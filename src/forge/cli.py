@@ -167,8 +167,8 @@ def _command_paper_bundle(args: argparse.Namespace) -> int:
     from forge.paper.build import build_overleaf_bundle
 
     repo = _repo()
-    output = Path(args.output) if args.output else Path(
-        "build/paper/FORGE_ICLR2027_paper_overleaf.zip"
+    output = (
+        Path(args.output) if args.output else Path("build/paper/FORGE_ICLR2027_paper_overleaf.zip")
     )
     output = output if output.is_absolute() else repo / output
     _print(
@@ -469,11 +469,23 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+# Every FORGE domain error derives from RuntimeError or ValueError, so catching those two reaches
+# all of them -- but it also reaches subclasses that mean "this code is broken" rather than "this
+# input is invalid". RecursionError and NotImplementedError are RuntimeErrors; the UnicodeError
+# family are ValueErrors. Those keep their traceback: reporting a runaway recursion as a tidy
+# `forge: maximum recursion depth exceeded` makes a bug indistinguishable from a validation failure
+# and throws away the stack that would explain it. A bare UnicodeError here means it escaped a
+# reader that should have named the offending file, which is also a defect worth seeing whole.
+_DEFECTS_NOT_DIAGNOSTICS = (RecursionError, NotImplementedError, UnicodeError)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
         return int(args.function(args))
+    except _DEFECTS_NOT_DIAGNOSTICS:
+        raise
     except (ExperimentError, FileNotFoundError, RuntimeError, ValueError) as error:
         print(f"forge: {error}", file=sys.stderr)
         return 2
