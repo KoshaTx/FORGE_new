@@ -12,6 +12,7 @@ to stay byte-compatible with artifacts already on disk, because those artifacts'
 paper's evidence chain and may not move. See `docs/REFACTOR_BASELINE.md`.
 """
 
+from forge.core.artifact import ArtifactError, ArtifactRun, artifact_run
 from forge.core.hashing import PinError, pin_record, resolve_pin, sha256_bytes, sha256_file
 from forge.core.io import (
     atomic_write,
@@ -34,6 +35,8 @@ from forge.core.types import (
 )
 
 __all__ = [
+    "ArtifactError",
+    "ArtifactRun",
     "ComponentId",
     "EvidenceStatus",
     "PinError",
@@ -42,6 +45,7 @@ __all__ = [
     "Sha256",
     "Smiles",
     "SupportTier",
+    "artifact_run",
     "atomic_write",
     "pin_record",
     "read_csv",
