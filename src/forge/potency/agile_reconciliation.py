@@ -26,6 +26,7 @@ import json
 import os
 import platform
 import re
+import shutil
 import tempfile
 import zipfile
 from collections import Counter
@@ -596,6 +597,43 @@ def reconcile_agile_records(
     return curated, excluded, ledger, summary
 
 
+def _publish_atomically(output_dir: Path, payloads: Mapping[str, bytes]) -> None:
+    """Write every artifact, or none of them, with a single directory rename.
+
+    Publishing file by file can leave new data beside a previous run's `result.json`, whose
+    `artifacts` sha256 manifest then describes bytes no longer on disk -- a result set that still
+    parses and is silently self-inconsistent. One rename makes the whole set appear at once.
+
+    An existing output directory is moved aside first, because a rename cannot overwrite a
+    non-empty directory, and is restored if the publish then fails.
+
+    Two rules keep the failure path from causing the damage it exists to prevent. Cleanup never
+    raises, so it cannot replace the exception that caused it -- the previous `finally: rmdir()`
+    did exactly that, reporting `Directory not empty` instead of the real error. And the superseded
+    copy is deleted only after a *successful* publish: if restoring it fails, it stays on disk
+    under its temporary name, because a recoverable directory with an awkward name is a far better
+    outcome than a deleted one.
+    """
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f".{output_dir.name}.", dir=output_dir.parent))
+    superseded = Path(f"{staging}.superseded")
+    try:
+        for name, payload in payloads.items():
+            (staging / name).write_bytes(payload)
+        if output_dir.exists():
+            os.replace(output_dir, superseded)
+        os.replace(staging, output_dir)
+    except BaseException:
+        shutil.rmtree(staging, ignore_errors=True)
+        if superseded.exists() and not output_dir.exists():
+            try:
+                os.replace(superseded, output_dir)
+            except OSError:
+                pass
+        raise
+    shutil.rmtree(superseded, ignore_errors=True)
+
+
 def run_agile_reconciliation(
     config_path: Path,
     output_dir: Path,
@@ -730,16 +768,13 @@ def run_agile_reconciliation(
     }
     result_payload = (json.dumps(result, indent=2, sort_keys=True) + "\n").encode()
 
-    output_dir.parent.mkdir(parents=True, exist_ok=True)
-    staging = Path(tempfile.mkdtemp(prefix=f".{output_dir.name}.", dir=output_dir.parent))
-    try:
-        (staging / "agile_oracle_curated.csv.gz").write_bytes(curated_payload)
-        (staging / "agile_mixture_exclusions.csv.gz").write_bytes(exclusion_payload)
-        (staging / "agile_reconciliation_ledger.csv.gz").write_bytes(ledger_payload)
-        (staging / "agile_label_reconciliation.json").write_bytes(result_payload)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        for path in sorted(staging.iterdir()):
-            os.replace(path, output_dir / path.name)
-    finally:
-        staging.rmdir()
+    _publish_atomically(
+        output_dir,
+        {
+            "agile_oracle_curated.csv.gz": curated_payload,
+            "agile_mixture_exclusions.csv.gz": exclusion_payload,
+            "agile_reconciliation_ledger.csv.gz": ledger_payload,
+            "agile_label_reconciliation.json": result_payload,
+        },
+    )
     return result
