@@ -1,0 +1,743 @@
+{
+  "schema_version": "m0_09_ugi3_virtual_terminal_procurement.v1",
+  "task": "Time-stamped US procurement snapshot for high-incidence AGILE virtual route leaves",
+  "snapshot": {
+    "accessed_utc": "2026-07-29T20:49:00Z",
+    "region": "US",
+    "expiry_days": 30,
+    "scope": "First-pass verification of the four diols, exact free-base primary amines, fatty acids, primary alcohols, and unresolved amine heads used by the AGILE virtual component programs.",
+    "identity_policy": "A record must match the exact canonical structure, CAS RN, and constitutional identity of the proposed leaf.",
+    "closure_policy": "Current item-level procurement closes only when a region-specific primary vendor page supplies an exact item identifier, purity, and an explicit current stock or shipping observation.",
+    "purity_acceptance_policy": "For this screening snapshot, a free terminal reagent closes at a stated assay of at least 90%. Lower-assay technical material remains vendor-verified but not accepted until an experiment-specific use or purification policy is documented.",
+    "price_policy": "Prices are intentionally excluded because they are volatile and are not evidence of identity or availability."
+  },
+  "expected_counts": {
+    "records": 36,
+    "current_item_level_vendor_verified": 36,
+    "current_item_level_procurement_closed": 35,
+    "identity_or_form_discrepancies": 0
+  },
+  "records": [
+    {
+      "canonical_smiles": "OCCCO",
+      "terminal_class": "diol",
+      "identity": {
+        "title": "1,3-Propanediol",
+        "inchi_key": "YPFDHNVEDLHUCE-UHFFFAOYSA-N",
+        "cas_rn": "504-63-2",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "1,3-Propanediol for synthesis",
+        "product_code": "807481",
+        "url": "https://www.sigmaaldrich.com/US/en/product/mm/807481",
+        "purity": ">=98.0% (GC)",
+        "availability_observation": "The 250 mL SKU 8074810250 was estimated to ship today."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "OCCCCO",
+      "terminal_class": "diol",
+      "identity": {
+        "title": "1,4-Butanediol",
+        "inchi_key": "WERYXYBDKMZEQL-UHFFFAOYSA-N",
+        "cas_rn": "110-63-4",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "1,4-Butanediol ReagentPlus",
+        "product_code": "493732",
+        "url": "https://www.sigmaaldrich.com/US/en/product/sial/493732",
+        "purity": "99%",
+        "availability_observation": "The 1 L, 3 L, and 18 L SKUs were available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "OCCCCCCO",
+      "terminal_class": "diol",
+      "identity": {
+        "title": "1,6-Hexanediol",
+        "inchi_key": "XXMIOPMDWAUFGU-UHFFFAOYSA-N",
+        "cas_rn": "629-11-8",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "1,6-Hexanediol",
+        "product_code": "H11807",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/h11807",
+        "purity": "97%",
+        "availability_observation": "The 500 g, 1 kg, and 2.5 kg SKUs were available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "OCCCCCCCCO",
+      "terminal_class": "diol",
+      "identity": {
+        "title": "1,8-Octanediol",
+        "inchi_key": "OEIJHBUUFURJLI-UHFFFAOYSA-N",
+        "cas_rn": "629-41-4",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1,8-Octanediol",
+        "product_code": "O0024",
+        "url": "https://www.tcichemicals.com/US/en/p/O0024",
+        "purity": ">99.0% (GC)",
+        "availability_observation": "The 25 g, 100 g, and 500 g items showed stock in both Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Dodecylamine",
+        "inchi_key": "JRBPAEWTRLWTQC-UHFFFAOYSA-N",
+        "cas_rn": "124-22-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Dodecylamine",
+        "product_code": "D0980",
+        "url": "https://www.tcichemicals.com/US/en/p/D0980",
+        "purity": ">97.0% (GC, titration)",
+        "availability_observation": "The 25 g and 400 g items showed local stock in both Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Tridecylamine",
+        "inchi_key": "ABVVEAHYODGCLZ-UHFFFAOYSA-N",
+        "cas_rn": "2869-34-3",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "Tridecylamine",
+        "product_code": "T58009",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/t58009",
+        "purity": "98%",
+        "availability_observation": "The 5 g and 25 g SKUs were available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Tetradecylamine",
+        "inchi_key": "PLZVEHJLHYMBBY-UHFFFAOYSA-N",
+        "cas_rn": "2016-42-4",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Tetradecylamine",
+        "product_code": "T0090",
+        "url": "https://www.tcichemicals.com/US/en/p/T0090",
+        "purity": ">96.0% (GC)",
+        "availability_observation": "The 25 g and 400 g items showed local stock in both Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Pentadecylamine",
+        "inchi_key": "JPZYXGPCHFZBHO-UHFFFAOYSA-N",
+        "cas_rn": "2570-26-5",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Aminopentadecane",
+        "product_code": "A0763",
+        "url": "https://www.tcichemicals.com/US/en/p/A0763",
+        "purity": ">95.0% (GC, titration)",
+        "availability_observation": "The 5 g item showed local stock in Philadelphia and Portland, and the 10 g item showed same-day shipment from Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Hexadecylamine",
+        "inchi_key": "FJLUATLTXUNBOT-UHFFFAOYSA-N",
+        "cas_rn": "143-27-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Hexadecylamine",
+        "product_code": "H0074",
+        "url": "https://www.tcichemicals.com/US/en/p/H0074",
+        "purity": ">95.0% (GC), >98.0% (titration)",
+        "availability_observation": "The 25 g and 500 g items showed local stock, including same-day shipment from Philadelphia; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Heptadecylamine",
+        "inchi_key": "KAJZYANLDWUIES-UHFFFAOYSA-N",
+        "cas_rn": "4200-95-7",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Aminoheptadecane",
+        "product_code": "A0764",
+        "url": "https://www.tcichemicals.com/US/en/p/A0764",
+        "purity": ">95.0% (GC, titration)",
+        "availability_observation": "The 10 g item showed 25 units in Japan stock; the US page states that Japan-stock items can ship from a US warehouse within two weeks."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Octadecylamine",
+        "inchi_key": "REYJJPSVUYRZGE-UHFFFAOYSA-N",
+        "cas_rn": "124-30-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "Octadecylamine, technical grade",
+        "product_code": "O1408",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/o1408",
+        "purity": "90%",
+        "availability_observation": "The 500 g and 3 kg SKUs were available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCC/C=C\\CCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "Oleylamine",
+        "inchi_key": "QGLWBTPVKHMVHM-KTKRTIGZSA-N",
+        "cas_rn": "112-90-3",
+        "form": "neutral_free_base_Z_isomer"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "Oleylamine",
+        "product_code": "HT-OA100",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/htoa100",
+        "purity": ">=98% (primary amine)",
+        "availability_observation": "The exact US item page listed a 1.5 kg SKU and price but required a cart check for availability; no explicit current US stock or shipping observation was accepted."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": false,
+      "next_action": "confirm_current_us_stock_or_shipping_for_high_purity_exact_item"
+    },
+    {
+      "canonical_smiles": "C#CCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "10-Undecynoic acid",
+        "inchi_key": "OAOUTNMJEFWJPO-UHFFFAOYSA-N",
+        "cas_rn": "2777-65-3",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "10-Undecynoic acid",
+        "product_code": "406546",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/406546",
+        "purity": "95%",
+        "availability_observation": "The 5 g SKU 406546-5G was available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "C=CCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "10-Undecenoic acid",
+        "inchi_key": "FRPZMMHWLSIFAZ-UHFFFAOYSA-N",
+        "cas_rn": "112-38-9",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "10-Undecenoic Acid",
+        "product_code": "U0007",
+        "url": "https://www.tcichemicals.com/US/en/p/U0007",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The US item showed local stock and same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Linoleic acid",
+        "inchi_key": "OYHQOLUKZRVURQ-HZJYTTRNSA-N",
+        "cas_rn": "60-33-3",
+        "form": "neutral_9Z_12Z_isomer"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Linoleic Acid",
+        "product_code": "L0124",
+        "url": "https://www.tcichemicals.com/US/en/p/L0124",
+        "purity": ">97.0% (GC, titration)",
+        "availability_observation": "The US item showed local stock and same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCC(C)CCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "4-Methylnonanoic acid",
+        "inchi_key": "WQTZCQIRCYSUBQ-UHFFFAOYSA-N",
+        "cas_rn": "45019-28-1",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "4-Methylnonanoic Acid",
+        "product_code": "M2380",
+        "url": "https://www.tcichemicals.com/US/en/p/M2380",
+        "purity": ">97.0% (GC, titration)",
+        "availability_observation": "The 5 mL and 25 mL items showed local stock in Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Heptanoic acid",
+        "inchi_key": "MNWFXJYAOYHMED-UHFFFAOYSA-N",
+        "cas_rn": "111-14-8",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Heptanoic Acid",
+        "product_code": "H0030",
+        "url": "https://www.tcichemicals.com/US/en/p/H0030",
+        "purity": ">98.0% (titration)",
+        "availability_observation": "The US item showed local stock and same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCC/C=C/C(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "trans-2-Decenoic acid",
+        "inchi_key": "WXBXVVIUZANZAU-CMDGGOBGSA-N",
+        "cas_rn": "334-49-6",
+        "form": "neutral_E_isomer"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "trans-2-Decenoic Acid",
+        "product_code": "D0098",
+        "url": "https://www.tcichemicals.com/US/en/p/D0098",
+        "purity": ">95.0% (titration)",
+        "availability_observation": "The 5 mL and 25 mL items showed same-day shipment from Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Octanoic acid",
+        "inchi_key": "WWZKQHOCKIZLMA-UHFFFAOYSA-N",
+        "cas_rn": "124-07-2",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Octanoic Acid",
+        "product_code": "O0027",
+        "url": "https://www.tcichemicals.com/US/en/p/O0027",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The US item showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Oleic acid",
+        "inchi_key": "ZQPPMHVWECSIRJ-KTKRTIGZSA-N",
+        "cas_rn": "112-80-1",
+        "form": "neutral_Z_isomer"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Oleic Acid",
+        "product_code": "O0180",
+        "url": "https://www.tcichemicals.com/US/en/p/O0180",
+        "purity": ">99.0% (GC, titration)",
+        "availability_observation": "The US item showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Nonanoic acid",
+        "inchi_key": "FBUKVWPVBMHYJY-UHFFFAOYSA-N",
+        "cas_rn": "112-05-0",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Nonanoic Acid",
+        "product_code": "P0952",
+        "url": "https://www.tcichemicals.com/US/en/p/P0952",
+        "purity": ">98.0% (titration)",
+        "availability_observation": "The US item showed same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Decanoic acid",
+        "inchi_key": "GHVNFZFCNZKVNT-UHFFFAOYSA-N",
+        "cas_rn": "334-48-5",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Decanoic Acid",
+        "product_code": "D0017",
+        "url": "https://www.tcichemicals.com/US/en/p/D0017",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The US item showed same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Undecanoic acid",
+        "inchi_key": "ZDPHROOEEOARMN-UHFFFAOYSA-N",
+        "cas_rn": "112-37-8",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Undecanoic Acid",
+        "product_code": "U0004",
+        "url": "https://www.tcichemicals.com/US/en/p/U0004",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The US item showed same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Lauric acid",
+        "inchi_key": "POULHZVOKOAJMA-UHFFFAOYSA-N",
+        "cas_rn": "143-07-7",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Lauric Acid",
+        "product_code": "L0011",
+        "url": "https://www.tcichemicals.com/US/en/p/L0011",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The 500 g item showed same-day shipment."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Palmitic acid",
+        "inchi_key": "IPCSVZSSVZVIGE-UHFFFAOYSA-N",
+        "cas_rn": "57-10-3",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Palmitic Acid",
+        "product_code": "P1145",
+        "url": "https://www.tcichemicals.com/US/en/p/P1145",
+        "purity": ">99.5% (GC)",
+        "availability_observation": "The US item showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCC(=O)O",
+      "terminal_class": "fatty_acid",
+      "identity": {
+        "title": "Stearic acid",
+        "inchi_key": "QIQXTHQIDYTFRH-UHFFFAOYSA-N",
+        "cas_rn": "57-11-4",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Stearic Acid",
+        "product_code": "S0163",
+        "url": "https://www.tcichemicals.com/US/en/p/S0163",
+        "purity": ">98.0% (titration)",
+        "availability_observation": "The US item showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCC/C=C\\CCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "Oleyl alcohol",
+        "inchi_key": "ALSTYHKOOCGGFT-KTKRTIGZSA-N",
+        "cas_rn": "143-28-2",
+        "form": "neutral_Z_isomer"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Oleyl Alcohol (High Purity)",
+        "product_code": "O0572",
+        "url": "https://www.tcichemicals.com/US/en/p/O0572",
+        "purity": ">99.0% (GC)",
+        "availability_observation": "The 1 g item showed same-day shipment from Philadelphia."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "1-Hexadecanol",
+        "inchi_key": "BXWNKGSJHAJOGX-UHFFFAOYSA-N",
+        "cas_rn": "36653-82-4",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Hexadecanol",
+        "product_code": "H0071",
+        "url": "https://www.tcichemicals.com/US/en/p/H0071",
+        "purity": ">98.0% (GC)",
+        "availability_observation": "The 25 g and 500 g items showed local stock in Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "1-Heptadecanol",
+        "inchi_key": "GOQYKNQRPGWPLP-UHFFFAOYSA-N",
+        "cas_rn": "1454-85-9",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Heptadecanol",
+        "product_code": "H0018",
+        "url": "https://www.tcichemicals.com/US/en/p/H0018",
+        "purity": ">97.0% (GC)",
+        "availability_observation": "The 5 g item showed local stock in Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "1-Octadecanol",
+        "inchi_key": "GLDOVTGHNKAZLK-UHFFFAOYSA-N",
+        "cas_rn": "112-92-5",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Octadecanol",
+        "product_code": "O0006",
+        "url": "https://www.tcichemicals.com/US/en/p/O0006",
+        "purity": ">98.0% (GC)",
+        "availability_observation": "The 25 g and 500 g items showed local stock in Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "1-Eicosanol",
+        "inchi_key": "BTFJIXJJCSYFAL-UHFFFAOYSA-N",
+        "cas_rn": "629-96-9",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "1-Eicosanol",
+        "product_code": "234494",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/234494",
+        "purity": "98%",
+        "availability_observation": "The 5 g SKU 234494-5G was available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCCO",
+      "terminal_class": "primary_alcohol",
+      "identity": {
+        "title": "1-Docosanol",
+        "inchi_key": "NOPFSRXAKWQILS-UHFFFAOYSA-N",
+        "cas_rn": "661-19-8",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Docosanol",
+        "product_code": "D0964",
+        "url": "https://www.tcichemicals.com/US/en/p/D0964",
+        "purity": ">98.0% (GC)",
+        "availability_observation": "The 25 g item showed same-day shipment from Philadelphia, and the 500 g item showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCCN",
+      "terminal_class": "primary_amine",
+      "identity": {
+        "title": "1-Aminoundecane",
+        "inchi_key": "QFKMMXYLAPZKIB-UHFFFAOYSA-N",
+        "cas_rn": "7307-55-3",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Aminoundecane",
+        "product_code": "A0761",
+        "url": "https://www.tcichemicals.com/US/en/p/A0761",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The 10 mL item showed local stock in Philadelphia and Portland; locally stocked items typically ship the same day."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CC(C)N1CCC(N)CC1",
+      "terminal_class": "unresolved_amine_head",
+      "identity": {
+        "title": "4-Amino-1-isopropylpiperidine",
+        "inchi_key": "ZRQQXFMGYSOKDF-UHFFFAOYSA-N",
+        "cas_rn": "127285-08-9",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "4-Amino-1-isopropylpiperidine",
+        "product_code": "I0774",
+        "url": "https://www.tcichemicals.com/US/en/p/I0774",
+        "purity": ">98.0% (GC, titration)",
+        "availability_observation": "The 5 g item showed same-day shipment from Portland, and the 25 g item showed same-day shipment from Philadelphia."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "CN1CCN(CCN)CC1",
+      "terminal_class": "unresolved_amine_head",
+      "identity": {
+        "title": "1-(2-Aminoethyl)-4-methylpiperazine",
+        "inchi_key": "GOWUDHPKGOIDIX-UHFFFAOYSA-N",
+        "cas_rn": "934-98-5",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "Aladdin Scientific via MilliporeSigma",
+        "product_title": "1-(2-Aminoethyl)-4-methylpiperazine",
+        "product_code": "ALNH9A9D80C7",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aladdinscientific/alnh9a9d80c7?context=bbe",
+        "purity": "98%",
+        "availability_observation": "The 1 g, 5 g, 25 g, and 100 g partner SKUs were listed to ship in five days."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "canonical_smiles": "Cc1cc(N)n(C)n1",
+      "terminal_class": "unresolved_amine_head",
+      "identity": {
+        "title": "5-Amino-1,3-dimethylpyrazole",
+        "inchi_key": "ZFDGMMZLXSFNFU-UHFFFAOYSA-N",
+        "cas_rn": "3524-32-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "ChemScene LLC via MilliporeSigma",
+        "product_title": "5-Amino-1,3-dimethylpyrazole",
+        "product_code": "CIAH987EF465",
+        "url": "https://www.sigmaaldrich.com/US/en/product/chemscenellcpreferredpartner/ciah987ef465?context=bbe",
+        "purity": "97%",
+        "availability_observation": "The 5 g, 10 g, and 25 g partner SKUs were listed to ship in five days."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true
+    }
+  ]
+}

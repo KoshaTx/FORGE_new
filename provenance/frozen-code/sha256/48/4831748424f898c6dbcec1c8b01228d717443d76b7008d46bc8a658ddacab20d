@@ -1,0 +1,21 @@
+{
+  "schema_version": "phase1_ugi_restartable_sampler_equivalence_config.v1",
+  "joint_checkpoint": {
+    "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+    "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+  },
+  "program_draw": {
+    "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+    "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+  },
+  "program_count": 12,
+  "generator_implementation_sha256": "8a8dfa39af82acdba2e9e25b31e3f79d218de36f3e5c827b6675aec4847b8739",
+  "sample_steps": 8,
+  "seed": 20260802,
+  "batch_sizes": [1, 4, 12],
+  "device": "cpu",
+  "output_dir": "results/phase1/ugi_restartable_sampler_equivalence_v1",
+  "scope": "zero_guidance_equivalence_only",
+  "production_synthesis_guidance": false,
+  "biological_guidance": false
+}

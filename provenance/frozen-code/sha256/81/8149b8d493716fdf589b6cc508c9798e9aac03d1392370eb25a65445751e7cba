@@ -1,0 +1,65 @@
+{
+  "schema_version": "phase1_ugi_sparse_closure_training_config.v2",
+  "task": "Expanded sparse feasible Ugi precursor closure placement",
+  "seed": 20260731,
+  "inputs": {
+    "component_exemplar_ledger": {
+      "path": "results/phase1/ugi_expanded_exemplars/component_exemplar_ledger.csv.gz",
+      "sha256": "533db59a3aa59c7c09ff1b485869ce6fab3dd70a58705336838a5db70f7c1322"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_expanded_exemplars/semantic_products.csv.gz",
+      "sha256": "2a94793c474be241b0b13f699b7665d64268adc2aedd2fe8aff5805cde588564"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_expanded_exemplars/semantic_atoms.csv.gz",
+      "sha256": "b2e7dd12e5b8be632ddc1d208b6376c8e77b1b9ebb59ed1c4b348275f4db021a"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    }
+  },
+  "expected_cyclic_census": {
+    "train_components": 87,
+    "train_edges": 87,
+    "calibration_components": 22,
+    "calibration_edges": 23,
+    "heldout_components": 25,
+    "heldout_edges": 25
+  },
+  "support": {
+    "ring_sizes": [5, 6, 7],
+    "maximum_heavy_degree": 4
+  },
+  "model": {
+    "maximum_children": 3,
+    "maximum_component_atoms": 32,
+    "maximum_cycle_rank": 2,
+    "maximum_ring_size": 7,
+    "hidden_dim": 64,
+    "layers": 2,
+    "dropout": 0.1
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 300,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "model_overrides": {
+      "hidden_dim": 32,
+      "layers": 1,
+      "dropout": 0.0
+    }
+  },
+  "full": {
+    "device": "cpu",
+    "steps": 4000,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100
+  }
+}

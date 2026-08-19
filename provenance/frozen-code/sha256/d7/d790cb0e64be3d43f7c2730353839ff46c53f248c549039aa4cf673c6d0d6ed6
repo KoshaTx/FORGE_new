@@ -1,0 +1,609 @@
+{
+  "schema_version": "m0_09_hydrophobic_motif_transfer_config.v3",
+  "task": "M0-09 fixed cross-platform hydrophobic-motif transfer pilot",
+  "pilot_id": "xh_2025_jl_2024_transfer_pilot_v2",
+  "generated_utc": "2026-07-29T22:31:51Z",
+  "source_assets": {
+    "jl_2024_article": {
+      "asset": "data/source_cache/m0_09_publishers/PMC11536852/publisher_page.html",
+      "expected_sha256": "f918e625753698706387783f831887ced721762a5cc6790598c6e681437e554c",
+      "role": "source_article_methods"
+    },
+    "jl_2024_supplement": {
+      "asset": "data/source_cache/m0_09_publishers/PMC11536852/assets/12951_2024_2919_MOESM1_ESM.pdf",
+      "expected_sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427",
+      "role": "source_supplement"
+    },
+    "borghi_2024_exact_b16_aldehyde_route": {
+      "asset": "data/source_cache/m0_09_transfer_routes/BORGHI_2024/sara2024.pdf",
+      "expected_sha256": "505cf441ccef01762325a008bf53da6d687962973579ab356cba616368608edf",
+      "role": "exact_ugi_handle_route_evidence"
+    },
+    "xh_2025_supplement": {
+      "asset": "data/source_cache/m0_09_pmc/PMC11888472/supplementary_files.zip",
+      "expected_sha256": "ddba528699713ecb133b7c4b9c0582ca7877d8aacb4bbe924a352cb7ef47b7c5",
+      "role": "source_supplement_archive",
+      "member": "media-1.pdf",
+      "expected_member_sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    }
+  },
+  "reference_component_ledger": {
+    "asset": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+    "expected_sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2",
+    "aldehyde_role": "oxoester_aldehyde_body_tail",
+    "expected_aldehyde_components": 62
+  },
+  "reaction_registry": {
+    "asset": "data/vendor/qualified_reactions_v1.json",
+    "expected_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+    "reaction_id": "ugi_3cr_agile",
+    "anchor_reactants": {
+      "amine_head": "CN(C)CCN",
+      "isocyanide_tail": "[C-]#[N+]CCCCCCCCCCCC"
+    }
+  },
+  "scope_policy": {
+    "transfer_target": "hydrophobic_tail_motifs",
+    "head_policy": "exact_site_defined_ugi_compatible_amine_only",
+    "no_head_motif_conversion": true,
+    "no_source_activity_label_inheritance": true,
+    "no_source_route_inheritance": true,
+    "no_procurement_inference_from_identity_reference": true,
+    "forward_compatibility_is_not_experimental_success": true,
+    "incomplete_routes_are_not_route_complete": true,
+    "generative_oracle_and_route_support_are_independent": true,
+    "missing_route_knowledge_is_not_chemical_failure": true,
+    "operational_closure_not_exhaustive_reaction_mining": true,
+    "reusable_synthesis_program_architecture": true,
+    "chemistry_specific_evidence_required": true
+  },
+  "route_outcome_taxonomy": [
+    "complete_route_found",
+    "chemically_implausible_or_incompatible",
+    "outside_declared_support",
+    "missing_route_knowledge"
+  ],
+  "sources": {
+    "jl_2024": {
+      "platform_id": "JL_2024",
+      "source_asset_ids": [
+        "jl_2024_article",
+        "jl_2024_supplement"
+      ],
+      "pmid": "39497197",
+      "pmc": "PMC11536852",
+      "doi": "10.1186/s12951-024-02919-1",
+      "title": "High-throughput synthesis and optimization of ionizable lipids through A3 coupling for efficient mRNA delivery",
+      "source_final_assembly": "amine_aldehyde_alkyne_a3_coupling",
+      "source_locator": "Article Methods, General procedures for the synthesis of ester-bearing terminal alkynes B12-B16; Supplementary Information pages S12-S14",
+      "biological_provenance_policy": "Source-platform occurrence is retained only as provenance. No activity, pKa, particle, formulation, or delivery label is assigned to a transferred component or generated Ugi product.",
+      "reported_reactions": {
+        "jl_b12_b16_esterification": {
+          "level": "source_component_preparation",
+          "transformation": "dcc_dmap_esterification_of_hept_6_ynoic_acid_with_aliphatic_alcohol",
+          "source_locator": "Article Methods, General procedures for the synthesis of ester-bearing terminal alkynes B12-B16; Supplementary Information pages S12-S14",
+          "evidence_status": "exact_general_procedure_and_product_specific_structure_yield_and_analytical_data",
+          "attachment_event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid",
+          "reactants": [
+            "hept-6-ynoic acid",
+            "named alkyl alcohol"
+          ],
+          "conditions": {
+            "acid_equivalents": 1.0,
+            "alcohol_equivalents": 1.0,
+            "dcc_equivalents": 1.0,
+            "dmap_equivalents": 0.3,
+            "solvent": "dry dichloromethane",
+            "temperature": "room temperature",
+            "duration": "12 h",
+            "workup": "filter, add water, extract with dichloromethane, dry over sodium sulfate, filter, concentrate",
+            "purification": "silica gel chromatography, petroleum ether/ethyl acetate 30:1"
+          },
+          "outcome_evidence": "B12-B16 have exact structures, isolated yields, proton and carbon NMR, and high-resolution mass spectrometry in the supplement."
+        }
+      }
+    },
+    "xh_2025": {
+      "platform_id": "XH_2025",
+      "source_asset_ids": [
+        "xh_2025_supplement"
+      ],
+      "source_id": "40060499",
+      "pmid": "40060499",
+      "doi": "10.1101/2025.02.25.640222",
+      "title": "Plug-and-play assembly of biodegradable ionizable lipids for potent mRNA delivery and gene editing in vivo",
+      "source_final_assembly": "amine_or_thiol_addition_to_dialkyl_maleate",
+      "source_locator": "Supplementary Fig. 2 and Materials and Methods, General procedure for the synthesis of maleates with two different alkyl chains",
+      "biological_provenance_policy": "Source-platform occurrence is retained only as provenance. No activity, pKa, particle, formulation, or delivery label is assigned to a transferred component or generated Ugi product.",
+      "reported_reactions": {
+        "xh_asymmetric_maleate_esterification": {
+          "level": "source_component_preparation",
+          "transformation": "dcc_dmap_esterification_of_mono_2_ethylhexyl_maleate_acid_with_aliphatic_alcohol",
+          "source_locator": "Materials and Methods, General procedure for the synthesis of maleates with two different alkyl chains; Supplementary Fig. 2",
+          "evidence_status": "exact_general_procedure_and_product_specific_yield_and_proton_nmr",
+          "attachment_event": "alcohol_oxygen_esterified_to_maleate_carboxyl",
+          "reactants": [
+            "named aliphatic alcohol",
+            "(Z)-4-((2-ethylhexyl)oxy)-4-oxobut-2-enoic acid"
+          ],
+          "conditions": {
+            "alcohol_equivalents": 1.0,
+            "acid_equivalents": 1.1,
+            "dcc_equivalents": 1.1,
+            "dmap_equivalents": 0.2,
+            "solvent": "anhydrous dichloromethane",
+            "temperature": "room temperature",
+            "duration": "24 h",
+            "atmosphere": "nitrogen",
+            "workup": "filter and evaporate filtrate",
+            "purification": "CombiFlash gradient from hexane to 20:80 ethyl acetate/hexane over 15 min"
+          },
+          "outcome_evidence": "D18, D9.2, D9.8, D11.1, D11.10, and D12.8 have isolated yields and proton NMR in Supplementary Fig. 2."
+        }
+      }
+    }
+  },
+  "programs": {
+    "jl_b16_exact_pcc_alcohol_to_aldehyde": {
+      "reaction_smarts": "[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]",
+      "target_role": "aldehyde_tail",
+      "evidence_grade": "exact_source_route",
+      "route_closure": "computationally_complete",
+      "terminal_status": "current_item_level_procurement_closed",
+      "route_gap_class": "",
+      "claim": "An exact literature procedure converts the exact named B16 alcohol precursor to 2-decyltetradecanal, and the exact alcohol has current region-specific item-level procurement evidence. Frozen-transform compatibility is verified separately; prospective Ugi assembly remains untested.",
+      "exact_route_evidence": {
+        "source_asset_ids": [
+          "borghi_2024_exact_b16_aldehyde_route"
+        ],
+        "source_locator": "Borghi 2024 Oxford Part II thesis, Appendix I, PDF page 66, printed page 59",
+        "reported_reactant": "2-decyl-1-tetradecanol",
+        "reported_product": "2-decyltetradecanal",
+        "conditions": {
+          "alcohol_mass_g": 15.0,
+          "alcohol_amount_mmol": 42.3,
+          "alcohol_equivalents": 1.0,
+          "pyridinium_chlorochromate_mass_g": 27.6,
+          "pyridinium_chlorochromate_amount_mmol": 128,
+          "pyridinium_chlorochromate_equivalents": 3.03,
+          "solvent": "anhydrous dichloromethane",
+          "solvent_volume_ml": 411,
+          "temperature": "room temperature",
+          "duration": "3 h",
+          "workup_and_purification": "filtered through a short silica-gel pad in dichloromethane"
+        },
+        "reported_outcome": "2-Decyltetradecanal, 12.76 g, 36.2 mmol, 86% isolated; identity confirmed by proton and carbon NMR.",
+        "terminal_evidence": {
+          "vendor": "TCI America",
+          "product_code": "D5283",
+          "url": "https://www.tcichemicals.com/US/en/p/D5283",
+          "region": "US",
+          "purity": ">97.0% (GC)",
+          "availability_observation": "The 25 mL and 500 mL items showed positive US stock and same-day shipment from Portland.",
+          "accessed_utc": "2026-07-29T22:31:51Z"
+        }
+      }
+    },
+    "primary_alcohol_to_aldehyde": {
+      "reaction_smarts": "[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]",
+      "target_role": "aldehyde_tail",
+      "evidence_grade": "reaction_family_precedent",
+      "route_closure": "incomplete",
+      "terminal_status": "not_assessed",
+      "route_gap_class": "exact_substrate_route_evidence_and_terminal_closure_missing",
+      "claim": "Deterministic structural realization and frozen-Ugi forward compatibility only; exact-substrate oxidation and prospective assembly remain unverified."
+    }
+  },
+  "motifs": [
+    {
+      "record_id": "xh-2025-d18-linoleyl-alcohol",
+      "source_id": "xh_2025",
+      "source_component_id": "D18",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 92,
+      "common_precursor_name": "(9Z,12Z)-octadeca-9,12-dien-1-ol",
+      "common_precursor_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCCO",
+      "mapped_common_precursor_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCC[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 5365682",
+        "inchikey": "JXNPEDYJTDQORS-HZJYTTRNSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "long_chain",
+        "cis_unsaturated",
+        "double_unsaturation"
+      ],
+      "risk_flags": [
+        "polyunsaturated_aldehyde_stability",
+        "exact_substrate_oxidation_not_yet_attached"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "xh-2025-d9-2-3-undecanol",
+      "source_id": "xh_2025",
+      "source_component_id": "D9.2",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 90,
+      "common_precursor_name": "3-undecanol",
+      "common_precursor_smiles": "CCCCCCCCC(O)CC",
+      "mapped_common_precursor_smiles": "CC[CH:1]([OH:2])CCCCCCCC",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 98970",
+        "inchikey": "HCARCYFXWDRVBZ-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "secondary",
+      "motif_classes": [
+        "medium_chain",
+        "asymmetric_secondary_attachment"
+      ],
+      "risk_flags": [
+        "secondary_alcohol_does_not_oxidize_to_aldehyde"
+      ],
+      "disposition": "defer_structure_only",
+      "program_id": "",
+      "route_gap_class": "alternative_ugi_handle_conversion_program_missing",
+      "defer_reason": "Direct oxidation produces a ketone, not an aldehyde. No exact or close-analogue route to a corresponding Ugi isocyanide has been admitted."
+    },
+    {
+      "record_id": "xh-2025-d9-8-9-heptadecanol",
+      "source_id": "xh_2025",
+      "source_component_id": "D9.8",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 88,
+      "common_precursor_name": "9-heptadecanol",
+      "common_precursor_smiles": "CCCCCCCCC(O)CCCCCCCC",
+      "mapped_common_precursor_smiles": "CCCCCCCC[CH:1]([OH:2])CCCCCCCC",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 136435",
+        "inchikey": "WTWWTKPAEZQYPW-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "secondary",
+      "motif_classes": [
+        "long_chain",
+        "symmetric_secondary_attachment"
+      ],
+      "risk_flags": [
+        "secondary_alcohol_does_not_oxidize_to_aldehyde"
+      ],
+      "disposition": "defer_structure_only",
+      "program_id": "",
+      "route_gap_class": "alternative_ugi_handle_conversion_program_missing",
+      "defer_reason": "Direct oxidation produces a ketone, not an aldehyde. No exact or close-analogue route to a corresponding Ugi isocyanide has been admitted."
+    },
+    {
+      "record_id": "xh-2025-d11-1-2-dodecanol",
+      "source_id": "xh_2025",
+      "source_component_id": "D11.1",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 90,
+      "common_precursor_name": "2-dodecanol",
+      "common_precursor_smiles": "CCCCCCCCCCC(C)O",
+      "mapped_common_precursor_smiles": "C[CH:1]([OH:2])CCCCCCCCCC",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 25045",
+        "inchikey": "XSWSEQPWKOWORN-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "secondary",
+      "motif_classes": [
+        "medium_chain",
+        "near_terminal_secondary_attachment"
+      ],
+      "risk_flags": [
+        "secondary_alcohol_does_not_oxidize_to_aldehyde"
+      ],
+      "disposition": "defer_structure_only",
+      "program_id": "",
+      "route_gap_class": "alternative_ugi_handle_conversion_program_missing",
+      "defer_reason": "Direct oxidation produces a ketone, not an aldehyde. No exact or close-analogue route to a corresponding Ugi isocyanide has been admitted."
+    },
+    {
+      "record_id": "xh-2025-d11-10-11-heneicosanol",
+      "source_id": "xh_2025",
+      "source_component_id": "D11.10",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 85,
+      "common_precursor_name": "11-heneicosanol",
+      "common_precursor_smiles": "CCCCCCCCCCC(O)CCCCCCCCCC",
+      "mapped_common_precursor_smiles": "CCCCCCCCCC[CH:1]([OH:2])CCCCCCCCCC",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 76913",
+        "inchikey": "BCNCKKYOXRHQGT-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "secondary",
+      "motif_classes": [
+        "very_long_chain",
+        "symmetric_secondary_attachment"
+      ],
+      "risk_flags": [
+        "secondary_alcohol_does_not_oxidize_to_aldehyde"
+      ],
+      "disposition": "defer_structure_only",
+      "program_id": "",
+      "route_gap_class": "alternative_ugi_handle_conversion_program_missing",
+      "defer_reason": "Direct oxidation produces a ketone, not an aldehyde. No exact or close-analogue route to a corresponding Ugi isocyanide has been admitted."
+    },
+    {
+      "record_id": "xh-2025-d12-8-2-octyldodecan-1-ol",
+      "source_id": "xh_2025",
+      "source_component_id": "D12.8",
+      "source_reaction_id": "xh_asymmetric_maleate_esterification",
+      "source_reported_yield_percent": 85,
+      "common_precursor_name": "2-octyldodecan-1-ol",
+      "common_precursor_smiles": "CCCCCCCCCCC(CO)CCCCCCCC",
+      "mapped_common_precursor_smiles": "CCCCCCCCCC[CH](CCCCCCCC)[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "pubchem",
+        "identifier": "CID 21414",
+        "inchikey": "LEACJMVNYZDSKR-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_maleate_carboxyl"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "very_long_chain",
+        "alpha_branched",
+        "asymmetric_branching"
+      ],
+      "risk_flags": [
+        "alpha_branched_aldehyde_ugi_scope",
+        "exact_substrate_oxidation_not_yet_attached"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "jl-2024-b12-dodecan-1-ol",
+      "source_id": "jl_2024",
+      "source_component_id": "B12",
+      "source_reaction_id": "jl_b12_b16_esterification",
+      "source_reported_yield_percent": 86,
+      "common_precursor_name": "dodecan-1-ol",
+      "common_precursor_smiles": "CCCCCCCCCCCCO",
+      "mapped_common_precursor_smiles": "CCCCCCCCCCC[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "source_reported_structure",
+        "identifier": "JL_2024 B12, dodecyl hept-6-ynoate",
+        "inchikey": "LQZZUXJYWNFBMV-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "medium_chain",
+        "linear_saturated"
+      ],
+      "risk_flags": [
+        "exact_substrate_oxidation_not_yet_attached"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "jl-2024-b13-dec-9-en-1-ol",
+      "source_id": "jl_2024",
+      "source_component_id": "B13",
+      "source_reaction_id": "jl_b12_b16_esterification",
+      "source_reported_yield_percent": 98,
+      "common_precursor_name": "dec-9-en-1-ol",
+      "common_precursor_smiles": "C=CCCCCCCCCO",
+      "mapped_common_precursor_smiles": "C=CCCCCCCC[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "source_reported_structure",
+        "identifier": "JL_2024 B13, dec-9-en-1-yl hept-6-ynoate",
+        "inchikey": "QGFSQVPRCWJZQK-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "medium_chain",
+        "terminal_unsaturation"
+      ],
+      "risk_flags": [
+        "exact_substrate_oxidation_not_yet_attached",
+        "terminal_alkene_selectivity_not_yet_attached"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "jl-2024-b14-undec-10-en-1-ol",
+      "source_id": "jl_2024",
+      "source_component_id": "B14",
+      "source_reaction_id": "jl_b12_b16_esterification",
+      "source_reported_yield_percent": 62,
+      "common_precursor_name": "undec-10-en-1-ol",
+      "common_precursor_smiles": "C=CCCCCCCCCCO",
+      "mapped_common_precursor_smiles": "C=CCCCCCCCC[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "source_reported_structure",
+        "identifier": "JL_2024 B14, undec-10-en-1-yl hept-6-ynoate",
+        "inchikey": "GIEMHYCMBGELGY-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "medium_chain",
+        "terminal_unsaturation"
+      ],
+      "risk_flags": [
+        "exact_substrate_oxidation_not_yet_attached",
+        "terminal_alkene_selectivity_not_yet_attached"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "jl-2024-b15-z-non-2-en-1-ol",
+      "source_id": "jl_2024",
+      "source_component_id": "B15",
+      "source_reaction_id": "jl_b12_b16_esterification",
+      "source_reported_yield_percent": 77,
+      "common_precursor_name": "(Z)-non-2-en-1-ol",
+      "common_precursor_smiles": "CCCCCC/C=C\\CO",
+      "mapped_common_precursor_smiles": "CCCCCC/C=C\\[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "source_reported_structure",
+        "identifier": "JL_2024 B15, (Z)-non-2-en-1-yl hept-6-ynoate",
+        "inchikey": "NSSALFVIQPAIQK-FPLPWBNLSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "medium_chain",
+        "internal_cis_unsaturation",
+        "allylic_alcohol"
+      ],
+      "risk_flags": [
+        "exact_substrate_oxidation_not_yet_attached",
+        "alpha_beta_unsaturated_aldehyde_ugi_compatibility"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "primary_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    },
+    {
+      "record_id": "jl-2024-b16-2-decyltetradecan-1-ol",
+      "source_id": "jl_2024",
+      "source_component_id": "B16",
+      "source_reaction_id": "jl_b12_b16_esterification",
+      "source_reported_yield_percent": 99,
+      "common_precursor_name": "2-decyltetradecan-1-ol",
+      "common_precursor_smiles": "CCCCCCCCCCCCC(CO)CCCCCCCCCC",
+      "mapped_common_precursor_smiles": "CCCCCCCCCCCC[CH](CCCCCCCCCC)[CH2:1][OH:2]",
+      "identity_reference": {
+        "kind": "source_reported_structure",
+        "identifier": "JL_2024 B16, 2-decyltetradecyl hept-6-ynoate",
+        "inchikey": "CAYHVMBQBLYQMT-UHFFFAOYSA-N",
+        "accessed_utc": "2026-07-29T00:00:00Z"
+      },
+      "source_attachment": {
+        "motif_anchor_atom_map": 1,
+        "source_handle_atom_map": 2,
+        "event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid"
+      },
+      "expected_alcohol_class": "primary",
+      "motif_classes": [
+        "very_long_chain",
+        "alpha_branched",
+        "asymmetric_branching"
+      ],
+      "risk_flags": [
+        "pcc_chromium_waste_and_scale_burden",
+        "alpha_branched_aldehyde_ugi_scope"
+      ],
+      "disposition": "propose_ugi_aldehyde",
+      "program_id": "jl_b16_exact_pcc_alcohol_to_aldehyde",
+      "route_gap_class": "",
+      "defer_reason": ""
+    }
+  ],
+  "expected_counts": {
+    "source_motifs": 11,
+    "independent_source_platforms": 2,
+    "reported_source_reactions": 2,
+    "motifs_linked_to_reported_source_reactions": 11,
+    "unambiguous_source_attachment_mappings": 11,
+    "primary_alcohols": 7,
+    "secondary_alcohols": 4,
+    "proposed_ugi_aldehydes": 7,
+    "deferred_structure_only": 4,
+    "exact_current_aldehyde_pool_matches": 0,
+    "frozen_ugi_forward_verified": 7,
+    "computationally_route_complete": 1
+  },
+  "expansion_policy": {
+    "current_stage": "two_platform_transfer_pilot_with_one_exact_route_closed",
+    "positive_signal": "Two independent non-Ugi platforms provide exact source-reaction-linked mappings to novel, frozen-transform-compatible Ugi components while source reactions, target-handle routes, biological applicability, and route closure remain separate.",
+    "next_stage": "Expand only through the frozen source-paper priority queue, beginning with native-Ugi JC_2023 and then high-value transfer sources, while measuring weighted motif and candidate-route closure.",
+    "broad_expansion_gate": "Two positive platforms and one exact route authorize targeted priority-queue expansion, not exhaustive or indiscriminate LNPDB mining."
+  },
+  "stopping_policy": {
+    "objective": "Stop when missing route knowledge no longer materially constrains the biologically relevant Ugi-3 design space under the declared support and oracle-applicability policies.",
+    "lnpdb_role": "Define and prioritize the tail-motif census, not the complete reaction universe.",
+    "tiers": [
+      "close every permitted native Ugi-3 component and locked control",
+      "transfer high-value motifs from other lipid platforms",
+      "fill repeated route-knowledge gaps exposed by biologically competitive generated candidates",
+      "leave chemistry irrelevant to the declared Ugi-3 paper scope uncurated"
+    ],
+    "metrics": [
+      "weighted high-priority motif coverage",
+      "candidate-route closure with substantive rejections separated from missing knowledge",
+      "marginal route-coverage gain across consecutive curation rounds",
+      "complete prospective-panel dossiers with backup routes for the riskiest precursors"
+    ],
+    "numeric_threshold_status": "Freeze exact thresholds before generator-driven curation and final prospective selection; do not choose them retrospectively."
+  }
+}

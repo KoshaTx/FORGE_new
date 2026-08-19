@@ -1,0 +1,77 @@
+{
+  "schema_version": "phase1_product_pretrain_config.v2",
+  "task": "Phase 1 lipid-context sparse whole-lipid discrete-flow pretraining",
+  "seed": 20260730,
+  "inputs": {
+    "phase1_manifest": {
+      "path": "data/splits/phase1/manifest.json",
+      "sha256": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad"
+    },
+    "product_prelaunch_audit": {
+      "path": "results/phase1/product_prelaunch_audit.json",
+      "sha256": "1640b2d4fdfc13ec0ead7e13179d2c8c9a1b169021d94c1a52c5d161a9226198"
+    }
+  },
+  "model": {
+    "hidden_dim": 256,
+    "layers": 6,
+    "dropout": 0.1,
+    "maximum_closure_slots": 12,
+    "maximum_heavy_atoms": 282,
+    "topology_context": true,
+    "parent_distance_buckets": 16,
+    "parent_distance_probability_floor": 0.001,
+    "parent_distance_prior_strength": 1.0
+  },
+  "training": {
+    "steps": 20000,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "maximum_graphs_per_batch": 64,
+    "maximum_atoms_per_batch": 4096,
+    "maximum_parent_pointer_logits_per_batch": 262144,
+    "log_every_steps": 50,
+    "validation_every_steps": 500,
+    "validation_batches": 16,
+    "checkpoint_every_steps": 1000
+  },
+  "execution": {
+    "device": "cuda",
+    "precision": "float32",
+    "mixed_precision": false,
+    "compile": false,
+    "deterministic_algorithms": true,
+    "num_workers": 0
+  },
+  "smoke": {
+    "device": "cpu",
+    "hidden_dim": 64,
+    "layers": 2,
+    "dropout": 0.0,
+    "steps": 40,
+    "maximum_graphs_per_batch": 8,
+    "maximum_atoms_per_batch": 512,
+    "maximum_parent_pointer_logits_per_batch": 131072,
+    "r0_records_per_fold": 64,
+    "r1_records_per_bucket": 64
+  },
+  "overfit_gate": {
+    "device": "cpu",
+    "records": 8,
+    "steps": 3000,
+    "learning_rate": 0.005,
+    "hidden_dim": 64,
+    "layers": 3,
+    "dropout": 0.0,
+    "minimum_total_loss_reduction_fraction": 0.5
+  },
+  "outputs": {
+    "default_full_directory": "results/phase1/product_pretrain_full_v2",
+    "checkpoint_filename": "checkpoint.pt",
+    "latest_checkpoint_filename": "checkpoint_latest.pt",
+    "best_checkpoint_filename": "checkpoint_best.pt",
+    "result_filename": "result.json",
+    "progress_filename": "progress.json"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "m0_09_agile_virtual_ugi3_capability_config.v1",
+  "task": "M0-09 AGILE virtual Ugi-3 decomposition and component capability census",
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "inputs": {
+    "virtual_smiles": {
+      "asset": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "expected_sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    },
+    "virtual_smiles_manifest": {
+      "asset": "data/derived/agile_virtual12k_smiles.manifest.json",
+      "expected_sha256": "7b048da8b337e4efd35f6da01587a03b9f6320e00b0d33cf2a8f8fe866dee375"
+    },
+    "qualified_reactions": {
+      "asset": "data/vendor/qualified_reactions_v1.json",
+      "expected_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "assembly_qualification": {
+      "asset": "results/m0_09/ugi3_assembly_qualification.json",
+      "expected_sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    },
+    "precursor_capability": {
+      "asset": "results/m0_09/ugi3_precursor_capability.json",
+      "expected_sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    },
+    "aldehyde_head_capability": {
+      "asset": "results/m0_09/ugi3_aldehyde_head_capability.json",
+      "expected_sha256": "0150b53015d3b31c12be9f97549fa612ff228435fac82881192d3af03f6f74ff"
+    },
+    "agile_component_routes": {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "expected_sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    }
+  },
+  "scope": {
+    "reaction_id": "ugi_3cr_agile",
+    "max_reverse_outcomes_per_product": 10000,
+    "max_forward_outcomes_per_candidate": 100,
+    "accepted_terminal_availability": [
+      "internal_stock",
+      "current_item_level_vendor_verified"
+    ],
+    "complete_route_state": "computationally_complete",
+    "role_policy_overrides": [
+      {
+        "reaction_id": "ugi_3cr_agile",
+        "role": "amine_head",
+        "site_multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+        "evidence_asset": "ugi3_assembly_qualification.json",
+        "evidence_schema_version": "m0_09_ugi3_assembly_qualification.v1"
+      }
+    ]
+  },
+  "expected_counts": {
+    "source_products": 12276,
+    "products_with_exact_qualified_ugi_decomposition": 12276,
+    "products_without_exact_qualified_ugi_decomposition": 0,
+    "products_with_multiple_exact_decompositions": 0,
+    "total_exact_decomposition_candidates": 12276,
+    "products_with_complete_l2_l3_candidate": 0,
+    "unique_components_total": 93,
+    "cartesian_component_tuples": 12276,
+    "roles": {
+      "amine_head": {
+        "unique_components": 22,
+        "evidence_matched_components": 18,
+        "unmatched_components": 4,
+        "components_with_exact_source_route": 0,
+        "accepted_terminal_components": 17,
+        "computationally_route_complete_components": 0,
+        "l2_l3_closed_components": 17
+      },
+      "oxoester_aldehyde_body_tail": {
+        "unique_components": 62,
+        "evidence_matched_components": 18,
+        "unmatched_components": 44,
+        "components_with_exact_source_route": 17,
+        "accepted_terminal_components": 0,
+        "computationally_route_complete_components": 0,
+        "l2_l3_closed_components": 0
+      },
+      "isocyanide_tail": {
+        "unique_components": 9,
+        "evidence_matched_components": 7,
+        "unmatched_components": 2,
+        "components_with_exact_source_route": 7,
+        "accepted_terminal_components": 0,
+        "computationally_route_complete_components": 0,
+        "l2_l3_closed_components": 0
+      }
+    }
+  },
+  "expected_forward_site_profile": {
+    "raw_1_unique_1_target_sites_1": 10602,
+    "raw_2_unique_1_target_sites_1": 558,
+    "raw_2_unique_2_target_sites_1": 558,
+    "raw_3_unique_1_target_sites_1": 558
+  },
+  "claims_boundary": {
+    "inverse_decomposition_is_observed_route_evidence": false,
+    "forward_roundtrip_is_synthesis_success": false,
+    "unlabeled_products_are_l2_supervision": false,
+    "component_join_is_route_closure": false,
+    "model_built": false
+  }
+}

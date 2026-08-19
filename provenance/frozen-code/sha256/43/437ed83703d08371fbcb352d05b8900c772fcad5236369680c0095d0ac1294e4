@@ -1,0 +1,114 @@
+{
+  "schema_version": "phase1_ugi3_exact_evidence_source_config.v1",
+  "task": "Exact-evidence-only Ugi L2/L3 RouteKnowledgeSource diagnostic",
+  "generated_utc": "2026-08-01T00:00:00Z",
+  "inputs": {
+    "adapter_source": {
+      "asset": "src/forge/route/ugi3_exact_evidence_source.py",
+      "expected_sha256": "ba843fdce8de67dd1c228fe0680d77c00bf7493bd38224dda2419a103154a290"
+    },
+    "component_dossier": {
+      "asset": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "expected_sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "component_dossier_result": {
+      "asset": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "expected_sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "component_program": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "expected_sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "component_program_result": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "expected_sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    "l1_variant": {
+      "asset": "configs/assembly/ugi_variant.yaml",
+      "expected_sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "planner_cache_source": {
+      "asset": "src/forge/route/planner_cache.py",
+      "expected_sha256": "72a07031fc7cd623446c99625333d848b79059ada995f4b5c3b7bdfd53b523db"
+    },
+    "planner_contract_source": {
+      "asset": "src/forge/route/planner.py",
+      "expected_sha256": "8cd48f704819810f83f02a9623f8de461f7334ad94684e3d77e325e3dd9902a0"
+    },
+    "step_ledger": {
+      "asset": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "expected_sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"
+    },
+    "step_result": {
+      "asset": "results/phase1/ugi3_exact_source_forward_verification/result.json",
+      "expected_sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"
+    },
+    "terminal_procurement": {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "expected_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "upstream_reaction_registry": {
+      "asset": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "expected_sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    }
+  },
+  "diagnostic_policy": {
+    "assessment_as_of_utc": "2026-08-01T00:00:00Z",
+    "budget_limits": {
+      "maximum_depth": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_expansions": 4,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 0,
+      "maximum_elapsed_milliseconds": 0
+    },
+    "existing_tier_to_expected_outcome": {
+      "accepted_terminal_l3_closed": "complete",
+      "exact_source_l2_verified_l3_closed": "complete",
+      "exact_source_l2_verified_l3_open": "missing_knowledge",
+      "family_projected_l3_closed_not_exact_source": "missing_knowledge",
+      "unresolved_component": "missing_knowledge"
+    },
+    "unavailable_procurement_statuses": [
+      "current_item_level_unavailable"
+    ]
+  },
+  "expected_counts": {
+    "admitted_components": 93,
+    "assessment_outcomes": {
+      "complete": 40,
+      "missing_knowledge": 53
+    },
+    "components_by_existing_evidence_tier": {
+      "accepted_terminal_l3_closed": 17,
+      "exact_source_l2_verified_l3_closed": 23,
+      "exact_source_l2_verified_l3_open": 1,
+      "family_projected_l3_closed_not_exact_source": 47,
+      "unresolved_component": 5
+    },
+    "outcomes_by_role": {
+      "amine_head": {
+        "complete": 17,
+        "missing_knowledge": 5
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 3
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 17,
+        "missing_knowledge": 45
+      }
+    },
+    "tier_crosswalk_agreement": 93,
+    "complete_flag_agreement": 93,
+    "first_pass_cache_misses": 93,
+    "second_pass_cache_hits": 93
+  },
+  "claims_boundary": {
+    "scope": "evidence_only_diagnostic_plumbing",
+    "dynamic_route_search": false,
+    "production_guidance": false,
+    "synthesis_success_probability": false
+  }
+}

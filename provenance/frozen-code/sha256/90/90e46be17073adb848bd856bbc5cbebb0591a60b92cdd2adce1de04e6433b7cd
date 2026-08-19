@@ -1,0 +1,57 @@
+{
+  "schema_version": "phase1_ugi_production_zero_guidance_rehearsal_config.v1",
+  "scope": "production_zero_guidance_rehearsal_schedule_and_identity_only",
+  "execution": {
+    "guidance_strength": 0,
+    "program_count": 12,
+    "sample_steps": 8,
+    "seed": 20260802,
+    "terminal_checkpoint_index": 8,
+    "generator_implementation_sha256": "52df6be6878da34e1205a307332173763c801a82026573afd7857e876fe2b193",
+    "terminal_decoder_id": "ugi_joint_terminal_completion:argmax:v1"
+  },
+  "assessment": {
+    "assessment_as_of_utc": "2026-08-03T04:00:00Z",
+    "cumulative_source_inputs_sha256": "adfc6767d44d9aa56cfb46bba2253e485ec35f5dace0af0f5a11f9cd72bcd3c6",
+    "l3_window": {
+      "accessed_utc": "2026-08-03T03:04:10Z",
+      "expires_utc": "2026-08-09T05:16:00Z",
+      "interval_semantics": "accessed_inclusive_expires_exclusive"
+    }
+  },
+  "artifacts": {
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "generator_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+    },
+    "restartable_equivalence_config": {
+      "path": "configs/model/phase1_ugi_restartable_sampler_equivalence_v2.json",
+      "sha256": "c34b8b9fa70fee228f79bb86f61fb6b6e04c72c2cf0540ae8a97aa4e5d9f589c"
+    },
+    "restartable_equivalence_result": {
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json",
+      "sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+    }
+  },
+  "scope_guards": {
+    "production_generator_executed": false,
+    "production_route_source_executed": false,
+    "nonzero_synthesis_guidance": false,
+    "synthesis_scalar_defined": false,
+    "biological_guidance": false,
+    "candidate_selection": false,
+    "private_holdout_accessed": false
+  }
+}

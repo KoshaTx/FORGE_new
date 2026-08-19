@@ -1,0 +1,58 @@
+{
+  "schema_version": "phase1_ugi_morphology_proposal_schedule_config.v1",
+  "status": "frozen_before_unused_program_confirmation",
+  "task": "Fit the transparent morphology-only support model on the completed calibration census and score only the 3072 unused frozen programs without reading any unused-program terminal outcome",
+  "scope": {
+    "read_only": true,
+    "unused_program_population_only": true,
+    "terminal_outcomes_for_unused_programs_consumed": false,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "inputs": {
+    "analysis_result": {
+      "path": "results/phase1/ugi_dynamic_controller_analysis_v1/result.json",
+      "sha256": "ad6fad9a79debe09eee1e630c242109dd0aa5f05a8a9c6f9bd732df40ecdae7a"
+    },
+    "analysis_terminal_support": {
+      "path": "results/phase1/ugi_dynamic_controller_analysis_v1/terminal_support.csv.gz",
+      "sha256": "129830af0e7ace9941efa6e30a2f6554e36fe3e7e489cebff9cfd227fc0ed83d"
+    },
+    "census_config": {
+      "path": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+      "sha256": "7500db52feb13f644d9a9585df649ec36b051b1792c9543fb0db5840f1542602"
+    },
+    "frozen_programs": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/programs.json",
+      "sha256": "46537953d40ecb14704b0dde8c461b9e4c48769206a03417a630b5ae4f633860"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_morphology_proposal_schedule.py",
+      "sha256": "d11df45893a51898f7b8c289a53f1fc5726e82dfce9e4b13591b046131374630"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_morphology_proposal_schedule.py",
+      "sha256": "1f31d933f3c770b56d5d9d5988cdb2412190785039cbb648d14d0af50dc29089"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_schedule.py",
+      "sha256": "a37825b182d8adaeced31e8c3d68d9dd43cde631b593378ee9072cf10a9b3186"
+    }
+  },
+  "policy": {
+    "analysis_result_sha256": "5b8a0f496d2a30edc5e90fb590646a1936595630d1b6c5522bb8c36e93572740",
+    "logistic_l2": 2.0,
+    "mixture_rho": 0.5,
+    "score_floor": 0.000001,
+    "score_power": 1.0,
+    "minimum_effective_program_fraction": 0.5,
+    "confirmation_design": "fresh_one_terminal_for_every_unused_program",
+    "predeclared_primary_comparison": "top_score_quartile_versus_all_unused_programs",
+    "potency_before_confirmation": false
+  }
+}

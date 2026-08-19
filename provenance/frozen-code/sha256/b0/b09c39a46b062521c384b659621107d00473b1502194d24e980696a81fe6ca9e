@@ -1,0 +1,60 @@
+{
+  "schema_version": "phase1_ugi_morphology_proposal_confirmation_config.v1",
+  "status": "frozen_before_independent_challenger_terminal_draw",
+  "task": "Generate a new independent terminal outcome for every development program under the frozen rho-0.50 power-1.50 challenger, without potency, routes, synthesis or nonzero guidance",
+  "scope": {
+    "partition": "unused_program_confirmation",
+    "fresh_native_terminals": true,
+    "potency_predictions": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "nonzero_guidance": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false,
+    "retries_or_repairs": false
+  },
+  "inputs": {
+    "base_census_config": {
+      "path": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+      "sha256": "7500db52feb13f644d9a9585df649ec36b051b1792c9543fb0db5840f1542602"
+    },
+    "proposal_result": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/result.json",
+      "sha256": "11d0a91a2b254e158131d0400e4d340a96a1df2f4fa652e06ad71ca8e9b23a5e"
+    },
+    "proposal_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/schedule.json",
+      "sha256": "386d98fd68900e3654d0a2d2ab6a3bef28b16fa6c40566b5e83a906813fe2d2d"
+    },
+    "runner": {
+      "path": "scripts/phase1_confirm_ugi_morphology_proposal.py",
+      "sha256": "f405ba6c7ea6e118f91908980fabe2fb5f73b7a7265fee902063592969ae2427"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_morphology_proposal_confirmation.py",
+      "sha256": "547f4e9e09a0f3a383eae417d5186f62758f3e3fdb460df4fcd8d4b64e11d815"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_confirmation.py",
+      "sha256": "25bd5b4ff66c9143205bf46d4b2632d64fa73b316a99255c30108973840b9ca6"
+    }
+  },
+  "design": {
+    "programs": 3072,
+    "shard_programs": 64,
+    "particle_seed_base": 20261021,
+    "terminal_seed_base": 20261022,
+    "device": "cpu",
+    "sample_steps": 8,
+    "terminals_per_program": 1
+  },
+  "analysis_policy": {
+    "comparison": "fresh_outcomes_reweighted_under_broad_reference_current_proposal_and_frozen_challenger",
+    "program_status": "previously_evaluated_programs",
+    "outcome_status": "independent_new_terminal_randomness",
+    "production_replacement_before_analysis": false,
+    "potency_before_confirmation": false
+  }
+}

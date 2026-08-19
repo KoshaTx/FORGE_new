@@ -1,0 +1,71 @@
+{
+  "schema_version": "phase1_ugi_product_l1_v2_fresh_pool_config.v1",
+  "status": "frozen_before_fresh_program_draw",
+  "frozen_at_utc": "2026-08-02T19:34:49Z",
+  "purpose": "Generate an independent nonselecting v2 product-plus-L1 pool for novelty, oracle-applicability and recursive-route coverage evaluation.",
+  "sampling": {
+    "program_seed": 20260813,
+    "flow_seed": 20260814,
+    "terminal_seed": 20260815,
+    "programs": 4096,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0
+  },
+  "inputs": {
+    "production_generator_v2": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "training_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "program_sampling_script": {
+      "path": "scripts/phase1_sample_ugi_program_prior.py",
+      "sha256": "9af316e2d0cf9ff251f81cbb350893f1a4d4e2d8a7a6c0e4364aa837885f87e9"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0"
+    },
+    "sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f"
+    }
+  },
+  "use_policy": {
+    "prospective_candidate_lock": false,
+    "model_or_threshold_selection": false,
+    "confirmation_outputs_reused": false,
+    "allowed_evaluations": [
+      "product and component novelty",
+      "tail chemistry and morphology diversity",
+      "oracle applicability and uncertainty without biological guidance",
+      "recursive route and complete-dossier coverage without synthesis guidance"
+    ],
+    "forbidden_interpretations": [
+      "experimental synthesis success",
+      "calibrated synthesis-success probability",
+      "authorization of biological or synthesis tilting"
+    ]
+  }
+}

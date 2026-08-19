@@ -1,0 +1,127 @@
+{
+  "schema_version": "m0_07_auxiliary_supervision_config.v1",
+  "seed": 1729,
+  "inputs": {
+    "lnpdb": {
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    "agile_curated": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "source_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "studies": [
+    {
+      "study_id": "JC_2023",
+      "pmid": "38060560",
+      "chemistry_relation": "native_agile_type_ugi3",
+      "expected_rows": 288,
+      "expected_unique_products": 288,
+      "expected_model_counts": {
+        "HeLa": 288
+      },
+      "component_roles": {
+        "head": {
+          "name_field": "IL_head_name",
+          "smiles_field": "IL_head_SMILES",
+          "agile_role": "A"
+        },
+        "aldehyde": {
+          "name_field": "IL_tail1_name",
+          "smiles_field": "IL_tail1_SMILES",
+          "agile_role": "B"
+        },
+        "isocyanide": {
+          "name_field": "IL_tail2_name",
+          "smiles_field": "IL_tail2_SMILES",
+          "agile_role": "C"
+        }
+      },
+      "source_review_id": "jc_2023_ugi3_subcomponent_review",
+      "forward_verification": {
+        "reaction_id": "ugi_3cr_agile",
+        "role_order": [
+          "head",
+          "aldehyde",
+          "isocyanide"
+        ],
+        "max_products": 100,
+        "expected_source_exact_products": 270,
+        "expected_source_component_rebuilds": 18,
+        "source_component_rebuild": {
+          "allowed_component_role": "head",
+          "allowed_component_ids": [
+            "A3"
+          ],
+          "require_unique_forward_product": true,
+          "source_locator": "Chen et al. 2023 main-text Figure 1C and the labeled 16 x 6 x 3 library grid",
+          "reason": "LNPDB A3 product graphs omit the tertiary amine present in the source-defined A3 reactant"
+        }
+      }
+    },
+    {
+      "study_id": "LM_2019",
+      "pmid": "31570898",
+      "chemistry_relation": "related_isocyanide_mediated_3cr",
+      "expected_rows": 1128,
+      "expected_unique_products": 1080,
+      "expected_model_counts": {
+        "BMDC": 36,
+        "BMDM": 12,
+        "HeLa": 1080
+      },
+      "component_roles": {
+        "head": {
+          "name_field": "IL_head_name",
+          "smiles_field": "IL_head_SMILES",
+          "agile_role": "A"
+        },
+        "ketone": {
+          "name_field": "IL_tail1_name",
+          "smiles_field": "IL_tail1_SMILES",
+          "agile_role": null
+        },
+        "isocyanide_linker": {
+          "name_field": "IL_linker_name",
+          "smiles_field": "IL_linker_SMILES",
+          "agile_role": null
+        }
+      },
+      "source_review_id": null
+    }
+  ],
+  "policy": {
+    "label_semantics": "lnpdb_within_study_endpoint_zscore",
+    "allow_cross_study_raw_label_pooling": false,
+    "allowed_auxiliary_strategies": [
+      "shared_encoder_with_study_specific_heads",
+      "source_pretraining_then_agile_finetuning",
+      "external_transfer_diagnostic"
+    ],
+    "prediction_head_key": [
+      "study_id",
+      "model_type"
+    ],
+    "model_selection_auxiliary_filter": {
+      "all_splits": "exclude_exact_agile_test_products",
+      "scaffold_holdout": "exclude_auxiliary_products_in_held_scaffolds",
+      "component_holdout": "exclude_auxiliary_records_containing_any_held_component_structure",
+      "component_pair_holdout": "exclude_auxiliary_records_containing_the_held_component_pair"
+    },
+    "auxiliary_internal_evaluation_status": "diagnostic_transductive_because_lnpdb_zscores_use_complete_study_endpoint_populations",
+    "retention_gate": "improve_frozen_agile_component_holdouts_or_declared_external_transfer_without_held_label_exposure"
+  }
+}

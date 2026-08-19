@@ -1,0 +1,50 @@
+{
+  "schema_version": "phase1_ugi_product_l1_postselection_held_component_stress_config.v1",
+  "status": "descriptive_postselection_contract_no_thresholds",
+  "inputs": {
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "held_component_probe": {
+      "path": "results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "sha256": "6b16f867fb72e92222df25cbd510b3acc586a2dde38a16e7c4afe63c669bc630"
+    },
+    "selected_checkpoint_sample": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_step1000_held_component_probe/result.json",
+      "sha256": "68a40281db1ec80849b5ebb7d01e2e29619524e6073b67bc5c678cd91988f317"
+    },
+    "earlier_nonselecting_gate": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json",
+      "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "selected_checkpoint": {
+    "step": 1000,
+    "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+  },
+  "sampling_contract": {
+    "seed": 20260801,
+    "attempted_programs": 512,
+    "program_source": "coarse_morphology_programs_from_products_with_at_least_one_held_component_family",
+    "component_identities_exposed_to_sampler": false
+  },
+  "reporting": {
+    "stratify_by_held_role_class": true,
+    "include_single_corruption_full_heldout_loss": true,
+    "thresholds": null,
+    "may_change_architecture_or_checkpoint": false
+  }
+}

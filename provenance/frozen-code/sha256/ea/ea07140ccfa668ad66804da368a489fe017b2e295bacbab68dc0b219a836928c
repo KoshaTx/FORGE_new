@@ -1,0 +1,35 @@
+{
+  "schema_version": "phase1_ugi3_source_qualified_cumulative_inputs_config.v1",
+  "policy": {
+    "historical_artifacts_rewritten": false,
+    "scientific_values_may_change": false,
+    "source_lineage_only": true,
+    "nonzero_guidance_authorized": false,
+    "selection_authorized": false,
+    "sealed_holdout_access_authorized": false
+  },
+  "inputs": {
+    "value_source": {"path": "src/forge/value/synthesis.py", "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"},
+    "source_qualification": {"path": "results/phase1/synthesis_value_source_qualification_v1/result.json", "sha256": "7b72a64e2bc53fbe55aed6751610e9426c735a41553dc95556da123269fd2ad4"},
+    "exact_route_replay": {"path": "results/phase1/synthesis_source_exact_route_replay_v1/result.json", "sha256": "855436b3eab7388a5f5b02578ce5b27105754cbdcb4f48b504d27c4ee101848d"},
+    "fresh_v2_config": {"path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json", "sha256": "bc7e0318610b186dbfc602da686483a11867bd60e682b3c9617c840fa09195f7"},
+    "fresh_v2_result": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json", "sha256": "8d0b0e1195bba39b7bf3318675e788f72fd3d0f83e5ef71d7b4082c202bf2841"},
+    "fresh_v2_component_values": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz", "sha256": "f66656a7bd0971701f387b0bd6278f9f9578b2195770f6671c6e7cc8f56a94e1"},
+    "fresh_v2_product_values": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz", "sha256": "7fdd08e2e4e3c5e28229d29bbf5bc91444a911640d073982354fd985fb287489"},
+    "fresh_v3_config": {"path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json", "sha256": "84bafa51a90cadd87a888ae92ef3d81a9d82746c17a72b93eddb239fc0210d96"},
+    "fresh_v3_result": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json", "sha256": "442e5c01f5c69b505a6767ff48dfb25b9f381233b5086509aec1e32c43163abf"},
+    "fresh_v3_component_values": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz", "sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"},
+    "fresh_v3_product_values": {"path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz", "sha256": "258081bae46f5e3416e9c7efba4de01b60d5f0661503ce3b757793afbac79206"},
+    "exact_c18_config": {"path": "configs/route/phase1_ugi3_exact_c18_route_v1.json", "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"},
+    "exact_c18_result": {"path": "results/phase1/ugi3_exact_c18_route_v1/result.json", "sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"},
+    "exact_c18_steps": {"path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz", "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b"},
+    "exact_c18_assessment": {"path": "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz", "sha256": "d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b"},
+    "exact_c16_config": {"path": "configs/route/phase1_ugi3_exact_c16_route_v1.json", "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"},
+    "exact_c16_result": {"path": "results/phase1/ugi3_exact_c16_route_v1/result.json", "sha256": "99ab8ff669df0e4eb97564abf6ba9ec6b713cdb59c0265a966f101121b4031f4"},
+    "exact_c16_steps": {"path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz", "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"},
+    "exact_c16_assessment": {"path": "results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz", "sha256": "97bdd52114c83388d4c9146e1e2569c6ab786903ca62a6004cc2d0017ee75a10"},
+    "builder_source": {"path": "src/forge/route/ugi3_source_qualified_cumulative_inputs.py", "sha256": "6c4b7dc4c8a4a5680bc178701e9c29669a4adc2b75606ce776c11475a015b9a3"},
+    "builder_runner": {"path": "scripts/phase1_build_ugi3_source_qualified_cumulative_inputs.py", "sha256": "30abb1f7286c50e7fb5f0a109a418a1ef168ea8b263dcd2a28df0ad5011c53f9"},
+    "builder_tests": {"path": "tests/test_ugi3_source_qualified_cumulative_inputs.py", "sha256": "73f4787ce2ae6cb59491d60d15eaac7d1efaf14e4596869156b6d55bd6c8ecd4"}
+  }
+}

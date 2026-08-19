@@ -1,0 +1,217 @@
+{
+  "schema_version": "phase1_ugi3_hybrid_search_config.v1",
+  "task": "Bounded fail-closed hybrid evidence-search qualification for the 424-component Ugi registry",
+  "generated_utc": "2026-08-01T00:00:00Z",
+  "inputs": {
+    "component_dossier": {
+      "asset": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "expected_sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "component_dossier_result": {
+      "asset": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "expected_sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "component_program": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "expected_sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "component_program_result": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "expected_sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    "exact_adapter_source": {
+      "asset": "src/forge/route/ugi3_exact_evidence_source.py",
+      "expected_sha256": "ba843fdce8de67dd1c228fe0680d77c00bf7493bd38224dda2419a103154a290"
+    },
+    "exact_evidence_ledger": {
+      "asset": "results/phase1/ugi3_exact_evidence_source/assessment_ledger.json.gz",
+      "expected_sha256": "0507480bf1117999629515f9d2c9ff7b5288695371b1f1eefe4efb58829e0f5d"
+    },
+    "exact_evidence_result": {
+      "asset": "results/phase1/ugi3_exact_evidence_source/result.json",
+      "expected_sha256": "c47b18d6ffe034182f5f68fc53bf9dfdf80c215ab4687448386955fe7bea8152"
+    },
+    "hybrid_adapter_source": {
+      "asset": "src/forge/route/ugi3_hybrid_search.py",
+      "expected_sha256": "f21d588034b4dea4a15e3c403722d67d9d6e24825f84c7153561453b301ea3e1"
+    },
+    "l1_variant": {
+      "asset": "configs/assembly/ugi_variant.yaml",
+      "expected_sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "oxidation_variant": {
+      "asset": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "expected_sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    },
+    "planner_cache_source": {
+      "asset": "src/forge/route/planner_cache.py",
+      "expected_sha256": "72a07031fc7cd623446c99625333d848b79059ada995f4b5c3b7bdfd53b523db"
+    },
+    "planner_contract_source": {
+      "asset": "src/forge/route/planner.py",
+      "expected_sha256": "8cd48f704819810f83f02a9623f8de461f7334ad94684e3d77e325e3dd9902a0"
+    },
+    "qualified_forward_source": {
+      "asset": "src/forge/route/qualified_forward.py",
+      "expected_sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    },
+    "readiness_config": {
+      "asset": "configs/route/phase1_ugi3_production_registry_route_readiness.json",
+      "expected_sha256": "d2cdf538593494a096e0cf529cc54e2252f865ae17c080f6b439cb11496334c1"
+    },
+    "readiness_ledger": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "expected_sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "readiness_result": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "expected_sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    },
+    "step_ledger": {
+      "asset": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "expected_sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"
+    },
+    "step_result": {
+      "asset": "results/phase1/ugi3_exact_source_forward_verification/result.json",
+      "expected_sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"
+    },
+    "terminal_procurement": {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "expected_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "transfer_config": {
+      "asset": "configs/route/m0_09_hydrophobic_motif_transfer.json",
+      "expected_sha256": "d790cb0e64be3d43f7c2730353839ff46c53f248c549039aa4cf673c6d0d6ed6"
+    },
+    "transfer_ledger": {
+      "asset": "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
+      "expected_sha256": "89370ce3dd6d6e39acac25d53f235adf86cc74840f106486b0490746fd624dff"
+    },
+    "transfer_result": {
+      "asset": "results/m0_09/hydrophobic_motif_transfer.json",
+      "expected_sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    },
+    "upstream_registry": {
+      "asset": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "expected_sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    }
+  },
+  "search_policy": {
+    "assessment_as_of_utc": "2026-08-01T00:00:00Z",
+    "retrieval_l3_expiry_days": 30,
+    "unavailable_l3_statuses": [
+      "current_item_level_unavailable"
+    ],
+    "per_component_budget": {
+      "maximum_depth": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_expansions": 4,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 1,
+      "maximum_elapsed_milliseconds": 0
+    },
+    "global_search_limits": {
+      "maximum_components": 512,
+      "maximum_exact_retrieval_candidates": 8,
+      "maximum_family_projection_proposals": 128,
+      "maximum_provenance_priorities": 256,
+      "maximum_forward_verifier_calls": 8
+    },
+    "combined_l3_context": {
+      "region": "US",
+      "latest_accessed_utc": "2026-07-29T22:31:51Z",
+      "earliest_expires_utc": "2026-08-28T20:49:00Z"
+    },
+    "closing_evidence_tiers": [
+      "accepted_terminal",
+      "exact_source"
+    ],
+    "nonclosing_channels": [
+      "family_projection",
+      "provenance_priority",
+      "motif_similarity",
+      "handle_qualification"
+    ]
+  },
+  "expected_counts": {
+    "admitted_components": 424,
+    "baseline_outcomes": {
+      "complete": 40,
+      "missing_knowledge": 53,
+      "outside_support": 331
+    },
+    "hybrid_outcomes": {
+      "complete": 41,
+      "missing_knowledge": 277,
+      "outside_support": 106
+    },
+    "hybrid_outcomes_by_role": {
+      "amine_head": {
+        "complete": 17,
+        "missing_knowledge": 189,
+        "outside_support": 58
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 37,
+        "outside_support": 10
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 18,
+        "missing_knowledge": 51,
+        "outside_support": 38
+      }
+    },
+    "search_channels": {
+      "exact_baseline": 40,
+      "exact_evidence_l3_open": 1,
+      "exact_identity_retrieval": 1,
+      "family_projection": 87,
+      "no_admitted_route": 106,
+      "provenance_priority": 189
+    },
+    "outcomes_by_search_channel": {
+      "exact_baseline": {
+        "complete": 40
+      },
+      "exact_evidence_l3_open": {
+        "missing_knowledge": 1
+      },
+      "exact_identity_retrieval": {
+        "complete": 1
+      },
+      "family_projection": {
+        "missing_knowledge": 87
+      },
+      "no_admitted_route": {
+        "outside_support": 106
+      },
+      "provenance_priority": {
+        "missing_knowledge": 189
+      }
+    },
+    "newly_closed_components": 1,
+    "original_missing_targets": 53,
+    "newly_closed_original_missing_targets": 0,
+    "original_missing_targets_remaining": 53,
+    "legacy_outside_reclassified_missing": 5,
+    "route_complete_flag_agreement": 424,
+    "admitted_qualified_templates": 0,
+    "first_pass_cache_misses": 424,
+    "second_pass_cache_hits": 424,
+    "first_pass_verifier_calls": 1,
+    "realized_global_search_budget": {
+      "components": 424,
+      "exact_retrieval_candidates": 1,
+      "family_projection_proposals": 87,
+      "provenance_priorities": 189,
+      "forward_verifier_calls": 1
+    }
+  },
+  "claims_boundary": {
+    "scope": "bounded_hybrid_search_diagnostic",
+    "dynamic_general_route_planner": false,
+    "production_synthesis_guidance": false,
+    "synthesis_success_probability": false
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "phase1_ugi_morphology_proposal_challenger_adjudication_config.v1",
+  "status": "frozen_after_point_rate_inspection_before_paired_cluster_bootstrap",
+  "task": "Adjudicate whether the frozen morphology-strength challenger improves fresh supported-terminal yield over the current proposal without changing applicability",
+  "scope": {
+    "read_only": true,
+    "fresh_terminal_outcomes_only": true,
+    "same_program_population_as_development": true,
+    "point_rates_inspected_before_adjudication_config": true,
+    "applicability_boundary_frozen": true,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "policy": {
+    "challenger_candidate_id": "rho-0.50_power-1.50",
+    "minimum_absolute_improvement_ci_lower": 0.0,
+    "maximum_validity_loss": 0.01,
+    "minimum_supported_diversity_fraction_of_current": 0.5,
+    "clustered_bootstrap": {
+      "unit": "program_sha256",
+      "replicates": 10000,
+      "seed": 20261024
+    }
+  },
+  "inputs": {
+    "baseline_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "challenger_confirmation_analysis": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_analysis_v1/result.json",
+      "sha256": "69403641bd6a4e9ccd63f81a7b66331eff11ad6b50d67d5aa80f7b94317a1b86"
+    },
+    "challenger_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/schedule.json",
+      "sha256": "386d98fd68900e3654d0a2d2ab6a3bef28b16fa6c40566b5e83a906813fe2d2d"
+    },
+    "fresh_support_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_analysis_v1/support_ledger.csv.gz",
+      "sha256": "171fb3eba8bd278a628f0f31fe3305dd613da595c7bf96cc94921ae63b827dad"
+    },
+    "runner": {
+      "path": "scripts/phase1_adjudicate_ugi_morphology_proposal_challenger.py",
+      "sha256": "0b5ab059ebf216fc0b5e11dff85b29162a9c360e7acfb097abd4d2dc695f02a1"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_proposal_challenger_adjudication.py",
+      "sha256": "42230eba072fe4a7b8af6a74478737a25fc2bfe2d81388a4b9dd328fe00454ca"
+    },
+    "strength_sweep": {
+      "path": "results/phase1/ugi_morphology_proposal_strength_sweep_v1/result.json",
+      "sha256": "05d4bfbaa7926f00b410708d7f824d91a81e102ca1bffc4358234287e2d53214"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_challenger_adjudication.py",
+      "sha256": "fa63238341de178b309df9ef9db2b4a75da03e9eb829ea41aa33f1661304b7c0"
+    }
+  }
+}

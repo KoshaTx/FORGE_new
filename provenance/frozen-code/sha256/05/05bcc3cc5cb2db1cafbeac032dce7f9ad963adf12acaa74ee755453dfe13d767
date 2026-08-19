@@ -1,0 +1,97 @@
+{
+  "schema_version": "phase1_ugi_production_refit_checkpoint_selection_policy.v1",
+  "status": "frozen_before_production_refit_checkpoint_sampling",
+  "frozen_at_utc": "2026-08-05T08:08:57Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+    "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"
+  },
+  "correction": {
+    "scientific_rationale": "The architecture and development-stage exposure were selected before the all-fold production refit. This audit uses a fresh unconditional morphology draw to select among the serial all-fold checkpoints by the unchanged generative-quality gates rather than by in-sample training loss. Because every product fold entered the refit, this is a production checkpoint quality-control audit and not a held-component generalization estimate.",
+    "training_loss_is_nonselecting": true,
+    "in_sample_diagnostic_loss_is_nonselecting": true,
+    "longer_training_is_not_assumed_better": true,
+    "checkpoint_selection_may_choose_an_earlier_snapshot": true
+  },
+  "overrides": {
+    "status": "frozen_before_production_refit_checkpoint_sampling",
+    "frozen_at_utc": "2026-08-05T08:08:57Z",
+    "scope": {
+      "phase": "Phase 1 all-fold product-plus-L1 production refit checkpoint selection",
+      "architectures": [
+        "full_morphology_program_conditioning"
+      ],
+      "common_serial_checkpoint_steps": [
+        100,
+        500,
+        1000,
+        1500,
+        1700
+      ],
+      "biological_guidance_evaluated": false,
+      "l2_routes_evaluated": false,
+      "synthesis_guidance_evaluated": false
+    },
+    "frozen_inputs": {
+      "unconditional_program_prior": {
+        "path": "results/phase1/ugi_production_refit_checkpoint_audit_probe_1024.json",
+        "sha256": "b8da66a1400932b6de0c3644544050b5cec50602ad954812847b8e786a353702",
+        "attempted_draws": 1024,
+        "seed": 20260810,
+        "source": "fresh independent draw from the unchanged training-fold, source- and family-balanced program prior",
+        "contains_component_ids_or_graphs": false
+      },
+      "frozen_product_reference": {
+        "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+        "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184",
+        "rows": 112386,
+        "unique_products": 112386,
+        "source_fold_counts": {
+          "train": 66464,
+          "calibration": 15800,
+          "heldout": 30122
+        },
+        "selection_folds": [
+          "train",
+          "calibration",
+          "heldout"
+        ],
+        "selection_rows": 112386,
+        "selection_unique_products": 112386,
+        "fold_field": "primary_product_fold",
+        "use": [
+          "all-fold production-refit exact-reproduction collapse safeguard",
+          "all-fold descriptor-distribution quality control"
+        ],
+        "heldout_use": "included because this all-fold refit audit is not reported as held-component generalization"
+      },
+      "architecture_configs": {
+        "full_morphology_program_conditioning": {
+          "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2_production_refit.json",
+          "sha256": "c5402422f8f2923eb16126c2a424246e7748616f1e843385b53cd972a47df0e6"
+        }
+      }
+    },
+    "matched_sampling": {
+      "seed": 20260810,
+      "attempted_draws": 1024,
+      "same_program_indices_across_checkpoints": true,
+      "sample_steps": 8,
+      "terminal_decoder_mode": "argmax"
+    },
+    "selection_algorithm": {
+      "production_refit_interpretation": [
+        "Apply every inherited validity, exact-L1, open-endedness, collapse and descriptor-realism gate without modification.",
+        "Select among passing checkpoints by the inherited paired usable-open-ended-yield, realism, exact-reproduction and earliest-noninferior rules.",
+        "Do not use decreasing all-fold training loss as evidence for a later checkpoint.",
+        "Treat the selected snapshot as the all-fold production checkpoint; retain the development-stage component-disjoint evidence as the generalization evidence."
+      ]
+    },
+    "failure_policy": {
+      "no_threshold_rewrite_after_opening_outputs": true,
+      "no_silent_override": true,
+      "no_checkpoint_promotion_if_every_snapshot_fails": true,
+      "longer_challenger_requires_new_frozen_contract": true
+    }
+  }
+}

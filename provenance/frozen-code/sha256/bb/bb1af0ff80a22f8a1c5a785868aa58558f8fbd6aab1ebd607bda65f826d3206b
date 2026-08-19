@@ -1,0 +1,63 @@
+{
+  "schema_version": "phase1_aizynthfinder_runtime_manifest.v1",
+  "status": "diagnostic_only_not_route_evidence",
+  "aizynthfinder_version": "4.4.1",
+  "python_version": "3.11.13",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "executable": ".venv-aizynthfinder-py311-arm64/bin/python",
+  "config": {
+    "path": "data/source_cache/aizynthfinder_public_v4_4_1/config.yml",
+    "sha256": "5f38e3576960c7b15ecbf77cd4cc0a6e2fce300159abaef064272d01e63ec0ba"
+  },
+  "assets": [
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/uspto_model.onnx",
+      "bytes": 91518243,
+      "sha256": "bd0a3cb74cd7068de474c8fb789a00a66bc42c75636d66510ccac585ebe928f8",
+      "published_md5": "b466a436b6a8eceaba8c14ef5e2a88c8"
+    },
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/uspto_filter_model.onnx",
+      "bytes": 16788859,
+      "sha256": "ad29aa32bdfcbe37065045546493806cf04899c55386c438905d83fb14bb6320",
+      "published_md5": "ab0df54b62a0aeceecd68051f8dc3f2e"
+    },
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/uspto_ringbreaker_model.onnx",
+      "bytes": 15036094,
+      "sha256": "1bf0690352d9e9212d7dbe8b35649caf74f73ef0b30edefdfdac37fce38085be",
+      "published_md5": "2aa7ee99d29a910369e723a73fc13044"
+    },
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/uspto_templates.csv.gz",
+      "bytes": 3313598,
+      "sha256": "a4f1945e90cfa195538320833d68aed38f14e2fcc2f8afb5d958bc920edcafbe",
+      "published_md5": "e8fb29d4dcd54073658000e212b7845a"
+    },
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/uspto_ringbreaker_templates.csv.gz",
+      "bytes": 373753,
+      "sha256": "5616a056454b10a2f044e69e027422128986856ebd958541a3bf9f837e3a0d14",
+      "published_md5": "a6d0117ee6122e2cca3b7f8efa35541d"
+    },
+    {
+      "path": "data/source_cache/aizynthfinder_public_v4_4_1/zinc_stock.hdf5",
+      "bytes": 663232280,
+      "sha256": "99d39a6f807c3e815487500bafc2b4a9dc66a31af189e3b1776874fb0d4a188d",
+      "published_md5": "00de71724ec1d4a8463c1b0d8a5d0941"
+    }
+  ],
+  "sources": {
+    "code": "https://github.com/MolecularAI/aizynthfinder/releases/tag/v4.4.1",
+    "models": "https://zenodo.org/records/7797465",
+    "templates": "https://zenodo.org/records/7341155",
+    "stock": "https://figshare.com/articles/dataset/ZINC_stock/12334577"
+  },
+  "authority": {
+    "may_generate_route_hypotheses": true,
+    "may_create_evidence_records": false,
+    "may_set_route_complete": false,
+    "may_populate_synthesis_success_probability": false,
+    "may_enter_synthesis_value": false
+  }
+}

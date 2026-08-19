@@ -1,0 +1,29 @@
+{
+  "schema_version": "m0_07_oracle_graph_transfer_decision_config.v1",
+  "task": "M0-07 pretrained graph transfer scientific adjudication",
+  "inputs": {
+    "transfer_matrix_result": {
+      "path": "results/m0_07/oracle_graph_transfer_result.json",
+      "sha256": "c6661597e2683a99046bed341eb70604deba0e0799db96bd664967c63c8e9862"
+    },
+    "oracle_freeze_result": {
+      "path": "results/m0_07/oracle_freeze_result.json",
+      "sha256": "8476be6e013e12715bdb55a7ef6d73162b01010f7b560297c6e8406028cda338"
+    }
+  },
+  "expected": {
+    "fits": 384,
+    "ensembles": 128,
+    "selected_candidate_id": "supervised_graph::ugi_component_role_aware_dmpnn::neural_3seed_ensemble"
+  },
+  "contract": {
+    "lane": "label_free_r0_transfer",
+    "variants": [
+      "r0_pretrained_frozen_linear",
+      "r0_pretrained_finetuned_dmpnn"
+    ],
+    "selection_evidence": "equal_endpoint_mean_equal_scheme_calibration_metrics",
+    "outer_test_used_for_selection": false,
+    "fits_may_be_rerun": false
+  }
+}

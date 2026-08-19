@@ -1,0 +1,191 @@
+{
+  "schema_version": "phase1_ugi_matched_synthesis_guidance_preregistration.v1",
+  "scope": "nonexecuting_preregistered_matched_synthesis_guidance_experiment",
+  "arms": [
+    "unguided_product_prior",
+    "post_hoc_route_filtering",
+    "in_trajectory_smc",
+    "finite_library_baseline"
+  ],
+  "design": {
+    "particles_per_seed": 64,
+    "sample_steps": 8,
+    "synthesis_checkpoints": [
+      2,
+      4,
+      6
+    ],
+    "terminal_rollouts_per_particle_checkpoint": 1,
+    "guidance_strengths": [
+      0.0,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "calibration_seeds": [
+      20260821,
+      20260822,
+      20260823
+    ],
+    "evaluation_seeds": [
+      20260824,
+      20260825,
+      20260826,
+      20260827,
+      20260828
+    ],
+    "no_retries": true,
+    "no_seed_search": true
+  },
+  "matched_compute": {
+    "unguided_product_prior": {
+      "product_transition_calls": 1280,
+      "terminal_completions": 256,
+      "logical_planner_calls": 768,
+      "physical_planner_calls": 768,
+      "logical_verifier_calls": 3328,
+      "physical_verifier_calls": 3328,
+      "final_candidates": 32,
+      "wall_seconds": 10800,
+      "gpu_device_seconds": 7200
+    },
+    "post_hoc_route_filtering": {
+      "product_transition_calls": 1280,
+      "terminal_completions": 256,
+      "logical_planner_calls": 768,
+      "physical_planner_calls": 768,
+      "logical_verifier_calls": 3328,
+      "physical_verifier_calls": 3328,
+      "final_candidates": 32,
+      "wall_seconds": 10800,
+      "gpu_device_seconds": 7200
+    },
+    "in_trajectory_smc": {
+      "product_transition_calls": 1280,
+      "terminal_completions": 256,
+      "logical_planner_calls": 768,
+      "physical_planner_calls": 768,
+      "logical_verifier_calls": 3328,
+      "physical_verifier_calls": 3328,
+      "final_candidates": 32,
+      "wall_seconds": 10800,
+      "gpu_device_seconds": 7200
+    },
+    "finite_library_baseline": {
+      "product_transition_calls": 0,
+      "terminal_completions": 256,
+      "logical_planner_calls": 768,
+      "physical_planner_calls": 768,
+      "logical_verifier_calls": 3328,
+      "physical_verifier_calls": 3328,
+      "final_candidates": 32,
+      "wall_seconds": 10800,
+      "gpu_device_seconds": 0
+    },
+    "matching_policy": {
+      "generator_and_logical_route_ceilings_exact_for_three_generator_arms": true,
+      "physical_calls_wall_and_gpu_reported_and_capped_separately": true,
+      "finite_library_excluded_from_causal_compute_match": true
+    }
+  },
+  "primary_endpoint": {
+    "name": "unique_fully_route_closed_beyond_catalog_candidates",
+    "deduplication": "canonical_constitutional_product_identity",
+    "requires_exact_l1": true,
+    "requires_all_three_roles_l2_l3_closed": true,
+    "requires_current_terminal_evidence": true,
+    "requires_component_outside_frozen_catalog": true,
+    "finite_library_endpoint_is_zero_by_definition": true,
+    "nonclosing_evidence_classes": [
+      "handle_qualified",
+      "family_projected",
+      "analogue_only",
+      "route_model_likelihood"
+    ]
+  },
+  "safeguards": {
+    "validity_absolute_drop": 0.02,
+    "exact_l1_absolute_drop": 0.02,
+    "uniqueness_ratio": 0.9,
+    "internal_diversity_ratio": 0.9,
+    "broad_coverage_ratio": 0.9,
+    "beyond_catalog_ratio": 0.8,
+    "role_effective_count_ratio": 0.8,
+    "role_max_concentration_absolute_increase": 0.1,
+    "oracle_assessed_fraction_floor": 0.99
+  },
+  "oracle_policy": {
+    "descriptive_only": true,
+    "all_actions_must_abstain": true,
+    "all_guidance_scores_must_be_null": true,
+    "biological_ranking_or_promotion_forbidden": true
+  },
+  "promotion": {
+    "calibration_selects_smallest_passing_maximizer": true,
+    "all_evaluation_seed_wins_required": true,
+    "exact_sign_test_probability": 0.03125,
+    "ties_or_losses_fail_promotion": true,
+    "aggregate_primary_difference_must_be_positive": true,
+    "no_retry_after_failure": true
+  },
+  "prerequisites": {
+    "restartable_v2_passed": true,
+    "production_zero_guidance_v2_passed": false,
+    "scalar_value_policy_frozen": false,
+    "current_l3_snapshot_frozen": false,
+    "all_passed": false,
+    "blocker": {
+      "id": "fresh_v2_v3_value_source_supersession_required",
+      "path": "src/forge/value/synthesis.py",
+      "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c",
+      "observed_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189",
+      "cause_status": "structured_pareto_value_source_supersession_pending_replay"
+    }
+  },
+  "artifacts": {
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "finite_component_catalog": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "generator_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "oracle_campaign_selection": {
+      "path": "results/phase1/oracle_campaign_selection.json",
+      "sha256": "21d5348a9ffe929658af60ca1dcdcd58ab8dc654e3c893c80741cff829ddd7cc"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+    },
+    "restartable_equivalence_config_v2": {
+      "path": "configs/model/phase1_ugi_restartable_sampler_equivalence_v2.json",
+      "sha256": "c34b8b9fa70fee228f79bb86f61fb6b6e04c72c2cf0540ae8a97aa4e5d9f589c"
+    },
+    "restartable_equivalence_result_v2": {
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json",
+      "sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+    },
+    "zero_guidance_rehearsal_config_v2": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json",
+      "sha256": "90e46be17073adb848bd856bbc5cbebb0591a60b92cdd2adce1de04e6433b7cd"
+    }
+  },
+  "scope_guards": {
+    "production_execution_authorized_by_this_config": false,
+    "biological_guidance": false,
+    "private_holdout_access": false,
+    "synthesis_success_probability_defined": false,
+    "route_likelihood_used_as_success_probability": false
+  }
+}

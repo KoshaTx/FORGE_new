@@ -1,0 +1,28 @@
+# Isolated Graph2Edits qualification runtime only.
+#
+# The two project wheels are hash-pinned separately in
+# configs/route/graph2edits_proposal_backend_candidate_v1.json and are installed
+# locally with --no-deps after this transitive runtime lock is synchronized.
+#
+# torch 2.2.2 is the version documented by Syntheseus 0.8.0 for its full model
+# environment.  Pinning below PyTorch 2.6 also preserves the checkpoint loading
+# behavior expected by the released Graph2Edits wrapper.
+torch==2.2.2
+
+# NumPy 1.26.4 is the final 1.x release and avoids the NumPy 2 ABI boundary for
+# this 2022-era model implementation.
+numpy==1.26.4
+
+# Match FORGE's declared RDKit support floor while using a Python 3.11 macOS
+# arm64 wheel with modern sanitization behavior.
+rdkit==2024.3.6
+
+# Direct dependencies declared by Syntheseus 0.8.0 and the Graph2Edits wheel.
+joblib
+more-itertools
+networkx
+# OmegaConf 2.0.6 publishes legacy ``PyYAML>=5.1.*`` metadata that modern pip
+# rejects.  2.3.0 retains the API Syntheseus needs and passes pip metadata
+# validation on Python 3.11.
+omegaconf==2.3.0
+tqdm

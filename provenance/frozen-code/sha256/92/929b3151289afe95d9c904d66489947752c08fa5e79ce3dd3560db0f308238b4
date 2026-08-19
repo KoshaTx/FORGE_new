@@ -1,0 +1,88 @@
+{
+  "schema_version": "m0_05_source_evidence_adjudication_config.v1",
+  "task": "M0-05",
+  "generated_utc": "2026-07-29T22:00:00+00:00",
+  "randomness": {
+    "used": false,
+    "seed": 0
+  },
+  "inputs": {
+    "ugi_qualification_config": {
+      "path": "configs/assembly/m0_09_ugi3_assembly_qualification.json",
+      "sha256": "022592e76e87803878814e4f34786c6be82b9ac59d6ca844fb548b25f611a639"
+    },
+    "agile_measured_library": {
+      "path": "data/vendor/AGILE_smiles_with_value_group.csv",
+      "sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    "agile_reconciliation_result": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "agile_reconciliation_ledger": {
+      "path": "results/m0_07/agile_reconciliation_ledger.csv.gz",
+      "sha256": "ae3bf41440b815a8a4cfe5862eccc396fc35d3653ab9266b6b74f53ef90f0e37"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "ugi_qualification_result": {
+      "path": "results/m0_09/ugi3_assembly_qualification.json",
+      "sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    },
+    "paper_route_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "agile_virtual_product_ledger": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "hydrophobic_motif_transfer": {
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    }
+  },
+  "source_assets": {
+    "41587_2023_1679_MOESM1_ESM.pdf": {
+      "path": "data/source_cache/m0_09_publishers/PMC10544676/assets/41587_2023_1679_MOESM1_ESM.pdf",
+      "sha256": "46be449ddcef11da686d499015c868c767f4c02714c54e3d5ef5db35c4a42490"
+    },
+    "41467_2024_50619_MOESM1_ESM.pdf": {
+      "path": "data/source_cache/m0_09_publishers/PMC11282250/assets/41467_2024_50619_MOESM1_ESM.pdf",
+      "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    },
+    "pnas.2309472120.sapp.pdf": {
+      "path": "data/source_cache/m0_09_review_assets/PMC10723144/pnas.2309472120.sapp.pdf",
+      "sha256": "51bdaccf337fe8f6d19bc9dbddf99ec6d1f312006d4d1ef2152a4fc2f6e4f1c6"
+    },
+    "41467_2024_45422_MOESM1_ESM.pdf": {
+      "path": "data/source_cache/m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM1_ESM.pdf",
+      "sha256": "7f5b1c6413e4db3b09cb86296139ba76848b06de96b7165942643233ad6a3e2c"
+    }
+  },
+  "expected": {
+    "source_reviews": 4,
+    "measured_l1_admit_exact": 1100,
+    "measured_l1_abstain_mixture": 100,
+    "virtual_l1_admit_transform_consistency": 12276,
+    "l2_route_instances": 45,
+    "l2_admit_exact": 44,
+    "l2_abstain": 1,
+    "reported_experimental_negatives": 0
+  },
+  "policy": {
+    "source_review_status": "chemistry_pages_visually_reviewed",
+    "measured_l1_basis": "exact_reported_library_execution",
+    "virtual_l1_basis": "computed_transform_consistency",
+    "series_member_basis": "exact_executed_series_member",
+    "missing_evidence_is_negative": false,
+    "human_review_required_for_exact_admission": false,
+    "optional_external_audit_retained": true
+  }
+}

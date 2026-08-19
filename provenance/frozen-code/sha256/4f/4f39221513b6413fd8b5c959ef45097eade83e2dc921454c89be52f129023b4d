@@ -1,0 +1,99 @@
+{
+  "schema_version": "phase1_ugi3_hybrid_high_impact_leaf_terminals.v1",
+  "snapshot": {
+    "accessed_utc": "2026-08-05T05:48:59Z",
+    "expires_utc": "2026-09-04T05:48:59Z",
+    "region": "US",
+    "retrieval_channel": "primary_supplier_product_page_rendered_by_web_index",
+    "selection_policy": "Frozen high-impact missing-leaf worklists from the Graph2Edits and hybrid proposal sensitivity audits were consulted before supplier lookup.",
+    "interpretation": "Each admitted record supplies exact current L3 procurement evidence for one molecular identity only."
+  },
+  "records": [
+    {
+      "canonical_smiles": "C=CCCCCCCCCO",
+      "name": "9-Decen-1-ol",
+      "cas": "13019-22-2",
+      "molecular_formula": "C10H20O",
+      "supplier": "TCI America",
+      "product_number": "D1892",
+      "source_url": "https://www.tcichemicals.com/US/en/p/D1892",
+      "source_page_lines": "330-385",
+      "purity": ">97.0% (GC)",
+      "pack_sizes": ["25 mL", "500 mL"],
+      "availability": "local_us_stock_typically_ships_same_day",
+      "stock_observation": {
+        "Philadelphia_PA_units_25mL": 1,
+        "Portland_OR_units_25mL": 1,
+        "Philadelphia_PA_units_500mL": 1,
+        "Portland_OR_units_500mL": 2
+      },
+      "disposition": "admit_exact_terminal"
+    },
+    {
+      "canonical_smiles": "CCCCCCCCCCO",
+      "name": "1-Decanol",
+      "cas": "112-30-1",
+      "molecular_formula": "C10H22O",
+      "supplier": "TCI America",
+      "product_number": "D0031",
+      "source_url": "https://www.tcichemicals.com/US/en/p/D0031",
+      "source_page_lines": "product identity and size/stock table",
+      "purity": ">98.0% (GC)",
+      "pack_sizes": ["25 mL", "500 mL"],
+      "availability": "ships_from_portland_same_day",
+      "stock_observation": {
+        "Portland_OR_units_25mL": 40,
+        "Portland_OR_units_500mL": 40
+      },
+      "disposition": "admit_exact_terminal"
+    },
+    {
+      "canonical_smiles": "C#CCCCCCCCCO",
+      "name": "9-Decyn-1-ol",
+      "cas": "17643-36-6",
+      "molecular_formula": "C10H18O",
+      "supplier": "TCI America",
+      "product_number": "D3710",
+      "source_url": "https://www.tcichemicals.com/US/en/p/D3710",
+      "source_page_lines": "332-390",
+      "purity": ">94.0% (GC)",
+      "pack_sizes": ["5 g", "25 g"],
+      "availability": "local_us_stock_same_day",
+      "stock_observation": {
+        "Portland_OR_units_5g": 1,
+        "Philadelphia_PA_units_25g": 6,
+        "Portland_OR_units_25g": 1
+      },
+      "disposition": "admit_exact_terminal"
+    },
+    {
+      "canonical_smiles": "CCCCCN",
+      "name": "Amylamine",
+      "cas": "110-58-7",
+      "pubchem_cid": 8060,
+      "molecular_formula": "C5H13N",
+      "supplier": "TCI America",
+      "product_number": "A0445",
+      "source_url": "https://www.tcichemicals.com/US/en/p/A0445",
+      "source_page_lines": "174-230",
+      "purity": ">98.0% (GC)(T)",
+      "pack_sizes": ["25 mL", "100 mL", "500 mL"],
+      "availability": "local_us_stock_typically_ships_same_day",
+      "stock_observation": {
+        "Philadelphia_PA_units_25mL": 3,
+        "Portland_OR_units_25mL": 2,
+        "Philadelphia_PA_units_100mL": 1,
+        "Portland_OR_units_100mL": 1,
+        "Philadelphia_PA_units_500mL": 1,
+        "Portland_OR_units_500mL": 1
+      },
+      "disposition": "admit_exact_terminal"
+    }
+  ],
+  "nonclaims": [
+    "Procurement evidence does not establish Ugi compatibility or experimental synthesis success.",
+    "No homologue, analogue or neighboring route is promoted by these records.",
+    "Supplier availability expires and must be refreshed before prospective candidate lock.",
+    "A public-stock planner result was not used as procurement evidence; exact primary supplier pages were checked independently."
+  ]
+}

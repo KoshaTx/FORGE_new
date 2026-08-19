@@ -1,0 +1,70 @@
+{
+  "schema_version": "phase1_ugi_morphology_proposal_confirmation_analysis_config.v1",
+  "status": "frozen_before_read_only_unused_program_scoring",
+  "task": "Score fresh unused-program terminals with the frozen target-free structural radius and test the predeclared morphology-proposal ranking without potency, routes or synthesis",
+  "scope": {
+    "read_only": true,
+    "fresh_unused_program_terminals_only": true,
+    "target_free_terminal_support_only": true,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "confirmation_result": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_v1/result.json",
+      "sha256": "717c1a024207c3779893742f7f988e9c51ebc9c4722e1335655b2013c1acf20b"
+    },
+    "confirmation_terminal_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "614e0381de4c7a12b0f0950b8d4888c3b63b9758ebcf92e11828a772f34c35cd"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "proposal_result": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/result.json",
+      "sha256": "34a87b40d0aa396a1687146443d3067b4ff195e330d52dcb3325a6165786b9e1"
+    },
+    "proposal_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "runner": {
+      "path": "scripts/phase1_analyze_ugi_morphology_proposal_confirmation.py",
+      "sha256": "79c987e23ccca2ac56bdaf63054a3114b313b326e5c9f5b53cf11e8b46240ec8"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_proposal_confirmation_analysis.py",
+      "sha256": "4afe02b28cfff7cb0baa71532a4f33a464e012d2b3fa63f56ea2f0c9426f7996"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_confirmation_analysis.py",
+      "sha256": "1eb0a8c55a9cd6defe4ff380624e70ab0f8ff80f2b0976067366ac3b0b1e8907"
+    }
+  },
+  "analysis": {
+    "clustered_bootstrap": {
+      "replicates": 10000,
+      "seed": 20260804,
+      "unit": "program_sha256"
+    },
+    "gates": {
+      "minimum_valid_exact_l1_rate": 0.90,
+      "minimum_auroc": 0.65,
+      "minimum_proposal_weighted_support_relative_improvement": 0.10,
+      "minimum_top_quartile_relative_support_improvement": 0.50,
+      "minimum_top_quartile_unique_supported_yield_improvement": 0.25
+    }
+  }
+}

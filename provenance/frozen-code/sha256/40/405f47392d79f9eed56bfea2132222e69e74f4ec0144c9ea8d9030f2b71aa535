@@ -1,0 +1,27 @@
+{
+  "schema_version": "phase1_ugi_training_cache_config.v1",
+  "task": "Shared exact tensor cache for the widened balanced Ugi training corpus",
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    }
+  },
+  "expected_fold_counts": {
+    "train": 66464,
+    "calibration": 15800,
+    "heldout": 30122
+  }
+}

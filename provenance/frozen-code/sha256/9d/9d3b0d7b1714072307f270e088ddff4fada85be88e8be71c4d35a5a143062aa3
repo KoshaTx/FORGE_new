@@ -1,0 +1,84 @@
+{
+  "schema_version": "phase1_ugi_terminal_decoder_challenger_config.v1",
+  "status": "post_promotion_causal_diagnostic_nonselecting",
+  "objective": "Determine whether greedy feasible-state terminal decoding is a primary cause of tail-chemotype collapse while holding the learned checkpoint and sampled morphology programs fixed.",
+  "matched_design": {
+    "checkpoints": [
+      1000,
+      2000,
+      4000
+    ],
+    "programs": 1024,
+    "flow_seed": 20260805,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_arms": [
+      {
+        "mode": "argmax",
+        "temperature": 1.0,
+        "terminal_seed": null
+      },
+      {
+        "mode": "stochastic",
+        "temperature": 1.0,
+        "terminal_seed": 20260807
+      }
+    ]
+  },
+  "decision_policy": {
+    "checkpoint_selection": false,
+    "prospective_candidate_selection": false,
+    "diagnostic_cannot_rewrite_the_frozen_promotion_rule": true,
+    "primary_question": "Does stochastic feasible-state completion recover tail chemistry suppressed by terminal argmax without materially degrading molecular validity or exact L1 semantics?",
+    "minimum_interpretability_conditions": {
+      "exact_l1_terminal_admission_fraction": 1.0,
+      "maximum_absolute_validity_degradation": 0.02,
+      "aldehyde_carbon_carbon_double_bond_fraction_must_be_nonzero": true,
+      "aldehyde_ester_absolute_fraction_improvement": 0.1
+    },
+    "adjudication": "A positive decoder diagnostic motivates a newly frozen production selector and draw. A negative diagnostic triggers loss and representation ablations; it does not justify changing the topology prior by itself."
+  },
+  "inputs": {
+    "joint_checkpoint_step1000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "joint_checkpoint_step2000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "joint_checkpoint_step4000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_4000.pt",
+      "sha256": "97c712b44b63de96245da3b68ce03b9424331d191c9357b68af13469f997999e"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_morphology_programs": {
+      "path": "results/phase1/ugi_program_prior_v5_challenger_selection_samples_1024.json",
+      "sha256": "3182795d0ceefb6667ddb95833595605b795f8114f6c808f907345f1e0f8d4ca"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "decoder_source": {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "sha256": "6c477141432de1ee6fe6dbd8a9b8976d29fa91090094d62cc0a85cf043d94069"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "95841f35efb86ddb624e897bd6e9d795f39b29dc3d44bc1e22baa4ff035da686"
+    },
+    "sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "bfaa795fa5538a4e7061125696aad79b9aeb26a8a5414442e0a6016a0e6233dd"
+    }
+  }
+}

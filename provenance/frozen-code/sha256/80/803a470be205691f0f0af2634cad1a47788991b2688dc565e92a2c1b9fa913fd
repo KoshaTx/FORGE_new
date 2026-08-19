@@ -1,0 +1,203 @@
+{
+  "schema_version": "phase1_ugi_architecture_checkpoint_selection_policy.v1",
+  "status": "frozen_before_size_only_sample_evaluation",
+  "frozen_at_utc": "2026-08-01T22:46:26Z",
+  "scope": {
+    "phase": "Phase 1 product plus exact L1 Ugi decomposition only",
+    "architectures": [
+      "full_morphology_program_conditioning",
+      "size_only_conditioning"
+    ],
+    "common_serial_checkpoint_steps": [
+      250,
+      500,
+      1000,
+      2000,
+      4000
+    ],
+    "biological_guidance_evaluated": false,
+    "l2_routes_evaluated": false,
+    "synthesis_guidance_evaluated": false
+  },
+  "frozen_inputs": {
+    "unconditional_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2_samples_1024.json",
+      "sha256": "b5109d192f5d60435c00fc4aab2aa0e4b9dba8d1b00f669cb06f591652c9729a",
+      "attempted_draws": 1024,
+      "source": "training-fold, source- and family-balanced program prior",
+      "contains_component_ids_or_graphs": false
+    },
+    "admitted_component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd",
+      "admitted_components": 424,
+      "components_by_role": {
+        "amine_head": 264,
+        "oxoester_aldehyde_body_tail": 107,
+        "isocyanide_tail": 53
+      }
+    },
+    "frozen_product_reference": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0",
+      "folds": [
+        "train",
+        "calibration",
+        "heldout"
+      ]
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "architecture_configs": {
+      "full_morphology_program_conditioning": {
+        "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+        "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+      },
+      "size_only_conditioning": {
+        "path": "configs/model/phase1_ugi_joint_sparse_size_only_v1.json",
+        "sha256": "c6cbf6314ca2bd91190051d1453f071297942a83be73c67fa0bfc406d5d1af3c"
+      }
+    }
+  },
+  "nonselecting_evidence": {
+    "held_component_outputs": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json",
+      "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705",
+      "use": "diagnostic only; already inspected and never treated as an untouched final test or architecture-selection endpoint"
+    },
+    "heldout_loss": "secondary diagnostic only because lower reconstruction loss can reward frozen-product reproduction",
+    "visual_samples": "diagnostic only and never a checkpoint or architecture selector",
+    "training_or_calibration_loss": "diagnostic only after the serial checkpoint set is frozen"
+  },
+  "reference_inverse_gate": {
+    "required_status": "pass",
+    "required_exact_component_reconstruction_fraction": 1.0,
+    "required_unique_components_covered_by_role": {
+      "amine_head": 264,
+      "oxoester_aldehyde_body_tail": 107,
+      "isocyanide_tail": 53
+    },
+    "rationale": "Novel precursor identity is interpretable only after the deterministic inverse of the fixed Ugi adapter exactly recovers every admitted reference component."
+  },
+  "candidate_hard_gates": {
+    "minimum_valid_fraction_of_all_attempted_draws": 0.95,
+    "minimum_component_reconstruction_fraction_of_valid_products": 1.0,
+    "minimum_exact_forward_reconstruction_fraction_of_reconstructed_products": 1.0,
+    "minimum_all_three_handle_qualification_fraction_of_reconstructed_products": 0.99,
+    "maximum_valid_outputs_with_forbidden_substructure": 0,
+    "maximum_valid_outputs_outside_declared_atom_bond_charge_size_cycle_support": 0,
+    "minimum_unique_fraction_among_valid_products": 0.98,
+    "maximum_exact_frozen_product_fraction_among_valid_products": 0.15,
+    "rationale": {
+      "validity": "At least 95% validity bounds structural failure without hiding failed attempts from the primary yield denominator.",
+      "inverse_and_forward": "Exact precursor recovery and exact forward reconstruction are invariants of the claimed joint product-L1 model, not soft quality metrics.",
+      "handles_and_support": "At least 99% handle qualification tolerates rare ambiguous generated heads while zero forbidden or out-of-support valid outputs preserves the declared chemistry contract.",
+      "uniqueness": "At least 98% unique valid products prevents high usable yield from being produced by repeated copies.",
+      "frozen_product_reproduction": "A 15% ceiling requires at least 85% of valid draws not to be exact products from the frozen Ugi corpus."
+    }
+  },
+  "per_role_component_collapse_safeguards": {
+    "roles": {
+      "amine_head": {
+        "minimum_unique_reconstructed_components": 64,
+        "minimum_effective_shannon_component_count": 20.0
+      },
+      "oxoester_aldehyde_body_tail": {
+        "minimum_unique_reconstructed_components": 32,
+        "minimum_effective_shannon_component_count": 20.0
+      },
+      "isocyanide_tail": {
+        "minimum_unique_reconstructed_components": 24,
+        "minimum_effective_shannon_component_count": 20.0
+      }
+    },
+    "maximum_top_1_component_fraction_per_role": 0.15,
+    "maximum_top_5_component_fraction_per_role": 0.50,
+    "rationale": "The role-specific absolute, entropy-effective and concentration floors prevent a high product-level novelty count from masking collapse of any one precursor role."
+  },
+  "descriptor_distribution_realism_floors": {
+    "reference_population": "all 112,386 frozen Ugi products across train, calibration and heldout folds",
+    "generated_population": "all valid draws, retaining multiplicity so distributional collapse is visible",
+    "descriptors": [
+      "heavy_atoms",
+      "molecular_weight",
+      "logp",
+      "rings",
+      "rotatable_bonds",
+      "heteroatoms"
+    ],
+    "normalized_wasserstein_1": {
+      "normalizer": "reference q95 minus reference q05, with a positive-unit fallback for degenerate descriptors",
+      "maximum_each_descriptor": 0.60,
+      "maximum_mean_across_descriptors": 0.30
+    },
+    "kolmogorov_smirnov": {
+      "maximum_each_descriptor": 0.70,
+      "maximum_mean_across_descriptors": 0.35
+    },
+    "central_reference_coverage": {
+      "interval": "inclusive reference q05 to q95",
+      "minimum_generated_fraction_each_descriptor": 0.55
+    },
+    "rationale": "These are distribution-level floors rather than favorable medians. They allow controlled exploration while rejecting a candidate whose average displacement approaches the entire central reference width, whose empirical CDF is nearly disjoint, or whose majority mass leaves the central observed range."
+  },
+  "primary_selection_statistic": {
+    "name": "usable_open_ended_yield",
+    "denominator": "all 1,024 attempted unconditional-program draws",
+    "success_requires_all": [
+      "valid complete product",
+      "deterministically reconstructed all three precursor graphs",
+      "exact forward reconstruction of the sampled product",
+      "all three precursor handles pass the frozen qualification policy",
+      "at least one reconstructed precursor graph is absent from the full 424-component admitted catalog"
+    ],
+    "failed_or_duplicate_draws": "failed draws remain failures; duplicate successful products still count in yield but are separately constrained by uniqueness and collapse gates",
+    "rationale": "This measures how often a generation attempt yields an exact-L1-consistent, handle-qualified product with actual precursor-level open-endedness, rather than novelty conditional on validity."
+  },
+  "matched_uncertainty": {
+    "method": "paired nonparametric bootstrap over the 1,024 frozen program indices",
+    "bootstrap_replicates": 10000,
+    "seed": 20260801,
+    "confidence_interval": 0.95,
+    "interval_method": "percentile",
+    "operationally_meaningful_absolute_difference": 0.02,
+    "meaningful_superiority_requires": [
+      "absolute point difference is at least 0.02",
+      "paired 95% bootstrap confidence interval excludes zero"
+    ]
+  },
+  "selection_algorithm": {
+    "within_architecture": [
+      "Discard any checkpoint that fails the reference-inverse gate, a candidate hard gate, a per-role collapse safeguard or a descriptor-distribution realism floor.",
+      "Among passing checkpoints, identify the maximum usable open-ended yield.",
+      "Keep a checkpoint in the noninferior set when the maximum-minus-candidate yield is below 0.02 or the paired 95% bootstrap interval for that difference includes zero.",
+      "Within the noninferior set, choose the lowest mean normalized Wasserstein-1 distance; if tied within 0.02, choose the lower exact-frozen-product fraction; if still tied, choose the earlier checkpoint."
+    ],
+    "between_architectures": [
+      "If neither architecture has a passing checkpoint, freeze no production generator and return to model development.",
+      "If exactly one architecture has a passing checkpoint, select it.",
+      "If both have passing checkpoints and one has meaningfully superior usable open-ended yield under the paired rule, select that architecture.",
+      "If the primary difference is not statistically and operationally meaningful and both pass every realism and safeguard floor, select size-only conditioning for weaker conditioning, parsimony and broader nominal support."
+    ],
+    "secondary_nonselectors": [
+      "held-component loss",
+      "training loss",
+      "calibration loss",
+      "visual preference",
+      "raw validity above the hard floor",
+      "median-only descriptor comparisons"
+    ]
+  },
+  "failure_policy": {
+    "no_threshold_rewrite_after_opening_size_only_outputs": true,
+    "no_silent_override": true,
+    "material_policy_change_requires": [
+      "new versioned policy artifact",
+      "explicit scientific rationale",
+      "disclosure that the previous size-only outputs had already been observed",
+      "rerun on a newly frozen selection draw"
+    ]
+  }
+}

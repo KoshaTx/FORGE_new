@@ -1,0 +1,86 @@
+{
+  "schema_version": "m0_07_oracle_graph_corpus_config.v2",
+  "task": "M0-07 graph-oracle corpus and pretraining leakage gate",
+  "seed": 1729,
+  "inputs": {
+    "curated_oracle_data": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "agile_label_reconciliation": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "r0_observed_structures": {
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "training_corpus_manifest": {
+      "path": "data/vendor/training_corpus_manifest_v1.json",
+      "sha256": "03eafbbeac5d63b95df4cc488f884fef1c8e9eae0a7d13a1ba9a3df1005c4a39"
+    },
+    "virtual_candidate_library": {
+      "path": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    }
+  },
+  "expected": {
+    "curated_oracle_records": 1100,
+    "r0_input_rows": 15433,
+    "r0_pretraining_eligible_rows": 15433,
+    "r0_unique_constitutions": 15229,
+    "r0_constitutional_duplicate_groups": 184,
+    "r0_rows_collapsed_before_oracle_exclusion": 204,
+    "r0_rows_matching_any_oracle_constitution": 1220,
+    "r0_unique_oracle_constitutions_matched": 1100,
+    "r0_nonoracle_rows_before_constitutional_deduplication": 14213,
+    "r0_additional_rows_collapsed_after_oracle_exclusion": 84,
+    "r0_retained_unique_constitutions": 14129,
+    "provenance_only_filter_remaining_oracle_rows": 20,
+    "provenance_only_filter_remaining_oracle_constitutions": 20,
+    "retained_inchi_connectivity_collapse_groups": 1,
+    "virtual_candidate_records": 12276
+  },
+  "representation": {
+    "stereochemistry": "excluded",
+    "atom_features": [
+      "atomic_number",
+      "formal_charge",
+      "total_degree",
+      "total_hydrogens",
+      "hybridization",
+      "aromatic",
+      "in_ring"
+    ],
+    "bond_features": [
+      "bond_type",
+      "conjugated",
+      "in_ring"
+    ],
+    "edge_direction": "both_directions",
+    "truncation_allowed": false
+  },
+  "pretraining_policy": {
+    "exclude_every_exact_oracle_constitution_globally": true,
+    "deduplicate_retained_r0_by_constitution": true,
+    "biological_labels_used": false,
+    "virtual_candidates_used": false,
+    "virtual_candidate_role": "applicability_only"
+  },
+  "pretraining_output_fields": [
+    "graph_id",
+    "constitutional_smiles",
+    "atom_count",
+    "undirected_bond_count",
+    "directed_edge_count"
+  ],
+  "identity_policy": {
+    "sanitize": true,
+    "canonical_isomeric_smiles": false,
+    "preserve_formal_charge": true,
+    "preserve_protonation": true,
+    "preserve_tautomers": true,
+    "strip_fragments": false,
+    "require_connected": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "phase1_ugi3_source_bounded_route_value_contrast_config.v1",
+  "status": "frozen_before_read_only_contrast_audit",
+  "task": "Determine whether independently source-bounded proposal adjudication creates enough nonuniform checkpoint route value to justify one new matched synthesis-guidance challenger",
+  "inputs": {
+    "adjudication_result": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v1/result.json",
+      "sha256": "232a0f0f54d46665f1eead3463f59d599a9de71802538be8cdafe2daab1721f3"
+    },
+    "adjudication_ledger": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v1/adjudication_ledger.jsonl.gz",
+      "sha256": "6422f0abbc314d269c4163675cdfe65ca292e3d3b3c30b7a36065bfacb3d86f0"
+    },
+    "frozen_matched_support_records": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    }
+  },
+  "audit_population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6],
+    "grouping": "checkpoint and frozen morphology program index",
+    "biological_scores_used": false,
+    "proposal_scores_used": false
+  },
+  "retry_authorization_gates": {
+    "minimum_qualified_components": 5,
+    "minimum_balanced_unique_route_ready_products": 32,
+    "minimum_mixed_checkpoint_groups": 8,
+    "minimum_mixed_checkpoint_group_fraction": 0.15,
+    "require_at_least_one_mixed_group_per_checkpoint": true,
+    "minimum_unique_route_ready_productive_finals": 4,
+    "all_gates_must_pass": true
+  },
+  "scope_guards": {
+    "read_only": true,
+    "does_not_rerun_generation": true,
+    "does_not_rerun_route_proposals": true,
+    "does_not_authorize_lambda_tuning": true,
+    "does_not_promote_synthesis_guidance": true
+  },
+  "output": "results/phase1/ugi3_source_bounded_route_value_contrast_v1/result.json"
+}

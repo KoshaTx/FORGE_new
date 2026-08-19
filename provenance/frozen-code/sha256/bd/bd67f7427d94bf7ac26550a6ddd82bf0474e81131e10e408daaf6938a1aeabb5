@@ -1,0 +1,46 @@
+{
+  "schema_version": "phase1_ugi3_high_leverage_tail_terminals.v1",
+  "snapshot": {
+    "accessed_utc": "2026-08-03T00:56:14Z",
+    "expires_utc": "2026-09-02T00:56:14Z",
+    "region": "US",
+    "retrieval_channel": "primary_supplier_product_page_rendered_by_web_index",
+    "direct_page_archival": "attempted_but_supplier_edge_returned_access_denied",
+    "interpretation": "The admitted record is exact current procurement evidence for the Ugi aldehyde component, not evidence that any Ugi product succeeds."
+  },
+  "records": [
+    {
+      "component_id": "ugi-component-ee515d932efe6740f313",
+      "role": "oxoester_aldehyde_body_tail",
+      "canonical_smiles": "CCCCCCCCCCCCCCCCC=O",
+      "name": "Heptadecanal",
+      "cas": "629-90-3",
+      "pubchem_cid": 71552,
+      "molecular_formula": "C17H34O",
+      "inchi_key": "PIYDVAYKYBWPPY-UHFFFAOYSA-N",
+      "identity_asset": "data/source_cache/phase1_ugi3_high_leverage_tail_terminals/pubchem_cid71552_identity_2026-08-03.json",
+      "identity_asset_sha256": "b3442cde65e0ed8646a071b30f57259f1ec130bdc8f64822df7b60a898553ce8",
+      "supplier": "TCI America",
+      "product_number": "H1295",
+      "source_url": "https://www.tcichemicals.com/US/en/p/H1295",
+      "source_page_lines": "173-225",
+      "assay": ">97.0% (GC)",
+      "pack_size": "1 g",
+      "availability": "available_to_ship_same_day_us",
+      "stock_observation": {
+        "Philadelphia_PA_units": 1,
+        "Portland_OR_units": 1,
+        "Japan_units": 5
+      },
+      "failed_archive_asset": "data/source_cache/phase1_ugi3_high_leverage_tail_terminals/tci_h1295_2026-08-03.html",
+      "failed_archive_asset_sha256": "510851870867d4c21cf1ec23d15d791667e0e8ece21e66c4eb3aedb61081f44b",
+      "disposition": "admit_exact_terminal"
+    }
+  ],
+  "nonclaims": [
+    "Procurement evidence does not establish Ugi substrate compatibility or synthesis success.",
+    "No neighboring aldehyde, alcohol oxidation or homologue is promoted by this record.",
+    "The direct HTTP response is an archived access-denial record, not supplier evidence.",
+    "The availability snapshot expires and must be refreshed before candidate lock."
+  ]
+}

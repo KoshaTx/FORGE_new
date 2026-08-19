@@ -1,0 +1,109 @@
+{
+  "schema_version": "phase1_ugi3_route_saturation_holdout_config.v1",
+  "status": "frozen_before_candidate_driven_route_mining",
+  "frozen_at_utc": "2026-08-03T00:42:59Z",
+  "purpose": "Seal an independent nonselecting generator draw for one-time route-registry saturation evaluation after candidate-driven evidence mining is frozen.",
+  "development_baseline": {
+    "fresh_pool_exact_l1_products": 3975,
+    "fresh_pool_route_complete_products": 147,
+    "fresh_pool_one_gap_products": 802,
+    "fresh_pool_missing_knowledge_one_gap_products": 723,
+    "fresh_pool_outside_support_one_gap_products": 79
+  },
+  "holdout_sampling": {
+    "program_seed": 20260819,
+    "flow_seed": 20260820,
+    "terminal_seed": 20260821,
+    "programs": 4096,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "program_output": "results/phase1/ugi3_route_saturation_holdout_v1/programs.json",
+    "sealed_sample_output": "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+  },
+  "inputs": {
+    "production_generator_v2": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "training_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "development_route_coverage": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/result.json",
+      "sha256": "16ea205e816e87a1daa3e8d4c765d7564f74c4fd887f8a7d44c62556705ac1d0"
+    },
+    "development_route_priority": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v1/result.json",
+      "sha256": "ff63a51203d9a91704a3ff282edac6547cb78b46b3deb07e8153ac2bff42ddf5"
+    },
+    "precursor_leaf_closure_audit": {
+      "path": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/result.json",
+      "sha256": "0c0dab513ac034ecc19ac6e97509db51f58b01bad356b6b81bae681daf7cfa64"
+    },
+    "program_sampling_script": {
+      "path": "scripts/phase1_sample_ugi_program_prior.py",
+      "sha256": "9af316e2d0cf9ff251f81cbb350893f1a4d4e2d8a7a6c0e4364aa837885f87e9"
+    },
+    "molecular_sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f"
+    }
+  },
+  "evidence_mining_policy": {
+    "development_pool_may_direct_evidence_mining": true,
+    "holdout_programs_may_be_hash_sealed_before_registry_freeze": true,
+    "holdout_programs_may_direct_evidence_mining": false,
+    "holdout_molecules_may_be_generated_or_inspected_before_registry_freeze": false,
+    "similarity_or_family_precedent_may_close_exact_routes": false,
+    "missing_knowledge_is_chemical_incompatibility": false,
+    "outside_support_is_chemical_impossibility": false
+  },
+  "reaction_family_admission_policy": {
+    "require_recurrent_development_gap": true,
+    "minimum_unique_development_components": 3,
+    "minimum_one_gap_product_occurrences": 10,
+    "exact_locked_candidate_exception_requires_separate_authorization": true,
+    "require_atom_mapped_transform": true,
+    "require_primary_source_execution": true,
+    "require_forward_verification": true,
+    "require_substrate_scope_boundary": true,
+    "require_terminal_material_policy": true,
+    "require_explicit_uncertainty_and_failure_taxonomy": true
+  },
+  "one_time_holdout_reporting": {
+    "report_exact_l1_denominator": true,
+    "report_product_route_complete_fraction": true,
+    "report_products_by_route_complete_component_count": true,
+    "report_missing_knowledge_by_role": true,
+    "report_outside_support_by_role": true,
+    "report_route_closure_by_component_novelty": true,
+    "report_route_closure_by_evidence_family": true,
+    "permit_threshold_or_registry_tuning_after_reveal": false
+  },
+  "nonclaims": [
+    "The sealed holdout does not authorize synthesis or biological guidance.",
+    "Route closure is not a calibrated probability of experimental synthesis success.",
+    "Failure on the one-time holdout cannot be repaired by tuning the same registry against the revealed molecules.",
+    "A finite generator holdout does not establish universal chemistry coverage."
+  ]
+}

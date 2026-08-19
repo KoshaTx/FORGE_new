@@ -1,0 +1,65 @@
+{
+  "schema_version": "m0_07_oracle_splits_config.v1",
+  "task": "M0-07",
+  "generated_utc": "2026-07-30T04:00:00+00:00",
+  "randomness": {
+    "used": true,
+    "seed": 1729,
+    "deterministic_hash_assignment": "sha256"
+  },
+  "inputs": {
+    "curated_oracle_data": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "agile_reconciliation_result": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "lantern_curated_hela": {
+      "path": "data/vendor/lantern_agile_curated.csv",
+      "sha256": "d0ecfd94ec40a7f013af546113520175e70f78045af1798673c2680fe6f23c54"
+    },
+    "lantern_random_split": {
+      "path": "data/vendor/lantern_agile_random_split.npy",
+      "sha256": "72d7cb6d5769c8b45f6634c530547c51147532539cfa2e728a7d630f24d699e8"
+    },
+    "lantern_murcko_split": {
+      "path": "data/vendor/lantern_agile_murcko_split.npy",
+      "sha256": "cd52f769972cde1e513a889ebfce0764017c56cd17032e3f9750b76f6e59632e"
+    },
+    "lantern_scaffold_balanced_split": {
+      "path": "data/vendor/lantern_agile_scaffold_balanced_split.npy",
+      "sha256": "1f3720b6fc8ce2dfc3cf71f3e62cd394c74058d25641bf009eb7ddb146493c01"
+    },
+    "agile_virtual_candidate_library": {
+      "path": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    }
+  },
+  "expected": {
+    "curated_records": 1100,
+    "virtual_candidate_records": 12276,
+    "A_components": 20,
+    "B_components": 11,
+    "C_components": 5
+  },
+  "split_design": {
+    "group_cv_folds": 5,
+    "calibration_fraction_of_non_test": 0.125,
+    "target_stage_ratio": {
+      "train": 0.7,
+      "calibration": 0.1,
+      "test": 0.2
+    }
+  },
+  "policy": {
+    "random_split_role": "reproduction_diagnostic_only",
+    "murcko_source_split_role": "audit_only_reject_if_scaffold_leakage",
+    "scaffold_balanced_role": "selection_eligible_if_scaffold_disjoint",
+    "candidate_library_role": "unlabeled_applicability_only",
+    "model_selection_uses_random_split": false,
+    "group_labels_never_cross_test_to_fit": true,
+    "endpoint_values_never_used_for_split_assignment": true
+  }
+}

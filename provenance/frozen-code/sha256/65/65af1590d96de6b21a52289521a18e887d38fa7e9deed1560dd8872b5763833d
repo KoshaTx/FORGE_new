@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase1_product_cuda_preflight_config.v1",
+  "task": "Phase 1 V3 region-aware sparse whole-lipid CUDA preflight",
+  "product_config": {
+    "path": "configs/model/phase1_product_pretrain_v3.json",
+    "sha256": "621a651fa5ca0488f3a7e5a229a56e07ce57596d0b6fe1566e2a21bf8247f148"
+  },
+  "atom_vocabulary_source": {
+    "path": "results/phase1/product_v3_atom_vocabulary.json",
+    "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+  },
+  "seed": 20260730,
+  "steps": 4,
+  "repetitions": 2,
+  "required_gpu_class": "L4",
+  "runtime": {
+    "python": "3.11",
+    "torch": "2.11.0",
+    "numpy": "2.4.2",
+    "rdkit": "2025.9.6",
+    "precision": "float32",
+    "mixed_precision": false,
+    "deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8"
+  },
+  "samples": [
+    {
+      "structure_id": "cuda-v3-saturated-head-ring",
+      "canonical_isomeric_smiles": "CCCCCCCCOC(=O)CCN1CCCCC1"
+    },
+    {
+      "structure_id": "cuda-v3-unsaturated-branched",
+      "canonical_isomeric_smiles": "CC(C)CCCCCCC/C=C\\CCCCCOC(=O)CN1CCOCC1"
+    },
+    {
+      "structure_id": "cuda-v3-aromatic-nitrogen",
+      "canonical_isomeric_smiles": "CCCCCCCCCCOC(=O)Cc1cc[nH]c1"
+    },
+    {
+      "structure_id": "cuda-v3-aromatic-oxygen",
+      "canonical_isomeric_smiles": "CCCCCCCCCCNC(=O)Cc1ccco1"
+    },
+    {
+      "structure_id": "cuda-v3-charged-head",
+      "canonical_isomeric_smiles": "CCCCCCCCCC[N+](C)(C)CCO"
+    }
+  ],
+  "acceptance": {
+    "minimum_total_closures": 4,
+    "require_finite_losses_and_gradients": true,
+    "require_exact_repeat_loss_history": true,
+    "require_exact_repeat_model_state": true,
+    "require_exact_resume_loss_history": true,
+    "require_exact_resume_model_state": true
+  }
+}

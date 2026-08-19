@@ -1,0 +1,101 @@
+{
+  "schema_version": "phase1_ugi3_precursor_leaf_closure_audit_config.v1",
+  "task": "Audit actual L3 starting-material closure beneath the optimistic AGILE structural programs",
+  "assessment_as_of_utc": "2026-08-02T23:59:00Z",
+  "region": "US",
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "expanded_products": {
+      "path": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+      "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"
+    },
+    "template_saturation_stress": {
+      "path": "results/phase1/ugi3_agile_template_saturation_stress_v1/result.json",
+      "sha256": "1e8b6f6d7f9b123b1d62e4a52e68441d6dc609f4336db029636bacddba57f023"
+    },
+    "agile_component_routes": {
+      "path": "configs/route/m0_09_agile_component_routes.json",
+      "sha256": "46314a48958ae1898ac917eb2ac3b5d3f79749493bf3b239dd96ab9dea6b2084"
+    },
+    "agile_supplement": {
+      "path": "data/vendor/agile_supplementary_information.pdf",
+      "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    },
+    "jl_2024_supplement": {
+      "path": "data/source_cache/m0_09_publishers/PMC11536852/assets/12951_2024_2919_MOESM1_ESM.pdf",
+      "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427"
+    },
+    "xh_2025_supplement_archive": {
+      "path": "data/source_cache/m0_09_pmc/PMC11888472/supplementary_files.zip",
+      "sha256": "ddba528699713ecb133b7c4b9c0582ca7877d8aacb4bbe924a352cb7ef47b7c5"
+    },
+    "miao_2019_supplement": {
+      "path": "data/source_cache/m0_09_ugi3_capability/MIAO_2019/41587_2019_247_MOESM1_ESM.pdf",
+      "sha256": "92d495da953b31003011e7b3e0c44b3fc16f91067e0975abda0c794773c53987"
+    },
+    "virtual_terminal_procurement": {
+      "path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "agile_head_procurement": {
+      "path": "configs/route/m0_09_ugi3_agile_head_procurement.json",
+      "sha256": "9167b0fef06931ea596e8996c8192d419f924a3d59e28e10c66d11b6891af157"
+    },
+    "targeted_role_gap_evidence": {
+      "path": "configs/route/phase1_ugi3_targeted_role_gap_evidence_v1.json",
+      "sha256": "0d6a8c1e8c45101df8329c3c99e15c11d6f70c6ae81ad1ece2ce23be9bae73da"
+    },
+    "high_leverage_head_terminals": {
+      "path": "configs/route/phase1_ugi3_high_leverage_head_terminals_v1.json",
+      "sha256": "b0e9fdaa527839f650939ee4b247604cacd5672d4df5ea01a51236d97c335add"
+    },
+    "second_wave_head_terminals": {
+      "path": "configs/route/phase1_ugi3_second_wave_head_terminals_v1.json",
+      "sha256": "660682af3068794a3e194ddc529f5bdc9877d49ecf3441cfad3bbdb2ce103358"
+    },
+    "third_wave_head_terminals": {
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
+      "sha256": "ec16ed0ec407354cae3efa58b68db935fa9c74aa4fef7988fd5871964896c6cb"
+    },
+    "hydrophobic_motif_transfer": {
+      "path": "configs/route/m0_09_hydrophobic_motif_transfer.json",
+      "sha256": "d790cb0e64be3d43f7c2730353839ff46c53f248c549039aa4cf673c6d0d6ed6"
+    },
+    "frozen_agile_program_projection_source": {
+      "path": "src/forge/route/ugi3_virtual_programs.py",
+      "sha256": "c45744dee3ad073f90e6f190c1952d73894e73f1221b29289f3fb02aca97564d"
+    }
+  },
+  "admission_policy": {
+    "current_terminal_requires_exact_constitutional_identity": true,
+    "current_terminal_requires_region_specific_item_level_availability": true,
+    "expired_procurement_evidence_closes": false,
+    "starting_material_closure_establishes_exact_l2_route": false,
+    "starting_material_closure_establishes_substrate_scope": false,
+    "starting_material_closure_establishes_ugi_product_success": false,
+    "missing_procurement_evidence_is_unavailability": false
+  },
+  "procurement_evidence_default_expiry_days": 30,
+  "source_boundary_audits": [
+    {
+      "source_id": "MIAO_2019",
+      "source_input": "miao_2019_supplement",
+      "source_locator": "Supplementary Note 1, PDF pages 2-4 (printed pages 1-3), visually inspected",
+      "reported_exact_reactant_name": "ethyl isocyanoacetate",
+      "reported_exact_reactant_smiles": "[C-]#[N+]CC(=O)OCC",
+      "mechanically_projected_leaf_name": "ethyl glycinate (free-base constitutional representation)",
+      "mechanically_projected_leaf_smiles": "CCOC(=O)CN",
+      "projected_leaf_reported_as_starting_material": false,
+      "disposition": "parent_component_source_used_projected_leaf_not_source_reported",
+      "nonclaim": "The source execution of ethyl isocyanoacetate does not supply an upstream preparation or current procurement record for the projected ethyl glycinate leaf."
+    }
+  ],
+  "outputs": {
+    "result": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/result.json",
+    "leaf_ledger": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/leaf_ledger.csv.gz",
+    "head_ledger": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/head_ledger.csv.gz"
+  }
+}

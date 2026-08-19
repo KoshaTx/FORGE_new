@@ -1,0 +1,84 @@
+{
+  "schema_version": "phase1_ugi3_exact_source_forward_verification_config.v1",
+  "task": "Transformation-specific forward-verification gate for exact-source Ugi component programs",
+  "generated_utc": "2026-08-02T00:00:00Z",
+  "inputs": {
+    "component_program_ledger": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "expected_sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "source_routes": {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "expected_sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "executable_registry": {
+      "asset": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "expected_sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "family_registry": {
+      "asset": "data/vendor/qualified_reaction_families_v1.json",
+      "expected_sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    }
+  },
+  "policy": {
+    "scope": "exact_source_programs_only",
+    "max_products_per_step": 100,
+    "isomeric_smiles": true,
+    "require_exact_source_qualification_metadata": true,
+    "missing_binding_disposition": "unverified_missing_qualified_transform_binding",
+    "execution_error_disposition": "explicit_error_not_pass",
+    "route_extraction_is_forward_verification": false,
+    "procurement_closure_is_forward_verification": false
+  },
+  "qualified_transform_bindings": {
+    "esterification": {
+      "reaction_id": "ugi3_upstream_esterification_exact_source_v1",
+      "variant_asset": "configs/route/variants/ugi3_upstream_esterification_exact_source_v1.json",
+      "variant_expected_sha256": "9ec11bdc145437f58cc223acda4d001fd720a412fb4fc8adb1610770e8b3733e",
+      "reactant_order": [0, 1]
+    },
+    "alcohol_to_aldehyde_oxidation": {
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "variant_asset": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "variant_expected_sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b",
+      "reactant_order": [0]
+    },
+    "amine_formylation": {
+      "reaction_id": "ugi3_upstream_amine_formylation_exact_source_v1",
+      "variant_asset": "configs/route/variants/ugi3_upstream_amine_formylation_exact_source_v1.json",
+      "variant_expected_sha256": "a56e43f25a0e2fb057d5fa6150cdb3d7dad4740f553790e2cde582d3c9c699f9",
+      "reactant_order": [0]
+    },
+    "formamide_dehydration_to_isocyanide": {
+      "reaction_id": "ugi3_upstream_formamide_dehydration_exact_source_v1",
+      "variant_asset": "configs/route/variants/ugi3_upstream_formamide_dehydration_exact_source_v1.json",
+      "variant_expected_sha256": "2761b88f385cfb0734557d35bad7b099a9bf42dd16058f12d7cb5fdd506ccc3c",
+      "reactant_order": [0]
+    }
+  },
+  "expected_counts": {
+    "exact_source_component_programs": 24,
+    "unique_source_routes": 24,
+    "upstream_steps": 46,
+    "forward_verified_steps": 46,
+    "steps_by_transformation": {
+      "alcohol_to_aldehyde_oxidation": 17,
+      "amine_formylation": 7,
+      "esterification": 15,
+      "formamide_dehydration_to_isocyanide": 7
+    },
+    "steps_by_verification_status": {
+      "verified_exact_product_unique": 46
+    },
+    "component_programs_by_family": {
+      "fatty_acid_diol_esterification_then_alcohol_oxidation": 15,
+      "primary_alcohol_oxidation": 2,
+      "primary_amine_formylation_then_formamide_dehydration": 7
+    },
+    "component_programs_by_role": {
+      "isocyanide_tail": 7,
+      "oxoester_aldehyde_body_tail": 17
+    },
+    "fully_forward_verified_component_programs": 24
+  }
+}

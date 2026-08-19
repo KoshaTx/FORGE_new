@@ -1,0 +1,61 @@
+{
+  "schema_version": "m0_07_oracle_graph_cache_config.v1",
+  "task": "M0-07 deterministic graph tensor cache",
+  "generated_utc": "2026-07-30T14:30:00+00:00",
+  "seed": 1729,
+  "inputs": {
+    "curated_oracle_data": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "graph_corpus_result": {
+      "path": "results/m0_07/oracle_graph_corpus_result.json",
+      "sha256": "8aa3dc31a4becc917c1e255217c828862995ea988cb1baf75ff7465bd8a11b2a"
+    },
+    "graph_profile_result": {
+      "path": "results/m0_07/oracle_graph_profile_result.json",
+      "sha256": "2dad16e9be14d3d0ebbbc10ec73bb594d03c626481ec5be2aaee3b5115425697"
+    },
+    "r0_pretraining_ledger": {
+      "path": "results/m0_07/oracle_graph_r0_pretraining.csv.gz",
+      "sha256": "d3a434282212abae9a9e688e0dde59b0f53537eeb1ec0dcff18ef63f23e0bc5f"
+    },
+    "virtual_candidate_library": {
+      "path": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    }
+  },
+  "expected": {
+    "curated_records": 1100,
+    "curated_graphs": 4400,
+    "curated_atoms": 105620,
+    "curated_directed_edges": 205080,
+    "curated_maximum_atoms": 60,
+    "r0_pretraining_records": 14129,
+    "r0_pretraining_atoms": 866591,
+    "r0_pretraining_directed_edges": 1726776,
+    "r0_pretraining_maximum_atoms": 282,
+    "virtual_records": 12276,
+    "virtual_atoms": 561838,
+    "virtual_directed_edges": 1114748,
+    "virtual_maximum_atoms": 62
+  },
+  "collections": [
+    "oracle_product",
+    "oracle_amine",
+    "oracle_aldehyde",
+    "oracle_isocyanide",
+    "r0_pretraining_product",
+    "virtual_applicability_product"
+  ],
+  "policy": {
+    "archive_format": "deterministic_npz_numeric_npy_members",
+    "pickle_allowed": false,
+    "archive_contains_targets": false,
+    "archive_contains_identifiers": false,
+    "metadata_stored_separately": true,
+    "truncation_allowed": false,
+    "source_row_order_preserved": true
+  }
+}
+

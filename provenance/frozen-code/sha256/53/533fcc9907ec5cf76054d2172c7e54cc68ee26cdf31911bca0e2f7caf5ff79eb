@@ -1,0 +1,211 @@
+{
+  "schema_version": "phase1_ugi3_targeted_aldehyde_evidence.v1",
+  "task": "Exact-evidence expansion for the highest-impact unresolved generated Ugi aldehyde components",
+  "claims_boundary": {
+    "admission_policy": "Only exact-identity current procurement or an exact-substrate, isolated-product literature procedure with product-specific analytical evidence may close a component.",
+    "family_precedent_policy": "Primary-alcohol oxidation precedent for a different chain length remains retrieval or ranking evidence and does not close an exact target.",
+    "scope": "This bounded evidence pack adjudicates four exact aldehydes prioritized before source retrieval. It does not qualify primary-alcohol oxidation as a general substrate-scope template.",
+    "outcome_semantics": "A complete component dossier means either the exact aldehyde is a current accepted terminal or its exact oxidation route terminates at an accepted current alcohol. It is not a calibrated probability of prospective Ugi synthesis success."
+  },
+  "snapshot": {
+    "assessment_as_of_utc": "2026-08-02T03:09:40Z",
+    "procurement_expiry_days": 30,
+    "region": "US",
+    "identity_policy": "Exact constitutional identity, InChIKey and CAS RN must agree.",
+    "purity_acceptance_policy": "A free terminal reagent closes at a stated assay of at least 90%.",
+    "availability_policy": "A vendor terminal closes only when the exact US item page reports current local stock or an explicit current shipping observation."
+  },
+  "literature_sources": [
+    {
+      "source_id": "kovalerchik_2022_marinedrugs",
+      "title": "Cytotoxic Alkylynols of the Sponge Cribrochalina vasculum: Structure, Synthetic Analogs and SAR Studies",
+      "doi": "10.3390/md20040265",
+      "pmcid": "PMC9032987",
+      "asset": "data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf",
+      "sha256": "ec598e1a6d36459aead7fa80c5e362bd0972ac7f706eb789cb2a630fd5d78b2c",
+      "locator": "PDF page 22 of 30, General procedure for oxidation of hexadecanol and octadecanol to 24 and 30",
+      "visual_review": "The rendered source page shows the complete PCC/Celite oxidation procedure, the statement that octadecanol gave octadecanal in 83% yield, and product-specific proton NMR."
+    },
+    {
+      "source_id": "mo_2018_chem_eur_j_si",
+      "title": "Supporting Information: Site-Selective trans-Hydrostannation of 1,3- and 1,n-Diynes: Application to the Total Synthesis of Typhonosides E and F, and a Fluorinated Cerebroside Analogue",
+      "doi": "10.1002/chem.201801344",
+      "asset": "data/source_cache/phase1_targeted_l2/TYPHONOSIDES/supporting_information.pdf",
+      "sha256": "7555da9839da7ab3019cc3aba27d0ab969cb80d92223839f624ee2c00b46b0a3",
+      "locator": "PDF page 17, Supporting Information page S16, compound S19",
+      "visual_review": "The rendered source page shows the exact 1-eicosanol-to-eicosanal scheme, complete procedure, 91% isolated yield, and product-specific proton NMR, carbon NMR, IR and HRMS."
+    },
+    {
+      "source_id": "busta_2016_phytochemistry",
+      "title": "Identification of beta-hydroxy fatty acid esters and primary, secondary-alkanediol esters in cuticular waxes of the moss Funaria hygrometrica",
+      "doi": "10.1016/j.phytochem.2015.10.007",
+      "asset": "data/source_cache/phase1_targeted_l2/BUSTA_2016/BustaEtAl_2016_Phytochem.pdf",
+      "sha256": "398d4f2ec3db0b37c077f55b5655b1b6afe7da512d32c6fa0ef2d2b720e6e54f",
+      "locator": "Article page 47, PDF page 10, section 5.3.2, compound 3",
+      "visual_review": "The rendered source page shows the exact docosanol-to-docosanal procedure, chromatographic purification and 70% isolated yield. The paper also reports mass-spectrometric characterization of the intermediate."
+    }
+  ],
+  "direct_procurement_terminals": [
+    {
+      "component_id": "ugi-component-277115bc675440f61724",
+      "role": "oxoester_aldehyde_body_tail",
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCC=O",
+      "identity": {
+        "title": "Octadecanal",
+        "inchi_key": "FWWQKRXKHIRPJY-UHFFFAOYSA-N",
+        "cas_rn": "638-66-4",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Octadecanal",
+        "product_code": "O0368",
+        "url": "https://www.tcichemicals.com/US/en/p/O0368",
+        "purity": ">95.0% (GC)",
+        "availability_observation": "The 1 g item showed three units in Philadelphia and two in Portland; the US page states that locally stocked items typically ship the same day."
+      },
+      "current_item_level_procurement_closed": true
+    },
+    {
+      "component_id": "ugi-component-10647807421b4e2c2c47",
+      "role": "oxoester_aldehyde_body_tail",
+      "canonical_smiles": "CCCCCCCCCCC=O",
+      "identity": {
+        "title": "Undecanal",
+        "inchi_key": "KMPQYAYAQWNLME-UHFFFAOYSA-N",
+        "cas_rn": "112-44-7",
+        "form": "neutral"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Undecanal",
+        "product_code": "U0009",
+        "url": "https://www.tcichemicals.com/US/en/p/U0009",
+        "purity": ">97.0% (GC)",
+        "availability_observation": "The 25 mL item reported same-day shipment from Philadelphia on the exact US product page."
+      },
+      "current_item_level_procurement_closed": true
+    }
+  ],
+  "exact_routes": [
+    {
+      "route_id": "kovalerchik_2022_octadecanal_pcc",
+      "component_id": "ugi-component-277115bc675440f61724",
+      "role": "oxoester_aldehyde_body_tail",
+      "target": {
+        "name": "Octadecanal",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCC=O",
+        "inchi_key": "FWWQKRXKHIRPJY-UHFFFAOYSA-N"
+      },
+      "reactant": {
+        "name": "1-Octadecanol",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCO",
+        "inchi_key": "GLDOVTGHNKAZLK-UHFFFAOYSA-N"
+      },
+      "source_id": "kovalerchik_2022_marinedrugs",
+      "transformation": "primary_alcohol_to_aldehyde_oxidation",
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "conditions": {
+        "reagents": [
+          "pyridinium chlorochromate",
+          "Celite"
+        ],
+        "solvent": "anhydrous dichloromethane",
+        "temperature": "room temperature",
+        "duration": "3 h",
+        "atmosphere": "not stated",
+        "workup": "filter twice, evaporate solvent, dissolve residue in petroleum ether, filter through silica and rinse",
+        "purification": "thin silica layer/petroleum ether"
+      },
+      "isolated_yield_percent": 83,
+      "analytical_evidence": [
+        "product-specific 1H NMR"
+      ],
+      "disposition": "admit_exact"
+    },
+    {
+      "route_id": "mo_2018_eicosanal_pcc",
+      "component_id": "ugi-component-6895b1b938ea2c6e1f6f",
+      "role": "oxoester_aldehyde_body_tail",
+      "target": {
+        "name": "Eicosanal",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCC=O",
+        "inchi_key": "FWBUWJHWAKTPHI-UHFFFAOYSA-N"
+      },
+      "reactant": {
+        "name": "1-Eicosanol",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCO",
+        "inchi_key": "BTFJIXJJCSYFAL-UHFFFAOYSA-N"
+      },
+      "source_id": "mo_2018_chem_eur_j_si",
+      "transformation": "primary_alcohol_to_aldehyde_oxidation",
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "conditions": {
+        "reagents": [
+          "pyridinium chlorochromate, 1.10 equivalents",
+          "Celite"
+        ],
+        "solvent": "dichloromethane",
+        "temperature": "room temperature",
+        "duration": "24 h plus 30 min with Celite",
+        "atmosphere": "flame-dried flask; atmosphere not otherwise stated",
+        "workup": "filter through Celite and wash with dichloromethane",
+        "purification": "flash chromatography, hexane:ethyl acetate 10:1"
+      },
+      "isolated_yield_percent": 91,
+      "analytical_evidence": [
+        "product-specific 1H NMR",
+        "product-specific 13C NMR",
+        "IR",
+        "HRMS"
+      ],
+      "disposition": "admit_exact"
+    },
+    {
+      "route_id": "busta_2016_docosanal_pcc",
+      "component_id": "ugi-component-7442c18fff083c4e8641",
+      "role": "oxoester_aldehyde_body_tail",
+      "target": {
+        "name": "Docosanal",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCC=O",
+        "inchi_key": "ULCXRAFXRZTNRO-UHFFFAOYSA-N"
+      },
+      "reactant": {
+        "name": "1-Docosanol",
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCCO",
+        "inchi_key": "NOPFSRXAKWQILS-UHFFFAOYSA-N"
+      },
+      "source_id": "busta_2016_phytochemistry",
+      "transformation": "primary_alcohol_to_aldehyde_oxidation",
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "conditions": {
+        "reagents": [
+          "pyridinium chlorochromate, 1 equivalent"
+        ],
+        "solvent": "dry dichloromethane",
+        "temperature": "room temperature",
+        "duration": "overnight",
+        "atmosphere": "not stated",
+        "workup": "evaporate solvent; dissolve residue in hexane:chloroform 1:1",
+        "purification": "silica column chromatography, hexane:chloroform 1:1"
+      },
+      "isolated_yield_percent": 70,
+      "analytical_evidence": [
+        "mass-spectrometric characterization reported in supplementary data"
+      ],
+      "disposition": "admit_exact"
+    }
+  ],
+  "unresolved_predeclared_target": {
+    "component_id": "ugi-component-d9e577f23ff7cd2696c1",
+    "role": "oxoester_aldehyde_body_tail",
+    "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCC=O",
+    "identity": {
+      "title": "Heneicosanal",
+      "inchi_key": "FJZCFGKQFDPNHS-UHFFFAOYSA-N",
+      "cas_rn": "51227-32-8"
+    },
+    "disposition": "abstain",
+    "reason": "The bounded source pass established exact identity but did not locate an exact current procurement terminal or exact-substrate, product-characterized preparation meeting the admission policy."
+  }
+}

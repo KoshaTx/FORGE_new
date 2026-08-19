@@ -1,0 +1,96 @@
+{
+  "schema_version": "m0_09_l2_supervision_decision_config.v2",
+  "frozen_utc": "2026-07-29T23:30:00Z",
+  "inputs": {
+    "agile_virtual_capability": {
+      "path": "results/m0_09/agile_virtual_ugi3_capability.json",
+      "sha256": "9143ae814fe6185813b67d0b80b7af901fcd0772f359b66e85bb8af5f56ba7a0",
+      "schema_version": "m0_09_agile_virtual_ugi3_capability.v1"
+    },
+    "component_programs": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4",
+      "schema_version": "m0_09_agile_virtual_ugi3_component_programs.v1"
+    },
+    "hydrophobic_transfer": {
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667",
+      "schema_version": "m0_09_hydrophobic_motif_transfer.v3"
+    },
+    "paper_route_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8",
+      "schema_version": "m0_09_lnpdb_paper_route_reviews.v2"
+    },
+    "precursor_capability": {
+      "path": "results/m0_09/ugi3_precursor_capability.json",
+      "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f",
+      "schema_version": "m0_09_ugi3_precursor_capability.v2"
+    },
+    "terminal_queue": {
+      "path": "results/m0_09/agile_virtual_ugi3_terminal_queue.json",
+      "sha256": "d4c1744ed00960407264dae15a5821667c32c31d932d538c3073a90787f95edd",
+      "schema_version": "m0_09_agile_virtual_ugi3_terminal_queue.v1"
+    },
+    "ugi3_aldehyde_head_capability": {
+      "path": "results/m0_09/ugi3_aldehyde_head_capability.json",
+      "sha256": "0150b53015d3b31c12be9f97549fa612ff228435fac82881192d3af03f6f74ff",
+      "schema_version": "m0_09_ugi3_aldehyde_head_capability.v3"
+    }
+  },
+  "architecture_gates": {
+    "joint_product_l1": {
+      "minimum_measured_products_passing_qualified_site_policy": 1200,
+      "minimum_exact_virtual_decompositions": 12000,
+      "maximum_virtual_products_without_exact_decomposition": 0,
+      "maximum_virtual_products_with_multiple_exact_decompositions": 0
+    },
+    "hybrid_l2": {
+      "minimum_structure_resolved_route_instances": 1,
+      "minimum_route_families": 3,
+      "minimum_exact_source_programs": 1,
+      "minimum_direct_transfer_aldehydes": 1
+    },
+    "monolithic_complete_route_decoder_necessary_conditions": {
+      "minimum_complete_product_routes": 1,
+      "minimum_reported_negative_outcomes": 1,
+      "minimum_head_upstream_routes": 1
+    }
+  },
+  "future_operational_closure_thresholds": {
+    "weighted_high_priority_motif_route_support_minimum": 0.9,
+    "eligible_candidate_complete_route_fraction_minimum": 0.9,
+    "eligible_candidate_decision_coverage_minimum": 0.95,
+    "eligible_candidate_missing_route_knowledge_fraction_maximum": 0.05,
+    "marginal_weighted_coverage_gain_maximum": 0.025,
+    "consecutive_saturation_rounds_required": 2,
+    "prospective_panel_complete_dossier_fraction_required": 1.0,
+    "prospective_panel_forward_consistency_fraction_required": 1.0,
+    "prospective_panel_current_terminal_closure_fraction_required": 1.0,
+    "high_risk_precursor_backup_route_fraction_required": 1.0
+  },
+  "claims_boundary": {
+    "architecture_gate_is_not_model_training": true,
+    "virtual_products_are_not_observed_route_outcomes": true,
+    "family_projections_are_not_exact_route_evidence": true,
+    "source_biological_labels_do_not_transfer": true,
+    "thresholds_apply_only_to_future_frozen_candidate_and_motif_sets": true,
+    "other_reaction_families_require_their_own_adapters_and_evidence": true,
+    "algorithmic_decomposition_is_not_chemical_validation_before_m0_05": true
+  },
+  "future_training_safeguards": {
+    "broad_corpus_replay_required": true,
+    "masked_l1_loss_for_unannotated_structures": true,
+    "ugi_only_finetuning_without_replay_allowed": false,
+    "raw_route_model_likelihood_allowed_as_synthesis_value": false,
+    "preprospective_synthesis_value_claim": "evidence_weighted_route_completion_value_not_success_probability",
+    "guidance_must_change_transition_probabilities_before_candidate_lock": true,
+    "post_hoc_baseline_uses_same_prior_and_planner": true,
+    "guidance_selection_requires_novelty_diversity_and_coverage_floors": true,
+    "route_closure_strata": [
+      "familiar_agile_components",
+      "transferred_known_components",
+      "genuinely_generated_components"
+    ]
+  }
+}

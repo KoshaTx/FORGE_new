@@ -1,0 +1,321 @@
+{
+  "schema_version": "forge.single_step_proposal_lane_qualification_benchmark.v1",
+  "status": "frozen_specification_not_executed",
+  "purpose": "Development-only matched-budget qualification of single-step proposal sources for bounded Ugi L2/L3 search.",
+  "activation": {
+    "benchmark_execution_authorized": false,
+    "graph2edits_backend_active": false,
+    "hybrid_production_lane_active": false,
+    "strict_lane_remains_production_default": true,
+    "candidate_selection_authorized": false
+  },
+  "lanes": [
+    {
+      "lane_id": "strict_lipid_precedented",
+      "sources": [
+        "exact_lipid_route_retrieval",
+        "lipid_precedented_family_template",
+        "lipid_component_analogue_retrieval"
+      ],
+      "learned_backend": false,
+      "lipid_family_whitelist_applies": true
+    },
+    {
+      "lane_id": "unrestricted_graph2edits_proposal_only",
+      "sources": [
+        "graph2edits_model_proposal_only"
+      ],
+      "learned_backend": true,
+      "lipid_family_whitelist_applies": false
+    },
+    {
+      "lane_id": "strict_first_hybrid",
+      "sources": [
+        "exact_lipid_route_retrieval",
+        "lipid_precedented_family_template",
+        "lipid_component_analogue_retrieval",
+        "graph2edits_model_proposal_only"
+      ],
+      "learned_backend": true,
+      "lipid_family_whitelist_applies": false
+    }
+  ],
+  "target_manifest_policy": {
+    "manifest_required_before_any_backend_execution": true,
+    "manifest_currently_frozen": false,
+    "selection_seed": 20260830,
+    "target_count": 120,
+    "development_sources_only": true,
+    "sealed_holdout_access_forbidden": true,
+    "constitutional_identity_deduplication": true,
+    "one_primary_stratum_per_target": true,
+    "secondary_chemotype_tags_retained": true,
+    "selection_completed_before_lane_inference": true,
+    "known_routes_hidden_from_lane_and_retained_for_scoring": true,
+    "held_family_local_records_and_templates_hidden_from_all_lanes": true,
+    "no_threshold_tuning_after_scored_run": true
+  },
+  "target_strata": [
+    {
+      "stratum_id": "known_exact_l2_routes",
+      "count": 18,
+      "truth_policy": "independently_atom_mapped_documented_reactant_multiset"
+    },
+    {
+      "stratum_id": "held_reaction_families",
+      "count": 18,
+      "truth_policy": "documented_family_disjoint_route_withheld_from_proposal_sources"
+    },
+    {
+      "stratum_id": "linear_aldehydes",
+      "count": 12,
+      "truth_policy": "development_component_with_qualified_aldehyde_role"
+    },
+    {
+      "stratum_id": "branched_aldehydes",
+      "count": 12,
+      "truth_policy": "development_component_with_nonterminal_carbon_branch"
+    },
+    {
+      "stratum_id": "unsaturated_aldehydes",
+      "count": 12,
+      "truth_policy": "development_component_with_noncarbonyl_unsaturation"
+    },
+    {
+      "stratum_id": "ester_containing_aldehydes",
+      "count": 12,
+      "truth_policy": "development_component_with_internal_ester_and_aldehyde_handle"
+    },
+    {
+      "stratum_id": "isocyanide_formamide_precursors",
+      "count": 12,
+      "truth_policy": "development_isocyanide_or_authenticated_formamide_parent"
+    },
+    {
+      "stratum_id": "heterocyclic_amine_heads",
+      "count": 12,
+      "truth_policy": "development_amine_role_with_heterocyclic_head"
+    },
+    {
+      "stratum_id": "adversarial_incompatibles",
+      "count": 12,
+      "truth_policy": "development_only_wrong_handle_role_swap_or_forward_incompatible_control"
+    }
+  ],
+  "matched_budget": {
+    "per_target": {
+      "proposal_source_calls": 1,
+      "raw_hypothesis_attempts": 200,
+      "canonical_hypotheses_considered": 200,
+      "forward_verifier_calls": 50,
+      "operational_screen_calls": 50,
+      "accepted_proposal_cap": 20,
+      "wall_seconds": 30,
+      "cpu_threads": 1,
+      "peak_host_memory_mebibytes": 12288,
+      "peak_accelerator_memory_mebibytes": 12288
+    },
+    "hybrid_allocation": {
+      "strict_reserved_hypotheses": 100,
+      "learned_reserved_hypotheses": 100,
+      "unused_quota_transferable": true,
+      "strict_results_ordered_before_learned_results_at_equal_screen_state": true,
+      "cross_source_canonical_deduplication": true
+    },
+    "matching_policy": {
+      "same_target_order": true,
+      "same_candidate_attempt_ceiling": true,
+      "same_forward_verifier_ceiling": true,
+      "same_operational_screen_ceiling": true,
+      "same_accepted_proposal_cap": true,
+      "same_wall_clock_cap": true,
+      "hardware_and_peak_memory_reported_separately": true,
+      "budget_exhaustion_is_retained_not_retried": true
+    }
+  },
+  "forward_verifier_resolution": {
+    "purpose": "Independent fail-closed L2 proposal verification under explicitly admitted transform scope.",
+    "proposal_source_may_select_or_define_verifier": false,
+    "graph2edits_reaction_class_is_verifier_evidence": false,
+    "try_all_independently_admitted_transform_and_role_assignments": true,
+    "admitted_registries": [
+      "qualified_l2_exact_source_reactions",
+      "qualified_l2_exact_c16_reactions",
+      "qualified_l2_exact_c18_reactions"
+    ],
+    "target_specific_scope_evidence": [
+      "targeted_aldehyde_exact_evidence",
+      "targeted_aldehyde_step_verification"
+    ],
+    "scope_policy": {
+      "qualified_for_exact_source_forward_verification_only": "apply_only_to_the_registered_exact_source_step_or_an_independently_admitted_scope_extension",
+      "qualified_for_one_exact_substrate_product_pair_only": "apply_only_to_the_registered_exact_reactant_multiset_and_target",
+      "family_or_analogue_projection_without_admission": "not_a_verifier"
+    },
+    "acceptance_rule": {
+      "required_matching_admitted_transform_assignments": 1,
+      "required_forward_products_for_matching_assignment": 1,
+      "required_exact_constitutional_target_reconstruction": true,
+      "reactant_multiset_must_be_canonical_and_connected": true
+    },
+    "censor_rules": {
+      "no_admitted_verifier_for_proposal": "censor_no_verifier",
+      "zero_exact_reconstructions": "reject_forward_mismatch",
+      "multiple_products_from_one_assignment": "censor_ambiguous_forward_products",
+      "multiple_admitted_assignments_reconstruct_target": "censor_ambiguous_transform_assignment",
+      "verifier_budget_exhausted": "censor_budget_exhausted"
+    },
+    "ugi_l1_registry_may_verify_l2_proposals": false,
+    "proposal_output_may_verify_itself": false
+  },
+  "metrics": {
+    "top_k": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "required": [
+      "known_route_top_k_recovery_by_exact_canonical_reactant_multiset",
+      "exact_forward_unique_pass_fraction",
+      "operational_screen_yield",
+      "proposal_source_provenance_counts",
+      "invalid_raw_hypothesis_fraction",
+      "canonical_duplicate_fraction",
+      "latency_p50_p95_and_max_seconds",
+      "peak_host_and_accelerator_memory",
+      "accepted_proposals_per_target",
+      "accepted_proposals_per_matched_budget"
+    ],
+    "reporting": {
+      "micro_and_macro_by_primary_stratum": true,
+      "paired_target_differences": true,
+      "raw_and_postscreen_denominators": true,
+      "budget_exhaustion_and_censoring": true,
+      "zero_accepted_adversarial_controls_reported_explicitly": true,
+      "model_score_reported_only_as_opaque_within_lane_rank": true
+    }
+  },
+  "promotion_rule": {
+    "only_hybrid_lane_may_be_promoted": true,
+    "all_prerequisite_gates_must_pass": true,
+    "hybrid_known_route_top10_drop_vs_strict_maximum_absolute": 0.02,
+    "hybrid_exact_forward_unique_drop_vs_strict_maximum_absolute": 0.05,
+    "hybrid_operational_yield_drop_vs_strict_maximum_absolute": 0.05,
+    "hybrid_accepted_proposals_per_budget_relative_gain_minimum": 0.1,
+    "hybrid_must_improve_held_family_stratum": true,
+    "minimum_additional_nonadversarial_chemotype_strata_improved": 3,
+    "invalid_raw_hypothesis_fraction_maximum": 0.1,
+    "canonical_duplicate_fraction_maximum": 0.25,
+    "adversarial_incompatible_accepted_proposals_maximum": 0,
+    "latency_p95_seconds_maximum": 30,
+    "peak_memory_mebibytes_maximum": 12288,
+    "tie_or_failed_gate_keeps_backend_inactive": true,
+    "no_retry_or_threshold_revision_after_scored_run": true
+  },
+  "scientific_authority": {
+    "proposal_records_are_route_evidence": false,
+    "model_score_may_enter_v_syn": false,
+    "model_score_may_set_evidence_tier": false,
+    "model_score_may_close_route": false,
+    "exact_forward_unique_is_experimental_evidence": false,
+    "operational_screen_pass_is_experimental_evidence": false,
+    "independent_evidence_and_l3_closure_remain_required": true,
+    "proposal_source_provenance_is_retained": true
+  },
+  "prerequisite_gates": {
+    "institutional_license_review_complete": false,
+    "isolated_runtime_lock_frozen": false,
+    "ten_repeat_byte_identity_on_production_device": false,
+    "development_target_manifest_frozen": false,
+    "malformed_output_and_budget_guard_tests_pass": true,
+    "all_gates_passed": false
+  },
+  "artifacts": {
+    "graph2edits_candidate_manifest": {
+      "path": "configs/route/graph2edits_proposal_backend_candidate_v1.json",
+      "sha256": "834d3714c7e7c2ee9b98e09ef07466b76f29038988c655a13e69a93eed4539ff"
+    },
+    "graph2edits_training_corpus_manifest": {
+      "path": "configs/route/graph2edits_usp50k_training_corpus_manifest_v1.json",
+      "sha256": "f3c109121757e9ff2b7f63a29fa88f030b9753d3e786e6f21e6c6e55db8d2720"
+    },
+    "proposal_engine_contract": {
+      "path": "src/forge/route/proposal_engine.py",
+      "sha256": "761ae3cd142ddc9bbb98f4181b3c975e0e4b4aba3e386eb4c81ed1ccdd2f68d8"
+    },
+    "graph2edits_adapter_candidate": {
+      "path": "src/forge/route/graph2edits_backend.py",
+      "sha256": "37042556568896908a63c5f2de195ffa47934e88bce649ff238f9bb712be240c"
+    },
+    "development_exact_component_routes": {
+      "path": "results/m0_09/agile_component_routes.json",
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "development_component_programs": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    "development_lipid_route_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "development_route_gap_worklist": {
+      "path": "results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json",
+      "sha256": "7d8a0d85c61c940208ca8c513354046641c36385d3c63e1f5db55a54375a004d"
+    },
+    "development_chemotype_priority_ledger": {
+      "path": "results/phase1/ugi3_l2_coverage_priority_audit_v1/chemotype_priority_ledger.csv.gz",
+      "sha256": "d48f4bc11f647733f1a3c35e01779bdba65344f191aba731274f9c799a4f3a17"
+    },
+    "qualified_l1_assembly_reaction": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "qualified_l2_exact_source_reactions": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "qualified_l2_exact_c16_reactions": {
+      "path": "configs/route/phase1_ugi3_exact_c16_qualified_reactions_v1.json",
+      "sha256": "0e90a1bc3b27bb34d0b033102ab405b77f55d87bfe770575873653c4d4e2b1c2"
+    },
+    "qualified_l2_exact_c18_reactions": {
+      "path": "configs/route/phase1_ugi3_exact_c18_qualified_reactions_v1.json",
+      "sha256": "5b2122be7717b5850be489b8ed77eda26fc33913ae5545da6322d658db4bd65b"
+    },
+    "targeted_aldehyde_exact_evidence": {
+      "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
+      "sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb"
+    },
+    "exact_c16_step_verification": {
+      "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+    },
+    "exact_c18_step_verification": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+      "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b"
+    },
+    "targeted_aldehyde_step_verification": {
+      "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz",
+      "sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+    }
+  },
+  "forbidden_inputs": [
+    "results/phase1/ugi3_route_saturation_holdout_v1/sample",
+    "results/phase1/ugi3_route_saturation_holdout_v1/sample/private_component_transitions.json.gz",
+    "results/phase1/ugi3_route_saturation_holdout_v1/sample/private_product_transitions.json.gz",
+    "private prospective synthesis outcomes",
+    "private biological holdouts"
+  ],
+  "scope_guards": {
+    "graph2edits_executed": false,
+    "benchmark_targets_materialized": false,
+    "adapter_files_modified": false,
+    "route_evidence_created": false,
+    "v_syn_modified": false,
+    "production_planner_modified": false,
+    "sealed_holdout_accessed": false,
+    "candidate_selected": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": "m0_09_ugi3_assembly_qualification_config.v1",
+  "task": "M0-09 AGILE Ugi-3 assembly and reactive-site qualification",
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "inputs": {
+    "agile_measured_library": {
+      "asset": "data/vendor/AGILE_smiles_with_value_group.csv",
+      "expected_sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    "qualified_reactions": {
+      "asset": "data/vendor/qualified_reactions_v1.json",
+      "expected_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "asset": "configs/assembly/ugi_variant.yaml",
+      "expected_sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "scope": {
+    "reaction_id": "ugi_3cr_agile",
+    "amine_role": "amine_head",
+    "multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+    "raw_match_count_role": "diagnostic_only",
+    "atom_equivalence_method": "RDKit canonical atom symmetry ranks with breakTies=false",
+    "require_single_atom_amine_handle": true,
+    "deduplicate_forward_products": true,
+    "multiple_unique_products_require_explicit_site_selection": true,
+    "max_forward_outcomes_per_record": 100
+  },
+  "expected_counts": {
+    "measured_products": 1200,
+    "unique_product_labels": 1200,
+    "amine_heads": 20,
+    "aldehyde_components": 12,
+    "isocyanide_components": 5,
+    "complete_component_combinations": 1200,
+    "products_reconstructed_exactly": 1200,
+    "products_passing_raw_amine_multiplicity": 1140,
+    "products_failing_raw_amine_multiplicity": 60,
+    "products_passing_qualified_amine_multiplicity": 1200,
+    "products_failing_qualified_amine_multiplicity": 0,
+    "heads_failing_raw_amine_multiplicity": 1,
+    "heads_failing_qualified_amine_multiplicity": 0,
+    "heads_with_equivalent_site_collapse": 2,
+    "products_with_equivalent_site_collapse": 120,
+    "heads_with_multiple_unique_forward_products": 2,
+    "products_with_multiple_unique_forward_products": 120
+  },
+  "expected_forward_outcome_profile": {
+    "raw_1_unique_1": 960,
+    "raw_2_unique_1": 60,
+    "raw_2_unique_2": 120,
+    "raw_3_unique_1": 60
+  },
+  "required_head_findings": {
+    "A5": {
+      "raw_required_handle_matches": 3,
+      "symmetry_distinct_required_handle_matches": 1,
+      "unique_forward_products_per_record": 1,
+      "rows": 60
+    },
+    "A17": {
+      "raw_required_handle_matches": 2,
+      "symmetry_distinct_required_handle_matches": 1,
+      "unique_forward_products_per_record": 1,
+      "rows": 60
+    },
+    "A19": {
+      "raw_required_handle_matches": 2,
+      "symmetry_distinct_required_handle_matches": 2,
+      "unique_forward_products_per_record": 2,
+      "rows": 60
+    },
+    "A20": {
+      "raw_required_handle_matches": 2,
+      "symmetry_distinct_required_handle_matches": 2,
+      "unique_forward_products_per_record": 2,
+      "rows": 60
+    }
+  }
+}

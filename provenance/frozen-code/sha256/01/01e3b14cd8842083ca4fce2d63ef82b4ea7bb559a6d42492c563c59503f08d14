@@ -1,0 +1,58 @@
+{
+  "schema_version": "phase1_ugi_joint_kernel_bounded_schedule_config.v1",
+  "status": "frozen_before_nonexecuting_whole_program_schedule",
+  "task": "Freeze eight bounded whole-program schedules from measured exact anchors and exact/local complete tuples in the frozen valid 1,024-program draw",
+  "policy": {
+    "programs_per_seed": 16,
+    "particles_per_program": 4,
+    "whole_program_sampling": true,
+    "role_marginal_recombination": false,
+    "program_selection": "deterministic_kernel_weighted_without_replacement",
+    "program_overlap_across_seeds": false,
+    "seed_search_retry_or_exclusion_allowed": false,
+    "all_three_component_graphs_generated": true,
+    "component_ids_enter_program_state": false,
+    "biological_targets_read": false,
+    "oracle_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "nonzero_guidance": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false
+  },
+  "inputs": {
+    "frozen_valid_program_draw": {
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+    },
+    "joint_program_audit": {
+      "path": "results/phase1/ugi_joint_program_support_audit_v2/result.json",
+      "sha256": "c388495979cd4016e78703d55abbea082df4906f0a299e04f4fc29b8b990416e"
+    },
+    "joint_program_ledger": {
+      "path": "results/phase1/ugi_joint_program_support_audit_v2/program_ledger.csv.gz",
+      "sha256": "4f6972dda92f28a844a06c0212fc7f2a2a94be275fc44142ad4b2836f951a613"
+    },
+    "model_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+      "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+    },
+    "prior_grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_joint_kernel_bounded_schedule_v1.py",
+      "sha256": "22465fcf162ff93147ecfef3c38fce255e88da9b00cdf9a4b808dd7b7b713007"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_joint_kernel_bounded_schedule.py",
+      "sha256": "884531429538724315a4ff4d71e48f4520da84137ff86d461b71f19339bb4488"
+    },
+    "tests": {
+      "path": "tests/test_ugi_joint_kernel_bounded_schedule.py",
+      "sha256": "fc1498052150539f5c91f8997b2a535c725b1b8bbfaa6eafeb7b25d26df0d21c"
+    }
+  }
+}

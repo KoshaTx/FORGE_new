@@ -1,0 +1,61 @@
+{
+  "schema_version": "phase1_ugi_selected_v2_pool_singleton_equivalence_config.v2",
+  "scope": {
+    "guidance": false,
+    "routing": false,
+    "biology": false,
+    "candidate_selection": false,
+    "holdout_access": false,
+    "nonzero_guidance": false
+  },
+  "design": {
+    "assignment_seed": 20260821,
+    "assignment_sha256": "c0b30c929cca59e08e9746050856761d2304934f883c06f1fb3379376c5daa27",
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "state_steps": [0, 2, 4, 6, 8],
+    "completion_checkpoints": [2, 4, 6],
+    "expanded_program_manifest_sha256": "9affa5ff2598ffc99376800b78269f8cf714670e06be30901c6e1364ab1716d4",
+    "particle_seed_manifest_sha256": "09fbd24a9c035a049055d1f3df299a4a67c2f1bb1669da8d6ec8e6ae9a97dfa1"
+  },
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/product/ugi_selected_v2_pool_singleton_equivalence_v2.py",
+      "sha256": "b8c22786019c7e19b1b898e542510f808093fd2bc5d363971974f441767e03f3"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi_selected_v2_pool_singleton_equivalence_v2.py",
+      "sha256": "9bc08e187594be9b03700b00057c48081587dfa725139604bfcc46a4a2c9f95d"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_selected_v2_pool_singleton_equivalence_v2.py",
+      "sha256": "8450df5f1609af50d2b80196da46d6c6c7b3bde1d2f1f98fd4defa3c08a2c3ed"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_restartable_generator_v2": {
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+    },
+    "selected_guidance_adapter_v2": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v2.py",
+      "sha256": "61a223218b7d28c2324773c92333f96b7f61b2880b49230d97de2453f64707cb"
+    },
+    "prior_selected_v2_equivalence": {
+      "path": "results/phase1/ugi_selected_v2_full_equivalence_v1/result.json",
+      "sha256": "915c145a44a491ef848d0434d41217286f5ee988a93375c8cf28289324b54f45"
+    },
+    "qualified_runtime_receipt": {
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json",
+      "sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+    }
+  },
+  "output_dir": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2"
+}

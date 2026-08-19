@@ -1,0 +1,128 @@
+{
+  "schema_version": "phase1_ugi3_synthesis_value_audit_config.v1",
+  "task": "Compose authenticated L1, L2 and L3 evidence into typed non-probabilistic synthesis values for the frozen generated Ugi sample",
+  "inputs": {
+    "audit_source": {
+      "asset": "src/forge/value/ugi3_synthesis_value_audit.py",
+      "expected_sha256": "a2de5c0321d8f30509b16e299347b2afd76e4e19a9023e8b6c5f7cb2b90e677d"
+    },
+    "generated_component_provenance": {
+      "asset": "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz",
+      "expected_sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6"
+    },
+    "generated_product_provenance": {
+      "asset": "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz",
+      "expected_sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"
+    },
+    "head_terminal_config": {
+      "asset": "configs/route/phase1_ugi3_high_leverage_head_terminal_audit_v1.json",
+      "expected_sha256": "2753c15906699a991ad50edd53771b981f57ee8d392f97c9b771de9f01272cbb"
+    },
+    "head_terminal_product_ledger": {
+      "asset": "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "9786f877e648cd490e84131bc63a9c1951605af4c7c64d616a6cbc6e609fbc36"
+    },
+    "head_terminal_result": {
+      "asset": "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/result.json",
+      "expected_sha256": "8b5b5d7cbb697b8b275159bdf5b5b2ddd8bc318ac3b1a3b12fc47ba3a5c19f4a"
+    },
+    "hybrid_assessment_ledger": {
+      "asset": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz",
+      "expected_sha256": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2"
+    },
+    "latest_product_impact": {
+      "asset": "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "9786f877e648cd490e84131bc63a9c1951605af4c7c64d616a6cbc6e609fbc36"
+    },
+    "production_generator": {
+      "asset": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "expected_sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "qualifier_source": {
+      "asset": "scripts/phase1_build_ugi3_synthesis_values.py",
+      "expected_sha256": "a6372007b1b32464fca33ddeb1249612af9be55b4cc384a632392f1ce30ffc20"
+    },
+    "role_gap_config": {
+      "asset": "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json",
+      "expected_sha256": "a4c2f40eed36187e4acae4872394cd97890f7215e90a84d1aabeb5419cde2941"
+    },
+    "role_gap_product_ledger": {
+      "asset": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "e32ad68ac7d8ec80589997337da7718bc3a152d2c8a3c902b9d8cb28ba4762c0"
+    },
+    "role_gap_result": {
+      "asset": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/result.json",
+      "expected_sha256": "2d4cb30d844b6dfafe7aafb8c2eaae001104cce3b5cd618fdc98586cf0bdfeca"
+    },
+    "targeted_audit_config": {
+      "asset": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json",
+      "expected_sha256": "b271127faeb78eebcb00c3c23e5e8e0c810f1aa08ddd3c8587c3bb00df403e42"
+    },
+    "targeted_audit_result": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json",
+      "expected_sha256": "40fae7dc1b3695a696217cb388a8a43bf9922f6a5604500fb2021552dc98714a"
+    },
+    "targeted_product_ledger": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/product_closure_impact_ledger.csv.gz",
+      "expected_sha256": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e"
+    },
+    "targeted_route_ledger": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz",
+      "expected_sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+    },
+    "value_source": {
+      "asset": "src/forge/value/synthesis.py",
+      "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    }
+  },
+  "expected_summary": {
+    "registry_components": 424,
+    "registry_outcomes": {
+      "complete": 48,
+      "missing_knowledge": 273,
+      "outside_support": 103
+    },
+    "generated_unique_components": 610,
+    "generated_component_value_sources": {
+      "frozen_registry_assessment": 91,
+      "generated_component_missing_route_knowledge": 519
+    },
+    "generated_component_outcomes": {
+      "complete": 24,
+      "missing_knowledge": 560,
+      "outside_support": 26
+    },
+    "generated_component_evidence_support": {
+      "exact_identity": 9,
+      "family_projected": 20,
+      "not_applicable": 15,
+      "provenance_only": 566
+    },
+    "generated_products": 1007,
+    "generated_product_outcomes": {
+      "complete": 38,
+      "noncomplete": 969
+    },
+    "products_with_exact_l1_forward_consistency": 1007,
+    "component_values_with_unknown_protection_burden": 610,
+    "component_values_with_unknown_purification_burden": 610,
+    "non_null_scalar_values": 0,
+    "non_null_success_probabilities": 0
+  },
+  "assessment_policy": {
+    "per_component_budget": {
+      "maximum_depth": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_expansions": 4,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 1,
+      "maximum_elapsed_milliseconds": 0
+    },
+    "preserve_blocker_taxonomy": true,
+    "unknown_burden_is_zero": false,
+    "permit_scalar_value": false,
+    "permit_success_probability": false,
+    "diagnostic_only": true,
+    "production_synthesis_guidance": false
+  }
+}

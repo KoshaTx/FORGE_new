@@ -1,0 +1,614 @@
+{
+  "schema_version": "m0_09_agile_component_routes_config.v2",
+  "inputs": {
+    "agile_measured": {
+      "asset": "AGILE_smiles_with_value_group.csv",
+      "root": "vendor",
+      "expected_sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    "agile_si": {
+      "asset": "agile_supplementary_information.pdf",
+      "root": "vendor",
+      "expected_sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    },
+    "lnpdb": {
+      "asset": "lnpdb_fc7c389.csv",
+      "root": "vendor",
+      "expected_sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    "component_source_ledger": {
+      "asset": "component_source_ledger.csv",
+      "root": "m0_results",
+      "expected_sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    "source_queue": {
+      "asset": "source_queue.csv",
+      "root": "m0_results",
+      "expected_sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    }
+  },
+  "source": {
+    "source_id": "agile_2024",
+    "citation": "Cheng et al., Nature Communications 15, 6610 (2024)",
+    "doi": "10.1038/s41467-024-50619-z",
+    "pmid": "39060305",
+    "si_locator": "Supplementary Note 1, pages 1-7",
+    "evidence_limit": "The SI documents route schemes and NMR characterization but no upstream tail yields. Route extraction is not forward verification.",
+    "starting_material_statement": {
+      "locator": "Main article Methods, Synthesis and characterization of iLNP formulations",
+      "paraphrase": "The publication reports that amine headgroups and starting compounds were purchased from Sigma-Aldrich and TCI America.",
+      "procurement_evidence_status": "vendor_claim_only",
+      "limitation": "No exact catalog identifiers, date-stamped availability, region, or internal stock records were reported."
+    }
+  },
+  "assembly": {
+    "route_id": "agile_ugi_3cr",
+    "level": "L1",
+    "source_locator": "Supplementary Note 1, pages 5-7",
+    "evidence_status": "source_identified",
+    "note": "The route-aware ledger records L1 separately. This M0-09 addendum inventories L2 component routes and does not forward-verify final-lipid assembly."
+  },
+  "amine_components": [
+    {
+      "label": "A1",
+      "smiles": "CN(C)CCN"
+    },
+    {
+      "label": "A2",
+      "smiles": "NCCCN1CCCC1"
+    },
+    {
+      "label": "A3",
+      "smiles": "CCN(CC)CCCN"
+    },
+    {
+      "label": "A4",
+      "smiles": "CCN(CCN)CC"
+    },
+    {
+      "label": "A5",
+      "smiles": "NCCN(CCN)CCN"
+    },
+    {
+      "label": "A6",
+      "smiles": "CN(C)CCCN"
+    },
+    {
+      "label": "A7",
+      "smiles": "NCCCN1CCOCC1"
+    },
+    {
+      "label": "A8",
+      "smiles": "CCCCN(CCCC)CCCN"
+    },
+    {
+      "label": "A9",
+      "smiles": "CC1=NN(C)C(N)=C1"
+    },
+    {
+      "label": "A10",
+      "smiles": "NCCN1CCCC1"
+    },
+    {
+      "label": "A11",
+      "smiles": "NN1CCOCC1"
+    },
+    {
+      "label": "A12",
+      "smiles": "CN1CCC(N)CC1"
+    },
+    {
+      "label": "A13",
+      "smiles": "NN1CCCCC1"
+    },
+    {
+      "label": "A14",
+      "smiles": "NC1=CNN=C1"
+    },
+    {
+      "label": "A15",
+      "smiles": "NCCN1CCCCC1"
+    },
+    {
+      "label": "A16",
+      "smiles": "CC(N(C(C)C)CCN)C"
+    },
+    {
+      "label": "A17",
+      "smiles": "NCCCN(CCCN)C"
+    },
+    {
+      "label": "A18",
+      "smiles": "CCN1C(CN)CCC1"
+    },
+    {
+      "label": "A19",
+      "smiles": "NCCN1CCNCC1"
+    },
+    {
+      "label": "A20",
+      "smiles": "NC1CCNCC1"
+    }
+  ],
+  "aldehyde_ester_route_family": {
+    "route_family_id": "agile_hexyl_aldehyde_two_step",
+    "source_locator": "Supplementary Note 1, pages 1-4",
+    "route_evidence_status": "route_extracted",
+    "forward_verification_status": "not_run_missing_qualified_template",
+    "analytical_evidence": "Product-specific proton NMR is reported.",
+    "explicit_yield": null,
+    "shared_leaf": {
+      "name": "hexane-1,6-diol",
+      "smiles": "OCCCCCCO",
+      "procurement_evidence_status": "vendor_claim_only"
+    },
+    "steps": [
+      {
+        "step_index": 1,
+        "transformation": "esterification",
+        "reactant_member_fields": [
+          "acid_smiles",
+          "shared_leaf.smiles"
+        ],
+        "product_member_field": "alcohol_intermediate_smiles",
+        "reagents": [
+          "EDC hydrochloride",
+          "DIPEA",
+          "DMAP"
+        ],
+        "solvent": "dichloromethane",
+        "temperature": "room temperature",
+        "duration": "18 h",
+        "atmosphere": "nitrogen",
+        "purification": "silica gel chromatography, 0-50% ethyl acetate in hexanes"
+      },
+      {
+        "step_index": 2,
+        "transformation": "alcohol_to_aldehyde_oxidation",
+        "reactant_member_fields": [
+          "alcohol_intermediate_smiles"
+        ],
+        "product_member_field": "target_smiles",
+        "reagents": [
+          "Dess-Martin periodinane"
+        ],
+        "solvent": "dichloromethane",
+        "temperature": "room temperature",
+        "duration": "2 h",
+        "atmosphere": "nitrogen",
+        "purification": "silica gel chromatography, 0-50% ethyl acetate in hexanes"
+      }
+    ],
+    "members": [
+      {
+        "label": "B1",
+        "route_id": "agile_b1_nonanoate",
+        "target_name": "6-oxohexyl nonanoate",
+        "target_smiles": "O=C(CCCCCCCC)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl nonanoate",
+        "alcohol_intermediate_smiles": "O=C(CCCCCCCC)OCCCCCCO",
+        "acid_name": "nonanoic acid",
+        "acid_smiles": "CCCCCCCCC(=O)O"
+      },
+      {
+        "label": "B2",
+        "route_id": "agile_b2_4_methylnonanoate",
+        "target_name": "6-oxohexyl 4-methylnonanoate",
+        "target_smiles": "CC(CCC(OCCCCCC=O)=O)CCCCC",
+        "alcohol_intermediate_name": "6-hydroxyhexyl 4-methylnonanoate",
+        "alcohol_intermediate_smiles": "CC(CCC(OCCCCCCO)=O)CCCCC",
+        "acid_name": "4-methylnonanoic acid",
+        "acid_smiles": "CC(CCC(O)=O)CCCCC"
+      },
+      {
+        "label": "B3",
+        "route_id": "agile_b3_decanoate",
+        "target_name": "6-oxohexyl decanoate",
+        "target_smiles": "O=C(CCCCCCCCC)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl decanoate",
+        "alcohol_intermediate_smiles": "O=C(CCCCCCCCC)OCCCCCCO",
+        "acid_name": "decanoic acid",
+        "acid_smiles": "CCCCCCCCCC(=O)O"
+      },
+      {
+        "label": "B4",
+        "route_id": "agile_b4_e_dec_2_enoate",
+        "target_name": "6-oxohexyl (E)-dec-2-enoate",
+        "target_smiles": "O=C(/C=C/CCCCCCC)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl (E)-dec-2-enoate",
+        "alcohol_intermediate_smiles": "O=C(/C=C/CCCCCCC)OCCCCCCO",
+        "acid_name": "(E)-dec-2-enoic acid",
+        "acid_smiles": "O=C(/C=C/CCCCCCC)O"
+      },
+      {
+        "label": "B6",
+        "route_id": "agile_b6_undecanoate",
+        "target_name": "6-oxohexyl undecanoate",
+        "target_smiles": "O=C(CCCCCCCCCC)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl undecanoate",
+        "alcohol_intermediate_smiles": "O=C(CCCCCCCCCC)OCCCCCCO",
+        "acid_name": "undecanoic acid",
+        "acid_smiles": "CCCCCCCCCCC(=O)O"
+      },
+      {
+        "label": "B7",
+        "route_id": "agile_b7_undec_10_ynoate",
+        "target_name": "6-oxohexyl undec-10-ynoate",
+        "target_smiles": "O=C(CCCCCCCCC#C)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl undec-10-ynoate",
+        "alcohol_intermediate_smiles": "O=C(CCCCCCCCC#C)OCCCCCCO",
+        "acid_name": "undec-10-ynoic acid",
+        "acid_smiles": "O=C(CCCCCCCCC#C)O"
+      },
+      {
+        "label": "B8",
+        "route_id": "agile_b8_undec_10_enoate",
+        "target_name": "6-oxohexyl undec-10-enoate",
+        "target_smiles": "O=C(CCCCCCCCC=C)OCCCCCC=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl undec-10-enoate",
+        "alcohol_intermediate_smiles": "O=C(CCCCCCCCC=C)OCCCCCCO",
+        "acid_name": "undec-10-enoic acid",
+        "acid_smiles": "O=C(CCCCCCCCC=C)O"
+      },
+      {
+        "label": "B9",
+        "route_id": "agile_b9_palmitate",
+        "target_name": "6-oxohexyl palmitate",
+        "target_smiles": "CCCCCCCCCCCCCCCC(OCCCCCC=O)=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl palmitate",
+        "alcohol_intermediate_smiles": "CCCCCCCCCCCCCCCC(OCCCCCCO)=O",
+        "acid_name": "palmitic acid",
+        "acid_smiles": "CCCCCCCCCCCCCCCC(=O)O"
+      },
+      {
+        "label": "B10",
+        "route_id": "agile_b10_stearate",
+        "target_name": "6-oxohexyl stearate",
+        "target_smiles": "CCCCCCCCCCCCCCCCCC(OCCCCCC=O)=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl stearate",
+        "alcohol_intermediate_smiles": "CCCCCCCCCCCCCCCCCC(OCCCCCCO)=O",
+        "acid_name": "stearic acid",
+        "acid_smiles": "CCCCCCCCCCCCCCCCCC(=O)O"
+      },
+      {
+        "label": "B11",
+        "route_id": "agile_b11_oleate",
+        "target_name": "6-oxohexyl oleate",
+        "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(OCCCCCC=O)=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl oleate",
+        "alcohol_intermediate_smiles": "CCCCCCCC/C=C\\CCCCCCCC(OCCCCCCO)=O",
+        "acid_name": "oleic acid",
+        "acid_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)O"
+      },
+      {
+        "label": "B12",
+        "route_id": "agile_b12_linoleate",
+        "target_name": "6-oxohexyl (9Z,12Z)-octadeca-9,12-dienoate",
+        "target_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(OCCCCCC=O)=O",
+        "alcohol_intermediate_name": "6-hydroxyhexyl (9Z,12Z)-octadeca-9,12-dienoate",
+        "alcohol_intermediate_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(OCCCCCCO)=O",
+        "acid_name": "linoleic acid",
+        "acid_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)O"
+      }
+    ]
+  },
+  "additional_aldehyde_route_families": [
+    {
+      "route_family_id": "agile_direct_aldehyde_oxidation",
+      "route_kind": "direct_oxidation",
+      "source_locator": "Supplementary Note 1, pages 5-6",
+      "route_evidence_status": "route_extracted",
+      "forward_verification_status": "not_run_missing_qualified_template",
+      "analytical_evidence": "Product-specific proton NMR is reported.",
+      "explicit_yield": null,
+      "member_smiles_fields": [
+        "target_smiles",
+        "alcohol_smiles"
+      ],
+      "steps": [
+        {
+          "step_index": 1,
+          "transformation": "alcohol_to_aldehyde_oxidation",
+          "reactant_member_fields": [
+            "alcohol_smiles"
+          ],
+          "product_member_field": "target_smiles",
+          "reagents": [
+            "Dess-Martin periodinane"
+          ],
+          "solvent": "dichloromethane",
+          "temperature": "room temperature",
+          "duration": "2 h"
+        }
+      ],
+      "members": [
+        {
+          "label": "B-identified-olealdehyde",
+          "route_id": "agile_identified_olealdehyde",
+          "target_name": "olealdehyde",
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC=O",
+          "alcohol_name": "(Z)-octadec-9-en-1-ol",
+          "alcohol_smiles": "CCCCCCCC/C=C\\CCCCCCCCO"
+        },
+        {
+          "label": "B-identified-palmitaldehyde",
+          "route_id": "agile_identified_palmitaldehyde",
+          "target_name": "palmitaldehyde",
+          "target_smiles": "CCCCCCCCCCCCCCCC=O",
+          "alcohol_name": "hexadecan-1-ol",
+          "alcohol_smiles": "CCCCCCCCCCCCCCCCO"
+        }
+      ]
+    },
+    {
+      "route_family_id": "agile_butyl_aldehyde_two_step",
+      "route_kind": "diol_esterification_oxidation",
+      "source_locator": "Supplementary Note 1, pages 6-7",
+      "route_evidence_status": "route_extracted",
+      "forward_verification_status": "not_run_missing_qualified_template",
+      "analytical_evidence": "Product-specific proton NMR is reported.",
+      "explicit_yield": null,
+      "member_smiles_fields": [
+        "target_smiles",
+        "alcohol_intermediate_smiles",
+        "acid_smiles"
+      ],
+      "shared_leaf": {
+        "name": "butane-1,4-diol",
+        "smiles": "OCCCCO",
+        "procurement_evidence_status": "vendor_claim_only"
+      },
+      "steps": [
+        {
+          "step_index": 1,
+          "transformation": "esterification",
+          "reactant_member_fields": [
+            "acid_smiles",
+            "shared_leaf.smiles"
+          ],
+          "product_member_field": "alcohol_intermediate_smiles",
+          "reagents": [
+            "EDC hydrochloride",
+            "DIPEA",
+            "DMAP"
+          ],
+          "solvent": "dichloromethane",
+          "temperature": "room temperature",
+          "duration": "18 h",
+          "atmosphere": "nitrogen",
+          "purification": "silica gel chromatography"
+        },
+        {
+          "step_index": 2,
+          "transformation": "alcohol_to_aldehyde_oxidation",
+          "reactant_member_fields": [
+            "alcohol_intermediate_smiles"
+          ],
+          "product_member_field": "target_smiles",
+          "reagents": [
+            "Dess-Martin periodinane"
+          ],
+          "solvent": "dichloromethane",
+          "temperature": "room temperature",
+          "duration": "2 h",
+          "atmosphere": "nitrogen",
+          "purification": "silica gel chromatography"
+        }
+      ],
+      "members": [
+        {
+          "label": "B-identified-butyl-4-methylnonanoate",
+          "route_id": "agile_identified_butyl_4_methylnonanoate",
+          "target_name": "4-oxobutyl 4-methylnonanoate",
+          "target_smiles": "CCCCCC(C)CCC(=O)OCCCC=O",
+          "alcohol_intermediate_name": "4-hydroxybutyl 4-methylnonanoate",
+          "alcohol_intermediate_smiles": "CCCCCC(C)CCC(=O)OCCCCO",
+          "acid_name": "4-methylnonanoic acid",
+          "acid_smiles": "CCCCCC(C)CCC(=O)O"
+        },
+        {
+          "label": "B-identified-butyl-e-dec-2-enoate",
+          "route_id": "agile_identified_butyl_e_dec_2_enoate",
+          "target_name": "4-oxobutyl (E)-dec-2-enoate",
+          "target_smiles": "CCCCCCC/C=C/C(=O)OCCCC=O",
+          "alcohol_intermediate_name": "4-hydroxybutyl (E)-dec-2-enoate",
+          "alcohol_intermediate_smiles": "CCCCCCC/C=C/C(=O)OCCCCO",
+          "acid_name": "(E)-dec-2-enoic acid",
+          "acid_smiles": "CCCCCCC/C=C/C(=O)O"
+        },
+        {
+          "label": "B-identified-butyl-octanoate",
+          "route_id": "agile_identified_butyl_octanoate",
+          "target_name": "4-oxobutyl octanoate",
+          "target_smiles": "CCCCCCCC(=O)OCCCC=O",
+          "alcohol_intermediate_name": "4-hydroxybutyl octanoate",
+          "alcohol_intermediate_smiles": "CCCCCCCC(=O)OCCCCO",
+          "acid_name": "octanoic acid",
+          "acid_smiles": "CCCCCCCC(=O)O"
+        },
+        {
+          "label": "B-identified-butyl-oleate",
+          "route_id": "agile_identified_butyl_oleate",
+          "target_name": "4-oxobutyl oleate",
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCC=O",
+          "alcohol_intermediate_name": "4-hydroxybutyl oleate",
+          "alcohol_intermediate_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCO",
+          "acid_name": "oleic acid",
+          "acid_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)O"
+        }
+      ]
+    }
+  ],
+  "unresolved_aldehyde_ester_components": [
+    {
+      "label": "B5",
+      "measured_smiles": "O=C(/C=C\\CCCCCCC)OCCCCCC=O",
+      "measured_identity": "6-oxohexyl (Z)-dec-2-enoate",
+      "route_evidence_status": "source_discrepancy_unresolved",
+      "source_candidate_name": "6-oxohexyl undec-2-enoate",
+      "source_locator": "Supplementary Note 1, pages 1-3",
+      "reason": "The measured component is a Z dec-2-enoate. The SI names an undec-2-enoate, depicts 2-undecenoic acid, and reports a coupling consistent with E geometry. Chain length and stereochemistry therefore prevent an exact identity match.",
+      "must_not_infer_route": true
+    }
+  ],
+  "isocyanide_route_family": {
+    "route_family_id": "agile_isocyanide_two_step",
+    "source_locator": "Supplementary Note 1, pages 4-5",
+    "route_evidence_status": "route_extracted",
+    "forward_verification_status": "not_run_missing_qualified_template",
+    "analytical_evidence": "Product-specific proton NMR is reported.",
+    "explicit_yield": null,
+    "steps": [
+      {
+        "step_index": 1,
+        "transformation": "amine_formylation",
+        "reactant_member_fields": [
+          "amine_smiles"
+        ],
+        "product_member_field": "formamide_intermediate_smiles",
+        "reagents": [
+          "sodium formate",
+          "acetyl chloride"
+        ],
+        "solvents": [
+          "tetrahydrofuran",
+          "dichloromethane"
+        ],
+        "temperature": "room temperature",
+        "duration": "12 h reagent preparation, then 4 h after amine addition"
+      },
+      {
+        "step_index": 2,
+        "transformation": "formamide_dehydration_to_isocyanide",
+        "reactant_member_fields": [
+          "formamide_intermediate_smiles"
+        ],
+        "product_member_field": "target_smiles",
+        "reagents": [
+          "triethylamine",
+          "phosphorus oxychloride"
+        ],
+        "solvent": "tetrahydrofuran",
+        "temperature": "0 degrees C",
+        "duration": "1.5 h after phosphorus oxychloride addition",
+        "purification": "column chromatography using a hexane/ethyl acetate system"
+      }
+    ],
+    "members": [
+      {
+        "label": "C1",
+        "route_id": "agile_c1_dodecyl_isocyanide",
+        "target_name": "1-isocyanododecane",
+        "target_smiles": "CCCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-dodecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCCNC=O",
+        "amine_name": "dodecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCCN"
+      },
+      {
+        "label": "C2",
+        "route_id": "agile_c2_tetradecyl_isocyanide",
+        "target_name": "1-isocyanotetradecane",
+        "target_smiles": "CCCCCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-tetradecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCCCCNC=O",
+        "amine_name": "tetradecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCCCCN"
+      },
+      {
+        "label": "C3",
+        "route_id": "agile_c3_hexadecyl_isocyanide",
+        "target_name": "1-isocyanohexadecane",
+        "target_smiles": "CCCCCCCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-hexadecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCCCCCCNC=O",
+        "amine_name": "hexadecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCCCCCCN"
+      },
+      {
+        "label": "C4",
+        "route_id": "agile_c4_octadecyl_isocyanide",
+        "target_name": "1-isocyanooctadecane",
+        "target_smiles": "CCCCCCCCCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-octadecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCCCCCCCCNC=O",
+        "amine_name": "octadecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCCCCCCCCN"
+      },
+      {
+        "label": "C5",
+        "route_id": "agile_c5_oleyl_isocyanide",
+        "target_name": "(Z)-1-isocyanooctadec-9-ene",
+        "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "(Z)-N-octadec-9-enylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCC/C=C\\CCCCCCCCNC=O",
+        "amine_name": "(Z)-octadec-9-en-1-amine",
+        "amine_smiles": "CCCCCCCC/C=C\\CCCCCCCCN"
+      }
+    ]
+  },
+  "additional_isocyanide_route_family": {
+    "route_family_id": "agile_additional_isocyanide_two_step",
+    "source_locator": "Supplementary Note 1, page 7",
+    "route_evidence_status": "route_extracted",
+    "forward_verification_status": "not_run_missing_qualified_template",
+    "analytical_evidence": "Product-specific proton NMR is reported.",
+    "explicit_yield": null,
+    "steps": [
+      {
+        "step_index": 1,
+        "transformation": "amine_formylation",
+        "reactant_member_fields": [
+          "amine_smiles"
+        ],
+        "product_member_field": "formamide_intermediate_smiles",
+        "reagents": [
+          "sodium formate",
+          "acetyl chloride"
+        ],
+        "solvents": [
+          "tetrahydrofuran",
+          "dichloromethane"
+        ],
+        "temperature": "room temperature"
+      },
+      {
+        "step_index": 2,
+        "transformation": "formamide_dehydration_to_isocyanide",
+        "reactant_member_fields": [
+          "formamide_intermediate_smiles"
+        ],
+        "product_member_field": "target_smiles",
+        "reagents": [
+          "triethylamine",
+          "phosphorus oxychloride"
+        ],
+        "solvent": "tetrahydrofuran",
+        "temperature": "0 degrees C",
+        "purification": "column chromatography using a hexane/ethyl acetate system"
+      }
+    ],
+    "members": [
+      {
+        "label": "C11",
+        "route_id": "agile_identified_c11_undecyl_isocyanide",
+        "target_name": "1-isocyanoundecane",
+        "target_smiles": "CCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-undecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCNC=O",
+        "amine_name": "undecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCN"
+      },
+      {
+        "label": "C17",
+        "route_id": "agile_identified_c17_heptadecyl_isocyanide",
+        "target_name": "1-isocyanoheptadecane",
+        "target_smiles": "CCCCCCCCCCCCCCCCC[N+]#[C-]",
+        "formamide_intermediate_name": "N-heptadecylformamide",
+        "formamide_intermediate_smiles": "CCCCCCCCCCCCCCCCCNC=O",
+        "amine_name": "heptadecan-1-amine",
+        "amine_smiles": "CCCCCCCCCCCCCCCCCN"
+      }
+    ]
+  }
+}

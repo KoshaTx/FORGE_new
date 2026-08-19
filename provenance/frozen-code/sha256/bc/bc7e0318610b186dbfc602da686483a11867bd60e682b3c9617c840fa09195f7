@@ -1,0 +1,170 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_coverage_config.v2",
+  "status": "frozen_before_exact_terminal_delta_execution",
+  "task": "Apply one already-owned exact head terminal and one newly authenticated exact aldehyde terminal to immutable fresh-v2 route values",
+  "inputs": {
+    "base_component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/component_synthesis_values.json.gz",
+      "sha256": "2535046846b4f6293273960c46ca9dc873bd3b37acf3849fe7871f162f975c03"
+    },
+    "base_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/product_synthesis_values.json.gz",
+      "sha256": "53c91af25ac37be5de8436865ec610e020e0900b232ae844c4ad63b2cd742d3e"
+    },
+    "base_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/result.json",
+      "sha256": "16ea205e816e87a1daa3e8d4c765d7564f74c4fd887f8a7d44c62556705ac1d0"
+    },
+    "head_procurement_evidence": {
+      "path": "configs/route/m0_09_ugi3_agile_head_procurement.json",
+      "sha256": "9167b0fef06931ea596e8996c8192d419f924a3d59e28e10c66d11b6891af157"
+    },
+    "tail_terminal_evidence": {
+      "path": "configs/route/phase1_ugi3_high_leverage_tail_terminals_v1.json",
+      "sha256": "bd67f7427d94bf7ac26550a6ddd82bf0474e81131e10e408daaf6938a1aeabb5"
+    },
+    "tail_identity_asset": {
+      "path": "data/source_cache/phase1_ugi3_high_leverage_tail_terminals/pubchem_cid71552_identity_2026-08-03.json",
+      "sha256": "b3442cde65e0ed8646a071b30f57259f1ec130bdc8f64822df7b60a898553ce8"
+    },
+    "tail_failed_archive": {
+      "path": "data/source_cache/phase1_ugi3_high_leverage_tail_terminals/tci_h1295_2026-08-03.html",
+      "sha256": "510851870867d4c21cf1ec23d15d791667e0e8ece21e66c4eb3aedb61081f44b"
+    },
+    "audit_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_coverage_v2.py",
+      "sha256": "c03adf8c37d6c20101b7e10c30f7af41f172e1442bb799727d928af225538668"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi3_fresh_pool_route_coverage_v2.py",
+      "sha256": "3dcff3d864faea208f1e8954e813854780295beb0dcf9b1b751805158f0d1dc9"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_coverage_v2.py",
+      "sha256": "21e651550b1e9483c5319f79b9104e786648d98e44d0a917c50292f47e7a5e44"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    }
+  },
+  "assessment_policy": {
+    "base_v1_is_immutable": true,
+    "component_identity": "exact role plus canonical constitutional SMILES",
+    "exact_current_target_terminal_may_override_stale_route_assessment": true,
+    "similarity_can_transfer_terminal_status": false,
+    "family_projection_can_close": false,
+    "unknown_burden_is_zero": false,
+    "permit_scalar_value": false,
+    "permit_success_probability": false,
+    "production_synthesis_guidance": false,
+    "prospective_candidate_selection": false
+  },
+  "expected_summary": {
+    "base_version": "fresh_pool_route_coverage_v1",
+    "exact_terminal_components_changed": 2,
+    "changed_component_keys": [
+      "amine_head\tNC1CCNCC1",
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCC=O"
+    ],
+    "unique_components": 1919,
+    "unique_component_outcomes": {
+      "complete": 42,
+      "missing_knowledge": 1832,
+      "outside_support": 45
+    },
+    "unique_component_outcomes_by_role": {
+      "amine_head": {
+        "complete": 20,
+        "missing_knowledge": 812,
+        "outside_support": 29
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 324,
+        "outside_support": 5
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 16,
+        "missing_knowledge": 696,
+        "outside_support": 11
+      }
+    },
+    "unique_component_value_sources": {
+      "existing_exact_current_head_terminal_refresh": 1,
+      "fresh_component_missing_route_knowledge": 1515,
+      "hybrid_registry_assessment": 86,
+      "new_exact_current_tail_terminal": 1,
+      "v3_exact_overlay_or_replay": 316
+    },
+    "component_occurrence_outcomes": {
+      "complete": 3852,
+      "missing_knowledge": 6892,
+      "outside_support": 1181
+    },
+    "component_occurrence_outcomes_by_role": {
+      "amine_head": {
+        "complete": 1272,
+        "missing_knowledge": 2471,
+        "outside_support": 232
+      },
+      "isocyanide_tail": {
+        "complete": 1683,
+        "missing_knowledge": 1755,
+        "outside_support": 537
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 897,
+        "missing_knowledge": 2666,
+        "outside_support": 412
+      }
+    },
+    "component_occurrences_by_value_source": {
+      "existing_exact_current_head_terminal_refresh": 21,
+      "fresh_component_missing_route_knowledge": 2637,
+      "hybrid_registry_assessment": 1036,
+      "new_exact_current_tail_terminal": 120,
+      "v3_exact_overlay_or_replay": 8111
+    },
+    "exact_l1_products": 3975,
+    "product_outcomes_before": {
+      "complete": 147,
+      "noncomplete": 3828
+    },
+    "product_outcomes_after": {
+      "complete": 171,
+      "noncomplete": 3804
+    },
+    "newly_complete_products": 24,
+    "single_target_new_closures": {
+      "amine_head\tNC1CCNCC1": 3,
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCC=O": 19
+    },
+    "joint_target_new_closures": 2,
+    "target_occurrences": {
+      "amine_head\tNC1CCNCC1": 21,
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCC=O": 120
+    },
+    "products_by_route_complete_component_count": {
+      "0": 1312,
+      "1": 1645,
+      "2": 847,
+      "3": 171
+    },
+    "product_outcomes_by_structural_provenance": {
+      "product_contains_admitted_transferred_or_expanded_known_component": {
+        "complete": 54,
+        "noncomplete": 452
+      },
+      "product_contains_catalog_absent_component": {
+        "noncomplete": 3152
+      },
+      "product_uses_only_original_ugi_components": {
+        "complete": 117,
+        "noncomplete": 200
+      }
+    },
+    "non_null_scalar_values": 0,
+    "non_null_success_probabilities": 0
+  }
+}

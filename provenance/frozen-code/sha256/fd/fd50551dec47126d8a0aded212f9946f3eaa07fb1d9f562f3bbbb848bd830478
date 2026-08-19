@@ -1,0 +1,167 @@
+{
+  "schema_version": "phase1_ugi_production_synthesis_guidance_seam_v4_config.v1",
+  "assessment_as_of_utc": "2026-08-03T17:30:13Z",
+  "cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+  "scope": {
+    "guidance_strength": 0.25,
+    "qualification_only": true,
+    "production_execution": false,
+    "nonzero_synthesis_guidance": true,
+    "biological_guidance": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false,
+    "sealed_holdout_access": false,
+    "no_seed_search": true
+  },
+  "design": {
+    "assignment_seed": 20260821,
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "checkpoints": [2, 4, 6],
+    "checkpoint_betas": [0.25, 0.5, 0.75],
+    "rollouts_per_particle_checkpoint": 1,
+    "final_selection_count": 32,
+    "product_transition_calls": 1280,
+    "terminal_completions": 256,
+    "logical_planner_calls": 768,
+    "logical_verifier_calls": 3328
+  },
+  "review_gate": {
+    "review_required_before_execution": true,
+    "review_token": "selected-v3-lambda-0.25-code-config-tests-reviewed",
+    "execution_authorized_by_config_alone": false
+  },
+  "preregistration": {
+    "guidance_strengths": [0.0, 0.25, 0.5, 1.0, 2.0],
+    "qualification_strength": 0.25,
+    "assignment_role": "first_preregistered_calibration_seed",
+    "single_assignment_only": true,
+    "no_retries": true,
+    "no_seed_search": true,
+    "not_a_calibration_winner_selection": true
+  },
+  "selected_v3_identities": {
+    "adapter_schema_version": "forge.selected_guidance_adapter.v3",
+    "adapter_identity_sha256": "f2c26cf2a27119a2f2a54d0df8430af7e6a62cacd26cc2fc607586513e5065e6",
+    "bound_closure_identity_sha256": "5195878ece3e13cee68373243037a98ac852fb7b96b9061b39879d9cc7a1acef"
+  },
+  "hardened_zero_guidance": {
+    "result_file_sha256": "ff4fdf36dd94b4e33b6c5e84527c5049578af7ea39ca25440dc33a7d8e32da3a",
+    "result_logical_sha256": "0b73258b25f790aeb25fc7a45915dacaa239e682c0582d2b333eb18f6e326611",
+    "run_file_sha256": "1627b2cdb47c6d54cc916fbb2327a86ba5420e0a5ca698607f7545335555a087",
+    "run_logical_sha256": "8f4b907971e197f08b8b0d738451ee7fd3d05be0452b4462d1d9521f958c37ee",
+    "support_file_sha256": "66bb85edaa29cb447cc43d359db07a19f092cc8e36110d689e743e191f02f316",
+    "support_logical_sha256": "1aba7b54bcd353e58dae8de9009ca11a09e0f6191468867398a2cb00f73a4409"
+  },
+  "inputs": {
+    "binary_utility_source": {
+      "path": "src/forge/value/ugi_exact_closure_guidance.py",
+      "sha256": "a1110f42d26b0c94db1eb4b0976eca7716552946148203cfee4d629229f2aaee"
+    },
+    "current_source_requalification": {
+      "path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json",
+      "sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "matched_cache_binding": {
+      "path": "src/forge/product/ugi_matched_planner_cache_binding.py",
+      "sha256": "c81f80bee6131e394c7e9df223a1303792c92a94bfb5084416cbdda2402af624"
+    },
+    "matched_preregistration_v1": {
+      "path": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json",
+      "sha256": "0834c51bf68b5d242e0ab22a5e9fb2bcc825f317989d63c6af9c695779ea897c"
+    },
+    "matched_preregistration_v2": {
+      "path": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v2.json",
+      "sha256": "d05db4d99ade39ef2c9752e88f5eb5f66b0f227fc4c6a0b2239172e006f685a3"
+    },
+    "nonzero_runner": {
+      "path": "src/forge/product/ugi_nonzero_guidance_runner.py",
+      "sha256": "4a0791b551cc0d3d3a1f862321d102f51b29c9d90e67c42102cbb390aab388a2"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "production_terminal_route_evaluator": {
+      "path": "src/forge/product/ugi_production_terminal_route_evaluator.py",
+      "sha256": "fe132af49ef544818db5564973f4249ed0cfe140228b67958dde15bcc93b454c"
+    },
+    "qualification_runner": {
+      "path": "scripts/phase1_qualify_ugi_production_synthesis_guidance_seam_v4.py",
+      "sha256": "6e31fa64f4f2b0024fda32a3c89669ed4d37c48235a13939662c3cb3cbd62538"
+    },
+    "qualification_source": {
+      "path": "src/forge/product/ugi_production_synthesis_guidance_seam_v4.py",
+      "sha256": "9ab057b93d6a55c23f7965a7cefee6d2605a8e73783860cb2179b134d8869cdf"
+    },
+    "qualification_tests": {
+      "path": "tests/test_ugi_production_synthesis_guidance_seam_v4.py",
+      "sha256": "d60c1304af42b37dbff39ec0784cd10a68fc039200a357472708a31ce56f491c"
+    },
+    "retry_amendment": {
+      "path": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4_retry_amendment_v1.json",
+      "sha256": "980b5ceb927dfc1c041dcce1dfdbf03b8c20148cb264432bb775cb8bfc3ff90b"
+    },
+    "route_completion_utility": {
+      "path": "results/phase1/ugi_route_completion_utility_v1/result.json",
+      "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"
+    },
+    "selected_guidance_adapter_v2": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v2.py",
+      "sha256": "61a223218b7d28c2324773c92333f96b7f61b2880b49230d97de2453f64707cb"
+    },
+    "selected_guidance_adapter_v3": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v3.py",
+      "sha256": "e4963e2c245a8b5a3ece7e1b869733553ccc1bcfbdb4811bca73131ff540b793"
+    },
+    "selected_restartable_generator_v2": {
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+    },
+    "selected_v3_equivalence_result": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/result.json",
+      "sha256": "e13eb65ce1653acd1d7ca6443eecb7dbc85ba90dd1e299ae705b409cc6b6f11d"
+    },
+    "selected_v3_equivalence_rows": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json",
+      "sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+    },
+    "typed_outcome_audit": {
+      "path": "src/forge/product/ugi_zero_guidance_typed_audit.py",
+      "sha256": "bee4a44526dddce35ef7953d2ac1a45f4790994d5366867abe2fa8865289d010"
+    },
+    "zero_seam_config": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+      "sha256": "0a12d7f0291ea2699b740ec06d160333eb31996c3d64025a7d14cd2553874342"
+    },
+    "zero_seam_result": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/result.json",
+      "sha256": "ff4fdf36dd94b4e33b6c5e84527c5049578af7ea39ca25440dc33a7d8e32da3a"
+    },
+    "zero_seam_run": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/run.json",
+      "sha256": "1627b2cdb47c6d54cc916fbb2327a86ba5420e0a5ca698607f7545335555a087"
+    },
+    "zero_seam_runner": {
+      "path": "scripts/phase1_qualify_ugi_production_zero_guidance_seam_v3.py",
+      "sha256": "ef75632ed7326de9957ee837eba8afd3144cd37c7dcc135909dcbf01472d543f"
+    },
+    "zero_seam_source": {
+      "path": "src/forge/product/ugi_production_zero_guidance_seam_v3.py",
+      "sha256": "13887ae17f224299c169ed5711d6964125992ae67f01b2dacf82b87b4c3f25e4"
+    },
+    "zero_seam_support": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/support_audits.json",
+      "sha256": "66bb85edaa29cb447cc43d359db07a19f092cc8e36110d689e743e191f02f316"
+    },
+    "zero_seam_tests": {
+      "path": "tests/test_ugi_production_zero_guidance_seam_v3.py",
+      "sha256": "116e82169ef1be365ee2d1b2e5f640ccb36ec8410707e120b86278a495c85e81"
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "activation_authorized": false,
+  "artifacts": {
+    "candidate_config": {
+      "path": "configs/route/graph2edits_proposal_backend_candidate_v1.json",
+      "sha256": "834d3714c7e7c2ee9b98e09ef07466b76f29038988c655a13e69a93eed4539ff",
+      "size_bytes": 3098
+    },
+    "checkpoint": {
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/checkpoint/epoch_123.pt",
+      "sha256": "e82cdff19ac1285755d4667ba6bc78e802053add8de6661eee0ba5323e44bcbe",
+      "size_bytes": 4994217
+    },
+    "qualification_module": {
+      "path": "src/forge/route/graph2edits_runtime_qualification.py",
+      "sha256": "5e4dd4713659ad1ff86779d8854ceb21f70261329be5c397559cf0b3cbdb3ee2",
+      "size_bytes": 17740
+    },
+    "qualification_script": {
+      "path": "scripts/qualify_graph2edits_runtime.py",
+      "sha256": "02a306820d6e26043a87bb9b37d139c7251a1c14e95aed735c4b94cb009c2286",
+      "size_bytes": 2556
+    },
+    "requirements_input": {
+      "path": "configs/route/graph2edits_runtime_py311_macos_arm64.in",
+      "sha256": "503cd2095678994360e8489489f35f97143170a807596a68146596de51eb3e84",
+      "size_bytes": 1087
+    },
+    "runtime_lock": {
+      "path": "configs/route/graph2edits_runtime_py311_macos_arm64.lock.txt",
+      "sha256": "ed01fbd93e959fe47b5589221d143a08a34405450a7944d397e6db324ec91f69",
+      "size_bytes": 31232
+    },
+    "syntheseus_graph2edits_wheel": {
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/syntheseus_graph2edits-0.2.0-py3-none-any.whl",
+      "sha256": "55656362070b429ba9b7ebd1bebfbfe3352db92f0ed263e9b368fd514a5d622d",
+      "size_bytes": 36822
+    },
+    "syntheseus_wheel": {
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/syntheseus-0.8.0-py3-none-any.whl",
+      "sha256": "c9bf6ea244badb209b7101a2d86b2b7ab40132b636e58bf09040dd2e7a66d32b",
+      "size_bytes": 185072
+    }
+  },
+  "checkpoint_load": {
+    "device": "cpu",
+    "max_edit_steps": 9,
+    "model_class": "syntheseus.reaction_prediction.inference.graph2edits.Graph2EditsModel",
+    "parameter_count": 1245599,
+    "passed": true
+  },
+  "dependency_resolution": {
+    "compatibility_decisions": {
+      "antlr4-python3-runtime": "4.9.3_hash_pinned_pure_python_sdist_required_by_omegaconf_2.3.0",
+      "numpy": "1.26.4_final_1x_to_avoid_numpy2_abi_transition",
+      "omegaconf": "2.3.0_replaces_metadata_incompatible_2.0.6",
+      "rdkit": "2024.3.6_python311_macos_arm64_wheel",
+      "torch": "2.2.2_from_Syntheseus_documented_environment"
+    },
+    "installed_versions": {
+      "antlr4-python3-runtime": "4.9.3",
+      "filelock": "3.32.2",
+      "fsspec": "2026.7.0",
+      "jinja2": "3.1.6",
+      "joblib": "1.5.3",
+      "markupsafe": "3.0.3",
+      "more-itertools": "11.1.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.6.1",
+      "numpy": "1.26.4",
+      "omegaconf": "2.3.0",
+      "pillow": "12.3.0",
+      "pyyaml": "6.0.3",
+      "rdkit": "2024.3.6",
+      "sympy": "1.14.0",
+      "syntheseus": "0.8.0",
+      "syntheseus-graph2edits": "0.2.0",
+      "torch": "2.2.2",
+      "tqdm": "4.70.0",
+      "typing-extensions": "4.16.0"
+    },
+    "installed_versions_sha256": "411920c00a7a0e4832427b55c4f23b4fa6896d912a0f6ebd429b4603dcb82dc9",
+    "local_wheel_versions": {
+      "syntheseus": "0.8.0",
+      "syntheseus-graph2edits": "0.2.0"
+    },
+    "locked_versions": {
+      "antlr4-python3-runtime": "4.9.3",
+      "filelock": "3.32.2",
+      "fsspec": "2026.7.0",
+      "jinja2": "3.1.6",
+      "joblib": "1.5.3",
+      "markupsafe": "3.0.3",
+      "more-itertools": "11.1.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.6.1",
+      "numpy": "1.26.4",
+      "omegaconf": "2.3.0",
+      "pillow": "12.3.0",
+      "pyyaml": "6.0.3",
+      "rdkit": "2024.3.6",
+      "sympy": "1.14.0",
+      "torch": "2.2.2",
+      "tqdm": "4.70.0",
+      "typing-extensions": "4.16.0"
+    },
+    "pip_check": {
+      "passed": true,
+      "result": "No broken requirements found."
+    }
+  },
+  "imports": {
+    "numpy": "1.26.4",
+    "omegaconf": "2.3.0",
+    "rdkit": "2024.03.6",
+    "torch": "2.2.2"
+  },
+  "payload_sha256": "c69258f32735f9512c3bf60c4ac7849053eeaeaad0abc18d0ce32eb506c84b39",
+  "platform": {
+    "device": "cpu",
+    "environment_locator": ".venv-graph2edits-py311-arm64",
+    "linux_gpu_qualified": false,
+    "machine": "arm64",
+    "macos_version": "26.5.2",
+    "python_implementation": "CPython",
+    "python_version": "3.11.13",
+    "runtime_id": "python311-macos-arm64-cpu",
+    "system": "Darwin"
+  },
+  "production_promotion_authorized": false,
+  "remaining_gates": [
+    "institutional artifact and patent-derived-data license review",
+    "frozen 120-target benchmark execution under separate authorization",
+    "production-device repeated-inference qualification"
+  ],
+  "schema_version": "forge.graph2edits_runtime_qualification.v1",
+  "scientific_authority": {
+    "may_close_route": false,
+    "may_create_route_evidence": false,
+    "may_enter_synthesis_value": false,
+    "may_support_performance_claim": false,
+    "proposal_only": true
+  },
+  "scope_guards": {
+    "candidate_backend_activated": false,
+    "frozen_120_target_benchmark_executed": false,
+    "performance_metrics_computed": false,
+    "proposal_or_value_logic_modified": false,
+    "sealed_holdouts_accessed": false
+  },
+  "smoke_inference": {
+    "byte_identical_normalized_outputs": true,
+    "executed": true,
+    "num_results_requested": 3,
+    "outputs": [
+      {
+        "opaque_model_score": 0.9935,
+        "reactants": [
+          "CCOC(=O)CBr"
+        ]
+      },
+      {
+        "opaque_model_score": 0.0064,
+        "reactants": [
+          "CCOC(=O)CCl"
+        ]
+      },
+      {
+        "opaque_model_score": 0.0001,
+        "reactants": [
+          "CCOC(=O)CO"
+        ]
+      }
+    ],
+    "repeat_count": 2,
+    "scientific_interpretation": "runtime_only_no_route_evidence_or_performance_claim",
+    "source": "hand-authored_nonbenchmark_runtime_smoke",
+    "target_smiles": "CCOC(=O)C"
+  },
+  "status": "local_cpu_import_checkpoint_and_nonbenchmark_smoke_passed"
+}

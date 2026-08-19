@@ -1,0 +1,106 @@
+{
+  "schema_version": "m0_10_flower_transfer_audit_config.v1",
+  "task": "M0-10 FlowER transfer pilot asset and supervision audit",
+  "seed": 20260730,
+  "generated_at_utc": "2026-07-30T00:00:00Z",
+  "registry_inputs": [
+    {
+      "label": "qualified_upstream_reaction_families",
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    {
+      "label": "qualified_ugi_reaction",
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  ],
+  "prospective_outcome_input": {
+    "label": "ugi3_precursor_capability",
+    "path": "results/m0_09/ugi3_precursor_capability.json",
+    "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+  },
+  "prior_local_evidence": [
+    {
+      "label": "may_2026_zero_shot_probe_memo",
+      "path": "../electron_flow_lipids/memos/11_flower_probe_results.md",
+      "sha256": "26e31e4293333cbf1daa3a2768161bc331bc8f44a74b727b9062941d24c7818d"
+    },
+    {
+      "label": "may_2026_probe_script",
+      "path": "../electron_flow_lipids/modal_apps/flower_probe.py",
+      "sha256": "0f0ce7ea540be917bb3e4980a82918ae8e4b7009a4140f6abcbdd230228b8581"
+    },
+    {
+      "label": "may_2026_diagnostic_script",
+      "path": "../electron_flow_lipids/modal_apps/flower_diagnostic.py",
+      "sha256": "fee6fb555913dabc591e2f772e2cdd0c3a3db748b30f297a635bb94873ab63c0"
+    }
+  ],
+  "required_assets": {
+    "source_code": {
+      "description": "A hash-pinned FlowER source checkout at an exact commit",
+      "candidate_paths": [
+        "data/vendor/FlowER",
+        "vendor/FlowER",
+        "../electron_flow_lipids/FlowER"
+      ]
+    },
+    "pretrained_checkpoint": {
+      "description": "FlowER v3 large checkpoint model.2880000_95.pt",
+      "candidate_paths": [
+        "data/vendor/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+        "checkpoints/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+        "../electron_flow_lipids/checkpoints/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt"
+      ],
+      "upstream_locator": {
+        "figshare_article_id": "28359407",
+        "figshare_version": 3,
+        "figshare_file_id": "55904912",
+        "archive_member": "flower_new_dataset/best_large_hyperparam/model.2880000_95.pt"
+      }
+    }
+  },
+  "target_classes": [
+    "aza_michael_amine_acrylate",
+    "epoxide_opening_amine",
+    "reductive_amination_amine_aldehyde"
+  ],
+  "mechanism_trajectory_fields": [
+    "elementary_mechanism_trajectories",
+    "bond_electron_trajectories",
+    "flower_trajectories"
+  ],
+  "pilot_contract": {
+    "curve_examples_per_class": [
+      0,
+      8,
+      16,
+      32
+    ],
+    "minimum_mechanism_trajectories_per_class": 32,
+    "reaction_class_holdout_required": true,
+    "frozen_holdout_before_fine_tuning": true,
+    "calibration": {
+      "target": "held_out_exact_forward_trajectory_correctness",
+      "reports": [
+        "reliability_table",
+        "expected_calibration_error",
+        "brier_score"
+      ],
+      "confidence_interval": "substrate-family bootstrap 95 percent interval"
+    },
+    "no_gpu_training_during_m0": true
+  },
+  "demotion_rule": {
+    "headline_requires_finetuning_improves_heldout_forward_consistency": true,
+    "headline_requires_prospective_conversion_spearman_ci_excludes_zero": true,
+    "otherwise_role": "orthogonal_consistency_check_only",
+    "deterministic_atom_mapped_verifier_load_bearing": true
+  },
+  "acquisition_boundary": {
+    "automatic_download_authorized": false,
+    "next_step": "Vendor an exact FlowER commit and the Figshare v3 checkpoint with license and SHA-256, then curate and freeze at least 32 elementary mechanism trajectories per target class before requesting any compute run.",
+    "prospective_step": "Evaluate conversion correlation only after a locked prospective synthesis ledger contains measured conversion outcomes; do not substitute literature yield or transform-validity labels."
+  }
+}

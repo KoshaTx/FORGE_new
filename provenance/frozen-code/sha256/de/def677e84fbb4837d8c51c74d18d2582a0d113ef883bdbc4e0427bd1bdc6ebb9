@@ -1,0 +1,209 @@
+{
+  "schema_version": "phase1_ugi_bounded_hybrid_route_cascade_config.v1",
+  "status": "frozen_before_bounded_hybrid_route_cascade",
+  "task": "Apply one identical, arm-blind, bounded hybrid L1/L2/L3 route cascade to every product in the route-blinded v2 shortlist without letting generation arm, cohort, authority tier or potency influence route search",
+  "assessment_as_of_utc": "2026-08-03T17:30:13Z",
+  "cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+  "seed": 20260805,
+  "output_directory": "results/phase1/ugi_bounded_hybrid_route_cascade_v1",
+  "procurement_snapshot": {
+    "frozen_snapshot_date": "2026-08-03",
+    "declared_comparison_horizon": {
+      "start_utc": "2026-08-03T17:30:13Z",
+      "end_utc": "2026-08-09T05:00:00Z",
+      "interval_semantics": "start_inclusive_end_exclusive"
+    },
+    "is_live_availability": false,
+    "refresh_required_before_panel_lock": true
+  },
+  "scope": {
+    "post_generation_route_assessment": true,
+    "assessment_before_candidate_lock": true,
+    "arm_blind_single_lane": true,
+    "guided_post_hoc_cache_split_inherited": false,
+    "identical_budget_all_arms_and_cohorts": true,
+    "proposal_engines_are_proposal_only": true,
+    "public_stock_solution_is_evidence": false,
+    "biological_model_calls": 0,
+    "potency_tilting": false,
+    "synthesis_tilting": false,
+    "generator_retraining": false,
+    "applicability_retuning": false,
+    "candidate_selection": false,
+    "prospective_panel_lock": false,
+    "preregistration_created": false,
+    "sealed_holdout_access": false
+  },
+  "inputs": {
+    "shortlist_result": {
+      "path": "results/phase1/ugi_production_route_shortlist_v2/result.json",
+      "sha256": "cd6dfb9ae9de1ea3164df74422de42b6b14ea0082e8df34a5de1325fc0a9cbfd"
+    },
+    "shortlist_ledger": {
+      "path": "results/phase1/ugi_production_route_shortlist_v2/shortlist.jsonl.gz",
+      "sha256": "d7b80c3d456ff56665d1c3c3f1e18a9bb9c7533864dfb03a0a92a6f0ba59bb7f"
+    },
+    "main_generation_result": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/result.json",
+      "sha256": "b2781e9d50c07dbe2653ded9ed34b735a274739ee6b4a94076edf924955f4726"
+    },
+    "main_generation_ledger": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/terminal_ledger.jsonl.gz",
+      "sha256": "913ca35cc221785328ce41f9caebb981029d83114d45ba634b28aa5e6f000a2d"
+    },
+    "branch_generation_result": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/result.json",
+      "sha256": "7a57853b307067fb53d237bc7115a11c04003ad24a2d08f3dffffe4d48d7992b"
+    },
+    "branch_generation_ledger": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/terminal_ledger.jsonl.gz",
+      "sha256": "287807bbf614d6b7bca40ace20661f61ae3ba29af64f4299dde23d28cdefd065"
+    },
+    "production_refit_result": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json",
+      "sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/checkpoint_best.pt",
+      "sha256": "3a3fbf2ad1e6a080bbba0476748d10e78de7cd5122e153d8fa7fc67b60823497"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "qualified_reaction_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "current_route_source": {
+      "path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json",
+      "sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+    },
+    "route_completion_utility": {
+      "path": "results/phase1/ugi_route_completion_utility_v1/result.json",
+      "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"
+    },
+    "terminal_rescoring_ledger": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+      "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+    },
+    "terminal_rescoring_result": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/result.json",
+      "sha256": "83e8c1bfc54f255ee6e2252fd77af5cb2694f2bb602b57ecc5a603c786faadfe"
+    },
+    "graded_evidence_ledger": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+    },
+    "graph2edits_runtime_qualification": {
+      "path": "configs/route/graph2edits_runtime_qualification_macos_arm64_py311_v1.json",
+      "sha256": "08b25e0a248a17ccb067cf94c7877a944b42cf6fd7b7e2f974fde242ce4a421f"
+    },
+    "graph2edits_training_corpus_manifest": {
+      "path": "configs/route/graph2edits_usp50k_training_corpus_manifest_v1.json",
+      "sha256": "f3c109121757e9ff2b7f63a29fa88f030b9753d3e786e6f21e6c6e55db8d2720"
+    },
+    "graph2edits_forward_resolver": {
+      "path": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+      "sha256": "3cb6012f4bbd73d198159ffcf1f765f45fc0cf526b2ed93e0a836fc7d01cdf04"
+    },
+    "aizynthfinder_runtime_manifest": {
+      "path": "configs/route/aizynthfinder_public_v4_4_1_diagnostic_macos_arm64_v1.json",
+      "sha256": "bb1af0ff80a22f8a1c5a785868aa58558f8fbd6aab1ebd607bda65f826d3206b"
+    }
+  },
+  "stages": {
+    "exact_evidence": {
+      "source": "frozen_cumulative_ugi3",
+      "target_context_policy": "component_intrinsic_empty_product_context.v1",
+      "budget_limits": {
+        "maximum_depth": 4,
+        "maximum_logical_planner_calls": 1,
+        "maximum_expansions": 4,
+        "maximum_product_candidates": 4,
+        "maximum_verifier_calls": 4,
+        "maximum_elapsed_milliseconds": 0
+      }
+    },
+    "graph2edits": {
+      "device": "cpu",
+      "maximum_proposals": 10,
+      "max_edit_steps": 9,
+      "repeat_count": 2
+    },
+    "aizynthfinder": {
+      "single_step": {
+        "expansion_policies": ["uspto", "ringbreaker"],
+        "filter_policies": ["uspto"],
+        "maximum_proposals": 10
+      },
+      "full_search": {
+        "stocks": ["zinc"],
+        "time_limit_seconds": 8,
+        "iteration_limit": 60,
+        "maximum_transforms": 6,
+        "maximum_routes_stored": 3
+      }
+    }
+  },
+  "expected_population": {
+    "rows": 256,
+    "unique_products": 256,
+    "arms": {
+      "branch_exploration": 64,
+      "broad_prior": 96,
+      "support_enriched": 96
+    },
+    "cohorts": {
+      "branched_oracle_scored_candidate": 32,
+      "branched_synthesis_exploration_no_potency_claim": 32,
+      "potency_exploitation": 192
+    },
+    "unique_components": {
+      "amine_head": 48,
+      "isocyanide_tail": 19,
+      "oxoester_aldehyde_body_tail": 91
+    },
+    "unique_components_total": 158
+  },
+  "reporting_only_fields": [
+    "arm_id",
+    "authority_tier",
+    "calibration_scale",
+    "biological_reason",
+    "cohort",
+    "conservative_high_potency",
+    "exact_refit_corpus_product",
+    "lcb90",
+    "oracle_mean",
+    "oracle_scored",
+    "pattern_id",
+    "potency_utility",
+    "realized_carbon_branch_class",
+    "stratum",
+    "stratum_rank"
+  ],
+  "decision_gates": {
+    "g0_preflight_population_and_hashes": true,
+    "g1_exact_constitutional_l1_all_rows": true,
+    "g2_arm_blind_cache_and_search": true,
+    "g3_identical_budget_all_arms": true,
+    "g4_proposal_only_cannot_close_route": true,
+    "g5_denominator_preservation": true,
+    "g6_report_balance_never_rebalance_by_dropping": true,
+    "g7_branch_sufficiency_recommendation_only": true
+  },
+  "nonclaims": [
+    "This is a bounded hybrid route cascade, not exhaustive retrosynthesis.",
+    "A Graph2Edits proposal is not route evidence.",
+    "An AiZynthFinder public-stock solution is not current procurement evidence.",
+    "An unresolved route is unresolved under the frozen bounded cascade, evidence and 3 August procurement snapshot; it is not proof of unsynthesizability.",
+    "Family-projected readiness is not an exact route dossier.",
+    "This artifact does not select candidates and does not lock a prospective panel.",
+    "Procurement availability is time dependent and must be refreshed before panel lock."
+  ]
+}

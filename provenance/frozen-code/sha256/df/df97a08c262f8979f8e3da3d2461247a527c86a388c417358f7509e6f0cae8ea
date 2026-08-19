@@ -1,0 +1,90 @@
+{
+  "schema_version": "m0_06_sparse_topology_feasibility_config.v2",
+  "seed": 20260730,
+  "inputs": {
+    "r0": {
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "split_assignments": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "split_manifest": {
+      "path": "data/splits/m0_03_constitutional/manifest.json",
+      "sha256": "948fc6c7fed8e28780f7538bedd37402ab4bdec16eb6b6f139aa0c4b9c194bb2"
+    }
+  },
+  "split_scheme": "source_study",
+  "expected_corpus_profile": {
+    "rows": 15229,
+    "records_at_most_64_atoms": 10702,
+    "records_at_most_96_atoms": 13879,
+    "maximum_heavy_atoms": 282
+  },
+  "declared_support": {
+    "elements": ["C", "N", "O", "S", "P", "F", "Si"],
+    "bond_types": ["SINGLE", "DOUBLE", "TRIPLE"],
+    "aromaticity_policy": "deterministic_kekulization_then_sanitization_restoration",
+    "stereochemistry_policy": "route_assigned_at_dossier_time",
+    "maximum_cycle_rank": 12
+  },
+  "model": {
+    "hidden_dim": 48,
+    "layers": 3,
+    "dropout": 0.0,
+    "maximum_closure_slots": 12
+  },
+  "training": {
+    "steps": 200,
+    "learning_rate": 0.0007,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "train_example_limit": 2048,
+    "cal_example_limit": 256,
+    "heldout_example_limit": 256,
+    "cpu_threads": 8
+  },
+  "sampling": {
+    "endpoint_samples": 48,
+    "steps": 20,
+    "batch_size": 4
+  },
+  "runs": [
+    {
+      "name": "sparse_n64",
+      "n_max": 64,
+      "batch_size": 8
+    },
+    {
+      "name": "sparse_n96",
+      "n_max": 96,
+      "batch_size": 4
+    }
+  ],
+  "scaling_dry_runs": [
+    {
+      "n_max": 128,
+      "batch_size": 2
+    },
+    {
+      "n_max": 192,
+      "batch_size": 1
+    },
+    {
+      "n_max": 282,
+      "batch_size": 1
+    }
+  ],
+  "decision_thresholds": {
+    "minimum_representation_roundtrip": 1.0,
+    "minimum_constitutional_roundtrip": 1.0,
+    "minimum_endpoint_validity": 0.5,
+    "minimum_endpoint_connectedness": 1.0,
+    "minimum_valid_and_connected": 0.5,
+    "minimum_n96_to_n64_training_throughput_ratio": 0.3,
+    "minimum_topology_novelty_among_valid": 0.5,
+    "maximum_peak_rss_bytes_at_282": 12884901888,
+    "maximum_terminal_constraint_repair_fraction": 0.1
+  }
+}

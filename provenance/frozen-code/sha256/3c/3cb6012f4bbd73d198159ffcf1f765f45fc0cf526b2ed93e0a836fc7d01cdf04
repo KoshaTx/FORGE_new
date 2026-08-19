@@ -1,0 +1,804 @@
+{
+  "activation_authorized": false,
+  "artifacts": {
+    "l2_exact_c16_registry": {
+      "path": "configs/route/phase1_ugi3_exact_c16_qualified_reactions_v1.json",
+      "sha256": "0e90a1bc3b27bb34d0b033102ab405b77f55d87bfe770575873653c4d4e2b1c2",
+      "size_bytes": 4049
+    },
+    "l2_exact_c16_step_ledger": {
+      "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93",
+      "size_bytes": 1817
+    },
+    "l2_exact_c18_registry": {
+      "path": "configs/route/phase1_ugi3_exact_c18_qualified_reactions_v1.json",
+      "sha256": "5b2122be7717b5850be489b8ed77eda26fc33913ae5545da6322d658db4bd65b",
+      "size_bytes": 3051
+    },
+    "l2_exact_c18_step_ledger": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+      "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b",
+      "size_bytes": 1501
+    },
+    "l2_exact_source_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e",
+      "size_bytes": 3378
+    },
+    "l2_exact_source_step_ledger": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38",
+      "size_bytes": 1671
+    },
+    "targeted_aldehyde_exact_evidence": {
+      "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
+      "sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb",
+      "size_bytes": 9956
+    },
+    "targeted_aldehyde_step_ledger": {
+      "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz",
+      "sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3",
+      "size_bytes": 768
+    },
+    "variant__ugi3_exact_c16_alkyne_zipper_v1": {
+      "path": "configs/route/variants/ugi3_exact_c16_alkyne_zipper_v1.json",
+      "sha256": "5932cccdcd74fcc0b693578633d2242b2d1394efd8d0fc9f72274b183e1221cb",
+      "size_bytes": 205
+    },
+    "variant__ugi3_exact_c16_c3_c13_chain_construction_v1": {
+      "path": "configs/route/variants/ugi3_exact_c16_c3_c13_chain_construction_v1.json",
+      "sha256": "e4479f37faec0c292aa4a0d64f10c6d65c7417291db376562ecfd595048409a1",
+      "size_bytes": 295
+    },
+    "variant__ugi3_exact_c16_primary_alcohol_oxidation_v1": {
+      "path": "configs/route/variants/ugi3_exact_c16_primary_alcohol_oxidation_v1.json",
+      "sha256": "1487799fcf8f938f46d259f9366c9c84f859157930e20d3491fe7bee0635bdad",
+      "size_bytes": 230
+    },
+    "variant__ugi3_exact_c16_thp_deprotection_v1": {
+      "path": "configs/route/variants/ugi3_exact_c16_thp_deprotection_v1.json",
+      "sha256": "ab5fd7ef55f7807ed2d529d2f634e7d40c49ca38083cd8b9293f86b51d6f4bce",
+      "size_bytes": 225
+    },
+    "variant__ugi3_exact_c18_alkyne_zipper_v1": {
+      "path": "configs/route/variants/ugi3_exact_c18_alkyne_zipper_v1.json",
+      "sha256": "1d174ef54de6b8324a8b7458d9fe8fdeafac906ff7230e7a6953be429a4c4f02",
+      "size_bytes": 205
+    },
+    "variant__ugi3_exact_c18_carboxylic_acid_reduction_v1": {
+      "path": "configs/route/variants/ugi3_exact_c18_carboxylic_acid_reduction_v1.json",
+      "sha256": "ce281f691ab4045a5a1cb6d59853bfc0e2268fabc6b758099162036bcbe15346",
+      "size_bytes": 226
+    },
+    "variant__ugi3_exact_c18_primary_alcohol_oxidation_v1": {
+      "path": "configs/route/variants/ugi3_exact_c18_primary_alcohol_oxidation_v1.json",
+      "sha256": "901f3a870ca32c0b275b589a59649370487fc3f5b021f477ffcd6cbca113fa06",
+      "size_bytes": 230
+    },
+    "variant__ugi3_upstream_amine_formylation_exact_source_v1": {
+      "path": "configs/route/variants/ugi3_upstream_amine_formylation_exact_source_v1.json",
+      "sha256": "a56e43f25a0e2fb057d5fa6150cdb3d7dad4740f553790e2cde582d3c9c699f9",
+      "size_bytes": 237
+    },
+    "variant__ugi3_upstream_esterification_exact_source_v1": {
+      "path": "configs/route/variants/ugi3_upstream_esterification_exact_source_v1.json",
+      "sha256": "9ec11bdc145437f58cc223acda4d001fd720a412fb4fc8adb1610770e8b3733e",
+      "size_bytes": 269
+    },
+    "variant__ugi3_upstream_formamide_dehydration_exact_source_v1": {
+      "path": "configs/route/variants/ugi3_upstream_formamide_dehydration_exact_source_v1.json",
+      "sha256": "2761b88f385cfb0734557d35bad7b099a9bf42dd16058f12d7cb5fdd506ccc3c",
+      "size_bytes": 245
+    },
+    "variant__ugi3_upstream_primary_alcohol_oxidation_exact_source_v1": {
+      "path": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b",
+      "size_bytes": 255
+    }
+  },
+  "budget": {
+    "budget_exhaustion_policy": "censor_before_partial_forward_execution",
+    "maximum_forward_calls_per_proposal": 50,
+    "maximum_products_per_assignment": 64
+  },
+  "purpose": "Independently screen proposal-only reactants against every exact-scope-admitted upstream L2 transform and role assignment.",
+  "resolver_id": "forge-independent-exact-scope-upstream-l2",
+  "resolver_version": "1",
+  "schema_version": "forge.l2_forward_resolver_config.v1",
+  "scientific_authority": {
+    "may_close_route": false,
+    "may_create_route_evidence": false,
+    "may_enter_synthesis_value": false,
+    "may_set_substrate_scope": false,
+    "may_set_synthesis_success_probability": false,
+    "proposal_screen_only": true
+  },
+  "scope_guards": {
+    "exact_forward_implies_scope_evidence": false,
+    "frozen_benchmark_executed": false,
+    "model_score_may_enter_v_syn": false,
+    "proposal_model_class_may_select_verifier": false,
+    "proposal_model_score_may_select_verifier": false,
+    "sealed_holdouts_accessed": false,
+    "ugi_l1_registry_admitted": false
+  },
+  "source_scope": {
+    "admission_unit": "exact_role_ordered_reactant_tuple_and_exact_target",
+    "development_inputs_only": true,
+    "duplicate_evidence_records_merge_without_duplicating_assignments": true,
+    "family_or_analogue_projection_admitted": false
+  },
+  "status": "frozen_inactive_not_benchmarked",
+  "summary": {
+    "exact_pair_admission_count": 56,
+    "registry_count": 3,
+    "transform_count": 11
+  },
+  "transforms": [
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-3716ad59dc568a77521a",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCC#CCO"
+          ],
+          "source_record_sha256s": [
+            "437f66b5b8849c7ee44130e32c2c9fe8423ceecb9651e500eb16f86bb932c592"
+          ],
+          "target_smiles": "C#CCCCCCCCCCCCCCCO"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c16_alkyne_zipper_v1",
+      "registry_artifact": "l2_exact_c16_registry",
+      "transform_sha256": "ba091b0e3b04e67dab7a5eed97136393462a1ac2555510104bc2bc2831e1f060",
+      "variant_artifact": "variant__ugi3_exact_c16_alkyne_zipper_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-3871ad2ea8618f7ba063",
+          "role_ordered_reactants": [
+            "C#CCOC1CCCCO1",
+            "CCCCCCCCCCCCCBr"
+          ],
+          "source_record_sha256s": [
+            "39d053f0e3b5e73fb8843686b87765055098065d4921069b00fc87ae626f2e17"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCC#CCOC1CCCCO1"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c16_c3_c13_chain_construction_v1",
+      "registry_artifact": "l2_exact_c16_registry",
+      "transform_sha256": "b9f1b28a3d42835cd9a0630949eb7bc6d40df2aa082d883f14d3621d5d5173fb",
+      "variant_artifact": "variant__ugi3_exact_c16_c3_c13_chain_construction_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-b7e1f7b3decafab75194",
+          "role_ordered_reactants": [
+            "C#CCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "0caef3c9d8cacf0f726b2ee4d69196f2a7834da0ad721ca78c89c5658eeee10f"
+          ],
+          "target_smiles": "C#CCCCCCCCCCCCCCC=O"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c16_primary_alcohol_oxidation_v1",
+      "registry_artifact": "l2_exact_c16_registry",
+      "transform_sha256": "ab97255d25ccfd61a06b8f9137bd29960f5753f89b829e640f671dd0489c56f8",
+      "variant_artifact": "variant__ugi3_exact_c16_primary_alcohol_oxidation_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-158c4788092271ea69c1",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCC#CCOC1CCCCO1"
+          ],
+          "source_record_sha256s": [
+            "2e9b15c31a1c6cfb3aa9f1ca4f4abfb24be64ef0701362e4c5e89dbb2949fbeb"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCC#CCO"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c16_thp_deprotection_v1",
+      "registry_artifact": "l2_exact_c16_registry",
+      "transform_sha256": "d461ff94531c6967565ff8e8de8c8da22dd640542ffaf076eb3c9adadacf9a7b",
+      "variant_artifact": "variant__ugi3_exact_c16_thp_deprotection_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-82908a5e439f12c99e3a",
+          "role_ordered_reactants": [
+            "CCCCCCCCC#CCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "e4ada48ea3f8383b292917537ca648ea846629e67eb3ede6aba503ec6139f773"
+          ],
+          "target_smiles": "C#CCCCCCCCCCCCCCCCCO"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c18_alkyne_zipper_v1",
+      "registry_artifact": "l2_exact_c18_registry",
+      "transform_sha256": "e0443b6a0c4cc5f5765284f63d8d5e88fc3550b38a8bfd006f28504115434ad5",
+      "variant_artifact": "variant__ugi3_exact_c18_alkyne_zipper_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-0e9ae3b3fbb7c9e817b5",
+          "role_ordered_reactants": [
+            "CCCCCCCCC#CCCCCCCCC(=O)O"
+          ],
+          "source_record_sha256s": [
+            "2b635fc0da15b7779b808f290e4fc33da22f4d3d52e79e691f0e23fa25e00469"
+          ],
+          "target_smiles": "CCCCCCCCC#CCCCCCCCCO"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c18_carboxylic_acid_reduction_v1",
+      "registry_artifact": "l2_exact_c18_registry",
+      "transform_sha256": "881673f62aaa3ccb6e71e218d4641d513ac2ede0ce1861a0f081bbadf402d579",
+      "variant_artifact": "variant__ugi3_exact_c18_carboxylic_acid_reduction_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-83266c3b7fc63b38e08b",
+          "role_ordered_reactants": [
+            "C#CCCCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "046f7392377ec346937b0dfea089553b9d02802a639b6c5b3db9cfa98e1c56f5"
+          ],
+          "target_smiles": "C#CCCCCCCCCCCCCCCCC=O"
+        }
+      ],
+      "reaction_id": "ugi3_exact_c18_primary_alcohol_oxidation_v1",
+      "registry_artifact": "l2_exact_c18_registry",
+      "transform_sha256": "9b4535d394fcc17d59f05ff13a56a6b32dbdf482de721d9e89758e6f59cee69c",
+      "variant_artifact": "variant__ugi3_exact_c18_primary_alcohol_oxidation_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-6228a16ef5d3d5fafce1",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "a5edd5e445a421e67e5dc97ba94e6c5951ac4ad219f6dc4acd2d359b67966ee3"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-b11434bdd386ee238c23",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "400dfea18dde7cc902968bbd4fe257f6003f213a13f53d0716f0939b8199d0f6"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-2a4d0df1e599ed2d2e98",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "517e6c49227e1b4035fb2a0eb7fad46d8963bed2fcd5eab1d5f4d73a6f690cc4"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-206905f8f102a573c6cd",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "15a7521348bf89615b76ed12b27eb7e0dbdc34c53c843c53aed75b14bc260e29"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-3ef5c488cf75934925b9",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "13db55b54f05b9c39f4d5d95d7ede2709bebdb920589a2705c0570e393214188"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-e3749d5a21735ccf5e92",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "9a297f92d0eabdefbac40a0513f18ce7d38652b1abc741b1c7bb84b77a674b47"
+          ],
+          "target_smiles": "CCCCCCCCCCCCNC=O"
+        },
+        {
+          "admission_id": "exact-pair-8186e2b40f643a6389bb",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCN"
+          ],
+          "source_record_sha256s": [
+            "c0f600375e8413ef2c7f014182895877ed9d3d5adfae878d6d17a89798212942"
+          ],
+          "target_smiles": "CCCCCCCCCCCNC=O"
+        }
+      ],
+      "reaction_id": "ugi3_upstream_amine_formylation_exact_source_v1",
+      "registry_artifact": "l2_exact_source_registry",
+      "transform_sha256": "c444f38235eb0ad25526d4d55d73a4c1a7808683f0fcba8317b796d18b7f71b6",
+      "variant_artifact": "variant__ugi3_upstream_amine_formylation_exact_source_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-eacbbff272979dd65106",
+          "role_ordered_reactants": [
+            "C#CCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "d8e5d558525f2c033756fc50c601362719c369988f15e8a37b99cddff576c248"
+          ],
+          "target_smiles": "C#CCCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-8d8411242235f65b218a",
+          "role_ordered_reactants": [
+            "C=CCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "7a5b7a0fdedb72e9952a7177664c5d5c4b6fc3a16fa586697477393905367fd9"
+          ],
+          "target_smiles": "C=CCCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-5da14bf9f75d6bedfb9e",
+          "role_ordered_reactants": [
+            "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "c072e28e71e25f9e278457e82a11bad3de66b74f01ad2c0e125b809fe4d119cb"
+          ],
+          "target_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-33946e6b164c44a298b6",
+          "role_ordered_reactants": [
+            "CCCCCC(C)CCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "396f9060878d8460aa92f1b78028d6b93d34efe2fe6682d575128f942bad7a81"
+          ],
+          "target_smiles": "CCCCCC(C)CCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-6bf33fbc4ce8719f42e6",
+          "role_ordered_reactants": [
+            "CCCCCC(C)CCC(=O)O",
+            "OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "5a512b1513b6ff118da33bba9e6a37289758723b409c27a61176924bfb0e89b7"
+          ],
+          "target_smiles": "CCCCCC(C)CCC(=O)OCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-0a18107ff7138a285fd0",
+          "role_ordered_reactants": [
+            "CCCCCCC/C=C/C(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "a000bcd69ceab970e3ccbdfd6c8e7ac2f5ca30b13f4f6c7bc696460e99a9de1e"
+          ],
+          "target_smiles": "CCCCCCC/C=C/C(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-5aa6fbcd2f8b858bb70a",
+          "role_ordered_reactants": [
+            "CCCCCCC/C=C/C(=O)O",
+            "OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "2c1302436856d76d271bedc24e4f8630f40f60b4a2b8a844f898a561d342ea21"
+          ],
+          "target_smiles": "CCCCCCC/C=C/C(=O)OCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-b595dc14f5e805c19b7a",
+          "role_ordered_reactants": [
+            "CCCCCCCC(=O)O",
+            "OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "93e5c36edd934a81afa47ec40bb0adc81265861f2cc83fb7f2560df959d76dfe"
+          ],
+          "target_smiles": "CCCCCCCC(=O)OCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-9ca5e33918d7f5cf2ea2",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "6335674b7ec201fb4b664e66293c2bd915c0165a05fbecfecad44df2ac27f21d"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-bb7a502af0aed0fd3157",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCC(=O)O",
+            "OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "79bea8f943b47109be004763a2dbfce11b07f0d844497d1ba2dc61277b12f7eb"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-b326f8b412312ce5a03b",
+          "role_ordered_reactants": [
+            "CCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "4d3e5271f7e75d6d3453459fc49e63d7022b0266559489b95e114e0457af8cd5"
+          ],
+          "target_smiles": "CCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-c25988bdee459f7abc49",
+          "role_ordered_reactants": [
+            "CCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "3d560e3ba60eb1f10201064846dcdab861a13bcaab47beb417b76ed2b2135388"
+          ],
+          "target_smiles": "CCCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-0fed3985482e390fb2b8",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "2869376f6b71479d3be2bfd49c0e59cd457bca45a517eef68821592307ba76cd"
+          ],
+          "target_smiles": "CCCCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-49757232943f6bb0d69a",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "8f30a05d1f177321e9528d5841f1f007a4d72279c1b655cc7b5c305e81646302"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCC(=O)OCCCCCCO"
+        },
+        {
+          "admission_id": "exact-pair-e5cd0c4e1d9aff098751",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCC(=O)O",
+            "OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "0c0c9b6692f1706cc2c2ab307cd41df798112acc2a03cded0a250ebc2d454b8a"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCC(=O)OCCCCCCO"
+        }
+      ],
+      "reaction_id": "ugi3_upstream_esterification_exact_source_v1",
+      "registry_artifact": "l2_exact_source_registry",
+      "transform_sha256": "404296c9a4e9e791c8fb13030a62c99e070b6b0f9bcf90100ee6658d701930d4",
+      "variant_artifact": "variant__ugi3_upstream_esterification_exact_source_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-52a477beb5ec9e4ee700",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "449b6f0127f6f8f74a48a3549754eea76fb52330186f20184b1ad7d3ea2957d9"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCC/C=C\\CCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-c99351fd006c8dd888f6",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "cfdebe155fa2234d237a3a9a1e6ff5ad3832e1326b6243d455c2c0c88b70887e"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCCCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-0371a52939c7d5940dbe",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "a59b49f449d8de500a77ec410ebfe22e197c6a104247fb8218d77c57a700e1ef"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-bbf3835dba5664b98ba6",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "23c46e625c03310ad85fce744ace6e9a9a911838cbed288d3b0faee5865d862c"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-bf3fa7f2219900f3f4b3",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "733770423be15c4b1416fc143719ecf67e139e67d9b71cb91e20673f72e23635"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-7de28693cfb5b196dbcd",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "5814336f76d132f903911e1e67d5d50c09affb02c50ff2c7dd5f049abee019b1"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCCC"
+        },
+        {
+          "admission_id": "exact-pair-ffb819935799e5bd8dad",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCNC=O"
+          ],
+          "source_record_sha256s": [
+            "495d60c52ca4887d843bad3e0943cbd28aba433fc2b0bd0d2a158b2e4c1e6c2f"
+          ],
+          "target_smiles": "[C-]#[N+]CCCCCCCCCCC"
+        }
+      ],
+      "reaction_id": "ugi3_upstream_formamide_dehydration_exact_source_v1",
+      "registry_artifact": "l2_exact_source_registry",
+      "transform_sha256": "8ed2d7e03bbf6dd05148409b5e3b735b4787f85312a86ab00c7a93c0e97f4892",
+      "variant_artifact": "variant__ugi3_upstream_formamide_dehydration_exact_source_v1"
+    },
+    {
+      "admissions": [
+        {
+          "admission_id": "exact-pair-0260c278b6f49330997f",
+          "role_ordered_reactants": [
+            "C#CCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "4028c6bf53306925c498eac88128ab3aa2860b4f07185d66a33f04fa079415e9"
+          ],
+          "target_smiles": "C#CCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-afb054027b67939d496c",
+          "role_ordered_reactants": [
+            "C=CCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "b831fa08a805e4e626f126ed9fcb011cc3182bd8b02721c4d21aa5f91455403d"
+          ],
+          "target_smiles": "C=CCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-068973aae7beb7949698",
+          "role_ordered_reactants": [
+            "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "f017ec4cd5ca816cc8998b2a706c1e474cd24c9cb0df4ca88179dbb1cae19f3d"
+          ],
+          "target_smiles": "CCCCC/C=C\\C/C=C\\CCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-41ea024b167e4c913adb",
+          "role_ordered_reactants": [
+            "CCCCCC(C)CCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "f7bb3772e573444dfb124c86749981198aa68b3626f438e484cf33a06d38865e"
+          ],
+          "target_smiles": "CCCCCC(C)CCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-507300660bc8ed471a11",
+          "role_ordered_reactants": [
+            "CCCCCC(C)CCC(=O)OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "d2d360b63abf89447d730f9277525e75f8720eb383f2c79bc907b9f8d542f13c"
+          ],
+          "target_smiles": "CCCCCC(C)CCC(=O)OCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-8898bd39d39255da48f8",
+          "role_ordered_reactants": [
+            "CCCCCCC/C=C/C(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "a88ff2a9b0d52b3da6c63b2b7d7a6a88983d4bf79c67e4b2ea0b5b480e0c9e50"
+          ],
+          "target_smiles": "CCCCCCC/C=C/C(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-932d43b4c5865bc5238f",
+          "role_ordered_reactants": [
+            "CCCCCCC/C=C/C(=O)OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "d72db8ceed8e18e1caf0d4cbc91e4f9919ff5430213505a7555449844a07b0ec"
+          ],
+          "target_smiles": "CCCCCCC/C=C/C(=O)OCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-4fe8933d7c6123ad6521",
+          "role_ordered_reactants": [
+            "CCCCCCCC(=O)OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "cb677eb882496f022e5c5b47da7248aed994319d37c1655ce2e8aaa798b233f9"
+          ],
+          "target_smiles": "CCCCCCCC(=O)OCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-8d6b728ae751e7f28815",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "855b3a6b7476c780f26d08f67b280c75a7047141f3a9bad558e79343226394f5"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-880f1faab02c55b92030",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCCO"
+          ],
+          "source_record_sha256s": [
+            "bb06f64ac31f91e350a74aab2f9c74fe8ca23734c80e720b33cbc9d34d49af9d"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC(=O)OCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-b875033552224b223b42",
+          "role_ordered_reactants": [
+            "CCCCCCCC/C=C\\CCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "0bcfcb6c69b688f86cf70a6da5741036480f052c448a2e05b056fae1d4f0d418"
+          ],
+          "target_smiles": "CCCCCCCC/C=C\\CCCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-325f65fc4f0b5b87194c",
+          "role_ordered_reactants": [
+            "CCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "f47ee8bb7ebe1857c7963b53a95705b19d683b7dd0e05809f49a353ccf52f905"
+          ],
+          "target_smiles": "CCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-c6cc1b5aa8d93b45946d",
+          "role_ordered_reactants": [
+            "CCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "8d865771ad1a1b29da93926d72bfbdd489074b83523cf54beee3f69b7cced641"
+          ],
+          "target_smiles": "CCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-f5949a1bf0c32389fe22",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "f21fa4d3acd5a9ca4032a68f86f92adf9f5bc27ce79c0b3310ddb68d726a78a8"
+          ],
+          "target_smiles": "CCCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-472a2352d907e3af9c33",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "f1e8c92b08048277e083d41e569b9b8f8a7316c8b62687378f528413eb783e22"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-c0de73b3b76c851bde45",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCC(=O)OCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "caa43692f4978b63e326f0d4efaa2b7a3aad86b65f104c350ea81ba64d52b329"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCC(=O)OCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-618459318b5d82528b03",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "14b971544e9436eab527025a77b2b539f999a4a9a048f230938e3ef322fad360"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-69b36c90ab9739cfe285",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "81300a23305e76ed3babc17e99cd701200e372ef62c8aa7093fb6b7147f6ac8e"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-cd1e993c1727a1ea238f",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "ee9b2b13d5ddce3d100f4010d9fce5fe763b2bd8dca9b6d764256cc7b1024383"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCCCC=O"
+        },
+        {
+          "admission_id": "exact-pair-fe5214e8a63db1464110",
+          "role_ordered_reactants": [
+            "CCCCCCCCCCCCCCCCO"
+          ],
+          "source_record_sha256s": [
+            "72243ceb70310309f5284e139176527ff5ca3e4e30b522fc0fe91e7b3c86caa6"
+          ],
+          "target_smiles": "CCCCCCCCCCCCCCCC=O"
+        }
+      ],
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "registry_artifact": "l2_exact_source_registry",
+      "transform_sha256": "af91d9fa1dfff4acaacf69259c16df9d83045b40ed2c58103f8384a6e154dcda",
+      "variant_artifact": "variant__ugi3_upstream_primary_alcohol_oxidation_exact_source_v1"
+    }
+  ]
+}

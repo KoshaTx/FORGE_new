@@ -1,0 +1,167 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_coverage_config.v4",
+  "assessment_policy": {
+    "purpose": "Nonselecting development-pool refresh after exact C18 L2/L3 qualification.",
+    "delta_scope": "One role-qualified exact identity only: oxoester_aldehyde_body_tail plus octadec-17-ynal.",
+    "reaction_family_scope_promoted": false,
+    "unknown_burden_imputed": false,
+    "synthesis_guidance_authorized": false,
+    "holdout_reveal_authorized": false
+  },
+  "inputs": {
+    "base_component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz",
+      "sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+    },
+    "base_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz",
+      "sha256": "258081bae46f5e3416e9c7efba4de01b60d5f0661503ce3b757793afbac79206"
+    },
+    "base_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json",
+      "sha256": "442e5c01f5c69b505a6767ff48dfb25b9f381233b5086509aec1e32c43163abf"
+    },
+    "exact_route_result": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+    },
+    "exact_route_assessment": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz",
+      "sha256": "d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b"
+    },
+    "exact_route_config": {
+      "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+      "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+    },
+    "audit_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_coverage_v4.py",
+      "sha256": "dec1230a80987993ab7c6d6eb8ebcd49ae1604ba66819703936fe57b393cefbc"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi3_fresh_pool_route_coverage_v4.py",
+      "sha256": "d2ac55f8552d0e2befd8ed4cf27c98ea9cbbebdff86748618dd72ea8ff932177"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_coverage_v4.py",
+      "sha256": "1c1488cd5f10fc0f0c0f370d60e32e29c769f6a742ccdd6d85750b0281361925"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    }
+  },
+  "expected_summary": {
+    "base_version": "fresh_pool_route_coverage_v3",
+    "exact_route_components_changed": 1,
+    "changed_component_keys": [
+      "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCCCC=O"
+    ],
+    "unique_components": 1919,
+    "unique_component_outcomes": {
+      "complete": 44,
+      "missing_knowledge": 1830,
+      "outside_support": 45
+    },
+    "unique_component_outcomes_by_role": {
+      "amine_head": {
+        "complete": 21,
+        "missing_knowledge": 811,
+        "outside_support": 29
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 324,
+        "outside_support": 5
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 17,
+        "missing_knowledge": 695,
+        "outside_support": 11
+      }
+    },
+    "unique_component_value_sources": {
+      "exact_c18_three_step_route_current_terminal": 1,
+      "existing_exact_current_head_terminal_refresh": 1,
+      "existing_exact_current_octadecylamine_terminal_refresh": 1,
+      "fresh_component_missing_route_knowledge": 1515,
+      "hybrid_registry_assessment": 86,
+      "new_exact_current_tail_terminal": 1,
+      "v3_exact_overlay_or_replay": 314
+    },
+    "component_occurrence_outcomes": {
+      "complete": 3968,
+      "missing_knowledge": 6776,
+      "outside_support": 1181
+    },
+    "component_occurrence_outcomes_by_role": {
+      "amine_head": {
+        "complete": 1281,
+        "missing_knowledge": 2462,
+        "outside_support": 232
+      },
+      "isocyanide_tail": {
+        "complete": 1683,
+        "missing_knowledge": 1755,
+        "outside_support": 537
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 1004,
+        "missing_knowledge": 2559,
+        "outside_support": 412
+      }
+    },
+    "component_occurrences_by_value_source": {
+      "exact_c18_three_step_route_current_terminal": 107,
+      "existing_exact_current_head_terminal_refresh": 21,
+      "existing_exact_current_octadecylamine_terminal_refresh": 9,
+      "fresh_component_missing_route_knowledge": 2637,
+      "hybrid_registry_assessment": 1036,
+      "new_exact_current_tail_terminal": 120,
+      "v3_exact_overlay_or_replay": 7995
+    },
+    "exact_l1_products": 3975,
+    "product_outcomes_before": {
+      "complete": 172,
+      "noncomplete": 3803
+    },
+    "product_outcomes_after": {
+      "complete": 185,
+      "noncomplete": 3790
+    },
+    "newly_complete_products": 13,
+    "target_occurrences": {
+      "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCCCC=O": 107
+    },
+    "products_by_route_complete_component_count": {
+      "0": 1252,
+      "1": 1663,
+      "2": 875,
+      "3": 185
+    },
+    "complete_component_count_transitions": {
+      "0_to_0": 1252,
+      "0_to_1": 55,
+      "1_to_1": 1608,
+      "1_to_2": 39,
+      "2_to_2": 836,
+      "2_to_3": 13,
+      "3_to_3": 172
+    },
+    "product_outcomes_by_structural_provenance": {
+      "product_contains_admitted_transferred_or_expanded_known_component": {
+        "complete": 55,
+        "noncomplete": 451
+      },
+      "product_contains_catalog_absent_component": {
+        "complete": 13,
+        "noncomplete": 3139
+      },
+      "product_uses_only_original_ugi_components": {
+        "complete": 117,
+        "noncomplete": 200
+      }
+    },
+    "non_null_scalar_values": 0,
+    "non_null_success_probabilities": 0
+  }
+}
