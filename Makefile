@@ -113,6 +113,14 @@ verify:
 verify-partial:
 	python3 scripts/vendor.py --verify --allow-partial
 
+# Re-hash every input a result artifact declares. Drift means a supposedly-frozen byte moved and
+# is always fatal; absence is reported but tolerated, because many pinned inputs live only on the
+# workstation that produced them. Run this after any refactor.
+verify-pins:
+	python3 scripts/verify_artifact_pins.py --expect-verified $(EXPECT_PINS)
+
+EXPECT_PINS ?= 508
+
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py
 

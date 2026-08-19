@@ -21,7 +21,7 @@ torch = ["torch>=2.2", "torch-geometric>=2.5"]
 # M0-07 oracle matrix and released-checkpoint diagnostics.
 oracle = ["torch>=2.2", "xgboost>=2.0", "matplotlib>=3.8"]
 report = ["reportlab>=5.0", "pypdf>=6.0"]
-dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "black>=24.3"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "black>=24.3", "mypy>=1.11"]
 
 [build-system]
 requires = ["hatchling"]
@@ -41,6 +41,30 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W", "UP"]
 ignore = ["E501"]
+
+[tool.mypy]
+# Annotation coverage is already near-total (99.4% of returns, 100% of parameters); what is thin
+# is the modelling -- dict[str, Any] appears ~2,000 times and there are no NewTypes. So this
+# starts permissive against the existing tree and is ratcheted as modules migrate onto forge.core.
+# Do not turn on the strict family globally: it would report thousands of errors at once and stop
+# being a signal. Tighten per package instead, via the overrides below.
+# No python_version pin: the project supports >=3.10, but pinning 3.10 here makes mypy reject the
+# numpy stubs shipped for the 3.14 interpreter this venv uses. Version-compatibility is a ruff
+# concern (target-version below); mypy runs against whatever interpreter is active.
+files = ["src/forge"]
+ignore_missing_imports = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+# New code is held to the standard the rest is moving toward. Everything in forge.core is written
+# after this config exists, so there is no legacy to grandfather.
+module = "forge.core.*"
+disallow_untyped_defs = true
+disallow_any_generics = true
+strict_equality = true
+warn_return_any = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -21,6 +21,7 @@ import sys
 import tempfile
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 REPO = Path(__file__).resolve().parents[1]
 VENDOR = REPO / "data" / "vendor"
@@ -143,8 +144,7 @@ REMOTE_ASSETS: dict[str, tuple[str, str]] = {
     # Both AGILE assets were originally recorded as local-only, but the published article and
     # the authors' repository serve the identical bytes. Verified against the pinned hashes.
     "AGILE_smiles_with_value_group.csv": (
-        "https://raw.githubusercontent.com/bowang-lab/AGILE/main/"
-        "AGILE_smiles_with_value_group.csv",
+        "https://raw.githubusercontent.com/bowang-lab/AGILE/main/AGILE_smiles_with_value_group.csv",
         "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686",
     ),
     "agile_supplementary_information.pdf": (
@@ -245,9 +245,7 @@ def sha256(path: Path, chunk: int = 1 << 20) -> str:
 
 
 def _git(repo: Path, *args: str) -> subprocess.CompletedProcess[bytes]:
-    return subprocess.run(
-        ["git", "-C", str(repo), *args], capture_output=True, check=False
-    )
+    return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, check=False)
 
 
 def git_blob(repo: Path, rev: str, path: str, expected: str) -> bytes | None:
@@ -273,9 +271,31 @@ def git_blob(repo: Path, rev: str, path: str, expected: str) -> bytes | None:
     return None
 
 
-def do_vendor(allow_partial: bool) -> int:
+def do_vendor(allow_partial: bool, refresh_provenance: bool = False) -> int:
     VENDOR.mkdir(parents=True, exist_ok=True)
     missing, entries = [], {}
+
+    # MANIFEST.json is itself a pinned input of results/m0_02/result.json, so rewriting it on a
+    # re-vendor breaks that pin even when every asset is byte-identical. Entries are therefore
+    # reused verbatim whenever the asset still hashes to what the manifest already records; only
+    # a genuine content change, or an explicit --refresh-provenance, rewrites one.
+    prior: dict[str, dict[str, Any]] = {}
+    if MANIFEST.exists():
+        try:
+            prior = json.loads(MANIFEST.read_text())
+        except ValueError:
+            prior = {}
+
+    def entry(name: str, digest: str, size: int, source: dict[str, str]) -> dict[str, Any]:
+        recorded = prior.get(name)
+        if not refresh_provenance and recorded and recorded.get("sha256") == digest:
+            return recorded
+        return {
+            **source,
+            "sha256": digest,
+            "bytes": size,
+            "retrieved_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+        }
 
     for name, (rev, path, expected) in GIT_ASSETS.items():
         blob = git_blob(COMPOSE_REPO, rev, path, expected)
@@ -283,12 +303,9 @@ def do_vendor(allow_partial: bool) -> int:
             missing.append((name, f"{COMPOSE_REPO}@{rev or 'any'}:{path}", expected))
             continue
         (VENDOR / name).write_bytes(blob)
-        entries[name] = {
-            "source_git": f"{COMPOSE_REPO}@{rev}:{path}",
-            "sha256": expected,
-            "bytes": len(blob),
-            "retrieved_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        }
+        entries[name] = entry(
+            name, expected, len(blob), {"source_git": f"{COMPOSE_REPO}@{rev}:{path}"}
+        )
         print(f"  vendored {name}  ({len(blob):,} bytes, from git)")
 
     for name, (src, expected) in ASSETS.items():
@@ -300,12 +317,7 @@ def do_vendor(allow_partial: bool) -> int:
             print(f"FAIL {name}: source hash mismatch\n  expected {expected}\n  actual   {actual}")
             return 1
         shutil.copy2(src, VENDOR / name)
-        entries[name] = {
-            "source_path": str(src),
-            "sha256": actual,
-            "bytes": src.stat().st_size,
-            "retrieved_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        }
+        entries[name] = entry(name, actual, src.stat().st_size, {"source_path": str(src)})
         print(f"  vendored {name}  ({src.stat().st_size:,} bytes)")
 
     for name, (url, expected) in REMOTE_ASSETS.items():
@@ -329,12 +341,7 @@ def do_vendor(allow_partial: bool) -> int:
             return 1
         target = VENDOR / name
         temporary_path.replace(target)
-        entries[name] = {
-            "source_url": url,
-            "sha256": actual,
-            "bytes": target.stat().st_size,
-            "retrieved_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        }
+        entries[name] = entry(name, actual, target.stat().st_size, {"source_url": url})
         print(f"  vendored {name}  ({target.stat().st_size:,} bytes)")
 
     if missing:
@@ -360,6 +367,14 @@ def do_vendor(allow_partial: bool) -> int:
             if name not in entries:
                 entries[name] = meta
                 carried += 1
+
+    # MANIFEST.json is a pinned input of results/m0_02/result.json, and the pinned bytes were
+    # serialized with a key order this writer no longer reproduces. Rewriting a semantically
+    # identical file would therefore break that pin for no gain, so an unchanged manifest is
+    # left untouched. Only a real content change is written.
+    if prior == entries:
+        print(f"\n{MANIFEST.relative_to(REPO)} unchanged ({len(entries)} assets); left as-is")
+        return 0
 
     MANIFEST.write_text(json.dumps(entries, indent=2, sort_keys=True) + "\n")
     suffix = f" ({carried} carried forward from the previous manifest)" if carried else ""
@@ -403,12 +418,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--verify", action="store_true", help="verify only; do not copy")
     ap.add_argument(
+        "--refresh-provenance",
+        action="store_true",
+        help="rewrite source and timestamp fields even when an asset is unchanged",
+    )
+    ap.add_argument(
         "--allow-partial",
         action="store_true",
         help="permit missing optional assets (the 96 MB R1 file)",
     )
     args = ap.parse_args()
-    return do_verify(args.allow_partial) if args.verify else do_vendor(args.allow_partial)
+    return (
+        do_verify(args.allow_partial)
+        if args.verify
+        else do_vendor(args.allow_partial, args.refresh_provenance)
+    )
 
 
 if __name__ == "__main__":
