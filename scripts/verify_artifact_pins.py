@@ -59,6 +59,19 @@ class Report:
         return not self.drift
 
 
+def load_moves(path: Path) -> dict[str, str]:
+    """Old path -> new path, for files a restructure relocated.
+
+    A pin binds a path and a digest. Moving a file changes the path but not the bytes, so without
+    this the verifier reports the input as absent and the pin count silently drops -- which is what
+    made restructuring look impossible. Resolving through the map keeps the content check exactly as
+    strict: a moved file whose bytes changed still fails.
+    """
+    if not path.is_file():
+        return {}
+    return dict(json.loads(path.read_text()).get("moves", {}))
+
+
 def load_baseline(path: Path) -> dict[str, str]:
     """Known-drifted pins: path -> the current hash that is accepted.
 
@@ -120,8 +133,13 @@ def collect_pins(roots: tuple[Path, ...]) -> list[Pin]:
     return pins
 
 
-def verify(pins: list[Pin], baseline: dict[str, str] | None = None) -> Report:
+def verify(
+    pins: list[Pin],
+    baseline: dict[str, str] | None = None,
+    moves: dict[str, str] | None = None,
+) -> Report:
     baseline = baseline or {}
+    moves = moves or {}
     report = Report()
     # One file is typically pinned by several artifacts. Hash it once.
     by_path: dict[str, list[Pin]] = defaultdict(list)
@@ -132,7 +150,7 @@ def verify(pins: list[Pin], baseline: dict[str, str] | None = None) -> Report:
         if path.startswith(FOREIGN_PREFIXES):
             report.foreign.extend(declarations)
             continue
-        resolved = REPO / path
+        resolved = REPO / moves.get(path, path)
         if not resolved.is_file():
             report.absent.extend(declarations)
             continue
@@ -173,11 +191,17 @@ def main() -> int:
         default=REPO / "docs" / "known_artifact_drift.json",
         help="known-drifted pins to accept; anything not listed still fails",
     )
+    parser.add_argument(
+        "--moves",
+        type=Path,
+        default=REPO / "docs" / "artifact_path_moves.json",
+        help="old-path to new-path map for files a restructure relocated",
+    )
     parser.add_argument("--json", action="store_true", help="emit machine-readable output")
     args = parser.parse_args()
 
     roots = tuple(args.root) if args.root else (REPO / "results", REPO / "docs" / "provenance")
-    report = verify(collect_pins(roots), load_baseline(args.baseline))
+    report = verify(collect_pins(roots), load_baseline(args.baseline), load_moves(args.moves))
 
     distinct = len({pin.path for pin in report.verified})
     if args.json:

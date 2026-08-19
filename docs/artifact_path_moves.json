@@ -1,0 +1,5 @@
+{
+  "schema_version": "forge.artifact_path_moves.v1",
+  "why": "A pin binds {path, sha256}. A restructure changes paths without changing bytes, so the verifier resolves through this map. The digest is still checked against the recorded value, so a moved file whose contents changed still fails. Add an entry in the same commit that moves the file.",
+  "moves": {}
+}
