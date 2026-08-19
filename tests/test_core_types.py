@@ -24,9 +24,37 @@ def test_newtypes_are_free_at_runtime() -> None:
     assert isinstance(Smiles("CCO"), str)
 
 
-def test_role_names_are_the_three_ugi_precursors() -> None:
-    """AGILE-type Ugi-3CR: amine, aldehyde, isocyanide, and no carboxylic-acid component."""
-    assert {role.value for role in RoleName} == {"amine", "aldehyde", "isocyanide"}
+def test_role_names_serialize_the_spelling_the_artifacts_use() -> None:
+    """The long form dominates serialized data ~500:1, so it is what round-trips."""
+    assert {role.value for role in RoleName} == {
+        "amine_head",
+        "oxoester_aldehyde_body_tail",
+        "isocyanide_tail",
+    }
+
+
+def test_role_names_parse_either_spelling() -> None:
+    """Two vocabularies exist across 17 declarations; both must resolve to one role."""
+    for long_form, short_form in (
+        ("amine_head", "amine"),
+        ("oxoester_aldehyde_body_tail", "aldehyde"),
+        ("isocyanide_tail", "isocyanide"),
+    ):
+        assert RoleName.parse(long_form) is RoleName.parse(short_form)
+
+
+def test_role_short_spellings_round_trip() -> None:
+    for role in RoleName:
+        assert RoleName.parse(role.short) is role
+        assert RoleName.parse(role.value) is role
+
+
+def test_unknown_role_spelling_is_rejected() -> None:
+    """A third spelling must fail loudly rather than pass through as a string."""
+    import pytest
+
+    with pytest.raises(ValueError, match="unknown Ugi role"):
+        RoleName.parse("acid")
 
 
 def test_support_tiers_use_the_current_vocabulary() -> None:
@@ -40,7 +68,7 @@ def test_synthesis_layers_are_ordered_assembly_to_procurement() -> None:
 
 def test_enums_compare_equal_to_their_string_values() -> None:
     """Str-valued so they can be adopted without rewriting existing comparisons or JSON."""
-    assert RoleName.ALDEHYDE == "aldehyde"
+    assert RoleName.ALDEHYDE == "oxoester_aldehyde_body_tail"
     assert SupportTier.E2 == "E2"
     assert EvidenceStatus.VERIFIED_FROZEN == "verified_frozen"
     assert ClaimClass.COMPUTED == "Computed"

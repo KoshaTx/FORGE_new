@@ -52,14 +52,43 @@ class RoleName(str, Enum):
     """The three Ugi-3CR precursor roles.
 
     AGENTS.md fixes the variant as an AGILE-type amine-aldehyde-isocyanide three-component
-    reaction with no carboxylic-acid reactant, so this vocabulary is closed. Note the ester in
-    AGILE lipids comes from the aldehyde component, which is why ester construction is an L2
-    problem rather than part of final assembly.
+    reaction with no carboxylic-acid reactant, so the vocabulary is closed. Note the ester comes
+    from the aldehyde component, which is why ester construction is an L2 problem rather than part
+    of final assembly -- hence the aldehyde role's long name.
+
+    **Two spellings exist and both are load-bearing.** The role vocabulary is declared 17 times
+    across the package under four constant names (`ROLE_NAMES`, `ROLES`, `ROLE_ORDER`, `VIEWS`) in
+    two incompatible forms. The long form dominates the serialized data by roughly 500:1, so it is
+    the enum's value and what round-trips to an artifact. The short form appears in a comparable
+    number of *modules* but barely reaches disk. No module mixes them, so the split is clean along
+    module lines — which is exactly why a third spelling would go unnoticed without this type.
+
+    Parse either with `RoleName.parse`; serialize only the long form.
     """
 
-    AMINE = "amine"
-    ALDEHYDE = "aldehyde"
-    ISOCYANIDE = "isocyanide"
+    AMINE = "amine_head"
+    ALDEHYDE = "oxoester_aldehyde_body_tail"
+    ISOCYANIDE = "isocyanide_tail"
+
+    @property
+    def short(self) -> str:
+        """The abbreviated spelling, for the modules and configs that use it."""
+        return {"amine_head": "amine", "oxoester_aldehyde_body_tail": "aldehyde"}.get(
+            self.value, "isocyanide"
+        )
+
+    @classmethod
+    def parse(cls, value: str) -> RoleName:
+        """Accept either spelling. Raises on anything else rather than guessing."""
+        for role in cls:
+            if value == role.value or value == role.short:
+                return role
+        raise ValueError(f"unknown Ugi role {value!r}; expected one of {cls.spellings()}")
+
+    @classmethod
+    def spellings(cls) -> tuple[str, ...]:
+        """Every accepted spelling, long and short, for error messages and validation."""
+        return tuple(s for role in cls for s in (role.value, role.short))
 
 
 class SupportTier(str, Enum):
