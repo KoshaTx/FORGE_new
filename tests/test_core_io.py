@@ -23,7 +23,9 @@ from forge.core.io import (
     iter_csv,
     jsonl_bytes,
     read_csv,
+    read_csv_rows,
     read_json,
+    read_json_object,
     read_jsonl,
     stable_json,
     write_csv,
@@ -205,3 +207,101 @@ def test_gzip_bytes_matches_stdlib_decompression() -> None:
     assert gzip.decompress(gzip_bytes(b"payload")) == b"payload"
     with gzip.GzipFile(fileobj=io.BytesIO(gzip_bytes(b"payload"))) as handle:
         assert handle.read() == b"payload"
+
+
+# ------------------------------------------------------------------ reading with a domain error
+
+
+class DomainError(ValueError):
+    """Stands in for the ~120 module-specific error classes the local readers raise."""
+
+
+def test_read_json_object_returns_the_document(tmp_path: Path) -> None:
+    target = tmp_path / "config.json"
+    target.write_text('{"schema_version": "v1", "n": 2}')
+    assert read_json_object(target, error=DomainError) == {"schema_version": "v1", "n": 2}
+
+
+def test_read_json_object_handles_gzip(tmp_path: Path) -> None:
+    target = tmp_path / "config.json.gz"
+    target.write_bytes(gzip_bytes(b'{"a": 1}'))
+    assert read_json_object(target, error=DomainError) == {"a": 1}
+
+
+@pytest.mark.parametrize(
+    ("name", "payload"),
+    [("missing.json", None), ("bad.json", b"{not json"), ("empty.json", b"")],
+)
+def test_read_json_object_raises_the_declared_error(
+    tmp_path: Path, name: str, payload: bytes | None
+) -> None:
+    target = tmp_path / name
+    if payload is not None:
+        target.write_bytes(payload)
+    with pytest.raises(DomainError):
+        read_json_object(target, error=DomainError)
+
+
+@pytest.mark.parametrize("payload", [b"[1, 2, 3]", b'"a string"', b"7", b"null"])
+def test_read_json_object_rejects_a_non_object(tmp_path: Path, payload: bytes) -> None:
+    """121 of 122 local copies assert the parsed value is an object; that is the contract."""
+    target = tmp_path / "doc.json"
+    target.write_bytes(payload)
+    with pytest.raises(DomainError, match="must contain a JSON object"):
+        read_json_object(target, error=DomainError)
+
+
+def test_read_json_object_preserves_the_original_exception(tmp_path: Path) -> None:
+    """Losing __cause__ turns 'the config is invalid' into a dead end."""
+    with pytest.raises(DomainError) as caught:
+        read_json_object(tmp_path / "absent.json", error=DomainError)
+    assert isinstance(caught.value.__cause__, FileNotFoundError)
+
+    bad = tmp_path / "bad.json"
+    bad.write_bytes(b"{not json")
+    with pytest.raises(DomainError) as caught:
+        read_json_object(bad, error=DomainError)
+    assert isinstance(caught.value.__cause__, json.JSONDecodeError)
+
+
+def test_read_json_object_label_names_the_input(tmp_path: Path) -> None:
+    with pytest.raises(DomainError, match="frozen split manifest"):
+        read_json_object(tmp_path / "absent.json", error=DomainError, label="frozen split manifest")
+
+
+def test_read_json_object_defaults_to_valueerror(tmp_path: Path) -> None:
+    with pytest.raises(ValueError):
+        read_json_object(tmp_path / "absent.json")
+
+
+def test_read_csv_rows_returns_rows(tmp_path: Path) -> None:
+    target = tmp_path / "ledger.csv.gz"
+    write_csv(target, ROWS, FIELDS)
+    assert read_csv_rows(target, error=DomainError) == [dict(row) for row in ROWS]
+
+
+def test_read_csv_rows_raises_the_declared_error_when_absent(tmp_path: Path) -> None:
+    with pytest.raises(DomainError) as caught:
+        read_csv_rows(tmp_path / "absent.csv", error=DomainError)
+    assert isinstance(caught.value.__cause__, FileNotFoundError)
+
+
+def test_read_csv_rows_reports_every_missing_field_at_once(tmp_path: Path) -> None:
+    """A caller fixing a schema mismatch should see the whole gap, not the first item."""
+    target = tmp_path / "ledger.csv"
+    write_csv(target, ROWS, FIELDS)
+    with pytest.raises(DomainError, match=r"missing fields \['role', 'sha256'\]"):
+        read_csv_rows(target, error=DomainError, required_fields=["id", "role", "sha256"])
+
+
+def test_read_csv_rows_accepts_present_fields(tmp_path: Path) -> None:
+    target = tmp_path / "ledger.csv"
+    write_csv(target, ROWS, FIELDS)
+    assert len(read_csv_rows(target, error=DomainError, required_fields=["id", "smiles"])) == 3
+
+
+def test_read_csv_rows_treats_an_empty_ledger_as_missing_every_field(tmp_path: Path) -> None:
+    target = tmp_path / "empty.csv"
+    target.write_text("")
+    with pytest.raises(DomainError, match="missing fields"):
+        read_csv_rows(target, error=DomainError, required_fields=["id"])

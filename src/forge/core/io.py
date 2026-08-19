@@ -133,6 +133,75 @@ def jsonl_bytes(records: Iterable[Any]) -> bytes:
     return "".join(f"{stable_json(record)}\n" for record in records).encode()
 
 
+# ------------------------------------------------------------------- reading with a domain error
+#
+# The 182 local `_load_json` and `_read_csv` copies cannot be replaced by the plain readers above,
+# because each raises its module's own exception type and callers -- including tests -- catch that
+# type. So the error class is a parameter. A survey of all 182 shaped the rest:
+#
+#   120 distinct raised classes         -> `error` must be supplied by the caller
+#   110/122 and 24/60 take a `label`    -> `label` names the input in the message, defaulting to
+#                                          the path, which is what the label-less copies effectively do
+#   121/122 `_load_json` copies assert  -> requiring a JSON object is the contract, not an extra;
+#     the parsed value is an object        that is why this is `read_json_object`, not `read_json`
+#   10/60 `_read_csv` copies check      -> `required_fields`, off by default
+#     for required columns
+#
+# The caught sets vary but nest: `FileNotFoundError` is an `OSError`, and both `JSONDecodeError`
+# and `UnicodeDecodeError` are `ValueError`s. Each function catches the union of what the copies
+# caught, listed explicitly rather than as bare `ValueError` so an unrelated failure still escapes.
+#
+# Messages are core's, not each module's. Reproducing ~20 message templates across 120 error classes
+# is not something one function can do, so migrating a consumer changes its message text even though
+# the exception type is preserved. That is why migration is a separate reviewed step.
+
+
+def read_json_object(
+    path: Path,
+    *,
+    error: type[Exception] = ValueError,
+    label: str | None = None,
+) -> dict[str, Any]:
+    """Read a JSON object, raising `error` if it is missing, malformed, or not an object.
+
+    The original exception is preserved as `__cause__`; losing it would turn "the config is
+    invalid" into a dead end when the real cause was a truncated file two directories away.
+    """
+    name = label or str(path)
+    try:
+        value = read_json(path)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise error(f"{name} could not be read: {path}: {exc}") from exc
+    if not isinstance(value, dict):
+        raise error(f"{name} must contain a JSON object: {path}")
+    return value
+
+
+def read_csv_rows(
+    path: Path,
+    *,
+    error: type[Exception] = ValueError,
+    label: str | None = None,
+    required_fields: Sequence[str] | None = None,
+) -> list[dict[str, str]]:
+    """Read CSV rows, raising `error` if the file is unreadable or lacks a required column.
+
+    Missing columns are reported together rather than one at a time, so a caller fixing a schema
+    mismatch sees the whole gap in one message.
+    """
+    name = label or str(path)
+    try:
+        rows = read_csv(path)
+    except (OSError, UnicodeDecodeError, csv.Error) as exc:
+        raise error(f"{name} could not be read: {path}: {exc}") from exc
+    if required_fields:
+        present = set(rows[0]) if rows else set()
+        missing = [field for field in required_fields if field not in present]
+        if missing:
+            raise error(f"{name} is missing fields {sorted(missing)}: {path}")
+    return rows
+
+
 # --------------------------------------------------------------------------------- writing
 
 
@@ -185,7 +254,9 @@ __all__ = [
     "jsonl_bytes",
     "pretty_json_bytes",
     "read_csv",
+    "read_csv_rows",
     "read_json",
+    "read_json_object",
     "read_jsonl",
     "stable_json",
     "stable_json_bytes",
