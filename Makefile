@@ -1,4 +1,4 @@
-.PHONY: help vendor vendor-partial verify verify-partial m0-03-r0-reconcile m0-03 m0-03-reproduce \
+.PHONY: help vendor vendor-partial verify verify-partial verify-pins verify-pins-code archive-pins m0-03-r0-reconcile m0-03 m0-03-reproduce \
 	m0-04 m0-05 m0-06 \
 	m0-06-sparse m0-06-sparse-full-support m0-06-ring-support \
 	m0-05-score \
@@ -28,17 +28,22 @@
 	phase1-v5-canonical-representation-audit phase1-v5-tree-traversal-comparison \
 	phase1-product-overfit phase1-product-smoke phase1-product-cuda-preflight \
 	phase1-product-pretrain \
-	manuscript-pdf \
-	manuscript-iclr \
+	manuscript-pdf manuscript-iclr paper-verify paper-bundle code-survey test-baseline-report \
+	doctor experiment-smoke phase1-corpus-run phase1-training-smoke \
+	phase1-training-modal-plan phase1-sampling-smoke phase1-sampling-reproduce \
+	typecheck check-core \
 	test lint fmt clean
 
 help:
-	@echo "FORGE — Milestone M0 only. Read AGENTS.md before working here."
+	@echo "FORGE — authorized M0 and bounded Phase 1 work. Read AGENTS.md first."
 	@echo ""
 	@echo "  make vendor          copy hash-pinned source assets into data/vendor/"
 	@echo "  make vendor-partial  same, tolerating assets only the origin workstation holds"
 	@echo "  make verify          re-hash vendored assets against MANIFEST.json"
 	@echo "  make verify-partial  same, treating an absent optional asset as not a failure"
+	@echo "  make verify-pins     re-hash every input a result artifact pins; drift is fatal"
+	@echo "  make verify-pins-code same, extended over configs/ (which pin their own source)"
+	@echo "  make archive-pins    recover pinned code bytes from git into the frozen-code archive"
 	@echo "  make m0-03-r0-reconcile build the corrected constitutional R0 corpus"
 	@echo "  make m0-03           validate the frozen R0 splits (create only if absent)"
 	@echo "  make m0-03-reproduce rebuild M0-03 in memory and require byte identity"
@@ -96,30 +101,113 @@ help:
 	@echo "  make phase1-product-smoke run bounded local sparse-flow training"
 	@echo "  make phase1-product-cuda-preflight run the deterministic L4 device gate"
 	@echo "  make phase1-product-pretrain run recoverable full-corpus L4 training"
-	@echo "  make manuscript-pdf  build the LaTeX FORGE working manuscript PDF"
-	@echo "  make manuscript-iclr build the ICLR-format version of the same manuscript"
+	@echo "  make doctor          verify all registered experiment inputs"
+	@echo "  make experiment-smoke run and verify the local runner smoke test"
+	@echo "  make phase1-corpus-run rebuild Phase 1 corpus artifacts in runs/"
+	@echo "  make phase1-training-smoke verify the resumable CPU training DAG"
+	@echo "  make phase1-training-modal-plan dry-run the pinned production L4 DAG"
+	@echo "  make phase1-sampling-smoke run and verify four diagnostic samples"
+	@echo "  make phase1-sampling-reproduce require byte-identical sampling outputs"
+	@echo "  make check-core      fast architecture, runner, and provenance gate"
+	@echo "  make paper-verify    verify the exact paper and recursive evidence graph"
+	@echo "  make manuscript-pdf build the authoritative ICLR paper in isolation"
+	@echo "  make paper-bundle    build and compile-check a deterministic Overleaf bundle"
+	@echo "  make code-survey     classify code against the paper and supported CLI roots"
+	@echo "  make test-baseline-report compare the last clean-cache pytest run with known blockers"
 	@echo "  make test            pytest"
 	@echo "  make lint / fmt      ruff / black"
 
 vendor:
-	python3 scripts/vendor.py
+	python3 -m forge.cli data vendor
 
 vendor-partial:
-	python3 scripts/vendor.py --allow-partial
+	python3 -m forge.cli data vendor --allow-partial
 
 verify:
-	python3 scripts/vendor.py --verify
+	python3 -m forge.cli data verify
 
 verify-partial:
-	python3 scripts/vendor.py --verify --allow-partial
+	python3 -m forge.cli data verify --allow-partial
 
 # Re-hash every input a result artifact declares. Drift means a supposedly-frozen byte moved and
 # is always fatal; absence is reported but tolerated, because many pinned inputs live only on the
 # workstation that produced them. Run this after any refactor.
 verify-pins:
-	python3 scripts/verify_artifact_pins.py --expect-verified $(EXPECT_PINS)
+	python3 -m forge.cli provenance verify --expect-verified $(EXPECT_PINS)
 
-EXPECT_PINS ?= 739
+# The same check extended over `configs/`. A frozen config pins the source that produced it, and
+# those pins outnumber the result-declared ones ~4:1 but went unscanned, so drift in them was
+# invisible: 216 pins over 117 files had gone stale without any gate noticing. Archiving the
+# recoverable bytes retired 124 of them; the rest exist in no commit and need a reviewed
+# `docs/known_artifact_drift.json` entry each, which is a provenance judgment, not a chore.
+# The ratchet holds that backlog flat -- it fails the moment drift grows.
+verify-pins-code:
+	python3 -m forge.cli provenance verify --code \
+		--expect-verified $(EXPECT_PINS_ALL) --allow-drift $(CODE_DRIFT_BACKLOG)
+
+# Recover pinned code/config bytes from git objects into the content-addressed archive. Idempotent
+# and additive: a blob is admitted on SHA-256 equality alone. Run after any refactor that edits a
+# file some frozen config or result pins.
+archive-pins:
+	python3 -m forge.cli provenance archive
+
+doctor:
+	python3 -m forge.cli doctor
+
+experiment-smoke:
+	python3 -m forge.cli experiment run installation-smoke --profile smoke --resume
+	python3 -m forge.cli experiment verify installation-smoke --profile smoke
+
+phase1-corpus-run:
+	python3 -m forge.cli experiment run phase1-corpus --profile full --resume
+	python3 -m forge.cli experiment verify phase1-corpus --profile full
+
+phase1-training-smoke:
+	python3 -m forge.cli experiment run phase1-training-smoke --profile smoke --resume
+	python3 -m forge.cli experiment verify phase1-training-smoke --profile smoke
+
+phase1-training-modal-plan:
+	python3 -m forge.cli experiment plan phase1-training-production --profile full --backend modal
+
+phase1-sampling-smoke:
+	python3 -m forge.cli experiment run phase1-sampling --profile smoke --resume
+	python3 -m forge.cli experiment verify phase1-sampling --profile smoke
+
+phase1-sampling-reproduce:
+	python3 -m forge.cli experiment reproduce phase1-sampling --profile smoke
+
+typecheck:
+	python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
+		src/forge/bio src/forge/corpus src/forge/generate src/forge/experiment \
+		src/forge/maintenance src/forge/paper src/forge/provenance src/forge/cli.py
+
+check-core: verify-pins typecheck
+	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
+		src/forge/bio src/forge/potency src/forge/corpus src/forge/generate \
+		src/forge/experiment src/forge/maintenance \
+		src/forge/paper src/forge/provenance src/forge/cli.py \
+		src/forge/data/vendor.py src/forge/experiment/modal_app.py \
+		src/forge/provenance tests/test_architecture_boundaries.py \
+		tests/test_assembly_ugi3.py tests/test_core_hashing.py \
+		tests/test_core_provenance_archive.py tests/test_experiment_runner.py \
+		tests/test_experiment_modal.py tests/test_experiment_model_pipelines.py \
+		tests/test_experiment_seed.py tests/test_maintenance_test_baseline.py \
+		tests/test_experiment_spec.py tests/test_paper_reproduction.py
+	python3 -m pytest -q tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
+		tests/test_core_hashing.py tests/test_core_provenance_archive.py \
+		tests/test_experiment_modal.py tests/test_experiment_model_pipelines.py \
+		tests/test_experiment_runner.py \
+		tests/test_experiment_seed.py tests/test_maintenance_test_baseline.py \
+		tests/test_experiment_spec.py tests/test_paper_reproduction.py \
+		tests/test_phase1_product_l1_data.py tests/test_pinned_sources_are_tracked.py
+
+EXPECT_PINS ?= 742
+
+# `verify-pins-code` covers results/ + docs/provenance/ + configs/. Both numbers are ratchets:
+# raise EXPECT_PINS_ALL as pins are recovered, lower CODE_DRIFT_BACKLOG as unrecoverable ones get
+# reviewed entries. Never raise CODE_DRIFT_BACKLOG -- a growing count means a frozen byte moved.
+EXPECT_PINS_ALL ?= 2090
+CODE_DRIFT_BACKLOG ?= 72
 
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py
@@ -295,36 +383,27 @@ phase1-product-smoke:
 		--output-dir results/phase1/product_pretrain_smoke
 
 phase1-product-cuda-preflight:
-	modal run scripts/modal_phase1_product_cuda_preflight.py
+	python3 -m forge.cli experiment plan phase1-training-production --profile full --backend modal
 
 phase1-product-pretrain:
-	modal run scripts/modal_phase1_product_pretrain.py
+	python3 -m forge.cli experiment run phase1-training-production --profile full --backend modal
 
-manuscript-pdf:
-	pandoc manuscript/FORGE_Nature_Biotechnology_working_draft.md \
-		--from=markdown --to=latex --standalone \
-		--template=manuscript/latex/forge_natbiotech.template.tex \
-		--lua-filter=manuscript/latex/forge_natbiotech_filter.lua \
-		--output=manuscript/FORGE_Nature_Biotechnology_working_draft.tex
-	xelatex -interaction=nonstopmode -halt-on-error \
-		-output-directory=manuscript \
-		manuscript/FORGE_Nature_Biotechnology_working_draft.tex
-	xelatex -interaction=nonstopmode -halt-on-error \
-		-output-directory=manuscript \
-		manuscript/FORGE_Nature_Biotechnology_working_draft.tex
+paper-verify:
+	python3 -m forge.cli paper verify
 
-manuscript-iclr:
-	pandoc manuscript/FORGE_ICLR2027_submission.md \
-		--from=markdown --to=latex --standalone \
-		--template=manuscript/latex/forge_iclr.template.tex \
-		--lua-filter=manuscript/latex/forge_iclr_filter.lua \
-		--output=manuscript/FORGE_ICLR2027_submission.tex
-	TEXINPUTS=manuscript/latex/iclr2027:$$TEXINPUTS pdflatex -interaction=nonstopmode \
-		-halt-on-error -output-directory=manuscript \
-		manuscript/FORGE_ICLR2027_submission.tex
-	TEXINPUTS=manuscript/latex/iclr2027:$$TEXINPUTS pdflatex -interaction=nonstopmode \
-		-halt-on-error -output-directory=manuscript \
-		manuscript/FORGE_ICLR2027_submission.tex
+manuscript-pdf manuscript-iclr:
+	python3 -m forge.cli paper build
+
+paper-bundle:
+	python3 -m forge.cli paper bundle
+
+code-survey:
+	python3 -m forge.cli maintenance survey \
+		--output provenance/code-retirement/iclr2027.json
+
+test-baseline-report:
+	python3 -m forge.cli maintenance test-report \
+		--output results/maintenance/bio_to_potency_migration_v1/test_baseline.json
 
 test:
 	PYTHONPATH=src python3 -m pytest -q

@@ -1,0 +1,85 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-training-smoke",
+  "description": "Verify the all-fold Ugi joint-flow and sparse-closure training pipeline on CPU.",
+  "root_seed": 20260805,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [
+    {
+      "id": "cache",
+      "implementation": "corpus.ugi.training-cache-verify.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_balanced_training_cache_v2.json",
+        "sha256": "405f47392d79f9eed56bfea2132222e69e74f4ec0144c9ea8d9030f2b71aa535"
+      },
+      "inputs": {
+        "assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "semantic_products": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz", "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"},
+        "semantic_atoms": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"}
+      },
+      "outputs": {
+        "receipt": {"path": "receipt.json", "schema_version": "forge.ugi_training_cache_receipt.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 8192, "timeout_seconds": 900, "gpu_type": null},
+      "determinism": {"mode": "strict", "stream": "training-cache"}
+    },
+    {
+      "id": "joint",
+      "implementation": "generate.ugi.joint-train.v1",
+      "needs": ["cache"],
+      "config": {
+        "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2_production_refit.json",
+        "sha256": "c5402422f8f2923eb16126c2a424246e7748616f1e843385b53cd972a47df0e6"
+      },
+      "inputs": {
+        "assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "semantic_products": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz", "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"},
+        "semantic_atoms": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "phase1_ugi_joint_sparse_training_result.v1"},
+        "checkpoint": {"path": "checkpoint_best.pt", "schema_version": "phase1_ugi_joint_sparse_checkpoint.v1"},
+        "checkpoint_latest": {"path": "checkpoint_latest.pt", "schema_version": "phase1_ugi_joint_sparse_checkpoint.v1"},
+        "progress": {"path": "progress.json", "schema_version": "phase1_ugi_joint_sparse_progress.v1"},
+        "checkpoint_snapshots": {"path": "checkpoint_snapshots.tar", "schema_version": "forge.checkpoint_archive.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 12288, "timeout_seconds": 3600, "gpu_type": null},
+      "determinism": {"mode": "statistical", "stream": "joint-training"}
+    },
+    {
+      "id": "closure",
+      "implementation": "generate.ugi.closure-train.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_closure_expanded.json",
+        "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+      },
+      "inputs": {
+        "component_exemplar_ledger": {"path": "results/phase1/ugi_expanded_exemplars/component_exemplar_ledger.csv.gz", "sha256": "533db59a3aa59c7c09ff1b485869ce6fab3dd70a58705336838a5db70f7c1322"},
+        "semantic_products": {"path": "results/phase1/ugi_expanded_exemplars/semantic_products.csv.gz", "sha256": "2a94793c474be241b0b13f699b7665d64268adc2aedd2fe8aff5805cde588564"},
+        "semantic_atoms": {"path": "results/phase1/ugi_expanded_exemplars/semantic_atoms.csv.gz", "sha256": "b2e7dd12e5b8be632ddc1d208b6376c8e77b1b9ebb59ed1c4b348275f4db021a"},
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "phase1_ugi_sparse_closure_result.v2"},
+        "checkpoint": {"path": "checkpoint_best.pt", "schema_version": "phase1_ugi_sparse_closure_checkpoint.v2"},
+        "checkpoint_latest": {"path": "checkpoint_latest.pt", "schema_version": "phase1_ugi_sparse_closure_checkpoint.v2"},
+        "progress": {"path": "progress.json", "schema_version": "phase1_ugi_sparse_closure_progress.v1"},
+        "checkpoint_snapshots": {"path": "checkpoint_snapshots.tar", "schema_version": "forge.checkpoint_archive.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 8192, "timeout_seconds": 1800, "gpu_type": null},
+      "determinism": {"mode": "statistical", "stream": "closure-training"}
+    }
+  ],
+  "metadata": {"authorization": "Phase 1 product plus L1 training", "purpose": "pipeline smoke qualification"},
+  "nonclaims": [
+    "The smoke checkpoints are not production checkpoints.",
+    "Training performs no biological, route, or synthesis-value guidance."
+  ]
+}

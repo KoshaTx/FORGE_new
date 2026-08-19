@@ -1,0 +1,88 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-corpus",
+  "description": "Rebuild the frozen Phase 1 broad-product and exact Ugi-L1 corpus contract.",
+  "root_seed": 20260730,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "freeze",
+      "implementation": "corpus.phase1.freeze.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_product_l1_data.json",
+        "sha256": "7794dedf7414b45eb6241737200b14711a1add15b0fdcc9f0268a9ca5e4dae64"
+      },
+      "inputs": {
+        "qualified_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "r0_assignments": {
+          "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+          "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+        },
+        "r0_constitutional": {
+          "path": "results/m0_03/r0_constitutional.csv.gz",
+          "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+        },
+        "r1_reaction_enumerated": {
+          "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+          "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+        },
+        "ugi_measured_semantics": {
+          "path": "results/m0_07/ugi_semantic_products.csv.gz",
+          "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+        },
+        "ugi_virtual_products": {
+          "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+          "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+        }
+      },
+      "outputs": {
+        "assignments": {
+          "path": "ugi_l1_assignments.csv.gz",
+          "schema_version": "phase1_ugi_l1_assignments.v1"
+        },
+        "manifest": {
+          "path": "manifest.json",
+          "schema_version": "phase1_product_l1_split_manifest.v3"
+        },
+        "provenance": {
+          "path": "ugi_l1_constitutional_provenance.csv.gz",
+          "schema_version": "phase1_ugi_l1_constitutional_provenance.v1"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "phase1_product_l1_data_result.v3"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 8192,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "phase1-corpus"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "Phase 1 product plus L1 training",
+    "scientific_identity": "constitutional_stereo_free_ugi3"
+  },
+  "nonclaims": [
+    "R1 is reaction-enumerated support and is not route-certified.",
+    "This corpus stage performs no biological or synthesis-value guidance."
+  ]
+}

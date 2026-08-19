@@ -1,0 +1,34 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-sampling",
+  "description": "Restartably sample matched morphology programs and apply exact Ugi-L1 terminal admission.",
+  "root_seed": 20260816,
+  "profiles": ["smoke", "full"],
+  "replicates": {"smoke": 1, "full": 3},
+  "stages": [
+    {
+      "id": "sample",
+      "implementation": "generate.ugi.sample-shards.v1",
+      "needs": [],
+      "config": {"path": "configs/experiments/stages/phase1_sampling_v1.json", "sha256": "31d0cc01d56c9dcc6fefaf7736fc483d76baf22bcb08d5db92582401bc05d3c4"},
+      "inputs": {
+        "joint_checkpoint": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt", "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"},
+        "closure_checkpoint": {"path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt", "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"},
+        "matched_programs": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+        "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.phase1_ugi_sampling_result.v1"},
+        "shards": {"path": "shards.tar", "schema_version": "forge.sampling_shard_archive.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 12288, "timeout_seconds": 21600, "gpu_type": null},
+      "determinism": {"mode": "strict", "stream": "matched-sampling"}
+    }
+  ],
+  "metadata": {"checkpoint": "selected development step 1000", "sampling": "matched diagnostic programs"},
+  "nonclaims": [
+    "This diagnostic sampler does not lock or rank candidates.",
+    "Exact L1 reconstruction is not L2/L3 route closure or synthesis success.",
+    "Sampling performs no biological, route, or synthesis-value guidance."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "forge.phase1_ugi_sampling_config.v1",
+  "task": "Restartable, exact-L1-audited sampling from the selected Phase 1 development checkpoint",
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_programs": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "profiles": {
+    "smoke": {
+      "program_count": 4,
+      "shard_size": 4,
+      "sample_steps": 8,
+      "batch_size": 4,
+      "maximum_adjacent_branch_runs": [2, 1, 1],
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0
+    },
+    "full": {
+      "program_count": 3072,
+      "shard_size": 1024,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "maximum_adjacent_branch_runs": [2, 1, 1],
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0
+    }
+  },
+  "policy": {
+    "contiguous_program_blocks": true,
+    "exact_l1_terminal_admission": true,
+    "reference_comparison": "deferred",
+    "retries_or_repairs": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false
+  }
+}

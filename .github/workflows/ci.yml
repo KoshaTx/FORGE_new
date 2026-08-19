@@ -1,0 +1,19 @@
+name: FORGE core checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install locked development environment
+        run: uv sync --frozen --extra dev --extra torch
+      - name: Verify architecture, provenance, and runner contracts
+        run: uv run make check-core
