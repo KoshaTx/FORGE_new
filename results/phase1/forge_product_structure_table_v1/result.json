@@ -1,0 +1,30 @@
+{
+ "distinct_canonical_products": 40,
+ "high_arm": 34,
+ "inputs": {
+  "panel": {
+   "path": "results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz",
+   "sha256": "d9b7c0a70c8d8528ce107752c44dc6c23ac3d1d6b635ead74bce23a531d2e0ee"
+  }
+ },
+ "low_arm": 6,
+ "nonclaims": [
+  "No member of this panel has been synthesized.",
+  "Route completeness is computational and is not evidence any reaction will succeed.",
+  "This table does not rank, reselect or rescore any candidate."
+ ],
+ "omitted_deliberately": {
+  "authority_tier": "tier machinery not used as ranking authority in the current formulation",
+  "lcb90": "the pilot's ranking statistic, provenance only, not reprinted beside structures",
+  "oracle_mean": "predicted activity is not printed with the structures"
+ },
+ "purpose": "supplementary table of complete product structures, absent from both prior drafts",
+ "rows": 40,
+ "runtime": {
+  "elapsed_seconds": 0.0,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_product_structure_table.v1",
+ "status": "complete"
+}

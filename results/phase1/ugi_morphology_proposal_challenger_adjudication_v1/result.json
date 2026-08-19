@@ -1,0 +1,114 @@
+{
+  "candidate_id": "rho-0.50_power-1.50",
+  "challenger_over_current": {
+    "absolute_improvement": 0.008502689100974736,
+    "clustered_bootstrap": {
+      "absolute_difference_ci95": [
+        0.004971730132914549,
+        0.012351149542617927
+      ],
+      "challenger_support_rate_ci95": [
+        0.0686259163950333,
+        0.10495712509482992
+      ],
+      "current_support_rate_ci95": [
+        0.06265701930258674,
+        0.0937823472747918
+      ],
+      "relative_improvement_ci95": [
+        0.07140722497372086,
+        0.14551337445647108
+      ]
+    },
+    "relative_improvement": 0.10912134658318373
+  },
+  "decision": {
+    "applicability_boundary_changed": false,
+    "challenger_promoted": true,
+    "checks": {
+      "clustered_absolute_improvement": true,
+      "development_floors_passed": true,
+      "point_support_improvement": true,
+      "supported_diversity_retained": true,
+      "validity_retained": true
+    },
+    "mh_authorized": false,
+    "next_gate": "role_restricted_morphology_potency_signal",
+    "potency_guidance_authorized": false
+  },
+  "inputs": {
+    "baseline_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "challenger_confirmation_analysis": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_analysis_v1/result.json",
+      "sha256": "69403641bd6a4e9ccd63f81a7b66331eff11ad6b50d67d5aa80f7b94317a1b86"
+    },
+    "challenger_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/schedule.json",
+      "sha256": "386d98fd68900e3654d0a2d2ab6a3bef28b16fa6c40566b5e83a906813fe2d2d"
+    },
+    "config": {
+      "path": "configs/bio/phase1_ugi_morphology_proposal_challenger_adjudication_v1.json",
+      "sha256": "8b7627ed94ec7caa1c70240d50f79c3af4f59ac930e4e1ca137cdb5299fccc5c"
+    },
+    "fresh_support_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_analysis_v1/support_ledger.csv.gz",
+      "sha256": "171fb3eba8bd278a628f0f31fe3305dd613da595c7bf96cc94921ae63b827dad"
+    },
+    "runner": {
+      "path": "scripts/phase1_adjudicate_ugi_morphology_proposal_challenger.py",
+      "sha256": "0b5ab059ebf216fc0b5e11dff85b29162a9c360e7acfb097abd4d2dc695f02a1"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_proposal_challenger_adjudication.py",
+      "sha256": "42230eba072fe4a7b8af6a74478737a25fc2bfe2d81388a4b9dd328fe00454ca"
+    },
+    "strength_sweep": {
+      "path": "results/phase1/ugi_morphology_proposal_strength_sweep_v1/result.json",
+      "sha256": "05d4bfbaa7926f00b410708d7f824d91a81e102ca1bffc4358234287e2d53214"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_challenger_adjudication.py",
+      "sha256": "fa63238341de178b309df9ef9db2b4a75da03e9eb829ea41aa33f1661304b7c0"
+    }
+  },
+  "nonclaims": [
+    "The fresh outcomes use previously evaluated morphology programs.",
+    "Promotion establishes a more efficient proposal, not terminal support certainty.",
+    "This result does not evaluate potency, routes, synthesis, SMC or MH."
+  ],
+  "result_sha256": "f24d0ffeb1eff8fb89014dd037562dd6a80637a7483bf9c6e7585f5f22e47e08",
+  "schema_version": "phase1_ugi_morphology_proposal_challenger_adjudication.v1",
+  "scope": {
+    "applicability_boundary_frozen": true,
+    "candidate_selection": false,
+    "fresh_terminal_outcomes_only": true,
+    "generator_trajectories_advanced": false,
+    "oracle_calls": 0,
+    "point_rates_inspected_before_adjudication_config": true,
+    "potency_predictions_consumed": false,
+    "proposal_calls": 0,
+    "read_only": true,
+    "route_calls": 0,
+    "same_program_population_as_development": true,
+    "sealed_holdout_access": false,
+    "synthesis_calls": 0
+  },
+  "status": "fresh_terminal_challenger_adjudication_complete",
+  "support_rates": {
+    "broad": 0.03873697916666666,
+    "challenger": 0.0864222654919524,
+    "current": 0.07791957639097766
+  },
+  "supported_smiles_effective_counts": {
+    "challenger": 84.20545781245855,
+    "current": 96.07905160692472
+  },
+  "valid_exact_l1_rates": {
+    "broad": 0.9687500000000006,
+    "challenger": 0.9625535065813158,
+    "current": 0.9646616169794866
+  }
+}

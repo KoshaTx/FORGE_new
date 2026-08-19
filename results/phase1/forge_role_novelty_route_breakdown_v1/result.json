@@ -1,0 +1,143 @@
+{
+ "admitted": {
+  "main": {
+   "any_role_off_registry": {
+    "count": 19520,
+    "fraction": 0.744
+   },
+   "definition": "distinct admitted products of the main rescoring ledger; the population behind the manuscript's headline off-registry figure",
+   "n_distinct_products": 26235,
+   "per_role_off_registry": {
+    "amine_head": {
+     "count": 12528,
+     "fraction": 0.4775
+    },
+    "isocyanide_tail": {
+     "count": 3754,
+     "fraction": 0.1431
+    },
+    "oxoester_aldehyde_body_tail": {
+     "count": 11156,
+     "fraction": 0.4252
+    }
+   }
+  },
+  "union": {
+   "any_role_off_registry": {
+    "count": 22617,
+    "fraction": 0.7577
+   },
+   "definition": "distinct admitted products across the union of both rescoring ledgers; the funnel population behind the 1,549 assessed",
+   "n_distinct_products": 29850,
+   "per_role_off_registry": {
+    "amine_head": {
+     "count": 14835,
+     "fraction": 0.497
+    },
+    "isocyanide_tail": {
+     "count": 4544,
+     "fraction": 0.1522
+    },
+    "oxoester_aldehyde_body_tail": {
+     "count": 12912,
+     "fraction": 0.4326
+    }
+   }
+  }
+ },
+ "inputs": {
+  "assignments": {
+   "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+   "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+  },
+  "branch": {
+   "path": "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz",
+   "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"
+  },
+  "main": {
+   "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+   "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+  }
+ },
+ "nonclaims": [
+  "Resolution is computational and is not evidence that any preparation will succeed.",
+  "A component that does not resolve is not thereby unsynthesizable; it is unresolved against this evidence base within this step budget.",
+  "Rates conditional on reaching route assessment; designs removed by earlier gates have unmeasured route status."
+ ],
+ "question": "which role carries the off-registry novelty, and does it survive route assessment",
+ "reaching_route_assessment": {
+  "by_number_of_off_registry_components": {
+   "0": {
+    "assessed": 664,
+    "rate": 1.0,
+    "route_complete": 664
+   },
+   "1": {
+    "assessed": 870,
+    "rate": 0.9218,
+    "route_complete": 802
+   },
+   "2": {
+    "assessed": 15,
+    "rate": 0.4,
+    "route_complete": 6
+   }
+  },
+  "n": 1549,
+  "per_role": {
+   "amine_head": {
+    "off_registry": {
+     "n": 10,
+     "rate": 0.9,
+     "resolved": 9
+    },
+    "on_registry": {
+     "n": 1539,
+     "rate": 1.0,
+     "resolved": 1539
+    }
+   },
+   "isocyanide_tail": {
+    "off_registry": {
+     "n": 90,
+     "rate": 0.5444,
+     "resolved": 49
+    },
+    "on_registry": {
+     "n": 1459,
+     "rate": 1.0,
+     "resolved": 1459
+    }
+   },
+   "oxoester_aldehyde_body_tail": {
+    "off_registry": {
+     "n": 800,
+     "rate": 0.9563,
+     "resolved": 765
+    },
+    "on_registry": {
+     "n": 749,
+     "rate": 1.0,
+     "resolved": 749
+    }
+   }
+  }
+ },
+ "registry": {
+  "definition": "distinct components of the training corpus",
+  "sizes": {
+   "amine_head": 264,
+   "isocyanide_tail": 53,
+   "oxoester_aldehyde_body_tail": 107
+  },
+  "total": 424
+ },
+ "route_standard": "component_dossier resolved: purchasable, or reducible to purchasable material under a forward-verified disconnection within the step budget. This is the standard behind the pooled accessibility rate, not the adjudicated-closure standard of the bounded hybrid cascade.",
+ "runtime": {
+  "elapsed_seconds": 2.5,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_role_novelty_route_breakdown.v1",
+ "status": "complete"
+}

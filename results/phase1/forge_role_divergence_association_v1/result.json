@@ -1,0 +1,84 @@
+{
+ "association": {
+  "delta_bar_sem": {
+   "heads": [
+    "atom_ce",
+    "parent_bond_ce",
+    "offspring_ce",
+    "closure_bond_ce",
+    "decoration_atom_ce",
+    "decoration_bond_ce"
+   ],
+   "n": 6,
+   "permutation_p_two_sided": 0.2972070279297207,
+   "spearman_rho": -0.5428571428571428
+  },
+  "delta_sem_at_t_0.10": {
+   "heads": [
+    "atom_ce",
+    "parent_bond_ce",
+    "offspring_ce",
+    "closure_bond_ce",
+    "decoration_atom_ce",
+    "decoration_bond_ce"
+   ],
+   "n": 6,
+   "permutation_p_two_sided": 0.42012579874201256,
+   "spearman_rho": -0.42857142857142855
+  }
+ },
+ "contract": "docs/FORGE_EVIDENCE_CONTRACT_v1.md Amendment 14",
+ "excluded_head": {
+  "decoration_anchor_ce": "positional target, not a categorical chemical state, so not comparable"
+ },
+ "inputs": {
+  "closure": {
+   "path": "results/phase1/forge_semantics_pilot_v1/closure.json",
+   "sha256": "c9f7b73efa046aaded4f682122482827c4c23fe81edfbe3febaca4536f8386d9"
+  },
+  "training_cache": {
+   "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+   "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+  }
+ },
+ "measure": "Jensen-Shannon divergence among the three role-conditional empirical target distributions, uniform mixture reference, base-2 logarithms, declared before computation",
+ "nonclaims": [
+  "Six heads cannot support an inferential claim. This is mechanism, not statistics.",
+  "A weak association is recorded as such and is not re-measured with another metric."
+ ],
+ "permutation_seed": 20260819,
+ "permutations": 100000,
+ "records_used": 20000,
+ "role_divergence_bits": {
+  "atom_ce": 0.15096395040954558,
+  "closure_bond_ce": 0.2180088923269734,
+  "decoration_atom_ce": 0.20810082616369907,
+  "decoration_bond_ce": 0.66382655547905,
+  "offspring_ce": 0.09533467845896171,
+  "parent_bond_ce": 0.08178722450029591
+ },
+ "runtime": {
+  "elapsed_seconds": 17.6,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_role_divergence_association.v1",
+ "semantic_utility_at_low_t": {
+  "atom_ce": 0.04720157819489638,
+  "closure_bond_ce": 0.06126767738411824,
+  "decoration_atom_ce": 0.0014285462287565072,
+  "decoration_bond_ce": -0.0046266671270132065,
+  "offspring_ce": 0.20645217907925448,
+  "parent_bond_ce": 0.03236021054908633
+ },
+ "semantic_utility_mean_over_seeds": {
+  "atom_ce": 0.026561023388057946,
+  "closure_bond_ce": 0.017126572232583234,
+  "decoration_atom_ce": 0.002796002054431786,
+  "decoration_bond_ce": -0.0004739538067951796,
+  "offspring_ce": 0.14091567510428527,
+  "parent_bond_ce": 0.017032303311862052
+ },
+ "status": "complete_one_shot_descriptive",
+ "verdict": "Descriptive and secondary by prior commitment. With six heads only a near-perfect ordering could reach conventional significance, so this analysis is reported for mechanism and is not featured as a primary result regardless of what it shows. No alternative divergence was computed."
+}

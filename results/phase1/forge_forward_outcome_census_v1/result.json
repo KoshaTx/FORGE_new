@@ -1,0 +1,209 @@
+{
+ "by_aldehyde_chemotype": {
+  "ester_linked": {
+   "designs": 19563,
+   "non_unique": 3319,
+   "target_not_reproduced": 0,
+   "unique": 16244,
+   "unique_rate": 0.8303429944282574
+  },
+  "ether_linked": {
+   "designs": 490,
+   "non_unique": 56,
+   "target_not_reproduced": 0,
+   "unique": 434,
+   "unique_rate": 0.8857142857142857
+  },
+  "ketone_and_ether": {
+   "designs": 93,
+   "non_unique": 14,
+   "target_not_reproduced": 0,
+   "unique": 79,
+   "unique_rate": 0.8494623655913979
+  },
+  "ketone_containing": {
+   "designs": 1817,
+   "non_unique": 268,
+   "target_not_reproduced": 0,
+   "unique": 1549,
+   "unique_rate": 0.852504127682994
+  },
+  "unlinked_chain_aldehyde": {
+   "designs": 7887,
+   "non_unique": 1443,
+   "target_not_reproduced": 0,
+   "unique": 6444,
+   "unique_rate": 0.8170406998858881
+  }
+ },
+ "contract": "docs/FORGE_EVIDENCE_CONTRACT_v1.md section C, committed before this ran",
+ "definitions": {
+  "non_unique": "the target is enumerated, together with at least one other product",
+  "target_not_reproduced": "the target does not appear among enumerated outcomes",
+  "unique": "the target is the only distinct product enumerated from its own components"
+ },
+ "designs_hitting_enumeration_cap": 0,
+ "enumerated_library_baseline": {
+  "designs": 12276,
+  "non_unique": 558,
+  "target_not_reproduced": 0,
+  "unique": 11718,
+  "unique_rate": 0.9545454545454546
+ },
+ "enumerated_library_ledger_agreement": {
+  "agreeing": 12276,
+  "rows": 12276
+ },
+ "enumeration_cap": 100,
+ "frozen_40": {
+  "members_found_in_census": 40,
+  "without_unique_outcome": [
+   {
+    "amine_head": "NCCN1CCNCC1",
+    "arm": "LOW",
+    "candidate_id": "C06",
+    "canonical_product": "CCCCCCCCCCCCCCC(=O)OCCCCCC(NCCN1CCNCC1)C(=O)NCCCCCCCCCCCC",
+    "competing_products": [
+     "CCCCCCCCCCCCCCC(=O)OCCCCCC(C(=O)NCCCCCCCCCCCC)N1CCN(CCN)CC1"
+    ],
+    "n_outcomes": 2,
+    "required_action": "exclude from the selected 12, or carry a named competing-outcome risk in its dossier",
+    "sites": [
+     2,
+     1,
+     1
+    ],
+    "status": "non_unique"
+   }
+  ]
+ },
+ "head_conditioned_comparison": {
+  "enumerated_library": {
+   "designs": 12276,
+   "multi_site_heads": 1674,
+   "non_unique_given_multi_site_head": 0.3333333333333333,
+   "non_unique_given_single_site_head": 0.0,
+   "share_with_multi_site_head": 0.13636363636363635,
+   "single_site_heads": 10602
+  },
+  "inside_enumeration": {
+   "designs": 3701,
+   "multi_site_heads": 401,
+   "non_unique_given_multi_site_head": 0.4513715710723192,
+   "non_unique_given_single_site_head": 0.0,
+   "share_with_multi_site_head": 0.10834909483923263,
+   "single_site_heads": 3300
+  },
+  "outside_enumeration": {
+   "designs": 26149,
+   "multi_site_heads": 6312,
+   "non_unique_given_multi_site_head": 0.7793092522179975,
+   "non_unique_given_single_site_head": 0.0,
+   "share_with_multi_site_head": 0.24138590385865616,
+   "single_site_heads": 19837
+  },
+  "prediction_supported": {
+   "designs": 2629,
+   "multi_site_heads": 276,
+   "non_unique_given_multi_site_head": 0.532608695652174,
+   "non_unique_given_single_site_head": 0.0,
+   "share_with_multi_site_head": 0.10498288322556106,
+   "single_site_heads": 2353
+  }
+ },
+ "inputs": {
+  "agile_enumeration": {
+   "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+   "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+  },
+  "branch_ledger": {
+   "path": "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz",
+   "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"
+  },
+  "capability_scope": {
+   "path": "configs/route/m0_09_agile_virtual_ugi3_capability.json",
+   "sha256": "52044ddb86c4997e296104291583a55c3dcd7de73a7348a84d35d1c793256fd6"
+  },
+  "main_ledger": {
+   "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+   "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+  },
+  "panel": {
+   "path": "results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz",
+   "sha256": "d9b7c0a70c8d8528ce107752c44dc6c23ac3d1d6b635ead74bce23a531d2e0ee"
+  },
+  "qualified_reactions": {
+   "path": "data/vendor/qualified_reactions_v1.json",
+   "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+  }
+ },
+ "mechanism_of_non_uniqueness": {
+  "amine_sites=2 aldehyde=1 isocyanide=1": 5024,
+  "amine_sites=3 aldehyde=1 isocyanide=1": 64,
+  "amine_sites=4 aldehyde=1 isocyanide=1": 12
+ },
+ "nonclaims": [
+  "A unique forward outcome under the qualified transform is a statement about the enumerated reaction, not about competing reactivity under experimental conditions.",
+  "Non-uniqueness is a property of the component set, not a defect of the generator: the enumerated library is measured here under the identical procedure precisely so that the two can be compared rather than conflated.",
+  "A design whose target is one of several enumerated outcomes remains chemically admissible. It is not unambiguous, which is a weaker and different property."
+ ],
+ "runtime": {
+  "elapsed_seconds": 21.2,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_forward_outcome_census.v1",
+ "status": "complete_full_census_no_sampling",
+ "strata": {
+  "all_admitted": {
+   "designs": 29850,
+   "non_unique": 5100,
+   "target_not_reproduced": 0,
+   "unique": 24750,
+   "unique_rate": 0.8291457286432161
+  },
+  "frozen_40": {
+   "designs": 40,
+   "non_unique": 1,
+   "target_not_reproduced": 0,
+   "unique": 39,
+   "unique_rate": 0.975
+  },
+  "inside_enumeration": {
+   "designs": 3701,
+   "non_unique": 181,
+   "target_not_reproduced": 0,
+   "unique": 3520,
+   "unique_rate": 0.9510942988381519
+  },
+  "not_prediction_supported": {
+   "designs": 27221,
+   "non_unique": 4953,
+   "target_not_reproduced": 0,
+   "unique": 22268,
+   "unique_rate": 0.8180448918114691
+  },
+  "outside_enumeration": {
+   "designs": 26149,
+   "non_unique": 4919,
+   "target_not_reproduced": 0,
+   "unique": 21230,
+   "unique_rate": 0.8118857317679452
+  },
+  "prediction_supported": {
+   "designs": 2629,
+   "non_unique": 147,
+   "target_not_reproduced": 0,
+   "unique": 2482,
+   "unique_rate": 0.9440852034994295
+  },
+  "prediction_supported_and_outside": {
+   "designs": 1042,
+   "non_unique": 75,
+   "target_not_reproduced": 0,
+   "unique": 967,
+   "unique_rate": 0.9280230326295585
+  }
+ },
+ "unit": "distinct product graphs across the union of both rescoring sources"
+}

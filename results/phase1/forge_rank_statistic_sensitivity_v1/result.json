@@ -1,0 +1,677 @@
+{
+ "schema_version": "phase1_forge_rank_statistic_sensitivity.v1",
+ "status": "sensitivity_and_backup_shortlist_complete",
+ "purpose": "quantify how much of the frozen panel depends on the ranking statistic, and provide route-resolved backup candidates",
+ "eligible_pool": 1367,
+ "frozen_panel_reproduced_exactly": true,
+ "high_arm_changed": 12,
+ "config_predicted_change": 9,
+ "candidates": [
+  {
+   "id": "N01",
+   "product": "CCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCC)NCCCN(CCCC)CCCC",
+   "oracle_mean": 11.889021237691244,
+   "lcb90": 6.579629023869833,
+   "tier": "exploratory_weak_absolute_aldehyde_generalization",
+   "agile_novel": false,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "CCCCN(CCCC)CCCN",
+     "action": "purchase",
+     "vendor_count": 62,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCC(=O)OCCCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCC(=O)O",
+       "vendor_count": 113
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCCCO",
+       "vendor_count": 82
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 19
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N02",
+   "product": "CCCCCCCCCC=CCCCCC(=O)OCCCCCCCC(NCCCN(CC)CC)C(=O)NCCCCCCCCCCC",
+   "oracle_mean": 9.624398231506348,
+   "lcb90": 3.4098496039708452,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "CCN(CC)CCCN",
+     "action": "purchase",
+     "vendor_count": 46,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCC=CCCCCC(=O)OCCCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCC=CCCCCC(=O)O",
+       "vendor_count": 7
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCCCO",
+       "vendor_count": 82
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCN",
+       "vendor_count": 44
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N03",
+   "product": "CCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCCC)NCCN1CCCC1",
+   "oracle_mean": 9.35824712117513,
+   "lcb90": 3.1436984936396284,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCN1CCCC1",
+     "action": "purchase",
+     "vendor_count": 82,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCC(=O)OCCCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCC(=O)O",
+       "vendor_count": 107
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCCCO",
+       "vendor_count": 82
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 3
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N04",
+   "product": "CCCCCCCCCCC=CCC=CCCC(=O)OCCCCCC(NCCCN1CCCC1)C(=O)NCCCCCCCCCCCCCC",
+   "oracle_mean": 8.78071673711141,
+   "lcb90": 3.471324523289999,
+   "tier": "exploratory_weak_absolute_aldehyde_generalization",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCCN1CCCC1",
+     "action": "purchase",
+     "vendor_count": 75,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCC=CCC=CCCC(=O)OCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCC=CCC=CCCC(=O)O",
+       "vendor_count": 2
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCO",
+       "vendor_count": 93
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCCCCN",
+       "vendor_count": 68
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N05",
+   "product": "CCCCCCCC=CCCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCCCCC)NN1CCOCC1",
+   "oracle_mean": 8.245046138763428,
+   "lcb90": 2.0304975112279253,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NN1CCOCC1",
+     "action": "purchase",
+     "vendor_count": 75,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCC(=O)OCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCC(=O)O",
+       "vendor_count": 101
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCO",
+       "vendor_count": 68
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 3
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N06",
+   "product": "CCCCCCCCCCCCCCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCCCCC)NCCCN(CCCC)CCCC",
+   "oracle_mean": 8.182701428731283,
+   "lcb90": 1.9681528011957807,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "CCCCN(CCCC)CCCN",
+     "action": "purchase",
+     "vendor_count": 62,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCC(=O)OCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCC(=O)O",
+       "vendor_count": 101
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCO",
+       "vendor_count": 68
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCN",
+       "vendor_count": 38
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N07",
+   "product": "CCCCCCCCC=CC(=O)OCCCC(NCCN1CCCCC1)C(=O)NCCCCCCCCCCCCC",
+   "oracle_mean": 8.182599067687988,
+   "lcb90": 1.9680504401524859,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCN1CCCCC1",
+     "action": "purchase",
+     "vendor_count": 75,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCC=CC(=O)OCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCC=CC(=O)O",
+       "vendor_count": 18
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCO",
+       "vendor_count": 68
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCCCN",
+       "vendor_count": 52
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N08",
+   "product": "CCCCCCCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCCCCCCC)NCCN1CCCCC1",
+   "oracle_mean": 7.959619998931885,
+   "lcb90": 1.7450713713963824,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCN1CCCCC1",
+     "action": "purchase",
+     "vendor_count": 75,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCCCC(=O)OCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCCCC(=O)O",
+       "vendor_count": 88
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCO",
+       "vendor_count": 68
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCCCN",
+       "vendor_count": 52
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N09",
+   "product": "CCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)C=CCCCCCCCC)NN1CCCCC1",
+   "oracle_mean": 7.957286834716797,
+   "lcb90": 1.7427382071812945,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NN1CCCCC1",
+     "action": "purchase",
+     "vendor_count": 67,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCC=CC(=O)OCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCC=CC(=O)O",
+       "vendor_count": 18
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCO",
+       "vendor_count": 93
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 3
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N10",
+   "product": "CCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCCCC)NN1CCOCC1",
+   "oracle_mean": 7.594593048095703,
+   "lcb90": 1.3800444205602007,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NN1CCOCC1",
+     "action": "purchase",
+     "vendor_count": 75,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCC(=O)OCCCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCC(=O)O",
+       "vendor_count": 101
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCCCO",
+       "vendor_count": 82
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 3
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N11",
+   "product": "CCCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCCC)NCCCN1CCOCC1",
+   "oracle_mean": 7.5777818361918134,
+   "lcb90": 1.363233208656311,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCCN1CCOCC1",
+     "action": "purchase",
+     "vendor_count": 78,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCC(=O)OCCCCCCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCC(=O)O",
+       "vendor_count": 107
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCCCCCCO",
+       "vendor_count": 82
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCCCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCN",
+       "vendor_count": 38
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "N12",
+   "product": "CCCCCCCC=CCCCCCCCCNC(=O)C(CCOC(=O)CCCCCCCCCCCCCCCCC)NCCCN1CCOCC1",
+   "oracle_mean": 7.53687858581543,
+   "lcb90": 1.3223299582799273,
+   "tier": "exploratory_simultaneous_exact_new_tails",
+   "agile_novel": true,
+   "steps": 4,
+   "resolved": true,
+   "dossier": [
+    {
+     "role": "amine_head",
+     "canonical_smiles": "NCCCN1CCOCC1",
+     "action": "purchase",
+     "vendor_count": 78,
+     "starting_materials": [],
+     "resolved": true
+    },
+    {
+     "role": "oxoester_aldehyde_body_tail",
+     "canonical_smiles": "CCCCCCCCCCCCCCCCCC(=O)OCCC=O",
+     "action": "synthesise",
+     "route": "AGILE Tail A",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "carboxylic acid",
+       "canonical_smiles": "CCCCCCCCCCCCCCCCCC(=O)O",
+       "vendor_count": 158
+      },
+      {
+       "role": "alpha,omega-diol",
+       "canonical_smiles": "OCCCO",
+       "vendor_count": 108
+      }
+     ],
+     "resolved": true
+    },
+    {
+     "role": "isocyanide_tail",
+     "canonical_smiles": "[C-]#[N+]CCCCCCCCC=CCCCCCCC",
+     "action": "synthesise",
+     "route": "isocyanide from primary amine",
+     "steps": 2,
+     "starting_materials": [
+      {
+       "role": "primary amine",
+       "canonical_smiles": "CCCCCCCC=CCCCCCCCCN",
+       "vendor_count": 3
+      }
+     ],
+     "resolved": true
+    }
+   ]
+  }
+ ],
+ "nonclaims": [
+  "This selects nothing and locks no panel.",
+  "Supplier counts are a 3 August 2026 snapshot, not live availability.",
+  "Route completeness is computational and is not evidence a synthesis will succeed.",
+  "These candidates carry no biological measurement."
+ ]
+}

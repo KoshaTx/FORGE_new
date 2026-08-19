@@ -1,0 +1,207 @@
+{
+ "conditional_difference_outside_minus_inside": {
+  "cluster_bootstrap_90_interval": [
+   -0.1033755274261603,
+   -0.05520361990950229
+  ],
+  "denominator": "designs that reached route assessment, fixed before computing because the contract left the denominator ambiguous",
+  "parity_margin_points": 10.0,
+  "point": -0.07638888888888884
+ },
+ "contract": "docs/FORGE_EVIDENCE_CONTRACT_v1.md section D, committed before this ran",
+ "frozen_40": {
+  "inside": 8,
+  "outside": 32
+ },
+ "funnel": [
+  {
+   "designs_inside": 3701,
+   "designs_outside": 26149,
+   "distinct_components_inside": {
+    "amine_head": 20,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 62
+   },
+   "distinct_components_outside": {
+    "amine_head": 5596,
+    "isocyanide_tail": 1037,
+    "oxoester_aldehyde_body_tail": 2513
+   },
+   "outside_share": 0.8760134003350084,
+   "stage": "chemically_admitted",
+   "unique_outcome_inside": 3520,
+   "unique_outcome_outside": 21230
+  },
+  {
+   "designs_inside": 1587,
+   "designs_outside": 1042,
+   "distinct_components_inside": {
+    "amine_head": 16,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 41
+   },
+   "distinct_components_outside": {
+    "amine_head": 23,
+    "isocyanide_tail": 15,
+    "oxoester_aldehyde_body_tail": 160
+   },
+   "outside_share": 0.39634842145302396,
+   "stage": "prediction_supported",
+   "unique_outcome_inside": 1515,
+   "unique_outcome_outside": 967
+  },
+  {
+   "designs_inside": 574,
+   "designs_outside": 1038,
+   "distinct_components_inside": {
+    "amine_head": 16,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 38
+   },
+   "distinct_components_outside": {
+    "amine_head": 23,
+    "isocyanide_tail": 15,
+    "oxoester_aldehyde_body_tail": 160
+   },
+   "outside_share": 0.6439205955334988,
+   "stage": "absent_from_train_fold",
+   "unique_outcome_inside": 502,
+   "unique_outcome_outside": 963
+  },
+  {
+   "designs_inside": 541,
+   "designs_outside": 1008,
+   "distinct_components_inside": {
+    "amine_head": 16,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 38
+   },
+   "distinct_components_outside": {
+    "amine_head": 23,
+    "isocyanide_tail": 15,
+    "oxoester_aldehyde_body_tail": 157
+   },
+   "outside_share": 0.6507424144609425,
+   "stage": "inside_physicochemical_envelope",
+   "unique_outcome_inside": 477,
+   "unique_outcome_outside": 936
+  },
+  {
+   "designs_inside": 541,
+   "designs_outside": 931,
+   "distinct_components_inside": {
+    "amine_head": 16,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 38
+   },
+   "distinct_components_outside": {
+    "amine_head": 22,
+    "isocyanide_tail": 11,
+    "oxoester_aldehyde_body_tail": 130
+   },
+   "outside_share": 0.6324728260869565,
+   "stage": "all_components_resolved",
+   "unique_outcome_inside": 477,
+   "unique_outcome_outside": 865
+  },
+  {
+   "designs_inside": 541,
+   "designs_outside": 931,
+   "distinct_components_inside": {
+    "amine_head": 16,
+    "isocyanide_tail": 9,
+    "oxoester_aldehyde_body_tail": 38
+   },
+   "distinct_components_outside": {
+    "amine_head": 22,
+    "isocyanide_tail": 11,
+    "oxoester_aldehyde_body_tail": 130
+   },
+   "outside_share": 0.6324728260869565,
+   "stage": "route_complete_within_steps",
+   "unique_outcome_inside": 477,
+   "unique_outcome_outside": 865
+  }
+ ],
+ "inputs": {
+  "agile_enumeration": {
+   "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+   "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+  },
+  "branch_ledger": {
+   "path": "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz",
+   "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"
+  },
+  "main_ledger": {
+   "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+   "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+  },
+  "panel": {
+   "path": "results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz",
+   "sha256": "d9b7c0a70c8d8528ce107752c44dc6c23ac3d1d6b635ead74bce23a531d2e0ee"
+  },
+  "panel_config": {
+   "path": "configs/bio/phase1_ugi_prospective_panel_v6.json",
+   "sha256": "0e04c17daa7e68a7a0f4f17dfad9a277dea8a6b11862231ae2b0a36d576ab52e"
+  }
+ },
+ "nonclaims": [
+  "Route completeness is computational: a documented preparation exists from purchasable material under a dated snapshot, not evidence a synthesis will succeed.",
+  "A stratum removed before route assessment has an UNMEASURED route completeness. The first-excluding-gate table records where each stratum is lost; it does not impute what would have happened downstream.",
+  "Unique-outcome counts are reported per stage as an annotation, not applied as a filter. The frozen 40 was not selected under a uniqueness gate, and applying one retrospectively would make the panel row inconsistent with the stages above it."
+ ],
+ "route_completeness": {
+  "inside": {
+   "admitted": 3701,
+   "conditional_rate_given_assessed": 1.0,
+   "failure_modes": {},
+   "first_excluding_gate": {
+    "absent_from_train_fold": 1013,
+    "physicochemical_envelope": 33,
+    "prediction_supported": 2114
+   },
+   "mean_components_requiring_preparation": 1.7726432532347505,
+   "median_steps": 4,
+   "reached_route_assessment": 541,
+   "route_complete": 541,
+   "unconditional_rate_of_admitted": 0.1461767089975682
+  },
+  "outside": {
+   "admitted": 26149,
+   "conditional_rate_given_assessed": 0.9236111111111112,
+   "failure_modes": {
+    "amine_head:no_preparation_schema": 1,
+    "isocyanide_tail:schema_matched_but_starting_material_unpurchasable": 41,
+    "oxoester_aldehyde_body_tail:no_preparation_schema": 2,
+    "oxoester_aldehyde_body_tail:schema_matched_but_starting_material_unpurchasable": 33
+   },
+   "first_excluding_gate": {
+    "absent_from_train_fold": 4,
+    "component_resolution": 77,
+    "physicochemical_envelope": 30,
+    "prediction_supported": 25107
+   },
+   "mean_components_requiring_preparation": 1.7164339419978518,
+   "median_steps": 4,
+   "reached_route_assessment": 1008,
+   "route_complete": 931,
+   "unconditional_rate_of_admitted": 0.03560365597154767
+  }
+ },
+ "runtime": {
+  "elapsed_seconds": 18.7,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_open_world_actionability_funnel.v1",
+ "seeds": {
+  "cluster_bootstrap": 20260815,
+  "cluster_unit": "aldehyde component",
+  "draws": 2000
+ },
+ "selected_12": "not yet chosen",
+ "status": "complete_enumeration_stratified_funnel",
+ "stratum_definition": "inside iff the canonical product is one of the 12,276 products of the complete AGILE component enumeration",
+ "unit": "distinct product graphs across the union of both rescoring sources",
+ "verdict": "MEASURED TRADE-OFF: the clustered 90% interval [-0.103, -0.055] leaves the plus or minus 10 point parity band, so route completeness differs by enumeration membership and the difference is reported as the result."
+}

@@ -184,3 +184,53 @@ output/
 
 # built Overleaf bundle, regenerate with scripts/build_overleaf_bundle.sh
 paper/*_overleaf.zip
+
+# artifacts the manuscript cites, so the registry in Appendix E resolves in a clone
+# (results/* is a whitelist: negate the dir, re-ignore its contents, then name each file)
+!results/phase1/forge_forward_outcome_census_v1/
+results/phase1/forge_forward_outcome_census_v1/*
+!results/phase1/forge_forward_outcome_census_v1/result.json
+!results/phase1/forge_held_family_stage2_v1/
+results/phase1/forge_held_family_stage2_v1/*
+!results/phase1/forge_held_family_stage2_v1/amphiphile_panel_v3.json
+!results/phase1/forge_held_family_stage2_v1/null_marginal_null.json
+!results/phase1/forge_open_world_actionability_funnel_v1/
+results/phase1/forge_open_world_actionability_funnel_v1/*
+!results/phase1/forge_open_world_actionability_funnel_v1/result.json
+!results/phase1/forge_product_structure_table_v1/
+results/phase1/forge_product_structure_table_v1/*
+!results/phase1/forge_product_structure_table_v1/result.json
+!results/phase1/forge_rank_statistic_sensitivity_v1/
+results/phase1/forge_rank_statistic_sensitivity_v1/*
+!results/phase1/forge_rank_statistic_sensitivity_v1/backup_dossier.md
+!results/phase1/forge_rank_statistic_sensitivity_v1/result.json
+!results/phase1/forge_role_divergence_association_v1/
+results/phase1/forge_role_divergence_association_v1/*
+!results/phase1/forge_role_divergence_association_v1/result.json
+!results/phase1/forge_role_novelty_route_breakdown_v1/
+results/phase1/forge_role_novelty_route_breakdown_v1/*
+!results/phase1/forge_role_novelty_route_breakdown_v1/result.json
+!results/phase1/forge_semantics_pilot_v1/
+results/phase1/forge_semantics_pilot_v1/*
+!results/phase1/forge_semantics_pilot_v1/closure.json
+!results/phase1/graph2edits_single_step_recovery_benchmark_v1/
+results/phase1/graph2edits_single_step_recovery_benchmark_v1/*
+!results/phase1/graph2edits_single_step_recovery_benchmark_v1/score.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/
+results/phase1/ugi_bounded_hybrid_route_cascade_v1/*
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/result.json
+!results/phase1/ugi_interpolative_conformal_v1/
+results/phase1/ugi_interpolative_conformal_v1/*
+!results/phase1/ugi_interpolative_conformal_v1/result.json
+!results/phase1/ugi_manuscript_numbers_v1/
+results/phase1/ugi_manuscript_numbers_v1/*
+!results/phase1/ugi_manuscript_numbers_v1/result.json
+!results/phase1/ugi_morphology_proposal_challenger_adjudication_v1/
+results/phase1/ugi_morphology_proposal_challenger_adjudication_v1/*
+!results/phase1/ugi_morphology_proposal_challenger_adjudication_v1/result.json
+!results/phase1/ugi_novelty_audit_v1/
+results/phase1/ugi_novelty_audit_v1/*
+!results/phase1/ugi_novelty_audit_v1/result.json
+!results/phase1/ugi_prospective_panel_v6/
+results/phase1/ugi_prospective_panel_v6/*
+!results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz
