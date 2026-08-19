@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import io
 import json
 import math
@@ -21,6 +20,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from forge.bio import ugi_distributional_applicability as applicability
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 
@@ -89,10 +89,6 @@ class UgiBoundedStructuralEnvelopeError(RuntimeError):
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

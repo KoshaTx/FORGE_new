@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import io
 import json
 import os
@@ -30,6 +29,7 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
@@ -102,10 +102,6 @@ class UgiRouteAwarePanelFeasibilityError(RuntimeError):
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _canonical_json_bytes(value: Any) -> bytes:

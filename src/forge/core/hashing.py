@@ -60,6 +60,19 @@ def sha256_file(path: Path, chunk_size: int = DEFAULT_CHUNK_SIZE) -> Sha256:
     return Sha256(digest.hexdigest())
 
 
+def sha256_json(value: Any) -> Sha256:
+    """Digest a JSON-able value by way of its canonical serialization.
+
+    Used to fingerprint a config or a result body rather than a file, so two structurally equal
+    documents hash the same regardless of key order or incidental whitespace. Defined here rather
+    than left to call sites because the digest is only stable if the serialization is, and pairing
+    it with a different serializer silently produces a different -- but equally plausible -- hash.
+    """
+    from forge.core.io import stable_json
+
+    return sha256_bytes(stable_json(value).encode())
+
+
 def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
     """Validate one `{"path", "sha256"}` record and return the file it names.
 
@@ -127,4 +140,5 @@ __all__ = [
     "resolve_pin",
     "sha256_bytes",
     "sha256_file",
+    "sha256_json",
 ]

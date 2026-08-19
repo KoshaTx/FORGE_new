@@ -21,6 +21,7 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_morphology_program import UgiMorphologyProgram
 from forge.product.ugi_restartable_terminal_support_adapter import (
@@ -116,10 +117,6 @@ class JointProgramKernel:
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -773,7 +770,7 @@ def build_joint_program_support_audit(
             "bandwidth": kernel.bandwidth,
             "local_radius": kernel.local_radius,
             "radius_rule": (
-                "higher 95th percentile of leave-one-unique-program-out nearest-anchor " "distances"
+                "higher 95th percentile of leave-one-unique-program-out nearest-anchor distances"
             ),
             "kernel": "occurrence-weighted Laplace mixture over complete measured programs",
             "biological_labels_used": False,

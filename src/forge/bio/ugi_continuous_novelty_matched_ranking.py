@@ -36,6 +36,7 @@ from forge.bio.ugi_morphology_potency_matched_adjudication import (
     _candidate,
     _exact_l1,
 )
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_continuous_novelty_matched_ranking_config.v1"
@@ -49,10 +50,6 @@ class UgiContinuousNoveltyMatchedRankingError(RuntimeError):
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:

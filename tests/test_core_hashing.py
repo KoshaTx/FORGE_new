@@ -20,6 +20,7 @@ from forge.core.hashing import (
     resolve_pin,
     sha256_bytes,
     sha256_file,
+    sha256_json,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -136,3 +137,22 @@ def test_pin_record_paths_are_relative_for_portability(tmp_path: Path) -> None:
     target = tmp_path / "input.json"
     target.write_bytes(b"{}")
     assert not Path(pin_record(target, tmp_path)["path"]).is_absolute()
+
+
+def test_sha256_json_is_order_independent() -> None:
+    """Structurally equal documents must hash the same, whatever order they were built in."""
+    assert sha256_json({"a": 1, "b": 2}) == sha256_json({"b": 2, "a": 1})
+
+
+def test_sha256_json_distinguishes_different_documents() -> None:
+    assert sha256_json({"a": 1}) != sha256_json({"a": 2})
+
+
+def test_sha256_json_matches_the_composition_it_replaces() -> None:
+    """The 55 local _sha256_payload copies are sha256 over the canonical JSON."""
+    import hashlib
+
+    from forge.core.io import stable_json
+
+    value = {"b": [3, 2], "a": {"z": None}}
+    assert sha256_json(value) == hashlib.sha256(stable_json(value).encode()).hexdigest()

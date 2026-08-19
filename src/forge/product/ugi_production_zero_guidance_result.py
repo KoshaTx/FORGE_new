@@ -9,13 +9,13 @@ It performs no generation, routing, scalarization, biology or selection.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
@@ -59,10 +59,6 @@ class UgiProductionZeroGuidanceResultError(RuntimeError):
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

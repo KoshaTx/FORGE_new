@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import io
 import json
 import math
@@ -21,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.bio import ugi_distributional_applicability as applicability_v1
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_generated_role_applicability_census_readiness_config.v1"
@@ -108,10 +108,6 @@ class UgiGeneratedRoleApplicabilityCensusError(RuntimeError):
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

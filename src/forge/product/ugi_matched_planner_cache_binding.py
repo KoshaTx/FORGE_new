@@ -13,7 +13,6 @@ candidate.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from dataclasses import dataclass
@@ -21,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_matched_budget_orchestration import (
     MatchedArm,
     MatchedAssessmentContext,
@@ -47,10 +47,6 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 def _stable_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

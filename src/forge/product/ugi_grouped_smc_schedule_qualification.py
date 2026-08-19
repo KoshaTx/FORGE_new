@@ -17,6 +17,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_morphology_program import UgiMorphologyProgram
 from forge.product.ugi_restartable_terminal_support_adapter import (
@@ -74,12 +75,6 @@ def _pin(repo: Path, value: Any, *, label: str) -> Path:
     if sha256_file(path) != value.get("sha256"):
         raise UgiGroupedSMCScheduleQualificationError(f"{label} hash changed")
     return path
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(
-        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
 
 
 def _program(value: Any) -> UgiMorphologyProgram:

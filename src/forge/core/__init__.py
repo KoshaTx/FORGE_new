@@ -13,7 +13,14 @@ paper's evidence chain and may not move. See `docs/REFACTOR_BASELINE.md`.
 """
 
 from forge.core.artifact import ArtifactError, ArtifactRun, artifact_run
-from forge.core.hashing import PinError, pin_record, resolve_pin, sha256_bytes, sha256_file
+from forge.core.hashing import (
+    PinError,
+    pin_record,
+    resolve_pin,
+    sha256_bytes,
+    sha256_file,
+    sha256_json,
+)
 from forge.core.io import (
     atomic_write,
     read_csv,
@@ -54,6 +61,7 @@ __all__ = [
     "resolve_pin",
     "sha256_bytes",
     "sha256_file",
+    "sha256_json",
     "stable_json",
     "write_csv",
     "write_json",
