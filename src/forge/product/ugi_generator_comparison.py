@@ -165,7 +165,15 @@ def _evaluate_arm(
                 "source_stratum": probe["source_stratum"],
                 "branch_class": probe["branch_class"],
                 "valid": valid,
-                "canonical_smiles": (Chem.MolToSmiles(molecule, canonical=True) if valid else None),
+                # Stereo-free, stated rather than inherited from RDKit's isomericSmiles default.
+                # This feeds unique_valid_fraction, which ugi_end_to_end_sampling computes stereo-
+                # free and ugi_decoration_checkpoint_screen gates at 0.98 -- one metric compared
+                # across modules has to be one metric.
+                "canonical_smiles": (
+                    Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
+                    if valid
+                    else None
+                ),
                 "exact_program_match": exact_program,
                 "motifs": _motifs(molecule) if valid else {},
                 "branch_atoms_by_role": branch_atoms_by_role,
