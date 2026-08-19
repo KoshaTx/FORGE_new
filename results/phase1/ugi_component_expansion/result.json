@@ -1,0 +1,191 @@
+{
+  "artifacts": {
+    "registry": {
+      "bytes": 23048,
+      "columns": [
+        "component_id",
+        "role",
+        "canonical_smiles",
+        "heavy_atoms",
+        "elements_json",
+        "source_classes_json",
+        "source_record_ids_json",
+        "source_platforms_json",
+        "is_current_catalog",
+        "source_scope_qualified",
+        "within_model_support",
+        "raw_handle_matches",
+        "symmetry_distinct_handle_sites",
+        "passes_registry_handle_policy",
+        "site_resolution_required",
+        "reference_forward_outcomes",
+        "reference_forward_products",
+        "reference_forward_compatible",
+        "route_evidence_states_json",
+        "procurement_evidence_states_json",
+        "route_closure_states_json",
+        "e2_route_closed",
+        "l1_structural_admission",
+        "admission_reason",
+        "family_id",
+        "family_size",
+        "family_fold",
+        "training_disposition"
+      ],
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "rows": 586,
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    }
+  },
+  "claims_boundary": {
+    "e2_requires_independent_complete_route": true,
+    "family_assignment_precedes_product_enumeration": true,
+    "l1_admission_is_route_closure": false,
+    "l1_admission_is_synthesis_success": false,
+    "reference_context_forward_compatibility_is_substrate_scope_proof": false,
+    "source_activity_labels_inherited": false
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_component_expansion.json",
+    "sha256": "774808442a2fed48a652ec3649837eba470acc342927e9a9d68b80579e356923"
+  },
+  "inputs": {
+    "aldehyde_head_capability": {
+      "bytes": 272615,
+      "path": "results/m0_09/ugi3_aldehyde_head_capability.json",
+      "sha256": "0150b53015d3b31c12be9f97549fa612ff228435fac82881192d3af03f6f74ff"
+    },
+    "atom_vocabulary": {
+      "bytes": 1963,
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "current_assignments": {
+      "bytes": 100713,
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "hydrophobic_motif_transfer": {
+      "bytes": 2551,
+      "path": "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
+      "sha256": "89370ce3dd6d6e39acac25d53f235adf86cc74840f106486b0490746fd624dff"
+    },
+    "lnpdb_head_transfer": {
+      "bytes": 11056,
+      "path": "results/m0_09/lnpdb_head_transfer_ledger.csv.gz",
+      "sha256": "5e666e5b1adcd9fc4b4867daf289d5684718e8e443599b4ebaf4342f827a15f2"
+    },
+    "precursor_capability": {
+      "bytes": 63601,
+      "path": "results/m0_09/ugi3_precursor_capability.json",
+      "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "policy": {
+    "allowed_elements": [
+      "C",
+      "N",
+      "O",
+      "S",
+      "P",
+      "F",
+      "Si"
+    ],
+    "family_fingerprint": {
+      "bits": 2048,
+      "include_chirality": false,
+      "kind": "ECFP4",
+      "radius": 2,
+      "similarity_threshold": 0.75
+    },
+    "family_split_fractions": {
+      "calibration": 0.15,
+      "heldout": 0.15,
+      "train": 0.7
+    },
+    "identity": "canonical_constitutional_smiles",
+    "maximum_forward_outcomes": 64,
+    "maximum_heavy_atoms": 282,
+    "novel_amine_requires_one_symmetry_distinct_site": true,
+    "reaction_id": "ugi_3cr_agile",
+    "source_policy": {
+      "bounded_capability_candidates": true,
+      "cross_assembly_components": true,
+      "current_catalog": true,
+      "forward_verified_hydrophobic_transfers": true,
+      "lnpdb_site_resolved_heads": true,
+      "route_closure_required_for_e2_claim": true,
+      "route_closure_required_for_l1_structural_admission": false,
+      "source_activity_labels_inherited": false
+    }
+  },
+  "randomness": {
+    "family_assignment": "deterministic ECFP4 similarity components and greedy balance",
+    "seed": 20260731,
+    "used": false
+  },
+  "registry_schema_version": "phase1_ugi_component_expansion_registry.v1",
+  "schema_version": "phase1_ugi_component_expansion_result.v1",
+  "status": "complete_l1_structural_expansion_census",
+  "summary": {
+    "admission_reasons": {
+      "current_catalog": 95,
+      "l1_structural_support_only": 329,
+      "no_valid_reference_context_forward_product": 1,
+      "outside_declared_candidate_sources": 117,
+      "outside_declared_model_support": 3,
+      "reactive_site_resolution_required": 41
+    },
+    "candidate_rows": 586,
+    "component_fold_counts": {
+      "amine_head": {
+        "calibration": 39,
+        "heldout": 40,
+        "train": 185
+      },
+      "isocyanide_tail": {
+        "calibration": 6,
+        "heldout": 12,
+        "train": 35
+      },
+      "oxoester_aldehyde_body_tail": {
+        "calibration": 16,
+        "heldout": 16,
+        "train": 75
+      }
+    },
+    "current_catalog_components": {
+      "amine_head": 24,
+      "isocyanide_tail": 9,
+      "oxoester_aldehyde_body_tail": 62
+    },
+    "current_components_retained": {
+      "amine_head": 24,
+      "isocyanide_tail": 9,
+      "oxoester_aldehyde_body_tail": 62
+    },
+    "e2_route_closed_components": 1,
+    "family_counts": {
+      "amine_head": 208,
+      "isocyanide_tail": 14,
+      "oxoester_aldehyde_body_tail": 13
+    },
+    "l1_admitted_components": {
+      "amine_head": 264,
+      "isocyanide_tail": 53,
+      "oxoester_aldehyde_body_tail": 107
+    },
+    "new_l1_structural_components": {
+      "amine_head": 240,
+      "isocyanide_tail": 44,
+      "oxoester_aldehyde_body_tail": 45
+    },
+    "raw_cartesian_upper_bound": 1497144
+  },
+  "task": "Phase 1 provenance-aware Ugi component expansion and family split"
+}

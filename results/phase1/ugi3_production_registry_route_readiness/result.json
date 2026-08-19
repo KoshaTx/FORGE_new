@@ -1,0 +1,221 @@
+{
+  "artifacts": {
+    "component_ledger_sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d",
+    "gap_ledger_sha256": "13cf73023daed1d718e9f55dc79c63b35cc82b79543345fd28cf03d47de7030c"
+  },
+  "claims_boundary": {
+    "family_projection_is_exact_source_route_evidence": false,
+    "handle_qualification_is_route_evidence": false,
+    "motif_similarity_is_route_evidence": false,
+    "route_complete_component_is_experimental_success": false,
+    "route_complete_component_is_observed_synthesis": false,
+    "structural_l1_admission_is_route_closure": false
+  },
+  "evidence_policy": {
+    "e2_flag_requires_independent_exact_forward_reexecution": true,
+    "exact_source_without_complete_reexecuted_l2_l3_dossier_is_open": true,
+    "family_or_bounded_applicability_is_exact_source": false,
+    "handle_qualification_is_route_evidence": false,
+    "identity": "role_plus_canonical_constitutional_smiles",
+    "l1_structural_admission_is_route_closure": false,
+    "motif_similarity_is_route_evidence": false,
+    "original_93_dossier_tiers_take_precedence": true,
+    "source_provenance_is_route_evidence": false,
+    "strongest_explicit_evidence_only": true
+  },
+  "exact_transfer_verification": {
+    "canonical_expected_product": "CCCCCCCCCCCCC(C=O)CCCCCCCCCC",
+    "canonical_reactant": "CCCCCCCCCCCCC(CO)CCCCCCCCCC",
+    "forward_products": [
+      "CCCCCCCCCCCCC(C=O)CCCCCCCCCC"
+    ],
+    "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+    "source_record_id": "jl-2024-b16-2-decyltetradecan-1-ol",
+    "verification_status": "verified_exact_product_unique"
+  },
+  "gap_policy": {
+    "materiality": "a role-specific closure adds component-level route-ready support; product-level expansion still requires separately verified L1 assembly",
+    "no_broad_literature_mining": true,
+    "no_chemical_class_inference_from_structure": true,
+    "priority_order": "ascending_component_count_then_role_then_gap_class",
+    "recurring_minimum_components": 2
+  },
+  "identity_policy": "role_plus_canonical_constitutional_smiles",
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "config": {
+      "path": "configs/route/phase1_ugi3_production_registry_route_readiness.json",
+      "sha256": "d2cdf538593494a096e0cf529cc54e2252f865ae17c080f6b439cb11496334c1"
+    },
+    "executable_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "expansion_result": {
+      "path": "results/phase1/ugi_component_expansion/result.json",
+      "sha256": "374e3edc61b6cf31a2253e9ac7babe29695b47ae212c95a1969950d5fc862666"
+    },
+    "hydrophobic_transfer": {
+      "path": "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
+      "sha256": "89370ce3dd6d6e39acac25d53f235adf86cc74840f106486b0490746fd624dff"
+    },
+    "original_component_ledger": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "original_result": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "oxidation_variant": {
+      "path": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    }
+  },
+  "safe_claim": "Among 424 L1-admitted production components, 41 are either accepted terminals or have an exact-source, uniquely forward-verified upstream program closed to frozen terminal evidence. Structural admission and component novelty do not establish route closure, exact-product synthesis or experimental success.",
+  "schema_version": "phase1_ugi3_production_registry_route_readiness.v1",
+  "software": {
+    "rdkit_version": "2026.03.4"
+  },
+  "summary": {
+    "by_evidence_category": {
+      "accepted_terminal": 17,
+      "exact_source_forward_verified_l3_closed": 24,
+      "exact_source_l3_open": 1,
+      "family_projected_only": 87,
+      "handle_qualified_provenance_only": 0,
+      "missing_route_knowledge": 184,
+      "outside_route_support": 111
+    },
+    "by_role": {
+      "amine_head": {
+        "by_evidence_category": {
+          "accepted_terminal": 17,
+          "exact_source_forward_verified_l3_closed": 0,
+          "exact_source_l3_open": 0,
+          "family_projected_only": 0,
+          "handle_qualified_provenance_only": 0,
+          "missing_route_knowledge": 184,
+          "outside_route_support": 63
+        },
+        "components": 264,
+        "route_complete_components": 17
+      },
+      "isocyanide_tail": {
+        "by_evidence_category": {
+          "accepted_terminal": 0,
+          "exact_source_forward_verified_l3_closed": 6,
+          "exact_source_l3_open": 1,
+          "family_projected_only": 36,
+          "handle_qualified_provenance_only": 0,
+          "missing_route_knowledge": 0,
+          "outside_route_support": 10
+        },
+        "components": 53,
+        "route_complete_components": 6
+      },
+      "oxoester_aldehyde_body_tail": {
+        "by_evidence_category": {
+          "accepted_terminal": 0,
+          "exact_source_forward_verified_l3_closed": 18,
+          "exact_source_l3_open": 0,
+          "family_projected_only": 51,
+          "handle_qualified_provenance_only": 0,
+          "missing_route_knowledge": 0,
+          "outside_route_support": 38
+        },
+        "components": 107,
+        "route_complete_components": 18
+      }
+    },
+    "components": 424,
+    "gap_evidence_status_groups": {
+      "exact_source_route_present_but_l3_open": {
+        "by_role": {
+          "amine_head": 0,
+          "isocyanide_tail": 1,
+          "oxoester_aldehyde_body_tail": 0
+        },
+        "components": 1,
+        "includes_categories": [
+          "exact_source_l3_open"
+        ]
+      },
+      "exact_substrate_route_evidence_absent_or_unreported": {
+        "by_role": {
+          "amine_head": 63,
+          "isocyanide_tail": 46,
+          "oxoester_aldehyde_body_tail": 89
+        },
+        "components": 198,
+        "includes_categories": [
+          "family_projected_only",
+          "outside_route_support",
+          "handle_qualified_provenance_only"
+        ]
+      },
+      "route_evidence_not_yet_assessed": {
+        "by_role": {
+          "amine_head": 184,
+          "isocyanide_tail": 0,
+          "oxoester_aldehyde_body_tail": 0
+        },
+        "components": 184,
+        "includes_categories": [
+          "missing_route_knowledge"
+        ]
+      }
+    },
+    "independently_reexecuted_exact_transfer_components": 1,
+    "original_93_constitutional_matches": 93,
+    "route_complete_components": 41,
+    "smallest_recurring_gap_classes": [
+      {
+        "component_count": 10,
+        "evidence_category": "outside_route_support",
+        "gap_class": "upstream_route_not_reported",
+        "priority_rank": 1,
+        "role": "isocyanide_tail"
+      },
+      {
+        "component_count": 36,
+        "evidence_category": "family_projected_only",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "priority_rank": 2,
+        "role": "isocyanide_tail"
+      },
+      {
+        "component_count": 38,
+        "evidence_category": "outside_route_support",
+        "gap_class": "upstream_route_not_reported",
+        "priority_rank": 3,
+        "role": "oxoester_aldehyde_body_tail"
+      },
+      {
+        "component_count": 51,
+        "evidence_category": "family_projected_only",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "priority_rank": 4,
+        "role": "oxoester_aldehyde_body_tail"
+      },
+      {
+        "component_count": 63,
+        "evidence_category": "outside_route_support",
+        "gap_class": "upstream_route_not_reported",
+        "priority_rank": 5,
+        "role": "amine_head"
+      },
+      {
+        "component_count": 184,
+        "evidence_category": "missing_route_knowledge",
+        "gap_class": "route_evidence_not_assessed",
+        "priority_rank": 6,
+        "role": "amine_head"
+      }
+    ]
+  },
+  "task": "Fail-closed route-readiness census for the full 424-component Ugi production registry"
+}

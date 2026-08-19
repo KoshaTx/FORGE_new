@@ -1,0 +1,80 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_launch_preflight.v1",
+  "status": "approved_ready_to_launch",
+  "run_name": "ugi_joint_sparse_balanced_v2_1cf363a57343",
+  "cloud_request": {
+    "provider": "Modal",
+    "gpu_class": "L4",
+    "cpu": 4.0,
+    "memory_mib": 24576,
+    "maximum_timeout_seconds": 14400,
+    "detached": true,
+    "billable_external_run": true
+  },
+  "training_contract": {
+    "maximum_steps": 8000,
+    "batch_size": 128,
+    "evaluation_interval_steps": 250,
+    "serial_checkpoint_steps": [250, 500, 1000, 2000, 4000, 6000, 8000],
+    "early_stopping_patience_evaluations": 12,
+    "early_stopping_minimum_steps": 2000,
+    "precision": "float32",
+    "deterministic_algorithms": true
+  },
+  "immutable_inputs": {
+    "training_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+      "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+    },
+    "training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "support_audit": {
+      "path": "results/phase1/ugi_support_bounds_audit_v2/result.json",
+      "sha256": "ac847df33cf9d446b85fccf88c298713e86107f626d816f3996f5b46b861ea29"
+    },
+    "novelty_stratified_probe": {
+      "path": "results/phase1/ugi_balanced_program_probe_v2_novelty_256.json",
+      "sha256": "61e3210ad3ecb5c507f9faa10b755e96adbb41ff59e48a15c9458036192d266b"
+    },
+    "unconditional_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "production_closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "production_closure_selection": {
+      "path": "results/phase1/ugi_closure_expanded_full/result.json",
+      "sha256": "c89142844ea2ee0dfca9d63b9a5ebf5eab10d721da459a49f677e60694a182fc"
+    },
+    "launcher": {
+      "path": "scripts/modal_phase1_ugi_joint_sparse_v2.py",
+      "sha256": "eae997cf7a81ebaf2d574b0092ad13479d1a34d9b17380d7a189b9f6c4e8d7bd"
+    },
+    "python_source_tree_sha256": "653a26d20d53fe2d7a0ce5ebe9a538ba962bb19a1f4dc1787f679c394f92a4c1"
+  },
+  "gates": {
+    "widened_cache_complete": true,
+    "widened_products_supported": true,
+    "complete_expanded_universe_supported": true,
+    "local_smoke_complete": true,
+    "serial_checkpoint_persistence_tested": true,
+    "novelty_stratified_probe_frozen": true,
+    "unconditional_program_prior_frozen": true,
+    "expanded_closure_census_matches_widened_cache": true,
+    "production_closure_checkpoint_selected_on_calibration": true,
+    "production_closure_end_to_end_smoke_complete": true,
+    "focused_tests_passed": true,
+    "repository_tests_passed": true,
+    "explicit_billable_cloud_approval_received": true
+  },
+  "scope_boundary": {
+    "product_and_l1_only": true,
+    "l2_routing_enabled": false,
+    "biological_guidance_enabled": false,
+    "synthesis_guidance_enabled": false
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "algorithm_version": "exact_single_site_family_split_enumeration_v1",
+  "artifacts": {
+    "products": {
+      "bytes": 40021381,
+      "columns": [
+        "product_id",
+        "canonical_product_smiles",
+        "amine_head_smiles",
+        "amine_head_family_id",
+        "amine_head_family_fold",
+        "oxoester_aldehyde_body_tail_smiles",
+        "oxoester_aldehyde_body_tail_family_id",
+        "oxoester_aldehyde_body_tail_family_fold",
+        "isocyanide_tail_smiles",
+        "isocyanide_tail_family_id",
+        "isocyanide_tail_family_fold",
+        "primary_product_fold",
+        "source_stratum",
+        "is_source_adjudicated_measured_product",
+        "component_novelty_class",
+        "family_balance_weight_raw"
+      ],
+      "path": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+      "rows": 1486415,
+      "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"
+    }
+  },
+  "claims_boundary": {
+    "exact_forward_enumeration_is_observed_synthesis": false,
+    "exact_forward_enumeration_is_route_closure": false,
+    "family_balance_weight_must_be_used_by_training_sampler": true,
+    "source_activity_labels_inherited": false
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_expanded_enumeration.json",
+    "sha256": "0f23a0f3155d01463dd1478f901d4b851bb8b87c03c6cd757e65221b39d67439"
+  },
+  "inputs": {
+    "component_registry": {
+      "bytes": 23048,
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "current_assignments": {
+      "bytes": 100713,
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "policy": {
+    "allowed_elements": [
+      "C",
+      "N",
+      "O",
+      "S",
+      "P",
+      "F",
+      "Si"
+    ],
+    "enumerated_product_is_synthesis_success": false,
+    "enumeration_requires_one_symmetry_distinct_site_per_role": true,
+    "family_balance": "inverse_product_of_role_family_sizes",
+    "gzip_compresslevel": 6,
+    "identity": "canonical_constitutional_smiles",
+    "maximum_forward_outcomes": 64,
+    "maximum_heavy_atoms": 282,
+    "preserve_current_exact_products_with_resolved_multisite_heads": true,
+    "product_fold_policy": "heldout_if_any_held_else_calibration_if_any_calibration_else_train",
+    "reaction_id": "ugi_3cr_agile",
+    "source_activity_labels_inherited": false,
+    "uniform_product_row_sampling_allowed": false
+  },
+  "randomness": {
+    "used": false
+  },
+  "schema_version": "phase1_ugi_expanded_enumeration_result.v1",
+  "software": {
+    "executable": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "status": "complete_exact_expanded_ugi_enumeration",
+  "summary": {
+    "admitted_components": {
+      "amine_head": 264,
+      "isocyanide_tail": 53,
+      "oxoester_aldehyde_body_tail": 107
+    },
+    "attempted_expanded_triples": 1485802,
+    "component_novelty_class_counts": {
+      "bounded_structural_expansion_component": 127326,
+      "familiar_components": 12889,
+      "transferred_known_component": 1346200
+    },
+    "enumeration_duplicates_against_existing_or_expanded": 11773,
+    "invalid_or_ambiguous_triples": 0,
+    "preserved_current_products": 12386,
+    "product_fold_counts": {
+      "calibration": 349013,
+      "heldout": 654370,
+      "train": 483032
+    },
+    "single_site_enumeration_components": {
+      "amine_head": 262,
+      "isocyanide_tail": 53,
+      "oxoester_aldehyde_body_tail": 107
+    },
+    "source_stratum_counts": {
+      "current_phase1_union": 12386,
+      "expanded_exact_forward_enumeration": 1474029
+    },
+    "unique_products": 1486415,
+    "valid_unique_outcome_triples": 1485802
+  },
+  "task": "Phase 1 exact expanded Ugi product enumeration"
+}

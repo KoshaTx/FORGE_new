@@ -1,0 +1,79 @@
+{
+  "artifacts": {
+    "component_ledger_sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a",
+    "product_ledger_sha256": "4cc614c70aae7ec1a2442748757eff13e6b808bef5b60b730858da4d0453adfb"
+  },
+  "claims_boundary": {
+    "complete_computational_dossier_is_experimental_success": false,
+    "complete_computational_dossier_is_observed_exact_product_synthesis": false,
+    "current_procurement_snapshot_guarantees_future_availability": false,
+    "family_projection_is_exact_source_route_evidence": false
+  },
+  "evidence_policy": {
+    "ambiguous_or_missing_step_passes": false,
+    "complete_component_requires": "accepted_terminal_or_exact_source_all_steps_uniquely_verified_and_all_leaves_closed",
+    "complete_computational_dossier_is_experimental_success": false,
+    "complete_computational_dossier_is_observed_synthesis": false,
+    "complete_product_requires": "exact_L1_forward_reconstruction_and_three_complete_exact_source_components",
+    "family_projection_is_exact_source": false,
+    "open_terminal_leaf_passes": false
+  },
+  "inputs": {
+    "component_dossier": {
+      "path": "results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "sha256": "87e667fcf53e951421e66a6b7878b1f6eee44622996c91774a46199e31aff1bc"
+    },
+    "component_program": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "config": {
+      "path": "configs/route/phase1_ugi3_complete_computational_dossiers.json",
+      "sha256": "a8f4b9032efd7a7ff58a4ce0fe5577befeedecfcbeac913cba9ab2431e2687bb"
+    },
+    "dossier_result": {
+      "path": "results/phase1/ugi3_dossier_coverage/result.json",
+      "sha256": "1a4b74b552ecd293966f309cf3d127ee8e8d52b389f5edf94bd84760bda93333"
+    },
+    "product_dossier": {
+      "path": "results/phase1/ugi3_dossier_coverage/product_dossier_ledger.csv.gz",
+      "sha256": "86b3dfa525e265be8587d9c9aa43aec0bb0c172332b64add3492592f698023d5"
+    },
+    "product_program": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "step_ledger": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"
+    },
+    "step_result": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/result.json",
+      "sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"
+    },
+    "terminal_procurement": {
+      "path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    }
+  },
+  "safe_claim": "1,734 of 12,276 Ugi products have complete forward-consistent computational L1/L2/L3 dossiers under exact-source route evidence and the frozen procurement snapshot. A complete computational dossier does not establish that the exact product was synthesized or that synthesis, formulation or biological testing succeeded.",
+  "schema_version": "phase1_ugi3_complete_computational_dossiers.v1",
+  "summary": {
+    "complete_exact_source_computational_dossiers": 1734,
+    "components": 93,
+    "components_by_evidence_tier": {
+      "accepted_terminal_l3_closed": 17,
+      "exact_source_l2_verified_l3_closed": 23,
+      "exact_source_l2_verified_l3_open": 1,
+      "family_projected_l3_closed_not_exact_source": 47,
+      "unresolved_component": 5
+    },
+    "products": 12276,
+    "products_by_dossier_tier": {
+      "complete_exact_source_computational_dossier": 1734,
+      "family_projected_support_not_exact_source": 6698,
+      "incomplete_computational_dossier": 3844
+    }
+  },
+  "task": "Fail-closed composition of exact Ugi L1, exact-source L2 and frozen L3 computational dossiers"
+}

@@ -234,3 +234,75 @@ results/phase1/ugi_novelty_audit_v1/*
 !results/phase1/ugi_prospective_panel_v6/
 results/phase1/ugi_prospective_panel_v6/*
 !results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz
+
+# --- handoff 07396db: inputs and evidence needed to re-derive the paper ---
+# collaborator handoff: chemistry source of truth, corpus chain, route evidence,
+# generator gates and the potency oracle. R1 (96 MB, M0-04 baseline control, not used
+# by the paper) and the 756 MB training cache stay out.
+# Parent dirs are negated first, then every file by name, because an earlier `dir/*`
+# rule still hides the contents otherwise.
+!results/phase1/forge_coverage_splits_v1/
+!results/phase1/ugi3_complete_computational_dossiers/
+!results/phase1/ugi3_exact_source_forward_verification/
+!results/phase1/ugi3_production_registry_route_readiness/
+!results/phase1/ugi3_route_registry_pair_v1/
+!results/phase1/ugi_balanced_chemistry_corpus_v2/
+!results/phase1/ugi_component_expansion/
+!results/phase1/ugi_distributional_applicability_v3/
+!results/phase1/ugi_expanded_enumeration/
+!data/vendor/building_block_pool_v1.json
+!data/vendor/corpus_fold_assignments.csv
+!data/vendor/qualified_reaction_families_v1.json
+!data/vendor/qualified_reactions_v1.json
+!data/vendor/splits_manifest.json
+!data/vendor/ugi_3cr_building_blocks_v1.json
+!results/m0_07/oracle_graph_pretraining_full_checkpoint.pt
+!results/m0_07/oracle_production_checkpoint.pt
+!results/phase1/forge_coverage_splits_v1/splits.json
+!results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz
+!results/phase1/ugi3_complete_computational_dossiers/product_dossier_ledger.csv.gz
+!results/phase1/ugi3_complete_computational_dossiers/result.json
+!results/phase1/ugi3_exact_source_forward_verification/result.json
+!results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz
+!results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz
+!results/phase1/ugi3_production_registry_route_readiness/recurring_gap_ledger.csv.gz
+!results/phase1/ugi3_production_registry_route_readiness/result.json
+!results/phase1/ugi3_route_registry_pair_v1/binding.json
+!results/phase1/ugi3_route_registry_pair_v1/r0_without_c18.manifest.json
+!results/phase1/ugi3_route_registry_pair_v1/r0_without_c18.records.json.gz
+!results/phase1/ugi3_route_registry_pair_v1/r1_with_c18.manifest.json
+!results/phase1/ugi3_route_registry_pair_v1/r1_with_c18.records.json.gz
+!results/phase1/ugi3_route_registry_pair_v1/registry_diff.json
+!results/phase1/ugi_architecture_checkpoint_selection_v3.json
+!results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz
+!results/phase1/ugi_balanced_chemistry_corpus_v2/result.json
+!results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz
+!results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_bonds.csv.gz
+!results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_component_mappings.csv.gz
+!results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/adjudication_result.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/aizynthfinder_hypotheses.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/aizynthfinder_result.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/attrition_by_arm_cohort.csv.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/cache_audit.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/candidate_exact_ledger.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/candidate_route_ledger.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/component_exact_evidence.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/component_route_ledger.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/exact_evidence_result.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/graph2edits_proposals.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/graph2edits_result.json
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/leaf_ledger.jsonl.gz
+!results/phase1/ugi_bounded_hybrid_route_cascade_v1/preflight.json
+!results/phase1/ugi_component_expansion/component_registry.csv.gz
+!results/phase1/ugi_component_expansion/result.json
+!results/phase1/ugi_distributional_applicability_v3/generated_applicability.csv.gz
+!results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz
+!results/phase1/ugi_distributional_applicability_v3/result.json
+!results/phase1/ugi_expanded_enumeration/products.csv.gz
+!results/phase1/ugi_expanded_enumeration/result.json
+!results/phase1/ugi_joint_sparse_balanced_v2_checkpoint_series_audit.json
+!results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json
+!results/phase1/ugi_joint_sparse_balanced_v2_launch_preflight.json
+!results/phase1/ugi_joint_sparse_balanced_v2_launch_receipt.json
+results/phase1/ugi_bounded_hybrid_route_cascade_v1/planner_cache/
