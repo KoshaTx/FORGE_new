@@ -12,7 +12,17 @@ to stay byte-compatible with artifacts already on disk, because those artifacts'
 paper's evidence chain and may not move. See `docs/REFACTOR_BASELINE.md`.
 """
 
-from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.hashing import PinError, pin_record, resolve_pin, sha256_bytes, sha256_file
+from forge.core.io import (
+    atomic_write,
+    read_csv,
+    read_json,
+    read_jsonl,
+    stable_json,
+    write_csv,
+    write_json,
+    write_jsonl,
+)
 from forge.core.types import (
     ComponentId,
     EvidenceStatus,
@@ -26,11 +36,22 @@ from forge.core.types import (
 __all__ = [
     "ComponentId",
     "EvidenceStatus",
+    "PinError",
     "ProductId",
     "RoleName",
     "Sha256",
     "Smiles",
     "SupportTier",
+    "atomic_write",
+    "pin_record",
+    "read_csv",
+    "read_json",
+    "read_jsonl",
+    "resolve_pin",
     "sha256_bytes",
     "sha256_file",
+    "stable_json",
+    "write_csv",
+    "write_json",
+    "write_jsonl",
 ]
