@@ -17,7 +17,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import _rstar_step
+from forge.generate.sampling import rstar_step as _rstar_step
 from forge.product.lipid_context import HEAD_REGION
 from forge.product.phase1_tree_topology_flow import preorder_offspring_to_parents
 from forge.product.v5_morphology_program import (

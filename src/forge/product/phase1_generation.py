@@ -10,7 +10,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import AtomState, _model_state_sha256, _rstar_step
+from forge.generate.sampling import rstar_step as _rstar_step
+from forge.product.defog_feasibility import AtomState, _model_state_sha256
 from forge.product.lipid_context import tree_pair_ring_sizes
 from forge.product.phase1_flow import (
     Phase1FlowError,

@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import _rstar_step
+from forge.generate.sampling import rstar_step as _rstar_step
 
 try:
     import torch
@@ -336,9 +336,7 @@ def noise_region_batch(
     examples = torch.arange(
         active.shape[0],
         device=active.device,
-    )[:, None].expand_as(
-        active
-    )[active]
+    )[:, None].expand_as(active)[active]
     probabilities = source[active] * (1.0 - t[examples, None])
     probabilities.scatter_add_(
         1,

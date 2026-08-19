@@ -60,7 +60,7 @@ warn_unused_ignores = true
 [[tool.mypy.overrides]]
 # New code is held to the standard the rest is moving toward. Everything in forge.core is written
 # after this config exists, so there is no legacy to grandfather.
-module = "forge.core.*"
+module = ["forge.core.*", "forge.generate.*"]
 disallow_untyped_defs = true
 disallow_any_generics = true
 strict_equality = true
