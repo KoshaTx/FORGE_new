@@ -86,7 +86,7 @@ They require separate source qualification under the same evidence policy.
 - `results/m0_05_source_adjudication/result.json`
 - `results/m0_05_source_adjudication/evidence_ledger.csv.gz`
 - `configs/corpus/m0_05_source_evidence_adjudication.json`
-- `.agents/skills/forge-adjudicate-chemistry-evidence/SKILL.md`
+- `.claude/skills/forge-adjudicate-chemistry-evidence/SKILL.md`
 
 ```bash
 make m0-05-adjudicate

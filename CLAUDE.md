@@ -12,19 +12,24 @@ Before doing any work in this repository, read these files completely and in thi
 3. `docs/PHASE1_UGI_FIRST_PRODUCTION_PLAN.md`
 4. `docs/DECISION_LOG.md` entries relevant to the task
 
-For code, pipelines, tests or result artifacts, also read:
+Three repository skills live in `.claude/skills/` and are discovered automatically, so they load
+when the work matches rather than needing to be opened by hand. Invoke one by name when you want it
+early. `.agents/skills` is a symlink to the same directory, kept because each skill also ships an
+`agents/openai.yaml` for non-Claude tooling.
 
-- `.agents/skills/forge-production-engineering/SKILL.md`
+For code, pipelines, tests or result artifacts:
 
-For manuscript prose, captions, evidence reconciliation or reviewer-facing text, also read:
+- `$forge-production-engineering`
 
-- `.agents/skills/forge-paper-writing/SKILL.md`
+For manuscript prose, captions, evidence reconciliation or reviewer-facing text:
+
+- `$forge-paper-writing`
 - `docs/provenance/NATURE_BIOTECH_DRAFTING_ANALYSIS.md`
 - `docs/MANUSCRIPT_EDITORIAL_GUIDE.md`
 
-For chemistry-source adjudication, also read:
+For chemistry-source adjudication:
 
-- `.agents/skills/forge-adjudicate-chemistry-evidence/SKILL.md`
+- `$forge-adjudicate-chemistry-evidence`
 
 `AGENTS.md` is the repository's current scientific-validity contract. Frozen configs and hash-pinned
 result artifacts remain the source of numeric truth. The dated lossless handoff is a historical

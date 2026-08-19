@@ -184,8 +184,10 @@ A task is complete when **all** of these hold:
 
 ## Task-specific workflows
 
-Repository-scoped skills live under `.agents/skills/` and provide focused checklists without bloating this
-contract:
+Repository-scoped skills live under `.claude/skills/` and provide focused checklists without bloating
+this contract. They are discovered automatically from that path, which is what makes the `$name`
+invocations below work; `.agents/skills` remains as a symlink to the same directory, because each
+skill also ships an `agents/openai.yaml` for non-Claude tooling.
 
 - Use `$forge-production-engineering` for implementation, refactoring, review, data pipelines, CLIs, and
   tests.
