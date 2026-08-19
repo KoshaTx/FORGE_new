@@ -1,9 +1,9 @@
-"""Every source file pinned by a config must be under version control.
+"""Every source identity pinned by a config must be recoverable.
 
 A config that pins a file by SHA-256 asserts "this artifact was produced by
-exactly this code".  If that file is not tracked by git, the assertion is
-unfalsifiable and unrecoverable: once the file changes, the pinned content is
-gone and no one can ever reproduce the artifact or even see what was lost.
+exactly this code". Active code must be tracked. Retired code may instead resolve through the
+content-addressed historical archive, which preserves the exact path/hash identity without keeping
+dead code importable.
 
 This is not a style rule.  It is the difference between a pin that can be
 audited and a pin that merely records a number nobody can check.
@@ -13,8 +13,8 @@ from __future__ import annotations
 
 import json
 import subprocess
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -28,21 +28,21 @@ EXTERNAL_PINS = {
 }
 
 
-def _pinned_python_paths() -> set[str]:
-    """Collect every `.py` path pinned with a sha256 anywhere under configs/."""
+def _pinned_python_identities() -> set[tuple[str, str]]:
+    """Collect every ``(path, sha256)`` Python identity pinned under configs/."""
 
-    def walk(node: object) -> Iterator[str]:
+    def walk(node: object) -> Iterator[tuple[str, str]]:
         if isinstance(node, dict):
             path, digest = node.get("path"), node.get("sha256")
             if isinstance(path, str) and isinstance(digest, str) and path.endswith(".py"):
-                yield path
+                yield path, digest
             for value in node.values():
                 yield from walk(value)
         elif isinstance(node, list):
             for value in node:
                 yield from walk(value)
 
-    pinned: set[str] = set()
+    pinned: set[tuple[str, str]] = set()
     for config in (REPO / "configs").rglob("*.json"):
         try:
             payload = json.loads(config.read_text())
@@ -59,29 +59,45 @@ def _tracked_paths() -> set[str]:
     return set(listing.stdout.splitlines())
 
 
-def test_every_pinned_source_file_is_tracked_by_git() -> None:
-    pinned = _pinned_python_paths()
+def _unrecoverable_pins() -> list[str]:
+    from forge.core.provenance_archive import HistoricalPinArchive
+    from forge.provenance.pins import load_moves
+
+    pinned = _pinned_python_identities()
     assert pinned, "no pinned .py paths found; the collector is probably broken"
-
     tracked = _tracked_paths()
-    untracked = sorted(p for p in pinned if p not in tracked and p not in EXTERNAL_PINS)
+    moves = load_moves(REPO / "docs/artifact_path_moves.json")
+    archive = HistoricalPinArchive.load(REPO / "provenance/frozen-code/manifest.json", REPO)
+    unresolved = []
+    for path, digest in sorted(pinned):
+        if path in EXTERNAL_PINS:
+            continue
+        active_path = moves.get(path, path)
+        active = REPO / active_path
+        # Active drift is adjudicated by the separate provenance ratchet. This test asks only
+        # whether the path is tracked or, once retired, its exact historical identity is archived.
+        if active.is_file() and active_path in tracked:
+            continue
+        if archive.resolve(path, digest) is not None:
+            continue
+        unresolved.append(f"{path} {digest}")
+    return unresolved
 
-    assert not untracked, (
-        f"{len(untracked)} source files are pinned by a config but are not tracked by git, "
-        "so their pinned content cannot be recovered or audited. Commit them:\n  "
-        + "\n  ".join(untracked)
+
+def test_every_active_pinned_source_file_is_tracked_or_archived() -> None:
+    unresolved = _unrecoverable_pins()
+
+    assert not unresolved, (
+        f"{len(unresolved)} pinned source identities are neither tracked at their exact bytes nor "
+        "present in provenance/frozen-code/:\n  "
+        + "\n  ".join(unresolved)
     )
 
 
-def test_pinned_source_files_exist_on_disk() -> None:
-    """A pin naming a file that is absent is a dangling provenance claim."""
+def test_retired_pinned_source_files_resolve_from_the_archive() -> None:
+    """Deleting an active historical path is valid only when its exact bytes remain resolvable."""
 
-    missing = sorted(
-        path
-        for path in _pinned_python_paths()
-        if path not in EXTERNAL_PINS and not (REPO / path).is_file()
-    )
-    assert not missing, "configs pin source files that do not exist:\n  " + "\n  ".join(missing)
+    assert not _unrecoverable_pins()
 
 
 def test_quarantined_pin_tests_still_exist() -> None:

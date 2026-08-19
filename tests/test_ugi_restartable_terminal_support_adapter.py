@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_generated_terminal_support import DeclaredGraphSupportContext
 from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
 from forge.product.ugi_matched_budget_orchestration import (

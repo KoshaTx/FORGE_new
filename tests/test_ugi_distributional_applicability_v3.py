@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.bio.ugi_distributional_applicability_v3 import (
+from forge.potency.ugi_distributional_applicability_v3 import (
     _product_reference_excluding_role_identity,
 )
 

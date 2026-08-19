@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from forge.bio.ugi_generated_role_applicability_census import (
+from forge.potency.ugi_generated_role_applicability_census import (
     ROLES,
     VIEWS,
     _policy_classification,

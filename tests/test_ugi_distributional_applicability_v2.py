@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.bio.ugi_distributional_applicability_v2 import (
+from forge.potency.ugi_distributional_applicability_v2 import (
     CountChemicalReference,
     _identity_excluded_reference,
 )

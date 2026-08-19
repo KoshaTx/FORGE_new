@@ -1,4 +1,4 @@
-from forge.bio.ugi_potency_novelty_lane_audit import audit_pair_split_novelty
+from forge.potency.ugi_potency_novelty_lane_audit import audit_pair_split_novelty
 
 
 def test_pair_holdout_does_not_imply_component_identity_holdout() -> None:

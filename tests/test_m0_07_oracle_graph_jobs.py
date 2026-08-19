@@ -5,7 +5,7 @@ import gzip
 from collections import Counter
 from pathlib import Path
 
-from forge.bio.oracle_graph_jobs import build_graph_job_rows
+from forge.potency.oracle_graph_jobs import build_graph_job_rows
 
 REPO = Path(__file__).resolve().parents[1]
 

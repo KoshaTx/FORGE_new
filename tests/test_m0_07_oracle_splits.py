@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.oracle_splits import (
+from forge.potency.oracle_splits import (
     OracleSplitError,
     _audit_scaffold_split,
     _load_config,
@@ -163,7 +163,9 @@ def test_frozen_oracle_split_build_environment_is_reported(tmp_path: Path) -> No
     output_dir = tmp_path / "m0_07"
     build_oracle_splits(REPO / "configs/bio/m0_07_oracle_splits.json", output_dir, REPO)
 
-    rebuilt = json.loads((output_dir / "oracle_split_manifest.json").read_text()).get("software", {})
+    rebuilt = json.loads((output_dir / "oracle_split_manifest.json").read_text()).get(
+        "software", {}
+    )
     stored = json.loads(result_path.read_text()).get("software", {})
     drifted = {
         key: (stored.get(key), rebuilt.get(key))
@@ -171,5 +173,7 @@ def test_frozen_oracle_split_build_environment_is_reported(tmp_path: Path) -> No
         if stored.get(key) != rebuilt.get(key)
     }
     if drifted:
-        detail = "; ".join(f"{k}: stored {was!r} -> current {now!r}" for k, (was, now) in drifted.items())
+        detail = "; ".join(
+            f"{k}: stored {was!r} -> current {now!r}" for k, (was, now) in drifted.items()
+        )
         pytest.skip(f"build environment differs from the frozen manifest ({detail})")

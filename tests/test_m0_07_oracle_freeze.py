@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.oracle_freeze import (
+from forge.potency.oracle_freeze import (
     OracleFreezeError,
     aggregate_candidates,
     build_applicability_policy,

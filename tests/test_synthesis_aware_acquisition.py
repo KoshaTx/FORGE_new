@@ -10,8 +10,8 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.bio.reaction_factorized_surrogate import ReactionFactorizedSurrogate
-from forge.bio.synthesis_aware_acquisition import (
+from forge.potency.reaction_factorized_surrogate import ReactionFactorizedSurrogate
+from forge.potency.synthesis_aware_acquisition import (
     AcquisitionPolicy,
     Candidate,
     SynthesisAwareAcquisitionError,
@@ -99,7 +99,10 @@ def test_pure_value_weight_reproduces_score_ranking():
     candidates = [c for c in make_candidates() if c.cost == 1.0]
     surrogate = fitted_surrogate(make_candidates())
     policy = AcquisitionPolicy(
-        batch_size=2, budget=99.0, value_weight=1.0, activity_floor_quantile=0.0,
+        batch_size=2,
+        budget=99.0,
+        value_weight=1.0,
+        activity_floor_quantile=0.0,
         cost_normalised=False,
     )
     chosen = select_batch(surrogate, candidates, [c.as_record() for c in candidates], policy)
@@ -111,7 +114,10 @@ def test_pure_information_weight_differs_from_score_ranking():
     candidates = make_candidates()
     surrogate = fitted_surrogate(candidates)
     policy = AcquisitionPolicy(
-        batch_size=4, budget=99.0, value_weight=0.0, activity_floor_quantile=0.0,
+        batch_size=4,
+        budget=99.0,
+        value_weight=0.0,
+        activity_floor_quantile=0.0,
         cost_normalised=False,
     )
     informative = select_batch(surrogate, candidates, [c.as_record() for c in candidates], policy)
@@ -124,7 +130,10 @@ def test_batch_is_chosen_jointly_not_as_top_k():
     candidates = make_candidates(16)
     surrogate = fitted_surrogate(candidates)
     policy = AcquisitionPolicy(
-        batch_size=5, budget=99.0, value_weight=0.0, activity_floor_quantile=0.0,
+        batch_size=5,
+        budget=99.0,
+        value_weight=0.0,
+        activity_floor_quantile=0.0,
         cost_normalised=False,
     )
     result = select_batch(surrogate, candidates, [c.as_record() for c in candidates], policy)
@@ -138,11 +147,15 @@ def test_cost_normalisation_prefers_cheaper_designs():
     surrogate = fitted_surrogate(candidates)
     common = dict(batch_size=3, budget=99.0, value_weight=0.5, activity_floor_quantile=0.0)
     cheap = select_batch(
-        surrogate, candidates, [c.as_record() for c in candidates],
+        surrogate,
+        candidates,
+        [c.as_record() for c in candidates],
         AcquisitionPolicy(**common, cost_normalised=True),
     )
     plain = select_batch(
-        surrogate, candidates, [c.as_record() for c in candidates],
+        surrogate,
+        candidates,
+        [c.as_record() for c in candidates],
         AcquisitionPolicy(**common, cost_normalised=False),
     )
     assert cheap.total_cost <= plain.total_cost
@@ -198,7 +211,7 @@ def test_activity_floor_is_separable_from_the_selection_rule():
     distribution while its baselines sample freely. On a learning metric that is a handicap,
     not an advantage, and it turns the comparison into one about the floor.
     """
-    from forge.bio.synthesis_aware_acquisition import apply_activity_floor
+    from forge.potency.synthesis_aware_acquisition import apply_activity_floor
 
     candidates = make_candidates(20)
     surrogate = fitted_surrogate(candidates)
@@ -217,7 +230,7 @@ def test_activity_floor_is_separable_from_the_selection_rule():
 
 
 def test_floor_rejects_an_empty_pool_and_a_bad_quantile():
-    from forge.bio.synthesis_aware_acquisition import apply_activity_floor
+    from forge.potency.synthesis_aware_acquisition import apply_activity_floor
 
     candidates = make_candidates()
     surrogate = fitted_surrogate(candidates)

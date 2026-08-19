@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from forge.bio.oracle_lantern import (
+from forge.potency.oracle_lantern import (
     LanternReproductionError,
     load_lantern_config,
     load_numpy_feature_dictionary,

@@ -12,7 +12,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.bio.reaction_factorized_surrogate import (
+from forge.potency.reaction_factorized_surrogate import (
     ReactionFactorizedSurrogate,
     ReactionFactorizedSurrogateError,
     RoleWeights,

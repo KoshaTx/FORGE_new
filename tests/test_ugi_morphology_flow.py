@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_morphology_flow import (
     UgiMorphologyFlow,
     collate_ugi_morphology_records,

@@ -1,6 +1,6 @@
 import numpy as np
 
-from forge.bio.ugi_morphology_potency_proposal_sweep import (
+from forge.potency.ugi_morphology_potency_proposal_sweep import (
     _calibrated_utility,
     _candidate_distribution,
 )

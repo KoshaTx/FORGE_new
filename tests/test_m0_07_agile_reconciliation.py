@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.agile_reconciliation import (
+from forge.potency.agile_reconciliation import (
     AgileReconciliationError,
     _canonical,
     _load_config,

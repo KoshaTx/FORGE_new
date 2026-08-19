@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 
 import forge.product.ugi_morphology_program as morphology_program
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.canonical_representation_audit import load_atom_vocabulary
 from forge.product.ugi_adapter_features import tensorize_ugi_l1_support_record
 from forge.product.ugi_morphology_program import (

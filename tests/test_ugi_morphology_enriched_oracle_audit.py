@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.bio.ugi_morphology_enriched_oracle_audit import (
+from forge.potency.ugi_morphology_enriched_oracle_audit import (
     UgiMorphologyEnrichedOracleAuditError,
     effective_sample_size,
     weighted_prediction_metrics,

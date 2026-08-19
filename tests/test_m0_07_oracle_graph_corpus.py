@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.oracle_graph_corpus import (
+from forge.potency.oracle_graph_corpus import (
     OracleGraphCorpusError,
     _load_json,
     run_oracle_graph_corpus_audit,

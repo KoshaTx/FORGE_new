@@ -4,7 +4,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from forge.bio.ugi_hela_potency_diagnostic import HeLaPotencyEvaluation
+from forge.potency.ugi_hela_potency_diagnostic import HeLaPotencyEvaluation
 from forge.product.ugi_hela_potency_guidance_seam_v1 import (
     run_lambda_zero_identity_gate,
     run_potency_seed,

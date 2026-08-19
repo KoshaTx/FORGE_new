@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.oracle_campaign_selection import (
+from forge.potency.oracle_campaign_selection import (
     OracleCampaignSelectionError,
     run_campaign_selection,
     select_campaign_oracle,

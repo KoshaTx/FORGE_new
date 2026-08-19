@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from forge.bio.ugi_morphology_proposal_strength_sweep import (
+from forge.potency.ugi_morphology_proposal_strength_sweep import (
     _cluster_bootstrap,
     _effective_count,
 )

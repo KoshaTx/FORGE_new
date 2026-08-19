@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from forge.bio.ugi_morphology_potency_matched_adjudication import (
+from forge.potency.ugi_morphology_potency_matched_adjudication import (
     EXPECTED_ARMS,
     POTENCY_ARM,
     SUPPORT_ARM,

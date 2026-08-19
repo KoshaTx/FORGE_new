@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from forge.bio.oracle_classical import (
+from forge.potency.oracle_classical import (
     OracleClassicalError,
     Partition,
     aggregate_selection_metrics,

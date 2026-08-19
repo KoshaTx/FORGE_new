@@ -31,7 +31,7 @@ SALT = "CCN.Cl"
 
 
 def test_agrees_with_the_canonicalizer_most_modules_route_through() -> None:
-    legacy = pytest.importorskip("forge.bio.ugi_distributional_applicability")
+    legacy = pytest.importorskip("forge.potency.ugi_distributional_applicability")
     for smiles in ("CCO", CIS, TRANS, SALT, "c1ccccc1", "C1=CC=CC=C1", "C[C@H](N)C(=O)O"):
         assert canonical_constitution(smiles) == legacy._canonical(smiles)
 

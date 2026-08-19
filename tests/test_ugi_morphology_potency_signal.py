@@ -1,6 +1,6 @@
 import numpy as np
 
-from forge.bio.ugi_morphology_potency_signal import prediction_metrics
+from forge.potency.ugi_morphology_potency_signal import prediction_metrics
 
 
 def test_prediction_metrics_detect_rank_and_top_quartile_signal() -> None:

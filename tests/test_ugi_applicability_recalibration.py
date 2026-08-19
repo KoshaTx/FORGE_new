@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from forge.bio.ugi_applicability_recalibration import (
+from forge.potency.ugi_applicability_recalibration import (
     _group_id,
     _meta_fold,
     _normalized_radius,

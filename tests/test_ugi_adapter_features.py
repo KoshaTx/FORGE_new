@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES, annotate_qualified_ugi_product
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES, annotate_qualified_ugi_product
 from forge.product.canonical_representation_audit import load_atom_vocabulary
 from forge.product.ugi_adapter_features import (
     ASSEMBLY_INTRODUCED,

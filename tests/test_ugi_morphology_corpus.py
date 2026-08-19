@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_morphology_corpus import (
     balanced_product_weights,
     component_marginal_errors,

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from forge.bio.ugi_continuous_novelty_matched_ranking import _select_equal_budgets
-from forge.bio.ugi_morphology_potency_matched_adjudication import EXPECTED_ARMS
+from forge.potency.ugi_continuous_novelty_matched_ranking import _select_equal_budgets
+from forge.potency.ugi_morphology_potency_matched_adjudication import EXPECTED_ARMS
 
 
 def test_equal_oracle_budget_is_applied_separately_by_novelty_pattern() -> None:

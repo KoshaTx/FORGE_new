@@ -8,7 +8,9 @@
 # Do not fix these inside a refactor commit -- fix them separately, so a real regression is
 # never hidden among them. Remove a line here when its test is genuinely fixed.
 #
-# Updated after handoff f58c679: 9 tests fixed, now 200 known failures.
+# Updated after handoff f58c679 and re-audited 2026-08-19: 201 known failing nodes.
+# One parameterized node had been truncated at the first space, and one immutable-source test was
+# already inconsistent in commit cc947f5 but absent from the list; neither was changed by the refactor.
 #
 tests/test_l2_forward_resolver.py::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked
 tests/test_l2_forward_resolver.py::test_real_resolver_replays_one_development_exact_pair_without_graph2edits
@@ -165,7 +167,7 @@ tests/test_ugi_potency_promotion_failure_audit.py::test_frozen_potency_failure_i
 tests/test_ugi_production_generator_manifest.py::test_production_generator_manifest_authenticates_all_pinned_artifacts
 tests/test_ugi_production_generator_manifest.py::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy
 tests/test_ugi_production_generator_manifest.py::test_v3_production_generator_manifest_freezes_refit_selection
-tests/test_ugi_production_synthesis_guidance_seam_v4.py::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration
+tests/test_ugi_production_synthesis_guidance_seam_v4.py::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration changed]
 tests/test_ugi_production_synthesis_guidance_seam_v4.py::test_v4_config_pins_one_nonzero_synthesis_only_assignment
 tests/test_ugi_production_terminal_route_evaluator.py::test_factory_derives_production_context_and_exact_internal_roles
 tests/test_ugi_production_terminal_route_evaluator.py::test_factory_rejects_wrong_l1_identity_exact_expiry_and_mutated_graph_support
@@ -201,6 +203,7 @@ tests/test_ugi_selected_guidance_adapter_v2.py::test_v2_lane_binds_current_check
 tests/test_ugi_selected_guidance_adapter_v2.py::test_v2_restartable_final_matches_direct_independent_stream_callback
 tests/test_ugi_selected_guidance_adapter_v3.py::test_comparison_rows_fail_semantically_even_under_rehashed_payload
 tests/test_ugi_selected_guidance_adapter_v3.py::test_comparison_rows_require_complete_canonical_coverage
+tests/test_ugi_selected_guidance_adapter_v3.py::test_frozen_v2_sources_remain_byte_identical
 tests/test_ugi_selected_restartable_generator.py::test_callback_seals_independently_nonexact_native_row_without_retry
 tests/test_ugi_selected_restartable_generator.py::test_callback_seals_invalid_native_row_without_retry
 tests/test_ugi_selected_restartable_generator.py::test_invalid_and_nonexact_rows_are_sealed_without_route_support

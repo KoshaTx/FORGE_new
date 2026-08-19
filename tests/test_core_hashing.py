@@ -21,6 +21,7 @@ from forge.core.hashing import (
     sha256_bytes,
     sha256_file,
     sha256_json,
+    sha256_tree,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -42,6 +43,19 @@ def test_sha256_file_is_chunk_size_invariant(tmp_path: Path) -> None:
     target = tmp_path / "payload.bin"
     target.write_bytes(bytes(range(256)) * 9_000)
     assert sha256_file(target, chunk_size=7) == sha256_file(target, chunk_size=1 << 20)
+
+
+def test_source_tree_hash_includes_relative_paths_and_is_order_independent(tmp_path: Path) -> None:
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    for root in (first, second):
+        (root / "nested").mkdir(parents=True)
+        (root / "nested" / "b.py").write_bytes(b"B = 2\n")
+        (root / "a.py").write_bytes(b"A = 1\n")
+    assert sha256_tree(first) == sha256_tree(second)
+
+    (second / "a.py").rename(second / "renamed.py")
+    assert sha256_tree(first) != sha256_tree(second)
 
 
 def test_agrees_with_the_implementation_it_replaces(tmp_path: Path) -> None:

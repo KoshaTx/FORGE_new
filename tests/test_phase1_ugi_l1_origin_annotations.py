@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.ugi_semantic_annotations import (
+from forge.potency.ugi_semantic_annotations import (
     ROLE_NAMES,
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,

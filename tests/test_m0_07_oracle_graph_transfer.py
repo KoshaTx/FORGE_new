@@ -6,14 +6,14 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.bio.oracle_graph import (
+from forge.potency.oracle_graph import (
     DMPNNEncoder,
     GraphFeatureVocabulary,
     OracleGraphRecord,
     tensorize_smiles,
 )
-from forge.bio.oracle_graph_pretraining import RESULT_SCHEMA_VERSION
-from forge.bio.oracle_graph_transfer import (
+from forge.potency.oracle_graph_pretraining import RESULT_SCHEMA_VERSION
+from forge.potency.oracle_graph_transfer import (
     FIT_SCHEMA_VERSION,
     OracleGraphTransferError,
     build_transfer_model,

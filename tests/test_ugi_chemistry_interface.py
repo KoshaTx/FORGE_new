@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.canonical_representation_audit import load_atom_vocabulary
 from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
 from forge.product.ugi_chemistry_interface import (
@@ -80,9 +80,9 @@ def test_stochastic_terminal_choice_is_seeded_and_respects_support() -> None:
 
 
 @cache
-def _source_rows() -> (
-    tuple[dict[str, str], dict[str, str], tuple[dict[str, str], ...], tuple[dict[str, str], ...]]
-):
+def _source_rows() -> tuple[
+    dict[str, str], dict[str, str], tuple[dict[str, str], ...], tuple[dict[str, str], ...]
+]:
     products_path = REPO / "results/phase1/ugi_l1_semantics/ugi_l1_semantic_products.csv.gz"
     atoms_path = REPO / "results/phase1/ugi_l1_semantics/ugi_l1_semantic_atoms.csv.gz"
     with gzip.open(products_path, "rt", newline="") as handle:

@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     UgiGeneratedTerminalSupportError,

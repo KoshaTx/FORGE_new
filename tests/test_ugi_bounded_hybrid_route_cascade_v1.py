@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_bounded_hybrid_route_cascade import (
     COMPLETE,
     COMPONENT_STATES,

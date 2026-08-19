@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_fresh_pool_audit import (
     UgiFreshPoolAuditError,
     summarize_fresh_pool_rows,
