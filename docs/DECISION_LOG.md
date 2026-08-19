@@ -6977,3 +6977,30 @@ preserved unchanged.
 - This is an engineering/provenance closeout. It launches no training, sampling, route engine,
   biological guidance, or candidate selection and changes no scientific result, evidence tier,
   sealed holdout, or paper claim.
+
+## 2026-08-19 - Triage the 72 drifted code pins; 56 accepted, 16 held open
+
+- **The drift is inherited, not caused by the restructuring.** Checked against `cc947f5`, this
+  repository's first commit: 18 of the 20 drifted files *already* differed from their pinned digest
+  there and none matched. The pinned revisions therefore predate this tree. An earlier note in this
+  log attributing the config-pin drift largely to the `forge.core` migration was true of the
+  *recoverable* pins, which are now archived; it does not describe this residue.
+- **Recovery was attempted before any exception was written, and failed exhaustively.** Each of the
+  37 distinct missing revisions was searched for by content in every blob of this repository (2,194
+  over 31 commits), every blob of the predecessor `forge` repository (2,226 over 245 commits), and
+  every copy of the filename on the originating filesystem (153 copies). Zero matches. The
+  experiments ran against a working tree carrying uncommitted edits, so the recorded hash describes
+  a file state that was never committed anywhere and cannot be reconstructed.
+- 29 exceptions covering **56 pins over 13 files** were added to `docs/known_artifact_drift.json`.
+  Every one meets both halves of the stated bar: the bytes are unrecoverable, and every declaring
+  config carries an explicit `frozen_*` status. `CODE_DRIFT_BACKLOG` drops 72 to 16 and was
+  negative-tested at 15, which fails.
+- **16 pins are deliberately left open, in two groups.** Two are the unrun
+  `phase1_ugi_planner_reach_sweep_v1` pins against `ugi_bounded_hybrid_route_cascade_v1`, whose
+  outputs are present but a later vintage than the config froze against; that needs a decision about
+  which vintage the sweep runs on, not an exception. The other 14 sit under eight configs whose
+  schema has no `status` field at all — `fresh_pool_route_coverage` carries `status` and `task` at
+  v1-v3 and drops both from v4 onward — so "the artifact is frozen" is not asserted and the
+  acceptance bar cannot be applied. Fixing that schema regression is a prerequisite, not a chore.
+- This is a provenance bookkeeping change. It alters no scientific gate, candidate, sealed holdout,
+  biological authorization, or paper claim, and `make verify-pins` is unchanged at 742 / 0 drift.

@@ -1,7 +1,7 @@
 {
   "schema_version": "forge.known_artifact_drift.v2",
   "recorded_utc": "2026-08-18",
-  "why": "Artifacts pin the inputs they were computed from. A few historical inputs were already unrecoverable when this repository was consolidated. Each exception is matched on the exact original path and missing expected digest. Recoverable versions belong in provenance/frozen-code and remain byte-verified; a new missing digest or any corrupted archived blob fails the gate.",
+  "why": "Artifacts pin the inputs they were computed from. A few historical inputs were already unrecoverable when this repository was consolidated. Each exception is matched on the exact original path and missing expected digest. Recoverable versions belong in provenance/frozen-code and remain byte-verified; a new missing digest or any corrupted archived blob fails the gate. Entries marked 'pre-consolidation revision' share one cause and one search, recorded 2026-08-19. Their experiments ran before the FORGE engine was consolidated into this tree, against a working tree carrying uncommitted edits, so the config recorded the hash of a file state that was never committed anywhere. Each was searched for by content in every blob of this repository (2,194 over 31 commits), every blob of the predecessor forge repository (2,226 over 245 commits), and every copy of the filename on the originating filesystem (153 copies). None matched, and each file already differed from its pinned digest at cc947f5, the first commit here. Every declaring config carries an explicit frozen_* status.",
   "how_to_add": "Do not add an entry to make a failing gate pass. An entry is only correct when the pinned bytes are genuinely unrecoverable AND the artifact that pinned them is frozen. If the input still exists somewhere, restore it instead.",
   "known_drift": [
     {
@@ -26,11 +26,214 @@
       "reason": "A second preflight artifact pins another launcher revision whose bytes were already unavailable when this repository was consolidated."
     },
     {
+      "path": "scripts/phase1_recalibrate_ugi_applicability.py",
+      "expected": "f4b2ab70f684caed07bda1057392232c12a972f2932cc7f31509e770fa05fa8e",
+      "actual": "5ce1bb79bd5a016e66a5c53427b9f717897340c072f6a2713cdcae75c85d57e9",
+      "declared_by": "configs/bio/phase1_ugi_applicability_recalibration_v1.json",
+      "reason": "Pre-consolidation revision of phase1_recalibrate_ugi_applicability.py, declared by configs/bio/phase1_ugi_applicability_recalibration_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "expected": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f",
+      "actual": "b58d20c2bd81a1f450bf5c837e693a59c4e3f9bba788b39c203e89ab55849f2b",
+      "declared_by": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "reason": "Pre-consolidation revision of phase1_sample_ugi_joint_end_to_end.py, declared by configs/route/phase1_ugi3_route_saturation_holdout_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "expected": "5adbf50cab58ef4607b7828c133df4f1e33e814a28b6590cf2ce7ee2ca6b3620",
+      "actual": "b58d20c2bd81a1f450bf5c837e693a59c4e3f9bba788b39c203e89ab55849f2b",
+      "declared_by": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json",
+      "reason": "Pre-consolidation revision of phase1_sample_ugi_joint_end_to_end.py, declared by configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "expected": "bfaa795fa5538a4e7061125696aad79b9aeb26a8a5414442e0a6016a0e6233dd",
+      "actual": "b58d20c2bd81a1f450bf5c837e693a59c4e3f9bba788b39c203e89ab55849f2b",
+      "declared_by": "configs/model/phase1_ugi_terminal_decoder_challenger_v1.json",
+      "reason": "Pre-consolidation revision of phase1_sample_ugi_joint_end_to_end.py, declared by configs/model/phase1_ugi_terminal_decoder_challenger_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "expected": "fd4a5ba4b6afa074aad6d7c028feb9c3a7406ceb8986af2ee5edc99754afb401",
+      "actual": "b58d20c2bd81a1f450bf5c837e693a59c4e3f9bba788b39c203e89ab55849f2b",
+      "declared_by": "configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json",
+      "reason": "Pre-consolidation revision of phase1_sample_ugi_joint_end_to_end.py, declared by configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_select_ugi_architecture.py",
+      "expected": "2b87eec1bcd62c20a6e971d6e1e089fbf4d5b5254ca9e5aa1a42b85c38aa9804",
+      "actual": "329ce05978fb8bde55f70cab21055b29d18f0db3d4153c576b2ed779cc1a7590",
+      "declared_by": "configs/model/phase1_ugi_v3_nonselecting_shadow_gate_v1.json",
+      "reason": "Pre-consolidation revision of phase1_select_ugi_architecture.py, declared by configs/model/phase1_ugi_v3_nonselecting_shadow_gate_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_select_ugi_architecture.py",
+      "expected": "79aa6cafef3675861ae6d617f83ef8d11bb0c8d346961c26c3a1a0ecdcdd6ab8",
+      "actual": "329ce05978fb8bde55f70cab21055b29d18f0db3d4153c576b2ed779cc1a7590",
+      "declared_by": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v2.json",
+      "reason": "Pre-consolidation revision of phase1_select_ugi_architecture.py, declared by configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v2.json. See `why` for the recovery search."
+    },
+    {
+      "path": "scripts/phase1_select_ugi_architecture.py",
+      "expected": "a59fc4957e6f1fec1478306d08c1f570acf62f0527c5cf2df363febae941fdc7",
+      "actual": "329ce05978fb8bde55f70cab21055b29d18f0db3d4153c576b2ed779cc1a7590",
+      "declared_by": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v3.json",
+      "reason": "Pre-consolidation revision of phase1_select_ugi_architecture.py, declared by configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v3.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/bio/ugi_applicability_recalibration.py",
+      "expected": "453d87af92903a4f7dbebb0ce786e8412a05c7a07e9b571794daa1b63deb0af5",
+      "actual": "5d89068ec5597cb45777d1cd44c793f15c69d23b755103a3b5ac129f39a2eb77",
+      "declared_by": "configs/bio/phase1_ugi_applicability_recalibration_v1.json",
+      "reason": "Pre-consolidation revision of ugi_applicability_recalibration.py, declared by configs/bio/phase1_ugi_applicability_recalibration_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/defog_feasibility.py",
+      "expected": "35e5b880983098371bff9b487c48597bc6ab024d384b5b866108a931d3f0fac1",
+      "actual": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0",
+      "declared_by": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+      "reason": "Pre-consolidation revision of defog_feasibility.py, declared by configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "expected": "4ab226d8af1f7b3f8849ea15580ded5c99489532b8b2db1c18865dfa8b1232cf",
+      "actual": "a905446dd2fc784ca5cfa9a973fa61aa406af21b26d0e0ebc74bfa531ea03db3",
+      "declared_by": "configs/model/phase1_ugi_stochastic_channel_isolation_v1.json",
+      "reason": "Pre-consolidation revision of ugi_chemistry_flow.py, declared by configs/model/phase1_ugi_stochastic_channel_isolation_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "expected": "6c477141432de1ee6fe6dbd8a9b8976d29fa91090094d62cc0a85cf043d94069",
+      "actual": "a905446dd2fc784ca5cfa9a973fa61aa406af21b26d0e0ebc74bfa531ea03db3",
+      "declared_by": "configs/model/phase1_ugi_terminal_decoder_challenger_v1.json",
+      "reason": "Pre-consolidation revision of ugi_chemistry_flow.py, declared by configs/model/phase1_ugi_terminal_decoder_challenger_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "expected": "c40fe8216c93008de898cff019de241ec78b8e7dfb477d7658fe12ea90b0dd66",
+      "actual": "a905446dd2fc784ca5cfa9a973fa61aa406af21b26d0e0ebc74bfa531ea03db3",
+      "declared_by": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+      "reason": "Pre-consolidation revision of ugi_chemistry_flow.py, declared by configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_fresh_pool_audit.py",
+      "expected": "5b11d8d9c1b7dd162d0f4c57a31450135cd6ebb2576fd320f8994d9df1c78e78",
+      "actual": "d0cc9f5913f1cc02af8bc28dfa82d0acafdbd4508223aad603bd848c6bf2b446",
+      "declared_by": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
+      "reason": "Pre-consolidation revision of ugi_fresh_pool_audit.py, declared by configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_held_component_gate.py",
+      "expected": "140de727b72ce79746f738145361357367febfc6b36e26af095b17ea32ba2d2d",
+      "actual": "3acd864842ea28760049ea8fcbc67f60dcecfdfcc49d8cb09af54749c1f61fbb",
+      "declared_by": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+      "reason": "Pre-consolidation revision of ugi_held_component_gate.py, declared by configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "expected": "5e46de9ae2949655e7713a280f7f972635596ec98f87d20c9cbd2739a23a08d2",
+      "actual": "47ad195ba71948019b845dfa2d0655f96338fa694816a75d1454a5768f73daf7",
+      "declared_by": "configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_end_to_end_sampling.py, declared by configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "expected": "95841f35efb86ddb624e897bd6e9d795f39b29dc3d44bc1e22baa4ff035da686",
+      "actual": "47ad195ba71948019b845dfa2d0655f96338fa694816a75d1454a5768f73daf7",
+      "declared_by": "configs/model/phase1_ugi_terminal_decoder_challenger_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_end_to_end_sampling.py, declared by configs/model/phase1_ugi_terminal_decoder_challenger_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "expected": "b6ca29e2df810b1bb9e442d796954025681b446318d39cf8a514aad8aa2ab604",
+      "actual": "47ad195ba71948019b845dfa2d0655f96338fa694816a75d1454a5768f73daf7",
+      "declared_by": "configs/model/phase1_ugi_numerical_sampler_convergence_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_end_to_end_sampling.py, declared by configs/model/phase1_ugi_numerical_sampler_convergence_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "expected": "e2030c743cb723c9801ab92dce638d8cb9ab5ed667af620db53f9287de4a574c",
+      "actual": "47ad195ba71948019b845dfa2d0655f96338fa694816a75d1454a5768f73daf7",
+      "declared_by": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json",
+      "reason": "Pre-consolidation revision of ugi_joint_end_to_end_sampling.py, declared by configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "expected": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0",
+      "actual": "47ad195ba71948019b845dfa2d0655f96338fa694816a75d1454a5768f73daf7",
+      "declared_by": "configs/model/phase1_ugi_stochastic_channel_isolation_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_end_to_end_sampling.py, declared by configs/model/phase1_ugi_stochastic_channel_isolation_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "expected": "a3ff68b623a78131edff43f008882b0e5d1b6eb18460a3b43304e72e94e154eb",
+      "actual": "be6affcd03f3b51216e6121df384cd272fce4c7b1f6377d7a4d233d0c950f320",
+      "declared_by": "configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_sparse_flow.py, declared by configs/model/phase1_ugi_branch_spacing_promotion_step2000_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "expected": "e2ef56ad270b0a61363ffeca2648b3062748e3bb5e3ef9c814500723d3a7f5d6",
+      "actual": "be6affcd03f3b51216e6121df384cd272fce4c7b1f6377d7a4d233d0c950f320",
+      "declared_by": "configs/model/phase1_ugi_numerical_sampler_convergence_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_sparse_flow.py, declared by configs/model/phase1_ugi_numerical_sampler_convergence_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "expected": "ef3ed574701b280efb33a9db5cfc4e2f3e06b2f314adb4a2b96f989e8f764b73",
+      "actual": "be6affcd03f3b51216e6121df384cd272fce4c7b1f6377d7a4d233d0c950f320",
+      "declared_by": "configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_sparse_flow.py, declared by configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "tests/test_phase1_ugi_architecture_selection.py",
+      "expected": "01e97304a173c9b5bda08a17501be242bdcfd16e2c0edf6240cbb96c7d982566",
+      "actual": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43",
+      "declared_by": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v2.json",
+      "reason": "Pre-consolidation revision of test_phase1_ugi_architecture_selection.py, declared by configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v2.json. See `why` for the recovery search."
+    },
+    {
+      "path": "tests/test_phase1_ugi_architecture_selection.py",
+      "expected": "4bfc71dc328ee7b29c65c3287188ccdd64c0122fd48754c37e05797fceda7dc8",
+      "actual": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43",
+      "declared_by": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+      "reason": "Pre-consolidation revision of test_phase1_ugi_architecture_selection.py, declared by configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json. See `why` for the recovery search."
+    },
+    {
+      "path": "tests/test_phase1_ugi_architecture_selection.py",
+      "expected": "8c1b52e7190de60e708772e036df41709713a4c29ccd72dae614fde1fadb0c89",
+      "actual": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43",
+      "declared_by": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v2.json",
+      "reason": "Pre-consolidation revision of test_phase1_ugi_architecture_selection.py, declared by configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v2.json. See `why` for the recovery search."
+    },
+    {
+      "path": "tests/test_phase1_ugi_architecture_selection.py",
+      "expected": "cf11df572da069796fcd3872f078517b80c78f55d3b0bd455c21662863971e5e",
+      "actual": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43",
+      "declared_by": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v3.json",
+      "reason": "Pre-consolidation revision of test_phase1_ugi_architecture_selection.py, declared by configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v3.json. See `why` for the recovery search."
+    },
+    {
+      "path": "tests/test_ugi_applicability_recalibration.py",
+      "expected": "27a44c19b4d3ce17d3f4b6585059eddbd302d1b348ae4137ffc37fe85a34e408",
+      "actual": "732b05f92601f9dfcaeddfbbb2833a989f2c1c57ef97994f7cb9363697478fd9",
+      "declared_by": "configs/bio/phase1_ugi_applicability_recalibration_v1.json",
+      "reason": "Pre-consolidation revision of test_ugi_applicability_recalibration.py, declared by configs/bio/phase1_ugi_applicability_recalibration_v1.json. See `why` for the recovery search."
+    },
+    {
       "path": "tests/test_ugi_candidate_eligibility.py",
       "expected": "709a860b8e2e91e8f76c829d912af132bdc0ea867d08190bbf3eddc07974ff3c",
       "actual": "75d62e0381ece497e88976bc02716b4fcd58b81e60388b7d325cfe2917652244",
       "declared_by": "results/phase1/ugi_candidate_eligibility_audit_v1.json",
       "reason": "Two audits pin two versions of this test file: v1 the earlier one, v2 the current. No single state satisfies both, and the file on disk correctly matches v2, the later audit. Arrived with the f58c679 handoff; not modified in this repository."
+    },
+    {
+      "path": "tests/test_ugi_fresh_pool_audit.py",
+      "expected": "57e89667325b9d4dfa5ea71dfd7b07174f66322fd6e9ea0c45e760132b0d2638",
+      "actual": "08e40ed6e1531cdbc008676974c117da01bde8befe873650f267475f35b5619b",
+      "declared_by": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
+      "reason": "Pre-consolidation revision of test_ugi_fresh_pool_audit.py, declared by configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json. See `why` for the recovery search."
     }
   ]
 }

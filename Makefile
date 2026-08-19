@@ -207,7 +207,10 @@ EXPECT_PINS ?= 742
 # raise EXPECT_PINS_ALL as pins are recovered, lower CODE_DRIFT_BACKLOG as unrecoverable ones get
 # reviewed entries. Never raise CODE_DRIFT_BACKLOG -- a growing count means a frozen byte moved.
 EXPECT_PINS_ALL ?= 2090
-CODE_DRIFT_BACKLOG ?= 72
+# 16 remaining: 2 are the unrun planner reach sweep, which needs a vintage decision rather than an
+# exception, and 14 sit under configs whose schema carries no `status`, so "the artifact is frozen"
+# is not asserted and the acceptance bar cannot be applied yet.
+CODE_DRIFT_BACKLOG ?= 16
 
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py
