@@ -187,6 +187,20 @@
       "reason": "Pre-consolidation revision of ugi_joint_sparse_flow.py, declared by configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json. See `why` for the recovery search."
     },
     {
+      "path": "src/forge/product/ugi_joint_sparse_sampling.py",
+      "expected": "3dcf86edf37993203399740bcc0ad012df903a189b46ead7a75d0a89f020bd42",
+      "actual": "be09808bc7844a3c5e42fbc65f6820d1793c5d70b04b99ed9b950e58a6100362",
+      "declared_by": "configs/model/phase1_ugi_numerical_sampler_convergence_v1.json",
+      "reason": "Pre-consolidation revision of ugi_joint_sparse_sampling.py, declared by configs/model/phase1_ugi_numerical_sampler_convergence_v1.json (status frozen_before_selection_visible_numerical_sweep). See `why` for the recovery search."
+    },
+    {
+      "path": "src/forge/value/synthesis.py",
+      "expected": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c",
+      "actual": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189",
+      "declared_by": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json, configs/route/phase1_ugi3_exact_c16_route_v1.json, configs/route/phase1_ugi3_exact_c18_route_v1.json, configs/route/phase1_ugi3_fresh_pool_route_coverage_v1.json, configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json, configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json, configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json, configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json, configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+      "reason": "Pre-consolidation revision of synthesis.py, declared by nine route configs. Eight are frozen -- four by an explicit frozen_* status, four by being hash-pinned at their current digest inside another config, which fixes them as firmly as a status string would. The ninth, configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json, is marked ready_to_freeze_prereveal_parent rather than frozen; the exception is recorded anyway because the bytes are unrecoverable for all nine declarers alike, and is noted here rather than omitted. If that config is later revised to pin a different revision, that becomes a new identity and the gate reports it. See `why` for the recovery search."
+    },
+    {
       "path": "tests/test_phase1_ugi_architecture_selection.py",
       "expected": "01e97304a173c9b5bda08a17501be242bdcfd16e2c0edf6240cbb96c7d982566",
       "actual": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43",

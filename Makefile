@@ -207,11 +207,11 @@ EXPECT_PINS ?= 742
 # raise EXPECT_PINS_ALL as pins are recovered, lower CODE_DRIFT_BACKLOG as unrecoverable ones get
 # reviewed entries. Never raise CODE_DRIFT_BACKLOG -- a growing count means a frozen byte moved.
 EXPECT_PINS_ALL ?= 2092
-# All 14 remaining sit under eight configs whose schema carries no `status` field, so "the artifact
-# is frozen" is not asserted and the acceptance bar cannot be applied. Repairing that schema
-# regression -- `fresh_pool_route_coverage` carries `status` and `task` at v1-v3 and drops both from
-# v4 -- is the prerequisite for retiring them.
-CODE_DRIFT_BACKLOG ?= 14
+# 4 remaining, from four configs that neither declare a frozen status nor are hash-pinned by any
+# other artifact -- so nothing fixes them, and "the artifact that pinned them is frozen" cannot be
+# asserted on any evidence. They are the honest remainder: retiring them needs someone to say
+# whether those four experiments are finished, which is a fact about the work, not a lookup.
+CODE_DRIFT_BACKLOG ?= 4
 
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py
