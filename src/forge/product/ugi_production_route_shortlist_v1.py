@@ -26,6 +26,7 @@ from typing import Any
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem, Descriptors
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_route_shortlist_config.v1"
@@ -36,10 +37,6 @@ ARMS = ("broad_prior", "support_enriched")
 
 class UgiProductionRouteShortlistError(RuntimeError):
     """Raised when the frozen pre-route shortlist contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -212,11 +209,7 @@ def build_production_route_shortlist(repo: Path, config_path: Path) -> tuple[dic
         "sha256"
     ) != sha256_file(paths["generation_ledger"]) or ranking_result.get("artifacts", {}).get(
         "terminal_rescoring.csv.gz", {}
-    ).get(
-        "sha256"
-    ) != sha256_file(
-        paths["ranking_ledger"]
-    ):
+    ).get("sha256") != sha256_file(paths["ranking_ledger"]):
         raise UgiProductionRouteShortlistError("ledger is not pinned by its result")
 
     generated = _generation_rows(paths["generation_ledger"])

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import platform
 import re
 from dataclasses import dataclass
@@ -12,6 +11,8 @@ from typing import Any
 
 import numpy as np
 from rdkit import rdBase
+
+from forge.core.io import stable_json as _stable_json
 
 try:
     import torch
@@ -60,10 +61,6 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 class UgiSelectedGeneratorImplementationError(RuntimeError):
     """Raised when productive generator code/runtime identity cannot be sealed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _sha256_bytes(value: bytes) -> str:

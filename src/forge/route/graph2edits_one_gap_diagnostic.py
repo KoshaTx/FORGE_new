@@ -11,7 +11,6 @@ closure or synthesis value.
 from __future__ import annotations
 
 import gzip
-import hashlib
 import json
 from collections import Counter
 from collections.abc import Iterable, Mapping
@@ -19,6 +18,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Protocol
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.planner import RouteTarget
 from forge.route.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
 from forge.route.proposal_engine import (
@@ -44,22 +45,6 @@ class ProposalBackend(Protocol):
         *,
         maximum_proposals: int,
     ) -> Any: ...
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _load_jsonl_gz(path: Path) -> list[dict[str, Any]]:

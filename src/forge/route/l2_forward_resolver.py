@@ -13,7 +13,6 @@ synthesis value without the independent evidence and L3 systems.
 
 from __future__ import annotations
 
-import hashlib
 import itertools
 import json
 import re
@@ -25,6 +24,8 @@ from typing import Any, Protocol
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.planner import ForwardVerificationState
 from forge.route.proposal_engine import SingleStepRetrosynthesisProposal
 from forge.route.qualified_forward import (
@@ -57,22 +58,6 @@ class L2ForwardResolutionStatus(str, Enum):
     CENSOR_AMBIGUOUS_TRANSFORM_ASSIGNMENT = "censor_ambiguous_transform_assignment"
     CENSOR_BUDGET_EXHAUSTED = "censor_budget_exhausted"
     CENSOR_EXECUTION_ERROR = "censor_execution_error"
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(chunk_size):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

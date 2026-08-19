@@ -20,6 +20,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_matched_planner_cache_binding import (
     preflight_lazy_matched_planner_cache_binding,
@@ -159,14 +161,6 @@ EXPECTED_SELF_PATHS = {
 
 class UgiProductionSynthesisGuidanceSeamV4Error(RuntimeError):
     """Raised when the reviewed synthesis-only qualification fails closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _canonical_bytes(value: Any) -> bytes:
@@ -555,9 +549,7 @@ def _validate_config(
         "assessment_as_of_utc"
     ) and config.get("assessment_as_of_utc") != _load(
         paths["zero_seam_config"], label="zero config"
-    ).get(
-        "assessment_as_of_utc"
-    ):
+    ).get("assessment_as_of_utc"):
         raise UgiProductionSynthesisGuidanceSeamV4Error(
             "seam-v4 route-evidence timestamp differs from lambda zero"
         )

@@ -6,8 +6,6 @@ import csv
 import gzip
 import io
 import json
-import os
-import tempfile
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -22,6 +20,7 @@ from forge.bio.ugi_semantic_annotations import (
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,
 )
+from forge.core.io import atomic_write as _atomic_write
 from forge.data.r0_splits import sha256_bytes, sha256_file
 from forge.product.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
 from forge.route.qualified_forward import load_qualified_forward_reaction
@@ -128,23 +127,6 @@ def _gzip_csv(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes
     with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as archive:
         archive.write(text.getvalue().encode())
     return output.getvalue()
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def build_expanded_ugi_exemplars(config_path: Path, repo: Path) -> dict[str, Any]:

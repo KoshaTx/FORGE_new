@@ -9,11 +9,11 @@ candidate.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from typing import Any
+
+from forge.core.hashing import sha256_json as _sha256_payload
 
 RUN_SCHEMA_VERSION = "forge.ugi_zero_guidance_qualification_run.v1"
 SUPPORT_AUDIT_SCHEMA_VERSION = "phase1_ugi_production_zero_guidance_support_audits.v1"
@@ -21,14 +21,6 @@ SUPPORT_AUDIT_SCHEMA_VERSION = "phase1_ugi_production_zero_guidance_support_audi
 
 class UgiZeroGuidanceTypedAuditError(RuntimeError):
     """Raised when zero-guidance outcome classes do not form an exact partition."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_mapping(value: Any, *, label: str) -> Mapping[str, Any]:

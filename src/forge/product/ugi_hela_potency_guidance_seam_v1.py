@@ -13,7 +13,6 @@ retrosynthesis, proposal-model, candidate-selection or prospective-lock work.
 from __future__ import annotations
 
 import hashlib
-import json
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from typing import Any
@@ -46,10 +45,6 @@ EVALUATION_SEEDS = (20260824, 20260825, 20260826, 20260827, 20260828)
 
 class UgiHeLaPotencyGuidanceSeamError(RuntimeError):
     """Raised when matched potency orchestration violates its frozen design."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _terminal_identity(terminal: LockedMatchedTerminal | None) -> dict[str, Any]:

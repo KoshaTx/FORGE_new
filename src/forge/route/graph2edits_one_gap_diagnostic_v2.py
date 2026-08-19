@@ -8,12 +8,11 @@ result hash only after artifact metadata is attached.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.graph2edits_one_gap_diagnostic import (
     ProposalBackend,
     _load_jsonl_gz,
@@ -30,14 +29,6 @@ LEDGER_SCHEMA_VERSION = "forge.graph2edits_one_gap_proposal_ledger.v2"
 
 class OneGapDiagnosticV2Error(RuntimeError):
     """Raised when the version-2 diagnostic fails closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def run_one_gap_diagnostic_v2(

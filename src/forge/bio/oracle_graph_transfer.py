@@ -15,8 +15,6 @@ import io
 import json
 import math
 import multiprocessing
-import os
-import tempfile
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
@@ -42,6 +40,9 @@ from forge.bio.oracle_graph import (
 from forge.bio.oracle_graph_jobs import build_graph_job_rows
 from forge.bio.oracle_graph_pretraining import RESULT_SCHEMA_VERSION as PRETRAINING_SCHEMA_VERSION
 from forge.bio.oracle_graph_profile import _budget_batches, _model_digest
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import pretty_json_bytes as _stable_json
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_config.v1"
 FIT_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_fit.v1"
@@ -119,14 +120,6 @@ class OracleGraphTransferError(ValueError):
     """Raised when pretrained-oracle transfer violates its frozen contract."""
 
 
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def _load_json(path: Path, label: str) -> dict[str, Any]:
     try:
         payload = json.loads(path.read_text())
@@ -169,27 +162,6 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
             return [dict(row) for row in csv.DictReader(handle)]
     except FileNotFoundError as exc:
         raise OracleGraphTransferError(f"input not found: {path}") from exc
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
-
-
-def _stable_json(value: Mapping[str, Any]) -> bytes:
-    return (json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
 
 
 def _finite_or_none(value: Any) -> Any:
@@ -1113,7 +1085,9 @@ def _csv_gzip(
                 field: (
                     ""
                     if value is None
-                    else format(value, ".12g") if isinstance(value, float) else value
+                    else format(value, ".12g")
+                    if isinstance(value, float)
+                    else value
                 )
                 for field in fields
                 for value in [row.get(field, "")]

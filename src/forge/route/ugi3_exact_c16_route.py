@@ -22,6 +22,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 from rdkit.Chem import rdMolDescriptors
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.planner import (
     AvailabilityState,
@@ -52,10 +53,6 @@ ASSESSMENT_LEDGER_SCHEMA_VERSION = "phase1_ugi3_exact_c16_assessment.v1"
 
 class Ugi3ExactC16RouteError(ValueError):
     """Raised when the exact C16 evidence chain violates its frozen contract."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _gzip_json_bytes(value: Any) -> bytes:

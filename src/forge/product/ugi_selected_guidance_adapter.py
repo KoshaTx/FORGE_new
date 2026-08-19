@@ -21,6 +21,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
 from forge.product.ugi_joint_sparse_sampling import (
     UgiJointSparseTrajectoryState,
@@ -79,10 +80,6 @@ def _stable_json_bytes(value: Any) -> bytes:
         raise UgiSelectedGuidanceAdapterError(
             "guidance-adapter record is not canonically serializable"
         ) from error
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json_bytes(value)).hexdigest()
 
 
 def _nonnegative_integer(value: Any, *, label: str) -> int:

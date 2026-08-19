@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 import math
 from collections import Counter
@@ -26,6 +25,7 @@ from forge.bio.ugi_hela_potency_diagnostic import (
     FrozenHeLaOracleWorker,
     HeLaPotencyDiagnosticPolicy,
 )
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
@@ -99,14 +99,6 @@ EXPECTED_HISTORICAL = {
 
 class UgiHeLaPotencyReadinessError(RuntimeError):
     """Raised when the potency diagnostic is not reproducibly ready."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:

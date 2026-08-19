@@ -8,7 +8,6 @@ activates the backend, creates route evidence, or authorizes benchmark access.
 
 from __future__ import annotations
 
-import hashlib
 import importlib.metadata
 import json
 import os
@@ -19,6 +18,9 @@ import sys
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 
 RUNTIME_RECEIPT_SCHEMA_VERSION = "forge.graph2edits_runtime_qualification.v1"
 RUNTIME_PLATFORM_ID = "python311-macos-arm64-cpu"
@@ -45,20 +47,6 @@ def stable_json(value: Any) -> str:
     """Return the canonical JSON representation used for receipt hashes."""
 
     return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Hash one file without loading large checkpoints into memory."""
-
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(chunk_size):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(stable_json(value).encode()).hexdigest()
 
 
 def _normalized_distribution_name(value: str) -> str:

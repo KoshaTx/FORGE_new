@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_nonzero_guidance_runner import (
     GuidanceTerminalCompletionReceipt,
@@ -35,7 +36,6 @@ from forge.product.ugi_selected_restartable_generator_v2 import (
 )
 from forge.product.ugi_synthesis_guidance import keyed_random_seed
 
-
 CONFIG_SCHEMA_VERSION = "phase1_ugi_selected_v2_pool_singleton_equivalence_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_selected_v2_pool_singleton_equivalence.v1"
 
@@ -44,25 +44,13 @@ class UgiSelectedV2PoolSingletonEquivalenceError(RuntimeError):
     """Raised when pooled and singleton restartable execution differ."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
 def _load(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise UgiSelectedV2PoolSingletonEquivalenceError(
-            f"invalid {label}: {path}"
-        ) from error
+        raise UgiSelectedV2PoolSingletonEquivalenceError(f"invalid {label}: {path}") from error
     if not isinstance(value, dict):
-        raise UgiSelectedV2PoolSingletonEquivalenceError(
-            f"{label} must be a JSON object"
-        )
+        raise UgiSelectedV2PoolSingletonEquivalenceError(f"{label} must be a JSON object")
     return value
 
 
@@ -116,9 +104,7 @@ def _exact_completion(receipt: GuidanceTerminalCompletionReceipt) -> dict[str, A
         "checkpoint_index": terminal.checkpoint_index,
         "generator_checkpoint_sha256": terminal.generator_checkpoint_sha256,
         "closure_checkpoint_sha256": terminal.closure_checkpoint_sha256,
-        "generation_trace_sha256": hashlib.sha256(
-            terminal.generation_trace_bytes
-        ).hexdigest(),
+        "generation_trace_sha256": hashlib.sha256(terminal.generation_trace_bytes).hexdigest(),
     }
 
 
@@ -141,9 +127,7 @@ def build_selected_v2_pool_singleton_equivalence(
     config_path = config_path.resolve()
     config = _load(config_path, label="pool-singleton equivalence config")
     if config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise UgiSelectedV2PoolSingletonEquivalenceError(
-            "unsupported pool-singleton config schema"
-        )
+        raise UgiSelectedV2PoolSingletonEquivalenceError("unsupported pool-singleton config schema")
     if config.get("scope") != {
         "guidance": False,
         "routing": False,
@@ -225,9 +209,7 @@ def build_selected_v2_pool_singleton_equivalence(
         pooled_advanced = lane.advance(pooled_state, target_step=step)
         expected_pooled_calls = design.particle_count * (step - previous)
         if pooled_advanced.product_transition_calls != expected_pooled_calls:
-            raise UgiSelectedV2PoolSingletonEquivalenceError(
-                "pooled transition accounting changed"
-            )
+            raise UgiSelectedV2PoolSingletonEquivalenceError("pooled transition accounting changed")
         pooled_state = pooled_advanced.state
         advanced_singletons = []
         for singleton in singleton_states:
@@ -368,8 +350,7 @@ def build_selected_v2_pool_singleton_equivalence(
             "assignment_seed": assignment.seed,
             "assignment_sha256": assignment.assignment_sha256,
             "particles": design.particle_count,
-            "state_comparisons": design.particle_count
-            * len(design_value["state_steps"]),
+            "state_comparisons": design.particle_count * len(design_value["state_steps"]),
             "checkpoint_completion_comparisons": design.particle_count
             * len(design_value["completion_checkpoints"]),
             "productive_singleton_comparisons": design.particle_count,

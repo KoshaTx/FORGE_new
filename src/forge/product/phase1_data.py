@@ -8,8 +8,6 @@ import hashlib
 import io
 import json
 import math
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -17,6 +15,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.data.r0_splits import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_product_l1_data_config.v3"
@@ -440,9 +439,7 @@ def _build_assignments(
     }
     assignments = []
     for product in products:
-        role_folds = {
-            role: fold_maps[role][product[f"{role}_smiles"]] for role in ROLES
-        }
+        role_folds = {role: fold_maps[role][product[f"{role}_smiles"]] for role in ROLES}
         # This strict, mutually exclusive product partition is the default
         # training/evaluation boundary.  A product is held out if any of its
         # components is held out; calibration similarly requires no held-out
@@ -487,23 +484,6 @@ def _csv_bytes(
     writer.writeheader()
     writer.writerows(rows)
     return gzip.compress(buffer.getvalue().encode(), compresslevel=9, mtime=0)
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _relative_output(repo: Path, configured: str) -> Path:

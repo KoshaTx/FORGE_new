@@ -17,6 +17,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.route.planner import RouteTarget, SynthesisAssessment
 from forge.route.planner_cache import (
     PLANNER_CACHE_ENTRY_SCHEMA_VERSION,
@@ -31,14 +33,6 @@ PLANNER_CACHE_SNAPSHOT_SCHEMA_VERSION = "forge.planner_cache_snapshot.v1"
 PLANNER_CACHE_OVERLAY_AUDIT_SCHEMA_VERSION = "forge.planner_cache_overlay_audit.v1"
 _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 _CACHE_RELATIVE_PATH_PATTERN = re.compile(r"^[0-9a-f]{2}/[0-9a-f]{64}\.json$")
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

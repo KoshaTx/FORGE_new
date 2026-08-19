@@ -8,7 +8,6 @@ distinction and applies the predeclared FlowER demotion rule mechanically.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import tempfile
@@ -16,20 +15,14 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file
+
 CONFIG_SCHEMA_VERSION = "m0_10_flower_transfer_audit_config.v1"
 RESULT_SCHEMA_VERSION = "m0_10_flower_transfer_audit.v1"
 
 
 class FlowerTransferAuditError(ValueError):
     """Raised when the M0-10 audit configuration or pinned input is invalid."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:

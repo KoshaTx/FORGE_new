@@ -16,6 +16,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.planner import (
     AssessmentOutcome,
@@ -53,10 +54,6 @@ PRODUCT_LEDGER_SCHEMA_VERSION = "phase1_ugi3_product_synthesis_values.v1"
 
 class Ugi3SynthesisValueAuditError(ValueError):
     """Raised when synthesis-value records cannot be reproduced exactly."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

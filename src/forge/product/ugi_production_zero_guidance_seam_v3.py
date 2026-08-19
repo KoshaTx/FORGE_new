@@ -21,6 +21,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_matched_budget_orchestration import (
     MatchedArm,
@@ -146,14 +148,6 @@ _PRODUCTIVE_TERMINAL_ID = re.compile(
 
 class UgiProductionZeroGuidanceSeamV3Error(RuntimeError):
     """Raised when the typed selected-v3 lambda-zero seam fails closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _canonical_bytes(value: Any) -> bytes:
@@ -573,7 +567,9 @@ def _require_selected_v3_productive_identity(
             expected_disposition = (
                 "invalid_terminal"
                 if expected.get("terminal_valid") is not True
-                else "nonexact_l1" if expected.get("exact_l1") is not True else None
+                else "nonexact_l1"
+                if expected.get("exact_l1") is not True
+                else None
             )
             if (
                 expected_disposition is not None

@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import gzip
-import hashlib
 import json
 from collections import Counter
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.l2_forward_resolver import L2ForwardResolutionStatus
 from forge.route.proposal_discovery_status import (
     FamilyProjectionTrace,
@@ -27,22 +28,6 @@ LEDGER_SCHEMA_VERSION = "forge.graph2edits_semantic_readjudication_ledger.v1"
 
 class Graph2EditsSemanticReadjudicationError(RuntimeError):
     """Raised when a frozen proposal receipt cannot be re-adjudicated."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _read_jsonl_gzip(path: Path) -> list[dict[str, Any]]:

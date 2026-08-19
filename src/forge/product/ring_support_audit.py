@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 import os
 import sys
@@ -17,26 +16,14 @@ from typing import Any
 from rdkit import Chem, rdBase
 from rdkit.Chem import rdMolDescriptors
 
+from forge.core.hashing import sha256_file
+
 CONFIG_SCHEMA_VERSION = "m0_06_lipid_ring_support_config.v1"
 RESULT_SCHEMA_VERSION = "m0_06_lipid_ring_support_result.v1"
 
 
 class RingSupportAuditError(ValueError):
     """Raised when ring-support inputs or frozen policies are invalid."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return the SHA-256 hash of a file."""
-
-    digest = hashlib.sha256()
-    try:
-        handle = path.open("rb")
-    except FileNotFoundError as exc:
-        raise RingSupportAuditError(f"required input not found: {path}") from exc
-    with handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -310,8 +297,7 @@ def run_ring_support_audit(
         observed = sha256_file(path)
         if observed != specification.get("sha256"):
             raise RingSupportAuditError(
-                f"{name} hash mismatch: expected {specification.get('sha256')}, "
-                f"observed {observed}"
+                f"{name} hash mismatch: expected {specification.get('sha256')}, observed {observed}"
             )
         paths[name] = path
         verified[name] = {

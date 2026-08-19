@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
-import hashlib
 import io
 import json
 import os
@@ -20,6 +19,8 @@ from pathlib import Path
 from typing import Any
 
 from rdkit import Chem, rdBase
+
+from forge.core.hashing import sha256_file
 
 SCHEMA_VERSION = "m0_09_l2_supervision_inventory.v1"
 LEDGER_SCHEMA_VERSION = "m0_09_supervision_sources.v1"
@@ -35,16 +36,6 @@ CHEMISTRY_CLASSES = (
 
 class InventoryError(ValueError):
     """Raised when an inventory input violates its declared contract."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return the SHA-256 digest of *path*."""
-
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def load_source_ledger(path: Path) -> dict[str, Any]:

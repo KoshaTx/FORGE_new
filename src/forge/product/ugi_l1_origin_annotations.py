@@ -7,8 +7,6 @@ import gzip
 import hashlib
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from datetime import datetime, timezone
@@ -26,6 +24,7 @@ from forge.bio.ugi_semantic_annotations import (
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,
 )
+from forge.core.io import atomic_write as _atomic_write
 from forge.product.defog_feasibility import sha256_file
 from forge.route.qualified_forward import load_qualified_forward_reaction
 
@@ -98,25 +97,6 @@ def _gzip_csv(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes
     writer.writeheader()
     writer.writerows(rows)
     return gzip.compress(buffer.getvalue().encode(), mtime=0)
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _artifact(payload: bytes) -> dict[str, Any]:

@@ -69,10 +69,6 @@ class PmcQueueEntry:
 FetchFunction = Callable[[str], FetchResponse]
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
 def _sha256_bytes(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
 
@@ -205,7 +201,7 @@ def _endpoint_urls(pmc_id: str) -> dict[str, str]:
         ),
         "pmc_oa_record": (f"https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id={pmc_id}"),
         "europe_pmc_supplements": (
-            "https://www.ebi.ac.uk/europepmc/webservices/rest/" f"{pmc_id}/supplementaryFiles"
+            f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmc_id}/supplementaryFiles"
         ),
     }
 

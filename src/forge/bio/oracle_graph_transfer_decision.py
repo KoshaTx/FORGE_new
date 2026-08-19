@@ -7,14 +7,14 @@ their hashes and contracts, and records whether the transfer lane was selected.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import os
-import tempfile
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file
+from forge.core.io import atomic_write as _atomic_write
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_decision_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_decision.v1"
@@ -29,14 +29,6 @@ TRANSFER_VARIANTS = frozenset(
 
 class OracleGraphTransferDecisionError(ValueError):
     """Raised when the transfer-lane freeze is stale or scientifically invalid."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -275,23 +267,6 @@ def adjudicate_transfer_lane(
             ),
         },
     }
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def run_transfer_decision(

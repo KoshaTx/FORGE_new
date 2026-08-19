@@ -14,12 +14,11 @@ import gzip
 import hashlib
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, TextIO
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.route.source_ledger import SOURCE_COLUMNS
 from forge.route.supervision_inventory import sha256_file
 
@@ -808,19 +807,6 @@ def build_source_priority(
         },
     }
     return result, priority_rows
-
-
-def _atomic_write(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        "wb",
-        dir=path.parent,
-        prefix=f".{path.name}.",
-        delete=False,
-    ) as handle:
-        handle.write(data)
-        temporary = Path(handle.name)
-    os.replace(temporary, path)
 
 
 def write_source_priority(

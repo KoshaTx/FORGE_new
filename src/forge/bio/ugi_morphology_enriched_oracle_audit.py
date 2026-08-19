@@ -14,6 +14,7 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
@@ -54,10 +55,6 @@ DISTANCE_KINDS = ("fingerprint", "descriptor")
 
 class UgiMorphologyEnrichedOracleAuditError(RuntimeError):
     """Raised when the frozen oracle-shift audit contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:

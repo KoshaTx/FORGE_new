@@ -14,6 +14,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_constrained_stochastic_production_candidates import (
     exact_terminal_admission,
@@ -31,10 +32,6 @@ SCHEDULE_SCHEMA_VERSION = "forge.ugi_branch_exploration_schedule.v1"
 
 class UgiFullCorpusBranchExplorationCandidatesError(RuntimeError):
     """Raised when fresh branch generation violates its frozen contract."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:
@@ -230,13 +227,7 @@ def collect_branch_exploration_candidates(
         "status"
     ) != "full_corpus_morphology_support_and_branch_schedule_frozen" or schedule_result.get(
         "artifacts", {}
-    ).get(
-        "schedule.json", {}
-    ).get(
-        "schedule_sha256"
-    ) != schedule.get(
-        "schedule_sha256"
-    ):
+    ).get("schedule.json", {}).get("schedule_sha256") != schedule.get("schedule_sha256"):
         raise UgiFullCorpusBranchExplorationCandidatesError("branch schedule receipt changed")
     reaction = _reaction_contract(paths["qualified_reactions"])
     reference_products = set()

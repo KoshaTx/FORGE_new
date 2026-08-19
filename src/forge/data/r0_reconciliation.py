@@ -7,9 +7,7 @@ import gzip
 import hashlib
 import io
 import json
-import os
 import sys
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -17,6 +15,9 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 from rdkit.Chem import Descriptors, rdMolDescriptors
+
+from forge.core.hashing import sha256_file
+from forge.core.io import atomic_write as _atomic_write
 
 CONFIG_SCHEMA_VERSION = "m0_03_r0_reconciliation_config.v1"
 RESULT_SCHEMA_VERSION = "m0_03_r0_reconciliation_result.v1"
@@ -72,20 +73,6 @@ LEDGER_FIELDS = (
 
 class R0ReconciliationError(ValueError):
     """Raised when constitutional R0 reconciliation violates its contract."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return the SHA-256 hash of a file."""
-
-    digest = hashlib.sha256()
-    try:
-        handle = path.open("rb")
-    except FileNotFoundError as exc:
-        raise R0ReconciliationError(f"required input not found: {path}") from exc
-    with handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -165,7 +152,7 @@ def _merge_annotation_objects(
             for name, items in source_annotations.items():
                 if not isinstance(items, list) or any(not isinstance(item, str) for item in items):
                     raise R0ReconciliationError(
-                        f"{row['r0_structure_id']} {field}/{source}/{name} " "must be a string list"
+                        f"{row['r0_structure_id']} {field}/{source}/{name} must be a string list"
                     )
                 merged[str(source)][str(name)].update(items)
     return {
@@ -292,8 +279,7 @@ def _verified_inputs(
         observed = sha256_file(path)
         if observed != specification.get("sha256"):
             raise R0ReconciliationError(
-                f"{name} hash mismatch: expected {specification.get('sha256')}, "
-                f"observed {observed}"
+                f"{name} hash mismatch: expected {specification.get('sha256')}, observed {observed}"
             )
         paths[name] = path
         verified[name] = {
@@ -689,23 +675,6 @@ def build_r0_reconciliation(
         },
     }
     return result, corpus_payload, ledger_payload
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def write_r0_reconciliation(

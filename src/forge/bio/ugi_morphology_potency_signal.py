@@ -22,6 +22,8 @@ from sklearn.model_selection import GroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import stable_json as _stable_json
 from forge.product.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
@@ -51,20 +53,8 @@ class UgiMorphologyPotencySignalError(RuntimeError):
     """Raised when the frozen morphology-potency gate cannot be evaluated."""
 
 
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _read_json(path: Path) -> dict[str, Any]:

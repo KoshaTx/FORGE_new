@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     RESULT_SCHEMA_VERSION as CENSUS_RESULT_SCHEMA_VERSION,
@@ -89,10 +90,6 @@ def _stable_json_bytes(value: Any) -> bytes:
         raise UgiDynamicTerminalCensusValidationError(
             "validation value is not canonically serializable"
         ) from error
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json_bytes(value)).hexdigest()
 
 
 def _producer_sha256_payload(value: Any) -> str:

@@ -12,6 +12,8 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file as _sha256_file
+
 CONFIG_SCHEMA_VERSION = "phase1_ugi_potency_novelty_lane_audit_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_potency_novelty_lane_audit.v1"
 PAIR_SCHEME = "held_aldehyde_isocyanide_pair_5fold"
@@ -20,14 +22,6 @@ LABEL_PATTERN = re.compile(r"^(A\d+)(B\d+)(C\d+)$")
 
 class UgiPotencyNoveltyLaneAuditError(RuntimeError):
     """Raised when the frozen novelty audit contract is violated."""
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _read_json(path: Path) -> dict[str, Any]:

@@ -21,6 +21,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_nonzero_guidance_runner import (
     GuidanceTerminalCompletionReceipt,
@@ -82,10 +83,6 @@ def _stable_json_bytes(value: Any) -> bytes:
         raise UgiGroupedZeroGuidanceIdentityError(
             "identity record is not canonically serializable"
         ) from error
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json_bytes(value)).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:

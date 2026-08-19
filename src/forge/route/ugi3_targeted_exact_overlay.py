@@ -41,10 +41,6 @@ class Ugi3TargetedExactOverlayError(ValueError):
     """Raised when exact evidence cannot be composed without promotion."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())

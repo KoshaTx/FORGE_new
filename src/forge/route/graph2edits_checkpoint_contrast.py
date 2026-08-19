@@ -10,14 +10,14 @@ independent forward and terminal-material adjudication has passed.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.graph2edits_one_gap_diagnostic import ProposalBackend, build_request
 from forge.route.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
 from forge.route.semantic_family_equivalence import audit_semantic_family_equivalence_v2
@@ -30,22 +30,6 @@ LEDGER_SCHEMA_VERSION = "forge.graph2edits_checkpoint_contrast_ledger.v1"
 
 class CheckpointContrastProposalError(RuntimeError):
     """Raised when the frozen checkpoint proposal contract is malformed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 @dataclass(frozen=True)

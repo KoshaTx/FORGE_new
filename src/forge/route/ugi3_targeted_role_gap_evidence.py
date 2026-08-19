@@ -14,6 +14,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_targeted_role_gap_evidence_audit_config.v1"
@@ -24,10 +25,6 @@ LEDGER_SCHEMA_VERSION = "phase1_ugi3_targeted_role_gap_product_impact.v1"
 
 class Ugi3TargetedRoleGapEvidenceError(ValueError):
     """Raised when role-gap evidence would be promoted beyond its support."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

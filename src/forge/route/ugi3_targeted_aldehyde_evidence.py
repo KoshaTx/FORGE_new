@@ -21,6 +21,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.qualified_forward import (
     QualifiedForwardError,
@@ -35,10 +36,6 @@ RESULT_SCHEMA_VERSION = "phase1_ugi3_targeted_aldehyde_evidence_audit.v1"
 
 class Ugi3TargetedAldehydeEvidenceError(ValueError):
     """Raised when targeted evidence cannot be admitted without inference."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -422,7 +419,9 @@ def build_targeted_aldehyde_evidence_audit(
         primary = (
             "direct_procurement"
             if direct_complete
-            else "exact_l2_to_current_l3" if route_complete else "abstain_missing_exact_evidence"
+            else "exact_l2_to_current_l3"
+            if route_complete
+            else "abstain_missing_exact_evidence"
         )
         target_rows.append(
             {

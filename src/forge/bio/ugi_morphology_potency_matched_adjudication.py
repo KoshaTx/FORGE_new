@@ -50,10 +50,6 @@ class UgiMorphologyPotencyMatchedAdjudicationError(RuntimeError):
     """Raised when the frozen matched diagnostic cannot be reproduced."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
 def _load(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_bytes())

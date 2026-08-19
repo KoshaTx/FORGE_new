@@ -9,7 +9,6 @@ applicability veto.
 from __future__ import annotations
 
 import hashlib
-import json
 import math
 from bisect import bisect_right
 from collections import Counter
@@ -40,6 +39,7 @@ from forge.bio.ugi_production_terminal_ranking import (
     _pin,
     _read_jsonl,
 )
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_full_support_rescoring_config.v2"
@@ -49,10 +49,6 @@ LEDGER_SCHEMA_VERSION = "phase1_ugi_production_full_support_rescoring_ledger.v2"
 
 class UgiProductionFullSupportRescoringError(RuntimeError):
     """Raised when the frozen full-support rescore contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def pattern_id_for_roles(unseen_roles: Sequence[str]) -> str:

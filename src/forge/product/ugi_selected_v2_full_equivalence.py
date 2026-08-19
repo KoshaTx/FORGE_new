@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
 from forge.product.ugi_joint_sparse_sampling import (
@@ -52,14 +53,6 @@ class UgiSelectedV2FullEquivalenceError(RuntimeError):
     """Raised when the restartable selected-v2 lane differs from its reference."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
 def _load(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())
@@ -97,9 +90,7 @@ def _terminal_record(receipt: GuidanceTerminalCompletionReceipt) -> dict[str, An
         "terminal_valid": terminal.terminal_valid,
         "exact_l1": terminal.exact_l1,
         "terminal_bytes_sha256": hashlib.sha256(terminal.terminal_bytes).hexdigest(),
-        "generation_trace_sha256": hashlib.sha256(
-            terminal.generation_trace_bytes
-        ).hexdigest(),
+        "generation_trace_sha256": hashlib.sha256(terminal.generation_trace_bytes).hexdigest(),
         "product_transition_calls": receipt.product_transition_calls,
     }
 
@@ -355,8 +346,7 @@ def build_selected_v2_full_equivalence(
             "assignment_seed": assignment.seed,
             "assignment_sha256": assignment.assignment_sha256,
             "particles": group_design.particle_count,
-            "checkpoint_comparisons": group_design.particle_count
-            * len(design["checkpoints"]),
+            "checkpoint_comparisons": group_design.particle_count * len(design["checkpoints"]),
             "productive_direct_callback_comparisons": group_design.particle_count,
             "all_equal": True,
             "comparison_rows_sha256": _sha256_payload(rows),

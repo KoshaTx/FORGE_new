@@ -27,6 +27,7 @@ from forge.bio.ugi_hela_potency_diagnostic import (
     HeLaPotencyDiagnosticPolicy,
 )
 from forge.bio.ugi_morphology_potency_matched_adjudication import _candidate, _exact_l1
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_terminal_ranking_config.v1"
@@ -37,14 +38,6 @@ EXPECTED_ARMS = ("broad_prior", "support_enriched")
 
 class UgiProductionTerminalRankingError(RuntimeError):
     """Raised when the production ranking contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:
@@ -186,8 +179,7 @@ def _deduplicated(values: Sequence[dict[str, Any]], *, lane_id: str) -> list[dic
         values,
         key=lambda row: hashlib.sha256(
             (
-                f"production-ranking-v1|{lane_id}|{row['draw_index']}|"
-                f"{row['canonical_product']}"
+                f"production-ranking-v1|{lane_id}|{row['draw_index']}|{row['canonical_product']}"
             ).encode()
         ).digest(),
     )

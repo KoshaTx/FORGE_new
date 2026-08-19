@@ -39,6 +39,8 @@ from forge.bio.oracle_graph import (
     sum_mean_pool,
     tensorize_smiles,
 )
+from forge.core.hashing import sha256_file
+from forge.core.io import atomic_write as _atomic_write
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_pretraining_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_pretraining.v1"
@@ -101,14 +103,6 @@ class PretrainingLogits:
     element: Tensor
     charge: Tensor
     bond: Tensor
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -755,23 +749,6 @@ def _git_provenance(repo_root: Path) -> dict[str, Any]:
         "status_sha256": hashlib.sha256(status.encode()).hexdigest(),
         "tracked_diff_sha256": hashlib.sha256(diff.encode()).hexdigest(),
     }
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _atomic_torch_save(path: Path, payload: Mapping[str, Any]) -> None:

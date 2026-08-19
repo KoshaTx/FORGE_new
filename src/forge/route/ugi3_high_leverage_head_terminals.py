@@ -13,6 +13,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.planner import (
     AvailabilityState,
@@ -61,10 +62,6 @@ class HighLeverageHeadTerminalOverlay:
         )
         result = self._terminal_results.get(key)
         return result if result is not None else self._base_source.lookup(target)
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

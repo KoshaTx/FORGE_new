@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_joint_program_support_audit import (
     JointProgramKernel,
@@ -109,10 +110,6 @@ class ProgramCandidate:
     @property
     def total_nodes(self) -> int:
         return sum(self.program.node_counts)
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

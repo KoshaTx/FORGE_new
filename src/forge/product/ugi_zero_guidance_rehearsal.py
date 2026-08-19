@@ -17,6 +17,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.product import ugi_matched_budget_orchestration as matched_runner
 from forge.product import ugi_terminal_route_assessment as terminal_route_assessment
 from forge.product.ugi_matched_budget_orchestration import (
@@ -60,14 +62,6 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 class UgiZeroGuidanceRehearsalError(RuntimeError):
     """Raised when a zero-guidance rehearsal contract is violated."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _module_sha256(module: Any, *, label: str) -> str:

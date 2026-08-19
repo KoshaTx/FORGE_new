@@ -9,7 +9,6 @@ authority.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from collections import Counter
@@ -18,6 +17,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Protocol
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.l2_forward_resolver import (
     IndependentL2ForwardResolver,
     L2ForwardResolution,
@@ -52,22 +53,6 @@ class BenchmarkContractError(ValueError):
 
 class BenchmarkExecutionBlockedError(RuntimeError):
     """Raised before target access when prerequisite gates are open."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(chunk_size):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _sha256(value: Any, *, label: str) -> str:

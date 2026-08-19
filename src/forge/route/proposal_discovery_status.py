@@ -10,9 +10,7 @@ success probability, or synthesis value.
 
 from __future__ import annotations
 
-import hashlib
 import itertools
-import json
 from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import Enum
@@ -20,6 +18,7 @@ from typing import Any, Protocol
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.l2_forward_resolver import (
     L2ForwardExecutor,
     L2ForwardResolution,
@@ -77,14 +76,6 @@ class ExactKnownRouteResolver(Protocol):
         *,
         maximum_forward_calls: int | None = None,
     ) -> L2ForwardResolution: ...
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _canonical_connected(value: str, *, label: str) -> str:

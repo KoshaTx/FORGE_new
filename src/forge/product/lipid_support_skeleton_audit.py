@@ -5,8 +5,6 @@ from __future__ import annotations
 import csv
 import gzip
 import json
-import os
-import tempfile
 import time
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
@@ -17,6 +15,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.product.defog_feasibility import sha256_file
 from forge.product.lipid_context import (
     HEAD_REGION,
@@ -459,25 +458,6 @@ def audit_lipid_support_skeletons(
         },
     }
     return result, [*broad_rows, *ugi_rows], origin_ledger
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    file_descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(file_descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary_name, path)
-    except BaseException:
-        try:
-            os.unlink(temporary_name)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def write_audit_artifacts(

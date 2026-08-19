@@ -12,6 +12,7 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_complete_morphology_proposal import support_preserving_probabilities
 
@@ -45,10 +46,6 @@ EXPECTED_INPUTS = {
 
 class UgiPromotedMorphologyProposalError(RuntimeError):
     """Raised when the promoted morphology proposal contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:

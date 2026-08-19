@@ -12,14 +12,13 @@ generation, invoke biology or select a candidate.
 
 from __future__ import annotations
 
-import hashlib
-import json
 import re
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     QualifiedGeneratedUgiTerminalSupport,
@@ -94,14 +93,6 @@ class UgiProductionTerminalRouteEvaluatorError(RuntimeError):
 
 
 CandidateRecordResolver = Callable[[LockedMatchedTerminal], Mapping[str, Any]]
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

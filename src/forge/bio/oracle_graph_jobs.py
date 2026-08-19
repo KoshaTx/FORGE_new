@@ -7,12 +7,13 @@ import gzip
 import hashlib
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import atomic_write as _atomic_write
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_jobs_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_jobs.v1"
@@ -38,14 +39,6 @@ JOB_FIELDS = (
 
 class OracleGraphJobsError(ValueError):
     """Raised when the graph job matrix violates its frozen contract."""
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -111,23 +104,6 @@ def _gzip_csv(rows: Sequence[Mapping[str, Any]]) -> bytes:
     with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as archive:
         archive.write(text.getvalue().encode())
     return output.getvalue()
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def build_graph_job_rows(

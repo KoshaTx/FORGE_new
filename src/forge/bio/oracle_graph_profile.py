@@ -37,6 +37,7 @@ from forge.bio.oracle_graph import (
     permute_graph_tensor,
     tensorize_smiles,
 )
+from forge.core.hashing import sha256_file as _sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_profile_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_profile.v1"
@@ -44,14 +45,6 @@ RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_profile.v1"
 
 class OracleGraphProfileError(ValueError):
     """Raised when the graph profiling contract is violated."""
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -472,8 +465,7 @@ def _profile_architecture(
         maximum_difference = float(torch.max(torch.abs(original_prediction - permuted_prediction)))
         if maximum_difference > tolerance:
             raise OracleGraphProfileError(
-                f"{architecture} permutation difference {maximum_difference} "
-                f"exceeds {tolerance}"
+                f"{architecture} permutation difference {maximum_difference} exceeds {tolerance}"
             )
         repeats.append(
             {

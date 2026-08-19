@@ -12,14 +12,13 @@ partial closure, route depth, route count, evidence volume and unknown burden.
 
 from __future__ import annotations
 
-import hashlib
-import json
 import math
 from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.planner import AssessmentOutcome
 from forge.value.synthesis import (
     ComponentSynthesisValue,
@@ -59,14 +58,6 @@ class GuidanceReason(str, Enum):
     INVALID_INPUT = "invalid_input"
     EXECUTION_ERROR = "execution_error"
     NONEXACT_L1 = "nonexact_l1"
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 _POLICY_CONTENT = {

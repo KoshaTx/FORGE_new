@@ -8,6 +8,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file as _sha256_file
+
 RESULT_SCHEMA_VERSION = "forge.ugi_high_potency_challenger_adjudication.v1"
 
 
@@ -23,14 +25,6 @@ def _load(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise HighPotencyChallengerAdjudicationError(f"input is not an object: {path}")
     return value
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _stable_hash(value: Mapping[str, Any]) -> str:

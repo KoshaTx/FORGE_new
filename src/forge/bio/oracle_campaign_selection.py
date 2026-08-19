@@ -8,7 +8,6 @@ metrics are copied only after selection for transparent descriptive reporting.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
 import os
@@ -16,6 +15,8 @@ import tempfile
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_oracle_campaign_selection_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_oracle_campaign_selection.v1"
@@ -25,16 +26,6 @@ FREEZE_STATUS = "oracle_architecture_and_applicability_policy_frozen"
 
 class OracleCampaignSelectionError(ValueError):
     """Raised when endpoint-specific selection violates its frozen contract."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return a streaming SHA-256 digest."""
-
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:

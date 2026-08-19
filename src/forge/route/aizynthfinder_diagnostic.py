@@ -21,6 +21,8 @@ from typing import Any
 from rdkit import Chem
 from rdkit.Chem.Draw import rdMolDraw2D
 
+from forge.core.io import atomic_write as _atomic_write
+
 AUDIT_RESULT_SCHEMA_VERSION = "phase1_ugi_high_potency_molecule_route_audit_result.v1"
 TARGET_SCHEMA_VERSION = "phase1_aizynthfinder_component_target.v1"
 RESULT_SCHEMA_VERSION = "phase1_aizynthfinder_component_route_diagnostic_result.v1"
@@ -269,13 +271,6 @@ def _molecule_png(smiles: str, *, width: int, height: int) -> bytes:
     drawer.DrawMolecule(molecule)
     drawer.FinishDrawing()
     return drawer.GetDrawingText()
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(payload)
-    temporary.replace(path)
 
 
 def _stock_leaf_smiles(route: dict[str, Any]) -> list[str]:

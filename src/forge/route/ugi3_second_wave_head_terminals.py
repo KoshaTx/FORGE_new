@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.planner import (
     AvailabilityState,
@@ -63,10 +63,6 @@ class SecondWaveHeadTerminalOverlay:
         )
         result = self._terminal_results.get(key)
         return result if result is not None else self._base_source.lookup(target)
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _validate_inputs(config: dict[str, Any], input_paths: dict[str, Path]) -> None:

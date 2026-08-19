@@ -13,7 +13,6 @@ candidate.
 
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -43,10 +42,6 @@ from forge.route.planner_cache_snapshot import (
 
 MATCHED_PLANNER_CACHE_PREFLIGHT_SCHEMA_VERSION = "forge.matched_planner_cache_binding_preflight.v1"
 _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

@@ -23,6 +23,9 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import rdFingerprintGenerator
 from rdkit.Chem.Draw import rdMolDraw2D
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import atomic_write as _atomic_write
+
 CONFIG_SCHEMA_VERSION = "phase1_ugi_high_potency_molecule_route_audit_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_high_potency_molecule_route_audit_result.v1"
 LEDGER_SCHEMA_VERSION = "phase1_ugi_high_potency_molecule_route_audit_ledger.v1"
@@ -30,14 +33,6 @@ LEDGER_SCHEMA_VERSION = "phase1_ugi_high_potency_molecule_route_audit_ledger.v1"
 
 class MoleculeAuditError(ValueError):
     """Raised when a molecule-audit input violates its frozen contract."""
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _content_sha256(value: Any) -> str:
@@ -428,13 +423,6 @@ def build_audit(
     }
     result["result_sha256"] = _content_sha256(result)
     return result, selected
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(payload)
-    temporary.replace(path)
 
 
 def write_audit_artifacts(

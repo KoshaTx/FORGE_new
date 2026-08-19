@@ -24,6 +24,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import stable_json as _stable_json
 from forge.route.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_agile_component_routes_config.v2"
@@ -70,10 +71,6 @@ LIPID_COLUMNS = (
 
 class RouteAwarenessError(ValueError):
     """Raised when a route-awareness input violates its evidence contract."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _canonicalize(smiles: str, *, label: str) -> str:
@@ -133,15 +130,11 @@ def load_route_config(path: Path) -> dict[str, Any]:
     aldehydes = config.get("aldehyde_ester_route_family", {}).get("members", [])
     additional_aldehyde_families = config.get("additional_aldehyde_route_families", [])
     additional_aldehydes = [
-        member
-        for family in additional_aldehyde_families
-        for member in family.get("members", [])
+        member for family in additional_aldehyde_families for member in family.get("members", [])
     ]
     unresolved = config.get("unresolved_aldehyde_ester_components", [])
     isocyanides = config.get("isocyanide_route_family", {}).get("members", [])
-    additional_isocyanides = config.get("additional_isocyanide_route_family", {}).get(
-        "members", []
-    )
+    additional_isocyanides = config.get("additional_isocyanide_route_family", {}).get("members", [])
     _require_unique_labels(amines, {f"A{i}" for i in range(1, 21)}, "amine component")
     _require_unique_labels(
         [*aldehydes, *unresolved],
@@ -461,9 +454,7 @@ def _diol_aldehyde_routes(
                             },
                             {
                                 **diol_record,
-                                "procurement_evidence_status": diol[
-                                    "procurement_evidence_status"
-                                ],
+                                "procurement_evidence_status": diol["procurement_evidence_status"],
                             },
                         ],
                         "product": intermediate,

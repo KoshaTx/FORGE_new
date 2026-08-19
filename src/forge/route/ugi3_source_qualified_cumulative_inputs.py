@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 from collections.abc import Mapping
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.data.r1_prime_audit import sha256_file
 from forge.route.ugi3_cumulative_production_source import CumulativeUgi3ProductionPaths
 from forge.route.ugi3_exact_c16_route import build_exact_c16_route_audit
@@ -85,23 +84,6 @@ def _pin(repo: Path, record: Mapping[str, Any], *, label: str) -> Path:
     if sha256_file(path) != record.get("sha256"):
         raise Ugi3SourceQualifiedCumulativeInputsError(f"{label} hash changed")
     return path
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _json_bytes(value: Any) -> bytes:

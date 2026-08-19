@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.l2_forward_resolver import (
     L2_FORWARD_RESOLVER_CONFIG_SCHEMA_VERSION,
     L2ForwardResolverError,
@@ -29,22 +30,6 @@ _TARGETED_EVIDENCE = Path("configs/route/phase1_ugi3_targeted_aldehyde_evidence_
 _TARGETED_LEDGER = Path(
     "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz"
 )
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(chunk_size):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _artifact(repo_root: Path, relative: Path) -> dict[str, Any]:

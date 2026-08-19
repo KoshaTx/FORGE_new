@@ -14,6 +14,7 @@ from typing import Any
 import numpy as np
 
 from forge.bio.ugi_dynamic_controller_analysis import BinomialRidge, morphology_features
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     load_census_contract,
@@ -51,10 +52,6 @@ EXPECTED_INPUTS = {
 
 class UgiMorphologyProposalScheduleError(RuntimeError):
     """Raised when an unused-program proposal contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:

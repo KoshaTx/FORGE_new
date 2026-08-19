@@ -21,8 +21,6 @@ import csv
 import gzip
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -30,6 +28,8 @@ from types import MappingProxyType
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
@@ -100,27 +100,8 @@ class UgiRouteAwarePanelFeasibilityError(RuntimeError):
     """Raised when the frozen route-aware census cannot be reproduced exactly."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
 def _canonical_json_bytes(value: Any) -> bytes:
     return (_stable_json(value) + "\n").encode()
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    temporary = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except Exception:
-        temporary.unlink(missing_ok=True)
-        raise
 
 
 def _jsonl_gzip_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:

@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import io
 import json
 import math
@@ -31,6 +30,7 @@ from forge.bio.ugi_generated_role_applicability_census import (
     ROLES,
     VIEWS,
 )
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
@@ -181,14 +181,6 @@ LEDGER_FIELDS = (
 
 class UgiJointKernelLambdaZeroError(RuntimeError):
     """Raised when bounded-schedule identity or structural gating fails closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

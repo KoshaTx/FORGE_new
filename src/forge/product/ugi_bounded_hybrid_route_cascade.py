@@ -30,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.hashing import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_bounded_hybrid_route_cascade_config.v1"
 PREFLIGHT_SCHEMA_VERSION = "phase1_ugi_bounded_hybrid_route_cascade_preflight.v1"
@@ -128,16 +129,6 @@ def sha256_payload(value: Any) -> str:
     """Return a deterministic SHA-256 over canonical JSON."""
 
     return hashlib.sha256(stable_json(value).encode()).hexdigest()
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return the SHA-256 of one file without loading it entirely."""
-
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def canonical_json_bytes(value: Any) -> bytes:

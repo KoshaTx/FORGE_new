@@ -18,6 +18,8 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.product.ugi_chemistry_flow import (
     UgiChemistrySample,
     chemistry_sample_to_molecule,
@@ -65,14 +67,6 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 class UgiTerminalRouteAssessmentError(RuntimeError):
     """Raised when the typed terminal-to-route boundary fails closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

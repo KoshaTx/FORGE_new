@@ -9,7 +9,6 @@ promotion recommendation; production activation remains false.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
 import time
@@ -20,6 +19,8 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Protocol
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.route.graph2edits_runtime_qualification import verify_runtime_receipt
 from forge.route.proposal_discovery_status import (
     ProposalDiscoveryResolution,
@@ -43,22 +44,6 @@ V3_CONTRACT_SCHEMA_VERSION = "forge.single_step_proposal_executable_contract.v3"
 V3_OUTPUT_SCHEMA_VERSION = "forge.single_step_proposal_benchmark_output.v3"
 V3_SCORE_SCHEMA_VERSION = "forge.single_step_proposal_benchmark_score.v3"
 V3_DECISION_SCHEMA_VERSION = "forge.single_step_proposal_benchmark_decision.v3"
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(chunk_size):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

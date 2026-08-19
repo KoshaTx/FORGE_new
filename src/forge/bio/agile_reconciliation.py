@@ -36,6 +36,8 @@ from xml.etree import ElementTree as ET
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_file
+
 CONFIG_SCHEMA_VERSION = "m0_07_agile_reconciliation_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_agile_reconciliation.v1"
 
@@ -92,14 +94,6 @@ _PACKAGE_REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
 
 class AgileReconciliationError(ValueError):
     """Raised when an input violates the frozen reconciliation contract."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -560,7 +554,7 @@ def reconcile_agile_records(
 
     if lantern_mismatch_labels:
         raise AgileReconciliationError(
-            "reconciled HeLa labels disagree with LANTERN: " f"{lantern_mismatch_labels[:10]}"
+            f"reconciled HeLa labels disagree with LANTERN: {lantern_mismatch_labels[:10]}"
         )
     if len(curated) != 1100 or len(excluded) != 100 or len(ledger) != 1200:
         raise AgileReconciliationError(

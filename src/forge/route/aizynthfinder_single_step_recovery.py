@@ -18,6 +18,8 @@ from typing import Any
 
 from rdkit import Chem
 
+from forge.core.hashing import sha256_file
+
 CONFIG_SCHEMA_VERSION = "phase1_aizynthfinder_single_step_recovery_benchmark_config.v1"
 TARGET_SCHEMA_VERSION = "forge.single_step_benchmark_lane_targets.v1"
 TRUTH_SCHEMA_VERSION = "forge.single_step_benchmark_scoring_truth.v1"
@@ -36,14 +38,6 @@ def stable_json(value: Any) -> str:
 
 def content_sha256(value: Any) -> str:
     return hashlib.sha256(stable_json(value).encode()).hexdigest()
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def load_gzip_json(path: Path) -> dict[str, Any]:

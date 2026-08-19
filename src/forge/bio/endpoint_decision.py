@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import inspect
 import json
 import os
@@ -10,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.bio.endpoint import endpoint_ids, load_endpoint
+from forge.core.hashing import sha256_file as _sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_08_endpoint_decision_config.v1"
 RESULT_SCHEMA_VERSION = "m0_08_endpoint_decision.v1"
@@ -17,18 +17,6 @@ RESULT_SCHEMA_VERSION = "m0_08_endpoint_decision.v1"
 
 class EndpointDecisionError(ValueError):
     """Raised when the endpoint decision package violates its frozen contract."""
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    try:
-        handle = path.open("rb")
-    except FileNotFoundError as exc:
-        raise EndpointDecisionError(f"required M0-08 input is missing: {path}") from exc
-    with handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path) -> dict[str, Any]:

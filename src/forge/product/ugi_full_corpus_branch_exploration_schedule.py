@@ -19,6 +19,7 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_complete_morphology_proposal import enumerate_complete_program_support
 from forge.product.ugi_constrained_stochastic_production_candidates import branch_class
@@ -53,10 +54,6 @@ EXPECTED_IMPLEMENTATION = {"runner", "source", "tests"}
 
 class UgiFullCorpusBranchExplorationScheduleError(RuntimeError):
     """Raised when the expanded support or exploration contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:

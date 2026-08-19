@@ -30,6 +30,7 @@ from forge.bio.oracle_graph import (
     GraphTensor,
     tensorize_smiles,
 )
+from forge.core.hashing import sha256_file as _sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_cache_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_cache.v1"
@@ -59,14 +60,6 @@ FIXED_ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 
 class OracleGraphCacheError(ValueError):
     """Raised when the graph tensor cache violates its frozen contract."""
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:

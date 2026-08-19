@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.product.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
@@ -55,10 +56,6 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 class UgiProductionZeroGuidanceResultError(RuntimeError):
     """Raised when production rehearsal provenance is incomplete or divergent."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _require_nonempty(value: Any, *, label: str) -> str:

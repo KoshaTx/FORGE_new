@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_nonzero_guidance_runner import (
     GuidanceTerminalCompletionReceipt,
@@ -77,14 +78,6 @@ EXPECTED_INPUT_KEYS = frozenset(
 
 class UgiSelectedV2PoolSingletonEquivalenceV2Error(RuntimeError):
     """Raised when the production-runtime equivalence contract is violated."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:

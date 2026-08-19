@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 import platform
 import re
@@ -27,6 +26,7 @@ from typing import Any
 
 from rdkit import rdBase
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_terminal_route_assessment import (
     DEFAULT_IDENTITY_POLICY,
@@ -61,14 +61,6 @@ _BUDGET_FIELDS = tuple(PlannerBudgetLimits.__annotations__)
 
 class Ugi3ProductionPlannerQualificationError(RuntimeError):
     """Raised when the production planner qualification cannot fail closed."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

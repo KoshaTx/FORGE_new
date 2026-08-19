@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_graded_route_readiness_evaluator import (
     UGI_GRADED_ROUTE_READINESS_POLICY_SHA256,
@@ -68,14 +69,6 @@ REVIEW_TOKEN = "graded-route-readiness-lambda-0.25-reviewed"
 
 class UgiGradedRouteReadinessGuidanceError(RuntimeError):
     """Raised when the matched graded-readiness experiment changes or fails."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path) -> dict[str, Any]:

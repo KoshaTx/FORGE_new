@@ -23,6 +23,9 @@ from typing import Any
 from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdFingerprintGenerator
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import stable_json as _stable_json
+
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_source_neutral_proposal_adjudication_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi3_source_neutral_proposal_adjudication.v1"
 LEDGER_SCHEMA_VERSION = "phase1_ugi3_source_neutral_proposal_adjudication_ledger.v1"
@@ -47,18 +50,6 @@ _FORMAMIDE = Chem.MolFromSmarts("[NX3H1][CH1]=[OX1]")
 
 class Ugi3ProposalAdjudicationError(RuntimeError):
     """Raised when a frozen input or adjudication contract changes."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _content_sha256(value: Mapping[str, Any]) -> str:

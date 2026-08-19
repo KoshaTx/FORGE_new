@@ -11,6 +11,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.planner import (
     AssessmentOutcome,
@@ -32,10 +33,6 @@ LEDGER_SCHEMA_VERSION = "phase1_ugi3_targeted_exact_overlay_assessments.v1"
 
 class Ugi3TargetedExactOverlayDiagnosticError(ValueError):
     """Raised when the versioned overlay diagnostic cannot be reproduced."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

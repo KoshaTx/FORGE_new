@@ -21,6 +21,7 @@ from typing import Any
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_route_shortlist_config.v2"
@@ -30,10 +31,6 @@ LEDGER_SCHEMA_VERSION = "phase1_ugi_production_route_shortlist_ledger.v2"
 
 class UgiProductionRouteShortlistV2Error(RuntimeError):
     """Raised when the corrected route-blinded shortlist cannot be reproduced."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

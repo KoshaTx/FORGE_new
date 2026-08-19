@@ -11,15 +11,15 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 import math
-import os
-import tempfile
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file
+from forge.core.io import atomic_write as _atomic_write
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_freeze_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_freeze.v1"
@@ -45,16 +45,6 @@ class OracleFreezeError(ValueError):
     """Raised when scientific oracle selection violates its frozen contract."""
 
 
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Return a streaming SHA256 digest."""
-
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def _stable_json(value: Mapping[str, Any]) -> bytes:
     return (
         json.dumps(
@@ -66,20 +56,6 @@ def _stable_json(value: Mapping[str, Any]) -> bytes:
         )
         + "\n"
     ).encode("utf-8")
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    temporary_path = Path(temporary)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary_path, path)
-    finally:
-        temporary_path.unlink(missing_ok=True)
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
@@ -573,7 +549,7 @@ def build_nested_selection_audit(
         key = (scheme, int(source["fold"]), candidate)
         if endpoint in by_partition_candidate[key]:
             raise OracleFreezeError(
-                f"nested audit has duplicate {scheme}/{source['fold']}/" f"{candidate}/{endpoint}"
+                f"nested audit has duplicate {scheme}/{source['fold']}/{candidate}/{endpoint}"
             )
         by_partition_candidate[key][endpoint] = source
     by_partition: defaultdict[
@@ -654,7 +630,7 @@ def build_nested_selection_audit(
         observed_folds = {int(row["fold"]) for row in group}
         if observed_folds != _expected_folds(scheme):
             raise OracleFreezeError(
-                f"nested audit {endpoint}/{scheme} has folds " f"{sorted(observed_folds)}"
+                f"nested audit {endpoint}/{scheme} has folds {sorted(observed_folds)}"
             )
         r2_values = [float(row["test_r2"]) for row in group]
         scheme_metrics[endpoint][scheme] = {

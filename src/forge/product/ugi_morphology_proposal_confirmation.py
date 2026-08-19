@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     _jsonl_gzip_bytes,
@@ -94,21 +95,6 @@ def _pin(repo: Path, record: Any, *, label: str) -> Path:
     if path.is_symlink() or not path.is_file() or sha256_file(path) != record["sha256"]:
         raise UgiMorphologyProposalConfirmationError(f"pin changed: {label}")
     return path
-
-
-def _atomic_write(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    temporary = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(data)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except Exception:
-        temporary.unlink(missing_ok=True)
-        raise
 
 
 def _atomic_json(path: Path, value: Any) -> None:

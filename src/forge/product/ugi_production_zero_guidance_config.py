@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_matched_budget_orchestration import (
     MatchedBudgetLimits,
     MatchedScheduleEntry,
@@ -67,16 +68,8 @@ class UgiProductionZeroGuidanceConfigError(RuntimeError):
     """Raised when the frozen rehearsal plan cannot be authenticated exactly."""
 
 
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
-
-
-def _sha256_payload(value: Any) -> str:
-    return _sha256_bytes(_stable_json(value).encode())
 
 
 def _reject_duplicate_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

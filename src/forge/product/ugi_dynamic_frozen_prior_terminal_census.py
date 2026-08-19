@@ -27,6 +27,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import atomic_write as _atomic_write
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
 from forge.product.ugi_joint_sparse_sampling import (
@@ -104,10 +106,6 @@ def _stable_json_bytes(value: Any) -> bytes:
         raise UgiDynamicTerminalCensusError("value is not canonically serializable") from error
 
 
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json_bytes(value)).hexdigest()
-
-
 def _lower_sha256(value: Any, *, label: str) -> str:
     if (
         not isinstance(value, str)
@@ -132,21 +130,6 @@ def _nonnegative_integer(value: Any, *, label: str) -> int:
 
 def _utc_now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-
-def _atomic_write(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    temporary = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(data)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except Exception:
-        temporary.unlink(missing_ok=True)
-        raise
 
 
 def _atomic_json(path: Path, value: Any) -> None:

@@ -9,7 +9,6 @@ does not tune or promote a production proposal on the same biological rows.
 from __future__ import annotations
 
 import hashlib
-import json
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -31,6 +30,7 @@ from forge.bio.ugi_morphology_potency_signal import (
     _sha256_file,
     prediction_metrics,
 )
+from forge.core.io import stable_json as _stable_json
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_morphology_high_potency_challenger_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_morphology_high_potency_challenger.v1"
@@ -38,10 +38,6 @@ RESULT_SCHEMA_VERSION = "phase1_ugi_morphology_high_potency_challenger.v1"
 
 class UgiMorphologyHighPotencyChallengerError(RuntimeError):
     """Raised when the frozen challenger cannot be evaluated."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _pin(repo: Path, record: Any, *, label: str) -> Path:

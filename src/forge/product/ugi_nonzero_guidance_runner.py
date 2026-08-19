@@ -24,6 +24,8 @@ from typing import Any, Protocol
 
 import numpy as np
 
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
@@ -50,14 +52,6 @@ RUN_RESULT_SCHEMA_VERSION = "forge.ugi_nonzero_guidance_development_run.v1"
 
 class UgiNonzeroGuidanceRunnerError(RuntimeError):
     """Raised when guidance orchestration violates the frozen contract."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

@@ -19,6 +19,7 @@ from typing import Any
 from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdChemReactions, rdFingerprintGenerator
 
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_hydrophobic_motif_transfer_config.v3"
@@ -95,17 +96,11 @@ def _load_json(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())
     except FileNotFoundError as exc:
-        raise HydrophobicMotifTransferError(
-            f"{label} not found: {path}"
-        ) from exc
+        raise HydrophobicMotifTransferError(f"{label} not found: {path}") from exc
     except json.JSONDecodeError as exc:
-        raise HydrophobicMotifTransferError(
-            f"{label} is not valid JSON: {path}: {exc}"
-        ) from exc
+        raise HydrophobicMotifTransferError(f"{label} is not valid JSON: {path}: {exc}") from exc
     if not isinstance(value, dict):
-        raise HydrophobicMotifTransferError(
-            f"{label} must contain a JSON object"
-        )
+        raise HydrophobicMotifTransferError(f"{label} must contain a JSON object")
     return value
 
 
@@ -119,17 +114,13 @@ def _required_mapping(
         raise HydrophobicMotifTransferError(f"{label} must be an object")
     missing = set(fields) - set(value)
     if missing:
-        raise HydrophobicMotifTransferError(
-            f"{label} is missing fields: {sorted(missing)}"
-        )
+        raise HydrophobicMotifTransferError(f"{label} is missing fields: {sorted(missing)}")
     return value
 
 
 def _required_string(value: Any, *, label: str) -> str:
     if not isinstance(value, str) or not value:
-        raise HydrophobicMotifTransferError(
-            f"{label} must be a nonempty string"
-        )
+        raise HydrophobicMotifTransferError(f"{label} must be a nonempty string")
     return value
 
 
@@ -139,20 +130,15 @@ def _verify_hash(path: Path, expected: Any, *, label: str) -> dict[str, Any]:
         label=f"{label} expected_sha256",
     )
     if len(expected_digest) != 64:
-        raise HydrophobicMotifTransferError(
-            f"{label} expected_sha256 must contain 64 characters"
-        )
+        raise HydrophobicMotifTransferError(f"{label} expected_sha256 must contain 64 characters")
     try:
         observed = sha256_file(path)
         size = path.stat().st_size
     except FileNotFoundError as exc:
-        raise HydrophobicMotifTransferError(
-            f"{label} not found: {path}"
-        ) from exc
+        raise HydrophobicMotifTransferError(f"{label} not found: {path}") from exc
     if observed != expected_digest:
         raise HydrophobicMotifTransferError(
-            f"{label} hash mismatch: expected {expected_digest}, "
-            f"observed {observed}"
+            f"{label} hash mismatch: expected {expected_digest}, observed {observed}"
         )
     return {
         "asset": path.name,
@@ -186,8 +172,7 @@ def _verify_zip_member(
     observed = hashlib.sha256(payload).hexdigest()
     if observed != digest:
         raise HydrophobicMotifTransferError(
-            f"source bundle member hash mismatch: expected {digest}, "
-            f"observed {observed}"
+            f"source bundle member hash mismatch: expected {digest}, observed {observed}"
         )
     return {
         "asset": member,
@@ -202,9 +187,7 @@ def _verify_source_assets(
     source_root: Path,
 ) -> tuple[list[dict[str, Any]], set[str]]:
     if not isinstance(raw_assets, dict) or not raw_assets:
-        raise HydrophobicMotifTransferError(
-            "source_assets must be a nonempty object"
-        )
+        raise HydrophobicMotifTransferError("source_assets must be a nonempty object")
     root = source_root.resolve()
     inputs: list[dict[str, Any]] = []
     verified_ids: set[str] = set()
@@ -227,9 +210,7 @@ def _verify_source_assets(
             )
         path = (root / relative).resolve()
         if not path.is_relative_to(root):
-            raise HydrophobicMotifTransferError(
-                f"source asset {asset_id} escapes the source root"
-            )
+            raise HydrophobicMotifTransferError(f"source asset {asset_id} escapes the source root")
         verified = _verify_hash(
             path,
             spec["expected_sha256"],
@@ -250,8 +231,7 @@ def _verify_source_assets(
         member_digest = spec.get("expected_member_sha256")
         if (member is None) != (member_digest is None):
             raise HydrophobicMotifTransferError(
-                f"source asset {asset_id} must specify both member and "
-                "expected_member_sha256"
+                f"source asset {asset_id} must specify both member and expected_member_sha256"
             )
         if member is not None:
             member_record = _verify_zip_member(
@@ -276,18 +256,14 @@ def _canonical_molecule(smiles: Any, *, label: str) -> tuple[Chem.Mol, str]:
     with rdBase.BlockLogs():
         molecule = Chem.MolFromSmiles(value)
     if molecule is None:
-        raise HydrophobicMotifTransferError(
-            f"{label} is not valid SMILES: {value!r}"
-        )
+        raise HydrophobicMotifTransferError(f"{label} is not valid SMILES: {value!r}")
     canonical = Chem.MolToSmiles(
         molecule,
         canonical=True,
         isomericSmiles=True,
     )
     if canonical != value:
-        raise HydrophobicMotifTransferError(
-            f"{label} is not canonical: {value!r} != {canonical!r}"
-        )
+        raise HydrophobicMotifTransferError(f"{label} is not canonical: {value!r} != {canonical!r}")
     return molecule, canonical
 
 
@@ -302,24 +278,18 @@ def _mapped_attachment(
     with rdBase.BlockLogs():
         molecule = Chem.MolFromSmiles(value)
     if molecule is None:
-        raise HydrophobicMotifTransferError(
-            f"{label} mapped SMILES is invalid"
-        )
+        raise HydrophobicMotifTransferError(f"{label} mapped SMILES is invalid")
     map_index: dict[int, Chem.Atom] = {}
     for atom in molecule.GetAtoms():
         atom_map = atom.GetAtomMapNum()
         if atom_map:
             if atom_map in map_index:
-                raise HydrophobicMotifTransferError(
-                    f"{label} repeats atom map {atom_map}"
-                )
+                raise HydrophobicMotifTransferError(f"{label} repeats atom map {atom_map}")
             map_index[atom_map] = atom
     anchor_map = attachment.get("motif_anchor_atom_map")
     handle_map = attachment.get("source_handle_atom_map")
     if not isinstance(anchor_map, int) or not isinstance(handle_map, int):
-        raise HydrophobicMotifTransferError(
-            f"{label} attachment maps must be integers"
-        )
+        raise HydrophobicMotifTransferError(f"{label} attachment maps must be integers")
     if set(map_index) != {anchor_map, handle_map}:
         raise HydrophobicMotifTransferError(
             f"{label} mapped atoms {sorted(map_index)} disagree with "
@@ -328,13 +298,9 @@ def _mapped_attachment(
     anchor = map_index[anchor_map]
     handle = map_index[handle_map]
     if anchor.GetAtomicNum() != 6 or handle.GetAtomicNum() != 8:
-        raise HydrophobicMotifTransferError(
-            f"{label} must map a carbon anchor and oxygen handle"
-        )
+        raise HydrophobicMotifTransferError(f"{label} must map a carbon anchor and oxygen handle")
     if molecule.GetBondBetweenAtoms(anchor.GetIdx(), handle.GetIdx()) is None:
-        raise HydrophobicMotifTransferError(
-            f"{label} mapped anchor and handle are not bonded"
-        )
+        raise HydrophobicMotifTransferError(f"{label} mapped anchor and handle are not bonded")
     stripped = Chem.Mol(molecule)
     for atom in stripped.GetAtoms():
         atom.SetAtomMapNum(0)
@@ -345,17 +311,14 @@ def _mapped_attachment(
     )
     if stripped_canonical != canonical_smiles:
         raise HydrophobicMotifTransferError(
-            f"{label} mapped structure does not reconstruct "
-            f"{canonical_smiles!r}"
+            f"{label} mapped structure does not reconstruct {canonical_smiles!r}"
         )
     return molecule, anchor, handle
 
 
 def _alcohol_class(anchor: Chem.Atom, handle: Chem.Atom) -> str:
     if handle.GetTotalNumHs() != 1:
-        raise HydrophobicMotifTransferError(
-            "mapped source handle is not an alcohol oxygen"
-        )
+        raise HydrophobicMotifTransferError("mapped source handle is not an alcohol oxygen")
     carbon_neighbors = sum(
         neighbor.GetAtomicNum() == 6
         for neighbor in anchor.GetNeighbors()
@@ -365,15 +328,11 @@ def _alcohol_class(anchor: Chem.Atom, handle: Chem.Atom) -> str:
         return "primary"
     if anchor.GetTotalNumHs() == 1 and carbon_neighbors == 2:
         return "secondary"
-    raise HydrophobicMotifTransferError(
-        "mapped alcohol is neither primary nor secondary"
-    )
+    raise HydrophobicMotifTransferError("mapped alcohol is neither primary nor secondary")
 
 
 def _motif_descriptors(molecule: Chem.Mol) -> dict[str, int]:
-    carbons = [
-        atom for atom in molecule.GetAtoms() if atom.GetAtomicNum() == 6
-    ]
+    carbons = [atom for atom in molecule.GetAtoms() if atom.GetAtomicNum() == 6]
     carbon_double_bonds = sum(
         bond.GetBondType() == Chem.BondType.DOUBLE
         and bond.GetBeginAtom().GetAtomicNum() == 6
@@ -381,8 +340,7 @@ def _motif_descriptors(molecule: Chem.Mol) -> dict[str, int]:
         for bond in molecule.GetBonds()
     )
     branch_carbons = sum(
-        sum(neighbor.GetAtomicNum() == 6 for neighbor in atom.GetNeighbors())
-        > 2
+        sum(neighbor.GetAtomicNum() == 6 for neighbor in atom.GetNeighbors()) > 2
         for atom in carbons
     )
     return {
@@ -402,9 +360,7 @@ def _read_component_pool(
         with gzip.open(path, "rt", newline="") as handle:
             reader = csv.DictReader(handle)
             required = {"component_id", "role", "canonical_smiles"}
-            if reader.fieldnames is None or not required.issubset(
-                reader.fieldnames
-            ):
+            if reader.fieldnames is None or not required.issubset(reader.fieldnames):
                 raise HydrophobicMotifTransferError(
                     "reference component ledger is missing required columns"
                 )
@@ -415,8 +371,7 @@ def _read_component_pool(
         ) from exc
     if len(rows) != expected_count:
         raise HydrophobicMotifTransferError(
-            f"reference component ledger has {len(rows)} {role!r} rows; "
-            f"expected {expected_count}"
+            f"reference component ledger has {len(rows)} {role!r} rows; expected {expected_count}"
         )
     seen: set[str] = set()
     for index, row in enumerate(rows):
@@ -440,14 +395,11 @@ def _load_reaction(
     registry = _load_json(path, label="qualified reaction registry")
     reactions = registry.get("reactions")
     if not isinstance(reactions, list):
-        raise HydrophobicMotifTransferError(
-            "qualified reaction registry has no reactions list"
-        )
+        raise HydrophobicMotifTransferError("qualified reaction registry has no reactions list")
     matches = [
         reaction
         for reaction in reactions
-        if isinstance(reaction, dict)
-        and reaction.get("reaction_id") == reaction_id
+        if isinstance(reaction, dict) and reaction.get("reaction_id") == reaction_id
     ]
     if len(matches) != 1:
         raise HydrophobicMotifTransferError(
@@ -461,22 +413,20 @@ def _load_reaction(
     with rdBase.BlockLogs():
         reaction = rdChemReactions.ReactionFromSmarts(smarts)
     if reaction is None:
-        raise HydrophobicMotifTransferError(
-            f"could not compile reaction {reaction_id!r}"
-        )
+        raise HydrophobicMotifTransferError(f"could not compile reaction {reaction_id!r}")
     roles = reaction_record.get("reactant_roles")
-    role_names = [
-        role.get("name") for role in roles if isinstance(role, dict)
-    ] if isinstance(roles, list) else []
+    role_names = (
+        [role.get("name") for role in roles if isinstance(role, dict)]
+        if isinstance(roles, list)
+        else []
+    )
     expected_roles = [
         "amine_head",
         "oxoester_aldehyde_body_tail",
         "isocyanide_tail",
     ]
     if role_names != expected_roles:
-        raise HydrophobicMotifTransferError(
-            f"{reaction_id} role order changed: {role_names}"
-        )
+        raise HydrophobicMotifTransferError(f"{reaction_id} role order changed: {role_names}")
     return reaction_record, reaction
 
 
@@ -486,9 +436,7 @@ def _compile_programs(
     verified_asset_ids: set[str],
 ) -> dict[str, tuple[Mapping[str, Any], rdChemReactions.ChemicalReaction]]:
     if not isinstance(raw, dict) or not raw:
-        raise HydrophobicMotifTransferError(
-            "programs must be a nonempty object"
-        )
+        raise HydrophobicMotifTransferError("programs must be a nonempty object")
     programs: dict[
         str,
         tuple[Mapping[str, Any], rdChemReactions.ChemicalReaction],
@@ -515,9 +463,7 @@ def _compile_programs(
                 )
             )
         if reaction is None:
-            raise HydrophobicMotifTransferError(
-                f"could not compile program {program_id!r}"
-            )
+            raise HydrophobicMotifTransferError(f"could not compile program {program_id!r}")
         route_closure = _required_string(
             spec["route_closure"],
             label=f"program {program_id} route_closure",
@@ -532,8 +478,7 @@ def _compile_programs(
                 f"program {program_id} route_gap_class must be a string"
             )
         is_complete = (
-            route_closure == COMPLETE_ROUTE_CLOSURE
-            and terminal_status in ACCEPTED_TERMINAL_STATES
+            route_closure == COMPLETE_ROUTE_CLOSURE and terminal_status in ACCEPTED_TERMINAL_STATES
         )
         if is_complete:
             if route_gap_class:
@@ -557,10 +502,7 @@ def _compile_programs(
             if (
                 not isinstance(asset_ids, list)
                 or not asset_ids
-                or any(
-                    not isinstance(asset_id, str) or not asset_id
-                    for asset_id in asset_ids
-                )
+                or any(not isinstance(asset_id, str) or not asset_id for asset_id in asset_ids)
             ):
                 raise HydrophobicMotifTransferError(
                     f"program {program_id} exact route needs source assets"
@@ -583,8 +525,7 @@ def _compile_programs(
                 )
             if not isinstance(exact_evidence["conditions"], dict):
                 raise HydrophobicMotifTransferError(
-                    f"program {program_id} exact route conditions must be "
-                    "an object"
+                    f"program {program_id} exact route conditions must be an object"
                 )
             terminal_evidence = _required_mapping(
                 exact_evidence["terminal_evidence"],
@@ -604,13 +545,9 @@ def _compile_programs(
                     value,
                     label=f"program {program_id} terminal evidence {field}",
                 )
-        elif (
-            route_closure == COMPLETE_ROUTE_CLOSURE
-            or terminal_status in ACCEPTED_TERMINAL_STATES
-        ):
+        elif route_closure == COMPLETE_ROUTE_CLOSURE or terminal_status in ACCEPTED_TERMINAL_STATES:
             raise HydrophobicMotifTransferError(
-                f"program {program_id} has inconsistent route and terminal "
-                "closure states"
+                f"program {program_id} has inconsistent route and terminal closure states"
             )
         elif not route_gap_class:
             raise HydrophobicMotifTransferError(
@@ -626,9 +563,7 @@ def _validate_sources(
     verified_asset_ids: set[str],
 ) -> dict[str, Mapping[str, Any]]:
     if not isinstance(raw_sources, dict) or not raw_sources:
-        raise HydrophobicMotifTransferError(
-            "sources must be a nonempty object"
-        )
+        raise HydrophobicMotifTransferError("sources must be a nonempty object")
     sources: dict[str, Mapping[str, Any]] = {}
     for source_id, raw_source in sorted(raw_sources.items()):
         source_id = _required_string(source_id, label="source id")
@@ -657,8 +592,7 @@ def _validate_sources(
         unknown_assets = set(asset_ids) - verified_asset_ids
         if unknown_assets:
             raise HydrophobicMotifTransferError(
-                f"source {source_id} references unknown assets: "
-                f"{sorted(unknown_assets)}"
+                f"source {source_id} references unknown assets: {sorted(unknown_assets)}"
             )
         for field in (
             "platform_id",
@@ -705,27 +639,20 @@ def _validate_sources(
             ):
                 _required_string(
                     reaction[field],
-                    label=(
-                        f"source {source_id} reaction {reaction_id} {field}"
-                    ),
+                    label=(f"source {source_id} reaction {reaction_id} {field}"),
                 )
             reactants = reaction["reactants"]
             if (
                 not isinstance(reactants, list)
                 or not reactants
-                or any(
-                    not isinstance(value, str) or not value
-                    for value in reactants
-                )
+                or any(not isinstance(value, str) or not value for value in reactants)
             ):
                 raise HydrophobicMotifTransferError(
-                    f"source {source_id} reaction {reaction_id} reactants "
-                    "must be nonempty strings"
+                    f"source {source_id} reaction {reaction_id} reactants must be nonempty strings"
                 )
             if not isinstance(reaction["conditions"], dict):
                 raise HydrophobicMotifTransferError(
-                    f"source {source_id} reaction {reaction_id} conditions "
-                    "must be an object"
+                    f"source {source_id} reaction {reaction_id} conditions must be an object"
                 )
         sources[source_id] = source
     return sources
@@ -742,9 +669,7 @@ def _unique_products(
         outcomes = reaction.RunReactants(tuple(reactants))
     for outcome in outcomes:
         if len(outcome) != 1:
-            raise HydrophobicMotifTransferError(
-                f"{label} produced a multi-product outcome"
-            )
+            raise HydrophobicMotifTransferError(f"{label} produced a multi-product outcome")
         product = Chem.Mol(outcome[0])
         try:
             Chem.SanitizeMol(product)
@@ -779,9 +704,7 @@ def _nearest_component(
     for row in reference_rows:
         molecule = Chem.MolFromSmiles(row["canonical_smiles"])
         if molecule is None:
-            raise HydrophobicMotifTransferError(
-                "reference component became unparsable"
-            )
+            raise HydrophobicMotifTransferError("reference component became unparsable")
         similarity = float(
             DataStructs.TanimotoSimilarity(
                 fingerprint,
@@ -797,14 +720,8 @@ def _nearest_component(
             best = key
         exact = exact or row["canonical_smiles"] == candidate_smiles
     if best is None:
-        raise HydrophobicMotifTransferError(
-            "reference component pool is empty"
-        )
+        raise HydrophobicMotifTransferError("reference component pool is empty")
     return best[1], best[2], best[0], exact
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def _csv_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:
@@ -830,9 +747,7 @@ def _csv_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:
 
 def _validate_config(config: Mapping[str, Any]) -> None:
     if config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise HydrophobicMotifTransferError(
-            f"config schema must be {CONFIG_SCHEMA_VERSION!r}"
-        )
+        raise HydrophobicMotifTransferError(f"config schema must be {CONFIG_SCHEMA_VERSION!r}")
     for field in ("task", "pilot_id", "generated_utc"):
         _required_string(config.get(field), label=field)
     policy = _required_mapping(
@@ -854,9 +769,7 @@ def _validate_config(config: Mapping[str, Any]) -> None:
             "chemistry_specific_evidence_required",
         ),
     )
-    safeguards = [
-        value for key, value in policy.items() if key.startswith("no_")
-    ] + [
+    safeguards = [value for key, value in policy.items() if key.startswith("no_")] + [
         policy["forward_compatibility_is_not_experimental_success"],
         policy["incomplete_routes_are_not_route_complete"],
         policy["generative_oracle_and_route_support_are_independent"],
@@ -866,19 +779,11 @@ def _validate_config(config: Mapping[str, Any]) -> None:
         policy["chemistry_specific_evidence_required"],
     ]
     if any(value is not True for value in safeguards):
-        raise HydrophobicMotifTransferError(
-            "all scope-policy safeguards must be true"
-        )
+        raise HydrophobicMotifTransferError("all scope-policy safeguards must be true")
     if policy["transfer_target"] != "hydrophobic_tail_motifs":
-        raise HydrophobicMotifTransferError(
-            "the pilot may transfer hydrophobic tail motifs only"
-        )
-    if policy["head_policy"] != (
-        "exact_site_defined_ugi_compatible_amine_only"
-    ):
-        raise HydrophobicMotifTransferError(
-            "head policy must forbid motif conversion"
-        )
+        raise HydrophobicMotifTransferError("the pilot may transfer hydrophobic tail motifs only")
+    if policy["head_policy"] != ("exact_site_defined_ugi_compatible_amine_only"):
+        raise HydrophobicMotifTransferError("head policy must forbid motif conversion")
     taxonomy = config.get("route_outcome_taxonomy")
     expected_taxonomy = [
         "complete_route_found",
@@ -902,9 +807,7 @@ def _validate_expected_counts(
         fields=tuple(summary),
     )
     if set(expected_counts) != set(summary):
-        raise HydrophobicMotifTransferError(
-            "expected_counts fields disagree with computed summary"
-        )
+        raise HydrophobicMotifTransferError("expected_counts fields disagree with computed summary")
     for field, observed in summary.items():
         wanted = expected_counts[field]
         if not isinstance(wanted, int) or wanted != observed:
@@ -978,9 +881,7 @@ def build_hydrophobic_motif_transfer(
     ]
     expected_pool_count = reference["expected_aldehyde_components"]
     if not isinstance(expected_pool_count, int) or expected_pool_count <= 0:
-        raise HydrophobicMotifTransferError(
-            "expected_aldehyde_components must be positive"
-        )
+        raise HydrophobicMotifTransferError("expected_aldehyde_components must be positive")
     reference_rows = _read_component_pool(
         component_ledger_path,
         role=_required_string(
@@ -1015,9 +916,7 @@ def build_hydrophobic_motif_transfer(
     )
     motifs = config.get("motifs")
     if not isinstance(motifs, list) or not motifs:
-        raise HydrophobicMotifTransferError(
-            "motifs must be a nonempty list"
-        )
+        raise HydrophobicMotifTransferError("motifs must be a nonempty list")
 
     rows: list[dict[str, Any]] = []
     seen_record_ids: set[str] = set()
@@ -1056,19 +955,14 @@ def build_hydrophobic_motif_transfer(
             label=f"{record_id} source_id",
         )
         if source_id not in sources:
-            raise HydrophobicMotifTransferError(
-                f"{record_id}: unknown source {source_id!r}"
-            )
+            raise HydrophobicMotifTransferError(f"{record_id}: unknown source {source_id!r}")
         source = sources[source_id]
         component_id = _required_string(
             record["source_component_id"],
             label=f"{record_id} source_component_id",
         )
         source_component_key = (source_id, component_id)
-        if (
-            record_id in seen_record_ids
-            or source_component_key in seen_source_components
-        ):
+        if record_id in seen_record_ids or source_component_key in seen_source_components:
             raise HydrophobicMotifTransferError(
                 f"{record_id}: duplicate record or source component"
             )
@@ -1109,9 +1003,7 @@ def build_hydrophobic_motif_transfer(
             "pubchem",
             "source_reported_structure",
         }:
-            raise HydrophobicMotifTransferError(
-                f"{record_id}: unsupported identity reference"
-            )
+            raise HydrophobicMotifTransferError(f"{record_id}: unsupported identity reference")
         observed_inchikey = Chem.MolToInchiKey(molecule)
         if observed_inchikey != identity["inchikey"]:
             raise HydrophobicMotifTransferError(
@@ -1129,8 +1021,7 @@ def build_hydrophobic_motif_transfer(
         )
         if attachment["event"] != source_reaction["attachment_event"]:
             raise HydrophobicMotifTransferError(
-                f"{record_id}: source attachment event disagrees with "
-                f"{source_reaction_id}"
+                f"{record_id}: source attachment event disagrees with {source_reaction_id}"
             )
         _, anchor, handle = _mapped_attachment(
             record["mapped_common_precursor_smiles"],
@@ -1155,13 +1046,10 @@ def build_hydrophobic_motif_transfer(
             )
         class_counts.update(motif_classes)
         risk_flags = record["risk_flags"]
-        if (
-            not isinstance(risk_flags, list)
-            or any(not isinstance(item, str) or not item for item in risk_flags)
+        if not isinstance(risk_flags, list) or any(
+            not isinstance(item, str) or not item for item in risk_flags
         ):
-            raise HydrophobicMotifTransferError(
-                f"{record_id}: risk_flags must contain strings"
-            )
+            raise HydrophobicMotifTransferError(f"{record_id}: risk_flags must contain strings")
         descriptors = _motif_descriptors(molecule)
         disposition = record["disposition"]
 
@@ -1186,17 +1074,14 @@ def build_hydrophobic_motif_transfer(
         if disposition == "propose_ugi_aldehyde":
             if alcohol_class != "primary" or defer_reason:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: proposed aldehyde must be an undeferred "
-                    "primary alcohol"
+                    f"{record_id}: proposed aldehyde must be an undeferred primary alcohol"
                 )
             program_id = _required_string(
                 record["program_id"],
                 label=f"{record_id} program_id",
             )
             if program_id not in programs:
-                raise HydrophobicMotifTransferError(
-                    f"{record_id}: unknown program {program_id!r}"
-                )
+                raise HydrophobicMotifTransferError(f"{record_id}: unknown program {program_id!r}")
             program, reaction = programs[program_id]
             realized = _unique_products(
                 reaction,
@@ -1205,15 +1090,12 @@ def build_hydrophobic_motif_transfer(
             )
             if len(realized) != 1:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: expected one realization, found "
-                    f"{len(realized)}"
+                    f"{record_id}: expected one realization, found {len(realized)}"
                 )
             candidate_smiles = realized[0]
             candidate = Chem.MolFromSmiles(candidate_smiles)
             if candidate is None or ALDEHYDE_QUERY is None:
-                raise HydrophobicMotifTransferError(
-                    f"{record_id}: aldehyde realization is invalid"
-                )
+                raise HydrophobicMotifTransferError(f"{record_id}: aldehyde realization is invalid")
             handle_matches = len(
                 candidate.GetSubstructMatches(
                     ALDEHYDE_QUERY,
@@ -1222,8 +1104,7 @@ def build_hydrophobic_motif_transfer(
             )
             if handle_matches != 1:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: expected one aldehyde handle, found "
-                    f"{handle_matches}"
+                    f"{record_id}: expected one aldehyde handle, found {handle_matches}"
                 )
             forward = _unique_products(
                 ugi_reaction,
@@ -1233,8 +1114,7 @@ def build_hydrophobic_motif_transfer(
             forward_products = len(forward)
             if forward_products != 1:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: frozen Ugi transform produced "
-                    f"{forward_products} unique products"
+                    f"{record_id}: frozen Ugi transform produced {forward_products} unique products"
                 )
             (
                 nearest_id,
@@ -1266,28 +1146,22 @@ def build_hydrophobic_motif_transfer(
             route_gap_class = raw_route_gap_class
             if record["route_gap_class"]:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: proposed record must use the program's "
-                    "route-gap class"
+                    f"{record_id}: proposed record must use the program's route-gap class"
                 )
             computationally_route_complete = (
                 route_closure == COMPLETE_ROUTE_CLOSURE
                 and terminal_status in ACCEPTED_TERMINAL_STATES
             )
             if computationally_route_complete:
-                route_support_status = (
-                    "complete_route_to_accepted_terminal"
-                )
+                route_support_status = "complete_route_to_accepted_terminal"
                 route_outcome_category = "complete_route_found"
                 missing_route_knowledge = False
             else:
-                route_support_status = (
-                    "forward_compatible_incomplete_route"
-                )
+                route_support_status = "forward_compatible_incomplete_route"
         elif disposition == "defer_structure_only":
             if record["program_id"] or not defer_reason:
                 raise HydrophobicMotifTransferError(
-                    f"{record_id}: deferred record needs an empty program "
-                    "and a reason"
+                    f"{record_id}: deferred record needs an empty program and a reason"
                 )
             route_gap_class = _required_string(
                 record["route_gap_class"],
@@ -1306,25 +1180,15 @@ def build_hydrophobic_motif_transfer(
                 "source_component_id": component_id,
                 "source_locator": source["source_locator"],
                 "source_reaction_id": source_reaction_id,
-                "source_reaction_transformation": source_reaction[
-                    "transformation"
-                ],
-                "source_reaction_conditions": _stable_json(
-                    source_reaction["conditions"]
-                ),
-                "source_reaction_evidence_status": source_reaction[
-                    "evidence_status"
-                ],
+                "source_reaction_transformation": source_reaction["transformation"],
+                "source_reaction_conditions": _stable_json(source_reaction["conditions"]),
+                "source_reaction_evidence_status": source_reaction["evidence_status"],
                 "source_reported_yield_percent": f"{float(source_yield):g}",
                 "common_precursor_name": record["common_precursor_name"],
                 "common_precursor_canonical_smiles": canonical,
                 "common_precursor_inchikey": observed_inchikey,
-                "motif_anchor_atom_map": attachment[
-                    "motif_anchor_atom_map"
-                ],
-                "source_handle_atom_map": attachment[
-                    "source_handle_atom_map"
-                ],
+                "motif_anchor_atom_map": attachment["motif_anchor_atom_map"],
+                "source_handle_atom_map": attachment["source_handle_atom_map"],
                 "source_handle_event": attachment["event"],
                 "source_attachment_mapping_status": "exact_mapped",
                 "alcohol_class": alcohol_class,
@@ -1340,43 +1204,28 @@ def build_hydrophobic_motif_transfer(
                 "terminal_status": terminal_status,
                 "route_outcome_category": route_outcome_category,
                 "route_gap_class": route_gap_class,
-                "missing_encoded_route_knowledge": str(
-                    missing_route_knowledge
-                ).lower(),
+                "missing_encoded_route_knowledge": str(missing_route_knowledge).lower(),
                 "observed_chemical_failure": "false",
                 "generative_support_status": "not_evaluated_in_m0",
-                "oracle_applicability_status": (
-                    "not_evaluated_no_label_transfer"
-                ),
+                "oracle_applicability_status": ("not_evaluated_no_label_transfer"),
                 "route_support_status": route_support_status,
                 "frozen_ugi_handle_matches": handle_matches,
                 "frozen_ugi_forward_products": forward_products,
-                "exact_current_aldehyde_pool_match": str(
-                    exact_pool_match
-                ).lower(),
+                "exact_current_aldehyde_pool_match": str(exact_pool_match).lower(),
                 "nearest_current_aldehyde_component_id": nearest_id,
                 "nearest_current_aldehyde_smiles": nearest_smiles,
                 "nearest_current_aldehyde_tanimoto": (
-                    f"{nearest_similarity:.6f}"
-                    if isinstance(nearest_similarity, float)
-                    else ""
+                    f"{nearest_similarity:.6f}" if isinstance(nearest_similarity, float) else ""
                 ),
-                "computationally_route_complete": str(
-                    computationally_route_complete
-                ).lower(),
+                "computationally_route_complete": str(computationally_route_complete).lower(),
                 "biological_label_inherited": "false",
                 "defer_reason": defer_reason,
             }
         )
 
     rows.sort(key=lambda row: row["record_id"])
-    source_platforms = sorted(
-        {str(row["source_platform"]) for row in rows}
-    )
-    source_reaction_keys = {
-        (str(row["source_id"]), str(row["source_reaction_id"]))
-        for row in rows
-    }
+    source_platforms = sorted({str(row["source_platform"]) for row in rows})
+    source_reaction_keys = {(str(row["source_id"]), str(row["source_reaction_id"])) for row in rows}
     summary = {
         "source_motifs": len(rows),
         "independent_source_platforms": len(source_platforms),
@@ -1385,39 +1234,27 @@ def build_hydrophobic_motif_transfer(
             bool(row["source_reaction_id"]) for row in rows
         ),
         "unambiguous_source_attachment_mappings": sum(
-            row["source_attachment_mapping_status"] == "exact_mapped"
-            for row in rows
+            row["source_attachment_mapping_status"] == "exact_mapped" for row in rows
         ),
-        "primary_alcohols": sum(
-            row["alcohol_class"] == "primary" for row in rows
-        ),
-        "secondary_alcohols": sum(
-            row["alcohol_class"] == "secondary" for row in rows
-        ),
-        "proposed_ugi_aldehydes": sum(
-            row["disposition"] == "propose_ugi_aldehyde" for row in rows
-        ),
+        "primary_alcohols": sum(row["alcohol_class"] == "primary" for row in rows),
+        "secondary_alcohols": sum(row["alcohol_class"] == "secondary" for row in rows),
+        "proposed_ugi_aldehydes": sum(row["disposition"] == "propose_ugi_aldehyde" for row in rows),
         "deferred_structure_only": sum(
             row["disposition"] == "defer_structure_only" for row in rows
         ),
         "exact_current_aldehyde_pool_matches": sum(
-            row["exact_current_aldehyde_pool_match"] == "true"
-            for row in rows
+            row["exact_current_aldehyde_pool_match"] == "true" for row in rows
         ),
-        "frozen_ugi_forward_verified": sum(
-            row["frozen_ugi_forward_products"] == 1 for row in rows
-        ),
+        "frozen_ugi_forward_verified": sum(row["frozen_ugi_forward_products"] == 1 for row in rows),
         "computationally_route_complete": sum(
             row["computationally_route_complete"] == "true" for row in rows
         ),
     }
     _validate_expected_counts(summary, config.get("expected_counts"))
     positive_signal = (
-        summary["unambiguous_source_attachment_mappings"]
-        == summary["source_motifs"]
+        summary["unambiguous_source_attachment_mappings"] == summary["source_motifs"]
         and summary["proposed_ugi_aldehydes"] > 0
-        and summary["frozen_ugi_forward_verified"]
-        == summary["proposed_ugi_aldehydes"]
+        and summary["frozen_ugi_forward_verified"] == summary["proposed_ugi_aldehydes"]
         and summary["exact_current_aldehyde_pool_matches"] == 0
     )
     positive_platforms = sorted(
@@ -1480,9 +1317,7 @@ def build_hydrophobic_motif_transfer(
         "programs": config["programs"],
         "summary": summary,
         "route_outcome_counts": {
-            category: sum(
-                row["route_outcome_category"] == category for row in rows
-            )
+            category: sum(row["route_outcome_category"] == category for row in rows)
             for category in config["route_outcome_taxonomy"]
         },
         "motif_class_counts": dict(sorted(class_counts.items())),
@@ -1491,8 +1326,7 @@ def build_hydrophobic_motif_transfer(
             "positive_platforms": positive_platforms,
             "positive_two_platform_signal": two_platform_signal,
             "priority_queue_expansion_authorized": (
-                two_platform_signal
-                and summary["computationally_route_complete"] > 0
+                two_platform_signal and summary["computationally_route_complete"] > 0
             ),
             "broad_lnpdb_expansion_authorized": False,
             "reason": expansion["positive_signal"],
@@ -1523,9 +1357,7 @@ def write_hydrophobic_motif_transfer(
     output_dir.mkdir(parents=True, exist_ok=True)
     payloads = {
         LEDGER_NAME: ledger,
-        RESULT_NAME: (
-            json.dumps(result, indent=2, sort_keys=True) + "\n"
-        ).encode(),
+        RESULT_NAME: (json.dumps(result, indent=2, sort_keys=True) + "\n").encode(),
     }
     temporary_paths: dict[str, Path] = {}
     try:

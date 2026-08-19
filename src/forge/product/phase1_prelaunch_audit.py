@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import csv
-import hashlib
 import json
 import math
 import os
@@ -15,6 +14,7 @@ from typing import Any
 
 from rdkit import Chem
 
+from forge.core.hashing import sha256_file
 from forge.product.defog_feasibility import AtomState, FeasibilityError
 from forge.product.phase1_flow import _load_json, _read_csv, _size_bucket
 from forge.product.sparse_topology_feasibility import (
@@ -29,14 +29,6 @@ RESULT_SCHEMA_VERSION = "phase1_product_prelaunch_audit.v1"
 
 class Phase1PrelaunchAuditError(ValueError):
     """Raised when the prelaunch audit contract or an input is invalid."""
-
-
-def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _resolve_and_verify(repo: Path, specification: Mapping[str, Any], label: str) -> Path:

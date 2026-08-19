@@ -11,13 +11,13 @@ from __future__ import annotations
 
 import csv
 import gzip
-import hashlib
 import json
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_nonzero_guidance_runner import (
     GuidanceAssessmentContext,
     GuidanceRouteEvaluation,
@@ -46,14 +46,6 @@ GRADED_ROUTE_READINESS_POLICY = {
     "family_projection_promoted_to_exact": False,
     "utility_is_synthesis_success_probability": False,
 }
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 UGI_GRADED_ROUTE_READINESS_POLICY_SHA256 = _sha256_payload(GRADED_ROUTE_READINESS_POLICY)

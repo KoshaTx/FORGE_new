@@ -41,6 +41,7 @@ from forge.bio.oracle_graph import (
     WholeGraphRegressor,
     tensorize_smiles,
 )
+from forge.core.io import atomic_write as _atomic_write
 from forge.route.qualified_forward import (
     QualifiedForwardError,
     QualifiedForwardReaction,
@@ -87,20 +88,6 @@ def _stable_json(value: Mapping[str, Any]) -> bytes:
         )
         + "\n"
     ).encode("utf-8")
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    temporary_path = Path(temporary)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary_path, path)
-    finally:
-        temporary_path.unlink(missing_ok=True)
 
 
 def _atomic_torch_save(path: Path, payload: Mapping[str, Any]) -> None:

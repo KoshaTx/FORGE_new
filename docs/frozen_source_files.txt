@@ -1,0 +1,30 @@
+# Source files whose own bytes are hash-pinned by a result artifact.
+#
+# These modules are frozen. An artifact recorded the digest of the code that produced it, so
+# editing one -- even a pure refactor that changes no behaviour -- breaks that artifact's
+# provenance record and fails `make verify-pins`.
+#
+# Discovered the hard way: a migration batch touched four of them and the gate caught it. They
+# were reverted. Note bio/liver.py, bio/muscle.py and bio/vaccine.py appear here despite being
+# referenced by no module, script or test -- they look like dead code and are not removable.
+#
+# To change one of these you must also re-run whatever produced the artifact that pins it, which
+# is out of scope for a refactor. Leave them alone.
+#
+scripts/modal_phase1_product_cuda_preflight.py
+scripts/modal_phase1_ugi_joint_sparse_v2.py
+scripts/phase1_adjudicate_ugi_morphology_proposal_challenger.py
+scripts/phase1_audit_ugi_distributional_applicability_v3.py
+scripts/phase1_audit_ugi_interpolative_conformal.py
+src/forge/bio/endpoint.py
+src/forge/bio/liver.py
+src/forge/bio/muscle.py
+src/forge/bio/ugi_distributional_applicability_v3.py
+src/forge/bio/ugi_interpolative_conformal.py
+src/forge/bio/ugi_morphology_proposal_challenger_adjudication.py
+src/forge/bio/vaccine.py
+src/forge/route/planner.py
+src/forge/route/planner_cache.py
+src/forge/route/qualified_forward.py
+src/forge/route/ugi3_exact_evidence_source.py
+src/forge/route/ugi3_hybrid_search.py

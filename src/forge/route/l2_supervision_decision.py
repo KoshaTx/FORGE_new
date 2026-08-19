@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import tempfile
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
+
+from forge.core.hashing import sha256_file as _sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_l2_supervision_decision_config.v2"
 RESULT_SCHEMA_VERSION = "m0_09_l2_supervision_decision.v2"
@@ -23,25 +24,10 @@ def _load_json(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())
     except (FileNotFoundError, json.JSONDecodeError, OSError) as exc:
-        raise L2SupervisionDecisionError(
-            f"cannot load {label} at {path}: {exc}"
-        ) from exc
+        raise L2SupervisionDecisionError(f"cannot load {label} at {path}: {exc}") from exc
     if not isinstance(value, dict):
         raise L2SupervisionDecisionError(f"{label} must be a JSON object")
     return value
-
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    try:
-        with path.open("rb") as handle:
-            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(chunk)
-    except FileNotFoundError as exc:
-        raise L2SupervisionDecisionError(
-            f"required decision input is missing: {path}"
-        ) from exc
-    return digest.hexdigest()
 
 
 def _required_mapping(
@@ -54,9 +40,7 @@ def _required_mapping(
         raise L2SupervisionDecisionError(f"{label} must be an object")
     missing = set(fields) - set(value)
     if missing:
-        raise L2SupervisionDecisionError(
-            f"{label} is missing fields: {sorted(missing)}"
-        )
+        raise L2SupervisionDecisionError(f"{label} is missing fields: {sorted(missing)}")
     return value
 
 
@@ -74,9 +58,7 @@ def _required_fraction(value: Any, *, label: str) -> float:
         or isinstance(value, bool)
         or not 0.0 <= float(value) <= 1.0
     ):
-        raise L2SupervisionDecisionError(
-            f"{label} must be a number between zero and one"
-        )
+        raise L2SupervisionDecisionError(f"{label} must be a number between zero and one")
     return float(value)
 
 
@@ -89,9 +71,7 @@ def _nested_integer(
     current: Any = value
     for key in path:
         if not isinstance(current, dict) or key not in current:
-            raise L2SupervisionDecisionError(
-                f"{label} is missing {'.'.join(path)}"
-            )
+            raise L2SupervisionDecisionError(f"{label} is missing {'.'.join(path)}")
         current = current[key]
     return _required_integer(current, label=f"{label} {'.'.join(path)}")
 
@@ -101,14 +81,10 @@ def load_config(path: Path) -> dict[str, Any]:
 
     config = _load_json(path, label="L2 supervision decision config")
     if config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise L2SupervisionDecisionError(
-            f"config schema must be {CONFIG_SCHEMA_VERSION!r}"
-        )
+        raise L2SupervisionDecisionError(f"config schema must be {CONFIG_SCHEMA_VERSION!r}")
     frozen_utc = config.get("frozen_utc")
     if not isinstance(frozen_utc, str) or not frozen_utc.endswith("Z"):
-        raise L2SupervisionDecisionError(
-            "frozen_utc must be an explicit UTC timestamp"
-        )
+        raise L2SupervisionDecisionError("frozen_utc must be an explicit UTC timestamp")
     inputs = _required_mapping(
         config.get("inputs"),
         label="inputs",
@@ -117,9 +93,7 @@ def load_config(path: Path) -> dict[str, Any]:
         raise L2SupervisionDecisionError("inputs must not be empty")
     for input_id, raw_spec in inputs.items():
         if not isinstance(input_id, str) or not input_id:
-            raise L2SupervisionDecisionError(
-                "input identifiers must be nonempty strings"
-            )
+            raise L2SupervisionDecisionError("input identifiers must be nonempty strings")
         spec = _required_mapping(
             raw_spec,
             label=f"input {input_id}",
@@ -131,22 +105,11 @@ def load_config(path: Path) -> dict[str, Any]:
             or Path(spec["path"]).is_absolute()
             or ".." in Path(spec["path"]).parts
         ):
-            raise L2SupervisionDecisionError(
-                f"input {input_id} path must be repository-relative"
-            )
-        if (
-            not isinstance(spec["sha256"], str)
-            or len(spec["sha256"]) != 64
-        ):
-            raise L2SupervisionDecisionError(
-                f"input {input_id} sha256 must contain 64 characters"
-            )
-        if not isinstance(spec["schema_version"], str) or not spec[
-            "schema_version"
-        ]:
-            raise L2SupervisionDecisionError(
-                f"input {input_id} schema_version must be nonempty"
-            )
+            raise L2SupervisionDecisionError(f"input {input_id} path must be repository-relative")
+        if not isinstance(spec["sha256"], str) or len(spec["sha256"]) != 64:
+            raise L2SupervisionDecisionError(f"input {input_id} sha256 must contain 64 characters")
+        if not isinstance(spec["schema_version"], str) or not spec["schema_version"]:
+            raise L2SupervisionDecisionError(f"input {input_id} schema_version must be nonempty")
 
     gates = _required_mapping(
         config.get("architecture_gates"),
@@ -160,9 +123,7 @@ def load_config(path: Path) -> dict[str, Any]:
     for gate_name, raw_gate in gates.items():
         gate = _required_mapping(raw_gate, label=f"gate {gate_name}")
         if not gate:
-            raise L2SupervisionDecisionError(
-                f"gate {gate_name} must not be empty"
-            )
+            raise L2SupervisionDecisionError(f"gate {gate_name} must not be empty")
         for field, value in gate.items():
             _required_integer(
                 value,
@@ -196,9 +157,7 @@ def load_config(path: Path) -> dict[str, Any]:
         label="claims_boundary",
     )
     if not boundaries or any(value is not True for value in boundaries.values()):
-        raise L2SupervisionDecisionError(
-            "every claims_boundary safeguard must be true"
-        )
+        raise L2SupervisionDecisionError("every claims_boundary safeguard must be true")
 
     safeguards = _required_mapping(
         config.get("future_training_safeguards"),
@@ -227,13 +186,9 @@ def load_config(path: Path) -> dict[str, Any]:
         "raw_route_model_likelihood_allowed_as_synthesis_value",
     )
     if any(safeguards[field] is not True for field in required_true):
-        raise L2SupervisionDecisionError(
-            "required future training safeguards must be true"
-        )
+        raise L2SupervisionDecisionError("required future training safeguards must be true")
     if any(safeguards[field] is not False for field in required_false):
-        raise L2SupervisionDecisionError(
-            "prohibited future training behaviors must be false"
-        )
+        raise L2SupervisionDecisionError("prohibited future training behaviors must be false")
     if safeguards["preprospective_synthesis_value_claim"] != (
         "evidence_weighted_route_completion_value_not_success_probability"
     ):
@@ -241,15 +196,11 @@ def load_config(path: Path) -> dict[str, Any]:
             "preprospective synthesis-value claim is not frozen correctly"
         )
     strata = safeguards["route_closure_strata"]
-    if (
-        not isinstance(strata, list)
-        or strata
-        != [
-            "familiar_agile_components",
-            "transferred_known_components",
-            "genuinely_generated_components",
-        ]
-    ):
+    if not isinstance(strata, list) or strata != [
+        "familiar_agile_components",
+        "transferred_known_components",
+        "genuinely_generated_components",
+    ]:
         raise L2SupervisionDecisionError(
             "route_closure_strata must contain the three frozen strata"
         )
@@ -268,9 +219,7 @@ def _load_inputs(
         spec = _required_mapping(raw_spec, label=f"input {input_id}")
         path = (root / str(spec["path"])).resolve()
         if not path.is_relative_to(root):
-            raise L2SupervisionDecisionError(
-                f"input {input_id} escapes the repository root"
-            )
+            raise L2SupervisionDecisionError(f"input {input_id} escapes the repository root")
         observed_hash = _sha256_file(path)
         if observed_hash != spec["sha256"]:
             raise L2SupervisionDecisionError(
@@ -303,9 +252,7 @@ def _review_by_id(
 ) -> Mapping[str, Any]:
     reviews = paper_reviews.get("reviews")
     if not isinstance(reviews, list):
-        raise L2SupervisionDecisionError(
-            "paper route review input must contain a reviews array"
-        )
+        raise L2SupervisionDecisionError("paper route review input must contain a reviews array")
     matches = [
         review
         for review in reviews
@@ -341,18 +288,12 @@ def _joint_l1_gate(
     requirements: Mapping[str, Any],
 ) -> tuple[bool, dict[str, dict[str, Any]]]:
     minimum_fields = {
-        key: value
-        for key, value in requirements.items()
-        if key.startswith("minimum_")
+        key: value for key, value in requirements.items() if key.startswith("minimum_")
     }
     maximum_fields = {
-        key: value
-        for key, value in requirements.items()
-        if key.startswith("maximum_")
+        key: value for key, value in requirements.items() if key.startswith("maximum_")
     }
-    minimum_observations = {
-        key: observations[key] for key in minimum_fields
-    }
+    minimum_observations = {key: observations[key] for key in minimum_fields}
     passed, checks = _minimum_gate(minimum_observations, minimum_fields)
     for field, maximum in maximum_fields.items():
         observed = observations[field]
@@ -377,9 +318,7 @@ def build_l2_supervision_decision(
     root = repo_root.resolve()
     resolved_config = config_path.resolve()
     if not resolved_config.is_relative_to(root):
-        raise L2SupervisionDecisionError(
-            "decision config must be inside the repository root"
-        )
+        raise L2SupervisionDecisionError("decision config must be inside the repository root")
     input_records.insert(
         0,
         {
@@ -520,14 +459,10 @@ def build_l2_supervision_decision(
     evidence = {
         "product_and_l1": {
             "measured_products_passing_qualified_site_policy": (
-                joint_l1_observations[
-                    "minimum_measured_products_passing_qualified_site_policy"
-                ]
+                joint_l1_observations["minimum_measured_products_passing_qualified_site_policy"]
             ),
             "virtual_products_with_exact_unique_decomposition": (
-                joint_l1_observations[
-                    "minimum_exact_virtual_decompositions"
-                ]
+                joint_l1_observations["minimum_exact_virtual_decompositions"]
             ),
             "unique_virtual_components": _nested_integer(
                 virtual,
@@ -554,15 +489,11 @@ def build_l2_supervision_decision(
                 ("summary", "l2_reaction_instances"),
                 label="paper route reviews",
             ),
-            "route_families": hybrid_l2_observations[
-                "minimum_route_families"
-            ],
+            "route_families": hybrid_l2_observations["minimum_route_families"],
             "reported_negative_outcomes": monolithic_observations[
                 "minimum_reported_negative_outcomes"
             ],
-            "head_upstream_routes": monolithic_observations[
-                "minimum_head_upstream_routes"
-            ],
+            "head_upstream_routes": monolithic_observations["minimum_head_upstream_routes"],
         },
         "recursive_programs_and_closure": {
             "exact_source_program_components": hybrid_l2_observations[
@@ -579,9 +510,7 @@ def build_l2_supervision_decision(
                     label="component program families",
                 )
             ),
-            "complete_product_routes": monolithic_observations[
-                "minimum_complete_product_routes"
-            ],
+            "complete_product_routes": monolithic_observations["minimum_complete_product_routes"],
             "current_accepted_procurement_candidates": _nested_integer(
                 terminal,
                 ("summary", "candidates_with_current_accepted_procurement"),
@@ -633,9 +562,7 @@ def build_l2_supervision_decision(
     if not joint_l1_passed or not hybrid_l2_passed:
         recommended_architecture = "insufficient_for_current_forge_design"
     else:
-        recommended_architecture = (
-            "hierarchical_joint_product_and_l1_with_hybrid_recursive_l2"
-        )
+        recommended_architecture = "hierarchical_joint_product_and_l1_with_hybrid_recursive_l2"
 
     return {
         "schema_version": RESULT_SCHEMA_VERSION,
@@ -673,9 +600,7 @@ def build_l2_supervision_decision(
         "future_operational_closure_thresholds": dict(
             config["future_operational_closure_thresholds"]
         ),
-        "future_training_safeguards": dict(
-            config["future_training_safeguards"]
-        ),
+        "future_training_safeguards": dict(config["future_training_safeguards"]),
         "decision": {
             "inventory_is_sufficient_to_choose_architecture": (
                 joint_l1_passed and hybrid_l2_passed
@@ -714,9 +639,7 @@ def write_l2_supervision_decision(
     """Write the deterministic M0-09 decision artifact atomically."""
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    payload = (
-        json.dumps(result, indent=2, sort_keys=True, ensure_ascii=True) + "\n"
-    ).encode()
+    payload = (json.dumps(result, indent=2, sort_keys=True, ensure_ascii=True) + "\n").encode()
     with tempfile.NamedTemporaryFile(
         dir=output_dir,
         prefix=f".{RESULT_NAME}.",

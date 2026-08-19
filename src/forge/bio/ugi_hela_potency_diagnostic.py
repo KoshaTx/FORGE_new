@@ -14,7 +14,6 @@ current generator runtime owns applicability and SMC orchestration.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
 import os
@@ -35,6 +34,8 @@ from forge.bio.ugi_interpolative_conformal import (
     _calibration_bins,
     _selected_calibration_ensembles,
 )
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_matched_budget_orchestration import LockedMatchedTerminal
 from forge.product.ugi_restartable_terminal_support_adapter import (
@@ -70,14 +71,6 @@ ROLE_MAP = {
 
 class UgiHeLaPotencyDiagnosticError(RuntimeError):
     """Raised when the bounded potency diagnostic cannot be reproduced exactly."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:

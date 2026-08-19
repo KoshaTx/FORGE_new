@@ -15,6 +15,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_file as _sha256_file
+
 CONFIG_SCHEMA_VERSION = "m0_09_agile_virtual_smiles_config.v1"
 MANIFEST_SCHEMA_VERSION = "m0_09_agile_virtual_smiles_manifest.v1"
 OUTPUT_FIELDS = (
@@ -28,20 +30,6 @@ class AgileVirtualExtractionError(ValueError):
     """Raised when the AGILE virtual source violates the frozen contract."""
 
 
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    try:
-        handle = path.open("rb")
-    except FileNotFoundError as exc:
-        raise AgileVirtualExtractionError(
-            f"AGILE virtual source not found: {path}"
-        ) from exc
-    with handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def _load_config(path: Path) -> dict[str, Any]:
     try:
         config = json.loads(path.read_text())
@@ -50,15 +38,11 @@ def _load_config(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as exc:
         raise AgileVirtualExtractionError(f"config is not valid JSON: {exc}") from exc
     if not isinstance(config, dict) or config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise AgileVirtualExtractionError(
-            f"config schema must be {CONFIG_SCHEMA_VERSION!r}"
-        )
+        raise AgileVirtualExtractionError(f"config schema must be {CONFIG_SCHEMA_VERSION!r}")
     if not isinstance(config.get("source"), dict) or not isinstance(
         config.get("expected_counts"), dict
     ):
-        raise AgileVirtualExtractionError(
-            "config must define source and expected_counts objects"
-        )
+        raise AgileVirtualExtractionError("config must define source and expected_counts objects")
     return config
 
 
@@ -72,15 +56,11 @@ def _expect_integer(value: Any, *, label: str, positive: bool = False) -> int:
 
 def _canonicalize(smiles: str, *, row_index: int) -> str:
     if not smiles:
-        raise AgileVirtualExtractionError(
-            f"source row {row_index} has an empty SMILES value"
-        )
+        raise AgileVirtualExtractionError(f"source row {row_index} has an empty SMILES value")
     with rdBase.BlockLogs():
         molecule = Chem.MolFromSmiles(smiles)
     if molecule is None:
-        raise AgileVirtualExtractionError(
-            f"source row {row_index} has invalid SMILES"
-        )
+        raise AgileVirtualExtractionError(f"source row {row_index} has invalid SMILES")
     return Chem.MolToSmiles(
         molecule,
         canonical=True,
@@ -114,14 +94,11 @@ def extract_agile_virtual_smiles(
     expected = config["expected_counts"]
     expected_sha256 = source.get("expected_sha256")
     if not isinstance(expected_sha256, str) or len(expected_sha256) != 64:
-        raise AgileVirtualExtractionError(
-            "source expected_sha256 must be a 64-character string"
-        )
+        raise AgileVirtualExtractionError("source expected_sha256 must be a 64-character string")
     observed_sha256 = _sha256_file(source_path)
     if observed_sha256 != expected_sha256:
         raise AgileVirtualExtractionError(
-            f"source hash mismatch: expected {expected_sha256}, "
-            f"observed {observed_sha256}"
+            f"source hash mismatch: expected {expected_sha256}, observed {observed_sha256}"
         )
     expected_bytes = _expect_integer(
         source.get("expected_bytes"),
@@ -140,9 +117,7 @@ def extract_agile_virtual_smiles(
     )
     smiles_column = source.get("smiles_column")
     if not isinstance(smiles_column, str) or not smiles_column:
-        raise AgileVirtualExtractionError(
-            "source smiles_column must be a nonempty string"
-        )
+        raise AgileVirtualExtractionError("source smiles_column must be a nonempty string")
 
     rows: list[dict[str, str | int]] = []
     source_smiles: set[str] = set()
@@ -152,11 +127,7 @@ def extract_agile_virtual_smiles(
         with handle:
             reader = csv.reader(handle)
             header = next(reader, None)
-            if (
-                header is None
-                or len(header) != expected_columns
-                or header[0] != smiles_column
-            ):
+            if header is None or len(header) != expected_columns or header[0] != smiles_column:
                 raise AgileVirtualExtractionError(
                     "source header does not match the frozen SMILES-first schema"
                 )
@@ -256,9 +227,7 @@ def write_agile_virtual_smiles(
             handle.flush()
             os.fsync(handle.fileno())
         with os.fdopen(manifest_descriptor, "wb") as handle:
-            handle.write(
-                (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
-            )
+            handle.write((json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode())
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(output_temporary_path, output_path)

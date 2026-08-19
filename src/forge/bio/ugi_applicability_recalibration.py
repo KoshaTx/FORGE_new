@@ -27,6 +27,7 @@ from forge.bio.ugi_selective_risk_proposal_diagnosis import (
     _prediction_metrics,
     _spearman,
 )
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_applicability_recalibration_config.v2"
@@ -81,10 +82,6 @@ def _read_csv(path: Path, *, label: str) -> list[dict[str, str]]:
     if not rows:
         raise UgiApplicabilityRecalibrationError(f"{label} is empty")
     return rows
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _meta_fold(label: str, *, salt: str, folds: int) -> int:

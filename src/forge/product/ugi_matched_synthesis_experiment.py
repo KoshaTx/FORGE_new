@@ -17,6 +17,8 @@ from enum import Enum
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
+
 CONFIG_SCHEMA_VERSION = "phase1_ugi_matched_synthesis_guidance_preregistration.v1"
 PLAN_SCHEMA_VERSION = "forge.ugi_matched_synthesis_guidance_plan.v1"
 EXPECTED_SCOPE = "nonexecuting_preregistered_matched_synthesis_guidance_experiment"
@@ -305,14 +307,6 @@ class ExperimentDecision:
     selected_guidance_strength: float | None
     reason: str
     paired_primary_differences: tuple[tuple[int, int], ...]
-
-
-def _stable_json(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value)).hexdigest()
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

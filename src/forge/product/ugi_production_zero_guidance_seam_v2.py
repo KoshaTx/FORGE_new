@@ -13,12 +13,12 @@ authorize nonzero guidance, biology, prospective selection or holdout access.
 
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_matched_budget_orchestration import (
     MatchedArm,
@@ -68,21 +68,12 @@ from forge.value.ugi_exact_closure_guidance import (
     smc_utility_bridge_from_exact_closure,
 )
 
-
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_zero_guidance_seam_v2_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_production_zero_guidance_seam_v2.v1"
 
 
 class UgiProductionZeroGuidanceSeamV2Error(RuntimeError):
     """Raised when the current production seam does not preserve lambda-zero identity."""
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"))
-
-
-def _sha256_payload(value: Any) -> str:
-    return hashlib.sha256(_stable_json(value).encode()).hexdigest()
 
 
 def _load(path: Path, *, label: str) -> dict[str, Any]:
@@ -125,11 +116,7 @@ class ProductionGuidanceRouteEvaluator:
         terminal: Any,
         context: GuidanceAssessmentContext,
     ) -> GuidanceRouteEvaluation:
-        treatment = (
-            MatchedArm.GUIDED
-            if context.treatment_arm == "guided"
-            else MatchedArm.POST_HOC
-        )
+        treatment = MatchedArm.GUIDED if context.treatment_arm == "guided" else MatchedArm.POST_HOC
         assessment_context = MatchedAssessmentContext(
             arm=treatment,
             route_seed=context.route_seed,
@@ -162,9 +149,7 @@ class ProductionGuidanceRouteEvaluator:
             value_policy_id=UGI_EXACT_CLOSURE_GUIDANCE_POLICY_SHA256,
             usage=receipt.realized_route_usage,
             assessment_receipt_sha256=receipt.assessment_sha256,
-            route_dossier_sha256=(
-                receipt.assessment_sha256 if bridge.support_bonus else None
-            ),
+            route_dossier_sha256=(receipt.assessment_sha256 if bridge.support_bonus else None),
         )
 
 
@@ -221,8 +206,7 @@ def _validate_config(repo: Path, config_path: Path) -> tuple[dict[str, Any], dic
         raise UgiProductionZeroGuidanceSeamV2Error("binary route utility is not qualified")
     manifest = _load(paths["production_generator_manifest"], label="production generator")
     if (
-        sha256_file(paths["production_generator_manifest"])
-        != PRODUCTION_GENERATOR_MANIFEST_SHA256
+        sha256_file(paths["production_generator_manifest"]) != PRODUCTION_GENERATOR_MANIFEST_SHA256
         or manifest.get("identity", {}).get("checkpoint_step") != 2000
         or manifest.get("identity", {}).get("terminal_decoder") != "bond_stochastic"
     ):
@@ -242,28 +226,20 @@ def run_production_zero_guidance_seam_v2(
     cache_root = cache_root.resolve()
     config, paths = _validate_config(repo, config_path)
     if cache_root.exists() and any(cache_root.iterdir()):
-        raise UgiProductionZeroGuidanceSeamV2Error(
-            "seam cache root must be absent or empty"
-        )
+        raise UgiProductionZeroGuidanceSeamV2Error("seam cache root must be absent or empty")
     cache_root.mkdir(parents=True, exist_ok=True)
 
-    schedule_qualification = load_grouped_smc_schedule_qualification(
-        paths["grouped_schedule"]
-    )
+    schedule_qualification = load_grouped_smc_schedule_qualification(paths["grouped_schedule"])
     assignments = schedule_qualification.by_seed()
     assignment_seed = config["design"]["assignment_seed"]
     if assignment_seed not in assignments:
-        raise UgiProductionZeroGuidanceSeamV2Error(
-            "frozen calibration assignment is missing"
-        )
+        raise UgiProductionZeroGuidanceSeamV2Error("frozen calibration assignment is missing")
     assignment = assignments[assignment_seed]
     lane = build_selected_model_restartable_guidance_lane_v2(repo)
     factory = build_production_ugi_terminal_aware_planner_factory(
         repo_root=repo,
         assessment_as_of_utc=config["assessment_as_of_utc"],
-        expected_cumulative_source_inputs_sha256=(
-            config["cumulative_source_inputs_sha256"]
-        ),
+        expected_cumulative_source_inputs_sha256=(config["cumulative_source_inputs_sha256"]),
         selected_generator_checkpoint_sha256=GENERATOR_CHECKPOINT_SHA256,
         graph_support=lane.callback.graph_support,
         l1_reverifier=lane.callback.l1_reverifier,
@@ -367,12 +343,10 @@ def run_production_zero_guidance_seam_v2(
                 item.canonical_identity is not None for item in run.guided.productive_admissions
             ),
             "route_support_bonus_count": sum(
-                value == 1.0
-                for value in run.guided.productive_route_completion_utilities
+                value == 1.0 for value in run.guided.productive_route_completion_utilities
             ),
             "route_censored_count": sum(
-                value is None
-                for value in run.guided.productive_route_completion_utilities
+                value is None for value in run.guided.productive_route_completion_utilities
             ),
             "support_audit_count": len(evaluator.support_audits),
             "support_audit_manifest_sha256": support_audit_manifest,

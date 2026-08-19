@@ -29,6 +29,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 
 from forge.bio import ugi_distributional_applicability as applicability_v1
 from forge.bio import ugi_distributional_applicability_v2 as applicability_v2
+from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_dynamic_controller_analysis_config.v1"
@@ -83,10 +84,6 @@ class Observation:
     trials: int
     terminal_indices: tuple[int, ...]
     checkpoint: int | None
-
-
-def _stable_json(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:
