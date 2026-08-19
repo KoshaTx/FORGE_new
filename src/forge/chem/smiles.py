@@ -4,16 +4,18 @@ Before this module the chemistry primitives lived in `bio/ugi_distributional_app
 were reached by importing its private `_canonical` and `_molecule` -- one consumer even aliases that
 module to the name `chemistry` to make the call sites read sensibly. Seventeen modules depend on it.
 
-Two canonical forms exist here because the codebase genuinely needs two, and conflating them would
-be a correctness change rather than a cleanup:
+Three canonical forms exist here because the codebase genuinely needs three, and conflating any of
+them would be a correctness change rather than a cleanup:
 
-  `canonical_constitution`            accepts a disconnected input (a salt, `CCN.Cl`) and returns it
-  `canonical_connected_constitution`  rejects one, because a lipid product must be a single molecule
+  `canonical_constitution`            stereo-free; accepts a disconnected input (a salt, `CCN.Cl`)
+  `canonical_connected_constitution`  stereo-free; rejects one, since a lipid product is one molecule
+  `canonical_isomeric`                keeps stereochemistry, for procurement and component work
 
-An audit of every canonicalizer in the package found exactly these two behaviours and no others.
-They agree on molecular identity -- both are stereo-free, as AGENTS.md requires of the model-facing
-representation -- and differ only in what input they admit. That distinction is deliberate, so it is
-preserved rather than unified.
+An audit executing every canonicalizer in the package against a battery covering stereochemistry,
+salts, charge, isotopes and aromatic form found **zero divergences of molecular identity**: the
+stereo-free ones all agree. They differ only in what input they admit. A separate survey of
+`MolToSmiles` call sites found 50 explicitly stereo-free and 25 explicitly stereo-preserving, which
+is why the third form exists rather than being folded into the first.
 
 **Stereo-free is not incidental.** `isomericSmiles=False` discards E/Z, chirality and isotope
 labels, which is what makes two source strings collapse to one constitutional graph. Turning it on
@@ -51,7 +53,22 @@ class ChemError(ValueError):
     """A SMILES string cannot be parsed, or violates a declared structural requirement."""
 
 
-def parse_smiles(smiles: str) -> Chem.Mol:
+_Error = type[Exception] | None
+
+
+def _translate(exc: ChemError, error: _Error) -> Exception:
+    """Re-raise a ChemError as the caller's own exception type, preserving the cause.
+
+    Every local helper this boundary replaces wraps failures in its module's own error class, and
+    callers -- including tests -- catch that type, so without this not one of them is a drop-in
+    replacement. Same convention as `core.io.read_json_object`, so one rule covers both. The
+    original is kept as `__cause__`: a bare "invalid structure" with no underlying error is a dead
+    end when the real problem is one malformed row in a large ledger.
+    """
+    return exc if error is None else error(str(exc))
+
+
+def parse_smiles(smiles: str, *, error: type[Exception] | None = None) -> Chem.Mol:
     """Parse SMILES into a molecule, raising rather than returning None.
 
     Deliberately not cached: `Chem.Mol` is mutable, and a shared instance would let one caller's
@@ -60,34 +77,76 @@ def parse_smiles(smiles: str) -> Chem.Mol:
     """
     molecule = Chem.MolFromSmiles(smiles)
     if molecule is None:
-        raise ChemError(f"invalid molecular graph: {smiles!r}")
+        exc = ChemError(f"invalid molecular graph: {smiles!r}")
+        raise _translate(exc, error) from exc
     return molecule
 
 
 @lru_cache(maxsize=CACHE_SIZE)
-def canonical_constitution(smiles: str) -> CanonicalSmiles:
-    """Canonical, stereo-free SMILES. Disconnected input is preserved as-is.
-
-    Matches the behaviour of the five existing canonicalizers that accept salts, including
-    `bio.ugi_distributional_applicability._canonical`, which most of the package routes through.
-    """
+def _canonical_constitution(smiles: str) -> CanonicalSmiles:
     return CanonicalSmiles(
         Chem.MolToSmiles(parse_smiles(smiles), canonical=True, isomericSmiles=False)
     )
 
 
+def canonical_constitution(smiles: str, *, error: type[Exception] | None = None) -> CanonicalSmiles:
+    """Canonical, stereo-free SMILES. Disconnected input is preserved as-is.
+
+    Matches the behaviour of the six existing canonicalizers that accept salts, including
+    `bio.ugi_distributional_applicability._canonical`, which most of the package routes through.
+    """
+    try:
+        return _canonical_constitution(smiles)
+    except ChemError as exc:
+        raise _translate(exc, error) from exc
+
+
 @lru_cache(maxsize=CACHE_SIZE)
-def canonical_connected_constitution(smiles: str) -> CanonicalSmiles:
+def _canonical_connected_constitution(smiles: str) -> CanonicalSmiles:
+    molecule = parse_smiles(smiles)
+    if len(Chem.GetMolFrags(molecule)) != 1:
+        raise ChemError(f"expected a single connected molecule: {smiles!r}")
+    return CanonicalSmiles(Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False))
+
+
+def canonical_connected_constitution(
+    smiles: str, *, error: type[Exception] | None = None
+) -> CanonicalSmiles:
     """Canonical, stereo-free SMILES for a single connected molecule.
 
     Raises on a disconnected input rather than silently accepting a salt or a mixture. A Ugi
     product that arrives in two pieces is not a product, so admitting one would let a malformed
     structure travel downstream looking well formed.
     """
-    molecule = parse_smiles(smiles)
-    if len(Chem.GetMolFrags(molecule)) != 1:
-        raise ChemError(f"expected a single connected molecule: {smiles!r}")
-    return CanonicalSmiles(Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False))
+    try:
+        return _canonical_connected_constitution(smiles)
+    except ChemError as exc:
+        raise _translate(exc, error) from exc
+
+
+@lru_cache(maxsize=CACHE_SIZE)
+def _canonical_isomeric(smiles: str) -> CanonicalSmiles:
+    return CanonicalSmiles(
+        Chem.MolToSmiles(parse_smiles(smiles), canonical=True, isomericSmiles=True)
+    )
+
+
+def canonical_isomeric(smiles: str, *, error: type[Exception] | None = None) -> CanonicalSmiles:
+    """Canonical SMILES that **keeps** stereochemistry.
+
+    A third form, not a variant of the other two. A survey of `MolToSmiles` across the free modules
+    found 50 explicitly stereo-free sites and 25 explicitly stereo-preserving ones, the latter in
+    procurement and component-projection contexts where a cis and a trans isomer are different
+    things you would order from different suppliers.
+
+    Keep the distinction deliberate. The model-facing identity is constitutional and stereo-free
+    (AGENTS.md), so this must never be used to decide whether two generated products are the same
+    molecule -- only where the physical isomer is what matters.
+    """
+    try:
+        return _canonical_isomeric(smiles)
+    except ChemError as exc:
+        raise _translate(exc, error) from exc
 
 
 def is_valid(smiles: str) -> bool:
@@ -113,16 +172,18 @@ def cache_stats() -> dict[str, dict[str, int]]:
             "size": info.currsize,
         }
         for name, info in (
-            ("canonical_constitution", canonical_constitution.cache_info()),
-            ("canonical_connected_constitution", canonical_connected_constitution.cache_info()),
+            ("canonical_constitution", _canonical_constitution.cache_info()),
+            ("canonical_connected_constitution", _canonical_connected_constitution.cache_info()),
+            ("canonical_isomeric", _canonical_isomeric.cache_info()),
         )
     }
 
 
 def clear_caches() -> None:
     """Drop memoized results. For benchmarks and for tests that measure parse counts."""
-    canonical_constitution.cache_clear()
-    canonical_connected_constitution.cache_clear()
+    _canonical_constitution.cache_clear()
+    _canonical_connected_constitution.cache_clear()
+    _canonical_isomeric.cache_clear()
 
 
 __all__ = [
@@ -133,6 +194,7 @@ __all__ = [
     "cache_stats",
     "canonical_connected_constitution",
     "canonical_constitution",
+    "canonical_isomeric",
     "clear_caches",
     "is_valid",
     "parse_smiles",

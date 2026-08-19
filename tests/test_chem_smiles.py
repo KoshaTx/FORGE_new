@@ -15,6 +15,7 @@ from forge.chem.smiles import (
     cache_stats,
     canonical_connected_constitution,
     canonical_constitution,
+    canonical_isomeric,
     clear_caches,
     is_valid,
     parse_smiles,
@@ -130,3 +131,69 @@ def test_cache_does_not_change_results() -> None:
     warm = canonical_constitution(CIS)
     clear_caches()
     assert cold == warm == canonical_constitution(CIS)
+
+
+# ------------------------------------------------------------------ the caller's own error type
+
+
+class DomainError(ValueError):
+    """Stands in for the module-specific errors every local helper raises."""
+
+
+def test_error_parameter_raises_the_callers_type() -> None:
+    """Without this, not one existing helper is a drop-in replacement."""
+    for fn in (canonical_constitution, canonical_connected_constitution, canonical_isomeric):
+        with pytest.raises(DomainError):
+            fn("C(((", error=DomainError)
+    with pytest.raises(DomainError):
+        parse_smiles("C(((", error=DomainError)
+
+
+def test_translated_error_keeps_the_original_as_cause() -> None:
+    """Losing the cause turns a bad row in a large ledger into a dead end."""
+    try:
+        canonical_constitution("C(((", error=DomainError)
+    except DomainError as exc:
+        assert isinstance(exc.__cause__, ChemError)
+    else:
+        pytest.fail("expected DomainError")
+
+
+def test_default_error_is_still_chemerror() -> None:
+    with pytest.raises(ChemError):
+        canonical_constitution("C(((")
+
+
+def test_error_parameter_does_not_alter_success() -> None:
+    assert canonical_constitution("CCO", error=DomainError) == canonical_constitution("CCO")
+
+
+def test_connected_check_also_translates() -> None:
+    with pytest.raises(DomainError, match="single connected molecule"):
+        canonical_connected_constitution(SALT, error=DomainError)
+
+
+# ------------------------------------------------------------------ the isomeric form
+
+
+def test_isomeric_form_keeps_what_the_constitutional_form_discards() -> None:
+    """The whole reason it is a separate function."""
+    assert canonical_isomeric(CIS) != canonical_isomeric(TRANS)
+    assert canonical_constitution(CIS) == canonical_constitution(TRANS)
+
+
+def test_isomeric_form_keeps_chirality_and_isotopes() -> None:
+    assert canonical_isomeric("C[C@H](N)C(=O)O") != canonical_isomeric("C[C@@H](N)C(=O)O")
+    assert canonical_isomeric("[13CH4]") != canonical_isomeric("C")
+
+
+def test_isomeric_and_constitutional_agree_when_there_is_no_stereochemistry() -> None:
+    for smiles in ("CCO", "CCN", "c1ccccc1"):
+        assert canonical_isomeric(smiles) == canonical_constitution(smiles)
+
+
+def test_isomeric_form_is_cached_separately() -> None:
+    clear_caches()
+    canonical_isomeric(CIS)
+    canonical_isomeric(CIS)
+    assert cache_stats()["canonical_isomeric"] == {"hits": 1, "misses": 1, "size": 1}
