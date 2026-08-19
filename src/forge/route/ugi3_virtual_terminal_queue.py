@@ -17,16 +17,14 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.route.ugi3_virtual_programs import (
     DIRECT_ALDEHYDE_PROGRAM,
     ESTER_PROGRAM,
     ISOCYANIDE_PROGRAM,
 )
 
-CONFIG_SCHEMA_VERSION = (
-    "m0_09_agile_virtual_ugi3_terminal_queue_config.v1"
-)
+CONFIG_SCHEMA_VERSION = "m0_09_agile_virtual_ugi3_terminal_queue_config.v1"
 RESULT_SCHEMA_VERSION = "m0_09_agile_virtual_ugi3_terminal_queue.v1"
 AGILE_ROUTES_SCHEMA_VERSION = "m0_09_agile_component_routes.v1"
 PROCUREMENT_SCHEMA_VERSION = "m0_09_ugi3_virtual_terminal_procurement.v1"
@@ -59,17 +57,11 @@ def _load_json(path: Path, *, label: str) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text())
     except FileNotFoundError as exc:
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} not found: {path}"
-        ) from exc
+        raise Ugi3VirtualTerminalQueueError(f"{label} not found: {path}") from exc
     except json.JSONDecodeError as exc:
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} is not valid JSON: {path}: {exc}"
-        ) from exc
+        raise Ugi3VirtualTerminalQueueError(f"{label} is not valid JSON: {path}: {exc}") from exc
     if not isinstance(value, dict):
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} must contain a JSON object"
-        )
+        raise Ugi3VirtualTerminalQueueError(f"{label} must contain a JSON object")
     return value
 
 
@@ -90,14 +82,10 @@ def _read_gzip_csv(path: Path, *, label: str) -> list[dict[str, str]]:
         with gzip.open(path, "rt", newline="") as handle:
             reader = csv.DictReader(handle)
             if reader.fieldnames is None:
-                raise Ugi3VirtualTerminalQueueError(
-                    f"{label} has no header"
-                )
+                raise Ugi3VirtualTerminalQueueError(f"{label} has no header")
             rows = list(reader)
     except (OSError, csv.Error) as exc:
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} could not be read: {exc}"
-        ) from exc
+        raise Ugi3VirtualTerminalQueueError(f"{label} could not be read: {exc}") from exc
     return rows
 
 
@@ -105,9 +93,7 @@ def _canonicalize(smiles: str, *, label: str) -> str:
     with rdBase.BlockLogs():
         molecule = Chem.MolFromSmiles(smiles)
     if molecule is None:
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} contains invalid SMILES: {smiles!r}"
-        )
+        raise Ugi3VirtualTerminalQueueError(f"{label} contains invalid SMILES: {smiles!r}")
     canonical = Chem.MolToSmiles(
         molecule,
         canonical=True,
@@ -124,9 +110,7 @@ def _json_list(value: str, *, label: str) -> list[Any]:
     try:
         parsed = json.loads(value)
     except json.JSONDecodeError as exc:
-        raise Ugi3VirtualTerminalQueueError(
-            f"{label} is not valid JSON"
-        ) from exc
+        raise Ugi3VirtualTerminalQueueError(f"{label} is not valid JSON") from exc
     if not isinstance(parsed, list):
         raise Ugi3VirtualTerminalQueueError(f"{label} must be a list")
     return parsed
@@ -135,14 +119,9 @@ def _json_list(value: str, *, label: str) -> list[Any]:
 def _leaf_class(smiles: str, program_family: str) -> str:
     molecule = Chem.MolFromSmiles(smiles)
     if molecule is None:
-        raise Ugi3VirtualTerminalQueueError(
-            f"proposed leaf contains invalid SMILES: {smiles!r}"
-        )
+        raise Ugi3VirtualTerminalQueueError(f"proposed leaf contains invalid SMILES: {smiles!r}")
     if program_family == ESTER_PROGRAM:
-        if (
-            CARBOXYLIC_ACID_QUERY is not None
-            and molecule.HasSubstructMatch(CARBOXYLIC_ACID_QUERY)
-        ):
+        if CARBOXYLIC_ACID_QUERY is not None and molecule.HasSubstructMatch(CARBOXYLIC_ACID_QUERY):
             return "fatty_acid"
         hydroxyls = (
             molecule.GetSubstructMatches(DIOL_QUERY, uniquify=True)
@@ -158,32 +137,24 @@ def _leaf_class(smiles: str, program_family: str) -> str:
         return "primary_alcohol"
     if program_family == ISOCYANIDE_PROGRAM:
         return "primary_amine"
-    raise Ugi3VirtualTerminalQueueError(
-        f"unsupported program family {program_family!r}"
-    )
+    raise Ugi3VirtualTerminalQueueError(f"unsupported program family {program_family!r}")
 
 
 def _source_procurement_index(
     artifact: Mapping[str, Any],
 ) -> dict[str, set[str]]:
     if artifact.get("schema_version") != AGILE_ROUTES_SCHEMA_VERSION:
-        raise Ugi3VirtualTerminalQueueError(
-            "AGILE component routes have an unsupported schema"
-        )
+        raise Ugi3VirtualTerminalQueueError("AGILE component routes have an unsupported schema")
     routes = artifact.get("routes")
     if not isinstance(routes, list):
-        raise Ugi3VirtualTerminalQueueError(
-            "AGILE component routes must contain a routes list"
-        )
+        raise Ugi3VirtualTerminalQueueError("AGILE component routes must contain a routes list")
     evidence: dict[str, set[str]] = defaultdict(set)
     for route in routes:
         if not isinstance(route, dict) or not isinstance(
             route.get("steps"),
             list,
         ):
-            raise Ugi3VirtualTerminalQueueError(
-                "AGILE component route contains malformed steps"
-            )
+            raise Ugi3VirtualTerminalQueueError("AGILE component route contains malformed steps")
         for step in route["steps"]:
             if not isinstance(step, dict) or not isinstance(
                 step.get("reactants"),
@@ -194,9 +165,7 @@ def _source_procurement_index(
                 )
             for reactant in step["reactants"]:
                 if not isinstance(reactant, dict):
-                    raise Ugi3VirtualTerminalQueueError(
-                        "AGILE source reactant is malformed"
-                    )
+                    raise Ugi3VirtualTerminalQueueError("AGILE source reactant is malformed")
                 smiles = reactant.get("canonical_smiles")
                 status = reactant.get("procurement_evidence_status")
                 if isinstance(smiles, str) and isinstance(status, str):
@@ -225,18 +194,14 @@ def _current_procurement_index(
         or not isinstance(expected, dict)
         or not isinstance(records, list)
     ):
-        raise Ugi3VirtualTerminalQueueError(
-            "terminal procurement snapshot is malformed"
-        )
+        raise Ugi3VirtualTerminalQueueError("terminal procurement snapshot is malformed")
     by_smiles: dict[str, dict[str, Any]] = {}
     verified = 0
     closed_count = 0
     discrepancies = 0
     for record in records:
         if not isinstance(record, dict):
-            raise Ugi3VirtualTerminalQueueError(
-                "terminal procurement record is malformed"
-            )
+            raise Ugi3VirtualTerminalQueueError("terminal procurement record is malformed")
         smiles = record.get("canonical_smiles")
         identity = record.get("identity")
         vendor = record.get("vendor_evidence")
@@ -257,25 +222,15 @@ def _current_procurement_index(
             label="terminal procurement record",
         )
         molecule = Chem.MolFromSmiles(canonical)
-        if (
-            molecule is None
-            or identity.get("inchi_key") != Chem.MolToInchiKey(molecule)
-        ):
+        if molecule is None or identity.get("inchi_key") != Chem.MolToInchiKey(molecule):
             discrepancies += 1
             raise Ugi3VirtualTerminalQueueError(
                 "terminal procurement identity does not match its structure"
             )
         if canonical in by_smiles:
-            raise Ugi3VirtualTerminalQueueError(
-                "terminal procurement structures are not unique"
-            )
-        is_verified = (
-            record.get("procurement_status")
-            == "current_item_level_vendor_verified"
-        )
-        closed = (
-            record.get("current_item_level_procurement_closed") is True
-        )
+            raise Ugi3VirtualTerminalQueueError("terminal procurement structures are not unique")
+        is_verified = record.get("procurement_status") == "current_item_level_vendor_verified"
+        closed = record.get("current_item_level_procurement_closed") is True
         if closed and not is_verified:
             raise Ugi3VirtualTerminalQueueError(
                 "closed procurement record lacks current vendor verification"
@@ -319,9 +274,7 @@ def _validate_frozen_counts(
         label = f"{prefix}.{field}"
         if isinstance(expected_value, dict):
             if not isinstance(observed_value, dict):
-                raise Ugi3VirtualTerminalQueueError(
-                    f"{label} must be an object"
-                )
+                raise Ugi3VirtualTerminalQueueError(f"{label} must be an object")
             _validate_frozen_counts(
                 observed_value,
                 expected_value,
@@ -329,8 +282,7 @@ def _validate_frozen_counts(
             )
         elif observed_value != expected_value:
             raise Ugi3VirtualTerminalQueueError(
-                f"{label} mismatch: expected {expected_value!r}, "
-                f"observed {observed_value!r}"
+                f"{label} mismatch: expected {expected_value!r}, " f"observed {observed_value!r}"
             )
 
 
@@ -360,9 +312,7 @@ def build_ugi3_virtual_terminal_queue(
 
     config = _load_json(config_path, label="terminal-queue config")
     if config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise Ugi3VirtualTerminalQueueError(
-            f"config schema must be {CONFIG_SCHEMA_VERSION!r}"
-        )
+        raise Ugi3VirtualTerminalQueueError(f"config schema must be {CONFIG_SCHEMA_VERSION!r}")
     inputs = {
         "component_ledger": component_ledger_path,
         "component_program_ledger": component_program_ledger_path,
@@ -383,18 +333,11 @@ def build_ugi3_virtual_terminal_queue(
         component_program_ledger_path,
         label="component-program ledger",
     )
-    component_by_id = {
-        row["component_id"]: row
-        for row in components
-    }
+    component_by_id = {row["component_id"]: row for row in components}
     if len(component_by_id) != len(components):
-        raise Ugi3VirtualTerminalQueueError(
-            "component ledger contains duplicate identifiers"
-        )
+        raise Ugi3VirtualTerminalQueueError("component ledger contains duplicate identifiers")
     if {row["component_id"] for row in programs} != set(component_by_id):
-        raise Ugi3VirtualTerminalQueueError(
-            "component and component-program ledgers do not align"
-        )
+        raise Ugi3VirtualTerminalQueueError("component and component-program ledgers do not align")
     source_procurement = _source_procurement_index(
         _load_json(
             agile_component_routes_path,
@@ -431,9 +374,7 @@ def build_ugi3_virtual_terminal_queue(
             },
         )
         if component["component_id"] not in entry["component_ids"]:
-            entry["component_product_incidence"] += int(
-                component["product_count"]
-            )
+            entry["component_product_incidence"] += int(component["product_count"])
         entry["terminal_classes"].add(terminal_class)
         entry["source_kinds"].add(source_kind)
         entry["component_ids"].add(component["component_id"])
@@ -456,9 +397,7 @@ def build_ugi3_virtual_terminal_queue(
         if status == "accepted_procurement_terminal":
             continue
         if status == "procurement_or_route_search_required":
-            if component["role"] != "amine_head" or leaves != [
-                component["canonical_smiles"]
-            ]:
+            if component["role"] != "amine_head" or leaves != [component["canonical_smiles"]]:
                 raise Ugi3VirtualTerminalQueueError(
                     "unresolved head terminal record is inconsistent"
                 )
@@ -494,9 +433,7 @@ def build_ugi3_virtual_terminal_queue(
     head_count = 0
     for canonical, entry in sorted(dependencies.items()):
         if len(entry["terminal_classes"]) != 1:
-            raise Ugi3VirtualTerminalQueueError(
-                f"terminal {canonical!r} has inconsistent classes"
-            )
+            raise Ugi3VirtualTerminalQueueError(f"terminal {canonical!r} has inconsistent classes")
         terminal_class = next(iter(entry["terminal_classes"]))
         class_counts[terminal_class] += 1
         source_kinds = sorted(entry["source_kinds"])
@@ -507,37 +444,25 @@ def build_ugi3_virtual_terminal_queue(
         current_record = procurement.get(canonical)
         current_closed = (
             current_record is not None
-            and current_record.get("current_item_level_procurement_closed")
-            is True
+            and current_record.get("current_item_level_procurement_closed") is True
         )
         accepted_procurement_count += int(current_closed)
         terminal_key = canonical.encode()
         rows.append(
             {
                 "terminal_id": (
-                    "virtual-terminal-"
-                    f"{hashlib.sha256(terminal_key).hexdigest()[:20]}"
+                    "virtual-terminal-" f"{hashlib.sha256(terminal_key).hexdigest()[:20]}"
                 ),
                 "canonical_smiles": canonical,
                 "terminal_class": terminal_class,
                 "source_kinds_json": _stable_json(source_kinds),
                 "dependent_component_count": len(entry["component_ids"]),
-                "dependent_component_ids_json": _stable_json(
-                    entry["component_ids"]
-                ),
+                "dependent_component_ids_json": _stable_json(entry["component_ids"]),
                 "dependent_roles_json": _stable_json(entry["roles"]),
-                "dependent_program_families_json": _stable_json(
-                    entry["program_families"]
-                ),
-                "dependency_evidence_levels_json": _stable_json(
-                    entry["evidence_levels"]
-                ),
-                "component_product_incidence": entry[
-                    "component_product_incidence"
-                ],
-                "source_procurement_evidence_json": _stable_json(
-                    procurement_states
-                ),
+                "dependent_program_families_json": _stable_json(entry["program_families"]),
+                "dependency_evidence_levels_json": _stable_json(entry["evidence_levels"]),
+                "component_product_incidence": entry["component_product_incidence"],
+                "source_procurement_evidence_json": _stable_json(procurement_states),
                 "current_procurement_evidence_json": json.dumps(
                     current_record or {},
                     sort_keys=True,
@@ -545,35 +470,31 @@ def build_ugi3_virtual_terminal_queue(
                 ),
                 "current_accepted_procurement": str(current_closed).lower(),
                 "procurement_status": (
-                    "current_item_level_vendor_verified"
-                    if current_closed
-                    else "unresolved"
+                    "current_item_level_vendor_verified" if current_closed else "unresolved"
                 ),
                 "next_action": (
                     "none"
                     if current_closed
-                    else current_record.get("next_action")
-                    if current_record is not None
-                    and isinstance(current_record.get("next_action"), str)
                     else (
-                        "verify_exact_identity_current_vendor_or_internal_stock;"
-                        "if_unavailable_route_recursively"
+                        current_record.get("next_action")
+                        if current_record is not None
+                        and isinstance(current_record.get("next_action"), str)
+                        else (
+                            "verify_exact_identity_current_vendor_or_internal_stock;"
+                            "if_unavailable_route_recursively"
+                        )
                     )
                 ),
             }
         )
     summary = {
         "terminal_candidates": len(rows),
-        "unresolved_terminal_candidates": (
-            len(rows) - accepted_procurement_count
-        ),
+        "unresolved_terminal_candidates": (len(rows) - accepted_procurement_count),
         "proposed_route_leaf_candidates": route_leaf_count,
         "unresolved_head_candidates": head_count,
         "terminal_classes": dict(sorted(class_counts.items())),
         "candidates_with_source_vendor_claim_only": vendor_claim_count,
-        "candidates_with_current_accepted_procurement": (
-            accepted_procurement_count
-        ),
+        "candidates_with_current_accepted_procurement": (accepted_procurement_count),
     }
     _validate_frozen_counts(summary, config["expected_counts"])
     ledger = _csv_bytes(rows)
@@ -606,10 +527,7 @@ def build_ugi3_virtual_terminal_queue(
         "summary": summary,
         "artifacts": {
             "agile_virtual_ugi3_terminal_queue.csv.gz": {
-                "path": (
-                    "results/m0_09/"
-                    "agile_virtual_ugi3_terminal_queue.csv.gz"
-                ),
+                "path": ("results/m0_09/" "agile_virtual_ugi3_terminal_queue.csv.gz"),
                 "bytes": len(ledger),
                 "sha256": sha256_bytes(ledger),
             }

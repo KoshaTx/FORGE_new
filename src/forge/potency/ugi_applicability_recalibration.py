@@ -21,8 +21,8 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.potency.ugi_selective_risk_proposal_diagnosis import (
     DISTANCE_KINDS,
     VIEWS,

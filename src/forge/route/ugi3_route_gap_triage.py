@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 from forge.route.ugi3_agile_template_saturation_stress import projected_leaf_candidates
 from forge.route.ugi3_precursor_leaf_closure import (
     ALDEHYDE_ROLE,

@@ -16,8 +16,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_dossier_coverage_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi3_dossier_coverage.v1"

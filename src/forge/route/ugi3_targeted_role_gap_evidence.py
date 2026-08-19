@@ -14,8 +14,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_targeted_role_gap_evidence_audit_config.v1"
 EVIDENCE_SCHEMA_VERSION = "phase1_ugi3_targeted_role_gap_evidence.v1"

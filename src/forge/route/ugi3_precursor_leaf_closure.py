@@ -19,7 +19,7 @@ from typing import Any, TextIO
 
 from rdkit import Chem, rdBase
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 from forge.route.ugi3_agile_template_saturation_stress import projected_leaf_candidates
 from forge.route.ugi3_virtual_programs import _aldehyde_program, _isocyanide_program
 

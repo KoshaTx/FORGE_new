@@ -21,8 +21,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.qualified_forward import (
     QualifiedForwardError,
     load_qualified_forward_reaction,
@@ -419,9 +419,7 @@ def build_targeted_aldehyde_evidence_audit(
         primary = (
             "direct_procurement"
             if direct_complete
-            else "exact_l2_to_current_l3"
-            if route_complete
-            else "abstain_missing_exact_evidence"
+            else "exact_l2_to_current_l3" if route_complete else "abstain_missing_exact_evidence"
         )
         target_rows.append(
             {

@@ -18,7 +18,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.potency.oracle_production import (
     load_production_checkpoint,
     score_production_ugi_candidates,
@@ -309,7 +309,9 @@ def build_fresh_pool_oracle_audit(repo: Path, config_path: Path) -> tuple[dict[s
         "pool_may_advance_to_nonselecting_oracle_and_route_assessment"
     ) is not True or fresh_audit.get("inputs", {}).get("fresh_pool_sample", {}).get(
         "sha256"
-    ) != sha256_file(paths["fresh_pool_sample"]):
+    ) != sha256_file(
+        paths["fresh_pool_sample"]
+    ):
         raise UgiFreshPoolOracleAuditError("fresh pool is not authorized for oracle audit")
     route_artifact = route_coverage.get("artifacts", {}).get("product_synthesis_values.json.gz", {})
     if route_artifact.get("sha256") != sha256_file(paths["route_product_values"]):

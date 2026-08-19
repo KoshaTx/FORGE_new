@@ -16,7 +16,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, TextIO
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_enumerated_routeability_census_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi3_enumerated_routeability_census.v1"

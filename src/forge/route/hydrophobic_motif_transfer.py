@@ -19,8 +19,8 @@ from typing import Any
 from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdChemReactions, rdFingerprintGenerator
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_hydrophobic_motif_transfer_config.v3"
 RESULT_SCHEMA_VERSION = "m0_09_hydrophobic_motif_transfer.v3"

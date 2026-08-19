@@ -14,7 +14,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 from forge.potency import ugi_production_full_support_rescoring as v2
 from forge.potency.ugi_hela_potency_diagnostic import (
     FrozenHeLaOracleWorker,

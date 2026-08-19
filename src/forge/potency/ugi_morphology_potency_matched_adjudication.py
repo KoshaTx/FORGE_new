@@ -25,8 +25,8 @@ import numpy as np
 from rdkit import Chem, DataStructs
 from rdkit.Chem import rdFingerprintGenerator
 
+from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.data.r1_prime_audit import sha256_file
 from forge.potency import ugi_distributional_applicability as applicability
 from forge.potency.ugi_hela_potency_diagnostic import (
     ROLE_MAP,

@@ -8,7 +8,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.route.planner import (
     AvailabilityState,
     EvidenceRecord,

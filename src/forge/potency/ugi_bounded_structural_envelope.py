@@ -18,9 +18,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import csv_gz_bytes as _csv_bytes
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.potency import ugi_distributional_applicability as applicability
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 

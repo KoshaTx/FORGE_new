@@ -27,8 +27,8 @@ import torch
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import average_precision_score, roc_auc_score
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.potency import ugi_distributional_applicability as applicability_v1
 from forge.potency import ugi_distributional_applicability_v2 as applicability_v2
 

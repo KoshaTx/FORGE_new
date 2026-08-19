@@ -16,7 +16,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 from forge.route.ugi3_virtual_programs import _aldehyde_program, _isocyanide_program
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_agile_template_saturation_stress_config.v1"

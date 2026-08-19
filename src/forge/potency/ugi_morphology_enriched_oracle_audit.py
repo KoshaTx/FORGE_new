@@ -14,8 +14,8 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )

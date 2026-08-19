@@ -26,8 +26,8 @@ from typing import Any
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem, Descriptors
 
+from forge.core.hashing import sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_production_route_shortlist_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_production_route_shortlist.v1"
@@ -209,7 +209,11 @@ def build_production_route_shortlist(repo: Path, config_path: Path) -> tuple[dic
         "sha256"
     ) != sha256_file(paths["generation_ledger"]) or ranking_result.get("artifacts", {}).get(
         "terminal_rescoring.csv.gz", {}
-    ).get("sha256") != sha256_file(paths["ranking_ledger"]):
+    ).get(
+        "sha256"
+    ) != sha256_file(
+        paths["ranking_ledger"]
+    ):
         raise UgiProductionRouteShortlistError("ledger is not pinned by its result")
 
     generated = _generation_rows(paths["generation_ledger"])

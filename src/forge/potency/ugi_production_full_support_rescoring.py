@@ -18,8 +18,8 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.hashing import sha256_file
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_file
 from forge.potency import ugi_distributional_applicability as v1
 from forge.potency.oracle_classical import conformal_radius
 from forge.potency.ugi_hela_potency_diagnostic import (

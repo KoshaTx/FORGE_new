@@ -25,7 +25,7 @@ import numpy as np
 from rdkit import DataStructs
 from rdkit.Chem import rdFingerprintGenerator
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.potency import ugi_distributional_applicability as v1
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_distributional_applicability_config.v2"

@@ -26,8 +26,8 @@ from typing import Any
 
 from rdkit import rdBase
 
+from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.data.r1_prime_audit import sha256_file
 from forge.route.planner import PlannerBudgetLimits
 from forge.route.planner_cache import (
     PLANNER_CACHE_KEY_SCHEMA_VERSION,

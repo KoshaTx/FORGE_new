@@ -9,7 +9,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_synthesis_guidance_failure_audit_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_synthesis_guidance_failure_audit.v1"

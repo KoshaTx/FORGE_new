@@ -27,10 +27,10 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
+from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import stable_json as _stable_json
-from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     declared_graph_support_context_sha256,

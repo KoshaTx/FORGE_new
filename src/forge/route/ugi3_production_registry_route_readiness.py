@@ -17,8 +17,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.qualified_forward import (
     QualifiedForwardError,
     load_qualified_forward_reaction,

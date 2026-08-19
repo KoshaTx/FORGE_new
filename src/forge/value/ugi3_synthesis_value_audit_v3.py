@@ -6,7 +6,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.route.planner import (
     KnowledgeDisposition,
     KnowledgeResult,

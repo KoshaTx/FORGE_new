@@ -14,7 +14,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 from forge.route.ugi3_route_registry_pair_contract import (
     BINDING_SCHEMA_VERSION,
     DIFF_SCHEMA_VERSION,

@@ -13,7 +13,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.core.hashing import sha256_file
 from forge.product.ugi_tail_chemotype_audit import summarize_component_cohort
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_terminal_decoder_evaluation_config.v1"

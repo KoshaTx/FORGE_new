@@ -29,7 +29,7 @@ from rdkit.Chem import rdFingerprintGenerator
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.ML.Cluster import Butina
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.core.hashing import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_hela_supported_diagnostic_preview_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_hela_supported_diagnostic_preview.v1"
