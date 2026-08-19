@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.verify.flower_transfer_audit import (
+from forge.audit.flower_transfer_audit import (
     FlowerTransferAuditError,
     run_flower_transfer_audit,
 )

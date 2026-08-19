@@ -1921,6 +1921,24 @@
       "path": "src/forge/assembly/ugi3.py"
     },
     {
+      "archived_pin_identities": 0,
+      "classification": "retire_candidate",
+      "historical_pin_identities": 0,
+      "path": "src/forge/audit/__init__.py"
+    },
+    {
+      "archived_pin_identities": 0,
+      "classification": "retire_candidate",
+      "historical_pin_identities": 0,
+      "path": "src/forge/audit/flower_transfer_audit.py"
+    },
+    {
+      "archived_pin_identities": 0,
+      "classification": "retire_candidate",
+      "historical_pin_identities": 0,
+      "path": "src/forge/audit/ugi_distribution_overlap.py"
+    },
+    {
       "archived_pin_identities": 1,
       "classification": "retire_candidate",
       "historical_pin_identities": 1,
@@ -2093,18 +2111,6 @@
       "classification": "keep_cli",
       "historical_pin_identities": 0,
       "path": "src/forge/data/vendor.py"
-    },
-    {
-      "archived_pin_identities": 0,
-      "classification": "retire_candidate",
-      "historical_pin_identities": 0,
-      "path": "src/forge/eval/__init__.py"
-    },
-    {
-      "archived_pin_identities": 1,
-      "classification": "retire_candidate",
-      "historical_pin_identities": 1,
-      "path": "src/forge/eval/ugi_distribution_overlap.py"
     },
     {
       "archived_pin_identities": 0,
@@ -3905,18 +3911,6 @@
       "classification": "retire_candidate",
       "historical_pin_identities": 0,
       "path": "src/forge/value/ugi_synthesis_guidance_failure_audit.py"
-    },
-    {
-      "archived_pin_identities": 0,
-      "classification": "retire_candidate",
-      "historical_pin_identities": 0,
-      "path": "src/forge/verify/__init__.py"
-    },
-    {
-      "archived_pin_identities": 0,
-      "classification": "retire_candidate",
-      "historical_pin_identities": 0,
-      "path": "src/forge/verify/flower_transfer_audit.py"
     }
   ],
   "counts": {
@@ -3924,15 +3918,15 @@
     "keep_cli": 22,
     "keep_paper": 262,
     "keep_shared": 69,
-    "retire_candidate": 293
+    "retire_candidate": 292
   },
   "inputs": {
     "contract": {
       "path": "configs/reproduction/iclr2027.json",
       "sha256": "bc7855ac1c7a6f3b3a4636242b5ccb1ca05ed9269c0318ce60b2a64d692cb08f"
     },
-    "scripts_tree_sha256": "4dbddfc5f28c5aa9fe47c12a970b8cb08a429bb8462fcf125aae36b6bea53b87",
-    "source_tree_sha256": "350354d03e6acd3ffc963ae36bc7e6455f5b27d53595598b4fe06e5168445118"
+    "scripts_tree_sha256": "9380bec33574e50866f56915500ad577cc424573421bb9483a1b6868ef4451f9",
+    "source_tree_sha256": "d3492f30d7422e2c7f2d549b2dc77d259cb8f12dde854190c16cb34392c08866"
   },
   "paper_id": "forge-iclr2027",
   "reachable_dynamic_imports": [],

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.eval.ugi_distribution_overlap import build_ugi_distribution_overlap_audit
+from forge.audit.ugi_distribution_overlap import build_ugi_distribution_overlap_audit
 
 
 def _atomic(path: Path, payload: bytes) -> None:

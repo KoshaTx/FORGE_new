@@ -45,7 +45,10 @@ def test_migrated_packages_follow_the_dependency_direction() -> None:
             relative = path.relative_to(SOURCE).as_posix()
             for imported in sorted(_forge_imports(path)):
                 target_package = imported.split(".", 2)[1]
-                if target_package not in allowed and (relative, imported) not in TRANSITIONAL_IMPORTS:
+                if (
+                    target_package not in allowed
+                    and (relative, imported) not in TRANSITIONAL_IMPORTS
+                ):
                     violations.append(f"{relative} -> {imported}")
     assert not violations, "dependency boundary violations:\n" + "\n".join(violations)
 
@@ -67,15 +70,12 @@ def test_bio_to_potency_move_is_complete_and_has_no_stale_runtime_imports() -> N
 
     move_document = json.loads((REPO / "docs/artifact_path_moves.json").read_text())
     moves = {
-        old: new
-        for old, new in move_document["moves"].items()
-        if old.startswith("src/forge/bio/")
+        old: new for old, new in move_document["moves"].items() if old.startswith("src/forge/bio/")
     }
     assert moves, "the bio-to-potency migration has no declared provenance moves"
 
     moved_modules = {
-        Path(old).with_suffix("").as_posix().removeprefix("src/").replace("/", ".")
-        for old in moves
+        Path(old).with_suffix("").as_posix().removeprefix("src/").replace("/", ".") for old in moves
     }
     violations: list[str] = []
     for old, new in sorted(moves.items()):
@@ -110,3 +110,38 @@ def test_bio_contains_only_endpoint_domain_modules() -> None:
         "muscle.py",
         "vaccine.py",
     }
+
+
+def test_no_package_directory_survives_only_as_a_cache() -> None:
+    """A deleted package must not come back as an empty namespace package.
+
+    Removing a package leaves `__pycache__` behind, and `rmdir` then fails silently. Python treats
+    the surviving directory as a namespace package, so `import forge.<name>` keeps succeeding and
+    returns nothing -- the deletion looks done and is not. This caught `forge.maintenance` and
+    `forge.dossier` after they were moved out, both still importable with no modules in them.
+    """
+    empty = [
+        directory.relative_to(REPO).as_posix()
+        for directory in SOURCE.iterdir()
+        if directory.is_dir()
+        and directory.name != "__pycache__"
+        and not any(directory.rglob("*.py"))
+    ]
+    assert not empty, "package directories with no Python modules:\n" + "\n".join(empty)
+
+
+def test_every_package_declares_what_it_is() -> None:
+    """No package may carry the placeholder docstring the original layout generated.
+
+    `\"\"\"FORGE <x> module — see docs/M0_TASKS.md.\"\"\"` says nothing, and the packages still
+    carrying it are exactly the ones the restructure has not reached. Declaring a real surface is
+    what lets ALLOWED_PACKAGE_IMPORTS above cover a package at all, so this list shrinking is the
+    ratchet -- entries may be removed, never added.
+    """
+    undeclared = {"data", "product", "route"}
+    stubs = set()
+    for init in SOURCE.glob("*/__init__.py"):
+        text = init.read_text()
+        if "see docs/M0_TASKS.md" in text:
+            stubs.add(init.parent.name)
+    assert stubs <= undeclared, f"new placeholder package docstring: {sorted(stubs - undeclared)}"

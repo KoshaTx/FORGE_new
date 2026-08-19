@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from forge.eval.ugi_distribution_overlap import (
+from forge.audit.ugi_distribution_overlap import (
     ViewReference,
     _identity_record,
     _identity_reference,

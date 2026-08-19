@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.verify.flower_transfer_audit import (
+from forge.audit.flower_transfer_audit import (
     FlowerTransferAuditError,
     audit_flower_transfer_inputs,
     run_flower_transfer_audit,
