@@ -106,23 +106,29 @@ potency/   oracle, applicability, morphology
 audit/     post-hoc audits and the _vN families
 ```
 
-Start with `potency/`: of the `bio↔product` cycle, **all 8 outbound and all 46 inbound edges
-involve the misfiled `ugi_*` modules and none involve real biology**, so extracting the 30 of them
-cuts three of the seven cycles in one move and leaves `bio/` an actual biology package.
-Then split `product/` into `corpus/` + `generate/`, then merge `value/` into `route/` — 16/29
-edges, one domain that was split by chronology rather than design.
+The `potency/` extraction is complete: 49 oracle, applicability, morphology, ranking, and authorized
+diagnostic modules moved out of `bio/`. The `bio/` package now contains only its package initializer,
+generic endpoint interface, frozen endpoint decision, and the liver/muscle/vaccine implementations.
+An executable boundary test requires every declared move target, rejects imports of every removed
+module, and fixes that six-file package surface. Frozen configs retain their historical `bio` paths;
+the provenance move map resolves those identities to the new bytes.
+
+The remaining `product -> potency` references are real transitional coupling, chiefly shared role
+constants and evaluation adapters. They are not hidden by the namespace move. Split `product/` into
+`corpus/` + `generate/` before tightening that boundary, then merge `value/` into `route/` — one
+domain that was split by chronology rather than design.
 
 ## Mechanism
 
 Moving files is cheap now. A pin binds `{path, sha256}`; moving changes the path, not the bytes, and
-`verify_artifact_pins.py` resolves through `docs/artifact_path_moves.json`. Proven both ways: a move
-holds at 739 verified / 0 drift, and one tampered byte in a moved file still fails.
+`forge provenance verify` resolves through `docs/artifact_path_moves.json`. Proven both ways: a move
+holds at 742 verified / 0 drift, and one tampered byte in a moved file still fails.
 
 One thing genuinely stays put: the 37 modules inside the blinded-execution manifest, which checks its
 module set by exact equality to prove which code ran during a sealed holdout. They move last, with
 the manifest regenerated as a reviewed act.
 
-Per step: `git mv`, append the rename map, rewrite imports, then gate on **739 pins / 0 drift**, all
+Per step: `git mv`, append the rename map, rewrite imports, then gate on **742 pins / 0 drift**, all
 modules importing, and the failing-test set staying a subset of `tests/baseline_failures.txt`.
 
 ## Corrections to earlier drafts

@@ -186,3 +186,16 @@ Options for the human operator:
 1. Run the agent on the original workstation where these paths resolve.
 2. Copy `data/vendor/` to the execution environment out of band and run `make verify` only.
 3. For tasks that do not need R1 (all of M0 except the M0-04 control), use `make vendor-partial`.
+# Repository migration provenance
+
+The current repository was initialized on 2026-08-18 from the former `forge` repository branch
+`agent/active-design-20260815` at commit
+`531d5a90694bb1dc3767861a07616f160fa0810e`. The former repository was left intact with its 238-commit
+history and remote. Files were copied rather than pruned because a static reachability analysis could
+not reliably identify result producers whose paths were assembled dynamically.
+
+The one-time root `MIGRATION_NOTES.md` was removed after this provenance was incorporated here. Its
+dated claim that 82 Phase 1 artifacts were unavailable is not an ongoing contract: several assets
+have since been recovered. Current availability must be established from hash-pinned experiment
+specifications with `forge doctor`, while historical source/config bytes are retained by digest under
+`provenance/frozen-code/`.

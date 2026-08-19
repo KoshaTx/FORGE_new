@@ -1,7 +1,7 @@
 {
-  "schema_version": "forge.known_artifact_drift.v1",
+  "schema_version": "forge.known_artifact_drift.v2",
   "recorded_utc": "2026-08-18",
-  "why": "Artifacts pin the inputs they were computed from. A few of those inputs moved on after the artifact was written and the original bytes no longer exist anywhere, so the pin can never be satisfied again. Recording them here keeps `make verify-pins` meaningful: this inherited drift is acknowledged once, while any NEW drift, or any further change to a file already listed here, still fails the gate. An entry is matched on both path and current hash, so editing one of these files again turns it fatal.",
+  "why": "Artifacts pin the inputs they were computed from. A few historical inputs were already unrecoverable when this repository was consolidated. Each exception is matched on the exact original path and missing expected digest. Recoverable versions belong in provenance/frozen-code and remain byte-verified; a new missing digest or any corrupted archived blob fails the gate.",
   "how_to_add": "Do not add an entry to make a failing gate pass. An entry is only correct when the pinned bytes are genuinely unrecoverable AND the artifact that pinned them is frozen. If the input still exists somewhere, restore it instead.",
   "known_drift": [
     {
@@ -15,8 +15,15 @@
       "path": "scripts/modal_phase1_product_cuda_preflight.py",
       "expected": "b6c1e2761a1244bd19261f4fd828ee88107f87385c68de0d1e13aa8345eb01e3",
       "actual": "a71a2d2eaddba99a1ac38cd450ddcb24662cb3f39b48231fd7340d4f60f98be7",
-      "declared_by": "results/phase1/product_cuda_preflight.json, results/phase1/product_cuda_preflight_v2.json",
-      "reason": "A code pin: the preflight artifacts record the hash of the launcher that produced them, and the launcher was edited afterwards. Two artifacts pin two different earlier revisions of the same file, so no single state of it could satisfy both. Inherited from forge; unchanged across every commit in this repository."
+      "declared_by": "results/phase1/product_cuda_preflight.json",
+      "reason": "A code pin: the preflight artifact records the hash of a launcher revision whose bytes were already unavailable when this repository was consolidated."
+    },
+    {
+      "path": "scripts/modal_phase1_product_cuda_preflight.py",
+      "expected": "e9b961fe41034091e2a74d9c9b60609272ef8164f6d2d2c96ab20e695476c0ac",
+      "actual": "a71a2d2eaddba99a1ac38cd450ddcb24662cb3f39b48231fd7340d4f60f98be7",
+      "declared_by": "results/phase1/product_cuda_preflight_v2.json",
+      "reason": "A second preflight artifact pins another launcher revision whose bytes were already unavailable when this repository was consolidated."
     },
     {
       "path": "tests/test_ugi_candidate_eligibility.py",

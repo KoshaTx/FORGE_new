@@ -185,3 +185,27 @@ override from the start, since it is new code with no legacy to grandfather.
 A dropping `verified` count means an input went missing. Any drift at all means a supposedly-frozen
 byte moved. A test flipping from skip to pass is a *finding* worth reporting, not noise — a large
 number currently skip on ad-hoc `.exists()` guards rather than registered markers.
+
+## 2026-08-19 implementation checkpoint
+
+The repository grew substantially after the original Phase 0 measurement, so current gates use the
+exact node set rather than the old raw totals:
+
+- provenance: 742 verified pins over 340 files, 0 drift;
+- full suite: 1,668 collected with 201 failed/error nodes;
+- failing-node diff: all 201 nodes are in `tests/baseline_failures.txt`, with 0 new nodes.
+
+The four additional passing outcomes are the persistent-partial resume test and the three registered
+training/sampling contract tests added with the CLI pipelines. The inherited failure/error node set is
+unchanged exactly.
+
+The baseline list was corrected in this pass: one parameter id had been truncated at a space, and
+`test_frozen_v2_sources_remain_byte_identical` was already failing against the unmodified `cc947f5`
+source pair but was absent from the list. This is a baseline bookkeeping correction, not a quarantine
+of a refactor regression.
+
+The normalized report is
+`results/maintenance/bio_to_potency_migration_v1/test_baseline.json`. It records zero new failures,
+zero resolved failures, zero stale cache nodes, and all 54 documented upstream inputs still absent.
+The full suite therefore remains blocked rather than green; no test was skipped, repinned, or relaxed
+to manufacture a pass.

@@ -2,10 +2,9 @@
 
 **Route-Grounded Generative Design of Synthetically Executable Ionizable Lipids**
 
-Computational engine for a Nature Biotechnology paper. The claim: an open-ended molecular generator
-coupled to complete synthesis-route generation produces lipids that arrive with **executable synthesis
-dossiers** and show higher **prospective** synthesis success than fixed-topology generation or post-hoc
-retrosynthesis filtering.
+Computational engine for a Nature Biotechnology paper on synthesis-grounded whole-lipid generation.
+FORGE couples a bounded whole-molecule generator to recursive synthesis-program construction and
+records auditable L1/L2/L3 evidence without treating computational route support as synthesis success.
 
 The unit of generation is a **product–route dossier**, not a SMILES string.
 
@@ -14,10 +13,12 @@ The unit of generation is a **product–route dossier**, not a SMILES string.
 
 ## Status
 
-**Milestone M0 only** — decisions, audits, feasibility gates, data inventories. The scientific plan is
-approved in principle but **not implementation-frozen**. No GPU training. No Phases 1–8.
+M0 is complete. Bounded Phase 1 product/L1 training, synthesis-routing readiness, and the single
+versioned HeLa diagnostic described in `AGENTS.md` are authorized. Later phases and unrestricted
+biological optimization are not.
 
 - Plan: [`docs/PLAN.md`](docs/PLAN.md)
+- Documentation map: [`docs/README.md`](docs/README.md)
 - Tasks: [`docs/M0_TASKS.md`](docs/M0_TASKS.md)
 - Data: [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)
 - Decisions: [`docs/DECISION_LOG.md`](docs/DECISION_LOG.md)
@@ -26,14 +27,44 @@ approved in principle but **not implementation-frozen**. No GPU training. No Pha
 
 ```bash
 uv venv && source .venv/bin/activate
-uv pip install -e ".[dev]"
+uv sync --frozen --extra dev --extra torch
 make vendor    # or: make vendor-partial   (skips the 96 MB R1 asset)
 make verify
-make test
+make check-core
+forge doctor
+forge experiment run installation-smoke --profile smoke
+
+# Qualified model workflows
+forge doctor phase1-training-smoke
+forge experiment run phase1-training-smoke --profile smoke
+forge experiment run phase1-sampling --profile smoke
+forge experiment reproduce phase1-sampling --profile smoke
+
+# Paper and provenance
+forge paper verify
+forge paper reproduce          # exact artifact replay + two clean packaging builds
+forge paper doctor --strict   # reports every blocker to a full numerical rerun
+forge paper build
+forge provenance verify --expect-verified 742
+forge maintenance survey --output provenance/code-retirement/iclr2027.json
+make test-baseline-report       # summarize the last clean-cache full-suite run
 ```
 
 `make vendor` copies hash-pinned assets from absolute paths on the originating workstation. If those
 paths do not resolve it fails with the missing list and expected hashes. **Do not substitute data.**
+
+Experiment specifications live in `configs/experiments/`. See
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for package boundaries and
+[`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) for local and Modal execution.
+The production training DAG is planned or launched explicitly with
+`forge experiment ... phase1-training-production --profile full`; it is never triggered by the
+smoke workflow.
+
+The authoritative ICLR source is `paper/FORGE_ICLR2027_paper.tex`. Its exact source, twelve
+manuscript evidence roots, generated tables, and included figures are frozen in
+`configs/reproduction/iclr2027.json`. `forge paper verify` checks artifact replay. The stricter
+doctor additionally walks the recursive path/hash graph and reports unavailable upstream corpus,
+checkpoint, and external-engine bytes; it never calls artifact replay a full training reproduction.
 
 ## The three synthesis layers
 

@@ -6829,3 +6829,151 @@ preserved unchanged.
 - Manuscript now 15 pages, builds without error.
 - No other figure artwork has been produced. The remaining figures in the section 10
   architecture stay unmade pending explicit authorization.
+
+## 2026-08-19 - Reproducible experiment runner and refactor provenance gate
+
+- Added the strict `forge.experiment.v1` DAG contract, content-addressed local execution, keyed
+  replicate/stage seeds, atomic stage commits, verified resume, failure receipts, and independent
+  downloaded-run verification. Added one generic Modal launcher; GCP remains deferred.
+- Added public `forge.corpus` and registry-backed `forge.assembly` seams. The L1 adapter reports exact
+  forward consistency only and does not promote reaction support to route certification or synthesis
+  success.
+- Rebuilt the Phase 1 product/L1 corpus in an isolated run. Both compressed ledgers reproduced the
+  frozen bytes exactly: 12,386 constitutional model products and all 13,376 source rows. A second
+  independent execution reproduced all four stage artifacts byte-for-byte.
+- The first execution exposed an inherited plumbing defect: `phase1_data` called the shared gzip CSV
+  writer without its required field order. Supplying the already-frozen `ASSIGNMENT_FIELDS` fixed the
+  invocation; the regenerated assignment ledger remained byte-identical.
+- Archived 137 exact historical source/config blobs. The active-plus-archive gate now verifies 739
+  pins over 337 files with zero drift. Three pre-existing unrecoverable digests remain exact exceptions;
+  they are no longer broad exceptions tied to a mutable current file.
+- This is an engineering/provenance milestone. It changes no scientific gate, candidate status, sealed
+  holdout, biological authorization, or paper claim.
+
+## 2026-08-19 - Register resumable Phase 1 training and diagnostic sampling DAGs
+
+- Registered separate CLI-owned training and sampling experiments. Training verifies the frozen
+  112,386-record balanced tensor cache before running the joint sparse-flow and closure trainers;
+  the production joint refit remains fixed-final-step and explicitly requests an L4 GPU.
+- Checkpoints now carry optimizer state, Python/NumPy/PyTorch random states, trainer-generator state,
+  loss/evaluation history, and selection counters. Failed stages retain a fingerprint-bound partial
+  workspace and `--resume` continues only the identical run contract.
+- Registered restartable contiguous sampling shards over the selected development checkpoint and the
+  matched 3,072-program draw. Seeds are derived independently per shard; merging is deterministic;
+  no retry, repair, candidate selection, route call, oracle call, or synthesis-value call is allowed.
+  Exact Ugi-L1 reconstruction is reported without promotion to L2/L3 closure or synthesis success.
+- The bounded CPU smoke run completed 10 joint steps over all 112,386 training records and 300
+  closure steps. The four-sample diagnostic returned four valid, terminal-valid, exact-L1 products.
+  These are pipeline qualification results, not production training or candidate evidence.
+- `scripts/` is now documented as a frozen compatibility/provenance surface. New workflows use the
+  CLI; legacy producers remain in place until a registered DAG covers their behavior and every
+  historical path/hash reference is recoverable. The stale root migration note was removed after its
+  durable repository provenance moved into `DATA_PROVENANCE.md`.
+- This engineering change does not launch production GPU training, select candidates, access sealed
+  holdouts, alter guidance, or change a scientific claim.
+
+## 2026-08-19 - Extend the provenance gate over `configs/`, which pins its own source
+
+- **The gate had a blind spot.** `verify_artifact_pins.py` scanned `results/` and `docs/provenance/`
+  only. A frozen config also pins the code that produced it, as `inputs.source.{path,sha256}`, and
+  those pins outnumber the result-declared ones roughly four to one. None of them were ever checked,
+  so `make verify-pins` read 739 verified / 0 drift while **216 config-declared pins over 117 files
+  had gone stale**. The green gate was accurate about what it looked at and silent about the rest.
+- Of the 117 drifted files, **87 had their pinned bytes at `cc947f5`**, this repository's first
+  commit — so the drift was introduced by work done here, most of it by the `forge.core` migration
+  editing modules that a frozen config pins. The remaining 30 exist in no commit at all.
+- **Fixed a defect in the gate itself:** `collect_pins` assumed absolute roots, so the advertised
+  `--root` flag crashed on any relative path. That is why nobody had pointed it at `configs/`.
+- Ran the archiver over `results/` + `docs/provenance/` + `configs/`. It recovered **312 additional
+  historical revisions**; the archive grew 137 -> 449 entries, a strict superset losing nothing.
+  Config drift fell 216 -> 92. Combined coverage is now **2,041 verified pins over 667 distinct
+  files**, up from 739 over 337. `configs/` is now in the archiver's default roots.
+- Added `make verify-pins-code` (all three roots) and `make archive-pins`. The new `--allow-drift N`
+  flag is a **burn-down ratchet, not an acceptance mechanism**: it holds the known backlog flat and
+  fails the moment drift grows. Negative-tested at N-1 (exit 1), N (exit 0), and on the unratcheted
+  main gate (exit 0). Accepted drift still requires a reviewed `known_artifact_drift.json` entry.
+- **92 pins over 36 files remain drifted and unrecoverable.** They are listed by
+  `make verify-pins-code`. Each needs an individual ruling on whether its bytes are genuinely
+  unrecoverable and its artifact frozen; `REFACTOR_BASELINE.md` forbids adding entries to make a
+  gate pass, so none were added. This is an open decision for the user, not a chore.
+- `make verify-pins` is unchanged at 739 / 0 drift. This is an engineering and provenance change: it
+  alters no scientific gate, candidate, sealed holdout, biological authorization, or paper claim.
+
+## 2026-08-19 - Freeze the ICLR reproduction graph and retire the first proven-dead code wave
+
+- Froze `configs/reproduction/iclr2027.json` over the authoritative LaTeX source, twelve numerical
+  evidence roots, three generated LaTeX inputs and all ten figures actually included by the paper.
+  All 26 direct files verify at their declared SHA-256 values.
+- Added `forge paper doctor|verify|reproduce|render|build|bundle`. Artifact replay is named as such:
+  the reproduction receipt states `numerical_recomputation_executed: false`. Strict diagnosis walks
+  1,190 recursive path/hash identities and currently finds 147 active, 25 archived, two drifted and
+  1,016 absent identities. Full numerical recomputation is therefore **not ready** on this checkout;
+  the final JSON files are not presented as a substitute for unavailable original corpora, remote
+  checkpoints or external-engine outputs.
+- Paper compilation and Overleaf packaging no longer depend on stale `manuscript/` shell scripts.
+  Both run in clean temporary directories through the CLI. Setting the TeX reproducible-build epoch
+  made two independent PDFs byte-identical at
+  `04d54a7fca0666c0ac90d921c359e80bd62a41b65ab6662ca69220ec51ed7980`;
+  the deterministic 23-file bundle reproduced at
+  `569390451730c1562a8ed9dc8163b57db81624515cfbe3cbf27bea45a61c871f`.
+- Moved data vendoring, generic Modal dispatch and provenance verify/archive implementations from
+  top-level scripts into typed package modules. Removed the two stale paper shell builders, the old
+  Nature-draft builder, seventeen superseded experiment-specific Modal launchers and six unused
+  figure builders: 30 top-level Python/shell files in total. Three Modal launchers remain as direct
+  ICLR producers and one remains because three historical identities are not fully archived.
+- Added the reproducible code survey at `provenance/code-retirement/iclr2027.json`. After the first
+  removal wave it classifies 24 files as CLI-only, 262 as paper-only, 69 as shared, 14 as blocked by
+  historical pins and 287 as further retirement candidates. The latter are an audit queue, not an
+  instruction for bulk deletion; unique acquisition, chemistry-adjudication and negative-result logic
+  still requires review.
+- Result-facing provenance remains 739 verified pins over 337 files with zero drift. Including frozen
+  configs now verifies 2,067 pins over 686 files while holding the inherited 92-pin drift backlog
+  flat. No known-drift exception was added.
+- Re-ran the current bounded CPU pipelines after the retirement wave. Training run
+  `a249f0e4dcc084bff48e81794348cf9fdabb88ba48f246c05d8b696477ff306d` completed and verified all
+  three stages; independent reproduction met its frozen strict/statistical contracts. Sampling run
+  `3c3f005674c588ab32db98b582ddfc2364f296348060ddabfa5543326cb0fc51` completed, verified and
+  reproduced both outputs byte-for-byte
+  (`a07a9a034ccbde1a6776bed98f48f2b341a7ed3edced24169a7baae6de21edc0` result,
+  `82278c058fe11159f4d56dd50aea73ee56f06fe45c07198d692cd4dcd3e88de5` shard tree).
+- The supported-core gate passes 66 tests, strict typing and lint. The unscoped historical test suite
+  remains red with 202 failing/error cases across 73 test files. Representative blockers include
+  absent historical result ledgers and sealed-sample directories plus frozen source hashes affected
+  by the concurrent `bio` to `potency` namespace migration. These failures were not skipped, repinned
+  or weakened to make this refactor green.
+- This is an engineering and reproducibility change. It launches only bounded CPU smoke training and
+  sampling; no production training, production sampling, route engine, biological guidance or
+  candidate selection ran, and no scientific result or evidence tier changed.
+
+## 2026-08-19 - Complete the `bio` to `potency` extraction and make the full-suite blocker reproducible
+
+- Moved all 49 oracle, applicability, morphology, ranking, and authorized-diagnostic implementations
+  from `forge.bio` to `forge.potency`. `forge.bio` now contains only its package initializer, generic
+  endpoint interface, frozen endpoint decision, and liver/muscle/vaccine implementations. All 49
+  moved modules import successfully.
+- Added an executable namespace boundary: every old path must be absent, every declared move target
+  must exist under `potency`, runtime source/scripts/tests may not import a removed `forge.bio.*`
+  module, and the six-file endpoint-only `bio` surface is exact. The remaining `product -> potency`
+  dependencies are recorded as transitional coupling for the later product split, not hidden by this
+  move.
+- Corrected a provenance mistake made during the move: 22 frozen configs had been edited to name the
+  new path. Restored their historical `src/forge/bio/...` source identities and made the relocation
+  resolver carry the migration instead. The frozen-code archive grew from 449 to 460 exact content
+  blobs; the combined gate improved from 2,067 verified / 92 drift to 2,090 verified / 72 drift. The
+  result-facing gate is 742 verified pins over 340 files with zero drift. No drift exception was
+  added.
+- Added `forge maintenance test-report` and `make test-baseline-report`. A clean-cache run collected
+  1,668 nodes and found exactly the 201 reviewed failing/error nodes, with zero new failures, zero
+  resolved failures, and zero stale cache entries. The pinned report is
+  `results/maintenance/bio_to_potency_migration_v1/test_baseline.json`.
+- The full suite is still **blocked, not green**: all 54 files in `docs/missing_test_inputs.txt` remain
+  unavailable. The report preserves that negative result instead of skipping tests, weakening a
+  scientific gate, substituting data, or changing frozen expected hashes.
+- `make verify` authenticates all 30 vendored assets. `make check-core` passes provenance, strict
+  typing over 50 supported source files, lint over the migrated namespaces, and 70 supported tests.
+  The refreshed code survey classifies 25 CLI, 262 paper, 69 shared, 7 historical-pin-blocked, and 294
+  further retirement candidates; those candidates remain a review queue rather than an automatic
+  deletion instruction.
+- This is an engineering/provenance closeout. It launches no training, sampling, route engine,
+  biological guidance, or candidate selection and changes no scientific result, evidence tier,
+  sealed holdout, or paper claim.
