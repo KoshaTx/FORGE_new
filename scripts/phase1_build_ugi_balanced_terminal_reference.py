@@ -14,8 +14,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX, PORT_TO_INDEX
 from forge.product.ugi_joint_sparse_training import _training_weights
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics

@@ -46,8 +46,9 @@ TIER_COLOR = {
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=REPO_DEFAULT)
-    parser.add_argument("--output", type=Path,
-                        default=Path("manuscript/figures/panel_v6/panel_40_ranking_heatmap.png"))
+    parser.add_argument(
+        "--output", type=Path, default=Path("paper/figures/panel_v6/panel_40_ranking_heatmap.png")
+    )
     args = parser.parse_args()
     repo = args.repo.resolve()
     out = args.output if args.output.is_absolute() else repo / args.output

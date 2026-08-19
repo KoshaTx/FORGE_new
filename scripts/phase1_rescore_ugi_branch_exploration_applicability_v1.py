@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.ugi_branch_exploration_applicability_v1 import (
+from forge.potency.ugi_branch_exploration_applicability_v1 import (
     build_branch_exploration_applicability,
 )
 

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.bio.oracle_graph_transfer import (
+from forge.potency.oracle_graph_transfer import (
     OracleGraphTransferError,
     aggregate_transfer_fits,
     run_oracle_graph_transfer,

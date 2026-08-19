@@ -18,8 +18,8 @@ import numpy as np
 from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdFingerprintGenerator
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_component_expansion import reaction_handle_qualification
 from forge.product.ugi_held_component_gate import _reaction_contract
 from forge.product.ugi_tail_chemotype_audit import (

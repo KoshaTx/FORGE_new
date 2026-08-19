@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.bio.oracle_splits import OracleSplitError, build_oracle_splits
+from forge.potency.oracle_splits import OracleSplitError, build_oracle_splits
 
 REPO = Path(__file__).resolve().parents[1]
 

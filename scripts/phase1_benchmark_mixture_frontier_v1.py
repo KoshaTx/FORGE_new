@@ -38,11 +38,15 @@ import numpy as np
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from forge.bio.reaction_factorized_surrogate import (  # noqa: E402
-    ReactionFactorizedSurrogate, RoleWeights,
+from forge.potency.reaction_factorized_surrogate import (  # noqa: E402
+    ReactionFactorizedSurrogate,
+    RoleWeights,
 )
-from forge.bio.synthesis_aware_acquisition import (  # noqa: E402
-    AcquisitionPolicy, apply_activity_floor, select_batch, select_mixture,
+from forge.potency.synthesis_aware_acquisition import (  # noqa: E402
+    AcquisitionPolicy,
+    apply_activity_floor,
+    select_batch,
+    select_mixture,
     select_uncertainty_mixture,
 )
 
@@ -107,8 +111,10 @@ def run_arm(arm: str, records, seed_indices, pool_indices, cfg, rng) -> dict[str
 
         pool, _ = apply_activity_floor(surrogate, full_pool, acq["activity_floor_quantile"])
         floored = AcquisitionPolicy(
-            batch_size=policy.batch_size, budget=policy.budget,
-            value_weight=policy.value_weight, activity_floor_quantile=0.0,
+            batch_size=policy.batch_size,
+            budget=policy.budget,
+            value_weight=policy.value_weight,
+            activity_floor_quantile=0.0,
             cost_normalised=policy.cost_normalised,
         )
 
@@ -171,8 +177,8 @@ def pareto_verdict(means: dict[str, tuple[float, float]]) -> dict[str, Any]:
         "consequence": (
             "Not dominated. The rule occupies a point no simple mixture reaches; a confirmatory "
             "study on fresh splits is required before any claim or second library."
-            if not dominators else
-            "Dominated by a simple mixture. Stop the acquisition workstream permanently: the "
+            if not dominators
+            else "Dominated by a simple mixture. Stop the acquisition workstream permanently: the "
             "rule adds nothing beyond combining existing policies. No Library 2, no "
             "reformulation, nothing in the paper."
         ),
@@ -183,7 +189,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--seeds", type=int, default=0)
     parser.add_argument(
-        "--output", type=Path,
+        "--output",
+        type=Path,
         default=REPO / "results/phase1/forge_mixture_frontier_v1/result.json",
     )
     args = parser.parse_args()
@@ -198,13 +205,12 @@ def main() -> None:
     print(f"loaded {len(records)} measured lipids (sha256 verified)")
 
     grid = cfg["arms"]["mixture_grid"]
-    arms = (
-        [f"mix_div_{a}" for a in grid]
-        + [f"mix_unc_{a}" for a in grid]
-        + ["reaction_factorized"]
+    arms = [f"mix_div_{a}" for a in grid] + [f"mix_unc_{a}" for a in grid] + ["reaction_factorized"]
+    seeds = (
+        cfg["fresh_randomisation"]["seeds"][: args.seeds]
+        if args.seeds
+        else cfg["fresh_randomisation"]["seeds"]
     )
-    seeds = cfg["fresh_randomisation"]["seeds"][: args.seeds] if args.seeds else \
-        cfg["fresh_randomisation"]["seeds"]
 
     started = time.time()
     results: dict[str, dict[str, Any]] = {}
@@ -220,7 +226,9 @@ def main() -> None:
             out = run_arm(arm, records, seed_idx, pool_idx, cfg, arm_rng)
             results[str(seed)][arm] = out
             f = out["final"]
-            print(f"  {arm:22s} rho={f['held_family_spearman']:6.3f}  hits={f['top_decile_hits_found']:3d}")
+            print(
+                f"  {arm:22s} rho={f['held_family_spearman']:6.3f}  hits={f['top_decile_hits_found']:3d}"
+            )
 
     means = {
         arm: (
@@ -258,7 +266,9 @@ def main() -> None:
     print(f"\ndominated: {verdict['dominated']}")
     if verdict["dominating_mixtures"]:
         for d in verdict["dominating_mixtures"]:
-            print(f"  dominated by {d['arm']}: rho {d['spearman']:.3f} >= , hits {d['hits']:.1f} >=")
+            print(
+                f"  dominated by {d['arm']}: rho {d['spearman']:.3f} >= , hits {d['hits']:.1f} >="
+            )
     print(verdict["consequence"])
     print(f"\nwrote {args.output.relative_to(REPO)}")
 

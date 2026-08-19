@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.ugi_morphology_proposal_strength_sweep import (
+from forge.potency.ugi_morphology_proposal_strength_sweep import (
     build_morphology_proposal_strength_sweep,
 )
 

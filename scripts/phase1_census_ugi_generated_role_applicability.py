@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_generated_role_applicability_census import (
+from forge.potency.ugi_generated_role_applicability_census import (
     build_generated_role_applicability_census,
 )
 

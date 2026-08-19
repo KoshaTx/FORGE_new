@@ -160,7 +160,7 @@ def main() -> None:
             f"\\texttt{{{esc(c['isocyanide_tail'])}}} \\\\")
     tex += [r"\end{longtable}", r"\endgroup", ""]
 
-    tex_path = REPO / "manuscript" / "generated_product_structures.tex"
+    tex_path = REPO / "paper" / "generated_product_structures.tex"
     tex_path.write_text("\n".join(tex) + "\n")
     print(f"wrote {tex_path.relative_to(REPO)}")
 

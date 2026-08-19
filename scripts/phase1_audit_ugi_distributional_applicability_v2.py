@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_distributional_applicability_v2 import (
+from forge.potency.ugi_distributional_applicability_v2 import (
     build_distributional_applicability_audit_v2,
 )
 

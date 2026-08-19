@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_applicability_recalibration import build_applicability_recalibration
+from forge.potency.ugi_applicability_recalibration import build_applicability_recalibration
 
 REPO = Path(__file__).resolve().parents[1]
 

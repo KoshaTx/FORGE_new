@@ -219,8 +219,9 @@ def panel_table(panel: dict) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path,
-                        default=REPO / "manuscript/generated_appendix_tables.tex")
+    parser.add_argument(
+        "--output", type=Path, default=REPO / "paper/generated_appendix_tables.tex"
+    )
     args = parser.parse_args()
 
     closure_path, panel_path = REPO / CLOSURE, REPO / PANEL

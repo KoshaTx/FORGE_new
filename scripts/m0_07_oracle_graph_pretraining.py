@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.bio.oracle_graph_pretraining import (
+from forge.potency.oracle_graph_pretraining import (
     OracleGraphPretrainingError,
     run_graph_pretraining,
 )

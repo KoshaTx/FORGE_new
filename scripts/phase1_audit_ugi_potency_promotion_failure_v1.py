@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.ugi_potency_promotion_failure_audit import (
+from forge.potency.ugi_potency_promotion_failure_audit import (
     audit_potency_promotion_failure,
 )
 

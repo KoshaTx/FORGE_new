@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.oracle_campaign_selection import run_campaign_selection
+from forge.potency.oracle_campaign_selection import run_campaign_selection
 
 
 def _arguments() -> argparse.Namespace:

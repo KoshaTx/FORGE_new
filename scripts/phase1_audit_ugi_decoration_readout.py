@@ -14,8 +14,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,

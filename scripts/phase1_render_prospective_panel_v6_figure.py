@@ -75,8 +75,9 @@ def render(smiles: str, px: int, py: int) -> bytes | None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=REPO_DEFAULT)
-    parser.add_argument("--output", type=Path,
-                        default=Path("manuscript/figures/panel_v6/panel_40_structures.png"))
+    parser.add_argument(
+        "--output", type=Path, default=Path("paper/figures/panel_v6/panel_40_structures.png")
+    )
     parser.add_argument("--columns", type=int, default=3)
     parser.add_argument("--per-page", type=int, default=12,
                         help="structures per page; forty cannot be legible on one page")

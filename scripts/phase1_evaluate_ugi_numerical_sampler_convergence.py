@@ -14,8 +14,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_terminal_decoder_challenger import (
     TAIL_ROLES,
     summarize_terminal_decoder_arm,

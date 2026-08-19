@@ -12,8 +12,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_joint_sparse_training import _training_weights
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 from forge.product.ugi_training_cache import load_ugi_training_cache

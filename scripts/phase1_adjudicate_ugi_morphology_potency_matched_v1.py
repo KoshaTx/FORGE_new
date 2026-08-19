@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_morphology_potency_matched_adjudication import (
+from forge.potency.ugi_morphology_potency_matched_adjudication import (
     build_matched_potency_adjudication,
 )
 

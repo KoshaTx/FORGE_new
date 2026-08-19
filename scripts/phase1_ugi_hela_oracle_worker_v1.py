@@ -64,7 +64,7 @@ def _serve(repo: Path, result_path: Path, expected_result_sha256: str) -> None:
     import torch
     from rdkit import rdBase
 
-    from forge.bio.oracle_production import (
+    from forge.potency.oracle_production import (
         classify_production_ugi_candidate,
         load_production_checkpoint,
         predict_production_ugi_smiles,

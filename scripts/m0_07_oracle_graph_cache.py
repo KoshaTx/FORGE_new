@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.bio.oracle_graph_cache import (
+from forge.potency.oracle_graph_cache import (
     OracleGraphCacheError,
     build_oracle_graph_cache,
 )

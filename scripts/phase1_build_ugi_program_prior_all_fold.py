@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_morphology_corpus import source_stratified_family_weights
 from forge.product.ugi_program_prior import (

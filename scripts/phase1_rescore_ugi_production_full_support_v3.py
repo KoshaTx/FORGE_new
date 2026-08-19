@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.ugi_production_full_support_rescoring_v3 import (
+from forge.potency.ugi_production_full_support_rescoring_v3 import (
     build_full_support_rescoring_v3,
 )
 

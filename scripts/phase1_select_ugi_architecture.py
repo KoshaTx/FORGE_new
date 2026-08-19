@@ -21,7 +21,7 @@ import torch
 from rdkit import Chem, rdBase
 from rdkit.Chem import Crippen, Descriptors, Lipinski
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_component_expansion import reaction_handle_qualification
 from forge.product.ugi_held_component_gate import (
     _canonical_molecule,

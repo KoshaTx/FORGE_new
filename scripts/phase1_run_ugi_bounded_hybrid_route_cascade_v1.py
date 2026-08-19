@@ -30,7 +30,7 @@ REPO_DEFAULT = Path(__file__).resolve().parents[1]
 if str(REPO_DEFAULT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "src"))
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
 from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     ADJUDICATION_SCHEMA_VERSION,
     ATTRITION_CSV_FIELDS,

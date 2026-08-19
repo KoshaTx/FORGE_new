@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_interpolative_conformal import build_interpolative_conformal_audit
+from forge.potency.ugi_interpolative_conformal import build_interpolative_conformal_audit
 
 
 def main() -> None:

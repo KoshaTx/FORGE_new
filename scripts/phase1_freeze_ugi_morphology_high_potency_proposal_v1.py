@@ -8,7 +8,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_morphology_high_potency_proposal import build_high_potency_proposal
+from forge.potency.ugi_morphology_high_potency_proposal import build_high_potency_proposal
 
 REPO = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = REPO / "configs/bio/phase1_ugi_morphology_high_potency_proposal_v1.json"

@@ -35,12 +35,19 @@ import numpy as np
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from forge.bio.reaction_factorized_surrogate import (  # noqa: E402
-    ReactionFactorizedSurrogate, RoleWeights,
+from forge.potency.reaction_factorized_surrogate import (  # noqa: E402
+    ReactionFactorizedSurrogate,
+    RoleWeights,
 )
-from forge.bio.synthesis_aware_acquisition import (  # noqa: E402
-    AcquisitionPolicy, Candidate, apply_activity_floor, select_batch,
-    select_component_diversity, select_random, select_top_lower_bound, select_top_mean,
+from forge.potency.synthesis_aware_acquisition import (  # noqa: E402
+    AcquisitionPolicy,
+    Candidate,
+    apply_activity_floor,
+    select_batch,
+    select_component_diversity,
+    select_random,
+    select_top_lower_bound,
+    select_top_mean,
     select_uncertainty,
 )
 
@@ -89,7 +96,10 @@ def load_measured(path: Path) -> list[Candidate]:
 
 
 def family_aware_split(
-    records: list[tuple[Candidate, float]], held_role: str, seed_fraction: float, rng: np.random.Generator
+    records: list[tuple[Candidate, float]],
+    held_role: str,
+    seed_fraction: float,
+    rng: np.random.Generator,
 ) -> tuple[list[int], list[int]]:
     """Seed and pool indices split so a held role identity never spans both.
 
@@ -268,7 +278,9 @@ def _metric_key(criterion: str, available: Sequence[str]) -> str:
     )
 
 
-def evaluate_gate(results: dict[int, dict[str, dict[str, Any]]], config: dict[str, Any]) -> dict[str, Any]:
+def evaluate_gate(
+    results: dict[int, dict[str, dict[str, Any]]], config: dict[str, Any]
+) -> dict[str, Any]:
     gate = config["gate"]
     any_final = next(iter(next(iter(results.values())).values()))["final"]
     primary = _metric_key(gate["primary_criterion"], list(any_final))
@@ -280,7 +292,9 @@ def evaluate_gate(results: dict[int, dict[str, dict[str, Any]]], config: dict[st
         method = arms["reaction_factorized"]["final"][primary]
         rivals = {name: arms[name]["final"][primary] for name in gate["must_beat"]}
         if not np.isfinite(method) or not all(np.isfinite(v) for v in rivals.values()):
-            raise SystemExit(f"seed {seed}: gate metric {primary!r} is not finite; refusing to rule")
+            raise SystemExit(
+                f"seed {seed}: gate metric {primary!r} is not finite; refusing to rule"
+            )
         beat = all(method >= value + margin for value in rivals.values())
         wins.append(beat)
         detail.append(
@@ -318,7 +332,8 @@ def main() -> None:
     parser.add_argument("--seeds", type=int, default=0, help="limit the number of frozen seeds")
     parser.add_argument("--rounds", type=int, default=0, help="override rounds (smoke runs only)")
     parser.add_argument(
-        "--output", type=Path,
+        "--output",
+        type=Path,
         default=REPO / "results/phase1/forge_active_design_benchmark_v1/result.json",
     )
     args = parser.parse_args()
@@ -347,8 +362,10 @@ def main() -> None:
         seed_idx, pool_idx = family_aware_split(
             records, bench["held_role"], bench["seed_fraction"], rng
         )
-        print(f"\nseed {seed}: {len(seed_idx)} seed / {len(pool_idx)} pool "
-              f"(held role: {bench['held_role']})")
+        print(
+            f"\nseed {seed}: {len(seed_idx)} seed / {len(pool_idx)} pool "
+            f"(held role: {bench['held_role']})"
+        )
         results[seed] = {}
         for arm in bench["arms"]:
             # zlib.crc32, not the builtin hash: str hashing is salted per process, so
@@ -358,10 +375,12 @@ def main() -> None:
             outcome = run_arm(arm, records, seed_idx, pool_idx, config, arm_rng)
             results[seed][arm] = outcome
             final = outcome["final"]
-            print(f"  {arm:22s} rho={final.get('held_family_spearman', float('nan')):.3f}  "
-                  f"best={final.get('best_activity_found', float('nan')):.2f}  "
-                  f"hits={final.get('top_decile_hits_found', 0)}  "
-                  f"cov90={final.get('coverage90', float('nan')):.3f}")
+            print(
+                f"  {arm:22s} rho={final.get('held_family_spearman', float('nan')):.3f}  "
+                f"best={final.get('best_activity_found', float('nan')):.2f}  "
+                f"hits={final.get('top_decile_hits_found', 0)}  "
+                f"cov90={final.get('coverage90', float('nan')):.3f}"
+            )
 
     gate = evaluate_gate(results, config)
     payload = {
@@ -376,15 +395,19 @@ def main() -> None:
             "numpy": np.__version__,
         },
         "seeds": seeds,
-        "results": {str(seed): {arm: results[seed][arm] for arm in results[seed]} for seed in results},
+        "results": {
+            str(seed): {arm: results[seed][arm] for arm in results[seed]} for seed in results
+        },
         "gate": gate,
         "nonclaims": config["nonclaims"],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=1, sort_keys=True))
 
-    print(f"\n=== gate: {'PASSED' if gate['passed'] else 'FAILED'} "
-          f"({gate['seeds_won']}/{len(seeds)} seeds, {gate['seeds_required']} required) ===")
+    print(
+        f"\n=== gate: {'PASSED' if gate['passed'] else 'FAILED'} "
+        f"({gate['seeds_won']}/{len(seeds)} seeds, {gate['seeds_required']} required) ==="
+    )
     print(gate["consequence"])
     print(f"\nwrote {args.output.relative_to(REPO)}")
 

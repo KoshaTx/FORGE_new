@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_potency_novelty_lane_audit import build_potency_novelty_lane_audit
+from forge.potency.ugi_potency_novelty_lane_audit import build_potency_novelty_lane_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

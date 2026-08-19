@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_dynamic_controller_analysis import build_dynamic_controller_analysis
+from forge.potency.ugi_dynamic_controller_analysis import build_dynamic_controller_analysis
 
 REPO = Path(__file__).resolve().parents[1]
 

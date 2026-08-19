@@ -18,7 +18,7 @@ import numpy as np
 import torch
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_candidate_eligibility import (
     compile_smarts,
     declared_support_violations,

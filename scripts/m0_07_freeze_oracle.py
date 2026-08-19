@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.bio.oracle_freeze import freeze_oracle
+from forge.potency.oracle_freeze import freeze_oracle
 
 
 def _arguments() -> argparse.Namespace:

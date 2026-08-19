@@ -113,8 +113,7 @@ def breakable_texttt(tex: str) -> tuple[str, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path,
-                        default=REPO / "manuscript/generated_supplement.tex")
+    parser.add_argument("--output", type=Path, default=REPO / "paper/generated_supplement.tex")
     args = parser.parse_args()
 
     module = load_generator(REPO)

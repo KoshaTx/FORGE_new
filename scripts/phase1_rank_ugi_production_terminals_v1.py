@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.bio.ugi_production_terminal_ranking import build_production_terminal_ranking
+from forge.potency.ugi_production_terminal_ranking import build_production_terminal_ranking
 
 REPO = Path(__file__).resolve().parents[1]
 
