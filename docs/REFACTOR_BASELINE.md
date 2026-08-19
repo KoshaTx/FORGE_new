@@ -105,13 +105,55 @@ artifact they expect is absent or is a different vintage. Concentrated in
 `test_single_step_benchmark_manifest.py` — all reading inputs that arrived only in the recent
 handoff sync, so several are likely stale expectations rather than real defects.
 
-Two consequences for the restructuring:
+### What the 188 failures actually are — investigated
 
-1. **Treat every one of these as inherited.** Do not fix a pre-existing failure inside a refactor
-   commit; fix it separately, so a genuine regression is never hidden among them. The check that
-   matters per phase is "no *new* failures", which means diffing the failing set, not the count.
-2. **Investigating the 188 is its own task**, worth doing before Phase 1 migration touches these
-   modules — a test that already fails cannot tell you whether your refactor broke something.
+All of them are **missing inputs. Not one is a code defect or a stale expectation.**
+
+The 74 failing modules were re-run in isolation and reproduce the baseline exactly (188 failed,
+21 error), so the result is deterministic. Every filesystem path named in a failure was then checked:
+**59 distinct paths, 59 of them absent, none present.** The causes break down as:
+
+| Signature | Count | What it actually means |
+|---|---|---|
+| `FileNotFoundError` / `required input not found` | 353 | the artifact is not on this machine |
+| `AssertionError` | 35 | see below — all downstream of the same thing |
+| `hash changed` / `pin changed` / `hash mismatch` | 30 | the file is absent, not altered |
+| domain errors (`L2ForwardResolverError`, …) | ~64 | wrapped "artifact is missing" |
+
+**The failure signatures are misleading and worth knowing about**, because three of them read like
+real defects and are not:
+
+- `AssertionError: Regex pattern did not match` — the test expects
+  `artifact <x> SHA-256 mismatch` and gets `artifact <x> is missing or leaves the repository`. It is
+  asserting that a *corrupted* pin fails closed; it cannot get that far because the file is absent.
+- `AssertionError: assert False` — every instance is `assert path.is_file()`.
+- `hash changed` — no artifact on disk has actually drifted. `make verify-pins` is green across all
+  508 pins, so these are absent files reported through a hash-comparison code path.
+- `KeyError: 'hash_matches'` — the one exception type suggesting a logic bug. It is
+  `test_m0_10_flower_transfer_audit`, which re-runs an audit that hashes three files in
+  `../electron_flow_lipids/`, **a sibling repository that does not exist on this machine**. The audit
+  emits rows without `hash_matches` when its probes are absent.
+
+### This corrects the recovery gap
+
+**45 of the 59 were not in the pin-derived missing list.** An artifact only appears in that analysis
+if some *surviving* artifact declares it as an input, so anything whose only consumer is a test was
+invisible to it. The suite is the better detector: it exercises consumers the pin graph cannot see.
+
+The full list is in `docs/missing_test_inputs.txt`. It includes a dependency worth flagging
+separately — `../electron_flow_lipids/` is an entire sibling project, not a file, and no part of it
+is present.
+
+### Consequences for the restructuring
+
+1. **These failures are inherited and safe to refactor past.** Since none is a defect, a module can be
+   migrated onto `forge.core` without first fixing its test — but the test cannot confirm the
+   migration either. For those 74 modules, `verify-pins` and review are the only checks that mean
+   anything until their inputs are recovered.
+2. **Check "no new failures" as a subset diff** against `tests/baseline_failures.txt`, never as a
+   count. A migration that breaks something while an unrelated artifact arrives would net to zero.
+3. **Recovering these 59 inputs is worth more than it looked.** It would turn roughly 209 tests green
+   and restore real coverage over exactly the route, corpus and guidance code the later phases touch.
 
 Reproduce with:
 

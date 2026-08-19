@@ -1,0 +1,69 @@
+# Inputs the test suite needs and this machine does not have.
+#
+# Derived 2026-08-18 by running the 74 failing test modules and collecting every filesystem path
+# named in a failure. All 209 failures (188 F + 21 E) trace to one of these being absent; none is
+# a code defect. Recovering these files is what turns the suite green.
+#
+# Worth noting: 45 of these were NOT in the pin-derived recovery gap. An artifact only appears in
+# that gap if some SURVIVING artifact declares it as an input, so anything whose only consumer is
+# a test was invisible to it. The test suite is the better detector of what is missing.
+#
+data/r1_prime_audit.py
+data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf
+data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html
+results/m0_07/oracle_graph_tensor_cache.npz
+results/phase1/r0_lipid_morphology_audit.json
+results/phase1/single_step_proposal_lane_qualification_benchmark_v1/lane_targets.json.gz
+results/phase1/synthesis_source_supersession_audit_v1/result.json
+results/phase1/synthesis_value_source_qualification_v1/result.json
+results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz
+results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz
+results/phase1/ugi3_exact_c18_route_v1/result.json
+results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz
+results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz
+results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz
+results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz
+results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json
+results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz
+results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json
+results/phase1/ugi3_fresh_pool_route_priority_v4/result.json
+results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz
+results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json
+results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz
+results/phase1/ugi3_graded_family_evidence_audit_v1/result.json
+results/phase1/ugi3_high_leverage_head_terminal_audit_v1/product_impact_ledger.csv.gz
+results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json
+results/phase1/ugi3_l2_coverage_priority_audit_v1/component_priority_ledger.csv.gz
+results/phase1/ugi3_route_saturation_holdout_v1/seal.json
+results/phase1/ugi3_second_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz
+results/phase1/ugi3_synthesis_value_audit_v1/result.json
+results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/product_closure_impact_ledger.csv.gz
+results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json
+results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz
+results/phase1/ugi3_targeted_exact_overlay_diagnostic_v1/result.json
+results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/product_impact_ledger.csv.gz
+results/phase1/ugi_architecture_selection_v3/full_step1000/result.json
+results/phase1/ugi_closure_expanded_full/checkpoint_best.pt
+results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json
+results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json
+results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json
+results/phase1/ugi_decoration_coupling_production_refit_v1/result.json
+results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt
+results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz
+results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json
+results/phase1/ugi_l1_semantics/ugi_l1_semantic_products.csv.gz
+results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json
+results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json
+results/phase1/ugi_morphology_potency_matched_v1/result.json
+results/phase1/ugi_nonzero_guidance_runner_v1/plan.json
+results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz
+results/phase1/ugi_product_l1_postselection_held_component_stress_v1.json
+results/phase1/ugi_product_l1_production_generator_v1.json
+results/phase1/ugi_product_l1_production_generator_v2.json
+results/phase1/ugi_product_l1_production_generator_v3.json
+results/phase1/ugi_production_candidate_schedule_v2/schedule.json
+results/phase1/ugi_production_zero_guidance_rehearsal_v1/composer_result.json
+results/phase1/ugi_production_zero_guidance_seam_v2/run.json
+results/phase1/ugi_program_prior_v2.json
+results/phase1/ugi_restartable_sampler_equivalence_v2/result.json
+results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json
