@@ -31,6 +31,7 @@ from forge.core.io import (
     write_json,
     write_jsonl,
 )
+from forge.core.records import ArtifactRef, PinnedInput, RecordError, is_pin
 from forge.core.types import (
     ComponentId,
     EvidenceStatus,
@@ -43,10 +44,13 @@ from forge.core.types import (
 
 __all__ = [
     "ArtifactError",
+    "ArtifactRef",
     "ArtifactRun",
     "ComponentId",
     "EvidenceStatus",
     "PinError",
+    "PinnedInput",
+    "RecordError",
     "ProductId",
     "RoleName",
     "Sha256",
@@ -54,6 +58,7 @@ __all__ = [
     "SupportTier",
     "artifact_run",
     "atomic_write",
+    "is_pin",
     "pin_record",
     "read_csv",
     "read_json",
