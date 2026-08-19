@@ -182,50 +182,6 @@ def _command_paper_bundle(args: argparse.Namespace) -> int:
     return 0
 
 
-def _command_maintenance_survey(args: argparse.Namespace) -> int:
-    from forge.maintenance import survey_code
-
-    repo = _repo()
-    output = Path(args.output) if args.output else None
-    if output is not None and not output.is_absolute():
-        output = repo / output
-    result = survey_code(repo, _paper_contract(repo, args.contract), output=output)
-    _print(result)
-    return 0 if result["safe_for_automated_deletion"] else 2
-
-
-def _command_maintenance_test_report(args: argparse.Namespace) -> int:
-    from forge.maintenance import build_test_baseline_report
-
-    repo = _repo()
-
-    def path(value: str) -> Path:
-        candidate = Path(value)
-        return candidate if candidate.is_absolute() else repo / candidate
-
-    output = path(args.output) if args.output else None
-    observed_output = (
-        path(args.observed_output)
-        if args.observed_output
-        else (
-            output.with_name("observed_failures.json")
-            if output
-            else repo / "build/observed_failures.json"
-        )
-    )
-    result = build_test_baseline_report(
-        repo,
-        baseline_path=path(args.baseline),
-        missing_inputs_path=path(args.missing_inputs),
-        lastfailed_path=path(args.lastfailed),
-        collected_path=path(args.collected),
-        observed_output=observed_output,
-        output=output,
-    )
-    _print(result)
-    return 0 if result["no_new_failures"] else 1
-
-
 def _command_experiment_list(_: argparse.Namespace) -> int:
     repo = _repo()
     rows = []
@@ -421,20 +377,10 @@ def build_parser() -> argparse.ArgumentParser:
             command.add_argument("--no-compile-check", action="store_true")
         command.set_defaults(function=function)
 
-    maintenance = subcommands.add_parser("maintenance", help="survey removable legacy code")
-    maintenance_commands = maintenance.add_subparsers(dest="maintenance_command", required=True)
-    survey = maintenance_commands.add_parser("survey")
-    survey.add_argument("--contract")
-    survey.add_argument("--output")
-    survey.set_defaults(function=_command_maintenance_survey)
-    test_report = maintenance_commands.add_parser("test-report")
-    test_report.add_argument("--baseline", default="tests/baseline_failures.txt")
-    test_report.add_argument("--missing-inputs", default="docs/missing_test_inputs.txt")
-    test_report.add_argument("--lastfailed", default=".pytest_cache/v/cache/lastfailed")
-    test_report.add_argument("--collected", default=".pytest_cache/v/cache/nodeids")
-    test_report.add_argument("--observed-output")
-    test_report.add_argument("--output")
-    test_report.set_defaults(function=_command_maintenance_test_report)
+    # Repository maintenance is deliberately absent from this CLI. `survey` and `test-report`
+    # classify this repository's own files, which is not part of the installed package's surface;
+    # they live in `tools/forge_maintenance` and run via `make code-survey` / `make
+    # test-baseline-report`.
 
     experiment = subcommands.add_parser("experiment", help="plan and execute experiment DAGs")
     experiment_commands = experiment.add_subparsers(dest="experiment_command", required=True)

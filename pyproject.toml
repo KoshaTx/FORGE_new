@@ -62,6 +62,14 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 
 [[tool.mypy.overrides]]
+# Repository tooling outside the installed package.
+module = ["forge_maintenance.*"]
+disallow_untyped_defs = true
+disallow_any_generics = true
+strict_equality = true
+warn_return_any = true
+
+[[tool.mypy.overrides]]
 # New code is held to the standard the rest is moving toward. Everything in forge.core is written
 # after this config exists, so there is no legacy to grandfather.
 module = [
@@ -70,7 +78,6 @@ module = [
     "forge.corpus.*",
     "forge.experiment.*",
     "forge.generate.*",
-    "forge.maintenance.*",
     "forge.paper.*",
     "forge.provenance.*",
 ]
@@ -80,6 +87,9 @@ strict_equality = true
 warn_return_any = true
 
 [tool.pytest.ini_options]
+# `tools/` holds repository maintenance code kept out of the installed package; tests still
+# import it, so it has to be on the path.
+pythonpath = ["tools"]
 testpaths = ["tests"]
 addopts = "-q"
 markers = [

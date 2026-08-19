@@ -63,7 +63,7 @@ def test_overleaf_bundle_is_byte_reproducible_and_minimal(tmp_path: Path) -> Non
     assert not any(member.endswith((".aux", ".log", ".pdf")) for member in members)
 
 
-def test_cli_exposes_supported_data_provenance_paper_and_survey_commands() -> None:
+def test_cli_exposes_supported_data_provenance_and_paper_commands() -> None:
     parser = build_parser()
     for argv in (
         ["data", "verify"],
@@ -72,7 +72,17 @@ def test_cli_exposes_supported_data_provenance_paper_and_survey_commands() -> No
         ["paper", "reproduce"],
         ["paper", "build"],
         ["paper", "bundle"],
-        ["maintenance", "survey"],
-        ["maintenance", "test-report"],
     ):
         assert parser.parse_args(argv).function is not None
+
+
+def test_cli_does_not_expose_repository_maintenance() -> None:
+    """Repository bookkeeping is not part of the installed package's command surface.
+
+    `survey` classifies this repository's own files and `test-report` reads its pytest cache;
+    neither means anything to someone who installed the package. They live in
+    `tools/forge_maintenance`, outside `src/`, and run through `make code-survey` and
+    `make test-baseline-report`.
+    """
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(["maintenance", "survey"])

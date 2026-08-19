@@ -210,11 +210,7 @@ def survey_code(
         if row["path"].startswith(("results/", "configs/", "data/"))
     }
     paper_roots = set(contract.numerical_entrypoints)
-    paper_roots.update(
-        row["path"]
-        for row in evidence["rows"]
-        if row["path"] in candidates
-    )
+    paper_roots.update(row["path"] for row in evidence["rows"] if row["path"] in candidates)
     # Older evidence builders did not always pin their own source. A script that names an artifact
     # in the recursive paper closure is therefore also a producer/consumer root. This closes the
     # gap without treating every historical script as live.
@@ -232,10 +228,17 @@ def survey_code(
             paper_roots.add(relative)
     for producer in contract.publication_producers:
         paper_roots.update(
-            item for item in producer.command if item in candidates and item.endswith((".py", ".sh"))
+            item
+            for item in producer.command
+            if item in candidates and item.endswith((".py", ".sh"))
         )
     paper_roots.update(
-        {"src/forge/paper/__init__.py", "src/forge/paper/build.py", "src/forge/paper/contract.py", "src/forge/paper/verification.py"}
+        {
+            "src/forge/paper/__init__.py",
+            "src/forge/paper/build.py",
+            "src/forge/paper/contract.py",
+            "src/forge/paper/verification.py",
+        }
     )
     cli_reachable = _closure(cli_roots & candidates, graph)
     paper_reachable = _closure(paper_roots & candidates, graph)

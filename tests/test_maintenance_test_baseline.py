@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.maintenance import build_test_baseline_report
+from forge_maintenance import build_test_baseline_report
 
 
 def _write(path: Path, value: object) -> Path:

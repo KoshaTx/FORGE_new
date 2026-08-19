@@ -179,12 +179,13 @@ phase1-sampling-reproduce:
 typecheck:
 	python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/corpus src/forge/generate src/forge/experiment \
-		src/forge/maintenance src/forge/paper src/forge/provenance src/forge/cli.py
+		src/forge/paper src/forge/provenance src/forge/cli.py
+	MYPYPATH=tools python3 -m mypy tools/forge_maintenance
 
 check-core: verify-pins typecheck
 	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/potency src/forge/corpus src/forge/generate \
-		src/forge/experiment src/forge/maintenance \
+		src/forge/experiment \
 		src/forge/paper src/forge/provenance src/forge/cli.py \
 		src/forge/data/vendor.py src/forge/experiment/modal_app.py \
 		src/forge/provenance tests/test_architecture_boundaries.py \
@@ -402,11 +403,11 @@ paper-bundle:
 	python3 -m forge.cli paper bundle
 
 code-survey:
-	python3 -m forge.cli maintenance survey \
+	PYTHONPATH=tools python3 -m forge_maintenance survey \
 		--output provenance/code-retirement/iclr2027.json
 
 test-baseline-report:
-	python3 -m forge.cli maintenance test-report \
+	PYTHONPATH=tools python3 -m forge_maintenance test-report \
 		--output results/maintenance/bio_to_potency_migration_v1/test_baseline.json
 
 test:
