@@ -16,7 +16,7 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import Draw
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.product.ugi_chemistry_flow import (
@@ -688,6 +688,8 @@ def sample_ugi_joint_end_to_end(
     program_offset: int = 0,
     program_limit: int | None = None,
     reference_comparison_mode: str = "full",
+    render: bool = True,
+    record_timing: bool = True,
 ) -> dict[str, Any]:
     """Generate on the exact same global programs used by the staged probe."""
 
@@ -814,7 +816,7 @@ def sample_ugi_joint_end_to_end(
         terminals,
         corpus.atom_vocabulary,
     )
-    sampling_seconds = time.perf_counter() - start
+    sampling_seconds = time.perf_counter() - start if record_timing else None
     render_path = output_dir / "samples.png"
     rendered_molecules = 0
     result = {
@@ -866,7 +868,7 @@ def sample_ugi_joint_end_to_end(
     # Persist the scientifically complete molecule ledger before optional
     # rendering and the expensive many-to-many frozen-reference comparison.
     _atomic_json(result_path, result)
-    if molecules:
+    if molecules and render:
         rendered_molecules = min(len(molecules), 60)
         image = Draw.MolsToGridImage(
             molecules[:rendered_molecules],
@@ -877,7 +879,9 @@ def sample_ugi_joint_end_to_end(
         image.save(render_path)
         result["render"] = str(render_path)
         result["rendered_molecules"] = rendered_molecules
-        result["sampling"]["total_seconds"] = time.perf_counter() - start
+        result["sampling"]["total_seconds"] = (
+            time.perf_counter() - start if record_timing else None
+        )
         _atomic_json(result_path, result)
     result = _complete_reference_comparison(
         result,
@@ -885,6 +889,6 @@ def sample_ugi_joint_end_to_end(
         reference_corpus=reference_corpus,
         mode=reference_comparison_mode,
     )
-    result["sampling"]["total_seconds"] = time.perf_counter() - start
+    result["sampling"]["total_seconds"] = time.perf_counter() - start if record_timing else None
     _atomic_json(result_path, result)
     return result

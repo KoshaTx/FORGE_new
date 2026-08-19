@@ -11,7 +11,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.adapter_node_conditioning import AdapterNodeConditioning
 from forge.product.defog_feasibility import AtomState, _rstar_step
 from forge.product.phase1_flow import DeterministicSparseFlowBlock

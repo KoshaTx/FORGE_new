@@ -20,8 +20,8 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.product.ugi_chemistry_flow import (
     chemistry_sample_statistics,

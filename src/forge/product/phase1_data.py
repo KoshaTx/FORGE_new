@@ -475,7 +475,7 @@ def _build_assignments(
     return assignments
 
 
-def _relative_output(repo: Path, configured: str) -> Path:
+def _relative_output(repo: Path, configured: str | Path) -> Path:
     path = Path(configured)
     return path if path.is_absolute() else repo / path
 
@@ -487,8 +487,20 @@ def _display_path(path: Path, repo: Path) -> str:
         return str(path)
 
 
-def freeze_phase1_data_contract(config_path: Path, repo: Path) -> dict[str, Any]:
-    """Validate inputs, freeze component holdouts, and write the Phase 1 manifest."""
+def freeze_phase1_data_contract(
+    config_path: Path,
+    repo: Path,
+    *,
+    output_paths: Mapping[str, str | Path] | None = None,
+    output_display_root: Path | None = None,
+) -> dict[str, Any]:
+    """Validate inputs, freeze component holdouts, and write the Phase 1 manifest.
+
+    ``output_paths`` lets the experiment runner isolate writes in its private staging directory.
+    Omitting it preserves the original CLI behavior and configured artifact locations exactly.
+    ``output_display_root`` controls only the stable paths recorded inside produced artifacts; it
+    never changes where bytes are written.
+    """
 
     config = _load_json(config_path, "Phase 1 data config")
     _validate_config(config)
@@ -614,22 +626,26 @@ def freeze_phase1_data_contract(config_path: Path, repo: Path) -> dict[str, Any]
             f"observed {primary_product_fold_counts}"
         )
 
-    assignment_payload = _csv_bytes(assignments)
+    assignment_payload = _csv_bytes(assignments, ASSIGNMENT_FIELDS)
     provenance_payload = _csv_bytes(provenance_rows, PROVENANCE_FIELDS)
-    outputs = config["outputs"]
+    outputs = dict(config["outputs"] if output_paths is None else output_paths)
+    expected_output_names = {"ugi_assignments", "ugi_provenance", "manifest", "result"}
+    if set(outputs) != expected_output_names:
+        raise Phase1DataError(f"output paths must define {sorted(expected_output_names)}")
     assignment_path = _relative_output(repo, outputs["ugi_assignments"])
     provenance_path = _relative_output(repo, outputs["ugi_provenance"])
     manifest_path = _relative_output(repo, outputs["manifest"])
     result_path = _relative_output(repo, outputs["result"])
+    display_root = output_display_root or repo
     assignment_record = {
-        "path": _display_path(assignment_path, repo),
+        "path": _display_path(assignment_path, display_root),
         "bytes": len(assignment_payload),
         "sha256": sha256_bytes(assignment_payload),
         "rows": len(assignments),
         "columns": list(ASSIGNMENT_FIELDS),
     }
     provenance_record = {
-        "path": _display_path(provenance_path, repo),
+        "path": _display_path(provenance_path, display_root),
         "bytes": len(provenance_payload),
         "sha256": sha256_bytes(provenance_payload),
         "rows": len(provenance_rows),
@@ -682,7 +698,7 @@ def freeze_phase1_data_contract(config_path: Path, repo: Path) -> dict[str, Any]
         json.dumps(manifest, indent=2, sort_keys=True, separators=(",", ": ")) + "\n"
     ).encode()
     manifest_record = {
-        "path": _display_path(manifest_path, repo),
+        "path": _display_path(manifest_path, display_root),
         "bytes": len(manifest_payload),
         "sha256": sha256_bytes(manifest_payload),
     }

@@ -9,14 +9,13 @@ shared sequence model.  Component identifiers and route labels are excluded.
 from __future__ import annotations
 
 import hashlib
-
 from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import _rstar_step
 from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.product.ugi_chemistry_corpus import UgiChemistryRecord
@@ -199,9 +198,9 @@ def project_joint_sparse_record(record: UgiChemistryRecord) -> UgiJointSparseRec
 
 # "none" is retained as an alias of flat_no_role so earlier callers keep working.
 SEMANTIC_ORGANIZATIONS = (
-    "role_structured",   # production: role-blocked layout plus the role map
-    "flat_no_role",      # flat layout, constant null tag, full embedding machinery retained
-    "flat_true_role",    # flat layout plus the true role map
+    "role_structured",  # production: role-blocked layout plus the role map
+    "flat_no_role",  # flat layout, constant null tag, full embedding machinery retained
+    "flat_true_role",  # flat layout plus the true role map
     "flat_misaligned_role",  # flat layout, labels permuted across nodes at matched counts
     "none",
 )
@@ -212,8 +211,7 @@ NULL_ROLE_INDEX = len(ROLE_NAMES)
 def _validated_semantic_organization(value: str) -> str:
     if value not in SEMANTIC_ORGANIZATIONS:
         raise UgiJointSparseFlowError(
-            f"unsupported semantic_organization {value!r}; expected one of "
-            f"{SEMANTIC_ORGANIZATIONS}"
+            f"unsupported semantic_organization {value!r}; expected one of {SEMANTIC_ORGANIZATIONS}"
         )
     return value
 
@@ -246,6 +244,7 @@ def flat_subtree_permutation(record: UgiJointSparseRecord) -> np.ndarray:
         raise UgiJointSparseFlowError("flat layout found the wrong number of exterior roots")
     bounds = roots + [int(record.offspring.size)]
     spans = [(bounds[i], bounds[i + 1]) for i in range(len(roots))]
+
     def content_key(span: tuple[int, int]) -> tuple:
         start, end = span
         return (
@@ -260,10 +259,12 @@ def flat_subtree_permutation(record: UgiJointSparseRecord) -> np.ndarray:
 
 
 def _true_role_of_position(record: UgiJointSparseRecord) -> np.ndarray:
-    return np.concatenate([
-        np.full(count, index, dtype=np.int64)
-        for index, count in enumerate(record.program.node_counts)
-    ])
+    return np.concatenate(
+        [
+            np.full(count, index, dtype=np.int64)
+            for index, count in enumerate(record.program.node_counts)
+        ]
+    )
 
 
 def collate_ugi_joint_sparse_records(
@@ -316,12 +317,17 @@ def collate_ugi_joint_sparse_records(
             record_offspring = record.offspring[permutation]
             record_atoms = record.atom_states[permutation]
             record_bonds = record.parent_bond_states[permutation]
-            record_left = (inverse[record.closure_left] if record.closure_left.size
-                           else record.closure_left)
-            record_right = (inverse[record.closure_right] if record.closure_right.size
-                            else record.closure_right)
-            record_anchors = (inverse[record.decoration_anchors]
-                              if record.decoration_anchors.size else record.decoration_anchors)
+            record_left = (
+                inverse[record.closure_left] if record.closure_left.size else record.closure_left
+            )
+            record_right = (
+                inverse[record.closure_right] if record.closure_right.size else record.closure_right
+            )
+            record_anchors = (
+                inverse[record.decoration_anchors]
+                if record.decoration_anchors.size
+                else record.decoration_anchors
+            )
             # Absolute sequence position, and the true role kept for analysis only.
             batch["within_role_positions"][index, :count] = torch.arange(count)
             true_roles = _true_role_of_position(record)[permutation]
@@ -352,9 +358,7 @@ def collate_ugi_joint_sparse_records(
         closure_right[index, :closure_count] = torch.from_numpy(record_right.copy())
         closure_bonds[index, :closure_count] = torch.from_numpy(record.closure_bond_states.copy())
         decoration_count = record.decoration_anchors.size
-        decoration_anchors[index, :decoration_count] = (
-            torch.from_numpy(record_anchors.copy()) + 1
-        )
+        decoration_anchors[index, :decoration_count] = torch.from_numpy(record_anchors.copy()) + 1
         decoration_atoms[index, :decoration_count] = torch.from_numpy(
             record.decoration_atom_states.copy()
         )
@@ -459,12 +463,16 @@ if nn is not None:
             # The flat arm receives the identical twelve-element program, consumed by one MLP
             # instead of role-indexed tables, so the information is matched but not the structure.
             self.program_projection = (
-                nn.Sequential(nn.Linear(12, hidden_dim), nn.GELU(),
-                              nn.Linear(hidden_dim, hidden_dim))
-                if flat else None
+                nn.Sequential(
+                    nn.Linear(12, hidden_dim), nn.GELU(), nn.Linear(hidden_dim, hidden_dim)
+                )
+                if flat
+                else None
             )
             self.count_embeddings = (
-                None if flat else nn.ModuleList(
+                None
+                if flat
+                else nn.ModuleList(
                     nn.Embedding(maximum_component_atoms + 1, hidden_dim) for _ in ROLE_NAMES
                 )
             )
@@ -556,8 +564,7 @@ if nn is not None:
 
         def _program_context(self, programs: Any) -> Any:
             if self.semantic_organization in FLAT_ORGANIZATIONS:
-                return self.program_projection(programs.to(
-                    self.offspring_embedding.weight.dtype))
+                return self.program_projection(programs.to(self.offspring_embedding.weight.dtype))
             counts = programs[:, :3]
             context = torch.zeros(
                 (programs.shape[0], self.hidden_dim),
@@ -621,9 +628,7 @@ if nn is not None:
                 hidden = hidden + self.role_embedding(role_states)
             else:
                 # Constant null tag. The table is present and the same size; only the index differs.
-                hidden = hidden + self.role_embedding(
-                    torch.full_like(role_states, NULL_ROLE_INDEX)
-                )
+                hidden = hidden + self.role_embedding(torch.full_like(role_states, NULL_ROLE_INDEX))
             if self.conditioning_mode == "full_morphology" and self.pending_embedding is not None:
                 pending = _pending_by_role(
                     offspring,
@@ -1350,13 +1355,9 @@ def ugi_joint_sparse_loss(
 
     organization = _validated_semantic_organization(semantic_organization)
     node_ce = _pooled_ce if organization in FLAT_ORGANIZATIONS else _role_balanced_ce
-    offspring_loss = node_ce(
-        predictions["offspring"], clean["offspring"], clean, "offspring"
-    )
+    offspring_loss = node_ce(predictions["offspring"], clean["offspring"], clean, "offspring")
     atom_loss = node_ce(predictions["nodes"], clean["nodes"], clean, "atom")
-    parent_bond_loss = node_ce(
-        predictions["parent_bonds"], clean["parent_bonds"], clean, "bond"
-    )
+    parent_bond_loss = node_ce(predictions["parent_bonds"], clean["parent_bonds"], clean, "bond")
     closure_mask = clean["closure_mask"]
     closure_loss = (
         functional.cross_entropy(

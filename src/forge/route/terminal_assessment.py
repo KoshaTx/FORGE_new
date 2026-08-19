@@ -17,9 +17,9 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_chemistry_flow import (
     UgiChemistrySample,
     chemistry_sample_to_molecule,

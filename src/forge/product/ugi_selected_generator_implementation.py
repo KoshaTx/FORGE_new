@@ -21,10 +21,10 @@ except ModuleNotFoundError:  # pragma: no cover - productive generation requires
 
 SELECTED_GENERATOR_IMPLEMENTATION_SCHEMA_VERSION = "forge.selected_ugi_generator_implementation.v1"
 SELECTED_GENERATOR_SOURCE_PATHS = (
-    "src/forge/bio/ugi_semantic_annotations.py",
     "src/forge/chemistry.py",
     "src/forge/data/r0_splits.py",
     "src/forge/data/r1_prime_audit.py",
+    "src/forge/potency/ugi_semantic_annotations.py",
     "src/forge/product/adapter_node_conditioning.py",
     "src/forge/product/defog_feasibility.py",
     "src/forge/product/phase1_flow.py",

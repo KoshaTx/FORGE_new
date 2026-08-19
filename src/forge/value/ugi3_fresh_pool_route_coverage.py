@@ -21,8 +21,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_postselection_provenance import (
     CATALOG_ABSENT,
     COMPONENT_STRATA,
@@ -235,9 +235,7 @@ def build_fresh_pool_route_coverage(
         paths["hybrid_assessment_ledger"]
     ) or v3_result.get("artifacts", {}).get("component_synthesis_values.json.gz", {}).get(
         "sha256"
-    ) != sha256_file(
-        paths["synthesis_value_v3_components"]
-    ):
+    ) != sha256_file(paths["synthesis_value_v3_components"]):
         raise Ugi3FreshPoolRouteCoverageError("frozen route-value ownership failed")
 
     hybrid = _load_gzip_json(paths["hybrid_assessment_ledger"], label="hybrid ledger")

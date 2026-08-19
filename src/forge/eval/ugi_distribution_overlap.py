@@ -30,8 +30,8 @@ from rdkit import DataStructs, rdBase
 from rdkit.Chem import rdFingerprintGenerator
 from sklearn.neighbors import NearestNeighbors
 
-from forge.bio import ugi_distributional_applicability as chemistry
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.potency import ugi_distributional_applicability as chemistry
 from forge.product.ugi_morphology_corpus import source_stratified_family_weights
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_distribution_overlap_config.v1"

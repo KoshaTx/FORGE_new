@@ -29,8 +29,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.hashing import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_bounded_hybrid_route_cascade_config.v1"
 PREFLIGHT_SCHEMA_VERSION = "phase1_ugi_bounded_hybrid_route_cascade_preflight.v1"

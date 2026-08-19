@@ -19,14 +19,14 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_hela_potency_diagnostic import (
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_hela_potency_diagnostic import (
     EXPECTED_SELECTED_CANDIDATE,
     POLICY_ID,
     FrozenHeLaOracleWorker,
     HeLaPotencyDiagnosticPolicy,
 )
-from forge.core.hashing import sha256_json as _sha256_payload
-from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
     EVALUATION_SEEDS,

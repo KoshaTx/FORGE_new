@@ -15,9 +15,9 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_dynamic_controller_analysis import BinomialRidge, morphology_features
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.potency.ugi_dynamic_controller_analysis import BinomialRidge, morphology_features
 from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     load_census_contract,
     load_selected_program_manifest,

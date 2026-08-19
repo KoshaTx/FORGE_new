@@ -13,8 +13,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.generate.sampling import rstar_step as _rstar_step
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_joint_sparse_flow import (
     UgiJointSparseFlowError,
     UgiJointSparseTerminal,

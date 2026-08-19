@@ -20,6 +20,7 @@ from forge.core.hashing import (
     sha256_bytes,
     sha256_file,
     sha256_json,
+    sha256_tree,
 )
 from forge.core.io import (
     atomic_write,
@@ -30,6 +31,11 @@ from forge.core.io import (
     write_csv,
     write_json,
     write_jsonl,
+)
+from forge.core.provenance_archive import (
+    HistoricalPinArchive,
+    HistoricalPinArchiveError,
+    HistoricalPinEntry,
 )
 from forge.core.records import ArtifactRef, PinnedInput, RecordError, is_pin
 from forge.core.types import (
@@ -48,6 +54,9 @@ __all__ = [
     "ArtifactRun",
     "ComponentId",
     "EvidenceStatus",
+    "HistoricalPinArchive",
+    "HistoricalPinArchiveError",
+    "HistoricalPinEntry",
     "PinError",
     "PinnedInput",
     "RecordError",
@@ -67,6 +76,7 @@ __all__ = [
     "sha256_bytes",
     "sha256_file",
     "sha256_json",
+    "sha256_tree",
     "stable_json",
     "write_csv",
     "write_json",

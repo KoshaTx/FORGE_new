@@ -36,8 +36,8 @@ import numpy as np
 import yaml
 from rdkit import rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_blinded_headless_sampling import (
     HeadlessRuntime,
     preflight_headless_runtime,
@@ -168,12 +168,12 @@ PREFLIGHT_MANIFEST_FIELDS = (
 )
 RUNTIME_DEPENDENCY_MANIFEST_SCHEMA_VERSION = "phase1_ugi3_blinded_headless_dependency_manifest.v1"
 RUNTIME_DEPENDENCY_MODULES = (
-    "forge.bio",
-    "forge.bio.ugi_semantic_annotations",
     "forge.chemistry",
     "forge.data",
     "forge.data.r0_splits",
     "forge.data.r1_prime_audit",
+    "forge.potency",
+    "forge.potency.ugi_semantic_annotations",
     "forge.product",
     "forge.product.adapter_node_conditioning",
     "forge.product.canonical_representation_audit",

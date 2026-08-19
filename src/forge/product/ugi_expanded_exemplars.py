@@ -11,7 +11,9 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import (
+from forge.core.io import atomic_write as _atomic_write
+from forge.data.r0_splits import sha256_bytes, sha256_file
+from forge.potency.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,
     COMPONENT_MAPPING_FIELDS,
@@ -20,8 +22,6 @@ from forge.bio.ugi_semantic_annotations import (
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,
 )
-from forge.core.io import atomic_write as _atomic_write
-from forge.data.r0_splits import sha256_bytes, sha256_file
 from forge.product.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
 from forge.route.qualified_forward import load_qualified_forward_reaction
 

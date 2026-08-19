@@ -11,8 +11,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.io import write_json as _atomic_json
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_morphology_corpus import (
     balanced_product_weights,

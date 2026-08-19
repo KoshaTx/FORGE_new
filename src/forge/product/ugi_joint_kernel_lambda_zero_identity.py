@@ -22,16 +22,16 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from forge.bio import ugi_distributional_applicability as applicability_v1
-from forge.bio import ugi_distributional_applicability_v2 as applicability_v2
-from forge.bio.ugi_generated_role_applicability_census import (
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.data.r1_prime_audit import sha256_bytes, sha256_file
+from forge.potency import ugi_distributional_applicability as applicability_v1
+from forge.potency import ugi_distributional_applicability_v2 as applicability_v2
+from forge.potency.ugi_generated_role_applicability_census import (
     EXPECTED_SUPPORTED_PATTERNS,
     ROLE_TO_SAMPLE_ROLE,
     ROLES,
     VIEWS,
 )
-from forge.core.hashing import sha256_json as _sha256_payload
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
     EVALUATION_SEEDS,

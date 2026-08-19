@@ -15,7 +15,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 
 TAIL_ROLES = ("oxoester_aldehyde_body_tail", "isocyanide_tail")
@@ -259,9 +259,9 @@ def compare_program_matched_tail_chemistry(
             smiles = str(assignment[f"{role}_smiles"])
             training_groups.setdefault(key, []).append((metrics_cache[smiles], numeric_weight))
 
-        generated_groups: dict[tuple[int, int, int, int], list[tuple[Mapping[str, int], float]]] = (
-            {}
-        )
+        generated_groups: dict[
+            tuple[int, int, int, int], list[tuple[Mapping[str, int], float]]
+        ] = {}
         for row in eligible:
             key = role_program_key(row["program"], role_index)
             smiles = str(row["component_smiles_by_role"][role])

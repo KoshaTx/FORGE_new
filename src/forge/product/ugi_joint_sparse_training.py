@@ -281,6 +281,7 @@ def train_ugi_joint_sparse(
     *,
     smoke: bool,
     overwrite: bool,
+    resume: bool = False,
     progress_callback: Callable[[int, Path], None] | None = None,
 ) -> dict[str, Any]:
     """Train one preregistered joint arm on the expanded chemistry exemplars."""
@@ -294,7 +295,9 @@ def train_ugi_joint_sparse(
     coverage_split = config.get("coverage_split")
     if config.get("schema_version") != "phase1_ugi_joint_sparse_training_config.v1":
         raise UgiJointSparseTrainingError("unsupported joint sparse config")
-    if output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
+    if overwrite and resume:
+        raise UgiJointSparseTrainingError("overwrite and resume are mutually exclusive")
+    if output_dir.exists() and any(output_dir.iterdir()) and not (overwrite or resume):
         raise UgiJointSparseTrainingError(f"output directory is nonempty: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
     resolved = {}
@@ -423,6 +426,26 @@ def train_ugi_joint_sparse(
     checkpoint_steps = _validated_checkpoint_steps(runtime)
     checkpoint_snapshots: list[dict[str, Any]] = []
 
+    def resume_state(step: int) -> dict[str, Any]:
+        return {
+            "best_loss": best_loss,
+            "best_step": best_step,
+            "checkpoint_snapshots": checkpoint_snapshots,
+            "completed_step": step,
+            "evaluations": evaluations,
+            "evaluations_without_improvement": evaluations_without_improvement,
+            "numpy_legacy_state": np.random.get_state(),
+            "numpy_training_state": rng.bit_generator.state,
+            "python_random_state": random.getstate(),
+            "stop_reason": stop_reason,
+            "torch_cpu_rng_state": torch.get_rng_state(),
+            "torch_cuda_rng_state_all": (
+                torch.cuda.get_rng_state_all() if device.type == "cuda" else None
+            ),
+            "torch_training_generator_state": generator.get_state(),
+            "losses": losses,
+        }
+
     def package(step: int) -> dict[str, Any]:
         return {
             "schema_version": "phase1_ugi_joint_sparse_checkpoint.v1",
@@ -432,6 +455,7 @@ def train_ugi_joint_sparse(
             "optimizer_state": optimizer.state_dict(),
             "source_marginals": sources_np,
             "inputs": inputs,
+            "resume_state": resume_state(step),
         }
 
     def evaluate(step: int) -> dict[str, Any]:
@@ -469,16 +493,62 @@ def train_ugi_joint_sparse(
         evaluations.append(value)
         return value
 
-    initial = evaluate(0)
-    if partition.selection_mode == "calibration_early_stopping":
-        best_loss = float(initial["calibration_loss"]["total"])
-    _atomic_checkpoint(latest_path, package(0))
-    if partition.selection_mode == "calibration_early_stopping":
-        _atomic_checkpoint(best_path, package(0))
-    if progress_callback is not None:
-        progress_callback(0, output_dir)
+    start_step = 1
+    if resume:
+        if not latest_path.is_file():
+            raise UgiJointSparseTrainingError(
+                f"resume requested but latest checkpoint is missing: {latest_path}"
+            )
+        checkpoint = torch.load(latest_path, map_location=device, weights_only=False)
+        if checkpoint.get("schema_version") != "phase1_ugi_joint_sparse_checkpoint.v1":
+            raise UgiJointSparseTrainingError("resume checkpoint schema changed")
+        if checkpoint.get("model_config") != model_config or checkpoint.get("inputs") != inputs:
+            raise UgiJointSparseTrainingError("resume checkpoint contract differs from this run")
+        state = checkpoint.get("resume_state")
+        if not isinstance(state, dict):
+            raise UgiJointSparseTrainingError(
+                "legacy checkpoint lacks deterministic resume state"
+            )
+        model.load_state_dict(checkpoint["model_state"], strict=True)
+        optimizer.load_state_dict(checkpoint["optimizer_state"])
+        losses = list(state["losses"])
+        evaluations = list(state["evaluations"])
+        best_loss = state["best_loss"]
+        best_step = int(state["best_step"])
+        evaluations_without_improvement = int(state["evaluations_without_improvement"])
+        stop_reason = str(state["stop_reason"])
+        completed_step = int(state["completed_step"])
+        checkpoint_snapshots = list(state["checkpoint_snapshots"])
+        random.setstate(state["python_random_state"])
+        np.random.set_state(state["numpy_legacy_state"])
+        rng.bit_generator.state = state["numpy_training_state"]
+        torch.set_rng_state(state["torch_cpu_rng_state"].cpu())
+        cuda_states = state.get("torch_cuda_rng_state_all")
+        if device.type == "cuda":
+            if not isinstance(cuda_states, list):
+                raise UgiJointSparseTrainingError("resume checkpoint lacks CUDA RNG state")
+            torch.cuda.set_rng_state_all(cuda_states)
+        # Generator state is serialized as a CPU ByteTensor even when the generator itself
+        # targets CUDA.  ``set_state`` performs the device-specific restore internally.
+        generator.set_state(state["torch_training_generator_state"].cpu())
+        for snapshot in checkpoint_snapshots:
+            snapshot_path = Path(str(snapshot["path"]))
+            if not snapshot_path.is_file() or sha256_file(snapshot_path) != snapshot["sha256"]:
+                raise UgiJointSparseTrainingError(
+                    f"resume checkpoint snapshot is missing or changed: {snapshot_path}"
+                )
+        start_step = completed_step + 1
+    else:
+        initial = evaluate(0)
+        if partition.selection_mode == "calibration_early_stopping":
+            best_loss = float(initial["calibration_loss"]["total"])
+        _atomic_checkpoint(latest_path, package(0))
+        if partition.selection_mode == "calibration_early_stopping":
+            _atomic_checkpoint(best_path, package(0))
+        if progress_callback is not None:
+            progress_callback(0, output_dir)
     model.train()
-    for step in range(1, int(runtime["steps"]) + 1):
+    for step in range(start_step, int(runtime["steps"]) + 1):
         completed_step = step
         indices = rng.choice(
             len(train_records),
@@ -533,18 +603,6 @@ def train_ugi_joint_sparse(
                 if partition.selection_mode == "calibration_early_stopping"
                 else None
             )
-            checkpoint = package(step)
-            _atomic_checkpoint(latest_path, checkpoint)
-            if step in checkpoint_steps:
-                snapshot_path = output_dir / f"checkpoint_step_{step}.pt"
-                _atomic_checkpoint(snapshot_path, checkpoint)
-                checkpoint_snapshots.append(
-                    {
-                        "step": step,
-                        "path": str(snapshot_path),
-                        "sha256": sha256_file(snapshot_path),
-                    }
-                )
             improved = (
                 observed is not None
                 and best_loss is not None
@@ -554,7 +612,6 @@ def train_ugi_joint_sparse(
                 best_loss = observed
                 best_step = step
                 evaluations_without_improvement = 0
-                _atomic_checkpoint(best_path, checkpoint)
             elif (
                 partition.selection_mode == "calibration_early_stopping"
                 and step >= early_stopping_minimum_steps
@@ -568,6 +625,23 @@ def train_ugi_joint_sparse(
             )
             if should_stop:
                 stop_reason = "calibration_early_stopping"
+            checkpoint = package(step)
+            _atomic_checkpoint(latest_path, checkpoint)
+            if improved:
+                _atomic_checkpoint(best_path, checkpoint)
+            if step in checkpoint_steps and not any(
+                int(snapshot["step"]) == step for snapshot in checkpoint_snapshots
+            ):
+                snapshot_path = output_dir / f"checkpoint_step_{step}.pt"
+                _atomic_checkpoint(snapshot_path, checkpoint)
+                checkpoint_snapshots.append(
+                    {
+                        "step": step,
+                        "path": str(snapshot_path),
+                        "sha256": sha256_file(snapshot_path),
+                    }
+                )
+                _atomic_checkpoint(latest_path, package(step))
             _atomic_json(
                 output_dir / "progress.json",
                 {

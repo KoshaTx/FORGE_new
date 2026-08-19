@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_adapter_features import (
     CORE_POSITION_STATES,
     ORIGIN_STATES,

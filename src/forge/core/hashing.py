@@ -73,6 +73,35 @@ def sha256_json(value: Any) -> Sha256:
     return sha256_bytes(stable_json(value).encode())
 
 
+def sha256_tree(root: Path, *, pattern: str = "*.py") -> Sha256:
+    """Digest a source tree by relative path and file content.
+
+    Hashing file bytes alone is ambiguous: two trees with the same files under different names
+    would otherwise collide.  Each entry therefore contributes its UTF-8 relative path length,
+    relative path, and content digest.  Files are ordered by POSIX relative path so filesystem
+    enumeration order never enters an experiment fingerprint.
+
+    Symlinks are rejected.  A source fingerprint must describe bytes inside the declared tree,
+    not whatever an external link happens to reference when the run starts.
+    """
+    resolved_root = root.resolve()
+    if not resolved_root.is_dir():
+        raise PinError(f"source tree is missing: {resolved_root}")
+    digest = hashlib.sha256()
+    files = sorted(
+        (candidate for candidate in resolved_root.rglob(pattern) if candidate.is_file()),
+        key=lambda candidate: candidate.relative_to(resolved_root).as_posix(),
+    )
+    for candidate in files:
+        if candidate.is_symlink():
+            raise PinError(f"source tree contains a symlink: {candidate}")
+        relative = candidate.relative_to(resolved_root).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(8, "big"))
+        digest.update(relative)
+        digest.update(bytes.fromhex(str(sha256_file(candidate))))
+    return Sha256(digest.hexdigest())
+
+
 def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
     """Validate one `{"path", "sha256"}` record and return the file it names.
 
@@ -141,4 +170,5 @@ __all__ = [
     "sha256_bytes",
     "sha256_file",
     "sha256_json",
+    "sha256_tree",
 ]

@@ -8,7 +8,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 
 
 class UgiCandidateEligibilityError(RuntimeError):

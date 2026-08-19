@@ -11,8 +11,8 @@ import numpy as np
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Crippen, Descriptors, Draw, Lipinski, rdFingerprintGenerator
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.io import write_json as _atomic_json
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_chemistry_corpus import (
     load_expanded_ugi_chemistry_corpus,

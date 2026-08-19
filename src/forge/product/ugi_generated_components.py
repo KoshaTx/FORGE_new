@@ -7,7 +7,7 @@ from collections.abc import Sequence
 import numpy as np
 from rdkit import Chem
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import AtomState, FeasibilityError
 from forge.product.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
 from forge.product.ugi_chemistry_flow import UgiChemistrySample, chemistry_sample_to_molecule

@@ -19,12 +19,12 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_hela_potency_diagnostic import (
+from forge.core.hashing import sha256_json as _sha256_payload
+from forge.potency.ugi_hela_potency_diagnostic import (
     HeLaBatchPredictor,
     HeLaPotencyDiagnosticPolicy,
     HeLaPotencyEvaluation,
 )
-from forge.core.hashing import sha256_json as _sha256_payload
 from forge.product.ugi_matched_budget_orchestration import LockedMatchedTerminal
 from forge.product.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,

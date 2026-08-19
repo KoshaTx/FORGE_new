@@ -8,8 +8,8 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r0_splits import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_morphology_program import maximum_adjacent_branch_graph_run
 
 CANDIDATE_SCHEMA_VERSION = "phase1_ugi_branch_spacing_promotion_candidate.v1"

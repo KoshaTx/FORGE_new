@@ -13,7 +13,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import (
+from forge.data.r0_splits import sha256_bytes, sha256_file
+from forge.potency.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,
     COMPONENT_MAPPING_FIELDS,
@@ -21,7 +22,6 @@ from forge.bio.ugi_semantic_annotations import (
     ROLE_NAMES,
     annotate_qualified_ugi_product,
 )
-from forge.data.r0_splits import sha256_bytes, sha256_file
 from forge.product.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
 from forge.product.ugi_expanded_exemplars import (
     _atomic_write,
@@ -79,9 +79,7 @@ def _select_rows(
         for row in mandatory
         if row["source_stratum"] != "current_phase1_union"
     }
-    mandatory_counts = Counter(
-        row["primary_product_fold"] for row in mandatory_by_id.values()
-    )
+    mandatory_counts = Counter(row["primary_product_fold"] for row in mandatory_by_id.values())
     capacities = {
         fold: int(expanded_quota_by_fold[fold]) - mandatory_counts[fold]
         for fold in ("train", "calibration", "heldout")
@@ -142,8 +140,7 @@ def _select_rows(
         (role, row[f"{role}_smiles"])
         for row in selected
         for role in ROLE_NAMES
-        if components[(role, row[f"{role}_smiles"])] ["family_fold"]
-        == row["primary_product_fold"]
+        if components[(role, row[f"{role}_smiles"])]["family_fold"] == row["primary_product_fold"]
     }
     if covered != set(components):
         raise UgiBalancedChemistryCorpusError("balanced selection lost component-fold coverage")
@@ -152,12 +149,10 @@ def _select_rows(
     )
     return selected, {
         "full_census_by_fold_and_stratum": {
-            f"{fold}|{stratum}": count
-            for (fold, stratum), count in sorted(census.items())
+            f"{fold}|{stratum}": count for (fold, stratum), count in sorted(census.items())
         },
         "selected_by_fold_and_stratum": {
-            f"{fold}|{stratum}": count
-            for (fold, stratum), count in sorted(selected_counts.items())
+            f"{fold}|{stratum}": count for (fold, stratum), count in sorted(selected_counts.items())
         },
         "mandatory_component_cover_products": len(mandatory_by_id),
         "full_weighted_triple_fraction_by_fold": {
@@ -228,9 +223,7 @@ def build_balanced_ugi_chemistry_corpus(
         "semantic_products.csv.gz": _gzip_csv(product_rows, PRODUCT_FIELDS),
         "semantic_atoms.csv.gz": _gzip_csv(atom_rows, ATOM_FIELDS),
         "semantic_bonds.csv.gz": _gzip_csv(bond_rows, BOND_FIELDS),
-        "semantic_component_mappings.csv.gz": _gzip_csv(
-            mapping_rows, COMPONENT_MAPPING_FIELDS
-        ),
+        "semantic_component_mappings.csv.gz": _gzip_csv(mapping_rows, COMPONENT_MAPPING_FIELDS),
     }
     artifacts = {}
     for name, payload in payloads.items():

@@ -17,7 +17,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import _rstar_step
 from forge.product.ugi_morphology_program import (
     UgiMorphologyProgram,

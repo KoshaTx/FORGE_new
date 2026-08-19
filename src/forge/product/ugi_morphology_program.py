@@ -17,7 +17,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.phase1_tree_topology_flow import TreeTopologyFlowError
 from forge.product.ugi_adapter_features import (
     ORIGIN_TO_INDEX,

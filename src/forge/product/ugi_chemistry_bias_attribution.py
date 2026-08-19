@@ -18,8 +18,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_candidate_eligibility import compile_smarts, motif_hits
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 

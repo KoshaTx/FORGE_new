@@ -18,7 +18,7 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.canonical_representation_audit import load_atom_vocabulary
 from forge.product.ugi_adapter_features import tensorize_ugi_l1_support_record
 from forge.product.ugi_morphology_program import (
@@ -445,11 +445,11 @@ def source_stratified_family_weights(
         if set(source_mass) != set(sources):
             raise UgiMorphologyCorpusError("source-mass keys disagree with observed strata")
         total = float(sum(source_mass.values()))
-        if total <= 0 or any(not np.isfinite(value) or value <= 0 for value in source_mass.values()):
+        if total <= 0 or any(
+            not np.isfinite(value) or value <= 0 for value in source_mass.values()
+        ):
             raise UgiMorphologyCorpusError("source masses must be finite and positive")
-        normalized_source_mass = {
-            source: float(source_mass[source]) / total for source in sources
-        }
+        normalized_source_mass = {source: float(source_mass[source]) / total for source in sources}
 
     output = np.zeros(len(assignments), dtype=np.float64)
     for source in sources:
@@ -476,17 +476,12 @@ def source_stratified_family_weights(
                 for group_indices in groups.values():
                     current = weights[group_indices].sum() / total
                     if current <= 0:
-                        raise UgiMorphologyCorpusError(
-                            "source-family raking encountered zero mass"
-                        )
+                        raise UgiMorphologyCorpusError("source-family raking encountered zero mass")
                     weights[group_indices] *= target / current
                 weights /= weights.sum()
         raked = weights / weights.sum()
         uniform = np.full(len(local), 1.0 / len(local), dtype=np.float64)
-        local_weights = (
-            (1.0 - uniform_row_mixture) * raked
-            + uniform_row_mixture * uniform
-        )
+        local_weights = (1.0 - uniform_row_mixture) * raked + uniform_row_mixture * uniform
         output[indices] = normalized_source_mass[source] * local_weights
     return output / output.sum()
 

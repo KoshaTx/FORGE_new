@@ -11,8 +11,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.io import write_json as _atomic_json
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_closure_placement import (
     UgiSparseClosureScorer,
@@ -214,6 +214,7 @@ def train_ugi_closure_scorer(
     *,
     smoke: bool,
     overwrite: bool,
+    resume: bool = False,
 ) -> dict[str, Any]:
     """Train on strict-train unique cyclic components and audit novel heads."""
 
@@ -229,7 +230,9 @@ def train_ugi_closure_scorer(
         "phase1_ugi_sparse_closure_training_config.v2",
     }:
         raise UgiClosureTrainingError("unsupported closure training config")
-    if output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
+    if overwrite and resume:
+        raise UgiClosureTrainingError("overwrite and resume are mutually exclusive")
+    if output_dir.exists() and any(output_dir.iterdir()) and not (overwrite or resume):
         raise UgiClosureTrainingError(f"output directory is nonempty: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
     resolved = {}
@@ -311,7 +314,7 @@ def train_ugi_closure_scorer(
     best_key: tuple[float, float] | None = None
     best_step: int | None = None
 
-    def checkpoint_value() -> dict[str, Any]:
+    def checkpoint_value(step: int) -> dict[str, Any]:
         return {
             "schema_version": checkpoint_schema,
             "model_config": model_config,
@@ -323,6 +326,21 @@ def train_ugi_closure_scorer(
                 component.component_key for component in train_components
             ],
             "inputs": inputs,
+            "optimizer_state_dict": optimizer.state_dict(),
+            "step": step,
+            "resume_state": {
+                "best_key": best_key,
+                "best_step": best_step,
+                "evaluations": evaluations,
+                "losses": losses,
+                "numpy_legacy_state": np.random.get_state(),
+                "numpy_training_state": rng.bit_generator.state,
+                "python_random_state": random.getstate(),
+                "torch_cpu_rng_state": torch.get_rng_state(),
+                "torch_cuda_rng_state_all": (
+                    torch.cuda.get_rng_state_all() if device.type == "cuda" else None
+                ),
+            },
         }
 
     def evaluate(step: int) -> None:
@@ -355,17 +373,52 @@ def train_ugi_closure_scorer(
             ),
         }
         evaluations.append(evaluation)
-        value = checkpoint_value()
-        _atomic_checkpoint(checkpoint_latest_path, value)
         selection_key = _closure_selection_key(evaluation)
-        if best_key is None or selection_key < best_key:
+        improved = best_key is None or selection_key < best_key
+        if improved:
             best_key = selection_key
             best_step = step
+        value = checkpoint_value(step)
+        _atomic_checkpoint(checkpoint_latest_path, value)
+        if improved:
             _atomic_checkpoint(checkpoint_path, value)
 
-    evaluate(0)
+    start_step = 1
+    if resume:
+        if not checkpoint_latest_path.is_file():
+            raise UgiClosureTrainingError(
+                f"resume requested but latest checkpoint is missing: {checkpoint_latest_path}"
+            )
+        checkpoint = torch.load(checkpoint_latest_path, map_location=device, weights_only=False)
+        if checkpoint.get("schema_version") != checkpoint_schema:
+            raise UgiClosureTrainingError("resume checkpoint schema changed")
+        if checkpoint.get("model_config") != model_config or checkpoint.get("inputs") != inputs:
+            raise UgiClosureTrainingError("resume checkpoint contract differs from this run")
+        state = checkpoint.get("resume_state")
+        if not isinstance(state, dict):
+            raise UgiClosureTrainingError("legacy checkpoint lacks deterministic resume state")
+        model.load_state_dict(checkpoint["model_state_dict"], strict=True)
+        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        losses = list(state["losses"])
+        evaluations = list(state["evaluations"])
+        stored_key = state["best_key"]
+        best_key = tuple(stored_key) if stored_key is not None else None
+        stored_step = state["best_step"]
+        best_step = int(stored_step) if stored_step is not None else None
+        random.setstate(state["python_random_state"])
+        np.random.set_state(state["numpy_legacy_state"])
+        rng.bit_generator.state = state["numpy_training_state"]
+        torch.set_rng_state(state["torch_cpu_rng_state"].cpu())
+        cuda_states = state.get("torch_cuda_rng_state_all")
+        if device.type == "cuda":
+            if not isinstance(cuda_states, list):
+                raise UgiClosureTrainingError("resume checkpoint lacks CUDA RNG state")
+            torch.cuda.set_rng_state_all(cuda_states)
+        start_step = int(checkpoint["step"]) + 1
+    else:
+        evaluate(0)
     model.train()
-    for step in range(1, int(runtime["steps"]) + 1):
+    for step in range(start_step, int(runtime["steps"]) + 1):
         component = train_components[int(rng.integers(len(train_components)))]
         offspring = torch.as_tensor(component.offspring, dtype=torch.long, device=device)
         target = tuple(

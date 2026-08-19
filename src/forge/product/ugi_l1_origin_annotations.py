@@ -15,7 +15,8 @@ from typing import Any
 
 from rdkit import rdBase
 
-from forge.bio.ugi_semantic_annotations import (
+from forge.core.io import atomic_write as _atomic_write
+from forge.potency.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,
     COMPONENT_MAPPING_FIELDS,
@@ -24,7 +25,6 @@ from forge.bio.ugi_semantic_annotations import (
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,
 )
-from forge.core.io import atomic_write as _atomic_write
 from forge.product.defog_feasibility import sha256_file
 from forge.route.qualified_forward import load_qualified_forward_reaction
 

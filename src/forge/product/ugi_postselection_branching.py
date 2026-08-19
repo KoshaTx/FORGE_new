@@ -16,8 +16,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.data.r1_prime_audit import sha256_file
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_postselection_branching_audit_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_postselection_branching_audit.v1"

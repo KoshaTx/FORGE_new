@@ -17,8 +17,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.route.planner import AssessmentOutcome
 from forge.value.synthesis import (
     ComponentSynthesisValue,

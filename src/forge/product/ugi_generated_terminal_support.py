@@ -19,7 +19,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_candidate_eligibility import declared_support_violations
 from forge.product.ugi_component_expansion import reaction_handle_qualification
 from forge.product.ugi_matched_budget_orchestration import LockedMatchedTerminal

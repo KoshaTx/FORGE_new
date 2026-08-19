@@ -14,7 +14,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
-from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_adapter_features import (
     CORE_POSITION_TO_INDEX,
