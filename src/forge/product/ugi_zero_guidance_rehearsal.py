@@ -20,7 +20,6 @@ from typing import Any
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
 from forge.product import ugi_matched_budget_orchestration as matched_runner
-from forge.product import ugi_terminal_route_assessment as terminal_route_assessment
 from forge.product.ugi_matched_budget_orchestration import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
@@ -37,19 +36,20 @@ from forge.product.ugi_matched_planner_cache_binding import (
     MatchedPlannerCacheBindingPreflight,
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    QualifiedUgiL1Reverifier,
-    UgiTerminalRouteAssessmentReceipt,
-    ValidatedUgiTerminalPayload,
-    assess_locked_ugi_terminal_routes,
-    required_three_role_route_reservation,
-)
+from forge.route import terminal_assessment as terminal_route_assessment
 from forge.route.planner import RoutePlanner
 from forge.route.planner_cache import FilePlannerCache, PlannerCacheContext
 from forge.route.planner_cache_snapshot import (
     MatchedPlannerCacheOverlayAudit,
     OverlayFilePlannerCache,
     planner_cache_context_sha256,
+)
+from forge.route.terminal_assessment import (
+    QualifiedUgiL1Reverifier,
+    UgiTerminalRouteAssessmentReceipt,
+    ValidatedUgiTerminalPayload,
+    assess_locked_ugi_terminal_routes,
+    required_three_role_route_reservation,
 )
 
 ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION = "forge.ugi_zero_guidance_rehearsal.v1"

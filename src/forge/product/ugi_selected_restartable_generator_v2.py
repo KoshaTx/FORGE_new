@@ -15,7 +15,6 @@ contract exercised by the grouped lambda-zero seam qualification.
 from __future__ import annotations
 
 import hashlib
-import json
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
@@ -24,7 +23,6 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_end_to_end_sampling import _closure_model, _load_checkpoint
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
@@ -60,15 +58,15 @@ from forge.product.ugi_selected_restartable_generator import (
     _read_json,
     _require_file_hash,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    QualifiedUgiL1Reverifier,
-    UgiTerminalRouteAssessmentError,
-    ValidatedUgiTerminalPayload,
-)
 from forge.product.ugi_training_cache import load_ugi_training_cache
 from forge.product.ugi_zero_guidance_rehearsal import (
     RestartableGeneratorClosureAdapter,
     RestartableGeneratorClosureIdentity,
+)
+from forge.route.terminal_assessment import (
+    QualifiedUgiL1Reverifier,
+    UgiTerminalRouteAssessmentError,
+    ValidatedUgiTerminalPayload,
 )
 
 try:
@@ -92,9 +90,7 @@ QUALIFIED_REACTION_REGISTRY_SHA256 = (
 )
 L1_REACTION_SHA256 = "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
 MODEL_CONFIG_SHA256 = "f3279a9b64aac4dfae7372c784a863fb93f25cfb4a0f1b5cb1ceb8c4c4a77f52"
-DECLARED_GRAPH_SUPPORT_SHA256 = (
-    "2fb6253fc1e6237d94029ca8196bb026262f48dea3eca12930a80e5cd0dc8ae7"
-)
+DECLARED_GRAPH_SUPPORT_SHA256 = "2fb6253fc1e6237d94029ca8196bb026262f48dea3eca12930a80e5cd0dc8ae7"
 COMPONENT_RECOVERY_CONTRACT_SHA256 = (
     "14a84998891a814db287ed808d650a7c8e79175f85ee1508645fa5de0e10b944"
 )
@@ -461,16 +457,12 @@ def build_selected_step2000_bond_stochastic_lane(
     )
     graph_support_sha256 = declared_graph_support_context_sha256(graph_support)
     if graph_support_sha256 != DECLARED_GRAPH_SUPPORT_SHA256:
-        raise UgiSelectedRestartableGeneratorError(
-            "selected v2 graph-support context changed"
-        )
+        raise UgiSelectedRestartableGeneratorError("selected v2 graph-support context changed")
 
     architecture = model_config.copy()
     source_probability_floor = architecture.pop("source_probability_floor", None)
     if source_probability_floor != 1e-5:
-        raise UgiSelectedRestartableGeneratorError(
-            "selected v2 source probability floor changed"
-        )
+        raise UgiSelectedRestartableGeneratorError("selected v2 source probability floor changed")
     model = UgiJointSparseFlow(atom_classes=len(corpus.atom_vocabulary), **architecture)
     model.load_state_dict(joint_checkpoint["model_state"])
     model.eval()
@@ -537,7 +529,9 @@ def build_selected_step2000_bond_stochastic_lane(
         terminal_decoder_id=TERMINAL_DECODER_ID,
     )
     return SelectedRestartableGeneratorLane(
-        adapter=RestartableGeneratorClosureAdapter(identity=identity, generate_locked_terminal=callback),
+        adapter=RestartableGeneratorClosureAdapter(
+            identity=identity, generate_locked_terminal=callback
+        ),
         callback=callback,
         bindings=bindings,
         graph_support=graph_support,

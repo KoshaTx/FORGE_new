@@ -16,18 +16,6 @@ from forge.product.ugi_matched_budget_orchestration import (
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    DEFAULT_IDENTITY_POLICY,
-    DEFAULT_STEREOCHEMISTRY_POLICY,
-    ExactL1ForwardVerification,
-    QualifiedUgiL1Reverifier,
-    UgiRoleComponent,
-    UgiTerminalRouteAssessmentError,
-    UgiTerminalRouteAssessmentReceipt,
-    ValidatedUgiTerminalPayload,
-    assess_locked_ugi_terminal_routes,
-    required_three_role_route_reservation,
-)
 from forge.route.planner import (
     AssessmentOutcome,
     AvailabilityState,
@@ -47,6 +35,18 @@ from forge.route.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,
+)
+from forge.route.terminal_assessment import (
+    DEFAULT_IDENTITY_POLICY,
+    DEFAULT_STEREOCHEMISTRY_POLICY,
+    ExactL1ForwardVerification,
+    QualifiedUgiL1Reverifier,
+    UgiRoleComponent,
+    UgiTerminalRouteAssessmentError,
+    UgiTerminalRouteAssessmentReceipt,
+    ValidatedUgiTerminalPayload,
+    assess_locked_ugi_terminal_routes,
+    required_three_role_route_reservation,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -265,7 +265,7 @@ def test_validated_payload_has_exact_order_and_canonical_bytes() -> None:
 
 def test_payload_recovers_exact_components_from_product_semantics() -> None:
     product = Chem.MolFromSmiles(
-        "[CH3:10][CH2:11][NH:4][C:3](=[O:5])[CH:2]([CH3:20])" "[NH:1][CH2:30][CH3:31]"
+        "[CH3:10][CH2:11][NH:4][C:3](=[O:5])[CH:2]([CH3:20])[NH:1][CH2:30][CH3:31]"
     )
     assert product is not None
     origin_by_map = {

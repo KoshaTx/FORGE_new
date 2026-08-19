@@ -57,11 +57,11 @@ from forge.product.ugi_selected_restartable_generator_v2 import (
     PRODUCTION_GENERATOR_MANIFEST_SHA256,
     TERMINAL_DECODER_ID,
 )
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.planner_cache import FilePlannerCache
+from forge.route.terminal_assessment import (
     ValidatedUgiTerminalPayload,
     assess_locked_ugi_terminal_routes,
 )
-from forge.route.planner_cache import FilePlannerCache
 from forge.value.ugi_exact_closure_guidance import (
     UGI_EXACT_CLOSURE_GUIDANCE_POLICY_SHA256,
     exact_closure_potential_from_product_value,

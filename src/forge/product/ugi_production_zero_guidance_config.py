@@ -25,14 +25,14 @@ from forge.product.ugi_morphology_program import UgiMorphologyProgram
 from forge.product.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    required_three_role_route_reservation,
-)
 from forge.product.ugi_zero_guidance_rehearsal import RestartableGeneratorClosureIdentity
 from forge.route.planner_cache import PlannerCacheContext, PlannerCacheError
 from forge.route.planner_cache_snapshot import (
     planner_cache_context_sha256,
     require_current_l3_context,
+)
+from forge.route.terminal_assessment import (
+    required_three_role_route_reservation,
 )
 
 PRODUCTION_ZERO_GUIDANCE_CONFIG_SCHEMA_VERSION = (

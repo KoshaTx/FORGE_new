@@ -15,11 +15,11 @@ from forge.product.ugi_production_zero_guidance_config import (
 from forge.product.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    required_three_role_route_reservation,
-)
 from forge.route.planner import PlannerBudgetLimits
 from forge.route.planner_cache import PlannerCacheContext
+from forge.route.terminal_assessment import (
+    required_three_role_route_reservation,
+)
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v1.json"

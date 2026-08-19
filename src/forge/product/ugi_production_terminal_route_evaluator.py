@@ -32,10 +32,6 @@ from forge.product.ugi_matched_budget_orchestration import (
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    QualifiedUgiL1Reverifier,
-    required_three_role_route_reservation,
-)
 from forge.route.planner import (
     PlannerBudgetLedger,
     RecursiveRouteAssessor,
@@ -52,6 +48,10 @@ from forge.route.planner_cache_snapshot import (
     OverlayFilePlannerCache,
     planner_cache_context_sha256,
     require_current_l3_context,
+)
+from forge.route.terminal_assessment import (
+    QualifiedUgiL1Reverifier,
+    required_three_role_route_reservation,
 )
 from forge.route.ugi3_cumulative_production_source import (
     CumulativeProductionUgi3Source,

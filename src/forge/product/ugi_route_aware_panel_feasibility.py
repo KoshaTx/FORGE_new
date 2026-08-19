@@ -64,12 +64,12 @@ from forge.product.ugi_selected_restartable_generator_v2 import (
     MODEL_CONFIG_SHA256,
     _canonical_sha256,
 )
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.planner_cache import FilePlannerCache
+from forge.route.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     assess_locked_ugi_terminal_routes,
     required_three_role_route_reservation,
 )
-from forge.route.planner_cache import FilePlannerCache
 from forge.value.ugi_exact_closure_guidance import (
     UGI_EXACT_CLOSURE_GUIDANCE_POLICY_SHA256,
     exact_closure_potential_from_product_value,

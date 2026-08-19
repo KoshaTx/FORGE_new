@@ -24,13 +24,13 @@ from forge.product.ugi_production_terminal_route_evaluator import (
     UgiProductionTerminalRouteEvaluatorError,
     build_production_ugi_terminal_aware_planner_factory,
 )
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.planner_cache import FilePlannerCache
+from forge.route.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     ValidatedUgiTerminalPayload,
     assess_locked_ugi_terminal_routes,
     required_three_role_route_reservation,
 )
-from forge.route.planner_cache import FilePlannerCache
 from forge.route.ugi3_support_boundary import UGI_COMPONENT_ROLES
 
 REPO = Path(__file__).resolve().parents[1]

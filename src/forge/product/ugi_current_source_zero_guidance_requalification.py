@@ -23,13 +23,13 @@ from forge.product.ugi_generated_terminal_support import (
     QualifiedGeneratedUgiTerminalSupport,
     RoleHandleRecheck,
 )
-from forge.product.ugi_terminal_route_assessment import ExactL1ForwardVerification
 from forge.route.planner import (
     PlannerBudgetLedger,
     PlannerBudgetLimits,
     RecursiveRouteAssessor,
     RouteTarget,
 )
+from forge.route.terminal_assessment import ExactL1ForwardVerification
 from forge.route.ugi3_cumulative_production_source import (
     load_cumulative_production_ugi3_source,
 )

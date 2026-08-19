@@ -29,7 +29,7 @@ from forge.product.ugi_matched_budget_orchestration import (
     MatchedGenerationRequest,
 )
 from forge.product.ugi_morphology_program import UgiMorphologyProgram
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     UgiTerminalRouteAssessmentError,
     ValidatedUgiTerminalPayload,

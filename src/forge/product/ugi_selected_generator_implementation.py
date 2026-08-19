@@ -51,10 +51,10 @@ SELECTED_GENERATOR_SOURCE_PATHS = (
     "src/forge/product/ugi_selected_generator_implementation.py",
     "src/forge/product/ugi_selected_restartable_generator.py",
     "src/forge/product/ugi_synthesis_guidance.py",
-    "src/forge/product/ugi_terminal_route_assessment.py",
     "src/forge/product/ugi_training_cache.py",
     "src/forge/product/v5_morphology_program.py",
     "src/forge/product/v5_sparse_representation.py",
+    "src/forge/route/terminal_assessment.py",
 )
 _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 

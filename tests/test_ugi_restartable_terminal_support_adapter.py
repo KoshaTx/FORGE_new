@@ -24,7 +24,7 @@ from forge.product.ugi_restartable_terminal_support_adapter import (
     native_candidate_eligibility_record,
     native_candidate_eligibility_record_bytes,
 )
-from forge.product.ugi_terminal_route_assessment import QualifiedUgiL1Reverifier
+from forge.route.terminal_assessment import QualifiedUgiL1Reverifier
 
 REPO = Path(__file__).resolve().parents[1]
 SAMPLE_PATH = REPO / "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"

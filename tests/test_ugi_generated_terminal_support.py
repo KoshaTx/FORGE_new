@@ -15,11 +15,11 @@ from forge.product.ugi_generated_terminal_support import (
 )
 from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
 from forge.product.ugi_matched_budget_orchestration import LockedMatchedTerminal
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
+from forge.route.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     ValidatedUgiTerminalPayload,
 )
-from forge.route.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
 from forge.route.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,
     MolecularSupportState,

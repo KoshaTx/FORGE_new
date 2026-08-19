@@ -28,16 +28,16 @@ from rdkit import rdBase
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_terminal_route_assessment import (
-    DEFAULT_IDENTITY_POLICY,
-    DEFAULT_STEREOCHEMISTRY_POLICY,
-)
 from forge.route.planner import PlannerBudgetLimits
 from forge.route.planner_cache import (
     PLANNER_CACHE_KEY_SCHEMA_VERSION,
     PlannerCacheContext,
 )
 from forge.route.planner_cache_snapshot import planner_cache_context_sha256
+from forge.route.terminal_assessment import (
+    DEFAULT_IDENTITY_POLICY,
+    DEFAULT_STEREOCHEMISTRY_POLICY,
+)
 from forge.route.ugi3_cumulative_production_source import CumulativeUgi3ProductionPaths
 from forge.route.ugi3_support_boundary import (
     UGI_COMPONENT_ROLES,
@@ -722,7 +722,7 @@ def build_production_planner_context_qualification(
                     "src/forge/route/ugi3_support_boundary.py",
                     "src/forge/route/ugi3_production_planner_qualification.py",
                     "src/forge/product/ugi_generated_terminal_support.py",
-                    "src/forge/product/ugi_terminal_route_assessment.py",
+                    "src/forge/route/terminal_assessment.py",
                     "src/forge/product/ugi_production_terminal_route_evaluator.py",
                 )
             }

@@ -284,16 +284,16 @@ def stage_exact_evidence(contract: Any) -> dict[str, Any]:
         COMPONENT_RECOVERY_CONTRACT_SHA256,
         L1_REACTION_SHA256,
     )
-    from forge.product.ugi_terminal_route_assessment import (
-        QualifiedUgiL1Reverifier,
-        assess_locked_ugi_terminal_routes,
-        required_three_role_route_reservation,
-    )
     from forge.route.planner_cache import FilePlannerCache
     from forge.route.planner_cache_snapshot import (
         OverlayFilePlannerCache,
         ReadOnlyFilePlannerCache,
         build_file_planner_cache_snapshot_manifest,
+    )
+    from forge.route.terminal_assessment import (
+        QualifiedUgiL1Reverifier,
+        assess_locked_ugi_terminal_routes,
+        required_three_role_route_reservation,
     )
     from forge.value.ugi_exact_closure_guidance import (
         UGI_EXACT_CLOSURE_GUIDANCE_POLICY_SHA256,
@@ -761,8 +761,9 @@ def stage_graph2edits(contract: Any) -> dict[str, Any]:
     if upstream.get("status") != "bounded_hybrid_route_cascade_exact_evidence_complete":
         raise UgiBoundedHybridRouteCascadeError("exact-evidence stage is not complete")
     component_path = repo / upstream["artifacts"]["component_exact_evidence.jsonl.gz"]["path"]
-    if sha256_file(component_path) != (
-        upstream["artifacts"]["component_exact_evidence.jsonl.gz"]["sha256"]
+    if (
+        sha256_file(component_path)
+        != (upstream["artifacts"]["component_exact_evidence.jsonl.gz"]["sha256"])
     ):
         raise UgiBoundedHybridRouteCascadeError("component exact-evidence ledger changed")
     component_rows = read_jsonl_gzip(component_path, label="component exact evidence")
@@ -1255,8 +1256,9 @@ def stage_adjudicate(contract: Any) -> dict[str, Any]:
     aizynth = load_json(aizynth_path, label="aizynthfinder result")
 
     component_path = repo / exact["artifacts"]["component_exact_evidence.jsonl.gz"]["path"]
-    if sha256_file(component_path) != (
-        exact["artifacts"]["component_exact_evidence.jsonl.gz"]["sha256"]
+    if (
+        sha256_file(component_path)
+        != (exact["artifacts"]["component_exact_evidence.jsonl.gz"]["sha256"])
     ):
         raise UgiBoundedHybridRouteCascadeError("component exact-evidence ledger changed")
     component_rows = read_jsonl_gzip(component_path, label="component exact evidence")
@@ -1584,16 +1586,18 @@ def stage_audit(contract: Any) -> dict[str, Any]:
     adjudication = load_json(adjudication_path, label="adjudication result")
 
     candidate_exact_path = repo / exact["artifacts"]["candidate_exact_ledger.jsonl.gz"]["path"]
-    if sha256_file(candidate_exact_path) != (
-        exact["artifacts"]["candidate_exact_ledger.jsonl.gz"]["sha256"]
+    if (
+        sha256_file(candidate_exact_path)
+        != (exact["artifacts"]["candidate_exact_ledger.jsonl.gz"]["sha256"])
     ):
         raise UgiBoundedHybridRouteCascadeError("candidate exact ledger changed")
     candidate_exact_rows = read_jsonl_gzip(candidate_exact_path, label="candidate exact ledger")
     component_ledger_path = (
         repo / adjudication["artifacts"]["component_route_ledger.jsonl.gz"]["path"]
     )
-    if sha256_file(component_ledger_path) != (
-        adjudication["artifacts"]["component_route_ledger.jsonl.gz"]["sha256"]
+    if (
+        sha256_file(component_ledger_path)
+        != (adjudication["artifacts"]["component_route_ledger.jsonl.gz"]["sha256"])
     ):
         raise UgiBoundedHybridRouteCascadeError("component route ledger changed")
     component_rows = read_jsonl_gzip(component_ledger_path, label="component route ledger")

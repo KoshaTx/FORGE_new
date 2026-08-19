@@ -56,15 +56,15 @@ from forge.product.ugi_selected_generator_implementation import (
     build_selected_generator_implementation_qualification,
     require_selected_generator_implementation_unchanged,
 )
-from forge.product.ugi_terminal_route_assessment import (
-    QualifiedUgiL1Reverifier,
-    UgiTerminalRouteAssessmentError,
-    ValidatedUgiTerminalPayload,
-)
 from forge.product.ugi_training_cache import load_ugi_training_cache
 from forge.product.ugi_zero_guidance_rehearsal import (
     RestartableGeneratorClosureAdapter,
     RestartableGeneratorClosureIdentity,
+)
+from forge.route.terminal_assessment import (
+    QualifiedUgiL1Reverifier,
+    UgiTerminalRouteAssessmentError,
+    ValidatedUgiTerminalPayload,
 )
 
 try:

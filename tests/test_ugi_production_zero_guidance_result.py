@@ -29,9 +29,9 @@ from forge.product.ugi_production_zero_guidance_result import (
     ProductionZeroGuidanceExecutionResult,
     UgiProductionZeroGuidanceResultError,
 )
-from forge.product.ugi_terminal_route_assessment import ExactL1ForwardVerification
 from forge.product.ugi_zero_guidance_rehearsal import ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION
 from forge.route.planner import RouteTarget
+from forge.route.terminal_assessment import ExactL1ForwardVerification
 from forge.route.ugi3_support_boundary import (
     MolecularSupportState,
     TargetQualification,
@@ -204,8 +204,9 @@ def test_complete_composer_and_support_audits_are_retained_byte_stably() -> None
     assert serialized["paired_support_count"] == 1
     assert serialized["paired_support_identity_except_cache_clone_proven"] is True
     assert len(serialized["support_audits"]) == 2
-    assert serialized["support_audits"][0]["audit"]["support"] == (
-        _snapshots()[0].audit.to_dict()["support"]
+    assert (
+        serialized["support_audits"][0]["audit"]["support"]
+        == (_snapshots()[0].audit.to_dict()["support"])
     )
     assert result.canonical_bytes == result.canonical_bytes
     assert json.loads(result.canonical_bytes)["result_sha256"] == result.result_sha256

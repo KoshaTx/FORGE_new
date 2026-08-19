@@ -33,7 +33,7 @@ from forge.product.ugi_selected_restartable_generator import (
     UgiSelectedRestartableGeneratorError,
     build_selected_step1000_restartable_generator_lane,
 )
-from forge.product.ugi_terminal_route_assessment import (
+from forge.route.terminal_assessment import (
     UgiTerminalRouteAssessmentError,
     ValidatedUgiTerminalPayload,
 )
