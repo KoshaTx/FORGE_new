@@ -1,4 +1,4 @@
-.PHONY: help vendor vendor-partial verify m0-03-r0-reconcile m0-03 m0-03-reproduce \
+.PHONY: help vendor vendor-partial verify verify-partial m0-03-r0-reconcile m0-03 m0-03-reproduce \
 	m0-04 m0-05 m0-06 \
 	m0-06-sparse m0-06-sparse-full-support m0-06-ring-support \
 	m0-05-score \
@@ -36,8 +36,9 @@ help:
 	@echo "FORGE — Milestone M0 only. Read AGENTS.md before working here."
 	@echo ""
 	@echo "  make vendor          copy hash-pinned source assets into data/vendor/"
-	@echo "  make vendor-partial  same, tolerating the absent 96 MB R1 file"
+	@echo "  make vendor-partial  same, tolerating assets only the origin workstation holds"
 	@echo "  make verify          re-hash vendored assets against MANIFEST.json"
+	@echo "  make verify-partial  same, treating an absent optional asset as not a failure"
 	@echo "  make m0-03-r0-reconcile build the corrected constitutional R0 corpus"
 	@echo "  make m0-03           validate the frozen R0 splits (create only if absent)"
 	@echo "  make m0-03-reproduce rebuild M0-03 in memory and require byte identity"
@@ -108,6 +109,9 @@ vendor-partial:
 
 verify:
 	python3 scripts/vendor.py --verify
+
+verify-partial:
+	python3 scripts/vendor.py --verify --allow-partial
 
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py
