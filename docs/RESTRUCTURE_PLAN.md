@@ -39,27 +39,58 @@ This is what makes the later moves safe — once a boundary is declared, breakin
 The 21 private cross-module imports each name a shared component that never got a home. They get
 one, in `core`, `chem`, or the owning domain.
 
-### 2. Model the recurring records
+### 2. Give the domain types a home — most of them already exist
 
-The ~2,073 `dict[str, Any]`s are not 2,073 different shapes. The tracked artifacts under `results/`
-are serialized instances of a small number of recurring records — a product row, a component, a
-route step, an evidence record — and the `fieldnames` constants modules declare for their CSV
-writers are literal schema declarations.
+The ~2,073 `dict[str, Any]`s are not 2,073 shapes, and the fix is smaller than it looks: **the
+shared surface of the big modules is already types, not logic.** `ugi_terminal_route_assessment` is
+1,381 lines of which **956 are dataclasses**, and 5 of its 7 exports are types, imported by 13
+modules. `ugi_nonzero_guidance_runner` is 2,579 lines with **722 lines of dataclasses**, 11 of 15
+exports types, imported by 15. That is 1,678 lines of domain records that 28 modules already depend
+on, sitting inside modules named after the one analysis that happened to define them.
 
-Define the dozen that recur as frozen dataclasses in a domain-types module, with `from_row` /
-`to_row` so ledgers keep serializing byte-identically. **Twelve well-chosen types beat forty**; a
-shape used once stays a dict.
+So this step is mostly relocation, not design. What genuinely needs defining is short:
 
-This is what turns dict-passing into composition, and it is the single highest-leverage change for
-"structured better".
+- **`PinnedInput` `{path, sha256}`** — constructed 506 times across **201 of 286 modules**, an order
+  of magnitude more pervasive than anything else. `core.hashing.pin_record` already returns it, and
+  modelling it is what lets the 50 divergent `_pin` validators converge on one parse.
+- **`RoleName` + `RoleMap`** — done, and it caught a defect: the enum modelled the spelling the
+  artifacts barely use.
+- **The `SemanticAtom`/`Bond`/`ComponentMapping`/`Product` family** — one owning module, explicit
+  field tuples, identical across three corpora. The safest pilot for `from_row`/`to_row`.
+- **`OracleMetricRow` / `OraclePredictionRow`** — declared 3× each with a clean shared core; the
+  prediction split (point vs ensemble) is honest subtyping.
+- **`ArtifactRef`** — a *produced* artifact, distinct from a consumed input.
 
-### 3. Split the vertical slices
+Leave the rest as dicts. Of 71 declared CSV schemas only 6 cluster at all; inventing a hierarchy
+over genuinely diverse ledger formats is the speculative abstraction the contract warns against.
 
-Decompose the largest modules along the seams they already have. The test for whether a concern
-deserves its own module is not size — it is whether *other modules import it*. A concern used only
-by its own `run_*()` is a long function; a concern others import is a shared component with no home.
+`from_row`/`to_row` must round-trip byte-identically — 63 tracked ledgers are hash-pinned.
 
-`defog_feasibility` is the archetype and the pilot.
+### 3. Extract the homeless shared components — and leave the giants alone
+
+The test is whether *other modules import it*, and applying it inverts the obvious ordering.
+**Seven of the fifteen largest non-frozen modules export nothing at all** — 7,377 lines across
+`decomposition_precision_audit` (2,096), `ugi3_aldehyde_head_capability` (1,459),
+`hydrophobic_motif_transfer` (1,381), `oracle_graph_transfer` (1,282), `route_awareness` (1,185)
+and two more. Each is one script's implementation. Decomposing them is internal tidying with no API
+benefit and no blast radius, so they rank **last** despite being the biggest.
+
+What matters is the opposite: small functions that many modules reach into privately. There are
+**147 such symbols across 44 modules**. Ranked:
+
+1. **`_rstar_step`** — 60 lines, *"one Euler step using DeFoG's minimum R-star conditional rate"*,
+   the core sampling primitive of the flow model. Reached privately by **9 modules**, and it lives
+   inside `defog_feasibility` — a *completed M0-06 feasibility probe*. Production sampling depends
+   on a finished experiment. `defog_feasibility` is frozen, so this is extract-and-shim: the new
+   home becomes canonical and the frozen copy stays as legacy.
+2. **The two type vocabularies** above — 1,678 lines, 28 importers, need a home not a redesign.
+3. **`_aldehyde_program` / `_isocyanide_program`** in `ugi3_virtual_programs`, 5 importers each — a
+   clean role-program seam.
+
+Also formalise the stage contract rather than invent one. 206 of 291 modules have an entry point,
+and 181 of them return `(result_document, *artifact_bytes)` positionally — that **is** the artifact
+contract, written as a tuple instead of a type. `core.artifact.ArtifactRun` already models it, so
+adopting it is a rename of something that exists.
 
 ### 4. Re-layout into domains
 
