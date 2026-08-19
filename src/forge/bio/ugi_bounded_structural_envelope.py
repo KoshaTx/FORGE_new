@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import io
 import json
 import math
 from collections import Counter, defaultdict
@@ -21,6 +20,7 @@ from typing import Any, Literal
 
 from forge.bio import ugi_distributional_applicability as applicability
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
 
@@ -351,17 +351,6 @@ def _csv_rows(path: Path) -> list[dict[str, str]]:
             return list(csv.DictReader(handle))
     except (OSError, csv.Error) as error:
         raise UgiBoundedStructuralEnvelopeError(f"cannot read ledger: {path}") from error
-
-
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes:
-    text = io.StringIO(newline="")
-    writer = csv.DictWriter(text, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", filename="", mtime=0) as handle:
-        handle.write(text.getvalue().encode())
-    return output.getvalue()
 
 
 def _bounded_census_action(

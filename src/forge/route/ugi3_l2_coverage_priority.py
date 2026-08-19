@@ -11,7 +11,6 @@ from __future__ import annotations
 import csv
 import gzip
 import hashlib
-import io
 import json
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
@@ -20,6 +19,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.product.ugi_tail_chemotype_audit import (
     ARCHITECTURE_FIELDS,
@@ -174,17 +174,6 @@ def _json_string_list(value: str, *, label: str) -> list[str]:
     if not isinstance(parsed, list) or any(not isinstance(item, str) for item in parsed):
         raise UgiL2CoveragePriorityError(f"{label} must be a list of strings")
     return parsed
-
-
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes:
-    text = io.StringIO(newline="")
-    writer = csv.DictWriter(text, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as compressed:
-        compressed.write(text.getvalue().encode())
-    return output.getvalue()
 
 
 def _portable(path: Path, *, root: Path) -> str:

@@ -10,8 +10,6 @@ from __future__ import annotations
 import csv
 import gzip
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping
 from pathlib import Path
@@ -20,6 +18,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import write_json as _atomic_json
 from forge.data.r0_splits import sha256_file
 from forge.product.ugi_component_expansion import reaction_handle_qualification
 from forge.product.ugi_held_component_gate import (
@@ -43,24 +42,6 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise UgiPostselectionHeldComponentError(f"expected JSON object: {path}")
     return value
-
-
-def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:

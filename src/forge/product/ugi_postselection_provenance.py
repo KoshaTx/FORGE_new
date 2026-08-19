@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import io
 import json
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
@@ -19,6 +18,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_postselection_provenance_audit_config.v1"
@@ -135,17 +135,6 @@ def _json_string_list(value: Any, *, label: str) -> list[str]:
     if not isinstance(parsed, list) or any(not isinstance(item, str) for item in parsed):
         raise UgiPostselectionProvenanceError(f"{label} must be a list of strings")
     return sorted(set(parsed))
-
-
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes:
-    text = io.StringIO(newline="")
-    writer = csv.DictWriter(text, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as compressed:
-        compressed.write(text.getvalue().encode())
-    return output.getvalue()
 
 
 def _portable(path: Path, *, root: Path) -> str:

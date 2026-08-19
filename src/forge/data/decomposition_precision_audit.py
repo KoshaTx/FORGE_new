@@ -26,6 +26,7 @@ from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdFingerprintGenerator
 from rdkit.Chem.Draw import rdMolDraw2D
 
+from forge.core.io import csv_bytes as _csv_bytes
 from forge.data.r1_prime_audit import (
     AuditError,
     CompiledReaction,
@@ -293,15 +294,6 @@ def _gzip_bytes(payload: bytes) -> bytes:
     return buffer.getvalue()
 
 
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fieldnames: Sequence[str]) -> bytes:
-    stream = io.StringIO(newline="")
-    writer = csv.DictWriter(stream, fieldnames=fieldnames, lineterminator="\n")
-    writer.writeheader()
-    for row in rows:
-        writer.writerow({field: row.get(field, "") for field in fieldnames})
-    return stream.getvalue().encode()
-
-
 def _read_r0(path: Path) -> dict[str, dict[str, str]]:
     required = {
         "r0_structure_id",
@@ -312,7 +304,7 @@ def _read_r0(path: Path) -> dict[str, dict[str, str]]:
         reader = csv.DictReader(handle)
         if reader.fieldnames is None or not required.issubset(reader.fieldnames):
             raise AuditError(
-                f"R0 input is missing columns: {sorted(required.difference(reader.fieldnames or ())) }"
+                f"R0 input is missing columns: {sorted(required.difference(reader.fieldnames or ()))}"
             )
         rows = list(reader)
     by_id = {row["r0_structure_id"]: row for row in rows}
@@ -1176,8 +1168,7 @@ def _prepare_lx_transfer_cases(
     members = _lx_members(review)
     if len(members) != expected_count:
         raise AuditError(
-            f"{LX_REVIEW_ID} contains {len(members)} routed aldehydes; "
-            f"expected {expected_count}"
+            f"{LX_REVIEW_ID} contains {len(members)} routed aldehydes; expected {expected_count}"
         )
     example = reaction.definition.known_positive_examples[0]
     roles = tuple(role.name for role in reaction.definition.reactant_roles)
@@ -1456,7 +1447,7 @@ def _control_wrong_families(
             control = replace(
                 base,
                 case_key=(
-                    f"control|wrong_family|{alternative.definition.reaction_id}|" f"{base.case_key}"
+                    f"control|wrong_family|{alternative.definition.reaction_id}|{base.case_key}"
                 ),
                 sampling_frame="adversarial_control",
                 case_origin="synthetic_adversarial_control",
@@ -1887,7 +1878,7 @@ def _html_packet(cases: Sequence[ReviewCase]) -> bytes:
   <p>Review independently. Do not consult the answer key until both reviewers have submitted frozen annotations.</p>
   <p>The packet mixes corpus decompositions, applicability stress cases, and controls. Their identities are intentionally hidden.</p>
 </header>
-<main>{''.join(cards)}</main>
+<main>{"".join(cards)}</main>
 </body>
 </html>
 """

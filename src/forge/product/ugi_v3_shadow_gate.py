@@ -19,6 +19,7 @@ from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import write_json as _atomic_json
 from forge.data.r0_splits import sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_v3_nonselecting_shadow_gate_config.v1"
@@ -82,24 +83,6 @@ def _require_hash(repository: Path, specification: Mapping[str, Any], *, label: 
             f"{label} hash mismatch: expected {specification['sha256']}, observed {observed}"
         )
     return path
-
-
-def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _candidate_objects(result: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
@@ -375,7 +358,7 @@ def evaluate_v3_shadow_gate(
     ]
     if mismatches:
         raise UgiV3ShadowGateError(
-            "unchanged v3 metric-and-gate objects failed exact reproduction: " f"{mismatches}"
+            f"unchanged v3 metric-and-gate objects failed exact reproduction: {mismatches}"
         )
     challenger_candidate = shadow_candidates[target_id]
     if challenger_candidate["sampling_result"]["sha256"] != challenger_result_sha256:

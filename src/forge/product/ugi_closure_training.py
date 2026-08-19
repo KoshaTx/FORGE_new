@@ -12,6 +12,7 @@ from typing import Any
 import numpy as np
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_closure_placement import (
     UgiSparseClosureScorer,
@@ -51,24 +52,6 @@ def _closure_selection_key(evaluation: dict[str, Any]) -> tuple[float, float]:
     if mean_nll is None or exact_fraction is None:
         raise UgiClosureTrainingError("closure calibration selection metric is undefined")
     return float(mean_nll), -float(exact_fraction)
-
-
-def _atomic_json(path: Path, value: Any) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _atomic_checkpoint(path: Path, value: Any) -> None:

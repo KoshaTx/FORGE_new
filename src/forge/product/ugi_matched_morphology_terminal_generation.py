@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import write_json as _atomic_json
 from forge.data.r1_prime_audit import sha256_file
 from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     _jsonl_gzip_bytes,
@@ -151,10 +152,6 @@ def _pin(repo: Path, record: Any, *, label: str) -> Path:
     if path.is_symlink() or not path.is_file() or sha256_file(path) != record["sha256"]:
         raise UgiMatchedMorphologyTerminalGenerationError(f"pin changed: {label}")
     return path
-
-
-def _atomic_json(path: Path, value: Any) -> None:
-    _atomic_write(path, json.dumps(value, indent=2, sort_keys=True).encode() + b"\n")
 
 
 def matched_draw_seed(base: int, *, purpose: str, draw_index: int) -> int:

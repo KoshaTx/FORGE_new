@@ -5,7 +5,6 @@ from __future__ import annotations
 import csv
 import gzip
 import hashlib
-import io
 import json
 import os
 import platform
@@ -17,6 +16,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import (
     CompiledReaction,
     DecompositionCandidate,
@@ -83,9 +83,7 @@ def _load_json(path: Path, *, label: str) -> dict[str, Any]:
     except FileNotFoundError as exc:
         raise Ugi3VirtualCapabilityError(f"{label} not found: {path}") from exc
     except json.JSONDecodeError as exc:
-        raise Ugi3VirtualCapabilityError(
-            f"{label} is not valid JSON: {path}: {exc}"
-        ) from exc
+        raise Ugi3VirtualCapabilityError(f"{label} is not valid JSON: {path}: {exc}") from exc
     if not isinstance(value, dict):
         raise Ugi3VirtualCapabilityError(f"{label} must contain a JSON object")
     return value
@@ -93,9 +91,7 @@ def _load_json(path: Path, *, label: str) -> dict[str, Any]:
 
 def _verify_hash(path: Path, expected: Any, *, label: str) -> str:
     if not isinstance(expected, str) or len(expected) != 64:
-        raise Ugi3VirtualCapabilityError(
-            f"{label} expected_sha256 must be a 64-character string"
-        )
+        raise Ugi3VirtualCapabilityError(f"{label} expected_sha256 must be a 64-character string")
     if not path.exists():
         raise Ugi3VirtualCapabilityError(f"{label} not found: {path}")
     observed = sha256_file(path)
@@ -120,9 +116,7 @@ def _canonicalize(molecule: Chem.Mol, *, label: str) -> str:
     except Ugi3VirtualCapabilityError:
         raise
     except Exception as exc:
-        raise Ugi3VirtualCapabilityError(
-            f"{label} could not be sanitized"
-        ) from exc
+        raise Ugi3VirtualCapabilityError(f"{label} could not be sanitized") from exc
 
 
 def _load_virtual_rows(
@@ -130,16 +124,9 @@ def _load_virtual_rows(
     virtual_manifest: Mapping[str, Any],
 ) -> list[dict[str, str]]:
     if virtual_manifest.get("schema_version") != VIRTUAL_MANIFEST_SCHEMA_VERSION:
-        raise Ugi3VirtualCapabilityError(
-            "virtual SMILES manifest has an unsupported schema"
-        )
-    if (
-        virtual_manifest.get("output", {}).get("sha256")
-        != sha256_file(virtual_smiles_path)
-    ):
-        raise Ugi3VirtualCapabilityError(
-            "virtual SMILES manifest does not match the derived table"
-        )
+        raise Ugi3VirtualCapabilityError("virtual SMILES manifest has an unsupported schema")
+    if virtual_manifest.get("output", {}).get("sha256") != sha256_file(virtual_smiles_path):
+        raise Ugi3VirtualCapabilityError("virtual SMILES manifest does not match the derived table")
     required = {
         "source_row_index",
         "source_smiles",
@@ -150,14 +137,10 @@ def _load_virtual_rows(
         with handle:
             reader = csv.DictReader(handle)
             if reader.fieldnames is None or set(reader.fieldnames) != required:
-                raise Ugi3VirtualCapabilityError(
-                    "virtual SMILES table has an unexpected schema"
-                )
+                raise Ugi3VirtualCapabilityError("virtual SMILES table has an unexpected schema")
             rows = list(reader)
     except (gzip.BadGzipFile, csv.Error, OSError) as exc:
-        raise Ugi3VirtualCapabilityError(
-            f"virtual SMILES table could not be read: {exc}"
-        ) from exc
+        raise Ugi3VirtualCapabilityError(f"virtual SMILES table could not be read: {exc}") from exc
     observed_indices = [int(row["source_row_index"]) for row in rows]
     if observed_indices != list(range(len(rows))):
         raise Ugi3VirtualCapabilityError(
@@ -175,9 +158,7 @@ def _validate_assembly_policy(
     scope: Mapping[str, Any],
 ) -> None:
     if assembly.get("schema_version") != ASSEMBLY_SCHEMA_VERSION:
-        raise Ugi3VirtualCapabilityError(
-            "assembly qualification has an unsupported schema"
-        )
+        raise Ugi3VirtualCapabilityError("assembly qualification has an unsupported schema")
     policy = assembly.get("multiplicity_policy")
     decision = assembly.get("decision")
     override = scope["role_policy_overrides"][0]
@@ -186,8 +167,7 @@ def _validate_assembly_policy(
         or not isinstance(decision, dict)
         or policy.get("reaction_id") != override["reaction_id"]
         or policy.get("role") != override["role"]
-        or policy.get("semantics")
-        != override["site_multiplicity_semantics"]
+        or policy.get("semantics") != override["site_multiplicity_semantics"]
         or decision.get("all_measured_products_pass") is not True
         or assembly.get("failed_row_labels") != []
     ):
@@ -224,14 +204,9 @@ def _forward_site_audit(
     target: str,
     max_outcomes: int,
 ) -> dict[str, Any]:
-    reactants = tuple(
-        Chem.MolFromSmiles(smiles)
-        for smiles in candidate.reactant_smiles
-    )
+    reactants = tuple(Chem.MolFromSmiles(smiles) for smiles in candidate.reactant_smiles)
     if any(molecule is None for molecule in reactants):
-        raise Ugi3VirtualCapabilityError(
-            "decomposition candidate contains invalid reactant SMILES"
-        )
+        raise Ugi3VirtualCapabilityError("decomposition candidate contains invalid reactant SMILES")
     typed_reactants: tuple[Chem.Mol, ...] = reactants  # type: ignore[assignment]
     with rdBase.BlockLogs():
         outcomes = reaction.forward.RunReactants(
@@ -239,9 +214,7 @@ def _forward_site_audit(
             maxProducts=max_outcomes,
         )
     if len(outcomes) >= max_outcomes:
-        raise Ugi3VirtualCapabilityError(
-            f"forward site audit reached max_outcomes={max_outcomes}"
-        )
+        raise Ugi3VirtualCapabilityError(f"forward site audit reached max_outcomes={max_outcomes}")
     unique_products: set[str] = set()
     target_site_records: dict[str, dict[str, Any]] = {}
     target_matching_outcomes = 0
@@ -290,10 +263,7 @@ def _forward_site_audit(
         "unique_forward_products": len(unique_products),
         "target_matching_forward_outcomes": target_matching_outcomes,
         "distinct_target_reacting_sites": len(target_site_records),
-        "reacting_amine_sites": [
-            target_site_records[key]
-            for key in sorted(target_site_records)
-        ],
+        "reacting_amine_sites": [target_site_records[key] for key in sorted(target_site_records)],
     }
 
 
@@ -303,27 +273,16 @@ def _evidence_index(
     agile_component_routes: Mapping[str, Any],
 ) -> dict[str, dict[str, list[dict[str, Any]]]]:
     if precursor.get("schema_version") != PRECURSOR_SCHEMA_VERSION:
-        raise Ugi3VirtualCapabilityError(
-            "precursor capability has an unsupported schema"
-        )
+        raise Ugi3VirtualCapabilityError("precursor capability has an unsupported schema")
     if aldehyde_head.get("schema_version") != ALDEHYDE_HEAD_SCHEMA_VERSION:
-        raise Ugi3VirtualCapabilityError(
-            "aldehyde/head capability has an unsupported schema"
-        )
-    if (
-        agile_component_routes.get("schema_version")
-        != AGILE_COMPONENT_ROUTES_SCHEMA_VERSION
-    ):
-        raise Ugi3VirtualCapabilityError(
-            "AGILE component routes have an unsupported schema"
-        )
+        raise Ugi3VirtualCapabilityError("aldehyde/head capability has an unsupported schema")
+    if agile_component_routes.get("schema_version") != AGILE_COMPONENT_ROUTES_SCHEMA_VERSION:
+        raise Ugi3VirtualCapabilityError("AGILE component routes have an unsupported schema")
     head_records = aldehyde_head.get("head_candidate_audit")
     aldehyde_records = aldehyde_head.get("aldehyde_candidate_audit")
     isocyanide_records = precursor.get("isocyanide_candidates")
     sources = {
-        "amine_head": list(head_records)
-        if isinstance(head_records, list)
-        else head_records,
+        "amine_head": list(head_records) if isinstance(head_records, list) else head_records,
         "oxoester_aldehyde_body_tail": list(aldehyde_records)
         if isinstance(aldehyde_records, list)
         else aldehyde_records,
@@ -371,38 +330,27 @@ def _evidence_index(
             )
         role_records = sources[role]
         if not isinstance(role_records, list):
-            raise Ugi3VirtualCapabilityError(
-                f"capability artifact has malformed {role} records"
-            )
+            raise Ugi3VirtualCapabilityError(f"capability artifact has malformed {role} records")
         role_records.append(
             {
                 "block_id": f"source-route:{route_id}",
                 "canonical_smiles": canonical_target,
                 "transformation_evidence": ["exact_source_route"],
                 "route_closure": "incomplete",
-                "operational_availability": (
-                    "route_or_procurement_resolution_required"
-                ),
+                "operational_availability": ("route_or_procurement_resolution_required"),
                 "source_route_id": route_id,
                 "source_route_family_id": family,
-                "source_execution_closure_status": route.get(
-                    "execution_closure_status"
-                ),
-                "source_forward_verification_status": route.get(
-                    "forward_verification_status"
-                ),
+                "source_execution_closure_status": route.get("execution_closure_status"),
+                "source_forward_verification_status": route.get("forward_verification_status"),
             }
         )
     result: dict[str, dict[str, list[dict[str, Any]]]] = {}
     for role, records in sources.items():
         if not isinstance(records, list) or any(
-            not isinstance(record, dict)
-            or not isinstance(record.get("canonical_smiles"), str)
+            not isinstance(record, dict) or not isinstance(record.get("canonical_smiles"), str)
             for record in records
         ):
-            raise Ugi3VirtualCapabilityError(
-                f"capability artifact has malformed {role} records"
-            )
+            raise Ugi3VirtualCapabilityError(f"capability artifact has malformed {role} records")
         by_smiles: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for record in records:
             by_smiles[record["canonical_smiles"]].append(record)
@@ -418,11 +366,7 @@ def _component_projection(
     complete_route_state: str,
 ) -> dict[str, Any]:
     record_ids = sorted(
-        {
-            str(record["block_id"])
-            for record in records
-            if isinstance(record.get("block_id"), str)
-        }
+        {str(record["block_id"]) for record in records if isinstance(record.get("block_id"), str)}
     )
     transformation_evidence = sorted(
         {
@@ -447,12 +391,8 @@ def _component_projection(
         }
     )
     accepted_terminal = any(
-        state in accepted_terminal_availability
-        for state in availability_states
-    ) or any(
-        record.get("current_item_level_procurement_closed") is True
-        for record in records
-    )
+        state in accepted_terminal_availability for state in availability_states
+    ) or any(record.get("current_item_level_procurement_closed") is True for record in records)
     route_complete = complete_route_state in route_states
     has_exact_source_route = "exact_source_route" in transformation_evidence
     closed = accepted_terminal or route_complete
@@ -480,20 +420,6 @@ def _component_projection(
     }
 
 
-def _csv_bytes(
-    rows: Sequence[Mapping[str, Any]],
-    fields: Sequence[str],
-) -> bytes:
-    buffer = io.StringIO(newline="")
-    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as compressed:
-        compressed.write(buffer.getvalue().encode())
-    return output.getvalue()
-
-
 def _validate_frozen_counts(
     observed: Mapping[str, Any],
     expected: Mapping[str, Any],
@@ -502,8 +428,7 @@ def _validate_frozen_counts(
 ) -> None:
     if set(observed) != set(expected):
         raise Ugi3VirtualCapabilityError(
-            f"{prefix} fields mismatch: expected {sorted(expected)}, "
-            f"observed {sorted(observed)}"
+            f"{prefix} fields mismatch: expected {sorted(expected)}, observed {sorted(observed)}"
         )
     for field, expected_value in expected.items():
         observed_value = observed[field]
@@ -518,8 +443,7 @@ def _validate_frozen_counts(
             )
         elif observed_value != expected_value:
             raise Ugi3VirtualCapabilityError(
-                f"{label} mismatch: expected {expected_value!r}, "
-                f"observed {observed_value!r}"
+                f"{label} mismatch: expected {expected_value!r}, observed {observed_value!r}"
             )
 
 
@@ -537,9 +461,7 @@ def build_ugi3_virtual_capability(
 
     config = _load_json(config_path, label="virtual capability config")
     if config.get("schema_version") != CONFIG_SCHEMA_VERSION:
-        raise Ugi3VirtualCapabilityError(
-            f"config schema must be {CONFIG_SCHEMA_VERSION!r}"
-        )
+        raise Ugi3VirtualCapabilityError(f"config schema must be {CONFIG_SCHEMA_VERSION!r}")
     inputs = {
         "virtual_smiles": virtual_smiles_path,
         "virtual_smiles_manifest": virtual_manifest_path,
@@ -625,10 +547,7 @@ def build_ugi3_virtual_capability(
     if (
         not isinstance(configured_terminal_states, list)
         or not configured_terminal_states
-        or any(
-            not isinstance(state, str) or not state
-            for state in configured_terminal_states
-        )
+        or any(not isinstance(state, str) or not state for state in configured_terminal_states)
         or not isinstance(complete_route_state, str)
         or not complete_route_state
     ):
@@ -732,45 +651,33 @@ def build_ugi3_virtual_capability(
                     sort_keys=True,
                     separators=(",", ":"),
                 ),
-                "has_complete_l2_l3_candidate": str(
-                    has_complete_candidate
-                ).lower(),
+                "has_complete_l2_l3_candidate": str(has_complete_candidate).lower(),
             }
         )
 
     component_rows: list[dict[str, Any]] = []
     role_summary: dict[str, dict[str, int]] = {}
     for role in ROLE_ORDER:
-        role_keys = sorted(
-            key for key in component_projections if key[0] == role
-        )
+        role_keys = sorted(key for key in component_projections if key[0] == role)
         role_summary[role] = {
             "unique_components": len(role_keys),
             "evidence_matched_components": sum(
-                component_projections[key]["evidence_match"]
-                for key in role_keys
+                component_projections[key]["evidence_match"] for key in role_keys
             ),
             "unmatched_components": sum(
-                not component_projections[key]["evidence_match"]
-                for key in role_keys
+                not component_projections[key]["evidence_match"] for key in role_keys
             ),
             "components_with_exact_source_route": sum(
-                component_projections[key]["has_exact_source_route"]
-                for key in role_keys
+                component_projections[key]["has_exact_source_route"] for key in role_keys
             ),
             "accepted_terminal_components": sum(
-                component_projections[key]["accepted_terminal"]
-                for key in role_keys
+                component_projections[key]["accepted_terminal"] for key in role_keys
             ),
             "computationally_route_complete_components": sum(
-                component_projections[key][
-                    "computationally_route_complete"
-                ]
-                for key in role_keys
+                component_projections[key]["computationally_route_complete"] for key in role_keys
             ),
             "l2_l3_closed_components": sum(
-                component_projections[key]["l2_l3_closed"]
-                for key in role_keys
+                component_projections[key]["l2_l3_closed"] for key in role_keys
             ),
         }
         for key in role_keys:
@@ -782,33 +689,21 @@ def build_ugi3_virtual_capability(
                     "canonical_smiles": key[1],
                     "product_count": len(component_products[key]),
                     "candidate_occurrence_count": component_occurrences[key],
-                    "evidence_match": str(
-                        projection["evidence_match"]
-                    ).lower(),
-                    "matched_record_ids_json": json.dumps(
-                        projection["matched_record_ids"]
-                    ),
+                    "evidence_match": str(projection["evidence_match"]).lower(),
+                    "matched_record_ids_json": json.dumps(projection["matched_record_ids"]),
                     "transformation_evidence_json": json.dumps(
                         projection["transformation_evidence"]
                     ),
-                    "has_exact_source_route": str(
-                        projection["has_exact_source_route"]
-                    ).lower(),
-                    "route_closure_states_json": json.dumps(
-                        projection["route_closure_states"]
-                    ),
+                    "has_exact_source_route": str(projection["has_exact_source_route"]).lower(),
+                    "route_closure_states_json": json.dumps(projection["route_closure_states"]),
                     "operational_availability_states_json": json.dumps(
                         projection["operational_availability_states"]
                     ),
-                    "accepted_terminal": str(
-                        projection["accepted_terminal"]
-                    ).lower(),
+                    "accepted_terminal": str(projection["accepted_terminal"]).lower(),
                     "computationally_route_complete": str(
                         projection["computationally_route_complete"]
                     ).lower(),
-                    "l2_l3_closed": str(
-                        projection["l2_l3_closed"]
-                    ).lower(),
+                    "l2_l3_closed": str(projection["l2_l3_closed"]).lower(),
                     "routing_action": projection["routing_action"],
                 }
             )
@@ -837,12 +732,8 @@ def build_ugi3_virtual_capability(
         "products_with_multiple_exact_decompositions": sum(
             row["candidate_count"] > 1 for row in product_rows
         ),
-        "total_exact_decomposition_candidates": sum(
-            row["candidate_count"] for row in product_rows
-        ),
-        "products_with_complete_l2_l3_candidate": (
-            products_with_complete_candidate
-        ),
+        "total_exact_decomposition_candidates": sum(row["candidate_count"] for row in product_rows),
+        "products_with_complete_l2_l3_candidate": (products_with_complete_candidate),
         "unique_components_total": len(component_rows),
         "cartesian_component_tuples": len(component_tuples),
         "roles": role_summary,

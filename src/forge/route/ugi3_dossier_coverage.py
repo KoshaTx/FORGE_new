@@ -10,13 +10,13 @@ from __future__ import annotations
 
 import csv
 import gzip
-import io
 import json
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_dossier_coverage_config.v1"
@@ -94,17 +94,6 @@ def _json_list(value: str, *, label: str) -> list[Any]:
     if not isinstance(parsed, list):
         raise Ugi3DossierCoverageError(f"{label} must be a list")
     return parsed
-
-
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes:
-    text = io.StringIO(newline="")
-    writer = csv.DictWriter(text, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as compressed:
-        compressed.write(text.getvalue().encode())
-    return output.getvalue()
 
 
 def _component_status(

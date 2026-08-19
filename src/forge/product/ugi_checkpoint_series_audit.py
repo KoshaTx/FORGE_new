@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 
 
@@ -28,24 +27,6 @@ def _load_json(path: Path, label: str) -> dict[str, Any]:
 def _resolve(reference: str, repo: Path) -> Path:
     path = Path(reference)
     return path if path.is_absolute() else repo / path
-
-
-def _atomic_json(path: Path, value: dict[str, Any]) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _checkpoint_step(sample: dict[str, Any], sample_path: Path) -> tuple[int, Path]:

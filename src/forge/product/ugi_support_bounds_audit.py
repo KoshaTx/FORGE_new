@@ -5,8 +5,6 @@ from __future__ import annotations
 import csv
 import gzip
 import json
-import os
-import tempfile
 from collections import Counter, deque
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -16,6 +14,7 @@ import numpy as np
 from rdkit import Chem
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 from forge.product.lipid_support_skeleton import (
     FUNCTIONAL_SUPPORT,
@@ -33,24 +32,6 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
     opener = gzip.open if path.suffix == ".gz" else open
     with opener(path, "rt", newline="") as handle:
         return list(csv.DictReader(handle))
-
-
-def _atomic_json(path: Path, value: Any) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _resolve_inputs(

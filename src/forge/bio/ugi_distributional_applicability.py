@@ -21,7 +21,6 @@ from __future__ import annotations
 import csv
 import gzip
 import hashlib
-import io
 import json
 import math
 from collections import Counter, defaultdict
@@ -35,6 +34,7 @@ import numpy as np
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Crippen, Descriptors, Lipinski, rdFingerprintGenerator, rdMolDescriptors
 
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_distributional_applicability_config.v1"
@@ -627,17 +627,6 @@ def _generated_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         },
         "all_guidance_actions_abstain": all(row["guidance_action"] == "abstain" for row in rows),
     }
-
-
-def _csv_bytes(rows: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> bytes:
-    text = io.StringIO(newline="")
-    writer = csv.DictWriter(text, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    output = io.BytesIO()
-    with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as handle:
-        handle.write(text.getvalue().encode())
-    return output.getvalue()
 
 
 def build_distributional_applicability_audit(

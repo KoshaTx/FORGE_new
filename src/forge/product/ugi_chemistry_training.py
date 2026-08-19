@@ -13,6 +13,7 @@ import numpy as np
 from rdkit import Chem
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_chemistry_corpus import (
     UgiChemistryRecord,
@@ -53,24 +54,6 @@ _IMPLEMENTATION_PATHS = {
     "interface": Path(__file__).with_name("ugi_chemistry_interface.py").resolve(),
     "training": Path(__file__).resolve(),
 }
-
-
-def _atomic_json(path: Path, value: Any) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _atomic_checkpoint(path: Path, value: Any) -> None:
@@ -153,9 +136,7 @@ def _source_stratified_coverage_subset_indices(
 ) -> np.ndarray:
     """Bound a smoke corpus without silently dropping a provenance stratum."""
 
-    sources = sorted(
-        {str(row.get("source_stratum") or "unspecified") for row in assignments}
-    )
+    sources = sorted({str(row.get("source_stratum") or "unspecified") for row in assignments})
     if len(sources) == 1:
         return _coverage_subset_indices(assignments, limit=limit)
     if limit < len(sources):
@@ -257,8 +238,7 @@ def _records_by_source(
 def _macro_average_metrics(values: dict[str, dict[str, float]]) -> dict[str, float]:
     keys = set.intersection(*(set(metrics) for metrics in values.values()))
     return {
-        key: float(np.mean([metrics[key] for metrics in values.values()]))
-        for key in sorted(keys)
+        key: float(np.mean([metrics[key] for metrics in values.values()])) for key in sorted(keys)
     }
 
 
@@ -503,9 +483,7 @@ def train_ugi_chemistry(
                 device=device,
                 maximum_decorations=int(model_config.get("maximum_decorations", 1)),
             )
-            for source_index, (source, records) in enumerate(
-                calibration_by_source.items()
-            )
+            for source_index, (source, records) in enumerate(calibration_by_source.items())
         }
         evaluation = {
             "step": step,
@@ -692,18 +670,14 @@ def train_ugi_chemistry(
                             [
                                 index
                                 for index, row in enumerate(train_assignments)
-                                if str(row.get("source_stratum") or "unspecified")
-                                == source
+                                if str(row.get("source_stratum") or "unspecified") == source
                             ],
                             dtype=np.int64,
                         )
                     ].sum()
                 )
                 for source in sorted(
-                    {
-                        str(row.get("source_stratum") or "unspecified")
-                        for row in train_assignments
-                    }
+                    {str(row.get("source_stratum") or "unspecified") for row in train_assignments}
                 )
             },
         },

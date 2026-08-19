@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -14,6 +12,7 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import Crippen, Descriptors, Draw, Lipinski, rdFingerprintGenerator
 
 from forge.bio.ugi_semantic_annotations import ROLE_NAMES
+from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 from forge.product.ugi_chemistry_corpus import (
     load_expanded_ugi_chemistry_corpus,
@@ -48,24 +47,6 @@ except ModuleNotFoundError:  # pragma: no cover - optional dependency
 
 class UgiEndToEndSamplingError(RuntimeError):
     """Raised when checkpoint composition violates the generated-data contract."""
-
-
-def _atomic_json(path: Path, value: Any) -> None:
-    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _load_checkpoint(path: Path, schema: str | tuple[str, ...]) -> dict[str, Any]:

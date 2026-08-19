@@ -5,7 +5,6 @@ from __future__ import annotations
 import csv
 import gzip
 import hashlib
-import io
 import json
 import math
 from collections import Counter, defaultdict
@@ -16,6 +15,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.data.r0_splits import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_product_l1_data_config.v3"
@@ -473,17 +473,6 @@ def _build_assignments(
             }
         )
     return assignments
-
-
-def _csv_bytes(
-    rows: Sequence[Mapping[str, str]],
-    fields: Sequence[str] = ASSIGNMENT_FIELDS,
-) -> bytes:
-    buffer = io.StringIO(newline="")
-    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    return gzip.compress(buffer.getvalue().encode(), compresslevel=9, mtime=0)
 
 
 def _relative_output(repo: Path, configured: str) -> Path:
