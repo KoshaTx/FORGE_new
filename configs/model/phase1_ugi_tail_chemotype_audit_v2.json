@@ -1,0 +1,46 @@
+{
+  "schema_version": "phase1_ugi_tail_chemotype_audit_config.v1",
+  "status": "frozen_nonselecting_fresh_pool_audit",
+  "tail_roles": [
+    "oxoester_aldehyde_body_tail",
+    "isocyanide_tail"
+  ],
+  "selection_visible_folds": [
+    "train",
+    "calibration"
+  ],
+  "transfer_source_class": "cross_platform_hydrophobic_transfer",
+  "identity_policy": {
+    "stereochemistry": "excluded",
+    "exact_component_identity": "role_plus_canonical_constitutional_smiles",
+    "chemotype_signature": "graph_derived_counts_without_fragment_vocabulary"
+  },
+  "decision_policy": {
+    "checkpoint_selection": false,
+    "fresh_pool_is_nonselecting": true,
+    "heldout_component_families_inspected": false,
+    "no_synthesis_or_biological_inference": true
+  },
+  "inputs": {
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "original_ugi_product_ledger": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "selection_reference_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    }
+  }
+}

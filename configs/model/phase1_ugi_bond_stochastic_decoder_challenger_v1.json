@@ -1,0 +1,102 @@
+{
+  "schema_version": "phase1_ugi_bond_stochastic_decoder_challenger_config.v1",
+  "status": "frozen_post_diagnostic_nonselecting_challenger",
+  "objective": "Test whether stochastic decoding of sparse backbone bond orders alone recovers supported tail unsaturation without the oxygen-pattern drift caused by fully stochastic atom and decoration decoding.",
+  "matched_design": {
+    "checkpoints": [
+      2000,
+      4000
+    ],
+    "programs": 1024,
+    "flow_seed": 20260805,
+    "terminal_seed": 20260807,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "channel_policy": {
+      "atom_states": "feasible_argmax",
+      "parent_and_closure_bonds": "feasible_stochastic",
+      "decoration_anchor_atom_and_bond": "feasible_argmax",
+      "ugi_core_and_precursor_attachment_bonds": "adapter_fixed"
+    }
+  },
+  "selection_visible_reference_feature_fractions": {
+    "oxoester_aldehyde_body_tail": {
+      "has_carbon_branch": 0.11600457065058835,
+      "has_carbon_carbon_double_bond": 0.3285519789944569,
+      "has_carbon_carbon_triple_bond": 0.13989108236895847,
+      "has_ester_like_carbonyl": 0.4878926383351162,
+      "has_ether_oxygen": 0.0
+    },
+    "isocyanide_tail": {
+      "has_carbon_branch": 0.5893829621705728,
+      "has_carbon_carbon_double_bond": 0.0,
+      "has_carbon_carbon_triple_bond": 0.0,
+      "has_ester_like_carbonyl": 0.16163814062044152,
+      "has_ether_oxygen": 0.0
+    }
+  },
+  "decision_policy": {
+    "checkpoint_selection": false,
+    "prospective_candidate_selection": false,
+    "exact_l1_fraction_of_valid": 1.0,
+    "maximum_absolute_validity_degradation_from_matched_argmax": 0.02,
+    "maximum_exact_frozen_product_reproduction_fraction": 0.15,
+    "maximum_fraction_for_reference_absent_tail_feature": 0.02,
+    "aldehyde_feature_l1_error_must_improve_over_matched_argmax": true,
+    "confirmation_checkpoint_rule": "Among passing arms, minimize the sum of declared aldehyde and isocyanide feature L1 errors to the selection-visible reference; break ties by lower exact frozen-product reproduction and then the earlier checkpoint.",
+    "adjudication": "A passing checkpoint requires a fresh preregistered confirmation draw before any production selector can change. Failure returns to loss reweighting; it does not implicate the topology prior."
+  },
+  "inputs": {
+    "joint_checkpoint_step2000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "joint_checkpoint_step4000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_4000.pt",
+      "sha256": "97c712b44b63de96245da3b68ce03b9424331d191c9357b68af13469f997999e"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_morphology_programs": {
+      "path": "results/phase1/ugi_program_prior_v5_challenger_selection_samples_1024.json",
+      "sha256": "3182795d0ceefb6667ddb95833595605b795f8114f6c808f907345f1e0f8d4ca"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "step2000_argmax_control": {
+      "path": "results/phase1/ugi_branch_spacing_checkpoint_promotion_v1/step2000/result.json",
+      "sha256": "3249b5d2509f27ae26165f001d306e0d2105cc5d6f0b1032a5d8af80ca969977"
+    },
+    "step4000_argmax_control": {
+      "path": "results/phase1/ugi_terminal_decoder_challenger_v1/step4000_argmax/result.json",
+      "sha256": "8445687ece3f895d35e7f575f75debe127a7a1838cd652bf4542a9a4f39145e1"
+    },
+    "chemistry_interface_source": {
+      "path": "src/forge/product/ugi_chemistry_interface.py",
+      "sha256": "e5f6b3e85b222cc1ceebdcdbcf51cea01857d9ee7ee514b3a8a6832af3be9e8c"
+    },
+    "decoder_source": {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "sha256": "c40fe8216c93008de898cff019de241ec78b8e7dfb477d7658fe12ea90b0dd66"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0"
+    },
+    "sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f"
+    }
+  }
+}

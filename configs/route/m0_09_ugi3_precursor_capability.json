@@ -1,0 +1,349 @@
+{
+  "schema_version": "m0_09_ugi3_precursor_capability_config.v2",
+  "task": "M0-09 bounded Ugi-3 precursor capability audit",
+  "inputs": {
+    "building_block_pool": {
+      "asset": "data/vendor/building_block_pool_v1.json",
+      "expected_sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "agile_component_routes": {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "expected_sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "component_source_ledger": {
+      "asset": "results/m0_09/component_source_ledger.csv",
+      "expected_sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    "paper_route_reviews": {
+      "asset": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "expected_sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    }
+  },
+  "expected_counts": {
+    "building_blocks": 490,
+    "blocks_by_handle": {
+      "aldehyde": 51,
+      "amine": 88,
+      "isocyanide": 39
+    },
+    "rational_isocyanide_candidates": 39,
+    "direct_agile_isocyanide_routes": 5,
+    "agile_source_reported_isocyanide_routes": 7,
+    "agile_amine_heads": 20,
+    "miao_heads": 12,
+    "miao_isocyanides": 10,
+    "miao_agile_head_overlap": 4
+  },
+  "candidate_scope": {
+    "handle": "isocyanide",
+    "required_provenance_source": "programmatic_rational",
+    "exact_agile_upstream_route_family_id": "agile_isocyanide_two_step",
+    "exact_upstream_route_transformation_evidence": [
+      "exact_source_route"
+    ],
+    "exact_upstream_route_component_observation": [
+      "programmatic_candidate",
+      "agile_measured_component"
+    ],
+    "extrapolated_transformation_evidence": [
+      "bounded_family_applicability"
+    ],
+    "extrapolated_component_observation": [
+      "programmatic_candidate"
+    ],
+    "route_closure": "incomplete",
+    "operational_availability": "route_or_procurement_resolution_required",
+    "prospective_outcome": "not_attempted",
+    "forward_verification_status": "not_run",
+    "scope_note": "The rational isocyanide pool is a finite structural audit set. Membership does not establish procurement, reaction success, purification, or forward route closure."
+  },
+  "agile_head_scope": {
+    "component_class": "amine",
+    "allowed_procurement_evidence_status": [
+      "vendor_claim_only"
+    ],
+    "allowed_route_evidence_status": [
+      "source_identified"
+    ],
+    "transformation_evidence": [
+      "no_upstream_route_reported"
+    ],
+    "component_observation": [
+      "agile_measured_component"
+    ],
+    "route_closure": "incomplete",
+    "operational_availability": "historical_blanket_vendor_claim",
+    "prospective_outcome": "not_attempted",
+    "forward_verification_status": "not_run",
+    "scope_note": "AGILE reports the amine set as purchased, but does not provide exact current catalog, date, and region closure for each head."
+  },
+  "miao_cross_assembly_scope": {
+    "pmid": "31570898",
+    "doi": "10.1038/s41587-019-0247-3",
+    "experiment_id": "LM_2019",
+    "head_role": "head",
+    "isocyanide_role": "linker",
+    "isocyanide_component_ids": [
+      "lnpdb-linker-08194d1e39a7738a",
+      "lnpdb-linker-23b43638d56ef708",
+      "lnpdb-linker-35059085fd651191",
+      "lnpdb-linker-53c235aad7a5b3b8",
+      "lnpdb-linker-5ae8861d9849318f",
+      "lnpdb-linker-92080b6b5512cdc3",
+      "lnpdb-linker-b98d28be02e448ea",
+      "lnpdb-linker-c04bd18eaffda968",
+      "lnpdb-linker-c51cf94a2bf74c1b",
+      "lnpdb-linker-d623f3f2ea56ebb6"
+    ],
+    "procurement_evidence_status": "historical_blanket_vendor_claim",
+    "assembly_applicability": "cross_assembly_evidence_only",
+    "transformation_evidence": [
+      "no_upstream_route_reported"
+    ],
+    "component_observation": [
+      "cross_assembly_component"
+    ],
+    "route_closure": "incomplete",
+    "operational_availability": "historical_blanket_vendor_claim",
+    "prospective_outcome": "not_attempted",
+    "forward_verification_status": "not_run",
+    "scope_note": "The paper reports commercial isocyanides and amines for a different lipid assembly. These structures broaden component evidence, but do not establish direct AGILE-type Ugi 3-CR compatibility or upstream synthesis."
+  },
+  "agile_paper_review": {
+    "review_id": "agile_2024_ugi3_subcomponent_review",
+    "expected_upstream_component_routes": 25,
+    "expected_l2_reaction_instances": 48,
+    "expected_structure_resolved_l2_route_instances": 24
+  },
+  "evidence_axes": {
+    "transformation_evidence": {
+      "cardinality": "multiple",
+      "states": [
+        {
+          "state": "no_upstream_route_reported",
+          "meaning": "The reviewed source identifies or uses the component but reports no upstream route for making it."
+        },
+        {
+          "state": "programmatic_route_proposal",
+          "meaning": "A route is proposed programmatically without exact or family-level experimental support."
+        },
+        {
+          "state": "bounded_family_applicability",
+          "meaning": "Published reaction scope supports a bounded substrate family, but the exact substrate route is not reported."
+        },
+        {
+          "state": "exact_source_route",
+          "meaning": "A source reports a structure-resolved precursor route for the exact component."
+        },
+        {
+          "state": "independently_reported_exact_route",
+          "meaning": "An independent source reports a route for the exact component."
+        }
+      ]
+    },
+    "component_observation": {
+      "cardinality": "multiple",
+      "states": [
+        {
+          "state": "programmatic_candidate",
+          "meaning": "The structure is present in a versioned programmatic candidate set."
+        },
+        {
+          "state": "agile_measured_component",
+          "meaning": "The exact component occurs in an experimentally measured AGILE lipid."
+        },
+        {
+          "state": "independent_ugi_component",
+          "meaning": "The exact component is reported in an independent Ugi lipid study."
+        },
+        {
+          "state": "cross_assembly_component",
+          "meaning": "The exact component is used in a different lipid assembly family."
+        }
+      ]
+    },
+    "route_closure": {
+      "cardinality": "single",
+      "states": [
+        {
+          "state": "incomplete",
+          "meaning": "No complete route to accepted terminal leaves has been established."
+        },
+        {
+          "state": "l1_only",
+          "meaning": "The final lipid assembly is specified, but one or more upstream component routes are unresolved."
+        },
+        {
+          "state": "upstream_proposed_unresolved_leaves",
+          "meaning": "Upstream transformations are proposed, but one or more leaves or operational details remain unresolved."
+        },
+        {
+          "state": "computationally_complete",
+          "meaning": "Every step and terminal leaf closes under the declared computational evidence policy."
+        }
+      ]
+    },
+    "operational_availability": {
+      "cardinality": "single",
+      "states": [
+        {
+          "state": "internal_stock",
+          "meaning": "The exact material is recorded as available in internal stock."
+        },
+        {
+          "state": "current_item_level_vendor_verified",
+          "meaning": "The exact item has time-stamped, region-specific current vendor evidence."
+        },
+        {
+          "state": "historical_blanket_vendor_claim",
+          "meaning": "A source reports commercial purchase only at group level or without current item-level verification."
+        },
+        {
+          "state": "route_or_procurement_resolution_required",
+          "meaning": "Neither current procurement nor a complete route has closed the material."
+        },
+        {
+          "state": "unavailable",
+          "meaning": "The material is explicitly unavailable under the declared procurement policy."
+        }
+      ]
+    },
+    "prospective_outcome": {
+      "cardinality": "single",
+      "states": [
+        {
+          "state": "not_attempted",
+          "meaning": "No post-freeze experimental synthesis attempt is recorded."
+        },
+        {
+          "state": "attempted_no_correct_product",
+          "meaning": "A prospective attempt did not produce the correct product."
+        },
+        {
+          "state": "correct_product_detected",
+          "meaning": "The correct product was detected but not yet isolated to the declared standard."
+        },
+        {
+          "state": "isolated_with_yield_and_purity",
+          "meaning": "The product was isolated and its yield and purity were recorded."
+        },
+        {
+          "state": "formulated",
+          "meaning": "The isolated lipid was successfully formulated under the declared protocol."
+        },
+        {
+          "state": "biologically_functional",
+          "meaning": "The formulated lipid met the declared prospective biological endpoint."
+        }
+      ]
+    }
+  },
+  "reaction_basis": {
+    "route_family": "primary_amine_to_isocyanide",
+    "conceptual_steps": [
+      "N-formylation of a primary amine to the corresponding formamide",
+      "dehydration of the formamide to the corresponding isocyanide"
+    ],
+    "applicability_note": "This route family motivates coverage hypotheses across aliphatic tails. Exact substrate success still depends on functional-group compatibility, sterics, solubility, isolation, and procurement closure.",
+    "alternatives": [
+      "p-toluenesulfonyl chloride and pyridine dehydration",
+      "micellar p-toluenesulfonyl chloride and sodium bicarbonate dehydration",
+      "stronger phosphorus-based dehydration for selected substrates outside mild-method scope"
+    ]
+  },
+  "evidence_sources": [
+    {
+      "source_id": "agile_2024",
+      "doi": "10.1038/s41467-024-50619-z",
+      "evidence_tags": {
+        "transformation_evidence": [
+          "exact_source_route"
+        ],
+        "component_observation": [
+          "agile_measured_component"
+        ]
+      },
+      "asset_sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+      "findings": [
+        "Five measured isocyanides have exact structure-resolved two-step routes.",
+        "Two additional isocyanides, C11 and C17, have exact structure-resolved two-step routes."
+      ]
+    },
+    {
+      "source_id": "pnas_2023",
+      "doi": "10.1073/pnas.2309472120",
+      "pmcid": "PMC10723144",
+      "evidence_tags": {
+        "transformation_evidence": [
+          "independently_reported_exact_route"
+        ],
+        "component_observation": [
+          "independent_ugi_component"
+        ]
+      },
+      "asset_sha256": "51bdaccf337fe8f6d19bc9dbddf99ec6d1f312006d4d1ef2152a4fc2f6e4f1c6",
+      "findings": [
+        "The supplementary information reports C11, C18, and cis-C18:1 isocyanide preparations.",
+        "Oleyl isocyanide is reported at 35 percent isolated yield."
+      ],
+      "qa_flags": [
+        {
+          "flag_id": "pnas_2023_oleyl_dehydration_base_conflict",
+          "status": "unresolved_source_internal_discrepancy",
+          "detail": "The prose reports TFA while the scheme reports TEA for the oleyl formamide dehydration. The artifact does not silently choose one."
+        }
+      ]
+    },
+    {
+      "source_id": "miao_2019",
+      "doi": "10.1038/s41587-019-0247-3",
+      "pmid": "31570898",
+      "evidence_tags": {
+        "component_observation": [
+          "cross_assembly_component"
+        ],
+        "operational_availability": "historical_blanket_vendor_claim"
+      },
+      "findings": [
+        "The normalized LNPDB ledger links 10 exact isocyanide structures and 12 exact amine head structures to this source.",
+        "The source gives blanket historical vendor evidence, not exact current item-level procurement closure."
+      ]
+    },
+    {
+      "source_id": "waibel_2020",
+      "doi": "10.1039/C9GC04070F",
+      "evidence_tags": {
+        "transformation_evidence": [
+          "bounded_family_applicability"
+        ]
+      },
+      "asset_sha256": "f51f24bcaa8702819978947b665e8129c7a30ccc6c8fbbdd467d85539dceb543",
+      "findings": [
+        "p-Toluenesulfonyl chloride and pyridine dehydration covers multiple long-chain aliphatic formamides.",
+        "Reported limitations include steric effects, solubility, hydroxy-substrate tosylation risk, and low yield for an aromatic example."
+      ]
+    },
+    {
+      "source_id": "brunelli_2022",
+      "doi": "10.1039/D2GC01398C",
+      "evidence_tags": {
+        "transformation_evidence": [
+          "bounded_family_applicability"
+        ]
+      },
+      "asset_sha256": "fb2cf24e00ae78465858f246b3effeb6ca445887f9585997207081904fa57377",
+      "findings": [
+        "Micellar p-toluenesulfonyl chloride, sodium bicarbonate, and TPGS conditions cover primary, secondary, tertiary aliphatic, and benzylic examples.",
+        "Dodecyl isocyanide is reported at 89 percent yield and 82 percent at 10 mmol scale.",
+        "Reported aromatic failures delimit the mild method and motivate stronger dehydration conditions for selected substrates."
+      ]
+    }
+  ],
+  "claims_boundary": {
+    "raw_cartesian_product_is_upper_bound": true,
+    "candidate_membership_is_not_synthesis_proof": true,
+    "cross_assembly_use_is_not_ugi3_validation": true,
+    "historical_vendor_claim_is_not_current_procurement": true,
+    "prospective_outcomes_expected": 0
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "m0_09_agile_virtual_ugi3_terminal_queue_config.v1",
+  "task": "M0-09 AGILE virtual Ugi-3 unresolved terminal-material queue",
+  "generated_utc": "2026-07-29T20:49:00+00:00",
+  "inputs": {
+    "component_ledger": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+      "expected_sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    "component_program_ledger": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "expected_sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "agile_component_routes": {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "expected_sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "terminal_procurement": {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "expected_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    }
+  },
+  "expected_counts": {
+    "terminal_candidates": 38,
+    "unresolved_terminal_candidates": 3,
+    "proposed_route_leaf_candidates": 33,
+    "unresolved_head_candidates": 5,
+    "terminal_classes": {
+      "diol": 4,
+      "fatty_acid": 14,
+      "primary_alcohol": 6,
+      "primary_amine": 9,
+      "unresolved_amine_head": 5
+    },
+    "candidates_with_source_vendor_claim_only": 23,
+    "candidates_with_current_accepted_procurement": 35
+  },
+  "claims_boundary": {
+    "source_vendor_claim_is_current_availability": false,
+    "proposed_terminal_is_accepted_terminal": false,
+    "dependency_incidence_is_unique_product_coverage": false,
+    "model_built": false
+  }
+}

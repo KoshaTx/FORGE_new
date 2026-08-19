@@ -1,0 +1,69 @@
+{
+  "schema_version": "phase1_ugi_joint_program_support_audit_config.v2",
+  "status": "frozen_before_joint_program_support_audit",
+  "task": "Audit an occurrence-weighted joint morphology-program kernel anchored to all 1,100 measured AGILE products, including a calibrated local neighborhood for nearby unseen complete programs, without enabling guidance",
+  "scope": {
+    "read_only": true,
+    "biological_targets_read": false,
+    "whole_programs_sampled_jointly": true,
+    "role_programs_sampled_independently": false,
+    "component_ids_enter_program_state": false,
+    "component_graphs_remain_generated": true,
+    "all_three_new_action_unchanged": "abstain",
+    "oracle_calls": 0,
+    "biological_guidance": false,
+    "synthesis_calls": 0,
+    "synthesis_guidance": false,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false,
+    "nonzero_guidance_execution": false
+  },
+  "inputs": {
+    "applicability_census_ledger": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/ledger.csv.gz",
+      "sha256": "1e2461769409f7c1286ab034f0701554911466d0f8848e7f7a9076ca6ce9616a"
+    },
+    "applicability_census_result": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/result.json",
+      "sha256": "af84d3016cae0fe3296904e31dde8535abb265efa85cb2fddb24ece3bc3a8548"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "frozen_program_schedule": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/programs.json",
+      "sha256": "46537953d40ecb14704b0dde8c461b9e4c48769206a03417a630b5ae4f633860"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "prepared_cache_result": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/result.json",
+      "sha256": "5fdb7b2887ddc67bc1606d7c65b3a4e5c93912738dd9f93edd55cfe86583bde0"
+    },
+    "runner": {
+      "path": "scripts/phase1_audit_ugi_joint_program_support_v2.py",
+      "sha256": "8823cb118896ebeeda84052bb5af464c7aa8bd29120685bef8b45a21bb13c222"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_joint_program_support_audit.py",
+      "sha256": "602615417eeb66b62c1387377d1a8c2855a0a4341ffbb55851df1ddbfe393dd8"
+    },
+    "superseded_envelope": {
+      "path": "results/phase1/ugi_bounded_structural_envelope_v1/envelope.json",
+      "sha256": "2caa3f95f8edb662f56bba881cedf54b398d4530e81bcd51489716f9a4ef7f94"
+    },
+    "superseded_envelope_census": {
+      "path": "results/phase1/ugi_bounded_structural_envelope_census_v1/result.json",
+      "sha256": "916e324bd61a1522f10159b49da1761c82f661466e40ef9bf33227f5976a9c79"
+    },
+    "tests": {
+      "path": "tests/test_ugi_joint_program_support_audit.py",
+      "sha256": "572988c9122f9890bafacb57d9e14c36d79f90fb1fd910b8b1dc35684e715040"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "configuration": {
+    "path": "configs/route/m0_09_lnpdb_head_transfer.json",
+    "seed": 20260730,
+    "sha256": "2061e4f678fd67c18999b2b3eb79e64a2ab33eb553741748cfde99dc3b7e9850"
+  },
+  "decision": {
+    "arbitrary_macrocycle_generation_authorized": false,
+    "bounded_head_transfer_queue_supported": true,
+    "broad_generator_head_support_expanded_by_training": "LNPDB head structures may inform broad molecular representation",
+    "exact_ring_fragment_vocabulary_required": false,
+    "mining_priority": "prioritize generator-demanded or biologically informative candidates from the frozen queue",
+    "primary_ugi_admission_rule": "a transfer candidate still requires site resolution, exact forward qualification, and route or procurement closure",
+    "resume_head_route_mining_for_all_candidates": false
+  },
+  "inputs": {
+    "agile_curated": {
+      "bytes": 30259,
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "component_source_ledger": {
+      "bytes": 145769,
+      "path": "results/m0_09/component_source_ledger.csv",
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ring_support": {
+      "bytes": 17369,
+      "path": "results/m0_06_ring_support/result.json",
+      "sha256": "a51091c2ad7dba844027fc7ee1f4d417f5148cfbcc1c436e23b8a1fe5f76bf5b"
+    }
+  },
+  "limitations": [
+    "LNPDB head occurrence is not evidence that the head is compatible with the AGILE Ugi conditions.",
+    "The component ledger contains no assessed procurement or upstream route evidence for these transferred heads.",
+    "Source-lipid biological outcomes do not transfer to a new Ugi product.",
+    "The current M0-07 oracle authorizes no biological guidance domain."
+  ],
+  "runtime": {
+    "python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "rdkit": "2025.09.6"
+  },
+  "schema_version": "m0_09_lnpdb_head_transfer_result.v1",
+  "scope": "M0 candidate census only; no head is admitted by this artifact",
+  "scope_policy": {
+    "exact_forward_qualification_required": true,
+    "lnpdb_occurrence_is_structural_and_biological_provenance_only": true,
+    "no_automatic_candidate_lock_admission": true,
+    "no_source_activity_label_inheritance": true,
+    "no_source_route_inheritance": true,
+    "outside_ring_gate_requires_support_amendment": true,
+    "route_or_procurement_closure_required": true,
+    "site_defined_ugi_amine_required": true
+  },
+  "status": "completed_lnpdb_head_transfer_census",
+  "summary": {
+    "automatically_admitted_candidates": 0,
+    "component_rows": 726,
+    "disposition_counts": {
+      "exact_agile_head": 20,
+      "invalid_source_head_structure": 12,
+      "lnpdb_ugi_head_transfer_candidate": 259,
+      "outside_primary_ring_topology": 62,
+      "without_qualified_ugi_amine": 55
+    },
+    "head_rows": 408,
+    "parsed_head_rows": 396,
+    "transfer_candidate_ring_size_counts": {
+      "[5]": 22,
+      "[6]": 107,
+      "[]": 130
+    },
+    "transfer_candidates_requiring_site_resolution": 36,
+    "transfer_candidates_with_procurement_evidence": 0,
+    "transfer_candidates_with_route_evidence": 0,
+    "unique_agile_heads": 20
+  },
+  "task": "M0-09 LNPDB head-motif transfer census"
+}

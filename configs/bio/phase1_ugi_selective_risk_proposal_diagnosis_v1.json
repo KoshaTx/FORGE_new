@@ -1,0 +1,142 @@
+{
+  "schema_version": "phase1_ugi_selective_risk_proposal_diagnosis_config.v1",
+  "status": "versioned_exploratory_nonselecting_gate_attribution_and_risk_diagnosis",
+  "task": "Separate terminal validity, multiview chemical support and role-evidence attrition, then test whether a fixed continuous support radius ranks persisted held-out HeLa oracle error without selecting candidates or authorizing guidance",
+  "scope": {
+    "read_only": true,
+    "existing_frozen_artifacts_only": true,
+    "oracle_calls": 0,
+    "potency_predictions_generated": false,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "guidance_authorized": false,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "sealed_holdout_access": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "heldout_oof_ledger": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz",
+      "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"
+    },
+    "broad_census_result": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/result.json",
+      "sha256": "af84d3016cae0fe3296904e31dde8535abb265efa85cb2fddb24ece3bc3a8548"
+    },
+    "broad_census_ledger": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/ledger.csv.gz",
+      "sha256": "1e2461769409f7c1286ab034f0701554911466d0f8848e7f7a9076ca6ce9616a"
+    },
+    "lambda_zero_result": {
+      "path": "results/phase1/ugi_joint_kernel_lambda_zero_identity_v1/seeds/20260821/result.json",
+      "sha256": "8134121593c81dd167236ada0cd1102e9424bb02cb9acf396d22df883ad25fcb"
+    },
+    "lambda_zero_ledger": {
+      "path": "results/phase1/ugi_joint_kernel_lambda_zero_identity_v1/seeds/20260821/ledger.csv.gz",
+      "sha256": "23c7bf5e6338aef363f1823eaff313443032752e6c7a0a836f1cb925d1a25bac"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_selective_risk_proposal_diagnosis.py",
+      "sha256": "07d0ed9436c7e085c878dbfe1b28a5b9865ef5f509cd083b466a2bedb067cf2e"
+    },
+    "runner": {
+      "path": "scripts/phase1_diagnose_ugi_selective_risk_proposal.py",
+      "sha256": "2f532b8ebe30e6cb8cbe866410617b0ddc046af9ef863661de59ec3987a881f1"
+    },
+    "tests": {
+      "path": "tests/test_ugi_selective_risk_proposal_diagnosis.py",
+      "sha256": "afb77f5a1818192a9fd5e7b2ad69ee3edd0d6f58bcfb3cabab1f019ab89504bb"
+    }
+  },
+  "risk_policy": {
+    "primary_schemes": [
+      "held_aldehyde_5fold",
+      "held_aldehyde_isocyanide_pair_5fold",
+      "held_head_5fold",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_isocyanide_5fold"
+    ],
+    "external_stress_schemes": [
+      "lantern_scaffold_balanced"
+    ],
+    "fixed_radius_thresholds": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0,
+      3.0,
+      5.0
+    ],
+    "fixed_radius_active_threshold": 1.0,
+    "clustered_bootstrap": {
+      "unit": "exact_product_label",
+      "replicates": 2000,
+      "seed": 20260803
+    },
+    "fixed_radius_acceptance": {
+      "minimum_mae_relative_reduction": 0.1,
+      "minimum_rmse_relative_reduction": 0.1,
+      "minimum_overall_coverage": 0.25,
+      "minimum_single_role_coverage": 0.15,
+      "single_role_schemes": [
+        "held_head_5fold",
+        "held_aldehyde_5fold",
+        "held_isocyanide_5fold"
+      ],
+      "minimum_per_scheme_r2": 0.1,
+      "minimum_per_scheme_spearman": 0.2,
+      "minimum_positive_fold_fraction": 0.6
+    },
+    "outer_group_folds": 5,
+    "fold_salt": "phase1-ugi-selective-risk-outer-v1",
+    "calibration_label_stride": 5,
+    "calibration_salt": "phase1-ugi-selective-risk-calibration-v1",
+    "risk_coverage": 0.9,
+    "random_seed": 20260803,
+    "coverage_fractions": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "monotone_hgb": {
+      "learning_rate": 0.05,
+      "max_iter": 150,
+      "max_leaf_nodes": 7,
+      "max_depth": 3,
+      "min_samples_leaf": 50,
+      "l2_regularization": 1.0
+    },
+    "screen": {
+      "coverage_fractions": [
+        0.25,
+        0.5
+      ],
+      "minimum_mae_improvement": 0.0,
+      "maximum_coverage_shortfall": 0.02,
+      "minimum_spearman_gain": 0.05,
+      "minimum_scheme_improvement_fraction": 0.8,
+      "minimum_global_selection_per_scheme_coverage": 0.15
+    }
+  },
+  "interpretation": {
+    "fixed_radius_is_primary_diagnostic": true,
+    "learned_risk_model_is_challenger_only": true,
+    "exact_novelty_is_provenance_not_applicability": true,
+    "lantern_is_external_stress_not_pooled_training_evidence": true,
+    "risk_screen_cannot_replace_v3_policy": true,
+    "risk_screen_cannot_authorize_guidance": true,
+    "acceptance_criteria_are_exploratory_not_an_independent_confirmation": true,
+    "morphology_failure_cannot_be_inferred_from_one_seed": true,
+    "partial_state_smc_requires_separate_rollout_evidence": true
+  }
+}

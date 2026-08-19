@@ -1,0 +1,73 @@
+{
+  "schema_version": "phase1_ugi_hela_supported_diagnostic_preview_config.v1",
+  "status": "frozen_before_nonselecting_diagnostic_preview",
+  "task": "Render a compact supported-interpolative HeLa diagnostic from the existing frozen unguided pool without authorizing guidance or assessing synthesis",
+  "scope": {
+    "preview_only": true,
+    "biological_guidance_authorized": false,
+    "candidate_selection_changed": false,
+    "synthesis_assessed": false,
+    "raw_mean_ranking": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "conformal_result": {
+      "path": "results/phase1/ugi_interpolative_conformal_v1/result.json",
+      "sha256": "a7ad0ddb71019f1ca89fb073d75311fb65b9d3e6041fa349934f5e1c0237e2ef"
+    },
+    "generated_applicability": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/generated_applicability.csv.gz",
+      "sha256": "ed12ac72362557072d14253d54675ad88c25d07cdc581491b99fa15b7452992f"
+    },
+    "oracle_campaign_selection": {
+      "path": "results/phase1/oracle_campaign_selection.json",
+      "sha256": "21d5348a9ffe929658af60ca1dcdcd58ab8dc654e3c893c80741cff829ddd7cc"
+    },
+    "runner": {
+      "path": "scripts/phase1_render_ugi_hela_supported_diagnostic_preview.py",
+      "sha256": "fab8b27daa37487b17e8cbb49fff5d64c2e17481700d963085a00f6f514fddf3"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_hela_diagnostic_preview.py",
+      "sha256": "0f6cf158d5a458c1bf5b8df19072c13abc5fbc2bb328b58a64da4824472b2755"
+    },
+    "tests": {
+      "path": "tests/test_ugi_hela_diagnostic_preview.py",
+      "sha256": "d3a03de13f0f512577e48048e7691dfef76ac7d224c12c059e52b3fb97150bef"
+    }
+  },
+  "supported_patterns": [
+    {
+      "pattern_id": "amine_only",
+      "exact_unseen_roles": [
+        "amine"
+      ],
+      "conformal_scheme": "held_head_5fold"
+    },
+    {
+      "pattern_id": "aldehyde_isocyanide",
+      "exact_unseen_roles": [
+        "aldehyde",
+        "isocyanide"
+      ],
+      "conformal_scheme": "held_aldehyde_isocyanide_pair_5fold"
+    }
+  ],
+  "uncertainty": {
+    "q90_reduction": "maximum_over_eligible_folds_within_supported_pattern",
+    "descriptive_lcb90": "three_seed_ensemble_mean_minus_pattern_specific_q90",
+    "ensemble_standard_deviation_role": "display_only"
+  },
+  "selection": {
+    "top_count": 6,
+    "fingerprint": "Morgan radius 2 bit fingerprint, 2048 dimensions",
+    "cluster_method": "Butina",
+    "cluster_distance_threshold": 0.2,
+    "cluster_representative": "highest descriptive LCB90 with sample-index tie break",
+    "control": "unused same-pattern lower-LCB product with maximum product-fingerprint Tanimoto similarity"
+  },
+  "required_card_warning": "diagnostic preview; not potency-guided selection; synthesis not assessed"
+}

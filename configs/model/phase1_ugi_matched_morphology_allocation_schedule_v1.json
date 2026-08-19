@@ -1,0 +1,55 @@
+{
+  "schema_version": "phase1_ugi_matched_morphology_allocation_schedule_config.v1",
+  "status": "frozen_before_matched_three_arm_schedule_construction",
+  "task": "Freeze one common-uniform 3,072-draw morphology schedule for the broad, promoted-support and nested-potency arms before any terminal chemistry is generated",
+  "scope": {
+    "read_only_distribution_sampling": true,
+    "complete_qualified_morphology_support": true,
+    "common_uniforms_across_arms": true,
+    "terminal_outcomes_consumed": false,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "population": {
+    "qualified_programs": 57190
+  },
+  "design": {
+    "draws_per_arm": 3072,
+    "common_uniform_seed": 20261101,
+    "sampling_with_replacement": true
+  },
+  "inputs": {
+    "potency_proposal_ledger": {
+      "path": "results/phase1/ugi_morphology_potency_proposal_sweep_v1/proposal_ledger.csv.gz",
+      "sha256": "9eb4a2133ebd80441a67962cc0c913b5f513bdb7901e814692bbadd037f9beb9"
+    },
+    "potency_proposal_result": {
+      "path": "results/phase1/ugi_morphology_potency_proposal_sweep_v1/result.json",
+      "sha256": "8c3a86e5fd130814d70b2c238b1729c7554ed42241e8b70094baf4e43c6fc6d6"
+    },
+    "promoted_proposal_ledger": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "b61f94a20df2e14c39d9455952dde2c11943df5dd85178963dcec206f799eef2"
+    },
+    "promoted_proposal_result": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/result.json",
+      "sha256": "978453f439755f2daa1ec4b56dfb2caad1769dfc731fe6d39e2b818b9f288a16"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_matched_morphology_allocation_schedule.py",
+      "sha256": "11f0fa5e3760e02cbe8b504a11d7d418402a72cf2c0c2b80ad63423a7f48eeaf"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_matched_morphology_allocation_schedule.py",
+      "sha256": "add3192703f5b0b9fa00b731397d3d97f9ebde2ef5561b67311260c895abf7a4"
+    },
+    "tests": {
+      "path": "tests/test_ugi_matched_morphology_allocation_schedule.py",
+      "sha256": "b365983a05de945f44e85175c5e3ffeb778c0f60377451d48b93e63ffab8d3da"
+    }
+  }
+}

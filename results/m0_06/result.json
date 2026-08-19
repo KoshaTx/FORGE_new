@@ -1,0 +1,1153 @@
+{
+  "atom_vocabulary": [
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 0,
+      "symbol": "C"
+    },
+    {
+      "aromatic": true,
+      "formal_charge": 0,
+      "index": 1,
+      "symbol": "C"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 2,
+      "symbol": "N"
+    },
+    {
+      "aromatic": true,
+      "formal_charge": 0,
+      "index": 3,
+      "symbol": "N"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 1,
+      "index": 4,
+      "symbol": "N"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": -1,
+      "index": 5,
+      "symbol": "O"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 6,
+      "symbol": "O"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 7,
+      "symbol": "P"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 8,
+      "symbol": "S"
+    },
+    {
+      "aromatic": true,
+      "formal_charge": 0,
+      "index": 9,
+      "symbol": "S"
+    }
+  ],
+  "bond_vocabulary": [
+    "NO_BOND",
+    "SINGLE",
+    "DOUBLE",
+    "TRIPLE",
+    "AROMATIC"
+  ],
+  "config": {
+    "path": "configs/model/m0_06_defog_feasibility.json",
+    "sha256": "6cb0ad98c117e9718c1788b195835648e5bd4acaabdfbd1e870cd5bf11beb617"
+  },
+  "decision": {
+    "bounded_probe_quality_established": false,
+    "checks": {
+      "memory_pass": true,
+      "n64_endpoint_bond_density_pass": true,
+      "n64_endpoint_connectedness_pass": false,
+      "n64_endpoint_validity_pass": false,
+      "n64_heldout_bond_recall_pass": true,
+      "n96_bond_density_error_increase_pass": true,
+      "n96_bond_recall_drop_pass": false,
+      "n96_endpoint_bond_density_pass": true,
+      "n96_endpoint_connectedness_pass": false,
+      "n96_endpoint_validity_pass": false,
+      "n96_heldout_bond_recall_pass": true,
+      "n96_training_throughput_ratio_pass": true
+    },
+    "comparisons": {
+      "n96_bond_recall_drop": 0.23691895927186124,
+      "n96_endpoint_bond_density_error_increase": -0.022901900872674918,
+      "n96_to_n64_training_throughput_ratio": 0.4570209952390583
+    },
+    "dense_degraded_at_n96": true,
+    "material_declared_vocabulary_corpus_above_n96": true,
+    "objective_diagnostics": {
+      "bond_recall_auxiliary": {
+        "64": {
+          "endpoint_bond_density_error": 0.13633326331827722,
+          "endpoint_connectedness": 1.0,
+          "endpoint_validity": 0.0,
+          "heldout_bond_probability_density_error": 0.08012975407602459,
+          "heldout_bond_recall": 0.5294577257300261
+        },
+        "96": {
+          "endpoint_bond_density_error": 0.15025267440688883,
+          "endpoint_connectedness": 1.0,
+          "endpoint_validity": 0.0,
+          "heldout_bond_probability_density_error": 0.11061019551329712,
+          "heldout_bond_recall": 0.515688149665948
+        }
+      },
+      "standard_edge_ce": {
+        "64": {
+          "endpoint_bond_density_error": 0.03122402304664693,
+          "endpoint_connectedness": 0.0,
+          "endpoint_validity": 0.0,
+          "heldout_bond_probability_density_error": 0.012319449057558482,
+          "heldout_bond_recall": 0.47411498228029814
+        },
+        "96": {
+          "endpoint_bond_density_error": 0.008322122173972012,
+          "endpoint_connectedness": 0.0,
+          "endpoint_validity": 0.020833333333333332,
+          "heldout_bond_probability_density_error": 0.0030847125840892317,
+          "heldout_bond_recall": 0.2371960230084369
+        }
+      }
+    },
+    "primary_objective": "standard_edge_ce",
+    "reason": "The bounded dense probe is not permission to discard larger real lipids. Sparse or hierarchical edges are required if N=96 degrades or if the current hash-pinned corpus has a material supported tail above N=96.",
+    "recommendation": "adopt_sparse_or_hierarchical_edge_parameterization_before_full_product_prior",
+    "support_profile_drift": true
+  },
+  "exclusions": {
+    "bond_recall_auxiliary_dense_n64": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 4395
+    },
+    "bond_recall_auxiliary_dense_n96": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 1251
+    },
+    "standard_edge_ce_dense_n64": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 4395
+    },
+    "standard_edge_ce_dense_n96": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 1251
+    }
+  },
+  "inputs": {
+    "r0": {
+      "bytes": 19633160,
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "split_assignments": {
+      "bytes": 3934182,
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "split_manifest": {
+      "bytes": 5177,
+      "path": "data/splits/m0_03/manifest.json",
+      "sha256": "d969f71c02b2429ae73b4131affc80682988a8e405baca466168081f8208be7b"
+    }
+  },
+  "limitations": [
+    "The fixed training budget tests tractability and failure modes, not converged generative quality.",
+    "Flat graph generation omits stereochemical labels under the frozen route-assigned stereo policy.",
+    "No pKa, particle-size, PDI, encapsulation, or other unavailable formulation measurements are imputed.",
+    "The empirical node-count prior makes count fidelity a sampler-contract check, not a learned node-count result."
+  ],
+  "method": {
+    "corruption": "linear interpolation between empirical marginal and clean graph",
+    "edge_representation": "dense symmetric matrix with explicit no-bond class",
+    "family": "DeFoG-style discrete flow matching",
+    "node_count": "sampled from empirical R0_train distribution",
+    "prediction_target": "clean node and upper-triangle edge marginals",
+    "reference": {
+      "code": "https://github.com/manuelmlmadeira/DeFoG",
+      "paper": "https://openreview.net/forum?id=KPRIwWhqAZ"
+    },
+    "sampler": "Euler CTMC with minimum R-star rate and direct terminal prediction",
+    "stereochemistry": "flat_graph_generation_route_assigned_at_dossier_time"
+  },
+  "runs": [
+    {
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.00675020286925862,
+          "brier_score": 0.028069444632082278,
+          "ece_10_bin": 0.007826350959185826,
+          "edge_null_baseline_accuracy": 0.9591509745072501,
+          "mean_predicted_bond_probability": 0.03409882262349129,
+          "observed_bond_fraction": 0.04084902549274991
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.22307582745949428,
+            "edge_accuracy": 0.9219777822494507,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8434538463751475,
+            "null_false_positive_rate": 0.020070599500710766,
+            "rows": 30
+          },
+          "33_48": {
+            "bond_recall": 0.4507459202962639,
+            "edge_accuracy": 0.9591139539153175,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8650978049345776,
+            "null_false_positive_rate": 0.01625896696891405,
+            "rows": 113
+          },
+          "49_64": {
+            "bond_recall": 0.532092744599929,
+            "edge_accuracy": 0.969207440329864,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8881835330904058,
+            "null_false_positive_rate": 0.01418425843729514,
+            "rows": 113
+          }
+        },
+        "graphs_per_second": 555.1656564388625,
+        "metrics": {
+          "bond_recall": 0.4599728279572446,
+          "edge_accuracy": 0.9592173867858946,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8727515882346779,
+          "null_false_positive_rate": 0.015789853343449067
+        },
+        "rows": 256,
+        "wall_seconds": 0.46112362504936755
+      },
+      "edge_marginal": [
+        0.9585495639698285,
+        0.037962462325815446,
+        0.002414092152527583,
+        9.421891980149786e-05,
+        0.000979662632026938
+      ],
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 47.145833333333336,
+          "jensen_shannon_divergence": 0.15334338948243142,
+          "train_mean": 47.10357843877397,
+          "wasserstein_heavy_atoms": 1.5261368211787218
+        },
+        "bond_sparsity": {
+          "absolute_density_error": 0.03122402304664693,
+          "generated_mean_bond_fraction": 0.02297021089641339,
+          "heldout_mean_bond_fraction": 0.05419423394306032
+        },
+        "connectedness": 0.0,
+        "endpoint_validity": 0.0,
+        "invalid_reason_counts": {
+          "AtomKekulizeException": 12,
+          "AtomValenceException": 35,
+          "KekulizeException": 1
+        },
+        "topology_novelty_among_valid": 0.0,
+        "unique_among_valid": 0.0,
+        "valid_and_connected": 0.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 1990,
+        "R0_heldout": 2081,
+        "R0_train": 6623
+      },
+      "heldout_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.012319449057558482,
+          "brier_score": 0.029277314209005135,
+          "ece_10_bin": 0.01263258955645921,
+          "edge_null_baseline_accuracy": 0.9533318991756645,
+          "mean_predicted_bond_probability": 0.03434865176677704,
+          "observed_bond_fraction": 0.04666810082433552
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.22471644257216952,
+            "edge_accuracy": 0.9239773223566454,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.800501896891483,
+            "null_false_positive_rate": 0.02195088633303639,
+            "rows": 86
+          },
+          "33_48": {
+            "bond_recall": 0.4610613409210654,
+            "edge_accuracy": 0.9552251233774073,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.866386525069966,
+            "null_false_positive_rate": 0.01658003824927351,
+            "rows": 85
+          },
+          "49_64": {
+            "bond_recall": 0.739501263814814,
+            "edge_accuracy": 0.9806350890327903,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.9299737846150118,
+            "null_false_positive_rate": 0.009741191234549178,
+            "rows": 85
+          }
+        },
+        "graphs_per_second": 569.6481553314359,
+        "metrics": {
+          "bond_recall": 0.47411498228029814,
+          "edge_accuracy": 0.953164717881009,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8653663650620729,
+          "null_false_positive_rate": 0.016113596604554914
+        },
+        "rows": 256,
+        "wall_seconds": 0.4494002088904381
+      },
+      "memory": {
+        "dense_ordered_edge_slots_per_graph": 4096,
+        "dense_upper_edge_slots_per_graph": 2016,
+        "peak_rss_after_bytes": 832307200,
+        "peak_rss_before_bytes": 603209728,
+        "peak_rss_increment_bytes": 229097472
+      },
+      "model": {
+        "parameter_count": 46095,
+        "state_sha256": "d3042722ad98a011bf05ece4ffc4eb5a136ea20b8f6df9ab938ca756753fef16"
+      },
+      "n_max": 64,
+      "name": "standard_edge_ce_dense_n64",
+      "node_marginal": [
+        0.8198847955072172,
+        0.020973372183596344,
+        0.05058227312504207,
+        0.002442566040638914,
+        0.0002788756503091673,
+        0.0024521824423737125,
+        0.09487541951552568,
+        0.0024008949664547853,
+        0.006106415101597284,
+        3.2054672449329575e-06
+      ],
+      "objective": {
+        "bond_auxiliary_weight": 0.0,
+        "name": "standard_edge_ce",
+        "purpose": "reference DeFoG clean-marginal cross-entropy"
+      },
+      "sampling": {
+        "atom_vocabulary_size": 10,
+        "graph_steps_per_second": 420.036997020608,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "wall_seconds": 2.2855129591189325
+      },
+      "training": {
+        "examples_seen_with_replacement": 1280,
+        "final_loss": {
+          "bonded_edge_aux_ce": 2.3527321815490723,
+          "edge_ce": 0.1329006403684616,
+          "node_ce": 0.5281834006309509,
+          "total": 0.6610840559005737
+        },
+        "graphs_per_second": 249.46264026868138,
+        "initial_loss": {
+          "bonded_edge_aux_ce": 1.5106817483901978,
+          "edge_ce": 1.994940996170044,
+          "node_ce": 2.1257667541503906,
+          "total": 4.1207075119018555
+        },
+        "mean_last_20_loss": {
+          "bonded_edge_aux_ce": 2.2291204929351807,
+          "edge_ce": 0.13489020429551601,
+          "node_ce": 0.5147299543023109,
+          "total": 0.6496201604604721
+        },
+        "steps": 160,
+        "wall_seconds": 5.131028833100572
+      }
+    },
+    {
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.0030100722947270855,
+          "brier_score": 0.02208647489362572,
+          "ece_10_bin": 0.004454219372395649,
+          "edge_null_baseline_accuracy": 0.9685179865768998,
+          "mean_predicted_bond_probability": 0.028471941128373146,
+          "observed_bond_fraction": 0.03148201342310023
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.2508910596370697,
+            "edge_accuracy": 0.9406896452109019,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8935515602429708,
+            "null_false_positive_rate": 0.0024586711699763936,
+            "rows": 30
+          },
+          "33_48": {
+            "bond_recall": 0.17681805853594523,
+            "edge_accuracy": 0.9602498890923672,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8740813184957035,
+            "null_false_positive_rate": 0.001854437930112491,
+            "rows": 61
+          },
+          "49_64": {
+            "bond_recall": 0.18598546239857872,
+            "edge_accuracy": 0.968557013074557,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8866752058267593,
+            "null_false_positive_rate": 0.0018983003275934607,
+            "rows": 60
+          },
+          "65_80": {
+            "bond_recall": 0.3490623187428961,
+            "edge_accuracy": 0.9776675224304199,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8836132238308588,
+            "null_false_positive_rate": 0.003634806068536515,
+            "rows": 60
+          },
+          "81_96": {
+            "bond_recall": 0.23597203304784165,
+            "edge_accuracy": 0.9793261594242519,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8694506433275011,
+            "null_false_positive_rate": 0.0026081129028979275,
+            "rows": 45
+          }
+        },
+        "graphs_per_second": 257.492944066785,
+        "metrics": {
+          "bond_recall": 0.23841500670096138,
+          "edge_accuracy": 0.9673401636537164,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8807347342371941,
+          "null_false_positive_rate": 0.002485282473571715
+        },
+        "rows": 256,
+        "wall_seconds": 0.9942020000889897
+      },
+      "edge_marginal": [
+        0.9668008752819196,
+        0.03027333213738332,
+        0.002076795979561406,
+        8.45479101093271e-05,
+        0.0007644486910263138
+      ],
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 58.104166666666664,
+          "jensen_shannon_divergence": 0.1876244612874945,
+          "train_mean": 55.999355739289165,
+          "wasserstein_heavy_atoms": 2.6539089623823298
+        },
+        "bond_sparsity": {
+          "absolute_density_error": 0.008322122173972012,
+          "generated_mean_bond_fraction": 0.034395204190114013,
+          "heldout_mean_bond_fraction": 0.042717326364086025
+        },
+        "connectedness": 0.0,
+        "endpoint_validity": 0.020833333333333332,
+        "invalid_reason_counts": {
+          "AtomKekulizeException": 1,
+          "AtomValenceException": 46
+        },
+        "topology_novelty_among_valid": 1.0,
+        "unique_among_valid": 1.0,
+        "valid_and_connected": 0.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 2231,
+        "R0_heldout": 2294,
+        "R0_train": 9313
+      },
+      "heldout_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.0030847125840892317,
+          "brier_score": 0.022396570287340056,
+          "ece_10_bin": 0.004623929180140671,
+          "edge_null_baseline_accuracy": 0.9683099622684012,
+          "mean_predicted_bond_probability": 0.028605325147509575,
+          "observed_bond_fraction": 0.03169003773159881
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.23151753699550262,
+            "edge_accuracy": 0.9436273758228009,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8675039192804923,
+            "null_false_positive_rate": 0.002101660562822452,
+            "rows": 52
+          },
+          "33_48": {
+            "bond_recall": 0.23271880241540763,
+            "edge_accuracy": 0.957556005853873,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8703727034422067,
+            "null_false_positive_rate": 0.0023236783230319046,
+            "rows": 52
+          },
+          "49_64": {
+            "bond_recall": 0.256011149702737,
+            "edge_accuracy": 0.9695686480173697,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.9100820410710114,
+            "null_false_positive_rate": 0.002671551630975535,
+            "rows": 52
+          },
+          "65_80": {
+            "bond_recall": 0.2298855814509667,
+            "edge_accuracy": 0.9759972989559174,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.876296076637048,
+            "null_false_positive_rate": 0.0024644309932437655,
+            "rows": 52
+          },
+          "81_96": {
+            "bond_recall": 0.23573462959999839,
+            "edge_accuracy": 0.9795293025672436,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8802896874646345,
+            "null_false_positive_rate": 0.0026248212343489286,
+            "rows": 48
+          }
+        },
+        "graphs_per_second": 259.47004444022355,
+        "metrics": {
+          "bond_recall": 0.2371960230084369,
+          "edge_accuracy": 0.9650327016133815,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8809185605496168,
+          "null_false_positive_rate": 0.0024342974131741357
+        },
+        "rows": 256,
+        "wall_seconds": 0.9866264159791172
+      },
+      "memory": {
+        "dense_ordered_edge_slots_per_graph": 9216,
+        "dense_upper_edge_slots_per_graph": 4560,
+        "peak_rss_after_bytes": 1155416064,
+        "peak_rss_before_bytes": 973668352,
+        "peak_rss_increment_bytes": 181747712
+      },
+      "model": {
+        "parameter_count": 46095,
+        "state_sha256": "1959c73ec3d57193d43dc58341bf5491015e9fb513ba2cbb63bb8973b85d8507"
+      },
+      "n_max": 96,
+      "name": "standard_edge_ce_dense_n96",
+      "node_marginal": [
+        0.8176318544567631,
+        0.02106526666180909,
+        0.04607092318253113,
+        0.0017717373380221736,
+        0.0002684450512154808,
+        0.0022741130767254306,
+        0.1015719375213318,
+        0.002160982662284621,
+        0.007182822584665652,
+        1.917464651539149e-06
+      ],
+      "objective": {
+        "bond_auxiliary_weight": 0.0,
+        "name": "standard_edge_ce",
+        "purpose": "reference DeFoG clean-marginal cross-entropy"
+      },
+      "sampling": {
+        "atom_vocabulary_size": 10,
+        "graph_steps_per_second": 228.27935106361122,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "wall_seconds": 4.205373791046441
+      },
+      "training": {
+        "examples_seen_with_replacement": 640,
+        "final_loss": {
+          "bonded_edge_aux_ce": 2.2911033630371094,
+          "edge_ce": 0.08475403487682343,
+          "node_ce": 0.5565280318260193,
+          "total": 0.6412820816040039
+        },
+        "graphs_per_second": 114.00966413055595,
+        "initial_loss": {
+          "bonded_edge_aux_ce": 1.462182641029358,
+          "edge_ce": 1.8916630744934082,
+          "node_ce": 2.340070962905884,
+          "total": 4.231734275817871
+        },
+        "mean_last_20_loss": {
+          "bonded_edge_aux_ce": 2.4037661373615267,
+          "edge_ce": 0.09705690871924162,
+          "node_ce": 0.4780718505382538,
+          "total": 0.575128760933876
+        },
+        "steps": 160,
+        "wall_seconds": 5.61355920904316
+      }
+    },
+    {
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.0968697712372916,
+          "brier_score": 0.04094398325012161,
+          "ece_10_bin": 0.09686978311536402,
+          "edge_null_baseline_accuracy": 0.9591509745072501,
+          "mean_predicted_bond_probability": 0.1377187967300415,
+          "observed_bond_fraction": 0.04084902549274991
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.28676669026414553,
+            "edge_accuracy": 0.91960409283638,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8633619248867035,
+            "null_false_positive_rate": 0.027896853691587845,
+            "rows": 30
+          },
+          "33_48": {
+            "bond_recall": 0.5139697439375177,
+            "edge_accuracy": 0.9578534148435677,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8704601225599778,
+            "null_false_positive_rate": 0.020597284898755296,
+            "rows": 113
+          },
+          "49_64": {
+            "bond_recall": 0.5794828317861641,
+            "edge_accuracy": 0.9674759180144926,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8911713556905764,
+            "null_false_positive_rate": 0.01773647414685219,
+            "rows": 113
+          }
+        },
+        "graphs_per_second": 554.5732483391374,
+        "metrics": {
+          "bond_recall": 0.516262272518361,
+          "edge_accuracy": 0.9576185054611415,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8787703702691942,
+          "null_false_positive_rate": 0.02018992337070813
+        },
+        "rows": 256,
+        "wall_seconds": 0.4616162080783397
+      },
+      "edge_marginal": [
+        0.9585495639698285,
+        0.037962462325815446,
+        0.002414092152527583,
+        9.421891980149786e-05,
+        0.000979662632026938
+      ],
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 47.145833333333336,
+          "jensen_shannon_divergence": 0.15334338948243142,
+          "train_mean": 47.10357843877397,
+          "wasserstein_heavy_atoms": 1.5261368211787218
+        },
+        "bond_sparsity": {
+          "absolute_density_error": 0.13633326331827722,
+          "generated_mean_bond_fraction": 0.19052749726133755,
+          "heldout_mean_bond_fraction": 0.05419423394306032
+        },
+        "connectedness": 1.0,
+        "endpoint_validity": 0.0,
+        "invalid_reason_counts": {
+          "AtomValenceException": 48
+        },
+        "topology_novelty_among_valid": 0.0,
+        "unique_among_valid": 0.0,
+        "valid_and_connected": 0.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 1990,
+        "R0_heldout": 2081,
+        "R0_train": 6623
+      },
+      "heldout_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.08012975407602459,
+          "brier_score": 0.0372366052749098,
+          "ece_10_bin": 0.08012976568367852,
+          "edge_null_baseline_accuracy": 0.9533318991756645,
+          "mean_predicted_bond_probability": 0.1267978549003601,
+          "observed_bond_fraction": 0.04666810082433552
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.29145894884023554,
+            "edge_accuracy": 0.9196675322776617,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.807835589314616,
+            "null_false_positive_rate": 0.031560615387333686,
+            "rows": 86
+          },
+          "33_48": {
+            "bond_recall": 0.5402679807999555,
+            "edge_accuracy": 0.9551316387513105,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.866386525069966,
+            "null_false_positive_rate": 0.021071721865412067,
+            "rows": 85
+          },
+          "49_64": {
+            "bond_recall": 0.7594462331603555,
+            "edge_accuracy": 0.9806282548343435,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.9299737846150118,
+            "null_false_positive_rate": 0.010479865346432608,
+            "rows": 85
+          }
+        },
+        "graphs_per_second": 570.546008055793,
+        "metrics": {
+          "bond_recall": 0.5294577257300261,
+          "edge_accuracy": 0.9516835887916386,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8678300273604691,
+          "null_false_positive_rate": 0.021078507173115213
+        },
+        "rows": 256,
+        "wall_seconds": 0.4486930000130087
+      },
+      "memory": {
+        "dense_ordered_edge_slots_per_graph": 4096,
+        "dense_upper_edge_slots_per_graph": 2016,
+        "peak_rss_after_bytes": 1165131776,
+        "peak_rss_before_bytes": 1155416064,
+        "peak_rss_increment_bytes": 9715712
+      },
+      "model": {
+        "parameter_count": 46095,
+        "state_sha256": "0937efde1eb72b773c0d5d22af73852410d7fb20d04cd5446c12c1596aff9df0"
+      },
+      "n_max": 64,
+      "name": "bond_recall_auxiliary_dense_n64",
+      "node_marginal": [
+        0.8198847955072172,
+        0.020973372183596344,
+        0.05058227312504207,
+        0.002442566040638914,
+        0.0002788756503091673,
+        0.0024521824423737125,
+        0.09487541951552568,
+        0.0024008949664547853,
+        0.006106415101597284,
+        3.2054672449329575e-06
+      ],
+      "objective": {
+        "bond_auxiliary_weight": 0.25,
+        "name": "bond_recall_auxiliary",
+        "purpose": "stress test whether countering no-edge dominance causes overbonding"
+      },
+      "sampling": {
+        "atom_vocabulary_size": 10,
+        "graph_steps_per_second": 416.1809114826915,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "wall_seconds": 2.306689166929573
+      },
+      "training": {
+        "examples_seen_with_replacement": 1280,
+        "final_loss": {
+          "bonded_edge_aux_ce": 1.0929293632507324,
+          "edge_ce": 0.22566479444503784,
+          "node_ce": 0.5260260701179504,
+          "total": 1.0249232053756714
+        },
+        "graphs_per_second": 250.82836842599932,
+        "initial_loss": {
+          "bonded_edge_aux_ce": 1.5106817483901978,
+          "edge_ce": 1.994940996170044,
+          "node_ce": 2.1257667541503906,
+          "total": 4.498377799987793
+        },
+        "mean_last_20_loss": {
+          "bonded_edge_aux_ce": 1.1294409573078155,
+          "edge_ce": 0.21760779917240142,
+          "node_ce": 0.5143117472529412,
+          "total": 1.0142797917127608
+        },
+        "steps": 160,
+        "wall_seconds": 5.103091042023152
+      }
+    },
+    {
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.1078267819098084,
+          "brier_score": 0.03625999801961667,
+          "ece_10_bin": 0.10782679250288969,
+          "edge_null_baseline_accuracy": 0.9685179865768998,
+          "mean_predicted_bond_probability": 0.13930879533290863,
+          "observed_bond_fraction": 0.03148201342310023
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.5084159190456072,
+            "edge_accuracy": 0.9481613675753275,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8948336124420166,
+            "null_false_positive_rate": 0.01531294734062006,
+            "rows": 30
+          },
+          "33_48": {
+            "bond_recall": 0.4504048487202066,
+            "edge_accuracy": 0.9559273934755169,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8748226888844224,
+            "null_false_positive_rate": 0.01949956134099086,
+            "rows": 61
+          },
+          "49_64": {
+            "bond_recall": 0.5253617083032925,
+            "edge_accuracy": 0.9660039265950521,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8869728247324625,
+            "null_false_positive_rate": 0.017276493130096545,
+            "rows": 60
+          },
+          "65_80": {
+            "bond_recall": 0.5783250123262406,
+            "edge_accuracy": 0.9734414060910542,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8836132238308588,
+            "null_false_positive_rate": 0.014731119650726517,
+            "rows": 60
+          },
+          "81_96": {
+            "bond_recall": 0.5050522930092282,
+            "edge_accuracy": 0.9723787175284492,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8697216457790798,
+            "null_false_positive_rate": 0.016215171923653945,
+            "rows": 45
+          }
+        },
+        "graphs_per_second": 258.3464856426476,
+        "metrics": {
+          "bond_recall": 0.514358319400344,
+          "edge_accuracy": 0.9643756807781756,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8811790209729224,
+          "null_false_positive_rate": 0.016792973302472092
+        },
+        "rows": 256,
+        "wall_seconds": 0.9909172921907157
+      },
+      "edge_marginal": [
+        0.9668008752819196,
+        0.03027333213738332,
+        0.002076795979561406,
+        8.45479101093271e-05,
+        0.0007644486910263138
+      ],
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 58.104166666666664,
+          "jensen_shannon_divergence": 0.1876244612874945,
+          "train_mean": 55.999355739289165,
+          "wasserstein_heavy_atoms": 2.6539089623823298
+        },
+        "bond_sparsity": {
+          "absolute_density_error": 0.15025267440688883,
+          "generated_mean_bond_fraction": 0.19297000077097484,
+          "heldout_mean_bond_fraction": 0.042717326364086025
+        },
+        "connectedness": 1.0,
+        "endpoint_validity": 0.0,
+        "invalid_reason_counts": {
+          "AtomValenceException": 48
+        },
+        "topology_novelty_among_valid": 0.0,
+        "unique_among_valid": 0.0,
+        "valid_and_connected": 0.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 2231,
+        "R0_heldout": 2294,
+        "R0_train": 9313
+      },
+      "heldout_reconstruction": {
+        "bond_sparsity_calibration": {
+          "absolute_density_error": 0.11061019551329712,
+          "brier_score": 0.03717034027733949,
+          "ece_10_bin": 0.11061019558779876,
+          "edge_null_baseline_accuracy": 0.9683099622684012,
+          "mean_predicted_bond_probability": 0.14230023324489594,
+          "observed_bond_fraction": 0.03169003773159881
+        },
+        "by_size": {
+          "01_32": {
+            "bond_recall": 0.5100968782431804,
+            "edge_accuracy": 0.9506381131135501,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8696954605671076,
+            "null_false_positive_rate": 0.015561310878883187,
+            "rows": 52
+          },
+          "33_48": {
+            "bond_recall": 0.5120509633651147,
+            "edge_accuracy": 0.9590631161744778,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8708199308468745,
+            "null_false_positive_rate": 0.01591988434889712,
+            "rows": 52
+          },
+          "49_64": {
+            "bond_recall": 0.5232052320184616,
+            "edge_accuracy": 0.9661068560985419,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.9082505920758615,
+            "null_false_positive_rate": 0.016474996245681092,
+            "rows": 52
+          },
+          "65_80": {
+            "bond_recall": 0.5117222500535158,
+            "edge_accuracy": 0.9698760566803125,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8765364621694272,
+            "null_false_positive_rate": 0.016822401389407996,
+            "rows": 52
+          },
+          "81_96": {
+            "bond_recall": 0.5218385308980942,
+            "edge_accuracy": 0.9726449648539225,
+            "exact_graph_reconstruction": 0.0,
+            "node_accuracy": 0.8800356214245161,
+            "null_false_positive_rate": 0.01651464498718269,
+            "rows": 48
+          }
+        },
+        "graphs_per_second": 257.8018090505135,
+        "metrics": {
+          "bond_recall": 0.515688149665948,
+          "edge_accuracy": 0.9635255222674459,
+          "exact_graph_reconstruction": 0.0,
+          "node_accuracy": 0.8810837382916361,
+          "null_false_positive_rate": 0.0162546476103671
+        },
+        "rows": 256,
+        "wall_seconds": 0.9930108750704676
+      },
+      "memory": {
+        "dense_ordered_edge_slots_per_graph": 9216,
+        "dense_upper_edge_slots_per_graph": 4560,
+        "peak_rss_after_bytes": 1166884864,
+        "peak_rss_before_bytes": 1165131776,
+        "peak_rss_increment_bytes": 1753088
+      },
+      "model": {
+        "parameter_count": 46095,
+        "state_sha256": "f59000db618d0db3e519701093ca0155bd83b505a15de7abb289fab41e7e23ed"
+      },
+      "n_max": 96,
+      "name": "bond_recall_auxiliary_dense_n96",
+      "node_marginal": [
+        0.8176318544567631,
+        0.02106526666180909,
+        0.04607092318253113,
+        0.0017717373380221736,
+        0.0002684450512154808,
+        0.0022741130767254306,
+        0.1015719375213318,
+        0.002160982662284621,
+        0.007182822584665652,
+        1.917464651539149e-06
+      ],
+      "objective": {
+        "bond_auxiliary_weight": 0.25,
+        "name": "bond_recall_auxiliary",
+        "purpose": "stress test whether countering no-edge dominance causes overbonding"
+      },
+      "sampling": {
+        "atom_vocabulary_size": 10,
+        "graph_steps_per_second": 223.7910496957843,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "wall_seconds": 4.289715792052448
+      },
+      "training": {
+        "examples_seen_with_replacement": 640,
+        "final_loss": {
+          "bonded_edge_aux_ce": 1.076611876487732,
+          "edge_ce": 0.16929101943969727,
+          "node_ce": 0.5558500289916992,
+          "total": 0.9942940473556519
+        },
+        "graphs_per_second": 112.97719295019895,
+        "initial_loss": {
+          "bonded_edge_aux_ce": 1.462182641029358,
+          "edge_ce": 1.8916630744934082,
+          "node_ce": 2.340070962905884,
+          "total": 4.597280025482178
+        },
+        "mean_last_20_loss": {
+          "bonded_edge_aux_ce": 1.1146827220916748,
+          "edge_ce": 0.1878167290240526,
+          "node_ce": 0.47821456044912336,
+          "total": 0.944701972603798
+        },
+        "steps": 160,
+        "wall_seconds": 5.664860165910795
+      }
+    }
+  ],
+  "runtime": {
+    "cpu_count": 12,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "torch": "2.11.0"
+  },
+  "schema_version": "m0_06_defog_feasibility_result.v1",
+  "scope": "M0 feasibility probe only; this is not the production product-prior training run",
+  "status": "completed_bounded_probe",
+  "support_audit": {
+    "actual_full_r0": {
+      "maximum_heavy_atoms": 282,
+      "n64_count": 10877,
+      "n64_fraction": 0.7047884403550833,
+      "n96_count": 14079,
+      "n96_fraction": 0.9122659236700577,
+      "rows": 15433
+    },
+    "declared_element_supported_r0": {
+      "maximum_heavy_atoms": 282,
+      "n64_count": 10694,
+      "n64_fraction": 0.7087282126052091,
+      "n96_count": 13838,
+      "n96_fraction": 0.9170919212671482,
+      "rows": 15089
+    },
+    "declared_elements": [
+      "C",
+      "N",
+      "O",
+      "P",
+      "S"
+    ],
+    "documented_profile": {
+      "maximum_heavy_atoms": 138,
+      "n64_fraction": 0.865,
+      "n96_fraction": 0.968
+    },
+    "invalid_smiles": [],
+    "observed_atom_states": [
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "F"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 1,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": -1,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "P"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "S"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "S"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "Si"
+      }
+    ],
+    "observed_bond_stereochemistry": {
+      "STEREOE": 525,
+      "STEREONONE": 914624,
+      "STEREOZ": 10971
+    },
+    "observed_bond_types": {
+      "AROMATIC": 15259,
+      "DOUBLE": 59664,
+      "SINGLE": 848881,
+      "TRIPLE": 2316
+    },
+    "profile_comparisons": {
+      "maximum_heavy_atoms_matches": false,
+      "n64_fraction_matches": false,
+      "n96_fraction_matches": false
+    },
+    "profile_matches": false,
+    "rows_outside_declared_element_vocabulary": 344,
+    "unsupported_element_row_incidence": {
+      "F": 92,
+      "Si": 252
+    }
+  }
+}

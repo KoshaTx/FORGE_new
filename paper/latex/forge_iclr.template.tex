@@ -1,0 +1,78 @@
+% ICLR 2027 build of the FORGE manuscript.
+%
+% This uses the official style files from
+% https://media.iclr.cc/Conferences/ICLR2027/iclr-2027-style-files.zip, vendored into
+% manuscript/latex/iclr2027/ so the build does not depend on network access. The style
+% file owns the page geometry, the running head, the anonymous author block and the
+% abstract shape; nothing here should re-specify any of them.
+%
+% Uncomment \iclrfinalcopy below to produce the camera-ready, non-anonymous version.
+\documentclass{article}
+
+\usepackage{iclr2027_conference,times}
+
+% \iclrfinalcopy
+
+\usepackage{graphicx}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% ---------------------------------------------------------------- typography
+% The ICLR measure is narrower than the journal template's, so material that fits there
+% overflows here. Rather than reflowing the source, the three offenders are sized to the
+% column: verbatim pseudocode, wide supplementary tables, and chemical strings in cells.
+% Headings carry their own numbers in the source, so that every cross-reference in the
+% prose points at a number the author controls. Letting LaTeX number them as well produced
+% "2 2 Reaction-Resolved Generation".
+\setcounter{secnumdepth}{0}
+
+\usepackage{etoolbox}
+\makeatletter
+\def\verbatim@font{\ttfamily\scriptsize}
+\makeatother
+
+\AtBeginEnvironment{longtable}{\footnotesize\setlength{\tabcolsep}{3pt}}
+\AtBeginEnvironment{tabular}{\footnotesize\setlength{\tabcolsep}{3pt}}
+
+% Captions: ICLR sets them small; keep the figure label bold so panels stay findable.
+\usepackage[font=small,labelfont=bf,skip=6pt]{caption}
+
+% Floats crowd out text at this measure unless they are allowed to take a whole page.
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.75}
+
+% Pandoc scaffolding.
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\makeatletter
+\@ifundefined{Shaded}{\newenvironment{Shaded}{}{}}{}
+\makeatother
+\newcommand{\pandocbounded}[1]{#1}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\title{$if(title)$$title$$else$FORGE$endif$}
+
+% Authors are suppressed by the style file unless \iclrfinalcopy is set.
+\author{Anonymous authors \\ Paper under double-blind review}
+
+\begin{document}
+
+\maketitle
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+$body$
+
+\end{document}

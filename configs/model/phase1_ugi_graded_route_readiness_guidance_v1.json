@@ -1,0 +1,23 @@
+{
+  "schema_version": "phase1_ugi_graded_route_readiness_guidance_config.v1",
+  "status": "frozen_before_single_graded_route_readiness_guidance_qualification",
+  "guidance_strength": 0.25,
+  "inputs": {
+    "base_v4_config": {
+      "path": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+      "sha256": "fd50551dec47126d8a0aded212f9946f3eaa07fb1d9f562f3bbbb848bd830478"
+    },
+    "graded_evidence_ledger": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+    },
+    "semantic_proposal_ledger": {
+      "path": "results/phase1/graph2edits_semantic_readjudication_v1/semantic_ledger.jsonl.gz",
+      "sha256": "7352af7ec0d3498aea9d982af374bb079e57a49662915d5989acb872d3acbc59"
+    },
+    "semantic_proposal_result": {
+      "path": "results/phase1/graph2edits_semantic_readjudication_v1/result.json",
+      "sha256": "5c05307acb4744e35282d8e7b0dcf7e8115d32eabb5b8ccc740a6af38705a0b0"
+    }
+  }
+}

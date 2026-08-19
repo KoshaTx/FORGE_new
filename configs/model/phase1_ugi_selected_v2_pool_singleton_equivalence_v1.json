@@ -1,0 +1,49 @@
+{
+  "schema_version": "phase1_ugi_selected_v2_pool_singleton_equivalence_config.v1",
+  "scope": {
+    "guidance": false,
+    "routing": false,
+    "biology": false,
+    "candidate_selection": false,
+    "holdout_access": false
+  },
+  "design": {
+    "assignment_seed": 20260821,
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "state_steps": [0, 2, 4, 6, 8],
+    "completion_checkpoints": [2, 4, 6]
+  },
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/product/ugi_selected_v2_pool_singleton_equivalence.py",
+      "sha256": "91bbce76459243187a49c9626f86199c4f02d9c943cd4668d9d7b0c08bba006c"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi_selected_v2_pool_singleton_equivalence.py",
+      "sha256": "648db4efdb45860d36e7cb1de2411c1f71e13244c18f3afc9cccd82d95ba8ace"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_restartable_generator_v2": {
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+    },
+    "selected_guidance_adapter_v2": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v2.py",
+      "sha256": "61a223218b7d28c2324773c92333f96b7f61b2880b49230d97de2453f64707cb"
+    },
+    "prior_selected_v2_equivalence": {
+      "path": "results/phase1/ugi_selected_v2_full_equivalence_v1/result.json",
+      "sha256": "915c145a44a491ef848d0434d41217286f5ee988a93375c8cf28289324b54f45"
+    }
+  },
+  "output_dir": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v1"
+}

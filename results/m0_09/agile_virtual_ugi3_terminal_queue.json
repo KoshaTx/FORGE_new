@@ -1,0 +1,76 @@
+{
+  "artifacts": {
+    "agile_virtual_ugi3_terminal_queue.csv.gz": {
+      "bytes": 5960,
+      "path": "results/m0_09/agile_virtual_ugi3_terminal_queue.csv.gz",
+      "sha256": "e7fad1b9a3646187a7fe2492fa96b607abbdf3851120a6d2d8b4cc965bd391df"
+    }
+  },
+  "claims_boundary": {
+    "dependency_incidence_is_unique_product_coverage": false,
+    "model_built": false,
+    "proposed_terminal_is_accepted_terminal": false,
+    "source_vendor_claim_is_current_availability": false
+  },
+  "decision": {
+    "batch_terminal_resolution_by_exact_identity": true,
+    "current_vendor_verification_required": true,
+    "model_built": false,
+    "prioritize_using_explicit_dependency_counts": true
+  },
+  "generated_utc": "2026-07-29T20:49:00+00:00",
+  "inputs": [
+    {
+      "asset": "m0_09_agile_virtual_ugi3_terminal_queue.json",
+      "bytes": 1702,
+      "role": "audit_config",
+      "sha256": "817638232e7270c7a8032e445ee3553bb6c7d42387e008c3685039dcef009ca4"
+    },
+    {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+      "bytes": 2548,
+      "sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "bytes": 4660,
+      "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "bytes": 83223,
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "bytes": 29240,
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    }
+  ],
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_agile_virtual_ugi3_terminal_queue.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "candidates_with_current_accepted_procurement": 35,
+    "candidates_with_source_vendor_claim_only": 23,
+    "proposed_route_leaf_candidates": 33,
+    "terminal_candidates": 38,
+    "terminal_classes": {
+      "diol": 4,
+      "fatty_acid": 14,
+      "primary_alcohol": 6,
+      "primary_amine": 9,
+      "unresolved_amine_head": 5
+    },
+    "unresolved_head_candidates": 5,
+    "unresolved_terminal_candidates": 3
+  },
+  "task": "M0-09 AGILE virtual Ugi-3 unresolved terminal-material queue"
+}

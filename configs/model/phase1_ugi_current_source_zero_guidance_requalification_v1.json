@@ -1,0 +1,45 @@
+{
+  "assessment_at_utc": "2026-08-03T17:30:13Z",
+  "decision_horizon": {
+    "end_utc": "2026-08-09T05:00:00Z",
+    "interval_semantics": "start_inclusive_end_exclusive",
+    "start_utc": "2026-08-03T17:30:13Z"
+  },
+  "expected_cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+  "inputs": {
+    "builder_runner": {"path": "scripts/phase1_requalify_ugi_current_source_zero_guidance.py", "sha256": "22bb2b10ab8198b244027772f41608dccc53261d4161e5db72be191c585a67f2"},
+    "builder_source": {"path": "src/forge/product/ugi_current_source_zero_guidance_requalification.py", "sha256": "17c5c418a0cad304d83ad9f42e1dbc553d976cd47b962fb7ae30b4041b395d73"},
+    "builder_tests": {"path": "tests/test_ugi_current_source_zero_guidance_requalification.py", "sha256": "ebefa03171a2148e09675d8b1570fb2cf483746d09b785f95edc14b7631aee4d"},
+    "cumulative_source": {"path": "src/forge/route/ugi3_cumulative_production_source.py", "sha256": "ea4393ca128543e428830957ddce05d52e31e1de2db05d58904d0f73d0b5fc5c"},
+    "historical_zero_guidance_composer": {"path": "results/phase1/ugi_production_zero_guidance_rehearsal_v1/composer_result.json", "sha256": "fdb42a6f4166a0351969c3f4689aed294466de8d8001bbca21d4b398ca29ebf1"},
+    "historical_zero_guidance_config_v2": {"path": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json", "sha256": "90e46be17073adb848bd856bbc5cbebb0591a60b92cdd2adce1de04e6433b7cd"},
+    "historical_zero_guidance_execution": {"path": "results/phase1/ugi_production_zero_guidance_rehearsal_v1/result.json", "sha256": "7bc95bbf57e22d6034ee01bc0b2a2d1568a88cc1295dfd1ac281345e30b1af54"},
+    "historical_zero_guidance_manifest": {"path": "results/phase1/ugi_production_zero_guidance_rehearsal_v1/execution_manifest.json", "sha256": "ab220e641d472187000639d40804bebdbc6ab08b8702b60ce030fde96d0bed79"},
+    "route_completion_utility_qualification": {"path": "results/phase1/ugi_route_completion_utility_v1/result.json", "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"},
+    "source_qualified_inputs_config": {"path": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json", "sha256": "ea07140ccfa668ad66804da368a489fe017b2e295bacbab68dc0b219a836928c"},
+    "source_qualified_inputs_result": {"path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/result.json", "sha256": "44f18334fa2fbc00af5fb510137e7b4785ce5fc33748d591d6d894c7320f3c65"},
+    "source_qualified_paths": {"path": "src/forge/route/ugi3_source_qualified_cumulative_inputs.py", "sha256": "6c4b7dc4c8a4a5680bc178701e9c29669a4adc2b75606ce776c11475a015b9a3"},
+    "support_boundary": {"path": "src/forge/route/ugi3_support_boundary.py", "sha256": "92311169a54ab6b9728ee296b80d877ea66d5a5241ebe7790733234111f1f7aa"},
+    "synthesis_source_qualification": {"path": "results/phase1/synthesis_value_source_qualification_v1/result.json", "sha256": "7b72a64e2bc53fbe55aed6751610e9426c735a41553dc95556da123269fd2ad4"},
+    "synthesis_value": {"path": "src/forge/value/synthesis.py", "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"}
+  },
+  "per_component_budget": {
+    "maximum_depth": 4,
+    "maximum_elapsed_milliseconds": 0,
+    "maximum_expansions": 4,
+    "maximum_logical_planner_calls": 1,
+    "maximum_product_candidates": 4,
+    "maximum_verifier_calls": 4
+  },
+  "policy": {
+    "biology_authorized": false,
+    "generator_rerun": false,
+    "historical_artifacts_rewritten": false,
+    "locked_terminals_reassessed": true,
+    "nonzero_guidance_authorized": false,
+    "sealed_holdout_access_authorized": false,
+    "selection_authorized": false,
+    "synthesis_success_probability_defined": false
+  },
+  "schema_version": "phase1_ugi_current_source_zero_guidance_requalification_config.v1"
+}

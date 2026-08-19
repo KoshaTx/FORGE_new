@@ -1,0 +1,45 @@
+{
+  "schema_version": "phase1_ugi3_route_gap_triage_config.v1",
+  "status": "frozen_before_gap_triage_execution",
+  "task": "Classify the frozen fresh-v2 one-gap frontier without promoting family projections into exact routes",
+  "inputs": {
+    "priority_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v1/result.json",
+      "sha256": "ff63a51203d9a91704a3ff282edac6547cb78b46b3deb07e8153ac2bff42ddf5"
+    },
+    "priority_ledger": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v1/priority_ledger.csv.gz",
+      "sha256": "fd43ec738becfafe0f2aa282507dd2eb670a3f66af5f361b4e0665106894c5f4"
+    },
+    "precursor_leaf_audit_config": {
+      "path": "configs/route/phase1_ugi3_precursor_leaf_closure_audit_v1.json",
+      "sha256": "5caa0650f5ac83da441cf4a831d6c5cf0d1c91874591a863a9b0d67125827c94"
+    },
+    "precursor_leaf_audit_result": {
+      "path": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/result.json",
+      "sha256": "0c0dab513ac034ecc19ac6e97509db51f58b01bad356b6b81bae681daf7cfa64"
+    },
+    "route_saturation_holdout_contract": {
+      "path": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "sha256": "c76b43fb59bd4802f5bf8596c8b2095ff8abfd59448b26e75c1f41264b679a79"
+    },
+    "route_saturation_holdout_seal": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+    }
+  },
+  "triage_policy": {
+    "current_exact_target_identity_precedes_upstream_planning": true,
+    "existing_projection_family_precedes_new_family_mining": true,
+    "all_projected_leaves_current_establishes_exact_l2_scope": false,
+    "historical_leaf_use_establishes_current_procurement": false,
+    "parent_component_observation_establishes_projected_leaf_use": false,
+    "missing_knowledge_is_chemical_incompatibility": false,
+    "outside_support_is_chemical_impossibility": false,
+    "new_reaction_family_may_be_admitted_by_this_audit": false
+  },
+  "outputs": {
+    "result": "results/phase1/ugi3_route_gap_triage_v1/result.json",
+    "triage_ledger": "results/phase1/ugi3_route_gap_triage_v1/triage_ledger.csv.gz"
+  }
+}

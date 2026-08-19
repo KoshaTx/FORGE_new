@@ -1,0 +1,59 @@
+{
+  "schema_version": "phase1_ugi_branch_spacing_challenger_diagnostic.v3",
+  "status": "frozen_before_policy-matched_diagnostic_resampling",
+  "purpose": "Evaluate the step-2000 checkpoint with decoded-tree branch-spacing constraints under the unchanged v3 sampling seed and program draw.",
+  "scope": {
+    "can_replace_production_generator": false,
+    "uses_previously_inspected_program_draw": true,
+    "heldout_component_families_inspected": false,
+    "requires_new_independent_selection_draw_before_replacement": true
+  },
+  "sampling": {
+    "seed": 20260803,
+    "attempted_draws": 1024,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_graph_runs_by_role": {
+      "amine_head": 2,
+      "oxoester_aldehyde_body_tail": 1,
+      "isocyanide_tail": 1
+    }
+  },
+  "evaluation": {
+    "original_v3_gates_unchanged": true,
+    "tail_chemotype_audit_required": true,
+    "branching_audit_required": true,
+    "no_threshold_rewrite_after_output": true,
+    "no_synthesis_or_biological_inference": true
+  },
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+    },
+    "sampling_script": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "5adbf50cab58ef4607b7828c133df4f1e33e814a28b6590cf2ce7ee2ca6b3620"
+    },
+    "joint_sampler": {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "sha256": "a3ff68b623a78131edff43f008882b0e5d1b6eb18460a3b43304e72e94e154eb"
+    },
+    "morphology_decoder": {
+      "path": "src/forge/product/ugi_morphology_program.py",
+      "sha256": "4a542b3713e04a9ba472d4437f07189bfe2058b0551ec86e772e7eee92e481bd"
+    },
+    "end_to_end_sampler": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "e2030c743cb723c9801ab92dce638d8cb9ab5ed667af620db53f9287de4a574c"
+    }
+  }
+}

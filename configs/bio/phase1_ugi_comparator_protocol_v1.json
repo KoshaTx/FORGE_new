@@ -1,0 +1,162 @@
+{
+  "schema_version": "phase1_ugi_comparator_protocol.v1",
+  "status": "descoped_2026-08-06_before_any_comparator_was_trained",
+  "frozen_utc": "2026-08-06",
+  "authority": "user instruction 2026-08-06, comparator package",
+  "purpose": "Fix the comparator suite, validation regimes and reporting before any comparator result is examined, so that no model family, hyperparameter or evaluation regime can be chosen after seeing which is favourable.",
+  "shared_setup": {
+    "training_data": "results/m0_07/agile_oracle_curated.csv.gz, the 1,100 measured single-compound AGILE products",
+    "endpoint": "expt_Hela",
+    "components": {
+      "amine": "A_smiles",
+      "aldehyde": "B_smiles",
+      "isocyanide": "C_smiles"
+    },
+    "label_preprocessing": "as used by the frozen primary predictor; no additional transformation is introduced here",
+    "replicate_aggregation": "one row per measured single-compound product, as curated",
+    "leakage_rules": "identical to the frozen primary predictor; fold assignment happens before any featurisation"
+  },
+  "comparators": {
+    "null": {
+      "definition": "training-set mean, intercept only",
+      "purpose": "calibration sanity check"
+    },
+    "factorial_main_effects": {
+      "definition": "shrinkage model over amine, aldehyde and isocyanide identities",
+      "implementation": "ridge regression on one-hot component indicators",
+      "unseen_levels": "revert to the population prior; no coefficient is invented for an unseen component"
+    },
+    "factorial_pairwise": {
+      "definition": "main effects plus amine-aldehyde, amine-isocyanide and aldehyde-isocyanide interactions",
+      "implementation": "ridge regression on one-hot main effects and pairwise interaction indicators",
+      "prohibited": "any three-way term, which would memorise exact products",
+      "purpose": "strongest simple baseline; determines whether the neural model adds value beyond factorial component structure"
+    },
+    "nearest_analogue_product": {
+      "definition": "k-nearest-neighbour on whole-product Morgan fingerprints, radius 2, 2048 bits, Tanimoto",
+      "k": 5,
+      "weighting": "similarity weighted"
+    },
+    "nearest_analogue_context_matched": {
+      "definition": "transfer from structurally similar measured aldehydes holding amine and isocyanide fixed where the factorial data permit; falls back to the product kNN when no context match exists",
+      "note": "both nearest-analogue variants are frozen here; neither may be dropped after seeing which performs better"
+    },
+    "fingerprint_nonlinear": {
+      "definition": "one prespecified nonlinear model on Morgan fingerprints concatenated with a small frozen RDKit descriptor set",
+      "implementation": "ExtraTreesRegressor, chosen before viewing any prospective outcome",
+      "descriptors": [
+        "MolWt",
+        "MolLogP",
+        "TPSA",
+        "NumRotatableBonds",
+        "HeavyAtomCount",
+        "NumHAcceptors",
+        "NumHDonors"
+      ]
+    },
+    "graph_neural_baseline": {
+      "definition": "supervised graph neural network ensemble on product graphs",
+      "naming": "labelled a supervised GNN baseline, NOT an AGILE reproduction, unless the architecture, pretraining corpus and implementation can be represented faithfully; every deviation is documented",
+      "status": "optional; omit rather than mislabel"
+    }
+  },
+  "frozen_primary_predictor": {
+    "unchanged": [
+      "checkpoint",
+      "ensemble membership",
+      "uncertainty calculation",
+      "LCB90 score"
+    ],
+    "note": "The current predictor is not retrained, retuned or re-selected as part of this package."
+  },
+  "validation_regimes": {
+    "hyperparameter_rule": "chosen using only the measured 1,100-product dataset; the identities, scores and eventual outcomes of the locked 30 are never used to choose model families or settings",
+    "nested_cv": "used wherever tuning would otherwise touch an evaluation fold",
+    "regimes": {
+      "Q_aligned_combination_holdout": {
+        "definition": "hold out exact products while every component identity in the held-out product remains represented in training",
+        "evaluates": "can the predictor rank new combinations of measured components"
+      },
+      "aldehyde_leave_one_component_out": {
+        "definition": "hold out an entire aldehyde identity, train without it, predict all products containing it",
+        "reporting": "performance as a function of similarity between the held-out aldehyde and the nearest training aldehyde",
+        "status": "diagnostic for analog transfer; NOT an eligibility gate for the N cohort"
+      },
+      "original_frozen_split": {
+        "definition": "the evaluation split originally used to develop and select the frozen primary predictor",
+        "prohibited": "replacing it after seeing which regime is favourable"
+      }
+    },
+    "recorded": [
+      "every fold assignment",
+      "every random seed"
+    ]
+  },
+  "metrics": [
+    "MAE and RMSE on the transformed and untransformed scales used in the project",
+    "Pearson and Spearman correlation",
+    "top-quantile enrichment",
+    "calibration or interval coverage, only for models that natively produce uncertainty",
+    "performance by held-out component and similarity range",
+    "bootstrap or fold-level confidence intervals"
+  ],
+  "reporting_rules": {
+    "no_post_hoc_winner": "the entire frozen comparator set is reported; no winning baseline is selected after the fact",
+    "panel_is_not_a_tournament": "the 30 candidates were selected using the frozen current predictor, so the panel is not an unbiased contest among comparators. A comparator assigning different scores to the 19 Q candidates does not show it would have selected a better panel.",
+    "model_specific_claim_requires_both": [
+      "superior or complementary performance in matched out-of-fold evaluation",
+      "prospective enrichment from the frozen Q-high versus Q-low allocation"
+    ],
+    "honest_null": "if the factorial or nearest-analogue baseline performs comparably, that is reported. The prospective allocation result stands; the neural-model-specific advantage narrows.",
+    "prohibited_analysis": "a multivariable regression of current score plus all baselines on 19 Q candidates; it would be unstable. Any incremental analysis is low-dimensional, prespecified and secondary."
+  },
+  "prospective_freeze": {
+    "after_hyperparameters_are_fixed": [
+      "refit every comparator on all eligible measured data",
+      "predict all 30 locked candidates",
+      "predict the complete corrected Q-eligible pool of 2,407 where computationally feasible",
+      "preserve raw means, native uncertainty where it exists, and all declared ranking scores",
+      "save panel ranks and full-pool ranks"
+    ],
+    "hashes_required": [
+      "prediction files",
+      "configs",
+      "model artifacts",
+      "training data manifest",
+      "environment",
+      "code commit"
+    ],
+    "hard_constraint": "comparator predictions must not alter candidate identities or cohort assignments"
+  },
+  "nonclaims": [
+    "A comparator scoring the panel differently is not evidence it would have chosen better.",
+    "Out-of-fold performance on 1,100 measured products does not establish prospective performance.",
+    "The aldehyde leave-one-component-out regime is a diagnostic, not a licence to widen the qualified domain."
+  ],
+  "descope": {
+    "reason": "The full six-model, three-regime package was disproportionate to the paper's central claim. The paper is a prospective LNP-discovery result, not a predictive-model benchmarking study. AGILE compared against ridge, lasso, gradient boosting and SVM on one scaffold split and proceeded to synthesis; the Nature Biotechnology LiON precedent leads with prospective biology, not model comparison.",
+    "retained": [
+      "factorial_main_effects (regularized component-additive)",
+      "fingerprint_nonlinear (ExtraTrees on Morgan + descriptors)",
+      "nearest_analogue_product (included only because fingerprints are already computed)",
+      "null (free sanity check)"
+    ],
+    "dropped": [
+      "factorial_pairwise interactions",
+      "nearest_analogue_context_matched",
+      "graph_neural_baseline / AGILE reproduction",
+      "nested three-regime validation",
+      "aldehyde leave-one-component-out as a required deliverable",
+      "full 2,407-pool comparator predictions",
+      "per-artifact hash manifest"
+    ],
+    "evaluation": "existing component-aware 5-fold cross-validation on the measured 1,100, the same regime already used in the project",
+    "purpose_retained": "answer only the obvious reviewer question: does the neural oracle add information beyond factorial component identity and molecular similarity",
+    "claims_not_supported_and_not_made": [
+      "the oracle is state of the art",
+      "uncertainty is formally calibrated",
+      "performance generalizes broadly to unseen building blocks",
+      "the model beats every plausible predictor"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "phase1_ugi_morphology_proposal_challenger_schedule_config.v1",
+  "status": "frozen_before_challenger_schedule_construction",
+  "task": "Apply the one selected morphology-strength challenger to the previous program population without reading terminal outcomes",
+  "scope": {
+    "read_only": true,
+    "same_programs_new_terminal_randomness": true,
+    "selected_challenger_only": true,
+    "terminal_outcomes_consumed": false,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "challenger": {
+    "candidate_id": "rho-0.50_power-1.50",
+    "mixture_rho": 0.5,
+    "score_power": 1.5,
+    "score_floor": 0.000001
+  },
+  "inputs": {
+    "baseline_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "67b4ce691a8e3f04517a984af094b534513cc283408814b6b7c4c31cd29cc69c"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "1e8354ac71e779b60d9dbd15a25373755f6a9c6eda24f46ebe8203d994b8a3f5"
+    },
+    "sweep_result": {
+      "path": "results/phase1/ugi_morphology_proposal_strength_sweep_v1/result.json",
+      "sha256": "05d4bfbaa7926f00b410708d7f824d91a81e102ca1bffc4358234287e2d53214"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "27947fd514127bf73226e2aae9bfecf6a535821c5c39b303ffb42e1fe7fcfc4c"
+    }
+  }
+}

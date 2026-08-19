@@ -1,0 +1,44 @@
+{
+  "schema_version": "forge.graph2edits_checkpoint_contrast_config.v1",
+  "status": "frozen_before_proposal_execution",
+  "task": "Run family-neutral Graph2Edits proposals for every unresolved component in the frozen synthesis-guidance checkpoint and productive-final population",
+  "inputs": {
+    "support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "runtime_qualification": {
+      "path": "configs/route/graph2edits_runtime_qualification_macos_arm64_py311_v1.json",
+      "sha256": "08b25e0a248a17ccb067cf94c7877a944b42cf6fd7b7e2f974fde242ce4a421f"
+    },
+    "training_corpus_manifest": {
+      "path": "configs/route/graph2edits_usp50k_training_corpus_manifest_v1.json",
+      "sha256": "f3c109121757e9ff2b7f63a29fa88f030b9753d3e786e6f21e6c6e55db8d2720"
+    },
+    "forward_resolver": {
+      "path": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+      "sha256": "3cb6012f4bbd73d198159ffcf1f765f45fc0cf526b2ed93e0a836fc7d01cdf04"
+    }
+  },
+  "population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6]
+  },
+  "inference": {
+    "device": "cpu",
+    "maximum_proposals_per_target": 10,
+    "repeat_count": 2
+  },
+  "scope_guards": {
+    "proposal_only": true,
+    "reaction_family_filter_before_proposal": false,
+    "proposal_score_may_enter_synthesis_value": false,
+    "proposal_may_create_evidence": false,
+    "proposal_may_close_route": false,
+    "candidate_selection": false,
+    "synthesis_guidance": false
+  },
+  "output_directory": "results/phase1/graph2edits_checkpoint_contrast_v1"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "m0_07_agile_reconciliation_config.v1",
+  "task": "M0-07",
+  "generated_utc": "2026-07-30T03:00:00+00:00",
+  "randomness": {
+    "used": false,
+    "seed": 0
+  },
+  "inputs": {
+    "agile_library": {
+      "path": "data/vendor/AGILE_smiles_with_value_group.csv",
+      "sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    "agile_official_source_data": {
+      "path": "data/vendor/agile_article_source_data.xlsx",
+      "sha256": "e795d4e7ef1ec5c82b0358c626ab1eae059b76485a3ebdb7cbe5565aa6aac723"
+    },
+    "lantern_curated_hela": {
+      "path": "data/vendor/lantern_agile_curated.csv",
+      "sha256": "d0ecfd94ec40a7f013af546113520175e70f78045af1798673c2680fe6f23c54"
+    },
+    "lantern_cis_trans_audit": {
+      "path": "data/vendor/lantern_agile_cis_trans_audit.csv",
+      "sha256": "eceea1dcfc86063d0129d2b25918a17f5a0493bd3601641719f8d6ee29dff44c"
+    }
+  },
+  "expected": {
+    "nominal_measurements": 1200,
+    "curated_records": 1100,
+    "excluded_mixtures": 100,
+    "corrected_B5_records": 100,
+    "label_tolerance": 1e-6
+  },
+  "policy": {
+    "model_stereochemistry": "not_encoded",
+    "mixture_handling": "exclude_from_single_graph_supervision_preserve_in_ledger",
+    "pure_trans_handling": "correct_graph_retain_source_labels",
+    "missing_properties": "never_impute"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": "phase1_ugi_dynamic_frozen_prior_terminal_census_config.v1",
+  "status": "frozen_before_calibration_only_census",
+  "frozen_at_utc": "2026-08-04T04:48:46Z",
+  "purpose": "Measure native exact-L1 terminal variability from authenticated interior selected-v3 states without oracle, potency, route, synthesis, proposal, guidance or candidate-selection calls.",
+  "design": {
+    "population_programs": 4096,
+    "selected_programs": 1024,
+    "states_per_program": 2,
+    "checkpoints": [
+      2,
+      4,
+      6
+    ],
+    "rollouts_per_state_checkpoint": 4,
+    "sample_steps": 8,
+    "shard_programs": 32,
+    "program_selection_seed": 20260831,
+    "particle_seed_base": 20260901,
+    "rollout_seed_base": 20260902,
+    "device": "cpu",
+    "selection_method": "sha256_priority_without_replacement_v1",
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "expected_partial_states": 6144,
+    "expected_terminal_attempts": 24576
+  },
+  "inputs": {
+    "fresh_pool_config": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+      "sha256": "92544cab4e67c34b1d6ae122122322a7b5fae802347aad223cec0bed7ec7be22"
+    },
+    "frozen_programs": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/programs.json",
+      "sha256": "46537953d40ecb14704b0dde8c461b9e4c48769206a03417a630b5ae4f633860"
+    },
+    "prior_terminal_reference": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "generator_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "selected_v3_adapter_source": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v3.py",
+      "sha256": "e4963e2c245a8b5a3ece7e1b869733553ccc1bcfbdb4811bca73131ff540b793"
+    },
+    "selected_v2_equivalence_result": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/result.json",
+      "sha256": "e13eb65ce1653acd1d7ca6443eecb7dbc85ba90dd1e299ae705b409cc6b6f11d"
+    },
+    "selected_v2_equivalence_rows": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json",
+      "sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+    },
+    "census_source": {
+      "path": "src/forge/product/ugi_dynamic_frozen_prior_terminal_census.py",
+      "sha256": "751dd7c41148f8f629e4e1a1032705e07383e9dbe6a2f745c533113fa3c8a1e0"
+    },
+    "census_runner": {
+      "path": "scripts/phase1_collect_ugi_dynamic_frozen_prior_terminal_census.py",
+      "sha256": "35992eff2f520e1fc7301de8dd6e10c54449958d192bfeee588b2833f8466b20"
+    },
+    "census_tests": {
+      "path": "tests/test_ugi_dynamic_frozen_prior_terminal_census.py",
+      "sha256": "fe507e7bf5da69599eead0d81cfc35a0a1ff5023b79a4ee4ff390589985cdaee"
+    }
+  },
+  "scope": {
+    "partition": "calibration",
+    "candidate_selection": false,
+    "guidance": false,
+    "nonzero_guidance": false,
+    "oracle_calls": 0,
+    "potency_predictions": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "sealed_holdout_access": false,
+    "prospective_candidate_lock": false,
+    "retries_or_repairs": false
+  },
+  "analysis_policy": {
+    "sampling_frame": "all_4096_frozen_programs_before_consulting_prior_terminal_outcomes",
+    "independence_unit": "program",
+    "checkpoint_unit": "authenticated_partial_state",
+    "terminal_endpoint": "native_bond_stochastic_exact_l1_completion",
+    "allowed_use": [
+      "estimate native terminal validity and exact-L1 rates by checkpoint",
+      "estimate within-program and between-program terminal variability",
+      "decide whether dynamic partial-state information merits a later controller experiment"
+    ],
+    "forbidden_use": [
+      "oracle or potency model selection",
+      "route or synthesis guidance",
+      "candidate ranking, selection or lock",
+      "prospective claims",
+      "authorization of a nonzero-guidance run"
+    ]
+  }
+}

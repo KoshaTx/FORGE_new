@@ -1,0 +1,51 @@
+{
+  "schema_version": "phase1_ugi3_agile_template_saturation_stress_config.v1",
+  "task": "Optimistic AGILE-template saturation stress test over the expanded Ugi universe",
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "expanded_products": {
+      "path": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+      "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"
+    },
+    "expanded_enumeration_result": {
+      "path": "results/phase1/ugi_expanded_enumeration/result.json",
+      "sha256": "fbff9d65dbcdf439907a3f92e1bdcfb215aec374f4640624a65f4fc667ceabf7"
+    },
+    "hybrid_assessment_ledger": {
+      "path": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz",
+      "sha256": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2"
+    },
+    "hybrid_result": {
+      "path": "results/phase1/ugi3_hybrid_search/result.json",
+      "sha256": "05905d2a5f7eee83cf5a7028d89bcb3e5374959789ecc7ed3c2a692ed75bcbbf"
+    },
+    "routeability_census": {
+      "path": "results/phase1/ugi3_enumerated_routeability_census_v1/result.json",
+      "sha256": "5ccebef57afa3f5bcc35558f353a1d849944d4632a15174ef322fa68b498a0df"
+    },
+    "frozen_agile_program_projection_source": {
+      "path": "src/forge/route/ugi3_virtual_programs.py",
+      "sha256": "c45744dee3ad073f90e6f190c1952d73894e73f1221b29289f3fb02aca97564d"
+    },
+    "original_agile_program_result": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    }
+  },
+  "stress_policy": {
+    "tail_program_assignment": "mechanically invert every admitted aldehyde and isocyanide through the frozen AGILE structural program",
+    "head_program_assignment": "treat every admitted amine head as an unresolved precursor leaf unless its frozen hybrid assessment is complete",
+    "structural_program_is_route_closure": false,
+    "family_projection_is_exact_evidence": false,
+    "projected_leaf_is_terminal": false,
+    "structural_program_establishes_substrate_scope": false,
+    "structural_program_establishes_ugi_success": false,
+    "unresolved_is_impossible": false
+  },
+  "outputs": {
+    "result": "results/phase1/ugi3_agile_template_saturation_stress_v1/result.json"
+  }
+}

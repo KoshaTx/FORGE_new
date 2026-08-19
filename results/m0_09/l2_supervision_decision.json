@@ -1,0 +1,233 @@
+{
+  "claims_boundary": {
+    "algorithmic_decomposition_is_not_chemical_validation_before_m0_05": true,
+    "architecture_gate_is_not_model_training": true,
+    "family_projections_are_not_exact_route_evidence": true,
+    "other_reaction_families_require_their_own_adapters_and_evidence": true,
+    "source_biological_labels_do_not_transfer": true,
+    "thresholds_apply_only_to_future_frozen_candidate_and_motif_sets": true,
+    "virtual_products_are_not_observed_route_outcomes": true
+  },
+  "decision": {
+    "current_operational_closure_achieved": false,
+    "hybrid_recursive_l2_supported": true,
+    "inventory_is_sufficient_to_choose_architecture": true,
+    "joint_product_l1_supervision_supported": true,
+    "l2_model_built": false,
+    "monolithic_joint_product_complete_route_decoder_supported": false,
+    "monolithic_necessary_conditions_passed": false,
+    "next_mining_triggers": [
+      "repeated missing-route-knowledge failures among eligible candidates",
+      "unresolved head or terminal closure needed by the candidate panel",
+      "new isocyanide substrate-scope evidence",
+      "negative or failed synthesis evidence needed for calibration"
+    ],
+    "paper_mining_policy": "targeted_gap_driven_only",
+    "rationale": [
+      "Product and final-assembly supervision is dense and exact.",
+      "L2 supervision is chemically useful but positive-heavy.",
+      "No complete product route currently closes across every L2 and L3 branch.",
+      "No upstream amine-head route is present in the reviewed source set.",
+      "No reported negative synthesis outcome is present in the reviewed source set.",
+      "Cross-platform aldehyde transfer is positive and no longer just speculative."
+    ],
+    "recommended_architecture": "hierarchical_joint_product_and_l1_with_hybrid_recursive_l2"
+  },
+  "evidence": {
+    "cross_platform_transfer": {
+      "lx_2024_direct_aldehyde_transfers": 15,
+      "pilot_route_complete_components": 1,
+      "pilot_source_platforms": 2
+    },
+    "l2_source_supervision": {
+      "head_upstream_routes": 0,
+      "reaction_instances": 76,
+      "reported_negative_outcomes": 0,
+      "reviewed_source_packages": 4,
+      "route_families": 11,
+      "route_instances": 45,
+      "structure_resolved_route_instances": 44
+    },
+    "native_component_scope": {
+      "agile_heads_with_upstream_route": 0,
+      "exact_agile_isocyanide_route_candidates": 5,
+      "structure_resolved_agile_aldehyde_routes": 17
+    },
+    "product_and_l1": {
+      "measured_products_passing_qualified_site_policy": 1200,
+      "unique_virtual_components": 93,
+      "virtual_products_with_exact_unique_decomposition": 12276
+    },
+    "recursive_programs_and_closure": {
+      "complete_product_routes": 0,
+      "current_accepted_procurement_candidates": 35,
+      "exact_source_program_components": 24,
+      "family_projected_program_components": 47,
+      "program_families": 3,
+      "unresolved_terminal_candidates": 3
+    }
+  },
+  "frozen_utc": "2026-07-29T23:30:00Z",
+  "future_operational_closure_thresholds": {
+    "consecutive_saturation_rounds_required": 2,
+    "eligible_candidate_complete_route_fraction_minimum": 0.9,
+    "eligible_candidate_decision_coverage_minimum": 0.95,
+    "eligible_candidate_missing_route_knowledge_fraction_maximum": 0.05,
+    "high_risk_precursor_backup_route_fraction_required": 1.0,
+    "marginal_weighted_coverage_gain_maximum": 0.025,
+    "prospective_panel_complete_dossier_fraction_required": 1.0,
+    "prospective_panel_current_terminal_closure_fraction_required": 1.0,
+    "prospective_panel_forward_consistency_fraction_required": 1.0,
+    "weighted_high_priority_motif_route_support_minimum": 0.9
+  },
+  "future_training_safeguards": {
+    "broad_corpus_replay_required": true,
+    "guidance_must_change_transition_probabilities_before_candidate_lock": true,
+    "guidance_selection_requires_novelty_diversity_and_coverage_floors": true,
+    "masked_l1_loss_for_unannotated_structures": true,
+    "post_hoc_baseline_uses_same_prior_and_planner": true,
+    "preprospective_synthesis_value_claim": "evidence_weighted_route_completion_value_not_success_probability",
+    "raw_route_model_likelihood_allowed_as_synthesis_value": false,
+    "route_closure_strata": [
+      "familiar_agile_components",
+      "transferred_known_components",
+      "genuinely_generated_components"
+    ],
+    "ugi_only_finetuning_without_replay_allowed": false
+  },
+  "gates": {
+    "hybrid_l2": {
+      "checks": {
+        "minimum_direct_transfer_aldehydes": {
+          "minimum": 1,
+          "observed": 15,
+          "passed": true
+        },
+        "minimum_exact_source_programs": {
+          "minimum": 1,
+          "observed": 24,
+          "passed": true
+        },
+        "minimum_route_families": {
+          "minimum": 3,
+          "observed": 11,
+          "passed": true
+        },
+        "minimum_structure_resolved_route_instances": {
+          "minimum": 1,
+          "observed": 44,
+          "passed": true
+        }
+      },
+      "interpretation": "Observed route families and exact programs can seed template search and learned proposal or ranking.",
+      "passed": true
+    },
+    "joint_product_l1": {
+      "checks": {
+        "maximum_virtual_products_with_multiple_exact_decompositions": {
+          "maximum": 0,
+          "observed": 0,
+          "passed": true
+        },
+        "maximum_virtual_products_without_exact_decomposition": {
+          "maximum": 0,
+          "observed": 0,
+          "passed": true
+        },
+        "minimum_exact_virtual_decompositions": {
+          "minimum": 12000,
+          "observed": 12276,
+          "passed": true
+        },
+        "minimum_measured_products_passing_qualified_site_policy": {
+          "minimum": 1200,
+          "observed": 1200,
+          "passed": true
+        }
+      },
+      "interpretation": "Dense exact product-component supervision supports joint whole-product and L1 assembly learning.",
+      "passed": true
+    },
+    "monolithic_complete_route_decoder_necessary_conditions": {
+      "checks": {
+        "minimum_complete_product_routes": {
+          "minimum": 1,
+          "observed": 0,
+          "passed": false
+        },
+        "minimum_head_upstream_routes": {
+          "minimum": 1,
+          "observed": 0,
+          "passed": false
+        },
+        "minimum_reported_negative_outcomes": {
+          "minimum": 1,
+          "observed": 0,
+          "passed": false
+        }
+      },
+      "interpretation": "Failure means the current corpus does not establish viability of a monolithic complete-route decoder. Passing would be necessary, not sufficient.",
+      "passed": false
+    }
+  },
+  "inputs": [
+    {
+      "bytes": 4530,
+      "input_id": "decision_config",
+      "path": "configs/route/m0_09_l2_supervision_decision.json",
+      "schema_version": "m0_09_l2_supervision_decision_config.v2",
+      "sha256": "757819a50362eebda267ef0a5598af7af2778972cb1d8d58880eb8e836d7b348"
+    },
+    {
+      "bytes": 4620,
+      "input_id": "agile_virtual_capability",
+      "path": "results/m0_09/agile_virtual_ugi3_capability.json",
+      "schema_version": "m0_09_agile_virtual_ugi3_capability.v1",
+      "sha256": "9143ae814fe6185813b67d0b80b7af901fcd0772f359b66e85bb8af5f56ba7a0"
+    },
+    {
+      "bytes": 9332,
+      "input_id": "component_programs",
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "schema_version": "m0_09_agile_virtual_ugi3_component_programs.v1",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    {
+      "bytes": 13876,
+      "input_id": "hydrophobic_transfer",
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "schema_version": "m0_09_hydrophobic_motif_transfer.v3",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    },
+    {
+      "bytes": 67946,
+      "input_id": "paper_route_reviews",
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "schema_version": "m0_09_lnpdb_paper_route_reviews.v2",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    {
+      "bytes": 63601,
+      "input_id": "precursor_capability",
+      "path": "results/m0_09/ugi3_precursor_capability.json",
+      "schema_version": "m0_09_ugi3_precursor_capability.v2",
+      "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    },
+    {
+      "bytes": 2494,
+      "input_id": "terminal_queue",
+      "path": "results/m0_09/agile_virtual_ugi3_terminal_queue.json",
+      "schema_version": "m0_09_agile_virtual_ugi3_terminal_queue.v1",
+      "sha256": "d4c1744ed00960407264dae15a5821667c32c31d932d538c3073a90787f95edd"
+    },
+    {
+      "bytes": 272615,
+      "input_id": "ugi3_aldehyde_head_capability",
+      "path": "results/m0_09/ugi3_aldehyde_head_capability.json",
+      "schema_version": "m0_09_ugi3_aldehyde_head_capability.v3",
+      "sha256": "0150b53015d3b31c12be9f97549fa612ff228435fac82881192d3af03f6f74ff"
+    }
+  ],
+  "schema_version": "m0_09_l2_supervision_decision.v2",
+  "task": "M0-09 L2 supervision sufficiency and stopping decision"
+}

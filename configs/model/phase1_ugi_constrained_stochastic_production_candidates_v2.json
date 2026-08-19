@@ -1,0 +1,113 @@
+{
+  "schema_version": "phase1_ugi_constrained_stochastic_production_candidates_config.v2",
+  "status": "frozen_before_fresh_matched_terminal_generation",
+  "frozen_at_utc": "2026-08-05T23:10:00Z",
+  "task": "Generate and seal fresh matched broad-prior and applicability-enriched candidate pools with the fully stochastic all-fold Ugi generator",
+  "scope": {
+    "matched_production_candidate_pool_only": true,
+    "fully_stochastic_atom_bond_decoration_decoding": true,
+    "raw_terminals_sealed_before_chemical_admission": true,
+    "exact_terminal_chemical_admission": true,
+    "terminal_admission_changes_generated_molecules": false,
+    "terminal_scoring": false,
+    "potency_model_calls": 0,
+    "applicability_model_calls": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "potency_tilting": false,
+    "synthesis_tilting": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false,
+    "retries_or_repairs": false
+  },
+  "design": {
+    "arms": [
+      "broad_prior",
+      "support_enriched"
+    ],
+    "draws_per_arm": 16384,
+    "shard_draws": 1024,
+    "shards_per_arm": 16,
+    "flow_seed_base": 2026080600,
+    "terminal_seed_base": 2026080700,
+    "chemistry_randomness_across_arms": "independent_hash_pinned_substreams",
+    "common_randomness_across_arms": "morphology_inverse_cdf_uniforms_only",
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "stochastic",
+    "terminal_temperature": 1.0,
+    "reference_comparison_mode": "deferred",
+    "retry_or_repair": false,
+    "terminal_admission": [
+      "sanitized_connected_product",
+      "exact_unsaturated_L1_forward_reconstruction",
+      "registry_handle_policy_for_all_three_precursor_roles"
+    ]
+  },
+  "inputs": {
+    "schedule": {
+      "path": "results/phase1/ugi_production_candidate_schedule_v2/schedule.json",
+      "sha256": "70b134ebbf9a009db206f810e027905a705bee97f5263f41798bc1ad1790b5f8"
+    },
+    "schedule_result": {
+      "path": "results/phase1/ugi_production_candidate_schedule_v2/result.json",
+      "sha256": "7235f9a22e77fb512ac8a6bda25116c3e4932e60629d38288a400d7a003ad090"
+    },
+    "production_refit_result": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json",
+      "sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+    },
+    "independent_generator_census": {
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/result.json",
+      "sha256": "b3de71b70bf4bedcfd45e978394f98140ed6edb4e07f2d1ce7e0e1efe35cb9f2"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/checkpoint_best.pt",
+      "sha256": "3a3fbf2ad1e6a080bbba0476748d10e78de7cd5122e153d8fa7fc67b60823497"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "implementation": {
+    "source": {
+      "path": "src/forge/product/ugi_constrained_stochastic_production_candidates.py",
+      "sha256": "784b4f4ede526b87740f59606df4e7f8c3d7aad6dd83941a5948700bf19c75e2"
+    },
+    "runner": {
+      "path": "scripts/modal_phase1_ugi_constrained_stochastic_production_candidates_v2.py",
+      "sha256": "fe86cda3c374a9e748043c3493d65d1e52458610b126d999c6659079b75b0855"
+    },
+    "collector": {
+      "path": "scripts/phase1_collect_ugi_constrained_stochastic_production_candidates_v2.py",
+      "sha256": "d0e0718383e404bc1301ea7845f46ebbe247b6b17c5905e8ba0e4739f4b06ce2"
+    },
+    "tests": {
+      "path": "tests/test_ugi_constrained_stochastic_production_candidates_v2.py",
+      "sha256": "8e5f53febbdcfcb3bd80d8b53c980864482f239ecd2c0cb618835708a479ad5e"
+    }
+  },
+  "decision_boundary": {
+    "old_argmax_candidate_pool_reused": false,
+    "applicability_proposal_retuned": false,
+    "applicability_boundary_retuned": false,
+    "potency_tilting_promoted": false,
+    "synthesis_tilting_promoted": false,
+    "next_stage": "apply the frozen biological applicability policy and identical conservative terminal ranking to admitted molecules"
+  }
+}

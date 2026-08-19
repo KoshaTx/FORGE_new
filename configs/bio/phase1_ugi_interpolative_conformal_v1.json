@@ -1,0 +1,57 @@
+{
+  "schema_version": "phase1_ugi_interpolative_conformal_config.v1",
+  "status": "frozen_before_additive_conditional_calibration_diagnostic",
+  "task": "Evaluate split-conformal uncertainty within the frozen interpolative applicability bin without refitting or reselecting the HeLa oracle",
+  "inputs": {
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "oracle_split_assignments": {
+      "path": "results/m0_07/oracle_split_assignments.csv.gz",
+      "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+    },
+    "oracle_graph_matrix_result": {
+      "path": "results/m0_07/oracle_graph_matrix_result.json",
+      "sha256": "1573e081a419b2b26a2deb3aab6d09aba20883235819a4d0b2dc7cf56e8738d4"
+    },
+    "applicability_v3_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "applicability_v3_heldout": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz",
+      "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_interpolative_conformal.py",
+      "sha256": "9d2a4083f094d40422e0c86243b4249035fb0f5f31869dce6cfc81c855a275c0"
+    },
+    "runner": {
+      "path": "scripts/phase1_audit_ugi_interpolative_conformal.py",
+      "sha256": "e1a6169772313f1675a90f91fe83ee2b31f110677a0226b63996cf5e25441d36"
+    },
+    "tests": {
+      "path": "tests/test_ugi_interpolative_conformal.py",
+      "sha256": "3d6b9192e83221f87ba9c02d9da13c1eb3bb85dbd67c0d011c060d92131fe75a"
+    }
+  },
+  "policy": {
+    "endpoint": "expt_Hela",
+    "representation": "ugi_component_role_aware_dmpnn",
+    "distribution_bin": "interpolative",
+    "coverage": 0.9,
+    "minimum_calibration_rows_per_fold": 20,
+    "minimum_test_rows_per_fold": 20,
+    "minimum_eligible_folds": 3,
+    "oracle_refit_or_reselected": false,
+    "biological_guidance_authorized": false,
+    "candidate_selection_changed": false
+  },
+  "guidance_gate": {
+    "minimum_scheme_mean_test_r2": 0.1,
+    "minimum_scheme_mean_test_spearman_rho": 0.2,
+    "minimum_positive_r2_fold_fraction": 0.6,
+    "maximum_scheme_mean_absolute_90pct_coverage_gap": 0.1
+  }
+}

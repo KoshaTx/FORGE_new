@@ -1,0 +1,74 @@
+{
+  "schema_version": "phase1_ugi_source_guidance_prerequisite_requalification_config.v1",
+  "policy": {
+    "purpose": "Requalify immutable zero-guidance and matched-budget prerequisites against source-qualified fresh-pool v6.",
+    "development_only": true,
+    "historical_artifacts_rewritten": false,
+    "production_runtime_replayed": false,
+    "scalarization_authorized": false,
+    "nonzero_guidance_authorized": false,
+    "candidate_selection_authorized": false,
+    "sealed_holdout_access_authorized": false
+  },
+  "assessment": {
+    "assessment_as_of_utc": "2026-08-03T17:30:13Z"
+  },
+  "inputs": {
+    "fresh_pool_v6_config": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json",
+      "sha256": "2a77a52ceaaa8f6e983ef80017d3d4a023707078d01416a3d4dbe16c7bc3f183"
+    },
+    "fresh_pool_v6_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "sha256": "339d11287ad1489336c1e949dab001aad05a169fa97dbe48c15c2b9857fec722"
+    },
+    "fresh_pool_v6_component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/component_synthesis_values.json.gz",
+      "sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+    },
+    "fresh_pool_v6_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz",
+      "sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+    },
+    "source_qualification": {
+      "path": "results/phase1/synthesis_value_source_qualification_v1/result.json",
+      "sha256": "7b72a64e2bc53fbe55aed6751610e9426c735a41553dc95556da123269fd2ad4"
+    },
+    "zero_guidance_config": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json",
+      "sha256": "90e46be17073adb848bd856bbc5cbebb0591a60b92cdd2adce1de04e6433b7cd"
+    },
+    "zero_guidance_result": {
+      "path": "results/phase1/ugi_production_zero_guidance_rehearsal_v1/result.json",
+      "sha256": "7bc95bbf57e22d6034ee01bc0b2a2d1568a88cc1295dfd1ac281345e30b1af54"
+    },
+    "zero_guidance_execution_manifest": {
+      "path": "results/phase1/ugi_production_zero_guidance_rehearsal_v1/execution_manifest.json",
+      "sha256": "ab220e641d472187000639d40804bebdbc6ab08b8702b60ce030fde96d0bed79"
+    },
+    "matched_budget_config": {
+      "path": "configs/model/phase1_ugi_matched_budget_orchestration_v1.json",
+      "sha256": "51c8804b034d648d7e64ca64066964e271db93dd9e20928e0d7aeb1309d6b5ad"
+    },
+    "matched_budget_result": {
+      "path": "results/phase1/ugi_matched_budget_orchestration_v1/result.json",
+      "sha256": "0c4b9f82df8fa68a4c81e3a228472cda3d73f2d1c04e5d69ea80a6d9a1ee2122"
+    },
+    "audit_source": {
+      "path": "src/forge/product/ugi_source_guidance_prerequisite_requalification.py",
+      "sha256": "8cc683e6dce4dff2ccb2ba558e6077405273ece74aa814f42e7c68ccfa7e3183"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_requalify_ugi_source_guidance_prerequisites.py",
+      "sha256": "a384fa612174a4be833cd7ab994271b5a4a4852ee0729e0e37aea8ce54cfa482"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_source_guidance_prerequisite_requalification.py",
+      "sha256": "7b34972b80bde51aacffddc38939c008ae6f55ed3f7403f8237211d22d1ee51e"
+    }
+  }
+}

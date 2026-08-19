@@ -1,0 +1,1348 @@
+{
+  "component_source_package_coverage": {
+    "any_complete_source_package": 423,
+    "by_role": {
+      "head": {
+        "any_complete_source_package": 330,
+        "non_pmc_or_unlinked_source_package": 57,
+        "only_incomplete_pmc_source_package": 21
+      },
+      "linker": {
+        "any_complete_source_package": 6,
+        "non_pmc_or_unlinked_source_package": 27,
+        "only_incomplete_pmc_source_package": 2
+      },
+      "tail1": {
+        "any_complete_source_package": 79,
+        "non_pmc_or_unlinked_source_package": 79,
+        "only_incomplete_pmc_source_package": 80
+      },
+      "tail2": {
+        "any_complete_source_package": 8,
+        "non_pmc_or_unlinked_source_package": 35,
+        "only_incomplete_pmc_source_package": 2
+      }
+    },
+    "non_pmc_or_unlinked_source_package": 198,
+    "only_incomplete_pmc_source_package": 105,
+    "total_components": 726
+  },
+  "evidence_contract": {
+    "review_not_started": "No chemistry or route claim has yet been extracted from the source package.",
+    "source_package_complete": "Main text and all publisher-listed or JATS-listed attachments are local and hash-verified.",
+    "supplement_unavailable": "Main text is local, but the supplementary package has not been acquired."
+  },
+  "generated_utc": "2026-07-29T04:14:20+00:00",
+  "inputs": [
+    {
+      "asset": "results/m0_09/source_queue.csv",
+      "bytes": 21156,
+      "sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    },
+    {
+      "asset": "results/m0_09/component_source_ledger.csv",
+      "bytes": 145769,
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    {
+      "asset": "results/m0_09/pmc_source_acquisition.json",
+      "bytes": 107534,
+      "sha256": "2dfbb26459c5e5afc4c78b8349ba66f2c67b25d639108a5fe4bc820311a08eb2"
+    },
+    {
+      "asset": "results/m0_09/publisher_source_acquisition.json",
+      "bytes": 40174,
+      "sha256": "2674902f4ca3d212cae0640586ce2a08b4f5e7988d99a34a0d57b00193e5267a"
+    }
+  ],
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "records": [
+    {
+      "doi": "10.1038/s41467-024-50619-z",
+      "gap_reason": "",
+      "lnpdb_record_count": 2400,
+      "main_text": {
+        "bytes": 145547,
+        "cache_asset": "m0_09_pmc/PMC11282250/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "facf63740ce76351afaec2346d3cb784c5971eda72c98a30e9522077324a7876",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11282250/unicode"
+      },
+      "pmc_id": "PMC11282250",
+      "pmid": "39060305",
+      "review_rank": 1,
+      "route_review_status": "not_started",
+      "source_id": "39060305",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 4,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 12499955,
+          "cache_asset": "m0_09_publishers/PMC11282250/assets/41467_2024_50619_MOESM1_ESM.pdf",
+          "filename": "41467_2024_50619_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-024-50619-z/MediaObjects/41467_2024_50619_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 421955,
+          "cache_asset": "m0_09_publishers/PMC11282250/assets/41467_2024_50619_MOESM2_ESM.pdf",
+          "filename": "41467_2024_50619_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "7431c6a1e372dbcbd701d399cb55a754d173da2c2fa4a43982f5cdda46a5a9cf",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-024-50619-z/MediaObjects/41467_2024_50619_MOESM2_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 82940,
+          "cache_asset": "m0_09_publishers/PMC11282250/assets/41467_2024_50619_MOESM3_ESM.pdf",
+          "filename": "41467_2024_50619_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "179f0a433172052e2a9ffe931fcc95b9b10ad6af8c8c17f84e14b039650d4ccb",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-024-50619-z/MediaObjects/41467_2024_50619_MOESM3_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 137546,
+          "cache_asset": "m0_09_publishers/PMC11282250/assets/41467_2024_50619_MOESM4_ESM.xlsx",
+          "filename": "41467_2024_50619_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "e795d4e7ef1ec5c82b0358c626ab1eae059b76485a3ebdb7cbe5565aa6aac723",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-024-50619-z/MediaObjects/41467_2024_50619_MOESM4_ESM.xlsx"
+        }
+      ],
+      "title": "AGILE platform: a deep learning powered approach to accelerate LNP development for mRNA delivery.",
+      "unique_component_count": 36
+    },
+    {
+      "doi": "10.1038/ncomms5277",
+      "gap_reason": "",
+      "lnpdb_record_count": 1273,
+      "main_text": {
+        "bytes": 89946,
+        "cache_asset": "m0_09_pmc/PMC4111939/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "b23c2619b05839fd68ef7f8d978e1e6f293cf5531cb94da20b282c11b4325f98",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC4111939/unicode"
+      },
+      "pmc_id": "PMC4111939",
+      "pmid": "24969323",
+      "review_rank": 2,
+      "route_review_status": "not_started",
+      "source_id": "24969323",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 1448595,
+          "cache_asset": "m0_09_publishers/PMC4111939/assets/41467_2014_BFncomms5277_MOESM1154_ESM.pdf",
+          "filename": "41467_2014_BFncomms5277_MOESM1154_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "f27140f521b337846d078adf2b2262496553890e6f2b7233322a05638e5f8a70",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fncomms5277/MediaObjects/41467_2014_BFncomms5277_MOESM1154_ESM.pdf"
+        }
+      ],
+      "title": "Degradable lipid nanoparticles with predictable in vivo siRNA delivery activity.",
+      "unique_component_count": 208
+    },
+    {
+      "doi": "10.1038/s41587-023-01679-x",
+      "gap_reason": "",
+      "lnpdb_record_count": 773,
+      "main_text": {
+        "bytes": 67678,
+        "cache_asset": "m0_09_pmc/PMC10544676/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "786d9ed09ea95dda55f1d7b3bc414932c4eac4fee8e050494934931443d182f2",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10544676/unicode"
+      },
+      "pmc_id": "PMC10544676",
+      "pmid": "36997680",
+      "review_rank": 3,
+      "route_review_status": "not_started",
+      "source_id": "36997680",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 2,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 9267004,
+          "cache_asset": "m0_09_publishers/PMC10544676/assets/41587_2023_1679_MOESM1_ESM.pdf",
+          "filename": "41587_2023_1679_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "46be449ddcef11da686d499015c868c767f4c02714c54e3d5ef5db35c4a42490",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41587-023-01679-x/MediaObjects/41587_2023_1679_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 1913257,
+          "cache_asset": "m0_09_publishers/PMC10544676/assets/41587_2023_1679_MOESM2_ESM.pdf",
+          "filename": "41587_2023_1679_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "662215466fb47c0fc1f6b577b29e33132be0b479c41e21726989129fef807320",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41587-023-01679-x/MediaObjects/41587_2023_1679_MOESM2_ESM.pdf"
+        }
+      ],
+      "title": "Combinatorial design of nanoparticles for pulmonary mRNA delivery and genome editing.",
+      "unique_component_count": 81
+    },
+    {
+      "doi": "10.1073/pnas.1520756113",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 1538,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC4725465/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC4725465/unicode"
+      },
+      "pmc_id": "PMC4725465",
+      "pmid": "26729861",
+      "review_rank": 4,
+      "route_review_status": "not_started",
+      "source_id": "26729861",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "Modular degradable dendrimers enable small RNAs to extend survival in an aggressive liver cancer model.",
+      "unique_component_count": 74
+    },
+    {
+      "doi": "10.1038/nbt1402",
+      "gap_reason": "",
+      "lnpdb_record_count": 497,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC3014085/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC3014085/unicode"
+      },
+      "pmc_id": "PMC3014085",
+      "pmid": "18438401",
+      "review_rank": 5,
+      "route_review_status": "not_started",
+      "source_id": "18438401",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 225181,
+          "cache_asset": "m0_09_publishers/PMC3014085/assets/41587_2008_BFnbt1402_MOESM5_ESM.pdf",
+          "filename": "41587_2008_BFnbt1402_MOESM5_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "c7367c7253d2f8a137d0e2508dbb775f6e47d637ee519cf2da01d4ccaefa3808",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnbt1402/MediaObjects/41587_2008_BFnbt1402_MOESM5_ESM.pdf"
+        }
+      ],
+      "title": "A combinatorial library of lipid-like materials for delivery of RNAi therapeutics.",
+      "unique_component_count": 58
+    },
+    {
+      "doi": "10.1073/pnas.0910603106",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 378,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC2804742/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC2804742/unicode"
+      },
+      "pmc_id": "PMC2804742",
+      "pmid": "20080679",
+      "review_rank": 6,
+      "route_review_status": "not_started",
+      "source_id": "20080679",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "Lipid-like materials for low-dose, in vivo gene silencing.",
+      "unique_component_count": 41
+    },
+    {
+      "doi": "10.1073/pnas.2307810121",
+      "gap_reason": "",
+      "lnpdb_record_count": 350,
+      "main_text": {
+        "bytes": 83804,
+        "cache_asset": "m0_09_pmc/PMC10945816/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "d95cdf42eb5e1b751315739dc6dd051f73108835f44cf80e0985ebbc1c6e54bf",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10945816/unicode"
+      },
+      "pmc_id": "PMC10945816",
+      "pmid": "38437545",
+      "review_rank": 7,
+      "route_review_status": "not_started",
+      "source_id": "38437545",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 756858,
+          "cache_asset": "m0_09_review_assets/PMC10945816/pnas.2307810121.sapp.pdf",
+          "filename": "pnas.2307810121.sapp.pdf",
+          "review_status": "not_started",
+          "sha256": "7cee2b08f12588d5d7e0caab893ff2599c9e25fa2d7615c25d943071c3d50578",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "Lipid nanoparticle structure and delivery route during pregnancy dictate mRNA potency, immunogenicity, and maternal and fetal outcomes.",
+      "unique_component_count": 33
+    },
+    {
+      "doi": "10.1038/s41563-020-00886-0",
+      "gap_reason": "",
+      "lnpdb_record_count": 572,
+      "main_text": {
+        "bytes": 89051,
+        "cache_asset": "m0_09_pmc/PMC8188687/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "350d60e2f48c4583eb57d76f0ff6642eb0fad955d68cd6e01d8eed36beca00a9",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC8188687/unicode"
+      },
+      "pmc_id": "PMC8188687",
+      "pmid": "33542471",
+      "review_rank": 8,
+      "route_review_status": "not_started",
+      "source_id": "33542471",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 2,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 18338163,
+          "cache_asset": "m0_09_publishers/PMC8188687/assets/41563_2020_886_MOESM1_ESM.pdf",
+          "filename": "41563_2020_886_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "b93add365aad4114ea93629bebb276666baa25a626edbb23471e246fbcc74dc5",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41563-020-00886-0/MediaObjects/41563_2020_886_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 4611928,
+          "cache_asset": "m0_09_publishers/PMC8188687/assets/41563_2020_886_MOESM2_ESM.pdf",
+          "filename": "41563_2020_886_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "833d2fe43a724396f0263f9a84a67b4699d9ef103a192ec5e9744b2e54a1dd95",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41563-020-00886-0/MediaObjects/41563_2020_886_MOESM2_ESM.pdf"
+        }
+      ],
+      "title": "Membrane-destabilizing ionizable phospholipids for organ-selective mRNA delivery and CRISPR-Cas gene editing.",
+      "unique_component_count": 28
+    },
+    {
+      "doi": "10.1038/s41467-024-45422-9",
+      "gap_reason": "",
+      "lnpdb_record_count": 851,
+      "main_text": {
+        "bytes": 125160,
+        "cache_asset": "m0_09_pmc/PMC10904786/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "70a269e6fd7d5d132fd4b2344ec7f34f4124263e6665bf51ba7383a0ccf1d0ac",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10904786/unicode"
+      },
+      "pmc_id": "PMC10904786",
+      "pmid": "38424061",
+      "review_rank": 9,
+      "route_review_status": "not_started",
+      "source_id": "38424061",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 6,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 7379733,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM1_ESM.pdf",
+          "filename": "41467_2024_45422_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "7f5b1c6413e4db3b09cb86296139ba76848b06de96b7165942643233ad6a3e2c",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 3897424,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM2_ESM.pdf",
+          "filename": "41467_2024_45422_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "3d27ab642dd8ae7c422a8c6cd0eb9f2052d1270e9c86e51dae6e4121486fbc34",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 107368,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM3_ESM.pdf",
+          "filename": "41467_2024_45422_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "75c909733d7b17b0c50fe1c3262410a2ad99c31a536a2bcb3a2b1558d20e5b1b",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 4864202,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM4_ESM.xlsx",
+          "filename": "41467_2024_45422_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "d4091da1a47e663400ab65ec7e974a7e0444efe6669b0a83bf8a79ba7a7f6d79",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 2965068,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM5_ESM.pdf",
+          "filename": "41467_2024_45422_MOESM5_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "c641bd463148e90fd781da391ae98d19297049c1f2f30f0c171206cbc1921f8c",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 46836,
+          "cache_asset": "m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM6_ESM.xlsx",
+          "filename": "41467_2024_45422_MOESM6_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "bbcf2fb8aa75b0e2dcf815ec6821ac00145a0c17a563dee33bd2c4e57f2bff33",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "High-throughput barcoding of nanoparticles identifies cationic, degradable lipid-like materials for mRNA delivery to the lungs in female preclinical models.",
+      "unique_component_count": 28
+    },
+    {
+      "doi": "10.1073/pnas.2309472120",
+      "gap_reason": "",
+      "lnpdb_record_count": 288,
+      "main_text": {
+        "bytes": 84859,
+        "cache_asset": "m0_09_pmc/PMC10723144/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "107d6543976017c6cb3cfaf095d5390ca6af1a3f2bf78a61dd77c3f61824e40c",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10723144/unicode"
+      },
+      "pmc_id": "PMC10723144",
+      "pmid": "38060560",
+      "review_rank": 10,
+      "route_review_status": "not_started",
+      "source_id": "38060560",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 2765858,
+          "cache_asset": "m0_09_review_assets/PMC10723144/pnas.2309472120.sapp.pdf",
+          "filename": "pnas.2309472120.sapp.pdf",
+          "review_status": "not_started",
+          "sha256": "51bdaccf337fe8f6d19bc9dbddf99ec6d1f312006d4d1ef2152a4fc2f6e4f1c6",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "Combinatorial design of ionizable lipid nanoparticles for muscle-selective mRNA delivery with minimized off-target effects.",
+      "unique_component_count": 25
+    },
+    {
+      "doi": "10.1038/s41467-024-50093-7",
+      "gap_reason": "",
+      "lnpdb_record_count": 140,
+      "main_text": {
+        "bytes": 90587,
+        "cache_asset": "m0_09_pmc/PMC11226454/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "64ff0baaf4e9eaf9787d3bdbaaacc3a16d12f7c5919514732cfb2b86ea1ea464",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11226454/unicode"
+      },
+      "pmc_id": "PMC11226454",
+      "pmid": "38969646",
+      "review_rank": 11,
+      "route_review_status": "not_started",
+      "source_id": "38969646",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 4,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 10465058,
+          "cache_asset": "m0_09_review_assets/PMC11226454/41467_2024_50093_MOESM1_ESM.pdf",
+          "filename": "41467_2024_50093_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "107c40ce9720a623c34d69850c5b3e863cc7d48582012facb410e888e2ce32b1",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 1506406,
+          "cache_asset": "m0_09_review_assets/PMC11226454/41467_2024_50093_MOESM2_ESM.pdf",
+          "filename": "41467_2024_50093_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "0027e09f948c240acae8368b355310251b4ddd360e17b12f4f38d64ccecc00f6",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 101983,
+          "cache_asset": "m0_09_review_assets/PMC11226454/41467_2024_50093_MOESM3_ESM.pdf",
+          "filename": "41467_2024_50093_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "2d1bdc25ac20141ba5dd7090d86162f8a9eb7f8c880f41d683cf9e511d3af2b6",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 74771,
+          "cache_asset": "m0_09_review_assets/PMC11226454/41467_2024_50093_MOESM4_ESM.xlsx",
+          "filename": "41467_2024_50093_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "2d9b8694049ba6daccaa571c25c9e6051e34d9f492f4f8e0d8b86aa0bfde90ef",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "Reformulating lipid nanoparticles for organ-targeted mRNA accumulation and translation.",
+      "unique_component_count": 24
+    },
+    {
+      "doi": "10.1002/anie.202013927",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 91,
+      "main_text": {
+        "bytes": 39445,
+        "cache_asset": "m0_09_pmc/PMC8100975/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "5d4c886855d98cad3fc01b171a35eeef58ea7056d23cafb2a99f9d401fb17cde",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC8100975/unicode"
+      },
+      "pmc_id": "PMC8100975",
+      "pmid": "33305471",
+      "review_rank": 12,
+      "route_review_status": "not_started",
+      "source_id": "33305471",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "A Systematic Study of Unsaturation in Lipid Nanoparticles Leads to Improved mRNA Transfection In Vivo.",
+      "unique_component_count": 20
+    },
+    {
+      "doi": "10.1002/anie.201610209",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 72,
+      "main_text": {
+        "bytes": 35048,
+        "cache_asset": "m0_09_pmc/PMC5521011/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "6fb3cb0a3b2b83dbdbece260db45db5c788f647b6e4c401621f80ae4879c5702",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC5521011/unicode"
+      },
+      "pmc_id": "PMC5521011",
+      "pmid": "27981708",
+      "review_rank": 13,
+      "route_review_status": "not_started",
+      "source_id": "27981708",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "Non-Viral CRISPR/Cas Gene Editing In Vitro and In Vivo Enabled by Synthetic Nanoparticle Co-Delivery of Cas9 mRNA and sgRNA.",
+      "unique_component_count": 18
+    },
+    {
+      "doi": "10.1002/adhm.202403366",
+      "gap_reason": "oa_package_fetch_failed",
+      "lnpdb_record_count": 36,
+      "main_text": {
+        "bytes": 88319,
+        "cache_asset": "m0_09_pmc/PMC11912100/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "31b3678ab5541af06c2398c5fca0ccbb6ab66a5ed4db81def59e1af97735741f",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11912100/unicode"
+      },
+      "pmc_id": "PMC11912100",
+      "pmid": "39502027",
+      "review_rank": 14,
+      "route_review_status": "not_started",
+      "source_id": "39502027",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "Novel Less Toxic, Lymphoid Tissue-Targeted Lipid Nanoparticles Containing a Vitamin B5-Derived Ionizable Lipid for mRNA Vaccine Delivery.",
+      "unique_component_count": 16
+    },
+    {
+      "doi": "10.1038/s41467-024-45537-z",
+      "gap_reason": "",
+      "lnpdb_record_count": 60,
+      "main_text": {
+        "bytes": 99203,
+        "cache_asset": "m0_09_pmc/PMC10897129/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "5234704ef90d65ac00b25c41875e2e1ae05059c9d41a1d16c0fced7fabb3ae62",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10897129/unicode"
+      },
+      "pmc_id": "PMC10897129",
+      "pmid": "38409275",
+      "review_rank": 15,
+      "route_review_status": "not_started",
+      "source_id": "38409275",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 4,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 4760746,
+          "cache_asset": "m0_09_review_assets/PMC10897129/41467_2024_45537_MOESM1_ESM.pdf",
+          "filename": "41467_2024_45537_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "b7ae2f3241f451fd49579fb88338cd3b0dabee0c92836978d4a4701afb03b2b3",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 7515956,
+          "cache_asset": "m0_09_review_assets/PMC10897129/41467_2024_45537_MOESM2_ESM.pdf",
+          "filename": "41467_2024_45537_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "bce632c04dd889efb567a95e5cb1b65cfa71630b522adfd2e4b632ef809b056a",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 105412,
+          "cache_asset": "m0_09_review_assets/PMC10897129/41467_2024_45537_MOESM3_ESM.pdf",
+          "filename": "41467_2024_45537_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "17f6e1c121efb2454c3b16d59daa80e6c070b872676db948446e37f47abb57e4",
+          "source_channel": "europe_pmc_supplement_archive"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 46990,
+          "cache_asset": "m0_09_review_assets/PMC10897129/41467_2024_45537_MOESM4_ESM.xlsx",
+          "filename": "41467_2024_45537_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "bb2e6bc324557a4778a1b97ed43bb3481181c4aea973a1e28c322f7e06a54592",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "In situ combinatorial synthesis of degradable branched lipidoids for systemic delivery of mRNA therapeutics and gene editors.",
+      "unique_component_count": 11
+    },
+    {
+      "doi": "10.1016/j.bioactmat.2024.05.012",
+      "gap_reason": "",
+      "lnpdb_record_count": 24,
+      "main_text": {
+        "bytes": 117910,
+        "cache_asset": "m0_09_pmc/PMC11109743/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "183482c255279f8d40a0559c1ce7c37956c7b005bf7afa9c550754c3d80c64f5",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11109743/unicode"
+      },
+      "pmc_id": "PMC11109743",
+      "pmid": "38779592",
+      "review_rank": 16,
+      "route_review_status": "not_started",
+      "source_id": "38779592",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 1172037,
+          "cache_asset": "m0_09_review_assets/PMC11109743/mmc1.docx",
+          "filename": "mmc1.docx",
+          "review_status": "not_started",
+          "sha256": "780de916eb59f2cd8c29a3c0b51bd570fa5cbbc624003fd988dbea6e52d9bd5e",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "A lipid nanoparticle platform incorporating trehalose glycolipid for exceptional mRNA vaccine safety.",
+      "unique_component_count": 5
+    },
+    {
+      "doi": "10.1038/s41467-022-31993-y",
+      "gap_reason": "",
+      "lnpdb_record_count": 1080,
+      "main_text": {
+        "bytes": 90065,
+        "cache_asset": "m0_09_pmc/PMC9310361/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "b7a77e51230c9fcf26bdde78f49d86c4413e142f9ef9f75bf92816afca6e43a7",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC9310361/unicode"
+      },
+      "pmc_id": "PMC9310361",
+      "pmid": "35879315",
+      "review_rank": 17,
+      "route_review_status": "not_started",
+      "source_id": "35879315",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 4,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 2490063,
+          "cache_asset": "m0_09_publishers/PMC9310361/assets/41467_2022_31993_MOESM1_ESM.pdf",
+          "filename": "41467_2022_31993_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "1ba881483152c2e4478a4023eebd42e406b167627305d01d853d72ef8a89316b",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-31993-y/MediaObjects/41467_2022_31993_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "nested_archive",
+          "bytes": 10194,
+          "cache_asset": "m0_09_publishers/PMC9310361/assets/41467_2022_31993_MOESM2_ESM.zip",
+          "filename": "41467_2022_31993_MOESM2_ESM.zip",
+          "review_status": "not_started",
+          "sha256": "f46fda5b65219c4cc6a09ab11304248e05d87f22270a16e46d19cd0c301c7685",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-31993-y/MediaObjects/41467_2022_31993_MOESM2_ESM.zip"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 273477,
+          "cache_asset": "m0_09_publishers/PMC9310361/assets/41467_2022_31993_MOESM3_ESM.pdf",
+          "filename": "41467_2022_31993_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "2ca39adc4728405320a7f32fbc4f6d8351e721ed062161e71f2cd7100a4e6720",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-31993-y/MediaObjects/41467_2022_31993_MOESM3_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 110925,
+          "cache_asset": "m0_09_publishers/PMC9310361/assets/41467_2022_31993_MOESM4_ESM.xlsx",
+          "filename": "41467_2022_31993_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "71d7ade4ed6f87d21f5be56550607c18724aa822770d6a8ac79669056d90c856",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-31993-y/MediaObjects/41467_2022_31993_MOESM4_ESM.xlsx"
+        }
+      ],
+      "title": "Multi-step screening of DNA/lipid nanoparticles and co-delivery with siRNA to enhance and prolong gene expression.",
+      "unique_component_count": 1
+    },
+    {
+      "doi": "10.1038/s41551-023-01131-0",
+      "gap_reason": "",
+      "lnpdb_record_count": 1080,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC11162325/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11162325/unicode"
+      },
+      "pmc_id": "PMC11162325",
+      "pmid": "38082180",
+      "review_rank": 18,
+      "route_review_status": "not_started",
+      "source_id": "38082180",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 5,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 7566731,
+          "cache_asset": "m0_09_publishers/PMC11162325/assets/41551_2023_1131_MOESM1_ESM.pdf",
+          "filename": "41551_2023_1131_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "be6b83908872affcfb4c435ecdd4cd2533aa92a7c22687130647965c84448332",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41551-023-01131-0/MediaObjects/41551_2023_1131_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 151325,
+          "cache_asset": "m0_09_publishers/PMC11162325/assets/41551_2023_1131_MOESM2_ESM.pdf",
+          "filename": "41551_2023_1131_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "e68e0084ecc5dd78b218a8869f3857399201439ca2c1916487942cab1517c0c0",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41551-023-01131-0/MediaObjects/41551_2023_1131_MOESM2_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 9319600,
+          "cache_asset": "m0_09_publishers/PMC11162325/assets/41551_2023_1131_MOESM3_ESM.pdf",
+          "filename": "41551_2023_1131_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "e7fe2d5ac104b0a5a1317e6f508ed23487e7560b29735ecb44535521131fc82b",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41551-023-01131-0/MediaObjects/41551_2023_1131_MOESM3_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 35236,
+          "cache_asset": "m0_09_publishers/PMC11162325/assets/41551_2023_1131_MOESM4_ESM.xlsx",
+          "filename": "41551_2023_1131_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "064b17ed39913bf55e934f71f72aabd2f5c8c87330eed63bc93bd9e4c409efa4",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41551-023-01131-0/MediaObjects/41551_2023_1131_MOESM4_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 119356,
+          "cache_asset": "m0_09_publishers/PMC11162325/assets/41551_2023_1131_MOESM5_ESM.xlsx",
+          "filename": "41551_2023_1131_MOESM5_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "c872943165c73a25742a2968634e216b10643d5470a8587daff8b2a3bfb41b15",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41551-023-01131-0/MediaObjects/41551_2023_1131_MOESM5_ESM.xlsx"
+        }
+      ],
+      "title": "Screening for lipid nanoparticles that modulate the immune activity of helper T cells towards enhanced antitumour activity.",
+      "unique_component_count": 1
+    },
+    {
+      "doi": "10.1186/s12951-024-02919-1",
+      "gap_reason": "",
+      "lnpdb_record_count": 623,
+      "main_text": {
+        "bytes": 110916,
+        "cache_asset": "m0_09_pmc/PMC11536852/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "520ff3a0167fd2000be921a61bf4b044bb430e17bd7c78d90eca8bf1bbf0351c",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11536852/unicode"
+      },
+      "pmc_id": "PMC11536852",
+      "pmid": "39497197",
+      "review_rank": 19,
+      "route_review_status": "not_started",
+      "source_id": "39497197",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 2,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 7619117,
+          "cache_asset": "m0_09_publishers/PMC11536852/assets/12951_2024_2919_MOESM1_ESM.pdf",
+          "filename": "12951_2024_2919_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fs12951-024-02919-1/MediaObjects/12951_2024_2919_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 3818419,
+          "cache_asset": "m0_09_publishers/PMC11536852/assets/12951_2024_2919_MOESM2_ESM.docx",
+          "filename": "12951_2024_2919_MOESM2_ESM.docx",
+          "review_status": "not_started",
+          "sha256": "208b48e7f29485bb1590cf767f174f7735a2acadd265cec5f0630c9b8478c693",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fs12951-024-02919-1/MediaObjects/12951_2024_2919_MOESM2_ESM.docx"
+        }
+      ],
+      "title": "High-throughput synthesis and optimization of ionizable lipids through A(3) coupling for efficient mRNA delivery.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1101/2025.02.25.640222",
+      "gap_reason": "",
+      "lnpdb_record_count": 500,
+      "main_text": {
+        "bytes": 54915,
+        "cache_asset": "m0_09_pmc/PMC11888472/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "6c3661917b291d946ee6976e3a3f0cdf06f86fefb34471c043ff3f1149f89110",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11888472/unicode"
+      },
+      "pmc_id": "PMC11888472",
+      "pmid": "40060499",
+      "review_rank": 20,
+      "route_review_status": "not_started",
+      "source_id": "40060499",
+      "source_package_channel": "europe_pmc_supplement_archive",
+      "source_package_status": "complete",
+      "supplement_count": 1,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 3058325,
+          "cache_asset": "m0_09_review_assets/PMC11888472/media-1.pdf",
+          "filename": "media-1.pdf",
+          "review_status": "not_started",
+          "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3",
+          "source_channel": "europe_pmc_supplement_archive"
+        }
+      ],
+      "title": "Plug-and-play assembly of biodegradable ionizable lipids for potent mRNA delivery and gene editing in vivo.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1021/jacs.4c10265",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 270,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC12190489/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12190489/unicode"
+      },
+      "pmc_id": "PMC12190489",
+      "pmid": "39742515",
+      "review_rank": 21,
+      "route_review_status": "not_started",
+      "source_id": "39742515",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "Multiarm-Assisted Design of Dendron-like Degradable Ionizable Lipids Facilitates Systemic mRNA Delivery to the Spleen.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41565-024-01747-6",
+      "gap_reason": "",
+      "lnpdb_record_count": 252,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC12207990/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12207990/unicode"
+      },
+      "pmc_id": "PMC12207990",
+      "pmid": "39354147",
+      "review_rank": 22,
+      "route_review_status": "not_started",
+      "source_id": "39354147",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 11,
+      "supplements": [
+        {
+          "asset_kind": "tabular",
+          "bytes": 10075,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM10_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM10_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "7505064aa56923d88daa6684cd205ad58c4540949b6b4e21820870b90c73eb27",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM10_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 12888,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM11_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM11_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "0f4c1bb1397a700fcd00cd7f8b8b693ba1b35206cbfac9be5d0e6f0de873b83d",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM11_ESM.xlsx"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 12429015,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM1_ESM.pdf",
+          "filename": "41565_2024_1747_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "67f26d9f55561be7bfbeeb64ee75f93ccb25a8f5b58224a619c3315b3916405f",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 234116,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM2_ESM.pdf",
+          "filename": "41565_2024_1747_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "6bc7f46664402e99c4bd03cbd92b0bb5a5c41ac2e23f200467178efc6ec10b05",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM2_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 43262,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM3_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM3_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "e0d28b9f383df325eca7b61c24eca23a26aa49d9e211f94cbfe4a86fd8422a18",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM3_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 17671,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM4_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "3e3a920bc76ec92a95fd04e506438e9a4baa8bf048382b6898ae3a4a7456147e",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM4_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 15061,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM5_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM5_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "ef3d0cc7b879aebfe6a261fa3857bf158a2bcef0711f5a5c2fe51f35eadc1000",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM5_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 20411,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM6_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM6_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "780a02eaaf8020f8bc4008ece343a0605b54681027008f1fe27ce2872cbfe303",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM6_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 14117,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM7_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM7_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "01001571a89c3add6f617e826c96b0ca507f2084b79342a76db1e78d42d8dbaf",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM7_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 15552,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM8_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM8_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "c63618dd3cf0a4b70497932c3835602726580ab620a03ea39502a5f6f59fa25f",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM8_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 13129,
+          "cache_asset": "m0_09_publishers/PMC12207990/assets/41565_2024_1747_MOESM9_ESM.xlsx",
+          "filename": "41565_2024_1747_MOESM9_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "9bb99477265d7df8ffc7ce92e3d6ac2018f6b713985d028dfde3480410aeff2f",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-024-01747-6/MediaObjects/41565_2024_1747_MOESM9_ESM.xlsx"
+        }
+      ],
+      "title": "Combinatorial design of siloxane-incorporated lipid nanoparticles augments intracellular processing for tissue-specific mRNA therapeutic delivery.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41565-023-01548-3",
+      "gap_reason": "",
+      "lnpdb_record_count": 1902,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC10954414/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10954414/unicode"
+      },
+      "pmc_id": "PMC10954414",
+      "pmid": "37985700",
+      "review_rank": 23,
+      "route_review_status": "not_started",
+      "source_id": "37985700",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 9,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 2451228,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM1_ESM.pdf",
+          "filename": "41565_2023_1548_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "febe59fae4f5d6bbd11ed754785c1618cc38171b9ec53d14d0956c56b758b220",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 55564,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM2_ESM.pdf",
+          "filename": "41565_2023_1548_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "bfa8f3bc78f250491bde6e99b29f5a85c5e6e879cc312541a3d58be81de07fed",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM2_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 65551,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM3_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM3_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "d08b84f602bb68e3d76c992db2aa06eb07be19c4e5c68a50c4e69e7ce7193517",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM3_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 12792,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM4_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM4_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "8513665da85ae4069dd2f112f99889133ea0b408084659e312d28ad6e8826288",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM4_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 11375,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM5_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM5_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "e153ed580e3847f75f427d5dfe413feac7a86fc3aa09da4e0c2374be3675cebd",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM5_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 12139,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM6_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM6_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "5e5e282e88d214f11ad23f0d7ebd2b69ba4dc6076bb663786c05b337ee5a1747",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM6_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 14945,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM7_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM7_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "6c927993bd27e93a7ba480298650aec0ceabe0775643ffcec278c615b6f1bc9a",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM7_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 15972,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM8_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM8_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "509237ab5fc5a165374863cdc7a463598c0a7953038cd4210471d4f2150f8860",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM8_ESM.xlsx"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 9074,
+          "cache_asset": "m0_09_publishers/PMC10954414/assets/41565_2023_1548_MOESM9_ESM.xlsx",
+          "filename": "41565_2023_1548_MOESM9_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "ad9f2d25888d9901e54048c83550f2c1361f54538daaf80cc6330ece32b3a1aa",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41565-023-01548-3/MediaObjects/41565_2023_1548_MOESM9_ESM.xlsx"
+        }
+      ],
+      "title": "Combinatorial development of nebulized mRNA delivery formulations for the lungs.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s42004-025-01516-z",
+      "gap_reason": "",
+      "lnpdb_record_count": 91,
+      "main_text": {
+        "bytes": 106690,
+        "cache_asset": "m0_09_pmc/PMC12000586/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "dc95cfc0c1f2dcd2f84be7430fc861f218cb5489ebc7d97acb2d73d3733dbbd4",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12000586/unicode"
+      },
+      "pmc_id": "PMC12000586",
+      "pmid": "40234552",
+      "review_rank": 24,
+      "route_review_status": "not_started",
+      "source_id": "40234552",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 3,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 858323,
+          "cache_asset": "m0_09_publishers/PMC12000586/assets/42004_2025_1516_MOESM1_ESM.pdf",
+          "filename": "42004_2025_1516_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "4d8a2007caf79e32995c03284230b419605d80d47f2bd05e5015db1459ed2825",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42004-025-01516-z/MediaObjects/42004_2025_1516_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 2081976,
+          "cache_asset": "m0_09_publishers/PMC12000586/assets/42004_2025_1516_MOESM2_ESM.pdf",
+          "filename": "42004_2025_1516_MOESM2_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "351ddc2ad3ebb139e4dddd9746401987e1fe67b8b7a2f438329657931d7062e9",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42004-025-01516-z/MediaObjects/42004_2025_1516_MOESM2_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 72472,
+          "cache_asset": "m0_09_publishers/PMC12000586/assets/42004_2025_1516_MOESM3_ESM.pdf",
+          "filename": "42004_2025_1516_MOESM3_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "0fc67802c3d6ba4274cd5f30ffec0c4f03e91ae0d2877d7b93f2d1a6268f507d",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42004-025-01516-z/MediaObjects/42004_2025_1516_MOESM3_ESM.pdf"
+        }
+      ],
+      "title": "Multicomponent thiolactone-based ionizable lipid screening platform for efficient and tunable mRNA delivery to the lungs.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1016/j.ymthe.2018.03.010",
+      "gap_reason": "official_api_reported_unavailable",
+      "lnpdb_record_count": 10,
+      "main_text": {
+        "bytes": 6148,
+        "cache_asset": "m0_09_pmc/PMC5986714/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC5986714/unicode"
+      },
+      "pmc_id": "PMC5986714",
+      "pmid": "29653760",
+      "review_rank": 25,
+      "route_review_status": "not_started",
+      "source_id": "29653760",
+      "source_package_channel": "unresolved",
+      "source_package_status": "supplement_unavailable",
+      "supplement_count": 0,
+      "supplements": [],
+      "title": "A Novel Amino Lipid Series for mRNA Delivery: Improved Endosomal Escape and Sustained Pharmacology and Safety in Non-human Primates.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41467-020-14527-2",
+      "gap_reason": "",
+      "lnpdb_record_count": 30,
+      "main_text": {
+        "bytes": 115489,
+        "cache_asset": "m0_09_pmc/PMC7033178/bioc_full_text.xml",
+        "review_status": "not_started",
+        "sha256": "277f219935a8bf11b8cffdc3bccc8e06b6e1840501d8c8da72f089868c374a31",
+        "source_url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC7033178/unicode"
+      },
+      "pmc_id": "PMC7033178",
+      "pmid": "32080183",
+      "review_rank": 26,
+      "route_review_status": "not_started",
+      "source_id": "32080183",
+      "source_package_channel": "publisher_page",
+      "source_package_status": "complete",
+      "supplement_count": 5,
+      "supplements": [
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 3515849,
+          "cache_asset": "m0_09_publishers/PMC7033178/assets/41467_2020_14527_MOESM1_ESM.pdf",
+          "filename": "41467_2020_14527_MOESM1_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "61a535a02c7e9470bb6ef044af654ed2e05d5e55b73c5602b32761b9f88a45c4",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-020-14527-2/MediaObjects/41467_2020_14527_MOESM1_ESM.pdf"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 12999,
+          "cache_asset": "m0_09_publishers/PMC7033178/assets/41467_2020_14527_MOESM2_ESM.docx",
+          "filename": "41467_2020_14527_MOESM2_ESM.docx",
+          "review_status": "not_started",
+          "sha256": "a3975800e24abc22d4a3ebf31fa0408d33153145a463c2b9b5b58a1d347c96a9",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-020-14527-2/MediaObjects/41467_2020_14527_MOESM2_ESM.docx"
+        },
+        {
+          "asset_kind": "media",
+          "bytes": 2829159,
+          "cache_asset": "m0_09_publishers/PMC7033178/assets/41467_2020_14527_MOESM3_ESM.mp4",
+          "filename": "41467_2020_14527_MOESM3_ESM.mp4",
+          "review_status": "not_started",
+          "sha256": "242f102c990e2ef618e72141f7fdcf98f17b0c7020ae6dc18acdd71e721649cb",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-020-14527-2/MediaObjects/41467_2020_14527_MOESM3_ESM.mp4"
+        },
+        {
+          "asset_kind": "narrative_or_structure_document",
+          "bytes": 136191,
+          "cache_asset": "m0_09_publishers/PMC7033178/assets/41467_2020_14527_MOESM4_ESM.pdf",
+          "filename": "41467_2020_14527_MOESM4_ESM.pdf",
+          "review_status": "not_started",
+          "sha256": "fc0e3f1595e73fd253b69b321ab42c104fc68058a2e41b6b4f21ff1b1d7c533a",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-020-14527-2/MediaObjects/41467_2020_14527_MOESM4_ESM.pdf"
+        },
+        {
+          "asset_kind": "tabular",
+          "bytes": 234562,
+          "cache_asset": "m0_09_publishers/PMC7033178/assets/41467_2020_14527_MOESM5_ESM.xlsx",
+          "filename": "41467_2020_14527_MOESM5_ESM.xlsx",
+          "review_status": "not_started",
+          "sha256": "5c137b87e3d2b4d90d81397400badc689faabb43265086b1e263a7b6dbed9654",
+          "source_channel": "publisher_page",
+          "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-020-14527-2/MediaObjects/41467_2020_14527_MOESM5_ESM.xlsx"
+        }
+      ],
+      "title": "Naturally-occurring cholesterol analogues in lipid nanoparticles induce polymorphic shape and enhance intracellular delivery of mRNA.",
+      "unique_component_count": 0
+    }
+  ],
+  "schema_version": "m0_09_source_review_index.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "machine_readable_main_texts": 26,
+    "pmc_publication_families": 26,
+    "route_reviews_completed": 0,
+    "source_packages_complete": 19,
+    "source_packages_supplement_unavailable": 7,
+    "supplementary_review_assets": 67
+  },
+  "task": "M0-09 hash-verified source review index"
+}

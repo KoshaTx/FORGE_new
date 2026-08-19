@@ -1,0 +1,63 @@
+{
+  "schema_version": "phase1_ugi_morphology_potency_matched_adjudication_policy.v1",
+  "status": "frozen_before_matched_terminal_outcomes",
+  "task": "Decide whether the nested morphology-potency proposal improves terminal conservative potency over the promoted applicability proposal at matched generation and oracle budgets",
+  "scientific_lane": {
+    "endpoint": "expt_Hela",
+    "exact_l1_required": true,
+    "exact_measured_product_neutral": true,
+    "all_product_and_role_views_must_be_interpolative": true,
+    "individual_component_identity_policy": "amine, aldehyde and isocyanide identities must each occur in the measured AGILE fit population",
+    "combination_policy": "the exact three-component combination must be absent from the measured AGILE population",
+    "validated_generalization_regime": "held aldehyde-isocyanide pairing with individual aldehyde and isocyanide identities observed elsewhere in fit data",
+    "exact_new_component_policy": "biological abstention; retain only in the unguided exploration lane",
+    "conformal_scale": "aldehyde_isocyanide_pair",
+    "potency_utility": "positive half of the held-pair LCB90 calibration ECDF",
+    "high_potency_threshold": "calibration_ecdf strictly greater than 0.5"
+  },
+  "arms": [
+    "broad_prior_plus_identical_terminal_ranking",
+    "promoted_applicability_proposal_plus_identical_terminal_ranking",
+    "nested_potency_proposal_plus_identical_terminal_ranking"
+  ],
+  "budgets": {
+    "generator_calls_per_arm": 3072,
+    "common_uniform_draws_across_arms": true,
+    "oracle_budget_rule": "classify every valid exact-L1 terminal without oracle calls, then score a deterministic hash-ordered subset of eligible terminals of size equal to the smallest eligible-arm count",
+    "terminal_ranking_identical_across_arms": true,
+    "final_portfolio_size": 32
+  },
+  "primary_endpoint": {
+    "name": "unique_applicable_conservative_high_potency_products_per_matched_oracle_budget",
+    "comparison": "nested_potency_proposal_minus_promoted_applicability_proposal",
+    "paired_unit": "common draw index",
+    "bootstrap": "paired draw-index bootstrap",
+    "replicates": 10000,
+    "confidence_level": 0.95
+  },
+  "promotion_gates": {
+    "primary_endpoint_difference_strictly_positive": true,
+    "paired_bootstrap_interval_lower_bound_at_least": 0.0,
+    "minimum_unique_high_potency_yield_ratio_vs_applicability": 1.0,
+    "minimum_exact_l1_validity_fraction_vs_applicability": 0.99,
+    "minimum_unique_product_count_fraction_vs_applicability": 0.8,
+    "minimum_product_fingerprint_diversity_fraction_vs_applicability": 0.8,
+    "minimum_effective_amine_count_fraction_vs_applicability": 0.8,
+    "minimum_effective_aldehyde_count_fraction_vs_applicability": 0.8,
+    "minimum_effective_isocyanide_count_fraction_vs_applicability": 0.8,
+    "no_single_component_probability_above": 0.2
+  },
+  "decision_rule": {
+    "promote": "all gates pass and the nested potency arm beats the promoted applicability arm at matched budgets",
+    "reject": "otherwise retain promoted applicability generation plus terminal conservative ranking",
+    "mh_or_partial_state_smc": "not authorized by this experiment"
+  },
+  "scope": {
+    "applicability_controller_frozen": true,
+    "oracle_frozen": true,
+    "generator_frozen": true,
+    "candidate_selection": false,
+    "prospective_claim": false,
+    "synthesis_guidance": false
+  }
+}

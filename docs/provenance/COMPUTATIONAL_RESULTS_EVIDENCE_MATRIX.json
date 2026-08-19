@@ -1,0 +1,1063 @@
+{
+  "schema_version": "forge.computational_results_evidence_matrix.v1",
+  "generated_date": "2026-08-04",
+  "scope": "Evidence-locked computational results available in the local FORGE repository. This file does not contain prospective synthesis, formulation, or biological outcomes.",
+  "claim_classes": {
+    "Measured": "Direct experimental observation in a source or prospective experiment.",
+    "Computed": "Deterministic or statistical result computed from a hash-pinned local artifact.",
+    "Reported": "Statement or datum reported by an external source and preserved with provenance.",
+    "Inferred": "Interpretation supported by evidence but not directly measured or computed as the stated claim.",
+    "Proposed": "Planned method, threshold, analysis, or experiment without a completed result."
+  },
+  "evidence_statuses": {
+    "verified_frozen": "Completed result with a locally verified, hash-pinned artifact.",
+    "verified_nonselecting": "Completed diagnostic or gate whose protocol forbids using it alone to select a model or checkpoint.",
+    "diagnostic_only": "Completed result that is explicitly ineligible for model selection or a headline performance claim.",
+    "trained_pending_evaluation": "Training completed, but the prespecified generation comparison is not yet present.",
+    "proposed_pending": "Not yet completed and not available as evidence.",
+    "historical_stale": "Historically valid record superseded for current operational use by a later artifact."
+  },
+  "terminology_locks": [
+    "R1 is reaction-enumerated support, not route-certified chemistry.",
+    "The model-facing graph identity is constitutional and stereochemistry-free; stereochemical provenance is retained separately where available.",
+    "Exact Ugi forward enumeration establishes graph and L1 transform consistency, not experimental synthesis, substrate-scope success, L2/L3 closure, or procurement closure.",
+    "Structural component novelty and L1 admission do not establish route closure, exact-product synthesis, or experimental success.",
+    "A component graph absent from the frozen catalog is assigned missing route knowledge until assessed; catalog absence is not chemical infeasibility.",
+    "The supported graph space is bounded by the declared atom, bond, charge, size, branching, and cycle-rank policy.",
+    "Morphology-level applicability enrichment is authorized; potency remains terminal ranking only, and synthesis trajectory guidance is not authorized.",
+    "The current Ugi program is an AGILE-type amine-aldehyde-isocyanide three-component reaction program."
+  ],
+  "entries": [
+    {
+      "id": "corpus.r0_constitutional_reconciliation",
+      "category": "corpus",
+      "claim": "The model-facing broad lipid corpus contains 15,229 unique constitutional graphs after collapsing 204 duplicate rows from 15,433 source rows.",
+      "statistics": [
+        {"name": "source_rows", "value": 15433, "denominator": 15433, "unit": "rows"},
+        {"name": "unique_constitutional_graphs", "value": 15229, "denominator": 15433, "unit": "graphs"},
+        {"name": "rows_collapsed", "value": 204, "denominator": 15433, "unit": "rows"},
+        {"name": "B4_mixture_rows_excluded_from_single_structure_weight", "value": 100, "denominator": 1200, "unit": "AGILE-derived rows"},
+        {"name": "model_graph_stereochemical_labels", "value": 0, "denominator": 15229, "unit": "graphs"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_03/r0_reconciliation.json", "sha256": "16d2cff2ff3e23344d2c26e6cd3835ec6373f1eff02f0be3a28379e8719ad310"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "After constitutional standardization, the model-facing corpus comprised 15,229 unique lipid graphs derived from 15,433 source rows; 204 duplicate rows were collapsed and 100 mixture measurements were excluded from single-structure weighting.",
+      "limitations": "15,433 is a source-row count, not a unique model-graph count. Constitutional identity does not preserve stereochemical distinctions."
+    },
+    {
+      "id": "corpus.constitutional_splits",
+      "category": "corpus",
+      "claim": "Four frozen constitutional split schemes cover all 15,229 graphs with zero groups crossing folds.",
+      "statistics": [
+        {"name": "source_study_train", "value": 10591, "denominator": 15229, "unit": "graphs"},
+        {"name": "source_study_calibration", "value": 2310, "denominator": 15229, "unit": "graphs"},
+        {"name": "source_study_heldout", "value": 2328, "denominator": 15229, "unit": "graphs"},
+        {"name": "headgroup_train", "value": 10659, "denominator": 15229, "unit": "graphs"},
+        {"name": "headgroup_calibration", "value": 2285, "denominator": 15229, "unit": "graphs"},
+        {"name": "headgroup_heldout", "value": 2285, "denominator": 15229, "unit": "graphs"},
+        {"name": "linker_scaffold_train", "value": 10659, "denominator": 15229, "unit": "graphs"},
+        {"name": "linker_scaffold_calibration", "value": 2285, "denominator": 15229, "unit": "graphs"},
+        {"name": "linker_scaffold_heldout", "value": 2285, "denominator": 15229, "unit": "graphs"},
+        {"name": "component_family_train", "value": 12209, "denominator": 15229, "unit": "graphs"},
+        {"name": "component_family_calibration", "value": 1920, "denominator": 15229, "unit": "graphs"},
+        {"name": "component_family_heldout", "value": 1100, "denominator": 15229, "unit": "graphs"},
+        {"name": "groups_spanning_folds", "value": 0, "denominator": 4, "unit": "split schemes"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_03/constitutional_split_result.json", "sha256": "c43bdfaa0e7c6024f8c911fc0de21612dde2369aa70ad33b98a10bb3bef3bf32"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "We froze source-study, headgroup, linker/scaffold and component-family partitions before model training, with no group assigned across folds.",
+      "limitations": "The split schemes answer different questions and their fold sizes should not be compared as model performance."
+    },
+    {
+      "id": "corpus.cross_platform_registry_audit",
+      "category": "corpus",
+      "claim": "Exact reconstruction through the frozen reaction registry is partial for held heads, linker/scaffold groups and component families, and zero for full source-study holdout.",
+      "statistics": [
+        {"name": "held_head_recovered", "value": 260, "denominator": 2285, "unit": "graphs", "fraction": 0.1138},
+        {"name": "held_head_non_AGILE_recovered", "value": 205, "denominator": 2065, "unit": "graphs", "fraction": 0.0993},
+        {"name": "held_linker_scaffold_recovered", "value": 402, "denominator": 2285, "unit": "graphs", "fraction": 0.1759},
+        {"name": "held_linker_scaffold_non_AGILE_recovered", "value": 341, "denominator": 2224, "unit": "graphs", "fraction": 0.1533},
+        {"name": "held_component_family_recovered", "value": 100, "denominator": 1100, "unit": "graphs", "fraction": 0.0909},
+        {"name": "held_source_study_recovered", "value": 0, "denominator": 2328, "unit": "graphs", "fraction": 0.0},
+        {"name": "historical_control_recovered", "value": 108, "denominator": 14233, "unit": "graphs"},
+        {"name": "corrected_control_recovered", "value": 112, "denominator": 14129, "unit": "graphs"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_04_constitutional/result.json", "sha256": "443c8fa2a6de315069f41ab5eb61bf8587c8dad42f511ca97744d2f190074853"},
+      "evidence_status": "diagnostic_only",
+      "safe_manuscript_wording": "A cross-platform leakage and registry-coverage audit recovered 11.4% of held-head, 17.6% of held-linker/scaffold and 9.1% of held-component-family structures, but no complete source-study holdout structures, exposing the boundary of the frozen reaction registry.",
+      "limitations": "This is a leakage and reaction-registry coverage audit, not a source-study generalization score for the whole-lipid generator and not evidence that held-out molecules are unsynthesizable."
+    },
+    {
+      "id": "corpus.agile_measured_labels",
+      "category": "corpus",
+      "claim": "The reconciled AGILE measurement set contains 1,100 single-structure constitutional graphs with exact HeLa and RAW 264.7 label agreement; 100 mixture measurements are retained as abstentions.",
+      "statistics": [
+        {"name": "nominal_measurements", "value": 1200, "denominator": 1200, "unit": "measurements"},
+        {"name": "curated_single_structure_graphs", "value": 1100, "denominator": 1200, "unit": "measurements"},
+        {"name": "mixture_measurements_excluded", "value": 100, "denominator": 1200, "unit": "measurements"},
+        {"name": "HeLa_label_mismatches", "value": 0, "denominator": 1200, "unit": "measurements"},
+        {"name": "RAW2647_label_mismatches", "value": 0, "denominator": 1200, "unit": "measurements"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_07/agile_label_reconciliation.json", "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "We reconciled all 1,200 AGILE measurement rows, retaining 1,100 single-compound constitutional graphs and treating 100 mixture measurements as structure-level abstentions; the HeLa and RAW 264.7 values matched the official workbook exactly.",
+      "limitations": "The 1,200 nominal measurements must not be called 1,200 unique single-molecule graphs."
+    },
+    {
+      "id": "corpus.agile_virtual_ugi_L1",
+      "category": "corpus",
+      "claim": "All 12,276 original virtual Ugi products have one exact decomposition under the frozen Ugi transform into 93 original components.",
+      "statistics": [
+        {"name": "virtual_products_with_exact_unique_decomposition", "value": 12276, "denominator": 12276, "unit": "products", "fraction": 1.0},
+        {"name": "original_components_total", "value": 93, "denominator": 93, "unit": "components"},
+        {"name": "original_amine_heads", "value": 22, "denominator": 93, "unit": "components"},
+        {"name": "original_aldehydes", "value": 62, "denominator": 93, "unit": "components"},
+        {"name": "original_isocyanides", "value": 9, "denominator": 93, "unit": "components"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_09/agile_virtual_ugi3_capability.json", "sha256": "9143ae814fe6185813b67d0b80b7af901fcd0772f359b66e85bb8af5f56ba7a0"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The frozen Ugi transform produced one exact component decomposition for each of 12,276 original virtual products, spanning 22 amines, 62 aldehydes and 9 isocyanides.",
+      "limitations": "Algorithmic exactness under the transform is L1 graph consistency, not route closure or proof that each virtual product was experimentally synthesized."
+    },
+    {
+      "id": "corpus.phase1_ugi_union",
+      "category": "corpus",
+      "claim": "The current Phase 1 Ugi union contains 12,386 unique constitutional products and 95 current components; the broader R1 corpus contains 464,265 reaction-enumerated products.",
+      "statistics": [
+        {"name": "R0_unique_constitutions", "value": 15229, "denominator": 15229, "unit": "graphs"},
+        {"name": "R1_reaction_enumerated_products", "value": 464265, "denominator": 464265, "unit": "products"},
+        {"name": "Ugi_L1_unique_constitutional_products", "value": 12386, "denominator": 12386, "unit": "products"},
+        {"name": "source_rows_collapsed_within_Ugi_union", "value": 990, "denominator": 13376, "unit": "rows"},
+        {"name": "current_components", "value": 95, "denominator": 95, "unit": "components"},
+        {"name": "current_amine_heads", "value": 24, "denominator": 95, "unit": "components"},
+        {"name": "current_aldehydes", "value": 62, "denominator": 95, "unit": "components"},
+        {"name": "current_isocyanides", "value": 9, "denominator": 95, "unit": "components"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/data_contract.json", "sha256": "0c6dd056b11599431946d32051f1f8914f9ae6bc6e346b1568690cd80f56bfef"},
+      "supporting_artifacts": [
+        {"path": "data/splits/phase1/manifest.json", "sha256": "4ac8285268fcff75d846ac212afdef925ec3b8f5009bc96c8609620f093fc975"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The current Ugi-L1 union comprised 12,386 unique constitutional products assembled from 95 components; the separate R1 corpus comprised 464,265 reaction-enumerated products.",
+      "limitations": "R1 is reaction-enumerated support, not route-certified chemistry. The 95-component current union differs from the 93-component original virtual library and the 424-component expanded registry."
+    },
+    {
+      "id": "corpus.ugi_component_expansion",
+      "category": "corpus",
+      "claim": "A provenance-aware expansion admitted 424 L1-structural components, of which 329 were outside the 95-component current catalog and only one was E2 route-closed.",
+      "statistics": [
+        {"name": "candidate_component_rows", "value": 586, "denominator": 586, "unit": "rows"},
+        {"name": "L1_admitted_components", "value": 424, "denominator": 586, "unit": "components"},
+        {"name": "L1_admitted_amine_heads", "value": 264, "denominator": 424, "unit": "components"},
+        {"name": "L1_admitted_aldehydes", "value": 107, "denominator": 424, "unit": "components"},
+        {"name": "L1_admitted_isocyanides", "value": 53, "denominator": 424, "unit": "components"},
+        {"name": "new_L1_structural_components", "value": 329, "denominator": 424, "unit": "components"},
+        {"name": "E2_route_closed_components", "value": 1, "denominator": 424, "unit": "components"},
+        {"name": "raw_Cartesian_upper_bound", "value": 1497144, "denominator": 1497144, "unit": "triples"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_component_expansion/result.json", "sha256": "374e3edc61b6cf31a2253e9ac7babe29695b47ae212c95a1969950d5fc862666"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_component_expansion/component_registry.csv.gz", "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "We expanded the Ugi component registry from 95 to 424 L1-compatible constitutional structures, including 264 amines, 107 aldehydes and 53 isocyanides; only one expanded component was already closed through the stricter E2 route criterion.",
+      "limitations": "L1 admission establishes structural handle and forward-context consistency only. It does not establish complete precursor synthesis, exact substrate success, or procurement closure."
+    },
+    {
+      "id": "corpus.ugi_expanded_enumeration",
+      "category": "corpus",
+      "claim": "Exact forward enumeration of the expanded registry produced 1,486,415 unique constitutional products.",
+      "statistics": [
+        {"name": "unique_products", "value": 1486415, "denominator": 1486415, "unit": "products"},
+        {"name": "preserved_current_products", "value": 12386, "denominator": 1486415, "unit": "products"},
+        {"name": "expanded_source_products", "value": 1474029, "denominator": 1486415, "unit": "products"},
+        {"name": "attempted_expanded_triples", "value": 1485802, "denominator": 1485802, "unit": "triples"},
+        {"name": "duplicates_removed", "value": 11773, "denominator": 1498188, "unit": "candidate products"},
+        {"name": "train_products", "value": 483032, "denominator": 1486415, "unit": "products"},
+        {"name": "calibration_products", "value": 349013, "denominator": 1486415, "unit": "products"},
+        {"name": "heldout_products", "value": 654370, "denominator": 1486415, "unit": "products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_expanded_enumeration/result.json", "sha256": "fbff9d65dbcdf439907a3f92e1bdcfb215aec374f4640624a65f4fc667ceabf7"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_expanded_enumeration/products.csv.gz", "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Applying the atom-mapped Ugi transform to the admitted component registry yielded 1,486,415 unique constitutional products, which were partitioned by frozen component-family assignments before training-corpus selection.",
+      "limitations": "The 1,497,144 Cartesian upper bound and 1,486,415 unique products are different quantities. Enumeration does not imply observed synthesis, L2/L3 closure, biological activity, or model open-endedness."
+    },
+    {
+      "id": "corpus.ugi_balanced_training_set",
+      "category": "corpus",
+      "claim": "The production Ugi training corpus contains 112,386 products selected with source-stratified, family-weighted sampling and frozen component-disjoint folds.",
+      "statistics": [
+        {"name": "selected_products", "value": 112386, "denominator": 1486415, "unit": "products"},
+        {"name": "current_union_products", "value": 12386, "denominator": 112386, "unit": "products"},
+        {"name": "expanded_products", "value": 100000, "denominator": 112386, "unit": "products"},
+        {"name": "train_products", "value": 66464, "denominator": 112386, "unit": "products"},
+        {"name": "calibration_products", "value": 15800, "denominator": 112386, "unit": "products"},
+        {"name": "heldout_products", "value": 30122, "denominator": 112386, "unit": "products"},
+        {"name": "mandatory_component_cover_products", "value": 419, "denominator": 112386, "unit": "products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/result.json", "sha256": "1b655ce6389f50c7310a21a287997793c592ca93de064d53bafacaee24f663a6"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_bonds.csv.gz", "sha256": "d8a6abe9ffea84ff6e5aa5e247dd9135121134c4de11d61e3b08bdec467a5101"},
+        {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "We retained all 12,386 current-union products and selected 100,000 expanded products through deterministic source-stratified, family-weighted sampling, yielding 66,464 training, 15,800 calibration and 30,122 held-out products.",
+      "limitations": "Uniform product-row sampling is prohibited because repeated component combinations would otherwise dominate the learned distribution."
+    },
+    {
+      "id": "routes.source_adjudication",
+      "category": "route_evidence",
+      "claim": "Automated source adjudication supports dense L1 supervision but sparse, positive-heavy L2 supervision.",
+      "statistics": [
+        {"name": "measured_single_product_L1_records", "value": 1100, "denominator": 1200, "unit": "AGILE measurements"},
+        {"name": "mixture_abstentions", "value": 100, "denominator": 1200, "unit": "AGILE measurements"},
+        {"name": "virtual_transform_consistency_records", "value": 12276, "denominator": 12276, "unit": "products"},
+        {"name": "L2_route_instances", "value": 45, "denominator": 45, "unit": "routes"},
+        {"name": "structure_resolved_L2_routes", "value": 44, "denominator": 45, "unit": "routes"},
+        {"name": "L2_route_abstentions", "value": 1, "denominator": 45, "unit": "routes"},
+        {"name": "reported_experimental_negative_routes", "value": 0, "denominator": 45, "unit": "routes"},
+        {"name": "source_assets_hash_verified", "value": 4, "denominator": 4, "unit": "source packages"},
+        {"name": "chemistry_pages_visually_reviewed", "value": 27, "denominator": 27, "unit": "pages"}
+      ],
+      "claim_class": "Computed",
+      "source_evidence_class": "Reported",
+      "artifact": {"path": "results/m0_05_source_adjudication/result.json", "sha256": "02156ba211e2af45fced8614912f09e86906ecacccb40004e1e873ec452e3159"},
+      "supporting_artifacts": [
+        {"path": "results/m0_05_source_adjudication/evidence_ledger.csv.gz", "sha256": "37e88fe7246422b64b652baf2477edcbfd205a570fb82c58699d278747973272"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Source adjudication retained 44 structure-resolved upstream routes from 45 route instances and no reported experimental route failures, supporting a hybrid evidence-aware L2 system rather than a locally trained success-probability model.",
+      "limitations": "The source literature is positive-heavy. Absence of a reported failure is not evidence of success, and a source route is not automatically a complete product dossier."
+    },
+    {
+      "id": "routes.L2_supervision_decision",
+      "category": "route_evidence",
+      "claim": "Current L2 supervision supports hierarchical joint product/L1 generation followed by hybrid recursive upstream routing, but not a monolithic complete-route decoder or synthesis-success model.",
+      "statistics": [
+        {"name": "route_instances", "value": 45, "denominator": 45, "unit": "routes"},
+        {"name": "resolved_routes", "value": 44, "denominator": 45, "unit": "routes"},
+        {"name": "reaction_instances", "value": 76, "denominator": 76, "unit": "reactions"},
+        {"name": "route_families", "value": 11, "denominator": 11, "unit": "families"},
+        {"name": "exact_LX2024_aldehyde_transfers", "value": 15, "denominator": 15, "unit": "components"},
+        {"name": "upstream_head_routes", "value": 0, "denominator": 24, "unit": "current heads"},
+        {"name": "complete_product_dossiers", "value": 0, "denominator": 12386, "unit": "current Ugi products"},
+        {"name": "reported_experimental_negatives", "value": 0, "denominator": 45, "unit": "routes"},
+        {"name": "exact_source_program_components", "value": 24, "denominator": 71, "unit": "components"},
+        {"name": "family_projected_components", "value": 47, "denominator": 71, "unit": "components"},
+        {"name": "accepted_procurement_candidates", "value": 35, "denominator": 38, "unit": "terminal candidates"},
+        {"name": "unresolved_terminal_candidates", "value": 3, "denominator": 38, "unit": "terminal candidates"}
+      ],
+      "claim_class": "Inferred",
+      "artifact": {"path": "results/m0_09/l2_supervision_decision.json", "sha256": "d6bd79b770c25dcc2c461e7241af9ab66058394892eba4a9eb464f3987d19938"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Dense product-to-Ugi decomposition supervision and sparse upstream-route evidence motivated a hierarchical design: joint product/L1 generation with recursive, evidence-aware L2/L3 completion.",
+      "limitations": "This architectural decision was frozen before exact-source step execution. The later computational-dossier audit does not change the sparse, role-imbalanced and positive-heavy nature of the L2 corpus, and it is not a prospective synthesis result."
+    },
+    {
+      "id": "routes.conservative_leaf_closure_composition",
+      "category": "route_evidence",
+      "claim": "Composing the original 93-component program ledger with current procurement records closes every proposed leaf for 23 of 24 exact-source component programs and all 47 family-projected programs; this yields conservative upstream-leaf coverage for subsets of the original 12,276 products, but not complete forward-verified dossiers.",
+      "statistics": [
+        {"name": "exact_source_programs_with_all_proposed_leaves_procurement_closed", "value": 23, "denominator": 24, "unit": "component programs", "fraction": 0.9583333333},
+        {"name": "family_projected_programs_with_all_proposed_leaves_procurement_closed", "value": 47, "denominator": 47, "unit": "component programs", "fraction": 1.0},
+        {"name": "accepted_terminal_components", "value": 17, "denominator": 93, "unit": "original components"},
+        {"name": "products_with_terminal_or_exact_source_leaf_closed_components", "value": 1734, "denominator": 12276, "unit": "original virtual products", "fraction": 0.141251222},
+        {"name": "products_with_terminal_exact_or_family_projected_leaf_closed_components", "value": 8432, "denominator": 12276, "unit": "original virtual products", "fraction": 0.6868686869}
+      ],
+      "claim_class": "Computed",
+      "source_evidence_class": "Reported",
+      "artifact": {"path": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz", "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"},
+      "supporting_artifacts": [
+        {"path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz", "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"},
+        {"path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json", "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"},
+        {"path": "configs/route/m0_09_ugi3_agile_head_procurement.json", "sha256": "9167b0fef06931ea596e8996c8192d419f924a3d59e28e10c66d11b6891af157"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "When current procurement records were composed with the original component-program ledger, 23 of 24 exact-source programs and all 47 family-projected programs had every proposed leaf procurement-closed. This gave conservative terminal/exact upstream-leaf coverage to 1,734 of 12,276 products and terminal/exact/family-projected coverage to 8,432 products.",
+      "limitations": "These counts describe proposed-leaf procurement closure and do not by themselves establish step-level forward verification. Exact-source step verification and final L1/L2/L3 composition are recorded in separate later entries; family projections remain non-exact."
+    },
+    {
+      "id": "routes.exact_source_step_forward_verification",
+      "category": "route_evidence",
+      "claim": "Four exact-source-only graph transforms uniquely reconstruct the expected canonical product for every extracted upstream step in the 24 exact-source Ugi component programs.",
+      "statistics": [
+        {"name": "uniquely_forward_verified_steps", "value": 46, "denominator": 46, "unit": "upstream steps", "fraction": 1.0},
+        {"name": "fully_forward_verified_component_programs", "value": 24, "denominator": 24, "unit": "component programs", "fraction": 1.0},
+        {"name": "esterification_steps", "value": 15, "denominator": 15, "unit": "source-resolved pairs", "fraction": 1.0},
+        {"name": "primary_alcohol_oxidation_steps", "value": 17, "denominator": 17, "unit": "source-resolved pairs", "fraction": 1.0},
+        {"name": "amine_formylation_steps", "value": 7, "denominator": 7, "unit": "source-resolved pairs", "fraction": 1.0},
+        {"name": "formamide_dehydration_steps", "value": 7, "denominator": 7, "unit": "source-resolved pairs", "fraction": 1.0},
+        {"name": "ambiguous_or_error_steps", "value": 0, "denominator": 46, "unit": "upstream steps", "fraction": 0.0}
+      ],
+      "claim_class": "Computed",
+      "source_evidence_class": "Reported",
+      "artifact": {"path": "results/phase1/ugi3_exact_source_forward_verification/result.json", "sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz", "sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"},
+        {"path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json", "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Exact canonical products were uniquely reconstructed for all 46 extracted upstream reaction steps spanning all 24 exact-source Ugi component programs.",
+      "limitations": "Qualification is limited to these source-resolved pairs. It does not establish general substrate scope, encode reported reagents or conditions, prove experimental success, apply to family-projected programs or by itself close complete product dossiers."
+    },
+    {
+      "id": "routes.complete_computational_dossiers",
+      "category": "route_evidence",
+      "claim": "Fail-closed composition of exact Ugi L1 reconstruction, exact-source L2 step verification and the frozen L3 snapshot yields 1,734 complete computational product dossiers.",
+      "statistics": [
+        {"name": "accepted_terminal_components", "value": 17, "denominator": 93, "unit": "components"},
+        {"name": "exact_source_L2_verified_L3_closed_components", "value": 23, "denominator": 24, "unit": "exact-source routed components", "fraction": 0.9583333333},
+        {"name": "exact_source_L2_verified_L3_open_components", "value": 1, "denominator": 24, "unit": "exact-source routed components", "fraction": 0.0416666667},
+        {"name": "family_projected_L3_closed_not_exact_source_components", "value": 47, "denominator": 47, "unit": "family-projected components", "fraction": 1.0},
+        {"name": "complete_exact_source_computational_dossiers", "value": 1734, "denominator": 12276, "unit": "products", "fraction": 0.141251222},
+        {"name": "family_projected_support_not_exact_source", "value": 6698, "denominator": 12276, "unit": "products", "fraction": 0.545617465},
+        {"name": "incomplete_computational_dossiers", "value": 3844, "denominator": 12276, "unit": "products", "fraction": 0.3131313131}
+      ],
+      "claim_class": "Computed",
+      "source_evidence_class": "Reported",
+      "artifact": {"path": "results/phase1/ugi3_complete_computational_dossiers/result.json", "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz", "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"},
+        {"path": "results/phase1/ugi3_complete_computational_dossiers/product_dossier_ledger.csv.gz", "sha256": "4cc614c70aae7ec1a2442748757eff13e6b808bef5b60b730858da4d0453adfb"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Under exact-source route evidence and the frozen procurement snapshot, 1,734 of 12,276 Ugi products have complete forward-consistent computational L1/L2/L3 dossiers.",
+      "limitations": "A complete computational dossier does not establish that the exact product was synthesized or that synthesis, isolation, purification, formulation or biological testing succeeded. Current procurement closure is time-stamped, and family-projected programs remain explicitly non-exact."
+    },
+    {
+      "id": "routes.production_registry_route_readiness",
+      "category": "route_evidence",
+      "claim": "Fail-closed evidence composition across all 424 L1-admitted production components identifies 41 route-complete components and exposes strong role imbalance in the remaining route gaps.",
+      "statistics": [
+        {"name": "production_registry_components", "value": 424, "denominator": 424, "unit": "components"},
+        {"name": "route_complete_components", "value": 41, "denominator": 424, "unit": "components", "fraction": 0.0966981132},
+        {"name": "accepted_terminal_components", "value": 17, "denominator": 424, "unit": "components"},
+        {"name": "exact_source_forward_verified_L3_closed_components", "value": 24, "denominator": 424, "unit": "components"},
+        {"name": "exact_source_L3_open_components", "value": 1, "denominator": 424, "unit": "components"},
+        {"name": "family_projected_only_components", "value": 87, "denominator": 424, "unit": "components"},
+        {"name": "outside_route_support_components", "value": 111, "denominator": 424, "unit": "components"},
+        {"name": "missing_route_knowledge_components", "value": 184, "denominator": 424, "unit": "components"},
+        {"name": "route_complete_heads", "value": 17, "denominator": 264, "unit": "amine heads", "fraction": 0.0643939394},
+        {"name": "route_complete_aldehydes", "value": 18, "denominator": 107, "unit": "aldehydes", "fraction": 0.1682242991},
+        {"name": "route_complete_isocyanides", "value": 6, "denominator": 53, "unit": "isocyanides", "fraction": 0.1132075472},
+        {"name": "independently_reexecuted_cross_platform_exact_transfer", "value": 1, "denominator": 1, "unit": "components", "fraction": 1.0}
+      ],
+      "claim_class": "Computed",
+      "source_evidence_class": "Reported",
+      "artifact": {"path": "results/phase1/ugi3_production_registry_route_readiness/result.json", "sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz", "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"},
+        {"path": "results/phase1/ugi3_production_registry_route_readiness/recurring_gap_ledger.csv.gz", "sha256": "13cf73023daed1d718e9f55dc79c63b35cc82b79543345fd28cf03d47de7030c"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Among 424 L1-admitted production components, 41 were accepted terminals or had exact-source, uniquely forward-verified upstream programs closed to frozen terminal evidence.",
+      "limitations": "Structural admission, handle qualification, provenance and motif similarity are not route closure. Component-level closure does not prove every Cartesian product assembles, that an exact product was synthesized, or that synthesis, formulation or biological testing succeeded."
+    },
+    {
+      "id": "oracle.production_matrix",
+      "category": "biological_oracle",
+      "claim": "The selected graph oracle has modest held-shift performance and universally abstains from generative guidance.",
+      "statistics": [
+        {"name": "matrix_candidates", "value": 17, "denominator": 17, "unit": "representation-model candidates"},
+        {"name": "equal_endpoint_calibration_R2", "value": 0.3673424638, "denominator": null, "unit": "R2"},
+        {"name": "equal_endpoint_calibration_RMSE", "value": 1.8584347835, "denominator": null, "unit": "mTP"},
+        {"name": "equal_endpoint_calibration_Spearman", "value": 0.59595854, "denominator": null, "unit": "rho"},
+        {"name": "postselection_equal_endpoint_test_R2", "value": 0.1829989012, "denominator": null, "unit": "R2"},
+        {"name": "HeLa_mean_test_R2_across_eligible_schemes", "value": 0.253363184, "denominator": 7, "unit": "schemes"},
+        {"name": "RAW2647_mean_test_R2_across_eligible_schemes", "value": 0.1126346185, "denominator": 7, "unit": "schemes"},
+        {"name": "guidance_domains_authorized", "value": 0, "denominator": 1, "unit": "declared policy"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_07/oracle_production_result.json", "sha256": "268f8f5929af582f35ada2e7f141ed1756232cafd9997149f8fb614d6626961d"},
+      "supporting_artifacts": [
+        {"path": "results/m0_07/oracle_production_checkpoint.pt", "sha256": "46f13b8a3cfef1f891e308dfda75e90685d82d1289f0061acdae4be18870e61c"},
+        {"path": "results/m0_07/result.json", "sha256": "5de640478d50620e454eb257ab70f6167513a487344037cccdbaeb130be87193"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Across the prespecified scaffold and held-component evaluation schemes, the selected role-aware graph ensemble achieved an equal-endpoint post-selection R2 of 0.183; all declared generative guidance domains failed the fixed applicability gates, so the oracle was frozen as a diagnostic with universal abstention.",
+      "limitations": "Do not report resubstitution metrics as performance. The oracle is a general in-vitro transfection diagnostic, not an in-vivo endpoint oracle, and is not authorized to tilt generation."
+    },
+    {
+      "id": "oracle.lantern_random_split_diagnostic",
+      "category": "biological_oracle",
+      "claim": "The released LANTERN checkpoint reproduces a higher HeLa random-split R2 than the selected FORGE oracle on the same assignments, but the LANTERN pipeline fits feature and target scaling before splitting and is diagnostic-only.",
+      "statistics": [
+        {"name": "LANTERN_HeLa_random_test_R2", "value": 0.819810204652, "denominator": 110, "unit": "test rows"},
+        {"name": "LANTERN_HeLa_random_test_RMSE", "value": 1.41641700652, "denominator": 110, "unit": "test rows"},
+        {"name": "LANTERN_HeLa_random_test_Pearson", "value": 0.906292086073, "denominator": 110, "unit": "test rows"},
+        {"name": "FORGE_selected_oracle_same_random_assignments_R2", "value": 0.784514733341, "denominator": 110, "unit": "test rows"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_07/lantern_reproduction_result.json", "sha256": "f5a5b31fd6b7fc8de1c43364dfff14f6138af30c61c32abc9e4d9470581ba2df"},
+      "supporting_artifacts": [
+        {"path": "results/m0_07/oracle_graph_matrix_metrics.csv.gz", "sha256": "019d43f16779c5abc8baec5b1d96c8f43053fb3a7422525bfc7557b9403def34"}
+      ],
+      "evidence_status": "diagnostic_only",
+      "safe_manuscript_wording": "On LANTERN's persisted random assignments, its released checkpoint reproduced a HeLa test R2 of 0.820 and the selected FORGE oracle reached 0.785 with train-only preprocessing; because the released LANTERN pipeline scales features and labels before splitting, this comparison was retained as a source-reproduction diagnostic and excluded from model selection.",
+      "limitations": "The performance difference cannot be attributed entirely to leakage because architectures, features and checkpoint-selection procedures also differ. Random splitting does not establish component-family transfer."
+    },
+    {
+      "id": "oracle.distributional_applicability_v3",
+      "category": "biological_oracle",
+      "claim": "Exact component novelty is independent from a frozen four-view chemical applicability definition, and the selected HeLa oracle performs substantially better in the interpolative than extrapolative bin.",
+      "statistics": [
+        {"name": "generated_interpolative", "value": 165, "denominator": 3975, "unit": "generated products"},
+        {"name": "generated_boundary", "value": 215, "denominator": 3975, "unit": "generated products"},
+        {"name": "generated_extrapolative", "value": 3595, "denominator": 3975, "unit": "generated products"},
+        {"name": "exact_new_interpolative", "value": 153, "denominator": 3963, "unit": "generated exact-new products"},
+        {"name": "heldout_interpolative_R2", "value": 0.4631382363, "denominator": 2732, "unit": "outer-test rows"},
+        {"name": "heldout_interpolative_Spearman", "value": 0.6532443418, "denominator": 2732, "unit": "outer-test rows"},
+        {"name": "heldout_extrapolative_R2", "value": -0.7256673477, "denominator": 895, "unit": "outer-test rows"},
+        {"name": "heldout_extrapolative_Spearman", "value": 0.0156977506, "denominator": 895, "unit": "outer-test rows"},
+        {"name": "guidance_authorized", "value": 0, "denominator": 1, "unit": "policy"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_distributional_applicability_v3/result.json", "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_distributional_applicability_v3/generated_applicability.csv.gz", "sha256": "ed12ac72362557072d14253d54675ad88c25d07cdc581491b99fa15b7452992f"},
+        {"path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz", "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Exact component identity was recorded independently from four-view chemical applicability; 153 generated products containing exact-new components remained interpolative under the frozen component-shift definition.",
+      "limitations": "The pooled bin metrics are descriptive results for an already selected oracle. Applicability thresholds do not use biological outcomes, but being interpolative does not itself authorize guidance."
+    },
+    {
+      "id": "oracle.interpolative_conditional_conformal",
+      "category": "biological_oracle",
+      "claim": "Fold-specific conditional conformal uncertainty passes the original numerical gates for two interpolative role-shift schemes but remains unsupported across the full precursor-role space.",
+      "statistics": [
+        {"name": "held_head_eligible_folds", "value": 4, "denominator": 5, "unit": "folds"},
+        {"name": "held_head_mean_R2", "value": 0.3442293454, "denominator": 4, "unit": "eligible folds"},
+        {"name": "held_head_mean_coverage_gap", "value": 0.0586612654, "denominator": 4, "unit": "eligible folds"},
+        {"name": "held_aldehyde_isocyanide_eligible_folds", "value": 3, "denominator": 5, "unit": "folds"},
+        {"name": "held_aldehyde_isocyanide_mean_R2", "value": 0.5325524545, "denominator": 3, "unit": "eligible folds"},
+        {"name": "held_aldehyde_isocyanide_mean_coverage_gap", "value": 0.0830915139, "denominator": 3, "unit": "eligible folds"},
+        {"name": "guidance_authorized", "value": 0, "denominator": 1, "unit": "policy"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_interpolative_conformal_v1/result.json", "sha256": "a7ad0ddb71019f1ca89fb073d75311fb65b9d3e6041fa349934f5e1c0237e2ef"},
+      "evidence_status": "diagnostic_only",
+      "safe_manuscript_wording": "Conditional uncertainty met the fixed numerical gates for held-head and held-aldehyde--isocyanide-pair interpolative diagnostics, but incomplete role support kept biological guidance in abstention.",
+      "limitations": "This conditional audit was specified after inspection of the v3 outer-test diagnostic. It does not retroactively create a pristine authorization test, and it cannot support unrestricted potency guidance."
+    },
+    {
+      "id": "representation.broad_sparse_roundtrip",
+      "category": "representation",
+      "claim": "The sparse constitutional representation exactly reconstructs all 15,229 accepted broad-corpus graphs, including all 1,891 aromatic records.",
+      "statistics": [
+        {"name": "exact_constitutional_roundtrips", "value": 15229, "denominator": 15229, "unit": "graphs", "fraction": 1.0},
+        {"name": "exact_aromatic_roundtrips", "value": 1891, "denominator": 1891, "unit": "graphs", "fraction": 1.0},
+        {"name": "maximum_heavy_atoms", "value": 282, "denominator": null, "unit": "atoms"},
+        {"name": "graphs_with_N_le_64", "value": 10702, "denominator": 15229, "unit": "graphs", "fraction": 0.7027},
+        {"name": "graphs_with_N_le_96", "value": 13879, "denominator": 15229, "unit": "graphs", "fraction": 0.9114},
+        {"name": "declared_element_coverage", "value": 15229, "denominator": 15229, "unit": "graphs", "fraction": 1.0}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/m0_06_sparse_full_support/result.json", "sha256": "cfd8b68637b6b1674e6bd064286f9482ddbcc60bb4b7514e16c6a6d88b4d0469"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The sparse constitutional encoding reconstructed all 15,229 accepted lipid graphs exactly, including all 1,891 aromatic structures.",
+      "limitations": "This establishes representational fidelity, not learned generation quality. The early feasibility implementation is superseded for production serialization by the V5 canonical audit."
+    },
+    {
+      "id": "representation.v5_canonical_program",
+      "category": "representation",
+      "claim": "The production canonical offspring representation is exact and invariant to tested atom permutations across all 15,229 broad-corpus graphs.",
+      "statistics": [
+        {"name": "exact_roundtrips", "value": 15229, "denominator": 15229, "unit": "graphs", "fraction": 1.0},
+        {"name": "permutation_encodings_tested", "value": 30458, "denominator": 30458, "unit": "encodings"},
+        {"name": "permutation_invariant_serializations", "value": 30458, "denominator": 30458, "unit": "encodings", "fraction": 1.0},
+        {"name": "valid_sparse_programs", "value": 15229, "denominator": 15229, "unit": "programs", "fraction": 1.0},
+        {"name": "broad_corpus_maximum_children", "value": 8, "denominator": null, "unit": "children"},
+        {"name": "broad_corpus_maximum_cycle_rank", "value": 12, "denominator": null, "unit": "closures"},
+        {"name": "broad_corpus_maximum_heavy_atoms", "value": 282, "denominator": null, "unit": "atoms"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/v5_canonical_representation_audit.json", "sha256": "5374eef0a4d6a3752320fb2e58b3d9f70d9555fe69305cee1c36f66ccef74148"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "A deterministic sparse offspring program gave exact graph round-trips for all 15,229 structures and identical serializations across 30,458 atom-permuted encodings.",
+      "limitations": "The canonical root and traversal are serialization devices, not chemical semantics. Broad-corpus maxima differ from the narrower declared Ugi production bounds."
+    },
+    {
+      "id": "representation.ugi_support_bounds",
+      "category": "representation",
+      "claim": "The declared Ugi bounds cover every admitted component, every balanced-corpus product and every product in the expanded exact-forward universe.",
+      "statistics": [
+        {"name": "maximum_attachment_count", "value": 2, "denominator": null, "unit": "attachments"},
+        {"name": "maximum_children", "value": 3, "denominator": null, "unit": "children"},
+        {"name": "maximum_component_atoms", "value": 32, "denominator": null, "unit": "atoms"},
+        {"name": "maximum_cycle_rank", "value": 2, "denominator": null, "unit": "closures"},
+        {"name": "maximum_decorations", "value": 7, "denominator": null, "unit": "decorations"},
+        {"name": "maximum_junction_budget", "value": 7, "denominator": null, "unit": "junction units"},
+        {"name": "maximum_total_atoms", "value": 80, "denominator": null, "unit": "atoms"},
+        {"name": "admitted_components_supported", "value": 424, "denominator": 424, "unit": "components", "fraction": 1.0},
+        {"name": "balanced_products_supported", "value": 112386, "denominator": 112386, "unit": "products", "fraction": 1.0},
+        {"name": "expanded_products_supported", "value": 1486415, "denominator": 1486415, "unit": "products", "fraction": 1.0},
+        {"name": "LNPDB_hydrophobic_proxy_unweighted_supported", "value": 299, "denominator": 307, "unit": "motifs", "fraction": 0.97394},
+        {"name": "LNPDB_hydrophobic_proxy_weighted_supported_fraction", "value": 0.98783, "denominator": null, "unit": "weighted fraction"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_support_bounds_audit_v2/result.json", "sha256": "ac847df33cf9d446b85fccf88c298713e86107f626d816f3996f5b46b861ea29"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The declared Ugi support bounds covered all 424 admitted components, all 112,386 balanced-corpus products and all 1,486,415 products in the expanded exact-forward universe.",
+      "limitations": "Capacity coverage of an LNPDB hydrophobic proxy is not Ugi compatibility, route evidence, oracle applicability, or synthesis success. The model is general only within these declared bounds."
+    },
+    {
+      "id": "generator.full_morphology_training",
+      "category": "generator",
+      "claim": "The full-morphology sparse generator completed 4,750 deterministic L4 training steps; calibration loss selected step 500 as the training checkpoint, but checkpoint generation audits remain nonselecting.",
+      "statistics": [
+        {"name": "completed_steps", "value": 4750, "denominator": 8000, "unit": "planned steps"},
+        {"name": "best_calibration_step", "value": 500, "denominator": 4750, "unit": "training step"},
+        {"name": "best_calibration_loss", "value": 2.8893739711, "denominator": null, "unit": "composite cross-entropy"},
+        {"name": "training_products", "value": 66464, "denominator": 112386, "unit": "products"},
+        {"name": "calibration_products", "value": 15800, "denominator": 112386, "unit": "products"},
+        {"name": "heldout_products", "value": 30122, "denominator": 112386, "unit": "products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/result.json", "sha256": "7427757fad7c6ed8545dbae721d7c4d13af77304a9ab74da2f8c1f8ef5fb2843"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt", "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"},
+        {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt", "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The unguided product-plus-L1 sparse generator completed 4,750 deterministic training steps; the lowest calibration loss occurred at step 500.",
+      "limitations": "The run used neither route nor biological guidance. Calibration loss is not a generation-validity, novelty, route-closure or biological-performance metric."
+    },
+    {
+      "id": "generator.full_morphology_checkpoint_series",
+      "category": "generator",
+      "claim": "A fixed-program 256-sample audit reveals increasing distributional conformity and exact training-corpus reproduction at later checkpoints.",
+      "statistics": [
+        {"name": "step250_valid", "value": 255, "denominator": 256, "unit": "samples", "fraction": 0.99609},
+        {"name": "step250_exact_frozen_matches", "value": 2, "denominator": 255, "unit": "valid products"},
+        {"name": "step500_valid", "value": 251, "denominator": 256, "unit": "samples", "fraction": 0.98047},
+        {"name": "step500_exact_frozen_matches", "value": 2, "denominator": 251, "unit": "valid products"},
+        {"name": "step1000_valid", "value": 255, "denominator": 256, "unit": "samples", "fraction": 0.99609},
+        {"name": "step1000_unique_valid", "value": 252, "denominator": 255, "unit": "valid products"},
+        {"name": "step1000_exact_frozen_matches", "value": 1, "denominator": 255, "unit": "valid products"},
+        {"name": "step1000_median_nearest_Morgan", "value": 0.625, "denominator": 255, "unit": "valid products"},
+        {"name": "step1000_median_heteroatoms", "value": 4, "denominator": 255, "unit": "atoms"},
+        {"name": "step1000_median_logP", "value": 9.7307, "denominator": 255, "unit": "logP"},
+        {"name": "step2000_valid", "value": 254, "denominator": 256, "unit": "samples", "fraction": 0.99219},
+        {"name": "step2000_unique_valid", "value": 252, "denominator": 254, "unit": "valid products"},
+        {"name": "step2000_exact_frozen_matches", "value": 9, "denominator": 254, "unit": "valid products"},
+        {"name": "step2000_median_nearest_Morgan", "value": 0.67308, "denominator": 254, "unit": "valid products"},
+        {"name": "step2000_median_heteroatoms", "value": 5, "denominator": 254, "unit": "atoms"},
+        {"name": "step2000_median_logP", "value": 8.699, "denominator": 254, "unit": "logP"},
+        {"name": "step4000_valid", "value": 256, "denominator": 256, "unit": "samples", "fraction": 1.0},
+        {"name": "step4000_exact_frozen_matches", "value": 44, "denominator": 256, "unit": "valid products"},
+        {"name": "reference_median_heteroatoms", "value": 6, "denominator": 112386, "unit": "products"},
+        {"name": "reference_median_logP", "value": 7.8193, "denominator": 112386, "unit": "products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_checkpoint_series_audit.json", "sha256": "38b756d2599032c39dba3918d1feb5e19ec36eeaa2da6b0cd77b7ef4dcdb485a"},
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Across a fixed 256-program audit, steps 1,000 and 2,000 produced 99.6% and 99.2% valid products, respectively; the later checkpoint moved closer to the reference descriptor distribution but reproduced more exact frozen products (9 versus 1).",
+      "limitations": "This fixed-program gate is nonselecting. It does not by itself establish open-ended generation, and step 4,000's higher realism coincides with substantially more exact-corpus reproduction."
+    },
+    {
+      "id": "generator.held_component_step1000",
+      "category": "generator_open_endedness",
+      "claim": "At step 1,000, a 512-program held-component probe generated mostly valid, forward-reconstructable products and 429 products containing at least one inverse-reconstructed precursor absent from all 424 admitted components.",
+      "statistics": [
+        {"name": "valid_products", "value": 511, "denominator": 512, "unit": "samples", "fraction": 0.998047},
+        {"name": "unique_valid_products", "value": 505, "denominator": 511, "unit": "valid products"},
+        {"name": "inverse_component_reconstruction_valid", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "exact_forward_product_reconstruction", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "all_three_handle_checks_pass", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "genuinely_generated_component_products", "value": 429, "denominator": 511, "unit": "valid products", "fraction": 0.83953},
+        {"name": "train_catalog_only_products", "value": 66, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_heldout_component_products", "value": 13, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_calibration_component_products", "value": 3, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_frozen_product_matches", "value": 23, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_strict_train_product_matches", "value": 18, "denominator": 511, "unit": "valid products"},
+        {"name": "outside_catalog_heads", "value": 258, "denominator": 511, "unit": "reconstructed heads"},
+        {"name": "outside_catalog_aldehydes", "value": 329, "denominator": 511, "unit": "reconstructed aldehydes"},
+        {"name": "outside_catalog_isocyanides", "value": 69, "denominator": 511, "unit": "reconstructed isocyanides"},
+        {"name": "median_logP", "value": 10.7275, "denominator": 511, "unit": "valid products"},
+        {"name": "median_heteroatoms", "value": 4, "denominator": 511, "unit": "valid products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json", "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt", "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "In a 512-program held-component probe at step 1,000, 511 products were valid and exactly forward-reconstructable; 429 of these contained at least one inverse-reconstructed precursor graph absent from the 424-component admitted catalog.",
+      "limitations": "The probe supplies morphology programs only. Held-role labels are inherited solely for stratification; generated components are recovered from each generated product by deterministic inverse Ugi decomposition. Structural component novelty does not imply route closure, synthesis success, product novelty, biological activity, or checkpoint selection."
+    },
+    {
+      "id": "generator.held_component_step2000",
+      "category": "generator_open_endedness",
+      "claim": "At step 2,000, the same 512-program held-component probe generated 506 valid, forward-reconstructable products, with lower novelty and more corpus reproduction than step 1,000.",
+      "statistics": [
+        {"name": "valid_products", "value": 506, "denominator": 512, "unit": "samples", "fraction": 0.988281},
+        {"name": "unique_valid_products", "value": 501, "denominator": 506, "unit": "valid products"},
+        {"name": "inverse_component_reconstruction_valid", "value": 506, "denominator": 506, "unit": "valid products", "fraction": 1.0},
+        {"name": "exact_forward_product_reconstruction", "value": 506, "denominator": 506, "unit": "valid products", "fraction": 1.0},
+        {"name": "all_three_handle_checks_pass", "value": 503, "denominator": 506, "unit": "valid products", "fraction": 0.99407},
+        {"name": "genuinely_generated_component_products", "value": 404, "denominator": 506, "unit": "valid products", "fraction": 0.79842},
+        {"name": "train_catalog_only_products", "value": 85, "denominator": 506, "unit": "valid products"},
+        {"name": "exact_heldout_component_products", "value": 16, "denominator": 506, "unit": "valid products"},
+        {"name": "exact_calibration_component_products", "value": 1, "denominator": 506, "unit": "valid products"},
+        {"name": "exact_frozen_product_matches", "value": 65, "denominator": 506, "unit": "valid products"},
+        {"name": "exact_strict_train_product_matches", "value": 52, "denominator": 506, "unit": "valid products"},
+        {"name": "outside_catalog_heads", "value": 224, "denominator": 506, "unit": "reconstructed heads"},
+        {"name": "outside_catalog_aldehydes", "value": 308, "denominator": 506, "unit": "reconstructed aldehydes"},
+        {"name": "outside_catalog_isocyanides", "value": 59, "denominator": 506, "unit": "reconstructed isocyanides"},
+        {"name": "median_logP", "value": 9.82225, "denominator": 506, "unit": "valid products"},
+        {"name": "median_heteroatoms", "value": 4, "denominator": 506, "unit": "valid products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json", "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt", "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "At step 2,000, 506 of 512 held-component probe products were valid and exactly forward-reconstructable; 404 contained an inverse-reconstructed precursor absent from the admitted catalog, while exact frozen-product matches increased to 65.",
+      "limitations": "Three valid products failed the head-handle policy because the inverse-reconstructed head contained three distinct amine sites. As at step 1,000, labels describe probe strata; novelty is computed from actual inverse-reconstructed components."
+    },
+    {
+      "id": "generator.heldout_loss_step_comparison",
+      "category": "generator",
+      "claim": "Step 2,000 has lower fixed-noise held-out loss than step 1,000, but held-out loss is not a generation metric.",
+      "statistics": [
+        {"name": "step1000_full_heldout_total_loss", "value": 3.66227292397, "denominator": 30122, "unit": "heldout products"},
+        {"name": "step2000_full_heldout_total_loss", "value": 3.43442372271, "denominator": 30122, "unit": "heldout products"},
+        {"name": "step1000_fixed_probe_total_loss", "value": 1.8392076264, "denominator": 512, "unit": "probe programs"},
+        {"name": "step2000_fixed_probe_total_loss", "value": 1.6638028829, "denominator": 512, "unit": "probe programs"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json", "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705"},
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Step 2,000 reduced fixed-noise held-out loss relative to step 1,000 on both the complete 30,122-product held-out fold and the fixed 512-program probe.",
+      "limitations": "Loss evaluates denoising likelihood under a fixed corruption protocol. It must not be described as validity, novelty, route closure, or synthesis performance, and does not override the generation trade-off."
+    },
+    {
+      "id": "generator.unconditional_step1000",
+      "category": "generator_open_endedness",
+      "claim": "Unconditional sampling from the training-fold program prior corroborates the step-1,000 open-endedness result.",
+      "statistics": [
+        {"name": "valid_products", "value": 1009, "denominator": 1024, "unit": "samples", "fraction": 0.98535},
+        {"name": "unique_valid_products", "value": 998, "denominator": 1009, "unit": "valid products"},
+        {"name": "genuinely_generated_component_products", "value": 844, "denominator": 1009, "unit": "valid products", "fraction": 0.83647},
+        {"name": "all_three_handle_checks_pass", "value": 1007, "denominator": 1009, "unit": "valid products", "fraction": 0.99802},
+        {"name": "exact_forward_product_reconstruction", "value": 1009, "denominator": 1009, "unit": "valid products", "fraction": 1.0},
+        {"name": "exact_frozen_product_matches", "value": 53, "denominator": 1009, "unit": "valid products"},
+        {"name": "exact_strict_train_product_matches", "value": 48, "denominator": 1009, "unit": "valid products"},
+        {"name": "median_logP", "value": 10.5125, "denominator": 1009, "unit": "valid products"},
+        {"name": "median_heteroatoms", "value": 4, "denominator": 1009, "unit": "valid products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_unconditional_component_gate.json", "sha256": "b40ef47dc714324fc6c3a449c77c0aa89218eb355070339b694f314808fc78d7"},
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Among 1,024 unconditional step-1,000 samples, 1,009 were valid and exactly forward-reconstructable, and 844 contained at least one inverse-reconstructed precursor absent from the admitted component catalog.",
+      "limitations": "The morphology programs are sampled from the training-fold prior, but no component identities or product graphs are supplied. This remains an unguided, nonselecting computational gate."
+    },
+    {
+      "id": "generator.unconditional_step2000",
+      "category": "generator_open_endedness",
+      "claim": "The unconditional step-2,000 sample is more distribution-conforming but less valid and less component-novel than step 1,000.",
+      "statistics": [
+        {"name": "valid_products", "value": 993, "denominator": 1024, "unit": "samples", "fraction": 0.96973},
+        {"name": "unique_valid_products", "value": 990, "denominator": 993, "unit": "valid products"},
+        {"name": "genuinely_generated_component_products", "value": 793, "denominator": 993, "unit": "valid products", "fraction": 0.79859},
+        {"name": "all_three_handle_checks_pass", "value": 989, "denominator": 993, "unit": "valid products", "fraction": 0.99597},
+        {"name": "exact_forward_product_reconstruction", "value": 993, "denominator": 993, "unit": "valid products", "fraction": 1.0},
+        {"name": "exact_frozen_product_matches", "value": 100, "denominator": 993, "unit": "valid products"},
+        {"name": "exact_strict_train_product_matches", "value": 96, "denominator": 993, "unit": "valid products"},
+        {"name": "median_logP", "value": 9.4955, "denominator": 993, "unit": "valid products"},
+        {"name": "median_heteroatoms", "value": 5, "denominator": 993, "unit": "valid products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_balanced_v2_unconditional_component_gate.json", "sha256": "b40ef47dc714324fc6c3a449c77c0aa89218eb355070339b694f314808fc78d7"},
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Among 1,024 unconditional step-2,000 samples, 993 were valid and exactly forward-reconstructable; 793 contained an inverse-reconstructed precursor absent from the catalog, while exact frozen-product matches increased to 100.",
+      "limitations": "The result corroborates a realism-versus-reproduction trade-off and does not select step 2,000 or authorize route or biological guidance."
+    },
+    {
+      "id": "generator.size_only_training",
+      "category": "generator_ablation",
+      "claim": "The matched size-only arm completed training and was evaluated at all five shared checkpoints under the frozen v3 selection protocol; no size-only checkpoint passed every gate.",
+      "statistics": [
+        {"name": "completed_steps", "value": 4750, "denominator": 8000, "unit": "planned steps"},
+        {"name": "best_calibration_step", "value": 500, "denominator": 4750, "unit": "training step"},
+        {"name": "best_calibration_loss", "value": 3.91833307594, "denominator": null, "unit": "composite cross-entropy"},
+        {"name": "training_products", "value": 66464, "denominator": 112386, "unit": "products"},
+        {"name": "calibration_products", "value": 15800, "denominator": 112386, "unit": "products"},
+        {"name": "heldout_products", "value": 30122, "denominator": 112386, "unit": "products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/result.json", "sha256": "2627d84281f53c431e7dd91d982863c53e68044b0ebf3bfb6c52e73aa247a16c"},
+      "supporting_artifacts": [
+        {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/checkpoint_best.pt", "sha256": "b9767d17822c3bd87713f0f069de8ae590092b210178498178a3b8807191332a"},
+        {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/checkpoint_step_1000.pt", "sha256": "523a755531e6bf7713e246bace1cdde80aaf46948226f0e5f4fef30d55e12d16"},
+        {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/checkpoint_step_2000.pt", "sha256": "b60649e41ec2308caaa99ee8cc42d2cfa414a4097a4fb16139e26573a07ad356"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "A matched size-only ablation completed 4,750 deterministic training steps and was evaluated at five shared checkpoints under the frozen v3 protocol; no checkpoint passed every prespecified gate.",
+      "limitations": "Training loss is not comparable across conditioning objectives as a stand-alone architecture decision. The v3 result evaluates product-plus-L1 generation only and does not evaluate route closure or biological or synthesis guidance."
+    },
+    {
+      "id": "generator.production_selection_v3",
+      "category": "generator_selection",
+      "claim": "A hash-pinned matched comparison selected the full-morphology step-1,000 checkpoint as the production product-plus-L1 generator because it was the only one of ten architecture-checkpoint candidates to pass every frozen gate.",
+      "statistics": [
+        {"name": "architecture_checkpoint_candidates", "value": 10, "denominator": 10, "unit": "candidates"},
+        {"name": "passing_candidates", "value": 1, "denominator": 10, "unit": "candidates", "fraction": 0.1},
+        {"name": "selection_reference_products", "value": 82264, "denominator": 112386, "unit": "products"},
+        {"name": "heldout_products_excluded_from_selection", "value": 30122, "denominator": 112386, "unit": "products"},
+        {"name": "selected_attempted_draws", "value": 1024, "denominator": 1024, "unit": "samples"},
+        {"name": "selected_valid_products", "value": 1007, "denominator": 1024, "unit": "samples", "fraction": 0.9833984375},
+        {"name": "selected_unique_valid_products", "value": 994, "denominator": 1007, "unit": "valid products", "fraction": 0.9870903674},
+        {"name": "selected_inverse_component_reconstruction", "value": 1007, "denominator": 1007, "unit": "valid products", "fraction": 1.0},
+        {"name": "selected_exact_forward_reconstruction", "value": 1007, "denominator": 1007, "unit": "valid products", "fraction": 1.0},
+        {"name": "selected_all_three_handles_qualified", "value": 1007, "denominator": 1007, "unit": "valid products", "fraction": 1.0},
+        {"name": "selected_usable_open_ended_successes", "value": 847, "denominator": 1024, "unit": "attempted samples", "fraction": 0.8271484375},
+        {"name": "selected_exact_selection_visible_products", "value": 39, "denominator": 1007, "unit": "valid products", "fraction": 0.0387288977},
+        {"name": "selected_mean_normalized_Wasserstein_1", "value": 0.15837265697, "denominator": 6, "unit": "descriptor distributions"},
+        {"name": "selected_mean_Kolmogorov_Smirnov", "value": 0.24000280034, "denominator": 6, "unit": "descriptor distributions"},
+        {"name": "selected_forbidden_substructure_products", "value": 0, "denominator": 1007, "unit": "valid products", "fraction": 0.0},
+        {"name": "selected_declared_support_violations", "value": 0, "denominator": 1007, "unit": "valid products", "fraction": 0.0}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_architecture_checkpoint_selection_v3.json", "sha256": "fe90fc849bbc88c8b004ceebcb4aae95ef6ac8158b8e1a6220792750aac83be5"},
+      "supporting_artifacts": [
+        {"path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json", "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"},
+        {"path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json", "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"},
+        {"path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt", "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"},
+        {"path": "results/phase1/ugi_product_l1_production_generator_v1.json", "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"}
+      ],
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Under a prespecified matched comparison of ten architecture-checkpoint candidates, the full-morphology step-1,000 model was the only checkpoint to pass every product-plus-L1 gate; 1,007 of 1,024 fresh samples were valid and exactly forward-reconstructable, and 847 attempts contained a component outside the admitted catalog while satisfying all usable open-endedness checks.",
+      "limitations": "The selector used training and calibration products only and excluded all 30,122 heldout structures. It authorizes unguided product-plus-L1 generation only; L2/L3 routing, synthesis guidance, biological guidance and experimental success were not evaluated."
+    },
+    {
+      "id": "generator.candidate_eligibility_diagnostic_v2",
+      "category": "generator_candidate_eligibility",
+      "claim": "A nonselecting post-selection audit found no declared-support, forbidden-substructure, inverse-decomposition, exact-forward or handle failure among the selected checkpoint's 1,007 valid products, while identifying 78 low-heteroatom-fraction products for review.",
+      "statistics": [
+        {"name": "attempted_products", "value": 1024, "denominator": 1024, "unit": "samples"},
+        {"name": "valid_products", "value": 1007, "denominator": 1024, "unit": "samples", "fraction": 0.9833984375},
+        {"name": "molecule_sanitization_failures", "value": 16, "denominator": 1024, "unit": "samples"},
+        {"name": "terminal_support_failures", "value": 1, "denominator": 1024, "unit": "samples"},
+        {"name": "alkyne_generated", "value": 157, "denominator": 1007, "unit": "valid products", "fraction": 0.1559086395},
+        {"name": "alkyne_reference", "value": 13397, "denominator": 82264, "unit": "reference products", "fraction": 0.1628537392},
+        {"name": "nitrogen_nitrogen_bond_generated", "value": 61, "denominator": 1007, "unit": "valid products", "fraction": 0.0605759682},
+        {"name": "nitrogen_nitrogen_bond_reference", "value": 4123, "denominator": 82264, "unit": "reference products", "fraction": 0.0501191287},
+        {"name": "aldehyde_generated", "value": 0, "denominator": 1007, "unit": "valid products"},
+        {"name": "peroxide_generated", "value": 0, "denominator": 1007, "unit": "valid products"},
+        {"name": "carbon_centered_allene_or_cumulene_generated", "value": 0, "denominator": 1007, "unit": "valid products"},
+        {"name": "low_heteroatom_fraction_generated", "value": 78, "denominator": 1007, "unit": "valid products", "fraction": 0.0774577954},
+        {"name": "low_heteroatom_fraction_reference", "value": 813, "denominator": 82264, "unit": "reference products", "fraction": 0.0098828163},
+        {"name": "high_heteroatom_count_generated", "value": 0, "denominator": 1007, "unit": "valid products"},
+        {"name": "high_heteroatom_fraction_generated", "value": 0, "denominator": 1007, "unit": "valid products"},
+        {"name": "adapter_and_declared_support_pass", "value": 1007, "denominator": 1007, "unit": "valid products", "fraction": 1.0},
+        {"name": "heldout_rows_skipped_without_molecule_evaluation", "value": 30122, "denominator": 30122, "unit": "heldout products", "fraction": 1.0}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_candidate_eligibility_audit_v2.json", "sha256": "2619322d5584b117cfcee1e83b79e7f6b08964e73b9261722fc1cadba8457474"},
+      "supporting_artifacts": [
+        {"path": "configs/model/phase1_ugi_candidate_eligibility_audit_v2.json", "sha256": "6b9abb3d2a2597a1274ef646fcda05aa223f5e6c4808421d7c3e36a3cd049aaf"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "In a post-selection diagnostic, all 1,007 valid samples remained inside declared support and passed inverse component recovery, exact Ugi reconstruction and handle checks; 78 had a heteroatom fraction below the selection-reference 1st percentile and were retained as review flags.",
+      "limitations": "Motif and heteroatom flags are candidate-review diagnostics, not automatic synthesis or biological exclusions. The audit cannot alter model selection, evaluates no L2/L3 routes, synthesis value or biological activity, and skipped all heldout products."
+    },
+    {
+      "id": "generator.postselection_held_component_stress_v1",
+      "category": "generator_postselection_stress",
+      "claim": "A descriptive post-selection stress test on 512 held-family-associated morphology programs produced 511 valid products, all of which passed exact inverse-L1 recovery, component-handle qualification and exact Ugi forward reconstruction.",
+      "statistics": [
+        {"name": "attempted_programs", "value": 512, "denominator": 512, "unit": "programs"},
+        {"name": "valid_products", "value": 511, "denominator": 512, "unit": "attempts", "fraction": 0.998046875},
+        {"name": "unique_valid_products", "value": 505, "denominator": 511, "unit": "valid products", "fraction": 0.988258317},
+        {"name": "inverse_L1_recovery", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "all_three_handles_qualified", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "exact_forward_reconstruction", "value": 511, "denominator": 511, "unit": "valid products", "fraction": 1.0},
+        {"name": "catalog_absent_component_attempts", "value": 429, "denominator": 512, "unit": "attempts", "fraction": 0.837890625},
+        {"name": "products_outside_complete_corpus", "value": 488, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_training_products", "value": 18, "denominator": 511, "unit": "valid products"},
+        {"name": "exact_heldout_products", "value": 5, "denominator": 511, "unit": "valid products"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_product_l1_postselection_held_component_stress_v1.json", "sha256": "cf2e6f34ecb86d9780925295cff3f11bc44c3d5c7b90b5556c0fa9777f991e16"},
+      "supporting_artifacts": [
+        {"path": "configs/model/phase1_ugi_product_l1_postselection_held_component_stress_v1.json", "sha256": "07899965880df531773ff8587493b6570cd41e1e9ecaea653a757e9048f786e4"}
+      ],
+      "evidence_status": "diagnostic_only",
+      "safe_manuscript_wording": "In a descriptive post-selection stress test of 512 held-family-associated morphology programs, 511 products were valid and all passed inverse component recovery, handle qualification and exact Ugi forward reconstruction; 429 attempts contained a component outside the 424-component catalog.",
+      "limitations": "The probe was inspected before checkpoint freeze and is not a pristine heldout estimate. It tests robustness under held-family-associated coarse morphology, not recovery of a requested held component, route closure, synthesis, biology or non-Ugi generalization."
+    },
+    {
+      "id": "generator.postselection_provenance_audit_v1",
+      "category": "generator_structural_provenance",
+      "claim": "Exact role-specific constitutional identity partitioned the selected sample into original-component, admitted transferred-or-expanded-known, and catalog-absent component strata without treating structural novelty as route closure or infeasibility.",
+      "statistics": [
+        {"name": "reconstructed_products", "value": 1007, "denominator": 1007, "unit": "products"},
+        {"name": "component_occurrences", "value": 3021, "denominator": 3021, "unit": "component occurrences"},
+        {"name": "original_component_occurrences", "value": 1053, "denominator": 3021, "unit": "component occurrences"},
+        {"name": "admitted_nonoriginal_known_occurrences", "value": 590, "denominator": 3021, "unit": "component occurrences"},
+        {"name": "explicit_cross_platform_transfer_occurrences", "value": 16, "denominator": 590, "unit": "known non-original occurrences"},
+        {"name": "expanded_known_occurrences", "value": 574, "denominator": 590, "unit": "known non-original occurrences"},
+        {"name": "catalog_absent_occurrences", "value": 1378, "denominator": 3021, "unit": "component occurrences"},
+        {"name": "products_original_only", "value": 30, "denominator": 1007, "unit": "products"},
+        {"name": "products_with_known_nonoriginal_but_no_absent_component", "value": 130, "denominator": 1007, "unit": "products"},
+        {"name": "products_with_catalog_absent_component", "value": 847, "denominator": 1007, "unit": "products"},
+        {"name": "products_all_components_static_route_complete", "value": 3, "denominator": 1007, "unit": "products"},
+        {"name": "within_catalog_products_with_noncomplete_static_route_tier", "value": 157, "denominator": 1007, "unit": "products"},
+        {"name": "catalog_absent_products_route_not_assessed", "value": 847, "denominator": 1007, "unit": "products"},
+        {"name": "catalog_absent_occurrences_labeled_infeasible", "value": 0, "denominator": 1378, "unit": "catalog-absent occurrences"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_postselection_provenance_audit_v1/result.json", "sha256": "1db7917885e8d2905eebe2faebdc40a92d8a3458bb5b47ed89ec372a7c7610cb"},
+      "supporting_artifacts": [
+        {"path": "configs/model/phase1_ugi_postselection_provenance_audit_v1.json", "sha256": "ffe6be8ecce694fecaf8baed8da8034fd67bc255a45a9dcea346a715e67f45f9"},
+        {"path": "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz", "sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6"},
+        {"path": "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz", "sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "Exact structural provenance partitioned 1,007 reconstructed products into 30 original-only, 130 containing an admitted transferred or expanded known component but no catalog-absent component, and 847 containing a component absent from the frozen 424-component catalog; every catalog-absent occurrence was marked route not assessed because of missing knowledge, not infeasible.",
+      "limitations": "Exact catalog matching does not establish route closure or experimental success. Catalog absence does not establish product novelty, unsynthesizability or biological novelty. The static route join performed no route planning."
+    },
+    {
+      "id": "generator.tail_chemotype_audit_v1",
+      "category": "generator_candidate_eligibility",
+      "claim": "A descriptive post-selection tail audit found strong depletion of ester-bearing and carbon-carbon-unsaturated aldehyde modes and introduced adjacent carbon-branch pairs that were absent from the selection-visible reference.",
+      "statistics": [
+        {"name": "generated_aldehyde_occurrences", "value": 1007, "denominator": 1007, "unit": "aldehyde component occurrences"},
+        {"name": "selection_visible_aldehyde_occurrences", "value": 82264, "denominator": 82264, "unit": "aldehyde component occurrences"},
+        {"name": "generated_aldehyde_ester_like_carbonyl", "value": 19, "denominator": 1007, "unit": "aldehyde component occurrences", "fraction": 0.018867924528301886},
+        {"name": "selection_visible_aldehyde_ester_like_carbonyl", "value": 40136, "denominator": 82264, "unit": "aldehyde component occurrences", "fraction": 0.4878926383351162},
+        {"name": "generated_aldehyde_carbon_carbon_double_bond", "value": 0, "denominator": 1007, "unit": "aldehyde component occurrences", "fraction": 0.0},
+        {"name": "selection_visible_aldehyde_carbon_carbon_double_bond", "value": 27028, "denominator": 82264, "unit": "aldehyde component occurrences", "fraction": 0.3285519789944569},
+        {"name": "generated_aldehyde_adjacent_carbon_branches", "value": 27, "denominator": 1007, "unit": "aldehyde component occurrences", "fraction": 0.026812313803376366},
+        {"name": "selection_visible_aldehyde_adjacent_carbon_branches", "value": 0, "denominator": 82264, "unit": "aldehyde component occurrences", "fraction": 0.0},
+        {"name": "generated_isocyanide_adjacent_carbon_branches", "value": 63, "denominator": 1007, "unit": "isocyanide component occurrences", "fraction": 0.06256206554121152},
+        {"name": "selection_visible_isocyanide_adjacent_carbon_branches", "value": 0, "denominator": 82264, "unit": "isocyanide component occurrences", "fraction": 0.0}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_tail_chemotype_audit_v1.json", "sha256": "c781761c5052d2ef88aa93a43356c7f076c2d99b8a0ff13904feaf4424071e4b"},
+      "supporting_artifacts": [
+        {"path": "configs/model/phase1_ugi_tail_chemotype_audit_v1.json", "sha256": "7953bbfece04f40711a4478d22f36166feed9761e4484f0b2eeebdedab75c011"}
+      ],
+      "evidence_status": "verified_nonselecting",
+      "safe_manuscript_wording": "In a descriptive post-selection audit, ester-like carbonyls occurred in 19/1,007 generated aldehyde components versus 40,136/82,264 selection-visible references, carbon-carbon double bonds occurred in 0/1,007 versus 27,028/82,264, and adjacent carbon branch pairs occurred in 27/1,007 aldehydes and 63/1,007 isocyanides versus zero in either reference role.",
+      "limitations": "The audit is nonselecting, excludes heldout component families and assesses graph-derived structural chemotypes only. It does not assess L2/L3 route closure, synthesis feasibility, formulation or biological activity."
+    },
+    {
+      "id": "oracle.applicability_morphology_proposal_v1",
+      "category": "biological_applicability",
+      "claim": "A support-preserving morphology proposal more than doubled the probability of generating terminal chemistry inside the frozen multiview AGILE support region while retaining positive probability for all qualified programs.",
+      "statistics": [
+        {"name": "qualified_morphology_programs", "value": 57190, "denominator": 57190, "unit": "programs"},
+        {"name": "broad_supported_terminal_rate", "value": 0.03874, "denominator": 1, "unit": "probability"},
+        {"name": "promoted_supported_terminal_rate", "value": 0.08642, "denominator": 1, "unit": "probability"},
+        {"name": "relative_enrichment", "value": 2.23, "denominator": 1, "unit": "fold"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_morphology_proposal_challenger_adjudication_v1/result.json", "sha256": "51ff8d26a674f9242a6ec78e31b5424feb969b17c050c62a9cdbfd2bb773d796"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "On fresh terminal outcomes, morphology-aware allocation increased the supported-product rate from 3.87% to 8.64% while retaining non-zero probability for every qualified morphology program.",
+      "limitations": "The proposal enriches but does not guarantee terminal applicability. It uses no potency labels and does not authorize potency outside the frozen terminal support region."
+    },
+    {
+      "id": "oracle.high_potency_morphology_challenger_v1",
+      "category": "biological_guidance",
+      "claim": "A decision-aligned morphology classifier had measurable HeLa signal, but its single frozen nested proposal did not improve unique supported conservative-high-potency terminal yield over applicability allocation plus terminal ranking.",
+      "statistics": [
+        {"name": "group_disjoint_classifier_auc", "value": 0.6225, "denominator": 1, "unit": "ROC AUC"},
+        {"name": "support_unique_conservative_high_tail_products", "value": 27, "denominator": 38, "unit": "matched oracle calls"},
+        {"name": "potency_tilt_unique_conservative_high_tail_products", "value": 23, "denominator": 38, "unit": "matched oracle calls"},
+        {"name": "nested_minus_support_yield_difference", "value": -0.001302, "denominator": 1, "unit": "unique products per generator call"},
+        {"name": "difference_ci95_low", "value": -0.002279, "denominator": 1, "unit": "unique products per generator call"},
+        {"name": "difference_ci95_high", "value": 0.000977, "denominator": 1, "unit": "unique products per generator call"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_high_potency_challenger_adjudication_v1/result.json", "sha256": "a508b45d455b7b164e54a8345b0dff1f8e4de928eec5e2f631e145dc0d981cc3"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The frozen potency-weighted morphology challenger produced 23 unique supported conservative-high-potency tail-novel products versus 27 under applicability enrichment alone at the same generation and oracle budgets; potency trajectory tilting was not promoted.",
+      "limitations": "The negative efficiency result does not imply that morphology contains no biological signal. Absolute potency for exact-new components remains prospectively unvalidated."
+    },
+    {
+      "id": "routes.proposal_augmented_search_v1",
+      "category": "route_search",
+      "claim": "Graph2Edits expanded route hypotheses and recovered known-family transformations, but proposal confidence alone did not create route evidence.",
+      "statistics": [
+        {"name": "single_step_proposals", "value": 173, "denominator": 173, "unit": "proposals"},
+        {"name": "one_gap_targets_with_known_family_hypothesis", "value": 27, "denominator": 30, "unit": "targets"},
+        {"name": "new_family_hypotheses", "value": 138, "denominator": 173, "unit": "proposals"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/graph2edits_semantic_readjudication_v1/result.json", "sha256": "5c05307acb4744e35282d8e7b0dcf7e8115d32eabb5b8ccc740a6af38705a0b0"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "The reaction proposal engine generated 173 single-step hypotheses for 30 one-gap components; 27 targets had a graph-consistent hypothesis in an already qualified reaction family, whereas 138 proposal rows remained new-family hypotheses without route evidence.",
+      "limitations": "A model proposal is a search hypothesis, not experimental evidence, terminal-material closure or a synthesis-success probability."
+    },
+    {
+      "id": "routes.matched_synthesis_guidance_null_v1",
+      "category": "synthesis_guidance",
+      "claim": "Evidence-safe route-readiness guidance changed terminal identities but did not improve route-ready product yield relative to complete generation followed by the same route assessment.",
+      "statistics": [
+        {"name": "guided_route_ready_products", "value": 2, "denominator": 56, "unit": "unique terminal products"},
+        {"name": "posthoc_route_ready_products", "value": 3, "denominator": 56, "unit": "unique terminal products"},
+        {"name": "mixed_utility_checkpoint_groups", "value": 5, "denominator": 48, "unit": "checkpoint groups"},
+        {"name": "resampled_checkpoint_groups", "value": 7, "denominator": 48, "unit": "checkpoint groups"}
+      ],
+      "claim_class": "Computed",
+      "artifact": {"path": "results/phase1/ugi_synthesis_guidance_failure_audit_v1/result.json", "sha256": "bbbf1d2305a78a2220d9a179d1abc957abea9433974416eb389c28cd68b9a9c2"},
+      "evidence_status": "verified_frozen",
+      "safe_manuscript_wording": "Matched route-aware resampling produced two route-ready products among 56 unique terminals versus three after ordinary generation and identical complete-product routing; synthesis trajectory guidance was not promoted.",
+      "limitations": "The null concerns this sparse intermediate controller. Complete-product proposal-augmented L1/L2/L3 route search remains part of candidate selection before prospective panel lock."
+    }
+  ],
+  "pending_results": [
+    {
+      "id": "pending.candidate_panel_lock",
+      "claim_class": "Proposed",
+      "status": "proposed_pending",
+      "required_result": "Apply the frozen applicability proposal, terminal support policy, conservative potency ranking, diversity policy and proposal-augmented route search to matched candidate pools before locking the prospective panel.",
+      "safe_current_statement": "The production generator and applicability proposal are frozen, but no prospective candidate panel has yet been locked."
+    },
+    {
+      "id": "pending.generated_and_prospective_route_dossiers",
+      "claim_class": "Proposed",
+      "status": "proposed_pending",
+      "required_result": "Extend the completed original-library dossiers to generated beyond-catalog candidates and the locked prospective panel, with forward verification, evidence grade, availability and uncertainty for every nonterminal branch.",
+      "safe_current_statement": "Complete computational dossiers exist for 1,734 original virtual-library products, but no generated beyond-catalog or locked prospective candidate dossier is yet evidenced."
+    },
+    {
+      "id": "pending.prospective_route_selection",
+      "claim_class": "Proposed",
+      "status": "proposed_pending",
+      "required_result": "Run proposal-augmented complete-product routing on an arm-balanced shortlist before panel lock and preserve the disposition of every routed and attempted candidate.",
+      "safe_current_statement": "Mid-trajectory synthesis guidance was tested and not promoted; complete-product route search remains required before prospective panel lock."
+    },
+    {
+      "id": "pending.prospective_biological_validation",
+      "claim_class": "Proposed",
+      "status": "proposed_pending",
+      "required_result": "Prospectively test an arm-balanced panel selected by the promoted applicability proposal and the identical conservative terminal potency-ranking policy, with measured formulation and biological outcomes.",
+      "safe_current_statement": "Applicability shapes morphology allocation and potency ranks supported terminals, but no prospective potency or delivery claim is yet available."
+    },
+    {
+      "id": "pending.prospective_experiment",
+      "claim_class": "Proposed",
+      "status": "proposed_pending",
+      "required_result": "Lock candidates and report every synthesis attempt through correct product, conversion, isolated yield, purity, route modification, precursor failure, LNP formulation and functional biological outcome.",
+      "safe_current_statement": "No prospective synthesis, formulation or biological result is represented in this evidence matrix."
+    }
+  ],
+  "contradictions_and_stale_records": [
+    {
+      "id": "stale.phase1_manifest_in_prelaunch_audit",
+      "status": "historical_stale",
+      "stale_artifact": {"path": "results/phase1/product_prelaunch_audit.json", "sha256": "1640b2d4fdfc13ec0ead7e13179d2c8c9a1b169021d94c1a52c5d161a9226198", "embedded_manifest_sha256": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad"},
+      "current_artifact": {"path": "data/splits/phase1/manifest.json", "sha256": "4ac8285268fcff75d846ac212afdef925ec3b8f5009bc96c8609620f093fc975"},
+      "resolution": "Use the current manifest hash pinned by results/phase1/data_contract.json; treat the prelaunch audit as historical."
+    },
+    {
+      "id": "stale.size_only_preflight_status",
+      "status": "historical_stale",
+      "stale_artifact": {"path": "results/phase1/ugi_joint_sparse_size_only_v1_launch_preflight.json", "sha256": "3c94c54c58208d7c2d0e29b4d631d6513b2884b013bb71423bfcde6bf1368791", "stale_status": "awaiting explicit approval/unlaunched"},
+      "current_artifact": {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/result.json", "sha256": "2627d84281f53c431e7dd91d982863c53e68044b0ebf3bfb6c52e73aa247a16c", "current_status": "complete"},
+      "resolution": "Retain the preflight as an immutable prelaunch record, but use the completed training result for current status."
+    },
+    {
+      "id": "stale.size_only_launch_receipt_status",
+      "status": "historical_stale",
+      "stale_artifact": {"path": "results/phase1/ugi_joint_sparse_size_only_v1_launch_receipt.json", "sha256": "ca3da5e4e227d36961fe0055dc23f3a4cb8c55e554636447700b3e5e8f4c55c7", "stale_status": "running"},
+      "current_artifact": {"path": "results/phase1/ugi_joint_sparse_size_only_v1_full/result.json", "sha256": "2627d84281f53c431e7dd91d982863c53e68044b0ebf3bfb6c52e73aa247a16c", "current_status": "complete"},
+      "resolution": "Use the launch receipt for authorization and run identity only, not current run status."
+    },
+    {
+      "id": "stale.checkpoint_path_alias",
+      "status": "historical_stale",
+      "stale_reference": "Some intermediate sampling artifacts refer to ugi_joint_sparse_balanced_v2_full_interim/checkpoint_step_2000.pt.",
+      "current_reference": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "shared_sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a",
+      "resolution": "The identical SHA-256 establishes checkpoint identity; manuscripts and new analyses should cite the canonical full-run path."
+    },
+    {
+      "id": "stale.component_universe_counts",
+      "status": "historical_stale",
+      "stale_or_context_specific_values": [
+        {"value": 93, "meaning": "components in the original 12,276-product virtual AGILE set"},
+        {"value": 95, "meaning": "components in the current 12,386-product Phase 1 Ugi union"},
+        {"value": 424, "meaning": "L1-admitted components in the expanded Phase 1 registry"}
+      ],
+      "resolution": "All three counts are valid only with their qualifiers; never use them interchangeably."
+    },
+    {
+      "id": "stale.product_count_semantics",
+      "status": "historical_stale",
+      "stale_or_context_specific_values": [
+        {"value": 1497144, "meaning": "raw Cartesian upper bound from the admitted component counts"},
+        {"value": 1486415, "meaning": "unique products after exact enumeration and duplicate collapse"},
+        {"value": 112386, "meaning": "balanced production training corpus"}
+      ],
+      "resolution": "State the denominator and operation for every product count."
+    },
+    {
+      "id": "stale.measured_product_count_semantics",
+      "status": "historical_stale",
+      "stale_or_context_specific_values": [
+        {"value": 1200, "meaning": "nominal AGILE measurement rows, including 100 mixtures"},
+        {"value": 1100, "meaning": "curated single-structure constitutional graphs"}
+      ],
+      "resolution": "Use 1,100 for exact single-product L1 or oracle graphs and 1,200 only for the nominal measurement ledger."
+    },
+    {
+      "id": "stale.documentation_counts",
+      "status": "historical_stale",
+      "affected_files": [
+        "manuscript/FORGE_EVIDENCE_LEDGER.md",
+        "docs/DATA_PROVENANCE.md",
+        "docs/M0_06_DEFOG_FEASIBILITY.md",
+        "docs/M0_09_L2_SUPERVISION_INVENTORY.md"
+      ],
+      "resolution": "These documents preserve earlier milestone states or omit later Phase 1 evidence. Use the hash-pinned artifacts in this matrix for current claims and update prose separately."
+    }
+  ],
+  "consistency_checks": [
+    {"name": "R0 reconciliation arithmetic", "status": "pass", "detail": "15,433 - 204 = 15,229"},
+    {"name": "all four constitutional split sums", "status": "pass", "detail": "each fold partition sums to 15,229 and has zero cross-fold groups"},
+    {"name": "expanded component role sums", "status": "pass", "detail": "264 + 107 + 53 = 424; 24 + 62 + 9 = 95; 240 + 45 + 44 = 329"},
+    {"name": "expanded product fold sum", "status": "pass", "detail": "483,032 + 349,013 + 654,370 = 1,486,415"},
+    {"name": "expanded product duplication arithmetic", "status": "pass", "detail": "12,386 + 1,485,802 - 11,773 = 1,486,415"},
+    {"name": "balanced corpus sums", "status": "pass", "detail": "66,464 + 15,800 + 30,122 = 112,386 and 12,386 + 100,000 = 112,386"},
+    {"name": "Phase 1 Ugi union identity", "status": "pass", "detail": "12,276 + 1,100 - 990 = 12,386"},
+    {"name": "held-component novelty partitions", "status": "pass", "detail": "step 1,000 categories sum to 511 and step 2,000 categories sum to 506"},
+    {"name": "unconditional novelty partitions", "status": "pass", "detail": "step 1,000 categories sum to 1,009 and step 2,000 categories sum to 993"},
+    {"name": "inverse and forward reconstruction denominators", "status": "pass", "detail": "all valid products at both checkpoints and in both gates have three reconstructed components and exact Ugi forward reconstruction"},
+    {"name": "current Phase 1 manifest hash", "status": "pass", "detail": "actual manifest SHA-256 equals the hash embedded in the current data contract"},
+    {"name": "conservative route-leaf composition", "status": "pass", "detail": "independent CSV/JSON composition reproduced 23/24 exact-source programs, 47/47 family-projected programs, 1,734/12,276 terminal-or-exact products, and 8,432/12,276 terminal/exact/family-projected products"},
+    {"name": "production registry route-readiness partition", "status": "pass", "detail": "17 + 24 + 1 + 87 + 0 + 111 + 184 = 424, with 41 route-complete components split as 17 heads, 18 aldehydes and 6 isocyanides"},
+    {"name": "size-only training and checkpoint hashes", "status": "pass", "detail": "training status is complete at 4,750 steps and all five downloaded checkpoint snapshot hashes match the completed result"},
+    {"name": "production generator manifest", "status": "pass", "detail": "all 16 path/hash identities authenticate locally and the manifest freezes full-morphology step 1,000 for product-plus-L1 scope"},
+    {"name": "v3 selection reference", "status": "pass", "detail": "66,464 training plus 15,800 calibration products equal 82,264 selection-visible products; all 30,122 heldout products were excluded"},
+    {"name": "v3 selected fresh sample", "status": "pass", "detail": "1,007 valid plus 17 invalid attempts equal 1,024; all valid products pass inverse, forward and handle checks; 847/1,024 satisfy usable open-endedness and 39/1,007 match selection-visible products"},
+    {"name": "candidate eligibility denominators", "status": "pass", "detail": "the v2 motif audit evaluates the same 1,007 valid products against 82,264 training-plus-calibration products and skips all 30,122 heldout rows"},
+    {"name": "postselection held-family stress denominators", "status": "pass", "detail": "511 valid plus one invalid attempt equals 512; all 511 valid products pass inverse, forward and handle checks; 488 outside-corpus plus 18 train plus 5 heldout products equals 511"},
+    {"name": "postselection provenance partitions", "status": "pass", "detail": "1,053 + 590 + 1,378 = 3,021 component occurrences; 30 + 130 + 847 = 1,007 products; 3 + 157 + 847 = 1,007 static route-diagnostic products"},
+    {"name": "tail chemotype audit denominators", "status": "pass", "detail": "each generated tail role has 1,007 occurrences and each selection-visible reference role has 82,264 occurrences; generated aldehyde counts are 19 ester-bearing, zero carbon-carbon-double-bond and 27 adjacent-branch occurrences, while generated isocyanides have 63 adjacent-branch occurrences and both reference roles have zero adjacent-branch occurrences"},
+    {"name": "applicability morphology proposal support", "status": "pass", "detail": "all 57,190 qualified programs retain positive probability; fresh supported-terminal rate changes from 3.874% under the broad prior to 8.642% under the promoted proposal"},
+    {"name": "fresh potency challenger budgets", "status": "pass", "detail": "each arm has 3,072 terminal attempts; exact-L1 counts are 2,971 broad, 2,955 applicability and 2,962 potency; the tail lane uses 38 oracle calls per arm"},
+    {"name": "potency challenger decision", "status": "pass", "detail": "23 nested-potency versus 27 applicability-only unique conservative-high tail products gives a nonpositive point difference with 95% interval crossing zero; potency tilting remains unpromoted"},
+    {"name": "synthesis-guidance matched endpoint", "status": "pass", "detail": "guided and post-hoc arms each assess 56 unique terminals under matched budgets, yielding two versus three route-ready products"}
+  ]
+}

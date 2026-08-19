@@ -1,0 +1,94 @@
+{
+  "schema_version": "phase1_ugi3_l2_coverage_priority_config.v1",
+  "status": "frozen_nonselecting_local_evidence_audit",
+  "task": "Prioritize repeated L2 evidence gaps in the frozen generated Ugi sample",
+  "generated_utc": "2026-08-01T00:00:00Z",
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "route_readiness_result": {
+      "path": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    },
+    "route_readiness_ledger": {
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "dossier_result": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "component_dossier_ledger": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "generated_provenance_result": {
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/result.json",
+      "sha256": "1db7917885e8d2905eebe2faebdc40a92d8a3458bb5b47ed89ec372a7c7610cb"
+    },
+    "generated_component_provenance_ledger": {
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz",
+      "sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6"
+    },
+    "generated_product_provenance_ledger": {
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz",
+      "sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"
+    }
+  },
+  "identity_policy": {
+    "component_identity": "exact_role_plus_canonical_constitutional_smiles",
+    "stereochemistry": "excluded"
+  },
+  "provenance_policy": {
+    "transfer_source_class": "cross_platform_hydrophobic_transfer",
+    "catalog_absent_tier": "not_assessed_missing_route_knowledge",
+    "no_similarity_promotion": true
+  },
+  "route_evidence_policy": {
+    "route_complete_categories": [
+      "accepted_terminal",
+      "exact_source_forward_verified_l3_closed"
+    ],
+    "family_projection_is_exact_evidence": false,
+    "catalog_absence_is_incompatibility": false,
+    "no_routes_asserted_by_this_audit": true
+  },
+  "chemotype_policy": {
+    "signature": "role_plus_graph_derived_length_independent_architecture_counts",
+    "fragment_vocabulary_used": false,
+    "structural_analogy_is_route_evidence": false
+  },
+  "priority_policy": {
+    "minimum_generated_occurrences": 2,
+    "component_priority_limit": 20,
+    "chemotype_priority_limit": 20,
+    "single_gap_frontier_budgets": [1, 2, 3, 5, 10, 20],
+    "primary_order": "guaranteed_single_gap_products_then_generated_products",
+    "chemotype_order": "single_gap_products_per_exact_component_then_product_reach"
+  },
+  "expected_summary": {
+    "registry_components": 424,
+    "registry_route_complete_components": 41,
+    "registry_noncomplete_components": 383,
+    "generated_products": 1007,
+    "generated_component_occurrences": 3021,
+    "generated_route_complete_component_occurrences": 649,
+    "generated_noncomplete_component_occurrences": 2372,
+    "generated_unique_components": 610,
+    "products_by_noncomplete_component_count": {
+      "0": 3,
+      "1": 116,
+      "2": 408,
+      "3": 480
+    },
+    "baseline_static_route_complete_products": 3,
+    "single_gap_products": 116,
+    "products_with_two_or_three_gaps": 888,
+    "unique_noncomplete_exact_components": 593,
+    "repeated_noncomplete_exact_components": 239,
+    "unique_noncomplete_chemotypes": 34,
+    "chemical_incompatibility_evidenced_components": 0
+  }
+}

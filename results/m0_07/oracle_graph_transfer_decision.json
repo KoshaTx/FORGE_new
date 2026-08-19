@@ -1,0 +1,72 @@
+{
+  "configuration": {
+    "bytes": 1003,
+    "path": "configs/bio/m0_07_oracle_graph_transfer_decision.json",
+    "sha256": "570e441ef709f82c64ccba4ba1f77d15283e228e3ab30b4a6b94b4de66972843"
+  },
+  "decision": {
+    "guidance_oracle_authorized": false,
+    "lane_role": "nonselected_diagnostic_pretraining_ablation",
+    "lane_selected_by_frozen_policy": false,
+    "negative_outer_test_r2_interpretation": "post-selection evidence that the transfer lane did not improve held-component generalization",
+    "negative_outer_test_r2_used_for_selection": false,
+    "production_checkpoint_authorized": false,
+    "reopen_requires": "a new hash-pinned cross-representation freeze with complete held-component evidence and an explicit applicability-policy decision",
+    "silent_promotion_prohibited": true
+  },
+  "inputs": {
+    "oracle_freeze_result": {
+      "bytes": 74675,
+      "path": "results/m0_07/oracle_freeze_result.json",
+      "sha256": "8476be6e013e12715bdb55a7ef6d73162b01010f7b560297c6e8406028cda338"
+    },
+    "transfer_matrix_result": {
+      "bytes": 134244,
+      "path": "results/m0_07/oracle_graph_transfer_result.json",
+      "sha256": "c6661597e2683a99046bed341eb70604deba0e0799db96bd664967c63c8e9862"
+    }
+  },
+  "matrix_completeness": {
+    "ensembles": 128,
+    "fits": 384,
+    "fits_rerun_for_adjudication": false,
+    "variants": [
+      "r0_pretrained_finetuned_dmpnn",
+      "r0_pretrained_frozen_linear"
+    ]
+  },
+  "schema_version": "m0_07_oracle_graph_transfer_decision.v1",
+  "selected_cross_representation_model": {
+    "candidate_id": "supervised_graph::ugi_component_role_aware_dmpnn::neural_3seed_ensemble",
+    "equal_endpoint_calibration_r2": 0.3673424638237814,
+    "equal_endpoint_test_r2": 0.18299890124873713,
+    "lane": "supervised_graph",
+    "selection_rank": 1
+  },
+  "selection_contract": {
+    "comparison_scope": "all_frozen_classical_supervised_graph_and_transfer_candidates",
+    "outer_test_metrics_used_for_selection": false,
+    "primary_metric": "equal_endpoint_mean_equal_scheme_calibration_r2",
+    "random_split_used": false
+  },
+  "status": "label_free_r0_transfer_frozen_as_nonselected_diagnostic",
+  "task": "M0-07 pretrained graph transfer scientific adjudication",
+  "transfer_candidates": [
+    {
+      "candidate_id": "label_free_r0_transfer::r0_pretrained_finetuned_dmpnn::pretrained_dmpnn_3seed_ensemble",
+      "equal_endpoint_calibration_r2": 0.03533446906528672,
+      "equal_endpoint_test_r2": -0.043674114237427,
+      "equal_endpoint_test_rmse": 2.462557787838143,
+      "selection_rank": 12,
+      "variant": "r0_pretrained_finetuned_dmpnn"
+    },
+    {
+      "candidate_id": "label_free_r0_transfer::r0_pretrained_frozen_linear::pretrained_dmpnn_3seed_ensemble",
+      "equal_endpoint_calibration_r2": -0.03347186024858184,
+      "equal_endpoint_test_r2": -0.07877827022406486,
+      "equal_endpoint_test_rmse": 2.5598205090184285,
+      "selection_rank": 14,
+      "variant": "r0_pretrained_frozen_linear"
+    }
+  ]
+}

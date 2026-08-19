@@ -1,0 +1,26 @@
+{
+  "schema_version": "phase1_ugi_synthesis_guidance_failure_audit_config.v1",
+  "task": "Adjudicate why proposal-augmented family-evidence synthesis guidance did not improve matched final route-ready yield",
+  "inputs": {
+    "guidance_result": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/result.json",
+      "sha256": "22260317a502957281418e289ca2940a94aa2668187d9b8a632e68b1aae4fcb9"
+    },
+    "guidance_diagnostics": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/diagnostics.json",
+      "sha256": "65720d99e7d70ca2485323f9bc4d80630741237a12e48500e2de458dbda4ce5d"
+    },
+    "guidance_support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "panel_readiness_result": {
+      "path": "results/phase1/ugi_proposal_augmented_route_readiness_v1/result.json",
+      "sha256": "3b3ec2a7ce1dd5a08e1c8291f391b0ef7e9e3a51af98be2a3349c7efa78b2cb8"
+    },
+    "proposal_readjudication_result": {
+      "path": "results/phase1/graph2edits_semantic_readjudication_v1/result.json",
+      "sha256": "5c05307acb4744e35282d8e7b0dcf7e8115d32eabb5b8ccc740a6af38705a0b0"
+    }
+  }
+}

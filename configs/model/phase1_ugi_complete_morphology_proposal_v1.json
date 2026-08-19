@@ -1,0 +1,72 @@
+{
+  "schema_version": "phase1_ugi_complete_morphology_proposal_config.v1",
+  "status": "frozen_before_complete_support_enumeration",
+  "task": "Enumerate every complete tuple in the qualified role-level Ugi morphology support and transfer the independently confirmed score only as a support-preserving probability proposal",
+  "scope": {
+    "read_only": true,
+    "complete_qualified_role_state_cartesian_support": true,
+    "observed_terminal_outcomes_for_model_development_only": true,
+    "confirmation_result_required": true,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "support": {
+    "definition": "cartesian_product_of_qualified_role_level_program_states",
+    "role_state_counts": [86, 19, 35],
+    "cartesian_programs": 57190,
+    "unobserved_role_level_program_states_added": false,
+    "whole_program_combinations_recombined_exhaustively": true
+  },
+  "inputs": {
+    "analysis_terminal_support": {
+      "path": "results/phase1/ugi_dynamic_controller_analysis_v1/terminal_support.csv.gz",
+      "sha256": "129830af0e7ace9941efa6e30a2f6554e36fe3e7e489cebff9cfd227fc0ed83d"
+    },
+    "census_config": {
+      "path": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+      "sha256": "7500db52feb13f644d9a9585df649ec36b051b1792c9543fb0db5840f1542602"
+    },
+    "confirmation_analysis": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_analysis_v1/result.json",
+      "sha256": "20b4229a18c155bc1433e1df84e5e2b6baf6074cafb4827ed9681571ce852eee"
+    },
+    "controller_analysis": {
+      "path": "results/phase1/ugi_dynamic_controller_analysis_v1/result.json",
+      "sha256": "ad6fad9a79debe09eee1e630c242109dd0aa5f05a8a9c6f9bd732df40ecdae7a"
+    },
+    "frozen_programs": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/programs.json",
+      "sha256": "46537953d40ecb14704b0dde8c461b9e4c48769206a03417a630b5ae4f633860"
+    },
+    "program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "proposal_result": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/result.json",
+      "sha256": "34a87b40d0aa396a1687146443d3067b4ff195e330d52dcb3325a6165786b9e1"
+    },
+    "proposal_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_complete_morphology_proposal.py",
+      "sha256": "e64791cec121f35f79d03f8cffca749cd5481a00bb131b02abc8a1bff47fbe8d"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_complete_morphology_proposal.py",
+      "sha256": "ba2250b9fb2692ddc5599b0d596d321c9900b0e5f31bd53b68fa82876a367096"
+    },
+    "tests": {
+      "path": "tests/test_ugi_complete_morphology_proposal.py",
+      "sha256": "4955d5ecbc18f8ec9a4ae37c1f5899b99acef3b09d8acb33d22306040c6fa6fb"
+    }
+  }
+}

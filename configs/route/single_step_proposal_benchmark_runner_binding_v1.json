@@ -1,0 +1,59 @@
+{
+  "schema_version": "forge.single_step_proposal_benchmark_runner_binding.v1",
+  "status": "bound_runner_preflight_not_executed",
+  "artifacts": {
+    "frozen_manifest_bound_benchmark": {
+      "path": "configs/route/single_step_proposal_lane_qualification_benchmark_v2.json",
+      "sha256": "4bea2147786056bd73d45a40fc2154730d76d0dbbe9ae9ec9206cd5ca1951e7b"
+    },
+    "frozen_policy": {
+      "path": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+      "sha256": "2211c468a6ffec619604a583bce62349baa8385a2e7d41680fd57d2bd48fc84e"
+    },
+    "independent_l2_forward_resolver_config": {
+      "path": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+      "sha256": "3cb6012f4bbd73d198159ffcf1f765f45fc0cf526b2ed93e0a836fc7d01cdf04"
+    },
+    "independent_l2_forward_resolver_source": {
+      "path": "src/forge/route/l2_forward_resolver.py",
+      "sha256": "fdf0e24bd54d02c18aa7157cd915a3ebb5e9bc327923f8d98a18e457edbd3ac9"
+    },
+    "single_step_benchmark_runner_source": {
+      "path": "src/forge/route/single_step_proposal_benchmark.py",
+      "sha256": "2d45035789760e04ff929bd5750928f4535dabd50210cf2820f2d6ab4b3b57f1"
+    },
+    "graph2edits_runtime_lock": {
+      "path": "configs/route/graph2edits_runtime_py311_macos_arm64.lock.txt",
+      "sha256": "ed01fbd93e959fe47b5589221d143a08a34405450a7944d397e6db324ec91f69"
+    },
+    "graph2edits_runtime_qualification": {
+      "path": "configs/route/graph2edits_runtime_qualification_macos_arm64_py311_v1.json",
+      "sha256": "08b25e0a248a17ccb067cf94c7877a944b42cf6fd7b7e2f974fde242ce4a421f"
+    }
+  },
+  "activation": {
+    "benchmark_execution_authorized": false,
+    "graph2edits_backend_active": false,
+    "hybrid_production_lane_active": false,
+    "strict_lane_remains_production_default": true,
+    "candidate_selection_authorized": false
+  },
+  "prerequisite_gates": {
+    "development_target_manifest_frozen": true,
+    "institutional_license_review_complete": false,
+    "isolated_runtime_lock_frozen": false,
+    "ten_repeat_byte_identity_on_production_device": false,
+    "all_gates_passed": false
+  },
+  "scope_guards": {
+    "graph2edits_executed": false,
+    "proposal_lane_executed": false,
+    "target_manifest_loaded_by_preflight": false,
+    "scoring_truth_loaded_by_preflight": false,
+    "route_evidence_created": false,
+    "v_syn_modified": false,
+    "production_planner_modified": false,
+    "sealed_holdout_accessed": false,
+    "candidate_selected": false
+  }
+}

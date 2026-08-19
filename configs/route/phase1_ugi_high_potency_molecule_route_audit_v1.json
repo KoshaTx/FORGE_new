@@ -1,0 +1,34 @@
+{
+  "schema_version": "phase1_ugi_high_potency_molecule_route_audit_config.v1",
+  "task": "Render a deterministic, diversity-selected molecule audit across every route-readiness stratum in the support-enriched conservative-high pool",
+  "inputs": {
+    "terminal_rescoring": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v2/terminal_rescoring.csv.gz",
+      "sha256": "de98658bcf15c744ac8d7f356e15b4859a7de1d5ab551f7933a6d3641bbd0623"
+    },
+    "route_readiness": {
+      "path": "results/phase1/ugi_proposal_augmented_route_readiness_v3_corrected/route_readiness_ledger.jsonl.gz",
+      "sha256": "2da432d9521f27035af75e5f140c31b942bb9278b8f099e3432375cf5d5f5214"
+    }
+  },
+  "policy": {
+    "arm_id": "support_enriched",
+    "require_conservative_high_potency": true,
+    "representatives_per_stratum": 8,
+    "selection": "highest_utility_seed_then_greedy_morgan_distance",
+    "morgan_radius": 2,
+    "morgan_fp_size": 2048,
+    "route_strata": [
+      "exact_complete_current",
+      "family_projected_all_current_leaves",
+      "family_projected_partial_current_leaves",
+      "unresolved_or_unsupported"
+    ]
+  },
+  "nonclaims": [
+    "A rendered structure is not a synthesis route.",
+    "A proposal-only disconnection is not experimental route evidence.",
+    "Unresolved by the current evaluator does not mean unsynthesizable.",
+    "Conservative-high is a computational prioritization label, not prospective potency evidence."
+  ]
+}

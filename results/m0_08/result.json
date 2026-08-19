@@ -1,0 +1,141 @@
+{
+  "claim_boundary": "The package defines prospective evidence contracts. It does not provide biological measurements or authorize AGILE as an in-vivo endpoint oracle.",
+  "config": {
+    "path": "configs/bio/m0_08_endpoint_decision.json",
+    "sha256": "7794412c5b9f35fc708d495ca0a02f20cdeddb11f7115bef561a73f620649049"
+  },
+  "decision": {
+    "agile_oracle_role": "general_in_vitro_transfection_only",
+    "current_lowest_risk_option": "im_functional_editing",
+    "default_in_code": null,
+    "disallowed_inference": "AGILE HeLa or RAW labels do not establish liver editing or vaccine immunogenicity",
+    "endpoint_locked": false,
+    "human_lock_required_before_phase": 4,
+    "required_human_locks": [
+      "endpoint or antigen",
+      "bridge assay",
+      "laboratory capacity",
+      "benchmark",
+      "formulation",
+      "advancement rule"
+    ]
+  },
+  "endpoint_specifications": {
+    "im_functional_editing": {
+      "administration_route": "intramuscular",
+      "disallowed_inferences": [
+        "The reported HeLa-to-IM correlation is not a universal transfer guarantee.",
+        "Reporter expression alone establishes delivery, not genome editing.",
+        "Cre reporter conversion does not establish endogenous or disease correction.",
+        "Predicted particle properties cannot replace prospective formulation measurement."
+      ],
+      "display_name": "Intramuscular reporter delivery and functional editing",
+      "required_readouts": [
+        "muscle_relevant_expression",
+        "formulation_quality",
+        "intramuscular_reporter_delivery",
+        "functional_muscle_editing",
+        "benchmark_comparison",
+        "basic_tolerability"
+      ],
+      "success_definition": [
+        "At least two structurally distinct FORGE lipids deliver reporter mRNA in vivo.",
+        "At least one lead demonstrates functional editing in muscle.",
+        "Benchmark comparison, distribution, and basic tolerability support the claim."
+      ]
+    },
+    "im_vaccination": {
+      "administration_route": "intramuscular",
+      "disallowed_inferences": [
+        "HeLa or RAW 264.7 potency alone does not establish vaccine immunogenicity.",
+        "Innate activation alone is not antigen-specific vaccine efficacy.",
+        "IM reporter expression alone establishes delivery, not vaccination.",
+        "Predicted particle properties cannot replace prospective formulation measurement."
+      ],
+      "display_name": "Intramuscular mRNA vaccination",
+      "required_readouts": [
+        "endpoint_relevant_expression",
+        "formulation_quality",
+        "intramuscular_expression_and_localization",
+        "antigen_specific_response",
+        "basic_tolerability"
+      ],
+      "success_definition": [
+        "At least two structurally distinct FORGE lipids support functional IM expression.",
+        "At least one predeclared antigen-specific response meets the benchmark.",
+        "Basic tolerability remains acceptable under predeclared advancement rules.",
+        "A second immune arm, durability, and functional efficacy strengthen the claim."
+      ]
+    },
+    "liver_functional_editing": {
+      "administration_route": "intravenous",
+      "disallowed_inferences": [
+        "HeLa or RAW 264.7 potency alone does not establish liver editing.",
+        "Predicted apparent pKa or particle properties cannot replace prospective measurement.",
+        "Reporter expression alone establishes delivery, not sequence-verified editing.",
+        "Reporter-locus editing does not establish disease correction."
+      ],
+      "display_name": "Intravenous functional liver editing",
+      "required_readouts": [
+        "hepatocyte_expression_or_editing",
+        "formulation_quality",
+        "sequence_verified_liver_editing",
+        "reporter_delivery_and_biodistribution",
+        "benchmark_comparison",
+        "basic_tolerability"
+      ],
+      "success_definition": [
+        "At least two structurally distinct FORGE lipids deliver the reporter in vivo.",
+        "At least one lead achieves sequence-verified editing.",
+        "Benchmark comparison, biodistribution, and basic tolerability support the claim."
+      ]
+    }
+  },
+  "generated_utc": "2026-07-30T23:30:00Z",
+  "inputs": {
+    "agile_reconciliation": {
+      "bytes": 3788,
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "decision_package": {
+      "bytes": 10879,
+      "path": "docs/M0_08_ENDPOINT_DECISION.md",
+      "sha256": "5d75cc6269314f4c017f3ec408328af313dc28ab5f71f9b02531e046aba84d56"
+    },
+    "endpoint_interface": {
+      "bytes": 5202,
+      "path": "src/forge/bio/endpoint.py",
+      "sha256": "1e0ec26682e8dbf3e8c8b1d11d39e8f48cbdcb18f49c89212ec1e24fa592047f"
+    },
+    "endpoint_tests": {
+      "bytes": 2565,
+      "path": "tests/test_m0_08_endpoints.py",
+      "sha256": "af756a5c6db812d4de5b8f078f317926d0106fe29fb71e0536bd13b0e390b47a"
+    },
+    "liver_endpoint": {
+      "bytes": 4531,
+      "path": "src/forge/bio/liver.py",
+      "sha256": "dffeb0ee0f4b0eb7f2dd4e2e4f3976c1ab0ba0967bd1301c42d975044d12090e"
+    },
+    "muscle_endpoint": {
+      "bytes": 4271,
+      "path": "src/forge/bio/muscle.py",
+      "sha256": "c01ab917dd0d0bcf351925d3181dec8e0770a943323c730a9109a6c47813ece6"
+    },
+    "training_corpus_manifest": {
+      "bytes": 4229,
+      "path": "data/vendor/training_corpus_manifest_v1.json",
+      "sha256": "03eafbbeac5d63b95df4cc488f884fef1c8e9eae0a7d13a1ba9a3df1005c4a39"
+    },
+    "vaccine_endpoint": {
+      "bytes": 4982,
+      "path": "src/forge/bio/vaccine.py",
+      "sha256": "bb37d374394522cda7f737e5e1781d2e312d501f0c746e861c1214be47dd00f2"
+    }
+  },
+  "randomness_used": false,
+  "schema_version": "m0_08_endpoint_decision.v1",
+  "status": "decision_package_complete_endpoint_unlocked",
+  "task": "M0-08"
+}

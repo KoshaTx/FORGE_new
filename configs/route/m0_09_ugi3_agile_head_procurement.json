@@ -1,0 +1,486 @@
+{
+  "schema_version": "m0_09_ugi3_agile_head_procurement.v1",
+  "task": "Time-stamped US procurement snapshot for the 20 AGILE amine heads",
+  "snapshot": {
+    "accessed_utc": "2026-07-29T18:23:53Z",
+    "region": "US",
+    "expiry_days": 30,
+    "identity_policy": "A record must match the exact campaign head by canonical constitutional identity and the neutral free-base form. Name-only, salt-only, and close-analogue matches do not qualify.",
+    "closure_policy": "Current item-level procurement closes only when a region-specific primary vendor page supplies an exact item identifier, purity, and an explicit current stock or shipping observation. A catalog page that says to check the cart does not close procurement.",
+    "price_policy": "Prices are intentionally excluded because they are volatile and are not evidence of chemical identity or availability.",
+    "backup_policy": "A verified primary item closes this M0 procurement axis. Backup supplier or upstream-route review remains a separate operational-risk field."
+  },
+  "expected_counts": {
+    "records": 20,
+    "current_item_level_vendor_verified": 19,
+    "catalog_item_verified_availability_unresolved": 1,
+    "identity_or_form_discrepancies": 0
+  },
+  "records": [
+    {
+      "component_label": "A1",
+      "block_id": "amine:0015",
+      "canonical_smiles": "CN(C)CCN",
+      "identity": {
+        "pubchem_cid": 66053,
+        "pubchem_title": "N,N-Dimethylethylenediamine",
+        "inchi_key": "DILRJUIACXKSQE-UHFFFAOYSA-N",
+        "cas_rn": "108-00-9",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N,N-Dimethylethylenediamine",
+        "product_code": "D0719",
+        "url": "https://www.tcichemicals.com/US/en/p/D0719",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "25 mL showed 2 units in Philadelphia and 2 in Portland; larger packs also showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A2",
+      "block_id": "amine:0084",
+      "canonical_smiles": "NCCCN1CCCC1",
+      "identity": {
+        "pubchem_cid": 31670,
+        "pubchem_title": "1-Pyrrolidinepropanamine",
+        "inchi_key": "VPBWZBGZWHDNKL-UHFFFAOYSA-N",
+        "cas_rn": "23159-07-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-(3-Aminopropyl)pyrrolidine",
+        "product_code": "A2270",
+        "url": "https://www.tcichemicals.com/US/en/p/A2270",
+        "purity": ">98.0%(T)",
+        "availability_observation": "The 5 g and 25 g items both showed same-day US shipping and local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A3",
+      "block_id": "amine:0077",
+      "canonical_smiles": "CCN(CC)CCCN",
+      "identity": {
+        "pubchem_cid": 61011,
+        "pubchem_title": "N,N-Diethyl-1,3-propanediamine",
+        "inchi_key": "QOHMWDJIBGVPIF-UHFFFAOYSA-N",
+        "cas_rn": "104-78-9",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N,N-Diethyl-1,3-diaminopropane",
+        "product_code": "D0473",
+        "url": "https://www.tcichemicals.com/US/en/p/D0473",
+        "purity": ">99.0%(GC)(T)",
+        "availability_observation": "The 25 mL item showed one unit in each US warehouse; the 500 mL item showed 16 in Philadelphia and 18 in Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed",
+      "qa_note": "Do not substitute N,N'-diethyl-1,3-propanediamine, CAS 10061-68-4; it is a different constitutional isomer."
+    },
+    {
+      "component_label": "A4",
+      "block_id": "amine:0078",
+      "canonical_smiles": "CCN(CC)CCN",
+      "identity": {
+        "pubchem_cid": 60993,
+        "pubchem_title": "N,N-Diethylethylenediamine",
+        "inchi_key": "UDGSVBYJWHOHNN-UHFFFAOYSA-N",
+        "cas_rn": "100-36-7",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "N,N-Diethylethylenediamine",
+        "product_code": "112720",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/112720",
+        "purity": ">=99%",
+        "availability_observation": "The 5 g and 100 g SKUs were both marked available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A5",
+      "block_id": "amine:0021",
+      "canonical_smiles": "NCCN(CCN)CCN",
+      "identity": {
+        "pubchem_cid": 77731,
+        "pubchem_title": "Tris(2-aminoethyl)amine",
+        "inchi_key": "MBYLVOKEDDQJDY-UHFFFAOYSA-N",
+        "cas_rn": "4097-89-6",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "Tris(2-aminoethyl)amine",
+        "product_code": "T1243",
+        "url": "https://www.tcichemicals.com/US/en/p/T1243",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 5 mL item showed 15 units in Philadelphia and 2 in Portland; the 25 mL item also showed same-day US shipping."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed",
+      "qa_note": "Procurement closure does not resolve the separate raw registry multiplicity-policy conflict for this measured AGILE head."
+    },
+    {
+      "component_label": "A6",
+      "block_id": "amine:0080",
+      "canonical_smiles": "CN(C)CCCN",
+      "identity": {
+        "pubchem_cid": 7993,
+        "pubchem_title": "N,N-Dimethyl-1,3-propanediamine",
+        "inchi_key": "IUNMPGNGSSIWFP-UHFFFAOYSA-N",
+        "cas_rn": "109-55-7",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N,N-Dimethyl-1,3-propanediamine",
+        "product_code": "D0790",
+        "url": "https://www.tcichemicals.com/US/en/p/D0790",
+        "purity": ">99.0%(GC)(T)",
+        "availability_observation": "The 25 mL item showed 7 units in Philadelphia and 2 in Portland; the 500 mL item also showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A7",
+      "block_id": "amine:0040",
+      "canonical_smiles": "NCCCN1CCOCC1",
+      "identity": {
+        "pubchem_cid": 61055,
+        "pubchem_title": "N-(3-Aminopropyl)morpholine",
+        "inchi_key": "UIKUBYKUYUSRSM-UHFFFAOYSA-N",
+        "cas_rn": "123-00-2",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N-(3-Aminopropyl)morpholine",
+        "product_code": "A0409",
+        "url": "https://www.tcichemicals.com/US/en/p/A0409",
+        "purity": ">99.0%(GC)",
+        "availability_observation": "The 25 mL item showed same-day shipping from Portland; both pack sizes showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A8",
+      "block_id": "amine:0076",
+      "canonical_smiles": "CCCCN(CCCC)CCCN",
+      "identity": {
+        "pubchem_cid": 1626,
+        "pubchem_title": "3-(Dibutylamino)propylamine",
+        "inchi_key": "KYCGURZGBKFEQB-UHFFFAOYSA-N",
+        "cas_rn": "102-83-0",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "3-(Dibutylamino)propylamine",
+        "product_code": "D1078",
+        "url": "https://www.tcichemicals.com/US/en/p/D1078",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 500 mL item showed 4 units in Philadelphia and 1 in Portland; the 25 mL item showed a four-week lead time."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A9",
+      "block_id": "amine:0083",
+      "canonical_smiles": "Cc1cc(N)n(C)n1",
+      "identity": {
+        "pubchem_cid": 520721,
+        "pubchem_title": "1,3-Dimethyl-1H-pyrazol-5-amine",
+        "inchi_key": "ZFDGMMZLXSFNFU-UHFFFAOYSA-N",
+        "cas_rn": "3524-32-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "5-Amino-1,3-dimethylpyrazole",
+        "product_code": "532223",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/532223",
+        "purity": "97%",
+        "availability_observation": "The exact 10 g item was listed, but the page required checking the cart for availability."
+      },
+      "procurement_status": "catalog_item_verified_availability_unresolved",
+      "current_item_level_procurement_closed": false,
+      "backup_status": "not_reviewed",
+      "required_followup": "Obtain a dated stock or lead-time confirmation, verify an exact backup supplier, or close an upstream preparation."
+    },
+    {
+      "component_label": "A10",
+      "block_id": "amine:0059",
+      "canonical_smiles": "NCCN1CCCC1",
+      "identity": {
+        "pubchem_cid": 1344,
+        "pubchem_title": "1-Pyrrolidineethanamine",
+        "inchi_key": "WRXNJTBODVGDRY-UHFFFAOYSA-N",
+        "cas_rn": "7154-73-6",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-(2-Aminoethyl)pyrrolidine",
+        "product_code": "A0884",
+        "url": "https://www.tcichemicals.com/US/en/p/A0884",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 5 g and 25 g items showed local stock and same-day US shipping."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A11",
+      "block_id": "amine:0086",
+      "canonical_smiles": "NN1CCOCC1",
+      "identity": {
+        "pubchem_cid": 20315,
+        "pubchem_title": "N-Aminomorpholine",
+        "inchi_key": "MKQLBNJQQZRQJU-UHFFFAOYSA-N",
+        "cas_rn": "4319-49-7",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "MilliporeSigma",
+        "product_title": "4-Aminomorpholine",
+        "product_code": "A66308",
+        "url": "https://www.sigmaaldrich.com/US/en/product/aldrich/a66308",
+        "purity": "97%",
+        "availability_observation": "The 10 g SKU was marked available to ship today from Milwaukee."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A12",
+      "block_id": "amine:0082",
+      "canonical_smiles": "CN1CCC(N)CC1",
+      "identity": {
+        "pubchem_cid": 2737531,
+        "pubchem_title": "4-Amino-1-methylpiperidine",
+        "inchi_key": "ALOCUZOKRULSAA-UHFFFAOYSA-N",
+        "cas_rn": "41838-46-4",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "4-Amino-1-methylpiperidine",
+        "product_code": "A2046",
+        "url": "https://www.tcichemicals.com/US/en/p/A2046",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 5 g item showed stock in both US warehouses; the 25 g item showed same-day US shipping."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A13",
+      "block_id": "amine:0085",
+      "canonical_smiles": "NN1CCCCC1",
+      "identity": {
+        "pubchem_cid": 16658,
+        "pubchem_title": "1-Aminopiperidine",
+        "inchi_key": "LWMPFIOTEAXAGV-UHFFFAOYSA-N",
+        "cas_rn": "2213-43-6",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-Aminopiperidine",
+        "product_code": "A2241",
+        "url": "https://www.tcichemicals.com/US/en/p/A2241",
+        "purity": ">95.0%(GC)(T)",
+        "availability_observation": "The 5 g item showed one unit in each US warehouse; the 25 g item also showed same-day US shipping."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A14",
+      "block_id": "amine:0087",
+      "canonical_smiles": "Nc1cn[nH]c1",
+      "identity": {
+        "pubchem_cid": 78035,
+        "pubchem_title": "1H-pyrazol-4-amine",
+        "inchi_key": "AXINVSXSGNSVLV-UHFFFAOYSA-N",
+        "cas_rn": "28466-26-4",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1H-Pyrazol-4-amine",
+        "product_code": "P2523",
+        "url": "https://www.tcichemicals.com/US/en/p/P2523",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 1 g item showed 4 units in Philadelphia and 1 in Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A15",
+      "block_id": "amine:0031",
+      "canonical_smiles": "NCCN1CCCCC1",
+      "identity": {
+        "pubchem_cid": 33944,
+        "pubchem_title": "N-(2-Aminoethyl)piperidine",
+        "inchi_key": "CJNRGSHEMCMUOE-UHFFFAOYSA-N",
+        "cas_rn": "27578-60-5",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "1-(2-Aminoethyl)piperidine",
+        "product_code": "A1026",
+        "url": "https://www.tcichemicals.com/US/en/p/A1026",
+        "purity": ">97.0%(GC)(T)",
+        "availability_observation": "The 5 mL and 25 mL items both showed stock in Philadelphia and Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A16",
+      "block_id": "amine:0075",
+      "canonical_smiles": "CC(C)N(CCN)C(C)C",
+      "identity": {
+        "pubchem_cid": 8459,
+        "pubchem_title": "N,N-Diisopropylethylenediamine",
+        "inchi_key": "CURJNMSGPBXOGK-UHFFFAOYSA-N",
+        "cas_rn": "121-05-1",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N,N-Diisopropylethylenediamine",
+        "product_code": "D0006",
+        "url": "https://www.tcichemicals.com/US/en/p/D0006",
+        "purity": ">97.0%(GC)(T)",
+        "availability_observation": "The 25 mL item showed local stock and same-day US shipping; the 500 mL item showed stock in both US warehouses."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed",
+      "qa_note": "Do not substitute N,N'-diisopropylethylenediamine, CAS 4013-94-9; it is a different constitutional isomer."
+    },
+    {
+      "component_label": "A17",
+      "block_id": "amine:0081",
+      "canonical_smiles": "CN(CCCN)CCCN",
+      "identity": {
+        "pubchem_cid": 7777,
+        "pubchem_title": "N,N-bis(3-aminopropyl)methylamine",
+        "inchi_key": "KMBPCQSCMCEPMU-UHFFFAOYSA-N",
+        "cas_rn": "105-83-9",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "3,3'-Diamino-N-methyldipropylamine",
+        "product_code": "B0821",
+        "url": "https://www.tcichemicals.com/US/en/p/B0821",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 25 mL item showed 5 units in Philadelphia and 2 in Portland; the 500 mL item also showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A18",
+      "block_id": "amine:0079",
+      "canonical_smiles": "CCN1CCCC1CN",
+      "identity": {
+        "pubchem_cid": 117295,
+        "pubchem_title": "2-Aminomethyl-1-ethylpyrrolidine",
+        "inchi_key": "UNRBEYYLYRXYCG-UHFFFAOYSA-N",
+        "cas_rn": "26116-12-1",
+        "form": "neutral_free_base_unspecified_stereochemistry"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "2-(Aminomethyl)-1-ethylpyrrolidine",
+        "product_code": "A2556",
+        "url": "https://www.tcichemicals.com/US/en/p/A2556",
+        "purity": ">98.0%(GC)(T)",
+        "availability_observation": "The 25 g item showed one unit in Philadelphia and same-day US shipping."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed",
+      "qa_note": "The campaign and vendor identities both leave stereochemistry unspecified; an enantiopure listing is not substituted."
+    },
+    {
+      "component_label": "A19",
+      "block_id": "amine:0029",
+      "canonical_smiles": "NCCN1CCNCC1",
+      "identity": {
+        "pubchem_cid": 8795,
+        "pubchem_title": "Aminoethylpiperazine",
+        "inchi_key": "IMUDHTPIFIBORV-UHFFFAOYSA-N",
+        "cas_rn": "140-31-8",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "N-(2-Aminoethyl)piperazine",
+        "product_code": "A0304",
+        "url": "https://www.tcichemicals.com/US/en/p/A0304",
+        "purity": ">99.0%(GC)(T)",
+        "availability_observation": "The 25 mL item showed local stock and same-day US shipping; the 500 mL item also showed local stock."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    },
+    {
+      "component_label": "A20",
+      "block_id": "amine:0027",
+      "canonical_smiles": "NC1CCNCC1",
+      "identity": {
+        "pubchem_cid": 424361,
+        "pubchem_title": "4-Piperidinamine",
+        "inchi_key": "BCIIMDOZSUCSEN-UHFFFAOYSA-N",
+        "cas_rn": "13035-19-3",
+        "form": "neutral_free_base"
+      },
+      "vendor_evidence": {
+        "vendor": "TCI America",
+        "product_title": "4-Aminopiperidine",
+        "product_code": "A1591",
+        "url": "https://www.tcichemicals.com/US/en/p/A1591",
+        "purity": ">96.0%(GC)(T)",
+        "availability_observation": "The 5 mL and 25 mL items both showed stock in Philadelphia and Portland."
+      },
+      "procurement_status": "current_item_level_vendor_verified",
+      "current_item_level_procurement_closed": true,
+      "backup_status": "not_reviewed"
+    }
+  ]
+}

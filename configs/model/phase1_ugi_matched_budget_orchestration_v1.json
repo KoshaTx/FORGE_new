@@ -1,0 +1,97 @@
+{
+  "schema_version": "phase1_ugi_matched_budget_orchestration_config.v1",
+  "scope": "synthetic_nonselecting_matched_budget_orchestration_only",
+  "seed": 20260803,
+  "zero_guidance": true,
+  "cache_snapshot_sha256": "f68d8bac3de6812188c4fd2d3dbd9f2bf3011252a0189ce8c4816415b3b7a12b",
+  "generator_checkpoint_sha256": "703a95fe06bb8d4d2f2755d21a5def895e1b53bf83342382c6a2685b1e74a729",
+  "closure_checkpoint_sha256": "59401159ed03549032208d6dc9916d295de84ac633fc3f265599c8285b3e6f04",
+  "schedule": [
+    {
+      "unit_id": "diagnostic-unit-0",
+      "morphology_program_utf8": "fake-morphology-program-0",
+      "program_index": 0,
+      "particle_index": 10,
+      "checkpoint_index": 2,
+      "rollout_index": 0,
+      "productive_generation_calls": 1,
+      "route_reservation": {
+        "logical_planner_calls": 1,
+        "physical_planner_calls": 1,
+        "logical_verifier_calls": 1,
+        "physical_verifier_calls": 1
+      }
+    },
+    {
+      "unit_id": "diagnostic-unit-1",
+      "morphology_program_utf8": "fake-morphology-program-1",
+      "program_index": 1,
+      "particle_index": 11,
+      "checkpoint_index": 2,
+      "rollout_index": 0,
+      "productive_generation_calls": 1,
+      "route_reservation": {
+        "logical_planner_calls": 1,
+        "physical_planner_calls": 1,
+        "logical_verifier_calls": 1,
+        "physical_verifier_calls": 1
+      }
+    },
+    {
+      "unit_id": "diagnostic-unit-2",
+      "morphology_program_utf8": "fake-morphology-program-2",
+      "program_index": 2,
+      "particle_index": 12,
+      "checkpoint_index": 2,
+      "rollout_index": 0,
+      "productive_generation_calls": 1,
+      "route_reservation": {
+        "logical_planner_calls": 1,
+        "physical_planner_calls": 1,
+        "logical_verifier_calls": 1,
+        "physical_verifier_calls": 1
+      }
+    }
+  ],
+  "budget_limits": {
+    "productive_generation_calls": 2,
+    "terminal_completions": 2,
+    "final_candidates": 2,
+    "route": {
+      "logical_planner_calls": 2,
+      "physical_planner_calls": 2,
+      "logical_verifier_calls": 2,
+      "physical_verifier_calls": 2
+    }
+  },
+  "expected_shared_censored_unit_ids": [
+    "diagnostic-unit-2"
+  ],
+  "inputs": {
+    "audit_script": {
+      "path": "scripts/phase1_audit_ugi_matched_budget_orchestration.py",
+      "sha256": "66e4dc1b3105304bf75ff21049c181c5bc4e08fee1ca59fd8841cd15340673c6"
+    },
+    "contract_source": {
+      "path": "src/forge/product/ugi_matched_budget_orchestration.py",
+      "sha256": "0643853cc15f92faf88c0c731db8e5691fbc899123386d2f4fd7e49806608cf5"
+    },
+    "contract_tests": {
+      "path": "tests/test_ugi_matched_budget_orchestration.py",
+      "sha256": "f024401088a7fab01145a9086d4959dc07a1ee562edb57570ea06b139341199f"
+    },
+    "fixed_budget_rollout_result": {
+      "path": "results/phase1/ugi_fixed_budget_rollout_plumbing_v1/result.json",
+      "sha256": "5aa1684915f0ee7a2520f6ea559c69a321a6d2ed6286214d8b20e2380d115bfe"
+    },
+    "restartable_sampler_result": {
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v1/result.json",
+      "sha256": "dee2de2804e8d01039769376213e5270ad59175444f9cf1bff9c5f82e7630052"
+    }
+  },
+  "output_dir": "results/phase1/ugi_matched_budget_orchestration_v1",
+  "production_synthesis_guidance": false,
+  "biological_guidance": false,
+  "candidate_selection": false,
+  "sealed_holdout_access": false
+}

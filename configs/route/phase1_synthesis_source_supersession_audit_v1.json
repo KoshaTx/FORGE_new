@@ -1,0 +1,99 @@
+{
+  "schema_version": "phase1_synthesis_source_supersession_config.v1",
+  "task": "Development-only replay qualification for the synthesis-value source supersession.",
+  "development_only": true,
+  "sealed_holdout_access_authorized": false,
+  "source_supersession": {
+    "path": "src/forge/value/synthesis.py",
+    "historical_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c",
+    "candidate_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+  },
+  "audit_inputs": {
+    "audit_source": {
+      "path": "src/forge/value/synthesis_source_supersession.py",
+      "sha256": "862147d1d34dab873838b93ca96503a8da3ecb1c6178fe614b5f336ac5a7f34b"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_synthesis_source_supersession.py",
+      "sha256": "4f7c86d6bb3380f204790172e3b85c20aeaeaa5fd873ae7029f1eda125576d91"
+    },
+    "audit_tests": {
+      "path": "tests/test_synthesis_source_supersession.py",
+      "sha256": "8b07549884f2643e5fc61ffabead44b762d10e862cd6d97c009e1859824a36fc"
+    }
+  },
+  "replays": {
+    "synthesis_value_v1": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_synthesis_value_audit_v1.json",
+        "sha256": "f99a73ef7a5bdb8f2e5a0312eb467cf4712e0c58e95efc0909dc0db7092df806"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+        "sha256": "a1137d14b876a3dc53167e28dbfb55b1fb54acd845d3cdffe37d25e6aa7d7f27"
+      },
+      "component_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v1/component_synthesis_values.json.gz",
+        "sha256": "7e16da6ed54609137917b4fb4c936db211662ec5c2ec92bff464624f4d95e297"
+      },
+      "product_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v1/product_synthesis_values.json.gz",
+        "sha256": "324aca317d1a1a6262f05202d42d0c4e8b4f853779e5be3926e5f0bf60624cc5"
+      }
+    },
+    "synthesis_value_v2": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_synthesis_value_audit_v2.json",
+        "sha256": "73a4ceed0cfa45138696ab0789ff44b969ef50c52148e4f6c382014386b064f3"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v2/result.json",
+        "sha256": "d498aeec5588f3b3791e67f3122c522f1e47a89418865e3a175c3d6498de111d"
+      },
+      "component_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v2/component_synthesis_values.json.gz",
+        "sha256": "95e691068a67156551427dfebd1a82368ac7e55dbcdcd7cec98c9e468e01b846"
+      },
+      "product_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v2/product_synthesis_values.json.gz",
+        "sha256": "ace4bd653c4c8bcac5d88692d989cc1ce4eac744b9fea3975fb13905239cba1b"
+      }
+    },
+    "synthesis_value_v3": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_synthesis_value_audit_v3.json",
+        "sha256": "ddac5a9d658d3aac6412baf64c202bb31527104b48887dd4680e3e8ea88fcf6f"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v3/result.json",
+        "sha256": "75dceb84bef3f77694fcb3262b89d18ceb975e3d506df26bafda5b2803a5fcec"
+      },
+      "component_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v3/component_synthesis_values.json.gz",
+        "sha256": "1e1b652b99d4560ede34a2ab95dd440eff6d02301955d3df1463441898957699"
+      },
+      "product_ledger": {
+        "path": "results/phase1/ugi3_synthesis_value_audit_v3/product_synthesis_values.json.gz",
+        "sha256": "cedd42814b82f6e176b52bf9f8588ca9da728b57be5dd38f5fb8230cad18d2fe"
+      }
+    },
+    "fresh_pool_route_coverage_v5": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+        "sha256": "38fb52131bcb4c79f122a19a7997da3fe4c8d7e6f6fa229add4b3fbc5c9e35c3"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+        "sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+      },
+      "component_ledger": {
+        "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz",
+        "sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+      },
+      "product_ledger": {
+        "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/product_synthesis_values.json.gz",
+        "sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+      }
+    }
+  }
+}

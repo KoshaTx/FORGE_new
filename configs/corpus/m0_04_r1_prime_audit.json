@@ -1,0 +1,52 @@
+{
+  "schema_version": "m0_04_r1_prime_audit_config.v2",
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "seed": 20260728,
+  "randomness_used": false,
+  "expected_reaction_count": 12,
+  "expected_r0_rows": 15433,
+  "expected_non_agile_r0_rows": 14233,
+  "expected_control_non_agile_recovered": 108,
+  "expected_inputs": {
+    "r0_observed_real_structures.csv": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d",
+    "r1_reaction_enumerated_support_v1.csv": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a",
+    "qualified_reaction_families_v1.json": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587",
+    "qualified_reactions_v1.json": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+    "r0_fold_assignments.csv": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c",
+    "m0_03_manifest.json": "d969f71c02b2429ae73b4131affc80682988a8e405baca466168081f8208be7b",
+    "ugi3_assembly_qualification.json": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+  },
+  "policy_evidence_inputs": {
+    "ugi3_assembly_qualification.json": "results/m0_09/ugi3_assembly_qualification.json"
+  },
+  "role_policy_overrides": [
+    {
+      "reaction_id": "ugi_3cr_agile",
+      "role": "amine_head",
+      "site_multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+      "evidence_asset": "ugi3_assembly_qualification.json",
+      "evidence_schema_version": "m0_09_ugi3_assembly_qualification.v1"
+    }
+  ],
+  "schemes": [
+    "source_study",
+    "headgroup",
+    "linker_scaffold",
+    "component_family"
+  ],
+  "decomposition": {
+    "max_reverse_outcomes_per_structure_reaction": 10000,
+    "max_forward_outcomes_per_reconstruction": 1000
+  },
+  "enumeration": {
+    "max_reactant_combinations_per_scheme": 50000000,
+    "sqlite_commit_interval": 10000
+  },
+  "fingerprint": {
+    "kind": "ECFP4",
+    "radius": 2,
+    "bits": 2048,
+    "include_chirality": true,
+    "reference_batch_size": 20000
+  }
+}

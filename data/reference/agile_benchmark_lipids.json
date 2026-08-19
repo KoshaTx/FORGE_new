@@ -1,0 +1,51 @@
+{
+  "note": "Reference lipids recovered from AGILE Supplementary Information (Xu et al., Nat Commun 15:6305, 2024, MOESM1). Structures derived from the stated IUPAC names and named Ugi components, then verified against the reported ESI-MS formula and M+H. Not present in our training corpus under these names.",
+  "source": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-024-50619-z/MediaObjects/41467_2024_50619_MOESM1_ESM.pdf",
+  "lipids": {
+    "H9": {
+      "iupac": "(Z)-5-(octadec-9-en-1-ylamino)-5-oxo-4-(piperidin-1-ylamino)pentyl octanoate",
+      "product_smiles": "CCCCCCCC/C=C\\CCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCC)NN1CCCCC1",
+      "product_smiles_constitutional": "CCCCCCCCC=CCCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCC)NN1CCCCC1",
+      "components": {
+        "amine_head": "NN1CCCCC1",
+        "oxoester_aldehyde_body_tail": "CCCCCCCC(=O)OCCCC=O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCC/C=C\\CCCCCCCC"
+      },
+      "component_names": {
+        "amine_head": "piperidin-1-amine",
+        "oxoester_aldehyde_body_tail": "4-oxobutyl octanoate",
+        "isocyanide_tail": "(Z)-1-isocyanooctadec-9-ene"
+      },
+      "reported_ms": {"formula_M_plus_H": "C36H69N3O3", "calculated": 592.53, "observed": 592.53},
+      "verified_formula": "C36H69N3O3",
+      "verified_exact_mass_M_plus_H": 592.54,
+      "reported_isolated_yield_percent": 23.69,
+      "post_doe_formulation_molar": "50:10:38.5:1.5 H9:DOPE:cholesterol:DMG-PEG2000",
+      "reported_performance": "7.8-fold greater intramuscular expression than MC3; comparable to ALC-0315; substantially lower liver and spleen expression than both; lower ALT/AST than ALC-0315",
+      "selection_provenance": "top-ranked of 15 AGILE HeLa candidates drawn from a ~12,000-member candidate library filtered from a ~60,000-member virtual library"
+    },
+    "R6": {
+      "iupac": "2-((3-(diethylamino)propyl)amino)-N-undecylheptadecanamide",
+      "components": {
+        "amine_head": "CCN(CC)CCCN",
+        "aldehyde": "CCCCCCCCCCCCCCCC=O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCCCCC"
+      },
+      "component_names": {
+        "amine_head": "N,N-diethylpropane-1,3-diamine",
+        "aldehyde": "palmitaldehyde",
+        "isocyanide_tail": "1-isocyanoundecane"
+      },
+      "reported_ms": {"formula_M_plus_H": "C35H73N3O", "calculated": 552.58, "observed": 552.73},
+      "note": "macrophage-optimized; not the IM benchmark"
+    }
+  },
+  "agile_candidate_library_scope": {
+    "head_groups": 22,
+    "tail1_types": 9,
+    "tail2_types": 2,
+    "approximate_size": 12000,
+    "note": "This is the space H9 was selected from, and is the correct comparison for our generated component space."
+  },
+  "agile_self_description": "AGILE state in their Discussion: 'the current deep learning model in AGILE is not generative in nature as it does not create ionizable lipid structures', and name integration of generative models as future work."
+}

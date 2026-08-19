@@ -1,0 +1,43 @@
+{
+  "schema_version": "phase1_ugi3_dossier_coverage_config.v1",
+  "task": "Conservative composition of Ugi L1, upstream route evidence and terminal procurement closure",
+  "generated_utc": "2026-08-01T22:58:26Z",
+  "inputs": {
+    "component_program_ledger": {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "expected_sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "product_ledger": {
+      "asset": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "expected_sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "terminal_procurement": {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "expected_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    }
+  },
+  "policy": {
+    "accepted_terminal_status": "accepted_terminal",
+    "exact_source_leaf_closed_status": "exact_source_leaf_closed",
+    "family_projected_leaf_closed_status": "family_projected_leaf_closed",
+    "complete_forward_verified_dossier_requires_step_forward_verification": true,
+    "family_projection_is_exact_route_evidence": false,
+    "l1_exact_graph_reconstruction_is_experimental_success": false
+  },
+  "expected_counts": {
+    "components": 93,
+    "components_by_status": {
+      "accepted_terminal": 17,
+      "exact_source_leaf_closed": 23,
+      "family_projected_leaf_closed": 47,
+      "incomplete": 6
+    },
+    "products": 12276,
+    "products_by_upstream_tier": {
+      "exact_source_upstream_closed": 1734,
+      "family_supported_upstream_closed": 6698,
+      "incomplete": 3844
+    },
+    "complete_forward_verified_dossiers": 0
+  }
+}

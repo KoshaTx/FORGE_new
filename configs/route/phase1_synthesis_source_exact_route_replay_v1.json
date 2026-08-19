@@ -1,0 +1,66 @@
+{
+  "schema_version": "phase1_synthesis_source_exact_route_replay_config.v1",
+  "development_only": true,
+  "sealed_holdout_access_authorized": false,
+  "source_supersession": {
+    "path": "src/forge/value/synthesis.py",
+    "historical_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c",
+    "candidate_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+  },
+  "supersession_audit": {
+    "path": "results/phase1/synthesis_source_supersession_audit_v1/result.json",
+    "sha256": "a07c01b247f1c47e8596112bec99a8c6035cb03eae9e39072b58d443a7cde7bd"
+  },
+  "audit_inputs": {
+    "source": {
+      "path": "src/forge/value/synthesis_source_exact_route_replay.py",
+      "sha256": "5fd54d2dcee899f57880c6568d6c1be8c83591bfce368fcf6610de1075d9a11b"
+    },
+    "runner": {
+      "path": "scripts/phase1_replay_synthesis_source_exact_routes.py",
+      "sha256": "d6299aa1791669878cb1d9e29338f0863f07cbbc0868ffd36c380f2e117efe1e"
+    },
+    "tests": {
+      "path": "tests/test_synthesis_source_exact_route_replay.py",
+      "sha256": "2dd7343096104bfd39d63a7520f26555fde9f91ece263d5dd56f3bdf6a45c0f1"
+    }
+  },
+  "replays": {
+    "exact_c18": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+        "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_exact_c18_route_v1/result.json",
+        "sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+      },
+      "step_ledger": {
+        "path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+        "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b"
+      },
+      "assessment": {
+        "path": "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz",
+        "sha256": "d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b"
+      }
+    },
+    "exact_c16": {
+      "config": {
+        "path": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+        "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"
+      },
+      "result": {
+        "path": "results/phase1/ugi3_exact_c16_route_v1/result.json",
+        "sha256": "99ab8ff669df0e4eb97564abf6ba9ec6b713cdb59c0265a966f101121b4031f4"
+      },
+      "step_ledger": {
+        "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+        "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+      },
+      "assessment": {
+        "path": "results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz",
+        "sha256": "97bdd52114c83388d4c9146e1e2569c6ab786903ca62a6004cc2d0017ee75a10"
+      }
+    }
+  }
+}

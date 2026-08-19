@@ -1,0 +1,65 @@
+{
+  "schema_version": "phase1_ugi_generated_role_applicability_census_readiness_config.v1",
+  "status": "frozen_before_read_only_generated_role_census",
+  "task": "Authenticate the fully generated-role terminal pool and materialize a nonselecting four-view applicability census",
+  "scope": {
+    "read_only": true,
+    "existing_frozen_terminal_pool_only": true,
+    "valid_exact_l1_terminals_only": true,
+    "all_three_component_roles_generated": true,
+    "fixed_head_clamp_primary_path": false,
+    "fixed_head_clamp_diagnostic_ablation_only": true,
+    "oracle_calls": 0,
+    "oracle_selection": false,
+    "potency_predictions_consumed": false,
+    "biological_guidance": false,
+    "synthesis_calls": 0,
+    "synthesis_guidance": false,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false,
+    "nonzero_guidance_execution": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "bio_policy": {
+      "path": "configs/bio/phase1_ugi_generated_role_applicability_census_policy_v1.json",
+      "sha256": "d6b02e8b8500d5954f717b7e7743674ac1444f4e1613089ba3eaad4df4693fa5"
+    },
+    "fresh_pool_audit": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/audit.json",
+      "sha256": "48f071e5776d956dc1f1bc99f1244c550f324f2d83097a54fde5a6be721a6f5e"
+    },
+    "fresh_pool_config": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+      "sha256": "92544cab4e67c34b1d6ae122122322a7b5fae802347aad223cec0bed7ec7be22"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "generated_applicability": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/generated_applicability.csv.gz",
+      "sha256": "ed12ac72362557072d14253d54675ad88c25d07cdc581491b99fa15b7452992f"
+    },
+    "prior_bio_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "runner": {
+      "path": "scripts/phase1_census_ugi_generated_role_applicability.py",
+      "sha256": "950b78d318aa3204383e7aa71f0acfba8ff39e178aadb1f3f7159526f6ac4168"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_generated_role_applicability_census.py",
+      "sha256": "3946ba434708c6a915a8deb2e5129255954f2c3a3acbba879630d86dd64dbb62"
+    },
+    "tests": {
+      "path": "tests/test_ugi_generated_role_applicability_census.py",
+      "sha256": "df6e6f452bf5ecbe7073d46362d83e9230e0a7bf12971da3e18fa9b87f7430c5"
+    }
+  }
+}

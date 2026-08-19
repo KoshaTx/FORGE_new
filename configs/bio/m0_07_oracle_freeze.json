@@ -1,0 +1,136 @@
+{
+  "schema_version": "m0_07_oracle_freeze_config.v1",
+  "task": "M0-07 scientific oracle selection and applicability freeze",
+  "seed": 1729,
+  "inputs": {
+    "classical": {
+      "result_path": "results/m0_07/oracle_classical_result.json",
+      "metrics_path": "results/m0_07/oracle_classical_metrics.csv.gz",
+      "result_schema": "m0_07_oracle_classical.v1",
+      "result_status": "classical_lane_complete_oracle_not_frozen",
+      "expected_candidates": [
+        ["morgan_count", "mlp"],
+        ["morgan_count", "random_forest"],
+        ["morgan_count", "ridge"],
+        ["morgan_count", "xgboost"],
+        ["morgan_plus_rdkit_expert", "mlp"],
+        ["morgan_plus_rdkit_expert", "random_forest"],
+        ["morgan_plus_rdkit_expert", "ridge"],
+        ["morgan_plus_rdkit_expert", "xgboost"],
+        ["rdkit_expert", "mlp"],
+        ["rdkit_expert", "random_forest"],
+        ["rdkit_expert", "ridge"],
+        ["rdkit_expert", "xgboost"]
+      ]
+    },
+    "supervised_graph": {
+      "result_path": "results/m0_07/oracle_graph_matrix_result.json",
+      "metrics_path": "results/m0_07/oracle_graph_matrix_metrics.csv.gz",
+      "result_schema": "m0_07_oracle_graph_matrix.v1",
+      "result_status": "completed_graph_oracle_matrix_pending_scientific_freeze",
+      "expected_candidates": [
+        ["whole_graph_dmpnn", "neural_3seed_ensemble"],
+        ["whole_graph_edge_gin", "neural_3seed_ensemble"],
+        ["ugi_component_role_aware_dmpnn", "neural_3seed_ensemble"]
+      ]
+    },
+    "label_free_r0_transfer": {
+      "result_path": "results/m0_07/oracle_graph_transfer_result.json",
+      "metrics_path": "results/m0_07/oracle_graph_transfer_metrics.csv.gz",
+      "result_schema": "m0_07_oracle_graph_transfer_matrix.v1",
+      "result_status": "completed_pretrained_oracle_transfer_pending_scientific_freeze",
+      "expected_candidates": [
+        ["r0_pretrained_frozen_linear", "pretrained_dmpnn_3seed_ensemble"],
+        ["r0_pretrained_finetuned_dmpnn", "pretrained_dmpnn_3seed_ensemble"]
+      ]
+    }
+  },
+  "excluded_from_selection": {
+    "lantern_released_checkpoint": "diagnostic has full-data feature and label scaling",
+    "lantern_random": "random split is a reproduction diagnostic only",
+    "virtual_12276": "unlabeled applicability set only"
+  },
+  "selection": {
+    "endpoints": {
+      "expt_Hela": 0.5,
+      "expt_Raw": 0.5
+    },
+    "eligible_schemes": [
+      "lantern_scaffold_balanced",
+      "held_head_5fold",
+      "held_aldehyde_5fold",
+      "held_isocyanide_5fold",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_aldehyde_isocyanide_pair_5fold"
+    ],
+    "primary_metric": "equal_endpoint_mean_equal_scheme_calibration_r2",
+    "tie_breakers": [
+      "lower_equal_endpoint_mean_equal_scheme_calibration_rmse",
+      "higher_equal_endpoint_mean_equal_scheme_calibration_spearman_rho",
+      "lexical_candidate_id"
+    ],
+    "one_representation_and_model_across_endpoints": true,
+    "random_split_used": false,
+    "outer_test_metrics_used_for_architecture_selection": false,
+    "outer_test_role": "post_selection_evaluation_and_predeclared_domain_gate"
+  },
+  "guidance_gate": {
+    "minimum_scheme_mean_test_r2": 0.1,
+    "minimum_scheme_mean_test_spearman_rho": 0.2,
+    "minimum_positive_r2_fold_fraction": 0.6,
+    "maximum_scheme_mean_absolute_90pct_coverage_gap": 0.1,
+    "uncertainty_use": "conformal_lower_confidence_guidance_not_raw_mean_maximization",
+    "failed_gate_action": "abstain"
+  },
+  "applicability_domains": {
+    "known_components_novel_combination": [
+      "lantern_scaffold_balanced",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_aldehyde_isocyanide_pair_5fold"
+    ],
+    "unseen_head": [
+      "lantern_scaffold_balanced",
+      "held_head_5fold"
+    ],
+    "unseen_aldehyde": [
+      "lantern_scaffold_balanced",
+      "held_aldehyde_5fold"
+    ],
+    "unseen_isocyanide": [
+      "lantern_scaffold_balanced",
+      "held_isocyanide_5fold"
+    ],
+    "unseen_head_and_aldehyde": [
+      "lantern_scaffold_balanced",
+      "held_head_5fold",
+      "held_aldehyde_5fold",
+      "held_head_aldehyde_pair_5fold"
+    ],
+    "unseen_head_and_isocyanide": [
+      "lantern_scaffold_balanced",
+      "held_head_5fold",
+      "held_isocyanide_5fold",
+      "held_head_isocyanide_pair_5fold"
+    ],
+    "unseen_aldehyde_and_isocyanide": [
+      "lantern_scaffold_balanced",
+      "held_aldehyde_5fold",
+      "held_isocyanide_5fold",
+      "held_aldehyde_isocyanide_pair_5fold"
+    ]
+  },
+  "unsupported_domains": {
+    "three_unseen_components": "no frozen three-role holdout supports biological guidance",
+    "non_ugi_final_assembly": "the AGILE oracle does not validate another final-assembly chemistry",
+    "in_vivo_endpoint": "HeLa and RAW 264.7 are general in vitro transfection endpoints"
+  },
+  "unavailable_properties_not_imputed": [
+    "apparent_pKa",
+    "particle_size",
+    "polydispersity",
+    "encapsulation_efficiency",
+    "formulation_robustness"
+  ]
+}

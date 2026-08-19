@@ -1,0 +1,57 @@
+{
+  "schema_version": "phase1_ugi_distribution_overlap_config.v1",
+  "status": "frozen_before_directional_chemical_support_audit",
+  "task": "Separate exact constitutional identity, generator-reference support, measured-oracle applicability and route completion for the frozen generated Ugi pool",
+  "inputs": {
+    "balanced_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "broad_r0": {
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "canonicalization_and_descriptors": {
+      "path": "src/forge/bio/ugi_distributional_applicability.py",
+      "sha256": "881a067e66315bb73529b1ef7f59476f1d90c489e562423a571c7a24883c43cd"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "generated_pool": {
+      "path": "results/phase1/ugi_fresh_pool_oracle_audit_v1/oracle_predictions.csv.gz",
+      "sha256": "7c8425cad54553383a8c7ddbf476f10501e4e6093064ef4ab927723f0805a18e"
+    },
+    "runner": {
+      "path": "scripts/phase1_audit_ugi_distribution_overlap.py",
+      "sha256": "514e2e5d1eb7fd0c8ed31e95460ef97c9e913cc62909cc63eece54f3857acfb2"
+    },
+    "sampling_implementation": {
+      "path": "src/forge/product/ugi_morphology_corpus.py",
+      "sha256": "8925e648262560719e8ca07b7f3a31caa28721a5c38fe2a9de413dc7c26c3c34"
+    },
+    "source": {
+      "path": "src/forge/eval/ugi_distribution_overlap.py",
+      "sha256": "08367d3f1cddbec70722582987ed68165998520ea51c640484da61f3966932bf"
+    },
+    "tests": {
+      "path": "tests/test_ugi_distribution_overlap.py",
+      "sha256": "1409b53e1e09dcf0f351667336c768dad62787c12d512ecc93db7cf5615c7d9c"
+    },
+    "training_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+      "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+    }
+  },
+  "policy": {
+    "seed": 1729,
+    "maximum_query_count": 3975,
+    "product_fingerprint_reference_cap": 20000,
+    "exact_identity_is_not_distribution_status": true,
+    "distance_calibration_excludes_exact_identity": true,
+    "biological_targets_used_for_geometry": false,
+    "biological_guidance_authorized": false,
+    "candidate_selection_changed": false
+  }
+}

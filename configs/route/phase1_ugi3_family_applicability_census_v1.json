@@ -1,0 +1,42 @@
+{
+  "schema_version": "phase1_ugi3_family_applicability_census_config.v1",
+  "status": "frozen_before_nonselecting_applicability_census",
+  "task": "Describe constitutional applicability axes and recurrent structural buckets for the final 209 family-projected components without qualifying family scope",
+  "inputs": {
+    "graded_evidence_result": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "sha256": "da179092251cda471feabe63a35bffa6d9f752f2b09c5d5d5b87456e55d88dc0"
+    },
+    "graded_evidence_ledger": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+    },
+    "census_source": {
+      "path": "src/forge/value/ugi3_family_applicability_census.py",
+      "sha256": "30d37a0e5e89298dc380743693b15f42847e48321df38c407e8c7c827ab80711"
+    },
+    "census_runner": {
+      "path": "scripts/phase1_census_ugi3_family_applicability.py",
+      "sha256": "8258b0325be843d58f73e220664b3c1b570bd9688376db6663812596155ac9a1"
+    },
+    "census_tests": {
+      "path": "tests/test_ugi3_family_applicability_census.py",
+      "sha256": "f83c16f3e25af71b730b0fb1c1707a3d3d3ac81a80b53c893a17c638b59beba0"
+    }
+  },
+  "census_policy": {
+    "constitutional_axes_only": true,
+    "reactive_handle_queries_reused_from_frozen_programs": true,
+    "recurrence_is_descriptive_not_scope_qualification": true,
+    "projected_leaf_currency_is_a_separate_axis": true,
+    "carbon_count_band_width": 4,
+    "minimum_unique_components_for_recurrent_bucket": 3,
+    "family_scope_qualification_performed": false,
+    "recurrent_bucket_is_validated_interpolation": false,
+    "sparse_bucket_is_chemical_incompatibility": false,
+    "scalar_synthesis_value_defined": false,
+    "synthesis_guidance_run": false,
+    "prospective_candidate_selection_changed": false,
+    "holdout_reveal_authorized": false
+  }
+}

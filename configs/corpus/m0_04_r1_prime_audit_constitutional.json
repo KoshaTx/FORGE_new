@@ -1,0 +1,78 @@
+{
+  "schema_version": "m0_04_r1_prime_audit_config.v3",
+  "generated_utc": "2026-07-30T23:30:00Z",
+  "seed": 20260730,
+  "randomness_used": false,
+  "expected_reaction_count": 12,
+  "expected_r0_rows": 15229,
+  "expected_historical_r0_rows": 15433,
+  "repository_inputs": {
+    "r0_constitutional.csv.gz": "results/m0_03/r0_constitutional.csv.gz",
+    "historical_r0_observed_real_structures.csv": "data/vendor/r0_observed_real_structures.csv",
+    "r1_reaction_enumerated_support_v1.csv": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+    "qualified_reaction_families_v1.json": "data/vendor/qualified_reaction_families_v1.json",
+    "qualified_reactions_v1.json": "data/vendor/qualified_reactions_v1.json",
+    "r0_fold_assignments_constitutional.csv": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+    "m0_03_constitutional_manifest.json": "data/splits/m0_03_constitutional/manifest.json",
+    "ugi3_assembly_qualification.json": "results/m0_09/ugi3_assembly_qualification.json"
+  },
+  "dataset": {
+    "current_r0_asset": "r0_constitutional.csv.gz",
+    "historical_r0_asset": "historical_r0_observed_real_structures.csv",
+    "r1_control_asset": "r1_reaction_enumerated_support_v1.csv",
+    "split_assignments_asset": "r0_fold_assignments_constitutional.csv",
+    "split_manifest_asset": "m0_03_constitutional_manifest.json",
+    "reaction_families_asset": "qualified_reaction_families_v1.json",
+    "reactions_asset": "qualified_reactions_v1.json",
+    "graph_identity": "canonical_constitutional_smiles"
+  },
+  "controls": {
+    "historical_non_agile_rows": 14233,
+    "historical_non_agile_recovered": 108,
+    "current_non_agile_rows": 14129,
+    "current_non_agile_recovered": 112
+  },
+  "expected_inputs": {
+    "r0_constitutional.csv.gz": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823",
+    "historical_r0_observed_real_structures.csv": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d",
+    "r1_reaction_enumerated_support_v1.csv": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a",
+    "qualified_reaction_families_v1.json": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587",
+    "qualified_reactions_v1.json": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+    "r0_fold_assignments_constitutional.csv": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d",
+    "m0_03_constitutional_manifest.json": "948fc6c7fed8e28780f7538bedd37402ab4bdec16eb6b6f139aa0c4b9c194bb2",
+    "ugi3_assembly_qualification.json": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+  },
+  "policy_evidence_inputs": {
+    "ugi3_assembly_qualification.json": "results/m0_09/ugi3_assembly_qualification.json"
+  },
+  "role_policy_overrides": [
+    {
+      "reaction_id": "ugi_3cr_agile",
+      "role": "amine_head",
+      "site_multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+      "evidence_asset": "ugi3_assembly_qualification.json",
+      "evidence_schema_version": "m0_09_ugi3_assembly_qualification.v1"
+    }
+  ],
+  "schemes": [
+    "source_study",
+    "headgroup",
+    "linker_scaffold",
+    "component_family"
+  ],
+  "decomposition": {
+    "max_reverse_outcomes_per_structure_reaction": 10000,
+    "max_forward_outcomes_per_reconstruction": 1000
+  },
+  "enumeration": {
+    "max_reactant_combinations_per_scheme": 50000000,
+    "sqlite_commit_interval": 10000
+  },
+  "fingerprint": {
+    "kind": "ECFP4",
+    "radius": 2,
+    "bits": 2048,
+    "include_chirality": false,
+    "reference_batch_size": 20000
+  }
+}

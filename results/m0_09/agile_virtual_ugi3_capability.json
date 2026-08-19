@@ -1,0 +1,131 @@
+{
+  "artifacts": {
+    "agile_virtual_ugi3_component_ledger.csv.gz": {
+      "bytes": 2548,
+      "path": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+      "sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    "agile_virtual_ugi3_product_ledger.csv.gz": {
+      "bytes": 134814,
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    }
+  },
+  "claims_boundary": {
+    "component_join_is_route_closure": false,
+    "forward_roundtrip_is_synthesis_success": false,
+    "inverse_decomposition_is_observed_route_evidence": false,
+    "model_built": false,
+    "unlabeled_products_are_l2_supervision": false
+  },
+  "decision": {
+    "complete_route_requires_every_component_branch_closed": true,
+    "deduplicated_components_require_recursive_l2_l3_resolution": true,
+    "model_built": false,
+    "product_structure_is_l1_route_evidence": false
+  },
+  "decomposition_profile": {
+    "one_exact_qualified_ugi_decomposition": 12276
+  },
+  "forward_site_profile": {
+    "raw_1_unique_1_target_sites_1": 10602,
+    "raw_2_unique_1_target_sites_1": 558,
+    "raw_2_unique_2_target_sites_1": 558,
+    "raw_3_unique_1_target_sites_1": 558
+  },
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "inputs": [
+    {
+      "asset": "m0_09_agile_virtual_ugi3_capability.json",
+      "bytes": 4149,
+      "role": "audit_config",
+      "sha256": "52044ddb86c4997e296104291583a55c3dcd7de73a7348a84d35d1c793256fd6"
+    },
+    {
+      "asset": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "bytes": 85911,
+      "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    },
+    {
+      "asset": "data/derived/agile_virtual12k_smiles.manifest.json",
+      "bytes": 1287,
+      "sha256": "7b048da8b337e4efd35f6da01587a03b9f6320e00b0d33cf2a8f8fe866dee375"
+    },
+    {
+      "asset": "data/vendor/qualified_reactions_v1.json",
+      "bytes": 5116,
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    {
+      "asset": "results/m0_09/ugi3_assembly_qualification.json",
+      "bytes": 14637,
+      "sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    },
+    {
+      "asset": "results/m0_09/ugi3_precursor_capability.json",
+      "bytes": 63601,
+      "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    },
+    {
+      "asset": "results/m0_09/ugi3_aldehyde_head_capability.json",
+      "bytes": 272615,
+      "sha256": "0150b53015d3b31c12be9f97549fa612ff228435fac82881192d3af03f6f74ff"
+    },
+    {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "bytes": 83223,
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    }
+  ],
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "rejected_reverse_outcomes": {},
+  "schema_version": "m0_09_agile_virtual_ugi3_capability.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "cartesian_component_tuples": 12276,
+    "products_with_complete_l2_l3_candidate": 0,
+    "products_with_exact_qualified_ugi_decomposition": 12276,
+    "products_with_multiple_exact_decompositions": 0,
+    "products_without_exact_qualified_ugi_decomposition": 0,
+    "roles": {
+      "amine_head": {
+        "accepted_terminal_components": 17,
+        "components_with_exact_source_route": 0,
+        "computationally_route_complete_components": 0,
+        "evidence_matched_components": 18,
+        "l2_l3_closed_components": 17,
+        "unique_components": 22,
+        "unmatched_components": 4
+      },
+      "isocyanide_tail": {
+        "accepted_terminal_components": 0,
+        "components_with_exact_source_route": 7,
+        "computationally_route_complete_components": 0,
+        "evidence_matched_components": 7,
+        "l2_l3_closed_components": 0,
+        "unique_components": 9,
+        "unmatched_components": 2
+      },
+      "oxoester_aldehyde_body_tail": {
+        "accepted_terminal_components": 0,
+        "components_with_exact_source_route": 17,
+        "computationally_route_complete_components": 0,
+        "evidence_matched_components": 18,
+        "l2_l3_closed_components": 0,
+        "unique_components": 62,
+        "unmatched_components": 44
+      }
+    },
+    "source_products": 12276,
+    "total_exact_decomposition_candidates": 12276,
+    "unique_components_total": 93
+  },
+  "task": "M0-09 AGILE virtual Ugi-3 decomposition and component capability census"
+}

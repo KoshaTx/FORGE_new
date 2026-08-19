@@ -1,0 +1,26 @@
+{
+  "schema_version": "phase1_ugi_program_prior_challenger_draw_config.v1",
+  "status": "frozen_before_nonselecting_challenger_draw",
+  "purpose": "Generate one fixed diagnostic draw from the component-family-balanced mixture prior without seed search.",
+  "sampling": {
+    "seed": 20260816,
+    "attempted_draws": 1024,
+    "no_retries_or_seed_search": true
+  },
+  "inputs": {
+    "challenger_prior": {
+      "path": "results/phase1/ugi_program_prior_challenger_v1.json",
+      "sha256": "2762cc6bee8ea2906af8de6987cdd03e82c06f0ae1e05632ec804d7a9a906569"
+    },
+    "sampling_script": {
+      "path": "scripts/phase1_sample_ugi_program_prior.py",
+      "sha256": "9af316e2d0cf9ff251f81cbb350893f1a4d4e2d8a7a6c0e4364aa837885f87e9"
+    }
+  },
+  "scope": {
+    "may_replace_production_prior": false,
+    "may_select_prospective_candidates": false,
+    "independent_confirmation_required": true,
+    "heldout_component_families_inspected": false
+  }
+}

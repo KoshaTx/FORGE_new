@@ -1,0 +1,3011 @@
+{
+  "evidence_contract": {
+    "main_text_acquired": "Exact machine-readable article text was downloaded and hashed.",
+    "pmc_indexed": "A PMCID exists.",
+    "route_extracted": "An exact source-located reaction record was curated.",
+    "route_reviewed": "Main text and every relevant supplementary attachment were inspected.",
+    "supplement_discovered": "A JATS or OA-package link was found but not necessarily downloaded."
+  },
+  "generated_utc": "2026-07-29T03:48:39+00:00",
+  "inputs": [
+    {
+      "asset": "results/m0_09/source_queue.csv",
+      "bytes": 21156,
+      "sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    }
+  ],
+  "parameters": {
+    "max_response_bytes": 536870912,
+    "user_agent": "FORGE-M0-09-source-inventory/1.0 (academic route evidence audit)",
+    "workers": 6
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "records": [
+    {
+      "doi": "10.1038/s41467-024-50619-z",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 145547,
+          "cache_asset": "PMC11282250/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "facf63740ce76351afaec2346d3cb784c5971eda72c98a30e9522077324a7876",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11282250/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 194777,
+          "cache_asset": "PMC11282250/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "966487f4cd712d906ae6b4d4949d1567f62acb9b3719ad5d034e0cc43dca69c1",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11282250/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11282250/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/7d/63/PMC11282250.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 450,
+          "cache_asset": "PMC11282250/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "dc43636e83c9e131e5371774a4aa251a88b6c600dda04cef81b7ac8d1a7cde66",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11282250"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2024_50619_MOESM1_ESM.pdf",
+        "41467_2024_50619_MOESM2_ESM.pdf",
+        "41467_2024_50619_MOESM3_ESM.pdf",
+        "41467_2024_50619_MOESM4_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 2400,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/7d/63/PMC11282250.tar.gz",
+            "updated": "2026-07-28 09:25:18"
+          }
+        ]
+      },
+      "pmc_id": "PMC11282250",
+      "pmid": "39060305",
+      "review_rank": 1,
+      "route_review_status": "not_started",
+      "source_id": "39060305",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "AGILE platform: a deep learning powered approach to accelerate LNP development for mRNA delivery.",
+      "unique_component_count": 36
+    },
+    {
+      "doi": "10.1038/ncomms5277",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 89946,
+          "cache_asset": "PMC4111939/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "b23c2619b05839fd68ef7f8d978e1e6f293cf5531cb94da20b282c11b4325f98",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC4111939/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4111939/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4111939/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/8f/15/PMC4111939.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 444,
+          "cache_asset": "PMC4111939/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "b0898e789978156a56245eebbeaf9ac8187a26357362328c28e7f61671095f96",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC4111939"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 1273,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "none",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/8f/15/PMC4111939.tar.gz",
+            "updated": "2024-06-18 15:25:16"
+          }
+        ]
+      },
+      "pmc_id": "PMC4111939",
+      "pmid": "24969323",
+      "review_rank": 2,
+      "route_review_status": "not_started",
+      "source_id": "24969323",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Degradable lipid nanoparticles with predictable in vivo siRNA delivery activity.",
+      "unique_component_count": 208
+    },
+    {
+      "doi": "10.1038/s41587-023-01679-x",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 67678,
+          "cache_asset": "PMC10544676/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "786d9ed09ea95dda55f1d7b3bc414932c4eac4fee8e050494934931443d182f2",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10544676/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10544676/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 165,
+          "cache_asset": "PMC10544676/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "cff79601e1219830fd293e5dd3c48379ec9ab815893d67633b0764c79a6b14a4",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10544676/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 224,
+          "cache_asset": "PMC10544676/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "4a157b2d5cb40ddd7f53126be8d100f380cd5bdee2e4a3a8da56998e7c416473",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10544676"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 773,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC10544676",
+      "pmid": "36997680",
+      "review_rank": 3,
+      "route_review_status": "not_started",
+      "source_id": "36997680",
+      "supplement_archive": {
+        "api_error": "Article with id PMC10544676 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Combinatorial design of nanoparticles for pulmonary mRNA delivery and genome editing.",
+      "unique_component_count": 81
+    },
+    {
+      "doi": "10.1073/pnas.1520756113",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC4725465/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC4725465/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4725465/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC4725465/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "ef69f0cd9b623c4cf0b8e354abecbbbc6e3d3bfeda84c266fed6fb67651d1ee2",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4725465/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC4725465/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "c92a63a3e32bff73325c977ea15198f7729a8f054da1f57d3ddb0f077beb75a9",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC4725465"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 1538,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC4725465",
+      "pmid": "26729861",
+      "review_rank": 4,
+      "route_review_status": "not_started",
+      "source_id": "26729861",
+      "supplement_archive": {
+        "api_error": "Article with id PMC4725465 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Modular degradable dendrimers enable small RNAs to extend survival in an aggressive liver cancer model.",
+      "unique_component_count": 74
+    },
+    {
+      "doi": "10.1038/nbt1402",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC3014085/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC3014085/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3014085/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC3014085/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "1f43c2ddb4537ef66b6e2c7644df601b9890e32e201f08f2ad57ee3f02d08151",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3014085/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC3014085/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "57e900ba92c51ba5b3e71fc39694967a55e772c0ae828d18ab1617d9a1d6c7ba",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC3014085"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 497,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC3014085",
+      "pmid": "18438401",
+      "review_rank": 5,
+      "route_review_status": "not_started",
+      "source_id": "18438401",
+      "supplement_archive": {
+        "api_error": "Article with id PMC3014085 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "A combinatorial library of lipid-like materials for delivery of RNAi therapeutics.",
+      "unique_component_count": 58
+    },
+    {
+      "doi": "10.1073/pnas.0910603106",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC2804742/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC2804742/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2804742/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC2804742/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "99378be5853390e0cb202284f6d6cfabff669f540b2f83b5ef1322f41771b888",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2804742/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC2804742/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "6a30e1ccd37ebbcfc3878448271be44249ab13659c44a87146c068dd66775f35",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC2804742"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 378,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC2804742",
+      "pmid": "20080679",
+      "review_rank": 6,
+      "route_review_status": "not_started",
+      "source_id": "20080679",
+      "supplement_archive": {
+        "api_error": "Article with id PMC2804742 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Lipid-like materials for low-dose, in vivo gene silencing.",
+      "unique_component_count": 41
+    },
+    {
+      "doi": "10.1073/pnas.2307810121",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 83804,
+          "cache_asset": "PMC10945816/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "d95cdf42eb5e1b751315739dc6dd051f73108835f44cf80e0985ebbc1c6e54bf",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10945816/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 131524,
+          "cache_asset": "PMC10945816/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "318d7e16d9eb0e3ee7f14dc2c42775ada5d9e76b838c4ff93af8c3c25e7d60de",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10945816/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 4236005,
+          "cache_asset": "PMC10945816/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "552ba372da015a514c45b964b876ec8913a6fb16281e3612e3a4cea505257015",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10945816/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ca/4f/PMC10945816.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 607,
+          "cache_asset": "PMC10945816/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "0b8f3af668d0d0233f70397918e23c95c0cc10afc0e624e882b3728862f0237d",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10945816"
+        }
+      },
+      "jats_supplement_links": [
+        "pnas.2307810121.sapp.pdf"
+      ],
+      "lnpdb_record_count": 350,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/ca/4f/pnas.202307810.PMC10945816.pdf",
+            "updated": "2024-03-18 10:45:36"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ca/4f/PMC10945816.tar.gz",
+            "updated": "2024-03-19 10:25:13"
+          }
+        ]
+      },
+      "pmc_id": "PMC10945816",
+      "pmid": "38437545",
+      "review_rank": 7,
+      "route_review_status": "not_started",
+      "source_id": "38437545",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 1188317,
+            "compressed_bytes": 997014,
+            "crc32": "b522a1a4",
+            "is_directory": false,
+            "name": "pnas.2307810121fig05.jpg"
+          },
+          {
+            "bytes": 470732,
+            "compressed_bytes": 324730,
+            "crc32": "5f795260",
+            "is_directory": false,
+            "name": "pnas.2307810121fig01.jpg"
+          },
+          {
+            "bytes": 4681,
+            "compressed_bytes": 4600,
+            "crc32": "81736cda",
+            "is_directory": false,
+            "name": "pnas.2307810121fig05.gif"
+          },
+          {
+            "bytes": 9325,
+            "compressed_bytes": 9225,
+            "crc32": "f2966678",
+            "is_directory": false,
+            "name": "pnas.2307810121fig03.gif"
+          },
+          {
+            "bytes": 756858,
+            "compressed_bytes": 713232,
+            "crc32": "af65049d",
+            "is_directory": false,
+            "name": "pnas.2307810121.sapp.pdf"
+          },
+          {
+            "bytes": 8696,
+            "compressed_bytes": 8630,
+            "crc32": "614b087c",
+            "is_directory": false,
+            "name": "pnas.2307810121fig04.gif"
+          },
+          {
+            "bytes": 19144,
+            "compressed_bytes": 17112,
+            "crc32": "86f2426c",
+            "is_directory": false,
+            "name": "pnas.2307810121fig02.gif"
+          },
+          {
+            "bytes": 177633,
+            "compressed_bytes": 150811,
+            "crc32": "1a993d35",
+            "is_directory": false,
+            "name": "pnas.2307810121fig02.jpg"
+          },
+          {
+            "bytes": 331350,
+            "compressed_bytes": 309430,
+            "crc32": "6d28069b",
+            "is_directory": false,
+            "name": "pnas.2307810121fig04.jpg"
+          },
+          {
+            "bytes": 2003369,
+            "compressed_bytes": 1694755,
+            "crc32": "f73604d2",
+            "is_directory": false,
+            "name": "pnas.2307810121fig03.jpg"
+          },
+          {
+            "bytes": 5042,
+            "compressed_bytes": 4904,
+            "crc32": "213569ca",
+            "is_directory": false,
+            "name": "pnas.2307810121fig01.gif"
+          }
+        ],
+        "archive_entry_count": 11,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 4975147,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "Lipid nanoparticle structure and delivery route during pregnancy dictate mRNA potency, immunogenicity, and maternal and fetal outcomes.",
+      "unique_component_count": 33
+    },
+    {
+      "doi": "10.1038/s41563-020-00886-0",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 89051,
+          "cache_asset": "PMC8188687/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "350d60e2f48c4583eb57d76f0ff6642eb0fad955d68cd6e01d8eed36beca00a9",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC8188687/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8188687/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8188687/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/be/01/PMC8188687.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 449,
+          "cache_asset": "PMC8188687/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "d1d71edcf3e9fef4d2d5906911e7642a81f443bfce6c3af791fabf12c3938667",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC8188687"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 572,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "none",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/be/01/PMC8188687.tar.gz",
+            "updated": "2025-04-04 14:25:13"
+          }
+        ]
+      },
+      "pmc_id": "PMC8188687",
+      "pmid": "33542471",
+      "review_rank": 8,
+      "route_review_status": "not_started",
+      "source_id": "33542471",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Membrane-destabilizing ionizable phospholipids for organ-selective mRNA delivery and CRISPR-Cas gene editing.",
+      "unique_component_count": 28
+    },
+    {
+      "doi": "10.1038/s41467-024-45422-9",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 125160,
+          "cache_asset": "PMC10904786/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "70a269e6fd7d5d132fd4b2344ec7f34f4124263e6665bf51ba7383a0ccf1d0ac",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10904786/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 167645,
+          "cache_asset": "PMC10904786/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "a1f53f6fb6311da854ae1819b21934c5fe26908997afcf1527b5950e610cf97a",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10904786/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 19735654,
+          "cache_asset": "PMC10904786/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "3d9ebfe36fef8aa9599bb75de1bec86111416c2f871e1271d5964ba7b32b1d96",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10904786/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/76/6a/PMC10904786.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 450,
+          "cache_asset": "PMC10904786/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "0b63c05c80d35fae90ffe9444ffdf43a1e52445ef4e6c21c394d99ab8afa058e",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10904786"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2024_45422_MOESM1_ESM.pdf",
+        "41467_2024_45422_MOESM2_ESM.pdf",
+        "41467_2024_45422_MOESM3_ESM.pdf",
+        "41467_2024_45422_MOESM4_ESM.xlsx",
+        "41467_2024_45422_MOESM5_ESM.pdf",
+        "41467_2024_45422_MOESM6_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 851,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/76/6a/PMC10904786.tar.gz",
+            "updated": "2024-03-17 13:25:25"
+          }
+        ]
+      },
+      "pmc_id": "PMC10904786",
+      "pmid": "38424061",
+      "review_rank": 9,
+      "route_review_status": "not_started",
+      "source_id": "38424061",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 2965068,
+            "compressed_bytes": 2948617,
+            "crc32": "a21efb2c",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM5_ESM.pdf"
+          },
+          {
+            "bytes": 4776,
+            "compressed_bytes": 4550,
+            "crc32": "9d6ad9ae",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig2_HTML.gif"
+          },
+          {
+            "bytes": 9277,
+            "compressed_bytes": 9106,
+            "crc32": "6ae84532",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig5_HTML.gif"
+          },
+          {
+            "bytes": 380472,
+            "compressed_bytes": 370584,
+            "crc32": "8f74e056",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig4_HTML.jpg"
+          },
+          {
+            "bytes": 7379733,
+            "compressed_bytes": 6847358,
+            "crc32": "fdfebb20",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM1_ESM.pdf"
+          },
+          {
+            "bytes": 6986,
+            "compressed_bytes": 6972,
+            "crc32": "e86ca899",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig3_HTML.gif"
+          },
+          {
+            "bytes": 8523,
+            "compressed_bytes": 8410,
+            "crc32": "d0de8b65",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig4_HTML.gif"
+          },
+          {
+            "bytes": 128178,
+            "compressed_bytes": 118727,
+            "crc32": "e09f73c9",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig2_HTML.jpg"
+          },
+          {
+            "bytes": 107368,
+            "compressed_bytes": 100673,
+            "crc32": "5333c6a9",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM3_ESM.pdf"
+          },
+          {
+            "bytes": 46836,
+            "compressed_bytes": 41920,
+            "crc32": "672bb104",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM6_ESM.xlsx"
+          },
+          {
+            "bytes": 4864202,
+            "compressed_bytes": 4816659,
+            "crc32": "deec1579",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM4_ESM.xlsx"
+          },
+          {
+            "bytes": 3897424,
+            "compressed_bytes": 3639835,
+            "crc32": "b984d346",
+            "is_directory": false,
+            "name": "41467_2024_45422_MOESM2_ESM.pdf"
+          },
+          {
+            "bytes": 226664,
+            "compressed_bytes": 214031,
+            "crc32": "a0252e55",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig3_HTML.jpg"
+          },
+          {
+            "bytes": 218015,
+            "compressed_bytes": 191091,
+            "crc32": "b3219b9c",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig1_HTML.jpg"
+          },
+          {
+            "bytes": 7177,
+            "compressed_bytes": 7135,
+            "crc32": "38721765",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig1_HTML.gif"
+          },
+          {
+            "bytes": 419275,
+            "compressed_bytes": 407516,
+            "crc32": "7db37000",
+            "is_directory": false,
+            "name": "41467_2024_45422_Fig5_HTML.jpg"
+          }
+        ],
+        "archive_entry_count": 16,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 20669974,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "High-throughput barcoding of nanoparticles identifies cationic, degradable lipid-like materials for mRNA delivery to the lungs in female preclinical models.",
+      "unique_component_count": 28
+    },
+    {
+      "doi": "10.1073/pnas.2309472120",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 84859,
+          "cache_asset": "PMC10723144/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "107d6543976017c6cb3cfaf095d5390ca6af1a3f2bf78a61dd77c3f61824e40c",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10723144/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 122194,
+          "cache_asset": "PMC10723144/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "100c51f29b996023a38f4ea48cacc4cc1ccf30d413771dc941c2be50f0f33342",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10723144/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 3206182,
+          "cache_asset": "PMC10723144/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "bc5243f2c3375f16df80766f45afeb8f745d1d649105fb63372f4a1d4d0e20f2",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10723144/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/3d/f3/PMC10723144.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 607,
+          "cache_asset": "PMC10723144/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "e716e67ca4c124da4b3bea4fc306b9a7a19db4b2956b8d51144692a46d1e2dfa",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10723144"
+        }
+      },
+      "jats_supplement_links": [
+        "pnas.2309472120.sapp.pdf"
+      ],
+      "lnpdb_record_count": 288,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/3d/f3/pnas.202309472.PMC10723144.pdf",
+            "updated": "2023-12-15 14:38:14"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/3d/f3/PMC10723144.tar.gz",
+            "updated": "2024-06-07 00:25:31"
+          }
+        ]
+      },
+      "pmc_id": "PMC10723144",
+      "pmid": "38060560",
+      "review_rank": 10,
+      "route_review_status": "not_started",
+      "source_id": "38060560",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 17528,
+            "compressed_bytes": 15445,
+            "crc32": "48236961",
+            "is_directory": false,
+            "name": "pnas.2309472120fig04.gif"
+          },
+          {
+            "bytes": 167338,
+            "compressed_bytes": 132561,
+            "crc32": "72b35488",
+            "is_directory": false,
+            "name": "pnas.2309472120fig04.jpg"
+          },
+          {
+            "bytes": 20609,
+            "compressed_bytes": 18590,
+            "crc32": "8df47435",
+            "is_directory": false,
+            "name": "pnas.2309472120fig02.gif"
+          },
+          {
+            "bytes": 15905,
+            "compressed_bytes": 13804,
+            "crc32": "4e5d4c79",
+            "is_directory": false,
+            "name": "pnas.2309472120fig05.gif"
+          },
+          {
+            "bytes": 137025,
+            "compressed_bytes": 107877,
+            "crc32": "6490392a",
+            "is_directory": false,
+            "name": "pnas.2309472120fig05.jpg"
+          },
+          {
+            "bytes": 20754,
+            "compressed_bytes": 18685,
+            "crc32": "129ad9d4",
+            "is_directory": false,
+            "name": "pnas.2309472120fig03.gif"
+          },
+          {
+            "bytes": 2765858,
+            "compressed_bytes": 2215901,
+            "crc32": "1455e51a",
+            "is_directory": false,
+            "name": "pnas.2309472120.sapp.pdf"
+          },
+          {
+            "bytes": 20445,
+            "compressed_bytes": 18356,
+            "crc32": "b7dd9c91",
+            "is_directory": false,
+            "name": "pnas.2309472120fig01.gif"
+          },
+          {
+            "bytes": 309616,
+            "compressed_bytes": 279164,
+            "crc32": "1de02131",
+            "is_directory": false,
+            "name": "pnas.2309472120fig03.jpg"
+          },
+          {
+            "bytes": 253350,
+            "compressed_bytes": 219748,
+            "crc32": "fd1f451e",
+            "is_directory": false,
+            "name": "pnas.2309472120fig02.jpg"
+          },
+          {
+            "bytes": 192439,
+            "compressed_bytes": 164489,
+            "crc32": "ecfb9e8c",
+            "is_directory": false,
+            "name": "pnas.2309472120fig01.jpg"
+          }
+        ],
+        "archive_entry_count": 11,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 3920867,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "Combinatorial design of ionizable lipid nanoparticles for muscle-selective mRNA delivery with minimized off-target effects.",
+      "unique_component_count": 25
+    },
+    {
+      "doi": "10.1038/s41467-024-50093-7",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 90587,
+          "cache_asset": "PMC11226454/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "64ff0baaf4e9eaf9787d3bdbaaacc3a16d12f7c5919514732cfb2b86ea1ea464",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11226454/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 129962,
+          "cache_asset": "PMC11226454/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "bc87c812e155ccd335002403de7717a0088ccd2c418831704465dd1af116a867",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11226454/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 10752887,
+          "cache_asset": "PMC11226454/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "9baba720def617e22a4eb095b84e8675dd1e54ecf83609f8344fdd84984ed188",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11226454/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/29/1b/PMC11226454.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 449,
+          "cache_asset": "PMC11226454/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "baa0c1ed431caf56a137b5d3a4a43402d876e4104a9077a0bcb8e2c7acf2dc43",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11226454"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2024_50093_MOESM1_ESM.pdf",
+        "41467_2024_50093_MOESM2_ESM.pdf",
+        "41467_2024_50093_MOESM3_ESM.pdf",
+        "41467_2024_50093_MOESM4_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 140,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/29/1b/PMC11226454.tar.gz",
+            "updated": "2024-07-07 13:25:23"
+          }
+        ]
+      },
+      "pmc_id": "PMC11226454",
+      "pmid": "38969646",
+      "review_rank": 11,
+      "route_review_status": "not_started",
+      "source_id": "38969646",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 146869,
+            "compressed_bytes": 127364,
+            "crc32": "a8cef9d6",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig3_HTML.jpg"
+          },
+          {
+            "bytes": 250325,
+            "compressed_bytes": 225588,
+            "crc32": "9feb77b1",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig5_HTML.jpg"
+          },
+          {
+            "bytes": 4174,
+            "compressed_bytes": 4084,
+            "crc32": "0ab2357d",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig3_HTML.gif"
+          },
+          {
+            "bytes": 6104,
+            "compressed_bytes": 6088,
+            "crc32": "75819332",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig5_HTML.gif"
+          },
+          {
+            "bytes": 10465058,
+            "compressed_bytes": 8068293,
+            "crc32": "f4f60dae",
+            "is_directory": false,
+            "name": "41467_2024_50093_MOESM1_ESM.pdf"
+          },
+          {
+            "bytes": 283090,
+            "compressed_bytes": 246737,
+            "crc32": "c50dcfcf",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig2_HTML.jpg"
+          },
+          {
+            "bytes": 1506406,
+            "compressed_bytes": 1464886,
+            "crc32": "a8ba8012",
+            "is_directory": false,
+            "name": "41467_2024_50093_MOESM2_ESM.pdf"
+          },
+          {
+            "bytes": 6077,
+            "compressed_bytes": 6062,
+            "crc32": "9d6667da",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig2_HTML.gif"
+          },
+          {
+            "bytes": 6276,
+            "compressed_bytes": 6236,
+            "crc32": "d27b2667",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig4_HTML.gif"
+          },
+          {
+            "bytes": 101983,
+            "compressed_bytes": 100973,
+            "crc32": "a251a568",
+            "is_directory": false,
+            "name": "41467_2024_50093_MOESM3_ESM.pdf"
+          },
+          {
+            "bytes": 74771,
+            "compressed_bytes": 65095,
+            "crc32": "5b6fd34a",
+            "is_directory": false,
+            "name": "41467_2024_50093_MOESM4_ESM.xlsx"
+          },
+          {
+            "bytes": 4895,
+            "compressed_bytes": 4858,
+            "crc32": "914a2c79",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig1_HTML.gif"
+          },
+          {
+            "bytes": 202142,
+            "compressed_bytes": 182758,
+            "crc32": "dd8743a4",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig1_HTML.jpg"
+          },
+          {
+            "bytes": 262607,
+            "compressed_bytes": 241705,
+            "crc32": "fba82538",
+            "is_directory": false,
+            "name": "41467_2024_50093_Fig4_HTML.jpg"
+          }
+        ],
+        "archive_entry_count": 14,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 13320777,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "Reformulating lipid nanoparticles for organ-targeted mRNA accumulation and translation.",
+      "unique_component_count": 24
+    },
+    {
+      "doi": "10.1002/anie.202013927",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 39445,
+          "cache_asset": "PMC8100975/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "5d4c886855d98cad3fc01b171a35eeef58ea7056d23cafb2a99f9d401fb17cde",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC8100975/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8100975/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC8100975/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "2dc24cf434454893651ab85ddf071a30a4191d14065a919797a5fe4f2017be43",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8100975/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC8100975/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "5124bf2a5177e5f22dbb409d80966220eef02de9e9456782bcb424d3be49598e",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC8100975"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 91,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC8100975",
+      "pmid": "33305471",
+      "review_rank": 12,
+      "route_review_status": "not_started",
+      "source_id": "33305471",
+      "supplement_archive": {
+        "api_error": "Article with id PMC8100975 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "A Systematic Study of Unsaturation in Lipid Nanoparticles Leads to Improved mRNA Transfection In Vivo.",
+      "unique_component_count": 20
+    },
+    {
+      "doi": "10.1002/anie.201610209",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 35048,
+          "cache_asset": "PMC5521011/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "6fb3cb0a3b2b83dbdbece260db45db5c788f647b6e4c401621f80ae4879c5702",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC5521011/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5521011/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC5521011/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "641e469e2918d82aeef09e29dd0aff486070bd0b4572bc30414656bda85bae3b",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5521011/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC5521011/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "45259a74f1ff15b0bb06166c4e73f5ae3344f935cb8d38113c5819bd95a23a51",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC5521011"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 72,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC5521011",
+      "pmid": "27981708",
+      "review_rank": 13,
+      "route_review_status": "not_started",
+      "source_id": "27981708",
+      "supplement_archive": {
+        "api_error": "Article with id PMC5521011 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Non-Viral CRISPR/Cas Gene Editing In Vitro and In Vivo Enabled by Synthetic Nanoparticle Co-Delivery of Cas9 mRNA and sgRNA.",
+      "unique_component_count": 18
+    },
+    {
+      "doi": "10.1002/adhm.202403366",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 88319,
+          "cache_asset": "PMC11912100/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "31b3678ab5541af06c2398c5fca0ccbb6ab66a5ed4db81def59e1af97735741f",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11912100/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 131503,
+          "cache_asset": "PMC11912100/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "78efa09efea427cbe1afe5bab776e628ebfa0d9d9366bde8d4099a2f9b25060c",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11912100/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11912100/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/09/5e/PMC11912100.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 601,
+          "cache_asset": "PMC11912100/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "aa0d12d053d3b13831351b1c616bcc457a6c66c7b38b24ecc455e82f1073d0db",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11912100"
+        }
+      },
+      "jats_supplement_links": [
+        "ADHM-14-0-s001.pdf"
+      ],
+      "lnpdb_record_count": 36,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/09/5e/ADHM-14-0.PMC11912100.pdf",
+            "updated": "2025-03-17 09:17:31"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/09/5e/PMC11912100.tar.gz",
+            "updated": "2025-03-18 00:25:29"
+          }
+        ]
+      },
+      "pmc_id": "PMC11912100",
+      "pmid": "39502027",
+      "review_rank": 14,
+      "route_review_status": "not_started",
+      "source_id": "39502027",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Novel Less Toxic, Lymphoid Tissue-Targeted Lipid Nanoparticles Containing a Vitamin B5-Derived Ionizable Lipid for mRNA Vaccine Delivery.",
+      "unique_component_count": 16
+    },
+    {
+      "doi": "10.1038/s41467-024-45537-z",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 99203,
+          "cache_asset": "PMC10897129/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "5234704ef90d65ac00b25c41875e2e1ae05059c9d41a1d16c0fced7fabb3ae62",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10897129/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 127479,
+          "cache_asset": "PMC10897129/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "7749783e511a5a943894e582f69acef8579e6fe19ec40accaa3cca413186b466",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10897129/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 11397636,
+          "cache_asset": "PMC10897129/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "cf85692057ffc17191513d69344925825463f78304d43d66034f94bce0e44f7c",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10897129/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/42/db/PMC10897129.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 450,
+          "cache_asset": "PMC10897129/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "c5b2043b9ec8a2db7559476a9778a914281aeb11f8663265d1fd1321ef44bc3e",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10897129"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2024_45537_MOESM1_ESM.pdf",
+        "41467_2024_45537_MOESM2_ESM.pdf",
+        "41467_2024_45537_MOESM3_ESM.pdf",
+        "41467_2024_45537_MOESM4_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 60,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/42/db/PMC10897129.tar.gz",
+            "updated": "2026-02-05 14:25:12"
+          }
+        ]
+      },
+      "pmc_id": "PMC10897129",
+      "pmid": "38409275",
+      "review_rank": 15,
+      "route_review_status": "not_started",
+      "source_id": "38409275",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 4196,
+            "compressed_bytes": 4067,
+            "crc32": "57c37e74",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig4_HTML.gif"
+          },
+          {
+            "bytes": 105524,
+            "compressed_bytes": 99485,
+            "crc32": "4a88cc78",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig5_HTML.jpg"
+          },
+          {
+            "bytes": 7515956,
+            "compressed_bytes": 6805230,
+            "crc32": "c813df76",
+            "is_directory": false,
+            "name": "41467_2024_45537_MOESM2_ESM.pdf"
+          },
+          {
+            "bytes": 4148,
+            "compressed_bytes": 4043,
+            "crc32": "6a50bd0f",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig5_HTML.gif"
+          },
+          {
+            "bytes": 4955,
+            "compressed_bytes": 4867,
+            "crc32": "80a4361a",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig2_HTML.gif"
+          },
+          {
+            "bytes": 124845,
+            "compressed_bytes": 121347,
+            "crc32": "9d7215a1",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig2_HTML.jpg"
+          },
+          {
+            "bytes": 3708,
+            "compressed_bytes": 3422,
+            "crc32": "32b13001",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig3_HTML.gif"
+          },
+          {
+            "bytes": 93250,
+            "compressed_bytes": 86412,
+            "crc32": "b0ca30fb",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig4_HTML.jpg"
+          },
+          {
+            "bytes": 105412,
+            "compressed_bytes": 104005,
+            "crc32": "5542739f",
+            "is_directory": false,
+            "name": "41467_2024_45537_MOESM3_ESM.pdf"
+          },
+          {
+            "bytes": 107118,
+            "compressed_bytes": 103638,
+            "crc32": "f18107e9",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig6_HTML.jpg"
+          },
+          {
+            "bytes": 46990,
+            "compressed_bytes": 42969,
+            "crc32": "6f2ca531",
+            "is_directory": false,
+            "name": "41467_2024_45537_MOESM4_ESM.xlsx"
+          },
+          {
+            "bytes": 4973,
+            "compressed_bytes": 4833,
+            "crc32": "7daaf3cb",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig6_HTML.gif"
+          },
+          {
+            "bytes": 4760746,
+            "compressed_bytes": 3830219,
+            "crc32": "e71917b0",
+            "is_directory": false,
+            "name": "41467_2024_45537_MOESM1_ESM.pdf"
+          },
+          {
+            "bytes": 100442,
+            "compressed_bytes": 96088,
+            "crc32": "0f2582b5",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig3_HTML.jpg"
+          },
+          {
+            "bytes": 85486,
+            "compressed_bytes": 80601,
+            "crc32": "5e34dfea",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig1_HTML.jpg"
+          },
+          {
+            "bytes": 4021,
+            "compressed_bytes": 3946,
+            "crc32": "b1395be6",
+            "is_directory": false,
+            "name": "41467_2024_45537_Fig1_HTML.gif"
+          }
+        ],
+        "archive_entry_count": 16,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 13071770,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "In situ combinatorial synthesis of degradable branched lipidoids for systemic delivery of mRNA therapeutics and gene editors.",
+      "unique_component_count": 11
+    },
+    {
+      "doi": "10.1016/j.bioactmat.2024.05.012",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 117910,
+          "cache_asset": "PMC11109743/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "183482c255279f8d40a0559c1ce7c37956c7b005bf7afa9c550754c3d80c64f5",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11109743/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 135643,
+          "cache_asset": "PMC11109743/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "f54ef0cc5fbd873937bca480a54a6c4c3fde8a3bcf6e5cb0f50cd536f0e99715",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11109743/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 3884554,
+          "cache_asset": "PMC11109743/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "9b59d159e0c851d4d6466f312d413af244524edc089ff65cd5baea8666b0a11f",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11109743/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/2c/2d/PMC11109743.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 588,
+          "cache_asset": "PMC11109743/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "6eabdfacba203de8a5a10765501f0a44d42665f0948cc98c6790b41669ee41c3",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11109743"
+        }
+      },
+      "jats_supplement_links": [
+        "mmc1.docx"
+      ],
+      "lnpdb_record_count": 24,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/2c/2d/main.PMC11109743.pdf",
+            "updated": "2024-05-22 07:33:25"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/2c/2d/PMC11109743.tar.gz",
+            "updated": "2024-05-23 17:25:18"
+          }
+        ]
+      },
+      "pmc_id": "PMC11109743",
+      "pmid": "38779592",
+      "review_rank": 16,
+      "route_review_status": "not_started",
+      "source_id": "38779592",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 275034,
+            "compressed_bytes": 245032,
+            "crc32": "0599c582",
+            "is_directory": false,
+            "name": "gr5.jpg"
+          },
+          {
+            "bytes": 73020,
+            "compressed_bytes": 70068,
+            "crc32": "167cb6df",
+            "is_directory": false,
+            "name": "gr2.gif"
+          },
+          {
+            "bytes": 261909,
+            "compressed_bytes": 236591,
+            "crc32": "fc54face",
+            "is_directory": false,
+            "name": "gr3.jpg"
+          },
+          {
+            "bytes": 150388,
+            "compressed_bytes": 133304,
+            "crc32": "3114cb63",
+            "is_directory": false,
+            "name": "gr2.jpg"
+          },
+          {
+            "bytes": 76206,
+            "compressed_bytes": 73369,
+            "crc32": "79b9e960",
+            "is_directory": false,
+            "name": "gr1.gif"
+          },
+          {
+            "bytes": 75776,
+            "compressed_bytes": 72964,
+            "crc32": "2f15b25e",
+            "is_directory": false,
+            "name": "gr4.gif"
+          },
+          {
+            "bytes": 78693,
+            "compressed_bytes": 75922,
+            "crc32": "6b48897b",
+            "is_directory": false,
+            "name": "gr6.gif"
+          },
+          {
+            "bytes": 75174,
+            "compressed_bytes": 72366,
+            "crc32": "a5734aed",
+            "is_directory": false,
+            "name": "gr7.gif"
+          },
+          {
+            "bytes": 75043,
+            "compressed_bytes": 72078,
+            "crc32": "4f4a41cf",
+            "is_directory": false,
+            "name": "ga1.gif"
+          },
+          {
+            "bytes": 646945,
+            "compressed_bytes": 619500,
+            "crc32": "b62ca321",
+            "is_directory": false,
+            "name": "gr6.jpg"
+          },
+          {
+            "bytes": 206969,
+            "compressed_bytes": 193989,
+            "crc32": "3700975a",
+            "is_directory": false,
+            "name": "ga1.jpg"
+          },
+          {
+            "bytes": 77022,
+            "compressed_bytes": 73608,
+            "crc32": "a8d7cc4a",
+            "is_directory": false,
+            "name": "gr5.gif"
+          },
+          {
+            "bytes": 340879,
+            "compressed_bytes": 316555,
+            "crc32": "2628ee6a",
+            "is_directory": false,
+            "name": "gr1.jpg"
+          },
+          {
+            "bytes": 253532,
+            "compressed_bytes": 236135,
+            "crc32": "f85a236b",
+            "is_directory": false,
+            "name": "gr4.jpg"
+          },
+          {
+            "bytes": 74528,
+            "compressed_bytes": 71595,
+            "crc32": "baedf2a3",
+            "is_directory": false,
+            "name": "gr3.gif"
+          },
+          {
+            "bytes": 1172037,
+            "compressed_bytes": 1069499,
+            "crc32": "3f1432cd",
+            "is_directory": false,
+            "name": "mmc1.docx"
+          },
+          {
+            "bytes": 277019,
+            "compressed_bytes": 250151,
+            "crc32": "2e1c18ce",
+            "is_directory": false,
+            "name": "gr7.jpg"
+          }
+        ],
+        "archive_entry_count": 17,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 4190174,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "A lipid nanoparticle platform incorporating trehalose glycolipid for exceptional mRNA vaccine safety.",
+      "unique_component_count": 5
+    },
+    {
+      "doi": "10.1038/s41467-022-31993-y",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 90065,
+          "cache_asset": "PMC9310361/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "b7a77e51230c9fcf26bdde78f49d86c4413e142f9ef9f75bf92816afca6e43a7",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC9310361/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 113722,
+          "cache_asset": "PMC9310361/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "de6f22f88e95b1b61d4dc1bd7954ddaa6634ab2de54adeb2dc4dca8ad6941df9",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9310361/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9310361/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ae/a9/PMC9310361.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 446,
+          "cache_asset": "PMC9310361/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "59ab702a9860d1d80fba6165dc0398e7e8e8f1e55a2c1f6d3e4ce672c2fba705",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC9310361"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2022_31993_MOESM1_ESM.pdf",
+        "41467_2022_31993_MOESM2_ESM.zip",
+        "41467_2022_31993_MOESM3_ESM.pdf",
+        "41467_2022_31993_MOESM4_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 1080,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ae/a9/PMC9310361.tar.gz",
+            "updated": "2022-07-28 02:16:53"
+          }
+        ]
+      },
+      "pmc_id": "PMC9310361",
+      "pmid": "35879315",
+      "review_rank": 17,
+      "route_review_status": "not_started",
+      "source_id": "35879315",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Multi-step screening of DNA/lipid nanoparticles and co-delivery with siRNA to enhance and prolong gene expression.",
+      "unique_component_count": 1
+    },
+    {
+      "doi": "10.1038/s41551-023-01131-0",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC11162325/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11162325/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11162325/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 165,
+          "cache_asset": "PMC11162325/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "eaa038620660cd2ef181e354b293334e40e0cf3df882bcfa205f7401085c6629",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11162325/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 224,
+          "cache_asset": "PMC11162325/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "ebfd7d3ad1339774bc13cd4c7e74a2bf9a965a8512c7c3d333608fd7da558096",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11162325"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 1080,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC11162325",
+      "pmid": "38082180",
+      "review_rank": 18,
+      "route_review_status": "not_started",
+      "source_id": "38082180",
+      "supplement_archive": {
+        "api_error": "Article with id PMC11162325 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Screening for lipid nanoparticles that modulate the immune activity of helper T cells towards enhanced antitumour activity.",
+      "unique_component_count": 1
+    },
+    {
+      "doi": "10.1186/s12951-024-02919-1",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 110916,
+          "cache_asset": "PMC11536852/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "520ff3a0167fd2000be921a61bf4b044bb430e17bd7c78d90eca8bf1bbf0351c",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11536852/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 149361,
+          "cache_asset": "PMC11536852/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "5ee6b742a5cebc7b35c6a68b53d0db05a88182856e9060f42853c5affeb548aa",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11536852/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11536852/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/c6/cf/PMC11536852.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 609,
+          "cache_asset": "PMC11536852/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "6fc80611e50272d8cd043dadc897af8036ec5e531274fd6c296b2603bb922c78",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11536852"
+        }
+      },
+      "jats_supplement_links": [
+        "12951_2024_2919_MOESM1_ESM.pdf",
+        "12951_2024_2919_MOESM2_ESM.docx"
+      ],
+      "lnpdb_record_count": 623,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/c6/cf/12951_2024_Article_2919.PMC11536852.pdf",
+            "updated": "2024-11-05 11:03:50"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/c6/cf/PMC11536852.tar.gz",
+            "updated": "2024-11-06 10:25:20"
+          }
+        ]
+      },
+      "pmc_id": "PMC11536852",
+      "pmid": "39497197",
+      "review_rank": 19,
+      "route_review_status": "not_started",
+      "source_id": "39497197",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "High-throughput synthesis and optimization of ionizable lipids through A(3) coupling for efficient mRNA delivery.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1101/2025.02.25.640222",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 54915,
+          "cache_asset": "PMC11888472/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "6c3661917b291d946ee6976e3a3f0cdf06f86fefb34471c043ff3f1149f89110",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC11888472/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 75006,
+          "cache_asset": "PMC11888472/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "57f7405def316dad2c9efc092f69ffb42229312011e0eda23f712c8aa612125d",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11888472/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 3176809,
+          "cache_asset": "PMC11888472/supplementary_files.zip",
+          "content_type": "application/zip",
+          "http_status": 200,
+          "sha256": "ddba528699713ecb133b7c4b9c0582ca7877d8aacb4bbe924a352cb7ef47b7c5",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11888472/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ec/30/PMC11888472.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 610,
+          "cache_asset": "PMC11888472/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "57bcc166906a86c185e29e86dfb71633f2653a8957a25e66931e3981e47eaf60",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC11888472"
+        }
+      },
+      "jats_supplement_links": [
+        "media-1.pdf"
+      ],
+      "lnpdb_record_count": 500,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/ec/30/nihpp-2025.02.25.640222v1.PMC11888472.pdf",
+            "updated": "2025-03-07 17:38:38"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/ec/30/PMC11888472.tar.gz",
+            "updated": "2026-06-03 00:25:16"
+          }
+        ]
+      },
+      "pmc_id": "PMC11888472",
+      "pmid": "40060499",
+      "review_rank": 20,
+      "route_review_status": "not_started",
+      "source_id": "40060499",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [
+          {
+            "bytes": 172888,
+            "compressed_bytes": 150662,
+            "crc32": "8672dcf3",
+            "is_directory": false,
+            "name": "nihpp-2025.02.25.640222v1-f0001.jpg"
+          },
+          {
+            "bytes": 117859,
+            "compressed_bytes": 97559,
+            "crc32": "9534b746",
+            "is_directory": false,
+            "name": "nihpp-2025.02.25.640222v1-f0002.jpg"
+          },
+          {
+            "bytes": 19644,
+            "compressed_bytes": 17551,
+            "crc32": "65fe190a",
+            "is_directory": false,
+            "name": "nihpp-2025.02.25.640222v1-f0001.gif"
+          },
+          {
+            "bytes": 15617,
+            "compressed_bytes": 13434,
+            "crc32": "76029a66",
+            "is_directory": false,
+            "name": "nihpp-2025.02.25.640222v1-f0002.gif"
+          },
+          {
+            "bytes": 3058325,
+            "compressed_bytes": 2896819,
+            "crc32": "6027ecc2",
+            "is_directory": false,
+            "name": "media-1.pdf"
+          }
+        ],
+        "archive_entry_count": 5,
+        "status": "validated_archive_acquired",
+        "uncompressed_bytes": 3384333,
+        "validation_error": ""
+      },
+      "supplement_status": "official_archive_acquired",
+      "title": "Plug-and-play assembly of biodegradable ionizable lipids for potent mRNA delivery and gene editing in vivo.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1021/jacs.4c10265",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC12190489/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12190489/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12190489/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 165,
+          "cache_asset": "PMC12190489/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "6ede4695c76669b5e335363d3aa4c98acf56bb753a015c9fea13ff3b7fc63dbe",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12190489/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 224,
+          "cache_asset": "PMC12190489/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "13ac8b1a2d22773760897be498a6b83771e3bbab2f2f8a820a5d4fce1c5dc9fa",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC12190489"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 270,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC12190489",
+      "pmid": "39742515",
+      "review_rank": 21,
+      "route_review_status": "not_started",
+      "source_id": "39742515",
+      "supplement_archive": {
+        "api_error": "Article with id PMC12190489 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Multiarm-Assisted Design of Dendron-like Degradable Ionizable Lipids Facilitates Systemic mRNA Delivery to the Spleen.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41565-024-01747-6",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC12207990/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12207990/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12207990/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 165,
+          "cache_asset": "PMC12207990/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "ca8a1d6d3d6f06e93c6c182ceba8610f9c1fb11ee7679e99138f79268707adc4",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12207990/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 224,
+          "cache_asset": "PMC12207990/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "d261c144a9f8106925eab7c400f08a546603fa4ff94b909774bb77299aaa78a1",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC12207990"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 252,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC12207990",
+      "pmid": "39354147",
+      "review_rank": 22,
+      "route_review_status": "not_started",
+      "source_id": "39354147",
+      "supplement_archive": {
+        "api_error": "Article with id PMC12207990 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Combinatorial design of siloxane-incorporated lipid nanoparticles augments intracellular processing for tissue-specific mRNA therapeutic delivery.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41565-023-01548-3",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC10954414/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC10954414/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10954414/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 165,
+          "cache_asset": "PMC10954414/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "0b5a8af9f246d1d901ca27399b772b4ed955a986f70e9b64ae593be9455c3ace",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10954414/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 224,
+          "cache_asset": "PMC10954414/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "05f80ee8f690d005d7ae064e1f2192722355f62cb96a8ceddb5487f85dbd787d",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10954414"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 1902,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC10954414",
+      "pmid": "37985700",
+      "review_rank": 23,
+      "route_review_status": "not_started",
+      "source_id": "37985700",
+      "supplement_archive": {
+        "api_error": "Article with id PMC10954414 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "Combinatorial development of nebulized mRNA delivery formulations for the lungs.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s42004-025-01516-z",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 106690,
+          "cache_asset": "PMC12000586/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "dc95cfc0c1f2dcd2f84be7430fc861f218cb5489ebc7d97acb2d73d3733dbbd4",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC12000586/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 131093,
+          "cache_asset": "PMC12000586/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "b8d8ce09d602ed25953cd434bdf878e791d07355a51e81b7daf8fceb45b13e72",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12000586/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12000586/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/5f/bd/PMC12000586.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 601,
+          "cache_asset": "PMC12000586/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "896f07f2d4c8fa918429a840d6aadbe9b331f34aba9f51a0b14134f5bfd90e2e",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC12000586"
+        }
+      },
+      "jats_supplement_links": [
+        "42004_2025_1516_MOESM1_ESM.pdf",
+        "42004_2025_1516_MOESM2_ESM.pdf",
+        "42004_2025_1516_MOESM3_ESM.pdf"
+      ],
+      "lnpdb_record_count": 91,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY-NC-ND",
+        "package_links": [
+          {
+            "format": "pdf",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_pdf/5f/bd/42004_2025_Article_1516.PMC12000586.pdf",
+            "updated": "2025-04-16 04:01:58"
+          },
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/5f/bd/PMC12000586.tar.gz",
+            "updated": "2025-04-17 00:25:47"
+          }
+        ]
+      },
+      "pmc_id": "PMC12000586",
+      "pmid": "40234552",
+      "review_rank": 24,
+      "route_review_status": "not_started",
+      "source_id": "40234552",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Multicomponent thiolactone-based ionizable lipid screening platform for efficient and tunable mRNA delivery to the lungs.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1016/j.ymthe.2018.03.010",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 6148,
+          "cache_asset": "PMC5986714/bioc_full_text.xml",
+          "content_type": "text/html",
+          "http_status": 200,
+          "sha256": "3acc5f4c51ec704cd708d3379196db9f66442a96c9bf275773710e0de0196b52",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC5986714/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5986714/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 164,
+          "cache_asset": "PMC5986714/supplementary_response.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "0edf486938588ecf002e820c4535f06f1ed20a493f76deebf0ecb195a6e928d9",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5986714/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": false,
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "",
+          "http_status": null,
+          "sha256": "",
+          "transport_error": "",
+          "url": ""
+        },
+        "pmc_oa_record": {
+          "bytes": 222,
+          "cache_asset": "PMC5986714/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "f2ee80cd38d76483c4f760038adc4d4dad6198c935d7a32ac4ff6807530464ea",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC5986714"
+        }
+      },
+      "jats_supplement_links": [],
+      "lnpdb_record_count": 10,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_attempted",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "api_reported_unavailable",
+        "error_code": "idIsNotOpenAccess",
+        "package_links": []
+      },
+      "pmc_id": "PMC5986714",
+      "pmid": "29653760",
+      "review_rank": 25,
+      "route_review_status": "not_started",
+      "source_id": "29653760",
+      "supplement_archive": {
+        "api_error": "Article with id PMC5986714 is not open access one",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "api_reported_unavailable",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "official_api_reported_unavailable",
+      "title": "A Novel Amino Lipid Series for mRNA Delivery: Improved Endosomal Escape and Sustained Pharmacology and Safety in Non-human Primates.",
+      "unique_component_count": 0
+    },
+    {
+      "doi": "10.1038/s41467-020-14527-2",
+      "endpoints": {
+        "bioc_full_text": {
+          "bytes": 115489,
+          "cache_asset": "PMC7033178/bioc_full_text.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "277f219935a8bf11b8cffdc3bccc8e06b6e1840501d8c8da72f089868c374a31",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/PMC7033178/unicode"
+        },
+        "europe_pmc_jats": {
+          "bytes": 150871,
+          "cache_asset": "PMC7033178/europe_pmc_jats.xml",
+          "content_type": "application/xml",
+          "http_status": 200,
+          "sha256": "3599a0065c9b9f117a3339c9bf2b061941ec0fc13c4d2c25e6965d00aff12f57",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7033178/fullTextXML"
+        },
+        "europe_pmc_supplements": {
+          "bytes": 0,
+          "cache_asset": "",
+          "content_type": "text/plain",
+          "http_status": 404,
+          "sha256": "",
+          "transport_error": "",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7033178/supplementaryFiles"
+        },
+        "pmc_oa_package": {
+          "attempted": true,
+          "bytes": 990,
+          "cache_asset": "",
+          "content_type": "text/html",
+          "http_status": 404,
+          "sha256": "04b10f58e3f1340fc897c7057a0001c82ebd216d8ced1a96a2f05676b5d22494",
+          "transport_error": "",
+          "url": "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/e2/4f/PMC7033178.tar.gz"
+        },
+        "pmc_oa_record": {
+          "bytes": 445,
+          "cache_asset": "PMC7033178/pmc_oa_record.xml",
+          "content_type": "text/xml",
+          "http_status": 200,
+          "sha256": "3962611bb6fda90af59ef06f85537fd80932f5a2f283b47cc63759a120932b1a",
+          "transport_error": "",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC7033178"
+        }
+      },
+      "jats_supplement_links": [
+        "41467_2020_14527_MOESM1_ESM.pdf",
+        "41467_2020_14527_MOESM2_ESM.docx",
+        "41467_2020_14527_MOESM3_ESM.mp4",
+        "41467_2020_14527_MOESM4_ESM.pdf",
+        "41467_2020_14527_MOESM5_ESM.xlsx"
+      ],
+      "lnpdb_record_count": 30,
+      "main_text_status": "machine_readable_full_text_acquired",
+      "oa_package_archive": {
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "fetch_failed",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "oa_record": {
+        "availability": "package_link_reported",
+        "error_code": "",
+        "license": "CC BY",
+        "package_links": [
+          {
+            "format": "tgz",
+            "href": "ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/e2/4f/PMC7033178.tar.gz",
+            "updated": "2025-10-04 13:25:42"
+          }
+        ]
+      },
+      "pmc_id": "PMC7033178",
+      "pmid": "32080183",
+      "review_rank": 26,
+      "route_review_status": "not_started",
+      "source_id": "32080183",
+      "supplement_archive": {
+        "api_error": "",
+        "archive_entries": [],
+        "archive_entry_count": 0,
+        "status": "not_acquired",
+        "uncompressed_bytes": 0,
+        "validation_error": ""
+      },
+      "supplement_status": "oa_package_fetch_failed",
+      "title": "Naturally-occurring cholesterol analogues in lipid nanoparticles induce polymorphic shape and enhance intracellular delivery of mRNA.",
+      "unique_component_count": 0
+    }
+  ],
+  "schema_version": "m0_09_pmc_source_acquisition.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "jats_full_text_acquired": 13,
+    "machine_readable_full_text_acquired": 26,
+    "machine_readable_full_text_unavailable": 0,
+    "oa_package_entries": 0,
+    "oa_package_links_reported": 15,
+    "oa_packages_acquired": 0,
+    "pmc_publication_families": 26,
+    "route_reviews_completed": 0,
+    "supplement_archive_entries": 90,
+    "supplement_archives_acquired": 7,
+    "supplement_status_counts": {
+      "oa_package_fetch_failed": 8,
+      "official_api_reported_unavailable": 11,
+      "official_archive_acquired": 7
+    }
+  },
+  "task": "M0-09 PMC primary-source acquisition"
+}

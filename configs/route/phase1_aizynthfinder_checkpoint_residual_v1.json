@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.aizynthfinder_checkpoint_residual_config.v1",
+  "status": "frozen_complementary_proposal_only_diagnostic",
+  "seed": 20260805,
+  "inputs": {
+    "component_ledger": {
+      "path": "results/phase1/ugi3_proposal_aware_checkpoint_contrast_v1/component_ledger.jsonl.gz",
+      "sha256": "cafbcc89bf03c2f3dd09745e0d7a14a80b8399593194a62d1ac2acaffb2e0d16"
+    },
+    "leaf_worklist": {
+      "path": "results/phase1/ugi3_proposal_aware_closure_sensitivity_v1/leaf_worklist.jsonl.gz",
+      "sha256": "eb49125d58e4c739b2704d88439f080c5d4d3d5ddba4588eea35d9bb44b7f41a"
+    },
+    "runtime_manifest": {
+      "path": "configs/route/aizynthfinder_public_v4_4_1_diagnostic_macos_arm64_v1.json",
+      "sha256": "bb1af0ff80a22f8a1c5a785868aa58558f8fbd6aab1ebd607bda65f826d3206b"
+    }
+  },
+  "single_step": {
+    "expansion_policies": ["uspto", "ringbreaker"],
+    "filter_policies": ["uspto"],
+    "maximum_proposals": 10
+  },
+  "full_search": {
+    "stocks": ["zinc"],
+    "time_limit_seconds": 8,
+    "iteration_limit": 60,
+    "maximum_transforms": 6,
+    "maximum_routes_stored": 3
+  },
+  "shard_count": 2,
+  "output_directory": "results/phase1/aizynthfinder_checkpoint_residual_v1",
+  "scope_guards": {
+    "proposal_only_not_route_evidence": true,
+    "public_stock_solution_is_current_procurement_evidence": false,
+    "planner_solution_sets_synthesis_value": false,
+    "model_score_used_as_synthesis_value": false,
+    "unsolved_search_means_unsynthesizable": false,
+    "candidate_selection": false
+  }
+}

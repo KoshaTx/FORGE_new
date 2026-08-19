@@ -1,0 +1,274 @@
+{
+  "schema_version": "phase1_ugi_prediction_cohorts.v3",
+  "status": "frozen_pre_procurement_amendment",
+  "frozen_utc": "2026-08-06",
+  "authority": "docs/MANUSCRIPT_AUTHORITY.md section 22",
+  "supersedes": "configs/bio/phase1_ugi_frontier_eligibility_v1.json",
+  "purpose": "Define the three prediction-evidence cohorts of the locked 30-candidate panel before any cohort is selected. The cohorts differ along exactly one axis, the identity and remoteness of a single aldehyde component, so that the panel reads as one interpretable progression rather than four unrelated generalization problems.",
+  "naming": {
+    "note": "Prediction-evidence cohorts are Q/N/X. Route-evidence labels remain R1/R2/R3. The earlier Tier A/B/C naming is retired because it collided with route evidence.",
+    "Q": "Qualified: all component identities measured, only the combination is new",
+    "N": "Near-boundary analog transfer: exactly one unseen aldehyde inside the similarity envelope",
+    "X": "Extrapolative: exactly one unseen aldehyde beyond the similarity envelope"
+  },
+  "single_axis_contract": {
+    "varied": "identity and remoteness of the aldehyde component only",
+    "held_constant": "amine head and isocyanide identities must be measured in every cohort; exact Ugi forward verification and route completeness are required in every cohort",
+    "excluded_from_all_cohorts": "unseen amine heads, unseen isocyanides, and any design with more than one unseen component. A multiple-new-component or new-head design may be synthesized as an explicitly labelled moonshot but is never aggregated into Q, N or X."
+  },
+  "similarity_envelope": {
+    "metric": "Tanimoto on Morgan fingerprints, radius 2, 2048 bits",
+    "reference_set": "measured training aldehydes",
+    "boundary": 0.65,
+    "derivation": "minimum internal nearest-neighbour similarity among the 11 measured aldehydes; a generated aldehyde at or above it is at least as close to the measured set as the most isolated measured aldehyde, for which the oracle already issues qualified predictions"
+  },
+  "cohorts": {
+    "Q_high": {
+      "n": 12,
+      "membership": "oracle_scored, all component identities measured",
+      "ordering_score": "calibrated conformal lower bound (lcb90)",
+      "selection": "highest lcb90 subject to the diversity rule",
+      "preference": "drawn from the qualified role-holdout authority tier where available"
+    },
+    "Q_low": {
+      "n": 7,
+      "membership": "same qualified and route-complete population as Q_high",
+      "ordering_score": "calibrated conformal lower bound (lcb90)",
+      "selection": "lowest lcb90 among candidates that survive the matching contract",
+      "matching_contract": {
+        "pool": "frozen low-rank definition: bottom quartile of lcb90 within the qualified route-complete population",
+        "method": "nearest-neighbour matching to Q-high in standardized covariate space",
+        "covariates": [
+          "molecular_weight",
+          "clogp",
+          "tpsa",
+          "heavy_atom_count",
+          "rotatable_bonds",
+          "formal_charge",
+          "component_role_classes",
+          "component_reuse",
+          "route_step_count"
+        ],
+        "prohibited_in_distance": "predicted potency, lcb90, oracle mean, or any biological outcome beyond the frozen low-rank eligibility criterion",
+        "purpose": "a chemically credible ranking control, not maximal separation of the two arms",
+        "reporting": "high-versus-low balance table with standardized differences"
+      }
+    },
+    "N_transfer": {
+      "n": 8,
+      "membership": "exactly one unseen aldehyde, similarity to measured >= 0.65, amine and isocyanide identities measured, exact forward verified, route complete",
+      "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation",
+      "ordering_rationale": "AGILE ranked their ~12,000-member candidate library by this statistic and recovered H9. It penalises high-variance extrapolation, which the raw mean does not. It is not the calibrated lower bound, which is undefined outside the qualified region.",
+      "composition": {
+        "strongest": 6,
+        "lower_edge": 2,
+        "lower_edge_definition": "highest conservative score among eligible candidates whose aldehyde similarity falls in the lowest quartile of the eligible N pool, so the cohort probes the envelope boundary as well as exploiting it"
+      }
+    },
+    "X_extrapolative": {
+      "n": 3,
+      "membership": "exactly one unseen aldehyde, similarity to measured < 0.65, amine and isocyanide identities measured, exact forward verified, route complete",
+      "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation",
+      "composition": {
+        "near_envelope": 2,
+        "remote": 2,
+        "rationale": "Selecting all four at one extreme would answer only one question. Two drawn from just below the envelope and two from the most remote eligible aldehydes give a gradient, which is what makes a four-member exploratory cohort interpretable.",
+        "note": "This split is an implementation judgement recorded here rather than inherited from the authority, which specifies only that X lies beyond the envelope."
+      }
+    }
+  },
+  "shared_requirements": {
+    "exact_ugi_validity": {
+      "exact_forward_verified": true,
+      "forward_product_count_minimum": 1
+    },
+    "route": {
+      "requirement": "route_complete",
+      "definition": "every component either purchasable or reduced to purchasable material by a forward-verified route",
+      "unresolved_material_leaves_permitted": 0
+    },
+    "physicochemical_screen": {
+      "note": "1st to 99th percentile envelope of the qualified population; every cohort must fall inside the same envelope",
+      "molecular_weight": [
+        563.91,
+        792.38
+      ],
+      "clogp": [
+        7.08,
+        14.17
+      ],
+      "tpsa": [
+        70.67,
+        122.71
+      ],
+      "comparison_tolerance": 1e-06
+    },
+    "pathological_motifs_excluded": [
+      "acyl halide",
+      "retained aldehyde",
+      "epoxide",
+      "isocyanate",
+      "peroxide",
+      "azide",
+      "N-nitroso",
+      "enone",
+      "silicon",
+      "boron",
+      "any halogen",
+      "allene",
+      "enol",
+      "hemiacetal or gem-diol",
+      "anhydride",
+      "ketene",
+      "carbamic acid",
+      "imine or oxime"
+    ]
+  },
+  "analysis_contract": {
+    "primary_endpoint": "continuous potency measurement",
+    "secondary_endpoint": "thresholded hit rate, reported as interpretable but not as the primary analysis",
+    "primary_comparison": "Q_high versus Q_low",
+    "power_statement": "Expanding 6-versus-2 to 12-versus-6 makes the enrichment analysis substantially more informative and gives it a realistic chance of formal significance if the effect is large. Ex ante power at true rates 67% versus 10%, one-sided alpha 0.05, is 0.65. Do not describe it as guaranteed or as properly powered.",
+    "population_separation": "N and X are never pooled into the Q primary analysis, and never pooled with each other",
+    "intention_to_test": "30 locked, route attempted, correct product isolated, formulation QC passed, biological assay completed. Failures remain in the denominator. Backups may be prepared operationally but any replacement is separately labelled.",
+    "generation_arm_comparison": "broad versus support-enriched remains computational and consumes no wet-lab slot"
+  },
+  "benchmarks": {
+    "outside_the_30": true,
+    "required": [
+      "established positive-control lipid",
+      "vehicle or negative control",
+      "formulation-system control where the assay requires it"
+    ],
+    "h9": "external precedent only; a direct H9 arm is not mandatory and the paper does not need to prove our model ranks H9"
+  },
+  "nonclaims": [
+    "Cohort membership is not a prediction of activity.",
+    "N eligibility does not assert validated generalization to unseen aldehydes.",
+    "Four X candidates support a case study, not a statistical claim about extrapolation.",
+    "The conservative ensemble score carries no coverage guarantee outside the qualified region."
+  ],
+  "screen_correction_2026-08-06": {
+    "what": "Added allene, enol, hemiacetal/gem-diol, anhydride, ketene, carbamic acid and imine/oxime to the excluded-motif list.",
+    "why": "The first X selection surfaced candidates containing OC(O)=C enols, C=C=C allenes and OC(O) hemiacetals. These are tautomer and valence artifacts of generation rather than stable synthetic targets, and the Tail A route correctly failed to resolve them. The frozen configuration already required exclusion of pathological motifs; the SMARTS implementation under-covered that requirement.",
+    "scope": "Applies to all cohorts. Q and N selections are unaffected in practice because those candidates resolve through verified routes, which such motifs cannot.",
+    "not_a_loosening": "This tightens the screen."
+  },
+  "amends": "configs/bio/phase1_ugi_prediction_cohorts_v2.json (preserved unchanged)",
+  "amendment_rationale": "Before procurement or biological evaluation, audit of the product-quality filter showed that a generic alpha,beta-unsaturated-carbonyl SMARTS unintentionally excluded 223 valid alpha,beta-unsaturated ester products. The excluded motif was represented in the measured source library and had passed synthesis, formulation and biological testing. We therefore narrowed the alert to the intended reactive carbonyl class and reran the prespecified qualified-cohort selection deterministically. No biological outcomes informed the amendment.",
+  "quota": {
+    "preferred": {
+      "Q_high": 12,
+      "Q_low": 7,
+      "N": 8,
+      "X": 3,
+      "total": 30
+    },
+    "fallback": {
+      "Q_high": 12,
+      "Q_low": 6,
+      "N": 9,
+      "X": 3,
+      "total": 30,
+      "condition": "only if seven Q-low controls cannot be selected without violating the frozen Q eligibility and low-rank definitions"
+    },
+    "prohibited": "changing N or X eligibility to satisfy counts"
+  },
+  "diversity_rules": {
+    "scope": "cohort-specific, never global",
+    "Q_high": {
+      "metric": "Tanimoto, Morgan radius 2, 2048 bits, complete products",
+      "maximum_pairwise": 0.8,
+      "note": "0.70 was inherited from the ten-slot panel and forced the 12th Q-high candidate to lcb90 -3.04, overlapping the control band."
+    },
+    "Q_low": {
+      "maximum_pairwise_within_cohort": 0.85,
+      "cross_cohort_exclusion": "NONE",
+      "note": "Similarity between Q-low and Q-high is desirable. A cross-arm exclusion is what collapsed the control pool in v1."
+    },
+    "N_transfer": {
+      "maximum_pairwise_within_cohort": 0.7
+    },
+    "X_extrapolative": {
+      "maximum_pairwise_within_cohort": 0.7,
+      "note": "Two X products may share one unseen aldehyde; that is within-aldehyde replication across two component contexts, not two independent demonstrations."
+    }
+  },
+  "X_reporting_contract": {
+    "products": 3,
+    "distinct_unseen_aldehydes": 2,
+    "structure": "one near-envelope aldehyde in two component contexts, one more remote aldehyde in one context",
+    "prohibited_description": "three independent demonstrations of component extrapolation",
+    "status": "exploratory out-of-envelope challenge cohort, not a statistical validation of general extrapolation"
+  },
+  "audit_package_required_before_lock": [
+    "v1 to v2 protocol diff and rationale",
+    "pre- and post-filter pool counts by cohort",
+    "chemistry and route attrition reasons",
+    "selected IDs, structures, component identities, scores, uncertainties, similarities",
+    "Q-high and Q-low score distributions",
+    "high-versus-low covariate balance table",
+    "within-cohort similarity matrices and component-reuse counts",
+    "N and X distinct-aldehyde accounting",
+    "complete route dossiers",
+    "deterministic selection seed and selection-order audit"
+  ],
+  "chemistry_sanity_filter_v3": {
+    "categories": {
+      "malformed_or_unintended": {
+        "purpose": "structures inconsistent with the intended Ugi-3 product",
+        "smarts": {
+          "enol": "[OX2H][CX3]=[CX3]",
+          "hemiacetal": "[CX4]([OX2H])[OX2]",
+          "gem_diol": "[CX4]([OX2H])[OX2H]",
+          "allene": "C=C=C",
+          "ketene": "[CX3]=[CX2]=[OX1]",
+          "retained_aldehyde": "[CX3H1](=O)[#6]",
+          "carbamic_acid": "[NX3][CX3](=O)[OX2H]",
+          "anhydride": "[CX3](=O)[OX2][CX3]=O"
+        }
+      },
+      "reactive_group_alerts": {
+        "purpose": "chemically valid but deliberately excluded electrophiles",
+        "smarts": {
+          "alpha_beta_unsaturated_ketone": "[CX3]=[CX3][CX3](=[OX1])[#6]",
+          "epoxide": "C1OC1",
+          "isocyanate": "[NX2]=[CX2]=[OX1]",
+          "peroxide": "[OX2][OX2]",
+          "azide": "[NX2]=[NX2+]=[NX1-]",
+          "n_nitroso": "[NX3][NX2]=[OX1]",
+          "acyl_halide": "[CX3](=O)[F,Cl,Br,I]"
+        }
+      },
+      "element_policy": {
+        "smarts": {
+          "silicon": "[Si]",
+          "boron": "[B]",
+          "halogen": "[F,Cl,Br,I]"
+        }
+      },
+      "explicitly_allowed": {
+        "alpha_beta_unsaturated_esters": "Must not be rejected merely for matching a generic alpha,beta-unsaturated carbonyl pattern. Present in the measured AGILE library. This is not a claim that unsaturated esters are nonreactive; they can participate in conjugate chemistry. The narrower conclusion is that a blanket exclusion was unsupported here and contradicted the empirically measured design domain."
+      }
+    },
+    "unit_tests": {
+      "passed": 12,
+      "must_not_match": [
+        "AGILE measured 2-decenoate ester aldehyde",
+        "methyl acrylate",
+        "ethyl crotonate",
+        "acrylamide",
+        "acrolein",
+        "saturated ester",
+        "saturated ketone",
+        "AGILE Ugi product from the 2-decenoate tail"
+      ],
+      "must_match": [
+        "methyl vinyl ketone",
+        "open-chain enone",
+        "cyclohexenone",
+        "cyclopentenone"
+      ]
+    }
+  }
+}

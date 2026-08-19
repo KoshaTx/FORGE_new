@@ -1,0 +1,70 @@
+{
+  "schema_version": "phase1_ugi_chemistry_bias_attribution_config.v1",
+  "status": "frozen_before_nonselecting_attribution",
+  "purpose": "Separate fresh-pool morphology-prior bias, terminal chemistry calibration bias, and unsupported-motif review flags before any prospective candidate selection.",
+  "inputs": {
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "selection_reference_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "broad_lipid_corpus": {
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "audit_source": {
+      "path": "src/forge/product/ugi_chemistry_bias_attribution.py",
+      "sha256": "1366b405d889da7fd31316e243a1a2973a1c3571b383014d683467ec31293c16"
+    },
+    "audit_cli": {
+      "path": "scripts/phase1_audit_ugi_chemistry_bias_attribution.py",
+      "sha256": "00f91f854761e8587e587a3a94930b9fd672c2c8a7ae91e9f0298bbb40804f38"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_chemistry_bias_attribution.py",
+      "sha256": "4231d255e75a29db58ce324592e4daa5e8cf403d9cdb292f520841649924901b"
+    }
+  },
+  "fresh_pool": {
+    "attempted_draws": 4096,
+    "expected_exact_l1_products": 3975,
+    "selection_use_authorized": false
+  },
+  "selection_reference": {
+    "fold_field": "primary_product_fold",
+    "folds": [
+      "train",
+      "calibration"
+    ],
+    "expected_products": 82264,
+    "heldout_fold_evaluated": false
+  },
+  "broad_reference": {
+    "expected_products": 15229,
+    "structure_only": true,
+    "biological_label_inheritance": false
+  },
+  "reporting": {
+    "maximum_examples_per_motif": 5,
+    "motif_frequency_is_not_synthesis_or_biological_evidence": true,
+    "absence_from_reference_does_not_automatically_authorize_a_hard_mask": true
+  },
+  "scope": {
+    "may_replace_frozen_v2_generator": false,
+    "may_select_prospective_candidates": false,
+    "may_inspect_heldout_component_families": false,
+    "may_authorize_biological_guidance": false,
+    "may_authorize_synthesis_guidance": false
+  }
+}

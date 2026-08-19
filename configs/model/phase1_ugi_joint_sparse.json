@@ -1,0 +1,67 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_training_config.v1",
+  "task": "Matched chemistry-aware joint sparse flow ablation",
+  "seed": 20260731,
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
+      "sha256": "55ff0c328da8b8d064e6657e57f2c2b0554dfbb918dc6695a9bc64a651c23d56"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_expanded_chemistry_exemplars/semantic_products.csv.gz",
+      "sha256": "e62c679ad7db0a34f5111fcb27674837331d00ee44683b871630cf34a6b10f50"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_expanded_chemistry_exemplars/semantic_atoms.csv.gz",
+      "sha256": "e0c67a665224e41a52e346ffe9b782e2ef37f8a75f8d6cbc97bd9723469fc75e"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    }
+  },
+  "expected_fold_counts": {
+    "train": 292,
+    "calibration": 61,
+    "heldout": 68
+  },
+  "model": {
+    "maximum_children": 3,
+    "bond_classes": 4,
+    "maximum_component_atoms": 26,
+    "maximum_total_atoms": 52,
+    "maximum_junction_budget": 7,
+    "maximum_cycle_rank": 2,
+    "maximum_attachment_count": 2,
+    "maximum_decorations": 5,
+    "hidden_dim": 192,
+    "layers": 4,
+    "dropout": 0.1,
+    "source_probability_floor": 0.00001
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 500,
+    "batch_size": 24,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "validation_batches": 3,
+    "model_overrides": {
+      "hidden_dim": 64,
+      "layers": 2,
+      "dropout": 0.0
+    }
+  },
+  "full": {
+    "device": "cuda",
+    "steps": 20000,
+    "batch_size": 64,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 500,
+    "validation_batches": 16
+  }
+}

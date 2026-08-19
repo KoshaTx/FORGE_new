@@ -1,0 +1,92 @@
+{
+  "schema_version": "phase1_ugi_chemistry_training_config.v2",
+  "task": "Source-stratified staged Ugi chemistry ablation",
+  "seed": 20260801,
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus/assignments.csv.gz",
+      "sha256": "ddeeebe64d08a4e0b78f2e5643ebf41c51bc0541982374fda667dd088685b0f4"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus/semantic_products.csv.gz",
+      "sha256": "a68313e09c2852e9bf7be3b8bdc8aec3b3f598f516bf164462ec0a8272fac73b"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus/semantic_atoms.csv.gz",
+      "sha256": "bfa3f2c95c27ba432e6a1c4822785718cee2b723d3406be4e4bccbdd0f3a0d0a"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache/ugi_training_cache.pt",
+      "sha256": "6fd21ae7510fe20c688b27373abfc9f8b3b5f3c6ea3c09cf03892a38dac5cff7"
+    }
+  },
+  "expected_fold_counts": {
+    "train": 12464,
+    "calibration": 3800,
+    "heldout": 8122
+  },
+  "sampling": {
+    "mode": "source_stratified_role_family_raked",
+    "source_mass": {
+      "current_phase1_union": 0.5,
+      "expanded_exact_forward_enumeration": 0.5
+    },
+    "uniform_row_mixture": 0.5,
+    "component_ids_enter_neural_tensors": false,
+    "uniform_product_row_sampling_allowed": false
+  },
+  "model": {
+    "bond_classes": 4,
+    "maximum_nodes": 68,
+    "maximum_distance": 68,
+    "maximum_decorations": 7,
+    "hidden_dim": 192,
+    "layers": 4,
+    "dropout": 0.1,
+    "source_probability_floor": 0.00001
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 500,
+    "bounded_train_records": 2048,
+    "batch_size": 24,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "eval_samples": 24,
+    "sample_steps": 8,
+    "validation_batches": 3,
+    "early_stopping": {
+      "patience": 0,
+      "min_delta": 0.0001,
+      "minimum_steps": 0
+    },
+    "model_overrides": {
+      "hidden_dim": 64,
+      "layers": 2,
+      "dropout": 0.0
+    }
+  },
+  "full": {
+    "device": "cuda",
+    "steps": 20000,
+    "batch_size": 64,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 500,
+    "eval_samples": 64,
+    "sample_steps": 16,
+    "validation_batches": 16,
+    "early_stopping": {
+      "patience": 8,
+      "min_delta": 0.0001,
+      "minimum_steps": 2000
+    }
+  }
+}

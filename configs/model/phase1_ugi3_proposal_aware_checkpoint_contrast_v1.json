@@ -1,0 +1,77 @@
+{
+  "schema_version": "forge.ugi3_proposal_aware_checkpoint_contrast_config.v1",
+  "status": "frozen_after_checkpoint_proposal_execution_before_route_adjudication",
+  "task": "Independently forward-verify and terminal-close Graph2Edits checkpoint proposals, then recompute within-decision synthesis-value contrast without family or model-score gates",
+  "inputs": {
+    "support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "proposal_result": {
+      "path": "results/phase1/graph2edits_checkpoint_contrast_v1/result.json",
+      "sha256": "01429f59459c20ebd0a8a2727f6f254999817698128ad6a33d436f8f63d2fdb2"
+    },
+    "proposal_ledger": {
+      "path": "results/phase1/graph2edits_checkpoint_contrast_v1/proposal_ledger.jsonl.gz",
+      "sha256": "34e7f277b005b57e2df551699fb74cc7f7e1a75f78429c57a5e8e32796a4130b"
+    },
+    "precursor_leaf_audit_config": {
+      "path": "configs/route/phase1_ugi3_precursor_leaf_closure_audit_v1.json",
+      "sha256": "5caa0650f5ac83da441cf4a831d6c5cf0d1c91874591a863a9b0d67125827c94"
+    },
+    "forward_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "variant_esterification": {
+      "path": "configs/route/variants/ugi3_upstream_esterification_exact_source_v1.json",
+      "sha256": "9ec11bdc145437f58cc223acda4d001fd720a412fb4fc8adb1610770e8b3733e"
+    },
+    "variant_primary_alcohol_oxidation": {
+      "path": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    },
+    "variant_amine_formylation": {
+      "path": "configs/route/variants/ugi3_upstream_amine_formylation_exact_source_v1.json",
+      "sha256": "a56e43f25a0e2fb057d5fa6150cdb3d7dad4740f553790e2cde582d3c9c699f9"
+    },
+    "variant_formamide_dehydration": {
+      "path": "configs/route/variants/ugi3_upstream_formamide_dehydration_exact_source_v1.json",
+      "sha256": "2761b88f385cfb0734557d35bad7b099a9bf42dd16058f12d7cb5fdd506ccc3c"
+    },
+    "cross_platform_step_evidence": {
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    },
+    "superseded_exact_ledger_contrast": {
+      "path": "results/phase1/ugi3_stepwise_route_value_contrast_v2/result.json",
+      "sha256": "16ab645d1a671aa2e7b0a26a5afc68db6d0ab7c8dfa14940b85168f26a1d6cd3"
+    }
+  },
+  "population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6],
+    "grouping": "checkpoint and frozen morphology program index"
+  },
+  "retry_authorization_gates": {
+    "minimum_qualified_components": 5,
+    "minimum_mixed_checkpoint_groups": 8,
+    "minimum_mixed_checkpoint_group_fraction": 0.15,
+    "require_at_least_one_mixed_group_per_checkpoint": true,
+    "minimum_unique_route_ready_productive_finals": 4,
+    "all_gates_must_pass": true
+  },
+  "scope_guards": {
+    "proposal_model_score_used": false,
+    "reaction_family_used_as_proposal_filter": false,
+    "reaction_family_used_as_route_gate": false,
+    "proposal_alone_may_create_evidence": false,
+    "route_hypothesis_is_experimental_success": false,
+    "does_not_authorize_lambda_tuning": true,
+    "does_not_promote_synthesis_guidance": true,
+    "candidate_selection": false
+  },
+  "output_directory": "results/phase1/ugi3_proposal_aware_checkpoint_contrast_v1"
+}

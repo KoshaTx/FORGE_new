@@ -1,0 +1,90 @@
+{
+  "schema_version": "phase1_ugi_candidate_eligibility_audit_config.v1",
+  "status": "frozen_nonselecting_after_model_selection",
+  "selected_candidate": "full_morphology_program_conditioning:step_1000",
+  "inputs": {
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "selection_result": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v3.json",
+      "sha256": "fe90fc849bbc88c8b004ceebcb4aae95ef6ac8158b8e1a6220792750aac83be5"
+    },
+    "selected_sample": {
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "audit_module": {
+      "path": "src/forge/product/ugi_candidate_eligibility.py",
+      "sha256": "a071873037c9e94c9a696bfc73469ec493b514782b7f15ef93360de4e64851e0"
+    },
+    "audit_script": {
+      "path": "scripts/phase1_audit_ugi_candidate_eligibility.py",
+      "sha256": "9cee84b330fb4f3b3e0d7ec32cd408ae3feb032bc38345028a182557b366630b"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_candidate_eligibility.py",
+      "sha256": "709a860b8e2e91e8f76c829d912af132bdc0ea867d08190bbf3eddc07974ff3c"
+    }
+  },
+  "sampling_contract": {
+    "seed": 20260803,
+    "attempted_draws": 1024,
+    "sample_steps": 8,
+    "batch_size": 16
+  },
+  "selection_reference": {
+    "fold_field": "primary_product_fold",
+    "folds": [
+      "train",
+      "calibration"
+    ],
+    "expected_rows": 82264,
+    "heldout_fold_evaluated": false
+  },
+  "motif_smarts": {
+    "alkyne": "[#6]#[#6]",
+    "allene_or_cumulene": "[!#1]=[!#1]=[!#1]",
+    "aldehyde": "[CX3H1](=O)[#6]",
+    "peroxide": "[#8X2]-[#8X2]",
+    "nitrogen_nitrogen_bond": "[#7]~[#7]"
+  },
+  "extreme_heteroatoms": {
+    "lower_quantile": 0.01,
+    "upper_quantile": 0.99,
+    "strict_comparison": true,
+    "count_definition": "non-carbon heavy atoms",
+    "fraction_definition": "non-carbon heavy atoms divided by all heavy atoms",
+    "flag_definition": "count or fraction strictly outside the selection-reference q01-q99 interval"
+  },
+  "reporting": {
+    "maximum_examples_per_flag": 5,
+    "retain_attempted_and_valid_denominators": true,
+    "motifs_are_manual_review_flags_not_automatic_rejections": true,
+    "declared_support_or_adapter_contract_failure_is_candidate_ineligible": true
+  },
+  "selection_finality": {
+    "can_change_selected_architecture_or_checkpoint": false,
+    "heldout_evaluation_authorized": false,
+    "l2_route_claim_authorized": false,
+    "biological_guidance_claim_authorized": false,
+    "synthesis_guidance_claim_authorized": false
+  }
+}

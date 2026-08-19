@@ -1,0 +1,69 @@
+{
+  "schema_version": "phase1_ugi_product_l1_v2_fresh_pool_audit_config.v1",
+  "status": "frozen_after_sampling_before_corrected_evaluation",
+  "supersedes": {
+    "config": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
+      "sha256": "3510f186297a0793f8c76a6c18e77d7a2e95a7c18c52a9f0e5f768377b959b4c"
+    },
+    "invalidation": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/audit_v1_invalidation.json",
+      "sha256": "a1d5603a3738ecb9b02ad40adf8f7bdb620a5d40939256707700f6c995ad2b40"
+    },
+    "sampling_outputs_changed": false,
+    "scientific_thresholds_changed": false,
+    "correction": "Read terminal decoder metadata from sampling.terminal_decoder and verify its seed and temperature."
+  },
+  "minimum_valid_fraction": 0.95,
+  "selection_reference": {
+    "fold_field": "primary_product_fold",
+    "folds": [
+      "train",
+      "calibration"
+    ],
+    "expected_products": 82264,
+    "heldout_fold_evaluated": false
+  },
+  "inputs": {
+    "production_generator_v2": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "fresh_pool_contract": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+      "sha256": "92544cab4e67c34b1d6ae122122322a7b5fae802347aad223cec0bed7ec7be22"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "selection_reference_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "audit_source": {
+      "path": "src/forge/product/ugi_fresh_pool_audit.py",
+      "sha256": "682d075dc6b600bc427a5cb7b75bac79f4a8721270c37f524f5131a49cd860e3"
+    },
+    "audit_cli": {
+      "path": "scripts/phase1_audit_ugi_product_l1_v2_fresh_pool.py",
+      "sha256": "8705cfadf11bf9c6c23087047800b9dfe6c17dc1ae623a1d5aeebf1cd961079b"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_fresh_pool_audit.py",
+      "sha256": "0262e05a0768e603c8858004b5e1868967a9ed80fff484d2df2e2007d84b9a4d"
+    }
+  },
+  "decision_policy": {
+    "descriptive_nonselecting_audit": true,
+    "heldout_products_excluded": true,
+    "structural_novelty_is_not_route_closure": true,
+    "tail_chemotype_metrics_are_graph_derived_not_fragment_vocabulary": true,
+    "prospective_candidate_selection": false,
+    "synthesis_or_biological_guidance": false
+  }
+}

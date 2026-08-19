@@ -1,0 +1,40 @@
+{
+  "schema_version": "phase1_ugi_decoration_readout_audit_config.v1",
+  "status": "frozen_before_selection_visible_audit",
+  "frozen_at_utc": "2026-08-05T21:00:00Z",
+  "purpose": "Distinguish decoration undertraining from a structurally undercoupled terminal-decoration head before changing the Ugi generator.",
+  "design": {
+    "fold": "heldout",
+    "records_per_source": 2048,
+    "sampling_seed": 20260829,
+    "batch_size": 128,
+    "evaluation_time": 1.0,
+    "input_state": "clean_support_topology_atom_and_parent_bond_states",
+    "checkpoints": [1000, 1500, 1700]
+  },
+  "decision_policy": {
+    "diagnostic_is_selection_visible": true,
+    "checkpoint_promotion_from_this_audit": false,
+    "chemistry_quota_fitting_from_this_audit": false,
+    "architecture_change_requires_matched_retraining": true,
+    "primary_question": "Does longer training recover exact decoration anchors and joint anchor-atom-bond states on unseen products, or does the current factorization retain a large terminal readout error even with a clean support graph?"
+  },
+  "inputs": {
+    "training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "checkpoint_step_1000": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1000.pt",
+      "sha256": "7595b650745df1194c31eb0293ef17b292d57a655e61433c75f307074aa174a4"
+    },
+    "checkpoint_step_1500": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1500.pt",
+      "sha256": "011f7a205014eb8ee49cca2014d8c16411e476423d2ad9bfd52d0f4c2edb258e"
+    },
+    "checkpoint_step_1700": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1700.pt",
+      "sha256": "997dee999349045fc306e25684aabe6f9ba58f195cbba7f67e33e1ff2011c5a5"
+    }
+  }
+}

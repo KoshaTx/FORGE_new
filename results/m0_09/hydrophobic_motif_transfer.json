@@ -1,0 +1,292 @@
+{
+  "artifacts": {
+    "hydrophobic_motif_transfer_ledger.csv.gz": {
+      "bytes": 2551,
+      "path": "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
+      "sha256": "89370ce3dd6d6e39acac25d53f235adf86cc74840f106486b0490746fd624dff"
+    }
+  },
+  "decision": {
+    "broad_expansion_gate": "Two positive platforms and one exact route authorize targeted priority-queue expansion, not exhaustive or indiscriminate LNPDB mining.",
+    "broad_lnpdb_expansion_authorized": false,
+    "model_built": false,
+    "next_stage": "Expand only through the frozen source-paper priority queue, beginning with native-Ugi JC_2023 and then high-value transfer sources, while measuring weighted motif and candidate-route closure.",
+    "positive_platforms": [
+      "JL_2024",
+      "XH_2025"
+    ],
+    "positive_transfer_signal": true,
+    "positive_two_platform_signal": true,
+    "priority_queue_expansion_authorized": true,
+    "reason": "Two independent non-Ugi platforms provide exact source-reaction-linked mappings to novel, frozen-transform-compatible Ugi components while source reactions, target-handle routes, biological applicability, and route closure remain separate.",
+    "stopping_policy": {
+      "lnpdb_role": "Define and prioritize the tail-motif census, not the complete reaction universe.",
+      "metrics": [
+        "weighted high-priority motif coverage",
+        "candidate-route closure with substantive rejections separated from missing knowledge",
+        "marginal route-coverage gain across consecutive curation rounds",
+        "complete prospective-panel dossiers with backup routes for the riskiest precursors"
+      ],
+      "numeric_threshold_status": "Freeze exact thresholds before generator-driven curation and final prospective selection; do not choose them retrospectively.",
+      "objective": "Stop when missing route knowledge no longer materially constrains the biologically relevant Ugi-3 design space under the declared support and oracle-applicability policies.",
+      "tiers": [
+        "close every permitted native Ugi-3 component and locked control",
+        "transfer high-value motifs from other lipid platforms",
+        "fill repeated route-knowledge gaps exposed by biologically competitive generated candidates",
+        "leave chemistry irrelevant to the declared Ugi-3 paper scope uncurated"
+      ]
+    },
+    "transferred_components_are_observed_l2_supervision": false
+  },
+  "generated_utc": "2026-07-29T22:31:51Z",
+  "inputs": [
+    {
+      "asset": "m0_09_hydrophobic_motif_transfer.json",
+      "bytes": 26570,
+      "role": "pilot_config",
+      "sha256": "d790cb0e64be3d43f7c2730353839ff46c53f248c549039aa4cf673c6d0d6ed6"
+    },
+    {
+      "asset": "data/source_cache/m0_09_transfer_routes/BORGHI_2024/sara2024.pdf",
+      "asset_id": "borghi_2024_exact_b16_aldehyde_route",
+      "bytes": 8287754,
+      "role": "exact_ugi_handle_route_evidence",
+      "sha256": "505cf441ccef01762325a008bf53da6d687962973579ab356cba616368608edf"
+    },
+    {
+      "asset": "data/source_cache/m0_09_publishers/PMC11536852/publisher_page.html",
+      "asset_id": "jl_2024_article",
+      "bytes": 474753,
+      "role": "source_article_methods",
+      "sha256": "f918e625753698706387783f831887ced721762a5cc6790598c6e681437e554c"
+    },
+    {
+      "asset": "data/source_cache/m0_09_publishers/PMC11536852/assets/12951_2024_2919_MOESM1_ESM.pdf",
+      "asset_id": "jl_2024_supplement",
+      "bytes": 7619117,
+      "role": "source_supplement",
+      "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427"
+    },
+    {
+      "asset": "data/source_cache/m0_09_pmc/PMC11888472/supplementary_files.zip",
+      "asset_id": "xh_2025_supplement",
+      "bytes": 3176809,
+      "role": "source_supplement_archive",
+      "sha256": "ddba528699713ecb133b7c4b9c0582ca7877d8aacb4bbe924a352cb7ef47b7c5"
+    },
+    {
+      "asset": "media-1.pdf",
+      "asset_id": "xh_2025_supplement:member",
+      "bytes": 3058325,
+      "parent_asset_id": "xh_2025_supplement",
+      "role": "source_supplement_member",
+      "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    },
+    {
+      "asset": "agile_virtual_ugi3_component_ledger.csv.gz",
+      "bytes": 2548,
+      "role": "current_ugi_component_universe",
+      "sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    {
+      "asset": "qualified_reactions_v1.json",
+      "bytes": 5116,
+      "role": "frozen_l1_transform",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  ],
+  "motif_class_counts": {
+    "allylic_alcohol": 1,
+    "alpha_branched": 2,
+    "asymmetric_branching": 2,
+    "asymmetric_secondary_attachment": 1,
+    "cis_unsaturated": 1,
+    "double_unsaturation": 1,
+    "internal_cis_unsaturation": 1,
+    "linear_saturated": 1,
+    "long_chain": 2,
+    "medium_chain": 6,
+    "near_terminal_secondary_attachment": 1,
+    "symmetric_secondary_attachment": 2,
+    "terminal_unsaturation": 2,
+    "very_long_chain": 3
+  },
+  "pilot_id": "xh_2025_jl_2024_transfer_pilot_v2",
+  "programs": {
+    "jl_b16_exact_pcc_alcohol_to_aldehyde": {
+      "claim": "An exact literature procedure converts the exact named B16 alcohol precursor to 2-decyltetradecanal, and the exact alcohol has current region-specific item-level procurement evidence. Frozen-transform compatibility is verified separately; prospective Ugi assembly remains untested.",
+      "evidence_grade": "exact_source_route",
+      "exact_route_evidence": {
+        "conditions": {
+          "alcohol_amount_mmol": 42.3,
+          "alcohol_equivalents": 1.0,
+          "alcohol_mass_g": 15.0,
+          "duration": "3 h",
+          "pyridinium_chlorochromate_amount_mmol": 128,
+          "pyridinium_chlorochromate_equivalents": 3.03,
+          "pyridinium_chlorochromate_mass_g": 27.6,
+          "solvent": "anhydrous dichloromethane",
+          "solvent_volume_ml": 411,
+          "temperature": "room temperature",
+          "workup_and_purification": "filtered through a short silica-gel pad in dichloromethane"
+        },
+        "reported_outcome": "2-Decyltetradecanal, 12.76 g, 36.2 mmol, 86% isolated; identity confirmed by proton and carbon NMR.",
+        "reported_product": "2-decyltetradecanal",
+        "reported_reactant": "2-decyl-1-tetradecanol",
+        "source_asset_ids": [
+          "borghi_2024_exact_b16_aldehyde_route"
+        ],
+        "source_locator": "Borghi 2024 Oxford Part II thesis, Appendix I, PDF page 66, printed page 59",
+        "terminal_evidence": {
+          "accessed_utc": "2026-07-29T22:31:51Z",
+          "availability_observation": "The 25 mL and 500 mL items showed positive US stock and same-day shipment from Portland.",
+          "product_code": "D5283",
+          "purity": ">97.0% (GC)",
+          "region": "US",
+          "url": "https://www.tcichemicals.com/US/en/p/D5283",
+          "vendor": "TCI America"
+        }
+      },
+      "reaction_smarts": "[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]",
+      "route_closure": "computationally_complete",
+      "route_gap_class": "",
+      "target_role": "aldehyde_tail",
+      "terminal_status": "current_item_level_procurement_closed"
+    },
+    "primary_alcohol_to_aldehyde": {
+      "claim": "Deterministic structural realization and frozen-Ugi forward compatibility only; exact-substrate oxidation and prospective assembly remain unverified.",
+      "evidence_grade": "reaction_family_precedent",
+      "reaction_smarts": "[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]",
+      "route_closure": "incomplete",
+      "route_gap_class": "exact_substrate_route_evidence_and_terminal_closure_missing",
+      "target_role": "aldehyde_tail",
+      "terminal_status": "not_assessed"
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "route_outcome_counts": {
+    "chemically_implausible_or_incompatible": 0,
+    "complete_route_found": 1,
+    "missing_route_knowledge": 10,
+    "outside_declared_support": 0
+  },
+  "schema_version": "m0_09_hydrophobic_motif_transfer.v3",
+  "scope_policy": {
+    "chemistry_specific_evidence_required": true,
+    "forward_compatibility_is_not_experimental_success": true,
+    "generative_oracle_and_route_support_are_independent": true,
+    "head_policy": "exact_site_defined_ugi_compatible_amine_only",
+    "incomplete_routes_are_not_route_complete": true,
+    "missing_route_knowledge_is_not_chemical_failure": true,
+    "no_head_motif_conversion": true,
+    "no_procurement_inference_from_identity_reference": true,
+    "no_source_activity_label_inheritance": true,
+    "no_source_route_inheritance": true,
+    "operational_closure_not_exhaustive_reaction_mining": true,
+    "reusable_synthesis_program_architecture": true,
+    "transfer_target": "hydrophobic_tail_motifs"
+  },
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "sources": {
+    "jl_2024": {
+      "biological_provenance_policy": "Source-platform occurrence is retained only as provenance. No activity, pKa, particle, formulation, or delivery label is assigned to a transferred component or generated Ugi product.",
+      "doi": "10.1186/s12951-024-02919-1",
+      "platform_id": "JL_2024",
+      "pmc": "PMC11536852",
+      "pmid": "39497197",
+      "reported_reactions": {
+        "jl_b12_b16_esterification": {
+          "attachment_event": "alcohol_oxygen_esterified_to_hept_6_ynoic_acid",
+          "conditions": {
+            "acid_equivalents": 1.0,
+            "alcohol_equivalents": 1.0,
+            "dcc_equivalents": 1.0,
+            "dmap_equivalents": 0.3,
+            "duration": "12 h",
+            "purification": "silica gel chromatography, petroleum ether/ethyl acetate 30:1",
+            "solvent": "dry dichloromethane",
+            "temperature": "room temperature",
+            "workup": "filter, add water, extract with dichloromethane, dry over sodium sulfate, filter, concentrate"
+          },
+          "evidence_status": "exact_general_procedure_and_product_specific_structure_yield_and_analytical_data",
+          "level": "source_component_preparation",
+          "outcome_evidence": "B12-B16 have exact structures, isolated yields, proton and carbon NMR, and high-resolution mass spectrometry in the supplement.",
+          "reactants": [
+            "hept-6-ynoic acid",
+            "named alkyl alcohol"
+          ],
+          "source_locator": "Article Methods, General procedures for the synthesis of ester-bearing terminal alkynes B12-B16; Supplementary Information pages S12-S14",
+          "transformation": "dcc_dmap_esterification_of_hept_6_ynoic_acid_with_aliphatic_alcohol"
+        }
+      },
+      "source_asset_ids": [
+        "jl_2024_article",
+        "jl_2024_supplement"
+      ],
+      "source_final_assembly": "amine_aldehyde_alkyne_a3_coupling",
+      "source_locator": "Article Methods, General procedures for the synthesis of ester-bearing terminal alkynes B12-B16; Supplementary Information pages S12-S14",
+      "title": "High-throughput synthesis and optimization of ionizable lipids through A3 coupling for efficient mRNA delivery"
+    },
+    "xh_2025": {
+      "biological_provenance_policy": "Source-platform occurrence is retained only as provenance. No activity, pKa, particle, formulation, or delivery label is assigned to a transferred component or generated Ugi product.",
+      "doi": "10.1101/2025.02.25.640222",
+      "platform_id": "XH_2025",
+      "pmid": "40060499",
+      "reported_reactions": {
+        "xh_asymmetric_maleate_esterification": {
+          "attachment_event": "alcohol_oxygen_esterified_to_maleate_carboxyl",
+          "conditions": {
+            "acid_equivalents": 1.1,
+            "alcohol_equivalents": 1.0,
+            "atmosphere": "nitrogen",
+            "dcc_equivalents": 1.1,
+            "dmap_equivalents": 0.2,
+            "duration": "24 h",
+            "purification": "CombiFlash gradient from hexane to 20:80 ethyl acetate/hexane over 15 min",
+            "solvent": "anhydrous dichloromethane",
+            "temperature": "room temperature",
+            "workup": "filter and evaporate filtrate"
+          },
+          "evidence_status": "exact_general_procedure_and_product_specific_yield_and_proton_nmr",
+          "level": "source_component_preparation",
+          "outcome_evidence": "D18, D9.2, D9.8, D11.1, D11.10, and D12.8 have isolated yields and proton NMR in Supplementary Fig. 2.",
+          "reactants": [
+            "named aliphatic alcohol",
+            "(Z)-4-((2-ethylhexyl)oxy)-4-oxobut-2-enoic acid"
+          ],
+          "source_locator": "Materials and Methods, General procedure for the synthesis of maleates with two different alkyl chains; Supplementary Fig. 2",
+          "transformation": "dcc_dmap_esterification_of_mono_2_ethylhexyl_maleate_acid_with_aliphatic_alcohol"
+        }
+      },
+      "source_asset_ids": [
+        "xh_2025_supplement"
+      ],
+      "source_final_assembly": "amine_or_thiol_addition_to_dialkyl_maleate",
+      "source_id": "40060499",
+      "source_locator": "Supplementary Fig. 2 and Materials and Methods, General procedure for the synthesis of maleates with two different alkyl chains",
+      "title": "Plug-and-play assembly of biodegradable ionizable lipids for potent mRNA delivery and gene editing in vivo"
+    }
+  },
+  "summary": {
+    "computationally_route_complete": 1,
+    "deferred_structure_only": 4,
+    "exact_current_aldehyde_pool_matches": 0,
+    "frozen_ugi_forward_verified": 7,
+    "independent_source_platforms": 2,
+    "motifs_linked_to_reported_source_reactions": 11,
+    "primary_alcohols": 7,
+    "proposed_ugi_aldehydes": 7,
+    "reported_source_reactions": 2,
+    "secondary_alcohols": 4,
+    "source_motifs": 11,
+    "unambiguous_source_attachment_mappings": 11
+  },
+  "task": "M0-09 fixed cross-platform hydrophobic-motif transfer pilot"
+}

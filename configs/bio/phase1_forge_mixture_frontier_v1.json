@@ -1,0 +1,102 @@
+{
+  "schema_version": "phase1_forge_mixture_frontier.v1",
+  "status": "frozen_before_any_mixture_result_existed",
+  "frozen_utc": "2026-08-15",
+  "task": "Test whether reaction-factorized acquisition lies outside the frontier traced by simple mixtures of exploitation and diversity.",
+  "why": {
+    "what_the_first_study_settled": "The preregistered dominance gate failed 0/5. Reaction-factorized acquisition does not beat both score ranking and component diversity on held-family Spearman.",
+    "what_it_did_not_settle": "It compared the method against the endpoints of a trade-off, not against the line joining them. The method sits between top-mean (hits) and component diversity or uncertainty (learning), so a reviewer may reasonably say it is an elaborate interpolation between two simple policies.",
+    "question": "At matched hit discovery, does the method achieve better held-family learning than the best simple mixture? Equivalently, at matched learning, does it discover more hits?"
+  },
+  "fresh_randomisation": {
+    "seeds": [
+      20260901,
+      20260902,
+      20260903,
+      20260904,
+      20260905
+    ],
+    "rationale": "The first study's five seeds are development evidence now: their results have been seen. This study is evaluated only on seeds never used before."
+  },
+  "arms": {
+    "mixture_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "mixture_definition": "exploit_fraction of the batch to top-mean, remainder to component diversity, exploitation allocated first, duplicates impossible by construction",
+    "second_frontier": "the same grid with uncertainty sampling as the learning endpoint",
+    "method": "reaction_factorized, with every parameter exactly as frozen in phase1_forge_active_design_v1.json"
+  },
+  "unchanged_from_the_failed_study": {
+    "surrogate": {
+      "family": "bayesian_linear_regression_over_role_decomposed_count_morgan_features",
+      "rationale": "Chosen for an auditable closed-form posterior, not for accuracy. Every acquisition rule reads the posterior covariance, so a model whose uncertainty we cannot write down would put the uncertainty estimate and the acquisition in an unauditable loop.",
+      "features": {
+        "kind": "count_morgan",
+        "radius": 2,
+        "n_bits": 256,
+        "blocks": [
+          "product",
+          "amine",
+          "aldehyde",
+          "isocyanide"
+        ],
+        "counts_not_bits_because": "binary folded Morgan fingerprints are blind to alkyl chain length; this project measured 30 generated pairs at Tanimoto 1.000 differing by 14 to 182 Da, and homologues are exactly what the generator produces",
+        "n_bits_rationale": "256 per block, so the design matrix is 1024-dimensional. The greedy batch loop forms Sigma M Sigma once per step, which is cubic in that dimension; 1024 keeps a full six-arm five-seed benchmark tractable while leaving the linear model far wider than the 1,100 measured lipids can constrain. Set before any benchmark result existed."
+      },
+      "role_weights": {
+        "product": 1.0,
+        "amine": 1.0,
+        "aldehyde": 1.0,
+        "isocyanide": 1.0
+      },
+      "role_weights_are_not_fitted": true,
+      "prior_variance": 1.0,
+      "noise_variance": 1.0,
+      "hyperparameters_held_fixed_across_every_arm": true
+    },
+    "acquisition": {
+      "objective": "greedy budgeted maximisation of value_weight * normalised_conservative_bound + (1 - value_weight) * normalised_variance_reduction_over_target, divided by synthetic cost",
+      "value_weight": 0.5,
+      "activity_floor_quantile": 0.5,
+      "activity_floor_rationale": "A hard filter applied before any trade-off, so exploration can never mean synthesising a design the surrogate expects to fail. Expressed as a quantile of the feasible pool so it does not depend on the endpoint scale.",
+      "cost_normalised": true,
+      "cost_definition": "number of precursor preparations required before the final Ugi assembly",
+      "target_population": "the route-complete, prediction-supported generated population; information is measured over the designs we would actually want to rank, not over the whole space",
+      "batch_selected_jointly": true,
+      "greedy_rather_than_exact_because": "the information term is recomputed against a posterior that changes as the batch grows, and a batch of a dozen from a pool of thousands does not warrant an exact combinatorial solve"
+    },
+    "protocol": {
+      "corpus": {
+        "path": "results/m0_07/agile_oracle_curated.csv.gz",
+        "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be",
+        "records": 1100,
+        "endpoint": "expt_Hela"
+      },
+      "split": "component_family_aware",
+      "held_role": "aldehyde",
+      "seed_fraction": 0.2,
+      "rounds": 5,
+      "batch_size": 16,
+      "budget_per_round": 32.0
+    },
+    "note": "No parameter of the reaction-factorized rule may move. This study asks a new question of the same frozen method."
+  },
+  "decision_rule": {
+    "status": "frozen_before_results",
+    "primary": "position of reaction_factorized relative to the empirical Pareto frontier of the simple mixtures in the (held_family_spearman, top_decile_hits_found) plane, averaged over the fresh seeds",
+    "dominated_if": "some simple mixture achieves both >= its Spearman and >= its hits",
+    "pass": "reaction_factorized is not dominated by any simple mixture, and the separation exceeds the paired across-seed uncertainty",
+    "fail": "reaction_factorized lies inside the simple-mixture frontier, or the separation is within paired uncertainty",
+    "consequence_if_fail": "Stop the acquisition workstream permanently. The rule adds no demonstrated value beyond combining existing policies. No Library 2, no constrained reformulation, nothing in the paper.",
+    "consequence_if_pass": "The method has value the dominance gate did not test. Only then consider the constrained batch-design formulation, and only then a confirmatory gate before any second library."
+  },
+  "nonclaims": [
+    "Passing this control does not reverse the failed dominance gate; it answers a different and narrower question.",
+    "The synthesis-cost dimension remains untested: the measured library carries no route dossier, so every candidate costs one unit and the budget binds only through batch size.",
+    "Nothing here authorises a second synthesised library."
+  ]
+}

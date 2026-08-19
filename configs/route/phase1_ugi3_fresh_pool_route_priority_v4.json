@@ -1,0 +1,45 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_priority_config.v1",
+  "status": "frozen_before_final_nonselecting_priority_execution",
+  "task": "Rerank exact one-gap route targets after the frozen exact C16 and C18 route-coverage refreshes",
+  "inputs": {
+    "route_coverage_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+    },
+    "component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz",
+      "sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+    },
+    "product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/product_synthesis_values.json.gz",
+      "sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+    },
+    "priority_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_priority.py",
+      "sha256": "3f30fb3eadac0f34dfdab33666166d78e68aed3a2f6c3050460b3898f1ac76fb"
+    },
+    "priority_runner": {
+      "path": "scripts/phase1_prioritize_ugi3_fresh_pool_route_gaps.py",
+      "sha256": "a0bbe74b06fc799dcc89a0e2bec4a190ffc90c8074e9304d55696c3f319ac483"
+    },
+    "priority_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_priority_v4.py",
+      "sha256": "4f639298fd4ee14b0422c4f98851aa4204ef5593658a8dac8099c1fbd1286a20"
+    }
+  },
+  "priority_policy": {
+    "eligible_products": "exact-L1 products with exactly two route-complete components after frozen exact C16 and C18 route deltas",
+    "ranking": "descending exact count of one-gap products, then lexical role and constitutional identity",
+    "missing_knowledge_lane": "targeted exact evidence or separately qualified exact-pair/template search",
+    "outside_support_lane": "declared-support review, not route mining",
+    "preserve_component_assessment_outcomes": true,
+    "family_projection_is_exact_route_evidence": false,
+    "reaction_family_promotion_authorized": false,
+    "homologue_promotion_authorized": false,
+    "route_planning_performed": false,
+    "synthesis_guidance_authorized": false,
+    "prospective_candidate_selection_changed": false,
+    "holdout_reveal_authorized": false
+  }
+}

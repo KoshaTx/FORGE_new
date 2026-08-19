@@ -1,0 +1,55 @@
+{
+  "schema_version": "phase1_ugi3_stepwise_route_program_adjudication_config.v1",
+  "status": "frozen_before_stepwise_gate_sensitivity_audit",
+  "task": "Re-execute every proposal-coherent Ugi precursor program step by step, preserve exact whole-program source scope as a confidence tier rather than a chemistry support boundary, and distinguish terminal-closed route hypotheses from experimental route proof",
+  "inputs": {
+    "proposal_first_result": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v2/result.json",
+      "sha256": "75d6ef21665a46cea74831f751e0d40f1db304e5de4502156a926826364be5a4"
+    },
+    "proposal_first_ledger": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v2/adjudication_ledger.jsonl.gz",
+      "sha256": "a709a807cd2059ba6d6a81bd47588bebd44dbd69ad940be913fe1c50825e51d0"
+    },
+    "route_assessment_ledger": {
+      "path": "results/phase1/ugi_route_aware_panel_feasibility_v3/route_assessment_ledger.jsonl.gz",
+      "sha256": "c85075988138d971b27a5c9169338a18fd19169066c5cd9e18d499a4b08b2b47"
+    },
+    "forward_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "variant_esterification": {
+      "path": "configs/route/variants/ugi3_upstream_esterification_exact_source_v1.json",
+      "sha256": "9ec11bdc145437f58cc223acda4d001fd720a412fb4fc8adb1610770e8b3733e"
+    },
+    "variant_primary_alcohol_oxidation": {
+      "path": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    },
+    "variant_amine_formylation": {
+      "path": "configs/route/variants/ugi3_upstream_amine_formylation_exact_source_v1.json",
+      "sha256": "a56e43f25a0e2fb057d5fa6150cdb3d7dad4740f553790e2cde582d3c9c699f9"
+    },
+    "variant_formamide_dehydration": {
+      "path": "configs/route/variants/ugi3_upstream_formamide_dehydration_exact_source_v1.json",
+      "sha256": "2761b88f385cfb0734557d35bad7b099a9bf42dd16058f12d7cb5fdd506ccc3c"
+    },
+    "cross_platform_step_evidence": {
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    }
+  },
+  "policy": {
+    "proposal_family_label_is_gate": false,
+    "whole_program_source_envelope_is_chemical_possibility_boundary": false,
+    "whole_program_source_envelope_is_high_confidence_tier": true,
+    "require_every_step_to_reconstruct_expected_product": true,
+    "require_exact_current_starting_materials_for_terminal_closed_hypothesis": true,
+    "stepwise_route_hypothesis_is_experimental_success": false,
+    "stepwise_route_hypothesis_is_success_probability": false,
+    "proposal_engine_may_create_evidence": false,
+    "unknown_family_proposal_is_deleted": false
+  },
+  "output_directory": "results/phase1/ugi3_stepwise_route_program_adjudication_v1"
+}

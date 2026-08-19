@@ -1,0 +1,733 @@
+{
+  "atom_vocabulary": [
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 0,
+      "maximum_valence_units": 8,
+      "symbol": "C"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 1,
+      "maximum_valence_units": 6,
+      "symbol": "N"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 1,
+      "index": 2,
+      "maximum_valence_units": 8,
+      "symbol": "N"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": -1,
+      "index": 3,
+      "maximum_valence_units": 2,
+      "symbol": "O"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 4,
+      "maximum_valence_units": 4,
+      "symbol": "O"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 5,
+      "maximum_valence_units": 10,
+      "symbol": "P"
+    },
+    {
+      "aromatic": false,
+      "formal_charge": 0,
+      "index": 6,
+      "maximum_valence_units": 12,
+      "symbol": "S"
+    }
+  ],
+  "bond_vocabulary": [
+    "SINGLE",
+    "DOUBLE",
+    "TRIPLE"
+  ],
+  "config": {
+    "path": "configs/model/m0_06_sparse_topology_feasibility.json",
+    "sha256": "b862fda0a53a3a3aa56b3d9c08acc5466d4f7125618d5a0af27115ce6b1231b1"
+  },
+  "decision": {
+    "accepted_for_production_architecture_implementation": true,
+    "checks": {
+      "n282_memory_pass": true,
+      "n64_endpoint_connectedness_pass": true,
+      "n64_endpoint_validity_pass": true,
+      "n64_terminal_repair_pass": true,
+      "n64_topology_novelty_pass": true,
+      "n64_valid_and_connected_pass": true,
+      "n96_endpoint_connectedness_pass": true,
+      "n96_endpoint_validity_pass": true,
+      "n96_terminal_repair_pass": true,
+      "n96_to_n64_throughput_pass": true,
+      "n96_topology_novelty_pass": true,
+      "n96_valid_and_connected_pass": true,
+      "representation_roundtrip_pass": true
+    },
+    "claim_boundary": "Acceptance selects a representation for later full training. It is not a trained product prior or evidence of prospective lipid performance.",
+    "recommendation": "implement_sparse_hierarchical_discrete_flow_product_prior"
+  },
+  "exclusions": {
+    "sparse_n64": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 4395
+    },
+    "sparse_n96": {
+      "outside_element_vocabulary": 344,
+      "over_n_max": 1251
+    }
+  },
+  "inputs": {
+    "r0": {
+      "bytes": 19633160,
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "split_assignments": {
+      "bytes": 3934182,
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "split_manifest": {
+      "bytes": 5177,
+      "path": "data/splits/m0_03/manifest.json",
+      "sha256": "d969f71c02b2429ae73b4131affc80682988a8e405baca466168081f8208be7b"
+    }
+  },
+  "limitations": [
+    "The bounded optimization budget selects a representation, not converged generative quality.",
+    "Terminal valence masks are deterministic chemistry constraints and every fallback is counted.",
+    "The current pointer implementation materializes N by N parent logits but eliminates N by N by hidden-dimension edge states.",
+    "Aromatic systems use deterministic Kekule graphs; stereochemistry remains route assigned.",
+    "No unavailable pKa, particle-size, PDI, encapsulation, or formulation values are imputed."
+  ],
+  "method": {
+    "aromaticity": "deterministic_kekulization_before_flat_graph_flow",
+    "closure_count": "empirical R0_train cycle-rank prior",
+    "family": "hierarchical sparse discrete flow matching",
+    "fixed_fragment_or_building_block_inventory": false,
+    "full_pair_reachability": true,
+    "node_count": "empirical R0_train prior",
+    "stereochemistry": "route_assigned_at_dossier_time",
+    "topology_factorization": "connected rooted backbone plus factorized residual closure endpoints",
+    "whole_molecule_generation": true
+  },
+  "representation_audit": {
+    "cycle_rank_counts": {
+      "0": 7117,
+      "1": 5746,
+      "12": 1,
+      "2": 1338,
+      "3": 560,
+      "4": 245,
+      "5": 55,
+      "6": 21,
+      "8": 5,
+      "9": 1
+    },
+    "eligible_single_fragment_rows": 15089,
+    "full_support_exclusions": {
+      "outside_element_vocabulary": 344
+    },
+    "maximum_observed_cycle_rank": 12,
+    "roundtrip_exact_rows": 15089,
+    "roundtrip_fraction": 1.0
+  },
+  "runs": [
+    {
+      "bond_marginal": [
+        0.9282213382582754,
+        0.06950561159255576,
+        0.002273050149168916
+      ],
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "by_size": {
+          "01_32": {
+            "backbone_bond_accuracy": 0.9439449548721314,
+            "closure_bond_accuracy": 1.0,
+            "closure_pair_accuracy": 1.0,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8689329246679942,
+            "parent_accuracy": 0.3613308325409889,
+            "rows": 30
+          },
+          "33_48": {
+            "backbone_bond_accuracy": 0.9497595909422478,
+            "closure_bond_accuracy": 0.9542772862236056,
+            "closure_pair_accuracy": 0.3407079646017699,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8890057032087207,
+            "parent_accuracy": 0.3389481774209875,
+            "rows": 113
+          },
+          "49_64": {
+            "backbone_bond_accuracy": 0.9506990809356217,
+            "closure_bond_accuracy": 0.9100294994041983,
+            "closure_pair_accuracy": 0.2743362831858407,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.905756173408137,
+            "parent_accuracy": 0.3112167948774532,
+            "rows": 113
+          }
+        },
+        "graphs_per_second": 1916.709248905181,
+        "metrics": {
+          "backbone_bond_accuracy": 0.9494928850326687,
+          "closure_bond_accuracy": 0.9401041670935228,
+          "closure_pair_accuracy": 0.388671875,
+          "exact_sparse_state": 0.0,
+          "node_accuracy": 0.8940471867099404,
+          "parent_accuracy": 0.3293303392420057
+        },
+        "rows": 256,
+        "wall_seconds": 0.1335622500628233
+      },
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 47.145833333333336,
+          "jensen_shannon_divergence": 0.15334338948243142,
+          "train_mean": 47.10357843877397,
+          "wasserstein_heavy_atoms": 1.5261368211787218
+        },
+        "connectedness": 1.0,
+        "cycle_rank_fidelity": {
+          "generated_maximum": 2,
+          "generated_mean": 0.5208333333333334,
+          "jensen_shannon_divergence": 0.011645662846666537,
+          "train_mean": 0.6601238109617998,
+          "wasserstein_cycle_rank": 0.13929047762846636
+        },
+        "endpoint_validity": 1.0,
+        "invalid_reason_counts": {},
+        "topology_novelty_among_valid": 1.0,
+        "unique_among_valid": 1.0,
+        "valid_and_connected": 1.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 1990,
+        "R0_heldout": 2081,
+        "R0_train": 6623
+      },
+      "heldout_reconstruction": {
+        "by_size": {
+          "01_32": {
+            "backbone_bond_accuracy": 0.9400312616381534,
+            "closure_bond_accuracy": 0.9612403103085452,
+            "closure_pair_accuracy": 0.45348837209302323,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8217188611973164,
+            "parent_accuracy": 0.3093801021229389,
+            "rows": 86
+          },
+          "33_48": {
+            "backbone_bond_accuracy": 0.9465507409151863,
+            "closure_bond_accuracy": 0.9176470588235294,
+            "closure_pair_accuracy": 0.6588235294117647,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8801016225534327,
+            "parent_accuracy": 0.3673129016862196,
+            "rows": 85
+          },
+          "49_64": {
+            "backbone_bond_accuracy": 0.9644604753045475,
+            "closure_bond_accuracy": 0.9647058823529412,
+            "closure_pair_accuracy": 0.8,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.9382784899543314,
+            "parent_accuracy": 0.3469665185493581,
+            "rows": 85
+          }
+        },
+        "graphs_per_second": 2030.8031584113053,
+        "metrics": {
+          "backbone_bond_accuracy": 0.9503071948420256,
+          "closure_bond_accuracy": 0.9479166667442769,
+          "closure_pair_accuracy": 0.63671875,
+          "exact_sparse_state": 0.0,
+          "node_accuracy": 0.879805201664567,
+          "parent_accuracy": 0.34109546680701897
+        },
+        "rows": 256,
+        "wall_seconds": 0.12605850002728403
+      },
+      "memory": {
+        "active_backbone_edges_per_graph": 63,
+        "closure_endpoint_logits_per_graph": 1536,
+        "dense_edge_hidden_states_eliminated": 4096,
+        "maximum_closure_edges_per_graph": 12,
+        "parent_pointer_logits_per_graph": 4096,
+        "peak_rss_after_bytes": 1028669440,
+        "peak_rss_before_bytes": 1004519424,
+        "peak_rss_increment_bytes": 24150016
+      },
+      "model": {
+        "parameter_count": 113581,
+        "state_sha256": "19d5cdebf3f831b1d9186dd722c504a00d5ccd9f2f0924dbca0279d85a75f149"
+      },
+      "n_max": 64,
+      "name": "sparse_n64",
+      "node_marginal": [
+        0.8408581676908135,
+        0.05302483916568099,
+        0.0002788756503091673,
+        0.0024521824423737125,
+        0.09487541951552568,
+        0.0024008949664547853,
+        0.006109620568842217
+      ],
+      "sampling": {
+        "closure_count_source": "empirical_R0_train_cycle_rank_distribution",
+        "graph_steps_per_second": 1102.65502968802,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "terminal_constraint_events": {
+          "realized_closures": 25,
+          "requested_closures": 25
+        },
+        "terminal_constraint_repair_fraction": 0.0,
+        "terminal_decisions": 4503,
+        "wall_seconds": 0.8706258749589324
+      },
+      "training": {
+        "examples_seen_with_replacement": 1600,
+        "final_loss": {
+          "backbone_bond_ce": 0.22904449701309204,
+          "closure_bond_ce": 0.09542392939329147,
+          "closure_left_ce": 3.2231197357177734,
+          "closure_right_ce": 2.5416150093078613,
+          "node_ce": 0.6070520281791687,
+          "parent_pointer_ce": 2.2866921424865723,
+          "total": 8.98294734954834
+        },
+        "graphs_per_second": 825.507759631475,
+        "initial_loss": {
+          "backbone_bond_ce": 1.2370373010635376,
+          "closure_bond_ce": 1.093876600265503,
+          "closure_left_ce": 3.7893776893615723,
+          "closure_right_ce": 3.8195557594299316,
+          "node_ce": 2.2352795600891113,
+          "parent_pointer_ce": 2.815349578857422,
+          "total": 14.99047565460205
+        },
+        "mean_last_20_loss": {
+          "backbone_bond_ce": 0.1888384811580181,
+          "closure_bond_ce": 0.30143606262281536,
+          "closure_left_ce": 2.865402853488922,
+          "closure_right_ce": 2.9374376595020295,
+          "node_ce": 0.46139014661312105,
+          "parent_pointer_ce": 2.1895375669002535,
+          "total": 8.944042825698853
+        },
+        "steps": 200,
+        "wall_seconds": 1.9382010421250015
+      }
+    },
+    {
+      "bond_marginal": [
+        0.9237996166478843,
+        0.07365369241290298,
+        0.002546690939212683
+      ],
+      "bounded_calibration_rows": 256,
+      "bounded_heldout_rows": 256,
+      "bounded_training_rows": 2048,
+      "calibration_reconstruction": {
+        "by_size": {
+          "01_32": {
+            "backbone_bond_accuracy": 0.977538122733434,
+            "closure_bond_accuracy": 1.0,
+            "closure_pair_accuracy": 1.0,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.9061562319596609,
+            "parent_accuracy": 0.3841619998216629,
+            "rows": 30
+          },
+          "33_48": {
+            "backbone_bond_accuracy": 0.9500987930376021,
+            "closure_bond_accuracy": 0.9330601105924512,
+            "closure_pair_accuracy": 0.4262295081967213,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8860011999724341,
+            "parent_accuracy": 0.27070505880430096,
+            "rows": 61
+          },
+          "49_64": {
+            "backbone_bond_accuracy": 0.9433485845724742,
+            "closure_bond_accuracy": 0.9250000009934107,
+            "closure_pair_accuracy": 0.21666666666666667,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.9039226512114207,
+            "parent_accuracy": 0.2379730666677157,
+            "rows": 60
+          },
+          "65_80": {
+            "backbone_bond_accuracy": 0.9504956473906835,
+            "closure_bond_accuracy": 0.8791666696468989,
+            "closure_pair_accuracy": 0.3333333333333333,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8718829323848089,
+            "parent_accuracy": 0.2259373813867569,
+            "rows": 60
+          },
+          "81_96": {
+            "backbone_bond_accuracy": 0.9528694762123956,
+            "closure_bond_accuracy": 0.9111111111111111,
+            "closure_pair_accuracy": 0.6222222222222222,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8733416888448927,
+            "parent_accuracy": 0.1871250707242224,
+            "rows": 45
+          }
+        },
+        "graphs_per_second": 1055.4106023519578,
+        "metrics": {
+          "backbone_bond_accuracy": 0.9523123062681407,
+          "closure_bond_accuracy": 0.9225260429084301,
+          "closure_pair_accuracy": 0.45703125,
+          "exact_sparse_state": 0.0,
+          "node_accuracy": 0.8870291842613369,
+          "parent_accuracy": 0.2511450142483227
+        },
+        "rows": 256,
+        "wall_seconds": 0.24255962506867945
+      },
+      "endpoints": {
+        "atom_count_fidelity": {
+          "generated_mean": 58.104166666666664,
+          "jensen_shannon_divergence": 0.1876244612874945,
+          "train_mean": 55.999355739289165,
+          "wasserstein_heavy_atoms": 2.6539089623823298
+        },
+        "connectedness": 1.0,
+        "cycle_rank_fidelity": {
+          "generated_maximum": 3,
+          "generated_mean": 0.9166666666666666,
+          "jensen_shannon_divergence": 0.012312041182392945,
+          "train_mean": 0.7404703103189091,
+          "wasserstein_cycle_rank": 0.2043290740541896
+        },
+        "endpoint_validity": 1.0,
+        "invalid_reason_counts": {},
+        "topology_novelty_among_valid": 1.0,
+        "unique_among_valid": 1.0,
+        "valid_and_connected": 1.0
+      },
+      "fold_counts_after_support_filters": {
+        "R0_cal": 2231,
+        "R0_heldout": 2294,
+        "R0_train": 9313
+      },
+      "heldout_reconstruction": {
+        "by_size": {
+          "01_32": {
+            "backbone_bond_accuracy": 0.9525246448241748,
+            "closure_bond_accuracy": 0.9807692307692307,
+            "closure_pair_accuracy": 0.38461538461538464,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.851307322199528,
+            "parent_accuracy": 0.37470890381015265,
+            "rows": 52
+          },
+          "33_48": {
+            "backbone_bond_accuracy": 0.9467140963444343,
+            "closure_bond_accuracy": 0.8685897439718246,
+            "closure_pair_accuracy": 0.6923076923076923,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8951152333846459,
+            "parent_accuracy": 0.3080431818962097,
+            "rows": 52
+          },
+          "49_64": {
+            "backbone_bond_accuracy": 0.9518216894223139,
+            "closure_bond_accuracy": 0.9807692307692307,
+            "closure_pair_accuracy": 0.8461538461538461,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.9213938220189168,
+            "parent_accuracy": 0.25042114979945695,
+            "rows": 52
+          },
+          "65_80": {
+            "backbone_bond_accuracy": 0.9477432874532846,
+            "closure_bond_accuracy": 1.0,
+            "closure_pair_accuracy": 0.8846153846153846,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8723901682175123,
+            "parent_accuracy": 0.20061739032658246,
+            "rows": 52
+          },
+          "81_96": {
+            "backbone_bond_accuracy": 0.9532301227251688,
+            "closure_bond_accuracy": 1.0,
+            "closure_pair_accuracy": 0.7291666666666666,
+            "exact_sparse_state": 0.0,
+            "node_accuracy": 0.8698523367444674,
+            "parent_accuracy": 0.18386596518879136,
+            "rows": 48
+          }
+        },
+        "graphs_per_second": 1092.0954261560594,
+        "metrics": {
+          "backbone_bond_accuracy": 0.9503626532386988,
+          "closure_bond_accuracy": 0.9654947917442769,
+          "closure_pair_accuracy": 0.70703125,
+          "exact_sparse_state": 0.0,
+          "node_accuracy": 0.8822017677593976,
+          "parent_accuracy": 0.264776089345105
+        },
+        "rows": 256,
+        "wall_seconds": 0.23441174998879433
+      },
+      "memory": {
+        "active_backbone_edges_per_graph": 95,
+        "closure_endpoint_logits_per_graph": 2304,
+        "dense_edge_hidden_states_eliminated": 9216,
+        "maximum_closure_edges_per_graph": 12,
+        "parent_pointer_logits_per_graph": 9216,
+        "peak_rss_after_bytes": 1030307840,
+        "peak_rss_before_bytes": 1028800512,
+        "peak_rss_increment_bytes": 1507328
+      },
+      "model": {
+        "parameter_count": 113581,
+        "state_sha256": "bc0066d5ec7028463de274e492842b1f65afb26a4e606389f407d3330e117e77"
+      },
+      "n_max": 96,
+      "name": "sparse_n96",
+      "node_marginal": [
+        0.8386971211185722,
+        0.047842660520553304,
+        0.0002684450512154808,
+        0.0022741130767254306,
+        0.1015719375213318,
+        0.002160982662284621,
+        0.007184740049317191
+      ],
+      "sampling": {
+        "closure_count_source": "empirical_R0_train_cycle_rank_distribution",
+        "graph_steps_per_second": 807.6274810202458,
+        "node_count_source": "empirical_R0_train_distribution_conditioned_on_n_max",
+        "samples": 48,
+        "sampling_steps": 20,
+        "terminal_constraint_events": {
+          "realized_closures": 44,
+          "requested_closures": 44
+        },
+        "terminal_constraint_repair_fraction": 0.0,
+        "terminal_decisions": 5574,
+        "wall_seconds": 1.1886668328661472
+      },
+      "training": {
+        "examples_seen_with_replacement": 800,
+        "final_loss": {
+          "backbone_bond_ce": 0.15268965065479279,
+          "closure_bond_ce": 0.14197610318660736,
+          "closure_left_ce": 2.731036424636841,
+          "closure_right_ce": 3.1866588592529297,
+          "node_ce": 0.6294606924057007,
+          "parent_pointer_ce": 2.620966911315918,
+          "total": 9.462788581848145
+        },
+        "graphs_per_second": 432.01881341891,
+        "initial_loss": {
+          "backbone_bond_ce": 1.1456830501556396,
+          "closure_bond_ce": 1.1643229722976685,
+          "closure_left_ce": 4.061303615570068,
+          "closure_right_ce": 4.078591346740723,
+          "node_ce": 2.9361114501953125,
+          "parent_pointer_ce": 3.2083191871643066,
+          "total": 16.594331741333008
+        },
+        "mean_last_20_loss": {
+          "backbone_bond_ce": 0.1985241174697876,
+          "closure_bond_ce": 0.39121605902910234,
+          "closure_left_ce": 3.394682985544205,
+          "closure_right_ce": 3.2871737837791444,
+          "node_ce": 0.47674120515584945,
+          "parent_pointer_ce": 2.6039150595664977,
+          "total": 10.352253210544585
+        },
+        "steps": 200,
+        "wall_seconds": 1.8517712079919875
+      }
+    }
+  ],
+  "runtime": {
+    "cpu_count": 12,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "torch": "2.11.0"
+  },
+  "scaling_dry_runs": [
+    {
+      "batch_size": 2,
+      "closure_endpoint_logits_per_graph": 3072,
+      "dense_edge_hidden_state_scalars_avoided_per_graph": 786432,
+      "graphs_per_second": 1546.7754567686113,
+      "iterations": 10,
+      "n_max": 128,
+      "parent_pointer_logits_per_graph": 16384,
+      "peak_rss_after_bytes": 1030340608,
+      "peak_rss_before_bytes": 1030340608,
+      "sparse_hidden_state_scalars_per_graph": 6144
+    },
+    {
+      "batch_size": 1,
+      "closure_endpoint_logits_per_graph": 4608,
+      "dense_edge_hidden_state_scalars_avoided_per_graph": 1769472,
+      "graphs_per_second": 844.288536418511,
+      "iterations": 10,
+      "n_max": 192,
+      "parent_pointer_logits_per_graph": 36864,
+      "peak_rss_after_bytes": 1030340608,
+      "peak_rss_before_bytes": 1030340608,
+      "sparse_hidden_state_scalars_per_graph": 9216
+    },
+    {
+      "batch_size": 1,
+      "closure_endpoint_logits_per_graph": 6768,
+      "dense_edge_hidden_state_scalars_avoided_per_graph": 3817152,
+      "graphs_per_second": 766.2590974558756,
+      "iterations": 10,
+      "n_max": 282,
+      "parent_pointer_logits_per_graph": 79524,
+      "peak_rss_after_bytes": 1030340608,
+      "peak_rss_before_bytes": 1030340608,
+      "sparse_hidden_state_scalars_per_graph": 13536
+    }
+  ],
+  "schema_version": "m0_06_sparse_topology_feasibility_result.v1",
+  "scope": "M0 representation feasibility only; no production product-prior training",
+  "status": "completed_bounded_sparse_probe",
+  "support_audit": {
+    "actual_full_r0": {
+      "maximum_heavy_atoms": 282,
+      "n64_count": 10877,
+      "n64_fraction": 0.7047884403550833,
+      "n96_count": 14079,
+      "n96_fraction": 0.9122659236700577,
+      "rows": 15433
+    },
+    "declared_element_supported_r0": {
+      "maximum_heavy_atoms": 282,
+      "n64_count": 10694,
+      "n64_fraction": 0.7087282126052091,
+      "n96_count": 13838,
+      "n96_fraction": 0.9170919212671482,
+      "rows": 15089
+    },
+    "declared_elements": [
+      "C",
+      "N",
+      "O",
+      "P",
+      "S"
+    ],
+    "documented_profile": {
+      "maximum_heavy_atoms": 282,
+      "n64_fraction": 0.7047884403550833,
+      "n96_fraction": 0.9122659236700577
+    },
+    "invalid_smiles": [],
+    "observed_atom_states": [
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "F"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 1,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": -1,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "P"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "S"
+      },
+      {
+        "aromatic": true,
+        "formal_charge": 0,
+        "symbol": "S"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "Si"
+      }
+    ],
+    "observed_bond_stereochemistry": {
+      "STEREOE": 525,
+      "STEREONONE": 914624,
+      "STEREOZ": 10971
+    },
+    "observed_bond_types": {
+      "AROMATIC": 15259,
+      "DOUBLE": 59664,
+      "SINGLE": 848881,
+      "TRIPLE": 2316
+    },
+    "profile_comparisons": {
+      "maximum_heavy_atoms_matches": true,
+      "n64_fraction_matches": true,
+      "n96_fraction_matches": true
+    },
+    "profile_matches": true,
+    "rows_outside_declared_element_vocabulary": 344,
+    "unsupported_element_row_incidence": {
+      "F": 92,
+      "Si": 252
+    }
+  }
+}

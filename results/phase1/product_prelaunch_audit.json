@@ -1,0 +1,140 @@
+{
+  "decision": {
+    "gpu_training_authorized_by_representation_audit": true,
+    "rows_may_not_be_dropped_to_pass": true
+  },
+  "inputs": {
+    "config": {
+      "bytes": 590,
+      "path": "configs/model/phase1_product_prelaunch_audit.json",
+      "sha256": "5cf57ceae39a12e5ec6a446aea42d5abdd69f77ef5577dd21b87e166d846a46d"
+    },
+    "phase1_manifest": {
+      "bytes": 6929,
+      "path": "data/splits/phase1/manifest.json",
+      "sha256": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad"
+    },
+    "r0_constitutional": {
+      "bytes": 1665612,
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "r1_reaction_enumerated": {
+      "bytes": 100296410,
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    }
+  },
+  "r1_audit": {
+    "all_rows_supported": true,
+    "failure_counts": {},
+    "failure_examples": {},
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "observed_atom_states": [
+      {
+        "aromatic": false,
+        "atom_occurrences": 21066603,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": false,
+        "atom_occurrences": 1401648,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "atom_occurrences": 1267006,
+        "formal_charge": 0,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "atom_occurrences": 40551,
+        "formal_charge": 0,
+        "symbol": "P"
+      },
+      {
+        "aromatic": false,
+        "atom_occurrences": 26229,
+        "formal_charge": 0,
+        "symbol": "S"
+      }
+    ],
+    "rows": 464265,
+    "size_bin_counts": {
+      "41_64": 299228,
+      "65_96": 49563,
+      "97_128": 12260,
+      "gt128": 246,
+      "le40": 102968
+    },
+    "unsupported_atom_states": []
+  },
+  "representation": {
+    "aromaticity_policy": "kekulized_bonds_with_cleared_atom_aromatic_flags",
+    "declared_elements": [
+      "C",
+      "F",
+      "N",
+      "O",
+      "P",
+      "S",
+      "Si"
+    ],
+    "maximum_closure_slots": 12,
+    "maximum_heavy_atoms": 282,
+    "r0_atom_vocabulary": [
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "C"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "F"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 1,
+        "symbol": "N"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": -1,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "O"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "P"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "S"
+      },
+      {
+        "aromatic": false,
+        "formal_charge": 0,
+        "symbol": "Si"
+      }
+    ]
+  },
+  "schema_version": "phase1_product_prelaunch_audit.v1",
+  "status": "pass",
+  "task": "Full-corpus representation audit before Phase 1 GPU training"
+}

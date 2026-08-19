@@ -1,0 +1,128 @@
+{
+  "decision": {
+    "architecture_impact": "Retain generic neural proposals plus deterministic source-linked template search. This inventory does not authorize a standalone lipid-specific route model.",
+    "curation_surface_is_finite": true,
+    "next_action": "Review locally available and PMC-linked sources first, extract exact component routes with source locations, then acquire the remaining publisher or author files."
+  },
+  "evidence_contract": {
+    "execution_acceptance_rule": "A component is executable only when it is procurement-verified or has a forward-verified route whose leaves are procurement-verified or internally stocked.",
+    "non_inference_rule": "Publication linkage, structural synthesizability, or supplier plausibility alone does not establish route or procurement closure.",
+    "procurement_statuses": {
+      "internal_stock_verified": "Identity and current internal stock are recorded.",
+      "not_assessed": "No current supplier evidence has been reviewed.",
+      "vendor_claim_only": "A supplier listing exists but has not been time-stamped and checked.",
+      "vendor_verified": "Identity, supplier, catalog identifier, region, date, and backup are recorded."
+    },
+    "route_statuses": {
+      "forward_verified": "Every non-terminal step passes deterministic forward reconstruction.",
+      "internally_validated": "The route also has an internal experimental success record.",
+      "not_assessed": "No route claim has been reviewed for this exact component.",
+      "route_extracted": "Steps and conditions are transcribed with source locations.",
+      "source_identified": "A primary source is linked, but no complete route is extracted."
+    }
+  },
+  "generated_utc": "2026-07-28T00:00:00+00:00",
+  "inputs": [
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/route/m0_09_lnpdb_route_sources.json",
+      "bytes": 2036,
+      "sha256": "495dc86c312e570a701a8f9fc3c7b50ef4fbad6067cc53a5645fd2c5e76da693"
+    },
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/data/vendor/r0_observed_real_structures.csv",
+      "bytes": 19633160,
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/data/vendor/lnpdb_fc7c389.csv",
+      "bytes": 20118803,
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/data/reference/lnpdb_pubmed_metadata_2026-07-28.json",
+      "bytes": 14335,
+      "sha256": "f74af17337d24be96911fea12647aaa706bc80cfae73d3736fdf479c98c55631"
+    },
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/data/vendor/agile_supplementary_information.pdf",
+      "bytes": 12499955,
+      "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    }
+  ],
+  "outputs": {
+    "component_source_ledger": {
+      "records": 726,
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    "source_queue": {
+      "records": 43,
+      "sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_lnpdb_route_source_ledger.v1",
+  "scope": {
+    "all_lnpdb_used_for_inventory_only": true,
+    "model_training_authorized": false,
+    "purpose": "Prioritize primary-source route curation for LNPDB-annotated heads, linkers, and tails.",
+    "split_before_extraction_required_for_later_model_data": true
+  },
+  "software": {
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "commercial_sources": 1,
+    "components_without_publication": 0,
+    "components_without_source": 0,
+    "lnpdb_records": 19797,
+    "lnpdb_unique_lipids": 12837,
+    "normalized_role_components": 726,
+    "publication_identity_corrections": 1,
+    "publications_requiring_publisher_or_author_acquisition": 16,
+    "publications_with_local_source": 1,
+    "publications_with_pmc_identifier": 26,
+    "r0_lnpdb_structures": 12837,
+    "raw_lnpdb_to_r0_exact_match": true,
+    "role_components": {
+      "head": {
+        "components_without_publication": 0,
+        "components_without_source": 0,
+        "invalid_components": 12,
+        "normalized_components": 408,
+        "parsed_components": 396,
+        "raw_values": 432
+      },
+      "linker": {
+        "components_without_publication": 0,
+        "components_without_source": 0,
+        "invalid_components": 0,
+        "normalized_components": 35,
+        "parsed_components": 35,
+        "raw_values": 36
+      },
+      "tail1": {
+        "components_without_publication": 0,
+        "components_without_source": 0,
+        "invalid_components": 8,
+        "normalized_components": 238,
+        "parsed_components": 230,
+        "raw_values": 248
+      },
+      "tail2": {
+        "components_without_publication": 0,
+        "components_without_source": 0,
+        "invalid_components": 0,
+        "normalized_components": 45,
+        "parsed_components": 45,
+        "raw_values": 45
+      }
+    },
+    "unique_publications": 42,
+    "unique_source_families": 43
+  },
+  "task": "M0-09 addendum"
+}

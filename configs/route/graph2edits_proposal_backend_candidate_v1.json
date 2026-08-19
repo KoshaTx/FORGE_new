@@ -1,0 +1,60 @@
+{
+  "schema_version": "forge.graph2edits_candidate_acquisition.v1",
+  "status": "artifacts_acquired_runtime_license_and_benchmark_gates_open",
+  "activation_authorized": false,
+  "backend_id": "graph2edits-uspto50k-reaction-class-unknown",
+  "source": {
+    "repository": "https://github.com/Jamson-Zhong/Graph2Edits",
+    "commit": "b12e97391c378e46e79e617d80017e95b21bba65",
+    "source_locator": "https://github.com/Jamson-Zhong/Graph2Edits/tree/b12e97391c378e46e79e617d80017e95b21bba65",
+    "archive_path": "data/source_cache/graph2edits_usp50k_figshare_v1/source_b12e97391c378e46e79e617d80017e95b21bba65.tar.gz",
+    "archive_size_bytes": 16455766,
+    "archive_sha256": "834b0d44e019176481ea4b24bafb5f2ffe2d4a2f907125b6fbf27696b550270b"
+  },
+  "checkpoint_release": {
+    "figshare_article_id": 25047314,
+    "figshare_file_id": 44194301,
+    "figshare_version": 1,
+    "doi": "10.6084/m9.figshare.25047314.v1",
+    "license_declared_by_record": "MIT",
+    "archive_path": "data/source_cache/graph2edits_usp50k_figshare_v1/graph2edits.zip",
+    "archive_size_bytes": 4631077,
+    "archive_md5_published": "ee66e25c735e94bf1db14a5f49b00675",
+    "archive_md5_computed": "ee66e25c735e94bf1db14a5f49b00675",
+    "archive_sha256": "14dab7a8d8ece3a2696f576c110298876555b906dc587860f68c177f938f57f3",
+    "checkpoint_path": "data/source_cache/graph2edits_usp50k_figshare_v1/checkpoint/epoch_123.pt",
+    "checkpoint_size_bytes": 4994217,
+    "checkpoint_sha256": "e82cdff19ac1285755d4667ba6bc78e802053add8de6661eee0ba5323e44bcbe"
+  },
+  "runtime": {
+    "syntheseus_version": "0.8.0",
+    "syntheseus_wheel_path": "data/source_cache/graph2edits_usp50k_figshare_v1/syntheseus-0.8.0-py3-none-any.whl",
+    "syntheseus_wheel_size_bytes": 185072,
+    "syntheseus_wheel_sha256": "c9bf6ea244badb209b7101a2d86b2b7ab40132b636e58bf09040dd2e7a66d32b",
+    "syntheseus_graph2edits_version": "0.2.0",
+    "syntheseus_graph2edits_wheel_path": "data/source_cache/graph2edits_usp50k_figshare_v1/syntheseus_graph2edits-0.2.0-py3-none-any.whl",
+    "syntheseus_graph2edits_wheel_size_bytes": 36822,
+    "syntheseus_graph2edits_wheel_sha256": "55656362070b429ba9b7ebd1bebfbfe3352db92f0ed263e9b368fd514a5d622d",
+    "reaction_class_mode": "unknown",
+    "max_edit_steps": 9,
+    "environment_lock_complete": false
+  },
+  "training_corpus": {
+    "id": "graph2edits-official-uspto50k-canonicalized",
+    "canonical_manifest_path": "configs/route/graph2edits_usp50k_training_corpus_manifest_v1.json",
+    "canonical_manifest_sha256": "f3c109121757e9ff2b7f63a29fa88f030b9753d3e786e6f21e6c6e55db8d2720",
+    "snapshot_complete": true
+  },
+  "blocking_gates": [
+    "complete institutional artifact and patent-derived-data license review",
+    "freeze and hash the isolated runtime lock",
+    "pass deterministic repeated-inference and FORGE lipid-component benchmarks"
+  ],
+  "scientific_authority": {
+    "proposal_only": true,
+    "may_create_evidence": false,
+    "may_set_synthesis_success_probability": false,
+    "may_close_route": false,
+    "may_enter_synthesis_value_without_independent_screening": false
+  }
+}

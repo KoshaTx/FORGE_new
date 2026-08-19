@@ -1,0 +1,70 @@
+{
+  "schema_version": "phase1_ugi_planner_reach_sweep_config.v1",
+  "status": "frozen_before_planner_reach_sweep",
+  "task": "Measure how many unresolved bounded-hybrid-cascade components a bounded multistep planner can connect to a public catalog snapshot, at one larger budget applied identically to every component",
+  "seed": 20260805,
+  "output_directory": "results/phase1/ugi_planner_reach_sweep_v1",
+  "shard_count": 2,
+  "motivation": {
+    "corrects": "The cascade ran AiZynthFinder only on the 72 components Graph2Edits left without a graph-consistent hypothesis, so 48 unresolved components were never asked whether a route to catalog stock exists.",
+    "also_corrects": "The cascade inherited an 8-second/60-iteration engine-benchmark budget, which is too small to answer a reachability question for 40-80 heavy-atom lipid precursors.",
+    "target_set": "every unresolved, assessable component in the frozen cascade component ledger, regardless of which engine already proposed on it"
+  },
+  "scope": {
+    "planner_solution_is_route_evidence": false,
+    "planner_solution_is_current_procurement_evidence": false,
+    "public_catalog_membership_is_current_availability": false,
+    "may_set_route_complete": false,
+    "may_change_cascade_result": false,
+    "identical_budget_for_every_component": true,
+    "arm_blind": true,
+    "candidate_selection": false,
+    "prospective_panel_lock": false
+  },
+  "inputs": {
+    "cascade_result": {
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/result.json",
+      "sha256": "27a7f7c95f9c0dc0e00aa53e8de217d5529052a5b214ca0b901daa7efab6576a"
+    },
+    "component_route_ledger": {
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/component_route_ledger.jsonl.gz",
+      "sha256": "243cfbdc1d29c6752eef17d5207ee9903f8a400dea285fb62e384941a0984b7b"
+    },
+    "aizynthfinder_runtime_manifest": {
+      "path": "configs/route/aizynthfinder_public_v4_4_1_diagnostic_macos_arm64_v1.json",
+      "sha256": "bb1af0ff80a22f8a1c5a785868aa58558f8fbd6aab1ebd607bda65f826d3206b"
+    }
+  },
+  "search": {
+    "single_step": {
+      "expansion_policies": ["uspto", "ringbreaker"],
+      "filter_policies": ["uspto"],
+      "maximum_proposals": 10
+    },
+    "full_search": {
+      "stocks": ["zinc"],
+      "time_limit_seconds": 60,
+      "iteration_limit": 300,
+      "maximum_transforms": 6,
+      "maximum_routes_stored": 3
+    },
+    "budget_note": "7.5x the cascade's inherited diagnostic time budget and 5x its iteration budget; identical for every component so no arm, cohort or role is advantaged"
+  },
+  "expected_population": {
+    "unresolved_assessable_components": 120,
+    "by_role": {
+      "amine_head": 30,
+      "isocyanide_tail": 13,
+      "oxoester_aldehyde_body_tail": 77
+    },
+    "previously_tested_by_aizynthfinder": 72,
+    "never_tested_by_aizynthfinder": 48
+  },
+  "nonclaims": [
+    "A planner solution to public catalog stock is not route evidence and is not procurement evidence.",
+    "ZINC membership is a frozen public snapshot, not current purchasability.",
+    "This sweep does not change any bounded hybrid route cascade result.",
+    "This sweep does not close a route, select a candidate or lock a panel.",
+    "An unsolved target is unsolved under this bounded budget, not unsynthesizable."
+  ]
+}

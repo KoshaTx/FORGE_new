@@ -1,0 +1,28 @@
+{
+  "inputs": {
+    "builder_runner": {"path": "scripts/phase1_qualify_ugi_grouped_smc_schedule.py", "sha256": "cbcae4e566259cc6433666b22424244dfc4901816931e6815539cacd616780bf"},
+    "builder_source": {"path": "src/forge/product/ugi_grouped_smc_schedule_qualification.py", "sha256": "c55254c726932cca2c2353e06152687663bc051a8790f0bfb03f0046c8261b36"},
+    "builder_tests": {"path": "tests/test_ugi_grouped_smc_schedule_qualification.py", "sha256": "41eb9d6edde91c90a2ae3114bddc9dee0fc722342d1cca001eda30e872243c31"},
+    "current_source_zero_guidance_requalification": {"path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json", "sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"},
+    "joint_sparse_sampling": {"path": "src/forge/product/ugi_joint_sparse_sampling.py", "sha256": "b28bfaf1acf5b2d47696b6ebe0d270b923831cf1de1143904c4e18624fca0b73"},
+    "matched_preregistration": {"path": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json", "sha256": "0834c51bf68b5d242e0ab22a5e9fb2bcc825f317989d63c6af9c695779ea897c"},
+    "program_draw": {"path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json", "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"},
+    "restartable_sampling": {"path": "src/forge/product/ugi_selected_restartable_generator.py", "sha256": "0b5bce196d811d279d0ab5b97de437c1fe12bf8fc17f23771a9533cdbb27be11"},
+    "route_completion_utility_qualification": {"path": "results/phase1/ugi_route_completion_utility_v1/result.json", "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"},
+    "synthesis_guidance": {"path": "src/forge/product/ugi_synthesis_guidance.py", "sha256": "3b6511c5632cb24001163fd6a60e20d21b8318599aa7ad664bfdadfda82ae9db"}
+  },
+  "policy": {
+    "ancestry_crosses_programs": false,
+    "ancestry_group_key": ["seed", "program_index"],
+    "biology_used": false,
+    "candidate_selection": false,
+    "nonzero_guidance_execution": false,
+    "particles_per_program": 4,
+    "particles_per_seed": 64,
+    "program_selection": "sha256_keyed_without_replacement_within_frozen_branch_strata",
+    "programs_per_seed": 16,
+    "sealed_holdout_accessed": false
+  },
+  "schema_version": "phase1_ugi_grouped_smc_schedule_qualification_config.v1",
+  "seeds": [20260821, 20260822, 20260823, 20260824, 20260825, 20260826, 20260827, 20260828]
+}

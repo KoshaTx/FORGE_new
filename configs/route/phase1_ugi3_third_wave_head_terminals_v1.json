@@ -1,0 +1,41 @@
+{
+  "schema_version": "phase1_ugi3_third_wave_head_terminals.v1",
+  "snapshot": {
+    "accessed_utc": "2026-08-02T05:51:40Z",
+    "expires_utc": "2026-08-09T05:51:40Z",
+    "region": "US",
+    "retrieval_channel": "direct_primary_supplier_product_page_archive",
+    "interpretation": "The admitted record is exact current procurement evidence, not evidence of Ugi reaction success."
+  },
+  "records": [
+    {
+      "component_id": "ugi-component-642c1e8985c43a1287ec",
+      "role": "amine_head",
+      "canonical_smiles": "NC1CCCCC1",
+      "name": "Cyclohexylamine",
+      "cas": "108-91-8",
+      "molecular_formula": "C6H13N",
+      "supplier": "Chem-Impex",
+      "product_number": "03599",
+      "source_url": "https://www.chemimpex.com/products/03599",
+      "source_asset": "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "source_asset_sha256": "b8473f5749707bdb9adecca9a017132333d7aa14607ad3a7efc60006b0f9b518",
+      "source_page_fields": "name, CAS, formula, assay, SKU, price, availability and add-to-cart state",
+      "assay": ">=99.9% (GC)",
+      "availability": "available_to_ship_today",
+      "available_skus": [
+        "03599-250ML",
+        "03599-1L",
+        "03599-4L",
+        "03599-16L",
+        "03599-64L"
+      ],
+      "disposition": "admit_exact_terminal"
+    }
+  ],
+  "nonclaims": [
+    "Procurement evidence does not establish Ugi substrate compatibility or synthesis success.",
+    "No analogue, homologue or family evidence is promoted by this record.",
+    "The availability snapshot expires and must be refreshed before candidate lock."
+  ]
+}

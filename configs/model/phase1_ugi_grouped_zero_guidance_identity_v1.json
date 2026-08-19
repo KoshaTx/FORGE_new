@@ -1,0 +1,73 @@
+{
+  "assignment_seed": 20260821,
+  "checkpoints": [2, 4, 6],
+  "inputs": {
+    "adapter_source": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter.py",
+      "sha256": "7a615ab03b3f00e35d65394629e219c5bbab5dbb8d328f4d167c629fd54b652a"
+    },
+    "adapter_tests": {
+      "path": "tests/test_ugi_selected_guidance_adapter.py",
+      "sha256": "795a742a7eb4112ecdcab25713c252115ffab62ceece5237596ee0e08a867098"
+    },
+    "builder_runner": {
+      "path": "scripts/phase1_qualify_ugi_grouped_zero_guidance_identity.py",
+      "sha256": "ec83490d1c94915392827963909d78ad1076ab422718bd71eb80af8dfd84218f"
+    },
+    "builder_source": {
+      "path": "src/forge/product/ugi_grouped_zero_guidance_identity.py",
+      "sha256": "b69f9d32481ed9ea6dae95de89eb3a321de089e55c85f4fe5d0e4fb0b3f1d51a"
+    },
+    "builder_tests": {
+      "path": "tests/test_ugi_grouped_zero_guidance_identity.py",
+      "sha256": "80d36c30bf34de28be6499f0eda51665fc107fe7cde5a7eddf8a5fed10d26622"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "nonzero_runner_config": {
+      "path": "configs/model/phase1_ugi_nonzero_guidance_runner_v1.json",
+      "sha256": "52d4b2ae87cd99b7cf54059abb3bd2866bf5479ff0db1701d71e39bdebe0fd6f"
+    },
+    "nonzero_runner_plan": {
+      "path": "results/phase1/ugi_nonzero_guidance_runner_v1/plan.json",
+      "sha256": "8d71321ff5dd33e0bd84f23185db6f3a5b54c59c069d1c73d3ce8af3351ab635"
+    },
+    "nonzero_runner_source": {
+      "path": "src/forge/product/ugi_nonzero_guidance_runner.py",
+      "sha256": "4a0791b551cc0d3d3a1f862321d102f51b29c9d90e67c42102cbb390aab388a2"
+    },
+    "nonzero_runner_tests": {
+      "path": "tests/test_ugi_nonzero_guidance_runner.py",
+      "sha256": "c40ef62fde3a59ce1e7e8e18eaf646002beac95158a2e21669e99c0a322b80fe"
+    },
+    "restartable_equivalence_v2": {
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json",
+      "sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+    },
+    "selected_generator_implementation": {
+      "path": "src/forge/product/ugi_selected_generator_implementation.py",
+      "sha256": "e03a945ea02e4d452adcc8608fd1b1d04729e689a135acce86d014a9750d1a83"
+    },
+    "selected_restartable_generator": {
+      "path": "src/forge/product/ugi_selected_restartable_generator.py",
+      "sha256": "0b5bce196d811d279d0ab5b97de437c1fe12bf8fc17f23771a9533cdbb27be11"
+    }
+  },
+  "policy": {
+    "ancestry": "identity_only",
+    "biological_guidance": false,
+    "candidate_selection": false,
+    "device": "cpu",
+    "direct_selected_callback_reference": true,
+    "nonzero_guidance": false,
+    "particles_per_program": 4,
+    "program_count": 16,
+    "route_evaluation": false,
+    "sealed_holdout_access": false,
+    "synthesis_value_evaluation": false
+  },
+  "sample_steps": 8,
+  "schema_version": "phase1_ugi_grouped_zero_guidance_identity_config.v1"
+}

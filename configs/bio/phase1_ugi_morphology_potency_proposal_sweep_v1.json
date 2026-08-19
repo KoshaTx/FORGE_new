@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase1_ugi_morphology_potency_proposal_sweep_config.v1",
+  "status": "frozen_before_nested_potency_proposal_sweep",
+  "task": "Select a support-preserving morphology potency proposal nested inside the promoted applicability proposal without changing the oracle trust region",
+  "scope": {
+    "read_only_distribution_calculation": true,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "applicability_boundary_changed": false,
+    "potency_tilting_promoted": false,
+    "candidate_selection": false,
+    "synthesis_guidance": false,
+    "prospective_claim": false
+  },
+  "model": {
+    "selected_model": "role_factorized_additive",
+    "ridge_alpha": 1.0,
+    "alpha_basis": "modal nested-CV alpha in four of five exact-program outer folds",
+    "conformal_coverage": 0.90,
+    "utility": "positive half of the OOF LCB90 empirical CDF",
+    "expected_value": "frozen applicability support score multiplied by conservative potency utility",
+    "unknown_role_state_policy": "zero potency utility without removing morphology support"
+  },
+  "sweep": {
+    "gamma": [0.25, 0.50, 0.75],
+    "beta": [1.0, 2.0, 4.0, 8.0],
+    "selection": "maximum expected supported potency value among candidates passing every frozen safeguard"
+  },
+  "safeguards": {
+    "minimum_effective_program_fraction": 0.75,
+    "minimum_shannon_effective_fraction": 0.80,
+    "minimum_importance_ess_fraction": 0.55,
+    "maximum_program_probability_multiplier": 1.50,
+    "minimum_role_effective_state_fraction": 0.80,
+    "minimum_expected_value_relative_improvement": 0.05,
+    "full_57190_program_support_required": true
+  },
+  "inputs": {
+    "potency_oof_ledger": {
+      "path": "results/phase1/ugi_morphology_potency_signal_v1/oof_predictions.csv.gz",
+      "sha256": "ce620f5a1e3559d689396f3f5b6568b28a9995091b7aec45bb04dfd0133fc480"
+    },
+    "potency_signal_result": {
+      "path": "results/phase1/ugi_morphology_potency_signal_v1/result.json",
+      "sha256": "3caa13797e311741f84a16c8405ff255e5a307b80ea2eba17c9838e4d279e94b"
+    },
+    "promoted_proposal_ledger": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "b61f94a20df2e14c39d9455952dde2c11943df5dd85178963dcec206f799eef2"
+    },
+    "promoted_proposal_result": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/result.json",
+      "sha256": "978453f439755f2daa1ec4b56dfb2caad1769dfc731fe6d39e2b818b9f288a16"
+    }
+  }
+}

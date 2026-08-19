@@ -1,0 +1,47 @@
+{
+  "schema_version": "phase1_ugi_production_candidate_schedule_config.v1",
+  "status": "frozen_before_two_arm_production_schedule_construction",
+  "task": "Freeze one common-uniform 16,384-draw morphology schedule for the broad and promoted applicability-enriched production arms before terminal chemistry is generated",
+  "scope": {
+    "read_only_distribution_sampling": true,
+    "complete_qualified_morphology_support": true,
+    "common_uniforms_across_arms": true,
+    "terminal_outcomes_consumed": false,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "population": {
+    "qualified_programs": 57190
+  },
+  "design": {
+    "draws_per_arm": 16384,
+    "common_uniform_seed": 20261201,
+    "sampling_with_replacement": true
+  },
+  "inputs": {
+    "promoted_proposal_ledger": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "b61f94a20df2e14c39d9455952dde2c11943df5dd85178963dcec206f799eef2"
+    },
+    "promoted_proposal_result": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/result.json",
+      "sha256": "978453f439755f2daa1ec4b56dfb2caad1769dfc731fe6d39e2b818b9f288a16"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_production_candidate_schedule.py",
+      "sha256": "cb501fa994eab298ed00e727335106e6611a1ceb039f8b1cd4ef0eab8e088d8f"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_production_candidate_schedule.py",
+      "sha256": "16a66280a1ef552596a50da5a7b13f91ac0a41148e892da6ad9e467a44b52a7f"
+    },
+    "tests": {
+      "path": "tests/test_ugi_production_candidate_schedule.py",
+      "sha256": "424554ade8c0da36df965ecfb2042fedb0daee32345236b97bbf9d9a5ded94d0"
+    }
+  }
+}

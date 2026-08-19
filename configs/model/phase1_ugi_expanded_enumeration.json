@@ -1,0 +1,45 @@
+{
+  "schema_version": "phase1_ugi_expanded_enumeration_config.v1",
+  "task": "Phase 1 exact expanded Ugi product enumeration",
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "current_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "policy": {
+    "reaction_id": "ugi_3cr_agile",
+    "identity": "canonical_constitutional_smiles",
+    "maximum_forward_outcomes": 64,
+    "maximum_heavy_atoms": 282,
+    "gzip_compresslevel": 6,
+    "allowed_elements": [
+      "C",
+      "N",
+      "O",
+      "S",
+      "P",
+      "F",
+      "Si"
+    ],
+    "enumeration_requires_one_symmetry_distinct_site_per_role": true,
+    "preserve_current_exact_products_with_resolved_multisite_heads": true,
+    "product_fold_policy": "heldout_if_any_held_else_calibration_if_any_calibration_else_train",
+    "family_balance": "inverse_product_of_role_family_sizes",
+    "uniform_product_row_sampling_allowed": false,
+    "source_activity_labels_inherited": false,
+    "enumerated_product_is_synthesis_success": false
+  },
+  "outputs": {
+    "products": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+    "result": "results/phase1/ugi_expanded_enumeration/result.json"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "config": {
+    "path": "configs/model/phase1_product_l1_data.json",
+    "sha256": "7794dedf7414b45eb6241737200b14711a1add15b0fdcc9f0268a9ca5e4dae64"
+  },
+  "manifest": {
+    "bytes": 7869,
+    "path": "data/splits/phase1/manifest.json",
+    "sha256": "4ac8285268fcff75d846ac212afdef925ec3b8f5009bc96c8609620f093fc975"
+  },
+  "schema_version": "phase1_product_l1_data_result.v3",
+  "status": "complete",
+  "summary": {
+    "biological_guidance_enabled": false,
+    "broad_r0_fraction": 0.9,
+    "broad_r1_fraction": 0.1,
+    "r0_rows": 15229,
+    "r1_rows": 464265,
+    "replay_ratios": [
+      [
+        0.75,
+        0.25
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.25,
+        0.75
+      ]
+    ],
+    "source_adjudicated_measured_ugi_products": 1100,
+    "synthesis_value_guidance_enabled": false,
+    "ugi_components": {
+      "amine_head": 24,
+      "isocyanide_tail": 9,
+      "oxoester_aldehyde_body_tail": 62
+    },
+    "ugi_l1_products": 12386,
+    "ugi_source_rows": 13376,
+    "ugi_source_rows_collapsed_by_constitutional_identity": 990,
+    "ugi_virtual_measured_overlap": 990
+  },
+  "task": "Phase 1 broad whole-lipid plus exact Ugi-L1 data contract"
+}

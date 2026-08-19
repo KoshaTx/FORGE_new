@@ -1,0 +1,65 @@
+{
+  "schema_version": "phase1_ugi3_third_wave_head_terminal_audit_config.v1",
+  "task": "Admit one archived exact-current head terminal and quantify deterministic product-dossier closure",
+  "inputs": {
+    "audit_source": {
+      "asset": "src/forge/route/ugi3_third_wave_head_terminals.py",
+      "expected_sha256": "459eeb74a6f58f8ffd540e5863945891e8f34ab84aee90d6303fb19dd5443274"
+    },
+    "evidence_pack": {
+      "asset": "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
+      "expected_sha256": "ec16ed0ec407354cae3efa58b68db935fa9c74aa4fef7988fd5871964896c6cb"
+    },
+    "prior_product_impact": {
+      "asset": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "08b92b1ba54d975501d6acf0784be3128ceb2d203a2076eb865e799df2a98301"
+    },
+    "prior_result": {
+      "asset": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/result.json",
+      "expected_sha256": "9a6763a2bd2154c3d065232cf17e50459a1bb0b8c511e98ff0f62a0aa9627431"
+    },
+    "qualifier_source": {
+      "asset": "scripts/phase1_audit_ugi3_third_wave_head_terminals.py",
+      "expected_sha256": "569e68fbed314e82a71b577cbb1d94857e6ad124ac9ed3c1511ab6a6a4e7be29"
+    },
+    "readiness_ledger": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "expected_sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "supplier_page": {
+      "asset": "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "expected_sha256": "b8473f5749707bdb9adecca9a017132333d7aa14607ad3a7efc60006b0f9b518"
+    }
+  },
+  "expected_summary": {
+    "exact_head_terminals_admitted": 1,
+    "registry_complete_components_before": 49,
+    "registry_complete_components_after": 50,
+    "generated_products": 1007,
+    "generated_products_complete_before": 42,
+    "generated_products_complete_after": 45,
+    "newly_complete_generated_products": 3,
+    "generated_target_occurrences": 17,
+    "target_occurrences": {
+      "amine_head\tNC1CCCCC1": 17
+    },
+    "newly_complete_products_by_target": {
+      "amine_head\tNC1CCCCC1": 3
+    },
+    "remaining_gap_count_distribution": {
+      "0": 45,
+      "1": 229,
+      "2": 419,
+      "3": 314
+    }
+  },
+  "audit_policy": {
+    "direct_procurement_requires_exact_identity": true,
+    "direct_procurement_requires_current_item_level_availability": true,
+    "archived_primary_supplier_page_required": true,
+    "family_or_analogue_evidence_can_close": false,
+    "availability_refresh_required_before_candidate_lock": true,
+    "diagnostic_only": true,
+    "production_synthesis_guidance": false
+  }
+}

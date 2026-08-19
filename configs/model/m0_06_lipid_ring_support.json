@@ -1,0 +1,34 @@
+{
+  "schema_version": "m0_06_lipid_ring_support_config.v1",
+  "seed": 20260730,
+  "inputs": {
+    "r0": {
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "agile_curated": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "agile_reconciliation": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    }
+  },
+  "expected": {
+    "r0_rows": 15229,
+    "agile_single_structure_rows": 1100
+  },
+  "ring_policy": {
+    "macrocycle_minimum_ring_size": 9,
+    "primary_ugi_automatic_ring_roles": ["amine_head"],
+    "primary_ugi_automatic_single_ring_sizes": [5, 6],
+    "primary_ugi_automatic_maximum_rings": 1,
+    "primary_ugi_automatic_fused_allowed": false,
+    "primary_ugi_automatic_spiro_allowed": false,
+    "primary_ugi_automatic_bridgehead_allowed": false,
+    "primary_ugi_automatic_macrocycle_allowed": false,
+    "exact_ring_fragment_vocabulary_required": false,
+    "outside_automatic_support_action": "abstain_from_primary_candidate_lock_pending_exact_evidence"
+  }
+}

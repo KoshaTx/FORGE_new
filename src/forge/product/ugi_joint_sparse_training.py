@@ -1,0 +1,675 @@
+"""Matched smoke training for the chemistry-aware joint sparse-flow arm."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import random
+import tempfile
+from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+
+from forge.product.defog_feasibility import sha256_file
+from forge.product.ugi_chemistry_corpus import (
+    load_expanded_ugi_chemistry_corpus,
+    load_ugi_chemistry_corpus,
+)
+from forge.product.ugi_joint_sparse_flow import (
+    UgiJointSparseFlow,
+    collate_ugi_joint_sparse_records,
+    joint_sparse_source_marginals,
+    noise_ugi_joint_sparse_batch,
+    project_joint_sparse_record,
+    ugi_joint_sparse_loss,
+)
+from forge.product.ugi_morphology_corpus import (
+    balanced_product_weights,
+    source_stratified_family_weights,
+)
+from forge.product.ugi_training_cache import load_ugi_training_cache
+
+try:
+    import torch
+except ModuleNotFoundError:  # pragma: no cover
+    torch = None
+
+
+class UgiJointSparseTrainingError(RuntimeError):
+    """Raised when the matched joint-flow experiment violates its contract."""
+
+
+@dataclass(frozen=True)
+class TrainingPartition:
+    """Validated fold use for development training or a fixed-duration production refit."""
+
+    mode: str
+    training_folds: tuple[str, ...]
+    diagnostic_folds: tuple[str, ...]
+    selection_mode: str
+
+    @property
+    def overlapping_folds(self) -> tuple[str, ...]:
+        return tuple(sorted(set(self.training_folds).intersection(self.diagnostic_folds)))
+
+
+def _training_partition(
+    config: dict[str, Any],
+    available_folds: tuple[str, ...],
+    runtime: dict[str, Any],
+) -> TrainingPartition:
+    """Validate that fold reuse cannot masquerade as checkpoint selection evidence."""
+
+    policy = dict(config.get("training_partition", {}))
+    mode = str(policy.get("mode", "development_split"))
+    training_folds = tuple(str(value) for value in policy.get("training_folds", ("train",)))
+    diagnostic_folds = tuple(
+        str(value) for value in policy.get("diagnostic_folds", ("calibration",))
+    )
+    selection_mode = str(policy.get("selection_mode", "calibration_early_stopping"))
+    available = set(available_folds)
+    if not training_folds or not diagnostic_folds:
+        raise UgiJointSparseTrainingError("training and diagnostic folds must be nonempty")
+    if len(set(training_folds)) != len(training_folds) or len(set(diagnostic_folds)) != len(
+        diagnostic_folds
+    ):
+        raise UgiJointSparseTrainingError("training partition contains duplicate folds")
+    unknown = (set(training_folds) | set(diagnostic_folds)).difference(available)
+    if unknown:
+        raise UgiJointSparseTrainingError(
+            f"training partition contains unknown folds: {sorted(unknown)}"
+        )
+    partition = TrainingPartition(
+        mode=mode,
+        training_folds=training_folds,
+        diagnostic_folds=diagnostic_folds,
+        selection_mode=selection_mode,
+    )
+    early_stopping = dict(runtime.get("early_stopping", {}))
+    patience = int(early_stopping.get("patience", 0))
+    if mode == "development_split":
+        if selection_mode != "calibration_early_stopping":
+            raise UgiJointSparseTrainingError(
+                "development split requires calibration early-stopping selection"
+            )
+        if partition.overlapping_folds:
+            raise UgiJointSparseTrainingError(
+                "development training and calibration folds must be disjoint"
+            )
+    elif mode == "production_refit_all_folds":
+        if set(training_folds) != available:
+            raise UgiJointSparseTrainingError(
+                "production refit must train on every available structural fold"
+            )
+        if selection_mode != "fixed_final_step":
+            raise UgiJointSparseTrainingError("production refit must select the fixed final step")
+        if patience != 0:
+            raise UgiJointSparseTrainingError(
+                "production refit cannot use data-dependent early stopping"
+            )
+    else:
+        raise UgiJointSparseTrainingError(f"unsupported training-partition mode: {mode}")
+    return partition
+
+
+def _merge_fold_values(
+    values_by_fold: dict[str, tuple[Any, ...]], folds: tuple[str, ...]
+) -> tuple[Any, ...]:
+    """Merge folds in the declared order without changing within-fold record order."""
+
+    return tuple(value for fold in folds for value in values_by_fold[fold])
+
+
+def _atomic_json(path: Path, value: Any) -> None:
+    payload = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def _atomic_checkpoint(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    os.close(descriptor)
+    try:
+        torch.save(value, temporary)
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def _resolve(repo: Path, record: dict[str, str], label: str) -> tuple[Path, dict[str, str]]:
+    path = Path(record["path"])
+    if not path.is_absolute():
+        path = repo / path
+    if not path.is_file():
+        raise UgiJointSparseTrainingError(f"missing {label}: {path}")
+    observed = sha256_file(path)
+    if observed != record["sha256"]:
+        raise UgiJointSparseTrainingError(f"{label} hash changed")
+    return path, {"path": str(path), "sha256": observed}
+
+
+def _move(batch: dict[str, Any], device: Any) -> dict[str, Any]:
+    return {
+        key: value.to(device) if hasattr(value, "to") else value for key, value in batch.items()
+    }
+
+
+def _training_weights(
+    assignments: tuple[Any, ...],
+    sampling: dict[str, Any],
+) -> np.ndarray:
+    mode = sampling.get("mode", "role_component_raked")
+    if mode == "role_component_raked":
+        return balanced_product_weights(assignments)
+    if mode == "source_stratified_role_family_raked":
+        source_mass = sampling.get("source_mass")
+        return source_stratified_family_weights(
+            assignments,
+            source_mass=(
+                {str(key): float(value) for key, value in source_mass.items()}
+                if source_mass is not None
+                else None
+            ),
+            uniform_row_mixture=float(sampling.get("uniform_row_mixture", 0.5)),
+        )
+    raise UgiJointSparseTrainingError(f"unsupported training sampling mode: {mode}")
+
+
+def _loss_on_records(
+    model: Any,
+    records: tuple[Any, ...],
+    sources: dict[str, Any],
+    model_config: dict[str, Any],
+    runtime: dict[str, Any],
+    *,
+    seed: int,
+    device: Any,
+    semantic_organization: str = "role_structured",
+) -> dict[str, float]:
+    rng = np.random.default_rng(seed)
+    generator = torch.Generator(device=device).manual_seed(seed + 1)
+    collected: dict[str, list[float]] = {}
+    model.eval()
+    with torch.no_grad():
+        for _ in range(int(runtime["validation_batches"])):
+            indices = rng.choice(
+                len(records),
+                size=min(int(runtime["batch_size"]), len(records)),
+                replace=False,
+            )
+            local = tuple(records[int(index)] for index in indices)
+            batch = _move(
+                collate_ugi_joint_sparse_records(
+                    local,
+                    maximum_nodes=max(record.node_count for record in local),
+                    maximum_children=int(model_config["maximum_children"]),
+                    maximum_closures=int(model_config["maximum_cycle_rank"]) * 3,
+                    maximum_decorations=int(model_config["maximum_decorations"]),
+                    semantic_organization=semantic_organization,
+                ),
+                device,
+            )
+            t = torch.rand(len(local), generator=generator, device=device).clamp(0.02, 0.98)
+            noisy = noise_ugi_joint_sparse_batch(batch, sources, t, generator)
+            predictions = model(
+                offspring=noisy["offspring"],
+                nodes=noisy["nodes"],
+                parent_bonds=noisy["parent_bonds"],
+                role_states=batch["role_states"],
+                within_role_positions=batch["within_role_positions"],
+                programs=batch["programs"],
+                node_mask=batch["node_mask"],
+                t=t,
+                closure_left=batch["closure_left"],
+                closure_right=batch["closure_right"],
+                decoration_anchors=noisy["decoration_anchors"],
+                decoration_atoms=noisy["decoration_atoms"],
+                decoration_bonds=noisy["decoration_bonds"],
+            )
+            _, metrics = ugi_joint_sparse_loss(
+                predictions, batch, semantic_organization=semantic_organization
+            )
+            for key, value in metrics.items():
+                collected.setdefault(key, []).append(value)
+    return {key: float(np.mean(values)) for key, values in collected.items()}
+
+
+def _records_by_source(
+    records: tuple[Any, ...],
+    assignments: tuple[Any, ...],
+) -> dict[str, tuple[Any, ...]]:
+    grouped: dict[str, list[Any]] = {}
+    for record, assignment in zip(records, assignments, strict=True):
+        source = str(assignment.get("source_stratum") or "unspecified")
+        grouped.setdefault(source, []).append(record)
+    return {source: tuple(values) for source, values in sorted(grouped.items())}
+
+
+def _macro_average_metrics(values: dict[str, dict[str, float]]) -> dict[str, float]:
+    keys = set.intersection(*(set(metrics) for metrics in values.values()))
+    return {
+        key: float(np.mean([metrics[key] for metrics in values.values()])) for key in sorted(keys)
+    }
+
+
+def _validated_checkpoint_steps(runtime: dict[str, Any]) -> tuple[int, ...]:
+    """Return deterministic serial-evaluation checkpoints allowed by the run."""
+
+    try:
+        steps = int(runtime["steps"])
+        eval_every = int(runtime["eval_every"])
+        requested = tuple(sorted({int(step) for step in runtime.get("checkpoint_steps", ())}))
+    except (KeyError, TypeError, ValueError) as error:
+        raise UgiJointSparseTrainingError("invalid checkpoint-step policy") from error
+    if steps <= 0 or eval_every <= 0:
+        raise UgiJointSparseTrainingError("invalid checkpoint-step policy")
+    if any(step <= 0 or step > steps or step % eval_every != 0 for step in requested):
+        raise UgiJointSparseTrainingError(
+            "checkpoint steps must be positive evaluation steps within the run"
+        )
+    return requested
+
+
+def train_ugi_joint_sparse(
+    config_path: Path,
+    repo: Path,
+    output_dir: Path,
+    *,
+    smoke: bool,
+    overwrite: bool,
+    progress_callback: Callable[[int, Path], None] | None = None,
+) -> dict[str, Any]:
+    """Train one preregistered joint arm on the expanded chemistry exemplars."""
+
+    if torch is None:
+        raise UgiJointSparseTrainingError("joint sparse training requires torch")
+    config = json.loads(config_path.read_text())
+    # Semantics experiment knobs. Absent from every production config, so existing runs are
+    # unaffected and reproduce bit-identically.
+    semantic_organization = str(config.get("semantic_organization", "role_structured"))
+    coverage_split = config.get("coverage_split")
+    if config.get("schema_version") != "phase1_ugi_joint_sparse_training_config.v1":
+        raise UgiJointSparseTrainingError("unsupported joint sparse config")
+    if output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
+        raise UgiJointSparseTrainingError(f"output directory is nonempty: {output_dir}")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    resolved = {}
+    inputs = {}
+    for label, value in config["inputs"].items():
+        resolved[label], inputs[label] = _resolve(repo, value, label)
+    corpus_kind = config.get("corpus_kind", "expanded_fold_clean")
+    cached_records_by_fold = None
+    if "prepared_cache" in resolved:
+        corpus, cached_records_by_fold = load_ugi_training_cache(resolved["prepared_cache"])
+    elif corpus_kind == "expanded_fold_clean":
+        corpus = load_expanded_ugi_chemistry_corpus(
+            resolved["assignments"],
+            resolved["semantic_products"],
+            resolved["semantic_atoms"],
+            resolved["atom_vocabulary"],
+        )
+    elif corpus_kind == "original_ugi_12276":
+        corpus = load_ugi_chemistry_corpus(
+            resolved["assignments"],
+            resolved["semantic_products"],
+            resolved["semantic_atoms"],
+            resolved["atom_vocabulary"],
+        )
+    else:
+        raise UgiJointSparseTrainingError(f"unsupported joint corpus kind: {corpus_kind}")
+    records_by_fold = (
+        cached_records_by_fold
+        if cached_records_by_fold is not None
+        else {
+            fold: tuple(project_joint_sparse_record(record) for record in records)
+            for fold, records in corpus.records_by_fold.items()
+        }
+    )
+    if {fold: len(records) for fold, records in records_by_fold.items()} != config[
+        "expected_fold_counts"
+    ]:
+        raise UgiJointSparseTrainingError("joint sparse fold counts changed")
+    mode = "smoke" if smoke else "full"
+    runtime = dict(config[mode])
+    model_config = dict(config["model"])
+    if smoke:
+        model_config.update(runtime.pop("model_overrides"))
+    device = torch.device(runtime["device"])
+    if device.type == "cuda" and not torch.cuda.is_available():
+        raise UgiJointSparseTrainingError("CUDA requested but unavailable")
+    seed = int(config["seed"])
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if device.type == "cuda":
+        torch.cuda.manual_seed_all(seed)
+    torch.use_deterministic_algorithms(True)
+    partition = _training_partition(config, tuple(records_by_fold), runtime)
+    train_records = _merge_fold_values(records_by_fold, partition.training_folds)
+    train_assignments = _merge_fold_values(corpus.assignments_by_fold, partition.training_folds)
+    diagnostic_records = _merge_fold_values(records_by_fold, partition.diagnostic_folds)
+    diagnostic_assignments = _merge_fold_values(
+        corpus.assignments_by_fold, partition.diagnostic_folds
+    )
+    if coverage_split is not None:
+        sealed = json.loads((repo / str(coverage_split["path"])).read_text())
+        digest = hashlib.sha256((repo / str(coverage_split["path"])).read_bytes()).hexdigest()
+        if digest != str(coverage_split["sha256"]):
+            raise UgiJointSparseTrainingError("sealed coverage split bytes changed")
+        alpha = f"{float(coverage_split['alpha']):.2f}"
+        keep = set(sealed["training_product_ids"][alpha])
+        before = len(train_records)
+        train_records = tuple(r for r in train_records if r.product_id in keep)
+        if len(train_records) != len(keep):
+            raise UgiJointSparseTrainingError(
+                f"coverage subset {alpha} selected {len(train_records)} of {len(keep)} sealed ids")
+        train_assignments = tuple(
+            a for a in train_assignments if a["product_id"] in keep)
+        print(f"coverage alpha={alpha}: {before} -> {len(train_records)} training records")
+    diagnostic_by_source = _records_by_source(diagnostic_records, diagnostic_assignments)
+    sampling = dict(config.get("sampling", {}))
+    weights = _training_weights(train_assignments, sampling)
+    sources_np = joint_sparse_source_marginals(
+        train_records,
+        atom_classes=len(corpus.atom_vocabulary),
+        bond_classes=int(model_config["bond_classes"]),
+        maximum_children=int(model_config["maximum_children"]),
+        maximum_decorations=int(model_config["maximum_decorations"]),
+        probability_floor=float(model_config["source_probability_floor"]),
+        record_weights=weights,
+        semantic_organization=semantic_organization,
+    )
+    sources = {
+        key: torch.as_tensor(value, dtype=torch.float32, device=device)
+        for key, value in sources_np.items()
+    }
+    architecture = dict(model_config)
+    architecture.pop("source_probability_floor")
+    model = UgiJointSparseFlow(
+        atom_classes=len(corpus.atom_vocabulary),
+        semantic_organization=semantic_organization,
+        **architecture,
+    ).to(device)
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=float(runtime["learning_rate"]),
+        weight_decay=float(runtime["weight_decay"]),
+    )
+    rng = np.random.default_rng(seed + 2)
+    generator = torch.Generator(device=device).manual_seed(seed + 1)
+    losses: list[dict[str, float]] = []
+    evaluations: list[dict[str, Any]] = []
+    latest_path = output_dir / "checkpoint_latest.pt"
+    best_path = output_dir / "checkpoint_best.pt"
+    best_loss: float | None = None
+    best_step = 0
+    early_stopping = dict(runtime.get("early_stopping", {}))
+    early_stopping_patience = int(early_stopping.get("patience", 0))
+    early_stopping_min_delta = float(early_stopping.get("min_delta", 0.0))
+    early_stopping_minimum_steps = int(early_stopping.get("minimum_steps", 0))
+    if (
+        early_stopping_patience < 0
+        or early_stopping_min_delta < 0
+        or early_stopping_minimum_steps < 0
+    ):
+        raise UgiJointSparseTrainingError("invalid joint early-stopping policy")
+    evaluations_without_improvement = 0
+    stop_reason = ""
+    completed_step = 0
+    checkpoint_steps = _validated_checkpoint_steps(runtime)
+    checkpoint_snapshots: list[dict[str, Any]] = []
+
+    def package(step: int) -> dict[str, Any]:
+        return {
+            "schema_version": "phase1_ugi_joint_sparse_checkpoint.v1",
+            "step": step,
+            "model_config": model_config,
+            "model_state": model.state_dict(),
+            "optimizer_state": optimizer.state_dict(),
+            "source_marginals": sources_np,
+            "inputs": inputs,
+        }
+
+    def evaluate(step: int) -> dict[str, Any]:
+        diagnostic_loss_by_source = {
+            source: _loss_on_records(
+                model,
+                records,
+                sources,
+                model_config,
+                runtime,
+                seed=seed + 30_000 + source_index,
+                device=device,
+                semantic_organization=semantic_organization,
+            )
+            for source_index, (source, records) in enumerate(diagnostic_by_source.items())
+        }
+        value = {
+            "step": step,
+            "training_loss": _loss_on_records(
+                model,
+                train_records,
+                sources,
+                model_config,
+                runtime,
+                seed=seed + 20_000,
+                device=device,
+                semantic_organization=semantic_organization,
+            ),
+            "diagnostic_loss": _macro_average_metrics(diagnostic_loss_by_source),
+            "diagnostic_loss_by_source": diagnostic_loss_by_source,
+        }
+        if partition.selection_mode == "calibration_early_stopping":
+            value["calibration_loss"] = value["diagnostic_loss"]
+            value["calibration_loss_by_source"] = value["diagnostic_loss_by_source"]
+        evaluations.append(value)
+        return value
+
+    initial = evaluate(0)
+    if partition.selection_mode == "calibration_early_stopping":
+        best_loss = float(initial["calibration_loss"]["total"])
+    _atomic_checkpoint(latest_path, package(0))
+    if partition.selection_mode == "calibration_early_stopping":
+        _atomic_checkpoint(best_path, package(0))
+    if progress_callback is not None:
+        progress_callback(0, output_dir)
+    model.train()
+    for step in range(1, int(runtime["steps"]) + 1):
+        completed_step = step
+        indices = rng.choice(
+            len(train_records),
+            size=int(runtime["batch_size"]),
+            replace=True,
+            p=weights,
+        )
+        local = tuple(train_records[int(index)] for index in indices)
+        batch = _move(
+            collate_ugi_joint_sparse_records(
+                local,
+                maximum_nodes=max(record.node_count for record in local),
+                maximum_children=int(model_config["maximum_children"]),
+                maximum_closures=int(model_config["maximum_cycle_rank"]) * 3,
+                maximum_decorations=int(model_config["maximum_decorations"]),
+                semantic_organization=semantic_organization,
+            ),
+            device,
+        )
+        t = torch.rand(len(local), generator=generator, device=device).clamp(0.02, 0.98)
+        noisy = noise_ugi_joint_sparse_batch(batch, sources, t, generator)
+        predictions = model(
+            offspring=noisy["offspring"],
+            nodes=noisy["nodes"],
+            parent_bonds=noisy["parent_bonds"],
+            role_states=batch["role_states"],
+            within_role_positions=batch["within_role_positions"],
+            programs=batch["programs"],
+            node_mask=batch["node_mask"],
+            t=t,
+            closure_left=batch["closure_left"],
+            closure_right=batch["closure_right"],
+            decoration_anchors=noisy["decoration_anchors"],
+            decoration_atoms=noisy["decoration_atoms"],
+            decoration_bonds=noisy["decoration_bonds"],
+        )
+        loss, metrics = ugi_joint_sparse_loss(
+            predictions, batch, semantic_organization=semantic_organization
+        )
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        gradient_norm = torch.nn.utils.clip_grad_norm_(
+            model.parameters(), float(runtime["gradient_clip_norm"])
+        )
+        optimizer.step()
+        losses.append({"step": step, **metrics, "gradient_norm": float(gradient_norm)})
+        if step % int(runtime["eval_every"]) == 0 or step == int(runtime["steps"]):
+            model.eval()
+            evaluation = evaluate(step)
+            observed = (
+                float(evaluation["calibration_loss"]["total"])
+                if partition.selection_mode == "calibration_early_stopping"
+                else None
+            )
+            checkpoint = package(step)
+            _atomic_checkpoint(latest_path, checkpoint)
+            if step in checkpoint_steps:
+                snapshot_path = output_dir / f"checkpoint_step_{step}.pt"
+                _atomic_checkpoint(snapshot_path, checkpoint)
+                checkpoint_snapshots.append(
+                    {
+                        "step": step,
+                        "path": str(snapshot_path),
+                        "sha256": sha256_file(snapshot_path),
+                    }
+                )
+            improved = (
+                observed is not None
+                and best_loss is not None
+                and observed < best_loss - early_stopping_min_delta
+            )
+            if improved:
+                best_loss = observed
+                best_step = step
+                evaluations_without_improvement = 0
+                _atomic_checkpoint(best_path, checkpoint)
+            elif (
+                partition.selection_mode == "calibration_early_stopping"
+                and step >= early_stopping_minimum_steps
+            ):
+                evaluations_without_improvement += 1
+            should_stop = (
+                partition.selection_mode == "calibration_early_stopping"
+                and early_stopping_patience > 0
+                and step >= early_stopping_minimum_steps
+                and evaluations_without_improvement >= early_stopping_patience
+            )
+            if should_stop:
+                stop_reason = "calibration_early_stopping"
+            _atomic_json(
+                output_dir / "progress.json",
+                {
+                    "step": step,
+                    "selection_mode": partition.selection_mode,
+                    "best_step": best_step,
+                    "best_calibration_loss": best_loss,
+                    "evaluations_without_improvement": evaluations_without_improvement,
+                    "stop_reason": stop_reason,
+                    "losses": losses,
+                    "evaluations": evaluations,
+                },
+            )
+            if progress_callback is not None:
+                progress_callback(step, output_dir)
+            model.train()
+            if should_stop:
+                break
+    if partition.selection_mode == "fixed_final_step":
+        best_step = completed_step
+        _atomic_checkpoint(best_path, package(completed_step))
+    result = {
+        "schema_version": "phase1_ugi_joint_sparse_training_result.v1",
+        "status": "complete",
+        "mode": mode,
+        "inputs": inputs,
+        "corpus": {fold: len(records) for fold, records in records_by_fold.items()},
+        "corpus_kind": corpus_kind,
+        "training_partition": {
+            "mode": partition.mode,
+            "training_folds": list(partition.training_folds),
+            "training_records": len(train_records),
+            "diagnostic_folds": list(partition.diagnostic_folds),
+            "diagnostic_records": len(diagnostic_records),
+            "overlapping_folds": list(partition.overlapping_folds),
+            "diagnostic_is_in_sample": bool(partition.overlapping_folds),
+            "selection_mode": partition.selection_mode,
+        },
+        "model": model_config,
+        "runtime": runtime,
+        "sampling": {
+            **sampling,
+            "observed_source_mass": {
+                source: float(
+                    weights[
+                        np.asarray(
+                            [
+                                index
+                                for index, row in enumerate(train_assignments)
+                                if str(row.get("source_stratum") or "unspecified") == source
+                            ],
+                            dtype=np.int64,
+                        )
+                    ].sum()
+                )
+                for source in sorted(
+                    {row.get("source_stratum", "unspecified") for row in train_assignments}
+                )
+            },
+        },
+        "selection": {
+            "mode": partition.selection_mode,
+            "best_step": best_step,
+            "best_calibration_loss": best_loss,
+            "completed_steps": completed_step,
+            "stop_reason": stop_reason or "maximum_steps",
+            "early_stopping_patience": early_stopping_patience,
+            "early_stopping_min_delta": early_stopping_min_delta,
+            "early_stopping_minimum_steps": early_stopping_minimum_steps,
+            "diagnostic_loss_is_nonselecting": partition.selection_mode == "fixed_final_step",
+        },
+        "losses": losses,
+        "evaluations": evaluations,
+        "checkpoint": {"path": str(best_path), "sha256": sha256_file(best_path)},
+        "checkpoint_latest": {
+            "path": str(latest_path),
+            "sha256": sha256_file(latest_path),
+        },
+        "checkpoint_snapshots": checkpoint_snapshots,
+        "boundary": {
+            "same_sparse_representation_as_staged_arm": True,
+            "topology_and_chemistry_shared_backbone": True,
+            "component_ids_in_model_state": False,
+            "route_or_oracle_guidance": False,
+        },
+    }
+    _atomic_json(output_dir / "result.json", result)
+    return result

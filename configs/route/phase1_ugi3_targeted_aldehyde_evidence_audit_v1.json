@@ -1,0 +1,77 @@
+{
+  "schema_version": "phase1_ugi3_targeted_aldehyde_evidence_audit_config.v1",
+  "task": "Validate the bounded exact-evidence expansion and quantify deterministic component and product-dossier closure",
+  "inputs": {
+    "audit_source": {
+      "asset": "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
+      "expected_sha256": "67883f8135b98f9b363a9d8a66640e2fb7c78435fdff2a6c262824a16428da5a"
+    },
+    "cli_source": {
+      "asset": "scripts/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
+      "expected_sha256": "5ced6837da97f1a32644e9e5e0d9fa7ad6089b63530b821c9b167358dcab34ba"
+    },
+    "evidence_pack": {
+      "asset": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
+      "expected_sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb"
+    },
+    "kovalerchik_source": {
+      "asset": "data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf",
+      "expected_sha256": "ec598e1a6d36459aead7fa80c5e362bd0972ac7f706eb789cb2a630fd5d78b2c"
+    },
+    "mo_source": {
+      "asset": "data/source_cache/phase1_targeted_l2/TYPHONOSIDES/supporting_information.pdf",
+      "expected_sha256": "7555da9839da7ab3019cc3aba27d0ab969cb80d92223839f624ee2c00b46b0a3"
+    },
+    "busta_source": {
+      "asset": "data/source_cache/phase1_targeted_l2/BUSTA_2016/BustaEtAl_2016_Phytochem.pdf",
+      "expected_sha256": "398d4f2ec3db0b37c077f55b5655b1b6afe7da512d32c6fa0ef2d2b720e6e54f"
+    },
+    "route_readiness_ledger": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "expected_sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "route_readiness_result": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "expected_sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    },
+    "product_gap_ledger": {
+      "asset": "results/phase1/ugi3_l2_coverage_priority_audit_v1/product_gap_ledger.csv.gz",
+      "expected_sha256": "a8ddbce7284de247b17c7e6cd017f8f1d86a16eb11f567214322377e17f4ae48"
+    },
+    "priority_result": {
+      "asset": "results/phase1/ugi3_l2_coverage_priority_audit_v1/result.json",
+      "expected_sha256": "01e9cbb2f52dfb4ebe5b97221183fb1bc0a309d7ed52e4ff4a4f39d93def86ea"
+    },
+    "terminal_procurement": {
+      "asset": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "expected_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "upstream_registry": {
+      "asset": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "expected_sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "oxidation_variant": {
+      "asset": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "expected_sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    },
+    "qualified_forward_source": {
+      "asset": "src/forge/route/qualified_forward.py",
+      "expected_sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    }
+  },
+  "audit_policy": {
+    "expected_direct_procurement_records": 2,
+    "expected_exact_route_records": 3,
+    "expected_unresolved_predeclared_targets": 1,
+    "expected_prioritized_targets": 5,
+    "expected_generated_products": 1007,
+    "expected_baseline_complete_products": 3,
+    "required_route_disposition": "admit_exact",
+    "required_unresolved_disposition": "abstain",
+    "maximum_forward_products_considered": 8,
+    "required_forward_product_count": 1,
+    "permit_family_projection_as_closure": false,
+    "permit_analogue_evidence_as_closure": false,
+    "diagnostic_only": true
+  }
+}

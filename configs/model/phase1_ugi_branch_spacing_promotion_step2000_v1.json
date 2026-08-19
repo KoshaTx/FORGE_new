@@ -1,0 +1,64 @@
+{
+  "schema_version": "phase1_ugi_branch_spacing_promotion_candidate.v1",
+  "status": "frozen_before_independent_sampling",
+  "candidate": {
+    "architecture": "full_morphology_program_conditioning",
+    "step": 2000,
+    "role": "corrected_branch_spacing_challenger"
+  },
+  "sampling": {
+    "seed": 20260805,
+    "attempted_draws": 1024,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_graph_runs_by_role": [
+      2,
+      1,
+      1
+    ],
+    "evaluate_exact_l1_terminal_admission": true,
+    "retry_or_resampling_allowed": false
+  },
+  "output": {
+    "directory": "results/phase1/ugi_branch_spacing_checkpoint_promotion_v1/step2000",
+    "result": "results/phase1/ugi_branch_spacing_checkpoint_promotion_v1/step2000/result.json"
+  },
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "training_result": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/result.json",
+      "sha256": "7427757fad7c6ed8545dbae721d7c4d13af77304a9ab74da2f8c1f8ef5fb2843"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi_program_prior_v5_challenger_selection_samples_1024.json",
+      "sha256": "3182795d0ceefb6667ddb95833595605b795f8114f6c808f907345f1e0f8d4ca"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "sampling_script": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "fd4a5ba4b6afa074aad6d7c028feb9c3a7406ceb8986af2ee5edc99754afb401"
+    },
+    "end_to_end_sampler": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "5e46de9ae2949655e7713a280f7f972635596ec98f87d20c9cbd2739a23a08d2"
+    },
+    "joint_sampler": {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "sha256": "a3ff68b623a78131edff43f008882b0e5d1b6eb18460a3b43304e72e94e154eb"
+    },
+    "morphology_decoder": {
+      "path": "src/forge/product/ugi_morphology_program.py",
+      "sha256": "4a542b3713e04a9ba472d4437f07189bfe2058b0551ec86e772e7eee92e481bd"
+    }
+  }
+}

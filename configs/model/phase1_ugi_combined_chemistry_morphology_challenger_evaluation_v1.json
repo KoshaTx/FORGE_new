@@ -1,0 +1,29 @@
+{
+  "schema_version": "phase1_ugi_chemistry_morphology_challenger_evaluation_config.v1",
+  "status": "frozen_before_evaluation_execution",
+  "inputs": {
+    "challenger_contract": {
+      "path": "configs/model/phase1_ugi_combined_chemistry_morphology_challenger_v1.json",
+      "sha256": "f41e5fc31eb82e08bf9f31cba523aed1b6046715d6bc8db4a38e19b2628d63ff"
+    },
+    "challenger_sample": {
+      "path": "results/phase1/ugi_combined_chemistry_morphology_challenger_v1/result.json",
+      "sha256": "42370f97593e7686639b5f7ed953d52ab21639757c087a0591537ccf3e4e1cc5"
+    }
+  },
+  "implementation_provenance": {
+    "module": {
+      "path": "src/forge/product/ugi_chemistry_morphology_challenger.py",
+      "sha256": "9cf3003ddfdd86eff192341db14c4b0b678e9bddc0e4e0179eecb9cc9dfb8d31"
+    },
+    "runner": {
+      "path": "scripts/phase1_evaluate_ugi_chemistry_morphology_challenger.py",
+      "sha256": "75030e5192f35a31458f3608f91d2a448d03267a5582a200c2e256882c5b1593"
+    },
+    "tests": {
+      "path": "tests/test_ugi_chemistry_morphology_challenger.py",
+      "sha256": "4ec4b1fa70ee5a30aac99a26709032e684448319e4148ed019948ad78094fcef"
+    }
+  },
+  "decision_policy": "Evaluate only the diagnostic gates frozen before the sample was inspected. A pass authorizes an independent confirmation draw; it does not replace the production generator."
+}

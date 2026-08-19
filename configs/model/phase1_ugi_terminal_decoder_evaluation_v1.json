@@ -1,0 +1,51 @@
+{
+  "schema_version": "phase1_ugi_terminal_decoder_evaluation_config.v1",
+  "status": "frozen_nonselecting_causal_decoder_evaluation",
+  "inputs": {
+    "challenger_contract": {
+      "path": "configs/model/phase1_ugi_terminal_decoder_challenger_v1.json",
+      "sha256": "9d3b0d7b1714072307f270e088ddff4fada85be88e8be71c4d35a5a143062aa3"
+    },
+    "step1000_argmax": {
+      "path": "results/phase1/ugi_branch_spacing_checkpoint_promotion_v1/step1000/result.json",
+      "sha256": "2c42ff01f412996fca4cf63a7dba07aa8e01a512cf8a3f3ac9251eaa79db6c00"
+    },
+    "step1000_stochastic": {
+      "path": "results/phase1/ugi_terminal_decoder_challenger_v1/step1000_stochastic_t1/result.json",
+      "sha256": "988b4b82550d3b106e76c5098ffdef2985f27df5643a4fa89a001ba740f4af64"
+    },
+    "step2000_argmax": {
+      "path": "results/phase1/ugi_branch_spacing_checkpoint_promotion_v1/step2000/result.json",
+      "sha256": "3249b5d2509f27ae26165f001d306e0d2105cc5d6f0b1032a5d8af80ca969977"
+    },
+    "step2000_stochastic": {
+      "path": "results/phase1/ugi_terminal_decoder_challenger_v1/step2000_stochastic_t1/result.json",
+      "sha256": "bdb5c8738cfed405e7159163c9f5d156f7aba141f60bed0c6efb56291a92080c"
+    },
+    "step4000_argmax": {
+      "path": "results/phase1/ugi_terminal_decoder_challenger_v1/step4000_argmax/result.json",
+      "sha256": "8445687ece3f895d35e7f575f75debe127a7a1838cd652bf4542a9a4f39145e1"
+    },
+    "step4000_stochastic": {
+      "path": "results/phase1/ugi_terminal_decoder_challenger_v1/step4000_stochastic_t1/result.json",
+      "sha256": "7bf6a3592a9c265986bd5875002fc2e14b071c35b0052f30c3b0bb93e091fa47"
+    }
+  },
+  "matched_pairs": [
+    {
+      "name": "step1000",
+      "argmax": "step1000_argmax",
+      "stochastic": "step1000_stochastic"
+    },
+    {
+      "name": "step2000",
+      "argmax": "step2000_argmax",
+      "stochastic": "step2000_stochastic"
+    },
+    {
+      "name": "step4000",
+      "argmax": "step4000_argmax",
+      "stochastic": "step4000_stochastic"
+    }
+  ]
+}

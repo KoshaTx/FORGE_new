@@ -1,0 +1,57 @@
+{
+  "schema_version": "phase1_ugi_stochastic_channel_isolation_config.v1",
+  "status": "frozen_before_selection_visible_channel_isolation",
+  "frozen_at_utc": "2026-08-05T18:30:00Z",
+  "purpose": "Identify whether stochastic atom states or stochastic learned decorations caused the earlier fully stochastic decoder failure before fitting any calibration rule.",
+  "design": {
+    "programs": 1024,
+    "program_seed": 20260820,
+    "flow_seed": 20260824,
+    "terminal_seed": 20260828,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [2, 1, 1],
+    "terminal_temperature": 1.0,
+    "matched_terminal_decoder_modes": [
+      "bond_stochastic",
+      "atom_bond_stochastic",
+      "decoration_bond_stochastic",
+      "stochastic"
+    ],
+    "same_programs_flow_seed_and_topology_across_arms": true,
+    "retry_or_repair": false
+  },
+  "decision_policy": {
+    "diagnostic_is_selection_visible": true,
+    "production_decoder_changes_from_this_draw": false,
+    "temperature_or_bias_selection_from_this_draw": false,
+    "independent_confirmation_required_after_calibration": true,
+    "primary_question": "Do stochastic atom states retain validity and exact Ugi semantics when learned decorations remain argmax, and do decorations independently explain the failure of the prior fully stochastic decoder?"
+  },
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1000.pt",
+      "sha256": "7595b650745df1194c31eb0293ef17b292d57a655e61433c75f307074aa174a4"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_programs": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_00.json",
+      "sha256": "87ae8e1066cfe1afb1042d77258b29cb6f1b04b8c0b9156c7966fde901008c1d"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "decoder_source": {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "sha256": "4ab226d8af1f7b3f8849ea15580ded5c99489532b8b2db1c18865dfa8b1232cf"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0"
+    }
+  }
+}

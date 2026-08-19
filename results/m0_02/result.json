@@ -1,0 +1,28 @@
+{
+  "decision": {
+    "asset_substitution_allowed": false,
+    "manifest_role": "hash-pinned vendored input authority",
+    "missing_asset_action": "fail_with_expected_path_and_sha256"
+  },
+  "generated_utc": "2026-07-30T23:55:00Z",
+  "inputs": {
+    "vendor_manifest": {
+      "assets": 30,
+      "bytes": 9993,
+      "path": "data/vendor/MANIFEST.json",
+      "sha256": "23136183c444cbed5a9e59150717369c6aa4e6897e65bf7579a14a5d3179d384"
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_02_vendor_verification.v1",
+  "status": "complete",
+  "task": "M0-02 vendoring and provenance",
+  "verification": {
+    "assets_verified": 30,
+    "command": "make verify",
+    "corruption_is_fatal": true
+  }
+}

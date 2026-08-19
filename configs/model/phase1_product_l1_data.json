@@ -1,0 +1,131 @@
+{
+  "schema_version": "phase1_product_l1_data_config.v3",
+  "task": "Phase 1 broad whole-lipid plus exact Ugi-L1 data contract",
+  "seed": 20260730,
+  "inputs": {
+    "r0_constitutional": {
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "r0_assignments": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "r1_reaction_enumerated": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "ugi_virtual_products": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "ugi_measured_semantics": {
+      "path": "results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "expected": {
+    "r0_rows": 15229,
+    "r0_source_study_folds": {
+      "R0_train": 10591,
+      "R0_cal": 2310,
+      "R0_heldout": 2328
+    },
+    "r1_rows": 464265,
+    "ugi_virtual_products": 12276,
+    "ugi_measured_products": 1100,
+    "ugi_virtual_constitutions": 12276,
+    "ugi_measured_constitutions": 1100,
+    "ugi_union_products": 12386,
+    "ugi_virtual_measured_overlap": 990,
+    "ugi_component_counts": {
+      "amine_head": 24,
+      "oxoester_aldehyde_body_tail": 62,
+      "isocyanide_tail": 9
+    },
+    "ugi_primary_product_folds": {
+      "train": 4362,
+      "calibration": 3350,
+      "heldout": 4674
+    }
+  },
+  "broad_stream": {
+    "primary_split_scheme": "source_study",
+    "r0_fraction": 0.9,
+    "r1_fraction": 0.1,
+    "r1_sampling_weight": "realism_weight",
+    "raw_reaction_family_sampling_allowed": false,
+    "r1_semantics": "reaction_enumerated_support_not_route_certified"
+  },
+  "ugi_l1": {
+    "roles": [
+      "amine_head",
+      "oxoester_aldehyde_body_tail",
+      "isocyanide_tail"
+    ],
+    "required_decomposition_status": "one_exact_qualified_ugi_decomposition",
+    "required_candidate_count": 1,
+    "component_split_fractions": {
+      "train": 0.7,
+      "calibration": 0.15,
+      "heldout": 0.15
+    },
+    "split_schemes": [
+      "primary_all_role_strict",
+      "held_amine_head",
+      "held_oxoester_aldehyde_body_tail",
+      "held_isocyanide_tail"
+    ],
+    "measured_source_priority": true,
+    "duplicate_product_upweighting_allowed": false
+  },
+  "joint_training": {
+    "stages": [
+      "broad_product_pretraining",
+      "ugi_l1_adapter_warm_start",
+      "joint_unfreeze_with_broad_replay"
+    ],
+    "broad_to_ugi_replay_ratios": [
+      [
+        0.75,
+        0.25
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.25,
+        0.75
+      ]
+    ],
+    "objective": "L_lipid_plus_mask_L1_plus_mask_roundtrip",
+    "biological_guidance_enabled": false,
+    "synthesis_value_guidance_enabled": false
+  },
+  "representation": {
+    "identity": "constitutional_graph_without_stereochemistry",
+    "elements": [
+      "C",
+      "N",
+      "O",
+      "S",
+      "P",
+      "F",
+      "Si"
+    ],
+    "maximum_heavy_atoms": 282,
+    "topology": "canonical_spanning_tree_plus_residual_closures",
+    "full_pair_reachability": true
+  },
+  "outputs": {
+    "ugi_assignments": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+    "ugi_provenance": "data/splits/phase1/ugi_l1_constitutional_provenance.csv.gz",
+    "manifest": "data/splits/phase1/manifest.json",
+    "result": "results/phase1/data_contract.json"
+  }
+}

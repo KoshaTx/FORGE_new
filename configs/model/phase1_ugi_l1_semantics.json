@@ -1,0 +1,61 @@
+{
+  "schema_version": "phase1_ugi_l1_semantics_config.v1",
+  "reaction_id": "ugi_3cr_agile",
+  "max_forward_outcomes_per_product": 100,
+  "inputs": {
+    "ugi_l1_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "measured_products": {
+      "path": "results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    },
+    "measured_atoms": {
+      "path": "results/m0_07/ugi_semantic_atoms.csv.gz",
+      "sha256": "e1f893d84ddfee19ea50fadfa7b5a4a9b3044866168dbdc9d9ee73c2388a71fe"
+    },
+    "measured_bonds": {
+      "path": "results/m0_07/ugi_semantic_bonds.csv.gz",
+      "sha256": "4b0c402339d3734ff96824ea1cf83bf8d14daecf67dbefadba46e10f48382b97"
+    },
+    "measured_component_mappings": {
+      "path": "results/m0_07/ugi_semantic_component_mappings.csv.gz",
+      "sha256": "16692b89b614ccbca9ef85745a345f2b4a6dfbfbe85603b30c1594331ba961f5"
+    }
+  },
+  "expected": {
+    "unique_products": 12386,
+    "measured_products": 1100,
+    "virtual_only_products": 11286,
+    "core_atoms_per_product": 5,
+    "core_position_origins": {
+      "map_1": "amine_head",
+      "map_2": "oxoester_aldehyde_body_tail",
+      "map_3": "isocyanide_tail",
+      "map_4": "isocyanide_tail",
+      "template_introduced_0": "assembly_introduced"
+    },
+    "component_counts": {
+      "amine_head": 24,
+      "oxoester_aldehyde_body_tail": 62,
+      "isocyanide_tail": 9
+    }
+  },
+  "policy": {
+    "origin_source": "qualified_atom_mapped_forward_transform",
+    "precursor_origin_and_core_membership_are_orthogonal": true,
+    "substructure_inference_allowed": false,
+    "measured_semantic_overlap_must_match_exactly": true,
+    "component_ids_in_model_state": false,
+    "all_origin_regions_must_be_connected": true
+  }
+}

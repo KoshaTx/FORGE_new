@@ -1,0 +1,112 @@
+{
+  "schema_version": "m0_09_ugi3_aldehyde_head_capability_config.v3",
+  "task": "M0-09 bounded Ugi-3 aldehyde and amine-head capability audit",
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "inputs": {
+    "building_block_pool": {
+      "asset": "data/vendor/building_block_pool_v1.json",
+      "expected_sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "agile_component_routes": {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "expected_sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "qualified_reactions": {
+      "asset": "data/vendor/qualified_reactions_v1.json",
+      "expected_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "precursor_capability": {
+      "asset": "results/m0_09/ugi3_precursor_capability.json",
+      "expected_sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    },
+    "agile_head_procurement": {
+      "asset": "configs/route/m0_09_ugi3_agile_head_procurement.json",
+      "expected_sha256": "9167b0fef06931ea596e8996c8192d419f924a3d59e28e10c66d11b6891af157"
+    },
+    "assembly_qualification": {
+      "asset": "results/m0_09/ugi3_assembly_qualification.json",
+      "expected_sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    }
+  },
+  "expected_counts": {
+    "aldehyde_candidates": 51,
+    "rational_aldehyde_candidates": 39,
+    "agile_measured_aldehyde_candidates": 12,
+    "structure_resolved_agile_aldehyde_routes": 17,
+    "exact_route_aldehyde_candidate_overlap": 11,
+    "source_resolved_aldehyde_routes_outside_pool": 6,
+    "unresolved_aldehyde_source_discrepancies": 1,
+    "amine_candidates": 88,
+    "agile_head_candidate_overlap": 20,
+    "miao_head_candidate_overlap": 5,
+    "amine_candidates_with_required_handle": 88,
+    "amine_candidates_passing_raw_registry_multiplicity": 78,
+    "amine_candidates_failing_raw_registry_multiplicity": 10,
+    "agile_heads_failing_raw_registry_multiplicity": 1,
+    "amine_candidates_passing_qualified_site_multiplicity": 85,
+    "amine_candidates_failing_qualified_site_multiplicity": 3,
+    "agile_heads_failing_qualified_site_multiplicity": 0,
+    "agile_measured_products_passing_qualified_site_multiplicity": 1200,
+    "isocyanide_candidates": 39,
+    "agile_head_procurement_records": 20,
+    "agile_heads_current_item_level_vendor_verified": 19,
+    "agile_heads_catalog_item_verified_availability_unresolved": 1,
+    "agile_head_procurement_identity_or_form_discrepancies": 0,
+    "head_candidates_with_upstream_route": 0,
+    "head_candidates_with_current_procurement_closure": 19,
+    "head_candidates_requiring_procurement_or_route_resolution": 69,
+    "computationally_route_complete_candidates": 0
+  },
+  "registry_scope": {
+    "reaction_id": "ugi_3cr_agile",
+    "aldehyde_role": "oxoester_aldehyde_body_tail",
+    "amine_role": "amine_head",
+    "multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+    "required_explicit_site_selection_heads": [
+      "A19",
+      "A20"
+    ],
+    "raw_multiplicity_interpretation": "Raw RDKit substructure-match counts are retained as diagnostics. The qualified Ugi amine gate applies the registry's allowed multiplicities to symmetry-distinct reactive sites, as validated against all 1,200 measured AGILE products."
+  },
+  "aldehyde_scope": {
+    "route_family_ids": [
+      "agile_hexyl_aldehyde_two_step",
+      "agile_direct_aldehyde_oxidation",
+      "agile_butyl_aldehyde_two_step"
+    ],
+    "exact_route_transformation_evidence": [
+      "exact_source_route"
+    ],
+    "unresolved_transformation_evidence": [
+      "no_upstream_route_reported"
+    ],
+    "route_closure": "incomplete",
+    "operational_availability": "route_or_procurement_resolution_required",
+    "prospective_outcome": "not_attempted",
+    "forward_verification_status": "not_run",
+    "scope_note": "Exact source routes are attached by isomeric canonical identity only. Other aldehydes remain unrouted even when a plausible alcohol-oxidation disconnection exists."
+  },
+  "head_scope": {
+    "transformation_evidence": [
+      "no_upstream_route_reported"
+    ],
+    "route_closure": "incomplete",
+    "prospective_outcome": "not_attempted",
+    "forward_verification_status": "not_run",
+    "default_current_procurement_status": "not_verified",
+    "verified_procurement_status": "current_item_level_vendor_verified",
+    "unresolved_catalog_status": "catalog_item_verified_availability_unresolved",
+    "required_unresolved_procurement_labels": [
+      "A9"
+    ],
+    "scope_note": "Historical group-level purchase statements do not close current item-level procurement. The 20 AGILE heads receive a hash-pinned, time-stamped US item-level review; every other candidate remains queued for exact structure, salt, protection state, region, catalog, purity, and stock review."
+  },
+  "claims_boundary": {
+    "source_route_is_not_route_closure": true,
+    "historical_vendor_claim_is_not_current_procurement": true,
+    "raw_handle_filter_is_not_synthesis_success": true,
+    "qualified_site_filter_is_not_synthesis_success": true,
+    "raw_cartesian_product_is_not_a_synthesizable_count": true,
+    "model_built": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "phase1_ugi3_enumerated_routeability_census_config.v1",
+  "task": "Evidence-bounded routeability census over the exact expanded Ugi product universe",
+  "inputs": {
+    "expanded_products": {
+      "path": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+      "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"
+    },
+    "expanded_enumeration_result": {
+      "path": "results/phase1/ugi_expanded_enumeration/result.json",
+      "sha256": "fbff9d65dbcdf439907a3f92e1bdcfb215aec374f4640624a65f4fc667ceabf7"
+    },
+    "hybrid_assessment_ledger": {
+      "path": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz",
+      "sha256": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2"
+    },
+    "hybrid_result": {
+      "path": "results/phase1/ugi3_hybrid_search/result.json",
+      "sha256": "05905d2a5f7eee83cf5a7028d89bcb3e5374959789ecc7ed3c2a692ed75bcbbf"
+    }
+  },
+  "policy": {
+    "identity": "exact role plus canonical constitutional SMILES",
+    "universe": "actual unique products from the frozen 424-component exact forward enumeration",
+    "family_projection_is_exact_route_evidence": false,
+    "missing_knowledge_is_incompatibility": false,
+    "outside_current_route_support_is_chemical_impossibility": false,
+    "enumerated_product_is_experimental_success": false,
+    "similarity_can_transfer_route_status": false
+  },
+  "outputs": {
+    "result": "results/phase1/ugi3_enumerated_routeability_census_v1/result.json"
+  }
+}

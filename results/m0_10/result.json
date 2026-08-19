@@ -1,0 +1,177 @@
+{
+  "acquisition_boundary": {
+    "automatic_download_authorized": false,
+    "next_step": "Vendor an exact FlowER commit and the Figshare v3 checkpoint with license and SHA-256, then curate and freeze at least 32 elementary mechanism trajectories per target class before requesting any compute run.",
+    "prospective_step": "Evaluate conversion correlation only after a locked prospective synthesis ledger contains measured conversion outcomes; do not substitute literature yield or transform-validity labels."
+  },
+  "asset_readiness": {
+    "pretrained_checkpoint": {
+      "candidates": [
+        {
+          "path": "data/vendor/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+          "present": false
+        },
+        {
+          "path": "checkpoints/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+          "present": false
+        },
+        {
+          "path": "../electron_flow_lipids/checkpoints/flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+          "present": false
+        }
+      ],
+      "description": "FlowER v3 large checkpoint model.2880000_95.pt",
+      "present": false,
+      "upstream_locator": {
+        "archive_member": "flower_new_dataset/best_large_hyperparam/model.2880000_95.pt",
+        "figshare_article_id": "28359407",
+        "figshare_file_id": "55904912",
+        "figshare_version": 3
+      }
+    },
+    "source_code": {
+      "candidates": [
+        {
+          "path": "data/vendor/FlowER",
+          "present": false
+        },
+        {
+          "path": "vendor/FlowER",
+          "present": false
+        },
+        {
+          "path": "../electron_flow_lipids/FlowER",
+          "present": false
+        }
+      ],
+      "description": "A hash-pinned FlowER source checkout at an exact commit",
+      "present": false
+    }
+  },
+  "config": {
+    "bytes": 4117,
+    "path": "configs/verify/m0_10_flower_transfer_pilot.json",
+    "sha256": "466760bcae64e3ff4ff27bb5a5c9010e72f8df89381f6e676946a968d794701b"
+  },
+  "demotion_rule": {
+    "deterministic_atom_mapped_verifier_load_bearing": true,
+    "flowER_role": "orthogonal_consistency_check_only",
+    "headline_rule_satisfied": false,
+    "heldout_forward_consistency_improvement_evaluable": false,
+    "mechanism_grounded_claim_authorized": false,
+    "prospective_conversion_correlation_evaluable": false,
+    "reason": "Both frozen headline conditions must pass. Neither a valid fine-tuning comparison nor a prospective conversion correlation can currently be evaluated."
+  },
+  "generated_at_utc": "2026-07-30T00:00:00Z",
+  "inputs": [
+    {
+      "bytes": 31686,
+      "label": "qualified_upstream_reaction_families",
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    {
+      "bytes": 5116,
+      "label": "qualified_ugi_reaction",
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    {
+      "bytes": 63601,
+      "label": "ugi3_precursor_capability",
+      "path": "results/m0_09/ugi3_precursor_capability.json",
+      "sha256": "ed52d1e5886e709f79a712883411f4995a34d51c5b8cc168f7ed5fc273b6090f"
+    }
+  ],
+  "pilot_readiness": {
+    "acceptance_criterion_satisfied": false,
+    "blockers": [
+      "hash_pinned_flower_source_absent",
+      "pretrained_flower_checkpoint_absent",
+      "minimum_32_elementary_mechanism_trajectories_per_class_absent",
+      "prospective_conversion_outcomes_absent"
+    ],
+    "calibration_ready": false,
+    "class_curve_data_ready": false,
+    "fine_tuning_run_executed": false,
+    "pretrained_checkpoint_ready": false,
+    "reaction_class_holdout_ready": false,
+    "source_code_ready": false
+  },
+  "prior_probe_evidence": [
+    {
+      "bytes": 7174,
+      "hash_matches": true,
+      "label": "may_2026_zero_shot_probe_memo",
+      "path": "../electron_flow_lipids/memos/11_flower_probe_results.md",
+      "present": true,
+      "sha256": "26e31e4293333cbf1daa3a2768161bc331bc8f44a74b727b9062941d24c7818d"
+    },
+    {
+      "bytes": 14318,
+      "hash_matches": true,
+      "label": "may_2026_probe_script",
+      "path": "../electron_flow_lipids/modal_apps/flower_probe.py",
+      "present": true,
+      "sha256": "0f0ce7ea540be917bb3e4980a82918ae8e4b7009a4140f6abcbdd230228b8581"
+    },
+    {
+      "bytes": 12249,
+      "hash_matches": true,
+      "label": "may_2026_diagnostic_script",
+      "path": "../electron_flow_lipids/modal_apps/flower_diagnostic.py",
+      "present": true,
+      "sha256": "fee6fb555913dabc591e2f772e2cdd0c3a3db748b30f297a635bb94873ab63c0"
+    }
+  ],
+  "prospective_outcomes": {
+    "attempted_with_conversion_measurement": 0,
+    "not_attempted": 82,
+    "observed_attempted_states": [],
+    "states_found": 82
+  },
+  "schema_version": "m0_10_flower_transfer_audit.v1",
+  "scientific_interpretation": {
+    "prior_probe": "The May 2026 zero-shot probe is preserved as prior evidence only and is not substituted for the frozen M0-10 holdout and fine-tuning curve.",
+    "registry_examples": "The registry examples qualify deterministic atom-mapped transforms. They do not encode the elementary bond-electron trajectories required for FlowER fine-tuning.",
+    "training_dependency": "This blocker does not prevent training the whole-lipid product model or the hybrid L2 route system because FlowER is not load-bearing."
+  },
+  "seed": 20260730,
+  "status": "blocked_scientifically_valid_pilot_not_executed_flower_demoted",
+  "target_classes": [
+    {
+      "atom_mapped_transform_present": true,
+      "elementary_mechanism_trajectories": 0,
+      "fine_tuning_curve_ready": false,
+      "minimum_required": 32,
+      "qualification_examples_are_flowER_trajectories": false,
+      "qualification_negative_examples": 1,
+      "qualification_positive_examples": 1,
+      "reaction_id": "aza_michael_amine_acrylate",
+      "trajectory_deficit": 32
+    },
+    {
+      "atom_mapped_transform_present": true,
+      "elementary_mechanism_trajectories": 0,
+      "fine_tuning_curve_ready": false,
+      "minimum_required": 32,
+      "qualification_examples_are_flowER_trajectories": false,
+      "qualification_negative_examples": 1,
+      "qualification_positive_examples": 1,
+      "reaction_id": "epoxide_opening_amine",
+      "trajectory_deficit": 32
+    },
+    {
+      "atom_mapped_transform_present": true,
+      "elementary_mechanism_trajectories": 0,
+      "fine_tuning_curve_ready": false,
+      "minimum_required": 32,
+      "qualification_examples_are_flowER_trajectories": false,
+      "qualification_negative_examples": 1,
+      "qualification_positive_examples": 1,
+      "reaction_id": "reductive_amination_amine_aldehyde",
+      "trajectory_deficit": 32
+    }
+  ],
+  "task": "M0-10 FlowER transfer pilot asset and supervision audit"
+}

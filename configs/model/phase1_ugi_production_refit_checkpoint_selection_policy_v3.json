@@ -1,0 +1,70 @@
+{
+  "schema_version": "phase1_ugi_production_refit_checkpoint_selection_policy.v3",
+  "status": "frozen_before_production_decoder_checkpoint_sampling",
+  "frozen_at_utc": "2026-08-05T08:32:00Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v2.json",
+    "sha256": "8a765e639a64d0b186ba61f3e4ac61876d0791b42d8caff65e6c312b1569d188"
+  },
+  "correction": {
+    "scientific_rationale": "The v1/v2 all-fold checkpoint audit deliberately measured masked-argmax checkpoint behavior, but the already qualified production generator uses branch-run feasibility limits and stochastic terminal bond decoding. Final checkpoint selection must therefore be repeated on a new independent program draw under the exact production decoder. The argmax result remains a disclosed diagnostic and cannot freeze the production checkpoint.",
+    "argmax_result_is_nonselecting_for_final_production": true,
+    "new_independent_program_draw": true,
+    "scientific_thresholds_changed": false,
+    "selection_algorithm_changed": false
+  },
+  "overrides": {
+    "status": "frozen_before_production_decoder_checkpoint_sampling",
+    "frozen_at_utc": "2026-08-05T08:32:00Z",
+    "frozen_inputs": {
+      "unconditional_program_prior": {
+        "path": "results/phase1/ugi_production_refit_decoder_checkpoint_audit_probe_1024.json",
+        "sha256": "21580657f22eda3f6e10c4a28b14126f7d62c9a6dfcfa759048b0e99865b391b",
+        "attempted_draws": 1024,
+        "seed": 20260813,
+        "source": "new independent draw from the unchanged training-fold, source- and family-balanced program prior",
+        "contains_component_ids_or_graphs": false
+      },
+      "selection_evaluator": {
+        "path": "scripts/phase1_select_ugi_architecture.py",
+        "sha256": "a59fc4957e6f1fec1478306d08c1f570acf62f0527c5cf2df363febae941fdc7"
+      },
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "cf11df572da069796fcd3872f078517b80c78f55d3b0bd455c21662863971e5e"
+      }
+    },
+    "matched_sampling": {
+      "seed": 20260814,
+      "attempted_draws": 1024,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "same_program_indices_across_checkpoints": true,
+      "maximum_adjacent_branch_graph_runs_by_role": {
+        "amine_head": 2,
+        "oxoester_aldehyde_body_tail": 1,
+        "isocyanide_tail": 1
+      },
+      "evaluate_exact_l1_terminal_admission": true,
+      "terminal_decoder_mode": "bond_stochastic",
+      "terminal_decoder_seed": 20260815,
+      "terminal_temperature": 1.0,
+      "resampling_or_retry_after_output": false
+    },
+    "selection_algorithm": {
+      "production_refit_interpretation": [
+        "Apply every inherited validity, exact-L1, open-endedness, collapse and descriptor-realism gate without modification.",
+        "Bind the already qualified branch-run limits and bond-stochastic terminal decoder before opening checkpoint outputs.",
+        "Select among passing checkpoints by the inherited paired usable-open-ended-yield, realism, exact-reproduction and earliest-noninferior rules.",
+        "Do not use the earlier argmax checkpoint result or decreasing all-fold training loss as final production selection evidence."
+      ]
+    },
+    "failure_policy": {
+      "no_threshold_rewrite_after_opening_outputs": true,
+      "no_silent_override": true,
+      "no_checkpoint_promotion_if_every_snapshot_fails": true,
+      "longer_challenger_requires_new_frozen_contract": true,
+      "argmax_result_retained_as_nonselecting_diagnostic": true
+    }
+  }
+}

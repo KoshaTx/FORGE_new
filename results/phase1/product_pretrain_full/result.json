@@ -1,0 +1,818 @@
+{
+  "best_checkpoint": {
+    "bytes": 75853665,
+    "path": "/__modal/volumes/vo-hawWvJKkhzf9Al9hMGtCXI/product_pretrain_full_9f6d81501630/checkpoint_best.pt",
+    "sha256": "9aa417fd7a953a7fb732c4456394964747b2e86187d03cff5a44f11d0804356c",
+    "step": 19500
+  },
+  "checkpoint": {
+    "bytes": 75934817,
+    "path": "/__modal/volumes/vo-hawWvJKkhzf9Al9hMGtCXI/product_pretrain_full_9f6d81501630/checkpoint.pt",
+    "resumable": true,
+    "schema_version": "phase1_product_pretrain_checkpoint.v2",
+    "sha256": "f5f88e8e0ed5626dde3c39db3baf0c8cf4135710e8d20312da88da9a8dc30589",
+    "step": 20000
+  },
+  "cloud_execution": {
+    "gpu_class": "L4",
+    "mounted_sources": {
+      "src/forge/__init__.py": "686172cff1bc979af050cf8f98384a1e0d5a745518f906cc1518ceaa280b9040",
+      "src/forge/data/__init__.py": "3668e3680cc57907854fa2a38d92ab7e64a68b5c563a1b0b2bfec65311a9f50a",
+      "src/forge/data/r0_splits.py": "f1a6d7c97638bb7055e049f34566b7d49895cc22dedaff9813de44b591327838",
+      "src/forge/product/__init__.py": "1db43186ab65ff46ab1ac5627486d121573eb7706f97567012ae5d46059c11af",
+      "src/forge/product/defog_feasibility.py": "139061492ba98c6bce5cfd4bdc13c4d2d2f79abf1c2f89dc381ad4ddde9a8a58",
+      "src/forge/product/phase1_flow.py": "a719bfcb115cb272f34bcf4ce5083d860350cff3a57694dc5dc6e9618dbe56b3",
+      "src/forge/product/sparse_topology_feasibility.py": "c842ebef779d5d85c346626858e0d584f65853a591618ca9d68455b8f43162c7"
+    },
+    "recovery": {
+      "restarted_uncheckpointed_partial": false,
+      "resumed": false,
+      "volume_background_commits": true
+    },
+    "run_name": "product_pretrain_full_9f6d81501630",
+    "runtime": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda_runtime": "13.0",
+      "cudnn": 91900,
+      "deterministic_algorithms": true,
+      "mixed_precision": false,
+      "numpy": "2.4.2",
+      "precision": "float32",
+      "python": "3.11.12",
+      "rdkit": "2025.09.6",
+      "torch": "2.11.0+cu130"
+    },
+    "training_inputs": {
+      "configs/model/phase1_product_pretrain.json": "9f6d815016304b6ab115482d96a67a72dec849d28d36bed25d546686e66d06b8",
+      "data/splits/m0_03_constitutional/r0_fold_assignments.csv": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d",
+      "data/splits/phase1/manifest.json": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad",
+      "data/vendor/r1_reaction_enumerated_support_v1.csv": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a",
+      "results/m0_03/r0_constitutional.csv.gz": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823",
+      "results/phase1/product_prelaunch_audit.json": "1640b2d4fdfc13ec0ead7e13179d2c8c9a1b169021d94c1a52c5d161a9226198"
+    },
+    "volume": "forge-phase1-training"
+  },
+  "config": {
+    "path": "configs/model/phase1_product_pretrain.json",
+    "sha256": "9f6d815016304b6ab115482d96a67a72dec849d28d36bed25d546686e66d06b8"
+  },
+  "data_manifest": {
+    "path": "data/splits/phase1/manifest.json",
+    "sha256": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad"
+  },
+  "effective": {
+    "execution": {
+      "compile": false,
+      "deterministic_algorithms": true,
+      "device": "cuda",
+      "mixed_precision": false,
+      "num_workers": 0,
+      "precision": "float32"
+    },
+    "model": {
+      "dropout": 0.1,
+      "hidden_dim": 256,
+      "layers": 6,
+      "maximum_closure_slots": 12,
+      "maximum_heavy_atoms": 282
+    },
+    "training": {
+      "checkpoint_every_steps": 1000,
+      "gradient_clip_norm": 1.0,
+      "learning_rate": 0.0002,
+      "log_every_steps": 50,
+      "maximum_atoms_per_batch": 4096,
+      "maximum_graphs_per_batch": 64,
+      "maximum_parent_pointer_logits_per_batch": 262144,
+      "steps": 20000,
+      "validation_batches": 16,
+      "validation_every_steps": 500,
+      "weight_decay": 1e-05
+    }
+  },
+  "environment": {
+    "cuda_device_name": "NVIDIA L4",
+    "device": "cuda",
+    "torch": "2.11.0+cu130"
+  },
+  "guidance": {
+    "biological": false,
+    "synthesis_value": false
+  },
+  "latest_checkpoint": {
+    "bytes": 75934817,
+    "path": "/__modal/volumes/vo-hawWvJKkhzf9Al9hMGtCXI/product_pretrain_full_9f6d81501630/checkpoint_latest.pt",
+    "sha256": "512bfca3fe9f7fdbbf23e4d1dc209b49b2cb756f9780ffdda008a32756c2fc10"
+  },
+  "mode": "full",
+  "model": {
+    "atom_classes": 9,
+    "parameters": 6050359,
+    "state_sha256": "e41eb0441180e2c580f7488e9abc0297dc58e8f43beea7bd65737ec6bfdeaaec"
+  },
+  "overfit_gate": {
+    "final_mean_total_loss": 8.635830402374268,
+    "initial_mean_total_loss": 18.595866203308105,
+    "loss_reduction_fraction": 0.5356048323880713,
+    "records": 8,
+    "required_reduction_fraction": 0.5,
+    "status": "pass",
+    "steps": 3000,
+    "steps_per_second": 43.70736009710975,
+    "wall_seconds": 68.638325292
+  },
+  "resumed_from": null,
+  "schema_version": "phase1_product_pretrain_result.v1",
+  "status": "complete",
+  "task": "Phase 1 broad sparse whole-lipid discrete-flow pretraining",
+  "training": {
+    "examples_seen": 999615,
+    "final_mean_loss": {
+      "backbone_bond_ce": 0.15602318048477173,
+      "closure_bond_ce": 0.1995922937989235,
+      "closure_count_ce": 1.0575653672218324,
+      "closure_left_ce": 2.013985741138458,
+      "closure_right_ce": 2.1772186756134033,
+      "gradient_norm": 3.6647328615188597,
+      "node_ce": 0.3319518804550171,
+      "node_count_ce": 4.38157434463501,
+      "parent_pointer_ce": 1.5037177443504333,
+      "total": 6.382489442825317,
+      "total_with_counts": 11.821628856658936
+    },
+    "graphs_per_second": 966.7412308255236,
+    "initial_mean_loss": {
+      "backbone_bond_ce": 0.4121620371937752,
+      "closure_bond_ce": 0.4509360268712044,
+      "closure_count_ce": 2.563750457763672,
+      "closure_left_ce": 3.82194402217865,
+      "closure_right_ce": 3.864568829536438,
+      "gradient_norm": 8.283495807647705,
+      "node_ce": 0.686962541937828,
+      "node_count_ce": 5.645150089263916,
+      "parent_pointer_ce": 3.1336952686309814,
+      "total": 12.370268630981446,
+      "total_with_counts": 20.579169273376465
+    },
+    "size_bucket_counts": {
+      "41_64": 572224,
+      "65_96": 129673,
+      "97_128": 22922,
+      "gt128": 5932,
+      "le40": 268864
+    },
+    "source_counts": {
+      "r0": 896180,
+      "r1": 103435
+    },
+    "source_fractions": {
+      "r0": 0.8965251621874422,
+      "r1": 0.10347483781255784
+    },
+    "source_mixture": {
+      "absolute_error": {
+        "r0": 0.0034748378125578627,
+        "r1": 0.003474837812557835
+      },
+      "expected_fractions": {
+        "r0": 0.9,
+        "r1": 0.1
+      },
+      "is_diagnostic_not_acceptance_gate": true,
+      "maximum_absolute_error": 0.0034748378125578627,
+      "observed_fractions": {
+        "r0": 0.8965251621874422,
+        "r1": 0.10347483781255784
+      }
+    },
+    "start_step": 0,
+    "steps": 20000,
+    "steps_per_second": 19.342271390996007,
+    "wall_seconds": 1034.004724456
+  },
+  "validation": {
+    "best_step": 19500,
+    "best_total_with_counts": 12.48459905385971,
+    "fixed_batches": 16,
+    "fixed_noise_seed": 20260735,
+    "fold": "R0_cal",
+    "heldout_fold_used": false,
+    "history": [
+      {
+        "metrics": {
+          "backbone_bond_ce": 1.14380644261837,
+          "closure_bond_ce": 1.179612010717392,
+          "closure_count_ce": 2.5649492740631104,
+          "closure_left_ce": 4.087664216756821,
+          "closure_right_ce": 4.090402618050575,
+          "node_ce": 1.9480902552604675,
+          "node_count_ce": 5.64544677734375,
+          "parent_pointer_ce": 3.101811960339546,
+          "total": 15.551387667655945,
+          "total_with_counts": 23.761783599853516
+        },
+        "step": 0
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1623750813305378,
+          "closure_bond_ce": 0.1980283153243363,
+          "closure_count_ce": 2.4549480676651,
+          "closure_left_ce": 2.3754471465945244,
+          "closure_right_ce": 2.3869012221693993,
+          "node_ce": 0.31552619114518166,
+          "node_count_ce": 5.561667770147324,
+          "parent_pointer_ce": 1.821204051375389,
+          "total": 7.2594820857048035,
+          "total_with_counts": 15.276097655296326
+        },
+        "step": 500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.160700099542737,
+          "closure_bond_ce": 0.17671082820743322,
+          "closure_count_ce": 2.3497879952192307,
+          "closure_left_ce": 2.3834474235773087,
+          "closure_right_ce": 2.2656683027744293,
+          "node_ce": 0.3135340269654989,
+          "node_count_ce": 5.479732394218445,
+          "parent_pointer_ce": 1.7622869163751602,
+          "total": 7.062347650527954,
+          "total_with_counts": 14.891868114471436
+        },
+        "step": 1000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15880523528903723,
+          "closure_bond_ce": 0.21311395335942507,
+          "closure_count_ce": 2.249564006924629,
+          "closure_left_ce": 2.238329567015171,
+          "closure_right_ce": 2.243570700287819,
+          "node_ce": 0.308480491861701,
+          "node_count_ce": 5.4039850533008575,
+          "parent_pointer_ce": 1.7225524708628654,
+          "total": 6.884852379560471,
+          "total_with_counts": 14.538401544094086
+        },
+        "step": 1500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15744057297706604,
+          "closure_bond_ce": 0.20882647624239326,
+          "closure_count_ce": 2.161455199122429,
+          "closure_left_ce": 2.246287062764168,
+          "closure_right_ce": 2.244176261126995,
+          "node_ce": 0.30252254009246826,
+          "node_count_ce": 5.334187775850296,
+          "parent_pointer_ce": 1.7052060887217522,
+          "total": 6.864458978176117,
+          "total_with_counts": 14.36010193824768
+        },
+        "step": 2000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.16152629256248474,
+          "closure_bond_ce": 0.19251415506005287,
+          "closure_count_ce": 2.0809292644262314,
+          "closure_left_ce": 2.264478877186775,
+          "closure_right_ce": 2.2385731264948845,
+          "node_ce": 0.30542693845927715,
+          "node_count_ce": 5.2659478187561035,
+          "parent_pointer_ce": 1.691515013575554,
+          "total": 6.85403448343277,
+          "total_with_counts": 14.200911581516266
+        },
+        "step": 2500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15793724730610847,
+          "closure_bond_ce": 0.2158332283142954,
+          "closure_count_ce": 2.009675830602646,
+          "closure_left_ce": 2.227396123111248,
+          "closure_right_ce": 2.2277720123529434,
+          "node_ce": 0.307214105501771,
+          "node_count_ce": 5.205732554197311,
+          "parent_pointer_ce": 1.6695022955536842,
+          "total": 6.805655092000961,
+          "total_with_counts": 14.021063566207886
+        },
+        "step": 3000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15770833753049374,
+          "closure_bond_ce": 0.19892899575643241,
+          "closure_count_ce": 1.9466755613684654,
+          "closure_left_ce": 2.22245030105114,
+          "closure_right_ce": 2.209855206310749,
+          "node_ce": 0.30088221468031406,
+          "node_count_ce": 5.146969735622406,
+          "parent_pointer_ce": 1.6503423601388931,
+          "total": 6.740167409181595,
+          "total_with_counts": 13.833812654018402
+        },
+        "step": 3500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15676759649068117,
+          "closure_bond_ce": 0.19807521346956491,
+          "closure_count_ce": 1.8907556980848312,
+          "closure_left_ce": 2.198526605963707,
+          "closure_right_ce": 2.190060757100582,
+          "node_ce": 0.3009688388556242,
+          "node_count_ce": 5.088355898857117,
+          "parent_pointer_ce": 1.6526802033185959,
+          "total": 6.6970793306827545,
+          "total_with_counts": 13.676191091537476
+        },
+        "step": 4000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15637577790766954,
+          "closure_bond_ce": 0.138599400408566,
+          "closure_count_ce": 1.8413820043206215,
+          "closure_left_ce": 2.1989172399044037,
+          "closure_right_ce": 2.202186331152916,
+          "node_ce": 0.30414185486733913,
+          "node_count_ce": 5.037630081176758,
+          "parent_pointer_ce": 1.6476855650544167,
+          "total": 6.647906094789505,
+          "total_with_counts": 13.526918113231659
+        },
+        "step": 4500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15828875545412302,
+          "closure_bond_ce": 0.17180268024094403,
+          "closure_count_ce": 1.7983819395303726,
+          "closure_left_ce": 2.2036550045013428,
+          "closure_right_ce": 2.1516665145754814,
+          "node_ce": 0.30640164017677307,
+          "node_count_ce": 4.987679898738861,
+          "parent_pointer_ce": 1.643001988530159,
+          "total": 6.634816437959671,
+          "total_with_counts": 13.42087835073471
+        },
+        "step": 5000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15658382326364517,
+          "closure_bond_ce": 0.20238744374364614,
+          "closure_count_ce": 1.7636318653821945,
+          "closure_left_ce": 2.181811511516571,
+          "closure_right_ce": 2.151387207210064,
+          "node_ce": 0.2983021019026637,
+          "node_count_ce": 4.942192584276199,
+          "parent_pointer_ce": 1.6334140822291374,
+          "total": 6.623886227607727,
+          "total_with_counts": 13.329710721969604
+        },
+        "step": 5500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15671985363587737,
+          "closure_bond_ce": 0.18924946803599596,
+          "closure_count_ce": 1.7337540611624718,
+          "closure_left_ce": 2.208905853331089,
+          "closure_right_ce": 2.15523698925972,
+          "node_ce": 0.29838539101183414,
+          "node_count_ce": 4.900406509637833,
+          "parent_pointer_ce": 1.633951097726822,
+          "total": 6.6424486339092255,
+          "total_with_counts": 13.276609063148499
+        },
+        "step": 6000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15564430970698595,
+          "closure_bond_ce": 0.15470198635011911,
+          "closure_count_ce": 1.707748144865036,
+          "closure_left_ce": 2.2013337835669518,
+          "closure_right_ce": 2.1491971015930176,
+          "node_ce": 0.303442046046257,
+          "node_count_ce": 4.85928612947464,
+          "parent_pointer_ce": 1.6371411979198456,
+          "total": 6.601460546255112,
+          "total_with_counts": 13.168494880199432
+        },
+        "step": 6500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15898143593221903,
+          "closure_bond_ce": 0.20564268087036908,
+          "closure_count_ce": 1.6872164979577065,
+          "closure_left_ce": 2.1845713108778,
+          "closure_right_ce": 2.159265898168087,
+          "node_ce": 0.3023875020444393,
+          "node_count_ce": 4.821965932846069,
+          "parent_pointer_ce": 1.6268170326948166,
+          "total": 6.637665808200836,
+          "total_with_counts": 13.146848201751709
+        },
+        "step": 7000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.156676659360528,
+          "closure_bond_ce": 0.1619386114180088,
+          "closure_count_ce": 1.672110691666603,
+          "closure_left_ce": 2.2081873789429665,
+          "closure_right_ce": 2.1280835419893265,
+          "node_ce": 0.30146101489663124,
+          "node_count_ce": 4.789519011974335,
+          "parent_pointer_ce": 1.6249203532934189,
+          "total": 6.581267684698105,
+          "total_with_counts": 13.042897403240204
+        },
+        "step": 7500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1571599869057536,
+          "closure_bond_ce": 0.1866804314777255,
+          "closure_count_ce": 1.6584948152303696,
+          "closure_left_ce": 2.2078742161393166,
+          "closure_right_ce": 2.117673322558403,
+          "node_ce": 0.30152036249637604,
+          "node_count_ce": 4.760473042726517,
+          "parent_pointer_ce": 1.6208185702562332,
+          "total": 6.591726839542389,
+          "total_with_counts": 13.010694742202759
+        },
+        "step": 8000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15628471318632364,
+          "closure_bond_ce": 0.19359784945845604,
+          "closure_count_ce": 1.645952545106411,
+          "closure_left_ce": 2.2023723050951958,
+          "closure_right_ce": 2.117367520928383,
+          "node_ce": 0.3042354304343462,
+          "node_count_ce": 4.731283366680145,
+          "parent_pointer_ce": 1.6181575134396553,
+          "total": 6.592015326023102,
+          "total_with_counts": 12.969251334667206
+        },
+        "step": 8500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15770916640758514,
+          "closure_bond_ce": 0.18052309309132397,
+          "closure_count_ce": 1.6381680220365524,
+          "closure_left_ce": 2.173082895576954,
+          "closure_right_ce": 2.1231174170970917,
+          "node_ce": 0.3010238064453006,
+          "node_count_ce": 4.703360080718994,
+          "parent_pointer_ce": 1.6208933293819427,
+          "total": 6.5563497841358185,
+          "total_with_counts": 12.897877931594849
+        },
+        "step": 9000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15515432506799698,
+          "closure_bond_ce": 0.1743091782554984,
+          "closure_count_ce": 1.6308749541640282,
+          "closure_left_ce": 2.1959810480475426,
+          "closure_right_ce": 2.1184254065155983,
+          "node_ce": 0.3017714377492666,
+          "node_count_ce": 4.6778644323349,
+          "parent_pointer_ce": 1.6166165247559547,
+          "total": 6.562257915735245,
+          "total_with_counts": 12.870997190475464
+        },
+        "step": 9500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15602335054427385,
+          "closure_bond_ce": 0.17431813082657754,
+          "closure_count_ce": 1.6271030008792877,
+          "closure_left_ce": 2.197603613138199,
+          "closure_right_ce": 2.147436462342739,
+          "node_ce": 0.2987168123945594,
+          "node_count_ce": 4.65521302819252,
+          "parent_pointer_ce": 1.6130524799227715,
+          "total": 6.587150722742081,
+          "total_with_counts": 12.869466841220856
+        },
+        "step": 10000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1569661684334278,
+          "closure_bond_ce": 0.1887082871980965,
+          "closure_count_ce": 1.6217165291309357,
+          "closure_left_ce": 2.1565554663538933,
+          "closure_right_ce": 2.113066554069519,
+          "node_ce": 0.30112704262137413,
+          "node_count_ce": 4.629180371761322,
+          "parent_pointer_ce": 1.6130178347229958,
+          "total": 6.529441297054291,
+          "total_with_counts": 12.78033822774887
+        },
+        "step": 10500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1564857168123126,
+          "closure_bond_ce": 0.18065649340860546,
+          "closure_count_ce": 1.6193550676107407,
+          "closure_left_ce": 2.171157494187355,
+          "closure_right_ce": 2.1124459505081177,
+          "node_ce": 0.2975037042051554,
+          "node_count_ce": 4.605729669332504,
+          "parent_pointer_ce": 1.6072460412979126,
+          "total": 6.525495380163193,
+          "total_with_counts": 12.750579953193665
+        },
+        "step": 11000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15455839410424232,
+          "closure_bond_ce": 0.15990972029976547,
+          "closure_count_ce": 1.6190043836832047,
+          "closure_left_ce": 2.179465964436531,
+          "closure_right_ce": 2.1156496703624725,
+          "node_ce": 0.2997806677594781,
+          "node_count_ce": 4.585758179426193,
+          "parent_pointer_ce": 1.608834132552147,
+          "total": 6.518198519945145,
+          "total_with_counts": 12.722961068153381
+        },
+        "step": 11500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15673371776938438,
+          "closure_bond_ce": 0.1832424954045564,
+          "closure_count_ce": 1.6173080131411552,
+          "closure_left_ce": 2.192085415124893,
+          "closure_right_ce": 2.136379562318325,
+          "node_ce": 0.30009618028998375,
+          "node_count_ce": 4.566815614700317,
+          "parent_pointer_ce": 1.601605124771595,
+          "total": 6.570142447948456,
+          "total_with_counts": 12.754266083240509
+        },
+        "step": 12000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15465786214917898,
+          "closure_bond_ce": 0.18321873620152473,
+          "closure_count_ce": 1.6161256730556488,
+          "closure_left_ce": 2.1578549295663834,
+          "closure_right_ce": 2.137281395494938,
+          "node_ce": 0.30096746888011694,
+          "node_count_ce": 4.548191010951996,
+          "parent_pointer_ce": 1.6107946559786797,
+          "total": 6.544775068759918,
+          "total_with_counts": 12.709091603755951
+        },
+        "step": 12500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1557437814772129,
+          "closure_bond_ce": 0.19689716421999037,
+          "closure_count_ce": 1.6137015148997307,
+          "closure_left_ce": 2.213953211903572,
+          "closure_right_ce": 2.1191687807440758,
+          "node_ce": 0.29955214634537697,
+          "node_count_ce": 4.534921586513519,
+          "parent_pointer_ce": 1.6076560243964195,
+          "total": 6.592971116304398,
+          "total_with_counts": 12.741594016551971
+        },
+        "step": 13000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1566249132156372,
+          "closure_bond_ce": 0.19070015382021666,
+          "closure_count_ce": 1.6120175868272781,
+          "closure_left_ce": 2.1736168563365936,
+          "closure_right_ce": 2.1312565580010414,
+          "node_ce": 0.30167373456060886,
+          "node_count_ce": 4.520796418190002,
+          "parent_pointer_ce": 1.6133821606636047,
+          "total": 6.567254394292831,
+          "total_with_counts": 12.700068354606628
+        },
+        "step": 13500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15728786680847406,
+          "closure_bond_ce": 0.20669584209099412,
+          "closure_count_ce": 1.6117473617196083,
+          "closure_left_ce": 2.1677419617772102,
+          "closure_right_ce": 2.117302007973194,
+          "node_ce": 0.29863643925637007,
+          "node_count_ce": 4.508432388305664,
+          "parent_pointer_ce": 1.6041981875896454,
+          "total": 6.551862329244614,
+          "total_with_counts": 12.67204201221466
+        },
+        "step": 14000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15832688938826323,
+          "closure_bond_ce": 0.25133515195921063,
+          "closure_count_ce": 1.610483594238758,
+          "closure_left_ce": 2.148345671594143,
+          "closure_right_ce": 2.113907888531685,
+          "node_ce": 0.29743597097694874,
+          "node_count_ce": 4.497728198766708,
+          "parent_pointer_ce": 1.6015795767307281,
+          "total": 6.570931136608124,
+          "total_with_counts": 12.679142892360687
+        },
+        "step": 14500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15675459895282984,
+          "closure_bond_ce": 0.2018647042568773,
+          "closure_count_ce": 1.6078672409057617,
+          "closure_left_ce": 2.161929666996002,
+          "closure_right_ce": 2.130856767296791,
+          "node_ce": 0.30055114813148975,
+          "node_count_ce": 4.488186717033386,
+          "parent_pointer_ce": 1.6030305698513985,
+          "total": 6.55498743057251,
+          "total_with_counts": 12.651041209697723
+        },
+        "step": 15000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15738311782479286,
+          "closure_bond_ce": 0.2490313434973359,
+          "closure_count_ce": 1.6091761738061905,
+          "closure_left_ce": 2.1804226264357567,
+          "closure_right_ce": 2.148409716784954,
+          "node_ce": 0.296795510686934,
+          "node_count_ce": 4.47811633348465,
+          "parent_pointer_ce": 1.6009449139237404,
+          "total": 6.632987201213837,
+          "total_with_counts": 12.720279514789581
+        },
+        "step": 15500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15596985863521695,
+          "closure_bond_ce": 0.1608587948139757,
+          "closure_count_ce": 1.606993492692709,
+          "closure_left_ce": 2.1416321098804474,
+          "closure_right_ce": 2.0959689021110535,
+          "node_ce": 0.29947785288095474,
+          "node_count_ce": 4.466471433639526,
+          "parent_pointer_ce": 1.6004034578800201,
+          "total": 6.454310983419418,
+          "total_with_counts": 12.527775824069977
+        },
+        "step": 16000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15430792421102524,
+          "closure_bond_ce": 0.18754066480323672,
+          "closure_count_ce": 1.6072255671024323,
+          "closure_left_ce": 2.153854787349701,
+          "closure_right_ce": 2.169237121939659,
+          "node_ce": 0.30317736975848675,
+          "node_count_ce": 4.456553071737289,
+          "parent_pointer_ce": 1.594744749367237,
+          "total": 6.562862545251846,
+          "total_with_counts": 12.62664133310318
+        },
+        "step": 16500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1565092201344669,
+          "closure_bond_ce": 0.21230240631848574,
+          "closure_count_ce": 1.6042718403041363,
+          "closure_left_ce": 2.1722388863563538,
+          "closure_right_ce": 2.1450712606310844,
+          "node_ce": 0.3004904817789793,
+          "node_count_ce": 4.449036180973053,
+          "parent_pointer_ce": 1.5970567390322685,
+          "total": 6.583669096231461,
+          "total_with_counts": 12.636977136135101
+        },
+        "step": 17000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1551278131082654,
+          "closure_bond_ce": 0.15862805675715208,
+          "closure_count_ce": 1.6055550575256348,
+          "closure_left_ce": 2.1387319415807724,
+          "closure_right_ce": 2.0990728363394737,
+          "node_ce": 0.30203946866095066,
+          "node_count_ce": 4.44114875793457,
+          "parent_pointer_ce": 1.6013630703091621,
+          "total": 6.454963237047195,
+          "total_with_counts": 12.501666903495789
+        },
+        "step": 17500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15580616146326065,
+          "closure_bond_ce": 0.21185965277254581,
+          "closure_count_ce": 1.605596385896206,
+          "closure_left_ce": 2.129727467894554,
+          "closure_right_ce": 2.101770080626011,
+          "node_ce": 0.29792929347604513,
+          "node_count_ce": 4.435826480388641,
+          "parent_pointer_ce": 1.5943949595093727,
+          "total": 6.491487622261047,
+          "total_with_counts": 12.532910585403442
+        },
+        "step": 18000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15657271817326546,
+          "closure_bond_ce": 0.19463067967444658,
+          "closure_count_ce": 1.6063901893794537,
+          "closure_left_ce": 2.1400992050766945,
+          "closure_right_ce": 2.117681860923767,
+          "node_ce": 0.3000297490507364,
+          "node_count_ce": 4.431418716907501,
+          "parent_pointer_ce": 1.5937680900096893,
+          "total": 6.502782374620438,
+          "total_with_counts": 12.540591180324554
+        },
+        "step": 18500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15590261481702328,
+          "closure_bond_ce": 0.1883419395890087,
+          "closure_count_ce": 1.6021043360233307,
+          "closure_left_ce": 2.126538246870041,
+          "closure_right_ce": 2.107758067548275,
+          "node_ce": 0.2966768741607666,
+          "node_count_ce": 4.426189303398132,
+          "parent_pointer_ce": 1.6025093421339989,
+          "total": 6.477727174758911,
+          "total_with_counts": 12.506020784378052
+        },
+        "step": 19000
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.1543322904035449,
+          "closure_bond_ce": 0.17887894506566226,
+          "closure_count_ce": 1.600698683410883,
+          "closure_left_ce": 2.1464459225535393,
+          "closure_right_ce": 2.0928260535001755,
+          "node_ce": 0.29519456904381514,
+          "node_count_ce": 4.424431294202805,
+          "parent_pointer_ce": 1.5917912125587463,
+          "total": 6.459469020366669,
+          "total_with_counts": 12.48459905385971
+        },
+        "step": 19500
+      },
+      {
+        "metrics": {
+          "backbone_bond_ce": 0.15518270200118423,
+          "closure_bond_ce": 0.19687034282833338,
+          "closure_count_ce": 1.6009396202862263,
+          "closure_left_ce": 2.1523101180791855,
+          "closure_right_ce": 2.1042813807725906,
+          "node_ce": 0.29909736663103104,
+          "node_count_ce": 4.419934868812561,
+          "parent_pointer_ce": 1.5932669714093208,
+          "total": 6.501008868217468,
+          "total_with_counts": 12.521883428096771
+        },
+        "step": 20000
+      }
+    ]
+  }
+}

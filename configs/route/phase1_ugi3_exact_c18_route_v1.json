@@ -1,0 +1,260 @@
+{
+  "schema_version": "phase1_ugi3_exact_c18_route_config.v1",
+  "scope": "one_exact_c18_route_only",
+  "limitations": {
+    "exact_substrate_product_pairs_only": true,
+    "reaction_family_promotion_authorized": false,
+    "substrate_scope_extrapolation_authorized": false,
+    "analogue_promotion_authorized": false,
+    "homologue_promotion_authorized": false,
+    "general_enumeration_authorized": false,
+    "terminal_closure_transfers_to_analogues": false
+  },
+  "assessment_as_of_utc": "2026-08-03T02:30:00Z",
+  "procurement_policy": {
+    "expiry_days": 30,
+    "status_semantics": "current_as_of_frozen_assessment_time",
+    "refresh_required_before_candidate_lock": true
+  },
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/route/ugi3_exact_c18_route.py",
+      "sha256": "af2f6180beb10eb86abed2401e73cdd6f8b7fae64ffeb38cc423b68c2d993307"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_qualify_ugi3_exact_c18_route.py",
+      "sha256": "20ccfe1d09741295e9c610753163a60b68b0a9198dcc8190924360797d651f7a"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_exact_c18_route.py",
+      "sha256": "d52d815824bcdd665a55a867af3e622686a15683650b3e862860d6b3af04ab41"
+    },
+    "qualified_forward_source": {
+      "path": "src/forge/route/qualified_forward.py",
+      "sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    },
+    "planner_source": {
+      "path": "src/forge/route/planner.py",
+      "sha256": "8cd48f704819810f83f02a9623f8de461f7334ad94684e3d77e325e3dd9902a0"
+    },
+    "synthesis_value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    },
+    "reaction_registry": {
+      "path": "configs/route/phase1_ugi3_exact_c18_qualified_reactions_v1.json",
+      "sha256": "5b2122be7717b5850be489b8ed77eda26fc33913ae5545da6322d658db4bd65b"
+    },
+    "reduction_variant": {
+      "path": "configs/route/variants/ugi3_exact_c18_carboxylic_acid_reduction_v1.json",
+      "sha256": "ce281f691ab4045a5a1cb6d59853bfc0e2268fabc6b758099162036bcbe15346"
+    },
+    "zipper_variant": {
+      "path": "configs/route/variants/ugi3_exact_c18_alkyne_zipper_v1.json",
+      "sha256": "1d174ef54de6b8324a8b7458d9fe8fdeafac906ff7230e7a6953be429a4c4f02"
+    },
+    "oxidation_variant": {
+      "path": "configs/route/variants/ugi3_exact_c18_primary_alcohol_oxidation_v1.json",
+      "sha256": "901f3a870ca32c0b275b589a59649370487fc3f5b021f477ffcd6cbca113fa06"
+    },
+    "amara_primary_article": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/amara_cell_chem_biol_2019.pdf",
+      "sha256": "f018ed81ecffa90c64a149d5bdd97516bc00e10d1389aee344a39ea45b34d4b6"
+    },
+    "oppolzer_primary_si": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/oppolzer_jo000463n_si_001.pdf",
+      "sha256": "1a2307e79ce92c5f41dac9b9247bf61d78ec6cae7499bb3ff7f6754c5227889b"
+    },
+    "oppolzer_article_transcription": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/oppolzer_article_transcription_lookchem_2026-08-03.html",
+      "sha256": "1ed14692dfb68a7f4d9e20a8fba62d39e90d15714f2b1b9cf526b9e9ed853c52"
+    },
+    "terminal_procurement_observation": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/mce_hy_w341997_product_observation_2026-08-03.json",
+      "sha256": "a5d5919417bab6b3a25e42cd4a570a1e512c73a12e31996b20a1c29c686fe841"
+    },
+    "terminal_identity_datasheet": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/mce_hy_w341997_datasheet_2026-08-03.pdf",
+      "sha256": "9db255bf1080f96e16abf936f47b0f371cd54b27b432d0f42dd82465ce36612a"
+    }
+  },
+  "molecules": {
+    "stearolic_acid": {
+      "name": "stearolic acid",
+      "canonical_smiles": "CCCCCCCCC#CCCCCCCCC(=O)O",
+      "inchi_key": "RGTIBVZDHOMOKC-UHFFFAOYSA-N"
+    },
+    "octadec_9_yn_1_ol": {
+      "name": "octadec-9-yn-1-ol",
+      "canonical_smiles": "CCCCCCCCC#CCCCCCCCCO",
+      "inchi_key": "UMHNGRQQWSQVNN-UHFFFAOYSA-N"
+    },
+    "octadec_17_yn_1_ol": {
+      "name": "octadec-17-yn-1-ol",
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "inchi_key": "DECQPLALTVMKDO-UHFFFAOYSA-N"
+    },
+    "octadec_17_ynal": {
+      "name": "octadec-17-ynal",
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+      "inchi_key": "YOMSVUMSXJCTEL-UHFFFAOYSA-N"
+    }
+  },
+  "steps": [
+    {
+      "step_id": "c18_step_01_stearolic_acid_reduction",
+      "reaction_id": "ugi3_exact_c18_carboxylic_acid_reduction_v1",
+      "reaction_class": "carboxylic_acid_to_primary_alcohol_reduction",
+      "reactant_id": "stearolic_acid",
+      "reactant_role": "exact_c18_terminal_acid",
+      "reactant_smiles": "CCCCCCCCC#CCCCCCCCC(=O)O",
+      "product_id": "octadec_9_yn_1_ol",
+      "product_role": "exact_c18_internal_alkynol",
+      "product_smiles": "CCCCCCCCC#CCCCCCCCCO",
+      "variant_input": "reduction_variant",
+      "primary_source_input": "amara_primary_article",
+      "source_locator": "PDF page 19 (electronic page e5), Octadec-9-yn-1-ol (16)",
+      "conditions_source_input": "amara_primary_article",
+      "conditions_source_sha256": "f018ed81ecffa90c64a149d5bdd97516bc00e10d1389aee344a39ea45b34d4b6",
+      "conditions_source_locator": "PDF page 19 (electronic page e5), complete Octadec-9-yn-1-ol (16) procedure",
+      "conditions": {
+        "substrate": "stearolic acid, 2.805 g, 10 mmol",
+        "reagent": "LiAlH4, 760 mg, 20 mmol",
+        "solvent": "anhydrous diethyl ether, 15 mL for each solution or suspension",
+        "operation": "Slow addition to a cooled LiAlH4 suspension followed by 4 h reaction",
+        "workup": "Water addition, sulfuric-acid acidification, ether extraction, MgSO4 drying and silica filtration"
+      },
+      "isolated_yield_percent": 99,
+      "characterization": [
+        "1H NMR",
+        "13C NMR",
+        "ESI-MS"
+      ]
+    },
+    {
+      "step_id": "c18_step_02_alkyne_zipper",
+      "reaction_id": "ugi3_exact_c18_alkyne_zipper_v1",
+      "reaction_class": "internal_to_terminal_alkyne_isomerization",
+      "reactant_id": "octadec_9_yn_1_ol",
+      "reactant_role": "exact_c18_internal_alkynol",
+      "reactant_smiles": "CCCCCCCCC#CCCCCCCCCO",
+      "product_id": "octadec_17_yn_1_ol",
+      "product_role": "exact_c18_terminal_alkynol",
+      "product_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "variant_input": "zipper_variant",
+      "primary_source_input": "amara_primary_article",
+      "source_locator": "PDF page 19 (electronic page e5), Octadec-17-yn-1-ol (17)",
+      "conditions_source_input": "amara_primary_article",
+      "conditions_source_sha256": "f018ed81ecffa90c64a149d5bdd97516bc00e10d1389aee344a39ea45b34d4b6",
+      "conditions_source_locator": "PDF page 19 (electronic page e5), complete Octadec-17-yn-1-ol (17) procedure",
+      "conditions": {
+        "substrate": "octadec-9-yn-1-ol, 1.33 g, 5 mmol",
+        "reagent": "1.5 M potassium 3-aminopropylamide prepared from KH in anhydrous 1,3-diaminopropane",
+        "atmosphere": "argon",
+        "operation": "Stirred in 1,3-diaminopropane for 16 h",
+        "workup": "Poured into ice-cooled 3 N HCl, ether extraction, 3 N HCl wash, MgSO4 drying and silica filtration"
+      },
+      "isolated_yield_percent": 92,
+      "characterization": [
+        "1H NMR",
+        "13C NMR",
+        "ESI-MS"
+      ]
+    },
+    {
+      "step_id": "c18_step_03_terminal_alkynol_oxidation",
+      "reaction_id": "ugi3_exact_c18_primary_alcohol_oxidation_v1",
+      "reaction_class": "primary_alcohol_to_aldehyde_oxidation",
+      "reactant_id": "octadec_17_yn_1_ol",
+      "reactant_role": "exact_c18_terminal_alkynol",
+      "reactant_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "product_id": "octadec_17_ynal",
+      "product_role": "oxoester_aldehyde_body_tail",
+      "product_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+      "variant_input": "oxidation_variant",
+      "primary_source_input": "oppolzer_primary_si",
+      "source_locator": "Supporting Information page 5, 17-octadecynal 8d",
+      "conditions_source_input": "oppolzer_article_transcription",
+      "conditions_source_sha256": "1ed14692dfb68a7f4d9e20a8fba62d39e90d15714f2b1b9cf526b9e9ed853c52",
+      "conditions_source_locator": "J. Org. Chem. 2001, 66, 4769 article transcription, General Procedure for the Parikh-Doering Oxidation of 7",
+      "conditions": {
+        "substrate_scale": "omega-alkynol 7, 10 mmol",
+        "reagents": "triethylamine, 14 mL, 100.44 mmol; sulfur trioxide-pyridine complex, 5.6 g, 35.18 mmol",
+        "solvents": "dry dichloromethane, 9 mL; DMSO, 35 mL",
+        "atmosphere": "dry argon",
+        "operation": "Room temperature for 2-5 h",
+        "workup": "Water quench, ether extraction, 0.2 M HCl/water/brine washes, MgSO4 drying and SiO2 chromatography with n-pentane/ether 10:1"
+      },
+      "isolated_yield_percent": 52,
+      "characterization": [
+        "melting point",
+        "1H NMR",
+        "13C NMR",
+        "IR",
+        "MS"
+      ]
+    }
+  ],
+  "terminal_procurement": {
+    "molecule_id": "stearolic_acid",
+    "canonical_smiles": "CCCCCCCCC#CCCCCCCCC(=O)O",
+    "cas_number": "506-24-1",
+    "identity_exact": true,
+    "vendor": "MedChemExpress",
+    "item_id": "HY-W341997",
+    "product_url": "https://www.medchemexpress.com/9-octadecynoic-acid.html",
+    "item_specific_purity": "99.90%",
+    "region": "continental US",
+    "observed_at_utc": "2026-08-03T02:24:02Z",
+    "expires_at_utc": "2026-09-02T02:24:02Z",
+    "explicit_current_stock_or_shipping_observed": true,
+    "current_item_level_procurement_closed": true,
+    "observation_source_input": "terminal_procurement_observation",
+    "evidence_records": [
+      {
+        "evidence_id": "exact-c18-terminal:mce-HY-W341997:product-observation",
+        "source_input": "terminal_procurement_observation",
+        "source_locator": "official_product_url; item; item_specific_purity; availability_observations; shipping_statement",
+        "supports_current_availability": true
+      },
+      {
+        "evidence_id": "exact-c18-terminal:mce-HY-W341997:official-datasheet",
+        "source_input": "terminal_identity_datasheet",
+        "source_locator": "Product Data Sheet pages 1-2: Cat. No., CAS No., formula and molecular weight",
+        "supports_current_availability": false
+      }
+    ]
+  },
+  "verification_policy": {
+    "randomized_smiles_trials": 100
+  },
+  "planner_budget": {
+    "maximum_depth": 4,
+    "maximum_logical_planner_calls": 1,
+    "maximum_expansions": 4,
+    "maximum_product_candidates": 4,
+    "maximum_verifier_calls": 4,
+    "maximum_elapsed_milliseconds": 0
+  },
+  "expected_summary": {
+    "assessment_as_of_utc": "2026-08-03T02:30:00Z",
+    "assessment_outcome": "complete",
+    "development_product_coverage_changed": true,
+    "evidence_support": "exact_identity",
+    "exact_steps": 3,
+    "forward_consistency": "exact_unique",
+    "maximum_route_depth": 3,
+    "randomized_smiles_total_successes": 300,
+    "randomized_smiles_trials_per_step": 100,
+    "reaction_family_admitted": false,
+    "route_complete": true,
+    "route_step_count": 3,
+    "target_role": "oxoester_aldehyde_body_tail",
+    "target_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+    "terminal_availability": "current_closed",
+    "terminal_expires_at_utc": "2026-09-02T02:24:02Z",
+    "terminal_observed_at_utc": "2026-08-03T02:24:02Z",
+    "unassessed_terminal_leaf_count": 0,
+    "uniquely_forward_verified_steps": 3
+  }
+}

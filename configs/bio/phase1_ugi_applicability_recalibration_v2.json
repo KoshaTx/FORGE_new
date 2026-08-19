@@ -1,0 +1,87 @@
+{
+  "schema_version": "phase1_ugi_applicability_recalibration_config.v2",
+  "status": "frozen_before_component_group_nested_error_calibration",
+  "task": "Select separate ranking and absolute-prediction applicability radii from persisted group-disjoint HeLa errors without using generated-candidate yield",
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "heldout_oof_ledger": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz",
+      "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_applicability_recalibration.py",
+      "sha256": "182274dc064dab87032366bbca7d7d40915fbfddcc41b13f65410c180b8cf4ae"
+    },
+    "runner": {
+      "path": "scripts/phase1_recalibrate_ugi_applicability.py",
+      "sha256": "eaf0874ae3e1820e5521cbd14a9f26a50cb83b8c54c161820d997e9d8c236be7"
+    },
+    "tests": {
+      "path": "tests/test_ugi_applicability_recalibration.py",
+      "sha256": "e70d8949f6f488fd855b8d5e384bc3f573cb75a91117451fb9a1c9484a8022b2"
+    }
+  },
+  "policy": {
+    "endpoint": "expt_Hela",
+    "schemes": [
+      "held_aldehyde_5fold",
+      "held_aldehyde_isocyanide_pair_5fold",
+      "held_head_5fold",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_isocyanide_5fold"
+    ],
+    "external_stress_schemes": [
+      "lantern_scaffold_balanced"
+    ],
+    "candidate_thresholds": [
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0,
+      3.0
+    ],
+    "outer_group_folds": 5,
+    "outer_group_salt": "forge-ugi-applicability-component-group-recalibration-v2",
+    "criteria": {
+      "ranking": {
+        "minimum_overall_coverage": 0.25,
+        "minimum_per_scheme_coverage": 0.15,
+        "minimum_mae_relative_reduction": 0.05,
+        "minimum_per_scheme_spearman": 0.2,
+        "minimum_top_quartile_enrichment": 0.0
+      },
+      "absolute": {
+        "minimum_overall_coverage": 0.25,
+        "minimum_per_scheme_coverage": 0.15,
+        "minimum_mae_relative_reduction": 0.1,
+        "minimum_per_scheme_spearman": 0.2,
+        "minimum_top_quartile_enrichment": 0.0,
+        "minimum_per_scheme_r2": 0.1,
+        "maximum_per_scheme_coverage90_gap": 0.15
+      }
+    },
+    "bootstrap": {
+      "cluster_unit": "scheme_specific_held_component_or_component_pair",
+      "replicates": 2000,
+      "seed": 20260805
+    },
+    "confirmation": {
+      "minimum_folds_with_threshold": 4,
+      "minimum_bootstrap_spearman_lower": 0.0,
+      "minimum_bootstrap_top_quartile_enrichment_lower": 0.0
+    },
+    "decision_boundary": {
+      "generated_candidate_yield_may_tune_thresholds": false,
+      "exact_component_novelty_is_a_veto": false,
+      "outside_authorized_radius_is_deleted": false,
+      "simultaneously_exact_new_roles_need_matching_structured_evidence": true,
+      "ranking_and_absolute_authority_are_separate": true,
+      "molecules_are_evaluated_individually_but_uncertainty_clusters_shared_components": true
+    }
+  }
+}

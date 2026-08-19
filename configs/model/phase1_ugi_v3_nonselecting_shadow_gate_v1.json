@@ -1,0 +1,85 @@
+{
+  "schema_version": "phase1_ugi_v3_nonselecting_shadow_gate_config.v1",
+  "status": "frozen_baseline_contract",
+  "expected_unchanged_candidates": 9,
+  "inputs": {
+    "policy": {
+      "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+      "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"
+    },
+    "selector": {
+      "path": "scripts/phase1_select_ugi_architecture.py",
+      "sha256": "2b87eec1bcd62c20a6e971d6e1e089fbf4d5b5254ca9e5aa1a42b85c38aa9804"
+    },
+    "original_v3_result": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v3.json",
+      "sha256": "fe90fc849bbc88c8b004ceebcb4aae95ef6ac8158b8e1a6220792750aac83be5"
+    },
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    }
+  },
+  "training_results": {
+    "full_morphology_program_conditioning": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/result.json",
+      "sha256": "7427757fad7c6ed8545dbae721d7c4d13af77304a9ab74da2f8c1f8ef5fb2843"
+    },
+    "size_only_conditioning": {
+      "path": "results/phase1/ugi_joint_sparse_size_only_v1_full/result.json",
+      "sha256": "2627d84281f53c431e7dd91d982863c53e68044b0ebf3bfb6c52e73aa247a16c"
+    }
+  },
+  "baseline_arm_samples": {
+    "full_morphology_program_conditioning": {
+      "250": {
+        "path": "results/phase1/ugi_architecture_selection_v3/full_step250/result.json",
+        "sha256": "78beb327f0ee36cb217a2f90cacc9de274ebde7a85c9663cf904a23f0861bc60"
+      },
+      "500": {
+        "path": "results/phase1/ugi_architecture_selection_v3/full_step500/result.json",
+        "sha256": "862922aa4db57aec33e627fd57ba7127aa4a55544eda46d22970889025b30095"
+      },
+      "1000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+        "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+      },
+      "2000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/full_step2000/result.json",
+        "sha256": "014512451beea29dfd162a9d2f141191231da2767796bddc5e59d2aa451e63ae"
+      },
+      "4000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/full_step4000/result.json",
+        "sha256": "d1c3dfa0e22b8b469cfd4dcc48fdddbcf26410dd240ba8a1b2baebb43c80eda4"
+      }
+    },
+    "size_only_conditioning": {
+      "250": {
+        "path": "results/phase1/ugi_architecture_selection_v3/size_step250/result.json",
+        "sha256": "3836f16656fed2c68ab0d9e5b534787e591991d81a24f98c33f2246ee991406b"
+      },
+      "500": {
+        "path": "results/phase1/ugi_architecture_selection_v3/size_step500/result.json",
+        "sha256": "54575cf1c086ec5983937d31bc5b5d0438bbe5e8653f8d5064fbb47e7fb0608d"
+      },
+      "1000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/size_step1000/result.json",
+        "sha256": "ed8a69757f2bfe9969efaa1258793eaa4cc5465dabbf5bdf4e7dd9a2be154941"
+      },
+      "2000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/size_step2000/result.json",
+        "sha256": "fbb6c83ea4a10d2536ed8325860d2c6f4d3b2880e637538487b3d055dc36a360"
+      },
+      "4000": {
+        "path": "results/phase1/ugi_architecture_selection_v3/size_step4000/result.json",
+        "sha256": "25be3c4ed4d159d5e126da4f9ecaeb4f4d58c8546769002d0cfb495802cba4aa"
+      }
+    }
+  },
+  "output_contract": {
+    "status": "diagnostic_only_cannot_replace_production",
+    "retain_shadow_decision": false,
+    "retain_only_challenger_and_same_step_baseline": true,
+    "verify_all_unchanged_metric_gate_objects_exactly": true
+  }
+}

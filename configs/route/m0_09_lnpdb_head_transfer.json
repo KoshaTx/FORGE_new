@@ -1,0 +1,47 @@
+{
+  "schema_version": "m0_09_lnpdb_head_transfer_config.v1",
+  "task": "M0-09 LNPDB head-motif transfer census",
+  "seed": 20260730,
+  "inputs": {
+    "component_source_ledger": {
+      "path": "results/m0_09/component_source_ledger.csv",
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "agile_curated": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "ring_support": {
+      "path": "results/m0_06_ring_support/result.json",
+      "sha256": "a51091c2ad7dba844027fc7ee1f4d417f5148cfbcc1c436e23b8a1fe5f76bf5b"
+    }
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "amine_role": "amine_head",
+  "multiplicity_semantics": "symmetry_distinct_required_handle_matches",
+  "expected": {
+    "component_rows": 726,
+    "head_rows": 408,
+    "parsed_head_rows": 396,
+    "invalid_head_rows": 12,
+    "unique_agile_heads": 20,
+    "exact_agile_head_overlap": 20,
+    "transfer_candidates": 259,
+    "outside_primary_ring_topology": 62,
+    "without_qualified_ugi_amine": 55
+  },
+  "scope_policy": {
+    "lnpdb_occurrence_is_structural_and_biological_provenance_only": true,
+    "no_source_activity_label_inheritance": true,
+    "no_source_route_inheritance": true,
+    "no_automatic_candidate_lock_admission": true,
+    "site_defined_ugi_amine_required": true,
+    "route_or_procurement_closure_required": true,
+    "exact_forward_qualification_required": true,
+    "outside_ring_gate_requires_support_amendment": true
+  }
+}

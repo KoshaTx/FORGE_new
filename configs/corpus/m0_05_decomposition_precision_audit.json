@@ -1,0 +1,74 @@
+{
+  "schema_version": "m0_05_decomposition_precision_audit_config.v1",
+  "generated_utc": "2026-07-29T20:00:00+00:00",
+  "seed": 20260729,
+  "randomness_used": true,
+  "sampling_method": "seeded_sha256_stratified_round_robin_v1",
+  "expected_reaction_count": 12,
+  "expected_inputs": {
+    "m0_04_config": {
+      "path": "configs/corpus/m0_04_r1_prime_audit.json",
+      "sha256": "b92b6b0d95e957e2df2e178fcb2973a299130cc595a5e4b07e676b50ac68a5ef"
+    },
+    "m0_04_result": {
+      "path": "results/m0_04/result.json",
+      "sha256": "f649f191ef6d1ea7c1885fc9b9422dcc0c819fb6f0935cde8117a09e82d4e125"
+    },
+    "decomposition_candidates": {
+      "path": "results/m0_04/decomposition_candidates.csv.gz",
+      "sha256": "b543539ea203ad91581461190ea5f31c8dfff11951ff193214db85a28c94727e"
+    },
+    "r0_structures": {
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "agile_virtual_ugi3_product_ledger": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "lnpdb_paper_route_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    }
+  },
+  "sampling": {
+    "observed_target_per_family": 30,
+    "virtual_ugi_stress_count": 15,
+    "lx_2024_transfer_count": 15,
+    "adversarial_count_per_type": 8,
+    "adversarial_types": [
+      "role_swap",
+      "cross_record_component_swap",
+      "wrong_reaction_family",
+      "non_ugi_as_ugi",
+      "wrong_attachment_site",
+      "degenerate_reconstructing"
+    ]
+  },
+  "forward_verification": {
+    "max_products_per_case": 1000
+  },
+  "fingerprint": {
+    "kind": "ECFP4",
+    "radius": 2,
+    "bits": 2048,
+    "include_chirality": true
+  },
+  "human_review": {
+    "required_reviewers": 2,
+    "family_dispositions": [
+      "admit",
+      "restrict",
+      "reject"
+    ],
+    "status": "awaiting_human_review"
+  }
+}

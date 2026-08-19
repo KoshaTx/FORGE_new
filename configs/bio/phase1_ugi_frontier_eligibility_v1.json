@@ -1,0 +1,156 @@
+{
+  "schema_version": "phase1_ugi_frontier_eligibility.v1",
+  "status": "frozen_before_any_out_of_domain_score_was_inspected",
+  "frozen_utc": "2026-08-06",
+  "authority": "docs/MANUSCRIPT_AUTHORITY.md section 20",
+  "purpose": "Define, in advance, which out-of-domain designs are eligible for the two exploratory frontier slots of the ten-candidate prospective panel. Raw ensemble predictions are ranked only within this frozen pool, so that selection cannot preferentially exploit the largest errors of an extrapolating predictor.",
+  "provenance_statement": "The physicochemical envelope below was computed from the 2,590 prediction-supported designs only. No out-of-domain prediction, ranking or score distribution was examined before this file was written.",
+  "eligibility": {
+    "unsupported_component_roles": {
+      "count": 1,
+      "permitted_roles": [
+        "oxoester_aldehyde_body_tail",
+        "isocyanide_tail"
+      ],
+      "rationale": "A single-role support failure keeps the whole product and the remaining two roles anchored in measured chemistry. Amine-head failures are excluded because the head group dominates the activity model's own saliency analysis and a head-group extrapolation is not near-boundary."
+    },
+    "near_boundary_similarity": {
+      "metric": "Tanimoto on Morgan fingerprints, radius 2, 2048 bits",
+      "reference_set": "measured training components of the same role",
+      "minimum_nearest_neighbour_similarity": {
+        "oxoester_aldehyde_body_tail": 0.65,
+        "isocyanide_tail": 0.73
+      },
+      "rationale": "Role-specific, derived from the minimum internal nearest-neighbour similarity of the measured component set. See amendment_2026-08-06."
+    },
+    "exact_ugi_validity": {
+      "exact_forward_verified": true,
+      "forward_product_count_minimum": 1
+    },
+    "route": {
+      "requirement": "route_complete",
+      "definition": "makeability verdict of buy_all or buy_and_make; every component either purchasable or reduced to purchasable material by a forward-verified route",
+      "unresolved_material_leaves_permitted": 0
+    },
+    "component_novelty": {
+      "requirement": "the unsupported component must be absent from the measured training component set",
+      "preferred": "absent also from the expanded reaction-enumerated registry"
+    },
+    "physicochemical_screen": {
+      "note": "1st to 99th percentile envelope of the prediction-supported population; frontier candidates must fall inside the same envelope as candidates selected under qualified ranking",
+      "molecular_weight": [
+        563.91,
+        792.38
+      ],
+      "clogp": [
+        7.08,
+        14.17
+      ],
+      "tpsa": [
+        70.67,
+        122.71
+      ],
+      "comparison_tolerance": 1e-06
+    },
+    "pathological_motifs_excluded": [
+      "acyl halide",
+      "aldehyde retained in product",
+      "epoxide",
+      "isocyanate",
+      "peroxide",
+      "azide",
+      "N-nitroso",
+      "Michael acceptor alpha,beta-unsaturated ketone",
+      "silicon",
+      "boron",
+      "phosphorus outside phosphate",
+      "any halogen"
+    ]
+  },
+  "selection_rule": {
+    "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation, on the expt_Hela endpoint",
+    "explicitly_not_used": "the raw ensemble mean alone, and the calibrated conformal lower bound, which is only defined inside the qualified support region",
+    "slots": 2,
+    "frontier_1": "highest raw ensemble mean in the eligible pool",
+    "frontier_2": "highest raw ensemble mean among eligible candidates that are structurally distinct from frontier 1, preferring an unsupported component absent from the expanded registry",
+    "structural_distinctness": {
+      "metric": "Tanimoto on Morgan fingerprints, radius 2, 2048 bits, between complete products",
+      "maximum_similarity_to_frontier_1": 0.7
+    }
+  },
+  "reporting_contract": {
+    "label_in_manuscript": "frontier designs",
+    "prohibited_labels": [
+      "high predicted potency",
+      "predicted hits",
+      "high-potency candidates"
+    ],
+    "raw_score_presentation": "shown for transparency and marked as an extrapolative score that is not a qualified activity estimate",
+    "population_separation": "frontier candidates are never pooled with supported candidates when reporting prediction performance",
+    "retain_for_all_out_of_domain_designs": [
+      "raw ensemble mean",
+      "ensemble standard deviation",
+      "component role that triggered abstention",
+      "nearest-neighbour similarity beyond the boundary",
+      "exact-component novelty class",
+      "route status"
+    ]
+  },
+  "nonclaims": [
+    "An extrapolative score is not evidence of activity.",
+    "Eligibility does not imply the predictor is reliable in this region.",
+    "Two frontier candidates cannot support a statistical claim about out-of-domain prediction quality.",
+    "Selecting a frontier candidate is a decision to measure, not a prediction of success."
+  ],
+  "amendment_2026-08-06": {
+    "what": "near_boundary_similarity replaced a flat 0.60 with role-specific thresholds derived from the measured training set's own geometry",
+    "thresholds": {
+      "oxoester_aldehyde_body_tail": 0.65,
+      "isocyanide_tail": 0.73
+    },
+    "derivation": "For each role, the threshold is the MINIMUM nearest-neighbour Tanimoto among the measured components of that role. A generated component at or above it is at least as close to the measured set as the most isolated measured component of the same role, for which the oracle already issues qualified predictions.",
+    "measured_internal_nn": {
+      "aldehyde": {
+        "n": 11,
+        "min": 0.65,
+        "median": 0.91
+      },
+      "isocyanide": {
+        "n": 5,
+        "min": 0.73,
+        "median": 1.0
+      },
+      "amine": {
+        "n": 20,
+        "min": 0.17,
+        "median": 0.6
+      }
+    },
+    "amine_exclusion_now_data_supported": "The measured amine set has median internal nearest-neighbour similarity 0.60 and minimum 0.17, so 'near the boundary' is not a meaningful notion for that role. The a priori exclusion of amine-role failures is retained and is now supported by the training geometry rather than by judgement alone.",
+    "direction": "Both new thresholds are STRICTER than the frozen 0.60, so the amendment cannot be read as loosening the rule to admit more candidates.",
+    "information_used": "Measured training components only. No out-of-domain prediction, score or ranking was inspected before this amendment.",
+    "reference_case": "AGILE H9 scores 0.90 against the measured aldehyde set and would be eligible."
+  },
+  "evaluation_order": {
+    "note": "Eligibility is defined before ranking, but is evaluated lazily for efficiency. Designs passing the structural criteria are scored and ranked by raw ensemble mean; the remaining criteria (route completeness, physicochemical envelope, pathological motifs) are then applied walking down that frozen ranking, and the first qualifying candidate is taken. This is deterministic and identical in outcome to filtering before ranking; it only avoids routing candidates that could never be selected.",
+    "prohibited": "Inspecting scores and then adjusting any criterion."
+  },
+  "correction_2026-08-06_tpsa_tolerance": {
+    "what": "Envelope comparisons now use a 1e-6 tolerance.",
+    "why": "The bounds are percentiles of the same continuous descriptors they screen, so exact float equality at a bound is arbitrary. AGILE H9 has TPSA 70.66999999999999 against a lower bound of 70.67 and was rejected, although 1,865 of the 2,590 supported designs carry exactly that value and 72% of the population sits at or below it.",
+    "not_a_loosening": "The numeric bounds are unchanged. Only the comparison is made numerically correct.",
+    "information_used": "A validation case (H9) and the descriptor distribution of the supported population. No out-of-domain score influenced this correction.",
+    "verification_required": "Re-run the pool and selection and confirm the two selected frontier designs are unchanged."
+  },
+  "revision_2026-08-06_conservative_ordering": {
+    "what": "Tier-B frontier candidates are ordered by mean minus standard deviation rather than by the raw mean.",
+    "why": "Authority section 21. AGILE ranked their ~12,000-member candidate library by ensemble mean minus ensemble standard deviation and recovered H9 that way. Using the same conservative statistic keeps the frontier lane comparable to the precedent it is modelled on and penalises high-variance extrapolation, which the raw mean does not.",
+    "distinct_from_tier_a": "Tier A continues to use the calibrated conformal lower bound. The frontier statistic is a plain mean-minus-sd and carries no coverage guarantee.",
+    "tier_labels": {
+      "A": "validated exploitation; all components measured; calibrated LCB",
+      "B": "analog-supported prospective transfer; one unseen component with a close measured analogue; conservative ensemble score; reported separately",
+      "C": "open extrapolation; remote or multiple unseen components; exploratory only"
+    },
+    "panel_decision": "Both frontier slots are Tier B. Tier C is included only with extra capacity."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "decision": {
+    "carboxylic_acid_reactant_component": false,
+    "ester_origin": "aldehyde_component",
+    "manuscript_name": "AGILE-type amine-aldehyde-isocyanide Ugi three-component reaction",
+    "prohibited_short_name": "acid-free Ugi",
+    "reaction_id": "ugi_3cr_agile",
+    "reactant_count": 3,
+    "variant": "ugi_3cr_agile"
+  },
+  "generated_utc": "2026-07-30T23:55:00Z",
+  "inputs": {
+    "assembly_variant": {
+      "bytes": 1814,
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "assembly_qualification": {
+      "bytes": 14637,
+      "path": "results/m0_09/ugi3_assembly_qualification.json",
+      "sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    },
+    "reaction_registry": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_01_ugi_variant_decision.v1",
+  "status": "complete",
+  "task": "M0-01 Ugi variant decision",
+  "verification": {
+    "agile_nominal_rows_forward_reconstructed": 1200,
+    "agile_nominal_rows_total": 1200,
+    "command": ".venv/bin/python -m pytest -q tests/test_m0_01_ugi_variant.py tests/test_qualified_forward.py"
+  }
+}

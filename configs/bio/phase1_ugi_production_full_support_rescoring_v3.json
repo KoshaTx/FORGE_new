@@ -1,0 +1,138 @@
+{
+  "schema_version": "phase1_ugi_production_full_support_rescoring_config.v3",
+  "status": "frozen_before_chemically_admitted_full_support_oracle_rescoring",
+  "endpoint": "expt_Hela",
+  "production_contract": {
+    "draws_per_arm": 16384,
+    "terminal_chemical_admission_required_before_biological_scoring": true,
+    "no_repair_or_retry": true
+  },
+  "applicability": {
+    "exact_l1_required": true,
+    "all_product_and_role_views_must_be_interpolative": true,
+    "exact_identity_is_not_an_applicability_veto": true,
+    "exact_measured_products_are_neutral_controls": true
+  },
+  "scoring": {
+    "all_nonmeasured_interpolative_unique_products_are_scored": true,
+    "duplicate_products_share_one_frozen_oracle_evaluation": true,
+    "batch_size": 256,
+    "raw_predictions_do_not_imply_claim_authority": true,
+    "uncalibrated_patterns_receive_no_conservative_utility": true
+  },
+  "pattern_policies": {
+    "known_components_novel_combination": {
+      "unseen_roles": [],
+      "authority_tier": "qualified_unseen_combination",
+      "calibration_scale": null,
+      "interpretation": "All component identities are measured but the exact combination is new; raw scoring is recorded pending a dedicated combination scale."
+    },
+    "amine_only": {
+      "unseen_roles": ["amine"],
+      "authority_tier": "exploratory_weak_absolute_head_generalization",
+      "calibration_scale": "amine_only",
+      "interpretation": "Continuously supported exact-new head; conservative score is exploratory because held-head absolute fit is weak."
+    },
+    "aldehyde_only": {
+      "unseen_roles": ["aldehyde"],
+      "authority_tier": "exploratory_weak_absolute_aldehyde_generalization",
+      "calibration_scale": "aldehyde_only",
+      "interpretation": "Continuously supported exact-new aldehyde; conservative score is exploratory because held-aldehyde absolute fit is weak."
+    },
+    "isocyanide_only": {
+      "unseen_roles": ["isocyanide"],
+      "authority_tier": "qualified_role_holdout",
+      "calibration_scale": "isocyanide_only",
+      "interpretation": "Continuously supported exact-new isocyanide with positive held-isocyanide absolute and ranking performance."
+    },
+    "amine_aldehyde": {
+      "unseen_roles": ["amine", "aldehyde"],
+      "authority_tier": "exploratory_multiple_exact_new_roles",
+      "calibration_scale": null,
+      "interpretation": "Two exact-new roles; raw score only because no eligible conditional calibration folds exist for this novelty pattern."
+    },
+    "amine_isocyanide": {
+      "unseen_roles": ["amine", "isocyanide"],
+      "authority_tier": "exploratory_multiple_exact_new_roles",
+      "calibration_scale": null,
+      "interpretation": "Two exact-new roles; raw score only because no eligible conditional calibration folds exist for this novelty pattern."
+    },
+    "aldehyde_isocyanide": {
+      "unseen_roles": ["aldehyde", "isocyanide"],
+      "authority_tier": "exploratory_simultaneous_exact_new_tails",
+      "calibration_scale": "aldehyde_isocyanide_pair",
+      "interpretation": "Two exact-new tail roles; pair-scale ranking is exploratory because the held-pair split retained each identity in fitting data."
+    },
+    "amine_aldehyde_isocyanide": {
+      "unseen_roles": ["amine", "aldehyde", "isocyanide"],
+      "authority_tier": "exploratory_all_roles_exact_new",
+      "calibration_scale": null,
+      "interpretation": "All three roles are exact-new; raw score only and no oracle-generalization claim."
+    }
+  },
+  "extended_calibration_scales": {
+    "aldehyde_only": {
+      "scheme": "held_aldehyde_5fold",
+      "unseen_roles": ["aldehyde"],
+      "eligible_folds": [0, 1, 2, 3, 4],
+      "expected": {
+        "fold_interpolative_rows": {"0": 22, "1": 20, "2": 42, "3": 42, "4": 32},
+        "fold_q90": {"0": 2.6691150665283203, "1": 5.309392213821411, "2": 2.936174790064494, "3": 3.565102418263753, "4": 4.61016575495402},
+        "max_q90": 5.309392213821411,
+        "calibration_records": 158,
+        "minimum_lcb90": -4.91605011622111,
+        "maximum_lcb90": 8.003586530685425,
+        "sorted_lcb90_sha256": "d69a82f062689e766222789b98cc42d81cf2c073725c96282cee3e7fe01f880b"
+      }
+    },
+    "isocyanide_only": {
+      "scheme": "held_isocyanide_5fold",
+      "unseen_roles": ["isocyanide"],
+      "eligible_folds": [0, 1, 2],
+      "expected": {
+        "fold_interpolative_rows": {"0": 35, "1": 38, "2": 27},
+        "fold_q90": {"0": 3.732707818349203, "1": 3.9147203763326006, "2": 2.9627268314361572},
+        "max_q90": 3.9147203763326006,
+        "calibration_records": 100,
+        "minimum_lcb90": -4.158058325449625,
+        "maximum_lcb90": 7.529890219370524,
+        "sorted_lcb90_sha256": "c90d831de0fbdc709df5c9c0245a7e3fcbf98a5c23cae1012fd306b1e7f8bad7"
+      }
+    }
+  },
+  "scope": {
+    "generator_frozen": true,
+    "terminal_chemical_admission_frozen": true,
+    "applicability_boundary_frozen": true,
+    "terminal_rescoring_only": true,
+    "potency_changes_generation": false,
+    "candidate_selection": false,
+    "prospective_panel_locked": false
+  },
+  "inputs": {
+    "generation_result": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/result.json",
+      "sha256": "b2781e9d50c07dbe2653ded9ed34b735a274739ee6b4a94076edf924955f4726"
+    },
+    "terminal_ledger": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/terminal_ledger.jsonl.gz",
+      "sha256": "913ca35cc221785328ce41f9caebb981029d83114d45ba634b28aa5e6f000a2d"
+    },
+    "hela_diagnostic_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "selective_risk_diagnosis": {
+      "path": "results/phase1/ugi_selective_risk_proposal_diagnosis_v1/result.json",
+      "sha256": "4cd54dfc1a5245996a149756162f0d4ad9eb41cb2ee9ab9b28c65464fdd5cedd"
+    },
+    "novelty_lane_audit": {
+      "path": "results/phase1/ugi_potency_novelty_lane_audit_v1/result.json",
+      "sha256": "d9682bd996d2c9fb4d2d955b8176aae8a7e593dea7e5cb4671d2e01c9f7f7bb0"
+    },
+    "legacy_matched_ranking": {
+      "path": "results/phase1/ugi_production_terminal_ranking_v1/result.json",
+      "sha256": "e1c8d6c4fd8a9f08f5003498100d442ababcee25c7c69c748cf0d3d7e1cf3979"
+    }
+  }
+}

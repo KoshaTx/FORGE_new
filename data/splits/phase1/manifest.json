@@ -1,0 +1,269 @@
+{
+  "counts": {
+    "r0_assignments": 15229,
+    "r0_rows": 15229,
+    "r1_rows": 464265,
+    "source_adjudicated_measured_products_in_union": 1100,
+    "ugi_component_folds": {
+      "amine_head": {
+        "calibration": 4,
+        "heldout": 4,
+        "train": 16
+      },
+      "isocyanide_tail": {
+        "calibration": 1,
+        "heldout": 1,
+        "train": 7
+      },
+      "oxoester_aldehyde_body_tail": {
+        "calibration": 9,
+        "heldout": 9,
+        "train": 44
+      }
+    },
+    "ugi_components": {
+      "amine_head": 24,
+      "isocyanide_tail": 9,
+      "oxoester_aldehyde_body_tail": 62
+    },
+    "ugi_measured_constitutions": 1100,
+    "ugi_measured_products": 1100,
+    "ugi_primary_product_folds": {
+      "calibration": 3350,
+      "heldout": 4674,
+      "train": 4362
+    },
+    "ugi_product_folds": {
+      "held_amine_head": {
+        "calibration": 2232,
+        "heldout": 2232,
+        "train": 7922
+      },
+      "held_isocyanide_tail": {
+        "calibration": 1364,
+        "heldout": 1364,
+        "train": 9658
+      },
+      "held_oxoester_aldehyde_body_tail": {
+        "calibration": 1812,
+        "heldout": 1812,
+        "train": 8762
+      }
+    },
+    "ugi_source_rows_collapsed_by_constitutional_identity": 990,
+    "ugi_union_products": 12386,
+    "ugi_virtual_constitutions": 12276,
+    "ugi_virtual_measured_overlap": 990,
+    "ugi_virtual_products": 12276
+  },
+  "inputs": {
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "r0_assignments": {
+      "bytes": 4110427,
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "r0_constitutional": {
+      "bytes": 1665612,
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "r1_reaction_enumerated": {
+      "bytes": 100296410,
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "ugi_measured_semantics": {
+      "bytes": 75799,
+      "path": "results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    },
+    "ugi_virtual_products": {
+      "bytes": 134814,
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    }
+  },
+  "outputs": {
+    "ugi_assignments": {
+      "bytes": 100713,
+      "columns": [
+        "product_id",
+        "canonical_product_smiles",
+        "amine_head_smiles",
+        "held_amine_head_fold",
+        "oxoester_aldehyde_body_tail_smiles",
+        "held_oxoester_aldehyde_body_tail_fold",
+        "isocyanide_tail_smiles",
+        "held_isocyanide_tail_fold",
+        "primary_product_fold",
+        "is_source_adjudicated_measured_product"
+      ],
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "rows": 12386,
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_provenance": {
+      "bytes": 244811,
+      "columns": [
+        "model_product_id",
+        "canonical_product_smiles",
+        "source_kind",
+        "source_product_id",
+        "source_product_smiles",
+        "source_isomeric_canonical_smiles",
+        "source_component_smiles_json",
+        "constitutional_component_smiles_json",
+        "is_selected_identity_source",
+        "constitutional_group_size"
+      ],
+      "path": "data/splits/phase1/ugi_l1_constitutional_provenance.csv.gz",
+      "rows": 13376,
+      "sha256": "804456d66f8978132e7be2f2318a260abb37b1a8780c759afcd10b2d0e651a2e"
+    }
+  },
+  "policy": {
+    "broad_primary_split": "source_study",
+    "broad_stream": {
+      "primary_split_scheme": "source_study",
+      "r0_fraction": 0.9,
+      "r1_fraction": 0.1,
+      "r1_sampling_weight": "realism_weight",
+      "r1_semantics": "reaction_enumerated_support_not_route_certified",
+      "raw_reaction_family_sampling_allowed": false
+    },
+    "joint_training": {
+      "biological_guidance_enabled": false,
+      "broad_to_ugi_replay_ratios": [
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.75
+        ]
+      ],
+      "objective": "L_lipid_plus_mask_L1_plus_mask_roundtrip",
+      "stages": [
+        "broad_product_pretraining",
+        "ugi_l1_adapter_warm_start",
+        "joint_unfreeze_with_broad_replay"
+      ],
+      "synthesis_value_guidance_enabled": false
+    },
+    "representation": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S",
+        "P",
+        "F",
+        "Si"
+      ],
+      "full_pair_reachability": true,
+      "identity": "constitutional_graph_without_stereochemistry",
+      "maximum_heavy_atoms": 282,
+      "topology": "canonical_spanning_tree_plus_residual_closures"
+    },
+    "ugi_l1": {
+      "component_split_fractions": {
+        "calibration": 0.15,
+        "heldout": 0.15,
+        "train": 0.7
+      },
+      "duplicate_product_upweighting_allowed": false,
+      "measured_source_priority": true,
+      "required_candidate_count": 1,
+      "required_decomposition_status": "one_exact_qualified_ugi_decomposition",
+      "roles": [
+        "amine_head",
+        "oxoester_aldehyde_body_tail",
+        "isocyanide_tail"
+      ],
+      "split_schemes": [
+        "primary_all_role_strict",
+        "held_amine_head",
+        "held_oxoester_aldehyde_body_tail",
+        "held_isocyanide_tail"
+      ]
+    }
+  },
+  "r1_weighted_family_mass": {
+    "acetal_aldehyde_diol": {
+      "normalized_weight_mass": 0.009666606826648504,
+      "rows": 1989,
+      "weight_sum": 4487.867360000044
+    },
+    "amide_coupling_acid_amine": {
+      "normalized_weight_mass": 0.061719891647520744,
+      "rows": 16590,
+      "weight_sum": 28654.386399998304
+    },
+    "aza_michael_amine_acrylate": {
+      "normalized_weight_mass": 0.22617839205246892,
+      "rows": 16590,
+      "weight_sum": 105006.7144999936
+    },
+    "carbamate_amine_chloroformate": {
+      "normalized_weight_mass": 0.0017867459184348366,
+      "rows": 16590,
+      "weight_sum": 829.5236199998783
+    },
+    "disulfide_coupling": {
+      "normalized_weight_mass": 0.0007764911820265976,
+      "rows": 780,
+      "weight_sum": 360.4976900000004
+    },
+    "epoxide_opening_amine": {
+      "normalized_weight_mass": 0.049851885689459655,
+      "rows": 16590,
+      "weight_sum": 23144.486440000157
+    },
+    "iphos_amine_dioxaphospholane": {
+      "normalized_weight_mass": 0.040669315507625876,
+      "rows": 16590,
+      "weight_sum": 18881.340359996673
+    },
+    "passerini_3cr": {
+      "normalized_weight_mass": 0.03352529477521979,
+      "rows": 77571,
+      "weight_sum": 15564.621469998656
+    },
+    "reductive_amination_amine_aldehyde": {
+      "normalized_weight_mass": 0.21239459913668263,
+      "rows": 21654,
+      "weight_sum": 98607.38167999884
+    },
+    "thiol_michael_thioether": {
+      "normalized_weight_mass": 0.014428866743350864,
+      "rows": 1521,
+      "weight_sum": 6698.8180300000395
+    },
+    "ugi_3cr_agile": {
+      "normalized_weight_mass": 0.34024876683574673,
+      "rows": 222768,
+      "weight_sum": 157965.59872000443
+    },
+    "urea_amine_isocyanate": {
+      "normalized_weight_mass": 0.008753143682503293,
+      "rows": 55032,
+      "weight_sum": 4063.77838000026
+    }
+  },
+  "randomness": {
+    "component_assignment": "SHA-256 rank by role and frozen seed",
+    "used": false
+  },
+  "schema_version": "phase1_product_l1_split_manifest.v3",
+  "seed": 20260730
+}

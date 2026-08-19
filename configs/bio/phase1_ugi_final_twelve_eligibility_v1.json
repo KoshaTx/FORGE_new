@@ -1,0 +1,50 @@
+{
+  "schema_version": "phase1_ugi_final_twelve_eligibility.v1",
+  "purpose": "Add a chemical eligibility criterion for the twelve designs taken into synthesis: the final Ugi assembly must be uniquely specified. Recorded before the blinded chemistry review returned and before any selection outcome was known.",
+  "recorded": "2026-08-16",
+  "amends": {
+    "config": "configs/bio/phase1_ugi_chemist_selection_blind_v1.json",
+    "why_a_separate_file": "that config is frozen and must not be edited after freezing; this is an additive criterion carried alongside it"
+  },
+  "criterion": {
+    "statement": "A candidate is eligible for the final twelve only if its target product is the unique product enumerated from its own three components under the qualified Ugi transformation.",
+    "properties": [
+      "chemical, not predictive: it makes no reference to oracle_mean, lcb90, arm or any ranking quantity",
+      "uniform: applied identically to all forty frozen candidates",
+      "prespecified: recorded before selection outcomes are known",
+      "does not modify the frozen panel artifact"
+    ],
+    "evaluation": {
+      "transform": "data/vendor/qualified_reactions_v1.json, single qualified Ugi three-component reaction",
+      "role_policy_overrides": "configs/route/m0_09_agile_virtual_ugi3_capability.json scope",
+      "enumeration_cap": 100,
+      "unit": "distinct canonical SMILES among enumerated single-product outcomes"
+    }
+  },
+  "measured_effect_on_the_frozen_forty": {
+    "artifact": "results/phase1/forge_forward_outcome_census_v1/result.json",
+    "candidates_with_unique_assembly": 39,
+    "candidates_without": 1,
+    "high_arm_candidates": 34,
+    "high_arm_without_unique_assembly": 0,
+    "low_arm_candidates": 6,
+    "low_arm_without_unique_assembly": 1,
+    "consequence": "none. The single affected candidate, C06, is in the LOW arm, which the all-HIGH decision already excludes from the twelve. Every candidate eligible for synthesis already satisfies this criterion, so the rule removes no option and changes no selection.",
+    "reported_as": "Every candidate taken to synthesis has a uniquely specified final Ugi assembly. This is a verified property of the eligible pool, not a constraint that had to be imposed on it."
+  },
+  "excluded_candidate": {
+    "candidate_id": "C06",
+    "arm": "LOW",
+    "amine_head": "NCCN1CCNCC1",
+    "head_identity": "1-(2-aminoethyl)piperazine",
+    "target": "CCCCCCCCCCCCCCC(=O)OCCCCCC(NCCN1CCNCC1)C(=O)NCCCCCCCCCCCC",
+    "competing_product": "CCCCCCCCCCCCCCC(=O)OCCCCCC(C(=O)NCCCCCCCCCCCC)N1CCN(CCN)CC1",
+    "mechanism": "the head carries two inequivalent reactive nitrogens; the competing outcome condenses through the piperazine ring nitrogen rather than the primary amine",
+    "action": "ineligible for the twelve. Already excluded on arm; this criterion is a second and independent reason."
+  },
+  "nonclaims": [
+    "A unique enumerated forward product is a statement about the qualified transform, not a prediction that no side reaction occurs under experimental conditions.",
+    "This criterion governs eligibility only. It does not rank candidates and does not enter the blinded reviewer's packet, which discloses structures and route information but no selection rule beyond the brief.",
+    "Non-uniqueness elsewhere in the generated population is a property of polyamine heads rather than of any tail chemotype; see results/phase1/forge_forward_outcome_census_v1/result.json."
+  ]
+}

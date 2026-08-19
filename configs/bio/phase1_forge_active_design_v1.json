@@ -1,0 +1,142 @@
+{
+  "schema_version": "phase1_forge_active_design.v1",
+  "status": "frozen_before_any_acquisition_benchmark_was_run",
+  "frozen_utc": "2026-08-15",
+  "task": "Freeze the reaction-factorized surrogate, the synthesis-aware batch-acquisition policy, the retrospective benchmark protocol and the pass/fail gate, before any result exists.",
+  "why_this_experiment": {
+    "diagnosis": "Generation is not the bottleneck (92.1% terminal admission, 26,235 distinct products) and routing is not the bottleneck among rankable designs (97.1% of prediction-supported designs resolve to purchasable material). The bottleneck is the activity model: under component-family-aware cross-validation the production D-MPNN ensemble reaches Spearman 0.469 on held aldehyde families, which a component-additive ridge matches.",
+    "question": "Given that diagnosis, does choosing an experimental batch by reaction-factorized information gain under a synthesis budget collect more informative data than score ranking or diversity selection, without giving up plausible activity or feasibility?",
+    "what_this_is_not": "This is not a claim that the generator should be guided by the activity model. Nothing here changes generation. The surrogate chooses which already-generated, already-route-complete designs to measure."
+  },
+  "surrogate": {
+    "family": "bayesian_linear_regression_over_role_decomposed_count_morgan_features",
+    "rationale": "Chosen for an auditable closed-form posterior, not for accuracy. Every acquisition rule reads the posterior covariance, so a model whose uncertainty we cannot write down would put the uncertainty estimate and the acquisition in an unauditable loop.",
+    "features": {
+      "kind": "count_morgan",
+      "radius": 2,
+      "n_bits": 256,
+      "blocks": [
+        "product",
+        "amine",
+        "aldehyde",
+        "isocyanide"
+      ],
+      "counts_not_bits_because": "binary folded Morgan fingerprints are blind to alkyl chain length; this project measured 30 generated pairs at Tanimoto 1.000 differing by 14 to 182 Da, and homologues are exactly what the generator produces",
+      "n_bits_rationale": "256 per block, so the design matrix is 1024-dimensional. The greedy batch loop forms Sigma M Sigma once per step, which is cubic in that dimension; 1024 keeps a full six-arm five-seed benchmark tractable while leaving the linear model far wider than the 1,100 measured lipids can constrain. Set before any benchmark result existed."
+    },
+    "role_weights": {
+      "product": 1.0,
+      "amine": 1.0,
+      "aldehyde": 1.0,
+      "isocyanide": 1.0
+    },
+    "role_weights_are_not_fitted": true,
+    "prior_variance": 1.0,
+    "noise_variance": 1.0,
+    "hyperparameters_held_fixed_across_every_arm": true
+  },
+  "acquisition": {
+    "objective": "greedy budgeted maximisation of value_weight * normalised_conservative_bound + (1 - value_weight) * normalised_variance_reduction_over_target, divided by synthetic cost",
+    "value_weight": 0.5,
+    "activity_floor_quantile": 0.5,
+    "activity_floor_rationale": "A hard filter applied before any trade-off, so exploration can never mean synthesising a design the surrogate expects to fail. Expressed as a quantile of the feasible pool so it does not depend on the endpoint scale.",
+    "cost_normalised": true,
+    "cost_definition": "number of precursor preparations required before the final Ugi assembly",
+    "target_population": "the route-complete, prediction-supported generated population; information is measured over the designs we would actually want to rank, not over the whole space",
+    "batch_selected_jointly": true,
+    "greedy_rather_than_exact_because": "the information term is recomputed against a posterior that changes as the batch grows, and a batch of a dozen from a pool of thousands does not warrant an exact combinatorial solve"
+  },
+  "retrospective_benchmark": {
+    "corpus": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be",
+      "records": 1100,
+      "endpoint": "expt_Hela"
+    },
+    "split": "component_family_aware",
+    "split_rationale": "A random split would let a tail seen in the seed set reappear in the pool, which inflates every acquisition arm equally and hides the differences that matter.",
+    "held_role": "aldehyde",
+    "seed_fraction": 0.2,
+    "rounds": 5,
+    "batch_size": 16,
+    "budget_per_round": 32.0,
+    "seeds": [
+      20260815,
+      20260816,
+      20260817,
+      20260818,
+      20260819
+    ],
+    "arms": [
+      "random",
+      "top_mean",
+      "top_lower_bound",
+      "uncertainty",
+      "component_diversity",
+      "reaction_factorized"
+    ],
+    "every_arm_sees_the_same_pool_budget_and_batch_size": true,
+    "metrics": [
+      "best_activity_found_by_round",
+      "top_decile_hits_found",
+      "held_family_rmse",
+      "held_family_spearman",
+      "coverage90_of_the_credible_bound",
+      "posterior_variance_over_target",
+      "component_role_coverage",
+      "total_synthetic_cost"
+    ]
+  },
+  "gate": {
+    "status": "frozen_before_results",
+    "decision_rule": "Proceed to a second synthesised library only if the reaction-factorized arm beats BOTH score-only ranking and component-diversity selection on the primary criterion, on a majority of seeds, without exceeding the fixed synthetic budget.",
+    "primary_criterion": "held_family_spearman after the final round",
+    "secondary_criterion": "top_decile_hits_found after the final round",
+    "must_beat": [
+      "top_lower_bound",
+      "component_diversity"
+    ],
+    "majority_of_seeds": 3,
+    "minimum_margin_spearman": 0.03,
+    "must_not_regress": {
+      "top_decile_hits_found": "no worse than the best baseline minus 1",
+      "total_synthetic_cost": "within the frozen per-round budget"
+    },
+    "if_the_gate_fails": "Stop. Report the negative result and do not synthesise a second library. A second library exists to test the acquisition method, not to decorate the paper.",
+    "no_retuning_after_seeing_results": "value_weight, activity_floor_quantile, role_weights, prior_variance and noise_variance are frozen by this file. Changing any of them after seeing benchmark output invalidates the gate and requires a new versioned config."
+  },
+  "library_plan": {
+    "library_1": {
+      "what": "the existing frozen 40-candidate panel, 34 HIGH plus 6 LOW",
+      "status": "unchanged, not superseded, not reranked",
+      "question": "can the original FORGE pipeline produce experimentally useful ionizable lipids?"
+    },
+    "library_2": {
+      "what": "a batch selected by the acquisition policy above from a fresh generated pool",
+      "status": "not generated; conditional on the gate passing",
+      "selection": "algorithmic, with a prespecified chemistry feasibility or safety veto only, no intuition reranking after the candidates are seen",
+      "pool_construction": "union of a broad-prior draw and a support-enriched draw, deduplicated, then the same admission, support, route and envelope filters, so the panel does not depend on one arbitrary proposal distribution",
+      "question": "does product-component-aware batch design collect more informative data without giving up plausible activity or feasibility?"
+    },
+    "library_3": {
+      "what": "a small confirmatory batch selected after Library 1 and 2 measurements update the surrogate",
+      "status": "not designed; conditional on Round 1 measurements existing",
+      "note": "only a design round that actually depends on prior experimental results may be described as closed-loop"
+    }
+  },
+  "scope": {
+    "generator_retrained": false,
+    "generator_guided_by_activity": false,
+    "applicability_boundary_changed": false,
+    "conformal_calibration_changed": false,
+    "existing_panel_changed": false,
+    "wet_lab_outcomes_used": false,
+    "oracle_calls": 0
+  },
+  "nonclaims": [
+    "A variance reduction is not a discovery.",
+    "A credible bound from this Gaussian surrogate is not the distribution-free conformal guarantee used for candidate ranking elsewhere in the project.",
+    "Route completeness constrains which designs are affordable to measure; it is not evidence that a synthesis will succeed.",
+    "Passing the retrospective gate does not establish that the method works prospectively."
+  ]
+}

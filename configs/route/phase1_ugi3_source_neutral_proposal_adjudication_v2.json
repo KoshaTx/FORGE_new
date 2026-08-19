@@ -1,0 +1,62 @@
+{
+  "schema_version": "phase1_ugi3_source_neutral_proposal_adjudication_config.v2",
+  "status": "frozen_after_v1_circular_family_gate_diagnosis",
+  "task": "Adjudicate Graph2Edits proposals proposal-first: infer candidate programs from independently executed chemistry, use reaction families only to retrieve source evidence, and require exact current closure of every upstream leaf",
+  "inputs": {
+    "raw_proposal_ledger": {
+      "path": "results/phase1/graph2edits_full_support_one_gap_v1/proposal_ledger.jsonl.gz",
+      "sha256": "45b656c0ac7a535575d0307466536f67636b225b8b1be4467877dfc2ba0e59c0"
+    },
+    "semantic_proposal_ledger": {
+      "path": "results/phase1/graph2edits_full_support_semantic_v1/semantic_ledger.jsonl.gz",
+      "sha256": "470ec056a51e135f4164f879220d8358a1d0288c244dc97af141fa47d120c10f"
+    },
+    "route_assessment_ledger": {
+      "path": "results/phase1/ugi_route_aware_panel_feasibility_v3/route_assessment_ledger.jsonl.gz",
+      "sha256": "c85075988138d971b27a5c9169338a18fd19169066c5cd9e18d499a4b08b2b47"
+    },
+    "exact_source_routes": {
+      "path": "results/m0_09/agile_component_routes.json",
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "precursor_leaf_audit_config": {
+      "path": "configs/route/phase1_ugi3_precursor_leaf_closure_audit_v1.json",
+      "sha256": "5caa0650f5ac83da441cf4a831d6c5cf0d1c91874591a863a9b0d67125827c94"
+    },
+    "invalidated_v1_result": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v1/result.json",
+      "sha256": "232a0f0f54d46665f1eead3463f59d599a9de71802538be8cdafe2daab1721f3"
+    },
+    "invalidated_v1_ledger": {
+      "path": "results/phase1/ugi3_source_neutral_proposal_adjudication_v1/adjudication_ledger.jsonl.gz",
+      "sha256": "6422f0abbc314d269c4163675cdfe65ca292e3d3b3c30b7a36065bfacb3d86f0"
+    }
+  },
+  "scope_policy": {
+    "morgan_radius": 2,
+    "morgan_bits": 2048,
+    "minimum_pair_similarity_floor": 0.55,
+    "similarity_threshold_derivation": "maximum of the frozen floor and the minimum leave-one-source-route-out nearest-pair similarity",
+    "numeric_features_must_remain_inside_source_min_max": true,
+    "categorical_features_must_be_source_observed": true,
+    "exact_source_pairs_are_always_in_scope": true,
+    "proposal_model_score_used": false,
+    "proposal_family_label_used": false,
+    "legacy_program_family_used": false,
+    "source_family_scope_is_success_probability": false
+  },
+  "qualification_policy": {
+    "proposal_first_family_inference": true,
+    "retain_all_graph_consistent_proposals_before_evidence_adjudication": true,
+    "require_expected_final_step_forward_reconstruction": true,
+    "require_source_bounded_pair_scope": true,
+    "require_at_least_two_exact_source_pairs": true,
+    "require_all_projected_terminal_leaves_current": true,
+    "qualified_family_route_value": 0.75,
+    "qualified_family_route_value_is_success_probability": false,
+    "raw_proposal_may_create_evidence": false,
+    "family_name_mismatch_may_reject_graph_consistent_route": false,
+    "new_family_hypothesis_may_close_route": false
+  },
+  "output_directory": "results/phase1/ugi3_source_neutral_proposal_adjudication_v2"
+}

@@ -1,0 +1,232 @@
+{
+  "artifacts": {
+    "source_platform_registry_coverage.csv.gz": {
+      "bytes": 19089,
+      "path": "results/m0_04/source_platform_registry_coverage.csv.gz",
+      "sha256": "98f6278d99219e28f3f3cb2567df833839e5431c44454be308bebd67f091126a"
+    }
+  },
+  "claims_boundary": {
+    "exact_registry_decomposition_is_not_a_reported_source_route": true,
+    "heldout_products_are_never_harvested_into_the_component_pool": true,
+    "motif_similarity_is_not_exact_product_coverage": true,
+    "not_a_model_generalization_benchmark": true,
+    "purpose": "cross-platform reaction-registry coverage and leakage audit"
+  },
+  "decision": {
+    "heldout_components_added_to_pool": false,
+    "model_built": false,
+    "source_holdout_is_model_generalization_benchmark": false,
+    "source_holdout_is_registry_coverage_and_leakage_audit": true
+  },
+  "generated_utc": "2026-07-29T21:39:37+00:00",
+  "inputs": [
+    {
+      "asset": "m0_04_source_platform_registry_audit.json",
+      "bytes": 3044,
+      "sha256": "0a22e7d8ba85aece64cf2436f498876d8419b80233cba592457d74e3e767d437"
+    },
+    {
+      "asset": "component_pool.csv.gz",
+      "bytes": 488780,
+      "sha256": "79ec52aac2fc4a3dff1b13d7df666cb295d6380981d8d8c2566c68693b7b9e48"
+    },
+    {
+      "asset": "m0_04_r1_prime_audit.json",
+      "bytes": 2012,
+      "sha256": "b92b6b0d95e957e2df2e178fcb2973a299130cc595a5e4b07e676b50ac68a5ef"
+    },
+    {
+      "asset": "m0_04_result.json",
+      "bytes": 49982,
+      "sha256": "f649f191ef6d1ea7c1885fc9b9422dcc0c819fb6f0935cde8117a09e82d4e125"
+    },
+    {
+      "asset": "qualified_reaction_families_v1.json",
+      "bytes": 31686,
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    {
+      "asset": "qualified_reactions_v1.json",
+      "bytes": 5116,
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    {
+      "asset": "r0_fold_assignments.csv",
+      "bytes": 3934182,
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    {
+      "asset": "r0_observed_real_structures.csv",
+      "bytes": 19633160,
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    }
+  ],
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_04_source_platform_registry_audit.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "platforms": {
+      "jl_2024": {
+        "exact_decomposition_candidates_by_reaction": {},
+        "heldout_structures": 623,
+        "products_with_exact_decomposition_by_reaction": {},
+        "products_with_exact_registered_decomposition": 0,
+        "products_with_fully_training_pool_supported_decomposition": 0,
+        "products_without_exact_registered_decomposition": 623,
+        "registry_interpretation": "no_exact_registered_decomposition",
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 146,
+          "epoxide_opening_amine:invalid_reactant": 105,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 2120
+        },
+        "reported_final_assembly": {
+          "description": "amine-aldehyde-alkyne A3 coupling",
+          "doi": "10.1186/s12951-024-02919-1",
+          "pmid": "39497197",
+          "status": "primary_source_verified"
+        },
+        "total_exact_registered_decompositions": 0,
+        "unique_missing_training_components": 0,
+        "unique_missing_training_components_by_reaction_role": {}
+      },
+      "lm_2019_lm_3cr": {
+        "exact_decomposition_candidates_by_reaction": {
+          "amide_coupling_acid_amine": 900,
+          "aza_michael_amine_acrylate": 72,
+          "reductive_amination_amine_aldehyde": 972
+        },
+        "heldout_structures": 1080,
+        "products_with_exact_decomposition_by_reaction": {
+          "amide_coupling_acid_amine": 900,
+          "aza_michael_amine_acrylate": 72,
+          "reductive_amination_amine_aldehyde": 711
+        },
+        "products_with_exact_registered_decomposition": 900,
+        "products_with_fully_training_pool_supported_decomposition": 0,
+        "products_without_exact_registered_decomposition": 180,
+        "registry_interpretation": "alternative_registered_decomposition_exists_but_training_components_are_missing",
+        "rejected_reverse_outcomes": {
+          "reductive_amination_amine_aldehyde:invalid_reactant": 2700
+        },
+        "reported_final_assembly": {
+          "description": "isocyanide-mediated amine-ketone-isocyanide three-component reaction",
+          "doi": "10.1038/s41587-019-0247-3",
+          "pmid": "31570898",
+          "status": "primary_source_verified"
+        },
+        "total_exact_registered_decompositions": 1944,
+        "unique_missing_training_components": 527,
+        "unique_missing_training_components_by_reaction_role": {
+          "amide_coupling_acid_amine:amine_head": 6,
+          "amide_coupling_acid_amine:carboxylic_acid_tail": 108,
+          "aza_michael_amine_acrylate:alkyl_acrylate_or_acrylamide_tail": 1,
+          "aza_michael_amine_acrylate:amine_head": 72,
+          "reductive_amination_amine_aldehyde:aldehyde_tail": 96,
+          "reductive_amination_amine_aldehyde:amine_head": 244
+        }
+      },
+      "sx_2025": {
+        "exact_decomposition_candidates_by_reaction": {
+          "amide_coupling_acid_amine": 87,
+          "carbamate_amine_chloroformate": 3,
+          "disulfide_coupling": 8,
+          "reductive_amination_amine_aldehyde": 83,
+          "urea_amine_isocyanate": 2
+        },
+        "heldout_structures": 130,
+        "products_with_exact_decomposition_by_reaction": {
+          "amide_coupling_acid_amine": 80,
+          "carbamate_amine_chloroformate": 2,
+          "disulfide_coupling": 3,
+          "reductive_amination_amine_aldehyde": 80,
+          "urea_amine_isocyanate": 1
+        },
+        "products_with_exact_registered_decomposition": 81,
+        "products_with_fully_training_pool_supported_decomposition": 0,
+        "products_without_exact_registered_decomposition": 49,
+        "registry_interpretation": "alternative_registered_decomposition_exists_but_training_components_are_missing",
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 110,
+          "amide_coupling_acid_amine:role_policy": 5,
+          "aza_michael_amine_acrylate:invalid_reactant": 2,
+          "carbamate_amine_chloroformate:invalid_reactant": 1,
+          "epoxide_opening_amine:invalid_reactant": 5,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 562,
+          "reductive_amination_amine_aldehyde:role_policy": 6,
+          "ugi_3cr_agile:invalid_reactant": 77,
+          "urea_amine_isocyanate:invalid_reactant": 2,
+          "urea_amine_isocyanate:role_policy": 2
+        },
+        "reported_final_assembly": {
+          "description": "not assigned from molecular graph alone",
+          "doi": "10.1038/s41551-025-01480-y",
+          "pmid": "40796944",
+          "status": "source_route_audit_pending"
+        },
+        "total_exact_registered_decompositions": 183,
+        "unique_missing_training_components": 200,
+        "unique_missing_training_components_by_reaction_role": {
+          "amide_coupling_acid_amine:amine_head": 13,
+          "amide_coupling_acid_amine:carboxylic_acid_tail": 80,
+          "carbamate_amine_chloroformate:amine_head": 2,
+          "carbamate_amine_chloroformate:chloroformate_tail": 3,
+          "disulfide_coupling:thiol_head_or_tail": 5,
+          "disulfide_coupling:thiol_tail": 5,
+          "reductive_amination_amine_aldehyde:aldehyde_tail": 15,
+          "reductive_amination_amine_aldehyde:amine_head": 74,
+          "urea_amine_isocyanate:amine_head": 1,
+          "urea_amine_isocyanate:isocyanate_tail": 2
+        }
+      },
+      "xh_2025": {
+        "exact_decomposition_candidates_by_reaction": {
+          "amide_coupling_acid_amine": 10,
+          "reductive_amination_amine_aldehyde": 260
+        },
+        "heldout_structures": 500,
+        "products_with_exact_decomposition_by_reaction": {
+          "amide_coupling_acid_amine": 10,
+          "reductive_amination_amine_aldehyde": 250
+        },
+        "products_with_exact_registered_decomposition": 250,
+        "products_with_fully_training_pool_supported_decomposition": 0,
+        "products_without_exact_registered_decomposition": 250,
+        "registry_interpretation": "alternative_registered_decomposition_exists_but_training_components_are_missing",
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:role_policy": 20,
+          "aza_michael_amine_acrylate:invalid_reactant": 40,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 1400,
+          "reductive_amination_amine_aldehyde:role_policy": 40,
+          "ugi_3cr_agile:no_exact_reconstruction": 10
+        },
+        "reported_final_assembly": {
+          "description": "amine or thiol addition to dialkyl maleates",
+          "doi_published_update": "10.1073/pnas.2528144123",
+          "pmid_preprint": "40060499",
+          "pmid_published_update": "42190011",
+          "status": "primary_source_verified"
+        },
+        "total_exact_registered_decompositions": 270,
+        "unique_missing_training_components": 201,
+        "unique_missing_training_components_by_reaction_role": {
+          "amide_coupling_acid_amine:amine_head": 10,
+          "amide_coupling_acid_amine:carboxylic_acid_tail": 10,
+          "reductive_amination_amine_aldehyde:aldehyde_tail": 171,
+          "reductive_amination_amine_aldehyde:amine_head": 10
+        }
+      }
+    },
+    "products_with_exact_registered_decomposition": 1231,
+    "products_with_fully_training_pool_supported_decomposition": 0,
+    "source_study_heldout": 2333
+  },
+  "task": "M0-04 source-platform reaction-registry coverage addendum"
+}

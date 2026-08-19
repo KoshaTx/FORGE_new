@@ -1,0 +1,162 @@
+\documentclass[10pt,letterpaper]{article}
+
+% Match the compact single-column LaTeX proportions of the Homological
+% Flows reference while retaining a standard US-letter manuscript page.
+\usepackage[letterpaper,margin=1.0in]{geometry}
+% Built with xelatex so the document can use a system font. Avenir Next is a humanist
+% sans with a large x-height, chosen for extended reading rather than for display.
+% To change face, edit \setsansfont below. To return to a pdflatex build, restore
+% lmodern/fontenc/inputenc here and switch the Makefile back to pdflatex.
+\usepackage{fontspec}
+\setsansfont{Avenir Next}[
+  UprightFont = * Regular,
+  BoldFont    = * Demi Bold,
+  ItalicFont  = * Italic,
+  BoldItalicFont = * Demi Bold Italic,
+  Scale = 0.96
+]
+\setmonofont{Menlo}[Scale=0.86]
+% Body text is set sans-serif to match the headings. Journals conventionally set body
+% text in a serif face, so revert this line before submission if the target requires it.
+\renewcommand{\familydefault}{\sfdefault}
+% Protrusion only. Font expansion stretches glyphs horizontally to help justification,
+% which is invisible on a narrow face like Latin Modern but reads as smeared on a wide
+% humanist one such as Avenir Next.
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+% calc supplies \real, which pandoc emits when computing proportional column widths.
+% Required by the supplementary tables; without it pdflatex aborts on the first one.
+\usepackage{calc}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{hyperref}
+
+\definecolor{ForgeInk}{HTML}{17191D}
+\definecolor{ForgeMuted}{HTML}{555A62}
+\definecolor{ForgePanel}{HTML}{F0F1F2}
+\definecolor{ForgePlaceholder}{HTML}{FFF8F8}
+\definecolor{ForgePlaceholderRule}{HTML}{D45B65}
+\definecolor{ForgePlaceholderText}{HTML}{9C3F49}
+
+\hypersetup{
+  hidelinks,
+  pdfauthor={Author list to be finalized},
+  pdftitle={Generative design of synthesizable ionizable lipids for mRNA delivery}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.05em minus 0.03em}
+\setlength{\emergencystretch}{1em}
+\setstretch{1.15}
+\raggedbottom
+\clubpenalty=9000
+\widowpenalty=9000
+\displaywidowpenalty=9000
+
+% Nature Biotechnology does not number section or subsection headings.
+\setcounter{secnumdepth}{0}
+\makeatletter
+\newcommand{\forgeneedspace}[1]{%
+  \par
+  \begingroup
+  \@tempdima=#1\relax
+  \ifdim\pagegoal<\maxdimen
+    \@tempdimb=\pagegoal
+    \advance\@tempdimb by -\pagetotal
+    \ifdim\@tempdima>\@tempdimb\newpage\fi
+  \fi
+  \endgroup}
+\renewcommand\section{\forgeneedspace{8\baselineskip}\@startsection{section}{1}{\z@}%
+  {-1.7ex \@plus -0.4ex \@minus -0.2ex}%
+  {0.7ex \@plus 0.2ex}%
+  {\normalfont\sffamily\bfseries\Large\color{ForgeInk}}}
+\renewcommand\subsection{\forgeneedspace{8\baselineskip}\@startsection{subsection}{2}{\z@}%
+  {-1.25ex \@plus -0.3ex \@minus -0.15ex}%
+  {0.45ex \@plus 0.15ex}%
+  {\normalfont\sffamily\bfseries\large\color{ForgeInk}}}
+\renewcommand\subsubsection{\forgeneedspace{6\baselineskip}\@startsection{subsubsection}{3}{\z@}%
+  {-1.0ex \@plus -0.2ex \@minus -0.1ex}%
+  {0.3ex \@plus 0.1ex}%
+  {\normalfont\sffamily\bfseries\small\color{ForgeInk}}}
+\makeatother
+
+\pagestyle{plain}
+
+\captionsetup{
+  font={small,stretch=1.05},
+  labelfont={bf,sf},
+  textfont={sf},
+  justification=raggedright,
+  singlelinecheck=false,
+  skip=7pt
+}
+\floatplacement{figure}{htbp}
+
+\setlist[itemize]{leftmargin=1.25em,itemsep=0.15em,topsep=0.25em}
+\setlist[enumerate]{leftmargin=1.40em,itemsep=0.15em,topsep=0.25em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\newsavebox{\openingpanelbox}
+\newenvironment{openingpanel}
+  {\par\noindent\begin{lrbox}{\openingpanelbox}%
+   \begin{minipage}{0.895\textwidth}\raggedright}
+  {\end{minipage}\end{lrbox}%
+   \begin{center}
+   \begin{tikzpicture}
+   \node[fill=ForgePanel,rounded corners=4mm,inner xsep=9mm,inner ysep=6mm]
+     {\usebox{\openingpanelbox}};
+   \end{tikzpicture}
+   \end{center}
+   \vspace{0.1em}}
+
+\newsavebox{\forgequotebox}
+\renewenvironment{quote}
+  {\par\begin{lrbox}{\forgequotebox}%
+   \begin{minipage}{0.91\textwidth}\small\setstretch{1.05}}
+  {\end{minipage}\end{lrbox}%
+   \begin{center}
+   \begin{tikzpicture}
+   \node[fill=ForgePlaceholder,draw=ForgePlaceholderRule,line width=0.75pt,
+         rounded corners=1.5mm,inner xsep=4mm,inner ysep=3mm]
+     {\usebox{\forgequotebox}};
+   \end{tikzpicture}
+   \end{center}\par}
+
+\newenvironment{forgeplaceholdertext}
+  {\par\begingroup\small\setstretch{1.15}\color{ForgePlaceholderText}%
+   \setlength{\leftskip}{0.6em}\setlength{\rightskip}{0.6em}\noindent}
+  {\par\endgroup\vspace{0.1em}}
+
+% The title is typeset here with a manual line break, so it cannot come from the
+% markdown directly. Keep it in step with the H1 in the markdown and the pdftitle above.
+\newcommand{\ForgeTitle}{Generative design of synthesizable\\ionizable lipids for mRNA delivery}
+
+\begin{document}
+
+\begin{openingpanel}
+{\setstretch{1.0}\sffamily\bfseries\fontsize{18}{21}\selectfont\color{ForgeInk} \ForgeTitle\par}
+\vspace{0.48em}
+{\sffamily\bfseries\normalsize $authorline$\par}
+{\sffamily\footnotesize\color{ForgeMuted}\setstretch{1.10} $affiliationline$\par}
+\vspace{0.82em}
+% The lua filter consumes the Abstract heading and passes only the paragraph body
+% through, so the label is set here rather than in the markdown. Do not write a
+% template variable inside a comment: pandoc substitutes it before LaTeX sees the
+% comment, and a multi-line expansion then escapes the comment and prints.
+% Matches the \section style exactly so it reads as a peer of Introduction below it.
+{\normalfont\sffamily\bfseries\Large\color{ForgeInk} Abstract\par}
+\vspace{0.30em}
+{\small\setstretch{1.20}$abstract$\par}
+\end{openingpanel}
+
+$body$
+
+\end{document}

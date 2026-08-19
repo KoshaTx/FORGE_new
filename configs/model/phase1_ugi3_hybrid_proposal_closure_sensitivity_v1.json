@@ -1,0 +1,39 @@
+{
+  "schema_version": "forge.ugi3_hybrid_proposal_closure_sensitivity_config.v1",
+  "status": "frozen_after_complementary_residual_search",
+  "task": "Quantify the non-authoritative checkpoint contrast ceiling of the benchmarked Graph2Edits plus residual AiZynthFinder cascade",
+  "inputs": {
+    "support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "graph2edits_component_ledger": {
+      "path": "results/phase1/ugi3_proposal_aware_checkpoint_contrast_v1/component_ledger.jsonl.gz",
+      "sha256": "cafbcc89bf03c2f3dd09745e0d7a14a80b8399593194a62d1ac2acaffb2e0d16"
+    },
+    "aizynthfinder_result": {
+      "path": "results/phase1/aizynthfinder_checkpoint_residual_v1/result.json",
+      "sha256": "4fce0428a4eeee604a3c0a17cad0e198054d12d43cf3be92c4036d92a4442ebc"
+    },
+    "aizynthfinder_ledger": {
+      "path": "results/phase1/aizynthfinder_checkpoint_residual_v1/route_hypotheses.jsonl.gz",
+      "sha256": "9ddc825d48a4648c3a113ffe970251b32d1881944c3fe760404f2a116c1c3373"
+    }
+  },
+  "population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6],
+    "grouping": "checkpoint and frozen morphology program index"
+  },
+  "scope_guards": {
+    "counterfactual_is_route_evidence": false,
+    "public_stock_solution_is_current_procurement_evidence": false,
+    "proposal_score_used": false,
+    "family_label_used_as_gate": false,
+    "gates_relaxed": false,
+    "candidate_selection": false
+  },
+  "output_directory": "results/phase1/ugi3_hybrid_proposal_closure_sensitivity_v1"
+}

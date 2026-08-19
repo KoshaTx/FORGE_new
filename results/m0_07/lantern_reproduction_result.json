@@ -1,0 +1,158 @@
+{
+  "artifact": {
+    "bytes": 31488,
+    "path": "results/m0_07/lantern_reproduction_predictions.csv.gz",
+    "sha256": "6740d1abeca4ccf97a7a026ef07cf970338721e28eb8e76d05c18389d256141e"
+  },
+  "configuration": {
+    "bytes": 3108,
+    "path": "configs/bio/m0_07_lantern_reproduction.json",
+    "sha256": "d057935745165164ac20eb51b7d1c73683eae367791cf14cd611b272d311982f"
+  },
+  "generated_utc": "2026-07-30T04:40:00Z",
+  "inputs": {
+    "lantern_circular_features": {
+      "bytes": 18132419,
+      "path": "data/vendor/lantern_agile_circular.pkl",
+      "sha256": "3a1331eeba6d16ccc9b12e53f68f957a1726a4b3c6ef4944cf97b6e353a0d619"
+    },
+    "lantern_curated_hela": {
+      "bytes": 80719,
+      "path": "data/vendor/lantern_agile_curated.csv",
+      "sha256": "d0ecfd94ec40a7f013af546113520175e70f78045af1798673c2680fe6f23c54"
+    },
+    "lantern_expert_features": {
+      "bytes": 1954714,
+      "path": "data/vendor/lantern_agile_expert.pkl",
+      "sha256": "23ba1fceaec5f10480ff7d14734d1ec70901f2e7680c129d88ee64405f9285a7"
+    },
+    "lantern_random_split": {
+      "bytes": 3341,
+      "path": "data/vendor/lantern_agile_random_split.npy",
+      "sha256": "72d7cb6d5769c8b45f6634c530547c51147532539cfa2e728a7d630f24d699e8"
+    },
+    "lantern_released_mlp": {
+      "bytes": 4500961,
+      "path": "data/vendor/lantern_agile_mlp.pth",
+      "sha256": "f419bfce435f1a08750b5d06902de9941b23343aa90d55aaefd6b3b2fa703382"
+    }
+  },
+  "metrics": {
+    "test": {
+      "mae": 1.10936311197,
+      "pearson_r": 0.906292086073,
+      "r2": 0.819810204652,
+      "rmse": 1.41641700652,
+      "rows": 110,
+      "spearman_rho": 0.900241191984
+    },
+    "train": {
+      "mae": 0.479510721891,
+      "pearson_r": 0.981600625972,
+      "r2": 0.962570511221,
+      "rmse": 0.628591255596,
+      "rows": 880,
+      "spearman_rho": 0.975494803067
+    },
+    "validation": {
+      "mae": 1.16180361852,
+      "pearson_r": 0.875459852477,
+      "r2": 0.765403652473,
+      "rmse": 1.69477502289,
+      "rows": 110,
+      "spearman_rho": 0.843545296756
+    }
+  },
+  "policy": {
+    "calibration_claim_allowed": false,
+    "interpretation": "The released checkpoint score reproduces LANTERN's committed implementation. Because the source scaler is fitted to all features and labels before splitting, the score contains test-information leakage and cannot select the FORGE oracle.",
+    "oracle_model_frozen": false,
+    "raw_checkpoint_score_compared_with_train_only_matrix": true,
+    "role": "released_checkpoint_reproduction_diagnostic_only",
+    "selection_eligible": false,
+    "untrusted_pickle_globals_allowlisted": true
+  },
+  "randomness": {
+    "deterministic_algorithms": true,
+    "inference_device": "cpu",
+    "numeric_serialization_significant_digits": 12,
+    "torch_threads": 1,
+    "training_performed": false
+  },
+  "reproduction_contract": {
+    "architecture": {
+      "activation": "ReLU",
+      "checkpoint_loading": "torch_weights_only_true",
+      "hidden_dimensions": [
+        200,
+        300,
+        500,
+        500,
+        300,
+        200
+      ],
+      "output_count": 1
+    },
+    "checkpoint_training_repeated": false,
+    "feature_dimensions": {
+      "circular": 2048,
+      "combined": 2258,
+      "expert": 210
+    },
+    "feature_matrix_sha256": "f3d49e3ef8b50fb0a690acd267283a87054911ccffa5694c4a7c90f1ef0241e6",
+    "preprocessing": {
+      "feature_order": [
+        "circular",
+        "expert"
+      ],
+      "feature_range": [
+        -1,
+        1
+      ],
+      "fit_scope": "all_1100_features_and_hela_labels_before_split",
+      "leakage_status": "test_information_leakage",
+      "scaler": "MinMaxScaler",
+      "source_faithful": true
+    },
+    "split_counts": {
+      "test": 110,
+      "train": 880,
+      "validation": 110
+    }
+  },
+  "schema_version": "m0_07_lantern_reproduction.v1",
+  "software": {
+    "numpy": "2.4.2",
+    "pandas": "3.0.1",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "scikit_learn": "1.8.0",
+    "torch": "2.11.0"
+  },
+  "source": {
+    "commit": "11240f29ef92323649ae60d177b21df77e2d428b",
+    "files": {
+      "config/train_config.yaml": {
+        "git_blob_sha1": "82b29e60601a50db8bbb2bc90ade5e0039004066"
+      },
+      "models/neural_models.py": {
+        "git_blob_sha1": "f97cf78d79baa98400781aa32592edc7ce201df4"
+      },
+      "models/wrappers.py": {
+        "git_blob_sha1": "4b515fa49ebf4b98cfa81f0d1c8055553d36a194"
+      },
+      "pipeline/preprocess.py": {
+        "git_blob_sha1": "4c41a5efa6e486e10552871ea9ec90a1f12d74cd"
+      },
+      "pipeline/trainer.py": {
+        "git_blob_sha1": "3a220d28f5b434ac6cd1f92eb4e0ff901df2ccf4"
+      },
+      "utils/data_utils.py": {
+        "git_blob_sha1": "660ab644c746d605d23a6b8e3cdef14452ac196b"
+      }
+    },
+    "repository": "https://github.com/AsalMehradfar/LANTERN"
+  },
+  "status": "released_checkpoint_reproduced_diagnostic_only",
+  "task": "M0-07"
+}

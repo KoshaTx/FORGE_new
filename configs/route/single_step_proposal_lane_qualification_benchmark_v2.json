@@ -1,0 +1,70 @@
+{
+  "schema_version": "forge.single_step_proposal_lane_qualification_benchmark.v2",
+  "status": "frozen_manifest_bound_benchmark_not_executed",
+  "frozen_policy": {
+    "path": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+    "sha256": "2211c468a6ffec619604a583bce62349baa8385a2e7d41680fd57d2bd48fc84e"
+  },
+  "manifest_builder_contract": {
+    "path": "configs/route/single_step_proposal_lane_qualification_manifest_v1.json",
+    "sha256": "1b6886fca14bc585a9e857f5819592570d0f461c400a836b8987c692f2ef5e84"
+  },
+  "development_target_manifest": {
+    "lane_targets": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/lane_targets.json.gz",
+      "sha256": "60b1316b43e0074b5662f18d77cf1c17ee566d1b981642890ccc7904fd484529"
+    },
+    "scoring_truth_not_lane_input": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/scoring_truth.json.gz",
+      "sha256": "764e253d22aa523ffc0f099bd7773770f851ff901f8101964ddbebb516012a32"
+    },
+    "local_source_visibility_masks": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/visibility_masks.json.gz",
+      "sha256": "039874d401363e8ab682dc9f10f6837c862d8acdc9c1136d165d596b2a52958c"
+    },
+    "materialization_receipt": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/result.json",
+      "sha256": "0a39e09b8bdd662e0821b58662d41c9f0bea600ebd9617123b52f513db0865ff"
+    }
+  },
+  "manifest_summary": {
+    "selection_seed": 20260830,
+    "target_count": 120,
+    "constitutional_unique_targets": 120,
+    "known_route_truth_records": 36,
+    "known_exact_l2_primary_targets": 18,
+    "held_reaction_family_primary_targets": 18,
+    "valid_connected_adversarial_controls": 12,
+    "sealed_or_private_inputs_accessed": false
+  },
+  "forward_verifier_contract": {
+    "source": "frozen_policy.forward_verifier_resolution",
+    "ugi_l1_registry_may_verify_l2_proposals": false,
+    "graph2edits_output_may_select_or_define_verifier": false,
+    "independently_try_all_in_scope_admitted_transform_role_assignments": true,
+    "no_verifier_or_ambiguity_is_fail_closed": true
+  },
+  "activation": {
+    "benchmark_execution_authorized": false,
+    "graph2edits_backend_active": false,
+    "hybrid_production_lane_active": false,
+    "strict_lane_remains_production_default": true,
+    "candidate_selection_authorized": false
+  },
+  "prerequisite_gates": {
+    "development_target_manifest_frozen": true,
+    "institutional_license_review_complete": false,
+    "isolated_runtime_lock_frozen": false,
+    "ten_repeat_byte_identity_on_production_device": false,
+    "all_gates_passed": false
+  },
+  "scope_guards": {
+    "graph2edits_executed": false,
+    "proposal_lane_executed": false,
+    "route_evidence_created": false,
+    "v_syn_modified": false,
+    "production_planner_modified": false,
+    "sealed_holdout_accessed": false,
+    "candidate_selected": false
+  }
+}

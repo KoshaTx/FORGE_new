@@ -1,0 +1,50 @@
+{
+  "schema_version": "phase1_ugi_bounded_structural_envelope_census_config.v1",
+  "status": "frozen_before_nonselecting_bounded_envelope_census",
+  "scope": {
+    "read_only": true,
+    "valid_exact_l1_terminals_only": true,
+    "oracle_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "nonzero_guidance_execution": false,
+    "candidate_selection": false,
+    "fixed_head_diagnostic_only": true,
+    "open_mode_unchanged": true
+  },
+  "inputs": {
+    "applicability_ledger": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/generated_applicability.csv.gz",
+      "sha256": "ed12ac72362557072d14253d54675ad88c25d07cdc581491b99fa15b7452992f"
+    },
+    "envelope": {
+      "path": "results/phase1/ugi_bounded_structural_envelope_v1/envelope.json",
+      "sha256": "2caa3f95f8edb662f56bba881cedf54b398d4530e81bcd51489716f9a4ef7f94"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "generated_role_census_ledger": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/ledger.csv.gz",
+      "sha256": "1e2461769409f7c1286ab034f0701554911466d0f8848e7f7a9076ca6ce9616a"
+    },
+    "generated_role_census_result": {
+      "path": "results/phase1/ugi_generated_role_applicability_census_v1/result.json",
+      "sha256": "af84d3016cae0fe3296904e31dde8535abb265efa85cb2fddb24ece3bc3a8548"
+    },
+    "runner": {
+      "path": "scripts/phase1_census_ugi_bounded_structural_envelope.py",
+      "sha256": "f9df247e6c781e5007ecfe22dd47af923d333d430078073865f39106d88b7070"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_bounded_structural_envelope.py",
+      "sha256": "88b961b15e67719b340c2b545dbee00cfb4213088c6afde446c26de8904cc356"
+    },
+    "tests": {
+      "path": "tests/test_ugi_bounded_structural_envelope.py",
+      "sha256": "666787329fe7acecb285dd8fc812b83d206efb103f9f60ed4aef106d789e6d0a"
+    }
+  }
+}

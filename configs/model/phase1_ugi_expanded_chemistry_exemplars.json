@@ -1,0 +1,35 @@
+{
+  "schema_version": "phase1_ugi_expanded_chemistry_exemplars_config.v1",
+  "task": "Phase 1 fold-clean exact chemistry exemplars for expanded Ugi components",
+  "reaction_id": "ugi_3cr_agile",
+  "maximum_forward_outcomes": 100,
+  "inputs": {
+    "products": {
+      "path": "results/phase1/ugi_expanded_enumeration/products.csv.gz",
+      "sha256": "545b037272092a0875488e0f09ecbb4fe4ceac7feada88b63b1b6a66ef650962"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "policy": {
+    "selection": "deterministic_first_product_cover_within_each_frozen_family_fold",
+    "one_or_more_semantic_targets_per_component": true,
+    "uniform_product_row_sampling_allowed": false,
+    "component_ids_in_model_state": false,
+    "substructure_origin_inference_allowed": false,
+    "source_activity_labels_inherited": false
+  },
+  "outputs": {
+    "directory": "results/phase1/ugi_expanded_chemistry_exemplars"
+  }
+}

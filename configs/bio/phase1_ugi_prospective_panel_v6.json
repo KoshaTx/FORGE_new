@@ -1,0 +1,245 @@
+{
+  "schema_version": "phase1_ugi_prospective_panel.v6",
+  "status": "frozen_before_v6_selection",
+  "frozen_utc": "2026-08-06",
+  "authority": "docs/MANUSCRIPT_AUTHORITY.md section 22; user instruction 2026-08-06 to select a hit-rate-focused panel across the full eligible population",
+  "amends": "configs/bio/phase1_ugi_prediction_cohorts_v5.json (preserved unchanged)",
+  "preserves": "v1 through v5 configs and every v1 through v5 result artifact remain unmodified on disk. The v4 36-candidate and v5 40-candidate panels are retained as superseded selections.",
+  "pre_experimental_status": "Nothing has been ordered, no chemistry has been signed off, and no biological measurement exists. This is a pre-experimental protocol amendment and modifies no result.",
+
+  "purpose": "Select a prospective panel optimised for hit rate at the top of the predicted distribution, drawn from the entire eligible population rather than from one authority tier, with novelty and component diversity used as tie-breaks that do not sacrifice predicted potency.",
+
+  "what_changed_from_v5_and_why": {
+    "population": {
+      "v5": "Q drew only from the qualified_role_holdout tier (114 candidates); N and X drew from separately scored abstained pools.",
+      "v6": "The pool is every design carrying a calibrated lcb90 that passes all gates, across all authority tiers: 1,367 candidates.",
+      "why": "The v5 restriction was inherited from a cohort scheme organised around a single-aldehyde axis. It excluded 401 route-complete aldehyde-generalization candidates and 381 double-new-tail candidates that carry calibrated bounds and good scores, purely because no cohort had been defined to hold them."
+    },
+    "objective": {
+      "v5": "five evidence-class cohorts, each testing a different generalization regime",
+      "v6": "one high arm optimised for hit rate, plus a small tier-matched low arm",
+      "why": "The paper's claim is prospective enrichment at the top, not rank correlation across the full predicted range. Evidence tier is retained as a recorded attribute on every candidate and reported, but is no longer the cohort axis."
+    },
+    "diversity_rule": {
+      "v5": "whole-product Tanimoto ceiling 0.80",
+      "v6": "whole-product Tanimoto ceiling 0.95 plus at most 4 candidates per amine head",
+      "why": "0.80 was costing 1.78 in median predicted potency and pulling the floor from beating 74% of AGILE's measured library down to 27%, without buying aldehyde diversity (23 either way). The head cap carries the component-diversity principle onto the axis that actually matters."
+    }
+  },
+
+  "precedent": {
+    "source": "Xu et al., AGILE platform, Nature Communications 15:6305 (2024)",
+    "their_validation_selection": "15 candidates synthesised for the HeLa screen, ranked by ensemble mean minus standard deviation, stratified by headgroup and tail combination rather than taken straight off the top ranking. H9 was the standout of those 15. In vivo used 3 mice per group against MC3 and ALC-0315.",
+    "quoted": [
+      "To increase the diversity of selected candidates, we implement a ranking scheme that sorts candidate lipids by headgroups and tail combinations",
+      "The mean predicted values are then subtracted from the standard deviation, and the resulting predicted score is used to rank the candidates."
+    ],
+    "what_is_adopted": "the principle that component identity, not a fingerprint threshold, is the right diversity currency for this chemistry",
+    "what_is_not_adopted": "their round-robin across every headgroup. Reproduced here it yields 22 heads but a floor beating only 9% of their own measured library, because covering rare heads forces weak candidates onto the panel. That objective suits initial discovery with 15 slots; it does not suit a hit-rate panel.",
+    "comparability_note": "Our hit rate is compared against the base rate in AGILE's measured 1,100-product library, not against their validation hit rate, so the two selection rules need not match."
+  },
+
+  "eligible_population": {
+    "sources": [
+      "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+      "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz"
+    ],
+    "required": [
+      "terminal_chemical_admitted",
+      "oracle_scored with a parseable calibrated lcb90",
+      "absent from the 66,464-product train fold",
+      "inside the frozen physicochemical envelope",
+      "route-complete with at most 4 synthetic steps"
+    ],
+    "realised_size": 1367,
+    "tier_composition_of_the_pool": {
+      "exploratory_weak_absolute_aldehyde_generalization": 653,
+      "exploratory_simultaneous_exact_new_tails": 540,
+      "qualified_role_holdout": 114,
+      "exploratory_weak_absolute_head_generalization": 24,
+      "note": "Tiers carrying no conformal quantile (multiple_exact_new_roles, all_roles_exact_new) are excluded because lcb90 is undefined for them."
+    }
+  },
+
+  "ranking_statistic": {
+    "primary": "calibrated conformal lower bound lcb90 = oracle_mean - conformal_q90",
+    "why_not_raw_mean": "Measured: ranking by mean instead changes 9 of 34 selected candidates and gains 0.18 in median predicted potency, while dropping the lcb90 floor from 0.95 to 0.09. Not worth switching a statistic the project has used throughout.",
+    "what_lcb90_actually_encodes": "conformal_q90 takes only four values across the pool (3.915 n=119, 4.296 n=24, 5.309 n=671, 6.215 n=553). It is a calibration-stratum constant, not a per-candidate uncertainty. Within a stratum, ranking by lcb90 is identical to ranking by mean; across strata it penalises membership in a weakly calibrated region. That is the applicability signal, and it is the reason to keep it.",
+    "not_used": "ensemble standard deviation does not enter lcb90; median ensemble sd across the pool is 0.36"
+  },
+
+  "cohorts": {
+    "HIGH": {
+      "n": 34,
+      "membership": "eligible population, ranked by lcb90 descending",
+      "selection": [
+        "the first 12 are taken on score alone, subject only to the diversity rule",
+        "the remaining 22 prefer candidates absent from the AGILE enumerated library, subject to the same diversity rule",
+        "ties break on canonical product SMILES"
+      ],
+      "why_novelty_is_a_tiebreak_not_a_filter": "Measured: hard-screening the AGILE library breaks the panel. Only 19 of 114 qualified-holdout candidates survive it, the extrapolative cohort admits a candidate at conservative score -0.15, and the branched cohort cannot fill. Preferring novelty within the frozen ranking costs nothing and in fact improves the selection, because greedy diversity is order-dependent and the novelty ordering happens to block fewer downstream candidates.",
+      "purpose": "prospective hit rate at the top of the predicted distribution"
+    },
+    "LOW": {
+      "n": 6,
+      "membership": "eligible population restricted to the exploratory_weak_absolute_aldehyde_generalization tier, ranked by lcb90 ascending",
+      "tier_restriction_rationale": "Score stratum and evidence tier are confounded in the pool: no qualified-holdout or head-generalization candidate exists at low predicted score. Drawing controls from the same tier as the bulk of the high arm removes the alternative explanation that any high-versus-low difference reflects evidence class rather than predicted score.",
+      "purpose": "internal evidence that the ranking discriminates. Without it the only baseline is AGILE's measured library, which differs in laboratory, assay run and chemistry.",
+      "novelty": "novelty-preferring, same as HIGH; controls are not required to be novel"
+    }
+  },
+
+  "diversity_rule": {
+    "product_near_identity": {
+      "metric": "Tanimoto on Morgan fingerprints, radius 2, 2048 bits, complete products",
+      "maximum_pairwise": 0.95,
+      "scope": "applies across the whole panel, HIGH and LOW together",
+      "purpose": "exclude true near-duplicates only"
+    },
+    "component_cap": {
+      "amine_head": 4,
+      "rationale": "The head sets the ionizable amine's pKa and is the dominant activity determinant in the model's own saliency analysis, so it is the axis along which outcomes are least correlated."
+    },
+    "why_0_95_and_not_0_80": {
+      "measured_tradeoff": {
+        "0.80": {"median_predicted_mean": 7.29, "floor_beats_fraction_of_measured_library": 0.27, "heads": 17, "aldehydes": 23},
+        "0.95": {"median_predicted_mean": 9.07, "floor_beats_fraction_of_measured_library": 0.74, "heads": 12, "aldehydes": 23},
+        "1.00": {"median_predicted_mean": 10.39, "floor_beats_fraction_of_measured_library": 0.85, "heads": 9, "aldehydes": 23, "near_duplicate_pairs": 116}
+      },
+      "conclusion": "0.80 was buying no aldehyde diversity and costing substantial predicted potency. Removing the ceiling entirely produces 116 near-duplicate pairs, which would make the panel roughly nine effective experiments rather than 34.",
+      "statistical_basis": "What is being maximised is the probability of at least one hit, which depends on predicted potency and on how independent the outcomes are. Near-identical molecules have correlated outcomes and are redundant draws."
+    },
+    "fingerprint_limitation_accepted": "Binary folded Morgan fingerprints encode which local environments are present, not how many, so alkyl homologs of different chain length can score 1.0. Measured on the head pool: 30 pairs scored 1.000 while differing by 14 to 182 Da, only one of which was a genuine duplicate. The ceiling is left on this metric anyway because it errs toward over-exclusion, and for a panel that cannot be repeated, too strict is safer than too loose. The 0.95 setting limits the damage."
+  },
+
+  "shared_requirements": {
+    "exact_ugi_validity": {"exact_forward_verified": true, "forward_product_count_minimum": 1},
+    "route": {
+      "requirement": "route_complete",
+      "definition": "every component either purchasable or reduced to purchasable material by a forward-verified route",
+      "unresolved_material_leaves_permitted": 0,
+      "maximum_synthetic_steps": 4
+    },
+    "physicochemical_screen": {
+      "note": "unchanged from v1 through v5",
+      "molecular_weight": [563.91, 792.38],
+      "clogp": [7.08, 14.17],
+      "tpsa": [70.67, 122.71],
+      "comparison_tolerance": 1e-06
+    },
+    "chemistry_sanity_filter": "inherits configs/bio/phase1_ugi_prediction_cohorts_v4.json key chemistry_sanity_filter_v3 unchanged, including its 12 passing unit tests and the explicit allowance for alpha,beta-unsaturated esters",
+    "train_fold_absence": {
+      "requirement": "canonical product SMILES absent from the 66,464-product train fold",
+      "reference": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz, primary_product_fold == train",
+      "rationale": "Novelty in generative chemistry is defined against the training set. The corpus is fold-split train 66,464 / calibration 15,800 / heldout 30,122; only the train fold was used to fit the generator."
+    }
+  },
+
+  "novelty_reporting": {
+    "primary_metric": "exact-match product novelty against the train fold",
+    "generator_level": 0.8897,
+    "panel_level_expected": 1.0,
+    "secondary_metric": "absence from AGILE's 12,276-member enumerated candidate library, compared stereo-free on both sides",
+    "why_exact_match_is_appropriate_here": "The standard objection to exact-match novelty is that a single methylene flips it. Ionizable-lipid potency is chain-length sensitive and the field describes transfection cliffs on that axis, so a one-methylene difference is a functionally different lipid. The metric's usual weakness is what makes it correct for this chemistry.",
+    "stereo_caveat_recorded": "Our pipeline is constitutional and emits no stereochemistry; the AGILE ledger retains it. Raw string comparison inflates the reach statistic, at one point by making an oleyl isocyanide look like a new building block. All AGILE comparisons are stereo-free on both sides.",
+    "corpus_caveat_recorded": "Novelty against a corpus we enumerated ourselves is weak in both directions. Present may only mean the enumeration was thorough; absent may only mean it had a filter. The AGILE library comparison and the measured-set comparison are reported alongside it."
+  },
+
+  "convergent_recovery_sanity_check": {
+    "finding": "The generator produced 3,590 of AGILE's 12,276 enumerated designs, of which 1,266 sit in calibration or heldout folds and were never seen during training.",
+    "why_it_is_meaningful": "Folds are split at the component-family level, so held-out designs use component families absent from training. Recovering them is convergent rediscovery across a real holdout.",
+    "what_must_not_be_claimed": "The 2,324 recovered designs that sit in the train fold prove nothing and are not quoted."
+  },
+
+  "prediction_scale_calibration": {
+    "issue": "Predicted means and measured potencies are not on the same footing; ensemble predictions are shrunk toward the centre.",
+    "measured_on_held_out_data": {
+      "slope_of_prediction_on_truth": {"train": 0.948, "validation": 0.783, "test": 0.786},
+      "top_decile_offset": {"train": 0.22, "validation": 1.00, "test": 1.27}
+    },
+    "consequence": "A predicted mean of 14.20 corresponds to an expected measured value of roughly 15.2 to 15.5, against AGILE's best measured lipid at 15.96. Any statement comparing our predictions to their measurements must apply this correction or state that it has not been applied.",
+    "source": "results/m0_07/lantern_reproduction_predictions.csv.gz"
+  },
+
+  "analysis_contract": {
+    "primary_endpoint": "prospective hit rate among the HIGH arm, reported against the base rate in AGILE's measured 1,100-product library",
+    "secondary_endpoint": "HIGH versus LOW comparison, as internal evidence that the ranking discriminates",
+    "reported_as_a_function_of_prediction": "hit rate is reported against predicted score, not only as a single pooled rate, so the enrichment claim does not depend on treating the HIGH arm as homogeneous",
+    "evidence_tier_is_a_covariate": "authority tier is recorded per candidate and reported, but the panel is not powered for per-tier claims and none will be made",
+    "population_separation": "HIGH and LOW are never pooled",
+    "intention_to_test": "every locked candidate stays in the denominator: route attempted, correct product isolated, formulation QC passed, biological assay completed. Backups may be prepared operationally but any replacement is separately labelled."
+  },
+
+  "quota": {"HIGH": 34, "LOW": 6, "panel_total": 40},
+
+  "expected_realised_properties": {
+    "train_fold_novelty": "40/40",
+    "agile_library_novelty": "approximately 32/40",
+    "predicted_mean_maximum": 14.2,
+    "predicted_mean_median": 8.23,
+    "high_arm_above_measured_p90": 18,
+    "high_arm_above_measured_p95": 12,
+    "distinct_amine_heads": 17,
+    "distinct_aldehydes": 26,
+    "distinct_isocyanides": 7,
+    "note": "These are the values observed during design exploration and are recorded so that the realised selection can be checked against them. They are not targets."
+  },
+
+  "known_limitations": {
+    "isocyanide_diversity": "7 distinct isocyanides, down from 10 in v4 and v5. This is the narrowest role in the chemistry: 5 measured, 15 in the qualified registry. Component caps on this axis were tested and moved nothing.",
+    "branched_tails": "5 of 40. A ceiling imposed by the chemistry, not by the selection: only 26 of 2,044 generated aldehydes carry the branch motif, and the main production run contributes no route-complete branched candidate at all.",
+    "route_ledger_coverage": "The eligible pool is bounded by route-assessment coverage, which holds 1,699 procurement records, 174 Tail A disconnections and 15 isocyanide routes, all built for previously considered candidates. Nothing here supports a claim about what is or is not routable outside that coverage.",
+    "no_per_tier_power": "Four evidence tiers are represented but none is powered for an independent claim."
+  },
+
+  "determinism": {
+    "selection_seed": 20260806,
+    "requirement": "selection walks a frozen ranking with deterministic tie-breaking on canonical product SMILES; selection order is recorded per candidate"
+  },
+
+  "environment": {"python": "3.14.2", "rdkit": "2026.03.4"},
+
+  "input_pins": {
+    "corpus_fold_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+    "rescoring_ledger": {"path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz", "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"},
+    "branch_lane": {"path": "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz", "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"},
+    "measured_products": {"path": "results/m0_07/agile_oracle_curated.csv.gz", "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"},
+    "agile_virtual_library": {"path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz", "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"},
+    "superseded_config": {"path": "configs/bio/phase1_ugi_prediction_cohorts_v5.json", "sha256": "98ca7c4ba260869980a3c156a8c05ec39428bfe7ffec089517bbc6836b5518ce"}
+  },
+
+  "information_inspected_before_freezing": {
+    "disclosure": "This configuration was written after extensive design exploration in which score bands, novelty counts and diversity tradeoffs were inspected. That is disclosed rather than concealed.",
+    "inspected": [
+      "pool sizes and tier composition",
+      "score bands under every diversity ceiling from 0.70 to 1.00",
+      "novelty counts under hard screening, novel-first and tiebreak variants",
+      "the confounding of score stratum with evidence tier",
+      "prediction shrinkage on held-out measured data"
+    ],
+    "not_inspected": [
+      "any biological measurement, because none exists",
+      "the identities the final selection would return under this exact rule"
+    ],
+    "why_this_is_acceptable": "No outcome exists to tune toward. Every gate on chemistry, route, envelope and step count is inherited unchanged from v1 through v5. The rules that did change, the population and the diversity ceiling, were changed to raise predicted potency and novelty simultaneously, and the tradeoff table supporting each is recorded above."
+  },
+
+  "nonclaims": [
+    "Cohort membership is not a prediction of activity.",
+    "Novelty is not evidence of activity.",
+    "A high predicted score is not a hit.",
+    "Four evidence tiers are represented but the panel supports no per-tier generalization claim.",
+    "Absence from AGILE's library means their component set lacked a building block, not that their chemists rejected the molecule; their library is the complete cross-product of 22 amines, 62 aldehydes and 9 isocyanides.",
+    "A route proposal is not evidence. Unresolved chemistry is not called unsynthesizable."
+  ],
+
+  "prohibited": [
+    "retraining or modifying the generator",
+    "retuning applicability, potency or synthesis guidance on the same evidence",
+    "weakening any chemistry, route, envelope or applicability gate",
+    "modifying any v1 through v5 config or result artifact",
+    "adjusting any threshold after inspecting which candidates it admits",
+    "pooling HIGH and LOW",
+    "quoting recovered train-fold AGILE designs as convergent validation"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "phase1_oracle_campaign_selection_config.v1",
+  "task": "Select the future HeLa campaign oracle from the frozen M0-07 matrix",
+  "seed": 1729,
+  "inputs": {
+    "oracle_freeze_result": {
+      "path": "results/m0_07/oracle_freeze_result.json",
+      "sha256": "8476be6e013e12715bdb55a7ef6d73162b01010f7b560297c6e8406028cda338",
+      "schema_version": "m0_07_oracle_freeze.v1",
+      "status": "oracle_architecture_and_applicability_policy_frozen"
+    }
+  },
+  "campaign": {
+    "campaign_id": "hela_first",
+    "endpoint": "expt_Hela",
+    "endpoint_interpretation": "AGILE mTP measured in HeLa cells",
+    "excluded_endpoints": [
+      "expt_Raw"
+    ],
+    "excluded_endpoint_policy": "zero selection weight; a RAW 264.7 campaign requires a separate endpoint-specific freeze"
+  },
+  "selection": {
+    "candidate_universe": "all_candidates_in_the_hash_pinned_m0_07_freeze",
+    "eligible_schemes": [
+      "lantern_scaffold_balanced",
+      "held_head_5fold",
+      "held_aldehyde_5fold",
+      "held_isocyanide_5fold",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_aldehyde_isocyanide_pair_5fold"
+    ],
+    "primary_metric": "equal_scheme_mean_calibration_r2",
+    "tie_breakers": [
+      "lower_equal_scheme_mean_calibration_rmse",
+      "higher_equal_scheme_mean_calibration_spearman_rho",
+      "lexical_candidate_id"
+    ],
+    "outer_test_metrics_used_for_selection": false,
+    "outer_test_role": "reporting_only_after_endpoint_specific_selection",
+    "refit_or_new_hyperparameter_search_allowed": false
+  },
+  "immutability": {
+    "m0_equal_endpoint_freeze_rewritten": false,
+    "purpose": "campaign-specific selection layered over the immutable M0 audit"
+  },
+  "guidance": {
+    "authorized": false,
+    "reason": "the frozen M0-07 applicability policy abstains in every evaluated guidance domain",
+    "reopen_requires": "a new hash-pinned applicability analysis; endpoint-specific selection alone cannot authorize tilting"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "phase1_ugi_sparse_closure_training_config.v1",
+  "task": "Sparse feasible Ugi precursor closure placement",
+  "seed": 20260731,
+  "inputs": {
+    "assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_l1_semantics/ugi_l1_semantic_products.csv.gz",
+      "sha256": "397c51f29cadfadb295918aaffaa8aa9f3e3c63b43453cd4f24e646cf3f395f1"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_l1_semantics/ugi_l1_semantic_atoms.csv.gz",
+      "sha256": "649865b966ab53dd70e4c3fbcff72e78d05d79813fbb4fe36273e3d87d8d8e44"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    }
+  },
+  "support": {
+    "ring_sizes": [5, 6],
+    "maximum_heavy_degree": 4
+  },
+  "model": {
+    "maximum_children": 2,
+    "maximum_component_atoms": 32,
+    "maximum_cycle_rank": 2,
+    "maximum_ring_size": 6,
+    "hidden_dim": 64,
+    "layers": 2,
+    "dropout": 0.1
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "model_overrides": {
+      "hidden_dim": 32,
+      "layers": 1,
+      "dropout": 0.0
+    }
+  },
+  "full": {
+    "device": "cuda",
+    "steps": 4000,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.00001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 250
+  }
+}

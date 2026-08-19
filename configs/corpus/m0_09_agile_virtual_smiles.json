@@ -1,0 +1,25 @@
+{
+  "schema_version": "m0_09_agile_virtual_smiles_config.v1",
+  "task": "M0-09 AGILE virtual candidate SMILES extraction",
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "source": {
+    "asset": "candidate_set_smiles_plus_features.csv",
+    "doi": "10.5281/zenodo.11228093",
+    "expected_sha256": "0b3c84321062efc7b5b4ef6a6954cc3340f22de61389418ad53e89e1c92719fe",
+    "expected_bytes": 116969761,
+    "expected_header_columns": 814,
+    "smiles_column": "smiles"
+  },
+  "expected_counts": {
+    "source_rows": 12276,
+    "valid_smiles": 12276,
+    "unique_source_smiles": 12276,
+    "unique_canonical_smiles": 12276
+  },
+  "claims_boundary": {
+    "descriptor_columns_retained": false,
+    "biological_labels_present": false,
+    "component_labels_present": false,
+    "l2_route_supervision_present": false
+  }
+}

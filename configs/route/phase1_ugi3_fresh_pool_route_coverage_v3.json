@@ -1,0 +1,155 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_coverage_config.v3",
+  "status": "frozen_before_remaining_exact_terminal_refresh",
+  "task": "Refresh the already-owned exact current octadecylamine terminal when used directly as an Ugi amine head",
+  "assessment_as_of_utc": "2026-08-03T01:15:00Z",
+  "inputs": {
+    "base_component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz",
+      "sha256": "f66656a7bd0971701f387b0bd6278f9f9578b2195770f6671c6e7cc8f56a94e1"
+    },
+    "base_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz",
+      "sha256": "7fdd08e2e4e3c5e28229d29bbf5bc91444a911640d073982354fd985fb287489"
+    },
+    "base_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json",
+      "sha256": "8d0b0e1195bba39b7bf3318675e788f72fd3d0f83e5ef71d7b4082c202bf2841"
+    },
+    "virtual_terminal_procurement": {
+      "path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "audit_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_coverage_v3.py",
+      "sha256": "19e8a93fe6b356d2942dcd7b087fc3af0ce59a0be6ce6239e7943a5a404e3c1a"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi3_fresh_pool_route_coverage_v3.py",
+      "sha256": "a21e22f7fe794b2cec58f4eee4727691ce54b4f8ed581b4ca1867024085f53ae"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_coverage_v3.py",
+      "sha256": "7012c83e189f4112c73df9d70a98956b8e382eabfbdab6a90c60483afabf3e6a"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    }
+  },
+  "assessment_policy": {
+    "base_v2_is_immutable": true,
+    "component_identity": "exact role plus canonical constitutional SMILES",
+    "current_terminal_identity_may_be_reused_across_compatible_terminal_roles": true,
+    "primary_amine_terminal_is_handle_compatible_with_ugi_amine_role": true,
+    "similarity_can_transfer_terminal_status": false,
+    "family_projection_can_close": false,
+    "unknown_burden_is_zero": false,
+    "permit_scalar_value": false,
+    "permit_success_probability": false,
+    "production_synthesis_guidance": false,
+    "prospective_candidate_selection": false
+  },
+  "expected_summary": {
+    "base_version": "fresh_pool_route_coverage_v2",
+    "exact_terminal_components_changed": 1,
+    "changed_component_keys": [
+      "amine_head\tCCCCCCCCCCCCCCCCCCN"
+    ],
+    "unique_components": 1919,
+    "unique_component_outcomes": {
+      "complete": 43,
+      "missing_knowledge": 1831,
+      "outside_support": 45
+    },
+    "unique_component_outcomes_by_role": {
+      "amine_head": {
+        "complete": 21,
+        "missing_knowledge": 811,
+        "outside_support": 29
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 324,
+        "outside_support": 5
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 16,
+        "missing_knowledge": 696,
+        "outside_support": 11
+      }
+    },
+    "unique_component_value_sources": {
+      "existing_exact_current_head_terminal_refresh": 1,
+      "existing_exact_current_octadecylamine_terminal_refresh": 1,
+      "fresh_component_missing_route_knowledge": 1515,
+      "hybrid_registry_assessment": 86,
+      "new_exact_current_tail_terminal": 1,
+      "v3_exact_overlay_or_replay": 315
+    },
+    "component_occurrence_outcomes": {
+      "complete": 3861,
+      "missing_knowledge": 6883,
+      "outside_support": 1181
+    },
+    "component_occurrence_outcomes_by_role": {
+      "amine_head": {
+        "complete": 1281,
+        "missing_knowledge": 2462,
+        "outside_support": 232
+      },
+      "isocyanide_tail": {
+        "complete": 1683,
+        "missing_knowledge": 1755,
+        "outside_support": 537
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 897,
+        "missing_knowledge": 2666,
+        "outside_support": 412
+      }
+    },
+    "component_occurrences_by_value_source": {
+      "existing_exact_current_head_terminal_refresh": 21,
+      "existing_exact_current_octadecylamine_terminal_refresh": 9,
+      "fresh_component_missing_route_knowledge": 2637,
+      "hybrid_registry_assessment": 1036,
+      "new_exact_current_tail_terminal": 120,
+      "v3_exact_overlay_or_replay": 8102
+    },
+    "exact_l1_products": 3975,
+    "product_outcomes_before": {
+      "complete": 171,
+      "noncomplete": 3804
+    },
+    "product_outcomes_after": {
+      "complete": 172,
+      "noncomplete": 3803
+    },
+    "newly_complete_products": 1,
+    "target_occurrences": {
+      "amine_head\tCCCCCCCCCCCCCCCCCCN": 9
+    },
+    "products_by_route_complete_component_count": {
+      "0": 1307,
+      "1": 1647,
+      "2": 849,
+      "3": 172
+    },
+    "product_outcomes_by_structural_provenance": {
+      "product_contains_admitted_transferred_or_expanded_known_component": {
+        "complete": 55,
+        "noncomplete": 451
+      },
+      "product_contains_catalog_absent_component": {
+        "noncomplete": 3152
+      },
+      "product_uses_only_original_ugi_components": {
+        "complete": 117,
+        "noncomplete": 200
+      }
+    },
+    "non_null_scalar_values": 0,
+    "non_null_success_probabilities": 0
+  }
+}

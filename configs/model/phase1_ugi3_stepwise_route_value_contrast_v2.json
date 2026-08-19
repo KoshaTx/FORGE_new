@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase1_ugi3_stepwise_route_value_contrast_config.v2",
+  "status": "frozen_after_nonmonotone_v1_contrast_diagnosis",
+  "task": "Measure monotone route-value contrast by retaining all legacy accepted route tiers and adding independently stepwise-forward-verified terminal-closed hypotheses",
+  "inputs": {
+    "stepwise_result": {
+      "path": "results/phase1/ugi3_stepwise_route_program_adjudication_v1/result.json",
+      "sha256": "627de23d56ad107fcab81b652eca762961cc08c44500feb55cedaf8920032b08"
+    },
+    "stepwise_ledger": {
+      "path": "results/phase1/ugi3_stepwise_route_program_adjudication_v1/stepwise_route_ledger.jsonl.gz",
+      "sha256": "3f07b590d755e7424aa6821266eb482128ed6fb56246cc804567cb606e61033e"
+    },
+    "frozen_matched_support_records": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "superseded_contrast_config": {
+      "path": "configs/model/phase1_ugi3_source_bounded_route_value_contrast_v1.json",
+      "sha256": "ce92726405d2c2a38b92409a9e985d714f3290ebcdd417c06798ccd787da44ee"
+    },
+    "invalidated_nonmonotone_result": {
+      "path": "results/phase1/ugi3_stepwise_route_value_contrast_v1/result.json",
+      "sha256": "bf864abbf4a3fcd91c259c6cec00e1c14acf32d13a800a838939d4da1a6c7331"
+    }
+  },
+  "audit_population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6],
+    "grouping": "checkpoint and frozen morphology program index",
+    "biological_scores_used": false,
+    "proposal_scores_used": false
+  },
+  "retry_authorization_gates": {
+    "minimum_qualified_components": 5,
+    "minimum_balanced_unique_route_ready_products": 32,
+    "minimum_mixed_checkpoint_groups": 8,
+    "minimum_mixed_checkpoint_group_fraction": 0.15,
+    "require_at_least_one_mixed_group_per_checkpoint": true,
+    "minimum_unique_route_ready_productive_finals": 4,
+    "all_gates_must_pass": true
+  },
+  "scope_guards": {
+    "read_only": true,
+    "does_not_rerun_generation": true,
+    "does_not_rerun_route_proposals": true,
+    "does_not_authorize_lambda_tuning": true,
+    "does_not_promote_synthesis_guidance": true,
+    "inherits_thresholds_unchanged_from_superseded_unexecuted_contrast": true,
+    "legacy_positive_route_states_must_remain_positive": true,
+    "new_route_states_may_only_add_coverage": true
+  },
+  "output": "results/phase1/ugi3_stepwise_route_value_contrast_v2/result.json"
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "phase1_ugi_fresh_pool_oracle_audit_config.v1",
+  "status": "frozen_before_nonselecting_oracle_execution",
+  "task": "Describe HeLa-oracle domains and predictions on the frozen fresh v2 Ugi pool",
+  "inputs": {
+    "production_generator_v2": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "fresh_pool_audit": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/audit.json",
+      "sha256": "48f071e5776d956dc1f1bc99f1244c550f324f2d83097a54fde5a6be721a6f5e"
+    },
+    "route_coverage_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/result.json",
+      "sha256": "16ea205e816e87a1daa3e8d4c765d7564f74c4fd887f8a7d44c62556705ac1d0"
+    },
+    "route_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/product_synthesis_values.json.gz",
+      "sha256": "53c91af25ac37be5de8436865ec610e020e0900b232ae844c4ad63b2cd742d3e"
+    },
+    "oracle_campaign_selection": {
+      "path": "results/phase1/oracle_campaign_selection.json",
+      "sha256": "21d5348a9ffe929658af60ca1dcdcd58ab8dc654e3c893c80741cff829ddd7cc"
+    },
+    "oracle_production_result": {
+      "path": "results/m0_07/oracle_production_result.json",
+      "sha256": "268f8f5929af582f35ada2e7f141ed1756232cafd9997149f8fb614d6626961d"
+    },
+    "oracle_production_checkpoint": {
+      "path": "results/m0_07/oracle_production_checkpoint.pt",
+      "sha256": "46f13b8a3cfef1f891e308dfda75e90685d82d1289f0061acdae4be18870e61c"
+    },
+    "oracle_audit_source": {
+      "path": "src/forge/bio/ugi_fresh_pool_oracle_audit.py",
+      "sha256": "e09c3d8e012eb9e048cd708fa7f11eca14587a701bf7b736aa619d37f99f71d0"
+    },
+    "oracle_audit_runner": {
+      "path": "scripts/phase1_audit_ugi_fresh_pool_oracle.py",
+      "sha256": "deb29aaa2826e61834b0251e5fdd5c8c51dfba581ab78f047351247d714cd3de"
+    },
+    "oracle_audit_tests": {
+      "path": "tests/test_ugi_fresh_pool_oracle_audit.py",
+      "sha256": "11ff649f56d78f09d24fc0865235597cbb6b854f813f1100294336cba88b69a9"
+    }
+  },
+  "policy": {
+    "endpoint": "expt_Hela",
+    "batch_size": 128,
+    "nominal_coverage_reference": 0.9,
+    "descriptive_nonselecting_only": true,
+    "raw_mean_ranking_allowed": false,
+    "biological_guidance_authorized": false,
+    "prospective_candidate_selection_changed": false
+  }
+}

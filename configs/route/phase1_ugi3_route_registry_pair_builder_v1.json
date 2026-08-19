@@ -1,0 +1,52 @@
+{
+  "schema_version": "phase1_ugi3_route_registry_pair_builder_config.v1",
+  "status": "frozen_inputs_bound_before_molecular_holdout_reveal",
+  "created_at_utc": "2026-08-03T02:51:21Z",
+  "purpose": "Materialize the immutable R0/without-C18 and R1/with-C18 pair only after the final component registry and exact C18 L2/L3 artifacts are explicitly hash bound.",
+  "protocol": {
+    "path": "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json",
+    "sha256": "36666eefdc8b0347191165041ea84cc7d9ce977f71442e2e961b79cabb0cd80b"
+  },
+  "inputs": {
+    "final_component_ledger": {
+      "path": "results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "sha256": "dfbeeb0e94377a1e4da2192c073f932123168514388a209c51a5427c98b21491",
+      "schema_version": "phase1_ugi3_frozen_parent_component_ledger.v1"
+    },
+    "exact_c18_config": {
+      "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+      "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+    },
+    "exact_c18_result": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+    },
+    "exact_c18_assessment": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz",
+      "sha256": "d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b"
+    }
+  },
+  "outputs": {
+    "r0_records": "results/phase1/ugi3_route_registry_pair_v1/r0_without_c18.records.json.gz",
+    "r0_manifest": "results/phase1/ugi3_route_registry_pair_v1/r0_without_c18.manifest.json",
+    "r1_records": "results/phase1/ugi3_route_registry_pair_v1/r1_with_c18.records.json.gz",
+    "r1_manifest": "results/phase1/ugi3_route_registry_pair_v1/r1_with_c18.manifest.json",
+    "registry_diff": "results/phase1/ugi3_route_registry_pair_v1/registry_diff.json",
+    "binding": "results/phase1/ugi3_route_registry_pair_v1/binding.json"
+  },
+  "binding_policy": {
+    "require_all_input_hashes": true,
+    "require_final_component_ledger_frozen": true,
+    "require_c18_noncomplete_in_parent": true,
+    "require_exact_c18_complete_l2_l3": true,
+    "permit_added_component_keys": false,
+    "permit_deleted_component_keys": false,
+    "permit_non_c18_record_changes": false,
+    "permit_holdout_generation_or_inspection": false
+  },
+  "decision": {
+    "inputs_bound": true,
+    "registry_pair_materialized": false,
+    "holdout_reveal_authorized": false
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": "phase1_ugi_morphology_enriched_oracle_audit_config.v1",
+  "status": "frozen_before_morphology_enriched_structured_oof_audit",
+  "task": "Determine whether the frozen HeLa oracle retains error, calibration and ranking quality inside the fixed chemical-support radius after support-preserving morphology-proposal reweighting",
+  "scope": {
+    "read_only": true,
+    "existing_frozen_artifacts_only": true,
+    "oracle_calls": 0,
+    "potency_predictions_generated": false,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "guidance_authorized": false,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "sealed_holdout_access": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "complete_proposal_ledger": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "273fdb44bc2df8405ea4835ac32c7305bfc2d59caa8ec51b138464f57bb17675"
+    },
+    "complete_proposal_result": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/result.json",
+      "sha256": "93543b3b563338f24435c595799118bbf416e64a8b7f0998a642b2065ba064d2"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "heldout_oof_ledger": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz",
+      "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"
+    },
+    "selective_risk_result": {
+      "path": "results/phase1/ugi_selective_risk_proposal_diagnosis_v1/result.json",
+      "sha256": "4cd54dfc1a5245996a149756162f0d4ad9eb41cb2ee9ab9b28c65464fdd5cedd"
+    },
+    "training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "runner": {
+      "path": "scripts/phase1_audit_ugi_morphology_enriched_oracle.py",
+      "sha256": "6c9ecfc65c034e495962824ed0ab3569dea0a8802a2e7129bff9efb5c249061e"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_enriched_oracle_audit.py",
+      "sha256": "c031fe1912ef65b4b2c0ad3aa842b167912c3cfd91c4c310da066f47db2417eb"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_enriched_oracle_audit.py",
+      "sha256": "5d814f0a0e53c621ba1d6726787817ee5129ee272236e06cb66749fd92e553a3"
+    }
+  },
+  "analysis": {
+    "primary_schemes": [
+      "held_aldehyde_5fold",
+      "held_aldehyde_isocyanide_pair_5fold",
+      "held_head_5fold",
+      "held_head_aldehyde_pair_5fold",
+      "held_head_isocyanide_pair_5fold",
+      "held_isocyanide_5fold"
+    ],
+    "active_radius": 1.0,
+    "clustered_bootstrap": {
+      "unit": "exact_product_label",
+      "replicates": 2000,
+      "seed": 20260804
+    },
+    "gates": {
+      "minimum_measured_product_support_overlap": 0.80,
+      "maximum_equal_scheme_mae_relative_increase": 0.10,
+      "maximum_bootstrap_upper_mae_relative_increase": 0.15,
+      "maximum_equal_scheme_rmse_relative_increase": 0.10,
+      "maximum_bootstrap_upper_rmse_relative_increase": 0.15,
+      "minimum_equal_scheme_conformal90_coverage": 0.80,
+      "minimum_bootstrap_lower_conformal90_coverage": 0.78,
+      "minimum_per_scheme_effective_sample_fraction": 0.50,
+      "minimum_per_scheme_weighted_support_coverage": 0.15,
+      "minimum_per_scheme_weighted_midrank_spearman": 0.20,
+      "minimum_per_scheme_r2": 0.10,
+      "minimum_equal_scheme_top_decile_observed_gain": 0.0
+    }
+  },
+  "interpretation": {
+    "morphology_score_uses_no_potency_or_oracle_error": true,
+    "importance_reweighting_is_covariate_shift_sensitivity_not_generated_label_evidence": true,
+    "exact_component_novelty_is_not_an_applicability_gate": true,
+    "passing_permits_only_a_separately_frozen_matched_computational_diagnostic": true,
+    "passing_does_not_authorize_partial_state_smc_or_prospective_candidate_lock": true
+  }
+}

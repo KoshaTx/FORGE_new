@@ -1,0 +1,102 @@
+{
+  "schema_version": "m0_07_lantern_reproduction_config.v1",
+  "task": "M0-07",
+  "generated_utc": "2026-07-30T04:40:00Z",
+  "inputs": {
+    "lantern_curated_hela": {
+      "path": "data/vendor/lantern_agile_curated.csv",
+      "sha256": "d0ecfd94ec40a7f013af546113520175e70f78045af1798673c2680fe6f23c54"
+    },
+    "lantern_random_split": {
+      "path": "data/vendor/lantern_agile_random_split.npy",
+      "sha256": "72d7cb6d5769c8b45f6634c530547c51147532539cfa2e728a7d630f24d699e8"
+    },
+    "lantern_circular_features": {
+      "path": "data/vendor/lantern_agile_circular.pkl",
+      "sha256": "3a1331eeba6d16ccc9b12e53f68f957a1726a4b3c6ef4944cf97b6e353a0d619"
+    },
+    "lantern_expert_features": {
+      "path": "data/vendor/lantern_agile_expert.pkl",
+      "sha256": "23ba1fceaec5f10480ff7d14734d1ec70901f2e7680c129d88ee64405f9285a7"
+    },
+    "lantern_released_mlp": {
+      "path": "data/vendor/lantern_agile_mlp.pth",
+      "sha256": "f419bfce435f1a08750b5d06902de9941b23343aa90d55aaefd6b3b2fa703382"
+    }
+  },
+  "source": {
+    "repository": "https://github.com/AsalMehradfar/LANTERN",
+    "commit": "11240f29ef92323649ae60d177b21df77e2d428b",
+    "files": {
+      "config/train_config.yaml": {
+        "git_blob_sha1": "82b29e60601a50db8bbb2bc90ade5e0039004066"
+      },
+      "models/neural_models.py": {
+        "git_blob_sha1": "f97cf78d79baa98400781aa32592edc7ce201df4"
+      },
+      "models/wrappers.py": {
+        "git_blob_sha1": "4b515fa49ebf4b98cfa81f0d1c8055553d36a194"
+      },
+      "pipeline/preprocess.py": {
+        "git_blob_sha1": "4c41a5efa6e486e10552871ea9ec90a1f12d74cd"
+      },
+      "pipeline/trainer.py": {
+        "git_blob_sha1": "3a220d28f5b434ac6cd1f92eb4e0ff901df2ccf4"
+      },
+      "utils/data_utils.py": {
+        "git_blob_sha1": "660ab644c746d605d23a6b8e3cdef14452ac196b"
+      }
+    }
+  },
+  "expected": {
+    "records": 1100,
+    "train_records": 880,
+    "validation_records": 110,
+    "test_records": 110,
+    "circular_feature_count": 2048,
+    "expert_feature_count": 210,
+    "combined_feature_count": 2258
+  },
+  "model": {
+    "hidden_dimensions": [
+      200,
+      300,
+      500,
+      500,
+      300,
+      200
+    ],
+    "activation": "ReLU",
+    "output_count": 1,
+    "checkpoint_loading": "torch_weights_only_true"
+  },
+  "preprocessing": {
+    "feature_order": [
+      "circular",
+      "expert"
+    ],
+    "scaler": "MinMaxScaler",
+    "feature_range": [
+      -1,
+      1
+    ],
+    "fit_scope": "all_1100_features_and_hela_labels_before_split",
+    "leakage_status": "test_information_leakage",
+    "source_faithful": true
+  },
+  "policy": {
+    "role": "released_checkpoint_reproduction_diagnostic_only",
+    "selection_eligible": false,
+    "calibration_claim_allowed": false,
+    "raw_checkpoint_score_compared_with_train_only_matrix": true,
+    "untrusted_pickle_globals_allowlisted": true,
+    "oracle_model_frozen": false
+  },
+  "randomness": {
+    "training_performed": false,
+    "inference_device": "cpu",
+    "torch_threads": 1,
+    "deterministic_algorithms": true,
+    "numeric_serialization_significant_digits": 12
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": "phase1_product_morphology_config.v5",
+  "task": "Bounded degree-budgeted sparse whole-lipid morphology flow",
+  "status": "representation_selected_for_bounded_implementation_gate",
+  "seed": 20260731,
+  "inputs": {
+    "r0_morphology_audit": {
+      "path": "results/phase1/r0_lipid_morphology_audit.json",
+      "sha256": "0d3e5da95a19c3e53d04de123d3b47e5ee6932ef6c7fe190fa8ff0dc2aa06036"
+    },
+    "canonical_representation_audit": {
+      "path": "results/phase1/v5_canonical_representation_audit.json",
+      "sha256": "5374eef0a4d6a3752320fb2e58b3d9f70d9555fe69305cee1c36f66ccef74148"
+    },
+    "tree_traversal_comparison": {
+      "path": "results/phase1/v5_tree_traversal_comparison.json",
+      "sha256": "268112d6f12986829271ec2be01d652a9f55aaf037eb1c2f99dabfb3d96d7e7e"
+    }
+  },
+  "representation": {
+    "identity": "constitutional_graph_without_stereochemistry",
+    "canonicalization": "canonical_nonisomeric_smiles_reparse",
+    "root_strategy": "lipid_polar",
+    "spanning_tree": "deterministic_breadth_first",
+    "serialization": "depth_first_preorder",
+    "offspring_language": "lukasiewicz_queue",
+    "learned_parent_pointers": false,
+    "maximum_heavy_atoms": 282,
+    "maximum_closure_edges": 12,
+    "region_scheme": "polar_structural_v2",
+    "region_classes": 3,
+    "maximum_tree_children": 8
+  },
+  "complexity_contract": {
+    "stored_graph_state": "O(N_plus_K)",
+    "generated_structural_decisions": "N_minus_1_tree_edges_plus_K_closure_edges",
+    "end_to_end_linear_runtime_claimed": false,
+    "dense_pairwise_ring_size_matrix_allowed_in_v5_sampling": false
+  },
+  "global_program": {
+    "generated": [
+      "n_head",
+      "n_interface",
+      "n_tail",
+      "tree_junction_budget_head_interface",
+      "tree_junction_budget_tail",
+      "cycle_rank"
+    ],
+    "derived": [
+      "heavy_atom_count",
+      "tree_leaf_count",
+      "closure_incidence_by_node",
+      "regional_closure_counts",
+      "final_molecular_degree"
+    ],
+    "independent_heavy_atom_count_head": false,
+    "independent_tail_count_head": false
+  },
+  "node_morphology": {
+    "primary_fields": [
+      "region",
+      "tree_children",
+      "coarse_valence_capacity"
+    ],
+    "ugi_adapter_field": "component_origin",
+    "component_catalog_identity_in_model_state": false
+  },
+  "exact_tree_constraints": {
+    "sum_children": "N_minus_1",
+    "prefix_pending_nodes": "positive_before_final",
+    "final_pending_nodes": 0,
+    "tree_degree": "children_plus_nonroot_indicator",
+    "tree_junction_budget_head_interface": "sum_max_tree_degree_minus_2_over_head_union_interface",
+    "tree_junction_budget_tail": "sum_max_tree_degree_minus_2_over_tail",
+    "terminal_repair_allowed": false
+  },
+  "closures": {
+    "primary_representation": "sequential_unordered_endpoint_pairs",
+    "generated_count": "cycle_rank",
+    "target_order": "lexicographic_in_canonical_serialized_indices",
+    "endpoint_factorization": "first_endpoint_then_second_conditioned_on_first",
+    "forbidden": [
+      "self_loop",
+      "tree_edge",
+      "duplicate_closure",
+      "coarse_valence_overflow"
+    ],
+    "residual_feasibility": "bounded_exact_backtracking",
+    "initial_global_feasibility": "mask_cycle_rank_to_exactly_completable_tree_and_capacity_states",
+    "prefix_policy": "renormalize_only_over_edges_with_an_exact_residual_completion",
+    "completion_order": "strict_lexicographic_endpoint_pairs",
+    "guarantee_scope": "coarse_topology_and_capacity_not_exact_bond_order_or_aromatic_feasibility",
+    "worst_case_gate": "benchmark_N_282_K_12_before_claiming_practical_exact_search",
+    "terminal_repair_allowed": false,
+    "closure_stub_sequence": "ablation_only"
+  },
+  "bounded_gate": {
+    "required_exact_tree_decode_fraction": 1.0,
+    "required_exact_closure_feasibility_fraction": 1.0,
+    "required_terminal_repair_events": 0,
+    "metrics": [
+      "joint_region_count_distribution",
+      "tree_degree_distribution_by_region",
+      "final_degree_distribution_by_region",
+      "tree_junction_budgets",
+      "tree_leaf_count",
+      "maximum_root_distance",
+      "tail_path_likeness",
+      "cycle_rank",
+      "closure_localization",
+      "topology_diversity",
+      "topology_novelty",
+      "per_molecule_outlier_fractions",
+      "throughput_and_memory_through_282_atoms"
+    ],
+    "means_alone_can_pass": false,
+    "random_and_worst_case_sample_audit_required": true
+  },
+  "deferred": {
+    "atom_and_bond_chemistry": "after_morphology_and_closure_gate",
+    "ugi_l1_adapter": "after_broad_morphology_gate",
+    "biological_guidance": false,
+    "l2_route_generation": false,
+    "synthesis_value_guidance": false,
+    "degree_two_path_contraction": "fallback_only"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "acceptance": {
+    "all_random_atom_permutations_remain_graph_equivalent": true,
+    "all_random_atom_permutations_serialize_exactly": true,
+    "declared_size_and_closure_support_is_preserved": true,
+    "every_record_constitutionally_roundtrips": true,
+    "every_record_is_a_valid_sparse_program": true,
+    "repeated_encoding_is_exact": true
+  },
+  "counts": {
+    "exact_constitutional_roundtrips": 15229,
+    "exact_permutation_encodings": 30458,
+    "exact_repeated_encodings": 15229,
+    "graph_equivalent_permutation_encodings": 30458,
+    "maximum_closures": 12,
+    "maximum_heavy_atoms": 282,
+    "permutation_encodings": 30458,
+    "records": 15229,
+    "symmetric_records": 13991,
+    "valid_sparse_programs": 15229
+  },
+  "decision": "selected_hybrid_canonicalization_passes_full_representation_gate",
+  "environment": {
+    "numpy_version": "2.5.1",
+    "rdkit_version": "2026.03.4"
+  },
+  "failure_counts": {},
+  "failure_examples": [],
+  "generated_at_utc": "2026-07-31T15:19:33.354425+00:00",
+  "implementation": {
+    "canonical_representation_audit": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/canonical_representation_audit.py",
+      "sha256": "4d1385ea068741adc1b4a42b82b1722714170059b5b94b34551fb57d8d22f30e"
+    },
+    "offspring_tree_decoder": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/phase1_tree_topology_flow.py",
+      "sha256": "f216cd16c0aaf3fc1189e0197b939448cdf122719e7d170233839488b67d2dee"
+    },
+    "v5_sparse_representation": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/v5_sparse_representation.py",
+      "sha256": "d2759e0270f0d5130a10a84c9292affad9e7d27acf94180566f2631345391ea1"
+    }
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "product_config": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/model/phase1_product_pretrain_v3.json",
+      "sha256": "621a651fa5ca0488f3a7e5a229a56e07ce57596d0b6fe1566e2a21bf8247f148"
+    },
+    "r0_constitutional": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    }
+  },
+  "policy": {
+    "maximum_children": 8,
+    "maximum_closures": 12,
+    "maximum_heavy_atoms": 282,
+    "permutation_rng": "numpy.PCG64 seeded by sha256(seed:structure_id)",
+    "permutations_per_record": 2,
+    "preserve_aromaticity": true,
+    "region_classes": 3,
+    "region_scheme": "polar_structural_v2",
+    "root_strategy": "lipid_polar",
+    "seed": 20260731,
+    "signature_arrays": [
+      "node_states",
+      "offspring",
+      "parent_bonds",
+      "closure_left",
+      "closure_right",
+      "closure_bonds",
+      "region_states"
+    ],
+    "stereochemistry": "excluded_from_product_graph_state",
+    "tree_traversal": "breadth_first_tree_preorder"
+  },
+  "runtime": {
+    "elapsed_seconds": 158.04681662493385
+  },
+  "schema_version": "phase1_v5_canonical_representation_audit.v2",
+  "size_strata": {
+    "41_64": {
+      "exact_permutation_encodings": 15514,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 15514,
+      "records": 7757
+    },
+    "65_96": {
+      "exact_permutation_encodings": 6354,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 6354,
+      "records": 3177
+    },
+    "97_128": {
+      "exact_permutation_encodings": 1626,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 1626,
+      "records": 813
+    },
+    "gt128": {
+      "exact_permutation_encodings": 1074,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 1074,
+      "records": 537
+    },
+    "le40": {
+      "exact_permutation_encodings": 5890,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 5890,
+      "records": 2945
+    }
+  },
+  "status": "pass",
+  "symmetry_strata": {
+    "asymmetric": {
+      "exact_permutation_encodings": 2476,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 2476,
+      "records": 1238
+    },
+    "symmetric": {
+      "exact_permutation_encodings": 27982,
+      "exact_permutation_fraction": 1.0,
+      "permutation_encodings": 27982,
+      "records": 13991
+    }
+  }
+}

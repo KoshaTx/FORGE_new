@@ -1,0 +1,77 @@
+{
+  "schema_version": "phase1_ugi_morphology_potency_signal_config.v1",
+  "status": "frozen_before_observed_potency_signal_test",
+  "task": "Test whether generated Ugi morphology contains transferable signal for observed HeLa MTP inside the authorized familiar-component unseen-pair lane",
+  "scope": {
+    "read_only": true,
+    "endpoint": "expt_Hela",
+    "observed_biology_is_primary_target": true,
+    "oracle_predictions_are_not_training_targets": true,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "potency_tilting": false,
+    "candidate_selection": false,
+    "synthesis_guidance": false,
+    "prospective_claim": false
+  },
+  "analysis": {
+    "minimum_cohort_records": 500,
+    "primary_scheme": "exact_program_hash",
+    "secondary_schemes": [
+      "aldehyde_role_state",
+      "isocyanide_role_state",
+      "tail_role_state_pair"
+    ],
+    "models": [
+      "constant",
+      "ridge_numeric",
+      "role_factorized_additive",
+      "shallow_nonlinear"
+    ],
+    "selectable_low_capacity_models": [
+      "ridge_numeric",
+      "role_factorized_additive"
+    ],
+    "ridge_alphas": [0.1, 1.0, 10.0, 100.0],
+    "seed": 20260804,
+    "clustered_bootstrap": {
+      "unit": "exact_morphology_program_hash",
+      "replicates": 2000,
+      "seed": 20260804
+    },
+    "gates": {
+      "minimum_primary_spearman_ci_lower": 0.0,
+      "minimum_primary_mae_relative_improvement": 0.02,
+      "minimum_top_quartile_gain_ci_lower": 0.0,
+      "minimum_role_blocked_spearman": 0.0,
+      "minimum_positive_spearman_head_fraction": 0.60,
+      "minimum_median_head_spearman": 0.0
+    }
+  },
+  "inputs": {
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "heldout_applicability": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/heldout_applicability.csv.gz",
+      "sha256": "8af8624a3c0f1d2a8072248c7e8b89c3a58a7380dd32b65c71c357eb72c00da2"
+    },
+    "novelty_lane_audit": {
+      "path": "results/phase1/ugi_potency_novelty_lane_audit_v1/result.json",
+      "sha256": "d9682bd996d2c9fb4d2d955b8176aae8a7e593dea7e5cb4671d2e01c9f7f7bb0"
+    },
+    "promoted_proposal_ledger": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "b61f94a20df2e14c39d9455952dde2c11943df5dd85178963dcec206f799eef2"
+    },
+    "promoted_proposal_result": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/result.json",
+      "sha256": "978453f439755f2daa1ec4b56dfb2caad1769dfc731fe6d39e2b818b9f288a16"
+    },
+    "training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  }
+}

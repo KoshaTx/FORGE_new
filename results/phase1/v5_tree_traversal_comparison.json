@@ -1,0 +1,683 @@
+{
+  "decision": "all_encodings_pass_review_metric_tradeoffs_before_freeze",
+  "environment": {
+    "numpy_version": "2.5.1",
+    "rdkit_version": "2026.03.4"
+  },
+  "failure_examples": [],
+  "generated_at_utc": "2026-07-31T15:31:30.652366+00:00",
+  "implementation": {
+    "canonical_representation_audit": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/canonical_representation_audit.py",
+      "sha256": "4d1385ea068741adc1b4a42b82b1722714170059b5b94b34551fb57d8d22f30e"
+    },
+    "offspring_tree_decoder": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/phase1_tree_topology_flow.py",
+      "sha256": "f216cd16c0aaf3fc1189e0197b939448cdf122719e7d170233839488b67d2dee"
+    },
+    "traversal_representation_audit": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/traversal_representation_audit.py",
+      "sha256": "292374c9eace7a5472245831ee990728670b56ccd7a35e0f48d7591de81f4910"
+    },
+    "v5_sparse_representation": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/product/v5_sparse_representation.py",
+      "sha256": "d2759e0270f0d5130a10a84c9292affad9e7d27acf94180566f2631345391ea1"
+    }
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "product_config": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/model/phase1_product_pretrain_v3.json",
+      "sha256": "621a651fa5ca0488f3a7e5a229a56e07ce57596d0b6fe1566e2a21bf8247f148"
+    },
+    "r0_assignments": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "r0_constitutional": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    "ugi_semantic_atoms": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/m0_07/ugi_semantic_atoms.csv.gz",
+      "sha256": "e1f893d84ddfee19ea50fadfa7b5a4a9b3044866168dbdc9d9ee73c2388a71fe"
+    },
+    "ugi_semantic_products": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    }
+  },
+  "metric_winners": {
+    "higher_tail_largest_run_fraction": "breadth_first",
+    "lower_bigram_cross_entropy": "depth_first_preorder",
+    "lower_closure_normalized_sequence_span": "breadth_first",
+    "lower_mean_root_distance_stretch": "tie",
+    "lower_region_transition_fraction": "depth_first_preorder",
+    "lower_ugi_origin_transition_fraction": "depth_first_preorder"
+  },
+  "policy": {
+    "closure_degree": "separate_from_tree_branch_budget",
+    "maximum_children": 8,
+    "permutations_per_record": 1,
+    "preserve_aromaticity": true,
+    "r0_heldout_use": "exact_invariance_checks_only_not_architecture_selection",
+    "region_scheme": "polar_structural_v2",
+    "root_strategy": "lipid_polar",
+    "seed": 20260731,
+    "selection": "measurement_only_no_traversal_winner_is_precommitted",
+    "selection_metrics_fold": "R0_cal",
+    "tree_branch_budget_degree": "tree_degree_only",
+    "ugi_origin_metrics_fold": "R0_train",
+    "ugi_origin_product_count": 1100
+  },
+  "runtime": {
+    "elapsed_seconds": 346.5693911248818
+  },
+  "schema_version": "phase1_v5_traversal_representation_audit.v2",
+  "status": "pass",
+  "traversals": {
+    "breadth_first": {
+      "acceptance": {
+        "all_atom_permutations_serialize_exactly": true,
+        "every_record_constitutionally_roundtrips": true,
+        "every_record_is_a_valid_sparse_program": true,
+        "offspring_word_decodes_exact_parents": true
+      },
+      "counts": {
+        "exact_constitutional_roundtrips": 15229,
+        "exact_offspring_parent_decodes": 15229,
+        "exact_permutation_encodings": 15229,
+        "parent_nodes": 770642,
+        "permutation_encodings": 15229,
+        "records": 15229,
+        "sibling_symmetry_tie_nodes": 30803,
+        "valid_sparse_programs": 15229
+      },
+      "fixed_bigram_model": {
+        "alpha": 0.5,
+        "evaluation_cross_entropy_nats_per_token": 1.1159783843494109,
+        "evaluation_fold": "R0_cal",
+        "token": "joint_region_and_offspring_count",
+        "train_fold": "R0_train"
+      },
+      "r0_metrics": {
+        "closure_normalized_sequence_span": {
+          "mean": 0.05344168490938546,
+          "q00": 0.014285714285714285,
+          "q10": 0.018518518518518517,
+          "q100": 0.13953488372093023,
+          "q25": 0.024096385542168676,
+          "q50": 0.05454545454545454,
+          "q75": 0.07272727272727272,
+          "q90": 0.08771929824561403
+        },
+        "closure_sequence_span": {
+          "mean": 2.9908225696804895,
+          "q00": 1.0,
+          "q10": 1.0,
+          "q100": 6.0,
+          "q25": 2.0,
+          "q50": 3.0,
+          "q75": 4.0,
+          "q90": 5.0
+        },
+        "closure_tree_distance": {
+          "mean": 4.859279401767505,
+          "q00": 2.0,
+          "q10": 4.0,
+          "q100": 5.0,
+          "q25": 5.0,
+          "q50": 5.0,
+          "q75": 5.0,
+          "q90": 5.0
+        },
+        "maximum_children": {
+          "mean": 2.9857142857142858,
+          "q00": 2.0,
+          "q10": 3.0,
+          "q100": 3.0,
+          "q25": 3.0,
+          "q50": 3.0,
+          "q75": 3.0,
+          "q90": 3.0
+        },
+        "maximum_graph_root_distance": {
+          "mean": 21.83896103896104,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 21.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 23.0
+        },
+        "maximum_root_distance_stretch": {
+          "mean": 0.0,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 0.0,
+          "q25": 0.0,
+          "q50": 0.0,
+          "q75": 0.0,
+          "q90": 0.0
+        },
+        "maximum_tree_root_distance": {
+          "mean": 21.83896103896104,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 21.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 23.0
+        },
+        "mean_root_distance_stretch": {
+          "mean": 0.0,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 0.0,
+          "q25": 0.0,
+          "q50": 0.0,
+          "q75": 0.0,
+          "q90": 0.0
+        },
+        "region_mean_largest_run_fraction": {
+          "mean": 0.6843673240761617,
+          "q00": 0.4176587301587302,
+          "q10": 0.5334656084656085,
+          "q100": 0.8746438746438746,
+          "q25": 0.6101190476190477,
+          "q50": 0.6703703703703704,
+          "q75": 0.7777777777777778,
+          "q90": 0.840882694541231
+        },
+        "region_mean_runs_per_present_label": {
+          "mean": 4.197402597402597,
+          "q00": 2.3333333333333335,
+          "q10": 2.3333333333333335,
+          "q100": 9.333333333333334,
+          "q25": 3.0,
+          "q50": 4.333333333333333,
+          "q75": 5.0,
+          "q90": 6.333333333333333
+        },
+        "region_target_largest_run_fraction": {
+          "mean": 0.6644883160314992,
+          "q00": 0.1875,
+          "q10": 0.45454545454545453,
+          "q100": 0.9736842105263158,
+          "q25": 0.5277777777777778,
+          "q50": 0.6142857142857143,
+          "q75": 0.8571428571428571,
+          "q90": 0.9459459459459459
+        },
+        "region_target_runs": {
+          "mean": 5.55974025974026,
+          "q00": 2.0,
+          "q10": 3.0,
+          "q100": 14.0,
+          "q25": 4.0,
+          "q50": 6.0,
+          "q75": 7.0,
+          "q90": 8.0
+        },
+        "region_transition_fraction": {
+          "mean": 0.19451371528094027,
+          "q00": 0.1016949152542373,
+          "q10": 0.11764705882352941,
+          "q100": 0.36619718309859156,
+          "q25": 0.14545454545454545,
+          "q50": 0.2,
+          "q75": 0.22448979591836735,
+          "q90": 0.2711864406779661
+        },
+        "tree_leaf_fraction": {
+          "mean": 0.18124086335152248,
+          "q00": 0.09900990099009901,
+          "q10": 0.14545454545454545,
+          "q100": 0.2916666666666667,
+          "q25": 0.16326530612244897,
+          "q50": 0.18181818181818182,
+          "q75": 0.2,
+          "q90": 0.22
+        }
+      },
+      "status": "pass",
+      "ugi_origin_metrics": {
+        "origin_mean_largest_run_fraction": {
+          "mean": 0.5571921183821339,
+          "q00": 0.3547619047619047,
+          "q10": 0.5333333333333333,
+          "q100": 0.614010989010989,
+          "q25": 0.5456349206349207,
+          "q50": 0.5573308270676692,
+          "q75": 0.5833333333333334,
+          "q90": 0.6027777777777777
+        },
+        "origin_mean_runs_per_present_label": {
+          "mean": 8.909090909090908,
+          "q00": 7.75,
+          "q10": 7.75,
+          "q100": 11.75,
+          "q25": 8.0,
+          "q50": 8.75,
+          "q75": 9.5,
+          "q90": 10.75
+        },
+        "origin_transition_fraction": {
+          "mean": 0.7379211428403519,
+          "q00": 0.5660377358490566,
+          "q10": 0.6595744680851063,
+          "q100": 0.9047619047619048,
+          "q25": 0.7021276595744681,
+          "q50": 0.7380952380952381,
+          "q75": 0.7777777777777778,
+          "q90": 0.813953488372093
+        }
+      }
+    },
+    "breadth_first_tree_preorder": {
+      "acceptance": {
+        "all_atom_permutations_serialize_exactly": true,
+        "every_record_constitutionally_roundtrips": true,
+        "every_record_is_a_valid_sparse_program": true,
+        "offspring_word_decodes_exact_parents": true
+      },
+      "counts": {
+        "exact_constitutional_roundtrips": 15229,
+        "exact_offspring_parent_decodes": 15229,
+        "exact_permutation_encodings": 15229,
+        "parent_nodes": 770642,
+        "permutation_encodings": 15229,
+        "records": 15229,
+        "sibling_symmetry_tie_nodes": 30803,
+        "valid_sparse_programs": 15229
+      },
+      "fixed_bigram_model": {
+        "alpha": 0.5,
+        "evaluation_cross_entropy_nats_per_token": 1.077261594260771,
+        "evaluation_fold": "R0_cal",
+        "token": "joint_region_and_offspring_count",
+        "train_fold": "R0_train"
+      },
+      "r0_metrics": {
+        "closure_normalized_sequence_span": {
+          "mean": 0.13708826351589687,
+          "q00": 0.014285714285714285,
+          "q10": 0.03333333333333333,
+          "q100": 0.9714285714285714,
+          "q25": 0.03571428571428571,
+          "q50": 0.041666666666666664,
+          "q75": 0.078125,
+          "q90": 0.4714121510673235
+        },
+        "closure_sequence_span": {
+          "mean": 8.70496261046907,
+          "q00": 1.0,
+          "q10": 2.0,
+          "q100": 68.0,
+          "q25": 2.0,
+          "q50": 2.0,
+          "q75": 5.0,
+          "q90": 39.90000000000009
+        },
+        "closure_tree_distance": {
+          "mean": 4.859279401767505,
+          "q00": 2.0,
+          "q10": 4.0,
+          "q100": 5.0,
+          "q25": 5.0,
+          "q50": 5.0,
+          "q75": 5.0,
+          "q90": 5.0
+        },
+        "maximum_children": {
+          "mean": 2.9857142857142858,
+          "q00": 2.0,
+          "q10": 3.0,
+          "q100": 3.0,
+          "q25": 3.0,
+          "q50": 3.0,
+          "q75": 3.0,
+          "q90": 3.0
+        },
+        "maximum_graph_root_distance": {
+          "mean": 21.83896103896104,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 21.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 23.0
+        },
+        "maximum_root_distance_stretch": {
+          "mean": 0.0,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 0.0,
+          "q25": 0.0,
+          "q50": 0.0,
+          "q75": 0.0,
+          "q90": 0.0
+        },
+        "maximum_tree_root_distance": {
+          "mean": 21.83896103896104,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 21.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 23.0
+        },
+        "mean_root_distance_stretch": {
+          "mean": 0.0,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 0.0,
+          "q25": 0.0,
+          "q50": 0.0,
+          "q75": 0.0,
+          "q90": 0.0
+        },
+        "region_mean_largest_run_fraction": {
+          "mean": 0.5289048885022761,
+          "q00": 0.20710180623973726,
+          "q10": 0.31666666666666665,
+          "q100": 0.7370689655172414,
+          "q25": 0.46400462962962963,
+          "q50": 0.5621212121212121,
+          "q75": 0.6157894736842106,
+          "q90": 0.6691086691086691
+        },
+        "region_mean_runs_per_present_label": {
+          "mean": 3.703030303030303,
+          "q00": 2.3333333333333335,
+          "q10": 2.3333333333333335,
+          "q100": 8.333333333333334,
+          "q25": 3.0,
+          "q50": 3.3333333333333335,
+          "q75": 4.0,
+          "q90": 5.333333333333333
+        },
+        "region_target_largest_run_fraction": {
+          "mean": 0.41162945119038075,
+          "q00": 0.10344827586206896,
+          "q10": 0.24432432432432433,
+          "q100": 0.6296296296296297,
+          "q25": 0.38461538461538464,
+          "q50": 0.425,
+          "q75": 0.4722222222222222,
+          "q90": 0.5384615384615384
+        },
+        "region_target_runs": {
+          "mean": 4.740259740259741,
+          "q00": 3.0,
+          "q10": 3.0,
+          "q100": 11.0,
+          "q25": 4.0,
+          "q50": 4.0,
+          "q75": 5.0,
+          "q90": 7.0
+        },
+        "region_transition_fraction": {
+          "mean": 0.17072908645143856,
+          "q00": 0.1016949152542373,
+          "q10": 0.125,
+          "q100": 0.3108108108108108,
+          "q25": 0.14035087719298245,
+          "q50": 0.16666666666666666,
+          "q75": 0.19230769230769232,
+          "q90": 0.22807017543859648
+        },
+        "tree_leaf_fraction": {
+          "mean": 0.18124086335152248,
+          "q00": 0.09900990099009901,
+          "q10": 0.14545454545454545,
+          "q100": 0.2916666666666667,
+          "q25": 0.16326530612244897,
+          "q50": 0.18181818181818182,
+          "q75": 0.2,
+          "q90": 0.22
+        }
+      },
+      "status": "pass",
+      "ugi_origin_metrics": {
+        "origin_mean_largest_run_fraction": {
+          "mean": 0.9669841269841271,
+          "q00": 0.8571428571428572,
+          "q10": 0.8976785714285714,
+          "q100": 0.9875,
+          "q25": 0.9821428571428572,
+          "q50": 0.984375,
+          "q75": 0.9875,
+          "q90": 0.9875
+        },
+        "origin_mean_runs_per_present_label": {
+          "mean": 1.3,
+          "q00": 1.25,
+          "q10": 1.25,
+          "q100": 1.5,
+          "q25": 1.25,
+          "q50": 1.25,
+          "q75": 1.25,
+          "q90": 1.5
+        },
+        "origin_transition_fraction": {
+          "mean": 0.09018066611795604,
+          "q00": 0.06779661016949153,
+          "q10": 0.07547169811320754,
+          "q100": 0.13513513513513514,
+          "q25": 0.08163265306122448,
+          "q50": 0.08888888888888889,
+          "q75": 0.0975609756097561,
+          "q90": 0.10638297872340426
+        }
+      }
+    },
+    "depth_first_preorder": {
+      "acceptance": {
+        "all_atom_permutations_serialize_exactly": true,
+        "every_record_constitutionally_roundtrips": true,
+        "every_record_is_a_valid_sparse_program": true,
+        "offspring_word_decodes_exact_parents": true
+      },
+      "counts": {
+        "exact_constitutional_roundtrips": 15229,
+        "exact_offspring_parent_decodes": 15229,
+        "exact_permutation_encodings": 15229,
+        "parent_nodes": 778926,
+        "permutation_encodings": 15229,
+        "records": 15229,
+        "sibling_symmetry_tie_nodes": 22348,
+        "valid_sparse_programs": 15229
+      },
+      "fixed_bigram_model": {
+        "alpha": 0.5,
+        "evaluation_cross_entropy_nats_per_token": 1.0759418815105204,
+        "evaluation_fold": "R0_cal",
+        "token": "joint_region_and_offspring_count",
+        "train_fold": "R0_train"
+      },
+      "r0_metrics": {
+        "closure_normalized_sequence_span": {
+          "mean": 0.22625198652342776,
+          "q00": 0.028985507246376812,
+          "q10": 0.08163265306122448,
+          "q100": 1.0,
+          "q25": 0.08771929824561403,
+          "q50": 0.10416666666666667,
+          "q75": 0.14545454545454545,
+          "q90": 1.0
+        },
+        "closure_sequence_span": {
+          "mean": 15.258667573079538,
+          "q00": 2.0,
+          "q10": 5.0,
+          "q100": 100.0,
+          "q25": 5.0,
+          "q50": 5.0,
+          "q75": 8.0,
+          "q90": 60.90000000000009
+        },
+        "closure_tree_distance": {
+          "mean": 5.0768184908225695,
+          "q00": 2.0,
+          "q10": 4.0,
+          "q100": 7.0,
+          "q25": 5.0,
+          "q50": 5.0,
+          "q75": 5.0,
+          "q90": 7.0
+        },
+        "maximum_children": {
+          "mean": 2.574891774891775,
+          "q00": 2.0,
+          "q10": 2.0,
+          "q100": 3.0,
+          "q25": 2.0,
+          "q50": 3.0,
+          "q75": 3.0,
+          "q90": 3.0
+        },
+        "maximum_graph_root_distance": {
+          "mean": 21.83896103896104,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 21.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 23.0
+        },
+        "maximum_root_distance_stretch": {
+          "mean": 3.3766233766233764,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 9.0,
+          "q25": 3.0,
+          "q50": 4.0,
+          "q75": 4.0,
+          "q90": 6.0
+        },
+        "maximum_tree_root_distance": {
+          "mean": 22.088311688311688,
+          "q00": 12.0,
+          "q10": 20.0,
+          "q100": 36.0,
+          "q25": 22.0,
+          "q50": 22.0,
+          "q75": 23.0,
+          "q90": 24.0
+        },
+        "mean_root_distance_stretch": {
+          "mean": 0.3541208061735208,
+          "q00": 0.0,
+          "q10": 0.0,
+          "q100": 3.1041666666666665,
+          "q25": 0.06060606060606061,
+          "q50": 0.10526315789473684,
+          "q75": 0.21818181818181817,
+          "q90": 0.5009090909090901
+        },
+        "region_mean_largest_run_fraction": {
+          "mean": 0.5367128433340405,
+          "q00": 0.20710180623973726,
+          "q10": 0.31666666666666665,
+          "q100": 0.7370689655172414,
+          "q25": 0.4645330459770115,
+          "q50": 0.5785714285714286,
+          "q75": 0.6265151515151516,
+          "q90": 0.676962676962677
+        },
+        "region_mean_runs_per_present_label": {
+          "mean": 3.696103896103896,
+          "q00": 2.3333333333333335,
+          "q10": 2.3333333333333335,
+          "q100": 8.333333333333334,
+          "q25": 3.0,
+          "q50": 3.3333333333333335,
+          "q75": 4.0,
+          "q90": 5.333333333333333
+        },
+        "region_target_largest_run_fraction": {
+          "mean": 0.41162945119038075,
+          "q00": 0.10344827586206896,
+          "q10": 0.24432432432432433,
+          "q100": 0.6296296296296297,
+          "q25": 0.38461538461538464,
+          "q50": 0.425,
+          "q75": 0.4722222222222222,
+          "q90": 0.5384615384615384
+        },
+        "region_target_runs": {
+          "mean": 4.767965367965368,
+          "q00": 3.0,
+          "q10": 3.0,
+          "q100": 11.0,
+          "q25": 4.0,
+          "q50": 4.0,
+          "q75": 5.0,
+          "q90": 7.0
+        },
+        "region_transition_fraction": {
+          "mean": 0.17028609531631694,
+          "q00": 0.1016949152542373,
+          "q10": 0.12277121374865735,
+          "q100": 0.32608695652173914,
+          "q25": 0.13793103448275862,
+          "q50": 0.16393442622950818,
+          "q75": 0.19047619047619047,
+          "q90": 0.23636363636363636
+        },
+        "tree_leaf_fraction": {
+          "mean": 0.16586886336854195,
+          "q00": 0.09900990099009901,
+          "q10": 0.12280701754385964,
+          "q100": 0.2916666666666667,
+          "q25": 0.14285714285714285,
+          "q50": 0.16363636363636364,
+          "q75": 0.18867924528301888,
+          "q90": 0.20967741935483872
+        }
+      },
+      "status": "pass",
+      "ugi_origin_metrics": {
+        "origin_mean_largest_run_fraction": {
+          "mean": 0.9742757936507936,
+          "q00": 0.8571428571428572,
+          "q10": 0.9726785714285721,
+          "q100": 0.9875,
+          "q25": 0.9821428571428572,
+          "q50": 0.9861111111111112,
+          "q75": 0.9875,
+          "q90": 0.9875
+        },
+        "origin_mean_runs_per_present_label": {
+          "mean": 1.275,
+          "q00": 1.25,
+          "q10": 1.25,
+          "q100": 1.5,
+          "q25": 1.25,
+          "q50": 1.25,
+          "q75": 1.25,
+          "q90": 1.2750000000000057
+        },
+        "origin_transition_fraction": {
+          "mean": 0.08796313487832388,
+          "q00": 0.06779661016949153,
+          "q10": 0.07547169811320754,
+          "q100": 0.12195121951219512,
+          "q25": 0.08,
+          "q50": 0.08695652173913043,
+          "q75": 0.09523809523809523,
+          "q90": 0.1
+        }
+      }
+    }
+  }
+}

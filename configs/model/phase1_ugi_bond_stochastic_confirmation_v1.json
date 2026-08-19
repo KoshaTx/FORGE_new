@@ -1,0 +1,96 @@
+{
+  "schema_version": "phase1_ugi_bond_stochastic_confirmation_config.v1",
+  "status": "frozen_before_independent_confirmation_draw",
+  "purpose": "Independently confirm the step-2000 bond-stochastic decoder on previously uninspected morphology programs before changing any production sampling policy.",
+  "sampling": {
+    "program_seed": 20260809,
+    "flow_seed": 20260810,
+    "terminal_seed": 20260812,
+    "programs": 1024,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "matched_terminal_decoder_modes": [
+      "argmax",
+      "bond_stochastic"
+    ],
+    "terminal_temperature": 1.0
+  },
+  "selection_visible_reference_feature_fractions": {
+    "oxoester_aldehyde_body_tail": {
+      "has_carbon_branch": 0.11600457065058835,
+      "has_carbon_carbon_double_bond": 0.3285519789944569,
+      "has_carbon_carbon_triple_bond": 0.13989108236895847,
+      "has_ester_like_carbonyl": 0.4878926383351162,
+      "has_ether_oxygen": 0.0
+    },
+    "isocyanide_tail": {
+      "has_carbon_branch": 0.5893829621705728,
+      "has_carbon_carbon_double_bond": 0.0,
+      "has_carbon_carbon_triple_bond": 0.0,
+      "has_ester_like_carbonyl": 0.16163814062044152,
+      "has_ether_oxygen": 0.0
+    }
+  },
+  "confirmation_gates": {
+    "minimum_valid_fraction": 0.95,
+    "minimum_unique_fraction_of_valid": 0.98,
+    "exact_l1_fraction_of_valid": 1.0,
+    "maximum_exact_frozen_product_reproduction_fraction": 0.15,
+    "minimum_aldehyde_carbon_carbon_double_bond_fraction": 0.15,
+    "minimum_aldehyde_ester_like_carbonyl_fraction": 0.25,
+    "aldehyde_feature_l1_error_must_improve_over_matched_argmax": true,
+    "maximum_isocyanide_feature_l1_error_increase_over_matched_argmax": 0.02,
+    "maximum_reference_absent_feature_increase_over_matched_argmax": 0.02
+  },
+  "decision_policy": {
+    "the_previous_challenger_draw_is_selection_visible_and_cannot_confirm": true,
+    "the_absolute_reference_absence_gate_from_v1_remains_failed": true,
+    "rationale_for_causal_stability_gate": "Open-ended generation must not interpret an unobserved feature as chemically impossible. The independent confirmation instead requires that bond-only stochastic decoding not increase any reference-absent feature by more than two percentage points relative to the matched argmax arm.",
+    "production_sampling_policy_changes_only_if_all_confirmation_gates_pass": true,
+    "prospective_candidate_selection": false,
+    "no_retries_or_seed_search": true
+  },
+  "inputs": {
+    "training_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "program_sampling_script": {
+      "path": "scripts/phase1_sample_ugi_program_prior.py",
+      "sha256": "9af316e2d0cf9ff251f81cbb350893f1a4d4e2d8a7a6c0e4364aa837885f87e9"
+    },
+    "joint_checkpoint_step2000": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "chemistry_interface_source": {
+      "path": "src/forge/product/ugi_chemistry_interface.py",
+      "sha256": "e5f6b3e85b222cc1ceebdcdbcf51cea01857d9ee7ee514b3a8a6832af3be9e8c"
+    },
+    "decoder_source": {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "sha256": "c40fe8216c93008de898cff019de241ec78b8e7dfb477d7658fe12ea90b0dd66"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0"
+    },
+    "sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f"
+    }
+  }
+}

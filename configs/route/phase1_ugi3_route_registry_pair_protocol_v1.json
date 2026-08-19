@@ -1,0 +1,197 @@
+{
+  "schema_version": "phase1_ugi3_route_registry_pair_protocol.v1",
+  "status": "frozen_protocol_holdout_unrevealed_registry_pair_unbound",
+  "frozen_at_utc": "2026-08-03T02:51:21Z",
+  "purpose": "Predeclare a one-change paired R0/R1 route-registry evaluation on the already sealed Ugi-3 saturation holdout without generating or inspecting its molecular sample.",
+  "sealed_holdout_anchor": {
+    "contract": {
+      "path": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "sha256": "c76b43fb59bd4802f5bf8596c8b2095ff8abfd59448b26e75c1f41264b679a79",
+      "schema_version": "phase1_ugi3_route_saturation_holdout_config.v1"
+    },
+    "seal": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1",
+      "schema_version": "phase1_ugi3_route_saturation_holdout_seal.v1",
+      "status": "program_draw_sealed_molecular_holdout_not_generated"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/programs.json",
+      "sha256": "20c29c692a3ce6a73584ae4182db93416550a531f36a9e21c1144d1b8efb6ad8",
+      "rows": 4096
+    },
+    "seeds": {
+      "program": 20260819,
+      "flow": 20260820,
+      "terminal": 20260821
+    },
+    "sampling": {
+      "sample_steps": 8,
+      "batch_size": 16,
+      "maximum_adjacent_branch_runs": [
+        2,
+        1,
+        1
+      ],
+      "terminal_decoder_mode": "bond_stochastic",
+      "terminal_temperature": 1.0
+    },
+    "sealed_sample_output": "results/phase1/ugi3_route_saturation_holdout_v1/sample",
+    "require_molecular_holdout_unrevealed": true,
+    "require_sample_output_absent_before_binding": true
+  },
+  "registry_pair": {
+    "snapshot_schema_version": "phase1_ugi3_route_registry_snapshot.v1",
+    "record_ledger_schema_version": "phase1_ugi3_route_registry_records.v1",
+    "binding_schema_version": "phase1_ugi3_route_registry_pair_binding.v1",
+    "diff_schema_version": "phase1_ugi3_route_registry_diff.v1",
+    "r0_role": "immutable_parent_registry",
+    "r1_role": "immutable_child_registry",
+    "r0_semantic_label": "without_c18",
+    "r1_semantic_label": "with_c18",
+    "required_delta_count": 1,
+    "required_added_count": 0,
+    "required_deleted_count": 0,
+    "required_regression_count": 0,
+    "required_non_target_mutation_count": 0,
+    "all_other_evidence_including_any_previously_qualified_routes_is_identical": true,
+    "identity_policy": {
+      "match_on_exact_role_and_canonical_smiles": true,
+      "permit_similarity_or_family_matching": false,
+      "permit_neighbor_homologue_admission": false,
+      "permit_reaction_family_template_promotion": false
+    }
+  },
+  "authorized_delta": {
+    "role": "oxoester_aldehyde_body_tail",
+    "canonical_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+    "component_key_sha256": "854cc7cf4409f4a0c5c28bac78d57ca4b8ab36364626021790b9a9765ac19c3c",
+    "r0_route_complete": false,
+    "r1_route_complete": true,
+    "required_exact_l2_steps": 3,
+    "required_terminal_availability": "current_closed",
+    "required_current_l3_procurement_closed": true,
+    "required_family_template_admitted": false
+  },
+  "exact_l1_eligibility": {
+    "denominator_symbol": "H",
+    "denominator_description": "sealed products passing all three exact-L1 gates",
+    "required_true_fields": [
+      "valid",
+      "component_reconstruction_valid",
+      "l1_forward_verification.exact_product_reconstructed"
+    ],
+    "missing_or_non_boolean_fields_are_ineligible": true,
+    "no_post_reveal_denominator_changes": true
+  },
+  "paired_estimand": {
+    "name": "marginal_exact_registry_route_coverage",
+    "denominator_symbol": "H",
+    "numerator_symbol": "D",
+    "numerator_description": "eligible sealed products that are noncomplete under R0 and complete under R1",
+    "point_estimate": "D/H",
+    "confidence_interval": "two_sided_clopper_pearson_95pct",
+    "paired_unit": "same sealed product under both immutable registries",
+    "secondary_counts": [
+      "eligible_products_complete_in_r0",
+      "eligible_products_complete_in_r1",
+      "eligible_products_by_route_complete_component_count_r0",
+      "eligible_products_by_route_complete_component_count_r1",
+      "target_component_occurrences",
+      "target_component_occurrences_that_flip_product_completion"
+    ],
+    "not_a_probability_of_experimental_synthesis_success": true
+  },
+  "execution_policy": {
+    "same_sealed_program_draw": true,
+    "same_flow_seed": true,
+    "same_terminal_seed": true,
+    "same_sampled_molecules": true,
+    "same_exact_l1_eligibility_ledger": true,
+    "permit_retry": false,
+    "permit_resampling": false,
+    "permit_replanning": false,
+    "permit_registry_tuning_after_reveal": false,
+    "permit_threshold_tuning_after_reveal": false,
+    "permit_post_reveal_evidence": false,
+    "permit_post_reveal_route_repair": false,
+    "permit_similarity_or_family_route_closure": false,
+    "permit_molecule_inspection_before_registry_binding": false
+  },
+  "ledger_contract": {
+    "private_identity_ledgers": {
+      "visibility": "private_hash_pinned",
+      "exact_l1_eligibility_fields": [
+        "sample_key_sha256",
+        "valid",
+        "component_reconstruction_valid",
+        "exact_product_reconstructed",
+        "eligible"
+      ],
+      "component_transition_fields": [
+        "sample_key_sha256",
+        "component_position",
+        "component_key_sha256",
+        "role",
+        "r0_route_complete",
+        "r1_route_complete",
+        "transition"
+      ],
+      "product_transition_fields": [
+        "sample_key_sha256",
+        "eligible",
+        "r0_route_complete",
+        "r1_route_complete",
+        "transition"
+      ]
+    },
+    "public_aggregate": {
+      "visibility": "public_aggregate_only",
+      "fields": [
+        "sealed_program_rows",
+        "sampled_products",
+        "exact_l1_eligible_products",
+        "eligible_products_complete_in_r0",
+        "eligible_products_complete_in_r1",
+        "marginal_completion_count",
+        "marginal_completion_fraction",
+        "confidence_interval_method",
+        "confidence_interval_95pct",
+        "target_component_occurrences",
+        "target_component_occurrences_that_flip_product_completion",
+        "aggregate_counts_by_evidence_family"
+      ],
+      "forbidden_identity_fields": [
+        "canonical_product_smiles",
+        "canonical_component_smiles",
+        "product_id",
+        "structure_id",
+        "route_steps",
+        "terminal_material_identities"
+      ]
+    }
+  },
+  "binding_requirements": {
+    "protocol_hash_must_be_pinned": true,
+    "r0_and_r1_manifest_hashes_must_be_pinned": true,
+    "registry_diff_hash_must_be_pinned": true,
+    "r1_parent_must_be_exact_r0_manifest": true,
+    "exact_c18_config_result_and_assessment_hashes_must_be_pinned": true,
+    "exact_c18_must_be_complete_at_l2_and_l3": true,
+    "registry_record_key_sets_must_match": true,
+    "all_non_target_records_must_be_byte_equivalent_as_canonical_json": true,
+    "binding_must_precede_molecular_holdout_reveal": true
+  },
+  "decision": {
+    "protocol_frozen": true,
+    "registry_pair_bound": false,
+    "holdout_reveal_authorized": false,
+    "authorization_condition": "A validator-confirmed immutable R0/R1 binding with exactly one complete exact-identity C18 delta and a still-unrevealed molecular holdout."
+  },
+  "nonclaims": [
+    "This protocol does not assert that the exact C18 route is currently complete.",
+    "This protocol does not authorize generation or inspection of sealed holdout molecules.",
+    "A positive paired result would estimate one exact registry delta on one sealed generator draw, not universal route saturation.",
+    "Route completion is not a calibrated probability of experimental synthesis success."
+  ]
+}

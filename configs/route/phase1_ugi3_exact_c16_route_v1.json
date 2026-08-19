@@ -1,0 +1,366 @@
+{
+  "schema_version": "phase1_ugi3_exact_c16_route_config.v1",
+  "scope": "one_exact_c16_route_only",
+  "assessment_as_of_utc": "2026-08-03T03:04:10Z",
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/route/ugi3_exact_c16_route.py",
+      "sha256": "39ddf4a626f99e888febb0326c2c11adf28e86baddd4952208631b58de34043b"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_qualify_ugi3_exact_c16_route.py",
+      "sha256": "30c8870f798db1a1ec95ea321e116aff35d25d3efbc6ae56875c609423ea81fe"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_exact_c16_route.py",
+      "sha256": "593787278fb6929600d41ace67d216fd4e58a8055c7a2d898cef3905d056455b"
+    },
+    "qualified_forward_source": {
+      "path": "src/forge/route/qualified_forward.py",
+      "sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    },
+    "planner_source": {
+      "path": "src/forge/route/planner.py",
+      "sha256": "8cd48f704819810f83f02a9623f8de461f7334ad94684e3d77e325e3dd9902a0"
+    },
+    "synthesis_value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    },
+    "reaction_registry": {
+      "path": "configs/route/phase1_ugi3_exact_c16_qualified_reactions_v1.json",
+      "sha256": "0e90a1bc3b27bb34d0b033102ab405b77f55d87bfe770575873653c4d4e2b1c2"
+    },
+    "chain_variant": {
+      "path": "configs/route/variants/ugi3_exact_c16_c3_c13_chain_construction_v1.json",
+      "sha256": "e4479f37faec0c292aa4a0d64f10c6d65c7417291db376562ecfd595048409a1"
+    },
+    "deprotection_variant": {
+      "path": "configs/route/variants/ugi3_exact_c16_thp_deprotection_v1.json",
+      "sha256": "ab5fd7ef55f7807ed2d529d2f634e7d40c49ca38083cd8b9293f86b51d6f4bce"
+    },
+    "zipper_variant": {
+      "path": "configs/route/variants/ugi3_exact_c16_alkyne_zipper_v1.json",
+      "sha256": "5932cccdcd74fcc0b693578633d2242b2d1394efd8d0fc9f72274b183e1221cb"
+    },
+    "oxidation_variant": {
+      "path": "configs/route/variants/ugi3_exact_c16_primary_alcohol_oxidation_v1.json",
+      "sha256": "1487799fcf8f938f46d259f9366c9c84f859157930e20d3491fe7bee0635bdad"
+    },
+    "source_manifest": {
+      "path": "data/source_cache/phase1_ugi3_exact_c16_alkynyl_aldehyde/source_manifest_v1.json",
+      "sha256": "f0ee2b7bc9d9cd06c91be41f2d5eee541e5e33371e06832c02763a509d9034ab"
+    },
+    "route_primary": {
+      "path": "data/source_cache/phase1_ugi3_exact_c16_alkynyl_aldehyde/au2020334152a1_wo2021035214a1.pdf",
+      "sha256": "269391717b19a39decad548ec0a35307be6ffff077f242827ce84515c0527f69"
+    },
+    "oxidation_primary": {
+      "path": "data/source_cache/phase1_ugi3_exact_c16_alkynyl_aldehyde/zheng_ja311416v_si_001.pdf",
+      "sha256": "42f365a30e238adca89c24eb96a7d222b9b9fe33e3a45c32e7eef9c1a18d4984"
+    },
+    "conflicted_source": {
+      "path": "data/source_cache/phase1_ugi3_exact_c16_alkynyl_aldehyde/wo2024073486a2_rejected_source_conflict.pdf",
+      "sha256": "8b439e735042b87030f39150a774e1b0479cb7121f54ed9cf17d9f0e4f01b596"
+    },
+    "terminal_observations": {
+      "path": "data/source_cache/phase1_ugi3_exact_c16_alkynyl_aldehyde/terminal_observations_2026-08-03.json",
+      "sha256": "dc91c0be2f88899f48726d6c6ece2ea8734e1d95d50912a194a9dd2db986b07d"
+    }
+  },
+  "limitations": {
+    "exact_substrate_product_pairs_only": true,
+    "reaction_family_promotion_authorized": false,
+    "substrate_scope_extrapolation_authorized": false,
+    "analogue_promotion_authorized": false,
+    "homologue_promotion_authorized": false,
+    "general_enumeration_authorized": false,
+    "terminal_closure_transfers_to_analogues": false,
+    "rejected_source_conflict_can_support_route": false
+  },
+  "molecules": {
+    "tetrahydro_2_propynyloxy_2h_pyran": {
+      "canonical_smiles": "C#CCOC1CCCCO1",
+      "molecular_formula": "C8H12O2",
+      "inchi_key": "HQAXHIGPGBPPFU-UHFFFAOYSA-N",
+      "carbon_count": 8,
+      "route_chain_carbon_count": 3
+    },
+    "1_bromotridecane": {
+      "canonical_smiles": "CCCCCCCCCCCCCBr",
+      "molecular_formula": "C13H27Br",
+      "inchi_key": "BFDNZQUBFCYTIC-UHFFFAOYSA-N",
+      "carbon_count": 13,
+      "route_chain_carbon_count": 13
+    },
+    "thp_protected_hexadec_2_yn_1_ol": {
+      "canonical_smiles": "CCCCCCCCCCCCCC#CCOC1CCCCO1",
+      "molecular_formula": "C21H38O2",
+      "inchi_key": "SOQDRLNXWHPPRI-UHFFFAOYSA-N",
+      "carbon_count": 21,
+      "route_chain_carbon_count": 16
+    },
+    "hexadec_2_yn_1_ol": {
+      "canonical_smiles": "CCCCCCCCCCCCCC#CCO",
+      "molecular_formula": "C16H30O",
+      "inchi_key": "FVTGRMTUSMFGNE-UHFFFAOYSA-N",
+      "carbon_count": 16,
+      "route_chain_carbon_count": 16
+    },
+    "hexadec_15_yn_1_ol": {
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCO",
+      "molecular_formula": "C16H30O",
+      "inchi_key": "KGUYWIWXJCKTGG-UHFFFAOYSA-N",
+      "carbon_count": 16,
+      "route_chain_carbon_count": 16
+    },
+    "hexadec_15_ynal": {
+      "canonical_smiles": "C#CCCCCCCCCCCCCCC=O",
+      "molecular_formula": "C16H28O",
+      "inchi_key": "FVNLYIAHOFOSLW-UHFFFAOYSA-N",
+      "carbon_count": 16,
+      "route_chain_carbon_count": 16
+    }
+  },
+  "steps": [
+    {
+      "step_id": "c16_step_1_c3_c13_chain_construction",
+      "reaction_id": "ugi3_exact_c16_c3_c13_chain_construction_v1",
+      "reaction_class": "terminal_alkyne_alkylation",
+      "variant_input": "chain_variant",
+      "reactant_ids": [
+        "tetrahydro_2_propynyloxy_2h_pyran",
+        "1_bromotridecane"
+      ],
+      "reactant_roles": [
+        "terminal_protected_propargyl_alcohol",
+        "terminal_alkyl_bromide"
+      ],
+      "product_id": "thp_protected_hexadec_2_yn_1_ol",
+      "product_role": "protected_internal_alkynol",
+      "carbon_identity": {
+        "reactant_total_carbons": 21,
+        "product_total_carbons": 21,
+        "discarded_protecting_group_carbons": 0,
+        "route_chain_carbons": 16,
+        "exact_chain_identity_preserved": true
+      },
+      "primary_source_input": "route_primary",
+      "source_locator": "WO 2021/035214, Example 5A, PDF page 145 (printed page 144)",
+      "conditions_source_sha256": "269391717b19a39decad548ec0a35307be6ffff077f242827ce84515c0527f69",
+      "conditions_source_locator": "WO 2021/035214, Example 5A, PDF page 145 (printed page 144)",
+      "conditions": {
+        "protected_propargyl_alcohol": "2.0 mL, 14.2 mmol, 1.0 equiv",
+        "DMPU": "5.1 mL, 42.8 mmol, 3.0 equiv",
+        "solvent": "anhydrous THF, 40 mL",
+        "initial_temperature_c": -78,
+        "n_butyllithium": "2.5 M in hexanes, 7.4 mL, 18.5 mmol, 1.3 equiv; syringe-pump addition at 20 mL h-1",
+        "pre_alkylation_time_h": 1,
+        "1_bromotridecane": "4.7 mL, 18.5 mmol, 1.3 equiv; added over 10 min",
+        "reaction": "warm to room temperature and stir 21 h",
+        "workup": "saturated ammonium chloride; three EtOAc extractions; Na2SO4",
+        "purification": "silica gel chromatography, 0-5% EtOAc/hexanes"
+      },
+      "isolated_yield_percent": 76,
+      "characterization": "TLC indicated complete conversion; isolated as an oil (3.5 g, 10.8 mmol)."
+    },
+    {
+      "step_id": "c16_step_2_thp_deprotection",
+      "reaction_id": "ugi3_exact_c16_thp_deprotection_v1",
+      "reaction_class": "thp_ether_deprotection",
+      "variant_input": "deprotection_variant",
+      "reactant_ids": [
+        "thp_protected_hexadec_2_yn_1_ol"
+      ],
+      "reactant_roles": [
+        "protected_internal_alkynol"
+      ],
+      "product_id": "hexadec_2_yn_1_ol",
+      "product_role": "internal_alkynol",
+      "carbon_identity": {
+        "reactant_total_carbons": 21,
+        "product_total_carbons": 16,
+        "discarded_protecting_group_carbons": 5,
+        "route_chain_carbons": 16,
+        "exact_chain_identity_preserved": true
+      },
+      "primary_source_input": "route_primary",
+      "source_locator": "WO 2021/035214, Example 5B, PDF page 145 (printed page 144)",
+      "conditions_source_sha256": "269391717b19a39decad548ec0a35307be6ffff077f242827ce84515c0527f69",
+      "conditions_source_locator": "WO 2021/035214, Example 5B, PDF page 145 (printed page 144)",
+      "conditions": {
+        "substrate": "2.5 g, 7.7 mmol, 1.0 equiv",
+        "solvent": "methanol, 20 mL",
+        "p_toluenesulfonic_acid": "133.4 mg, 0.78 mmol, 0.1 equiv",
+        "reaction": "room temperature, 16 h",
+        "purification": "silica gel flash chromatography, 0-10% EtOAc/hexanes"
+      },
+      "isolated_yield_percent": 86,
+      "characterization": "TLC indicated full conversion; isolated as a white solid (1.6 g, 6.7 mmol)."
+    },
+    {
+      "step_id": "c16_step_3_alkyne_zipper",
+      "reaction_id": "ugi3_exact_c16_alkyne_zipper_v1",
+      "reaction_class": "internal_to_terminal_alkyne_isomerization",
+      "variant_input": "zipper_variant",
+      "reactant_ids": [
+        "hexadec_2_yn_1_ol"
+      ],
+      "reactant_roles": [
+        "internal_alkynol"
+      ],
+      "product_id": "hexadec_15_yn_1_ol",
+      "product_role": "terminal_alkynol",
+      "carbon_identity": {
+        "reactant_total_carbons": 16,
+        "product_total_carbons": 16,
+        "discarded_protecting_group_carbons": 0,
+        "route_chain_carbons": 16,
+        "exact_chain_identity_preserved": true
+      },
+      "primary_source_input": "route_primary",
+      "source_locator": "WO 2021/035214, Example 5C, PDF page 146 (printed page 145)",
+      "conditions_source_sha256": "269391717b19a39decad548ec0a35307be6ffff077f242827ce84515c0527f69",
+      "conditions_source_locator": "WO 2021/035214, Example 5C, PDF page 146 (printed page 145)",
+      "conditions": {
+        "sodium_hydride": "60% dispersion in mineral oil, 2.1 g, 53.3 mmol, 8.0 equiv",
+        "1_3_diaminopropane": "27.8 mL, 333.4 mmol, 50 equiv",
+        "base_activation": "70 C, 1 h; cool to room temperature",
+        "substrate": "1.5 g, 6.6 mmol, 1.0 equiv; added in portions",
+        "reaction": "55 C, 17 h",
+        "workup": "water quench; acidify with 3 N HCl to pH 2; three hexane extractions; Na2SO4",
+        "purification": "silica gel chromatography, 0-5% EtOAc/hexanes"
+      },
+      "isolated_yield_percent": 65,
+      "characterization": "Isolated as a white solid (1.0 g, 4.38 mmol)."
+    },
+    {
+      "step_id": "c16_step_4_primary_alcohol_oxidation",
+      "reaction_id": "ugi3_exact_c16_primary_alcohol_oxidation_v1",
+      "reaction_class": "primary_alcohol_to_aldehyde_oxidation",
+      "variant_input": "oxidation_variant",
+      "reactant_ids": [
+        "hexadec_15_yn_1_ol"
+      ],
+      "reactant_roles": [
+        "terminal_alkynol"
+      ],
+      "product_id": "hexadec_15_ynal",
+      "product_role": "oxoester_aldehyde_body_tail",
+      "carbon_identity": {
+        "reactant_total_carbons": 16,
+        "product_total_carbons": 16,
+        "discarded_protecting_group_carbons": 0,
+        "route_chain_carbons": 16,
+        "exact_chain_identity_preserved": true
+      },
+      "primary_source_input": "oxidation_primary",
+      "source_locator": "Zheng et al., JACS 2013 Supporting Information, page S3, 15-hexadecynal",
+      "conditions_source_sha256": "42f365a30e238adca89c24eb96a7d222b9b9fe33e3a45c32e7eef9c1a18d4984",
+      "conditions_source_locator": "Zheng et al., JACS 2013 Supporting Information, page S3, 15-hexadecynal",
+      "conditions": {
+        "IBX": "1.76 g, 6.3 mmol",
+        "solvent": "DMSO, 6 mL; prepare 1 M IBX solution for 20 min at room temperature",
+        "reaction": "add 15-hexadecynol; room temperature, 3 h; TLC monitoring",
+        "workup": "20 mL water; filtration; ether extraction; brine wash; Na2SO4",
+        "purification": "flash chromatography, ethyl acetate/hexanes"
+      },
+      "isolated_yield_percent": 90,
+      "characterization": "Product isolated as 0.9 g and characterized by product-specific 1H NMR."
+    }
+  ],
+  "terminal_procurement": [
+    {
+      "molecule_id": "tetrahydro_2_propynyloxy_2h_pyran",
+      "role": "terminal_protected_propargyl_alcohol",
+      "canonical_smiles": "C#CCOC1CCCCO1",
+      "inchi_key": "HQAXHIGPGBPPFU-UHFFFAOYSA-N",
+      "vendor": "Sigma-Aldrich",
+      "item_id": "300810",
+      "cas_number": "6089-04-9",
+      "product_url": "https://www.sigmaaldrich.com/US/en/product/aldrich/300810",
+      "identity_exact": true,
+      "item_specific_purity": "98%",
+      "observation_source_input": "terminal_observations",
+      "observed_at_utc": "2026-08-03T02:43:31Z",
+      "expires_at_utc": "2026-09-02T02:43:31Z"
+    },
+    {
+      "molecule_id": "1_bromotridecane",
+      "role": "terminal_alkyl_bromide",
+      "canonical_smiles": "CCCCCCCCCCCCCBr",
+      "inchi_key": "BFDNZQUBFCYTIC-UHFFFAOYSA-N",
+      "vendor": "TCI America",
+      "item_id": "B0935",
+      "cas_number": "765-09-3",
+      "product_url": "https://www.tcichemicals.com/US/en/p/B0935",
+      "identity_exact": true,
+      "item_specific_purity": ">98.0% (GC)",
+      "observation_source_input": "terminal_observations",
+      "observed_at_utc": "2026-08-03T02:43:31Z",
+      "expires_at_utc": "2026-09-02T02:43:31Z"
+    }
+  ],
+  "rejected_evidence": [
+    {
+      "evidence_id": "wo2024073486a2_example2_step1_source_conflict",
+      "status": "rejected_source_conflict",
+      "source_input": "conflicted_source",
+      "source_sha256": "8b439e735042b87030f39150a774e1b0479cb7121f54ed9cf17d9f0e4f01b596",
+      "source_locator": "WO 2024/073486 A2, Example 2 Step 1, PDF page 17 (printed page 16)",
+      "reported_reactants": [
+        "oct-7-yn-1-ol (C8)",
+        "1-bromoheptane (C7)"
+      ],
+      "reported_product": "hexadec-7-yn-1-ol (C16)",
+      "carbon_audit": {
+        "first_reactant_carbons": 8,
+        "second_reactant_carbons": 7,
+        "reactant_carbon_sum": 15,
+        "reported_product_carbons": 16,
+        "is_carbon_coherent": false
+      },
+      "reason": "The written reactants account for C15, not the reported C16 product; no intended reagent substitution is inferred.",
+      "use_in_route": false,
+      "family_promotion_authorized": false,
+      "homologue_promotion_authorized": false
+    }
+  ],
+  "verification_policy": {
+    "randomized_smiles_trials": 100,
+    "require_unique_forward_product": true,
+    "require_exact_carbon_identity": true,
+    "require_two_current_terminal_leaves": true
+  },
+  "planner_budget": {
+    "maximum_depth": 4,
+    "maximum_logical_planner_calls": 1,
+    "maximum_expansions": 4,
+    "maximum_product_candidates": 4,
+    "maximum_verifier_calls": 4,
+    "maximum_elapsed_milliseconds": 0
+  },
+  "expected_summary": {
+    "assessment_as_of_utc": "2026-08-03T03:04:10Z",
+    "target_role": "oxoester_aldehyde_body_tail",
+    "target_smiles": "C#CCCCCCCCCCCCCCC=O",
+    "target_carbon_count": 16,
+    "exact_steps": 4,
+    "uniquely_forward_verified_steps": 4,
+    "randomized_smiles_trials_per_step": 100,
+    "randomized_smiles_total_successes": 400,
+    "terminal_leaf_count": 2,
+    "terminal_availability": "current_closed",
+    "assessment_outcome": "complete",
+    "route_complete": true,
+    "route_step_count": 4,
+    "maximum_route_depth": 4,
+    "unassessed_terminal_leaf_count": 0,
+    "forward_consistency": "exact_unique",
+    "evidence_support": "exact_identity",
+    "reaction_family_admitted": false,
+    "rejected_source_conflict_count": 1,
+    "rejected_source_conflict_used": false,
+    "development_product_coverage_changed": false
+  }
+}

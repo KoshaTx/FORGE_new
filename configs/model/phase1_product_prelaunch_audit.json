@@ -1,0 +1,19 @@
+{
+  "schema_version": "phase1_product_prelaunch_audit_config.v1",
+  "task": "Full-corpus representation audit before Phase 1 GPU training",
+  "inputs": {
+    "phase1_manifest": {
+      "path": "data/splits/phase1/manifest.json",
+      "sha256": "0ffe68b3aad1e6e0a415384ae50e0b04055e2725e77f0ac1f3654f7d09762dad"
+    }
+  },
+  "expected": {
+    "r1_rows": 464265,
+    "maximum_heavy_atoms": 282,
+    "maximum_closure_slots": 12,
+    "required_components_per_product": 1,
+    "minimum_realism_weight": 0.0,
+    "required_size_bin_match": true,
+    "required_r1_state_subset_of_r0": true
+  }
+}

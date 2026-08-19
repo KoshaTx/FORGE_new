@@ -1,0 +1,123 @@
+{
+  "schema_version": "phase1_ugi3_route_saturation_blinded_execution_config.v1",
+  "status": "frozen_one_shot_execution_unrun",
+  "frozen_at_utc": "2026-08-03T04:19:00Z",
+  "experiment_id": "phase1_ugi3_route_saturation_blinded_execution_v1",
+  "purpose": "Execute the already sealed 4,096-program molecular holdout exactly once after immutable R0/R1 binding, then evaluate the same exact-L1-eligible products under both registries without molecular rendering or biological guidance.",
+  "inputs": {
+    "protocol": {
+      "path": "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json",
+      "sha256": "36666eefdc8b0347191165041ea84cc7d9ce977f71442e2e961b79cabb0cd80b"
+    },
+    "binding": {
+      "path": "results/phase1/ugi3_route_registry_pair_v1/binding.json",
+      "sha256": "2f9481ecc2b30335749f57dc250323f64b8b401ec135a4ac565e29aa3e3ebd09"
+    },
+    "holdout_contract": {
+      "path": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "sha256": "c76b43fb59bd4802f5bf8596c8b2095ff8abfd59448b26e75c1f41264b679a79"
+    },
+    "holdout_seal": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/programs.json",
+      "sha256": "20c29c692a3ce6a73584ae4182db93416550a531f36a9e21c1144d1b8efb6ad8"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_2000.pt",
+      "sha256": "e1a0092a6425d19b09a46ab49660d144eccce20785177544dbc5308ab489d21a"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "prepared_training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "implementation": {
+    "execution_module": {
+      "path": "src/forge/route/ugi3_route_saturation_blinded_execution.py",
+      "sha256": "ee09d06c959276eab8e2e5a5d2a1792214bda6010715df1869e73987ed8be820"
+    },
+    "execution_cli": {
+      "path": "scripts/phase1_run_ugi3_route_saturation_blinded_holdout.py",
+      "sha256": "7ebabee5832ff40681a0bbd612cbfe0d03b369fa2c303dd21e6eed3e68e56a04"
+    },
+    "headless_sampling_module": {
+      "path": "src/forge/product/ugi_blinded_headless_sampling.py",
+      "sha256": "770961b5653557545232fab702cc7bd1615173580fa6d60184811ebd97c8b630"
+    },
+    "headless_dependency_manifest": {
+      "path": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+      "sha256": "d1abd0dab7671be94392ddaeadcd0ae13ef93d7a262bd3d3f41a0e596d28cc48"
+    },
+    "joint_flow_module": {
+      "path": "src/forge/product/ugi_joint_sparse_flow.py",
+      "sha256": "ef3ed574701b280efb33a9db5cfc4e2f3e06b2f314adb4a2b96f989e8f764b73"
+    },
+    "registry_pair_contract_module": {
+      "path": "src/forge/route/ugi3_route_registry_pair_contract.py",
+      "sha256": "5b863121578af33129f2fe41088663b03879cd2e3e331f1fd4301c055d97d47e"
+    }
+  },
+  "sampling": {
+    "program_rows": 4096,
+    "program_seed": 20260819,
+    "flow_seed": 20260820,
+    "closure_seed": 20260821,
+    "terminal_seed": 20260821,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "device": "cpu",
+    "evaluate_exact_l1_terminal_admission": true,
+    "render_molecules": false,
+    "biological_guidance_enabled": false
+  },
+  "outputs": {
+    "final_directory": "results/phase1/ugi3_route_saturation_holdout_v1/sample",
+    "attempt_directory": "results/phase1/ugi3_route_saturation_holdout_v1/.sample.one_shot_attempt",
+    "one_shot_claim": "results/phase1/ugi3_route_saturation_holdout_v1/sample.one_shot.claim.json"
+  },
+  "policy": {
+    "sample_exactly_once": true,
+    "permit_retry": false,
+    "permit_resampling": false,
+    "permit_overwrite": false,
+    "render_molecules": false,
+    "inspect_molecules_during_execution": false,
+    "same_products_for_r0_and_r1": true,
+    "exact_role_and_constitutional_identity_only": true,
+    "permit_similarity_or_family_route_closure": false,
+    "permit_post_reveal_registry_or_threshold_tuning": false,
+    "biological_guidance_enabled": false,
+    "write_private_identity_ledgers": true,
+    "write_public_aggregate_only": true
+  },
+  "decision": {
+    "binding_reconciled": true,
+    "one_shot_execution_run": false,
+    "holdout_molecules_inspected": false,
+    "biological_guidance_enabled": false
+  },
+  "nonclaims": [
+    "The paired registry estimand is not a probability of experimental synthesis success.",
+    "The one exact C18 delta does not establish universal route-registry saturation.",
+    "This execution uses no biological guidance and does not authorize prospective candidate selection.",
+    "Identity-bearing sample and transition ledgers remain private; only the validated aggregate is public."
+  ]
+}

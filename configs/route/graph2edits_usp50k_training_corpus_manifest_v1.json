@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.graph2edits_training_corpus_manifest.v1",
+  "corpus_id": "graph2edits-official-uspto50k-canonicalized",
+  "source": {
+    "repository": "https://github.com/Jamson-Zhong/Graph2Edits",
+    "commit": "b12e97391c378e46e79e617d80017e95b21bba65",
+    "archive_path": "data/source_cache/graph2edits_usp50k_figshare_v1/source_b12e97391c378e46e79e617d80017e95b21bba65.tar.gz",
+    "archive_sha256": "834b0d44e019176481ea4b24bafb5f2ffe2d4a2f907125b6fbf27696b550270b"
+  },
+  "identity_policy": {
+    "training_input": "canonicalized_train.csv",
+    "checkpoint_selection_input": "canonicalized_valid.csv",
+    "reported_evaluation_input": "canonicalized_test.csv",
+    "raw_splits_retained_for_lineage": true,
+    "row_count_excludes_header": true
+  },
+  "splits": [
+    {
+      "representation": "raw",
+      "split": "train",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/raw_train.csv",
+      "size_bytes": 15838430,
+      "row_count": 40008,
+      "sha256": "96dd3f57546d8e12b477102a617baa090517c2c05210f2cdf00d0fca9e74508b"
+    },
+    {
+      "representation": "raw",
+      "split": "valid",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/raw_valid.csv",
+      "size_bytes": 1977425,
+      "row_count": 5001,
+      "sha256": "f054f2db0e61b5a664829e433871ef916a143cc3a9a7cbe78f130baf47fa83de"
+    },
+    {
+      "representation": "raw",
+      "split": "test",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/raw_test.csv",
+      "size_bytes": 1974084,
+      "row_count": 5007,
+      "sha256": "606be1a3f7eb6ecae0ba7b8cc2885bd2ebf4ce05b25baef48ba93447811a15f6"
+    },
+    {
+      "representation": "canonicalized",
+      "split": "train",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/canonicalized_train.csv",
+      "size_bytes": 16304865,
+      "row_count": 40008,
+      "sha256": "7ccf0b70e4c4edc78497282fdc6c17e5b8605529c13debfe3ce65c004c124458"
+    },
+    {
+      "representation": "canonicalized",
+      "split": "valid",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/canonicalized_valid.csv",
+      "size_bytes": 2036093,
+      "row_count": 5001,
+      "sha256": "5a4c2b9f57dc16f8a62f2a0f464f1f622d8ee55a4b1343d748977b1720a63f3d"
+    },
+    {
+      "representation": "canonicalized",
+      "split": "test",
+      "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/data/uspto_50k/canonicalized_test.csv",
+      "size_bytes": 2033751,
+      "row_count": 5007,
+      "sha256": "e708b9b4061b34dc6991b5475522dd515bfc475259fd9ffc6c64abc44d9537bc"
+    }
+  ],
+  "checkpoint_selection_receipt": {
+    "path": "data/source_cache/graph2edits_usp50k_figshare_v1/source/experiments/uspto_50k/without_rxn_class/27-06-2022--10-27-22/logs.csv",
+    "size_bytes": 6510,
+    "sha256": "4bb983c3a7bc2e272101814b353025da2861c4dadffa439f0dd54b59b4b248e3"
+  },
+  "scope": {
+    "reaction_class_count": 10,
+    "reaction_class_input_at_inference": false,
+    "lipid_specific_training": false,
+    "proposal_only": true
+  },
+  "nonclaims": [
+    "The corpus snapshot does not establish applicability to FORGE lipid components.",
+    "The corpus snapshot does not create route evidence or synthesis-success labels.",
+    "The Graph2Edits code or checkpoint license does not determine the reuse status of patent-derived reaction records."
+  ]
+}

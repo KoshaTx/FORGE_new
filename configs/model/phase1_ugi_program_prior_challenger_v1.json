@@ -1,0 +1,47 @@
+{
+  "schema_version": "phase1_ugi_program_prior_challenger_config.v1",
+  "status": "frozen_before_building_component-balanced_challenger",
+  "purpose": "Increase component-morphology exploration without replacing the product/family-raked realism prior or selecting stored component graphs.",
+  "inputs": {
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "baseline_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "prior_source": {
+      "path": "src/forge/product/ugi_program_prior.py",
+      "sha256": "493f7e44254bb045961bf89a7daa80095529a99c16d22a98fca9a1257443544c"
+    },
+    "builder": {
+      "path": "scripts/phase1_build_ugi_program_prior_challenger.py",
+      "sha256": "b0b6e097dd0bf858c525c39530e6ffe2600271f7a44432dc22563c3cb7139d8a"
+    },
+    "tests": {
+      "path": "tests/test_ugi_program_prior.py",
+      "sha256": "546637b2ecfd7f9b6f9db3c19b341d79a428e16259e3723f6a76cc54ca596027"
+    }
+  },
+  "estimator": {
+    "production_prior_mass": 0.5,
+    "component_family_balanced_mass": 0.5,
+    "rationale": "A fixed midpoint preserves half of the frozen product/family-raked realism distribution while assigning half of morphology mass by equal family and within-family component coverage.",
+    "component_ids_enter_neural_or_program_state": false,
+    "whole_component_graphs_selected": false
+  },
+  "bounds": {
+    "maximum_component_atoms": 32,
+    "maximum_total_atoms": 80,
+    "maximum_junction_budget": 7,
+    "maximum_cycle_rank": 2,
+    "maximum_attachment_count": 2
+  },
+  "scope": {
+    "may_replace_frozen_v2_prior": false,
+    "may_select_prospective_candidates": false,
+    "requires_matched_diagnostic_and_independent_confirmation": true,
+    "heldout_component_families_inspected": false
+  }
+}

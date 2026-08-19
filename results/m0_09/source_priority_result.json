@@ -1,0 +1,230 @@
+{
+  "artifacts": {
+    "source_priority_queue.csv": {
+      "records": 43,
+      "sha256": "2b664929a735d18b65180b6522a4bca56c7eba9305a3ebe5818e83e8817acb2d"
+    }
+  },
+  "decision": {
+    "marginal_value_queue_implemented": true,
+    "model_training_authorized": false,
+    "next_action": "Use next_review_rank for targeted source review, then let generator-induced missing-route failures and the frozen saturation rule control further curation."
+  },
+  "evidence_contract": {
+    "acquisition_stability": "The original source_queue.csv remains the acquisition authority. This overlay does not change its rows, review ranks, buckets, or downstream hashes.",
+    "biological_provenance": "Biological provenance records the presence and depth of source-linked LNPDB measurements, not their magnitude or transferability to a generated Ugi lipid.",
+    "missing_evidence": "Unassessed motif or Ugi-conversion evidence receives zero credit and is listed explicitly; missing evidence is never inferred as favorable.",
+    "novelty": "Novelty and redundancy are exact component-identity diagnostics only. They do not establish motif transfer, Ugi compatibility, or biological value.",
+    "score_interpretation": "The score prioritizes evidence review. It is not a synthesis-success, biological-potency, route-closure, or procurement score."
+  },
+  "generated_utc": "2026-07-30T23:45:00Z",
+  "inputs": [
+    {
+      "bytes": 2461,
+      "path": "configs/route/m0_09_source_priority.json",
+      "role": "priority_policy",
+      "sha256": "d531ff1fb00c3264eb4e77234995966e9b88a02c7f207b071250e5cdefda7993"
+    },
+    {
+      "bytes": 2548,
+      "path": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+      "role": "agile_component_ledger",
+      "sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    {
+      "bytes": 145769,
+      "path": "results/m0_09/component_source_ledger.csv",
+      "role": "component_source_ledger",
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    {
+      "bytes": 20118803,
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "role": "lnpdb",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    {
+      "bytes": 2551,
+      "path": "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
+      "role": "motif_transfer_ledger",
+      "sha256": "89370ce3dd6d6e39acac25d53f235adf86cc74840f106486b0490746fd624dff"
+    },
+    {
+      "bytes": 13876,
+      "path": "results/m0_09/hydrophobic_motif_transfer.json",
+      "role": "motif_transfer_result",
+      "sha256": "669a71f5d5edc860854509fe375a837d29b343e80a0e35c97bb0eff419376667"
+    },
+    {
+      "bytes": 67946,
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "role": "paper_route_reviews",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    {
+      "bytes": 21156,
+      "path": "results/m0_09/source_queue.csv",
+      "role": "source_queue",
+      "sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    }
+  ],
+  "policy": {
+    "axis_weights": {
+      "agile_exact_novelty": 1,
+      "biological_provenance": 1,
+      "exact_component_redundancy": 1,
+      "method_accessibility": 1,
+      "motif_distinctiveness": 1,
+      "ugi_handle_conversion": 1
+    },
+    "claim_boundary": "The queue prioritizes evidence review. It is not a synthesis-success, biological-potency, route-closure, or procurement score.",
+    "hydrophobic_roles": [
+      "linker",
+      "tail1",
+      "tail2"
+    ],
+    "missing_evidence_score": 0,
+    "ranking_tiebreakers": [
+      "priority_score_descending",
+      "assessed_axis_count_descending",
+      "original_review_rank_ascending",
+      "source_id_ascending"
+    ],
+    "reviewed_source_policy": "Keep completed chemistry reviews in the evidence-value ranking but omit them from next_review_rank.",
+    "thresholds": {
+      "motif_high_class_count": 2,
+      "novelty_high_fraction": 0.75,
+      "redundancy_low_shared_fraction": 0.25,
+      "redundancy_mid_shared_fraction": 0.75
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_source_priority_result.v1",
+  "status": "completed_evidence_bounded_source_priority_queue",
+  "summary": {
+    "acquisition_bucket_counts_preserved": {
+      "commercial_procurement_review": 1,
+      "local_partial_followup": 1,
+      "pmc_first_pass": 25,
+      "publisher_or_author_acquisition": 16
+    },
+    "acquisition_commercial_sources_preserved": 1,
+    "acquisition_publications_preserved": 42,
+    "active_next_review_sources": 39,
+    "axis_evidence_coverage": {
+      "agile_exact_novelty": 43,
+      "biological_provenance": 43,
+      "exact_component_redundancy": 43,
+      "method_accessibility": 43,
+      "motif_distinctiveness": 2,
+      "ugi_handle_conversion": 5
+    },
+    "chemistry_review_complete_sources": 4,
+    "priority_score_distribution": {
+      "0": 1,
+      "1": 2,
+      "10": 1,
+      "11": 1,
+      "2": 3,
+      "3": 9,
+      "4": 5,
+      "5": 4,
+      "6": 7,
+      "7": 4,
+      "8": 3,
+      "9": 3
+    },
+    "source_records": 43,
+    "sources_with_missing_priority_axes": 41,
+    "top_active_sources": [
+      {
+        "missing_priority_axes": [],
+        "next_review_rank": 1,
+        "priority_score": 9,
+        "source_id": "39497197"
+      },
+      {
+        "missing_priority_axes": [],
+        "next_review_rank": 2,
+        "priority_score": 8,
+        "source_id": "40060499"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 3,
+        "priority_score": 8,
+        "source_id": "39502027"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 4,
+        "priority_score": 8,
+        "source_id": "38409275"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 5,
+        "priority_score": 7,
+        "source_id": "26729861"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 6,
+        "priority_score": 7,
+        "source_id": "20080679"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 7,
+        "priority_score": 7,
+        "source_id": "33305471"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 8,
+        "priority_score": 7,
+        "source_id": "38779592"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 9,
+        "priority_score": 6,
+        "source_id": "24969323"
+      },
+      {
+        "missing_priority_axes": [
+          "motif_distinctiveness",
+          "ugi_handle_conversion"
+        ],
+        "next_review_rank": 10,
+        "priority_score": 6,
+        "source_id": "18438401"
+      }
+    ]
+  },
+  "task": "M0-09 source-paper marginal-value priority overlay"
+}

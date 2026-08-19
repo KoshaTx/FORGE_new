@@ -1,0 +1,38 @@
+{
+  "schema_version": "phase1_ugi_production_refit_checkpoint_selection_policy.v4",
+  "status": "frozen_before_production_decoder_checkpoint_sampling",
+  "frozen_at_utc": "2026-08-05T08:32:23Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v3.json",
+    "sha256": "28b20652ff34065feed370f5f7bda54d50b75c112abaac2269d8b99df50cb8df"
+  },
+  "correction": {
+    "scientific_rationale": "The independent program draw and the conditional graph-flow trajectory intentionally use separate frozen random seeds. This administrative correction binds both seeds explicitly and binds the audited Modal runner before any decoder-matched checkpoint output is opened.",
+    "program_draw_changed": false,
+    "flow_sampling_changed": false,
+    "scientific_thresholds_changed": false,
+    "selection_algorithm_changed": false
+  },
+  "overrides": {
+    "status": "frozen_before_production_decoder_checkpoint_sampling",
+    "frozen_at_utc": "2026-08-05T08:32:23Z",
+    "frozen_inputs": {
+      "selection_evaluator": {
+        "path": "scripts/phase1_select_ugi_architecture.py",
+        "sha256": "5e309c227ef7e0b3f2e39a5b2f0f33cd865d69edd3848ac162ea918d4c29e938"
+      },
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "453d43a1df2a8eada52f15fdaeaeebf470ab92f976b113bca69df597c3e78c43"
+      },
+      "checkpoint_audit_runner": {
+        "path": "scripts/modal_phase1_ugi_production_refit_checkpoint_audit.py",
+        "sha256": "e598c5c0525bef80f791109a7eef0bbab8114dd09ee5cfb27c7c958930637d4d"
+      }
+    },
+    "matched_sampling": {
+      "program_seed": 20260813,
+      "seed": 20260814
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "phase1_ugi3_targeted_role_gap_evidence.v1",
+  "scope": "bounded exact-evidence adjudication for one high-impact amine head and one high-impact isocyanide tail",
+  "assessment_as_of_utc": "2026-08-02T04:00:00Z",
+  "direct_procurement_terminal": {
+    "component_id": "ugi-component-0f9b1dfb401dcebcc56e",
+    "role": "amine_head",
+    "canonical_smiles": "NCCCN1CCCCC1",
+    "identity": {
+      "title": "3-(Piperidin-1-yl)propan-1-amine",
+      "synonym": "N-(3-Aminopropyl)piperidine",
+      "inchi_key": "JMUCXULQKPWSTJ-UHFFFAOYSA-N",
+      "cas_rn": "3529-08-6",
+      "form": "neutral"
+    },
+    "vendor_evidence": {
+      "marketplace": "Sigma-Aldrich US",
+      "preferred_partner": "ChemScene LLC",
+      "marketplace_product_code": "CIAH987F216E",
+      "vendor_sku": "CS-0105129",
+      "url": "https://www.sigmaaldrich.com/US/en/product/chemscenellcpreferredpartner/ciah987f216e",
+      "purity": "97%",
+      "item_level_observations": [
+        {
+          "size": "250 mg",
+          "marketplace_sku": "CIAH987F216E-250MG",
+          "availability": "Ships in 5 days - from Aldrich Partner."
+        },
+        {
+          "size": "1 g",
+          "marketplace_sku": "CIAH987F216E-1G",
+          "availability": "Ships in 5 days - from Aldrich Partner."
+        },
+        {
+          "size": "5 g",
+          "marketplace_sku": "CIAH987F216E-5G",
+          "availability": "Ships in 5 days - from Aldrich Partner."
+        }
+      ],
+      "accessed_utc": "2026-08-02T04:00:00Z",
+      "expires_utc": "2026-09-01T04:00:00Z",
+      "observation_note": "The official US marketplace page resolved the exact CAS number, InChI key and preferred-partner item SKUs with explicit five-day shipment status. The separate legacy Aldrich 694134 listing remained cart-dependent and is not the closing record."
+    },
+    "current_item_level_procurement_closed": true,
+    "disposition": "admit_exact_terminal"
+  },
+  "unresolved_isocyanide_target": {
+    "component_id": "ugi-component-b30930b8c5e8b606c770",
+    "role": "isocyanide_tail",
+    "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCC",
+    "identity": {
+      "title": "1-Isocyanotridecane",
+      "inchi_key": "AOLPTTMYDSPOPP-UHFFFAOYSA-N"
+    },
+    "exact_target_found_in_reviewed_product_routes": false,
+    "nonclosing_homologue_evidence": {
+      "source": "AGILE supplementary information",
+      "source_asset": "data/vendor/agile_supplementary_information.pdf",
+      "source_sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+      "locators": [
+        "Supplementary Note 1, pages 4-5: exact C12, C14, C16, C18 and oleyl isocyanide products",
+        "Supplementary Note 1, page 7: exact C11 and C17 isocyanide products"
+      ],
+      "exact_neighbor_products": [
+        "[C-]#[N+]CCCCCCCCCCC",
+        "[C-]#[N+]CCCCCCCCCCCC",
+        "[C-]#[N+]CCCCCCCCCCCCCC",
+        "[C-]#[N+]CCCCCCCCCCCCCCCC",
+        "[C-]#[N+]CCCCCCCCCCCCCCCCC",
+        "[C-]#[N+]CCCCCCCCCCCCCCCCCC"
+      ],
+      "classification": "family_and_neighbouring_homologue_precedent_only"
+    },
+    "disposition": "abstain",
+    "reason": "The bounded primary-source review establishes the two-step primary-amine formylation and formamide-dehydration family for multiple neighboring chain lengths, but it does not report the exact C13 substrate/product route. Homologue interpolation cannot close an exact route under the frozen policy."
+  },
+  "claims_boundary": {
+    "head_procurement_terminal_is_time_limited": true,
+    "partner_marketplace_listing_is_distinguished_from_legacy_manufacturer_listing": true,
+    "homologue_evidence_can_close_exact_isocyanide_route": false,
+    "production_synthesis_guidance": false,
+    "synthesis_success_probability": false
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "m0_03_r0_reconciliation_config.v1",
+  "task": "M0-03 constitutional R0 reconciliation",
+  "seed": 20260730,
+  "inputs": {
+    "r0": {
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "agile_reconciliation": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "agile_reconciliation_ledger": {
+      "path": "results/m0_07/agile_reconciliation_ledger.csv.gz",
+      "sha256": "ae3bf41440b815a8a4cfe5862eccc396fc35d3653ab9266b6b74f53ef90f0e37"
+    },
+    "training_corpus_manifest": {
+      "path": "data/vendor/training_corpus_manifest_v1.json",
+      "sha256": "03eafbbeac5d63b95df4cc488f884fef1c8e9eae0a7d13a1ba9a3df1005c4a39"
+    }
+  },
+  "identity_policy": {
+    "model_graph_identity": "canonical_constitutional_smiles",
+    "stereochemistry_in_product_flow": false,
+    "preserve_isomeric_source_provenance": true,
+    "preserve_formal_charge": true,
+    "preserve_protonation": true,
+    "preserve_tautomers": true,
+    "strip_fragments": false,
+    "require_connected": true,
+    "deduplicate_by_constitution": true,
+    "b4_mixture_contributes_single_structure_weight": false,
+    "b4_mixture_retained_in_exclusion_ledger": true,
+    "b5_uses_reconciled_pure_trans_provenance": true
+  },
+  "expected": {
+    "input_rows": 15433,
+    "output_constitutions": 15229,
+    "input_duplicate_groups": 184,
+    "rows_collapsed": 204,
+    "duplicate_group_size_distribution": {
+      "2": 164,
+      "3": 20
+    },
+    "agile_derived_rows": 1200,
+    "b4_mixture_rows": 100,
+    "b5_corrected_rows": 100,
+    "b4_constitutions_with_exact_b5_support": 100,
+    "mixture_only_constitutions": 0
+  }
+}

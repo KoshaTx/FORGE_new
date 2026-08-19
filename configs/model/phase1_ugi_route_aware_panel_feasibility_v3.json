@@ -1,0 +1,86 @@
+{
+  "schema_version": "phase1_ugi_route_aware_panel_feasibility_config.v3",
+  "assessment_as_of_utc": "2026-08-03T17:30:13Z",
+  "cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+  "scope": {
+    "post_generation_route_assessment": true,
+    "assessment_before_candidate_lock": true,
+    "matched_broad_and_support_arms": true,
+    "exact_l1_l2_l3_policy": true,
+    "new_route_evidence": false,
+    "graph2edits": false,
+    "biological_model_calls": 0,
+    "potency_tilting": false,
+    "candidate_selection": false,
+    "prospective_panel_lock": false,
+    "sealed_holdout_access": false
+  },
+  "cohort": {
+    "production_yield_definition": "all non-measured multiview-interpolative terminals scored under the version-2 full-support policy",
+    "causal_matched_definition": "the legacy 176-per-arm matched analysis remains a secondary controlled comparison and is not redefined here",
+    "eligible_rows_per_arm": {
+      "broad_prior": 560,
+      "support_enriched": 1295
+    },
+    "oracle_scored_rows_per_arm": {
+      "broad_prior": 560,
+      "support_enriched": 1295
+    },
+    "included_continuous_novelty_patterns": [
+      "amine_only",
+      "aldehyde_only",
+      "isocyanide_only",
+      "amine_aldehyde",
+      "amine_isocyanide",
+      "aldehyde_isocyanide",
+      "amine_aldehyde_isocyanide"
+    ]
+  },
+  "panel_targets": {
+    "minimum_evaluable_per_causal_arm": 18,
+    "preferred_evaluable_per_causal_arm": 28,
+    "targets_are_feasibility_thresholds_not_a_panel_lock": true
+  },
+  "inputs": {
+    "generation_result": {
+      "path": "results/phase1/ugi_production_candidate_generation_v1/result.json",
+      "sha256": "3ee63bcc281d968c7d0fd1110fa1cb71ae054377b9f12f12d48614c8fae759c0"
+    },
+    "generation_ledger": {
+      "path": "results/phase1/ugi_production_candidate_generation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "769d8bc521e92a6f77b5db0eaaeb0e879f482cb8646d730cbc9ba1c811631846"
+    },
+    "ranking_result": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v2/result.json",
+      "sha256": "9adad987d87960741376abb5bf497d43b4e95afa473d5d55b4e49c3e36592e1f"
+    },
+    "ranking_ledger": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v2/terminal_rescoring.csv.gz",
+      "sha256": "de98658bcf15c744ac8d7f356e15b4859a7de1d5ab551f7933a6d3641bbd0623"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_model_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+      "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "qualified_reaction_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "current_route_source": {
+      "path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json",
+      "sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+    },
+    "route_completion_utility": {
+      "path": "results/phase1/ugi_route_completion_utility_v1/result.json",
+      "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"
+    }
+  }
+}

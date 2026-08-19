@@ -1,0 +1,472 @@
+{
+  "schema_version": "phase1_ugi_prediction_cohorts.v5",
+  "status": "frozen_before_v5_selection",
+  "frozen_utc": "2026-08-06",
+  "authority": "docs/MANUSCRIPT_AUTHORITY.md section 22; user instruction 2026-08-06 to reselect preferring training-corpus-absent candidates and to reconsider the cohort structure",
+  "amends": "configs/bio/phase1_ugi_prediction_cohorts_v4.json (preserved unchanged)",
+  "preserves": "v1 through v4 configs and every v1 through v4 result artifact remain unmodified. The v4 36-candidate panel is retained on disk as the superseded selection.",
+  "pre_experimental_status": "Nothing has been ordered, no chemistry has been signed off, and no biological measurement exists. This amendment is therefore pre-experimental and does not modify any result.",
+  "purpose": "Reselect the prospective panel so that panel members are absent from the generator's training corpus, and re-index the cohort ladder by what is recombined rather than by what makes the oracle abstain. Adds a head-recombination cohort (H), which is the only cohort that varies the amine head.",
+  "motivating_findings": {
+    "generator_novelty": {
+      "value": 0.8897,
+      "definition": "fraction of distinct valid generated products whose canonical SMILES is absent from the 66,464-product train fold",
+      "n_generated_distinct": 26235,
+      "audit_artifact": "results/phase1/ugi_novelty_audit_v1/result.json",
+      "against_other_reference_sets": {
+        "measured_products_1100": 0.9846,
+        "agile_virtual_library_12276": 0.8922,
+        "full_corpus_all_folds_112386": 0.837
+      },
+      "note": "The corpus is fold-split: train 66,464, calibration 15,800, heldout 30,122. Novelty is defined against the train fold. 404 generated designs reproduce measured AGILE lipids, which is rediscovery rather than memorisation of the generative corpus.",
+      "verification": "Confirmed not to be a canonicalisation or stereochemistry artifact. Neither side carries stereo markers; 5,000/5,000 sampled strings on each side are already in identical canonical form; re-canonicalising both sides through one call and stripping stereo reproduces the same value.",
+      "healthy_range": "GuacaMol and MOSES distribution-learning benchmarks place competent models at 0.8 to 1.0. This value sits inside that band, so the generator is not memorising."
+    },
+    "where_novelty_is_lost": {
+      "measured_against": "the 66,464-product train fold",
+      "raw_generated": 0.8897,
+      "valid_molecule": 0.8897,
+      "exact_ugi_forward_verified": 0.8897,
+      "chemically_admitted": 0.8897,
+      "oracle_qualified_applicability": 0.6073,
+      "v4_panel_as_selected": 0.75,
+      "conclusion": "Novelty falls at exactly one gate, applicability. Validity, exact Ugi forward verification and chemical admission cost nothing. This is selection-induced novelty loss, not memorisation and not mode collapse. It is the standard reliability-against-novelty tension: an oracle is trustworthy only near its training data, so filtering against it pulls the retained set back toward training density.",
+      "why_this_matters_for_the_cohort_ladder": "Q, H, N and X are a ladder across exactly this axis. Prospective measurement at each rung tests how far the oracle stays useful beyond its own support, which is the question the funnel makes concrete."
+    },
+    "component_novelty_of_raw_output": {
+      "against_measured_20_11_5": {
+        "amine_head": 0.996,
+        "aldehyde": 0.997,
+        "isocyanide": 0.995
+      },
+      "against_corpus_block_registry_264_107_53": {
+        "amine_head": 0.965,
+        "aldehyde": 0.962,
+        "isocyanide": 0.954
+      },
+      "reconciliation_with_product_novelty": "Distinct-component novelty and product novelty differ because novel components are each used rarely while registry components are used constantly. Share of draws reusing a registry block: amine 0.560, aldehyde 0.604, isocyanide 0.852. A product enters the corpus only if all three components are registry members and that exact triple was enumerated: 0.324 of draws meet the first condition, 0.731 of those meet the second."
+    },
+    "metric_limitation_recorded": {
+      "issue": "Exact-match novelty is a binary on an exact string and saturates near 1.0 for competent distribution learners. It is a memorisation alarm, not a measure of how far the model reached.",
+      "distance_novelty_vs_train_fold": {
+        "nearest_neighbour_tanimoto": {
+          "p25": 0.72,
+          "median": 0.8254,
+          "p75": 0.9667
+        },
+        "fraction_below_0_7": 0.2167,
+        "perfect_similarity_share": 0.2407,
+        "perfect_similarity_but_different_molecule": "200 of 1,500 sampled"
+      },
+      "fingerprint_blindness": "Binary folded Morgan fingerprints record which local environments are present, not how many, so alkyl homologs of different chain length can produce identical bit sets. Ionizable-lipid potency is chain-length sensitive and the field describes transfection cliffs on exactly this axis, so a perfect fingerprint score between two lipids of different tail length is a metric artifact, not chemical equivalence. That is also why exact-match novelty is the appropriate primary metric here.",
+      "scaffold_novelty_is_uninformative": "Murcko scaffold novelty is 0.1272, but a lipid's product scaffold is essentially its head ring: the reference sample carries 61 distinct scaffolds against 211 among generated designs. The generator explores more scaffold diversity than the corpus contains, and the low percentage reflects the metric rather than the chemistry."
+    }
+  },
+  "naming": {
+    "note": "Prediction-evidence cohorts are Q/H/N/X/B. Route-evidence labels remain R1/R2/R3.",
+    "Q": "Qualified: oracle issues a calibrated prediction; the combination is new",
+    "H": "Head recombination: exactly one unseen component and it is the amine head, built from measured head vocabulary",
+    "N": "Near-boundary tail analog transfer: exactly one unseen aldehyde inside the similarity envelope",
+    "X": "Extrapolative: exactly one unseen aldehyde beyond the similarity envelope",
+    "B": "Branched exploratory: ester-linked branched aldehyde chemotype"
+  },
+  "correction_of_v4_cohort_semantics": {
+    "what": "The v4 config described Q_high membership as 'oracle_scored, all component identities measured'. That is not what oracle_scored means.",
+    "finding": "All 4,333 qualified rows carry reason code interpolative_nonmeasured_oracle_scored. The qualified support registry spans 23 amines, 163 aldehydes and 15 isocyanides, of which 6, 156 and 11 respectively were never measured. Every one of the 36 v4 panel candidates already carries at least one never-measured building block, and 12 carry two.",
+    "consequence": "Q was never a zero-component-novelty cohort. The v5 cohort definitions state the support criterion rather than a measured-identity criterion that was never enforced.",
+    "not_a_loosening": "No criterion changes. Only the description is corrected to match the criterion actually applied."
+  },
+  "correction_of_amine_role_exclusion": {
+    "supersedes": "configs/bio/phase1_ugi_frontier_eligibility_v1.json key amendment_2026-08-06.amine_exclusion_now_data_supported",
+    "prior_claim": "The measured amine set has median internal nearest-neighbour similarity 0.60 and minimum 0.17, so 'near the boundary' is not a meaningful notion for that role.",
+    "why_that_reasoning_was_wrong": "The 0.17 minimum reflects fingerprint sparsity on 83 to 186 Da fragments spanning six genuinely distinct Murcko scaffolds. It characterises the diversity of the measured set. It does not establish that a new head cannot be an interpolant. Generated head NCCCN1CCCCC1 sits at Tanimoto 0.94 to a measured head, closer than most measured heads are to each other.",
+    "what_replaces_it": "For a scattered categorical role, nearest-neighbour distance alone is the wrong ruler. The head_recombination_rule below tests structural recombination instead, and additionally requires similarity at or above the measured set's MEDIAN internal nearest-neighbour value rather than its minimum.",
+    "direction": "The replacement threshold of 0.60 is stricter than the 0.17 that a minimum-based rule would have produced for this role."
+  },
+  "training_corpus_absence": {
+    "requirement": "the candidate's canonical product SMILES must be absent from the TRAIN FOLD",
+    "reference_artifact": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+    "reference_sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184",
+    "train_fold_size": 66464,
+    "definition_rationale": "Novelty in generative chemistry is defined as absence from the training set. The corpus is fold-split into train 66,464, calibration 15,800 and heldout 30,122. Only the train fold was used to fit the generator, so it is the correct denominator. Measuring against all 112,386 counts calibration and heldout products as training data and understates novelty.",
+    "applies_to": [
+      "Q_high",
+      "Q_low",
+      "H_head_recombination",
+      "N_transfer",
+      "X_extrapolative",
+      "B_branched"
+    ],
+    "secondary_statistic_reported_not_required": {
+      "what": "absence from the full 112,386-product corpus, all folds",
+      "why_not_required": "The stricter bar was evaluated and rejected on evidence, not convenience. Under it Q, H and N still fill comfortably (928, 23 and 76 candidates), but the branched cohort drops to zero available candidates and X drops to 4 candidates for 3 slots. It would eliminate a whole chemotype cohort while adding nothing the field-standard metric does not already establish.",
+      "reporting": "recorded per candidate and reported in the audit package, so a reader applying the stricter definition can recompute the panel's novelty themselves"
+    },
+    "shortfall_policy": "If a cohort cannot be filled from train-fold-absent candidates, the shortfall is reported and the cohort is left short. Train-fold-present candidates are never substituted in silently.",
+    "comparison": "canonical SMILES string equality, both sides verified to be in identical RDKit canonical form with no stereochemistry"
+  },
+  "similarity_envelope": {
+    "metric": "Tanimoto on Morgan fingerprints, radius 2, 2048 bits",
+    "aldehyde": {
+      "reference_set": "measured training aldehydes",
+      "boundary": 0.65,
+      "derivation": "minimum internal nearest-neighbour similarity among the 11 measured aldehydes",
+      "unchanged_from": "v1 through v4"
+    },
+    "measured_internal_geometry": {
+      "aldehyde": {
+        "n": 11,
+        "min": 0.65,
+        "median": 0.91
+      },
+      "isocyanide": {
+        "n": 5,
+        "min": 0.73,
+        "median": 1.0
+      },
+      "amine_head": {
+        "n": 20,
+        "min": 0.17,
+        "median": 0.6
+      }
+    },
+    "role_geometry_note": "The three roles are not the same kind of variable. Measured aldehydes form a tight homologous series and admit genuine interpolation: 991 of 2,037 generated new aldehydes, 48.6%, sit at or above 0.65. Measured isocyanides are near-duplicates of each other so the envelope is tight and the pool thin: 114 of 872, 13.1%. Measured amine heads are 20 discrete chemotypes across 6 Murcko scaffolds and behave as a categorical factor, which is why they get a recombination rule rather than a distance threshold."
+  },
+  "head_recombination_rule": {
+    "purpose": "Define, before any head-cohort score is inspected, which unseen amine heads count as recombinations of measured head vocabulary rather than head-group extrapolation.",
+    "measured_head_scaffolds": [
+      "(acyclic)",
+      "C1CCNCC1",
+      "C1CCNC1",
+      "C1COCCN1",
+      "c1cn[nH]c1",
+      "C1CNCCN1"
+    ],
+    "measured_head_mw_range": [
+      83.1,
+      186.3
+    ],
+    "criteria_all_required": {
+      "murcko_scaffold": "Bemis-Murcko scaffold of the head must be one of the six measured head scaffolds, where an acyclic head maps to the literal token (acyclic)",
+      "element_policy": "every atom in {C, N, O}",
+      "molecular_weight": "within the measured head MW range inclusive",
+      "basic_nitrogen_count": "between 1 and 4 inclusive, matching the measured range, counting non-aromatic nitrogens with three heavy-atom-plus-hydrogen connections",
+      "nearest_neighbour_similarity": 0.6
+    },
+    "threshold_derivation": "0.60 is the MEDIAN internal nearest-neighbour Tanimoto of the 20 measured amine heads. For a scattered categorical reference set the median is the defensible reference point: a new head at or above it is at least as close to the measured set as a typical measured head is to its own nearest neighbour. Using the minimum, as the aldehyde and isocyanide rules do, would give 0.17 and admit almost anything containing nitrogen.",
+    "strictness_statement": "This rule is strictly narrower than the excluded-role policy it replaces would have been under a minimum-based threshold, and it admits no candidate that fails any chemistry, route, envelope or step-count gate.",
+    "information_used": "Measured training components and the structure of generated heads. No head-cohort score, ranking or potency value was inspected before this rule was written.",
+    "qualifying_heads_found": 8,
+    "worked_examples": {
+      "NCCCN1CCCCC1": "1-(3-aminopropyl)piperidine, T=0.94; recombines the piperidine ring of NCCN1CCCCC1 with the propyl linker of NCCCN1CCCC1",
+      "NCCN1CCOCC1": "4-(2-aminoethyl)morpholine, T=0.73; the ethyl-linker homolog of measured NCCCN1CCOCC1",
+      "NCCCN1CCNCC1": "1-(3-aminopropyl)piperazine, T=0.73; the propyl homolog of measured NCCN1CCNCC1",
+      "NCCCCN1CCCC1": "1-(4-aminobutyl)pyrrolidine, T=0.84; the next homolog of measured NCCCN1CCCC1"
+    }
+  },
+  "cohorts": {
+    "Q_high": {
+      "n": 12,
+      "authority_tier": "qualified_role_holdout",
+      "membership": "authority tier qualified_role_holdout, train-fold-absent, route-complete, envelope-passing, at most 4 synthetic steps",
+      "ordering_score": "calibrated conformal lower bound (lcb90)",
+      "selection": "highest lcb90 subject to the diversity rule, walking the frozen ranking downward",
+      "why_the_tier_restriction": {
+        "finding": "No generated design has zero unseen components. Among oracle-qualified admitted rows the unseen-role breakdown is aldehyde 1,858, aldehyde+isocyanide 1,643, isocyanide 643, amine+aldehyde 56, all three 54, amine 42, amine+isocyanide 37. Zero rows have no unseen role.",
+        "consequence": "A membership rule reading 'all component identities measured' selects nothing, and a rule reading 'oracle_scored' selects across every evidence class at once, including unseen-head designs that belong in H.",
+        "resolution": "Q is the qualified_role_holdout tier: an unseen isocyanide only, which is the strongest evidence class the generated pool contains. This is the tier v4 already drew Q from.",
+        "additional_benefit": "It makes Q disjoint from H, N, X and B by construction rather than by coincidence."
+      }
+    },
+    "Q_low": {
+      "n": 7,
+      "membership": "same qualified, corpus-absent, route-complete population as Q_high",
+      "ordering_score": "calibrated conformal lower bound (lcb90)",
+      "selection": "lowest lcb90 among candidates that survive the matching contract",
+      "matching_contract": {
+        "pool": "bottom quartile of lcb90 within the qualified corpus-absent route-complete population",
+        "method": "nearest-neighbour matching to Q_high in standardized covariate space",
+        "covariates": [
+          "molecular_weight",
+          "clogp",
+          "tpsa",
+          "heavy_atom_count",
+          "rotatable_bonds",
+          "formal_charge",
+          "component_role_classes",
+          "component_reuse",
+          "route_step_count"
+        ],
+        "prohibited_in_distance": "predicted potency, lcb90, oracle mean, or any biological outcome beyond the frozen low-rank eligibility criterion",
+        "purpose": "a chemically credible ranking control, not maximal separation of the two arms",
+        "reporting": "high-versus-low balance table with standardized differences",
+        "unchanged_from_v4": true
+      }
+    },
+    "H_head_recombination": {
+      "n": 6,
+      "new_in_v5": true,
+      "membership": "exactly one unseen component and it is the amine head; the head satisfies head_recombination_rule; aldehyde and isocyanide within the qualified support registry; corpus-absent; exact forward verified; route-complete; envelope-passing; at most 4 synthetic steps",
+      "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation",
+      "ordering_rationale": "The oracle abstains on an unseen head, so the calibrated lower bound is undefined. The conservative statistic is the same one used for N and X and the same one AGILE used to rank their candidate library.",
+      "why_this_cohort_exists": "The v4 panel varies only the aldehyde and never the amine head, which the model's own saliency analysis calls the dominant activity determinant. H is the only cohort that reaches at the head position.",
+      "diversity": {
+        "rule": "distinct amine head preferred; at most 4 candidates may share one head; whole-product pairwise Tanimoto at most 0.80 within the cohort",
+        "honest_limitation": "The qualifying pool is head-concentrated. Of 23 route-complete candidates, 17 sit on NCCCN1CCCCC1 and 4 on NCCN1CCOCC1. H is therefore a reach at 2 to 4 distinct heads, not six independent head demonstrations, and must be described that way."
+      },
+      "procurement_note": "Heads have no synthesis route in this framework and must be purchasable. Four of the eight qualifying heads are confirmed in the procurement ledger at 57 to 95 vendors, including both heads that dominate the pool. The remaining four require a vendor lookup before any candidate carrying them is selectable."
+    },
+    "N_transfer": {
+      "n": 8,
+      "membership": "exactly one unseen aldehyde, similarity to measured at or above 0.65, corpus-absent, amine and isocyanide within the qualified support registry, exact forward verified, route-complete",
+      "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation",
+      "composition": {
+        "strongest": 6,
+        "lower_edge": 2,
+        "lower_edge_definition": "highest conservative score among eligible candidates whose aldehyde similarity falls in the lowest quartile of the eligible corpus-absent N pool"
+      }
+    },
+    "X_extrapolative": {
+      "n": 3,
+      "membership": "exactly one unseen aldehyde, similarity to measured below 0.65, corpus-absent, amine and isocyanide within the qualified support registry, exact forward verified, route-complete",
+      "ordering_score": "conservative ensemble score, ensemble_mean minus ensemble_standard_deviation",
+      "composition": {
+        "near_envelope": 2,
+        "remote": 1
+      },
+      "route_headroom_warning": "Only 4 corpus-absent X candidates are currently route-assessed against 3 slots. The route pass defined below must extend X coverage before selection, otherwise the near-envelope and remote split is determined by route-assessment coverage rather than by the frozen rule."
+    },
+    "B_branched": {
+      "n": 4,
+      "membership": "ester-linked branched aldehyde chemotype, corpus-absent, passing every chemistry and physicochemical screen, route-complete",
+      "branch_definition_smarts": "[CX4;!R]([CX4,CX3])([CX4,CX3])[CX4,CX3]",
+      "ordering_score": "lcb90 where the candidate is oracle-qualified, otherwise conservative ensemble score; the statistic used is recorded per candidate and the two are never pooled into one ranking",
+      "correction_from_v4": {
+        "prior_claim": "B is 0 of 14 corpus-absent, so branched candidates cannot be novel.",
+        "why_wrong": "Two separate errors. First, the claim measured absence against all 112,386 corpus products rather than the 66,464-product train fold. Against the correct denominator all six v4 B candidates are novel: every one sits in the heldout fold and was never trained on. Second, a generic branch SMARTS applied to the whole product matches the tert-butyl ester carried by many isocyanide tails, which has nothing to do with the ester-linked branched aldehyde this cohort tests.",
+        "branch_motif_scope": "The branch test is applied to the aldehyde component only, never to the whole product.",
+        "main_run_availability": "26 of 2,044 generated aldehydes carry the branch motif, giving 14 envelope-passing products. All 14 are absent from both the train fold and the full corpus, and none is route-complete. The main production run therefore contributes no branched candidate, exactly as the v4 structural audit found.",
+        "source_lane": "B candidates come from the branch-conditioned lane, results/phase1/ugi_branch_exploration_applicability_v1, not from the main 32,768-draw run.",
+        "measured_precedent": "1 of 11 measured aldehydes carries the motif, CCCCCC(C)CCC(=O)OCCCCCC=O."
+      },
+      "diversity": {
+        "rule": "distinct amine head required; distinct isocyanide preferred",
+        "rationale": "B is a single-motif cohort by construction. A whole-product Tanimoto ceiling fights that purpose because products sharing the branched aldehyde are necessarily similar. The meaningful diversity axis is component context."
+      },
+      "shortfall_policy": "If the pool cannot fill 4 train-fold-absent branched slots, report the shortfall. Do not substitute train-fold-present branched candidates without a recorded decision."
+    },
+    "B_qualified_reference": {
+      "n": 2,
+      "membership": "the exact measured AGILE branched aldehyde CCCCCC(C)CCC(=O)OCCCCCC=O, oracle-qualified, train-fold-absent, route-complete, envelope-passing, distinct amine heads",
+      "ordering_score": "calibrated conformal lower bound (lcb90)",
+      "purpose": "In-domain reference on the same acyl motif as B_branched. Without it a branched outcome cannot be attributed: if the reference pair works and the exploratory four do not, the model's extrapolation on this motif is unreliable; if both work, branching itself is the driver; if neither works, the motif does not transfer to this generated chemistry.",
+      "novelty_status": "By construction this aldehyde is one of AGILE's curated blocks, so these two candidates are not novel against the AGILE library. That is intended. A control's job is interpretive, not novel, for the same reason Q_low is not required to be novel.",
+      "reporting": "reported separately from B_branched and never pooled with it, and excluded from any panel-level novelty headline, which is computed over the reach cohorts"
+    }
+  },
+  "route_pass": {
+    "status": "not_required_for_v5",
+    "why": "A route pass was scoped while the requirement was full-corpus absence, which left the branched cohort with zero available candidates and X with four candidates for three slots. Under train-fold absence every cohort fills from candidates that are already route-assessed: Q 1,434, N 187, H 23, X 5, B from the branch-conditioned lane. No new Tail A disconnection, isocyanide route or vendor lookup is needed to build v5.",
+    "residual_coverage_limit_disclosed": "Route-ledger coverage still bounds the eligible pools, and that is a coverage property rather than a chemistry result. The ledgers hold 1,699 procurement records, 174 Tail A disconnections and 15 isocyanide routes, all built for previously considered candidates. Any statement about what is or is not routable outside that coverage is not supported by this work.",
+    "outstanding_lookups": "Four of the eight qualifying head-recombination amines are absent from the procurement ledger. The two heads that dominate the H pool are confirmed at 64 and 95 vendors, so H can be filled without them, but any selected candidate carrying one of the four requires a vendor lookup before lock."
+  },
+  "shared_requirements": {
+    "exact_ugi_validity": {
+      "exact_forward_verified": true,
+      "forward_product_count_minimum": 1
+    },
+    "route": {
+      "requirement": "route_complete",
+      "definition": "every component either purchasable or reduced to purchasable material by a forward-verified route",
+      "unresolved_material_leaves_permitted": 0,
+      "maximum_synthetic_steps": 4
+    },
+    "physicochemical_screen": {
+      "note": "unchanged from v1 through v4",
+      "molecular_weight": [
+        563.91,
+        792.38
+      ],
+      "clogp": [
+        7.08,
+        14.17
+      ],
+      "tpsa": [
+        70.67,
+        122.71
+      ],
+      "comparison_tolerance": 1e-06
+    },
+    "chemistry_sanity_filter": "inherits configs/bio/phase1_ugi_prediction_cohorts_v4.json key chemistry_sanity_filter_v3 without modification, including the 12 passing unit tests and the explicit allowance for alpha,beta-unsaturated esters"
+  },
+  "diversity_rules": {
+    "scope": "cohort-specific, never global",
+    "Q_high": {
+      "metric": "Tanimoto, Morgan radius 2, 2048 bits, complete products",
+      "maximum_pairwise": 0.8
+    },
+    "Q_low": {
+      "maximum_pairwise_within_cohort": 0.85,
+      "cross_cohort_exclusion": "NONE"
+    },
+    "H_head_recombination": {
+      "maximum_pairwise_within_cohort": 0.8
+    },
+    "N_transfer": {
+      "maximum_pairwise_within_cohort": 0.7
+    },
+    "X_extrapolative": {
+      "maximum_pairwise_within_cohort": 0.7
+    },
+    "B_branched": {
+      "metric": "component context, not whole-product Tanimoto"
+    },
+    "measured_metric_defect_not_actioned": {
+      "issue": "These ceilings run on binary folded Morgan fingerprints, which record which local atom environments are present but not how many. Alkyl chains are the same few environments repeated, so lipids of different tail length collapse to the same bit set.",
+      "measurement": {
+        "scope": "the 23-candidate head-recombination pool, all pairs",
+        "pairs_the_binary_metric_calls_identical": 30,
+        "of_which_genuinely_identical": 1,
+        "mass_difference_among_the_other_29": "14.0 to 182.4 Da, up to roughly thirteen methylenes",
+        "same_pairs_under_count_fingerprints": "0.758 to 1.000, with only the true 0 Da duplicate at 1.000",
+        "pairs_rejected_by_the_0_80_ceiling": 148,
+        "still_rejected_under_count_fingerprints": 126
+      },
+      "why_this_matters_chemically": "Ionizable-lipid potency is chain-length sensitive and the field describes transfection cliffs on that axis, so two lipids separated by several methylenes are different molecules, not near-duplicates.",
+      "counterfactual_if_the_metric_were_switched": {
+        "H_cohort": "4 of 6 under binary, 5 of 6 under counts; still short",
+        "Q_high": "12 under both, but only 6 of 12 members in common, and the band moves from 2.91-6.96 to 2.58-6.96",
+        "N_strongest": "6 under both, 4 in common"
+      },
+      "decision": "Not actioned in v5. Switching the metric reshuffles half of Q_high, which carries the primary endpoint, and would invalidate the derivations of the 0.65 aldehyde envelope and the 0.60 head-recombination threshold, both computed under binary fingerprints. The gain is one candidate in a secondary cohort.",
+      "consequence_accepted": "The H cohort fills 4 of 6. The shortfall is a metric artifact, is reported as such, and is not concealed by substituting candidates from elsewhere.",
+      "if_revisited": "Any future switch must re-derive every binary-derived threshold in the same pass, and must be recorded as a metric correction rather than a ceiling change."
+    }
+  },
+  "analysis_contract": {
+    "primary_endpoint": "continuous potency measurement",
+    "secondary_endpoint": "thresholded hit rate, reported as interpretable but not as the primary analysis",
+    "primary_comparison": "Q_high versus Q_low",
+    "power_statement": "Ex ante power at assumed true rates 67% versus 10%, one-sided alpha 0.05, with 12 versus 7, is 0.65. Do not describe it as guaranteed or as properly powered.",
+    "power_statement_unchanged_and_why": "The v5 reselection widens the predicted lcb90 separation between Q_high and Q_low relative to v4. The power calculation depends on assumed true biological hit rates, not on predicted score separation, so the assumed rates and the resulting 0.65 are carried over from v4 unchanged. Revising them to match an observed score gap would be tuning the analysis to the selection.",
+    "ranking_statistic_confound": {
+      "issue": "Q ranks by lcb90 while H, N, X and part of B rank by mean minus standard deviation. A cross-cohort difference in outcome could reflect either the evidence class or the ranking statistic.",
+      "remedy": "Record both statistics for every candidate in every cohort. Q_high versus Q_low uses lcb90. Any cross-cohort comparison uses the conservative statistic, which is defined everywhere. This costs no wet-lab slot and changes no candidate.",
+      "prohibited": "reading the panel as one ranked list across cohorts"
+    },
+    "population_separation": "Q, H, N, X and B are never pooled with each other, and none is pooled into the Q primary analysis",
+    "intention_to_test": "Every locked candidate stays in the denominator: route attempted, correct product isolated, formulation QC passed, biological assay completed. Backups may be prepared operationally but any replacement is separately labelled."
+  },
+  "quota": {
+    "Q_high": 12,
+    "Q_low": 7,
+    "H_head_recombination": 6,
+    "N_transfer": 8,
+    "X_extrapolative": 3,
+    "B_branched": 4,
+    "B_qualified_reference": 2,
+    "panel_total": 42
+  },
+  "expected_novelty_of_v5_panel": {
+    "product_novelty_vs_training_set": "100% by construction, since train-fold absence is a membership requirement for every cohort",
+    "component_novelty": "every candidate carries at least one never-measured building block, as was already true of v4",
+    "v4_comparison": "27 of 36 train-fold-absent, 75%. The often-quoted 25% figure measured against all 112,386 corpus products and counted calibration and heldout molecules as training data.",
+    "honest_framing": "The reselection moves panel novelty from 75% to 100%. It is a hygiene improvement, not a rescue, and must not be described as one.",
+    "caveat": "This is a selection property, not a generator property. The generator's novelty is 89.0% and is reported separately."
+  },
+  "known_costs_of_reselection": {
+    "Q_high_band": "under full-corpus absence a greedy selection occupied lcb90 2.03 to 6.96 against v4's 3.19 to 6.59. Under the looser train-fold criterion the eligible pool grows from 928 to 1,434, so the realised band is expected to be at least this good. The realised band is reported after selection and is not a target.",
+    "X_headroom": "5 train-fold-absent route-assessed candidates for 3 slots. Thin, and the near-envelope versus remote split is therefore constrained by route coverage as much as by the frozen rule. Disclose this rather than presenting the split as a free design choice.",
+    "H_head_concentration": "2 to 4 distinct heads across 6 slots",
+    "B_status": "no cost. All six v4 B candidates sit in the heldout fold and satisfy train-fold absence unchanged."
+  },
+  "information_inspected_before_freezing": {
+    "disclosure": "Feasibility checks were run before this configuration was written, and they revealed score bands. This is disclosed rather than concealed.",
+    "inspected": [
+      "counts of corpus-absent candidates per cohort",
+      "the lcb90 band a greedy corpus-absent Q_high selection would occupy under the 0.80 ceiling, 2.03 to 6.96",
+      "the conservative-score range of the head-recombination pool, 2.15 to 10.84",
+      "the top conservative scores of the corpus-absent N and X pools",
+      "route-ledger coverage counts"
+    ],
+    "not_inspected": [
+      "any biological measurement, because none exists",
+      "identities of the candidates a v5 selection would return"
+    ],
+    "why_this_is_acceptable": "Every threshold in this file is inherited unchanged from v1 through v4, or, in the case of the head-recombination rule, derived from measured training-set geometry alone. No threshold was set to a value chosen after seeing which candidates it would admit."
+  },
+  "input_pins": {
+    "training_corpus": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "corpus_fold_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "agile_virtual_library": {
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "rescoring_ledger": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+      "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+    },
+    "measured_products": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "scored_N_pool": {
+      "path": "results/phase1/ugi_prediction_cohorts_v1/scored_N.jsonl.gz",
+      "sha256": "12e1fb7573b35adc8d439934fc8f3f790cc2cc212b92df690298568f7f674a9c"
+    },
+    "scored_X_pool": {
+      "path": "results/phase1/ugi_prediction_cohorts_v1/scored_X.jsonl.gz",
+      "sha256": "a361ab0827f33460da811751aedbed6d7a04e4dc976b20025fa06a06d92d406e"
+    },
+    "superseded_config": {
+      "path": "configs/bio/phase1_ugi_prediction_cohorts_v4.json",
+      "sha256": "82ad741431df79210ffd6265faa140ae51e4ba99edca1e11da7cb23588b83426"
+    }
+  },
+  "determinism": {
+    "selection_seed": 20260806,
+    "requirement": "every selection walks a frozen ranking with deterministic tie-breaking on canonical product SMILES; selection order is recorded per candidate"
+  },
+  "environment": {
+    "python": "3.14.2",
+    "rdkit": "2026.03.4"
+  },
+  "audit_package_required_before_lock": [
+    "v4 to v5 protocol diff and rationale",
+    "pre- and post-filter pool counts by cohort, including corpus-absence attrition",
+    "route-pass disclosure: candidates assessed, resolved, resolution rate, per cohort",
+    "chemistry and route attrition reasons",
+    "selected IDs, structures, component identities, both ranking statistics, uncertainties, similarities",
+    "Q_high and Q_low score distributions and covariate balance table",
+    "within-cohort similarity matrices and component-reuse counts",
+    "H head-identity accounting and the head-concentration statement",
+    "N and X distinct-aldehyde accounting",
+    "complete route dossiers",
+    "chain-length blindness measurement for the diversity ceilings",
+    "deterministic selection seed and selection-order audit"
+  ],
+  "nonclaims": [
+    "Cohort membership is not a prediction of activity.",
+    "Corpus absence is a novelty property of the selection, not evidence of activity or of superior chemistry.",
+    "H eligibility does not assert validated generalization to unseen amine heads. Six candidates across 2 to 4 distinct heads support a case study, not a statistical claim.",
+    "N eligibility does not assert validated generalization to unseen aldehydes.",
+    "Three X candidates support a case study, not a statistical claim about extrapolation.",
+    "The conservative ensemble score carries no coverage guarantee outside the qualified region.",
+    "A route proposal is not evidence. Unresolved chemistry is not called unsynthesizable."
+  ],
+  "prohibited": [
+    "retraining or modifying the generator",
+    "retuning applicability, potency or synthesis guidance on the same evidence",
+    "weakening any chemistry, route, envelope or applicability gate",
+    "modifying any v1 through v4 config or result artifact",
+    "substituting corpus-present candidates for corpus-absent ones without a recorded decision",
+    "pooling cohorts into one ranked list",
+    "adjusting any threshold after inspecting which candidates it admits"
+  ]
+}

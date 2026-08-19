@@ -1,0 +1,98 @@
+{
+  "schema_version": "phase1_ugi_dynamic_controller_analysis_config.v1",
+  "status": "versioned_nonselecting_controller_choice_analysis",
+  "task": "Determine with program-disjoint evaluation whether frozen morphology programs or saved categorical partial states predict target-free terminal structural support well enough to justify a proposal controller instead of plain terminal screening",
+  "scope": {
+    "read_only": true,
+    "frozen_generator_only": true,
+    "target_free_terminal_support_only": true,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false,
+    "smc_execution": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "census_result": {
+      "path": "results/phase1/ugi_dynamic_frozen_prior_terminal_census_v1/result.json",
+      "sha256": "af56a3aecbf441414e5dc71881cf242c73524f71f9689bf40ac95fac33654c84"
+    },
+    "census_validation_result": {
+      "path": "results/phase1/ugi_dynamic_frozen_prior_terminal_census_validation_v1/result.json",
+      "sha256": "cd6635e34e0fbba39e5aca21baa50b0c7b4817854c09bd33c54ecc108537be7b"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "partial_state_manifest": {
+      "path": "results/phase1/ugi_dynamic_frozen_prior_terminal_census_v1/partial_state_manifest.json",
+      "sha256": "9a4a2ef5c4323156e7f666849e90d646fb1a511f264e97b540fb8c9acc7db4fd"
+    },
+    "runner": {
+      "path": "scripts/phase1_analyze_ugi_dynamic_controller.py",
+      "sha256": "db686cb3db747a90e5a3724902ff018bcf8add193c4405fc6664bb5d837a1b63"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_dynamic_controller_analysis.py",
+      "sha256": "e3c7b16fb55b71372a48a9ec96380620a65b19830d91f46f16550ebe7a33b3b4"
+    },
+    "terminal_ledger": {
+      "path": "results/phase1/ugi_dynamic_frozen_prior_terminal_census_v1/terminal_ledger.jsonl.gz",
+      "sha256": "80fef13b75984e1730bc55732396f0d11c30a437de72136c6176d0b99caee1ef"
+    },
+    "tests": {
+      "path": "tests/test_ugi_dynamic_controller_analysis.py",
+      "sha256": "9444ffc1b9072cba4027a7ffd4f0fb9e06c2fc1f0a5db0fc1070bd9f69ae567a"
+    }
+  },
+  "analysis": {
+    "outer_folds": 5,
+    "fold_salt": "phase1-ugi-dynamic-controller-program-group-v1",
+    "logistic_l2": 2.0,
+    "allocation_fraction": 0.25,
+    "clustered_bootstrap": {
+      "replicates": 10000,
+      "seed": 20260804,
+      "unit": "program_sha256"
+    },
+    "hgb": {
+      "learning_rate": 0.04,
+      "max_iter": 150,
+      "max_leaf_nodes": 7,
+      "max_depth": 3,
+      "min_samples_leaf": 50,
+      "l2_regularization": 2.0,
+      "random_state": 20260804
+    },
+    "gates": {
+      "m0_minimum_brier_relative_reduction": 0.05,
+      "m0_minimum_average_precision_lift": 1.25,
+      "minimum_auroc": 0.60,
+      "minimum_calibration_slope": 0.50,
+      "maximum_calibration_slope": 1.50,
+      "minimum_program_coverage": 0.25,
+      "m0_minimum_support_yield_relative_improvement": 0.25,
+      "minimum_diverse_yield_relative_improvement": 0.15,
+      "m1_minimum_brier_relative_reduction_over_m0": 0.10,
+      "m1_minimum_average_precision_lift_over_m0": 0.20,
+      "m1_minimum_support_yield_relative_improvement_over_m0": 0.20,
+      "simplicity_tolerance": 0.10
+    }
+  },
+  "interpretation": {
+    "simplest_passing_controller_wins": true,
+    "terminal_radius_is_structural_support_not_potency": true,
+    "exact_novelty_is_not_an_applicability_gate": true,
+    "hgb_is_a_challenger_not_the_authority": true,
+    "smc_requires_a_separate_confirmatory_experiment": true
+  }
+}

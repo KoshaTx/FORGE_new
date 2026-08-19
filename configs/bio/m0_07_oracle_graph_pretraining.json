@@ -1,0 +1,75 @@
+{
+  "schema_version": "m0_07_oracle_graph_pretraining_config.v1",
+  "task": "M0-07 label-free R0 graph-encoder pretraining",
+  "seed": 1729,
+  "inputs": {
+    "graph_corpus_result": {
+      "path": "results/m0_07/oracle_graph_corpus_result.json",
+      "sha256": "8aa3dc31a4becc917c1e255217c828862995ea988cb1baf75ff7465bd8a11b2a"
+    },
+    "r0_pretraining_ledger": {
+      "path": "results/m0_07/oracle_graph_r0_pretraining.csv.gz",
+      "sha256": "d3a434282212abae9a9e688e0dde59b0f53537eeb1ec0dcff18ef63f23e0bc5f"
+    }
+  },
+  "expected": {
+    "graphs": 14129,
+    "atoms": 866591,
+    "directed_edges": 1726776,
+    "maximum_atoms": 282,
+    "post_exclusion_oracle_constitution_overlap": 0,
+    "post_exclusion_oracle_inchi_connectivity_overlap": 0
+  },
+  "split": {
+    "method": "sha256_seeded_standard_inchi_connectivity_group",
+    "validation_fraction": 0.1
+  },
+  "corruption": {
+    "atom_mask_fraction": 0.15,
+    "undirected_bond_mask_fraction": 0.15,
+    "atom_mask_replacement": "learned_full_feature_mask_token",
+    "bond_mask_replacement": "learned_full_feature_mask_token",
+    "mask_both_directed_bond_copies": true,
+    "preserve_topology": true
+  },
+  "objective": {
+    "targets": [
+      "atomic_number",
+      "formal_charge",
+      "bond_type"
+    ],
+    "loss": "mean_of_capped_inverse_sqrt_frequency_weighted_cross_entropies",
+    "maximum_class_weight": 10.0
+  },
+  "architecture": {
+    "encoder": "sparse_dmpnn",
+    "hidden_dim": 128,
+    "depth": 3,
+    "dropout": 0.1,
+    "readout": "sum_mean"
+  },
+  "optimization": {
+    "optimizer": "adamw",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 40,
+    "early_stopping_patience": 6,
+    "gradient_clip_norm": 5.0,
+    "maximum_atoms_per_batch": 8192,
+    "maximum_directed_edges_per_batch": 16384,
+    "cpu_threads": 4
+  },
+  "profile": {
+    "epochs": 1,
+    "maximum_train_graphs": 256,
+    "maximum_validation_graphs": 128
+  },
+  "data_policy": {
+    "biological_labels_used": false,
+    "component_annotations_used": false,
+    "provenance_fields_used": false,
+    "virtual_candidates_used": false,
+    "stereochemistry_used": false,
+    "graph_truncation_allowed": false
+  }
+}

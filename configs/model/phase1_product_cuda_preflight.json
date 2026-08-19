@@ -1,0 +1,52 @@
+{
+  "schema_version": "phase1_product_cuda_preflight_config.v1",
+  "task": "Phase 1 sparse whole-lipid CUDA preflight",
+  "product_config": {
+    "path": "configs/model/phase1_product_pretrain.json",
+    "sha256": "9f6d815016304b6ab115482d96a67a72dec849d28d36bed25d546686e66d06b8"
+  },
+  "atom_vocabulary_source": {
+    "path": "results/m0_06_sparse_full_support/result.json",
+    "sha256": "cfd8b68637b6b1674e6bd064286f9482ddbcc60bb4b7514e16c6a6d88b4d0469"
+  },
+  "seed": 20260730,
+  "steps": 3,
+  "repetitions": 2,
+  "required_gpu_class": "L4",
+  "runtime": {
+    "python": "3.11",
+    "torch": "2.11.0",
+    "numpy": "2.4.2",
+    "rdkit": "2025.9.6",
+    "precision": "float32",
+    "mixed_precision": false,
+    "deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8"
+  },
+  "samples": [
+    {
+      "structure_id": "cuda-ring-saturated",
+      "canonical_isomeric_smiles": "CCCCCCCCOC(=O)CCN1CCCCC1"
+    },
+    {
+      "structure_id": "cuda-ring-unsaturated",
+      "canonical_isomeric_smiles": "CCCCCCCC/C=C\\CCCCCCOC(=O)CN1CCOCC1"
+    },
+    {
+      "structure_id": "cuda-aromatic-branched",
+      "canonical_isomeric_smiles": "CC(C)CCCCCCCCCOC(=O)c1ccncc1"
+    },
+    {
+      "structure_id": "cuda-charged-head",
+      "canonical_isomeric_smiles": "CCCCCCCCCC[N+](C)(C)CCO"
+    }
+  ],
+  "acceptance": {
+    "minimum_total_closures": 3,
+    "require_finite_losses_and_gradients": true,
+    "require_exact_repeat_loss_history": true,
+    "require_exact_repeat_model_state": true,
+    "require_exact_resume_loss_history": true,
+    "require_exact_resume_model_state": true
+  }
+}

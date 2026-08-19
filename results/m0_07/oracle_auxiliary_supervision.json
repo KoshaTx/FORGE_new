@@ -1,0 +1,186 @@
+{
+  "artifacts": {
+    "oracle_auxiliary_records.csv.gz": {
+      "bytes": 37282,
+      "sha256": "0a34c625d930eb1bb86612824a2ef4184c0d9630c6188cab61dbefc9db7b1007"
+    }
+  },
+  "decision": {
+    "head_diversity_note": "JC_2023 adds no exact amine-head structures beyond AGILE; its direct value is new native-Ugi tail chemistry and an external study shift.",
+    "jc_2023_disposition": "eligible_for_shared_encoder_study_specific_head_source_pretraining_and_external_transfer_comparison",
+    "lm_2019_disposition": "eligible_for_related_chemistry_encoder_pretraining_and_external_transfer_comparison_not_direct_ugi_target_pooling",
+    "raw_label_pooling_allowed": false,
+    "retain_auxiliary_data_only_if": "improve_frozen_agile_component_holdouts_or_declared_external_transfer_without_held_label_exposure"
+  },
+  "inputs": {
+    "agile_curated": {
+      "bytes": 30259,
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "config": {
+      "bytes": 4299,
+      "path": "configs/bio/m0_07_auxiliary_supervision.json",
+      "sha256": "9f4afdc20a7b970a01b5bb38221727652390bece0c7ab1d6eaa753bfa30d6e63"
+    },
+    "lnpdb": {
+      "bytes": 20118803,
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "source_reviews": {
+      "bytes": 67946,
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "ugi_variant": {
+      "bytes": 1814,
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "policy": {
+    "allow_cross_study_raw_label_pooling": false,
+    "allowed_auxiliary_strategies": [
+      "shared_encoder_with_study_specific_heads",
+      "source_pretraining_then_agile_finetuning",
+      "external_transfer_diagnostic"
+    ],
+    "auxiliary_internal_evaluation_status": "diagnostic_transductive_because_lnpdb_zscores_use_complete_study_endpoint_populations",
+    "label_semantics": "lnpdb_within_study_endpoint_zscore",
+    "model_selection_auxiliary_filter": {
+      "all_splits": "exclude_exact_agile_test_products",
+      "component_holdout": "exclude_auxiliary_records_containing_any_held_component_structure",
+      "component_pair_holdout": "exclude_auxiliary_records_containing_the_held_component_pair",
+      "scaffold_holdout": "exclude_auxiliary_products_in_held_scaffolds"
+    },
+    "prediction_head_key": [
+      "study_id",
+      "model_type"
+    ],
+    "retention_gate": "improve_frozen_agile_component_holdouts_or_declared_external_transfer_without_held_label_exposure"
+  },
+  "schema_version": "m0_07_auxiliary_supervision.v1",
+  "seed": 1729,
+  "status": "completed_auxiliary_supervision_audit",
+  "studies": {
+    "JC_2023": {
+      "chemistry_relation": "native_agile_type_ugi3",
+      "components": {
+        "aldehyde": {
+          "agile_role_comparison": "B",
+          "exact_agile_component_overlap": 1,
+          "new_relative_to_agile_role": 5,
+          "source_component_ids": 6,
+          "unique_structures": 6
+        },
+        "head": {
+          "agile_role_comparison": "A",
+          "exact_agile_component_overlap": 16,
+          "new_relative_to_agile_role": 0,
+          "source_component_ids": 16,
+          "unique_structures": 16
+        },
+        "isocyanide": {
+          "agile_role_comparison": "C",
+          "exact_agile_component_overlap": 2,
+          "new_relative_to_agile_role": 1,
+          "source_component_ids": 3,
+          "unique_structures": 3
+        }
+      },
+      "exact_agile_product_overlap": 32,
+      "label_statistics": {
+        "HeLa": {
+          "maximum": 1.975769688,
+          "mean": 1.3888882186629975e-11,
+          "minimum": -2.398145978,
+          "n": 288,
+          "population_standard_deviation": 1.0000000000125486
+        }
+      },
+      "model_counts": {
+        "HeLa": 288
+      },
+      "model_identity_actions": {
+        "source_component_forward_reconstruction": 18,
+        "source_product_retained": 270
+      },
+      "paired_supervision_eligible_rows": 288,
+      "pmid": "38060560",
+      "rows": 288,
+      "source_review_identity_changes": 1,
+      "source_review_override_definitions": 4,
+      "unique_products": 288
+    },
+    "LM_2019": {
+      "chemistry_relation": "related_isocyanide_mediated_3cr",
+      "components": {
+        "head": {
+          "agile_role_comparison": "A",
+          "exact_agile_component_overlap": 4,
+          "new_relative_to_agile_role": 8,
+          "source_component_ids": 12,
+          "unique_structures": 12
+        },
+        "isocyanide_linker": {
+          "agile_role_comparison": null,
+          "exact_agile_component_overlap": null,
+          "new_relative_to_agile_role": null,
+          "source_component_ids": 10,
+          "unique_structures": 10
+        },
+        "ketone": {
+          "agile_role_comparison": null,
+          "exact_agile_component_overlap": null,
+          "new_relative_to_agile_role": null,
+          "source_component_ids": 9,
+          "unique_structures": 9
+        }
+      },
+      "exact_agile_product_overlap": 0,
+      "label_statistics": {
+        "BMDC": {
+          "maximum": 2.054706751,
+          "mean": 8.333333231948116e-10,
+          "minimum": -1.371690943,
+          "n": 36,
+          "population_standard_deviation": 1.0000000000144393
+        },
+        "BMDM": {
+          "maximum": 1.74936294,
+          "mean": 8.333333213298803e-11,
+          "minimum": -1.165699239,
+          "n": 12,
+          "population_standard_deviation": 0.9999999998885374
+        },
+        "HeLa": {
+          "maximum": 4.472089488,
+          "mean": 2.3148146567083286e-11,
+          "minimum": -2.325658245,
+          "n": 1080,
+          "population_standard_deviation": 0.999999999998276
+        }
+      },
+      "model_counts": {
+        "BMDC": 36,
+        "BMDM": 12,
+        "HeLa": 1080
+      },
+      "model_identity_actions": {
+        "database_product_unverified_related_chemistry": 1128
+      },
+      "paired_supervision_eligible_rows": 0,
+      "pmid": "31570898",
+      "rows": 1128,
+      "source_review_identity_changes": 0,
+      "source_review_override_definitions": 0,
+      "unique_products": 1080
+    }
+  }
+}

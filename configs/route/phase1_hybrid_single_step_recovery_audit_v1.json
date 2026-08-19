@@ -1,0 +1,20 @@
+{
+  "schema_version": "phase1_hybrid_single_step_recovery_audit_config.v1",
+  "status": "frozen_before_hybrid_recovery_combination",
+  "inputs": {
+    "aizynthfinder_score": {
+      "path": "results/phase1/aizynthfinder_single_step_recovery_benchmark_v1/score.json",
+      "sha256": "4751f05d0eaa6475dfd573bc9e76504376efd8555de3cc33e79f7255b47b263b"
+    },
+    "graph2edits_score": {
+      "path": "results/phase1/graph2edits_single_step_recovery_benchmark_v1/score.json",
+      "sha256": "242846611340f20432d7d9ac06c84dc4d617c136e2b83208770f7a41d5376364"
+    }
+  },
+  "output_directory": "results/phase1/hybrid_single_step_recovery_audit_v1",
+  "scientific_authority": {
+    "proposal_recovery_is_route_evidence": false,
+    "may_enter_synthesis_value": false,
+    "may_activate_synthesis_tilting": false
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "schema_version": "m0_09_supervision_sources.v1",
+  "chemistry_classes": [
+    "ester",
+    "isocyanide",
+    "aldehyde",
+    "carbonate",
+    "acrylate",
+    "heterocycle_formation"
+  ],
+  "uspto_pretraining": {
+    "asset": "uspto_50k.csv",
+    "dataset": "USPTO-50K",
+    "source_url": "https://deepchemdata.s3.us-west-1.amazonaws.com/datasets/USPTO_50K.csv",
+    "expected_sha256": "1d69b90a299bd255b00342ccd15c3bc11d6c3047a3fecefaec539c3d04168dc9",
+    "large_corpus": {
+      "asset": "uspto_mit_data.zip",
+      "dataset": "USPTO-MIT",
+      "source_url": "https://github.com/wengong-jin/nips17-rexgen/raw/master/USPTO/data.zip",
+      "expected_sha256": "6d94a136e11f76fe464430cb95d1ae6db37b6ca352161ca4edddd9e6fe76a88a",
+      "archive_members": {
+        "train": "data/train.txt",
+        "validation": "data/valid.txt",
+        "test": "data/test.txt"
+      },
+      "class_labels_available": false,
+      "intended_role": "Large-corpus generic reaction pretraining; retain USPTO-50K as the class-labeled controlled benchmark."
+    },
+    "reaction_class_names": {
+      "1": "Heteroatom alkylation and arylation",
+      "2": "Acylation and related processes",
+      "3": "C-C bond formation",
+      "4": "Heterocycle formation",
+      "5": "Protections",
+      "6": "Deprotections",
+      "7": "Reductions",
+      "8": "Oxidations",
+      "9": "Functional group interconversion",
+      "10": "Functional group addition"
+    },
+    "product_motif_smarts": {
+      "ester": "[#6][CX3](=[OX1])[OX2H0][#6]",
+      "isocyanide": "[N+]#[C-]",
+      "aldehyde": "[#6][CX3H1](=[OX1])",
+      "carbonate": "[OX2H0][CX3](=[OX1])[OX2H0]",
+      "acrylate": "[C,c]=[C,c][CX3](=[OX1])[OX2H0][#6]"
+    },
+    "coverage_method": "A candidate formation has the product motif and no reactant molecule with that motif. Heterocycle formation uses USPTO class 4. Motif counts are screening-level upper bounds, not route validation."
+  },
+  "agile_si": {
+    "asset": "agile_supplementary_information.pdf",
+    "expected_sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+    "citation": "Supplementary Note 1 of Cheng et al., Nature Communications 15, 6610 (2024), DOI 10.1038/s41467-024-50619-z",
+    "reviewed_pages": "1-7",
+    "source_kind": "supplementary_information",
+    "route_groups": [
+      {
+        "route_group": "tail_a_hexyl_aldehydes",
+        "targets": [
+          "6-oxohexyl nonanoate",
+          "6-oxohexyl 4-methylnonanoate",
+          "6-oxohexyl decanoate",
+          "6-oxohexyl undec-2-enoate",
+          "6-oxohexyl (E)-dec-2-enoate",
+          "6-oxohexyl undecanoate",
+          "6-oxohexyl undec-10-ynoate",
+          "6-oxohexyl undec-10-enoate",
+          "6-oxohexyl palmitate",
+          "6-oxohexyl stearate",
+          "6-oxohexyl oleate",
+          "6-oxohexyl (9Z,12Z)-octadeca-9,12-dienoate"
+        ],
+        "steps": [
+          "esterification",
+          "alcohol_to_aldehyde_oxidation"
+        ],
+        "coverage": [
+          "ester",
+          "aldehyde"
+        ]
+      },
+      {
+        "route_group": "tail_b_isocyanides",
+        "targets": [
+          "1-isocyanododecane",
+          "1-isocyanotetradecane",
+          "1-isocyanohexadecane",
+          "1-isocyanooctadecane",
+          "(Z)-1-isocyanooctadec-9-ene"
+        ],
+        "steps": [
+          "amine_formylation",
+          "formamide_dehydration_to_isocyanide"
+        ],
+        "coverage": [
+          "isocyanide"
+        ]
+      },
+      {
+        "route_group": "identified_direct_aldehydes",
+        "targets": [
+          "olealdehyde",
+          "palmitaldehyde"
+        ],
+        "steps": [
+          "alcohol_to_aldehyde_oxidation"
+        ],
+        "coverage": [
+          "aldehyde"
+        ]
+      },
+      {
+        "route_group": "identified_butyl_aldehydes",
+        "targets": [
+          "4-oxobutyl 4-methylnonanoate",
+          "4-oxobutyl (E)-dec-2-enoate",
+          "4-oxobutyl octanoate",
+          "4-oxobutyl oleate"
+        ],
+        "steps": [
+          "esterification",
+          "alcohol_to_aldehyde_oxidation"
+        ],
+        "coverage": [
+          "ester",
+          "aldehyde"
+        ]
+      },
+      {
+        "route_group": "identified_additional_isocyanides",
+        "targets": [
+          "1-isocyanoundecane",
+          "1-isocyanoheptadecane"
+        ],
+        "steps": [
+          "amine_formylation",
+          "formamide_dehydration_to_isocyanide"
+        ],
+        "coverage": [
+          "isocyanide"
+        ]
+      }
+    ],
+    "outcome_evidence": {
+      "characterization_reported": true,
+      "explicit_success_yields": 0,
+      "explicit_failed_syntheses": 0,
+      "note": "Products are accompanied by NMR characterization, but Note 1 does not report yields for these upstream tail steps."
+    },
+    "qa_flags": [
+      "The SI heading '6-hydroxyphenyl undec-10-enoate' conflicts with the general hexane-1,6-diol route and is treated as a document typo, not a distinct phenyl route.",
+      "Final Ugi-3CR lipid syntheses are L1 and are excluded from this L2 inventory."
+    ]
+  },
+  "internal_rm_protocols": {
+    "protocols": [
+      {
+        "protocol": "RM-006",
+        "asset": "rm_006_tail_1a.docx",
+        "expected_sha256": "f39b98e609328ff5fa3a6fe6506fca39f18b53cedcb0afa527921afce261c134",
+        "target": "2-hexyl-1-decyl acrylate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester",
+          "acrylate"
+        ],
+        "documented_conditions": "acryloyl chloride, triethylamine, DCM, 0 C to room temperature, overnight",
+        "outcome_status": "not_reported"
+      },
+      {
+        "protocol": "RM-007",
+        "asset": "rm_007_tail_1b.docx",
+        "expected_sha256": "11d7f5753c7b1c1a8d02148d86e3f084c71158d4152685f9012c5a1ad9b21637",
+        "target": "trans-farnesyl acrylate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester",
+          "acrylate"
+        ],
+        "documented_conditions": "acryloyl chloride, triethylamine, DCM, 0 C to room temperature, overnight",
+        "outcome_status": "not_reported"
+      },
+      {
+        "protocol": "RM-008",
+        "asset": "rm_008_tail_1c.docx",
+        "expected_sha256": "6b222e7bb2df23840cdede744b4754b61a99dabc6fe1e99e1b51b4a6c1f70959",
+        "target": "2-(oleoyloxy)ethyl acrylate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester",
+          "acrylate"
+        ],
+        "documented_conditions": "oleoyl chloride, triethylamine, DCM, 0 C for 30 minutes then room temperature overnight",
+        "outcome_status": "not_reported"
+      },
+      {
+        "protocol": "RM-009",
+        "asset": "rm_009_tail_1d.docx",
+        "expected_sha256": "ad8a3f153470e0b3b945c06213e0aab0bbaa0589d56c7aa05ac5fc1f822d15a5",
+        "target": "2-(stearoyloxy)ethyl acrylate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester",
+          "acrylate"
+        ],
+        "documented_conditions": "stearoyl chloride, triethylamine, DCM, 0 C for 30 minutes then room temperature overnight",
+        "outcome_status": "not_reported"
+      },
+      {
+        "protocol": "RM-016",
+        "asset": "rm_016_tail2b_corrected.docx",
+        "expected_sha256": "0a4f14cbae53c02921fc237e54fd7b399ce0e92204b22af1973c1c8c2065f45f",
+        "target": "linoleyl propiolate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester"
+        ],
+        "documented_conditions": "propiolic acid, DCC, DMAP, DCM, 0 C then room temperature overnight",
+        "outcome_status": "not_reported",
+        "qa_flags": [
+          "The corrected document is authoritative; the older RM_016_Tail2b.docx has an incorrect DMAP molecular weight.",
+          "The prose says DDC once while the reagent table and chemistry specify DCC."
+        ]
+      },
+      {
+        "protocol": "RM-066",
+        "asset": "rm_066_tail2a_bf3oet2.docx",
+        "expected_sha256": "f5fa383b1484e2c01512cf5664783d49ba64dbf3d89084fa45c518877058781c",
+        "target": "2-hexyl-1-decyl propiolate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester"
+        ],
+        "documented_conditions": "propiolic acid, boron trifluoride diethyl etherate, neat, 60 C for 3 hours then room temperature overnight",
+        "outcome_status": "not_reported"
+      },
+      {
+        "protocol": "RM-067",
+        "asset": "rm_067_tail2c_bf3oet2.docx",
+        "expected_sha256": "94d52884b8cf74b59d02b6678e53d9c73bafabc30865f1ca5e5889650078e9b0",
+        "target": "heptadecan-9-yl propiolate",
+        "steps": [
+          "esterification"
+        ],
+        "coverage": [
+          "ester"
+        ],
+        "documented_conditions": "propiolic acid, boron trifluoride diethyl etherate, neat, 60 C for 3 hours then room temperature overnight",
+        "outcome_status": "not_reported",
+        "qa_flags": [
+          "The reagent table names heptadecan-9-ol, but the procedure prose says 2-hexyl-1-decanol; this is treated as an unresolved copy-paste error."
+        ]
+      }
+    ],
+    "outcome_evidence": {
+      "explicit_success_yields": 0,
+      "explicit_failed_syntheses": 0,
+      "blank_yield_fields": 7,
+      "note": "Blank yield, appearance, and LCMS fields are missing outcomes, not failed syntheses."
+    }
+  },
+  "patent_routes": {
+    "available_machine_readable_lipid_route_sources": 0,
+    "note": "No separate local patent-route corpus or licensed Reaxys, CAS, or Pistachio export was available. USPTO-50K is counted only as generic pretraining, not as curated lipid routes."
+  },
+  "negative_outcomes": {
+    "explicit_failed_syntheses": [],
+    "note": "No explicit failed L2 synthesis was found in the reviewed AGILE SI or seven RM protocols."
+  },
+  "related_structure_corpora_not_counted_as_l2": [
+    {
+      "corpus": "AGILE measured library",
+      "records": 1200,
+      "unique_structures": 1200,
+      "asset": "AGILE_smiles_with_value_group.csv",
+      "expected_sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686",
+      "labels": "HeLa and RAW 264.7 mRNA transfection measurements",
+      "appropriate_role": "Product-oracle training and evaluation; component coverage analysis.",
+      "l2_exclusion_reason": "The rows describe final Ugi-3CR lipids and assay labels, not reactions that make their tail blocks."
+    },
+    {
+      "corpus": "AGILE virtual candidate set",
+      "records": 12276,
+      "unique_structures": 12276,
+      "source_path": "/Users/rmaganti/Desktop/thesis_projects_ML/diffusion_project/lipid_diffusion/data/agile_virtual/candidate_set_smiles_plus_features.csv",
+      "source_sha256": "0b3c84321062efc7b5b4ef6a6954cc3340f22de61389418ad53e89e1c92719fe",
+      "source_doi": "10.5281/zenodo.11228093",
+      "labels": "No wet-lab outcome labels in the candidate file; computed molecular descriptors are present.",
+      "appropriate_role": "Representation learning, product-space coverage, and candidate evaluation.",
+      "l2_exclusion_reason": "Combinatorially generated final structures do not provide observed upstream reactions, yields, or failures."
+    },
+    {
+      "corpus": "R0 measured real-lipid corpus",
+      "records": 15433,
+      "unique_structures": 15433,
+      "asset": "r0_observed_real_structures.csv",
+      "expected_sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d",
+      "appropriate_role": "Realism anchor, split-before-extraction block harvesting, and prioritization of tail/linker coverage gaps.",
+      "l2_exclusion_reason": "A product structure can suggest a precursor decomposition, but it does not label a route or synthesis outcome."
+    }
+  ],
+  "excluded_sources": [
+    {
+      "source": "r1_reaction_enumerated_support_v1.csv",
+      "reason": "R1 blocks are terminal by construction and enumerator-produced reactant_ids are circular for L2 supervision."
+    }
+  ]
+}

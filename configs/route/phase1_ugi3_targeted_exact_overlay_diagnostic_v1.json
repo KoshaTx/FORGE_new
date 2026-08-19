@@ -1,0 +1,121 @@
+{
+  "schema_version": "phase1_ugi3_targeted_exact_overlay_diagnostic_config.v1",
+  "task": "Qualify the versioned targeted exact-evidence overlay across the frozen 424-component Ugi registry",
+  "inputs": {
+    "diagnostic_source": {
+      "asset": "src/forge/route/ugi3_targeted_exact_overlay_diagnostic.py",
+      "expected_sha256": "4830dcfc98075f690df77762d694fed7513e4a852b7816edefcd9d68d4f407e2"
+    },
+    "hybrid_config": {
+      "asset": "configs/route/phase1_ugi3_hybrid_search.json",
+      "expected_sha256": "d13ab4be85ef26820718a673e9ad5ea2bf80f2ec4ebbff269cf41f21dffd690a"
+    },
+    "hybrid_ledger": {
+      "asset": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz",
+      "expected_sha256": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2"
+    },
+    "hybrid_result": {
+      "asset": "results/phase1/ugi3_hybrid_search/result.json",
+      "expected_sha256": "05905d2a5f7eee83cf5a7028d89bcb3e5374959789ecc7ed3c2a692ed75bcbbf"
+    },
+    "overlay_source": {
+      "asset": "src/forge/route/ugi3_targeted_exact_overlay.py",
+      "expected_sha256": "d98244bcd71cd4b677fd64b151fe55d1a1689b98bc32b6fcd05286c12e8806af"
+    },
+    "qualifier_source": {
+      "asset": "scripts/phase1_qualify_ugi3_targeted_exact_overlay.py",
+      "expected_sha256": "0ed35fff72545c383e030142b723766af2747b3a59f22127b5ffa6879df45461"
+    },
+    "targeted_audit_config": {
+      "asset": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json",
+      "expected_sha256": "b271127faeb78eebcb00c3c23e5e8e0c810f1aa08ddd3c8587c3bb00df403e42"
+    },
+    "targeted_audit_result": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json",
+      "expected_sha256": "40fae7dc1b3695a696217cb388a8a43bf9922f6a5604500fb2021552dc98714a"
+    },
+    "targeted_product_ledger": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/product_closure_impact_ledger.csv.gz",
+      "expected_sha256": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e"
+    },
+    "targeted_route_ledger": {
+      "asset": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz",
+      "expected_sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+    }
+  },
+  "hybrid_result_environment_migration": {
+    "stored_software_versions": [
+      [
+        "python",
+        "3.14.2"
+      ],
+      [
+        "rdkit",
+        "2025.09.6"
+      ]
+    ],
+    "current_software_versions": [
+      [
+        "python",
+        "3.14.2"
+      ],
+      [
+        "rdkit",
+        "2026.03.4"
+      ]
+    ],
+    "require_assessment_ledger_byte_identity": true,
+    "permit_other_result_differences": false
+  },
+  "assessment_policy": {
+    "per_component_budget": {
+      "maximum_depth": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_expansions": 4,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 1,
+      "maximum_elapsed_milliseconds": 0
+    },
+    "permit_family_or_analogue_evidence_as_closure": false,
+    "production_synthesis_guidance": false,
+    "diagnostic_only": true
+  },
+  "expected_summary": {
+    "admitted_components": 424,
+    "baseline_outcomes": {
+      "complete": 41,
+      "missing_knowledge": 277,
+      "outside_support": 106
+    },
+    "overlay_outcomes": {
+      "complete": 45,
+      "missing_knowledge": 274,
+      "outside_support": 105
+    },
+    "overlay_outcomes_by_role": {
+      "amine_head": {
+        "complete": 17,
+        "missing_knowledge": 189,
+        "outside_support": 58
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 37,
+        "outside_support": 10
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 22,
+        "missing_knowledge": 48,
+        "outside_support": 37
+      }
+    },
+    "newly_closed_components": 4,
+    "newly_closed_by_overlay_channel": {
+      "targeted_exact_procurement": 2,
+      "targeted_exact_route": 2
+    },
+    "selected_exact_overlay_targets": 4,
+    "overlay_verifier_calls": 3,
+    "unresolved_abstentions": 1
+  }
+}

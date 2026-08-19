@@ -1,0 +1,80 @@
+{
+  "schema_version": "phase1_ugi_architecture_checkpoint_selection_policy.v2",
+  "status": "frozen_before_v2_selection_sampling",
+  "frozen_at_utc": "2026-08-01T23:15:42Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v1.json",
+    "sha256": "803a470be205691f0f0af2634cad1a47788991b2688dc565e92a2c1b9fa913fd"
+  },
+  "correction": {
+    "scientific_rationale": "Architecture selection must compare generated products with the same 112,386-product frozen production corpus used by both training arms. The v1 policy path named the 12,386-row lineage source even though its descriptor-reference text explicitly named all 112,386 production products.",
+    "v1_size_only_outputs_were_already_observed": true,
+    "v1_result": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v1_invalid_reference_population.json",
+      "sha256": "5355f53b2e511f146779d75a587be5f11dea1abc354755d4ae76b35f9a876a54",
+      "status": "invalidated_before_production_freeze"
+    },
+    "v1_invalidation": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v1_invalidation.json",
+      "sha256": "4807e638ed21998a9fbc25a439cbf8b56a46c74fb3d76beb6aaa4a7df91843b3"
+    },
+    "additional_evaluator_fix": "Canonicalize every valid product and reconstructed precursor before reference membership, uniqueness, concentration and exact-reproduction calculations.",
+    "numerical_gate_thresholds_changed_from_v1": false,
+    "selection_algorithm_changed_from_v1": false
+  },
+  "overrides": {
+    "status": "frozen_before_v2_selection_sampling",
+    "frozen_at_utc": "2026-08-01T23:15:42Z",
+    "frozen_inputs": {
+      "unconditional_program_prior": {
+        "path": "results/phase1/ugi_program_prior_v3_selection_samples_1024.json",
+        "sha256": "4980793deaf2f32d8d6b6b44751ad8661569704bf09b343f91b94e928bdd92f1",
+        "attempted_draws": 1024,
+        "seed": 20260802,
+        "source": "new independent draw from the unchanged training-fold, source- and family-balanced program prior",
+        "contains_component_ids_or_graphs": false
+      },
+      "frozen_product_reference": {
+        "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+        "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184",
+        "rows": 112386,
+        "unique_products": 112386,
+        "fold_field": "primary_product_fold",
+        "folds": [
+          "train",
+          "calibration",
+          "heldout"
+        ],
+        "use": [
+          "exact frozen-product reproduction",
+          "descriptor-distribution realism"
+        ]
+      },
+      "lineage_product_reference": {
+        "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+        "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0",
+        "rows": 12386,
+        "use": "lineage and provenance only; not a selection reference"
+      },
+      "selection_evaluator": {
+        "path": "scripts/phase1_select_ugi_architecture.py",
+        "sha256": "79aa6cafef3675861ae6d617f83ef8d11bb0c8d346961c26c3a1a0ecdcdd6ab8"
+      },
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "01e97304a173c9b5bda08a17501be242bdcfd16e2c0edf6240cbb96c7d982566"
+      }
+    },
+    "matched_sampling": {
+      "seed": 20260802,
+      "attempted_draws": 1024,
+      "same_program_indices_across_architectures_and_checkpoints": true
+    },
+    "failure_policy": {
+      "v1_result_invalidated": true,
+      "v2_uses_new_independent_selection_draw": true,
+      "no_threshold_rewrite_after_opening_v2_outputs": true,
+      "no_silent_override": true
+    }
+  }
+}

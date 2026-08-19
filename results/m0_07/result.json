@@ -1,0 +1,43 @@
+{
+  "authoritative_artifacts": {
+    "agile_reconciliation": {
+      "bytes": 3788,
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "oracle_freeze": {
+      "bytes": 74675,
+      "path": "results/m0_07/oracle_freeze_result.json",
+      "sha256": "8476be6e013e12715bdb55a7ef6d73162b01010f7b560297c6e8406028cda338"
+    },
+    "production_oracle": {
+      "bytes": 30292,
+      "path": "results/m0_07/oracle_production_result.json",
+      "sha256": "268f8f5929af582f35ada2e7f141ed1756232cafd9997149f8fb614d6626961d"
+    },
+    "ugi_semantic_annotations": {
+      "bytes": 5034,
+      "path": "results/m0_07/ugi_semantic_annotations_result.json",
+      "sha256": "ad0b18101253cff0fdc4a52451629c95e919fc745b5e505e5d20fd422ae74edd"
+    }
+  },
+  "decision": {
+    "any_biological_guidance_domain_authorized": false,
+    "guidance_action": "abstain",
+    "oracle_role": "predictive general in-vitro transfection diagnostic",
+    "selected_candidate": "supervised_graph::ugi_component_role_aware_dmpnn::neural_3seed_ensemble"
+  },
+  "generated_utc": "2026-07-30T23:55:00Z",
+  "metrics": {
+    "equal_endpoint_calibration_r2": 0.3673424638237814,
+    "equal_endpoint_calibration_rmse": 1.858434783466143,
+    "equal_endpoint_calibration_spearman_rho": 0.5959585400015428,
+    "equal_endpoint_postselection_test_r2": 0.18299890124873713
+  },
+  "randomness": {
+    "recorded_in_authoritative_artifacts": true
+  },
+  "schema_version": "m0_07_authoritative_index.v1",
+  "status": "complete_with_universal_guidance_abstention",
+  "task": "M0-07 AGILE biological oracle matrix and production boundary"
+}

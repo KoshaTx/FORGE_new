@@ -1,0 +1,121 @@
+{
+  "schema_version": "phase1_ugi_decoration_coupling_production_fresh_census_config.v1",
+  "status": "frozen_before_independent_production_census",
+  "frozen_at_utc": "2026-08-05T21:11:00Z",
+  "purpose": "Independent, non-selection molecular census of the final all-fold decoration-coupled Ugi production generator.",
+  "design": {
+    "shards": 4,
+    "programs_per_shard": 1024,
+    "attempted_draws": 4096,
+    "program_seeds": [
+      20260910,
+      20260911,
+      20260912,
+      20260913
+    ],
+    "flow_seeds": [
+      20260920,
+      20260921,
+      20260922,
+      20260923
+    ],
+    "terminal_seeds": [
+      20260930,
+      20260931,
+      20260932,
+      20260933
+    ],
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "terminal_decoder_mode": "stochastic",
+    "terminal_temperature": 1.0,
+    "reference_comparison_mode": "deferred",
+    "retry_or_repair": false,
+    "relationship_to_model_selection": "All four program schedules and every flow and terminal seed are new after the development checkpoint was selected and the all-fold refit completed."
+  },
+  "inputs": {
+    "production_refit_result": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json",
+      "sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/checkpoint_best.pt",
+      "sha256": "3a3fbf2ad1e6a080bbba0476748d10e78de7cd5122e153d8fa7fc67b60823497"
+    },
+    "all_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v3_all_fold.json",
+      "sha256": "a8dc910f98732c64bb528cccb8299e848cf9d620a4abbd0759fea464a5ff87ac"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "program_shard_00": {
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/programs_shard_00.json",
+      "sha256": "baf08a62241b3ec000a3db467b23d8a8df8f3939a9d42efb61b8a9d73b91d91c"
+    },
+    "program_shard_01": {
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/programs_shard_01.json",
+      "sha256": "463914ccbb9ae598b49102f8fca324345c09308f487a676d0620780c13ef1aa6"
+    },
+    "program_shard_02": {
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/programs_shard_02.json",
+      "sha256": "15b91cd31806022d4c43beb7a51714d9a52e5878512dedb46220f2f1cfd11358"
+    },
+    "program_shard_03": {
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/programs_shard_03.json",
+      "sha256": "0dda9f2e9ea0e602ccb93a38eee4fb03acd6f771caeffab5d029e5a139db40e5"
+    }
+  },
+  "decision_policy": {
+    "checkpoint_or_threshold_selection": false,
+    "fresh_census_outputs_reused_for_model_selection": false,
+    "minimum_valid_fraction": 0.95,
+    "required_exact_l1_fraction_of_valid": 1.0,
+    "minimum_unique_fraction_of_valid": 0.98,
+    "minimum_three_handle_fraction_of_reconstructed": 0.99,
+    "required_zero_adjacent_tail_branch_components": true,
+    "chemistry_and_branch_metrics_are_descriptive_not_posthoc_gates": true
+  },
+  "required_reports": [
+    "validity, exact-L1 reconstruction and uniqueness by shard",
+    "exact all-fold-corpus reproduction and nearest-neighbor novelty",
+    "role-specific exact and effective component diversity",
+    "tail carbon-count and carbon-diameter coverage",
+    "branch frequency, depth, distal-arm lengths, balance and adjacent branch chains",
+    "carbon-carbon unsaturation, alkyne, ester, ether and ring coverage",
+    "program-balanced local chemistry and branch geometry versus the all-fold reference",
+    "seed and shard stability"
+  ],
+  "implementation": {
+    "runner": {
+      "path": "scripts/modal_phase1_ugi_decoration_coupling_production_fresh_census_v1.py",
+      "sha256": "5ed7153710400b67cb14fa4311df5b30551e78032ca34cec5ac209a6a468ca11"
+    },
+    "collector": {
+      "path": "scripts/phase1_collect_ugi_decoration_coupling_production_fresh_census_v1.py",
+      "sha256": "90ea817b0b10de0bc242ca0b0596dfc93782b21a6121edb4ee70b2763786721e"
+    },
+    "tests": {
+      "path": "tests/test_ugi_decoration_coupling_production_fresh_census.py",
+      "sha256": "a9caf32ea426205c67c6a1e8659abca05a3523e611a882ba3c0947e0b6ed28dc"
+    }
+  }
+}

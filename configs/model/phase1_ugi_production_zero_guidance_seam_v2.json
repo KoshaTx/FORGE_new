@@ -1,0 +1,76 @@
+{
+  "schema_version": "phase1_ugi_production_zero_guidance_seam_v2_config.v1",
+  "assessment_as_of_utc": "2026-08-03T17:30:13Z",
+  "cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+  "scope": {
+    "guidance_strength": 0.0,
+    "nonzero_guidance": false,
+    "biological_guidance": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "design": {
+    "assignment_seed": 20260821,
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "checkpoints": [2, 4, 6],
+    "checkpoint_betas": [0.25, 0.5, 0.75],
+    "rollouts_per_particle_checkpoint": 1,
+    "final_selection_count": 32,
+    "product_transition_calls": 1280,
+    "terminal_completions": 256,
+    "logical_planner_calls": 768,
+    "logical_verifier_calls": 3328
+  },
+  "inputs": {
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "current_source_requalification": {
+      "path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json",
+      "sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+    },
+    "route_completion_utility": {
+      "path": "results/phase1/ugi_route_completion_utility_v1/result.json",
+      "sha256": "4650bedd6503004c09efb72365d6cc03e65e5b8572aef08037d9277ac9fc0893"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_restartable_generator_v2": {
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+    },
+    "selected_guidance_adapter_v2": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v2.py",
+      "sha256": "61a223218b7d28c2324773c92333f96b7f61b2880b49230d97de2453f64707cb"
+    },
+    "nonzero_runner": {
+      "path": "src/forge/product/ugi_nonzero_guidance_runner.py",
+      "sha256": "4a0791b551cc0d3d3a1f862321d102f51b29c9d90e67c42102cbb390aab388a2"
+    },
+    "production_terminal_route_evaluator": {
+      "path": "src/forge/product/ugi_production_terminal_route_evaluator.py",
+      "sha256": "fe132af49ef544818db5564973f4249ed0cfe140228b67958dde15bcc93b454c"
+    },
+    "matched_cache_binding": {
+      "path": "src/forge/product/ugi_matched_planner_cache_binding.py",
+      "sha256": "c81f80bee6131e394c7e9df223a1303792c92a94bfb5084416cbdda2402af624"
+    },
+    "binary_utility_source": {
+      "path": "src/forge/value/ugi_exact_closure_guidance.py",
+      "sha256": "a1110f42d26b0c94db1eb4b0976eca7716552946148203cfee4d629229f2aaee"
+    },
+    "seam_source": {
+      "path": "src/forge/product/ugi_production_zero_guidance_seam_v2.py",
+      "sha256": "a298d86e1ae547178f4586df5a522cafaf164f691eaec5206f162c8e59bb8d35"
+    },
+    "seam_runner": {
+      "path": "scripts/phase1_qualify_ugi_production_zero_guidance_seam_v2.py",
+      "sha256": "b52c145de45e308a652e18750e38df24b0bc152f53c44d5bb58c979fcc882147"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "phase1_ugi_route_aware_decision_package_config.v1",
+  "status": "frozen_before_route_aware_decision_package",
+  "task": "Assemble one nonselecting, route-aware candidate dossier over the full 256-product shortlist, presenting every evidence rung side by side for user and PI review",
+  "output_directory": "results/phase1/ugi_route_aware_decision_package_v1",
+  "scope": {
+    "candidate_selection": false,
+    "prospective_panel_lock": false,
+    "preregistration_created": false,
+    "route_outcomes_may_reorder_candidates": false,
+    "evidence_rungs_are_not_equivalent": true,
+    "planner_reach_is_route_evidence": false,
+    "family_projection_is_exact_route_evidence": false,
+    "procurement_refresh_required_before_panel_lock": true
+  },
+  "evidence_ladder": [
+    {
+      "rung": "exact_indexed_route_evidence",
+      "supports": "locking a prospective synthesis panel",
+      "means": "every role closed by independent recursive evidence to a verified current terminal material"
+    },
+    {
+      "rung": "family_projected_all_current_leaves",
+      "supports": "prioritisation, or a panel with the substrate-scope risk stated",
+      "means": "every role in a qualified reaction family with a forward-consistent disconnection and currently available projected leaves; substrate scope NOT verified"
+    },
+    {
+      "rung": "planner_reachable_to_public_catalog",
+      "supports": "plausibility triage only",
+      "means": "a bounded planner connected every open role to a frozen public catalog snapshot; neither route evidence nor current procurement"
+    },
+    {
+      "rung": "unresolved",
+      "supports": "nothing",
+      "means": "no route found by exact evidence, family projection or bounded planner search under the frozen budgets"
+    }
+  ],
+  "chemotype_cluster_definition": {
+    "policy": "declared descriptor tuple, not a learned clustering",
+    "fields": [
+      "amine_head_canonical_smiles",
+      "aldehyde_tail_length_bucket",
+      "product_branched",
+      "product_unsaturated"
+    ]
+  },
+  "inputs": {
+    "cascade_result": {
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/result.json",
+      "sha256": "3066e306e3ab77ded09fbb8d76c9d0aab46540e8fa689063b896e17c8ed0eb20"
+    },
+    "candidate_route_ledger": {
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/candidate_route_ledger.jsonl.gz",
+      "sha256": "ce5794a558190ddd800d7d525985722fd95c3f63bb85fcfd98bb675be8505db4"
+    },
+    "component_route_ledger": {
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/component_route_ledger.jsonl.gz",
+      "sha256": "0076d72f7649c5b2b6d7fad242b0ecc0a667d232c137dbd282a52ff34a3e6a20"
+    },
+    "planner_reach_result": {
+      "path": "results/phase1/ugi_planner_reach_sweep_v1/result.json",
+      "sha256": "666300eb5a5c5af65425a78fb159200feebec4f8039dd63f4dab8d52313cce7c"
+    },
+    "planner_reach_ledger": {
+      "path": "results/phase1/ugi_planner_reach_sweep_v1/planner_reach_ledger.jsonl.gz",
+      "sha256": "1f56de795449759a4a07af67262c51ce87afe2d9fd76981afc80af58fbccacc7"
+    },
+    "graded_evidence_ledger": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+    },
+    "terminal_rescoring_ledger": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+      "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+    },
+    "procurement_result": {
+      "path": "results/phase1/ugi_online_procurement_snapshot_v1/result.json",
+      "sha256": "d02b7dee82ee5009f60819b7c09533b39b4b6b4d65481f83a22f38f3d524b95c"
+    },
+    "procurement_ledger": {
+      "path": "results/phase1/ugi_online_procurement_snapshot_v1/procurement_ledger.jsonl.gz",
+      "sha256": "e6f4e9242bbeb597f250c6bdcdabe61319072208308514ca47eea0af3dbd0007"
+    }
+  },
+  "panel_targets": {
+    "minimum_evaluable_per_causal_arm": 18,
+    "preferred_evaluable_per_causal_arm": 28,
+    "targets_are_feasibility_thresholds_not_a_panel_lock": true
+  },
+  "nonclaims": [
+    "This dossier does not select candidates and does not lock a prospective panel.",
+    "The evidence rungs are ordered and are not interchangeable.",
+    "A planner solution to a public catalog snapshot is not route evidence.",
+    "Family-projected readiness does not verify substrate scope.",
+    "No candidate here has been synthesized, formulated or biologically tested.",
+    "Procurement evidence expires and must be refreshed before any panel lock."
+  ]
+}

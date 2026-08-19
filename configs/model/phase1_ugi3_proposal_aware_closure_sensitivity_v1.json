@@ -1,0 +1,37 @@
+{
+  "schema_version": "forge.ugi3_proposal_aware_closure_sensitivity_config.v1",
+  "status": "frozen_after_proposal_aware_route_adjudication",
+  "task": "Quantify the non-authoritative checkpoint contrast ceiling behind unresolved upstream leaves without changing evidence or chemistry gates",
+  "inputs": {
+    "support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "proposal_adjudication": {
+      "path": "results/phase1/ugi3_proposal_aware_checkpoint_contrast_v1/result.json",
+      "sha256": "079c1f90509aeb76c0ecae70b952316cdfedcfb207396a3b1f508467992c8977"
+    },
+    "component_ledger": {
+      "path": "results/phase1/ugi3_proposal_aware_checkpoint_contrast_v1/component_ledger.jsonl.gz",
+      "sha256": "cafbcc89bf03c2f3dd09745e0d7a14a80b8399593194a62d1ac2acaffb2e0d16"
+    }
+  },
+  "population": {
+    "arm": "post_hoc",
+    "checkpoint_phase": "checkpoint_shadow",
+    "terminal_phase": "productive_final",
+    "checkpoints": [2, 4, 6],
+    "grouping": "checkpoint and frozen morphology program index"
+  },
+  "scope_guards": {
+    "counterfactual_is_route_evidence": false,
+    "counterfactual_is_procurement_evidence": false,
+    "proposal_only_ceiling_is_authoritative": false,
+    "proposal_scores_used": false,
+    "reaction_family_used_as_gate": false,
+    "biological_scores_used": false,
+    "gates_relaxed": false,
+    "candidate_selection": false
+  },
+  "output_directory": "results/phase1/ugi3_proposal_aware_closure_sensitivity_v1"
+}

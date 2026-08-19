@@ -1,0 +1,58 @@
+{
+  "schema_version": "phase1_ugi3_route_gap_triage_config.v2",
+  "status": "frozen_before_post_terminal_delta_gap_triage",
+  "task": "Reclassify the one-gap frontier after exact-terminal deltas with corrected precedence and per-family recurrence",
+  "inputs": {
+    "priority_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v2/result.json",
+      "sha256": "ee164749226f8262d5a759ec8961a9910b76268bd05d9a2d5dfb1913d3422542"
+    },
+    "priority_ledger": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v2/priority_ledger.csv.gz",
+      "sha256": "e29b180409e5937998cd8b86bd15b857b26c7e5213d1f61118e5bfd1fddc8d77"
+    },
+    "precursor_leaf_audit_config": {
+      "path": "configs/route/phase1_ugi3_precursor_leaf_closure_audit_v1.json",
+      "sha256": "5caa0650f5ac83da441cf4a831d6c5cf0d1c91874591a863a9b0d67125827c94"
+    },
+    "precursor_leaf_audit_result": {
+      "path": "results/phase1/ugi3_precursor_leaf_closure_audit_v1/result.json",
+      "sha256": "0c0dab513ac034ecc19ac6e97509db51f58b01bad356b6b81bae681daf7cfa64"
+    },
+    "route_saturation_holdout_contract": {
+      "path": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "sha256": "c76b43fb59bd4802f5bf8596c8b2095ff8abfd59448b26e75c1f41264b679a79"
+    },
+    "route_saturation_holdout_seal": {
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+    },
+    "audit_source": {
+      "path": "src/forge/route/ugi3_route_gap_triage_v2.py",
+      "sha256": "05e280115ce2891e012b0a4f3398bf04bb5819306d51ceb71ea8d978261cebb1"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_triage_ugi3_route_gaps_v2.py",
+      "sha256": "b7839adf0f732051a551dc500683bdc683227112c0627114a914ccc5eb6c8b68"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_route_gap_triage_v2.py",
+      "sha256": "6d579dc4190f4504803606e798791fb696d78dc28484e47f4c71a7f82f61feec"
+    }
+  },
+  "triage_policy": {
+    "current_exact_target_identity_precedes_upstream_planning": true,
+    "existing_projection_family_precedes_new_family_mining": true,
+    "family_thresholds_apply_per_coherent_cluster": true,
+    "all_projected_leaves_current_establishes_exact_l2_scope": false,
+    "historical_leaf_use_establishes_current_procurement": false,
+    "parent_component_observation_establishes_projected_leaf_use": false,
+    "missing_knowledge_is_chemical_incompatibility": false,
+    "outside_support_is_chemical_impossibility": false,
+    "new_reaction_family_may_be_admitted_by_this_audit": false
+  },
+  "outputs": {
+    "result": "results/phase1/ugi3_route_gap_triage_v3/result.json",
+    "triage_ledger": "results/phase1/ugi3_route_gap_triage_v3/triage_ledger.csv.gz"
+  }
+}

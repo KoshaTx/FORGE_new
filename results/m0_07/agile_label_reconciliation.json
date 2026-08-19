@@ -1,0 +1,100 @@
+{
+  "adversarial_checks": {
+    "B4_mixtures_absent_from_single_graph_training": true,
+    "B4_mixtures_preserved_in_exclusion_ledger": true,
+    "B5_graphs_corrected_to_LANTERN_pure_trans_identity": true,
+    "LANTERN_hela_matches_all_1100_curated_records": true,
+    "missing_formulation_properties_not_imputed": true,
+    "model_facing_constitutional_graphs_are_unique": true,
+    "official_hela_values_match_all_1200_labels": true,
+    "official_raw_values_match_all_1200_labels": true
+  },
+  "artifacts": {
+    "agile_mixture_exclusions.csv.gz": {
+      "bytes": 4094,
+      "sha256": "3b64189e9291ebab2fdf5d5c7f194b9f7f0b956e889e997ad789b09ae6da98b0"
+    },
+    "agile_oracle_curated.csv.gz": {
+      "bytes": 30259,
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "agile_reconciliation_ledger.csv.gz": {
+      "bytes": 39942,
+      "sha256": "ae3bf41440b815a8a4cfe5862eccc396fc35d3653ab9266b6b74f53ef90f0e37"
+    }
+  },
+  "downstream_contract": {
+    "lantern_scope": "HeLa curation and B4/B5 identity audit only; RAW labels are independently reconciled to AGILE official source data",
+    "not_invalidated": [
+      "non-AGILE M0-04 conclusions",
+      "Ugi transform mechanics for nominal library rows",
+      "M0-09 upstream route evidence unrelated to B4/B5 identity"
+    ],
+    "oracle_training_input": "results/m0_07/agile_oracle_curated.csv.gz",
+    "raw_1200_row_file_allowed_for_nominal_chemistry_audit": true,
+    "raw_1200_row_file_allowed_for_oracle_fit": false,
+    "requires_rebuild_before_model_training": [
+      "R0 AGILE-derived single-structure records",
+      "M0-03 splits derived from the unreconciled R0 artifact",
+      "M0-04 AGILE-specific denominators derived from the unreconciled R0 artifact",
+      "M0-06 corpus counts derived from the unreconciled R0 artifact"
+    ]
+  },
+  "environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "generated_utc": "2026-07-30T03:00:00+00:00",
+  "inputs": {
+    "agile_library": {
+      "bytes": 196871,
+      "path": "data/vendor/AGILE_smiles_with_value_group.csv",
+      "sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    "agile_official_source_data": {
+      "bytes": 137546,
+      "path": "data/vendor/agile_article_source_data.xlsx",
+      "sha256": "e795d4e7ef1ec5c82b0358c626ab1eae059b76485a3ebdb7cbe5565aa6aac723"
+    },
+    "lantern_cis_trans_audit": {
+      "bytes": 22696,
+      "path": "data/vendor/lantern_agile_cis_trans_audit.csv",
+      "sha256": "eceea1dcfc86063d0129d2b25918a17f5a0493bd3601641719f8d6ee29dff44c"
+    },
+    "lantern_curated_hela": {
+      "bytes": 80719,
+      "path": "data/vendor/lantern_agile_curated.csv",
+      "sha256": "d0ecfd94ec40a7f013af546113520175e70f78045af1798673c2680fe6f23c54"
+    }
+  },
+  "policy": {
+    "missing_properties": "never_impute",
+    "mixture_handling": "exclude_from_single_graph_supervision_preserve_in_ledger",
+    "model_stereochemistry": "not_encoded",
+    "pure_trans_handling": "correct_graph_retain_source_labels"
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_07_agile_reconciliation.v1",
+  "status": "completed_blocking_source_reconciliation",
+  "summary": {
+    "B5_pure_trans_graph_corrections": 100,
+    "component_counts": {
+      "A": 20,
+      "B_in_curated": 11,
+      "C": 5
+    },
+    "curated_single_structure_records": 1100,
+    "excluded_mixture_measurements": 100,
+    "lantern_hela_cross_validation_mismatches": 0,
+    "nominal_experimental_measurements": 1200,
+    "official_hela_label_mismatches": 0,
+    "official_raw_label_mismatches": 0,
+    "unique_isomeric_graphs": 1100,
+    "unique_model_graphs": 1100
+  },
+  "task": "M0-07"
+}

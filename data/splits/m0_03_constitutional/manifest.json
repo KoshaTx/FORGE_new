@@ -1,0 +1,193 @@
+{
+  "all_groups_leak_free": true,
+  "annotation_parse_failure_policy": "Unparseable annotated component SMILES remain distinct raw-string grouping tokens; they are not dropped or treated as valid molecules.",
+  "annotation_parse_failures": {
+    "head": 230
+  },
+  "assignment_policy": {
+    "algorithm": "whole-group deterministic largest normalized deficit",
+    "exact_structure_policy": "leakage_group_id is included in every scheme's connected components.",
+    "multi_annotation_policy": "Rows sharing any scheme token are collapsed into connected components before fold assignment.",
+    "target_fractions": {
+      "R0_cal": 0.15,
+      "R0_heldout": 0.15,
+      "R0_train": 0.7
+    }
+  },
+  "downstream_contract": "Load this bundle with forge.data.r0_splits.load_frozen_r0_splits. Do not reconstruct or repartition groups in M0-04 or later tasks.",
+  "folds": [
+    "R0_train",
+    "R0_cal",
+    "R0_heldout"
+  ],
+  "frozen_utc": "2026-07-30T23:30:00Z",
+  "group_definitions": {
+    "component_family": "exact reaction_family_holdout_groups signature",
+    "headgroup": "configured head or amine fields from component_holdout_groups_json; parseable SMILES are canonicalized",
+    "linker_scaffold": "heteroatom connector core plus configured linker fields from component_holdout_groups_json",
+    "source_study": "study_split_groups_json; observed_source_ids is the fallback when study IDs are absent"
+  },
+  "inputs": [
+    {
+      "asset": "m0_03_r0_splits_constitutional.json",
+      "bytes": 2134,
+      "role": "split_config",
+      "sha256": "3d0a130138d15f1213d1583695fb877e7be12b4aad8188b5e02cb1f6e6f41790"
+    },
+    {
+      "asset": "r0_constitutional",
+      "bytes": 1665612,
+      "path": "results/m0_03/r0_constitutional.csv.gz",
+      "sha256": "fc8bcb6ed618abf4e571a26564f59c716a80b6e6ecf919f451101fb32f552823"
+    },
+    {
+      "asset": "r0_reconciliation",
+      "bytes": 3393,
+      "path": "results/m0_03/r0_reconciliation.json",
+      "sha256": "16d2cff2ff3e23344d2c26e6cd3835ec6373f1eff02f0be3a28379e8719ad310"
+    },
+    {
+      "asset": "upstream_assignments",
+      "bytes": 2460121,
+      "path": "data/vendor/corpus_fold_assignments.csv",
+      "sha256": "92a39758bb35daf3590a83522dee31541b2586e1d18eef64a5cb403a7e50d369"
+    },
+    {
+      "asset": "upstream_manifest",
+      "bytes": 8322,
+      "path": "data/vendor/splits_manifest.json",
+      "sha256": "51d2f714886cbed0982a47e7c8c78ad49ebe91383c80cf97ec7bfee0b582322a"
+    }
+  ],
+  "outputs": {
+    "assignments": {
+      "bytes": 4110427,
+      "columns": [
+        "r0_structure_id",
+        "leakage_group_id",
+        "source_study_group_id",
+        "source_study_fold",
+        "headgroup_group_id",
+        "headgroup_fold",
+        "linker_scaffold_group_id",
+        "linker_scaffold_fold",
+        "component_family_group_id",
+        "component_family_fold"
+      ],
+      "path": "r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    }
+  },
+  "randomness_used": false,
+  "row_count": 15229,
+  "schema_version": "m0_03_r0_splits.v2",
+  "schemes": {
+    "component_family": {
+      "fold_counts": {
+        "R0_cal": 1920,
+        "R0_heldout": 1100,
+        "R0_train": 12209
+      },
+      "fold_fractions": {
+        "R0_cal": 0.12607525116553944,
+        "R0_heldout": 0.07223061264692364,
+        "R0_train": 0.8016941361875369
+      },
+      "groups": 3,
+      "groups_spanning_folds": 0,
+      "largest_group": 12209
+    },
+    "headgroup": {
+      "fold_counts": {
+        "R0_cal": 2285,
+        "R0_heldout": 2285,
+        "R0_train": 10659
+      },
+      "fold_fractions": {
+        "R0_cal": 0.150042681725655,
+        "R0_heldout": 0.150042681725655,
+        "R0_train": 0.69991463654869
+      },
+      "groups": 2942,
+      "groups_spanning_folds": 0,
+      "largest_group": 460
+    },
+    "linker_scaffold": {
+      "fold_counts": {
+        "R0_cal": 2285,
+        "R0_heldout": 2285,
+        "R0_train": 10659
+      },
+      "fold_fractions": {
+        "R0_cal": 0.150042681725655,
+        "R0_heldout": 0.150042681725655,
+        "R0_train": 0.69991463654869
+      },
+      "groups": 1993,
+      "groups_spanning_folds": 0,
+      "largest_group": 898
+    },
+    "source_study": {
+      "fold_counts": {
+        "R0_cal": 2310,
+        "R0_heldout": 2328,
+        "R0_train": 10591
+      },
+      "fold_fractions": {
+        "R0_cal": 0.15168428655853963,
+        "R0_heldout": 0.15286624203821655,
+        "R0_train": 0.6954494714032438
+      },
+      "groups": 22,
+      "groups_spanning_folds": 0,
+      "largest_group": 8622
+    }
+  },
+  "seed": 20260730,
+  "software": {
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "upstream_reference": {
+    "format": "compose_lipid_corpus_splits_v1",
+    "group_leakage": {
+      "component_family": {
+        "local_groups_spanning_upstream_folds": 0
+      },
+      "headgroup": {
+        "local_groups_spanning_upstream_folds": 93
+      },
+      "linker_scaffold": {
+        "local_groups_spanning_upstream_folds": 15
+      },
+      "source_study": {
+        "local_groups_spanning_upstream_folds": 1
+      }
+    },
+    "rows_with_source_fold_conflicts": {
+      "component_family": 0,
+      "headgroup": 32,
+      "linker_scaffold": 0,
+      "source_study": 20
+    },
+    "source_row_fold_counts": {
+      "component_family": {
+        "train": 15229
+      },
+      "headgroup": {
+        "test": 2679,
+        "train": 9988,
+        "val": 2594
+      },
+      "linker_scaffold": {
+        "test": 2132,
+        "train": 10469,
+        "val": 2628
+      },
+      "source_study": {
+        "test": 1100,
+        "train": 14149
+      }
+    }
+  }
+}

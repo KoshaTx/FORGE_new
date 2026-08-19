@@ -1,0 +1,62 @@
+{
+  "schema_version": "phase1_ugi_branch_exploration_applicability_config.v1",
+  "status": "frozen_before_branch_applicability_rescoring",
+  "endpoint": "expt_Hela",
+  "task": "Measure how many chemically admitted branched exploration products enter the unchanged multiview biological applicability domain and may receive a frozen HeLa oracle score",
+  "production_contract": {
+    "draws": 4096,
+    "terminal_chemical_admission_required_before_biological_scoring": true,
+    "no_repair_or_retry": true
+  },
+  "scoring": {
+    "all_nonmeasured_interpolative_unique_products_are_scored": true,
+    "duplicate_products_share_one_frozen_oracle_evaluation": true,
+    "batch_size": 256,
+    "raw_predictions_do_not_imply_claim_authority": true,
+    "uncalibrated_patterns_receive_no_conservative_utility": true
+  },
+  "scope": {
+    "generator_frozen": true,
+    "terminal_chemical_admission_frozen": true,
+    "applicability_boundary_frozen": true,
+    "branching_is_not_a_categorical_veto": true,
+    "terminal_rescoring_only": true,
+    "potency_changes_generation": false,
+    "candidate_selection": false,
+    "prospective_panel_locked": false
+  },
+  "inputs": {
+    "generation_result": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/result.json",
+      "sha256": "7a57853b307067fb53d237bc7115a11c04003ad24a2d08f3dffffe4d48d7992b"
+    },
+    "terminal_ledger": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/terminal_ledger.jsonl.gz",
+      "sha256": "287807bbf614d6b7bca40ace20661f61ae3ba29af64f4299dde23d28cdefd065"
+    },
+    "frozen_rescoring_config": {
+      "path": "configs/bio/phase1_ugi_production_full_support_rescoring_v3.json",
+      "sha256": "27977ec6b5a2e939865937ea735da2eaba0c9b514011cf8e6426c8d0d4de0af6"
+    }
+  },
+  "implementation": {
+    "source": {
+      "path": "src/forge/bio/ugi_branch_exploration_applicability_v1.py",
+      "sha256": "88db4fd69eb513f7c39793a9e7ba8365f54dc04cb068b0c763b215b804f47382"
+    },
+    "runner": {
+      "path": "scripts/phase1_rescore_ugi_branch_exploration_applicability_v1.py",
+      "sha256": "fc522b55c824fb7489a443de69c16b23f3a5b5259cca9cc8d81c28411c34a5ef"
+    },
+    "tests": {
+      "path": "tests/test_ugi_branch_exploration_applicability_v1.py",
+      "sha256": "1e18b1b32be46efb88813a17564858ca05d94088a8f76c61094f6ccb9d1a534c"
+    }
+  },
+  "decision_boundary": {
+    "applicability_thresholds_retuned": false,
+    "branching_added_as_an_applicability_feature": false,
+    "exact_component_novelty_used_as_a_veto": false,
+    "next_stage": "separate oracle-scored branched candidates from biologically abstained synthesis exploration before route assessment"
+  }
+}

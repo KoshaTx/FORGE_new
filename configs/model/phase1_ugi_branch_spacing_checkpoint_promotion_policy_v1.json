@@ -1,0 +1,94 @@
+{
+  "schema_version": "phase1_ugi_architecture_checkpoint_selection_policy.v4",
+  "status": "frozen_before_independent_branch_spacing_promotion_sampling",
+  "frozen_at_utc": "2026-08-02T02:36:01Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+    "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"
+  },
+  "correction": {
+    "scientific_rationale": "A post-selection tail audit exposed repeated adjacent tail junctions in the selected step-1000 generator. A decoded-tree branch-spacing correction eliminated those pathologies and restored tail chemotype support in a nonselecting diagnostic, but that diagnostic used an inspected draw and the step-2000 arm missed the exact-forward invariant once. This independent two-checkpoint experiment therefore asks only whether the corrected step-2000 checkpoint can replace the frozen step-1000 generator under every unchanged v3 gate on a new matched draw.",
+    "production_baseline_remains_immutable_until_pass": true,
+    "architecture_selection_reopened": false,
+    "candidate_checkpoints": [
+      1000,
+      2000
+    ],
+    "both_candidates_use_corrected_decoded_tree_branch_spacing": true,
+    "prior_diagnostic_outputs_were_inspected": true,
+    "tail_chemotype_metrics_are_descriptive_nonselectors": true,
+    "exact_l1_terminal_admission_is_reported_without_removing_raw_valid_outputs_from_v3_denominators": true,
+    "numerical_gate_thresholds_changed_from_v3": false,
+    "within_architecture_selection_algorithm_changed_from_v3": false
+  },
+  "overrides": {
+    "status": "frozen_before_independent_branch_spacing_promotion_sampling",
+    "frozen_at_utc": "2026-08-02T02:36:01Z",
+    "scope": {
+      "phase": "Phase 1 product plus exact L1 Ugi decomposition; branch-spacing checkpoint promotion only",
+      "architectures": [
+        "full_morphology_program_conditioning"
+      ],
+      "common_serial_checkpoint_steps": [
+        1000,
+        2000
+      ],
+      "biological_guidance_evaluated": false,
+      "l2_routes_evaluated": false,
+      "synthesis_guidance_evaluated": false
+    },
+    "frozen_inputs": {
+      "unconditional_program_prior": {
+        "path": "results/phase1/ugi_program_prior_v5_challenger_selection_samples_1024.json",
+        "sha256": "3182795d0ceefb6667ddb95833595605b795f8114f6c808f907345f1e0f8d4ca",
+        "attempted_draws": 1024,
+        "seed": 20260805,
+        "source": "new independent draw from the unchanged training-fold, source- and family-balanced program prior",
+        "contains_component_ids_or_graphs": false
+      },
+      "selection_evaluator": {
+        "path": "scripts/phase1_select_ugi_architecture.py",
+        "sha256": "2b87eec1bcd62c20a6e971d6e1e089fbf4d5b5254ca9e5aa1a42b85c38aa9804"
+      },
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "8c1b52e7190de60e708772e036df41709713a4c29ccd72dae614fde1fadb0c89"
+      }
+    },
+    "matched_sampling": {
+      "seed": 20260805,
+      "attempted_draws": 1024,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "same_program_indices_across_architectures_and_checkpoints": true,
+      "maximum_adjacent_branch_graph_runs_by_role": {
+        "amine_head": 2,
+        "oxoester_aldehyde_body_tail": 1,
+        "isocyanide_tail": 1
+      },
+      "evaluate_exact_l1_terminal_admission": true,
+      "retain_raw_validity_for_unchanged_candidate_gates": true,
+      "resampling_or_retry_after_output": false
+    },
+    "failure_policy": {
+      "v1_result_invalidated": true,
+      "v2_result_invalidated": true,
+      "v3_production_generator_remains_frozen_unless_v4_passes": true,
+      "v4_uses_new_independent_selection_draw": true,
+      "v4_is_a_one_shot_two_checkpoint_experiment": true,
+      "no_threshold_rewrite_after_opening_v4_outputs": true,
+      "no_resampling_or_retry_after_opening_v4_outputs": true,
+      "no_silent_override": true
+    }
+  },
+  "promotion_rule": {
+    "requirements": [
+      "both matched sample preflights pass",
+      "step-2000 passes every unchanged v3 candidate gate",
+      "the unchanged within-architecture selector chooses step-2000",
+      "both outputs have zero decoded-tree branch-spacing violations"
+    ],
+    "otherwise": "retain the frozen step-1000 production generator",
+    "tail_chemotype_audit": "descriptive and nonselecting"
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "artifacts": {
+    "agile_virtual_ugi3_component_program_ledger.csv.gz": {
+      "bytes": 4660,
+      "path": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    }
+  },
+  "claims_boundary": {
+    "family_projection_is_exact_substrate_evidence": false,
+    "model_built": false,
+    "proposed_leaf_is_procurement_closed": false,
+    "source_route_extraction_is_forward_verification": false,
+    "structural_program_is_experimental_route": false
+  },
+  "decision": {
+    "all_nonterminal_branches_require_forward_and_leaf_closure": true,
+    "model_built": false,
+    "project_at_unique_component_level": true,
+    "source_exact_and_family_projected_programs_are_separate": true
+  },
+  "generated_utc": "2026-07-29T19:54:21+00:00",
+  "inputs": [
+    {
+      "asset": "m0_09_agile_virtual_ugi3_component_programs.json",
+      "bytes": 8080,
+      "role": "audit_config",
+      "sha256": "41618069af15d83772dc4bfa56c4cfd25613916f7f4c221eece6a98117f24441"
+    },
+    {
+      "asset": "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz",
+      "bytes": 2548,
+      "sha256": "e0af020c5bd68d17392d72010f05162212cb12e4a8ea394396f9583c48449dd2"
+    },
+    {
+      "asset": "results/m0_09/agile_virtual_ugi3_capability.json",
+      "bytes": 4620,
+      "sha256": "9143ae814fe6185813b67d0b80b7af901fcd0772f359b66e85bb8af5f56ba7a0"
+    },
+    {
+      "asset": "results/m0_09/agile_component_routes.json",
+      "bytes": 83223,
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    }
+  ],
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_agile_virtual_ugi3_component_programs.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "accepted_procurement_terminals": 17,
+    "components_with_exact_source_program": 24,
+    "components_with_family_projected_program": 47,
+    "components_with_structural_program": 71,
+    "components_without_assigned_program": 5,
+    "exact_source_programs_reproduced_structurally": 24,
+    "program_families": {
+      "fatty_acid_diol_esterification_then_alcohol_oxidation": 56,
+      "primary_alcohol_oxidation": 6,
+      "primary_amine_formylation_then_formamide_dehydration": 9
+    },
+    "roles": {
+      "amine_head": {
+        "accepted_procurement_terminals": 17,
+        "components": 22,
+        "without_assigned_program": 5
+      },
+      "isocyanide_tail": {
+        "components": 9,
+        "exact_source_programs": 7,
+        "family_projected_programs": 2,
+        "route_complete_components": 0
+      },
+      "oxoester_aldehyde_body_tail": {
+        "components": 62,
+        "exact_source_programs": 17,
+        "family_projected_programs": 45,
+        "route_complete_components": 0
+      }
+    },
+    "source_components": 93,
+    "substrate_scope": {
+      "amine_head": {
+        "carbon_branching": {
+          "branched": {
+            "accepted_procurement_terminals": 0,
+            "components": 1,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 1
+          },
+          "unbranched": {
+            "accepted_procurement_terminals": 17,
+            "components": 21,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 4
+          }
+        },
+        "carbon_count": {
+          "maximum": 11,
+          "minimum": 2,
+          "observed_values": [
+            2,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ]
+        },
+        "carbon_unsaturation": {
+          "saturated": {
+            "accepted_procurement_terminals": 17,
+            "components": 22,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 5
+          }
+        },
+        "ester_bearing": {
+          "no": {
+            "accepted_procurement_terminals": 17,
+            "components": 22,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 5
+          }
+        },
+        "ring_topology": {
+          "acyclic": {
+            "accepted_procurement_terminals": 8,
+            "components": 9,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 1
+          },
+          "cyclic": {
+            "accepted_procurement_terminals": 9,
+            "components": 13,
+            "exact_source_programs": 0,
+            "family_projected_programs": 0,
+            "unresolved_components": 4
+          }
+        }
+      },
+      "isocyanide_tail": {
+        "carbon_branching": {
+          "unbranched": {
+            "accepted_procurement_terminals": 0,
+            "components": 9,
+            "exact_source_programs": 7,
+            "family_projected_programs": 2,
+            "unresolved_components": 0
+          }
+        },
+        "carbon_count": {
+          "maximum": 19,
+          "minimum": 12,
+          "observed_values": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "carbon_unsaturation": {
+          "monoene": {
+            "accepted_procurement_terminals": 0,
+            "components": 1,
+            "exact_source_programs": 1,
+            "family_projected_programs": 0,
+            "unresolved_components": 0
+          },
+          "saturated": {
+            "accepted_procurement_terminals": 0,
+            "components": 8,
+            "exact_source_programs": 6,
+            "family_projected_programs": 2,
+            "unresolved_components": 0
+          }
+        },
+        "ester_bearing": {
+          "no": {
+            "accepted_procurement_terminals": 0,
+            "components": 9,
+            "exact_source_programs": 7,
+            "family_projected_programs": 2,
+            "unresolved_components": 0
+          }
+        },
+        "ring_topology": {
+          "acyclic": {
+            "accepted_procurement_terminals": 0,
+            "components": 9,
+            "exact_source_programs": 7,
+            "family_projected_programs": 2,
+            "unresolved_components": 0
+          }
+        }
+      },
+      "oxoester_aldehyde_body_tail": {
+        "carbon_branching": {
+          "branched": {
+            "accepted_procurement_terminals": 0,
+            "components": 4,
+            "exact_source_programs": 2,
+            "family_projected_programs": 2,
+            "unresolved_components": 0
+          },
+          "unbranched": {
+            "accepted_procurement_terminals": 0,
+            "components": 58,
+            "exact_source_programs": 15,
+            "family_projected_programs": 43,
+            "unresolved_components": 0
+          }
+        },
+        "carbon_count": {
+          "maximum": 26,
+          "minimum": 10,
+          "observed_values": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            24,
+            26
+          ]
+        },
+        "carbon_unsaturation": {
+          "alkyne": {
+            "accepted_procurement_terminals": 0,
+            "components": 4,
+            "exact_source_programs": 1,
+            "family_projected_programs": 3,
+            "unresolved_components": 0
+          },
+          "monoene": {
+            "accepted_procurement_terminals": 0,
+            "components": 13,
+            "exact_source_programs": 6,
+            "family_projected_programs": 7,
+            "unresolved_components": 0
+          },
+          "polyene": {
+            "accepted_procurement_terminals": 0,
+            "components": 4,
+            "exact_source_programs": 1,
+            "family_projected_programs": 3,
+            "unresolved_components": 0
+          },
+          "saturated": {
+            "accepted_procurement_terminals": 0,
+            "components": 41,
+            "exact_source_programs": 9,
+            "family_projected_programs": 32,
+            "unresolved_components": 0
+          }
+        },
+        "ester_bearing": {
+          "no": {
+            "accepted_procurement_terminals": 0,
+            "components": 6,
+            "exact_source_programs": 2,
+            "family_projected_programs": 4,
+            "unresolved_components": 0
+          },
+          "yes": {
+            "accepted_procurement_terminals": 0,
+            "components": 56,
+            "exact_source_programs": 15,
+            "family_projected_programs": 41,
+            "unresolved_components": 0
+          }
+        },
+        "ring_topology": {
+          "acyclic": {
+            "accepted_procurement_terminals": 0,
+            "components": 62,
+            "exact_source_programs": 17,
+            "family_projected_programs": 45,
+            "unresolved_components": 0
+          }
+        }
+      }
+    },
+    "unique_proposed_intermediates": 65,
+    "unique_proposed_leaf_candidates": 33
+  },
+  "task": "M0-09 AGILE virtual Ugi-3 recursive component-program census"
+}

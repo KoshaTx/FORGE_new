@@ -1,0 +1,99 @@
+{
+  "schema_version": "phase1_ugi_production_refit_fresh_census_config.v1",
+  "status": "frozen_before_independent_all_fold_refit_census",
+  "frozen_at_utc": "2026-08-05T09:04:00Z",
+  "purpose": "Measure production validity, exact-L1 recovery, open-endedness, morphology and tail-chemistry coverage on fresh samples from the selected all-fold refit generator.",
+  "design": {
+    "shards": 4,
+    "programs_per_shard": 1024,
+    "attempted_draws": 4096,
+    "program_seeds": [20260820, 20260821, 20260822, 20260823],
+    "flow_seeds": [20260824, 20260825, 20260826, 20260827],
+    "terminal_seeds": [20260828, 20260829, 20260830, 20260831],
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [2, 1, 1],
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "retry_or_repair": false
+  },
+  "inputs": {
+    "production_generator": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v3.json",
+      "sha256": "35afaadb15347b94f0c00c29a161a6471baf7e1e8a2112299355a817f85592af"
+    },
+    "all_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v3_all_fold.json",
+      "sha256": "a8dc910f98732c64bb528cccb8299e848cf9d620a4abbd0759fea464a5ff87ac"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1000.pt",
+      "sha256": "7595b650745df1194c31eb0293ef17b292d57a655e61433c75f307074aa174a4"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "program_shard_00": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_00.json",
+      "sha256": "87ae8e1066cfe1afb1042d77258b29cb6f1b04b8c0b9156c7966fde901008c1d"
+    },
+    "program_shard_01": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_01.json",
+      "sha256": "904881d1c14ed378cca11aa523c6737827045c26620f21afe363750f408b67ea"
+    },
+    "program_shard_02": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_02.json",
+      "sha256": "31ddea01cdada991aa9db3cab2c4a4b1a0b80c31a608348028872db44c5e246c"
+    },
+    "program_shard_03": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_03.json",
+      "sha256": "bfd18bc58ead4f38b6e2b822ce21a419bb632eb1703e72aeb9cd03a024335039"
+    },
+    "runner": {
+      "path": "scripts/modal_phase1_ugi_production_refit_fresh_census.py",
+      "sha256": "46ff0f71f06da8cc6bdd95f205ffd7b50b4e1a5110f080f44651d62b33119ef3"
+    },
+    "collector": {
+      "path": "scripts/phase1_collect_ugi_production_refit_fresh_census.py",
+      "sha256": "85926e9fb2710a7b548b01bb78d9b7d279031ae2dffac092c918c3846aefb5a2"
+    },
+    "tests": {
+      "path": "tests/test_ugi_production_refit_fresh_census.py",
+      "sha256": "c152bcd29ce58e4d17ab17b06254709a9fc32fc7e2a73f6a658f9ec78a1d8061"
+    }
+  },
+  "decision_policy": {
+    "checkpoint_or_threshold_selection": false,
+    "fresh_census_outputs_reused_for_prospective_selection": false,
+    "minimum_valid_fraction": 0.9,
+    "required_exact_l1_fraction_of_valid": 1.0,
+    "required_exact_forward_fraction_of_reconstructed": 1.0,
+    "minimum_unique_fraction_of_valid": 0.98,
+    "minimum_three_handle_fraction_of_reconstructed": 0.99,
+    "required_zero_declared_support_violations": true,
+    "chemotype_metrics_are_descriptive_not_posthoc_gates": true
+  },
+  "required_reports": [
+    "validity and exact-L1 recovery",
+    "exact refit-corpus reproduction and nearest-neighbor novelty",
+    "role-specific component and chemotype effective counts",
+    "tail carbon-count and carbon-diameter coverage",
+    "branching and adjacent-branch-run coverage",
+    "carbon-carbon unsaturation and alkyne coverage",
+    "ester, ether, carbonyl and ring coverage",
+    "seed and shard stability"
+  ]
+}

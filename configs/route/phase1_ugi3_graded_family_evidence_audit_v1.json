@@ -1,0 +1,50 @@
+{
+  "schema_version": "phase1_ugi3_graded_family_evidence_audit_config.v1",
+  "status": "frozen_before_nonselecting_graded_evidence_execution",
+  "task": "Audit categorical exact and family-projected evidence over final v5 development components without running guidance or selection",
+  "inputs": {
+    "coverage_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+    },
+    "component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz",
+      "sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+    },
+    "triage_result": {
+      "path": "results/phase1/ugi3_route_gap_triage_v5/result.json",
+      "sha256": "01530b93b85d4ab889d16e47565b3de61d14ab92acb6f94ea7ddc0daebaae978"
+    },
+    "triage_ledger": {
+      "path": "results/phase1/ugi3_route_gap_triage_v5/triage_ledger.csv.gz",
+      "sha256": "887d81b6737f5baa81d1566c499e6323931d65565b3da8ec6111439f04aa8ef7"
+    },
+    "audit_source": {
+      "path": "src/forge/value/ugi3_graded_family_evidence_audit.py",
+      "sha256": "c236283f0f91cddadbdce5db2bd9103ad384f5cd370b477529077f9b80493824"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi3_graded_family_evidence.py",
+      "sha256": "0f6849207b14954288b7cb8affa8dec725c605847dbe76e7467e58d48296a5ea"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_graded_family_evidence_audit.py",
+      "sha256": "1a0bb7a975d5259a1427b59fbf5fd7a6089f71471e4870ebc77440b61738d927"
+    }
+  },
+  "audit_policy": {
+    "exact_complete_is_highest_evidence": true,
+    "family_projection_all_current_is_lower_confidence": true,
+    "partial_and_no_current_projected_leaves_are_distinct": true,
+    "typed_failure_outcomes_remain_distinct": true,
+    "exact_scope_required_before_candidate_lock": true,
+    "family_projection_is_exact_route_evidence": false,
+    "family_projection_changes_exact_assessment_outcome": false,
+    "family_scope_qualification_performed": false,
+    "scalar_synthesis_value_defined": false,
+    "synthesis_success_probability_defined": false,
+    "synthesis_guidance_run": false,
+    "prospective_candidate_selection_changed": false,
+    "holdout_reveal_authorized": false
+  }
+}

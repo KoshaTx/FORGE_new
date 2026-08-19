@@ -1,0 +1,54 @@
+{
+  "schema_version": "phase1_ugi_distributional_applicability_config.v2",
+  "status": "frozen_before_corrected_nonselecting_distributional_audit",
+  "task": "Separate exact component novelty from chemical-distribution applicability with identity-excluded component calibration",
+  "inputs": {
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "fresh_pool_oracle_predictions": {
+      "path": "results/phase1/ugi_fresh_pool_oracle_audit_v1/oracle_predictions.csv.gz",
+      "sha256": "7c8425cad54553383a8c7ddbf476f10501e4e6093064ef4ab927723f0805a18e"
+    },
+    "oracle_graph_metrics": {
+      "path": "results/m0_07/oracle_graph_matrix_metrics.csv.gz",
+      "sha256": "019d43f16779c5abc8baec5b1d96c8f43053fb3a7422525bfc7557b9403def34"
+    },
+    "oracle_graph_predictions": {
+      "path": "results/m0_07/oracle_graph_matrix_predictions.csv.gz",
+      "sha256": "2a1e83794ad8acef7cf0de8533d5e0036d120daf434d05cc56be48db5b39affd"
+    },
+    "oracle_split_assignments": {
+      "path": "results/m0_07/oracle_split_assignments.csv.gz",
+      "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_distributional_applicability_v2.py",
+      "sha256": "51aab3672c6ce5842115e3ba244c98ea835b0747e3719adfcf2e2274957f7b85"
+    },
+    "runner": {
+      "path": "scripts/phase1_audit_ugi_distributional_applicability_v2.py",
+      "sha256": "bf8885f8a99632efcfc1b0def338377c76f6aaa696c5d6e877c1125bacf5ee43"
+    },
+    "tests": {
+      "path": "tests/test_ugi_distributional_applicability_v2.py",
+      "sha256": "4cd61576d5d0ea1bc9fa43b26f465e63a3344910fa34f14aecc9da4378ace25a"
+    }
+  },
+  "policy": {
+    "endpoint": "expt_Hela",
+    "threshold_inputs": "structures_and_split_stage_only",
+    "targets_predictions_and_errors_used_for_thresholds": false,
+    "calibration_component_identity_excluded": true,
+    "morgan_fingerprint_counts_used": true,
+    "interpolative_calibration_quantile": 0.5,
+    "boundary_calibration_quantile": 0.9,
+    "exact_identity_and_distributional_applicability_are_independent": true,
+    "candidate_distribution_bin_uses_worst_of_product_and_three_component_views": true,
+    "fingerprint_and_descriptor_views_must_both_pass": true,
+    "biological_guidance_authorized": false,
+    "raw_mean_ranking_allowed": false,
+    "candidate_selection_changed": false
+  }
+}

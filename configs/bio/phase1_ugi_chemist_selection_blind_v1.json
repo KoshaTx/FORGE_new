@@ -1,0 +1,64 @@
+{
+  "schema_version": "phase1_ugi_chemist_selection_blind.v1",
+  "purpose": "Freeze the blinding and the selection brief for the chemistry review that reduces the locked 34-candidate high-ranked pool to the 12 designs taken into synthesis.",
+  "frozen_before": "any candidate structure was shown to the reviewing chemist",
+  "input": {
+    "panel": "results/phase1/ugi_prospective_panel_v6/prospective_panel.jsonl.gz",
+    "panel_sha256": "PINNED_AT_BUILD",
+    "arm_included": "HIGH",
+    "n_candidates": 34,
+    "arm_excluded": "LOW",
+    "reason_for_exclusion": "the low-ranked designs are ranking controls, not synthesis candidates; showing them would require disclosing that a ranking exists"
+  },
+  "blinding": {
+    "seed": 20260812,
+    "code_prefix": "L",
+    "assignment": "codes are assigned in shuffled order so that code order carries no ranking information",
+    "withheld_from_reviewer": [
+      "oracle_mean",
+      "oracle_sd",
+      "lcb90",
+      "conformal_q90",
+      "percentile_of_agile_measured_library_beaten",
+      "authority_tier",
+      "arm",
+      "selection_order_within_arm",
+      "candidate_id",
+      "novelty.absent_from_train_fold",
+      "novelty.absent_from_agile_library"
+    ],
+    "disclosed_to_reviewer": [
+      "canonical_product",
+      "components.amine_head",
+      "components.oxoester_aldehyde_body_tail",
+      "components.isocyanide_tail",
+      "route_dossier.action",
+      "route_dossier.route",
+      "route_dossier.steps",
+      "route_dossier.starting_materials",
+      "route_dossier.vendor_count",
+      "synthetic_steps",
+      "descriptors.molecular_weight"
+    ],
+    "rationale": "Predicted activity already determined which designs entered this pool. Withholding it during the chemistry review means the reviewer's choices cannot have been shaped by the model's scores, so any later association between computational rank and experimental outcome is not an artefact of the selection step."
+  },
+  "brief": {
+    "n_to_select": 12,
+    "instruction": "Pick the twelve of the thirty-four you think will be good.",
+    "constraints_imposed": "none",
+    "rationale": "The reviewer was briefed in person before receiving this packet. No structural-diversity targets, quotas or coverage requests are imposed, because any constraint we add is a constraint the model did not choose and would have to be described as part of the selection rule. An unconstrained blind pick from the high-ranked pool is the cleanest test: the only inputs to her decision are the structures and the chemistry needed to make them.",
+    "reviewer_records": [
+      "which twelve were selected",
+      "anything she would decline to attempt, with the reason"
+    ]
+  },
+  "controls": {
+    "decision": "OPEN",
+    "options": [
+      "no low-ranked controls; the campaign tests only whether high-ranked FORGE designs are realizable and active",
+      "two low-ranked controls appended by the study team after the chemistry review, giving 14 syntheses and a weak ranking anchor",
+      "the full six low-ranked controls, restoring the powered high-versus-low comparison at the cost of six syntheses"
+    ],
+    "note": "Without low-ranked designs the campaign cannot test whether the ranking discriminates, only whether the prioritized designs work. Any control must be added by the study team, never surfaced to the reviewing chemist."
+  }
+}

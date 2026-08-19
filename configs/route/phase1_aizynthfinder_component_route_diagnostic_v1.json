@@ -1,0 +1,35 @@
+{
+  "schema_version": "phase1_aizynthfinder_component_route_diagnostic_config.v1",
+  "seed": 20260804,
+  "inputs": {
+    "molecule_audit_result": {
+      "path": "results/phase1/ugi_high_potency_molecule_route_audit_v1/result.json",
+      "sha256": "2f9306c28821dbeec65abb61673448aaed42fb8db02505df5af37be2f91db724"
+    },
+    "runtime_manifest": {
+      "path": "configs/route/aizynthfinder_public_v4_4_1_diagnostic_macos_arm64_v1.json",
+      "sha256": "bb1af0ff80a22f8a1c5a785868aa58558f8fbd6aab1ebd607bda65f826d3206b"
+    }
+  },
+  "single_step": {
+    "expansion_policies": ["uspto", "ringbreaker"],
+    "filter_policies": ["uspto"],
+    "maximum_proposals": 10
+  },
+  "full_search": {
+    "enabled": true,
+    "stocks": ["zinc"],
+    "maximum_unresolved_per_role": 8,
+    "time_limit_seconds": 8,
+    "iteration_limit": 60,
+    "maximum_transforms": 6,
+    "maximum_routes_stored": 3
+  },
+  "output_directory": "results/phase1/aizynthfinder_component_route_diagnostic_v1",
+  "nonclaims": [
+    "A planner proposal is a route hypothesis, not experimental or literature evidence.",
+    "Solved to the public ZINC stock does not certify procurement, operational compatibility or substrate scope.",
+    "An unsolved bounded search does not establish that a component is unsynthesizable.",
+    "This diagnostic cannot contribute route-completion value or synthesis-success probability."
+  ]
+}

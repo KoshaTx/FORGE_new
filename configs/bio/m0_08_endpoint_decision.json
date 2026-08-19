@@ -1,0 +1,55 @@
+{
+  "schema_version": "m0_08_endpoint_decision_config.v1",
+  "generated_utc": "2026-07-30T23:30:00Z",
+  "randomness_used": false,
+  "inputs": {
+    "decision_package": {
+      "path": "docs/M0_08_ENDPOINT_DECISION.md",
+      "sha256": "5d75cc6269314f4c017f3ec408328af313dc28ab5f71f9b02531e046aba84d56"
+    },
+    "endpoint_interface": {
+      "path": "src/forge/bio/endpoint.py",
+      "sha256": "1e0ec26682e8dbf3e8c8b1d11d39e8f48cbdcb18f49c89212ec1e24fa592047f"
+    },
+    "muscle_endpoint": {
+      "path": "src/forge/bio/muscle.py",
+      "sha256": "c01ab917dd0d0bcf351925d3181dec8e0770a943323c730a9109a6c47813ece6"
+    },
+    "liver_endpoint": {
+      "path": "src/forge/bio/liver.py",
+      "sha256": "dffeb0ee0f4b0eb7f2dd4e2e4f3976c1ab0ba0967bd1301c42d975044d12090e"
+    },
+    "vaccine_endpoint": {
+      "path": "src/forge/bio/vaccine.py",
+      "sha256": "bb37d374394522cda7f737e5e1781d2e312d501f0c746e861c1214be47dd00f2"
+    },
+    "endpoint_tests": {
+      "path": "tests/test_m0_08_endpoints.py",
+      "sha256": "af756a5c6db812d4de5b8f078f317926d0106fe29fb71e0536bd13b0e390b47a"
+    },
+    "agile_reconciliation": {
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "training_corpus_manifest": {
+      "path": "data/vendor/training_corpus_manifest_v1.json",
+      "sha256": "03eafbbeac5d63b95df4cc488f884fef1c8e9eae0a7d13a1ba9a3df1005c4a39"
+    }
+  },
+  "decision": {
+    "endpoint_locked": false,
+    "current_lowest_risk_option": "im_functional_editing",
+    "default_in_code": null,
+    "human_lock_required_before_phase": 4,
+    "agile_oracle_role": "general_in_vitro_transfection_only",
+    "disallowed_inference": "AGILE HeLa or RAW labels do not establish liver editing or vaccine immunogenicity",
+    "required_human_locks": [
+      "endpoint or antigen",
+      "bridge assay",
+      "laboratory capacity",
+      "benchmark",
+      "formulation",
+      "advancement rule"
+    ]
+  }
+}

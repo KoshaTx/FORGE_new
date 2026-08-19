@@ -1,0 +1,23 @@
+{
+  "schema_version": "phase1_ugi_morphology_potency_matched_adjudication_config.v1",
+  "status": "frozen_after_generation_and_before_terminal_oracle_scoring",
+  "bootstrap_seed": 20260804,
+  "inputs": {
+    "matched_generation_result": {
+      "path": "results/phase1/ugi_matched_morphology_terminal_generation_v1/result.json",
+      "sha256": "9f749ca11e2e1c563885ae0db8afff1cece0516fe540089212dea61d5655e7e6"
+    },
+    "matched_terminal_ledger": {
+      "path": "results/phase1/ugi_matched_morphology_terminal_generation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "de5d58f0835ee3e405a30a7a177f9472fc62a65688bddd41e11befa1cc0141b9"
+    },
+    "adjudication_policy": {
+      "path": "configs/bio/phase1_ugi_morphology_potency_matched_adjudication_policy_v1.json",
+      "sha256": "338c7e63d5e877c52748224621c9be537cf1998cc679d123762af813f58d4e2f"
+    },
+    "hela_diagnostic_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    }
+  }
+}

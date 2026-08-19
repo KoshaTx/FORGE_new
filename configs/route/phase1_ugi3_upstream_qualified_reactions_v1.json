@@ -1,0 +1,77 @@
+{
+  "registry_version": "phase1_ugi3_upstream_qualified_reactions_v1",
+  "scope": "exact_source_forward_verification_only",
+  "source_route_artifact": {
+    "asset": "results/m0_09/agile_component_routes.json",
+    "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb",
+    "doi": "10.1038/s41467-024-50619-z",
+    "locator": "Supplementary Note 1, pages 1-7"
+  },
+  "claims_boundary": {
+    "qualified_for_general_enumeration": false,
+    "qualified_for_substrate_scope_extrapolation": false,
+    "conditions_encoded_in_graph_transform": false,
+    "exact_graph_reconstruction_is_experimental_success": false
+  },
+  "reactions": [
+    {
+      "reaction_id": "ugi3_upstream_esterification_exact_source_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_exact_source_forward_verification_only",
+      "source_transformation": "esterification",
+      "qualification_pair_count": 15,
+      "reactant_roles": [
+        {
+          "name": "carboxylic_acid"
+        },
+        {
+          "name": "alpha_omega_diol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CX3:1](=[OX1:2])[OX2H1:3].[OX2H1:4][#6:5]>>[CX3:1](=[OX1:2])[OX2:4][#6:5]",
+      "qualification_note": "Reconstructs the exact reported monoester intermediate for all 15 source-resolved acid-plus-diol pairs; no general esterification scope is claimed."
+    },
+    {
+      "reaction_id": "ugi3_upstream_primary_alcohol_oxidation_exact_source_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_exact_source_forward_verification_only",
+      "source_transformation": "alcohol_to_aldehyde_oxidation",
+      "qualification_pair_count": 17,
+      "reactant_roles": [
+        {
+          "name": "primary_alcohol_substrate"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CH2:1][OX2H1:2]>>[CH1:1]=[OX1:2]",
+      "qualification_note": "Reconstructs the exact reported aldehyde for all 17 source-resolved primary-alcohol pairs; oxidant and conditions are evidence metadata, not graph-transform inputs."
+    },
+    {
+      "reaction_id": "ugi3_upstream_amine_formylation_exact_source_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_exact_source_forward_verification_only",
+      "source_transformation": "amine_formylation",
+      "qualification_pair_count": 7,
+      "reactant_roles": [
+        {
+          "name": "primary_amine_substrate"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[NX3H2:1]>>[NH1:1][CH1](=[OX1])",
+      "qualification_note": "Reconstructs the exact reported N-substituted formamide for all seven source-resolved primary-amine pairs; the formylating system is retained as route evidence rather than a graph reactant."
+    },
+    {
+      "reaction_id": "ugi3_upstream_formamide_dehydration_exact_source_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_exact_source_forward_verification_only",
+      "source_transformation": "formamide_dehydration_to_isocyanide",
+      "qualification_pair_count": 7,
+      "reactant_roles": [
+        {
+          "name": "n_substituted_formamide"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[NX3H1:1][CH1:2]=[OX1:3]>>[N+:1]#[C-:2]",
+      "qualification_note": "Reconstructs the exact reported isocyanide for all seven source-resolved N-substituted formamides; dehydrating reagents and conditions are not encoded as graph inputs."
+    }
+  ]
+}

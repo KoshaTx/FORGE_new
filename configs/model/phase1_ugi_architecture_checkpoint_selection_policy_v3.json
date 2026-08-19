@@ -1,0 +1,82 @@
+{
+  "schema_version": "phase1_ugi_architecture_checkpoint_selection_policy.v3",
+  "status": "frozen_before_v3_selection_sampling",
+  "frozen_at_utc": "2026-08-01T23:45:12Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v2.json",
+    "sha256": "1f40c32bd2c44699011a3a5282b33edd10e16992f73216ea1bfe770381c0fc53"
+  },
+  "correction": {
+    "scientific_rationale": "The final v3 architecture and checkpoint selector must not use the structural distribution of the component-family heldout fold. The v2 policy named all 112,386 source rows as the selection reference. Earlier held-component outputs remain preserved as explicitly nonselecting diagnostics, so the fold is not described as globally untouched and later fold-level results remain descriptive rather than a pristine final test.",
+    "v2_outputs_were_already_generated": true,
+    "v2_selector_produced_a_decision": false,
+    "v2_invalidation": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v2_invalidation.json",
+      "sha256": "2c7d3dcb198661a7ecef6be2cb7becc7826a7d6841f1d4f22d0273ef1defb7fc"
+    },
+    "additional_evaluator_fix": "Normalize only the path and sha256 fields of the metadata-bearing product-reference specification, then filter the hash-verified 112,386-row source file to the preregistered train and calibration folds before exact-reproduction and descriptor calculations.",
+    "heldout_rows_excluded_from_selection": 30122,
+    "numerical_gate_thresholds_changed_from_v2": false,
+    "selection_algorithm_changed_from_v2": false
+  },
+  "overrides": {
+    "status": "frozen_before_v3_selection_sampling",
+    "frozen_at_utc": "2026-08-01T23:45:12Z",
+    "frozen_inputs": {
+      "unconditional_program_prior": {
+        "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+        "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32",
+        "attempted_draws": 1024,
+        "seed": 20260803,
+        "source": "new independent draw from the unchanged training-fold, source- and family-balanced program prior",
+        "contains_component_ids_or_graphs": false
+      },
+      "frozen_product_reference": {
+        "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+        "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184",
+        "rows": 112386,
+        "unique_products": 112386,
+        "source_fold_counts": {
+          "train": 66464,
+          "calibration": 15800,
+          "heldout": 30122
+        },
+        "selection_folds": [
+          "train",
+          "calibration"
+        ],
+        "selection_rows": 82264,
+        "selection_unique_products": 82264,
+        "fold_field": "primary_product_fold",
+        "use": [
+          "exact selection-visible product reproduction",
+          "descriptor-distribution realism"
+        ],
+        "heldout_use": "excluded from the final v3 selector; earlier exploratory outputs are preserved as nonselecting diagnostics and later fold-level results are descriptive"
+      },
+      "selection_evaluator": {
+        "path": "scripts/phase1_select_ugi_architecture.py",
+        "sha256": "2b87eec1bcd62c20a6e971d6e1e089fbf4d5b5254ca9e5aa1a42b85c38aa9804"
+      },
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "4bfc71dc328ee7b29c65c3287188ccdd64c0122fd48754c37e05797fceda7dc8"
+      }
+    },
+    "descriptor_distribution_realism_floors": {
+      "reference_population": "82,264 selection-visible Ugi products from the train and calibration folds; the 30,122 component-family heldout products are excluded from the final v3 selector"
+    },
+    "matched_sampling": {
+      "seed": 20260803,
+      "attempted_draws": 1024,
+      "same_program_indices_across_architectures_and_checkpoints": true
+    },
+    "failure_policy": {
+      "v1_result_invalidated": true,
+      "v2_result_invalidated": true,
+      "v3_uses_new_independent_selection_draw": true,
+      "no_threshold_rewrite_after_opening_v3_outputs": true,
+      "no_silent_override": true
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "annotation_parse_failure_policy": "Unparseable annotated component SMILES remain distinct raw-string grouping tokens; they are not dropped or treated as valid molecules.",
+  "annotation_parse_failures": {
+    "head": 230
+  },
+  "decision": {
+    "all_groups_leak_free": true,
+    "component_family_limitation": "R0 has three observed family signatures, so this stress split is necessarily coarse and remains a secondary robustness analysis.",
+    "downstream_rule": "M0-04 must load the selected scheme from the frozen bundle and extract components from R0_train only.",
+    "status": "frozen"
+  },
+  "frozen_artifacts": {
+    "assignments": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "manifest": {
+      "path": "data/splits/m0_03/manifest.json",
+      "sha256": "d969f71c02b2429ae73b4131affc80682988a8e405baca466168081f8208be7b"
+    }
+  },
+  "generated_utc": "2026-07-28T20:52:10+00:00",
+  "inputs": [
+    {
+      "asset": "m0_03_r0_splits.json",
+      "bytes": 1477,
+      "role": "split_config",
+      "sha256": "f723debc03b6d1b672b561239fe5a4a684b6ebe7a4f9975852b54f72849987fc"
+    },
+    {
+      "asset": "corpus_fold_assignments.csv",
+      "bytes": 2460121,
+      "sha256": "92a39758bb35daf3590a83522dee31541b2586e1d18eef64a5cb403a7e50d369"
+    },
+    {
+      "asset": "r0_observed_real_structures.csv",
+      "bytes": 19633160,
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    {
+      "asset": "splits_manifest.json",
+      "bytes": 8322,
+      "sha256": "51d2f714886cbed0982a47e7c8c78ad49ebe91383c80cf97ec7bfee0b582322a"
+    }
+  ],
+  "randomness_used": false,
+  "row_count": 15433,
+  "schema_version": "m0_03_result.v1",
+  "schemes": {
+    "component_family": {
+      "fold_counts": {
+        "R0_cal": 1920,
+        "R0_heldout": 1200,
+        "R0_train": 12313
+      },
+      "fold_fractions": {
+        "R0_cal": 0.12440873452990345,
+        "R0_heldout": 0.07775545908118967,
+        "R0_train": 0.7978358063889069
+      },
+      "groups": 3,
+      "groups_spanning_folds": 0,
+      "largest_group": 12313
+    },
+    "headgroup": {
+      "fold_counts": {
+        "R0_cal": 2315,
+        "R0_heldout": 2315,
+        "R0_train": 10803
+      },
+      "fold_fractions": {
+        "R0_cal": 0.15000323981079505,
+        "R0_heldout": 0.15000323981079505,
+        "R0_train": 0.6999935203784099
+      },
+      "groups": 2967,
+      "groups_spanning_folds": 0,
+      "largest_group": 469
+    },
+    "linker_scaffold": {
+      "fold_counts": {
+        "R0_cal": 2315,
+        "R0_heldout": 2315,
+        "R0_train": 10803
+      },
+      "fold_fractions": {
+        "R0_cal": 0.15000323981079505,
+        "R0_heldout": 0.15000323981079505,
+        "R0_train": 0.6999935203784099
+      },
+      "groups": 2006,
+      "groups_spanning_folds": 0,
+      "largest_group": 898
+    },
+    "source_study": {
+      "fold_counts": {
+        "R0_cal": 2330,
+        "R0_heldout": 2333,
+        "R0_train": 10770
+      },
+      "fold_fractions": {
+        "R0_cal": 0.15097518304930993,
+        "R0_heldout": 0.1511695716970129,
+        "R0_train": 0.6978552452536771
+      },
+      "groups": 24,
+      "groups_spanning_folds": 0,
+      "largest_group": 7248
+    }
+  },
+  "seed": 20260728,
+  "software": {
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "task": "M0-03",
+  "upstream_reference_diagnostics": {
+    "group_leakage": {
+      "component_family": {
+        "local_groups_spanning_upstream_folds": 0
+      },
+      "headgroup": {
+        "local_groups_spanning_upstream_folds": 92
+      },
+      "linker_scaffold": {
+        "local_groups_spanning_upstream_folds": 11
+      },
+      "source_study": {
+        "local_groups_spanning_upstream_folds": 1
+      }
+    },
+    "r0_fold_counts": {
+      "component_family": {
+        "train": 15433
+      },
+      "headgroup": {
+        "test": 2721,
+        "train": 10078,
+        "val": 2634
+      },
+      "linker_scaffold": {
+        "test": 2158,
+        "train": 10596,
+        "val": 2679
+      },
+      "source_study": {
+        "test": 1200,
+        "train": 14233
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "phase1_ugi_selected_v2_full_equivalence_config.v1",
+  "scope": {
+    "guidance": false,
+    "routing": false,
+    "biology": false,
+    "candidate_selection": false,
+    "holdout_access": false
+  },
+  "design": {
+    "assignment_seed": 20260821,
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "checkpoints": [2, 4, 6]
+  },
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/product/ugi_selected_v2_full_equivalence.py",
+      "sha256": "2bce1de6b1463beb735055003002b0ee152f647475b1e7a5d1061a643880f22a"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi_selected_v2_full_equivalence.py",
+      "sha256": "05f4bef57d73197b97ea6cbf28aa219211863d48ae1a35545182451de173d1df"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "production_generator_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "selected_restartable_generator_v2": {
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+    },
+    "selected_guidance_adapter_v2": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v2.py",
+      "sha256": "61a223218b7d28c2324773c92333f96b7f61b2880b49230d97de2453f64707cb"
+    }
+  },
+  "output_dir": "results/phase1/ugi_selected_v2_full_equivalence_v1"
+}

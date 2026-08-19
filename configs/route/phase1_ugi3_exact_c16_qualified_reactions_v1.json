@@ -1,0 +1,91 @@
+{
+  "registry_version": "phase1_ugi3_exact_c16_qualified_reactions_v1",
+  "scope": "one_exact_c16_substrate_route_only",
+  "claims_boundary": {
+    "qualified_for_general_enumeration": false,
+    "qualified_for_substrate_scope_extrapolation": false,
+    "qualified_as_a_reaction_family": false,
+    "conditions_encoded_in_graph_transform": false,
+    "exact_graph_reconstruction_is_experimental_success": false,
+    "exact_l2_evidence_implies_current_l3_procurement": false,
+    "rejected_source_conflict_used": false
+  },
+  "reactions": [
+    {
+      "reaction_id": "ugi3_exact_c16_c3_c13_chain_construction_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "terminal_alkyne_alkylation",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": [
+        "C#CCOC1CCCCO1",
+        "CCCCCCCCCCCCCBr"
+      ],
+      "exact_product_smiles": "CCCCCCCCCCCCCC#CCOC1CCCCO1",
+      "reactant_roles": [
+        {
+          "name": "exact_thp_protected_propargyl_alcohol"
+        },
+        {
+          "name": "exact_1_bromotridecane"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[C:1]#[CH:2].[CH2:3][Br:4]>>[C:1]#[C:2][CH2:3]",
+      "qualification_note": "Admitted only for the exact protected propargyl alcohol plus 1-bromotridecane to protected C16 alkynol pair in WO 2021/035214 Example 5A. The C3+C13 identity is explicit; no terminal-alkyne alkylation family scope is claimed."
+    },
+    {
+      "reaction_id": "ugi3_exact_c16_thp_deprotection_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "thp_ether_deprotection",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": [
+        "CCCCCCCCCCCCCC#CCOC1CCCCO1"
+      ],
+      "exact_product_smiles": "CCCCCCCCCCCCCC#CCO",
+      "reactant_roles": [
+        {
+          "name": "exact_thp_protected_hexadec_2_yn_1_ol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CH2:1][O:2][CH:3]1[CH2:4][CH2:5][CH2:6][CH2:7][O:8]1>>[CH2:1][OH:2]",
+      "qualification_note": "Admitted only for the exact protected-C16 to hexadec-2-yn-1-ol pair in WO 2021/035214 Example 5B; no THP-deprotection family scope is claimed."
+    },
+    {
+      "reaction_id": "ugi3_exact_c16_alkyne_zipper_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "internal_to_terminal_alkyne_isomerization",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": [
+        "CCCCCCCCCCCCCC#CCO"
+      ],
+      "exact_product_smiles": "C#CCCCCCCCCCCCCCCO",
+      "reactant_roles": [
+        {
+          "name": "exact_hexadec_2_yn_1_ol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[#8:1]-[#6:2]-[#6:3]#[#6:4]-[#6:5]-[#6:6]-[#6:7]-[#6:8]-[#6:9]-[#6:10]-[#6:11]-[#6:12]-[#6:13]-[#6:14]-[#6:15]-[#6:16]-[#6:17]>>[#8:1]-[#6:2]-[#6:3]-[#6:4]-[#6:5]-[#6:6]-[#6:7]-[#6:8]-[#6:9]-[#6:10]-[#6:11]-[#6:12]-[#6:13]-[#6:14]-[#6:15]-[#6:16]#[#6:17]",
+      "qualification_note": "This whole-chain mapping verifies only the exact C16 alkyne zipper reported in WO 2021/035214 Example 5C. It is deliberately not a transferable local template."
+    },
+    {
+      "reaction_id": "ugi3_exact_c16_primary_alcohol_oxidation_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "primary_alcohol_to_aldehyde_oxidation",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": [
+        "C#CCCCCCCCCCCCCCCO"
+      ],
+      "exact_product_smiles": "C#CCCCCCCCCCCCCCC=O",
+      "reactant_roles": [
+        {
+          "name": "exact_hexadec_15_yn_1_ol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CH2:1][OX2H1:2]>>[CH1:1]=[OX1:2]",
+      "qualification_note": "Admitted only for the exact 15-hexadecynol to 15-hexadecynal pair reported in Zheng et al. Supporting Information; no oxidation family scope is claimed."
+    }
+  ]
+}

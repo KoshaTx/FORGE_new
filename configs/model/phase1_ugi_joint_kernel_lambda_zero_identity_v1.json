@@ -1,0 +1,130 @@
+{
+  "schema_version": "phase1_ugi_joint_kernel_lambda_zero_identity_config.v1",
+  "status": "frozen_before_all_eight_lambda_zero_identity",
+  "task": "Qualify all eight bounded whole-program schedules under exact selected-v3 lambda-zero identity and bind the no-score v3 structural applicability gate",
+  "scope": {
+    "all_three_component_graphs_generated": true,
+    "applicability_gate_only": true,
+    "biological_guidance": false,
+    "biological_target_values_used": false,
+    "candidate_selection": false,
+    "generator_trajectories_advanced": true,
+    "lambda_zero_only": true,
+    "nonzero_guidance": false,
+    "oracle_calls": 0,
+    "potency_predictions_consumed": false,
+    "proposal_calls": 0,
+    "prospective_candidate_lock": false,
+    "route_evaluation": false,
+    "sealed_holdout_access": false,
+    "synthesis_calls": 0
+  },
+  "policy": {
+    "assignment_seeds": [
+      20260821,
+      20260822,
+      20260823,
+      20260824,
+      20260825,
+      20260826,
+      20260827,
+      20260828
+    ],
+    "calibration_seeds": [
+      20260821,
+      20260822,
+      20260823
+    ],
+    "evaluation_seeds": [
+      20260824,
+      20260825,
+      20260826,
+      20260827,
+      20260828
+    ],
+    "programs_per_seed": 16,
+    "particles_per_program": 4,
+    "sample_steps": 8,
+    "checkpoints": [
+      2,
+      4,
+      6
+    ],
+    "checkpoint_betas": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "rollouts_per_particle_checkpoint": 1,
+    "device": "cpu",
+    "historical_old_schedule_manifest_comparison": false,
+    "seed_search_retry_or_exclusion_allowed": false,
+    "all_eight_identity_required_before_nonzero": true,
+    "all_four_views_must_be_interpolative": true,
+    "exact_measured_combination_action": "neutral",
+    "unsupported_role_pattern_action": "abstain",
+    "all_three_new_action": "abstain",
+    "supported_no_score_patterns": {
+      "amine": "amine_only",
+      "aldehyde+isocyanide": "aldehyde_isocyanide_pair"
+    }
+  },
+  "inputs": {
+    "applicability_v3_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "bio_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "curated_agile_structures": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "lambda_zero_seam_source": {
+      "path": "src/forge/product/ugi_hela_potency_guidance_seam_v1.py",
+      "sha256": "4eb2e32c689e451e0392e35f2dc47bf79c063c14df09a9d3f9f4815234fe9a38"
+    },
+    "role_policy": {
+      "path": "configs/bio/phase1_ugi_generated_role_applicability_census_policy_v1.json",
+      "sha256": "d6b02e8b8500d5954f717b7e7743674ac1444f4e1613089ba3eaad4df4693fa5"
+    },
+    "runner": {
+      "path": "scripts/phase1_qualify_ugi_joint_kernel_lambda_zero_identity_v1.py",
+      "sha256": "6e43e42724997baf2406b28642073e2efc5141e69f348b4d72e473f642a13e98"
+    },
+    "schedule_config": {
+      "path": "configs/model/phase1_ugi_joint_kernel_bounded_schedule_v1.json",
+      "sha256": "01e3b14cd8842083ca4fce2d63ef82b4ea7bb559a6d42492c563c59503f08d14"
+    },
+    "schedule_result": {
+      "path": "results/phase1/ugi_joint_kernel_bounded_schedule_v1/result.json",
+      "sha256": "c83a61b598254c4e284e1cfef6ecb925da7d6bd1c3d5f1b3ddf5c1dffc837e32"
+    },
+    "schedule_source": {
+      "path": "src/forge/product/ugi_joint_kernel_bounded_schedule.py",
+      "sha256": "884531429538724315a4ff4d71e48f4520da84137ff86d461b71f19339bb4488"
+    },
+    "selected_v3_adapter_source": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v3.py",
+      "sha256": "e4963e2c245a8b5a3ece7e1b869733553ccc1bcfbdb4811bca73131ff540b793"
+    },
+    "selected_v3_equivalence_result": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/result.json",
+      "sha256": "e13eb65ce1653acd1d7ca6443eecb7dbc85ba90dd1e299ae705b409cc6b6f11d"
+    },
+    "selected_v3_equivalence_rows": {
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json",
+      "sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_joint_kernel_lambda_zero_identity.py",
+      "sha256": "17a403b169df8dc99e91b5b33e7d4c12a00509a98ab1e837d9100eb77d2215d9"
+    },
+    "tests": {
+      "path": "tests/test_ugi_joint_kernel_lambda_zero_identity.py",
+      "sha256": "e9b06533e92f57aa54941c0acfa0a35ad9107267e8b7854263b1cb68536fe4ea"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "phase1_ugi3_source_neutral_proposal_adjudication_config.v1",
+  "status": "frozen_before_source_neutral_adjudication",
+  "task": "Adjudicate full-support Graph2Edits route hypotheses against source-derived family scope, operational compatibility, independent evidence, and current terminal-material closure without using proposal scores",
+  "inputs": {
+    "raw_proposal_ledger": {
+      "path": "results/phase1/graph2edits_full_support_one_gap_v1/proposal_ledger.jsonl.gz",
+      "sha256": "45b656c0ac7a535575d0307466536f67636b225b8b1be4467877dfc2ba0e59c0"
+    },
+    "semantic_proposal_ledger": {
+      "path": "results/phase1/graph2edits_full_support_semantic_v1/semantic_ledger.jsonl.gz",
+      "sha256": "470ec056a51e135f4164f879220d8358a1d0288c244dc97af141fa47d120c10f"
+    },
+    "graded_evidence_ledger": {
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+    },
+    "route_assessment_ledger": {
+      "path": "results/phase1/ugi_route_aware_panel_feasibility_v3/route_assessment_ledger.jsonl.gz",
+      "sha256": "c85075988138d971b27a5c9169338a18fd19169066c5cd9e18d499a4b08b2b47"
+    },
+    "exact_source_routes": {
+      "path": "results/m0_09/agile_component_routes.json",
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    }
+  },
+  "scope_policy": {
+    "morgan_radius": 2,
+    "morgan_bits": 2048,
+    "minimum_pair_similarity_floor": 0.55,
+    "similarity_threshold_derivation": "maximum of the frozen floor and the minimum leave-one-source-route-out nearest-pair similarity",
+    "numeric_features_must_remain_inside_source_min_max": true,
+    "categorical_features_must_be_source_observed": true,
+    "exact_source_pairs_are_always_in_scope": true,
+    "proposal_model_score_used": false,
+    "proposal_reaction_class_used": false,
+    "source_family_scope_is_success_probability": false
+  },
+  "qualification_policy": {
+    "require_expected_final_step_forward_reconstruction": true,
+    "require_source_bounded_pair_scope": true,
+    "require_at_least_two_exact_source_pairs": true,
+    "require_operational_functional_group_compatibility": true,
+    "require_all_projected_terminal_leaves_current": true,
+    "qualified_family_route_value": 0.75,
+    "qualified_family_route_value_is_success_probability": false,
+    "raw_proposal_may_create_evidence": false,
+    "new_family_hypothesis_may_close_route": false
+  },
+  "output_directory": "results/phase1/ugi3_source_neutral_proposal_adjudication_v1"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "phase1_ugi_step4000_bond_stochastic_diagnostic_config.v1",
+  "status": "frozen_before_matched_nonselecting_diagnostic",
+  "purpose": "Test whether the later chemistry checkpoint restores ester and unsaturation fidelity under the already-qualified bond-stochastic decoder without changing morphology programs.",
+  "sampling": {
+    "flow_seed": 20260810,
+    "terminal_seed": 20260812,
+    "attempted_draws": 1024,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "terminal_decoder_mode": "bond_stochastic",
+    "terminal_temperature": 1.0,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ],
+    "no_retries_or_seed_search": true
+  },
+  "inputs": {
+    "matched_morphology_programs": {
+      "path": "results/phase1/ugi_bond_stochastic_confirmation_v1/programs.json",
+      "sha256": "6450ba79770d609622da1605184cb19671c8ddba46866a60e8c3ec0514d5b708"
+    },
+    "step2000_bond_stochastic_control": {
+      "path": "results/phase1/ugi_bond_stochastic_confirmation_v1/bond_stochastic/result.json",
+      "sha256": "7b7aacc69e4f09909afd1b54b2762110af7f0aa5f24fe46cdeb0005cf0edc1b2"
+    },
+    "step4000_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_4000.pt",
+      "sha256": "97c712b44b63de96245da3b68ce03b9424331d191c9357b68af13469f997999e"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "decoder_source": {
+      "path": "src/forge/product/ugi_chemistry_flow.py",
+      "sha256": "c40fe8216c93008de898cff019de241ec78b8e7dfb477d7658fe12ea90b0dd66"
+    },
+    "sampling_source": {
+      "path": "src/forge/product/ugi_joint_end_to_end_sampling.py",
+      "sha256": "f1a84d054e756abe0b930a13e2a027873bd5bbbe68638910aa4a3bf88e02c6c0"
+    },
+    "sampling_cli": {
+      "path": "scripts/phase1_sample_ugi_joint_end_to_end.py",
+      "sha256": "0623353527706d1bd9534660db7990204d6c588471bf19e686098a20a70adb0f"
+    }
+  },
+  "scope": {
+    "selection_visible_diagnostic_programs": true,
+    "may_replace_frozen_v2_generator": false,
+    "may_select_prospective_candidates": false,
+    "independent_confirmation_required_if_promising": true,
+    "heldout_component_families_inspected": false
+  }
+}

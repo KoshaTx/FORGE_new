@@ -1,0 +1,161 @@
+{
+  "decision": {
+    "generator_integration": "Exact component identities can retrieve zero or more source-linked route DAGs. Route proposal and ranking remain downstream work.",
+    "map_every_lnpdb_lipid": true,
+    "model_built": false,
+    "reason": "M0-09 inventories route evidence. It does not authorize the L2 model.",
+    "whole_graph_generation_preserved": true
+  },
+  "generated_utc": "2026-07-29T18:07:01+00:00",
+  "inputs": [
+    {
+      "asset": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/route/m0_09_agile_component_routes.json",
+      "bytes": 21654,
+      "sha256": "46314a48958ae1898ac917eb2ac3b5d3f79749493bf3b239dd96ab9dea6b2084"
+    },
+    {
+      "asset": "AGILE_smiles_with_value_group.csv",
+      "bytes": 196871,
+      "sha256": "1b3dd460125ba7d70d8cce266bd5febaabe09eeddc6a4622405c2706420b9686"
+    },
+    {
+      "asset": "agile_supplementary_information.pdf",
+      "bytes": 12499955,
+      "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    },
+    {
+      "asset": "component_source_ledger.csv",
+      "bytes": 145769,
+      "sha256": "bda9ca826d7051060608e174d21415c8714736265814cd73ea93fed08dd88ff5"
+    },
+    {
+      "asset": "lnpdb_fc7c389.csv",
+      "bytes": 20118803,
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    {
+      "asset": "source_queue.csv",
+      "bytes": 21156,
+      "sha256": "598d75ca8264f9baf1827a2b65f4854e2dbe2ff51c1281a5c10ebcdfbd70d3de"
+    }
+  ],
+  "limitations": [
+    "An empty route list means not yet curated, not unsynthesizable.",
+    "Only exact component identity propagates route evidence in this artifact.",
+    "Source extraction does not establish forward success on a new substrate.",
+    "Vendor claims without exact catalog and time-stamped availability do not close procurement.",
+    "The ledger represents known alternatives and explicit unknowns, not every chemically possible route."
+  ],
+  "outputs": {
+    "agile_component_routes": {
+      "asset": "agile_component_routes.json",
+      "records": 24,
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "lnpdb_lipid_route_ledger": {
+      "asset": "lnpdb_lipid_route_ledger.csv.gz",
+      "records": 12837,
+      "sha256": "ce29178944804fa2125cb93224cbf20bbebcc69307942785a0af945f2c22b2f8"
+    }
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_lnpdb_route_awareness.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "summary": {
+    "agile_measured": {
+      "complete_cartesian_product": true,
+      "component_counts": {
+        "aldehyde_ester": 12,
+        "amine": 20,
+        "isocyanide": 5
+      },
+      "exact_extracted_route_components": {
+        "aldehyde_ester": 11,
+        "isocyanide": 5
+      },
+      "measured_products": 1200,
+      "unique_product_structures": 1200,
+      "unresolved_source_discrepancies": 1,
+      "vendor_claim_only_components": {
+        "amine": 20
+      }
+    },
+    "lnpdb": {
+      "agile_reference_identity_labels": {
+        "exact_isomeric_structure": [
+          "A1",
+          "A10",
+          "A11",
+          "A12",
+          "A13",
+          "A14",
+          "A15",
+          "A16",
+          "A17",
+          "A18",
+          "A19",
+          "A2",
+          "A20",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "B1",
+          "B10",
+          "B2",
+          "B3",
+          "B6",
+          "B7",
+          "B8",
+          "B9",
+          "C1",
+          "C3",
+          "C4"
+        ],
+        "source_label_reconciled_missing_or_incomplete_stereochemistry": [
+          "B11",
+          "B12",
+          "B4",
+          "B5",
+          "C5"
+        ],
+        "source_label_reconciled_to_measured_reference_raw_conflict_preserved": [
+          "C2"
+        ]
+      },
+      "agile_reference_route_status_counts": {
+        "all_components_source_resolved": 1100,
+        "contains_source_discrepancy": 100
+      },
+      "components_with_exact_extracted_route": 17,
+      "components_with_historical_vendor_claim": 20,
+      "components_with_source_linked_extracted_route": 22,
+      "components_with_source_reconciled_route": 5,
+      "execution_closed_lipids": 0,
+      "forward_verified_routes": 0,
+      "lipids_with_source_linked_l1_assembly": 1200,
+      "lnpdb_records": 19797,
+      "procurement_closed_components": 0,
+      "route_awareness_status_counts": {
+        "all_components_source_resolved": 1225,
+        "contains_source_discrepancy": 100,
+        "not_assessed": 9426,
+        "partially_source_resolved": 2086
+      },
+      "unique_annotated_components": 726,
+      "unique_lipids": 12837
+    },
+    "route_records": 24
+  },
+  "task": "M0-09 L2 supervision inventory addendum"
+}

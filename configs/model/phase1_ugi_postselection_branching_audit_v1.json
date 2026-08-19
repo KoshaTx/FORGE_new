@@ -1,0 +1,43 @@
+{
+  "schema_version": "phase1_ugi_postselection_branching_audit_config.v1",
+  "status": "frozen_nonselecting_audit",
+  "identity_policy": {
+    "stereochemistry": "excluded",
+    "component_identity": "exact_role_plus_canonical_constitutional_smiles"
+  },
+  "reference_policy": {
+    "folds": [
+      "train",
+      "calibration"
+    ],
+    "heldout_molecule_evaluation": false
+  },
+  "branch_definition": {
+    "branch_atom": "carbon atom with at least three carbon neighbors",
+    "adjacent_branch_edge": "single molecular edge joining two branch atoms",
+    "branch_run": "connected component in the branch-atom-induced graph"
+  },
+  "decision_policy": {
+    "can_reopen_frozen_checkpoint": false,
+    "challenger_required_if_generated_tail_adjacent_branch_rate_exceeds_reference": true,
+    "tail_roles": [
+      "oxoester_aldehyde_body_tail",
+      "isocyanide_tail"
+    ],
+    "no_automatic_infeasibility_label": true
+  },
+  "inputs": {
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "selected_sample": {
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+    },
+    "selection_reference_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  }
+}

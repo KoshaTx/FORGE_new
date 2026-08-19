@@ -1,0 +1,75 @@
+{
+  "schema_version": "phase1_ugi_generated_role_applicability_census_policy.v1",
+  "status": "frozen_read_only_support_census_policy",
+  "task": "Measure four-view applicability among valid exact-L1 terminals from the fully generated-role Ugi model without selecting an oracle, scoring potency, or authorizing guidance",
+  "scope": {
+    "read_only": true,
+    "existing_frozen_terminal_pool_only": true,
+    "valid_exact_l1_terminals_only": true,
+    "all_three_component_roles_generated": true,
+    "fixed_head_clamp_primary_path": false,
+    "fixed_head_clamp_diagnostic_ablation_only": true,
+    "oracle_calls": 0,
+    "oracle_selection": false,
+    "potency_predictions_consumed": false,
+    "biological_guidance": false,
+    "synthesis_calls": 0,
+    "synthesis_guidance": false,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false,
+    "nonzero_guidance_execution": false
+  },
+  "source_policy": {
+    "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+    "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+  },
+  "threshold_identity": {
+    "applicability_version": 3,
+    "applicability_result_sha256": "e0173b349d350a86f466b1bc12a997ac76257b46246b8b171a8fa4127b23e1da",
+    "thresholds_sha256": "f43efb355cca547eb067f3f4fb93199151e18f0716f55304805f6a8752da67d7",
+    "views": [
+      "product",
+      "amine",
+      "aldehyde",
+      "isocyanide"
+    ],
+    "fingerprint_and_descriptor_must_both_pass": true,
+    "worst_view_defines_overall_bin": true
+  },
+  "role_pattern_policy": {
+    "supported_exact_unseen_role_patterns": [
+      {
+        "pattern_id": "amine_only",
+        "unseen_roles": [
+          "amine"
+        ],
+        "conditional_scheme": "held_head_5fold"
+      },
+      {
+        "pattern_id": "aldehyde_isocyanide_pair",
+        "unseen_roles": [
+          "aldehyde",
+          "isocyanide"
+        ],
+        "conditional_scheme": "held_aldehyde_isocyanide_pair_5fold"
+      }
+    ],
+    "exact_measured_combination_action": "neutral",
+    "unsupported_pattern_action": "abstain",
+    "all_three_new_action": "abstain",
+    "all_three_new_pattern": [
+      "amine",
+      "aldehyde",
+      "isocyanide"
+    ],
+    "applicability_supported_action": "record_support_only_without_potency_score"
+  },
+  "interpretation": {
+    "applicability_is_not_potency": true,
+    "interpolative_is_not_guidance_permission": true,
+    "all_three_new_interpolative_is_still_unsupported": true,
+    "census_can_inform_a_future_trust_region_design": true,
+    "census_cannot_select_or_lock_candidates": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "phase1_ugi_production_route_shortlist_config.v2",
+  "status": "frozen_before_corrected_route_blinded_shortlist",
+  "quotas": {
+    "preserved_linear_potency": 192,
+    "branch_oracle_scored": 32,
+    "branch_potency_neutral_exploration": 32
+  },
+  "scope": {
+    "route_outcomes_visible": false,
+    "previous_linear_causal_comparison_preserved": true,
+    "previous_preliminary_branch_cohort_superseded": true,
+    "prospective_panel_locked": false
+  },
+  "inputs": {
+    "previous_shortlist_result": {
+      "path": "results/phase1/ugi_production_route_shortlist_v1/result.json",
+      "sha256": "e9f6d596b8e24f8aa9eeec63f4469e62156803b274ccbb678bdb2f63109b09a3"
+    },
+    "previous_shortlist_ledger": {
+      "path": "results/phase1/ugi_production_route_shortlist_v1/shortlist.jsonl.gz",
+      "sha256": "134ef930d0c8cd669fc109f69844e72536c192805ecb1d08f370599af1ffbaca"
+    },
+    "branch_generation_result": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/result.json",
+      "sha256": "7a57853b307067fb53d237bc7115a11c04003ad24a2d08f3dffffe4d48d7992b"
+    },
+    "branch_generation_ledger": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/terminal_ledger.jsonl.gz",
+      "sha256": "287807bbf614d6b7bca40ace20661f61ae3ba29af64f4299dde23d28cdefd065"
+    },
+    "branch_applicability_result": {
+      "path": "results/phase1/ugi_branch_exploration_applicability_v1/result.json",
+      "sha256": "a5c782e19f42fffa615305b5a42b8e85a55c897e6f3af1a72815e272545f5032"
+    },
+    "branch_applicability_ledger": {
+      "path": "results/phase1/ugi_branch_exploration_applicability_v1/terminal_rescoring.csv.gz",
+      "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"
+    }
+  },
+  "implementation": {
+    "source": {
+      "path": "src/forge/product/ugi_production_route_shortlist_v2.py",
+      "sha256": "206f05820782ea39354a3f9f7a1cc58c7e003db41d41881b836aea1895eb1549"
+    },
+    "script": {
+      "path": "scripts/phase1_build_ugi_production_route_shortlist_v2.py",
+      "sha256": "e4558135e81470afefd869e95c9a0f46d6543c1d7669a50a045486d410dbb859"
+    },
+    "tests": {
+      "path": "tests/test_ugi_production_route_shortlist_v2.py",
+      "sha256": "1ba7d372223427464517adf80a1aa5097ff1ef5cdf50e6abcbc2eb2c717da325"
+    }
+  }
+}

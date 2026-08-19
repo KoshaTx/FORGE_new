@@ -1,0 +1,1814 @@
+{
+  "algorithm_version": "blinded_stratified_specificity_packet_v1",
+  "artifacts": {
+    "answer_key.csv.gz": {
+      "bytes": 32710,
+      "path": "results/m0_05/answer_key.csv.gz",
+      "sha256": "71f5a640a8c667141e871d7d3c962786a8186b019422b206943a6907ca2f9c4b"
+    },
+    "review_packet.csv": {
+      "bytes": 135102,
+      "path": "results/m0_05/review_packet.csv",
+      "sha256": "63d2ec6d9a278e29684a627a51a265d83526fc4ed912c8b3a949979efd590a9f"
+    },
+    "review_packet.html.gz": {
+      "bytes": 11281854,
+      "path": "results/m0_05/review_packet.html.gz",
+      "sha256": "6c856ef0a589e5821a339d7c0c6e055324e2df3d37f4f0819c5ca986bea5b536"
+    },
+    "sampling_manifest.json": {
+      "bytes": 14646,
+      "path": "results/m0_05/sampling_manifest.json",
+      "sha256": "5fd4a279cfecc4f86885182d8f9d85e96765090e48189d0084e10e29dd2ba68f"
+    }
+  },
+  "generated_utc": "2026-07-29T20:00:00+00:00",
+  "human_review": {
+    "allowed_final_dispositions": [
+      "admit",
+      "restrict",
+      "reject"
+    ],
+    "claim_boundary": "The frozen procedure produced exact, forward-reconstructing decompositions under the declared transforms. Chemical precision and specificity have not yet been established.",
+    "confidence_intervals": null,
+    "family_dispositions": {
+      "acetal_aldehyde_diol": "pending_human_review",
+      "amide_coupling_acid_amine": "pending_human_review",
+      "aza_michael_amine_acrylate": "pending_human_review",
+      "carbamate_amine_chloroformate": "pending_human_review",
+      "disulfide_coupling": "pending_human_review",
+      "epoxide_opening_amine": "pending_human_review",
+      "iphos_amine_dioxaphospholane": "pending_human_review",
+      "passerini_3cr": "pending_human_review",
+      "reductive_amination_amine_aldehyde": "pending_human_review",
+      "thiol_michael_thioether": "pending_human_review",
+      "ugi_3cr_agile": "pending_human_review",
+      "urea_amine_isocyanate": "pending_human_review"
+    },
+    "precision_per_family": null,
+    "required_reviewers": 2,
+    "reviewer_agreement": null,
+    "specificity_per_control_type": null,
+    "status": "awaiting_human_review"
+  },
+  "inputs": {
+    "agile_virtual_ugi3_product_ledger": {
+      "bytes": 134814,
+      "path": "results/m0_09/agile_virtual_ugi3_product_ledger.csv.gz",
+      "sha256": "2cb7861b2d284eb3262f58d9c7ed30c186d04e047cf33fa7356b470a50904fdd"
+    },
+    "config": {
+      "bytes": 2465,
+      "path": "configs/corpus/m0_05_decomposition_precision_audit.json",
+      "sha256": "c727106c8089f4be120ce8c1b264d9dfc58a150fc83df691241110a2ebff38fb"
+    },
+    "decomposition_candidates": {
+      "bytes": 1043768,
+      "path": "results/m0_04/decomposition_candidates.csv.gz",
+      "sha256": "b543539ea203ad91581461190ea5f31c8dfff11951ff193214db85a28c94727e"
+    },
+    "lnpdb_paper_route_reviews": {
+      "bytes": 67946,
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "m0_04_config": {
+      "bytes": 2012,
+      "path": "configs/corpus/m0_04_r1_prime_audit.json",
+      "sha256": "b92b6b0d95e957e2df2e178fcb2973a299130cc595a5e4b07e676b50ac68a5ef"
+    },
+    "m0_04_result": {
+      "bytes": 49982,
+      "path": "results/m0_04/result.json",
+      "sha256": "f649f191ef6d1ea7c1885fc9b9422dcc0c819fb6f0935cde8117a09e82d4e125"
+    },
+    "qualified_reaction_families": {
+      "bytes": 31686,
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "r0_structures": {
+      "bytes": 19633160,
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    }
+  },
+  "packet_summary": {
+    "adversarial_controls": {
+      "cross_record_component_swap": 8,
+      "degenerate_reconstructing": 8,
+      "non_ugi_as_ugi": 8,
+      "role_swap": 8,
+      "wrong_attachment_site": 8,
+      "wrong_reaction_family": 8
+    },
+    "frames": {
+      "adversarial_control": 48,
+      "observed_corpus_decomposition": 241,
+      "ugi_applicability_stress": 30
+    },
+    "mechanically_forward_reconstructing_rows": 289,
+    "observed_frame": {
+      "deduplicated_exact_decompositions": 16424,
+      "families": {
+        "acetal_aldehyde_diol": {
+          "deduplicated_exact_decompositions": 48,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 1,
+            "degenerate_risk": 27,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 13,
+            "near_registry_anchor": 17,
+            "rare_component": 30,
+            "unsaturation": 21
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "amide_coupling_acid_amine": {
+          "deduplicated_exact_decompositions": 6210,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 21,
+            "common_component": 15,
+            "degenerate_risk": 3,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 18,
+            "multiple_reactive_sites": 3,
+            "near_registry_anchor": 12,
+            "rare_component": 8,
+            "unsaturation": 14
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "aza_michael_amine_acrylate": {
+          "deduplicated_exact_decompositions": 135,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 30,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 11,
+            "multiple_reactive_sites": 4,
+            "near_registry_anchor": 20,
+            "rare_component": 30,
+            "unsaturation": 4
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "carbamate_amine_chloroformate": {
+          "deduplicated_exact_decompositions": 14,
+          "sampled": 14,
+          "sampled_strata": {
+            "branching": 8,
+            "embedded_linker": 14,
+            "far_from_registry_anchor": 7,
+            "multiple_reactive_sites": 6,
+            "near_registry_anchor": 7,
+            "rare_component": 14,
+            "unsaturation": 4
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "disulfide_coupling": {
+          "deduplicated_exact_decompositions": 825,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 15,
+            "common_component": 18,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 11,
+            "near_registry_anchor": 19,
+            "rare_component": 12,
+            "unsaturation": 10
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "epoxide_opening_amine": {
+          "deduplicated_exact_decompositions": 3,
+          "sampled": 3,
+          "sampled_strata": {
+            "branching": 1,
+            "degenerate_risk": 1,
+            "embedded_linker": 1,
+            "far_from_registry_anchor": 2,
+            "near_registry_anchor": 2,
+            "rare_component": 3,
+            "unsaturation": 1
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "iphos_amine_dioxaphospholane": {
+          "deduplicated_exact_decompositions": 0,
+          "sampled": 0,
+          "sampled_strata": {},
+          "status": "zero_available_explicitly_reported",
+          "target_rule": "min(30, available)"
+        },
+        "passerini_3cr": {
+          "deduplicated_exact_decompositions": 12,
+          "sampled": 12,
+          "sampled_strata": {
+            "branching": 12,
+            "embedded_linker": 12,
+            "far_from_registry_anchor": 6,
+            "near_registry_anchor": 6,
+            "rare_component": 1
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "reductive_amination_amine_aldehyde": {
+          "deduplicated_exact_decompositions": 7390,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 12,
+            "common_component": 15,
+            "degenerate_risk": 3,
+            "embedded_linker": 27,
+            "far_from_registry_anchor": 16,
+            "multiple_reactive_sites": 16,
+            "near_registry_anchor": 14,
+            "rare_component": 10,
+            "unsaturation": 11
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "thiol_michael_thioether": {
+          "deduplicated_exact_decompositions": 152,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 29,
+            "common_component": 18,
+            "degenerate_risk": 5,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 12,
+            "near_registry_anchor": 18,
+            "rare_component": 12,
+            "unsaturation": 5
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "ugi_3cr_agile": {
+          "deduplicated_exact_decompositions": 1633,
+          "sampled": 30,
+          "sampled_strata": {
+            "branching": 6,
+            "common_component": 29,
+            "degenerate_risk": 1,
+            "embedded_linker": 30,
+            "far_from_registry_anchor": 17,
+            "multiple_reactive_sites": 6,
+            "near_registry_anchor": 13,
+            "rare_component": 1,
+            "unsaturation": 21
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        },
+        "urea_amine_isocyanate": {
+          "deduplicated_exact_decompositions": 2,
+          "sampled": 2,
+          "sampled_strata": {
+            "branching": 2,
+            "embedded_linker": 2,
+            "far_from_registry_anchor": 2,
+            "near_registry_anchor": 2,
+            "rare_component": 2
+          },
+          "status": "sampled",
+          "target_rule": "min(30, available)"
+        }
+      },
+      "sampled": 241
+    },
+    "rows": 319
+  },
+  "randomness": {
+    "method": "seeded_sha256_stratified_round_robin_v1",
+    "used": true
+  },
+  "schema_version": "m0_05_decomposition_precision_audit.v1",
+  "seed": 20260729,
+  "source_m0_04_coverage": {
+    "component_family": {
+      "decomposition": {
+        "all_harvest_sources_are_r0_train": true,
+        "candidate_decompositions": 9888,
+        "candidate_decompositions_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 3186,
+          "aza_michael_amine_acrylate": 135,
+          "carbamate_amine_chloroformate": 14,
+          "disulfide_coupling": 825,
+          "epoxide_opening_amine": 3,
+          "passerini_3cr": 12,
+          "reductive_amination_amine_aldehyde": 5078,
+          "thiol_michael_thioether": 152,
+          "ugi_3cr_agile": 433,
+          "urea_amine_isocyanate": 2
+        },
+        "heldout_structures": 1200,
+        "heldout_structures_decomposed_for_harvesting": 0,
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 1525,
+          "amide_coupling_acid_amine:no_exact_reconstruction": 9,
+          "amide_coupling_acid_amine:role_policy": 65,
+          "aza_michael_amine_acrylate:invalid_reactant": 14841,
+          "aza_michael_amine_acrylate:role_policy": 101,
+          "carbamate_amine_chloroformate:invalid_reactant": 1,
+          "epoxide_opening_amine:invalid_reactant": 3526,
+          "epoxide_opening_amine:role_policy": 82,
+          "iphos_amine_dioxaphospholane:invalid_reactant": 1956,
+          "iphos_amine_dioxaphospholane:role_policy": 494,
+          "passerini_3cr:no_exact_reconstruction": 1,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 61773,
+          "reductive_amination_amine_aldehyde:no_exact_reconstruction": 33,
+          "reductive_amination_amine_aldehyde:role_policy": 1491,
+          "ugi_3cr_agile:invalid_reactant": 886,
+          "ugi_3cr_agile:no_exact_reconstruction": 18,
+          "urea_amine_isocyanate:invalid_reactant": 4,
+          "urea_amine_isocyanate:role_policy": 2
+        },
+        "role_typed_pool_records": 6619,
+        "train_structures": 12313,
+        "train_structures_with_candidate_decomposition": 4575,
+        "unique_block_structures": 6228
+      },
+      "existing_r1_exact_control": {
+        "agile_heldout": {
+          "denominator": 1200,
+          "recovered": 1200,
+          "recovery_rate": 1.0,
+          "wilson_95_interval": [
+            0.9968089993972651,
+            1.0
+          ]
+        },
+        "all_heldout": {
+          "denominator": 1200,
+          "recovered": 1200,
+          "recovery_rate": 1.0,
+          "wilson_95_interval": [
+            0.9968089993972651,
+            1.0
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 0,
+          "recovered": 0,
+          "recovery_rate": null,
+          "wilson_95_interval": [
+            null,
+            null
+          ]
+        }
+      },
+      "r1_prime_enumeration": {
+        "first_seen_unique_products_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 1304236,
+          "aza_michael_amine_acrylate": 6460,
+          "disulfide_coupling": 22921,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 18,
+          "reductive_amination_amine_aldehyde": 4402919,
+          "thiol_michael_thioether": 884,
+          "ugi_3cr_agile": 4685
+        },
+        "generated_product_outcomes": 6509421,
+        "generated_product_outcomes_by_reaction": {
+          "acetal_aldehyde_diol": 96,
+          "amide_coupling_acid_amine": 1373084,
+          "aza_michael_amine_acrylate": 7124,
+          "carbamate_amine_chloroformate": 152,
+          "disulfide_coupling": 46225,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 5073292,
+          "thiol_michael_thioether": 1022,
+          "ugi_3cr_agile": 8370,
+          "urea_amine_isocyanate": 2
+        },
+        "generator_role": "diagnostic_only_not_the_whole_graph_product_generator",
+        "globally_unique_products": 5742177,
+        "invalid_product_outcomes_by_reaction": {},
+        "predicted_reactant_combinations": 4304858,
+        "provenance": "r0_train_derived_reaction_enumerated_reference",
+        "reactant_combinations_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 873917,
+          "aza_michael_amine_acrylate": 6656,
+          "carbamate_amine_chloroformate": 104,
+          "disulfide_coupling": 46225,
+          "epoxide_opening_amine": 6,
+          "iphos_amine_dioxaphospholane": 0,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 3370080,
+          "thiol_michael_thioether": 1022,
+          "ugi_3cr_agile": 6750,
+          "urea_amine_isocyanate": 2
+        },
+        "reactant_combinations_processed": 4304858,
+        "sampling_used": false,
+        "unique_products_by_reaction_nonexclusive": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 1304241,
+          "aza_michael_amine_acrylate": 7124,
+          "carbamate_amine_chloroformate": 145,
+          "disulfide_coupling": 23036,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 4775327,
+          "thiol_michael_thioether": 1009,
+          "ugi_3cr_agile": 7290,
+          "urea_amine_isocyanate": 1
+        }
+      },
+      "r1_prime_exact_recovery": {
+        "agile_heldout": {
+          "denominator": 1200,
+          "recovered": 200,
+          "recovery_rate": 0.16666666666666666,
+          "wilson_95_interval": [
+            0.14665129381791034,
+            0.1888093732505796
+          ]
+        },
+        "all_heldout": {
+          "denominator": 1200,
+          "recovered": 200,
+          "recovery_rate": 0.16666666666666666,
+          "wilson_95_interval": [
+            0.14665129381791034,
+            0.1888093732505796
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 0,
+          "recovered": 0,
+          "recovery_rate": null,
+          "wilson_95_interval": [
+            null,
+            null
+          ]
+        }
+      },
+      "r1_prime_nearest_reachable_distance": {
+        "all_unrecovered": {
+          "count": 1000,
+          "histogram": [
+            {
+              "count": 625,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 95,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 177,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 103,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 0,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 0,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 0,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 0,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 0,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 0,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 0,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 0,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 0,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 0,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 0,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 0,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.048664856353297835,
+          "quantiles": {
+            "max": 0.19298245614035092,
+            "median": 0.0,
+            "min": 0.0,
+            "q01": 0.0,
+            "q05": 0.0,
+            "q10": 0.0,
+            "q25": 0.0,
+            "q75": 0.12698412698412698,
+            "q90": 0.15094339622641506,
+            "q95": 0.17741935483870963,
+            "q99": 0.18965517241379315
+          },
+          "standard_deviation": 0.06675258470235021
+        },
+        "metric": "1 - maximum ECFP4 Tanimoto similarity",
+        "non_agile_unrecovered": {
+          "count": 0,
+          "histogram": [],
+          "mean": null,
+          "quantiles": {},
+          "standard_deviation": null
+        }
+      }
+    },
+    "headgroup": {
+      "decomposition": {
+        "all_harvest_sources_are_r0_train": true,
+        "candidate_decompositions": 11120,
+        "candidate_decompositions_by_reaction": {
+          "acetal_aldehyde_diol": 10,
+          "amide_coupling_acid_amine": 4259,
+          "aza_michael_amine_acrylate": 65,
+          "carbamate_amine_chloroformate": 11,
+          "disulfide_coupling": 735,
+          "epoxide_opening_amine": 3,
+          "passerini_3cr": 12,
+          "reductive_amination_amine_aldehyde": 4839,
+          "thiol_michael_thioether": 102,
+          "ugi_3cr_agile": 1084
+        },
+        "heldout_structures": 2315,
+        "heldout_structures_decomposed_for_harvesting": 0,
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 2325,
+          "amide_coupling_acid_amine:no_exact_reconstruction": 6,
+          "amide_coupling_acid_amine:role_policy": 23,
+          "aza_michael_amine_acrylate:invalid_reactant": 10663,
+          "aza_michael_amine_acrylate:role_policy": 75,
+          "carbamate_amine_chloroformate:invalid_reactant": 1,
+          "epoxide_opening_amine:invalid_reactant": 2845,
+          "epoxide_opening_amine:role_policy": 57,
+          "iphos_amine_dioxaphospholane:invalid_reactant": 1510,
+          "iphos_amine_dioxaphospholane:role_policy": 208,
+          "passerini_3cr:no_exact_reconstruction": 1,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 51175,
+          "reductive_amination_amine_aldehyde:no_exact_reconstruction": 113,
+          "reductive_amination_amine_aldehyde:role_policy": 1769,
+          "ugi_3cr_agile:invalid_reactant": 2145,
+          "ugi_3cr_agile:no_exact_reconstruction": 15,
+          "urea_amine_isocyanate:invalid_reactant": 4
+        },
+        "role_typed_pool_records": 5014,
+        "train_structures": 10803,
+        "train_structures_with_candidate_decomposition": 5244,
+        "unique_block_structures": 4750
+      },
+      "existing_r1_exact_control": {
+        "agile_heldout": {
+          "denominator": 180,
+          "recovered": 180,
+          "recovery_rate": 1.0,
+          "wilson_95_interval": [
+            0.9791045020783868,
+            1.0
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2315,
+          "recovered": 187,
+          "recovery_rate": 0.08077753779697625,
+          "wilson_95_interval": [
+            0.07035937528563568,
+            0.09258469205601647
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2135,
+          "recovered": 7,
+          "recovery_rate": 0.003278688524590164,
+          "wilson_95_interval": [
+            0.001589103886386666,
+            0.0067525423572444435
+          ]
+        }
+      },
+      "r1_prime_enumeration": {
+        "first_seen_unique_products_by_reaction": {
+          "acetal_aldehyde_diol": 10,
+          "amide_coupling_acid_amine": 803159,
+          "aza_michael_amine_acrylate": 140,
+          "disulfide_coupling": 14042,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 18,
+          "reductive_amination_amine_aldehyde": 2173611,
+          "thiol_michael_thioether": 329,
+          "ugi_3cr_agile": 3347
+        },
+        "generated_product_outcomes": 3362658,
+        "generated_product_outcomes_by_reaction": {
+          "acetal_aldehyde_diol": 20,
+          "amide_coupling_acid_amine": 837382,
+          "aza_michael_amine_acrylate": 580,
+          "carbamate_amine_chloroformate": 112,
+          "disulfide_coupling": 28224,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 2488110,
+          "thiol_michael_thioether": 424,
+          "ugi_3cr_agile": 7752
+        },
+        "generator_role": "diagnostic_only_not_the_whole_graph_product_generator",
+        "globally_unique_products": 2994662,
+        "invalid_product_outcomes_by_reaction": {},
+        "predicted_reactant_combinations": 2236032,
+        "provenance": "r0_train_derived_reaction_enumerated_reference",
+        "reactant_combinations_by_reaction": {
+          "acetal_aldehyde_diol": 10,
+          "amide_coupling_acid_amine": 552227,
+          "aza_michael_amine_acrylate": 580,
+          "carbamate_amine_chloroformate": 80,
+          "disulfide_coupling": 28224,
+          "epoxide_opening_amine": 6,
+          "iphos_amine_dioxaphospholane": 0,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 1647905,
+          "thiol_michael_thioether": 424,
+          "ugi_3cr_agile": 6528,
+          "urea_amine_isocyanate": 0
+        },
+        "reactant_combinations_processed": 2236032,
+        "sampling_used": false,
+        "unique_products_by_reaction_nonexclusive": {
+          "acetal_aldehyde_diol": 10,
+          "amide_coupling_acid_amine": 803159,
+          "aza_michael_amine_acrylate": 580,
+          "carbamate_amine_chloroformate": 107,
+          "disulfide_coupling": 14049,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 2393539,
+          "thiol_michael_thioether": 416,
+          "ugi_3cr_agile": 7344
+        }
+      },
+      "r1_prime_exact_recovery": {
+        "agile_heldout": {
+          "denominator": 180,
+          "recovered": 60,
+          "recovery_rate": 0.3333333333333333,
+          "wilson_95_interval": [
+            0.2685841614927578,
+            0.4050476711477798
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2315,
+          "recovered": 273,
+          "recovery_rate": 0.11792656587473002,
+          "wilson_95_interval": [
+            0.10541710943897759,
+            0.13170192978172446
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2135,
+          "recovered": 213,
+          "recovery_rate": 0.09976580796252928,
+          "wilson_95_interval": [
+            0.08776362818200578,
+            0.1132056662217498
+          ]
+        }
+      },
+      "r1_prime_nearest_reachable_distance": {
+        "all_unrecovered": {
+          "count": 2042,
+          "histogram": [
+            {
+              "count": 207,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 99,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 207,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 255,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 153,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 244,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 137,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 214,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 113,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 109,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 152,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 92,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 34,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 19,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 4,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 2,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 1,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.2817133118011306,
+          "quantiles": {
+            "max": 0.8105263157894737,
+            "median": 0.2682926829268293,
+            "min": 0.0,
+            "q01": 0.0,
+            "q05": 0.014705882352941124,
+            "q10": 0.03703703703703709,
+            "q25": 0.14925373134328357,
+            "q75": 0.40476190476190477,
+            "q90": 0.5305813234384662,
+            "q95": 0.5740740740740741,
+            "q99": 0.6612903225806452
+          },
+          "standard_deviation": 0.1737544698838577
+        },
+        "metric": "1 - maximum ECFP4 Tanimoto similarity",
+        "non_agile_unrecovered": {
+          "count": 1922,
+          "histogram": [
+            {
+              "count": 207,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 99,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 199,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 203,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 153,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 244,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 120,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 171,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 113,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 109,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 152,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 92,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 34,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 19,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 4,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 2,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 1,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.28301592030337946,
+          "quantiles": {
+            "max": 0.8105263157894737,
+            "median": 0.2682926829268293,
+            "min": 0.0,
+            "q01": 0.0,
+            "q05": 0.014285714285714235,
+            "q10": 0.024582798459563602,
+            "q25": 0.1428571428571429,
+            "q75": 0.4181139755766622,
+            "q90": 0.5306122448979591,
+            "q95": 0.5799062499999997,
+            "q99": 0.6612903225806452
+          },
+          "standard_deviation": 0.17717347766073205
+        }
+      }
+    },
+    "linker_scaffold": {
+      "decomposition": {
+        "all_harvest_sources_are_r0_train": true,
+        "candidate_decompositions": 12387,
+        "candidate_decompositions_by_reaction": {
+          "acetal_aldehyde_diol": 21,
+          "amide_coupling_acid_amine": 4678,
+          "aza_michael_amine_acrylate": 57,
+          "carbamate_amine_chloroformate": 10,
+          "disulfide_coupling": 671,
+          "epoxide_opening_amine": 2,
+          "passerini_3cr": 12,
+          "reductive_amination_amine_aldehyde": 5467,
+          "thiol_michael_thioether": 71,
+          "ugi_3cr_agile": 1396,
+          "urea_amine_isocyanate": 2
+        },
+        "heldout_structures": 2315,
+        "heldout_structures_decomposed_for_harvesting": 0,
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 2522,
+          "amide_coupling_acid_amine:no_exact_reconstruction": 4,
+          "amide_coupling_acid_amine:role_policy": 24,
+          "aza_michael_amine_acrylate:invalid_reactant": 9515,
+          "aza_michael_amine_acrylate:role_policy": 76,
+          "epoxide_opening_amine:invalid_reactant": 2691,
+          "epoxide_opening_amine:role_policy": 63,
+          "iphos_amine_dioxaphospholane:invalid_reactant": 1512,
+          "iphos_amine_dioxaphospholane:role_policy": 338,
+          "passerini_3cr:no_exact_reconstruction": 1,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 48259,
+          "reductive_amination_amine_aldehyde:no_exact_reconstruction": 177,
+          "reductive_amination_amine_aldehyde:role_policy": 1712,
+          "ugi_3cr_agile:invalid_reactant": 2210,
+          "ugi_3cr_agile:no_exact_reconstruction": 13,
+          "urea_amine_isocyanate:invalid_reactant": 2,
+          "urea_amine_isocyanate:role_policy": 2
+        },
+        "role_typed_pool_records": 5737,
+        "train_structures": 10803,
+        "train_structures_with_candidate_decomposition": 5731,
+        "unique_block_structures": 5446
+      },
+      "existing_r1_exact_control": {
+        "agile_heldout": {
+          "denominator": 8,
+          "recovered": 8,
+          "recovery_rate": 1.0,
+          "wilson_95_interval": [
+            0.6755924351161198,
+            1.0
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2315,
+          "recovered": 26,
+          "recovery_rate": 0.01123110151187905,
+          "wilson_95_interval": [
+            0.007675901364805612,
+            0.016405718621881067
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2307,
+          "recovered": 18,
+          "recovery_rate": 0.007802340702210663,
+          "wilson_95_interval": [
+            0.004941068721956187,
+            0.012300035668228444
+          ]
+        }
+      },
+      "r1_prime_enumeration": {
+        "first_seen_unique_products_by_reaction": {
+          "acetal_aldehyde_diol": 21,
+          "amide_coupling_acid_amine": 807484,
+          "aza_michael_amine_acrylate": 2173,
+          "disulfide_coupling": 20011,
+          "epoxide_opening_amine": 4,
+          "passerini_3cr": 18,
+          "reductive_amination_amine_aldehyde": 3121500,
+          "thiol_michael_thioether": 343,
+          "ugi_3cr_agile": 3443
+        },
+        "generated_product_outcomes": 4407998,
+        "generated_product_outcomes_by_reaction": {
+          "acetal_aldehyde_diol": 42,
+          "amide_coupling_acid_amine": 844765,
+          "aza_michael_amine_acrylate": 2250,
+          "carbamate_amine_chloroformate": 84,
+          "disulfide_coupling": 40401,
+          "epoxide_opening_amine": 4,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 3511618,
+          "thiol_michael_thioether": 384,
+          "ugi_3cr_agile": 8400,
+          "urea_amine_isocyanate": 2
+        },
+        "generator_role": "diagnostic_only_not_the_whole_graph_product_generator",
+        "globally_unique_products": 3954997,
+        "invalid_product_outcomes_by_reaction": {},
+        "predicted_reactant_combinations": 2916889,
+        "provenance": "r0_train_derived_reaction_enumerated_reference",
+        "reactant_combinations_by_reaction": {
+          "acetal_aldehyde_diol": 21,
+          "amide_coupling_acid_amine": 570019,
+          "aza_michael_amine_acrylate": 2250,
+          "carbamate_amine_chloroformate": 60,
+          "disulfide_coupling": 40401,
+          "epoxide_opening_amine": 4,
+          "iphos_amine_dioxaphospholane": 0,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 2297100,
+          "thiol_michael_thioether": 384,
+          "ugi_3cr_agile": 6600,
+          "urea_amine_isocyanate": 2
+        },
+        "reactant_combinations_processed": 2916889,
+        "sampling_used": false,
+        "unique_products_by_reaction_nonexclusive": {
+          "acetal_aldehyde_diol": 21,
+          "amide_coupling_acid_amine": 807489,
+          "aza_michael_amine_acrylate": 2250,
+          "carbamate_amine_chloroformate": 80,
+          "disulfide_coupling": 20125,
+          "epoxide_opening_amine": 4,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 3354220,
+          "thiol_michael_thioether": 374,
+          "ugi_3cr_agile": 7200,
+          "urea_amine_isocyanate": 1
+        }
+      },
+      "r1_prime_exact_recovery": {
+        "agile_heldout": {
+          "denominator": 8,
+          "recovered": 8,
+          "recovery_rate": 1.0,
+          "wilson_95_interval": [
+            0.6755924351161198,
+            1.0
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2315,
+          "recovered": 443,
+          "recovery_rate": 0.1913606911447084,
+          "wilson_95_interval": [
+            0.17585290743105222,
+            0.20789107620172517
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2307,
+          "recovered": 435,
+          "recovery_rate": 0.18855656697009102,
+          "wilson_95_interval": [
+            0.17311765009719673,
+            0.20503094832142735
+          ]
+        }
+      },
+      "r1_prime_nearest_reachable_distance": {
+        "all_unrecovered": {
+          "count": 1872,
+          "histogram": [
+            {
+              "count": 67,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 64,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 379,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 186,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 201,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 173,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 156,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 106,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 81,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 67,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 59,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 133,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 79,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 95,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 13,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 9,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 4,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.3063340151794146,
+          "quantiles": {
+            "max": 0.8214285714285714,
+            "median": 0.2586206896551724,
+            "min": 0.0,
+            "q01": 0.0,
+            "q05": 0.06639463713203156,
+            "q10": 0.11111111111111116,
+            "q25": 0.1428571428571429,
+            "q75": 0.4395454545454546,
+            "q90": 0.6100221075902728,
+            "q95": 0.6608504842615012,
+            "q99": 0.71670019467878
+          },
+          "standard_deviation": 0.19032187715171303
+        },
+        "metric": "1 - maximum ECFP4 Tanimoto similarity",
+        "non_agile_unrecovered": {
+          "count": 1872,
+          "histogram": [
+            {
+              "count": 67,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 64,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 379,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 186,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 201,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 173,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 156,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 106,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 81,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 67,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 59,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 133,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 79,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 95,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 13,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 9,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 4,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.3063340151794146,
+          "quantiles": {
+            "max": 0.8214285714285714,
+            "median": 0.2586206896551724,
+            "min": 0.0,
+            "q01": 0.0,
+            "q05": 0.06639463713203156,
+            "q10": 0.11111111111111116,
+            "q25": 0.1428571428571429,
+            "q75": 0.4395454545454546,
+            "q90": 0.6100221075902728,
+            "q95": 0.6608504842615012,
+            "q99": 0.71670019467878
+          },
+          "standard_deviation": 0.19032187715171303
+        }
+      }
+    },
+    "source_study": {
+      "decomposition": {
+        "all_harvest_sources_are_r0_train": true,
+        "candidate_decompositions": 11691,
+        "candidate_decompositions_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 3389,
+          "aza_michael_amine_acrylate": 63,
+          "carbamate_amine_chloroformate": 11,
+          "disulfide_coupling": 817,
+          "epoxide_opening_amine": 3,
+          "passerini_3cr": 12,
+          "reductive_amination_amine_aldehyde": 5563,
+          "thiol_michael_thioether": 152,
+          "ugi_3cr_agile": 1633
+        },
+        "heldout_structures": 2333,
+        "heldout_structures_decomposed_for_harvesting": 0,
+        "rejected_reverse_outcomes": {
+          "amide_coupling_acid_amine:invalid_reactant": 1269,
+          "amide_coupling_acid_amine:no_exact_reconstruction": 9,
+          "amide_coupling_acid_amine:role_policy": 40,
+          "aza_michael_amine_acrylate:invalid_reactant": 13729,
+          "aza_michael_amine_acrylate:role_policy": 101,
+          "epoxide_opening_amine:invalid_reactant": 3416,
+          "epoxide_opening_amine:role_policy": 82,
+          "iphos_amine_dioxaphospholane:invalid_reactant": 1956,
+          "iphos_amine_dioxaphospholane:role_policy": 494,
+          "passerini_3cr:no_exact_reconstruction": 1,
+          "reductive_amination_amine_aldehyde:invalid_reactant": 54520,
+          "reductive_amination_amine_aldehyde:no_exact_reconstruction": 33,
+          "reductive_amination_amine_aldehyde:role_policy": 2105,
+          "ugi_3cr_agile:invalid_reactant": 809,
+          "ugi_3cr_agile:no_exact_reconstruction": 8,
+          "urea_amine_isocyanate:invalid_reactant": 2
+        },
+        "role_typed_pool_records": 6127,
+        "train_structures": 10770,
+        "train_structures_with_candidate_decomposition": 4544,
+        "unique_block_structures": 5817
+      },
+      "existing_r1_exact_control": {
+        "agile_heldout": {
+          "denominator": 0,
+          "recovered": 0,
+          "recovery_rate": null,
+          "wilson_95_interval": [
+            null,
+            null
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2333,
+          "recovered": 0,
+          "recovery_rate": 0.0,
+          "wilson_95_interval": [
+            0.0,
+            0.0016438679681045835
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2333,
+          "recovered": 0,
+          "recovery_rate": 0.0,
+          "wilson_95_interval": [
+            0.0,
+            0.0016438679681045835
+          ]
+        }
+      },
+      "r1_prime_enumeration": {
+        "first_seen_unique_products_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 1251921,
+          "aza_michael_amine_acrylate": 2779,
+          "disulfide_coupling": 21860,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 18,
+          "reductive_amination_amine_aldehyde": 3539135,
+          "thiol_michael_thioether": 884,
+          "ugi_3cr_agile": 5806
+        },
+        "generated_product_outcomes": 5486075,
+        "generated_product_outcomes_by_reaction": {
+          "acetal_aldehyde_diol": 96,
+          "amide_coupling_acid_amine": 1320762,
+          "aza_michael_amine_acrylate": 2856,
+          "carbamate_amine_chloroformate": 85,
+          "disulfide_coupling": 44100,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 4103150,
+          "thiol_michael_thioether": 1022,
+          "ugi_3cr_agile": 13950
+        },
+        "generator_role": "diagnostic_only_not_the_whole_graph_product_generator",
+        "globally_unique_products": 4822457,
+        "invalid_product_outcomes_by_reaction": {},
+        "predicted_reactant_combinations": 3541919,
+        "provenance": "r0_train_derived_reaction_enumerated_reference",
+        "reactant_combinations_by_reaction": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 834324,
+          "aza_michael_amine_acrylate": 2856,
+          "carbamate_amine_chloroformate": 55,
+          "disulfide_coupling": 44100,
+          "epoxide_opening_amine": 6,
+          "iphos_amine_dioxaphospholane": 0,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 2648210,
+          "thiol_michael_thioether": 1022,
+          "ugi_3cr_agile": 11250,
+          "urea_amine_isocyanate": 0
+        },
+        "reactant_combinations_processed": 3541919,
+        "sampling_used": false,
+        "unique_products_by_reaction_nonexclusive": {
+          "acetal_aldehyde_diol": 48,
+          "amide_coupling_acid_amine": 1251926,
+          "aza_michael_amine_acrylate": 2856,
+          "carbamate_amine_chloroformate": 79,
+          "disulfide_coupling": 21972,
+          "epoxide_opening_amine": 6,
+          "passerini_3cr": 48,
+          "reductive_amination_amine_aldehyde": 3871171,
+          "thiol_michael_thioether": 1009,
+          "ugi_3cr_agile": 12150
+        }
+      },
+      "r1_prime_exact_recovery": {
+        "agile_heldout": {
+          "denominator": 0,
+          "recovered": 0,
+          "recovery_rate": null,
+          "wilson_95_interval": [
+            null,
+            null
+          ]
+        },
+        "all_heldout": {
+          "denominator": 2333,
+          "recovered": 0,
+          "recovery_rate": 0.0,
+          "wilson_95_interval": [
+            0.0,
+            0.0016438679681045835
+          ]
+        },
+        "non_agile_heldout": {
+          "denominator": 2333,
+          "recovered": 0,
+          "recovery_rate": 0.0,
+          "wilson_95_interval": [
+            0.0,
+            0.0016438679681045835
+          ]
+        }
+      },
+      "r1_prime_nearest_reachable_distance": {
+        "all_unrecovered": {
+          "count": 2333,
+          "histogram": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 1,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 0,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 18,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 19,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 42,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 146,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 435,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 339,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 493,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 415,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 208,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 178,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 31,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 8,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.5129482197796071,
+          "quantiles": {
+            "max": 0.7671232876712328,
+            "median": 0.5142857142857142,
+            "min": 0.09433962264150941,
+            "q01": 0.2577321603128055,
+            "q05": 0.370048309178744,
+            "q10": 0.4,
+            "q25": 0.4423076923076923,
+            "q75": 0.574468085106383,
+            "q90": 0.6481481481481481,
+            "q95": 0.6666666666666667,
+            "q99": 0.7150429669832649
+          },
+          "standard_deviation": 0.09470067361884124
+        },
+        "metric": "1 - maximum ECFP4 Tanimoto similarity",
+        "non_agile_unrecovered": {
+          "count": 2333,
+          "histogram": [
+            {
+              "count": 0,
+              "lower": 0.0,
+              "upper": 0.05
+            },
+            {
+              "count": 1,
+              "lower": 0.05,
+              "upper": 0.1
+            },
+            {
+              "count": 0,
+              "lower": 0.1,
+              "upper": 0.15
+            },
+            {
+              "count": 0,
+              "lower": 0.15,
+              "upper": 0.2
+            },
+            {
+              "count": 18,
+              "lower": 0.2,
+              "upper": 0.25
+            },
+            {
+              "count": 19,
+              "lower": 0.25,
+              "upper": 0.3
+            },
+            {
+              "count": 42,
+              "lower": 0.3,
+              "upper": 0.35
+            },
+            {
+              "count": 146,
+              "lower": 0.35,
+              "upper": 0.4
+            },
+            {
+              "count": 435,
+              "lower": 0.4,
+              "upper": 0.45
+            },
+            {
+              "count": 339,
+              "lower": 0.45,
+              "upper": 0.5
+            },
+            {
+              "count": 493,
+              "lower": 0.5,
+              "upper": 0.55
+            },
+            {
+              "count": 415,
+              "lower": 0.55,
+              "upper": 0.6
+            },
+            {
+              "count": 208,
+              "lower": 0.6,
+              "upper": 0.65
+            },
+            {
+              "count": 178,
+              "lower": 0.65,
+              "upper": 0.7
+            },
+            {
+              "count": 31,
+              "lower": 0.7,
+              "upper": 0.75
+            },
+            {
+              "count": 8,
+              "lower": 0.75,
+              "upper": 0.8
+            },
+            {
+              "count": 0,
+              "lower": 0.8,
+              "upper": 0.85
+            },
+            {
+              "count": 0,
+              "lower": 0.85,
+              "upper": 0.9
+            },
+            {
+              "count": 0,
+              "lower": 0.9,
+              "upper": 0.95
+            },
+            {
+              "count": 0,
+              "lower": 0.95,
+              "upper": 1.0
+            }
+          ],
+          "mean": 0.5129482197796071,
+          "quantiles": {
+            "max": 0.7671232876712328,
+            "median": 0.5142857142857142,
+            "min": 0.09433962264150941,
+            "q01": 0.2577321603128055,
+            "q05": 0.370048309178744,
+            "q10": 0.4,
+            "q25": 0.4423076923076923,
+            "q75": 0.574468085106383,
+            "q90": 0.6481481481481481,
+            "q95": 0.6666666666666667,
+            "q99": 0.7150429669832649
+          },
+          "standard_deviation": 0.09470067361884124
+        }
+      }
+    }
+  },
+  "status": "awaiting_human_chemist_review",
+  "task": "M0-05"
+}

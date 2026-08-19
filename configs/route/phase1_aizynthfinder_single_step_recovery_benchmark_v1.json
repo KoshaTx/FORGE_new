@@ -1,0 +1,39 @@
+{
+  "schema_version": "phase1_aizynthfinder_single_step_recovery_benchmark_config.v1",
+  "status": "frozen_before_proposal_execution",
+  "purpose": "Proposal-only recovery benchmark on the frozen 120-target FORGE development panel. Hidden route truth is not an input to proposal execution.",
+  "inputs": {
+    "target_manifest": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/lane_targets.json.gz",
+      "sha256": "60b1316b43e0074b5662f18d77cf1c17ee566d1b981642890ccc7904fd484529"
+    },
+    "scoring_truth": {
+      "path": "results/phase1/single_step_proposal_lane_qualification_benchmark_v1/scoring_truth.json.gz",
+      "sha256": "764e253d22aa523ffc0f099bd7773770f851ff901f8101964ddbebb516012a32",
+      "proposal_execution_input": false
+    },
+    "runtime_manifest": {
+      "path": "configs/route/aizynthfinder_public_v4_4_1_diagnostic_macos_arm64_v1.json",
+      "sha256": "bb1af0ff80a22f8a1c5a785868aa58558f8fbd6aab1ebd607bda65f826d3206b"
+    }
+  },
+  "seed": 20260804,
+  "single_step": {
+    "expansion_policies": [
+      "uspto",
+      "ringbreaker"
+    ],
+    "filter_policies": [
+      "uspto"
+    ],
+    "maximum_proposals": 20
+  },
+  "output_directory": "results/phase1/aizynthfinder_single_step_recovery_benchmark_v1",
+  "scientific_authority": {
+    "proposal_only": true,
+    "may_create_route_evidence": false,
+    "may_set_route_complete": false,
+    "may_enter_synthesis_value": false,
+    "may_activate_synthesis_tilting": false
+  }
+}

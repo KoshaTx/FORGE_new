@@ -1,0 +1,71 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_coverage_config.v1",
+  "status": "frozen_before_nonselecting_route_coverage_execution",
+  "task": "Transfer authenticated exact-identity route values onto the fresh v2 Ugi product pool",
+  "inputs": {
+    "production_generator_v2": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+    },
+    "fresh_pool_sample": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/sample/result.json",
+      "sha256": "859b160a0194197c54743842263021afb6bac9b6a7e11dc391727e576afb17f3"
+    },
+    "fresh_pool_audit": {
+      "path": "results/phase1/ugi_product_l1_v2_fresh_pool_v1/audit.json",
+      "sha256": "48f071e5776d956dc1f1bc99f1244c550f324f2d83097a54fde5a6be721a6f5e"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "hybrid_assessment_ledger": {
+      "path": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz",
+      "sha256": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2"
+    },
+    "hybrid_result": {
+      "path": "results/phase1/ugi3_hybrid_search/result.json",
+      "sha256": "05905d2a5f7eee83cf5a7028d89bcb3e5374959789ecc7ed3c2a692ed75bcbbf"
+    },
+    "synthesis_value_v3_components": {
+      "path": "results/phase1/ugi3_synthesis_value_audit_v3/component_synthesis_values.json.gz",
+      "sha256": "1e1b652b99d4560ede34a2ab95dd440eff6d02301955d3df1463441898957699"
+    },
+    "synthesis_value_v3_result": {
+      "path": "results/phase1/ugi3_synthesis_value_audit_v3/result.json",
+      "sha256": "75dceb84bef3f77694fcb3262b89d18ceb975e3d506df26bafda5b2803a5fcec"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    },
+    "audit_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_coverage.py",
+      "sha256": "93c746ea71a7f9bf25695128b9d6280c9fc323979956aae16677467180400b28"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_audit_ugi3_fresh_pool_route_coverage.py",
+      "sha256": "7171764c305f6382e66e9032301cbcb284bb5b2be3b2935a53825a21e00f1250"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_coverage.py",
+      "sha256": "460d942a4805874949f02b62f5c179648c4fc5bf563fbe175a1a7a68de357e34"
+    }
+  },
+  "identity_policy": {
+    "component_identity": "exact role plus canonical constitutional SMILES",
+    "stereochemistry": "excluded consistently with phase-1 model identity",
+    "similarity_can_transfer_route_value": false,
+    "family_projection_can_close": false
+  },
+  "assessment_policy": {
+    "route_planning_performed": false,
+    "fresh_unmatched_components": "missing_route_knowledge",
+    "missing_route_knowledge_is_incompatibility": false,
+    "unknown_burden_is_zero": false,
+    "permit_scalar_value": false,
+    "permit_success_probability": false,
+    "production_synthesis_guidance": false,
+    "prospective_candidate_selection": false
+  }
+}

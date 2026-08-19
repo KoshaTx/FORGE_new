@@ -1,0 +1,25 @@
+{
+  "schema_version": "phase1_ugi_branch_spacing_independent_program_draw.v1",
+  "status": "frozen_before_independent_program_draw",
+  "purpose": "Create a new, uninspected morphology-program draw for a future policy-frozen production-challenger comparison.",
+  "scope": {
+    "selection_decision_made": false,
+    "heldout_component_families_inspected": false,
+    "contains_component_ids_or_graphs": false,
+    "may_not_replace_production_without_a_separate_frozen_selection_policy": true
+  },
+  "sampling": {
+    "seed": 20260805,
+    "attempted_draws": 1024
+  },
+  "inputs": {
+    "training_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "sampling_script": {
+      "path": "scripts/phase1_sample_ugi_program_prior.py",
+      "sha256": "9af316e2d0cf9ff251f81cbb350893f1a4d4e2d8a7a6c0e4364aa837885f87e9"
+    }
+  }
+}

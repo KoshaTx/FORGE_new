@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase1_ugi_full_corpus_branch_exploration_schedule_config.v1",
+  "status": "frozen_before_branch_exploration_schedule",
+  "task": "Restore the full all-fold morphology support for a branch-focused exploration lane without changing the independently promoted biological proposal",
+  "scope": {
+    "read_only_distribution_sampling": true,
+    "full_corpus_role_state_support": true,
+    "branch_exploration_only": true,
+    "biological_applicability_policy_changed": false,
+    "promoted_applicability_proposal_changed": false,
+    "terminal_outcomes_consumed": false,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "support": {
+    "definition": "cartesian_product_of_all_fold_production_refit_role_states",
+    "role_state_counts": [106, 39, 40],
+    "cartesian_programs": 165360,
+    "whole_program_combinations_recombined_exhaustively": true,
+    "unobserved_role_level_program_states_added": false
+  },
+  "design": {
+    "draws": 4096,
+    "seed": 2026081200,
+    "sampling_with_replacement": true,
+    "stratification": "largest_remainder_of_broad_prior_branch_class_mass"
+  },
+  "inputs": {
+    "all_fold_program_prior": {
+      "path": "results/phase1/ugi_program_prior_v3_all_fold.json",
+      "sha256": "a8dc910f98732c64bb528cccb8299e848cf9d620a4abbd0759fea464a5ff87ac"
+    },
+    "previous_complete_support_result": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/result.json",
+      "sha256": "93543b3b563338f24435c595799118bbf416e64a8b7f0998a642b2065ba064d2"
+    }
+  },
+  "implementation": {
+    "source": {
+      "path": "src/forge/product/ugi_full_corpus_branch_exploration_schedule.py",
+      "sha256": "0835eebc292c73c1012d4afef77da8dc5f9b9e2f19748c60d0c39c8ddb880f46"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_full_corpus_branch_exploration_schedule_v1.py",
+      "sha256": "006717af8a269c689250b878a51cdeb315159ead98d2cb03240f65df5bc3726b"
+    },
+    "tests": {
+      "path": "tests/test_ugi_full_corpus_branch_exploration_schedule.py",
+      "sha256": "6edbe29e626c526cf0b237c002d5a480b44f7b36922c74cf35f64a2b4af3ab59"
+    }
+  }
+}

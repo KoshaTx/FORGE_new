@@ -1,0 +1,65 @@
+{
+  "schema_version": "m0_03_r0_split_config.v1",
+  "frozen_utc": "2026-07-28T20:52:10+00:00",
+  "seed": 20260728,
+  "randomness_used": false,
+  "expected_r0_rows": 15433,
+  "target_fractions": {
+    "R0_train": 0.7,
+    "R0_cal": 0.15,
+    "R0_heldout": 0.15
+  },
+  "expected_inputs": {
+    "r0_observed_real_structures.csv": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d",
+    "corpus_fold_assignments.csv": "92a39758bb35daf3590a83522dee31541b2586e1d18eef64a5cb403a7e50d369",
+    "splits_manifest.json": "51d2f714886cbed0982a47e7c8c78ad49ebe91383c80cf97ec7bfee0b582322a"
+  },
+  "headgroup_fields": {
+    "agile_measured1200": {
+      "smiles": [
+        "A_smiles"
+      ],
+      "identifiers": []
+    },
+    "lion_repository_all": {
+      "smiles": [
+        "Amine_SMILES"
+      ],
+      "identifiers": [
+        "Amine"
+      ]
+    },
+    "lnpdb_v1": {
+      "smiles": [
+        "IL_head_SMILES"
+      ],
+      "identifiers": []
+    },
+    "lumi_4cr1920": {
+      "smiles": [],
+      "identifiers": [
+        "R1"
+      ]
+    }
+  },
+  "linker_fields": {
+    "lion_repository_all": {
+      "smiles": [],
+      "identifiers": [
+        "Linker"
+      ]
+    },
+    "lnpdb_v1": {
+      "smiles": [
+        "IL_linker_SMILES"
+      ],
+      "identifiers": []
+    }
+  },
+  "upstream_split_columns": {
+    "source_study": "held_study",
+    "headgroup": "held_head",
+    "linker_scaffold": "held_scaffold",
+    "component_family": "held_reaction_family"
+  }
+}

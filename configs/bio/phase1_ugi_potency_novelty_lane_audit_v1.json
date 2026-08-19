@@ -1,0 +1,39 @@
+{
+  "schema_version": "phase1_ugi_potency_novelty_lane_audit_config.v1",
+  "status": "frozen_before_read_only_novelty_scope_audit",
+  "task": "Determine exactly which aldehyde/isocyanide novelty regime is tested by the successful held-pair oracle evaluation before any potency tilt",
+  "scope": {
+    "read_only": true,
+    "generator_calls": 0,
+    "oracle_calls": 0,
+    "potency_tilting": false,
+    "candidate_selection": false,
+    "synthesis_guidance": false,
+    "prospective_claim": false
+  },
+  "analysis": {
+    "scheme": "held_aldehyde_isocyanide_pair_5fold",
+    "folds": [0, 1, 2, 3, 4],
+    "fit_stages": ["train", "calibration"],
+    "test_stage": "test",
+    "identity_claim_requires_absence_from_both_fit_stages": true
+  },
+  "inputs": {
+    "legacy_potency_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "morphology_enriched_oracle_audit": {
+      "path": "results/phase1/ugi_morphology_enriched_oracle_audit_v1/result.json",
+      "sha256": "e3a4fea5c3d4cbdf6db0772a04cca51e5af5ac653b44d05a5e774fb3f2c5de8e"
+    },
+    "oracle_split_assignments": {
+      "path": "results/m0_07/oracle_split_assignments.csv.gz",
+      "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+    },
+    "promoted_applicability_proposal": {
+      "path": "results/phase1/ugi_promoted_morphology_proposal_v1/result.json",
+      "sha256": "978453f439755f2daa1ec4b56dfb2caad1769dfc731fe6d39e2b818b9f288a16"
+    }
+  }
+}

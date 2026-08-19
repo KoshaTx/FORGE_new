@@ -1,0 +1,49 @@
+{
+  "schema_version": "phase1_ugi_bounded_structural_envelope_derivation_config.v1",
+  "status": "frozen_before_measured_only_envelope_derivation",
+  "scope": {
+    "reference": "unique_measured_AGILE_graphs_by_view",
+    "biological_labels_read": false,
+    "generated_structures_read": false,
+    "pka_used": false,
+    "lnp_size_or_formulation_measurements_used": false,
+    "quantile_method": "linear_type7",
+    "fence": "outward_rounded_Tukey_1.5_IQR",
+    "feature_values": "nonnegative_integer_graph_descriptors"
+  },
+  "features": [
+    "heavy_atoms",
+    "carbon_atoms",
+    "nitrogen_atoms",
+    "oxygen_atoms",
+    "other_hetero_atoms",
+    "carbon_subgraph_diameter",
+    "carbon_branch_atoms",
+    "adjacent_carbon_branch_edges",
+    "carbon_unsaturation_count",
+    "ring_count",
+    "ester_or_ether_count"
+  ],
+  "inputs": {
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "feature_source": {
+      "path": "src/forge/product/ugi_tail_chemotype_audit.py",
+      "sha256": "c00564c51c7abb661d579a6e7568992c329ef65fb2559392ec34ba4dddbb4b12"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_bounded_structural_envelope.py",
+      "sha256": "90a8ea24f73a059494eefda2b36ad1073e42e2ca4618c992b7a1613c4fa56d7c"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_bounded_structural_envelope.py",
+      "sha256": "88b961b15e67719b340c2b545dbee00cfb4213088c6afde446c26de8904cc356"
+    },
+    "tests": {
+      "path": "tests/test_ugi_bounded_structural_envelope.py",
+      "sha256": "666787329fe7acecb285dd8fc812b83d206efb103f9f60ed4aef106d789e6d0a"
+    }
+  }
+}

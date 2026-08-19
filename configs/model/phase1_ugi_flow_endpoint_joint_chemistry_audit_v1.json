@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase1_ugi_flow_endpoint_joint_chemistry_audit_config.v1",
+  "status": "frozen_before_selection_visible_audit",
+  "frozen_at_utc": "2026-08-05T22:00:00Z",
+  "purpose": "Determine whether the categorical flow endpoint preserves ester-forming atom-bond-decoration correlations that are disrupted by the current terminal re-decoding step.",
+  "design": {
+    "checkpoint_step": 1500,
+    "programs": 256,
+    "program_subset": "first_256_rows_of_frozen_program_file",
+    "sample_steps": 8,
+    "batch_size": 32,
+    "flow_seed": 20260831,
+    "closure_seed": 20260832,
+    "terminal_seed": 20260833,
+    "terminal_decoder_mode": "stochastic",
+    "terminal_temperature": 1.0,
+    "maximum_adjacent_branch_runs": [
+      2,
+      1,
+      1
+    ]
+  },
+  "decision_policy": {
+    "diagnostic_is_selection_visible": true,
+    "same_generated_topology_and_closure_completion_across_arms": true,
+    "flow_endpoint_arm_does_not_repair_or_resample_flowed_channels": true,
+    "closure_bonds_are_shared_from_the_matched_terminal_completion": true,
+    "no_atom_or_motif_quota_fitting": true,
+    "no_temperature_fitting": true,
+    "production_policy_changed": false,
+    "architecture_change_requires_matched_retraining": true,
+    "primary_question": "Does the native time-one categorical state recover more exact-L1 ester-bearing aldehydes and fewer ether substitutions than a second stochastic draw from terminal logits?"
+  },
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_production_refit_full/checkpoint_step_1500.pt",
+      "sha256": "011f7a205014eb8ee49cca2014d8c16411e476423d2ad9bfd52d0f4c2edb258e"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_programs": {
+      "path": "results/phase1/ugi_production_refit_fresh_census_v1/programs_shard_00.json",
+      "sha256": "87ae8e1066cfe1afb1042d77258b29cb6f1b04b8c0b9156c7966fde901008c1d"
+    },
+    "balanced_training_reference": {
+      "path": "results/phase1/ugi_balanced_terminal_reference_v1.json",
+      "sha256": "477f23e15af75026434b0554263c0f8425698495b22a0dd0c2719ffda7bcf050"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  }
+}

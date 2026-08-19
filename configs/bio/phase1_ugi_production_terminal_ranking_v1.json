@@ -1,0 +1,74 @@
+{
+  "schema_version": "phase1_ugi_production_terminal_ranking_config.v1",
+  "status": "frozen_after_matched_generation_before_terminal_classification_or_oracle_scoring",
+  "endpoint": "expt_Hela",
+  "arms": [
+    "broad_prior",
+    "support_enriched"
+  ],
+  "lanes": {
+    "known_components_novel_combination": {
+      "unseen_roles": [],
+      "calibration_scale": "aldehyde_isocyanide_pair",
+      "claim_level": "familiar_component_interpolation"
+    },
+    "aldehyde_isocyanide_pair": {
+      "unseen_roles": [
+        "aldehyde",
+        "isocyanide"
+      ],
+      "calibration_scale": "aldehyde_isocyanide_pair",
+      "claim_level": "continuous_support_ranking_pending_prospective_confirmation"
+    },
+    "amine_only": {
+      "unseen_roles": [
+        "amine"
+      ],
+      "calibration_scale": "amine_only",
+      "claim_level": "exploratory_new_head_ranking_only"
+    }
+  },
+  "applicability": {
+    "exact_l1_required": true,
+    "exact_measured_product_action": "neutral",
+    "exact_identity_is_not_an_automatic_veto": true,
+    "all_product_and_role_views_must_be_interpolative": true,
+    "unsupported_novelty_patterns_abstain": true
+  },
+  "matched_design": {
+    "generator_calls_per_arm": 16384,
+    "oracle_budget": "minimum_unique_eligible_products_across_arms_within_each_lane",
+    "oracle_subset": "deterministic_hash_order_independent_of_potency",
+    "conservative_high_potency_threshold": "pattern_calibration_ecdf_strictly_greater_than_0.5"
+  },
+  "scope": {
+    "terminal_scoring_only": true,
+    "same_policy_and_budget_per_arm": true,
+    "potency_changes_generation": false,
+    "synthesis_changes_generation": false,
+    "route_shortlist_locked": false,
+    "prospective_panel_locked": false
+  },
+  "inputs": {
+    "generation_result": {
+      "path": "results/phase1/ugi_production_candidate_generation_v1/result.json",
+      "sha256": "3ee63bcc281d968c7d0fd1110fa1cb71ae054377b9f12f12d48614c8fae759c0"
+    },
+    "terminal_ledger": {
+      "path": "results/phase1/ugi_production_candidate_generation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "769d8bc521e92a6f77b5db0eaaeb0e879f482cb8646d730cbc9ba1c811631846"
+    },
+    "hela_diagnostic_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "potency_tilt_adjudication": {
+      "path": "results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "sha256": "00d31aa474cabc0ffef225410d8bdd6e7cc00b8869e740f77bc3286c4755f3ca"
+    },
+    "continuous_novelty_diagnostic": {
+      "path": "results/phase1/ugi_continuous_novelty_matched_ranking_v1/result.json",
+      "sha256": "059dc2c273e7cb5e24f2e1ae195450b1f741c3f0aab7e4e4309aa4c051dcfc5c"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "phase1_ugi_dynamic_terminal_census_validator_config.v1",
+  "status": "frozen_before_post_aggregation_validation",
+  "frozen_at_utc": "2026-08-04T16:00:00Z",
+  "purpose": "Read-only validation of every completed shard and the aggregate census, including logical terminal hashes, the exact coordinate lattice, global seed and completion-ID uniqueness, artifact pins, and deterministic reconstruction of omitted layout/source tensors.",
+  "inputs": {
+    "census_config": {
+      "path": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+      "sha256": "7500db52feb13f644d9a9585df649ec36b051b1792c9543fb0db5840f1542602"
+    },
+    "census_source": {
+      "path": "src/forge/product/ugi_dynamic_frozen_prior_terminal_census.py",
+      "sha256": "751dd7c41148f8f629e4e1a1032705e07383e9dbe6a2f745c533113fa3c8a1e0"
+    },
+    "validator_source": {
+      "path": "src/forge/product/ugi_dynamic_frozen_prior_terminal_census_validator.py",
+      "sha256": "8c236b13b13710e9e2b28345c43c75ac25d843447aa0576f72610710c491672b"
+    },
+    "validator_runner": {
+      "path": "scripts/phase1_validate_ugi_dynamic_frozen_prior_terminal_census.py",
+      "sha256": "15dc952530516a6cd038a4ba8e57f69271e7c10b479ea0dcf5b94ca5e07ce6ff"
+    },
+    "validator_tests": {
+      "path": "tests/test_ugi_dynamic_frozen_prior_terminal_census_validator.py",
+      "sha256": "8becc2d35344234e552356e8bb4eb61b0e7950c36eb5b0adfd86f27623e6e017"
+    }
+  },
+  "scope": {
+    "read_only": true,
+    "candidate_selection": false,
+    "guidance": false,
+    "oracle_calls": 0,
+    "potency_predictions": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "sealed_holdout_access": false,
+    "prospective_candidate_lock": false
+  }
+}

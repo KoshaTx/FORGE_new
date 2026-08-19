@@ -1,0 +1,84 @@
+{
+  "schema_version": "m0_04_source_platform_registry_audit_config.v1",
+  "task": "M0-04 source-platform reaction-registry coverage addendum",
+  "generated_utc": "2026-07-29T21:39:37+00:00",
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "expected_inputs": {
+    "r0_observed_real_structures.csv": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d",
+    "r0_fold_assignments.csv": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c",
+    "qualified_reaction_families_v1.json": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587",
+    "qualified_reactions_v1.json": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+    "m0_04_r1_prime_audit.json": "b92b6b0d95e957e2df2e178fcb2973a299130cc595a5e4b07e676b50ac68a5ef",
+    "m0_04_result.json": "f649f191ef6d1ea7c1885fc9b9422dcc0c819fb6f0935cde8117a09e82d4e125",
+    "component_pool.csv.gz": "79ec52aac2fc4a3dff1b13d7df666cb295d6380981d8d8c2566c68693b7b9e48"
+  },
+  "expected_source_study_heldout": 2333,
+  "max_reverse_outcomes_per_structure_reaction": 10000,
+  "max_forward_outcomes_per_reconstruction": 1000,
+  "platforms": [
+    {
+      "platform_id": "lm_2019_lm_3cr",
+      "aliases": [
+        "LM_2019",
+        "LM_3CR"
+      ],
+      "expected_structures": 1080,
+      "reported_final_assembly": {
+        "status": "primary_source_verified",
+        "description": "isocyanide-mediated amine-ketone-isocyanide three-component reaction",
+        "pmid": "31570898",
+        "doi": "10.1038/s41587-019-0247-3"
+      }
+    },
+    {
+      "platform_id": "jl_2024",
+      "aliases": [
+        "JL_2024"
+      ],
+      "expected_structures": 623,
+      "reported_final_assembly": {
+        "status": "primary_source_verified",
+        "description": "amine-aldehyde-alkyne A3 coupling",
+        "pmid": "39497197",
+        "doi": "10.1186/s12951-024-02919-1"
+      }
+    },
+    {
+      "platform_id": "xh_2025",
+      "aliases": [
+        "XH_2025"
+      ],
+      "expected_structures": 500,
+      "reported_final_assembly": {
+        "status": "primary_source_verified",
+        "description": "amine or thiol addition to dialkyl maleates",
+        "pmid_preprint": "40060499",
+        "pmid_published_update": "42190011",
+        "doi_published_update": "10.1073/pnas.2528144123"
+      }
+    },
+    {
+      "platform_id": "sx_2025",
+      "aliases": [
+        "SX_2025"
+      ],
+      "expected_structures": 130,
+      "reported_final_assembly": {
+        "status": "source_route_audit_pending",
+        "description": "not assigned from molecular graph alone",
+        "pmid": "40796944",
+        "doi": "10.1038/s41551-025-01480-y"
+      }
+    }
+  ],
+  "claims_boundary": {
+    "purpose": "cross-platform reaction-registry coverage and leakage audit",
+    "not_a_model_generalization_benchmark": true,
+    "exact_registry_decomposition_is_not_a_reported_source_route": true,
+    "motif_similarity_is_not_exact_product_coverage": true,
+    "heldout_products_are_never_harvested_into_the_component_pool": true
+  }
+}

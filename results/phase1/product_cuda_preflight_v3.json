@@ -1,0 +1,316 @@
+{
+  "acceptance": {
+    "minimum_total_closures": 4,
+    "require_exact_repeat_loss_history": true,
+    "require_exact_repeat_model_state": true,
+    "require_exact_resume_loss_history": true,
+    "require_exact_resume_model_state": true,
+    "require_finite_losses_and_gradients": true
+  },
+  "created_at_utc": "2026-07-31T05:09:38.385634+00:00",
+  "decision": {
+    "cuda_training_path_authorized": true,
+    "does_not_establish": [
+      "full-run convergence",
+      "molecular generation quality",
+      "biological activity",
+      "synthesis route closure"
+    ],
+    "scope": "kernel, device-RNG, forward, backward, optimizer, checkpoint-resume, and determinism preflight only"
+  },
+  "inputs": {
+    "atom_vocabulary_source": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "mounted_sources": {
+      "src/forge/__init__.py": "686172cff1bc979af050cf8f98384a1e0d5a745518f906cc1518ceaa280b9040",
+      "src/forge/data/__init__.py": "3668e3680cc57907854fa2a38d92ab7e64a68b5c563a1b0b2bfec65311a9f50a",
+      "src/forge/data/r0_splits.py": "f1a6d7c97638bb7055e049f34566b7d49895cc22dedaff9813de44b591327838",
+      "src/forge/product/__init__.py": "1db43186ab65ff46ab1ac5627486d121573eb7706f97567012ae5d46059c11af",
+      "src/forge/product/defog_feasibility.py": "a5bd8d7e852c001a843756d9f9acc13d1da5e7c667584b987469c211ea4cbef5",
+      "src/forge/product/lipid_context.py": "7a90dc259f59b4d8b3eaf8a8f5a8068b5eade4f9dc98869431599504e9f78e39",
+      "src/forge/product/phase1_flow.py": "b303e82a50df24e0b660f3f17a49fb09dc40b0472ca804931bf7ad95aa036985",
+      "src/forge/product/sparse_topology_feasibility.py": "e5db084fc3a3f6d024e6029218be9ccbd19df425eb41932b19a6cfcddb411112"
+    },
+    "preflight_config": {
+      "path": "configs/model/phase1_product_cuda_preflight_v3.json",
+      "sha256": "65af1590d96de6b21a52289521a18e887d38fa7e9deed1560dd8872b5763833d"
+    },
+    "product_config": {
+      "path": "configs/model/phase1_product_pretrain_v3.json",
+      "sha256": "621a651fa5ca0488f3a7e5a229a56e07ce57596d0b6fe1566e2a21bf8247f148"
+    },
+    "runner": {
+      "path": "scripts/modal_phase1_product_cuda_preflight.py",
+      "sha256": "a71a2d2eaddba99a1ac38cd450ddcb24662cb3f39b48231fd7340d4f60f98be7"
+    }
+  },
+  "result": {
+    "determinism": {
+      "exact_loss_history": true,
+      "exact_model_state": true,
+      "exact_resume_loss_history": true,
+      "exact_resume_model_state": true
+    },
+    "device": {
+      "capability": [
+        8,
+        9
+      ],
+      "name": "NVIDIA L4",
+      "requested_class": "L4",
+      "total_memory_bytes": 23659151360
+    },
+    "repetitions": [
+      {
+        "loss_history": [
+          {
+            "backbone_bond_ce": 1.256251573562622,
+            "closure_bond_ce": 1.4198195934295654,
+            "closure_count_ce": 2.5649495124816895,
+            "closure_left_ce": 3.051971912384033,
+            "closure_right_ce": 3.0095982551574707,
+            "gradient_norm": 14.818926811218262,
+            "node_ce": 3.0428895950317383,
+            "node_count_ce": 5.64544677734375,
+            "parent_pointer_ce": 0.9955620765686035,
+            "region_ce": 1.2631568908691406,
+            "total": 12.776093482971191,
+            "total_with_counts": 22.249645233154297
+          },
+          {
+            "backbone_bond_ce": 1.0319966077804565,
+            "closure_bond_ce": 1.2241989374160767,
+            "closure_count_ce": 2.5646109580993652,
+            "closure_left_ce": 2.9911108016967773,
+            "closure_right_ce": 3.030916690826416,
+            "gradient_norm": 11.405549049377441,
+            "node_ce": 1.6381258964538574,
+            "node_count_ce": 5.645051002502441,
+            "parent_pointer_ce": 0.966815173625946,
+            "region_ce": 0.9129641056060791,
+            "total": 10.883164405822754,
+            "total_with_counts": 20.00579071044922
+          },
+          {
+            "backbone_bond_ce": 0.8456353545188904,
+            "closure_bond_ce": 1.0547881126403809,
+            "closure_count_ce": 2.5642731189727783,
+            "closure_left_ce": 2.9214863777160645,
+            "closure_right_ce": 2.884603500366211,
+            "gradient_norm": 7.327844619750977,
+            "node_ce": 1.0503612756729126,
+            "node_count_ce": 5.644656181335449,
+            "parent_pointer_ce": 0.9383447170257568,
+            "region_ce": 0.8258600831031799,
+            "total": 9.695219039916992,
+            "total_with_counts": 18.730009078979492
+          },
+          {
+            "backbone_bond_ce": 0.7203199863433838,
+            "closure_bond_ce": 0.8872169256210327,
+            "closure_count_ce": 2.5639407634735107,
+            "closure_left_ce": 2.979682683944702,
+            "closure_right_ce": 2.9624242782592773,
+            "gradient_norm": 5.6935200691223145,
+            "node_ce": 0.9979812502861023,
+            "node_count_ce": 5.6442670822143555,
+            "parent_pointer_ce": 0.9056685566902161,
+            "region_ce": 0.8889369368553162,
+            "total": 9.453292846679688,
+            "total_with_counts": 18.550437927246094
+          }
+        ],
+        "model_state_sha256": "d04be25367188519768b72a382e46932aa2149df28ae084e1a76aa8523928fcc",
+        "parameters": 6122322,
+        "peak_memory_allocated_bytes": 190624256,
+        "peak_memory_reserved_bytes": 211812352
+      },
+      {
+        "loss_history": [
+          {
+            "backbone_bond_ce": 1.256251573562622,
+            "closure_bond_ce": 1.4198195934295654,
+            "closure_count_ce": 2.5649495124816895,
+            "closure_left_ce": 3.051971912384033,
+            "closure_right_ce": 3.0095982551574707,
+            "gradient_norm": 14.818926811218262,
+            "node_ce": 3.0428895950317383,
+            "node_count_ce": 5.64544677734375,
+            "parent_pointer_ce": 0.9955620765686035,
+            "region_ce": 1.2631568908691406,
+            "total": 12.776093482971191,
+            "total_with_counts": 22.249645233154297
+          },
+          {
+            "backbone_bond_ce": 1.0319966077804565,
+            "closure_bond_ce": 1.2241989374160767,
+            "closure_count_ce": 2.5646109580993652,
+            "closure_left_ce": 2.9911108016967773,
+            "closure_right_ce": 3.030916690826416,
+            "gradient_norm": 11.405549049377441,
+            "node_ce": 1.6381258964538574,
+            "node_count_ce": 5.645051002502441,
+            "parent_pointer_ce": 0.966815173625946,
+            "region_ce": 0.9129641056060791,
+            "total": 10.883164405822754,
+            "total_with_counts": 20.00579071044922
+          },
+          {
+            "backbone_bond_ce": 0.8456353545188904,
+            "closure_bond_ce": 1.0547881126403809,
+            "closure_count_ce": 2.5642731189727783,
+            "closure_left_ce": 2.9214863777160645,
+            "closure_right_ce": 2.884603500366211,
+            "gradient_norm": 7.327844619750977,
+            "node_ce": 1.0503612756729126,
+            "node_count_ce": 5.644656181335449,
+            "parent_pointer_ce": 0.9383447170257568,
+            "region_ce": 0.8258600831031799,
+            "total": 9.695219039916992,
+            "total_with_counts": 18.730009078979492
+          },
+          {
+            "backbone_bond_ce": 0.7203199863433838,
+            "closure_bond_ce": 0.8872169256210327,
+            "closure_count_ce": 2.5639407634735107,
+            "closure_left_ce": 2.979682683944702,
+            "closure_right_ce": 2.9624242782592773,
+            "gradient_norm": 5.6935200691223145,
+            "node_ce": 0.9979812502861023,
+            "node_count_ce": 5.6442670822143555,
+            "parent_pointer_ce": 0.9056685566902161,
+            "region_ce": 0.8889369368553162,
+            "total": 9.453292846679688,
+            "total_with_counts": 18.550437927246094
+          }
+        ],
+        "model_state_sha256": "d04be25367188519768b72a382e46932aa2149df28ae084e1a76aa8523928fcc",
+        "parameters": 6122322,
+        "peak_memory_allocated_bytes": 190624256,
+        "peak_memory_reserved_bytes": 211812352
+      }
+    ],
+    "resumed_run": {
+      "checkpoint_model_state_sha256": "fa50daf20c67a4e1aa44c2dfac8ad423c54e3e646f464dc560601631e8852e86",
+      "checkpoint_step": 2,
+      "loss_history": [
+        {
+          "backbone_bond_ce": 1.256251573562622,
+          "closure_bond_ce": 1.4198195934295654,
+          "closure_count_ce": 2.5649495124816895,
+          "closure_left_ce": 3.051971912384033,
+          "closure_right_ce": 3.0095982551574707,
+          "gradient_norm": 14.818926811218262,
+          "node_ce": 3.0428895950317383,
+          "node_count_ce": 5.64544677734375,
+          "parent_pointer_ce": 0.9955620765686035,
+          "region_ce": 1.2631568908691406,
+          "total": 12.776093482971191,
+          "total_with_counts": 22.249645233154297
+        },
+        {
+          "backbone_bond_ce": 1.0319966077804565,
+          "closure_bond_ce": 1.2241989374160767,
+          "closure_count_ce": 2.5646109580993652,
+          "closure_left_ce": 2.9911108016967773,
+          "closure_right_ce": 3.030916690826416,
+          "gradient_norm": 11.405549049377441,
+          "node_ce": 1.6381258964538574,
+          "node_count_ce": 5.645051002502441,
+          "parent_pointer_ce": 0.966815173625946,
+          "region_ce": 0.9129641056060791,
+          "total": 10.883164405822754,
+          "total_with_counts": 20.00579071044922
+        },
+        {
+          "backbone_bond_ce": 0.8456353545188904,
+          "closure_bond_ce": 1.0547881126403809,
+          "closure_count_ce": 2.5642731189727783,
+          "closure_left_ce": 2.9214863777160645,
+          "closure_right_ce": 2.884603500366211,
+          "gradient_norm": 7.327844619750977,
+          "node_ce": 1.0503612756729126,
+          "node_count_ce": 5.644656181335449,
+          "parent_pointer_ce": 0.9383447170257568,
+          "region_ce": 0.8258600831031799,
+          "total": 9.695219039916992,
+          "total_with_counts": 18.730009078979492
+        },
+        {
+          "backbone_bond_ce": 0.7203199863433838,
+          "closure_bond_ce": 0.8872169256210327,
+          "closure_count_ce": 2.5639407634735107,
+          "closure_left_ce": 2.979682683944702,
+          "closure_right_ce": 2.9624242782592773,
+          "gradient_norm": 5.6935200691223145,
+          "node_ce": 0.9979812502861023,
+          "node_count_ce": 5.6442670822143555,
+          "parent_pointer_ce": 0.9056685566902161,
+          "region_ce": 0.8889369368553162,
+          "total": 9.453292846679688,
+          "total_with_counts": 18.550437927246094
+        }
+      ],
+      "model_state_sha256": "d04be25367188519768b72a382e46932aa2149df28ae084e1a76aa8523928fcc",
+      "parameters": 6122322,
+      "peak_memory_allocated_bytes": 288633856,
+      "peak_memory_reserved_bytes": 297795584
+    },
+    "runtime": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda_runtime": "13.0",
+      "cudnn": 91900,
+      "deterministic_algorithms": true,
+      "mixed_precision": false,
+      "numpy": "2.4.2",
+      "precision": "float32",
+      "python": "3.11.12",
+      "rdkit": "2025.09.6",
+      "torch": "2.11.0+cu130"
+    },
+    "samples": [
+      {
+        "closures": 1,
+        "exact_constitutional_roundtrip": true,
+        "exact_sparse_roundtrip": true,
+        "heavy_atoms": 19,
+        "structure_id": "cuda-v3-saturated-head-ring"
+      },
+      {
+        "closures": 1,
+        "exact_constitutional_roundtrip": true,
+        "exact_sparse_roundtrip": true,
+        "heavy_atoms": 27,
+        "structure_id": "cuda-v3-unsaturated-branched"
+      },
+      {
+        "closures": 1,
+        "exact_constitutional_roundtrip": true,
+        "exact_sparse_roundtrip": true,
+        "heavy_atoms": 19,
+        "structure_id": "cuda-v3-aromatic-nitrogen"
+      },
+      {
+        "closures": 1,
+        "exact_constitutional_roundtrip": true,
+        "exact_sparse_roundtrip": true,
+        "heavy_atoms": 19,
+        "structure_id": "cuda-v3-aromatic-oxygen"
+      },
+      {
+        "closures": 0,
+        "exact_constitutional_roundtrip": true,
+        "exact_sparse_roundtrip": true,
+        "heavy_atoms": 16,
+        "structure_id": "cuda-v3-charged-head"
+      }
+    ],
+    "status": "pass",
+    "total_closures": 4
+  },
+  "schema_version": "phase1_product_cuda_preflight_result.v1",
+  "status": "pass",
+  "task": "Phase 1 V3 region-aware sparse whole-lipid CUDA preflight"
+}

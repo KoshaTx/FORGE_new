@@ -1,0 +1,34 @@
+{
+  "schema_version": "phase1_ugi_production_refit_checkpoint_selection_policy.v2",
+  "status": "administrative_hash_amendment_before_selection_metrics",
+  "amended_at_utc": "2026-08-05T08:20:00Z",
+  "base_policy": {
+    "path": "configs/model/phase1_ugi_production_refit_checkpoint_selection_policy_v1.json",
+    "sha256": "05bcc3cc5cb2db1cafbeac032dce7f9ad963adf12acaa74ee755453dfe13d767"
+  },
+  "correction": {
+    "reason": "The inherited v3 selector-test hash predated a later additive branch-spacing policy regression test in the shared worktree. The selector implementation itself still exactly matches its frozen v3 hash, and the current ten-test selector suite passes. This amendment updates only the test-file provenance hash after molecular sampling but before computing or opening checkpoint-selection metrics.",
+    "molecular_samples_regenerated": false,
+    "sampling_outputs_used_to_choose_amendment": false,
+    "selector_implementation_changed": false,
+    "scientific_thresholds_changed": false,
+    "selection_algorithm_changed": false,
+    "sampling_contract_changed": false
+  },
+  "overrides": {
+    "status": "administrative_hash_amendment_before_selection_metrics",
+    "frozen_inputs": {
+      "selection_evaluator_tests": {
+        "path": "tests/test_phase1_ugi_architecture_selection.py",
+        "sha256": "8c1b52e7190de60e708772e036df41709713a4c29ccd72dae614fde1fadb0c89"
+      }
+    },
+    "failure_policy": {
+      "no_threshold_rewrite_after_opening_outputs": true,
+      "no_silent_override": true,
+      "no_checkpoint_promotion_if_every_snapshot_fails": true,
+      "longer_challenger_requires_new_frozen_contract": true,
+      "administrative_hash_amendment_disclosed": true
+    }
+  }
+}

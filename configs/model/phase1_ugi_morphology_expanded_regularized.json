@@ -1,0 +1,91 @@
+{
+  "schema_version": "phase1_ugi_morphology_training_config.v2",
+  "task": "Regularized family-balanced Ugi-core-anchored lipid morphology flow",
+  "seed": 20260731,
+  "inputs": {
+    "component_exemplar_ledger": {
+      "path": "results/phase1/ugi_expanded_exemplars/component_exemplar_ledger.csv.gz",
+      "sha256": "533db59a3aa59c7c09ff1b485869ce6fab3dd70a58705336838a5db70f7c1322"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_expanded_exemplars/semantic_products.csv.gz",
+      "sha256": "2a94793c474be241b0b13f699b7665d64268adc2aedd2fe8aff5805cde588564"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_expanded_exemplars/semantic_atoms.csv.gz",
+      "sha256": "b2e7dd12e5b8be632ddc1d208b6376c8e77b1b9ebb59ed1c4b348275f4db021a"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "expanded_exemplar_audit": {
+      "path": "results/phase1/ugi_expanded_exemplars/result.json",
+      "sha256": "4bf7772aae786e671de2fa1b41ed9950e8dba4689a737fc971e8f1712756c48a"
+    }
+  },
+  "sampling": {
+    "training_policy": "uniform_family_then_uniform_component_per_role",
+    "calibration_pool_size": 512,
+    "uniform_product_row_sampling_allowed": false,
+    "component_ids_enter_neural_tensors": false,
+    "maximum_adjacent_branch_run_by_role": {
+      "amine_head": 2,
+      "oxoester_aldehyde_body_tail": 1,
+      "isocyanide_tail": 1
+    }
+  },
+  "model": {
+    "maximum_children": 3,
+    "maximum_component_atoms": 32,
+    "maximum_total_atoms": 80,
+    "maximum_junction_budget": 7,
+    "maximum_cycle_rank": 2,
+    "maximum_attachment_count": 2,
+    "hidden_dim": 128,
+    "layers": 3,
+    "dropout": 0.15,
+    "source_probability_floor": 0.00001
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 100,
+    "batch_size": 24,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 25,
+    "eval_samples": 36,
+    "sample_steps": 8,
+    "validation_batches": 3,
+    "label_smoothing": 0.02,
+    "early_stopping": {
+      "patience": 3,
+      "min_delta": 0.001,
+      "minimum_steps": 50
+    },
+    "model_overrides": {
+      "hidden_dim": 64,
+      "layers": 2,
+      "dropout": 0.05
+    }
+  },
+  "full": {
+    "device": "cuda",
+    "steps": 5000,
+    "batch_size": 64,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 250,
+    "eval_samples": 96,
+    "sample_steps": 16,
+    "validation_batches": 16,
+    "label_smoothing": 0.02,
+    "early_stopping": {
+      "patience": 6,
+      "min_delta": 0.002,
+      "minimum_steps": 750
+    }
+  }
+}

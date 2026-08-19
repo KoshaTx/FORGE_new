@@ -1,0 +1,52 @@
+{
+  "schema_version": "phase1_ugi_route_completion_utility_config.v1",
+  "policy": {
+    "utility_name": "binary_exact_dossier_route_completion_utility",
+    "interpretation": "route_completion_utility_not_success_probability",
+    "support_bonus": 1.0,
+    "neutral_utility": 0.0,
+    "censored_utility": null,
+    "censored_incremental_log_weight": 0.0,
+    "censor_fraction_ceiling": 0.05,
+    "success_probability": null,
+    "richer_weighting_authorized": false,
+    "selection_authorized": false,
+    "sealed_holdout_access_authorized": false
+  },
+  "expected_census": {
+    "product_count": 3975,
+    "support_bonus_count": 203,
+    "neutral_count": 3772,
+    "censored_count": 0
+  },
+  "inputs": {
+    "fresh_pool_v6_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "sha256": "339d11287ad1489336c1e949dab001aad05a169fa97dbe48c15c2b9857fec722"
+    },
+    "fresh_pool_v6_product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz",
+      "sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+    },
+    "guidance_preregistration": {
+      "path": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json",
+      "sha256": "0834c51bf68b5d242e0ab22a5e9fb2bcc825f317989d63c6af9c695779ea897c"
+    },
+    "utility_source": {
+      "path": "src/forge/value/ugi_exact_closure_guidance.py",
+      "sha256": "a1110f42d26b0c94db1eb4b0976eca7716552946148203cfee4d629229f2aaee"
+    },
+    "qualification_source": {
+      "path": "src/forge/value/ugi_route_completion_utility_qualification.py",
+      "sha256": "5aa06b947280abbc81d82eae67a411c0e9e8b3c57420eb53121917186fe15e55"
+    },
+    "qualification_runner": {
+      "path": "scripts/phase1_qualify_ugi_route_completion_utility.py",
+      "sha256": "2d0a44ff4823a12fd5c3885500876978257f0953a4d6a64dc0747b93b46ba417"
+    },
+    "qualification_tests": {
+      "path": "tests/test_ugi_route_completion_utility.py",
+      "sha256": "dc8bb0a75345da9018e6669f2834040b0c7fc363ddd62340a4fd835e39cdeb56"
+    }
+  }
+}

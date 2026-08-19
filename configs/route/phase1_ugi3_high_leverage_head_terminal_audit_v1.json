@@ -1,0 +1,62 @@
+{
+  "schema_version": "phase1_ugi3_high_leverage_head_terminal_audit_config.v1",
+  "task": "Admit two exact current high-leverage head terminals and quantify deterministic product-dossier closure",
+  "inputs": {
+    "audit_source": {
+      "asset": "src/forge/route/ugi3_high_leverage_head_terminals.py",
+      "expected_sha256": "63577f935737a06b38397aa4e58ca71c85fb16c4d39a9ffa9232d0c86a84d2e2"
+    },
+    "evidence_pack": {
+      "asset": "configs/route/phase1_ugi3_high_leverage_head_terminals_v1.json",
+      "expected_sha256": "b0e9fdaa527839f650939ee4b247604cacd5672d4df5ea01a51236d97c335add"
+    },
+    "prior_product_impact": {
+      "asset": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "e32ad68ac7d8ec80589997337da7718bc3a152d2c8a3c902b9d8cb28ba4762c0"
+    },
+    "prior_result": {
+      "asset": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/result.json",
+      "expected_sha256": "2d4cb30d844b6dfafe7aafb8c2eaae001104cce3b5cd618fdc98586cf0bdfeca"
+    },
+    "qualifier_source": {
+      "asset": "scripts/phase1_audit_ugi3_high_leverage_head_terminals.py",
+      "expected_sha256": "8c36490fd5fd00a3981792336dd0bcdcc83007557b9abbd6f766ced4ef7bb973"
+    },
+    "readiness_ledger": {
+      "asset": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "expected_sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    }
+  },
+  "expected_summary": {
+    "exact_head_terminals_admitted": 2,
+    "registry_complete_components_before": 46,
+    "registry_complete_components_after": 48,
+    "generated_products": 1007,
+    "generated_products_complete_before": 29,
+    "generated_products_complete_after": 38,
+    "newly_complete_generated_products": 9,
+    "generated_target_occurrences": 35,
+    "target_occurrences": {
+      "amine_head\tCC(C)(C)N": 10,
+      "amine_head\tCC(C)N": 25
+    },
+    "newly_complete_products_by_target": {
+      "amine_head\tCC(C)(C)N": 4,
+      "amine_head\tCC(C)N": 5
+    },
+    "remaining_gap_count_distribution": {
+      "0": 38,
+      "1": 217,
+      "2": 425,
+      "3": 327
+    }
+  },
+  "audit_policy": {
+    "direct_procurement_requires_exact_identity": true,
+    "direct_procurement_requires_current_item_level_availability": true,
+    "family_or_analogue_evidence_can_close": false,
+    "availability_refresh_required_before_candidate_lock": true,
+    "diagnostic_only": true,
+    "production_synthesis_guidance": false
+  }
+}

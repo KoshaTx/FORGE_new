@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase1_synthesis_source_qualification_config.v1",
+  "development_only": true,
+  "sealed_holdout_access_authorized": false,
+  "inputs": {
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+    },
+    "compatibility_audit": {
+      "path": "results/phase1/synthesis_source_supersession_audit_v1/result.json",
+      "sha256": "a07c01b247f1c47e8596112bec99a8c6035cb03eae9e39072b58d443a7cde7bd"
+    },
+    "exact_route_replay": {
+      "path": "results/phase1/synthesis_source_exact_route_replay_v1/result.json",
+      "sha256": "855436b3eab7388a5f5b02578ce5b27105754cbdcb4f48b504d27c4ee101848d"
+    },
+    "qualifier_source": {
+      "path": "src/forge/value/synthesis_source_qualification.py",
+      "sha256": "11221b255e24f879ded17e917064f9a5855630e0cdd22737ba23846dfaa7ae0c"
+    },
+    "qualifier_runner": {
+      "path": "scripts/phase1_qualify_synthesis_value_source.py",
+      "sha256": "e715bc2ab3f580af900fa5a9eace40ad1da4f753f6fcba3a738f38f6c3e848a4"
+    },
+    "qualifier_tests": {
+      "path": "tests/test_synthesis_source_qualification.py",
+      "sha256": "cda642fbd8c71519bb71aa95d1e6057b750437d8770870d679c7e3d504587e07"
+    }
+  }
+}

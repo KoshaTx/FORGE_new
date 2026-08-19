@@ -1,0 +1,156 @@
+{
+  "artifacts": {
+    "ugi_semantic_atoms.csv.gz": {
+      "bytes": 312565,
+      "sha256": "e1f893d84ddfee19ea50fadfa7b5a4a9b3044866168dbdc9d9ee73c2388a71fe"
+    },
+    "ugi_semantic_bonds.csv.gz": {
+      "bytes": 162954,
+      "sha256": "4b0c402339d3734ff96824ea1cf83bf8d14daecf67dbefadba46e10f48382b97"
+    },
+    "ugi_semantic_component_mappings.csv.gz": {
+      "bytes": 225431,
+      "sha256": "16692b89b614ccbca9ef85745a345f2b4a6dfbfbe85603b30c1594331ba961f5"
+    },
+    "ugi_semantic_products.csv.gz": {
+      "bytes": 75799,
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    }
+  },
+  "decision": {
+    "capture_transient_reaction_properties": true,
+    "component_ids_authorized_in_model_state": false,
+    "distances_must_be_derived_from_graph": true,
+    "independent_fragment_generation_authorized": false,
+    "oracle_model_frozen": false,
+    "ordinary_atom_maps_survive_serialization": false,
+    "whole_graph_semantic_supervision_authorized": true
+  },
+  "inputs": {
+    "agile_reconciliation_result": {
+      "bytes": 3788,
+      "path": "results/m0_07/agile_label_reconciliation.json",
+      "sha256": "44e9f451af94efe13d57961c32d71d6cfa37cb227f8e674f226a3b559ec913a7"
+    },
+    "config": {
+      "bytes": 3491,
+      "path": "configs/bio/m0_07_ugi_semantic_annotations.json",
+      "sha256": "eb212e9bbd703dab16375e2a0cd82d1c8d622ad1932a4b29cd23d9ff3d2568d3"
+    },
+    "curated_oracle_data": {
+      "bytes": 30259,
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "source_evidence_ledger": {
+      "bytes": 390229,
+      "path": "results/m0_05_source_adjudication/evidence_ledger.csv.gz",
+      "sha256": "37e88fe7246422b64b652baf2477edcbfd205a570fb82c58699d278747973272"
+    },
+    "source_evidence_result": {
+      "bytes": 6495,
+      "path": "results/m0_05_source_adjudication/result.json",
+      "sha256": "02156ba211e2af45fced8614912f09e86906ecacccb40004e1e873ec452e3159"
+    },
+    "ugi_assembly_qualification": {
+      "bytes": 14637,
+      "path": "results/m0_09/ugi3_assembly_qualification.json",
+      "sha256": "c976b048283a3f46ec5fa5aaff6697a43bf7e88b583625ede7f3d76e0c416c77"
+    },
+    "ugi_variant": {
+      "bytes": 1814,
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "role_anchor_map_numbers": {
+    "amine_head": [
+      1
+    ],
+    "isocyanide_tail": [
+      4
+    ],
+    "oxoester_aldehyde_body_tail": [
+      2
+    ]
+  },
+  "schema_version": "m0_07_ugi_semantic_annotations.v1",
+  "scope": {
+    "capture_transient_reaction_properties_before_serialization": true,
+    "max_forward_outcomes_per_product": 100,
+    "model_stereochemistry": "excluded",
+    "permutation_stress": "reverse_each_component_atom_order",
+    "product_atom_identity": "canonical_nonisomeric_smiles_output_order",
+    "reaction_id": "ugi_3cr_agile",
+    "source_atom_identity": "canonical_component_index_plus_symmetry_class",
+    "source_evidence_basis": "exact_reported_library_execution",
+    "source_evidence_disposition": "admit_exact",
+    "source_evidence_level": "L1",
+    "whole_graph_policy": {
+      "component_catalog_ids_in_model_state": false,
+      "distances_are_derived_not_generated": true,
+      "independent_fragment_generation": false,
+      "one_connected_product_graph": true,
+      "region_labels_are_node_level_supervision": true
+    }
+  },
+  "seed": 1729,
+  "software": {
+    "rdkit": "2026.03.4"
+  },
+  "status": "completed_exact_source_ugi_semantic_annotations",
+  "summary": {
+    "component_atom_rows": 52810,
+    "connected_role_regions": 3300,
+    "core_atoms": 5500,
+    "core_boundary_bonds": 3300,
+    "deleted_component_atoms": 1100,
+    "deleted_component_atoms_by_role": {
+      "oxoester_aldehyde_body_tail": 1100
+    },
+    "introduced_product_atoms": 1100,
+    "maximum_distance_to_core_distribution": {
+      "15": 80,
+      "16": 160,
+      "17": 180,
+      "18": 280,
+      "22": 100,
+      "24": 300
+    },
+    "origin_atom_counts": {
+      "amine_head": 9350,
+      "assembly_introduced": 1100,
+      "isocyanide_tail": 19360,
+      "oxoester_aldehyde_body_tail": 23000
+    },
+    "permutation_annotation_mismatches": 0,
+    "product_atoms": 52810,
+    "product_bonds": 52370,
+    "products": 1100,
+    "raw_outcome_distribution": {
+      "1": 880,
+      "2": 165,
+      "3": 55
+    },
+    "semantic_signature_multiplicity_distribution": {
+      "1": 1100
+    },
+    "source_exact_records": 1100,
+    "source_mapping_multiplicity_distribution": {
+      "1": 990,
+      "2": 55,
+      "3": 55
+    },
+    "target_matching_outcome_distribution": {
+      "1": 990,
+      "2": 55,
+      "3": 55
+    },
+    "unique_labels": 1100
+  }
+}

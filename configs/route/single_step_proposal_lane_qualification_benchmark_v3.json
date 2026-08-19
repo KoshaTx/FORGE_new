@@ -1,0 +1,75 @@
+{
+  "schema_version": "forge.single_step_proposal_executable_contract.v3",
+  "status": "frozen_executable_development_contract_not_run",
+  "purpose": "Additive executable development contract for the frozen 120-target proposal-lane benchmark; readiness is derived from authenticated artifacts and the qualified two-repeat semantic smoke.",
+  "artifacts": {
+    "frozen_v1_runner_binding": {
+      "path": "configs/route/single_step_proposal_benchmark_runner_binding_v1.json",
+      "sha256": "08683e515cc4e90261089aba164b3a92411a46bc75f358bfe6f804047fc796b7"
+    },
+    "runtime_lock": {
+      "path": "configs/route/graph2edits_runtime_py311_macos_arm64.lock.txt",
+      "sha256": "ed01fbd93e959fe47b5589221d143a08a34405450a7944d397e6db324ec91f69"
+    },
+    "runtime_qualification": {
+      "path": "configs/route/graph2edits_runtime_qualification_macos_arm64_py311_v1.json",
+      "sha256": "08b25e0a248a17ccb067cf94c7877a944b42cf6fd7b7e2f974fde242ce4a421f"
+    },
+    "exact_resolver_config": {
+      "path": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+      "sha256": "3cb6012f4bbd73d198159ffcf1f765f45fc0cf526b2ed93e0a836fc7d01cdf04"
+    }
+  },
+  "readiness_derivation": {
+    "minimum_semantic_repeat_count": 2,
+    "require_byte_identical_normalized_proposal_identities_and_ranks": true,
+    "require_authenticated_isolated_runtime_lock": true,
+    "require_frozen_target_and_hidden_truth_bindings": true,
+    "require_exact_resolver_binding": true,
+    "manual_license_boolean_is_scientific_readiness_gate": false,
+    "manual_all_gates_summary_is_used": false,
+    "separate_benchmark_execution_authorization_boolean_is_used": false
+  },
+  "decision_policy": {
+    "hard_requirements": {
+      "known_route_top10_drop_maximum_absolute": 0.02,
+      "accepted_proposals_must_strictly_improve": true,
+      "adversarial_incompatible_accepted_proposals_maximum": 0,
+      "scientific_authority_must_remain_null": true
+    },
+    "operational_checks": {
+      "accepted_relative_gain_minimum": 0.1,
+      "graph_consistent_drop_maximum_absolute": 0.05,
+      "operational_yield_drop_maximum_absolute": 0.05,
+      "invalid_raw_hypothesis_fraction_maximum": 0.1,
+      "canonical_duplicate_fraction_maximum": 0.25,
+      "minimum_nonadversarial_strata_improved": 3,
+      "latency_p95_seconds_maximum": 30,
+      "peak_memory_mebibytes_maximum": 12288
+    },
+    "production_activation_is_separate_versioned_decision": true,
+    "technical_invalidation_may_be_rerun_before_hidden_truth_scoring": true,
+    "scientific_failure_may_not_be_retried_or_retuned": true
+  },
+  "scientific_authority": {
+    "proposal_model_score_used": false,
+    "proposal_model_reaction_class_used": false,
+    "known_family_projection_is_graph_consistency_only": true,
+    "known_family_projection_creates_evidence": false,
+    "new_family_hypothesis_closes_route": false,
+    "locally_novel_hypothesis_is_chemically_incompatible_by_default": false,
+    "unqualified_new_family_hypothesis_state": "missing_independent_scope_or_evidence",
+    "identical_independent_forward_scope_evidence_operational_l3_contracts_produce_identical_route_state_and_value": true,
+    "proposal_source_may_change_qualified_route_state_or_value": false,
+    "any_discovery_status_may_set_success_probability": false,
+    "any_discovery_status_may_enter_v_syn": false
+  },
+  "scope_guards": {
+    "production_backend_active": false,
+    "production_planner_modified": false,
+    "route_evidence_created": false,
+    "synthesis_value_modified": false,
+    "sealed_holdout_accessed": false,
+    "benchmark_already_executed": false
+  }
+}

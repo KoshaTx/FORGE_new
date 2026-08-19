@@ -1,0 +1,101 @@
+{
+  "schema_version": "phase1_ugi_full_corpus_branch_exploration_candidates_config.v1",
+  "status": "frozen_before_fresh_branch_exploration_generation",
+  "frozen_at_utc": "2026-08-06T00:10:00Z",
+  "task": "Generate a fresh branch-focused exploration pool from the restored all-fold morphology support using the promoted stochastic generator and exact terminal chemical admission",
+  "scope": {
+    "branch_exploration_pool_only": true,
+    "full_corpus_morphology_support": true,
+    "fully_stochastic_atom_bond_decoration_decoding": true,
+    "raw_terminals_sealed_before_chemical_admission": true,
+    "exact_terminal_chemical_admission": true,
+    "terminal_admission_changes_generated_molecules": false,
+    "terminal_scoring": false,
+    "potency_model_calls": 0,
+    "applicability_model_calls": 0,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "potency_tilting": false,
+    "synthesis_tilting": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false,
+    "retries_or_repairs": false
+  },
+  "design": {
+    "draws": 4096,
+    "shard_draws": 1024,
+    "shards": 4,
+    "flow_seed_base": 2026081300,
+    "terminal_seed_base": 2026081400,
+    "sample_steps": 8,
+    "batch_size": 16,
+    "maximum_adjacent_branch_runs": [2, 1, 1],
+    "terminal_decoder_mode": "stochastic",
+    "terminal_temperature": 1.0,
+    "reference_comparison_mode": "deferred",
+    "retry_or_repair": false,
+    "raw_root": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/raw",
+    "terminal_admission": [
+      "sanitized_connected_product",
+      "exact_unsaturated_L1_forward_reconstruction",
+      "registry_handle_policy_for_all_three_precursor_roles"
+    ]
+  },
+  "inputs": {
+    "schedule": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_schedule_v1/schedule.json",
+      "sha256": "37261cb5b18f9113878897f733656f0c149f524c00cf91b3734da27ad86ef65e"
+    },
+    "schedule_result": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_schedule_v1/result.json",
+      "sha256": "adcca743b41ea6b5ad896299e32e5035c4c91a2c309b106403d8ece3506bd17f"
+    },
+    "production_refit_result": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json",
+      "sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+    },
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/checkpoint_best.pt",
+      "sha256": "3a3fbf2ad1e6a080bbba0476748d10e78de7cd5122e153d8fa7fc67b60823497"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "implementation": {
+    "source": {
+      "path": "src/forge/product/ugi_full_corpus_branch_exploration_candidates.py",
+      "sha256": "a2cc7a5f1a3d0f5ba9b1231f38f520091b0586b29ea3643b1b898487eb236c1d"
+    },
+    "runner": {
+      "path": "scripts/modal_phase1_ugi_full_corpus_branch_exploration_candidates_v1.py",
+      "sha256": "91bf3ee9895b9a01fb1c85da50a4009ac923e6eb6f59bb6b08debdce1462d562"
+    },
+    "collector": {
+      "path": "scripts/phase1_collect_ugi_full_corpus_branch_exploration_candidates_v1.py",
+      "sha256": "a5b3a7dce1ea50c8868924de9746d06bf08095fa063bbeccc93644c8ba1a91e5"
+    },
+    "tests": {
+      "path": "tests/test_ugi_full_corpus_branch_exploration_candidates.py",
+      "sha256": "be09e4bd81d94fd1e94a7291d345fd45bb16ab3565555947822f87c8c276398e"
+    }
+  },
+  "decision_boundary": {
+    "generator_checkpoint_changed": false,
+    "promoted_applicability_proposal_changed": false,
+    "biological_applicability_thresholds_changed": false,
+    "branch_exploration_carries_potency_claim": false,
+    "previous_branching_shortlist_is_final": false,
+    "next_stage": "audit realized carbon branching, ester retention, branch adjacency, diversity and exact-L1 admission before rebuilding the route-blinded exploration shortlist"
+  }
+}

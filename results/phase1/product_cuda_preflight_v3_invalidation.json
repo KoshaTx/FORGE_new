@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase1_product_cuda_preflight_invalidation.v2",
+  "status": "invalidated_historical_artifact",
+  "artifact": {
+    "path": "results/phase1/product_cuda_preflight_v3.json",
+    "sha256": "564fb43405274ae488f0dd0355345de6911d2181aca242f7545629e93b9673b0"
+  },
+  "changed_sources": [
+    {
+      "path": "src/forge/product/sparse_topology_feasibility.py",
+      "artifact_recorded_sha256": "e5db084fc3a3f6d024e6029218be9ccbd19df425eb41932b19a6cfcddb411112",
+      "current_sha256": "9c78eb4ce3635ad650c436f1f191c6ace836cc72e755b93106cfc7635d7d7b24",
+      "change_commit": "9fa0dfa180bbedbb67d7c3861bd517c03e818dc9",
+      "reason": "pointer R-star transitions were corrected to remain inside variable-specific candidate support"
+    },
+    {
+      "path": "src/forge/product/defog_feasibility.py",
+      "artifact_recorded_sha256": "a5bd8d7e852c001a843756d9f9acc13d1da5e7c667584b987469c211ea4cbef5",
+      "current_sha256": "35e5b880983098371bff9b487c48597bc6ab024d384b5b866108a931d3f0fac1",
+      "change_commit": null,
+      "reason": "the shared R-star scatter source was moved onto the active tensor device after the historical preflight exposed only the CPU path"
+    }
+  ],
+  "scientific_disposition": {
+    "v3_architecture": "rejected_by_endpoint_morphology_gate",
+    "historical_cuda_result_retained": true,
+    "cuda_training_path_authorized_for_current_source": false,
+    "replacement_representation": "configs/model/phase1_product_morphology_v5.json",
+    "rerun_required_before_any_future_v3_claim": true
+  }
+}

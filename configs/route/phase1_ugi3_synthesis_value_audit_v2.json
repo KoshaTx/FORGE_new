@@ -1,0 +1,94 @@
+{
+  "schema_version": "phase1_ugi3_synthesis_value_audit_config.v2",
+  "task": "Extend immutable v1 synthesis values with the authenticated second-wave exact-terminal delta",
+  "inputs": {
+    "audit_source": {
+      "asset": "src/forge/value/ugi3_synthesis_value_audit_v2.py",
+      "expected_sha256": "514ba9404886966bcc8de5504a72c0442835c7b4914948f2c152ed0e6826d8f5"
+    },
+    "base_component_values": {
+      "asset": "results/phase1/ugi3_synthesis_value_audit_v1/component_synthesis_values.json.gz",
+      "expected_sha256": "7e16da6ed54609137917b4fb4c936db211662ec5c2ec92bff464624f4d95e297"
+    },
+    "base_config": {
+      "asset": "configs/route/phase1_ugi3_synthesis_value_audit_v1.json",
+      "expected_sha256": "f99a73ef7a5bdb8f2e5a0312eb467cf4712e0c58e95efc0909dc0db7092df806"
+    },
+    "base_product_values": {
+      "asset": "results/phase1/ugi3_synthesis_value_audit_v1/product_synthesis_values.json.gz",
+      "expected_sha256": "324aca317d1a1a6262f05202d42d0c4e8b4f853779e5be3926e5f0bf60624cc5"
+    },
+    "base_result": {
+      "asset": "results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "expected_sha256": "a1137d14b876a3dc53167e28dbfb55b1fb54acd845d3cdffe37d25e6aa7d7f27"
+    },
+    "generated_component_provenance": {
+      "asset": "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz",
+      "expected_sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6"
+    },
+    "generated_product_provenance": {
+      "asset": "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz",
+      "expected_sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"
+    },
+    "qualifier_source": {
+      "asset": "scripts/phase1_build_ugi3_synthesis_values_v2.py",
+      "expected_sha256": "50dde9a43aa880621d5a7b2124df1554e673e5223a57883dcb3f05b2e755db8e"
+    },
+    "second_wave_config": {
+      "asset": "configs/route/phase1_ugi3_second_wave_head_terminal_audit_v1.json",
+      "expected_sha256": "4854b4769ef7e7fe0a9a39e6b8a6c690b9ec1cd1cde248e4d204bee974aa23c2"
+    },
+    "second_wave_product_impact": {
+      "asset": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+      "expected_sha256": "08b92b1ba54d975501d6acf0784be3128ceb2d203a2076eb865e799df2a98301"
+    },
+    "second_wave_result": {
+      "asset": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/result.json",
+      "expected_sha256": "9a6763a2bd2154c3d065232cf17e50459a1bb0b8c511e98ff0f62a0aa9627431"
+    },
+    "value_source": {
+      "asset": "src/forge/value/synthesis.py",
+      "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    }
+  },
+  "expected_summary": {
+    "base_version": "v1",
+    "second_wave_components_changed": 1,
+    "generated_unique_components": 610,
+    "generated_component_value_sources": {
+      "frozen_registry_assessment": 90,
+      "generated_component_missing_route_knowledge": 519,
+      "second_wave_exact_current_terminal": 1
+    },
+    "generated_component_outcomes": {
+      "complete": 25,
+      "missing_knowledge": 560,
+      "outside_support": 25
+    },
+    "generated_component_evidence_support": {
+      "exact_identity": 9,
+      "family_projected": 20,
+      "not_applicable": 16,
+      "provenance_only": 565
+    },
+    "generated_products": 1007,
+    "generated_product_outcomes": {
+      "complete": 42,
+      "noncomplete": 965
+    },
+    "products_with_exact_l1_forward_consistency": 1007,
+    "component_values_with_unknown_protection_burden": 610,
+    "component_values_with_unknown_purification_burden": 610,
+    "non_null_scalar_values": 0,
+    "non_null_success_probabilities": 0
+  },
+  "assessment_policy": {
+    "base_v1_is_immutable": true,
+    "second_wave_is_exact_identity_only": true,
+    "unknown_burden_is_zero": false,
+    "permit_scalar_value": false,
+    "permit_success_probability": false,
+    "diagnostic_only": true,
+    "production_synthesis_guidance": false
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "phase1_ugi3_frozen_parent_component_ledger_config.v1",
+  "status": "ready_to_freeze_prereveal_parent",
+  "policy": {
+    "purpose": "Freeze prereveal R0/without-C18 from final v5 plus the exact v3 C18 record.",
+    "authorized_reversion": {
+      "role": "oxoester_aldehyde_body_tail",
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+      "source_version": "fresh_pool_route_coverage_v3"
+    },
+    "permit_added_component_keys": false,
+    "permit_deleted_component_keys": false,
+    "permit_non_c18_record_changes": false,
+    "permit_family_template_promotion": false,
+    "permit_homologue_template_promotion": false,
+    "permit_registry_pair_materialization": false,
+    "permit_holdout_access_or_reveal": false
+  },
+  "decision": {
+    "registry_pair_materialized": false,
+    "holdout_accessed": false,
+    "holdout_reveal_authorized": false
+  },
+  "inputs": {
+    "v5_component_ledger": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz",
+      "sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+    },
+    "v5_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+    },
+    "v5_config": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+      "sha256": "38fb52131bcb4c79f122a19a7997da3fe4c8d7e6f6fa229add4b3fbc5c9e35c3"
+    },
+    "v3_component_ledger": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz",
+      "sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+    },
+    "v3_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json",
+      "sha256": "442e5c01f5c69b505a6767ff48dfb25b9f381233b5086509aec1e32c43163abf"
+    },
+    "v3_config": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json",
+      "sha256": "84bafa51a90cadd87a888ae92ef3d81a9d82746c17a72b93eddb239fc0210d96"
+    },
+    "value_source": {
+      "path": "src/forge/value/synthesis.py",
+      "sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+    },
+    "audit_source": {
+      "path": "src/forge/route/ugi3_frozen_parent_component_ledger.py",
+      "sha256": "2dc8b29009d5b5e7bcffb2c307c07ea424b18e7b8f74a68038d9d5517696096f"
+    },
+    "audit_runner": {
+      "path": "scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "sha256": "2decd029f23e145f214517c2cdee2135f20fcdd0ecd2572306243730491d223e"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi3_frozen_parent_component_ledger.py",
+      "sha256": "46de79d2a5a49744779ff51f4c89596197f6bb18c18002c4380b04a5a38043b0"
+    }
+  },
+  "expected_summary": {
+    "source_record_count": 1919,
+    "output_record_count": 1919,
+    "added_component_keys": 0,
+    "deleted_component_keys": 0,
+    "authorized_c18_reversions": 1,
+    "non_c18_v5_records_preserved": 1918,
+    "output_component_outcomes": {
+      "complete": 44,
+      "missing_knowledge": 1830,
+      "outside_support": 45
+    },
+    "output_component_value_sources": {
+      "exact_c16_four_step_route_two_current_terminals": 1,
+      "existing_exact_current_head_terminal_refresh": 1,
+      "existing_exact_current_octadecylamine_terminal_refresh": 1,
+      "fresh_component_missing_route_knowledge": 1515,
+      "hybrid_registry_assessment": 86,
+      "new_exact_current_tail_terminal": 1,
+      "v3_exact_overlay_or_replay": 314
+    },
+    "qualified_c16_records_retained": 1,
+    "c16_route_step_count": 4,
+    "c16_current_terminal_leaf_count": 2,
+    "c18_parent_assessment_outcome": "missing_knowledge",
+    "c18_parent_route_complete": false,
+    "c18_parent_route_step_count": 0,
+    "family_template_admitted_records": 0,
+    "homologue_template_admitted_records": 0,
+    "registry_pair_materialized": false,
+    "holdout_artifacts_accessed": 0
+  }
+}

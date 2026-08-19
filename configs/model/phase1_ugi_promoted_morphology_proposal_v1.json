@@ -1,0 +1,55 @@
+{
+  "schema_version": "phase1_ugi_promoted_morphology_proposal_config.v1",
+  "status": "frozen_after_challenger_adjudication_before_full_support_promotion",
+  "task": "Apply the confirmed rho-0.50 power-1.50 applicability proposal to every qualified Ugi morphology program",
+  "scope": {
+    "read_only": true,
+    "complete_qualified_morphology_support": true,
+    "confirmed_challenger_only": true,
+    "applicability_boundary_frozen": true,
+    "potency_predictions_consumed": false,
+    "oracle_calls": 0,
+    "route_calls": 0,
+    "synthesis_calls": 0,
+    "proposal_calls": 0,
+    "generator_trajectories_advanced": false,
+    "candidate_selection": false,
+    "sealed_holdout_access": false
+  },
+  "proposal": {
+    "candidate_id": "rho-0.50_power-1.50",
+    "mixture_rho": 0.5,
+    "score_power": 1.5,
+    "score_floor": 0.000001
+  },
+  "inputs": {
+    "adjudication_result": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_adjudication_v1/result.json",
+      "sha256": "51ff8d26a674f9242a6ec78e31b5424feb969b17c050c62a9cdbfd2bb773d796"
+    },
+    "baseline_full_ledger": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "273fdb44bc2df8405ea4835ac32c7305bfc2d59caa8ec51b138464f57bb17675"
+    },
+    "baseline_full_result": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/result.json",
+      "sha256": "93543b3b563338f24435c595799118bbf416e64a8b7f0998a642b2065ba064d2"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_promoted_morphology_proposal.py",
+      "sha256": "cd71d1fb93a20ecf6910066ae185a34930ffa94f228dc054f1d13669d6beb127"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_promoted_morphology_proposal.py",
+      "sha256": "55796c6bdf0fcb5659c2a8a143deb3daabeb7fad3b9d1d7139ac8da7c9ec68cf"
+    },
+    "strength_sweep": {
+      "path": "results/phase1/ugi_morphology_proposal_strength_sweep_v1/result.json",
+      "sha256": "05d4bfbaa7926f00b410708d7f824d91a81e102ca1bffc4358234287e2d53214"
+    },
+    "tests": {
+      "path": "tests/test_ugi_promoted_morphology_proposal.py",
+      "sha256": "decf36c2118ce24d2395fefc9a7a368a647465f6e32b9c328680309f3740aeba"
+    }
+  }
+}

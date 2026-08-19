@@ -1,0 +1,61 @@
+{
+  "schema_version": "phase1_ugi3_high_leverage_route_evidence_worklist_config.v1",
+  "status": "frozen_before_development_only_worklist_execution",
+  "task": "Build the smallest high-leverage exact-component evidence worklist reaching at least 25% of missing-knowledge one-gap development products",
+  "development_only": true,
+  "inputs": {
+    "priority_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v4/result.json",
+      "sha256": "adae9a7b111e6a715e63b705f11b8e6270c747541f192ec799cc29d7977a0211"
+    },
+    "priority_ledger": {
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v4/priority_ledger.csv.gz",
+      "sha256": "55062a7ea94641f5fa5ab0a7735854772653d471615f7c252bc19ce4f5dd694e"
+    },
+    "triage_result": {
+      "path": "results/phase1/ugi3_route_gap_triage_v5/result.json",
+      "sha256": "01530b93b85d4ab889d16e47565b3de61d14ab92acb6f94ea7ddc0daebaae978"
+    },
+    "triage_ledger": {
+      "path": "results/phase1/ugi3_route_gap_triage_v5/triage_ledger.csv.gz",
+      "sha256": "887d81b6737f5baa81d1566c499e6323931d65565b3da8ec6111439f04aa8ef7"
+    }
+  },
+  "implementation": {
+    "builder_source": {
+      "path": "src/forge/route/ugi3_high_leverage_route_evidence_worklist.py",
+      "sha256": "957d696188fcb1f9cf14df42320866490617c3eefb92bc7a501c9702928ddf02"
+    },
+    "runner": {
+      "path": "scripts/phase1_build_ugi3_high_leverage_route_evidence_worklist.py",
+      "sha256": "64938a39b22e0fd28a1bd6865762ad75f3c59bb571719df8fa86f10cec92f472"
+    },
+    "tests": {
+      "path": "tests/test_ugi3_high_leverage_route_evidence_worklist.py",
+      "sha256": "49c600a912d079442a1f1f264de6e7235db59422c3e3c9e767542c1bdf725758"
+    }
+  },
+  "selection_policy": {
+    "eligible_outcome": "missing_knowledge",
+    "ranking": "frozen priority rank, which is descending exact one-gap product count then lexical role and constitutional identity",
+    "target_fraction_of_missing_knowledge_one_gap_products": 0.25,
+    "cardinality_minimal_top_prefix_required": true,
+    "preserve_exact_component_identity": true,
+    "preserve_existing_program_projection": true,
+    "head_without_existing_program_remains_procurement_or_exact_route_lane": true,
+    "projected_program_is_exact_route": false,
+    "current_leaves_establish_exact_substrate_scope": false,
+    "learned_proposal_is_route_evidence": false,
+    "learned_proposal_can_close_route": false,
+    "new_reaction_family_admission_authorized": false,
+    "procurement_assertion_authorized": false,
+    "route_assertion_authorized": false,
+    "synthesis_guidance_authorized": false,
+    "prospective_candidate_selection_changed": false,
+    "sealed_holdout_access_authorized": false
+  },
+  "outputs": {
+    "manifest": "results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json",
+    "memo": "docs/phase1_ugi3_high_leverage_route_evidence_worklist_v1.md"
+  }
+}

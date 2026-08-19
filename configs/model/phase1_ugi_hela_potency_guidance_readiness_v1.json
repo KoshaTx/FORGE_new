@@ -1,0 +1,64 @@
+{
+  "schema_version": "phase1_ugi_hela_potency_guidance_readiness_config.v1",
+  "scope": {
+    "diagnostic_only": true,
+    "endpoint": "expt_Hela",
+    "synthesis_guidance": false,
+    "proposal_guidance": false,
+    "candidate_selection": false,
+    "prospective_candidate_lock": false,
+    "generator_trajectories_advanced": false,
+    "nonzero_execution_authorized": false
+  },
+  "design": {
+    "oracle_candidate_id": "supervised_graph::ugi_component_role_aware_dmpnn::neural_3seed_ensemble",
+    "seeds": [20260821, 20260822, 20260823, 20260824, 20260825, 20260826, 20260827, 20260828],
+    "calibration_seeds": [20260821, 20260822, 20260823],
+    "evaluation_seeds": [20260824, 20260825, 20260826, 20260827, 20260828],
+    "morphology_program_count": 16,
+    "particles_per_program": 4,
+    "particles_per_seed": 64,
+    "sample_steps": 8,
+    "checkpoints": [2, 4, 6],
+    "checkpoint_betas": [0.25, 0.5, 0.75],
+    "guidance_strength": 0.25,
+    "terminal_particles_per_arm_all_seeds": 512,
+    "checkpoint_completions_per_arm_all_seeds": 1536,
+    "terminal_assessment_attempts_per_arm_all_seeds": 2048,
+    "product_transition_calls_per_arm_all_seeds": 10240
+  },
+  "inputs": {
+    "bio_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "grouped_schedule": {
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+    },
+    "historical_result": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/result.json",
+      "sha256": "ff4fdf36dd94b4e33b6c5e84527c5049578af7ea39ca25440dc33a7d8e32da3a"
+    },
+    "historical_run": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/run.json",
+      "sha256": "1627b2cdb47c6d54cc916fbb2327a86ba5420e0a5ca698607f7545335555a087"
+    },
+    "historical_support_audits": {
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v3/support_audits.json",
+      "sha256": "66bb85edaa29cb447cc43d359db07a19f092cc8e36110d689e743e191f02f316"
+    },
+    "potency_policy_source": {
+      "path": "src/forge/bio/ugi_hela_potency_diagnostic.py",
+      "sha256": "f63fa63f6e7e31f40232738db28423553968940c8e1c481d5874ec5b372f899c"
+    },
+    "potency_seam_source": {
+      "path": "src/forge/product/ugi_hela_potency_guidance_seam_v1.py",
+      "sha256": "4eb2e32c689e451e0392e35f2dc47bf79c063c14df09a9d3f9f4815234fe9a38"
+    },
+    "selected_v3_adapter_source": {
+      "path": "src/forge/product/ugi_selected_guidance_adapter_v3.py",
+      "sha256": "e4963e2c245a8b5a3ece7e1b869733553ccc1bcfbdb4811bca73131ff540b793"
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "artifacts": {
+    "assessment_ledger_sha256": "0507480bf1117999629515f9d2c9ff7b5288695371b1f1eefe4efb58829e0f5d"
+  },
+  "claims_boundary": {
+    "assessment_outcome_is_synthesis_success_probability": false,
+    "evidence_only_diagnostic_plumbing": true,
+    "family_projection_can_close": false,
+    "general_dynamic_planner_qualified": false,
+    "learned_route_planner_qualified": false,
+    "production_synthesis_guidance_authorized_by_this_result": false,
+    "provenance_only_can_close": false
+  },
+  "diagnostic_policy": {
+    "assessment_as_of_utc": "2026-08-01T00:00:00Z",
+    "budget_limits": {
+      "maximum_depth": 4,
+      "maximum_elapsed_milliseconds": 0,
+      "maximum_expansions": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 0
+    },
+    "existing_tier_to_expected_outcome": {
+      "accepted_terminal_l3_closed": "complete",
+      "exact_source_l2_verified_l3_closed": "complete",
+      "exact_source_l2_verified_l3_open": "missing_knowledge",
+      "family_projected_l3_closed_not_exact_source": "missing_knowledge",
+      "unresolved_component": "missing_knowledge"
+    },
+    "unavailable_procurement_statuses": [
+      "current_item_level_unavailable"
+    ]
+  },
+  "generated_utc": "2026-08-01T00:00:00Z",
+  "inputs": {
+    "adapter_source": {
+      "path": "src/forge/route/ugi3_exact_evidence_source.py",
+      "sha256": "ba843fdce8de67dd1c228fe0680d77c00bf7493bd38224dda2419a103154a290"
+    },
+    "component_dossier": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "component_dossier_result": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "component_program": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "component_program_result": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    "config": {
+      "path": "configs/route/phase1_ugi3_exact_evidence_source.json",
+      "sha256": "437ed83703d08371fbcb352d05b8900c772fcad5236369680c0095d0ac1294e4"
+    },
+    "l1_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    },
+    "planner_cache_source": {
+      "path": "src/forge/route/planner_cache.py",
+      "sha256": "72a07031fc7cd623446c99625333d848b79059ada995f4b5c3b7bdfd53b523db"
+    },
+    "planner_contract_source": {
+      "path": "src/forge/route/planner.py",
+      "sha256": "8cd48f704819810f83f02a9623f8de461f7334ad94684e3d77e325e3dd9902a0"
+    },
+    "step_ledger": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"
+    },
+    "step_result": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/result.json",
+      "sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"
+    },
+    "terminal_procurement": {
+      "path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "upstream_reaction_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    }
+  },
+  "planner_cache_context": {
+    "budget_limits": {
+      "maximum_depth": 4,
+      "maximum_elapsed_milliseconds": 0,
+      "maximum_expansions": 4,
+      "maximum_logical_planner_calls": 1,
+      "maximum_product_candidates": 4,
+      "maximum_verifier_calls": 0
+    },
+    "identity_policy": "canonical_constitutional_smiles",
+    "l1_reaction_sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427",
+    "l3_accessed_at_utc": "2026-07-29T20:49:00Z",
+    "l3_expires_at_utc": "2026-08-28T20:49:00Z",
+    "l3_region": "US",
+    "l3_snapshot_sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960",
+    "planner_id": "ugi3_exact_evidence_only_diagnostic_v1",
+    "planner_sha256": "1727a0f7efdc1a5af6b1f50bd8d265c73f2a51c8aa5e42ac35aa30c76a8f9074",
+    "search_policy_sha256": "1b949abaaa3cd38e9d49385fb1dba96de2dfa9863b9fdfa68373df57392395a1",
+    "software_versions": [
+      [
+        "python",
+        "3.14.2"
+      ],
+      [
+        "rdkit",
+        "2026.03.4"
+      ]
+    ],
+    "stereochemistry_policy": "phase1_stereo_free",
+    "upstream_reaction_registry_sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e",
+    "value_policy_sha256": "8991ed533cacb1f12e27b351ddad541f97a1c9e8780b4bcc9652f047cd7041ac",
+    "variant_registry_sha256": "7f188f9d9b2bf218e4e21250dc89fadc31f73d34ac9a39410f0d738583ba34c4",
+    "verifier_sha256": "1af7734a06d846cbe4d73a5db2013ea0b8a67f5d6b2221736d27bbf620d61f36"
+  },
+  "safe_claim": "The frozen exact-evidence adapter reproduces the admitted component dossier classifications through the typed recursive planner and deterministic cache. This diagnostic performs no route inference and does not qualify production guidance.",
+  "schema_version": "phase1_ugi3_exact_evidence_source.v1",
+  "summary": {
+    "admitted_components": 93,
+    "assessment_outcomes": {
+      "complete": 40,
+      "missing_knowledge": 53
+    },
+    "complete_flag_agreement": 93,
+    "components_by_existing_evidence_tier": {
+      "accepted_terminal_l3_closed": 17,
+      "exact_source_l2_verified_l3_closed": 23,
+      "exact_source_l2_verified_l3_open": 1,
+      "family_projected_l3_closed_not_exact_source": 47,
+      "unresolved_component": 5
+    },
+    "first_pass_cache_misses": 93,
+    "outcomes_by_role": {
+      "amine_head": {
+        "complete": 17,
+        "missing_knowledge": 5
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 3
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 17,
+        "missing_knowledge": 45
+      }
+    },
+    "second_pass_cache_hits": 93,
+    "tier_crosswalk_agreement": 93
+  },
+  "task": "Exact-evidence-only Ugi L2/L3 RouteKnowledgeSource diagnostic"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "phase1_ugi3_fresh_pool_route_priority_config.v1",
+  "status": "frozen_before_nonselecting_priority_execution",
+  "task": "Rank exact one-gap route targets in the fresh v2 Ugi product pool",
+  "inputs": {
+    "route_coverage_result": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/result.json",
+      "sha256": "16ea205e816e87a1daa3e8d4c765d7564f74c4fd887f8a7d44c62556705ac1d0"
+    },
+    "component_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/component_synthesis_values.json.gz",
+      "sha256": "2535046846b4f6293273960c46ca9dc873bd3b37acf3849fe7871f162f975c03"
+    },
+    "product_values": {
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v1/product_synthesis_values.json.gz",
+      "sha256": "53c91af25ac37be5de8436865ec610e020e0900b232ae844c4ad63b2cd742d3e"
+    },
+    "priority_source": {
+      "path": "src/forge/value/ugi3_fresh_pool_route_priority.py",
+      "sha256": "3f30fb3eadac0f34dfdab33666166d78e68aed3a2f6c3050460b3898f1ac76fb"
+    },
+    "priority_runner": {
+      "path": "scripts/phase1_prioritize_ugi3_fresh_pool_route_gaps.py",
+      "sha256": "a0bbe74b06fc799dcc89a0e2bec4a190ffc90c8074e9304d55696c3f319ac483"
+    },
+    "priority_tests": {
+      "path": "tests/test_ugi3_fresh_pool_route_priority.py",
+      "sha256": "18bdccd4d5273820bda856f60d7783a4093a26895cd7cda3bee853422a6c6099"
+    }
+  },
+  "priority_policy": {
+    "eligible_products": "exact-L1 products with exactly two route-complete components",
+    "ranking": "descending exact count of one-gap products, then lexical role and constitutional identity",
+    "missing_knowledge_lane": "targeted exact evidence or separately qualified template search",
+    "outside_support_lane": "declared-support review, not route mining",
+    "route_planning_performed": false,
+    "synthesis_guidance_authorized": false,
+    "prospective_candidate_selection_changed": false
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "m0_06_defog_feasibility_config.v1",
+  "seed": 20260729,
+  "inputs": {
+    "r0": {
+      "path": "data/vendor/r0_observed_real_structures.csv",
+      "sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "split_assignments": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "split_manifest": {
+      "path": "data/splits/m0_03/manifest.json",
+      "sha256": "d969f71c02b2429ae73b4131affc80682988a8e405baca466168081f8208be7b"
+    }
+  },
+  "split_scheme": "source_study",
+  "declared_support": {
+    "elements": ["C", "N", "O", "S", "P"],
+    "bond_types": ["NO_BOND", "SINGLE", "DOUBLE", "TRIPLE", "AROMATIC"],
+    "stereochemistry_policy": "flat_graph_generation_route_assigned_at_dossier_time",
+    "documented_profile_to_audit": {
+      "n64_fraction": 0.865,
+      "n96_fraction": 0.968,
+      "maximum_heavy_atoms": 138
+    }
+  },
+  "model": {
+    "hidden_dim": 32,
+    "layers": 2,
+    "dropout": 0.0,
+    "edge_loss_weight": 1.0
+  },
+  "primary_objective": "standard_edge_ce",
+  "objective_variants": [
+    {
+      "name": "standard_edge_ce",
+      "bond_auxiliary_weight": 0.0,
+      "purpose": "reference DeFoG clean-marginal cross-entropy"
+    },
+    {
+      "name": "bond_recall_auxiliary",
+      "bond_auxiliary_weight": 0.25,
+      "purpose": "stress test whether countering no-edge dominance causes overbonding"
+    }
+  ],
+  "training": {
+    "steps": 160,
+    "learning_rate": 0.0007,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "train_example_limit": 2048,
+    "cal_example_limit": 256,
+    "heldout_example_limit": 256,
+    "cpu_threads": 8
+  },
+  "sampling": {
+    "endpoint_samples": 48,
+    "steps": 20,
+    "batch_size": 4
+  },
+  "runs": [
+    {
+      "name": "dense_n64",
+      "n_max": 64,
+      "batch_size": 8
+    },
+    {
+      "name": "dense_n96",
+      "n_max": 96,
+      "batch_size": 4
+    }
+  ],
+  "decision_thresholds": {
+    "minimum_endpoint_validity": 0.05,
+    "minimum_endpoint_connectedness": 0.05,
+    "minimum_heldout_bond_recall": 0.1,
+    "maximum_endpoint_bond_density_error": 0.05,
+    "minimum_n96_to_n64_training_throughput_ratio": 0.3,
+    "maximum_n96_bond_recall_drop": 0.15,
+    "maximum_n96_bond_density_error_increase": 0.02,
+    "maximum_peak_rss_bytes": 12884901888,
+    "support_profile_fraction_tolerance": 0.001
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "registry_version": "phase1_ugi3_exact_c18_qualified_reactions_v1",
+  "scope": "one_exact_c18_substrate_chain_only",
+  "claims_boundary": {
+    "qualified_for_general_enumeration": false,
+    "qualified_for_substrate_scope_extrapolation": false,
+    "qualified_as_a_reaction_family": false,
+    "conditions_encoded_in_graph_transform": false,
+    "exact_graph_reconstruction_is_experimental_success": false,
+    "exact_l2_evidence_implies_current_l3_procurement": false
+  },
+  "reactions": [
+    {
+      "reaction_id": "ugi3_exact_c18_carboxylic_acid_reduction_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "carboxylic_acid_to_primary_alcohol_reduction",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": "CCCCCCCCC#CCCCCCCCC(=O)O",
+      "exact_product_smiles": "CCCCCCCCC#CCCCCCCCCO",
+      "reactant_roles": [
+        {
+          "name": "exact_stearolic_acid"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CX3:1](=[OX1:2])[OX2H1:3]>>[CH2:1][OX2H1:2]",
+      "qualification_note": "The graph transform is admitted only for the exact stearolic-acid to octadec-9-yn-1-ol pair reported by Amara et al.; no general reduction scope is claimed."
+    },
+    {
+      "reaction_id": "ugi3_exact_c18_alkyne_zipper_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "internal_to_terminal_alkyne_isomerization",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": "CCCCCCCCC#CCCCCCCCCO",
+      "exact_product_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "reactant_roles": [
+        {
+          "name": "exact_octadec_9_yn_1_ol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[#8:1]-[#6:2]-[#6:3]-[#6:4]-[#6:5]-[#6:6]-[#6:7]-[#6:8]-[#6:9]-[#6:10]#[#6:11]-[#6:12]-[#6:13]-[#6:14]-[#6:15]-[#6:16]-[#6:17]-[#6:18]-[#6:19]>>[#8:1]-[#6:2]-[#6:3]-[#6:4]-[#6:5]-[#6:6]-[#6:7]-[#6:8]-[#6:9]-[#6:10]-[#6:11]-[#6:12]-[#6:13]-[#6:14]-[#6:15]-[#6:16]-[#6:17]-[#6:18]#[#6:19]",
+      "qualification_note": "This whole-chain mapping is an exact-pair identity verifier for the reported C18 alkyne zipper. It is deliberately not a transferable local reaction template."
+    },
+    {
+      "reaction_id": "ugi3_exact_c18_primary_alcohol_oxidation_v1",
+      "reaction_version": 1,
+      "status": "qualified_for_one_exact_substrate_product_pair_only",
+      "source_transformation": "primary_alcohol_to_aldehyde_oxidation",
+      "qualification_pair_count": 1,
+      "exact_reactant_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "exact_product_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+      "reactant_roles": [
+        {
+          "name": "exact_octadec_17_yn_1_ol"
+        }
+      ],
+      "atom_mapped_reaction_smarts": "[CH2:1][OX2H1:2]>>[CH1:1]=[OX1:2]",
+      "qualification_note": "The graph transform is admitted only for the exact octadec-17-yn-1-ol to octadec-17-ynal pair reported by Oppolzer et al.; no general oxidation scope is claimed."
+    }
+  ]
+}

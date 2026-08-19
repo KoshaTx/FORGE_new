@@ -1,0 +1,45 @@
+{
+  "claims_boundary": {
+    "biological_labels_present": false,
+    "component_labels_present": false,
+    "descriptor_columns_retained": false,
+    "l2_route_supervision_present": false
+  },
+  "generated_utc": "2026-07-29T19:07:32+00:00",
+  "output": {
+    "asset": "data/derived/agile_virtual12k_smiles.csv.gz",
+    "bytes": 85911,
+    "compression": "gzip_mtime_0",
+    "fields": [
+      "source_row_index",
+      "source_smiles",
+      "canonical_isomeric_smiles"
+    ],
+    "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+  },
+  "randomness": {
+    "seed": 0,
+    "used": false
+  },
+  "schema_version": "m0_09_agile_virtual_smiles_manifest.v1",
+  "software": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.2",
+    "rdkit": "2025.09.6"
+  },
+  "source": {
+    "asset": "candidate_set_smiles_plus_features.csv",
+    "bytes": 116969761,
+    "doi": "10.5281/zenodo.11228093",
+    "header_columns": 814,
+    "sha256": "0b3c84321062efc7b5b4ef6a6954cc3340f22de61389418ad53e89e1c92719fe",
+    "smiles_column": "smiles"
+  },
+  "summary": {
+    "source_rows": 12276,
+    "unique_canonical_smiles": 12276,
+    "unique_source_smiles": 12276,
+    "valid_smiles": 12276
+  },
+  "task": "M0-09 AGILE virtual candidate SMILES extraction"
+}

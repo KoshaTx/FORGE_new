@@ -1,0 +1,49 @@
+{
+  "schema_version": "phase1_ugi3_second_wave_head_terminals.v1",
+  "snapshot": {
+    "accessed_utc": "2026-08-02T05:16:00Z",
+    "expires_utc": "2026-08-09T05:16:00Z",
+    "region": "US",
+    "retrieval_channel": "primary_supplier_product_page_rendered_by_web_index",
+    "direct_page_archival": "attempted_twice_but_upstream_http_transfer_failed",
+    "interpretation": "The admitted record is an exact extraction from the named primary supplier product page. It is current procurement evidence, not evidence of Ugi reaction success."
+  },
+  "records": [
+    {
+      "component_id": "ugi-component-d3963aa54a059bcab3b4",
+      "role": "amine_head",
+      "canonical_smiles": "CCCN",
+      "name": "Propylamine",
+      "cas": "107-10-8",
+      "inchi_key": "WGYKZJWCGVVSQN-UHFFFAOYSA-N",
+      "supplier": "Sigma-Aldrich",
+      "product_number": "240958",
+      "source_url": "https://www.sigmaaldrich.com/US/en/product/aldrich/240958",
+      "source_page_fields": "name, CAS, SMILES, InChIKey, assay, SKU, availability, price, add-to-cart state",
+      "assay": ">=99%",
+      "availability": "available_to_ship_today",
+      "available_skus": [
+        "240958-50ML"
+      ],
+      "disposition": "admit_exact_terminal"
+    }
+  ],
+  "abstentions": [
+    {
+      "component_id": "ugi-component-642c1e8985c43a1287ec",
+      "role": "amine_head",
+      "canonical_smiles": "NC1CCCCC1",
+      "name": "Cyclohexylamine",
+      "cas": "108-91-8",
+      "source_url": "https://www.sigmaaldrich.com/US/en/product/aldrich/240648",
+      "observed_availability_text": "Available to ship on July 22, 2026",
+      "reason": "The indexed availability date precedes the audit snapshot, so the record is identity-valid but not promoted as current procurement closure."
+    }
+  ],
+  "nonclaims": [
+    "Procurement evidence does not establish Ugi substrate compatibility or synthesis success.",
+    "No analogue, homologue or family evidence is promoted by this record.",
+    "The availability snapshot expires and must be refreshed before candidate lock.",
+    "The cyclohexylamine listing remains an explicit abstention pending a fresh item-level availability state."
+  ]
+}

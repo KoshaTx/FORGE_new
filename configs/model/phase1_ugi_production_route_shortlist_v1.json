@@ -1,0 +1,50 @@
+{
+  "schema_version": "phase1_ugi_production_route_shortlist_config.v1",
+  "status": "frozen_before_route_blinded_shortlist_selection",
+  "quotas": {
+    "exploitation": {
+      "aldehyde_only": 32,
+      "isocyanide_only": 24,
+      "aldehyde_isocyanide": 40
+    },
+    "exploration": {
+      "isocyanide_origin_branched": 16,
+      "aldehyde_origin_branched": 8,
+      "both_tail_origins_branched": 8
+    }
+  },
+  "selection": {
+    "method": "within_stratum_greedy_morgan_maxmin_with_frozen_potency_tradeoff",
+    "morgan_radius": 2,
+    "morgan_fp_size": 2048,
+    "exploitation_potency_weight": 0.25,
+    "exploration_potency_weight": 0.0,
+    "exclude_cross_arm_product_overlap_from_both_arms": true,
+    "exclude_refit_corpus_products_from_exploration": true
+  },
+  "scope": {
+    "route_outcomes_visible": false,
+    "matched_arm_quotas": true,
+    "potency_changes_generation": false,
+    "synthesis_changes_generation": false,
+    "prospective_panel_locked": false
+  },
+  "inputs": {
+    "generation_result": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/result.json",
+      "sha256": "b2781e9d50c07dbe2653ded9ed34b735a274739ee6b4a94076edf924955f4726"
+    },
+    "generation_ledger": {
+      "path": "results/phase1/ugi_constrained_stochastic_production_candidates_v2/terminal_ledger.jsonl.gz",
+      "sha256": "913ca35cc221785328ce41f9caebb981029d83114d45ba634b28aa5e6f000a2d"
+    },
+    "ranking_result": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/result.json",
+      "sha256": "83e8c1bfc54f255ee6e2252fd77af5cb2694f2bb602b57ecc5a603c786faadfe"
+    },
+    "ranking_ledger": {
+      "path": "results/phase1/ugi_production_full_support_rescoring_v3/terminal_rescoring.csv.gz",
+      "sha256": "de51ceb6d452a59f87f1210ce15c9700c562c4bf86105ac1446437e73f280240"
+    }
+  }
+}

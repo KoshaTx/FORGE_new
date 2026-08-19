@@ -1,0 +1,52 @@
+{
+  "schema_version": "m0_09_lnpdb_route_source_config.v1",
+  "role_fields": [
+    "IL_head_SMILES",
+    "IL_linker_SMILES",
+    "IL_tail1_SMILES",
+    "IL_tail2_SMILES"
+  ],
+  "inputs": {
+    "r0": {
+      "asset": "r0_observed_real_structures.csv",
+      "expected_sha256": "3e2a35416c98f44e2261c06717c1fdee1b5ea393fb8013a38235631aa5ee6c0d"
+    },
+    "lnpdb": {
+      "asset": "lnpdb_fc7c389.csv",
+      "expected_sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3",
+      "source_commit": "fc7c38933b445eb54985014f2b8917606462eec1",
+      "source_url": "https://raw.githubusercontent.com/evancollins1/LNPDB/fc7c38933b445eb54985014f2b8917606462eec1/data/LNPDB_for_LiON/LNPDB.csv"
+    },
+    "pubmed_snapshot": {
+      "asset": "lnpdb_pubmed_metadata_2026-07-28.json",
+      "expected_sha256": "f74af17337d24be96911fea12647aaa706bc80cfae73d3736fdf479c98c55631"
+    }
+  },
+  "publication_identity_overrides": [
+    {
+      "reported_pmid": "29786478",
+      "publication_link": "https://doi.org/10.1016/j.bioactmat.2024.05.012",
+      "resolved_pmid": "38779592",
+      "reason": "The reported PMID resolves to an unrelated stroke consensus statement. The LNPDB row DOI resolves to PMID 38779592 in PubMed.",
+      "evidence_url": "https://pubmed.ncbi.nlm.nih.gov/38779592/"
+    }
+  ],
+  "non_publication_sources": [
+    {
+      "source_id": "commercial:broadpharm_2024",
+      "source_kind": "commercial_catalog",
+      "reported_pmid": "NA",
+      "publication_link": "https://broadpharm.com/product-categories/lipid/ionizable-lipid",
+      "title": "BroadPharm ionizable lipid catalog"
+    }
+  ],
+  "known_local_sources": [
+    {
+      "pmid": "39060305",
+      "asset": "agile_supplementary_information.pdf",
+      "expected_sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+      "route_review_status": "partial_route_review",
+      "review_scope": "Supplementary Note 1, pages 1 through 7. Upstream tail routes only; exact component evidence remains to be encoded."
+    }
+  ]
+}
