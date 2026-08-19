@@ -119,7 +119,7 @@ verify-partial:
 verify-pins:
 	python3 scripts/verify_artifact_pins.py --expect-verified $(EXPECT_PINS)
 
-EXPECT_PINS ?= 508
+EXPECT_PINS ?= 739
 
 m0-03-r0-reconcile:
 	PYTHONPATH=src python3 scripts/m0_03_reconcile_r0.py

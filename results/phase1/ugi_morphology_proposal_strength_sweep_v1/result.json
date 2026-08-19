@@ -1,0 +1,1900 @@
+{
+  "abstention_decomposition": {
+    "broad_prior": {
+      "exact_novelty_failure": "exact_novelty_is_reported_but_is_not_a_support_gate",
+      "exclusive_category_probability": {
+        "aldehyde_only": 0.0019531249999999998,
+        "invalid_or_non_exact_l1": 0.03027343749999996,
+        "multiple_views": 0.9033203125000344,
+        "product_only": 0.025390624999999976,
+        "supported_all_views": 0.03906250000000001
+      },
+      "nonexclusive_metric_failure_probability": {
+        "aldehyde_descriptor": 0.7337239583333485,
+        "aldehyde_fingerprint": 0.7597656250000181,
+        "amine_descriptor": 0.5227864583333245,
+        "amine_fingerprint": 0.5009765624999887,
+        "isocyanide_descriptor": 0.3808593749999954,
+        "isocyanide_fingerprint": 0.41731770833332665,
+        "product_descriptor": 0.8782552083333649,
+        "product_fingerprint": 0.9264322916667037
+      },
+      "route_failure": "not_evaluated_in_this_read_only_experiment",
+      "uncertainty_failure": "not_part_of_the_frozen_target_free_support_definition"
+    },
+    "reference_proposal": {
+      "exact_novelty_failure": "exact_novelty_is_reported_but_is_not_a_support_gate",
+      "exclusive_category_probability": {
+        "aldehyde_only": 0.0036630347110374805,
+        "invalid_or_non_exact_l1": 0.03306095391051711,
+        "multiple_views": 0.8497411541056759,
+        "product_only": 0.03700538231718292,
+        "supported_all_views": 0.07652947495558429
+      },
+      "nonexclusive_metric_failure_probability": {
+        "aldehyde_descriptor": 0.7032898440167723,
+        "aldehyde_fingerprint": 0.7250312249882741,
+        "amine_descriptor": 0.4309595190254419,
+        "amine_fingerprint": 0.41109410762570786,
+        "isocyanide_descriptor": 0.2099199967445685,
+        "isocyanide_fingerprint": 0.23539693380633897,
+        "product_descriptor": 0.822773354617199,
+        "product_fingerprint": 0.8813606368940322
+      },
+      "route_failure": "not_evaluated_in_this_read_only_experiment",
+      "uncertainty_failure": "not_part_of_the_frozen_target_free_support_definition"
+    },
+    "selected_challenger": {
+      "exact_novelty_failure": "exact_novelty_is_reported_but_is_not_a_support_gate",
+      "exclusive_category_probability": {
+        "aldehyde_only": 0.003999391380606655,
+        "invalid_or_non_exact_l1": 0.034832473765064244,
+        "multiple_views": 0.8398978854276473,
+        "product_only": 0.03655716827820345,
+        "supported_all_views": 0.08471308114848278
+      },
+      "nonexclusive_metric_failure_probability": {
+        "aldehyde_descriptor": 0.6988155003326172,
+        "aldehyde_fingerprint": 0.7185552041773238,
+        "amine_descriptor": 0.42003938940081165,
+        "amine_fingerprint": 0.39633831757870175,
+        "isocyanide_descriptor": 0.20787599202339405,
+        "isocyanide_fingerprint": 0.23351548644250647,
+        "product_descriptor": 0.8151806485554568,
+        "product_fingerprint": 0.8700873158258784
+      },
+      "route_failure": "not_evaluated_in_this_read_only_experiment",
+      "uncertainty_failure": "not_part_of_the_frozen_target_free_support_definition"
+    }
+  },
+  "artifacts": {
+    "sweep_ledger.csv.gz": {
+      "records": 16,
+      "schema_version": "phase1_ugi_morphology_proposal_strength_sweep_ledger.v1",
+      "sha256": "563e20c3244ca66bf83cf0615d23550291a35a9f62559265fbed545c5080b2b7"
+    }
+  },
+  "broad_reference": {
+    "confirmation": {
+      "expected_support_rate": 0.03906249999999999,
+      "expected_valid_exact_l1_rate": 0.9697265625000007,
+      "supported_component_effective_counts": {
+        "aldehyde": 28.34645669291339,
+        "amine": 8.035714285714286,
+        "isocyanide": 7.692307692307692
+      },
+      "supported_smiles_effective_count": 112.49999999999997,
+      "valid_component_effective_counts": {
+        "aldehyde": 72.66567589476529,
+        "amine": 77.40665695569881,
+        "isocyanide": 20.740151021180818
+      },
+      "valid_novelty_pattern_probability": {
+        "aldehyde": 0.0869419268210816,
+        "aldehyde+isocyanide": 0.16146357838200914,
+        "amine": 0.005706612957368298,
+        "amine+aldehyde": 0.19570325612621992,
+        "amine+aldehyde+isocyanide": 0.5236656596173155,
+        "amine+isocyanide": 0.013763007720711788,
+        "isocyanide": 0.007049345417925544,
+        "none": 0.005706612957368298
+      },
+      "valid_smiles_effective_count": 2874.778425655976
+    },
+    "full_support": {
+      "effective_program_count": 5339.856860390926,
+      "importance_ess_fraction": 1.0000000000000002,
+      "maximum_importance_ratio": 1.0,
+      "maximum_program_probability": 0.0010375703621389365,
+      "minimum_importance_ratio": 1.0,
+      "role_marginals": {
+        "aldehyde": {
+          "effective_state_count": 13.341096322729905,
+          "maximum_state_probability": 0.14014510968288957,
+          "shannon_effective_state_count": 15.37392709593417,
+          "states": 19
+        },
+        "amine": {
+          "effective_state_count": 23.211774040441398,
+          "maximum_state_probability": 0.101580301155115,
+          "shannon_effective_state_count": 36.338624507861475,
+          "states": 86
+        },
+        "isocyanide": {
+          "effective_state_count": 17.24367232634948,
+          "maximum_state_probability": 0.07288365000458824,
+          "shannon_effective_state_count": 20.959807549135714,
+          "states": 35
+        }
+      },
+      "shannon_effective_program_count": 11709.560432383134
+    }
+  },
+  "candidates": [
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.25_power-0.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.010543547258374954,
+            0.01596169000479144
+          ],
+          "relative_improvement_ci95": [
+            0.30198349428094967,
+            0.376682584380043
+          ],
+          "support_rate_ci95": [
+            0.04249190780995791,
+            0.06242059313598629
+          ]
+        },
+        "expected_support_rate": 0.0522857942507966,
+        "expected_valid_exact_l1_rate": 0.9692500399316539,
+        "relative_support_improvement_over_broad": 0.3385163328203933,
+        "relative_support_improvement_over_reference": -0.3167888022080132,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.31375836954298,
+          "amine": 7.469330235320674,
+          "isocyanide": 7.685380810664304
+        },
+        "supported_smiles_effective_count": 110.3318381007267,
+        "valid_component_effective_counts": {
+          "aldehyde": 72.23286085122167,
+          "amine": 62.075484758147525,
+          "isocyanide": 17.389364806525688
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.11104841091677793,
+          "aldehyde+isocyanide": 0.1683852267698079,
+          "amine": 0.006586849348565626,
+          "amine+aldehyde": 0.21274152561803464,
+          "amine+aldehyde+isocyanide": 0.47083529128582097,
+          "amine+isocyanide": 0.01406436782603743,
+          "isocyanide": 0.008764410739486788,
+          "none": 0.007573917495468714
+        },
+        "valid_smiles_effective_count": 2659.4285209288214
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 4236.436970192358,
+        "importance_ess_fraction": 0.9405311374591708,
+        "maximum_importance_ratio": 1.329982182100129,
+        "maximum_program_probability": 0.0014913004641922325,
+        "minimum_importance_ratio": 0.5555772017054915,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.279397707092178,
+            "maximum_state_probability": 0.14260726207317545,
+            "shannon_effective_state_count": 15.333461142885481,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 20.566677949956098,
+            "maximum_state_probability": 0.11518714610850866,
+            "shannon_effective_state_count": 33.02428395185757,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 15.964696847134112,
+            "maximum_state_probability": 0.08507651669073499,
+            "shannon_effective_state_count": 19.77854493856268,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 9971.292791851942
+      },
+      "mixture_rho": 0.25,
+      "score_power": 0.5
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.25_power-1.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.01445189971848488,
+            0.02320683455205535
+          ],
+          "relative_improvement_ci95": [
+            0.4032727788964204,
+            0.5603253456213185
+          ],
+          "support_rate_ci95": [
+            0.046769719559105166,
+            0.06912292484123597
+          ]
+        },
+        "expected_support_rate": 0.05779598747779214,
+        "expected_valid_exact_l1_rate": 0.9683328042947416,
+        "relative_support_improvement_over_broad": 0.479577279431479,
+        "relative_support_improvement_over_reference": -0.24478787406635916,
+        "supported_component_effective_counts": {
+          "aldehyde": 30.0143355951498,
+          "amine": 6.9063738260717376,
+          "isocyanide": 7.6814947629366
+        },
+        "supported_smiles_effective_count": 104.32603968996267,
+        "valid_component_effective_counts": {
+          "aldehyde": 73.28151343226646,
+          "amine": 56.66922573717554,
+          "isocyanide": 17.068139677997536
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.11787620584264319,
+          "aldehyde+isocyanide": 0.17342031338283304,
+          "amine": 0.006772892343442104,
+          "amine+aldehyde": 0.20936473007114131,
+          "amine+aldehyde+isocyanide": 0.46074254535053893,
+          "amine+isocyanide": 0.014153319503295835,
+          "isocyanide": 0.00950161958564792,
+          "none": 0.008168373920457718
+        },
+        "valid_smiles_effective_count": 2516.6480011535496
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 3789.051428175636,
+        "importance_ess_fraction": 0.9102505884125807,
+        "maximum_importance_ratio": 1.3333212404951664,
+        "maximum_program_probability": 0.0017155118925218952,
+        "minimum_importance_ratio": 0.3509146645888321,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.337084416308457,
+            "maximum_state_probability": 0.14147442842552724,
+            "shannon_effective_state_count": 15.329385022542695,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 19.197626182939775,
+            "maximum_state_probability": 0.12499859952495913,
+            "shannon_effective_state_count": 31.819359653769915,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 15.743678549873868,
+            "maximum_state_probability": 0.08742912332245674,
+            "shannon_effective_state_count": 19.54354776571625,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 9412.273609599473
+      },
+      "mixture_rho": 0.25,
+      "score_power": 1.0
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.25_power-1.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.01694475451985414,
+            0.02903140605744796
+          ],
+          "relative_improvement_ci95": [
+            0.46623665531749453,
+            0.7103530363801039
+          ],
+          "support_rate_ci95": [
+            0.04980076515036989,
+            0.07426031134037867
+          ]
+        },
+        "expected_support_rate": 0.0618877905742414,
+        "expected_valid_exact_l1_rate": 0.9674470443674679,
+        "relative_support_improvement_over_broad": 0.5843274387005801,
+        "relative_support_improvement_over_reference": -0.19132085238844954,
+        "supported_component_effective_counts": {
+          "aldehyde": 30.29354439926345,
+          "amine": 6.493791602212637,
+          "isocyanide": 7.675393122288069
+        },
+        "supported_smiles_effective_count": 96.12009320763951,
+        "valid_component_effective_counts": {
+          "aldehyde": 74.70030739588752,
+          "amine": 53.146791819842214,
+          "isocyanide": 17.04181557914024
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.12168673682516816,
+          "aldehyde+isocyanide": 0.17759142652436719,
+          "amine": 0.006879439621951893,
+          "amine+aldehyde": 0.2052291268058505,
+          "amine+aldehyde+isocyanide": 0.4559143729826111,
+          "amine+isocyanide": 0.014189852196366926,
+          "isocyanide": 0.010112167916653113,
+          "none": 0.008396877127031112
+        },
+        "valid_smiles_effective_count": 2359.2938869670816
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 3498.681332820125,
+        "importance_ess_fraction": 0.888405074792384,
+        "maximum_importance_ratio": 1.3333332962165538,
+        "maximum_program_probability": 0.0018284214008189577,
+        "minimum_importance_ratio": 0.2309195045321785,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.437415968144633,
+            "maximum_state_probability": 0.13893405086877844,
+            "shannon_effective_state_count": 15.345067342779956,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 18.23640511402448,
+            "maximum_state_probability": 0.1324621698266489,
+            "shannon_effective_state_count": 31.023005395770696,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 15.694242394995385,
+            "maximum_state_probability": 0.08871748087931747,
+            "shannon_effective_state_count": 19.487689364931242,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 9065.951662345678
+      },
+      "mixture_rho": 0.25,
+      "score_power": 1.5
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.25_power-2.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.018694994332182763,
+            0.03434310437059658
+          ],
+          "relative_improvement_ci95": [
+            0.5102597793196296,
+            0.846593272736042
+          ],
+          "support_rate_ci95": [
+            0.05197148320523324,
+            0.07903730350271626
+          ]
+        },
+        "expected_support_rate": 0.06530613648245692,
+        "expected_valid_exact_l1_rate": 0.9667254919455116,
+        "relative_support_improvement_over_broad": 0.6718370939508975,
+        "relative_support_improvement_over_reference": -0.14665380207614254,
+        "supported_component_effective_counts": {
+          "aldehyde": 30.060322970549052,
+          "amine": 6.217585928503959,
+          "isocyanide": 7.655625924590774
+        },
+        "supported_smiles_effective_count": 86.39960151465515,
+        "valid_component_effective_counts": {
+          "aldehyde": 76.12741930843593,
+          "amine": 50.690618779483266,
+          "isocyanide": 17.047082420568522
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.12447990509041429,
+          "aldehyde+isocyanide": 0.18091330535094946,
+          "amine": 0.006931569115796504,
+          "amine+aldehyde": 0.20176522334394958,
+          "amine+aldehyde+isocyanide": 0.45268304123552294,
+          "amine+isocyanide": 0.014177452074379305,
+          "isocyanide": 0.010658890346928736,
+          "none": 0.008390613442059155
+        },
+        "valid_smiles_effective_count": 2171.6053277738315
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 3265.1142318126676,
+        "importance_ess_fraction": 0.8699242288320015,
+        "maximum_importance_ratio": 1.3333333332290653,
+        "maximum_program_probability": 0.0018550817215914057,
+        "minimum_importance_ratio": 0.1577715094233709,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.546057516014448,
+            "maximum_state_probability": 0.1354997591878446,
+            "shannon_effective_state_count": 15.363426469055813,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 17.561347876242536,
+            "maximum_state_probability": 0.1380079484198702,
+            "shannon_effective_state_count": 30.435062149532257,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 15.668526405877198,
+            "maximum_state_probability": 0.0898570018304889,
+            "shannon_effective_state_count": 19.460095911176726,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 8782.80795509325
+      },
+      "mixture_rho": 0.25,
+      "score_power": 2.0
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.50_power-0.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.02116270649153057,
+            0.03184473185501067
+          ],
+          "relative_improvement_ci95": [
+            0.6020700761157197,
+            0.7562422702974327
+          ],
+          "support_rate_ci95": [
+            0.05331660727061735,
+            0.07809576382972411
+          ]
+        },
+        "expected_support_rate": 0.0655090885015932,
+        "expected_valid_exact_l1_rate": 0.9687735173633079,
+        "relative_support_improvement_over_broad": 0.6770326656407863,
+        "relative_support_improvement_over_reference": -0.1440018562833083,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.674573437934438,
+          "amine": 7.092331424214909,
+          "isocyanide": 7.673692527208852
+        },
+        "supported_smiles_effective_count": 107.16444479457934,
+        "valid_component_effective_counts": {
+          "aldehyde": 70.4733521581306,
+          "amine": 49.75061738422706,
+          "isocyanide": 14.383906905533435
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.13517861011927593,
+          "aldehyde+isocyanide": 0.17531368443058604,
+          "amine": 0.007467951685205075,
+          "amine+aldehyde": 0.22979655675701258,
+          "amine+aldehyde+isocyanide": 0.41795295030570445,
+          "amine+isocyanide": 0.014366024398780621,
+          "isocyanide": 0.010481163281677591,
+          "none": 0.009443059021757698
+        },
+        "valid_smiles_effective_count": 2214.1178282066153
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 3151.8950443459626,
+        "importance_ess_fraction": 0.7799100396743065,
+        "maximum_importance_ratio": 1.9849952442591368,
+        "maximum_program_probability": 0.0019468060881626169,
+        "minimum_importance_ratio": 0.38463613449018197,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.08110517966682,
+            "maximum_state_probability": 0.14506941446346153,
+            "shannon_effective_state_count": 15.176394901672882,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 18.13100503175553,
+            "maximum_state_probability": 0.12879399106190254,
+            "shannon_effective_state_count": 29.560211780886988,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 14.047151167310112,
+            "maximum_state_probability": 0.09739410409241323,
+            "shannon_effective_state_count": 17.94437120139147,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 7962.833239358121
+      },
+      "mixture_rho": 0.5,
+      "score_power": 0.5
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.50_power-1.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.029054386481403148,
+            0.04623373797007347
+          ],
+          "relative_improvement_ci95": [
+            0.8069254824907125,
+            1.1221194678201956
+          ],
+          "support_rate_ci95": [
+            0.061662070653210756,
+            0.09168612027026135
+          ]
+        },
+        "expected_support_rate": 0.07652947495558429,
+        "expected_valid_exact_l1_rate": 0.9669390460894829,
+        "relative_support_improvement_over_broad": 0.9591545588629582,
+        "relative_support_improvement_over_reference": 0.0,
+        "supported_component_effective_counts": {
+          "aldehyde": 30.064205418559414,
+          "amine": 6.268336116375674,
+          "isocyanide": 7.6492366335456445
+        },
+        "supported_smiles_effective_count": 95.39976114145449,
+        "valid_component_effective_counts": {
+          "aldehyde": 71.73510152741162,
+          "amine": 41.26719885708457,
+          "isocyanide": 13.850692647266218
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.14889966298848176,
+          "aldehyde+isocyanide": 0.18541151756262653,
+          "amine": 0.00784224562677854,
+          "amine+aldehyde": 0.22306558765970594,
+          "amine+aldehyde+isocyanide": 0.3976380347337719,
+          "amine+isocyanide": 0.014544756486587894,
+          "isocyanide": 0.011960963231548152,
+          "none": 0.010637231710499327
+        },
+        "valid_smiles_effective_count": 1862.011764435344
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 2460.9409638672973,
+        "importance_ess_fraction": 0.7084975109894138,
+        "maximum_importance_ratio": 1.9999455832153281,
+        "maximum_program_probability": 0.002395228944821942,
+        "minimum_importance_ratio": 0.212793514716046,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.0448938867915,
+            "maximum_state_probability": 0.14280374716816516,
+            "shannon_effective_state_count": 15.037367569024212,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 15.61763614514846,
+            "maximum_state_probability": 0.14841689789480333,
+            "shannon_effective_state_count": 26.96852868426288,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 13.560363103296062,
+            "maximum_state_probability": 0.10209931735585703,
+            "shannon_effective_state_count": 17.364336422208638,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 6835.62461815405
+      },
+      "mixture_rho": 0.5,
+      "score_power": 1.0
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.50_power-1.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.03412882241622656,
+            0.057707259763858994
+          ],
+          "relative_improvement_ci95": [
+            0.9363627931733061,
+            1.4209784609390503
+          ],
+          "support_rate_ci95": [
+            0.06734107670839141,
+            0.10248785459694627
+          ]
+        },
+        "expected_support_rate": 0.0847130811484828,
+        "expected_valid_exact_l1_rate": 0.9651675262349357,
+        "relative_support_improvement_over_broad": 1.1686548774011603,
+        "relative_support_improvement_over_reference": 0.10693404335581902,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.580583815765298,
+          "amine": 5.730838752687579,
+          "isocyanide": 7.611527347704602
+        },
+        "supported_smiles_effective_count": 82.34479367867308,
+        "valid_component_effective_counts": {
+          "aldehyde": 73.48400647905993,
+          "amine": 36.20740066292765,
+          "isocyanide": 13.799129489485857
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.15659566636760036,
+          "aldehyde+isocyanide": 0.19379545568459147,
+          "amine": 0.008057806215253743,
+          "amine+aldehyde": 0.21479999360139582,
+          "amine+aldehyde+isocyanide": 0.3878430584103917,
+          "amine+isocyanide": 0.014618712901734821,
+          "isocyanide": 0.013189457871512036,
+          "none": 0.011099848947520086
+        },
+        "valid_smiles_effective_count": 1549.9936161904016
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 2056.3529010662064,
+        "importance_ess_fraction": 0.6711918907556753,
+        "maximum_importance_ratio": 1.9999998329745001,
+        "maximum_program_probability": 0.002621047961416067,
+        "minimum_importance_ratio": 0.13053080689305402,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 13.015546093038338,
+            "maximum_state_probability": 0.13772299205466768,
+            "shannon_effective_state_count": 14.893676211252469,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 13.960554337674314,
+            "maximum_state_probability": 0.16334403849818294,
+            "shannon_effective_state_count": 25.213669563245237,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 13.460193469811578,
+            "maximum_state_probability": 0.10467603246957818,
+            "shannon_effective_state_count": 17.240146547676247,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 6156.090355106657
+      },
+      "mixture_rho": 0.5,
+      "score_power": 1.5
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.50_power-2.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.03768976943804506,
+            0.06812006734952825
+          ],
+          "relative_improvement_ci95": [
+            1.0274933942950584,
+            1.6912556748621872
+          ],
+          "support_rate_ci95": [
+            0.0715511836811139,
+            0.11207211944265079
+          ]
+        },
+        "expected_support_rate": 0.09154977296491384,
+        "expected_valid_exact_l1_rate": 0.9637244213910231,
+        "relative_support_improvement_over_broad": 1.343674187901795,
+        "relative_support_improvement_over_reference": 0.19626814398043302,
+        "supported_component_effective_counts": {
+          "aldehyde": 28.271872809335928,
+          "amine": 5.405239960555741,
+          "isocyanide": 7.543399454174578
+        },
+        "supported_smiles_effective_count": 69.44332148204265,
+        "valid_component_effective_counts": {
+          "aldehyde": 74.71783210806129,
+          "amine": 32.94949277801306,
+          "isocyanide": 13.796036809942896
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.16225167243629027,
+          "aldehyde+isocyanide": 0.2004841665395998,
+          "amine": 0.00816415438432307,
+          "amine+aldehyde": 0.20786494490496885,
+          "amine+aldehyde+isocyanide": 0.3812583382885146,
+          "amine+isocyanide": 0.014594477615611957,
+          "isocyanide": 0.014290915766746815,
+          "none": 0.011091330063944606
+        },
+        "valid_smiles_effective_count": 1258.0898546625563
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1757.6024091215718,
+        "importance_ess_fraction": 0.6425147534718336,
+        "maximum_importance_ratio": 1.9999999995307929,
+        "maximum_program_probability": 0.002674368602960963,
+        "minimum_importance_ratio": 0.08564166184075647,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.907413946848003,
+            "maximum_state_probability": 0.13085440869280063,
+            "shannon_effective_state_count": 14.7116805834449,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 12.876548179137,
+            "maximum_state_probability": 0.17443559568462544,
+            "shannon_effective_state_count": 23.93783982487412,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 13.407676437538592,
+            "maximum_state_probability": 0.10695507437192156,
+            "shannon_effective_state_count": 17.181705029188368,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 5621.070456431929
+      },
+      "mixture_rho": 0.5,
+      "score_power": 2.0
+    },
+    {
+      "all_floors_pass": true,
+      "candidate_id": "rho-0.75_power-0.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.031800835409687166,
+            0.047697532190426974
+          ],
+          "relative_improvement_ci95": [
+            0.9005351129091003,
+            1.1389417497644894
+          ],
+          "support_rate_ci95": [
+            0.06396537302506332,
+            0.09378531568984094
+          ]
+        },
+        "expected_support_rate": 0.0787323827523898,
+        "expected_valid_exact_l1_rate": 0.9682969947949618,
+        "relative_support_improvement_over_broad": 1.0155489984611794,
+        "relative_support_improvement_over_reference": 0.02878508964139659,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.816261758607993,
+          "amine": 6.833476288856829,
+          "isocyanide": 7.662838213118465
+        },
+        "supported_smiles_effective_count": 104.41744136421084,
+        "valid_component_effective_counts": {
+          "aldehyde": 67.57043911315574,
+          "amine": 40.17089312023767,
+          "isocyanide": 11.866496206110003
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.15933255944092226,
+          "aldehyde+isocyanide": 0.18224896141737099,
+          "amine": 0.00834992124574524,
+          "amine+aldehyde": 0.24686837428959796,
+          "amine+aldehyde+isocyanide": 0.36501855994594523,
+          "amine+isocyanide": 0.01466797787663782,
+          "isocyanide": 0.0121996055354652,
+          "none": 0.011314040248315307
+        },
+        "valid_smiles_effective_count": 1739.5159719267524
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": true,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 2320.5246348715696,
+        "importance_ess_fraction": 0.5192292539609239,
+        "maximum_importance_ratio": 3.911302352096402,
+        "maximum_program_probability": 0.0024023117121330013,
+        "minimum_importance_ratio": 0.29413584821797184,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.758207190644923,
+            "maximum_state_probability": 0.14753156685374813,
+            "shannon_effective_state_count": 14.877648484536683,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 15.954819236245191,
+            "maximum_state_probability": 0.14240083601529632,
+            "shannon_effective_state_count": 25.983823495064904,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 11.955416022331086,
+            "maximum_state_probability": 0.10971169149409143,
+            "shannon_effective_state_count": 15.483765314551091,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 5914.931546131612
+      },
+      "mixture_rho": 0.75,
+      "score_power": 0.5
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.75_power-1.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.04365502339237452,
+            0.06920855066893992
+          ],
+          "relative_improvement_ci95": [
+            1.2077111058772763,
+            1.690276841788679
+          ],
+          "support_rate_ci95": [
+            0.07640531706874729,
+            0.11428008922823894
+          ]
+        },
+        "expected_support_rate": 0.09526296243337642,
+        "expected_valid_exact_l1_rate": 0.9655452878842243,
+        "relative_support_improvement_over_broad": 1.4387318382944367,
+        "relative_support_improvement_over_reference": 0.24478787406635893,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.815121684974006,
+          "amine": 5.885571988071497,
+          "isocyanide": 7.6210706256289065
+        },
+        "supported_smiles_effective_count": 89.24843070595502,
+        "valid_component_effective_counts": {
+          "aldehyde": 68.2700092434165,
+          "amine": 30.587576595652962,
+          "isocyanide": 11.226725484444398
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.18001268444268595,
+          "aldehyde+isocyanide": 0.19743734018948075,
+          "amine": 0.008914686118828388,
+          "amine+aldehyde": 0.2368059994419949,
+          "amine+aldehyde+isocyanide": 0.33435134223374163,
+          "amine+isocyanide": 0.014937323543247116,
+          "isocyanide": 0.01442740696986049,
+          "none": 0.013113217060160696
+        },
+        "valid_smiles_effective_count": 1302.5364567580455
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1627.1752593740905,
+        "importance_ess_fraction": 0.41900395058320083,
+        "maximum_importance_ratio": 3.9996735170581195,
+        "maximum_program_probability": 0.0030749459971219895,
+        "minimum_importance_ratio": 0.1526930393134236,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.50083117699312,
+            "maximum_state_probability": 0.1441330659108026,
+            "shannon_effective_state_count": 14.477289377366048,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 12.673822513571722,
+            "maximum_state_probability": 0.1718351962646474,
+            "shannon_effective_state_count": 22.01895021332358,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 11.277436987119565,
+            "maximum_state_probability": 0.11676951138925705,
+            "shannon_effective_state_count": 14.472586567715112,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 4464.069061318639
+      },
+      "mixture_rho": 0.75,
+      "score_power": 1.0
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.75_power-1.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.0514907152334698,
+            0.08634727680786336
+          ],
+          "relative_improvement_ci95": [
+            1.4074426117196333,
+            2.1339210755390394
+          ],
+          "support_rate_ci95": [
+            0.08509584031897435,
+            0.13051439805282777
+          ]
+        },
+        "expected_support_rate": 0.10753837172272421,
+        "expected_valid_exact_l1_rate": 0.9628880081024035,
+        "relative_support_improvement_over_broad": 1.7529823161017402,
+        "relative_support_improvement_over_reference": 0.4051889391000876,
+        "supported_component_effective_counts": {
+          "aldehyde": 28.743331474321685,
+          "amine": 5.311791404383097,
+          "isocyanide": 7.559504039550557
+        },
+        "supported_smiles_effective_count": 74.38376391390851,
+        "valid_component_effective_counts": {
+          "aldehyde": 69.27662939485968,
+          "amine": 25.401039947211466,
+          "isocyanide": 11.156974298981174
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.19166988104643418,
+          "aldehyde+isocyanide": 0.21007620691006104,
+          "amine": 0.009241752082559621,
+          "amine+aldehyde": 0.2244161760810515,
+          "amine+aldehyde+isocyanide": 0.3194494430211158,
+          "amine+isocyanide": 0.015049604156337902,
+          "isocyanide": 0.016281318032235245,
+          "none": 0.013815618670204697
+        },
+        "valid_smiles_effective_count": 986.347287278253
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": false,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1267.911504496758,
+        "importance_ess_fraction": 0.3853103228456521,
+        "maximum_importance_ratio": 3.9999989978471673,
+        "maximum_program_probability": 0.0034136745220131764,
+        "minimum_importance_ratio": 0.09097906135853683,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.166524278434292,
+            "maximum_state_probability": 0.1365119332405578,
+            "shannon_effective_state_count": 14.036559278400825,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 10.699002389790978,
+            "maximum_state_probability": 0.19422590716971688,
+            "shannon_effective_state_count": 19.38725648872038,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 11.145936526998435,
+            "maximum_state_probability": 0.12063458405983912,
+            "shannon_effective_state_count": 14.276288052618684,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 3683.042821200931
+      },
+      "mixture_rho": 0.75,
+      "score_power": 1.5
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.75_power-2.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.056931733096859095,
+            0.1015666255090353
+          ],
+          "relative_improvement_ci95": [
+            1.5446323525437744,
+            2.5392840560640155
+          ],
+          "support_rate_ci95": [
+            0.09139517464276949,
+            0.14516713046149612
+          ]
+        },
+        "expected_support_rate": 0.11779340944737077,
+        "expected_valid_exact_l1_rate": 0.9607233508365346,
+        "relative_support_improvement_over_broad": 2.0155112818526923,
+        "relative_support_improvement_over_reference": 0.5391900900370084,
+        "supported_component_effective_counts": {
+          "aldehyde": 26.808847004666273,
+          "amine": 4.984181862096267,
+          "isocyanide": 7.458456256198479
+        },
+        "supported_smiles_effective_count": 60.97504400615403,
+        "valid_component_effective_counts": {
+          "aldehyde": 68.8632459252908,
+          "amine": 22.293629978266583,
+          "isocyanide": 11.142182993950229
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.2002594197626133,
+          "aldehyde+isocyanide": 0.22017729713117057,
+          "amine": 0.009404440257507677,
+          "amine+aldehyde": 0.21400277461595962,
+          "amine+aldehyde+isocyanide": 0.3093874078761474,
+          "amine+isocyanide": 0.015014108533452081,
+          "isocyanide": 0.017945632348450525,
+          "none": 0.013808919474698783
+        },
+        "valid_smiles_effective_count": 737.9477650296882
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": false,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1025.2860016015031,
+        "importance_ess_fraction": 0.3611030163064408,
+        "maximum_importance_ratio": 3.999999997184756,
+        "maximum_program_probability": 0.003708717015261093,
+        "minimum_importance_ratio": 0.05877222489726445,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 11.639510423776121,
+            "maximum_state_probability": 0.12620905819775632,
+            "shannon_effective_state_count": 13.503299977720504,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 9.502671446179917,
+            "maximum_state_probability": 0.2108632429493806,
+            "shannon_effective_state_count": 17.532671761639996,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 11.076887183736401,
+            "maximum_state_probability": 0.1240531469133543,
+            "shannon_effective_state_count": 14.191671106591278,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 3115.176401139608
+      },
+      "mixture_rho": 0.75,
+      "score_power": 2.0
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.90_power-0.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.03821110485461488,
+            0.05721765420365225
+          ],
+          "relative_improvement_ci95": [
+            1.0779938119840082,
+            1.3721849090587472
+          ],
+          "support_rate_ci95": [
+            0.07046057540786149,
+            0.10321699849376675
+          ]
+        },
+        "expected_support_rate": 0.08666635930286777,
+        "expected_valid_exact_l1_rate": 0.9680110812539543,
+        "relative_support_improvement_over_broad": 1.2186587981534154,
+        "relative_support_improvement_over_reference": 0.1324572571962197,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.853904573022312,
+          "amine": 6.7149025487654965,
+          "isocyanide": 7.657108447617058
+        },
+        "supported_smiles_effective_count": 103.02840125461225,
+        "valid_component_effective_counts": {
+          "aldehyde": 65.39296730258162,
+          "amine": 35.51654195625692,
+          "isocyanide": 10.58925980782592
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.17383634368204975,
+          "aldehyde+isocyanide": 0.18641340507539617,
+          "amine": 0.008879519782322967,
+          "amine+aldehyde": 0.2571195325908455,
+          "amine+aldehyde+isocyanide": 0.3332329100511878,
+          "amine+isocyanide": 0.014849292660211287,
+          "isocyanide": 0.013231482987383013,
+          "none": 0.012437513170603527
+        },
+        "valid_smiles_effective_count": 1488.729436359975
+      },
+      "floor_checks": {
+        "effective_program_count": true,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": true,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": true,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1942.8361312510885,
+        "importance_ess_fraction": 0.2974607836046687,
+        "maximum_importance_ratio": 9.363017083928188,
+        "maximum_program_probability": 0.0026756150865152317,
+        "minimum_importance_ratio": 0.2577487304233389,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.512113317576931,
+            "maximum_state_probability": 0.14900885828791927,
+            "shannon_effective_state_count": 14.606161095132167,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 14.778384022344586,
+            "maximum_state_probability": 0.1505649429873324,
+            "shannon_effective_state_count": 23.769067449967153,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 10.75366882006275,
+            "maximum_state_probability": 0.11710224393509838,
+            "shannon_effective_state_count": 13.67382578248739,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 4716.0403586822695
+      },
+      "mixture_rho": 0.9,
+      "score_power": 0.5
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.90_power-1.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.052510030400985085,
+            0.08283258932354332
+          ],
+          "relative_improvement_ci95": [
+            1.4463773654474246,
+            2.035026915555725
+          ],
+          "support_rate_ci95": [
+            0.08541685983058483,
+            0.12777265611994304
+          ]
+        },
+        "expected_support_rate": 0.10650305492005172,
+        "expected_valid_exact_l1_rate": 0.9647090329610691,
+        "relative_support_improvement_over_broad": 1.7264782059533244,
+        "relative_support_improvement_over_reference": 0.3916605985061743,
+        "supported_component_effective_counts": {
+          "aldehyde": 29.645098703657446,
+          "amine": 5.72363695696771,
+          "isocyanide": 7.606967083658462
+        },
+        "supported_smiles_effective_count": 86.52227820579945,
+        "valid_component_effective_counts": {
+          "aldehyde": 65.47864312065752,
+          "amine": 25.85584235508898,
+          "isocyanide": 9.922926444916905
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.19872364967137274,
+          "aldehyde+isocyanide": 0.20466951303867228,
+          "amine": 0.009559637840605598,
+          "amine+aldehyde": 0.24506930384220124,
+          "amine+aldehyde+isocyanide": 0.2962915509482951,
+          "amine+isocyanide": 0.015173408250027876,
+          "isocyanide": 0.01591069405896567,
+          "none": 0.014602242349859478
+        },
+        "valid_smiles_effective_count": 1052.4785175826764
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": false,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 1296.9062316244676,
+        "importance_ess_fraction": 0.19512552949078021,
+        "maximum_importance_ratio": 9.997551777587326,
+        "maximum_program_probability": 0.0034827762285020176,
+        "minimum_importance_ratio": 0.13056697753344454,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 12.078492328408288,
+            "maximum_state_probability": 0.14493065715638578,
+            "shannon_effective_state_count": 13.976885318838415,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 11.206512624639338,
+            "maximum_state_probability": 0.18588617528655407,
+            "shannon_effective_state_count": 19.02981015884329,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 10.01137983564707,
+            "maximum_state_probability": 0.12557162780929745,
+            "shannon_effective_state_count": 12.341579715929472,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 3215.1376390111536
+      },
+      "mixture_rho": 0.9,
+      "score_power": 1.0
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.90_power-1.50",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.06195481871806117,
+            0.10339580732049809
+          ],
+          "relative_improvement_ci95": [
+            1.6835259696951554,
+            2.566175058452328
+          ],
+          "support_rate_ci95": [
+            0.0958696128149497,
+            0.14740776487227952
+          ]
+        },
+        "expected_support_rate": 0.12123354606726906,
+        "expected_valid_exact_l1_rate": 0.9615202972228843,
+        "relative_support_improvement_over_broad": 2.1035787793220884,
+        "relative_support_improvement_over_reference": 0.5841418765466488,
+        "supported_component_effective_counts": {
+          "aldehyde": 28.31414392753471,
+          "amine": 5.142459903239513,
+          "isocyanide": 7.534509130283191
+        },
+        "supported_smiles_effective_count": 71.15656604428708,
+        "valid_component_effective_counts": {
+          "aldehyde": 65.68273297986097,
+          "amine": 20.898548466565032,
+          "isocyanide": 9.845848058579923
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.21279423574636747,
+          "aldehyde+isocyanide": 0.21988171123331954,
+          "amine": 0.009954814161796503,
+          "amine+aldehyde": 0.23020777117219188,
+          "amine+aldehyde+isocyanide": 0.2782576158077821,
+          "amine+isocyanide": 0.015309119580494433,
+          "isocyanide": 0.01814347093617825,
+          "none": 0.015451261361869875
+        },
+        "valid_smiles_effective_count": 765.3128298667534
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": false,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": true
+      },
+      "full_support": {
+        "effective_program_count": 981.29365982253,
+        "importance_ess_fraction": 0.17412094851015308,
+        "maximum_importance_ratio": 9.999992483857522,
+        "maximum_program_probability": 0.003889250458371442,
+        "minimum_importance_ratio": 0.07698319425777303,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 11.517368430602541,
+            "maximum_state_probability": 0.13578529795209096,
+            "shannon_effective_state_count": 13.306080781187829,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 9.175304172310605,
+            "maximum_state_probability": 0.21275502837263705,
+            "shannon_effective_state_count": 15.982994931580311,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 9.871447575072054,
+            "maximum_state_probability": 0.1302097150139957,
+            "shannon_effective_state_count": 12.096768106383946,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 2488.768052669899
+      },
+      "mixture_rho": 0.9,
+      "score_power": 1.5
+    },
+    {
+      "all_floors_pass": false,
+      "candidate_id": "rho-0.90_power-2.00",
+      "confirmation": {
+        "clustered_bootstrap": {
+          "absolute_improvement_ci95": [
+            0.06869882539258676,
+            0.1216124702621966
+          ],
+          "relative_improvement_ci95": [
+            1.8555827488028658,
+            3.052534058980618
+          ],
+          "support_rate_ci95": [
+            0.10321513187735444,
+            0.16481613783625132
+          ]
+        },
+        "expected_support_rate": 0.1335395913368449,
+        "expected_valid_exact_l1_rate": 0.9589227085038416,
+        "relative_support_improvement_over_broad": 2.41861353822323,
+        "relative_support_improvement_over_reference": 0.7449432576709534,
+        "supported_component_effective_counts": {
+          "aldehyde": 26.141590993800065,
+          "amine": 4.818698790318786,
+          "isocyanide": 7.419137541314058
+        },
+        "supported_smiles_effective_count": 57.76183244212793,
+        "valid_component_effective_counts": {
+          "aldehyde": 63.945107562197315,
+          "amine": 18.032859008036855,
+          "isocyanide": 9.824544869335812
+        },
+        "valid_novelty_pattern_probability": {
+          "aldehyde": 0.22317826023365825,
+          "aldehyde+isocyanide": 0.2320523423562551,
+          "amine": 0.010152338148481117,
+          "amine+aldehyde": 0.21770391319638804,
+          "amine+aldehyde+isocyanide": 0.2660489175814118,
+          "amine+isocyanide": 0.015267147840941752,
+          "isocyanide": 0.020149442681743783,
+          "none": 0.015447637961120095
+        },
+        "valid_smiles_effective_count": 555.1098316030132
+      },
+      "floor_checks": {
+        "effective_program_count": false,
+        "importance_ess_fraction": false,
+        "maximum_program_probability": true,
+        "role_marginal_aldehyde": true,
+        "role_marginal_amine": false,
+        "role_marginal_isocyanide": true,
+        "shannon_effective_program_count": false,
+        "supported_component_aldehyde": true,
+        "supported_component_amine": true,
+        "supported_component_isocyanide": true,
+        "supported_smiles_diversity": true,
+        "valid_exact_l1": false
+      },
+      "full_support": {
+        "effective_program_count": 776.3142646333789,
+        "importance_ess_fraction": 0.16179773421273783,
+        "maximum_importance_ratio": 9.999999978885672,
+        "maximum_program_probability": 0.004380699007054706,
+        "minimum_importance_ratio": 0.049461346309221554,
+        "role_marginals": {
+          "aldehyde": {
+            "effective_state_count": 10.720921093667087,
+            "maximum_state_probability": 0.13278317342957063,
+            "shannon_effective_state_count": 12.514225450875793,
+            "states": 19
+          },
+          "amine": {
+            "effective_state_count": 7.99564461157376,
+            "maximum_state_probability": 0.2327198313082338,
+            "shannon_effective_state_count": 13.88681126086488,
+            "states": 86
+          },
+          "isocyanide": {
+            "effective_state_count": 9.797985997057488,
+            "maximum_state_probability": 0.13431199043821393,
+            "shannon_effective_state_count": 12.000637584338424,
+            "states": 35
+          }
+        },
+        "shannon_effective_program_count": 1992.0409289833244
+      },
+      "mixture_rho": 0.9,
+      "score_power": 2.0
+    }
+  ],
+  "current_reference": {
+    "all_floors_pass": true,
+    "candidate_id": "rho-0.50_power-1.00",
+    "confirmation": {
+      "clustered_bootstrap": {
+        "absolute_improvement_ci95": [
+          0.029054386481403148,
+          0.04623373797007347
+        ],
+        "relative_improvement_ci95": [
+          0.8069254824907125,
+          1.1221194678201956
+        ],
+        "support_rate_ci95": [
+          0.061662070653210756,
+          0.09168612027026135
+        ]
+      },
+      "expected_support_rate": 0.07652947495558429,
+      "expected_valid_exact_l1_rate": 0.9669390460894829,
+      "relative_support_improvement_over_broad": 0.9591545588629582,
+      "relative_support_improvement_over_reference": 0.0,
+      "supported_component_effective_counts": {
+        "aldehyde": 30.064205418559414,
+        "amine": 6.268336116375674,
+        "isocyanide": 7.6492366335456445
+      },
+      "supported_smiles_effective_count": 95.39976114145449,
+      "valid_component_effective_counts": {
+        "aldehyde": 71.73510152741162,
+        "amine": 41.26719885708457,
+        "isocyanide": 13.850692647266218
+      },
+      "valid_novelty_pattern_probability": {
+        "aldehyde": 0.14889966298848176,
+        "aldehyde+isocyanide": 0.18541151756262653,
+        "amine": 0.00784224562677854,
+        "amine+aldehyde": 0.22306558765970594,
+        "amine+aldehyde+isocyanide": 0.3976380347337719,
+        "amine+isocyanide": 0.014544756486587894,
+        "isocyanide": 0.011960963231548152,
+        "none": 0.010637231710499327
+      },
+      "valid_smiles_effective_count": 1862.011764435344
+    },
+    "floor_checks": {
+      "effective_program_count": true,
+      "importance_ess_fraction": true,
+      "maximum_program_probability": true,
+      "role_marginal_aldehyde": true,
+      "role_marginal_amine": true,
+      "role_marginal_isocyanide": true,
+      "shannon_effective_program_count": true,
+      "supported_component_aldehyde": true,
+      "supported_component_amine": true,
+      "supported_component_isocyanide": true,
+      "supported_smiles_diversity": true,
+      "valid_exact_l1": true
+    },
+    "full_support": {
+      "effective_program_count": 2460.9409638672973,
+      "importance_ess_fraction": 0.7084975109894138,
+      "maximum_importance_ratio": 1.9999455832153281,
+      "maximum_program_probability": 0.002395228944821942,
+      "minimum_importance_ratio": 0.212793514716046,
+      "role_marginals": {
+        "aldehyde": {
+          "effective_state_count": 13.0448938867915,
+          "maximum_state_probability": 0.14280374716816516,
+          "shannon_effective_state_count": 15.037367569024212,
+          "states": 19
+        },
+        "amine": {
+          "effective_state_count": 15.61763614514846,
+          "maximum_state_probability": 0.14841689789480333,
+          "shannon_effective_state_count": 26.96852868426288,
+          "states": 86
+        },
+        "isocyanide": {
+          "effective_state_count": 13.560363103296062,
+          "maximum_state_probability": 0.10209931735585703,
+          "shannon_effective_state_count": 17.364336422208638,
+          "states": 35
+        }
+      },
+      "shannon_effective_program_count": 6835.62461815405
+    },
+    "mixture_rho": 0.5,
+    "score_power": 1.0
+  },
+  "decision": {
+    "applicability_boundary_changed": false,
+    "baseline_proposal_remains_production_reference": true,
+    "challenger_selected_for_fresh_confirmation": true,
+    "mh_authorized": false,
+    "next_gate": "fresh_untouched_program_terminal_confirmation_of_selected_challenger",
+    "partial_state_smc_authorized": false,
+    "production_replacement_authorized": false
+  },
+  "development_selected_challenger": {
+    "candidate_id": "rho-0.50_power-1.50",
+    "clustered_bootstrap_on_reused_confirmation": {
+      "absolute_improvement_ci95": [
+        0.03412882241622656,
+        0.057707259763858994
+      ],
+      "relative_improvement_ci95": [
+        0.9363627931733061,
+        1.4209784609390503
+      ],
+      "support_rate_ci95": [
+        0.06734107670839141,
+        0.10248785459694627
+      ]
+    },
+    "expected_support_rate_on_reused_confirmation": 0.0847130811484828,
+    "floor_checks": {
+      "effective_program_count": true,
+      "importance_ess_fraction": true,
+      "maximum_program_probability": true,
+      "role_marginal_aldehyde": true,
+      "role_marginal_amine": true,
+      "role_marginal_isocyanide": true,
+      "shannon_effective_program_count": true,
+      "supported_component_aldehyde": true,
+      "supported_component_amine": true,
+      "supported_component_isocyanide": true,
+      "supported_smiles_diversity": true,
+      "valid_exact_l1": true
+    },
+    "full_support": {
+      "effective_program_count": 2056.3529010662064,
+      "importance_ess_fraction": 0.6711918907556753,
+      "maximum_importance_ratio": 1.9999998329745001,
+      "maximum_program_probability": 0.002621047961416067,
+      "minimum_importance_ratio": 0.13053080689305402,
+      "role_marginals": {
+        "aldehyde": {
+          "effective_state_count": 13.015546093038338,
+          "maximum_state_probability": 0.13772299205466768,
+          "shannon_effective_state_count": 14.893676211252469,
+          "states": 19
+        },
+        "amine": {
+          "effective_state_count": 13.960554337674314,
+          "maximum_state_probability": 0.16334403849818294,
+          "shannon_effective_state_count": 25.213669563245237,
+          "states": 86
+        },
+        "isocyanide": {
+          "effective_state_count": 13.460193469811578,
+          "maximum_state_probability": 0.10467603246957818,
+          "shannon_effective_state_count": 17.240146547676247,
+          "states": 35
+        }
+      },
+      "shannon_effective_program_count": 6156.090355106657
+    },
+    "mixture_rho": 0.5,
+    "score_power": 1.5
+  },
+  "frozen_boundary": {
+    "definition": "valid_exact_l1_and_fixed_multiview_radius_at_most_one",
+    "thresholds": {
+      "aldehyde": {
+        "descriptor": {
+          "boundary_max": 0.5409506381222321,
+          "calibration_records": 44,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.2624553440832844
+        },
+        "fingerprint": {
+          "boundary_max": 0.3301075268817205,
+          "calibration_records": 44,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.18604651162790697
+        }
+      },
+      "amine": {
+        "descriptor": {
+          "boundary_max": 1.0897583113937728,
+          "calibration_records": 80,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.3635037283205912
+        },
+        "fingerprint": {
+          "boundary_max": 0.8463869463869464,
+          "calibration_records": 80,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.5365853658536586
+        }
+      },
+      "isocyanide": {
+        "descriptor": {
+          "boundary_max": 0.6948832262651745,
+          "calibration_records": 20,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.4705085792900163
+        },
+        "fingerprint": {
+          "boundary_max": 0.2666666666666667,
+          "calibration_records": 20,
+          "calibration_unit": "unique_exact_identity_excluded_component_per_fold",
+          "interpolative_max": 0.12290969899665555
+        }
+      },
+      "product": {
+        "descriptor": {
+          "boundary_max": 0.32371542420115895,
+          "calibration_records": 1648,
+          "calibration_unit": "product_after_held_role_component_identity_exclusion",
+          "interpolative_max": 0.0728642581594326
+        },
+        "fingerprint": {
+          "boundary_max": 0.15646258503401356,
+          "calibration_records": 1648,
+          "calibration_unit": "product_after_held_role_component_identity_exclusion",
+          "interpolative_max": 0.053640634174985324
+        }
+      }
+    },
+    "thresholds_unchanged": true
+  },
+  "grid": {
+    "candidate_count": 16,
+    "mixture_rho": [
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "score_floor": 1e-06,
+    "score_power": [
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ]
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "config": {
+      "path": "configs/bio/phase1_ugi_morphology_proposal_strength_sweep_v1.json",
+      "sha256": "a7710a903a191e4e3fe7626ee5e9efaf66c68df2f4304472b120ad78069346b2"
+    },
+    "confirmation_analysis": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_analysis_v1/result.json",
+      "sha256": "20b4229a18c155bc1433e1df84e5e2b6baf6074cafb4827ed9681571ce852eee"
+    },
+    "confirmation_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "confirmation_support_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_analysis_v1/support_ledger.csv.gz",
+      "sha256": "ec95757d3fbd4ffd3bbc15ee57ab226d6ca49cf083fde0287094459ea2510ad3"
+    },
+    "confirmation_terminal_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_confirmation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "614e0381de4c7a12b0f0950b8d4888c3b63b9758ebcf92e11828a772f34c35cd"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "full_proposal_ledger": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/proposal_ledger.jsonl.gz",
+      "sha256": "273fdb44bc2df8405ea4835ac32c7305bfc2d59caa8ec51b138464f57bb17675"
+    },
+    "full_proposal_result": {
+      "path": "results/phase1/ugi_complete_morphology_proposal_v1/result.json",
+      "sha256": "93543b3b563338f24435c595799118bbf416e64a8b7f0998a642b2065ba064d2"
+    },
+    "runner": {
+      "path": "scripts/phase1_sweep_ugi_morphology_proposal_strength.py",
+      "sha256": "5697e408baa8738df1df665bcf762bd1adc0cf0cb4f9c7d7e8ba8c851a4f6294"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_proposal_strength_sweep.py",
+      "sha256": "eb28d1bc5089b4ce08499b5e3340a3e66f9034107d407202e09a2443159f5af9"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_strength_sweep.py",
+      "sha256": "9c862b130f675024e89ca8ace79ccc11d2b45d9dfe0a724f85786c248e1ec0c2"
+    }
+  },
+  "nonclaims": [
+    "Counterfactual reweighting does not create new terminal chemistry.",
+    "The reused confirmation set cannot independently confirm the selected hyperparameters.",
+    "Morphology role-state diversity is not identical to atom-level component diversity.",
+    "This experiment does not evaluate potency, routes, synthesis, MH or SMC."
+  ],
+  "result_sha256": "dd11cf45e97d1e522055e6274d03998c8f22aabf7bafebcd383efd66f3bc182c",
+  "schema_version": "phase1_ugi_morphology_proposal_strength_sweep.v1",
+  "scope": {
+    "applicability_boundary_frozen": true,
+    "candidate_selection": false,
+    "generator_trajectories_advanced": false,
+    "oracle_calls": 0,
+    "potency_predictions_consumed": false,
+    "proposal_calls": 0,
+    "read_only": true,
+    "reuse_confirmation_for_challenger_selection_only": true,
+    "route_calls": 0,
+    "sealed_holdout_access": false,
+    "synthesis_calls": 0
+  },
+  "selection": {
+    "confirmation_set_status": "reused_development_evidence_not_untouched_after_selection",
+    "floors": {
+      "maximum_single_program_probability": 0.005,
+      "minimum_effective_program_count_fraction_of_broad": 0.35,
+      "minimum_importance_ess_fraction": 0.5,
+      "minimum_role_effective_count_fraction_of_broad": 0.5,
+      "minimum_shannon_effective_count_fraction_of_broad": 0.4,
+      "minimum_supported_component_effective_count_fraction_of_reference": 0.5,
+      "minimum_supported_smiles_effective_count_fraction_of_reference": 0.5,
+      "minimum_valid_exact_l1_fraction_of_broad": 0.99
+    },
+    "objective": "maximize_reused_confirmation_expected_support_subject_to_all_frozen_floors_then_require_fresh_confirmation"
+  },
+  "status": "frozen_proposal_strength_development_sweep_complete"
+}

@@ -17,6 +17,13 @@
       "actual": "a71a2d2eaddba99a1ac38cd450ddcb24662cb3f39b48231fd7340d4f60f98be7",
       "declared_by": "results/phase1/product_cuda_preflight.json, results/phase1/product_cuda_preflight_v2.json",
       "reason": "A code pin: the preflight artifacts record the hash of the launcher that produced them, and the launcher was edited afterwards. Two artifacts pin two different earlier revisions of the same file, so no single state of it could satisfy both. Inherited from forge; unchanged across every commit in this repository."
+    },
+    {
+      "path": "tests/test_ugi_candidate_eligibility.py",
+      "expected": "709a860b8e2e91e8f76c829d912af132bdc0ea867d08190bbf3eddc07974ff3c",
+      "actual": "75d62e0381ece497e88976bc02716b4fcd58b81e60388b7d325cfe2917652244",
+      "declared_by": "results/phase1/ugi_candidate_eligibility_audit_v1.json",
+      "reason": "Two audits pin two versions of this test file: v1 the earlier one, v2 the current. No single state satisfies both, and the file on disk correctly matches v2, the later audit. Arrived with the f58c679 handoff; not modified in this repository."
     }
   ]
 }

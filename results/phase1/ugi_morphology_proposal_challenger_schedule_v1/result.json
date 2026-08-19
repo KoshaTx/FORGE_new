@@ -1,0 +1,72 @@
+{
+  "decision": {
+    "challenger_frozen": true,
+    "next_gate": "independent_fresh_terminal_outcome_confirmation",
+    "production_replacement_authorized": false
+  },
+  "inputs": {
+    "baseline_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_schedule_v1/schedule.json",
+      "sha256": "b16efc98fad27eeeb4551bd8e478c384313da37bc714882374d6b26f1a7d3d08"
+    },
+    "config": {
+      "path": "configs/model/phase1_ugi_morphology_proposal_challenger_schedule_v1.json",
+      "sha256": "bb1c860934b667eeb5af8cef68358764f843414f3cc7cc93b36e5d74f8e02fea"
+    },
+    "runner": {
+      "path": "scripts/phase1_freeze_ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "67b4ce691a8e3f04517a984af094b534513cc283408814b6b7c4c31cd29cc69c"
+    },
+    "source": {
+      "path": "src/forge/product/ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "1e8354ac71e779b60d9dbd15a25373755f6a9c6eda24f46ebe8203d994b8a3f5"
+    },
+    "sweep_result": {
+      "path": "results/phase1/ugi_morphology_proposal_strength_sweep_v1/result.json",
+      "sha256": "05d4bfbaa7926f00b410708d7f824d91a81e102ca1bffc4358234287e2d53214"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_challenger_schedule.py",
+      "sha256": "27947fd514127bf73226e2aae9bfecf6a535821c5c39b303ffb42e1fe7fcfc4c"
+    }
+  },
+  "nonclaims": [
+    "The program identities were used in the development sweep.",
+    "The new terminal seeds provide independent outcome randomness, not a new program set.",
+    "No potency, route, synthesis or applicability outcome was read by this builder."
+  ],
+  "population": {
+    "fresh_terminal_outcomes": true,
+    "previously_evaluated_programs": true,
+    "program_rows": 3072,
+    "unique_program_sha256": 2454
+  },
+  "proposal": {
+    "all_programs_positive": true,
+    "candidate_id": "rho-0.50_power-1.50",
+    "effective_program_count": 1669.033137239383,
+    "form": "support_preserving_prior_score_mixture",
+    "maximum_importance_ratio": 1.9999998268214982,
+    "minimum_importance_ratio": 0.14540308999925608,
+    "mixture_rho": 0.5,
+    "schedule_sha256": "7337949cd3baf00822e50df64e4cf74b3f0c1b8b5c292544cdeb019f630d5b86",
+    "score_floor": 1e-06,
+    "score_power": 1.5
+  },
+  "result_sha256": "f4dcdd71065fce963a08ad69c1e70d43bc6179d074689a33002847cf57bdbc28",
+  "schema_version": "phase1_ugi_morphology_proposal_challenger_schedule.v1",
+  "scope": {
+    "candidate_selection": false,
+    "generator_trajectories_advanced": false,
+    "oracle_calls": 0,
+    "potency_predictions_consumed": false,
+    "read_only": true,
+    "route_calls": 0,
+    "same_programs_new_terminal_randomness": true,
+    "sealed_holdout_access": false,
+    "selected_challenger_only": true,
+    "synthesis_calls": 0,
+    "terminal_outcomes_consumed": false
+  },
+  "status": "frozen_strength_challenger_schedule_for_fresh_terminal_draw"
+}

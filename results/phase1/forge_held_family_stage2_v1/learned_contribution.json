@@ -1,0 +1,107 @@
+{
+ "arms": {
+  "marginal_null": {
+   "admitted_available": 3072,
+   "clogp": {
+    "median": 6.864350000000008,
+    "p10": 3.5446000000000017,
+    "p90": 10.629399999999995
+   },
+   "molecular_weight": {
+    "median": 606.8670000000004,
+    "p10": 492.61300000000045,
+    "p90": 743.1269999999997
+   },
+   "nearest_train_tanimoto": {
+    "median": 0.373134328358209,
+    "p10": 0.29473684210526313,
+    "p90": 0.49122807017543857
+   },
+   "products_scored": 400,
+   "source": {
+    "path": "results/phase1/forge_held_family_stage2_v1/null_marginal_null.json",
+    "sha256": "813aee2e7386edf14bf2161d9fa9c00cca14994f2eeca80405d8002acecb7d94"
+   }
+  },
+  "random_init": {
+   "admitted_available": 2175,
+   "clogp": {
+    "median": -4.781974999999993,
+    "p10": -27.918899999999994,
+    "p90": 12.412300000000004
+   },
+   "molecular_weight": {
+    "median": 810.4669999999999,
+    "p10": 590.7110000000002,
+    "p90": 1260.8390000000006
+   },
+   "nearest_train_tanimoto": {
+    "median": 0.10638297872340426,
+    "p10": 0.08783783783783784,
+    "p90": 0.14516129032258066
+   },
+   "products_scored": 400,
+   "source": {
+    "path": "results/phase1/forge_held_family_stage2_v1/null_random_init.json",
+    "sha256": "33e62a98af329bc75076a926e45ef471015a71c3e0f8bf1ae82fe2a3c9a4a79c"
+   }
+  },
+  "train_corpus_reference": {
+   "clogp": {
+    "median": 8.412450000000007,
+    "p10": 4.580600000000005,
+    "p90": 12.476299999999984
+   },
+   "molecular_weight": {
+    "median": 565.4560000000004,
+    "p10": 414.6750000000002,
+    "p90": 706.2419999999995
+   },
+   "nearest_train_tanimoto": null,
+   "products": 400
+  },
+  "trained_flow": {
+   "admitted_available": 3040,
+   "clogp": {
+    "median": 9.7273,
+    "p10": 6.462400000000007,
+    "p90": 13.587699999999977
+   },
+   "molecular_weight": {
+    "median": 549.9290000000003,
+    "p10": 424.7580000000002,
+    "p90": 677.2439999999996
+   },
+   "nearest_train_tanimoto": {
+    "median": 0.6436507936507937,
+    "p10": 0.4745762711864407,
+    "p90": 0.9024390243902439
+   },
+   "products_scored": 400,
+   "source": {
+    "path": "results/phase1/forge_held_family_stage2_v1/samples.json",
+    "sha256": "7dc32d5e1d1450f4875f333a87f783c06a594115a6d7ed63ffb6f2a70c93f939"
+   }
+  }
+ },
+ "nonclaims": [
+  "These are three descriptors, not a generative fidelity metric. They separate legal from lipid-like; they do not establish distributional match.",
+  "Nearest-neighbour Tanimoto to the train fold is a similarity statistic on binary folded fingerprints, which cannot distinguish alkyl homologues of different chain length. It is used here only to separate arms that differ by a wide margin.",
+  "Admission is excluded as evidence of learned competence: the marginal null reaches a higher admission rate than the trained flow under identical constraints."
+ ],
+ "protocol": {
+  "fingerprint": "ECFP4, 2048 bits",
+  "per_arm_sample": 400,
+  "population": "admitted products only",
+  "reference_sample": 3000,
+  "seed": 20260816
+ },
+ "question": "what does the trained flow supply that the constrained sampler does not, given that a marginal denoiser reaches higher admission than the trained flow under identical constraints",
+ "runtime": {
+  "elapsed_seconds": 2.2,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_learned_contribution_audit.v1",
+ "status": "complete_descriptive_comparison"
+}

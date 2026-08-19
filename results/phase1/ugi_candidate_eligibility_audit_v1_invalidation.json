@@ -1,0 +1,19 @@
+{
+  "schema_version": "phase1_ugi_candidate_eligibility_audit_invalidation.v1",
+  "status": "superseded_diagnostic_definition",
+  "invalidated_at_utc": "2026-08-02T00:12:19Z",
+  "config": {
+    "path": "configs/model/phase1_ugi_candidate_eligibility_audit_v1.json",
+    "sha256": "6c303ea9dae34fb9e3b270dd06337151ebfe7fe989eb082dff9e1e14451f8884"
+  },
+  "result": {
+    "path": "results/phase1/ugi_candidate_eligibility_audit_v1.json",
+    "sha256": "4eae9b5a0813537ef1f8625196300abb13e8679fc2206f2c6c44b6f4ccbd1a16"
+  },
+  "reason": "The allene_or_cumulene SMARTS [!#1]=[!#1]=[!#1] is not carbon-centered and therefore matched O=S=O sulfones. This overbroad motif definition invalidates that motif's v1 comparison. The production-generator selection and every other frozen result are unaffected because this audit is post-selection and nonselecting.",
+  "replacement": {
+    "config": "configs/model/phase1_ugi_candidate_eligibility_audit_v2.json",
+    "corrected_smarts": "[!#1]=[#6]=[!#1]",
+    "selection_may_change": false
+  }
+}

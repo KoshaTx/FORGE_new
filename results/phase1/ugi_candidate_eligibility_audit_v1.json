@@ -1,0 +1,643 @@
+{
+  "adapter_and_declared_support": {
+    "all_three_handle_qualification_pass": {
+      "count": 1007,
+      "denominator": 1007,
+      "fraction": 1.0
+    },
+    "component_reconstruction_pass": {
+      "count": 1007,
+      "denominator": 1007,
+      "fraction": 1.0
+    },
+    "declared_support_violation_counts": {},
+    "declared_support_violation_examples": [],
+    "exact_forward_reconstruction_pass": {
+      "count": 1007,
+      "denominator": 1007,
+      "fraction": 1.0
+    },
+    "exact_selection_visible_products": {
+      "count": 39,
+      "denominator": 1007,
+      "fraction": 0.038728897715988087
+    },
+    "forbidden_substructure_products": {
+      "count": 0,
+      "denominator": 1007,
+      "fraction": 0.0
+    },
+    "valid_product_declared_support_pass": {
+      "count": 1007,
+      "denominator": 1007,
+      "fraction": 1.0
+    }
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_candidate_eligibility_audit_v1.json",
+    "sha256": "6c303ea9dae34fb9e3b270dd06337151ebfe7fe989eb082dff9e1e14451f8884"
+  },
+  "extreme_heteroatoms": {
+    "definition": {
+      "count_definition": "non-carbon heavy atoms",
+      "flag_definition": "count or fraction strictly outside the selection-reference q01-q99 interval",
+      "fraction_definition": "non-carbon heavy atoms divided by all heavy atoms",
+      "lower_quantile": 0.01,
+      "strict_comparison": true,
+      "upper_quantile": 0.99
+    },
+    "flags": {
+      "any_extreme_heteroatom_pattern": {
+        "generated_attempted": {
+          "count": 78,
+          "denominator": 1024,
+          "fraction": 0.076171875
+        },
+        "generated_valid": {
+          "count": 78,
+          "denominator": 1007,
+          "examples": [
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "sample_index": 8,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NC1CCCCC1C)C(=O)NCCCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "sample_index": 13,
+              "smiles": "CCCCCCCCCCCCCCCCCCNC(CCCCCCCCCCCCCC)C(=O)NCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "sample_index": 16,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NCCC)C(=O)NCCC(CCCCC)CCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06382978723404255,
+              "heteroatoms": 3,
+              "sample_index": 38,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NC1CCCC(C)C1)C(=O)NCCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.058823529411764705,
+              "heteroatoms": 3,
+              "sample_index": 102,
+              "smiles": "CCCCCCCCCCCCCCCCCCNC(CCCCCCCCCCCCCCC)C(=O)NCCCCCCCCCCCCC"
+            }
+          ],
+          "fraction": 0.07745779543197617
+        },
+        "reference": {
+          "count": 1666,
+          "denominator": 82264,
+          "examples": [
+            {
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCCCCN(CCCCCCCCCCC)C(CC(C)CC(C)CC)C(=O)NCCCCCC(C)CCCCCC"
+            },
+            {
+              "fraction": 0.2916666666666667,
+              "heteroatoms": 7,
+              "smiles": "CCCCCCC(NCC(O)CN)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCC=CCCCCCCCCNC(CC(C)CC(C)CC)C(=O)NCCCCCCCC(C)CCCCCCCC"
+            },
+            {
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCCCCCCCCCCCC(NCCCCc1ccccc1)C(=O)NCCCCCCCCCCCCCCCCC"
+            },
+            {
+              "fraction": 0.3076923076923077,
+              "heteroatoms": 8,
+              "smiles": "C=CCCCCCCCC(Nc1nc(N)nc(N)n1)C(=O)NC(C)(C)C"
+            }
+          ],
+          "fraction": 0.020251872021783527
+        }
+      },
+      "high_heteroatom_count": {
+        "generated_attempted": {
+          "count": 0,
+          "denominator": 1024,
+          "fraction": 0.0
+        },
+        "generated_valid": {
+          "count": 0,
+          "denominator": 1007,
+          "examples": [],
+          "fraction": 0.0
+        },
+        "reference": {
+          "count": 250,
+          "denominator": 82264,
+          "examples": [
+            {
+              "fraction": 0.2682926829268293,
+              "heteroatoms": 11,
+              "smiles": "CCCCCCCCCC(=O)OCCCCCC(Nc1ccc(OC(F)(F)F)cc1)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.2894736842105263,
+              "heteroatoms": 11,
+              "smiles": "CCCCCCCCC(=O)OCCCC(Nc1ccc(OC(F)(F)F)cc1)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.22448979591836735,
+              "heteroatoms": 11,
+              "smiles": "CCCCCCCCCCCCCCCC(=O)OCCCCCCCC(Nc1ccc(OC(F)(F)F)cc1)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.2894736842105263,
+              "heteroatoms": 11,
+              "smiles": "CCCCCCCCCC(=O)OCCC(Nc1ccc(F)cc1C(F)(F)F)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.32432432432432434,
+              "heteroatoms": 12,
+              "smiles": "C#CCCCCCCCCC(=O)OCCCC(Nc1nc(N)nc(N)n1)C(=O)NCC(=O)OC(C)(C)C"
+            }
+          ],
+          "fraction": 0.0030389964018282603
+        }
+      },
+      "high_heteroatom_fraction": {
+        "generated_attempted": {
+          "count": 0,
+          "denominator": 1024,
+          "fraction": 0.0
+        },
+        "generated_valid": {
+          "count": 0,
+          "denominator": 1007,
+          "examples": [],
+          "fraction": 0.0
+        },
+        "reference": {
+          "count": 727,
+          "denominator": 82264,
+          "examples": [
+            {
+              "fraction": 0.2916666666666667,
+              "heteroatoms": 7,
+              "smiles": "CCCCCCC(NCC(O)CN)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.3076923076923077,
+              "heteroatoms": 8,
+              "smiles": "C=CCCCCCCCC(Nc1nc(N)nc(N)n1)C(=O)NC(C)(C)C"
+            },
+            {
+              "fraction": 0.2903225806451613,
+              "heteroatoms": 9,
+              "smiles": "CCCCCCC(=O)OCCCC(NCC1OCCO1)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.2777777777777778,
+              "heteroatoms": 10,
+              "smiles": "CCCCCCCCCC(=O)OCCC(NCCOCCOCCN)C(=O)NCC(=O)OC(C)(C)C"
+            },
+            {
+              "fraction": 0.28125,
+              "heteroatoms": 9,
+              "smiles": "CCCCCCCCC(=O)OCCC(NC(C)(CO)CO)C(=O)NCC(=O)OC(C)(C)C"
+            }
+          ],
+          "fraction": 0.008837401536516581
+        }
+      },
+      "low_heteroatom_count": {
+        "generated_attempted": {
+          "count": 0,
+          "denominator": 1024,
+          "fraction": 0.0
+        },
+        "generated_valid": {
+          "count": 0,
+          "denominator": 1007,
+          "examples": [],
+          "fraction": 0.0
+        },
+        "reference": {
+          "count": 0,
+          "denominator": 82264,
+          "examples": [],
+          "fraction": 0.0
+        }
+      },
+      "low_heteroatom_fraction": {
+        "generated_attempted": {
+          "count": 78,
+          "denominator": 1024,
+          "fraction": 0.076171875
+        },
+        "generated_valid": {
+          "count": 78,
+          "denominator": 1007,
+          "examples": [
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "sample_index": 8,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NC1CCCCC1C)C(=O)NCCCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "sample_index": 13,
+              "smiles": "CCCCCCCCCCCCCCCCCCNC(CCCCCCCCCCCCCC)C(=O)NCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "sample_index": 16,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NCCC)C(=O)NCCC(CCCCC)CCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.06382978723404255,
+              "heteroatoms": 3,
+              "sample_index": 38,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCC(NC1CCCC(C)C1)C(=O)NCCCCCCCCCCCCCC"
+            },
+            {
+              "exact_selection_visible_product": false,
+              "fraction": 0.058823529411764705,
+              "heteroatoms": 3,
+              "sample_index": 102,
+              "smiles": "CCCCCCCCCCCCCCCCCCNC(CCCCCCCCCCCCCCC)C(=O)NCCCCCCCCCCCCC"
+            }
+          ],
+          "fraction": 0.07745779543197617
+        },
+        "reference": {
+          "count": 813,
+          "denominator": 82264,
+          "examples": [
+            {
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCCCCN(CCCCCCCCCCC)C(CC(C)CC(C)CC)C(=O)NCCCCCC(C)CCCCCC"
+            },
+            {
+              "fraction": 0.0625,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCC=CCCCCCCCCNC(CC(C)CC(C)CC)C(=O)NCCCCCCCC(C)CCCCCCCC"
+            },
+            {
+              "fraction": 0.06,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCCCCCCCCCCCC(NCCCCc1ccccc1)C(=O)NCCCCCCCCCCCCCCCCC"
+            },
+            {
+              "fraction": 0.058823529411764705,
+              "heteroatoms": 3,
+              "smiles": "CCCCCCCCCCCCCCCCCCCCCCC(C(=O)NCC(C)CC(C)CC)N(CCCCCCCC)CCCCCCCC"
+            },
+            {
+              "fraction": 0.05084745762711865,
+              "heteroatoms": 3,
+              "smiles": "CCCCC=CCC=CCCCCC(C(=O)NCCCCCCCC(C)CCCCCCCC)N(CCCCCCCCCCCC)CCCCCCCCCCCC"
+            }
+          ],
+          "fraction": 0.009882816298745501
+        }
+      }
+    },
+    "generated_count_summary": {
+      "maximum": 7,
+      "minimum": 3
+    },
+    "reference_count_summary": {
+      "maximum": 13,
+      "minimum": 3
+    },
+    "thresholds_from_selection_reference": {
+      "count_q01": 3.0,
+      "count_q99": 10.0,
+      "fraction_q01": 0.06521739130434782,
+      "fraction_q99": 0.2727272727272727
+    }
+  },
+  "generated_denominators": {
+    "attempted": 1024,
+    "component_reconstructed": 1007,
+    "invalid": 17,
+    "valid": 1007
+  },
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "audit_module": {
+      "path": "src/forge/product/ugi_candidate_eligibility.py",
+      "sha256": "a071873037c9e94c9a696bfc73469ec493b514782b7f15ef93360de4e64851e0"
+    },
+    "audit_script": {
+      "path": "scripts/phase1_audit_ugi_candidate_eligibility.py",
+      "sha256": "9cee84b330fb4f3b3e0d7ec32cd408ae3feb032bc38345028a182557b366630b"
+    },
+    "audit_tests": {
+      "path": "tests/test_ugi_candidate_eligibility.py",
+      "sha256": "709a860b8e2e91e8f76c829d912af132bdc0ea867d08190bbf3eddc07974ff3c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "selected_sample": {
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+    },
+    "selection_result": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v3.json",
+      "sha256": "fe90fc849bbc88c8b004ceebcb4aae95ef6ac8158b8e1a6220792750aac83be5"
+    }
+  },
+  "interpretation_contract": {
+    "automatic_candidate_ineligibility": [
+      "declared graph-support violation",
+      "failed deterministic component reconstruction",
+      "failed exact Ugi forward reconstruction",
+      "failed frozen handle policy",
+      "forbidden substructure match"
+    ],
+    "manual_review_flags_not_automatic_rejections": [
+      "motif SMARTS match",
+      "selection-reference q01-q99 heteroatom excursion"
+    ],
+    "no_synthesis_claim": "A motif absence or presence is not a synthesis-success or synthesis-failure result."
+  },
+  "invalid_failure_types": {
+    "MoleculeSanitizationFailure": 16,
+    "TerminalSupportFailure": 1
+  },
+  "motifs": {
+    "aldehyde": {
+      "absolute_fraction_difference_generated_minus_reference": 0.0,
+      "fraction_ratio_generated_over_reference": null,
+      "generated_attempted": {
+        "count": 0,
+        "denominator": 1024,
+        "fraction": 0.0
+      },
+      "generated_valid": {
+        "count": 0,
+        "denominator": 1007,
+        "examples": [],
+        "fraction": 0.0
+      },
+      "reference": {
+        "count": 0,
+        "denominator": 82264,
+        "examples": [],
+        "fraction": 0.0
+      },
+      "reference_zero": true,
+      "smarts": "[CX3H1](=O)[#6]"
+    },
+    "alkyne": {
+      "absolute_fraction_difference_generated_minus_reference": -0.006945099657836157,
+      "fraction_ratio_generated_over_reference": 0.957353759927429,
+      "generated_attempted": {
+        "count": 157,
+        "denominator": 1024,
+        "fraction": 0.1533203125
+      },
+      "generated_valid": {
+        "count": 157,
+        "denominator": 1007,
+        "examples": [
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 15,
+            "smiles": "C#CCCCCCCCCCCCCCCCC(NC1CCN(C)CC1)C(=O)NCCCCCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 18,
+            "smiles": "C#CCCCCCCCCCCCCCCCC(NC1CCCN(CC)CC1)C(=O)NC1CCC(C)C1"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 21,
+            "smiles": "C#CCCCCCCCCCCCCCC(NCCCN1CCCC1)C(=O)NCCCCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 24,
+            "smiles": "C#CCCCCCCCCCCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 36,
+            "smiles": "C#CCCCCCCCC(NCCCN1CCCCC1)C(=O)NCCCC(C)C(C)C"
+          }
+        ],
+        "fraction": 0.15590863952333664
+      },
+      "reference": {
+        "count": 13397,
+        "denominator": 82264,
+        "examples": [
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCCCCCCC(NCCN1CCN(C)CC1)C(=O)NCCCCCCCCCCCCC"
+          },
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCCC"
+          },
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCCCCC(NC1CCNCC1)C(=O)NCCCCCCCCCCCCCCCC"
+          },
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCC(NCCCN(C)CCCN)C(=O)NCCCCCCCCCCCCCC"
+          },
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCCCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCCC"
+          }
+        ],
+        "fraction": 0.1628537391811728
+      },
+      "reference_zero": false,
+      "smarts": "[#6]#[#6]"
+    },
+    "allene_or_cumulene": {
+      "absolute_fraction_difference_generated_minus_reference": -0.025491101818535446,
+      "fraction_ratio_generated_over_reference": 0.0,
+      "generated_attempted": {
+        "count": 0,
+        "denominator": 1024,
+        "fraction": 0.0
+      },
+      "generated_valid": {
+        "count": 0,
+        "denominator": 1007,
+        "examples": [],
+        "fraction": 0.0
+      },
+      "reference": {
+        "count": 2097,
+        "denominator": 82264,
+        "examples": [
+          {
+            "smiles": "CCCCCCCCCC=CCCCCCCCCCC(NCCN1CCS(=O)(=O)CC1)C(=O)NCCC(C)CCC"
+          },
+          {
+            "smiles": "CCCCC=CCCCCC(NCCN1CCS(=O)(=O)CC1)C(=O)NC(C)(C)C"
+          },
+          {
+            "smiles": "CCCCCCCCCCCCCCC(NCCN1CCS(=O)(=O)CC1)C(=O)NC(C)(C)C"
+          },
+          {
+            "smiles": "C=CCCCCCCCC(NCCN1CCS(=O)(=O)CC1)C(=O)NCCCC(C)CCC(C)CCC"
+          },
+          {
+            "smiles": "C#CCCCCCCCCC(=O)OCCCCCC(NCCN1CCS(=O)(=O)CC1)C(=O)NC1CCCCC1"
+          }
+        ],
+        "fraction": 0.025491101818535446
+      },
+      "reference_zero": false,
+      "smarts": "[!#1]=[!#1]=[!#1]"
+    },
+    "nitrogen_nitrogen_bond": {
+      "absolute_fraction_difference_generated_minus_reference": 0.010456839563491228,
+      "fraction_ratio_generated_over_reference": 1.2086396919357367,
+      "generated_attempted": {
+        "count": 61,
+        "denominator": 1024,
+        "fraction": 0.0595703125
+      },
+      "generated_valid": {
+        "count": 61,
+        "denominator": 1007,
+        "examples": [
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 24,
+            "smiles": "C#CCCCCCCCCCCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 30,
+            "smiles": "CCCCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCCCCCCCCCCCCCCC)NCCN1CCCCN1C"
+          },
+          {
+            "exact_selection_visible_product": true,
+            "sample_index": 53,
+            "smiles": "CCCCCCCCCCCCCCCCCCCC(NN(C)C)C(=O)NCCCCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": true,
+            "sample_index": 55,
+            "smiles": "CCCCCCCCCCCCCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCC"
+          },
+          {
+            "exact_selection_visible_product": false,
+            "sample_index": 79,
+            "smiles": "C#CCCCCCCCCCCCCCC(NCCCNN(CC)CC)C(=O)NCCC(C)CCC"
+          }
+        ],
+        "fraction": 0.0605759682224429
+      },
+      "reference": {
+        "count": 4123,
+        "denominator": 82264,
+        "examples": [
+          {
+            "smiles": "CCCCCCCCCCCCCCCCC(NN1CCOCC1)C(=O)NCCCCCCCCCCC"
+          },
+          {
+            "smiles": "CCCCCCCCCCCNC(=O)C(CCCCCOC(=O)CCCCCCCCC)NN(C)C"
+          },
+          {
+            "smiles": "CCCCCCCCCCCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCCCCCCCCC)NN1CCCCC1"
+          },
+          {
+            "smiles": "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(NN1CCOCC1)C(=O)NCCCCCCCCCCCC"
+          },
+          {
+            "smiles": "CCCCCCCCCCCCCCCCCNC(=O)C(CCOC(=O)CCCCCCC)Nc1cc(C)nn1C"
+          }
+        ],
+        "fraction": 0.05011912865895167
+      },
+      "reference_zero": false,
+      "smarts": "[#7]~[#7]"
+    },
+    "peroxide": {
+      "absolute_fraction_difference_generated_minus_reference": 0.0,
+      "fraction_ratio_generated_over_reference": null,
+      "generated_attempted": {
+        "count": 0,
+        "denominator": 1024,
+        "fraction": 0.0
+      },
+      "generated_valid": {
+        "count": 0,
+        "denominator": 1007,
+        "examples": [],
+        "fraction": 0.0
+      },
+      "reference": {
+        "count": 0,
+        "denominator": 82264,
+        "examples": [],
+        "fraction": 0.0
+      },
+      "reference_zero": true,
+      "smarts": "[#8X2]-[#8X2]"
+    }
+  },
+  "schema_version": "phase1_ugi_candidate_eligibility_audit.v1",
+  "scope": {
+    "biological_guidance_evaluated": false,
+    "can_change_architecture_or_checkpoint_selection": false,
+    "candidate_eligibility_diagnostic_only": true,
+    "heldout_fold_evaluated": false,
+    "l2_routes_evaluated": false,
+    "synthesis_guidance_evaluated": false
+  },
+  "selection_reference": {
+    "folds": [
+      "calibration",
+      "train"
+    ],
+    "heldout_rows_skipped_without_molecule_evaluation": 30122,
+    "products": 82264,
+    "source_fold_counts": {
+      "calibration": 15800,
+      "heldout": 30122,
+      "train": 66464
+    }
+  },
+  "status": "complete_nonselecting"
+}

@@ -17,7 +17,6 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 
 from forge.bio import ugi_distributional_applicability_v2 as applicability_v2
 from forge.bio.ugi_dynamic_controller_analysis import _terminal_support_rows
-from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_morphology_proposal_confirmation_analysis_config.v1"
@@ -51,6 +50,10 @@ EXPECTED_INPUTS = {
 
 class UgiMorphologyProposalConfirmationAnalysisError(RuntimeError):
     """Raised when the confirmation-analysis contract changes."""
+
+
+def _stable_json(value: Any) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _logical_sha256(value: Any) -> str:

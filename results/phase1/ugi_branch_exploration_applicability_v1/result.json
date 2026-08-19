@@ -1,0 +1,197 @@
+{
+  "artifacts": {
+    "terminal_rescoring.csv.gz": {
+      "rows": 4096,
+      "schema_version": "phase1_ugi_branch_exploration_applicability_ledger.v1",
+      "sha256": "db8e10c2a144ae8c56e1b58188188f01662060d815afd9654afd89f06cf5b9e3"
+    }
+  },
+  "decision": {
+    "applicability_boundary_relaxed": false,
+    "branch_exploration_potency_claim_authorized_globally": false,
+    "branched_molecules_may_enter_applicability_domain": true,
+    "next_gate": "route_blinded_diversity_selection_by_authority_tier"
+  },
+  "implementation": {
+    "runner": {
+      "path": "scripts/phase1_rescore_ugi_branch_exploration_applicability_v1.py",
+      "sha256": "fc522b55c824fb7489a443de69c16b23f3a5b5259cca9cc8d81c28411c34a5ef"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_branch_exploration_applicability_v1.py",
+      "sha256": "88db4fd69eb513f7c39793a9e7ba8365f54dc04cb068b0c763b215b804f47382"
+    },
+    "tests": {
+      "path": "tests/test_ugi_branch_exploration_applicability_v1.py",
+      "sha256": "1e18b1b32be46efb88813a17564858ca05d94088a8f76c61094f6ccb9d1a534c"
+    }
+  },
+  "inputs": {
+    "config": {
+      "path": "configs/bio/phase1_ugi_branch_exploration_applicability_v1.json",
+      "sha256": "e9d23fd68e8cd3adaf013c02a0ca7904617040984d63a532ae04cba43c31462e"
+    },
+    "frozen_rescoring_config": {
+      "path": "configs/bio/phase1_ugi_production_full_support_rescoring_v3.json",
+      "sha256": "27977ec6b5a2e939865937ea735da2eaba0c9b514011cf8e6426c8d0d4de0af6"
+    },
+    "generation_result": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/result.json",
+      "sha256": "7a57853b307067fb53d237bc7115a11c04003ad24a2d08f3dffffe4d48d7992b"
+    },
+    "hela_diagnostic_policy": {
+      "path": "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json",
+      "sha256": "ffcc3f0c22ca46ad603950873f5e5eef262a3141af419b546d36c79c4f6ec26b"
+    },
+    "terminal_ledger": {
+      "path": "results/phase1/ugi_full_corpus_branch_exploration_candidates_v1/terminal_ledger.jsonl.gz",
+      "sha256": "287807bbf614d6b7bca40ace20661f61ae3ba29af64f4299dde23d28cdefd065"
+    }
+  },
+  "nonclaims": [
+    "Branching alone does not authorize an oracle score.",
+    "A raw oracle score does not establish prospective potency.",
+    "Exploratory novelty tiers do not establish broad branched-tail generalization.",
+    "This rescore does not change molecular generation or select a synthesis panel."
+  ],
+  "policy": {
+    "all_product_and_role_views_must_be_interpolative": true,
+    "branching_is_not_a_categorical_veto": true,
+    "exact_novelty_is_provenance_not_applicability": true,
+    "frozen_v3_policy_reused_without_changes": true,
+    "pattern_policies": {
+      "aldehyde_isocyanide": {
+        "authority_tier": "exploratory_simultaneous_exact_new_tails",
+        "calibration_scale": "aldehyde_isocyanide_pair",
+        "interpretation": "Two exact-new tail roles; pair-scale ranking is exploratory because the held-pair split retained each identity in fitting data.",
+        "unseen_roles": [
+          "aldehyde",
+          "isocyanide"
+        ]
+      },
+      "aldehyde_only": {
+        "authority_tier": "exploratory_weak_absolute_aldehyde_generalization",
+        "calibration_scale": "aldehyde_only",
+        "interpretation": "Continuously supported exact-new aldehyde; conservative score is exploratory because held-aldehyde absolute fit is weak.",
+        "unseen_roles": [
+          "aldehyde"
+        ]
+      },
+      "amine_aldehyde": {
+        "authority_tier": "exploratory_multiple_exact_new_roles",
+        "calibration_scale": null,
+        "interpretation": "Two exact-new roles; raw score only because no eligible conditional calibration folds exist for this novelty pattern.",
+        "unseen_roles": [
+          "amine",
+          "aldehyde"
+        ]
+      },
+      "amine_aldehyde_isocyanide": {
+        "authority_tier": "exploratory_all_roles_exact_new",
+        "calibration_scale": null,
+        "interpretation": "All three roles are exact-new; raw score only and no oracle-generalization claim.",
+        "unseen_roles": [
+          "amine",
+          "aldehyde",
+          "isocyanide"
+        ]
+      },
+      "amine_isocyanide": {
+        "authority_tier": "exploratory_multiple_exact_new_roles",
+        "calibration_scale": null,
+        "interpretation": "Two exact-new roles; raw score only because no eligible conditional calibration folds exist for this novelty pattern.",
+        "unseen_roles": [
+          "amine",
+          "isocyanide"
+        ]
+      },
+      "amine_only": {
+        "authority_tier": "exploratory_weak_absolute_head_generalization",
+        "calibration_scale": "amine_only",
+        "interpretation": "Continuously supported exact-new head; conservative score is exploratory because held-head absolute fit is weak.",
+        "unseen_roles": [
+          "amine"
+        ]
+      },
+      "isocyanide_only": {
+        "authority_tier": "qualified_role_holdout",
+        "calibration_scale": "isocyanide_only",
+        "interpretation": "Continuously supported exact-new isocyanide with positive held-isocyanide absolute and ranking performance.",
+        "unseen_roles": [
+          "isocyanide"
+        ]
+      },
+      "known_components_novel_combination": {
+        "authority_tier": "qualified_unseen_combination",
+        "calibration_scale": null,
+        "interpretation": "All component identities are measured but the exact combination is new; raw scoring is recorded pending a dedicated combination scale.",
+        "unseen_roles": []
+      }
+    },
+    "potency_changes_generation": false,
+    "terminal_chemical_admission_precedes_applicability": true
+  },
+  "result_sha256": "5348488efddcc6af1c5f9a29ade43721c906fc3bc9a532438ed3182ef6e17b80",
+  "schema_version": "phase1_ugi_branch_exploration_applicability.v1",
+  "scope": {
+    "applicability_boundary_frozen": true,
+    "branching_is_not_a_categorical_veto": true,
+    "candidate_selection": false,
+    "generator_frozen": true,
+    "potency_changes_generation": false,
+    "prospective_panel_locked": false,
+    "terminal_chemical_admission_frozen": true,
+    "terminal_rescoring_only": true
+  },
+  "status": "complete_branch_exploration_frozen_policy_applicability_rescoring",
+  "summary": {
+    "all_view_interpolative": 65,
+    "applicability_failure_views": {
+      "aldehyde:boundary": 522,
+      "aldehyde:extrapolative": 1986,
+      "amine:boundary": 2164,
+      "amine:extrapolative": 607,
+      "isocyanide:boundary": 103,
+      "isocyanide:extrapolative": 2651,
+      "product:boundary": 184,
+      "product:extrapolative": 3428
+    },
+    "attempts": 4096,
+    "branched_authority_tiers": {
+      "exploratory_multiple_exact_new_roles": 3,
+      "exploratory_simultaneous_exact_new_tails": 15,
+      "exploratory_weak_absolute_aldehyde_generalization": 21,
+      "qualified_role_holdout": 6
+    },
+    "branched_pattern_counts": {
+      "aldehyde_isocyanide": 15,
+      "aldehyde_only": 21,
+      "amine_aldehyde": 1,
+      "amine_isocyanide": 2,
+      "isocyanide_only": 6
+    },
+    "long_ester_branched_aldehyde_conservative_high": 17,
+    "long_ester_branched_aldehyde_oracle_scored": 45,
+    "long_ester_branched_aldehydes": 570,
+    "oracle_response_receipts": [
+      "f08d322bd1c997de5b0cac19fb7764fbc719092852ef6f3890b0f4ccf89807f2"
+    ],
+    "realized_branched_all_view_interpolative": 65,
+    "realized_branched_calibrated": 42,
+    "realized_branched_conservative_high": 17,
+    "realized_branched_oracle_scored": 45,
+    "realized_carbon_branched": 3462,
+    "reason_counts": {
+      "distribution_boundary": 139,
+      "distribution_extrapolative": 3474,
+      "exact_measured_product_neutral_control": 20,
+      "interpolative_nonmeasured_oracle_scored": 45,
+      "terminal_chemical_admission:handle_policy_failure:amine_head": 144,
+      "terminal_chemical_admission:handle_policy_failure:oxoester_aldehyde_body_tail": 11,
+      "terminal_chemical_admission:invalid_or_nonexact_l1": 263
+    },
+    "terminal_chemical_admitted": 3678,
+    "unique_oracle_calls": 39
+  },
+  "worker_ready_receipt_sha256": "76117ccd29c26363e1d60fceda351db709fcd95bec9e54e221d4de811f8def54"
+}

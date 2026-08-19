@@ -1,0 +1,227 @@
+{
+  "config": {
+    "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/model/phase1_ugi_postselection_branching_audit_v1.json",
+    "sha256": "bb6c5428d231395ec85ed9ca6159f8ace2554ba4e98338c0efe3d009898560b9"
+  },
+  "flagged_product_ids": [
+    "joint_generated_0022",
+    "joint_generated_0025",
+    "joint_generated_0036",
+    "joint_generated_0042",
+    "joint_generated_0057",
+    "joint_generated_0071",
+    "joint_generated_0080",
+    "joint_generated_0085",
+    "joint_generated_0095",
+    "joint_generated_0190",
+    "joint_generated_0203",
+    "joint_generated_0218",
+    "joint_generated_0223",
+    "joint_generated_0229",
+    "joint_generated_0231",
+    "joint_generated_0242",
+    "joint_generated_0244",
+    "joint_generated_0262",
+    "joint_generated_0269",
+    "joint_generated_0286",
+    "joint_generated_0293",
+    "joint_generated_0301",
+    "joint_generated_0316",
+    "joint_generated_0327",
+    "joint_generated_0334",
+    "joint_generated_0352",
+    "joint_generated_0359",
+    "joint_generated_0374",
+    "joint_generated_0379",
+    "joint_generated_0384",
+    "joint_generated_0395",
+    "joint_generated_0418",
+    "joint_generated_0430",
+    "joint_generated_0446",
+    "joint_generated_0476",
+    "joint_generated_0482",
+    "joint_generated_0498",
+    "joint_generated_0529",
+    "joint_generated_0530",
+    "joint_generated_0533",
+    "joint_generated_0538",
+    "joint_generated_0556",
+    "joint_generated_0560",
+    "joint_generated_0567",
+    "joint_generated_0592",
+    "joint_generated_0606",
+    "joint_generated_0633",
+    "joint_generated_0639",
+    "joint_generated_0665",
+    "joint_generated_0673",
+    "joint_generated_0680",
+    "joint_generated_0715",
+    "joint_generated_0729",
+    "joint_generated_0731",
+    "joint_generated_0734",
+    "joint_generated_0741",
+    "joint_generated_0805",
+    "joint_generated_0807",
+    "joint_generated_0812",
+    "joint_generated_0818",
+    "joint_generated_0825",
+    "joint_generated_0826",
+    "joint_generated_0832",
+    "joint_generated_0833",
+    "joint_generated_0835",
+    "joint_generated_0838",
+    "joint_generated_0850",
+    "joint_generated_0866",
+    "joint_generated_0879",
+    "joint_generated_0888",
+    "joint_generated_0889",
+    "joint_generated_0895",
+    "joint_generated_0900",
+    "joint_generated_0908",
+    "joint_generated_0911",
+    "joint_generated_0953",
+    "joint_generated_0959",
+    "joint_generated_0961",
+    "joint_generated_0973",
+    "joint_generated_0976",
+    "joint_generated_0986",
+    "joint_generated_0996",
+    "joint_generated_0999",
+    "joint_generated_1000",
+    "joint_generated_1001",
+    "joint_generated_1004",
+    "joint_generated_1013"
+  ],
+  "inputs": {
+    "production_manifest": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "selected_sample": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+    },
+    "selection_reference_assignments": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "limitations": [
+    "Carbon-skeleton branch metrics do not establish synthesis infeasibility or biological quality.",
+    "The audit is post-selection and cannot reopen the frozen checkpoint.",
+    "The reference is the selection-visible Ugi training and calibration corpus, not all lipids."
+  ],
+  "production_generator": null,
+  "safe_claim": "The frozen generator remains a reproducible baseline, but adjacent carbon-skeleton branch points occur in generated tail-bearing components despite being absent from the selection-visible reference. A separately versioned challenger sampling or training policy is required before candidate lock.",
+  "schema_version": "phase1_ugi_postselection_branching_audit.v1",
+  "scope": {
+    "biological_activity_assessed": false,
+    "can_reopen_frozen_checkpoint": false,
+    "challenger_retraining_decision_only": true,
+    "synthesis_feasibility_assessed": false
+  },
+  "status": "complete_nonselecting_postselection_audit",
+  "summary": {
+    "challenger_required_before_candidate_lock": true,
+    "generated": {
+      "amine_head": {
+        "adjacent_carbon_branch_fraction": 0.08838133068520357,
+        "carbon_branch_atom_count_distribution": {
+          "0": 605,
+          "1": 271,
+          "2": 101,
+          "3": 28,
+          "4": 2
+        },
+        "components": 1007,
+        "components_with_adjacent_carbon_branch_atoms": 89,
+        "components_with_any_carbon_branch": 402,
+        "components_with_branch_run_at_least_three": 15,
+        "maximum_observed_branch_run": 4,
+        "minimum_observed_branch_graph_distance": 1
+      },
+      "isocyanide_tail": {
+        "adjacent_carbon_branch_fraction": 0.06256206554121152,
+        "carbon_branch_atom_count_distribution": {
+          "0": 613,
+          "1": 304,
+          "2": 90
+        },
+        "components": 1007,
+        "components_with_adjacent_carbon_branch_atoms": 63,
+        "components_with_any_carbon_branch": 394,
+        "components_with_branch_run_at_least_three": 0,
+        "maximum_observed_branch_run": 2,
+        "minimum_observed_branch_graph_distance": 1
+      },
+      "oxoester_aldehyde_body_tail": {
+        "adjacent_carbon_branch_fraction": 0.026812313803376366,
+        "carbon_branch_atom_count_distribution": {
+          "0": 932,
+          "1": 33,
+          "2": 42
+        },
+        "components": 1007,
+        "components_with_adjacent_carbon_branch_atoms": 27,
+        "components_with_any_carbon_branch": 75,
+        "components_with_branch_run_at_least_three": 0,
+        "maximum_observed_branch_run": 2,
+        "minimum_observed_branch_graph_distance": 1
+      }
+    },
+    "generated_products_with_components": 1007,
+    "products_with_adjacent_tail_carbon_branch_atoms": 87,
+    "products_with_adjacent_tail_carbon_branch_fraction": 0.08639523336643495,
+    "selection_reference": {
+      "amine_head": {
+        "adjacent_carbon_branch_fraction": 0.028469318292327142,
+        "carbon_branch_atom_count_distribution": {
+          "0": 63306,
+          "1": 13297,
+          "2": 5522,
+          "4": 139
+        },
+        "components": 82264,
+        "components_with_adjacent_carbon_branch_atoms": 2342,
+        "components_with_any_carbon_branch": 18958,
+        "components_with_branch_run_at_least_three": 0,
+        "maximum_observed_branch_run": 2,
+        "minimum_observed_branch_graph_distance": 1
+      },
+      "isocyanide_tail": {
+        "adjacent_carbon_branch_fraction": 0.0,
+        "carbon_branch_atom_count_distribution": {
+          "0": 33779,
+          "1": 32512,
+          "2": 15973
+        },
+        "components": 82264,
+        "components_with_adjacent_carbon_branch_atoms": 0,
+        "components_with_any_carbon_branch": 48485,
+        "components_with_branch_run_at_least_three": 0,
+        "maximum_observed_branch_run": 1,
+        "minimum_observed_branch_graph_distance": 2
+      },
+      "oxoester_aldehyde_body_tail": {
+        "adjacent_carbon_branch_fraction": 0.0,
+        "carbon_branch_atom_count_distribution": {
+          "0": 72721,
+          "1": 1936,
+          "2": 7607
+        },
+        "components": 82264,
+        "components_with_adjacent_carbon_branch_atoms": 0,
+        "components_with_any_carbon_branch": 9543,
+        "components_with_branch_run_at_least_three": 0,
+        "maximum_observed_branch_run": 1,
+        "minimum_observed_branch_graph_distance": 2
+      }
+    },
+    "selection_reference_products": 82264,
+    "tail_adjacent_branch_rate_exceeds_reference": {
+      "isocyanide_tail": true,
+      "oxoester_aldehyde_body_tail": true
+    }
+  },
+  "task": "role_specific_carbon_skeleton_branching"
+}

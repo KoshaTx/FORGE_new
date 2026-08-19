@@ -1,0 +1,681 @@
+{
+  "claim_boundary": {
+    "does_not_support": [
+      "a pristine or untouched heldout estimate",
+      "recovery of the exact held component represented by each source product",
+      "unseen reaction-family or non-Ugi generalization",
+      "L2 or L3 route closure, synthesis feasibility or synthesis success",
+      "biological activity or biological guidance"
+    ],
+    "supports": [
+      "generation remains valid and exactly L1-forward-consistent under coarse morphology programs associated with held component families",
+      "the selected generator emits structurally novel precursor graphs under that descriptive stress condition",
+      "performance can be stratified by which precursor role families supplied the held-associated program"
+    ]
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_product_l1_postselection_held_component_stress_v1.json",
+    "sha256": "07899965880df531773ff8587493b6570cd41e1e9ecaea653a757e9048f786e4"
+  },
+  "decision": {
+    "architecture_or_checkpoint_changed": false,
+    "broad_pretraining_decision": "not_made_by_this_descriptive_evaluation",
+    "thresholds_applied": false
+  },
+  "evaluation_timing": {
+    "current_analysis_performed_after_production_freeze": true,
+    "heldout_fold_is_pristine": false,
+    "interpretation": "descriptive post-selection component-family stress test",
+    "raw_probe_and_samples_existed_and_were_inspected_before_production_freeze": true
+  },
+  "generation": {
+    "by_generated_component_role": {
+      "amine_head": {
+        "handle_policy_counts": {
+          "distinct_sites_1": 488,
+          "distinct_sites_2": 23,
+          "pass": 511
+        },
+        "handle_policy_failure_examples": [],
+        "handle_policy_pass_fraction": 1.0,
+        "membership_counts": {
+          "calibration": 14,
+          "heldout": 40,
+          "outside_admitted_catalog": 258,
+          "train": 199
+        },
+        "membership_fractions": {
+          "calibration": 0.0273972602739726,
+          "heldout": 0.07827788649706457,
+          "outside_admitted_catalog": 0.5048923679060665,
+          "train": 0.38943248532289626
+        },
+        "nearest_all_admitted_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.9090909090909091,
+          "minimum": 0.17857142857142858,
+          "q05": 0.28869047619047616,
+          "q95": 1.0
+        },
+        "nearest_train_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.6153846153846154,
+          "minimum": 0.16666666666666666,
+          "q05": 0.2714987714987715,
+          "q95": 1.0
+        },
+        "outside_catalog_nearest_train_ecfp4_tanimoto": {
+          "maximum": 0.8421052631578947,
+          "median": 0.4583333333333333,
+          "minimum": 0.16666666666666666,
+          "q05": 0.2568548387096774,
+          "q95": 0.75
+        },
+        "outside_catalog_nearest_train_similarity_threshold_fractions": {
+          "below_0.5": 0.5775193798449613,
+          "below_0.7": 0.9147286821705426,
+          "below_0.8": 0.9844961240310077,
+          "below_0.9": 1.0
+        },
+        "samples": 511,
+        "unique_generated_components": 195,
+        "unique_outside_admitted_catalog_components": 160
+      },
+      "isocyanide_tail": {
+        "handle_policy_counts": {
+          "distinct_sites_1": 511,
+          "pass": 511
+        },
+        "handle_policy_failure_examples": [],
+        "handle_policy_pass_fraction": 1.0,
+        "membership_counts": {
+          "outside_admitted_catalog": 69,
+          "train": 442
+        },
+        "membership_fractions": {
+          "outside_admitted_catalog": 0.1350293542074364,
+          "train": 0.8649706457925636
+        },
+        "nearest_all_admitted_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 1.0,
+          "minimum": 0.2857142857142857,
+          "q05": 0.4791304347826087,
+          "q95": 1.0
+        },
+        "nearest_train_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 1.0,
+          "minimum": 0.2857142857142857,
+          "q05": 0.4791304347826087,
+          "q95": 1.0
+        },
+        "outside_catalog_nearest_train_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.52,
+          "minimum": 0.2857142857142857,
+          "q05": 0.32142857142857145,
+          "q95": 1.0
+        },
+        "outside_catalog_nearest_train_similarity_threshold_fractions": {
+          "below_0.5": 0.42028985507246375,
+          "below_0.7": 0.6376811594202898,
+          "below_0.8": 0.7681159420289855,
+          "below_0.9": 0.8115942028985508
+        },
+        "samples": 511,
+        "unique_generated_components": 57,
+        "unique_outside_admitted_catalog_components": 40
+      },
+      "oxoester_aldehyde_body_tail": {
+        "handle_policy_counts": {
+          "distinct_sites_1": 511,
+          "pass": 511
+        },
+        "handle_policy_failure_examples": [],
+        "handle_policy_pass_fraction": 1.0,
+        "membership_counts": {
+          "heldout": 2,
+          "outside_admitted_catalog": 329,
+          "train": 180
+        },
+        "membership_fractions": {
+          "heldout": 0.003913894324853229,
+          "outside_admitted_catalog": 0.6438356164383562,
+          "train": 0.3522504892367906
+        },
+        "nearest_all_admitted_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.6956521739130435,
+          "minimum": 0.2692307692307692,
+          "q05": 0.38873626373626374,
+          "q95": 1.0
+        },
+        "nearest_train_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.6571428571428571,
+          "minimum": 0.26666666666666666,
+          "q05": 0.3516483516483516,
+          "q95": 1.0
+        },
+        "outside_catalog_nearest_train_ecfp4_tanimoto": {
+          "maximum": 1.0,
+          "median": 0.5217391304347826,
+          "minimum": 0.26666666666666666,
+          "q05": 0.29777777777777775,
+          "q95": 1.0
+        },
+        "outside_catalog_nearest_train_similarity_threshold_fractions": {
+          "below_0.5": 0.3860182370820669,
+          "below_0.7": 0.9270516717325228,
+          "below_0.8": 0.9270516717325228,
+          "below_0.9": 0.9270516717325228
+        },
+        "samples": 511,
+        "unique_generated_components": 187,
+        "unique_outside_admitted_catalog_components": 166
+      }
+    },
+    "by_held_role_class": {
+      "amine_head": {
+        "all_three_handles_qualified": {
+          "count": 76,
+          "denominator": 76,
+          "fraction": 1.0
+        },
+        "attempted_programs": 76,
+        "component_membership_counts": {
+          "exact_heldout_component": 5,
+          "genuinely_generated_component": 62,
+          "train_catalog_only": 9
+        },
+        "component_reconstruction": {
+          "count": 76,
+          "denominator": 76,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 76,
+          "denominator": 76,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "heldout": 2,
+          "outside_frozen_product_corpus": 73,
+          "train": 1
+        },
+        "unique_fraction_of_valid_products": 0.9868421052631579,
+        "unique_valid_products": 75,
+        "usable_structural_open_ended": {
+          "count": 62,
+          "denominator": 76,
+          "fraction": 0.8157894736842105
+        },
+        "valid_products": {
+          "count": 76,
+          "denominator": 76,
+          "fraction": 1.0
+        }
+      },
+      "amine_head+isocyanide_tail": {
+        "all_three_handles_qualified": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "attempted_programs": 50,
+        "component_membership_counts": {
+          "exact_calibration_component": 1,
+          "exact_heldout_component": 3,
+          "genuinely_generated_component": 31,
+          "train_catalog_only": 15
+        },
+        "component_reconstruction": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "heldout": 1,
+          "outside_frozen_product_corpus": 46,
+          "train": 3
+        },
+        "unique_fraction_of_valid_products": 0.96,
+        "unique_valid_products": 48,
+        "usable_structural_open_ended": {
+          "count": 31,
+          "denominator": 50,
+          "fraction": 0.62
+        },
+        "valid_products": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        }
+      },
+      "amine_head+oxoester_aldehyde_body_tail": {
+        "all_three_handles_qualified": {
+          "count": 99,
+          "denominator": 100,
+          "fraction": 0.99
+        },
+        "attempted_programs": 100,
+        "component_membership_counts": {
+          "exact_heldout_component": 4,
+          "genuinely_generated_component": 84,
+          "train_catalog_only": 11
+        },
+        "component_reconstruction": {
+          "count": 99,
+          "denominator": 100,
+          "fraction": 0.99
+        },
+        "exact_forward_reconstruction": {
+          "count": 99,
+          "denominator": 100,
+          "fraction": 0.99
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 1,
+        "product_membership_counts": {
+          "heldout": 2,
+          "outside_frozen_product_corpus": 95,
+          "train": 2
+        },
+        "unique_fraction_of_valid_products": 1.0,
+        "unique_valid_products": 99,
+        "usable_structural_open_ended": {
+          "count": 84,
+          "denominator": 100,
+          "fraction": 0.84
+        },
+        "valid_products": {
+          "count": 99,
+          "denominator": 100,
+          "fraction": 0.99
+        }
+      },
+      "amine_head+oxoester_aldehyde_body_tail+isocyanide_tail": {
+        "all_three_handles_qualified": {
+          "count": 63,
+          "denominator": 63,
+          "fraction": 1.0
+        },
+        "attempted_programs": 63,
+        "component_membership_counts": {
+          "exact_heldout_component": 1,
+          "genuinely_generated_component": 53,
+          "train_catalog_only": 9
+        },
+        "component_reconstruction": {
+          "count": 63,
+          "denominator": 63,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 63,
+          "denominator": 63,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "outside_frozen_product_corpus": 61,
+          "train": 2
+        },
+        "unique_fraction_of_valid_products": 1.0,
+        "unique_valid_products": 63,
+        "usable_structural_open_ended": {
+          "count": 53,
+          "denominator": 63,
+          "fraction": 0.8412698412698413
+        },
+        "valid_products": {
+          "count": 63,
+          "denominator": 63,
+          "fraction": 1.0
+        }
+      },
+      "isocyanide_tail": {
+        "all_three_handles_qualified": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "attempted_programs": 50,
+        "component_membership_counts": {
+          "exact_calibration_component": 1,
+          "genuinely_generated_component": 39,
+          "train_catalog_only": 10
+        },
+        "component_reconstruction": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "outside_frozen_product_corpus": 46,
+          "train": 4
+        },
+        "unique_fraction_of_valid_products": 1.0,
+        "unique_valid_products": 50,
+        "usable_structural_open_ended": {
+          "count": 39,
+          "denominator": 50,
+          "fraction": 0.78
+        },
+        "valid_products": {
+          "count": 50,
+          "denominator": 50,
+          "fraction": 1.0
+        }
+      },
+      "oxoester_aldehyde_body_tail": {
+        "all_three_handles_qualified": {
+          "count": 100,
+          "denominator": 100,
+          "fraction": 1.0
+        },
+        "attempted_programs": 100,
+        "component_membership_counts": {
+          "exact_calibration_component": 1,
+          "genuinely_generated_component": 95,
+          "train_catalog_only": 4
+        },
+        "component_reconstruction": {
+          "count": 100,
+          "denominator": 100,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 100,
+          "denominator": 100,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "outside_frozen_product_corpus": 98,
+          "train": 2
+        },
+        "unique_fraction_of_valid_products": 1.0,
+        "unique_valid_products": 100,
+        "usable_structural_open_ended": {
+          "count": 95,
+          "denominator": 100,
+          "fraction": 0.95
+        },
+        "valid_products": {
+          "count": 100,
+          "denominator": 100,
+          "fraction": 1.0
+        }
+      },
+      "oxoester_aldehyde_body_tail+isocyanide_tail": {
+        "all_three_handles_qualified": {
+          "count": 73,
+          "denominator": 73,
+          "fraction": 1.0
+        },
+        "attempted_programs": 73,
+        "component_membership_counts": {
+          "genuinely_generated_component": 65,
+          "train_catalog_only": 8
+        },
+        "component_reconstruction": {
+          "count": 73,
+          "denominator": 73,
+          "fraction": 1.0
+        },
+        "exact_forward_reconstruction": {
+          "count": 73,
+          "denominator": 73,
+          "fraction": 1.0
+        },
+        "forward_outcome_saturated": 0,
+        "invalid_products": 0,
+        "product_membership_counts": {
+          "outside_frozen_product_corpus": 69,
+          "train": 4
+        },
+        "unique_fraction_of_valid_products": 1.0,
+        "unique_valid_products": 73,
+        "usable_structural_open_ended": {
+          "count": 65,
+          "denominator": 73,
+          "fraction": 0.8904109589041096
+        },
+        "valid_products": {
+          "count": 73,
+          "denominator": 73,
+          "fraction": 1.0
+        }
+      }
+    },
+    "overall": {
+      "all_three_handles_qualified": {
+        "count": 511,
+        "denominator": 512,
+        "fraction": 0.998046875
+      },
+      "attempted_programs": 512,
+      "component_membership_counts": {
+        "exact_calibration_component": 3,
+        "exact_heldout_component": 13,
+        "genuinely_generated_component": 429,
+        "train_catalog_only": 66
+      },
+      "component_reconstruction": {
+        "count": 511,
+        "denominator": 512,
+        "fraction": 0.998046875
+      },
+      "exact_forward_reconstruction": {
+        "count": 511,
+        "denominator": 512,
+        "fraction": 0.998046875
+      },
+      "forward_outcome_saturated": 0,
+      "invalid_products": 1,
+      "product_membership_counts": {
+        "heldout": 5,
+        "outside_frozen_product_corpus": 488,
+        "train": 18
+      },
+      "unique_fraction_of_valid_products": 0.9882583170254403,
+      "unique_valid_products": 505,
+      "usable_structural_open_ended": {
+        "count": 429,
+        "denominator": 512,
+        "fraction": 0.837890625
+      },
+      "valid_products": {
+        "count": 511,
+        "denominator": 512,
+        "fraction": 0.998046875
+      }
+    }
+  },
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "earlier_nonselecting_gate": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_held_component_novelty_gate.json",
+      "sha256": "cd371b1f959a822a650b32daf28e107b972d921f51b37c2c274693e259a2d705"
+    },
+    "held_component_probe": {
+      "path": "results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "sha256": "6b16f867fb72e92222df25cbd510b3acc586a2dde38a16e7c4afe63c669bc630"
+    },
+    "production_manifest": {
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "selected_checkpoint_sample": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_step1000_held_component_probe/result.json",
+      "sha256": "68a40281db1ec80849b5ebb7d01e2e29619524e6073b67bc5c678cd91988f317"
+    }
+  },
+  "program_contract": {
+    "attempted_programs": 512,
+    "component_identities_or_graphs_exposed_to_sampler": false,
+    "held_role_class_counts": {
+      "amine_head": 76,
+      "amine_head+isocyanide_tail": 50,
+      "amine_head+oxoester_aldehyde_body_tail": 100,
+      "amine_head+oxoester_aldehyde_body_tail+isocyanide_tail": 63,
+      "isocyanide_tail": 50,
+      "oxoester_aldehyde_body_tail": 100,
+      "oxoester_aldehyde_body_tail+isocyanide_tail": 73
+    },
+    "program_fields": [
+      "attachment_counts",
+      "cycle_ranks",
+      "junction_budgets",
+      "node_counts"
+    ],
+    "seed": 20260801
+  },
+  "schema_version": "phase1_ugi_product_l1_postselection_held_component_stress.v1",
+  "selected_checkpoint": {
+    "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+    "selection_remains_frozen": true,
+    "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532",
+    "step": 1000
+  },
+  "single_corruption_denoising_loss": {
+    "by_held_role_class": {
+      "amine_head": {
+        "metrics": {
+          "atom_ce": 0.41234142150713765,
+          "closure_bond_ce": 0.6427445749493388,
+          "decoration_anchor_ce": 0.9480706236372778,
+          "decoration_atom_ce": 0.16427138520525647,
+          "decoration_bond_ce": 0.49044293813375167,
+          "offspring_ce": 0.4050003829972569,
+          "parent_bond_ce": 0.18346873634305352,
+          "total": 3.2463400506354
+        },
+        "records": 5775
+      },
+      "amine_head+isocyanide_tail": {
+        "metrics": {
+          "atom_ce": 0.24828259912404146,
+          "closure_bond_ce": 0.4109048500928012,
+          "decoration_anchor_ce": 0.2557407686927102,
+          "decoration_atom_ce": 0.23781810673800383,
+          "decoration_bond_ce": 0.32095648624680256,
+          "offspring_ce": 0.28969194759022104,
+          "parent_bond_ce": 0.3075672643834894,
+          "total": 2.070962036306208
+        },
+        "records": 550
+      },
+      "amine_head+oxoester_aldehyde_body_tail": {
+        "metrics": {
+          "atom_ce": 0.47848183750837164,
+          "closure_bond_ce": 0.8538007672968622,
+          "decoration_anchor_ce": 1.2274005878590568,
+          "decoration_atom_ce": 0.19907446815285404,
+          "decoration_bond_ce": 0.5993624468151119,
+          "offspring_ce": 0.5155199525318619,
+          "parent_bond_ce": 0.2106652223835142,
+          "total": 4.0843053326918906
+        },
+        "records": 3544
+      },
+      "amine_head+oxoester_aldehyde_body_tail+isocyanide_tail": {
+        "metrics": {
+          "atom_ce": 0.2884621606595395,
+          "closure_bond_ce": 0.6871780996028604,
+          "decoration_anchor_ce": 0.39291469892611774,
+          "decoration_atom_ce": 0.4081875664299359,
+          "decoration_bond_ce": 0.43582002494993544,
+          "offspring_ce": 0.39800346720634133,
+          "parent_bond_ce": 0.35399466920793854,
+          "total": 2.9645604953049975
+        },
+        "records": 373
+      },
+      "isocyanide_tail": {
+        "metrics": {
+          "atom_ce": 0.227477629011145,
+          "closure_bond_ce": 0.36613848856831477,
+          "decoration_anchor_ce": 0.2889604880491319,
+          "decoration_atom_ce": 0.22593730272081927,
+          "decoration_bond_ce": 0.2364913588229117,
+          "offspring_ce": 0.2518883953958068,
+          "parent_bond_ce": 0.30470161089158854,
+          "total": 1.9015952536632295
+        },
+        "records": 2493
+      },
+      "oxoester_aldehyde_body_tail": {
+        "metrics": {
+          "atom_ce": 0.47296155686538927,
+          "closure_bond_ce": 0.8675003881335417,
+          "decoration_anchor_ce": 1.2689597733414646,
+          "decoration_atom_ce": 0.19731679467445287,
+          "decoration_bond_ce": 0.6534696507231832,
+          "offspring_ce": 0.4970262962280212,
+          "parent_bond_ce": 0.21244782105906895,
+          "total": 4.169682305497171
+        },
+        "records": 15781
+      },
+      "oxoester_aldehyde_body_tail+isocyanide_tail": {
+        "metrics": {
+          "atom_ce": 0.2760619073178373,
+          "closure_bond_ce": 0.592571335741473,
+          "decoration_anchor_ce": 0.3962246307994182,
+          "decoration_atom_ce": 0.35901583436120343,
+          "decoration_bond_ce": 0.31327724827924375,
+          "offspring_ce": 0.3906157070569054,
+          "parent_bond_ce": 0.35302378335598844,
+          "total": 2.6807904789783294
+        },
+        "records": 1606
+      }
+    },
+    "description": "One deterministic corruption draw per record across all 30,122 component-family heldout products; descriptive denoising stress metric, not exact likelihood",
+    "record_weighted_metrics": {
+      "atom_ce": 0.42478675512740055,
+      "closure_bond_ce": 0.7560756716244756,
+      "decoration_anchor_ce": 1.0455613696710118,
+      "decoration_atom_ce": 0.20552880114544103,
+      "decoration_bond_ce": 0.554433178152904,
+      "offspring_ce": 0.4505850993975899,
+      "parent_bond_ce": 0.2253020345159486,
+      "total": 3.6622729239714875
+    },
+    "records": 30122,
+    "seed": 20260801
+  },
+  "status": "complete_descriptive_postselection_evaluation"
+}

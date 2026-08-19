@@ -1,0 +1,147 @@
+{
+ "anatomy": {
+  "A_train_family_derived": {
+   "complete_tuple_present_in_stratum_reference": 1024,
+   "complete_tuple_present_in_train_fold": 671,
+   "complete_tuple_present_in_train_fold_rate": 0.6552734375,
+   "distance_sample": 128,
+   "median_l1_distance_to_nearest_train_fold_program": 0.0,
+   "programs": 1024,
+   "roles_with_a_subprogram_unseen_in_train_fold": {
+    "0": 738,
+    "1": 267,
+    "2": 19
+   }
+  },
+  "B_held_family_overlapping": {
+   "complete_tuple_present_in_stratum_reference": 1024,
+   "complete_tuple_present_in_train_fold": 788,
+   "complete_tuple_present_in_train_fold_rate": 0.76953125,
+   "distance_sample": 128,
+   "median_l1_distance_to_nearest_train_fold_program": 0.0,
+   "programs": 1024,
+   "roles_with_a_subprogram_unseen_in_train_fold": {
+    "0": 821,
+    "1": 195,
+    "2": 8
+   }
+  },
+  "C_held_family_disjoint": {
+   "complete_tuple_present_in_stratum_reference": 0,
+   "complete_tuple_present_in_train_fold": 163,
+   "complete_tuple_present_in_train_fold_rate": 0.1591796875,
+   "distance_sample": 128,
+   "median_l1_distance_to_nearest_train_fold_program": 1.0,
+   "programs": 1024,
+   "roles_with_a_subprogram_unseen_in_train_fold": {
+    "0": 210,
+    "1": 592,
+    "2": 208,
+    "3": 14
+   }
+  }
+ },
+ "inputs": {
+  "draw": {
+   "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+   "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+  },
+  "samples": {
+   "path": "results/phase1/forge_held_family_stage2_v1/samples.json",
+   "sha256": "7dc32d5e1d1450f4875f333a87f783c06a594115a6d7ed63ffb6f2a70c93f939"
+  }
+ },
+ "nonclaims": [
+  "A program absent as a complete tuple whose role subprograms were all seen individually shows composition of familiar role programs, not extrapolation to unseen role-level values.",
+  "Per-family rates are reported because stratum C draws 1,024 programs from six source families; the pooled rate has six independent chemical regimes behind it, not 1,024."
+ ],
+ "per_family": {
+  "A_train_family_derived": {
+   "families": 5,
+   "leave_one_family_out_range": [
+    0.9877750611246944,
+    0.9890829694323144
+   ],
+   "per_family_admission": {
+    "oxoester_aldehyde_body_tail-2086eb280d89fc8a": 0.9868421052631579,
+    "oxoester_aldehyde_body_tail-5d8ece9d1baf6b8f": 0.9912280701754386,
+    "oxoester_aldehyde_body_tail-94d293532dfe7c9c": 0.9814814814814815,
+    "oxoester_aldehyde_body_tail-bf6cd33f8d5d0c9f": 0.9887387387387387,
+    "oxoester_aldehyde_body_tail-c52a8eac7d268b54": 0.9902912621359223
+   },
+   "per_family_programs": {
+    "oxoester_aldehyde_body_tail-2086eb280d89fc8a": 152,
+    "oxoester_aldehyde_body_tail-5d8ece9d1baf6b8f": 114,
+    "oxoester_aldehyde_body_tail-94d293532dfe7c9c": 108,
+    "oxoester_aldehyde_body_tail-bf6cd33f8d5d0c9f": 444,
+    "oxoester_aldehyde_body_tail-c52a8eac7d268b54": 206
+   },
+   "per_family_range": [
+    0.9814814814814815,
+    0.9912280701754386
+   ],
+   "pooled_admission": 0.98828125
+  },
+  "B_held_family_overlapping": {
+   "families": 2,
+   "leave_one_family_out_range": [
+    0.9883527454242929,
+    0.9976359338061466
+   ],
+   "per_family_admission": {
+    "oxoester_aldehyde_body_tail-26c4e1d574b04edd": 0.9976359338061466,
+    "oxoester_aldehyde_body_tail-c9c8746eff3946f4": 0.9883527454242929
+   },
+   "per_family_programs": {
+    "oxoester_aldehyde_body_tail-26c4e1d574b04edd": 423,
+    "oxoester_aldehyde_body_tail-c9c8746eff3946f4": 601
+   },
+   "per_family_range": [
+    0.9883527454242929,
+    0.9976359338061466
+   ],
+   "pooled_admission": 0.9921875
+  },
+  "C_held_family_disjoint": {
+   "families": 6,
+   "leave_one_family_out_range": [
+    0.9864559819413092,
+    0.9905325443786982
+   ],
+   "per_family_admission": {
+    "oxoester_aldehyde_body_tail-0d39f75c4c34704e": 0.9937888198757764,
+    "oxoester_aldehyde_body_tail-17158463fd33fdcc": 0.9918367346938776,
+    "oxoester_aldehyde_body_tail-26c4e1d574b04edd": 0.9776536312849162,
+    "oxoester_aldehyde_body_tail-29748bbbe6e353c5": 0.9883040935672515,
+    "oxoester_aldehyde_body_tail-c9c8746eff3946f4": 0.9769230769230769,
+    "oxoester_aldehyde_body_tail-d12265eb5121cde4": 1.0
+   },
+   "per_family_programs": {
+    "oxoester_aldehyde_body_tail-0d39f75c4c34704e": 161,
+    "oxoester_aldehyde_body_tail-17158463fd33fdcc": 245,
+    "oxoester_aldehyde_body_tail-26c4e1d574b04edd": 179,
+    "oxoester_aldehyde_body_tail-29748bbbe6e353c5": 171,
+    "oxoester_aldehyde_body_tail-c9c8746eff3946f4": 130,
+    "oxoester_aldehyde_body_tail-d12265eb5121cde4": 138
+   },
+   "per_family_range": [
+    0.9769230769230769,
+    1.0
+   ],
+   "pooled_admission": 0.98828125
+  }
+ },
+ "references": {
+  "train_family_heldout_programs": 4260,
+  "train_fold_programs": 24714,
+  "train_fold_role_subprograms": 140,
+  "why_two": "the strata were cut against the train-family subset of the heldout fold, which is not the set the model trained on. Disjointness from the former does not imply the program was never seen during fitting."
+ },
+ "runtime": {
+  "elapsed_seconds": 23.8,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.2"
+ },
+ "schema_version": "phase1_forge_program_disjointness_anatomy.v1",
+ "status": "complete_anatomy_and_per_family_stratification"
+}

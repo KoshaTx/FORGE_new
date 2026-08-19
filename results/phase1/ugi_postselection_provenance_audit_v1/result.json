@@ -1,0 +1,158 @@
+{
+  "artifacts": {
+    "component_ledger_sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6",
+    "product_ledger_sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"
+  },
+  "claims_boundary": {
+    "catalog_absence_is_unsynthesizability": false,
+    "exact_catalog_match_is_route_closure": false,
+    "registry_provenance_is_experimental_success": false,
+    "static_route_composition_is_route_planning": false,
+    "structural_novelty_is_product_novelty": false
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_postselection_provenance_audit_v1.json",
+    "sha256": "ffe6be8ecce694fecaf8baed8da8034fd67bc255a45a9dcea346a715e67f45f9"
+  },
+  "identity_policy": {
+    "component_identity": "exact_role_plus_canonical_constitutional_smiles",
+    "similarity_used_for_provenance": false,
+    "stereochemistry": "excluded"
+  },
+  "inputs": {
+    "component_expansion_result": {
+      "bytes": 6051,
+      "path": "results/phase1/ugi_component_expansion/result.json",
+      "sha256": "374e3edc61b6cf31a2253e9ac7babe29695b47ae212c95a1969950d5fc862666"
+    },
+    "component_registry": {
+      "bytes": 23048,
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "production_manifest": {
+      "bytes": 5923,
+      "path": "results/phase1/ugi_product_l1_production_generator_v1.json",
+      "sha256": "c27352c11a2e210fd76a6e4ae510bbbb89e51c92c28514fd9b4693f82a50e68a"
+    },
+    "route_readiness_ledger": {
+      "bytes": 14189,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "route_readiness_result": {
+      "bytes": 8558,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    },
+    "selected_sample": {
+      "bytes": 1752629,
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+    }
+  },
+  "provenance_policy": {
+    "expanded_substratum_definition": "admitted non-original exact catalog identity without the transfer source class",
+    "known_definition": "exact admitted catalog identity with is_current_catalog=false",
+    "no_similarity_promotion": true,
+    "original_definition": "exact catalog identity with is_current_catalog=true",
+    "primary_component_strata": [
+      "original_ugi_component",
+      "admitted_transferred_or_expanded_known_component",
+      "graph_absent_from_frozen_424_component_catalog"
+    ],
+    "transfer_source_class": "cross_platform_hydrophobic_transfer",
+    "transfer_substratum_definition": "exact registry source class only"
+  },
+  "route_diagnostic_policy": {
+    "exact_role_identity_join": true,
+    "outside_catalog_evidence_category": "missing_route_knowledge",
+    "outside_catalog_is_infeasible": false,
+    "outside_catalog_tier": "not_assessed_missing_route_knowledge",
+    "route_planning_performed": false,
+    "static_composition_only": true
+  },
+  "safe_claim": "The frozen sample contains exact role-specific constitutional matches to original and expanded known Ugi components, together with component graphs absent from the frozen 424-component catalog. Catalog absence is assigned missing route knowledge, not chemical infeasibility.",
+  "schema_version": "phase1_ugi_postselection_provenance_audit.v1",
+  "scope": {
+    "biological_scoring_performed": false,
+    "can_reopen_architecture_or_checkpoint": false,
+    "candidate_selection_performed": false,
+    "outside_catalog_components_are_infeasible": false,
+    "postselection_nonselecting": true,
+    "route_guidance_performed": false,
+    "route_planning_performed": false
+  },
+  "status": "complete_nonselecting_postselection_audit",
+  "summary": {
+    "attempted_draws": 1024,
+    "component_occurrences": 3021,
+    "component_occurrences_by_catalog_provenance_substratum": {
+      "admitted_cross_platform_transferred_known_component": 16,
+      "admitted_expanded_known_component": 574,
+      "graph_absent_from_frozen_catalog": 1378,
+      "original_current_ugi_catalog_component": 1053
+    },
+    "component_occurrences_by_role_and_structural_provenance": {
+      "amine_head": {
+        "admitted_transferred_or_expanded_known_component": 234,
+        "graph_absent_from_frozen_424_component_catalog": 612,
+        "original_ugi_component": 161
+      },
+      "isocyanide_tail": {
+        "admitted_transferred_or_expanded_known_component": 145,
+        "graph_absent_from_frozen_424_component_catalog": 318,
+        "original_ugi_component": 544
+      },
+      "oxoester_aldehyde_body_tail": {
+        "admitted_transferred_or_expanded_known_component": 211,
+        "graph_absent_from_frozen_424_component_catalog": 448,
+        "original_ugi_component": 348
+      }
+    },
+    "component_occurrences_by_static_route_readiness_tier": {
+      "accepted_terminal": 142,
+      "exact_source_forward_verified_l3_closed": 507,
+      "family_projected_only": 464,
+      "missing_route_knowledge": 114,
+      "not_assessed_missing_route_knowledge": 1378,
+      "outside_route_support": 416
+    },
+    "component_occurrences_by_structural_provenance": {
+      "admitted_transferred_or_expanded_known_component": 590,
+      "graph_absent_from_frozen_424_component_catalog": 1378,
+      "original_ugi_component": 1053
+    },
+    "component_reconstructed_products": 1007,
+    "frozen_catalog_components": 424,
+    "original_current_catalog_components": 95,
+    "products_by_static_route_diagnostic": {
+      "all_components_static_route_complete": 3,
+      "contains_catalog_absent_component_route_not_assessed": 847,
+      "within_catalog_with_one_or_more_noncomplete_static_route_tiers": 157
+    },
+    "products_by_structural_provenance": {
+      "product_contains_admitted_transferred_or_expanded_known_component": 130,
+      "product_contains_catalog_absent_component": 847,
+      "product_uses_only_original_ugi_components": 30
+    },
+    "unique_components_by_role_and_structural_provenance": {
+      "amine_head": {
+        "admitted_transferred_or_expanded_known_component": 36,
+        "graph_absent_from_frozen_424_component_catalog": 287,
+        "original_ugi_component": 12
+      },
+      "isocyanide_tail": {
+        "admitted_transferred_or_expanded_known_component": 15,
+        "graph_absent_from_frozen_424_component_catalog": 127,
+        "original_ugi_component": 8
+      },
+      "oxoester_aldehyde_body_tail": {
+        "admitted_transferred_or_expanded_known_component": 10,
+        "graph_absent_from_frozen_424_component_catalog": 105,
+        "original_ugi_component": 10
+      }
+    }
+  },
+  "task": "Exact-identity provenance strata and static route-readiness composition"
+}

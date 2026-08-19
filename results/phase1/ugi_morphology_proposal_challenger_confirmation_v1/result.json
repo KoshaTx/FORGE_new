@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "shard_receipts_sha256": "0491955a176d1290079fc6408e3369746221b38da961ebcfa3eb5b62ab8ec883",
+    "terminal_ledger": {
+      "logical_sha256": "367fd6f14ef8a50e305bba3b0da07c99aab33b1d218828e759a79b6312bcf883",
+      "path": "terminal_ledger.jsonl.gz",
+      "rows": 3072,
+      "sha256": "993e474eda3fd94547b702a2129d7f1c3f1bdb89968ab483a21917bb7798e3bf"
+    }
+  },
+  "config": {
+    "path": "configs/model/phase1_ugi_morphology_proposal_challenger_confirmation_v1.json",
+    "sha256": "b09c39a46b062521c384b659621107d00473b1502194d24e980696a81fe6ca9e"
+  },
+  "counts": {
+    "programs": 3072,
+    "shards": 48,
+    "terminal_attempts": 3072,
+    "valid_exact_l1": 2976
+  },
+  "nonclaims": [
+    "no potency, route or synthesis value was evaluated",
+    "no nonzero guidance or candidate selection was performed",
+    "terminal structural support remains to be scored read-only"
+  ],
+  "result_sha256": "e778f21dadb6d30407a4211836f2f9e31b580067bbc918ee469afcb7e71e1f1f",
+  "schedule_sha256": "7337949cd3baf00822e50df64e4cf74b3f0c1b8b5c292544cdeb019f630d5b86",
+  "schema_version": "phase1_ugi_morphology_proposal_confirmation.v1",
+  "scope": {
+    "candidate_selection": false,
+    "fresh_native_terminals": true,
+    "nonzero_guidance": false,
+    "oracle_calls": 0,
+    "partition": "unused_program_confirmation",
+    "potency_predictions": 0,
+    "proposal_calls": 0,
+    "retries_or_repairs": false,
+    "route_calls": 0,
+    "sealed_holdout_access": false,
+    "synthesis_calls": 0
+  },
+  "status": "complete_unused_program_morphology_confirmation_census"
+}

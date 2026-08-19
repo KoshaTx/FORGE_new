@@ -1,0 +1,124 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_launch_preflight.v1",
+  "status": "awaiting_explicit_external_cloud_approval",
+  "run_name": "ugi_joint_sparse_size_only_v1_39a69b5bf465",
+  "comparison_role": "matched size-only conditioning ablation of the full-morphology prior",
+  "launch_review": {
+    "attempted_on": "2026-08-01",
+    "submitted_to_modal": false,
+    "billable_job_started": false,
+    "data_uploaded": false,
+    "blocking_requirement": "explicit approval of the Modal destination, frozen source/corpus upload and billable L4 cost class"
+  },
+  "cloud_request": {
+    "provider": "Modal",
+    "gpu_class": "L4",
+    "cpu": 4.0,
+    "memory_mib": 24576,
+    "maximum_timeout_seconds": 14400,
+    "detached": true,
+    "billable_external_run": true
+  },
+  "training_contract": {
+    "maximum_steps": 8000,
+    "batch_size": 128,
+    "evaluation_interval_steps": 250,
+    "serial_checkpoint_steps": [250, 500, 1000, 2000, 4000, 6000, 8000],
+    "early_stopping_patience_evaluations": 12,
+    "early_stopping_minimum_steps": 2000,
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "supplied_global_variables": ["per_origin_node_counts"],
+    "generated_global_variables": [
+      "per_origin_attachment_counts",
+      "per_origin_junction_budgets",
+      "per_origin_cycle_ranks"
+    ]
+  },
+  "matched_baseline": {
+    "run_name": "ugi_joint_sparse_balanced_v2_1cf363a57343",
+    "preflight": "results/phase1/ugi_joint_sparse_balanced_v2_launch_preflight.json",
+    "same_training_corpus": true,
+    "same_split": true,
+    "same_architecture_width": true,
+    "same_seed": true,
+    "same_training_and_checkpoint_schedule": true,
+    "intended_difference": "remove clean junction, cycle-rank, and attachment-count conditioning"
+  },
+  "immutable_inputs": {
+    "training_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_size_only_v1.json",
+      "sha256": "c6cbf6314ca2bd91190051d1453f071297942a83be73c67fa0bfc406d5d1af3c"
+    },
+    "training_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "support_audit": {
+      "path": "results/phase1/ugi_support_bounds_audit_v2/result.json",
+      "sha256": "ac847df33cf9d446b85fccf88c298713e86107f626d816f3996f5b46b861ea29"
+    },
+    "novelty_stratified_probe": {
+      "path": "results/phase1/ugi_balanced_program_probe_v2_novelty_256.json",
+      "sha256": "61e3210ad3ecb5c507f9faa10b755e96adbb41ff59e48a15c9458036192d266b"
+    },
+    "unconditional_size_prior_source": {
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+    },
+    "production_closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "production_closure_selection": {
+      "path": "results/phase1/ugi_closure_expanded_full/result.json",
+      "sha256": "c89142844ea2ee0dfca9d63b9a5ebf5eab10d721da459a49f677e60694a182fc"
+    },
+    "launcher": {
+      "path": "scripts/modal_phase1_ugi_joint_sparse_size_only_v1.py",
+      "sha256": "963af4007fa73ebc7afb4bec3d928d2d7b292fcf44e74c80216f50d018abec4e"
+    },
+    "python_source_tree_sha256": "cd3434db2cd99208cb46e7aaefb508b121f79219c628725e10be4db1c95b93ce"
+  },
+  "local_evidence": {
+    "smoke_result": {
+      "path": "results/phase1/ugi_joint_sparse_size_only_v1_smoke/result.json",
+      "sha256": "d57915d244a36774d1f07076d6420fc30e8b3efcc15195af492fa059b6bca7cb"
+    },
+    "smoke_checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_size_only_v1_smoke/checkpoint_best.pt",
+      "sha256": "d73cc0a274cd25d51141cc4aa6e35d7826aff2e0766c8ea3d015dbd5b14b231f"
+    },
+    "fixed_probe_sampling": {
+      "path": "results/phase1/ugi_joint_sparse_size_only_v1_smoke_samples_novelty_256/result.json",
+      "sha256": "c86bb0fe7fd30e2f160dd87266612699a68cee2f7ee76bcfb3b28525cc0bfff4",
+      "valid": 256,
+      "requested": 256,
+      "unique": 256,
+      "post_hoc_structural_repairs": 0
+    },
+    "known_smoke_limitation": "At 250 smoke steps, aldehyde tree-junction count is overdispersed relative to the reference corpus; this is the prespecified diagnostic for the full run, not a passed fidelity result."
+  },
+  "gates": {
+    "same_immutable_training_data_as_baseline": true,
+    "size_only_conditioning_invariance_test_passed": true,
+    "exact_tree_support_test_passed": true,
+    "local_smoke_complete": true,
+    "local_fixed_probe_sampling_complete": true,
+    "serial_checkpoint_persistence_configured": true,
+    "novelty_stratified_probe_frozen": true,
+    "production_closure_checkpoint_frozen": true,
+    "focused_tests_passed": true,
+    "repository_tests_passed": true,
+    "vendored_assets_verified": true,
+    "git_diff_check_passed": true,
+    "explicit_billable_cloud_approval_received": false
+  },
+  "scope_boundary": {
+    "product_and_l1_only": true,
+    "l2_routing_enabled": false,
+    "biological_guidance_enabled": false,
+    "synthesis_guidance_enabled": false
+  },
+  "decision_rule": "Compare full-morphology and size-only checkpoints on exact validity, Ugi consistency, topology fidelity, chemistry descriptors, novelty, and diversity. Prefer size-only only if it learns topology without persistent tail overbranching or other distributional failure; prefer full morphology only if its fidelity gain does not cause novelty or diversity collapse."
+}

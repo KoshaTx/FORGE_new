@@ -1,0 +1,141 @@
+{
+  "config": {
+    "path": "configs/route/phase1_ugi_synthesis_guidance_failure_audit_v1.json",
+    "sha256": "f685337365a98cc83cc557bf286beb22fa8d8ce20df35291b1f82a586f663be0"
+  },
+  "controller_diagnostics": {
+    "checkpoint_groups": 48,
+    "interpretation": "Binary route readiness was too sparse within four-particle morphology groups to alter most ancestry decisions.",
+    "mixed_utility_group_fraction": 0.10416666666666667,
+    "mixed_utility_groups": 5,
+    "resampled_group_fraction": 0.14583333333333334,
+    "resampled_groups": 7
+  },
+  "coverage_context": {
+    "interpretation": "Family evidence improves terminal route triage, but it does not make incomplete graph states informative enough for this mid-trajectory controller.",
+    "separate_terminal_panel_readiness": {
+      "arms": {
+        "broad_prior": {
+          "rows_by_route_readiness_class": {
+            "exact_complete_current": 1,
+            "family_projected_all_current_leaves": 22,
+            "family_projected_partial_current_leaves": 9,
+            "unresolved_or_unsupported": 10
+          },
+          "unique_products_exact_complete": 1,
+          "unique_products_family_all_current_or_better": 23,
+          "unique_products_family_partial_or_better": 32
+        },
+        "support_enriched": {
+          "rows_by_route_readiness_class": {
+            "exact_complete_current": 3,
+            "family_projected_all_current_leaves": 44,
+            "family_projected_partial_current_leaves": 24,
+            "unresolved_or_unsupported": 11
+          },
+          "unique_products_exact_complete": 3,
+          "unique_products_family_all_current_or_better": 41,
+          "unique_products_family_partial_or_better": 64
+        }
+      },
+      "balanced_unique_products_family_all_current_or_better": 23,
+      "balanced_unique_products_family_partial_or_better": 32,
+      "proposal_status_by_role_occurrence": {
+        "amine_head": {
+          "new_family_hypothesis_retained": 4,
+          "not_proposed": 120
+        },
+        "isocyanide_tail": {
+          "not_proposed": 124
+        },
+        "oxoester_aldehyde_body_tail": {
+          "not_proposed": 29,
+          "semantically_equivalent_known_family_projection": 95
+        }
+      },
+      "route_rows": 124
+    }
+  },
+  "decision": {
+    "midtrajectory_synthesis_tilting_promoted": false,
+    "production_synthesis_method": "complete generation followed by proposal-augmented L1/L2/L3 routing before prospective panel lock",
+    "proposal_engine_retained": true,
+    "reason": "No matched final route-ready yield gain and sparse, weakly actionable intermediate reward.",
+    "repeat_lambda_tuning_on_same_schedule": false,
+    "synthesis_grounded_claim_retained": true
+  },
+  "diagnosis": [
+    "The fixed 16-program schedule permits ancestry changes only among four particles sharing one morphology; it cannot reallocate probability across route-favorable morphologies.",
+    "Only a small minority of checkpoint groups contained both ready and unready completions, so most resampling probabilities were uniform.",
+    "Exact component chemistry, not coarse partial topology, determined most route-readiness outcomes.",
+    "Graph2Edits supplies search hypotheses, not experimental evidence; its unverified new-family proposals cannot legitimately be converted into synthesis value."
+  ],
+  "inputs": {
+    "guidance_diagnostics": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/diagnostics.json",
+      "sha256": "65720d99e7d70ca2485323f9bc4d80630741237a12e48500e2de458dbda4ce5d"
+    },
+    "guidance_result": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/result.json",
+      "sha256": "22260317a502957281418e289ca2940a94aa2668187d9b8a632e68b1aae4fcb9"
+    },
+    "guidance_support_audits": {
+      "path": "results/phase1/ugi_graded_route_readiness_guidance_v1_retry3/support_audits.json",
+      "sha256": "d568d75d3f39373740c5ba016d3f7d06d41b0eaeab34e2bb87c725dabb7bc7ee"
+    },
+    "panel_readiness_result": {
+      "path": "results/phase1/ugi_proposal_augmented_route_readiness_v1/result.json",
+      "sha256": "3b3ec2a7ce1dd5a08e1c8291f391b0ef7e9e3a51af98be2a3349c7efa78b2cb8"
+    },
+    "proposal_readjudication_result": {
+      "path": "results/phase1/graph2edits_semantic_readjudication_v1/result.json",
+      "sha256": "5c05307acb4744e35282d8e7b0dcf7e8115d32eabb5b8ccc740a6af38705a0b0"
+    }
+  },
+  "matched_result": {
+    "absolute_difference": -1,
+    "changed_terminal_identities": 8,
+    "guidance_strength": 0.25,
+    "guided_canonical_representatives": 56,
+    "guided_unique_route_ready_final": 2,
+    "post_hoc_canonical_representatives": 56,
+    "post_hoc_unique_route_ready_final": 3,
+    "selected_constitutional_overlap": {
+      "intersection_count": 29,
+      "jaccard": 0.8285714285714286,
+      "left_count": 32,
+      "right_count": 32,
+      "union_count": 35
+    },
+    "terminal_particles": 64
+  },
+  "nonclaims": [
+    "The negative controller result does not imply that the generated molecules are unsynthesizable.",
+    "Failure to close a route is missing knowledge under a declared search system, not proof of chemical impossibility.",
+    "Proposal discovery does not constitute route validation or synthesis-success probability."
+  ],
+  "paper_interpretation": "Route search remains part of candidate selection before synthesis-panel locking, but the current evidence does not support claiming that synthesis guidance improves the molecular trajectory.",
+  "proposal_engine_diagnostics": {
+    "global_semantic_readjudication": {
+      "proposal_count": 173,
+      "semantic_status_counts": {
+        "known_family_forward_consistent_projection": 8,
+        "new_family_hypothesis_retained": 138,
+        "semantically_equivalent_known_family_projection": 27
+      },
+      "targets_with_graph_consistent_discovery_hypothesis": 27
+    },
+    "interpretation": "The proposal engine mostly rediscovered a known oxidation family; new-family hypotheses correctly remained evidence-free and could not create route readiness.",
+    "proposal_component_occurrences": 24,
+    "proposal_model_scores_used": false,
+    "proposal_only_hypotheses_entered_value": false,
+    "semantic_status_occurrences": {
+      "new_family_hypothesis_retained": 5,
+      "semantically_equivalent_known_family_projection": 19
+    },
+    "unique_proposed_components": 8
+  },
+  "result_sha256": "6a7f3ac9e673504e5ef6e9af42b29f18eef95f1ce2987496b68349f410490204",
+  "schema_version": "phase1_ugi_synthesis_guidance_failure_audit.v1",
+  "status": "proposal_augmented_synthesis_guidance_failure_audited"
+}

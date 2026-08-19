@@ -1,0 +1,171 @@
+{
+  "artifacts": {
+    "support_ledger.csv.gz": {
+      "records": 3072,
+      "schema_version": "phase1_ugi_morphology_proposal_confirmation_support.v1",
+      "sha256": "171fb3eba8bd278a628f0f31fe3305dd613da595c7bf96cc94921ae63b827dad"
+    }
+  },
+  "decision": {
+    "checks": {
+      "auroc": true,
+      "proposal_clustered_bootstrap": true,
+      "proposal_weighted_support_improvement": true,
+      "top_quartile_clustered_bootstrap": true,
+      "top_quartile_diverse_yield_improvement": true,
+      "top_quartile_support_improvement": true,
+      "valid_exact_l1_rate": true
+    },
+    "morphology_proposal_confirmed": true,
+    "next_gate": "matched applicability-bounded potency tilt versus terminal post-hoc ranking",
+    "partial_state_smc_authorized": false,
+    "potency_guidance_authorized": false
+  },
+  "inputs": {
+    "applicability_result": {
+      "path": "results/phase1/ugi_distributional_applicability_v3/result.json",
+      "sha256": "a3e5c4bd446cde222b8007f3fc101f6c319d447410e2348f6b8915afa86161f8"
+    },
+    "config": {
+      "path": "configs/bio/phase1_ugi_morphology_proposal_challenger_confirmation_analysis_v1.json",
+      "sha256": "20ff5647be4e6a06a91eb55d6fbb50f67bdaee4e9b8bd3ba49fc8535f9f29cfb"
+    },
+    "confirmation_result": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_v1/result.json",
+      "sha256": "b9f9bcef500741ca5dcfee9cea41c60d77cd1f3c251dd7e829a516d094c5ace2"
+    },
+    "confirmation_terminal_ledger": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_confirmation_v1/terminal_ledger.jsonl.gz",
+      "sha256": "993e474eda3fd94547b702a2129d7f1c3f1bdb89968ab483a21917bb7798e3bf"
+    },
+    "curated_agile": {
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "proposal_result": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/result.json",
+      "sha256": "11d0a91a2b254e158131d0400e4d340a96a1df2f4fa652e06ad71ca8e9b23a5e"
+    },
+    "proposal_schedule": {
+      "path": "results/phase1/ugi_morphology_proposal_challenger_schedule_v1/schedule.json",
+      "sha256": "386d98fd68900e3654d0a2d2ab6a3bef28b16fa6c40566b5e83a906813fe2d2d"
+    },
+    "runner": {
+      "path": "scripts/phase1_analyze_ugi_morphology_proposal_confirmation.py",
+      "sha256": "79c987e23ccca2ac56bdaf63054a3114b313b326e5c9f5b53cf11e8b46240ec8"
+    },
+    "source": {
+      "path": "src/forge/bio/ugi_morphology_proposal_confirmation_analysis.py",
+      "sha256": "4afe02b28cfff7cb0baa71532a4f33a464e012d2b3fa63f56ea2f0c9426f7996"
+    },
+    "tests": {
+      "path": "tests/test_ugi_morphology_proposal_confirmation_analysis.py",
+      "sha256": "1eb0a8c55a9cd6defe4ff380624e70ab0f8ff80f2b0976067366ac3b0b1e8907"
+    }
+  },
+  "nonclaims": [
+    "This analysis does not evaluate potency.",
+    "This analysis does not evaluate routes or synthesis.",
+    "Confirmation of morphology allocation does not authorize partial-state SMC."
+  ],
+  "overall": {
+    "attempts": 3072,
+    "support_rate": 0.038736979166666664,
+    "supported": 119,
+    "unique_supported_smiles": 117,
+    "unique_supported_smiles_per_attempt": 0.0380859375,
+    "valid_exact_l1": 2976
+  },
+  "ranking": {
+    "auroc": 0.8591604606624227,
+    "average_precision": 0.15963861550903774,
+    "bootstrap": {
+      "clusters": 2454,
+      "replicates": 10000,
+      "support_preserving_proposal": {
+        "absolute_difference_ci95": [
+          0.035837426072837436,
+          0.05997170967833001
+        ],
+        "relative_improvement_ci95": [
+          0.9981575490545664,
+          1.4721881700518904
+        ]
+      },
+      "top_quartile": {
+        "absolute_difference_ci95": [
+          0.057534692366619025,
+          0.0946328672677925
+        ],
+        "relative_improvement_ci95": [
+          1.6014325883773837,
+          2.327674447556449
+        ]
+      },
+      "unit": "program_sha256"
+    },
+    "quartile_support_is_monotone": true,
+    "support_prevalence": 0.038736979166666664,
+    "top_quartile_diverse_yield_relative_improvement": 1.9401709401709404,
+    "top_quartile_support_relative_improvement": 1.957983193277311
+  },
+  "result_sha256": "a989737d3e6ce901eea2f29dc62930e03463f09d23fb753e49d64190408c06d2",
+  "schema_version": "phase1_ugi_morphology_proposal_confirmation_analysis.v1",
+  "scope": {
+    "candidate_selection": false,
+    "fresh_unused_program_terminals_only": true,
+    "generator_trajectories_advanced": false,
+    "oracle_calls": 0,
+    "potency_predictions_consumed": false,
+    "proposal_calls": 0,
+    "read_only": true,
+    "route_calls": 0,
+    "sealed_holdout_access": false,
+    "synthesis_calls": 0,
+    "target_free_terminal_support_only": true
+  },
+  "score_quartiles": {
+    "1": {
+      "attempts": 768,
+      "support_rate": 0.11458333333333333,
+      "supported": 88,
+      "unique_supported_smiles": 86,
+      "unique_supported_smiles_per_attempt": 0.11197916666666667,
+      "valid_exact_l1": 738
+    },
+    "2": {
+      "attempts": 768,
+      "support_rate": 0.040364583333333336,
+      "supported": 31,
+      "unique_supported_smiles": 31,
+      "unique_supported_smiles_per_attempt": 0.040364583333333336,
+      "valid_exact_l1": 753
+    },
+    "3": {
+      "attempts": 768,
+      "support_rate": 0.0,
+      "supported": 0,
+      "unique_supported_smiles": 0,
+      "unique_supported_smiles_per_attempt": 0.0,
+      "valid_exact_l1": 740
+    },
+    "4": {
+      "attempts": 768,
+      "support_rate": 0.0,
+      "supported": 0,
+      "unique_supported_smiles": 0,
+      "unique_supported_smiles_per_attempt": 0.0,
+      "valid_exact_l1": 745
+    }
+  },
+  "status": "complete_unused_program_morphology_proposal_confirmation_analysis",
+  "support_definition": "valid_exact_l1_and_fixed_multiview_radius_at_most_one",
+  "support_preserving_proposal": {
+    "prior_expected_support_rate": 0.03873697916666666,
+    "prior_expected_valid_exact_l1_rate": 0.9687500000000006,
+    "proposal_expected_support_rate": 0.0864222654919524,
+    "proposal_expected_valid_exact_l1_rate": 0.9625535065813158,
+    "proposal_support_absolute_improvement": 0.047685286325285736,
+    "proposal_support_relative_improvement": 1.2310016772376287
+  }
+}

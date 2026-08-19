@@ -1,0 +1,43 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_launch_receipt.v1",
+  "status": "running",
+  "run_name": "ugi_joint_sparse_size_only_v1_39a69b5bf465",
+  "approval": {
+    "received": true,
+    "scope": "upload the frozen FORGE source/corpus bundle to Modal and run one detached billable L4 size-only ablation",
+    "received_on": "2026-08-01"
+  },
+  "preflight": {
+    "path": "results/phase1/ugi_joint_sparse_size_only_v1_launch_preflight.json",
+    "sha256": "3c94c54c58208d7c2d0e29b4d631d6513b2884b013bb71423bfcde6bf1368791"
+  },
+  "immutable_execution": {
+    "profile": "nitya",
+    "training_config_sha256": "c6cbf6314ca2bd91190051d1453f071297942a83be73c67fa0bfc406d5d1af3c",
+    "training_cache_sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46",
+    "python_source_tree_sha256": "cd3434db2cd99208cb46e7aaefb508b121f79219c628725e10be4db1c95b93ce",
+    "launcher_sha256": "963af4007fa73ebc7afb4bec3d928d2d7b292fcf44e74c80216f50d018abec4e",
+    "run_fingerprint_sha256": "39a69b5bf4657dfc3d30e5ae61970271c1f8ba6dc42c6d817b7a5daac42e074d"
+  },
+  "cloud_execution": {
+    "provider": "Modal",
+    "app_id": "ap-W7FUzwBAjvqIWSJEpnvBjw",
+    "app_url": "https://modal.com/apps/nitya/main/ap-W7FUzwBAjvqIWSJEpnvBjw",
+    "state_at_launch": "ephemeral (detached)",
+    "active_tasks_after_staging": 1,
+    "created_at": "2026-08-01 18:36:03-04:00",
+    "gpu_class": "L4",
+    "volume": "forge-phase1-training"
+  },
+  "first_committed_artifacts": {
+    "observed_at": "2026-08-01 18:38-04:00",
+    "progress_sha256": "d8ea258e1080d2535ee9b27b4cfdc7aaec605606e9b2fb91db80fbe335a40aff",
+    "checkpoint_step_250_sha256": "39574d51032dd2d7a32a9ca3d6207d2054f927b6d20fd74f0502698e5aca7b73",
+    "checkpoint_step_500_sha256": "1185886c2f7f6dfffc83a053ef43c5acc0b1c458564095848f8cf461ac7167a3"
+  },
+  "selection": {
+    "production_arm_frozen": false,
+    "production_checkpoint_frozen": false,
+    "policy": "monitor serial checkpoints and apply the frozen matched full-morphology-versus-size-only audit after completion"
+  }
+}

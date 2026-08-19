@@ -1,0 +1,135 @@
+{
+  "schema_version": "phase1_ugi_product_l1_production_generator.v1",
+  "status": "frozen",
+  "frozen_at_utc": "2026-08-02T00:05:02Z",
+  "identity": {
+    "architecture": "full_morphology_program_conditioning",
+    "checkpoint_step": 1000,
+    "conditioning": "complete Ugi morphology program",
+    "generated_object": "complete constitutional ionizable-lipid graph plus exact L1 Ugi component decomposition",
+    "stereochemistry": "not represented in model-facing graph identity"
+  },
+  "selection": {
+    "policy": {
+      "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+      "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"
+    },
+    "result": {
+      "path": "results/phase1/ugi_architecture_checkpoint_selection_v3.json",
+      "sha256": "fe90fc849bbc88c8b004ceebcb4aae95ef6ac8158b8e1a6220792750aac83be5"
+    },
+    "selection_visible_reference": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184",
+      "folds": [
+        "train",
+        "calibration"
+      ],
+      "products": 82264,
+      "heldout_products_excluded": 30122
+    },
+    "fresh_program_draw": {
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32",
+      "seed": 20260803,
+      "attempted_draws": 1024
+    },
+    "fresh_selected_sample": {
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a",
+      "sample_steps": 8,
+      "batch_size": 16,
+      "seed": 20260803
+    }
+  },
+  "model": {
+    "checkpoint": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt",
+      "sha256": "90f5f0bd3e41e2884f6588d9875db0b7bf34e5c5ea7fdc1f9d8565fba8c0c532"
+    },
+    "training_result": {
+      "path": "results/phase1/ugi_joint_sparse_balanced_v2_full/result.json",
+      "sha256": "7427757fad7c6ed8545dbae721d7c4d13af77304a9ab74da2f8c1f8ef5fb2843"
+    },
+    "training_config": {
+      "path": "configs/model/phase1_ugi_joint_sparse_balanced_v2.json",
+      "sha256": "f33e3c6bceb9dd893715fa449d66bb9ad59c9ed97b423824b4262b3ddb411a84"
+    },
+    "training_source_tree_sha256": "653a26d20d53fe2d7a0ce5ebe9a538ba962bb19a1f4dc1787f679c394f92a4c1",
+    "training_run_fingerprint_sha256": "1cf363a573431640f294c4e57346219e203946acb82ca7d1c5dd05c340ec268e"
+  },
+  "common_training_inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  },
+  "sampling_dependencies": {
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "admitted_component_registry": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "qualified_reaction_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "fresh_selection_metrics": {
+    "attempted_draws": 1024,
+    "valid_products": 1007,
+    "unique_valid_products": 994,
+    "all_three_components_reconstructed": 1007,
+    "exact_forward_reconstructions": 1007,
+    "all_three_handles_qualified": 1007,
+    "exact_selection_visible_products": 39,
+    "products_with_at_least_one_outside_catalog_component": 847,
+    "usable_open_ended_successes": 847,
+    "usable_open_ended_yield": 0.8271484375,
+    "mean_normalized_wasserstein_1": 0.15837265697432493,
+    "mean_kolmogorov_smirnov": 0.24000280034313917,
+    "valid_outputs_with_forbidden_substructure": 0,
+    "valid_outputs_outside_declared_support": 0
+  },
+  "scope": {
+    "authorized": [
+      "unguided complete-product generation within the declared Ugi graph support",
+      "deterministic inverse recovery of the three L1 component graphs",
+      "exact frozen Ugi forward-consistency verification",
+      "product-plus-L1 computational evaluation"
+    ],
+    "excluded": [
+      "L2 upstream-route proposal or route completion",
+      "L3 terminal-material or procurement closure",
+      "synthesis-value or route-value guidance",
+      "biological-oracle guidance",
+      "calibrated synthesis-success probability",
+      "experimental synthesis, formulation or biological success",
+      "empirical support for non-Ugi final-assembly adapters"
+    ],
+    "heldout_fold": "excluded from the v3 selector; earlier exploratory outputs remain nonselecting diagnostics and any later fold-level analysis is descriptive"
+  },
+  "selection_finality": {
+    "architecture_or_checkpoint_may_be_changed_by_postselection_diagnostics": false,
+    "motif_diagnostics_are_candidate_eligibility_only": true
+  }
+}
