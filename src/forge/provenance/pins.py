@@ -133,8 +133,28 @@ def _load(path: Path) -> Any | None:
         return None
 
 
+def _is_repo_path(value: str) -> bool:
+    """Whether a mapping key reads as a repository-relative path rather than a field name."""
+    return bool(value) and not value.startswith(("/", "..")) and "/" in value
+
+
 def collect_pins(roots: tuple[Path, ...]) -> list[Pin]:
-    """Find every {"path", "sha256"} pair reachable in the artifacts under `roots`."""
+    """Find every pinned (path, sha256) pair reachable in the artifacts under `roots`.
+
+    Two declaration shapes exist and both are load-bearing. The common one states the path in a
+    field::
+
+        {"path": "src/forge/x.py", "sha256": "..."}
+
+    The other keys the mapping *by* the path and omits the field entirely::
+
+        {"source_files": {"src/forge/x.py": {"bytes": 123, "sha256": "..."}}}
+
+    Only the first was recognised until now, so the second was silently unverified -- 32 pins,
+    none of them declared anywhere else, including `scripts/m0_07_oracle_graph_pretraining.py`,
+    which had drifted with nothing reporting it. A gate that reads one of two encodings is not a
+    gate for the other, and the shape it cannot see is exactly where drift accumulates unnoticed.
+    """
     pins: list[Pin] = []
 
     def walk(node: Any, source: str) -> None:
@@ -142,15 +162,34 @@ def collect_pins(roots: tuple[Path, ...]) -> list[Pin]:
             path, digest = node.get("path"), node.get("sha256")
             if isinstance(path, str) and isinstance(digest, str) and len(digest) == 64:
                 pins.append(Pin(path=path, sha256=digest, declared_by=source))
-            for value in node.values():
+            for key, value in node.items():
+                # A nested mapping carrying a digest but no `path` of its own is keyed by the path.
+                # Requiring the absent `path` field is what keeps this from double-counting the
+                # first shape, and `_is_repo_path` from mistaking an ordinary field name for one.
+                if (
+                    isinstance(key, str)
+                    and isinstance(value, dict)
+                    and "path" not in value
+                    and _is_repo_path(key)
+                ):
+                    nested = value.get("sha256")
+                    if isinstance(nested, str) and len(nested) == 64:
+                        pins.append(Pin(path=key, sha256=nested, declared_by=source))
                 walk(value, source)
         elif isinstance(node, list):
             for value in node:
                 walk(value, source)
 
+    def declared_by(candidate: Path) -> str:
+        """Label an artifact by its repository-relative path, or absolutely if it lives outside."""
+        try:
+            return str(candidate.relative_to(REPO))
+        except ValueError:
+            return str(candidate)
+
     for root in roots:
         # Resolve against the repository so a relative `--root configs` behaves like the absolute
-        # defaults; `relative_to(REPO)` below needs an absolute path and raises otherwise.
+        # defaults; `relative_to` needs an absolute path and raises otherwise.
         root = root if root.is_absolute() else (REPO / root)
         if not root.exists():
             continue
@@ -161,7 +200,7 @@ def collect_pins(roots: tuple[Path, ...]) -> list[Pin]:
                 continue
             document = _load(candidate)
             if document is not None:
-                walk(document, str(candidate.relative_to(REPO)))
+                walk(document, declared_by(candidate))
     return pins
 
 

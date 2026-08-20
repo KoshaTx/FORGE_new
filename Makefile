@@ -202,12 +202,12 @@ check-core: verify-pins typecheck
 		tests/test_experiment_spec.py tests/test_paper_reproduction.py \
 		tests/test_phase1_product_l1_data.py tests/test_pinned_sources_are_tracked.py
 
-EXPECT_PINS ?= 742
+EXPECT_PINS ?= 745
 
 # `verify-pins-code` covers results/ + docs/provenance/ + configs/. Both numbers are ratchets:
 # raise EXPECT_PINS_ALL as pins are recovered, lower CODE_DRIFT_BACKLOG as unrecoverable ones get
 # reviewed entries. Never raise CODE_DRIFT_BACKLOG -- a growing count means a frozen byte moved.
-EXPECT_PINS_ALL ?= 2092
+EXPECT_PINS_ALL ?= 2095
 # 4 remaining, from four configs that neither declare a frozen status nor are hash-pinned by any
 # other artifact -- so nothing fixes them, and "the artifact that pinned them is frozen" cannot be
 # asserted on any evidence. They are the honest remainder: retiring them needs someone to say

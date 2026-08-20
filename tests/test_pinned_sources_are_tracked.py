@@ -89,8 +89,7 @@ def test_every_active_pinned_source_file_is_tracked_or_archived() -> None:
 
     assert not unresolved, (
         f"{len(unresolved)} pinned source identities are neither tracked at their exact bytes nor "
-        "present in provenance/frozen-code/:\n  "
-        + "\n  ".join(unresolved)
+        "present in provenance/frozen-code/:\n  " + "\n  ".join(unresolved)
     )
 
 
@@ -125,3 +124,50 @@ def test_quarantined_pin_tests_still_exist() -> None:
         "quarantined pin tests no longer exist; remove them from "
         "tests/unreproducible_pins.py:\n  " + "\n  ".join(dangling)
     )
+
+
+def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> None:
+    """Pins keyed by path, with no `path` field, must be collected too.
+
+    Artifacts declare pins two ways. The common shape names the path in a field; the other keys the
+    mapping by the path itself::
+
+        {"source_files": {"scripts/x.py": {"bytes": 1, "sha256": "..."}}}
+
+    Only the first was recognised, so the second went unverified -- 32 pins that appear nowhere
+    else, and the gate stayed green while `scripts/m0_07_oracle_graph_pretraining.py` drifted. That
+    drift was introduced by a one-line import rewrite during the bio-to-potency move and nothing
+    reported it, which is precisely the failure a provenance gate exists to prevent.
+    """
+    from forge.provenance.pins import collect_pins
+
+    digest = "a" * 64
+    other = "b" * 64
+    (tmp_path / "artifact.json").write_text(
+        json.dumps(
+            {
+                "inputs": {"declared": {"path": "src/forge/named.py", "sha256": other}},
+                "source_files": {"scripts/keyed.py": {"bytes": 12, "sha256": digest}},
+                # A plain field whose value happens to carry a digest is not a pin: the key is not
+                # a path, so it must not be collected.
+                "summary": {"checksum": {"sha256": "c" * 64}},
+            }
+        )
+    )
+    found = {(pin.path, pin.sha256) for pin in collect_pins((tmp_path,))}
+
+    assert ("scripts/keyed.py", digest) in found, "path-keyed pin was not collected"
+    assert ("src/forge/named.py", other) in found, "field-named pin regressed"
+    assert not any(path == "checksum" for path, _ in found), "a field name was mistaken for a path"
+
+
+def test_the_path_keyed_shape_is_actually_present_in_this_repository() -> None:
+    """Guard the guard: the shape above must still occur, or the test above proves nothing."""
+    from forge.provenance.pins import collect_pins
+
+    keyed = [
+        pin
+        for pin in collect_pins((REPO / "results",))
+        if pin.path.endswith(".py") and "source_files" in (REPO / pin.declared_by).read_text()
+    ]
+    assert keyed, "no artifact declares a path-keyed source pin any more; retire the branch"
