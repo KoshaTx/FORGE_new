@@ -17,8 +17,11 @@ from typing import Any
 from forge.core.hashing import is_sha256
 from forge.core.io import read_json_object
 from forge.core.records import PinnedInput
-from forge.experiment.errors import SpecError
+from forge_experiment.errors import SpecError
 
+# The schema id keeps its original spelling even though the package is now `forge_experiment`.
+# It is a data contract: every config under configs/experiments/ declares it, and several are
+# hash-pinned, so renaming the string would invalidate them to no benefit.
 EXPERIMENT_SCHEMA_VERSION = "forge.experiment.v1"
 _IDENTIFIER = re.compile(r"^[a-z0-9][a-z0-9_.-]*$")
 _DEVICES = frozenset({"cpu", "mps", "cuda"})

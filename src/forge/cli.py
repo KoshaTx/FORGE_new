@@ -8,8 +8,11 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from forge.experiment import ExperimentRunner, diagnose_experiment, verify_run_directory
-from forge.experiment.errors import ExperimentError
+# Importing this registers the FORGE stage implementations into the runner's registry. The
+# runner cannot import them itself without depending on the science it is meant to execute.
+import forge.stages  # noqa: F401
+from forge_experiment import ExperimentRunner, diagnose_experiment, verify_run_directory
+from forge_experiment.errors import ExperimentError
 
 
 def _repo() -> Path:
@@ -185,7 +188,7 @@ def _command_paper_bundle(args: argparse.Namespace) -> int:
 def _command_experiment_list(_: argparse.Namespace) -> int:
     repo = _repo()
     rows = []
-    from forge.experiment.spec import ExperimentSpec
+    from forge_experiment.spec import ExperimentSpec
 
     for path in _experiment_specs(repo):
         spec = ExperimentSpec.load(path)
@@ -207,7 +210,7 @@ def _command_experiment_plan(args: argparse.Namespace) -> int:
     repo = _repo()
     spec_path = _spec_path(repo, args.experiment)
     if args.backend == "modal":
-        from forge.experiment.modal import modal_request_plan
+        from forge_experiment.modal import modal_request_plan
 
         _print(
             modal_request_plan(
@@ -233,7 +236,7 @@ def _command_experiment_run(args: argparse.Namespace) -> int:
     repo = _repo()
     spec_path = _spec_path(repo, args.experiment)
     if args.backend == "modal":
-        from forge.experiment.modal import launch_modal
+        from forge_experiment.modal import launch_modal
 
         return launch_modal(
             repo,

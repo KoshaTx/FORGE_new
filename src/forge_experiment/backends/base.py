@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from forge.experiment.stage import RunContext, StageCallable, StageResult
+from forge_experiment.stage import RunContext, StageCallable, StageResult
 
 
 class ExecutionBackend(Protocol):

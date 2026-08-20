@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.experiment.seed import SeedPlan
+from forge_experiment.seed import SeedPlan
 
 
 def test_keyed_seeds_are_stable_and_distinct() -> None:

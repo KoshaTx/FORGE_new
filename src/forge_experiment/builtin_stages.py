@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from forge.core.hashing import sha256_file
 from forge.core.io import write_json
-from forge.experiment.registry import stage
-from forge.experiment.stage import ProducedArtifact, RunContext, StageResult
+from forge_experiment.registry import stage
+from forge_experiment.stage import ProducedArtifact, RunContext, StageResult
 
 
 @stage("experiment.inputs_snapshot.v1")

@@ -9,9 +9,9 @@ from types import MappingProxyType
 from typing import Any
 
 from forge.core.io import read_json_object
-from forge.experiment.errors import StageError
-from forge.experiment.seed import SeedPlan
-from forge.experiment.spec import ResourceSpec, StageSpec
+from forge_experiment.errors import StageError
+from forge_experiment.seed import SeedPlan
+from forge_experiment.spec import ResourceSpec, StageSpec
 
 
 @dataclass(frozen=True)

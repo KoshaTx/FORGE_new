@@ -48,7 +48,7 @@ image = (
 
 
 def _upload_paths(spec_path: Path) -> dict[str, Path]:
-    from forge.experiment.spec import ExperimentSpec
+    from forge_experiment.spec import ExperimentSpec
 
     spec = ExperimentSpec.load(spec_path)
     paths = {str(spec_path.relative_to(LOCAL_REPO)): spec_path}
@@ -86,7 +86,7 @@ def execute_experiment(
     sys.path.insert(0, str(repo / "src"))
 
     from forge.core.hashing import sha256_tree
-    from forge.experiment import ExperimentRunner, ModalRuntimeBackend
+    from forge_experiment import ExperimentRunner, ModalRuntimeBackend
 
     observed_source = str(sha256_tree(source))
     if observed_source != expected_source_sha256:
@@ -123,7 +123,7 @@ def _download_run(remote_path: str, local_path: Path) -> None:
     from modal.types import FileEntryType
 
     if local_path.exists():
-        from forge.experiment import verify_run_directory
+        from forge_experiment import verify_run_directory
 
         verify_run_directory(local_path)
         return
@@ -158,7 +158,7 @@ def _download_run(remote_path: str, local_path: Path) -> None:
                     pass
                 raise
 
-        from forge.experiment import verify_run_directory
+        from forge_experiment import verify_run_directory
 
         verify_run_directory(temporary)
         os.rename(temporary, local_path)
@@ -177,7 +177,7 @@ def main(
 ) -> None:
     """Upload verified pins, allocate the declared envelope, execute, and download."""
 
-    from forge.experiment.modal import modal_request_plan
+    from forge_experiment.modal import modal_request_plan
 
     spec_path = (LOCAL_REPO / experiment).resolve()
     request = modal_request_plan(

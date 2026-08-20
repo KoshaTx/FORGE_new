@@ -7,10 +7,10 @@ import pytest
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write, write_json
-from forge.experiment.errors import RunExistsError, StageError, VerificationError
-from forge.experiment.registry import StageRegistry
-from forge.experiment.runner import ExperimentRunner, verify_run_directory
-from forge.experiment.stage import ProducedArtifact, RunContext, StageResult
+from forge_experiment.errors import RunExistsError, StageError, VerificationError
+from forge_experiment.registry import StageRegistry
+from forge_experiment.runner import ExperimentRunner, verify_run_directory
+from forge_experiment.stage import ProducedArtifact, RunContext, StageResult
 
 
 def pin(path: Path, repo: Path) -> dict[str, str]:

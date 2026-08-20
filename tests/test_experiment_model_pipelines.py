@@ -3,8 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.experiment import registry
-from forge.experiment.spec import ExperimentSpec, StageSpec
+# The model stages register themselves on import of `forge.stages`, not of the runner. The runner
+# deliberately does not import them -- that is what keeps `forge_experiment` free of any dependency
+# on the science it executes -- so a test about model pipelines has to load them itself.
+import forge.stages  # noqa: F401
+from forge_experiment import registry
+from forge_experiment.spec import ExperimentSpec, StageSpec
 
 REPO = Path(__file__).resolve().parents[1]
 EXPERIMENTS = REPO / "configs" / "experiments"

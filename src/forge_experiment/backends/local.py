@@ -5,8 +5,8 @@ from __future__ import annotations
 import os
 import random
 
-from forge.experiment.errors import BackendError
-from forge.experiment.stage import RunContext, StageCallable, StageResult
+from forge_experiment.errors import BackendError
+from forge_experiment.stage import RunContext, StageCallable, StageResult
 
 
 class LocalBackend:

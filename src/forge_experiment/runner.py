@@ -14,19 +14,19 @@ from typing import Any
 
 from forge.core.hashing import sha256_file, sha256_json, sha256_tree
 from forge.core.io import read_json_object, write_json
-from forge.experiment.backends.base import ExecutionBackend
-from forge.experiment.backends.local import LocalBackend
-from forge.experiment.environment import EnvironmentRecord
-from forge.experiment.errors import (
+from forge_experiment.backends.base import ExecutionBackend
+from forge_experiment.backends.local import LocalBackend
+from forge_experiment.environment import EnvironmentRecord
+from forge_experiment.errors import (
     RunExistsError,
     StageError,
     VerificationError,
 )
-from forge.experiment.registry import StageRegistry
-from forge.experiment.registry import registry as global_registry
-from forge.experiment.seed import SeedPlan
-from forge.experiment.spec import ExperimentSpec, ResourceSpec, StageSpec
-from forge.experiment.stage import (
+from forge_experiment.registry import StageRegistry
+from forge_experiment.registry import registry as global_registry
+from forge_experiment.seed import SeedPlan
+from forge_experiment.spec import ExperimentSpec, ResourceSpec, StageSpec
+from forge_experiment.stage import (
     DependencyArtifact,
     ProducedArtifact,
     RunContext,

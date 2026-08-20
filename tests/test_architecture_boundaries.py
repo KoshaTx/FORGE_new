@@ -60,7 +60,7 @@ def test_domain_code_never_imports_the_experiment_runner() -> None:
         if relative.parts[0] == "experiment" or relative == Path("cli.py"):
             continue
         for imported in _forge_imports(path):
-            if imported == "forge.experiment" or imported.startswith("forge.experiment."):
+            if imported == "forge_experiment" or imported.startswith("forge_experiment."):
                 violations.append(f"{relative.as_posix()} -> {imported}")
     assert not violations, "orchestration leaked into domain code:\n" + "\n".join(violations)
 

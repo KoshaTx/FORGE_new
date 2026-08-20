@@ -1,16 +1,17 @@
-"""Typed, content-addressed experiment execution for FORGE.
+"""Typed, content-addressed experiment execution.
 
-The public surface is intentionally orchestration-only.  Scientific domain packages do not import
-this package; registered stage adapters depend on the domains and remain at the outer edge.
+Deliberately outside `forge`: this is a generic DAG runner -- typed contracts, keyed seeds,
+atomic stage commits, verified resume, a Modal backend -- with nothing lipid-specific in it. The
+science enters through the stage registry, which `forge.stages` populates.
+
 """
 
-# Registration is explicit but central: importing forge.experiment makes infrastructure stages
+# Registration is explicit but central: importing forge_experiment makes infrastructure stages
 # available without allowing a JSON spec to import arbitrary Python modules.
-import forge.experiment.builtin_stages as _builtin_stages  # noqa: F401
-import forge.experiment.model_stages as _model_stages  # noqa: F401
-from forge.experiment.backends import ExecutionBackend, LocalBackend, ModalRuntimeBackend
-from forge.experiment.doctor import diagnose_experiment
-from forge.experiment.errors import (
+import forge_experiment.builtin_stages as _builtin_stages  # noqa: F401
+from forge_experiment.backends import ExecutionBackend, LocalBackend, ModalRuntimeBackend
+from forge_experiment.doctor import diagnose_experiment
+from forge_experiment.errors import (
     BackendError,
     ExperimentError,
     RegistryError,
@@ -19,22 +20,22 @@ from forge.experiment.errors import (
     StageError,
     VerificationError,
 )
-from forge.experiment.registry import StageRegistry, registry, stage
-from forge.experiment.runner import (
+from forge_experiment.registry import StageRegistry, registry, stage
+from forge_experiment.runner import (
     ExperimentRunner,
     ExperimentRunResult,
     RunPlan,
     verify_run_directory,
 )
-from forge.experiment.seed import SeedPlan
-from forge.experiment.spec import (
+from forge_experiment.seed import SeedPlan
+from forge_experiment.spec import (
     DeterminismSpec,
     ExperimentSpec,
     OutputSpec,
     ResourceSpec,
     StageSpec,
 )
-from forge.experiment.stage import ProducedArtifact, RunContext, StageResult
+from forge_experiment.stage import ProducedArtifact, RunContext, StageResult
 
 __all__ = [
     "BackendError",

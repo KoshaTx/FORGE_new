@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file, sha256_json, sha256_tree
-from forge.experiment.errors import BackendError
-from forge.experiment.spec import ExperimentSpec
+from forge_experiment.errors import BackendError
+from forge_experiment.spec import ExperimentSpec
 
 
 def modal_request_plan(

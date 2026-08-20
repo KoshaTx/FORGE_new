@@ -5,8 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from forge.experiment.environment import EnvironmentRecord
-from forge.experiment.spec import ExperimentSpec
+from forge_experiment.environment import EnvironmentRecord
+from forge_experiment.spec import ExperimentSpec
 
 
 def diagnose_experiment(repo: Path, spec_path: Path) -> dict[str, Any]:

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from forge.experiment.errors import RegistryError
-from forge.experiment.stage import StageCallable
+from forge_experiment.errors import RegistryError
+from forge_experiment.stage import StageCallable
 
 
 class StageRegistry:

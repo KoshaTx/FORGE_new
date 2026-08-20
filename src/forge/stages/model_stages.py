@@ -15,9 +15,9 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.io import write_json
-from forge.experiment.errors import StageError
-from forge.experiment.registry import stage
-from forge.experiment.stage import ProducedArtifact, RunContext, StageResult
+from forge_experiment.errors import StageError
+from forge_experiment.registry import stage
+from forge_experiment.stage import ProducedArtifact, RunContext, StageResult
 
 
 def _require_config_inputs(

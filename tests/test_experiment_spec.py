@@ -4,8 +4,8 @@ from copy import deepcopy
 
 import pytest
 
-from forge.experiment.errors import SpecError
-from forge.experiment.spec import ExperimentSpec
+from forge_experiment.errors import SpecError
+from forge_experiment.spec import ExperimentSpec
 
 PIN = {"path": "data/input.json", "sha256": "a" * 64}
 RESOURCES = {
