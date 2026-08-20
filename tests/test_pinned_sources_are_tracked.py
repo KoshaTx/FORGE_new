@@ -61,7 +61,7 @@ def _tracked_paths() -> set[str]:
 
 def _unrecoverable_pins() -> list[str]:
     from forge.core.provenance_archive import HistoricalPinArchive
-    from forge.provenance.pins import load_moves
+    from forge_provenance.pins import load_moves
 
     pinned = _pinned_python_identities()
     assert pinned, "no pinned .py paths found; the collector is probably broken"
@@ -139,7 +139,7 @@ def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> 
     drift was introduced by a one-line import rewrite during the bio-to-potency move and nothing
     reported it, which is precisely the failure a provenance gate exists to prevent.
     """
-    from forge.provenance.pins import collect_pins
+    from forge_provenance.pins import collect_pins
 
     digest = "a" * 64
     other = "b" * 64
@@ -163,7 +163,7 @@ def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> 
 
 def test_the_path_keyed_shape_is_actually_present_in_this_repository() -> None:
     """Guard the guard: the shape above must still occur, or the test above proves nothing."""
-    from forge.provenance.pins import collect_pins
+    from forge_provenance.pins import collect_pins
 
     keyed = [
         pin

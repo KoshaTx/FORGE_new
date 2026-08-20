@@ -32,7 +32,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/forge", "src/forge_experiment", "src/forge_cli", "paper/forge_paper"]
+# Only what an installer can actually use. `forge_paper` and `forge_provenance` read `results/`,
+# `configs/`, `docs/provenance/` and `provenance/frozen-code/` -- repository trees that are not in
+# the wheel -- so shipping them would hand an installer commands that can only fail. They live in
+# `paper/` and `tools/` and run from a clone.
+packages = ["src/forge", "src/forge_experiment", "src/forge_cli"]
 
 [tool.black]
 line-length = 100
@@ -78,9 +82,8 @@ module = [
     "forge.corpus.*",
     "forge_cli.*",
     "forge_paper.*",
+    "forge_provenance.*",
     "forge_experiment.*",
-    "forge.paper.*",
-    "forge.provenance.*",
 ]
 disallow_untyped_defs = true
 disallow_any_generics = true

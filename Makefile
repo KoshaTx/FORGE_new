@@ -133,7 +133,7 @@ verify-partial:
 # is always fatal; absence is reported but tolerated, because many pinned inputs live only on the
 # workstation that produced them. Run this after any refactor.
 verify-pins:
-	python3 -m forge_cli provenance verify --expect-verified $(EXPECT_PINS)
+	PYTHONPATH=tools python3 -m forge_cli provenance verify --expect-verified $(EXPECT_PINS)
 
 # The same check extended over `configs/`. A frozen config pins the source that produced it, and
 # those pins outnumber the result-declared ones ~4:1 but went unscanned, so drift in them was
@@ -142,14 +142,14 @@ verify-pins:
 # `docs/known_artifact_drift.json` entry each, which is a provenance judgment, not a chore.
 # The ratchet holds that backlog flat -- it fails the moment drift grows.
 verify-pins-code:
-	python3 -m forge_cli provenance verify --code \
+	PYTHONPATH=tools python3 -m forge_cli provenance verify --code \
 		--expect-verified $(EXPECT_PINS_ALL) --allow-drift $(CODE_DRIFT_BACKLOG)
 
 # Recover pinned code/config bytes from git objects into the content-addressed archive. Idempotent
 # and additive: a blob is admitted on SHA-256 equality alone. Run after any refactor that edits a
 # file some frozen config or result pins.
 archive-pins:
-	python3 -m forge_cli provenance archive
+	PYTHONPATH=tools python3 -m forge_cli provenance archive
 
 doctor:
 	python3 -m forge_cli doctor
@@ -177,20 +177,23 @@ phase1-sampling-reproduce:
 	python3 -m forge_cli experiment reproduce phase1-sampling --profile smoke
 
 typecheck:
-	python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
+	# forge_cli lazily imports forge_provenance from tools/, so mypy needs it on the path
+	# or those call sites degrade to Any and trip warn_return_any.
+	MYPYPATH=tools:paper python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/corpus src/forge/stages \
-		src/forge/provenance src/forge_cli
+		src/forge_cli
 	python3 -m mypy src/forge_experiment
 	MYPYPATH=paper python3 -m mypy paper/forge_paper
+	MYPYPATH=tools python3 -m mypy tools/forge_provenance
 	MYPYPATH=tools python3 -m mypy tools/forge_maintenance
 
 check-core: verify-pins typecheck
 	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/potency src/forge/corpus \
 		src/forge/stages \
-		src/forge/provenance src/forge_cli \
+		src/forge_cli \
 		src/forge/data/vendor.py src/forge_experiment/modal_app.py \
-		src/forge/provenance tests/test_architecture_boundaries.py \
+		tests/test_architecture_boundaries.py \
 		tests/test_assembly_ugi3.py tests/test_core_hashing.py \
 		tests/test_core_provenance_archive.py tests/test_experiment_runner.py \
 		tests/test_experiment_modal.py tests/test_experiment_model_pipelines.py \
@@ -396,13 +399,13 @@ phase1-product-pretrain:
 	python3 -m forge_cli experiment run phase1-training-production --profile full --backend modal
 
 paper-verify:
-	python3 -m forge_cli paper verify
+	PYTHONPATH=tools:paper python3 -m forge_cli paper verify
 
 manuscript-pdf manuscript-iclr:
-	python3 -m forge_cli paper build
+	PYTHONPATH=tools:paper python3 -m forge_cli paper build
 
 paper-bundle:
-	python3 -m forge_cli paper bundle
+	PYTHONPATH=tools:paper python3 -m forge_cli paper bundle
 
 code-survey:
 	PYTHONPATH=tools python3 -m forge_maintenance survey \

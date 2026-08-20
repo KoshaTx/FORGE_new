@@ -71,7 +71,7 @@ def _command_doctor(args: argparse.Namespace) -> int:
 
 
 def _command_artifacts_verify(_: argparse.Namespace) -> int:
-    from forge.provenance.pins import main as verify_main
+    from forge_provenance.pins import main as verify_main
 
     return verify_main([])
 
@@ -105,7 +105,7 @@ def _command_data_verify(args: argparse.Namespace) -> int:
 
 
 def _command_provenance_verify(args: argparse.Namespace) -> int:
-    from forge.provenance.pins import main as verify_main
+    from forge_provenance.pins import main as verify_main
 
     arguments: list[str] = []
     if args.code:
@@ -122,7 +122,7 @@ def _command_provenance_verify(args: argparse.Namespace) -> int:
 
 
 def _command_provenance_archive(_: argparse.Namespace) -> int:
-    from forge.provenance.archive import main as archive_main
+    from forge_provenance.archive import main as archive_main
 
     return archive_main([])
 

@@ -33,7 +33,8 @@ from typing import Any
 from forge.core.hashing import is_sha256
 from forge.core.provenance_archive import HistoricalPinArchive
 
-REPO = Path(__file__).resolve().parents[3]
+# tools/forge_provenance/pins.py -> parents[2] is the repository root.
+REPO = Path(__file__).resolve().parents[2]
 
 # Pins recorded against a container-side path (a Modal mount, a remote checkout) describe the
 # same bytes we may hold locally under a different root. They are not local files and their

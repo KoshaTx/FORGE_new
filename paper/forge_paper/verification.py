@@ -13,7 +13,7 @@ from typing import Any
 
 from forge.core.hashing import is_sha256, sha256_file
 from forge.core.provenance_archive import HistoricalPinArchive
-from forge.provenance.pins import load_baseline, load_moves
+from forge_provenance.pins import load_baseline, load_moves
 from forge_paper.contract import PaperContract, PaperPin
 
 

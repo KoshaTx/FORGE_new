@@ -18,7 +18,7 @@ from typing import Any
 
 from forge.core.io import atomic_write, write_json
 from forge.core.provenance_archive import HISTORICAL_PIN_ARCHIVE_SCHEMA
-from forge.provenance.pins import (
+from forge_provenance.pins import (
     FOREIGN_PREFIXES,
     Pin,
     collect_pins,
@@ -26,7 +26,7 @@ from forge.provenance.pins import (
     load_moves,
 )
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[2]
 ARCHIVE_ROOT = REPO / "provenance" / "frozen-code"
 
 # `configs/` is scanned alongside the result artifacts because a frozen config pins the source that
