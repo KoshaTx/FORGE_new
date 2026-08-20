@@ -18,6 +18,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.product.canonical_representation_audit import (
     _random_nonidentity_order,
     _row_seed,
@@ -69,15 +70,7 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise TraversalRepresentationAuditError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise TraversalRepresentationAuditError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(payload, dict):
-        raise TraversalRepresentationAuditError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=TraversalRepresentationAuditError, label=label)
 
 
 def _quantiles(values: Sequence[float]) -> dict[str, float] | None:

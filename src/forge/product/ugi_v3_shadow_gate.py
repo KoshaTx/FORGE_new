@@ -19,6 +19,7 @@ from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import read_json_object
 from forge.core.io import write_json as _atomic_json
 from forge.data.r0_splits import sha256_file
 
@@ -55,13 +56,7 @@ class UgiV3ShadowGateError(RuntimeError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as error:
-        raise UgiV3ShadowGateError(f"invalid {label}: {path}") from error
-    if not isinstance(value, dict):
-        raise UgiV3ShadowGateError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=UgiV3ShadowGateError, label=label)
 
 
 def _resolve(repository: Path, value: str | Path) -> Path:

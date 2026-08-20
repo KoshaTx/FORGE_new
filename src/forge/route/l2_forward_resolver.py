@@ -14,7 +14,6 @@ synthesis value without the independent evidence and L3 systems.
 from __future__ import annotations
 
 import itertools
-import json
 import re
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
@@ -26,6 +25,7 @@ from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_file as _sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import read_json_object
 from forge.route.planner import ForwardVerificationState
 from forge.route.proposal_engine import SingleStepRetrosynthesisProposal
 from forge.route.qualified_forward import (
@@ -621,13 +621,7 @@ class IndependentL2ForwardResolver:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (OSError, json.JSONDecodeError) as exc:
-        raise L2ForwardResolverError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise L2ForwardResolverError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=L2ForwardResolverError, label=label)
 
 
 def _verify_artifact(repo_root: Path, record: Mapping[str, Any], *, label: str) -> Path:

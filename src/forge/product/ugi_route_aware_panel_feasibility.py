@@ -30,6 +30,7 @@ from typing import Any
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 from forge.product.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
@@ -113,13 +114,7 @@ def _jsonl_gzip_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_bytes())
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise UgiRouteAwarePanelFeasibilityError(f"invalid {label}: {path}") from error
-    if not isinstance(value, dict):
-        raise UgiRouteAwarePanelFeasibilityError(f"{label} must contain one JSON object")
-    return value
+    return read_json_object(path, error=UgiRouteAwarePanelFeasibilityError, label=label)
 
 
 def _pin(repo: Path, value: Any, *, label: str) -> Path:

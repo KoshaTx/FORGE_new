@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_10_flower_transfer_audit_config.v1"
 RESULT_SCHEMA_VERSION = "m0_10_flower_transfer_audit.v1"
@@ -26,15 +27,7 @@ class FlowerTransferAuditError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise FlowerTransferAuditError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise FlowerTransferAuditError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(payload, dict):
-        raise FlowerTransferAuditError(f"{label} must contain a JSON object")
-    return payload
+    return read_json_object(path, error=FlowerTransferAuditError, label=label)
 
 
 def _safe_workspace_path(repo_root: Path, relative: str) -> Path:

@@ -8,12 +8,12 @@ the denominator and are reported separately.
 
 from __future__ import annotations
 
-import json
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.product.ugi_tail_chemotype_audit import summarize_component_cohort
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_terminal_decoder_evaluation_config.v1"
@@ -30,13 +30,7 @@ class UgiTerminalDecoderChallengerError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise UgiTerminalDecoderChallengerError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise UgiTerminalDecoderChallengerError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=UgiTerminalDecoderChallengerError, label=label)
 
 
 def _compact_chemotype_summary(smiles: Sequence[str]) -> dict[str, Any]:

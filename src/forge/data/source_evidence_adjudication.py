@@ -18,6 +18,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.route.supervision_inventory import sha256_file
 from forge.route.ugi3_assembly_qualification import (
     Ugi3AssemblyQualificationError,
@@ -50,15 +51,7 @@ class SourceEvidenceAdjudicationError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise SourceEvidenceAdjudicationError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise SourceEvidenceAdjudicationError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise SourceEvidenceAdjudicationError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=SourceEvidenceAdjudicationError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, label: str) -> dict[str, Any]:

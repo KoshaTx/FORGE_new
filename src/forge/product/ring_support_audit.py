@@ -17,6 +17,7 @@ from rdkit import Chem, rdBase
 from rdkit.Chem import rdMolDescriptors
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_06_lipid_ring_support_config.v1"
 RESULT_SCHEMA_VERSION = "m0_06_lipid_ring_support_result.v1"
@@ -27,15 +28,7 @@ class RingSupportAuditError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise RingSupportAuditError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise RingSupportAuditError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise RingSupportAuditError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=RingSupportAuditError, label=label)
 
 
 def _read_csv(path: Path, required: set[str], label: str) -> list[dict[str, str]]:

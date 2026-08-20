@@ -18,6 +18,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_file
 from forge.data.r1_prime_audit import compile_reactions, load_reaction_definitions
 from forge.product.ugi_component_expansion import FOLDS, ROLES
@@ -50,15 +51,7 @@ class ExpandedEnumerationError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise ExpandedEnumerationError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise ExpandedEnumerationError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise ExpandedEnumerationError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=ExpandedEnumerationError, label=label)
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:

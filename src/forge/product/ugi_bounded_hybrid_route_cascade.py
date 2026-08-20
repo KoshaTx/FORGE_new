@@ -30,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_bounded_hybrid_route_cascade_config.v1"
@@ -180,14 +181,7 @@ def atomic_write(path: Path, payload: bytes) -> None:
 
 def load_json(path: Path, *, label: str) -> dict[str, Any]:
     """Load one JSON object with an actionable failure message."""
-
-    try:
-        value = json.loads(path.read_bytes())
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise UgiBoundedHybridRouteCascadeError(f"invalid {label}: {path}") from error
-    if not isinstance(value, dict):
-        raise UgiBoundedHybridRouteCascadeError(f"{label} must contain one JSON object")
-    return value
+    return read_json_object(path, error=UgiBoundedHybridRouteCascadeError, label=label)
 
 
 def read_jsonl_gzip(path: Path, *, label: str) -> list[dict[str, Any]]:

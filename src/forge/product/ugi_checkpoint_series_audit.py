@@ -7,6 +7,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import read_json_object
 from forge.core.io import write_json as _atomic_json
 from forge.product.defog_feasibility import sha256_file
 
@@ -16,12 +17,7 @@ class UgiCheckpointSeriesAuditError(RuntimeError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    if not path.is_file():
-        raise UgiCheckpointSeriesAuditError(f"missing {label}: {path}")
-    value = json.loads(path.read_text())
-    if not isinstance(value, dict):
-        raise UgiCheckpointSeriesAuditError(f"{label} is not a JSON object: {path}")
-    return value
+    return read_json_object(path, error=UgiCheckpointSeriesAuditError, label=label)
 
 
 def _resolve(reference: str, repo: Path) -> Path:

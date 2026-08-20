@@ -18,6 +18,7 @@ from rdkit.Chem import Descriptors, rdMolDescriptors
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_03_r0_reconciliation_config.v1"
 RESULT_SCHEMA_VERSION = "m0_03_r0_reconciliation_result.v1"
@@ -76,15 +77,7 @@ class R0ReconciliationError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise R0ReconciliationError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise R0ReconciliationError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise R0ReconciliationError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=R0ReconciliationError, label=label)
 
 
 def _read_csv(path: Path, required: set[str], label: str) -> list[dict[str, str]]:

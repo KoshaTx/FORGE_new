@@ -9,13 +9,13 @@ source, compute a synthesis scalar, invoke biology or select candidates.
 from __future__ import annotations
 
 import hashlib
-import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import read_json_object
 from forge.product.ugi_matched_budget_orchestration import (
     MatchedBudgetLimits,
     MatchedScheduleEntry,
@@ -82,17 +82,7 @@ def _reject_duplicate_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _read_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        raw = path.read_bytes()
-    except OSError as error:
-        raise UgiProductionZeroGuidanceConfigError(f"cannot read {label}: {path}") from error
-    try:
-        value = json.loads(raw, object_pairs_hook=_reject_duplicate_pairs)
-    except (UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise UgiProductionZeroGuidanceConfigError(f"{label} is not valid JSON: {path}") from error
-    if not isinstance(value, dict):
-        raise UgiProductionZeroGuidanceConfigError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=UgiProductionZeroGuidanceConfigError, label=label)
 
 
 def _require_exact_fields(value: Any, expected: set[str], *, label: str) -> dict[str, Any]:

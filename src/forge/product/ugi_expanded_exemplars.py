@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_bytes, sha256_file
 from forge.potency.ugi_semantic_annotations import (
     ATOM_FIELDS,
@@ -46,15 +47,7 @@ class ExpandedExemplarError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise ExpandedExemplarError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise ExpandedExemplarError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise ExpandedExemplarError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=ExpandedExemplarError, label=label)
 
 
 def _resolve_inputs(

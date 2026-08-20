@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import json
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
@@ -17,6 +16,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_postselection_branching_audit_config.v1"
@@ -28,13 +28,7 @@ class UgiPostselectionBranchingError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise UgiPostselectionBranchingError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise UgiPostselectionBranchingError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=UgiPostselectionBranchingError, label=label)
 
 
 def _component_molecule(smiles: Any, *, label: str) -> Chem.Mol:

@@ -16,6 +16,7 @@ from rdkit import Chem, rdBase
 
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import csv_gz_bytes as _csv_bytes
+from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_bytes, sha256_file
 
 CONFIG_SCHEMA_VERSION = "phase1_product_l1_data_config.v3"
@@ -53,15 +54,7 @@ class Phase1DataError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise Phase1DataError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise Phase1DataError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise Phase1DataError(f"{label} must be a JSON object: {path}")
-    return value
+    return read_json_object(path, error=Phase1DataError, label=label)
 
 
 def _resolve_and_verify(

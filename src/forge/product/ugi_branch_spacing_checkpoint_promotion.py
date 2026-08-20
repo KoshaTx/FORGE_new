@@ -8,6 +8,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_file
 from forge.potency.ugi_semantic_annotations import ROLE_NAMES
 from forge.product.ugi_morphology_program import maximum_adjacent_branch_graph_run
@@ -33,13 +34,7 @@ class UgiBranchSpacingPromotionError(RuntimeError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as error:
-        raise UgiBranchSpacingPromotionError(f"invalid {label}: {path}") from error
-    if not isinstance(value, dict):
-        raise UgiBranchSpacingPromotionError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=UgiBranchSpacingPromotionError, label=label)
 
 
 def _resolve(repository: Path, value: str | Path) -> Path:
