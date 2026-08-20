@@ -30,6 +30,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.route.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_lnpdb_route_source_config.v1"
@@ -112,15 +113,7 @@ def _as_clean_strings(value: Any) -> list[str]:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise SourceLedgerError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise SourceLedgerError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise SourceLedgerError(f"{label} must contain a JSON object: {path}")
-    return value
+    return read_json_object(path, error=SourceLedgerError, label=label)
 
 
 def load_config(path: Path) -> dict[str, Any]:

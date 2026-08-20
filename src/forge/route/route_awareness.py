@@ -24,6 +24,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 from forge.route.supervision_inventory import sha256_file
 
@@ -82,15 +83,7 @@ def _canonicalize(smiles: str, *, label: str) -> str:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise RouteAwarenessError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise RouteAwarenessError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise RouteAwarenessError(f"{label} must contain a JSON object: {path}")
-    return value
+    return read_json_object(path, error=RouteAwarenessError, label=label)
 
 
 def _require_unique_labels(entries: list[dict[str, Any]], expected: set[str], label: str) -> None:

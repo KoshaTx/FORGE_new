@@ -20,6 +20,7 @@ from forge.chemistry import (
 )
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.product.ring_support_audit import _ring_signature
 
 CONFIG_SCHEMA_VERSION = "m0_09_lnpdb_head_transfer_config.v1"
@@ -64,15 +65,7 @@ class LnpdbHeadTransferError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise LnpdbHeadTransferError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise LnpdbHeadTransferError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise LnpdbHeadTransferError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=LnpdbHeadTransferError, label=label)
 
 
 def _read_csv(path: Path, required: set[str], label: str) -> list[dict[str, str]]:

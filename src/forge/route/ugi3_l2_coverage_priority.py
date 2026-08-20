@@ -21,6 +21,7 @@ from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
+from forge.core.io import read_json_object
 from forge.product.ugi_tail_chemotype_audit import (
     ARCHITECTURE_FIELDS,
     architecture_signature,
@@ -137,13 +138,7 @@ class UgiL2CoveragePriorityError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise UgiL2CoveragePriorityError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise UgiL2CoveragePriorityError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=UgiL2CoveragePriorityError, label=label)
 
 
 def _read_csv(path: Path, *, label: str) -> list[dict[str, str]]:

@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, TextIO
 
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.route.source_ledger import SOURCE_COLUMNS
 from forge.route.supervision_inventory import sha256_file
 
@@ -95,15 +96,7 @@ def _open_text(path: Path) -> TextIO:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise SourcePriorityError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise SourcePriorityError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise SourcePriorityError(f"{label} must contain a JSON object: {path}")
-    return value
+    return read_json_object(path, error=SourcePriorityError, label=label)
 
 
 def _safe_relative_path(repo_root: Path, value: str, label: str) -> Path:

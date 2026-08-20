@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import gzip
 import io
-import json
 from collections import Counter, defaultdict
 from collections.abc import Mapping
 from copy import deepcopy
@@ -12,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 from forge.route.planner import (
     AssessmentOutcome,
@@ -36,13 +36,7 @@ class Ugi3TargetedExactOverlayDiagnosticError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3TargetedExactOverlayDiagnosticError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3TargetedExactOverlayDiagnosticError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3TargetedExactOverlayDiagnosticError, label=label)
 
 
 def _gzip_json_bytes(value: Any) -> bytes:

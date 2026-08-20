@@ -20,6 +20,7 @@ from typing import Any, TextIO
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.route.ugi3_agile_template_saturation_stress import projected_leaf_candidates
 from forge.route.ugi3_virtual_programs import _aldehyde_program, _isocyanide_program
 
@@ -45,13 +46,7 @@ class Ugi3PrecursorLeafClosureError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3PrecursorLeafClosureError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3PrecursorLeafClosureError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3PrecursorLeafClosureError, label=label)
 
 
 def _validated_inputs(config: Mapping[str, Any], repo: Path) -> dict[str, Path]:

@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import csv
 import gzip
-import json
 import platform
 import re
 from collections.abc import Mapping, Sequence
@@ -28,6 +27,7 @@ from rdkit import rdBase
 
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
+from forge.core.io import read_json_object
 from forge.route.planner import PlannerBudgetLimits
 from forge.route.planner_cache import (
     PLANNER_CACHE_KEY_SCHEMA_VERSION,
@@ -78,13 +78,7 @@ def _require_nonempty(value: Any, *, label: str) -> str:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as error:
-        raise Ugi3ProductionPlannerQualificationError(f"invalid {label}: {path}") from error
-    if not isinstance(value, dict):
-        raise Ugi3ProductionPlannerQualificationError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3ProductionPlannerQualificationError, label=label)
 
 
 def _portable(path: Path, *, repo_root: Path) -> str:

@@ -15,6 +15,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.route.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_lnpdb_paper_reviews_config.v2"
@@ -54,15 +55,7 @@ def _atomic_write_bytes(path: Path, content: bytes) -> None:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise PaperReviewError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise PaperReviewError(f"{label} is not valid JSON: {exc}") from exc
-    if not isinstance(value, dict):
-        raise PaperReviewError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=PaperReviewError, label=label)
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

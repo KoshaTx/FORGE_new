@@ -17,6 +17,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.io import csv_gz_bytes as _csv_bytes
+from forge.core.io import read_json_object
 from forge.data.r1_prime_audit import (
     CompiledReaction,
     DecompositionCandidate,
@@ -78,15 +79,7 @@ class Ugi3VirtualCapabilityError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise Ugi3VirtualCapabilityError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise Ugi3VirtualCapabilityError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3VirtualCapabilityError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3VirtualCapabilityError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, *, label: str) -> str:

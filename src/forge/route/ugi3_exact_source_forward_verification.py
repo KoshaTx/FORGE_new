@@ -21,6 +21,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.io import read_json_object
 from forge.route.qualified_forward import (
     QualifiedForwardError,
     QualifiedForwardReaction,
@@ -74,13 +75,7 @@ class TransformBinding:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3ExactSourceForwardVerificationError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3ExactSourceForwardVerificationError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3ExactSourceForwardVerificationError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, *, label: str) -> None:

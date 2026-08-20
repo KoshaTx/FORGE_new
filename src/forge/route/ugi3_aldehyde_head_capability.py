@@ -18,6 +18,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.chemistry import audit_reactive_site_multiplicity
+from forge.core.io import read_json_object
 from forge.route.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_ugi3_aldehyde_head_capability_config.v3"
@@ -38,17 +39,7 @@ def _portable_path(path: Path) -> str:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise Ugi3AldehydeHeadCapabilityError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise Ugi3AldehydeHeadCapabilityError(
-            f"{label} is not valid JSON: {path}: {exc}"
-        ) from exc
-    if not isinstance(value, dict):
-        raise Ugi3AldehydeHeadCapabilityError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3AldehydeHeadCapabilityError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, *, label: str) -> str:

@@ -18,6 +18,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.io import read_json_object
 from forge.route.ugi3_virtual_programs import (
     DIRECT_ALDEHYDE_PROGRAM,
     ESTER_PROGRAM,
@@ -54,15 +55,7 @@ class Ugi3VirtualTerminalQueueError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise Ugi3VirtualTerminalQueueError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise Ugi3VirtualTerminalQueueError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3VirtualTerminalQueueError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3VirtualTerminalQueueError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, *, label: str) -> None:

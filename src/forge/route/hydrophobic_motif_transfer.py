@@ -20,6 +20,7 @@ from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdChemReactions, rdFingerprintGenerator
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 
 CONFIG_SCHEMA_VERSION = "m0_09_hydrophobic_motif_transfer_config.v3"
@@ -93,15 +94,7 @@ class HydrophobicMotifTransferError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise HydrophobicMotifTransferError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise HydrophobicMotifTransferError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise HydrophobicMotifTransferError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=HydrophobicMotifTransferError, label=label)
 
 
 def _required_mapping(

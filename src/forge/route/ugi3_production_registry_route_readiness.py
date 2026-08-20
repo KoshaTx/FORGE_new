@@ -19,6 +19,7 @@ from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
+from forge.core.io import read_json_object
 from forge.route.qualified_forward import (
     QualifiedForwardError,
     load_qualified_forward_reaction,
@@ -99,13 +100,7 @@ class ProductionRegistryRouteReadinessError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise ProductionRegistryRouteReadinessError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise ProductionRegistryRouteReadinessError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=ProductionRegistryRouteReadinessError, label=label)
 
 
 def _read_csv(path: Path, *, label: str) -> list[dict[str, str]]:

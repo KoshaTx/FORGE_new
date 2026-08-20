@@ -18,6 +18,7 @@ from typing import Any
 
 from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_dossier_coverage_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi3_dossier_coverage.v1"
@@ -58,13 +59,7 @@ class Ugi3DossierCoverageError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3DossierCoverageError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3DossierCoverageError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=Ugi3DossierCoverageError, label=label)
 
 
 def _read_gzip_csv(path: Path, *, label: str) -> list[dict[str, str]]:

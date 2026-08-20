@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_09_l2_supervision_decision_config.v2"
 RESULT_SCHEMA_VERSION = "m0_09_l2_supervision_decision.v2"
@@ -21,13 +22,7 @@ class L2SupervisionDecisionError(RuntimeError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError, OSError) as exc:
-        raise L2SupervisionDecisionError(f"cannot load {label} at {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise L2SupervisionDecisionError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=L2SupervisionDecisionError, label=label)
 
 
 def _required_mapping(

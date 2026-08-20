@@ -15,6 +15,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import read_json_object
 from forge.route.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_ugi3_precursor_capability_config.v2"
@@ -61,15 +62,7 @@ def _atomic_write_bytes(path: Path, content: bytes) -> None:
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise Ugi3CapabilityError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise Ugi3CapabilityError(f"{label} is not valid JSON: {exc}") from exc
-    if not isinstance(payload, dict):
-        raise Ugi3CapabilityError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=Ugi3CapabilityError, label=label)
 
 
 def _require_sha256(value: Any, *, label: str) -> str:

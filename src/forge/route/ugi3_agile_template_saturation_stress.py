@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.route.ugi3_virtual_programs import _aldehyde_program, _isocyanide_program
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_agile_template_saturation_stress_config.v1"
@@ -33,13 +34,7 @@ class Ugi3AgileTemplateSaturationStressError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3AgileTemplateSaturationStressError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3AgileTemplateSaturationStressError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3AgileTemplateSaturationStressError, label=label)
 
 
 def _load_gzip_json(path: Path, *, label: str) -> dict[str, Any]:

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 from forge.route.ugi3_agile_template_saturation_stress import projected_leaf_candidates
 from forge.route.ugi3_precursor_leaf_closure import (
     ALDEHYDE_ROLE,
@@ -35,13 +36,7 @@ class Ugi3RouteGapTriageError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3RouteGapTriageError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3RouteGapTriageError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3RouteGapTriageError, label=label)
 
 
 def _validate_inputs(config: Mapping[str, Any], repo: Path) -> dict[str, Path]:

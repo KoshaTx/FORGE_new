@@ -15,6 +15,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_targeted_role_gap_evidence_audit_config.v1"
@@ -28,13 +29,7 @@ class Ugi3TargetedRoleGapEvidenceError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3TargetedRoleGapEvidenceError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3TargetedRoleGapEvidenceError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3TargetedRoleGapEvidenceError, label=label)
 
 
 def _read_csv(path: Path, *, label: str) -> list[dict[str, str]]:

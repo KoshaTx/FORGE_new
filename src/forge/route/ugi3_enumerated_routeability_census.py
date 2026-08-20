@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, TextIO
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi3_enumerated_routeability_census_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi3_enumerated_routeability_census.v1"
@@ -48,13 +49,7 @@ class Ugi3EnumeratedRouteabilityCensusError(ValueError):
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise Ugi3EnumeratedRouteabilityCensusError(f"invalid {label}: {path}") from exc
-    if not isinstance(value, dict):
-        raise Ugi3EnumeratedRouteabilityCensusError(f"{label} must be an object")
-    return value
+    return read_json_object(path, error=Ugi3EnumeratedRouteabilityCensusError, label=label)
 
 
 def _load_gzip_json(path: Path, *, label: str) -> dict[str, Any]:
