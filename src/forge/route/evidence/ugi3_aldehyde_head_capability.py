@@ -17,7 +17,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.chemistry import audit_reactive_site_multiplicity
+from forge.chem.reactive_sites import audit_reactive_site_multiplicity
 from forge.core.io import read_json_object
 from forge.route.sources.supervision_inventory import sha256_file
 

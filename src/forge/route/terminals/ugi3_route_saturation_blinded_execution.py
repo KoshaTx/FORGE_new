@@ -168,7 +168,7 @@ PREFLIGHT_MANIFEST_FIELDS = (
 )
 RUNTIME_DEPENDENCY_MANIFEST_SCHEMA_VERSION = "phase1_ugi3_blinded_headless_dependency_manifest.v1"
 RUNTIME_DEPENDENCY_MODULES = (
-    "forge.chemistry",
+    "forge.chem.reactive_sites",
     "forge.data",
     "forge.data.r0_splits",
     "forge.data.r1_prime_audit",

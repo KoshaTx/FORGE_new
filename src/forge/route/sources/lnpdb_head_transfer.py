@@ -14,7 +14,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.chemistry import (
+from forge.chem.reactive_sites import (
     SUPPORTED_MULTIPLICITY_SEMANTICS,
     audit_reactive_site_multiplicity,
 )

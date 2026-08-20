@@ -18,7 +18,7 @@ import yaml
 from rdkit import Chem, rdBase
 from rdkit.Chem import rdChemReactions
 
-from forge.chemistry import (
+from forge.chem.reactive_sites import (
     SYMMETRY_DISTINCT_REQUIRED_HANDLE_MATCHES,
     audit_reactive_site_multiplicity,
 )

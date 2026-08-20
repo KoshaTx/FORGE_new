@@ -31,7 +31,7 @@ from typing import Any
 from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdChemReactions, rdFingerprintGenerator
 
-from forge.chemistry import (
+from forge.chem.reactive_sites import (
     RAW_SUBSTRUCTURE_MATCHES,
     SUPPORTED_MULTIPLICITY_SEMANTICS,
     SYMMETRY_DISTINCT_REQUIRED_HANDLE_MATCHES,
