@@ -8,8 +8,8 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.design.flow.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
 from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.flow.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
 from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,

@@ -11,12 +11,12 @@ from forge.route.engine.planner import (
     PlannerBudgetLimits,
     RecursiveRouteAssessor,
 )
-from forge.route.sources.ugi3_exact_evidence_source import load_exact_evidence_only_source
 from forge.route.engine.ugi3_hybrid_search import (
     SearchChannel,
     build_hybrid_search_diagnostic,
     load_bounded_hybrid_source,
 )
+from forge.route.sources.ugi3_exact_evidence_source import load_exact_evidence_only_source
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_hybrid_search.json"

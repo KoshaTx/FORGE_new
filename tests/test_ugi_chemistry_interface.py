@@ -11,8 +11,8 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
+from forge.design.audit.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
 from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
 from forge.design.flow.ugi_chemistry_interface import (
     ADAPTER_ATTACHMENT_BOND_STATE,
@@ -26,8 +26,8 @@ from forge.design.flow.ugi_chemistry_interface import (
     recompute_adapter_distances,
     validate_chemistry_topology_condition,
 )
-from forge.design.audit.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
 from forge.design.flow.ugi_morphology_program import split_ugi_support_morphology
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 torch = pytest.importorskip("torch")
 

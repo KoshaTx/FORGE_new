@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 from forge.route.engine.graph2edits_backend import (
     GRAPH2EDITS_BACKEND_ID,
     GRAPH2EDITS_CHECKPOINT_LICENSE,
@@ -30,7 +31,6 @@ from forge.route.engine.proposal_engine import (
     ProposalTargetKind,
     RootQualificationReceipt,
 )
-from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 
 
 def _sha256_bytes(value: bytes) -> str:

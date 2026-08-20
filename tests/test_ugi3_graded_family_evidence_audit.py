@@ -9,12 +9,6 @@ import pytest
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
 from forge.route.engine.planner import AssessmentOutcome, RouteTarget
-from forge.value.synthesis.synthesis import (
-    BurdenEstimate,
-    ComponentSynthesisValue,
-    EvidenceSupport,
-    ForwardConsistency,
-)
 from forge.value.audit.ugi3_graded_family_evidence_audit import (
     EXACT_COMPLETE,
     FAMILY_ALL_CURRENT,
@@ -26,6 +20,12 @@ from forge.value.audit.ugi3_graded_family_evidence_audit import (
     Ugi3GradedFamilyEvidenceAuditError,
     build_graded_family_evidence_audit,
     classify_graded_evidence,
+)
+from forge.value.synthesis.synthesis import (
+    BurdenEstimate,
+    ComponentSynthesisValue,
+    EvidenceSupport,
+    ForwardConsistency,
 )
 
 REPO = Path(__file__).resolve().parents[1]

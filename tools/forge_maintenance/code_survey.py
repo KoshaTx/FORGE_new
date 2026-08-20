@@ -12,8 +12,8 @@ from typing import Any
 from forge.core.hashing import sha256_file, sha256_tree
 from forge.core.io import write_json
 from forge.core.provenance_archive import HistoricalPinArchive
-from forge.paper.contract import PaperContract
-from forge.paper.verification import provenance_closure
+from forge_paper.contract import PaperContract
+from forge_paper.verification import provenance_closure
 from forge.provenance.pins import collect_pins
 
 

@@ -4,6 +4,16 @@ from collections import Counter
 
 import pytest
 
+from forge.route.assessment.ugi3_support_boundary import (
+    AuthenticatedInternalRoleRegistry,
+    MolecularSupportState,
+    RoutePriorityLane,
+    SupportBoundaryNormalizedUgi3Source,
+    TargetQualification,
+    Ugi3SupportBoundaryError,
+    qualification_key,
+    route_priority_lane,
+)
 from forge.route.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
@@ -17,16 +27,6 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteStepProposal,
     RouteTarget,
-)
-from forge.route.assessment.ugi3_support_boundary import (
-    AuthenticatedInternalRoleRegistry,
-    MolecularSupportState,
-    RoutePriorityLane,
-    SupportBoundaryNormalizedUgi3Source,
-    TargetQualification,
-    Ugi3SupportBoundaryError,
-    qualification_key,
-    route_priority_lane,
 )
 
 EMPTY_INTERNAL_ROLES = AuthenticatedInternalRoleRegistry(frozenset())

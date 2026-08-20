@@ -6,6 +6,11 @@ from dataclasses import replace
 
 import pytest
 
+from forge.route.assessment.ugi3_support_boundary import (
+    AuthenticatedInternalRoleRegistry,
+    MolecularSupportState,
+    TargetQualification,
+)
 from forge.route.engine.planner import (
     ForwardVerificationState,
     RoutePlannerError,
@@ -27,11 +32,6 @@ from forge.route.engine.proposal_engine import (
     build_internal_target_lineage,
     screen_learned_proposal,
     validate_proposal_batch,
-)
-from forge.route.assessment.ugi3_support_boundary import (
-    AuthenticatedInternalRoleRegistry,
-    MolecularSupportState,
-    TargetQualification,
 )
 
 POLICY_ID = "forge-lipid-component-operational-v1"

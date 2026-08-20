@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
+from forge.route.assessment.ugi3_targeted_role_gap_overlay import load_targeted_role_gap_overlay
 from forge.route.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
@@ -19,7 +20,6 @@ from forge.route.evidence.ugi3_targeted_role_gap_evidence import (
     Ugi3TargetedRoleGapEvidenceError,
     build_targeted_role_gap_evidence_audit,
 )
-from forge.route.assessment.ugi3_targeted_role_gap_overlay import load_targeted_role_gap_overlay
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json"

@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from forge.value.synthesis.synthesis_source_qualification import build_synthesis_source_qualification
+from forge.value.synthesis.synthesis_source_qualification import (
+    build_synthesis_source_qualification,
+)
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_synthesis_value_source_qualification_v1.json"

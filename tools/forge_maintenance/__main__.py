@@ -1,6 +1,6 @@
 """Command line for the repository maintenance tools.
 
-This wiring used to live in `forge.cli` as `forge maintenance ...`. It moved here with the code so
+This wiring used to live in `forge_cli` as `forge maintenance ...`. It moved here with the code so
 the installed package's command surface describes the science rather than this repository's own
 bookkeeping, and so nothing in `forge` has to import a tool that only makes sense inside the
 working tree.
@@ -20,7 +20,7 @@ DEFAULT_CONTRACT = Path("configs/reproduction/iclr2027.json")
 
 
 def _repo() -> Path:
-    """Locate the repository root the same way `forge.cli` does."""
+    """Locate the repository root the same way `forge_cli` does."""
     candidates = [Path.cwd(), *Path.cwd().parents, Path(__file__).resolve().parents[2]]
     for candidate in candidates:
         if (candidate / "pyproject.toml").is_file() and (candidate / "src" / "forge").is_dir():

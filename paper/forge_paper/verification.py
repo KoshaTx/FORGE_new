@@ -13,8 +13,8 @@ from typing import Any
 
 from forge.core.hashing import is_sha256, sha256_file
 from forge.core.provenance_archive import HistoricalPinArchive
-from forge.paper.contract import PaperContract, PaperPin
 from forge.provenance.pins import load_baseline, load_moves
+from forge_paper.contract import PaperContract, PaperPin
 
 
 def _nested_pins(node: Any) -> Iterator[PaperPin]:
@@ -246,7 +246,7 @@ def reproduce_paper_artifacts(repo: Path, contract_path: Path) -> dict[str, Any]
 
     from tempfile import TemporaryDirectory
 
-    from forge.paper.build import build_overleaf_bundle, build_pdf
+    from forge_paper.build import build_overleaf_bundle, build_pdf
 
     verification = verify_paper(repo, contract_path)
     if not verification["ok"]:

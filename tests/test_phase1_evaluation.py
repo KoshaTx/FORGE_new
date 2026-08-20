@@ -6,11 +6,11 @@ import pytest
 pytest.importorskip("rdkit")
 
 from forge.design.flow.defog_feasibility import AtomState  # noqa: E402
+from forge.design.flow.phase1_flow import TrainingGraphRecord  # noqa: E402
 from forge.design.sampling.phase1_evaluation import (  # noqa: E402
     evaluate_product_samples,
     training_record_edges,
 )
-from forge.design.flow.phase1_flow import TrainingGraphRecord  # noqa: E402
 
 
 def _record(

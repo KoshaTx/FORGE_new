@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
+from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 from forge.route.engine.planner import RouteTarget
 from forge.route.engine.proposal_engine import (
     OperationalCompatibility,
@@ -31,7 +32,6 @@ from forge.route.engine.single_step_proposal_benchmark import (
     load_frozen_benchmark_contract,
     score_frozen_lane_outputs,
 )
-from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 
 REPO = Path(__file__).resolve().parents[1]
 BINDING = REPO / "configs/route/single_step_proposal_benchmark_runner_binding_v1.json"

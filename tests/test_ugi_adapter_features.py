@@ -6,7 +6,6 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES, annotate_qualified_ugi_product
 from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
 from forge.design.flow.ugi_adapter_features import (
     ASSEMBLY_INTRODUCED,
@@ -18,6 +17,7 @@ from forge.design.flow.ugi_adapter_features import (
     ugi_adapter_features,
 )
 from forge.design.flow.v5_sparse_representation import v5_constitutional_roundtrip_exact
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES, annotate_qualified_ugi_product
 from forge.route.engine.qualified_forward import load_qualified_forward_reaction
 
 REPO = Path(__file__).resolve().parents[1]

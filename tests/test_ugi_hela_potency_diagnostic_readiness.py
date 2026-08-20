@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.audit.ugi_hela_potency_diagnostic import HeLaPotencyDiagnosticPolicy
 from forge.design.flow.ugi_hela_potency_diagnostic_readiness import (
     UgiHeLaPotencyReadinessError,
     audit_historical_checkpoint_coverage,
     build_hela_potency_diagnostic_readiness,
 )
+from forge.potency.audit.ugi_hela_potency_diagnostic import HeLaPotencyDiagnosticPolicy
 
 REPO = Path(__file__).resolve().parents[1]
 BIO_CONFIG = REPO / "configs/bio/phase1_ugi_hela_potency_diagnostic_authorization_v1.json"

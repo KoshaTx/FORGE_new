@@ -128,7 +128,7 @@ def _command_provenance_archive(_: argparse.Namespace) -> int:
 
 
 def _command_paper_doctor(args: argparse.Namespace) -> int:
-    from forge.paper import diagnose_paper
+    from forge_paper import diagnose_paper
 
     repo = _repo()
     result = diagnose_paper(repo, _paper_contract(repo, args.contract))
@@ -138,7 +138,7 @@ def _command_paper_doctor(args: argparse.Namespace) -> int:
 
 
 def _command_paper_verify(args: argparse.Namespace) -> int:
-    from forge.paper import verify_paper
+    from forge_paper import verify_paper
 
     repo = _repo()
     result = verify_paper(repo, _paper_contract(repo, args.contract), strict=args.strict)
@@ -147,7 +147,7 @@ def _command_paper_verify(args: argparse.Namespace) -> int:
 
 
 def _command_paper_render(args: argparse.Namespace) -> int:
-    from forge.paper.verification import render_publication_outputs
+    from forge_paper.verification import render_publication_outputs
 
     repo = _repo()
     _print(render_publication_outputs(repo, _paper_contract(repo, args.contract)))
@@ -155,7 +155,7 @@ def _command_paper_render(args: argparse.Namespace) -> int:
 
 
 def _command_paper_reproduce(args: argparse.Namespace) -> int:
-    from forge.paper.verification import reproduce_paper_artifacts
+    from forge_paper.verification import reproduce_paper_artifacts
 
     repo = _repo()
     _print(reproduce_paper_artifacts(repo, _paper_contract(repo, args.contract)))
@@ -163,7 +163,7 @@ def _command_paper_reproduce(args: argparse.Namespace) -> int:
 
 
 def _command_paper_build(args: argparse.Namespace) -> int:
-    from forge.paper.build import build_pdf
+    from forge_paper.build import build_pdf
 
     repo = _repo()
     output = Path(args.output) if args.output else Path("build/paper/FORGE_ICLR2027_paper.pdf")
@@ -173,7 +173,7 @@ def _command_paper_build(args: argparse.Namespace) -> int:
 
 
 def _command_paper_bundle(args: argparse.Namespace) -> int:
-    from forge.paper.build import build_overleaf_bundle
+    from forge_paper.build import build_overleaf_bundle
 
     repo = _repo()
     output = (

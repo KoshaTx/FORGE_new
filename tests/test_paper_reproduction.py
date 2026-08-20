@@ -5,9 +5,9 @@ import zipfile
 from pathlib import Path
 
 import pytest
+from forge_paper import PaperContract, PaperContractError, diagnose_paper, verify_paper
+from forge_paper.build import build_overleaf_bundle
 
-from forge.paper import PaperContract, PaperContractError, diagnose_paper, verify_paper
-from forge.paper.build import build_overleaf_bundle
 from forge_cli import build_parser
 
 REPO = Path(__file__).resolve().parents[1]

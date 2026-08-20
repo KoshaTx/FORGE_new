@@ -7,9 +7,11 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.design.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
 from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX
+from forge.design.flow.ugi_joint_sparse_flow import UgiJointSparseTerminal
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
 from forge.design.sampling.ugi_joint_end_to_end_sampling import (
     UgiJointEndToEndSamplingError,
     _annotate_l1_terminal_admission,
@@ -20,8 +22,6 @@ from forge.design.sampling.ugi_joint_end_to_end_sampling import (
     flow_endpoint_chemistry_sample,
     sample_ugi_joint_end_to_end,
 )
-from forge.design.flow.ugi_joint_sparse_flow import UgiJointSparseTerminal
-from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
 
 torch = pytest.importorskip("torch")
 

@@ -3,13 +3,16 @@ from __future__ import annotations
 import hashlib
 from types import SimpleNamespace
 
+from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
+from forge.route.assessment.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
 from forge.route.audit.graph2edits_checkpoint_contrast import (
     extract_checkpoint_component_targets,
     run_checkpoint_component_proposals,
 )
-from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
-from forge.route.assessment.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
-from forge.route.engine.proposal_engine import ProposalBackendManifest, SingleStepRetrosynthesisProposal
+from forge.route.engine.proposal_engine import (
+    ProposalBackendManifest,
+    SingleStepRetrosynthesisProposal,
+)
 
 
 def _hash(label: str) -> str:

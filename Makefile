@@ -179,15 +179,16 @@ phase1-sampling-reproduce:
 typecheck:
 	python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/corpus src/forge/generate src/forge/stages \
-		src/forge/paper src/forge/provenance src/forge_cli
+		src/forge/provenance src/forge_cli
 	python3 -m mypy src/forge_experiment
+	MYPYPATH=paper python3 -m mypy paper/forge_paper
 	MYPYPATH=tools python3 -m mypy tools/forge_maintenance
 
 check-core: verify-pins typecheck
 	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/potency src/forge/corpus src/forge/generate \
 		src/forge/stages \
-		src/forge/paper src/forge/provenance src/forge_cli \
+		src/forge/provenance src/forge_cli \
 		src/forge/data/vendor.py src/forge_experiment/modal_app.py \
 		src/forge/provenance tests/test_architecture_boundaries.py \
 		tests/test_assembly_ugi3.py tests/test_core_hashing.py \

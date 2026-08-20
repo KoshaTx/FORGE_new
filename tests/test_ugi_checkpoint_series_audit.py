@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.design.flow.defog_feasibility import sha256_file
 from forge.design.audit.ugi_checkpoint_series_audit import audit_ugi_checkpoint_series
+from forge.design.flow.defog_feasibility import sha256_file
 
 
 def _write(path: Path, value: object) -> None:

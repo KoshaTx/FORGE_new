@@ -6,11 +6,18 @@ from dataclasses import replace
 
 import pytest
 
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.design.corpus.ugi_generated_terminal_support import (
     QualifiedGeneratedUgiTerminalSupport,
     RoleHandleRecheck,
 )
+from forge.design.guidance.ugi_production_zero_guidance_result import (
+    ArmTerminalSupportAuditSnapshot,
+    AuthenticatedZeroGuidanceComposerResult,
+    ProductionTerminalSupportAuditCollector,
+    ProductionZeroGuidanceExecutionResult,
+    UgiProductionZeroGuidanceResultError,
+)
+from forge.design.guidance.ugi_zero_guidance_rehearsal import ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION
 from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
@@ -22,20 +29,13 @@ from forge.design.schedule.ugi_production_terminal_route_evaluator import (
     ProductionTerminalSupportAudit,
     _support_sha256,
 )
-from forge.design.guidance.ugi_production_zero_guidance_result import (
-    ArmTerminalSupportAuditSnapshot,
-    AuthenticatedZeroGuidanceComposerResult,
-    ProductionTerminalSupportAuditCollector,
-    ProductionZeroGuidanceExecutionResult,
-    UgiProductionZeroGuidanceResultError,
-)
-from forge.design.guidance.ugi_zero_guidance_rehearsal import ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION
-from forge.route.engine.planner import RouteTarget
-from forge.route.terminals.terminal_assessment import ExactL1ForwardVerification
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.route.assessment.ugi3_support_boundary import (
     MolecularSupportState,
     TargetQualification,
 )
+from forge.route.engine.planner import RouteTarget
+from forge.route.terminals.terminal_assessment import ExactL1ForwardVerification
 
 
 def _hash(label: str) -> str:

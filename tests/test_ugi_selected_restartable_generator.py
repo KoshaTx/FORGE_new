@@ -7,12 +7,6 @@ from types import SimpleNamespace
 
 import pytest
 
-from forge.design.schedule.ugi_matched_budget_orchestration import (
-    MatchedArm,
-    MatchedGenerationRequest,
-    MatchedScheduleEntry,
-    RouteComputeUsage,
-)
 from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     UgiRestartableTerminalSupportAdapterError,
     canonical_morphology_program_bytes,
@@ -32,6 +26,12 @@ from forge.design.sampling.ugi_selected_restartable_generator import (
     SelectedRestartableGeneratorLane,
     UgiSelectedRestartableGeneratorError,
     build_selected_step1000_restartable_generator_lane,
+)
+from forge.design.schedule.ugi_matched_budget_orchestration import (
+    MatchedArm,
+    MatchedGenerationRequest,
+    MatchedScheduleEntry,
+    RouteComputeUsage,
 )
 from forge.route.terminals.terminal_assessment import (
     UgiTerminalRouteAssessmentError,

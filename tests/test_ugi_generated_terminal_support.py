@@ -7,7 +7,6 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.design.corpus.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     UgiGeneratedTerminalSupportError,
@@ -15,14 +14,15 @@ from forge.design.corpus.ugi_generated_terminal_support import (
 )
 from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
 from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.route.assessment.ugi3_support_boundary import (
+    AuthenticatedInternalRoleRegistry,
+    MolecularSupportState,
+)
 from forge.route.engine.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
 from forge.route.terminals.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     ValidatedUgiTerminalPayload,
-)
-from forge.route.assessment.ugi3_support_boundary import (
-    AuthenticatedInternalRoleRegistry,
-    MolecularSupportState,
 )
 
 REPO = Path(__file__).resolve().parents[1]

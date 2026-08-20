@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.schedule.ugi_matched_budget_orchestration import _schedule_sha256
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    canonical_morphology_program_bytes,
+)
 from forge.design.guidance.ugi_production_zero_guidance_config import (
     UgiProductionZeroGuidanceConfigError,
     load_production_zero_guidance_rehearsal_plan,
 )
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-)
+from forge.design.schedule.ugi_matched_budget_orchestration import _schedule_sha256
 from forge.route.engine.planner import PlannerBudgetLimits
 from forge.route.engine.planner_cache import PlannerCacheContext
 from forge.route.terminals.terminal_assessment import (

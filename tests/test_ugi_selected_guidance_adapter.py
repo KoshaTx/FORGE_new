@@ -7,7 +7,6 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.design.sampling.ugi_joint_sparse_sampling import initialize_ugi_joint_sparse_state
 from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
     decode_canonical_morphology_program_bytes,
@@ -18,6 +17,7 @@ from forge.design.flow.ugi_selected_guidance_adapter import (
     SelectedModelRestartableGuidanceLane,
     UgiSelectedGuidanceAdapterError,
 )
+from forge.design.sampling.ugi_joint_sparse_sampling import initialize_ugi_joint_sparse_state
 from forge.design.sampling.ugi_selected_restartable_generator import (
     SAMPLE_STEPS,
     SelectedRestartableGeneratorLane,

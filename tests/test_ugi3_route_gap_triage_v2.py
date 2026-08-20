@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from forge.route.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE
 from forge.route.audit.ugi3_route_gap_triage_v2 import (
     _family_discovery_cluster,
     classify_route_gap,
 )
+from forge.route.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE
 
 
 def test_current_terminal_precedes_stale_outside_support() -> None:

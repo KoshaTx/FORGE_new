@@ -11,6 +11,13 @@ import pytest
 import torch
 
 import forge.design.flow.ugi_dynamic_frozen_prior_terminal_census as census_module
+from forge.design.audit.ugi_dynamic_frozen_prior_terminal_census_validator import (
+    EXPECTED_SCOPE,
+    UgiDynamicTerminalCensusValidationError,
+    load_validation_contract,
+    validate_completed_census,
+    write_validation_receipt,
+)
 from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     CensusContract,
     CensusDesign,
@@ -20,15 +27,6 @@ from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     execute_census_shard,
     select_frozen_prior_programs,
 )
-from forge.design.audit.ugi_dynamic_frozen_prior_terminal_census_validator import (
-    EXPECTED_SCOPE,
-    UgiDynamicTerminalCensusValidationError,
-    load_validation_contract,
-    validate_completed_census,
-    write_validation_receipt,
-)
-from forge.design.sampling.ugi_joint_sparse_sampling import UgiJointSparseTrajectoryState
-from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceStateReceipt
 from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     decode_canonical_morphology_program_bytes,
 )
@@ -36,6 +34,8 @@ from forge.design.flow.ugi_selected_guidance_adapter import (
     SelectedGuidanceParticleState,
     SelectedGuidanceState,
 )
+from forge.design.sampling.ugi_joint_sparse_sampling import UgiJointSparseTrajectoryState
+from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceStateReceipt
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_validator_v1.json"

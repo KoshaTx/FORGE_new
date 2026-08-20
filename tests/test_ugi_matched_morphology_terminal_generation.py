@@ -6,7 +6,6 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.schedule.ugi_matched_morphology_allocation_schedule import ARM_IDS
 from forge.design.sampling.ugi_matched_morphology_terminal_generation import (
     TERMINAL_LEDGER_REQUIRED_FIELDS,
     MatchedTerminalDesign,
@@ -15,6 +14,7 @@ from forge.design.sampling.ugi_matched_morphology_terminal_generation import (
     load_matched_terminal_contract,
     matched_draw_seed,
 )
+from forge.design.schedule.ugi_matched_morphology_allocation_schedule import ARM_IDS
 
 REPO = Path(__file__).resolve().parents[1]
 

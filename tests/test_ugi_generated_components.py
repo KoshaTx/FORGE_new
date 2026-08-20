@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from rdkit import Chem
 
-from forge.design.flow.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
 from forge.design.corpus.ugi_generated_components import precursor_components_from_product_semantics
+from forge.design.flow.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
 
 
 def test_precursor_components_restore_exact_ugi_handles() -> None:

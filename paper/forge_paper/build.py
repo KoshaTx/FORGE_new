@@ -13,10 +13,14 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write
-from forge.paper.contract import PaperContract
+from forge_paper.contract import PaperContract
 
 _DOC = "FORGE_ICLR2027_paper"
 _BUILD_SUFFIXES = {".aux", ".blg", ".fdb_latexmk", ".fls", ".log", ".out", ".pdf"}
+# The bundle is assembled by walking `paper/` and taking every file, so anything living there
+# ships to reviewers. This tooling now lives in `paper/tools/`, hence the directory exclusion --
+# without it the submission zip would carry the code that built it.
+_EXCLUDED_DIRECTORIES = {"forge_paper"}
 
 
 def _copy_sources(repo: Path, destination: Path, contract: PaperContract) -> None:
@@ -136,6 +140,11 @@ def build_overleaf_bundle(
 
         members = [path for path in stage.rglob("*") if path.is_file()]
         members = [path for path in members if path.suffix not in _BUILD_SUFFIXES]
+        members = [
+            path
+            for path in members
+            if not (set(path.relative_to(stage).parts) & _EXCLUDED_DIRECTORIES)
+        ]
         with tempfile.NamedTemporaryFile(prefix="forge-overleaf-", suffix=".zip", delete=False) as handle:
             temporary_zip = Path(handle.name)
         try:

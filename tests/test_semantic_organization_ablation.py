@@ -327,8 +327,9 @@ def test_flat_arm_uses_a_pooled_loss_not_a_role_balanced_one(corpus_and_records,
 
 @requires_switch
 def test_flat_arm_source_marginals_are_pooled(corpus_and_records, architecture):
-    from forge.design.flow.ugi_joint_sparse_flow import joint_sparse_source_marginals
     import numpy as np
+
+    from forge.design.flow.ugi_joint_sparse_flow import joint_sparse_source_marginals
     corpus, records_by_fold = corpus_and_records
     records = tuple(itertools.islice(records_by_fold["train"], 512))
     sources = joint_sparse_source_marginals(
@@ -407,6 +408,7 @@ def test_flat_role_labels_are_the_permuted_true_roles(corpus_and_records, archit
     experiment's meaning.
     """
     import numpy as np
+
     from forge.design.flow.ugi_joint_sparse_flow import flat_subtree_permutation
     _, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 64))
@@ -494,6 +496,7 @@ def test_pilot_arms_are_paired_on_randomness_and_initialization(corpus_and_recor
 def test_pilot_arms_draw_identical_minibatches_and_times(corpus_and_records, architecture):
     """Same seed must give the same example sequence and the same corruption times."""
     import json
+
     import numpy as np
     sealed = REPO / "results/phase1/forge_coverage_splits_v1/splits.json"
     if not sealed.exists():

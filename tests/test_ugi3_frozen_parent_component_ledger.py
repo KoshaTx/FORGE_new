@@ -9,6 +9,8 @@ from typing import Any
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
+from forge.route.assessment.ugi3_route_registry_pair_builder import _load_parent_records
+from forge.route.assessment.ugi3_route_registry_pair_contract import TARGET_ROLE, TARGET_SMILES
 from forge.route.sources.ugi3_frozen_parent_component_ledger import (
     DERIVED_RECORD_FIELDS,
     FROZEN_STATUS,
@@ -17,8 +19,6 @@ from forge.route.sources.ugi3_frozen_parent_component_ledger import (
     Ugi3FrozenParentComponentLedgerError,
     build_frozen_parent_component_ledger,
 )
-from forge.route.assessment.ugi3_route_registry_pair_builder import _load_parent_records
-from forge.route.assessment.ugi3_route_registry_pair_contract import TARGET_ROLE, TARGET_SMILES
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json"
