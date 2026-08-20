@@ -419,5 +419,11 @@ lint:
 fmt:
 	python3 -m black src tests scripts && python3 -m ruff check --fix src tests scripts
 
+# LaTeX leaves its intermediates beside the sources, and `paper/` has to stay flat because
+# Overleaf does not search subfolders for style files -- so the only way to keep the manuscript
+# directory readable is to sweep them. The tracked .bbl and .pdf are submission artifacts and are
+# deliberately not removed.
 clean:
 	rm -rf .pytest_cache .ruff_cache **/__pycache__
+	rm -f paper/*.aux paper/*.blg paper/*.fdb_latexmk paper/*.fls paper/*.log \
+		paper/*.out paper/*.toc paper/*.synctex.gz
