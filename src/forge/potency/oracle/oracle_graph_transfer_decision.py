@@ -15,6 +15,7 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_decision_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_transfer_decision.v1"
@@ -32,15 +33,7 @@ class OracleGraphTransferDecisionError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleGraphTransferDecisionError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleGraphTransferDecisionError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(payload, dict):
-        raise OracleGraphTransferDecisionError(f"{label} must contain a JSON object")
-    return payload
+    return read_json_object(path, error=OracleGraphTransferDecisionError, label=label)
 
 
 def _verify_input(

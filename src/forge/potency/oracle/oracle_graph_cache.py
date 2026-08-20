@@ -26,6 +26,7 @@ import numpy as np
 import torch
 
 from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import read_json_object
 from forge.potency.oracle.oracle_graph import (
     GraphFeatureVocabulary,
     GraphTensor,
@@ -63,15 +64,7 @@ class OracleGraphCacheError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleGraphCacheError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleGraphCacheError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(value, dict):
-        raise OracleGraphCacheError(f"{label} must contain a JSON object")
-    return value
+    return read_json_object(path, error=OracleGraphCacheError, label=label)
 
 
 def _portable(path: Path, repo_root: Path) -> str:

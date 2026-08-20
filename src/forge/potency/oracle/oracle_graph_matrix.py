@@ -6,7 +6,6 @@ import csv
 import gzip
 import hashlib
 import io
-import json
 import math
 import multiprocessing
 from collections import defaultdict
@@ -22,6 +21,7 @@ from torch import nn
 from forge.core.hashing import sha256_file as _sha256_file
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import pretty_json_bytes as _stable_json
+from forge.core.io import read_json_object
 from forge.potency.oracle.oracle_classical import (
     aggregate_selection_metrics,
     conformal_radius,
@@ -89,15 +89,7 @@ class OracleGraphMatrixError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleGraphMatrixError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleGraphMatrixError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(value, dict):
-        raise OracleGraphMatrixError(f"{label} must contain an object")
-    return value
+    return read_json_object(path, error=OracleGraphMatrixError, label=label)
 
 
 def _verify_input(

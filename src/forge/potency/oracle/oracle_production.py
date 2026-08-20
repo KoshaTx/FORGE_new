@@ -25,6 +25,7 @@ from rdkit import Chem, rdBase
 from rdkit.Chem import rdChemReactions
 
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.potency.oracle import oracle_graph_matrix as graph_matrix
 from forge.potency.oracle import oracle_graph_transfer as graph_transfer
 from forge.potency.oracle.oracle_classical import (
@@ -66,15 +67,7 @@ class OracleProductionError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleProductionError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleProductionError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(value, dict):
-        raise OracleProductionError(f"{label} must contain an object")
-    return value
+    return read_json_object(path, error=OracleProductionError, label=label)
 
 
 def _stable_json(value: Mapping[str, Any]) -> bytes:

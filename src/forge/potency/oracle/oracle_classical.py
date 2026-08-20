@@ -42,6 +42,7 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from forge.core.io import read_json_object
 from forge.potency.oracle.agile_reconciliation import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_classical_config.v1"
@@ -130,15 +131,7 @@ class Partition:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleClassicalError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleClassicalError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(payload, dict):
-        raise OracleClassicalError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=OracleClassicalError, label=label)
 
 
 def _portable(path: Path, repo_root: Path) -> str:

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "phase1_oracle_campaign_selection_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_oracle_campaign_selection.v1"
@@ -29,15 +30,7 @@ class OracleCampaignSelectionError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleCampaignSelectionError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleCampaignSelectionError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(payload, dict):
-        raise OracleCampaignSelectionError(f"{label} must contain a JSON object")
-    return payload
+    return read_json_object(path, error=OracleCampaignSelectionError, label=label)
 
 
 def _finite_float(value: Any, label: str) -> float:

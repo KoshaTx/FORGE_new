@@ -29,6 +29,7 @@ from scipy.stats import pearsonr, spearmanr
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import MinMaxScaler
 
+from forge.core.io import read_json_object
 from forge.potency.oracle.agile_reconciliation import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_lantern_reproduction_config.v1"
@@ -65,15 +66,7 @@ def _portable(path: Path, repo_root: Path) -> str:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise LanternReproductionError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise LanternReproductionError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(payload, dict):
-        raise LanternReproductionError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=LanternReproductionError, label=label)
 
 
 def load_lantern_config(path: Path) -> dict[str, Any]:

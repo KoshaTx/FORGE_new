@@ -26,6 +26,7 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 from forge.route.engine.qualified_forward import (
     QualifiedForwardError,
     load_qualified_forward_reaction,
@@ -73,15 +74,7 @@ def _canonical(smiles: str, *, label: str) -> str:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise AuxiliarySupervisionError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise AuxiliarySupervisionError(f"{label} is not valid JSON: {path}") from exc
-    if not isinstance(payload, dict):
-        raise AuxiliarySupervisionError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=AuxiliarySupervisionError, label=label)
 
 
 def _load_csv(path: Path, label: str) -> list[dict[str, str]]:

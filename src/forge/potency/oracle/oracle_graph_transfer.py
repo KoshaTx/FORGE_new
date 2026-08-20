@@ -12,7 +12,6 @@ import csv
 import gzip
 import hashlib
 import io
-import json
 import math
 import multiprocessing
 from collections import defaultdict
@@ -27,6 +26,7 @@ import torch
 from forge.core.hashing import sha256_file as _sha256_file
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import pretty_json_bytes as _stable_json
+from forge.core.io import read_json_object
 from forge.potency.oracle.oracle_classical import (
     aggregate_selection_metrics,
     conformal_radius,
@@ -123,15 +123,7 @@ class OracleGraphTransferError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleGraphTransferError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleGraphTransferError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(payload, dict):
-        raise OracleGraphTransferError(f"{label} must contain a JSON object")
-    return payload
+    return read_json_object(path, error=OracleGraphTransferError, label=label)
 
 
 def _verify_input(
@@ -1087,9 +1079,7 @@ def _csv_gzip(
                 field: (
                     ""
                     if value is None
-                    else format(value, ".12g")
-                    if isinstance(value, float)
-                    else value
+                    else format(value, ".12g") if isinstance(value, float) else value
                 )
                 for field in fields
                 for value in [row.get(field, "")]

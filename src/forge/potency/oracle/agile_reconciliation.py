@@ -38,6 +38,7 @@ from xml.etree import ElementTree as ET
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_file
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_07_agile_reconciliation_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_agile_reconciliation.v1"
@@ -98,15 +99,7 @@ class AgileReconciliationError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        payload = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise AgileReconciliationError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise AgileReconciliationError(f"{label} is not valid JSON: {path}: {exc}") from exc
-    if not isinstance(payload, dict):
-        raise AgileReconciliationError(f"{label} must be a JSON object")
-    return payload
+    return read_json_object(path, error=AgileReconciliationError, label=label)
 
 
 def _canonical(smiles: str, *, isomeric: bool, label: str) -> str:

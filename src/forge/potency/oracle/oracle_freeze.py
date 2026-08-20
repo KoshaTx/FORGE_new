@@ -20,6 +20,7 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_freeze_config.v1"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_freeze.v1"
@@ -59,15 +60,7 @@ def _stable_json(value: Mapping[str, Any]) -> bytes:
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleFreezeError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleFreezeError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(value, dict):
-        raise OracleFreezeError(f"{label} must contain an object")
-    return value
+    return read_json_object(path, error=OracleFreezeError, label=label)
 
 
 def _finite_float(value: Any, label: str) -> float:

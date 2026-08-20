@@ -31,6 +31,7 @@ import numpy as np
 from rdkit import Chem, rdBase
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
+from forge.core.io import read_json_object
 from forge.potency.oracle.agile_reconciliation import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_splits_config.v1"
@@ -45,15 +46,7 @@ class OracleSplitError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleSplitError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleSplitError(f"{label} is invalid JSON: {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise OracleSplitError(f"{label} must be a JSON object")
-    return value
+    return read_json_object(path, error=OracleSplitError, label=label)
 
 
 def _verify_hash(path: Path, expected: Any, label: str) -> dict[str, Any]:

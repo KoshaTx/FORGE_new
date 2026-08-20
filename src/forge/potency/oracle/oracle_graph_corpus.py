@@ -17,6 +17,7 @@ from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_file as _sha256_file
 from forge.core.io import atomic_write as _atomic_write
+from forge.core.io import read_json_object
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_graph_corpus_config.v2"
 RESULT_SCHEMA_VERSION = "m0_07_oracle_graph_corpus.v2"
@@ -50,15 +51,7 @@ class OracleGraphCorpusError(ValueError):
 
 
 def _load_json(path: Path, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text())
-    except FileNotFoundError as exc:
-        raise OracleGraphCorpusError(f"{label} not found: {path}") from exc
-    except json.JSONDecodeError as exc:
-        raise OracleGraphCorpusError(f"{label} is invalid JSON: {path}") from exc
-    if not isinstance(value, dict):
-        raise OracleGraphCorpusError(f"{label} must contain an object")
-    return value
+    return read_json_object(path, error=OracleGraphCorpusError, label=label)
 
 
 def _portable(path: Path, repo_root: Path) -> str:
