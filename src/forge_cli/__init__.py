@@ -1,4 +1,10 @@
-"""The single command-line interface for FORGE experiments and provenance checks."""
+"""The single command-line interface for FORGE experiments and provenance checks.
+
+Outside `forge` because it sits on top of everything rather than inside anything: it composes the
+science in `forge`, the DAG runner in `forge_experiment`, and the stage registrations in
+`forge.stages`. Nothing in either package imports it, so the dependency runs one way and the
+library stays usable without the command line.
+"""
 
 from __future__ import annotations
 

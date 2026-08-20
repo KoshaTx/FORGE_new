@@ -7,7 +7,7 @@ from typing import Any
 
 import pytest
 
-from forge.cli import main
+from forge_cli import main
 from forge_experiment.errors import ExperimentError
 
 

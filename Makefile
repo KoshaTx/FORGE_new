@@ -118,22 +118,22 @@ help:
 	@echo "  make lint / fmt      ruff / black"
 
 vendor:
-	python3 -m forge.cli data vendor
+	python3 -m forge_cli data vendor
 
 vendor-partial:
-	python3 -m forge.cli data vendor --allow-partial
+	python3 -m forge_cli data vendor --allow-partial
 
 verify:
-	python3 -m forge.cli data verify
+	python3 -m forge_cli data verify
 
 verify-partial:
-	python3 -m forge.cli data verify --allow-partial
+	python3 -m forge_cli data verify --allow-partial
 
 # Re-hash every input a result artifact declares. Drift means a supposedly-frozen byte moved and
 # is always fatal; absence is reported but tolerated, because many pinned inputs live only on the
 # workstation that produced them. Run this after any refactor.
 verify-pins:
-	python3 -m forge.cli provenance verify --expect-verified $(EXPECT_PINS)
+	python3 -m forge_cli provenance verify --expect-verified $(EXPECT_PINS)
 
 # The same check extended over `configs/`. A frozen config pins the source that produced it, and
 # those pins outnumber the result-declared ones ~4:1 but went unscanned, so drift in them was
@@ -142,44 +142,44 @@ verify-pins:
 # `docs/known_artifact_drift.json` entry each, which is a provenance judgment, not a chore.
 # The ratchet holds that backlog flat -- it fails the moment drift grows.
 verify-pins-code:
-	python3 -m forge.cli provenance verify --code \
+	python3 -m forge_cli provenance verify --code \
 		--expect-verified $(EXPECT_PINS_ALL) --allow-drift $(CODE_DRIFT_BACKLOG)
 
 # Recover pinned code/config bytes from git objects into the content-addressed archive. Idempotent
 # and additive: a blob is admitted on SHA-256 equality alone. Run after any refactor that edits a
 # file some frozen config or result pins.
 archive-pins:
-	python3 -m forge.cli provenance archive
+	python3 -m forge_cli provenance archive
 
 doctor:
-	python3 -m forge.cli doctor
+	python3 -m forge_cli doctor
 
 experiment-smoke:
-	python3 -m forge.cli experiment run installation-smoke --profile smoke --resume
-	python3 -m forge.cli experiment verify installation-smoke --profile smoke
+	python3 -m forge_cli experiment run installation-smoke --profile smoke --resume
+	python3 -m forge_cli experiment verify installation-smoke --profile smoke
 
 phase1-corpus-run:
-	python3 -m forge.cli experiment run phase1-corpus --profile full --resume
-	python3 -m forge.cli experiment verify phase1-corpus --profile full
+	python3 -m forge_cli experiment run phase1-corpus --profile full --resume
+	python3 -m forge_cli experiment verify phase1-corpus --profile full
 
 phase1-training-smoke:
-	python3 -m forge.cli experiment run phase1-training-smoke --profile smoke --resume
-	python3 -m forge.cli experiment verify phase1-training-smoke --profile smoke
+	python3 -m forge_cli experiment run phase1-training-smoke --profile smoke --resume
+	python3 -m forge_cli experiment verify phase1-training-smoke --profile smoke
 
 phase1-training-modal-plan:
-	python3 -m forge.cli experiment plan phase1-training-production --profile full --backend modal
+	python3 -m forge_cli experiment plan phase1-training-production --profile full --backend modal
 
 phase1-sampling-smoke:
-	python3 -m forge.cli experiment run phase1-sampling --profile smoke --resume
-	python3 -m forge.cli experiment verify phase1-sampling --profile smoke
+	python3 -m forge_cli experiment run phase1-sampling --profile smoke --resume
+	python3 -m forge_cli experiment verify phase1-sampling --profile smoke
 
 phase1-sampling-reproduce:
-	python3 -m forge.cli experiment reproduce phase1-sampling --profile smoke
+	python3 -m forge_cli experiment reproduce phase1-sampling --profile smoke
 
 typecheck:
 	python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/corpus src/forge/generate src/forge/stages \
-		src/forge/paper src/forge/provenance src/forge/cli.py
+		src/forge/paper src/forge/provenance src/forge_cli
 	python3 -m mypy src/forge_experiment
 	MYPYPATH=tools python3 -m mypy tools/forge_maintenance
 
@@ -187,7 +187,7 @@ check-core: verify-pins typecheck
 	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/potency src/forge/corpus src/forge/generate \
 		src/forge/stages \
-		src/forge/paper src/forge/provenance src/forge/cli.py \
+		src/forge/paper src/forge/provenance src/forge_cli \
 		src/forge/data/vendor.py src/forge_experiment/modal_app.py \
 		src/forge/provenance tests/test_architecture_boundaries.py \
 		tests/test_assembly_ugi3.py tests/test_core_hashing.py \
@@ -389,19 +389,19 @@ phase1-product-smoke:
 		--output-dir results/phase1/product_pretrain_smoke
 
 phase1-product-cuda-preflight:
-	python3 -m forge.cli experiment plan phase1-training-production --profile full --backend modal
+	python3 -m forge_cli experiment plan phase1-training-production --profile full --backend modal
 
 phase1-product-pretrain:
-	python3 -m forge.cli experiment run phase1-training-production --profile full --backend modal
+	python3 -m forge_cli experiment run phase1-training-production --profile full --backend modal
 
 paper-verify:
-	python3 -m forge.cli paper verify
+	python3 -m forge_cli paper verify
 
 manuscript-pdf manuscript-iclr:
-	python3 -m forge.cli paper build
+	python3 -m forge_cli paper build
 
 paper-bundle:
-	python3 -m forge.cli paper bundle
+	python3 -m forge_cli paper bundle
 
 code-survey:
 	PYTHONPATH=tools python3 -m forge_maintenance survey \

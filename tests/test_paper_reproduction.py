@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from forge.cli import build_parser
 from forge.paper import PaperContract, PaperContractError, diagnose_paper, verify_paper
 from forge.paper.build import build_overleaf_bundle
+from forge_cli import build_parser
 
 REPO = Path(__file__).resolve().parents[1]
 CONTRACT = REPO / "configs/reproduction/iclr2027.json"
@@ -59,7 +59,9 @@ def test_overleaf_bundle_is_byte_reproducible_and_minimal(tmp_path: Path) -> Non
     with zipfile.ZipFile(first) as archive:
         members = set(archive.namelist())
     assert "FORGE_ICLR2027_paper.tex" in members
-    assert {Path(pin.path).relative_to("paper").as_posix() for pin in contract.figure_outputs} <= members
+    assert {
+        Path(pin.path).relative_to("paper").as_posix() for pin in contract.figure_outputs
+    } <= members
     assert not any(member.endswith((".aux", ".log", ".pdf")) for member in members)
 
 
