@@ -1,8 +1,7 @@
 """The single command-line interface for FORGE experiments and provenance checks.
 
 Outside `forge` because it sits on top of everything rather than inside anything: it composes the
-science in `forge`, the DAG runner in `forge_experiment`, and the stage registrations in
-`forge.stages`. Nothing in either package imports it, so the dependency runs one way and the
+science in `forge`, and the DAG runner in `forge_experiment`. Nothing in either package imports it, so the dependency runs one way and the
 library stays usable without the command line.
 """
 
@@ -14,9 +13,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-# Importing this registers the FORGE stage implementations into the runner's registry. The
-# runner cannot import them itself without depending on the science it is meant to execute.
-import forge.stages  # noqa: F401
 from forge_experiment import ExperimentRunner, diagnose_experiment, verify_run_directory
 from forge_experiment.errors import ExperimentError
 

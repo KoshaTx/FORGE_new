@@ -180,7 +180,7 @@ typecheck:
 	# forge_cli lazily imports forge_provenance from tools/, so mypy needs it on the path
 	# or those call sites degrade to Any and trip warn_return_any.
 	MYPYPATH=tools:paper python3 -m mypy src/forge/core src/forge/chem src/forge/assembly \
-		src/forge/bio src/forge/corpus src/forge/stages \
+		src/forge/bio src/forge/corpus \
 		src/forge_cli
 	python3 -m mypy src/forge_experiment
 	MYPYPATH=paper python3 -m mypy paper/forge_paper
@@ -190,7 +190,6 @@ typecheck:
 check-core: verify-pins typecheck
 	python3 -m ruff check src/forge/core src/forge/chem src/forge/assembly \
 		src/forge/bio src/forge/potency src/forge/corpus \
-		src/forge/stages \
 		src/forge_cli \
 		src/forge/data/vendor.py src/forge_experiment/modal_app.py \
 		tests/test_architecture_boundaries.py \

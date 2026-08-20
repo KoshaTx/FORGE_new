@@ -1,14 +1,16 @@
 """Typed, content-addressed experiment execution.
 
-Deliberately outside `forge`: this is a generic DAG runner -- typed contracts, keyed seeds,
-atomic stage commits, verified resume, a Modal backend -- with nothing lipid-specific in it. The
-science enters through the stage registry, which `forge.stages` populates.
+Outside `forge` because it is orchestration rather than science: typed contracts, keyed seeds,
+atomic stage commits, verified resume, a Modal backend. `model_stages` is the exception and holds
+the FORGE-specific stages, so this package is not reusable as-is -- the separation it keeps is
+execution from domain, not generic from specific.
 
 """
 
 # Registration is explicit but central: importing forge_experiment makes infrastructure stages
 # available without allowing a JSON spec to import arbitrary Python modules.
 import forge_experiment.builtin_stages as _builtin_stages  # noqa: F401
+import forge_experiment.model_stages as _model_stages  # noqa: F401
 from forge_experiment.backends import ExecutionBackend, LocalBackend, ModalRuntimeBackend
 from forge_experiment.doctor import diagnose_experiment
 from forge_experiment.errors import (

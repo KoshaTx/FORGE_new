@@ -1,12 +1,9 @@
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
-# The model stages register themselves on import of `forge.stages`, not of the runner. The runner
-# deliberately does not import them -- that is what keeps `forge_experiment` free of any dependency
-# on the science it executes -- so a test about model pipelines has to load them itself.
-import forge.stages  # noqa: F401
 from forge_experiment import registry
 from forge_experiment.spec import ExperimentSpec, StageSpec
 
@@ -67,9 +64,7 @@ def test_sampling_contract_is_sharded_exact_l1_and_has_no_guidance_or_retries() 
     stage = _stage(spec, "sample")
     registry.resolve(stage.implementation)
     config = _json(EXPERIMENTS / "stages" / "phase1_sampling_v1.json")
-    assert config["inputs"] == {
-        label: pin.to_mapping() for label, pin in stage.inputs.items()
-    }
+    assert config["inputs"] == {label: pin.to_mapping() for label, pin in stage.inputs.items()}
     profiles = config["profiles"]
     assert isinstance(profiles, dict)
     assert profiles["smoke"]["program_count"] == 4
@@ -85,3 +80,26 @@ def test_sampling_contract_is_sharded_exact_l1_and_has_no_guidance_or_retries() 
         "oracle_calls": 0,
         "candidate_selection": False,
     }
+
+
+def test_importing_the_runner_does_not_pull_in_the_training_stack() -> None:
+    """The stage bodies must keep their `forge.design` imports function-local.
+
+    `model_stages` lives inside the runner, so nothing structural stops someone hoisting those
+    imports to module level for tidiness. Doing so costs ~550ms and drags in torch, which is an
+    optional extra -- `forge experiment list` and `forge doctor` would then fail outright for anyone
+    who installed without it. This is the property that used to be protected by keeping the stages
+    in a separate package; it is now protected by this test.
+    """
+    source = Path(__file__).resolve().parents[1] / "src" / "forge_experiment" / "model_stages.py"
+    tree = ast.parse(source.read_text())
+
+    module_level = {
+        node.module for node in tree.body if isinstance(node, ast.ImportFrom) and node.module
+    }
+    domain = {name for name in module_level if name.startswith(("forge.design", "forge.corpus"))}
+
+    assert not domain, (
+        "model_stages imports the science at module level, which makes torch a hard requirement "
+        f"for every runner command: {sorted(domain)}"
+    )
