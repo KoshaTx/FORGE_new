@@ -8,9 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.route.terminals.ugi3_virtual_programs import ALDEHYDE_ROLE, ISOCYANIDE_ROLE
-from forge.value.coverage.ugi3_family_applicability_census import (
+from experiments.archive.phase1.synthesis_value_coverage.ugi3_family_applicability_census import (
     EXTRAPOLATION_REVIEW,
     MISSING_METADATA,
     RECURRENT_BUCKET,
@@ -19,6 +17,8 @@ from forge.value.coverage.ugi3_family_applicability_census import (
     classify_applicability_bucket,
     constitutional_applicability_axes,
 )
+from forge.corpus.r1_prime_audit import sha256_bytes, sha256_file
+from forge.synthesis.terminals.ugi3_virtual_programs import ALDEHYDE_ROLE, ISOCYANIDE_ROLE
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_family_applicability_census_v1.json"

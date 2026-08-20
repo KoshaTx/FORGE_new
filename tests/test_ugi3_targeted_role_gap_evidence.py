@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.assessment.ugi3_targeted_role_gap_overlay import load_targeted_role_gap_overlay
-from forge.route.engine.planner import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.assessment.ugi3_targeted_role_gap_overlay import load_targeted_role_gap_overlay
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
     KnowledgeResult,
@@ -16,7 +16,7 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.evidence.ugi3_targeted_role_gap_evidence import (
+from forge.synthesis.evidence.ugi3_targeted_role_gap_evidence import (
     Ugi3TargetedRoleGapEvidenceError,
     build_targeted_role_gap_evidence_audit,
 )
@@ -30,7 +30,8 @@ INPUT_PATHS = {
     "paper_reviews": REPO / "configs/route/m0_09_lnpdb_paper_reviews.json",
     "product_impact_ledger": REPO
     / "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/product_closure_impact_ledger.csv.gz",
-    "qualifier_source": REPO / "scripts/phase1_audit_ugi3_targeted_role_gap_evidence.py",
+    "qualifier_source": REPO
+    / "experiments/archive/producers/phase1_audit_ugi3_targeted_role_gap_evidence.py",
     "readiness_ledger": REPO
     / "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
     "targeted_aldehyde_result": REPO

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r0_reconciliation import (
+from forge.corpus.r0_reconciliation import (
     build_r0_reconciliation,
     sha256_file,
 )

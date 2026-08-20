@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.assessment.ugi3_l2_coverage_priority import (
+from forge.synthesis.assessment.ugi3_l2_coverage_priority import (
     CATALOG_ABSENT_NOT_ASSESSED,
     ROUTE_COMPLETE,
     UgiL2CoveragePriorityError,

@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.audit.ugi3_targeted_exact_overlay_diagnostic import (
+from experiments.archive.phase1.synthesis_audits.ugi3_targeted_exact_overlay_diagnostic import (
     Ugi3TargetedExactOverlayDiagnosticError,
     _verify_hybrid_reproduction,
 )
-from forge.route.engine.planner import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
     KnowledgeResult,
@@ -19,7 +19,7 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.evidence.ugi3_targeted_exact_overlay import (
+from forge.synthesis.evidence.ugi3_targeted_exact_overlay import (
     Ugi3TargetedExactOverlayError,
     load_targeted_exact_overlay,
 )
@@ -28,7 +28,8 @@ REPO = Path(__file__).resolve().parents[1]
 AUDIT_CONFIG = REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json"
 AUDIT_INPUT_PATHS = {
     "audit_source": REPO / "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
-    "cli_source": REPO / "scripts/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
+    "cli_source": REPO
+    / "experiments/archive/producers/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
     "evidence_pack": REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
     "kovalerchik_source": REPO
     / "data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf",

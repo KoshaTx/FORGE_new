@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.design.sampling.ugi_morphology_proposal_confirmation import (
+from experiments.phase1.product_l1.sampling.ugi_morphology_proposal_confirmation import (
     ConfirmationDesign,
     _keyed_seed,
 )

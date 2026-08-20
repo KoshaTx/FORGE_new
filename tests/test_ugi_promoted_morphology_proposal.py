@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.design.guidance.ugi_promoted_morphology_proposal import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_promoted_morphology_proposal import (
     build_promoted_morphology_proposal,
 )
 

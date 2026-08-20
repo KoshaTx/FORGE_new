@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.evidence.ugi3_targeted_aldehyde_evidence import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.evidence.ugi3_targeted_aldehyde_evidence import (
     Ugi3TargetedAldehydeEvidenceError,
     build_targeted_aldehyde_evidence_audit,
 )
@@ -16,7 +16,8 @@ REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json"
 INPUT_PATHS = {
     "audit_source": REPO / "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
-    "cli_source": REPO / "scripts/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
+    "cli_source": REPO
+    / "experiments/archive/producers/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
     "evidence_pack": REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
     "kovalerchik_source": REPO
     / "data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf",

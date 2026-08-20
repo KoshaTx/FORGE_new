@@ -1,4 +1,6 @@
-from forge.value.coverage.ugi3_fresh_pool_route_priority import _coverage_thresholds
+from experiments.archive.phase1.synthesis_value_coverage.ugi3_fresh_pool_route_priority import (
+    _coverage_thresholds,
+)
 
 
 def test_coverage_thresholds_count_ranked_components() -> None:

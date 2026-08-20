@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from forge.design.audit.ugi_fresh_pool_audit import (
+from experiments.archive.phase1.design_audits.ugi_fresh_pool_audit import (
     UgiFreshPoolAuditError,
     summarize_fresh_pool_rows,
     validate_sampling_metadata,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 
 def _row(product: str, components: dict[str, str]) -> dict[str, object]:

@@ -7004,3 +7004,37 @@ preserved unchanged.
   acceptance bar cannot be applied. Fixing that schema regression is a prerequisite, not a chore.
 - This is a provenance bookkeeping change. It alters no scientific gate, candidate, sealed holdout,
   biological authorization, or paper claim, and `make verify-pins` is unchanged at 742 / 0 drift.
+
+## 2026-08-20 - Adopt a root scientific library and explicit experiment applications
+
+- Removed the `src/` indirection and top-level `scripts/` workflow surface. `forge/` is now only the
+  reusable scientific library; `cli/`, `experiments/_runtime/`, named applications under
+  `experiments/phase1/`, `paper/`, and `tools/` are separate dependency layers. Catch-all
+  `forge.audit`, `forge.bio`, `forge.cli`, `forge.data`, `forge.design`, `forge.experiment`,
+  `forge.route`, and `forge.value` namespaces no longer exist.
+- Unified training and sampling as separate typed DAGs in the `product_l1` application. The current
+  source tree reproduced CPU training run
+  `0e01e1d3c5dece81213c33b48f302ac00660528bf8fcc1eead8307c968034b6a` under its declared
+  strict/statistical contracts. Sampling run
+  `fc4731a2de7b6f93c40b7290a54a247d978f659073e82f3fc4cb6a26ce63f3be` reproduced both outputs
+  byte-for-byte. Both bind source digest
+  `745f05d4fcf4e810c96211e4a406073231626f0959d5e8938dcae43f5bdfd367` and record their seed
+  hierarchies. The L4 production DAG was planned with all 14 uploads verified; no remote job ran.
+- Quarantined historical producers and reports under `experiments/archive/`; active experiment code
+  is forbidden by test from importing it. The explicit catalog exposes five supported experiment
+  specifications. The current retirement survey records 11 CLI, 183 paper, 73 shared, and 285
+  retire-candidate files; candidates remain an audit queue, not an automatic deletion instruction.
+- Preserved historical path identities through 837 reviewed move records and 478 content-addressed
+  code/config revisions. Result provenance verifies with zero drift. Config-inclusive verification
+  accounts for 2,117 pins; the same four genuinely unresolved revisions remain visible under the
+  four-item burn-down ratchet. No known-drift exception or scientific gate was added.
+- A clean-cache full-suite run collected 1,678 nodes. After repairing all 36 path/hash regressions
+  introduced by the move, the observation returned to exactly the reviewed 201-node baseline with
+  zero new failures. The suite is still blocked, not green, because all 54 documented historical
+  artifacts remain absent. `make verify` authenticates all 30 vendored assets, and `make check-core`
+  passes architecture, provenance, strict typing, lint, and its supported tests.
+- The attributable closeout is
+  `results/maintenance/root_package_architecture_v1/result.json`. This was an engineering and
+  reproducibility change: no production training or sampling, synthesis-value or biological
+  guidance, candidate selection, sealed-holdout access, evidence-tier change, or paper-claim change
+  occurred.

@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 from rdkit import Chem
 
-from forge.design.guidance.ugi_candidate_eligibility import (
+from forge.model.eligibility import (
     compile_smarts,
     declared_support_violations,
     heteroatom_extreme_flags,
@@ -11,7 +11,7 @@ from forge.design.guidance.ugi_candidate_eligibility import (
     heteroatom_thresholds,
     motif_hits,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 SMARTS = {
     "alkyne": "[#6]#[#6]",

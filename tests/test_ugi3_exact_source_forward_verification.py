@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.sources.ugi3_exact_source_forward_verification import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.sources.ugi3_exact_source_forward_verification import (
     AMBIGUOUS_MATCH_STATUS,
     EXPECTED_ABSENT_STATUS,
     INVALID_INPUT_STATUS,

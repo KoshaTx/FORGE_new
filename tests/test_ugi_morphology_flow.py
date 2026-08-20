@@ -3,19 +3,19 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.flow.ugi_morphology_flow import (
+from forge.model.ugi_morphology_flow import (
     UgiMorphologyFlow,
     collate_ugi_morphology_records,
     noise_ugi_morphology_batch,
     sample_ugi_morphologies,
     ugi_morphology_flow_loss,
 )
-from forge.design.flow.ugi_morphology_program import (
+from forge.model.ugi_morphology_program import (
     UgiComponentMorphology,
     UgiProductMorphology,
     attached_tree_matches_program,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 torch = pytest.importorskip("torch")
 

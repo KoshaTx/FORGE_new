@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.evidence.ugi3_capability import (
+from forge.synthesis.evidence.ugi3_capability import (
     Ugi3CapabilityError,
     build_ugi3_precursor_capability,
     write_ugi3_precursor_capability,
@@ -234,24 +234,16 @@ def _write_fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
             "candidate_scope": {
                 "handle": "isocyanide",
                 "required_provenance_source": "programmatic_rational",
-                "exact_agile_upstream_route_family_id": (
-                    "agile_isocyanide_two_step"
-                ),
-                "exact_upstream_route_transformation_evidence": [
-                    "exact_source_route"
-                ],
+                "exact_agile_upstream_route_family_id": ("agile_isocyanide_two_step"),
+                "exact_upstream_route_transformation_evidence": ["exact_source_route"],
                 "exact_upstream_route_component_observation": [
                     "programmatic_candidate",
                     "agile_measured_component",
                 ],
-                "extrapolated_transformation_evidence": [
-                    "bounded_family_applicability"
-                ],
+                "extrapolated_transformation_evidence": ["bounded_family_applicability"],
                 "extrapolated_component_observation": ["programmatic_candidate"],
                 "route_closure": "incomplete",
-                "operational_availability": (
-                    "route_or_procurement_resolution_required"
-                ),
+                "operational_availability": ("route_or_procurement_resolution_required"),
                 "prospective_outcome": "not_attempted",
                 "forward_verification_status": "not_run",
             },
@@ -436,12 +428,10 @@ def test_capability_audit_separates_exact_routes_from_family_candidates(
         "isocyanide:2": ["agile_measured_component", "programmatic_candidate"],
         "isocyanide:3": ["programmatic_candidate"],
     }
-    assert {
-        record["route_closure"] for record in result["isocyanide_candidates"]
-    } == {"incomplete"}
-    assert {
-        record["prospective_outcome"] for record in result["isocyanide_candidates"]
-    } == {"not_attempted"}
+    assert {record["route_closure"] for record in result["isocyanide_candidates"]} == {"incomplete"}
+    assert {record["prospective_outcome"] for record in result["isocyanide_candidates"]} == {
+        "not_attempted"
+    }
     assert "evidence_layers" not in result
     assert all(
         "rank" not in definition
@@ -453,10 +443,9 @@ def test_capability_audit_separates_exact_routes_from_family_candidates(
 def test_capability_audit_preserves_head_and_qa_boundaries(tmp_path: Path) -> None:
     result = _build_fixture(tmp_path)
 
-    assert {
-        record["operational_availability"]
-        for record in result["agile_amine_head_audit"]
-    } == {"historical_blanket_vendor_claim"}
+    assert {record["operational_availability"] for record in result["agile_amine_head_audit"]} == {
+        "historical_blanket_vendor_claim"
+    }
     assert not any(
         record["current_item_level_procurement_closed"]
         for record in result["agile_amine_head_audit"]

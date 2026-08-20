@@ -3,13 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-
-from forge.core.hashing import sha256_file
-from forge.core.io import atomic_write, write_json
-from forge.core.provenance_archive import (
+from forge_provenance.resolver import (
     HistoricalPinArchive,
     HistoricalPinArchiveError,
 )
+
+from forge.core.hashing import sha256_file
+from forge.core.io import atomic_write, write_json
 
 
 def build_archive(tmp_path: Path) -> tuple[Path, Path, str]:

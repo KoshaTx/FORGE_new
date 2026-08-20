@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.design.flow.defog_feasibility import sha256_file
+from forge.model.defog_feasibility import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.decomposition_precision_audit import (
+from forge.corpus.decomposition_precision_audit import (
     ANSWER_FIELDS,
     BLIND_FIELDS,
     ReviewCase,
@@ -17,8 +17,8 @@ from forge.data.decomposition_precision_audit import (
     _stratified_round_robin,
     run_audit,
 )
-from forge.data.decomposition_precision_review import score_reviews, wilson_interval
-from forge.data.r1_prime_audit import AuditError, sha256_file
+from forge.corpus.decomposition_precision_review import score_reviews, wilson_interval
+from forge.corpus.r1_prime_audit import AuditError, sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/corpus/m0_05_decomposition_precision_audit.json"

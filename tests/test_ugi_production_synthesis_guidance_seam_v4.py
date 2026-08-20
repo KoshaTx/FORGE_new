@@ -6,7 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
+from experiments.archive.producers.phase1_qualify_ugi_production_synthesis_guidance_seam_v4 import (
+    EXPECTED_FILENAMES,
+    _atomic_output,
+)
+from experiments.phase1.synthesis_guidance.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     EXPECTED_DESIGN,
     EXPECTED_INPUT_KEYS,
     EXPECTED_SCOPE,
@@ -19,10 +23,6 @@ from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     _validate_config,
     _validate_preregistration,
     run_production_synthesis_guidance_seam_v4,
-)
-from scripts.phase1_qualify_ugi_production_synthesis_guidance_seam_v4 import (
-    EXPECTED_FILENAMES,
-    _atomic_output,
 )
 
 REPO = Path(__file__).resolve().parents[1]

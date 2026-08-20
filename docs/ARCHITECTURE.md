@@ -1,98 +1,93 @@
 # FORGE architecture
 
-## Design rule
-
-Scientific policy belongs in domain packages. Execution policy belongs in `forge.experiment`.
-Domain code must never import the runner, and JSON experiment files may select only registered stage
-implementations. They cannot import arbitrary Python.
-
-The target dependency direction is:
+## One dependency direction
 
 ```text
-core <- chem <- assembly <- corpus <- generate
-                         \             \
-                          route <- potency
-                                  \
-                                   audit
-
-all domains <- experiment stage adapters <- CLI / local / Modal
+forge/ scientific library
+        ^
+        |
+experiments/<app>/ scientific workflows ----> experiments/_runtime/ DAG execution
+        ^
+        |
+cli/ command parsing and dispatch
 ```
 
-`core` owns lossless records, hashing, and byte-stable I/O. `chem` owns structure identity and is the
-eventual RDKit boundary. `assembly` owns registry-defined L1 transform interfaces. `corpus` owns data
-identity, splits, and sampling policy. `generate` owns model and sampler primitives. `route` owns L2/L3
-planning and evidence. `potency` owns oracle fitting, applicability, and authorized ranking. The runner
-orchestrates these domains but does not define their chemistry.
+`forge/` contains reusable scientific behavior: chemistry, assembly, corpora, flow/model
+primitives, potency interfaces, and synthesis routing. It never imports `cli` or `experiments`.
 
-## Public boundaries
+`experiments/_runtime/` contains the generic immutable-DAG runner, resource declarations,
+backends, manifests, and deterministic seed handling. It may reuse `forge.core` byte-stable records
+and hashing, but it cannot import a scientific stage or application. It also resolves old
+path-plus-digest identities through the content-addressed historical archive.
 
-New callers import from a package API, for example:
+A named experiment application composes both layers. Its `stages.py` adapts a verified run context
+to scientific APIs, and its JSON specifications and local configs live beside that code. The CLI
+loads the explicit allow-list in `experiments/catalog.py`; JSON cannot name arbitrary Python.
 
-```python
-from forge.assembly import Ugi3AssemblyAdapter
-from forge.corpus import freeze_phase1_data_contract
-from forge.generate import rstar_step
+`cli/` is top-level because command parsing is an application concern, not molecular science.
+Likewise, paper builders and repository tooling live under `paper/` and `tools/`.
+
+## Repository layout
+
+```text
+forge/
+  assembly/        registry-backed final assembly
+  chemistry/       molecular identity, reactive sites, graph descriptors
+  core/            byte-stable records, hashing, I/O, keyed seeds
+  corpus/          corpus identities, splits, and source-balanced policies
+  flow/            reusable discrete-flow sampling primitives
+  model/           graph representations and neural architectures
+  potency/         endpoint, oracle, and applicability APIs
+  synthesis/       planners, evidence, terminals, assessments, structured values
+cli/               the installed `forge` command
+experiments/
+  _runtime/        stage/DAG/runtime/backend machinery
+  installation_smoke/
+  phase1/
+    corpus/
+    product_l1/    one app containing both training and sampling
+    hela_potency/
+    synthesis_guidance/
+  archive/         runnable historical producers and nonselecting reports
+paper/             manuscript build and verification
+tools/             data, provenance, and repository-maintenance support
 ```
 
-Cross-package imports of private names are prohibited in migrated packages. The executable rules are
-in `tests/test_architecture_boundaries.py`. Three exact transitional edges remain while frozen source
-paths are preserved:
+There is deliberately no `src/` indirection and no top-level `scripts/` workflow surface. There
+are also no catch-all `forge.audit`, `forge.bio`, `forge.cli`, `forge.data`, `forge.design`,
+`forge.experiment`, `forge.route`, or `forge.value` namespaces. The executable rules are in
+`tests/test_architecture_boundaries.py`.
 
-- `corpus.phase1 -> product.phase1_data`
-- `assembly.ugi3 -> data.r1_prime_audit`
-- `assembly.ugi3 -> product.ugi_held_component_gate`
+## Scientific versus experimental code
 
-They are compatibility shims, not permissions to add new coupling. Historical implementations remain
-available because frozen results pin their bytes. New work uses the target APIs.
+A module belongs in `forge/` when it can be called with typed/in-memory inputs, returns scientific
+objects or values, and does not know a run directory, experiment arm, report filename, or CLI.
 
-The first legacy-domain extraction is complete. `forge.bio` contains only the generic endpoint
-interface, the endpoint decision, and liver/muscle/vaccine endpoint implementations. The 49 oracle,
-applicability, morphology, ranking, and authorized-diagnostic modules formerly under that namespace
-now live in `forge.potency`. Historical config documents deliberately keep the old source path and
-resolve it through `docs/artifact_path_moves.json`; current runtime code must not import a removed
-`forge.bio.*` module. `product -> potency` dependencies remain transitional until the product package
-is split into corpus and generator domains.
+A module belongs in an experiment application when it selects a frozen cohort/config, coordinates
+training or sampling, writes a result ledger, compares arms, or implements a milestone-specific
+gate. Post-hoc reports and old direct entry points belong in `experiments/archive/`, even when they
+remain runnable for exact reproduction.
 
-## Experiment boundary
+Active applications may never import `experiments.archive`. Anything needed by a current workflow
+must live in that application or in `forge/`; an executable architecture test enforces this rule.
 
-An experiment consists of a strict JSON DAG and registered stage functions. Every stage declares:
+This boundary also fixes provenance. Run identities hash the complete executable source set:
+`forge/`, the runtime, the catalog, and active experiment applications. Archived producers are not
+part of a new run identity. Every spec/config/input/output retains its own path and SHA-256.
 
-- a hash-pinned configuration and every external input;
-- dependency stages;
-- output filenames and schema versions;
-- CPU/GPU, precision, worker, memory, and timeout requirements;
-- a named deterministic or statistical random stream.
+## Training and sampling
 
-The runner verifies pins before work starts, writes only to a private partial directory, validates
-every declared output, writes a manifest, and commits the completed directory atomically. A failed
-stage retains fingerprint-bound scratch state for deterministic checkpoint resume; a committed stage
-is reusable only when its fingerprint and every artifact byte verify.
+Training and sampling are two workflows in the same `product_l1` application because they share one
+model, tensor-cache schema, graph support, and exact-L1 contract. They are separate DAGs:
 
-Run identities bind the experiment specification, source tree, lockfile/runtime environment, backend,
-resource declaration, profile, replicate, and dependency artifact hashes. Deterministic stages must
-produce byte-identical artifacts. Statistical stages use keyed streams so paired arms do not drift when
-another arm consumes an extra random draw.
+- `training_smoke.json` and `training_production.json` build resumable checkpoints;
+- `sampling.json` consumes already frozen checkpoints and writes restartable sample shards.
 
-## Frozen provenance
+Neither DAG performs route, synthesis-value, or biological guidance. Those authorized diagnostics
+have their own applications and cannot silently enter the product prior.
 
-Active restructuring cannot invalidate historical results. Exact historical source/config bytes are
-stored by digest under `provenance/frozen-code/`; `forge provenance verify` checks the active path
-first and then the archive. The three already-unrecoverable digests in
-`docs/known_artifact_drift.json` are bound to exact `(path, expected_sha256)` identities. No path-wide or
-current-file exception exists.
+## Historical provenance
 
-Regenerate the archive only as a mechanical recovery operation:
-
-```bash
-forge provenance archive
-make verify-pins
-```
-
-The generator refuses any newly unresolved digest. Never add a known-drift entry to make a gate pass.
-
-## Executable entry points
-
-The installed `forge` CLI is the supported interface for data, provenance, paper builds, corpus,
-training, sampling, and remote experiment workflows. `scripts/` now contains only retained historical
-evidence/publication producers; it is not an operational API. Do not add new top-level workflow
-scripts. See `../scripts/README.md` and the machine-readable retirement survey for the removal gate.
+Refactoring does not rewrite the identity of completed work. Old `{path, sha256}` references resolve
+to exact bytes in `provenance/frozen-code/`; current code uses current paths. `forge provenance
+verify` checks both without treating a move as permission to change bytes or relax a gate.

@@ -25,11 +25,13 @@ sys.path.insert(0, str(REPO / "src"))
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
+from experiments.phase1.product_l1.training.ugi_training_cache import (  # noqa: E402
+    load_ugi_training_cache,
+)
+from forge.model.ugi_joint_sparse_flow import (  # noqa: E402
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
 )
-from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = REPO / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 CHECKPOINT = REPO / "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt"
@@ -75,9 +77,10 @@ def test_role_states_are_determined_by_the_conditioning_program(loaded):
     for fold in ("train", "calibration", "heldout"):
         records = list(itertools.islice(records_by_fold[fold], 256))
         for start in range(0, len(records), 128):
-            chunk = tuple(records[start:start + 128])
+            chunk = tuple(records[start : start + 128])
             batch = collate_ugi_joint_sparse_records(
-                chunk, maximum_nodes=max(r.node_count for r in chunk),
+                chunk,
+                maximum_nodes=max(r.node_count for r in chunk),
                 maximum_children=int(architecture["maximum_children"]),
                 maximum_closures=int(architecture["maximum_cycle_rank"]) * 3,
                 maximum_decorations=int(architecture["maximum_decorations"]),

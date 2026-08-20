@@ -4,19 +4,19 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from forge.design.guidance.ugi_hela_potency_guidance_seam_v1 import (
+from experiments.phase1.hela_potency.evaluation import HeLaPotencyEvaluation
+from experiments.phase1.hela_potency.guidance import (
     run_lambda_zero_identity_gate,
     run_potency_seed,
 )
-from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
-from forge.design.schedule.ugi_nonzero_guidance_runner import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GuidanceSchedule,
     GuidanceStateReceipt,
     GuidanceTerminalCompletionReceipt,
     ParticleGroupDesign,
 )
-from forge.potency.audit.ugi_hela_potency_diagnostic import HeLaPotencyEvaluation
+from forge.synthesis.matched import LockedMatchedTerminal
 
 FAKE_SHA = "a" * 64
 

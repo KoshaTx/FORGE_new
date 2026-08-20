@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import pytest
 
-from forge.design.sampling.ugi_production_candidate_generation import (
+from experiments.phase1.product_l1.sampling.ugi_production_candidate_generation import (
     TERMINAL_LEDGER_REQUIRED_FIELDS,
     ProductionCandidateDesign,
     UgiProductionCandidateGenerationError,
     production_draw_seed,
 )
-from forge.design.schedule.ugi_production_candidate_schedule import ARM_IDS
+from experiments.phase1.synthesis_guidance.schedule.ugi_production_candidate_schedule import ARM_IDS
 
 
 def test_production_design_has_matched_two_arm_budget() -> None:

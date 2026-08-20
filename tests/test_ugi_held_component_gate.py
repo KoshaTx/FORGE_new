@@ -5,7 +5,7 @@ import gzip
 import json
 from pathlib import Path
 
-from forge.design.corpus.ugi_held_component_gate import (
+from forge.corpus.ugi_held_component_gate import (
     analyze_generated_components,
     exact_forward_reconstructs_ugi_product,
     held_role_class,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from forge.potency.morphology.ugi_morphology_proposal_challenger_adjudication import (
+from experiments.phase1.hela_potency.morphology.ugi_morphology_proposal_challenger_adjudication import (
     paired_cluster_bootstrap,
 )
 

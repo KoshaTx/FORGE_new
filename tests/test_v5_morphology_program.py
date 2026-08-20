@@ -3,8 +3,8 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.flow.lipid_context import HEAD_REGION, INTERFACE_REGION, TAIL_REGION
-from forge.design.flow.v5_morphology_program import (
+from forge.model.lipid_context import HEAD_REGION, INTERFACE_REGION, TAIL_REGION
+from forge.model.v5_morphology_program import (
     MorphologyProgramError,
     V5GlobalMorphologyProgram,
     offspring_matches_program,

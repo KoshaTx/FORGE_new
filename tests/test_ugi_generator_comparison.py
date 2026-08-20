@@ -5,7 +5,9 @@ import gzip
 import json
 from pathlib import Path
 
-from forge.design.audit.ugi_generator_comparison import compare_ugi_generator_arms
+from experiments.archive.phase1.design_audits.ugi_generator_comparison import (
+    compare_ugi_generator_arms,
+)
 
 
 def _write_result(path: Path, smiles: str) -> None:

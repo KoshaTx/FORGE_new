@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.engine.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
-from forge.route.terminals.ugi3_second_wave_head_terminals import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.engine.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
+from forge.synthesis.terminals.ugi3_second_wave_head_terminals import (
     Ugi3SecondWaveHeadTerminalError,
     build_second_wave_head_terminal_audit,
     load_second_wave_head_terminal_overlay,
@@ -21,7 +21,8 @@ INPUTS = {
     "prior_product_impact": REPO
     / "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/product_impact_ledger.csv.gz",
     "prior_result": REPO / "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/result.json",
-    "qualifier_source": REPO / "scripts/phase1_audit_ugi3_second_wave_head_terminals.py",
+    "qualifier_source": REPO
+    / "experiments/archive/producers/phase1_audit_ugi3_second_wave_head_terminals.py",
     "readiness_ledger": REPO
     / "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
 }

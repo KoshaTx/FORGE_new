@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.sources.l2_supervision_decision import (
+from forge.synthesis.sources.l2_supervision_decision import (
     CONFIG_SCHEMA_VERSION,
     RESULT_SCHEMA_VERSION,
     L2SupervisionDecisionError,
@@ -22,12 +22,8 @@ def test_config_freezes_operational_closure_before_generation() -> None:
     config = load_config(CONFIG)
     assert config["schema_version"] == CONFIG_SCHEMA_VERSION
     thresholds = config["future_operational_closure_thresholds"]
-    assert thresholds[
-        "weighted_high_priority_motif_route_support_minimum"
-    ] == pytest.approx(0.9)
-    assert thresholds[
-        "eligible_candidate_complete_route_fraction_minimum"
-    ] == pytest.approx(0.9)
+    assert thresholds["weighted_high_priority_motif_route_support_minimum"] == pytest.approx(0.9)
+    assert thresholds["eligible_candidate_complete_route_fraction_minimum"] == pytest.approx(0.9)
     assert thresholds[
         "eligible_candidate_missing_route_knowledge_fraction_maximum"
     ] == pytest.approx(0.05)
@@ -39,9 +35,7 @@ def test_config_freezes_operational_closure_before_generation() -> None:
     assert safeguards["broad_corpus_replay_required"] is True
     assert safeguards["masked_l1_loss_for_unannotated_structures"] is True
     assert safeguards["ugi_only_finetuning_without_replay_allowed"] is False
-    assert safeguards[
-        "raw_route_model_likelihood_allowed_as_synthesis_value"
-    ] is False
+    assert safeguards["raw_route_model_likelihood_allowed_as_synthesis_value"] is False
 
 
 def test_decision_selects_hierarchical_joint_hybrid_architecture() -> None:
@@ -50,10 +44,7 @@ def test_decision_selects_hierarchical_joint_hybrid_architecture() -> None:
     assert result["gates"]["joint_product_l1"]["passed"] is True
     assert result["gates"]["hybrid_l2"]["passed"] is True
     assert (
-        result["gates"][
-            "monolithic_complete_route_decoder_necessary_conditions"
-        ]["passed"]
-        is False
+        result["gates"]["monolithic_complete_route_decoder_necessary_conditions"]["passed"] is False
     )
     decision = result["decision"]
     assert decision["recommended_architecture"] == (
@@ -61,13 +52,14 @@ def test_decision_selects_hierarchical_joint_hybrid_architecture() -> None:
     )
     assert decision["monolithic_joint_product_complete_route_decoder_supported"] is False
     assert decision["l2_model_built"] is False
-    assert result["evidence"]["cross_platform_transfer"][
-        "lx_2024_direct_aldehyde_transfers"
-    ] == 15
+    assert result["evidence"]["cross_platform_transfer"]["lx_2024_direct_aldehyde_transfers"] == 15
     assert result["inputs"][0]["input_id"] == "decision_config"
-    assert result["future_training_safeguards"][
-        "guidance_must_change_transition_probabilities_before_candidate_lock"
-    ] is True
+    assert (
+        result["future_training_safeguards"][
+            "guidance_must_change_transition_probabilities_before_candidate_lock"
+        ]
+        is True
+    )
 
 
 def test_input_hash_mismatch_fails_cleanly(tmp_path: Path) -> None:

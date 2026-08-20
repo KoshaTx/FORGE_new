@@ -7,8 +7,10 @@ from pathlib import Path
 
 from rdkit import Chem
 
-from forge.design.audit.traversal_representation_audit import audit_traversal_representations
-from forge.design.flow.sparse_topology_feasibility import build_sparse_atom_vocabulary
+from experiments.archive.phase1.design_audits.traversal_representation_audit import (
+    audit_traversal_representations,
+)
+from forge.model.sparse_topology_feasibility import build_sparse_atom_vocabulary
 
 
 def _row(structure_id: str, smiles: str) -> dict[str, str]:

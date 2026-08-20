@@ -8,7 +8,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.phase1_tree_topology_flow import (  # noqa: E402
+from forge.model.phase1_tree_topology_flow import (  # noqa: E402
     OffspringTreeFlow,
     TreeTopologyFlowError,
     collate_tree_records,

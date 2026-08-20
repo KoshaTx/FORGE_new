@@ -6,18 +6,18 @@ from dataclasses import replace
 
 import pytest
 
-from forge.route.assessment.ugi3_support_boundary import (
+from forge.synthesis.assessment.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,
     MolecularSupportState,
     TargetQualification,
 )
-from forge.route.engine.planner import (
+from forge.synthesis.engine.planner import (
     ForwardVerificationState,
     RoutePlannerError,
     RouteStepProposal,
     RouteTarget,
 )
-from forge.route.engine.proposal_engine import (
+from forge.synthesis.engine.proposal_engine import (
     OperationalCompatibility,
     ProposalBackendManifest,
     ProposalDisposition,

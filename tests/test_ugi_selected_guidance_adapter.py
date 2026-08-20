@@ -7,21 +7,23 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-    decode_canonical_morphology_program_bytes,
-    native_completion_record_from_locked_terminal,
+from experiments.phase1.product_l1.sampling.ugi_joint_sparse_sampling import (
+    initialize_ugi_joint_sparse_state,
 )
-from forge.design.flow.ugi_selected_guidance_adapter import (
+from experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator import (
+    SAMPLE_STEPS,
+    SelectedRestartableGeneratorLane,
+    build_selected_step1000_restartable_generator_lane,
+)
+from experiments.phase1.synthesis_guidance.adapters.selected_v1 import (
     SelectedGuidanceState,
     SelectedModelRestartableGuidanceLane,
     UgiSelectedGuidanceAdapterError,
 )
-from forge.design.sampling.ugi_joint_sparse_sampling import initialize_ugi_joint_sparse_state
-from forge.design.sampling.ugi_selected_restartable_generator import (
-    SAMPLE_STEPS,
-    SelectedRestartableGeneratorLane,
-    build_selected_step1000_restartable_generator_lane,
+from experiments.phase1.synthesis_guidance.adapters.terminal_support import (
+    canonical_morphology_program_bytes,
+    decode_canonical_morphology_program_bytes,
+    native_completion_record_from_locked_terminal,
 )
 
 REPO = Path(__file__).resolve().parents[1]

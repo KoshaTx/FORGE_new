@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.engine.planner import (
+from forge.synthesis.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -19,7 +19,7 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.engine.planner_cache import (
+from forge.synthesis.engine.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,

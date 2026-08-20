@@ -3,10 +3,10 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-from forge.design.flow.ugi_program_prior import load_program_prior
+from forge.model.ugi_program_prior import load_program_prior
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "scripts/phase1_build_ugi_program_prior_all_fold.py"
+SCRIPT = REPO / "experiments/archive/producers/phase1_build_ugi_program_prior_all_fold.py"
 SPEC = importlib.util.spec_from_file_location("phase1_build_ugi_program_prior_all_fold", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)

@@ -10,7 +10,7 @@ from rdkit import Chem
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.defog_feasibility import (  # noqa: E402
+from forge.model.defog_feasibility import (  # noqa: E402
     AtomState,
     DenseGraphFlowProbe,
     GraphRecord,

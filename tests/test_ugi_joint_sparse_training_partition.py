@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.design.training.ugi_joint_sparse_training import (
+from experiments.phase1.product_l1.training.ugi_joint_sparse_training import (
     UgiJointSparseTrainingError,
     _merge_fold_values,
     _training_partition,

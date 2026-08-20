@@ -5,16 +5,19 @@ from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
-from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
-from forge.route.assessment.proposal_discovery_status import (
+from forge.synthesis.assessment.l2_forward_resolver import L2ForwardResolutionStatus
+from forge.synthesis.assessment.proposal_discovery_status import (
     ProposalDiscoveryStatus,
     SourceNeutralProposalDiscoveryResolver,
     SourceNeutralRouteAdjudicationStatus,
     adjudicate_source_neutral_route,
 )
-from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
-from forge.route.engine.planner import RouteTarget
-from forge.route.engine.proposal_engine import (
+from forge.synthesis.assessment.ugi3_support_boundary import (
+    MolecularSupportState,
+    TargetQualification,
+)
+from forge.synthesis.engine.planner import RouteTarget
+from forge.synthesis.engine.proposal_engine import (
     OperationalCompatibility,
     ProposalBackendManifest,
     ProposalRequest,
@@ -22,7 +25,7 @@ from forge.route.engine.proposal_engine import (
     RootQualificationReceipt,
     SingleStepRetrosynthesisProposal,
 )
-from forge.route.engine.single_step_proposal_benchmark import (
+from forge.synthesis.engine.single_step_proposal_benchmark import (
     EXPECTED_LANES,
     BenchmarkTarget,
     BenchmarkTargetManifest,
@@ -30,7 +33,7 @@ from forge.route.engine.single_step_proposal_benchmark import (
     HiddenTruthRecord,
     MatchedTargetBudget,
 )
-from forge.route.engine.single_step_proposal_benchmark_v3 import (
+from forge.synthesis.engine.single_step_proposal_benchmark_v3 import (
     ExecutableBenchmarkContractV3,
     ExecutableProposalLaneBenchmarkRunnerV3,
     FrozenLaneOutputLedgerV3,

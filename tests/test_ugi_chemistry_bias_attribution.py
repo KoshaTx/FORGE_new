@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.design.audit.ugi_chemistry_bias_attribution import (
+from experiments.archive.phase1.design_audits.ugi_chemistry_bias_attribution import (
     compact_product_motif_summary,
     compact_tail_summary,
     prior_positive_junction_fractions,

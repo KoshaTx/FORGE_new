@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.engine.qualified_forward import (
+from forge.synthesis.engine.qualified_forward import (
     QualifiedForwardError,
     load_qualified_forward_reaction,
     unique_forward_products,

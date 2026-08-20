@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 

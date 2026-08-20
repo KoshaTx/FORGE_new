@@ -4,8 +4,8 @@ from copy import deepcopy
 
 import pytest
 
-from forge_experiment.errors import SpecError
-from forge_experiment.spec import ExperimentSpec
+from experiments._runtime.errors import SpecError
+from experiments._runtime.spec import ExperimentSpec
 
 PIN = {"path": "data/input.json", "sha256": "a" * 64}
 RESOURCES = {
@@ -26,9 +26,7 @@ def stage(stage_id: str, needs: list[str] | None = None) -> dict[str, object]:
         "needs": needs or [],
         "config": PIN,
         "inputs": {"source": PIN},
-        "outputs": {
-            "result": {"path": f"{stage_id}.json", "schema_version": "test.result.v1"}
-        },
+        "outputs": {"result": {"path": f"{stage_id}.json", "schema_version": "test.result.v1"}},
         "resources": RESOURCES,
         "determinism": {"mode": "strict", "stream": stage_id},
     }

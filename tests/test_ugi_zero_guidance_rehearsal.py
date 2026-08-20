@@ -7,8 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.design.guidance.ugi_zero_guidance_rehearsal import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_zero_guidance_rehearsal import (
     HASH_PINNED_MATCHED_RUNNER_SHA256,
     QualifiedRoutePlannerFactoryAdapter,
     RestartableGeneratorClosureAdapter,
@@ -18,15 +17,8 @@ from forge.design.guidance.ugi_zero_guidance_rehearsal import (
     current_terminal_route_assessment_source_sha256,
     run_zero_guidance_route_rehearsal,
 )
-from forge.design.schedule.ugi_matched_budget_orchestration import (
-    LockedMatchedTerminal,
-    MatchedArm,
-    MatchedBudgetLimits,
-    MatchedGenerationRequest,
-    MatchedScheduleEntry,
-    RouteComputeUsage,
-)
-from forge.route.engine.planner import (
+from forge.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.synthesis.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -37,16 +29,24 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.engine.planner_cache import (
+from forge.synthesis.engine.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,
 )
-from forge.route.engine.planner_cache_snapshot import (
+from forge.synthesis.engine.planner_cache_snapshot import (
     build_file_planner_cache_snapshot_manifest,
     planner_cache_context_sha256,
 )
-from forge.route.terminals.terminal_assessment import (
+from forge.synthesis.matched import (
+    LockedMatchedTerminal,
+    MatchedArm,
+    MatchedBudgetLimits,
+    MatchedGenerationRequest,
+    MatchedScheduleEntry,
+    RouteComputeUsage,
+)
+from forge.synthesis.terminals.terminal_assessment import (
     DEFAULT_IDENTITY_POLICY,
     DEFAULT_STEREOCHEMISTRY_POLICY,
     QualifiedUgiL1Reverifier,

@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.design.guidance.ugi_postselection_branching import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_postselection_branching import (
     UgiPostselectionBranchingError,
     build_postselection_branching_audit,
     carbon_branch_metrics,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_postselection_branching_audit_v1.json"

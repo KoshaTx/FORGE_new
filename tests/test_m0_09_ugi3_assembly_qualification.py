@@ -8,8 +8,8 @@ import pytest
 import yaml
 from rdkit import Chem
 
-from forge.chem.reactive_sites import audit_reactive_site_multiplicity
-from forge.route.evidence.ugi3_assembly_qualification import (
+from forge.chemistry.reactive_sites import audit_reactive_site_multiplicity
+from forge.synthesis.evidence.ugi3_assembly_qualification import (
     Ugi3AssemblyQualificationError,
     build_ugi3_assembly_qualification,
     write_ugi3_assembly_qualification,
@@ -103,9 +103,7 @@ def _write_fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
             "scope": {
                 "reaction_id": "ugi_3cr_agile",
                 "amine_role": "amine_head",
-                "multiplicity_semantics": (
-                    "symmetry_distinct_required_handle_matches"
-                ),
+                "multiplicity_semantics": ("symmetry_distinct_required_handle_matches"),
                 "raw_match_count_role": "diagnostic_only",
                 "atom_equivalence_method": "fixture",
                 "require_single_atom_amine_handle": True,

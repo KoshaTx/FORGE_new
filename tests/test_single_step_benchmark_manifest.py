@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.route.engine.single_step_benchmark_manifest import (
+from forge.synthesis.engine.single_step_benchmark_manifest import (
     OUTPUT_FILENAMES,
     SingleStepBenchmarkManifestError,
     _load_role_queries,

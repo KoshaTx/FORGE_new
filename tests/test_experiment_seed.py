@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from forge_experiment.seed import SeedPlan
+from experiments._runtime.seed import SeedPlan
 
 
 def test_keyed_seeds_are_stable_and_distinct() -> None:
     plan = SeedPlan(root_seed=20260819, namespace="paper-model/train")
     assert plan.derive("batch", 4) == plan.derive("batch", 4)
     assert plan.derive("batch", 4) != plan.derive("batch", 5)
-    assert plan.derive("batch", 4) != SeedPlan(20260820, "paper-model/train").derive(
-        "batch", 4
-    )
+    assert plan.derive("batch", 4) != SeedPlan(20260820, "paper-model/train").derive("batch", 4)
 
 
 def test_python_stream_is_independent_of_call_order() -> None:

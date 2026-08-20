@@ -7,16 +7,10 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.schedule.ugi_matched_budget_orchestration import (
-    LockedMatchedTerminal,
-    MatchedArm,
-    MatchedAssessmentContext,
-    RouteComputeUsage,
-)
-from forge.design.schedule.ugi_matched_planner_cache_binding import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_matched_planner_cache_binding import (
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.design.schedule.ugi_nonzero_guidance_runner import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GuidanceAssessmentContext,
     GuidanceCacheFinalization,
@@ -35,11 +29,17 @@ from forge.design.schedule.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
     run_development_matched_guidance,
 )
-from forge.route.engine.planner import PlannerBudgetLimits
-from forge.route.engine.planner_cache import (
+from forge.synthesis.engine.planner import PlannerBudgetLimits
+from forge.synthesis.engine.planner_cache import (
     FilePlannerCache,
     PlannerCacheContext,
     PlannerCacheError,
+)
+from forge.synthesis.matched import (
+    LockedMatchedTerminal,
+    MatchedArm,
+    MatchedAssessmentContext,
+    RouteComputeUsage,
 )
 
 REPO = Path(__file__).resolve().parents[1]

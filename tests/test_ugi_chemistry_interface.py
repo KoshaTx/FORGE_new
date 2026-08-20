@@ -11,10 +11,14 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
-from forge.design.audit.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
-from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
-from forge.design.flow.ugi_chemistry_interface import (
+from experiments.archive.phase1.design_audits.canonical_representation_audit import (
+    load_atom_vocabulary,
+)
+from experiments.archive.phase1.design_audits.ugi_chemistry_interface_audit import (
+    audit_ugi_chemistry_interface,
+)
+from forge.model.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
+from forge.model.ugi_chemistry_interface import (
     ADAPTER_ATTACHMENT_BOND_STATE,
     ROOT_BOND_TARGET,
     WITHHELD_STATE,
@@ -26,16 +30,16 @@ from forge.design.flow.ugi_chemistry_interface import (
     recompute_adapter_distances,
     validate_chemistry_topology_condition,
 )
-from forge.design.flow.ugi_morphology_program import split_ugi_support_morphology
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.model.ugi_morphology_program import split_ugi_support_morphology
+from forge.potency.annotations import ROLE_NAMES
 
 torch = pytest.importorskip("torch")
 
-from forge.design.corpus.ugi_chemistry_corpus import (  # noqa: E402
+from forge.corpus.ugi_chemistry_corpus import (  # noqa: E402
     UgiChemistryRecord,
     load_expanded_ugi_chemistry_corpus,
 )
-from forge.design.flow.ugi_chemistry_flow import (  # noqa: E402
+from forge.model.ugi_chemistry_flow import (  # noqa: E402
     UgiChemistryFlow,
     UgiChemistrySample,
     _masked_terminal_choice,
@@ -80,9 +84,9 @@ def test_stochastic_terminal_choice_is_seeded_and_respects_support() -> None:
 
 
 @cache
-def _source_rows() -> tuple[
-    dict[str, str], dict[str, str], tuple[dict[str, str], ...], tuple[dict[str, str], ...]
-]:
+def _source_rows() -> (
+    tuple[dict[str, str], dict[str, str], tuple[dict[str, str], ...], tuple[dict[str, str], ...]]
+):
     products_path = REPO / "results/phase1/ugi_l1_semantics/ugi_l1_semantic_products.csv.gz"
     atoms_path = REPO / "results/phase1/ugi_l1_semantics/ugi_l1_semantic_atoms.csv.gz"
     with gzip.open(products_path, "rt", newline="") as handle:

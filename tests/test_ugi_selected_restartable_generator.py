@@ -7,17 +7,10 @@ from types import SimpleNamespace
 
 import pytest
 
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
-    UgiRestartableTerminalSupportAdapterError,
-    canonical_morphology_program_bytes,
-    decode_canonical_morphology_program_bytes,
-    lock_unqualified_restartable_completion_row,
-    native_completion_record_from_locked_terminal,
-)
-from forge.design.sampling.ugi_selected_generator_implementation import (
+from experiments.phase1.product_l1.sampling.ugi_selected_generator_implementation import (
     build_selected_generator_implementation_qualification,
 )
-from forge.design.sampling.ugi_selected_restartable_generator import (
+from experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator import (
     CLOSURE_CHECKPOINT_SHA256,
     GENERATOR_CHECKPOINT_SHA256,
     SAMPLE_STEPS,
@@ -27,13 +20,20 @@ from forge.design.sampling.ugi_selected_restartable_generator import (
     UgiSelectedRestartableGeneratorError,
     build_selected_step1000_restartable_generator_lane,
 )
-from forge.design.schedule.ugi_matched_budget_orchestration import (
+from experiments.phase1.synthesis_guidance.adapters.terminal_support import (
+    UgiRestartableTerminalSupportAdapterError,
+    canonical_morphology_program_bytes,
+    decode_canonical_morphology_program_bytes,
+    lock_unqualified_restartable_completion_row,
+    native_completion_record_from_locked_terminal,
+)
+from forge.synthesis.matched import (
     MatchedArm,
     MatchedGenerationRequest,
     MatchedScheduleEntry,
     RouteComputeUsage,
 )
-from forge.route.terminals.terminal_assessment import (
+from forge.synthesis.terminals.terminal_assessment import (
     UgiTerminalRouteAssessmentError,
     ValidatedUgiTerminalPayload,
 )
@@ -171,14 +171,14 @@ def _mock_callback(
 ) -> SelectedRestartableGeneratorCallback:
     implementation_qualification = build_selected_generator_implementation_qualification(REPO)
     monkeypatch.setattr(
-        "forge.design.sampling.ugi_selected_restartable_generator.sample_restartable_terminals",
+        "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.sample_restartable_terminals",
         lambda *args, **kwargs: (
             [object()],
             {"sample_steps": SAMPLE_STEPS, "terminal_tree_repairs": 0, "samples": 1},
         ),
     )
     monkeypatch.setattr(
-        "forge.design.sampling.ugi_selected_restartable_generator.complete_ugi_joint_terminals",
+        "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.complete_ugi_joint_terminals",
         lambda *args, **kwargs: SimpleNamespace(rows=(row,)),
     )
     bindings = SelectedRestartableGeneratorBindings(

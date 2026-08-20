@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.design.corpus.ugi_morphology_corpus import (
+from forge.corpus.ugi_morphology_corpus import (
     balanced_product_weights,
     component_marginal_errors,
     component_program_ledger,
@@ -15,7 +15,7 @@ from forge.design.corpus.ugi_morphology_corpus import (
     sample_family_balanced_records,
     source_stratified_family_weights,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 REPO = Path(__file__).resolve().parents[1]
 

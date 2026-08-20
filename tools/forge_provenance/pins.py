@@ -31,7 +31,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import is_sha256
-from forge.core.provenance_archive import HistoricalPinArchive
+from forge_provenance.resolver import HistoricalPinArchive
 
 # tools/forge_provenance/pins.py -> parents[2] is the repository root.
 REPO = Path(__file__).resolve().parents[2]
@@ -371,7 +371,7 @@ def main(argv: list[str] | None = None) -> int:
             f"{args.expect_verified} — an input went missing."
         )
         return 1
-    note("\nno drift.")
+    note("\nno drift." if not report.drift else "\ndrift backlog is within the configured ratchet.")
     return 0
 
 

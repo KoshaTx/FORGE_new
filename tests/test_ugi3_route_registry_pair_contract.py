@@ -7,8 +7,8 @@ from typing import Any
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.assessment.ugi3_route_registry_pair_contract import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.assessment.ugi3_route_registry_pair_contract import (
     PUBLIC_AGGREGATE_FIELDS,
     RECORD_LEDGER_SCHEMA_VERSION,
     SNAPSHOT_SCHEMA_VERSION,

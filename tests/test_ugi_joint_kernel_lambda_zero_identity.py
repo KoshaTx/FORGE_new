@@ -8,13 +8,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from forge.design.guidance.ugi_joint_kernel_lambda_zero_identity import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity import (
     LEDGER_FIELDS,
     RecordingGuidanceLane,
     load_execution_contract,
     run_seed_qualification,
 )
-from forge.design.schedule.ugi_nonzero_guidance_runner import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
     GuidanceStateReceipt,
     GuidanceTerminalCompletionReceipt,
 )

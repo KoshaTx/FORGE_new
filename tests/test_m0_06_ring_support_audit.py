@@ -6,7 +6,8 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.design.audit.ring_support_audit import _ring_signature, sha256_file
+from forge.chemistry.descriptors import ring_signature
+from forge.core.hashing import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -71,7 +72,7 @@ def test_ring_signature_distinguishes_lipid_topology_classes(
     expected: dict[str, object],
 ) -> None:
     molecule = Chem.MolFromSmiles(smiles)
-    signature = _ring_signature(molecule, macrocycle_minimum=9)
+    signature = ring_signature(molecule, macrocycle_minimum=9)
 
     for field, value in expected.items():
         assert signature[field] == value

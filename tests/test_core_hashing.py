@@ -2,7 +2,7 @@
 
 The point of these is not that hashing works -- it is that the new shared implementation agrees
 exactly with the copies it replaces. If `forge.core.hashing.sha256_file` returned anything other
-than what `forge.data.r0_splits.sha256_file` returns, migrating a module onto core would silently
+than what `forge.corpus.r0_splits.sha256_file` returns, migrating a module onto core would silently
 rewrite the pins in every artifact that module produces.
 """
 
@@ -60,7 +60,7 @@ def test_source_tree_hash_includes_relative_paths_and_is_order_independent(tmp_p
 
 def test_agrees_with_the_implementation_it_replaces(tmp_path: Path) -> None:
     """Byte-compatibility with the pre-existing helper. This is the one that matters."""
-    legacy = pytest.importorskip("forge.data.r0_splits")
+    legacy = pytest.importorskip("forge.corpus.r0_splits")
     target = tmp_path / "payload.bin"
     target.write_bytes(b"lipid" * 100_000)
     assert sha256_file(target) == legacy.sha256_file(target)

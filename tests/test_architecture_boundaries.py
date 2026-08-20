@@ -1,147 +1,123 @@
-"""Executable dependency rules for packages already moved onto the target architecture."""
+"""Executable boundaries for the root-package FORGE architecture."""
 
 from __future__ import annotations
 
 import ast
-import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SOURCE = REPO / "src" / "forge"
+LIBRARY = REPO / "forge"
+RUNTIME = REPO / "experiments" / "_runtime"
+ACTIVE_EXPERIMENTS = REPO / "experiments" / "phase1"
 
-ALLOWED_PACKAGE_IMPORTS = {
-    "core": {"core"},
-    "chem": {"chem", "core"},
-    "assembly": {"assembly", "chem", "core"},
-    "bio": {"bio", "core"},
-    "corpus": {"corpus", "chem", "core"},
-    "generate": {"generate", "assembly", "corpus", "chem", "core"},
+LIBRARY_PACKAGES = {
+    "assembly",
+    "chemistry",
+    "core",
+    "corpus",
+    "flow",
+    "model",
+    "potency",
+    "synthesis",
 }
-
-# Exact migration shims.  They preserve frozen implementation paths while all new callers use the
-# target-domain API.  This list may shrink; adding an entry requires an architectural review.
-TRANSITIONAL_IMPORTS = {
-    ("assembly/ugi3.py", "forge.data.r1_prime_audit"),
-    ("assembly/ugi3.py", "forge.design.corpus.ugi_held_component_gate"),
-    ("corpus/phase1.py", "forge.design.corpus.phase1_data"),
-}
+REMOVED_LIBRARY_PACKAGES = {"audit", "bio", "cli", "data", "design", "experiment", "route", "value"}
 
 
-def _forge_imports(path: Path) -> set[str]:
+def _imports(path: Path) -> set[str]:
     tree = ast.parse(path.read_text(), filename=str(path))
-    imports: set[str] = set()
+    imported: set[str] = set()
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
-            imports.update(alias.name for alias in node.names if alias.name.startswith("forge."))
-        elif isinstance(node, ast.ImportFrom) and node.module and node.module.startswith("forge."):
-            imports.add(node.module)
-    return imports
+            imported.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported.add(node.module)
+    return imported
 
 
-def test_migrated_packages_follow_the_dependency_direction() -> None:
+def test_scientific_library_has_only_declared_domains() -> None:
+    packages = {
+        path.name
+        for path in LIBRARY.iterdir()
+        if path.is_dir() and path.name != "__pycache__" and any(path.rglob("*.py"))
+    }
+    assert packages == LIBRARY_PACKAGES
+    assert not (REPO / "src").exists()
+    assert not (REPO / "scripts").exists()
+
+
+def test_removed_catch_all_namespaces_do_not_exist() -> None:
+    survivors = sorted(name for name in REMOVED_LIBRARY_PACKAGES if (LIBRARY / name).exists())
+    assert not survivors, f"removed forge namespaces survived: {survivors}"
+
+
+def test_library_never_depends_on_cli_or_experiment_apps() -> None:
     violations: list[str] = []
-    for package, allowed in ALLOWED_PACKAGE_IMPORTS.items():
-        for path in sorted((SOURCE / package).rglob("*.py")):
-            relative = path.relative_to(SOURCE).as_posix()
-            for imported in sorted(_forge_imports(path)):
-                target_package = imported.split(".", 2)[1]
-                if (
-                    target_package not in allowed
-                    and (relative, imported) not in TRANSITIONAL_IMPORTS
-                ):
-                    violations.append(f"{relative} -> {imported}")
-    assert not violations, "dependency boundary violations:\n" + "\n".join(violations)
+    for path in sorted(LIBRARY.rglob("*.py")):
+        for imported in sorted(_imports(path)):
+            if imported == "cli" or imported.startswith(("cli.", "experiments.")):
+                violations.append(f"{path.relative_to(REPO)} -> {imported}")
+    assert not violations, "application code leaked into forge:\n" + "\n".join(violations)
 
 
-def test_domain_code_never_imports_the_experiment_runner() -> None:
-    violations = []
-    for path in sorted(SOURCE.rglob("*.py")):
-        relative = path.relative_to(SOURCE)
-        if relative.parts[0] == "experiment" or relative == Path("cli.py"):
-            continue
-        for imported in _forge_imports(path):
-            if imported == "forge_experiment" or imported.startswith("forge_experiment."):
-                violations.append(f"{relative.as_posix()} -> {imported}")
-    assert not violations, "orchestration leaked into domain code:\n" + "\n".join(violations)
+def test_generic_runtime_has_no_forge_stage_or_application_imports() -> None:
+    """The runner may reuse forge.core records, but cannot know scientific stages or apps."""
 
-
-def test_bio_to_potency_move_is_complete_and_has_no_stale_runtime_imports() -> None:
-    """Historical pins keep old paths; importable code must use the new namespace."""
-
-    move_document = json.loads((REPO / "docs/artifact_path_moves.json").read_text())
-    moves = {
-        old: new for old, new in move_document["moves"].items() if old.startswith("src/forge/bio/")
-    }
-    assert moves, "the bio-to-potency migration has no declared provenance moves"
-
-    moved_modules = {
-        Path(old).with_suffix("").as_posix().removeprefix("src/").replace("/", ".") for old in moves
-    }
     violations: list[str] = []
-    for old, new in sorted(moves.items()):
-        if (REPO / old).exists():
-            violations.append(f"old implementation still exists: {old}")
-        if not (REPO / new).is_file():
-            violations.append(f"moved implementation is missing: {new}")
-        if not new.startswith("src/forge/potency/"):
-            violations.append(f"bio implementation moved outside potency: {old} -> {new}")
-
-    for root in (REPO / "src", REPO / "scripts", REPO / "tests"):
-        for path in sorted(root.rglob("*.py")):
-            for imported in _forge_imports(path):
-                if any(
-                    imported == module or imported.startswith(f"{module}.")
-                    for module in moved_modules
-                ):
-                    violations.append(
-                        f"{path.relative_to(REPO).as_posix()} imports removed {imported}"
-                    )
-
-    assert not violations, "incomplete bio-to-potency migration:\n" + "\n".join(violations)
+    for path in sorted(RUNTIME.rglob("*.py")):
+        for imported in sorted(_imports(path)):
+            if imported.startswith("experiments.phase1") or (
+                imported.startswith("forge.") and not imported.startswith("forge.core")
+            ):
+                violations.append(f"{path.relative_to(REPO)} -> {imported}")
+    assert not violations, "scientific code leaked into the generic runtime:\n" + "\n".join(
+        violations
+    )
 
 
-def test_bio_contains_only_endpoint_domain_modules() -> None:
-    modules = {path.name for path in (SOURCE / "bio").glob("*.py")}
-    assert modules == {
-        "__init__.py",
-        "endpoint.py",
-        "endpoint_decision.py",
-        "liver.py",
-        "muscle.py",
-        "vaccine.py",
+def test_active_experiments_never_import_the_historical_archive() -> None:
+    violations: list[str] = []
+    for path in sorted(ACTIVE_EXPERIMENTS.rglob("*.py")):
+        for imported in sorted(_imports(path)):
+            if imported == "experiments.archive" or imported.startswith("experiments.archive."):
+                violations.append(f"{path.relative_to(REPO)} -> {imported}")
+    assert not violations, "active experiments depend on historical code:\n" + "\n".join(violations)
+
+
+def test_cli_is_an_application_boundary_not_a_library_dependency() -> None:
+    cli_imports = _imports(REPO / "cli" / "__init__.py")
+    eager_scientific_imports = sorted(
+        name for name in cli_imports if name.startswith("forge.") and name != "forge.core"
+    )
+    assert not eager_scientific_imports
+    assert "experiments" in cli_imports
+    assert "experiments._runtime" in cli_imports
+
+
+def test_catalog_owns_every_active_experiment_specification() -> None:
+    from experiments.catalog import SPECIFICATIONS
+
+    declared = {Path(path) for path in SPECIFICATIONS.values()}
+    discovered = {
+        path.relative_to(REPO)
+        for path in (REPO / "experiments").rglob("*.json")
+        if "configs" not in path.parts and "archive" not in path.parts
     }
+    assert declared == discovered
+    assert all(path.parts[0] == "experiments" for path in declared)
 
 
-def test_no_package_directory_survives_only_as_a_cache() -> None:
-    """A deleted package must not come back as an empty namespace package.
+def test_archived_producers_are_importable_but_not_a_supported_cli_surface() -> None:
+    archive = REPO / "experiments" / "archive" / "producers"
+    assert (archive / "README.md").is_file()
+    assert (archive / "__init__.py").is_file()
+    assert any(archive.glob("m0_*.py"))
+    assert any(archive.glob("phase1_*.py"))
 
-    Removing a package leaves `__pycache__` behind, and `rmdir` then fails silently. Python treats
-    the surviving directory as a namespace package, so `import forge.<name>` keeps succeeding and
-    returns nothing -- the deletion looks done and is not. This caught `forge.maintenance` and
-    `forge.dossier` after they were moved out, both still importable with no modules in them.
-    """
-    empty = [
-        directory.relative_to(REPO).as_posix()
-        for directory in SOURCE.iterdir()
-        if directory.is_dir()
-        and directory.name != "__pycache__"
-        and not any(directory.rglob("*.py"))
+
+def test_no_deleted_package_survives_only_as_bytecode() -> None:
+    empty_namespaces = [
+        path.relative_to(REPO).as_posix()
+        for path in LIBRARY.iterdir()
+        if path.is_dir() and path.name != "__pycache__" and not any(path.rglob("*.py"))
     ]
-    assert not empty, "package directories with no Python modules:\n" + "\n".join(empty)
-
-
-def test_every_package_declares_what_it_is() -> None:
-    """No package may carry the placeholder docstring the original layout generated.
-
-    `\"\"\"FORGE <x> module — see docs/M0_TASKS.md.\"\"\"` says nothing, and the packages still
-    carrying it are exactly the ones the restructure has not reached. Declaring a real surface is
-    what lets ALLOWED_PACKAGE_IMPORTS above cover a package at all, so this list shrinking is the
-    ratchet -- entries may be removed, never added.
-    """
-    undeclared = {"data", "product", "route"}
-    stubs = set()
-    for init in SOURCE.glob("*/__init__.py"):
-        text = init.read_text()
-        if "see docs/M0_TASKS.md" in text:
-            stubs.add(init.parent.name)
-    assert stubs <= undeclared, f"new placeholder package docstring: {sorted(stubs - undeclared)}"
+    assert not empty_namespaces

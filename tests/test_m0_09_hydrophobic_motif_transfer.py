@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.route.assessment.hydrophobic_motif_transfer import (
+from forge.synthesis.assessment.hydrophobic_motif_transfer import (
     CONFIG_SCHEMA_VERSION,
     HydrophobicMotifTransferError,
     build_hydrophobic_motif_transfer,
@@ -105,9 +105,7 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                 "expected_sha256": _sha256(source_bundle),
                 "role": "source_supplement_archive",
                 "member": "media-1.pdf",
-                "expected_member_sha256": hashlib.sha256(
-                    b"fixed source supplement"
-                ).hexdigest(),
+                "expected_member_sha256": hashlib.sha256(b"fixed source supplement").hexdigest(),
             }
         },
         "reference_component_ledger": {
@@ -160,9 +158,7 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                         "transformation": "test esterification",
                         "source_locator": "test source",
                         "evidence_status": "reported",
-                        "attachment_event": (
-                            "alcohol_oxygen_esterified_to_test_acid"
-                        ),
+                        "attachment_event": ("alcohol_oxygen_esterified_to_test_acid"),
                         "reactants": ["alcohol", "test acid"],
                         "conditions": {"temperature": "room temperature"},
                         "outcome_evidence": "reported yield",
@@ -172,16 +168,12 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
         },
         "programs": {
             "primary_alcohol_to_aldehyde": {
-                "reaction_smarts": (
-                    "[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]"
-                ),
+                "reaction_smarts": ("[C;H2:1][O;H1:2]>>[C;H1:1]=[O:2]"),
                 "target_role": "aldehyde_tail",
                 "evidence_grade": "reaction_family_precedent",
                 "route_closure": "incomplete",
                 "terminal_status": "not_assessed",
-                "route_gap_class": (
-                    "exact_substrate_route_evidence_missing"
-                ),
+                "route_gap_class": ("exact_substrate_route_evidence_missing"),
                 "claim": "structural realization only",
             }
         },
@@ -194,9 +186,7 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                 "source_reported_yield_percent": 90,
                 "common_precursor_name": "1-pentanol",
                 "common_precursor_smiles": "CCCCCO",
-                "mapped_common_precursor_smiles": (
-                    "CCCC[CH2:1][OH:2]"
-                ),
+                "mapped_common_precursor_smiles": ("CCCC[CH2:1][OH:2]"),
                 "identity_reference": {
                     "kind": "pubchem",
                     "identifier": "test",
@@ -206,9 +196,7 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                 "source_attachment": {
                     "motif_anchor_atom_map": 1,
                     "source_handle_atom_map": 2,
-                    "event": (
-                        "alcohol_oxygen_esterified_to_test_acid"
-                    ),
+                    "event": ("alcohol_oxygen_esterified_to_test_acid"),
                 },
                 "expected_alcohol_class": "primary",
                 "motif_classes": ["linear"],
@@ -226,9 +214,7 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                 "source_reported_yield_percent": 80,
                 "common_precursor_name": "3-pentanol",
                 "common_precursor_smiles": "CCC(O)CC",
-                "mapped_common_precursor_smiles": (
-                    "CC[CH:1]([OH:2])CC"
-                ),
+                "mapped_common_precursor_smiles": ("CC[CH:1]([OH:2])CC"),
                 "identity_reference": {
                     "kind": "pubchem",
                     "identifier": "test",
@@ -238,20 +224,14 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict]:
                 "source_attachment": {
                     "motif_anchor_atom_map": 1,
                     "source_handle_atom_map": 2,
-                    "event": (
-                        "alcohol_oxygen_esterified_to_test_acid"
-                    ),
+                    "event": ("alcohol_oxygen_esterified_to_test_acid"),
                 },
                 "expected_alcohol_class": "secondary",
                 "motif_classes": ["secondary_attachment"],
-                "risk_flags": [
-                    "secondary_alcohol_does_not_oxidize_to_aldehyde"
-                ],
+                "risk_flags": ["secondary_alcohol_does_not_oxidize_to_aldehyde"],
                 "disposition": "defer_structure_only",
                 "program_id": "",
-                "route_gap_class": (
-                    "alternative_ugi_handle_conversion_program_missing"
-                ),
+                "route_gap_class": ("alternative_ugi_handle_conversion_program_missing"),
                 "defer_reason": "oxidation gives a ketone",
             },
         ],
@@ -331,9 +311,7 @@ def test_transfer_pilot_is_deterministic_and_keeps_claims_separate(
     assert not first_result["decision"]["positive_two_platform_signal"]
     assert not first_result["decision"]["priority_queue_expansion_authorized"]
     assert not first_result["decision"]["broad_lnpdb_expansion_authorized"]
-    assert not first_result["decision"][
-        "transferred_components_are_observed_l2_supervision"
-    ]
+    assert not first_result["decision"]["transferred_components_are_observed_l2_supervision"]
     assert first_result["route_outcome_counts"] == {
         "complete_route_found": 0,
         "chemically_implausible_or_incompatible": 0,
@@ -368,14 +346,10 @@ def test_transfer_pilot_is_deterministic_and_keeps_claims_separate(
     assert rows[0]["missing_encoded_route_knowledge"] == "true"
     assert rows[0]["observed_chemical_failure"] == "false"
     assert rows[0]["route_outcome_category"] == "missing_route_knowledge"
-    assert rows[0]["oracle_applicability_status"] == (
-        "not_evaluated_no_label_transfer"
-    )
+    assert rows[0]["oracle_applicability_status"] == ("not_evaluated_no_label_transfer")
     assert rows[1]["proposed_ugi_component_smiles"] == ""
     assert rows[1]["route_closure"] == "unresolved"
-    assert rows[1]["route_gap_class"] == (
-        "alternative_ugi_handle_conversion_program_missing"
-    )
+    assert rows[1]["route_gap_class"] == ("alternative_ugi_handle_conversion_program_missing")
 
 
 def test_transfer_pilot_closes_exact_route_to_procured_terminal(
@@ -426,9 +400,7 @@ def test_transfer_pilot_closes_exact_route_to_procured_terminal(
         rows = list(csv.DictReader(io.TextIOWrapper(handle)))
     primary = next(row for row in rows if row["record_id"] == "primary")
     assert primary["route_outcome_category"] == "complete_route_found"
-    assert primary["route_support_status"] == (
-        "complete_route_to_accepted_terminal"
-    )
+    assert primary["route_support_status"] == ("complete_route_to_accepted_terminal")
     assert primary["missing_encoded_route_knowledge"] == "false"
     assert primary["computationally_route_complete"] == "true"
 

@@ -8,7 +8,7 @@ import pytest
 from forge_paper import PaperContract, PaperContractError, diagnose_paper, verify_paper
 from forge_paper.build import build_overleaf_bundle
 
-from forge_cli import build_parser
+from cli import build_parser
 
 REPO = Path(__file__).resolve().parents[1]
 CONTRACT = REPO / "configs/reproduction/iclr2027.json"

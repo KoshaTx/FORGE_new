@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.route.sources.ugi3_source_neutral_proposal_adjudication import (
+from forge.synthesis.sources.ugi3_source_neutral_proposal_adjudication import (
     DIRECT_ALDEHYDE,
     ISOCYANIDE,
     SourcePair,
@@ -28,7 +28,7 @@ def test_source_pair_scope_accepts_interpolation_and_rejects_wrong_functionality
     )
     # The production builder expects all three programs; isolate the same logic
     # through a minimal direct profile assembled from two legitimate members.
-    from forge.route.sources.ugi3_source_neutral_proposal_adjudication import (
+    from forge.synthesis.sources.ugi3_source_neutral_proposal_adjudication import (
         PairScopeProfile,
         _feature_profile,
         _pair_similarity,

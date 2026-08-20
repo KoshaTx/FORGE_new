@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
+from experiments.phase1.synthesis_guidance.route_cascade import (
     COMPLETE,
     COMPONENT_STATES,
     CONFIG_SCHEMA_VERSION,
@@ -49,7 +49,7 @@ from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
     unresolved_disposition,
     unresolved_leaf_classes,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json"

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from forge.design.guidance.ugi_source_guidance_prerequisite_requalification import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_source_guidance_prerequisite_requalification import (
     build_source_guidance_prerequisite_requalification,
 )
 

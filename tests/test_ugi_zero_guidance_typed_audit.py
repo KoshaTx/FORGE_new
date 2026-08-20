@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.audit.ugi_zero_guidance_typed_audit import (
+from experiments.phase1.synthesis_guidance.guidance.typed_outcomes import (
     UgiZeroGuidanceTypedAuditError,
     build_support_audit_artifact,
     build_zero_guidance_run_artifact,

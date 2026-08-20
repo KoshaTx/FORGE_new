@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.corpus.phase1_data import (
+from forge.corpus.phase1_data import (
     ASSIGNMENT_FIELDS,
     FOLDS,
     ROLES,
@@ -247,7 +247,7 @@ def test_repository_phase1_contract_matches_frozen_inputs(tmp_path: Path) -> Non
     config_path = tmp_path / "config.json"
     config_path.write_text(json.dumps(config))
 
-    from forge.design.corpus.phase1_data import freeze_phase1_data_contract
+    from forge.corpus.phase1_data import freeze_phase1_data_contract
 
     result = freeze_phase1_data_contract(config_path, repo)
     assert result["summary"]["r0_rows"] == 15_229

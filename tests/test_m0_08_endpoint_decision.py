@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.bio.endpoint_decision import (
+from experiments.archive.m0.endpoint_decision import (
     EndpointDecisionError,
     freeze_endpoint_decision,
 )

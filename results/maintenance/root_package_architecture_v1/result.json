@@ -1,0 +1,137 @@
+{
+  "archive": {
+    "archived_identities": 478,
+    "known_unresolved_identities": 34,
+    "unresolved_identities": 4
+  },
+  "architecture": {
+    "active_experiments_import_archive": false,
+    "catch_all_forge_namespaces_removed": [
+      "audit",
+      "bio",
+      "cli",
+      "data",
+      "design",
+      "experiment",
+      "route",
+      "value"
+    ],
+    "root_scripts_directory_present": false,
+    "src_directory_present": false
+  },
+  "code_survey": {
+    "archive_tree_sha256": "28b9e39849c8e0edb15b03cb69287e07ca956f7e84ed3b77255f56e68c8ba706",
+    "keep_cli": 11,
+    "keep_paper": 183,
+    "keep_shared": 73,
+    "reachable_dynamic_imports": 0,
+    "retire_candidate": 285
+  },
+  "decision": "adopt_root_library_and_explicit_experiment_applications",
+  "generated_date": "2026-08-20",
+  "inputs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "1e7b8f3c2f3f9daf216b0344b6c815dcadd9240bb4f62743ceb7e33aeaabde8e"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "1b0c4e3b43fecc3c7541e05e24e167ce58d10465ab9bb4e275fa4b430bfc7ef3"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "2ec415f1d920980b0850ee67ab0538c8635e0f6d891599489a9651a8b5328cc2"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "63f5d6a9c79a0abbe5f10cce79550a617d16b16623dc54e7017068856f0d7ffb"
+    },
+    {
+      "path": "docs/artifact_path_moves.json",
+      "sha256": "4a19badcdcbf694441883546a0e8b558b35994fa0f1912a694c88b89af07248c"
+    },
+    {
+      "path": "experiments/phase1/product_l1/training_smoke.json",
+      "sha256": "ec36a2b07a008227f1a614cd5c246f38089095f1f30f2d28af0aad904873a22d"
+    },
+    {
+      "path": "experiments/phase1/product_l1/sampling.json",
+      "sha256": "4440090922ed339d36b77124861b27d3f82a900acb59f40377e960264fb4ec55"
+    },
+    {
+      "path": "provenance/code-retirement/iclr2027.json",
+      "sha256": "e2fc5399b3c427aa7338fdf495baa0199ac00e819ef539928557f0fabf4fc2bd"
+    },
+    {
+      "path": "provenance/frozen-code/manifest.json",
+      "sha256": "db352395f33c0fb993a0a4bba6c21e1ab068217d376481f0df43f1b94ee2fed6"
+    },
+    {
+      "path": "results/maintenance/root_package_architecture_v1/test_baseline.json",
+      "sha256": "72493f894e948ecb4c9d535960aa59f60b432c579545e7210320501497f2d6d5"
+    }
+  ],
+  "production_compute_launched": false,
+  "provenance": {
+    "code_config_drift_backlog": 4,
+    "code_config_pins_verified": 2117,
+    "result_pin_drift": 0,
+    "result_pins_verified_before_this_record": 748,
+    "vendored_assets_verified": 30
+  },
+  "sampling_smoke": {
+    "artifact_sha256": {
+      "result": "a07a9a034ccbde1a6776bed98f48f2b341a7ed3edced24169a7baae6de21edc0",
+      "shards": "82278c058fe11159f4d56dd50aea73ee56f06fe45c07198d692cd4dcd3e88de5"
+    },
+    "byte_identical": true,
+    "master_seed": 20260816,
+    "root_seed": 7439838324581993533,
+    "run_id": "fc4731a2de7b6f93c40b7290a54a247d978f659073e82f3fc4cb6a26ce63f3be",
+    "source_sha256": "745f05d4fcf4e810c96211e4a406073231626f0959d5e8938dcae43f5bdfd367",
+    "status": "reproduced"
+  },
+  "schema_version": "forge.root_package_architecture_result.v1",
+  "scientific_effect": {
+    "candidate_selection_performed": false,
+    "evidence_tier_changed": false,
+    "guidance_performed": false,
+    "paper_claim_changed": false,
+    "sealed_holdout_accessed": false
+  },
+  "status": "pass_with_documented_missing_artifact_baseline",
+  "test_baseline": {
+    "baseline_failure_count": 201,
+    "collected_node_count": 1678,
+    "current_failure_count": 201,
+    "documented_missing_input_count": 54,
+    "new_failure_count": 0,
+    "ready": false,
+    "status": "blocked_known_failures"
+  },
+  "training_production_plan": {
+    "backend": "modal",
+    "gpu_type": "L4",
+    "request_id": "a0bafdd5a772366737c5b5b88e6a2b3405323d376634e14042f173d24af0a9a1",
+    "run_id": null,
+    "source_sha256": "745f05d4fcf4e810c96211e4a406073231626f0959d5e8938dcae43f5bdfd367",
+    "upload_count": 14
+  },
+  "training_smoke": {
+    "master_seed": 20260805,
+    "reproduction_modes": {
+      "cache": "strict_byte_identity",
+      "closure": "replicated_statistics",
+      "joint": "replicated_statistics"
+    },
+    "root_seed": 1396784990052689023,
+    "run_id": "0e01e1d3c5dece81213c33b48f302ac00660528bf8fcc1eead8307c968034b6a",
+    "source_sha256": "745f05d4fcf4e810c96211e4a406073231626f0959d5e8938dcae43f5bdfd367",
+    "stages": [
+      "cache",
+      "joint",
+      "closure"
+    ],
+    "status": "reproduced"
+  }
+}

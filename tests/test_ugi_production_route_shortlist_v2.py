@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.design.guidance.ugi_production_route_shortlist_v2 import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_production_route_shortlist_v2 import (
     _eligible_aldehyde_branch,
     _select_diverse,
 )

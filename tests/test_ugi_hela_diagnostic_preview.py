@@ -6,7 +6,7 @@ import json
 import pytest
 from PIL import Image
 
-from forge.potency.audit.ugi_hela_diagnostic_preview import (
+from experiments.phase1.hela_potency.preview import (
     CARD_WARNING,
     UgiHelaDiagnosticPreviewError,
     _pdf_bytes,

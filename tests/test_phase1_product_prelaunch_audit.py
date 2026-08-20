@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from forge.design.audit.phase1_prelaunch_audit import audit_r1_rows
-from forge.design.flow.defog_feasibility import AtomState
+from experiments.archive.phase1.design_audits.phase1_prelaunch_audit import audit_r1_rows
+from forge.model.defog_feasibility import AtomState
 
 
 def _expected(rows: int) -> dict:

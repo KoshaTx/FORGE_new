@@ -4,14 +4,14 @@ from types import SimpleNamespace
 
 from rdkit.Chem import rdChemReactions
 
-from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
-from forge.route.assessment.proposal_discovery_status import (
+from forge.synthesis.assessment.l2_forward_resolver import L2ForwardResolutionStatus
+from forge.synthesis.assessment.proposal_discovery_status import (
     FamilyProjectionTrace,
     ProposalDiscoveryResolution,
     ProposalDiscoveryStatus,
 )
-from forge.route.engine.qualified_forward import QualifiedForwardReaction
-from forge.route.evidence.semantic_family_equivalence import (
+from forge.synthesis.engine.qualified_forward import QualifiedForwardReaction
+from forge.synthesis.evidence.semantic_family_equivalence import (
     audit_semantic_family_equivalence,
     audit_semantic_family_equivalence_v2,
 )

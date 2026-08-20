@@ -5,7 +5,10 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.design.audit.ugi_joint_program_support_audit import (
+from experiments.phase1.synthesis_guidance.adapters.terminal_support import (
+    canonical_morphology_program_bytes,
+)
+from experiments.phase1.synthesis_guidance.schedule.joint_program_support import (
     build_empirical_joint_program_prior,
     build_joint_program_kernel,
     evaluate_program_mode,
@@ -13,10 +16,7 @@ from forge.design.audit.ugi_joint_program_support_audit import (
     joint_program_neighborhood,
     sample_empirical_joint_program_prior,
 )
-from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-)
+from forge.model.ugi_morphology_program import UgiMorphologyProgram
 
 
 def _program(

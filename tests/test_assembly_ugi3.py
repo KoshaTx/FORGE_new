@@ -14,9 +14,7 @@ REGISTRY = REPO / "data/vendor/qualified_reactions_v1.json"
 
 def _example() -> tuple[dict[str, str], str]:
     document = json.loads(REGISTRY.read_text())
-    reaction = next(
-        row for row in document["reactions"] if row["reaction_id"] == "ugi_3cr_agile"
-    )
+    reaction = next(row for row in document["reactions"] if row["reaction_id"] == "ugi_3cr_agile")
     roles = [row["name"] for row in reaction["reactant_roles"]]
     example = reaction["known_positive_examples"][0]
     return dict(zip(roles, example["reactants"], strict=True)), example["expected"]

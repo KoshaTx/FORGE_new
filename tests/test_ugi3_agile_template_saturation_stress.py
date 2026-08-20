@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from forge.route.terminals.ugi3_agile_template_saturation_stress import projected_leaf_candidates
+from forge.synthesis.terminals.ugi3_agile_template_saturation_stress import (
+    projected_leaf_candidates,
+)
 
 
 def test_projected_leaf_candidates_excludes_internal_intermediate() -> None:

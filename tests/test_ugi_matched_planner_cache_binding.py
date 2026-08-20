@@ -6,22 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.schedule.ugi_matched_budget_orchestration import (
-    DiagnosticRouteAssessment,
-    LockedMatchedTerminal,
-    MatchedArm,
-    MatchedAssessmentContext,
-    MatchedBudgetLimits,
-    MatchedGenerationRequest,
-    MatchedScheduleEntry,
-    RouteComputeUsage,
-    run_diagnostic_matched_budget_arms,
-)
-from forge.design.schedule.ugi_matched_planner_cache_binding import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_matched_planner_cache_binding import (
     MatchedPlannerCacheBindingPreflight,
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.route.engine.planner import (
+from forge.synthesis.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -33,12 +22,23 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.engine.planner_cache import (
+from forge.synthesis.engine.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,
     PlannerCacheError,
     PlannerCacheKey,
+)
+from forge.synthesis.matched import (
+    DiagnosticRouteAssessment,
+    LockedMatchedTerminal,
+    MatchedArm,
+    MatchedAssessmentContext,
+    MatchedBudgetLimits,
+    MatchedGenerationRequest,
+    MatchedScheduleEntry,
+    RouteComputeUsage,
+    run_diagnostic_matched_budget_arms,
 )
 
 ASSESSMENT_AT_UTC = "2026-08-15T00:00:00Z"

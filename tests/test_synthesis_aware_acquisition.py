@@ -10,8 +10,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.potency.oracle.reaction_factorized_surrogate import ReactionFactorizedSurrogate
-from forge.potency.ranking.synthesis_aware_acquisition import (
+from experiments.archive.phase1.potency_ranking.synthesis_aware_acquisition import (
     AcquisitionPolicy,
     Candidate,
     SynthesisAwareAcquisitionError,
@@ -20,6 +19,7 @@ from forge.potency.ranking.synthesis_aware_acquisition import (
     select_random,
     select_top_lower_bound,
 )
+from forge.potency.oracle.reaction_factorized_surrogate import ReactionFactorizedSurrogate
 
 TAILS = ["CCCC", "CCCCC", "CCCCCC", "CCCCCCC", "CCCCCCCC", "CCCCCCCCC"]
 HEADS = ["NCCN(C)C", "NCCCN(C)C", "NCCN1CCCC1"]
@@ -211,7 +211,9 @@ def test_activity_floor_is_separable_from_the_selection_rule():
     distribution while its baselines sample freely. On a learning metric that is a handicap,
     not an advantage, and it turns the comparison into one about the floor.
     """
-    from forge.potency.ranking.synthesis_aware_acquisition import apply_activity_floor
+    from experiments.archive.phase1.potency_ranking.synthesis_aware_acquisition import (
+        apply_activity_floor,
+    )
 
     candidates = make_candidates(20)
     surrogate = fitted_surrogate(candidates)
@@ -230,7 +232,9 @@ def test_activity_floor_is_separable_from_the_selection_rule():
 
 
 def test_floor_rejects_an_empty_pool_and_a_bad_quantile():
-    from forge.potency.ranking.synthesis_aware_acquisition import apply_activity_floor
+    from experiments.archive.phase1.potency_ranking.synthesis_aware_acquisition import (
+        apply_activity_floor,
+    )
 
     candidates = make_candidates()
     surrogate = fitted_surrogate(candidates)

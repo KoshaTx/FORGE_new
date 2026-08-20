@@ -8,23 +8,23 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.design.corpus.ugi_generated_terminal_support import DeclaredGraphSupportContext
-from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+from experiments.phase1.synthesis_guidance.adapters.terminal_support import (
     UgiRestartableTerminalSupportAdapterError,
     adapt_restartable_completion_row_for_route_support,
     canonical_morphology_program_bytes,
     native_candidate_eligibility_record,
     native_candidate_eligibility_record_bytes,
 )
-from forge.design.schedule.ugi_matched_budget_orchestration import (
+from forge.corpus.ugi_generated_terminal_support import DeclaredGraphSupportContext
+from forge.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.potency.annotations import ROLE_NAMES
+from forge.synthesis.matched import (
     MatchedArm,
     MatchedGenerationRequest,
     MatchedScheduleEntry,
     RouteComputeUsage,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
-from forge.route.terminals.terminal_assessment import QualifiedUgiL1Reverifier
+from forge.synthesis.terminals.terminal_assessment import QualifiedUgiL1Reverifier
 
 REPO = Path(__file__).resolve().parents[1]
 SAMPLE_PATH = REPO / "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"

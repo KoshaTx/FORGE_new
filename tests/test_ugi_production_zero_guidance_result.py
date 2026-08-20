@@ -6,36 +6,38 @@ from dataclasses import replace
 
 import pytest
 
-from forge.design.corpus.ugi_generated_terminal_support import (
-    QualifiedGeneratedUgiTerminalSupport,
-    RoleHandleRecheck,
-)
-from forge.design.guidance.ugi_production_zero_guidance_result import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_result import (
     ArmTerminalSupportAuditSnapshot,
     AuthenticatedZeroGuidanceComposerResult,
     ProductionTerminalSupportAuditCollector,
     ProductionZeroGuidanceExecutionResult,
     UgiProductionZeroGuidanceResultError,
 )
-from forge.design.guidance.ugi_zero_guidance_rehearsal import ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION
-from forge.design.schedule.ugi_matched_budget_orchestration import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_zero_guidance_rehearsal import (
+    ZERO_GUIDANCE_REHEARSAL_SCHEMA_VERSION,
+)
+from experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator import (
+    ProductionQualifiedRoutePlanner,
+    ProductionTerminalSupportAudit,
+    _support_sha256,
+)
+from forge.corpus.ugi_generated_terminal_support import (
+    QualifiedGeneratedUgiTerminalSupport,
+    RoleHandleRecheck,
+)
+from forge.potency.annotations import ROLE_NAMES
+from forge.synthesis.assessment.ugi3_support_boundary import (
+    MolecularSupportState,
+    TargetQualification,
+)
+from forge.synthesis.engine.planner import RouteTarget
+from forge.synthesis.matched import (
     LockedMatchedTerminal,
     MatchedArm,
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.design.schedule.ugi_production_terminal_route_evaluator import (
-    ProductionQualifiedRoutePlanner,
-    ProductionTerminalSupportAudit,
-    _support_sha256,
-)
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
-from forge.route.assessment.ugi3_support_boundary import (
-    MolecularSupportState,
-    TargetQualification,
-)
-from forge.route.engine.planner import RouteTarget
-from forge.route.terminals.terminal_assessment import ExactL1ForwardVerification
+from forge.synthesis.terminals.terminal_assessment import ExactL1ForwardVerification
 
 
 def _hash(label: str) -> str:
@@ -204,9 +206,8 @@ def test_complete_composer_and_support_audits_are_retained_byte_stably() -> None
     assert serialized["paired_support_count"] == 1
     assert serialized["paired_support_identity_except_cache_clone_proven"] is True
     assert len(serialized["support_audits"]) == 2
-    assert (
-        serialized["support_audits"][0]["audit"]["support"]
-        == (_snapshots()[0].audit.to_dict()["support"])
+    assert serialized["support_audits"][0]["audit"]["support"] == (
+        _snapshots()[0].audit.to_dict()["support"]
     )
     assert result.canonical_bytes == result.canonical_bytes
     assert json.loads(result.canonical_bytes)["result_sha256"] == result.result_sha256

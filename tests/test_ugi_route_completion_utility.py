@@ -3,16 +3,16 @@ from dataclasses import replace
 from gzip import open as gzip_open
 from pathlib import Path
 
-from forge.route.engine.planner import AssessmentOutcome
-from forge.value.guidance.ugi_exact_closure_guidance import (
+from experiments.archive.phase1.synthesis_value_audits.ugi_route_completion_utility_qualification import (
+    build_route_completion_utility_qualification,
+)
+from forge.synthesis.engine.planner import AssessmentOutcome
+from forge.synthesis.value.contracts import ProductSynthesisValue
+from forge.synthesis.value.exact_closure import (
     GuidanceDisposition,
     exact_closure_potential_from_product_value,
     smc_utility_bridge_from_exact_closure,
 )
-from forge.value.guidance.ugi_route_completion_utility_qualification import (
-    build_route_completion_utility_qualification,
-)
-from forge.value.synthesis.synthesis import ProductSynthesisValue
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_route_completion_utility_v1.json"

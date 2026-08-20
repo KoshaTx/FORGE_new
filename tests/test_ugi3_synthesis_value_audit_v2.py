@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from forge.value.synthesis.synthesis import ComponentSynthesisValue, ProductSynthesisValue
-from forge.value.synthesis.ugi3_synthesis_value_audit_v2 import (
+from experiments.archive.phase1.synthesis_value_audits.ugi3_synthesis_value_audit_v2 import (
     Ugi3SynthesisValueAuditV2Error,
     build_ugi3_synthesis_value_audit_v2,
 )
+from forge.synthesis.value.contracts import ComponentSynthesisValue, ProductSynthesisValue
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT_PATH = REPO / "scripts/phase1_build_ugi3_synthesis_values_v2.py"
+SCRIPT_PATH = REPO / "experiments/archive/producers/phase1_build_ugi3_synthesis_values_v2.py"
 SPEC = importlib.util.spec_from_file_location("phase1_build_ugi3_synthesis_values_v2", SCRIPT_PATH)
 assert SPEC is not None and SPEC.loader is not None
 SCRIPT = importlib.util.module_from_spec(SPEC)

@@ -58,7 +58,8 @@ def test_the_enumeration_actually_carries_stereochemistry(enumeration):
     """If this ever became false, the bug would be invisible rather than fixed."""
     with rdBase.BlockLogs():
         bearing = sum(
-            1 for smiles in enumeration["raw"]
+            1
+            for smiles in enumeration["raw"]
             if (molecule := Chem.MolFromSmiles(smiles)) is not None
             and stereo_free(smiles) != Chem.MolToSmiles(molecule)
         )
@@ -72,20 +73,22 @@ def test_stripping_stereo_does_not_collapse_distinct_enumeration_members(enumera
 
 
 def test_panel_novelty_flag_matches_stereo_free_membership(enumeration, panel):
-    inside = sum(1 for record in panel
-                 if stereo_free(record["canonical_product"]) in enumeration["stereo_free"])
-    flagged = sum(1 for record in panel
-                  if not record["novelty"]["absent_from_agile_library"])
+    inside = sum(
+        1
+        for record in panel
+        if stereo_free(record["canonical_product"]) in enumeration["stereo_free"]
+    )
+    flagged = sum(1 for record in panel if not record["novelty"]["absent_from_agile_library"])
     assert inside == flagged == 8
 
 
 def test_raw_membership_disagrees_and_is_the_wrong_convention(enumeration, panel):
     """The failing convention, pinned so a regression reads as a change and not as noise."""
-    raw_inside = sum(1 for record in panel
-                     if record["canonical_product"] in enumeration["raw"])
+    raw_inside = sum(1 for record in panel if record["canonical_product"] in enumeration["raw"])
     assert raw_inside == 2
     disagreeing = sorted(
-        record["candidate_id"] for record in panel
+        record["candidate_id"]
+        for record in panel
         if (record["canonical_product"] in enumeration["raw"])
         != (not record["novelty"]["absent_from_agile_library"])
     )

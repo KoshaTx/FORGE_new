@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.value.audit.ugi3_hybrid_proposal_closure_sensitivity import (
+from experiments.archive.phase1.synthesis_value_audits.ugi3_hybrid_proposal_closure_sensitivity import (
     _hybrid_diagnostic_qualified,
     _solved_residual_sets,
 )

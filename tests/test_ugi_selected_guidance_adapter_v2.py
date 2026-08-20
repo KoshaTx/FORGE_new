@@ -5,19 +5,19 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.flow.ugi_selected_guidance_adapter_v2 import (
-    build_selected_model_restartable_guidance_lane_v2,
-)
-from forge.design.guidance.ugi_production_zero_guidance_seam_v2 import (
-    UgiProductionZeroGuidanceSeamV2Error,
-    _validate_config,
-)
-from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
+from experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator_v2 import (
     GENERATOR_CHECKPOINT_SHA256,
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_DECODER_ID,
 )
-from forge.design.schedule.ugi_nonzero_guidance_runner import (
+from experiments.phase1.synthesis_guidance.adapters.selected_v2 import (
+    build_selected_model_restartable_guidance_lane_v2,
+)
+from experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_seam_v2 import (
+    UgiProductionZeroGuidanceSeamV2Error,
+    _validate_config,
+)
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
 )
 
@@ -29,9 +29,7 @@ SCHEDULE = REPO / "results/phase1/ugi_grouped_smc_schedule_qualification_v1/resu
 def test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy() -> None:
     lane = build_selected_model_restartable_guidance_lane_v2(REPO)
 
-    assert lane.selected_lane.bindings.generator_checkpoint_sha256 == (
-        GENERATOR_CHECKPOINT_SHA256
-    )
+    assert lane.selected_lane.bindings.generator_checkpoint_sha256 == (GENERATOR_CHECKPOINT_SHA256)
     assert lane.selected_lane.bindings.terminal_decoder_id == TERMINAL_DECODER_ID
     assert lane.selected_lane.bindings.maximum_adjacent_branch_runs == (
         MAXIMUM_ADJACENT_BRANCH_RUNS

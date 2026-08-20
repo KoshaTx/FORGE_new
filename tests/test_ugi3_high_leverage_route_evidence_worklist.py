@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.evidence.ugi3_high_leverage_route_evidence_worklist import (
+from forge.synthesis.evidence.ugi3_high_leverage_route_evidence_worklist import (
     MANIFEST_SCHEMA_VERSION,
     RouteEvidenceWorklistError,
     build_high_leverage_route_evidence_worklist,

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from forge.value.synthesis.synthesis_source_qualification import (
+from experiments.archive.phase1.synthesis_value_audits.synthesis_source_qualification import (
     build_synthesis_source_qualification,
 )
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.potency.ranking.ugi_production_full_support_rescoring import (
+from experiments.phase1.hela_potency.ranking.ugi_production_full_support_rescoring import (
     UgiProductionFullSupportRescoringError,
     pattern_id_for_roles,
 )

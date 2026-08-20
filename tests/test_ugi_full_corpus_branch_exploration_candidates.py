@@ -3,7 +3,7 @@ from __future__ import annotations
 import subprocess
 import sys
 
-from forge.design.corpus.ugi_full_corpus_branch_exploration_candidates import (
+from experiments.phase1.product_l1.data.branch_exploration import (
     program_shard,
     realized_branch_class,
 )
@@ -75,7 +75,7 @@ class BlockSklearn(importlib.abc.MetaPathFinder):
         return None
 
 sys.meta_path.insert(0, BlockSklearn())
-import forge.design.corpus.ugi_full_corpus_branch_exploration_candidates
+import experiments.phase1.product_l1.data.branch_exploration
 """
     completed = subprocess.run(
         [sys.executable, "-c", code],

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import pytest
 
-from forge.design.flow.ugi_program_matched_tail_chemistry import (
+from forge.model.ugi_program_matched_tail_chemistry import (
     compare_program_matched_tail_chemistry,
 )
 

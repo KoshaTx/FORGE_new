@@ -53,9 +53,7 @@ def test_report_passes_the_no_new_failure_gate_with_known_failures(tmp_path: Pat
     missing = tmp_path / "missing.txt"
     missing.write_text("")
     collected = _write(tmp_path / "cache/nodeids", ["tests/test_one.py::test_known"])
-    lastfailed = _write(
-        tmp_path / "cache/lastfailed", {"tests/test_one.py::test_known": True}
-    )
+    lastfailed = _write(tmp_path / "cache/lastfailed", {"tests/test_one.py::test_known": True})
     output = tmp_path / "report.json"
 
     report = build_test_baseline_report(

@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.value.coverage.ugi3_fresh_pool_route_coverage_v6 import (
+from experiments.archive.phase1.synthesis_value_coverage.ugi3_fresh_pool_route_coverage_v6 import (
     build_fresh_pool_route_coverage_v6,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json"

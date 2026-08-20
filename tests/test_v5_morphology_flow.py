@@ -3,11 +3,11 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.flow.v5_morphology_flow import (
+from forge.model.v5_morphology_flow import (
     V5MorphologyFlow,
     sample_v5_morphologies,
 )
-from forge.design.flow.v5_morphology_program import (
+from forge.model.v5_morphology_program import (
     V5GlobalMorphologyProgram,
     offspring_matches_program,
     regions_match_program,

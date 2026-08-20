@@ -1,6 +1,6 @@
-"""Tests for forge.chem.smiles.
+"""Tests for forge.chemistry.smiles.
 
-The load-bearing tests are the agreement ones. `forge.chem` may only replace the existing
+The load-bearing tests are the agreement ones. `forge.chemistry` may only replace the existing
 canonicalizers if it returns exactly what they return -- canonical identity decides which
 structures count as the same molecule, so a difference here would not raise, it would quietly
 change what the corpus contains.
@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.chem.smiles import (
+from forge.chemistry.smiles import (
     ChemError,
     cache_stats,
     canonical_connected_constitution,
@@ -37,7 +37,9 @@ def test_agrees_with_the_canonicalizer_most_modules_route_through() -> None:
 
 
 def test_agrees_with_the_connected_variant() -> None:
-    legacy = pytest.importorskip("forge.route.sources.ugi3_source_neutral_proposal_adjudication")
+    legacy = pytest.importorskip(
+        "forge.synthesis.sources.ugi3_source_neutral_proposal_adjudication"
+    )
     for smiles in ("CCO", CIS, "c1ccccc1"):
         assert canonical_connected_constitution(smiles) == legacy._canonical(smiles)
 

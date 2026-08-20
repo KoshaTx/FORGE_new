@@ -47,12 +47,12 @@ FIELDS = ["id", "smiles", "note"]
 
 
 def test_csv_bytes_matches_the_legacy_writer() -> None:
-    legacy = pytest.importorskip("forge.data.r1_prime_audit")
+    legacy = pytest.importorskip("forge.corpus.r1_prime_audit")
     assert csv_bytes(ROWS, FIELDS) == legacy._plain_csv_bytes(ROWS, FIELDS)
 
 
 def test_csv_gz_bytes_matches_the_legacy_writer() -> None:
-    legacy = pytest.importorskip("forge.data.r1_prime_audit")
+    legacy = pytest.importorskip("forge.corpus.r1_prime_audit")
     assert csv_gz_bytes(ROWS, FIELDS) == legacy._gzip_csv_bytes(ROWS, FIELDS)
 
 

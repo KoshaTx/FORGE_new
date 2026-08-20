@@ -1,26 +1,28 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
 
-from forge.route.engine.planner import (
+from experiments._runtime.historical import resolve_pinned_input
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     EvidenceTier,
     PlannerBudgetLedger,
     PlannerBudgetLimits,
     RecursiveRouteAssessor,
 )
-from forge.route.engine.ugi3_hybrid_search import (
+from forge.synthesis.engine.ugi3_hybrid_search import (
     SearchChannel,
     build_hybrid_search_diagnostic,
     load_bounded_hybrid_source,
 )
-from forge.route.sources.ugi3_exact_evidence_source import load_exact_evidence_only_source
+from forge.synthesis.sources.ugi3_exact_evidence_source import load_exact_evidence_only_source
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_hybrid_search.json"
-INPUT_PATHS = {
+_DECLARED_INPUT_PATHS = {
     "component_dossier": REPO
     / "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
     "component_dossier_result": REPO
@@ -51,6 +53,15 @@ INPUT_PATHS = {
     "transfer_ledger": REPO / "results/m0_09/hydrophobic_motif_transfer_ledger.csv.gz",
     "transfer_result": REPO / "results/m0_09/hydrophobic_motif_transfer.json",
     "upstream_registry": REPO / "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+}
+_CONFIGURED_INPUTS = json.loads(CONFIG.read_text())["inputs"]
+INPUT_PATHS = {
+    name: resolve_pinned_input(
+        REPO,
+        path.relative_to(REPO).as_posix(),
+        _CONFIGURED_INPUTS[name]["expected_sha256"],
+    )
+    for name, path in _DECLARED_INPUT_PATHS.items()
 }
 LIMITS = PlannerBudgetLimits(
     maximum_depth=4,

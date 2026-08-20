@@ -10,14 +10,14 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.design.audit.canonical_representation_audit import (
+from experiments.archive.phase1.design_audits.canonical_representation_audit import (
     audit_canonical_representation,
     sparse_record_signature,
 )
-from forge.design.flow.sparse_topology_feasibility import (
+from forge.model.sparse_topology_feasibility import (
     build_sparse_atom_vocabulary,
 )
-from forge.design.flow.v5_sparse_representation import (
+from forge.model.v5_sparse_representation import (
     tensorize_v5_sparse_molecule,
     tensorize_v5_sparse_row,
     v5_constitutional_roundtrip_exact,

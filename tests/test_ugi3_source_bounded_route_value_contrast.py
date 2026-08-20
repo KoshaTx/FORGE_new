@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.value.audit.ugi3_source_bounded_route_value_contrast import (
+from experiments.archive.phase1.synthesis_value_audits.ugi3_source_bounded_route_value_contrast import (
     Ugi3SourceBoundedContrastError,
     source_bounded_utility,
 )

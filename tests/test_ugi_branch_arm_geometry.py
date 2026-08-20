@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from scripts.phase1_audit_ugi_branch_arm_geometry import (
+from experiments.archive.producers.phase1_audit_ugi_branch_arm_geometry import (
     _cached_component_branch_geometry,
     component_branch_geometry,
 )

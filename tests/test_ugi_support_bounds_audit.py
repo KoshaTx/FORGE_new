@@ -3,7 +3,7 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from forge.design.audit.ugi_support_bounds_audit import (
+from experiments.archive.phase1.design_audits.ugi_support_bounds_audit import (
     _product_capacity_summary,
     component_capacity_metrics,
 )

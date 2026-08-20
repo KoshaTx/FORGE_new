@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.route.audit.aizynthfinder_checkpoint_residual import (
+from experiments.archive.phase1.synthesis_audits.aizynthfinder_checkpoint_residual import (
     build_residual_targets,
     summarize_residual_records,
 )

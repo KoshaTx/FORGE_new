@@ -10,7 +10,7 @@ from typing import Any
 import pytest
 import torch
 
-from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
+from experiments.phase1.product_l1.sampling.terminal_census import (
     EXPECTED_SCOPE,
     CensusContract,
     CensusDesign,
@@ -26,21 +26,25 @@ from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     save_partial_state,
     select_frozen_prior_programs,
 )
-from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.flow.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-    decode_canonical_morphology_program_bytes,
+from experiments.phase1.product_l1.sampling.ugi_joint_sparse_sampling import (
+    UgiJointSparseTrajectoryState,
 )
-from forge.design.flow.ugi_selected_guidance_adapter import (
+from experiments.phase1.synthesis_guidance.adapters.selected_v1 import (
     SelectedGuidanceParticleState,
     SelectedGuidanceState,
 )
-from forge.design.sampling.ugi_joint_sparse_sampling import UgiJointSparseTrajectoryState
-from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceStateReceipt
+from experiments.phase1.synthesis_guidance.adapters.terminal_support import (
+    canonical_morphology_program_bytes,
+    decode_canonical_morphology_program_bytes,
+)
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
+    GuidanceStateReceipt,
+)
+from forge.model.ugi_morphology_program import UgiMorphologyProgram
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json"
-SOURCE = REPO / "src/forge/product/ugi_dynamic_frozen_prior_terminal_census.py"
+SOURCE = REPO / "experiments/phase1/product_l1/sampling/terminal_census.py"
 
 
 def _program(index: int) -> dict[str, list[int]]:
@@ -342,7 +346,7 @@ def test_native_completion_does_not_hide_invariant_failures(monkeypatch: Any) ->
         raise RuntimeError("programming invariant failed")
 
     monkeypatch.setattr(
-        "forge.design.flow.ugi_dynamic_frozen_prior_terminal_census." "advance_ugi_joint_sparse_state",
+        "experiments.phase1.product_l1.sampling.terminal_census." "advance_ugi_joint_sparse_state",
         _fail_hard,
     )
     with pytest.raises(RuntimeError, match="programming invariant failed"):
@@ -366,7 +370,7 @@ def test_census_source_has_no_forbidden_scientific_subsystem_imports() -> None:
             imported.add(node.module)
 
     assert not any(name.startswith("forge.bio") for name in imported)
-    assert not any(name.startswith("forge.route") for name in imported)
+    assert not any(name.startswith("forge.synthesis") for name in imported)
     source = SOURCE.read_text()
     assert "adapt_restartable_completion_row_for_route_support" not in source
     assert "_lock_completion_row" not in source

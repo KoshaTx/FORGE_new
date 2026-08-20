@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.schedule.ugi_matched_morphology_allocation_schedule import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_matched_morphology_allocation_schedule import (
     UgiMatchedMorphologyAllocationScheduleError,
     inverse_cdf_indices,
 )

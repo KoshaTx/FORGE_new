@@ -45,15 +45,15 @@ forge paper verify
 forge paper reproduce          # exact artifact replay + two clean packaging builds
 forge paper doctor --strict   # reports every blocker to a full numerical rerun
 forge paper build
-forge provenance verify --expect-verified 742
-forge maintenance survey --output provenance/code-retirement/iclr2027.json
+forge provenance verify --expect-verified 758
+make code-survey
 make test-baseline-report       # summarize the last clean-cache full-suite run
 ```
 
 `make vendor` copies hash-pinned assets from absolute paths on the originating workstation. If those
 paths do not resolve it fails with the missing list and expected hashes. **Do not substitute data.**
 
-Experiment specifications live in `configs/experiments/`. See
+Active experiment specifications live beside their applications under `experiments/`. See
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for package boundaries and
 [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) for local and Modal execution.
 The production training DAG is planned or launched explicitly with

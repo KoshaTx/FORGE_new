@@ -1,4 +1,7 @@
-from forge.potency.oracle.ugi_fresh_pool_oracle_audit import _quantiles, summarize_oracle_rows
+from experiments.archive.phase1.potency_audits.ugi_fresh_pool_oracle_audit import (
+    _quantiles,
+    summarize_oracle_rows,
+)
 
 
 def _row(

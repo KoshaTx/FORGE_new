@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "scripts/phase1_collect_ugi_production_refit_fresh_census.py"
+SCRIPT = REPO / "experiments/archive/producers/phase1_collect_ugi_production_refit_fresh_census.py"
 SPEC = importlib.util.spec_from_file_location(
     "phase1_collect_ugi_production_refit_fresh_census", SCRIPT
 )

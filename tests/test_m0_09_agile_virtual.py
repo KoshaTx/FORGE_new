@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.agile_virtual import (
+from forge.corpus.agile_virtual import (
     AgileVirtualExtractionError,
     extract_agile_virtual_smiles,
     write_agile_virtual_smiles,
@@ -64,9 +64,7 @@ def test_extracts_only_smiles_with_deterministic_gzip(tmp_path: Path) -> None:
     assert first_manifest == second_manifest
     assert first_payload == second_payload
     decompressed = gzip.decompress(first_payload).decode().splitlines()
-    assert decompressed[0] == (
-        "source_row_index,source_smiles,canonical_isomeric_smiles"
-    )
+    assert decompressed[0] == ("source_row_index,source_smiles,canonical_isomeric_smiles")
     assert decompressed[1:] == ["0,CCO,CCO", "1,CCN,CCN"]
     assert first_manifest["claims_boundary"]["l2_route_supervision_present"] is False
 

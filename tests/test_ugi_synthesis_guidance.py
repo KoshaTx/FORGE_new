@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.guidance.ugi_synthesis_guidance import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_synthesis_guidance import (
     LockedRolloutTerminal,
     RolloutBudgetLimits,
     RolloutDisposition,

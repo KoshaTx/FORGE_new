@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.potency.morphology.ugi_morphology_proposal_confirmation_analysis import (
+from experiments.phase1.hela_potency.morphology.ugi_morphology_proposal_confirmation_analysis import (
     UgiMorphologyProposalConfirmationAnalysisError,
     _cluster_bootstrap_differences,
     _proposal_weighted_summary,

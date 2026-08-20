@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.schedule.ugi_matched_budget_orchestration import (
+from forge.synthesis.matched import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
     MatchedArm,
@@ -362,7 +362,7 @@ def test_invalid_usage_and_duplicate_schedule_coordinates_fail_closed() -> None:
 
 def test_frozen_matched_budget_audit_is_deterministic_and_provenance_pinned() -> None:
     repo = Path(__file__).resolve().parents[1]
-    script = repo / "scripts/phase1_audit_ugi_matched_budget_orchestration.py"
+    script = repo / "experiments/archive/producers/phase1_audit_ugi_matched_budget_orchestration.py"
     config = repo / "configs/model/phase1_ugi_matched_budget_orchestration_v1.json"
     build_audit = runpy.run_path(script)["build_audit"]
 

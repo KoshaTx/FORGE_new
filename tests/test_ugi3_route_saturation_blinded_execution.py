@@ -16,13 +16,7 @@ import torch
 import yaml
 from rdkit import rdBase
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.assessment.ugi3_route_registry_pair_contract import (
-    TARGET_ROLE,
-    TARGET_SMILES,
-    component_key_sha256,
-)
-from forge.route.terminals.ugi3_route_saturation_blinded_execution import (
+from experiments.archive.phase1.synthesis_audits.ugi3_route_saturation_blinded_execution import (
     CONFIG_SCHEMA_VERSION,
     EXECUTABLE_STATUS,
     REQUIRED_DECISION,
@@ -37,13 +31,21 @@ from forge.route.terminals.ugi3_route_saturation_blinded_execution import (
     run_one_shot_blinded_holdout,
     validate_completed_blinded_holdout,
 )
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.assessment.ugi3_route_registry_pair_contract import (
+    TARGET_ROLE,
+    TARGET_SMILES,
+    component_key_sha256,
+)
 
 REPO = Path(__file__).resolve().parents[1]
-MODULE = REPO / "src/forge/route/ugi3_route_saturation_blinded_execution.py"
-CLI = REPO / "scripts/phase1_run_ugi3_route_saturation_blinded_holdout.py"
-HEADLESS = REPO / "src/forge/product/ugi_blinded_headless_sampling.py"
-JOINT_FLOW = REPO / "src/forge/product/ugi_joint_sparse_flow.py"
-CONTRACT = REPO / "src/forge/route/ugi3_route_registry_pair_contract.py"
+MODULE = (
+    REPO / "experiments/archive/phase1/synthesis_audits/ugi3_route_saturation_blinded_execution.py"
+)
+CLI = REPO / "experiments/archive/producers/phase1_run_ugi3_route_saturation_blinded_holdout.py"
+HEADLESS = REPO / "experiments/phase1/product_l1/sampling/ugi_blinded_headless_sampling.py"
+JOINT_FLOW = REPO / "forge/model/ugi_joint_sparse_flow.py"
+CONTRACT = REPO / "forge/synthesis/assessment/ugi3_route_registry_pair_contract.py"
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -418,20 +420,21 @@ def test_runner_requires_validator_authorization_before_irreversible_claim(
 
 
 def test_renderer_free_runner_import_does_not_load_rdkit_draw() -> None:
-    environment = {**os.environ, "PYTHONPATH": str(REPO / "src")}
+    environment = {**os.environ, "PYTHONPATH": str(REPO)}
     result = subprocess.run(
         [
             sys.executable,
             "-c",
             (
                 "import sys; from pathlib import Path; "
-                "import forge.route.terminals.ugi3_route_saturation_blinded_execution as execution; "
+                "import experiments.archive.phase1.synthesis_audits.ugi3_route_saturation_blinded_execution as execution; "
                 "assert 'rdkit.Chem.Draw' not in sys.modules; "
                 "assert 'rdkit.Chem.Draw.rdMolDraw2D' not in sys.modules; "
                 f"root=Path({str(REPO)!r}).resolve(); "
                 "loaded={name for name,module in sys.modules.items() "
-                "if name.startswith('forge.') and getattr(module,'__file__',None) "
-                "and Path(module.__file__).resolve().is_relative_to(root/'src')}; "
+                "if name.startswith(('forge.','experiments.')) "
+                "and getattr(module,'__file__',None) "
+                "and Path(module.__file__).resolve().is_relative_to(root)}; "
                 "assert loaded == set(execution.RUNTIME_DEPENDENCY_MODULES), "
                 "(sorted(loaded-set(execution.RUNTIME_DEPENDENCY_MODULES)), "
                 "sorted(set(execution.RUNTIME_DEPENDENCY_MODULES)-loaded))"

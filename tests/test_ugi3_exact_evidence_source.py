@@ -6,7 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.engine.planner import (
+from experiments._runtime.historical import resolve_pinned_input
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceTier,
@@ -15,7 +16,7 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.sources.ugi3_exact_evidence_source import (
+from forge.synthesis.sources.ugi3_exact_evidence_source import (
     ExactEvidenceOnlyUgi3Source,
     build_exact_evidence_source_diagnostic,
     load_exact_evidence_only_source,
@@ -24,7 +25,7 @@ from forge.route.sources.ugi3_exact_evidence_source import (
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_exact_evidence_source.json"
-INPUT_PATHS = {
+_DECLARED_INPUT_PATHS = {
     "adapter_source": REPO / "src/forge/route/ugi3_exact_evidence_source.py",
     "component_dossier": REPO
     / "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
@@ -41,6 +42,15 @@ INPUT_PATHS = {
     "terminal_procurement": REPO / "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
     "upstream_reaction_registry": REPO
     / "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+}
+_CONFIGURED_INPUTS = json.loads(CONFIG.read_text())["inputs"]
+INPUT_PATHS = {
+    name: resolve_pinned_input(
+        REPO,
+        path.relative_to(REPO).as_posix(),
+        _CONFIGURED_INPUTS[name]["expected_sha256"],
+    )
+    for name, path in _DECLARED_INPUT_PATHS.items()
 }
 LIMITS = PlannerBudgetLimits(
     maximum_depth=4,

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.evidence.ugi3_aldehyde_head_capability import (
+from forge.synthesis.evidence.ugi3_aldehyde_head_capability import (
     Ugi3AldehydeHeadCapabilityError,
     build_ugi3_aldehyde_head_capability,
     write_ugi3_aldehyde_head_capability,
@@ -181,13 +181,9 @@ def _write_fixture(
                         {"state": "current_item_level_vendor_verified"},
                     ]
                 },
-                "prospective_outcome": {
-                    "states": [{"state": "not_attempted"}]
-                },
+                "prospective_outcome": {"states": [{"state": "not_attempted"}]},
             },
-            "miao_cross_assembly_audit": {
-                "heads": [{"canonical_smiles": "CN"}]
-            },
+            "miao_cross_assembly_audit": {"heads": [{"canonical_smiles": "CN"}]},
         },
     )
 
@@ -254,9 +250,7 @@ def _write_fixture(
                         "purity": "99%",
                         "availability_observation": "Check cart for availability.",
                     },
-                    "procurement_status": (
-                        "catalog_item_verified_availability_unresolved"
-                    ),
+                    "procurement_status": ("catalog_item_verified_availability_unresolved"),
                     "current_item_level_procurement_closed": False,
                     "backup_status": "not_reviewed",
                     "required_followup": "Verify current stock.",
@@ -325,12 +319,8 @@ def _write_fixture(
                 "agile_component_routes": {"expected_sha256": _sha256(agile)},
                 "qualified_reactions": {"expected_sha256": _sha256(registry)},
                 "precursor_capability": {"expected_sha256": _sha256(precursor)},
-                "agile_head_procurement": {
-                    "expected_sha256": _sha256(procurement)
-                },
-                "assembly_qualification": {
-                    "expected_sha256": _sha256(qualification)
-                },
+                "agile_head_procurement": {"expected_sha256": _sha256(procurement)},
+                "assembly_qualification": {"expected_sha256": _sha256(qualification)},
             },
             "expected_counts": {
                 "aldehyde_candidates": 2,
@@ -365,22 +355,16 @@ def _write_fixture(
                 "reaction_id": "ugi-test",
                 "aldehyde_role": "aldehyde",
                 "amine_role": "amine",
-                "multiplicity_semantics": (
-                    "symmetry_distinct_required_handle_matches"
-                ),
+                "multiplicity_semantics": ("symmetry_distinct_required_handle_matches"),
                 "required_explicit_site_selection_heads": [],
                 "raw_multiplicity_interpretation": "fixture",
             },
             "aldehyde_scope": {
                 "route_family_ids": ["aldehyde-family"],
                 "exact_route_transformation_evidence": ["exact_source_route"],
-                "unresolved_transformation_evidence": [
-                    "no_upstream_route_reported"
-                ],
+                "unresolved_transformation_evidence": ["no_upstream_route_reported"],
                 "route_closure": "incomplete",
-                "operational_availability": (
-                    "route_or_procurement_resolution_required"
-                ),
+                "operational_availability": ("route_or_procurement_resolution_required"),
                 "prospective_outcome": "not_attempted",
                 "forward_verification_status": "not_run",
             },
@@ -390,12 +374,8 @@ def _write_fixture(
                 "prospective_outcome": "not_attempted",
                 "forward_verification_status": "not_run",
                 "default_current_procurement_status": "not_verified",
-                "verified_procurement_status": (
-                    "current_item_level_vendor_verified"
-                ),
-                "unresolved_catalog_status": (
-                    "catalog_item_verified_availability_unresolved"
-                ),
+                "verified_procurement_status": ("current_item_level_vendor_verified"),
+                "unresolved_catalog_status": ("catalog_item_verified_availability_unresolved"),
                 "required_unresolved_procurement_labels": ["A5"],
             },
             "claims_boundary": {"model_built": False},
@@ -420,27 +400,13 @@ def test_audit_separates_exact_routes_discrepancies_and_procurement(
     assert result["summary"]["source_resolved_aldehyde_routes_outside_pool"] == 1
     assert result["summary"]["unresolved_aldehyde_source_discrepancies"] == 1
     assert result["summary"]["head_candidates_with_current_procurement_closure"] == 1
-    assert (
-        result["summary"]["head_candidates_requiring_procurement_or_route_resolution"]
-        == 2
-    )
+    assert result["summary"]["head_candidates_requiring_procurement_or_route_resolution"] == 2
     assert result["summary"]["raw_component_cartesian_upper_bound"] == 12
-    assert (
-        result["summary"]["raw_triples_remaining_under_literal_registry_head_filter"]
-        == 8
-    )
-    assert (
-        result["summary"]["raw_triples_remaining_under_qualified_registry_head_filter"]
-        == 12
-    )
-    by_id = {
-        record["block_id"]: record for record in result["aldehyde_candidate_audit"]
-    }
+    assert result["summary"]["raw_triples_remaining_under_literal_registry_head_filter"] == 8
+    assert result["summary"]["raw_triples_remaining_under_qualified_registry_head_filter"] == 12
+    by_id = {record["block_id"]: record for record in result["aldehyde_candidate_audit"]}
     assert by_id["aldehyde:1"]["exact_source_route_ids"] == ["route-in-pool"]
-    assert (
-        by_id["aldehyde:2"]["source_route_evidence_status"]
-        == "source_discrepancy_unresolved"
-    )
+    assert by_id["aldehyde:2"]["source_route_evidence_status"] == "source_discrepancy_unresolved"
     assert {flag["component_label"] for flag in result["qa_flags"]} == {
         "A5",
         "B5",
@@ -478,19 +444,12 @@ def test_catalog_listing_without_availability_does_not_close(
     }
 
     assert heads["A1"]["current_item_level_procurement_closed"] is True
-    assert (
-        heads["A1"]["operational_availability"]
-        == "current_item_level_vendor_verified"
-    )
+    assert heads["A1"]["operational_availability"] == "current_item_level_vendor_verified"
     assert heads["A5"]["current_item_level_procurement_closed"] is False
     assert (
-        heads["A5"]["current_procurement_status"]
-        == "catalog_item_verified_availability_unresolved"
+        heads["A5"]["current_procurement_status"] == "catalog_item_verified_availability_unresolved"
     )
-    assert (
-        heads["A5"]["operational_availability"]
-        == "route_or_procurement_resolution_required"
-    )
+    assert heads["A5"]["operational_availability"] == "route_or_procurement_resolution_required"
 
 
 def test_audit_rejects_procurement_identity_mismatch(tmp_path: Path) -> None:
@@ -507,9 +466,7 @@ def test_audit_rejects_procurement_identity_mismatch(tmp_path: Path) -> None:
     procurement_payload["records"][0]["canonical_smiles"] = "CCN"
     _write_json(procurement, procurement_payload)
     config_payload = json.loads(config.read_text())
-    config_payload["inputs"]["agile_head_procurement"]["expected_sha256"] = _sha256(
-        procurement
-    )
+    config_payload["inputs"]["agile_head_procurement"]["expected_sha256"] = _sha256(procurement)
     _write_json(config, config_payload)
 
     with pytest.raises(
@@ -598,16 +555,8 @@ def test_committed_audit_preserves_non_closure_and_qualified_registry() -> None:
     assert result["summary"]["amine_candidates"] == 88
     assert result["summary"]["exact_route_aldehyde_candidate_overlap"] == 11
     assert result["summary"]["head_candidates_with_current_procurement_closure"] == 19
-    assert (
-        result["summary"][
-            "agile_heads_catalog_item_verified_availability_unresolved"
-        ]
-        == 1
-    )
-    assert (
-        result["summary"]["head_candidates_requiring_procurement_or_route_resolution"]
-        == 69
-    )
+    assert result["summary"]["agile_heads_catalog_item_verified_availability_unresolved"] == 1
+    assert result["summary"]["head_candidates_requiring_procurement_or_route_resolution"] == 69
     assert result["summary"]["computationally_route_complete_candidates"] == 0
     assert result["summary"]["amine_candidates_passing_qualified_site_multiplicity"] == 85
     assert result["summary"]["agile_heads_failing_qualified_site_multiplicity"] == 0
@@ -617,6 +566,5 @@ def test_committed_audit_preserves_non_closure_and_qualified_registry() -> None:
         for flag in result["qa_flags"]
     )
     assert any(
-        flag["flag_id"] == "agile_a9_current_availability_unresolved"
-        for flag in result["qa_flags"]
+        flag["flag_id"] == "agile_a9_current_availability_unresolved" for flag in result["qa_flags"]
     )

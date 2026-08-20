@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.source_platform_registry_audit import (
+from forge.corpus.source_platform_registry_audit import (
     RESULT_SCHEMA_VERSION,
     SourcePlatformAuditError,
     _classify_platform,
@@ -72,10 +72,7 @@ def test_completed_source_platform_artifacts_match_manifest() -> None:
     result = json.loads(RESULT.read_text())
     assert result["schema_version"] == RESULT_SCHEMA_VERSION
     assert result["summary"]["source_study_heldout"] == 2_333
-    assert (
-        result["summary"]["products_with_fully_training_pool_supported_decomposition"]
-        == 0
-    )
+    assert result["summary"]["products_with_fully_training_pool_supported_decomposition"] == 0
     assert result["decision"]["heldout_components_added_to_pool"] is False
     assert result["decision"]["source_holdout_is_model_generalization_benchmark"] is False
     for details in result["artifacts"].values():

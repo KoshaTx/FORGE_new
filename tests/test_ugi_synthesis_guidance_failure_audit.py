@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from forge.value.synthesis.ugi_synthesis_guidance_failure_audit import (
+from experiments.archive.phase1.synthesis_value_audits.ugi_synthesis_guidance_failure_audit import (
     build_synthesis_guidance_failure_audit,
 )
 

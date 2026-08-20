@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from forge.value.synthesis.synthesis_source_exact_route_replay import (
+from experiments.archive.phase1.synthesis_value_audits.synthesis_source_exact_route_replay import (
     build_synthesis_source_exact_route_replay,
 )
 

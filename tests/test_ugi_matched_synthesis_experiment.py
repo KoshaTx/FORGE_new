@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.flow.ugi_matched_synthesis_experiment import (
+from experiments.phase1.synthesis_guidance.contract import (
     ROLE_NAMES,
     ArmSeedOutcome,
     ComputeReceipt,

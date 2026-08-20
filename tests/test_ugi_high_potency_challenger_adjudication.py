@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.potency.morphology.ugi_high_potency_challenger_adjudication import (
+from experiments.phase1.hela_potency.morphology.ugi_high_potency_challenger_adjudication import (
     adjudicate_high_potency_challenger,
 )
 

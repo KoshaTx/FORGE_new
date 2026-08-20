@@ -9,7 +9,7 @@ import pytest
 from rdkit import Chem, DataStructs
 from rdkit.Chem import rdFingerprintGenerator
 
-from forge.data.r1_prime_audit import (
+from forge.corpus.r1_prime_audit import (
     AuditError,
     ProductIndex,
     _audit_scheme_worker,

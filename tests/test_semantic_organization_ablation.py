@@ -34,11 +34,13 @@ sys.path.insert(0, str(REPO / "src"))
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
+from experiments.phase1.product_l1.training.ugi_training_cache import (  # noqa: E402
+    load_ugi_training_cache,
+)
+from forge.model.ugi_joint_sparse_flow import (  # noqa: E402
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
 )
-from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = REPO / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 REFERENCE = REPO / "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt"
@@ -55,6 +57,7 @@ pytestmark = pytest.mark.skipif(
 def _supports_switch() -> bool:
     try:
         import inspect
+
         return "semantic_organization" in inspect.signature(UgiJointSparseFlow).parameters
     except (TypeError, ValueError):  # pragma: no cover
         return False
@@ -84,10 +87,13 @@ def _batch(records, architecture, semantic_organization=None):
     if semantic_organization is not None:
         kwargs["semantic_organization"] = semantic_organization
     return collate_ugi_joint_sparse_records(
-        tuple(records), maximum_nodes=max(r.node_count for r in records),
+        tuple(records),
+        maximum_nodes=max(r.node_count for r in records),
         maximum_children=int(architecture["maximum_children"]),
         maximum_closures=int(architecture["maximum_cycle_rank"]) * 3,
-        maximum_decorations=int(architecture["maximum_decorations"]), **kwargs)
+        maximum_decorations=int(architecture["maximum_decorations"]),
+        **kwargs,
+    )
 
 
 # ------------------------------------------------------- 1. the ablation must remove information
@@ -123,7 +129,8 @@ def test_flat_layout_does_not_encode_role_in_position(corpus_and_records, archit
     # stop being contiguous. Measured at 0.245 with content-based ordering.
     assert exact <= len(records) * 0.40, (
         f"{exact}/{len(records)} flat-arm records reproduce program-order role blocks; the flat "
-        "layout is not decoupling position from the program at all")
+        "layout is not decoupling position from the program at all"
+    )
 
 
 @requires_switch
@@ -143,17 +150,21 @@ def test_flat_arm_drops_role_but_keeps_generic_sequence_position(architecture):
     names = dict(model.named_parameters())
     # Amendment 12: the table is RETAINED with a null slot so capacity parity is exact. The
     # ablation is which index is fed, not whether the machinery exists.
-    from forge.design.flow.ugi_joint_sparse_flow import ROLE_NAMES
+    from forge.model.ugi_joint_sparse_flow import ROLE_NAMES
+
     assert names["role_embedding.weight"].shape[0] == len(ROLE_NAMES) + 1, (
         "the flat arms must share one role table including the null slot, so their parameter "
-        "counts are identical and the ablation is the fed index rather than the capacity")
-    assert "position_embedding.weight" in names, (
-        "the flat arm needs generic sequence position; removing it handicaps the baseline")
+        "counts are identical and the ablation is the fed index rather than the capacity"
+    )
+    assert (
+        "position_embedding.weight" in names
+    ), "the flat arm needs generic sequence position; removing it handicaps the baseline"
     rows = names["position_embedding.weight"].shape[0]
     assert rows == int(architecture["maximum_total_atoms"]), (
         f"flat position embedding has {rows} rows; a global sequence position embedding must span "
         f"maximum_total_atoms ({architecture['maximum_total_atoms']}), not "
-        f"maximum_component_atoms ({architecture['maximum_component_atoms']})")
+        f"maximum_component_atoms ({architecture['maximum_component_atoms']})"
+    )
 
 
 @requires_switch
@@ -168,12 +179,14 @@ def test_flat_position_index_is_global_not_within_role(corpus_and_records, archi
         observed = positions[index][mask[index]].tolist()
         assert observed == list(range(record.node_count)), (
             "flat positions must run 0..node_count-1 over the whole molecule; a per-role counter "
-            "that resets at each region boundary reintroduces role through position")
+            "that resets at each region boundary reintroduces role through position"
+        )
 
 
 @requires_switch
-def test_role_is_not_recoverable_from_the_flat_arm_layout_channels(corpus_and_records,
-                                                                  architecture):
+def test_role_is_not_recoverable_from_the_flat_arm_layout_channels(
+    corpus_and_records, architecture
+):
     """The model-level leakage test, scoped to the channels that carry role in the structured arm.
 
     Scoping matters or this test fails for the wrong reason. Role IS partly inferable from atom and
@@ -188,6 +201,7 @@ def test_role_is_not_recoverable_from_the_flat_arm_layout_channels(corpus_and_re
     majority-class baseline rather than near 1.0.
     """
     from collections import defaultdict
+
     _, records_by_fold = corpus_and_records
     fit = list(itertools.islice(records_by_fold["train"], 4096))
     evaluate = list(itertools.islice(records_by_fold["calibration"], 1024))
@@ -201,8 +215,9 @@ def test_role_is_not_recoverable_from_the_flat_arm_layout_channels(corpus_and_re
         for index, record in enumerate(records):
             program = tuple(int(v) for v in flat["programs"][index].tolist())
             selected = mask[index]
-            for position, role in zip(positions[index][selected].tolist(),
-                                      truth[index][selected].tolist(), strict=True):
+            for position, role in zip(
+                positions[index][selected].tolist(), truth[index][selected].tolist(), strict=True
+            ):
                 out.append(((position, program), role))
         return out
 
@@ -227,14 +242,18 @@ def test_role_is_not_recoverable_from_the_flat_arm_layout_channels(corpus_and_re
     # of the molecule class, not an encoding choice.
     assert accuracy < 0.95, (
         f"role recovered at {accuracy:.4f}; at or above 0.95 this is not an ablation at all and the "
-        "arm is void")
+        "arm is void"
+    )
     assert accuracy <= baseline + 0.35, (
         f"role recovered at {accuracy:.4f} against a {baseline:.4f} baseline, a lift beyond the "
-        "partial-ablation band; the flat layout is not removing enough")
+        "partial-ablation band; the flat layout is not removing enough"
+    )
     # Recorded for the arm's own audit: this is a PARTIAL ablation and every statement about the
     # flat arm must carry this figure, exactly as the origin-channel rule requires.
-    print(f"\n  partial ablation: role recoverability {accuracy:.4f} against baseline "
-          f"{baseline:.4f}; structured arm is 1.000 by construction")
+    print(
+        f"\n  partial ablation: role recoverability {accuracy:.4f} against baseline "
+        f"{baseline:.4f}; structured arm is 1.000 by construction"
+    )
 
 
 @requires_switch
@@ -242,10 +261,16 @@ def test_flat_arm_consumes_the_program_without_role_indexed_tables(architecture)
     """Parity requires the same twelve numbers, not the same role-indexed consumption of them."""
     model = UgiJointSparseFlow(atom_classes=14, semantic_organization=FLAT, **architecture)
     names = list(dict(model.named_parameters()))
-    for banned in ("count_embeddings", "junction_embeddings", "cycle_embeddings",
-                   "attachment_embeddings", "pending_embedding"):
-        assert not any(n.startswith(banned) for n in names), (
-            f"{banned} is role-indexed and must not survive into the flat arm")
+    for banned in (
+        "count_embeddings",
+        "junction_embeddings",
+        "cycle_embeddings",
+        "attachment_embeddings",
+        "pending_embedding",
+    ):
+        assert not any(
+            n.startswith(banned) for n in names
+        ), f"{banned} is role-indexed and must not survive into the flat arm"
 
 
 # --------------------------------------------------------------- 2. parity must be preserved
@@ -260,19 +285,22 @@ def test_both_arms_receive_the_identical_program_vector(corpus_and_records, arch
     flat = _batch(records, architecture, semantic_organization=FLAT)
     assert torch.equal(structured["programs"], flat["programs"]), (
         "the flat arm must receive the same program vector; a different vector makes any "
-        "advantage uninterpretable")
+        "advantage uninterpretable"
+    )
 
 
 @requires_switch
 def test_parameter_counts_are_close_enough_to_report(architecture):
-    structured = UgiJointSparseFlow(atom_classes=14, semantic_organization=STRUCTURED,
-                                    **architecture)
+    structured = UgiJointSparseFlow(
+        atom_classes=14, semantic_organization=STRUCTURED, **architecture
+    )
     flat = UgiJointSparseFlow(atom_classes=14, semantic_organization=FLAT, **architecture)
     a = sum(p.numel() for p in structured.parameters())
     b = sum(p.numel() for p in flat.parameters())
     assert abs(a - b) / a < 0.10, (
         f"parameter counts differ by more than 10% ({a} vs {b}); the parity table must either "
-        "match capacity or state the gap explicitly")
+        "match capacity or state the gap explicitly"
+    )
 
 
 @requires_switch
@@ -284,16 +312,18 @@ def test_structured_arm_is_unchanged_by_the_switch(corpus_and_records, architect
     with_flag = _batch(records, architecture, semantic_organization=STRUCTURED)
     for key in sorted(without):
         assert key in with_flag, f"{key} vanished when the default was named explicitly"
-        assert torch.equal(without[key], with_flag[key]), (
-            f"{key} changed when semantic_organization was set to its default")
+        assert torch.equal(
+            without[key], with_flag[key]
+        ), f"{key} changed when semantic_organization was set to its default"
 
 
 @requires_switch
 def test_reference_checkpoint_still_loads_into_the_default_arm(corpus_and_records, architecture):
     corpus, _ = corpus_and_records
     checkpoint = torch.load(REFERENCE, map_location="cpu", weights_only=False)
-    model = UgiJointSparseFlow(atom_classes=len(corpus.atom_vocabulary),
-                               semantic_organization=STRUCTURED, **architecture)
+    model = UgiJointSparseFlow(
+        atom_classes=len(corpus.atom_vocabulary), semantic_organization=STRUCTURED, **architecture
+    )
     model.load_state_dict(checkpoint["model_state"], strict=True)
 
 
@@ -303,48 +333,68 @@ def test_reference_checkpoint_still_loads_into_the_default_arm(corpus_and_record
 @requires_switch
 def test_flat_arm_uses_a_pooled_loss_not_a_role_balanced_one(corpus_and_records, architecture):
     """A role-balanced objective is role structure. It must not survive the ablation."""
-    from forge.design.flow.ugi_joint_sparse_flow import ugi_joint_sparse_loss
+    from forge.model.ugi_joint_sparse_flow import ugi_joint_sparse_loss
+
     corpus, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 64))
     flat = _batch(records, architecture, semantic_organization=FLAT)
-    model = UgiJointSparseFlow(atom_classes=len(corpus.atom_vocabulary),
-                               semantic_organization=FLAT, **architecture)
+    model = UgiJointSparseFlow(
+        atom_classes=len(corpus.atom_vocabulary), semantic_organization=FLAT, **architecture
+    )
     model.eval()
     with torch.no_grad():
         predictions = model(
-            offspring=flat["offspring"], nodes=flat["nodes"],
-            parent_bonds=flat["parent_bonds"], programs=flat["programs"],
+            offspring=flat["offspring"],
+            nodes=flat["nodes"],
+            parent_bonds=flat["parent_bonds"],
+            programs=flat["programs"],
             role_states=flat["role_states"],
             within_role_positions=flat["within_role_positions"],
-            node_mask=flat["node_mask"], t=torch.full((len(records),), 0.5),
-            **{k: flat[k] for k in ("closure_left", "closure_right", "decoration_anchors",
-                                    "decoration_atoms", "decoration_bonds") if k in flat})
-        _, metrics = ugi_joint_sparse_loss(predictions, flat,
-                                           semantic_organization=FLAT)
-    assert not any("amine" in k or "isocyanide" in k or "oxoester" in k for k in metrics), (
-        "the flat arm reported per-role loss terms, so the objective is still role-partitioned")
+            node_mask=flat["node_mask"],
+            t=torch.full((len(records),), 0.5),
+            **{
+                k: flat[k]
+                for k in (
+                    "closure_left",
+                    "closure_right",
+                    "decoration_anchors",
+                    "decoration_atoms",
+                    "decoration_bonds",
+                )
+                if k in flat
+            },
+        )
+        _, metrics = ugi_joint_sparse_loss(predictions, flat, semantic_organization=FLAT)
+    assert not any(
+        "amine" in k or "isocyanide" in k or "oxoester" in k for k in metrics
+    ), "the flat arm reported per-role loss terms, so the objective is still role-partitioned"
 
 
 @requires_switch
 def test_flat_arm_source_marginals_are_pooled(corpus_and_records, architecture):
     import numpy as np
 
-    from forge.design.flow.ugi_joint_sparse_flow import joint_sparse_source_marginals
+    from forge.model.ugi_joint_sparse_flow import joint_sparse_source_marginals
+
     corpus, records_by_fold = corpus_and_records
     records = tuple(itertools.islice(records_by_fold["train"], 512))
     sources = joint_sparse_source_marginals(
-        records, atom_classes=len(corpus.atom_vocabulary),
+        records,
+        atom_classes=len(corpus.atom_vocabulary),
         bond_classes=int(architecture["bond_classes"]),
         maximum_children=int(architecture["maximum_children"]),
         maximum_decorations=int(architecture["maximum_decorations"]),
-        probability_floor=1e-5, semantic_organization=FLAT)
+        probability_floor=1e-5,
+        semantic_organization=FLAT,
+    )
     for key in ("atoms", "bonds", "offspring"):
         array = np.asarray(sources[key])
         # Pooled then broadcast back, so the shape the noiser expects is unchanged and every role
         # row carries the identical distribution.
         assert array.ndim == 2 and array.shape[0] == 3, array.shape
-        assert np.allclose(array[0], array[1]) and np.allclose(array[1], array[2]), (
-            f"source marginal '{key}' still differs by role; the flat arms must pool it")
+        assert np.allclose(array[0], array[1]) and np.allclose(
+            array[1], array[2]
+        ), f"source marginal '{key}' still differs by role; the flat arms must pool it"
 
 
 # ------------------------------------------------------ 4. the causal check, after training
@@ -362,18 +412,34 @@ def test_flat_arm_has_no_privileged_region_structure(corpus_and_records, archite
     corpus, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 32))
     flat = _batch(records, architecture, semantic_organization=FLAT)
-    model = UgiJointSparseFlow(atom_classes=len(corpus.atom_vocabulary),
-                               semantic_organization=FLAT, **architecture)
+    model = UgiJointSparseFlow(
+        atom_classes=len(corpus.atom_vocabulary), semantic_organization=FLAT, **architecture
+    )
     model.eval()
-    keys = {k: flat[k] for k in ("closure_left", "closure_right", "decoration_anchors",
-                                 "decoration_atoms", "decoration_bonds") if k in flat}
+    keys = {
+        k: flat[k]
+        for k in (
+            "closure_left",
+            "closure_right",
+            "decoration_anchors",
+            "decoration_atoms",
+            "decoration_bonds",
+        )
+        if k in flat
+    }
 
     def run(nodes):
-        return model(offspring=flat["offspring"], nodes=nodes,
-                     parent_bonds=flat["parent_bonds"], programs=flat["programs"],
-                     role_states=flat["role_states"],
-                     within_role_positions=flat["within_role_positions"],
-                     node_mask=flat["node_mask"], t=torch.full((len(records),), 0.5), **keys)
+        return model(
+            offspring=flat["offspring"],
+            nodes=nodes,
+            parent_bonds=flat["parent_bonds"],
+            programs=flat["programs"],
+            role_states=flat["role_states"],
+            within_role_positions=flat["within_role_positions"],
+            node_mask=flat["node_mask"],
+            t=torch.full((len(records),), 0.5),
+            **keys,
+        )
 
     with torch.no_grad():
         base = run(flat["nodes"])
@@ -393,7 +459,8 @@ def test_flat_arm_has_no_privileged_region_structure(corpus_and_records, archite
     contiguous, spread = deltas
     assert 0.5 <= contiguous / spread <= 2.0, (
         f"a contiguous span behaves differently from a scattered subset "
-        f"({contiguous:.4f} vs {spread:.4f}); the flat arm still has privileged region structure")
+        f"({contiguous:.4f} vs {spread:.4f}); the flat arm still has privileged region structure"
+    )
 
 
 # ------------------------------- 5. the two arms differ in exactly one thing, checked functionally
@@ -409,15 +476,19 @@ def test_flat_role_labels_are_the_permuted_true_roles(corpus_and_records, archit
     """
     import numpy as np
 
-    from forge.design.flow.ugi_joint_sparse_flow import flat_subtree_permutation
+    from forge.model.ugi_joint_sparse_flow import flat_subtree_permutation
+
     _, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 64))
     flat = _batch(records, architecture, semantic_organization=FLAT_TRUE)
     for index, record in enumerate(records):
         permutation = flat_subtree_permutation(record)
-        blocks = np.concatenate([
-            np.full(count, role, dtype=np.int64)
-            for role, count in enumerate(record.program.node_counts)])
+        blocks = np.concatenate(
+            [
+                np.full(count, role, dtype=np.int64)
+                for role, count in enumerate(record.program.node_counts)
+            ]
+        )
         mask = flat["node_mask"][index]
         assert flat["role_states"][index][mask].tolist() == blocks[permutation].tolist()
 
@@ -437,34 +508,48 @@ def test_no_role_arm_output_is_invariant_to_the_role_channel(corpus_and_records,
     def logits(model, batch, roles):
         with torch.no_grad():
             return model(
-                offspring=batch["offspring"], nodes=batch["nodes"],
-                parent_bonds=batch["parent_bonds"], role_states=roles,
+                offspring=batch["offspring"],
+                nodes=batch["nodes"],
+                parent_bonds=batch["parent_bonds"],
+                role_states=roles,
                 within_role_positions=batch["within_role_positions"],
-                programs=batch["programs"], node_mask=batch["node_mask"],
+                programs=batch["programs"],
+                node_mask=batch["node_mask"],
                 t=torch.full((len(records),), 0.5),
-                closure_left=batch["closure_left"], closure_right=batch["closure_right"],
+                closure_left=batch["closure_left"],
+                closure_right=batch["closure_right"],
                 decoration_anchors=batch["decoration_anchors"],
                 decoration_atoms=batch["decoration_atoms"],
-                decoration_bonds=batch["decoration_bonds"])["nodes"]
+                decoration_bonds=batch["decoration_bonds"],
+            )["nodes"]
 
     torch.manual_seed(0)
     for organization, must_be_invariant in ((FLAT, True), (FLAT_TRUE, False)):
         batch = _batch(records, architecture, semantic_organization=organization)
         scrambled = torch.randint(0, 3, batch["role_states"].shape)
         torch.manual_seed(7)
-        model = UgiJointSparseFlow(atom_classes=len(corpus.atom_vocabulary),
-                                   semantic_organization=organization, **architecture)
+        model = UgiJointSparseFlow(
+            atom_classes=len(corpus.atom_vocabulary),
+            semantic_organization=organization,
+            **architecture,
+        )
         model.eval()
-        delta = (logits(model, batch, batch["role_states"])
-                 - logits(model, batch, scrambled)).abs().max().item()
+        delta = (
+            (logits(model, batch, batch["role_states"]) - logits(model, batch, scrambled))
+            .abs()
+            .max()
+            .item()
+        )
         if must_be_invariant:
             assert delta == 0.0, (
                 f"{organization} changed by {delta} when the role input was scrambled, so it is "
-                "consuming role and is not a no-role arm")
+                "consuming role and is not a no-role arm"
+            )
         else:
             assert delta > 0.0, (
                 f"{organization} did not change when the role input was scrambled, so it is not "
-                "consuming role at all")
+                "consuming role at all"
+            )
 
 
 # ------------------------------------------------ 6. paired randomness across the two pilot arms
@@ -484,12 +569,15 @@ def test_pilot_arms_are_paired_on_randomness_and_initialization(corpus_and_recor
         torch.manual_seed(20260817)
         built[organization] = UgiJointSparseFlow(
             atom_classes=len(corpus.atom_vocabulary),
-            semantic_organization=organization, **architecture).state_dict()
+            semantic_organization=organization,
+            **architecture,
+        ).state_dict()
     left, right = built[FLAT], built[FLAT_TRUE]
     assert sorted(left) == sorted(right), "the pilot arms do not share module structure"
     for key in left:
-        assert torch.equal(left[key], right[key]), (
-            f"{key} differs at initialization under the same seed, so the arms are not paired")
+        assert torch.equal(
+            left[key], right[key]
+        ), f"{key} differs at initialization under the same seed, so the arms are not paired"
 
 
 @requires_switch
@@ -498,6 +586,7 @@ def test_pilot_arms_draw_identical_minibatches_and_times(corpus_and_records, arc
     import json
 
     import numpy as np
+
     sealed = REPO / "results/phase1/forge_coverage_splits_v1/splits.json"
     if not sealed.exists():
         pytest.skip("sealed coverage splits are unavailable")

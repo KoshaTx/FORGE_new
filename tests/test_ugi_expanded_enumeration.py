@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from forge.design.corpus.ugi_expanded_enumeration import (
+from forge.corpus.ugi_expanded_enumeration import (
     PRODUCT_FIELDS,
     _component_novelty,
     _product_fold,

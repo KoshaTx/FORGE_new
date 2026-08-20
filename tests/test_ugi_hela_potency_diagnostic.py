@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from forge.potency.audit.ugi_hela_potency_diagnostic import (
+from experiments.phase1.hela_potency.evaluation import (
     HeLaPotencyDiagnosticPolicy,
     UgiHeLaPotencyDiagnosticError,
 )

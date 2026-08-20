@@ -7,8 +7,8 @@ from typing import Any
 
 import pytest
 
-from forge_cli import main
-from forge_experiment.errors import ExperimentError
+from cli import main
+from experiments._runtime.errors import ExperimentError
 
 
 def _run_raising(monkeypatch: pytest.MonkeyPatch, error: BaseException) -> int:

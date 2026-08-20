@@ -6,7 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.route.audit.ugi_high_potency_molecule_audit import build_audit
+from experiments.archive.phase1.synthesis_audits.ugi_high_potency_molecule_audit import build_audit
 
 
 def _sha256(path: Path) -> str:

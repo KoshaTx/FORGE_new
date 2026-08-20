@@ -6,9 +6,12 @@ from pathlib import Path
 
 import pytest
 
-import forge.design.flow.ugi_selected_guidance_adapter_v3 as adapter_v3
-from forge.design.flow.ugi_selected_guidance_adapter import _sha256_payload
-from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+import experiments.phase1.synthesis_guidance.adapters.selected_v3 as adapter_v3
+from experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator_v2 import (
+    _PENDING_EQUIVALENCE_SHA256,
+)
+from experiments.phase1.synthesis_guidance.adapters.selected_v1 import _sha256_payload
+from experiments.phase1.synthesis_guidance.adapters.selected_v3 import (
     EQUIVALENCE_RESULT_FILE_SHA256,
     EQUIVALENCE_RESULT_LOGICAL_SHA256,
     EQUIVALENCE_ROWS_FILE_SHA256,
@@ -21,9 +24,6 @@ from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
     _validate_comparison_rows,
     build_selected_model_restartable_guidance_lane_v3,
     load_selected_v2_equivalence_binding,
-)
-from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
-    _PENDING_EQUIVALENCE_SHA256,
 )
 
 REPO = Path(__file__).resolve().parents[1]

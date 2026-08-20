@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from forge.route.engine.aizynthfinder_single_step_recovery import (
+from forge.synthesis.engine.aizynthfinder_single_step_recovery import (
     SCORE_SCHEMA_VERSION as AIZYNTH_SCORE_SCHEMA_VERSION,
 )
-from forge.route.engine.graph2edits_single_step_recovery import (
+from forge.synthesis.engine.graph2edits_single_step_recovery import (
     SCORE_SCHEMA_VERSION as GRAPH2EDITS_SCORE_SCHEMA_VERSION,
 )
-from forge.route.engine.single_step_recovery_combination import combine_recovery_scores
+from forge.synthesis.engine.single_step_recovery_combination import combine_recovery_scores
 
 
 def _score(schema: str, *, recovered: set[int]) -> dict[str, object]:

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.audit.source_review import (
+from experiments.archive.phase1.synthesis_audits.source_review import (
     SourceReviewError,
     build_source_review_index,
     write_source_review_index,

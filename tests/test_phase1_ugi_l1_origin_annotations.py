@@ -6,12 +6,12 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.audit.ugi_semantic_annotations import (
+from forge.potency.annotations import (
     ROLE_NAMES,
     UgiSemanticAnnotationError,
     annotate_qualified_ugi_product,
 )
-from forge.route.engine.qualified_forward import load_qualified_forward_reaction
+from forge.synthesis.engine.qualified_forward import load_qualified_forward_reaction
 
 REPO = Path(__file__).resolve().parents[1]
 

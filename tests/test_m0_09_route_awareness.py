@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.assessment.route_awareness import (
+from forge.synthesis.assessment.route_awareness import (
     RouteAwarenessError,
     analyze_agile_measured,
     build_route_awareness,

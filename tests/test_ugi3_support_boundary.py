@@ -4,7 +4,7 @@ from collections import Counter
 
 import pytest
 
-from forge.route.assessment.ugi3_support_boundary import (
+from forge.synthesis.assessment.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,
     MolecularSupportState,
     RoutePriorityLane,
@@ -14,7 +14,7 @@ from forge.route.assessment.ugi3_support_boundary import (
     qualification_key,
     route_priority_lane,
 )
-from forge.route.engine.planner import (
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceRecord,

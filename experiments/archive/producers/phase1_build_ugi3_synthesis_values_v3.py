@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""Build versioned Ugi synthesis values after the third exact-terminal wave."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import tempfile
+from pathlib import Path
+
+from experiments.archive.phase1.synthesis_value_audits.ugi3_synthesis_value_audit_v3 import (
+    build_ugi3_synthesis_value_audit_v3,
+)
+
+REPO = Path(__file__).resolve().parents[3]
+
+INPUT_PATHS = {
+    "audit_source": REPO / "src/forge/value/ugi3_synthesis_value_audit_v3.py",
+    "base_component_values": REPO
+    / "results/phase1/ugi3_synthesis_value_audit_v2/component_synthesis_values.json.gz",
+    "base_config": REPO / "configs/route/phase1_ugi3_synthesis_value_audit_v2.json",
+    "base_product_values": REPO
+    / "results/phase1/ugi3_synthesis_value_audit_v2/product_synthesis_values.json.gz",
+    "base_result": REPO / "results/phase1/ugi3_synthesis_value_audit_v2/result.json",
+    "generated_component_provenance": REPO
+    / "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz",
+    "generated_product_provenance": REPO
+    / "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz",
+    "qualifier_source": REPO / "scripts/phase1_build_ugi3_synthesis_values_v3.py",
+    "third_wave_config": REPO / "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+    "third_wave_product_impact": REPO
+    / "results/phase1/ugi3_third_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+    "third_wave_result": REPO / "results/phase1/ugi3_third_wave_head_terminal_audit_v1/result.json",
+    "value_source": REPO / "src/forge/value/synthesis.py",
+}
+
+THIRD_WAVE_INPUT_PATHS = {
+    "audit_source": REPO / "src/forge/route/ugi3_third_wave_head_terminals.py",
+    "evidence_pack": REPO / "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
+    "prior_product_impact": REPO
+    / "results/phase1/ugi3_second_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz",
+    "prior_result": REPO / "results/phase1/ugi3_second_wave_head_terminal_audit_v1/result.json",
+    "qualifier_source": REPO / "scripts/phase1_audit_ugi3_third_wave_head_terminals.py",
+    "readiness_ledger": REPO
+    / "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+    "supplier_page": REPO
+    / "data/source_cache/phase1_ugi3_third_wave_head_terminals"
+    / "chemimpex_03599_2026-08-01.html",
+}
+
+
+def _write_atomic(path: Path, payload: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    temporary = Path(name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=REPO / "configs/route/phase1_ugi3_synthesis_value_audit_v3.json",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=REPO / "results/phase1/ugi3_synthesis_value_audit_v3",
+    )
+    args = parser.parse_args()
+    result, component_ledger, product_ledger = build_ugi3_synthesis_value_audit_v3(
+        config_path=args.config,
+        input_paths=INPUT_PATHS,
+        third_wave_input_paths=THIRD_WAVE_INPUT_PATHS,
+    )
+    _write_atomic(args.output_dir / "component_synthesis_values.json.gz", component_ledger)
+    _write_atomic(args.output_dir / "product_synthesis_values.json.gz", product_ledger)
+    _write_atomic(
+        args.output_dir / "result.json",
+        (json.dumps(result, indent=2, sort_keys=True) + "\n").encode(),
+    )
+    print(json.dumps(result["summary"], indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

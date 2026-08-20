@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from forge_experiment.errors import BackendError
-from forge_experiment.modal import modal_request_plan
+from experiments._runtime.errors import BackendError
+from experiments._runtime.modal import modal_request_plan
 
 REPO = Path(__file__).resolve().parents[1]
-SPEC = REPO / "configs" / "experiments" / "installation-smoke.json"
+SPEC = REPO / "experiments" / "installation_smoke" / "experiment.json"
 
 
 def test_modal_plan_is_a_hash_pinned_dry_run() -> None:
@@ -23,8 +23,8 @@ def test_modal_plan_is_a_hash_pinned_dry_run() -> None:
     assert plan["run_id"] is None
     assert plan["resource_envelope"]["gpu_type"] is None
     assert set(plan["uploads"]) == {
-        "configs/experiments/installation-smoke.json",
-        "configs/experiments/stages/installation_snapshot_v1.json",
+        "experiments/installation_smoke/experiment.json",
+        "experiments/installation_smoke/configs/snapshot_v1.json",
         "pyproject.toml",
         "uv.lock",
     }

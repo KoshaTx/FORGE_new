@@ -5,7 +5,7 @@ import math
 import numpy as np
 import pytest
 
-from scripts.phase1_evaluate_ugi_numerical_sampler_convergence import (
+from experiments.archive.producers.phase1_evaluate_ugi_numerical_sampler_convergence import (
     _assert_matched_programs,
     _distribution_distance,
 )

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r0_splits import (
+from forge.corpus.r0_splits import (
     FOLDS,
     SCHEMES,
     SplitError,

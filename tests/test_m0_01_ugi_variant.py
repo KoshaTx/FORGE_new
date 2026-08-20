@@ -42,12 +42,7 @@ def test_config_declares_agile_3cr_without_carboxylic_acid_component() -> None:
     )
     assert cfg["compatibility"]["raw_required_handle_match_count"] == "diagnostic_only"
     assert cfg["compatibility"]["deduplicate_forward_products"] is True
-    assert (
-        cfg["compatibility"][
-            "multiple_unique_products_require_explicit_site_selection"
-        ]
-        is True
-    )
+    assert cfg["compatibility"]["multiple_unique_products_require_explicit_site_selection"] is True
 
 
 def test_smarts_has_exactly_three_reactants(ugi_reaction: dict) -> None:

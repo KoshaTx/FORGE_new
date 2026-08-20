@@ -7,9 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.route.engine.planner import AssessmentOutcome, RouteTarget
-from forge.value.audit.ugi3_graded_family_evidence_audit import (
+from experiments.archive.phase1.synthesis_value_audits.ugi3_graded_family_evidence_audit import (
     EXACT_COMPLETE,
     FAMILY_ALL_CURRENT,
     FAMILY_NO_CURRENT,
@@ -21,7 +19,9 @@ from forge.value.audit.ugi3_graded_family_evidence_audit import (
     build_graded_family_evidence_audit,
     classify_graded_evidence,
 )
-from forge.value.synthesis.synthesis import (
+from forge.corpus.r1_prime_audit import sha256_bytes, sha256_file
+from forge.synthesis.engine.planner import AssessmentOutcome, RouteTarget
+from forge.synthesis.value.contracts import (
     BurdenEstimate,
     ComponentSynthesisValue,
     EvidenceSupport,

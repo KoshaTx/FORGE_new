@@ -6,10 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
-from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
-from forge.route.engine.planner import RouteTarget
-from forge.route.engine.proposal_engine import (
+from forge.synthesis.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
+from forge.synthesis.assessment.ugi3_support_boundary import (
+    MolecularSupportState,
+    TargetQualification,
+)
+from forge.synthesis.engine.planner import RouteTarget
+from forge.synthesis.engine.proposal_engine import (
     OperationalCompatibility,
     ProposalBackendManifest,
     ProposalRequest,
@@ -17,7 +20,7 @@ from forge.route.engine.proposal_engine import (
     RootQualificationReceipt,
     SingleStepRetrosynthesisProposal,
 )
-from forge.route.engine.single_step_proposal_benchmark import (
+from forge.synthesis.engine.single_step_proposal_benchmark import (
     EXPECTED_LANES,
     BenchmarkContractError,
     BenchmarkExecutionBlockedError,

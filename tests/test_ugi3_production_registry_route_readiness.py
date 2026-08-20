@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.assessment.ugi3_production_registry_route_readiness import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.assessment.ugi3_production_registry_route_readiness import (
     ACCEPTED_TERMINAL,
     EXACT_CLOSED,
     EXACT_OPEN,

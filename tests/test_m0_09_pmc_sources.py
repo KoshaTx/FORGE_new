@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.sources.pmc_sources import (
+from forge.synthesis.sources.pmc_sources import (
     FetchResponse,
     PmcSourceError,
     acquire_pmc_queue,

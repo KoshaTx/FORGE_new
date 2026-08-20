@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.phase1_run_ugi_production_zero_guidance_rehearsal import (
+from experiments.archive.producers.phase1_run_ugi_production_zero_guidance_rehearsal import (
     EXECUTION_ORCHESTRATION_SOURCE_PATHS,
     ProductionZeroGuidanceExecutionError,
     _build_orchestration_implementation,
@@ -23,14 +23,15 @@ def test_orchestration_implementation_is_explicit_stable_and_self_including() ->
     assert [source["path"] for source in first["sources"]] == list(
         EXECUTION_ORCHESTRATION_SOURCE_PATHS
     )
-    assert "scripts/phase1_run_ugi_production_zero_guidance_rehearsal.py" in (
+    assert "experiments/archive/producers/phase1_run_ugi_production_zero_guidance_rehearsal.py" in (
         EXECUTION_ORCHESTRATION_SOURCE_PATHS
     )
-    assert "src/forge/product/ugi_zero_guidance_rehearsal.py" in (
+    assert "experiments/phase1/synthesis_guidance/guidance/ugi_zero_guidance_rehearsal.py" in (
         EXECUTION_ORCHESTRATION_SOURCE_PATHS
     )
-    assert "src/forge/product/ugi_matched_planner_cache_binding.py" in (
-        EXECUTION_ORCHESTRATION_SOURCE_PATHS
+    assert (
+        "experiments/phase1/synthesis_guidance/schedule/ugi_matched_planner_cache_binding.py"
+        in EXECUTION_ORCHESTRATION_SOURCE_PATHS
     )
     _require_orchestration_implementation_unchanged(REPO, first)
 

@@ -3,15 +3,16 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.data.r0_splits import sha256_file
-from forge.design.flow.defog_feasibility import AtomState
-from forge.design.flow.sparse_topology_feasibility import (
+from forge.corpus.r0_splits import sha256_file
+from forge.model.defog_feasibility import AtomState
+from forge.model.sparse_topology_feasibility import (
     sparse_constitutional_roundtrip_exact,
     sparse_roundtrip_exact,
     tensorize_sparse_row,
 )
 
 REPO = Path(__file__).resolve().parents[1]
+MOVES = json.loads((REPO / "docs/artifact_path_moves.json").read_text())["moves"]
 
 
 def _resolve(record: dict[str, str]) -> Path:
@@ -82,7 +83,7 @@ def test_historical_cuda_preflight_result_remains_self_describing() -> None:
         assert sha256_file(REPO / record["path"]) == record["sha256"]
     _assert_sha256(inputs["runner"]["sha256"])
     for path, expected in inputs["mounted_sources"].items():
-        assert (REPO / path).is_file()
+        assert (REPO / MOVES.get(path, path)).is_file()
         _assert_sha256(expected)
 
     measured = result["result"]
@@ -118,7 +119,7 @@ def test_historical_lipid_context_cuda_preflight_result_remains_self_describing(
         assert sha256_file(REPO / record["path"]) == record["sha256"]
     _assert_sha256(inputs["runner"]["sha256"])
     for path, expected in inputs["mounted_sources"].items():
-        assert (REPO / path).is_file()
+        assert (REPO / MOVES.get(path, path)).is_file()
         _assert_sha256(expected)
 
     preflight = json.loads((REPO / inputs["preflight_config"]["path"]).read_text())

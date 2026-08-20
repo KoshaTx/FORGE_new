@@ -6,8 +6,10 @@ import io
 import json
 from pathlib import Path
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.audit.ugi3_dossier_coverage import build_ugi3_dossier_coverage
+from experiments.archive.phase1.synthesis_audits.ugi3_dossier_coverage import (
+    build_ugi3_dossier_coverage,
+)
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.terminals.ugi3_virtual_programs import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.terminals.ugi3_virtual_programs import (
     ESTER_PROGRAM,
     ISOCYANIDE_PROGRAM,
     Ugi3VirtualProgramError,
@@ -20,18 +20,11 @@ from forge.route.terminals.ugi3_virtual_programs import (
 )
 
 REPO = Path(__file__).resolve().parents[1]
-CONFIG = (
-    REPO
-    / "configs/route/m0_09_agile_virtual_ugi3_component_programs.json"
-)
-COMPONENT_LEDGER = (
-    REPO / "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz"
-)
+CONFIG = REPO / "configs/route/m0_09_agile_virtual_ugi3_component_programs.json"
+COMPONENT_LEDGER = REPO / "results/m0_09/agile_virtual_ugi3_component_ledger.csv.gz"
 CAPABILITY = REPO / "results/m0_09/agile_virtual_ugi3_capability.json"
 SOURCE_ROUTES = REPO / "results/m0_09/agile_component_routes.json"
-RESULT = (
-    REPO / "results/m0_09/agile_virtual_ugi3_component_programs.json"
-)
+RESULT = REPO / "results/m0_09/agile_virtual_ugi3_component_programs.json"
 
 
 def _production_paths() -> tuple[Path, ...]:
@@ -135,21 +128,13 @@ def test_writer_is_deterministic_for_committed_payloads(
     tmp_path: Path,
 ) -> None:
     result = json.loads(RESULT.read_text())
-    details = result["artifacts"][
-        "agile_virtual_ugi3_component_program_ledger.csv.gz"
-    ]
+    details = result["artifacts"]["agile_virtual_ugi3_component_program_ledger.csv.gz"]
     ledger = (REPO / details["path"]).read_bytes()
 
     write_ugi3_virtual_component_programs(result, ledger, tmp_path)
-    first = {
-        path.name: path.read_bytes()
-        for path in tmp_path.iterdir()
-    }
+    first = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
     write_ugi3_virtual_component_programs(result, ledger, tmp_path)
-    second = {
-        path.name: path.read_bytes()
-        for path in tmp_path.iterdir()
-    }
+    second = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
 
     assert first == second
     assert not list(tmp_path.glob(".*.tmp"))
@@ -166,9 +151,7 @@ def test_committed_program_census_preserves_evidence_boundaries() -> None:
     assert summary["exact_source_programs_reproduced_structurally"] == 24
     assert summary["unique_proposed_intermediates"] == 65
     assert summary["unique_proposed_leaf_candidates"] == 33
-    aldehyde_scope = summary["substrate_scope"][
-        "oxoester_aldehyde_body_tail"
-    ]
+    aldehyde_scope = summary["substrate_scope"]["oxoester_aldehyde_body_tail"]
     assert aldehyde_scope["carbon_unsaturation"] == {
         "alkyne": {
             "components": 4,
@@ -199,20 +182,12 @@ def test_committed_program_census_preserves_evidence_boundaries() -> None:
             "unresolved_components": 0,
         },
     }
-    assert aldehyde_scope["carbon_branching"]["branched"][
-        "exact_source_programs"
-    ] == 2
+    assert aldehyde_scope["carbon_branching"]["branched"]["exact_source_programs"] == 2
     assert aldehyde_scope["ester_bearing"]["yes"]["components"] == 56
-    assert result["claims_boundary"][
-        "family_projection_is_exact_substrate_evidence"
-    ] is False
-    assert result["claims_boundary"][
-        "proposed_leaf_is_procurement_closed"
-    ] is False
+    assert result["claims_boundary"]["family_projection_is_exact_substrate_evidence"] is False
+    assert result["claims_boundary"]["proposed_leaf_is_procurement_closed"] is False
 
-    details = result["artifacts"][
-        "agile_virtual_ugi3_component_program_ledger.csv.gz"
-    ]
+    details = result["artifacts"]["agile_virtual_ugi3_component_program_ledger.csv.gz"]
     ledger_path = REPO / details["path"]
     assert ledger_path.stat().st_size == details["bytes"]
     assert sha256_file(ledger_path) == details["sha256"]
@@ -220,15 +195,11 @@ def test_committed_program_census_preserves_evidence_boundaries() -> None:
         rows = list(csv.DictReader(handle))
     assert len(rows) == 93
     assert all(json.loads(row["scope_features_json"]) for row in rows)
-    assert sum(
-        row["structural_program_status"]
-        == "exact_source_structure_reproduced"
-        for row in rows
-    ) == 24
-    assert sum(
-        row["structural_program_status"] == "family_projection_only"
-        for row in rows
-    ) == 47
+    assert (
+        sum(row["structural_program_status"] == "exact_source_structure_reproduced" for row in rows)
+        == 24
+    )
+    assert sum(row["structural_program_status"] == "family_projection_only" for row in rows) == 47
     assert all(
         row["route_closure"] != "computationally_complete"
         for row in rows

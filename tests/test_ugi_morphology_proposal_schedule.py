@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.schedule.ugi_morphology_proposal_schedule import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_morphology_proposal_schedule import (
     UgiMorphologyProposalScheduleError,
     _program_dict,
 )

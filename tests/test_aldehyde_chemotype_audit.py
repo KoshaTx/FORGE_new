@@ -17,7 +17,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def _audit():
-    path = REPO / "scripts/phase1_aldehyde_chemotype_audit_v1.py"
+    path = REPO / "experiments/archive/producers/phase1_aldehyde_chemotype_audit_v1.py"
     spec = importlib.util.spec_from_file_location("forge_chemotype_audit", path)
     module = importlib.util.module_from_spec(spec)
     sys.modules["forge_chemotype_audit"] = module
@@ -38,7 +38,7 @@ def label(smiles: str) -> str:
     [
         # the measured chemotype: acid esterified onto a diol, then oxidised
         ("CCCCCCCCCCC(=O)OCCCCCC=O", "ester_linked"),
-        ("CCCCCCCCCC(=O)OCCOCCC=O", "ester_linked"),          # ester wins over a co-occurring ether
+        ("CCCCCCCCCC(=O)OCCOCCC=O", "ester_linked"),  # ester wins over a co-occurring ether
         ("CCCCCCCCCC(=O)CCCOCCC=O", "ketone_and_ether"),
         ("CCCCCCCCCCCC(=O)CCCCC=O", "ketone_containing"),
         ("CCCCCCCOCCCC=O", "ether_linked"),

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.source_evidence_adjudication import (
+from forge.corpus.source_evidence_adjudication import (
     SourceEvidenceAdjudicationError,
     _canonical,
     _load_config,

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import ast
-import json
 import re
 from collections import defaultdict, deque
 from pathlib import Path
@@ -12,18 +11,18 @@ from typing import Any
 from forge_paper.contract import PaperContract
 from forge_paper.verification import provenance_closure
 from forge_provenance.pins import collect_pins
+from forge_provenance.resolver import HistoricalPinArchive
 
 from forge.core.hashing import sha256_file, sha256_tree
 from forge.core.io import write_json
-from forge.core.provenance_archive import HistoricalPinArchive
 
 
 def _candidates(repo: Path) -> tuple[str, ...]:
     paths = [
         path.relative_to(repo).as_posix()
         for root, patterns in (
-            (repo / "src/forge", ("*.py",)),
-            (repo / "scripts", ("*.py", "*.sh")),
+            (repo / "forge", ("*.py",)),
+            (repo / "experiments" / "archive", ("*.py", "*.sh")),
         )
         for pattern in patterns
         for path in root.rglob(pattern)
@@ -36,9 +35,9 @@ def _module_index(candidates: tuple[str, ...]) -> dict[str, str]:
     index: dict[str, str] = {}
     for relative in candidates:
         path = Path(relative)
-        if path.parts[:2] != ("src", "forge") or path.suffix != ".py":
+        if path.parts[:1] != ("forge",) or path.suffix != ".py":
             continue
-        module_parts = list(path.with_suffix("").parts[1:])
+        module_parts = list(path.with_suffix("").parts)
         if module_parts[-1] == "__init__":
             module_parts.pop()
         index[".".join(module_parts)] = relative
@@ -49,7 +48,8 @@ def _script_index(candidates: tuple[str, ...]) -> dict[str, str]:
     return {
         Path(relative).stem: relative
         for relative in candidates
-        if Path(relative).parts[:1] == ("scripts",) and Path(relative).suffix == ".py"
+        if Path(relative).parts[:3] == ("experiments", "archive", "producers")
+        and Path(relative).suffix == ".py"
     }
 
 
@@ -116,12 +116,14 @@ def _static_edges(
             literal = node.value.replace("\\", "/")
             if literal in candidates:
                 edges.add(literal)
-            elif literal.startswith("scripts/") and literal.endswith((".py", ".sh")):
+            elif literal.startswith("experiments/archive/producers/") and literal.endswith(
+                (".py", ".sh")
+            ):
                 if literal in candidates:
                     edges.add(literal)
     path_parts = Path(relative).parts
-    if path_parts[:2] == ("src", "forge"):
-        for depth in range(2, len(path_parts) - 1):
+    if path_parts[:1] == ("forge",):
+        for depth in range(1, len(path_parts) - 1):
             package_init = Path(*path_parts[: depth + 1], "__init__.py").as_posix()
             if package_init in candidates:
                 edges.add(package_init)
@@ -185,24 +187,26 @@ def survey_code(
         if unresolved:
             dynamic[relative] = unresolved
 
-    cli_roots = {
-        "src/forge/cli.py",
-        "src/forge/data/vendor.py",
-        "src/forge/experiment/modal_app.py",
-        "src/forge/provenance/archive.py",
-        "src/forge/provenance/pins.py",
-    }
-    for experiment in contract.registered_experiments:
-        spec_path = repo / "configs/experiments" / f"{experiment}.json"
-        if not spec_path.is_file():
-            continue
-        document = json.loads(spec_path.read_text())
-        for stage in document.get("stages", []):
-            implementation = stage.get("implementation")
-            if isinstance(implementation, str) and implementation.startswith("forge."):
-                module = implementation.rsplit(".", 1)[0]
-                if module in modules:
-                    cli_roots.add(modules[module])
+    cli_roots: set[str] = set()
+    active_sources = [
+        repo / "cli",
+        repo / "experiments" / "_runtime",
+        repo / "experiments" / "phase1",
+    ]
+    active_sources.extend(repo / "experiments" / name for name in ("__init__.py", "catalog.py"))
+    for source in active_sources:
+        paths = source.rglob("*.py") if source.is_dir() else (source,)
+        for path in paths:
+            if not path.is_file():
+                continue
+            edges, _ = _static_edges(
+                repo,
+                path.relative_to(repo).as_posix(),
+                modules=modules,
+                scripts=scripts,
+                candidates=candidates,
+            )
+            cli_roots.update(edges)
 
     evidence = provenance_closure(repo, contract)
     evidence_paths = {
@@ -215,7 +219,9 @@ def survey_code(
     # Older evidence builders did not always pin their own source. A script that names an artifact
     # in the recursive paper closure is therefore also a producer/consumer root. This closes the
     # gap without treating every historical script as live.
-    for relative in sorted(path for path in candidates if path.startswith("scripts/")):
+    for relative in sorted(
+        path for path in candidates if path.startswith("experiments/archive/producers/")
+    ):
         text = (repo / relative).read_text(errors="replace")
         literals = {
             match.group(1).rstrip("/")
@@ -233,14 +239,6 @@ def survey_code(
             for item in producer.command
             if item in candidates and item.endswith((".py", ".sh"))
         )
-    paper_roots.update(
-        {
-            "src/forge/paper/__init__.py",
-            "src/forge/paper/build.py",
-            "src/forge/paper/contract.py",
-            "src/forge/paper/verification.py",
-        }
-    )
     cli_reachable = _closure(cli_roots & candidates, graph)
     paper_reachable = _closure(paper_roots & candidates, graph)
     reachable_dynamic = sorted(
@@ -290,8 +288,11 @@ def survey_code(
                 "path": str(contract_path.relative_to(repo)),
                 "sha256": str(sha256_file(contract_path)),
             },
-            "scripts_tree_sha256": str(sha256_tree(repo / "scripts")),
-            "source_tree_sha256": str(sha256_tree(repo / "src/forge")),
+            "producers_tree_sha256": str(
+                sha256_tree(repo / "experiments" / "archive" / "producers")
+            ),
+            "archive_tree_sha256": str(sha256_tree(repo / "experiments" / "archive")),
+            "source_tree_sha256": str(sha256_tree(repo / "forge")),
         },
         "paper_id": contract.paper_id,
         "reachable_dynamic_imports": reachable_dynamic,

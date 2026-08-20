@@ -5,17 +5,17 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
-from forge.route.assessment.proposal_discovery_status import (
-    ProposalDiscoveryStatus,
-    SourceNeutralProposalDiscoveryResolver,
-)
-from forge.route.audit.graph2edits_one_gap_diagnostic import (
+from experiments.archive.phase1.synthesis_audits.graph2edits_one_gap_diagnostic import (
     build_request,
     extract_one_gap_targets,
     run_one_gap_diagnostic,
 )
-from forge.route.engine.proposal_engine import (
+from forge.synthesis.assessment.l2_forward_resolver import L2ForwardResolutionStatus
+from forge.synthesis.assessment.proposal_discovery_status import (
+    ProposalDiscoveryStatus,
+    SourceNeutralProposalDiscoveryResolver,
+)
+from forge.synthesis.engine.proposal_engine import (
     ProposalBackendManifest,
     SingleStepRetrosynthesisProposal,
 )

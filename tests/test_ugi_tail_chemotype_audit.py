@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from forge.design.audit.ugi_tail_chemotype_audit import (
+from experiments.phase1.product_l1.evaluation.tail_chemotype import (
     architecture_signature,
     chemotype_signature,
     compare_component_cohorts,

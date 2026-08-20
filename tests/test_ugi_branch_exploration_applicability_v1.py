@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.potency.applicability.ugi_branch_exploration_applicability_v1 import (
+from experiments.phase1.hela_potency.applicability import (
     _flatten_metadata,
     _prepare_branch_rows,
 )

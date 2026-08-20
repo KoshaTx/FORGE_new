@@ -60,8 +60,8 @@ def _tracked_paths() -> set[str]:
 
 
 def _unrecoverable_pins() -> list[str]:
-    from forge.core.provenance_archive import HistoricalPinArchive
     from forge_provenance.pins import load_moves
+    from forge_provenance.resolver import HistoricalPinArchive
 
     pinned = _pinned_python_identities()
     assert pinned, "no pinned .py paths found; the collector is probably broken"
@@ -132,10 +132,10 @@ def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> 
     Artifacts declare pins two ways. The common shape names the path in a field; the other keys the
     mapping by the path itself::
 
-        {"source_files": {"scripts/x.py": {"bytes": 1, "sha256": "..."}}}
+        {"source_files": {"experiments/archive/producers/x.py": {"bytes": 1, "sha256": "..."}}}
 
     Only the first was recognised, so the second went unverified -- 32 pins that appear nowhere
-    else, and the gate stayed green while `scripts/m0_07_oracle_graph_pretraining.py` drifted. That
+    else, and the gate stayed green while `experiments/archive/producers/m0_07_oracle_graph_pretraining.py` drifted. That
     drift was introduced by a one-line import rewrite during the bio-to-potency move and nothing
     reported it, which is precisely the failure a provenance gate exists to prevent.
     """
@@ -147,7 +147,9 @@ def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> 
         json.dumps(
             {
                 "inputs": {"declared": {"path": "src/forge/named.py", "sha256": other}},
-                "source_files": {"scripts/keyed.py": {"bytes": 12, "sha256": digest}},
+                "source_files": {
+                    "experiments/archive/producers/keyed.py": {"bytes": 12, "sha256": digest}
+                },
                 # A plain field whose value happens to carry a digest is not a pin: the key is not
                 # a path, so it must not be collected.
                 "summary": {"checksum": {"sha256": "c" * 64}},
@@ -156,7 +158,10 @@ def test_collect_pins_reads_the_path_keyed_declaration_shape(tmp_path: Path) -> 
     )
     found = {(pin.path, pin.sha256) for pin in collect_pins((tmp_path,))}
 
-    assert ("scripts/keyed.py", digest) in found, "path-keyed pin was not collected"
+    assert (
+        "experiments/archive/producers/keyed.py",
+        digest,
+    ) in found, "path-keyed pin was not collected"
     assert ("src/forge/named.py", other) in found, "field-named pin regressed"
     assert not any(path == "checksum" for path, _ in found), "a field name was mistaken for a path"
 

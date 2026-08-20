@@ -4,11 +4,12 @@ import ast
 import json
 from pathlib import Path
 
-from forge_experiment import registry
-from forge_experiment.spec import ExperimentSpec, StageSpec
+from experiments import load_catalog
+from experiments._runtime import registry
+from experiments._runtime.spec import ExperimentSpec, StageSpec
 
 REPO = Path(__file__).resolve().parents[1]
-EXPERIMENTS = REPO / "configs" / "experiments"
+PRODUCT_L1 = REPO / "experiments" / "phase1" / "product_l1"
 
 
 def _json(path: Path) -> dict[str, object]:
@@ -20,8 +21,9 @@ def _stage(spec: ExperimentSpec, stage_id: str) -> StageSpec:
 
 
 def test_training_specs_use_registered_stages_and_one_frozen_contract() -> None:
-    smoke = ExperimentSpec.load(EXPERIMENTS / "phase1-training-smoke.json")
-    production = ExperimentSpec.load(EXPERIMENTS / "phase1-training-production.json")
+    load_catalog()
+    smoke = ExperimentSpec.load(PRODUCT_L1 / "training_smoke.json")
+    production = ExperimentSpec.load(PRODUCT_L1 / "training_production.json")
     assert [stage.implementation for stage in smoke.stages] == [
         "corpus.ugi.training-cache-verify.v1",
         "generate.ugi.joint-train.v1",
@@ -60,10 +62,11 @@ def test_production_training_is_all_fold_fixed_step_and_uses_every_cached_record
 
 
 def test_sampling_contract_is_sharded_exact_l1_and_has_no_guidance_or_retries() -> None:
-    spec = ExperimentSpec.load(EXPERIMENTS / "phase1-sampling.json")
+    load_catalog()
+    spec = ExperimentSpec.load(PRODUCT_L1 / "sampling.json")
     stage = _stage(spec, "sample")
     registry.resolve(stage.implementation)
-    config = _json(EXPERIMENTS / "stages" / "phase1_sampling_v1.json")
+    config = _json(PRODUCT_L1 / "configs" / "sampling_v1.json")
     assert config["inputs"] == {label: pin.to_mapping() for label, pin in stage.inputs.items()}
     profiles = config["profiles"]
     assert isinstance(profiles, dict)
@@ -83,23 +86,32 @@ def test_sampling_contract_is_sharded_exact_l1_and_has_no_guidance_or_retries() 
 
 
 def test_importing_the_runner_does_not_pull_in_the_training_stack() -> None:
-    """The stage bodies must keep their `forge.design` imports function-local.
+    """The application adapters must keep heavyweight scientific imports function-local.
 
-    `model_stages` lives inside the runner, so nothing structural stops someone hoisting those
-    imports to module level for tidiness. Doing so costs ~550ms and drags in torch, which is an
-    optional extra -- `forge experiment list` and `forge doctor` would then fail outright for anyone
-    who installed without it. This is the property that used to be protected by keeping the stages
-    in a separate package; it is now protected by this test.
+    Loading the catalog must not drag in torch, which is an optional extra. The application module
+    may import lightweight core serialization at module scope; model, corpus, training, and sampling
+    implementations stay inside their stage functions.
     """
-    source = Path(__file__).resolve().parents[1] / "src" / "forge_experiment" / "model_stages.py"
+    source = PRODUCT_L1 / "stages.py"
     tree = ast.parse(source.read_text())
 
     module_level = {
         node.module for node in tree.body if isinstance(node, ast.ImportFrom) and node.module
     }
-    domain = {name for name in module_level if name.startswith(("forge.design", "forge.corpus"))}
+    domain = {
+        name
+        for name in module_level
+        if name.startswith(
+            (
+                "forge.corpus",
+                "forge.model",
+                "experiments.phase1.product_l1.sampling",
+                "experiments.phase1.product_l1.training",
+            )
+        )
+    }
 
     assert not domain, (
-        "model_stages imports the science at module level, which makes torch a hard requirement "
+        "product_l1 stages import the science at module level, making torch a hard requirement "
         f"for every runner command: {sorted(domain)}"
     )

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.design.flow.ugi_route_aware_panel_feasibility import summarize_route_records
+from experiments.phase1.synthesis_guidance.feasibility import summarize_route_records
 
 
 def _record(

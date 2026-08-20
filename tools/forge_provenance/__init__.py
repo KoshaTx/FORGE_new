@@ -5,9 +5,9 @@ repository root from its own location and walks `results/`, `configs/`, `docs/pr
 `provenance/frozen-code/`, none of which ship in the wheel. Shipping the code without the trees it
 reads would give an installer a command that can only fail.
 
-`forge.core.provenance_archive` stays in the library on purpose -- that is the resolver, a
-primitive that maps a (path, digest) to archived bytes. This is the verifier and archiver built on
-top of it: tooling that operates on the repository, like `forge_maintenance` beside it.
+`forge_provenance.resolver` is a compatibility re-export of the generic experiment-runtime
+resolver: active applications may need to map a historical `(path, digest)` to archived bytes.
+The verifier and archiver here remain repository tooling, like `forge_maintenance` beside them.
 """
 
 from forge_provenance.archive import archive

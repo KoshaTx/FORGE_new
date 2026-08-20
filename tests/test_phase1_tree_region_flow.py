@@ -7,7 +7,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.phase1_tree_region_flow import (  # noqa: E402
+from forge.model.phase1_tree_region_flow import (  # noqa: E402
     ConditionalTreeRegionFlow,
     collate_region_records,
     noise_region_batch,

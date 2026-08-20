@@ -1,6 +1,8 @@
 import numpy as np
 
-from forge.potency.morphology.ugi_morphology_potency_signal import prediction_metrics
+from experiments.phase1.hela_potency.morphology.ugi_morphology_potency_signal import (
+    prediction_metrics,
+)
 
 
 def test_prediction_metrics_detect_rank_and_top_quartile_signal() -> None:

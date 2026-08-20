@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.route.engine.qualified_forward import load_qualified_forward_reaction
-from forge.route.evidence.ugi3_stepwise_route_program_adjudication import _execute_program
-from forge.route.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE
+from forge.synthesis.engine.qualified_forward import load_qualified_forward_reaction
+from forge.synthesis.evidence.ugi3_stepwise_route_program_adjudication import _execute_program
+from forge.synthesis.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE
 
 
 def test_stepwise_program_reconstructs_unseen_spacer_length() -> None:

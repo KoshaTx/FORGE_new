@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.route.engine.planner import RouteTarget
-from forge.value.coverage.ugi3_fresh_pool_route_coverage_v2 import (
+from experiments.phase1.synthesis_guidance.sources.coverage.ugi3_fresh_pool_route_coverage_v2 import (
     ALDEHYDE_ROLE,
     ALDEHYDE_SMILES,
     HEAD_ROLE,
@@ -11,6 +10,7 @@ from forge.value.coverage.ugi3_fresh_pool_route_coverage_v2 import (
     _terminal_value,
     build_fresh_pool_route_coverage_v2,
 )
+from forge.synthesis.engine.planner import RouteTarget
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -165,7 +165,7 @@ only the source, generated includes, styles, bibliography, and figures actually 
 The retirement inventory is reproducible too:
 
 ```bash
-forge maintenance survey --output provenance/code-retirement/iclr2027.json
+make code-survey
 ```
 
 It roots reachability at the supported CLI, registered experiments, direct paper producers, every
@@ -177,8 +177,7 @@ After a complete clean-cache test run, produce the machine-readable baseline com
 
 ```bash
 pytest -q --tb=no --cache-clear
-forge maintenance test-report \
-  --output results/maintenance/bio_to_potency_migration_v1/test_baseline.json
+make test-baseline-report
 ```
 
 The report intersects pytest's `lastfailed` cache with the exact collected-node cache, compares that

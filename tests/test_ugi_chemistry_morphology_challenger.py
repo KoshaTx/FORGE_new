@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from forge.design.flow.ugi_chemistry_morphology_challenger import challenger_checks
+from experiments.archive.phase1.design_audits.ugi_chemistry_morphology_challenger import (
+    challenger_checks,
+)
 
 
 def test_challenger_checks_apply_frozen_intervals() -> None:

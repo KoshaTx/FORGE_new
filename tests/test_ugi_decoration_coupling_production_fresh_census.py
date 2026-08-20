@@ -4,12 +4,13 @@ import importlib.util
 import json
 from pathlib import Path
 
-from forge.data.r1_prime_audit import sha256_file
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG_PATH = REPO / "configs/model/phase1_ugi_decoration_coupling_production_fresh_census_v1.json"
 COLLECTOR_PATH = (
-    REPO / "scripts/phase1_collect_ugi_decoration_coupling_production_fresh_census_v1.py"
+    REPO
+    / "experiments/archive/producers/phase1_collect_ugi_decoration_coupling_production_fresh_census_v1.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "phase1_collect_ugi_decoration_coupling_production_fresh_census_v1",

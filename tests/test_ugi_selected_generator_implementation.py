@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.sampling.ugi_selected_generator_implementation import (
+from experiments.phase1.product_l1.sampling.ugi_selected_generator_implementation import (
     SELECTED_GENERATOR_SOURCE_PATHS,
     SelectedGeneratorSourceArtifact,
     UgiSelectedGeneratorImplementationError,
@@ -24,9 +24,12 @@ def test_real_productive_implementation_is_complete_stable_and_typed() -> None:
     assert first.implementation_sha256 == second.implementation_sha256
     assert tuple(source.path for source in first.sources) == SELECTED_GENERATOR_SOURCE_PATHS
     assert len(first.sources) == 34
-    assert "src/forge/product/phase1_tree_topology_flow.py" in SELECTED_GENERATOR_SOURCE_PATHS
-    assert "src/forge/product/ugi_synthesis_guidance.py" in SELECTED_GENERATOR_SOURCE_PATHS
-    assert "src/forge/data/r1_prime_audit.py" in SELECTED_GENERATOR_SOURCE_PATHS
+    assert "forge/model/phase1_tree_topology_flow.py" in SELECTED_GENERATOR_SOURCE_PATHS
+    assert (
+        "experiments/phase1/synthesis_guidance/guidance/ugi_synthesis_guidance.py"
+        in SELECTED_GENERATOR_SOURCE_PATHS
+    )
+    assert "forge/corpus/r1_prime_audit.py" in SELECTED_GENERATOR_SOURCE_PATHS
     assert {name for name, _ in first.runtime_versions} == {
         "numpy",
         "python",

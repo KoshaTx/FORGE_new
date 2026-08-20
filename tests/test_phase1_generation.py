@@ -8,9 +8,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.defog_feasibility import AtomState, _model_state_sha256  # noqa: E402
-from forge.design.flow.phase1_flow import Phase1FlowError, SparseWholeLipidFlow  # noqa: E402
-from forge.design.sampling.phase1_generation import (  # noqa: E402
+from experiments.phase1.product_l1.sampling.phase1_generation import (  # noqa: E402
     _closure_pair_log_bias,
     _construct_product_terminal_graph,
     _degree_continuation_log_bias,
@@ -19,6 +17,8 @@ from forge.design.sampling.phase1_generation import (  # noqa: E402
     maximum_likelihood_count_distributions,
     sample_product_endpoints,
 )
+from forge.model.defog_feasibility import AtomState, _model_state_sha256  # noqa: E402
+from forge.model.phase1_flow import Phase1FlowError, SparseWholeLipidFlow  # noqa: E402
 
 
 def _model() -> SparseWholeLipidFlow:
@@ -213,7 +213,7 @@ def test_terminal_decoder_preserves_clean_bfs_parent_support() -> None:
 
 
 def test_closure_pair_prior_corrects_endpoint_multiplicity() -> None:
-    from forge.design.flow.lipid_context import tree_pair_ring_sizes
+    from forge.model.lipid_context import tree_pair_ring_sizes
 
     parents = np.asarray([0, 0, 1, 2, 3, 4], dtype=np.int64)
     node_count = len(parents)

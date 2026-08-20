@@ -7,7 +7,15 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.engine.planner import (
+from experiments.phase1.synthesis_guidance.sources.ugi3_cumulative_production_source import (
+    LAYER_ORDER,
+    AuthenticatedExactTerminalDeltaOverlay,
+    CumulativeUgi3ProductionPaths,
+    Ugi3CumulativeProductionSourceError,
+    load_authenticated_fresh_exact_terminal_delta,
+    load_cumulative_production_ugi3_source,
+)
+from forge.synthesis.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -15,14 +23,6 @@ from forge.route.engine.planner import (
     KnowledgeDisposition,
     KnowledgeResult,
     RouteTarget,
-)
-from forge.route.sources.ugi3_cumulative_production_source import (
-    LAYER_ORDER,
-    AuthenticatedExactTerminalDeltaOverlay,
-    CumulativeUgi3ProductionPaths,
-    Ugi3CumulativeProductionSourceError,
-    load_authenticated_fresh_exact_terminal_delta,
-    load_cumulative_production_ugi3_source,
 )
 
 REPO = Path(__file__).resolve().parents[1]

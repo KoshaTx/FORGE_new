@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.io import atomic_write, write_json
-from forge.core.provenance_archive import HISTORICAL_PIN_ARCHIVE_SCHEMA
 from forge_provenance.pins import (
     FOREIGN_PREFIXES,
     Pin,
@@ -25,16 +24,33 @@ from forge_provenance.pins import (
     load_baseline,
     load_moves,
 )
+from forge_provenance.resolver import HISTORICAL_PIN_ARCHIVE_SCHEMA
 
 REPO = Path(__file__).resolve().parents[2]
 ARCHIVE_ROOT = REPO / "provenance" / "frozen-code"
 
-# `configs/` is scanned alongside the result artifacts because a frozen config pins the source that
-# produced it (`inputs.source.{path,sha256}`), and those pins outnumber the ones results declare
-# roughly four to one. They were unscanned until now, so the code revisions they name were the ones
-# most likely to be lost: recovering them grew this archive from 137 entries to 449.
-DEFAULT_ROOTS = (REPO / "results", REPO / "docs" / "provenance", REPO / "configs")
-ELIGIBLE_PREFIXES = ("configs/", "scripts/", "src/", "tests/")
+# Frozen configuration lives both in `configs/` and beside the active experiment applications.
+# Scan both alongside result artifacts so moving a specification never drops its source pins from
+# the archive boundary.
+DEFAULT_ROOTS = (
+    REPO / "results",
+    REPO / "docs" / "provenance",
+    REPO / "configs",
+    REPO / "experiments",
+)
+# Historical prefixes remain eligible because frozen artifacts still name them. Current prefixes
+# allow new records to preserve source identity without recreating the old layout.
+ELIGIBLE_PREFIXES = (
+    "cli/",
+    "configs/",
+    "experiments/",
+    "forge/",
+    "paper/",
+    "scripts/",
+    "src/",
+    "tests/",
+    "tools/",
+)
 ELIGIBLE_ROOT_FILES = frozenset({"Makefile", "pyproject.toml"})
 
 

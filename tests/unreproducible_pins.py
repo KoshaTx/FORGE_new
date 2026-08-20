@@ -19,9 +19,7 @@ See docs/DECISION_LOG.md, entry dated 2026-08-06.
 
 from __future__ import annotations
 
-UNREPRODUCIBLE_PIN_REASON = (
-    "pinned source revision predates version control and is unrecoverable; see docs/DECISION_LOG.md 2026-08-06"
-)
+UNREPRODUCIBLE_PIN_REASON = "pinned source revision predates version control and is unrecoverable; see docs/DECISION_LOG.md 2026-08-06"
 
 # Tests whose pin check runs inside a module-scoped fixture, so the mismatch
 # surfaces as an error during setup rather than a failure in the test body.

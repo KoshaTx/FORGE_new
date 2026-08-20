@@ -4,7 +4,7 @@ import inspect
 
 import pytest
 
-from forge.bio.endpoint import EndpointError, endpoint_ids, load_endpoint
+from forge.potency.endpoint import EndpointError, endpoint_ids, load_endpoint
 
 
 def test_endpoint_registry_has_no_implicit_default() -> None:

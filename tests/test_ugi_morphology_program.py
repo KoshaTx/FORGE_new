@@ -8,10 +8,12 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-import forge.design.flow.ugi_morphology_program as morphology_program
-from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
-from forge.design.flow.ugi_adapter_features import tensorize_ugi_l1_support_record
-from forge.design.flow.ugi_morphology_program import (
+import forge.model.ugi_morphology_program as morphology_program
+from experiments.archive.phase1.design_audits.canonical_representation_audit import (
+    load_atom_vocabulary,
+)
+from forge.model.ugi_adapter_features import tensorize_ugi_l1_support_record
+from forge.model.ugi_morphology_program import (
     UgiProductMorphology,
     attached_tree_matches_program,
     component_weighted_offspring_marginals,
@@ -24,7 +26,7 @@ from forge.design.flow.ugi_morphology_program import (
     sample_component_weighted_programs,
     split_ugi_support_morphology,
 )
-from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.potency.annotations import ROLE_NAMES
 
 torch = pytest.importorskip("torch")
 REPO = Path(__file__).resolve().parents[1]

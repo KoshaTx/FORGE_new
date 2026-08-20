@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.design.training.ugi_closure_training import (
+from experiments.phase1.product_l1.training.ugi_closure_training import (
     UgiClosureTrainingError,
     _closure_selection_key,
 )

@@ -11,8 +11,8 @@ from rdkit import Chem
 
 torch = pytest.importorskip("torch")
 
-from forge.design.flow.defog_feasibility import AtomState, sha256_file  # noqa: E402
-from forge.design.flow.sparse_topology_feasibility import (  # noqa: E402
+from forge.model.defog_feasibility import AtomState, sha256_file  # noqa: E402
+from forge.model.sparse_topology_feasibility import (  # noqa: E402
     INDEX_TO_DENSE_BOND,
     SparseTopologyFlowProbe,
     _connected,

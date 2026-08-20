@@ -25,7 +25,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def _audit():
-    path = REPO / "scripts/phase1_route_grounding_audit_v1.py"
+    path = REPO / "experiments/archive/producers/phase1_route_grounding_audit_v1.py"
     spec = importlib.util.spec_from_file_location("forge_route_audit", path)
     module = importlib.util.module_from_spec(spec)
     sys.modules["forge_route_audit"] = module

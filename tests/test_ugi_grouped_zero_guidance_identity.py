@@ -6,7 +6,10 @@ from pathlib import Path
 
 import pytest
 
-from forge.design.guidance.ugi_grouped_zero_guidance_identity import (
+from experiments.archive.producers.phase1_qualify_ugi_grouped_zero_guidance_identity import (
+    _atomic_write_once,
+)
+from experiments.phase1.synthesis_guidance.guidance.ugi_grouped_zero_guidance_identity import (
     UgiGroupedZeroGuidanceIdentityError,
     _assert_completion_identity,
     _expanded_programs,
@@ -14,11 +17,10 @@ from forge.design.guidance.ugi_grouped_zero_guidance_identity import (
     _validate_blocked_runner_plan,
     _validate_restartable_v2,
 )
-from forge.design.schedule.ugi_nonzero_guidance_runner import (
+from experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner import (
     GuidanceTerminalCompletionReceipt,
     load_grouped_smc_schedule_qualification,
 )
-from scripts.phase1_qualify_ugi_grouped_zero_guidance_identity import _atomic_write_once
 
 REPO = Path(__file__).resolve().parents[1]
 

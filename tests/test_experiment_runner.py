@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
+from experiments._runtime.errors import RunExistsError, StageError, VerificationError
+from experiments._runtime.registry import StageRegistry
+from experiments._runtime.runner import ExperimentRunner, verify_run_directory
+from experiments._runtime.stage import ProducedArtifact, RunContext, StageResult
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write, write_json
-from forge_experiment.errors import RunExistsError, StageError, VerificationError
-from forge_experiment.registry import StageRegistry
-from forge_experiment.runner import ExperimentRunner, verify_run_directory
-from forge_experiment.stage import ProducedArtifact, RunContext, StageResult
 
 
 def pin(path: Path, repo: Path) -> dict[str, str]:
@@ -31,8 +31,8 @@ def resources() -> dict[str, object]:
 
 def build_repo(tmp_path: Path) -> tuple[Path, Path]:
     repo = tmp_path
-    (repo / "src" / "forge").mkdir(parents=True)
-    atomic_write(repo / "src" / "forge" / "example.py", b"VALUE = 1\n")
+    (repo / "forge").mkdir(parents=True)
+    atomic_write(repo / "forge" / "example.py", b"VALUE = 1\n")
     atomic_write(repo / "pyproject.toml", b"[project]\nname='fixture'\nversion='0'\n")
     (repo / "configs").mkdir()
     config = repo / "configs" / "stage.json"
@@ -70,9 +70,7 @@ def build_repo(tmp_path: Path) -> tuple[Path, Path]:
                 "needs": ["prepare"],
                 "config": pin(config, repo),
                 "inputs": {},
-                "outputs": {
-                    "score": {"path": "score.json", "schema_version": "test.score.v1"}
-                },
+                "outputs": {"score": {"path": "score.json", "schema_version": "test.score.v1"}},
                 "resources": resources(),
                 "determinism": {"mode": "strict", "stream": "evaluate"},
             },
@@ -102,9 +100,7 @@ def fixture_registry() -> StageRegistry:
             },
         )
         return StageResult(
-            artifacts=(
-                ProducedArtifact("prepared", "prepared.json", "test.prepared.v1", rows=1),
-            ),
+            artifacts=(ProducedArtifact("prepared", "prepared.json", "test.prepared.v1", rows=1),),
             summary={"rows": 1},
         )
 
@@ -124,17 +120,11 @@ def fixture_registry() -> StageRegistry:
 
 def test_runs_a_dag_and_verifies_every_output(tmp_path: Path) -> None:
     repo, spec = build_repo(tmp_path)
-    runner = ExperimentRunner(repo, registry=fixture_registry())
+    runner = ExperimentRunner(repo, registry=fixture_registry(), source_paths=("forge",))
     result = runner.run(spec, profile="smoke")
     assert list(result.stage_manifests) == ["prepare", "evaluate"]
     score = json.loads(
-        (
-            result.plan.run_dir
-            / "stages"
-            / "evaluate"
-            / "artifacts"
-            / "score.json"
-        ).read_text()
+        (result.plan.run_dir / "stages" / "evaluate" / "artifacts" / "score.json").read_text()
     )
     assert score["score"] == 22
     assert runner.verify(spec, profile="smoke").plan.run_id == result.plan.run_id
@@ -145,7 +135,7 @@ def test_runs_a_dag_and_verifies_every_output(tmp_path: Path) -> None:
 
 def test_resume_reuses_only_verified_completed_stages(tmp_path: Path) -> None:
     repo, spec = build_repo(tmp_path)
-    runner = ExperimentRunner(repo, registry=fixture_registry())
+    runner = ExperimentRunner(repo, registry=fixture_registry(), source_paths=("forge",))
     first = runner.run(spec, profile="smoke")
     with pytest.raises(RunExistsError):
         runner.run(spec, profile="smoke")
@@ -155,7 +145,7 @@ def test_resume_reuses_only_verified_completed_stages(tmp_path: Path) -> None:
 
 def test_tampered_output_is_rejected(tmp_path: Path) -> None:
     repo, spec = build_repo(tmp_path)
-    runner = ExperimentRunner(repo, registry=fixture_registry())
+    runner = ExperimentRunner(repo, registry=fixture_registry(), source_paths=("forge",))
     result = runner.run(spec, profile="smoke")
     output = result.plan.run_dir / "stages" / "prepare" / "artifacts" / "prepared.json"
     atomic_write(output, b"{}\n")
@@ -165,7 +155,7 @@ def test_tampered_output_is_rejected(tmp_path: Path) -> None:
 
 def test_replicates_have_distinct_recorded_seed_streams(tmp_path: Path) -> None:
     repo, spec = build_repo(tmp_path)
-    runner = ExperimentRunner(repo, registry=fixture_registry())
+    runner = ExperimentRunner(repo, registry=fixture_registry(), source_paths=("forge",))
     first = runner.run(spec, profile="smoke", replicate=0)
     second = runner.run(spec, profile="smoke", replicate=1)
     assert first.plan.run_id != second.plan.run_id
@@ -177,7 +167,7 @@ def test_replicates_have_distinct_recorded_seed_streams(tmp_path: Path) -> None:
 
 def test_strict_reproduction_executes_twice_and_requires_byte_identity(tmp_path: Path) -> None:
     repo, spec = build_repo(tmp_path)
-    runner = ExperimentRunner(repo, registry=fixture_registry())
+    runner = ExperimentRunner(repo, registry=fixture_registry(), source_paths=("forge",))
     receipt = runner.reproduce(spec, profile="smoke")
     assert receipt["status"] == "reproduced"
     assert receipt["stages"]["prepare"]["byte_identical"] is True
@@ -195,7 +185,7 @@ def test_failure_leaves_resumable_partial_stage_but_no_committed_stage(tmp_path:
     document["stages"][1]["implementation"] = "test.fail.v1"
     write_json(spec, document)
     registry.register("test.fail.v1", fail)
-    runner = ExperimentRunner(repo, registry=registry)
+    runner = ExperimentRunner(repo, registry=registry, source_paths=("forge",))
     with pytest.raises(RuntimeError, match="intentional"):
         runner.run(spec, profile="smoke")
     plan = runner.plan(spec, profile="smoke")
@@ -233,7 +223,7 @@ def test_resume_reenters_matching_partial_stage(tmp_path: Path) -> None:
     document["stages"][1]["implementation"] = "test.once.v1"
     write_json(spec, document)
     registry.register("test.once.v1", once)
-    runner = ExperimentRunner(repo, registry=registry)
+    runner = ExperimentRunner(repo, registry=registry, source_paths=("forge",))
     with pytest.raises(RuntimeError, match="interrupt"):
         runner.run(spec, profile="smoke")
     completed = runner.run(spec, profile="smoke", resume=True)

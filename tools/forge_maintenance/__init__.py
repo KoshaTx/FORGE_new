@@ -1,13 +1,13 @@
 """Repository maintenance operations.
 
-Deliberately outside `src/forge/`. These tools classify *this repository's own* files -- which
+Deliberately outside `forge/`. These tools classify *this repository's own* files -- which
 scripts are retirable, which test failures are new against the recorded baseline -- so they are of
 no use to anyone who installs the package, and shipping them in the wheel would put repo
 bookkeeping on the scientific library's public surface.
 
-They are also not `scripts/`, which `scripts/README.md` documents as a shrinking historical
-evidence-producer surface rather than an interface. They live here as an importable package so the
-behaviour stays testable, which is the property that took them out of `scripts/` originally.
+They are also not historical experiment producers. They live here as an importable checkout-only
+package so the behavior remains testable without putting repository bookkeeping on the scientific
+library surface.
 
 Run them with `make code-survey` / `make test-baseline-report`, or directly:
 

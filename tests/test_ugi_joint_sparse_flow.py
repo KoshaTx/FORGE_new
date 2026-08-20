@@ -6,23 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from forge.design.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
-from forge.design.flow.ugi_joint_sparse_flow import (
-    UgiJointSparseFlow,
-    UgiJointSparseFlowError,
-    _legacy_sample_ugi_joint_sparse_terminals,
-    collate_ugi_joint_sparse_records,
-    joint_sparse_source_marginals,
-    noise_ugi_joint_sparse_batch,
-    project_joint_sparse_record,
-    sample_ugi_joint_sparse_terminals,
-    ugi_joint_sparse_loss,
-)
-from forge.design.flow.ugi_morphology_program import (
-    UgiMorphologyProgram,
-    attached_tree_matches_program,
-)
-from forge.design.sampling.ugi_joint_sparse_sampling import (
+from experiments.phase1.product_l1.sampling.ugi_joint_sparse_sampling import (
     UgiJointSparseTrajectoryState,
     advance_ugi_joint_sparse_state,
     extract_ugi_joint_sparse_particles,
@@ -30,9 +14,27 @@ from forge.design.sampling.ugi_joint_sparse_sampling import (
     initialize_ugi_joint_sparse_state,
     resample_ugi_joint_sparse_ancestry,
 )
-from forge.design.training.ugi_joint_sparse_training import (
+from experiments.phase1.product_l1.sampling.ugi_joint_sparse_sampling import (
+    sample_restartable_terminals as sample_ugi_joint_sparse_terminals,
+)
+from experiments.phase1.product_l1.training.ugi_joint_sparse_training import (
     UgiJointSparseTrainingError,
     _validated_checkpoint_steps,
+)
+from forge.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
+from forge.model.ugi_joint_sparse_flow import (
+    UgiJointSparseFlow,
+    UgiJointSparseFlowError,
+    _legacy_sample_ugi_joint_sparse_terminals,
+    collate_ugi_joint_sparse_records,
+    joint_sparse_source_marginals,
+    noise_ugi_joint_sparse_batch,
+    project_joint_sparse_record,
+    ugi_joint_sparse_loss,
+)
+from forge.model.ugi_morphology_program import (
+    UgiMorphologyProgram,
+    attached_tree_matches_program,
 )
 
 torch = pytest.importorskip("torch")

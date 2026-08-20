@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.route.engine.planner import (
+from forge.corpus.r1_prime_audit import sha256_file
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
     KnowledgeResult,
@@ -16,7 +16,7 @@ from forge.route.engine.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.evidence.ugi3_exact_c18_route import (
+from forge.synthesis.evidence.ugi3_exact_c18_route import (
     Ugi3ExactC18RouteError,
     build_exact_c18_route_audit,
     load_exact_c18_route_overlay,
@@ -29,7 +29,7 @@ STEP_LEDGER = REPO / ("results/phase1/ugi3_exact_c18_route_v1/step_verification_
 ASSESSMENT = REPO / "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz"
 INPUT_PATHS = {
     "audit_source": REPO / "src/forge/route/ugi3_exact_c18_route.py",
-    "audit_runner": REPO / "scripts/phase1_qualify_ugi3_exact_c18_route.py",
+    "audit_runner": REPO / "experiments/archive/producers/phase1_qualify_ugi3_exact_c18_route.py",
     "audit_tests": REPO / "tests/test_ugi3_exact_c18_route.py",
     "qualified_forward_source": REPO / "src/forge/route/qualified_forward.py",
     "planner_source": REPO / "src/forge/route/planner.py",

@@ -6,13 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.value.synthesis.synthesis_source_supersession import (
+from experiments.archive.phase1.synthesis_value_audits.synthesis_source_supersession import (
     AUTHORIZED_REPLAY_IDS,
     SynthesisSourceSupersessionError,
     build_synthesis_source_supersession_audit,
     substitute_value_source_hash,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_synthesis_source_supersession_audit_v1.json"

@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 import torch
 
-from forge.potency.audit.ugi_dynamic_controller_analysis import (
+from forge.potency.controller import (
     BinomialRidge,
     Observation,
     UgiDynamicControllerAnalysisError,

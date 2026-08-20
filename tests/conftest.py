@@ -59,9 +59,7 @@ def prereveal_registry_view(monkeypatch: pytest.MonkeyPatch) -> PrerevealRegistr
     """
 
     source_repo = Path(__file__).resolve().parents[1]
-    source_protocol = (
-        source_repo / "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json"
-    )
+    source_protocol = source_repo / "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json"
     protocol = json.loads(source_protocol.read_text())
     anchor = protocol["sealed_holdout_anchor"]
     sealed_sample = source_repo / anchor["sealed_sample_output"]

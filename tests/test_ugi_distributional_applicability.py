@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments.archive.producers.phase1_audit_ugi_distributional_applicability import _write_once
 from forge.potency.applicability.ugi_distributional_applicability import (
     ChemicalReference,
     DistancePair,
@@ -15,7 +16,6 @@ from forge.potency.applicability.ugi_distributional_applicability import (
     _performance,
     _view_bin,
 )
-from scripts.phase1_audit_ugi_distributional_applicability import _write_once
 
 
 def test_exact_new_identity_can_be_chemically_interpolative() -> None:

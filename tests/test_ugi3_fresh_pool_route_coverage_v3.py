@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.value.coverage.ugi3_fresh_pool_route_coverage import _load_json
-from forge.value.coverage.ugi3_fresh_pool_route_coverage_v3 import (
+from experiments.phase1.synthesis_guidance.sources.coverage.ugi3_fresh_pool_route_coverage import (
+    _load_json,
+)
+from experiments.phase1.synthesis_guidance.sources.coverage.ugi3_fresh_pool_route_coverage_v3 import (
     HEAD_ROLE,
     HEAD_SMILES,
     _find_octadecylamine_record,
@@ -18,9 +20,7 @@ def test_octadecylamine_record_is_exact_and_current() -> None:
         REPO / "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
         label="virtual terminal procurement",
     )
-    record = _find_octadecylamine_record(
-        payload, assessment_as_of_utc="2026-08-03T01:15:00Z"
-    )
+    record = _find_octadecylamine_record(payload, assessment_as_of_utc="2026-08-03T01:15:00Z")
     assert record["identity"]["inchi_key"] == "REYJJPSVUYRZGE-UHFFFAOYSA-N"
     assert record["current_item_level_procurement_closed"] is True
 

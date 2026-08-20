@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.route.audit.aizynthfinder_diagnostic import (
+from experiments.archive.phase1.synthesis_audits.aizynthfinder_diagnostic import (
     AiZynthFinderDiagnosticError,
     select_full_search_targets,
     summarize_worker_records,

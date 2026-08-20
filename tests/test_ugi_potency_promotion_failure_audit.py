@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.potency.audit.ugi_potency_promotion_failure_audit import (
+from experiments.archive.phase1.potency_audits.ugi_potency_promotion_failure_audit import (
     audit_potency_promotion_failure,
 )
 

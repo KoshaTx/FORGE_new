@@ -8,8 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.design.guidance.ugi_postselection_provenance import (
+from experiments.phase1.synthesis_guidance.guidance.ugi_postselection_provenance import (
     ABSENT_SUBSTRATUM,
     CATALOG_ABSENT,
     EXPANDED_SUBSTRATUM,
@@ -27,6 +26,7 @@ from forge.design.guidance.ugi_postselection_provenance import (
     classify_component_provenance,
     classify_product_provenance,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_postselection_provenance_audit_v1.json"

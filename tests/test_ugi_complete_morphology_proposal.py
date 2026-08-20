@@ -3,12 +3,12 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.design.flow.ugi_program_prior import UgiProgramPrior
-from forge.design.sampling.ugi_complete_morphology_proposal import (
+from experiments.phase1.product_l1.sampling.ugi_complete_morphology_proposal import (
     UgiCompleteMorphologyProposalError,
     enumerate_complete_program_support,
     support_preserving_probabilities,
 )
+from forge.model.ugi_program_prior import UgiProgramPrior
 
 
 def _prior() -> UgiProgramPrior:

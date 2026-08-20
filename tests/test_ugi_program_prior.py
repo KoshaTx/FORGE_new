@@ -5,8 +5,8 @@ import json
 import numpy as np
 import pytest
 
-from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.flow.ugi_program_prior import (
+from forge.model.ugi_morphology_program import UgiMorphologyProgram
+from forge.model.ugi_program_prior import (
     UgiProgramPriorError,
     blend_program_priors,
     build_component_family_balanced_program_prior,

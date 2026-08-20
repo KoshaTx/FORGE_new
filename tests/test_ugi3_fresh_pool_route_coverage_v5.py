@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from forge.data.r1_prime_audit import sha256_file
-from forge.value.coverage.ugi3_fresh_pool_route_coverage_v5 import (
+from experiments.archive.phase1.synthesis_value_coverage.ugi3_fresh_pool_route_coverage_v5 import (
     TARGET_ROLE,
     TARGET_SMILES,
     TARGET_SOURCE_CLASS,
     Ugi3FreshPoolRouteCoverageV5Error,
     build_fresh_pool_route_coverage_v5,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json"

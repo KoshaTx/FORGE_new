@@ -1,4 +1,4 @@
-"""Tests for forge.design.sampling.rstar.
+"""Tests for forge.flow.rstar.
 
 The load-bearing tests are the equivalence ones. `rstar_step` was transcribed out of a frozen
 module that ten samplers depend on, so the only thing that licenses repointing any caller is proof
@@ -15,13 +15,13 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from forge.design.sampling.rstar import (  # noqa: E402
+from forge.flow.rstar import (  # noqa: E402
     SamplingError,
     rstar_step,
     sample_categorical,
 )
 
-legacy = pytest.importorskip("forge.design.flow.defog_feasibility")
+legacy = pytest.importorskip("forge.model.defog_feasibility")
 
 
 def _generator(seed: int = 20260819):

@@ -8,13 +8,13 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.data.r1_prime_audit import (
+from forge.corpus.r1_prime_audit import (
     compile_reactions,
     decompose_structure,
     load_reaction_definitions,
     sha256_file,
 )
-from forge.route.evidence.ugi3_virtual_capability import (
+from forge.synthesis.evidence.ugi3_virtual_capability import (
     Ugi3VirtualCapabilityError,
     _forward_site_audit,
     build_ugi3_virtual_capability,
@@ -24,15 +24,11 @@ from forge.route.evidence.ugi3_virtual_capability import (
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/m0_09_agile_virtual_ugi3_capability.json"
 VIRTUAL = REPO / "data/derived/agile_virtual12k_smiles.csv.gz"
-VIRTUAL_MANIFEST = (
-    REPO / "data/derived/agile_virtual12k_smiles.manifest.json"
-)
+VIRTUAL_MANIFEST = REPO / "data/derived/agile_virtual12k_smiles.manifest.json"
 REGISTRY = REPO / "data/vendor/qualified_reactions_v1.json"
 ASSEMBLY = REPO / "results/m0_09/ugi3_assembly_qualification.json"
 PRECURSOR = REPO / "results/m0_09/ugi3_precursor_capability.json"
-ALDEHYDE_HEAD = (
-    REPO / "results/m0_09/ugi3_aldehyde_head_capability.json"
-)
+ALDEHYDE_HEAD = REPO / "results/m0_09/ugi3_aldehyde_head_capability.json"
 AGILE_COMPONENT_ROUTES = REPO / "results/m0_09/agile_component_routes.json"
 RESULT = REPO / "results/m0_09/agile_virtual_ugi3_capability.json"
 
@@ -58,14 +54,8 @@ def test_a19_roundtrip_records_one_explicit_target_site() -> None:
         role_policy_overrides=config["scope"]["role_policy_overrides"],
     )[0]
     reaction = compile_reactions((definition,))[0]
-    with (
-        REPO / "data/vendor/AGILE_smiles_with_value_group.csv"
-    ).open(newline="") as handle:
-        measured = next(
-            row
-            for row in csv.DictReader(handle)
-            if row["label"] == "A19B1C1"
-        )
+    with (REPO / "data/vendor/AGILE_smiles_with_value_group.csv").open(newline="") as handle:
+        measured = next(row for row in csv.DictReader(handle) if row["label"] == "A19B1C1")
     target_molecule = Chem.MolFromSmiles(measured["combined_mol_SMILES"])
     assert target_molecule is not None
     target = Chem.MolToSmiles(
@@ -117,20 +107,13 @@ def test_rejects_hash_mismatch_before_decomposition(tmp_path: Path) -> None:
 def test_writer_is_deterministic_for_committed_payloads(tmp_path: Path) -> None:
     result = json.loads(RESULT.read_text())
     artifacts = {
-        name: (REPO / details["path"]).read_bytes()
-        for name, details in result["artifacts"].items()
+        name: (REPO / details["path"]).read_bytes() for name, details in result["artifacts"].items()
     }
 
     write_ugi3_virtual_capability(result, artifacts, tmp_path)
-    first = {
-        path.name: path.read_bytes()
-        for path in tmp_path.iterdir()
-    }
+    first = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
     write_ugi3_virtual_capability(result, artifacts, tmp_path)
-    second = {
-        path.name: path.read_bytes()
-        for path in tmp_path.iterdir()
-    }
+    second = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
 
     assert first == second
     assert not list(tmp_path.glob(".*.tmp"))
@@ -143,52 +126,31 @@ def test_committed_census_maps_all_products_without_inventing_l2() -> None:
 
     assert result["schema_version"] == "m0_09_agile_virtual_ugi3_capability.v1"
     assert result["summary"]["source_products"] == 12276
-    assert (
-        result["summary"]["products_with_exact_qualified_ugi_decomposition"]
-        == 12276
-    )
+    assert result["summary"]["products_with_exact_qualified_ugi_decomposition"] == 12276
     assert result["summary"]["cartesian_component_tuples"] == 12276
     assert result["summary"]["unique_components_total"] == 93
     assert result["summary"]["roles"]["amine_head"]["unique_components"] == 22
-    assert (
-        result["summary"]["roles"]["oxoester_aldehyde_body_tail"][
-            "unique_components"
-        ]
-        == 62
-    )
-    assert (
-        result["summary"]["roles"]["isocyanide_tail"]["unique_components"]
-        == 9
-    )
+    assert result["summary"]["roles"]["oxoester_aldehyde_body_tail"]["unique_components"] == 62
+    assert result["summary"]["roles"]["isocyanide_tail"]["unique_components"] == 9
     assert (
         result["summary"]["roles"]["oxoester_aldehyde_body_tail"][
             "components_with_exact_source_route"
         ]
         == 17
     )
-    assert (
-        result["summary"]["roles"]["isocyanide_tail"][
-            "components_with_exact_source_route"
-        ]
-        == 7
-    )
+    assert result["summary"]["roles"]["isocyanide_tail"]["components_with_exact_source_route"] == 7
     assert result["summary"]["products_with_complete_l2_l3_candidate"] == 0
     assert result["claims_boundary"]["unlabeled_products_are_l2_supervision"] is False
     for details in result["artifacts"].values():
         path = REPO / details["path"]
         assert path.stat().st_size == details["bytes"]
         assert sha256_file(path) == details["sha256"]
-    product_path = (
-        REPO / result["artifacts"]["agile_virtual_ugi3_product_ledger.csv.gz"]["path"]
-    )
+    product_path = REPO / result["artifacts"]["agile_virtual_ugi3_product_ledger.csv.gz"]["path"]
     with gzip.open(product_path, "rt", newline="") as handle:
         product_rows = list(csv.DictReader(handle))
     assert len(product_rows) == 12276
     assert all(int(row["candidate_count"]) == 1 for row in product_rows)
     assert all(
-        json.loads(row["candidate_routes_json"])[0][
-            "distinct_target_reacting_sites"
-        ]
-        == 1
+        json.loads(row["candidate_routes_json"])[0]["distinct_target_reacting_sites"] == 1
         for row in product_rows
     )

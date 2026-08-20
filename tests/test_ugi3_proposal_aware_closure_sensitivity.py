@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from forge.value.audit.ugi3_proposal_aware_closure_sensitivity import _qualified_components
+from experiments.archive.phase1.synthesis_value_audits.ugi3_proposal_aware_closure_sensitivity import (
+    _qualified_components,
+)
 
 
 def test_qualified_components_keep_counterfactuals_separate_from_evidence() -> None:

@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from forge.route.sources.ugi3_source_neutral_proposal_adjudication import (
+from forge.synthesis.sources.ugi3_source_neutral_proposal_adjudication import (
     FATTY_ALDEHYDE,
     ISOCYANIDE,
 )
-from forge.route.sources.ugi3_source_neutral_proposal_adjudication_v2 import (
+from forge.synthesis.sources.ugi3_source_neutral_proposal_adjudication_v2 import (
     _matching_forward_precursors,
     _program_from_target,
 )
-from forge.route.terminals.ugi3_precursor_leaf_closure import (
+from forge.synthesis.terminals.ugi3_precursor_leaf_closure import (
     ALDEHYDE_ROLE,
     HEAD_ROLE,
     ISOCYANIDE_ROLE,

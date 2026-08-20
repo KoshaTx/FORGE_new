@@ -7,8 +7,11 @@ from pathlib import Path
 
 import numpy as np
 
-SCRIPT = Path(__file__).resolve().parents[1] / "scripts/phase1_select_ugi_architecture.py"
-REPO = SCRIPT.parents[1]
+SCRIPT = (
+    Path(__file__).resolve().parents[1]
+    / "experiments/archive/producers/phase1_select_ugi_architecture.py"
+)
+REPO = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("phase1_select_ugi_architecture", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)

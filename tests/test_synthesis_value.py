@@ -4,7 +4,7 @@ from dataclasses import dataclass, field, replace
 
 import pytest
 
-from forge.route.engine.planner import (
+from forge.synthesis.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceRecord,
@@ -18,7 +18,7 @@ from forge.route.engine.planner import (
     RouteStepProposal,
     RouteTarget,
 )
-from forge.value.synthesis.synthesis import (
+from forge.synthesis.value.contracts import (
     BurdenEstimate,
     ComponentSynthesisValue,
     Dominance,

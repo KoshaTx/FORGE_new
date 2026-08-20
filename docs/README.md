@@ -16,7 +16,6 @@ automation. This index provides the hierarchy without creating path churn during
 - `ARCHITECTURE.md` — package boundaries and allowed dependency direction.
 - `REPRODUCIBILITY.md` — local and Modal experiment execution.
 - `../configs/reproduction/iclr2027.json` — exact authoritative paper/evidence contract.
-- `RESTRUCTURE_PLAN.md` — remaining package migration.
 - `REFACTOR_BASELINE.md` — inherited test and artifact baseline.
 - `DATA_PROVENANCE.md` — data, repository migration, and artifact provenance.
 - `provenance_check_audit.md` — strictness differences in legacy pin validators.
@@ -27,7 +26,7 @@ inputs or generated inventories. They are not general narrative documentation an
 deleted as clutter.
 
 `../provenance/code-retirement/iclr2027.json` is the generated code-reachability and retirement
-inventory. Regenerate it with `forge maintenance survey`; do not hand-edit its classifications.
+inventory. Regenerate it with `make code-survey`; do not hand-edit its classifications.
 
 ## Scientific milestone records
 
