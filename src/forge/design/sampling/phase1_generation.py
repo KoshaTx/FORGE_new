@@ -26,7 +26,7 @@ from forge.design.flow.sparse_topology_feasibility import (
     _sample_from_logits,
     pointer_rstar_step,
 )
-from forge.generate.sampling import rstar_step as _rstar_step
+from forge.design.sampling.rstar import rstar_step as _rstar_step
 
 try:
     import torch

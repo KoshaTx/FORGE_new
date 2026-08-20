@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.generate.sampling import rstar_step as _rstar_step
+from forge.design.sampling.rstar import rstar_step as _rstar_step
 
 try:
     import torch

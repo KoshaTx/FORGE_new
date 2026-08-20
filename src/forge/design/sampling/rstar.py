@@ -1,10 +1,10 @@
-"""The discrete-flow sampling primitives.
+"""The discrete-flow sampling primitive: one Euler step of the generative sampler.
 
 `rstar_step` is one Euler step of the generative model's sampler, using DeFoG's minimum R-star
 conditional rate. It is the core primitive of every flow in this package: ten modules call it, for
 node states, parent bonds, closure bonds, decoration anchors, regions and offspring channels.
 
-It did not have a home. It lived as `_rstar_step` inside `product/defog_feasibility.py` -- a
+It did not have a home. It lived as `_rstar_step` inside `design/flow/defog_feasibility.py` -- a
 completed M0-06 *feasibility probe*, one bounded experiment asking whether dense edge flow was
 viable at 96 atoms -- and every production sampler reached into that finished experiment's privates
 to get it. The probe also carries a training loop, ECE/Jensen-Shannon/Wasserstein metrics, a
@@ -17,7 +17,7 @@ the price of not invalidating a frozen result, and it resolves whenever that art
 
 Six of the ten callers are inside the blinded-execution dependency manifest, which proves which
 modules loaded during a sealed holdout by exact set equality. Repointing them would add
-`forge.generate` to that set and break the proof, so they keep importing the frozen copy until the
+`forge.design.sampling.rstar` to that set and break the proof, so they keep importing the frozen copy until the
 sealed protocol is revisited.
 
 Behaviour is identical to the original, and `tests/test_generate_sampling.py` asserts that directly

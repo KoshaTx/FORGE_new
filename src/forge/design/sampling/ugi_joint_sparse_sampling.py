@@ -26,7 +26,7 @@ from forge.design.flow.ugi_morphology_program import (
     sample_attached_offspring_with_exact_budget_and_cycle_rank,
     sample_attached_offspring_without_budget,
 )
-from forge.generate.sampling import rstar_step as _rstar_step
+from forge.design.sampling.rstar import rstar_step as _rstar_step
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

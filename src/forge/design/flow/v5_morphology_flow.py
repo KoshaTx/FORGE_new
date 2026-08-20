@@ -24,7 +24,7 @@ from forge.design.flow.v5_morphology_program import (
     program_from_sparse_record,
     sample_morphology_with_exact_program,
 )
-from forge.generate.sampling import rstar_step as _rstar_step
+from forge.design.sampling.rstar import rstar_step as _rstar_step
 
 try:
     import torch
