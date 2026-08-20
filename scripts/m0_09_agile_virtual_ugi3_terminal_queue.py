@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.ugi3_virtual_terminal_queue import (
+from forge.route.terminals.ugi3_virtual_terminal_queue import (
     Ugi3VirtualTerminalQueueError,
     build_ugi3_virtual_terminal_queue,
     write_ugi3_virtual_terminal_queue,

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.ugi_end_to_end_sampling import (
+from forge.design.sampling.ugi_end_to_end_sampling import (
     UgiEndToEndSamplingError,
     sample_ugi_end_to_end,
 )

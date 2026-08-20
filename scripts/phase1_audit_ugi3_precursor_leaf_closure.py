@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_precursor_leaf_closure import build_precursor_leaf_closure_audit
+from forge.route.terminals.ugi3_precursor_leaf_closure import build_precursor_leaf_closure_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

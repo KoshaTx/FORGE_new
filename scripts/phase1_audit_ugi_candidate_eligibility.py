@@ -18,8 +18,8 @@ import numpy as np
 import torch
 from rdkit import Chem, rdBase
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_candidate_eligibility import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.guidance.ugi_candidate_eligibility import (
     compile_smarts,
     declared_support_violations,
     heteroatom_extreme_flags,
@@ -27,8 +27,8 @@ from forge.product.ugi_candidate_eligibility import (
     heteroatom_thresholds,
     motif_hits,
 )
-from forge.product.ugi_component_expansion import reaction_handle_qualification
-from forge.product.ugi_held_component_gate import (
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
+from forge.design.corpus.ugi_held_component_gate import (
     _canonical_molecule,
     _forward_reconstructs_product,
     _reaction_contract,

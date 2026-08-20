@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.product.ring_support_audit import _ring_signature, sha256_file
+from forge.design.audit.ring_support_audit import _ring_signature, sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 

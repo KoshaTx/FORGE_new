@@ -15,29 +15,29 @@ from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
-from forge.design.ugi_joint_sparse_sampling import (
-    advance_ugi_joint_sparse_state,
-    finalize_ugi_joint_sparse_state,
-)
-from forge.design.ugi_nonzero_guidance_runner import (
-    GuidanceTerminalCompletionReceipt,
-    ParticleGroupDesign,
-    load_grouped_smc_schedule_qualification,
-)
-from forge.design.ugi_selected_guidance_adapter import _replace_generator_state
-from forge.design.ugi_selected_guidance_adapter_v2 import (
+from forge.design.flow.ugi_selected_guidance_adapter import _replace_generator_state
+from forge.design.flow.ugi_selected_guidance_adapter_v2 import (
     SelectedModelRestartableGuidanceLaneV2,
     build_selected_model_restartable_guidance_lane_v2,
 )
-from forge.design.ugi_selected_restartable_generator import SAMPLE_STEPS
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.sampling.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
+from forge.design.sampling.ugi_joint_sparse_sampling import (
+    advance_ugi_joint_sparse_state,
+    finalize_ugi_joint_sparse_state,
+)
+from forge.design.sampling.ugi_selected_restartable_generator import SAMPLE_STEPS
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     GENERATOR_CHECKPOINT_SHA256,
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_DECODER_ID,
     TERMINAL_TEMPERATURE,
 )
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
+    GuidanceTerminalCompletionReceipt,
+    ParticleGroupDesign,
+    load_grouped_smc_schedule_qualification,
+)
 
 try:
     import torch

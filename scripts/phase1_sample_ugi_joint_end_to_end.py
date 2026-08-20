@@ -5,8 +5,8 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_chemistry_flow import TERMINAL_DECODER_MODES
-from forge.product.ugi_joint_end_to_end_sampling import sample_ugi_joint_end_to_end
+from forge.design.flow.ugi_chemistry_flow import TERMINAL_DECODER_MODES
+from forge.design.sampling.ugi_joint_end_to_end_sampling import sample_ugi_joint_end_to_end
 
 REPO = Path(__file__).resolve().parents[1]
 

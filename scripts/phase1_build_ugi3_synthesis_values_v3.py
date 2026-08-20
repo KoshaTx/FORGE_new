@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_synthesis_value_audit_v3 import (
+from forge.value.synthesis.ugi3_synthesis_value_audit_v3 import (
     build_ugi3_synthesis_value_audit_v3,
 )
 

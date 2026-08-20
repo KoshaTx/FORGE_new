@@ -13,11 +13,11 @@ from statistics import mean
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_decoration_checkpoint_screen import (
+from forge.design.audit.ugi_decoration_checkpoint_screen import (
     evaluate_checkpoint_arm,
     select_confirmed_training_duration,
 )
-from forge.product.ugi_joint_end_to_end_sampling import (
+from forge.design.sampling.ugi_joint_end_to_end_sampling import (
     joint_sampling_result_matches_request,
 )
 

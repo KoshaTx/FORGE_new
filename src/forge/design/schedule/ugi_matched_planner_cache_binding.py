@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_matched_budget_orchestration import (
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     MatchedArm,
     MatchedAssessmentContext,
     RouteComputeUsage,

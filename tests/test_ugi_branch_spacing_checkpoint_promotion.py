@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.product.ugi_branch_spacing_checkpoint_promotion import _branch_contract
+from forge.design.guidance.ugi_branch_spacing_checkpoint_promotion import _branch_contract
 
 
 def _sample(offspring: list[int]) -> dict:

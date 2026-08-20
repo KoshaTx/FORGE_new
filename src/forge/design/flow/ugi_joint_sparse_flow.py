@@ -15,14 +15,14 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.defog_feasibility import _rstar_step
-from forge.design.ugi_adapter_features import ORIGIN_TO_INDEX
-from forge.design.ugi_chemistry_corpus import UgiChemistryRecord
-from forge.design.ugi_morphology_flow import (
+from forge.design.corpus.ugi_chemistry_corpus import UgiChemistryRecord
+from forge.design.flow.defog_feasibility import _rstar_step
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX
+from forge.design.flow.ugi_morphology_flow import (
     _layout_from_programs,
     _pending_by_role,
 )
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.ugi_morphology_program import (
     UgiMorphologyProgram,
     attached_tree_junction_contributions,
     preorder_attached_forest_to_parents,
@@ -1185,7 +1185,7 @@ def _legacy_sample_ugi_joint_sparse_terminals(
             output_programs = []
             for batch_index, program in enumerate(local):
                 if model.conditioning_mode == "size_only":
-                    from forge.design.ugi_closure_placement import feasible_next_closures
+                    from forge.design.flow.ugi_closure_placement import feasible_next_closures
 
                     cycle_ranks = []
                     for role_index, offspring in enumerate(component_values[batch_index]):
@@ -1305,7 +1305,7 @@ def sample_ugi_joint_sparse_terminals(
 ) -> tuple[list[UgiJointSparseTerminal], dict[str, Any]]:
     """Compatibility wrapper around restartable zero-guidance operations."""
 
-    from forge.design.ugi_joint_sparse_sampling import sample_restartable_terminals
+    from forge.design.sampling.ugi_joint_sparse_sampling import sample_restartable_terminals
 
     return sample_restartable_terminals(
         model,

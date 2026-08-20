@@ -27,7 +27,7 @@ REPO_DEFAULT = Path(__file__).resolve().parents[1]
 if str(REPO_DEFAULT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "src"))
 
-from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     UgiBoundedHybridRouteCascadeError,
     atomic_write,
     canonical_json_bytes,
@@ -37,20 +37,20 @@ from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     sha256_file,
     sha256_payload,
 )
-from forge.route.graph2edits_one_gap_diagnostic import _qualification_from_dict  # noqa: E402
-from forge.route.l2_forward_resolver import load_independent_l2_forward_resolver  # noqa: E402
-from forge.route.planner import RouteTarget  # noqa: E402
-from forge.route.proposal_discovery_status import (  # noqa: E402
+from forge.route.audit.graph2edits_one_gap_diagnostic import _qualification_from_dict  # noqa: E402
+from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver  # noqa: E402
+from forge.route.engine.planner import RouteTarget  # noqa: E402
+from forge.route.assessment.proposal_discovery_status import (  # noqa: E402
     SourceNeutralProposalDiscoveryResolver,
 )
-from forge.route.proposal_engine import (  # noqa: E402
+from forge.route.engine.proposal_engine import (  # noqa: E402
     ProposalBackendManifest,
     ProposalRequest,
     ProposalTargetKind,
     RootQualificationReceipt,
     SingleStepRetrosynthesisProposal,
 )
-from forge.route.semantic_family_equivalence import (  # noqa: E402
+from forge.route.evidence.semantic_family_equivalence import (  # noqa: E402
     audit_semantic_family_equivalence,
 )
 

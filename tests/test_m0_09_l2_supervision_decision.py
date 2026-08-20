@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.l2_supervision_decision import (
+from forge.route.sources.l2_supervision_decision import (
     CONFIG_SCHEMA_VERSION,
     RESULT_SCHEMA_VERSION,
     L2SupervisionDecisionError,

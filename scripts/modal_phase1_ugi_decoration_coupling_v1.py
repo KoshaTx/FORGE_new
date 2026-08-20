@@ -151,8 +151,8 @@ def train_lane(lane: str) -> dict[str, Any]:
     import rdkit
     import torch
 
-    from forge.product.defog_feasibility import sha256_file
-    from forge.product.ugi_joint_sparse_training import train_ugi_joint_sparse
+    from forge.design.flow.defog_feasibility import sha256_file
+    from forge.design.training.ugi_joint_sparse_training import train_ugi_joint_sparse
 
     config_relative = CONFIGS[lane]
     config_path = REMOTE_REPO_ROOT / config_relative

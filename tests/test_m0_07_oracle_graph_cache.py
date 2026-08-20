@@ -10,8 +10,8 @@ import numpy as np
 import pytest
 import torch
 
-from forge.potency.oracle_graph import GraphFeatureVocabulary, tensorize_smiles
-from forge.potency.oracle_graph_cache import (
+from forge.potency.oracle.oracle_graph import GraphFeatureVocabulary, tensorize_smiles
+from forge.potency.oracle.oracle_graph_cache import (
     ARCHIVE_FILENAME,
     ARRAY_FIELDS,
     COLLECTIONS,

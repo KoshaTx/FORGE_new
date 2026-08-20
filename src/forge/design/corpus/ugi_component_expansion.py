@@ -24,7 +24,7 @@ from rdkit.Chem import rdFingerprintGenerator
 
 from forge.data.r0_splits import sha256_bytes, sha256_file
 from forge.data.r1_prime_audit import compile_reactions, load_reaction_definitions
-from forge.design.canonical_representation_audit import load_atom_vocabulary
+from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_component_expansion_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_component_expansion_result.v1"

@@ -9,7 +9,7 @@ from typing import Any
 
 from forge.core.io import read_json_object
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
+from forge.design.flow.defog_feasibility import sha256_file
 
 
 class UgiCheckpointSeriesAuditError(RuntimeError):

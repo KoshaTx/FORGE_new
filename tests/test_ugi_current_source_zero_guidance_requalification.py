@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from forge.product.ugi_current_source_zero_guidance_requalification import (
+from forge.design.guidance.ugi_current_source_zero_guidance_requalification import (
     build_current_source_zero_guidance_requalification,
 )
 

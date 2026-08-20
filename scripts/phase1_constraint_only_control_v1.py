@@ -49,11 +49,11 @@ sys.path.insert(0, str(REPO / "src"))
 import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
-from forge.product.ugi_blinded_headless_sampling import (  # noqa: E402
+from forge.design.sampling.ugi_blinded_headless_sampling import (  # noqa: E402
     preflight_headless_runtime,
     sample_headless_runtime,
 )
-from forge.product.ugi_joint_sparse_flow import UgiJointSparseFlow  # noqa: E402
+from forge.design.flow.ugi_joint_sparse_flow import UgiJointSparseFlow  # noqa: E402
 
 JOINT = "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt"
 CLOSURE = "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt"

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.oracle_auxiliary import (
+from forge.potency.oracle.oracle_auxiliary import (
     AuxiliarySupervisionError,
     _canonical,
     _load_config,

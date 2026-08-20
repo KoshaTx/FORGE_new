@@ -1,6 +1,6 @@
 import numpy as np
 
-from forge.potency.ugi_morphology_high_potency_challenger import classification_metrics
+from forge.potency.morphology.ugi_morphology_high_potency_challenger import classification_metrics
 
 
 def test_classification_metrics_reward_correct_ordering() -> None:

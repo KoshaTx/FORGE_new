@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_targeted_exact_overlay_diagnostic import (
+from forge.route.audit.ugi3_targeted_exact_overlay_diagnostic import (
     build_targeted_exact_overlay_diagnostic,
 )
 

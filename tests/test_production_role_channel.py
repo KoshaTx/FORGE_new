@@ -25,11 +25,11 @@ sys.path.insert(0, str(REPO / "src"))
 
 torch = pytest.importorskip("torch")
 
-from forge.product.ugi_joint_sparse_flow import (  # noqa: E402
+from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache  # noqa: E402
+from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = REPO / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 CHECKPOINT = REPO / "results/phase1/ugi_joint_sparse_balanced_v2_full/checkpoint_step_1000.pt"

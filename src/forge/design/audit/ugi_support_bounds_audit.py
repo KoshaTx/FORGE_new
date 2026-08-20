@@ -14,13 +14,13 @@ import numpy as np
 from rdkit import Chem
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.lipid_support_skeleton import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.lipid_support_skeleton import (
     FUNCTIONAL_SUPPORT,
     encode_lipid_support_skeleton,
     skeleton_statistics,
 )
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 

@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.potency.oracle_production import run_oracle_production_refit
+from forge.potency.oracle.oracle_production import run_oracle_production_refit
 
 
 def _arguments() -> argparse.Namespace:

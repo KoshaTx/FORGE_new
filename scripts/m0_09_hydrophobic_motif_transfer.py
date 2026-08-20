@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.hydrophobic_motif_transfer import (
+from forge.route.assessment.hydrophobic_motif_transfer import (
     HydrophobicMotifTransferError,
     build_hydrophobic_motif_transfer,
     write_hydrophobic_motif_transfer,

@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.value.ugi_proposal_augmented_route_readiness import (
+from forge.value.guidance.ugi_proposal_augmented_route_readiness import (
     build_proposal_augmented_route_readiness,
 )
 

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_synthesis_value_audit import build_ugi3_synthesis_value_audit
+from forge.value.synthesis.ugi3_synthesis_value_audit import build_ugi3_synthesis_value_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

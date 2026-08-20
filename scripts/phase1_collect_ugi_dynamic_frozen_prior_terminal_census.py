@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
+from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     aggregate_completed_census,
     census_plan,
     run_census_shard,

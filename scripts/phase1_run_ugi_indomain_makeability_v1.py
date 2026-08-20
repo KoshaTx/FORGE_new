@@ -54,7 +54,7 @@ if str(REPO_DEFAULT / "src") not in sys.path:
 if str(REPO_DEFAULT / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "scripts"))
 
-from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     UgiBoundedHybridRouteCascadeError,
     atomic_write,
     canonical_json_bytes,

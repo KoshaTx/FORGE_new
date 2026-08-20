@@ -7,17 +7,17 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_matched_budget_orchestration import _schedule_sha256
-from forge.product.ugi_production_zero_guidance_config import (
+from forge.design.schedule.ugi_matched_budget_orchestration import _schedule_sha256
+from forge.design.guidance.ugi_production_zero_guidance_config import (
     UgiProductionZeroGuidanceConfigError,
     load_production_zero_guidance_rehearsal_plan,
 )
-from forge.product.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.route.planner import PlannerBudgetLimits
-from forge.route.planner_cache import PlannerCacheContext
-from forge.route.terminal_assessment import (
+from forge.route.engine.planner import PlannerBudgetLimits
+from forge.route.engine.planner_cache import PlannerCacheContext
+from forge.route.terminals.terminal_assessment import (
     required_three_role_route_reservation,
 )
 
@@ -137,7 +137,7 @@ def test_real_frozen_config_builds_only_the_typed_deterministic_schedule() -> No
 
 
 def test_terminal_decoder_identity_matches_selected_generator_lane_exactly() -> None:
-    from forge.product.ugi_selected_restartable_generator import TERMINAL_DECODER_ID
+    from forge.design.sampling.ugi_selected_restartable_generator import TERMINAL_DECODER_ID
 
     plan = _load()
     assert TERMINAL_DECODER_ID == "ugi_joint_terminal_completion:argmax:v1"

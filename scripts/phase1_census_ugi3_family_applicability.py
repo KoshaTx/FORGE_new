@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_family_applicability_census import (
+from forge.value.coverage.ugi3_family_applicability_census import (
     build_family_applicability_census,
 )
 

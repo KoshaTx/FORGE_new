@@ -5,7 +5,7 @@ import json
 import numpy as np
 import pytest
 
-from forge.potency.ugi_selective_risk_proposal_diagnosis import (
+from forge.potency.applicability.ugi_selective_risk_proposal_diagnosis import (
     VIEWS,
     _finite_quantile,
     _spearman,

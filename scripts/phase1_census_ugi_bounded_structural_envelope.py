@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_bounded_structural_envelope import (
+from forge.potency.applicability.ugi_bounded_structural_envelope import (
     build_bounded_structural_envelope_census,
 )
 

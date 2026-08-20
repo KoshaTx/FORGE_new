@@ -22,7 +22,7 @@ from rdkit import Chem, rdBase
 from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.io import csv_gz_bytes as _csv_bytes
 from forge.core.io import read_json_object
-from forge.design.ugi_tail_chemotype_audit import (
+from forge.design.audit.ugi_tail_chemotype_audit import (
     ARCHITECTURE_FIELDS,
     architecture_signature,
     component_chemotype_metrics,

@@ -30,8 +30,8 @@ REPO_DEFAULT = Path(__file__).resolve().parents[1]
 if str(REPO_DEFAULT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "src"))
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
-from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     ADJUDICATION_SCHEMA_VERSION,
     ATTRITION_CSV_FIELDS,
     CACHE_CLONE_ID,
@@ -257,45 +257,45 @@ def _not_admitted_candidate_row(
 def stage_exact_evidence(contract: Any) -> dict[str, Any]:
     from types import MappingProxyType
 
-    from forge.product.ugi_generated_terminal_support import (
+    from forge.design.corpus.ugi_generated_terminal_support import (
         DeclaredGraphSupportContext,
         declared_graph_support_context_sha256,
     )
-    from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
-    from forge.product.ugi_matched_budget_orchestration import (
+    from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+    from forge.design.schedule.ugi_matched_budget_orchestration import (
         MatchedArm,
         MatchedAssessmentContext,
         MatchedGenerationRequest,
         MatchedScheduleEntry,
         RouteComputeUsage,
     )
-    from forge.product.ugi_production_terminal_route_evaluator import (
+    from forge.design.schedule.ugi_production_terminal_route_evaluator import (
         build_production_ugi_terminal_aware_planner_factory,
     )
-    from forge.product.ugi_restartable_terminal_support_adapter import (
+    from forge.design.flow.ugi_restartable_terminal_support_adapter import (
         UgiRestartableTerminalSupportAdapterError,
         adapt_restartable_completion_row_for_route_support,
         canonical_morphology_program_bytes,
         native_completion_record_from_locked_terminal,
     )
-    from forge.product.ugi_selected_restartable_generator import _atom_vocabulary_states
-    from forge.product.ugi_selected_restartable_generator_v2 import (
+    from forge.design.sampling.ugi_selected_restartable_generator import _atom_vocabulary_states
+    from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
         CLOSURE_CHECKPOINT_SHA256,
         COMPONENT_RECOVERY_CONTRACT_SHA256,
         L1_REACTION_SHA256,
     )
-    from forge.route.planner_cache import FilePlannerCache
-    from forge.route.planner_cache_snapshot import (
+    from forge.route.engine.planner_cache import FilePlannerCache
+    from forge.route.engine.planner_cache_snapshot import (
         OverlayFilePlannerCache,
         ReadOnlyFilePlannerCache,
         build_file_planner_cache_snapshot_manifest,
     )
-    from forge.route.terminal_assessment import (
+    from forge.route.terminals.terminal_assessment import (
         QualifiedUgiL1Reverifier,
         assess_locked_ugi_terminal_routes,
         required_three_role_route_reservation,
     )
-    from forge.value.ugi_exact_closure_guidance import (
+    from forge.value.guidance.ugi_exact_closure_guidance import (
         UGI_EXACT_CLOSURE_GUIDANCE_POLICY_SHA256,
         exact_closure_potential_from_product_value,
     )
@@ -729,7 +729,7 @@ def _unresolved_component_rows(component_rows: list[dict[str, Any]]) -> list[dic
 
 
 def stage_graph2edits(contract: Any) -> dict[str, Any]:
-    from forge.route.graph2edits_backend import (
+    from forge.route.engine.graph2edits_backend import (
         GRAPH2EDITS_BACKEND_ID,
         GRAPH2EDITS_CHECKPOINT_LICENSE,
         GRAPH2EDITS_IMPLEMENTATION_VERSION,
@@ -740,17 +740,17 @@ def stage_graph2edits(contract: Any) -> dict[str, Any]:
         Graph2EditsProposalBackend,
         build_syntheseus_worker,
     )
-    from forge.route.graph2edits_one_gap_diagnostic import _qualification_from_dict
-    from forge.route.l2_forward_resolver import load_independent_l2_forward_resolver
-    from forge.route.planner import RouteTarget
-    from forge.route.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
-    from forge.route.proposal_engine import (
+    from forge.route.audit.graph2edits_one_gap_diagnostic import _qualification_from_dict
+    from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
+    from forge.route.engine.planner import RouteTarget
+    from forge.route.assessment.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
+    from forge.route.engine.proposal_engine import (
         ProposalBackendManifest,
         ProposalRequest,
         ProposalTargetKind,
         RootQualificationReceipt,
     )
-    from forge.route.semantic_family_equivalence import audit_semantic_family_equivalence
+    from forge.route.evidence.semantic_family_equivalence import audit_semantic_family_equivalence
 
     repo = contract.repo
     output_dir = contract.output_dir

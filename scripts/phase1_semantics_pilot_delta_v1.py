@@ -50,13 +50,13 @@ sys.path.insert(0, str(REPO / "src"))
 import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
-from forge.product.ugi_joint_sparse_flow import (  # noqa: E402
+from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
     noise_ugi_joint_sparse_batch,
     ugi_joint_sparse_loss,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache  # noqa: E402
+from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 SPLITS = "results/phase1/forge_coverage_splits_v1/splits.json"

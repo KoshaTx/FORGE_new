@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.product.ugi_decoration_checkpoint_screen import (
+from forge.design.audit.ugi_decoration_checkpoint_screen import (
     pareto_frontier,
     select_confirmed_training_duration,
 )

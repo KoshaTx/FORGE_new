@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from rdkit.Chem import rdChemReactions
 
-from forge.route.l2_forward_resolver import (
+from forge.route.assessment.l2_forward_resolver import (
     AdmittedL2ForwardTransform,
     ExactPairAdmission,
     IndependentL2ForwardResolver,
@@ -16,17 +16,17 @@ from forge.route.l2_forward_resolver import (
     L2ForwardResolverError,
     load_independent_l2_forward_resolver,
 )
-from forge.route.l2_forward_resolver_manifest import build_l2_forward_resolver_config
-from forge.route.planner import ForwardVerificationState, RouteTarget
-from forge.route.proposal_engine import (
+from forge.route.assessment.l2_forward_resolver_manifest import build_l2_forward_resolver_config
+from forge.route.engine.planner import ForwardVerificationState, RouteTarget
+from forge.route.engine.proposal_engine import (
     ProposalBackendManifest,
     ProposalRequest,
     ProposalTargetKind,
     RootQualificationReceipt,
     SingleStepRetrosynthesisProposal,
 )
-from forge.route.qualified_forward import QualifiedForwardError, QualifiedForwardReaction
-from forge.route.ugi3_support_boundary import MolecularSupportState, TargetQualification
+from forge.route.engine.qualified_forward import QualifiedForwardError, QualifiedForwardReaction
+from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 
 REPO = Path(__file__).resolve().parents[1]
 REAL_CONFIG = REPO / "configs/route/graph2edits_l2_forward_resolver_v1.json"

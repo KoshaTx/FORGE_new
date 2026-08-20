@@ -41,7 +41,7 @@ REPO_DEFAULT = Path(__file__).resolve().parents[1]
 if str(REPO_DEFAULT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "src"))
 
-from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     NOT_ASSESSED_OUTCOME,
     UgiBoundedHybridRouteCascadeError,
     atomic_write,

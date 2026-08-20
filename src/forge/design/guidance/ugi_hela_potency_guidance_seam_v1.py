@@ -20,8 +20,9 @@ from typing import Any
 import numpy as np
 
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_matched_budget_orchestration import LockedMatchedTerminal
-from forge.design.ugi_nonzero_guidance_runner import (
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed, select_smc_ancestry
+from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GroupedSMCScheduleQualification,
     GuidanceSchedule,
@@ -30,7 +31,6 @@ from forge.design.ugi_nonzero_guidance_runner import (
     ParticleGroupDesign,
     RestartableGuidanceLane,
 )
-from forge.design.ugi_synthesis_guidance import keyed_random_seed, select_smc_ancestry
 from forge.potency.audit.ugi_hela_potency_diagnostic import (
     HeLaBatchPredictor,
     HeLaPotencyDiagnosticPolicy,

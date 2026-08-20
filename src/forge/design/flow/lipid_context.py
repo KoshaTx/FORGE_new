@@ -7,7 +7,7 @@ from collections import deque
 import numpy as np
 from rdkit import Chem
 
-from forge.design.defog_feasibility import FeasibilityError
+from forge.design.flow.defog_feasibility import FeasibilityError
 
 LIPID_REGION_NAMES = ("head", "interface", "tail")
 HEAD_REGION = 0

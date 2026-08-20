@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_targeted_role_gap_evidence import (
+from forge.route.evidence.ugi3_targeted_role_gap_evidence import (
     build_targeted_role_gap_evidence_audit,
 )
 

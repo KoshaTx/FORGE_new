@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.phase1_prelaunch_audit import (
+from forge.design.audit.phase1_prelaunch_audit import (
     Phase1PrelaunchAuditError,
     run_prelaunch_audit,
 )

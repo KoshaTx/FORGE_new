@@ -17,7 +17,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from forge.design.ugi_component_expansion import reaction_handle_qualification
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 ARMS = ("broad_prior", "support_enriched")

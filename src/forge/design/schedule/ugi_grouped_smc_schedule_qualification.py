@@ -19,11 +19,11 @@ from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_grouped_smc_schedule_qualification_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_grouped_smc_schedule_qualification.v1"

@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.product.ugi_postselection_held_component import (
+from forge.design.corpus.ugi_postselection_held_component import (
     component_membership_class,
     evaluate_postselection_held_component_stress,
 )

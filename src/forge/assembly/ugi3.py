@@ -31,7 +31,7 @@ class Ugi3AssemblyAdapter:
         expected_sha256: str | None = None,
     ) -> Ugi3AssemblyAdapter:
         from forge.data.r1_prime_audit import QUALIFIED_STATUS
-        from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
+        from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
 
         resolved = registry_path.resolve()
         observed = str(sha256_file(resolved))
@@ -61,7 +61,7 @@ class Ugi3AssemblyAdapter:
         *,
         maximum_outcomes: int = 64,
     ) -> ForwardAssemblyCheck:
-        from forge.product.ugi_held_component_gate import (
+        from forge.design.corpus.ugi_held_component_gate import (
             exact_forward_reconstructs_ugi_product,
         )
 

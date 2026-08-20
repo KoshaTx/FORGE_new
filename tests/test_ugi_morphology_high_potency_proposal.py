@@ -1,6 +1,6 @@
 import numpy as np
 
-from forge.potency.ugi_morphology_potency_proposal_sweep import _candidate_distribution
+from forge.potency.morphology.ugi_morphology_potency_proposal_sweep import _candidate_distribution
 
 
 def test_candidate_distribution_preserves_full_support() -> None:

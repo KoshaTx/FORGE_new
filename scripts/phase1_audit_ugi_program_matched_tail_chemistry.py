@@ -12,11 +12,11 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_joint_sparse_training import _training_weights
-from forge.product.ugi_program_matched_tail_chemistry import (
+from forge.design.training.ugi_joint_sparse_training import _training_weights
+from forge.design.flow.ugi_program_matched_tail_chemistry import (
     compare_program_matched_tail_chemistry,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 REFERENCE_FOLDS = ("train", "calibration")

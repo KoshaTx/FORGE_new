@@ -183,7 +183,7 @@ def main() -> None:
     wanted = set(family_of)
 
     # --- the matched real reference: the heldout products the programs were drawn from
-    from forge.product.ugi_training_cache import load_ugi_training_cache
+    from forge.design.training.ugi_training_cache import load_ugi_training_cache
     corpus, records_by_fold = load_ugi_training_cache(
         REPO / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt")
     assignments = {a["product_id"]: a for a in corpus.assignments_by_fold["heldout"]}

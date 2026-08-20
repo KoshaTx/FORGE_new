@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_fresh_pool_audit import build_fresh_pool_audit
+from forge.design.audit.ugi_fresh_pool_audit import build_fresh_pool_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

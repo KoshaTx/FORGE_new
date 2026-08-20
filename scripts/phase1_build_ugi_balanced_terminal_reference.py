@@ -15,11 +15,11 @@ from typing import Any
 import numpy as np
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX, PORT_TO_INDEX
-from forge.product.ugi_joint_sparse_training import _training_weights
-from forge.product.ugi_tail_chemotype_audit import component_chemotype_metrics
-from forge.product.ugi_training_cache import load_ugi_training_cache
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX, PORT_TO_INDEX
+from forge.design.training.ugi_joint_sparse_training import _training_weights
+from forge.design.audit.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 FEATURE_FIELDS = {

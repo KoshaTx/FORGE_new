@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.oracle_graph_transfer_decision import (
+from forge.potency.oracle.oracle_graph_transfer_decision import (
     OracleGraphTransferDecisionError,
     adjudicate_transfer_lane,
     run_transfer_decision,

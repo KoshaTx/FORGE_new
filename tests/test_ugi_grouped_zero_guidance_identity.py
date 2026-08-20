@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_grouped_zero_guidance_identity import (
+from forge.design.guidance.ugi_grouped_zero_guidance_identity import (
     UgiGroupedZeroGuidanceIdentityError,
     _assert_completion_identity,
     _expanded_programs,
@@ -14,7 +14,7 @@ from forge.product.ugi_grouped_zero_guidance_identity import (
     _validate_blocked_runner_plan,
     _validate_restartable_v2,
 )
-from forge.product.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     GuidanceTerminalCompletionReceipt,
     load_grouped_smc_schedule_qualification,
 )

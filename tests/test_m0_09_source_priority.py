@@ -7,13 +7,13 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.source_ledger import SOURCE_COLUMNS
-from forge.route.source_priority import (
+from forge.route.sources.source_ledger import SOURCE_COLUMNS
+from forge.route.sources.source_priority import (
     SourcePriorityError,
     build_source_priority,
     write_source_priority,
 )
-from forge.route.supervision_inventory import sha256_file
+from forge.route.sources.supervision_inventory import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -19,11 +19,11 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.io import read_json_object
-from forge.route.supervision_inventory import sha256_file
-from forge.route.ugi3_assembly_qualification import (
+from forge.route.evidence.ugi3_assembly_qualification import (
     Ugi3AssemblyQualificationError,
     build_ugi3_assembly_qualification,
 )
+from forge.route.sources.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_05_source_evidence_adjudication_config.v1"
 RESULT_SCHEMA_VERSION = "m0_05_source_evidence_adjudication.v1"

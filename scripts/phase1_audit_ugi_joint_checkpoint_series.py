@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_checkpoint_series_audit import audit_ugi_checkpoint_series
+from forge.design.audit.ugi_checkpoint_series_audit import audit_ugi_checkpoint_series
 
 REPO = Path(__file__).resolve().parents[1]
 

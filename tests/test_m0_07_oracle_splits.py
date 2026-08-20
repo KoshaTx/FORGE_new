@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.oracle_splits import (
+from forge.potency.oracle.oracle_splits import (
     OracleSplitError,
     _audit_scaffold_split,
     _load_config,

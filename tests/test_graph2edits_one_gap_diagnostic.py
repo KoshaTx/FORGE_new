@@ -5,17 +5,17 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-from forge.route.graph2edits_one_gap_diagnostic import (
+from forge.route.audit.graph2edits_one_gap_diagnostic import (
     build_request,
     extract_one_gap_targets,
     run_one_gap_diagnostic,
 )
-from forge.route.l2_forward_resolver import L2ForwardResolutionStatus
-from forge.route.proposal_discovery_status import (
+from forge.route.assessment.l2_forward_resolver import L2ForwardResolutionStatus
+from forge.route.assessment.proposal_discovery_status import (
     ProposalDiscoveryStatus,
     SourceNeutralProposalDiscoveryResolver,
 )
-from forge.route.proposal_engine import ProposalBackendManifest, SingleStepRetrosynthesisProposal
+from forge.route.engine.proposal_engine import ProposalBackendManifest, SingleStepRetrosynthesisProposal
 
 
 def _hash(label: str) -> str:

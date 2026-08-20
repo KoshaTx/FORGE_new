@@ -7,7 +7,7 @@ from collections import Counter
 from pathlib import Path
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.value.ugi3_fresh_pool_route_priority import build_fresh_pool_route_priority
+from forge.value.coverage.ugi3_fresh_pool_route_priority import build_fresh_pool_route_priority
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_fresh_pool_route_priority_v4.json"

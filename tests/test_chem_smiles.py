@@ -31,13 +31,13 @@ SALT = "CCN.Cl"
 
 
 def test_agrees_with_the_canonicalizer_most_modules_route_through() -> None:
-    legacy = pytest.importorskip("forge.potency.ugi_distributional_applicability")
+    legacy = pytest.importorskip("forge.potency.applicability.ugi_distributional_applicability")
     for smiles in ("CCO", CIS, TRANS, SALT, "c1ccccc1", "C1=CC=CC=C1", "C[C@H](N)C(=O)O"):
         assert canonical_constitution(smiles) == legacy._canonical(smiles)
 
 
 def test_agrees_with_the_connected_variant() -> None:
-    legacy = pytest.importorskip("forge.route.ugi3_source_neutral_proposal_adjudication")
+    legacy = pytest.importorskip("forge.route.sources.ugi3_source_neutral_proposal_adjudication")
     for smiles in ("CCO", CIS, "c1ccccc1"):
         assert canonical_connected_constitution(smiles) == legacy._canonical(smiles)
 

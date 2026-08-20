@@ -11,7 +11,7 @@ import tempfile
 from pathlib import Path
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.single_step_benchmark_manifest import (
+from forge.route.engine.single_step_benchmark_manifest import (
     OUTPUT_FILENAMES,
     SingleStepBenchmarkManifestError,
     build_manifest_payloads,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.route.ugi3_enumerated_routeability_census import (
+from forge.route.audit.ugi3_enumerated_routeability_census import (
     EXACT_COMPLETE,
     EXACT_L3_OPEN,
     FAMILY_PROJECTED,

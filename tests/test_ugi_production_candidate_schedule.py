@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.product.ugi_production_candidate_schedule import ARM_IDS
+from forge.design.schedule.ugi_production_candidate_schedule import ARM_IDS
 
 
 def test_production_schedule_contains_only_promoted_causal_arms() -> None:

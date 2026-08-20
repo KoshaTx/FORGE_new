@@ -12,10 +12,10 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.canonical_representation_audit import load_atom_vocabulary
-from forge.design.defog_feasibility import AtomState, sha256_file
-from forge.design.ugi_adapter_features import tensorize_ugi_l1_support_record
-from forge.design.ugi_chemistry_interface import (
+from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
+from forge.design.flow.defog_feasibility import AtomState, sha256_file
+from forge.design.flow.ugi_adapter_features import tensorize_ugi_l1_support_record
+from forge.design.flow.ugi_chemistry_interface import (
     WITHHELD_STATE,
     ChemistryTopologyCondition,
     UgiFixedCoreSchema,
@@ -25,7 +25,7 @@ from forge.design.ugi_chemistry_interface import (
     project_chemistry_topology_condition,
     recompute_adapter_distances,
 )
-from forge.design.ugi_morphology_program import split_ugi_support_morphology
+from forge.design.flow.ugi_morphology_program import split_ugi_support_morphology
 
 
 class UgiChemistryInterfaceAuditError(RuntimeError):

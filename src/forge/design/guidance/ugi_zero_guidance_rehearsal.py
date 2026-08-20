@@ -19,8 +19,8 @@ from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
-from forge.design import ugi_matched_budget_orchestration as matched_runner
-from forge.design.ugi_matched_budget_orchestration import (
+from forge.design.schedule import ugi_matched_budget_orchestration as matched_runner
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
     MatchedArm,
@@ -32,7 +32,7 @@ from forge.design.ugi_matched_budget_orchestration import (
     MatchedScheduleEntry,
     RouteComputeUsage,
 )
-from forge.design.ugi_matched_planner_cache_binding import (
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
     MatchedPlannerCacheBindingPreflight,
     preflight_lazy_matched_planner_cache_binding,
 )

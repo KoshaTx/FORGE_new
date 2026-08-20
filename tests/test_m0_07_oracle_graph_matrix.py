@@ -11,12 +11,12 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.potency.oracle_graph import (
+from forge.potency.oracle.oracle_graph import (
     GraphFeatureVocabulary,
     load_oracle_graph_records,
 )
-from forge.potency.oracle_graph_jobs import build_graph_job_rows
-from forge.potency.oracle_graph_matrix import (
+from forge.potency.oracle.oracle_graph_jobs import build_graph_job_rows
+from forge.potency.oracle.oracle_graph_matrix import (
     _inner_split,
     fit_graph_job,
 )

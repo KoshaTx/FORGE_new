@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_selective_risk_proposal_diagnosis import (
+from forge.potency.applicability.ugi_selective_risk_proposal_diagnosis import (
     build_selective_risk_proposal_diagnosis,
 )
 

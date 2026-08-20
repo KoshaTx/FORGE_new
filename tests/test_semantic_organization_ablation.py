@@ -34,11 +34,11 @@ sys.path.insert(0, str(REPO / "src"))
 
 torch = pytest.importorskip("torch")
 
-from forge.product.ugi_joint_sparse_flow import (  # noqa: E402
+from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache  # noqa: E402
+from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = REPO / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 REFERENCE = REPO / "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt"
@@ -143,7 +143,7 @@ def test_flat_arm_drops_role_but_keeps_generic_sequence_position(architecture):
     names = dict(model.named_parameters())
     # Amendment 12: the table is RETAINED with a null slot so capacity parity is exact. The
     # ablation is which index is fed, not whether the machinery exists.
-    from forge.product.ugi_joint_sparse_flow import ROLE_NAMES
+    from forge.design.flow.ugi_joint_sparse_flow import ROLE_NAMES
     assert names["role_embedding.weight"].shape[0] == len(ROLE_NAMES) + 1, (
         "the flat arms must share one role table including the null slot, so their parameter "
         "counts are identical and the ablation is the fed index rather than the capacity")
@@ -303,7 +303,7 @@ def test_reference_checkpoint_still_loads_into_the_default_arm(corpus_and_record
 @requires_switch
 def test_flat_arm_uses_a_pooled_loss_not_a_role_balanced_one(corpus_and_records, architecture):
     """A role-balanced objective is role structure. It must not survive the ablation."""
-    from forge.product.ugi_joint_sparse_flow import ugi_joint_sparse_loss
+    from forge.design.flow.ugi_joint_sparse_flow import ugi_joint_sparse_loss
     corpus, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 64))
     flat = _batch(records, architecture, semantic_organization=FLAT)
@@ -327,7 +327,7 @@ def test_flat_arm_uses_a_pooled_loss_not_a_role_balanced_one(corpus_and_records,
 
 @requires_switch
 def test_flat_arm_source_marginals_are_pooled(corpus_and_records, architecture):
-    from forge.product.ugi_joint_sparse_flow import joint_sparse_source_marginals
+    from forge.design.flow.ugi_joint_sparse_flow import joint_sparse_source_marginals
     import numpy as np
     corpus, records_by_fold = corpus_and_records
     records = tuple(itertools.islice(records_by_fold["train"], 512))
@@ -407,7 +407,7 @@ def test_flat_role_labels_are_the_permuted_true_roles(corpus_and_records, archit
     experiment's meaning.
     """
     import numpy as np
-    from forge.product.ugi_joint_sparse_flow import flat_subtree_permutation
+    from forge.design.flow.ugi_joint_sparse_flow import flat_subtree_permutation
     _, records_by_fold = corpus_and_records
     records = list(itertools.islice(records_by_fold["train"], 64))
     flat = _batch(records, architecture, semantic_organization=FLAT_TRUE)

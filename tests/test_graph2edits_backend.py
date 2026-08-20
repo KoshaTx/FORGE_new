@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.graph2edits_backend import (
+from forge.route.engine.graph2edits_backend import (
     GRAPH2EDITS_BACKEND_ID,
     GRAPH2EDITS_CHECKPOINT_LICENSE,
     GRAPH2EDITS_IMPLEMENTATION_VERSION,
@@ -23,14 +23,14 @@ from forge.route.graph2edits_backend import (
     Graph2EditsRawPrediction,
     build_syntheseus_worker,
 )
-from forge.route.planner import RouteTarget
-from forge.route.proposal_engine import (
+from forge.route.engine.planner import RouteTarget
+from forge.route.engine.proposal_engine import (
     ProposalBackendManifest,
     ProposalRequest,
     ProposalTargetKind,
     RootQualificationReceipt,
 )
-from forge.route.ugi3_support_boundary import MolecularSupportState, TargetQualification
+from forge.route.assessment.ugi3_support_boundary import MolecularSupportState, TargetQualification
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -313,7 +313,7 @@ def test_optional_runtime_fails_clearly_when_dependency_is_absent(
     def missing_version(distribution_name: str) -> str:
         raise metadata.PackageNotFoundError(distribution_name)
 
-    monkeypatch.setattr("forge.route.graph2edits_backend.metadata.version", missing_version)
+    monkeypatch.setattr("forge.route.engine.graph2edits_backend.metadata.version", missing_version)
 
     with pytest.raises(Graph2EditsDependencyError, match="optional dependency syntheseus==0.8.0"):
         build_syntheseus_worker(model_dir=tmp_path)

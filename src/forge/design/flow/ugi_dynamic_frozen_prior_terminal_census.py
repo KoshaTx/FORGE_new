@@ -30,25 +30,25 @@ from typing import Any
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
-from forge.design.ugi_joint_sparse_sampling import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    canonical_morphology_program_bytes,
+)
+from forge.design.flow.ugi_selected_guidance_adapter import (
+    SelectedGuidanceParticleState,
+    SelectedGuidanceState,
+)
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+    build_selected_model_restartable_guidance_lane_v3,
+)
+from forge.design.sampling.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
+from forge.design.sampling.ugi_joint_sparse_sampling import (
     UgiJointSparseTrajectoryState,
     advance_ugi_joint_sparse_state,
     finalize_ugi_joint_sparse_state,
 )
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-)
-from forge.design.ugi_selected_guidance_adapter import (
-    SelectedGuidanceParticleState,
-    SelectedGuidanceState,
-)
-from forge.design.ugi_selected_guidance_adapter_v3 import (
-    build_selected_model_restartable_guidance_lane_v3,
-)
-from forge.design.ugi_selected_restartable_generator import SAMPLE_STEPS
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_selected_restartable_generator import SAMPLE_STEPS
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_TEMPERATURE,
 )

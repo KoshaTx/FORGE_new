@@ -9,7 +9,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.route.aizynthfinder_diagnostic import render_route_hypothesis_pdf
+from forge.route.audit.aizynthfinder_diagnostic import render_route_hypothesis_pdf
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 

@@ -22,8 +22,8 @@ ALLOWED_PACKAGE_IMPORTS = {
 # target-domain API.  This list may shrink; adding an entry requires an architectural review.
 TRANSITIONAL_IMPORTS = {
     ("assembly/ugi3.py", "forge.data.r1_prime_audit"),
-    ("assembly/ugi3.py", "forge.product.ugi_held_component_gate"),
-    ("corpus/phase1.py", "forge.product.phase1_data"),
+    ("assembly/ugi3.py", "forge.design.corpus.ugi_held_component_gate"),
+    ("corpus/phase1.py", "forge.design.corpus.phase1_data"),
 }
 
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from forge.route.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE, ISOCYANIDE_ROLE
-from forge.route.ugi3_route_gap_triage import classify_route_gap
+from forge.route.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE, ISOCYANIDE_ROLE
+from forge.route.audit.ugi3_route_gap_triage import classify_route_gap
 
 
 def test_current_exact_target_precedes_upstream_planning() -> None:

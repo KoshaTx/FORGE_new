@@ -11,16 +11,16 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_end_to_end_sampling import _atomic_json, _load_checkpoint
-from forge.product.ugi_joint_end_to_end_sampling import _load_matched_programs
-from forge.product.ugi_joint_sparse_flow import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.sampling.ugi_end_to_end_sampling import _atomic_json, _load_checkpoint
+from forge.design.sampling.ugi_joint_end_to_end_sampling import _load_matched_programs
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     UgiJointSparseTerminal,
     _legacy_sample_ugi_joint_sparse_terminals,
     sample_ugi_joint_sparse_terminals,
 )
-from forge.product.ugi_selected_generator_implementation import (
+from forge.design.sampling.ugi_selected_generator_implementation import (
     build_selected_generator_implementation_qualification,
 )
 

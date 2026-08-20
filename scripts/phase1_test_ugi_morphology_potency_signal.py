@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_morphology_potency_signal import build_morphology_potency_signal
+from forge.potency.morphology.ugi_morphology_potency_signal import build_morphology_potency_signal
 
 REPO = Path(__file__).resolve().parents[1]
 

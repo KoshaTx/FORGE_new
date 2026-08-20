@@ -3,8 +3,8 @@ from __future__ import annotations
 import numpy as np
 from rdkit import Chem
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_candidate_eligibility import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.guidance.ugi_candidate_eligibility import (
     compile_smarts,
     declared_support_violations,
     heteroatom_extreme_flags,

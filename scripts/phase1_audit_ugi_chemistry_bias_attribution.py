@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_chemistry_bias_attribution import build_chemistry_bias_attribution
+from forge.design.audit.ugi_chemistry_bias_attribution import build_chemistry_bias_attribution
 
 REPO = Path(__file__).resolve().parents[1]
 

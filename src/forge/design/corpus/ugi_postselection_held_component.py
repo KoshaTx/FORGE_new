@@ -19,8 +19,8 @@ from rdkit import Chem, rdBase
 
 from forge.core.io import write_json as _atomic_json
 from forge.data.r0_splits import sha256_file
-from forge.design.ugi_component_expansion import reaction_handle_qualification
-from forge.design.ugi_held_component_gate import (
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
+from forge.design.corpus.ugi_held_component_gate import (
     _canonical_molecule,
     _catalog_by_role,
     _forward_reconstructs_product,

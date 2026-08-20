@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.ugi_chemistry_training import train_ugi_chemistry
+from forge.design.training.ugi_chemistry_training import train_ugi_chemistry
 
 REPO = Path(__file__).resolve().parents[1]
 

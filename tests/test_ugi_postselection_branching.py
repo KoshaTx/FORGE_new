@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_postselection_branching import (
+from forge.design.guidance.ugi_postselection_branching import (
     UgiPostselectionBranchingError,
     build_postselection_branching_audit,
     carbon_branch_metrics,

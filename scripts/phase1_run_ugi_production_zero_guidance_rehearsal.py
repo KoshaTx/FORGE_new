@@ -11,34 +11,34 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_production_terminal_route_evaluator import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.schedule.ugi_production_terminal_route_evaluator import (
     build_production_ugi_terminal_aware_planner_factory,
 )
-from forge.product.ugi_production_zero_guidance_config import (
+from forge.design.guidance.ugi_production_zero_guidance_config import (
     load_production_zero_guidance_rehearsal_plan,
 )
-from forge.product.ugi_production_zero_guidance_result import (
+from forge.design.guidance.ugi_production_zero_guidance_result import (
     ProductionTerminalSupportAuditCollector,
     build_production_zero_guidance_execution_result,
 )
-from forge.product.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     native_completion_record_from_locked_terminal,
 )
-from forge.product.ugi_selected_generator_implementation import (
+from forge.design.sampling.ugi_selected_generator_implementation import (
     require_selected_generator_implementation_unchanged,
 )
-from forge.product.ugi_selected_restartable_generator import (
+from forge.design.sampling.ugi_selected_restartable_generator import (
     build_selected_step1000_restartable_generator_lane,
 )
-from forge.product.ugi_zero_guidance_rehearsal import (
+from forge.design.guidance.ugi_zero_guidance_rehearsal import (
     QualifiedRoutePlannerFactoryAdapter,
     ZeroGuidanceRehearsalContract,
     current_terminal_route_assessment_source_sha256,
     run_zero_guidance_route_rehearsal,
 )
-from forge.route.planner_cache import FilePlannerCache
-from forge.route.planner_cache_snapshot import (
+from forge.route.engine.planner_cache import FilePlannerCache
+from forge.route.engine.planner_cache_snapshot import (
     build_file_planner_cache_snapshot_manifest,
 )
 

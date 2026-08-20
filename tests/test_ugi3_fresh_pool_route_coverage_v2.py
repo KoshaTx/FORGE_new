@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.route.planner import RouteTarget
-from forge.value.ugi3_fresh_pool_route_coverage_v2 import (
+from forge.route.engine.planner import RouteTarget
+from forge.value.coverage.ugi3_fresh_pool_route_coverage_v2 import (
     ALDEHYDE_ROLE,
     ALDEHYDE_SMILES,
     HEAD_ROLE,

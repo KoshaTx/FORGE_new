@@ -18,13 +18,13 @@ from typing import Any
 import numpy as np
 
 from forge.data.r0_splits import sha256_file
-from forge.design.defog_feasibility import (
+from forge.design.flow.defog_feasibility import (
     AtomState,
     _model_state_sha256,
     _parameter_count,
     set_determinism,
 )
-from forge.design.sparse_topology_feasibility import (
+from forge.design.flow.sparse_topology_feasibility import (
     BOND_VALENCE_UNITS,
     SparseGraphRecord,
     _masked_sparse_losses,

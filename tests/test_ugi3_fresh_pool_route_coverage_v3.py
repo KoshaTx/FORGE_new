@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.value.ugi3_fresh_pool_route_coverage_v3 import (
+from forge.value.coverage.ugi3_fresh_pool_route_coverage_v3 import (
     HEAD_ROLE,
     HEAD_SMILES,
     _find_octadecylamine_record,
     build_fresh_pool_route_coverage_v3,
 )
-from forge.value.ugi3_fresh_pool_route_coverage import _load_json
+from forge.value.coverage.ugi3_fresh_pool_route_coverage import _load_json
 
 REPO = Path(__file__).resolve().parents[1]
 

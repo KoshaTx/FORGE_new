@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_morphology_proposal_confirmation_analysis import (
+from forge.potency.morphology.ugi_morphology_proposal_confirmation_analysis import (
     build_morphology_proposal_confirmation_analysis,
 )
 

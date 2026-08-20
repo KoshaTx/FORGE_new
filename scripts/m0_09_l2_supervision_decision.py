@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.l2_supervision_decision import (
+from forge.route.sources.l2_supervision_decision import (
     L2SupervisionDecisionError,
     build_l2_supervision_decision,
     write_l2_supervision_decision,

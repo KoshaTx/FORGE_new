@@ -10,14 +10,14 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_morphology_corpus import source_stratified_family_weights
-from forge.product.ugi_program_prior import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.corpus.ugi_morphology_corpus import source_stratified_family_weights
+from forge.design.flow.ugi_program_prior import (
     build_weighted_program_prior,
     validate_program_prior_support,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 ALL_FOLDS = ("train", "calibration", "heldout")

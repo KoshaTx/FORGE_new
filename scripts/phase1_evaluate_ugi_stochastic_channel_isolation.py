@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_terminal_decoder_challenger import (
+from forge.design.sampling.ugi_terminal_decoder_challenger import (
     TAIL_ROLES,
     _assert_matched_rows,
     summarize_terminal_decoder_arm,

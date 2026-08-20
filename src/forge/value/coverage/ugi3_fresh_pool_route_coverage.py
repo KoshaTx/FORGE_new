@@ -22,7 +22,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_postselection_provenance import (
+from forge.design.guidance.ugi_postselection_provenance import (
     CATALOG_ABSENT,
     COMPONENT_STRATA,
     classify_component_provenance,

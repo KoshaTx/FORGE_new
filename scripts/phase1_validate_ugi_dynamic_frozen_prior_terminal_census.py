@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_dynamic_frozen_prior_terminal_census_validator import (
+from forge.design.audit.ugi_dynamic_frozen_prior_terminal_census_validator import (
     validate_completed_census_from_config,
     write_validation_receipt,
 )

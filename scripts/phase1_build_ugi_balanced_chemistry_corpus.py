@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_balanced_chemistry_corpus import build_balanced_ugi_chemistry_corpus
+from forge.design.corpus.ugi_balanced_chemistry_corpus import build_balanced_ugi_chemistry_corpus
 
 REPO = Path(__file__).resolve().parents[1]
 

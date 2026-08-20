@@ -4,8 +4,8 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.product.defog_feasibility import FeasibilityError
-from forge.product.lipid_support_skeleton import (
+from forge.design.flow.defog_feasibility import FeasibilityError
+from forge.design.flow.lipid_support_skeleton import (
     CARBON_INDUCED,
     FULL_HEAVY,
     FUNCTIONAL_SUPPORT,

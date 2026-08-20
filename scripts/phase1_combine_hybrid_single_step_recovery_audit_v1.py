@@ -8,8 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge.route.aizynthfinder_single_step_recovery import content_sha256, sha256_file
-from forge.route.single_step_recovery_combination import combine_recovery_scores
+from forge.route.engine.aizynthfinder_single_step_recovery import content_sha256, sha256_file
+from forge.route.engine.single_step_recovery_combination import combine_recovery_scores
 
 
 def _json(path: Path) -> dict[str, Any]:

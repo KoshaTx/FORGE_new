@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_grouped_smc_schedule_qualification import (
+from forge.design.schedule.ugi_grouped_smc_schedule_qualification import (
     build_grouped_smc_schedule_qualification,
 )
 

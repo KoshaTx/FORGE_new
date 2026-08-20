@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.oracle_graph_corpus import (
+from forge.potency.oracle.oracle_graph_corpus import (
     OracleGraphCorpusError,
     run_oracle_graph_corpus_audit,
 )

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.ugi3_capability import (
+from forge.route.evidence.ugi3_capability import (
     Ugi3CapabilityError,
     build_ugi3_precursor_capability,
     write_ugi3_precursor_capability,

@@ -253,7 +253,7 @@ def main() -> None:
     out = args.output_dir if args.output_dir.is_absolute() else repo / args.output_dir
     out.mkdir(parents=True, exist_ok=True)
 
-    from forge.product.ugi_bounded_hybrid_route_cascade import (
+    from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
         atomic_write, canonical_json_bytes, sha256_file, sha256_payload,
     )
 

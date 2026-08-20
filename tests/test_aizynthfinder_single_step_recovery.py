@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.route.aizynthfinder_single_step_recovery import (
+from forge.route.engine.aizynthfinder_single_step_recovery import (
     PROPOSAL_RESULT_SCHEMA_VERSION,
     proposal_result,
     score_frozen_proposals,

@@ -21,7 +21,7 @@ from forge.generate.sampling import (  # noqa: E402
     sample_categorical,
 )
 
-legacy = pytest.importorskip("forge.product.defog_feasibility")
+legacy = pytest.importorskip("forge.design.flow.defog_feasibility")
 
 
 def _generator(seed: int = 20260819):

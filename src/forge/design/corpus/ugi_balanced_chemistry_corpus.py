@@ -14,8 +14,8 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r0_splits import sha256_bytes, sha256_file
-from forge.design.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
-from forge.design.ugi_expanded_exemplars import (
+from forge.design.corpus.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
+from forge.design.corpus.ugi_expanded_exemplars import (
     _atomic_write,
     _gzip_csv,
     _read_csv,

@@ -36,7 +36,7 @@ sys.path.insert(0, str(REPO / "src"))
 
 import torch  # noqa: E402
 
-from forge.product.ugi_blinded_headless_sampling import (  # noqa: E402
+from forge.design.sampling.ugi_blinded_headless_sampling import (  # noqa: E402
     preflight_headless_runtime,
     sample_headless_runtime,
 )

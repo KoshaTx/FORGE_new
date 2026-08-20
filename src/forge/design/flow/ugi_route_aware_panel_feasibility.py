@@ -32,31 +32,18 @@ from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
-from forge.design.ugi_generated_terminal_support import (
+from forge.design.corpus.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     declared_graph_support_context_sha256,
 )
-from forge.design.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.design.ugi_matched_budget_orchestration import (
-    MatchedArm,
-    MatchedAssessmentContext,
-    MatchedGenerationRequest,
-    MatchedScheduleEntry,
-    RouteComputeUsage,
-)
-from forge.design.ugi_matched_planner_cache_binding import (
-    preflight_lazy_matched_planner_cache_binding,
-)
-from forge.design.ugi_production_terminal_route_evaluator import (
-    build_production_ugi_terminal_aware_planner_factory,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     adapt_restartable_completion_row_for_route_support,
     canonical_morphology_program_bytes,
     native_completion_record_from_locked_terminal,
 )
-from forge.design.ugi_selected_restartable_generator import _atom_vocabulary_states
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_selected_restartable_generator import _atom_vocabulary_states
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     CLOSURE_CHECKPOINT_SHA256,
     COMPONENT_RECOVERY_CONTRACT_SHA256,
     DECLARED_GRAPH_SUPPORT_SHA256,
@@ -64,6 +51,19 @@ from forge.design.ugi_selected_restartable_generator_v2 import (
     L1_REACTION_SHA256,
     MODEL_CONFIG_SHA256,
     _canonical_sha256,
+)
+from forge.design.schedule.ugi_matched_budget_orchestration import (
+    MatchedArm,
+    MatchedAssessmentContext,
+    MatchedGenerationRequest,
+    MatchedScheduleEntry,
+    RouteComputeUsage,
+)
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
+    preflight_lazy_matched_planner_cache_binding,
+)
+from forge.design.schedule.ugi_production_terminal_route_evaluator import (
+    build_production_ugi_terminal_aware_planner_factory,
 )
 from forge.route.engine.planner_cache import FilePlannerCache
 from forge.route.terminals.terminal_assessment import (

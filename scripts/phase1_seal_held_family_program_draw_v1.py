@@ -41,8 +41,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from forge.product.ugi_held_component_gate import held_role_class  # noqa: E402
-from forge.product.ugi_training_cache import load_ugi_training_cache  # noqa: E402
+from forge.design.corpus.ugi_held_component_gate import held_role_class  # noqa: E402
+from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
 
 CACHE = "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
 ROLE = "oxoester_aldehyde_body_tail"

@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_v3_shadow_gate import evaluate_v3_shadow_gate
+from forge.design.flow.ugi_v3_shadow_gate import evaluate_v3_shadow_gate
 
 REPO = Path(__file__).resolve().parents[1]
 

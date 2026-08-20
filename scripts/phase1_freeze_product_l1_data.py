@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.phase1_data import Phase1DataError, freeze_phase1_data_contract
+from forge.design.corpus.phase1_data import Phase1DataError, freeze_phase1_data_contract
 
 REPO = Path(__file__).resolve().parents[1]
 

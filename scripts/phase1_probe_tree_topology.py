@@ -11,12 +11,12 @@ from pathlib import Path
 
 import numpy as np
 
-from forge.product.defog_feasibility import set_determinism
-from forge.product.phase1_flow import (
+from forge.design.flow.defog_feasibility import set_determinism
+from forge.design.flow.phase1_flow import (
     _training_records,
     build_corpus_from_config,
 )
-from forge.product.phase1_tree_topology_flow import (
+from forge.design.flow.phase1_tree_topology_flow import (
     OffspringTreeFlow,
     TreeTopologyFlowError,
     TreeTopologySample,

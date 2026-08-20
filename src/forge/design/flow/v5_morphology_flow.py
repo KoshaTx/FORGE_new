@@ -17,9 +17,9 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.lipid_context import HEAD_REGION
-from forge.design.phase1_tree_topology_flow import preorder_offspring_to_parents
-from forge.design.v5_morphology_program import (
+from forge.design.flow.lipid_context import HEAD_REGION
+from forge.design.flow.phase1_tree_topology_flow import preorder_offspring_to_parents
+from forge.design.flow.v5_morphology_program import (
     V5GlobalMorphologyProgram,
     program_from_sparse_record,
     sample_morphology_with_exact_program,

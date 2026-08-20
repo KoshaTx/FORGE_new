@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_hybrid_search import build_hybrid_search_diagnostic
+from forge.route.engine.ugi3_hybrid_search import build_hybrid_search_diagnostic
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.l2_forward_resolver_manifest import build_l2_forward_resolver_config
+from forge.route.assessment.l2_forward_resolver_manifest import build_l2_forward_resolver_config
 
 REPO = Path(__file__).resolve().parents[1]
 

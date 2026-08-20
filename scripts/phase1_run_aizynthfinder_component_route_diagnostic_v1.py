@@ -18,7 +18,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.route.aizynthfinder_diagnostic import (
+from forge.route.audit.aizynthfinder_diagnostic import (
     RESULT_SCHEMA_VERSION,
     AiZynthFinderDiagnosticError,
     content_sha256,

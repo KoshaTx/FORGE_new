@@ -8,7 +8,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_graded_route_readiness_guidance import (
+from forge.design.guidance.ugi_graded_route_readiness_guidance import (
     run_graded_route_readiness_guidance,
 )
 

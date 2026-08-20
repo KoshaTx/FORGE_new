@@ -3,14 +3,14 @@ from dataclasses import replace
 from gzip import open as gzip_open
 from pathlib import Path
 
-from forge.route.planner import AssessmentOutcome
-from forge.value.synthesis import ProductSynthesisValue
-from forge.value.ugi_exact_closure_guidance import (
+from forge.route.engine.planner import AssessmentOutcome
+from forge.value.synthesis.synthesis import ProductSynthesisValue
+from forge.value.guidance.ugi_exact_closure_guidance import (
     GuidanceDisposition,
     exact_closure_potential_from_product_value,
     smc_utility_bridge_from_exact_closure,
 )
-from forge.value.ugi_route_completion_utility_qualification import (
+from forge.value.guidance.ugi_route_completion_utility_qualification import (
     build_route_completion_utility_qualification,
 )
 

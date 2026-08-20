@@ -9,8 +9,8 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.route.ugi3_virtual_programs import ALDEHYDE_ROLE, ISOCYANIDE_ROLE
-from forge.value.ugi3_family_applicability_census import (
+from forge.route.terminals.ugi3_virtual_programs import ALDEHYDE_ROLE, ISOCYANIDE_ROLE
+from forge.value.coverage.ugi3_family_applicability_census import (
     EXTRAPOLATION_REVIEW,
     MISSING_METADATA,
     RECURRENT_BUCKET,

@@ -8,13 +8,13 @@ from typing import Any
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_route_registry_pair_builder import (
+from forge.route.assessment.ugi3_route_registry_pair_builder import (
     OUTPUT_LABELS,
     REQUIRED_BINDING_POLICY,
     Ugi3RouteRegistryPairBuilderError,
     build_registry_pair,
 )
-from forge.route.ugi3_route_registry_pair_contract import (
+from forge.route.assessment.ugi3_route_registry_pair_contract import (
     TARGET_ROLE,
     TARGET_SMILES,
     Ugi3RouteRegistryPairContractError,

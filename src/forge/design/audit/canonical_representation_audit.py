@@ -18,8 +18,8 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
-from forge.design.defog_feasibility import AtomState, FeasibilityError, sha256_file
-from forge.design.v5_sparse_representation import (
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError, sha256_file
+from forge.design.flow.v5_sparse_representation import (
     V5SparseGraphRecord,
     tensorize_v5_sparse_molecule,
     v5_constitutional_roundtrip_exact,

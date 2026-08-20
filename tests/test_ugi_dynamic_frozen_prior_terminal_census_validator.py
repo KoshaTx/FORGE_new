@@ -10,8 +10,8 @@ from typing import Any
 import pytest
 import torch
 
-import forge.product.ugi_dynamic_frozen_prior_terminal_census as census_module
-from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
+import forge.design.flow.ugi_dynamic_frozen_prior_terminal_census as census_module
+from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     CensusContract,
     CensusDesign,
     _jsonl_gzip_bytes,
@@ -20,19 +20,19 @@ from forge.product.ugi_dynamic_frozen_prior_terminal_census import (
     execute_census_shard,
     select_frozen_prior_programs,
 )
-from forge.product.ugi_dynamic_frozen_prior_terminal_census_validator import (
+from forge.design.audit.ugi_dynamic_frozen_prior_terminal_census_validator import (
     EXPECTED_SCOPE,
     UgiDynamicTerminalCensusValidationError,
     load_validation_contract,
     validate_completed_census,
     write_validation_receipt,
 )
-from forge.product.ugi_joint_sparse_sampling import UgiJointSparseTrajectoryState
-from forge.product.ugi_nonzero_guidance_runner import GuidanceStateReceipt
-from forge.product.ugi_restartable_terminal_support_adapter import (
+from forge.design.sampling.ugi_joint_sparse_sampling import UgiJointSparseTrajectoryState
+from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceStateReceipt
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     decode_canonical_morphology_program_bytes,
 )
-from forge.product.ugi_selected_guidance_adapter import (
+from forge.design.flow.ugi_selected_guidance_adapter import (
     SelectedGuidanceParticleState,
     SelectedGuidanceState,
 )

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.agile_reconciliation import (
+from forge.potency.oracle.agile_reconciliation import (
     AgileReconciliationError,
     run_agile_reconciliation,
 )

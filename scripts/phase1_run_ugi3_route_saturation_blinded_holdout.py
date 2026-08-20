@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.route.ugi3_route_saturation_blinded_execution import (
+from forge.route.terminals.ugi3_route_saturation_blinded_execution import (
     run_one_shot_blinded_holdout,
     validate_completed_blinded_holdout,
 )

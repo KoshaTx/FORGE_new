@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.graph2edits_runtime_qualification import (
+from forge.route.engine.graph2edits_runtime_qualification import (
     Graph2EditsRuntimeQualificationError,
     parse_hash_lock,
     verify_runtime_receipt,

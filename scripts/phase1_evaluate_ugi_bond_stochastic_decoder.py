@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_terminal_decoder_challenger import (
+from forge.design.sampling.ugi_terminal_decoder_challenger import (
     build_bond_stochastic_evaluation,
 )
 

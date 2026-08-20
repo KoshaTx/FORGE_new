@@ -10,7 +10,7 @@ from typing import Any
 
 from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_file
-from forge.design.ugi_morphology_program import maximum_adjacent_branch_graph_run
+from forge.design.flow.ugi_morphology_program import maximum_adjacent_branch_graph_run
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 CANDIDATE_SCHEMA_VERSION = "phase1_ugi_branch_spacing_promotion_candidate.v1"

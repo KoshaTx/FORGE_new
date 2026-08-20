@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.route.hydrophobic_motif_transfer import (
+from forge.route.assessment.hydrophobic_motif_transfer import (
     CONFIG_SCHEMA_VERSION,
     HydrophobicMotifTransferError,
     build_hydrophobic_motif_transfer,

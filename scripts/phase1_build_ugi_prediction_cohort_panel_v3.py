@@ -48,7 +48,7 @@ NX_COLUMN = {
 
 
 def route_index(repo: Path) -> dict[str, Any]:
-    from forge.product.ugi_bounded_hybrid_route_cascade import read_jsonl_gzip
+    from forge.design.flow.ugi_bounded_hybrid_route_cascade import read_jsonl_gzip
 
     def load(names: tuple[str, ...], label: str) -> dict[str, dict[str, Any]]:
         merged: dict[str, dict[str, Any]] = {}
@@ -127,7 +127,7 @@ def similarity_matrix(products: list[str]) -> list[list[float]]:
 
 
 def build(repo: Path, output_dir: Path) -> dict[str, Any]:
-    from forge.product.ugi_bounded_hybrid_route_cascade import (
+    from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
         atomic_write, canonical_json_bytes, jsonl_gzip_bytes, sha256_file, sha256_payload,
     )
 

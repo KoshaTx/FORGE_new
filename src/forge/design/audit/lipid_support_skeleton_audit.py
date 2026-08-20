@@ -16,14 +16,14 @@ import numpy as np
 from rdkit import Chem, rdBase
 
 from forge.core.io import atomic_write as _atomic_write
-from forge.design.defog_feasibility import sha256_file
-from forge.design.lipid_context import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.lipid_context import (
     HEAD_REGION,
     TAIL_REGION,
     assign_lipid_regions,
     select_lipid_polar_root,
 )
-from forge.design.lipid_support_skeleton import (
+from forge.design.flow.lipid_support_skeleton import (
     FUNCTIONAL_SUPPORT,
     SKELETON_VARIANTS,
     encode_lipid_support_skeleton,

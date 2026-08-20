@@ -20,32 +20,32 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
-from forge.design.ugi_selected_generator_implementation import (
-    build_selected_generator_implementation_qualification,
-)
-from forge.design.ugi_selected_guidance_adapter import (
+from forge.design.flow.ugi_selected_guidance_adapter import (
     SelectedGuidanceState,
     UgiSelectedGuidanceAdapterError,
     _sha256_payload,
 )
-from forge.design.ugi_selected_guidance_adapter_v2 import (
+from forge.design.flow.ugi_selected_guidance_adapter_v2 import (
     SelectedModelRestartableGuidanceLaneV2,
 )
-from forge.design.ugi_selected_restartable_generator import (
+from forge.design.guidance.ugi_zero_guidance_rehearsal import (
+    RestartableGeneratorClosureAdapter,
+    RestartableGeneratorClosureIdentity,
+)
+from forge.design.sampling.ugi_selected_generator_implementation import (
+    build_selected_generator_implementation_qualification,
+)
+from forge.design.sampling.ugi_selected_restartable_generator import (
     SAMPLE_STEPS,
     SelectedRestartableGeneratorLane,
 )
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     _PENDING_EQUIVALENCE_SHA256,
     CLOSURE_CHECKPOINT_SHA256,
     GENERATOR_CHECKPOINT_SHA256,
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_DECODER_ID,
     build_selected_step2000_bond_stochastic_lane,
-)
-from forge.design.ugi_zero_guidance_rehearsal import (
-    RestartableGeneratorClosureAdapter,
-    RestartableGeneratorClosureIdentity,
 )
 
 SELECTED_GUIDANCE_ADAPTER_V3_SCHEMA_VERSION = "forge.selected_guidance_adapter.v3"

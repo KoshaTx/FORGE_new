@@ -4,7 +4,7 @@ from collections import Counter
 
 import pytest
 
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceRecord,
@@ -18,7 +18,7 @@ from forge.route.planner import (
     RouteStepProposal,
     RouteTarget,
 )
-from forge.route.ugi3_support_boundary import (
+from forge.route.assessment.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,
     MolecularSupportState,
     RoutePriorityLane,

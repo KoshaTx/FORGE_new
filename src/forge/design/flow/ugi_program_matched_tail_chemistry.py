@@ -15,7 +15,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.audit.ugi_tail_chemotype_audit import component_chemotype_metrics
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 TAIL_ROLES = ("oxoester_aldehyde_body_tail", "isocyanide_tail")

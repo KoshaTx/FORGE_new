@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_fresh_pool_route_coverage_v3 import (
+from forge.value.coverage.ugi3_fresh_pool_route_coverage_v3 import (
     build_fresh_pool_route_coverage_v3,
 )
 

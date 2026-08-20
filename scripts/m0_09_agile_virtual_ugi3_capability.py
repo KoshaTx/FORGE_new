@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.ugi3_virtual_capability import (
+from forge.route.evidence.ugi3_virtual_capability import (
     Ugi3VirtualCapabilityError,
     build_ugi3_virtual_capability,
     write_ugi3_virtual_capability,

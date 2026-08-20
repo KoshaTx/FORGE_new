@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
     MatchedArm,

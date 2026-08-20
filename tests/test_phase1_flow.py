@@ -9,8 +9,8 @@ from rdkit import Chem
 
 torch = pytest.importorskip("torch")
 
-from forge.product.defog_feasibility import AtomState  # noqa: E402
-from forge.product.phase1_flow import (  # noqa: E402
+from forge.design.flow.defog_feasibility import AtomState  # noqa: E402
+from forge.design.flow.phase1_flow import (  # noqa: E402
     Phase1FlowError,
     SparseWholeLipidFlow,
     TrainingGraphRecord,
@@ -30,7 +30,7 @@ from forge.product.phase1_flow import (  # noqa: E402
     _validate_effective_training_config,
     run_tiny_overfit_gate,
 )
-from forge.product.sparse_topology_feasibility import (  # noqa: E402
+from forge.design.flow.sparse_topology_feasibility import (  # noqa: E402
     _noise_sparse_batch,
     collate_sparse_records,
     tensorize_sparse_row,

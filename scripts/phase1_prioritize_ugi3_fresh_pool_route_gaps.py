@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_fresh_pool_route_priority import build_fresh_pool_route_priority
+from forge.value.coverage.ugi3_fresh_pool_route_priority import build_fresh_pool_route_priority
 
 REPO = Path(__file__).resolve().parents[1]
 

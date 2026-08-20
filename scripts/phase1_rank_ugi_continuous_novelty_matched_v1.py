@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_continuous_novelty_matched_ranking import (
+from forge.potency.ranking.ugi_continuous_novelty_matched_ranking import (
     build_continuous_novelty_matched_ranking,
 )
 

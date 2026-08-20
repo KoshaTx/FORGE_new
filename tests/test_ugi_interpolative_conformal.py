@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from forge.potency.ugi_interpolative_conformal import _scheme_metrics
+from forge.potency.applicability.ugi_interpolative_conformal import _scheme_metrics
 
 
 def test_scheme_metrics_require_minimum_fold_size() -> None:

@@ -5,7 +5,7 @@ import pytest
 pytest.importorskip("rdkit")
 from rdkit import Chem  # noqa: E402
 
-from forge.product.lipid_morphology_audit import molecule_morphology  # noqa: E402
+from forge.design.audit.lipid_morphology_audit import molecule_morphology  # noqa: E402
 
 
 def test_morphology_recovers_path_like_hydrophobic_arms() -> None:

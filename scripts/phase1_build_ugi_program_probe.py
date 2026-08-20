@@ -13,8 +13,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_training_cache import load_ugi_training_cache
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 

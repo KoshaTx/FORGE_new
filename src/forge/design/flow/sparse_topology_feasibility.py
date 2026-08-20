@@ -28,7 +28,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
-from forge.design.defog_feasibility import (
+from forge.design.flow.defog_feasibility import (
     AtomState,
     FeasibilityError,
     _connected,
@@ -45,7 +45,7 @@ from forge.design.defog_feasibility import (
     sha256_file,
     topology_hash,
 )
-from forge.design.lipid_context import assign_lipid_regions, select_lipid_polar_root
+from forge.design.flow.lipid_context import assign_lipid_regions, select_lipid_polar_root
 
 try:
     import torch

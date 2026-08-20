@@ -21,7 +21,7 @@ from typing import Any, Literal
 from forge.core.hashing import sha256_bytes, sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import csv_gz_bytes as _csv_bytes
-from forge.design.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.audit.ugi_tail_chemotype_audit import component_chemotype_metrics
 from forge.potency.applicability import ugi_distributional_applicability as applicability
 
 DERIVATION_CONFIG_SCHEMA = "phase1_ugi_bounded_structural_envelope_derivation_config.v1"

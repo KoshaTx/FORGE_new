@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_virtual_programs import (
+from forge.route.terminals.ugi3_virtual_programs import (
     ESTER_PROGRAM,
     ISOCYANIDE_PROGRAM,
     Ugi3VirtualProgramError,

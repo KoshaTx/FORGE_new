@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_hela_potency_diagnostic_readiness import (
+from forge.design.flow.ugi_hela_potency_diagnostic_readiness import (
     build_hela_potency_diagnostic_readiness,
 )
 

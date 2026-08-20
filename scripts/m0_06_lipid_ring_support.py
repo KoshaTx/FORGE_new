@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.ring_support_audit import (
+from forge.design.audit.ring_support_audit import (
     RingSupportAuditError,
     run_ring_support_audit,
 )

@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from forge.product.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
-from forge.product.ugi_joint_sparse_flow import (
+from forge.design.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     UgiJointSparseFlowError,
     _legacy_sample_ugi_joint_sparse_terminals,
@@ -18,7 +18,7 @@ from forge.product.ugi_joint_sparse_flow import (
     sample_ugi_joint_sparse_terminals,
     ugi_joint_sparse_loss,
 )
-from forge.product.ugi_joint_sparse_sampling import (
+from forge.design.sampling.ugi_joint_sparse_sampling import (
     UgiJointSparseTrajectoryState,
     advance_ugi_joint_sparse_state,
     extract_ugi_joint_sparse_particles,
@@ -26,11 +26,11 @@ from forge.product.ugi_joint_sparse_sampling import (
     initialize_ugi_joint_sparse_state,
     resample_ugi_joint_sparse_ancestry,
 )
-from forge.product.ugi_joint_sparse_training import (
+from forge.design.training.ugi_joint_sparse_training import (
     UgiJointSparseTrainingError,
     _validated_checkpoint_steps,
 )
-from forge.product.ugi_morphology_program import (
+from forge.design.flow.ugi_morphology_program import (
     UgiMorphologyProgram,
     attached_tree_matches_program,
 )

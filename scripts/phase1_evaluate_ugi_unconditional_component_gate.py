@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_held_component_gate import evaluate_unconditional_component_gate
+from forge.design.corpus.ugi_held_component_gate import evaluate_unconditional_component_gate
 
 REPO = Path(__file__).resolve().parents[1]
 

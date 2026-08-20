@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_morphology_proposal_confirmation import (
+from forge.design.sampling.ugi_morphology_proposal_confirmation import (
     aggregate_confirmation,
     confirmation_plan,
     run_all_confirmation_shards,

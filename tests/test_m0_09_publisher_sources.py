@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.pmc_sources import FetchResponse
-from forge.route.publisher_sources import (
+from forge.route.sources.pmc_sources import FetchResponse
+from forge.route.sources.publisher_sources import (
     PublisherSourceError,
     acquire_publisher_sources,
     load_publisher_sources,

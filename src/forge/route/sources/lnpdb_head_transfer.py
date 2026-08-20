@@ -21,7 +21,7 @@ from forge.chemistry import (
 from forge.core.hashing import sha256_file
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import read_json_object
-from forge.design.ring_support_audit import _ring_signature
+from forge.design.audit.ring_support_audit import _ring_signature
 
 CONFIG_SCHEMA_VERSION = "m0_09_lnpdb_head_transfer_config.v1"
 RESULT_SCHEMA_VERSION = "m0_09_lnpdb_head_transfer_result.v1"

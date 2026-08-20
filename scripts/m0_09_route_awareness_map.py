@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.route_awareness import (
+from forge.route.assessment.route_awareness import (
     RouteAwarenessError,
     build_route_awareness,
     write_route_awareness,

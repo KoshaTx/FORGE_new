@@ -10,7 +10,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from forge.product.ugi_joint_kernel_lambda_zero_identity import (
+from forge.design.guidance.ugi_joint_kernel_lambda_zero_identity import (
     finalize_all_seed_qualification,
     run_seed_qualification,
 )

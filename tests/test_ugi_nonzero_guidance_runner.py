@@ -7,16 +7,16 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.product.ugi_matched_planner_cache_binding import (
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.product.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GuidanceAssessmentContext,
     GuidanceCacheFinalization,
@@ -35,8 +35,8 @@ from forge.product.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
     run_development_matched_guidance,
 )
-from forge.route.planner import PlannerBudgetLimits
-from forge.route.planner_cache import FilePlannerCache, PlannerCacheContext, PlannerCacheError
+from forge.route.engine.planner import PlannerBudgetLimits
+from forge.route.engine.planner_cache import FilePlannerCache, PlannerCacheContext, PlannerCacheError
 
 REPO = Path(__file__).resolve().parents[1]
 FAKE_SHA = "a" * 64

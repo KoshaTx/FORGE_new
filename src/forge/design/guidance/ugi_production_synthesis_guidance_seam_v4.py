@@ -23,10 +23,38 @@ from typing import Any
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_matched_planner_cache_binding import (
+from forge.design.audit.ugi_zero_guidance_typed_audit import (
+    build_support_audit_artifact,
+    derive_typed_counts,
+)
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    native_completion_record_from_locked_terminal,
+)
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+    SELECTED_GUIDANCE_ADAPTER_V3_SCHEMA_VERSION,
+    build_selected_model_restartable_guidance_lane_v3,
+)
+from forge.design.guidance.ugi_production_zero_guidance_seam_v3 import (
+    ProductionGuidanceRouteEvaluatorV3,
+    UgiProductionZeroGuidanceSeamV3Error,
+    _annotate_support_record_coordinates,
+    _canonical_identity,
+    _parse_productive_terminal_id,
+    _require_selected_v3_productive_identity,
+)
+from forge.design.guidance.ugi_production_zero_guidance_seam_v3 import (
+    _validate_config as _validate_zero_seam_config,
+)
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
+    GENERATOR_CHECKPOINT_SHA256,
+    MAXIMUM_ADJACENT_BRANCH_RUNS,
+    TERMINAL_DECODER_ID,
+)
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.design.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GuidanceCacheIsolationContract,
     GuidanceComputeBudget,
@@ -36,36 +64,8 @@ from forge.design.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
     run_development_matched_guidance,
 )
-from forge.design.ugi_production_terminal_route_evaluator import (
+from forge.design.schedule.ugi_production_terminal_route_evaluator import (
     build_production_ugi_terminal_aware_planner_factory,
-)
-from forge.design.ugi_production_zero_guidance_seam_v3 import (
-    ProductionGuidanceRouteEvaluatorV3,
-    UgiProductionZeroGuidanceSeamV3Error,
-    _annotate_support_record_coordinates,
-    _canonical_identity,
-    _parse_productive_terminal_id,
-    _require_selected_v3_productive_identity,
-)
-from forge.design.ugi_production_zero_guidance_seam_v3 import (
-    _validate_config as _validate_zero_seam_config,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    native_completion_record_from_locked_terminal,
-)
-from forge.design.ugi_selected_guidance_adapter_v3 import (
-    SELECTED_GUIDANCE_ADAPTER_V3_SCHEMA_VERSION,
-    build_selected_model_restartable_guidance_lane_v3,
-)
-from forge.design.ugi_selected_restartable_generator_v2 import (
-    GENERATOR_CHECKPOINT_SHA256,
-    MAXIMUM_ADJACENT_BRANCH_RUNS,
-    TERMINAL_DECODER_ID,
-)
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
-from forge.design.ugi_zero_guidance_typed_audit import (
-    build_support_audit_artifact,
-    derive_typed_counts,
 )
 from forge.route.engine.planner_cache import FilePlannerCache
 from forge.value.guidance.ugi_exact_closure_guidance import (

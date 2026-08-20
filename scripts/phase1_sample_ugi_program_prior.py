@@ -13,8 +13,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_program_prior import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_program_prior import (
     load_program_prior,
     sample_weighted_program_prior,
 )

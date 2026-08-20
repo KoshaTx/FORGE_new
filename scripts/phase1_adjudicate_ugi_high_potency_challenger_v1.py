@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_high_potency_challenger_adjudication import (
+from forge.potency.morphology.ugi_high_potency_challenger_adjudication import (
     adjudicate_high_potency_challenger,
 )
 

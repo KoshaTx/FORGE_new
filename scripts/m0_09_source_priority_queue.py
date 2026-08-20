@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.source_priority import (
+from forge.route.sources.source_priority import (
     SourcePriorityError,
     build_source_priority,
     write_source_priority,

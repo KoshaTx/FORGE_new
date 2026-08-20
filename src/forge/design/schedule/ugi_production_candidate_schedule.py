@@ -17,7 +17,7 @@ from typing import Any
 import numpy as np
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_matched_morphology_allocation_schedule import (
+from forge.design.schedule.ugi_matched_morphology_allocation_schedule import (
     _logical_sha256,
     _program,
     _read_jsonl_gzip,

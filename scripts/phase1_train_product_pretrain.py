@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.phase1_flow import Phase1FlowError, train_product_pretrain
+from forge.design.flow.phase1_flow import Phase1FlowError, train_product_pretrain
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -8,9 +8,9 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
-from forge.design.ugi_joint_sparse_flow import project_joint_sparse_record
+from forge.design.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_joint_sparse_flow import project_joint_sparse_record
 
 try:
     import torch

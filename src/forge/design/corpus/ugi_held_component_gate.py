@@ -20,16 +20,16 @@ from rdkit.Chem import rdFingerprintGenerator
 
 from forge.data.r0_splits import sha256_file
 from forge.data.r1_prime_audit import compile_reactions, load_reaction_definitions
-from forge.design.ugi_chemistry_flow import UgiChemistrySample
-from forge.design.ugi_component_expansion import reaction_handle_qualification
-from forge.design.ugi_generated_components import generated_ugi_component_smiles
-from forge.design.ugi_joint_sparse_flow import (
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
+from forge.design.corpus.ugi_generated_components import generated_ugi_component_smiles
+from forge.design.flow.ugi_chemistry_flow import UgiChemistrySample
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
     noise_ugi_joint_sparse_batch,
     ugi_joint_sparse_loss,
 )
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.ugi_distributional_applicability import (
+from forge.potency.applicability.ugi_distributional_applicability import (
     ChemicalReference,
     DistancePair,
     _bins,

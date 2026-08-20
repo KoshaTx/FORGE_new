@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.ugi3_virtual_programs import (
+from forge.route.terminals.ugi3_virtual_programs import (
     Ugi3VirtualProgramError,
     build_ugi3_virtual_component_programs,
     write_ugi3_virtual_component_programs,

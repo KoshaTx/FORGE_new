@@ -11,17 +11,17 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.design.adapter_node_conditioning import AdapterNodeConditioning
-from forge.design.defog_feasibility import AtomState, _rstar_step
-from forge.design.phase1_flow import DeterministicSparseFlowBlock
-from forge.design.ugi_adapter_features import ORIGIN_TO_INDEX
-from forge.design.ugi_chemistry_corpus import UgiChemistryRecord
-from forge.design.ugi_chemistry_interface import (
+from forge.design.corpus.ugi_chemistry_corpus import UgiChemistryRecord
+from forge.design.flow.adapter_node_conditioning import AdapterNodeConditioning
+from forge.design.flow.defog_feasibility import AtomState, _rstar_step
+from forge.design.flow.phase1_flow import DeterministicSparseFlowBlock
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX
+from forge.design.flow.ugi_chemistry_interface import (
     ROOT_BOND_TARGET,
     ChemistryTopologyCondition,
     recompute_adapter_distances,
 )
-from forge.design.v5_sparse_representation import (
+from forge.design.flow.v5_sparse_representation import (
     _INDEX_TO_BOND_TYPE,
     V5SparseGraphRecord,
     v5_graph_to_molecule,

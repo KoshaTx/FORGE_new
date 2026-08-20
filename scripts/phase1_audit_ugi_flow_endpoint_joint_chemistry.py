@@ -14,32 +14,32 @@ import numpy as np
 from rdkit import Chem
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_chemistry_flow import (
+from forge.design.flow.ugi_chemistry_flow import (
     UgiChemistryFlowError,
     chemistry_sample_statistics,
     chemistry_sample_to_molecule,
 )
-from forge.product.ugi_end_to_end_sampling import _closure_model, _load_checkpoint
-from forge.product.ugi_generated_components import (
+from forge.design.sampling.ugi_end_to_end_sampling import _closure_model, _load_checkpoint
+from forge.design.corpus.ugi_generated_components import (
     UgiGeneratedComponentError,
     generated_ugi_component_smiles,
 )
-from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.product.ugi_joint_end_to_end_sampling import (
+from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.sampling.ugi_joint_end_to_end_sampling import (
     _annotate_l1_terminal_admission,
     _load_matched_programs,
     complete_ugi_joint_terminals,
     flow_endpoint_chemistry_sample,
 )
-from forge.product.ugi_joint_sparse_flow import (
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     sample_ugi_joint_sparse_terminals,
 )
-from forge.product.ugi_terminal_decoder_challenger import (
+from forge.design.sampling.ugi_terminal_decoder_challenger import (
     TAIL_ROLES,
     summarize_terminal_decoder_arm,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.value.ugi3_stepwise_route_value_contrast import stepwise_utility
+from forge.value.audit.ugi3_stepwise_route_value_contrast import stepwise_utility
 
 
 def test_stepwise_utility_is_component_identity_based_not_family_named() -> None:

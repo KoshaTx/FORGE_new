@@ -15,17 +15,17 @@ import torch
 from rdkit import rdBase
 from sklearn.dummy import DummyRegressor
 
-from forge.potency import oracle_graph_matrix as graph_matrix
-from forge.potency.oracle_classical import build_feature_bundle
-from forge.potency.oracle_freeze import RESULT_SCHEMA_VERSION as FREEZE_RESULT_SCHEMA_VERSION
-from forge.potency.oracle_graph import (
+from forge.potency.oracle import oracle_graph_matrix as graph_matrix
+from forge.potency.oracle.oracle_classical import build_feature_bundle
+from forge.potency.oracle.oracle_freeze import RESULT_SCHEMA_VERSION as FREEZE_RESULT_SCHEMA_VERSION
+from forge.potency.oracle.oracle_graph import (
     DMPNNEncoder,
     GraphFeatureVocabulary,
     OracleGraphRecord,
     WholeGraphRegressor,
     tensorize_smiles,
 )
-from forge.potency.oracle_production import (
+from forge.potency.oracle.oracle_production import (
     CHECKPOINT_SCHEMA_VERSION,
     CONFIG_SCHEMA_VERSION,
     RESULT_SCHEMA_VERSION,

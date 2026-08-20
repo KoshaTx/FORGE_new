@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_chemistry_morphology_challenger import build_challenger_evaluation
+from forge.design.flow.ugi_chemistry_morphology_challenger import build_challenger_evaluation
 
 REPO = Path(__file__).resolve().parents[1]
 

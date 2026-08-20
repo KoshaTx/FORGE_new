@@ -16,7 +16,7 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.route.aizynthfinder_single_step_recovery import (
+from forge.route.engine.aizynthfinder_single_step_recovery import (
     CONFIG_SCHEMA_VERSION,
     LEDGER_SCHEMA_VERSION,
     AiZynthFinderRecoveryError,

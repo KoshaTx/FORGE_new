@@ -12,8 +12,7 @@ from typing import Any
 import numpy as np
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_morphology_corpus import (
+from forge.design.corpus.ugi_morphology_corpus import (
     balanced_product_weights,
     component_marginal_errors,
     component_program_ledger,
@@ -23,7 +22,8 @@ from forge.design.ugi_morphology_corpus import (
     load_ugi_morphology_corpus,
     sample_family_balanced_records,
 )
-from forge.design.ugi_morphology_flow import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_morphology_flow import (
     UgiMorphologyFlow,
     UgiMorphologySample,
     collate_ugi_morphology_records,
@@ -32,7 +32,7 @@ from forge.design.ugi_morphology_flow import (
     ugi_morphology_flow_loss,
     ugi_morphology_statistics,
 )
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.ugi_morphology_program import (
     component_offspring_marginals,
     component_weighted_offspring_marginals,
     component_weighted_program_pool,

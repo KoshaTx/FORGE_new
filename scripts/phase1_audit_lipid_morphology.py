@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.lipid_morphology_audit import audit_r0_morphology, write_audit
+from forge.design.audit.lipid_morphology_audit import audit_r0_morphology, write_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

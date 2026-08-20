@@ -47,11 +47,11 @@ import numpy as np
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from forge.product.ugi_joint_sparse_flow import (  # noqa: E402
+from forge.design.flow.ugi_joint_sparse_flow import (  # noqa: E402
     project_joint_sparse_record,
 )
-from forge.product.ugi_training_cache import load_ugi_training_cache  # noqa: E402
-from forge.product.ugi_morphology_program import (  # noqa: E402
+from forge.design.training.ugi_training_cache import load_ugi_training_cache  # noqa: E402
+from forge.design.flow.ugi_morphology_program import (  # noqa: E402
     preorder_attached_forest_to_parents,
 )
 
@@ -154,7 +154,7 @@ def check(record) -> dict[str, bool]:
             np.sort(flat_full[flat_anchors]), np.sort(record.full_indices[anchors])))
 
     # The twelve program numbers, recomputed from the flat layout rather than asserted.
-    from forge.product.ugi_morphology_program import attached_tree_junction_contributions
+    from forge.design.flow.ugi_morphology_program import attached_tree_junction_contributions
     recomputed_counts, recomputed_junctions, recomputed_attachments = [], [], []
     for role_index in range(len(program.node_counts)):
         selected = flat_roles == role_index

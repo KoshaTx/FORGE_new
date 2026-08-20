@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.ugi_l1_origin_annotations import build_phase1_ugi_l1_semantics
+from forge.design.corpus.ugi_l1_origin_annotations import build_phase1_ugi_l1_semantics
 
 REPO = Path(__file__).resolve().parents[1]
 

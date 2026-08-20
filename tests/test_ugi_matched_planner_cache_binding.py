@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
     MatchedArm,
@@ -17,11 +17,11 @@ from forge.product.ugi_matched_budget_orchestration import (
     RouteComputeUsage,
     run_diagnostic_matched_budget_arms,
 )
-from forge.product.ugi_matched_planner_cache_binding import (
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
     MatchedPlannerCacheBindingPreflight,
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -33,7 +33,7 @@ from forge.route.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.planner_cache import (
+from forge.route.engine.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,

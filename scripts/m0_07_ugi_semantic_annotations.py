@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.ugi_semantic_annotations import (
+from forge.potency.audit.ugi_semantic_annotations import (
     UgiSemanticAnnotationError,
     build_ugi_semantic_annotations,
 )

@@ -26,8 +26,8 @@ REPO_DEFAULT = Path(__file__).resolve().parents[1]
 if str(REPO_DEFAULT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_DEFAULT / "src"))
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
-from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES  # noqa: E402
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     UgiBoundedHybridRouteCascadeError,
     atomic_write,
     canonical_json_bytes,
@@ -38,7 +38,7 @@ from forge.product.ugi_bounded_hybrid_route_cascade import (  # noqa: E402
     sha256_file,
     sha256_payload,
 )
-from forge.value.ugi_proposal_augmented_route_readiness import (  # noqa: E402
+from forge.value.guidance.ugi_proposal_augmented_route_readiness import (  # noqa: E402
     EXACT,
     FAMILY_ALL,
     UNRESOLVED,

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.product.ugi_terminal_decoder_challenger import summarize_terminal_decoder_arm
+from forge.design.sampling.ugi_terminal_decoder_challenger import summarize_terminal_decoder_arm
 
 
 def test_terminal_decoder_summary_keeps_semantic_failures_in_denominator() -> None:

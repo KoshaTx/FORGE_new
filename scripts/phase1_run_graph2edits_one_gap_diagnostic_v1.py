@@ -6,7 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.route.graph2edits_backend import (
+from forge.route.engine.graph2edits_backend import (
     GRAPH2EDITS_BACKEND_ID,
     GRAPH2EDITS_CHECKPOINT_LICENSE,
     GRAPH2EDITS_IMPLEMENTATION_VERSION,
@@ -17,10 +17,10 @@ from forge.route.graph2edits_backend import (
     Graph2EditsProposalBackend,
     build_syntheseus_worker,
 )
-from forge.route.graph2edits_one_gap_diagnostic import run_one_gap_diagnostic
-from forge.route.l2_forward_resolver import load_independent_l2_forward_resolver
-from forge.route.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
-from forge.route.proposal_engine import ProposalBackendManifest
+from forge.route.audit.graph2edits_one_gap_diagnostic import run_one_gap_diagnostic
+from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
+from forge.route.assessment.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
+from forge.route.engine.proposal_engine import ProposalBackendManifest
 
 
 def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:

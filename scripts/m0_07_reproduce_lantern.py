@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.potency.oracle_lantern import run_lantern_reproduction
+from forge.potency.oracle.oracle_lantern import run_lantern_reproduction
 
 
 def main() -> int:

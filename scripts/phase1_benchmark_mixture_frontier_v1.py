@@ -38,11 +38,11 @@ import numpy as np
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from forge.potency.reaction_factorized_surrogate import (  # noqa: E402
+from forge.potency.oracle.reaction_factorized_surrogate import (  # noqa: E402
     ReactionFactorizedSurrogate,
     RoleWeights,
 )
-from forge.potency.synthesis_aware_acquisition import (  # noqa: E402
+from forge.potency.ranking.synthesis_aware_acquisition import (  # noqa: E402
     AcquisitionPolicy,
     apply_activity_floor,
     select_batch,

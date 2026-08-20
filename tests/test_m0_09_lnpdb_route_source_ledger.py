@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.route.source_ledger import (
+from forge.route.sources.source_ledger import (
     PUBMED_SNAPSHOT_SCHEMA_VERSION,
     SourceLedgerError,
     build_source_ledger,

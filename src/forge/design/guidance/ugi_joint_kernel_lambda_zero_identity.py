@@ -24,13 +24,19 @@ from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_hela_potency_guidance_seam_v1 import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    native_completion_record_from_locked_terminal,
+)
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+    build_selected_model_restartable_guidance_lane_v3,
+)
+from forge.design.guidance.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
     EVALUATION_SEEDS,
     EXPECTED_SEEDS,
     run_lambda_zero_identity_gate,
 )
-from forge.design.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GroupedSMCScheduleQualification,
     GuidanceSchedule,
@@ -39,12 +45,6 @@ from forge.design.ugi_nonzero_guidance_runner import (
     ParticleGroupDesign,
     RestartableGuidanceLane,
     load_grouped_smc_schedule_qualification,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    native_completion_record_from_locked_terminal,
-)
-from forge.design.ugi_selected_guidance_adapter_v3 import (
-    build_selected_model_restartable_guidance_lane_v3,
 )
 from forge.potency.applicability import ugi_distributional_applicability as applicability_v1
 from forge.potency.applicability import ugi_distributional_applicability_v2 as applicability_v2

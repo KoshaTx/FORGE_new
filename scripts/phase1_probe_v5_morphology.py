@@ -14,9 +14,9 @@ from typing import Any
 
 import numpy as np
 
-from forge.product.canonical_representation_audit import load_atom_vocabulary
-from forge.product.defog_feasibility import set_determinism, sha256_file
-from forge.product.v5_morphology_flow import (
+from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
+from forge.design.flow.defog_feasibility import set_determinism, sha256_file
+from forge.design.flow.v5_morphology_flow import (
     V5MorphologyFlow,
     V5MorphologySample,
     collate_v5_morphology_records,
@@ -26,8 +26,8 @@ from forge.product.v5_morphology_flow import (
     v5_morphology_flow_loss,
     v5_morphology_statistics,
 )
-from forge.product.v5_morphology_program import program_from_sparse_record
-from forge.product.v5_sparse_representation import tensorize_v5_sparse_row
+from forge.design.flow.v5_morphology_program import program_from_sparse_record
+from forge.design.flow.v5_sparse_representation import tensorize_v5_sparse_row
 
 try:
     import torch

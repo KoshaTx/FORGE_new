@@ -12,18 +12,18 @@ from typing import Any
 import numpy as np
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_closure_placement import (
+from forge.design.corpus.ugi_morphology_corpus import (
+    load_expanded_ugi_morphology_corpus,
+    load_ugi_morphology_corpus,
+)
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_closure_placement import (
     UgiSparseClosureScorer,
     closure_set_loss,
     feasible_next_closures,
     sample_sparse_closures,
 )
-from forge.design.ugi_morphology_corpus import (
-    load_expanded_ugi_morphology_corpus,
-    load_ugi_morphology_corpus,
-)
-from forge.design.ugi_morphology_program import unique_component_morphologies
+from forge.design.flow.ugi_morphology_program import unique_component_morphologies
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

@@ -11,7 +11,7 @@ import pytest
 import torch
 from rdkit import Chem
 
-from forge.potency.oracle_graph import (
+from forge.potency.oracle.oracle_graph import (
     DMPNNEncoder,
     EdgeGINEncoder,
     GraphFeatureVocabulary,

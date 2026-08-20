@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.product.ugi_expanded_exemplars import build_expanded_ugi_exemplars
+from forge.design.corpus.ugi_expanded_exemplars import build_expanded_ugi_exemplars
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_expanded_exemplars.json"

@@ -17,13 +17,13 @@ import numpy as np
 
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_dynamic_frozen_prior_terminal_census import (
+from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     load_census_contract,
     load_selected_program_manifest,
 )
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.ugi_program_prior import UgiProgramPrior, load_program_prior
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.flow.ugi_program_prior import UgiProgramPrior, load_program_prior
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
 from forge.potency.audit.ugi_dynamic_controller_analysis import BinomialRidge, morphology_features

@@ -10,8 +10,8 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.potency.reaction_factorized_surrogate import ReactionFactorizedSurrogate
-from forge.potency.synthesis_aware_acquisition import (
+from forge.potency.oracle.reaction_factorized_surrogate import ReactionFactorizedSurrogate
+from forge.potency.ranking.synthesis_aware_acquisition import (
     AcquisitionPolicy,
     Candidate,
     SynthesisAwareAcquisitionError,
@@ -211,7 +211,7 @@ def test_activity_floor_is_separable_from_the_selection_rule():
     distribution while its baselines sample freely. On a learning metric that is a handicap,
     not an advantage, and it turns the comparison into one about the floor.
     """
-    from forge.potency.synthesis_aware_acquisition import apply_activity_floor
+    from forge.potency.ranking.synthesis_aware_acquisition import apply_activity_floor
 
     candidates = make_candidates(20)
     surrogate = fitted_surrogate(candidates)
@@ -230,7 +230,7 @@ def test_activity_floor_is_separable_from_the_selection_rule():
 
 
 def test_floor_rejects_an_empty_pool_and_a_bad_quantile():
-    from forge.potency.synthesis_aware_acquisition import apply_activity_floor
+    from forge.potency.ranking.synthesis_aware_acquisition import apply_activity_floor
 
     candidates = make_candidates()
     surrogate = fitted_surrogate(candidates)

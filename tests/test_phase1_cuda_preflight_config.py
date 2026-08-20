@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 
 from forge.data.r0_splits import sha256_file
-from forge.product.defog_feasibility import AtomState
-from forge.product.sparse_topology_feasibility import (
+from forge.design.flow.defog_feasibility import AtomState
+from forge.design.flow.sparse_topology_feasibility import (
     sparse_constitutional_roundtrip_exact,
     sparse_roundtrip_exact,
     tensorize_sparse_row,

@@ -10,14 +10,14 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.defog_feasibility import AtomState, _model_state_sha256
-from forge.design.lipid_context import tree_pair_ring_sizes
-from forge.design.phase1_flow import (
+from forge.design.flow.defog_feasibility import AtomState, _model_state_sha256
+from forge.design.flow.lipid_context import tree_pair_ring_sizes
+from forge.design.flow.phase1_flow import (
     Phase1FlowError,
     SparseWholeLipidFlow,
     _model_architecture_kwargs,
 )
-from forge.design.sparse_topology_feasibility import (
+from forge.design.flow.sparse_topology_feasibility import (
     BOND_VALENCE_UNITS,
     INDEX_TO_DENSE_BOND,
     _endpoint_candidate_mask,

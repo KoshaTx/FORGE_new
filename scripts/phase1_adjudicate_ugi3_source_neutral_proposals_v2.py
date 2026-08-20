@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.route.ugi3_source_neutral_proposal_adjudication_v2 import (
+from forge.route.sources.ugi3_source_neutral_proposal_adjudication_v2 import (
     build_source_neutral_adjudication_v2,
 )
 

@@ -4,15 +4,15 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     EvidenceTier,
     PlannerBudgetLedger,
     PlannerBudgetLimits,
     RecursiveRouteAssessor,
 )
-from forge.route.ugi3_exact_evidence_source import load_exact_evidence_only_source
-from forge.route.ugi3_hybrid_search import (
+from forge.route.sources.ugi3_exact_evidence_source import load_exact_evidence_only_source
+from forge.route.engine.ugi3_hybrid_search import (
     SearchChannel,
     build_hybrid_search_diagnostic,
     load_bounded_hybrid_source,

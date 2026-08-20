@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_production_synthesis_guidance_seam_v4 import (
+from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     RERUN_TOKEN,
     REVIEW_TOKEN,
     run_production_synthesis_guidance_seam_v4,

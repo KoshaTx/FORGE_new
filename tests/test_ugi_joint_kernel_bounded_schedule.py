@@ -7,17 +7,17 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from forge.product.ugi_joint_kernel_bounded_schedule import (
+from forge.design.schedule.ugi_joint_kernel_bounded_schedule import (
     _program_feasible,
     build_complete_program_pool,
     select_bounded_schedule,
 )
-from forge.product.ugi_joint_program_support_audit import build_joint_program_kernel
-from forge.product.ugi_morphology_program import UgiMorphologyProgram
-from forge.product.ugi_nonzero_guidance_runner import (
+from forge.design.audit.ugi_joint_program_support_audit import build_joint_program_kernel
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
 )
-from forge.product.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
 

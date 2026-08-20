@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_fresh_pool_audit import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.audit.ugi_fresh_pool_audit import (
     UgiFreshPoolAuditError,
     summarize_fresh_pool_rows,
     validate_sampling_metadata,

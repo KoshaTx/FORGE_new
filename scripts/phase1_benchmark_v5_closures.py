@@ -13,8 +13,8 @@ import tracemalloc
 from pathlib import Path
 from typing import Any
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.v5_closure_feasibility import exact_closure_completion
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.v5_closure_feasibility import exact_closure_completion
 
 REPO = Path(__file__).resolve().parents[1]
 IMPLEMENTATION = REPO / "src/forge/product/v5_closure_feasibility.py"

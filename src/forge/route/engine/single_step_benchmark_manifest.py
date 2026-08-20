@@ -22,7 +22,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.audit.ugi_tail_chemotype_audit import component_chemotype_metrics
 
 CONFIG_SCHEMA_VERSION = "forge.single_step_benchmark_manifest_builder.v1"
 LANE_MANIFEST_SCHEMA_VERSION = "forge.single_step_benchmark_lane_targets.v1"

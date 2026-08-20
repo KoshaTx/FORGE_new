@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
     KnowledgeResult,
@@ -16,7 +16,7 @@ from forge.route.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.ugi3_exact_c18_route import (
+from forge.route.evidence.ugi3_exact_c18_route import (
     Ugi3ExactC18RouteError,
     build_exact_c18_route_audit,
     load_exact_c18_route_overlay,

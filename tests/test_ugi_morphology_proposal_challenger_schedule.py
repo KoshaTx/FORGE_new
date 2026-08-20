@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.product.ugi_morphology_proposal_challenger_schedule import (
+from forge.design.schedule.ugi_morphology_proposal_challenger_schedule import (
     build_morphology_proposal_challenger_schedule,
 )
 

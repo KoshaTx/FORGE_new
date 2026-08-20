@@ -1,7 +1,7 @@
 import shutil
 from pathlib import Path
 
-from forge.route.ugi3_source_qualified_cumulative_inputs import (
+from forge.route.sources.ugi3_source_qualified_cumulative_inputs import (
     build_source_qualified_cumulative_inputs,
 )
 

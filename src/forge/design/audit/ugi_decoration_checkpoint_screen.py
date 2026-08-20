@@ -7,7 +7,7 @@ from collections import Counter
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from forge.design.ugi_program_matched_tail_chemistry import eligible_generated_rows
+from forge.design.flow.ugi_program_matched_tail_chemistry import eligible_generated_rows
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 MINIMUM_VALID_FRACTION = 0.95

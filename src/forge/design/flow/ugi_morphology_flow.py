@@ -17,8 +17,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.defog_feasibility import _rstar_step
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.defog_feasibility import _rstar_step
+from forge.design.flow.ugi_morphology_program import (
     UgiMorphologyProgram,
     UgiProductMorphology,
     attached_tree_matches_program,

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.ugi3_aldehyde_head_capability import (
+from forge.route.evidence.ugi3_aldehyde_head_capability import (
     Ugi3AldehydeHeadCapabilityError,
     build_ugi3_aldehyde_head_capability,
     write_ugi3_aldehyde_head_capability,

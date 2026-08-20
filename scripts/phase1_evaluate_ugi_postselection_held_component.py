@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_postselection_held_component import (
+from forge.design.corpus.ugi_postselection_held_component import (
     evaluate_postselection_held_component_stress,
 )
 

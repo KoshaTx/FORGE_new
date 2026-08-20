@@ -27,20 +27,20 @@ import numpy as np
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_matched_budget_orchestration import (
-    LockedMatchedTerminal,
-    RouteComputeUsage,
-)
-from forge.design.ugi_matched_planner_cache_binding import (
-    LazyMatchedPlannerCacheBinding,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.design.ugi_synthesis_guidance import (
+from forge.design.guidance.ugi_synthesis_guidance import (
     RolloutDisposition,
     keyed_random_seed,
     select_smc_ancestry,
+)
+from forge.design.schedule.ugi_matched_budget_orchestration import (
+    LockedMatchedTerminal,
+    RouteComputeUsage,
+)
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
+    LazyMatchedPlannerCacheBinding,
 )
 
 RUNNER_CONFIG_SCHEMA_VERSION = "phase1_ugi_nonzero_guidance_runner_config.v1"

@@ -19,8 +19,8 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_candidate_eligibility import compile_smarts, motif_hits
-from forge.design.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.audit.ugi_tail_chemotype_audit import component_chemotype_metrics
+from forge.design.guidance.ugi_candidate_eligibility import compile_smarts, motif_hits
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_chemistry_bias_attribution_config.v1"

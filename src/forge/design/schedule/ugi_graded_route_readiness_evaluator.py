@@ -18,15 +18,15 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_nonzero_guidance_runner import (
-    GuidanceAssessmentContext,
-    GuidanceRouteEvaluation,
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    native_completion_record_from_locked_terminal,
 )
-from forge.design.ugi_production_zero_guidance_seam_v3 import (
+from forge.design.guidance.ugi_production_zero_guidance_seam_v3 import (
     ProductionGuidanceRouteEvaluatorV3,
 )
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    native_completion_record_from_locked_terminal,
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
+    GuidanceAssessmentContext,
+    GuidanceRouteEvaluation,
 )
 from forge.value.guidance.ugi_proposal_augmented_route_readiness import (
     EXACT,

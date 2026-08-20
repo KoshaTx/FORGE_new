@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency import agile_reconciliation
-from forge.potency.agile_reconciliation import (
+from forge.potency.oracle import agile_reconciliation
+from forge.potency.oracle.agile_reconciliation import (
     AgileReconciliationError,
     _canonical,
     _load_config,

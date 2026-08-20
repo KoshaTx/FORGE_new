@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_route_aware_panel_feasibility import (
+from forge.design.flow.ugi_route_aware_panel_feasibility import (
     run_route_aware_panel_feasibility,
 )
 

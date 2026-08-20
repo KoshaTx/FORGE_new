@@ -12,8 +12,8 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_morphology_program import (
     attached_tree_matches_program,
     preorder_attached_forest_to_parents,
 )

@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.ugi_hela_potency_diagnostic import HeLaPotencyDiagnosticPolicy
-from forge.product.ugi_hela_potency_diagnostic_readiness import (
+from forge.potency.audit.ugi_hela_potency_diagnostic import HeLaPotencyDiagnosticPolicy
+from forge.design.flow.ugi_hela_potency_diagnostic_readiness import (
     UgiHeLaPotencyReadinessError,
     audit_historical_checkpoint_coverage,
     build_hela_potency_diagnostic_readiness,

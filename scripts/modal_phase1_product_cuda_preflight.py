@@ -122,8 +122,8 @@ def run_cuda_preflight(payload: dict[str, Any]) -> dict[str, Any]:
     import rdkit
     import torch
 
-    from forge.product.defog_feasibility import AtomState, _model_state_sha256, _parameter_count
-    from forge.product.phase1_flow import (
+    from forge.design.flow.defog_feasibility import AtomState, _model_state_sha256, _parameter_count
+    from forge.design.flow.phase1_flow import (
         SparseWholeLipidFlow,
         _checkpoint_package,
         _compact_training_record,
@@ -137,7 +137,7 @@ def run_cuda_preflight(payload: dict[str, Any]) -> dict[str, Any]:
         _save_checkpoint_atomic,
         _train_one_step,
     )
-    from forge.product.sparse_topology_feasibility import (
+    from forge.design.flow.sparse_topology_feasibility import (
         sparse_constitutional_roundtrip_exact,
         sparse_roundtrip_exact,
         tensorize_sparse_row,

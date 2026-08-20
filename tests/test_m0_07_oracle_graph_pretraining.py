@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 import torch
 
-from forge.potency.oracle_graph import GraphFeatureVocabulary, tensorize_smiles
-from forge.potency.oracle_graph_pretraining import (
+from forge.potency.oracle.oracle_graph import GraphFeatureVocabulary, tensorize_smiles
+from forge.potency.oracle.oracle_graph_pretraining import (
     MaskedFeatureDMPNN,
     OracleGraphPretrainingError,
     PretrainingRecord,

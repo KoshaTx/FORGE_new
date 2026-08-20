@@ -29,10 +29,10 @@ import numpy as np
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
-from forge.design.ugi_matched_budget_orchestration import LockedMatchedTerminal
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     native_completion_record_from_locked_terminal,
 )
+from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
 from forge.potency.applicability import ugi_distributional_applicability as v1
 from forge.potency.applicability import ugi_distributional_applicability_v2 as v2
 from forge.potency.applicability.ugi_interpolative_conformal import (

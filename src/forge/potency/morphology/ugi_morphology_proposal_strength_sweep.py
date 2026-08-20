@@ -15,7 +15,7 @@ from typing import Any
 import numpy as np
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_complete_morphology_proposal import support_preserving_probabilities
+from forge.design.sampling.ugi_complete_morphology_proposal import support_preserving_probabilities
 from forge.potency.applicability import ugi_distributional_applicability as applicability_v1
 from forge.potency.applicability import ugi_distributional_applicability_v2 as applicability_v2
 from forge.potency.audit.ugi_dynamic_controller_analysis import ROLE_COMPONENT_KEYS, ROLES, VIEWS

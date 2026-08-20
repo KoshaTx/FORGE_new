@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.canonical_representation_audit import (
+from forge.design.audit.canonical_representation_audit import (
     audit_canonical_representation,
     require_pass,
     write_audit,

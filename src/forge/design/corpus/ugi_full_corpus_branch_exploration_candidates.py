@@ -16,10 +16,10 @@ from rdkit import Chem, rdBase
 
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_constrained_stochastic_production_candidates import (
+from forge.design.corpus.ugi_held_component_gate import _reaction_contract
+from forge.design.training.ugi_constrained_stochastic_production_candidates import (
     exact_terminal_admission,
 )
-from forge.design.ugi_held_component_gate import _reaction_contract
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_full_corpus_branch_exploration_candidates_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_full_corpus_branch_exploration_candidates.v1"

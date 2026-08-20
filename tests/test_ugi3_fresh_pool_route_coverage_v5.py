@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.value.ugi3_fresh_pool_route_coverage_v5 import (
+from forge.value.coverage.ugi3_fresh_pool_route_coverage_v5 import (
     TARGET_ROLE,
     TARGET_SMILES,
     TARGET_SOURCE_CLASS,

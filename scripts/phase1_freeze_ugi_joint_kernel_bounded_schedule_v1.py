@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_joint_kernel_bounded_schedule import (
+from forge.design.schedule.ugi_joint_kernel_bounded_schedule import (
     build_joint_kernel_bounded_schedule,
 )
 

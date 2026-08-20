@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from forge.route.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE
-from forge.route.ugi3_route_gap_triage_v2 import (
+from forge.route.terminals.ugi3_precursor_leaf_closure import ALDEHYDE_ROLE, HEAD_ROLE
+from forge.route.audit.ugi3_route_gap_triage_v2 import (
     _family_discovery_cluster,
     classify_route_gap,
 )

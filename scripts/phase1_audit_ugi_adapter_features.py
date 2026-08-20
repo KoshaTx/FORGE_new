@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_adapter_feature_audit import audit_ugi_adapter_features
+from forge.design.audit.ugi_adapter_feature_audit import audit_ugi_adapter_features
 
 REPO = Path(__file__).resolve().parents[1]
 

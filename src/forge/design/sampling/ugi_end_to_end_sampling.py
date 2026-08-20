@@ -12,31 +12,31 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import Crippen, Descriptors, Draw, Lipinski, rdFingerprintGenerator
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_chemistry_corpus import (
+from forge.design.corpus.ugi_chemistry_corpus import (
     load_expanded_ugi_chemistry_corpus,
     load_ugi_chemistry_corpus,
 )
-from forge.design.ugi_chemistry_flow import (
+from forge.design.corpus.ugi_morphology_corpus import (
+    load_expanded_ugi_morphology_corpus,
+    load_ugi_morphology_corpus,
+    sample_family_balanced_records,
+)
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_chemistry_flow import (
     UgiChemistryFlow,
     chemistry_sample_statistics,
     chemistry_sample_to_molecule,
     sample_ugi_chemistry,
 )
-from forge.design.ugi_chemistry_interface import assemble_ugi_chemistry_topology_condition
-from forge.design.ugi_closure_placement import UgiSparseClosureScorer, sample_sparse_closures
-from forge.design.ugi_morphology_corpus import (
-    load_expanded_ugi_morphology_corpus,
-    load_ugi_morphology_corpus,
-    sample_family_balanced_records,
-)
-from forge.design.ugi_morphology_flow import UgiMorphologyFlow, sample_ugi_morphologies
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.ugi_chemistry_interface import assemble_ugi_chemistry_topology_condition
+from forge.design.flow.ugi_closure_placement import UgiSparseClosureScorer, sample_sparse_closures
+from forge.design.flow.ugi_morphology_flow import UgiMorphologyFlow, sample_ugi_morphologies
+from forge.design.flow.ugi_morphology_program import (
     UgiMorphologyProgram,
     component_weighted_program_pool,
     sample_component_weighted_programs,
 )
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

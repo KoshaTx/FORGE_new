@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_selected_guidance_adapter import (
+from forge.design.flow.ugi_selected_guidance_adapter import (
     _particle_seed_manifest_sha256,
 )
-from forge.product.ugi_selected_v2_pool_singleton_equivalence_v2 import (
+from forge.design.guidance.ugi_selected_v2_pool_singleton_equivalence_v2 import (
     EXPECTED_BASE_ADAPTER_IDENTITY_SHA256,
     EXPECTED_IMPLEMENTATION_SHA256,
     EXPECTED_INPUT_KEYS,

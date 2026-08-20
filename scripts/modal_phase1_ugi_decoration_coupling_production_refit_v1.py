@@ -182,7 +182,7 @@ def train_production_refit(run_name: str) -> dict[str, Any]:
     import rdkit
     import torch
 
-    from forge.product.ugi_joint_sparse_training import train_ugi_joint_sparse
+    from forge.design.training.ugi_joint_sparse_training import train_ugi_joint_sparse
 
     config_path = REMOTE_REPO_ROOT / CONFIG_RELATIVE
     config = json.loads(config_path.read_text())

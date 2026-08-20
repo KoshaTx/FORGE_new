@@ -12,7 +12,7 @@ from typing import Any
 import numpy as np
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_complete_morphology_proposal import support_preserving_probabilities
+from forge.design.sampling.ugi_complete_morphology_proposal import support_preserving_probabilities
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_morphology_proposal_challenger_schedule_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_morphology_proposal_challenger_schedule.v1"

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.supervision_inventory import InventoryError, build_inventory, write_inventory
+from forge.route.sources.supervision_inventory import InventoryError, build_inventory, write_inventory
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_generator_comparison import compare_ugi_generator_arms
+from forge.design.audit.ugi_generator_comparison import compare_ugi_generator_arms
 
 
 def _arguments() -> argparse.Namespace:

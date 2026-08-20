@@ -13,15 +13,15 @@ from pathlib import Path
 import numpy as np
 
 from forge.data.r0_splits import sha256_file
-from forge.product.defog_feasibility import graph_to_molecule
-from forge.product.phase1_evaluation import evaluate_product_samples
-from forge.product.phase1_flow import (
+from forge.design.flow.defog_feasibility import graph_to_molecule
+from forge.design.sampling.phase1_evaluation import evaluate_product_samples
+from forge.design.flow.phase1_flow import (
     Phase1FlowError,
     _degree_continuation_log_prior,
     _training_records,
     build_corpus_from_config,
 )
-from forge.product.phase1_generation import (
+from forge.design.sampling.phase1_generation import (
     load_product_checkpoint,
     maximum_likelihood_count_distributions,
     sample_product_endpoints,

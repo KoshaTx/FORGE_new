@@ -14,8 +14,8 @@ from typing import Any
 import numpy as np
 from rdkit import Chem, rdBase
 
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_adapter_features import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_adapter_features import (
     CORE_POSITION_TO_INDEX,
     ORIGIN_STATES,
     adapter_canonical_tree,

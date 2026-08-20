@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.ugi3_assembly_qualification import (
+from forge.route.evidence.ugi3_assembly_qualification import (
     Ugi3AssemblyQualificationError,
     build_ugi3_assembly_qualification,
     write_ugi3_assembly_qualification,

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_branch_spacing_checkpoint_promotion import (
+from forge.design.guidance.ugi_branch_spacing_checkpoint_promotion import (
     build_branch_spacing_promotion_preflight,
     evaluate_branch_spacing_promotion,
 )

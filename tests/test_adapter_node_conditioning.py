@@ -4,7 +4,7 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from forge.product.adapter_node_conditioning import (  # noqa: E402
+from forge.design.flow.adapter_node_conditioning import (  # noqa: E402
     AdapterConditioningError,
     AdapterNodeConditioning,
 )

@@ -8,14 +8,14 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.route.planner import AssessmentOutcome, RouteTarget
-from forge.value.synthesis import (
+from forge.route.engine.planner import AssessmentOutcome, RouteTarget
+from forge.value.synthesis.synthesis import (
     BurdenEstimate,
     ComponentSynthesisValue,
     EvidenceSupport,
     ForwardConsistency,
 )
-from forge.value.ugi3_graded_family_evidence_audit import (
+from forge.value.audit.ugi3_graded_family_evidence_audit import (
     EXACT_COMPLETE,
     FAMILY_ALL_CURRENT,
     FAMILY_NO_CURRENT,

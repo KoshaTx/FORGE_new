@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_enumerated_routeability_census import (
+from forge.route.audit.ugi3_enumerated_routeability_census import (
     build_enumerated_routeability_census,
 )
 

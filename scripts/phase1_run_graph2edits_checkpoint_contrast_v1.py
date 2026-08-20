@@ -9,7 +9,7 @@ import json
 from collections.abc import Mapping
 from pathlib import Path
 
-from forge.route.graph2edits_backend import (
+from forge.route.engine.graph2edits_backend import (
     GRAPH2EDITS_BACKEND_ID,
     GRAPH2EDITS_CHECKPOINT_LICENSE,
     GRAPH2EDITS_IMPLEMENTATION_VERSION,
@@ -20,13 +20,13 @@ from forge.route.graph2edits_backend import (
     Graph2EditsProposalBackend,
     build_syntheseus_worker,
 )
-from forge.route.graph2edits_checkpoint_contrast import (
+from forge.route.audit.graph2edits_checkpoint_contrast import (
     finalize_checkpoint_component_proposals,
     run_checkpoint_component_proposals,
 )
-from forge.route.l2_forward_resolver import load_independent_l2_forward_resolver
-from forge.route.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
-from forge.route.proposal_engine import ProposalBackendManifest
+from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
+from forge.route.assessment.proposal_discovery_status import SourceNeutralProposalDiscoveryResolver
+from forge.route.engine.proposal_engine import ProposalBackendManifest
 
 CONFIG_SCHEMA_VERSION = "forge.graph2edits_checkpoint_contrast_config.v1"
 

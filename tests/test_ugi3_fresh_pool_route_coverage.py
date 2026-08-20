@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.value.ugi3_fresh_pool_route_coverage import _exact_l1_rows
+from forge.value.coverage.ugi3_fresh_pool_route_coverage import _exact_l1_rows
 
 
 def test_exact_l1_rows_require_all_three_gates() -> None:

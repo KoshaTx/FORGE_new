@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
 
 
 class UgiMatchedBudgetError(RuntimeError):

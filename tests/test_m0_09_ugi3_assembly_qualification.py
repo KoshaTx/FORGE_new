@@ -9,7 +9,7 @@ import yaml
 from rdkit import Chem
 
 from forge.chemistry import audit_reactive_site_multiplicity
-from forge.route.ugi3_assembly_qualification import (
+from forge.route.evidence.ugi3_assembly_qualification import (
     Ugi3AssemblyQualificationError,
     build_ugi3_assembly_qualification,
     write_ugi3_assembly_qualification,

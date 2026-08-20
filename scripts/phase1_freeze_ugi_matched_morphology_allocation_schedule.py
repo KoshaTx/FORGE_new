@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_matched_morphology_allocation_schedule import (
+from forge.design.schedule.ugi_matched_morphology_allocation_schedule import (
     build_matched_morphology_allocation_schedule,
 )
 

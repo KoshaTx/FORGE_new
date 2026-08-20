@@ -15,8 +15,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_bounded_hybrid_route_cascade import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
     COMPLETE,
     COMPONENT_STATES,
     CONFIG_SCHEMA_VERSION,

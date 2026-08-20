@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.publisher_sources import (
+from forge.route.sources.publisher_sources import (
     PublisherSourceError,
     acquire_publisher_sources,
     write_publisher_acquisition_result,

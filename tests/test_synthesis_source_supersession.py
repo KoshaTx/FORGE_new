@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.value.synthesis_source_supersession import (
+from forge.value.synthesis.synthesis_source_supersession import (
     AUTHORIZED_REPLAY_IDS,
     SynthesisSourceSupersessionError,
     build_synthesis_source_supersession_audit,

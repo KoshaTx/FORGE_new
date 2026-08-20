@@ -24,12 +24,12 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
 )
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.applicability import ugi_distributional_applicability as applicability
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_known_head_tail_schedule_config.v1"

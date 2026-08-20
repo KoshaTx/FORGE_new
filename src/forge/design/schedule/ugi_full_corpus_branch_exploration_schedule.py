@@ -21,9 +21,11 @@ import numpy as np
 
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_complete_morphology_proposal import enumerate_complete_program_support
-from forge.design.ugi_constrained_stochastic_production_candidates import branch_class
-from forge.design.ugi_program_prior import load_program_prior
+from forge.design.flow.ugi_program_prior import load_program_prior
+from forge.design.sampling.ugi_complete_morphology_proposal import (
+    enumerate_complete_program_support,
+)
+from forge.design.training.ugi_constrained_stochastic_production_candidates import branch_class
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_full_corpus_branch_exploration_schedule_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_full_corpus_branch_exploration_schedule.v1"

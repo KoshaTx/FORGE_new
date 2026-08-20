@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge.route.aizynthfinder_single_step_recovery import (
+from forge.route.engine.aizynthfinder_single_step_recovery import (
     AiZynthFinderRecoveryError,
     load_gzip_json,
     score_frozen_proposals,

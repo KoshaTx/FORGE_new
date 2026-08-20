@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_matched_morphology_terminal_generation import (
+from forge.design.sampling.ugi_matched_morphology_terminal_generation import (
     aggregate_matched_terminal_generation,
     matched_terminal_plan,
     run_all_matched_terminal_shards,

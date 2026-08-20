@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.route.graph2edits_single_step_recovery import (
+from forge.route.engine.graph2edits_single_step_recovery import (
     RESULT_SCHEMA_VERSION,
     score_graph2edits_recovery,
 )

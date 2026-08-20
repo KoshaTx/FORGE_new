@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.route.ugi3_dossier_coverage import build_ugi3_dossier_coverage
+from forge.route.audit.ugi3_dossier_coverage import build_ugi3_dossier_coverage
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -24,12 +24,12 @@ import numpy as np
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     canonical_morphology_program_bytes,
     decode_canonical_morphology_program_bytes,
 )
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_joint_program_support_audit_config.v2"
 RESULT_SCHEMA_VERSION = "phase1_ugi_joint_program_support_audit.v2"

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
+from forge.design.audit.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
 
 REPO = Path(__file__).resolve().parents[1]
 

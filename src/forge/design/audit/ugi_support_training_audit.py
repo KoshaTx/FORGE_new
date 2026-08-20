@@ -13,14 +13,14 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.canonical_representation_audit import load_atom_vocabulary
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_adapter_features import (
+from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_adapter_features import (
     ORIGIN_STATES,
     tensorize_ugi_l1_support_record,
 )
-from forge.design.v5_morphology_program import tree_junction_contributions
-from forge.design.v5_sparse_representation import (
+from forge.design.flow.v5_morphology_program import tree_junction_contributions
+from forge.design.flow.v5_sparse_representation import (
     v5_constitutional_roundtrip_exact,
     v5_sparse_program_valid,
 )

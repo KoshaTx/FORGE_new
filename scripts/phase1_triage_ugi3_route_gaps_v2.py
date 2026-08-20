@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_route_gap_triage_v2 import build_route_gap_triage_v2
+from forge.route.audit.ugi3_route_gap_triage_v2 import build_route_gap_triage_v2
 
 REPO = Path(__file__).resolve().parents[1]
 

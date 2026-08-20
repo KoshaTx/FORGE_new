@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_production_zero_guidance_seam_v2 import (
+from forge.design.guidance.ugi_production_zero_guidance_seam_v2 import (
     run_production_zero_guidance_seam_v2,
 )
 

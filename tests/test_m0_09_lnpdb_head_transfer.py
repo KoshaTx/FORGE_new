@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.route.lnpdb_head_transfer import (
+from forge.route.sources.lnpdb_head_transfer import (
     _ledger_row,
     build_lnpdb_head_transfer,
     sha256_file,

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_grouped_zero_guidance_identity import (
+from forge.design.guidance.ugi_grouped_zero_guidance_identity import (
     build_grouped_zero_guidance_identity,
 )
 

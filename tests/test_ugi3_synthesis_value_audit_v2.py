@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from forge.value.synthesis import ComponentSynthesisValue, ProductSynthesisValue
-from forge.value.ugi3_synthesis_value_audit_v2 import (
+from forge.value.synthesis.synthesis import ComponentSynthesisValue, ProductSynthesisValue
+from forge.value.synthesis.ugi3_synthesis_value_audit_v2 import (
     Ugi3SynthesisValueAuditV2Error,
     build_ugi3_synthesis_value_audit_v2,
 )

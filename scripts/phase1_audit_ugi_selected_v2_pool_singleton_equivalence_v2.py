@@ -10,7 +10,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_selected_v2_pool_singleton_equivalence_v2 import (
+from forge.design.guidance.ugi_selected_v2_pool_singleton_equivalence_v2 import (
     build_selected_v2_pool_singleton_equivalence_v2,
 )
 

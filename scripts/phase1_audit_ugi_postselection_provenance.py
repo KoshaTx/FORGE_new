@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_postselection_provenance import build_postselection_provenance_audit
+from forge.design.guidance.ugi_postselection_provenance import build_postselection_provenance_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

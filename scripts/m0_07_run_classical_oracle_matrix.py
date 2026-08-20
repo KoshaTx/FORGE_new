@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.oracle_classical import (
+from forge.potency.oracle.oracle_classical import (
     OracleClassicalError,
     run_classical_oracle_matrix,
 )

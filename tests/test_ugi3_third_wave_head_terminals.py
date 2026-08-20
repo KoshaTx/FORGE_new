@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
-from forge.route.ugi3_third_wave_head_terminals import (
+from forge.route.engine.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
+from forge.route.terminals.ugi3_third_wave_head_terminals import (
     Ugi3ThirdWaveHeadTerminalError,
     build_third_wave_head_terminal_audit,
     load_third_wave_head_terminal_overlay,

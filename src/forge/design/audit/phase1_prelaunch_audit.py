@@ -15,9 +15,9 @@ from typing import Any
 from rdkit import Chem
 
 from forge.core.hashing import sha256_file
-from forge.design.defog_feasibility import AtomState, FeasibilityError
-from forge.design.phase1_flow import _load_json, _read_csv, _size_bucket
-from forge.design.sparse_topology_feasibility import (
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError
+from forge.design.flow.phase1_flow import _load_json, _read_csv, _size_bucket
+from forge.design.flow.sparse_topology_feasibility import (
     SPARSE_BOND_TO_INDEX,
     _kekulized_molecule,
     build_sparse_atom_vocabulary,

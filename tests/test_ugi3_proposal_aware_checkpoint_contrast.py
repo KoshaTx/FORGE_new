@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.value.ugi3_proposal_aware_checkpoint_contrast import (
+from forge.value.audit.ugi3_proposal_aware_checkpoint_contrast import (
     _direct_current_trace,
     _product_utility,
 )

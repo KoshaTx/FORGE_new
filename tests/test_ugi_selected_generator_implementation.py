@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_selected_generator_implementation import (
+from forge.design.sampling.ugi_selected_generator_implementation import (
     SELECTED_GENERATOR_SOURCE_PATHS,
     SelectedGeneratorSourceArtifact,
     UgiSelectedGeneratorImplementationError,

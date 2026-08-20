@@ -3,12 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.product.ugi_constrained_stochastic_production_candidates import (
+from forge.design.training.ugi_constrained_stochastic_production_candidates import (
     branch_class,
     exact_terminal_admission,
     program_shard,
 )
-from forge.product.ugi_held_component_gate import _reaction_contract
+from forge.design.corpus.ugi_held_component_gate import _reaction_contract
 
 REPO = Path(__file__).resolve().parents[1]
 

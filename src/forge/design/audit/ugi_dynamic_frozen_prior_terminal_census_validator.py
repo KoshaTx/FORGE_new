@@ -22,11 +22,11 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_dynamic_frozen_prior_terminal_census import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     RESULT_SCHEMA_VERSION as CENSUS_RESULT_SCHEMA_VERSION,
 )
-from forge.design.ugi_dynamic_frozen_prior_terminal_census import (
+from forge.design.flow.ugi_dynamic_frozen_prior_terminal_census import (
     SHARD_SCHEMA_VERSION,
     CensusContract,
     SelectedProgramManifest,
@@ -38,8 +38,8 @@ from forge.design.ugi_dynamic_frozen_prior_terminal_census import (
     restore_partial_state,
     rollout_seed,
 )
-from forge.design.ugi_selected_guidance_adapter import SelectedGuidanceState
-from forge.design.ugi_selected_guidance_adapter_v3 import (
+from forge.design.flow.ugi_selected_guidance_adapter import SelectedGuidanceState
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
     build_selected_model_restartable_guidance_lane_v3,
 )
 

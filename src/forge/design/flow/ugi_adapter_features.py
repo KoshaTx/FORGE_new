@@ -16,15 +16,15 @@ from dataclasses import dataclass
 import numpy as np
 from rdkit import Chem
 
-from forge.design.defog_feasibility import AtomState, FeasibilityError
-from forge.design.lipid_support_skeleton import (
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError
+from forge.design.flow.lipid_support_skeleton import (
     FUNCTIONAL_SUPPORT,
     LipidSupportSkeleton,
     encode_lipid_support_skeleton,
     skeleton_roundtrip_exact,
 )
-from forge.design.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
-from forge.design.v5_sparse_representation import (
+from forge.design.flow.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
+from forge.design.flow.v5_sparse_representation import (
     V5SparseGraphRecord,
     canonical_constitutional_molecule,
     v5_offspring_to_parents,

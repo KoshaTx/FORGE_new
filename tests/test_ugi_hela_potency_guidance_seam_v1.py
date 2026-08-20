@@ -4,13 +4,13 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from forge.potency.ugi_hela_potency_diagnostic import HeLaPotencyEvaluation
-from forge.product.ugi_hela_potency_guidance_seam_v1 import (
+from forge.potency.audit.ugi_hela_potency_diagnostic import HeLaPotencyEvaluation
+from forge.design.guidance.ugi_hela_potency_guidance_seam_v1 import (
     run_lambda_zero_identity_gate,
     run_potency_seed,
 )
-from forge.product.ugi_matched_budget_orchestration import LockedMatchedTerminal
-from forge.product.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     FrozenSeedProgramAssignment,
     GuidanceSchedule,
     GuidanceStateReceipt,

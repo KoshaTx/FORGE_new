@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from forge.product.ugi_full_corpus_branch_exploration_schedule import (
+from forge.design.schedule.ugi_full_corpus_branch_exploration_schedule import (
     build_full_corpus_branch_exploration_schedule,
 )
 

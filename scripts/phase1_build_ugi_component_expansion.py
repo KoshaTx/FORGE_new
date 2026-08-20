@@ -13,7 +13,7 @@ SRC = REPO / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from forge.product.ugi_component_expansion import (  # noqa: E402
+from forge.design.corpus.ugi_component_expansion import (  # noqa: E402
     ComponentExpansionError,
     build_ugi_component_expansion,
     write_ugi_component_expansion,

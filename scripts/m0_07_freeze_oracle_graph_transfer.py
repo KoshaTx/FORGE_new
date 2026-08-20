@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.oracle_graph_transfer_decision import (
+from forge.potency.oracle.oracle_graph_transfer_decision import (
     OracleGraphTransferDecisionError,
     run_transfer_decision,
 )

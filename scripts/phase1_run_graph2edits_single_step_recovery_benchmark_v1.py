@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.route.aizynthfinder_single_step_recovery import (
+from forge.route.engine.aizynthfinder_single_step_recovery import (
     canonical_connected_smiles,
     content_sha256,
     load_gzip_json,
@@ -20,9 +20,9 @@ from forge.route.aizynthfinder_single_step_recovery import (
     stable_json,
     validate_public_targets,
 )
-from forge.route.graph2edits_backend import build_syntheseus_worker
-from forge.route.graph2edits_runtime_qualification import verify_runtime_receipt
-from forge.route.graph2edits_single_step_recovery import RESULT_SCHEMA_VERSION
+from forge.route.engine.graph2edits_backend import build_syntheseus_worker
+from forge.route.engine.graph2edits_runtime_qualification import verify_runtime_receipt
+from forge.route.engine.graph2edits_single_step_recovery import RESULT_SCHEMA_VERSION
 
 CONFIG_SCHEMA_VERSION = "phase1_graph2edits_single_step_recovery_benchmark_config.v1"
 LEDGER_SCHEMA_VERSION = "phase1_graph2edits_single_step_recovery_ledger.v1"

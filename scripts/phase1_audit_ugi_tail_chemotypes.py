@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_tail_chemotype_audit import build_tail_chemotype_audit
+from forge.design.audit.ugi_tail_chemotype_audit import build_tail_chemotype_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

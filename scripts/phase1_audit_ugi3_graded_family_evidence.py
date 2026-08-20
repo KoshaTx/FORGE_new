@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi3_graded_family_evidence_audit import (
+from forge.value.audit.ugi3_graded_family_evidence_audit import (
     build_graded_family_evidence_audit,
 )
 

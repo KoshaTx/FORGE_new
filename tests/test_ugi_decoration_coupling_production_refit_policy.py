@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.product.ugi_joint_sparse_training import _training_partition
+from forge.design.training.ugi_joint_sparse_training import _training_partition
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/model/phase1_ugi_decoration_coupling_production_refit_v1.json"

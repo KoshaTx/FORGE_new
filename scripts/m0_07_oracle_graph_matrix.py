@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.oracle_graph_matrix import (
+from forge.potency.oracle.oracle_graph_matrix import (
     OracleGraphMatrixError,
     aggregate_graph_fits,
     run_graph_fit_workers,

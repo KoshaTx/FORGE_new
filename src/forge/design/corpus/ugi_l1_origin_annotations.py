@@ -16,7 +16,7 @@ from typing import Any
 from rdkit import rdBase
 
 from forge.core.io import atomic_write as _atomic_write
-from forge.design.defog_feasibility import sha256_file
+from forge.design.flow.defog_feasibility import sha256_file
 from forge.potency.audit.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,

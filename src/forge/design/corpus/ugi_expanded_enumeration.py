@@ -21,7 +21,7 @@ from rdkit import Chem, rdBase
 from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_file
 from forge.data.r1_prime_audit import compile_reactions, load_reaction_definitions
-from forge.design.ugi_component_expansion import FOLDS, ROLES
+from forge.design.corpus.ugi_component_expansion import FOLDS, ROLES
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_expanded_enumeration_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_expanded_enumeration_result.v1"

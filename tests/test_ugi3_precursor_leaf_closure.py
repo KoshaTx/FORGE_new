@@ -3,7 +3,7 @@ from __future__ import annotations
 import io
 from pathlib import Path
 
-from forge.route.ugi3_precursor_leaf_closure import (
+from forge.route.terminals.ugi3_precursor_leaf_closure import (
     ALDEHYDE_ROLE,
     HEAD_ROLE,
     ISOCYANIDE_ROLE,

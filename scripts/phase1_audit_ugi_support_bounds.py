@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_support_bounds_audit import audit_ugi_support_bounds
+from forge.design.audit.ugi_support_bounds_audit import audit_ugi_support_bounds
 
 REPO = Path(__file__).resolve().parents[1]
 

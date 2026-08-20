@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.product.ugi_production_route_shortlist_v1 import (
+from forge.design.guidance.ugi_production_route_shortlist_v1 import (
     build_production_route_shortlist,
 )
 

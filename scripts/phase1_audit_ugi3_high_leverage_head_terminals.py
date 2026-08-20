@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_high_leverage_head_terminals import (
+from forge.route.terminals.ugi3_high_leverage_head_terminals import (
     build_high_leverage_head_terminal_audit,
 )
 

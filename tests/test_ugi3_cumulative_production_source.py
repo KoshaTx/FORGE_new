@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AvailabilityState,
     EvidenceRecord,
     EvidenceTier,
@@ -16,7 +16,7 @@ from forge.route.planner import (
     KnowledgeResult,
     RouteTarget,
 )
-from forge.route.ugi3_cumulative_production_source import (
+from forge.route.sources.ugi3_cumulative_production_source import (
     LAYER_ORDER,
     AuthenticatedExactTerminalDeltaOverlay,
     CumulativeUgi3ProductionPaths,

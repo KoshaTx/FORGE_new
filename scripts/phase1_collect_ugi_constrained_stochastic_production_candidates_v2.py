@@ -17,7 +17,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_constrained_stochastic_production_candidates import (
+from forge.design.training.ugi_constrained_stochastic_production_candidates import (
     ARMS,
     CONFIG_SCHEMA_VERSION,
     LEDGER_SCHEMA_VERSION,
@@ -29,7 +29,7 @@ from forge.product.ugi_constrained_stochastic_production_candidates import (
     program_shard,
     stable_sha256,
 )
-from forge.product.ugi_held_component_gate import _reaction_contract
+from forge.design.corpus.ugi_held_component_gate import _reaction_contract
 
 REPO = Path(__file__).resolve().parents[1]
 RAW_ROOT = "results/phase1/ugi_constrained_stochastic_production_candidates_v2/raw"

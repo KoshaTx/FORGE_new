@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.pmc_sources import (
+from forge.route.sources.pmc_sources import (
     PmcSourceError,
     acquire_pmc_queue,
     write_acquisition_result,

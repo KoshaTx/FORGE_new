@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from forge.potency.ugi_bounded_structural_envelope import (
+from forge.potency.applicability.ugi_bounded_structural_envelope import (
     FEATURES,
     MODE_BOUNDED,
     MODE_OPEN,

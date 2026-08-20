@@ -22,38 +22,38 @@ from pathlib import Path
 from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
-from forge.design.ugi_joint_sparse_sampling import (
-    UgiJointSparseTrajectoryState,
-    advance_ugi_joint_sparse_state,
-    finalize_ugi_joint_sparse_state,
-    initialize_ugi_joint_sparse_state,
-)
-from forge.design.ugi_matched_budget_orchestration import (
-    MatchedArm,
-    MatchedGenerationRequest,
-    MatchedScheduleEntry,
-    RouteComputeUsage,
-)
-from forge.design.ugi_nonzero_guidance_runner import (
-    GuidanceStateReceipt,
-    GuidanceTerminalCompletionReceipt,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     UgiRestartableTerminalSupportAdapterError,
     adapt_restartable_completion_row_for_route_support,
     decode_canonical_morphology_program_bytes,
     lock_unqualified_restartable_completion_row,
     native_completion_record,
 )
-from forge.design.ugi_selected_generator_implementation import (
+from forge.design.sampling.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
+from forge.design.sampling.ugi_joint_sparse_sampling import (
+    UgiJointSparseTrajectoryState,
+    advance_ugi_joint_sparse_state,
+    finalize_ugi_joint_sparse_state,
+    initialize_ugi_joint_sparse_state,
+)
+from forge.design.sampling.ugi_selected_generator_implementation import (
     require_selected_generator_implementation_unchanged,
 )
-from forge.design.ugi_selected_restartable_generator import (
+from forge.design.sampling.ugi_selected_restartable_generator import (
     SAMPLE_STEPS,
     SelectedRestartableGeneratorLane,
     SelectedStep1000Artifacts,
     build_selected_step1000_restartable_generator_lane,
+)
+from forge.design.schedule.ugi_matched_budget_orchestration import (
+    MatchedArm,
+    MatchedGenerationRequest,
+    MatchedScheduleEntry,
+    RouteComputeUsage,
+)
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
+    GuidanceStateReceipt,
+    GuidanceTerminalCompletionReceipt,
 )
 from forge.route.terminals.terminal_assessment import (
     UgiTerminalRouteAssessmentError,

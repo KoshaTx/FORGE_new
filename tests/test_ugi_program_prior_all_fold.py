@@ -3,7 +3,7 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-from forge.product.ugi_program_prior import load_program_prior
+from forge.design.flow.ugi_program_prior import load_program_prior
 
 REPO = Path(__file__).resolve().parents[1]
 SCRIPT = REPO / "scripts/phase1_build_ugi_program_prior_all_fold.py"

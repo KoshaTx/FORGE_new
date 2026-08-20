@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.lipid_support_skeleton_audit import (
+from forge.design.audit.lipid_support_skeleton_audit import (
     audit_lipid_support_skeletons,
     write_audit_artifacts,
 )

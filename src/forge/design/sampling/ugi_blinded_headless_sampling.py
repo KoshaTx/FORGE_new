@@ -21,29 +21,29 @@ import numpy as np
 from rdkit import Chem
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_adapter_features import ORIGIN_TO_INDEX
-from forge.design.ugi_chemistry_flow import (
+from forge.design.corpus.ugi_generated_components import (
+    UgiGeneratedComponentError,
+    generated_ugi_component_smiles,
+)
+from forge.design.corpus.ugi_held_component_gate import (
+    exact_forward_reconstructs_ugi_product,
+    load_ugi_reaction_contract,
+)
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX
+from forge.design.flow.ugi_chemistry_flow import (
     chemistry_sample_statistics,
     chemistry_sample_to_molecule,
     valence_constrained_terminal_sample,
 )
-from forge.design.ugi_chemistry_interface import assemble_ugi_chemistry_topology_condition
-from forge.design.ugi_closure_placement import UgiSparseClosureScorer, sample_sparse_closures
-from forge.design.ugi_generated_components import (
-    UgiGeneratedComponentError,
-    generated_ugi_component_smiles,
-)
-from forge.design.ugi_held_component_gate import (
-    exact_forward_reconstructs_ugi_product,
-    load_ugi_reaction_contract,
-)
-from forge.design.ugi_joint_sparse_flow import (
+from forge.design.flow.ugi_chemistry_interface import assemble_ugi_chemistry_topology_condition
+from forge.design.flow.ugi_closure_placement import UgiSparseClosureScorer, sample_sparse_closures
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     UgiJointSparseTerminal,
     sample_ugi_joint_sparse_terminals,
 )
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

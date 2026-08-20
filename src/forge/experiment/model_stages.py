@@ -238,7 +238,7 @@ def verify_ugi_training_cache(context: RunContext) -> StageResult:
 def train_ugi_joint_stage(context: RunContext) -> StageResult:
     """Run the frozen all-fold joint-flow contract with deterministic resume state."""
 
-    from forge.product.ugi_joint_sparse_training import train_ugi_joint_sparse
+    from forge.design.training.ugi_joint_sparse_training import train_ugi_joint_sparse
 
     context.dependency("cache", "receipt")
     config = context.config()
@@ -281,7 +281,7 @@ def train_ugi_joint_stage(context: RunContext) -> StageResult:
 def train_ugi_closure_stage(context: RunContext) -> StageResult:
     """Train the sparse closure scorer with resumable optimizer and RNG state."""
 
-    from forge.product.ugi_closure_training import train_ugi_closure_scorer
+    from forge.design.training.ugi_closure_training import train_ugi_closure_scorer
 
     config = context.config()
     _require_config_inputs(context, config)
@@ -319,7 +319,7 @@ def train_ugi_closure_stage(context: RunContext) -> StageResult:
 def sample_ugi_shards(context: RunContext) -> StageResult:
     """Sample verified contiguous program shards and merge them without retries."""
 
-    from forge.product.ugi_joint_end_to_end_sampling import (
+    from forge.design.sampling.ugi_joint_end_to_end_sampling import (
         joint_sampling_result_matches_request,
         sample_ugi_joint_end_to_end,
     )

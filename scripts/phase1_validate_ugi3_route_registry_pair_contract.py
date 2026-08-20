@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.route.ugi3_route_registry_pair_contract import (
+from forge.route.assessment.ugi3_route_registry_pair_contract import (
     validate_binding,
     validate_protocol,
 )

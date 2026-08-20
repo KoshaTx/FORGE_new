@@ -19,9 +19,9 @@ from typing import Any
 
 from rdkit import Chem
 
-from forge.design.defog_feasibility import AtomState, FeasibilityError
-from forge.design.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
-from forge.design.v5_sparse_representation import canonical_constitutional_molecule
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError
+from forge.design.flow.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
+from forge.design.flow.v5_sparse_representation import canonical_constitutional_molecule
 
 FULL_HEAVY = "full_heavy"
 CARBON_INDUCED = "carbon_induced"

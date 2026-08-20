@@ -8,15 +8,15 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
-from forge.product.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
-from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.design.flow.ugi_adapter_features import CORE_POSITION_TO_INDEX, ORIGIN_TO_INDEX
+from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceRecord,
@@ -31,12 +31,12 @@ from forge.route.planner import (
     SynthesisAssessment,
     budget_exhausted_assessment,
 )
-from forge.route.planner_cache import (
+from forge.route.engine.planner_cache import (
     CachedRoutePlanner,
     FilePlannerCache,
     PlannerCacheContext,
 )
-from forge.route.terminal_assessment import (
+from forge.route.terminals.terminal_assessment import (
     DEFAULT_IDENTITY_POLICY,
     DEFAULT_STEREOCHEMISTRY_POLICY,
     ExactL1ForwardVerification,

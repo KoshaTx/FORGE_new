@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_production_synthesis_guidance_seam_v4 import (
+from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     EXPECTED_DESIGN,
     EXPECTED_INPUT_KEYS,
     EXPECTED_SCOPE,

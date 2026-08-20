@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 from rdkit import Chem
 
-from forge.product.lipid_context import (
+from forge.design.flow.lipid_context import (
     HEAD_REGION,
     INTERFACE_REGION,
     TAIL_REGION,

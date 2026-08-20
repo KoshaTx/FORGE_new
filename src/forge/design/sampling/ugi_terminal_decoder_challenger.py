@@ -14,7 +14,7 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.io import read_json_object
-from forge.design.ugi_tail_chemotype_audit import summarize_component_cohort
+from forge.design.audit.ugi_tail_chemotype_audit import summarize_component_cohort
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_terminal_decoder_evaluation_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_terminal_decoder_evaluation.v1"

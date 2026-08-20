@@ -13,14 +13,14 @@ from dataclasses import dataclass
 import numpy as np
 from rdkit import Chem
 
-from forge.design.defog_feasibility import AtomState, FeasibilityError
-from forge.design.lipid_context import assign_lipid_regions, select_lipid_polar_root
-from forge.design.phase1_tree_topology_flow import (
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError
+from forge.design.flow.lipid_context import assign_lipid_regions, select_lipid_polar_root
+from forge.design.flow.phase1_tree_topology_flow import (
     TreeTopologyFlowError,
     offspring_to_parents,
     preorder_offspring_to_parents,
 )
-from forge.design.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
+from forge.design.flow.sparse_topology_feasibility import SPARSE_BOND_TO_INDEX
 
 _INDEX_TO_BOND_TYPE = {
     0: Chem.BondType.SINGLE,

@@ -1,29 +1,10 @@
-"""Typed value records used by FORGE guidance experiments."""
+"""Synthesis value: what a route is worth, and what may be claimed from it.
 
-from forge.value.synthesis import (
-    BurdenEstimate,
-    BurdenKnowledge,
-    ComponentSynthesisValue,
-    Dominance,
-    EvidenceSupport,
-    ForwardConsistency,
-    ProductSynthesisValue,
-    SynthesisValueError,
-    compare_component_synthesis_values,
-    compare_product_synthesis_values,
-    component_synthesis_value_from_assessment,
-)
+    synthesis/  the structured value contract and its source qualification
+    coverage/   route closure across candidate pools
+    guidance/   turning value into guidance
+    audit/      post-hoc description of the above
 
-__all__ = [
-    "BurdenEstimate",
-    "BurdenKnowledge",
-    "ComponentSynthesisValue",
-    "Dominance",
-    "EvidenceSupport",
-    "ForwardConsistency",
-    "ProductSynthesisValue",
-    "SynthesisValueError",
-    "compare_component_synthesis_values",
-    "compare_product_synthesis_values",
-    "component_synthesis_value_from_assessment",
-]
+Raw route likelihood is never a synthesis-success probability; the contract in `synthesis` is
+what a value may be derived from.
+"""

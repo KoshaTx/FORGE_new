@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     KnowledgeDisposition,
     KnowledgeResult,
@@ -15,11 +15,11 @@ from forge.route.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.ugi3_targeted_exact_overlay import (
+from forge.route.evidence.ugi3_targeted_exact_overlay import (
     Ugi3TargetedExactOverlayError,
     load_targeted_exact_overlay,
 )
-from forge.route.ugi3_targeted_exact_overlay_diagnostic import (
+from forge.route.audit.ugi3_targeted_exact_overlay_diagnostic import (
     Ugi3TargetedExactOverlayDiagnosticError,
     _verify_hybrid_reproduction,
 )

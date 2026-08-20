@@ -7,7 +7,7 @@ from pathlib import Path
 
 from rdkit import Chem
 
-from forge.product.ugi_component_expansion import (
+from forge.design.corpus.ugi_component_expansion import (
     FOLDS,
     ROLES,
     _family_fold_map,

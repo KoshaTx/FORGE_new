@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.potency.oracle_auxiliary import (
+from forge.potency.oracle.oracle_auxiliary import (
     AuxiliarySupervisionError,
     run_auxiliary_supervision_audit,
 )

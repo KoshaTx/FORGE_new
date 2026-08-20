@@ -15,8 +15,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.lipid_context import HEAD_REGION, INTERFACE_REGION, TAIL_REGION
-from forge.design.phase1_tree_topology_flow import (
+from forge.design.flow.lipid_context import HEAD_REGION, INTERFACE_REGION, TAIL_REGION
+from forge.design.flow.phase1_tree_topology_flow import (
     TreeTopologyFlowError,
     preorder_offspring_to_parents,
 )

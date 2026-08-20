@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.route.lnpdb_head_transfer import (
+from forge.route.sources.lnpdb_head_transfer import (
     LnpdbHeadTransferError,
     build_lnpdb_head_transfer,
     write_lnpdb_head_transfer,

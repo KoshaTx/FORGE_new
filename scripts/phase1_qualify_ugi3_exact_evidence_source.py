@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_exact_evidence_source import build_exact_evidence_source_diagnostic
+from forge.route.sources.ugi3_exact_evidence_source import build_exact_evidence_source_diagnostic
 
 REPO = Path(__file__).resolve().parents[1]
 

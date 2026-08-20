@@ -6,13 +6,13 @@ from dataclasses import replace
 
 import pytest
 
-from forge.route.planner import (
+from forge.route.engine.planner import (
     ForwardVerificationState,
     RoutePlannerError,
     RouteStepProposal,
     RouteTarget,
 )
-from forge.route.proposal_engine import (
+from forge.route.engine.proposal_engine import (
     OperationalCompatibility,
     ProposalBackendManifest,
     ProposalDisposition,
@@ -28,7 +28,7 @@ from forge.route.proposal_engine import (
     screen_learned_proposal,
     validate_proposal_batch,
 )
-from forge.route.ugi3_support_boundary import (
+from forge.route.assessment.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,
     MolecularSupportState,
     TargetQualification,

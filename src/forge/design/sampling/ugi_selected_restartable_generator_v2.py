@@ -23,31 +23,31 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.ugi_end_to_end_sampling import _closure_model, _load_checkpoint
-from forge.design.ugi_generated_terminal_support import (
+from forge.design.corpus.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     declared_graph_support_context_sha256,
 )
-from forge.design.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.design.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
-from forge.design.ugi_joint_sparse_flow import UgiJointSparseFlow
-from forge.design.ugi_joint_sparse_sampling import sample_restartable_terminals
-from forge.design.ugi_matched_budget_orchestration import (
-    LockedMatchedTerminal,
-    MatchedGenerationRequest,
-)
-from forge.design.ugi_restartable_terminal_support_adapter import (
+from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.flow.ugi_joint_sparse_flow import UgiJointSparseFlow
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
     UgiRestartableTerminalSupportAdapterError,
     adapt_restartable_completion_row_for_route_support,
     decode_canonical_morphology_program_bytes,
     lock_unqualified_restartable_completion_row,
     native_completion_record,
 )
-from forge.design.ugi_selected_generator_implementation import (
+from forge.design.guidance.ugi_zero_guidance_rehearsal import (
+    RestartableGeneratorClosureAdapter,
+    RestartableGeneratorClosureIdentity,
+)
+from forge.design.sampling.ugi_end_to_end_sampling import _closure_model, _load_checkpoint
+from forge.design.sampling.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
+from forge.design.sampling.ugi_joint_sparse_sampling import sample_restartable_terminals
+from forge.design.sampling.ugi_selected_generator_implementation import (
     build_selected_generator_implementation_qualification,
     require_selected_generator_implementation_unchanged,
 )
-from forge.design.ugi_selected_restartable_generator import (
+from forge.design.sampling.ugi_selected_restartable_generator import (
     SAMPLE_STEPS,
     SelectedRestartableGeneratorCallback,
     SelectedRestartableGeneratorLane,
@@ -58,11 +58,11 @@ from forge.design.ugi_selected_restartable_generator import (
     _read_json,
     _require_file_hash,
 )
-from forge.design.ugi_training_cache import load_ugi_training_cache
-from forge.design.ugi_zero_guidance_rehearsal import (
-    RestartableGeneratorClosureAdapter,
-    RestartableGeneratorClosureIdentity,
+from forge.design.schedule.ugi_matched_budget_orchestration import (
+    LockedMatchedTerminal,
+    MatchedGenerationRequest,
 )
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.route.terminals.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     UgiTerminalRouteAssessmentError,

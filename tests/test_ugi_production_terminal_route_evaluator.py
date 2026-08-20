@@ -8,30 +8,30 @@ import pytest
 from rdkit import Chem
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_generated_terminal_support import DeclaredGraphSupportContext
-from forge.product.ugi_held_component_gate import load_ugi_reaction_contract
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.corpus.ugi_generated_terminal_support import DeclaredGraphSupportContext
+from forge.design.corpus.ugi_held_component_gate import load_ugi_reaction_contract
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
     MatchedAssessmentContext,
     RouteComputeUsage,
 )
-from forge.product.ugi_matched_planner_cache_binding import (
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
     preflight_lazy_matched_planner_cache_binding,
 )
-from forge.product.ugi_production_terminal_route_evaluator import (
+from forge.design.schedule.ugi_production_terminal_route_evaluator import (
     UgiProductionTerminalRouteEvaluatorError,
     build_production_ugi_terminal_aware_planner_factory,
 )
-from forge.route.planner_cache import FilePlannerCache
-from forge.route.terminal_assessment import (
+from forge.route.engine.planner_cache import FilePlannerCache
+from forge.route.terminals.terminal_assessment import (
     QualifiedUgiL1Reverifier,
     ValidatedUgiTerminalPayload,
     assess_locked_ugi_terminal_routes,
     required_three_role_route_reservation,
 )
-from forge.route.ugi3_support_boundary import UGI_COMPONENT_ROLES
+from forge.route.assessment.ugi3_support_boundary import UGI_COMPONENT_ROLES
 
 REPO = Path(__file__).resolve().parents[1]
 ASSESSMENT_AT = "2026-08-03T04:00:00Z"

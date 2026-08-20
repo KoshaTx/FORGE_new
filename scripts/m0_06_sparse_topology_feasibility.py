@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.sparse_topology_feasibility import (
+from forge.design.flow.sparse_topology_feasibility import (
     FeasibilityError,
     run_sparse_feasibility,
 )

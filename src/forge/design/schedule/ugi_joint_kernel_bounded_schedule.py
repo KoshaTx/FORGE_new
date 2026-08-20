@@ -23,26 +23,26 @@ from typing import Any
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_joint_program_support_audit import (
+from forge.design.audit.ugi_joint_program_support_audit import (
     JointProgramKernel,
     build_joint_program_kernel,
     joint_program_affinities,
     joint_program_distance,
     joint_program_neighborhood,
 )
-from forge.design.ugi_morphology_program import (
+from forge.design.flow.ugi_morphology_program import (
     UgiMorphologyProgram,
     attached_program_feasible,
 )
-from forge.design.ugi_nonzero_guidance_runner import (
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    canonical_morphology_program_bytes,
+)
+from forge.design.guidance.ugi_synthesis_guidance import keyed_random_seed
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     GROUPED_SMC_SCHEDULE_SCHEMA_VERSION,
     FrozenSeedProgramAssignment,
     GroupedSMCScheduleQualification,
 )
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    canonical_morphology_program_bytes,
-)
-from forge.design.ugi_synthesis_guidance import keyed_random_seed
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_joint_kernel_bounded_schedule_config.v1"
 RESULT_SCHEMA_VERSION = GROUPED_SMC_SCHEDULE_SCHEMA_VERSION

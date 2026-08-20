@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_joint_program_support_audit import (
+from forge.design.audit.ugi_joint_program_support_audit import (
     build_joint_program_support_audit,
 )
 

@@ -19,9 +19,9 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.design.ugi_candidate_eligibility import declared_support_violations
-from forge.design.ugi_component_expansion import reaction_handle_qualification
-from forge.design.ugi_matched_budget_orchestration import LockedMatchedTerminal
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
+from forge.design.guidance.ugi_candidate_eligibility import declared_support_violations
+from forge.design.schedule.ugi_matched_budget_orchestration import LockedMatchedTerminal
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.route.assessment.ugi3_support_boundary import (
     AuthenticatedInternalRoleRegistry,

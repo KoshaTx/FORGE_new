@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_fresh_pool_oracle_audit import build_fresh_pool_oracle_audit
+from forge.potency.oracle.ugi_fresh_pool_oracle_audit import build_fresh_pool_oracle_audit
 
 REPO = Path(__file__).resolve().parents[1]
 

@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_nonzero_guidance_runner import build_nonzero_guidance_runner_plan
+from forge.design.schedule.ugi_nonzero_guidance_runner import build_nonzero_guidance_runner_plan
 
 
 def _arguments() -> argparse.Namespace:

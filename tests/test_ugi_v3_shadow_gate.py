@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_v3_shadow_gate import (
+from forge.design.flow.ugi_v3_shadow_gate import (
     UgiV3ShadowGateError,
     evaluate_v3_shadow_gate,
 )

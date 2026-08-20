@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_agile_template_saturation_stress import (
+from forge.route.terminals.ugi3_agile_template_saturation_stress import (
     build_agile_template_saturation_stress,
 )
 

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_tail_chemotype_audit import (
+from forge.design.audit.ugi_tail_chemotype_audit import (
     chemotype_signature,
     component_chemotype_metrics,
 )

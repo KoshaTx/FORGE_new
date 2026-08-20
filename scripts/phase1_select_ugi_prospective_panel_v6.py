@@ -238,7 +238,7 @@ def main() -> None:
 
     from importlib import import_module
 
-    from forge.product.ugi_bounded_hybrid_route_cascade import (
+    from forge.design.flow.ugi_bounded_hybrid_route_cascade import (
         atomic_write, canonical_json_bytes, jsonl_gzip_bytes, sha256_file, sha256_payload,
     )
 

@@ -14,7 +14,7 @@ from typing import Any
 from forge.core.io import atomic_write as _atomic_write
 from forge.core.io import read_json_object
 from forge.data.r0_splits import sha256_bytes, sha256_file
-from forge.design.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
+from forge.design.corpus.ugi_expanded_enumeration import PRODUCT_FIELDS as ENUMERATED_PRODUCT_FIELDS
 from forge.potency.audit.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,

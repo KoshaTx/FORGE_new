@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.traversal_representation_audit import (
+from forge.design.audit.traversal_representation_audit import (
     audit_traversal_representations,
     write_audit,
 )

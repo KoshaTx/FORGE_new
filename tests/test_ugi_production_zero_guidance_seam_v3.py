@@ -7,10 +7,10 @@ from types import SimpleNamespace
 
 import pytest
 
-import forge.product.ugi_production_zero_guidance_seam_v3 as seam_v3
-from forge.product.ugi_matched_budget_orchestration import RouteComputeUsage
-from forge.product.ugi_nonzero_guidance_runner import GuidanceAssessmentContext
-from forge.product.ugi_production_zero_guidance_seam_v3 import (
+import forge.design.guidance.ugi_production_zero_guidance_seam_v3 as seam_v3
+from forge.design.schedule.ugi_matched_budget_orchestration import RouteComputeUsage
+from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceAssessmentContext
+from forge.design.guidance.ugi_production_zero_guidance_seam_v3 import (
     EXPECTED_INPUT_KEYS,
     ProductionGuidanceRouteEvaluatorV3,
     UgiProductionZeroGuidanceSeamV3Error,
@@ -18,7 +18,7 @@ from forge.product.ugi_production_zero_guidance_seam_v3 import (
     _require_selected_v3_productive_identity,
     _validate_config,
 )
-from forge.product.ugi_selected_guidance_adapter_v3 import (
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
     build_selected_model_restartable_guidance_lane_v3,
 )
 from scripts.phase1_qualify_ugi_production_zero_guidance_seam_v3 import (

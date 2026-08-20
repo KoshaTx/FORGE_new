@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_frozen_parent_component_ledger import (
+from forge.route.sources.ugi3_frozen_parent_component_ledger import (
     Ugi3FrozenParentComponentLedgerError,
     build_frozen_parent_component_ledger,
 )

@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.ugi_joint_sparse_training import train_ugi_joint_sparse
+from forge.design.training.ugi_joint_sparse_training import train_ugi_joint_sparse
 
 REPO = Path(__file__).resolve().parents[1]
 

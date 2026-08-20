@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 

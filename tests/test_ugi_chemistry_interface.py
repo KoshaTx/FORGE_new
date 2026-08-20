@@ -11,10 +11,10 @@ import numpy as np
 import pytest
 from rdkit import Chem
 
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.canonical_representation_audit import load_atom_vocabulary
-from forge.product.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
-from forge.product.ugi_chemistry_interface import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.audit.canonical_representation_audit import load_atom_vocabulary
+from forge.design.flow.ugi_adapter_features import ORIGIN_TO_INDEX, tensorize_ugi_l1_support_record
+from forge.design.flow.ugi_chemistry_interface import (
     ADAPTER_ATTACHMENT_BOND_STATE,
     ROOT_BOND_TARGET,
     WITHHELD_STATE,
@@ -26,16 +26,16 @@ from forge.product.ugi_chemistry_interface import (
     recompute_adapter_distances,
     validate_chemistry_topology_condition,
 )
-from forge.product.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
-from forge.product.ugi_morphology_program import split_ugi_support_morphology
+from forge.design.audit.ugi_chemistry_interface_audit import audit_ugi_chemistry_interface
+from forge.design.flow.ugi_morphology_program import split_ugi_support_morphology
 
 torch = pytest.importorskip("torch")
 
-from forge.product.ugi_chemistry_corpus import (  # noqa: E402
+from forge.design.corpus.ugi_chemistry_corpus import (  # noqa: E402
     UgiChemistryRecord,
     load_expanded_ugi_chemistry_corpus,
 )
-from forge.product.ugi_chemistry_flow import (  # noqa: E402
+from forge.design.flow.ugi_chemistry_flow import (  # noqa: E402
     UgiChemistryFlow,
     UgiChemistrySample,
     _masked_terminal_choice,

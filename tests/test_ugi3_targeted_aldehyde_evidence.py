@@ -7,7 +7,7 @@ import pytest
 from rdkit import Chem
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_targeted_aldehyde_evidence import (
+from forge.route.evidence.ugi3_targeted_aldehyde_evidence import (
     Ugi3TargetedAldehydeEvidenceError,
     build_targeted_aldehyde_evidence_audit,
 )

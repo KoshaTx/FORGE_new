@@ -19,17 +19,17 @@ from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
-from forge.design.ugi_chemistry_flow import (
-    UgiChemistrySample,
-    chemistry_sample_to_molecule,
-)
-from forge.design.ugi_chemistry_interface import ChemistryTopologyCondition
-from forge.design.ugi_generated_components import (
+from forge.design.corpus.ugi_generated_components import (
     generated_ugi_component_smiles,
     precursor_components_from_product_semantics,
 )
-from forge.design.ugi_held_component_gate import exact_forward_reconstructs_ugi_product
-from forge.design.ugi_matched_budget_orchestration import (
+from forge.design.corpus.ugi_held_component_gate import exact_forward_reconstructs_ugi_product
+from forge.design.flow.ugi_chemistry_flow import (
+    UgiChemistrySample,
+    chemistry_sample_to_molecule,
+)
+from forge.design.flow.ugi_chemistry_interface import ChemistryTopologyCondition
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedArm,
     MatchedAssessmentContext,

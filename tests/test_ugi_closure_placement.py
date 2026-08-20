@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from forge.product.ugi_closure_placement import (
+from forge.design.flow.ugi_closure_placement import (
     UgiSparseClosureScorer,
     closure_set_loss,
     feasible_next_closures,

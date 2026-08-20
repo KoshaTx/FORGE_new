@@ -18,7 +18,7 @@ from typing import Any
 
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_generated_terminal_support import (
+from forge.design.corpus.ugi_generated_terminal_support import (
     QualifiedGeneratedUgiTerminalSupport,
     RoleHandleRecheck,
 )

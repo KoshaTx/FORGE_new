@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.defog_feasibility import FeasibilityError, run_feasibility
+from forge.design.flow.defog_feasibility import FeasibilityError, run_feasibility
 
 REPO = Path(__file__).resolve().parents[1]
 

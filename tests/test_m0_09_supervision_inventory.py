@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.supervision_inventory import (
+from forge.route.sources.supervision_inventory import (
     CHEMISTRY_CLASSES,
     InventoryError,
     _combined_lipid_specific,

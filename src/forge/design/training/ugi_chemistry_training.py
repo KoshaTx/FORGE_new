@@ -13,13 +13,17 @@ import numpy as np
 from rdkit import Chem
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_chemistry_corpus import (
+from forge.design.corpus.ugi_chemistry_corpus import (
     UgiChemistryRecord,
     load_expanded_ugi_chemistry_corpus,
     load_ugi_chemistry_corpus,
 )
-from forge.design.ugi_chemistry_flow import (
+from forge.design.corpus.ugi_morphology_corpus import (
+    balanced_product_weights,
+    source_stratified_family_weights,
+)
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_chemistry_flow import (
     UgiChemistryFlow,
     UgiChemistryFlowError,
     UgiChemistrySample,
@@ -31,11 +35,7 @@ from forge.design.ugi_chemistry_flow import (
     sample_ugi_chemistry,
     ugi_chemistry_flow_loss,
 )
-from forge.design.ugi_morphology_corpus import (
-    balanced_product_weights,
-    source_stratified_family_weights,
-)
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 try:

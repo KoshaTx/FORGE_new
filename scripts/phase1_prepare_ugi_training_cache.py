@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from forge.product.ugi_training_cache import prepare_ugi_training_cache
+from forge.design.training.ugi_training_cache import prepare_ugi_training_cache
 
 REPO = Path(__file__).resolve().parents[1]
 

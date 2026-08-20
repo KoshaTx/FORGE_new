@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.ugi_closure_training import (
+from forge.design.training.ugi_closure_training import (
     UgiClosureTrainingError,
     train_ugi_closure_scorer,
 )

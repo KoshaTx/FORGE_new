@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.value.ugi3_hybrid_proposal_closure_sensitivity import (
+from forge.value.audit.ugi3_hybrid_proposal_closure_sensitivity import (
     build_hybrid_proposal_closure_sensitivity,
 )
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.potency.ugi_semantic_annotations import (
+from forge.potency.audit.ugi_semantic_annotations import (
     ATOM_FIELDS,
     BOND_FIELDS,
     COMPONENT_MAPPING_FIELDS,

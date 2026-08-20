@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.planner import (
+from forge.route.engine.planner import (
     AssessmentOutcome,
     AvailabilityState,
     EvidenceTier,
@@ -15,7 +15,7 @@ from forge.route.planner import (
     RecursiveRouteAssessor,
     RouteTarget,
 )
-from forge.route.ugi3_exact_evidence_source import (
+from forge.route.sources.ugi3_exact_evidence_source import (
     ExactEvidenceOnlyUgi3Source,
     build_exact_evidence_source_diagnostic,
     load_exact_evidence_only_source,

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from forge.product.ugi_morphology_training import (
+from forge.design.training.ugi_morphology_training import (
     UgiMorphologyTrainingError,
     train_ugi_morphology,
 )

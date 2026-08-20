@@ -8,7 +8,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_morphology_high_potency_challenger import (
+from forge.potency.morphology.ugi_morphology_high_potency_challenger import (
     build_high_potency_challenger,
 )
 

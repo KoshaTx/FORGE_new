@@ -17,8 +17,8 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.phase1_tree_topology_flow import TreeTopologyFlowError
-from forge.design.ugi_adapter_features import (
+from forge.design.flow.phase1_tree_topology_flow import TreeTopologyFlowError
+from forge.design.flow.ugi_adapter_features import (
     ORIGIN_TO_INDEX,
     UgiL1SupportTrainingRecord,
 )
@@ -845,7 +845,7 @@ def sample_attached_offspring_with_exact_budget_and_cycle_rank(
         import torch
     except ModuleNotFoundError as exc:  # pragma: no cover - optional dependency
         raise UgiMorphologyProgramError("attached-tree sampling requires torch") from exc
-    from forge.design.ugi_closure_placement import feasible_next_closures
+    from forge.design.flow.ugi_closure_placement import feasible_next_closures
 
     if logits.ndim != 2 or logits.shape[0] < 1 or logits.shape[1] < 2:
         raise UgiMorphologyProgramError("offspring logits must be [nodes, child classes]")

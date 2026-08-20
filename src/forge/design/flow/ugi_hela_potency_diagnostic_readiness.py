@@ -21,16 +21,16 @@ from typing import Any
 
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
-from forge.design.ugi_hela_potency_guidance_seam_v1 import (
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+    build_selected_model_restartable_guidance_lane_v3,
+)
+from forge.design.guidance.ugi_hela_potency_guidance_seam_v1 import (
     CALIBRATION_SEEDS,
     EVALUATION_SEEDS,
     EXPECTED_SEEDS,
 )
-from forge.design.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
-)
-from forge.design.ugi_selected_guidance_adapter_v3 import (
-    build_selected_model_restartable_guidance_lane_v3,
 )
 from forge.potency.audit.ugi_hela_potency_diagnostic import (
     EXPECTED_SELECTED_CANDIDATE,

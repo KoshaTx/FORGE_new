@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.defog_feasibility import _rstar_step
+from forge.design.flow.defog_feasibility import _rstar_step
 
 try:
     import torch

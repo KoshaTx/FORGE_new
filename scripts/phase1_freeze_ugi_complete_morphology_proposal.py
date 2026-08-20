@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_complete_morphology_proposal import (
+from forge.design.sampling.ugi_complete_morphology_proposal import (
     build_complete_morphology_proposal,
 )
 

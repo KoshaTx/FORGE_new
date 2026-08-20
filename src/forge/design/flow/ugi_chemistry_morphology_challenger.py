@@ -10,8 +10,8 @@ from typing import Any
 from rdkit import rdBase
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_chemistry_bias_attribution import compact_product_motif_summary
-from forge.design.ugi_terminal_decoder_challenger import summarize_terminal_decoder_arm
+from forge.design.audit.ugi_chemistry_bias_attribution import compact_product_motif_summary
+from forge.design.sampling.ugi_terminal_decoder_challenger import summarize_terminal_decoder_arm
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_chemistry_morphology_challenger_evaluation_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_chemistry_morphology_challenger_evaluation.v1"

@@ -17,17 +17,17 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from forge.design.ugi_generated_terminal_support import (
+from forge.design.corpus.ugi_generated_terminal_support import (
     DeclaredGraphSupportContext,
     QualifiedGeneratedUgiTerminalSupport,
     UgiGeneratedTerminalSupportError,
     qualify_locked_generated_ugi_terminal_support,
 )
-from forge.design.ugi_matched_budget_orchestration import (
+from forge.design.flow.ugi_morphology_program import UgiMorphologyProgram
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     LockedMatchedTerminal,
     MatchedGenerationRequest,
 )
-from forge.design.ugi_morphology_program import UgiMorphologyProgram
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 from forge.route.terminals.terminal_assessment import (
     QualifiedUgiL1Reverifier,

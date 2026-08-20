@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_full_corpus_branch_exploration_schedule import (
+from forge.design.schedule.ugi_full_corpus_branch_exploration_schedule import (
     build_full_corpus_branch_exploration_schedule,
 )
 

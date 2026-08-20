@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from forge.route.paper_reviews import (
+from forge.route.audit.paper_reviews import (
     PaperReviewError,
     build_paper_route_reviews,
     write_paper_route_reviews,

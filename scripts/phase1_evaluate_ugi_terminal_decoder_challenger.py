@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_terminal_decoder_challenger import build_terminal_decoder_evaluation
+from forge.design.sampling.ugi_terminal_decoder_challenger import build_terminal_decoder_evaluation
 
 REPO = Path(__file__).resolve().parents[1]
 

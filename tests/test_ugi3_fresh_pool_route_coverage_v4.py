@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.value.ugi3_fresh_pool_route_coverage_v4 import (
+from forge.value.coverage.ugi3_fresh_pool_route_coverage_v4 import (
     TARGET_ROLE,
     TARGET_SMILES,
     Ugi3FreshPoolRouteCoverageV4Error,

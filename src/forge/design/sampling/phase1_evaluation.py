@@ -8,15 +8,15 @@ from typing import Any
 
 import numpy as np
 
-from forge.design.defog_feasibility import AtomState, graph_to_molecule
-from forge.design.lipid_context import (
+from forge.design.audit.lipid_morphology_audit import molecule_morphology
+from forge.design.flow.defog_feasibility import AtomState, graph_to_molecule
+from forge.design.flow.lipid_context import (
     LIPID_REGION_NAMES,
     assign_lipid_regions,
     select_lipid_polar_root,
 )
-from forge.design.lipid_morphology_audit import molecule_morphology
-from forge.design.phase1_flow import Phase1FlowError, TrainingGraphRecord
-from forge.design.sparse_topology_feasibility import INDEX_TO_DENSE_BOND
+from forge.design.flow.phase1_flow import Phase1FlowError, TrainingGraphRecord
+from forge.design.flow.sparse_topology_feasibility import INDEX_TO_DENSE_BOND
 
 try:
     from rdkit import Chem

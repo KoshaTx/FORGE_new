@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.route.ugi3_route_registry_pair_builder import (
+from forge.route.assessment.ugi3_route_registry_pair_builder import (
     build_registry_pair,
     configured_output_paths,
 )

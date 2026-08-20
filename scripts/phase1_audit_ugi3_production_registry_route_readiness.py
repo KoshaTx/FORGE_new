@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_production_registry_route_readiness import (
+from forge.route.assessment.ugi3_production_registry_route_readiness import (
     build_production_registry_route_readiness,
 )
 

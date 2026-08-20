@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.potency.ugi_morphology_proposal_challenger_adjudication import (
+from forge.potency.morphology.ugi_morphology_proposal_challenger_adjudication import (
     build_morphology_proposal_challenger_adjudication,
 )
 

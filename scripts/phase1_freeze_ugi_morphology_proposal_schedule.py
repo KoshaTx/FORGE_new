@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.product.ugi_morphology_proposal_schedule import (
+from forge.design.schedule.ugi_morphology_proposal_schedule import (
     build_morphology_proposal_schedule,
 )
 

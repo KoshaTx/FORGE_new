@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from forge.potency.ugi_production_full_support_rescoring_v3 import (
+from forge.potency.ranking.ugi_production_full_support_rescoring_v3 import (
     UgiProductionFullSupportRescoringV3Error,
     _attach_admission_metadata,
     _prepare_rows,

@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_production_candidate_schedule import build_production_candidate_schedule
+from forge.design.schedule.ugi_production_candidate_schedule import build_production_candidate_schedule
 
 REPO = Path(__file__).resolve().parents[1]
 

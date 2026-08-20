@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge.product.ugi_production_candidate_generation import (
+from forge.design.sampling.ugi_production_candidate_generation import (
     aggregate_production_candidate_generation,
     production_candidate_plan,
     run_all_production_candidate_shards,

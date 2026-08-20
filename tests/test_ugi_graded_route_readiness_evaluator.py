@@ -3,13 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from forge.product.ugi_graded_route_readiness_evaluator import (
+from forge.design.schedule.ugi_graded_route_readiness_evaluator import (
     GRADED_ROUTE_READINESS_POLICY,
     UGI_GRADED_ROUTE_READINESS_POLICY_SHA256,
     load_graded_component_index,
     load_semantic_proposal_index,
 )
-from forge.product.ugi_graded_route_readiness_guidance import (
+from forge.design.guidance.ugi_graded_route_readiness_guidance import (
     _generation_only_post_hoc_equivalence,
 )
 

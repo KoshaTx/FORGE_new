@@ -22,11 +22,11 @@ from phase1_run_aizynthfinder_component_route_diagnostic_v1 import (
     _write_json_atomic,
 )
 
-from forge.route.aizynthfinder_checkpoint_residual import (
+from forge.route.audit.aizynthfinder_checkpoint_residual import (
     build_residual_targets,
     summarize_residual_records,
 )
-from forge.route.aizynthfinder_diagnostic import content_sha256
+from forge.route.audit.aizynthfinder_diagnostic import content_sha256
 
 CONFIG_SCHEMA_VERSION = "forge.aizynthfinder_checkpoint_residual_config.v1"
 RESULT_SCHEMA_VERSION = "forge.aizynthfinder_checkpoint_residual.v1"

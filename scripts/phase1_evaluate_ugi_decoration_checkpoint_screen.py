@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.product.ugi_decoration_checkpoint_screen import (
+from forge.design.audit.ugi_decoration_checkpoint_screen import (
     MINIMUM_EFFECTIVE_COMPONENT_COUNT,
     MINIMUM_UNIQUE_COMPONENTS,
     MINIMUM_UNIQUE_VALID_FRACTION,

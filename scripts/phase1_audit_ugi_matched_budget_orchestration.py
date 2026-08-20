@@ -9,9 +9,9 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from forge.product.defog_feasibility import sha256_file
-from forge.product.ugi_end_to_end_sampling import _atomic_json
-from forge.product.ugi_matched_budget_orchestration import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.sampling.ugi_end_to_end_sampling import _atomic_json
+from forge.design.schedule.ugi_matched_budget_orchestration import (
     DiagnosticRouteAssessment,
     LockedMatchedTerminal,
     MatchedBudgetLimits,

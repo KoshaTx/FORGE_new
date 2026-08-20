@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from forge.route.ugi3_stepwise_route_program_adjudication import (
+from forge.route.evidence.ugi3_stepwise_route_program_adjudication import (
     build_stepwise_route_program_adjudication,
 )
 

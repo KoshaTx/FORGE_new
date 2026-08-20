@@ -8,7 +8,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.value.ugi_synthesis_guidance_failure_audit import (
+from forge.value.synthesis.ugi_synthesis_guidance_failure_audit import (
     build_synthesis_guidance_failure_audit,
 )
 

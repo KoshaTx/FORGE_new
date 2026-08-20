@@ -15,12 +15,16 @@ from typing import Any
 import numpy as np
 
 from forge.core.io import write_json as _atomic_json
-from forge.design.defog_feasibility import sha256_file
-from forge.design.ugi_chemistry_corpus import (
+from forge.design.corpus.ugi_chemistry_corpus import (
     load_expanded_ugi_chemistry_corpus,
     load_ugi_chemistry_corpus,
 )
-from forge.design.ugi_joint_sparse_flow import (
+from forge.design.corpus.ugi_morphology_corpus import (
+    balanced_product_weights,
+    source_stratified_family_weights,
+)
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
     collate_ugi_joint_sparse_records,
     joint_sparse_source_marginals,
@@ -28,11 +32,7 @@ from forge.design.ugi_joint_sparse_flow import (
     project_joint_sparse_record,
     ugi_joint_sparse_loss,
 )
-from forge.design.ugi_morphology_corpus import (
-    balanced_product_weights,
-    source_stratified_family_weights,
-)
-from forge.design.ugi_training_cache import load_ugi_training_cache
+from forge.design.training.ugi_training_cache import load_ugi_training_cache
 
 try:
     import torch

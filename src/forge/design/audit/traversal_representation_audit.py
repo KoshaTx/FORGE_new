@@ -19,21 +19,21 @@ import numpy as np
 from rdkit import Chem, rdBase
 
 from forge.core.io import read_json_object
-from forge.design.canonical_representation_audit import (
+from forge.design.audit.canonical_representation_audit import (
     _random_nonidentity_order,
     _row_seed,
     load_atom_vocabulary,
     sparse_record_signature,
 )
-from forge.design.defog_feasibility import sha256_file
-from forge.design.lipid_context import rooted_distances
-from forge.design.phase1_tree_topology_flow import (
+from forge.design.flow.defog_feasibility import sha256_file
+from forge.design.flow.lipid_context import rooted_distances
+from forge.design.flow.phase1_tree_topology_flow import (
     offspring_to_parents,
     preorder_offspring_to_parents,
     preorder_record_offspring_counts,
     record_offspring_counts,
 )
-from forge.design.v5_sparse_representation import (
+from forge.design.flow.v5_sparse_representation import (
     V5SparseGraphRecord,
     canonical_constitutional_molecule,
     canonical_tree,

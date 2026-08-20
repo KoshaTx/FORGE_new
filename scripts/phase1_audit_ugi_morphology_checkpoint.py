@@ -14,12 +14,12 @@ from typing import Any
 import numpy as np
 import torch
 
-from forge.product.ugi_morphology_corpus import (
+from forge.design.corpus.ugi_morphology_corpus import (
     load_expanded_ugi_morphology_corpus,
     sample_family_balanced_records,
 )
-from forge.product.ugi_morphology_flow import UgiMorphologyFlow
-from forge.product.ugi_morphology_training import _validation_loss
+from forge.design.flow.ugi_morphology_flow import UgiMorphologyFlow
+from forge.design.training.ugi_morphology_training import _validation_loss
 
 REPO = Path(__file__).resolve().parents[1]
 

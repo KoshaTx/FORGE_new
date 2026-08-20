@@ -6,11 +6,11 @@ import hashlib
 import json
 from pathlib import Path
 
-from forge.route.graph2edits_semantic_readjudication import (
+from forge.route.audit.graph2edits_semantic_readjudication import (
     build_semantic_readjudication,
     finalize_semantic_readjudication,
 )
-from forge.route.l2_forward_resolver import load_independent_l2_forward_resolver
+from forge.route.assessment.l2_forward_resolver import load_independent_l2_forward_resolver
 
 
 def _stable_bytes(value: object) -> bytes:

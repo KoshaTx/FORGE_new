@@ -10,25 +10,14 @@ from typing import Any
 from forge.core.hashing import sha256_file
 from forge.core.hashing import sha256_json as _sha256_payload
 from forge.core.io import stable_json as _stable_json
-from forge.design.ugi_graded_route_readiness_evaluator import (
-    UGI_GRADED_ROUTE_READINESS_POLICY_SHA256,
-    GradedRouteReadinessEvaluator,
-    load_graded_component_index,
-    load_semantic_proposal_index,
+from forge.design.audit.ugi_zero_guidance_typed_audit import derive_typed_counts
+from forge.design.flow.ugi_restartable_terminal_support_adapter import (
+    native_completion_record_from_locked_terminal,
 )
-from forge.design.ugi_matched_planner_cache_binding import (
-    preflight_lazy_matched_planner_cache_binding,
+from forge.design.flow.ugi_selected_guidance_adapter_v3 import (
+    build_selected_model_restartable_guidance_lane_v3,
 )
-from forge.design.ugi_nonzero_guidance_runner import (
-    GuidanceCacheIsolationContract,
-    GuidanceComputeBudget,
-    GuidanceSchedule,
-    ParticleGroupDesign,
-    finalize_lazy_matched_cache_binding,
-    load_grouped_smc_schedule_qualification,
-    run_development_matched_guidance,
-)
-from forge.design.ugi_production_synthesis_guidance_seam_v4 import (
+from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     EXPECTED_DESIGN,
     _annotate_support_record_coordinates,
     _artifact_pin,
@@ -39,25 +28,36 @@ from forge.design.ugi_production_synthesis_guidance_seam_v4 import (
     _json_value,
     _require_selected_v3_productive_identity,
 )
-from forge.design.ugi_production_synthesis_guidance_seam_v4 import (
+from forge.design.guidance.ugi_production_synthesis_guidance_seam_v4 import (
     _validate_config as _validate_v4_config,
 )
-from forge.design.ugi_production_terminal_route_evaluator import (
-    build_production_ugi_terminal_aware_planner_factory,
-)
-from forge.design.ugi_production_zero_guidance_seam_v3 import (
+from forge.design.guidance.ugi_production_zero_guidance_seam_v3 import (
     ProductionGuidanceRouteEvaluatorV3,
 )
-from forge.design.ugi_restartable_terminal_support_adapter import (
-    native_completion_record_from_locked_terminal,
-)
-from forge.design.ugi_selected_guidance_adapter_v3 import (
-    build_selected_model_restartable_guidance_lane_v3,
-)
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     GENERATOR_CHECKPOINT_SHA256,
 )
-from forge.design.ugi_zero_guidance_typed_audit import derive_typed_counts
+from forge.design.schedule.ugi_graded_route_readiness_evaluator import (
+    UGI_GRADED_ROUTE_READINESS_POLICY_SHA256,
+    GradedRouteReadinessEvaluator,
+    load_graded_component_index,
+    load_semantic_proposal_index,
+)
+from forge.design.schedule.ugi_matched_planner_cache_binding import (
+    preflight_lazy_matched_planner_cache_binding,
+)
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
+    GuidanceCacheIsolationContract,
+    GuidanceComputeBudget,
+    GuidanceSchedule,
+    ParticleGroupDesign,
+    finalize_lazy_matched_cache_binding,
+    load_grouped_smc_schedule_qualification,
+    run_development_matched_guidance,
+)
+from forge.design.schedule.ugi_production_terminal_route_evaluator import (
+    build_production_ugi_terminal_aware_planner_factory,
+)
 from forge.route.engine.planner_cache import FilePlannerCache
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_graded_route_readiness_guidance_config.v1"

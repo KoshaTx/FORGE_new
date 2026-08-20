@@ -14,7 +14,7 @@ import numpy as np
 
 from forge.core.io import stable_json as _stable_json
 from forge.data.r1_prime_audit import sha256_bytes, sha256_file
-from forge.design.ugi_complete_morphology_proposal import support_preserving_probabilities
+from forge.design.sampling.ugi_complete_morphology_proposal import support_preserving_probabilities
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_promoted_morphology_proposal_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_promoted_morphology_proposal.v1"

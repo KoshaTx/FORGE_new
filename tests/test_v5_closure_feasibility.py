@@ -5,7 +5,7 @@ import random
 
 import pytest
 
-from forge.product.v5_closure_feasibility import (
+from forge.design.flow.v5_closure_feasibility import (
     ClosureFeasibilityError,
     closure_edge_retains_exact_completion,
     exact_closure_completion,

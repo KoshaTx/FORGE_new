@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.route.ugi3_third_wave_head_terminals import (
+from forge.route.terminals.ugi3_third_wave_head_terminals import (
     build_third_wave_head_terminal_audit,
 )
 

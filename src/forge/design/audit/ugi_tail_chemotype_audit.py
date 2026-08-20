@@ -19,7 +19,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.design.ugi_postselection_branching import carbon_branch_metrics
+from forge.design.guidance.ugi_postselection_branching import carbon_branch_metrics
 
 CONFIG_SCHEMA_VERSION = "phase1_ugi_tail_chemotype_audit_config.v1"
 RESULT_SCHEMA_VERSION = "phase1_ugi_tail_chemotype_audit.v1"

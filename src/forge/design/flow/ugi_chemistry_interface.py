@@ -21,8 +21,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from forge.design.defog_feasibility import AtomState, FeasibilityError
-from forge.design.ugi_adapter_features import (
+from forge.design.flow.defog_feasibility import AtomState, FeasibilityError
+from forge.design.flow.ugi_adapter_features import (
     CORE_POSITION_STATES,
     CORE_POSITION_TO_INDEX,
     NOT_APPLICABLE_DISTANCE,
@@ -31,8 +31,8 @@ from forge.design.ugi_adapter_features import (
     UgiAdapterNodeFeatures,
     UgiL1SupportTrainingRecord,
 )
-from forge.design.ugi_morphology_program import preorder_attached_forest_to_parents
-from forge.design.v5_sparse_representation import v5_offspring_to_parents
+from forge.design.flow.ugi_morphology_program import preorder_attached_forest_to_parents
+from forge.design.flow.v5_sparse_representation import v5_offspring_to_parents
 from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
 
 WITHHELD_STATE = -1

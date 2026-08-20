@@ -5,17 +5,17 @@ from pathlib import Path
 
 import pytest
 
-from forge.product.ugi_nonzero_guidance_runner import (
+from forge.design.schedule.ugi_nonzero_guidance_runner import (
     load_grouped_smc_schedule_qualification,
 )
-from forge.product.ugi_production_zero_guidance_seam_v2 import (
+from forge.design.guidance.ugi_production_zero_guidance_seam_v2 import (
     UgiProductionZeroGuidanceSeamV2Error,
     _validate_config,
 )
-from forge.product.ugi_selected_guidance_adapter_v2 import (
+from forge.design.flow.ugi_selected_guidance_adapter_v2 import (
     build_selected_model_restartable_guidance_lane_v2,
 )
-from forge.product.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     GENERATOR_CHECKPOINT_SHA256,
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_DECODER_ID,

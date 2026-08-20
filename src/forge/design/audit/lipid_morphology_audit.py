@@ -15,8 +15,8 @@ from typing import Any
 import numpy as np
 from rdkit import Chem
 
-from forge.design.defog_feasibility import FeasibilityError, sha256_file
-from forge.design.lipid_context import (
+from forge.design.flow.defog_feasibility import FeasibilityError, sha256_file
+from forge.design.flow.lipid_context import (
     LIPID_REGION_NAMES,
     assign_lipid_regions,
     rooted_distances,

@@ -19,10 +19,10 @@ from rdkit import Chem, DataStructs, rdBase
 from rdkit.Chem import rdFingerprintGenerator
 
 from forge.data.r1_prime_audit import sha256_file
-from forge.potency.ugi_semantic_annotations import ROLE_NAMES
-from forge.product.ugi_component_expansion import reaction_handle_qualification
-from forge.product.ugi_held_component_gate import _reaction_contract
-from forge.product.ugi_tail_chemotype_audit import (
+from forge.potency.audit.ugi_semantic_annotations import ROLE_NAMES
+from forge.design.corpus.ugi_component_expansion import reaction_handle_qualification
+from forge.design.corpus.ugi_held_component_gate import _reaction_contract
+from forge.design.audit.ugi_tail_chemotype_audit import (
     compare_component_cohorts,
     summarize_component_cohort,
 )

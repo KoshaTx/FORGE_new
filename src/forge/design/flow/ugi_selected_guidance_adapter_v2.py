@@ -12,29 +12,29 @@ import hashlib
 from pathlib import Path
 from typing import Any
 
-from forge.design.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
-from forge.design.ugi_joint_sparse_sampling import (
-    advance_ugi_joint_sparse_state,
-    finalize_ugi_joint_sparse_state,
-)
-from forge.design.ugi_nonzero_guidance_runner import GuidanceTerminalCompletionReceipt
-from forge.design.ugi_selected_generator_implementation import (
-    require_selected_generator_implementation_unchanged,
-)
-from forge.design.ugi_selected_guidance_adapter import (
+from forge.design.flow.ugi_selected_guidance_adapter import (
     SelectedGuidanceState,
     SelectedModelRestartableGuidanceLane,
     UgiSelectedGuidanceAdapterError,
     _replace_generator_state,
     _sha256_payload,
 )
-from forge.design.ugi_selected_restartable_generator import SAMPLE_STEPS
-from forge.design.ugi_selected_restartable_generator_v2 import (
+from forge.design.sampling.ugi_joint_end_to_end_sampling import complete_ugi_joint_terminals
+from forge.design.sampling.ugi_joint_sparse_sampling import (
+    advance_ugi_joint_sparse_state,
+    finalize_ugi_joint_sparse_state,
+)
+from forge.design.sampling.ugi_selected_generator_implementation import (
+    require_selected_generator_implementation_unchanged,
+)
+from forge.design.sampling.ugi_selected_restartable_generator import SAMPLE_STEPS
+from forge.design.sampling.ugi_selected_restartable_generator_v2 import (
     MAXIMUM_ADJACENT_BRANCH_RUNS,
     TERMINAL_TEMPERATURE,
     SelectedStep2000BondStochasticArtifacts,
     build_selected_step2000_bond_stochastic_lane,
 )
+from forge.design.schedule.ugi_nonzero_guidance_runner import GuidanceTerminalCompletionReceipt
 
 try:
     import torch

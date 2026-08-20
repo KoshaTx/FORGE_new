@@ -9,7 +9,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from forge.potency.ugi_morphology_enriched_oracle_audit import (
+from forge.potency.oracle.ugi_morphology_enriched_oracle_audit import (
     build_morphology_enriched_oracle_audit,
 )
 
