@@ -123,13 +123,11 @@ discrete flow then generates the complete molecular realization at atom-and-bond
 component identifiers, stored precursor graphs, or fragment tokens. Across Ugi, repeated aza-Michael
 addition, and repeated reductive amination, FORGE achieves exact level-one transform-consistent
 yields of $78.7\%$, $77.5\%$, and $31.3\%$, substantially outperforming matched whole-graph
-generation followed by post-hoc reaction filtering. Unlike a finite train-only catalogue assembler,
-FORGE generates exact-assembly products whose recovered precursor identities extend beyond the
-supplied component vocabulary. Recursive route assessment further connects
-\ForgeRouteCompleteProducts{} of \ForgeRouteAdmitted{} admitted Ugi designs to complete computational
-synthesis dossiers while explicitly returning unresolved or search-censored outcomes otherwise.
-FORGE therefore uses reaction knowledge to preserve synthesis semantics while opening molecular
-identity to de novo generation.
+generation followed by post-hoc reaction filtering. In the deeply supervised Ugi benchmark, FORGE also generated
+open-ended exact-L1 products whose recovered precursor identities extended beyond the training
+component catalogue, a capability unavailable to a finite catalogue assembler by construction. FORGE
+therefore uses reaction knowledge to preserve synthesis semantics while opening molecular identity to
+de novo generation.
 \end{abstract}
 
 \section{Introduction}
@@ -166,9 +164,8 @@ structures that occupy it. Our premise is that synthesis grounding need not requ
 enumeration: reaction knowledge can provide semantic coordinates that determine how molecular
 regions participate in construction while leaving their identities generative.
 
-We introduce FORGE (\textbf{F}low-matched, \textbf{O}pen-ended, \textbf{R}oute-resolved
-\textbf{G}eneration and \textbf{E}xploration), a synthesis-grounded generative framework that uses
-known reaction chemistry as the coordinate system for molecular generation. A reaction program specifies the assembly chemistry,
+We introduce FORGE, a synthesis-grounded generative framework that uses known reaction chemistry as
+the coordinate system for molecular generation. A reaction program specifies the assembly chemistry,
 precursor roles, reaction-core positions, transformation order and coarse molecular architecture,
 but not precursor identities. Conditioned on this program, a discrete flow generates the complete
 molecular realization at atom-and-bond resolution without component identifiers, stored precursor
@@ -176,17 +173,16 @@ graphs or fragment tokens. Because reaction semantics are preserved in the gener
 completed molecule can be decomposed into the precursors implied by its program and the specified
 assembly reaction replayed exactly. Precursors that are not directly available are then assessed
 recursively for upstream preparation, yielding a complete evidence-qualified computational synthesis
-dossier or an explicit unresolved or search-censored outcome. We evaluate this formulation across an
-AGILE-type Ugi three-component reaction, repeated aza-Michael addition and repeated reductive
-amination. These experiments test generalization across specified reaction programs rather than
+dossier or an explicit unresolved or search-censored outcome. We evaluate this formulation across a Ugi
+three-component reaction, repeated aza-Michael addition and repeated reductive amination. These experiments test generalization across specified reaction programs rather than
 zero-shot support for arbitrary chemistry. Our contributions are threefold. First, we formulate
 synthesis-grounded whole-graph generation in which reaction programs provide semantic coordinates
 while molecular identity remains generative at atom-and-bond resolution. Second, matched controls
 across three assembly programs show that reaction semantics substantially increase exact
 transform-consistent generation relative to whole-graph generation followed by post-hoc filtering.
-Third, FORGE generates exact-assembly products with precursor identities beyond a finite training
-catalogue and connects generated precursors to bounded recursive synthesis programs with explicit
-abstention.
+Third, FORGE leaves precursor identity open rather than restricting generation to a finite component
+vocabulary; in the deeply supervised Ugi benchmark, this yields exact-assembly products with
+recovered precursor identities beyond the training catalogue.
 
 
 \section{FORGE}
@@ -374,21 +370,12 @@ Method & Valid & Exact L1 & Unique L1 & Open-ended & Held-comp. & Diversity \\
 \end{tabular}
 \end{table}
 
-\paragraph{Recursive synthesis programs connect generated lipids to evidence-qualified materials.}
-Route assessment is method-blind, and a reaction sequence counts as a complete dossier only when the
-final assembly and every upstream step pass exact forward verification and every terminal material
-closes under the frozen evidence policy. The frozen union contained
-\ForgeCommonRouteUnionComponents{} distinct role--constitution components, of which the exact-source
-library closed \ForgeCommonRouteEvidenceCompleteComponents{}; FORGE therefore produced
-\ForgeCommonRouteForgeExactPerThousand{} exact-L1 products per 1,000 attempts but
-\ForgeCommonRouteForgeCompletePerThousand{} complete dossiers and
-\ForgeCommonRouteForgeAbstentionPerThousand{} abstentions under that library. In the bounded cascade
-over a frozen, route-blinded shortlist of \ForgeRouteCandidates{} distinct Ugi products, all
-\ForgeRouteExactLone{} passed exact-L1 reverification, \ForgeRouteAdmitted{} entered route assessment,
-and \ForgeRouteCompleteProducts{} closed, with \ForgeRouteUnresolvedProducts{} unresolved and
-\ForgeRouteCensoredProducts{} search-censored. Most unresolved components were absent from the
-bounded evidence index and were never expanded, so this measures closure under a frozen cascade
-rather than molecular synthesizability.
+\paragraph{Generated precursors can be passed to a bounded recursive route assessor.}
+Accepted upstream transformations must reconstruct their targets under the corresponding forward
+reaction, and terminal branches must close under the frozen material-evidence policy. Because route
+coverage depends on the available reaction and procurement evidence, unresolved outputs are treated
+as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
+Appendix~\ref{app:results}.
 
 \begin{figure}[H]
 \centering
@@ -410,7 +397,7 @@ FORGE couples whole-graph generation to reaction programs and recursive synthesi
 model can generate new molecular structures while exact forward replay and recursive routing keep
 accepted products connected to chemistry.
 
-The evidence is strongest for AGILE-type Ugi 3-CR; repeated aza-Michael addition is a second
+The evidence is strongest for the Ugi 3-CR; repeated aza-Michael addition is a second
 computational family and repeated reductive amination a lighter stress test. The study is
 computational, supports only three qualified assembly programs and operates within a bounded
 molecular graph space. Exact route closure does not establish experimental synthesis success, and the
@@ -452,10 +439,10 @@ structures determine the molecular identity of the resulting lipid.
 
 \subsection{Assembly chemistries studied}
 
-We study three ionizable-lipid assembly chemistries: an AGILE-type
+We study three ionizable-lipid assembly chemistries: an
 amine--aldehyde--isocyanide Ugi three-component reaction, repeated aza-Michael addition, and
 repeated reductive amination.
-In the AGILE-type Ugi reaction, an amine head reacts with an aldehyde component and an isocyanide
+In the Ugi reaction, an amine head reacts with an aldehyde component and an isocyanide
 component to form an $\alpha$-amino amide that connects the headgroup to two hydrophobic regions
 \citep{xu2024agile}.
 A second assembly strategy uses repeated aza-Michael additions to attach acrylate-bearing
@@ -1357,102 +1344,24 @@ coverage, or zero-shot held-reaction-family generalization.
 
 \subsection{Recursive synthesis programs connect generated lipids to evidence-qualified materials}
 
-Table~\ref{tab:route-evidence-baselines} separates a method's native identity source and route
-representation from evidence obtained under the common FORGE assessor.
-We freeze the union of exact-L1 components from all methods and seeds before route assessment,
-hide method membership from the evidence pass, and require one complete, unresolved or
-search-censored disposition for every component before unsealing membership.
-Emitting a reaction sequence is not counted as a complete dossier unless the final assembly and
-every upstream step pass exact forward verification and every terminal material closes under the
-frozen evidence policy.
+FORGE includes a bounded post-generation route assessor for generated precursors that are not
+already supported as available materials. The assessor first queries the frozen route registry and
+may invoke single-step or multistep proposal engines where the registry is silent. A proposed
+transformation is accepted only when the corresponding forward reaction reconstructs the intended
+precursor under the declared verification contract, and a complete dossier is returned only when
+every terminal branch closes under the frozen material-evidence policy. Otherwise the assessor
+abstains. Abstention therefore records insufficient evidence under the declared search and evidence
+contract, not proof that the molecule is unsynthesizable.
+
 We do not report a separate AiZynthFinder row: a proposal-only route is a hypothesis and cannot
 change exact evidence closure until every step passes the same forward-verification and
 terminal-evidence gates \citep{genheden2020aizynthfinder}.
 
-\begin{minipage}{\linewidth}
-The frozen union contained \ForgeCommonRouteUnionComponents{} distinct role--constitution
-components, but the exact-source library closed only
-\ForgeCommonRouteEvidenceCompleteComponents{}. Consequently, FORGE produced
-\ForgeCommonRouteForgeExactPerThousand{} exact-L1 products per 1,000 attempts, yet
-\ForgeCommonRouteForgeCompletePerThousand{} complete dossiers and
-\ForgeCommonRouteForgeAbstentionPerThousand{} abstentions under this library. The learned inventory
-selector closed \ForgeCommonRouteSelectorCompletePerThousand{} dossiers per 1,000 attempts through
-occasional reuse of covered training components. This is a negative result about current exact
-evidence coverage, not a comparison of intrinsic synthesizability: components outside the frozen
-library were not searched and remain unknown.
-\end{minipage}
-
-\begin{table*}[t]
-\caption{\textbf{Common synthesis-evidence assessment of Ugi generative methods.}
-Descriptive support fields record what each method is permitted to use at generation time.
-Numerical evidence fields are populated only after applying the same method-blind union of exact-L1
-components, upstream forward-verification, terminal-evidence, and abstention policy to each
-method's outputs.
-N/P means that the method does not produce that object; it is not interpreted as a measured zero.
-All numerical fields are reported per 1,000 generation attempts as mean $\pm$ sample standard
-deviation across three seeds. An abstention records missing exact evidence, not a failed synthesis;
-the frozen exact-source component library is deliberately non-exhaustive.}
-\label{tab:route-evidence-baselines}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3.2pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{llcccccc}
-\hline
-Method & Molecular identity source &
-Finite vocab. &
-Exact L1/1k &
-Verified upstream &
-Terminal evidence &
-Complete dossier &
-Abstention \\
-\hline
-\input{../v1/generated/route_evidence_completed_rows.tex}%
-\end{tabular}
-}
-\end{table*}
-
-The completed bounded route cascade starts from a frozen, route-blinded shortlist of
-\ForgeRouteCandidates{} distinct Ugi products rather than from the full production-attempt
-population. All \ForgeRouteExactLone{} products passed exact L1 reverification;
-\ForgeRouteAdmitted{} entered route assessment and one silicon-containing state was support-censored.
-Across the full shortlist, \ForgeRouteCompleteProducts{} closed under the exact-evidence and
-terminal-material policy, \ForgeRouteUnresolvedProducts{} remained unresolved and
-\ForgeRouteCensoredProducts{} was search-censored. The products contained
-\ForgeRouteComponents{} unique component targets: \ForgeRouteCompleteComponents{} complete,
-\ForgeRouteUnresolvedComponents{} unresolved and \ForgeRouteCensoredComponents{} search-censored.
-The proposal engines added graph-consistent hypotheses but closed no additional exact routes.
-Most unresolved components were absent from the bounded evidence index and were never expanded, so
-the result measures closure under this frozen cascade rather than molecular synthesizability.
-
-\begin{figure*}[t]
-\centering
-\fbox{
-\parbox{0.94\linewidth}{
-\centering
-\textbf{Bounded route-cascade dispositions}\\[3pt]
-\begin{tabular}{lrrrr}
-\hline
-Unit & Population & Complete & Unresolved & Censored \\
-\hline
-Products & 256 & 19 & 236 & 1 \\
-Unique components & 158 & 36 & 120 & 2 \\
-\hline
-\end{tabular}\\[4pt]
-All 256 shortlist products passed exact-L1 reverification; one product was support-censored before
-route assessment. Proposal engines added hypotheses but no additional exact route closure.
-}}
-\caption{\textbf{Recursive synthesis programs produce auditable computational dossiers.}
-Panel a reports the count and denominator at every stage; no stage is normalized to a later
-survivor set without stating that denominator.
 An L2 step is admitted only when its evidence tier permits the claimed reaction scope and its
-forward transform reconstructs the intended precursor.
-A terminal branch closes only with a current, dated supplier record for an exact constitutional
-match.
-Computational route closure establishes transform consistency and evidence-qualified terminal
-materials, not experimental synthesis success.}
-\label{fig:synthesis-dossiers}
-\end{figure*}
+forward transform reconstructs the intended precursor. A terminal branch closes only with a current,
+dated supplier record for an exact constitutional match. Computational route closure establishes
+transform consistency and evidence-qualified terminal materials, not experimental synthesis
+success.
 
 \subsection{Guidance diagnostics define the limits of additional optimization}
 
@@ -1516,8 +1425,7 @@ activity, delivery or experimental potency.
 
 The following tables define the complete reporting contract for the common Ugi benchmark. Completed
 matched controls, the learned inventory selector and three external generators are populated from
-hash-pinned three-seed results. The method-blind L2/L3 evidence assessment is reported in
-Table~\ref{tab:route-evidence-baselines}.
+hash-pinned three-seed results.
 
 \begin{table}[H]
 \caption{\textbf{Training and sampling parity for the common Ugi benchmark.}

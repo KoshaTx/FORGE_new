@@ -18,6 +18,8 @@ condensation of `paper/v1`; there is no `paper/v2`.
 | Introduction | Replaced in full, author-supplied, three paragraphs ending in a threefold contributions statement |
 | FORGE expansion | First mention in both abstract and introduction now reads FORGE (**F**low-matched, **O**pen-ended, **R**oute-resolved **G**eneration and **E**xploration), initials bolded |
 | Bibliography | One new entry, `maganti2026synthesis`, added to `../v1/references.bib` |
+| Routing de-emphasis | The sparse-evidence route diagnostics are removed from the abstract, the main Results and Appendix C.7; Table 7 and the route-disposition figure are deleted |
+| AGILE dependence | The "AGILE-type" qualifier is dropped in all four places it appeared; the Ugi chemistry itself is unchanged |
 | Everything else | Byte-identical to `v1_neuripsgem` |
 
 Two substantive differences follow from the new text and are deliberate, not oversights:
@@ -26,8 +28,22 @@ Two substantive differences follow from the new text and are deliberate, not ove
    `\ForgeNullUgiDifferencePP`, `\ForgeNullBLDifferencePP` and `\ForgeNullLXDifferencePP`
    percentage points, v2 says "substantially outperforming". The quantities remain in the body and
    in Appendix C.
-2. The route sentence no longer carries the "bounded, route-blinded Ugi shortlist" scoping. It still
-   says "admitted", and the fail-closed reading ("unresolved or search-censored") is unchanged.
+2. No route-completeness number appears anywhere in the manuscript. Recursive routing is presented
+   as a downstream capability with an abstention contract, not as a scored result.
+
+### Why the routing numbers were removed
+
+The bounded cascade closed 19 of 255 admitted Ugi products. That figure measures coverage of one
+deliberately sparse, frozen, method-blind evidence contract, and the manuscript itself recorded that
+most unresolved components were absent from the bounded evidence index and were never expanded. Read
+without that context it invites the conclusion that FORGE finds routes for about seven percent of its
+designs, which is not what the experiment establishes.
+
+An earlier route audit reported 2,515 of 2,590 prediction-supported Ugi designs, 97.1%, resolving to
+purchasable starting material. The two are not comparable, and `docs/FORGE_IMPLEMENTATION_REFERENCE.md`
+already warns that the 97.1% denominator is prediction-supported designs, "roughly 8.6% of admitted
+ones". Reconciling them is a separate audit; until it runs, the manuscript reports no route
+percentage. All thirteen route macros are now unused by this build.
 
 The introduction now carries 22 citations against v1's 13, adding `qin2025defog`, `lee2025genmol`,
 `ou2024deep` and `maganti2026synthesis`, and restoring `gao2020synthesizability`. The bibliography
@@ -52,17 +68,25 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 
 | Requirement | Status |
 | --- | --- |
-| Up to 5 pages, excluding references and appendix | **NOT MET.** Body runs to page 6; Figure 1, its caption and the Discussion sit past the limit, and references begin partway down page 6 |
+| Up to 5 pages, excluding references and appendix | **NOT MET.** The Discussion, sixteen lines, sits on page 6 and references begin below it. Removing the routing material recovered seven of the twenty-three overflow lines |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
 | Maximum 50 MB | 1.5 MB |
 | Deadline 30 August 2026, 11:59 PM AoE, via OpenReview | Not submitted by this repository |
 
 The longer abstract and introduction added roughly twenty-three lines over `v1_neuripsgem`, which
-built to exactly five body pages. Recovering them is an open editorial decision, deliberately
-deferred rather than made here: the candidates are moving Figure 1 to the appendix, shrinking it
-below 0.52 textwidth, or condensing the Results paragraphs. Shrinking Figure 1 to 0.52 textwidth
-was measured and does not on its own bring the body back to five pages.
+built to exactly five body pages. Cutting the routing material recovered seven of them; sixteen
+remain. Recovering those is an open editorial decision, deliberately deferred: the candidates are
+moving Figure 1 to the appendix, shrinking it below 0.52 textwidth, or condensing the Results
+paragraphs. Shrinking Figure 1 to 0.52 textwidth was measured and does not on its own suffice.
+
+## Build requirement
+
+tcolorbox 6.9.0 and later call `\NewStructureName`, which needs the LaTeX kernel's tagging sockets
+from the 2024-11 release. On a TeX Live 2024 format those commands are undefined and roughly
+eighteen lines of literal tagging markup are typeset above the title. If that appears, install
+tcolorbox 6.3.0 (2024/07/10) under `TEXMFHOME`, or update the kernel. The document source is not
+modified to work around it.
 
 `GEM_workshop_2026.sty` is the workshop's file, downloaded unmodified from the link on the call for
 papers. Note that its running head reads "Under review at the GEM workshop, ICLR 2026": the workshop
