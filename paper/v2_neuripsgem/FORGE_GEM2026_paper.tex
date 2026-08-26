@@ -313,8 +313,8 @@ erasing the deeply supported Ugi behavior.
 
 \begin{table}[tb]
 \caption{\textbf{One shared conditional flow learns three ionizable-lipid assembly programs.}
-Exact-L1 yield and decomposition/replay statistics are reported as mean $\pm$ sample standard
-deviation across three independent training seeds. Results are never pooled across programs. Per-seed
+Exact-L1 yield is reported as mean $\pm$ sample standard deviation across three independent
+training seeds. The final column gives decomposition coverage and forward-replay precision. Results are never pooled across programs. Per-seed
 results and full matched controls are reported in Appendix~\ref{app:results}.}
 \label{tab:gem-shared-programs}
 \centering
@@ -322,7 +322,7 @@ results and full matched controls are reported in Appendix~\ref{app:results}.}
 \setlength{\tabcolsep}{4.6pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Program & FORGE conditioned & Shared null & Cyclic program & Decomposition / replay (\%) \\
+Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%) \\
 \midrule
 \input{../v1/generated/shared_program_figure_rows.tex}%
 \end{tabular}
@@ -348,11 +348,13 @@ downstream assessment (Appendix~\ref{app:semantic-intervention}).
 Table~\ref{tab:ugi-common-benchmark} compares FORGE with external synthesis-aware generators, matched
 controls and a finite-catalogue oracle under one common Ugi benchmark, normalizing every yield by
 generation attempts. The learned finite-inventory selector reached $1000.0\pm0.0$ exact-L1 products
-per 1,000 attempts with zero open-ended component generation, imposed by its finite action space,
-whereas FORGE produced $786.8\pm100.8$ exact-L1 products and
-$751.2\pm80.2$ unique exact-L1 products per 1,000 attempts. All of the latter were open-ended
-against the method-visible training catalogue; against the full training catalogue the open-ended
-yield was $729.3$ per 1,000 (Table~\ref{tab:catalogue-comparison}). Among open-ended external generators, unconditional DeFoG produced $280.6\pm26.6$ exact-L1
+per 1,000 attempts with zero generation outside its own component vocabulary, imposed by its finite
+action space, whereas FORGE produced $786.8\pm100.8$ exact-L1 products and $751.2\pm80.2$ unique
+exact-L1 products per 1,000 attempts. All of the latter lay outside the component vocabulary
+available to FORGE at generation time. Measured instead against the fixed training component
+catalogue, the component-novel exact-L1 yield was $729.3$ per 1,000 for Ugi, with $313.9$ for
+repeated aza-Michael addition and $34.8$ for repeated reductive amination, against a structural zero
+for the corresponding finite catalogues (Table~\ref{tab:catalogue-comparison}). Among open-ended external generators, unconditional DeFoG produced $280.6\pm26.6$ exact-L1
 products and recovered held components at $15.5\pm2.4$ per 1,000 attempts against $0.1\pm0.2$ for
 FORGE; GenMol/SAFE produced $627.5\pm6.2$ valid connected outputs but no exact Ugi-L1 product, and
 RGFN emitted no admissible output under the strict native contract. Against the train-only assembler,
@@ -364,10 +366,11 @@ separately.
 \caption{\textbf{FORGE combines exact Ugi assembly with precursor identities beyond a finite
 training vocabulary.}
 All methods are evaluated under the common component-disjoint split, three-seed attempt budget and
-exact-L1 verifier, as mean $\pm$ sample standard deviation per 1,000 generation attempts. Open-ended
-yield denotes exact-L1 products with a verifier-returned precursor constitution absent from the
-method-visible training catalogue; the stricter yield against the full training catalogue is
-reported in Table~\ref{tab:catalogue-comparison}. $\dagger$ denotes a structural zero for methods
+exact-L1 verifier, as mean $\pm$ sample standard deviation per 1,000 generation attempts. Outside vocabulary denotes exact-L1 products whose verifier-returned precursor constitution lies outside the
+component vocabulary available to that method at generation time; it is method-relative and is not
+comparable across methods with different vocabularies. The distinct component-novel exact-L1 metric,
+defined against the fixed training component catalogue, is reported in
+Table~\ref{tab:catalogue-comparison}. $\dagger$ denotes a structural zero for methods
 restricted to finite component inventories. N/E, not estimable. No published values from the original
 baseline papers are inserted. Full admission rules and seed-level results are reported in
 Appendix~\ref{app:results}.}
@@ -390,7 +393,7 @@ Appendix~\ref{app:results}.}
 \renewcommand{\textit}[1]{\makebox[0pt][l]{\textbf{\scshape #1}}}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.45cm}cccccc@{}}
 \toprule
-Method & Valid & Exact L1 & Unique L1 & Open-ended & Held-comp. & Diversity \\
+Method & Valid & Exact L1 & Unique L1 & \shortstack{Outside\\vocab.} & Held-comp. & Diversity \\
 \midrule
 \input{../v1/generated/common_ugi_benchmark_completed_rows.tex}%
 \end{tabular}
@@ -436,8 +439,8 @@ define coordinates over an otherwise open molecular generative state. The eviden
 Ugi, while repeated reductive amination remains substantially more variable and
 decomposition-ambiguous. The present study is computational, covers three specified reaction programs
 within bounded graph support, and treats recursive route assessment as a downstream evidence layer
-rather than experimental synthesis validation. Several prespecified outcomes did not favor FORGE and
-are reported in full in Appendix~\ref{app:results}. Within these limits, FORGE provides a practical
+rather than experimental synthesis validation. Additional diagnostics and ablations that delimit the
+scope of these conclusions are reported in Appendix~\ref{app:results}. Within these limits, FORGE provides a practical
 route from fixed reaction semantics to open molecular identity.
 
 \bibliography{../v0/forge,../v1/references}
@@ -1181,9 +1184,9 @@ All included methods were run under the common split, attempt budget, seed set a
 % float moved to the main body: tab:ugi-common-benchmark
 
 The learned finite-inventory selector achieved $1000.0\pm0.0$ exact-L1 products per 1,000 attempts,
-but its finite action space imposed zero open-ended component generation. FORGE produced
-$786.8\pm100.8$ exact-L1 products and $751.2\pm80.2$ unique method-visible open-ended exact-L1
-products per 1,000
+but its finite action space imposed zero generation outside its own component vocabulary. FORGE
+produced $786.8\pm100.8$ exact-L1 products and $751.2\pm80.2$ unique exact-L1 products outside its
+method vocabulary per 1,000
 attempts. Among open-ended external generators, unconditional DeFoG produced
 $280.6\pm26.6$ exact-L1 products per 1,000 attempts and recovered held components at
 $15.5\pm2.4$ per 1,000 attempts, compared with $0.1\pm0.2$ for FORGE. GenMol/SAFE produced
@@ -1281,8 +1284,8 @@ every introduced module independently improves exact-L1 yield. These one-at-a-ti
 identify which effects replicate across chemistries; they are not pooled into a composite
 architecture score.
 
-At the matched sampling budget, FORGE produced 751.2 unique method-visible open-ended exact-L1
-Ugi products per 1,000 attempts, averaged across the three independent seeds. The corresponding
+At the matched sampling budget, FORGE produced 751.2 unique exact-L1 Ugi products per 1,000 attempts
+outside its method vocabulary, averaged across the three independent seeds. The corresponding
 values were 313.9 for aza-Michael addition and 34.8 for reductive amination. The finite-component
 assembler produced zero by construction because every sampled product uses only components from
 the training catalogue
@@ -1317,7 +1320,7 @@ inventory.
 \resizebox{0.98\linewidth}{!}{%
 \begin{tabular}{lcccc}
 \hline
-Program & FORGE L1/1k & Catalogue L1/1k & FORGE open-ended/1k & Catalogue open-ended/1k \\
+Program & FORGE L1/1k & Catalogue L1/1k & FORGE comp.-novel/1k & Catalogue comp.-novel/1k \\
 \hline
 \input{../v1/generated/catalogue_figure_rows.tex}%
 \end{tabular}}\\[4pt]
@@ -1332,15 +1335,18 @@ train-only finite-component assembler that receives exact forward chemistry and 
 attempt budget. Values are means across three independent training seeds.
 The comparisons use identical molecular support and final reaction adapters and make no L2-planner,
 biological-oracle or candidate-selection calls.
-The finite catalogue has zero open-ended yield by construction.}
+The finite catalogue has zero component-novel yield by construction.}
 \label{fig:semantic-controls}
 \end{figure}
 
 \begin{table}[H]
 \caption{\textbf{Whole-graph generation versus a finite-component assembler.}
-Exact-L1, unique exact-L1 and open-ended exact-L1 yields are reported per 1,000 generation
-attempts. An operationally open-ended product has exactly one verifier-returned exact-L1
-decomposition and contains at least one component constitution absent from the training catalogue.
+Exact-L1, unique exact-L1 and component-novel exact-L1 yields are reported per 1,000 generation
+attempts. A component-novel exact-L1 product has exactly one verifier-returned exact-L1
+decomposition and contains at least one component constitution absent from the fixed training
+component catalogue. This is the metric that supports claims about precursor identities beyond the
+training catalogue, and it is distinct from the method-relative outside-method-vocabulary yield of
+Table~\ref{tab:ugi-common-benchmark}.
 This verifier-relative metric is not called strong catalogue escape unless reverse enumeration is
 shown to be exhaustive. The catalogue has zero input-component novelty by construction, but may
 achieve higher raw validity or exact-L1 yield. FORGE-minus-catalogue contrasts use the three seeds
@@ -1355,7 +1361,7 @@ as paired resampling units.}
 Program & Method & Valid/1k &
 Exact L1/1k &
 Unique L1/1k &
-Open-ended/1k &
+Component-novel exact L1/1k &
 Whole nov. &
 Comp. nov. &
 Diversity/$N_{\mathrm{eff}}$ \\
@@ -1496,7 +1502,7 @@ independent training replicates.}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llcccccc}
 \hline
-Method & Seed(s) & Valid/1k & Exact L1/1k & Unique L1/1k & Open-ended/1k & Held-comp. L1/1k & Diversity \\
+Method & Seed(s) & Valid/1k & Exact L1/1k & Unique L1/1k & Outside vocab./1k & Held-comp. L1/1k & Diversity \\
 \hline
 \input{../v1/generated/common_ugi_seed_rows.tex}%
 \end{tabular}
