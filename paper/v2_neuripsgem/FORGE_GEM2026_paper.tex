@@ -101,6 +101,16 @@
   \makebox[\atlasrankwidth]{\raisebox{-0.5\height}{\footnotesize\color{atlasink}#1}}}
 \newcommand{\atlashead}[2]{\makebox[#1]{\footnotesize\scshape #2}}
 
+% Float and caption spacing. Typography only: no table content, number, row or column changes.
+% The workshop body is page-limited, and LaTeX's defaults leave more air around floats and captions
+% than this layout needs.
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{0.95}
+
 \title{FORGE: Synthesis-Grounded Generative Design of Ionizable Lipids}
 
 \author{Anonymous authors\\Paper under double-blind review}
@@ -296,7 +306,8 @@ and produced zero fixed-state violations and zero support overflows across 27,64
 One conditional flow can therefore learn the three specified reaction-program coordinates without
 erasing the deeply supported Ugi behavior.
 
-\begin{table}[H]
+\begin{table}[tb]
+\footnotesize
 \caption{\textbf{A shared model learns multiple assembly programs.}
 Exact-L1 yield (\%) and transform verification per program, as mean $\pm$ sample standard deviation
 over three training seeds. Results are never pooled across programs. Per-arm and per-seed values:
@@ -347,7 +358,8 @@ FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 a
 consistency, open-ended identity generation and recovery of reserved components therefore trade off
 separately.
 
-\begin{table}[H]
+\begin{table}[tb]
+\footnotesize
 \caption{\textbf{Common Ugi benchmark for external generators and matched controls.}
 Yields per 1,000 generation attempts under one component-disjoint split, three-seed protocol and
 common exact-L1 verifier (mean $\pm$ sample standard deviation). Open-ended: exactly one
@@ -377,9 +389,10 @@ coverage depends on the available reaction and procurement evidence, unresolved 
 as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
 Appendix~\ref{app:results}.
 
-\begin{figure}[H]
+\begin{figure}[tb]
 \centering
-\includegraphics[width=0.72\textwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
+\includegraphics[width=0.62	extwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
+\footnotesize
 \caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
 Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
 constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;

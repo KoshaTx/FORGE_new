@@ -68,17 +68,23 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 
 | Requirement | Status |
 | --- | --- |
-| Up to 5 pages, excluding references and appendix | **NOT MET.** The Discussion, sixteen lines, sits on page 6 and references begin below it. Removing the routing material recovered seven of the twenty-three overflow lines |
+| Up to 5 pages, excluding references and appendix | **Met.** The body ends on page 5, with references beginning below the Discussion on the same page |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
 | Maximum 50 MB | 1.5 MB |
 | Deadline 30 August 2026, 11:59 PM AoE, via OpenReview | Not submitted by this repository |
 
-The longer abstract and introduction added roughly twenty-three lines over `v1_neuripsgem`, which
-built to exactly five body pages. Cutting the routing material recovered seven of them; sixteen
-remain. Recovering those is an open editorial decision, deliberately deferred: the candidates are
-moving Figure 1 to the appendix, shrinking it below 0.52 textwidth, or condensing the Results
-paragraphs. Shrinking Figure 1 to 0.52 textwidth was measured and does not on its own suffice.
+The longer abstract and introduction had pushed the body twenty-three lines past five pages. Cutting
+the routing material recovered seven. The remaining sixteen came from layout alone, with no further
+content cut and no reduction in figure size: the three body floats were carrying `[H]` placement,
+which pins a float exactly where it is declared and ships the page out early when it does not fit,
+stranding whitespace at the foot of pages 3 through 5. Freeing them to `[tb]` and tightening
+LaTeX's default caption and float separation recovered the rest.
+
+Figure 1 remains at its original `0.72\textwidth`. Shrinking it was tested at 0.66, 0.62, 0.56 and
+0.52 and is not needed; do not shrink it to buy space that layout already provides. Note that these
+floats now move relative to the paragraph that introduces them, which is normal for this template
+but means float order should be re-checked after any future body edit.
 
 ## Build requirement
 
