@@ -63,13 +63,24 @@ All 27 cited references were checked against authoritative sources, not against 
 - The two page ranges most at risk of fabrication were checked digit by digit against PMLR and are
   exact: GenMol `lee25o` 33205--33226, DeFoG `qin25d` 50269--50326.
 
-Three fields remain unverified and are the only places a reader should not rely on this bibliography:
+Two of the three fields that were initially unverified have since been resolved at the source:
 
-1. `maganti2026synthesis`, in full, as described below.
-2. `koziarski2024rgfn` pages 46908--46955. The NeurIPS 2024 venue and volume 37 are confirmed;
-   DBLP does not carry a page range for it, so the range itself is unchecked.
-3. `ou2024deep` booktitle, the NeurIPS 2024 Workshop on AI for New Drug Modalities. The paper and
-   its arXiv id are confirmed; the workshop name is not indexed and was not verified.
+- `koziarski2024rgfn` pages `46908--46955` are confirmed exactly against the official NeurIPS
+  proceedings bibtex for hash `53704142f230054140418ecd8857f391`, together with volume 37, the
+  publisher and the nine-author list. That record also supplied `doi = 10.52202/079017-1488`, now
+  added to the entry.
+- `ou2024deep` booktitle is confirmed by arXiv's own comment field on 2412.00928, which reads
+  "NeurIPS 2024 Workshop on AI for New Drug Modalities" verbatim.
+
+One field remains unverified:
+
+1. `maganti2026synthesis`, its exact title string and full author list. The venue and year are not
+   in doubt: it is the GEM workshop at ICLR 2026, OpenReview forum `6RFQqfjD06`. The record cannot
+   be retrieved programmatically. OpenReview answers the API with `ChallengeRequiredError` 403, a
+   bot challenge, and neither Semantic Scholar nor DBLP indexes the paper. It needs a human to open
+   <https://openreview.net/forum?id=6RFQqfjD06> and read off the title and author list. Until then
+   the entry renders as "Rohin Maganti et al." with a title reconstructed from
+   `docs/provenance/REFERENCE_AUDIT.md`.
 
 `rekesh2025syncogen` is correctly dated 2025: arXiv 2507.11818 was posted in 2025, so the entry is
 right and the "Rekesh et al., 2026" reading in the drafted prose was not.
