@@ -50,6 +50,30 @@ The introduction now carries 22 citations against v1's 13, adding `qin2025defog`
 is 27 entries. Every key resolves; the final pdflatex pass reports no undefined citation or
 reference.
 
+### Reference audit, 26 August 2026
+
+All 27 cited references were checked against authoritative sources, not against memory.
+
+- 19 entries carrying DOIs were resolved through the CrossRef API. Title, year and journal match
+  the deposited record in every case.
+- 7 entries without DOIs were resolved on arXiv. Titles match exactly and author counts match the
+  bib entries: SynFlowNet 9, SynNet 3, RGFN 9, GenMol 9, Ou 5, DeFoG 4, SynCoGen 9.
+- Venues were confirmed independently through DBLP and PMLR: SynFlowNet at ICLR 2025, SynNet at
+  ICLR 2022, RGFN at NeurIPS 2024. PMLR volume 267 is confirmed as the 42nd ICML, 2025.
+- The two page ranges most at risk of fabrication were checked digit by digit against PMLR and are
+  exact: GenMol `lee25o` 33205--33226, DeFoG `qin25d` 50269--50326.
+
+Three fields remain unverified and are the only places a reader should not rely on this bibliography:
+
+1. `maganti2026synthesis`, in full, as described below.
+2. `koziarski2024rgfn` pages 46908--46955. The NeurIPS 2024 venue and volume 37 are confirmed;
+   DBLP does not carry a page range for it, so the range itself is unchecked.
+3. `ou2024deep` booktitle, the NeurIPS 2024 Workshop on AI for New Drug Modalities. The paper and
+   its arXiv id are confirmed; the workshop name is not indexed and was not verified.
+
+`rekesh2025syncogen` is correctly dated 2025: arXiv 2507.11818 was posted in 2025, so the entry is
+right and the "Rekesh et al., 2026" reading in the drafted prose was not.
+
 ### Open items
 
 - **`maganti2026synthesis` is not fully verified.** The entry was reconstructed from
