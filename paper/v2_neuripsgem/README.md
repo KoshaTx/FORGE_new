@@ -150,6 +150,19 @@ boundary is unmistakable to a reviewer, and it costs nothing against the limit.
 The style governs typography. No `geometry`, `captionsetup`, `titlespacing`, `parskip`,
 `arraystretch` or float-spacing override remains in the document.
 
+### There is deliberately no running head
+
+`GEM_workshop_2026.sty` sets `\lhead{Under review at the GEM workshop, ICLR 2026}` at its line 95,
+inside the `\vbox` that `\@maketitle` opens. The assignment is local to that group and reverts when
+the box closes, so no head ever reaches a page. A minimal document built from the official `.sty`
+alone reproduces the same empty head, confirming it is the style file rather than this manuscript.
+
+The head is **not** reissued here, and that is deliberate. The string in their file names ICLR 2026,
+carried over from the previous edition of the workshop; this submission is to GEM at NeurIPS 2026.
+Reissuing it would make this the only submission displaying a header, and the header would name the
+wrong conference. Leaving the style's default, no head at all, is both what every other submission
+built from their file will show and free of a wrong venue claim.
+
 ### The whitespace under Figure 1 comes from the official style
 
 Line 54 of `GEM_workshop_2026.sty` sets `\flushbottom`, which forces every page to end flush at the
