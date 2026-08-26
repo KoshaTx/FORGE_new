@@ -18,6 +18,7 @@ condensation of `paper/v1`; there is no `paper/v2`.
 | Introduction | Replaced in full, author-supplied, three paragraphs ending in a threefold contributions statement |
 | FORGE expansion | First mention in both abstract and introduction now reads FORGE (**F**low-matched, **O**pen-ended, **R**oute-resolved **G**eneration and **E**xploration), initials bolded |
 | Bibliography | One new entry, `maganti2026synthesis`, added to `../v1/references.bib` |
+| Figure 1 | New framework overview added as Figure 1; all later figures shift by one. The sample-atlas figure moved from the body to Appendix F |
 | Routing de-emphasis | The sparse-evidence route diagnostics are removed from the abstract, the main Results and Appendix C.7; Table 7 and the route-disposition figure are deleted |
 | AGILE dependence | The "AGILE-type" qualifier is dropped in all four places it appeared; the Ugi chemistry itself is unchanged |
 | Everything else | Byte-identical to `v1_neuripsgem` |
@@ -109,7 +110,7 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 
 | Requirement | Status |
 | --- | --- |
-| Up to 5 pages, excluding references and appendix | **Met.** The body ends on page 5, with references beginning below the Discussion on the same page |
+| Up to 5 pages, excluding references and appendix | **NOT MET.** The new Figure 1 costs about twenty-seven lines; the body runs eight lines onto page 6 |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
 | Maximum 50 MB | 1.5 MB |
@@ -126,6 +127,27 @@ Figure 1 remains at its original `0.72\textwidth`. Shrinking it was tested at 0.
 0.52 and is not needed; do not shrink it to buy space that layout already provides. Note that these
 floats now move relative to the paragraph that introduces them, which is normal for this template
 but means float order should be re-checked after any future body edit.
+
+## Figure 1 and the page budget
+
+The framework overview was added as Figure 1 at `0.92\textwidth`, and every later figure shifts by
+one: the sample atlas is now Figure 5 and lives in Appendix F, where its own caption already pointed
+for the selection rule and the twelve further examples.
+
+The body had been exactly full at five pages, so this figure costs real space. Measured, from a
+clean build each time:
+
+| Configuration | Lines past page 5 |
+| --- | --- |
+| Figure 1 full width, atlas still in body | 17 |
+| Figure 1 full width, atlas moved to Appendix F | 10 |
+| Figure 1 at 0.88 or 0.80, atlas in Appendix F | 7 |
+| Figure 1 at 0.92, atlas in Appendix F | 8 |
+
+Shrinking Figure 1 saturates: 0.88 and 0.80 give the same result, because the remaining overflow is
+Discussion prose, not figure height. Floats move as indivisible blocks, so width tuning cannot
+recover a partial float. Closing the last eight lines needs one of: trimming about eight lines of
+body prose, moving Table 2 to the appendix, or accepting six pages.
 
 ## Build requirement
 

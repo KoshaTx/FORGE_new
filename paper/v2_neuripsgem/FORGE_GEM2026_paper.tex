@@ -198,6 +198,22 @@ recovered precursor identities beyond the training catalogue.
 
 \section{FORGE}
 
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/forge_framework_v2/forge_framework.png}
+\footnotesize
+\caption{\textbf{FORGE uses reaction chemistry as the coordinate system for generation.}
+Top, the four stages. A reaction program $P$ fixes precursor roles and reaction-core structure but
+no molecular identities; a conditional discrete flow generates the complete lipid at atom-and-bond
+resolution; exact assembly verification requires the product to match the assembly $P$ implies; and
+generated precursors may optionally be traced upstream, or the assessor abstains. Bottom, the
+position this yields: finite-vocabulary generation cannot introduce identities outside its building
+blocks, and generic whole-molecule generation carries no assembly semantics. Colors mark semantic
+roles, not a vocabulary the model selects from.}
+\label{fig:forge-framework}
+\end{figure}
+
+
 We formulate ionizable-lipid design as conditional generation under a specified reaction program,
 while leaving precursor identities unspecified.
 Let $G\in\mathcal{G}$ denote a complete ionizable-lipid graph and $P\in\mathcal{P}$ a reaction
@@ -390,20 +406,7 @@ coverage depends on the available reaction and procurement evidence, unresolved 
 as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
 Appendix~\ref{app:results}.
 
-\begin{figure}[tb]
-\centering
-\includegraphics[width=0.62	extwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
-\footnotesize
-\caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
-Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
-constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;
-center, precursor origins recovered by exact atom-mapped forward replay, halos marking the Ugi core;
-right, the exact precursor constitutions returned by the verifier. Colors are semantic coordinates,
-not a vocabulary the model selects from. These are display examples, not experimental candidates, and
-exact L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
-rule and twelve further examples: Appendix~\ref{app:atlas}.}
-\label{fig:forge-generated-samples}
-\end{figure}
+
 
 \section{Discussion}
 
@@ -2032,6 +2035,21 @@ claim about routes outside $\mathcal{B}$.
 
 \section{Generated-structure atlas}
 \label{app:atlas}
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
+\footnotesize
+\caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
+Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
+constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;
+center, precursor origins recovered by exact atom-mapped forward replay, halos marking the Ugi core;
+right, the exact precursor constitutions returned by the verifier. Colors are semantic coordinates,
+not a vocabulary the model selects from. These are display examples, not experimental candidates, and
+exact L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
+rule and twelve further examples: Appendix~\ref{app:atlas}.}
+\label{fig:forge-generated-samples}
+\end{figure}
 
 Table~\ref{tab:forge-generated-atlas} reports 12 deterministic display examples
 from the same frozen seed-0 Ugi population used in Figure~\ref{fig:forge-generated-samples}. The
