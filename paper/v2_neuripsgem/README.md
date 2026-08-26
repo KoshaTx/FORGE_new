@@ -128,26 +128,32 @@ Figure 1 remains at its original `0.72\textwidth`. Shrinking it was tested at 0.
 floats now move relative to the paragraph that introduces them, which is normal for this template
 but means float order should be re-checked after any future body edit.
 
-## Figure 1 and the page budget
+## Submission format
 
-The framework overview was added as Figure 1 at `0.92\textwidth`, and every later figure shifts by
-one: the sample atlas is now Figure 5 and lives in Appendix F, where its own caption already pointed
-for the selection rule and the twelve further examples.
+The build uses the official `GEM_workshop_2026.sty` and lets it govern margins, fonts, section and
+caption typography. Earlier manual overrides were removed: five `\setlength` float and caption
+spacing declarations, one `\arraystretch`, and three `\footnotesize` caption-size commands on body
+floats. No `geometry`, `captionsetup`, `titlespacing` or `parskip` override remains. Body floats use
+`[tb]` rather than `[H]`; `[H]` is the override, since it pins a float and ships pages early, while
+`[tb]` is the template's own placement.
 
-The body had been exactly full at five pages, so this figure costs real space. Measured, from a
-clean build each time:
+## Page budget: currently over
 
-| Configuration | Lines past page 5 |
+The body runs 24 lines onto page 6 against the workshop's five-page limit. This is recorded, not
+resolved. Nothing was cut to hide it: the page limit is not being met by compressing typography, and
+no scientific content has been removed to reach it either.
+
+What drives the overage, measured from clean builds: Figure 1 at full `\textwidth`, Table 1 and
+Table 2 in the body, and the restored per-seed values, paired-seed intervals and baseline numerals
+in Results. Two structural options were measured and neither was applied:
+
+| Option | Lines past page 5 |
 | --- | --- |
-| Figure 1 full width, atlas still in body | 17 |
-| Figure 1 full width, atlas moved to Appendix F | 10 |
-| Figure 1 at 0.88 or 0.80, atlas in Appendix F | 7 |
-| Figure 1 at 0.92, atlas in Appendix F | 8 |
+| As it stands: Figure 1 full width, both tables in body | 24 |
+| Figure 1 reduced to 0.85 textwidth | 15 |
+| Figure 1 full width, Table 2 moved to Appendix C | 3 |
 
-Shrinking Figure 1 saturates: 0.88 and 0.80 give the same result, because the remaining overflow is
-Discussion prose, not figure height. Floats move as indivisible blocks, so width tuning cannot
-recover a partial float. Closing the last eight lines needs one of: trimming about eight lines of
-body prose, moving Table 2 to the appendix, or accepting six pages.
+Choosing among these is an editorial decision about what leaves the body, and is left to the author.
 
 ## Build requirement
 
