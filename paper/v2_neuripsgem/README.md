@@ -130,12 +130,34 @@ but means float order should be re-checked after any future body edit.
 
 ## Submission format
 
-The build uses the official `GEM_workshop_2026.sty` and lets it govern margins, fonts, section and
-caption typography. Earlier manual overrides were removed: five `\setlength` float and caption
-spacing declarations, one `\arraystretch`, and three `\footnotesize` caption-size commands on body
-floats. No `geometry`, `captionsetup`, `titlespacing` or `parskip` override remains. Body floats use
-`[tb]` rather than `[H]`; `[H]` is the override, since it pins a float and ships pages early, while
-`[tb]` is the template's own placement.
+Verified against the workshop's own page on 26 August 2026, following its links rather than any
+cached copy:
+
+- `GEM_workshop_2026.sty` is **byte-identical** to the file behind the "the GEM version" link on
+  <https://www.gembio.ai/>.
+- `NEURIPS_2026_reference_template.tex` is **byte-identical** to `neurips_2026.tex` inside the
+  official `Formatting_Instructions_For_NeurIPS_2026.zip` that the same page links.
+
+The call for papers states: short papers up to 5 pages excluding references and appendix; formatted
+with the NeurIPS 2026 main conference template with the style file replaced by the GEM version;
+anonymized for one round of double-blind review; maximum file size 50 MB; deadline 30 August 2026,
+11:59 PM AoE.
+
+Nothing in the call for papers requires the appendix to carry a title. It says only that the
+appendix and references fall outside the five-page limit. A title page is included anyway so the
+boundary is unmistakable to a reviewer, and it costs nothing against the limit.
+
+The style governs typography. No `geometry`, `captionsetup`, `titlespacing`, `parskip`,
+`arraystretch` or float-spacing override remains in the document.
+
+### The whitespace under Figure 1 comes from the official style
+
+Line 54 of `GEM_workshop_2026.sty` sets `\flushbottom`, which forces every page to end flush at the
+bottom by stretching vertical glue. When a page falls slightly short, the shortfall is absorbed by
+the largest elastic gap on it. On the Figure 1 page that is the space beneath the float, measured at
+69pt, about 0.96in. This is the official style behaving as designed, not a defect in this document,
+and removing it would mean overriding the very file the call for papers requires. Adding content to
+that page, or moving the float, changes it; a spacing override would not be legitimate.
 
 ## Page budget: currently over
 

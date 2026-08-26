@@ -188,7 +188,7 @@ identities beyond the corresponding training catalogues.
 
 \section{FORGE}
 
-\begin{figure}[tb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/forge_framework_v2/forge_framework.png}
 \caption{\textbf{FORGE uses reaction chemistry as the coordinate system for molecular
@@ -311,7 +311,7 @@ and produced zero fixed-state violations and zero support overflows across 27,64
 One conditional flow can therefore learn the three specified reaction-program coordinates without
 erasing the deeply supported Ugi behavior.
 
-\begin{table}[tb]
+\begin{table}[htbp]
 \caption{\textbf{One shared conditional flow learns three ionizable-lipid assembly programs.}
 Exact-L1 yield is reported as mean $\pm$ sample standard deviation across three independent
 training seeds. The final column gives decomposition coverage and forward-replay precision. Results are never pooled across programs. Per-seed
@@ -362,7 +362,7 @@ FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 a
 consistency, open-ended identity generation and recovery of reserved components therefore trade off
 separately.
 
-\begin{table}[tb]
+\begin{table}[htbp]
 \caption{\textbf{FORGE combines exact Ugi assembly with precursor identities beyond a finite
 training vocabulary.}
 All methods are evaluated under the common component-disjoint split, three-seed attempt budget and
@@ -406,23 +406,6 @@ coverage depends on the available reaction and procurement evidence, unresolved 
 as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
 Appendix~\ref{app:results}.
 
-
-
-\begin{figure}[tb]
-\centering
-\includegraphics[width=0.72\textwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
-\footnotesize
-\caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
-Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
-constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;
-center, precursor origins recovered by exact atom-mapped forward replay, halos marking the Ugi core;
-right, the exact precursor constitutions returned by the verifier. Colors are semantic coordinates,
-not a vocabulary the model selects from. These are display examples, not experimental candidates, and
-exact L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
-rule and twelve further examples: Appendix~\ref{app:atlas}.}
-\label{fig:forge-generated-samples}
-\end{figure}
-
 \section{Discussion}
 
 FORGE introduces a reaction-grounded formulation of molecular generation in which known assembly
@@ -448,6 +431,15 @@ route from fixed reaction semantics to open molecular identity.
 
 \clearpage
 \appendix
+
+\begin{center}
+{\Large\bfseries Appendix}
+\end{center}
+
+\noindent
+Appendices A through F are supplementary and are excluded from the five-page short-paper limit, as
+are the references. They give the full formulation, the complete reporting contract, the theoretical
+results and a generated-structure atlas.
 
 \section{Preliminaries}
 \label{app:preliminaries}
@@ -2059,6 +2051,21 @@ claim about routes outside $\mathcal{B}$.
 
 \section{Generated-structure atlas}
 \label{app:atlas}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
+\footnotesize
+\caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
+Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
+constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;
+center, precursor origins recovered by exact atom-mapped forward replay, halos marking the Ugi core;
+right, the exact precursor constitutions returned by the verifier. Colors are semantic coordinates,
+not a vocabulary the model selects from. These are display examples, not experimental candidates, and
+exact L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
+rule and twelve further examples: Appendix~\ref{app:atlas}.}
+\label{fig:forge-generated-samples}
+\end{figure}
 Table~\ref{tab:forge-generated-atlas} reports 12 deterministic display examples
 from the same frozen seed-0 Ugi population used in Figure~\ref{fig:forge-generated-samples}. The
 display begins with the lowest constitutional SHA-256 rank and then applies ECFP4 MaxMin selection
