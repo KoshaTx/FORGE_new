@@ -72,15 +72,21 @@ Two of the three fields that were initially unverified have since been resolved 
 - `ou2024deep` booktitle is confirmed by arXiv's own comment field on 2412.00928, which reads
   "NeurIPS 2024 Workshop on AI for New Drug Modalities" verbatim.
 
-One field remains unverified:
+- `maganti2026synthesis` is now verified by reading the OpenReview record directly. It could not be
+  retrieved programmatically: OpenReview answers the API with `ChallengeRequiredError` 403, a bot
+  challenge, and neither Semantic Scholar nor DBLP indexes it. Accepted to the ICLR 2026 GEM
+  workshop, submission 111, published 01 March 2026. The reconstruction had been wrong in two ways
+  and both are corrected: the title is "Synthesis-constrained discrete diffusion for ionizable lipid
+  generation", not "Ionizable-Lipid", and the authors are Rohin Maganti, Rahul Maganti and
+  Mohamad-Gabriel Alameh, not "Maganti et al."
 
-1. `maganti2026synthesis`, its exact title string and full author list. The venue and year are not
-   in doubt: it is the GEM workshop at ICLR 2026, OpenReview forum `6RFQqfjD06`. The record cannot
-   be retrieved programmatically. OpenReview answers the API with `ChallengeRequiredError` 403, a
-   bot challenge, and neither Semantic Scholar nor DBLP indexes the paper. It needs a human to open
-   <https://openreview.net/forum?id=6RFQqfjD06> and read off the title and author list. Until then
-   the entry renders as "Rohin Maganti et al." with a title reconstructed from
-   `docs/provenance/REFERENCE_AUDIT.md`.
+**All 27 references are verified. No field in this bibliography now rests on recall.**
+
+One editorial point this raises. `maganti2026synthesis` is a self-citation, and the cited paper is
+close to this one in subject: scaffold-conditioned Ugi lipid generation by an overlapping author
+group. It is cited in the third person, which is the correct handling under double-blind review, but
+a reviewer may still infer authorship from it. That is a normal and accepted cost of citing relevant
+prior work, and it is noted here only so the choice is a deliberate one.
 
 `rekesh2025syncogen` is correctly dated 2025: arXiv 2507.11818 was posted in 2025, so the entry is
 right and the "Rekesh et al., 2026" reading in the drafted prose was not.
