@@ -139,21 +139,28 @@ floats. No `geometry`, `captionsetup`, `titlespacing` or `parskip` override rema
 
 ## Page budget: currently over
 
-The body runs 24 lines onto page 6 against the workshop's five-page limit. This is recorded, not
-resolved. Nothing was cut to hide it: the page limit is not being met by compressing typography, and
-no scientific content has been removed to reach it either.
+The body occupies six full pages against the workshop's five-page limit; references begin on page 7.
+This is recorded, not resolved. The limit is not being met by compressing typography, and no
+scientific content has been removed to reach it.
 
-What drives the overage, measured from clean builds: Figure 1 at full `\textwidth`, Table 1 and
-Table 2 in the body, and the restored per-seed values, paired-seed intervals and baseline numerals
-in Results. Two structural options were measured and neither was applied:
+Body layout as it stands: page 1 title and abstract through the introduction, page 2 introduction and
+FORGE, page 3 Figure 1, page 4 Table 1, page 5 Table 2, page 6 Figure 2 and the Discussion.
 
-| Option | Lines past page 5 |
+Everything that had previously been moved or trimmed for page count has been put back. The
+sample-atlas figure is again Figure 2 in the body, immediately before the Discussion, and the
+per-seed values, paired-seed intervals, baseline numerals, encoding detail and setup paragraph are
+all restored to full length.
+
+Measured options, none applied, all from clean builds:
+
+| Option | Body pages |
 | --- | --- |
-| As it stands: Figure 1 full width, both tables in body | 24 |
-| Figure 1 reduced to 0.85 textwidth | 15 |
-| Figure 1 full width, Table 2 moved to Appendix C | 3 |
+| As it stands | 6 |
+| Figure 1 reduced to 0.85 textwidth | still 6, 15 lines onto page 6 |
+| Sample atlas in Appendix F, Figure 1 full width | 6, 3 lines onto page 6 |
+| Sample atlas in Appendix F and Table 2 in Appendix C | not measured |
 
-Choosing among these is an editorial decision about what leaves the body, and is left to the author.
+Choosing what leaves the body is an editorial decision and is left to the author.
 
 ## Build requirement
 
