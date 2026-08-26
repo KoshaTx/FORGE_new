@@ -1,0 +1,99 @@
+{
+  "cache": {
+    "bytes": 7329033,
+    "logical_path": "cache.npz",
+    "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+  },
+  "config": {
+    "bytes": 1930,
+    "path": "configs/multireaction/shared_production_cache_v1.json",
+    "sha256": "feff5553a47580da60fe4a8f739bccc771dd6886657842f514fc52d5da76db53"
+  },
+  "fixed_state_failures": 0,
+  "fold_counts": {
+    "bl_2023_repeated_aza_michael": {
+      "calibration": 158,
+      "heldout": 194,
+      "train": 258
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "calibration": 38,
+      "heldout": 46,
+      "train": 70
+    },
+    "ugi_3cr_agile": {
+      "calibration": 15800,
+      "heldout": 30122,
+      "train": 66464
+    }
+  },
+  "gates": {
+    "all_frozen_fold_counts_exact": true,
+    "all_records_packed": true,
+    "fixed_state_policy_exact": true,
+    "full_closure_support_preserved": true,
+    "full_heavy_atom_support_preserved": true,
+    "raw_family_count_sampling_absent": true
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "bytes": 1963,
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "multireaction_atlas": {
+      "bytes": 21508,
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "multireaction_semantic_atoms": {
+      "bytes": 168746,
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "multireaction_splits": {
+      "bytes": 12977,
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "production_design": {
+      "bytes": 9419,
+      "path": "configs/multireaction/shared_production_comparison_design_v1.json",
+      "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"
+    },
+    "representation_config": {
+      "bytes": 3530,
+      "path": "configs/multireaction/shared_synthesis_program_representation_v1.json",
+      "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"
+    },
+    "ugi_assignments": {
+      "bytes": 4044135,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_semantic_atoms": {
+      "bytes": 40656153,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "ugi_semantic_products": {
+      "bytes": 9614211,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    }
+  },
+  "nonclaims": [
+    "This cache is model input infrastructure, not evidence of model generalization.",
+    "The cache contains reaction-enumerated support, not route-certified products.",
+    "No route, oracle, candidate-selection or reductive-amination substructure metric is present."
+  ],
+  "records": 113150,
+  "schema_version": "forge.synthesis_program_production_cache_result.v1",
+  "status": "pass",
+  "support": {
+    "maximum_closures": 3,
+    "maximum_heavy_atoms": 194,
+    "observed_maximum_closures": 3,
+    "observed_maximum_heavy_atoms": 194
+  }
+}

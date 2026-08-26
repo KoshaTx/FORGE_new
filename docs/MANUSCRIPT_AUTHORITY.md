@@ -1,7 +1,11 @@
 # FORGE manuscript authority
 
-**Status: authoritative.** This document supersedes `MANUSCRIPT_REFRAME_PLAN.md` for
-framing, claim hierarchy, section structure, figure architecture and panel design.
+**Status: historical authority, superseded for paper scope on 2026-08-21.** This document previously
+superseded `MANUSCRIPT_REFRAME_PLAN.md` for framing, claim hierarchy, section structure, figure
+architecture and panel design. The user has since explicitly frozen the current paper as
+**computational only**. It contains no prospective synthesis, formulation, in-vitro or in-vivo
+experiments. All candidate-panel and wet-lab sections below are retained as historical planning
+records but are not requirements, blockers, claims or next steps for the current paper.
 `MANUSCRIPT_PROSE_ANALYSIS.md` remains in force for sentence-level style and is
 consistent with §16 here. Where any earlier plan conflicts with this document,
 this document wins.

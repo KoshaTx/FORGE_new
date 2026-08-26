@@ -31,7 +31,7 @@ import numpy as np
 from rdkit import Chem, rdBase
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
-from forge.core.io import read_json_object
+from forge.core.io import gzip_bytes, read_json_object
 from forge.potency.oracle.agile_reconciliation import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_07_oracle_splits_config.v1"
@@ -312,7 +312,10 @@ def _render_assignments(rows: Sequence[Mapping[str, Any]]) -> bytes:
             ),
         )
     )
-    return gzip.compress(text.getvalue().encode(), compresslevel=9, mtime=0)
+    # ``gzip.compress(..., mtime=0)`` delegates to zlib on Python 3.11 and leaks a
+    # platform-specific OS header byte.  The shared writer fixes that byte at the
+    # historical value, which is required for byte-exact split reproduction.
+    return gzip_bytes(text.getvalue().encode())
 
 
 def _component_ids(label: str) -> tuple[str, str, str]:

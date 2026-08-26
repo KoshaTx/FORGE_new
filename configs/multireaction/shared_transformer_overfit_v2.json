@@ -1,0 +1,48 @@
+{
+  "schema_version": "forge.synthesis_program_training_config.v1",
+  "seed": 20260830,
+  "inputs": {},
+  "model": {
+    "architecture": "reaction_program_graph_transformer",
+    "hidden_dim": 64,
+    "layers": 3,
+    "attention_heads": 4,
+    "expert_count": 3,
+    "adapter_dim": 16,
+    "dropout": 0.0,
+    "bond_classes": 4,
+    "maximum_heavy_atoms": 194,
+    "maximum_closures": 3,
+    "semantic_objective": {
+      "role_consistency_weight": 0.25,
+      "core_consistency_weight": 0.25,
+      "state_balancing": "equal_present_semantic_state_mass"
+    },
+    "gradient_balancing": {
+      "method": "per_family_norm_balanced_deterministic_pcgrad",
+      "group_identity": "source_program_state"
+    }
+  },
+  "training": {
+    "steps": 2400,
+    "batch_size": 3,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 1.0
+  },
+  "evaluation": {
+    "corruption_time": 0.5
+  },
+  "execution": {
+    "device": "cpu",
+    "precision": "float32",
+    "cpu_threads": 2,
+    "checkpoint_interval_steps": 400,
+    "deterministic_algorithms": true
+  },
+  "gates": {
+    "maximum_final_to_initial_loss_ratio": 0.5,
+    "minimum_exact_tensor_records": 3
+  },
+  "claim_boundary": "Bounded three-record positional-memory Transformer overfit gate only; no generalization or production-training claim. The 2,400-step budget is a new follow-up after the 1,200-step positional-memory gate missed one Ugi parent pointer; no acceptance threshold changed."
+}

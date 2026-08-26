@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.multireaction_sampling_config.v2",
+  "run_kind": "diagnostic_smoke",
+  "seed": 20260840,
+  "inputs": {
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    }
+  },
+  "model_contract": {
+    "declared_elements": [
+      "C",
+      "N",
+      "O"
+    ]
+  },
+  "sampling": {
+    "layout_source": "factorized_training_fold_count_marginals",
+    "samples": 4,
+    "steps": 2,
+    "batch_size": 2
+  },
+  "execution": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true
+  },
+  "claim_boundary": "Diagnostic checkpoint-to-sampler plumbing only."
+}

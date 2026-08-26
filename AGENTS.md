@@ -7,13 +7,15 @@ Read this file completely before doing anything. It is the contract for work in 
 FORGE is the computational engine for a Nature Biotechnology paper on **synthesis-grounded generative
 design of ionizable lipids**. The scientific claim is that a whole-molecule generator coupled to
 recursive synthesis-program construction produces complete lipid graphs with **auditable synthesis
-dossiers** to experimentally supported terminal materials. The first deep prospective validation uses
-AGILE-type Ugi 3-CR chemistry. Matched comparison with post-hoc route filtering is a causal ablation
-of synthesis coupling, not the paper's identity.
+dossiers** to experimentally supported terminal materials. The current paper is **computational**.
+It does not include prospective synthesis, formulation, in-vitro experiments or in-vivo experiments.
+AGILE-type Ugi 3-CR chemistry is the deepest computational case. Matched comparison with post-hoc
+route filtering is a causal ablation of synthesis coupling, not the paper's identity.
 
 Full scientific plan: [`docs/PLAN.md`](docs/PLAN.md). Read §1–§5 and §13 before writing code. The
 current Phase 1 execution order is frozen in
 [`docs/PHASE1_UGI_FIRST_PRODUCTION_PLAN.md`](docs/PHASE1_UGI_FIRST_PRODUCTION_PLAN.md).
+Prospective wet-lab sections in older plans are historical proposals and are not current paper scope.
 
 ## Authorized scope — READ THIS
 
@@ -37,6 +39,10 @@ use the already selected frozen HeLa ensemble, a new hash-pinned applicability a
 uncertainty policy, matched in-trajectory and post-hoc arms, and zero synthesis or
 proposal-engine calls. Unsupported chemical shifts must abstain, and the run cannot
 lock candidates, access sealed holdouts or support an in-vivo efficacy claim.
+
+On 2026-08-21, the user explicitly reconfirmed that the current paper is computational only.
+Candidate-panel recovery, procurement, synthesis, formulation, in-vitro testing and in-vivo testing
+are not paper-readiness tasks and must not be presented as blockers or next steps.
 
 **You are authorized to:**
 
@@ -79,6 +85,8 @@ lock candidates, access sealed holdouts or support an in-vivo efficacy claim.
   L1/L2/L3 dossier set closes and the zero-guidance equivalence gate passes.
 - Build Phases 2–8 from the plan.
 - Create the `PREREGISTRATION.md` freeze.
+- Recover or lock a prospective candidate panel for this paper, initiate procurement, or plan or
+  execute synthesis, formulation, in-vitro or in-vivo experiments as part of paper readiness.
 
 Treat all M0 artifacts, splits, evidence gates, and negative results as frozen inputs. If Phase 1
 appears to require out-of-scope work, **stop and report** rather than expanding scope.
@@ -129,8 +137,9 @@ paper's central claims. **Never relax a gate to make it pass. Fail loudly and re
   components contain at most one exterior branch node and current isocyanide tails contain none.
   Do not let Cartesian product frequency or an unconstrained generic decoder create repeated tail
   junction chains. Broader tail branching requires qualified component supervision.
-- **Biological endpoint** is deferred to the PI but defaults to liver functional editing. Keep the
-  `Endpoint` interface generic; do not hard-code an endpoint.
+- **Biological endpoint** is outside the current computational paper. Keep the `Endpoint` interface
+  generic for possible future work; do not hard-code an endpoint or treat endpoint selection as a
+  current blocker.
 
 ## Setup
 

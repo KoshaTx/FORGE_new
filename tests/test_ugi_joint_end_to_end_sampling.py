@@ -17,13 +17,22 @@ from experiments.phase1.product_l1.sampling.ugi_joint_end_to_end_sampling import
     flow_endpoint_chemistry_sample,
     sample_ugi_joint_end_to_end,
 )
-from forge.corpus.ugi_chemistry_corpus import load_expanded_ugi_chemistry_corpus
+from experiments.phase1.product_l1.training.ugi_training_cache import load_ugi_training_cache
 from forge.corpus.ugi_held_component_gate import load_ugi_reaction_contract
 from forge.model.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.model.ugi_joint_sparse_flow import UgiJointSparseTerminal
 from forge.model.ugi_morphology_program import UgiMorphologyProgram
 
 torch = pytest.importorskip("torch")
+
+
+@pytest.fixture(scope="module")
+def ugi_training_corpus():
+    repo = Path(__file__).resolve().parents[1]
+    corpus, _ = load_ugi_training_cache(
+        repo / "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt"
+    )
+    return corpus
 
 
 def test_flow_endpoint_mapping_preserves_joint_channels_without_redrawing() -> None:
@@ -219,14 +228,10 @@ def test_l1_terminal_failure_remains_in_raw_validity_denominator() -> None:
     assert row["l1_forward_verification"]["exact_product_reconstructed"] is False
 
 
-def test_terminal_completion_is_restartable_at_the_closure_rng_boundary() -> None:
-    repo = Path(__file__).resolve().parents[1]
-    corpus = load_expanded_ugi_chemistry_corpus(
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_products.csv.gz",
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_atoms.csv.gz",
-        repo / "results/phase1/product_v3_atom_vocabulary.json",
-    )
+def test_terminal_completion_is_restartable_at_the_closure_rng_boundary(
+    ugi_training_corpus,
+) -> None:
+    corpus = ugi_training_corpus
     program = UgiMorphologyProgram(
         node_counts=(1, 1, 1),
         junction_budgets=(0, 0, 0),
@@ -274,14 +279,9 @@ def test_terminal_completion_is_restartable_at_the_closure_rng_boundary() -> Non
 )
 def test_stochastic_terminal_completion_requires_explicit_rng_state(
     decoder_mode: str,
+    ugi_training_corpus,
 ) -> None:
-    repo = Path(__file__).resolve().parents[1]
-    corpus = load_expanded_ugi_chemistry_corpus(
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_products.csv.gz",
-        repo / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_atoms.csv.gz",
-        repo / "results/phase1/product_v3_atom_vocabulary.json",
-    )
+    corpus = ugi_training_corpus
     program = UgiMorphologyProgram(
         node_counts=(1, 1, 1),
         junction_budgets=(0, 0, 0),

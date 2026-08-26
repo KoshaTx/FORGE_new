@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -11,6 +12,27 @@ from experiments._runtime.errors import BackendError
 from experiments._runtime.source import source_fingerprint
 from experiments._runtime.spec import ExperimentSpec
 from forge.core.hashing import sha256_file, sha256_json
+
+
+def modal_volume_relative_path(path: Path, volume_root: Path) -> str:
+    """Return a stable logical path even when Modal resolves a mounted volume symlink."""
+
+    try:
+        relative = path.resolve().relative_to(volume_root.resolve())
+    except ValueError as exc:
+        raise BackendError(f"run path {path} is outside Modal volume {volume_root}") from exc
+    if not relative.parts:
+        raise BackendError("run path resolves to the Modal volume root, not a run directory")
+    return relative.as_posix()
+
+
+def modal_run_staging_paths(local_run: Path) -> tuple[Path, Path]:
+    """Create a private staging root containing a child named as the final run id."""
+
+    staging_root = Path(tempfile.mkdtemp(prefix=f".{local_run.name}.", dir=local_run.parent))
+    staged_run = staging_root / local_run.name
+    staged_run.mkdir()
+    return staging_root, staged_run
 
 
 def modal_request_plan(
@@ -130,4 +152,9 @@ def launch_modal(
     return int(completed.returncode)
 
 
-__all__ = ["launch_modal", "modal_request_plan"]
+__all__ = [
+    "launch_modal",
+    "modal_request_plan",
+    "modal_run_staging_paths",
+    "modal_volume_relative_path",
+]

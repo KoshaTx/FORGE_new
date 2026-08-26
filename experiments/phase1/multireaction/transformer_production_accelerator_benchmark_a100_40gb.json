@@ -1,0 +1,81 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-transformer-production-accelerator-benchmark-a100-40gb",
+  "description": "Qualify exact Transformer production capacity, deterministic replay and optimizer throughput on the declared accelerator.",
+  "root_seed": 20260825,
+  "profiles": [
+    "smoke"
+  ],
+  "replicates": {
+    "smoke": 1
+  },
+  "stages": [
+    {
+      "id": "benchmark",
+      "implementation": "model.shared-synthesis-program-production-accelerator-benchmark.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/transformer_production_accelerator_benchmark_v2.json",
+        "sha256": "d841c8532c6c0085b7bb54c1fb54beaa5984ad343ac55a2dc7e3cbcbb6d5cbd0"
+      },
+      "inputs": {
+        "production_design": {
+          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+          "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+        },
+        "production_training_config": {
+          "path": "configs/multireaction/transformer_production_training_v1.json",
+          "sha256": "6c166bcfe7860af9865adf34153c7c4f5947a2f270ec98cd15806f38bd60a130"
+        },
+        "production_evaluation_config": {
+          "path": "configs/multireaction/transformer_production_evaluation_v1.json",
+          "sha256": "72dcb3da2f6e743454ee218ec9b8fdf5fe7a6010010247df1dafbf5e3f83fbf8"
+        },
+        "smoke_training_result": {
+          "path": "results/phase1/transformer_synthesis_program_production_smoke_v1/training_result.json",
+          "sha256": "8eeb49f2f88456c8891b912441789df9fa1e962345988e07b654fa6dedeb0e00"
+        },
+        "smoke_evaluation_result": {
+          "path": "results/phase1/transformer_synthesis_program_production_smoke_v1/evaluation_result.json",
+          "sha256": "2b0a376dd2057e0ad862cb33bbadcca7927cf9e7041fca1ff1e3f81876b1d5ef"
+        },
+        "test_baseline_report": {
+          "path": "results/phase1/transformer_synthesis_program_production_readiness_v1/test_baseline.json",
+          "sha256": "dfe8f7ebde7810041f664638845d0abbf709e67f0f65f3f2a60af942fb79077c"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_production_accelerator_benchmark_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 3600,
+        "gpu_type": "A100-40GB"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "transformer-production-accelerator-benchmark-a100-40gb"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-23 matched A100/H100 Transformer preflight authorized; production remains fail-closed",
+    "scientific_identity": "transformer_execution_only_accelerator_qualification"
+  },
+  "nonclaims": [
+    "The benchmark is not a training result or a model-quality experiment.",
+    "The benchmark makes zero route, oracle or candidate-selection calls.",
+    "The sparse-MPNN preflight does not qualify this Transformer."
+  ]
+}

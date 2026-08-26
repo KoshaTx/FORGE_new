@@ -1,0 +1,63 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-reaction-program-transformer-overfit-v3",
+  "description": "Qualify positional reaction-program memory with equal family mass and conflict projection without unstable gradient-norm amplification.",
+  "root_seed": 20260830,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [
+    {
+      "id": "cache",
+      "implementation": "model.shared-synthesis-program-cache.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/shared_training_cache_overfit_v1.json",
+        "sha256": "2cd416a185d01a4f59f09a5342ab3fca1a0d449458289aa3f6a284edf5557ae8"
+      },
+      "inputs": {
+        "representation_config": {"path": "configs/multireaction/shared_synthesis_program_representation_v1.json", "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"},
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "ugi_semantic_products": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz", "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"},
+        "ugi_semantic_atoms": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        "multireaction_atlas": {"path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz", "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"},
+        "multireaction_semantic_atoms": {"path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz", "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"},
+        "multireaction_splits": {"path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz", "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"}
+      },
+      "outputs": {
+        "cache": {"path": "cache.json", "schema_version": "forge.synthesis_program_training_cache.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_cache_qualification.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 2, "workers": 0, "memory_mb": 4096, "timeout_seconds": 300, "gpu_type": null},
+      "determinism": {"mode": "strict", "stream": "transformer-program-cache-v3"}
+    },
+    {
+      "id": "training",
+      "implementation": "model.shared-synthesis-program-training.v1",
+      "needs": ["cache"],
+      "config": {
+        "path": "configs/multireaction/shared_transformer_overfit_v3.json",
+        "sha256": "a431c527c6af6149cb52202e5a6d072fde95d30c92eb23410e8669af5bdef859"
+      },
+      "inputs": {},
+      "outputs": {
+        "checkpoint": {"path": "checkpoint.json", "schema_version": "forge.synthesis_program_sparse_flow_checkpoint.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_training_result.v1"}
+      },
+      "resources": {"device": "cpu", "precision": "float32", "cpus": 2, "workers": 0, "memory_mb": 8192, "timeout_seconds": 3600, "gpu_type": null},
+      "determinism": {"mode": "strict", "stream": "reaction-program-transformer-overfit-v3"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-23 explicit user authorization for the Transformer follow-up",
+    "scientific_identity": "post-negative-result_stable_family_balancing_followup",
+    "predecessor_run": "fd752a10d39dea34340769fecfd3d6682b05757b7abe2213d0510104e1d40a5f",
+    "change_from_predecessor": "Remove per-family gradient-norm equalization; retain exactly balanced family sampling, equal loss mass and deterministic PCGrad. Data, architecture, seed, step budget and gates are unchanged."
+  },
+  "nonclaims": [
+    "Three-record overfitting is not evidence of generalization.",
+    "This optimizer correction does not erase either prior positional-memory failure.",
+    "This follow-up does not replace the completed negative MPNN comparison.",
+    "No route, biological-oracle or candidate-selection call is authorized."
+  ]
+}

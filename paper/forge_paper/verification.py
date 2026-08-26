@@ -11,9 +11,10 @@ from collections.abc import Iterator, Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.core.hashing import is_sha256, sha256_file
-from forge_provenance.resolver import HistoricalPinArchive
 from forge_provenance.pins import load_baseline, load_moves
+from forge_provenance.resolver import HistoricalPinArchive
+
+from forge.core.hashing import is_sha256, sha256_file
 from forge_paper.contract import PaperContract, PaperPin
 
 
@@ -111,7 +112,11 @@ def _direct_report(repo: Path, pins: tuple[PaperPin, ...]) -> dict[str, Any]:
                 "actual": observed,
                 "expected": pin.sha256,
                 "path": pin.path,
-                "status": "verified" if observed == pin.sha256 else "missing" if observed is None else "drift",
+                "status": (
+                    "verified"
+                    if observed == pin.sha256
+                    else "missing" if observed is None else "drift"
+                ),
             }
         )
     return {"ok": all(row["status"] == "verified" for row in rows), "rows": rows}
@@ -119,14 +124,15 @@ def _direct_report(repo: Path, pins: tuple[PaperPin, ...]) -> dict[str, Any]:
 
 def _source_references(repo: Path, contract: PaperContract) -> dict[str, Any]:
     source = (repo / contract.source.path).read_text()
+    manuscript = Path(contract.source.path).parent
     graphics = set()
     import re
 
     for match in re.finditer(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", source):
         relative = match.group(1)
-        graphics.add(f"paper/figures/{relative}")
+        graphics.add((manuscript / "figures" / relative).as_posix())
     generated = {
-        f"paper/{match.group(1)}.tex"
+        (manuscript / f"{match.group(1)}.tex").as_posix()
         for match in re.finditer(r"\\input\{(generated_[^}]+)\}", source)
     }
     declared_figures = {pin.path for pin in contract.figure_outputs}
@@ -146,7 +152,9 @@ def diagnose_paper(repo: Path, contract_path: Path) -> dict[str, Any]:
     references = _source_references(repo, contract)
     producers = []
     for producer in contract.publication_producers:
-        entrypoint = next((item for item in producer.command if item.endswith((".py", ".sh"))), None)
+        entrypoint = next(
+            (item for item in producer.command if item.endswith((".py", ".sh"))), None
+        )
         missing_tools = [tool for tool in producer.tools if shutil.which(tool) is None]
         producers.append(
             {

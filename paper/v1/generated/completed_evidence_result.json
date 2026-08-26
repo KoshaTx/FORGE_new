@@ -1,0 +1,483 @@
+{
+  "artifacts": {
+    "catalogue_comparison_rows.tex": {
+      "bytes": 522,
+      "logical_path": "catalogue_comparison_rows.tex",
+      "sha256": "2caa27753a74b4390a1d0c06f24a08aef9405a35e07db6f0b0e3230e0ddac451"
+    },
+    "catalogue_figure_rows.tex": {
+      "bytes": 136,
+      "logical_path": "catalogue_figure_rows.tex",
+      "sha256": "166e1fea4640bfd0bd5df9e6f84c7f6b483e823da3b9ab50684affb3e6ec3bb7"
+    },
+    "catalogue_tradeoff.csv": {
+      "bytes": 560,
+      "logical_path": "catalogue_tradeoff.csv",
+      "sha256": "99532707d6e11168ad4daeabd2411f06ab6516f5a39b3e8e280b3b2a3bd30902"
+    },
+    "common_ugi_benchmark_completed_rows.tex": {
+      "bytes": 1295,
+      "logical_path": "common_ugi_benchmark_completed_rows.tex",
+      "sha256": "aaf1f2c6f92b997ebb6084e5a828cd95b11a69681c3d6031432fee9bd5900021"
+    },
+    "common_ugi_completed_rows.tex": {
+      "bytes": 612,
+      "logical_path": "common_ugi_completed_rows.tex",
+      "sha256": "fea352391025ae5d066e070c5992d58d8bd9f4d3422cb2ff4d58ac561681f3ae"
+    },
+    "common_ugi_decomposition_rows.tex": {
+      "bytes": 835,
+      "logical_path": "common_ugi_decomposition_rows.tex",
+      "sha256": "04b36324d93c232603fd2533ec334bc973a03e554a014112a99ab5d7d0b9f119"
+    },
+    "common_ugi_formulation_rows.tex": {
+      "bytes": 137,
+      "logical_path": "common_ugi_formulation_rows.tex",
+      "sha256": "8e2467ee45a2c89f7e190d64e7095bc14fff0d448ccc5185f780401fbeb0d8ef"
+    },
+    "common_ugi_generic_external_rows.tex": {
+      "bytes": 229,
+      "logical_path": "common_ugi_generic_external_rows.tex",
+      "sha256": "e344ff8c11f0524974f91ae0436ef25711d5f4c58207649513151ec308c2dee7"
+    },
+    "common_ugi_reaction_external_rows.tex": {
+      "bytes": 94,
+      "logical_path": "common_ugi_reaction_external_rows.tex",
+      "sha256": "5f4521f3a6a4cdc1f0f8a934c7723680f36d5006a0a341678591df12a9ae5939"
+    },
+    "common_ugi_seed_rows.tex": {
+      "bytes": 2029,
+      "logical_path": "common_ugi_seed_rows.tex",
+      "sha256": "e78ba260b5ea397ea8309acb4b6c6529aa59cd8a91d7edfed3e285b7216f1122"
+    },
+    "completed_evidence_macros.tex": {
+      "bytes": 4317,
+      "logical_path": "completed_evidence_macros.tex",
+      "sha256": "c27901c5a7666c5bbfac2ef5366394e9afa741ad9ab1989a2d4ee786e4337896"
+    },
+    "completed_evidence_summary.json": {
+      "bytes": 15819,
+      "logical_path": "completed_evidence_summary.json",
+      "sha256": "21db32e8afbe0318f0eea195db59cc529afd92a63935bca04f7d4d7c5dfd74bc"
+    },
+    "compute_parity_completed_rows.tex": {
+      "bytes": 691,
+      "logical_path": "compute_parity_completed_rows.tex",
+      "sha256": "edf9acbb978fa4e89ac34a923986b414678573b5f4464a00968a75e4ee266078"
+    },
+    "compute_parity_external_rows.tex": {
+      "bytes": 333,
+      "logical_path": "compute_parity_external_rows.tex",
+      "sha256": "e89988ca6fa3fc502c6fbf87b1009f2a707886500c30c333acb0516844805121"
+    },
+    "inventory_coverage_completed_rows.tex": {
+      "bytes": 285,
+      "logical_path": "inventory_coverage_completed_rows.tex",
+      "sha256": "229d042f14dcf08e5f11ad91f5328f131d03a449dbc1e723997386b3c924fa76"
+    },
+    "lipid_realism_rows.tex": {
+      "bytes": 1116,
+      "logical_path": "lipid_realism_rows.tex",
+      "sha256": "a18c7b43900b8a6ff3df4e7320ba3f350c436c70894a1ca03b7ac715d45af458"
+    },
+    "production_comparison_rows.tex": {
+      "bytes": 1080,
+      "logical_path": "production_comparison_rows.tex",
+      "sha256": "f04f55135707e8851a1eb3403dce183e077033fb3371216200c63afce3ab06f2"
+    },
+    "production_metrics.csv": {
+      "bytes": 1373,
+      "logical_path": "production_metrics.csv",
+      "sha256": "5e4187deb7a2329101887ee32b391ee8b1b6a210037009208a7686544a81f158"
+    },
+    "route_evidence_completed_rows.tex": {
+      "bytes": 1053,
+      "logical_path": "route_evidence_completed_rows.tex",
+      "sha256": "b5b4238479772138ea781747abdb3666fdc748e4a1418124999e41b2da33f68a"
+    },
+    "semantic_intervention.csv": {
+      "bytes": 627,
+      "logical_path": "semantic_intervention.csv",
+      "sha256": "996c22be7b0b1e719fe732be0e0646936baadb61c65d578c9cd6fd1ab004aa83"
+    },
+    "shared_program_figure_rows.tex": {
+      "bytes": 220,
+      "logical_path": "shared_program_figure_rows.tex",
+      "sha256": "dc240bcde0d138f1ddf00a093e5914f022a4d9b38db9554d9d659a211e532e13"
+    }
+  },
+  "available_common_methods": [
+    "finite_catalogue_oracle",
+    "shared_null_posthoc",
+    "fact_matched",
+    "fact_generous",
+    "forge_transformer",
+    "rgfn",
+    "defog_unconditional",
+    "genmol_safe",
+    "learned_inventory_selector"
+  ],
+  "candidate_selection": false,
+  "config": {
+    "bytes": 10345,
+    "path": "configs/reproduction/natbiotech_v1_completed_evidence_v1.json",
+    "sha256": "41a6b2a7ce8a541b1a65839b3c08a86654df2c7cf1a193ed28e40d695b7ddbc5"
+  },
+  "held_reaction_family_included": false,
+  "macros": {
+    "ForgeCommonRouteEvidenceCompleteComponents": "29",
+    "ForgeCommonRouteForgeAbstentionPerThousand": "$786.8\\pm100.8$",
+    "ForgeCommonRouteForgeCompletePerThousand": "$0.0\\pm0.0$",
+    "ForgeCommonRouteForgeExactPerThousand": "$786.8\\pm100.8$",
+    "ForgeCommonRouteSelectorCompletePerThousand": "$0.7\\pm0.3$",
+    "ForgeCommonRouteUnionComponents": "11{,}313",
+    "ForgeCyclicBLCIHighPP": "77.02",
+    "ForgeCyclicBLCILowPP": "71.13",
+    "ForgeCyclicBLDifferencePP": "73.67",
+    "ForgeCyclicLXCIHighPP": "22.01",
+    "ForgeCyclicLXCILowPP": "-3.91",
+    "ForgeCyclicLXDifferencePP": "13.15",
+    "ForgeCyclicUgiCIHighPP": "49.41",
+    "ForgeCyclicUgiCILowPP": "32.00",
+    "ForgeCyclicUgiDifferencePP": "38.43",
+    "ForgeHeldComponentAttempts": "9{,}216",
+    "ForgeHeldComponentPerThousand": "0.11",
+    "ForgeHeldComponentTotal": "1",
+    "ForgeNovelAgainstFullCount": "21{,}960",
+    "ForgeNovelAgainstFullDenominator": "26{,}235",
+    "ForgeNovelAgainstFullPercent": "83.7",
+    "ForgeNullBLCIHighPP": "78.45",
+    "ForgeNullBLCILowPP": "69.69",
+    "ForgeNullBLDifferencePP": "73.49",
+    "ForgeNullLXCIHighPP": "26.04",
+    "ForgeNullLXCILowPP": "2.51",
+    "ForgeNullLXDifferencePP": "18.10",
+    "ForgeNullUgiCIHighPP": "79.95",
+    "ForgeNullUgiCILowPP": "60.84",
+    "ForgeNullUgiDifferencePP": "67.24",
+    "ForgeOffRegistryCount": "19{,}520",
+    "ForgeOffRegistryDenominator": "26{,}235",
+    "ForgeOffRegistryPercent": "74.4",
+    "ForgePotencyAUC": "0.623",
+    "ForgePotencyAUCCIHigh": "0.679",
+    "ForgePotencyAUCCILow": "0.565",
+    "ForgePotencyAttemptsPerArm": "3{,}072",
+    "ForgePotencyDifferenceCIHighPerThousand": "0.98",
+    "ForgePotencyDifferenceCILowPerThousand": "-2.28",
+    "ForgePotencyDifferencePerThousand": "-1.30",
+    "ForgePotencyNestedEligible": "82",
+    "ForgePotencyNestedExactLone": "2962",
+    "ForgePotencyNestedHigh": "23",
+    "ForgePotencyOracleBudget": "38",
+    "ForgePotencySupportEligible": "90",
+    "ForgePotencySupportExactLone": "2955",
+    "ForgePotencySupportHigh": "27",
+    "ForgePotencyTopQuartileGain": "1.177",
+    "ForgeRouteAdmitted": "255",
+    "ForgeRouteCandidates": "256",
+    "ForgeRouteCensoredComponents": "2",
+    "ForgeRouteCensoredProducts": "1",
+    "ForgeRouteCompleteComponents": "36",
+    "ForgeRouteCompleteProducts": "19",
+    "ForgeRouteComponents": "158",
+    "ForgeRouteExactLone": "256",
+    "ForgeRouteUnresolvedComponents": "120",
+    "ForgeRouteUnresolvedProducts": "236",
+    "ForgeSemanticBLTokenCIHighPP": "5.60",
+    "ForgeSemanticBLTokenCILowPP": "-2.18",
+    "ForgeSemanticBLTokenDifferencePP": "2.00",
+    "ForgeSemanticBLTokenPercent": "37.70",
+    "ForgeSemanticFactualPercent": "39.69",
+    "ForgeSemanticForwardRoleCIHighPP": "1.69",
+    "ForgeSemanticForwardRoleCILowPP": "0.29",
+    "ForgeSemanticForwardRoleDifferencePP": "0.82",
+    "ForgeSemanticForwardRolePercent": "38.87",
+    "ForgeSemanticLXTokenCIHighPP": "27.47",
+    "ForgeSemanticLXTokenCILowPP": "14.06",
+    "ForgeSemanticLXTokenDifferencePP": "22.60",
+    "ForgeSemanticLXTokenPercent": "17.09",
+    "ForgeSemanticNullCoordinatesCIHighPP": "37.24",
+    "ForgeSemanticNullCoordinatesCILowPP": "34.28",
+    "ForgeSemanticNullCoordinatesDifferencePP": "36.07",
+    "ForgeSemanticNullCoordinatesPercent": "3.62",
+    "ForgeSemanticReverseRoleCIHighPP": "8.27",
+    "ForgeSemanticReverseRoleCILowPP": "1.37",
+    "ForgeSemanticReverseRoleDifferencePP": "4.49",
+    "ForgeSemanticReverseRolePercent": "35.20",
+    "ForgeSynthesisCanonicalRepresentatives": "56",
+    "ForgeSynthesisChangedIdentities": "8",
+    "ForgeSynthesisGuidanceStrength": "0.25",
+    "ForgeSynthesisGuidedReady": "2",
+    "ForgeSynthesisPosthocReady": "3",
+    "ForgeSynthesisTerminalParticles": "64",
+    "ForgeUgiRetentionCIHighPP": "61.82",
+    "ForgeUgiRetentionCILowPP": "41.24",
+    "ForgeUgiRetentionDifferencePP": "53.26"
+  },
+  "method_blind_route_union_included": true,
+  "missing_common_methods": [],
+  "schema_version": "forge.natbiotech_v1_completed_evidence_render.v1",
+  "sources": [
+    {
+      "bytes": 3578,
+      "path": "results/phase1/ugi_high_potency_challenger_adjudication_v1/result.json",
+      "sha256": "a508b45d455b7b164e54a8345b0dff1f8e4de928eec5e2f631e145dc0d981cc3"
+    },
+    {
+      "bytes": 281751,
+      "path": "results/phase1/final_bl_core_production_adjudication_v1/result.json",
+      "sha256": "80bee35bdb6a583b0bf722ceb96e8dc2d761ada85e5775b41a8963551d3f1e7a"
+    },
+    {
+      "bytes": 3808,
+      "path": "results/phase1/forge_role_novelty_route_breakdown_v1/result.json",
+      "sha256": "c389dd7e93e0059325c94da3f1cbc5a684652cf84b9bee8a4df7ab6806503efa"
+    },
+    {
+      "bytes": 18730,
+      "path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/result.json",
+      "sha256": "3066e306e3ab77ded09fbb8d76c9d0aab46540e8fa689063b896e17c8ed0eb20"
+    },
+    {
+      "bytes": 7490,
+      "path": "results/phase1/forge_generated_sample_atlas_v1/result.json",
+      "sha256": "dbb6589e8feda489006d4b9bfcc6a6e5e529706c8fe0cb021a1c876d15d17a31"
+    },
+    {
+      "bytes": 2662,
+      "path": "results/phase1/forge_generated_sample_figure_v2/result.json",
+      "sha256": "003d4cd437d8c565e663f7840ed3378f7b9118b00a2f6cc8e93d27062129503a"
+    },
+    {
+      "bytes": 6295,
+      "path": "results/phase1/final_program_semantic_intervention_v1/result.json",
+      "sha256": "b3696e4965bda3dd35766eda6f77ad1433873e7e14cac38b10b73cdb869d7627"
+    },
+    {
+      "bytes": 6638,
+      "path": "results/phase1/ugi_synthesis_guidance_failure_audit_v1/result.json",
+      "sha256": "bbbf1d2305a78a2220d9a179d1abc957abea9433974416eb389c28cd68b9a9c2"
+    },
+    {
+      "bytes": 7137,
+      "path": "results/phase1/ugi_novelty_audit_v1/result.json",
+      "sha256": "d58678ef37510c7abf95de1eef12d7648bbaf87fb3d1087524acd2f49ba44025"
+    },
+    {
+      "bytes": 7037,
+      "path": "results/phase1/finite_catalogue_common_assessment_seed0_v1/result.json",
+      "sha256": "2b8676765a33fa363bd3ba7ce8371f9d95d5a6551501234e08334afb121f8504"
+    },
+    {
+      "bytes": 7033,
+      "path": "results/phase1/finite_catalogue_common_assessment_seed1_v1/result.json",
+      "sha256": "b09ca42366f0662da381cc72650b9185457ee0164a4265094a383b3613b9517a"
+    },
+    {
+      "bytes": 7049,
+      "path": "results/phase1/finite_catalogue_common_assessment_seed2_v1/result.json",
+      "sha256": "fdf5af01fdba76578eaec6251c40660de5c3d406bb408de6f4cf293721737139"
+    },
+    {
+      "bytes": 7216,
+      "path": "results/phase1/shared_null_posthoc_common_assessment_seed0_v1/result.json",
+      "sha256": "6efd6179b150d8780f07b2a97214b176d95782335f4c12627899069eb8941347"
+    },
+    {
+      "bytes": 7168,
+      "path": "results/phase1/shared_null_posthoc_common_assessment_seed1_v1/result.json",
+      "sha256": "d05a81d3d438c48ab92159e60fbeaae2cbf27e4b7cb8c01adb6a5aeb81d19225"
+    },
+    {
+      "bytes": 7229,
+      "path": "results/phase1/shared_null_posthoc_common_assessment_seed2_v1/result.json",
+      "sha256": "2fff4d9e07afaf3ba76ba38673abee2b9e217039c24b3ae174d532b8a0743aa6"
+    },
+    {
+      "bytes": 7115,
+      "path": "results/phase1/fact_matched_common_assessment_seed0_v1/result.json",
+      "sha256": "7e0a3ca039ac85255c55f8eefcde73963a79997d263aa43e894ae5488d84a2a0"
+    },
+    {
+      "bytes": 7202,
+      "path": "results/phase1/fact_matched_common_assessment_seed1_v1/result.json",
+      "sha256": "b0192b7a72514f2542294e294f942e1e3984d75f385a1845fc89e2e466ccc904"
+    },
+    {
+      "bytes": 7176,
+      "path": "results/phase1/fact_matched_common_assessment_seed2_v1/result.json",
+      "sha256": "b092f69e9a758572f6d35499b2e415c6b5fb5e2f3bfac5f8937765801ab13950"
+    },
+    {
+      "bytes": 7146,
+      "path": "results/phase1/fact_generous_common_assessment_seed0_v1/result.json",
+      "sha256": "1ce9a0eeabb93520e02105208d7625cb2caf351ba5ca2d8bde380f7d5b49d97c"
+    },
+    {
+      "bytes": 7175,
+      "path": "results/phase1/fact_generous_common_assessment_seed1_v1/result.json",
+      "sha256": "6ca648afe09beb50c6fbe3ff82dfb91c231032404d8bf49fbcac75e406b7d1e1"
+    },
+    {
+      "bytes": 7176,
+      "path": "results/phase1/fact_generous_common_assessment_seed2_v1/result.json",
+      "sha256": "f9dc26860136c5dc38ef20894f3e52fd43d3aa844801fbc16e1bc3c370b2d6f9"
+    },
+    {
+      "bytes": 7212,
+      "path": "results/phase1/forge_transformer_common_assessment_seed0_v1/result.json",
+      "sha256": "a4fe7a637cf2caf8ed5e7fae54ba7fda2f96510cb83d127371da307de6ed6e1a"
+    },
+    {
+      "bytes": 7236,
+      "path": "results/phase1/forge_transformer_common_assessment_seed1_v1/result.json",
+      "sha256": "ca1ad0e24f065ab8b7a5a49de4ed1af84376f8fb5c5e1647a9c6098dede6ddcd"
+    },
+    {
+      "bytes": 7255,
+      "path": "results/phase1/forge_transformer_common_assessment_seed2_v1/result.json",
+      "sha256": "1cb5d61ee83e17fc2f136a447352eaf2aed92cd94059880194aea5733999561c"
+    },
+    {
+      "bytes": 6740,
+      "path": "runs/phase1-external-ugi-native-results-v3/rgfn/seed0/common_assessment/result.json",
+      "sha256": "6db8687c0dc1705609b647875fc4e413d941b513d15ea0d5a62279938f338181"
+    },
+    {
+      "bytes": 6740,
+      "path": "runs/phase1-external-ugi-native-results-v3/rgfn/seed1/common_assessment/result.json",
+      "sha256": "40cbcb859d3c4e4b499ad059fb8b9d866a13892749e315a0fd9a79314bcfc595"
+    },
+    {
+      "bytes": 6740,
+      "path": "runs/phase1-external-ugi-native-results-v3/rgfn/seed2/common_assessment/result.json",
+      "sha256": "553c26699f17e2ce1da19769b9aea8f278d7f48bfc8ec3330761d864c30d65ea"
+    },
+    {
+      "bytes": 7197,
+      "path": "runs/phase1-external-ugi-native-results-v3/defog_unconditional/seed0/common_assessment/result.json",
+      "sha256": "9475283fec53517b08e471aad3436788b9833a77dd992ecfc01802ac3dafcc38"
+    },
+    {
+      "bytes": 7239,
+      "path": "runs/phase1-external-ugi-native-results-v3/defog_unconditional/seed1/common_assessment/result.json",
+      "sha256": "43b35d2170511ed8dda9a02c5ebc7cc2951c5f64ba8f9bf4bc5e980c28f93aa2"
+    },
+    {
+      "bytes": 7211,
+      "path": "runs/phase1-external-ugi-native-results-v3/defog_unconditional/seed2/common_assessment/result.json",
+      "sha256": "afaabc5e52cbccd2309698adec0b19adb1b2da3604a4c38fd81e9d0d76e6a891"
+    },
+    {
+      "bytes": 6835,
+      "path": "results/phase1/genmol_safe_common_assessment_seed0_v1/result.json",
+      "sha256": "1702e839253fffe4ae1860f145a7c38124a4b0d06842d520ec7be084e9e3da0e"
+    },
+    {
+      "bytes": 6815,
+      "path": "results/phase1/genmol_safe_common_assessment_seed1_v1/result.json",
+      "sha256": "6aabb367c6e2204a5584d882d0ba39d8bcf2a924636a80f2daa4518954a5bb96"
+    },
+    {
+      "bytes": 6834,
+      "path": "results/phase1/genmol_safe_common_assessment_seed2_v1/result.json",
+      "sha256": "ba402185811d38c5285161621a715b4203f67856c509312abbf7e8632016822c"
+    },
+    {
+      "bytes": 7873,
+      "path": "runs/phase1-learned-inventory-selector/feb7af6d929fafb58b74ba9e5ff3ed83d0abf2c1357bb24cebe84572ebe823a7/stages/selector/artifacts/result.json",
+      "sha256": "40ec6f6a2a63ff41846c6e91739c227d59b8642be43c14d30daea7f95817b0db"
+    },
+    {
+      "bytes": 7884,
+      "path": "runs/phase1-learned-inventory-selector/2024106a25c36eea9c2e9585bd59d345c29edf957b1452abe1631db1befa5eb0/stages/selector/artifacts/result.json",
+      "sha256": "c5a22fc5d76fa2dbaf7ed045013b066646fd3a369827ede0a598e33e77403530"
+    },
+    {
+      "bytes": 7868,
+      "path": "runs/phase1-learned-inventory-selector/7e6e19c564269c904fe531938d6e50a96f9cf1c7a13210dbd571981657f5ca1d/stages/selector/artifacts/result.json",
+      "sha256": "567bc08c3aa11a0a36550ac469bc99a2a1746d6ecc280e9670950732987044c6"
+    },
+    {
+      "bytes": 47913,
+      "path": "results/phase1/common_ugi_method_blind_route_adjudication_v1/result.json",
+      "sha256": "36b474711c5e20e9720e2ae6e62a495b4594ec973bae8fa15db52a7f93f3199f"
+    },
+    {
+      "bytes": 2216,
+      "path": "results/phase1/common_ugi_method_blind_route_evidence_v1/result.json",
+      "sha256": "bf3626b630f3504e829bd424613841a087db89677e80a2e18f0f10e9bdbeec35"
+    },
+    {
+      "bytes": 3408,
+      "path": "runs/phase1-external-ugi-native-requests-v3/rgfn/seed0/request.json",
+      "sha256": "456e0b7bc6bbf21d456932c4919edaa9d055f1c0b99058db9be6070490cb56b5"
+    },
+    {
+      "bytes": 3408,
+      "path": "runs/phase1-external-ugi-native-requests-v3/rgfn/seed1/request.json",
+      "sha256": "a0ca50e22d877c840dc0a21067694f51cb3621debfb8c5f270e8a0057115718f"
+    },
+    {
+      "bytes": 3408,
+      "path": "runs/phase1-external-ugi-native-requests-v3/rgfn/seed2/request.json",
+      "sha256": "4ee2275b0706f40734510640639a4041309469ffc33c95f6090fc818b5c72f44"
+    },
+    {
+      "bytes": 3597,
+      "path": "runs/phase1-external-ugi-native-requests-v3/defog_unconditional/seed0/request.json",
+      "sha256": "eb62dfe005e907605cd8f4664008efcc0d8ff119c266f1136de79439ac2ae174"
+    },
+    {
+      "bytes": 3597,
+      "path": "runs/phase1-external-ugi-native-requests-v3/defog_unconditional/seed1/request.json",
+      "sha256": "2f68602b078ee73e285b0dc7d8f3d1289f64146b4df2ff91976fae155f3b9b48"
+    },
+    {
+      "bytes": 3597,
+      "path": "runs/phase1-external-ugi-native-requests-v3/defog_unconditional/seed2/request.json",
+      "sha256": "8b610760341fc6b1cd6708a0177c8d946695983a819f9e1660b8d07282339186"
+    },
+    {
+      "bytes": 3543,
+      "path": "runs/phase1-external-ugi-native-requests-v3/genmol_safe/seed0/request.json",
+      "sha256": "00523be5a471084d8672e55c9536c6916f01b78046dca50162f205f1c26567a0"
+    },
+    {
+      "bytes": 3543,
+      "path": "runs/phase1-external-ugi-native-requests-v3/genmol_safe/seed1/request.json",
+      "sha256": "9bd93f2e921fad53b42996518d750be0540f626d391734c3b5f7c4e234344347"
+    },
+    {
+      "bytes": 3543,
+      "path": "runs/phase1-external-ugi-native-requests-v3/genmol_safe/seed2/request.json",
+      "sha256": "2f2b692e854dba36d8e2bc0c9d351999e79e23dae8184c5a60874e9ac5f88865"
+    },
+    {
+      "bytes": 22288,
+      "path": "results/phase1/common_lipid_realism_v1/final_aggregate/result.json",
+      "sha256": "810d9ea329dce00c57ff19de36da0b3daa9efc73f6c7b5df7ff6bc9745f21d17"
+    },
+    {
+      "bytes": 59367,
+      "path": "runs/phase1-transformer-mechanism-study/5f149b098c61a855dc1bf51b5ba1c3c31162d35fb5e84abeb174bde30a5eb54f/stages/study/artifacts/training/result.json",
+      "sha256": "878b655257241abf2d1823e5ea5e21be4d7f5f041aa88ef511ba5fe669961f56"
+    },
+    {
+      "bytes": 59398,
+      "path": "runs/phase1-transformer-mechanism-study/9f5633821b0234c367d7f1058703ba05034d2971c04ee45a7e9a26af83f311c1/stages/study/artifacts/training/result.json",
+      "sha256": "6c946471c2a8b39f881995679d46a2f9e46570d04bf0e0334893692c01b88a08"
+    },
+    {
+      "bytes": 59383,
+      "path": "runs/phase1-transformer-mechanism-study/3715b68bb7faaa8815ff575e07ff4c00f7983327322462ed8c2b463629172e46/stages/study/artifacts/training/result.json",
+      "sha256": "d59bf9fed863ed49bf22deaf55e441f09d9b268b8fbe46b2f175399ef2ba199a"
+    },
+    {
+      "bytes": 15047,
+      "path": "results/phase1/transformer_mechanism_study_v1/seed_rows.jsonl",
+      "sha256": "4a382994c6dbc7bd36b362a18baf1e01da11ee5bf9c02a5a875b4ee18d93f938"
+    }
+  ],
+  "status": "complete_for_currently_available_evidence"
+}

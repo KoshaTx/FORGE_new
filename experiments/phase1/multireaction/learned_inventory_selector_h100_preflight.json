@@ -1,0 +1,31 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-learned-inventory-selector-h100-preflight",
+  "description": "Run the learned train-only Ugi inventory selector smoke contract on an exact H100 before production.",
+  "root_seed": 20260825,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [{
+    "id": "selector",
+    "implementation": "model.learned-inventory-selector.v1",
+    "needs": [],
+    "config": {"path": "configs/multireaction/learned_inventory_selector_h100_preflight_v1.json", "sha256": "f26d2358e143d2221bfd07408daf3a50e5313f580d8aff5110b860cab2c1a06f"},
+    "inputs": {
+      "common_protocol": {"path": "configs/multireaction/common_ugi_baseline_protocol_v1.json", "sha256": "54951f190e3cecc91b3d37a22858a3be84a18d8ef42c295b29bb418b5e9f3e15"},
+      "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+      "qualified_ugi_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+      "component_route_ledger": {"path": "results/phase1/ugi_bounded_hybrid_route_cascade_v1/component_route_ledger.jsonl.gz", "sha256": "0076d72f7649c5b2b6d7fad242b0ecc0a667d232c137dbd282a52ff34a3e6a20"}
+    },
+    "outputs": {
+      "attempts": {"path": "attempts.jsonl.gz", "schema_version": "forge.common_ugi_baseline_attempt.v1"},
+      "assessed_attempts": {"path": "assessed_attempts.jsonl.gz", "schema_version": "forge.common_ugi_assessed_attempts.v1"},
+      "route_assessed_attempts": {"path": "route_assessed_attempts.jsonl.gz", "schema_version": "forge.common_ugi_route_assessed_attempts.v1"},
+      "checkpoint": {"path": "checkpoint.pt", "schema_version": "forge.learned_inventory_selector_checkpoint.v1"},
+      "result": {"path": "result.json", "schema_version": "forge.learned_inventory_selector_result.v1"}
+    },
+    "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 24576, "timeout_seconds": 3600, "gpu_type": "H100!"},
+    "determinism": {"mode": "strict", "stream": "learned-inventory-selector-preflight"}
+  }],
+  "metadata": {"scientific_identity": "learned_finite_component_vocabulary_baseline_preflight"},
+  "nonclaims": ["A preflight is not a production baseline result."]
+}

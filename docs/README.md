@@ -10,6 +10,9 @@ automation. This index provides the hierarchy without creating path churn during
 2. `PLAN.md` — scientific plan; sections 1–5 and 13 are required context.
 3. `PHASE1_UGI_FIRST_PRODUCTION_PLAN.md` — frozen Phase 1 execution order.
 4. `DECISION_LOG.md` — chronological decisions, including negative results.
+5. `MULTIREACTION_COMPUTATIONAL_PLAN.md` — bounded ICLR multi-reaction extension.
+6. `PAPER_EXPERIMENT_EXECUTION_MATRIX.md` — current computational execution and prospective evidence gates.
+7. `PAPER_RESULTS_TASKS.md` — active ordered checklist for completing the computational paper results.
 
 ## Current engineering contracts
 

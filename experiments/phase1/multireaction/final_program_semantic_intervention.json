@@ -1,0 +1,39 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-final-program-semantic-intervention",
+  "description": "Measure inference-time dependence on factual Ugi program coordinates in the three frozen final BL-core-constrained checkpoints.",
+  "root_seed": 20260829,
+  "profiles": ["smoke", "full"],
+  "replicates": {"smoke": 1, "full": 1},
+  "stages": [{
+    "id": "intervention",
+    "implementation": "model.program-semantic-intervention.v1",
+    "needs": [],
+    "config": {"path": "configs/multireaction/final_program_semantic_intervention_v1.json", "sha256": "f399732c01cbcaa553829545034eec65323e36dcb47b7ff5194f639d9b1df913"},
+    "inputs": {
+      "production_design": {"path": "configs/multireaction/shared_production_comparison_transformer_v1.json", "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"},
+      "checkpoint_design": {"path": "runs/phase1-bl-core-constrained-production-h100/647a8c643b841a569a3a8fd9a721b431fdf27da4cd5d2c3667c53e86fa57eeaa/stages/study/artifacts/study_design.json", "sha256": "867f6ff8e7e292e1e6fd23570449650ea6be6b9b546cfa2745a79112a17fbc5b"},
+      "production_cache": {"path": "results/phase1/bl_core_constrained_production_cache_v1/cache.npz", "sha256": "3744e066325f3e203139797ab48eb54725f95ce09b39209905fb656df53c5973"},
+      "program_config": {"path": "configs/multireaction/lnpdb_reaction_programs_v1.json", "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"},
+      "qualified_reaction_families": {"path": "data/vendor/qualified_reaction_families_v1.json", "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"},
+      "qualified_ugi_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+      "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+      "multireaction_atlas": {"path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz", "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"},
+      "multireaction_splits": {"path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz", "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"},
+      "training_result_r0": {"path": "runs/phase1-bl-core-constrained-production-h100/647a8c643b841a569a3a8fd9a721b431fdf27da4cd5d2c3667c53e86fa57eeaa/stages/study/artifacts/training/result.json", "sha256": "70a8c25039ea625de38e71ab3496aa7f21c1afc65d97d74e4d7d44767b7bb2b8"},
+      "checkpoint_archive_r0": {"path": "runs/phase1-bl-core-constrained-production-h100/647a8c643b841a569a3a8fd9a721b431fdf27da4cd5d2c3667c53e86fa57eeaa/stages/study/artifacts/training/checkpoints.tar", "sha256": "08d9ebb04497d9ee78488c100315f1d50eef65bdeae84d9252d61cc4dead77e5"},
+      "training_result_r1": {"path": "runs/phase1-bl-core-constrained-production-h100/6f51e43124edca1c241bc466eb896b8e6689a80306bd12653a0e36eaefee0131/stages/study/artifacts/training/result.json", "sha256": "fca377e3491b4865dd009631378351f09c4db0e41ce01e93863e17a76395f5d6"},
+      "checkpoint_archive_r1": {"path": "runs/phase1-bl-core-constrained-production-h100/6f51e43124edca1c241bc466eb896b8e6689a80306bd12653a0e36eaefee0131/stages/study/artifacts/training/checkpoints.tar", "sha256": "de695509e21e0fca31edf33c83f0ba499a1ac61a77eebbbf078928f6601e3655"},
+      "training_result_r2": {"path": "runs/phase1-bl-core-constrained-production-h100/cb1454baeeb6c9a7a3f5f6351ce7ac587480151cfe76b8363af85a0c109ab183/stages/study/artifacts/training/result.json", "sha256": "8ec632d80518771e0a15501a769c446163453307d0b2af9a9601605307a633e0"},
+      "checkpoint_archive_r2": {"path": "runs/phase1-bl-core-constrained-production-h100/cb1454baeeb6c9a7a3f5f6351ce7ac587480151cfe76b8363af85a0c109ab183/stages/study/artifacts/training/checkpoints.tar", "sha256": "457a599a275562d9bf59a6495014be586b740edeea808ded8ee1aaa17be20c6d"}
+    },
+    "outputs": {
+      "samples": {"path": "samples.jsonl.gz", "schema_version": "forge.program_semantic_intervention_samples.v1"},
+      "result": {"path": "result.json", "schema_version": "forge.program_semantic_intervention_result.v2"}
+    },
+    "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 85000, "gpu_type": "H100!"},
+    "determinism": {"mode": "strict", "stream": "final-program-semantic-intervention"}
+  }],
+  "metadata": {"scientific_identity": "paired_inference_semantic_intervention_on_final_model", "training_reused": true, "paid_launch_requires_passing_preflight": true},
+  "nonclaims": ["This diagnostic makes no synthesis-success claim.", "The null condition is out of distribution.", "No route, oracle or candidate-selection call is permitted."]
+}

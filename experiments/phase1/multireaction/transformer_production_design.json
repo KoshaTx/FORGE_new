@@ -1,0 +1,91 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-transformer-synthesis-program-production-design",
+  "description": "Freeze and verify the post-negative-result Transformer four-arm Ugi/BL/LX comparison without launching training or sampling.",
+  "root_seed": 20260825,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "design",
+      "implementation": "model.shared-synthesis-program-production-design.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+        "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+      },
+      "inputs": {
+        "representation_config": {
+          "path": "configs/multireaction/shared_synthesis_program_representation_v1.json",
+          "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"
+        },
+        "representation_result": {
+          "path": "results/phase1/shared_synthesis_program_representation_v1/result.json",
+          "sha256": "487c7382af3a18099505aa1e01b981b2b9b9c7b191e0cd7a36b79ad5c318bb88"
+        },
+        "integration_qualification": {
+          "path": "results/phase1/shared_synthesis_program_training_integration_v1/qualification/result.json",
+          "sha256": "ecfd968181e3729843d4ccac6f3a7d046dc8475ff23e5ead49fbe2193c74cad1"
+        },
+        "atom_vocabulary": {
+          "path": "results/phase1/product_v3_atom_vocabulary.json",
+          "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "ugi_corpus_result": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/result.json",
+          "sha256": "1b655ce6389f50c7310a21a287997793c592ca93de064d53bafacaee24f663a6"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+          "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+        },
+        "multireaction_corpus_result": {
+          "path": "results/phase1/multireaction_program_corpus_v1/result.json",
+          "sha256": "df6f06fc1a4f9239ee24cbd46e0de8805a5e5063e3e9087379182868695e401d"
+        },
+        "transformer_qualification": {
+          "path": "results/phase1/reaction_program_transformer_overfit_v1/result.json",
+          "sha256": "2e51fcf71f2daf791b9913d9e2dc0859f0d8fc8d346a855f4a0e4b4ea534081b"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_production_design_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 2048,
+        "timeout_seconds": 120,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "transformer-production-design"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-23 explicit user authorization for the Transformer follow-up",
+    "scientific_identity": "post_negative_result_transformer_comparison_freeze"
+  },
+  "nonclaims": [
+    "This experiment freezes a design and does not launch production training or sampling.",
+    "A passing design receipt is not evidence of multi-family model generalization.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability or route certification.",
+    "The completed sparse-MPNN comparison remains an immutable negative baseline.",
+    "A passing Transformer design receipt is not evidence of model generalization."
+  ]
+}

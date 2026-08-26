@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-production-accelerator-benchmark-l4",
+  "description": "Qualify exact production capacity, deterministic replay and measured optimizer throughput on one NVIDIA L4.",
+  "root_seed": 20260825,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [
+    {
+      "id": "benchmark",
+      "implementation": "model.shared-synthesis-program-production-accelerator-benchmark.v1",
+      "needs": [],
+      "config": {"path": "configs/multireaction/shared_production_accelerator_benchmark_v5.json", "sha256": "b9b4828fbf64f30dcbb2abc2167464c2cfcdbba62c45d659904aa5ea80f2f71a"},
+      "inputs": {
+        "production_design": {"path": "configs/multireaction/shared_production_comparison_design_v1.json", "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz", "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"},
+        "production_training_config": {"path": "configs/multireaction/shared_production_training_v1.json", "sha256": "b040716116f8fa2cce4374e660e36a6117c7cbd9914664527e13da5577431ecc"},
+        "production_evaluation_config": {"path": "configs/multireaction/shared_production_evaluation_v1.json", "sha256": "97916c9fe91ab67712fd81a3c8d0b8e1f98a1fbefc58837a62fc2aba9abc96bc"},
+        "smoke_training_result": {"path": "results/phase1/shared_synthesis_program_production_smoke_v1/training_result.json", "sha256": "50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8"},
+        "smoke_evaluation_result": {"path": "results/phase1/shared_synthesis_program_production_smoke_v1/evaluation_result.json", "sha256": "441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07"},
+        "test_baseline_report": {"path": "results/phase1/shared_synthesis_program_production_readiness_v5/test_baseline.json", "sha256": "c76be3af6790daa12b4a00a6ddc5033e35fa98b285f001c4d24fe65ded5f841f"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_production_accelerator_benchmark_result.v1"}
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 3600,
+        "gpu_type": "L4"
+      },
+      "determinism": {"mode": "strict", "stream": "shared-production-accelerator-benchmark"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-21 explicit user authorization",
+    "scientific_identity": "execution-only accelerator qualification"
+  },
+  "nonclaims": [
+    "The benchmark is not a training result or a model-quality experiment.",
+    "The benchmark makes zero route, oracle or candidate-selection calls."
+  ]
+}

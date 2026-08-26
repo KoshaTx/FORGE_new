@@ -1,0 +1,73 @@
+{
+  "cache": {
+    "bytes": 21600,
+    "logical_path": "cache/cache.json",
+    "sha256": "bd053e2d79e584e4f119d96aed73810f56d49bded62bf7dc8525d187f4b855bf"
+  },
+  "checkpoint": {
+    "bytes": 1073066,
+    "logical_path": "training/checkpoint.json",
+    "sha256": "feb9d0c27531e183a4108a7dec7f58360c80969eed3a82ade123da46fcd66e5e"
+  },
+  "config": {
+    "bytes": 669,
+    "path": "configs/multireaction/shared_sampling_overfit_v1.json",
+    "sha256": "a627947b4837a6f26045c1b27ca374924257a04ecbf03e7e08ca5add432015d6"
+  },
+  "gates": {
+    "every_program_has_exact_graph": true,
+    "expected_balanced_sample_count": true,
+    "fixed_states_immutable_through_sampling": true,
+    "minimum_exact_tensor_fraction": true,
+    "minimum_valid_fraction": true
+  },
+  "metrics": {
+    "by_program": {
+      "bl_2023_repeated_aza_michael": {
+        "exact_target_graph": 4,
+        "exact_tensor": 4,
+        "samples": 4,
+        "valid": 4
+      },
+      "lx_2024_repeated_reductive_amination": {
+        "exact_target_graph": 4,
+        "exact_tensor": 4,
+        "samples": 4,
+        "valid": 4
+      },
+      "ugi_3cr_agile": {
+        "exact_target_graph": 4,
+        "exact_tensor": 4,
+        "samples": 4,
+        "valid": 4
+      }
+    },
+    "exact_target_graph": 12,
+    "exact_tensor": 12,
+    "fixed_state_failures": 0,
+    "repairs": {},
+    "samples": 12,
+    "valid": 12
+  },
+  "nonclaims": [
+    "Samples reuse three overfit semantic layouts and are not generalization evidence.",
+    "Exact target recovery is not synthesis-success probability or route certification.",
+    "This run does not authorize production multi-reaction sampling."
+  ],
+  "run_kind": "overfit_gate",
+  "samples": {
+    "bytes": 6991,
+    "logical_path": "samples.json",
+    "sha256": "6842bbe03e5b93ff455988e9b16f62fe75d00c92ed12df86d1ec63bff32b13f8"
+  },
+  "sampling_contract": {
+    "component_identifiers_visible": false,
+    "fragment_tokens_visible": false,
+    "layout_visible_state": "program_role_core_position_counts_and_adapter_fixed_states",
+    "variable_target_atoms_visible": false,
+    "variable_target_bonds_visible": false
+  },
+  "schema_version": "forge.synthesis_program_sampling_result.v1",
+  "seed": 20260825,
+  "status": "pass"
+}

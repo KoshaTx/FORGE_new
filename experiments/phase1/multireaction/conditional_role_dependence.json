@@ -1,0 +1,22 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-conditional-role-dependence",
+  "description": "Measure intact versus within-context shuffled Ugi cross-role dependence before interpreting FACT.",
+  "root_seed": 20260824,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [{
+    "id": "diagnostic",
+    "implementation": "model.conditional-role-dependence.v1",
+    "needs": [],
+    "config": {"path": "configs/multireaction/conditional_role_dependence_v1.json", "sha256": "6a44073f1c5cfcecee31856797018426af9aca451b38ee14b42e60f797143d73"},
+    "inputs": {
+      "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"}
+    },
+    "outputs": {"result": {"path": "result.json", "schema_version": "forge.conditional_role_dependence.v1"}},
+    "resources": {"device": "cpu", "precision": "float64", "cpus": 4, "workers": 0, "memory_mb": 16384, "timeout_seconds": 21600, "gpu_type": null},
+    "determinism": {"mode": "strict", "stream": "conditional-role-permutation"}
+  }],
+  "metadata": {"scientific_identity": "pre_fact_conditional_dependence_diagnostic"},
+  "nonclaims": ["Detectable dependence does not establish that FORGE learns it."]
+}

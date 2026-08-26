@@ -1,0 +1,125 @@
+{
+  "artifacts": {
+    "result": {
+      "bytes": 12891,
+      "path": "artifacts/result.json",
+      "schema_version": "forge.synthesis_program_production_accelerator_benchmark_result.v1",
+      "sha256": "8e3b19fba66c9163f55200b1705ab073adeb77dee40900b6d8f51a87bdad978a"
+    }
+  },
+  "backend": "modal",
+  "completed_utc": "2026-08-21T15:55:26+00:00",
+  "config": {
+    "path": "configs/multireaction/shared_production_accelerator_benchmark_v1.json",
+    "sha256": "adff26a98c11b3508615fdd3e85014d6be52a996368ee67618ed5719e5279cbe"
+  },
+  "dependencies": {},
+  "determinism": {
+    "mode": "strict",
+    "stream": "shared-production-accelerator-benchmark"
+  },
+  "environment": {
+    "accelerators": {
+      "cuda_available": true,
+      "cuda_device_count": 1,
+      "cuda_devices": [
+        "NVIDIA A100-SXM4-40GB"
+      ],
+      "cuda_runtime": "13.0",
+      "cudnn_version": 92000,
+      "deterministic_algorithms": false,
+      "mps_available": false,
+      "torch_available": true
+    },
+    "executable": "/.uv/.venv/bin/python",
+    "implementation": "CPython",
+    "lock": {
+      "path": "uv.lock",
+      "sha256": "2ec415f1d920980b0850ee67ab0538c8635e0f6d891599489a9651a8b5328cc2"
+    },
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "rdkit": "2026.3.5",
+      "scikit-learn": "1.9.0",
+      "torch": "2.13.0",
+      "torch-geometric": "2.8.0.post1",
+      "xgboost": "3.2.0"
+    },
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "processor": "",
+    "python": "3.11.12"
+  },
+  "experiment_id": "phase1-shared-synthesis-program-production-accelerator-benchmark-a100-40gb",
+  "external_inputs": {
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+      "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+    },
+    "production_design": {
+      "path": "configs/multireaction/shared_production_comparison_design_v1.json",
+      "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"
+    },
+    "production_evaluation_config": {
+      "path": "configs/multireaction/shared_production_evaluation_v1.json",
+      "sha256": "97916c9fe91ab67712fd81a3c8d0b8e1f98a1fbefc58837a62fc2aba9abc96bc"
+    },
+    "production_training_config": {
+      "path": "configs/multireaction/shared_production_training_v1.json",
+      "sha256": "b040716116f8fa2cce4374e660e36a6117c7cbd9914664527e13da5577431ecc"
+    },
+    "smoke_evaluation_result": {
+      "path": "results/phase1/shared_synthesis_program_production_smoke_v1/evaluation_result.json",
+      "sha256": "441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07"
+    },
+    "smoke_training_result": {
+      "path": "results/phase1/shared_synthesis_program_production_smoke_v1/training_result.json",
+      "sha256": "50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8"
+    },
+    "test_baseline_report": {
+      "path": "results/phase1/shared_synthesis_program_production_readiness_v1/test_baseline.json",
+      "sha256": "1369a71ecf2a835523ad902e9dcc6912d266bb970741399844e58151245cc285"
+    }
+  },
+  "fingerprint": "3ea50b261adcf8ec3db5ba4d1c4193d8e1378481a7eaa36ea71ef0a5ce145680",
+  "implementation": "model.shared-synthesis-program-production-accelerator-benchmark.v1",
+  "metrics": {
+    "gates_passed": 20,
+    "gpu_cost_usd_all_replicates": 2.7941963764440034,
+    "peak_reserved_bytes": 660602880,
+    "seconds_per_replicate": 1597.596556000002
+  },
+  "profile": "smoke",
+  "randomness": {
+    "derived_seeds": {
+      "stage": 3496057393697042257
+    },
+    "master_seed": 20260825,
+    "replicate": 0,
+    "root_seed": 5148463696952592220,
+    "stream": "shared-production-accelerator-benchmark"
+  },
+  "resources": {
+    "cpus": 4,
+    "device": "cuda",
+    "gpu_type": "A100-40GB",
+    "memory_mb": 32768,
+    "precision": "float32",
+    "timeout_seconds": 3600,
+    "workers": 0
+  },
+  "run_id": "88e51151d9c18f8896efd3fa4fc78ce2d8177cce19c6b7c2ec135bd4aa5eb368",
+  "schema_version": "forge.stage_manifest.v1",
+  "source_sha256": "9bad187578b59c580493fa8d85cbf6662a650650672abfc0bea755373601fbd0",
+  "stage_id": "benchmark",
+  "status": "complete",
+  "summary": {
+    "candidate_selection": false,
+    "declared_gpu_type": "A100-40GB",
+    "device": "NVIDIA A100-SXM4-40GB",
+    "projection_scope": "training_only_excludes_evaluation_and_startup",
+    "route_or_oracle_calls": 0,
+    "status": "pass"
+  }
+}

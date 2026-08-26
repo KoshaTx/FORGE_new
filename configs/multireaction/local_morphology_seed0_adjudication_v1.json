@@ -1,0 +1,48 @@
+{
+  "schema_version": "forge.local_morphology_seed0_adjudication_config.v1",
+  "scientific_question": "Does train-derived role-local ring morphology remove unsupported small oxygen rings without materially degrading the frozen seed-0 generator?",
+  "inputs": {
+    "baseline_result": {
+      "path": "runs/phase1-local-chemistry-resampling/84f70389032405b8da5f10bd80e6f21cb0366bcce26e222ffa4ec7a794d4b1e3/stages/resampling/artifacts/result.json",
+      "sha256": "83bc791e95b543d987b2d1cfa6a75ff479b1976c7c085ed6f8f10dcbef4ba5b5"
+    },
+    "morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    }
+  },
+  "evaluation": {
+    "arm_id": "bl_core_constrained_repeat_aware",
+    "replicate": 0,
+    "seed": 20260825,
+    "checkpoint_step": 1700,
+    "split": "heldout",
+    "attempts_per_program": 3072,
+    "programs": [
+      "bl_2023_repeated_aza_michael",
+      "lx_2024_repeated_reductive_amination",
+      "ugi_3cr_agile"
+    ]
+  },
+  "acceptance": {
+    "maximum_oxygen_containing_three_or_four_membered_rings": 0,
+    "maximum_ugi_oxygen_rings_outside_amine_head_in_exact_l1_components": 0,
+    "maximum_unsupported_role_ring_signatures_in_exact_l1_components": 0,
+    "minimum_exact_l1_yield_retained_fraction_per_program": 0.9,
+    "maximum_internal_diversity_absolute_decrease_per_program": 0.02,
+    "minimum_effective_component_count_retained_fraction_per_program": 0.8
+  },
+  "reporting": {
+    "candidate_selection": false,
+    "training_calls": 0,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "negative_results_are_reported": true,
+    "thresholds_frozen_before_full_seed0_run": true
+  },
+  "nonclaims": [
+    "A passing local morphology policy is not evidence of synthesis success, stability, safety or activity.",
+    "The diagnostic does not supersede the frozen raw exact-L1 production result.",
+    "A failing yield or diversity gate is reported and is not repaired by changing thresholds."
+  ]
+}

@@ -101,6 +101,23 @@ def _training_partition(
             raise UgiJointSparseTrainingError(
                 "development training and calibration folds must be disjoint"
             )
+    elif mode == "fixed_train_only":
+        if training_folds != ("train",):
+            raise UgiJointSparseTrainingError(
+                "fixed train-only fitting requires exactly the frozen train fold"
+            )
+        if partition.overlapping_folds:
+            raise UgiJointSparseTrainingError(
+                "fixed train-only diagnostics must remain disjoint from fitting"
+            )
+        if selection_mode != "fixed_final_step":
+            raise UgiJointSparseTrainingError(
+                "fixed train-only fitting must select the prespecified final step"
+            )
+        if patience != 0:
+            raise UgiJointSparseTrainingError(
+                "fixed train-only fitting cannot use data-dependent early stopping"
+            )
     elif mode == "production_refit_all_folds":
         if set(training_folds) != available:
             raise UgiJointSparseTrainingError(
@@ -291,7 +308,6 @@ def train_ugi_joint_sparse(
     config = json.loads(config_path.read_text())
     # Semantics experiment knobs. Absent from every production config, so existing runs are
     # unaffected and reproduce bit-identically.
-    semantic_organization = str(config.get("semantic_organization", "role_structured"))
     coverage_split = config.get("coverage_split")
     if config.get("schema_version") != "phase1_ugi_joint_sparse_training_config.v1":
         raise UgiJointSparseTrainingError("unsupported joint sparse config")
@@ -341,6 +357,21 @@ def train_ugi_joint_sparse(
     model_config = dict(config["model"])
     if smoke:
         model_config.update(runtime.pop("model_overrides"))
+    top_level_semantic = config.get("semantic_organization")
+    model_semantic = model_config.get("semantic_organization")
+    if (
+        top_level_semantic is not None
+        and model_semantic is not None
+        and str(top_level_semantic) != str(model_semantic)
+    ):
+        raise UgiJointSparseTrainingError(
+            "top-level and checkpoint model semantic organizations disagree"
+        )
+    semantic_organization = str(
+        top_level_semantic
+        if top_level_semantic is not None
+        else model_semantic if model_semantic is not None else "role_structured"
+    )
     device = torch.device(runtime["device"])
     if device.type == "cuda" and not torch.cuda.is_available():
         raise UgiJointSparseTrainingError("CUDA requested but unavailable")
@@ -392,6 +423,7 @@ def train_ugi_joint_sparse(
     }
     architecture = dict(model_config)
     architecture.pop("source_probability_floor")
+    architecture.pop("semantic_organization", None)
     model = UgiJointSparseFlow(
         atom_classes=len(corpus.atom_vocabulary),
         semantic_organization=semantic_organization,

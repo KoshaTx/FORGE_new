@@ -1,0 +1,22 @@
+{
+  "schema_version": "forge.synthesis_program_sampling_config.v1",
+  "seed": 20260825,
+  "inputs": {},
+  "sampling": {
+    "layout_source": "cache_semantics_and_adapter_fixed_states_only",
+    "samples_per_program": 4,
+    "steps": 32,
+    "batch_size": 3
+  },
+  "execution": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true
+  },
+  "gates": {
+    "minimum_valid_fraction": 0.75,
+    "minimum_exact_tensor_fraction": 0.75,
+    "minimum_exact_graphs_per_program": 1
+  },
+  "claim_boundary": "Checkpoint-separated native sampling on three overfit layouts only; no generalization, synthesis-success, or production-sampling claim."
+}

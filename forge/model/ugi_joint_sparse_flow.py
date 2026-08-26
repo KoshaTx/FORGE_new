@@ -385,6 +385,62 @@ def collate_ugi_joint_sparse_records(
 
 if nn is not None:
 
+    class _UgiProgramTransformerBlock(nn.Module):
+        """Bidirectional exterior attention with morphology-program cross-attention."""
+
+        def __init__(
+            self,
+            *,
+            hidden_dim: int,
+            heads: int,
+            dropout: float,
+            feedforward_multiplier: int,
+        ) -> None:
+            super().__init__()
+            self.self_norm = nn.LayerNorm(hidden_dim)
+            self.self_attention = nn.MultiheadAttention(
+                hidden_dim,
+                heads,
+                dropout=dropout,
+                batch_first=True,
+            )
+            self.program_norm = nn.LayerNorm(hidden_dim)
+            self.program_attention = nn.MultiheadAttention(
+                hidden_dim,
+                heads,
+                dropout=dropout,
+                batch_first=True,
+            )
+            self.feedforward_norm = nn.LayerNorm(hidden_dim)
+            self.feedforward = nn.Sequential(
+                nn.Linear(hidden_dim, feedforward_multiplier * hidden_dim),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(feedforward_multiplier * hidden_dim, hidden_dim),
+            )
+            self.dropout = nn.Dropout(dropout)
+
+        def forward(self, hidden: Any, *, node_mask: Any, program_tokens: Any) -> Any:
+            normalized = self.self_norm(hidden)
+            attended, _ = self.self_attention(
+                normalized,
+                normalized,
+                normalized,
+                key_padding_mask=~node_mask,
+                need_weights=False,
+            )
+            hidden = (hidden + self.dropout(attended)) * node_mask[:, :, None]
+            normalized = self.program_norm(hidden)
+            attended, _ = self.program_attention(
+                normalized,
+                program_tokens,
+                program_tokens,
+                need_weights=False,
+            )
+            hidden = (hidden + self.dropout(attended)) * node_mask[:, :, None]
+            hidden = hidden + self.dropout(self.feedforward(self.feedforward_norm(hidden)))
+            return hidden * node_mask[:, :, None]
+
     class UgiJointSparseFlow(nn.Module):
         """Shared sequence denoiser for topology and chemistry variables."""
 
@@ -406,6 +462,9 @@ if nn is not None:
             conditioning_mode: str = "full_morphology",
             decoration_state_conditioning: str = "legacy_global",
             semantic_organization: str = "role_structured",
+            backbone: str = "bidirectional_gru",
+            attention_heads: int = 8,
+            transformer_feedforward_multiplier: int = 4,
         ) -> None:
             super().__init__()
             if (
@@ -425,8 +484,20 @@ if nn is not None:
                 or conditioning_mode not in {"full_morphology", "size_only"}
                 or decoration_state_conditioning
                 not in {"legacy_global", "bidirectional_anchor_local"}
+                or backbone not in {"bidirectional_gru", "ugi_program_transformer"}
+                or attention_heads < 1
+                or transformer_feedforward_multiplier < 1
             ):
                 raise UgiJointSparseFlowError("invalid joint sparse architecture")
+            if backbone == "ugi_program_transformer" and (
+                hidden_dim % attention_heads
+                or semantic_organization != "role_structured"
+                or conditioning_mode != "full_morphology"
+            ):
+                raise UgiJointSparseFlowError(
+                    "Ugi program Transformer requires role-structured full morphology and "
+                    "a hidden dimension divisible by its attention heads"
+                )
             self.maximum_children = maximum_children
             self.atom_classes = atom_classes
             self.bond_classes = bond_classes
@@ -439,6 +510,9 @@ if nn is not None:
             self.hidden_dim = hidden_dim
             self.conditioning_mode = conditioning_mode
             self.decoration_state_conditioning = decoration_state_conditioning
+            self.backbone = backbone
+            self.attention_heads = attention_heads
+            self.transformer_feedforward_multiplier = transformer_feedforward_multiplier
             self.offspring_embedding = nn.Embedding(maximum_children + 1, hidden_dim)
             self.atom_embedding = nn.Embedding(atom_classes, hidden_dim)
             self.bond_embedding = nn.Embedding(bond_classes, hidden_dim)
@@ -501,13 +575,35 @@ if nn is not None:
                 nn.Linear(hidden_dim, hidden_dim),
             )
             self.input_norm = nn.LayerNorm(hidden_dim)
-            self.sequence = nn.GRU(
-                hidden_dim,
-                hidden_dim // 2,
-                num_layers=layers,
-                batch_first=True,
-                dropout=dropout if layers > 1 else 0.0,
-                bidirectional=True,
+            self.sequence = (
+                nn.GRU(
+                    hidden_dim,
+                    hidden_dim // 2,
+                    num_layers=layers,
+                    batch_first=True,
+                    dropout=dropout if layers > 1 else 0.0,
+                    bidirectional=True,
+                )
+                if backbone == "bidirectional_gru"
+                else None
+            )
+            self.program_global_token = (
+                nn.Parameter(torch.zeros(hidden_dim))
+                if backbone == "ugi_program_transformer"
+                else None
+            )
+            self.transformer_blocks = (
+                nn.ModuleList(
+                    _UgiProgramTransformerBlock(
+                        hidden_dim=hidden_dim,
+                        heads=attention_heads,
+                        dropout=dropout,
+                        feedforward_multiplier=transformer_feedforward_multiplier,
+                    )
+                    for _ in range(layers)
+                )
+                if backbone == "ugi_program_transformer"
+                else None
             )
             self.output = nn.Sequential(
                 nn.LayerNorm(hidden_dim),
@@ -581,6 +677,33 @@ if nn is not None:
                         + self.attachment_embeddings[role_index](programs[:, 9 + role_index])
                     )
             return context
+
+        def _program_tokens(self, programs: Any, t: Any) -> Any:
+            """Return one global and three role-local coarse-program tokens."""
+
+            if (
+                self.backbone != "ugi_program_transformer"
+                or self.program_global_token is None
+                or self.count_embeddings is None
+                or self.junction_embeddings is None
+                or self.cycle_embeddings is None
+                or self.attachment_embeddings is None
+            ):
+                raise UgiJointSparseFlowError("program tokens require the Ugi program Transformer")
+            role_tokens = []
+            for role_index in range(len(ROLE_NAMES)):
+                token = (
+                    self.role_embedding.weight[role_index][None]
+                    + self.count_embeddings[role_index](programs[:, role_index])
+                    + self.junction_embeddings[role_index](programs[:, 3 + role_index])
+                    + self.cycle_embeddings[role_index](programs[:, 6 + role_index])
+                    + self.attachment_embeddings[role_index](programs[:, 9 + role_index])
+                )
+                role_tokens.append(token)
+            roles = torch.stack(role_tokens, dim=1)
+            global_token = roles.mean(dim=1) + self.program_global_token[None]
+            tokens = torch.cat((global_token[:, None], roles), dim=1)
+            return tokens + self.time_embedding(t[:, None])[:, None, :]
 
         def forward(
             self,
@@ -680,18 +803,31 @@ if nn is not None:
                 )
                 hidden = hidden + self.decoration_to_node(decoration_node_context)
             hidden = self.input_norm(hidden) * node_mask[:, :, None]
-            packed = pack_padded_sequence(
-                hidden,
-                node_mask.sum(dim=1).to("cpu"),
-                batch_first=True,
-                enforce_sorted=False,
-            )
-            packed_output, _ = self.sequence(packed)
-            hidden, _ = pad_packed_sequence(
-                packed_output,
-                batch_first=True,
-                total_length=shape[1],
-            )
+            if self.backbone == "bidirectional_gru":
+                if self.sequence is None:
+                    raise UgiJointSparseFlowError("GRU backbone is unexpectedly absent")
+                packed = pack_padded_sequence(
+                    hidden,
+                    node_mask.sum(dim=1).to("cpu"),
+                    batch_first=True,
+                    enforce_sorted=False,
+                )
+                packed_output, _ = self.sequence(packed)
+                hidden, _ = pad_packed_sequence(
+                    packed_output,
+                    batch_first=True,
+                    total_length=shape[1],
+                )
+            else:
+                if self.transformer_blocks is None:
+                    raise UgiJointSparseFlowError("Transformer backbone is unexpectedly absent")
+                program_tokens = self._program_tokens(programs, t)
+                for block in self.transformer_blocks:
+                    hidden = block(
+                        hidden,
+                        node_mask=node_mask,
+                        program_tokens=program_tokens,
+                    )
             hidden = (hidden + self.output(hidden)) * node_mask[:, :, None]
             global_hidden = hidden.sum(dim=1) / node_mask.sum(dim=1, keepdim=True).clamp(min=1)
             query = self.decoration_query(global_hidden)

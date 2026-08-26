@@ -1,0 +1,97 @@
+{
+  "schema_version": "forge.program_semantic_intervention_config.v1",
+  "target_program": "ugi_3cr_agile",
+  "mismatch_programs": [
+    "bl_2023_repeated_aza_michael",
+    "lx_2024_repeated_reductive_amination"
+  ],
+  "checkpoint_step": 1700,
+  "inputs": {
+    "production_design": {
+      "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+      "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+      "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "training_result_r0": {
+      "path": "runs/phase1-transformer-synthesis-program-production-h100/6b3798b98ac61d2a20f5ca51cc331fe05d0fcef7142b15c70dd36433c116e860/stages/training/artifacts/result.json",
+      "sha256": "f0afa783cfa7cc82710bd260c4e35275ef6dd2a3b98cb9eb78f3c566784eba58"
+    },
+    "checkpoint_archive_r0": {
+      "path": "runs/phase1-transformer-synthesis-program-production-h100/6b3798b98ac61d2a20f5ca51cc331fe05d0fcef7142b15c70dd36433c116e860/stages/training/artifacts/checkpoints.tar",
+      "sha256": "8410936b311326c206b42f4e41da19a29c6265f28111142936cac4e55812924a"
+    },
+    "training_result_r1": {
+      "path": "runs/phase1-transformer-synthesis-program-production-h100/df5ef056b9455a93550a7c9f412646c72bbe9adbd3b78cf603ca6a603b4bb8e0/stages/training/artifacts/result.json",
+      "sha256": "b8e26e321f650c7dddeaebc483fe15e11cdae7335c003e7dd351db2e72c4017b"
+    },
+    "checkpoint_archive_r1": {
+      "path": "runs/phase1-transformer-synthesis-program-production-h100/df5ef056b9455a93550a7c9f412646c72bbe9adbd3b78cf603ca6a603b4bb8e0/stages/training/artifacts/checkpoints.tar",
+      "sha256": "585afd8ac9c69d9b31534d02aa5258d19afbd106a9374ce5d5b076b6adf5f5d4"
+    },
+    "training_result_r2": {
+      "path": "runs/_recovered/phase1-transformer-synthesis-program-production-h100/fa922f643892d730e059fa1c7d44a7b9f5cb5623092222bfe85c3277d23937e3/training_stage/result.json",
+      "sha256": "fe247c35495d56861f46e6eb408371b9058dec9b5c2faedf65321d1071375e20"
+    },
+    "checkpoint_archive_r2": {
+      "path": "runs/_recovered/phase1-transformer-synthesis-program-production-h100/fa922f643892d730e059fa1c7d44a7b9f5cb5623092222bfe85c3277d23937e3/training_stage/checkpoints.tar",
+      "sha256": "301cf92cbeba47a5859f1a1e664ffa76ed75e8e84a7e1ee4a9525e46eb82447e"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-24",
+    "scope": "Paired inference-only reaction-program mismatch diagnostic over the three frozen H100 training replicates; no retraining, route calls, oracle calls or candidate selection."
+  },
+  "smoke": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "samples": 2,
+    "sample_steps": 2,
+    "batch_size": 2
+  },
+  "full": {
+    "device": "cuda",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "samples": 3072,
+    "sample_steps": 32,
+    "batch_size": 32
+  },
+  "aggregate": {
+    "method": "paired_training_seed_bootstrap",
+    "confidence_level": 0.95,
+    "resamples": 10000,
+    "seed": 20260829
+  },
+  "candidate_selection": false,
+  "route_calls": 0,
+  "oracle_calls": 0
+}

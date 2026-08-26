@@ -1,0 +1,117 @@
+{
+  "cache": {
+    "bytes": 21600,
+    "logical_path": "cache.json",
+    "sha256": "bd053e2d79e584e4f119d96aed73810f56d49bded62bf7dc8525d187f4b855bf"
+  },
+  "config": {
+    "bytes": 2142,
+    "path": "configs/multireaction/shared_training_cache_overfit_v1.json",
+    "sha256": "2cd416a185d01a4f59f09a5342ab3fca1a0d449458289aa3f6a284edf5557ae8"
+  },
+  "gates": {
+    "aromatic_state_space_preserved": true,
+    "auxiliary_core_remains_learnable": true,
+    "equal_program_sampling_mass": true,
+    "full_declared_closure_support_preserved": true,
+    "full_declared_size_support_preserved": true,
+    "one_training_record_per_program": true,
+    "ugi_five_fixed_atoms": true,
+    "ugi_fixed_atoms_match_existing_adapter": true,
+    "ugi_fixed_edges_match_existing_adapter": true
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "bytes": 1963,
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "multireaction_atlas": {
+      "bytes": 21508,
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "multireaction_semantic_atoms": {
+      "bytes": 168746,
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "multireaction_splits": {
+      "bytes": 12977,
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "representation_config": {
+      "bytes": 3530,
+      "path": "configs/multireaction/shared_synthesis_program_representation_v1.json",
+      "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"
+    },
+    "ugi_assignments": {
+      "bytes": 4044135,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_semantic_atoms": {
+      "bytes": 40656153,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "ugi_semantic_products": {
+      "bytes": 9614211,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    }
+  },
+  "nonclaims": [
+    "The three-record cache is a bounded integration and overfit set, not generalization evidence.",
+    "Exact adapter agreement is not route certification or synthesis-success probability.",
+    "This cache does not authorize production multi-reaction training."
+  ],
+  "schema_version": "forge.synthesis_program_cache_qualification.v1",
+  "seed": 20260823,
+  "selected_records": {
+    "bl_2023_repeated_aza_michael": {
+      "closures": 1,
+      "fixed_atoms": 0,
+      "fixed_closure_edges": 0,
+      "fixed_parent_edges": 0,
+      "fold": "train",
+      "heavy_atoms": 57,
+      "record_id": "mrp-b8896834bf61053a",
+      "source_weight": 0.635658914729,
+      "training_weight": 0.3333333333333333
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "closures": 1,
+      "fixed_atoms": 0,
+      "fixed_closure_edges": 0,
+      "fixed_parent_edges": 0,
+      "fold": "train",
+      "heavy_atoms": 33,
+      "record_id": "mrp-6b2e352993dd5ffe",
+      "source_weight": 2.34285714286,
+      "training_weight": 0.3333333333333333
+    },
+    "ugi_3cr_agile": {
+      "closures": 1,
+      "fixed_atoms": 5,
+      "fixed_closure_edges": 0,
+      "fixed_parent_edges": 7,
+      "fold": "train",
+      "heavy_atoms": 46,
+      "record_id": "EUGI-b6cb28a615a4f7c82c91",
+      "source_weight": 0.025,
+      "training_weight": 0.3333333333333333
+    }
+  },
+  "status": "pass",
+  "ugi_regression": {
+    "atom_states_exact": true,
+    "bond_states_and_endpoints_exact": true,
+    "established_fixed_atom_count": 5,
+    "established_fixed_edge_count": 7,
+    "fixed_atom_count": 5,
+    "fixed_edge_count": 7,
+    "product_id": "EUGI-b6cb28a615a4f7c82c91"
+  }
+}

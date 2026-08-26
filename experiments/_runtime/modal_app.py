@@ -13,8 +13,8 @@ from typing import Any
 
 import modal
 
-LOCAL_REPO = Path(__file__).resolve().parents[2]
 IMAGE_PROJECT = Path("/opt/forge-project")
+LOCAL_REPO = Path(__file__).resolve().parents[2] if modal.is_local() else IMAGE_PROJECT
 VOLUME_ROOT = Path("/forge-workspace")
 VOLUME_NAME = "forge-experiment-runs"
 
@@ -22,6 +22,11 @@ app = modal.App("forge-experiment-runner")
 experiment_volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 image = (
     modal.Image.debian_slim(python_version="3.11")
+    # Modal imports this entrypoint from its /root mount before the remote function body runs.
+    # The project itself is copied into IMAGE_PROJECT, so make that copy importable during
+    # function hydration as well as during experiment execution.
+    .env({"PYTHONPATH": str(IMAGE_PROJECT)})
+    .apt_install("libsm6", "libxext6", "libxrender1")
     .add_local_file(
         LOCAL_REPO / "pyproject.toml",
         remote_path=str(IMAGE_PROJECT / "pyproject.toml"),
@@ -33,7 +38,7 @@ image = (
         copy=True,
     )
     .uv_sync(
-        str(IMAGE_PROJECT),
+        str(LOCAL_REPO),
         extras=["oracle", "torch"],
         extra_options="--no-install-project",
         frozen=True,
@@ -121,6 +126,7 @@ def execute_experiment(
 
     from experiments import load_catalog
     from experiments._runtime import ExperimentRunner, ModalRuntimeBackend
+    from experiments._runtime.modal import modal_volume_relative_path
     from experiments._runtime.source import source_fingerprint
 
     observed_source = source_fingerprint(repo)
@@ -147,7 +153,7 @@ def execute_experiment(
     return {
         "backend": "modal",
         "experiment_id": result.plan.experiment_id,
-        "remote_run_path": str(result.plan.run_dir.relative_to(VOLUME_ROOT)),
+        "remote_run_path": modal_volume_relative_path(result.plan.run_dir, VOLUME_ROOT),
         "run_id": result.plan.run_id,
         "source_sha256": result.plan.source_sha256,
         "stages": list(result.stage_manifests),
@@ -164,7 +170,9 @@ def _download_run(remote_path: str, local_path: Path) -> None:
         verify_run_directory(local_path)
         return
     local_path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = Path(tempfile.mkdtemp(prefix=f".{local_path.name}.", dir=local_path.parent))
+    from experiments._runtime.modal import modal_run_staging_paths
+
+    temporary_root, temporary = modal_run_staging_paths(local_path)
     prefix = remote_path.strip("/") + "/"
     try:
         entries = experiment_volume.listdir(remote_path, recursive=True)
@@ -198,8 +206,9 @@ def _download_run(remote_path: str, local_path: Path) -> None:
 
         verify_run_directory(temporary)
         os.rename(temporary, local_path)
+        temporary_root.rmdir()
     except BaseException:
-        shutil.rmtree(temporary, ignore_errors=True)
+        shutil.rmtree(temporary_root, ignore_errors=True)
         raise
 
 
@@ -244,7 +253,6 @@ def main(
         resume,
         request["source_sha256"],
     )
-    experiment_volume.reload()
     local_run = LOCAL_REPO / "runs" / result["experiment_id"] / result["run_id"]
     _download_run(result["remote_run_path"], local_run)
     result["local_run_path"] = str(local_run)

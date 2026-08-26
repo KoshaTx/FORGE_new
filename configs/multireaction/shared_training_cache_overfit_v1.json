@@ -1,0 +1,49 @@
+{
+  "schema_version": "forge.synthesis_program_cache_config.v1",
+  "seed": 20260823,
+  "inputs": {
+    "representation_config": {
+      "path": "configs/multireaction/shared_synthesis_program_representation_v1.json",
+      "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "ugi_semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "multireaction_semantic_atoms": {
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    }
+  },
+  "model_support": {
+    "maximum_heavy_atoms": 194,
+    "maximum_closures": 3,
+    "bond_classes": 4
+  },
+  "selection": {
+    "fold": "train",
+    "records_per_program": 1,
+    "program_prior": "equal_total_mass"
+  },
+  "claim_boundary": "Bounded three-record cache and Ugi compatibility gate only; no generalization, synthesis-success, route-certification, or production-training claim."
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-local-chemistry-support",
+  "description": "Build a training-fold-only program- and role-local chemistry policy for vocabulary-free constrained decoding and method-blind assessment.",
+  "root_seed": 20260825,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "support",
+      "implementation": "model.local-chemistry-support.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/local_chemistry_support_v1.json",
+        "sha256": "c4a0553bf1be8021f8f787402d36e5f92e467c958274d1b6a722652996a29bca"
+      },
+      "inputs": {
+        "production_cache": {
+          "path": "results/phase1/bl_core_constrained_production_cache_v1/cache.npz",
+          "sha256": "3744e066325f3e203139797ab48eb54725f95ce09b39209905fb656df53c5973"
+        }
+      },
+      "outputs": {
+        "policy": {
+          "path": "policy.json",
+          "schema_version": "forge.local_chemistry_support.v1"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.local_chemistry_support_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "local-chemistry-support"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-25 explicit user instruction to add local chemistry constraints without retraining",
+    "candidate_selection": false,
+    "finite_component_vocabulary": false
+  },
+  "nonclaims": [
+    "Local support is not synthesis success, stability, safety, activity or route closure.",
+    "No generated candidate is selected by this build."
+  ]
+}

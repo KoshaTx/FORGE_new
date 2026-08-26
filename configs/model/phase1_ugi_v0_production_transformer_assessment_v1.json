@@ -1,0 +1,60 @@
+{
+  "schema_version": "forge.ugi_v0_transformer_assessment_config.v1",
+  "scientific_question": "Under the same 3,072 held Ugi morphology programs and the same no-repair stochastic terminal decoder, how do the authoritative train-fold production-budget v0 model and the Ugi-only Transformer compare on exact L1, structural realism, local chemistry, role-local tail morphology, diversity, novelty and held-component behavior?",
+  "expected_attempts": 3072,
+  "seed_label": 0,
+  "inputs": {
+    "v0_samples": {
+      "path": "results/phase1/forge_held_family_stage2_v1/samples_prod_budget.json",
+      "sha256": "536dc7471c1f4d1f0a4b807892c4f6f1cc55a0bcfbad3974549a93d05a6a8d4c"
+    },
+    "v0_sampler_config": {
+      "path": "configs/model/phase1_ugi_v0_production_sampling_contract_v1.json",
+      "sha256": "4bb295736e28f28d772dc9505c3ecd5051cf545cd39280b335b0b0eebc3ccb96"
+    },
+    "v0_training_config": {
+      "path": "configs/model/phase1_ugi_decoration_coupling_challenger_v1.json",
+      "sha256": "8943953b1889a0c5334de96425581e821c93d64535befcbc5fa82709e07eebb4"
+    },
+    "transformer_samples": {
+      "path": "runs/phase1-ugi-v0-port-transformer-seed0-sampling-v1/4d7d2a67253732f7428e450ef8af4d44e769222c3fbd8aeae74b9900022ac7a9/stages/sample/artifacts/result.json",
+      "sha256": "c8686ea8033a4e400e7eb7c07cf4c52a45328ad69e37e89429cec7d4c930b51e"
+    },
+    "transformer_sampler_config": {
+      "path": "experiments/phase1/product_l1/configs/ugi_v0_port_transformer_seed0_sampling_v1.json",
+      "sha256": "e6e2d1cfce89c04a83a9642dff4298a42acc46c30bad15ff2ce69d803d88413a"
+    },
+    "transformer_training_config": {
+      "path": "configs/model/phase1_ugi_v0_port_transformer_seed0_v1.json",
+      "sha256": "00187e9e3d5b9973ddccb05b95640d127cdceda9d05359378e0022b2557c7b7f"
+    },
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    }
+  },
+  "reporting": {
+    "candidate_selection": false,
+    "single_seed_descriptive_comparison": true,
+    "negative_results_are_reported": true,
+    "reductive_amination_substructure_rate_reported": false
+  },
+  "nonclaims": [
+    "This single-seed, training-budget-unmatched diagnostic does not isolate an architecture effect or establish variance-estimated model superiority.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Training-supported local chemistry and role morphology are not route closure, stability, safety, ionization, delivery or biological activity.",
+    "The assessment performs no generation, repair, retry, route, oracle or candidate-selection calls."
+  ]
+}

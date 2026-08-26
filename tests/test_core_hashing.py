@@ -15,6 +15,7 @@ import pytest
 
 from forge.core.hashing import (
     PinError,
+    artifact_record,
     is_sha256,
     pin_record,
     resolve_pin,
@@ -151,6 +152,18 @@ def test_pin_record_paths_are_relative_for_portability(tmp_path: Path) -> None:
     target = tmp_path / "input.json"
     target.write_bytes(b"{}")
     assert not Path(pin_record(target, tmp_path)["path"]).is_absolute()
+
+
+def test_artifact_record_uses_a_logical_path_not_a_staging_directory(tmp_path: Path) -> None:
+    first = tmp_path / "first" / ".stage.partial" / "artifact.json"
+    second = tmp_path / "second" / "artifact.json"
+    first.parent.mkdir(parents=True)
+    second.parent.mkdir(parents=True)
+    first.write_bytes(b"same")
+    second.write_bytes(b"same")
+    assert artifact_record(first, logical_path="cache/artifact.json") == artifact_record(
+        second, logical_path="cache/artifact.json"
+    )
 
 
 def test_sha256_json_is_order_independent() -> None:

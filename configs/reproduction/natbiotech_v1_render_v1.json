@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.natbiotech_v1_renderer_config.v1",
+  "bootstrap_seed": 20260821,
+  "bootstrap_resamples": 10000,
+  "expected_seeds": [20260825, 20260826, 20260827],
+  "common_method_order": [
+    "rgfn",
+    "defog_unconditional",
+    "genmol_safe",
+    "finite_catalogue_oracle",
+    "learned_inventory_selector",
+    "shared_null_posthoc",
+    "fact_matched",
+    "fact_generous",
+    "forge_transformer"
+  ],
+  "mechanism_arm_order": [
+    "input_only_program",
+    "no_role_loss",
+    "no_core_loss",
+    "no_routed_adapters",
+    "no_gradient_conflict_control",
+    "fact_matched",
+    "fact_generous",
+    "full_transformer"
+  ],
+  "display_names": {
+    "rgfn": "RGFN",
+    "defog_unconditional": "DeFoG unconditional",
+    "genmol_safe": "GenMol/SAFE",
+    "finite_catalogue_oracle": "Finite catalogue oracle",
+    "learned_inventory_selector": "Learned inventory selector",
+    "shared_null_posthoc": "Shared-null + post-hoc",
+    "fact_matched": "FACT-matched",
+    "fact_generous": "FACT-generous",
+    "forge_transformer": "FORGE Transformer",
+    "input_only_program": "Input-only program",
+    "no_role_loss": "No role loss",
+    "no_core_loss": "No core loss",
+    "no_routed_adapters": "No routed adapters",
+    "no_gradient_conflict_control": "No gradient conflict control",
+    "full_transformer": "FORGE Transformer"
+  },
+  "held_reaction_family_is_secondary_not_hard_gate": true,
+  "candidate_selection": false
+}

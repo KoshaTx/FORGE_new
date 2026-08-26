@@ -10,6 +10,7 @@ from experiments._runtime.spec import ExperimentSpec, StageSpec
 
 REPO = Path(__file__).resolve().parents[1]
 PRODUCT_L1 = REPO / "experiments" / "phase1" / "product_l1"
+MULTIREACTION = REPO / "experiments" / "phase1" / "multireaction"
 
 
 def _json(path: Path) -> dict[str, object]:
@@ -115,3 +116,109 @@ def test_importing_the_runner_does_not_pull_in_the_training_stack() -> None:
         "product_l1 stages import the science at module level, making torch a hard requirement "
         f"for every runner command: {sorted(domain)}"
     )
+
+
+def test_multireaction_smoke_has_an_authenticated_checkpoint_boundary() -> None:
+    load_catalog()
+    spec = ExperimentSpec.load(MULTIREACTION / "training_smoke.json")
+    assert [stage.implementation for stage in spec.stages] == [
+        "model.multireaction.training.v2",
+        "model.multireaction.sampling.v2",
+    ]
+    assert _stage(spec, "sampling").needs == ("training",)
+    for stage in spec.stages:
+        registry.resolve(stage.implementation)
+    training = _json(REPO / "configs" / "multireaction" / "training_smoke_v1.json")
+    assert training["training"]["arms"] == [
+        "program",
+        "null",
+        "program_id_shuffled",
+    ]
+    assert training["model"]["maximum_heavy_atoms"] == 194
+    assert training["expected"]["maxima"]["heavy_atoms"] == 194
+    assert _stage(spec, "training").outputs["checkpoint"].path == "checkpoint.json"
+
+
+def test_multireaction_overfit_gate_is_separate_and_cannot_authorize_production() -> None:
+    load_catalog()
+    spec = ExperimentSpec.load(MULTIREACTION / "overfit.json")
+    assert [stage.stage_id for stage in spec.topological_stages()] == [
+        "training",
+        "sampling",
+        "qualification",
+    ]
+    assert _stage(spec, "qualification").needs == ("training", "sampling")
+    for stage in spec.stages:
+        registry.resolve(stage.implementation)
+    training = _json(REPO / "configs" / "multireaction" / "training_overfit_v1.json")
+    sampling = _json(REPO / "configs" / "multireaction" / "sampling_overfit_v1.json")
+    assert training["selection"] == {
+        "mode": "deterministic_records_per_program",
+        "records_per_program": 1,
+    }
+    assert training["training"]["arms"] == ["program"]
+    assert sampling["sampling"]["layout_source"] == "checkpoint_training_semantics"
+    assert "production launch" in " ".join(spec.nonclaims).lower()
+
+
+def test_shared_representation_is_a_full_census_before_production_training() -> None:
+    load_catalog()
+    spec = ExperimentSpec.load(MULTIREACTION / "shared_representation.json")
+    assert len(spec.stages) == 1
+    stage = spec.stages[0]
+    assert stage.implementation == "model.shared-synthesis-program-representation.v1"
+    registry.resolve(stage.implementation)
+    assert stage.resources.device == "cpu"
+    assert stage.resources.timeout_seconds == 1800
+    config = _json(
+        REPO / "configs" / "multireaction" / "shared_synthesis_program_representation_v1.json"
+    )
+    assert config["support_bounds"] == {
+        "maximum_heavy_atoms": 194,
+        "maximum_closures": 3,
+        "atom_vocabulary": "phase1_product_v3_explicit_aromaticity",
+    }
+    assert sum(program["expected_records"] for program in config["programs"]) == 113_150
+    assert "production" in " ".join(spec.nonclaims).lower()
+
+
+def test_shared_program_integration_keeps_cache_training_sampling_separate() -> None:
+    load_catalog()
+    spec = ExperimentSpec.load(MULTIREACTION / "shared_integration.json")
+    assert [stage.stage_id for stage in spec.topological_stages()] == [
+        "cache",
+        "training",
+        "sampling",
+        "qualification",
+    ]
+    assert _stage(spec, "training").needs == ("cache",)
+    assert _stage(spec, "sampling").needs == ("cache", "training")
+    assert _stage(spec, "qualification").needs == ("cache", "training", "sampling")
+    for stage in spec.stages:
+        registry.resolve(stage.implementation)
+    cache = _json(REPO / "configs/multireaction/shared_training_cache_overfit_v1.json")
+    assert cache["selection"] == {
+        "fold": "train",
+        "records_per_program": 1,
+        "program_prior": "equal_total_mass",
+    }
+    assert "production" in " ".join(spec.nonclaims).lower()
+
+
+def test_shared_production_design_is_a_nonlaunching_preflight() -> None:
+    load_catalog()
+    spec = ExperimentSpec.load(MULTIREACTION / "shared_production_design.json")
+    assert len(spec.stages) == 1
+    stage = spec.stages[0]
+    assert stage.implementation == "model.shared-synthesis-program-production-design.v1"
+    registry.resolve(stage.implementation)
+    assert stage.resources.device == "cpu"
+    config = _json(REPO / "configs/multireaction/shared_production_comparison_design_v1.json")
+    training = config["training"]
+    assert isinstance(training, dict)
+    assert training["folds"] == ["train"]
+    assert training["checkpoint_selection"] == "fixed_final_step"
+    execution = config["execution"]
+    assert isinstance(execution, dict)
+    assert execution["production_launch_authorized"] is False
+    assert "does not launch" in " ".join(spec.nonclaims).lower()

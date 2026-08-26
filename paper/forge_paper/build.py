@@ -24,16 +24,16 @@ _EXCLUDED_DIRECTORIES = {"forge_paper"}
 
 
 def _copy_sources(repo: Path, destination: Path, contract: PaperContract) -> None:
-    paper = repo / "paper"
+    manuscript = (repo / contract.source.path).parent
     destination.mkdir(parents=True, exist_ok=True)
-    for source in sorted(paper.iterdir()):
+    for source in sorted(manuscript.iterdir()):
         if source.is_dir():
             continue
         if source.suffix in _BUILD_SUFFIXES:
             continue
         shutil.copy2(source, destination / source.name)
     for pin in contract.figure_outputs:
-        relative = Path(pin.path).relative_to("paper")
+        relative = (repo / pin.path).relative_to(manuscript)
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(repo / pin.path, target)
@@ -62,7 +62,9 @@ def _run_latex(work: Path) -> None:
             command, cwd=work, env=environment, capture_output=True, text=True, check=False
         )
         if completed.returncode:
-            raise RuntimeError(f"paper build failed:\n{completed.stdout[-2000:]}\n{completed.stderr[-1000:]}")
+            raise RuntimeError(
+                f"paper build failed:\n{completed.stdout[-2000:]}\n{completed.stderr[-1000:]}"
+            )
         return
     if not shutil.which("pdflatex"):
         raise RuntimeError("paper build requires latexmk or pdflatex")
@@ -102,9 +104,7 @@ def _referenced_figures(source: str) -> tuple[str, ...]:
         sorted(
             {
                 match.group(1)
-                for match in re.finditer(
-                    r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", source
-                )
+                for match in re.finditer(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", source)
             }
         )
     )
@@ -145,7 +145,9 @@ def build_overleaf_bundle(
             for path in members
             if not (set(path.relative_to(stage).parts) & _EXCLUDED_DIRECTORIES)
         ]
-        with tempfile.NamedTemporaryFile(prefix="forge-overleaf-", suffix=".zip", delete=False) as handle:
+        with tempfile.NamedTemporaryFile(
+            prefix="forge-overleaf-", suffix=".zip", delete=False
+        ) as handle:
             temporary_zip = Path(handle.name)
         try:
             with zipfile.ZipFile(temporary_zip, "w", compression=zipfile.ZIP_DEFLATED) as archive:

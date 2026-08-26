@@ -1,0 +1,62 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-potency-study-corpus",
+  "description": "Build the active potency corpus directly from LNPDB with explicit study, endpoint, constitutional-identity, and mixture-exclusion boundaries.",
+  "root_seed": 20260821,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "build",
+      "implementation": "potency.study-corpus.v2",
+      "needs": [],
+      "config": {
+        "path": "configs/bio/phase1_potency_study_corpus_v2.json",
+        "sha256": "4593b09d97323cef3906ae034cd8621bde6395c7c352f6cf0cb92cb96102d99e"
+      },
+      "inputs": {
+        "lnpdb": {
+          "path": "data/vendor/lnpdb_fc7c389.csv",
+          "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+        }
+      },
+      "outputs": {
+        "observations": {
+          "path": "observations.csv.gz",
+          "schema_version": "forge.potency_study_observations.v2"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.potency_study_corpus_result.v2"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 1,
+        "workers": 0,
+        "memory_mb": 1024,
+        "timeout_seconds": 120,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "phase1-potency-study-corpus"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "data consolidation only",
+    "scientific_identity": "single_source_lnpdb_biological_studies"
+  },
+  "nonclaims": [
+    "This data build performs no biological guidance or candidate selection.",
+    "AGILE B4 mixture measurements are excluded from the modelling artifact.",
+    "LNPDB normalized targets are never pooled across studies or presented as raw assay values.",
+    "Reaction-program admission and evidence are owned by separate reaction-program corpora."
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "forge.known_artifact_drift.v2",
-  "recorded_utc": "2026-08-18",
+  "recorded_utc": "2026-08-24",
   "why": "Artifacts pin the inputs they were computed from. A few historical inputs were already unrecoverable when this repository was consolidated. Each exception is matched on the exact original path and missing expected digest. Recoverable versions belong in provenance/frozen-code and remain byte-verified; a new missing digest or any corrupted archived blob fails the gate. Entries marked 'pre-consolidation revision' share one cause and one search, recorded 2026-08-19. Their experiments ran before the FORGE engine was consolidated into this tree, against a working tree carrying uncommitted edits, so the config recorded the hash of a file state that was never committed anywhere. Each was searched for by content in every blob of this repository (2,194 over 31 commits), every blob of the predecessor forge repository (2,226 over 245 commits), and every copy of the filename on the originating filesystem (153 copies). None matched, and each file already differed from its pinned digest at cc947f5, the first commit here. Every declaring config carries an explicit frozen_* status.",
   "how_to_add": "Do not add an entry to make a failing gate pass. An entry is only correct when the pinned bytes are genuinely unrecoverable AND the artifact that pinned them is frozen. If the input still exists somewhere, restore it instead.",
   "known_drift": [
@@ -248,6 +248,118 @@
       "actual": "08e40ed6e1531cdbc008676974c117da01bde8befe873650f267475f35b5619b",
       "declared_by": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
       "reason": "Pre-consolidation revision of test_ugi_fresh_pool_audit.py, declared by configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json. See `why` for the recovery search."
+    },
+    {
+      "path": "configs/baselines/external_ugi_v1.json",
+      "expected": "a57ae9df4737316b46e7e5c2e612069e43cdf27fc8bc9d3d6b98819af1dedf1c",
+      "actual": "84a169251c71ee78b91a3a6d50e05da28ed6148900f6cf4867ab8851a1ff2625",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The frozen implementation receipt captured an uncommitted intermediate manifest before the 2026-08-23 native-baseline audit. The old bytes were searched in every current-repository Git object, the frozen-code archive, the available working tree and task-temporary copies but were never committed or archived. The receipt remains immutable; the current readiness result supersedes it."
+    },
+    {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "expected": "27b03f7eb02b076ae7ffbed5b3e6fa17307b444f52d832d000def45c07a96976",
+      "actual": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The frozen implementation receipt captured an uncommitted intermediate assessment config before method-blind route-union support was added. No matching bytes were found in current-repository Git objects, the frozen-code archive, the available working tree or task-temporary copies. The receipt is preserved and superseded by a fresh current-source readiness result."
+    },
+    {
+      "path": "configs/multireaction/common_ugi_baseline_protocol_v1.json",
+      "expected": "c38e3b6b6cccbf886f13332ba2c59d18f115308f0fe628f5666b0ec58d27caaf",
+      "actual": "54951f190e3cecc91b3d37a22858a3be84a18d8ef42c295b29bb418b5e9f3e15",
+      "declared_by": "results/maintenance/paper_experiment_readiness_v1/result.json, results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "Two frozen receipts pin the same uncommitted pre-audit protocol bytes. Those bytes are absent from current-repository Git objects, archived blobs, the available working tree and task-temporary copies. The protocol was intentionally superseded to retain only scientifically admissible empirical methods; neither old receipt is rewritten."
+    },
+    {
+      "path": "configs/multireaction/learned_inventory_selector_v1.json",
+      "expected": "a95968f67951d2e394a13fdf6fdfaacf2d3d3cc06042f05feae4444282c680a6",
+      "actual": "ae32a279fac86bf8b5076b92f5ee0405289c9a3246a565419a232e3f358fa6d2",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The receipt pinned an uncommitted intermediate selector config before its common-protocol dependency was repinned. The exact old bytes are absent from current-repository Git objects, the historical archive, the available working tree and task-temporary copies; the immutable receipt is superseded rather than edited."
+    },
+    {
+      "path": "configs/reproduction/natbiotech_v1_experiments.json",
+      "expected": "e739a4362bbddc37491474b3bd0085f5b9a34effc42fcc16a59eed15106bf048",
+      "actual": "ac606c03ede01385f1e53db8a04cdb18fc4917b63381a9f823fb7ca6d913ec92",
+      "declared_by": "results/maintenance/paper_experiment_readiness_v1/result.json",
+      "reason": "The historical readiness receipt pins an uncommitted matrix from before the retained baseline and method-blind-union implementations. Its exact bytes are unavailable in current-repository Git objects, the frozen-code archive, the available working tree and task-temporary copies. A new current-source readiness result supersedes this receipt."
+    },
+    {
+      "path": "configs/reproduction/natbiotech_v1_experiments.json",
+      "expected": "bb2af93c1824674e7728fff71ce964299cacb7b1bb40e5c9cde0ac9d46405942",
+      "actual": "ac606c03ede01385f1e53db8a04cdb18fc4917b63381a9f823fb7ca6d913ec92",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The implementation receipt pins a later but still uncommitted matrix state that was superseded by the reviewed runnable-baseline contract. No matching bytes were found in current-repository Git objects, the frozen-code archive, the available working tree or task-temporary copies, so the old receipt remains immutable and is superseded."
+    },
+    {
+      "path": "configs/reproduction/natbiotech_v1_render_v1.json",
+      "expected": "9199cd313abebb3fe1e9f5cdd351ceaca9d9e9391bcef8b1ee4000f5f000ef4a",
+      "actual": "ed8410abb6ddc7bfdd0ac21ee10242d0ab31d93695f4ab9d6e441f3ebecae420",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The frozen receipt captured an uncommitted renderer config before excluded empirical rows were removed. No exact historical bytes exist in current-repository Git objects, the archive, the available working tree or task-temporary copies. The receipt is retained and a fresh result pins the current renderer."
+    },
+    {
+      "path": "experiments/phase1/multireaction/catalogue_baseline.py",
+      "expected": "190479d4b8377005c1e3b3defcb41298aea1152c0f4b9b0f046f45b6c2a562f3",
+      "actual": "c8027ef00c266c885ac9d4b2ac7eb61579417ac23eefa86a81f0028b8e7e9252",
+      "declared_by": "results/phase1/shared_synthesis_program_production_adjudication_v1/catalogue_evidence/replicate_0/catalogue_result.json, replicate_1/catalogue_result.json, replicate_2/catalogue_result.json",
+      "reason": "The three historical catalogue receipts pin the same uncommitted implementation revision. It was never committed or archived and could not be recovered by digest search. Those results remain historical; fresh catalogue replicates are required on the final source."
+    },
+    {
+      "path": "experiments/phase1/multireaction/layout_prior_benchmark.py",
+      "expected": "1a3b2fd7e68055430cc586521a0796bd08df0ceda1a84c4ece3718d34ba796c8",
+      "actual": "125a5f8abc2721717ed94dd3b03a63f188c519bef54249c388a4801b60443b0e",
+      "declared_by": "results/phase1/factorized_layout_sampling_benchmark_v1/result.json",
+      "reason": "The historical benchmark pins an uncommitted source revision that is absent from current-repository Git objects, archived blobs, the available working tree and task-temporary copies. The benchmark is preserved as historical evidence and does not qualify the current source."
+    },
+    {
+      "path": "paper/v1/FORGE_ICLR2027_paper.tex",
+      "expected": "169d211328866c2b5ccea94764347e2a1e17332898ec59ae15b9c39c71fbdf68",
+      "actual": "3cb8a516f4720a650baaab4f0b2845bbe3e77cbbd6fc793f05308f713ae9428f",
+      "declared_by": "results/maintenance/paper_experiment_readiness_v1/result.json",
+      "reason": "The readiness receipt pinned an uncommitted manuscript draft before the scientifically inadmissible empirical placeholders were removed. Its bytes are absent from current-repository Git objects, the archive, the available working tree and task-temporary copies; the old readiness conclusion remains historical and is superseded."
+    },
+    {
+      "path": "results/maintenance/root_package_architecture_v1/test_baseline.json",
+      "expected": "335c149d36ac30494c325474fc633199694095e07abca7694f150b080629f582",
+      "actual": "2f7ab01d9713bb1850f692ee8044f3b5a7dae3a319e4798073bd15758b47b0fc",
+      "declared_by": "results/maintenance/root_package_architecture_v1/result.json",
+      "reason": "The maintenance receipt pinned an uncommitted earlier report state. Its exact bytes were never committed or archived and are unrecoverable after digest search. The current report independently reproduces the same 201 known failures with zero new failures and supersedes the old report without editing it."
+    },
+    {
+      "path": "configs/multireaction/transformer_mechanism_study_v1.json",
+      "expected": "e8c6413788cf262b7296bb9a0b2d71608e4121b713609842a6cd5362b2f515d1",
+      "actual": "a7182c8b4661812cd8f1006857824e3367b4e930098f7bff13dd41fc558aeedb",
+      "declared_by": "results/phase1/paper_experiment_implementation_v1/result.json",
+      "reason": "The frozen implementation receipt pins an uncommitted mechanism-study config from before the reviewed BL-core-constrained final arm and repeat-aware controls were frozen. The expected bytes are absent from every version of this path in current-repository Git history, the frozen-code archive, the available working tree and task-temporary copies. The receipt remains historical; current smoke and subsequent production runs supersede its readiness claim."
+    },
+    {
+      "path": "configs/reproduction/natbiotech_v1_experiments.json",
+      "expected": "ac606c03ede01385f1e53db8a04cdb18fc4917b63381a9f823fb7ca6d913ec92",
+      "actual": "d94605d78b8d6b1d05a601b6674d3a8167cccba878f3f0ba7f517dfe062185f4",
+      "declared_by": "results/phase1/external_baseline_route_union_readiness_v1/result.json",
+      "reason": "The frozen external-readiness result pins an uncommitted matrix state from before final-arm production completion and the strict ordered results checklist. The expected bytes are absent from current-repository Git history, the frozen-code archive, the available working tree and task-temporary copies. The old readiness result is preserved and superseded by verified current-source runs rather than rewritten."
+    },
+    {
+      "path": "experiments/phase1/multireaction/production_adjudication.py",
+      "expected": "fae584327c2ac17b023356f76cdd2a60bc1910d147b396da007a18415f93139d",
+      "actual": "04e000c85df89be2e55a68536a6e008fa256b48c8be3396fe29ab7a261d2de30",
+      "declared_by": "results/phase1/shared_synthesis_program_production_adjudication_v1/result.json",
+      "reason": "The immutable negative four-arm aggregate pins an uncommitted adjudicator revision whose bytes are absent from current-repository Git history, the frozen-code archive, the available working tree and task-temporary copies. Its negative scientific result remains frozen. The promoted model is adjudicated by a separate current implementation and result, so the historical artifact is not rewritten."
+    },
+    {
+      "path": "paper/v1/FORGE_ICLR2027_paper.tex",
+      "expected": "3cb8a516f4720a650baaab4f0b2845bbe3e77cbbd6fc793f05308f713ae9428f",
+      "actual": "dff756e16cc061ed7d90082593f5a04e82c26da96c09b19790737b44f62fca2c",
+      "declared_by": "results/phase1/external_baseline_route_union_readiness_v1/result.json",
+      "reason": "The frozen readiness receipt pins an uncommitted manuscript draft from before verified final-arm values were inserted. The expected bytes are absent from current-repository Git history, the frozen-code archive, the available working tree and task-temporary copies. The readiness conclusion remains historical and does not authenticate later manuscript numbers."
+    },
+    {
+      "path": "results/maintenance/root_package_architecture_v1/test_baseline.json",
+      "expected": "2f7ab01d9713bb1850f692ee8044f3b5a7dae3a319e4798073bd15758b47b0fc",
+      "actual": "03d295a14ead434f7899438366f92b6be79cfb2e30c61c32431b8da2dac28843",
+      "declared_by": "results/phase1/external_baseline_route_union_readiness_v1/result.json",
+      "reason": "The frozen external-readiness result pins an uncommitted test-baseline report predating the current clean-cache collection. The expected bytes are absent from current-repository Git history, the frozen-code archive, the available working tree and task-temporary copies. The refreshed report independently retains exactly 201 documented failures with zero new failures and supersedes the old readiness input."
     }
   ]
 }

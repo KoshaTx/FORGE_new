@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.paper.forge_generated_sample_figure_config.v1",
+  "status": "frozen_display_only",
+  "inputs": {
+    "common_assessment_result": {
+      "path": "results/phase1/forge_transformer_common_assessment_seed0_v1/result.json",
+      "sha256": "a4fe7a637cf2caf8ed5e7fae54ba7fda2f96510cb83d127371da307de6ed6e1a"
+    },
+    "common_assessed_attempts": {
+      "path": "results/phase1/forge_transformer_common_assessment_seed0_v1/assessed_attempts.jsonl.gz",
+      "sha256": "1bf6fd7188f258be0e5a66659882951d6b8df568235bc17f642a0646c38186fb"
+    },
+    "realism_assessment_result": {
+      "path": "results/phase1/common_lipid_realism_v1/forge_transformer/seed0/result.json",
+      "sha256": "3106455cab4e54df8703f8400784e8c7314ad564e583e67a112fb3d22af396f1"
+    },
+    "realism_assessed_attempts": {
+      "path": "results/phase1/common_lipid_realism_v1/forge_transformer/seed0/assessed_attempts.jsonl.gz",
+      "sha256": "39035f67370d84c6fb860d078b7d68ac0d72f0369588554e789270e3a965be7d"
+    }
+  },
+  "selection": {
+    "method_id": "forge_transformer",
+    "seed": 20260825,
+    "program_id": "ugi_3cr_agile",
+    "display_count": 3,
+    "required_exact_l1_trace_count": 1,
+    "require_method_visible_open_ended": true,
+    "require_descriptor_manifold_member": true,
+    "require_declared_support": true,
+    "deduplicate_by": "canonical_constitution",
+    "rank_by": "sha256_canonical_smiles_ascending",
+    "expected_eligible_unique": 23,
+    "expected_selected_attempt_indices": [2256, 2931, 1586]
+  },
+  "conformers": {
+    "generator": "rdkit_etkdgv3",
+    "count_per_molecule": 3,
+    "random_seed": 20260825,
+    "optimizer": "mmff94s_with_uff_fallback",
+    "max_iterations": 400,
+    "render_hydrogens": false
+  },
+  "display_only": true,
+  "candidate_selection": false
+}

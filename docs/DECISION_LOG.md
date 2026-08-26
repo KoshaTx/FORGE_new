@@ -7038,3 +7038,1889 @@ preserved unchanged.
   reproducibility change: no production training or sampling, synthesis-value or biological
   guidance, candidate selection, sealed-holdout access, evidence-tier change, or paper-claim change
   occurred.
+
+## 2026-08-20 - Authorize a bounded computational multi-reaction extension
+
+- The user authorized the source-grounded computational extension in
+  `MULTIREACTION_COMPUTATIONAL_PLAN.md`: Ugi remains the deep validated case, BL_2023 repeated
+  aza-Michael addition is the full second family, and LX_2024 repeated reductive amination is a
+  lighter stress test. This amendment supersedes the earlier statement that every ICLR experiment
+  uses only a Ugi adapter, but does not authorize wet-lab work, biological-label transfer,
+  arbitrary retrosynthesis, yield claims, or new synthesis-success claims.
+- Source review showed that both added libraries require repeated execution of a two-reactant
+  transform for polyamines. The shared object is therefore an ordered reaction program, not a
+  fixed one-head/one-tail tuple. Each step is registry-backed and every admitted complete program
+  must reproduce the source product exactly in forward replay.
+- The first deterministic corpus build examined 773 BL_2023 and 851 LX_2024 source rows, preserved
+  all 1,624 row identities, and collapsed them to 891 constitutional products. It admitted 610 of
+  720 source-reported aza-Michael members and 154 of 180 reductive-amination members, passing the
+  frozen 576 and 144 gates. The atlas preserves 127 abstentions, including unresolved reverse
+  decompositions, ambiguous decompositions, inconsistent LNPDB product/component assignments, and
+  the A3-6b source conflict. Exact source-adjudicated forward precision among admitted programs is
+  1.0 by construction; this is not a synthesis-success rate.
+- The admitted set contains 1,344 exact program steps and deterministic component-disjoint product
+  folds of 328 train, 196 calibration and 240 heldout products. Sampling weights equalize total
+  weight per reaction program within each fold; raw family counts are not used as the prior. Exact
+  isotope-tagged forward replay assigns accumulator-versus-repeat precursor origin to all 56,588
+  atoms across all 764 admitted products without a component identifier entering model state.
+- This decision changes the computational data/model interface and paper experiment plan. It does
+  not alter any frozen Ugi artifact, candidate, holdout, evidence tier, route dossier, synthesis
+  value, or biological result.
+
+## 2026-08-20 — Multi-reaction sparse-flow plumbing passes; scientific comparison remains blocked
+
+- Implemented a role-blocked whole-product sparse representation for the 764 admitted aza-Michael
+  and reductive-amination products. It covers the complete observed support: 194 heavy atoms,
+  three residual closures and program depth four, with no small-molecule truncation.
+- Froze precursor role plus complete program depth as the invariant semantic coordinates. Ordered
+  steps remain in the exact execution trace, but identical repeated precursor copies are not given
+  fabricated per-atom step identities when graph symmetry makes those identities non-identifiable.
+- Added matched program-conditioned, null and program-ID-swapped training arms and a separate
+  checkpoint-consuming sampler. The deterministic JSON tensor checkpoint is non-executable and
+  reproduced byte-for-byte.
+- Diagnostic run `30af60ef1ffd67098406c034e8db58b0835dffad16369324c7b94267ee3bebbc`
+  completed and independently reproduced byte-for-byte. The authenticated training checkpoint is
+  `ab82baf6f096e73da51ea04105615cf6c7123c9cd02acc132f70dbc8c797aa26`; all three
+  four-step arms had finite loss. Sampling gave 3/4 sanitized graphs and 0/4 exact L1 programs.
+- Decision: the pipeline gate passes, but the four-step checkpoint supplies no comparative model
+  evidence. Zero exact-L1 samples is retained as a negative diagnostic. Do not use this smoke in a
+  paper table or claim multi-family generation quality; production multi-seed training remains a
+  separate pending experiment.
+
+## 2026-08-20 — Reaction-core representation and strict overfit gate pass; production remains blocked
+
+- The first multi-reaction tensorization encoded precursor origin and program depth but omitted the
+  registry reaction-core position. That left the model without the intended local semantic
+  coordinate. The corrected v2 atom ledger carries namespaced registry map positions for 6,798 atoms
+  and has core annotation in all 764 admitted products. Ugi origin and core state remain orthogonal;
+  no component identifier or stored fragment enters the model.
+- Added position-aware sparse decoding because canonical node position is required to distinguish
+  otherwise symmetric parent-pointer targets. A first bounded run without this feature failed the
+  tensor reconstruction gate. A later apparent tensor failure was traced to the evaluator taking an
+  argmax over impossible self/future parents; masking to the same admissible parent set used by the
+  model corrected the measurement without changing a frozen threshold. Both negative intermediate
+  outcomes are retained as engineering evidence and were not converted into weaker gates.
+- Frozen overfit run `53b7d98c2c3dfcba76eaa5664966470c1710af4137061458dfe1af1f14b71863`
+  passed all five prespecified gates: finite loss, final/initial loss ratio 0.0001424 against a 0.5
+  ceiling, exact fixed-noise tensors for 2/2 family-balanced records, 16/16 valid native samples and
+  16/16 exact-L1 products. All 24 exact decomposition traces reproduced their products in forward
+  replay. The strict reproduction hashes are `9d753862d430fb727658228d85ccc9c55f112ce88a83b1e260c4b66efaf44cc0`
+  (training checkpoint), `4cd9f6be4a372f5653da3269c72726b6dd47651c84518a3a6538a50796b50332`
+  (training result), `46c2795314bd0aa02b99465f36699d0148c45e94caa6b0f4e5064b3a7cb6e636`
+  (samples), `fa5e680eaccb93b328c1bada552a79e12a216fa0cf1b055f9e728157d20ad2b6`
+  (sampling result), and `f9fd33c16e89ab3bf93a9b7962ba48c6991ae350f941dc20eab2cc714ed61dbc`
+  (qualification result).
+- Added role- and family-specific non-selecting metrics and deterministic within-stage restart.
+  Restart checkpoints capture model, optimizer, Python/NumPy/torch RNG and explicit generator state;
+  a forced interruption at step two produces the same final model hash and published metrics as
+  uninterrupted training. Interruption history remains private work state so it cannot change the
+  scientific artifact bytes.
+  Smoke run `a786b22cdcd4fcd5a70b90c8670b79c331b8736e7167914bbed9f22bbeb43a22`
+  reproduced byte-for-byte and retained its negative 0/4 exact-L1 result.
+- **Decision:** the reaction-core representation gate passes for the BL/LX repeated-program subset.
+  It does not authorize a paper-facing production comparison. The next gate is a single matched
+  Ugi+BL+LX representation supporting three distinct Ugi precursor roles, the assembly-introduced
+  amide oxygen, aromatic chemistry and the full union size support. Until that closes, a BL/LX-only
+  production run would answer the wrong question and will not be launched.
+
+## 2026-08-20 — Shared Ugi+BL+LX whole-product representation gate passes
+
+- Implemented one aromatic-aware program-graph contract for AGILE-type Ugi 3CR, BL_2023 repeated
+  aza-Michael assembly and LX_2024 repeated reductive amination. It carries program identity,
+  complete program depth, exact precursor-origin role and namespaced reaction-core position. Its
+  origin-component blocks are deterministic serialization spans only: no component identifier,
+  stored fragment or purchasable-block vocabulary enters model state.
+- The fail-closed full census represented and constitutionally reconstructed **113,150/113,150**
+  declared products and **4,472,034/4,472,034** atoms: 112,386 Ugi, 610 aza-Michael and 154
+  reductive-amination records. It preserved explicit aromatic atoms and bonds, the observed maximum
+  of 194 heavy atoms and all three residual closures. No molecule was size-capped or omitted.
+- Ugi's five exact core atoms remain adapter-fixed and orthogonal to precursor origin: 561,930 core
+  atom states were marked fixed across the Ugi corpus. Auxiliary-family core positions are retained
+  as semantic coordinates but are not silently promoted to fixed chemistry invariants.
+- CLI run `d40b98c40a28bf300aa84a9cd5b92a13a4dd4524e76997929451d3682cae746a`
+  completed successfully and independent strict reproduction was byte-identical. Its result matches
+  the checked-in qualification artifact at SHA-256
+  `487c7382af3a18099505aa1e01b981b2b9b9c7b191e0cd7a36b79ad5c318bb88`; the representation digest is
+  `ef10c20f443ee8a272b916a6da76556cdbaca9e53d58cae75abb5c6069301534`.
+- The supported-core gate passes strict typing, lint and all scoped tests. Result provenance now
+  verifies 773 pins over 360 files with zero drift; config/code-inclusive verification accounts for
+  2,201 pins while preserving the inherited four-item drift ratchet. The unscoped suite collected
+  1,702 nodes and returned exactly the reviewed 201 missing-artifact failures, with no new, resolved
+  or stale-cache nodes; all 54 documented historical inputs remain absent.
+- **Decision:** the shared representation gate is closed. This establishes lossless support, not
+  generalization, synthesis success or route certification, and does not authorize production
+  training. The next gate is shared-cache/model integration with exact Ugi fixed-core noising and
+  decoding, followed by a bounded three-program overfit/equivalence test and Ugi regression control.
+
+## 2026-08-20 - Shared cache, model, and fixed-state sampling integration gate passes
+
+- Built a deterministic model-ready cache from one training-fold product per admitted program. The
+  cache assigns equal total mass to AGILE-type Ugi 3CR, BL_2023 repeated aza-Michael assembly, and
+  LX_2024 repeated reductive amination. It contains complete sparse product targets and categorical
+  program coordinates, but no component identifier, precursor SMILES, fingerprint, fragment token,
+  or biological label. This three-record cache is an integration set, not a production corpus.
+- The Ugi regression control mapped both serializers back to original product atom indices. The
+  shared record preserved all 5 adapter-fixed atom states and all 7 adapter-fixed edge states and
+  endpoints exactly. BL and LX retained their reaction-core positions as conditioning coordinates
+  but had zero fixed atoms or edges. On those zero-fixed records, shared noising tensors, loss, and
+  reported loss components were exactly equal to the generic sparse-flow path.
+- A first 768-step run failed the unchanged exact-tensor gate because one of 32 LX parent pointers
+  was wrong. Increasing the bounded optimization budget closed that training failure. Native
+  sampling then produced 12 of 12 valid and constitutionally exact molecules but initially reported
+  only 8 of 12 exact tensors. The sole mismatch was parent-bond slot zero, the masked root sentinel,
+  which the decoder had incorrectly overwritten with an argmax despite excluding it from noising,
+  loss, and molecular construction. Increasing training to 3,072 steps did not change this pattern.
+  The decoder was corrected to preserve all inactive sentinels; no acceptance threshold was relaxed.
+- In the final computed run, loss fell from 16.315578 to 0.000008165, a final-to-initial ratio of
+  0.0000005004. All three records reconstructed every active tensor exactly at fixed noise. The
+  checkpoint-separated sampler produced 12 of 12 valid molecules, 12 of 12 exact tensors, and 12 of
+  12 exact source graphs, with four samples from each program and zero fixed-state changes across
+  initialization, 32 flow steps, and terminal decoding.
+- The attributable artifacts are
+  `results/phase1/shared_synthesis_program_training_integration_v1/`: cache
+  `bd053e2d79e584e4f119d96aed73810f56d49bded62bf7dc8525d187f4b855bf`, cache result
+  `587e44881783798b137b39555732f665513d3315b67c2758a0560b21c690caa8`, training checkpoint
+  `feb9d0c27531e183a4108a7dec7f58360c80969eed3a82ade123da46fcd66e5e`, training result
+  `289fa4caa5a6a62325bb74d8159fe20425f98e4c9e47c35b6cf16ef7624fe50a`, samples
+  `6842bbe03e5b93ff455988e9b16f62fe75d00c92ed12df86d1ec63bff32b13f8`, sampling result
+  `280102a21f604a8000df686d7d525e3b3f38390397637568af8f672c0f24f96f`, and final qualification
+  `ecfd968181e3729843d4ccac6f3a7d046dc8475ff23e5ead49fbe2193c74cad1`. Registered run
+  `b2912ab0065ff187e25afd44bdd1c30a02fcfe66dd0efd158560006b5da02863` verified and reproduced
+  every stage artifact byte-for-byte. Produced-artifact receipts use logical paths, so independent
+  reruns do not record transient staging directories as data dependencies.
+- Vendored-data verification passed for all 30 present assets. Result provenance verifies 794 pins
+  over 365 files with no drift. Config/code-inclusive verification accounts for 2,242 pins while
+  preserving the inherited four-item drift ratchet; no new drift was introduced.
+- The scoped architecture, type, lint and test gate passed. The full-suite baseline audit collected
+  1,710 tests and returned exactly the frozen 201 failures caused by 54 documented unavailable
+  historical inputs, with no new failures, resolved failures or stale-cache nodes.
+- **Decision:** the bounded shared cache/model/noising/loss/decoder integration gate passes. This is
+  computed pipeline evidence only. It does not demonstrate held-component generalization,
+  synthesis success, route certification, or biological performance, and it does not authorize a
+  production multi-reaction training or sampling launch.
+
+## 2026-08-20 - Freeze the matched multi-reaction production design; launch remains blocked
+
+- The deterministic preflight verified the actual model-union partitions before freezing a design:
+  Ugi contributes 66,464 training, 15,800 calibration and 30,122 heldout products; BL contributes
+  258, 158 and 194; LX contributes 70, 38 and 46. Ugi retains
+  `family_balance_weight_raw`; BL and LX retain `source_balanced_weight`. Every program is normalized
+  within fold before arm-level mass is assigned, so raw family counts cannot become the prior.
+- The proposed comparison contains four architecture- and compute-matched arms: Ugi-only,
+  conditioned Ugi+BL+LX, null-conditioned Ugi+BL+LX and a nonselecting cyclic program-ID control.
+  The three-family arms assign exactly one-third total mass to each program. Every arm uses the same
+  194-atom, three-closure sparse model, shared source marginals, three deterministic seeds, 1,700
+  optimizer steps, effective batch 128 and diagnostic checkpoints at steps 100, 500, 1,000, 1,500
+  and 1,700. The final step is fixed before training; neither calibration nor heldout results select
+  a checkpoint or threshold.
+- Family-specific evaluation must report validity, connectedness, exact-L1 decomposition coverage,
+  exact-forward replay precision, abstention, ambiguity, diversity, effective component count and
+  component/whole-product novelty. Ugi retention uses a paired hierarchical-bootstrap
+  noninferiority comparison against the Ugi-only arm. Fixed-state changes and support overflow have
+  zero tolerance. Held-reaction-family analysis is secondary, and the degenerate
+  reductive-amination substructure hit rate remains forbidden.
+- The design preflight passed all 12 gates. Artifact
+  `results/phase1/shared_synthesis_program_production_design_v1/result.json` has SHA-256
+  `54ca338e3e7706eccf6af4f32eaa80e8782136301446ed268400f3ffccab2ea7`. Registered run
+  `85559f2ad7b66e6a1f694d0cc77c59e6b3336203b1a7e5bfd5f36f98f8021f68` verified and reproduced the
+  result byte-for-byte. Result provenance verifies 803 pins across 368 files with zero drift;
+  config/code-inclusive verification accounts for 2,268 pins under the unchanged four-item drift
+  ratchet.
+- All scoped architecture, type, lint and design tests pass. A clean full-suite run collected 1,716
+  tests and returned exactly the frozen 201 failures attributable to 54 documented unavailable
+  historical inputs, with no new failures, resolved failures or stale-cache nodes.
+- **Decision:** the production-qualification design is frozen. This is a proposed experiment backed
+  by computed corpus/preflight checks, not a trained-model result. It performs zero route or oracle
+  calls, selects no candidates and does not authorize production training or sampling. Production
+  cache/trainer/evaluator implementation and any GPU launch require explicit authorization after
+  review of this design.
+
+## 2026-08-20 - Production pipeline implemented; external L4 launch awaits explicit upload approval
+
+- Implemented the frozen four-arm production pipeline without changing the design. The packed,
+  numeric-only cache contains all 113,150 declared records and preserves the 194-heavy-atom and
+  three-closure support. Its checked-in cache SHA-256 is
+  `db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41`. Training is
+  restartable at optimizer-step boundaries and publishes an allow-listed, hash-authenticated
+  checkpoint archive. The evaluator loads published checkpoints with the restricted PyTorch
+  loader, samples every fixed checkpoint without repair or retry, reports coverage and precision
+  separately, performs a complete held-component tensor census in the full profile, and writes a
+  seeded random plus worst-case molecule audit without selecting a candidate.
+- The repinned two-step CPU execution smoke completed all four arms and both evaluation stages under
+  run `48da8a4081c6bfdb356653dba16eaac5b14855d9fef20b7fce41f10e4e76f81f`. All 13
+  infrastructure gates passed. As expected for two optimizer steps, 0 of 40 sampled graphs were
+  valid and the component-disjoint exact-tensor fraction was zero. This negative is retained as a
+  plumbing result only and is not model-quality evidence. The authenticated training and evaluation
+  receipts have SHA-256 values `50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8`
+  and `441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07`.
+- Vendored-data verification passed for all 30 assets. The current suite collected 1,724 tests and
+  reproduced exactly the reviewed 201 failures caused by the unchanged 54 missing historical
+  inputs, with zero new failures, zero resolved failures and zero stale nodes. Result provenance
+  verifies 820 pins across 372 files with no drift. Config/code-inclusive verification accounts for
+  2,341 pins under the unchanged four-item drift ratchet. All scoped tests, lint and targeted typing
+  pass.
+- Added a separate one-job L4 preflight that must exercise the exact full model, effective batch 128,
+  every arm, deterministic challenger replay and a 32 by 194-atom capacity stress before production
+  training. It also authenticates the smoke receipts and no-new-failures baseline. The preflight
+  makes zero route, oracle or candidate-selection calls and cannot publish a model candidate.
+- **Decision:** no external computation ran. The sandboxed Modal connection failed, and the elevated
+  request was denied because it would upload repository source, pinned configurations, the 7.3 MB
+  cache and smoke receipts to Modal and incur external L4 cost without an explicit payload-level
+  approval. Do not bypass that control. After the user explicitly approves this Modal upload and
+  cost, run the bounded L4 preflight first. Launch the three fixed production replicates only if
+  every preflight gate passes.
+
+## 2026-08-21 - Make LNPDB the common row source without conflating data and evidence
+
+- Added one typed LNPDB catalogue for stable row identity, study selection, whole-lipid structures,
+  normalized targets, and source-reported head/linker/tail slots. The potency and multi-reaction
+  builders now consume this same interface instead of independently parsing the 19,797-row CSV.
+- Reduced the new potency contract to raw LNPDB plus one config. It contains 2,200 `YX_2024`, 288
+  `JC_2023`, and 1,128 `LM_2019` observations. The 3,616 model rows plus 200 configured B4-mixture
+  exclusions account for all 3,816 selected source rows. Every target is explicitly
+  `lnpdb_within_study_endpoint_zscore`; the typed loader still requires a study/endpoint pair.
+  Reaction-program IDs, component payloads, exact-program eligibility, parallel AGILE raw labels,
+  and model-identity correction flags were removed from the potency-row schema.
+- The multi-reaction corpus retains exactly the same admitted and abstained products and is
+  byte-identical after migration. LNPDB supplies rows, products and reported components. The
+  reaction registry, paper reviews and supplements remain mandatory evidence for transform
+  semantics, source conflicts, and admission; they do not add duplicate observations or labels.
+  Exact atom-origin ledgers and balanced caches remain derived artifacts. The virtual Ugi corpus
+  remains separately declared because its unmeasured products are absent from LNPDB.
+- Checked potency artifacts live under `results/phase1/potency_study_corpus_v2/`. The observation
+  SHA-256 is
+  `7773f88c64e1793b9b6a5d188b8805d48d0542749554e2aba43af7c157d6886f`; the result SHA-256 is
+  `573cd3e8f57bccfc3e7b12263750c77488ce05f8361233726848c9672957d810`. Registered run
+  `c23a5cf0683d4930c1f90f365e3da5329acc6de0f2f5500843d85ab9902d8ba8` verified and reproduced
+  both artifacts byte-for-byte.
+- All 30 vendored assets verified. Result provenance verifies 822 pins with zero drift;
+  code/config-inclusive verification accounts for 2,346 pins under the unchanged four-item drift
+  ratchet. The scoped type, lint and 127-test gate passed. The full suite collected 1,735 tests and
+  reproduced exactly the 201 reviewed failures caused by 54 unavailable historical inputs, with no
+  new, resolved, or stale-cache nodes.
+- **Decision:** LNPDB is the authoritative row-level source for new potency and LNPDB-backed
+  reaction-program work. Evidence and derived training caches remain separate by function, not
+  treated as independent datasets. Frozen M0 results and the completed raw-label HeLa diagnostic
+  retain their original bytes. Cross-study target pooling remains prohibited, and this consolidation
+  authorizes no biological guidance, candidate selection, synthesis call, or potency claim.
+
+## 2026-08-21 - Replace the unrun L4-only preflight with matched accelerator qualification
+
+- The frozen production design contained an L4 execution target inherited from prior deterministic
+  CUDA qualification, but no measured L4-versus-A100/H100 cost-to-result comparison supported that
+  choice for the larger four-arm workload. Hardware is an execution decision, not part of the
+  scientific identity of the matched comparison.
+- Replaced the unexecuted L4-only specification with two execution-only experiments sharing one
+  hash-pinned contract: exact NVIDIA L4 and exact NVIDIA A100-40GB. Each runs the full 192-hidden,
+  four-layer model for every arm at effective batch 128, includes one warm-up and three measured
+  optimizer steps, repeats the conditioned challenger exactly, and performs a full-batch stress on
+  the 194-heavy-atom boundary. GPU identity, physical memory class, at least ten-percent memory
+  headroom, finite optimization, zero fixed-state changes and exact deterministic replay are
+  fail-closed gates.
+- Each result records per-step timing, examples per second, peak allocated and reserved memory,
+  CUDA math-mode flags, physical device identity, and a training-only projection for all four arms
+  and three production replicates. Modal GPU prices are frozen as execution metadata at their
+  2026-08-21 published rates. The adjudicator requires both verified runs to have identical source,
+  config, inputs, model, runtime, design, cache and math mode, then orders eligible targets by
+  projected training-only GPU cost and wall time. It cannot select a model or molecule.
+- Both Modal request plans validate. Each would upload the active private `forge/` and
+  `experiments/` Python source, the 7.3 MB packed cache, frozen configs, smoke receipts, test-baseline
+  receipt and lockfile. The attempted L4 launch was rejected by the external-action approval gate
+  because this exact private-source upload and billable Modal destination require a separate,
+  explicit user confirmation. No external benchmark ran and no cloud cost was incurred.
+- All 30 present vendored assets verify. The 35 accelerator, experiment-model, architecture and CLI
+  regression tests pass; scoped lint, formatting and typing pass. The full suite reproduces exactly
+  the frozen 201-item missing-historical-input failure set with no accelerator-test failure, matching
+  the checked-in no-new-failures baseline. Code/config-inclusive provenance verifies 2,354 pins under
+  the unchanged four-item historical drift ratchet.
+- **Decision:** the prior L4 choice is no longer treated as benchmark-justified. Production remains
+  blocked until the user explicitly approves the disclosed Modal payload and costs, both bounded
+  accelerator benchmarks pass, the selection receipt is frozen, and the selected exact accelerator
+  passes the production preflight. H100 is not included because the deterministic float32 workload
+  must first show that A100-40GB fails the cost/time tradeoff; adding another cost class without that
+  evidence would not change the current decision.
+
+## 2026-08-21 - Matched accelerator qualification selects L4; final confirmation remains blocked
+
+- After disclosure of the private source/cache payload and a USD 4.10 combined cap, the user
+  authorized the matched Modal L4 and A100-40GB benchmark pair. Both completed under executable
+  source fingerprint `9bad187578b59c580493fa8d85cbf6662a650650672abfc0bea755373601fbd0`.
+  Their run directories were downloaded directly from the committed Modal volume and independently
+  passed the self-contained manifest verifier.
+- Every fail-closed gate passed on physical `NVIDIA L4` and `NVIDIA A100-SXM4-40GB` devices: all four
+  arms were finite, deterministic challenger replay was exact, fixed-state failures and route/oracle
+  calls were zero, the full 194-atom support was exercised, the checked-in cache and smoke receipts
+  matched, raw family-count sampling was absent, and the frozen test baseline had no new failures.
+  Peak reserved memory was 660,602,880 bytes on both devices, far inside both memory envelopes.
+- Under the prespecified training-only projection, three L4 replicates require 4,434.30 GPU-seconds
+  and USD 0.9844, versus 4,792.79 GPU-seconds and USD 2.7942 on A100-40GB. These estimates exclude
+  evaluation, startup, CPU, memory, transfer and storage. The bounded three-step timing result is an
+  execution estimate only and provides no model-quality evidence.
+- Verified L4 run `bb668b65570d5267aee0bb6bf0d6223c09cb8db7b442a96a9e3cb43b4957a481`
+  produced result SHA-256 `4bfdbaad36091373c58aa70513612d4d3a125542abc6e02e43e2d4d2bf1b68d0`.
+  Verified A100 run `88e51151d9c18f8896efd3fa4fc78ce2d8177cce19c6b7c2ec135bd4aa5eb368`
+  produced result SHA-256 `8e3b19fba66c9163f55200b1705ab073adeb77dee40900b6d8f51a87bdad978a`.
+  The selector chose L4 and wrote the pinned receipt with SHA-256
+  `5d9d2cf14c4f74f12d6068763502c2f47898ba29cd3a34b6f5fde0d8e76fbfb8`. The receipt
+  snapshots both verified benchmark results and manifests beneath its tracked evidence directory;
+  it does not depend on ignored local run folders or continued access to the Modal volume.
+- The external execution exposed three launcher defects, retained as negative engineering results:
+  `uv_sync` received an image path instead of a local project path; the remotely imported entrypoint
+  assumed a local file hierarchy; and volume paths were compared before resolving Modal's mount while
+  the local client called a remote-only `reload` API. The benchmark computations were not used until
+  their committed artifacts were downloaded and verified. The launcher now normalizes local/remote
+  roots, resolves the mounted-volume boundary, avoids the illegal reload, and detaches scalar logging
+  from autograd.
+- All 30 vendored assets verify. The 40 focused accelerator, Modal, experiment-model, architecture and
+  CLI tests pass; scoped lint, formatting, typing and diff-integrity checks pass. The full suite
+  collected 1,744 tests and reproduced exactly the frozen 201 failures caused by 54 unavailable
+  historical inputs, with zero new, resolved or stale failures. Code/config-inclusive provenance
+  verifies 2,395 pins under the unchanged four-item historical drift ratchet.
+- **Decision:** L4 is the benchmark-supported production accelerator; A100-40GB and H100 are not
+  justified for this workload. The checked-in production DAG already requests exact L4. A separate
+  confirmation on the active transport-fixed source was rejected because it is a third private upload
+  and billable job beyond the approved pair. Do not bypass that control. No production replicate has
+  launched; production remains blocked until the user explicitly authorizes and the final selected-L4
+  confirmation passes.
+
+## 2026-08-21 - Selected-L4 confirmation passes and closes the accelerator gate
+
+- The user explicitly authorized one additional selected-target L4 preflight, the disclosed private
+  payload and an additional USD 1.50 cap. Modal run
+  `d97c3dd86b4c2383382a4ed91055135bda0235aaab2db6006d7c1a741c69a2a7` completed on physical
+  `NVIDIA L4` under compute-source fingerprint
+  `4106ce1d6f204b30be0e897ada92a2d510120658424344bb1a81d16e52bc910d`.
+- All benchmark gates passed: every arm remained finite, deterministic replay was exact, fixed-state
+  failures and route/oracle calls were zero, the 194-atom maximum-support batch executed, cache and
+  smoke pins matched, raw family-count sampling was absent, and no candidate was selected. Peak
+  reserved memory was 660,602,880 bytes. The short-run projection was 1,109.42 GPU-seconds and USD
+  0.2463 per replicate, or USD 0.7389 GPU-only for three replicates; it excludes evaluation, startup,
+  CPU, memory, transfer and storage and is not model-quality evidence.
+- The downloaded run independently passed the self-contained verifier. Its result SHA-256 is
+  `7df8f04de6357e9436df852df6ad6d2e45965f56eb53a06f2973a2e7b595f56e`; the tracked confirmation
+  receipt SHA-256 is `7d26b80c01f34045d5bfa2e052828b0aefb992d68a51930774674176c0920748`.
+  Run, stage and result JSON are frozen under
+  `results/phase1/shared_synthesis_program_accelerator_selection_v1/selected_l4_preflight/`.
+- Automatic local download initially failed after the verified GPU computation because the private
+  staging directory's random basename violated the verifier's content-addressed run-name invariant.
+  The artifact was recovered directly from the committed Modal volume and verified before use. The
+  downloader now stages inside a private parent while preserving the run-id child basename; the new
+  regression test passes. This post-execution local transport correction changes no model, data,
+  training, gate or remote compute path and did not trigger another GPU run.
+- All 30 vendored assets verify. The 41 focused accelerator, Modal, experiment-model, architecture and
+  CLI tests pass; scoped formatting, lint, typing and diff-integrity checks pass. Code/config-inclusive
+  provenance verifies 2,416 pins under the unchanged four-item historical drift ratchet. The full
+  suite collected 1,745 tests and reproduced exactly the frozen 201 failures caused by 54 unavailable
+  historical inputs, with zero new, resolved or stale failures.
+- **Decision:** the selected exact-L4 accelerator gate is closed. The production DAG is input-ready
+  and requests exact L4. This confirmation supplies execution evidence only: it launches no production
+  replicate, establishes no model quality, and authorizes no candidate, route, oracle or biological
+  selection.
+
+## 2026-08-21 - Freeze paper execution evidence and implement cross-run production adjudication
+
+- Added a deterministic cross-run adjudicator for the three authorized full production replicates.
+  It independently verifies each run and its stage artifacts, requires one executable source, one
+  experiment specification and one frozen scientific design, enforces replicates 0/1/2 and seeds
+  20260825/20260826/20260827, and snapshots the authenticated run, stage, training, evaluation and
+  sample evidence into the result package. It rejects any run that performed or failed to exclude
+  route, biological-oracle or candidate-selection calls.
+- Ugi retention is adjudicated at the fixed final checkpoint using the frozen 10,000-resample paired
+  seed rule. Independent training seeds are the resampling unit; generated molecule rows are not
+  promoted to independent training replicates. All frozen validity, connectedness, exact-L1,
+  forward-precision, diversity, effective-component, component-novelty and held-component margins
+  remain fail-closed. A noninferiority failure is preserved as a valid negative result.
+- The same aggregate now implements the required catalogue-free versus post-hoc reaction-filtering
+  comparison. It compares the shared program-conditioned arm against the compute-matched shared-null
+  arm at equal heldout attempt budgets for Ugi, BL and LX, then reports raw validity, exact-L1 yield,
+  coverage among valid products and forward-replay precision separately. This analysis uses complete
+  generated graphs and exact adapters; component identifiers and fragment tokens remain absent.
+- Froze `docs/PAPER_EXPERIMENT_EXECUTION_MATRIX.md` as the paper-facing separation among computed,
+  ready, proposed and prospective evidence. The existing nonzero synthesis-guidance and HeLa
+  potency-tilting diagnostics remain closed negative results. Held-reaction-family generalization
+  remains a secondary, unexecuted stress test rather than a paper gate. The broad ML-baseline suite
+  is not promoted to a pre-prospective blocker under the authoritative strategic reset.
+- The paper's production-model novelty denominator remains all 112,386 fitted products: 21,960 of
+  26,235 distinct admitted products, or 83.7%, are absent. The 89.0% train-fold statistic is not
+  substituted for this production-model claim.
+- The prospective analysis plan requires
+  `results/phase1/ugi_prediction_cohort_panel_v3/candidate_manifest.json`, which is absent from the
+  current repository. The available 40-candidate v6 panel is not the locked 30-candidate v3 panel
+  and cannot substitute for it. Prospective execution therefore remains fail-closed pending exact
+  artifact recovery, current procurement evidence, human chemistry signoff and PI endpoint/design
+  decisions. No candidate was regenerated, replaced or selected.
+- **Decision:** finish local verification, then rerun the selected L4 preflight on the final source
+  snapshot. Launch the three full production replicates only if every preflight gate passes. Do not
+  modify executable source between that preflight and the three launches.
+
+## 2026-08-21 - Correct the paper scope to computational only
+
+- The user explicitly corrected the execution plan: the current paper does not include synthesis,
+  formulation, in-vitro experiments or in-vivo experiments. Earlier prospective candidate and
+  wet-lab plans are historical records, not paper requirements, blockers or next steps.
+- The missing 30-candidate v3 manifest and the available historical 40-candidate v6 panel are
+  therefore irrelevant to current paper readiness. Do not recover, substitute, relock, procure or
+  experimentally advance either panel as part of this paper.
+- Biological endpoint selection, assay design, formulation controls, animal design, procurement and
+  laboratory capacity are outside current scope. Existing biological and synthesis-guidance
+  diagnostics remain bounded computational evidence with their frozen nonclaims.
+- **Decision:** paper completion requires the authorized computational production comparison,
+  sampling and held-component analyses, catalogue-free versus post-hoc ablation, aggregate
+  adjudication and manuscript integration. No wet-lab experiment may be added to the readiness list.
+
+## 2026-08-21 - Add a strong finite-component catalogue baseline
+
+- The user explicitly authorized a direct finite-component-vocabulary comparison for the
+  multi-reaction paper experiment. The selected baseline is an oracle catalogue assembler rather
+  than a weak learned fragment model: it receives exact train-fold component identities and the
+  exact qualified forward transform for Ugi, BL and LX.
+- Within each reaction family, it samples components independently from source-weighted role
+  marginals. Ugi uses `family_balance_weight_raw`; BL and LX use `source_balanced_weight`. It never
+  samples by raw family counts, never accesses calibration or heldout components, makes zero route
+  or biological-oracle calls, performs no repair or retry, and emits at most one uniformly selected
+  exact forward product per tuple attempt.
+- The full arm uses the same 3,072 attempts per family and seeds 20260825, 20260826 and 20260827 as
+  final-checkpoint FORGE evaluation. It is a CPU experiment with deterministic samples and pinned
+  input ledgers. The aggregate adjudicator accepts the three catalogue receipts only when source,
+  design, seeds and replicate identities exactly match the production runs.
+- **Decision:** the primary differentiating metric is distinct valid, uniquely decomposed exact-L1
+  products containing at least one component constitution absent from the train-fold catalogue per
+  1,000 attempts. Report raw validity, exact-L1 yield, unique exact-L1 product yield, whole-product
+  novelty, internal diversity and effective component count separately. The catalogue value for
+  component escape is zero by construction and is not sufficient by itself; the paper must expose
+  the catalogue's expected reaction-validity advantage and FORGE's intended breadth advantage
+  without a composite winner score. The Cartesian tuple-space size is an upper bound, not a count
+  of unique valid products.
+- Catalogue coverage is reported directly for train, calibration and held-component source folds,
+  with unique source-component coverage by role. The maximum attainable *component* novelty of the
+  baseline is exactly zero. This is kept separate from empirical whole-product novelty because a
+  finite catalogue can still make unseen products by recombining familiar components.
+- Every descriptive FORGE-minus-catalogue contrast receives a two-sided paired-seed bootstrap
+  interval using the frozen 10,000-resample settings. Molecules are not pseudoreplicates.
+
+## 2026-08-21 - Refresh the production no-new-failures receipt before the final source freeze
+
+- A clean-cache full-suite run collected 1,747 nodes and reproduced exactly the reviewed 201
+  failures caused by the unchanged 54 missing historical artifacts. It introduced zero new
+  failures, resolved zero reviewed failures and left no stale cache nodes.
+- Refreshed the rolling maintenance receipt and its two mutable input identities: the current
+  repository contract in `AGENTS.md` and the current test-baseline report. This changes no
+  scientific gate, historical failure identity, chemistry evidence or model result.
+- The four-item code/config drift burn-down remains unchanged and visible. No new known-drift
+  exception was added and no scientific gate was relaxed.
+- **Decision:** freeze the executable source, rerun the selected-target L4 preflight on that exact
+  fingerprint, and make no executable-source edits between the passing preflight and the six matched
+  production/catalogue launches.
+
+## 2026-08-21 - Repair CUDA RNG restoration exposed by an interrupted production launch
+
+- The first three attached Modal production clients encountered a local DNS interruption and
+  canceled their remote calls. Resuming the resulting partial training stages then failed
+  identically in all three replicates: `torch.load(..., map_location="cuda")` had moved serialized
+  CUDA RNG-state tensors onto the accelerator, while `torch.cuda.set_rng_state_all` requires CPU
+  byte tensors.
+- The restart primitive now validates every RNG state as a one-dimensional byte tensor and moves
+  RNG bookkeeping tensors back to CPU before calling the PyTorch setters. Focused CPU regression
+  tests cover the CUDA-map-location normalization and fail-closed dtype validation. This changes no
+  training seed, optimizer state, checkpoint schedule, model architecture or scientific gate.
+- A clean-cache full suite collected 1,749 nodes and reproduced exactly the same 201 reviewed
+  failures from the same 54 missing historical artifacts, with zero new failures. Readiness v3
+  records that observation.
+- The repaired executable source fingerprint is
+  `6fd98fa6717e149de631c551c19b5b571bef36c6bd4930f51f65be68f3445a86`.
+  Its fresh NVIDIA L4 preflight run
+  `e4b5bfa58822c97734a972988d92f84a0194699be31b38db72e636033ad042cd`
+  passed all 20 fail-closed gates, including exact deterministic replay and the 194-atom
+  maximum-support stress.
+- **Decision:** preserve the canceled attempts as negative operational evidence, use detached Modal
+  clients for production durability, and rerun both catalogue and GPU replicates on the repaired
+  source so aggregate adjudication never mixes executable fingerprints.
+
+## 2026-08-23 - Preserve the shared multi-reaction production comparison as a negative result
+
+- The three GPU production replicates and three matched CPU catalogue replicates completed on one
+  frozen executable source, specification, design and seed set. The aggregate now handles
+  zero-survivor metrics without coercing undefined effective-component counts, component novelty
+  or forward precision to zero. Undefined cells are never imputed or complete-case bootstrapped.
+- The frozen Ugi non-inferiority decision failed. Shared training failed raw validity,
+  connectedness, exact-L1 coverage, effective component count and held-component exact-L1
+  coverage; it retained forward precision, diversity and component novelty among survivors. The
+  conditioned exact-L1 yield per attempt was 0.03147 for Ugi, 0 for BL and 0.14659 for LX, versus
+  0.14410, 0.03451 and 0.12956 under matched post-hoc filtering, respectively.
+- The finite catalogue attained much higher exact-L1 yield but zero component escape by
+  construction. FORGE produced 31.47 and 33.42 open-ended exact-L1 products per 1,000 attempts for
+  Ugi and LX, respectively, but zero for BL. This is a validity--open-endedness tradeoff, not a
+  composite win.
+- A training/calibration-only diagnosis found zero BL exact-L1 samples at every checkpoint in all
+  seeds and a decline in mean shared-model Ugi calibration yield from 0.10156 at step 100 to
+  0.02669 at the fixed final step. This localizes failure before heldout evaluation but does not
+  distinguish optimization interference from insufficient program-specific capacity.
+- **Decision:** the completed primary comparison remains a valid negative result and must not be
+  replaced by checkpoint selection or same-data retuning. Any program-specific adapter or routing
+  head is a newly frozen follow-up experiment. Manuscript text and figures must not claim shared
+  multi-reaction success from this run.
+
+## 2026-08-23 - Implement and audit a reaction-program cross-attentive graph Transformer follow-up
+
+- The user explicitly authorized a new architecture after the frozen MPNN comparison failed. The
+  completed negative comparison remains unchanged and is not replaced by this follow-up.
+- The new denoiser retains the complete sparse whole-product state, bounded 194-atom/three-closure
+  support, component-free tensors and adapter-fixed chemistry. It replaces four local
+  message-passing blocks with full graph self-attention carrying parent/child/closure relation
+  biases. Every block separately cross-attends to program, depth, precursor-role and reaction-core
+  memory tokens.
+- Every block also contains three softly program-routed residual adapters. The objective adds
+  equal-present-state precursor-role and reaction-core consistency losses to the existing atom,
+  pointer and bond flow loss. Training computes one loss per source program, equalizes raw gradient
+  norms and applies deterministic PCGrad before combining family gradients.
+- Initial run `4c08f2a818ecc1d5a0f29578fc04903e12838bc40d36dc6303d6edb721e0b830`
+  passed the first implementation gate, but the subsequent code audit found that atom-aligned
+  role/core memory tokens lacked positional keys. That run remains reproducible historical evidence
+  but is superseded for architecture qualification because cross-attention could only observe a
+  semantic multiset rather than the structural slot associated with each coordinate.
+- Positional-memory run `1e6fece41895341faa9dfb2cbed5de7fe7372c0de711fada5644162d28df7a91`
+  is a frozen negative result. At the predeclared 1,200 steps it exactly reconstructed the BL and LX
+  records, but not Ugi: one Ugi parent pointer remained wrong, giving 0.95556 parent accuracy and
+  zero exact-record reconstruction. Total loss still fell from 18.8357 to 3.66166e-4, and all other
+  five gates passed. The receipt is
+  `results/phase1/reaction_program_transformer_overfit_positional_v1/result.json`.
+- **Decision:** do not advance the 1,200-step positional model to accelerator preflight and do not
+  weaken the exact gate. Run one separately pinned 2,400-step optimization follow-up with identical
+  architecture, data, seed and acceptance criteria. Neither bounded attempt is evidence of BL/Ugi
+  generalization, and the failed MPNN production result remains the immutable baseline.
+
+## 2026-08-23 - Remove unstable reaction-family gradient-norm amplification
+
+- Positional-memory follow-up run
+  `fd752a10d39dea34340769fecfd3d6682b05757b7abe2213d0510104e1d40a5f` is a frozen negative
+  result. Merely extending the original norm-equalized optimizer to 2,400 steps destabilized the
+  bounded problem: the final raw family gradient norms diverged to 1,608.27, 0.12355 and 2,524.72,
+  and none of the three records reconstructed exactly. The receipt is
+  `results/phase1/reaction_program_transformer_overfit_positional_v2/result.json`.
+- The failure localized the defect to per-family norm equalization. At step 1,200 the prior run had
+  raw norms of 0.00126, 8.00e-9 and 0.85778, so rescaling every family to their mean amplified the
+  nearly converged family's numerical gradient by tens of millions. This is not a safe balancing
+  rule near an optimum.
+- The corrected rule retains exactly stratified family sampling, gives each family equal loss mass,
+  and applies deterministic PCGrad conflict projection, but never amplifies gradients to a common
+  norm. A zero-gradient family therefore contributes zero instead of numerical noise.
+- Corrected run `e299bd07e494e8d2b77651398fbd5b895051dcf21e45f1e9bc790106d2cce3ae`
+  passed all six unchanged gates and reproduced both stages byte for byte. Total loss fell from
+  18.8357 to 2.83678e-5; Ugi, BL and LX each reached exact tensor reconstruction, all fixed states
+  remained exact, and final raw family norms were 0.00179, 0.000344 and 0.000368.
+- **Decision:** qualify the corrected architecture and optimizer for a separately frozen accelerator
+  preflight only. The receipt is
+  `results/phase1/reaction_program_transformer_overfit_v1/result.json`. This bounded memorization
+  result is not evidence that held-component or multi-reaction generalization is fixed; production
+  evaluation must retain the original split and failed MPNN baseline unchanged.
+
+## 2026-08-23 - Freeze and smoke-test the Transformer four-arm production follow-up
+
+- Frozen design run `8a9886a192652752dc5f8d34b1210254da7748e5e999f7fb29d7bc63d49081c6`
+  passed all 13 design and prerequisite gates. It retains the original Ugi-only, shared-conditioned,
+  null-program and cyclic-program control arms; component-disjoint folds; fixed-final checkpoint;
+  exact-L1 evaluation; three replicate seeds; and 194-atom/three-closure support. The only model
+  change is the separately qualified six-layer, eight-head reaction-program graph Transformer with
+  three routed experts and stable equal-family-mass PCGrad.
+- The first CPU smoke attempt completed training but exposed one architecture-specific sampler
+  access to the old MPNN `.backbone`. No evaluation result was published. Both model classes now
+  expose the same immutable support attributes, and sampling no longer inspects implementation
+  internals.
+- Corrected smoke run `f24ba6894a07ad552783ffe98dfcfdfeecadfa8afef5dec25a1f032a4b26c80d`
+  passed all eight training and 13 evaluation gates across all four arms. Fixed-state failures,
+  support overflows, route calls, oracle calls and candidate selections were all zero. The full
+  repository run collected 1,760 tests and reproduced exactly the 201 reviewed failures caused by
+  54 absent historical artifacts, with zero new failure nodes and zero stale cache nodes.
+- L4 and A100-40GB preflight specifications are now hash-pinned to the Transformer design, smoke
+  receipts and current regression receipt. They are execution-only capacity/determinism checks and
+  have not been launched in this change.
+- **Decision:** the Transformer follow-up is ready for its bounded accelerator preflight, but full
+  production remains blocked until one exact GPU class passes. Do not reuse the earlier MPNN
+  accelerator receipt, and do not interpret smoke success as held-component generalization.
+
+## 2026-08-23 - Optimize the Transformer training hot path without changing family weighting
+
+- A production-shaped CPU profile localized less than 1% of step time to cache sampling, record
+  loading and collation. The dominant cost was the three-family PCGrad backward, followed by dense
+  graph attention. The prior PCGrad implementation also materialized many CUDA scalars as Python
+  values inside each micro-batch, which would serialize accelerator execution.
+- The optimized path compiles stratified family indices and weights once per arm, vectorizes empty-
+  safe graph and semantic losses, collects metrics and fixed-state checks once per optimizer step,
+  constructs graph relations by indexed assignment instead of dense one-hot tensors, and flattens
+  PCGrad projection. A no-conflict fast path computes the exact equal-family gradient mean after one
+  pairwise conflict check; the sequential deterministic projection remains unchanged when a
+  conflict exists. Raw `reaction_family` counts are never used and the sampler reproduces the prior
+  five-batch RNG sequence exactly.
+- Reproducible benchmark
+  `results/phase1/transformer_training_optimization_v1/result.json` used the 5,289,517-parameter
+  production Transformer, batch size 12 and 158 padded atoms. Median forward + loss + PCGrad time
+  fell from 0.408209 s to 0.385620 s (1.05858x). Graph-bias construction was 1.69492x faster and the
+  PCGrad backward was 1.08293x faster. Graph biases and PCGrad gradients were bit-identical; the
+  maximum full-objective loss difference was 1.90735e-6 and passed the frozen `rtol=1e-6`,
+  `atol=1e-7` numerical-equivalence policy.
+- Fused scaled-dot-product attention was evaluated but not retained: it was neutral in the complete
+  local path and slightly slower in an isolated CPU training-backward measurement, while a current
+  production-GPU comparison could not be run without separate external upload/cost approval. The
+  qualified explicit attention implementation therefore remains in production.
+- Current-source overfit run
+  `d5cd9d8705e8e02694f3f119ab0ce321e1757f200fffb1d45be6626dcc1264eb` passed all six gates,
+  including exact Ugi/BL/LX tensor reconstruction. Four-arm smoke run
+  `d3640f379cd993487637ce50525967277e505c9df200c7a331d653300ea8ff61` passed every training
+  and evaluation gate with zero fixed-state failures. All 30 vendored assets verified. The full
+  suite reproduced the same 201 reviewed failures from absent historical artifacts and introduced
+  no Transformer-related failure node.
+- **Decision:** retain the measured sampler, loss, graph-bias and PCGrad optimizations. Production
+  launch remains blocked on a separately approved current-source L4 preflight; the CPU benchmark is
+  not evidence of CUDA throughput or model quality.
+
+## 2026-08-23 - Current-source Transformer L4 preflight passes
+
+- With explicit user approval for the bounded external run, Modal execution
+  `2ca97d586bce5c00f3960ba7fca7935b95f0569b974c6a52d00b53b269afd5b9` evaluated source
+  `15765d81e863e14e3c71d95720fd42fe222cb62acea7d1d1ec33ec1562390d8a` on an NVIDIA L4
+  under deterministic float32. The downloaded run and its single result artifact verified against
+  the remote manifests.
+- All 23 fail-closed gates passed. The benchmark exercised all four frozen arms, all 194 supported
+  atoms and three observed closures, the complete factorized layout schedule and the full cache fold
+  counts. Fixed-state failures, route calls, oracle calls and candidate selections were all zero;
+  raw-family-count sampling remained absent.
+- The peak reserved allocation was 3,772,776,448 bytes of 23,659,151,360 bytes total, leaving 84.1%
+  measured memory headroom. The maximum-194-atom stress step completed in 1.43652 s. Median measured
+  optimizer-step time was 1.06533 s for the shared conditioned arm, 1.05598 s for the null control,
+  1.07385 s for the cyclic-program control and 0.469181 s for Ugi-only. The exact conditioned repeat
+  reproduced model-state hash
+  `6b48d5c4130a7dc47523fa6bf8bb60f685b8fe5fcd13d3a8a7c7fc6584b83b56`.
+- The frozen training-only projection is 6,229.39 s (1.73039 GPU-hours) and $1.38292 per replicate,
+  or 18,688.16 s and $4.14877 for all three replicates at the pinned 2026-08-21 L4 rate. Evaluation,
+  startup, CPU, memory, transfer and storage are excluded exactly as declared by the config.
+- **Decision:** the exact L4 class is qualified for the separately frozen three-replicate Transformer
+  production comparison. This preflight establishes capacity, throughput and deterministic replay,
+  not model quality. Do not launch the production replicates without a separate explicit execution
+  instruction.
+
+## 2026-08-23 - Expand the manuscript baseline and ablation reporting contract
+
+- The user explicitly requested manuscript placeholders for the complete comparison suite rather
+  than only the previously implemented production arms. The common Ugi contract now reserves rows
+  for the ionizable-lipid DAG generator, SynFlowNet, RGFN, SynCoGen, unconditional DeFoG,
+  GenMol/SAFE, the finite catalogue oracle, a learned inventory selector, shared-null post-hoc
+  assessment, FACT-matched and FACT-generous.
+- The architecture table separately reserves one-at-a-time interventions for layerwise reaction-
+  program cross-attention, precursor-role consistency loss, reaction-core consistency loss,
+  program-routed adapters and PCGrad. Ugi-only, shared-conditioned, shared-null and cyclic-program
+  controls remain in the multi-reaction production table.
+- The historical fixed-scaffold model is scientific lineage rather than an independent comparator.
+  The failed sparse MPNN is an internal development predecessor rather than a mechanistic ablation.
+  Neither appears as a manuscript baseline; their frozen records remain in repository history.
+- **Decision:** these rows are explicit TBD reporting obligations only. They do not convert an
+  unexecuted comparison into evidence, silently authorize implementation or launch, or make every
+  external method a blocker for reporting already frozen negative and positive results.
+
+## 2026-08-23 - Audit and freeze the v1 paper experiment-readiness matrix
+
+- The current-source Transformer four-arm experiment and finite-catalogue oracle both pass their
+  registered input doctors. The exact executable fingerprint remains
+  `15765d81e863e14e3c71d95720fd42fe222cb62acea7d1d1ec33ec1562390d8a`, matching the
+  NVIDIA L4 preflight that passed all 23 gates. No full Transformer replicate exists on this source.
+  Existing full catalogue runs have older executable identities and cannot enter the matched
+  Transformer aggregate, so three current-source CPU runs are still required.
+- The paired production adjudicator is implemented. The common external-baseline importer and
+  assessor, conditional cross-role diagnostic, FACT-matched/generous models, learned inventory
+  selector, five Transformer mechanism ablations, six published-method adapters, method-neutral
+  route-evidence aggregate, and v1 result renderer are not implemented. Manuscript placeholders for
+  those methods are therefore not launch-ready results.
+- Froze one common Ugi baseline protocol: train fold only; seeds 20260825--27; 3,072 attempts per
+  seed; failed and invalid generations retained in the denominator; no repair/retry, route calls,
+  biological-oracle calls or candidate selection; and one constitutional exact-L1 assessor that
+  reports both decomposition coverage and forward-replay precision.
+- Added a machine-readable matrix and `forge paper experiments` diagnosis. It separately reports
+  immediate production readiness, setup completeness for all retained manuscript rows and final
+  result completeness. Optional leave-one-reaction-family-out remains secondary and never becomes a
+  hard gate.
+- **Decision:** preserve the passing production source freeze, run the three Transformer and three
+  matching catalogue replicates, and aggregate them before changing executable experiment code for
+  the remaining baselines and ablations. Every later adapter must receive its own smoke, provenance
+  and capacity gate. External rows must be run on the common split or remain TBD; published values
+  from other datasets cannot be substituted.
+
+## 2026-08-23 - Implement the retained computational baselines, ablations and v1 renderer
+
+- The user explicitly superseded the previous execution order by instructing implementation of the
+  conditional-dependence diagnostic, FACT controls, learned inventory selector, five Transformer
+  ablations, six external-baseline interfaces, common synthesis-evidence assessment, v1 result
+  renderer and held-reaction-family study. This intentionally invalidates the earlier source
+  fingerprint and its L4 preflight; no production result from that receipt will be reused.
+- Added a common Ugi attempt ledger that retains invalid and failed native attempts, call totals and
+  method-visible components. One registry-backed assessor now computes constitutional validity,
+  exact-L1 decomposition coverage, forward-replay precision, ambiguity, held-component yield and
+  method-relative open-endedness. The finite catalogue and Transformer evaluators export canonical
+  Ugi attempt ledgers, and the learned selector emits and assesses its ledger directly.
+- Implemented the source-balanced autoregressive train-inventory selector. It uses only train-fold
+  component identities and `family_balance_weight_raw`; out-of-inventory escape is zero by
+  construction. Its CPU smoke run passed the exact denominator, zero-call, no-selection and
+  coverage/precision gates.
+- Implemented one paired Transformer study containing the full model, the five one-at-a-time
+  mechanism ablations, FACT-matched and FACT-generous. FACT masks role-to-role messages in both the
+  graph layers and program-token encoder; an intervention test verifies that changing other-role
+  atom/core states cannot change target-role predictions. The matched arm has exactly the full
+  model's parameter count and the generous arm must be strictly larger. The CPU smoke completed all
+  eight arms, checkpoints, heldout losses, sampling, molecule reports and zero-call gates.
+- Implemented three leave-one-reaction-family-out arms. Their results are marked secondary and
+  `hard_gate=false`. The CPU smoke completed for all three held programs without weakening any
+  production gate.
+- Implemented the within-count-context role-shuffling diagnostic and generated-sample residual
+  cross-role fidelity metric. The first deterministic diagnostic execution produced mean AUC
+  0.48845, failed the 0.60 detection threshold and had component-family overlap between tuple-group
+  folds. Therefore no cross-role-dependence or joint-generation advantage claim is authorized from
+  that execution. Rerun it once on the final source; if the negative result persists, remove the
+  corresponding claim rather than changing the threshold.
+- Pinned upstream commits and legal status for Ou DAG+Chem, SynFlowNet, RGFN, SynCoGen, DeFoG and
+  GenMol/SAFE; implemented the common train/split/reaction export, clean-checkout verifier, strict
+  native receipt importer and failed-attempt preservation. This is not falsely called six runnable
+  native ports: Ou lacks released paper-specific code, SynCoGen lacks a usable license, and the four
+  other upstream training ports still require implementation and qualification.
+- Added lookup-only common route assessment. It promotes only exact role/constitution evidence and
+  treats every index miss as an abstention. The current frozen index is the bounded FORGE-candidate
+  cascade, not an exhaustive method-blind union; its coverage cannot support a cross-method
+  synthesis-success claim until that broader evidence scope is separately frozen.
+- Added `forge paper collect-results-v1` and `forge paper render-results-v1`. The collector extracts
+  normalized rows from hash-pinned source results without manual transcription. The renderer uses
+  the three training seeds as the independent units, applies the frozen 10,000-resample bootstrap,
+  emits LaTeX row fragments and figure CSVs, renders undefined metrics as N/R rather than zero, and
+  refuses strict publication output unless every retained method, mechanism and held-family row has
+  the exact paired seed set. A partial smoke preview completed successfully and is explicitly marked
+  non-publication.
+- **Decision:** internal implementations are ready for a final repository verification and fresh
+  L4 preflight. Full production remains unlaunched. External empirical rows remain blocked until
+  qualified native ports or author/licensing resolution exists, and the common L2/L3 table remains
+  descriptive evidence-index coverage rather than synthesis-success comparison.
+
+## 2026-08-23 - Close the baseline and ablation implementation milestone
+
+- Froze executable source fingerprint
+  `d1d13f12d3b6cd7276b6d52c78730559df28d8ed97de4f4ca826392d92fdc762` after the
+  common assessor, learned selector, Transformer/FACT study, held-family study, external contract and
+  result renderer were complete. Current-source smoke run IDs are recorded in
+  `results/phase1/paper_experiment_implementation_v1/result.json`; every listed result reproduced
+  byte-for-byte.
+- Verified all 30 vendored assets, passed active-source lint, passed four mypy groups covering
+  17/65/6/10 source files and passed the focused benchmark, external-adapter, renderer, Transformer
+  and architecture-boundary tests. The full historical test baseline remains blocked at 201 known
+  failures from 54 documented missing historical inputs, with zero new failures.
+- The provenance verifier reports seven drift declarations from old frozen receipts: three old
+  catalogue aggregates plus the earlier readiness matrix/paper, layout benchmark and maintenance
+  test-baseline receipt. These are expected invalidations caused by the authorized implementation,
+  not accepted drift. Their historical bytes and expected hashes remain unchanged; fresh
+  current-source runs must supersede them before production readiness can be green.
+- The final diagnostic measured mean conditional-role discrimination AUC 0.48845 against the frozen
+  0.60 threshold and its tuple-group folds were not component-family disjoint. This is a completed
+  negative result: no cross-role-dependence or joint-generation advantage claim is authorized, and
+  the gate will not be retuned.
+- The six external rows have a common split/export/receipt/import/assessment interface, but they are
+  not falsely declared runnable native ports. Ou DAG+Chem lacks the paper-specific author code,
+  SynCoGen requires licensing resolution, and SynFlowNet, RGFN, DeFoG and GenMol/SAFE require
+  qualified native ports. Published values from other datasets remain inadmissible substitutes.
+- The common route evaluator remains lookup-only and abstains on missing evidence. Its current index
+  covers the bounded FORGE cascade rather than a method-blind union, so cross-method synthesis-success
+  ranking is not authorized.
+- **Decision:** the authorized internal implementation milestone is complete. Before any full GPU
+  production run, rerun the exact NVIDIA L4 preflight on this source. The entire paper experiment
+  suite is not yet setup-complete because external native runs and a method-blind union evidence
+  scope remain unresolved; strict rendering must stay red until real paired-seed rows exist.
+
+## 2026-08-23 - Admit runnable external baselines and method-blind route evidence
+
+- Audited the exact pinned upstream releases rather than treating a repository URL as a runnable
+  paper baseline. Retain three empirical methods under the common Ugi protocol: RGFN at
+  `6ce59169f855ed18f34ba4e8279de93bee306e4f`, unconditional DeFoG at
+  `365bda9affadd5c2307014a0532ddaa244399441`, and GenMol/SAFE at
+  `add09fc83b7255bd09c797e527c0f4b51f5fb7c1`.
+- Implemented clean-checkout, fixed-final native runners for all three retained methods. RGFN uses
+  the exact registry-derived three-reactant Ugi transform and a constant non-property reward;
+  DeFoG recomputes the custom 194-heavy-atom data support and directly decodes raw graphs; GenMol
+  trains from scratch with the pinned SAFE tokenizer and strict decoding. Every adapter retains one
+  row per requested attempt and makes zero route, biological-oracle or candidate-selection calls.
+  Repair, retry and substitution of original-paper numbers are forbidden.
+- Exclude Ou DAG+Chem from the empirical table because the released repository omits the
+  paper-specific author implementation; exclude SynFlowNet because the released action space
+  supports at most two reactants and cannot represent the qualified AGILE three-reactant step;
+  exclude SynCoGen because its repository has no usable code license. Retain all three as cited
+  methodological context. A sequential pseudo-reaction is not an admissible SynFlowNet port.
+- Implemented a method-blind route-evidence union. It freezes the exact role/constitution union from
+  all assessed attempt ledgers, emits an opaque public worklist without method identity, seals
+  method membership separately, and requires one complete/unresolved/search-censored disposition
+  for every union component before per-method closure is computed. Missing evidence remains an
+  abstention. This supports a common route-evidence-closure comparison, not a synthesis-success
+  probability.
+- Tightened the v1 result collector and renderer to require
+  `route_scope=method_blind_cross_method_union` for strict common-method rows. The earlier bounded
+  FORGE-only route index cannot enter the cross-method table. Removed numerical placeholders for
+  the three excluded external methods while retaining the citations and exclusion reasons.
+- Verified deterministic smoke request preparation against clean exact checkouts for RGFN, DeFoG
+  and GenMol. Full native training has not run. `forge paper experiments --strict` now reports zero
+  setup blockers and `setup_complete_for_all_retained_rows=true`; that is readiness, not a result.
+- Reproduced the repository test baseline exactly: 1,778 collected nodes, the same 201 known
+  failures caused by 54 documented absent historical inputs, and zero new failures. All 30 vendored
+  assets verify; focused baseline/union tests, lint and strict typing pass.
+- The earlier frozen receipts remain immutable. Eleven unrecoverable intermediate identities were
+  never committed or archived; exact reviewed path/digest exceptions now document them, while
+  `results/phase1/external_baseline_route_union_readiness_v1/result.json` pins the current source and
+  supersedes the old readiness conclusion. The provenance gate reports zero unreviewed drift.
+- The fresh NVIDIA L4 run for source
+  `085e063a5c87d4fcc0f3a2a343bde6118617355dba7de5ee22f054555267327e` is planned as run
+  `46b2e06ea31aca29371a2b64f6289f14306804f2db443c2cf9211f18886cc545` but was not launched because
+  external paid-compute approval for this newly changed private source was not granted. No older
+  L4 receipt qualifies this source.
+- **Decision:** the retained experiment suite is implementation-complete and runnable. Production
+  remains fail-closed until the exact-source L4 preflight passes, after which the three paired-seed
+  internal studies and the three retained native baseline studies may launch. The method-blind
+  evidence union is frozen only after all resulting assessed ledgers exist.
+
+## 2026-08-23 - Qualify the final experiment source on NVIDIA L4
+
+- With explicit user approval, launched the fresh Modal NVIDIA L4 preflight for executable-source
+  digest `085e063a5c87d4fcc0f3a2a343bde6118617355dba7de5ee22f054555267327e`.
+- Run `9939ea913b54d9462213a7a8488436d1b12a1f7c2b11a3a30d3ea4385c25b7f5` completed and its
+  downloaded artifact independently verifies against the remote run and stage manifests. The
+  result digest is `9e2618f70db4e7bc099a76b139475434ff0391b4a1793ff0292773ad0f2e636a`.
+- All 23 prespecified gates pass, including exact deterministic replay, all-four-arm finite loss,
+  fixed-state preservation, full 194-heavy-atom support, factorized-layout closure, at least 10%
+  memory headroom, exact frozen training/evaluation budgets, absence of raw-family-count sampling,
+  and zero route, oracle and candidate-selection calls.
+- The maximum observed reserved GPU memory was 3,772,776,448 bytes on a 23,659,151,360-byte NVIDIA
+  L4. The projected four-arm training time is 1.7211 hours per replicate and the projected L4 GPU
+  line-item cost is USD 1.3755 per replicate, excluding CPU, memory, evaluation, transfer and
+  storage.
+- Repinned the paper experiment matrix to this exact source, run and result. The strict readiness
+  audit now reports `source_freeze.intact=true`, `immediate_production_ready=true`, zero blockers and
+  complete setup for every retained numerical row.
+- **Decision:** authorize launch of the three paired-seed Transformer production replicates and
+  their matched catalogue, learned-inventory, mechanism/FACT, held-family and retained native
+  baseline runs without further executable-source changes. Full paper results remain pending; the
+  preflight establishes capacity and determinism, not model quality.
+
+## 2026-08-23 - Cancel L4 production and prepare matched A100/H100 execution
+
+- At the user's explicit instruction, stopped all four active Modal L4 applications associated with
+  the production launch: `ap-hf20VA8gq3jwNqZYL4v43E`, `ap-xjevkBQAnL2AB3BAheYoMk`,
+  `ap-4vW8MBgU3IRChCYhxQsorf` and the orphaned `ap-9uVDT71vCdVayJmqH3hbz2`. No completed L4
+  production result is admitted from those cancelled applications.
+- Preserved the scientific design exactly and added two execution alternatives: NVIDIA A100-40GB
+  and exact NVIDIA H100. The H100 request uses provider resource `H100!` to prohibit silent H200
+  substitution. Both alternatives keep float32 strict determinism, the same four arms, seeds,
+  effective batch, 1,700 optimizer steps and evaluation budget.
+- Froze a matched A100/H100 benchmark policy that selects the lowest projected training wall time,
+  with projected GPU line-item cost as the tie-breaker. The benchmark changes no model-quality
+  metric and makes zero route, oracle or candidate-selection calls.
+- Corrected the production adjudicator to accept only the current Transformer production IDs and
+  to reject mixed experiment identities across replicates; the retired sparse-MPNN ID can no longer
+  enter the Transformer aggregate.
+- All 30 vendored inputs verify and the focused accelerator, aggregate and Modal-plan tests pass.
+  The previous L4 source freeze is intentionally invalidated by these executable changes.
+- Paid A100/H100 execution was not started because the external-action approval boundary requires a
+  new explicit authorization to upload the current private source and incur both benchmark charges.
+- **Decision:** production remains fail-closed. After that explicit approval, run the two short
+  benchmarks in parallel, adjudicate the measured wall-time winner, repin the source freeze and
+  launch only the selected GPU's three production replicates.
+
+## 2026-08-23 - Qualify exact H100 and reject the substituted A100 allocation
+
+- With explicit user approval, launched the A100-40GB and exact H100 Modal benchmarks in parallel
+  on executable-source digest
+  `668fb8d431bc48da2b63992c75cc3f58b666d797b57117da0ba5c8d0765906c5`.
+- H100 application `ap-9IzUnIIFqkVAZrsgmjTOn4` completed as run
+  `9327c755b39b1217e0f838f33dc346a1b26e50b641cf446262f6059fb890b3e1`. Its downloaded run
+  independently verifies and result digest
+  `0cc81c7324984a00ebb93a23ea606faa239d04a2d277064dfe5e95b4c983080b` passes all 23 gates on an
+  `NVIDIA H100 80GB HBM3`.
+- The H100 projection is 0.77393 training hours and USD 3.0564 GPU line-item cost per replicate,
+  excluding evaluation, startup, CPU, memory, transfer and storage. Peak reserved memory is
+  3,772,776,448 bytes out of 85,017,624,576 bytes.
+- A100 application `ap-Yvz24qmaxlIyxzQT4bSBCl` requested `A100-40GB`, but the provider allocated
+  `NVIDIA A100-SXM4-80GB`. The immutable physical-identity gate therefore failed while the other 22
+  gates passed. The raw failed result and failure receipt are preserved under
+  `results/phase1/transformer_a100_40gb_accelerator_failure_v1/`; the gate was not relaxed.
+- The substituted A100-80GB projected 1.34966 hours per replicate, so the qualified H100 was also
+  42.7% faster than the observed A100 allocation. This throughput comparison is execution evidence,
+  not a model-quality result.
+- Repinned the paper matrix to the exact H100 run and switched its three production commands to the
+  predeclared H100 experiment specification. This changes no executable source, model setting,
+  seed, data input or evaluation budget.
+- **Decision:** exact H100 is the sole qualified production target. The benchmark authorization does
+  not itself launch the three full paid production replicates.
+
+## 2026-08-23 - Launch three exact-H100 Transformer production replicates
+
+- With explicit user approval, launched full-profile replicates 0, 1 and 2 concurrently from the
+  predeclared `phase1-transformer-synthesis-program-production-h100` specification on exact
+  `H100!` resources.
+- The Modal application identities are `ap-Cmc93u1lO2LqRk6j4TEJd5` for replicate 0,
+  `ap-sxbvd0L4yBZPPBRMjwQj8h` for replicate 1 and `ap-rdlp7Oz879EhLXsFc1pose` for replicate 2.
+- All three launch plans are bound to executable-source digest
+  `668fb8d431bc48da2b63992c75cc3f58b666d797b57117da0ba5c8d0765906c5`; the H100 source freeze
+  was intact immediately before launch. No model, data, seed, precision, arm or evaluation setting
+  changed after preflight.
+- **Decision:** the applications are running. No production result or scientific conclusion is
+  admitted until each downloaded run independently verifies and the three-replicate adjudicator
+  completes.
+
+## 2026-08-24 - Freeze the paired reaction-program semantic intervention
+
+- The original production clients disconnected after all three replicates had entered their fourth
+  arm. Their fingerprint-bound restart ledgers survived on the persistent experiment volume, and
+  detached resume continued from the most recent 25-step restart boundary rather than retraining
+  completed work. All three training stages subsequently passed with zero fixed-state failures and
+  published 20 authenticated model checkpoints each.
+- Replicates 0 and 1 completed their original fixed-checkpoint evaluations and downloaded as verified
+  runs. Replicate 2 completed training but its original evaluation stopped when a string emitted by
+  RDKit could not be parsed again by the metric layer. The complete training stage was recovered by
+  its manifest hashes; this is an evaluation failure, not lost training or a scientific negative.
+- The sampler now requires a generated canonical SMILES to survive an independent sanitizing RDKit
+  parse before marking the row valid. Invalid rows remain in the attempt ledger and are not repaired
+  or retried.
+- Replaced the misleading interpretation of the cyclic-ID training arm with a proper inference-time
+  intervention. The new diagnostic reuses the three frozen final conditioned checkpoints and pairs
+  the exact same Ugi layouts and flow noise under six conditions: factual coordinates, each of the
+  two wrong reaction-family IDs, forward and reverse registry-role cycles, and removal of all
+  program coordinates. No checkpoint is retrained or selected.
+- Local CPU smoke run `d629661719eb8bfac5f06f8891d85d9a768ceb2c03e97a5084fae270e9f79af0`
+  completed, independently verified, evaluated all six conditions over all three training seeds,
+  and passed every execution and provenance gate. Its two attempts per condition are plumbing only
+  and are not interpreted scientifically.
+- **Decision:** the full paired semantic intervention is launch-ready on the qualified exact H100.
+  Completion will report conditional dependence without forcing a positive effect. A changed output
+  is not synthesis evidence, and the null inference condition remains an out-of-distribution
+  diagnostic rather than a substitute for the separately trained null arm.
+
+## 2026-08-24 - Qualify the Modal hydration fix and launch the semantic intervention
+
+- The first approved launch exposed an older detached application,
+  `ap-lnf0vFKGja8VNx4YDu1lY3`, that had retried a remote-hydration failure every ten minutes since
+  2026-08-22. The container imported `experiments._runtime` from Modal's `/root` entrypoint mount
+  before the separately copied `/opt/forge-project/forge` package was on `PYTHONPATH`, causing
+  `ModuleNotFoundError: No module named 'forge'`. This application had produced no scientific
+  result and was stopped rather than allowed to retry again.
+- Stopped the first semantic-intervention application `ap-6x7xQB5JORD8E0kFf0d5Ii` before its
+  queued H100 task could encounter the same defect. The three uploaded checkpoint archives remain
+  immutable inputs; no partial output is admitted from this stopped launch.
+- Added `/opt/forge-project` to the Modal image `PYTHONPATH` during image construction and added a
+  launcher regression assertion. All 18 focused Modal and semantic-intervention tests pass.
+- Ran the real CPU-only Modal installation smoke with the repaired launcher. Run
+  `fddca3166cc6ba358f494341fd00a9418e506c990343e0bc0f357e33156bb9ff`, executable-source digest
+  `e8cab91e9c6396cb8209e4c219aa1027bd7e8085d011fe6659509c0c87e8b1a7`, completed remotely,
+  downloaded and independently verified.
+- Relaunched the explicitly approved full exact-H100 semantic intervention as detached application
+  `ap-RIW9WEncu8dRRRvgSNAS8l`, request
+  `d88ecd957c3b9f8c24904598b39bc471baacee06338949f8d7b33fe9ac6fca1c`, on the same qualified
+  source digest. Modal reports one active task; no scientific result is admitted before remote
+  completion, download and manifest verification.
+- **Decision:** the remote import boundary is now qualified independently of GPU allocation. The
+  full semantic intervention is launched on exact `H100!`; its effect remains an outcome, never an
+  execution gate.
+
+## 2026-08-24 - Diagnose weak BL/LX generation with component-local layouts and a calibration-only repair study
+
+- Replicates 0 and 1 of the frozen Transformer comparison showed exact-L1 yield near 3--4% for the
+  repeated aza-Michael program and 18--19% for the repeated reductive-amination program. Inspection
+  found a concrete pre-model defect: the factorized layout prior pooled reaction-core coordinate
+  counts globally by role, then scattered them across repeated component copies. A sampled BL
+  program could therefore place multiple copies' core coordinates in one precursor block and none
+  in another before the Transformer received the program.
+- The layout prior now preserves a count-only reaction-core signature for each component occurrence.
+  It still stores no component identity, SMILES, fingerprint, atom state, parent pointer or bond
+  target. Exhaustive support validation and regression tests require every repeated component to
+  retain its own signature.
+- Added optional repeat-equivalence and within-component-position coordinates to the reaction-program
+  memory, plus a repeat-consistency objective over aligned exterior atom and parent-bond
+  distributions. Component-instance indices exist only as loss masks and never enter an embedding,
+  so this does not introduce a component vocabulary. The option defaults off, preserving strict
+  loading of the completed production checkpoints.
+- Added `strict_valence_topology_argmax` as a separate terminal policy. It preserves fixed adapter
+  states, realizes the requested tree and every requested closure once under the existing atom/bond
+  valence support, and abstains with a recorded reason when exact support is unavailable. It performs
+  no fallback, closure omission, repair or retry; the historical unconstrained argmax path remains
+  unchanged for frozen evaluations.
+- Frozen a nonselecting two-model by two-decoder study: corrected-layout reference versus the
+  repeat-aware Transformer, each evaluated with unconstrained and strict decoding. Only BL and LX
+  calibration products are read. Layouts and flow-noise seeds are paired across all four cells; no
+  heldout product, route service, oracle or candidate-selection call is permitted. The repeat loss
+  weight is fixed at 0.25 rather than tuned.
+- Current-source local smoke run `f09b2efd7da4174f2b739da0026234356284ca6b3d6869f880a430877aa62f85`
+  completed and independently verified. It trained both models, evaluated all four cells for both
+  programs, preserved every fixed state, reported coverage and precision, and recorded zero repairs,
+  route calls, oracle calls and candidate selections. Its two samples per cell/program and two
+  optimizer steps are plumbing only; all scientific metrics are intentionally uninterpreted.
+- Current-source CPU benchmark
+  `results/phase1/transformer_training_layout_repair_v1/result.json` retained numerical-equivalence
+  gates (maximum loss difference `1.90735e-6`, gradient difference zero) and measured a 1.053x median
+  optimized-path speedup on the unchanged 5,289,517-parameter reference Transformer. This is not a
+  CUDA throughput result.
+- **Decision:** the BL/LX failure now has a testable causal repair rather than an unstructured
+  architecture change. The three-replicate H100 calibration descriptor is prepared but not launched;
+  paid execution requires separate approval and a current exact-H100 preflight. Calibration outcomes
+  may diagnose the next freeze but cannot select a production model or support a heldout claim.
+
+## 2026-08-24 - Run seed 0 of the BL/LX repair calibration and preserve Ugi
+
+- Before paid training, expanded the calibration-only evaluator to report Ugi as a nonselecting
+  anti-regression anchor in every model/decoder cell. This supersedes the previous statement that
+  only BL and LX are reported; no heldout product is read. Local smoke run
+  `183cc47338aa6fb7902e84d25796454ab024b87bf17eabbf169a59f59f28ce5d` completed and independently
+  verified the four cells, all three families and every fail-closed execution gate.
+- With explicit user approval, exact-H100 preflight run
+  `2afcef2e92874b5e62ee934d7e8b2a98ff358ae6e35bf1d64738c7dff9278f95` passed all gates and
+  independently verified on an NVIDIA H100 80GB HBM3. Peak reserved memory was 3,911,188,480 bytes;
+  deterministic replay was exact and fixed-state failures were zero.
+- Full calibration replicate 0 ran from the identical executable-source digest
+  `7a23b6fd10b139ce6eb096d47fee42d1ab224a2c2a32644d79fa93b74beb9241`. Run
+  `9aa0115b3cd8d909db7fe1dbb4463a25cd5cfe0ce1395d55eb599d4dcc611589` trained both 5.3M-parameter
+  models for 1,700 optimizer steps, evaluated 512 attempts per family in each of four cells,
+  completed, downloaded and independently verified.
+- Under strict decoding, repeat-aware conditioning changed exact-L1 yield per attempt from 9.96% to
+  9.38% for BL, 17.58% to 44.14% for LX, and 78.91% to 78.91% for Ugi. Corresponding raw-valid
+  fractions changed from 99.61% to 97.46%, 22.66% to 50.20%, and 91.21% to 93.75%.
+- Retro-decomposition coverage and exact-forward replay precision are reported together. Precision
+  was 100% in all six strict-decoder family/model cells. BL coverage remained only 10.00% for the
+  reference and 9.62% for the repeat-aware model, so roughly 90% of valid BL attempts had no admitted
+  exact-L1 decomposition. LX coverage improved from 77.59% to 87.94%; Ugi remained 86.51% versus
+  84.17%.
+- Every execution gate passed: calibration-only access, immutable fixed states, matched attempt
+  counts, no repairs or retries, zero support overflow, no forbidden reductive-amination motif
+  metric, zero route or oracle calls and no candidate selection. The 512 molecules are attempts,
+  not independent experimental replicates, and one seed does not establish seed robustness.
+- **Decision:** do not spend two additional seeds yet. The repeat-aware intervention is positive for
+  LX and preserves Ugi, but it does not address BL. Diagnose BL reaction-core/handle realization on
+  the paired attempt ledger before freezing a revised intervention; additional seeds would measure
+  robustness of the current systematic BL failure rather than repair it. The hash-pinned summary is
+  `results/phase1/bl_lx_repair_calibration_seed0_v1/result.json`.
+
+## 2026-08-24 - Promote the BL aza-Michael junction to an adapter-fixed constraint
+
+- Re-inspected the hash-pinned BL_2023 supplement
+  (`46be449ddcef11da686d499015c868c767f4c02714c54e3d5ef5db35c4a42490`). General Procedure B,
+  pages 9--10, reports repeated aza-Michael assembly between an amine head and an acrylate tail;
+  Supplementary Figure S1, page 13, reports the 72-head by 10-tail library. The qualified registry
+  remains the sole executable chemistry source for the atom-mapped transform; no SMARTS or component
+  structure was retyped into model code.
+- Added a versioned representation intervention that changes exactly one scientific field relative
+  to the frozen base representation: all six semantic reaction-core coordinates of
+  `bl_2023_repeated_aza_michael` are adapter-fixed. Ugi remains fixed and LX remains learnable. The
+  generated head and tail interiors remain variable, and no component ID, SMILES, fingerprint or
+  fragment token enters the model.
+- The full-corpus census represented all 113,150 declared products and passed every gate. Across all
+  610 admitted BL products, all 6,350 semantic core atoms are fixed with zero policy mismatches. The
+  qualification receipt is
+  `results/phase1/bl_core_constrained_representation_v1/result.json`.
+- Built the deterministic 113,150-record packed cache at SHA-256
+  `3744e066325f3e203139797ab48eb54725f95ce09b39209905fb656df53c5973`. Frozen fold counts, 194-atom
+  support, three-closure support and source-balanced sampling are unchanged. Exhaustive layout
+  validation covered nine semantic bundles; 4,096 additional seeded BL draws stayed within the five
+  BL training-fold bundles and had zero fixed-state failures.
+- Prepared a one-arm calibration that reuses the previous seed-0 repeat-aware Transformer and both
+  terminal decoders. Relative to the previous matched strict cell, the only intended intervention is
+  the BL semantic reaction-core mask. Ugi and LX remain nonselecting anti-regression diagnostics;
+  only calibration products are read. Local smoke run
+  `90c5c8e8d267b2c16e41cd75d8c6d23aea6d27467094ae2b35c052ef11987a2e` completed and independently
+  verified all execution gates. Its two optimizer steps and two attempts per family are plumbing
+  only and have no scientific interpretation.
+- All 42 focused representation, cache, layout, Transformer and intervention tests pass; formatting,
+  lint and all 30 vendored-data pins pass. The repository-wide `make test` remains red on 203 tests:
+  201 exactly match the recorded historical-artifact baseline and two additional failures are in the
+  untouched paper-experiment-matrix diagnosis. No failing node is in the changed constraint scope;
+  no historical scientific gate or missing artifact was weakened to obtain a green local result.
+- **Decision:** the BL reaction-semantic constraint is implementation- and smoke-qualified. Do not
+  launch paid training from this decision entry. A fresh exact-H100 preflight and separate explicit
+  paid-launch approval are required before the single full seed-0 calibration can run. Exact-L1
+  coverage and forward-replay precision must still be reported together; exact replay remains
+  transform consistency, not synthesis-success probability or route certification.
+
+## 2026-08-24 - Run the BL-core seed-0 calibration without changing the Ugi train fold
+
+- Added and ran a two-step exact-H100 preflight under current executable-source digest
+  `b99e0d351a8ae7f77995a68f9595ac0f83a91b6d843e53d0346139aa2f5f2187`. The first launch exposed a
+  descriptor/runtime mismatch before training because the smoke config declared CPU while the stage
+  allocated CUDA; it produced no scientific output. Corrected preflight run
+  `65c05a70ab277302502c296994de905ecfeadbab9b588185b6af7ca4fc3e9f10` ran on an observed NVIDIA H100
+  80GB HBM3, passed every gate and independently verified.
+- With explicit user approval, full run
+  `639cf90dbcb57ba2ae2f32e255e2b208f01152c1de5b8c3efdae263534bf7140` trained the single 5,328,301-
+  parameter BL-core-constrained repeat-aware Transformer for the fixed 1,700 optimizer steps. Modal
+  preempted the first container after the persisted step-825 receipt. The same content-addressed run
+  resumed from its model, optimizer and RNG snapshot, reached the fixed step-1,700 checkpoint, then
+  completed, downloaded and independently verified.
+- The controlled data contract was preserved: Ugi used 66,464 train products and 15,800 calibration
+  products; none of the 30,122 Ugi heldout products was read. BL/LX used their existing 258/70 train
+  and 158/38 calibration products. Program mass remained one third per family; no product identity,
+  finite component vocabulary, route service, oracle or candidate selection entered training.
+- Under strict decoding, BL exact-L1 yield increased from 48/512 (9.38%) in the matched historical
+  repeat-aware cell to 369/512 (72.07%), a +62.70 percentage-point or 7.69x change. BL
+  retro-decomposition coverage was 100% among valid products and exact-forward replay precision was
+  100%; the strict decoder separately recorded 92 abstentions and performed no repair or retry.
+- The non-BL diagnostics reveal a tradeoff rather than a universal improvement. Strict exact-L1 yield
+  was essentially unchanged for LX, 226/512 (44.14%) versus 225/512 (43.95%), while Ugi decreased
+  from 404/512 (78.91%) to 371/512 (72.46%). Exact-forward replay precision remained 100% for all
+  three families. The unconstrained decoder independently moved BL from 4.49% to 23.83%, LX from
+  35.74% to 34.77%, and Ugi from 41.21% to 37.11%.
+- Every execution gate passed: fixed final checkpoint, calibration-only access, immutable fixed
+  states, matched 512-attempt cells, no repairs or retries, coverage plus precision, no forbidden
+  reductive-amination motif metric, zero route/oracle calls and no candidate selection. The frozen
+  hash-pinned summary is
+  `results/phase1/bl_core_constraint_calibration_seed0_v1/result.json`.
+- **Decision:** the BL reaction-core constraint worked strongly enough to retain, but the final
+  training mixture is not frozen and remaining production seeds are not launched. Next run one
+  separately frozen seed-0 ablation that increases Ugi exposure using only the same 66,464-product
+  Ugi train fold, with BL/LX data and all other training/evaluation controls matched. The 30,122 Ugi
+  heldout products remain untouched. One seed is calibration evidence, not across-seed robustness or
+  a final production-model selection.
+
+## 2026-08-24 - Test additional Ugi train-fold exposure without changing BL/LX exposure
+
+- Added an opt-in, explicit per-program microbatch allocation to the stratified production sampler.
+  The default path preserves the historical equal-family allocation exactly. The new calibration
+  appends ten Ugi rows to each historical 11-Ugi/11-BL/10-LX microbatch, producing
+  21-Ugi/11-BL/10-LX batches. It does not remove BL/LX rows, change source marginals, alter equal-family
+  PCGrad, introduce component identities or change any product fold.
+- Local smoke run `53fa9d6e46be764cea24d09643267e5b7737e2af6dd70aa0a87fe52940e6a974`
+  completed and independently verified. It observed the exact frozen row counts, passed the train-
+  fold and heldout-access gates, preserved fixed states and evaluated both decoders for all three
+  families. Its two steps and two attempts per cell are execution plumbing only.
+- Exact-H100 preflight run `c9c579791ee13789d8472e8202f9e39e8ed30d253cd6482355ec224e3dc528a5`
+  ran on an observed NVIDIA H100 80GB HBM3, completed, downloaded and independently verified. Every
+  exposure, fixed-state, calibration-only, coverage/precision and no-repair gate passed.
+- Full run `f2d85f206bab5b877b76ee421991ca4e80b477bf863a0369d8a61c48ff4e4973`
+  trained the unchanged 5,328,301-parameter model for the fixed 1,700 steps. It processed 142,800 Ugi
+  rows versus the historical 74,800, while BL remained 74,800 and LX remained 68,000. Every Ugi draw
+  came with replacement from the same 66,464-product train fold; none of the 30,122 Ugi heldout
+  products was read. The final checkpoint, training result and calibration evaluation completed,
+  downloaded and independently verified.
+- Under strict decoding, exact-L1 yield changed from 369/512 (72.07%) to 373/512 (72.85%) for BL,
+  225/512 (43.95%) to 229/512 (44.73%) for LX, and 371/512 (72.46%) to 374/512 (73.05%) for Ugi.
+  The Ugi gain was only three products or 0.59 percentage points and remained 5.86 points below the
+  pre-BL-constraint 404/512 (78.91%) result. Forward replay precision was 100% for all three strict
+  cells. Ugi raw validity increased to 87.11%, but conditional exact-decomposition coverage decreased
+  to 83.86%, leaving exact-L1 yield nearly unchanged.
+- The unconstrained decoder did not provide corroborating Ugi improvement: Ugi changed from 37.11%
+  to 36.33%, BL from 23.83% to 16.80%, and LX from 34.77% to 38.87%. Every execution gate passed, and
+  no repair, retry, route call, oracle call or candidate selection occurred. The frozen summary is
+  `results/phase1/ugi_train_exposure_calibration_seed0_v1/result.json`.
+- Formatting, lint, all 30 vendored-data pins and all 29 sampler/calibration/Modal focused tests pass.
+  The repository-wide suite remains red on exactly its recorded 203-node historical and missing-
+  artifact baseline; none of those nodes is in the changed sampler or experiment scope.
+- **Decision:** retain the BL reaction-core constraint, but do not freeze this larger Ugi-exposure
+  schedule or launch remaining production seeds. A 90.9% increase in Ugi row exposure did not
+  materially recover Ugi exact-L1 yield, so simple resampling of the same train fold is not the main
+  repair. Diagnose cross-family parameter interference at the shared output and routed-adapter
+  boundary next. Do not add or reassign heldout products.
+
+## 2026-08-24 - Freeze and run the three-seed final conditioned Transformer
+
+- Froze the standard 32-row microbatch, 128-example effective batch, equal-program-mass
+  BL-core-constrained repeat-aware Transformer as the final conditioned arm. The rejected enlarged-
+  Ugi schedule is absent. The production descriptor fixes three seeds, 1,700 optimizer steps, a
+  strict no-repair terminal decoder, 512 calibration attempts and 3,072 heldout attempts per
+  reaction program.
+- The earlier positive seed-0 calibration checkpoint was not reused: it authenticates a calibration-
+  only design and only 512 attempts. Exact-H100 preflight run
+  `48aafaaa0fb82705864bd2e2d055d0fc1ebd075d66c3e7bd9df265b9b753c2f9` passed and independently
+  verified before production.
+- Under the identical executable source SHA-256
+  `a154389d2f8109e2d91dc508c0d9ab06a10bbe61fbfa6411663a931bb3355c39`, production runs
+  `647a8c643b841a569a3a8fd9a721b431fdf27da4cd5d2c3667c53e86fa57eeaa`,
+  `6f51e43124edca1c241bc466eb896b8e6689a80306bd12653a0e36eaefee0131` and
+  `cb1454baeeb6c9a7a3f5f6351ce7ac587480151cfe76b8363af85a0c109ab183` completed on observed NVIDIA
+  H100 80GB HBM3 accelerators, downloaded and independently verified.
+- Heldout exact-L1 yield per attempt across seeds 20260825/20260826/20260827 was
+  72.27%/90.30%/73.47% for Ugi, 76.53%/81.51%/74.35% for BL and
+  38.61%/14.78%/40.43% for LX. Means were 78.68%, 77.46% and 31.27%, respectively. Exact forward-
+  replay precision was 100% in every family/seed cell. LX therefore remains the most seed-sensitive
+  family; no seed is selected or excluded.
+- The method-blind common Ugi assessor preserved all 3,072 attempts per seed and produced passing,
+  hash-pinned results at `results/phase1/forge_transformer_common_assessment_seed{0,1,2}_v1/`.
+  Ugi unique method-visible open-ended exact-L1 yield was 702.15, 843.75 and 707.68 products per
+  1,000 attempts. Bounded route-index misses remain abstentions and cannot support a synthesis-
+  success comparison.
+- **Decision:** these are the final three conditioned-model replicates for the current paper
+  comparison. Report the complete across-seed distribution. Do not retrain, select a favorable seed,
+  relax the strict decoder or interpret exact L1 replay as synthesis success.
+
+## 2026-08-24 - Qualify matched baseline execution without weakening upload boundaries
+
+- Current-source CPU finite-catalogue replicates
+  `6ee5e552b8f622f9dda9c326246b211c32fcb2dc2d09a0a5c7e1d23c994a3cb4`,
+  `5a492f06fd1722d7e19a8fc79627f83afe2d7c884a7a7d118a0ac3fcdbccf9fe` and
+  `f20cbd3ff05112fd5a95ec01663a8c247acec5aba17e4de321c6c13521a8080f` completed and independently
+  verified. Their common Ugi assessments are frozen under
+  `results/phase1/finite_catalogue_common_assessment_seed{0,1,2}_v1/`. The catalogue has zero
+  method-visible open-ended products by construction; this is the bounded-discovery contrast, not a
+  validity defect.
+- Split the learned-inventory selector's CPU smoke from its exact-H100 preflight so allocated-device
+  equality remains fail-closed. Local run
+  `45879045172e2eb7d67f601ee960443e45e2eb01f26c13142ddeed74671e29b3` and exact-H100 preflight
+  `75775d201ddb32ac0ba8876857518d5168ba5e34becfe3f25b3c70b27220fa8b` both passed and independently
+  verified. The three full learned-inventory replicates have not launched because exporting the
+  private common molecular inputs to a new Modal job requires explicit user approval.
+- Rebased the five one-factor Transformer ablations and FACT-matched/generous controls onto the final
+  repeat-aware BL-core model and strict terminal decoder. Local eight-arm smoke run
+  `9c0301e27fa67e15a409b814fc78f0fd9ccb6aed9ac0554e6396800bdc03ce4e` passed all execution and
+  parameter-count gates. Its tiny smoke metrics are not scientific results; exact-H100 preflight and
+  production remain unlaunched pending the same explicit private-input upload approval.
+- The full local conditional-dependence diagnostic
+  `e4d137d85897198ffac92fc54d19ff27be3046ae25e1f9398c334ea672d34376` completed and independently
+  verified. Mean cross-validated intact-versus-shuffled classifier AUC was 0.4885, below the frozen
+  0.60 threshold, and component-family overlap prevented a strict component-disjoint interpretation.
+  The diagnostic therefore does not authorize a claim that the Ugi data exhibit detectable cross-
+  role dependence; this negative result is retained.
+- Prepared all nine full native requests for pinned RGFN, DeFoG and GenMol checkouts at seeds
+  20260825--20260827 with 3,072 attempts each, plus one smoke request per method. No external native
+  job was launched and no data were transferred to the new Modal baseline volume after the upload
+  boundary rejected the request.
+- **Decision:** preserve every qualified request and negative result. Continue already-authorized
+  internal H100 controls, but do not upload private common inputs, heldout data or external checkouts
+  to a new Modal destination without the user's explicit informed approval.
+
+## 2026-08-24 - Adjudicate the final conditioned model and finite-catalogue baseline
+
+- Added a separate final-production adjudicator rather than rewriting the historical negative
+  four-arm aggregate. It independently verifies three promoted FORGE runs, three frozen four-arm
+  control runs and three finite-catalogue runs, then binds all nine to executable-source digest
+  `a154389d2f8109e2d91dc508c0d9ab06a10bbe61fbfa6411663a931bb3355c39`, paired seeds
+  20260825--20260827, common molecular inputs and 3,072 heldout attempts per program and seed.
+- The new immutable result is
+  `results/phase1/final_bl_core_production_adjudication_v1/result.json`. Every input run and copied
+  evidence artifact verifies; all zero-call, no-selection, no-repair, fixed-state, support,
+  coverage/precision and forbidden-metric gates pass. The aggregate reports seed means, sample
+  standard deviations and paired-seed bootstrap intervals without treating molecule rows as
+  independent replicates.
+- The final model met every prespecified Ugi-retention gate relative to the Ugi-only arm. Ugi
+  exact-L1 yield was 78.68% versus 25.42% for Ugi-only, a paired difference of 53.26 percentage
+  points (95% paired-seed bootstrap interval 41.24--61.82 points). Final exact-L1 means remained
+  78.68% for Ugi, 77.46% for repeated aza-Michael and 31.27% for repeated reductive amination.
+- FORGE produced 729.28, 313.91 and 34.83 unique operationally open-ended exact-L1 products per
+  1,000 attempts for Ugi, aza-Michael and reductive amination, respectively. The train-only finite
+  catalogue produced zero for all three by construction. This is the declared bounded-discovery
+  contrast; it is not a synthesis-success comparison.
+- The shared-null and cyclic-ID checkpoints use the same seeds, data, molecular support and attempt
+  budget, but predate the promoted BL-core constraint. Their aggregate contrasts are retained as
+  descriptive context, not presented as one-factor causal effects on the final model. The full
+  paired inference-time program-semantic intervention remains the causal test.
+- All focused adjudication and architecture tests pass, all 30 vendored inputs verify, and a clean-
+  cache collection of 1,812 tests has exactly the recorded 201 historical/missing-artifact failures
+  with zero new failures.
+- The strict code/config provenance gate exposed five frozen receipts that pinned intermediate,
+  uncommitted bytes later superseded by the final mechanism config, paper matrix, historical
+  adjudicator, manuscript and refreshed test-baseline report. Each missing digest was searched over
+  every version of its path in current-repository Git history, the frozen-code archive, the working
+  tree and task-temporary copies; none was recoverable. Five exact expected/current identity pairs
+  were therefore added to `docs/known_artifact_drift.json`. The declaring receipts remain immutable,
+  and a different future digest still fails closed.
+- **Decision:** Task 1 of `docs/PAPER_RESULTS_TASKS.md` is complete. Freeze this aggregate and do not
+  retrain, seed-select, relax gates or overwrite the historical negative result. Proceed next to the
+  inference-only program-semantic intervention using the promoted final checkpoints.
+
+## 2026-08-24 - Complete the final-checkpoint program-semantic intervention
+
+- Implemented a versioned inference-only intervention over the three promoted
+  `bl_core_constrained_repeat_aware` checkpoints. Within every paired comparison, checkpoint,
+  morphology layout and flow noise are identical; only the family token, precursor roles or all
+  program coordinates change. No model was retrained and there were zero route calls, oracle calls
+  or candidate-selection operations.
+- Local smoke `a1ce6cbd225c80ac7de593050d71bf646809409715a569722c1bb3ba3a4a6264`
+  passed before remote execution. Exact-H100 preflight
+  `a80832881ecdc5d8d326b334adb585399ea1911ad9be343941d21114a7038d96`
+  and full run `a653dcea7db0ac2e745e4efc9738d1e4bb750cd70fe318ed7192ad33e937f4dd`
+  used identical executable source SHA-256
+  `c8260b6e691978e06d07e442ca25201f79a8a9ce8357a6147c3ad98c86aaacdd`, completed on observed
+  NVIDIA H100 80GB HBM3 accelerators, downloaded and independently verified.
+- The full experiment evaluated 3,072 paired attempts for each of six conditions and each of three
+  independent training seeds, producing 55,296 attempt rows. Factual Ugi exact-L1 yield was 39.69%.
+  Removing all learned program coordinates reduced it to 3.62%, a factual advantage of 36.07
+  percentage points (95% paired-seed bootstrap interval 34.28--37.24 points). Substituting the LX
+  family token reduced yield to 17.09%, a 22.60-point advantage (14.06--27.47 points).
+- Cyclically shifting precursor roles caused smaller but consistent exact-L1 losses: 0.82 points
+  (0.29--1.69) for the forward cycle and 4.49 points (1.37--8.27) for the reverse cycle. The BL
+  family-token substitution yielded 37.70%, only 2.00 points below factual, and its interval
+  (-2.18--5.60) crossed zero. Canonical outputs changed for roughly 47--52% of paired attempts, but
+  this is conditional dependence rather than chemical correctness. Exact forward-replay precision
+  was 100% among every exact decomposition, and decomposition ambiguity was zero.
+- The frozen hash-pinned summary is
+  `results/phase1/final_program_semantic_intervention_v1/result.json`; the complete metrics and
+  attempt ledger remain in the verified run. The null condition is out of distribution and cannot
+  be interpreted as a matched trained baseline.
+- **Decision:** Task 2 of `docs/PAPER_RESULTS_TASKS.md` is complete. The final Transformer uses the
+  joint reaction-program coordinate system, with strong evidence for program presence and the
+  Ugi-versus-LX distinction plus role sensitivity. Do not claim that every family ID is equally
+  informative: the Ugi-versus-BL token effect is unresolved across three seeds. Proceed to the
+  prespecified eight-arm Transformer mechanism and FACT study without selecting or modifying these
+  results.
+
+## 2026-08-25 - Complete the three-seed Transformer mechanism and FACT production runs
+
+- All eight arms completed for independent seeds 20260825--20260827 on exact NVIDIA H100 80GB
+  accelerators and executable source SHA-256
+  `c8260b6e691978e06d07e442ca25201f79a8a9ce8357a6147c3ad98c86aaacdd`. The independently verified
+  run IDs are `5f149b098c61a855dc1bf51b5ba1c3c31162d35fb5e84abeb174bde30a5eb54f`,
+  `9f5633821b0234c367d7f1058703ba05034d2971c04ee45a7e9a26af83f311c1` and
+  `3715b68bb7faaa8815ff575e07ff4c00f7983327322462ed8c2b463629172e46`.
+- At 3,072 held-out attempts per program and seed, the full Transformer produced mean exact-L1
+  yields of 79.18% for Ugi, 76.25% for repeated aza-Michael and 31.81% for repeated reductive
+  amination. FACT-matched produced 5.20%, 39.37% and 50.99%; FACT-generous produced 29.67%, 68.70%
+  and 56.13%, respectively. FORGE exceeded both FACT controls in every seed for Ugi and repeated
+  aza-Michael, while both FACT controls exceeded FORGE in every seed for repeated reductive
+  amination.
+- Removing layerwise program cross-attention reduced mean exact-L1 yield by 5.45 percentage points
+  for Ugi and 4.08 points for repeated reductive amination, but increased repeated aza-Michael yield
+  by 1.74 points. Other one-factor interventions were also chemistry dependent. The arm without
+  gradient-conflict control slightly exceeded the full-model mean for all three programs.
+- The 24-row seed ledger is
+  `results/phase1/transformer_mechanism_study_v1/seed_rows.jsonl` with SHA-256
+  `4a382994c6dbc7bd36b362a18baf1e01da11ee5bf9c02a5a875b4ee18d93f938`. The paper-render result is
+  `results/phase1/transformer_mechanism_study_v1/paper/result.json` with SHA-256
+  `f3c7e4d332defe03649658467d320a89ade5d1ff129d43f86ac3b62518427c5e`.
+- **Decision:** populate the manuscript architecture table and report the reaction-dependent result,
+  including the adverse LX contrast and the no-gradient-control result. Do not claim universal
+  superiority, detected cross-role dependence, or that every Transformer mechanism independently
+  improves exact-L1 yield. Task 3 remains open only for its common-assessment and compute-accounting
+  reporting requirements; these completed production runs are frozen and must not be retrained or
+  seed-selected.
+
+## 2026-08-25 - Insert every completed result into the v1 manuscript without filling missing methods
+
+- Added a fail-closed completed-evidence renderer driven by
+  `configs/reproduction/natbiotech_v1_completed_evidence_v1.json`. It verifies exact path/SHA-256
+  pins before generating manuscript macros, table rows, figure summaries, CSV inputs and a result
+  receipt. The renderer performs no model training, route search, oracle calls or candidate selection.
+- Completed common Ugi assessment for the finite-catalogue oracle, shared-null post-hoc control,
+  FACT-matched, FACT-generous and FORGE Transformer at paired seeds 20260825--20260827. These
+  molecular and exact-L1 rows use zero route/oracle calls and do not import the bounded FORGE route
+  index into a cross-method evidence comparison.
+- Replaced supported manuscript placeholders with the final three-program production comparison,
+  semantic interventions, Transformer mechanism study, catalogue tradeoff, Ugi novelty audits,
+  bounded route cascade, synthesis-guidance failure audit and HeLa potency-guidance failure audit.
+  The manuscript now reports the native held-component result as a negative finding: one exact-L1
+  recovery in 9,216 attempts (0.11 per 1,000).
+- Removed the unsupported role-specific held-component and optional held-reaction-family claims.
+  The remaining red TBD cells are limited to the learned inventory selector, RGFN, DeFoG,
+  GenMol/SAFE and their method-blind route-evidence union. Historical compute fields absent from
+  frozen receipts are marked N/R rather than estimated.
+- All 30 vendored inputs verify. Focused renderer, CLI and paper-matrix tests pass. The full
+  1,814-node suite retains exactly the 201 documented historical missing-artifact failures with zero
+  new failures; the refreshed baseline report is `blocked_known_failures`, not a green full-suite
+  claim.
+- **Decision:** freeze the inserted values through the completed-evidence config and renderer. Do not
+  fill the remaining external or route-comparison rows from published values, native FORGE evidence
+  or manual transcription. Complete the learned inventory and native external runs before freezing
+  the method-blind union and strict final paper renderer.
+
+## 2026-08-25 - Supersede the GenMol/SAFE empty-output labeling defect without retraining
+
+- The completed native GenMol/SAFE ledgers incorrectly labeled an empty strict SAFE decode as
+  `generated` because the adapter tested only `decoded_smiles is not None`. The original native
+  receipts and sample files remain immutable. A new explicit supersession changes only the
+  contradictory `generated` plus empty-payload state to `invalid`; it creates no molecule, changes
+  no molecular payload, and performs no retraining, resampling, repair, route call, oracle call or
+  candidate selection.
+- The hash-pinned supersessions corrected 962, 925 and 968 labels at seeds
+  20260825--20260827 while preserving all 3,072 requested attempts and compute-accounting totals in
+  each seed. Future native runs now classify an empty SAFE decode as invalid at the runtime boundary.
+- The common assessor passed for all three corrected ledgers. Valid connected yields were 62.73%,
+  63.38% and 62.14% (mean 62.75%, sample SD 0.62 percentage points), but only 15, 20 and 17 unique
+  valid products were produced. Exact Ugi L1 yield was 0/3,072 in every seed. The result is therefore
+  paper-admissible as a negative external baseline with severe mode collapse, not as evidence that
+  GenMol/SAFE generates Ugi-compatible lipids under this matched training protocol.
+- The final assessment receipts are
+  `results/phase1/genmol_safe_common_assessment_seed0_v1/result.json` (SHA-256
+  `1702e839253fffe4ae1860f145a7c38124a4b0d06842d520ec7be084e9e3da0e`), seed 1
+  `6aabb367c6e2204a5584d882d0ba39d8bcf2a924636a80f2daa4518954a5bb96`, and seed 2
+  `ba402185811d38c5285161621a715b4203f67856c509312abbf7e8632016822c`.
+- **Decision:** retain the original malformed native receipts as historical evidence and use only
+  the explicit superseding ledgers for common assessment. Do not retrain or rerun GenMol/SAFE for
+  this label-only defect. Include the resulting zero exact-L1 finding when the external-baseline
+  table is next regenerated.
+
+## 2026-08-25 - Add one method-blind whole-lipid structural-realism diagnostic
+
+- Added `forge experiment assess-lipid-realism` as a separate question from exact Ugi-L1 replay:
+  whether each requested generation attempt yields a diverse connected graph near the empirical
+  structure distribution of source-study-held-out observed constitutional R0 lipids. This is a
+  secondary post-hoc diagnostic, not a new confirmatory endpoint and not a replacement for exact
+  synthesis-program evaluation.
+- The common protocol is `configs/multireaction/common_lipid_realism_v1.json` (SHA-256
+  `a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855`). It selects 4,096 R0-train
+  structures by deterministic SHA-256 rank only to freeze robust descriptor scaling, and 2,048
+  source-study-held-out structures as the evaluation manifold. Selection is independent of method
+  outputs. The declared common support remains C/N/O/P/S and at most 194 heavy atoms; the 398
+  excluded R0-train structures are explicitly counted rather than silently discarded.
+- The assessment reports Morgan/Tanimoto and interpretable whole-lipid descriptor manifolds
+  separately, including both precision and coverage. It also reports continuous nearest-reference
+  distances, robustly standardized descriptor Wasserstein distance, grouped classifier two-sample
+  AUC, validity/connectedness, uniqueness, Shannon effective molecule count and internal diversity.
+  Failed, invalid, duplicate and out-of-support attempts remain in the 3,072-attempt denominator.
+  QED is intentionally absent, and the evaluator performs zero route, proposal-engine or biological-
+  oracle calls.
+- Added a fail-closed seed aggregator. It requires identical config/reference pins, identical
+  attempt budgets and the full seed set 20260825--20260827 for every included method; it reports the
+  mean and sample standard deviation over training seeds and never treats molecules as independent
+  training replicates. Missing metrics, such as a classifier AUC for a collapsed generator, remain
+  explicitly not estimable rather than imputed.
+- Focused tests, Ruff, Black, MyPy and all 30 vendored-data pins pass. The complete suite returns
+  exactly the frozen 201 historical/missing-artifact failures and no new failures. During that
+  check, the old M0-07 split writer was moved to the shared deterministic gzip serializer so Python
+  3.11 no longer leaks a platform-specific gzip OS byte into a byte-exact frozen artifact.
+- The current pre-DeFoG aggregate is
+  `results/phase1/common_lipid_realism_v1/pre_defog_aggregate/result.json`. FORGE produced 86.60%
+  connected outputs, a 95.68% unique fraction among connected outputs and a mean effective count of
+  2,479 molecules. GenMol/SAFE produced 62.75% connected outputs but only a 0.90% unique fraction and
+  effective count 3.25; RGFN produced no molecular outputs. The finite-catalogue and learned-
+  inventory methods had higher descriptor-manifold precision per attempt (5.46% and 5.66%) than
+  FORGE (0.88%), while FORGE's descriptor distance was slightly lower. Fingerprint-manifold
+  precision was zero for FORGE and GenMol/SAFE and near zero for the inventory methods, and grouped
+  classifier AUC remained near 0.97 where estimable. These absolute values show that no evaluated
+  method should be claimed to reproduce the full held-out observed-lipid distribution.
+- **Decision:** retain this as a multi-axis structural diagnostic. Do not collapse it into a single
+  “reasonable molecule” score, use it to select candidates, or describe it as ionization,
+  formulation, delivery, activity or synthesis success. Apply the unchanged evaluator to all three
+  DeFoG ledgers when they finish, then regenerate the complete aggregate and paper table.
+
+## 2026-08-25 - Complete the common molecular baseline and structural-realism paper tables
+
+- DeFoG seed 20260827 completed on the previously authorized exact H100 run. Its downloaded samples,
+  receipt and checkpoint match the hashes recorded by the remote runtime. The canonical import
+  retained all 3,072 attempts and made zero repair, retry, route, oracle or selection calls.
+- The frozen common Ugi assessor returned 929 exact-L1 products for seed 20260827, or 302.4 per
+  1,000 attempts. Across three independent seeds, unconditional DeFoG produced $280.6\pm26.6$
+  exact-L1 products and $15.5\pm2.4$ held-component exact-L1 products per 1,000 attempts. FORGE
+  remained higher in exact-L1 yield at $786.8\pm100.8$ per 1,000 attempts, while DeFoG materially
+  exceeded FORGE on recovery of specifically reserved held components.
+- The final method-blind structural aggregate is
+  `results/phase1/common_lipid_realism_v1/final_aggregate/result.json` (SHA-256
+  `810d9ea329dce00c57ff19de36da0b3daa9efc73f6c7b5df7ff6bc9745f21d17`). DeFoG produced
+  $1064.3\pm129.9$ effective molecules and 100% uniqueness among connected outputs, but only
+  $17.3\pm1.4$ attempts per 1,000 entered the held-out descriptor manifold. No method reproduced
+  the full observed-lipid distribution; grouped classifier AUC remained 0.961--0.974 where
+  estimable and fingerprint-manifold precision was zero or near zero.
+- The hash-pinned completed-evidence renderer now includes all three external methods and the learned
+  finite-inventory selector, renders non-estimable quantities as N/E, and populates common benchmark,
+  seed, decomposition, inventory, compute and structural-realism tables. Exact-L1 rates are also
+  inserted into the otherwise pending route-evidence comparison.
+- The resulting 25-page manuscript compiles without undefined citations, undefined references,
+  overfull boxes or fatal LaTeX errors, and the result-heavy pages passed visual inspection. All 30
+  vendored inputs verify. The full suite collected 1,822 tests and reproduced exactly the 201
+  documented missing-artifact failures with zero new failures; the baseline status remains
+  `blocked_known_failures`, not a green full-suite claim.
+- **Decision:** freeze the common molecular and structural tables as complete. Preserve the negative
+  RGFN and GenMol/SAFE results, the weak FORGE held-component recovery and the failure of every
+  method to reproduce the full held-out structural distribution. Leave cross-method L2/L3 fields
+  TBD until the method-blind component union is frozen and adjudicated.
+
+## 2026-08-25 - Complete the method-blind cross-method L2/L3 evidence assessment
+
+- Froze the exact role/constitution union from all 27 retained common-assessment ledgers (nine
+  methods, three seeds each) only after those ledgers were complete. The union contains 11,313
+  components. Its public worklist contains no method identity; private membership remains in a
+  separate sealed ledger. The union result is
+  `results/phase1/common_ugi_method_blind_route_union_v1/result.json` (SHA-256
+  `978450c4702cc984b3cd382df94fc4ddc956add0d4b717032856de5e434da4d7`).
+- Applied the pre-existing exact-source Ugi component dossier library to that public worklist with
+  no access to private membership and no planner, proposal-engine, biological-oracle or selection
+  calls. Of 11,313 components, 29 closed; 38 family projections were explicitly barred from
+  closing, four had incomplete exact evidence and 11,242 had no exact-source record. Every
+  non-closed item is an explicit missing-evidence abstention. The evidence result is
+  `results/phase1/common_ugi_method_blind_route_evidence_v1/result.json` (SHA-256
+  `bf3626b630f3504e829bd424613841a087db89677e80a2e18f0f10e9bdbeec35`).
+- Adjudicated every method and seed against that one complete disposition index. FORGE generated
+  $786.8\pm100.8$ exact-L1 products per 1,000 attempts but zero verified-upstream, terminal-evidence
+  or complete-dossier products; all exact-L1 products abstained under this sparse library. DeFoG,
+  shared-null and FACT-matched likewise had zero complete dossiers. The finite catalogue oracle and
+  learned inventory selector closed only $0.1\pm0.2$ and $0.7\pm0.3$ dossiers per 1,000 attempts,
+  respectively. RGFN and GenMol/SAFE had no exact-L1-eligible products. The adjudication result is
+  `results/phase1/common_ugi_method_blind_route_adjudication_v1/result.json` (SHA-256
+  `36b474711c5e20e9720e2ae6e62a495b4594ec973bae8fa15db52a7f93f3199f`).
+- Removed the redundant DeFoG-plus-AiZynthFinder table row. A proposal-only planner result cannot
+  close exact evidence and therefore cannot produce a distinct admissible L2/L3 value without new
+  exact forward verification and terminal-material evidence.
+- **Decision:** publish this as a negative result about the coverage of the current exact evidence
+  library, not as a ranking of intrinsic synthesizability or a synthesis-success probability.
+  Preserve family projections as abstentions, preserve all unknown components, and do not promote
+  the bounded FORGE cascade into the cross-method comparison.
+
+## 2026-08-25 - Freeze deterministic FORGE-generated sample visualization
+
+- Added the versioned display contract
+  `configs/reproduction/natbiotech_v1_forge_sample_figure_v1.json` and the reproducible renderer
+  `paper/forge_paper/sample_visualization.py`. The figure reads the hash-pinned seed-0 common Ugi
+  assessment and structural-realism ledgers; it does not resample the model or inspect biological,
+  planner or procurement outputs.
+- The frozen display pool contains 23 constitutionally unique, connected, support-conforming,
+  descriptor-manifold, method-visible open-ended products with a unique exact-L1 trace. Three rows
+  were selected by ascending SHA-256 rank, yielding attempt indices 2256, 2931 and 1586. This is a
+  deterministic display policy, not an experimental-candidate selection rule.
+- Each row shows the FORGE-generated constitutional graph, three deterministic post-hoc RDKit
+  ETKDGv3 conformers optimized with MMFF94s (UFF only as the declared fallback), and the exact amine,
+  aldehyde and isocyanide precursor constitutions returned by the common Ugi verifier. Hydrogens are
+  omitted from the 3D rendering for clarity. FORGE does not generate three-dimensional coordinates.
+- The final PNG is
+  `paper/v1/figures/forge_generated_samples_v1/forge_generated_samples.png` (SHA-256
+  `738e3049c2980cc9188c825f45099df1584a3c9556f414a1959b056602dca972`). Its selection receipt is
+  `paper/v1/figures/forge_generated_samples_v1/selected_samples.json` (SHA-256
+  `5c78e882f7793935a4240c222d457b6bca35e955a3cefe2625b8c42891e65f09`). The attributable result is
+  `results/phase1/forge_generated_sample_figure_v1/result.json` (SHA-256
+  `a6ffe5834de4108a870e39475477bd134cec521a5c5f28d35fb0a9e40b8f588b`). A repeated render reproduced
+  all three hashes exactly.
+- **Decision:** include this as a qualitative visualization of open-ended constitutional generation
+  and exact L1 decomposition. Do not present descriptor-manifold membership as evidence of activity,
+  formulation behavior or synthesis success, and do not present the post-hoc conformers as model
+  outputs or ground-truth structures.
+
+## 2026-08-25 - Replace the conformer display with reaction-program coordinates
+
+- Superseded the manuscript's v1 conformer figure because FORGE does not generate three-dimensional
+  coordinates and a post-hoc conformer ensemble obscured the model's actual scientific contribution.
+  The v1 config, artifact and renderer branch remain reproducible but are no longer included in the
+  manuscript.
+- The v2 figure shows, for each row, the jointly generated constitutional graph, the same graph
+  colored by exact precursor origin with enlarged reaction-core halos, and the exact amine,
+  aldehyde and isocyanide L1 building blocks. Origin and core assignments are recovered by replaying
+  the hash-pinned atom-mapped qualified Ugi transform; they are not inferred from substructure
+  matching and are not a finite component catalogue used by the generator.
+- To avoid three visually redundant long-chain examples, v2 uses a frozen deterministic display
+  diversity rule. It starts from the lowest constitutional SHA-256 rank and adds the structure with
+  maximum minimum ECFP4 distance, breaking ties by SHA-256. Among the unchanged 23 eligible products,
+  this selects attempt indices 2256, 1194 and 2699. The rule remains display-only and performs no
+  experimental candidate selection.
+- The v2 PNG is
+  `paper/v1/figures/forge_generated_samples_v2/forge_generated_samples.png` (SHA-256
+  `d5eca1219abc5415be71d2d0c27d5c5dd16ec81579b41bd331bcb8282471fd65`). Its selection and exact-origin
+  receipt is `paper/v1/figures/forge_generated_samples_v2/selected_samples.json` (SHA-256
+  `aa370f57326e6866d2388408ea51db701ca975b15322b8397978ef40dd2129e6`). The attributable v2 result is
+  `results/phase1/forge_generated_sample_figure_v2/result.json` (SHA-256
+  `14391da8e6a798d6a649b69c7fd5395a5e8136e983d4a7d66c80a8fa66e9247e`).
+- **Decision:** use v2 in the paper. Interpret its colors as a visualization of exact reaction-program
+  semantics and its L1 precursors as transform-consistent decompositions. Do not interpret either as
+  activity, synthesis success, route closure or experimental-candidate status.
+
+## 2026-08-25 - Add the generated-structure appendix atlas
+
+- Added a three-page appendix atlas containing 12 deterministic open-ended, exact-L1 FORGE Ugi
+  products. Every row reports a role-colored constitutional graph, one decorated post-hoc 3D view and
+  the exact canonical constitutional SMILES. Purple identifies the amine-derived head, teal the
+  aldehyde-derived body and tail, orange the isocyanide-derived tail and gray the assembly-introduced
+  oxygen. The color assignments come from exact atom-mapped forward replay.
+- The atlas applies the same frozen display eligibility as the main sample figure, then takes the
+  first 12 identities under SHA-256-seeded ECFP4 MaxMin ordering. The selected attempt indices are
+  2256, 1194, 2699, 2919, 329, 1776, 1861, 382, 2078, 2546, 1152 and 1059. This is a display-only
+  diversity rule and makes no biological, procurement, route or experimental candidate selection.
+- Each 3D view uses one deterministic RDKit ETKDGv3 embedding followed by up to 400 MMFF94s
+  iterations. One of 12 structures required the declared deterministic ETKDG random-coordinate
+  fallback; all used MMFF94s, and three converged within the iteration budget. These coordinates are
+  decorative post-hoc illustrations, not FORGE outputs or predicted bioactive conformations.
+- The atlas pages have SHA-256 values
+  `a7b1dd55ed3dfc4f9b60b90a56b8ad0bbf267b97341d63edb16839e871c3eb2e`,
+  `6aeee7bd361863efc4a92d6f9533910707aa5b9bd4b630347ca35d560785ded5` and
+  `9400f342a2f6388080b12ab8a48b9d6525ce5d941db3dcbab441bbfe9eb69a0b`. The exact sample and
+  conformer receipt is
+  `paper/v1/figures/forge_generated_sample_atlas_v1/atlas_samples.json` (SHA-256
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`). The attributable result is
+  `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `e7e747d219a4c3237542c9e4e401d570bbd6ad614b2687726daacd2d5650bf9b`).
+- **Decision:** include the atlas in the appendix as a qualitative identity and reaction-program
+  visualization. Do not use its 3D views as conformer evidence or its deterministic display set as a
+  prospective selection panel.
+
+## 2026-08-25 - Adopt white editorial styling for generated-structure figures
+
+- Superseded the tinted panels, rounded cards and colored sample badges in both the main generated-
+  structure figure and appendix atlas with a pure-white canvas, open whitespace and thin gray column
+  and row rules. Exact precursor-origin colors remain on the molecular depictions and L1 role rules;
+  no sample identity, structure, coordinate or scientific annotation changed.
+- The revised main PNG has SHA-256
+  `1b7be3da094ba43dde9361012a63ee3a694d2c35fef03d308b3c075bf3f875ad`; its unchanged selection and
+  exact-origin receipt remains
+  `aa370f57326e6866d2388408ea51db701ca975b15322b8397978ef40dd2129e6`. The superseding attributable
+  result is `results/phase1/forge_generated_sample_figure_v2/result.json` (SHA-256
+  `003d4cd437d8c565e663f7840ed3378f7b9118b00a2f6cc8e93d27062129503a`).
+- The revised atlas pages have SHA-256 values
+  `55f54ef122fdab04e4c6fadb2e20eda74a8cd1cf34c5e1d4f199060abc201558`,
+  `97c3cf9f7512b0b390a5cae0314d5588aa5fa30bd0868159c356b3e372e7815a` and
+  `686ab5ea6588f3de4d9a35bf01242c80471646900fe420c980c4f90f2a0751fd`. Its unchanged sample and
+  conformer receipt remains
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`; the superseding attributable
+  result is `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `d7a3861736bfd436ec0214dccad36ff7453861d70eaaff7f05ea2ac63945e681`).
+- **Decision:** use the white editorial renderings in the manuscript. This is a display-only change;
+  the prior scientific interpretation and nonclaims remain in force.
+
+## 2026-08-25 - Present the generated-structure atlas as one multipage table
+
+- Replaced the three separately numbered atlas figures with one `longtable` containing all 12
+  deterministic display rows. The three hash-pinned raster sections are now pagination units within
+  a single table, with one caption, one label and repeated embedded column headings.
+- No molecular identity, display ordering, semantic annotation, conformer coordinate, SMILES string,
+  eligibility rule or artifact hash changed. This is solely a manuscript-organization change.
+- **Decision:** cite the appendix atlas as Table 12 rather than Figures 6--8. Preserve the existing
+  display-only and post-hoc 3D nonclaims in the unified caption.
+
+## 2026-08-25 - Replace the redundant atlas semantic map with a conventional 2D graph
+
+- Removed the precursor-origin-colored 2D map from the appendix atlas because it repeated the same
+  partition already communicated by the decorated 3D view and by the main reaction-program figure.
+  The replacement is a conventional RDKit 2D molecular depiction with standard bond and heteroatom
+  coloring. The 3D column retains the exact atom-origin colors and legend.
+- The revised atlas columns are ID, conventional 2D constitutional graph, decorated post-hoc 3D view
+  and canonical SMILES. The page SHA-256 values are
+  `d32d949798d70ae4985d046e41255cb14ad00c5d52998e3ae0554165a2562f04`,
+  `6d431766acf73e29b8ece6cd1f5ca8c69046c83ee5ac5b4abc60bd96a0f316f3` and
+  `c36840b38008bda77aa70ee6a573c050dceb7cca54692a5340025814bdcd0e32`.
+  The unchanged sample and conformer receipt remains
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`.
+  The superseding attributable result is
+  `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `9b534600f431f86046413085666a28758b9ab8e3dbe70f971244a25c8ea25433`).
+- **Decision:** use the conventional 2D graph in the appendix table. This changes only the display;
+  the selected molecules, order, coordinates, evidence and nonclaims remain unchanged.
+
+## 2026-08-25 - Remove the redundant atlas ID column and narrow SMILES
+
+- Removed the display-rank and attempt-ID column from the appendix atlas. Canonical SMILES remains the
+  exact row identity, while the hash-pinned receipt retains display ranks and attempt indices for
+  reproducibility.
+- Reallocated the recovered width to larger conventional 2D and decorated 3D depictions. Narrowed the
+  canonical-SMILES column and reduced its wrap width to 26 characters. The revised page SHA-256 values
+  are `35e2154dc20c24c6b05c255e269db0c93a3bd839a8ec5103d7ce99cd4dbdf20b`,
+  `0994fdad48bd49976b47693d0e29c647054dbad65955294bbedf9e4401f81d86` and
+  `ecff742a8fa0c174c419bf209c87a321ed16c84182f64c9a7bf18b89afac09a6`.
+  The superseding attributable result is
+  `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `5c0504da31031378da9beeae8430a92743950faf391f739f573d8519fcf5bdd9`).
+- **Decision:** present only the conventional 2D graph, decorated 3D view and canonical SMILES in the
+  visible table. Preserve machine-readable IDs in the receipt rather than spending manuscript width
+  on them.
+
+## 2026-08-25 - Place canonical SMILES beneath each 2D atlas structure
+
+- Collapsed the separate canonical-SMILES column into the conventional 2D cell. The visible appendix
+  atlas now has two columns: a standard 2D molecular graph with its canonical SMILES directly below,
+  and the decorated post-hoc 3D view. This preserves exact row identity while giving both molecular
+  depictions more width.
+- The revised page SHA-256 values are
+  `8fd0ef1bd6e79a1c9008cc3dae687da187dfec6f82a997dc5de7b5ebe20074cf`,
+  `9b05e0c095879fb82a6b54b8d503a92d11ec1e16acfa4cf19893d06d4c43f636` and
+  `d7c5b8510212d9952194fe6bc3633667c298e908cec211ff34a10f1aa514f6a8`.
+  The unchanged sample and conformer receipt remains
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`.
+  The superseding attributable result is
+  `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `beeb31968f7b8091ab921d3fec541939aeb83410ba15184f3bac3f8d0792a453`).
+- **Decision:** use the two-column atlas with SMILES embedded beneath the corresponding 2D graph.
+  This is a display-only change; molecule selection, ordering, coordinates, evidence and scientific
+  nonclaims remain unchanged.
+
+## 2026-08-25 - Typeset the generated-structure atlas as a native LaTeX table
+
+- Replaced the three page-sized raster composites with a native two-column LaTeX `longtable`.
+  The renderer now emits one conventional 2D image and one decorated post-hoc 3D image per row, plus
+  hash-pinned LaTeX row markup. The manuscript owns the caption, repeated column headings, rules,
+  pagination and canonical-SMILES typography, so these elements use the paper's fonts and spacing.
+- Removed the raster legend. Its precursor-origin color definitions remain in the paper-native table
+  caption. The 12 rows are paginated four per page, and canonical SMILES remains directly beneath
+  the corresponding 2D structure.
+- The atlas renderer contract advances to
+  `forge.paper.forge_generated_sample_atlas.v2`. The generated LaTeX rows have SHA-256
+  `67e7fa9959c757b5d73ad1a0fc6ff9ed1bc1d2b8167da4aeb791c922f986827d`; the unchanged sample and
+  conformer receipt remains
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`. The superseding attributable
+  result is `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `d66111653ef8480db8bcf9e34c3d377133a98e935a664caf8b0ce37b39016834`).
+- **Decision:** use paper-native table construction and individual molecular assets for the appendix
+  atlas. This is a display-only change; molecule selection, order, coordinates, evidence and
+  scientific nonclaims remain unchanged.
+
+## 2026-08-25 - Move the generated-structure atlas to the appendix end
+
+- Placed the generated-structure atlas after the theoretical appendix so the multipage visual table
+  no longer interrupts technical results.
+- Row separation had never worked: a row terminator's optional argument only raises that row's
+  depth, which a full-height minipage already exceeds, so the previous `2 mm` was silently
+  discarded. Separation now comes from a struck row height that exceeds both panels, which also
+  keeps the column divider unbroken and fixes the multipage break at the same place for every row
+  instead of following whether a SMILES string happened to wrap. With the forced page breaks after
+  rows four and eight removed, the 12 rows paginate 3/5/4 across three filled pages rather than
+  4/4/4 across three mostly empty ones.
+- Restyled the table: rules are light gray and confined to the head and foot, the two panels are
+  separated by a continuous hairline rather than a full-width rule per row, headings are small
+  capitals, canonical SMILES moved from `\tiny` ragged-right to centered `\scriptsize` gray
+  monospace, and a display-order index column was added. The row artifact now names manuscript
+  lengths and styles instead of carrying its own dimensions, rules and page breaks, so the layout
+  can be retuned without reissuing a hash-pinned artifact. The atlas `layout.columns` contract gains
+  `display_diversity_rank`.
+- Fixed two rendering defects the restyle exposed. Decorated views were centered on the atom
+  centroid while scaled by the projected extent, so a lipid whose mass sits in its tail had its head
+  clipped by the canvas edge; they are now centered on the projected bounding box. Both panels are
+  also trimmed to their drawing, since a fixed-aspect canvas letterboxes a molecule and that margin
+  became dead space in the appendix row. The decorated-view canvas moves to 1360x900 to suit its
+  narrower column, and bond stroke and atom radius are now fractions of one drawn C--C bond so the
+  drawing keeps a constant visual weight across canvas aspects.
+- The generated LaTeX rows have SHA-256
+  `59c33c4f7113e079d658e4d9d48972d02ffaa63367ec51821de964e3354d35d3`; the unchanged sample and
+  conformer receipt remains
+  `36ff7ca3b4a7728676e9963cc16e9c03c40d2fc857e27433928ad00286821534`. The superseding attributable
+  result is `results/phase1/forge_generated_sample_atlas_v1/result.json` (SHA-256
+  `dbb6589e8feda489006d4b9bfcc6a6e5e529706c8fe0cb021a1c876d15d17a31`), repinned in
+  `configs/reproduction/natbiotech_v1_completed_evidence_v1.json` (SHA-256
+  `41a6b2a7ce8a541b1a65839b3c08a86654df2c7cf1a193ed28e40d695b7ddbc5`), after which the
+  completed-evidence render was reissued. Macro values did not change.
+- **Decision:** keep the atlas as the final appendix section with visibly separated molecular rows.
+  This changes only manuscript order, layout and panel framing; molecule selection, order,
+  constitutional identity, SMILES, conformer coordinates, evidence receipt and scientific nonclaims
+  remain unchanged.
+
+## 2026-08-26 - Add training-derived local chemistry constraints without retraining
+
+- Added a versioned, training-fold-only local-support policy for all three current reaction programs.
+  It records program- and precursor-role-conditioned element/bond neighborhoods, three-membered-ring
+  compositions and observed component carbon/heteroatom bounds. It stores no component identity,
+  fingerprint or complete fragment. The deterministic policy is
+  `results/phase1/local_chemistry_support_v1/policy.json` (SHA-256
+  `855c64ff810ab3266ba9630fdc243423842d932e79305eb8e8eeb438f66bef34`); its result is
+  `results/phase1/local_chemistry_support_v1/result.json` (SHA-256
+  `bfa0b07dcf9cdd42abf7b73dacca31725b6e5bd8adf1339c806126c9ed0a5a40`). It was fit
+  from 66,464 Ugi, 258 BL and 70 LX training products only.
+- Added `strict_local_chemistry_argmax` as a new opt-in terminal decoder while preserving the frozen
+  unconstrained and strict-valence decoders. The new path masks unsupported local element/bond
+  assignments, masks unsupported three-membered closures before atom realization and enforces
+  observed program-role carbon/heteroatom bounds incrementally. It performs one decode with no
+  repair, retry, component lookup, route call or oracle call; an infeasible request abstains.
+- Added a separate method-blind, program-only assessment that supplements rather than replaces raw
+  exact-L1 yield. On the already frozen FORGE attempt ledgers, local-support-qualified exact-L1 yield
+  was 52.34%, 68.88% and 54.92% for seeds 0, 1 and 2, respectively, versus raw exact-L1 yields of
+  72.27%, 90.30% and 73.47%. Precision among raw exact-L1 products was 72.43%, 76.28% and 74.75%.
+  These negative differences are retained: the policy is intentionally stricter than graph validity
+  and exact L1 replay, and absence from observed support is an abstention rather than proof of
+  chemical impossibility.
+- Added an evaluation-only resampling experiment that binds the exact three frozen final checkpoint
+  archives to this policy. No weights are updated. A CPU seed-0 smoke run completed all 20 gates with
+  no fixed-state failures, repair, retry, route call, oracle call or candidate selection. Its result is
+  `runs/phase1-local-chemistry-resampling/e6c1e24d76c4a5cdbe0a88dba7456dfc6e5cf61b03e2b7bf9769df06a3ffbbd7/stages/resampling/artifacts/result.json`
+  (SHA-256 `decb50504d9a81314a40845b2fc977095139d4c9192e6a6609323eb584dbd707`).
+- **Decision:** retain the frozen raw production results as the primary historical result and use the
+  local-support decoder as a transparent constrained-resampling policy for improved displayed and
+  downstream samples. Do not call this a finite component vocabulary, chemical-validity oracle,
+  synthesis-success probability or route certificate. A full three-seed H100 resampling remains a
+  separate paid launch and must not be inferred from the passing smoke run.
+
+## 2026-08-26 - Complete three-seed H100 local-chemistry resampling
+
+- The authorized evaluation-only H100 experiment completed for frozen production replicates 0, 1
+  and 2 (seeds 20260825, 20260826 and 20260827). All three downloaded runs independently verify and
+  share executable source SHA-256
+  `1109b6cecb644ad1cc6c447344189e9757ed1812e9f562721e3aaf9f7d29cee1`, one experiment
+  specification, one frozen checkpoint design and local-support policy SHA-256
+  `855c64ff810ab3266ba9630fdc243423842d932e79305eb8e8eeb438f66bef34`. No model weights were
+  updated.
+- At 3,072 held-out attempts per program and seed, constrained exact-L1 yield (mean +/- sample SD)
+  was 75.88 +/- 11.25% for Ugi, 59.75 +/- 5.14% for BL and 18.07 +/- 5.56% for LX. Relative to the
+  frozen original decoder means, the constrained decoder retained 96.44%, 77.14% and 57.77% of Ugi,
+  BL and LX exact-L1 yield, respectively. Strict-constraint abstention rates were 2.68 +/- 2.37% for
+  Ugi, 34.44 +/- 8.73% for BL and 54.64 +/- 6.65% for LX. The much larger BL/LX cost is preserved as
+  a data-sparse-family limitation rather than hidden by changing the gate.
+- A direct graph audit covered all 27,648 final-heldout attempts and all 15,029 valid products. Every
+  attempt records the bound policy. Across valid products, the declared liabilities were absent:
+  zero O--O bonds, zero N--O bonds and zero three-membered rings. This audit does not imply synthesis
+  success, stability, safety, activity or route closure.
+- The attributable aggregate is
+  `results/phase1/local_chemistry_resampling_adjudication_v1/result.json` (SHA-256
+  `ebd5054b58ec27a9a0e513fe8b29ec98f6bbcb551ada54a0d7bd83ee28f0b5f9`). It can be reproduced with
+  `forge experiment adjudicate-local-chemistry-resampling` over the three verified run directories.
+- **Decision:** qualify the constrained decoder for clean qualitative galleries and explicit
+  downstream acceptance, especially for Ugi. Do not supersede the original production metrics: the
+  weights are unchanged and strict decoding trades yield for bounded local support. Retain the
+  original decoder as the primary production comparison and report the constrained result as a
+  transparent sampling-policy sensitivity analysis.
+
+## 2026-08-26 - Freeze role-local ring morphology before atlas replacement
+
+- Extended the training-fold-only local-support policy to closure-defined ring morphology. The v2
+  policy records complete element and precursor-role multisets for variable training closures
+  relative to the deterministic spanning tree. Fixed adapter cycles cannot authorize a generated
+  closure. The policy stores no component identity, fingerprint or complete fragment and does not
+  retrain any checkpoint. Its frozen artifact is
+  `results/phase1/local_morphology_support_v2/policy.json` (SHA-256
+  `50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538`); the build result is
+  `results/phase1/local_morphology_support_v2/result.json` (SHA-256
+  `282cfcb76aa71c090b7981c2b24f38fa4a8c7f108e79fa749642e057089478f6`).
+- The train-fold audit found no Ugi four-member ring support. Ugi five-, six- and seven-member rings
+  occur in the amine-head role, while the only admitted Ugi isocyanide-tail ring signature is a
+  six-member all-carbon ring. BL ring signatures are confined to the amine-head role; LX admits a
+  six-member all-carbon aldehyde-tail ring and a six-member C4N2 amine-head ring. These are observed
+  local-support statements, not claims of chemical impossibility outside the data.
+- The strict decoder now rejects a variable closure before atom realization when its complete
+  reaction-family and role multiset is absent from training support. Atom realization subsequently
+  requires the observed role-and-element ring signature. Existing v1 policies retain their exact
+  historical behavior and do not silently claim full-cycle support.
+- A local CPU execution smoke completed and independently verified as run
+  `775403a326ae1ff2b7e71da3a879de2d5da8a783a9c47f5ae0751eb1e42882fd`. The full seed-0 diagnostic
+  is frozen at 3,072 attempts per program with thresholds fixed before execution: at least 90% exact-
+  L1 yield retention per program, at most 0.02 absolute internal-diversity loss, at least 80%
+  effective-component-count retention, zero oxygen-containing three- or four-member rings, zero Ugi
+  oxygen rings outside the amine-head role among exact-L1 components and zero unsupported role-ring
+  signatures among exact-L1 components.
+- **Decision:** do not replace the paper atlas from the smoke run. Run the exact-H100 preflight and
+  full seed-0 diagnostic only after explicit approval to upload the private source and pinned inputs
+  to paid Modal compute. Promote the policy to three-seed resampling and regenerate the atlas only if
+  every prespecified seed-0 gate passes; otherwise retain and report the negative result without
+  changing thresholds.
+
+## 2026-08-26 - Reject v2 role-local morphology after the frozen seed-0 diagnostic
+
+- The authorized exact-H100 preflight completed and independently verified as run
+  `bf33c93dedb19404ac1b6b5484446edf9c4c12b6a8afe5065565d03f41d47240`. Every execution gate
+  passed with the fixed checkpoint archive SHA-256
+  `08d9ebb04497d9ee78488c100315f1d50eef65bdeae84d9252d61cc4dead77e5`, morphology-policy
+  SHA-256 `50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538`, no repair or retry,
+  and zero training, route, oracle or candidate-selection calls.
+- The contingent full seed-0 run then completed all 3,072 held-out attempts per program and
+  independently verified as run
+  `c42ab83331f77b5b3f0097abcce459a18a95cfc7e7447cb43a806ac90c901d3b`, with executable source
+  SHA-256 `adab947055663caa02125c57e3311438efeee906acbcc4db6e7f593b35e0769b`. The independent audit
+  initially failed closed because repeated BL roles serialize multiple components as a list. The
+  adjudicator was corrected to assess every repeated component separately, with a regression test;
+  the generated ledger, thresholds and sampling result were not changed or rerun.
+- Versus the frozen v1 seed-0 decoder, v2 exact-L1 yield retention was 91.73% for BL, 71.41% for LX
+  and 82.19% for Ugi. Effective-component-count retention was 88.29%, 63.21% and 76.69%,
+  respectively. Internal-diversity change passed for BL but decreased by 0.0754 for LX and 0.0210
+  for Ugi. The graph audit found zero O--O bonds, zero N--O bonds and zero small oxygen rings for BL
+  and LX, but five oxygen-containing three- or four-member rings among valid Ugi products. It also
+  found 6, 961 and 63 unsupported exact-L1 role-ring signatures for BL, LX and Ugi, respectively.
+- The attributable negative result is
+  `results/phase1/local_morphology_seed0_adjudication_v1/result.json` (SHA-256
+  `ae426eb2c6ab94455e8c96868cc64e6d0b69bc5d3a1952e4fcf9965eea97bf87`). It preserves the
+  prespecified thresholds and records `qualified_for_three_seed_resampling_and_atlas: false`.
+- **Decision:** do not promote v2 to three-seed resampling and do not replace the paper atlas from
+  this diagnostic. Retain the already qualified v1 constrained decoder and its frozen paper result.
+  Treat v2 as a negative seed-0 result: its stronger closure mask did not reliably enforce the final
+  product-level morphology contract and imposed unacceptable Ugi/LX yield and diversity costs.
+
+## 2026-08-26 - Complete the Ugi-only Transformer seed-0 training and matched sampling gate
+
+- The exact-H100 two-step preflight completed and independently verified as run
+  `c3055d4e00818d8be444d0f50ba3a8bf44ed12647a8d013c0fa07a358a0eb322`. The contingent production
+  run then completed exactly 5,100 optimizer steps on an NVIDIA H100 80GB HBM3 and independently
+  verified as run `f35b30a5a7d3bd6386f0b4c5f578f5808c9cb070df16c7092e1759dc99680ead`.
+  It used the 66,464 train-fold products for fitting, the disjoint 15,800 calibration products only
+  for nonselecting diagnostics, and no held-out product for fitting or checkpoint selection.
+- The final-step checkpoint is SHA-256
+  `745271c7552bd9212c97a04cf004a7f7724cc3acc4b7e062cd6963a8a7239951`. Its final training loss was
+  0.2131 and its nonselecting calibration loss was 6.5486. The larger calibration loss is preserved;
+  the model was frozen at the prespecified final step rather than selected post hoc.
+- The checkpoint-specific original constrained Ugi sampler then returned all 3,072 fixed program
+  attempts. The downloaded run independently verifies as
+  `4d7d2a67253732f7428e450ef8af4d44e769222c3fbd8aeae74b9900022ac7a9`. Exactly 2,883 products
+  (93.85%) were valid, terminal-valid and exact-L1; 189 failures remain in the denominator. Sampling
+  made zero repair, retry, route, oracle or candidate-selection calls. One infrastructure
+  cancellation was recovered by authenticating completed shard receipts and replaying only the
+  incomplete shard from its original fixed seed.
+- The attributable summary is `results/phase1/ugi_v0_port_transformer_seed0_v1/result.json`
+  (SHA-256 `7ff7aad960e39e1598ca02782683b578e0ebf694c9a5fd9b9edfe7342e534167`).
+- **Decision:** admit this checkpoint to the matched v0 evaluation harness. Do not claim superiority,
+  lipid realism, diversity, novelty, held-component improvement or seed stability from exact-L1
+  yield alone. Run the common assessment against v0 before deciding whether the Transformer
+  supersedes the historical model, and retain this as a single-seed Ugi-only result.

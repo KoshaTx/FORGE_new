@@ -1,0 +1,145 @@
+{
+  "schema_version": "forge.external_baseline_route_union_readiness.v1",
+  "as_of": "2026-08-23",
+  "status": "setup_complete_exact_source_l4_qualified_ready_to_launch",
+  "executable_source": {
+    "sha256": "085e063a5c87d4fcc0f3a2a343bde6118617355dba7de5ee22f054555267327e",
+    "manifest": {
+      "experiments/__init__.py": "56e1ff3194b870b1d9eccad17d7267a808f51728be5a9e270f21762e7298382f",
+      "experiments/_runtime": "7ccdcbc71d07c6386c03b52d8a63f67da809742bb12240f5a1b0b9948c56c275",
+      "experiments/catalog.py": "16365995c3ac92e396eaae0dbc81d0bada3f0ab9846411caf0827e8fe62cbcae",
+      "experiments/installation_smoke": "2eb57e99032d936ec6491ae251718417e66c5bfff80c0663f89893988ade8ef7",
+      "experiments/phase1": "cf61b5bc1dbb1f82f56f2de631ccfad9652e771a5981a6273ad042afcd63927e",
+      "forge": "bb9ef7c25ee5e3218372404a580d19d102c2a7cbf3b357855102d25be1fe2dcc"
+    }
+  },
+  "inputs": {
+    "external_manifest": {
+      "path": "configs/baselines/external_ugi_v1.json",
+      "sha256": "84a169251c71ee78b91a3a6d50e05da28ed6148900f6cf4867ab8851a1ff2625",
+      "bytes": 6334
+    },
+    "external_export": {
+      "path": "configs/baselines/external_ugi_export_v1.json",
+      "sha256": "74a9451971b1d744aab512cdacbf4c79b2940a592b4e3405a4d28cff394f3141",
+      "bytes": 678
+    },
+    "common_assessment": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e",
+      "bytes": 760
+    },
+    "common_protocol": {
+      "path": "configs/multireaction/common_ugi_baseline_protocol_v1.json",
+      "sha256": "54951f190e3cecc91b3d37a22858a3be84a18d8ef42c295b29bb418b5e9f3e15",
+      "bytes": 4271
+    },
+    "experiment_matrix": {
+      "path": "configs/reproduction/natbiotech_v1_experiments.json",
+      "sha256": "ac606c03ede01385f1e53db8a04cdb18fc4917b63381a9f823fb7ca6d913ec92",
+      "bytes": 23912
+    },
+    "render_contract": {
+      "path": "configs/reproduction/natbiotech_v1_render_v1.json",
+      "sha256": "ed8410abb6ddc7bfdd0ac21ee10242d0ab31d93695f4ab9d6e441f3ebecae420",
+      "bytes": 1446
+    },
+    "native_preparation": {
+      "path": "experiments/phase1/multireaction/native_baseline_ports.py",
+      "sha256": "888a62e7dbaac4107ea21ae5b67920f42ed6c6a678ab37968178441f0577d836",
+      "bytes": 10011
+    },
+    "native_runtime": {
+      "path": "experiments/phase1/multireaction/native_baseline_runtime.py",
+      "sha256": "52bb47b059b5917f20c896163b6fce3f206b7bfd603d011beba66ff56285d4d5",
+      "bytes": 26124
+    },
+    "route_union": {
+      "path": "experiments/phase1/multireaction/method_blind_route_union.py",
+      "sha256": "805d2520254672bea59ab5294f331930eddc8bff44930378d12de2222e2b2517",
+      "bytes": 13149
+    },
+    "manuscript": {
+      "path": "paper/v1/FORGE_ICLR2027_paper.tex",
+      "sha256": "3cb8a516f4720a650baaab4f0b2845bbe3e77cbbd6fc793f05308f713ae9428f",
+      "bytes": 96057
+    },
+    "full_test_baseline": {
+      "path": "results/maintenance/root_package_architecture_v1/test_baseline.json",
+      "sha256": "2f7ab01d9713bb1850f692ee8044f3b5a7dae3a319e4798073bd15758b47b0fc",
+      "bytes": 5334
+    }
+  },
+  "external_baselines": {
+    "empirical_methods": [
+      {
+        "method_id": "rgfn",
+        "commit": "6ce59169f855ed18f34ba4e8279de93bee306e4f",
+        "native_port_ready": true,
+        "smoke_request_sha256": "5867239e4ff006dea12e622cd91e5c241253962d80b74313c89573d90c254ac3"
+      },
+      {
+        "method_id": "defog_unconditional",
+        "commit": "365bda9affadd5c2307014a0532ddaa244399441",
+        "native_port_ready": true,
+        "smoke_request_sha256": "59c03ce8bb2ac9279284c20a349cc03b7cc8b7512c998144e1ab9b626d498884"
+      },
+      {
+        "method_id": "genmol_safe",
+        "commit": "add09fc83b7255bd09c797e527c0f4b51f5fb7c1",
+        "native_port_ready": true,
+        "smoke_request_sha256": "921e73254c5cff274e0fadbbbc90b871c5f14a0abb09f36a013e55cbdd47a82c"
+      }
+    ],
+    "context_only_methods": [
+      {"method_id": "ou_dag_chem", "reason": "no_released_paper_specific_implementation"},
+      {"method_id": "synflownet", "reason": "released_action_space_has_maximum_reaction_arity_two"},
+      {"method_id": "syncogen", "reason": "released_repository_has_no_usable_code_license"}
+    ],
+    "native_full_training_completed": false,
+    "published_numbers_substituted": false
+  },
+  "route_evidence": {
+    "method_blind_union_freezer_ready": true,
+    "public_worklist_contains_method_identity": false,
+    "private_membership_sealed_separately": true,
+    "complete_disposition_required_for_every_union_component": true,
+    "planner_calls_during_scoring": 0,
+    "synthesis_success_probability_claimed": false,
+    "final_union_completed": false
+  },
+  "verification": {
+    "vendored_assets_verified": 30,
+    "paper_readiness_strict_blockers": 0,
+    "setup_complete_for_all_retained_rows": true,
+    "immediate_production_ready": true,
+    "focused_test_failures": 0,
+    "strict_typecheck_failures": 0,
+    "full_suite_collected_nodes": 1778,
+    "full_suite_known_failure_nodes": 201,
+    "full_suite_new_failure_nodes": 0,
+    "documented_missing_historical_inputs": 54,
+    "provenance_drift": 0
+  },
+  "l4_preflight": {
+    "experiment_id": "phase1-transformer-production-accelerator-benchmark-l4",
+    "run_id": "9939ea913b54d9462213a7a8488436d1b12a1f7c2b11a3a30d3ea4385c25b7f5",
+    "source_sha256": "085e063a5c87d4fcc0f3a2a343bde6118617355dba7de5ee22f054555267327e",
+    "result": {
+      "path": "runs/phase1-transformer-production-accelerator-benchmark-l4/9939ea913b54d9462213a7a8488436d1b12a1f7c2b11a3a30d3ea4385c25b7f5/stages/benchmark/artifacts/result.json",
+      "sha256": "9e2618f70db4e7bc099a76b139475434ff0391b4a1793ff0292773ad0f2e636a",
+      "bytes": 14641
+    },
+    "gates_passed": 23,
+    "gates_total": 23,
+    "device": "NVIDIA L4",
+    "status": "pass"
+  },
+  "decision": "The experiment suite is setup-complete and the exact source is NVIDIA L4-qualified. The retained native baselines and paired-seed production experiments may now launch; manuscript results remain pending until those runs and their aggregates complete.",
+  "nonclaims": [
+    "Runnable setup is not a completed baseline result.",
+    "Route-evidence closure is not a synthesis-success probability.",
+    "The context-only methods are not empirical rows.",
+    "No in-vitro or in-vivo experiment is part of this paper."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "forge.common_local_chemistry_assessment_config.v1",
+  "scientific_question": "Per requested Ugi generation attempt, how often does each method produce an exact-L1 whole-product graph whose local atom-bond and three-membered-ring chemistry occurs in the Ugi training fold?",
+  "inputs": {
+    "local_chemistry_support": {
+      "path": "results/phase1/local_chemistry_support_v1/policy.json",
+      "sha256": "855c64ff810ab3266ba9630fdc243423842d932e79305eb8e8eeb438f66bef34"
+    }
+  },
+  "metrics": {
+    "primary": "local_support_qualified_exact_l1_yield_per_attempt",
+    "raw_exact_l1_retained": true,
+    "invalid_failed_and_duplicate_attempts_retained": true,
+    "method_private_atom_roles_required": false,
+    "candidate_selection": false
+  },
+  "nonclaims": [
+    "Training-supported local chemistry is not synthesis success, stability, safety, activity or route closure.",
+    "Absence from local training support is an abstention under a bounded comparison policy, not proof of chemical impossibility.",
+    "The qualified yield supplements and never replaces raw exact-L1 yield.",
+    "This assessment performs no generation, route, proposal-engine or biological-oracle calls and selects no candidate."
+  ]
+}

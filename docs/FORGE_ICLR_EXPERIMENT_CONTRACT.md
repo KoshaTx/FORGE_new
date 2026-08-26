@@ -7,6 +7,13 @@ patched once the experiments below are frozen.
 Numbers referenced here trace to `docs/FORGE_IMPLEMENTATION_REFERENCE.md`, which was
 recomputed from frozen artifacts and is the source of truth.
 
+> **2026-08-20 scope amendment.** The earlier one-Ugi-family generality boundary is superseded by
+> the bounded computational extension in `MULTIREACTION_COMPUTATIONAL_PLAN.md`: Ugi remains the
+> deep validated case, BL_2023 aza-Michael is a full computational second family, and LX_2024
+> reductive amination is a lighter stress test. The extension covers ordered repetitions of an
+> explicit registry reaction; it does not expand the claim to arbitrary multistep synthesis,
+> reaction discovery, yield prediction, or biological transfer.
+
 ---
 
 ## 1. Settled framing
@@ -78,9 +85,10 @@ reassembly.
 
 ### Generality claim
 
-Permitted: *the reaction-adapter formulation extends in principle to other fixed-arity,
-single-step molecular families with explicit precursor roles and a verifiable forward
-transformation. All experiments use one Ugi-3 adapter.*
+Permitted after the amended experiments close: *the reaction-program formulation supports
+explicit precursor roles and verifiable forward transformations across Ugi-3, repeated
+aza-Michael addition, and repeated reductive amination; the depth and evidence tier of validation
+are reported separately for each family.*
 
 Not permitted: any claim covering arbitrary multistep synthesis, unrestricted reaction
 selection, synthesis trees, extensive atom rearrangement, unknown reaction outcomes,

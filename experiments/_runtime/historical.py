@@ -185,7 +185,8 @@ def resolve_pinned_input(
         archived = HistoricalPinArchive.load(manifest, repo).resolve(original_path, sha256)
         if archived is None:
             raise HistoricalPinArchiveError(
-                f"pinned input is neither current nor archived: {original_path} at {sha256}"
+                "pinned input hash mismatch: no current or archived bytes match "
+                f"{original_path} at {sha256}"
             ) from current_error
         return archived
 

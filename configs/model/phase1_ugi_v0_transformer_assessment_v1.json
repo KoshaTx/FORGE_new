@@ -1,0 +1,52 @@
+{
+  "schema_version": "forge.ugi_v0_transformer_assessment_config.v1",
+  "scientific_question": "Under the same 3,072 held Ugi morphology programs and the same no-repair stochastic terminal decoder, how do the frozen v0 sparse model and the Ugi-only Transformer compare on exact L1, structural realism, local chemistry, role-local tail morphology, diversity, novelty and held-component behavior?",
+  "expected_attempts": 3072,
+  "seed_label": 0,
+  "inputs": {
+    "v0_samples": {
+      "path": "runs/phase1-sampling/4cb3d37fa08074e4d493622d43e7b96133362af9e7cf8eb0155e7ba68edc6714/stages/sample/artifacts/result.json",
+      "sha256": "c62f86dec9eed6de20180a51261a13b2919431038a89020378584ca9c2a8ed64"
+    },
+    "v0_sampler_config": {
+      "path": "experiments/phase1/product_l1/configs/sampling_v1.json",
+      "sha256": "31d0cc01d56c9dcc6fefaf7736fc483d76baf22bcb08d5db92582401bc05d3c4"
+    },
+    "transformer_samples": {
+      "path": "runs/phase1-ugi-v0-port-transformer-seed0-sampling-v1/4d7d2a67253732f7428e450ef8af4d44e769222c3fbd8aeae74b9900022ac7a9/stages/sample/artifacts/result.json",
+      "sha256": "c8686ea8033a4e400e7eb7c07cf4c52a45328ad69e37e89429cec7d4c930b51e"
+    },
+    "transformer_sampler_config": {
+      "path": "experiments/phase1/product_l1/configs/ugi_v0_port_transformer_seed0_sampling_v1.json",
+      "sha256": "e6e2d1cfce89c04a83a9642dff4298a42acc46c30bad15ff2ce69d803d88413a"
+    },
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    }
+  },
+  "reporting": {
+    "candidate_selection": false,
+    "single_seed_descriptive_comparison": true,
+    "negative_results_are_reported": true,
+    "reductive_amination_substructure_rate_reported": false
+  },
+  "nonclaims": [
+    "This single-seed diagnostic does not establish variance-estimated model superiority.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Training-supported local chemistry and role morphology are not route closure, stability, safety, ionization, delivery or biological activity.",
+    "The assessment performs no generation, repair, retry, route, oracle or candidate-selection calls."
+  ]
+}

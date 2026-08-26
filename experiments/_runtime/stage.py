@@ -64,6 +64,7 @@ class RunContext:
     experiment_id: str
     run_id: str
     profile: str
+    replicate: int
     backend: str
     stage: StageSpec
     resources: ResourceSpec
@@ -140,6 +141,30 @@ class RunContext:
         return MappingProxyType(dict(sorted(self._derived_seeds.items())))
 
 
+def require_config_inputs(
+    context: RunContext,
+    config: Mapping[str, Any],
+    *,
+    labels: set[str] | None = None,
+) -> None:
+    """Require a stage config to repeat exactly the pins declared by its experiment spec."""
+
+    configured = config.get("inputs")
+    if not isinstance(configured, dict):
+        raise StageError(f"stage {context.stage.stage_id} config has no input mapping")
+    expected = set(context.inputs) if labels is None else labels
+    if set(configured) != expected:
+        raise StageError(
+            f"experiment inputs and stage config differ for {context.stage.stage_id}: "
+            f"experiment={sorted(expected)}, config={sorted(configured)}"
+        )
+    for label in sorted(expected):
+        pin = context.stage.inputs[label]
+        record = configured[label]
+        if not isinstance(record, dict) or record != pin.to_mapping():
+            raise StageError(f"experiment pin differs from stage config for {label!r}")
+
+
 StageCallable = Callable[[RunContext], StageResult]
 
 
@@ -149,4 +174,5 @@ __all__ = [
     "RunContext",
     "StageCallable",
     "StageResult",
+    "require_config_inputs",
 ]

@@ -1,0 +1,75 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-production-training",
+  "description": "Train the four frozen matched Ugi-only, shared conditioned and nonselecting semantic-control arms with one explicit replicate seed per run.",
+  "root_seed": 20260825,
+  "profiles": ["smoke", "full"],
+  "replicates": {"smoke": 1, "full": 3},
+  "stages": [
+    {
+      "id": "training",
+      "implementation": "model.shared-synthesis-program-production-training.v1",
+      "needs": [],
+      "config": {"path": "configs/multireaction/shared_production_training_v1.json", "sha256": "b040716116f8fa2cce4374e660e36a6117c7cbd9914664527e13da5577431ecc"},
+      "inputs": {
+        "production_design": {"path": "configs/multireaction/shared_production_comparison_design_v1.json", "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz", "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"}
+      },
+      "outputs": {
+        "checkpoints": {"path": "checkpoints.tar", "schema_version": "forge.synthesis_program_production_checkpoint_archive.v1"},
+        "progress": {"path": "progress.json", "schema_version": "forge.synthesis_program_production_progress.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_production_training_result.v1"}
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 85000,
+        "gpu_type": "L4"
+      },
+      "determinism": {"mode": "strict", "stream": "shared-production-training"}
+    },
+    {
+      "id": "evaluation",
+      "implementation": "model.shared-synthesis-program-production-evaluation.v1",
+      "needs": ["training"],
+      "config": {"path": "configs/multireaction/shared_production_evaluation_v1.json", "sha256": "97916c9fe91ab67712fd81a3c8d0b8e1f98a1fbefc58837a62fc2aba9abc96bc"},
+      "inputs": {
+        "production_design": {"path": "configs/multireaction/shared_production_comparison_design_v1.json", "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz", "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"},
+        "program_config": {"path": "configs/multireaction/lnpdb_reaction_programs_v1.json", "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"},
+        "qualified_reaction_families": {"path": "data/vendor/qualified_reaction_families_v1.json", "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"},
+        "qualified_ugi_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+        "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "multireaction_atlas": {"path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz", "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"},
+        "multireaction_splits": {"path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz", "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"}
+      },
+      "outputs": {
+        "molecule_report": {"path": "molecule_report.html", "schema_version": "forge.synthesis_program_production_molecule_report.v1"},
+        "samples": {"path": "samples.jsonl.gz", "schema_version": "forge.synthesis_program_production_samples.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_production_evaluation_result.v1"}
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 85000,
+        "gpu_type": "L4"
+      },
+      "determinism": {"mode": "strict", "stream": "shared-production-evaluation"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-20 explicit user authorization after frozen-design review",
+    "scientific_identity": "matched_shared_synthesis_program_production_training"
+  },
+  "nonclaims": [
+    "Training completion does not establish model quality or synthesis success.",
+    "No trained arm is a candidate source in this diagnostic comparison.",
+    "No route, biological-oracle or candidate-selection call is permitted."
+  ]
+}

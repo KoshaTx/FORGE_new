@@ -56,11 +56,12 @@ def test_overleaf_bundle_is_byte_reproducible_and_minimal(tmp_path: Path) -> Non
     assert one["sha256"] == two["sha256"]
 
     contract = PaperContract.load(CONTRACT)
+    manuscript = Path(contract.source.path).parent
     with zipfile.ZipFile(first) as archive:
         members = set(archive.namelist())
     assert "FORGE_ICLR2027_paper.tex" in members
     assert {
-        Path(pin.path).relative_to("paper").as_posix() for pin in contract.figure_outputs
+        Path(pin.path).relative_to(manuscript).as_posix() for pin in contract.figure_outputs
     } <= members
     assert not any(member.endswith((".aux", ".log", ".pdf")) for member in members)
 

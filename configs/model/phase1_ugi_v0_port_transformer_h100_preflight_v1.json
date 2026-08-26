@@ -1,0 +1,94 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_training_config.v1",
+  "task": "Execution-only exact-H100 preflight for the Ugi v0-program Transformer port",
+  "corpus_kind": "expanded_fold_clean",
+  "seed": 20260828,
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  },
+  "expected_fold_counts": {
+    "train": 66464,
+    "calibration": 15800,
+    "heldout": 30122
+  },
+  "training_partition": {
+    "mode": "fixed_train_only",
+    "training_folds": ["train"],
+    "diagnostic_folds": ["calibration"],
+    "selection_mode": "fixed_final_step"
+  },
+  "sampling": {
+    "mode": "source_stratified_role_family_raked",
+    "source_mass": {
+      "current_phase1_union": 0.5,
+      "expanded_exact_forward_enumeration": 0.5
+    },
+    "uniform_row_mixture": 0.5,
+    "component_ids_enter_neural_tensors": false,
+    "uniform_product_row_sampling_allowed": false
+  },
+  "model": {
+    "maximum_children": 3,
+    "bond_classes": 4,
+    "maximum_component_atoms": 32,
+    "maximum_total_atoms": 80,
+    "maximum_junction_budget": 7,
+    "maximum_cycle_rank": 2,
+    "maximum_attachment_count": 2,
+    "maximum_decorations": 7,
+    "hidden_dim": 192,
+    "layers": 4,
+    "dropout": 0.15,
+    "source_probability_floor": 0.00001,
+    "conditioning_mode": "full_morphology",
+    "semantic_organization": "role_structured",
+    "decoration_state_conditioning": "bidirectional_anchor_local",
+    "backbone": "ugi_program_transformer",
+    "attention_heads": 8,
+    "transformer_feedforward_multiplier": 4
+  },
+  "smoke": {
+    "device": "cuda",
+    "steps": 2,
+    "batch_size": 2,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 1,
+    "checkpoint_steps": [1, 2],
+    "validation_batches": 1,
+    "early_stopping": {
+      "patience": 0,
+      "min_delta": 0.0,
+      "minimum_steps": 0
+    },
+    "model_overrides": {
+      "hidden_dim": 32,
+      "layers": 1,
+      "dropout": 0.0
+    }
+  },
+  "nonclaims": [
+    "This two-step preflight is an execution gate, not a scientific result.",
+    "It does not authorize or launch the paid production fit."
+  ]
+}

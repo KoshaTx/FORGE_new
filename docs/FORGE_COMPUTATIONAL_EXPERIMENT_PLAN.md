@@ -107,8 +107,9 @@ without depriving the baseline of context, reaction semantics, or chemical suppo
 
 #### Arm C: FACT-generous
 
-As a robustness control, train three independent role-specific denoisers, each with approximately the
-same width and depth as the joint FORGE backbone. This arm intentionally receives more total
+As a robustness control, train three role-specific denoisers on the same count-only assembly-layout
+prior, each with approximately the same width and depth as the joint FORGE backbone. This arm
+intentionally receives more total
 parameters and compute than FORGE. It addresses the objection that FACT-matched failed merely because
 one matched parameter budget was divided across three roles.
 

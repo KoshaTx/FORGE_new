@@ -1,0 +1,18 @@
+{
+  "schema_version": "forge.synthesis_program_production_smoke_manifest.v1",
+  "source_run_id": "48da8a4081c6bfdb356653dba16eaac5b14855d9fef20b7fce41f10e4e76f81f",
+  "profile": "smoke",
+  "replicate": 0,
+  "artifacts": {
+    "checkpoints.tar": {"bytes": 1525760, "sha256": "c3f88a906bf628704d2a3e2e2f6a7908427ec5e9e83cf4402bd31cb65b073a8f"},
+    "training_result.json": {"bytes": 12076, "sha256": "50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8"},
+    "evaluation_result.json": {"bytes": 49964, "sha256": "441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07"},
+    "samples.jsonl.gz": {"bytes": 2502, "sha256": "24e5a4336109975cc22200ebd37d4d069e96c38b8371d451eb7bef0c93c6e896"},
+    "molecule_report.html": {"bytes": 3072, "sha256": "703a2ddc63dc838f18ec3d3028f4ffd6027a0ea885ac42e6d20b1f58c9db907c"}
+  },
+  "status": "pass",
+  "nonclaims": [
+    "This two-step CPU run is an execution smoke, not evidence of model quality.",
+    "No checkpoint or generated molecule is selected as a candidate."
+  ]
+}

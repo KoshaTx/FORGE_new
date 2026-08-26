@@ -1,0 +1,65 @@
+{
+  "schema_version": "forge.synthesis_program_production_selected_accelerator_confirmation.v1",
+  "status": "pass",
+  "selected_gpu_type": "L4",
+  "physical_device": "NVIDIA L4",
+  "run_id": "d97c3dd86b4c2383382a4ed91055135bda0235aaab2db6006d7c1a741c69a2a7",
+  "confirmed_compute_source_sha256": "4106ce1d6f204b30be0e897ada92a2d510120658424344bb1a81d16e52bc910d",
+  "current_source_sha256": "e795f33673d0506b018c52a7104710cc1bd0ae2bc24b63102adc0d123a7fa0eb",
+  "selection_receipt": {
+    "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/result.json",
+    "bytes": 3843,
+    "sha256": "5d9d2cf14c4f74f12d6068763502c2f47898ba29cd3a34b6f5fde0d8e76fbfb8"
+  },
+  "evidence": {
+    "run_manifest": {
+      "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/selected_l4_preflight/run.json",
+      "bytes": 946,
+      "sha256": "c5b02ec885da33cb2741c70189a24ad1e28f635a7fd47a012618a1c22d241aaa"
+    },
+    "stage_manifest": {
+      "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/selected_l4_preflight/stage_manifest.json",
+      "bytes": 4429,
+      "sha256": "82da063fe53f0d54f713d085b63c15a2293d4ef661d5e656a3fda425507c6066"
+    },
+    "result": {
+      "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/selected_l4_preflight/result.json",
+      "bytes": 12874,
+      "sha256": "7df8f04de6357e9436df852df6ad6d2e45965f56eb53a06f2973a2e7b595f56e"
+    }
+  },
+  "gates": {
+    "all_benchmark_gates_passed": true,
+    "downloaded_run_manifest_verified": true,
+    "selected_gpu_matches_receipt": true,
+    "maximum_194_atom_capacity_exercised": true,
+    "deterministic_repeat_exact": true,
+    "fixed_state_failures_zero": true,
+    "route_or_oracle_calls_zero": true,
+    "candidate_selection_absent": true
+  },
+  "projection": {
+    "scope": "training_only_excludes_evaluation_and_startup",
+    "hours_per_replicate": 0.3081712338611105,
+    "gpu_cost_usd_all_three_replicates": 0.7388713503053985,
+    "peak_reserved_bytes": 660602880
+  },
+  "post_confirmation_change": {
+    "scope": "local post-execution artifact staging only",
+    "reason": "The verified GPU result exposed that the temporary download directory did not preserve the content-addressed run-id basename required by the local verifier.",
+    "compute_path_changed": false,
+    "model_or_data_contract_changed": false,
+    "modal_runtime_utility_sha256": "7571e003cefb2b9324dd2956c8dec50946ee4bfc2435aaefa0fcd2f2821c0c11",
+    "modal_entrypoint_sha256": "520dc3839f87d01a7b8ab5c69d3d1bebe388de0a1e5ee81f4df6412e2776a8b7"
+  },
+  "calls": {
+    "route": 0,
+    "oracle": 0
+  },
+  "candidate_selection": false,
+  "nonclaims": [
+    "This confirmation establishes execution capacity and determinism, not model quality.",
+    "The projection covers training GPU time only.",
+    "This confirmation did not launch a production replicate or select a molecule."
+  ]
+}

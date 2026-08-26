@@ -1,0 +1,74 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-v0-port-transformer-seed0-sampling-v1",
+  "description": "Sample the fixed-step Ugi-only Transformer on 3,072 matched programs with the original constrained sampler.",
+  "root_seed": 20260816,
+  "profiles": ["smoke", "full"],
+  "replicates": {"smoke": 1, "full": 1},
+  "stages": [
+    {
+      "id": "sample",
+      "implementation": "generate.ugi.sample-shards.v1",
+      "needs": [],
+      "config": {
+        "path": "experiments/phase1/product_l1/configs/ugi_v0_port_transformer_seed0_sampling_v1.json",
+        "sha256": "e6e2d1cfce89c04a83a9642dff4298a42acc46c30bad15ff2ce69d803d88413a"
+      },
+      "inputs": {
+        "joint_checkpoint": {
+          "path": "runs/phase1-ugi-v0-port-transformer-seed0-h100-v1/f35b30a5a7d3bd6386f0b4c5f578f5808c9cb070df16c7092e1759dc99680ead/stages/joint/artifacts/checkpoint_best.pt",
+          "sha256": "745271c7552bd9212c97a04cf004a7f7724cc3acc4b7e062cd6963a8a7239951"
+        },
+        "closure_checkpoint": {
+          "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+          "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+        },
+        "matched_programs": {
+          "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+          "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+        },
+        "prepared_cache": {
+          "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+          "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+        },
+        "qualified_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.phase1_ugi_sampling_result.v1"
+        },
+        "shards": {
+          "path": "shards.tar",
+          "schema_version": "forge.sampling_shard_archive.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 24576,
+        "timeout_seconds": 21600,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-v0-port-transformer-seed0-matched-sampling"
+      }
+    }
+  ],
+  "metadata": {
+    "checkpoint": "fixed final step 5100",
+    "programs": "same pinned 3,072-program draw used by the matched Ugi evaluation",
+    "sampler": "original constrained Ugi v0 sampler"
+  },
+  "nonclaims": [
+    "This diagnostic sampler does not lock or rank candidates.",
+    "Exact L1 reconstruction is not L2/L3 route closure or synthesis success.",
+    "Sampling performs no biological, route, or synthesis-value guidance."
+  ]
+}

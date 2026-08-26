@@ -1,0 +1,85 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-representation",
+  "description": "Qualify one aromatic-aware whole-product graph and reaction-program coordinate system across Ugi, repeated aza-Michael, and repeated reductive-amination records.",
+  "root_seed": 20260822,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "representation",
+      "implementation": "model.shared-synthesis-program-representation.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/shared_synthesis_program_representation_v1.json",
+        "sha256": "7ec8238aad7d5437baa2f8b8ebdc7b22ce48bbe48aff1982a242bf8423323886"
+      },
+      "inputs": {
+        "atom_vocabulary": {
+          "path": "results/phase1/product_v3_atom_vocabulary.json",
+          "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+        },
+        "multireaction_atlas": {
+          "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+          "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+        },
+        "multireaction_corpus_result": {
+          "path": "results/phase1/multireaction_program_corpus_v1/result.json",
+          "sha256": "df6f06fc1a4f9239ee24cbd46e0de8805a5e5063e3e9087379182868695e401d"
+        },
+        "multireaction_semantic_atoms": {
+          "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+          "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "ugi_corpus_result": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/result.json",
+          "sha256": "1b655ce6389f50c7310a21a287997793c592ca93de064d53bafacaee24f663a6"
+        },
+        "ugi_semantic_atoms": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+          "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+        },
+        "ugi_semantic_products": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+          "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.shared_synthesis_program_representation_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "shared-synthesis-program-representation"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-20 bounded computational multi-reaction extension",
+    "scientific_identity": "vocabulary_free_shared_reaction_program_coordinates"
+  },
+  "nonclaims": [
+    "Exact graph reconstruction is not evidence of model generalization.",
+    "Exact L1 replay is not route certification or synthesis-success probability.",
+    "This qualification does not authorize a production multi-reaction run."
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-multireaction-overfit",
+  "description": "Qualify reaction-core conditioning on a bounded, source-balanced two-record overfit set before any production run.",
+  "root_seed": 20260821,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [
+    {
+      "id": "training",
+      "implementation": "model.multireaction.training.v2",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/training_overfit_v1.json",
+        "sha256": "694461377bf2f3bf77f9a846db7d555ba2a7abed765c8f32b65807413d47992d"
+      },
+      "inputs": {
+        "atlas": {
+          "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+          "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "semantic_atoms": {
+          "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+          "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+        },
+        "splits": {
+          "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+          "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+        }
+      },
+      "outputs": {
+        "checkpoint": {
+          "path": "checkpoint.json",
+          "schema_version": "forge.multireaction_sparse_flow_checkpoint.v2"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.multireaction_training_result.v2"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 1200,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "multireaction-overfit-training"}
+    },
+    {
+      "id": "sampling",
+      "implementation": "model.multireaction.sampling.v2",
+      "needs": ["training"],
+      "config": {
+        "path": "configs/multireaction/sampling_overfit_v1.json",
+        "sha256": "c36643b0c066b2abaa17ae08b1664745b0ca3b3207d60388ff299357eb90c9e0"
+      },
+      "inputs": {
+        "atlas": {
+          "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+          "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "qualified_reaction_families": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        },
+        "semantic_atoms": {
+          "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+          "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+        },
+        "splits": {
+          "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+          "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+        }
+      },
+      "outputs": {
+        "samples": {
+          "path": "samples.json",
+          "schema_version": "forge.multireaction_samples.v2"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.multireaction_sampling_result.v2"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 1200,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "multireaction-overfit-sampling"}
+    },
+    {
+      "id": "qualification",
+      "implementation": "model.multireaction.overfit-qualification.v1",
+      "needs": ["training", "sampling"],
+      "config": {
+        "path": "configs/multireaction/overfit_qualification_v1.json",
+        "sha256": "25fa86a872e4d785ced12f57f3b453af443d4208dd570f5c37f191cebd3b2fe0"
+      },
+      "inputs": {},
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.multireaction_overfit_qualification.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 1,
+        "workers": 0,
+        "memory_mb": 1024,
+        "timeout_seconds": 120,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "multireaction-overfit-qualification"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-20 bounded computational multi-reaction extension",
+    "scientific_identity": "reaction_core_conditioned_overfit_gate"
+  },
+  "nonclaims": [
+    "The two selected training records provide no generalization evidence.",
+    "A pass does not authorize a production launch.",
+    "Exact L1 is transform consistency, not synthesis success."
+  ]
+}

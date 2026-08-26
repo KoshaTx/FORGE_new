@@ -101,6 +101,22 @@ have (see PLAN §5). Use the vendored name in all code and prose.
   independently reconciled to the official AGILE workbook because LANTERN does not
   publish a curated RAW table. **AGILE remains a predictive general-transfection
   oracle, not an in-vivo endpoint oracle.**
+- **Consolidated potency-study view** — new biological modelling code consumes one observation
+  schema produced by `phase1-potency-study-corpus`, with raw LNPDB as its only row-level input for
+  AGILE (`YX_2024`), `JC_2023`, and `LM_2019`. It preserves the LNPDB within-study endpoint z-score,
+  canonicalizes the complete lipid graph under the constitution-only Phase 1 identity, and excludes
+  all 200 B4 mixture observations through a hash-pinned component-label policy. It contains no
+  reaction-program or component-supervision fields. The output is intentionally keyed by
+  `(study_id, endpoint)` and targets are never pooled across studies or presented as raw assay
+  measurements. Historical M0 results, the frozen raw-label HeLa pilot, and their reconciliation
+  inputs keep their original bytes; this is the supported contract for new potency work.
+- **Reaction-program views** use the same raw LNPDB catalogue for source rows, product graphs, study
+  identity, and reported component columns. Registries, supplementary-information reviews, and
+  source-specific corrections are evidence inputs: they decide whether a reported component or
+  transform is admitted, abstained, or corrected, but they are not parallel observation tables.
+  Exact atom-origin ledgers and balanced chemistry caches are derived training artifacts, not new
+  sources. The virtual Ugi corpus remains a separate declared enumeration because those unmeasured
+  products do not exist in LNPDB.
 - **M0-07 LANTERN split artifacts** are retained exactly for reproduction and
   independent leakage auditing. The nominal `Murcko_scaffold.npy` artifact is
   not scaffold-disjoint: all six Murcko groups cross its train, validation, and

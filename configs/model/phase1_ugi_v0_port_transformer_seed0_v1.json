@@ -1,0 +1,133 @@
+{
+  "schema_version": "phase1_ugi_joint_sparse_training_config.v1",
+  "task": "Ugi-only Transformer port of the qualified v0 morphology and chemistry generator",
+  "corpus_kind": "expanded_fold_clean",
+  "seed": 20260828,
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  },
+  "expected_fold_counts": {
+    "train": 66464,
+    "calibration": 15800,
+    "heldout": 30122
+  },
+  "training_partition": {
+    "mode": "fixed_train_only",
+    "training_folds": ["train"],
+    "diagnostic_folds": ["calibration"],
+    "selection_mode": "fixed_final_step",
+    "diagnostic_use": "nonselecting loss monitoring only; heldout remains sealed"
+  },
+  "duration_contract": {
+    "reference": "qualified v0 fixed-duration production exposure",
+    "optimizer_steps": 5100,
+    "batch_size": 128,
+    "weighted_training_draws": 652800,
+    "data_dependent_early_stopping": false
+  },
+  "port_contract": {
+    "reaction_program": "ugi_3cr_agile",
+    "fixed_five_atom_ugi_core": true,
+    "core_excluded_origin_local_exteriors": true,
+    "coarse_role_morphology_program": true,
+    "component_weighted_branch_budgets": true,
+    "role_conditioned_source_marginals": true,
+    "bidirectional_anchor_local_decorations": true,
+    "reverse_star_sampling_steps": 8,
+    "component_ids_enter_neural_tensors": false,
+    "fragment_tokens_enter_neural_tensors": false,
+    "bl_or_lx_training_rows": 0,
+    "repairs_or_retries": false
+  },
+  "sampling": {
+    "mode": "source_stratified_role_family_raked",
+    "source_mass": {
+      "current_phase1_union": 0.5,
+      "expanded_exact_forward_enumeration": 0.5
+    },
+    "uniform_row_mixture": 0.5,
+    "component_ids_enter_neural_tensors": false,
+    "uniform_product_row_sampling_allowed": false
+  },
+  "model": {
+    "maximum_children": 3,
+    "bond_classes": 4,
+    "maximum_component_atoms": 32,
+    "maximum_total_atoms": 80,
+    "maximum_junction_budget": 7,
+    "maximum_cycle_rank": 2,
+    "maximum_attachment_count": 2,
+    "maximum_decorations": 7,
+    "hidden_dim": 192,
+    "layers": 4,
+    "dropout": 0.15,
+    "source_probability_floor": 0.00001,
+    "conditioning_mode": "full_morphology",
+    "semantic_organization": "role_structured",
+    "decoration_state_conditioning": "bidirectional_anchor_local",
+    "backbone": "ugi_program_transformer",
+    "attention_heads": 8,
+    "transformer_feedforward_multiplier": 4
+  },
+  "smoke": {
+    "device": "cpu",
+    "steps": 2,
+    "batch_size": 2,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 1,
+    "checkpoint_steps": [1, 2],
+    "validation_batches": 1,
+    "early_stopping": {
+      "patience": 0,
+      "min_delta": 0.0,
+      "minimum_steps": 0
+    },
+    "model_overrides": {
+      "hidden_dim": 32,
+      "layers": 1,
+      "dropout": 0.0
+    }
+  },
+  "full": {
+    "device": "cuda",
+    "steps": 5100,
+    "batch_size": 128,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 300,
+    "checkpoint_steps": [300, 1500, 3000, 5100],
+    "validation_batches": 16,
+    "early_stopping": {
+      "patience": 0,
+      "min_delta": 0.0,
+      "minimum_steps": 0
+    }
+  },
+  "nonclaims": [
+    "This Ugi-specialist configuration does not establish multi-reaction generality.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Calibration loss is nonselecting and heldout records never enter fitting."
+  ]
+}

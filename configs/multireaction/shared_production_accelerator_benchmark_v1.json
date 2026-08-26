@@ -1,0 +1,64 @@
+{
+  "schema_version": "forge.synthesis_program_production_accelerator_benchmark_config.v1",
+  "inputs": {
+    "production_design": {"path": "configs/multireaction/shared_production_comparison_design_v1.json", "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"},
+    "production_cache": {"path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz", "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"},
+    "production_training_config": {"path": "configs/multireaction/shared_production_training_v1.json", "sha256": "b040716116f8fa2cce4374e660e36a6117c7cbd9914664527e13da5577431ecc"},
+    "production_evaluation_config": {"path": "configs/multireaction/shared_production_evaluation_v1.json", "sha256": "97916c9fe91ab67712fd81a3c8d0b8e1f98a1fbefc58837a62fc2aba9abc96bc"},
+    "smoke_training_result": {"path": "results/phase1/shared_synthesis_program_production_smoke_v1/training_result.json", "sha256": "50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8"},
+    "smoke_evaluation_result": {"path": "results/phase1/shared_synthesis_program_production_smoke_v1/evaluation_result.json", "sha256": "441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07"},
+    "test_baseline_report": {"path": "results/phase1/shared_synthesis_program_production_readiness_v1/test_baseline.json", "sha256": "1369a71ecf2a835523ad902e9dcc6912d266bb970741399844e58151245cc285"}
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-21",
+    "scope": "Run the bounded, execution-only L4 and A100-40GB qualification benchmarks before selecting one production accelerator.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "benchmark": {
+    "targets": {
+      "L4": {
+        "device_name_tokens": ["L4"],
+        "minimum_memory_gib": 22.0,
+        "maximum_memory_gib": 26.0
+      },
+      "A100-40GB": {
+        "device_name_tokens": ["A100"],
+        "minimum_memory_gib": 38.0,
+        "maximum_memory_gib": 42.0
+      }
+    },
+    "warmup_optimizer_steps": 1,
+    "measured_optimizer_steps": 3,
+    "maximum_support_optimizer_steps": 1,
+    "production_optimizer_steps_per_arm": 1700,
+    "production_replicates": 3,
+    "pricing": {
+      "provider": "Modal",
+      "source_url": "https://modal.com/pricing",
+      "accessed_date": "2026-08-21",
+      "currency": "USD",
+      "scope": "GPU line item only; CPU, memory, evaluation, transfer and storage are excluded",
+      "gpu_usd_per_second": {
+        "L4": 0.000222,
+        "A100-40GB": 0.000583
+      }
+    },
+    "adjudication": {
+      "required_targets": ["L4", "A100-40GB"],
+      "eligibility": [
+        "all fail-closed gates pass",
+        "at least ten percent memory headroom under the 194-atom stress",
+        "exact deterministic challenger replay"
+      ],
+      "primary_order": "lowest projected training-only GPU cost across three replicates",
+      "tie_breaker": "lowest projected training wall time",
+      "production_requirement": "rerun the accelerator preflight on the selected exact GPU class before launching any production replicate"
+    }
+  },
+  "nonclaims": [
+    "The benchmark measures execution capacity and short-run throughput, not model quality.",
+    "The cost projection excludes evaluation and non-GPU Modal charges.",
+    "The benchmark makes zero route, oracle or candidate-selection calls."
+  ]
+}

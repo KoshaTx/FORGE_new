@@ -65,8 +65,10 @@ class PublicationProducer:
         tools = value["tools"]
         if not isinstance(producer_id, str) or not producer_id:
             raise PaperContractError(f"{label}.id must be a non-empty string")
-        if not isinstance(command, list) or not command or not all(
-            isinstance(item, str) and item for item in command
+        if (
+            not isinstance(command, list)
+            or not command
+            or not all(isinstance(item, str) and item for item in command)
         ):
             raise PaperContractError(f"{label}.command must be a non-empty string array")
         if not isinstance(outputs, list) or not outputs:
@@ -100,7 +102,9 @@ class PaperContract:
         try:
             document: Any = json.loads(path.read_text())
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-            raise PaperContractError(f"paper contract could not be read: {path}: {error}") from error
+            raise PaperContractError(
+                f"paper contract could not be read: {path}: {error}"
+            ) from error
         fields = {
             "schema_version",
             "paper_id",
@@ -145,8 +149,10 @@ class PaperContract:
         if not isinstance(numerical, list) or not numerical:
             raise PaperContractError("numerical_entrypoints must be a non-empty path array")
         experiments = document["registered_experiments"]
-        if not isinstance(experiments, list) or not experiments or not all(
-            isinstance(item, str) and item for item in experiments
+        if (
+            not isinstance(experiments, list)
+            or not experiments
+            or not all(isinstance(item, str) and item for item in experiments)
         ):
             raise PaperContractError("registered_experiments must be a non-empty string array")
 

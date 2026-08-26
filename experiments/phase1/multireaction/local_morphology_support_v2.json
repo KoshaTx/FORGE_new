@@ -1,0 +1,58 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-local-morphology-support-v2",
+  "description": "Build a training-fold-only reaction-family- and role-conditioned ring-morphology policy for vocabulary-free constrained decoding.",
+  "root_seed": 20260826,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "support",
+      "implementation": "model.local-morphology-support.v2",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/local_morphology_support_v2.json",
+        "sha256": "575f7202c096c91476396935da53be3c44dc33389b8df494579e661a8b574855"
+      },
+      "inputs": {
+        "production_cache": {
+          "path": "results/phase1/bl_core_constrained_production_cache_v1/cache.npz",
+          "sha256": "3744e066325f3e203139797ab48eb54725f95ce09b39209905fb656df53c5973"
+        }
+      },
+      "outputs": {
+        "policy": {
+          "path": "policy.json",
+          "schema_version": "forge.local_chemistry_support.v2"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.local_chemistry_support_result.v2"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "local-morphology-support-v2"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-26 explicit user instruction to restore train-derived role-local ring constraints without retraining",
+    "candidate_selection": false,
+    "finite_component_vocabulary": false,
+    "fixed_adapter_cycles_authorize_variable_closures": false
+  },
+  "nonclaims": [
+    "Local ring support is not synthesis success, stability, safety, activity or route closure.",
+    "No generated candidate is selected by this build."
+  ]
+}

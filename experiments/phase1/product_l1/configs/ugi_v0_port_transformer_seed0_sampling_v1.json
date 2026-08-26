@@ -1,0 +1,56 @@
+{
+  "schema_version": "forge.phase1_ugi_sampling_config.v1",
+  "task": "Matched no-repair sampling from the fixed-step Ugi-only Transformer seed-0 checkpoint",
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "runs/phase1-ugi-v0-port-transformer-seed0-h100-v1/f35b30a5a7d3bd6386f0b4c5f578f5808c9cb070df16c7092e1759dc99680ead/stages/joint/artifacts/checkpoint_best.pt",
+      "sha256": "745271c7552bd9212c97a04cf004a7f7724cc3acc4b7e062cd6963a8a7239951"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_programs": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "profiles": {
+    "smoke": {
+      "program_count": 4,
+      "shard_size": 4,
+      "sample_steps": 8,
+      "batch_size": 4,
+      "maximum_adjacent_branch_runs": [2, 1, 1],
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0
+    },
+    "full": {
+      "program_count": 3072,
+      "shard_size": 1024,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "maximum_adjacent_branch_runs": [2, 1, 1],
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0
+    }
+  },
+  "policy": {
+    "contiguous_program_blocks": true,
+    "exact_l1_terminal_admission": true,
+    "original_v0_sampler": true,
+    "reference_comparison": "deferred",
+    "retries_or_repairs": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false
+  }
+}

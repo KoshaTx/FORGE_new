@@ -1,0 +1,35 @@
+{
+  "schema_version": "forge.synthesis_program_training_config.v1",
+  "seed": 20260824,
+  "inputs": {},
+  "model": {
+    "hidden_dim": 64,
+    "layers": 2,
+    "dropout": 0.0,
+    "bond_classes": 4,
+    "maximum_heavy_atoms": 194,
+    "maximum_closures": 3
+  },
+  "training": {
+    "steps": 3072,
+    "batch_size": 3,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 1.0
+  },
+  "evaluation": {
+    "corruption_time": 0.5
+  },
+  "execution": {
+    "device": "cpu",
+    "precision": "float32",
+    "cpu_threads": 2,
+    "checkpoint_interval_steps": 768,
+    "deterministic_algorithms": true
+  },
+  "gates": {
+    "maximum_final_to_initial_loss_ratio": 0.5,
+    "minimum_exact_tensor_records": 3
+  },
+  "claim_boundary": "Bounded three-record shared-model overfit gate only; no generalization or production-training claim."
+}

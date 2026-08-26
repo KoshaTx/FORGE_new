@@ -1,0 +1,89 @@
+{
+  "benchmark_config": {
+    "bytes": 3427,
+    "path": "configs/multireaction/shared_production_accelerator_benchmark_v1.json",
+    "sha256": "adff26a98c11b3508615fdd3e85014d6be52a996368ee67618ed5719e5279cbe"
+  },
+  "cache_sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41",
+  "calls": {
+    "oracle": 0,
+    "route": 0
+  },
+  "candidate_selection": false,
+  "design_sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87",
+  "evidence": [
+    {
+      "gpu_type": "A100-40GB",
+      "result": {
+        "bytes": 12891,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/a100_40gb/result.json",
+        "sha256": "8e3b19fba66c9163f55200b1705ab073adeb77dee40900b6d8f51a87bdad978a"
+      },
+      "run_id": "88e51151d9c18f8896efd3fa4fc78ce2d8177cce19c6b7c2ec135bd4aa5eb368",
+      "run_manifest": {
+        "bytes": 954,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/a100_40gb/run.json",
+        "sha256": "cee20cbd44e0caca9f3f40f45ff2efa6f88c36f2faa035c3d05afe63f548df1a"
+      },
+      "stage_fingerprint": "3ea50b261adcf8ec3db5ba4d1c4193d8e1378481a7eaa36ea71ef0a5ce145680",
+      "stage_manifest": {
+        "bytes": 4474,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/a100_40gb/stage_manifest.json",
+        "sha256": "cc28255a4534056f1b06bb5a46a11eb31137bc2875ec79f9466fd822b04231a0"
+      }
+    },
+    {
+      "gpu_type": "L4",
+      "result": {
+        "bytes": 12851,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/l4/result.json",
+        "sha256": "4bfdbaad36091373c58aa70513612d4d3a125542abc6e02e43e2d4d2bf1b68d0"
+      },
+      "run_id": "bb668b65570d5267aee0bb6bf0d6223c09cb8db7b442a96a9e3cb43b4957a481",
+      "run_manifest": {
+        "bytes": 946,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/l4/run.json",
+        "sha256": "657cbc3e6dd970fba032dbcca2eea38934ee14d4efb4e2f6add7d4d702b37f36"
+      },
+      "stage_fingerprint": "880323e7badfb6f480f3f60fe97a51d1375169522ff56c359b69bafa2801e7e1",
+      "stage_manifest": {
+        "bytes": 4429,
+        "path": "results/phase1/shared_synthesis_program_accelerator_selection_v1/evidence/l4/stage_manifest.json",
+        "sha256": "e92a9db8d01b7690f189281a9e29172cee3c9365a5cce2d9df6489d5e93e1410"
+      }
+    }
+  ],
+  "math_mode": {
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "nonclaims": [
+    "This is an execution-cost selection, not model-quality evidence.",
+    "Projected cost covers training GPU time only."
+  ],
+  "production_requirement": "rerun the accelerator preflight on the selected exact GPU class before launching any production replicate",
+  "ranking": [
+    {
+      "gpu_type": "L4",
+      "peak_reserved_bytes": 660602880,
+      "physical_device": "NVIDIA L4",
+      "projected_training_gpu_cost_usd_all_replicates": 0.9844154647344016,
+      "projected_training_hours_per_replicate": 0.41058369400000067,
+      "total_memory_bytes": 23659151360
+    },
+    {
+      "gpu_type": "A100-40GB",
+      "peak_reserved_bytes": 660602880,
+      "physical_device": "NVIDIA A100-SXM4-40GB",
+      "projected_training_gpu_cost_usd_all_replicates": 2.7941963764440034,
+      "projected_training_hours_per_replicate": 0.44377682111111166,
+      "total_memory_bytes": 42405855232
+    }
+  ],
+  "schema_version": "forge.synthesis_program_production_accelerator_selection.v1",
+  "selected_gpu_type": "L4",
+  "selection_objective": "lowest projected training-only GPU cost across three replicates",
+  "source_sha256": "9bad187578b59c580493fa8d85cbf6662a650650672abfc0bea755373601fbd0",
+  "status": "selected_execution_target",
+  "tie_breaker": "lowest projected training wall time"
+}

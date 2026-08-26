@@ -1,0 +1,40 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-bl-lx-repair-calibration-h100",
+  "description": "Run H100 replicates of the two-model by two-decoder BL/LX repair study with a Ugi calibration anti-regression readout.",
+  "root_seed": 20260825,
+  "profiles": ["full"],
+  "replicates": {"full": 3},
+  "stages": [{
+    "id": "study",
+    "implementation": "model.transformer-mechanism-study.v1",
+    "needs": [],
+    "config": {"path": "configs/multireaction/bl_lx_repair_calibration_v1.json", "sha256": "2879dc167d4c50346301a629690337be698d0d493f5d6dffe37da94e115f59c1"},
+    "inputs": {
+      "base_design": {"path": "configs/multireaction/shared_production_comparison_transformer_v1.json", "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"},
+      "production_cache": {"path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz", "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"},
+      "program_config": {"path": "configs/multireaction/lnpdb_reaction_programs_v1.json", "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"},
+      "qualified_reaction_families": {"path": "data/vendor/qualified_reaction_families_v1.json", "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"},
+      "qualified_ugi_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+      "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+      "multireaction_atlas": {"path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz", "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"},
+      "multireaction_splits": {"path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz", "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"}
+    },
+    "outputs": {
+      "design": {"path": "study_design.json", "schema_version": "forge.synthesis_program_production_design_config.v1"},
+      "training_result": {"path": "training/result.json", "schema_version": "forge.synthesis_program_production_training_result.v1"},
+      "checkpoints": {"path": "training/checkpoints.tar", "schema_version": "forge.synthesis_program_production_checkpoint_archive.v1"},
+      "samples": {"path": "evaluation/samples.jsonl.gz", "schema_version": "forge.synthesis_program_production_samples.v1"},
+      "evaluation_result": {"path": "evaluation/result.json", "schema_version": "forge.bl_lx_repair_calibration_result.v1"},
+      "result": {"path": "result.json", "schema_version": "forge.transformer_mechanism_study_result.v1"}
+    },
+    "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 172800, "gpu_type": "H100!"},
+    "determinism": {"mode": "strict", "stream": "bl-lx-repair-calibration-h100"}
+  }],
+  "metadata": {"scientific_identity": "calibration_only_bl_lx_failure_diagnosis", "cells": 4, "ugi_role": "nonselecting_anti_regression_anchor", "paid_launch_requires_separate_approval": true},
+  "nonclaims": [
+    "No heldout products are read.",
+    "Calibration outcomes cannot select a final production model.",
+    "This descriptor does not itself authorize a paid remote launch."
+  ]
+}

@@ -15,31 +15,14 @@ from typing import Any
 
 from experiments._runtime.errors import StageError
 from experiments._runtime.registry import stage
-from experiments._runtime.stage import ProducedArtifact, RunContext, StageResult
+from experiments._runtime.stage import (
+    ProducedArtifact,
+    RunContext,
+    StageResult,
+    require_config_inputs,
+)
 from forge.core.hashing import sha256_file
 from forge.core.io import write_json
-
-
-def _require_config_inputs(
-    context: RunContext,
-    config: dict[str, Any],
-    *,
-    labels: set[str] | None = None,
-) -> None:
-    configured = config.get("inputs")
-    if not isinstance(configured, dict):
-        raise StageError(f"stage {context.stage.stage_id} config has no input mapping")
-    expected = set(context.inputs) if labels is None else labels
-    if set(configured) != expected:
-        raise StageError(
-            f"experiment inputs and stage config differ for {context.stage.stage_id}: "
-            f"experiment={sorted(expected)}, config={sorted(configured)}"
-        )
-    for label in sorted(expected):
-        pin = context.stage.inputs[label]
-        record = configured[label]
-        if not isinstance(record, dict) or record != pin.to_mapping():
-            raise StageError(f"experiment pin differs from stage config for {label!r}")
 
 
 def _copy(source: Path, target: Path) -> None:
@@ -141,7 +124,7 @@ def freeze_phase1_corpus(context: RunContext) -> StageResult:
     from forge.corpus import freeze_phase1_data_contract
 
     config = context.config()
-    _require_config_inputs(context, config)
+    require_config_inputs(context, config)
     paths = {
         "ugi_assignments": context.output_path("ugi_l1_assignments.csv.gz"),
         "ugi_provenance": context.output_path("ugi_l1_constitutional_provenance.csv.gz"),
@@ -193,7 +176,7 @@ def verify_ugi_training_cache(context: RunContext) -> StageResult:
 
     config = context.config()
     configured_labels = set(config.get("inputs", {}))
-    _require_config_inputs(context, config, labels=configured_labels)
+    require_config_inputs(context, config, labels=configured_labels)
     cache_path = context.input("prepared_cache")
     payload = load_ugi_training_cache_payload(cache_path)
     cached_inputs = payload.get("inputs")
@@ -242,7 +225,7 @@ def train_ugi_joint_stage(context: RunContext) -> StageResult:
 
     context.dependency("cache", "receipt")
     config = context.config()
-    _require_config_inputs(context, config)
+    require_config_inputs(context, config)
     runtime = config.get(context.profile)
     if not isinstance(runtime, dict) or runtime.get("device") != context.resources.device:
         raise StageError("joint training config and declared device differ")
@@ -284,7 +267,7 @@ def train_ugi_closure_stage(context: RunContext) -> StageResult:
     from experiments.phase1.product_l1.training.ugi_closure_training import train_ugi_closure_scorer
 
     config = context.config()
-    _require_config_inputs(context, config)
+    require_config_inputs(context, config)
     runtime = config.get(context.profile)
     if not isinstance(runtime, dict) or runtime.get("device") != context.resources.device:
         raise StageError("closure training config and declared device differ")
@@ -325,7 +308,7 @@ def sample_ugi_shards(context: RunContext) -> StageResult:
     )
 
     config = context.config()
-    _require_config_inputs(context, config)
+    require_config_inputs(context, config)
     runtime = config.get("profiles", {}).get(context.profile)
     if not isinstance(runtime, dict):
         raise StageError(f"sampling config has no {context.profile!r} profile")
@@ -381,6 +364,11 @@ def sample_ugi_shards(context: RunContext) -> StageResult:
                 joint_checkpoint_path=context.input("joint_checkpoint"),
                 closure_checkpoint_path=context.input("closure_checkpoint"),
                 matched_staged_result_path=context.input("matched_programs"),
+                prepared_cache_path=(
+                    context.input("prepared_cache")
+                    if "prepared_cache" in context.inputs
+                    else None
+                ),
                 sample_steps=int(runtime["sample_steps"]),
                 batch_size=int(runtime["batch_size"]),
                 seed=flow_seed,

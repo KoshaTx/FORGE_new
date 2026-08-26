@@ -1,0 +1,77 @@
+{
+  "schema_version": "forge.multireaction_training_config.v2",
+  "run_kind": "diagnostic_smoke",
+  "seed": 20260820,
+  "inputs": {
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    }
+  },
+  "model": {
+    "declared_elements": [
+      "C",
+      "N",
+      "O"
+    ],
+    "hidden_dim": 32,
+    "layers": 1,
+    "dropout": 0.0,
+    "bond_classes": 3,
+    "maximum_heavy_atoms": 194,
+    "maximum_closures": 3
+  },
+  "training": {
+    "arms": [
+      "program",
+      "null",
+      "program_id_shuffled"
+    ],
+    "steps": 4,
+    "batch_size": 4,
+    "validation_batch_size": 4,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 1.0
+  },
+  "execution": {
+    "device": "cpu",
+    "precision": "float32",
+    "cpu_threads": 2,
+    "checkpoint_interval_steps": 2,
+    "deterministic_algorithms": true
+  },
+  "selection": {
+    "mode": "all_training_records"
+  },
+  "evaluation": {
+    "fold": "calibration"
+  },
+  "expected": {
+    "fold_counts": {
+      "train": 328,
+      "calibration": 196,
+      "heldout": 240
+    },
+    "maxima": {
+      "heavy_atoms": 194,
+      "closures": 3,
+      "program_depth": 4,
+      "accumulator_atoms": 18,
+      "repeat_component_atoms": 45
+    }
+  },
+  "claim_boundary": "Diagnostic plumbing only; no model comparison, synthesis-success or biological claim."
+}

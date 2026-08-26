@@ -1,0 +1,122 @@
+{
+  "candidate_selection": false,
+  "display_only": true,
+  "eligible_unique": 23,
+  "schema_version": "forge.paper.forge_generated_sample_selection.v1",
+  "selected": [
+    {
+      "attempt_index": 2256,
+      "canonical_smiles": "CCCCC(=O)CCCCCCCCCCCC(C(=O)NCCOC)N(C)CCCC",
+      "components_by_role": {
+        "amine_head": "CCCCNC",
+        "isocyanide_tail": "[C-]#[N+]CCOC",
+        "oxoester_aldehyde_body_tail": "CCCCC(=O)CCCCCCCCCCCC=O"
+      },
+      "conformer_generator": "RDKit ETKDGv3",
+      "conformer_seed": 20260825,
+      "conformers": [
+        {
+          "conformer_id": 0,
+          "energy_kcal_mol": 52.047503476385785,
+          "status": 0
+        },
+        {
+          "conformer_id": 1,
+          "energy_kcal_mol": 52.35570445231795,
+          "status": 1
+        },
+        {
+          "conformer_id": 2,
+          "energy_kcal_mol": 51.657198826859045,
+          "status": 1
+        }
+      ],
+      "nearest_reference_descriptor_distance": 0.6323876205523783,
+      "nearest_reference_tanimoto": 0.45901639344262296,
+      "optimizer_used": "MMFF94s",
+      "rank_sha256": "0096e4dd3485d4509807088cd5438abf75cea5ee931adfa4a707b7e2723e8168"
+    },
+    {
+      "attempt_index": 2931,
+      "canonical_smiles": "CCCCCCCCCCCCCC(NCCCC)C(=O)NCCCC1OCO1",
+      "components_by_role": {
+        "amine_head": "CCCCN",
+        "isocyanide_tail": "[C-]#[N+]CCCC1OCO1",
+        "oxoester_aldehyde_body_tail": "CCCCCCCCCCCCCC=O"
+      },
+      "conformer_generator": "RDKit ETKDGv3",
+      "conformer_seed": 20270798,
+      "conformers": [
+        {
+          "conformer_id": 0,
+          "energy_kcal_mol": 22.157540198479225,
+          "status": 0
+        },
+        {
+          "conformer_id": 1,
+          "energy_kcal_mol": 19.253964139947566,
+          "status": 0
+        },
+        {
+          "conformer_id": 2,
+          "energy_kcal_mol": 23.14014995427423,
+          "status": 1
+        }
+      ],
+      "nearest_reference_descriptor_distance": 0.8523006410829269,
+      "nearest_reference_tanimoto": 0.3333333333333333,
+      "optimizer_used": "MMFF94s",
+      "rank_sha256": "0a25174123fd965ac2cc1909f7b507781b07953984d187b0ff4bad41a6ec2d6f"
+    },
+    {
+      "attempt_index": 1586,
+      "canonical_smiles": "CCCC=CCCCCCCCCCCCCCC(C(=O)NCCCCCC)N(C)CCCCCCCCCCCC",
+      "components_by_role": {
+        "amine_head": "CCCCCCCCCCCCNC",
+        "isocyanide_tail": "[C-]#[N+]CCCCCC",
+        "oxoester_aldehyde_body_tail": "CCCC=CCCCCCCCCCCCCCC=O"
+      },
+      "conformer_generator": "RDKit ETKDGv3",
+      "conformer_seed": 20280771,
+      "conformers": [
+        {
+          "conformer_id": 0,
+          "energy_kcal_mol": 32.79468737197263,
+          "status": 1
+        },
+        {
+          "conformer_id": 1,
+          "energy_kcal_mol": 35.68685991626022,
+          "status": 1
+        },
+        {
+          "conformer_id": 2,
+          "energy_kcal_mol": 32.801479434295814,
+          "status": 1
+        }
+      ],
+      "nearest_reference_descriptor_distance": 0.5484371290883553,
+      "nearest_reference_tanimoto": 0.55,
+      "optimizer_used": "MMFF94s",
+      "rank_sha256": "0aec664fc50a1b90a87dd3f47cf704ef36f2f0af631ea304b131a15f7a479927"
+    }
+  ],
+  "selection_policy": {
+    "deduplicate_by": "canonical_constitution",
+    "display_count": 3,
+    "expected_eligible_unique": 23,
+    "expected_selected_attempt_indices": [
+      2256,
+      2931,
+      1586
+    ],
+    "method_id": "forge_transformer",
+    "program_id": "ugi_3cr_agile",
+    "rank_by": "sha256_canonical_smiles_ascending",
+    "require_declared_support": true,
+    "require_descriptor_manifold_member": true,
+    "require_method_visible_open_ended": true,
+    "required_exact_l1_trace_count": 1,
+    "seed": 20260825
+  }
+}

@@ -670,6 +670,7 @@ if nn is not None:
             parent_distance_buckets: int = 0,
             closure_ring_size_buckets: int = 0,
             region_classes: int = 0,
+            use_position_embedding: bool = False,
         ) -> None:
             super().__init__()
             if bond_classes not in {3, 4}:
@@ -684,7 +685,11 @@ if nn is not None:
             self.closure_ring_size_buckets = closure_ring_size_buckets
             self.region_classes = region_classes
             self.bond_classes = bond_classes
+            self.use_position_embedding = use_position_embedding
             self.node_embedding = nn.Embedding(node_classes, hidden_dim)
+            self.position_embedding = (
+                nn.Embedding(maximum_heavy_atoms, hidden_dim) if use_position_embedding else None
+            )
             self.bond_embedding = nn.Embedding(bond_classes, hidden_dim)
             if region_classes:
                 self.region_embedding = nn.Embedding(region_classes, hidden_dim)
@@ -748,9 +753,21 @@ if nn is not None:
             child_mask: Any,
             closure_mask: Any,
             regions: Any | None = None,
+            node_context: Any | None = None,
         ) -> dict[str, Any]:
             time_hidden = self.time_embedding(t[:, None])
             hidden = self.node_embedding(nodes) + time_hidden[:, None, :]
+            if self.position_embedding is not None:
+                if nodes.shape[1] > self.position_embedding.num_embeddings:
+                    raise Phase1FlowError("node sequence exceeds position-embedding support")
+                positions = torch.arange(nodes.shape[1], device=nodes.device)
+                hidden += self.position_embedding(positions)[None, :, :]
+            if node_context is not None:
+                if node_context.shape != (*nodes.shape, self.hidden_dim):
+                    raise Phase1FlowError(
+                        "external node context must be [batch, nodes, hidden_dim]"
+                    )
+                hidden += node_context
             if self.region_classes:
                 if regions is None:
                     raise Phase1FlowError("region-aware flow requires atom-region state")

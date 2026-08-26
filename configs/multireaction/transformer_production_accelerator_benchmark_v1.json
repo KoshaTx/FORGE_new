@@ -1,0 +1,93 @@
+{
+  "schema_version": "forge.synthesis_program_production_accelerator_benchmark_config.v1",
+  "inputs": {
+    "production_design": {
+      "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+      "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+      "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+    },
+    "production_training_config": {
+      "path": "configs/multireaction/transformer_production_training_v1.json",
+      "sha256": "6c166bcfe7860af9865adf34153c7c4f5947a2f270ec98cd15806f38bd60a130"
+    },
+    "production_evaluation_config": {
+      "path": "configs/multireaction/transformer_production_evaluation_v1.json",
+      "sha256": "72dcb3da2f6e743454ee218ec9b8fdf5fe7a6010010247df1dafbf5e3f83fbf8"
+    },
+    "smoke_training_result": {
+      "path": "results/phase1/transformer_synthesis_program_production_smoke_v1/training_result.json",
+      "sha256": "8eeb49f2f88456c8891b912441789df9fa1e962345988e07b654fa6dedeb0e00"
+    },
+    "smoke_evaluation_result": {
+      "path": "results/phase1/transformer_synthesis_program_production_smoke_v1/evaluation_result.json",
+      "sha256": "2b0a376dd2057e0ad862cb33bbadcca7927cf9e7041fca1ff1e3f81876b1d5ef"
+    },
+    "test_baseline_report": {
+      "path": "results/phase1/transformer_synthesis_program_production_readiness_v1/test_baseline.json",
+      "sha256": "dfe8f7ebde7810041f664638845d0abbf709e67f0f65f3f2a60af942fb79077c"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-23",
+    "scope": "Run bounded execution-only L4 and A100-40GB qualification benchmarks for the separately frozen Transformer follow-up before any full production launch.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "benchmark": {
+    "targets": {
+      "L4": {
+        "device_name_tokens": [
+          "L4"
+        ],
+        "minimum_memory_gib": 22.0,
+        "maximum_memory_gib": 26.0
+      },
+      "A100-40GB": {
+        "device_name_tokens": [
+          "A100"
+        ],
+        "minimum_memory_gib": 38.0,
+        "maximum_memory_gib": 42.0
+      }
+    },
+    "warmup_optimizer_steps": 1,
+    "measured_optimizer_steps": 3,
+    "maximum_support_optimizer_steps": 1,
+    "production_optimizer_steps_per_arm": 1700,
+    "production_replicates": 3,
+    "pricing": {
+      "provider": "Modal",
+      "source_url": "https://modal.com/pricing",
+      "accessed_date": "2026-08-21",
+      "currency": "USD",
+      "scope": "GPU line item only; CPU, memory, evaluation, transfer and storage are excluded",
+      "gpu_usd_per_second": {
+        "L4": 0.000222,
+        "A100-40GB": 0.000583
+      }
+    },
+    "adjudication": {
+      "required_targets": [
+        "L4",
+        "A100-40GB"
+      ],
+      "eligibility": [
+        "all fail-closed gates pass",
+        "at least ten percent memory headroom under the 194-atom stress",
+        "exact deterministic challenger replay"
+      ],
+      "primary_order": "lowest projected training-only GPU cost across three replicates",
+      "tie_breaker": "lowest projected training wall time",
+      "production_requirement": "rerun the accelerator preflight on the selected exact GPU class before launching any production replicate"
+    }
+  },
+  "nonclaims": [
+    "The benchmark measures execution capacity and short-run throughput, not model quality.",
+    "The cost projection excludes evaluation and non-GPU Modal charges.",
+    "The benchmark makes zero route, oracle or candidate-selection calls.",
+    "The sparse-MPNN accelerator result cannot qualify the Transformer architecture."
+  ]
+}

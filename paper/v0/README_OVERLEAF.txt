@@ -17,7 +17,7 @@ run, which left every citation undefined.
 The figures are downsampled to 300 DPI and alpha-flattened for the same reason.
 The originals are about 700 DPI with an unused alpha channel, which made a
 single pass cost roughly 6.9 s instead of 0.8 s. If you need the full-resolution
-figures, take them from paper/figures/ in the main repository.
+figures, take them from paper/v0/figures/ in the main repository.
 
 Layout of this archive
 ----------------------

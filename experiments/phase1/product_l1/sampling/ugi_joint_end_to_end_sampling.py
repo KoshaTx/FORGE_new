@@ -76,6 +76,41 @@ def _validate_reference_comparison_mode(mode: str) -> None:
         )
 
 
+def _resolve_prepared_cache_path(
+    repo: Path,
+    joint_checkpoint: dict[str, Any],
+    prepared_cache_path: Path | None,
+) -> Path | None:
+    """Resolve a checkpoint's pinned cache without trusting a machine-local training path."""
+
+    cache_record = joint_checkpoint.get("inputs", {}).get("prepared_cache")
+    if cache_record is None:
+        if prepared_cache_path is not None:
+            raise UgiJointEndToEndSamplingError(
+                "a prepared-cache override was supplied for a checkpoint with no cache pin"
+            )
+        return None
+    if not isinstance(cache_record, dict) or not isinstance(cache_record.get("sha256"), str):
+        raise UgiJointEndToEndSamplingError("joint checkpoint has an invalid prepared-cache pin")
+
+    if prepared_cache_path is not None:
+        cache_path = prepared_cache_path
+    else:
+        cache_path = Path(str(cache_record.get("path", "")))
+        if not cache_path.is_file() and str(cache_path).startswith("/root/forge_repo/"):
+            cache_path = repo / cache_path.relative_to("/root/forge_repo")
+    if not cache_path.is_file():
+        raise UgiJointEndToEndSamplingError(f"prepared training cache is missing: {cache_path}")
+    observed = sha256_file(cache_path)
+    expected = cache_record["sha256"]
+    if observed != expected:
+        raise UgiJointEndToEndSamplingError(
+            "prepared training cache differs from the checkpoint pin: "
+            f"expected {expected}, observed {observed}"
+        )
+    return cache_path
+
+
 def _complete_reference_comparison(
     result: dict[str, Any],
     *,
@@ -673,6 +708,7 @@ def sample_ugi_joint_end_to_end(
     joint_checkpoint_path: Path,
     closure_checkpoint_path: Path,
     matched_staged_result_path: Path,
+    prepared_cache_path: Path | None = None,
     sample_steps: int,
     batch_size: int,
     seed: int,
@@ -720,10 +756,8 @@ def sample_ugi_joint_end_to_end(
         ),
     )
     assignment_path = str(joint_checkpoint["inputs"]["assignments"]["path"])
-    if "prepared_cache" in joint_checkpoint["inputs"]:
-        cache_path = Path(joint_checkpoint["inputs"]["prepared_cache"]["path"])
-        if not cache_path.is_file() and str(cache_path).startswith("/root/forge_repo/"):
-            cache_path = repo / cache_path.relative_to("/root/forge_repo")
+    cache_path = _resolve_prepared_cache_path(repo, joint_checkpoint, prepared_cache_path)
+    if cache_path is not None:
         corpus, _ = load_ugi_training_cache(cache_path)
     else:
         corpus = _load_expanded_chemistry(repo)

@@ -1,0 +1,132 @@
+{
+  "cache": {
+    "bytes": 21600,
+    "logical_path": "cache/cache.json",
+    "sha256": "bd053e2d79e584e4f119d96aed73810f56d49bded62bf7dc8525d187f4b855bf"
+  },
+  "checkpoint": {
+    "bytes": 1073066,
+    "logical_path": "checkpoint.json",
+    "sha256": "feb9d0c27531e183a4108a7dec7f58360c80969eed3a82ade123da46fcd66e5e"
+  },
+  "config": {
+    "bytes": 853,
+    "path": "configs/multireaction/shared_training_overfit_v1.json",
+    "sha256": "70fc9a10d99272a9524cb5174b59426f7819ab676d4a1f743ee99c15a765389c"
+  },
+  "gates": {
+    "all_losses_finite": true,
+    "fixed_states_never_noised": true,
+    "fixed_states_restored_at_decode": true,
+    "loss_reduction": true,
+    "three_program_exact_tensor_reconstruction": true,
+    "zero_fixed_auxiliary_path_matches_generic_flow": true
+  },
+  "nonclaims": [
+    "Three-record overfitting is an integration gate, not evidence of generalization.",
+    "This run does not authorize production multi-reaction training."
+  ],
+  "run_kind": "overfit_gate",
+  "schema_version": "forge.synthesis_program_training_result.v1",
+  "seed": 20260824,
+  "status": "pass",
+  "training": {
+    "all_losses_finite": true,
+    "examples_seen": 9216,
+    "final_to_initial_loss_ratio": 5.004263232380308e-07,
+    "final_total_loss": 8.164744940586388e-06,
+    "fixed_noising_exact": true,
+    "initial_total_loss": 16.31557846069336,
+    "minimum_total_loss": 6.448510703194188e-06,
+    "model_state_sha256": "3cf438a5dbfded732733bc6bd8d4d6c5f51786ef364d888b9cb292cdc229b94e",
+    "restart": {
+      "checkpoint_interval_steps": 768,
+      "completed_steps": 3072,
+      "schema_version": "forge.synthesis_program_training_restart.v1"
+    },
+    "steps": 3072
+  },
+  "validation": {
+    "bl_2023_repeated_aza_michael": {
+      "backbone_bond_ce": 1.6178390183085867e-07,
+      "closure_bond_ce": 0.0,
+      "closure_left_ce": 0.0,
+      "closure_right_ce": 0.0,
+      "fixed_noising_exact": true,
+      "node_ce": 4.454627287486801e-06,
+      "parent_pointer_ce": 1.5113997733351425e-06,
+      "reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_accuracy": {
+          "closure_bonds": 1.0,
+          "closure_left": 1.0,
+          "closure_right": 1.0,
+          "nodes": 1.0,
+          "parent_bonds": 1.0,
+          "parents": 1.0
+        },
+        "fixed_states_exact": true
+      },
+      "record_id": "mrp-b8896834bf61053a",
+      "total": 6.12781104791793e-06
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "backbone_bond_ce": 5.055070687376428e-06,
+      "closure_bond_ce": 0.0,
+      "closure_left_ce": 0.0,
+      "closure_right_ce": 0.0,
+      "fixed_noising_exact": true,
+      "node_ce": 1.617948328203056e-05,
+      "parent_pointer_ce": 4.928502676193602e-06,
+      "reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_accuracy": {
+          "closure_bonds": 1.0,
+          "closure_left": 1.0,
+          "closure_right": 1.0,
+          "nodes": 1.0,
+          "parent_bonds": 1.0,
+          "parents": 1.0
+        },
+        "fixed_states_exact": true
+      },
+      "record_id": "mrp-6b2e352993dd5ffe",
+      "total": 2.616305573610589e-05
+    },
+    "ugi_3cr_agile": {
+      "backbone_bond_ce": 3.7017534282313136e-07,
+      "closure_bond_ce": 0.0,
+      "closure_left_ce": 0.0,
+      "closure_right_ce": 0.0,
+      "fixed_noising_exact": true,
+      "node_ce": 3.1314013995142886e-06,
+      "parent_pointer_ce": 1.1826761010524933e-06,
+      "reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_accuracy": {
+          "closure_bonds": 1.0,
+          "closure_left": 1.0,
+          "closure_right": 1.0,
+          "nodes": 1.0,
+          "parent_bonds": 1.0,
+          "parents": 1.0
+        },
+        "fixed_states_exact": true
+      },
+      "record_id": "EUGI-b6cb28a615a4f7c82c91",
+      "total": 4.684252871811623e-06
+    }
+  },
+  "zero_fixed_equivalence": {
+    "loss_exact": true,
+    "metric_values_exact": true,
+    "noise_tensors_exact": true,
+    "programs": [
+      "bl_2023_repeated_aza_michael",
+      "lx_2024_repeated_reductive_amination"
+    ]
+  }
+}

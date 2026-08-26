@@ -15,8 +15,8 @@ try:
     import torch
     import torch.nn as nn
 except ModuleNotFoundError:  # pragma: no cover - optional dependency
-    torch = None
-    nn = None
+    torch = None  # type: ignore[assignment]
+    nn = None  # type: ignore[assignment]
 
 
 class AdapterConditioningError(ValueError):
@@ -39,20 +39,37 @@ if nn is not None:
             hidden_dim: int,
             maximum_distance: int,
             use_all_port_distances: bool = False,
+            origin_state_count: int = len(ORIGIN_STATES),
+            core_position_state_count: int = len(CORE_POSITION_STATES),
+            port_state_count: int = len(PORT_STATES),
+            role_count: int = len(ROLE_NAMES),
         ) -> None:
             super().__init__()
-            if hidden_dim < 1 or maximum_distance < 1:
+            if (
+                hidden_dim < 1
+                or maximum_distance < 1
+                or origin_state_count < 1
+                or core_position_state_count < 1
+                or port_state_count < 1
+                or role_count < 1
+            ):
                 raise AdapterConditioningError("invalid adapter-conditioning support")
             self.maximum_distance = maximum_distance
             self.use_all_port_distances = use_all_port_distances
-            self.origin_embedding = nn.Embedding(len(ORIGIN_STATES), hidden_dim)
-            self.core_position_embedding = nn.Embedding(len(CORE_POSITION_STATES), hidden_dim)
-            self.port_embedding = nn.Embedding(len(PORT_STATES), hidden_dim)
+            self.origin_state_count = origin_state_count
+            self.core_position_state_count = core_position_state_count
+            self.port_state_count = port_state_count
+            self.role_count = role_count
+            self.origin_embedding = nn.Embedding(origin_state_count, hidden_dim)
+            self.core_position_embedding = nn.Embedding(core_position_state_count, hidden_dim)
+            self.port_embedding = nn.Embedding(port_state_count, hidden_dim)
             # Index zero means not applicable; graph distance d occupies d + 1.
             self.core_distance_embedding = nn.Embedding(maximum_distance + 2, hidden_dim)
             self.own_port_distance_embedding = nn.Embedding(maximum_distance + 2, hidden_dim)
             self.all_port_distance_embeddings = (
-                nn.ModuleList(nn.Embedding(maximum_distance + 2, hidden_dim) for _ in ROLE_NAMES)
+                nn.ModuleList(
+                    nn.Embedding(maximum_distance + 2, hidden_dim) for _ in range(role_count)
+                )
                 if use_all_port_distances
                 else None
             )
@@ -94,9 +111,9 @@ if nn is not None:
             if adapter_mask.dtype != torch.bool:
                 raise AdapterConditioningError("adapter mask must be Boolean")
             for values, classes, label in (
-                (origin_states, len(ORIGIN_STATES), "origin"),
-                (core_position_states, len(CORE_POSITION_STATES), "core position"),
-                (port_states, len(PORT_STATES), "port"),
+                (origin_states, self.origin_state_count, "origin"),
+                (core_position_states, self.core_position_state_count, "core position"),
+                (port_states, self.port_state_count, "port"),
             ):
                 if torch.any(values < 0) or torch.any(values >= classes):
                     raise AdapterConditioningError(f"adapter {label} state is outside support")
@@ -118,7 +135,7 @@ if nn is not None:
             if self.use_all_port_distances:
                 if distances_to_all_ports is None or distances_to_all_ports.shape != (
                     *shape,
-                    len(ROLE_NAMES),
+                    self.role_count,
                 ):
                     raise AdapterConditioningError(
                         "all-port ablation requires [batch, nodes, roles] distances"

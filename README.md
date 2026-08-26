@@ -15,13 +15,15 @@ The unit of generation is a **product–route dossier**, not a SMILES string.
 
 M0 is complete. Bounded Phase 1 product/L1 training, synthesis-routing readiness, and the single
 versioned HeLa diagnostic described in `AGENTS.md` are authorized. Later phases and unrestricted
-biological optimization are not.
+biological optimization are not. A bounded computational multi-reaction extension is also
+authorized; Ugi remains the deep case and no new biological or wet-lab scope is implied.
 
 - Plan: [`docs/PLAN.md`](docs/PLAN.md)
 - Documentation map: [`docs/README.md`](docs/README.md)
 - Tasks: [`docs/M0_TASKS.md`](docs/M0_TASKS.md)
 - Data: [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)
 - Decisions: [`docs/DECISION_LOG.md`](docs/DECISION_LOG.md)
+- Multi-reaction extension: [`docs/MULTIREACTION_COMPUTATIONAL_PLAN.md`](docs/MULTIREACTION_COMPUTATIONAL_PLAN.md)
 
 ## Quick start
 
@@ -39,13 +41,27 @@ forge doctor phase1-training-smoke
 forge experiment run phase1-training-smoke --profile smoke
 forge experiment run phase1-sampling --profile smoke
 forge experiment reproduce phase1-sampling --profile smoke
+forge experiment run phase1-multireaction-corpus --profile full
+forge experiment run phase1-multireaction-training-smoke --profile smoke
+forge experiment run phase1-multireaction-overfit --profile smoke
+forge experiment reproduce phase1-multireaction-overfit --profile smoke
+forge experiment run phase1-shared-synthesis-program-representation --profile full
+forge experiment reproduce phase1-shared-synthesis-program-representation --profile full
+forge experiment run phase1-shared-synthesis-program-integration --profile smoke
+forge experiment reproduce phase1-shared-synthesis-program-integration --profile smoke
+forge experiment run phase1-shared-synthesis-program-production-design --profile full
+forge experiment reproduce phase1-shared-synthesis-program-production-design --profile full
+forge experiment run phase1-finite-component-catalogue-baseline --profile smoke
+# After the final source snapshot is frozen, run the matched three-seed CPU baseline:
+make phase1-finite-component-catalogue-full
 
 # Paper and provenance
 forge paper verify
 forge paper reproduce          # exact artifact replay + two clean packaging builds
 forge paper doctor --strict   # reports every blocker to a full numerical rerun
+forge paper experiments       # audits every v1 experiment/baseline manuscript row
 forge paper build
-forge provenance verify --expect-verified 758
+forge provenance verify --expect-verified 822
 make code-survey
 make test-baseline-report       # summarize the last clean-cache full-suite run
 ```
@@ -60,7 +76,7 @@ The production training DAG is planned or launched explicitly with
 `forge experiment ... phase1-training-production --profile full`; it is never triggered by the
 smoke workflow.
 
-The authoritative ICLR source is `paper/FORGE_ICLR2027_paper.tex`. Its exact source, twelve
+The archived ICLR v0 source is `paper/v0/FORGE_ICLR2027_paper.tex`. Its exact source, twelve
 manuscript evidence roots, generated tables, and included figures are frozen in
 `configs/reproduction/iclr2027.json`. `forge paper verify` checks artifact replay. The stricter
 doctor additionally walks the recursive path/hash graph and reports unavailable upstream corpus,

@@ -1,0 +1,18 @@
+{
+  "schema_version": "forge.conditional_role_dependence_config.v1",
+  "inputs": {
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "roles": ["amine_head", "oxoester_aldehyde_body_tail", "isocyanide_tail"],
+  "seed": 20260824,
+  "classifier_folds": 5,
+  "classifier": "standardized_l2_logistic_regression",
+  "permutation": "independent_role_permutation_within_exact_count_context",
+  "decision_threshold": {"mean_auc_minimum": 0.6, "component_family_overlap_maximum": 0},
+  "candidate_selection": false,
+  "route_calls": 0,
+  "oracle_calls": 0
+}

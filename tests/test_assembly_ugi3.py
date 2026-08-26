@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
+from rdkit import Chem
 
 from forge.assembly import Ugi3AssemblyAdapter, Ugi3AssemblyError
 from forge.core.hashing import sha256_file
@@ -31,6 +32,11 @@ def test_registry_example_reconstructs_exactly() -> None:
     assert check.exact
     assert not check.saturated
     assert check.enumerated_outcomes == 1
+    products = adapter.forward_products(components)
+    assert products.products == (
+        Chem.MolToSmiles(Chem.MolFromSmiles(expected), isomericSmiles=False),
+    )
+    assert not products.saturated
 
 
 def test_adapter_rejects_an_incomplete_role_mapping() -> None:
@@ -39,3 +45,15 @@ def test_adapter_rejects_an_incomplete_role_mapping() -> None:
     components.pop(next(iter(components)))
     with pytest.raises(Ugi3AssemblyError, match="roles differ"):
         adapter.check_forward(components, expected)
+
+
+def test_registry_example_has_an_exact_open_decomposition() -> None:
+    adapter = Ugi3AssemblyAdapter.from_registry(REGISTRY)
+    components, expected = _example()
+    traces = adapter.decompose(expected)
+    assert len(traces) == 1
+    assert traces[0].as_mapping() == {
+        role: Chem.MolToSmiles(Chem.MolFromSmiles(smiles), isomericSmiles=False)
+        for role, smiles in components.items()
+    }
+    assert adapter.check_forward(traces[0].as_mapping(), expected).exact

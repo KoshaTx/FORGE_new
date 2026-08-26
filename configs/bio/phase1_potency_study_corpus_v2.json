@@ -1,0 +1,66 @@
+{
+  "schema_version": "forge.potency_study_corpus_config.v2",
+  "task": "Build one LNPDB-only modelling corpus while preserving study, endpoint, graph-identity, and mixture-exclusion boundaries",
+  "graph_identity": "canonical_connected_constitutional_smiles",
+  "inputs": {
+    "lnpdb": {
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    }
+  },
+  "policy": {
+    "raw_cross_study_label_pooling": false,
+    "lnpdb_is_authoritative_row_source": true,
+    "mixture_measurements_excluded": true,
+    "reaction_program_fields_in_potency_rows": false
+  },
+  "studies": {
+    "YX_2024": {
+      "study_id": "YX_2024",
+      "label_semantics": "lnpdb_within_study_endpoint_zscore",
+      "expected_source_endpoint_rows": {
+        "HeLa": 1200,
+        "RAW264.7": 1200
+      },
+      "expected_model_endpoint_rows": {
+        "HeLa": 1100,
+        "RAW264.7": 1100
+      },
+      "excluded_component_labels": {
+        "tail1": [
+          "B4"
+        ]
+      },
+      "expected_excluded_rows": 200,
+      "exclusion_reason": "B4 is a cis/trans mixture measurement without one single-molecule target"
+    },
+    "JC_2023": {
+      "study_id": "JC_2023",
+      "label_semantics": "lnpdb_within_study_endpoint_zscore",
+      "expected_source_endpoint_rows": {
+        "HeLa": 288
+      },
+      "expected_model_endpoint_rows": {
+        "HeLa": 288
+      },
+      "excluded_component_labels": {},
+      "expected_excluded_rows": 0
+    },
+    "LM_2019": {
+      "study_id": "LM_2019",
+      "label_semantics": "lnpdb_within_study_endpoint_zscore",
+      "expected_source_endpoint_rows": {
+        "BMDC": 36,
+        "BMDM": 12,
+        "HeLa": 1080
+      },
+      "expected_model_endpoint_rows": {
+        "BMDC": 36,
+        "BMDM": 12,
+        "HeLa": 1080
+      },
+      "excluded_component_labels": {},
+      "expected_excluded_rows": 0
+    }
+  }
+}

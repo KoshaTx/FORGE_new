@@ -161,7 +161,26 @@ def pin_record(path: Path, repo: Path) -> dict[str, Any]:
     }
 
 
+def artifact_record(path: Path, *, logical_path: str | None = None) -> dict[str, Any]:
+    """Describe produced bytes without leaking a staging or reproduction directory.
+
+    Experiment outputs are first written below a temporary ``.partial`` directory and then moved
+    into their final stage directory.  Recording that physical path makes otherwise identical runs
+    differ and leaves a dead path after publication.  A logical artifact name plus content digest
+    and size is stable across both operations.
+    """
+
+    if logical_path is not None and (not logical_path or Path(logical_path).is_absolute()):
+        raise PinError("artifact logical path must be a nonempty relative path")
+    return {
+        "logical_path": logical_path or path.name,
+        "sha256": str(sha256_file(path)),
+        "bytes": path.stat().st_size,
+    }
+
+
 __all__ = [
+    "artifact_record",
     "DEFAULT_CHUNK_SIZE",
     "PinError",
     "is_sha256",

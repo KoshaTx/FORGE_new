@@ -1,0 +1,55 @@
+{
+  "schema_version": "forge.phase1_ugi_sampling_config.v1",
+  "task": "Frozen sampling contract reconstructed from the authoritative train-fold production-budget v0 ledger",
+  "inputs": {
+    "joint_checkpoint": {
+      "path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt",
+      "sha256": "4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "matched_programs": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "profiles": {
+    "full": {
+      "program_count": 3072,
+      "shard_size": 3072,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "maximum_adjacent_branch_runs": [2, 1, 1],
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0
+    }
+  },
+  "policy": {
+    "contiguous_program_blocks": true,
+    "exact_l1_terminal_admission": true,
+    "reference_comparison": "deferred",
+    "retries_or_repairs": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false
+  },
+  "source": {
+    "samples": {
+      "path": "results/phase1/forge_held_family_stage2_v1/samples_prod_budget.json",
+      "sha256": "536dc7471c1f4d1f0a4b807892c4f6f1cc55a0bcfbad3974549a93d05a6a8d4c"
+    },
+    "training_config": {
+      "path": "configs/model/phase1_ugi_decoration_coupling_challenger_v1.json",
+      "sha256": "8943953b1889a0c5334de96425581e821c93d64535befcbc5fa82709e07eebb4"
+    },
+    "training_fold": "train",
+    "fixed_production_budget_checkpoint_step": 3000,
+    "post_hoc_candidate_selection": false
+  }
+}

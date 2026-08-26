@@ -1,0 +1,32 @@
+{
+  "schema_version": "forge.local_chemistry_support_config.v2",
+  "scientific_question": "Can generated whole-product graphs be constrained to reaction-family- and precursor-role-specific ring morphology observed in the training fold without selecting a finite component vocabulary?",
+  "inputs": {
+    "production_cache": {
+      "path": "results/phase1/bl_core_constrained_production_cache_v1/cache.npz",
+      "sha256": "3744e066325f3e203139797ab48eb54725f95ce09b39209905fb656df53c5973"
+    }
+  },
+  "policy": {
+    "source_fold": "train",
+    "edge_support": "program_and_precursor_origin_role_conditioned",
+    "three_membered_ring_support": "program_and_precursor_origin_role_conditioned",
+    "component_hard_bounds": "observed_training_min_max",
+    "component_diagnostic_bounds": "training_q01_q99_nonselecting",
+    "store_component_identities": false,
+    "fundamental_cycle_support": "program_and_precursor_origin_role_conditioned_training_closures",
+    "fixed_adapter_cycles_authorize_variable_closures": false
+  },
+  "reporting": {
+    "candidate_selection": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "negative_results_are_reported": true
+  },
+  "nonclaims": [
+    "Training-supported local ring morphology is not synthesis success, stability, safety, activity or route closure.",
+    "An unsupported ring closure is an abstention under this bounded policy, not proof that the structure is chemically impossible.",
+    "The policy stores no component identity, component fingerprint or complete molecular fragment.",
+    "This policy does not replace the frozen raw exact-L1 result and does not select candidates."
+  ]
+}

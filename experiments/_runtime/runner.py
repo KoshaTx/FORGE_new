@@ -499,6 +499,7 @@ class ExperimentRunner:
                 experiment_id=spec.experiment_id,
                 run_id=plan.run_id,
                 profile=plan.profile,
+                replicate=plan.replicate,
                 backend=plan.backend,
                 stage=stage,
                 resources=resources,

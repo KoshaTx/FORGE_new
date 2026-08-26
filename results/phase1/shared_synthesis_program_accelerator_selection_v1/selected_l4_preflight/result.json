@@ -1,0 +1,385 @@
+{
+  "benchmarks": {
+    "shared_three_program_conditioned": {
+      "arm_id": "shared_three_program_conditioned",
+      "elapsed_seconds": 0.7222333429999992,
+      "examples": 384,
+      "examples_per_second": 752.6127362724799,
+      "fixed_state_failures": 0,
+      "gradient_norm": 9.874433517456055,
+      "losses": [
+        17.38727569580078,
+        17.03460121154785,
+        16.909536361694336,
+        17.01122283935547,
+        16.41640281677246,
+        16.20244026184082,
+        16.356281280517578,
+        16.23210334777832,
+        15.462692260742188,
+        15.788212776184082,
+        15.90782356262207,
+        15.769641876220703,
+        14.866012573242188,
+        14.883358001708984,
+        14.967357635498047,
+        15.2283296585083
+      ],
+      "maximum_closures_observed": 3,
+      "maximum_nodes_observed": 188,
+      "measured_elapsed_seconds": 0.5102225639999993,
+      "measured_optimizer_steps": 3,
+      "model_state_sha256": "dd3f691e4f57da98b539706a5c2eac9575336cdc1f0974c0992950f269fef420",
+      "optimizer_steps_total": 4,
+      "peak_allocated_bytes": 447701504,
+      "peak_reserved_bytes": 660602880,
+      "seconds_per_optimizer_step": 0.17454628399999983,
+      "step_elapsed_seconds": [
+        0.1798139479999996,
+        0.17454628399999983,
+        0.15586233199999988
+      ],
+      "warmup_optimizer_steps": 1
+    },
+    "shared_three_program_null": {
+      "arm_id": "shared_three_program_null",
+      "elapsed_seconds": 0.7338769729999992,
+      "examples": 384,
+      "examples_per_second": 803.9693726611281,
+      "fixed_state_failures": 0,
+      "gradient_norm": 9.930450439453125,
+      "losses": [
+        17.397512435913086,
+        16.98976707458496,
+        16.902177810668945,
+        16.980422973632812,
+        16.373903274536133,
+        16.169885635375977,
+        16.301570892333984,
+        16.216129302978516,
+        15.410969734191895,
+        15.72734260559082,
+        15.874852180480957,
+        15.723901748657227,
+        14.84195327758789,
+        14.823379516601562,
+        14.895828247070312,
+        15.193634986877441
+      ],
+      "maximum_closures_observed": 3,
+      "maximum_nodes_observed": 188,
+      "measured_elapsed_seconds": 0.47763013500000007,
+      "measured_optimizer_steps": 3,
+      "model_state_sha256": "6261b230a10d187207bf6071fa27d215fd7d751f3bb8d9c42e0e894884d7deb3",
+      "optimizer_steps_total": 4,
+      "peak_allocated_bytes": 445901312,
+      "peak_reserved_bytes": 656408576,
+      "seconds_per_optimizer_step": 0.16109962600000038,
+      "step_elapsed_seconds": [
+        0.16109962600000038,
+        0.16576612899999787,
+        0.1507643800000018
+      ],
+      "warmup_optimizer_steps": 1
+    },
+    "shared_three_program_program_id_cyclic": {
+      "arm_id": "shared_three_program_program_id_cyclic",
+      "elapsed_seconds": 0.6635617049999993,
+      "examples": 384,
+      "examples_per_second": 805.1506814234491,
+      "fixed_state_failures": 0,
+      "gradient_norm": 9.82415771484375,
+      "losses": [
+        17.364627838134766,
+        17.023157119750977,
+        16.88951301574707,
+        17.00736427307129,
+        16.409862518310547,
+        16.184295654296875,
+        16.35348892211914,
+        16.212373733520508,
+        15.437385559082031,
+        15.772065162658691,
+        15.87785816192627,
+        15.76223373413086,
+        14.853076934814453,
+        14.87707233428955,
+        14.962165832519531,
+        15.205923080444336
+      ],
+      "maximum_closures_observed": 3,
+      "maximum_nodes_observed": 188,
+      "measured_elapsed_seconds": 0.47692936099999983,
+      "measured_optimizer_steps": 3,
+      "model_state_sha256": "3f4bd9d083f363a21aacc3e9071d12a8019cfe05c37c316cef458146944e0d69",
+      "optimizer_steps_total": 4,
+      "peak_allocated_bytes": 445901312,
+      "peak_reserved_bytes": 656408576,
+      "seconds_per_optimizer_step": 0.1623211799999993,
+      "step_elapsed_seconds": [
+        0.16502746400000134,
+        0.1623211799999993,
+        0.1495807169999992
+      ],
+      "warmup_optimizer_steps": 1
+    },
+    "ugi_only_conditioned": {
+      "arm_id": "ugi_only_conditioned",
+      "elapsed_seconds": 1.8023104429999997,
+      "examples": 384,
+      "examples_per_second": 837.7687808780032,
+      "fixed_state_failures": 0,
+      "gradient_norm": 11.685574531555176,
+      "losses": [
+        15.76838493347168,
+        15.860090255737305,
+        15.997318267822266,
+        16.09166145324707,
+        15.145086288452148,
+        15.180429458618164,
+        15.08029556274414,
+        15.132360458374023,
+        14.671243667602539,
+        14.418380737304688,
+        14.434147834777832,
+        14.340326309204102,
+        13.743879318237305,
+        13.68493366241455,
+        13.607257843017578,
+        13.626290321350098
+      ],
+      "maximum_closures_observed": 2,
+      "maximum_nodes_observed": 56,
+      "measured_elapsed_seconds": 0.4583603599999968,
+      "measured_optimizer_steps": 3,
+      "model_state_sha256": "946ed55f398b40a452cc1f9f5f40c2e7d608c93fb6f54173b79a4948a33af223",
+      "optimizer_steps_total": 4,
+      "peak_allocated_bytes": 209780224,
+      "peak_reserved_bytes": 234881024,
+      "seconds_per_optimizer_step": 0.15463081699999925,
+      "step_elapsed_seconds": [
+        0.15463081699999925,
+        0.14832771099999853,
+        0.15540183199999902
+      ],
+      "warmup_optimizer_steps": 1
+    }
+  },
+  "cache": {
+    "bytes": 7329033,
+    "logical_path": "cache.npz",
+    "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+  },
+  "calls": {
+    "oracle": 0,
+    "route": 0
+  },
+  "candidate_selection": false,
+  "config": {
+    "bytes": 3427,
+    "path": "configs/multireaction/shared_production_accelerator_benchmark_v1.json",
+    "sha256": "adff26a98c11b3508615fdd3e85014d6be52a996368ee67618ed5719e5279cbe"
+  },
+  "design_sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87",
+  "determinism_repeat": {
+    "arm_id": "shared_three_program_conditioned_determinism_repeat",
+    "elapsed_seconds": 0.6444957580000015,
+    "examples": 384,
+    "examples_per_second": 813.1761489531445,
+    "fixed_state_failures": 0,
+    "gradient_norm": 9.874433517456055,
+    "losses": [
+      17.38727569580078,
+      17.03460121154785,
+      16.909536361694336,
+      17.01122283935547,
+      16.41640281677246,
+      16.20244026184082,
+      16.356281280517578,
+      16.23210334777832,
+      15.462692260742188,
+      15.788212776184082,
+      15.90782356262207,
+      15.769641876220703,
+      14.866012573242188,
+      14.883358001708984,
+      14.967357635498047,
+      15.2283296585083
+    ],
+    "maximum_closures_observed": 3,
+    "maximum_nodes_observed": 188,
+    "measured_elapsed_seconds": 0.472222409000004,
+    "measured_optimizer_steps": 3,
+    "model_state_sha256": "dd3f691e4f57da98b539706a5c2eac9575336cdc1f0974c0992950f269fef420",
+    "optimizer_steps_total": 4,
+    "peak_allocated_bytes": 445901312,
+    "peak_reserved_bytes": 656408576,
+    "seconds_per_optimizer_step": 0.16105711600000205,
+    "step_elapsed_seconds": [
+      0.16351883400000133,
+      0.16105711600000205,
+      0.14764645900000062
+    ],
+    "warmup_optimizer_steps": 1
+  },
+  "device": {
+    "cuda": "13.0",
+    "declared_gpu_type": "L4",
+    "name": "NVIDIA L4",
+    "torch": "2.13.0+cu130",
+    "total_memory_bytes": 23659151360
+  },
+  "gates": {
+    "all_four_arms_finite": true,
+    "candidate_selection_absent": true,
+    "declared_gpu_matches_runtime": true,
+    "deterministic_repeat_exact": true,
+    "evaluation_smoke_passed": true,
+    "explicit_authorization_present": true,
+    "fixed_state_failures_zero": true,
+    "full_cache_fold_counts_exact": true,
+    "full_declared_support_present": true,
+    "full_evaluation_matches_frozen_budget": true,
+    "gpu_memory_headroom_at_least_ten_percent": true,
+    "maximum_atom_capacity_exercised": true,
+    "projection_matches_frozen_training": true,
+    "raw_family_count_sampling_absent": true,
+    "repository_has_no_new_test_failures": true,
+    "route_or_oracle_calls_zero": true,
+    "smoke_uses_current_cache": true,
+    "smoke_uses_current_evaluation_config": true,
+    "smoke_uses_current_training_config": true,
+    "training_smoke_passed": true
+  },
+  "inputs": {
+    "production_cache": {
+      "bytes": 7329033,
+      "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+      "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+    },
+    "production_design": {
+      "bytes": 9419,
+      "path": "configs/multireaction/shared_production_comparison_design_v1.json",
+      "sha256": "88ec2c41cee96e3d0faef710ba3d08a20c9ff9fd935a7652cfd1832c299a5f87"
+    },
+    "production_evaluation_config": {
+      "bytes": 2001,
+      "path": "configs/multireaction/shared_production_evaluation_v1.json",
+      "sha256": "97916c9fe91ab67712fd81a3c8d0b8e1f98a1fbefc58837a62fc2aba9abc96bc"
+    },
+    "production_training_config": {
+      "bytes": 1692,
+      "path": "configs/multireaction/shared_production_training_v1.json",
+      "sha256": "b040716116f8fa2cce4374e660e36a6117c7cbd9914664527e13da5577431ecc"
+    },
+    "smoke_evaluation_result": {
+      "bytes": 49964,
+      "path": "results/phase1/shared_synthesis_program_production_smoke_v1/evaluation_result.json",
+      "sha256": "441f31f46451e9a245f3c5ceb8bd7d16b30aa87f4381d4ccbf4536a152f71c07"
+    },
+    "smoke_training_result": {
+      "bytes": 12076,
+      "path": "results/phase1/shared_synthesis_program_production_smoke_v1/training_result.json",
+      "sha256": "50d809761dc04bda7c8a85411e5150036874438750834e4bc994164a99fe26e8"
+    },
+    "test_baseline_report": {
+      "bytes": 5349,
+      "path": "results/phase1/shared_synthesis_program_production_readiness_v1/test_baseline.json",
+      "sha256": "1369a71ecf2a835523ad902e9dcc6912d266bb970741399844e58151245cc285"
+    }
+  },
+  "math_mode": {
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "maximum_support_stress": {
+    "arm_id": "maximum_194_atom_capacity_stress",
+    "elapsed_seconds": 0.19334684699999727,
+    "examples": 128,
+    "examples_per_second": 662.6980613591385,
+    "fixed_state_failures": 0,
+    "gradient_norm": 15.002214431762695,
+    "losses": [
+      20.828996658325195,
+      20.82302474975586,
+      20.812026977539062,
+      20.794649124145508
+    ],
+    "maximum_closures_observed": 1,
+    "maximum_nodes_observed": 194,
+    "measured_elapsed_seconds": 0.19314980300000073,
+    "measured_optimizer_steps": 1,
+    "model_state_sha256": "7fd8456f59ba7a7607e1b90541d63aa83b23f970d17d779c94fa7a33485418dd",
+    "optimizer_steps_total": 1,
+    "peak_allocated_bytes": 436203008,
+    "peak_reserved_bytes": 520093696,
+    "seconds_per_optimizer_step": 0.19314980300000073,
+    "step_elapsed_seconds": [
+      0.19314980300000073
+    ],
+    "warmup_optimizer_steps": 0
+  },
+  "model": {
+    "architecture": "reaction_program_sparse_whole_lipid_flow",
+    "bond_classes": 4,
+    "component_ids_enter_neural_tensors": false,
+    "dropout": 0.15,
+    "fragment_tokens_enter_neural_tensors": false,
+    "hidden_dim": 192,
+    "layers": 4,
+    "maximum_closures": 3,
+    "maximum_heavy_atoms": 194,
+    "source_probability_floor": 1e-05
+  },
+  "nonclaims": [
+    "This preflight establishes execution capacity and determinism, not model quality.",
+    "No training checkpoint or generated candidate is selected or published by this stage."
+  ],
+  "peak_reserved_bytes": 660602880,
+  "projection": {
+    "arms": 4,
+    "gpu_cost_usd_all_replicates": 0.7388713503053985,
+    "gpu_cost_usd_per_replicate": 0.24629045010179954,
+    "gpu_usd_per_second": 0.000222,
+    "hours_per_replicate": 0.3081712338611105,
+    "optimizer_steps_per_arm": 1700,
+    "pricing": {
+      "accessed_date": "2026-08-21",
+      "currency": "USD",
+      "gpu_usd_per_second": {
+        "A100-40GB": 0.000583,
+        "L4": 0.000222
+      },
+      "provider": "Modal",
+      "scope": "GPU line item only; CPU, memory, evaluation, transfer and storage are excluded",
+      "source_url": "https://modal.com/pricing"
+    },
+    "replicates": 3,
+    "scope": "training_only_excludes_evaluation_and_startup",
+    "seconds_all_replicates": 3328.2493256999933,
+    "seconds_per_replicate": 1109.4164418999978
+  },
+  "runtime": {
+    "checkpoint_steps": [
+      100,
+      500,
+      1000,
+      1500,
+      1700
+    ],
+    "cpu_threads": 4,
+    "deterministic_algorithms": true,
+    "device": "cuda",
+    "effective_batch_size": 128,
+    "gradient_accumulation_steps": 4,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.0001,
+    "micro_batch_size": 32,
+    "optimizer_steps": 1700,
+    "precision": "float32",
+    "restart_interval_steps": 25,
+    "weight_decay": 5e-05
+  },
+  "schema_version": "forge.synthesis_program_production_accelerator_benchmark_result.v1",
+  "status": "pass"
+}

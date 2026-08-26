@@ -1,0 +1,414 @@
+{
+  "artifacts": {
+    "architecture_ablation_rows.tex": {
+      "bytes": 1423,
+      "logical_path": "architecture_ablation_rows.tex",
+      "sha256": "68989677215d1818bbf79e9f8adcfd9950f2b219022dcb02703f65b2d781cb4d"
+    },
+    "common_ugi_benchmark_rows.tex": {
+      "bytes": 1,
+      "logical_path": "common_ugi_benchmark_rows.tex",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "common_ugi_tradeoff.csv": {
+      "bytes": 281,
+      "logical_path": "common_ugi_tradeoff.csv",
+      "sha256": "e0affc4685973d796e0a3818f30ce1e856e555639319e523567feae5468359cb"
+    },
+    "held_reaction_family_metrics.csv": {
+      "bytes": 70,
+      "logical_path": "held_reaction_family_metrics.csv",
+      "sha256": "63fcfafd4164bda12707374a21e738587f6bc68a515f2d33d361ba4d219550b5"
+    },
+    "mechanism_ablation_metrics.csv": {
+      "bytes": 1247,
+      "logical_path": "mechanism_ablation_metrics.csv",
+      "sha256": "9e6472c7144ef79d36f1623e27c1a4998c51d569c7c6b252142899db3f4f86ee"
+    },
+    "route_evidence_rows.tex": {
+      "bytes": 1,
+      "logical_path": "route_evidence_rows.tex",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "summary.json": {
+      "bytes": 10876,
+      "logical_path": "summary.json",
+      "sha256": "a17952764eec049611d86c6a38b8be5020641126be589ace63aa77369b034aeb"
+    }
+  },
+  "bootstrap": {
+    "independent_unit": "training_seed",
+    "resamples": 10000,
+    "seed": 20260821
+  },
+  "candidate_selection": false,
+  "common_methods": {},
+  "config": {
+    "bytes": 1446,
+    "path": "configs/reproduction/natbiotech_v1_render_v1.json",
+    "sha256": "ed8410abb6ddc7bfdd0ac21ee10242d0ab31d93695f4ab9d6e441f3ebecae420"
+  },
+  "held_reaction_families": {},
+  "held_reaction_family_is_secondary_not_hard_gate": true,
+  "mechanism_arms": {
+    "fact_generous": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 811.5234375,
+        "ci95_low": 584.6354166666666,
+        "mean": 686.9574652777777
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 1.1794459511585256,
+        "ci95_low": 1.1416664593357613,
+        "mean": 1.160566547760048
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.604964931585153,
+        "ci95_low": 0.5978725196989745,
+        "mean": 0.600417094851227
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 8.602081874289816,
+        "ci95_low": 8.030093538301626,
+        "mean": 8.241392333738526
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 635.7421875,
+        "ci95_low": 491.5364583333333,
+        "mean": 561.3064236111111
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 508.7890625,
+        "ci95_low": 161.78385416666666,
+        "mean": 296.6579861111111
+      }
+    },
+    "fact_matched": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 460.9375,
+        "ci95_low": 327.4739583333333,
+        "mean": 393.6631944444444
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 1.723591400662248,
+        "ci95_low": 1.1358901818187048,
+        "mean": 1.44673038354664
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.5703142998956141,
+        "ci95_low": 0.5536910637557527,
+        "mean": 0.5616259642048093
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "mean": 0.0
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 7.34103115707849,
+        "ci95_low": 6.855420886567418,
+        "mean": 7.08732965698576
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 562.8255208333334,
+        "ci95_low": 457.3567708333333,
+        "mean": 509.8741319444444
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 68.68489583333333,
+        "ci95_low": 37.760416666666664,
+        "mean": 51.974826388888886
+      }
+    },
+    "full_transformer": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 815.1041666666666,
+        "ci95_low": 725.2604166666666,
+        "mean": 762.478298611111
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 2.093175143785679,
+        "ci95_low": 1.7562260241671561,
+        "mean": 1.9409596445933721
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.593983850764718,
+        "ci95_low": 0.5843699464545462,
+        "mean": 0.5887334600009692
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 8.121344165587855,
+        "ci95_low": 7.680418195095064,
+        "mean": 7.882951468325395
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 413.4114583333333,
+        "ci95_low": 134.44010416666666,
+        "mean": 318.1423611111111
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 916.6666666666666,
+        "ci95_low": 725.9114583333334,
+        "mean": 791.7751736111112
+      }
+    },
+    "input_only_program": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 820.3125,
+        "ci95_low": 757.4869791666666,
+        "mean": 779.8394097222222
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 1.9081039825387556,
+        "ci95_low": 1.7020309470373618,
+        "mean": 1.7865808917884285
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.6096686399641785,
+        "ci95_low": 0.5945184110098728,
+        "mean": 0.60008040969585
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 9.144461392771852,
+        "ci95_low": 7.720830532933708,
+        "mean": 8.479074179062186
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 339.5182291666667,
+        "ci95_low": 230.14322916666666,
+        "mean": 277.34375
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 845.703125,
+        "ci95_low": 631.1848958333334,
+        "mean": 737.3046875
+      }
+    },
+    "no_core_loss": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 819.3359375,
+        "ci95_low": 726.8880208333334,
+        "mean": 772.7864583333334
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 1.980397908634804,
+        "ci95_low": 1.7459302490037933,
+        "mean": 1.8883880666425854
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.5934948704459732,
+        "ci95_low": 0.5825496440616152,
+        "mean": 0.5882991350104044
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 7.983621599242397,
+        "ci95_low": 7.778347449198502,
+        "mean": 7.851438485827807
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 409.1796875,
+        "ci95_low": 151.69270833333334,
+        "mean": 300.4557291666667
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 906.5755208333334,
+        "ci95_low": 674.1536458333334,
+        "mean": 753.6892361111112
+      }
+    },
+    "no_gradient_conflict_control": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 806.3151041666666,
+        "ci95_low": 721.6796875,
+        "mean": 768.8802083333334
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 2.0890739634130258,
+        "ci95_low": 1.8664399721523282,
+        "mean": 1.9588393979900791
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.5932372654039489,
+        "ci95_low": 0.5796505755014366,
+        "mean": 0.587791647692168
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 8.202087226873457,
+        "ci95_low": 7.819662558672749,
+        "mean": 7.983880538790814
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 427.734375,
+        "ci95_low": 149.08854166666666,
+        "mean": 326.9314236111111
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 916.015625,
+        "ci95_low": 732.421875,
+        "mean": 798.0685763888888
+      }
+    },
+    "no_role_loss": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 820.6380208333334,
+        "ci95_low": 743.4895833333334,
+        "mean": 772.1354166666666
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 1.9755973732970353,
+        "ci95_low": 1.8942567080489205,
+        "mean": 1.9378898285061457
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.6044694464412421,
+        "ci95_low": 0.5841705047664958,
+        "mean": 0.5909651120484088
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.3255208333333333,
+        "ci95_low": 0.0,
+        "mean": 0.10850694444444443
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 8.004135013047565,
+        "ci95_low": 7.782232201008617,
+        "mean": 7.870519598234117
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 396.1588541666667,
+        "ci95_low": 115.234375,
+        "mean": 289.2795138888889
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 888.9973958333334,
+        "ci95_low": 672.2005208333334,
+        "mean": 771.5928819444445
+      }
+    },
+    "no_routed_adapters": {
+      "bl_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 823.8932291666666,
+        "ci95_low": 744.4661458333334,
+        "mean": 779.0798611111112
+      },
+      "cross_role_fidelity": {
+        "available_seeds": 3,
+        "ci95_high": 2.0649129551553815,
+        "ci95_low": 1.7522769058193646,
+        "mean": 1.8775336344803204
+      },
+      "diversity": {
+        "available_seeds": 3,
+        "ci95_high": 0.5909890563921265,
+        "ci95_low": 0.5891499211433354,
+        "mean": 0.5897982463313935
+      },
+      "held_component_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "mean": 0.0
+      },
+      "held_family_loss": {
+        "available_seeds": 3,
+        "ci95_high": 8.037329257515042,
+        "ci95_low": 7.44077669682196,
+        "mean": 7.805455452205432
+      },
+      "lx_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 384.1145833333333,
+        "ci95_low": 265.625,
+        "mean": 326.7144097222222
+      },
+      "ugi_l1_per_1000": {
+        "available_seeds": 3,
+        "ci95_high": 875.3255208333334,
+        "ci95_low": 592.4479166666666,
+        "mean": 718.6414930555555
+      }
+    }
+  },
+  "result_rows": {
+    "bytes": 15047,
+    "path": "results/phase1/transformer_mechanism_study_v1/seed_rows.jsonl",
+    "sha256": "4a382994c6dbc7bd36b362a18baf1e01da11ee5bf9c02a5a875b4ee18d93f938"
+  },
+  "schema_version": "forge.natbiotech_v1_rendered_results.v1",
+  "status": "partial_nonpublication_preview"
+}
