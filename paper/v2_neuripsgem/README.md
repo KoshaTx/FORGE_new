@@ -147,6 +147,15 @@ Nothing in the call for papers requires the appendix to carry a title. It says o
 appendix and references fall outside the five-page limit. A title page is included anyway so the
 boundary is unmistakable to a reviewer, and it costs nothing against the limit.
 
+The document's package list now follows the official `neurips_2026.tex` preamble, with the style
+file swapped as the call for papers directs: `inputenc`, `fontenc`, `amsfonts`, `nicefrac` and
+`microtype` were missing and are restored. Without T1 `fontenc` the bibliography set "Michal
+Koziarski" for Micha\l{} and "Roc\i o" for Roc\'io.
+
+T1 alone made that worse, falling back to bitmapped EC and embedding Type 3 fonts. `cm-super` is not
+installable on this TeX Live, so `lmodern` supplies the Type 1 T1 faces. The PDF now embeds no Type 3
+font and sets Micha\l{}, Roc\'io and Gai\'nski correctly.
+
 The style governs typography. No `geometry`, `captionsetup`, `titlespacing`, `parskip`,
 `arraystretch` or float-spacing override remains in the document.
 
@@ -183,6 +192,18 @@ override is deliberate and narrow:
   `\textfloatsep`, and the remaining 65pt sits at the page foot where a short page belongs.
 
 Anyone restoring strict style conformance should delete that one line and accept the padding.
+
+### Every deviation from a literal template build, in one place
+
+| Deviation | Why | Revert |
+| --- | --- | --- |
+| `\usepackage{lmodern}` | T1 without `cm-super` embeds Type 3 bitmaps and mis-sets Micha\l{} | Drop the line; accept Type 3 fonts, or install `cm-super` |
+| `\raggedbottom` | The style's `\flushbottom` put 69pt of padding under Figure 1 | Drop the line; accept the padding |
+| No running head | The style's `\lhead` never fires, and its string names ICLR 2026 | Reissue `\lhead` after `\maketitle` |
+| `\renewcommand{\textit}` in Table 2 | Generated group labels wrapped to four lines inside a 3.45cm column | Drop the two lines around that table |
+
+None of these changes margins, type size or any spacing length, and none shortens the paper. The
+five-page limit is **not** met by any of them, and is not met at all: the body runs to page 7.
 
 ## Page budget: currently over
 

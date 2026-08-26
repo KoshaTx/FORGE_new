@@ -14,6 +14,19 @@
 
 \usepackage{GEM_workshop_2026}
 
+% Carried over from the official NeurIPS 2026 template, whose package list the call for papers asks
+% submissions to follow with only the style file swapped. Without T1 fontenc the bibliography set
+% "Michal Koziarski" for Micha\l{} and "Roc\i o" for Roc\'io.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% T1 without scalable T1 fonts falls back to bitmapped EC, which embeds Type 3 fonts and mis-set
+% Micha\l{} as "Micha^a". cm-super is not installable on this TeX Live, so Latin Modern supplies the
+% Type 1 T1 faces. It is the maintained continuation of Computer Modern and a designed drop-in.
+\usepackage{lmodern}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
