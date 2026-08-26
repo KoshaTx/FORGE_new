@@ -381,6 +381,31 @@ RGFN emitted no admissible output under the strict native contract. Against the 
 FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 and 16.9. Reaction
 consistency, open-ended identity generation and recovery of reserved components therefore trade off
 separately.
+Accepted upstream transformations must reconstruct their targets under the corresponding forward
+reaction, and terminal branches must close under the frozen material-evidence policy. Because route
+coverage depends on the available reaction and procurement evidence, unresolved outputs are treated
+as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
+Appendix~\ref{app:results}.
+
+\section{Discussion}
+
+FORGE introduces a reaction-grounded formulation of molecular generation in which known assembly
+chemistry provides semantic structure without fixing the molecular identities that occupy it. Across
+Ugi, repeated aza-Michael addition and repeated reductive amination, reaction-program conditioning
+substantially increased exact transform-consistent generation relative to matched whole-graph
+generation followed by post-hoc filtering. Whole-graph generation further produced exact assemblies
+with precursor identities beyond finite training catalogues, showing that reaction grounding need not
+reduce molecular design to component enumeration.
+
+These results suggest a broader role for synthesis knowledge in generative modeling. Rather than
+entering only as a finite reaction action space or a terminal feasibility filter, known chemistry can
+define coordinates over an otherwise open molecular generative state. The evidence is strongest for
+Ugi, while repeated reductive amination remains substantially more variable and
+decomposition-ambiguous. The present study is computational, covers three specified reaction programs
+within bounded graph support, and treats recursive route assessment as a downstream evidence layer
+rather than experimental synthesis validation. Additional diagnostics and ablations that delimit the
+scope of these conclusions are reported in Appendix~\ref{app:results}. Within these limits, FORGE provides a practical
+route from fixed reaction semantics to open molecular identity.
 
 \begin{table}[htbp]
 \caption{\textbf{FORGE combines exact Ugi assembly with precursor identities beyond a finite
@@ -434,32 +459,6 @@ exact L1 replay is a structural diagnostic, not evidence of activity or synthesi
 rule and twelve further examples: Appendix~\ref{app:atlas}.}
 \label{fig:forge-generated-samples}
 \end{figure}
-
-Accepted upstream transformations must reconstruct their targets under the corresponding forward
-reaction, and terminal branches must close under the frozen material-evidence policy. Because route
-coverage depends on the available reaction and procurement evidence, unresolved outputs are treated
-as abstentions rather than evidence of unsynthesizability; full route-assessment details are given in
-Appendix~\ref{app:results}.
-
-\section{Discussion}
-
-FORGE introduces a reaction-grounded formulation of molecular generation in which known assembly
-chemistry provides semantic structure without fixing the molecular identities that occupy it. Across
-Ugi, repeated aza-Michael addition and repeated reductive amination, reaction-program conditioning
-substantially increased exact transform-consistent generation relative to matched whole-graph
-generation followed by post-hoc filtering. Whole-graph generation further produced exact assemblies
-with precursor identities beyond finite training catalogues, showing that reaction grounding need not
-reduce molecular design to component enumeration.
-
-These results suggest a broader role for synthesis knowledge in generative modeling. Rather than
-entering only as a finite reaction action space or a terminal feasibility filter, known chemistry can
-define coordinates over an otherwise open molecular generative state. The evidence is strongest for
-Ugi, while repeated reductive amination remains substantially more variable and
-decomposition-ambiguous. The present study is computational, covers three specified reaction programs
-within bounded graph support, and treats recursive route assessment as a downstream evidence layer
-rather than experimental synthesis validation. Additional diagnostics and ablations that delimit the
-scope of these conclusions are reported in Appendix~\ref{app:results}. Within these limits, FORGE provides a practical
-route from fixed reaction semantics to open molecular identity.
 
 \bibliography{../v0/forge,../v1/references}
 \bibliographystyle{../v0/iclr2027_conference}

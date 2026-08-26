@@ -205,30 +205,20 @@ Anyone restoring strict style conformance should delete that one line and accept
 None of these changes margins, type size or any spacing length, and none shortens the paper. The
 five-page limit is **not** met by any of them, and is not met at all: the body runs to page 7.
 
-## Page budget: currently over
+## Page budget
 
-The body occupies six full pages against the workshop's five-page limit; references begin on page 7.
-This is recorded, not resolved. The limit is not being met by compressing typography, and no
-scientific content has been removed to reach it.
+All prose ends on page 5. The Discussion closes there with "Within these limits, FORGE provides a
+practical route from fixed reaction semantics to open molecular identity." Table 2 and Figure 2 are
+declared after the Discussion and set on page 6; references begin on page 7.
 
-Body layout as it stands: page 1 title and abstract through the introduction, page 2 introduction and
-FORGE, page 3 Figure 1, page 4 Table 1, page 5 Table 2, page 6 Figure 2 and the Discussion.
+Read this honestly. The call for papers excludes only references and appendix from the five-page
+limit, not body tables and figures, so a strict reading counts pages 1 through 6 and the submission
+is one page over. Moving the two floats after the Discussion changed their position, not their
+status. The author chose this arrangement knowing that; it is recorded here rather than presented as
+compliance.
 
-Everything that had previously been moved or trimmed for page count has been put back. The
-sample-atlas figure is again Figure 2 in the body, immediately before the Discussion, and the
-per-seed values, paired-seed intervals, baseline numerals, encoding detail and setup paragraph are
-all restored to full length.
-
-Measured options, none applied, all from clean builds:
-
-| Option | Body pages |
-| --- | --- |
-| As it stands | 6 |
-| Figure 1 reduced to 0.85 textwidth | still 6, 15 lines onto page 6 |
-| Sample atlas in Appendix F, Figure 1 full width | 6, 3 lines onto page 6 |
-| Sample atlas in Appendix F and Table 2 in Appendix C | not measured |
-
-Choosing what leaves the body is an editorial decision and is left to the author.
+To be compliant on a strict reading, Table 2 and Figure 2 would have to move into the appendix, or
+roughly a page of body content would have to go.
 
 ## Build requirement
 
