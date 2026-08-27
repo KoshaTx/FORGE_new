@@ -19,7 +19,7 @@
 \definecolor{roleiso}{HTML}{E39532}
 \definecolor{navybar}{HTML}{4C6780}
 \definecolor{ground}{HTML}{F4F1E9}
-\definecolor{groundcore}{HTML}{EDE6D5}
+\definecolor{groundcore}{HTML}{E7DCC5}
 \definecolor{peri}{HTML}{55708A}
 \definecolor{cyanacc}{HTML}{9C8062}
 \definecolor{ink}{HTML}{22262F}
@@ -81,12 +81,16 @@
 % which asserts an importance ordering the roles do not have. The per-band fill opacity, rule
 % opacity and label mix were solved so every band sits the same L* below the ground and every label
 % sits at the same L*. Hue separates the roles; value deliberately does not.
+% Solved against groundcore, the vignette's centre value, which is what sits under the middle of
+% the block. The vignette fades outward, so the equalisation is exact at the centre and drifts
+% toward the block's two ends, where no atom is drawn. Deepening the vignette widens that drift:
+% these numbers must be re-solved if groundcore changes again.
 % The first column is the stratum offset in mm inside a state scope, which is exactly what
 % \forgesites uses to place atoms. Bands and atoms therefore read from one set of numbers.
 \foreach \sy/\col/\bandop/\ruleop/\labmix/\lb/\grp in {%
-       8.4/roleamine/0.085/0.38/83/{amine}/{$\mathrm{N}\text{--}\mathrm{H}$},
-       0.0/roleald/0.090/0.41/75/{aldehyde}/{$\mathrm{CH}{=}\mathrm{O}$},
-      -8.4/roleiso/0.140/0.63/57/{isocyanide}/{$\mathrm{N}{\equiv}\mathrm{C}$}} {
+       8.4/roleamine/0.082/0.37/83/{amine}/{$\mathrm{N}\text{--}\mathrm{H}$},
+       0.0/roleald/0.087/0.39/75/{aldehyde}/{$\mathrm{CH}{=}\mathrm{O}$},
+      -8.4/roleiso/0.156/0.70/57/{isocyanide}/{$\mathrm{N}{\equiv}\mathrm{C}$}} {
   \pgfmathsetmacro\yc{\ya+\sy/10}
   \pgfmathsetmacro\ytop{\yc+\bandh}
   \pgfmathsetmacro\ybot{\yc-\bandh}
@@ -161,6 +165,34 @@
 % Left half: one column per graph position, in the same order and colours as the sites above, with
 % the outermost pair bracketed to their atoms. Right half: the same coordinates entering the
 % per-position embedding. Together they are what "reaction-program coordinates" means.
+%% ================================================================ the core the reaction forms
+% Quoted from the product side of the atom-mapped Ugi-3CR SMARTS,
+%   ... >> [N:1][CH1:2][C+0:3](=O)[NH1+0:4]
+% so this is N-CH-C(=O)-NH: the five-atom core the adapter owns. Each atom carries the colour of
+% the component it came from, which is why the carbonyl O is grey -- map_1..map_4 come from the
+% three precursors, but the O is template_introduced_0 and enters from no precursor at all. Halos
+% mark core membership, the same convention the states above use for k_i.
+% The two open bonds mean "continues into the precursor region", not "exactly one R": the amine
+% is [NX3;H2,H1], so N:1 may carry one substituent or two, and the drawing does not commit.
+\begin{scope}[shift={(7.10,-1.60)}]
+  \draw[draw=inkmuted!55, line width=0.5pt]
+    (-3.4mm,1.7mm) -- (0mm,0mm) -- (3.4mm,1.7mm) -- (6.8mm,0mm) -- (10.2mm,1.7mm) -- (13.6mm,0mm);
+  \draw[draw=inkmuted!55, line width=0.5pt] (6.45mm,0mm) -- (6.45mm,-3.4mm);
+  \draw[draw=inkmuted!55, line width=0.5pt] (7.15mm,0mm) -- (7.15mm,-3.4mm);
+  \foreach \ax/\ay/\col in {0/0/roleamine, 3.4/1.7/roleald, 6.8/0/roleiso,
+                            10.2/1.7/roleiso, 6.8/-3.4/inkmuted} {
+    \draw[\col, line width=0.4pt, opacity=0.42] (\ax mm,\ay mm) circle (1.5mm);
+    \fill[\col] (\ax mm,\ay mm) circle (0.85mm);
+  }
+  \node[font=\tiny, text=roleamine!83!black, anchor=north] at (0mm,-1.6mm) {N};
+  \node[font=\tiny, text=roleiso!57!black, anchor=west] at (12.0mm,1.7mm) {N};
+  \node[font=\tiny, text=inkmuted, anchor=north] at (6.8mm,-4.6mm) {O};
+\end{scope}
+\node[font=\tiny, text=inkmuted!85, anchor=west] at (8.80,-1.48)
+  {reaction core, marked by $k_i$};
+\node[font=\tiny, text=inkmuted!70, anchor=west] at (8.80,-1.72)
+  {O: from the template, not a precursor};
+
 \begin{scope}[shift={(2.88,\ypanel)}]
   \node[font=\tiny, text=ink, anchor=east] at (-0.6mm,3.05mm) {$r_i$};
   \node[font=\tiny, text=ink, anchor=east] at (-0.6mm,0.05mm) {$k_i$};
