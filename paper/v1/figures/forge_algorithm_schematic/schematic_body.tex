@@ -157,9 +157,9 @@
 
 %% ================================================================ mask chips, one each side
 \node[font=\tiny, text=inkmuted, anchor=south] (chL) at (4.05,2.80)
-  {$r_i,k_i$ from $P$: never resampled};
+  {$r_i$, $k_i$ and the core states from $P$: never resampled};
 \node[font=\tiny, text=inkmuted, anchor=south] (chR) at (9.95,2.80)
-  {atom and bond states: resampled};
+  {atom and bond states outside the core: resampled};
 
 %% ================================================================ coordinate panel, centred
 % Left half: one column per graph position, in the same order and colours as the sites above, with
@@ -172,13 +172,14 @@
 % the component it came from, which is why the carbonyl O is grey -- map_1..map_4 come from the
 % three precursors, but the O is template_introduced_0 and enters from no precursor at all. Halos
 % mark core membership, the same convention the states above use for k_i.
-% Sits centred under X_1, the state that has one. That mirrors the coordinate track, which hangs
-% under X_0 because r_i and k_i are given before sampling starts, and it gives the figure a
-% symmetry: what P supplies drops out of the left state, what the chemistry builds out of the
-% right one. The alignment is the anchor, so no leader line is needed.
+% Centred on \cx, under no single state, because the core belongs to all three. The adapter owns
+% this chemistry and P fixes it: "the chemistry adapter marks any atom, pointer, or bond states
+% fixed by P. FORGE holds these states constant while corrupting the remaining states." So the
+% core is already there at t=0 and is never sampled. Hanging it under X_1 said the opposite --
+% that it emerges at the end -- which is the reverse of what the figure argues.
 % The two open bonds mean "continues into the precursor region", not "exactly one R": the amine
 % is [NX3;H2,H1], so N:1 may carry one substituent or two, and the drawing does not commit.
-\begin{scope}[shift={(9.44,-1.60)}]
+\begin{scope}[shift={(6.49,-1.60)}]
   \draw[draw=inkmuted!55, line width=0.5pt]
     (-3.4mm,1.7mm) -- (0mm,0mm) -- (3.4mm,1.7mm) -- (6.8mm,0mm) -- (10.2mm,1.7mm) -- (13.6mm,0mm);
   \draw[draw=inkmuted!55, line width=0.5pt] (6.45mm,0mm) -- (6.45mm,-3.4mm);
@@ -192,9 +193,9 @@
   \node[font=\tiny, text=roleiso!57!black, anchor=west] at (12.0mm,1.7mm) {N};
   \node[font=\tiny, text=inkmuted, anchor=north] at (6.8mm,-4.6mm) {O};
 \end{scope}
-\node[font=\tiny, text=inkmuted!85, anchor=east] at (8.90,-1.48)
+\node[font=\tiny, text=inkmuted!85, anchor=west] at (8.15,-1.48)
   {reaction core, marked by $k_i$};
-\node[font=\tiny, text=inkmuted!70, anchor=east] at (8.90,-1.72)
+\node[font=\tiny, text=inkmuted!70, anchor=west] at (8.15,-1.72)
   {O: from the template, not a precursor};
 
 \begin{scope}[shift={(2.88,\ypanel)}]
