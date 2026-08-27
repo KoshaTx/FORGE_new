@@ -1,0 +1,209 @@
+% FORGE algorithm figure. Vector, no external assets, no numbers: this states the method, so nothing
+% in it is a result and nothing needs a hash pin.
+%
+% Composition: everything is centred on one vertical axis at x=7 and laid out in four even bands,
+% so the figure reads as a stack rather than a scatter.
+%
+% Deliberately plain: no gradient ground, no glow, no dot lattice, no drop shadows, minimal corner
+% rounding. Those effects are the tells of a generated-looking figure and none of them carried
+% information here. Flat fills, hairlines and typography do the work instead.
+%
+% The four precursor-role colours are untouched: they are the key shared with the atlas and the
+% generated-sample figure, so they are not a styling choice. What is compensated below is how
+% heavily each one renders, not which colour it is.
+%
+% Claim discipline: exact replay and route closure are computational checks. The figure asserts
+% neither experimental synthesis success nor biological activity.
+\definecolor{roleamine}{HTML}{8A5AC2}
+\definecolor{roleald}{HTML}{168C8C}
+\definecolor{roleiso}{HTML}{E39532}
+\definecolor{navybar}{HTML}{4C6780}
+\definecolor{ground}{HTML}{F4F1E9}
+\definecolor{groundcore}{HTML}{EDE6D5}
+\definecolor{peri}{HTML}{55708A}
+\definecolor{cyanacc}{HTML}{9C8062}
+\definecolor{ink}{HTML}{22262F}
+\definecolor{inkmuted}{HTML}{5C6474}
+
+\newcommand{\plateref}{\tiny\color{white!84!navybar}}
+
+\begin{tikzpicture}[
+  font=\scriptsize,
+  plate/.style={rounded corners=2pt, fill=navybar, text=white, inner xsep=10pt, inner ysep=6pt,
+    minimum width=10.60cm, align=center, font=\footnotesize},
+  statelab/.style={text=peri!85!black, font=\small},
+  lead/.style={-{Stealth[length=3pt,width=3pt]}, draw=peri!75, line width=0.6pt},
+]
+
+\def\cx{7.00}      % the single vertical axis everything is centred on
+\def\bandl{2.05}   % band block, left and right. The endpoints sit outside it, so these
+\def\bandr{11.95}  % two values are what set the clearance around P and T.
+\def\labx{2.20}    % label column. Set by the tightest pair in the block: "aldehyde" against
+                   % the leftmost X_1 atom halo, and "amine" against its own, both ~0.32cm.
+\def\inx{0.90}     % P, far enough left that "program in" clears the panel edge
+\def\outx{13.05}   % T, mirrored. Not \px/\tx: those are loop variables further down.
+\def\ya{0.05}      % trajectory band
+\def\yaxis{2.60}   % sampling-time axis, above the molecules
+\def\ypanel{-2.80} % coordinate panel
+\def\bandh{0.35}   % band half-height. Holds the two-line stratum label; an atom halo is 0.17 of
+                   % that, so both clear the band edge. At the original 0.155 the halos
+                   % overflowed their own stratum and bled into the neighbouring ones.
+
+%% ================================================================ ground
+% A vignette rather than a panel: warm at the centre, fading to the page at the edges, so the
+% figure sits on a field with no border to read as an arbitrary rectangle. The large corner
+% radius plus the fade gives a lozenge rather than a box.
+% Deliberately not an hourglass. In the transition-path figures this shape comes from, the waist
+% is the transition state between two basins and the shape is the claim. Here the vertical axis
+% is the role coordinate, so a waist would assert that roles merge as sampling proceeds, which
+% is false: \Pi_P pins them at every step. The shape stays neutral and the strata carry meaning.
+\shade[rounded corners=1.9cm, inner color=groundcore, outer color=white]
+  (-0.15,-4.50) rectangle (14.10,4.46);
+% Soft basins under the two endpoints, marking where the program enters and the route leaves.
+\shade[inner color=peri!22, outer color=white] (\inx,\ya) circle (1.05);
+\shade[inner color=cyanacc!22, outer color=white] (\outx,\ya) circle (1.05);
+
+
+%% ================================================================ role strata
+% The vertical direction is the role coordinate: one stratum per precursor role, and every atom is
+% drawn inside its own stratum. This is what makes the background a coordinate system rather than a
+% backdrop, and it is only legible because the sites are laid out by role instead of by chemical
+% geometry.
+% Three strata, not four. This axis is the role coordinate r_i, and r_i ranges over exactly the
+% three Ugi-3CR precursor roles: ROLE_NAMES in forge/potency/annotations.py has three entries, and
+% forge/model/ugi_joint_sparse_flow.py sizes role_embedding to len(ROLE_NAMES) -- the +1 slot is
+% NULL_ROLE_INDEX for the flat ablation arm, not a fourth role. The slate band that used to sit
+% here was assembly_introduced from the atlas origin palette, which is an atom origin recovered by
+% atom-mapped forward replay after generation, not a coordinate P assigns before sampling. On this
+% axis it asserted a fourth precursor role in a three-component reaction.
+% Equal-weight bands. The role colours differ widely in intrinsic luminance -- the orange is far
+% lighter than the others -- so one shared opacity made isocyanide read as the faintest stratum,
+% which asserts an importance ordering the roles do not have. The per-band fill opacity, rule
+% opacity and label mix were solved so every band sits the same L* below the ground and every label
+% sits at the same L*. Hue separates the roles; value deliberately does not.
+% The first column is the stratum offset in mm inside a state scope, which is exactly what
+% \forgesites uses to place atoms. Bands and atoms therefore read from one set of numbers.
+\foreach \sy/\col/\bandop/\ruleop/\labmix/\lb/\grp in {%
+       8.4/roleamine/0.085/0.38/83/{amine}/{$\mathrm{N}\text{--}\mathrm{H}$},
+       0.0/roleald/0.090/0.41/75/{aldehyde}/{$\mathrm{CH}{=}\mathrm{O}$},
+      -8.4/roleiso/0.140/0.63/57/{isocyanide}/{$\mathrm{N}{\equiv}\mathrm{C}$}} {
+  \pgfmathsetmacro\yc{\ya+\sy/10}
+  \pgfmathsetmacro\ytop{\yc+\bandh}
+  \pgfmathsetmacro\ybot{\yc-\bandh}
+  \fill[\col, opacity=\bandop] (\bandl,\ybot) rectangle (\bandr,\ytop);
+  \draw[\col, opacity=\ruleop, line width=0.4pt] (\bandl,\ybot) -- (\bandr,\ybot);
+  \node[font=\tiny, text=\col!\labmix!black, anchor=west] at (\labx,\yc+0.10) {\lb};
+  % the group each role contributes at the reaction core, quoted from the reaction SMARTS
+  \node[font=\tiny, text=inkmuted!70, anchor=west] at (\labx,\yc-0.11) {\grp};
+}
+\pgfmathsetmacro\blocktop{\ya+0.84+\bandh+0.06}
+\pgfmathsetmacro\blockbot{\ya-0.84-\bandh-0.06}
+\pgfmathsetmacro\rolehdr{\blocktop+0.10}
+\draw[draw=inkmuted!22, line width=0.35pt] (\bandl,\blocktop) -- (\bandr,\blocktop);
+\draw[draw=inkmuted!22, line width=0.35pt] (\bandl,\blockbot) -- (\bandr,\blockbot);
+\node[font=\tiny, text=inkmuted!75, anchor=west] at (\labx,\rolehdr) {role $r_i$};
+
+%% ================================================================ endpoints
+\fill[peri] (\inx,\ya) circle (1.1mm);
+\node[font=\small, text=peri!85!black, anchor=south] at (\inx,\ya+0.16) {$P$};
+\node[font=\tiny, text=inkmuted, anchor=north] at (\inx,\ya-0.16) {program in};
+\fill[cyanacc] (\outx,\ya) circle (1.1mm);
+\node[font=\small, text=cyanacc!80!black, anchor=south] at (\outx,\ya+0.16) {$T$};
+\node[font=\tiny, text=inkmuted, anchor=north] at (\outx,\ya-0.16) {route out};
+
+%% ================================================================ the three states
+% One shared position layout across all three: the reaction-program coordinates are per-position and
+% are given by P before sampling starts, so every position keeps its role colour and its core halo
+% throughout. Opacity, not colour, carries what the flow actually determines.
+\newcommand{\forgesites}[1]{%
+  % x is position along the chain, y is the role stratum, so a site's height IS its role coordinate
+  \foreach \px/\py/\col/\core in {%
+      -7.4/8.4/roleamine/1,
+      -5.0/0.0/roleald/1, -2.0/0.0/roleald/0, 1.0/0.0/roleald/1,
+       4.0/0.0/roleald/0,  7.0/0.0/roleald/0,
+       2.9/-8.4/roleiso/1,  5.4/-8.4/roleiso/0} {
+    \ifnum\core=1 \draw[\col, line width=0.45pt, opacity=0.42] (\px mm,\py mm) circle (1.7mm); \fi
+    \ifnum#1=1 \fill[\col] (\px mm,\py mm) circle (0.95mm);
+    \else \fill[\col, opacity=0.38] (\px mm,\py mm) circle (0.95mm); \fi
+  }%
+}
+
+\begin{scope}[shift={(4.05,\ya)}] \forgesites{0} \end{scope}
+
+\begin{scope}[shift={(\cx,\ya)}]
+  \draw[roleald, line width=1.15pt] (-5mm,0mm) -- (-2mm,0mm) -- (1mm,0mm);
+  \forgesites{0}
+  \foreach \px in {-5.0, -2.0, 1.0} \fill[roleald] (\px mm,0mm) circle (0.95mm);
+\end{scope}
+
+\begin{scope}[shift={(9.95,\ya)}]
+  \draw[roleald, line width=1.15pt] (-5mm,0mm) -- (7mm,0mm);
+  \draw[roleiso, line width=1.15pt] (1mm,0mm) -- (2.9mm,-8.4mm) -- (5.4mm,-8.4mm);
+  \draw[roleamine, line width=1.15pt] (-5mm,0mm) -- (-7.4mm,8.4mm);
+  \forgesites{1}
+\end{scope}
+
+%% ================================================================ sampling-time axis
+\draw[draw=inkmuted!26, line width=0.4pt] (\bandl,\yaxis) -- (\bandr,\yaxis);
+\foreach \tx/\tl/\sl in {4.05/{$t=0$}/{$X_0$}, \cx/{$t$}/{$X_t$}, 9.95/{$t=1$}/{$X_1\!\to\!G$}} {
+  \draw[draw=inkmuted!34, line width=0.5pt] (\tx,\yaxis) -- (\tx,\yaxis-0.14);
+  \node[font=\tiny, text=inkmuted!85, anchor=north] at (\tx,\yaxis-0.17) {\tl};
+  \node[statelab, anchor=north] at (\tx,\yaxis-0.47) {\sl};
+}
+
+%% ================================================================ mask chips, one each side
+\node[font=\tiny, text=inkmuted, anchor=south] (chL) at (4.05,2.80)
+  {$r_i,k_i$ from $P$: never resampled};
+\node[font=\tiny, text=inkmuted, anchor=south] (chR) at (9.95,2.80)
+  {atom and bond states: resampled};
+
+%% ================================================================ coordinate panel, centred
+% Left half: one column per graph position, in the same order and colours as the sites above, with
+% the outermost pair bracketed to their atoms. Right half: the same coordinates entering the
+% per-position embedding. Together they are what "reaction-program coordinates" means.
+\begin{scope}[shift={(2.88,\ypanel)}]
+  \node[font=\tiny, text=ink, anchor=east] at (-0.6mm,3.05mm) {$r_i$};
+  \node[font=\tiny, text=ink, anchor=east] at (-0.6mm,0.05mm) {$k_i$};
+  \foreach \i/\col/\core in {0/roleamine/1, 1/roleald/1, 2/roleald/0, 3/roleald/1,
+                             4/roleald/0, 5/roleald/0, 6/roleiso/1, 7/roleiso/0} {
+    \pgfmathsetmacro\x{\i*3.0}
+    \fill[\col] (\x mm,2.2mm) rectangle (\x mm+2.4mm,4.6mm);
+    \ifnum\core=1
+      \fill[peri] (\x mm,-0.8mm) rectangle (\x mm+2.4mm,1.6mm);
+    \else
+      \draw[peri!55, line width=0.4pt] (\x mm,-0.8mm) rectangle (\x mm+2.4mm,1.6mm);
+    \fi
+  }
+\end{scope}
+\foreach \ax/\i in {-7.4/0, 7.0/7} {
+  \pgfmathsetmacro\axcm{4.05+\ax/10}
+  \pgfmathsetmacro\colx{2.88+\i*0.30+0.12}
+  \draw[draw=inkmuted!30, line width=0.35pt] (\axcm,-1.26) -- (\colx,\ypanel+0.50);
+}
+
+\begin{scope}[shift={(8.05,\ypanel)}]
+  \foreach \i/\lb/\op in {0/{$e_c(c)$}/0.85, 1/{$e_d(d)$}/0.68, 2/{$e_r(r_i)$}/0.50, 3/{$e_k(k_i)$}/0.34} {
+    \pgfmathsetmacro\x{\i*7.8}
+    \fill[peri, opacity=\op] (\x mm,1.4mm) rectangle (\x mm+5.2mm,4.0mm);
+    \node[font=\tiny, text=inkmuted, anchor=north] at (\x mm+2.6mm,0.9mm) {\lb};
+    \ifnum\i<3 \node[font=\tiny, text=ink] at (\x mm+6.5mm,2.7mm) {$+$}; \fi
+  }
+  \draw[-{Stealth[length=3.5pt,width=3.5pt]}, draw=peri, line width=0.8pt] (28.8mm,2.7mm) -- (32.2mm,2.7mm);
+  \node[font=\tiny, text=inkmuted, anchor=south] at (30.5mm,3.9mm) {LN};
+  \fill[navybar] (33.0mm,1.4mm) rectangle (39.4mm,4.0mm);
+  \node[font=\tiny, text=inkmuted, anchor=north] at (36.2mm,0.9mm) {$h_i^{P}$};
+\end{scope}
+
+%% ================================================================ equation plates, centred
+\node[plate, anchor=south] at (\cx,3.42)
+  {{\plateref sampling step}\\[2pt]
+   $X_t=(\mathbf{a},\boldsymbol{\pi},\mathbf{b},\mathbf{e}^{L},\mathbf{e}^{R},\mathbf{z})
+    \qquad
+    X_{k+1}=\Pi_P\!\left(\Phi_k^\theta(X_k,\xi_k)\right)$\\[3pt]
+   {\plateref $\Pi_P$ restores every coordinate $P$ fixes; the rest keep their sampled value}};
+\node[plate, anchor=north] at (\cx,-3.62)
+  {{\plateref acceptance and route}\\[2pt]
+   $\mathrm{L1}(G,P)=\mathbf{1}\!\left[\widehat{\mathcal{E}}_P(G)\neq\varnothing\right]
+    \qquad T=\mathcal{A}(G,P)\in\mathfrak{T}\cup\{\bot\}$};
+
+\end{tikzpicture}

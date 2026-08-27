@@ -1,0 +1,75 @@
+% FORGE reachable-space figure, pure TikZ.
+%
+% Rebuilt from an SVG-plus-overlay version: hand-fitted organic blobs read as lumpy rather than
+% considered, and the overlay forced Computer Modern maths beside a Helvetica sans, which clashed.
+% Clean nested ellipses state a set relationship more clearly, and drawing in TikZ means every label
+% and every symbol is the document's own font with no overlay coordinates to keep in sync.
+%
+% Claim discipline: the outer set is the DECLARED bounded support, never "all graphs"; the catalogue
+% ellipse is a ceiling that holds by construction; the teal set is verifier-relative exact-L1 and is
+% not asserted to be proven catalogue escape. Areas are schematic, as the caption states.
+\definecolor{roleamine}{HTML}{8A5AC2}
+\definecolor{roleald}{HTML}{168C8C}
+\definecolor{roleiso}{HTML}{E39532}
+\definecolor{inkmuted}{HTML}{545B6B}
+\definecolor{acceptgreen}{HTML}{2E8B57}
+\definecolor{supportfill}{HTML}{C9C2EA}
+
+\begin{tikzpicture}[
+  font=\scriptsize,
+  lead/.style={draw=inkmuted!45, line width=0.45pt},
+  lbl/.style={align=center, inner sep=1.5pt, text=inkmuted},
+]
+
+% ---------------------------------------------------------------- declared bounded support
+\shade[inner color=supportfill!30, outer color=supportfill!8]
+  (5.40,0) ellipse (5.90 and 2.35);
+\draw[draw=inkmuted!40, line width=0.7pt, dash pattern=on 3pt off 2.6pt]
+  (5.40,0) ellipse (5.90 and 2.35);
+
+% ---------------------------------------------------------------- exact-L1 verified products
+\fill[roleald, opacity=0.14] (5.00,-0.15) ellipse (3.70 and 1.70);
+\draw[roleald, line width=1.1pt] (5.00,-0.15) ellipse (3.70 and 1.70);
+
+% ---------------------------------------------------------------- train-only catalogue ceiling
+\fill[pattern=north east lines, pattern color=roleamine!55]
+  (3.60,-0.20) ellipse (1.50 and 1.00);
+\draw[roleamine, line width=1.0pt] (3.60,-0.20) ellipse (1.50 and 1.00);
+
+% ---------------------------------------------------------------- routes closed under the library
+\fill[acceptgreen, opacity=0.22] (6.85,-0.40) ellipse (0.95 and 0.68);
+\draw[acceptgreen, line width=1.0pt] (6.85,-0.40) ellipse (0.95 and 0.68);
+
+% ---------------------------------------------------------------- reserved held components
+\foreach \p in {(9.30,0.72),(9.95,0.34),(9.45,-0.12),(10.10,-0.52),(9.15,-0.72)}
+  \fill[roleiso] \p circle (1.5pt);
+
+% ---------------------------------------------------------------- sampling trajectory
+\fill[inkmuted!30] (-1.45,-0.40) circle (7.5pt);
+\fill[inkmuted!70] (-1.45,-0.40) circle (3.2pt);
+\draw[-{Stealth[length=4.5pt,width=4.5pt]}, draw=inkmuted!75, line width=1.0pt]
+  (-1.10,-0.36) .. controls (-0.10,-0.05) and (0.35,-0.55) .. (1.22,-0.22);
+\node[lbl, anchor=north] at (-1.45,-0.85) {noise};
+\node[lbl, anchor=south] at (0.10,0.05) {$p_\theta(\cdot\mid P)$};
+
+% ---------------------------------------------------------------- labels
+% Terse on purpose: a figure label should name a region, not explain it. The caption carries the
+% definitions, and short labels neither hyphenate nor sit across the boundary they annotate.
+\node[lbl, anchor=south west, text width=33mm] at (-0.95,2.62)
+  {declared bounded graph space $\mathfrak{G}_{N_{\max},K}$};
+\draw[lead] (0.95,2.58) -- (1.70,2.06);
+
+\node[lbl, anchor=south, text=roleald] at (5.05,2.62) {\textbf{exact-L1 verified products}};
+\draw[lead] (5.05,2.56) -- (4.90,1.58);
+
+\node[lbl, anchor=north, text=roleamine] at (2.85,-2.62) {\textbf{train-only finite catalogue}};
+\draw[lead] (2.95,-2.56) -- (3.30,-1.16);
+
+\node[lbl, anchor=north, text=acceptgreen] at (7.55,-2.62) {\textbf{routes closed}};
+\draw[lead] (7.35,-2.56) -- (6.95,-1.06);
+
+\node[lbl, anchor=south, text=roleiso, text width=30mm] at (9.95,1.72)
+  {\textbf{reserved held components}};
+\draw[lead] (9.70,1.66) -- (9.40,0.92);
+
+\end{tikzpicture}

@@ -18,6 +18,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.arrows,fit,backgrounds}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{colortbl}
@@ -551,19 +553,7 @@ identity and connects whole-graph generation to recursive synthesis-program cons
 
 \begin{figure*}[t]
 \centering
-\fbox{
-\parbox{0.94\linewidth}{
-\centering\footnotesize
-\fbox{\parbox{0.13\linewidth}{\centering\textbf{Reaction program}\\roles, core, depth; no identities}}
-$\longrightarrow$
-\fbox{\parbox{0.13\linewidth}{\centering\textbf{Discrete flow}\\all atoms, bonds and topology}}
-$\longrightarrow$
-\fbox{\parbox{0.13\linewidth}{\centering\textbf{Complete lipid graph}\\bounded support}}
-$\longrightarrow$
-\fbox{\parbox{0.13\linewidth}{\centering\textbf{Exact L1}\\decompose and replay}}
-$\longrightarrow$
-\fbox{\parbox{0.13\linewidth}{\centering\textbf{Recursive dossier}\\L2/L3 evidence, or abstain}}
-}}
+\resizebox{\textwidth}{!}{\input{../v1/figures/forge_algorithm_schematic/schematic_body.tex}}
 \caption{\textbf{FORGE generates complete ionizable-lipid graphs within reaction-program
 coordinates.}
 The reaction program specifies how molecular regions participate in an assembly without choosing
@@ -688,7 +678,7 @@ For any graph $G$, define its complete program-relative preimage as
 \begin{equation}
     \operatorname{Escape}^{\star}(G;P,\mathcal C)
     =
-    \mathbb{1}\!\left[
+    \mathbf{1}\!\left[
         \mathcal E_P^\star(G)\neq\varnothing
         \;\land\;
         \mathcal E_P^\star(G)\cap\mathfrak T_P(\mathcal C)=\varnothing
@@ -826,7 +816,7 @@ The verifier-returned exact set is
 A graph $G$ satisfies exact L1 consistency under $P$ when this set is nonempty:
 \begin{equation}
     \mathrm{L1}(G,P)
-    = \mathbb{1}\!\left[
+    = \mathbf{1}\!\left[
         \widehat{\mathcal E}_P(G)\neq\varnothing
     \right].
 \end{equation}
@@ -1923,7 +1913,7 @@ Fix a reaction program $P$, and define
 \begin{equation}
     A_P(G)
     =
-    \mathbb{1}\!\left[
+    \mathbf{1}\!\left[
         G\in\mathcal{G}_{\mathrm{L1}}(P)
     \right].
 \end{equation}
