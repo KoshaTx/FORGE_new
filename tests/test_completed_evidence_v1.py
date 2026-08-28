@@ -44,3 +44,16 @@ def test_completed_evidence_renderer_uses_only_pinned_nonselecting_results(tmp_p
     assert "DeFoG + AiZynthFinder" not in route_rows
     assert "route" not in (generated / "common_ugi_completed_rows.tex").read_text().lower()
     assert "ForgeRouteCompleteProducts" in (generated / "completed_evidence_macros.tex").read_text()
+    macros = (generated / "completed_evidence_macros.tex").read_text()
+    assert "ForgeUgiRetentionRangeLowPP" in macros
+    assert "ForgeNullUgiSeedDifferencesPP" in macros
+    assert "ForgeSemanticNullCoordinatesRangeLowPP" in macros
+    assert "ForgeSemanticNullCoordinatesSeedDifferencesPP" in macros
+    production_transposed = (generated / "production_comparison_transposed_rows.tex").read_text()
+    assert "Exact-L1/attempt" in production_transposed
+    assert "\\cellcolor{forgerow}" in production_transposed
+    seed_counts = (generated / "production_seed_exact_counts_rows.tex").read_text()
+    assert "2{,}220" in seed_counts
+    assert "3{,}072" in seed_counts
+    catalogue_transposed = (generated / "catalogue_comparison_transposed_rows.tex").read_text()
+    assert "Verifier-recovered component-novel/1k" in catalogue_transposed

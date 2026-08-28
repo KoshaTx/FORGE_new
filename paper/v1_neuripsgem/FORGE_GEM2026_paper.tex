@@ -1,10 +1,9 @@
 % FORGE, GEM workshop (NeurIPS 2026) short-paper build.
 %
-% This manuscript is a condensation of paper/v1. It carries no numbers of its own: every quantitative
-% statement is either typed verbatim from the v1 body or expanded from the hash-pinned macros in
-% ../v1/generated/completed_evidence_macros.tex, and every table row is the same generated artifact
-% the v1 manuscript inputs. Editing a value here without reissuing its artifact would break that
-% correspondence.
+% This manuscript is a condensation of paper/v1. Every reported quantitative result is expanded
+% from hash-pinned macros or generated row files under ../v1/generated; descriptive N/P and N/R
+% support-contract cells contain no measured value. Editing a measured value here without reissuing
+% its artifact would break the correspondence.
 %
 % Venue contract: short papers are limited to 5 pages excluding references and appendix, must use the
 % NeurIPS 2026 main-conference template with the GEM style file substituted, and are anonymous for
@@ -14,7 +13,7 @@
 
 \usepackage{GEM_workshop_2026}
 
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
@@ -28,6 +27,7 @@
 \usepackage{longtable}
 \usepackage[most]{tcolorbox}
 \usepackage{float}
+\usepackage{chemfig}
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
@@ -41,6 +41,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{invariant}[theorem]{Implementation invariant}
 
 % Formal statements use a quiet lavender field to separate assumptions and guarantees from the
 % surrounding argument. The box may break across pages; proofs intentionally remain unboxed.
@@ -69,6 +70,7 @@
 \tcolorboxenvironment{theorem}{forge formal block}
 \tcolorboxenvironment{lemma}{forge formal block}
 \tcolorboxenvironment{corollary}{forge formal block}
+\tcolorboxenvironment{invariant}{forge formal block}
 
 % Unresolved experimental results remain visually explicit until a verified artifact supplies
 % the value. Never replace one of these placeholders from an unverified log or planning document.
@@ -125,14 +127,17 @@ reactant catalogue. FORGE represents each synthesis route through precursor role
 positions, transformation order and coarse molecular architecture, while generating the complete
 molecule at atom-and-bond resolution. The model does not receive component identifiers, stored
 precursor graphs or fragment tokens. We evaluated FORGE on an AGILE-type Ugi three-component
-reaction, repeated aza-Michael addition and repeated reductive amination. Across three independent
-seeds, FORGE achieved exact level-one (exact-L1) transform-consistent yields of $78.7\pm10.1\%$,
+reaction, repeated aza-Michael addition and repeated reductive amination. Under population-optimal
+primary denoising and exact continuous-time integration, we prove that the ideal terminal state law
+recovers the encoded program-compatible endpoint distribution and therefore decodes to valid,
+verified exact-L1 graphs almost surely. Across three independent
+seeds, FORGE achieved verified exact level-one (exact-L1) transform-consistent yields of $78.7\pm10.1\%$,
 $77.5\pm3.7\%$ and $31.3\pm14.3\%$, respectively. Matched whole-molecule generation followed by
 post-hoc reaction filtering yielded $11.4\pm1.1\%$, $4.0\pm0.8\%$ and $13.2\pm1.3\%$; the paired
 differences were \ForgeNullUgiDifferencePP, \ForgeNullBLDifferencePP{} and
-\ForgeNullLXDifferencePP{} percentage points. FORGE also generated exact-L1 products with precursor
-identities absent from the corresponding training component catalogues in all three reactions, a
-quantity that is structurally zero for a finite-catalogue assembler. In a bounded, route-blinded Ugi
+\ForgeNullLXDifferencePP{} percentage points. FORGE also generated products with verifier-recovered
+exact decompositions containing precursor constitutions absent from the corresponding training
+catalogues in all three reactions. In a bounded, route-blinded Ugi
 shortlist, \ForgeRouteCompleteProducts{} of \ForgeRouteAdmitted{} admitted products closed to
 complete computational synthesis dossiers; the remaining products were explicitly unresolved or
 search-censored rather than called unsynthesizable.
@@ -185,8 +190,8 @@ hydrophobic regions \citep{xu2024agile}. The other two attach hydrophobic compon
 the reactive amines of a single head, by conjugate addition of an amine to an acrylate
 \citep{li2023combinatorial} or by reductive amination of an aldehyde \citep{xue2024barcoding}. Each
 hydrophobic component carries one reactive handle, so the head's reactive sites bound how many
-attach. These experiments test
-generalization across specified reaction programs, not zero-shot support for arbitrary chemistry.
+attach. These experiments test shared learning across three specified reaction programs, not
+zero-shot support for arbitrary chemistry.
 This short paper reports the principal computational findings; Appendix~\ref{app:preliminaries}
 through Appendix~\ref{app:atlas} give the complete formulation, the full reporting contract, the
 theoretical results and a sample of generated structures.
@@ -199,10 +204,16 @@ We summarize our main contributions as follows.
     \item \textbf{Conditioning acts on generation, not on filtering.} Matched controls across three
     assembly programs show that reaction-program conditioning increases exact transform-consistent
     generation relative to whole-molecule generation followed by post-hoc filtering.
-    \item \textbf{Exact assembly outside a finite catalogue.} Across all three programs, FORGE
-    generates exact assemblies whose recovered precursor identities lie outside the corresponding
-    training component catalogues, a quantity that is structurally zero for finite-catalogue
-    assemblers.
+    \item \textbf{Verified decompositions with component-novel precursors.} Across all three
+    programs, FORGE generates verified exact assemblies with recovered precursor constitutions absent
+    from the corresponding training component catalogues. Strong product-level catalogue escape is
+    reserved for a direct common-reference reachability test and is not claimed here.
+    \item \textbf{Ideal population correctness.} We prove that a population minimizer of the primary
+    coordinatewise denoising loss recovers the local generator of the encoded endpoint path and,
+    under exact continuous-time simulation, transports the program-compatible source to the
+    conditional endpoint law. Its decoder pushforward is consequently valid and verified exact-L1
+    almost surely. The result deliberately excludes auxiliary losses, PCGrad, finite capacity and
+    numerical integration error.
 \end{itemize}
 
 \section{FORGE}
@@ -211,17 +222,20 @@ FORGE generates complete ionizable-lipid graphs under specified assembly chemist
 precursor identities open. Let $G\in\mathcal{G}$ denote a complete ionizable-lipid graph and
 $P\in\mathcal{P}$ a reaction program. FORGE models $p_\theta(G\mid P)$ without access to precursor
 identifiers, stored component graphs or fragment tokens. Given $P$, FORGE must generate $G$ and
-either construct a complete synthesis program for it or abstain. Writing $\mathfrak{T}$ for the space
-of recursive synthesis programs and $\bot$ for an explicit abstention outcome,
+either construct a complete synthesis dossier or return a typed failure. Writing $\mathfrak D$ for
+the dossier space and $\mathfrak F_{\mathfrak B}$ for the finite failure set under the frozen route
+contract,
 \begin{equation}
     G\sim p_\theta(\cdot\mid P),
     \qquad
-    T=\mathcal{A}(G,P)\in\mathfrak{T}\cup\{\bot\},
+    Y=\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)
+    \in\mathfrak D\cup\mathfrak F_{\mathfrak B},
 \end{equation}
-where $\mathcal{A}$ is the bounded program constructor that verifies the final assembly, searches for
-preparation routes to unavailable precursors, and checks terminal supplier evidence. $P$ and
-$\mathcal{A}$ act at different stages: $P$ guides the generation of $G$, whereas $\mathcal{A}$
-constructs $T$ from the completed graph without modifying it. FORGE accepts $(G,T)$ only when $G$
+where $(\mathbf C_T,\tau_T)$ is the sole verifier-returned exact root trace; ambiguous roots cause
+an abstention. The bounded constructor $\mathsf{Assess}_{\mathfrak B}$ verifies the final
+assembly, searches for preparation routes to unavailable precursors, and checks terminal supplier
+evidence. $P$ guides generation, whereas the assessor constructs $T$ from the completed graph without
+modifying it. FORGE accepts $(G,T)$ only when $G$
 passes molecular and exact-assembly verification and $T$ traces every required precursor to an
 available starting material; otherwise it abstains.
 
@@ -249,32 +263,32 @@ assembly chemistry, $d$ is the program depth, $\mathbf{r}$ assigns precursor rol
 marks reaction-core positions, and $M$ specifies coarse per-role morphology as four integers per
 role: exterior atom count, junction budget, cycle rank and attachment count. $M$ constrains coarse
 molecular architecture while leaving the exact topology, atoms, bonds and precursor identities
-unspecified. FORGE samples $M$ from a training-fold morphology prior and then generates $G$
-conditioned on the resulting program, so that
-$p_\theta(G,M\mid c)=p_{\mathrm{prog}}(M\mid c)\,p_\theta(G\mid M,c)$.
+unspecified. FORGE samples an admissible complete program $P$ from a training-fold prior and then
+generates $G$ conditioned on it, so that
+$p_\theta(G,P\mid c)=p_{\mathrm{prog}}(P\mid c)\,p_\theta(G\mid P)$.
 At graph position $i$, the program embedding combines learned embeddings of program identity, program
-depth, precursor role and reaction-core position,
-$h_i^P=\operatorname{LN}(e_c(c)+e_d(d)+e_r(r_i)+e_k(k_i))$.
-This embedding identifies the position's precursor role and reaction-core status without encoding a
-component identity.
+depth, precursor role, reaction-core position and the four role-local morphology counts. Those counts
+also define active positions and masks. The embedding identifies the position's semantic layout
+without encoding a component identity.
 
 \paragraph{Discrete flow generation.}
 FORGE proceeds in four stages: the program specifies roles, core positions, order and coarse
 morphology; a conditional discrete flow generates every atom, bond and topology state under it; a
 reverse transform decomposes the product and the corresponding forward transform must reconstruct it
 exactly; and precursors that are not already available are expanded recursively or the design is
-withheld. Generation operates on a sparse tree-plus-closure encoding. Let
-$X_G=(\mathbf{a},\boldsymbol{\pi},\mathbf{b},\mathbf{e}^{L},\mathbf{e}^{R},\mathbf{z})$
+withheld. Generation operates on a sparse tree-plus-closure encoding. Given the selected exact
+atom-mapped annotation $\alpha$, let
+$X_G:=\operatorname{Enc}_P(G,\alpha)=(\mathbf{a},\boldsymbol{\pi},\mathbf{b},\mathbf{e}^{L},\mathbf{e}^{R},\mathbf{z})$
 be the categorical graph state, with $\mathbf{a}$ atom states, $\boldsymbol{\pi}$ parent pointers,
 $\mathbf{b}$ spanning-tree bond states, $\mathbf{e}^{L}$ and $\mathbf{e}^{R}$ closure endpoints and
 $\mathbf{z}$ closure-bond states. The decoder is surjective onto the declared graph space
-$\mathfrak{G}_{N_{\max},K}$, here $N_{\max}=194$ and $K=3$, so every graph within the declared atom,
+$\mathfrak{G}_{N_{\max},K_{\rm cl}}$, here $N_{\max}=194$ and $K_{\rm cl}=3$, so every graph within the declared atom,
 bond and size support is representable. This is a statement about architectural support, not about
 reaction consistency or probability under a trained model.
 
 The chemistry adapter marks the atom, pointer and bond states that $P$ fixes. FORGE holds those
 constant while corrupting the remaining states along the linear probability path and predicting their
-clean values from $(X_t,t,P)$. Writing $\mathcal{Q}$ for the six state families,
+clean values from $(X_t,t,P)$. Writing $\mathscr J$ for the six state families,
 $m_j^{(q)}(P)\in\{0,1\}$ for whether coordinate $j$ remains variable under $P$,
 $\mu_{\mathrm{bal}}$ for the frozen program-balanced training distribution, and
 $\ell^{(q)}_j(\theta)=-\log p_\theta(X_{G,j}^{(q)}\mid X_t,t,P)$ for the per-coordinate denoising
@@ -286,20 +300,55 @@ term, FORGE minimizes
         t\sim\mathcal{U}(0,1),\;
         X_t\sim p_t(\cdot\mid X_G,P)}}
     \left[\,
-        \sum_{q\in\mathcal{Q}}
+        \sum_{q\in\mathscr J}
         \lambda_q\,
         \frac{\sum_j m_j^{(q)}(P)\,\ell^{(q)}_j(\theta)}
         {\max\!\left\{1,\sum_j m_j^{(q)}(P)\right\}}
     \right],
 \end{equation}
 where $\lambda_q$ weights family $q$ and a family with no variable coordinates contributes zero loss.
-The corruption and sampling operators project every intermediate state onto the program-fixed
-coordinates, so those coordinates are invariant by construction while the masked objective learns the
-conditional clean-state distributions of the remainder. This is the precise sense in which reaction
-semantics enter generation rather than filtering: the program fixes which coordinates the model is
-never permitted to resample. Appendix~\ref{app:forge} gives the sampler, verifier and bounded route
+The corruption and sampling operators give fixed coordinates zero update rate and project each
+finite-step state back onto them. This is the precise syntactic sense in which the program constrains
+the trajectory: fixed coordinates cannot be resampled. Chemical consistency is established
+separately by exact forward replay. The denoising result in Appendix~\ref{app:theory} concerns the
+primary masked term only, not auxiliary losses or PCGrad. Appendix~\ref{app:forge} gives the sampler,
+verifier and bounded route
 assessor in full, and Appendix~\ref{app:theory} the representation, invariance, sampling-efficiency
 and termination results.
+
+\paragraph{Ideal population guarantee.}
+The following result closes the idealized chain from encoded endpoint data, through the primary
+denoising posterior and local continuous-time generator, to the decoded terminal graph law. Write
+$\widehat{\mathrm{L1}}(G,P)=1$ when the frozen verifier returns at least one program-compatible
+decomposition that exactly reconstructs $G$ by forward replay.
+
+\begin{theorem}[Ideal population correctness of program-conditioned generation]
+\label{thm:ideal-terminal-law}
+Fix a program $P$ with positive mass under $\mu_{\mathrm{bal}}$, and let
+\begin{equation}
+ q_1^P=\mathcal L\!\left(\operatorname{Enc}_P(G,\alpha)\mid P\right),
+ \qquad
+ \mu_G^P=\mathcal L\!\left([G]_{\cong}\mid P\right)
+\end{equation}
+be the encoded endpoint law and corresponding conditional graph law. Assume finite coordinate
+alphabets and a full-support variable-coordinate source; every admitted endpoint decodes by exact
+round trip, is molecularly valid and satisfies $\widehat{\mathrm{L1}}(G,P)=1$; the unrestricted
+coordinatewise model is at a population minimum of the primary masked denoising term; and sampling
+starts from the program source and exactly simulates the induced local continuous-time Markov chain.
+Then, writing $G_1=\operatorname{Dec}(X_1)$, the ideal terminal state satisfies
+\begin{align}
+ \mathcal L(X_1\mid P)&=q_1^P,
+ &\operatorname{Dec}_{\#}q_1^P&=\mu_G^P,\\
+ \Pr\!\left[\mathrm{Valid}(G_1)=1,
+ \widehat{\mathrm{L1}}(G_1,P)=1\mid P\right]&=1.
+\end{align}
+\end{theorem}
+
+Appendix~\ref{app:theory} defines the multivariate probability path and local generator and proves
+Theorem~\ref{thm:ideal-terminal-law}. The result is deliberately ideal: it does not characterize the
+trained finite-capacity Transformer, auxiliary objectives, PCGrad update or capped finite-step
+sampler. It also neither implies strong catalogue escape nor assigns positive probability to graphs
+outside the endpoint law.
 
 \section{Results}
 
@@ -309,7 +358,7 @@ addition as a second family, and repeated reductive amination as a lighter stres
 matched training arms: Ugi-only conditioning, shared conditioning, shared training without program
 information, and shared training with cyclically incorrect program labels. All arms shared
 architecture, optimization budget and attempts per program, and we evaluated the prespecified final
-checkpoint from each of three independent seeds. The primary metric is exact-L1 yield per generation
+checkpoint from each of three independent seeds. The primary metric is verified exact-L1 yield per generation
 attempt: generated graphs passing molecular validity, program-aware decomposition and exact forward
 replay, divided by total attempts. Training used only the component-disjoint training folds, and
 held-out products neither entered training nor selected checkpoints. Generated molecules are not
@@ -318,24 +367,26 @@ external-baseline admission rules.
 
 \paragraph{Generalizing across reaction programs.}
 Across 3,072 held-out generation attempts per program in each of three independent training seeds,
-the conditioned model achieved exact-L1 yields of $78.7\pm10.1\%$ for Ugi
+the conditioned model achieved verified exact-L1 yields of $78.7\pm10.1\%$ for Ugi
 ($72.3\%$, $90.3\%$ and $73.5\%$ by seed), $77.5\pm3.7\%$ for repeated aza-Michael
 addition ($76.5\%$, $81.5\%$ and $74.3\%$), and $31.3\pm14.3\%$ for repeated reductive
 amination ($38.6\%$, $14.8\%$ and $40.4\%$) (mean $\pm$ sample standard deviation;
 Table~\ref{tab:gem-shared-programs}).
-Exact forward-replay precision was $100\%$ in every program and seed. Mean decomposition ambiguity
+Every verifier-returned trace passed forward replay, as required by the verifier invariant. Mean exact-decomposition ambiguity
 was $54.9\%$ for aza-Michael addition and $74.1\%$ for reductive amination, and reductive amination
 also varied substantially between seeds, indicating less consistent learning in this lower-data
-setting. Relative to the Ugi-only model, shared training changed Ugi exact-L1 yield by
-\ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed interval
-\ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP), met every prespecified Ugi-retention gate,
-and produced zero fixed-state violations and zero support overflows across 27,648 held-out attempts.
-One conditional flow therefore learned the three specified reaction-program coordinates without
+setting. Relative to the Ugi-only model, shared training changed verified Ugi exact-L1 yield by
+\ForgeUgiRetentionDifferencePP{} percentage points; the paired seed differences were
+\ForgeUgiRetentionSeedDifferencesPP{} points, spanning
+\ForgeUgiRetentionRangeLowPP{} to \ForgeUgiRetentionRangeHighPP{}. The observed runs met the
+numerical Ugi-retention gate. As an implementation check, they recorded zero fixed-coordinate
+violations and zero support overflows across 27,648 held-out attempts. One conditional flow learned
+the three specified reaction-program coordinates without
 erasing the deeply supported Ugi behavior.
 
 \begin{table}[H]
-\caption{\textbf{A shared model learns multiple assembly programs.}
-Exact-L1 yield (\%) and transform verification per program, as mean $\pm$ sample standard deviation
+\caption{\textbf{Shared learning across three specified assembly programs.}
+Verified exact-L1 yield (\%) and transform verification per program, as mean $\pm$ sample standard deviation
 over three training seeds. Results are never pooled across programs. Per-arm and per-seed values:
 Appendix~\ref{app:results}.}
 \label{tab:gem-shared-programs}
@@ -353,44 +404,50 @@ Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%)
 \paragraph{Reaction information changes generation rather than merely filtering its output.}
 Under matched attempt budgets, conditioned generation produced 786.8, 774.6 and 312.7 exact-L1
 products per 1,000 attempts for Ugi, repeated aza-Michael and repeated reductive amination, compared
-with 114.4, 39.7 and 131.7 for matched null generation followed by post-hoc filtering. The paired
+with 114.4, 39.7 and 131.7 for matched null generation followed by post-hoc filtering. The mean paired
 conditioned-minus-post-hoc differences were \ForgeNullUgiDifferencePP{} percentage points for Ugi
-(95\% interval \ForgeNullUgiCILowPP{} to \ForgeNullUgiCIHighPP), \ForgeNullBLDifferencePP{} for
-aza-Michael (\ForgeNullBLCILowPP{} to \ForgeNullBLCIHighPP), and \ForgeNullLXDifferencePP{} for
-reductive amination (\ForgeNullLXCILowPP{} to \ForgeNullLXCIHighPP). A cyclic control that retained
+(three-seed range \ForgeNullUgiRangeLowPP{} to \ForgeNullUgiRangeHighPP{}),
+\ForgeNullBLDifferencePP{} for aza-Michael (\ForgeNullBLRangeLowPP{} to
+\ForgeNullBLRangeHighPP{}), and \ForgeNullLXDifferencePP{} for reductive amination
+(\ForgeNullLXRangeLowPP{} to \ForgeNullLXRangeHighPP{}). A cyclic control that retained
 precursor roles, reaction-core coordinates and program depth but assigned the wrong reaction identity
-changed exact-L1 yield by \ForgeCyclicUgiDifferencePP{} percentage points for Ugi
-(\ForgeCyclicUgiCILowPP{} to \ForgeCyclicUgiCIHighPP), \ForgeCyclicBLDifferencePP{} for aza-Michael
-and \ForgeCyclicLXDifferencePP{} for reductive amination. Changing only program coordinates at
-inference, with the trained network and Ugi request fixed, reduced exact-L1 yield from
+changed verified exact-L1 yield by \ForgeCyclicUgiDifferencePP{} percentage points for Ugi
+(three-seed range \ForgeCyclicUgiRangeLowPP{} to \ForgeCyclicUgiRangeHighPP{}),
+\ForgeCyclicBLDifferencePP{} for aza-Michael and \ForgeCyclicLXDifferencePP{} for reductive
+amination. Changing only program coordinates at
+inference, with the trained network and Ugi request fixed, reduced verified exact-L1 yield from
 \ForgeSemanticFactualPercent\% to \ForgeSemanticNullCoordinatesPercent\% when all coordinates were
-nulled (\ForgeSemanticNullCoordinatesDifferencePP{} points, 95\% interval
-\ForgeSemanticNullCoordinatesCILowPP{} to \ForgeSemanticNullCoordinatesCIHighPP), whereas the
+nulled (\ForgeSemanticNullCoordinatesDifferencePP{} points; paired differences
+\ForgeSemanticNullCoordinatesSeedDifferencesPP{}, spanning
+\ForgeSemanticNullCoordinatesRangeLowPP{} to \ForgeSemanticNullCoordinatesRangeHighPP), whereas the
 aza-Michael-token contrast was unresolved at \ForgeSemanticBLTokenDifferencePP{} points. The
 reaction program therefore changes molecular generation before downstream verification, but the
 evidence does not support an equal or individually identifiable effect for every coordinate.
 
-\paragraph{Whole-graph generation extends beyond finite catalogues.}
+\paragraph{Whole-graph generation recovers precursor constitutions outside training catalogues.}
 Table~\ref{tab:ugi-common-benchmark} compares FORGE with external synthesis-aware generators, matched
 controls and a finite-catalogue oracle under one common Ugi benchmark, normalizing every yield by
-generation attempts. The learned finite-inventory selector reached $1000.0\pm0.0$ exact-L1 products
-per 1,000 attempts with zero open-ended component generation, imposed by its finite action space,
-whereas FORGE produced $786.8\pm100.8$ exact-L1 and $751.2\pm80.2$ unique open-ended exact-L1
-products. Among open-ended external generators, unconditional DeFoG produced $280.6\pm26.6$ exact-L1
+generation attempts. The learned finite-inventory selector reached $1000.0\pm0.0$ verified
+exact-L1 products per 1,000 attempts with zero verifier-recovered component-novel yield, imposed by
+its finite action space, whereas FORGE produced $786.8\pm100.8$ verified exact-L1 and
+$751.2\pm80.2$ distinct verified exact-L1 products. Among whole-molecule external generators,
+unconditional DeFoG produced $280.6\pm26.6$ verified exact-L1
 products and recovered held components at $15.5\pm2.4$ per 1,000 attempts against $0.1\pm0.2$ for
 FORGE; GenMol/SAFE produced $627.5\pm6.2$ valid connected outputs but no exact Ugi-L1 product, and
 RGFN emitted no admissible output under the strict native contract. Against the train-only assembler,
 FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 and 16.9. Reaction
-consistency, open-ended identity generation and recovery of reserved components therefore trade off
-separately. Representative Ugi products show exact decompositions into precursor identities outside
-the visible training inventory (Table~\ref{tab:forge-generated-samples}).
+consistency, verifier-recovered component novelty and recovery of reserved components therefore
+trade off separately. This component-level diagnostic is not a direct test of product-level strong
+catalogue escape. Representative Ugi products show exact decompositions into precursor identities
+outside the visible training inventory (Table~\ref{tab:forge-generated-samples}).
 
 \begin{table}[H]
 \caption{\textbf{Common Ugi benchmark for external generators and matched controls.}
 Yields per 1,000 generation attempts under one component-disjoint split, three-seed protocol and
-common exact-L1 verifier (mean $\pm$ sample standard deviation). Open-ended: exactly one
+common exact-L1 verifier (mean $\pm$ sample standard deviation). Component-novel: exactly one
 verifier-returned decomposition with a component constitution absent from the method-visible
-training catalogue. The whole-molecule baselines have no reaction program, so their exact-L1 yields come from the
+training catalogue. This verifier-relative metric is not strong catalogue escape. The whole-molecule
+baselines have no reaction program, so their exact-L1 yields come from the
 same post-hoc assessment applied to every method.
 $\dagger$, a zero imposed by a finite component action space, not an empirical
 failure; N/E, not estimable. No published values from the original baseline papers are inserted.
@@ -409,7 +466,7 @@ Definitions and seed-level values: Appendix~\ref{app:results}.}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}cccccc@{}}
 \toprule
-Models & Valid $\uparrow$ & Exact L1 $\uparrow$ & Unique L1 $\uparrow$ & Open-ended $\uparrow$ &
+Models & Valid $\uparrow$ & Verified L1 $\uparrow$ & Distinct L1 $\uparrow$ & Comp.-novel $\uparrow$ &
 Held-comp. $\uparrow$ & Diversity \\
 \midrule
 \input{../v1/generated/common_ugi_benchmark_completed_rows.tex}%
@@ -418,13 +475,13 @@ Held-comp. $\uparrow$ & Diversity \\
 \end{table}
 
 \paragraph{Recursive synthesis programs connect generated lipids to evidence-qualified materials.}
-Exact-L1 verification establishes the specified final assembly reaction but does not establish a
+Verified exact-L1 establishes the specified final assembly reaction but does not establish a
 complete synthesis route. Route assessment is method-blind, and a reaction sequence counts as a
 complete dossier only when the final assembly and every upstream step pass exact forward
 verification and every terminal material closes under the frozen evidence policy. The frozen union
 contained \ForgeCommonRouteUnionComponents{} distinct role--constitution components, of which the
 exact-source library closed \ForgeCommonRouteEvidenceCompleteComponents{}; FORGE therefore produced
-\ForgeCommonRouteForgeExactPerThousand{} exact-L1 products per 1,000 attempts but
+\ForgeCommonRouteForgeExactPerThousand{} verified exact-L1 products per 1,000 attempts but
 \ForgeCommonRouteForgeCompletePerThousand{} complete dossiers and
 \ForgeCommonRouteForgeAbstentionPerThousand{} abstentions under that library. In the bounded cascade
 over a frozen, route-blinded shortlist of \ForgeRouteCandidates{} distinct Ugi products, all
@@ -436,7 +493,7 @@ rather than molecular synthesizability. We record incomplete bounded route searc
 because they do not demonstrate unsynthesizability.
 
 \begin{table}[H]
-\caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
+\caption{\textbf{Deterministic examples of component-novel FORGE ionizable-lipid graphs.}
 Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
 constitution outside the method-visible training inventory. Left, the graph sampled jointly by
 FORGE; centre, precursor origins recovered by exact atom-mapped forward replay, halos marking the
@@ -455,6 +512,7 @@ rule and twelve further examples: Appendix~\ref{app:atlas}.}
 \newlength{\samplesemanticwidth}\setlength{\samplesemanticwidth}{5.87cm}
 \newlength{\sampleprecursorwidth}\setlength{\sampleprecursorwidth}{3.80cm}
 \setlength{\tabcolsep}{0pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{}}
 \toprule
 \atlashead{\sampleproductwidth}{Generated lipid}
@@ -466,6 +524,7 @@ rule and twelve further examples: Appendix~\ref{app:atlas}.}
 \addlinespace[0.6mm]
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \section{Discussion}
@@ -473,10 +532,12 @@ rule and twelve further examples: Appendix~\ref{app:atlas}.}
 We present FORGE, a generative framework that uses known assembly chemistry during whole-molecule
 generation while leaving precursor identities open. Across an AGILE-type Ugi three-component
 reaction, repeated aza-Michael addition and repeated reductive amination, reaction-program
-conditioning increased exact-L1 yield relative to matched whole-molecule generation followed by
-post-hoc filtering, and FORGE generated exact assemblies with precursor identities outside the
-corresponding training catalogues. Reaction information can therefore guide molecular generation
-without limiting the search to enumerated components.
+conditioning increased verified exact-L1 yield relative to matched whole-molecule generation followed by
+post-hoc filtering, and FORGE generated exact assemblies whose verifier-returned traces contained
+precursor identities absent from the corresponding training catalogues. Reaction information can
+therefore guide molecular generation without making a finite component inventory part of the
+generative state. Because direct catalogue-product reachability was not computed, this study does
+not claim strong product-level catalogue escape.
 
 The evidence is strongest for AGILE-type Ugi 3-CR; repeated aza-Michael addition is a second
 computational family and repeated reductive amination a lighter stress test, showing lower exact-L1
@@ -490,9 +551,9 @@ Appendix~\ref{app:results}: native recovery of specifically reserved held compon
 \ForgeHeldComponentPerThousand{} products per 1,000 attempts, no evaluated method reproduced the
 held-out observed-lipid distribution, joint denoising was not uniformly superior to role isolation
 across programs, and neither synthesis tilting nor the nested potency proposal improved its matched
-terminal endpoint. Experimental synthesis, LNP formulation and in vitro delivery studies will be
-required to determine whether the generated lipids retain the predicted assembly properties and
-produce functional RNA delivery. Within these limits, reaction programs provide a practical
+terminal endpoint. Prospective synthesis, formulation and biological validation are outside the
+scope of this computational paper; none of the reported metrics should be interpreted as such
+evidence. Within these limits, reaction programs provide a practical
 coordinate system for expanding molecular identity without disconnecting generative design from
 assembly chemistry.
 \bibliography{../v0/forge,../v1/references}
@@ -537,6 +598,24 @@ hydrophobic components sequentially to reactive amines in the headgroup
 \citep{li2023combinatorial}.
 Reductive amination sequentially couples aldehyde-bearing hydrophobic components to reactive amines
 in the headgroup through new carbon--nitrogen bonds \citep{xue2024barcoding}.
+Figure~\ref{fig:reaction-schemes} draws all three.
+
+% [tbp] rather than [H]: the schemes are too tall to sit inline, and forcing them here broke the
+% page early and left LaTeX stretching the section glue above to fill it.
+\begin{figure}[tbp]
+\centering
+\input{../v1/figures/forge_reaction_schemes/schemes_body.tex}
+\caption{\textbf{The three assembly chemistries.} Skeletal notation, with each bond carrying the
+colour of the component that contributes it: amine head in purple, aldehyde-derived atoms in teal,
+the isocyanide or acrylate tail in orange. Grey marks an atom the assembly template introduces and
+no precursor supplies, following the same convention as the core inset of
+Figure~\ref{fig:forge-overview}. Hydrogens are drawn only on the atoms whose substitution decides
+whether a product can be decomposed back into precursors: the head N--H, and the
+$\alpha$-carbon C--H that the Ugi reaction takes from the aldehyde. $R^i$ stand for the
+source-linked components of the frozen library, which are larger than the fragments drawn here.
+The Ugi variant has no carboxylic-acid reactant component.}
+\label{fig:reaction-schemes}
+\end{figure}
 
 \subsection{Reaction transforms and exact assembly}
 
@@ -550,64 +629,30 @@ lipid exactly.
 
 \subsection{Discrete molecular graph spaces}
 
-Let $\mathcal{A}$ denote a finite vocabulary of atom states and $\mathcal{B}$ a finite vocabulary of
-bond states.
-A molecular graph $G=(V,E)$ assigns an atom state $a_i\in\mathcal{A}$ to each node $i\in V$ and a
-bond state $b_{ij}\in\mathcal{B}$ to each edge $(i,j)\in E$.
-For a fixed maximum heavy-atom count $N_{\max}$, let $\mathcal{G}$ denote the resulting finite space
-of labeled molecular graphs.
+Let $\Sigma_{\rm atom}$ and $\Sigma_{\rm bond}$ be finite atom-state and bond-state vocabularies.
+A molecular graph is $G=(V,E,\ell_V,\ell_E)$, where the underlying graph is finite, connected,
+undirected and simple, $\ell_V:V\to\Sigma_{\rm atom}$, and
+$\ell_E:E\to\Sigma_{\rm bond}$. Bond order is part of $\ell_E$ rather than a parallel edge.
+Graphs are identified up to label-preserving isomorphism. The declared model support additionally
+bounds the heavy-atom count and cycle rank.
 
 \subsection{Discrete flow matching}
 
-Let $\mathcal{X}$ be a finite state space, $p_0$ a tractable source distribution, and $p_1$ the
-target data distribution.
-Discrete flow matching constructs a time-indexed probability path $(p_t)_{t\in[0,1]}$ between these
-distributions, such that $p_{t=0}=p_0$ and $p_{t=1}=p_1$ \citep{qin2025defog}.
-Given a target sample $x_1\sim p_1$, the linear conditional path is
+For one coordinate with alphabet $\mathcal X_i$, full-support source marginal $q_{0,i}$ and clean
+endpoint $a\in\mathcal X_i$, the linear conditional path is
 \begin{equation}
-    p_t(x_t\mid x_1)
-    = (1-t)p_0(x_t) + t\,\delta_{x_1}(x_t),
+    q_{t\mid1,i}(u\mid a)
+    = (1-t)q_{0,i}(u) + t\,\mathbf 1\{u=a\},
     \qquad t\in[0,1],
 \end{equation}
-where $\delta_{x_1}$ denotes a point mass at $x_1$.
-Marginalizing over $x_1$ gives
-\begin{equation}
-    p_t(x) = (1-t)p_0(x) + t p_1(x),
-\end{equation}
-so the states remain discrete while their probabilities evolve continuously in time.
-A continuous-time Markov chain realizes this probability path through transition rates
-$R_t(x,y)\geq 0$, where $R_t(x,y)$ is the instantaneous rate of moving from state $x$ to state $y$.
-The resulting distribution evolves according to
-\begin{equation}
-    \frac{\mathrm{d}}{\mathrm{d}t}p_t(x)
-    = \sum_{y\neq x}
-    \left[
-        p_t(y)R_t(y,x) - p_t(x)R_t(x,y)
-    \right],
-\end{equation}
-which balances the probability flowing into and out of each state.
-Given an intermediate state $x_t$, a neural network $p_\theta(x_1\mid x_t,t)$ predicts the target
-state $x_1$.
-We train this predictor by minimizing the denoising cross-entropy
-\begin{equation}
-    \mathcal{L}_{\mathrm{DFM}}(\theta)
-    = \mathbb{E}_{\substack{
-        t\sim\mathcal{U}(0,1),\;
-        x_1\sim p_1,\;
-        x_t\sim p_t(\cdot\mid x_1)
-    }}
-    \left[-\log p_\theta(x_1\mid x_t,t)\right].
-\end{equation}
-For each endpoint $x_1$, let $R_t(x,y\mid x_1)$ realize the conditional path above.
-We obtain the learned transition rate by averaging these conditional rates under the model prediction:
-\begin{equation}
-    R_t^\theta(x,y)
-    = \sum_{x_1\in\mathcal{X}}
-    p_\theta(x_1\mid x,t)\,
-    R_t(x,y\mid x_1).
-\end{equation}
-Sampling draws $x_0\sim p_0$ and evolves the state from $t=0$ to $t=1$ according to the learned
-transition rates $R_t^\theta$.
+with a univariate conditional rate $R^*_{t,i}(u,v\mid a)$ that realizes this path
+\citep{qin2025defog}. FORGE applies this construction independently to the variable coordinates
+conditional on the shared clean endpoint. Consequently the joint conditional path is a product of
+coordinate paths, not the mixture $(1-t)q_0+tq_1$. Its continuous-time generator permits one
+coordinate jump at an infinitesimal time. The denoiser predicts the clean posterior marginal of each
+coordinate, which is exactly the quantity needed to marginalize the corresponding local rate.
+Appendix~\ref{app:forge} defines the full path, learned generator and the capped
+independent-coordinate Euler approximation used in code.
 
 \clearpage
 
@@ -650,18 +695,20 @@ FORGE is organized into four stages:
 
 Given a reaction program $P$, FORGE must generate a complete molecular graph $G$ and either
 construct a complete synthesis program for $G$ or abstain.
-Let $\mathfrak{T}$ denote the space of recursive synthesis programs and $\bot$ an explicit abstention
-outcome.
+Let $\mathfrak D$ denote the dossier space and let $\mathfrak F_{\mathfrak B}$ be the finite set of
+typed failure outcomes under a frozen route contract $\mathfrak B_{\rm route}$.
 We write the design process as
 \begin{equation}
     G\sim p_\theta(\cdot\mid P),
     \qquad
-    T=\mathcal{A}(G,P)\in\mathfrak{T}\cup\{\bot\}.
+    Y=\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)
+    \in\mathfrak D\cup\mathfrak F_{\mathfrak B}.
 \end{equation}
-$\mathcal{A}$ denotes the bounded program constructor that verifies the final assembly, searches for
-preparation routes to unavailable precursors, and checks terminal supplier evidence.
-$P$ and $\mathcal{A}$ act at different stages: $P$ guides the generation of $G$, whereas
-$\mathcal{A}$ constructs $T$ from the completed graph without modifying it.
+$\mathsf{Assess}_{\mathfrak B}$ denotes the bounded program constructor, invoked after the verifier
+selects the sole admitted root trace $(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$, that verifies the final
+assembly, searches for preparation routes to unavailable precursors, and checks terminal supplier
+evidence. $P$ and the assessor act at different stages: $P$ guides generation, whereas the assessor
+constructs a dossier from the completed graph without modifying it.
 FORGE accepts $(G,T)$ only when $G$ passes molecular and exact-assembly verification and $T$ traces
 every required precursor to an available starting material; otherwise, it abstains.
 
@@ -672,20 +719,31 @@ A reaction program is a tuple
 \begin{equation}
     P=(c,d,\mathbf{r},\mathbf{k},M),
 \end{equation}
-where $c$ identifies the ordered assembly chemistry, $d$ is the program depth, $\mathbf{r}$ assigns
-precursor roles, $\mathbf{k}$ marks reaction-core positions, and $M$ specifies coarse per-role
-morphology.
+with an ordered layout index set $\mathcal I(P)=\{1,\ldots,n(P)\}$. Here $c$ identifies the
+ordered assembly chemistry, $d$ is the program depth,
+$\mathbf r=(r_i)_{i\in\mathcal I(P)}$ assigns precursor roles,
+$\mathbf k=(k_i)_{i\in\mathcal I(P)}$ marks reaction-core positions, and $M$ specifies coarse
+per-role morphology.
 For each precursor role $r$, $M$ records four integers: the number of exterior atoms $n_r$,
 junction budget $j_r$, cycle rank $\gamma_r$, and attachment count $a_r$.
 \end{definition}
-$M$ sets only coarse structural constraints; the model generates the exact topology, atoms, and
-bonds of each region.
-FORGE first samples $M$ from a training-fold morphology prior and then generates $G$ conditioned on
-the resulting reaction program:
+$M$ is defined relative to an exact atom-mapped trace $\tau$ and precursor tuple $\mathbf C$.
+An atom is exterior for role $r$ when $\tau$ assigns it to the corresponding precursor and does not
+mark it as reaction core. Template-introduced atoms belong to the core and to no precursor role.
+The role-induced subgraph contains the atoms assigned to $r$ and all product bonds with both
+endpoints in that set. Its junction count is
+$\sum_v\max\{\deg_r(v)-2,0\}$, its cycle rank is
+$|E_r|-|V_r|+\kappa_r$ for $\kappa_r$ connected components, and its core-attachment count is the
+number of product bonds between an exterior atom of $r$ and a core atom. We write
+$(G,\mathbf C,\tau)\models M(P)$ when these values match the sampled counts, with junction count at
+most its budget. Thus morphology is decomposition-relative rather than an unlabeled property of
+$G$.
+
+FORGE first samples an admissible complete program $P$ from the training-fold program prior and then
+generates $G$ conditioned on it:
 \begin{equation}
-    p_\theta(G,M\mid c)
-    = p_{\mathrm{prog}}(M\mid c)\,
-    p_\theta(G\mid M,c).
+    p_\theta(G,P\mid c)
+    = p_{\mathrm{prog}}(P\mid c)\,p_\theta(G\mid P).
 \end{equation}
 The prior sets each region's atom count, branching budget, cycle rank, and number of core
 attachments, but not its molecular structure.
@@ -697,10 +755,13 @@ depth, precursor role, and reaction-core position:
     h_i^P
     = \operatorname{LN}\!\left(
         e_c(c) + e_d(d) + e_r(r_i) + e_k(k_i)
+        + \sum_{u=1}^{4}e_{M,u}(M_{r_i,u})
     \right).
 \end{equation}
-These coordinates tell the generator which precursor role each position plays and whether it lies in
-the reaction core, but not which molecular structure should occupy that role.
+The morphology fields also determine active positions and fixed/variable masks in the sampling
+layout. These coordinates tell the generator which precursor role each position plays, whether it
+lies in the reaction core, and the role-local count constraints, but not which molecular structure
+should occupy that role.
 
 \subsection{Program-defined molecular space}
 
@@ -708,8 +769,12 @@ Reaction programs constrain how a lipid is assembled without specifying the mole
 that occupy its precursor roles.
 Let $\mathcal{G}_{\mathrm{bounded}}\subseteq\mathcal{G}$ denote the molecular graphs within the
 declared atom and bond vocabularies, the 194-heavy-atom limit, and the three-closure limit.
-We write $G\models M(P)$ when its per-role atom counts, cycle ranks, and core-attachment counts match
-$M$, and its junction counts do not exceed the corresponding budgets.
+For chemistry $c$, let $\mathcal D_c(G)$ be the candidate exact-decomposition search space and define
+\begin{equation}
+    \mathcal D_P(G)
+    =\left\{(\mathbf C,\tau)\in\mathcal D_c(G):
+    (G,\mathbf C,\tau)\models P\right\}.
+\end{equation}
 The valid, exact-L1 molecular space associated with $P$ is
 \begin{equation}
     \mathcal{G}_{\mathrm{L1}}(P)
@@ -717,30 +782,29 @@ The valid, exact-L1 molecular space associated with $P$ is
     \left\{
         G\in\mathcal{G}_{\mathrm{bounded}}:
         \mathrm{Valid}(G)=1,\;
-        G\models M(P),\;
-        \mathrm{L1}(G,P)=1
+        \widehat{\mathrm{L1}}(G,P)=1
     \right\}.
 \end{equation}
 A generated lipid can pass the exact L1 check even when one or more recovered precursors never
 appeared in the training component set, provided the specified reaction reconstructs the lipid from
 them.
-For a reaction program $P$, let $\mathfrak{T}_P$ denote its admissible program inputs, including
+For a reaction program $P$, let $\mathfrak C_P$ denote its admissible precursor-program inputs, including
 precursor identities, role assignments, and program depth.
 The registered forward operator maps each input to a finite set of canonical products:
 \begin{equation}
     \mathcal{F}_P:
-    \mathfrak{T}_P
+    \mathfrak C_P
     \longrightarrow
-    2^{\mathfrak{G}_{N,K}}.
+    2^{\mathfrak{G}_{N,K_{\rm cl}}}.
 \end{equation}
 Given role-specific catalogues $\mathcal C$, let
-$\mathfrak{T}_P(\mathcal C)\subseteq\mathfrak{T}_P$ contain the admissible program inputs whose
+$\mathfrak C_P(\mathcal C)\subseteq\mathfrak C_P$ contain the admissible program inputs whose
 components all belong to their corresponding catalogues.
 The catalogue-reachable product set is
 \begin{equation}
     \mathcal{G}_{\mathrm{cat}}(P,\mathcal C)
     =
-    \bigcup_{\mathbf C\in\mathfrak{T}_P(\mathcal C)}
+    \bigcup_{\mathbf C\in\mathfrak C_P(\mathcal C)}
     \mathcal{F}_P(\mathbf C).
 \end{equation}
 For any graph $G$, define its complete program-relative preimage as
@@ -748,7 +812,7 @@ For any graph $G$, define its complete program-relative preimage as
     \mathcal{E}^{\star}_P(G)
     =
     \left\{
-        \mathbf C\in\mathfrak{T}_P:
+        \mathbf C\in\mathfrak C_P:
         G\in\mathcal{F}_P(\mathbf C)
     \right\}.
 \end{equation}
@@ -761,17 +825,27 @@ For any graph $G$, define its complete program-relative preimage as
     \mathbf{1}\!\left[
         \mathcal E_P^\star(G)\neq\varnothing
         \;\land\;
-        \mathcal E_P^\star(G)\cap\mathfrak T_P(\mathcal C)=\varnothing
+        \mathcal E_P^\star(G)\cap\mathfrak C_P(\mathcal C)=\varnothing
     \right].
 \end{equation}
 \end{definition}
-Theorem~\ref{thm:catalogue-bound} bounds the catalogue-reachable product set while establishing a
-zero component-novelty ceiling for the catalogue assembler.
-Strong catalogue escape additionally requires that no admissible all-catalogue input produces $G$.
+Proposition~\ref{prop:catalogue-bound} bounds the catalogue-reachable product set.
+For a verified exact-L1 graph, direct membership in the canonical product-hash set gives the
+operational strong-escape test
+\begin{equation}
+    \mathrm{StrongEscape}(G;P,\mathcal C)
+    =\mathbf 1\!\left[
+       \widehat{\mathrm{L1}}(G,P)=1\ \land\
+       G\notin\mathcal G_{\rm cat}(P,\mathcal C)
+    \right].
+\end{equation}
 The verifier-returned set $\widehat{\mathcal E}_P(G)$ defined below is a subset of
 $\mathcal E_P^\star(G)$ when every returned trace passes exact forward replay.
 A novel component in a returned trace establishes strong catalogue escape only when reverse
 enumeration is exhaustive or direct catalogue reachability is checked independently.
+The present experiments did not precompute a complete common-reference product-hash set, so they
+report verifier-recovered component novelty as a secondary diagnostic and do not report
+$\mathrm{StrongEscape}$ for FORGE.
 FORGE instead parameterizes $p_\theta(G\mid P)$ over whole graphs in
 $\mathcal{G}_{\mathrm{bounded}}$, without including any component catalogue $\mathcal{C}_r$ in the
 generative state.
@@ -784,9 +858,18 @@ FORGE realizes this whole-graph distribution with a discrete flow over atom, bon
 states.
 To preserve the full 194-atom support without an $O(N_{\max}^2)$ edge state, FORGE encodes each
 graph as a spanning tree plus at most three residual closure edges.
-Let
+Let $\alpha=(\mathbf C,\tau,\mathbf r,\mathbf k)$ contain the selected exact precursor tuple,
+atom-mapped reaction trace, precursor-role assignment and reaction-core annotation. The deterministic
+program-aware encoder
 \begin{equation}
-    X_G=
+    \operatorname{Enc}_P:
+    \{(G,\alpha):G\in\mathfrak G_{N_{\max},K_{\rm cl}}
+      \text{ and }\alpha\text{ is admitted for }P\}
+    \longrightarrow \mathfrak X_{N_{\max},K_{\rm cl}}
+\end{equation}
+constructs the categorical graph state
+\begin{equation}
+    X_G:=\operatorname{Enc}_P(G,\alpha)=
     \left(
         \mathbf{a},
         \boldsymbol{\pi},
@@ -796,26 +879,68 @@ Let
         \mathbf{z}
     \right)
 \end{equation}
-denote the categorical graph state, where $\mathbf{a}$ contains atom states, $\boldsymbol{\pi}$
+where $\mathbf{a}$ contains atom states, $\boldsymbol{\pi}$
 parent pointers, $\mathbf{b}$ spanning-tree bond states, $\mathbf{e}^{L}$ and $\mathbf{e}^{R}$
 closure-endpoint pointers, and $\mathbf{z}$ closure-bond states.
-The sparse decoder is surjective onto the declared graph space
-$\mathfrak{G}_{N_{\max},K}$: every graph in this space has at least one exact tree-closure encoding
-(Theorem~\ref{thm:bounded-representation}).
-For this study, $N_{\max}=194$ and $K=3$.
+
+The encoder first partitions the atoms into connected precursor-origin components under $\alpha$.
+It chooses as root the reaction-core atom with the smallest tied-broken canonical RDKit rank, and
+orders the origin-component graph by breadth-first traversal from that root component, breaking
+ties by role index, component canonical ranks and original atom index. Within each component it uses
+a deterministic depth-first preorder from the selected attachment atom, with neighbors ordered by
+the same canonical ranks. The traversed bonds define the spanning tree. Every residual bond is
+represented once as an ordered endpoint pair with its bond label, and residual triples are sorted
+lexicographically. Role, core, fixed-coordinate and morphology arrays are permuted by precisely the
+same atom order. Training records with more than one qualified exact source trace are not resolved
+arbitrarily: they abstain from semantic training; duplicate descriptions of the same admitted trace
+collapse to its canonical record. Thus
+$\operatorname{Dec}(\operatorname{Enc}_P(G,\alpha))\cong G$ for every admitted record.
+
+The raw padded categorical product space $\overline{\mathfrak X}_{N_{\max},K_{\rm cl}}$ also
+contains malformed states. Its well-formed subset $\mathfrak X_{N_{\max},K_{\rm cl}}$ enforces an
+active node prefix, earlier-parent pointers, distinct valid closure endpoints, no duplicate edges,
+and null values in unused closure slots. The partial decoder is therefore typed as
+\begin{equation}
+    \operatorname{Dec}:\overline{\mathfrak X}_{N_{\max},K_{\rm cl}}
+    \longrightarrow
+    \mathfrak G_{N_{\max},K_{\rm cl}}\cup\{\bot_{\rm dec}\}.
+\end{equation}
+For this study, $N_{\max}=194$ and $K_{\rm cl}=3$.
 This is a statement about architectural support.
 It does not imply reaction consistency, nonzero probability under a trained model, or
 synthesis-program completeness.
 
+If $q_\theta(x\mid P)$ is the terminal raw-state law, the generated graph distribution is its
+decoder pushforward,
+\begin{equation}
+    p_\theta([G]_{\cong}\mid P)
+    =\sum_{x:\operatorname{Dec}(x)\cong G}q_\theta(x\mid P),
+    \qquad
+    p_\theta(\bot_{\rm dec}\mid P)
+    =\sum_{x:\operatorname{Dec}(x)=\bot_{\rm dec}}q_\theta(x\mid P).
+\end{equation}
+
 The chemistry adapter marks any atom, pointer, or bond states fixed by $P$.
 FORGE holds these states constant while corrupting the remaining states along the linear probability
-path and predicting their clean values from $(X_t,t,P)$.
-Let $\mathcal{Q}=\{\mathbf{a},\boldsymbol{\pi},\mathbf{b},\mathbf{e}^{L},\mathbf{e}^{R},\mathbf{z}\}$
+path and predicting their clean values from $(X_t,t,P)$. Let $\Omega_P$ be the face of the raw state
+space satisfying those fixed coordinates, and define the admissible program set
+\begin{equation}
+    \mathcal P_{\rm adm}
+    =\left\{P:\mathfrak X_{N_{\max},K_{\rm cl}}\cap\Omega_P\neq\varnothing\right\}.
+\end{equation}
+The morphology prior is normalized only on $\mathcal P_{\rm adm}$. Each chemistry adapter is required
+to satisfy the program-compatible encoding property: every admitted annotated record obeys
+$\operatorname{Enc}_P(G,\alpha)\in\Omega_P$. Corpus construction checks this invariant together
+with exact constitutional decode round trip and fails closed before a record enters any split. This
+is an exhaustive implementation invariant over the cached training, calibration and held-out
+records, not a theorem for unregistered chemistries.
+
+Let $\mathscr J=\{\mathbf{a},\boldsymbol{\pi},\mathbf{b},\mathbf{e}^{L},\mathbf{e}^{R},\mathbf{z}\}$
 denote the six state families optimized during training.
 Let $\mu_{\mathrm{bal}}$ denote the frozen training distribution over graph-program pairs, which
 assigns equal total mass to each reaction program and preserves the source-balanced weights within
 each program.
-For each $q\in\mathcal{Q}$, let $m_j^{(q)}(P)\in\{0,1\}$ indicate whether coordinate $j$ remains
+For each $q\in\mathscr J$, let $m_j^{(q)}(P)\in\{0,1\}$ indicate whether coordinate $j$ remains
 variable under $P$.
 FORGE minimizes a program-balanced denoising objective over the variable coordinates:
 \begin{equation}
@@ -829,7 +954,7 @@ FORGE minimizes a program-balanced denoising objective over the variable coordin
     \Bigg[
     \\
     & \quad
-        \sum_{q\in\mathcal{Q}}
+        \sum_{q\in\mathscr J}
         \lambda_q
         \frac{
             \sum_j m_j^{(q)}(P)
@@ -842,11 +967,14 @@ FORGE minimizes a program-balanced denoising objective over the variable coordin
 \end{equation}
 Here, $\lambda_q$ weights state family $q$, and a family with no variable coordinates contributes
 zero loss.
-The corruption and sampling operators project every intermediate state onto the program-fixed
-coordinates.
-This makes those coordinates invariant by construction, while the masked denoising objective learns
-the conditional clean-state distributions of the remaining coordinates in the population limit
-(Proposition~\ref{prop:fixed-invariance} and Theorem~\ref{thm:masked-consistency}).
+The corruption and sampling operators assign zero rates to program-fixed coordinates and project
+each finite-step state back onto them as an implementation safeguard. This is the precise syntactic
+sense in which the program constrains a state trajectory: fixed coordinates cannot be resampled.
+Chemical consistency with the requested assembly is established separately by exact forward replay.
+Under an unrestricted coordinatewise model class, every population minimizer of the primary masked
+denoising term recovers the corresponding clean-coordinate posterior marginals. This result does
+not characterize the optimizer of the auxiliary-loss or PCGrad procedure
+(Propositions~\ref{prop:fixed-invariance} and~\ref{prop:masked-bayes}).
 
 The denoiser is a graph Transformer over the complete sparse state. Each layer applies graph
 self-attention with relation biases for parent, child and closure edges, then cross-attends to memory
@@ -855,22 +983,40 @@ Cross-attention is repeated in every layer so that reaction semantics can influe
 updates and long-range coordination among precursor-derived regions. Three softly program-routed
 residual adapters provide family-specific capacity while retaining a shared whole-graph backbone.
 
-The complete training loss augments the flow objective with precursor-role and reaction-core
-consistency terms:
+For each reaction family $f$, we compute a task loss
 \begin{equation}
-    \mathcal L_{\mathrm{total}}
-    = \mathcal L_{\mathrm{FORGE}}
+    \mathcal L_f
+    = \mathcal L_{\mathrm{FORGE},f}
     + \lambda_{\mathrm{role}}\mathcal L_{\mathrm{role}}
     + \lambda_{\mathrm{core}}\mathcal L_{\mathrm{core}}.
 \end{equation}
 Present semantic states receive equal mass within each auxiliary term. Training gives every reaction
-family equal total loss mass and uses deterministic projected conflicting gradient updates (PCGrad)
-to remove pairwise gradient conflicts without amplifying a nearly converged family's gradient.
+family equal total loss mass. The gradients of the family task losses, not the individual loss
+heads, are combined by deterministic PCGrad. Families are ordered by their integer program state.
+Writing $g_f=\nabla_\theta\mathcal L_f$, the algorithm initializes
+$\widetilde g_f\leftarrow g_f$ and, for every other family $h$ in that fixed order, applies
+\begin{equation}
+    \widetilde g_f\leftarrow
+    \widetilde g_f-
+    \mathbf 1\{\langle\widetilde g_f,g_h\rangle<0\}
+    \frac{\langle\widetilde g_f,g_h\rangle}{\max(\lVert g_h\rVert_2^2,10^{-12})}
+    g_h
+\end{equation}
+on parameter coordinates available to both tasks. Zero gradients remain zero; gradients are not
+norm-normalized; and the optimizer receives the arithmetic mean of the projected family gradients.
+This is an algorithmic definition of the update and is not the gradient of the displayed scalar
+sum in general.
 Table~\ref{tab:architecture-ablations} prespecifies separate interventions for layerwise
 cross-attention, each auxiliary loss, routed adapters and gradient conflict control.
 
-At inference, FORGE samples $X_0$ from the source distribution, holds the program-fixed coordinates
-constant, and simulates $R_t^\theta(\cdot\mid P)$ from $t=0$ to $t=1$.
+At inference, FORGE samples $X_0$ from the factorized program-compatible source, assigns zero update
+rates to fixed coordinates, and applies $L_{\rm samp}$ capped independent-coordinate Euler steps.
+At each step the implementation samples one clean category per coordinate from the denoiser, forms
+the minimum $R^*$ rate for that sampled endpoint, multiplies it by
+$\Delta t=1/L_{\rm samp}$, and rescales the total off-diagonal mass to at most $0.999$ before drawing
+the next coordinate value. This is a finite-step Monte Carlo approximation to the local CTMC, not
+exact CTMC simulation. Appendix~\ref{app:theory} states the ideal marginalized rate and the numerical
+kernel.
 FORGE decodes the terminal state $X_1$ into a molecular graph $G$ and retains it only if it is
 connected, valence-valid, and passes molecular sanitization.
 
@@ -879,28 +1025,34 @@ connected, valence-valid, and passes molecular sanitization.
 To ensure that each retained graph satisfies the specified reaction program, FORGE decomposes it
 into role-assigned precursors and applies the corresponding forward transform.
 
-\begin{definition}[Exact L1 consistency]
-For chemistry $c$, the reverse transform $\mathcal{D}_c$ maps $G$ to a set of role-assigned precursor
-tuples.
-Let $\mathcal{D}_P(G)\subseteq\mathcal{D}_c(G)$ contain only those precursor tuples whose role
-assignments, reaction-core atoms, and morphology satisfy $P$.
-The verifier-returned exact set is
+\begin{definition}[Mathematical and verifier-relative L1]
+For chemistry $c$, the reverse search $\mathcal D_c$ maps $G$ to candidate role-assigned precursor
+tuples and atom-mapped traces. The complete mathematical preimage $\mathcal E_P^\star(G)$ contains
+every admissible input whose registered forward operator can produce $G$. Define
+\begin{equation}
+    \mathrm{L1}^\star(G,P)
+    =\mathbf 1\!\left[\mathcal E_P^\star(G)\neq\varnothing\right].
+\end{equation}
+The bounded implementation searches $\mathcal D_P(G)\subseteq\mathcal D_c(G)$ and returns
 \begin{equation}
     \widehat{\mathcal E}_P(G)
     =
     \left\{
-        \mathbf C\in\mathcal D_P(G):
-        G\in\mathcal F_P(\mathbf C)
+        (\mathbf C,\tau)\in\mathcal D_P(G):
+        \exists H\in\mathcal F_P(\mathbf C)\text{ such that }H\cong G
     \right\}.
 \end{equation}
-A graph $G$ satisfies exact L1 consistency under $P$ when this set is nonempty:
+Its verified predicate is
 \begin{equation}
-    \mathrm{L1}(G,P)
+    \widehat{\mathrm{L1}}(G,P)
     = \mathbf{1}\!\left[
         \widehat{\mathcal E}_P(G)\neq\varnothing
     \right].
 \end{equation}
 \end{definition}
+Every returned trace passes exact replay, hence
+$\widehat{\mathrm{L1}}(G,P)\leq\mathrm{L1}^\star(G,P)$. Reverse-search completeness has not been
+proved, so the reported metric is called \emph{verified exact-L1 yield}.
 Post-hoc filtering changes which completed samples are retained but cannot change the proposal
 distribution's exact-L1 acceptance probability.
 Under independent sampling, this probability determines the complete distribution of accepted
@@ -908,11 +1060,23 @@ counts under a fixed attempt budget and the expected cost of obtaining a fixed n
 products (Proposition~\ref{prop:posthoc-budget}).
 FORGE reports decomposition coverage separately from forward-replay precision because identifying a
 candidate disconnection does not guarantee exact reconstruction of $G$.
-Decomposition coverage is the fraction of valid graphs for which
-$\mathcal{D}_c(G)\neq\varnothing$; forward-replay precision is the fraction of returned precursor
-tuples for which $\mathcal{F}_c(\mathbf{C})\cong G$.
-FORGE rejects $G$ when $\mathcal{D}_c(G)=\varnothing$ and marks it as ambiguous when
-$\lvert\mathcal{D}_c(G)\rvert>1$.
+Candidate decomposition coverage is the fraction of valid graphs for which
+$\mathcal D_c(G)\neq\varnothing$. Candidate replay precision is
+\begin{equation}
+ \mathrm{ReplayPrecision}
+ =\frac{\sum_G\sum_{(\mathbf C,\tau)\in\mathcal D_P(G)}
+ \mathbf 1\{\exists H\in\mathcal F_P(\mathbf C):H\cong G\}}
+ {\sum_G|\mathcal D_P(G)|},
+\end{equation}
+with N/E when the denominator is zero. Replay of tuples already in
+$\widehat{\mathcal E}_P(G)$ is a $100\%$ verifier invariant rather than an empirical precision
+result. We separately define
+\begin{equation}
+ \mathrm{CandidateAmbig}(G,c)=\mathbf 1\{|\mathcal D_c(G)|>1\},\qquad
+ \mathrm{ExactAmbig}(G,P)=\mathbf 1\{|\widehat{\mathcal E}_P(G)|>1\}.
+\end{equation}
+A distinct exact-L1 product is a deduplicated generated constitution; an unambiguous exact
+decomposition instead has $|\widehat{\mathcal E}_P(G)|=1$. We do not use ``unique L1'' for both.
 
 \subsection{Recursive synthesis-program construction}
 
@@ -932,24 +1096,38 @@ For each proposal, FORGE records the reaction, reactants, product, and supportin
 accepts the step only when the forward transform reconstructs the target precursor exactly.
 Each accepted reaction adds its reactants as new molecule nodes, and FORGE applies the same
 termination-or-expansion rule recursively.
-For each L2 reaction node $r$, let $\mathrm{Verify}(r)=1$ when its forward transform reconstructs its
-product exactly.
-For each leaf molecule $\ell$, let $\mathrm{Available}(\ell)=1$ when it satisfies the terminal
+The current assessor admits only an unambiguous verified exact-L1 root. Every dossier therefore
+records the sole selected root trace
+$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$; an ambiguous exact set produces a typed
+abstention. For each upstream reaction node $r$, let
+$\mathrm{Admitted}_{\mathfrak B}(r)=1$ when its reaction and substrate scope satisfy the frozen
+evidence policy, and let $\mathrm{Verify}_{\mathfrak B}(r)=1$ when
+$\operatorname{target}(r)\in\mathcal F_r(\operatorname{reactants}(r))$.
+For each leaf molecule $\ell$, let $\mathrm{Available}_{\mathfrak B}(\ell)=1$ when it satisfies the terminal
 supplier-evidence rule.
-Let $V_R^{\mathrm{L2}}(T)$ denote the L2 reaction nodes and $L(T)$ the leaf molecules in $T$.
+Let $V_R^{\mathrm{up}}(T)$ denote the upstream preparation-reaction nodes and $L(T)$ the leaf
+molecules. $\mathrm{WellFormed}(G,T,P)$ requires that $T$ is a connected, acyclic bipartite tree
+rooted at $G$; each internal molecule has exactly one recorded producing reaction; each reaction's
+incoming molecule children equal its recorded reactants; and $T$ has no disconnected, cyclic or
+extraneous node. Its distinguished final-assembly record must have product $G$ and precursor
+children exactly $\mathbf C_T$ under trace $\tau_T$.
 \begin{equation}
-    \mathrm{Complete}(G,T,P)
-    =
-    \mathrm{L1}(G,P)
-    \prod_{r\in V_R^{\mathrm{L2}}(T)}\mathrm{Verify}(r)
-    \prod_{\ell\in L(T)}\mathrm{Available}(\ell).
+\begin{aligned}
+    \mathrm{Complete}_{\mathfrak B}(G,T,P)
+    ={}&\mathrm{WellFormed}(G,T,P)
+    \mathbf 1\!\left[(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)\right]\\
+    &\times\prod_{r\in V_R^{\mathrm{up}}(T)}
+    \mathrm{Admitted}_{\mathfrak B}(r)\mathrm{Verify}_{\mathfrak B}(r)
+    \prod_{\ell\in L(T)}\mathrm{Available}_{\mathfrak B}(\ell).
+\end{aligned}
 \end{equation}
-Let $\mathcal{B}$ fix the route-depth and query budgets, registered transforms, evidence-admission
-policy, and dated supplier snapshot used by the assessor $\mathcal{A}_{\mathcal{B}}$.
+Empty products equal one. Let $\mathfrak B_{\rm route}$ fix the route-depth and query budgets,
+registered transforms, evidence-admission policy, and dated supplier snapshot used by
+$\mathsf{Assess}_{\mathfrak B}$.
 Under finite search bounds and terminating evidence queries, the assessor terminates and returns a
-dossier only when $\mathrm{Complete}(G,T,P)=1$
-(Lemma~\ref{lem:planner-termination} and Theorem~\ref{thm:dossier-soundness}).
-An abstention means that FORGE did not complete a dossier under $\mathcal{B}$; it does not imply that
+dossier only when $\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$
+(Lemma~\ref{lem:planner-termination} and Invariant~\ref{inv:dossier-soundness}).
+An abstention means that FORGE did not complete a dossier under $\mathfrak B_{\rm route}$; it does not imply that
 no synthesis route exists outside the frozen search space or evidence snapshot.
 The guarantee is computational and does not establish experimental synthesis success.
 
@@ -960,36 +1138,45 @@ attempt in a typed ledger.
 \caption{FORGE generation and fail-closed synthesis-program construction.}
 \label{alg:forge-inference}
 \begin{algorithmic}[1]
-\Require trained rates $R_t^\theta$, reaction program $P$, transition count $K$, attempt budget $B$,
-recorded seed $s$, and frozen route contract $\mathcal{B}$
-\Ensure accepted computational dossiers $\mathcal{S}$ and typed failure ledger $\mathcal{H}$
-\State initialize the random-number streams from $s$; $\mathcal{S}\gets\varnothing$;
-$\mathcal{H}\gets\varnothing$
+\Require trained coordinate predictors, reaction program $P$, Euler-step count $L_{\rm samp}$,
+attempt budget $B$, recorded seed $s$, and frozen route contract $\mathfrak B_{\rm route}$
+\Ensure attempt-indexed dossier sequence $\mathcal D_{\rm out}$, exact-L1 ledger $\mathcal L_{\rm out}$,
+and typed failure ledger $\mathcal H$
+\State initialize the random-number streams from $s$;
+$\mathcal D_{\rm out}\gets[\,]$; $\mathcal L_{\rm out}\gets[\,]$; $\mathcal H\gets[\,]$
 \For{$b=1,\ldots,B$}
-    \State sample $X_0\sim p_0(\cdot\mid P)$ and set $X\gets\Pi_P(X_0)$
-    \For{$k=0,\ldots,K-1$}
-        \State $t_k\gets k/K$
-        \State $X\gets\Pi_P\!\left(\Call{JumpStep}{X,R_{t_k}^\theta(\cdot\mid X,P)}\right)$
+    \State sample $X_0\sim q_0^P$ and set $X\gets\Pi_P(X_0)$
+    \For{$k=0,\ldots,L_{\rm samp}-1$}
+        \State $t_k\gets k/L_{\rm samp}$; $\Delta t_k\gets1/L_{\rm samp}$
+        \State $X\gets\Pi_P\!\left(\Call{CappedCoordinateEuler}{X,t_k,\Delta t_k,P}\right)$
     \EndFor
     \State $G\gets\Call{Decode}{X}$
-    \If{$G$ is disconnected, valence-invalid, or fails molecular sanitization}
-        \State $\mathcal{H}\gets\mathcal{H}\cup\{(b,\textsc{InvalidGraph})\}$
+    \If{$G=\bot_{\rm dec}$, is valence-invalid, or fails molecular sanitization}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{InvalidGraph})]$
         \State \textbf{continue}
     \EndIf
     \State $\widehat{\mathcal{E}}_P(G)\gets
-    \{\mathbf{C}\in\mathcal{D}_P(G):G\in\mathcal{F}_P(\mathbf{C})\}$
+    \{(\mathbf C,\tau)\in\mathcal D_P(G):\exists H\in\mathcal F_P(\mathbf C),\ H\cong G\}$
     \If{$\widehat{\mathcal{E}}_P(G)=\varnothing$}
-        \State $\mathcal{H}\gets\mathcal{H}\cup\{(b,\textsc{L1Failure})\}$
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{L1Failure})]$
         \State \textbf{continue}
     \EndIf
-    \State $Y\gets\mathcal{A}_{\mathcal{B}}(G,P)$ \Comment{recursively assess the exact L1 precursors}
-    \If{$Y$ is a tree $T$ and $\mathrm{Complete}(G,T,P)=1$}
-        \State $\mathcal{S}\gets\mathcal{S}\cup\{\Call{Dossier}{G,P,T}\}$
+    \State $\mathcal L_{\rm out}\gets\mathcal L_{\rm out}\mathbin{\|}
+    [(b,G,\widehat{\mathcal E}_P(G))]$
+    \If{$|\widehat{\mathcal E}_P(G)|\neq1$}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{AmbiguousL1})]$
+        \State \textbf{continue}
+    \EndIf
+    \State select the sole $(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$
+    \State $Y\gets\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)$
+    \If{$Y$ is a tree $T$ and $\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$}
+        \State $\mathcal D_{\rm out}\gets\mathcal D_{\rm out}\mathbin{\|}
+        [(b,\Call{Dossier}{G,P,\mathbf C_T,\tau_T,T})]$
     \Else
-        \State $\mathcal{H}\gets\mathcal{H}\cup\{(b,Y)\}$ \Comment{preserve the typed outcome}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,Y)]$ \Comment{preserve the typed outcome}
     \EndIf
 \EndFor
-\State \Return $\mathcal{S},\mathcal{H}$
+\State \Return $\mathcal D_{\rm out},\mathcal L_{\rm out},\mathcal H$
 \end{algorithmic}
 \end{algorithm}
 
@@ -1020,29 +1207,35 @@ Our evaluation spans the three assembly programs defined above, with Ugi as the 
 case, repeated aza-Michael addition as a second family, and repeated reductive amination as a lighter
 stress test.
 The evaluation tests four capabilities: learning multiple assembly programs within one model, using
-reaction semantics during generation rather than after it, producing exact assemblies beyond a
-finite component catalogue, and tracing generated precursors to available starting materials.
+reaction semantics during generation rather than after it, recovering verified decompositions with
+components absent from the training catalogue, and tracing generated precursors to available
+starting materials.
 We compare four matched training arms: Ugi-only conditioning, shared conditioning across all three
 programs, shared training without program information, and shared training with cyclically incorrect
 program labels.
 All arms use the same architecture and optimization budget, and we evaluate the prespecified final
 checkpoint from each of three independent seeds.
 Each matched comparison uses the same number of generation attempts per program.
-Our primary metric is exact-L1 yield per generation attempt: the number of generated graphs that
+Our primary metric is verified exact-L1 yield per generation attempt: the number of generated graphs that
 pass molecular validity, program-aware decomposition, and exact forward replay divided by the total
 number of sampling attempts.
-Secondary metrics separate graph quality (validity and connectedness), reaction recovery (coverage,
-precision, abstention, and ambiguity), and exploration (unique-product fraction, whole-product and
+Secondary metrics separate graph quality (validity and connectedness), reaction recovery (verified
+coverage, the replay invariant, abstention, and exact ambiguity), and exploration (distinct-product fraction, whole-product and
 component novelty, molecular diversity, and effective component count).
-We report means across seeds, individual seed values, and 95\% paired-seed bootstrap intervals;
-generated molecules are not treated as independent replicates.
+We report exact counts, means across seeds, sample standard deviations, individual seed values, and
+the minimum and maximum of the three paired seed contrasts. These are descriptive across-seed
+summaries, not confidence intervals. Generated molecules are not treated as independent training
+replicates. Conditional binomial variation across a fixed model's 3,072 attempts is distinct from
+variation induced by retraining.
 Training uses only the component-disjoint training folds.
 Calibration data are diagnostic, and held-out products neither enter training nor select
 checkpoints.
 The three shared arms assign equal total sampling mass to each program while preserving the frozen
 within-program source weights.
-We assess whether shared training preserves Ugi behavior using prespecified non-inferiority margins
-and require zero program-fixed-state violations and zero support overflows.
+The frozen implementation evaluated numerical promotion gates, but three seeds do not support a
+population-level non-inferiority claim. We therefore report only whether the observed runs met each
+numeric rule. Zero program-fixed-coordinate violations are an implementation check required by
+Proposition~\ref{prop:fixed-invariance}, not learned behavior.
 
 Two additional comparisons isolate the role of reaction semantics.
 First, we compare conditioned generation with null generation followed by exact post-hoc reaction
@@ -1078,37 +1271,133 @@ generators, and targeted interventions on the Transformer. Table~\ref{tab:archit
 reports the completed three-seed Transformer mechanism and component-factorization study. Each
 intervention uses the same folds, generation budget and evaluation code as the full Transformer.
 
+\subsection{Metric, identity and uncertainty definitions}
+
+Let $Y_{s,a,b}^{\rm L1}\in\{0,1\}$ indicate verified exact L1 for training seed $s$, arm $a$ and
+attempt $b$, and let $B=3{,}072$. We report the exact count
+$C_{s,a}^{\rm L1}=\sum_{b=1}^B Y_{s,a,b}^{\rm L1}$ and
+\begin{equation}
+ \widehat p_{s,a}^{\rm L1}=C_{s,a}^{\rm L1}/B.
+\end{equation}
+Validity and connected yield replace $Y^{\rm L1}$ with their attempt-level indicators. Verified
+decomposition coverage is the number of valid graphs with
+$\widehat{\mathcal E}_P(G)\neq\varnothing$ divided by valid graphs; the implementation does not
+report candidate-search coverage before replay. Exact ambiguity is the fraction of valid graphs with
+$|\widehat{\mathcal E}_P(G)|>1$. Replay of members of $\widehat{\mathcal E}_P(G)$ is an invariant,
+while candidate replay precision is defined in Appendix~\ref{app:forge} and is N/E if no candidate
+tuple is returned.
+Explicitly, with attempt outcomes $G_{s,a,b}$ and the convention that a failed decode makes every
+graph predicate zero,
+\begin{align}
+ \widehat p^{\rm valid}_{s,a}
+ &=B^{-1}\sum_b\mathbf 1\{\mathrm{Valid}(G_{s,a,b})=1\},\\
+ \widehat p^{\rm conn}_{s,a}
+ &=B^{-1}\sum_b\mathbf 1\{\mathrm{Valid}(G_{s,a,b})=1,
+                              \mathrm{Connected}(G_{s,a,b})=1\},\\
+ \mathrm{CandidateCoverage}
+ &=\frac{\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1,
+                              \mathcal D_c(G_b)\neq\varnothing\}}
+         {\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1\}},\\
+ \mathrm{ExactAmbiguity}
+ &=\frac{\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1,
+                              |\widehat{\mathcal E}_P(G_b)|>1\}}
+         {\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1\}}.
+\end{align}
+Each ratio is N/E when its denominator is zero.
+
+Distinct-product yield is the number of distinct canonical product constitutions satisfying verified
+exact L1 divided by $B$. The reported verifier-recovered component-novel yield additionally requires
+$|\widehat{\mathcal E}_P(G)|=1$ and at least one returned role-assigned precursor constitution absent
+from the fixed training catalogue. It is not $\mathrm{StrongEscape}$. Held-component recovery counts
+verified exact-L1 attempts whose returned tuple contains a designated held constitution and divides
+by $B$.
+Writing $\operatorname{can}(G)$ for constitutional canonicalization, $\mathcal C_{\rm train}$ for
+the role-indexed training catalogue and $\mathcal H_{\rm held}$ for the designated held
+constitutions, these yields are
+\begin{align}
+ \mathrm{DistinctL1Yield}
+ &=B^{-1}\left|\{\operatorname{can}(G_b):\widehat{\mathrm{L1}}(G_b,P)=1\}\right|,\\
+ \mathrm{ComponentNovelYield}
+ &=B^{-1}\sum_b\mathbf 1\!\Bigl[
+ \widehat{\mathrm{L1}}(G_b,P)=1,\ |\widehat{\mathcal E}_P(G_b)|=1,\notag\\[-1mm]
+ &\hspace{34mm}\exists (r,C)\in\mathbf C_b:
+ C\notin\mathcal C_{{\rm train},r}\Bigr],\\
+ \mathrm{HeldComponentYield}
+ &=B^{-1}\sum_b\mathbf 1\!\Bigl[
+ \widehat{\mathrm{L1}}(G_b,P)=1,
+ \mathbf C_b\cap\mathcal H_{\rm held}\neq\varnothing\Bigr].
+\end{align}
+For component frequencies $w_i$, the effective count is
+\begin{equation}
+ N_{\rm eff}=\exp\!\left(-\sum_i w_i\log w_i\right).
+\end{equation}
+Component duplicates are retained when estimating $w_i$. Molecular diversity is the mean pairwise
+ECFP4 Tanimoto distance among distinct valid canonical product constitutions, so molecular duplicates
+are removed for that metric. For distinct products $g_1,\ldots,g_m$,
+\begin{equation}
+ \mathrm{Diversity}=
+ \frac{2}{m(m-1)}\sum_{1\leq i<j\leq m}
+ \left[1-\mathrm{Tanimoto}\bigl(\mathrm{ECFP4}(g_i),\mathrm{ECFP4}(g_j)\bigr)\right],
+\end{equation}
+with N/E for $m<2$. Every other undefined conditional denominator is likewise reported N/E.
+
+Identity is constitutional and stereo-free. Graph and product identity use connected canonical RDKit
+SMILES with atom maps and stereochemical tags removed; formal charges and bond orders are retained;
+salts or disconnected products are invalid; and no tautomer normalization is applied. Precursor
+identity uses the same canonicalization. Precursor-tuple equality is role- and program-step-aware,
+with repeated inputs compared in their registered step order. Atom mappings and the trace $\tau$ are
+evidence for semantic alignment, not part of constitutional identity.
+
+For a paired contrast, $D_s=\widehat p_{s,\rm FORGE}-\widehat p_{s,\rm control}$. We report
+$(D_1,D_2,D_3)$, $\overline D$, and $[\min_sD_s,\max_sD_s]$. These summarize the three observed
+training seeds and are not 95\% confidence intervals. Conditional on one fixed trained model,
+$C_{s,a}^{\rm L1}$ has the finite-attempt binomial variation in
+Proposition~\ref{prop:posthoc-budget}; that uncertainty does not substitute for independent
+retraining. Unless explicitly named primary, architecture, coordinate, guidance, potency and
+catalogue contrasts are exploratory and no multiplicity-adjusted inferential claim is made.
+
+The frozen Ugi-retention contract had numerical margins on the challenger relative to Ugi-only:
+maximum absolute drops of 2 percentage points for validity, 1 point for connectedness, 3 points for
+verified decomposition coverage, 1 point for replay precision with an absolute floor of 95\%, 5
+points for component novelty, 5 points for held-component decomposition coverage and 0.05 for
+diversity; $N_{\rm eff}$ had a minimum ratio of 0.8; fixed-coordinate failures and support overflows
+had maximum zero. The original artifact applied one-sided bootstrap bounds, but with three seeds we
+use only the observed numerical checks and do not interpret them as population non-inferiority
+tests. Formally, a future non-inferiority analysis would prespecify
+$H_0:\Delta\leq-\delta$ versus $H_1:\Delta>-\delta$, the one-sided level, independent-seed count and
+multiplicity rule before training.
+
 \subsection{Shared reaction-program learning across three assembly chemistries}
 
 Across 3,072 held-out generation attempts per program in each of three independent training seeds,
-the final conditioned model achieved exact-L1 yields of $78.7\pm10.1\%$ for Ugi
+the final conditioned model achieved verified exact-L1 yields of $78.7\pm10.1\%$ for Ugi
 ($72.3\%$, $90.3\%$ and $73.5\%$ by seed), $77.5\pm3.7\%$ for repeated aza-Michael
 addition ($76.5\%$, $81.5\%$ and $74.3\%$), and $31.3\pm14.3\%$ for repeated reductive
 amination ($38.6\%$, $14.8\%$ and $40.4\%$) (mean $\pm$ sample standard deviation;
 Table~\ref{tab:shared-programs} and Table~\ref{tab:production-comparison}).
-Exact forward-replay precision was $100\%$ in every program and seed. However, mean
+Every verifier-returned trace passed forward replay, as required by the verifier invariant. However, mean exact-
 decomposition ambiguity was $54.9\%$ for repeated aza-Michael addition and $74.1\%$ for
 repeated reductive amination, and the latter program showed substantial between-seed variation.
 Table~\ref{tab:production-comparison} reports molecular validity, connectedness, decomposition
 coverage, forward-replay precision, abstention, ambiguity, novelty and diversity separately for
 each program.
 
-Relative to the Ugi-only model, shared training changed Ugi exact-L1 yield by
-\ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed interval
-\ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP) and met every prespecified Ugi-retention
-gate.
-The final conditioned model produced zero fixed-state violations and zero support overflows across
+Relative to the Ugi-only model, shared training changed verified Ugi exact-L1 yield by
+\ForgeUgiRetentionDifferencePP{} percentage points. The paired seed differences were
+\ForgeUgiRetentionSeedDifferencesPP{} points, spanning \ForgeUgiRetentionRangeLowPP{} to
+\ForgeUgiRetentionRangeHighPP{}, and the observed runs met the frozen numerical retention rules.
+The final conditioned model recorded zero fixed-coordinate violations and zero support overflows across
 27,648 held-out attempts (three seeds, three programs and 3,072 attempts per program).
 Together, these results support the conclusion that one conditional flow can learn the three
 specified reaction-program coordinates without erasing the deeply supported Ugi behavior.
 
 \begin{table*}[t]
-\caption{\textbf{A shared model learns multiple ionizable-lipid assembly programs.}
-Exact-L1 yield (\%) and transform verification, reported separately for Ugi, repeated aza-Michael
+\caption{\textbf{Shared learning across three specified ionizable-lipid assembly programs.}
+Verified exact-L1 yield (\%) and transform verification, reported separately for Ugi, repeated aza-Michael
 addition and repeated reductive amination. Cells show means and sample standard deviations across
-three independent training seeds. Shared conditioning improved Ugi exact-L1 yield over Ugi-only
-training by \ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed bootstrap interval
-\ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP). The Ugi-only arm is evaluated only on
+three independent training seeds. Shared conditioning changed verified Ugi exact-L1 yield relative
+to Ugi-only training by \ForgeUgiRetentionDifferencePP{} percentage points, with paired differences
+\ForgeUgiRetentionSeedDifferencesPP{} across the three seeds. The Ugi-only arm is evaluated only on
 Ugi, and results are not pooled across reaction programs. All values here and in
 Table~\ref{tab:production-comparison} are hash verified.}
 \label{tab:shared-programs}
@@ -1127,8 +1416,8 @@ Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%)
 \begin{table*}[t]
 \caption{\textbf{Matched production comparison across reaction programs.}
 Point estimates report the mean across three independent seeds; the exact-L1 column additionally
-reports the sample standard deviation. Paired contrasts include 95\% paired-seed bootstrap
-intervals; individual seed values appear in the supplement.
+reports the sample standard deviation. Paired contrasts are summarized by their three seed values,
+mean and observed range; individual seed values appear in the supplement.
 Validity and connectedness use all generation attempts as the denominator.
 Decomposition coverage, replay precision, abstention and ambiguity retain their prespecified
 conditional denominators. Novelty is conditioned on valid products or unique returned
@@ -1139,10 +1428,6 @@ Results are never pooled across reaction programs.}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
-% Transposed against generated/production_comparison_rows.tex, which is still written arm-major:
-% metrics are the rows and the ten program/arm combinations are the columns. The cells are
-% therefore inlined rather than \input and do not track that artifact. Re-render it with
-% `cli paper render-completed-evidence-v1` and these numbers must be re-copied by hand.
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lcccccccccc@{}}
 \hline
@@ -1152,54 +1437,67 @@ Results are never pooled across reaction programs.}
 & Ugi-only & FORGE & Shared null & Cyclic & FORGE & Shared null & Cyclic
 & FORGE & Shared null & Cyclic \\
 \hline
-Valid./Conn. & 28.0/28.0 & \cellcolor{forgerow}86.6/86.6 & 19.5/19.5 & 43.4/43.4 & \cellcolor{forgerow}77.5/77.5 & 16.5/16.5 & 25.7/25.7 & \cellcolor{forgerow}36.5/36.5 & 15.4/15.4 & 21.4/21.4 \\
-Decomp./Replay & 89.9/100.0 & \cellcolor{forgerow}90.7/100.0 & 58.8/100.0 & 92.7/100.0 & \cellcolor{forgerow}100.0/100.0 & 24.3/100.0 & 15.2/100.0 & \cellcolor{forgerow}84.3/100.0 & 85.4/100.0 & 84.9/100.0 \\
-Abst./Ambig. & 10.1/0.0 & \cellcolor{forgerow}9.3/0.0 & 41.2/0.0 & 7.3/0.0 & \cellcolor{forgerow}0.0/54.9 & 75.7/0.1 & 84.8/0.0 & \cellcolor{forgerow}15.7/74.1 & 14.6/70.7 & 15.1/74.6 \\
-Exact-L1/attempt & $25.4\pm12.0$ & \cellcolor{forgerow}$78.7\pm10.1$ & $11.4\pm1.1$ & $40.2\pm0.7$ & \cellcolor{forgerow}$77.5\pm3.7$ & $4.0\pm0.8$ & $3.8\pm0.6$ & \cellcolor{forgerow}$31.3\pm14.3$ & $13.2\pm1.3$ & $18.1\pm0.8$ \\
-Whole/Comp. novelty & 99.8/92.4 & \cellcolor{forgerow}99.8/96.2 & 100.0/99.9 & 99.9/90.1 & \cellcolor{forgerow}99.7/99.2 & 99.9/99.7 & 99.8/98.3 & \cellcolor{forgerow}98.1/100.0 & 99.5/100.0 & 96.2/100.0 \\
-Diversity/$N_{\mathrm{eff}}$ & 0.597/134.8 & \cellcolor{forgerow}0.621/320.8 & 0.754/219.9 & 0.562/138.0 & \cellcolor{forgerow}0.521/156.9 & 0.635/111.3 & 0.388/51.5 & \cellcolor{forgerow}0.624/102.9 & 0.615/77.2 & 0.570/34.8 \\
+\input{../v1/generated/production_comparison_transposed_rows.tex}%
 \end{tabular}
 }
 \end{table*}
 
+\begin{table}[H]
+\caption{\textbf{Exact verified-L1 counts for the final conditioned model.}
+Each row reports the numerator, fixed attempt denominator and resulting percentage for one
+independently trained seed. These attempt-level counts quantify conditional Monte Carlo variation;
+the three seeds, rather than the individual attempts, are the units for retraining variation.}
+\label{tab:production-seed-counts}
+\centering
+\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lrrrr}
+\hline
+Program & Seed & Verified L1 count & Attempts & Yield (\%) \\
+\hline
+\input{../v1/generated/production_seed_exact_counts_rows.tex}%
+\end{tabular}
+\end{table}
+
 \subsection{Reaction semantics alter generation rather than merely filtering its output}
 
 Under matched attempt budgets, conditioned generation produced
-786.8, 774.6 and 312.7 exact-L1 products per 1,000 attempts for Ugi, repeated aza-Michael and
+786.8, 774.6 and 312.7 verified exact-L1 products per 1,000 attempts for Ugi, repeated aza-Michael and
 repeated reductive amination, compared with 114.4, 39.7 and 131.7 for matched null generation
 followed by post-hoc filtering
 (Table~\ref{tab:catalogue-ceiling}).
 The paired conditioned-minus-post-hoc differences were
-\ForgeNullUgiDifferencePP{} percentage points for Ugi (95\% interval
-\ForgeNullUgiCILowPP{} to \ForgeNullUgiCIHighPP), \ForgeNullBLDifferencePP{} for aza-Michael
-(\ForgeNullBLCILowPP{} to \ForgeNullBLCIHighPP), and \ForgeNullLXDifferencePP{} for reductive
-amination (\ForgeNullLXCILowPP{} to \ForgeNullLXCIHighPP).
+\ForgeNullUgiDifferencePP{} percentage points for Ugi (three-seed range
+\ForgeNullUgiRangeLowPP{} to \ForgeNullUgiRangeHighPP{}), \ForgeNullBLDifferencePP{} for
+aza-Michael (\ForgeNullBLRangeLowPP{} to \ForgeNullBLRangeHighPP{}), and
+\ForgeNullLXDifferencePP{} for reductive amination (\ForgeNullLXRangeLowPP{} to
+\ForgeNullLXRangeHighPP{}).
 
 The cyclic control retained precursor roles, reaction-core coordinates and program depth but assigned
 the wrong reaction identity.
-Relative to correct conditioning, this intervention changed exact-L1 yield by
-\ForgeCyclicUgiDifferencePP{} percentage points for Ugi (95\% interval
-\ForgeCyclicUgiCILowPP{} to \ForgeCyclicUgiCIHighPP), \ForgeCyclicBLDifferencePP{} for
-aza-Michael (\ForgeCyclicBLCILowPP{} to \ForgeCyclicBLCIHighPP), and
-\ForgeCyclicLXDifferencePP{} for reductive amination (\ForgeCyclicLXCILowPP{} to
-\ForgeCyclicLXCIHighPP). Forward-replay precision remained $100\%$ for every returned
-decomposition in these arms.
+Relative to correct conditioning, this intervention changed verified exact-L1 yield by
+\ForgeCyclicUgiDifferencePP{} percentage points for Ugi (three-seed range
+\ForgeCyclicUgiRangeLowPP{} to \ForgeCyclicUgiRangeHighPP{}), \ForgeCyclicBLDifferencePP{} for
+aza-Michael (\ForgeCyclicBLRangeLowPP{} to \ForgeCyclicBLRangeHighPP{}), and
+\ForgeCyclicLXDifferencePP{} for reductive amination (\ForgeCyclicLXRangeLowPP{} to
+\ForgeCyclicLXRangeHighPP{}). Every returned exact trace passed replay by verifier construction.
 
 A separate inference-time intervention held the trained network and Ugi request fixed while changing
-only program coordinates. The factual exact-L1 yield was \ForgeSemanticFactualPercent\%. Nulling all
+only program coordinates. The factual verified exact-L1 yield was \ForgeSemanticFactualPercent\%. Nulling all
 program coordinates reduced it to \ForgeSemanticNullCoordinatesPercent\%, a
-\ForgeSemanticNullCoordinatesDifferencePP-point loss (95\% interval
-\ForgeSemanticNullCoordinatesCILowPP{} to \ForgeSemanticNullCoordinatesCIHighPP). Reversing the
+\ForgeSemanticNullCoordinatesDifferencePP-point loss (paired differences
+\ForgeSemanticNullCoordinatesSeedDifferencesPP{}, spanning
+\ForgeSemanticNullCoordinatesRangeLowPP{} to \ForgeSemanticNullCoordinatesRangeHighPP). Reversing the
 role assignment caused a \ForgeSemanticReverseRoleDifferencePP-point loss
-(\ForgeSemanticReverseRoleCILowPP{} to \ForgeSemanticReverseRoleCIHighPP), and substituting the
+(paired range \ForgeSemanticReverseRoleRangeLowPP{} to \ForgeSemanticReverseRoleRangeHighPP), and substituting the
 reductive-amination program token caused a \ForgeSemanticLXTokenDifferencePP-point loss
-(\ForgeSemanticLXTokenCILowPP{} to \ForgeSemanticLXTokenCIHighPP). The aza-Michael-token contrast
+(paired range \ForgeSemanticLXTokenRangeLowPP{} to \ForgeSemanticLXTokenRangeHighPP). The aza-Michael-token contrast
 was unresolved at \ForgeSemanticBLTokenDifferencePP{} points
-(\ForgeSemanticBLTokenCILowPP{} to \ForgeSemanticBLTokenCIHighPP). Thus the coordinates affect
+(paired range \ForgeSemanticBLTokenRangeLowPP{} to \ForgeSemanticBLTokenRangeHighPP). Thus the coordinates affect
 generation, but the evidence does not support an equal or individually identifiable effect for every
 coordinate.
 
-\subsection{Whole-graph generation produces precursor identities beyond a finite vocabulary}
+\subsection{Whole-graph generation recovers precursor identities absent from the training catalogue}
 
 Table~\ref{tab:ugi-common-benchmark} defines the common Ugi benchmark used to compare FORGE with
 external synthesis-aware generators, matched internal controls, and the finite-catalogue oracle.
@@ -1209,16 +1507,16 @@ All included methods were run under the common split, attempt budget, seed set a
 
 % float moved to the main body: tab:ugi-common-benchmark
 
-The learned finite-inventory selector achieved $1000.0\pm0.0$ exact-L1 products per 1,000 attempts,
-but its finite action space imposed zero open-ended component generation. FORGE produced
-$786.8\pm100.8$ exact-L1 products and $751.2\pm80.2$ unique open-ended exact-L1 products per 1,000
-attempts. Among open-ended external generators, unconditional DeFoG produced
-$280.6\pm26.6$ exact-L1 products per 1,000 attempts and recovered held components at
+The learned finite-inventory selector achieved $1000.0\pm0.0$ verified exact-L1 products per 1,000
+attempts, but its finite action space imposed zero verifier-recovered component-novel yield. FORGE
+produced $786.8\pm100.8$ verified exact-L1 products and $751.2\pm80.2$ distinct verified exact-L1
+products per 1,000 attempts. Among whole-molecule external generators, unconditional DeFoG produced
+$280.6\pm26.6$ verified exact-L1 products per 1,000 attempts and recovered held components at
 $15.5\pm2.4$ per 1,000 attempts, compared with $0.1\pm0.2$ for FORGE. GenMol/SAFE produced
 $627.5\pm6.2$ valid connected outputs but no exact Ugi-L1 product, while RGFN emitted no admissible
 molecular output under the strict native contract. These outcomes expose separate tradeoffs between
-reaction consistency, open-ended identity generation and recovery of specifically reserved
-components.
+reaction consistency, verifier-recovered component novelty and recovery of specifically reserved
+components. They do not establish product-level strong catalogue escape.
 
 \begin{table*}[t]
 \caption{\textbf{Method-blind structural-realism diagnostic.}
@@ -1307,8 +1605,8 @@ every introduced module independently improves exact-L1 yield. These one-at-a-ti
 identify which effects replicate across chemistries; they are not pooled into a composite
 architecture score.
 
-At the matched sampling budget, FORGE produced 751.2 unique method-visible open-ended exact-L1
-Ugi products per 1,000 attempts, averaged across the three independent seeds. The corresponding
+At the matched sampling budget, FORGE produced 729.3 verifier-recovered component-novel Ugi
+products per 1,000 attempts, averaged across the three independent seeds. The corresponding
 values were 313.9 for aza-Michael addition and 34.8 for reductive amination. The finite-component
 assembler produced zero by construction because every sampled product uses only components from
 the training catalogue
@@ -1317,7 +1615,8 @@ The catalogue achieved exact-L1 yields of 1,000.0, 723.2 and 1,000.0 products pe
 compared with 786.8, 774.6 and 312.7 for FORGE. The corresponding raw validities were 1,000.0,
 723.2 and 1,000.0 for the catalogue and 866.0, 774.6 and 365.0 for FORGE.
 We report these quantities separately because reaction validity and verifier-relative component
-novelty measure different capabilities.
+novelty measure different capabilities. Direct membership in the complete catalogue-reachable
+product set was not computed, so these results are not reported as strong catalogue escape.
 
 In a distinct-product Ugi role audit, \ForgeOffRegistryCount{} of
 \ForgeOffRegistryDenominator{} products (\ForgeOffRegistryPercent\%) contained at least one
@@ -1329,10 +1628,9 @@ from the full 112,386-product constitutional reference corpus. FORGE effective c
 contained 185 amines, 75 aldehydes and 35 isocyanides and covered $100\%$ of training products but
 $0\%$ of the calibration and component-disjoint held-out products. Its Cartesian tuple ceilings were
 485,625 for Ugi, 774 for aza-Michael and 490 for reductive amination; these count possible
-component-program inputs rather than unique forward products. These results establish the intended
-tradeoff: the exact finite catalogue has high transform consistency, whereas whole-graph generation
-can produce exact-L1 products whose recovered precursor identities are not restricted to that
-inventory.
+component-program inputs rather than unique forward products. The exact finite catalogue has high
+transform consistency, whereas whole-graph generation can produce verified exact-L1 products with
+verifier-recovered precursor identities absent from that inventory.
 
 \begin{table}[H]
 \caption{\textbf{Reaction conditioning improves sampling efficiency without imposing a finite
@@ -1351,7 +1649,7 @@ reductive-amination token reduced it to \ForgeSemanticLXTokenPercent\%.}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \hline
-Program & FORGE L1/1k & Catalogue L1/1k & FORGE open-ended/1k & Catalogue open-ended/1k \\
+Program & FORGE L1/1k & Catalogue L1/1k & FORGE comp.-novel/1k & Catalogue comp.-novel/1k \\
 \hline
 \input{../v1/generated/catalogue_figure_rows.tex}%
 \end{tabular}}
@@ -1359,21 +1657,17 @@ Program & FORGE L1/1k & Catalogue L1/1k & FORGE open-ended/1k & Catalogue open-e
 
 \begin{table}[H]
 \caption{\textbf{Whole-graph generation versus a finite-component assembler.}
-Exact-L1, unique exact-L1 and open-ended exact-L1 yields are reported per 1,000 generation
-attempts. An operationally open-ended product has exactly one verifier-returned exact-L1
+Verified exact-L1, distinct exact-L1 and verifier-recovered component-novel yields are reported per
+1,000 generation attempts. A component-novel product has exactly one verifier-returned exact-L1
 decomposition and contains at least one component constitution absent from the training catalogue.
-This verifier-relative metric is not called strong catalogue escape unless reverse enumeration is
-shown to be exhaustive. The catalogue has zero input-component novelty by construction, but may
+This verifier-relative metric is not strong catalogue escape because complete catalogue-product
+reachability was not computed. The catalogue has zero input-component novelty by construction, but may
 achieve higher raw validity or exact-L1 yield. FORGE-minus-catalogue contrasts use the three seeds
-as paired resampling units.}
+as descriptive paired units; no three-seed confidence interval is inferred.}
 \label{tab:catalogue-comparison}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{4pt}
-% Transposed against generated/catalogue_comparison_rows.tex, which is still written row-major:
-% seven metrics against six arms overruns the text block as columns and fits as rows. The cells
-% are therefore inlined rather than \input, and do not track that artifact. Re-render it with
-% `cli paper render-completed-evidence-v1` and these numbers must be re-copied by hand.
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lcccccc@{}}
 \hline
@@ -1382,34 +1676,10 @@ as paired resampling units.}
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
 & FORGE & Finite cat. & FORGE & Finite cat. & FORGE & Finite cat. \\
 \hline
-Valid/1k & \cellcolor{forgerow}866.0 & 1000.0 & \cellcolor{forgerow}774.6 & 723.2 & \cellcolor{forgerow}365.0 & 1000.0 \\
-Exact L1/1k & \cellcolor{forgerow}786.8 & 1000.0 & \cellcolor{forgerow}774.6 & 723.2 & \cellcolor{forgerow}312.7 & 1000.0 \\
-Unique L1/1k & \cellcolor{forgerow}751.2 & 837.6 & \cellcolor{forgerow}738.0 & 147.5 & \cellcolor{forgerow}279.7 & 52.1 \\
-Open-ended/1k & \cellcolor{forgerow}729.3 & 0.0 & \cellcolor{forgerow}313.9 & 0.0 & \cellcolor{forgerow}34.8 & 0.0 \\
-Whole nov. & \cellcolor{forgerow}99.8 & 16.9 & \cellcolor{forgerow}99.7 & 39.8 & \cellcolor{forgerow}98.1 & 44.8 \\
-Comp. nov. & \cellcolor{forgerow}96.2 & 0.0 & \cellcolor{forgerow}99.2 & 0.0 & \cellcolor{forgerow}100.0 & 0.0 \\
-Diversity/$N_{\mathrm{eff}}$ & \cellcolor{forgerow}0.621/320.8 & 0.719/86.4 & \cellcolor{forgerow}0.521/156.9 & 0.402/23.4 & \cellcolor{forgerow}0.624/102.9 & 0.514/16.9 \\
+\input{../v1/generated/catalogue_comparison_transposed_rows.tex}%
 \end{tabular}
 }
 \end{table}
-\begin{figure}[H]
-\centering
-\def\forgedatadir{../v1/generated/}
-\input{../v1/figures/forge_tradeoff/tradeoff_body.tex}
-\caption{\textbf{Reaction consistency and escape from a finite component vocabulary are separate
-axes.} Common Ugi benchmark, per 1,000 generation attempts, mean and sample standard deviation over
-three seeds. Filled points are methods with no component vocabulary; they track $y\approx x$ because
-almost every exact-L1 product they return is outside a vocabulary they do not have, so the diagonal
-is a property of that family rather than a result. Open markers are finite-vocabulary methods, whose
-outside-vocabulary yield is zero by Theorem~\ref{thm:catalogue-bound} rather than by measurement:
-every catalogue attempt uses catalogue components. The two families measure $y$ against different
-references, so a filled point's $y$ is not comparable with an open point's $y$; the comparable
-component-novel metric against one fixed training catalogue is
-Table~\ref{tab:catalogue-comparison}. What the figure shows is position along the diagonal: FORGE
-reaches $786.8\pm100.8$ exact-L1 products, against $296.7\pm186.0$ for the next open-ended method,
-while the two methods that exceed it on the horizontal axis cannot leave the floor.}
-\label{fig:tradeoff}
-\end{figure}
 
 
 \subsection{Native recovery of held components remains weak}
@@ -1442,7 +1712,7 @@ terminal-evidence gates \citep{genheden2020aizynthfinder}.
 The frozen union contained \ForgeCommonRouteUnionComponents{} distinct role--constitution
 components, but the exact-source library closed only
 \ForgeCommonRouteEvidenceCompleteComponents{}. Consequently, FORGE produced
-\ForgeCommonRouteForgeExactPerThousand{} exact-L1 products per 1,000 attempts, yet
+\ForgeCommonRouteForgeExactPerThousand{} verified exact-L1 products per 1,000 attempts, yet
 \ForgeCommonRouteForgeCompletePerThousand{} complete dossiers and
 \ForgeCommonRouteForgeAbstentionPerThousand{} abstentions under this library. The learned inventory
 selector closed \ForgeCommonRouteSelectorCompletePerThousand{} dossiers per 1,000 attempts through
@@ -1470,7 +1740,7 @@ the frozen exact-source component library is deliberately non-exhaustive.}
 \hline
 Method & Molecular identity source &
 Finite vocab. &
-Exact L1/1k &
+Verified L1/1k &
 Verified upstream &
 Terminal evidence &
 Complete dossier &
@@ -1554,7 +1824,7 @@ budgets.}
 \hline
 Arm &
 Attempts &
-Exact L1 &
+Verified L1 &
 Eligible before budget &
 Oracle budget &
 Unique conservative-high \\
@@ -1618,7 +1888,7 @@ independent training replicates.}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llcccccc}
 \hline
-Method & Seed(s) & Valid/1k & Exact L1/1k & Unique L1/1k & Open-ended/1k & Held-comp. L1/1k & Diversity \\
+Method & Seed(s) & Valid/1k & Verified L1/1k & Distinct L1/1k & Comp.-novel/1k & Held-comp. L1/1k & Diversity \\
 \hline
 \input{../v1/generated/common_ugi_seed_rows.tex}%
 \end{tabular}
@@ -1627,19 +1897,22 @@ Method & Seed(s) & Valid/1k & Exact L1/1k & Unique L1/1k & Open-ended/1k & Held-
 
 \begin{table}[H]
 \caption{\textbf{Reaction decomposition outcomes under the common Ugi verifier.}
-Coverage is conditioned on molecular validity; replay precision is conditioned on returned
-decompositions. Abstention and ambiguity retain their prespecified denominators. N/E denotes a
-conditional metric with no eligible valid product or returned decomposition.}
+Verified decomposition coverage is conditioned on molecular validity. Replay of every tuple in the
+returned exact set is a verifier invariant, not an estimate of reverse-search precision. Abstention
+and exact ambiguity retain their prespecified denominators. N/E denotes a conditional metric with
+no eligible valid product or returned decomposition.}
 \label{tab:baseline-decomposition}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{4.5pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
 \hline
-Method & Valid products & Decomp. coverage & Replay precision & Abstention & Ambiguity \\
+Method & Valid products & Verified coverage & Replay invariant & Abstention & Exact ambiguity \\
 \hline
 \input{../v1/generated/common_ugi_decomposition_rows.tex}%
 \end{tabular}
+}
 \end{table}
 
 \clearpage
@@ -1647,12 +1920,12 @@ Method & Valid products & Decomp. coverage & Replay precision & Abstention & Amb
 \section{Theoretical properties}
 \label{app:theory}
 
-This appendix establishes five properties of FORGE.
-We show that the sparse state space represents every connected labeled graph within the declared
-vocabulary, size, and cycle-rank support; characterize the reachability ceiling of a finite-component
-assembler; prove invariance and population consistency for program-masked denoising; quantify the
-efficiency of post-hoc rejection under a fixed sampling budget; and establish termination and
-soundness for the bounded recursive route assessor.
+This appendix establishes the formal properties of FORGE. We prove correctness and bounded completeness
+of the sparse representation, characterize finite-component reachability, prove fixed-coordinate
+invariance and Bayes optimality of the primary coordinatewise denoising loss, connect those posterior
+marginals to the local continuous-time rate, prove ideal population recovery of the terminal
+program-conditioned graph law, quantify matched-budget post-hoc rejection, and state termination
+plus the fail-closed route implementation invariant.
 
 These results concern representation, population objectives, and computational verification.
 They do not imply that finite-data training assigns positive probability to every representable
@@ -1661,32 +1934,61 @@ complete, or that a returned dossier guarantees experimental synthesis success.
 
 \subsection{Notation and setup}
 
-All graphs in this appendix are finite, connected, undirected, loop-free labeled graphs.
-Let $\Sigma_V$ and $\Sigma_E$ be the finite atom-state and bond-state vocabularies, and define
+We use the following notation consistently.
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\Sigma_{\rm atom},\Sigma_{\rm bond}$ & atom-state and bond-state alphabets \\
+$N,K_{\rm cl}$ & maximum active nodes and closure-edge budget \\
+$L_{\rm samp}$ & finite Euler-step count \\
+$\mathscr J$ & six categorical state families \\
+$\mathcal F(P),\mathcal V(P)$ & fixed and variable coordinate sets \\
+$\mathfrak C_P$ & admissible precursor-program inputs \\
+$\mathfrak B_{\rm route}$ & frozen route-assessment contract \\
+$\mathfrak D,\mathcal D_{\rm out}$ & dossier space and attempt-indexed dossier sequence \\
+$Q$ & proposal law in the post-hoc comparison \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A molecular graph is $G=(V,E,\ell_V,\ell_E)$, where the underlying graph is finite, connected,
+undirected and simple, $\ell_V:V\to\Sigma_{\rm atom}$, and
+$\ell_E:E\to\Sigma_{\rm bond}$. Bond multiplicity belongs to $\ell_E$; parallel edges are not
+permitted. Define the set of label-preserving isomorphism classes
 \begin{equation}
-    \mathfrak{G}_{N,K}
+    \mathfrak{G}_{N,K_{\rm cl}}
     =
     \left\{
-        G=(V,E):
+        [G]_{\cong}:
         |V|\leq N,\;
-        \beta(G)=|E|-|V|+1\leq K,\;
-        \ell_V(V)\subseteq\Sigma_V,\;
-        \ell_E(E)\subseteq\Sigma_E
+        \beta(G)=|E|-|V|+1\leq K_{\rm cl},\;
+        \ell_V(V)\subseteq\Sigma_{\rm atom},\;
+        \ell_E(E)\subseteq\Sigma_{\rm bond}
     \right\}.
 \end{equation}
-Graphs are identified up to label-preserving isomorphism.
 
-A sparse FORGE state with $n$ active nodes is well formed when:
+Let $\overline{\mathfrak X}_{N,K_{\rm cl}}$ be the full padded categorical product space. A state
+belongs to its well-formed subset $\mathfrak X_{N,K_{\rm cl}}$ exactly when:
 \begin{enumerate}
-    \item $1\leq n\leq N$, and every active node has a label in $\Sigma_V$;
-    \item the root has no parent and every node $i>1$ has one parent $\pi_i<i$;
-    \item every parent edge has a label in $\Sigma_E$;
-    \item it contains $k\leq K$ distinct closure edges, each carrying a label in $\Sigma_E$, joining
-    two active nodes, and duplicating neither a tree edge nor another closure edge; and
-    \item closure edges are ordered lexicographically by their endpoint pairs.
+    \item for some $1\leq n\leq N$, the active nodes are exactly $\{1,\ldots,n\}$, every active
+    node has a label in $\Sigma_{\rm atom}$, and inactive node slots carry the null state;
+    \item node $1$ is the unique root and carries the null parent-edge sentinel;
+    \item every $i>1$ has $\pi_i\in\{1,\ldots,i-1\}$ and a parent-edge label in
+    $\Sigma_{\rm bond}$;
+    \item every active closure slot joins two distinct endpoints in $\{1,\ldots,n\}$, carries a
+    label in $\Sigma_{\rm bond}$, and duplicates neither a tree edge nor another closure edge;
+    \item active closure triples are ordered lexicographically by endpoint pair; and
+    \item at most $K_{\rm cl}$ closure slots are active and every unused slot carries designated null
+    endpoint and bond states.
 \end{enumerate}
-Let $\mathfrak{X}_{N,K}$ denote this state space and
-$\operatorname{Dec}:\mathfrak{X}_{N,K}\rightarrow\mathfrak{G}_{N,K}$ its decoder.
+The raw decoder returns a typed failure on every malformed state:
+\begin{equation}
+ \operatorname{Dec}:\overline{\mathfrak X}_{N,K_{\rm cl}}
+ \longrightarrow\mathfrak G_{N,K_{\rm cl}}\cup\{\bot_{\rm dec}\}.
+\end{equation}
 
 \subsection{Sparse graph representation}
 
@@ -1718,50 +2020,50 @@ Because $E(T)\subseteq E$,
 The final expression is the cyclomatic number of a connected graph.
 \end{proof}
 
-\begin{theorem}[Bounded representational completeness]
+\begin{theorem}[Correctness and bounded completeness of the sparse representation]
 \label{thm:bounded-representation}
 The decoder
 \begin{equation}
     \operatorname{Dec}:
-    \mathfrak{X}_{N,K}
+    \mathfrak{X}_{N,K_{\rm cl}}
     \longrightarrow
-    \mathfrak{G}_{N,K}
+    \mathfrak{G}_{N,K_{\rm cl}}
 \end{equation}
-is surjective up to label-preserving graph isomorphism.
-Equivalently:
+is well defined and surjective up to label-preserving graph isomorphism:
 \begin{enumerate}
-    \item for every $G\in\mathfrak{G}_{N,K}$, there exists
-    $X\in\mathfrak{X}_{N,K}$ such that $\operatorname{Dec}(X)\cong G$; and
-    \item every $X\in\mathfrak{X}_{N,K}$ decodes to a graph in
-    $\mathfrak{G}_{N,K}$.
+    \item every $X\in\mathfrak{X}_{N,K_{\rm cl}}$ decodes to a graph in
+    $\mathfrak{G}_{N,K_{\rm cl}}$; and
+    \item for every $G\in\mathfrak{G}_{N,K_{\rm cl}}$, there exists
+    $X\in\mathfrak{X}_{N,K_{\rm cl}}$ such that $\operatorname{Dec}(X)\cong G$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Let $G=(V,E)\in\mathfrak{G}_{N,K}$, and choose a spanning tree $T\subseteq G$.
+Let $G=(V,E,\ell_V,\ell_E)\in\mathfrak{G}_{N,K_{\rm cl}}$, and choose a spanning tree
+$T=(V,E_T)$ with $E_T\subseteq E$.
 Choose a root of $T$ and enumerate its vertices $v_1,\ldots,v_n$ in any root-first traversal.
 Every non-root vertex then appears after its parent.
 
 Assign node $i$ the label of $v_i$.
 For each $i>1$, let $\pi_i<i$ be the index of the parent of $v_i$ in $T$, and assign the
 corresponding tree-edge label.
-By Lemma~\ref{lem:tree-closure}, the residual edge set $E\setminus E(T)$ contains
-$\beta(G)\leq K$ edges.
+By Lemma~\ref{lem:tree-closure}, the residual edge set $E\setminus E_T$ contains
+$\beta(G)\leq K_{\rm cl}$ edges.
 Orient each residual edge by increasing endpoint index, attach its original edge label, and sort the
 resulting triples lexicographically by endpoint pair.
-The resulting state is an element of $\mathfrak{X}_{N,K}$.
+The resulting state is an element of $\mathfrak{X}_{N,K_{\rm cl}}$.
 
-The decoder reconstructs every edge of $T$ from the parent pointers and every edge of
-$E\setminus E(T)$ from the closure triples.
+The decoder reconstructs every edge in $E_T$ from the parent pointers and every edge in
+$E\setminus E_T$ from the closure triples.
 It also preserves all node and edge labels.
 The map $i\mapsto v_i$ is therefore a label-preserving isomorphism from
 $\operatorname{Dec}(X)$ to $G$.
 
-Conversely, let $X\in\mathfrak{X}_{N,K}$ have $n$ active nodes.
+Conversely, let $X\in\mathfrak{X}_{N,K_{\rm cl}}$ have $n$ active nodes.
 Since $\pi_i<i$, repeatedly following parent pointers from any node strictly decreases its index and
 must terminate at the root.
 The $n-1$ parent edges therefore form a connected acyclic graph, hence a spanning tree.
-If the state contains $k\leq K$ closure edges, the decoded graph has
+If the state contains $k\leq K_{\rm cl}$ closure edges, the decoded graph has
 \begin{equation}
     |E|=(n-1)+k
 \end{equation}
@@ -1773,32 +2075,41 @@ Its cyclomatic number is consequently
     (n-1+k)-n+1
     =
     k
-    \leq K.
+    \leq K_{\rm cl}.
 \end{equation}
 The remaining well-formedness conditions preserve the declared node and edge vocabularies and
 exclude loops or duplicate edges.
-Thus $\operatorname{Dec}(X)\in\mathfrak{G}_{N,K}$.
+Thus $\operatorname{Dec}(X)\in\mathfrak{G}_{N,K_{\rm cl}}$.
 \end{proof}
+
+Global completeness does not by itself imply compatibility with a program face $\Omega_P$.
+FORGE therefore restricts the morphology prior to
+\begin{equation}
+ \mathcal P_{\rm adm}=\{P:\mathfrak X_{N,K_{\rm cl}}\cap\Omega_P\neq\varnothing\}
+\end{equation}
+and treats
+$\operatorname{Enc}_P(G,\alpha)\in\mathfrak X_{N,K_{\rm cl}}\cap\Omega_P$ as an adapter-level
+implementation invariant checked for every admitted corpus record.
 
 \subsection{Finite-component reachability}
 
-\begin{theorem}[Finite-component reachability]
-\label{thm:catalogue-bound}
-Assume that $\mathfrak{T}_P(\mathcal C)$ is finite and that every forward-outcome set is finite.
+\begin{proposition}[Finite-component reachability]
+\label{prop:catalogue-bound}
+Assume that $\mathfrak C_P(\mathcal C)$ is finite and that every forward-outcome set is finite.
 Then
 \begin{equation}
     \left|
         \mathcal{G}_{\mathrm{cat}}(P,\mathcal C)
     \right|
     \leq
-    \sum_{\mathbf C\in\mathfrak{T}_P(\mathcal C)}
+    \sum_{\mathbf C\in\mathfrak C_P(\mathcal C)}
     \left|\mathcal{F}_P(\mathbf C)\right|.
 \end{equation}
-If $\mathfrak{T}_P(\mathcal C)\neq\varnothing$ and
+If $\mathfrak C_P(\mathcal C)\neq\varnothing$ and
 \begin{equation}
-    M_P(\mathcal C)
+    m_{\max,P}(\mathcal C)
     =
-    \max_{\mathbf C\in\mathfrak{T}_P(\mathcal C)}
+    \max_{\mathbf C\in\mathfrak C_P(\mathcal C)}
     \left|\mathcal{F}_P(\mathbf C)\right|,
 \end{equation}
 then
@@ -1807,8 +2118,8 @@ then
         \mathcal{G}_{\mathrm{cat}}(P,\mathcal C)
     \right|
     \leq
-    M_P(\mathcal C)
-    \left|\mathfrak{T}_P(\mathcal C)\right|.
+    m_{\max,P}(\mathcal C)
+    \left|\mathfrak C_P(\mathcal C)\right|.
 \end{equation}
 Moreover,
 \begin{equation}
@@ -1816,180 +2127,323 @@ Moreover,
     \quad\Longleftrightarrow\quad
     \mathcal{E}^{\star}_P(G)
     \cap
-    \mathfrak{T}_P(\mathcal C)
+    \mathfrak C_P(\mathcal C)
     \neq\varnothing.
 \end{equation}
-Every catalogue attempt uses only catalogue components, so its attainable component-novelty fraction
-is exactly zero.
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 The reachable set is a finite union of forward-outcome sets.
 The cardinality of a union is at most the sum of the cardinalities of its members, which proves the
 first inequality.
-Bounding each summand by $M_P(\mathcal C)$ proves the second.
+Bounding each summand by $m_{\max,P}(\mathcal C)$ proves the second.
 
 By definition, $G$ belongs to the union precisely when at least one
-$\mathbf C\in\mathfrak T_P(\mathcal C)$ satisfies $G\in\mathcal F_P(\mathbf C)$.
+$\mathbf C\in\mathfrak C_P(\mathcal C)$ satisfies $G\in\mathcal F_P(\mathbf C)$.
 This is equivalent to membership in
-$\mathcal E_P^\star(G)\cap\mathfrak T_P(\mathcal C)$.
-Finally, every component in an input from $\mathfrak T_P(\mathcal C)$ belongs to its role-specific
-catalogue by construction, so component novelty is impossible.
+$\mathcal E_P^\star(G)\cap\mathfrak C_P(\mathcal C)$.
+\end{proof}
+
+\begin{corollary}[Catalogue assemblers cannot strongly escape]
+For every $G\in\mathcal G_{\rm cat}(P,\mathcal C)$,
+$\operatorname{Escape}^\star(G;P,\mathcal C)=0$. Consequently any assembler whose outputs are
+contained in $\mathcal G_{\rm cat}(P,\mathcal C)$ has zero strong-catalogue-escape yield per attempt.
+\end{corollary}
+
+\begin{proof}
+Membership in $\mathcal G_{\rm cat}(P,\mathcal C)$ supplies a catalogue tuple in
+$\mathcal E_P^\star(G)\cap\mathfrak C_P(\mathcal C)$, contradicting the second conjunct in the
+definition of strong escape.
 \end{proof}
 
 \subsection{Program-masked discrete flow}
 
-For a program $P$, let $\mathcal I(P)$ index the categorical coordinates of its sampling layout.
-Define
+For a program $P$, let $\mathcal I(P)$ index all categorical coordinates, with coordinate alphabet
+$\mathcal X_i$. Partition it into fixed coordinates $\mathcal F(P)$ and variable coordinates
+$\mathcal V(P)$. Let $x_{P,i}$ be the prescribed value for $i\in\mathcal F(P)$ and define
 \begin{equation}
-    \mathcal S(P)
-    =
-    \left\{
-        (q,j)\in\mathcal I(P):
-        m_j^{(q)}(P)=0
-    \right\}
+ \Omega_P=\{x:x_i=x_{P,i}\text{ for every }i\in\mathcal F(P)\}.
 \end{equation}
-and let $x_{P,j}^{(q)}$ be the prescribed value of each fixed coordinate.
-The program-compatible face of the raw categorical state space is
-\begin{equation}
-    \Omega_P
-    =
-    \left\{
-        x:
-        x_j^{(q)}=x_{P,j}^{(q)}
-        \text{ for every }(q,j)\in\mathcal S(P)
-    \right\}.
-\end{equation}
-Define the projection $\Pi_P$ coordinatewise by
-\begin{equation}
-    [\Pi_P(x)]_j^{(q)}
-    =
-    \begin{cases}
-        x_{P,j}^{(q)}, & (q,j)\in\mathcal S(P),\\
-        x_j^{(q)}, & (q,j)\notin\mathcal S(P).
-    \end{cases}
-\end{equation}
+The projection $\Pi_P$ restores $x_{P,i}$ on $\mathcal F(P)$ and is the identity on
+$\mathcal V(P)$.
 
-Training corruption has the form $X_t=\Pi_P(\widetilde X_t)$.
-Numerical sampling begins from $X_0=\Pi_P(\widetilde X_0)$ and applies
+The program-compatible source factorizes as
 \begin{equation}
-    X_{k+1}
-    =
-    \Pi_P\!\left(
-        \Phi_k^\theta(X_k,\xi_k)
-    \right),
-    \qquad k=0,\ldots,L-1,
+ q_0^P(x)=
+ \mathbf 1[x_{\mathcal F(P)}=x_{P,\mathcal F(P)}]
+ \prod_{i\in\mathcal V(P)}q_{0,i}^P(x_i),
+ \qquad q_{0,i}^P(a)>0\quad\forall a\in\mathcal X_i.
 \end{equation}
-where $\Phi_k^\theta$ is the unconstrained stochastic update and $\xi_k$ contains its sampling
-randomness.
+For a clean endpoint $x_1\in\Omega_P$, the independent-coordinate conditional path is
+\begin{equation}
+ q_{t\mid1}^P(x\mid x_1)=
+ \mathbf 1[x_{\mathcal F(P)}=x_{1,\mathcal F(P)}]
+ \prod_{i\in\mathcal V(P)}
+ \left[(1-t)q_{0,i}^P(x_i)+t\mathbf 1\{x_i=x_{1,i}\}\right].
+\end{equation}
+Thus each coordinate is linearly interpolated conditional on the endpoint, while the joint law is
+their product. It is not the joint mixture $(1-t)q_0^P+tq_1^P$.
+
+For coordinate $i$, write
+$p_{t,i}(v\mid a)=(1-t)q_{0,i}^P(v)+t\mathbf 1\{v=a\}$,
+$\dot p_{t,i}(v\mid a)=\mathbf 1\{v=a\}-q_{0,i}^P(v)$ and
+$S_{t,i}(a)=\{v:p_{t,i}(v\mid a)>0\}$. The implementation's minimum univariate conditional rate is,
+for $u\neq v$,
+\begin{align}
+ R^*_{t,i}(u,v\mid a)
+ &=
+ \frac{[\dot p_{t,i}(v\mid a)-\dot p_{t,i}(u\mid a)]_+
+ \mathbf 1\{v\in S_{t,i}(a)\}}
+ {|S_{t,i}(a)|p_{t,i}(u\mid a)},\\
+ R^*_{t,i}(u,u\mid a)
+ &=-\sum_{v\neq u}R^*_{t,i}(u,v\mid a).
+\end{align}
+Full source support makes the off-diagonal denominator positive for the integration times used by
+the sampler. For $x\neq y$, define the local joint
+conditional generator
+\begin{equation}
+ R_t^*(x,y\mid x_1,P)=
+ \sum_{i\in\mathcal V(P)}\mathbf 1\{y_{-i}=x_{-i}\}
+ R^*_{t,i}(x_i,y_i\mid x_{1,i}).
+\end{equation}
+It permits at most one coordinate to jump at an infinitesimal time. The denoiser induces the ideal
+marginal coordinate rate
+\begin{equation}
+ R_{t,i}^\theta(u,v\mid x,P)=
+ \sum_{a\in\mathcal X_i}p_{\theta,i}(a\mid x,t,P)R^*_{t,i}(u,v\mid a),
+\end{equation}
+and hence, off diagonal,
+\begin{equation}
+ R_t^\theta(x,y\mid P)=
+ \sum_{i\in\mathcal V(P)}\mathbf 1\{y_{-i}=x_{-i}\}
+ R_{t,i}^\theta(x_i,y_i\mid x,P),
+ \qquad
+ R_t^\theta(x,x\mid P)=-\sum_{y\neq x}R_t^\theta(x,y\mid P).
+\end{equation}
+Fixed coordinates have identically zero off-diagonal rates.
+
+For a grid $0=t_0<\cdots<t_{L_{\rm samp}}=1$ and
+$\Delta t_k=t_{k+1}-t_k$, an uncapped independent-coordinate Euler kernel would use
+\begin{align}
+ K_{k,i}^\theta(v\mid x)
+ &=\Delta t_k R_{t_k,i}^\theta(x_i,v\mid x,P), &&v\neq x_i,\\
+ K_{k,i}^\theta(x_i\mid x)
+ &=1-\Delta t_k\sum_{v\neq x_i}R_{t_k,i}^\theta(x_i,v\mid x,P),
+\end{align}
+and $\widetilde K_k^\theta(y\mid x,P)=
+\mathbf 1[y_{\mathcal F(P)}=x_{\mathcal F(P)}]
+\prod_{i\in\mathcal V(P)}K_{k,i}^\theta(y_i\mid x)$. These probabilities are nonnegative when
+$\Delta t_k\sum_{v\neq x_i}R_{t_k,i}^\theta(x_i,v\mid x,P)\leq1$ for every coordinate and context.
+
+The actual implementation uses one Monte Carlo clean endpoint
+$A_{k,i}\sim p_{\theta,i}(\cdot\mid X_k,t_k,P)$ per coordinate. It substitutes
+$R^*_{t_k,i}(\cdot,\cdot\mid A_{k,i})$ and multiplies every off-diagonal mass by
+\begin{equation}
+ \alpha_{k,i}=\min\!\left\{1,
+ \frac{0.999}{\Delta t_k\sum_{v\neq X_{k,i}}
+ R^*_{t_k,i}(X_{k,i},v\mid A_{k,i})}\right\},
+\end{equation}
+with $\alpha_{k,i}=1$ when the denominator is zero. The diagonal receives the remaining mass.
+Coordinates are then drawn independently, $X_{k+1}\sim\prod_i\widehat K_{k,i}$, followed by
+$\Pi_P$. This cap makes every finite-step kernel nonnegative and stochastic. It also means the code
+uses a finite-step Monte Carlo Euler approximation rather than exact Gillespie simulation of the
+ideal CTMC.
 
 \begin{proposition}[Program-fixed invariance]
 \label{prop:fixed-invariance}
-For every program $P$,
-\begin{equation}
-    \Pr[X_t\in\Omega_P]=1
-\end{equation}
-at every corruption time $t$, and
-\begin{equation}
-    \Pr\left[
-        X_k\in\Omega_P
-        \text{ for every }k=0,\ldots,L
-    \right]
-    =1
-\end{equation}
-during numerical sampling.
+For every $P\in\mathcal P_{\rm adm}$, corruption and numerical sampling satisfy
+$\Pr[X_t\in\Omega_P]=1$ and
+$\Pr[X_k\in\Omega_P\text{ for all }k=0,\ldots,L_{\rm samp}]=1$.
 \end{proposition}
 
 \begin{proof}
-By definition, $\Pi_P(x)\in\Omega_P$ for every raw state $x$, and
-$\Pi_P(x)=x$ for every $x\in\Omega_P$.
-Since corruption returns $\Pi_P(\widetilde X_t)$, every corrupted state lies in $\Omega_P$.
-
-The sampling claim follows by induction.
-The projected initial state belongs to $\Omega_P$.
-If $X_k\in\Omega_P$, the unconstrained update may change any coordinate, but applying $\Pi_P$
-restores every coordinate in $\mathcal S(P)$.
-Hence $X_{k+1}\in\Omega_P$.
-The conclusion holds for all sampling steps.
+The source and conditional path assign zero mass outside the fixed face. Fixed coordinates also have
+zero off-diagonal rates. Finally, $\Pi_P(x)\in\Omega_P$ for every raw $x$, so the implementation
+safeguard preserves the claim by induction over finite steps.
 \end{proof}
 
-Define the joint population law
+Let $X_1=\operatorname{Enc}_P(G,\alpha)$ and define the population law
 \begin{equation}
-    \nu(dG,dP,dt,dX_t)
-    =
-    \mu_{\mathrm{bal}}(dG,dP)\,
-    \mathcal U(dt)\,
-    p_t(dX_t\mid X_G,P).
+ \nu(dG,d\alpha,dP,dt,dX_t)=
+ \mu_{\rm bal}(dG,d\alpha,dP)\,\mathcal U(dt)\,
+ q_{t\mid1}^P(dX_t\mid X_1).
 \end{equation}
-For a variable coordinate, let
-\begin{equation}
-    \rho_{qj}(a\mid X_t,t,P)
-    =
-    \Pr_{\nu}\!\left[
-        X_{G,j}^{(q)}=a
-        \mid X_t,t,P
-    \right].
-\end{equation}
+For $i\in\mathcal V(P)$, write
+$\rho_i(a\mid X_t,t,P)=\Pr_\nu[X_{1,i}=a\mid X_t,t,P]$.
 
-\begin{theorem}[Population optimality of masked denoising]
-\label{thm:masked-consistency}
-Assume an unrestricted conditional model class and $\lambda_q>0$.
-For every coordinate satisfying $m_j^{(q)}(P)=1$, every population minimizer of
-$\mathcal L_{\mathrm{FORGE}}$ satisfies
+\begin{proposition}[Bayes optimality of the primary coordinatewise masked-denoising loss]
+\label{prop:masked-bayes}
+Assume an unrestricted coordinatewise conditional model class and positive state-family weight.
+On the event $i\in\mathcal V(P)$, every population minimizer of the primary masked denoising term
+satisfies
 \begin{equation}
-    p_\theta^\star\!\left(
-        X_{G,j}^{(q)}=a
-        \mid X_t,t,P
-    \right)
-    =
-    \rho_{qj}(a\mid X_t,t,P)
+ p_{\theta,i}^\star(a\mid X_t,t,P)=\rho_i(a\mid X_t,t,P)
 \end{equation}
-for every categorical state $a$, $\nu$-almost surely.
-Coordinates with $m_j^{(q)}(P)=0$ contribute no loss and are instead governed by
-Proposition~\ref{prop:fixed-invariance}.
-\end{theorem}
+for every $a\in\mathcal X_i$, $\nu$-almost surely. This proposition does not characterize the
+optimizer produced by auxiliary losses, finite capacity or PCGrad.
+\end{proposition}
 
 \begin{proof}
-Fix a family $q$, a variable coordinate $j$, and a context $C=(X_t,t,P)$ for which the regular
-conditional distribution is defined.
-Let $p(a)=p_\theta(X_{G,j}^{(q)}=a\mid C)$ and
-$\rho(a)=\rho_{qj}(a\mid C)$.
-The conditional expected loss is
-\begin{align}
-    -\sum_a \rho(a)\log p(a)
-    &=
-    -\sum_a \rho(a)\log\rho(a)
-    +
-    \sum_a \rho(a)\log\frac{\rho(a)}{p(a)}\\
-    &=
-    H(\rho)
-    +
-    D_{\mathrm{KL}}(\rho\Vert p).
-\end{align}
-The entropy term is independent of $p$.
-By non-negativity of Kullback--Leibler divergence, the expression is minimized exactly when
-$p=\rho$.
-
-For fixed $P$ and $q$, the factor
-$\lambda_q/\sum_j m_j^{(q)}(P)$ is positive and independent of the predicted categorical
-distribution.
-It therefore does not change the pointwise minimizer.
-Integrating over contexts and repeating the argument for every variable coordinate proves the
-result.
-Coordinates with zero masks do not appear in the objective.
+Fix a variable coordinate and context. Its conditional cross-entropy is
+$H(\rho_i)+D_{\rm KL}(\rho_i\Vert p_{\theta,i})$, which is minimized exactly at
+$p_{\theta,i}=\rho_i$. The positive family weight and positive normalization by the number of
+variable coordinates do not alter that pointwise minimizer. Fixed coordinates do not appear in the
+primary loss.
 \end{proof}
+
+\begin{corollary}[Population recovery of the local rate]
+\label{cor:local-rate-recovery}
+Suppose the conditional joint generator decomposes coordinatewise as above. Substituting any
+population minimizer $p_{\theta,i}^\star$ of the primary masked denoising term into the marginal-rate
+formula recovers the population local generator $R_t$ almost surely on the training path.
+\end{corollary}
+
+\begin{proof}
+The proposition identifies $p_{\theta,i}^\star$ with the true clean-endpoint posterior marginal.
+The displayed rate is linear in that marginal, so substituting it performs the conditional
+expectation of $R^*_{t,i}$ required for each local coordinate generator. Summing the one-coordinate
+terms recovers the joint local generator.
+\end{proof}
+
+\paragraph{Formal path and proof of Theorem~\ref{thm:ideal-terminal-law}.}
+For the fixed program in the theorem, write the encoded endpoint mass function and population path
+as
+\begin{align}
+ q_1^P(x)
+ &=\Pr_{\mu_{\rm bal}}\!\left[
+ \operatorname{Enc}_P(G,\alpha)=x\mid P\right],\\
+ q_t^P(x)
+ &=\sum_{x_1}q_1^P(x_1)q_{t\mid1}^P(x\mid x_1).
+\end{align}
+The theorem's exact-simulation assumption uses the displayed rates $R^*_{t,i}$ on $0\leq t<1$,
+initial law $X_0\sim q_0^P$ and terminal law defined by $t\uparrow1$. We prove the stronger path
+identity
+\begin{equation}
+ \mathcal L(X_t\mid P)=q_t^P\quad(0\leq t<1),
+ \qquad
+ \mathcal L(X_1\mid P)=q_1^P.
+\end{equation}
+For clarity, its conditional graph mass function is
+\begin{equation}
+ \mu_G^P([G]_{\cong})
+ =\Pr_{\mu_{\rm bal}}\!\left[[G']_{\cong}=[G]_{\cong}\mid P\right],
+\end{equation}
+and the remaining conclusions are
+\begin{equation}
+ \operatorname{Dec}_{\#}q_1^P=\mu_G^P
+\end{equation}
+on $\mathfrak G_{N,K_{\rm cl}}\cup\{\bot_{\rm dec}\}$, with zero mass at
+$\bot_{\rm dec}$, and
+\begin{equation}
+ G_1:=\operatorname{Dec}(X_1),\qquad
+ \Pr\!\left[
+ G_1\in\mathfrak G_{N,K_{\rm cl}},\;
+ \mathrm{Valid}(G_1)=1,\;
+ \widehat{\mathrm{L1}}(G_1,P)=1
+ \,\middle|\,P\right]=1.
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ideal-terminal-law}]
+Fix an endpoint $x_1$. For one coordinate, let $p_t(v)=p_{t,i}(v\mid x_{1,i})$
+and $\dot p_t(v)=\dot p_{t,i}(v\mid x_{1,i})$. The off-diagonal definition of
+$R^*_{t,i}$ gives the net probability flux into state $v$ as
+\begin{align}
+ \sum_u p_t(u)R^*_{t,i}(u,v\mid x_{1,i})
+ &=
+ \frac{1}{|S_{t,i}|}\sum_{u\in S_{t,i}}
+ \left([\dot p_t(v)-\dot p_t(u)]_+
+       -[\dot p_t(u)-\dot p_t(v)]_+\right)\\
+ &=
+ \dot p_t(v)-\frac{1}{|S_{t,i}|}
+ \sum_{u\in S_{t,i}}\dot p_t(u)
+ =\dot p_t(v),
+\end{align}
+because the derivative of a probability vector sums to zero. Thus each univariate rate realizes
+its coordinate path. The sum of one-coordinate generators realizes the product conditional path
+$q_{t\mid1}^P$ by the product rule:
+\begin{equation}
+ \partial_t q_{t\mid1}^P(y\mid x_1)
+ =
+ \sum_x q_{t\mid1}^P(x\mid x_1)R_t^*(x,y\mid x_1,P).
+\end{equation}
+Averaging this identity over $q_1^P$ and applying Bayes' rule yields
+\begin{align}
+ \partial_t q_t^P(y)
+ &=
+ \sum_x q_t^P(x)
+ \sum_{x_1}
+ \Pr[X_1=x_1\mid X_t=x,P]\,
+ R_t^*(x,y\mid x_1,P)\\
+ &=
+ \sum_x q_t^P(x)R_t(x,y\mid P).
+\end{align}
+By Corollary~\ref{cor:local-rate-recovery}, $R_t^{\theta^\star}=R_t$ almost surely on the
+population path. On every compact interval $[0,1-\eta]$, $\eta>0$, this finite-state forward
+equation has a unique solution with initial law $q_0^P$, hence the exactly simulated CTMC has
+marginal $q_t^P$. Since each conditional coordinate path converges to its endpoint point mass,
+$q_t^P\to q_1^P$ as $t\uparrow1$.
+
+Finally, deterministic decode round trip sends every encoded endpoint to its source graph.
+Summing $q_1^P$ over all endpoint encodings of one graph class therefore gives $\mu_G^P$.
+The assumed endpoint validity and exact replay make the final probability-one statement immediate.
+\end{proof}
+
+\begin{corollary}[Decoder contraction and approximate failure bound]
+\label{cor:decoder-contraction}
+Under the endpoint assumptions of Theorem~\ref{thm:ideal-terminal-law}, let
+$\widetilde q_1^P$ be any approximate terminal raw-state law and define
+\begin{equation}
+ \mathcal B_P=
+ \{x:\operatorname{Dec}(x)=\bot_{\rm dec}\}
+ \cup
+ \left\{x:\operatorname{Dec}(x)=G\in\mathfrak G_{N,K_{\rm cl}},\
+ \mathrm{Valid}(G)\widehat{\mathrm{L1}}(G,P)=0\right\}.
+\end{equation}
+Then
+\begin{equation}
+ \left\|
+ \operatorname{Dec}_{\#}\widetilde q_1^P-\mu_G^P
+ \right\|_{\rm TV}
+ \leq
+ \left\|\widetilde q_1^P-q_1^P\right\|_{\rm TV},
+\end{equation}
+and
+\begin{equation}
+ \Pr_{X\sim\widetilde q_1^P}[X\in\mathcal B_P]
+ \leq
+ \left\|\widetilde q_1^P-q_1^P\right\|_{\rm TV}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Total variation cannot increase under a measurable deterministic map, which proves the first
+inequality. The failure event has probability zero under $q_1^P$ by
+Theorem~\ref{thm:ideal-terminal-law}; its probability under $\widetilde q_1^P$ is therefore at most
+the total-variation distance between the two raw-state laws.
+\end{proof}
+
+The theorem is intentionally an ideal population statement. It does not characterize the
+finite-capacity Transformer trained with auxiliary losses and PCGrad, does not bound the
+Monte Carlo endpoint approximation or capped Euler discretization, and does not imply support
+outside $q_1^P$ or strong catalogue escape. Corollary~\ref{cor:decoder-contraction} identifies the
+single approximation quantity whose control would transfer ideal endpoint correctness to the
+implemented sampler.
 
 \subsection{Matched-budget post-hoc filtering}
 
 Fix a reaction program $P$, and define
 \begin{equation}
-    A_P(G)
+    \mathcal Y=\mathfrak G_{N,K_{\rm cl}}\cup\mathfrak F_{\rm gen},
+    \qquad A_P(y)
     =
     \mathbf{1}\!\left[
-        G\in\mathcal{G}_{\mathrm{L1}}(P)
+        y\in\mathfrak G_{N,K_{\rm cl}},\;
+        \mathrm{Valid}(y)=1,\;
+        \widehat{\mathrm{L1}}(y,P)=1
     \right].
 \end{equation}
-For a proposal distribution $Q$ on the bounded graph space, let
+Thus $A_P(y)=0$ for invalid-decode and other generation failures. For a proposal law $Q$ on
+$\mathcal Y$, conditional on a fixed trained model and requested program, let
 \begin{equation}
     Z_Q(P)
     =
@@ -2001,26 +2455,18 @@ denote the exact-L1 acceptance probability.
 
 \begin{proposition}[Exact law of matched-budget post-hoc filtering]
 \label{prop:posthoc-budget}
-Suppose $Z_Q(P)>0$.
-Rejection filtering produces the conditional distribution
+For $B$ conditionally independent attempts $Y_1,\ldots,Y_B\sim Q$,
+$N_B=\sum_{b=1}^BA_P(Y_b)$ satisfies
+\begin{equation}
+    N_B\sim\operatorname{Binomial}(B,Z_Q(P))
+\end{equation}
+for every $Z_Q(P)\in[0,1]$. If $Z_Q(P)>0$, rejection filtering additionally produces
 \begin{equation}
     Q_{\mathrm{post}}(g\mid P)
     =
     \Pr_{G\sim Q}[G=g\mid A_P(G)=1]
     =
     \frac{Q(g)A_P(g)}{Z_Q(P)}.
-\end{equation}
-For $B$ independent attempts $G_1,\ldots,G_B\sim Q$, define
-\begin{equation}
-    N_B
-    =
-    \sum_{b=1}^{B}A_P(G_b).
-\end{equation}
-Then
-\begin{equation}
-    N_B
-    \sim
-    \operatorname{Binomial}(B,Z_Q(P)),
 \end{equation}
 and consequently
 \begin{align}
@@ -2031,11 +2477,11 @@ and consequently
     \Pr[N_B=0]
     &=\bigl(1-Z_Q(P)\bigr)^B.
 \end{align}
-If $T_K$ is the number of independent attempts required to obtain $K$ accepted products, then
+If $T_m$ is the number of independent attempts required to obtain $m$ accepted products, then
 \begin{equation}
-    \mathbb E[T_K]
+    \mathbb E[T_m]
     =
-    \frac{K}{Z_Q(P)}.
+    \frac{m}{Z_Q(P)}.
 \end{equation}
 Finally, for a program-conditioned proposal $Q_P$ and an unconditioned proposal $Q_0$,
 \begin{equation}
@@ -2050,7 +2496,9 @@ Finally, for a program-conditioned proposal $Q_P$ and an unconditioned proposal 
 \end{proposition}
 
 \begin{proof}
-For any graph $g$, Bayes' rule gives
+Conditional independence makes the acceptance indicators Bernoulli with common probability
+$Z_Q(P)$, including the degenerate case $Z_Q(P)=0$, so their sum is binomial. When $Z_Q(P)>0$,
+Bayes' rule gives
 \begin{align}
     \Pr[G=g\mid A_P(G)=1]
     &=
@@ -2062,86 +2510,58 @@ For any graph $g$, Bayes' rule gives
     &=
     \frac{A_P(g)Q(g)}{Z_Q(P)}.
 \end{align}
-Since the proposals are independent, the indicators
-$A_P(G_1),\ldots,A_P(G_B)$ are independent Bernoulli random variables with common success
-probability $Z_Q(P)$.
-Their sum is therefore binomial, which gives its expectation, variance, and zero-acceptance
-probability.
-
-The waiting time $T_K$ has the negative-binomial distribution with success probability $Z_Q(P)$,
-whose expectation is $K/Z_Q(P)$.
+The waiting time $T_m$ has the negative-binomial distribution with success probability $Z_Q(P)$,
+whose expectation is $m/Z_Q(P)$.
 Applying the binomial expectation separately to $Q_P$ and $Q_0$ and subtracting proves the final
 identity.
 \end{proof}
 
 The proposition compares sampling efficiency only.
 It does not imply that conditioning improves $Z_Q(P)$; the matched production experiment tests that
-empirical claim.
+empirical claim. The binomial count is the total accepted-attempt count, not the number of distinct
+accepted products.
 
 \subsection{Recursive route construction}
 
 \begin{lemma}[Termination of bounded route assessment]
 \label{lem:planner-termination}
-Fix an assessment contract $\mathcal{B}$ with finite maximum route depth $D_{\mathcal{B}}$.
-Assume that each evidence query terminates and returns either a non-expansion outcome or an expansion
-with finitely many reactants.
-Then $\mathcal{A}_{\mathcal{B}}(G,P)$ terminates with either a finite route tree or a typed failure
-state.
+Fix $\mathfrak B_{\rm route}$ with finite maximum route depth $D_{\mathfrak B}$. Assume finitely many
+candidate root decompositions, finitely many alternative expansions per molecule, finitely many
+reactants per expansion, and termination of every evidence, proposal and forward-verification call.
+Then $\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)$ terminates in
+$\mathfrak D\cup\mathfrak F_{\mathfrak B}$.
 \end{lemma}
 
 \begin{proof}
-We use induction on the remaining depth $d=D_{\mathcal{B}}-k$ at a node of depth $k$.
+We use induction on the remaining depth $d=D_{\mathfrak B}-k$ at a node of depth $k$.
 When $d=0$, the assessor performs the terminating evidence query and either accepts a terminal node,
 returns its typed failure, or rejects an expansion with a depth-exhaustion state.
 Suppose the claim holds whenever fewer than $d>0$ levels remain.
-At the current node, the evidence query either returns a non-expansion outcome immediately or a
-finite reactant tuple.
-In the latter case, each child is assessed at depth $k+1$ and therefore has $d-1$ levels remaining.
-Every child assessment terminates with a finite result by the induction hypothesis, and a finite
-tuple of finite child trees forms a finite parent tree.
-Finite expansion, proposal, verifier, and time budgets can only stop this recursion earlier.
+At the current node, the finite sequence of terminating proposal, evidence and verification calls
+returns either a typed non-expansion outcome or one of finitely many finite reactant tuples. In the
+latter case, each child is assessed at depth $k+1$ and therefore has $d-1$ levels remaining. Every
+child assessment terminates by the induction hypothesis, and a finite tuple of finite child trees
+forms a finite parent tree. The finite root-decomposition loop also terminates.
 Rejecting an ancestor identity additionally prevents a circular molecular dependency from being
 accepted, but finite depth alone establishes termination.
 \end{proof}
 
-\begin{theorem}[Soundness of returned synthesis dossiers]
-\label{thm:dossier-soundness}
-Fix $\mathcal{B}$ as in Lemma~\ref{lem:planner-termination}.
-If $\mathcal{A}_{\mathcal{B}}(G,P)=T$, then $T$ is finite and
-$\mathrm{Complete}(G,T,P)=1$.
-In particular, $G$ passes exact L1 verification under $P$, every L2 reaction in $T$ reconstructs its
-target exactly under its registered forward transform, and every leaf has a current accepted record
-identifying the same constitutional structure as supplier-listed and available.
-A candidate tree with $\mathrm{Complete}(G,T,P)=0$ cannot be returned as a synthesis dossier.
-The outcome $\mathcal{A}_{\mathcal{B}}(G,P)=\bot$ states only that no complete dossier was returned
-under $\mathcal{B}$.
-It does not prove that no route exists under a larger search budget, a different admitted reaction
-set, or a later supplier snapshot.
-\end{theorem}
+\begin{invariant}[Fail-closed synthesis-dossier implementation]
+\label{inv:dossier-soundness}
+For the frozen assessor implementation, a successful return
+$\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)=T\in\mathfrak D$ is admitted only after checking
+$\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$. Every other branch returns a member of the typed failure
+set $\mathfrak F_{\mathfrak B}$. This is an implementation invariant, not a completeness theorem for
+the chemical search space.
+\end{invariant}
 
-\begin{proof}
-Finiteness follows from Lemma~\ref{lem:planner-termination}.
-It remains to establish the three factors in the completeness predicate.
-The assessor begins recursive route construction only after exact L1 decomposition and forward
-replay have succeeded, so a returned dossier satisfies $\mathrm{L1}(G,P)=1$.
-
-We next use structural induction on the finite route tree.
-At a leaf, the assessor returns a complete node only when the evidence policy admits an exact
-terminal-material record whose availability state is current and closed.
-Therefore $\mathrm{Available}(\ell)=1$ for every leaf $\ell$ of a returned tree.
-At an internal node, the assessor admits an expansion only when the registered reaction has
-exact-source, exact-substrate evidence and its deterministic forward transform uniquely reconstructs
-the target product.
-Thus $\mathrm{Verify}(r)=1$ for the associated reaction node $r$.
-The internal node is complete only when every child is complete; the induction hypothesis therefore
-applies to all descendant reactions and leaves.
-
-All factors in $\mathrm{Complete}(G,T,P)$ equal one, so their product equals one.
-Conversely, if any factor for a candidate tree equals zero, the fail-closed return rule does not
-admit that tree as a dossier and instead records the corresponding typed failure.
-Because the search and evidence contract is bounded, this rejection establishes no completeness
-claim about routes outside $\mathcal{B}$.
-\end{proof}
+The invariant records four independently checked conditions: the dossier is a well-formed tree
+rooted at $G$; its selected root trace belongs to $\widehat{\mathcal E}_P(G)$; every upstream
+reaction is evidence-admitted and satisfies
+$\operatorname{target}(r)\in\mathcal F_r(\operatorname{reactants}(r))$; and every leaf closes under
+the dated availability policy. A typed failure means only that no complete dossier was returned
+under the frozen contract, not that no route exists under a larger search budget, a different
+admitted reaction set, or a later supplier snapshot.
 
 \clearpage
 

@@ -14,6 +14,10 @@ from forge.core.io import read_json_object
 from forge.flow import rstar_step
 from forge.model.defog_feasibility import AtomState, _model_state_sha256, graph_to_molecule
 from forge.model.local_chemistry_support import LocalChemistrySupport, tree_path_indices
+from forge.model.reaction_core_saturation import (
+    BoundReactionCoreSaturation,
+    ReactionCoreSaturationPolicy,
+)
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_flow import (
     collate_synthesis_program_layouts,
@@ -51,11 +55,22 @@ TERMINAL_DECODE_POLICIES = (
 LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY = "strict_local_chemistry_argmax"
 PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_program_topology_argmax"
 COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_ugi_program_coupled_conditional"
+CORE_SATURATION_TERMINAL_DECODE_POLICY = "strict_reaction_core_saturation_argmax"
 SUPPORTED_TERMINAL_DECODE_POLICIES = (
     *TERMINAL_DECODE_POLICIES,
     LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
     PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
     COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+    CORE_SATURATION_TERMINAL_DECODE_POLICY,
+)
+STRICT_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        "strict_valence_topology_argmax",
+        LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+        PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+        COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+        CORE_SATURATION_TERMINAL_DECODE_POLICY,
+    }
 )
 
 
@@ -539,6 +554,7 @@ def _strict_terminal_record(
     local_chemistry_support: LocalChemistrySupport | None = None,
     *,
     enforce_program_topology: bool = False,
+    core_saturation: BoundReactionCoreSaturation | None = None,
 ) -> tuple[dict[str, np.ndarray] | None, str | None]:
     """Decode one exact-size graph under topology and valence support, without fallback."""
 
@@ -577,6 +593,26 @@ def _strict_terminal_record(
         _exact_role_morphology_targets(record) if enforce_program_topology else None
     )
 
+    # The qualified transform pins the hydrogen count, and therefore the exact heavy-atom
+    # valence, of some reaction-core positions.  Reduce their capacity to that requirement so the
+    # admissible sets below simply cannot place another neighbour there, and record the target so
+    # under-saturation is caught too.  Precursor components meet only at the core, so a generated
+    # edge stays inside one component block and a generated closure joins two exterior atoms.
+    required_core_units: np.ndarray | None = None
+    core_constrained = core_saturation is not None and core_saturation.applies_to(record)
+    component_confined = (
+        core_constrained and core_saturation.policy.component_confined_generated_edges
+    )
+    exterior_only_closures = (
+        core_constrained and core_saturation.policy.exterior_only_generated_closures
+    )
+    if core_constrained:
+        required_core_units = core_saturation.required_units(record)
+        pinned = required_core_units >= 0
+        if np.any(required_core_units[pinned] > maximum_capacities[pinned]):
+            return None, "reaction_core_saturation_exceeds_atom_support"
+        maximum_capacities[pinned] = required_core_units[pinned]
+
     # Reserve immutable adapter edges first so variable choices cannot consume their capacity.
     for child in np.flatnonzero(record.fixed_parent_bond_mask):
         child = int(child)
@@ -607,7 +643,9 @@ def _strict_terminal_record(
         valid = np.zeros(count, dtype=np.bool_)
         if parent_headroom[child]:
             valid[:child] = parent_headroom[:child]
-            if enforce_program_topology:
+            # Core saturation confines generated tree edges to one component just as program
+            # topology does, so both gates mask the admissible row the same way.
+            if enforce_program_topology or component_confined:
                 valid[:child] &= component_instances[:child] == component_instances[child]
         if enforce_program_topology:
             for parent in np.flatnonzero(valid).tolist():
@@ -629,11 +667,12 @@ def _strict_terminal_record(
                     valid[parent] = False
         parent = _argmax_allowed(predictions["parents"][index, child, :count], valid)
         if parent is None:
-            reason = (
-                "program_topology_parent_unavailable"
-                if enforce_program_topology
-                else "parent_capacity_exhausted"
-            )
+            if enforce_program_topology:
+                reason = "program_topology_parent_unavailable"
+            elif component_confined:
+                reason = "reaction_core_component_parent_unavailable"
+            else:
+                reason = "parent_capacity_exhausted"
             return None, reason
         parents[child] = parent
         degrees[[child, parent]] += 1
@@ -680,6 +719,14 @@ def _strict_terminal_record(
                 semantic_pair = component_instances[left] == component_instances[right] or (
                     int(core[left]) > 1 and int(core[right]) > 1
                 )
+                if exterior_only_closures:
+                    # A ring that reaches a reaction-core atom, or crosses two precursor
+                    # components, cannot be cut back into that transform's precursors.
+                    semantic_pair = (
+                        component_instances[left] == component_instances[right]
+                        and int(core[left]) == 1
+                        and int(core[right]) == 1
+                    )
                 if enforce_program_topology:
                     role_state = int(record.role_states[left])
                     current = _terminal_role_morphology(
@@ -730,7 +777,11 @@ def _strict_terminal_record(
                     else:
                         closure_left[slot], closure_right[slot] = left, right
         if best is None:
-            return None, "closure_pair_unavailable"
+            return None, (
+                "reaction_core_exterior_closure_unavailable"
+                if exterior_only_closures and not enforce_program_topology
+                else "closure_pair_unavailable"
+            )
         _, left, right = best
         degrees[[left, right]] += 1
         minimum_used[[left, right]] += 2
@@ -899,6 +950,10 @@ def _strict_terminal_record(
             ):
                 return None, "component_outside_observed_local_support"
 
+    if required_core_units is not None:
+        # Bond-order selection below must not spend a pinned core position's stated valence on a
+        # higher bond order either, so the realized capacities carry the same ceiling.
+        capacities = np.minimum(capacities, maximum_capacities)
     used = minimum_used.copy()
     variable_edges: list[tuple[str, int, int, int]] = []
     for child in range(1, count):
@@ -944,6 +999,12 @@ def _strict_terminal_record(
             closure_bonds[slot] = bond
     if np.any(used > capacities):
         return None, "terminal_valence_overflow"
+    if required_core_units is not None:
+        pinned = required_core_units >= 0
+        if np.any(used[pinned] != required_core_units[pinned]):
+            # Masking makes over-substitution unreachable; this catches under-substitution, which
+            # would leave the core atom with an extra hydrogen and equally break the transform.
+            return None, "reaction_core_saturation_unmet"
     if local_chemistry_support is not None:
         symbols = tuple(atom_vocabulary[int(state)].symbol for state in node_states)
         terminal_edges = [
@@ -999,6 +1060,7 @@ def decode_synthesis_program_strict_argmax(
     local_chemistry_support: LocalChemistrySupport | None = None,
     *,
     enforce_program_topology: bool = False,
+    core_saturation: BoundReactionCoreSaturation | None = None,
 ) -> tuple[dict[str, Any], tuple[str | None, ...]]:
     """Decode once under strict support; infeasible attempts abstain and are never repaired."""
 
@@ -1059,6 +1121,7 @@ def decode_synthesis_program_strict_argmax(
             atom_vocabulary,
             local_chemistry_support,
             enforce_program_topology=enforce_program_topology,
+            core_saturation=core_saturation,
         )
         reasons.append(reason)
         if decoded is None:
@@ -1088,6 +1151,7 @@ def sample_synthesis_program_products(
     terminal_decode_policy: str = "unconstrained_argmax",
     local_chemistry_support: LocalChemistrySupport | None = None,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
+    reaction_core_saturation_policy: ReactionCoreSaturationPolicy | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate from semantic layouts while exposing only Ugi adapter-fixed graph states."""
 
@@ -1111,6 +1175,23 @@ def sample_synthesis_program_products(
         raise SynthesisProgramSamplingError(
             "coupled Ugi topology decoding and its explicit support policy must be supplied together"
         )
+    if (terminal_decode_policy == CORE_SATURATION_TERMINAL_DECODE_POLICY) != (
+        reaction_core_saturation_policy is not None
+    ):
+        raise SynthesisProgramSamplingError(
+            "strict reaction-core saturation decoding and its registry contract must be supplied "
+            "together"
+        )
+    core_saturation: BoundReactionCoreSaturation | None = None
+    if reaction_core_saturation_policy is not None:
+        vocabulary = getattr(model, "vocabulary", None)
+        core_position_states = getattr(vocabulary, "core_position_states", None)
+        if core_position_states is None:
+            raise SynthesisProgramSamplingError(
+                "reaction-core saturation decoding requires a model that declares its "
+                "core-position vocabulary"
+            )
+        core_saturation = reaction_core_saturation_policy.bind(core_position_states)
     resolved_device = torch.device(device)
     repeated = tuple(record for record in records for _ in range(samples_per_program))
     maximum_closures = int(model.maximum_closures)
@@ -1276,18 +1357,14 @@ def sample_synthesis_program_products(
                     endpoint_logits.scatter_(-1, topology_state[field].unsqueeze(-1), 1e9)
                     pointer_predictions[field] = endpoint_logits
                 terminal_predictions = pointer_predictions
-            if terminal_decode_policy in {
-                "strict_valence_topology_argmax",
-                LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
-                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
-            }:
+            if terminal_decode_policy in STRICT_TERMINAL_DECODE_POLICIES:
                 terminal, abstention_reasons = decode_synthesis_program_strict_argmax(
                     terminal_predictions,
                     layout,
                     local,
                     atom_vocabulary,
                     local_chemistry_support,
+                    core_saturation=core_saturation,
                     enforce_program_topology=(
                         terminal_decode_policy
                         in {
@@ -1306,12 +1383,7 @@ def sample_synthesis_program_products(
             else:
                 terminal = decode_synthesis_program_argmax(terminal_predictions, layout)
                 abstention_reasons = (None,) * len(local)
-            if terminal_decode_policy in {
-                "strict_valence_topology_argmax",
-                LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
-                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
-            }:
+            if terminal_decode_policy in STRICT_TERMINAL_DECODE_POLICIES:
                 fixed_failures += int(not _fixed_state_exact_records(terminal, local))
             else:
                 fixed_failure_checks.append(~_fixed_state_exact_tensor(terminal, layout))
@@ -1391,6 +1463,9 @@ def sample_synthesis_program_products(
                             }
                         ),
                         "topology_coupling_second_pass_applied": coupled_ugi_topology,
+                        "reaction_core_saturation_policy_applied": (
+                            core_saturation is not None and core_saturation.applies_to(record)
+                        ),
                         "exact_target_graph": smiles == record.graph.canonical_smiles,
                         "exact_tensor": all(exact_fields.values()),
                         "exact_fields": exact_fields,
@@ -1436,6 +1511,12 @@ def sample_synthesis_program_products(
         "ugi_topology_policy": (
             None if ugi_topology_policy is None else ugi_topology_policy.to_mapping()
         ),
+        "reaction_core_saturation_policy_applied": reaction_core_saturation_policy is not None,
+        "reaction_core_saturation_policy": (
+            None
+            if reaction_core_saturation_policy is None
+            else reaction_core_saturation_policy.to_mapping()
+        ),
         "by_program": by_program,
         "repairs": dict(Counter()),
     }
@@ -1443,9 +1524,11 @@ def sample_synthesis_program_products(
 
 __all__ = [
     "CHECKPOINT_SCHEMA",
+    "CORE_SATURATION_TERMINAL_DECODE_POLICY",
     "COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY",
     "LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY",
     "PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY",
+    "STRICT_TERMINAL_DECODE_POLICIES",
     "SUPPORTED_TERMINAL_DECODE_POLICIES",
     "TERMINAL_DECODE_POLICIES",
     "SynthesisProgramSamplingError",

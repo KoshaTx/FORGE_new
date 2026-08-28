@@ -29,6 +29,7 @@ from forge.model.common_ugi_benchmark import (
 from forge.model.conditional_role_dependence import cross_role_fidelity_to_heldout
 from forge.model.defog_feasibility import _model_state_sha256
 from forge.model.local_chemistry_support import LocalChemistrySupport
+from forge.model.reaction_core_saturation import ReactionCoreSaturationPolicy
 from forge.model.reaction_program_evaluation import (
     adjudicate_reaction_program_rows,
     evaluate_reaction_program_samples,
@@ -40,6 +41,7 @@ from forge.model.synthesis_program_layout import (
     SynthesisProgramLayoutPrior,
 )
 from forge.model.synthesis_program_sampling import (
+    CORE_SATURATION_TERMINAL_DECODE_POLICY,
     LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
     PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
     SUPPORTED_TERMINAL_DECODE_POLICIES,
@@ -588,6 +590,15 @@ def run_synthesis_program_production_evaluation(
         raise SynthesisProgramProductionEvaluationError(
             "local chemistry support must be present exactly for its terminal decoder"
         )
+    # The core-saturation contract needs no new artifact: it is read from the qualified reaction
+    # registry that this evaluation already pins by sha256.
+    reaction_core_saturation_policy = None
+    if terminal_decode_policy == CORE_SATURATION_TERMINAL_DECODE_POLICY:
+        reaction_core_saturation_policy = ReactionCoreSaturationPolicy.from_qualified_registry(
+            paths["qualified_ugi_reactions"],
+            reaction_id="ugi_3cr_agile",
+            expected_sha256=str(config["inputs"]["qualified_ugi_reactions"]["sha256"]),
+        )
     all_rows: list[dict[str, Any]] = []
     checkpoint_metrics: dict[str, Any] = {}
     component_disjoint_metrics: dict[str, Any] = {}
@@ -695,6 +706,7 @@ def run_synthesis_program_production_evaluation(
                                 program_state_mapping=state_mapping,
                                 terminal_decode_policy=terminal_decode_policy,
                                 local_chemistry_support=local_chemistry_support,
+                                reaction_core_saturation_policy=reaction_core_saturation_policy,
                             )
                             adjudicate_reaction_program_rows(
                                 rows,
@@ -1038,6 +1050,11 @@ def run_synthesis_program_production_evaluation(
             pin_record(paths["local_chemistry_support"], repo)
             if local_chemistry_support is not None
             else None
+        ),
+        "reaction_core_saturation_policy": (
+            None
+            if reaction_core_saturation_policy is None
+            else reaction_core_saturation_policy.to_mapping()
         ),
         "nonclaims": [
             "Generated-product metrics are computational evidence, not synthesis-success probabilities.",

@@ -31,6 +31,7 @@ PROGRAM_NAMES = {
     "bl_2023_repeated_aza_michael": "Aza-Michael",
     "lx_2024_repeated_reductive_amination": "Reductive amination",
 }
+PRODUCTION_ATTEMPTS_PER_SEED = 3_072
 INTERNAL_COMMON_METHOD_ORDER = (
     "finite_catalogue_oracle",
     "shared_null_posthoc",
@@ -203,6 +204,30 @@ def _production_row(program: str, arm: str, metrics: Mapping[str, Any]) -> str:
     )
 
 
+def _production_metric_cells(metrics: Mapping[str, Any]) -> tuple[str, ...]:
+    """Render the six metric cells used by the transposed production table."""
+
+    def mean(name: str) -> float:
+        return _number(_metric_summary(metrics, name)["mean"], label=f"production.{name}")
+
+    exact = _metric_summary(metrics, "exact_l1_yield_per_attempt")
+    exact_mean = 100.0 * _number(exact["mean"], label="production exact mean")
+    exact_sd = 100.0 * _number(
+        exact["sample_standard_deviation"], label="production exact sd"
+    )
+    return (
+        f"{100.0 * mean('raw_valid_fraction'):.1f}/{100.0 * mean('connected_fraction'):.1f}",
+        f"{100.0 * mean('exact_l1_decomposition_coverage'):.1f}/"
+        f"{100.0 * mean('exact_forward_replay_precision'):.1f}",
+        f"{100.0 * mean('decomposition_abstention_fraction'):.1f}/"
+        f"{100.0 * mean('decomposition_ambiguity_fraction'):.1f}",
+        rf"${exact_mean:.1f}\pm{exact_sd:.1f}$",
+        f"{100.0 * mean('whole_lipid_novelty_fraction'):.1f}/"
+        f"{100.0 * mean('component_novelty_fraction'):.1f}",
+        f"{mean('internal_diversity'):.3f}/{mean('effective_component_count'):.1f}",
+    )
+
+
 def _catalogue_row(
     program: str, method: str, metrics: Mapping[str, Any], *, catalogue: bool
 ) -> str:
@@ -224,6 +249,26 @@ def _catalogue_row(
     return (
         " & ".join(_tex_escape(value) if index < 2 else value for index, value in enumerate(cells))
         + r" \\"
+    )
+
+
+def _catalogue_metric_cells(
+    program: str, method: str, metrics: Mapping[str, Any], *, catalogue: bool
+) -> tuple[str, ...]:
+    """Render the seven metric cells used by the transposed catalogue table."""
+
+    def mean(name: str) -> float:
+        return _number(_metric_summary(metrics, name)["mean"], label=f"{method}.{program}.{name}")
+
+    whole_name = "whole_product_novelty_fraction" if catalogue else "whole_lipid_novelty_fraction"
+    return (
+        f"{1000.0 * mean('raw_valid_fraction'):.1f}",
+        f"{1000.0 * mean('exact_l1_yield_per_attempt'):.1f}",
+        f"{mean('unique_exact_l1_products_per_1000_attempts'):.1f}",
+        f"{mean('unique_open_ended_exact_l1_products_per_1000_attempts'):.1f}",
+        f"{100.0 * mean(whole_name):.1f}",
+        f"{100.0 * mean('component_novelty_fraction'):.1f}",
+        f"{mean('internal_diversity'):.3f}/{mean('effective_component_count'):.1f}",
     )
 
 
@@ -916,6 +961,20 @@ def render_completed_evidence_v1(
     semantic = loaded["semantic_intervention"]
     if semantic.get("status") != "complete":
         raise CompletedEvidenceV1Error("semantic intervention is not complete")
+    semantic_source_spec = semantic.get("source_run", {}).get("result")
+    if not isinstance(semantic_source_spec, Mapping):
+        raise CompletedEvidenceV1Error("semantic intervention source run is not pinned")
+    semantic_source_path, semantic_source = _load_pinned_json(
+        semantic_source_spec, repo, label="semantic intervention source run"
+    )
+    sources.append(pin_record(semantic_source_path, repo))
+    semantic_replicates = semantic_source.get("replicates")
+    if not isinstance(semantic_replicates, Mapping) or set(semantic_replicates) != {
+        "0",
+        "1",
+        "2",
+    }:
+        raise CompletedEvidenceV1Error("semantic intervention seed results are incomplete")
     interventions = {str(row["condition"]): row for row in semantic.get("interventions", [])}
     expected_interventions = {
         "mismatched_program__bl_2023_repeated_aza_michael",
@@ -972,6 +1031,41 @@ def render_completed_evidence_v1(
             ]
         )
     _write_text(output_dir / "production_comparison_rows.tex", "\n".join(production_lines) + "\n")
+    production_columns = (
+        arms["ugi_only_conditioned"]["ugi_3cr_agile"],
+        final_arm["ugi_3cr_agile"],
+        arms["shared_three_program_null"]["ugi_3cr_agile"],
+        arms["shared_three_program_program_id_cyclic"]["ugi_3cr_agile"],
+        final_arm["bl_2023_repeated_aza_michael"],
+        arms["shared_three_program_null"]["bl_2023_repeated_aza_michael"],
+        arms["shared_three_program_program_id_cyclic"]["bl_2023_repeated_aza_michael"],
+        final_arm["lx_2024_repeated_reductive_amination"],
+        arms["shared_three_program_null"]["lx_2024_repeated_reductive_amination"],
+        arms["shared_three_program_program_id_cyclic"][
+            "lx_2024_repeated_reductive_amination"
+        ],
+    )
+    production_metric_rows = tuple(zip(*map(_production_metric_cells, production_columns)))
+    production_metric_labels = (
+        "Valid./Conn.",
+        "Decomp./Replay",
+        "Abst./Ambig.",
+        "Exact-L1/attempt",
+        "Whole/Comp. novelty",
+        r"Diversity/$N_{\mathrm{eff}}$",
+    )
+    highlighted_production_columns = {1, 4, 7}
+    production_transposed_lines = []
+    for label, cells in zip(production_metric_labels, production_metric_rows, strict=True):
+        rendered = [
+            (r"\cellcolor{forgerow}" + value if index in highlighted_production_columns else value)
+            for index, value in enumerate(cells)
+        ]
+        production_transposed_lines.append(" & ".join((label, *rendered)) + r" \\ ")
+    _write_text(
+        output_dir / "production_comparison_transposed_rows.tex",
+        "\n".join(production_transposed_lines) + "\n",
+    )
 
     def production_summary_tex(metrics: Mapping[str, Any], name: str, scale: float) -> str:
         values = [
@@ -1011,6 +1105,37 @@ def render_completed_evidence_v1(
             + r" \\"
         )
     _write_text(output_dir / "shared_program_figure_rows.tex", "\n".join(figure2_lines) + "\n")
+    seed_count_lines = []
+    for program in PROGRAMS:
+        yields = _metric_summary(final_arm[program], "exact_l1_yield_per_attempt")["by_seed"]
+        for seed, value in zip(expected_seeds, yields, strict=True):
+            yield_value = _number(value, label=f"{program}.seed_{seed}.exact_l1_yield")
+            exact_count = round(yield_value * PRODUCTION_ATTEMPTS_PER_SEED)
+            if not math.isclose(
+                exact_count / PRODUCTION_ATTEMPTS_PER_SEED,
+                yield_value,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            ):
+                raise CompletedEvidenceV1Error(
+                    f"{program} seed {seed} exact-L1 yield does not encode an integer count"
+                )
+            seed_count_lines.append(
+                " & ".join(
+                    (
+                        PROGRAM_NAMES[program],
+                        str(seed),
+                        f"{exact_count:,}".replace(",", "{,}"),
+                        f"{PRODUCTION_ATTEMPTS_PER_SEED:,}".replace(",", "{,}"),
+                        f"{100.0 * yield_value:.2f}",
+                    )
+                )
+                + r" \\"
+            )
+    _write_text(
+        output_dir / "production_seed_exact_counts_rows.tex",
+        "\n".join(seed_count_lines) + "\n",
+    )
 
     catalogue_lines = []
     for index, program in enumerate(PROGRAMS):
@@ -1023,6 +1148,37 @@ def render_completed_evidence_v1(
             ]
         )
     _write_text(output_dir / "catalogue_comparison_rows.tex", "\n".join(catalogue_lines) + "\n")
+    catalogue_columns = tuple(
+        item
+        for program in PROGRAMS
+        for item in (
+            _catalogue_metric_cells(program, "FORGE", final_arm[program], catalogue=False),
+            _catalogue_metric_cells(
+                program, "Finite catalogue", catalogue[program], catalogue=True
+            ),
+        )
+    )
+    catalogue_metric_rows = tuple(zip(*catalogue_columns))
+    catalogue_metric_labels = (
+        "Valid/1k",
+        "Verified exact L1/1k",
+        "Distinct exact L1/1k",
+        "Verifier-recovered component-novel/1k",
+        "Whole novelty",
+        "Component novelty",
+        r"Diversity/$N_{\mathrm{eff}}$",
+    )
+    catalogue_transposed_lines = []
+    for label, cells in zip(catalogue_metric_labels, catalogue_metric_rows, strict=True):
+        rendered = [
+            (r"\cellcolor{forgerow}" + value if index % 2 == 0 else value)
+            for index, value in enumerate(cells)
+        ]
+        catalogue_transposed_lines.append(" & ".join((label, *rendered)) + r" \\ ")
+    _write_text(
+        output_dir / "catalogue_comparison_transposed_rows.tex",
+        "\n".join(catalogue_transposed_lines) + "\n",
+    )
     figure3_lines = []
     for program in PROGRAMS:
         figure3_lines.append(
@@ -1163,9 +1319,10 @@ def render_completed_evidence_v1(
     )
 
     paired = production["paired_seed_comparisons"]
-    retention_interval = paired["final_vs_ugi_only"]["ugi_3cr_agile"]["exact_l1_yield_per_attempt"][
-        "paired_seed_difference_interval"
+    retention_metric = paired["final_vs_ugi_only"]["ugi_3cr_agile"][
+        "exact_l1_yield_per_attempt"
     ]
+    retention_interval = retention_metric["paired_seed_difference_interval"]
 
     def paired_values(comparison: str, program: str) -> tuple[float, float, float]:
         interval = paired[comparison][program]["exact_l1_yield_per_attempt"][
@@ -1175,6 +1332,33 @@ def render_completed_evidence_v1(
             _number(interval["point_estimate"], label="paired point"),
             _number(interval["lower_bound"], label="paired low"),
             _number(interval["upper_bound"], label="paired high"),
+        )
+
+    def paired_descriptive(comparison: str, program: str) -> tuple[float, float, float, str]:
+        row = paired[comparison][program]["exact_l1_yield_per_attempt"]
+        left = row.get("final_forge_by_seed")
+        other_keys = sorted(
+            key for key in row if key.endswith("_by_seed") and key != "final_forge_by_seed"
+        )
+        if (
+            not isinstance(left, list)
+            or len(left) != 3
+            or len(other_keys) != 1
+            or not isinstance(row[other_keys[0]], list)
+            or len(row[other_keys[0]]) != 3
+        ):
+            raise CompletedEvidenceV1Error(
+                f"paired comparison lacks three explicit seed differences: {comparison}/{program}"
+            )
+        differences = [
+            _number(a, label="paired left") - _number(b, label="paired right")
+            for a, b in zip(left, row[other_keys[0]], strict=True)
+        ]
+        return (
+            float(np.mean(differences)),
+            min(differences),
+            max(differences),
+            ", ".join(f"{100.0 * value:.2f}" for value in differences),
         )
 
     null_values = {
@@ -1344,12 +1528,29 @@ def render_completed_evidence_v1(
         "ForgePotencyDifferenceCILowPerThousand": f"{1000.0 * potency_ci[0]:.2f}",
         "ForgePotencyDifferenceCIHighPerThousand": f"{1000.0 * potency_ci[1]:.2f}",
     }
+    retention_point, retention_low, retention_high, retention_seeds = paired_descriptive(
+        "final_vs_ugi_only", "ugi_3cr_agile"
+    )
+    macros["ForgeUgiRetentionDifferencePP"] = f"{100.0 * retention_point:.2f}"
+    macros["ForgeUgiRetentionRangeLowPP"] = f"{100.0 * retention_low:.2f}"
+    macros["ForgeUgiRetentionRangeHighPP"] = f"{100.0 * retention_high:.2f}"
+    macros["ForgeUgiRetentionSeedDifferencesPP"] = retention_seeds
     for prefix, values in (("Null", null_values), ("Cyclic", cyclic_values)):
         for program, label in zip(PROGRAMS, ("Ugi", "BL", "LX"), strict=True):
             point, low, high = values[program]
             macros[f"Forge{prefix}{label}DifferencePP"] = f"{100.0 * point:.2f}"
             macros[f"Forge{prefix}{label}CILowPP"] = f"{100.0 * low:.2f}"
             macros[f"Forge{prefix}{label}CIHighPP"] = f"{100.0 * high:.2f}"
+            descriptive = paired_descriptive(
+                "final_vs_shared_null_posthoc"
+                if prefix == "Null"
+                else "final_vs_cyclic_program_id",
+                program,
+            )
+            macros[f"Forge{prefix}{label}DifferencePP"] = f"{100.0 * descriptive[0]:.2f}"
+            macros[f"Forge{prefix}{label}RangeLowPP"] = f"{100.0 * descriptive[1]:.2f}"
+            macros[f"Forge{prefix}{label}RangeHighPP"] = f"{100.0 * descriptive[2]:.2f}"
+            macros[f"Forge{prefix}{label}SeedDifferencesPP"] = descriptive[3]
     factual = semantic["factual"]
     macros["ForgeSemanticFactualPercent"] = f"{100.0 * factual['exact_l1_yield_mean']:.2f}"
     for condition, label in (
@@ -1366,13 +1567,49 @@ def render_completed_evidence_v1(
         )
         macros[f"ForgeSemantic{label}CILowPP"] = f"{100.0 * row['paired_seed_95_interval'][0]:.2f}"
         macros[f"ForgeSemantic{label}CIHighPP"] = f"{100.0 * row['paired_seed_95_interval'][1]:.2f}"
+        seed_differences = []
+        for seed in ("0", "1", "2"):
+            conditions = semantic_replicates[seed].get("conditions")
+            if not isinstance(conditions, Mapping):
+                raise CompletedEvidenceV1Error(
+                    f"semantic intervention seed {seed} conditions are missing"
+                )
+            factual_yield = _number(
+                conditions["factual"]["exact_l1_yield_per_attempt"],
+                label=f"semantic seed {seed} factual yield",
+            )
+            intervention_yield = _number(
+                conditions[condition]["exact_l1_yield_per_attempt"],
+                label=f"semantic seed {seed} {condition} yield",
+            )
+            seed_differences.append(factual_yield - intervention_yield)
+        if not math.isclose(
+            float(np.mean(seed_differences)),
+            _number(
+                row["factual_minus_intervention_exact_l1"],
+                label=f"semantic {condition} point estimate",
+            ),
+            rel_tol=0.0,
+            abs_tol=1e-12,
+        ):
+            raise CompletedEvidenceV1Error(
+                f"semantic intervention {condition} paired differences changed"
+            )
+        macros[f"ForgeSemantic{label}RangeLowPP"] = f"{100.0 * min(seed_differences):.2f}"
+        macros[f"ForgeSemantic{label}RangeHighPP"] = f"{100.0 * max(seed_differences):.2f}"
+        macros[f"ForgeSemantic{label}SeedDifferencesPP"] = ", ".join(
+            f"{100.0 * value:.2f}" for value in seed_differences
+        )
     macro_path = output_dir / "completed_evidence_macros.tex"
     _write_text(macro_path, "\n".join(_macro(name, macros[name]) for name in sorted(macros)) + "\n")
 
     artifact_paths = [
         output_dir / "production_comparison_rows.tex",
+        output_dir / "production_comparison_transposed_rows.tex",
         output_dir / "shared_program_figure_rows.tex",
+        output_dir / "production_seed_exact_counts_rows.tex",
         output_dir / "catalogue_comparison_rows.tex",
+        output_dir / "catalogue_comparison_transposed_rows.tex",
         output_dir / "catalogue_figure_rows.tex",
         output_dir / "common_ugi_completed_rows.tex",
         output_dir / "common_ugi_reaction_external_rows.tex",
