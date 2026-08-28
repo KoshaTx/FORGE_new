@@ -1,0 +1,309 @@
+{
+  "arm_id": "shared_three_program_conditioned",
+  "calls": {
+    "oracle": 0,
+    "route": 0
+  },
+  "candidate_selection": false,
+  "dispatch_accounting": {
+    "optimized": {
+      "dispatches_per_optimizer_step": 41376,
+      "host_synchronizing_dispatches_per_optimizer_step": 144,
+      "kernel_launching_dispatches_per_optimizer_step": 16324,
+      "most_common": [
+        [
+          "aten.view.default",
+          2858
+        ],
+        [
+          "aten.t.default",
+          1596
+        ],
+        [
+          "aten.mm.default",
+          736
+        ],
+        [
+          "aten.transpose.int",
+          471
+        ],
+        [
+          "aten.sum.dim_IntList",
+          395
+        ],
+        [
+          "aten.add.Tensor",
+          377
+        ],
+        [
+          "aten.mul.Tensor",
+          364
+        ],
+        [
+          "aten.slice.Tensor",
+          329
+        ],
+        [
+          "aten._unsafe_view.default",
+          300
+        ],
+        [
+          "aten.clone.default",
+          276
+        ],
+        [
+          "aten.bmm.default",
+          245
+        ],
+        [
+          "aten.detach.default",
+          187
+        ]
+      ]
+    },
+    "reference": {
+      "dispatches_per_optimizer_step": 41436,
+      "host_synchronizing_dispatches_per_optimizer_step": 940,
+      "kernel_launching_dispatches_per_optimizer_step": 16312,
+      "most_common": [
+        [
+          "aten.view.default",
+          2858
+        ],
+        [
+          "aten.t.default",
+          1596
+        ],
+        [
+          "aten.mm.default",
+          736
+        ],
+        [
+          "aten.transpose.int",
+          471
+        ],
+        [
+          "aten.sum.dim_IntList",
+          395
+        ],
+        [
+          "aten.add.Tensor",
+          377
+        ],
+        [
+          "aten.mul.Tensor",
+          364
+        ],
+        [
+          "aten.slice.Tensor",
+          329
+        ],
+        [
+          "aten._unsafe_view.default",
+          300
+        ],
+        [
+          "aten.clone.default",
+          275
+        ],
+        [
+          "aten.bmm.default",
+          245
+        ],
+        [
+          "aten.index.Tensor",
+          204
+        ]
+      ]
+    }
+  },
+  "execution_equivalence_and_speed": {
+    "equivalence": {
+      "gradient_cosine_similarity": 0.9999999999997994,
+      "gradient_max_absolute_difference": 0.0,
+      "gradient_relative_l2_difference": 0.0,
+      "gradients_bitwise_exact": true,
+      "loss_max_absolute_difference": 0.0,
+      "loss_max_relative_difference": 0.0,
+      "losses_bitwise_exact": true,
+      "passes_frozen_float32_tolerance": true
+    },
+    "optimized_min_step_seconds": 5.513138875001459,
+    "optimized_step_seconds": [
+      5.513138875001459,
+      5.809106000000611,
+      5.907005749999371,
+      5.828102874998876,
+      5.5432645000000775,
+      5.898845040999731
+    ],
+    "paired_ratios": [
+      1.0251780949377112,
+      1.0751172598672356,
+      0.9872848016104686,
+      1.0471288724468095,
+      1.120576301744204,
+      1.0397385771916459
+    ],
+    "reference_min_step_seconds": 5.651949209001032,
+    "reference_step_seconds": [
+      5.651949209001032,
+      6.245470124998974,
+      5.831897000000026,
+      6.102774792001583,
+      6.2116508330000215,
+      6.133256750003056
+    ],
+    "repeats": 6,
+    "speedup_paired_median": 1.0434337248192276,
+    "speedup_paired_minimum": 1.0251780949377112
+  },
+  "frozen_packing_padding": {
+    "attention_quadratic_utilization": 0.24353453202871383,
+    "maximum_true_heavy_atoms": 149,
+    "mean_padded_width": 100.5,
+    "mean_true_heavy_atoms": 47.6875,
+    "node_linear_utilization": 0.47450248756218905,
+    "padded_widths": [
+      78,
+      96,
+      149,
+      79
+    ]
+  },
+  "gates": {
+    "execution_change_is_bitwise_exact": true,
+    "execution_change_passes_frozen_tolerance": true,
+    "frozen_geometry_preserved": true,
+    "full_194_atom_support_declared": true,
+    "host_synchronizations_not_increased": true,
+    "three_source_balanced_programs_active": true
+  },
+  "h100_reference": {
+    "examples_per_second": 351.63,
+    "median_wall_seconds_per_optimizer_step": 0.35855,
+    "peak_reserved_bytes": 1836871680,
+    "source": "results/phase1/shared_synthesis_program_mixed_h100_profile_v1/result.json"
+  },
+  "inputs": {
+    "production_cache": {
+      "bytes": 13727905,
+      "logical_path": "cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "production_design": {
+      "path": "results/phase1/shared_synthesis_program_mixed_design_v1/design.json",
+      "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+    }
+  },
+  "nonclaims": [
+    "This is a CPU execution profile. It does not establish accelerator throughput, model quality, or a production launch decision.",
+    "Absolute seconds on a shared workstation are not comparable across runs; only the paired ratios and the dispatch counts are claims.",
+    "The packing comparison changes which records share a micro-batch. It preserves the source measure but is not a bitwise-equivalent execution change."
+  ],
+  "packing_comparison": {
+    "examples_per_second_from_best": {
+      "quantile_bins_1": 28.534490317025046,
+      "quantile_bins_32": 45.36854766473117
+    },
+    "optimizer_step_seconds_from_best": {
+      "quantile_bins_1": 4.4857994160011,
+      "quantile_bins_32": 2.8213378339969495
+    },
+    "padding": {
+      "quantile_bins_1": {
+        "attention_quadratic_utilization": 0.24353453202871383,
+        "maximum_true_heavy_atoms": 149,
+        "mean_padded_width": 100.5,
+        "mean_true_heavy_atoms": 47.6875,
+        "node_linear_utilization": 0.47450248756218905,
+        "padded_widths": [
+          78,
+          96,
+          149,
+          79
+        ]
+      },
+      "quantile_bins_32": {
+        "attention_quadratic_utilization": 0.6424641790348176,
+        "maximum_true_heavy_atoms": 68,
+        "mean_padded_width": 50.75,
+        "mean_true_heavy_atoms": 40.0859375,
+        "node_linear_utilization": 0.7898706896551724,
+        "padded_widths": [
+          68,
+          47,
+          42,
+          46
+        ]
+      }
+    },
+    "per_micro_batch_best_seconds": {
+      "quantile_bins_1": [
+        1.0527014580002287,
+        1.3136599169993133,
+        1.40186820800227,
+        0.7175698329992883
+      ],
+      "quantile_bins_32": [
+        0.9828974589981954,
+        0.8860985419996723,
+        0.4772376250002708,
+        0.47510420799881103
+      ]
+    },
+    "speedup": 1.5899547235880405
+  },
+  "pcgrad_backend_comparison": {
+    "batched_vjp": {
+      "median_micro_batch_seconds": 0.5347988334997353,
+      "min_micro_batch_seconds": 0.4831503750028787
+    },
+    "sequential": {
+      "median_micro_batch_seconds": 0.4376090210007533,
+      "min_micro_batch_seconds": 0.42761529099880136
+    }
+  },
+  "pcgrad_walk_headroom": {
+    "forward": {
+      "median": 0.35225741650174314,
+      "min": 0.331660167001246
+    },
+    "one_walk": {
+      "median": 0.23703710399968259,
+      "min": 0.2293056250018708
+    },
+    "projected_step_speedup_if_one_walk": 1.7566282080782971,
+    "three_walks": {
+      "median": 0.7099217289996886,
+      "min": 0.6537481669984118
+    },
+    "three_walks_over_one_walk_min": 2.8509905371622617
+  },
+  "runtime": {
+    "cpu_threads": 8,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "precision": "float32",
+    "processor": "arm",
+    "torch": "2.13.0"
+  },
+  "schema_version": "forge.synthesis_program_cpu_training_step_profile.v1",
+  "scientific_contract": {
+    "effective_batch_size": 128,
+    "gradient_accumulation_steps": 4,
+    "gradient_balancing": {
+      "group_identity": "source_program_state",
+      "method": "equal_family_mass_deterministic_pcgrad",
+      "norm_amplification": false
+    },
+    "maximum_heavy_atoms": 194,
+    "micro_batch_size": 32,
+    "parameter_count": 5289901,
+    "pcgrad_backend": "sequential",
+    "source_balancing": "stratified_equal_reaction_family_mass"
+  },
+  "seed": 20260825,
+  "status": "pass"
+}

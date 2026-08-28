@@ -5,15 +5,22 @@ import math
 import pytest
 
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
+from forge.model.reaction_program_flow import (
+    _group_balanced_masked_cross_entropy,
+    _masked_cross_entropy,
+)
 from forge.model.reaction_program_transformer import (
     ReactionProgramGraphTransformer,
+    _balanced_state_cross_entropy,
     _repeat_component_consistency,
+    _slice_batch,
     balanced_pcgrad_backward,
     per_program_transformer_losses,
     reaction_program_transformer_loss,
     synthesis_program_offspring_targets,
 )
 from forge.model.synthesis_program_training import (
+    synthesis_program_fixed_state_exact_tensor,
     synthesis_program_forward,
     synthesis_program_paired_topology_forward,
     synthesis_program_topology_conditioned_forward,
@@ -638,3 +645,255 @@ def test_paired_topology_forward_matches_two_calls_without_dropout() -> None:
     assert all(torch.equal(noisy[key], paired_noisy[key]) for key in noisy)
     assert all(torch.equal(predictions[key], paired_predictions[key]) for key in predictions)
     assert all(torch.equal(topology[key], paired_topology[key]) for key in topology)
+
+
+def _closure_batch() -> dict[str, torch.Tensor]:
+    clean = _batch()
+    clean["closure_mask"] = torch.tensor([[True], [False], [True]])
+    clean["closure_left"] = torch.tensor([[2], [0], [4]])
+    clean["closure_right"] = torch.tensor([[5], [0], [1]])
+    return clean
+
+
+def test_graph_bias_matches_the_boolean_indexed_reference_construction() -> None:
+    from experiments.phase1.multireaction.cpu_training_step_profile import _reference_graph_bias
+
+    torch.manual_seed(313)
+    model = _model().eval()
+    clean = _closure_batch()
+
+    observed = model._graph_bias(
+        clean["parents"],
+        clean["closure_left"],
+        clean["closure_right"],
+        clean["child_mask"],
+        clean["closure_mask"],
+    )
+    reference = _reference_graph_bias(
+        model,
+        clean["parents"],
+        clean["closure_left"],
+        clean["closure_right"],
+        clean["child_mask"],
+        clean["closure_mask"],
+    )
+
+    assert observed.shape == reference.shape
+    assert torch.equal(observed, reference)
+
+
+def test_hoisted_absent_key_fill_matches_per_layer_masking() -> None:
+    torch.manual_seed(317)
+    attention = _model(layers=1).blocks[0].self_attention.eval()
+    hidden = torch.randn((2, 6, 32))
+    node_mask = torch.tensor([[True] * 6, [True] * 4 + [False] * 2])
+    bias = torch.randn((2, 4, 6, 6)) * 0.1
+
+    per_layer = attention(
+        hidden, hidden, query_mask=node_mask, memory_mask=node_mask, attention_bias=bias
+    )
+    hoisted = attention(
+        hidden,
+        hidden,
+        query_mask=node_mask,
+        memory_mask=node_mask,
+        attention_bias=bias.masked_fill(~node_mask[:, None, None, :], -torch.inf),
+        attention_bias_is_masked=True,
+    )
+
+    assert torch.equal(per_layer, hoisted)
+
+
+def test_integer_family_selection_matches_the_boolean_mask_selection() -> None:
+    torch.manual_seed(319)
+    values = {
+        "wide": torch.randn((4, 3, 2)),
+        "narrow": torch.randn((4,)),
+        "unaligned": torch.randn((7, 2)),
+        "scalar": 3.5,
+    }
+    membership = torch.tensor([True, False, True, True])
+    rows = membership.nonzero(as_tuple=True)[0]
+
+    by_mask = _slice_batch(values, membership)
+    by_rows = _slice_batch(values, rows, batch_size=4)
+
+    assert set(by_mask) == set(by_rows)
+    assert by_rows["scalar"] == 3.5
+    assert torch.equal(by_mask["unaligned"], by_rows["unaligned"])
+    for key in ("wide", "narrow"):
+        assert torch.equal(by_mask[key], by_rows[key])
+
+
+def test_shared_mask_resolution_leaves_the_selected_objectives_unchanged() -> None:
+    from experiments.phase1.multireaction.cpu_training_step_profile import (
+        _reference_balanced_state_cross_entropy,
+        _reference_group_balanced_masked_cross_entropy,
+        _reference_masked_cross_entropy,
+    )
+
+    torch.manual_seed(331)
+    logits = torch.randn((3, 6, 5))
+    targets = torch.randint(0, 5, (3, 6))
+    mask = torch.rand((3, 6)) > 0.4
+    groups = torch.randint(0, 3, (3, 6))
+
+    assert torch.equal(
+        _balanced_state_cross_entropy(logits, targets, mask),
+        _reference_balanced_state_cross_entropy(logits, targets, mask),
+    )
+    assert torch.equal(
+        _masked_cross_entropy(logits, targets, mask),
+        _reference_masked_cross_entropy(logits, targets, mask),
+    )
+    assert torch.equal(
+        _group_balanced_masked_cross_entropy(logits, targets, mask, groups),
+        _reference_group_balanced_masked_cross_entropy(logits, targets, mask, groups),
+    )
+
+
+def test_sequential_pcgrad_buffer_matches_the_stacked_reference_gradients() -> None:
+    torch.manual_seed(337)
+    buffered = torch.nn.Linear(6, 4)
+    stacked = torch.nn.Linear(6, 4)
+    stacked.load_state_dict(buffered.state_dict())
+    inputs = torch.randn((9, 6))
+
+    def family_losses(model: torch.nn.Module) -> dict[int, torch.Tensor]:
+        output = model(inputs)
+        return {
+            family: output[start : start + 3].square().mean()
+            for family, start in ((1, 0), (2, 3), (3, 6))
+        }
+
+    def reference_backward(losses: dict[int, torch.Tensor], model: torch.nn.Module) -> None:
+        parameters = [p for p in model.parameters() if p.requires_grad]
+        ordered = sorted(losses)
+        raw = [
+            torch.autograd.grad(losses[program], parameters, retain_graph=index + 1 < len(ordered))
+            for index, program in enumerate(ordered)
+        ]
+        flat = torch.stack(
+            [torch.cat([gradient.reshape(-1) for gradient in gradients]) for gradients in raw]
+        )
+        pairwise = flat @ flat.transpose(0, 1)
+        off_diagonal = ~torch.eye(len(ordered), dtype=torch.bool)
+        combined = flat.mean(dim=0)
+        assert not bool(((pairwise < 0.0) & off_diagonal).any()), "reference needs the mean path"
+        offset = 0
+        for parameter in parameters:
+            elements = parameter.numel()
+            parameter.grad = combined[offset : offset + elements].view_as(parameter).clone()
+            offset += elements
+
+    balanced_pcgrad_backward(
+        family_losses(buffered), buffered, materialize_diagnostics=False, backend="sequential"
+    )
+    reference_backward(family_losses(stacked), stacked)
+
+    for left, right in zip(buffered.parameters(), stacked.parameters(), strict=True):
+        assert torch.equal(left.grad, right.grad)
+
+
+def test_fixed_state_check_matches_the_gathered_reference() -> None:
+    from experiments.phase1.multireaction.cpu_training_step_profile import (
+        _reference_fixed_state_exact_tensor,
+    )
+
+    torch.manual_seed(347)
+    clean = _closure_batch()
+    clean.update(
+        {
+            "fixed_atom_mask": torch.rand((3, 6)) > 0.5,
+            "fixed_parent_mask": torch.rand((3, 6)) > 0.5,
+            "fixed_parent_bond_mask": torch.rand((3, 6)) > 0.5,
+            "fixed_closure_endpoint_mask": torch.rand((3, 1)) > 0.5,
+            "fixed_closure_bond_mask": torch.rand((3, 1)) > 0.5,
+        }
+    )
+    fields = (
+        "nodes",
+        "parents",
+        "parent_bonds",
+        "closure_left",
+        "closure_right",
+        "closure_bonds",
+    )
+
+    for corrupted in (False, True):
+        state = {field: clean[field].clone() for field in fields}
+        if corrupted:
+            state["nodes"][clean["fixed_atom_mask"]] += 1
+        observed = synthesis_program_fixed_state_exact_tensor(state, clean)
+        reference = _reference_fixed_state_exact_tensor(state, clean)
+        assert torch.equal(observed, reference)
+        assert bool(observed) is not corrupted
+
+
+def test_optimized_execution_reproduces_the_reference_losses_and_gradients() -> None:
+    """The whole hot path, optimized and pre-optimization, must agree bit for bit."""
+
+    from experiments.phase1.multireaction.cpu_training_step_profile import (
+        _install_reference_execution,
+        _restore,
+    )
+
+    clean = _closure_batch()
+    t = clean.pop("t")
+
+    def run(reference: bool) -> tuple[torch.Tensor, torch.Tensor]:
+        torch.manual_seed(353)
+        model = _model(dropout=0.1)
+        model.train()
+        undo = _install_reference_execution(model) if reference else []
+        try:
+            torch.manual_seed(359)
+            predictions = model(
+                nodes=clean["nodes"],
+                parents=clean["parents"],
+                parent_bonds=clean["parent_bonds"],
+                closure_left=clean["closure_left"],
+                closure_right=clean["closure_right"],
+                closure_bonds=clean["closure_bonds"],
+                t=t,
+                node_mask=clean["node_mask"],
+                child_mask=clean["child_mask"],
+                closure_mask=clean["closure_mask"],
+                program_states=clean["program_states"],
+                role_states=clean["role_states"],
+                core_position_states=clean["core_position_states"],
+                program_depths=clean["program_depths"],
+                adapter_mask=clean["adapter_mask"],
+                repeat_group_states=clean["repeat_group_states"],
+                component_position_states=clean["component_position_states"],
+                component_instance_states=clean["component_instance_states"],
+                role_morphology_states=clean["role_morphology_states"],
+            )
+            losses, _ = per_program_transformer_losses(
+                predictions,
+                clean,
+                role_weight=0.25,
+                core_weight=0.25,
+                repeat_consistency_weight=0.25,
+                program_states=(1, 2, 3),
+                materialize_metrics=False,
+            )
+            stacked = torch.stack([losses[key] for key in sorted(losses)]).detach().clone()
+            balanced_pcgrad_backward(
+                losses, model, scale=0.25, materialize_diagnostics=False, backend="sequential"
+            )
+        finally:
+            _restore(undo)
+        gradients = torch.cat(
+            [
+                (p.grad if p.grad is not None else torch.zeros_like(p)).reshape(-1)
+                for p in model.parameters()
+            ]
+        )
+        return stacked, gradients
+
+    reference_losses, reference_gradients = run(reference=True)
+    optimized_losses, optimized_gradients = run(reference=False)
+
+    assert torch.equal(reference_losses, optimized_losses)
+    assert torch.equal(reference_gradients, optimized_gradients)

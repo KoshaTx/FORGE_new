@@ -314,8 +314,12 @@ def synthesis_program_fixed_state_exact_tensor(
 ) -> Any:
     """Return the fixed-state invariant as a scalar tensor without host synchronization."""
 
+    # Compare in place and neutralize the unprotected positions instead of gathering the protected
+    # ones.  Boolean advanced indexing resolves the mask on the host, so the gathering form cost
+    # twelve device-to-host synchronizations per micro-batch for a scalar that is never branched on
+    # until the optimizer step has already been launched.
     checks = [
-        (state[field][clean[mask]] == clean[field][clean[mask]]).all()
+        ((state[field] == clean[field]) | ~clean[mask]).all()
         for field, mask in {
             "nodes": "fixed_atom_mask",
             "parents": "fixed_parent_mask",
