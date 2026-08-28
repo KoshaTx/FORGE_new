@@ -9813,3 +9813,61 @@ preserved unchanged.
   `c96e086fc971c392acd8386d62e5e783aa705be19b7aa3535b7ab81c050088ef` under source SHA-256
   `ed0cb774636583adf5799d70850ea1766d721ba0762cd4b492360ce2008b8007`; because the one-preflight
   authorization was consumed, a new paid retry requires fresh explicit authorization.
+
+## 2026-08-28 - Locate the remaining Transformer training cost in padding and PCGrad walk count
+
+- Followed the 2026-08-27 instruction to attack the variable-shape collation/attention schedule or
+  the PCGrad implementation without changing its mathematical partition. Deterministic eager true
+  FP32, the 32 x 4 geometry, equal-family source balancing and full 194-heavy-atom support are
+  unchanged; TF32, BF16, compilation and alternative batch geometry were not re-proposed.
+- Added `experiments/phase1/multireaction/cpu_training_step_profile.py`, a reproducible CPU profile
+  of the frozen optimizer step. It carries an inline pre-optimization implementation of every hot
+  path it changes and runs the two arms back to back on the same micro-batch, because absolute
+  seconds on a shared workstation drift by tens of percent within one run and are not comparable.
+  The attributable result is
+  `results/phase1/shared_synthesis_program_cpu_step_profile_v1/result.json` (SHA-256
+  `4097339a4d14204754c1e0b59f826b261477493e899fe8d6fe1f4dd0412d8034`).
+- Six execution-only changes landed: the graph-relation bias resolves each mask once and is
+  materialized head-major; the absent-key fill is applied once per forward instead of once per
+  attention layer; family selection, both chemistry cross entropies, the state-balanced semantic
+  cross entropy and the repeat-consistency bond selection each resolve their mask once and gather by
+  integer row; the fixed-state check compares in place; and the sequential PCGrad backend flattens
+  each family straight into its row of the projection buffer. Losses and accumulated parameter
+  gradients are **bit-identical** to the pre-optimization path, asserted by `torch.equal` in
+  `tests/test_reaction_program_transformer.py`.
+- Their measured effect is a 6.53x reduction in host-synchronizing dispatches per optimizer step,
+  940 to 144, at an unchanged kernel-launching dispatch count of about 16,300. The paired CPU wall
+  time improved by a median 1.043x, which is at the edge of what this machine can resolve. Host
+  synchronization is a device-independent count, not a CPU timing artifact; its accelerator value is
+  unmeasured here.
+- The dominant remaining cost is padding. At the frozen packing the mean padded width is 115.3
+  against a mean of 48.2 true heavy atoms, so 42.8% of node-linear work and 20.8% of attention work
+  is on real atoms. The already-implemented padding-aware quantile-bin sampler at 32 bins raises
+  those to 73.9% and 54.9% and measured 1.59x on the frozen 32 x 4 geometry. It is not enabled in
+  the frozen mixed-arm runtime. It preserves each exact categorical source measure but changes which
+  records share a micro-batch, so it is a packing decision, not a bit-identical execution change.
+- Measured but not implemented: the three per-family PCGrad backward walks cost 2.851x one walk of
+  their sum. The family losses depend on disjoint batch rows, so one walk already carries all three
+  activation gradients; three walks buy only the per-family split of the parameter reduction. Taking
+  that split from a single walk projects a 1.757x optimizer step. It requires a manual per-family
+  parameter reduction for every parameterized operation, and the model forward would have to keep
+  the batch axis attributable for the shared-index position embeddings, the token-type constants,
+  the closure slots and the two count-logit parameters. It is not bit-exact, because the weight
+  reduction would run over the family's rows rather than over all rows with the others at zero.
+- Negative results: the batched-VJP PCGrad backend is 1.13x **slower** than the sequential backend
+  on CPU, because `vmap` replaces one graph walk with a batched one at three times the work rather
+  than exploiting row disjointness; it may still win where launch overhead dominates, which this
+  machine cannot show. Making the attention query, key and value contiguous measured as noise and
+  was reverted. The macOS CPU `bmm` batch loop and `bernoulli_` dropout-mask cost are host artifacts
+  and were not optimized against.
+- The four named suites behave as before: `tests/test_reaction_program_transformer.py` passes all 24
+  tests including 7 new equivalence tests, and the model-related suite slice fails on exactly the
+  same 21 absent historical artifacts with and without these changes.
+- **Decision:** retain the six bit-identical execution changes. Do not change the frozen mixed-arm
+  packing without an explicit decision: quantile-bin packing is the largest available lever and is
+  measured, but it changes micro-batch composition and therefore where per-family PCGrad projection
+  is computed, which is the same objection that blocked 64 x 2. Treat the single-walk per-family
+  parameter reduction as the next optimization target, gated on its own exact-gradient test and a
+  fresh exact-H100 equivalence run. This CPU profile establishes execution equivalence, dispatch and
+  padding accounting, and a local speedup only; it is not evidence of H100 throughput or of model
+  quality, and it authorizes no paid run.

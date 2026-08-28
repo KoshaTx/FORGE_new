@@ -50,6 +50,7 @@ if nn is not None:
             query_mask: Any,
             memory_mask: Any,
             attention_bias: Any | None = None,
+            attention_bias_is_masked: bool = False,
         ) -> Any:
             batch, queries, hidden_dim = query.shape
             keys = memory.shape[1]
@@ -59,8 +60,13 @@ if nn is not None:
             if attention_bias is not None:
                 if attention_bias.shape != (batch, self.heads, queries, keys):
                     raise ReactionProgramTransformerError("attention bias shape is inconsistent")
-                attention_mask = attention_bias.masked_fill(
-                    ~memory_mask[:, None, None, :], -torch.inf
+                # The absent-key fill is identical for every layer that shares one memory mask, so
+                # a caller that has already applied it hands the finished additive mask straight to
+                # the kernel instead of rebuilding a [batch, heads, queries, keys] copy per layer.
+                attention_mask = (
+                    attention_bias
+                    if attention_bias_is_masked
+                    else attention_bias.masked_fill(~memory_mask[:, None, None, :], -torch.inf)
                 )
             else:
                 attention_mask = memory_mask[:, None, None, :]
@@ -360,6 +366,7 @@ if nn is not None:
             program_summary: Any,
             graph_bias: Any,
             role_states: Any,
+            graph_bias_is_masked: bool = False,
         ) -> tuple[Any, Any]:
             normalized = self.self_norm(hidden)
             if self.role_isolated_attention:
@@ -371,6 +378,8 @@ if nn is not None:
                     graph_bias.new_zeros(()),
                     graph_bias.new_full((), -1e9),
                 )
+                # An absent key already holds -inf, and -inf plus the finite isolation penalty is
+                # still -inf, so the pre-masked bias survives the role restriction unchanged.
                 graph_bias = graph_bias + role_bias
             hidden = hidden + self.dropout(
                 self.self_attention(
@@ -379,6 +388,7 @@ if nn is not None:
                     query_mask=node_mask,
                     memory_mask=node_mask,
                     attention_bias=graph_bias,
+                    attention_bias_is_masked=graph_bias_is_masked,
                 )
             )
             if self.program_cross_attention:
@@ -567,20 +577,22 @@ if nn is not None:
             relations = torch.zeros((batch, nodes, nodes), dtype=torch.long, device=parents.device)
             diagonal = torch.arange(nodes, device=parents.device)
             relations[:, diagonal, diagonal] = 1
-            batch_nodes = torch.arange(batch, device=parents.device)[:, None].expand(batch, nodes)
-            child_nodes = diagonal[None].expand(batch, nodes)
-            relations[batch_nodes[child_mask], child_nodes[child_mask], parents[child_mask]] = 2
-            relations[batch_nodes[child_mask], parents[child_mask], child_nodes[child_mask]] = 3
-            closure_slots = closure_left.shape[1]
-            closure_batches = torch.arange(batch, device=parents.device)[:, None].expand(
-                batch, closure_slots
-            )
-            active_batches = closure_batches[closure_mask]
-            active_left = closure_left[closure_mask]
-            active_right = closure_right[closure_mask]
+            # Resolve each boolean selection to integer coordinates once.  Boolean advanced indexing
+            # runs `nonzero`, which is a device-to-host synchronization; the six selections below
+            # previously forced six of them per micro-batch for two distinct masks.
+            child_rows, child_nodes = child_mask.nonzero(as_tuple=True)
+            child_parents = parents[child_rows, child_nodes]
+            relations[child_rows, child_nodes, child_parents] = 2
+            relations[child_rows, child_parents, child_nodes] = 3
+            active_batches, active_slots = closure_mask.nonzero(as_tuple=True)
+            active_left = closure_left[active_batches, active_slots]
+            active_right = closure_right[active_batches, active_slots]
             relations[active_batches, active_left, active_right] = 4
             relations[active_batches, active_right, active_left] = 4
-            return self.relation_bias(relations).permute(0, 3, 1, 2)
+            # `permute` leaves the head axis with the innermost stride of the gathered
+            # [batch, nodes, nodes, heads] table.  Every attention layer then reads the bias in that
+            # transposed order.  One contiguous copy here is repaid by each layer that follows.
+            return self.relation_bias(relations).permute(0, 3, 1, 2).contiguous()
 
         def forward(
             self,
@@ -632,6 +644,10 @@ if nn is not None:
             )
             expert_weights = []
             if self.role_blocks is None:
+                # Every shared block attends over the same node memory, so the absent-key fill is
+                # layer independent.  Applying it once here is bit-identical to applying it inside
+                # each layer and removes one [batch, heads, nodes, nodes] tensor per layer.
+                masked_graph_bias = graph_bias.masked_fill(~node_mask[:, None, None, :], -torch.inf)
                 for block in self.blocks:
                     hidden, weights = block(
                         hidden,
@@ -639,8 +655,9 @@ if nn is not None:
                         program_tokens=program_tokens,
                         program_mask=program_mask,
                         program_summary=program_summary,
-                        graph_bias=graph_bias,
+                        graph_bias=masked_graph_bias,
                         role_states=role_states,
+                        graph_bias_is_masked=True,
                     )
                     expert_weights.append(weights)
             else:
@@ -761,8 +778,11 @@ else:  # pragma: no cover
 def _balanced_state_cross_entropy(logits: Any, targets: Any, mask: Any) -> Any:
     """Average semantic classification loss across present states, not atom frequency."""
 
-    selected_targets = targets[mask]
-    point_losses = functional.cross_entropy(logits[mask], selected_targets, reduction="none")
+    # One `nonzero` shared by both selections.  Boolean advanced indexing resolves the mask on the
+    # host, so gathering targets and logits separately cost two synchronizations for one mask.
+    selection = mask.nonzero(as_tuple=True)
+    selected_targets = targets[selection]
+    point_losses = functional.cross_entropy(logits[selection], selected_targets, reduction="none")
     classes = logits.shape[-1]
     state_sums = logits.new_zeros(classes).scatter_add(0, selected_targets, point_losses)
     state_counts = torch.bincount(selected_targets, minlength=classes)
@@ -814,9 +834,13 @@ def _repeat_component_consistency(
         clean["child_mask"][pair_batch, pair_left] & clean["child_mask"][pair_batch, pair_right]
     )
     bond_probabilities = torch.softmax(predictions["parent_bonds"], dim=-1)
+    # Resolve the admitted bond pairs once.  Selecting each coordinate with the boolean mask
+    # repeated the same host-side resolution four times for one selection.
+    bond_selection = bond_pair_mask.nonzero(as_tuple=True)[0]
+    bond_batch = pair_batch[bond_selection]
     bond_difference = (
-        bond_probabilities[pair_batch[bond_pair_mask], pair_left[bond_pair_mask]]
-        - bond_probabilities[pair_batch[bond_pair_mask], pair_right[bond_pair_mask]]
+        bond_probabilities[bond_batch, pair_left[bond_selection]]
+        - bond_probabilities[bond_batch, pair_right[bond_selection]]
     )
     bond_count = bond_pair_mask.sum()
     bond_loss = bond_difference.square().mean(dim=-1).sum() / bond_count.clamp(min=1)
@@ -1024,12 +1048,22 @@ def reaction_program_transformer_loss(
     return total, {**metrics, **semantic_metrics}
 
 
-def _slice_batch(values: Mapping[str, Any], indices: Any) -> dict[str, Any]:
-    batch = int(indices.shape[0])
+def _slice_batch(
+    values: Mapping[str, Any], indices: Any, *, batch_size: int | None = None
+) -> dict[str, Any]:
+    """Select the rows of one reaction family from every batch-aligned entry.
+
+    ``indices`` may be the boolean membership mask or the integer row positions it resolves to.
+    An integer selection is the same gather in the same ascending order, and it is taken once for
+    the whole family instead of once per entry, so it does not re-resolve the mask on the host.
+    """
+
+    batch = int(indices.shape[0]) if batch_size is None else int(batch_size)
+    integer_selection = indices.dtype != torch.bool
     output: dict[str, Any] = {}
     for key, value in values.items():
         if hasattr(value, "shape") and value.ndim > 0 and value.shape[0] == batch:
-            output[key] = value[indices]
+            output[key] = value.index_select(0, indices) if integer_selection else value[indices]
         else:
             output[key] = value
     return output
@@ -1064,11 +1098,12 @@ def per_program_transformer_losses(
         if program_states is None
         else program_states
     )
+    batch_size = int(source_programs.shape[0])
     for program_state in observed_programs:
-        indices = source_programs == int(program_state)
+        indices = (source_programs == int(program_state)).nonzero(as_tuple=True)[0]
         loss, values = reaction_program_transformer_loss(
-            _slice_batch(predictions, indices),
-            _slice_batch(clean, indices),
+            _slice_batch(predictions, indices, batch_size=batch_size),
+            _slice_batch(clean, indices, batch_size=batch_size),
             role_weight=role_weight,
             core_weight=core_weight,
             repeat_consistency_weight=repeat_consistency_weight,
@@ -1076,7 +1111,7 @@ def per_program_transformer_losses(
             junction_consistency_weight=junction_consistency_weight,
             chemistry_loss_balancing=chemistry_loss_balancing,
             topology_conditioned_predictions=(
-                _slice_batch(topology_conditioned_predictions, indices)
+                _slice_batch(topology_conditioned_predictions, indices, batch_size=batch_size)
                 if topology_conditioned_predictions is not None
                 else None
             ),
@@ -1141,30 +1176,29 @@ def balanced_pcgrad_backward(
         )
         del batched
     else:
-        raw = [
-            torch.autograd.grad(
+        # Flatten each family straight into its row of the projection buffer.  Holding every
+        # family's gradient tuple and then stacking the concatenations kept three unflattened
+        # copies and two flattened copies of the whole parameter vector alive at once; writing
+        # into the buffer keeps one family resident and removes the stacking copy entirely.
+        elements = sum(parameter.numel() for parameter in parameters)
+        flat_gradients = parameters[0].new_empty((len(ordered), elements))
+        availability = []
+        for index, program in enumerate(ordered):
+            gradients = torch.autograd.grad(
                 losses[program],
                 parameters,
                 retain_graph=index + 1 < len(ordered),
                 allow_unused=True,
             )
-            for index, program in enumerate(ordered)
-        ]
-        availability = [[gradient is not None for gradient in gradients] for gradients in raw]
-        flat_gradients = torch.stack(
-            [
-                torch.cat(
-                    [
-                        (gradient if gradient is not None else torch.zeros_like(parameter)).reshape(
-                            -1
-                        )
-                        for gradient, parameter in zip(gradients, parameters, strict=True)
-                    ]
-                )
-                for gradients in raw
-            ]
-        )
-        del raw
+            availability.append([gradient is not None for gradient in gradients])
+            torch.cat(
+                [
+                    (gradient if gradient is not None else torch.zeros_like(parameter)).reshape(-1)
+                    for gradient, parameter in zip(gradients, parameters, strict=True)
+                ],
+                out=flat_gradients[index],
+            )
+            del gradients
     norms = torch.linalg.vector_norm(flat_gradients, dim=1)
     conflicts = torch.zeros((), dtype=torch.int64, device=flat_gradients.device)
     pairwise_dots = flat_gradients @ flat_gradients.transpose(0, 1)

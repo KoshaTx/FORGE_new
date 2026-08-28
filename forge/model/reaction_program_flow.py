@@ -515,15 +515,20 @@ def _masked_cross_entropy(logits: Any, targets: Any, mask: Any) -> Any:
     CUDA tensor as a Python boolean on every objective component.
     """
 
-    selected = functional.cross_entropy(logits[mask], targets[mask], reduction="sum")
+    # One resolution of the mask, shared by both operands.  Boolean advanced indexing resolves on
+    # the host, so gathering the logits and the targets separately cost two synchronizations for
+    # one selection, on every component of every family objective.
+    selection = mask.nonzero(as_tuple=True)
+    selected = functional.cross_entropy(logits[selection], targets[selection], reduction="sum")
     return selected / mask.sum().clamp(min=1)
 
 
 def _group_balanced_masked_cross_entropy(logits: Any, targets: Any, mask: Any, groups: Any) -> Any:
     """Give each present semantic group equal mass while retaining per-state supervision."""
 
-    selected_groups = groups[mask]
-    point_losses = functional.cross_entropy(logits[mask], targets[mask], reduction="none")
+    selection = mask.nonzero(as_tuple=True)
+    selected_groups = groups[selection]
+    point_losses = functional.cross_entropy(logits[selection], targets[selection], reduction="none")
     group_count = int(groups.max()) + 1
     sums = logits.new_zeros(group_count).scatter_add(0, selected_groups, point_losses)
     counts = torch.bincount(selected_groups, minlength=group_count)
