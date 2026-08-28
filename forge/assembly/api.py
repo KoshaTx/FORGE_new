@@ -200,6 +200,15 @@ class ReactionProgramAdapter(Protocol):
         maximum_outcomes: int = 512,
     ) -> ForwardAssemblyProducts: ...
 
+    def forward_traces(
+        self,
+        terminal_head_smiles: str,
+        repeated_component_smiles: Sequence[str],
+        *,
+        maximum_outcomes: int = 512,
+        maximum_states: int = 4096,
+    ) -> tuple[ReactionProgramTrace, ...]: ...
+
     def atom_origins(self, trace: ReactionProgramTrace) -> ReactionProgramAtomOrigins: ...
 
 

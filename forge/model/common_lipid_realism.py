@@ -16,6 +16,7 @@ import math
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -27,7 +28,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.neighbors import NearestNeighbors
 
-from forge.core.hashing import sha256_json
+from forge.core.hashing import sha256_file, sha256_json
 from forge.core.io import iter_csv
 from forge.model.common_ugi_benchmark import CommonUgiAttempt, validate_attempt_ledger
 from forge.model.lipid_context import (
@@ -410,12 +411,19 @@ def _fingerprint_radii(fingerprints: tuple[Any, ...], neighbors: int) -> np.ndar
     return radii
 
 
-def build_realism_reference(
+@lru_cache(maxsize=8)
+def _build_realism_reference_cached(
     r0_path: Path,
     splits_path: Path,
     policy: RealismPolicy,
+    r0_sha256: str,
+    splits_sha256: str,
 ) -> RealismReference:
-    """Build the deterministic training scale and held-out empirical manifold."""
+    """Build one immutable reference per pinned input pair and policy."""
+
+    # Digests participate in the cache key so replacing a file at the same path cannot reuse an
+    # earlier reference.  The files were hash-pinned by the caller before reaching this function.
+    del r0_sha256, splits_sha256
 
     training, heldout, audit = _reference_rows(r0_path, splits_path, policy)
     training_matrix = np.asarray(
@@ -464,6 +472,24 @@ def build_realism_reference(
         descriptor_radii=descriptor_radii,
         fingerprint_radii=fingerprint_radii,
         audit=audit,
+    )
+
+
+def build_realism_reference(
+    r0_path: Path,
+    splits_path: Path,
+    policy: RealismPolicy,
+) -> RealismReference:
+    """Build or reuse the deterministic, content-addressed observed-lipid reference."""
+
+    resolved_r0 = r0_path.resolve()
+    resolved_splits = splits_path.resolve()
+    return _build_realism_reference_cached(
+        resolved_r0,
+        resolved_splits,
+        policy,
+        str(sha256_file(resolved_r0)),
+        str(sha256_file(resolved_splits)),
     )
 
 

@@ -1,0 +1,71 @@
+{
+  "schema_version": "forge.reaction_program_specialization_config.v1",
+  "target_program": "ugi_3cr_agile",
+  "seed": 2026082801,
+  "specialist_adapter_dim": 64,
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar",
+      "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"
+    },
+    "base_training_result": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json",
+      "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"
+    },
+    "base_design": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json",
+      "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "full_role_morphology_transformer",
+    "step": 1700,
+    "member_sha256": "1c227a107414ced7978a4addbed79b96a4486e9524564f9080205ac31d032ef3",
+    "model_state_sha256": "725c6b74b6816f44ba6d019abc2ba7e285d37c23e3b2b01280dbc112e937a3ff"
+  },
+  "exposure": {
+    "existing_examples": 68000,
+    "target_examples": 384000,
+    "reference": "v0 step 3000 x effective batch 128"
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-28",
+    "scope": "Implement and qualify an exposure-matched Ugi specialist without modifying the authenticated shared Transformer.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "smoke": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 2,
+    "additional_examples": 6,
+    "micro_batch_size": 2,
+    "effective_batch_size": 4,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "restart_interval_steps": 1
+  },
+  "full": {
+    "device": "cuda",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 4,
+    "micro_batch_size": 32,
+    "effective_batch_size": 128,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "restart_interval_steps": 25
+  },
+  "nonclaims": [
+    "The specialist does not train or select on heldout products.",
+    "Exposure matching alone does not establish superiority to v0.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability."
+  ]
+}

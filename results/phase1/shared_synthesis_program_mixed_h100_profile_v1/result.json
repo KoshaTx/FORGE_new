@@ -1,0 +1,126 @@
+{
+  "schema_version": "forge.synthesis_program_h100_profile_summary.v1",
+  "status": "pass",
+  "date": "2026-08-27",
+  "hardware": {
+    "declared_gpu_type": "H100!",
+    "name": "NVIDIA H100 80GB HBM3",
+    "compute_capability": "9.0",
+    "total_memory_bytes": 85017624576,
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0"
+  },
+  "inputs": {
+    "production_design": {
+      "path": "results/phase1/shared_synthesis_program_mixed_design_v1/design.json",
+      "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "production_training_config": {
+      "path": "configs/multireaction/shared_mixed_training_smoke_v1.json",
+      "sha256": "ad13ac227d5754674953c1111fb6c7fceccaba62b2bbb7a5b3de1d026f97c8c6"
+    },
+    "cpu_performance_result": {
+      "path": "results/phase1/shared_synthesis_program_training_performance_v1/result.json",
+      "sha256": "81e6247e951cda82634511e39a381e7215dad12e793e7b350e3ace8f0061390b"
+    },
+    "smoke_training_result": {
+      "path": "results/phase1/shared_synthesis_program_mixed_training_smoke_v1/result.json",
+      "sha256": "cf17c4d4a16178bbe67c3304dc6e49bfa9b4a0ff912c83ed584bf398f0525843"
+    }
+  },
+  "verified_runs": {
+    "general_profile": {
+      "run_id": "e70abc6490be580e82f53206b800a4933801654c1288987c97fb1ba2b4ed62ba",
+      "source_sha256": "622bca9ec01ea5e9acf0b27cba996ea48e610b3529106cc2e0ff63e322d21d72",
+      "artifact_path": "runs/phase1-shared-synthesis-program-mixed-h100-training-profile/e70abc6490be580e82f53206b800a4933801654c1288987c97fb1ba2b4ed62ba/stages/profile/artifacts/result.json",
+      "artifact_sha256": "b06bc0994b0ce277b487dbc76c30756d991de1a50df441a991b1c4ce203b138f"
+    },
+    "tf32_profile": {
+      "run_id": "2ba0a7fe582acd58ca410768dd7cd6e92bbca301fbc803e17b506c16896dbd54",
+      "source_sha256": "4dfea6926b5f2cef7174ef8bb7ce120084d495ac2c9ee959e436dd98677848f9",
+      "artifact_path": "runs/phase1-shared-synthesis-program-mixed-h100-tf32-profile/2ba0a7fe582acd58ca410768dd7cd6e92bbca301fbc803e17b506c16896dbd54/stages/profile/artifacts/result.json",
+      "artifact_sha256": "447b4ea784b366c6dd2c2d54909b0bd568c4d8240345cb0f81ae610de4a055d5"
+    }
+  },
+  "baseline": {
+    "mode": "deterministic_true_fp32_eager",
+    "micro_batch_size": 32,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 128,
+    "median_wall_seconds_per_optimizer_step": 0.3585520449999997,
+    "examples_per_second": 351.6283677581214,
+    "peak_reserved_bytes": 1711276032,
+    "deterministic_replay_exact": true,
+    "fixed_state_failures": 0
+  },
+  "candidates": {
+    "fp32_compile": {
+      "speedup": 1.0918542591563931,
+      "parameter_update_relative_l2_difference": 0.18422725588002525,
+      "eligible": false,
+      "reason": "prespecified numerical-equivalence gate failed"
+    },
+    "bf16_eager": {
+      "speedup": 0.8637831290590107,
+      "parameter_update_relative_l2_difference": 0.17848538727185317,
+      "eligible": false,
+      "reason": "slower than FP32 and prespecified numerical-equivalence gate failed"
+    },
+    "bf16_compile": {
+      "speedup": 0.9426341646998563,
+      "parameter_update_relative_l2_difference": 0.17848538727185317,
+      "eligible": false,
+      "reason": "slower than FP32 and prespecified numerical-equivalence gate failed"
+    },
+    "batch64_accum2": {
+      "speedup": 1.3492153823902167,
+      "parameter_update_relative_l2_difference": 0.24623150026675028,
+      "eligible": false,
+      "reason": "changes the PCGrad projection partition and scientific optimizer"
+    },
+    "batch128_accum1": {
+      "speedup": 1.3204014044511696,
+      "parameter_update_relative_l2_difference": 0.24443798135674902,
+      "eligible": false,
+      "reason": "changes the PCGrad projection partition and scientific optimizer"
+    },
+    "tf32_eager": {
+      "speedup": 0.9884841611789844,
+      "loss_max_relative_difference": 0.000004370291090521903,
+      "parameter_update_relative_l2_difference": 0.004627150307371378,
+      "eligible": false,
+      "reason": "no speedup and prespecified maximum-update-difference gate failed"
+    },
+    "tf32_compile": {
+      "speedup": 1.031664285637843,
+      "loss_max_relative_difference": 0.003833656420135645,
+      "parameter_update_relative_l2_difference": 0.184252250134969,
+      "eligible": false,
+      "reason": "below minimum promotion speedup and prespecified numerical-equivalence gate failed"
+    }
+  },
+  "maximum_support_stress": {
+    "maximum_nodes_observed": 194,
+    "median_wall_seconds_per_optimizer_step": 0.3015091739999889,
+    "peak_reserved_bytes": 1518338048,
+    "fixed_state_failures": 0
+  },
+  "decision": {
+    "selected_mode": "fp32_eager",
+    "production_config_changed": false,
+    "reason": "No candidate cleared the prespecified speed, numerical-equivalence, deterministic-replay and PCGrad-identity gates."
+  },
+  "calls": {
+    "route": 0,
+    "oracle": 0
+  },
+  "nonclaims": [
+    "This is an execution profile, not a model-quality result or training run.",
+    "No checkpoint, molecule, route or biological candidate was produced or selected.",
+    "Reaction-program generation quality is not established by this profile."
+  ]
+}

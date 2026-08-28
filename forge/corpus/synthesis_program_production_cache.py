@@ -23,6 +23,7 @@ import numpy as np
 
 from forge.core.hashing import artifact_record, pin_record, resolve_pin
 from forge.core.io import iter_csv, read_json_object, stable_json, write_json
+from forge.corpus.reaction_program_records import admits_reaction_program_structure
 from forge.corpus.synthesis_program_representation import (
     SynthesisProgramRepresentationError,
     synthesis_program_contracts,
@@ -397,7 +398,7 @@ def _iter_auxiliary_records(
     atlas = (
         row
         for row in iter_csv(paths["multireaction_atlas"])
-        if row["disposition"] == "admit_exact" and row["semantic_origin_status"] == "exact"
+        if admits_reaction_program_structure(row)
     )
     atoms = _group_rows(
         iter_csv(paths["multireaction_semantic_atoms"]),
@@ -783,6 +784,108 @@ class SynthesisProgramProductionCache:
             bonds += weight * np.bincount(parent_bonds[~parent_fixed], minlength=bond_classes)
             bonds += weight * np.bincount(closure_bonds[~closure_fixed], minlength=bond_classes)
         return nodes / nodes.sum(), bonds / bonds.sum()
+
+    def program_role_source_marginals(
+        self,
+        measure: np.ndarray,
+        *,
+        node_classes: int,
+        bond_classes: int,
+        probability_floor: float,
+        backoff_strength: float = 1.0,
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Fit smoothed program/role sources with family and global backoff.
+
+        These are noise distributions, not component inventories.  Every atom and bond class keeps
+        positive probability in every program/role cell.  An unsupported cell inherits its program
+        distribution; a program with no active mass inherits the global distribution.  Parent bonds
+        are assigned to the child role, while closure bonds use role zero (the program-level pool).
+        """
+
+        if (
+            measure.shape != (len(self),)
+            or np.any(measure < 0)
+            or not np.isfinite(measure).all()
+            or not np.isclose(measure.sum(), 1.0)
+            or probability_floor <= 0
+            or backoff_strength <= 0
+        ):
+            raise SynthesisProgramProductionCacheError(
+                "invalid program-role source-marginal measure"
+            )
+        programs = len(self.vocabulary.program_states)
+        roles = len(self.vocabulary.role_states)
+        global_nodes = np.full(node_classes, probability_floor, dtype=np.float64)
+        global_bonds = np.full(bond_classes, probability_floor, dtype=np.float64)
+        program_nodes = np.zeros((programs, node_classes), dtype=np.float64)
+        program_bonds = np.zeros((programs, bond_classes), dtype=np.float64)
+        role_nodes = np.zeros((programs, roles, node_classes), dtype=np.float64)
+        role_bonds = np.zeros((programs, roles, bond_classes), dtype=np.float64)
+
+        for index in np.flatnonzero(measure > 0):
+            node_start, node_stop = self.arrays["node_offsets"][index : index + 2]
+            closure_start, closure_stop = self.arrays["closure_offsets"][index : index + 2]
+            weight = float(measure[index])
+            program = int(self.arrays["program_states"][index])
+            node_states = self.arrays["node_states"][node_start:node_stop]
+            node_roles = self.arrays["role_states"][node_start:node_stop]
+            atom_variable = ~self.arrays["fixed_atom_mask"][node_start:node_stop].astype(bool)
+            parent_bonds = self.arrays["parent_bonds"][node_start + 1 : node_stop]
+            parent_roles = node_roles[1:]
+            parent_variable = ~self.arrays["fixed_parent_bond_mask"][
+                node_start + 1 : node_stop
+            ].astype(bool)
+            closure_bonds = self.arrays["closure_bonds"][closure_start:closure_stop]
+            closure_variable = ~self.arrays["fixed_closure_bond_mask"][
+                closure_start:closure_stop
+            ].astype(bool)
+
+            node_counts = np.bincount(node_states[atom_variable], minlength=node_classes)
+            parent_counts = np.bincount(parent_bonds[parent_variable], minlength=bond_classes)
+            closure_counts = np.bincount(closure_bonds[closure_variable], minlength=bond_classes)
+            global_nodes += weight * node_counts
+            global_bonds += weight * (parent_counts + closure_counts)
+            program_nodes[program] += weight * node_counts
+            program_bonds[program] += weight * (parent_counts + closure_counts)
+            for role in np.unique(node_roles[atom_variable]):
+                selected = atom_variable & (node_roles == role)
+                role_nodes[program, int(role)] += weight * np.bincount(
+                    node_states[selected], minlength=node_classes
+                )
+            for role in np.unique(parent_roles[parent_variable]):
+                selected = parent_variable & (parent_roles == role)
+                role_bonds[program, int(role)] += weight * np.bincount(
+                    parent_bonds[selected], minlength=bond_classes
+                )
+
+        global_nodes /= global_nodes.sum()
+        global_bonds /= global_bonds.sum()
+        output_nodes = np.empty_like(role_nodes)
+        output_bonds = np.empty_like(role_bonds)
+        output_nodes[0] = global_nodes
+        output_bonds[0] = global_bonds
+        for program in range(1, programs):
+            program_node_source = backoff_strength * global_nodes + program_nodes[program]
+            program_bond_source = backoff_strength * global_bonds + program_bonds[program]
+            program_node_source /= program_node_source.sum()
+            program_bond_source /= program_bond_source.sum()
+            output_nodes[program, 0] = program_node_source
+            output_bonds[program, 0] = program_bond_source
+            for role in range(1, roles):
+                node_source = backoff_strength * program_node_source + role_nodes[program, role]
+                bond_source = backoff_strength * program_bond_source + role_bonds[program, role]
+                output_nodes[program, role] = node_source / node_source.sum()
+                output_bonds[program, role] = bond_source / bond_source.sum()
+        if (
+            np.any(output_nodes <= 0)
+            or np.any(output_bonds <= 0)
+            or not np.allclose(output_nodes.sum(axis=-1), 1.0)
+            or not np.allclose(output_bonds.sum(axis=-1), 1.0)
+        ):
+            raise SynthesisProgramProductionCacheError(
+                "program-role source marginals lost full support or normalization"
+            )
+        return output_nodes, output_bonds
 
     def record(self, index: int) -> SynthesisProgramGraphRecord:
         if index < 0 or index >= len(self):

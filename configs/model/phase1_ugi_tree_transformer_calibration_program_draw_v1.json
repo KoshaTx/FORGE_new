@@ -1,0 +1,30 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_calibration_draw_config.v1",
+  "status": "frozen_before_tree_transformer_training",
+  "fold": "calibration",
+  "count": 512,
+  "seed": 20260831,
+  "source_mass": {
+    "current_phase1_union": 0.5,
+    "expanded_exact_forward_enumeration": 0.5
+  },
+  "inputs": {
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  },
+  "selection_policy": {
+    "without_replacement": true,
+    "source_balanced": true,
+    "calibration_role_class_balanced_within_source": true,
+    "component_identifiers_exposed_to_model": false,
+    "heldout_rows_allowed": false,
+    "repairs_or_retries": false
+  },
+  "nonclaims": [
+    "Calibration program identities select development architecture and checkpoints but never candidates.",
+    "A morphology program contains no stored component graph or component identifier.",
+    "Held-out products and component families do not enter this draw."
+  ]
+}

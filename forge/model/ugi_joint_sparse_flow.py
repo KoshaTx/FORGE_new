@@ -9,7 +9,7 @@ shared sequence model.  Component identifiers and route labels are excluded.
 from __future__ import annotations
 
 import hashlib
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
@@ -47,6 +47,30 @@ except ModuleNotFoundError:  # pragma: no cover - optional dependency
 
 class UgiJointSparseFlowError(RuntimeError):
     """Raised when joint sparse tensors violate the adapter contract."""
+
+
+UGI_TREE_RELATIONS = (
+    "unrelated",
+    "self",
+    "query_child_of_memory",
+    "query_parent_of_memory",
+    "siblings",
+    "query_descendant_of_memory",
+    "query_ancestor_of_memory",
+    "same_role",
+    "different_role",
+)
+(
+    TREE_UNRELATED,
+    TREE_SELF,
+    TREE_CHILD,
+    TREE_PARENT,
+    TREE_SIBLING,
+    TREE_DESCENDANT,
+    TREE_ANCESTOR,
+    TREE_SAME_ROLE,
+    TREE_DIFFERENT_ROLE,
+) = range(len(UGI_TREE_RELATIONS))
 
 
 @dataclass(frozen=True)
@@ -383,6 +407,101 @@ def collate_ugi_joint_sparse_records(
     return batch
 
 
+def noisy_preorder_relation_states(
+    offspring: Any,
+    role_states: Any,
+    node_mask: Any,
+) -> Any:
+    """Infer fail-soft preorder relations from the current noisy offspring state.
+
+    A discrete-flow intermediate is not guaranteed to be a valid forest.  Relation construction
+    therefore cannot call the strict terminal decoder or use the clean target tree.  For every
+    current node, this function finds the first preorder balance closure within the same role.  If
+    none exists, the subtree is conservatively extended to that role's final active node.  The
+    resulting relation tensor is deterministic, uses only model-visible state, and becomes exact
+    whenever the offspring word is a valid core-attached preorder forest.
+    """
+
+    if torch is None:
+        raise UgiJointSparseFlowError("tree relations require torch")
+    if (
+        offspring.ndim != 2
+        or role_states.shape != offspring.shape
+        or node_mask.shape != offspring.shape
+        or node_mask.dtype != torch.bool
+    ):
+        raise UgiJointSparseFlowError("tree-relation tensors are misaligned")
+    batch, nodes = offspring.shape
+    positions = torch.arange(nodes, device=offspring.device)
+    active = node_mask
+    same_role = role_states[:, :, None] == role_states[:, None, :]
+    active_pairs = active[:, :, None] & active[:, None, :]
+
+    delta = (offspring.to(torch.long) - 1) * active
+    prefix = torch.cumsum(delta, dim=1)
+    target = prefix - delta - 1
+    possible_end = (
+        active_pairs
+        & same_role
+        & (positions[None, None, :] >= positions[None, :, None])
+        & (prefix[:, None, :] == target[:, :, None])
+    )
+    end_candidates = torch.where(
+        possible_end,
+        positions[None, None, :],
+        positions.new_full((), nodes),
+    )
+    first_end = end_candidates.amin(dim=2)
+    last_role_node = torch.where(
+        active_pairs & same_role,
+        positions[None, None, :],
+        positions.new_full((), -1),
+    ).amax(dim=2)
+    subtree_end = torch.where(first_end < nodes, first_end, last_role_node)
+
+    before = positions[None, :, None] < positions[None, None, :]
+    descendants = (
+        active_pairs & same_role & before & (positions[None, None, :] <= subtree_end[:, :, None])
+    )
+    ancestor_indices = torch.where(
+        descendants,
+        positions[None, :, None],
+        positions.new_full((), -1),
+    )
+    parent_by_child = ancestor_indices.amax(dim=1)
+
+    query_positions = positions[None, :, None]
+    memory_positions = positions[None, None, :]
+    query_parent = parent_by_child[:, :, None]
+    memory_parent = parent_by_child[:, None, :]
+    query_is_child = query_parent == memory_positions
+    query_is_parent = memory_parent == query_positions
+    siblings = (
+        (query_parent >= 0)
+        & (query_parent == memory_parent)
+        & (query_positions != memory_positions)
+    )
+    query_is_descendant = descendants.transpose(1, 2)
+    query_is_ancestor = descendants
+
+    relations = torch.full(
+        (batch, nodes, nodes),
+        TREE_UNRELATED,
+        dtype=torch.long,
+        device=offspring.device,
+    )
+    relations = torch.where(active_pairs & ~same_role, TREE_DIFFERENT_ROLE, relations)
+    relations = torch.where(active_pairs & same_role, TREE_SAME_ROLE, relations)
+    relations = torch.where(query_is_descendant, TREE_DESCENDANT, relations)
+    relations = torch.where(query_is_ancestor, TREE_ANCESTOR, relations)
+    relations = torch.where(siblings, TREE_SIBLING, relations)
+    relations = torch.where(query_is_parent, TREE_PARENT, relations)
+    relations = torch.where(query_is_child, TREE_CHILD, relations)
+    diagonal = positions[None, :, None] == positions[None, None, :]
+    relations = torch.where(active_pairs & diagonal, TREE_SELF, relations)
+    return relations
+
+
 if nn is not None:
 
     class _UgiProgramTransformerBlock(nn.Module):
@@ -441,6 +560,155 @@ if nn is not None:
             hidden = hidden + self.dropout(self.feedforward(self.feedforward_norm(hidden)))
             return hidden * node_mask[:, :, None]
 
+    class _UgiTreeProgramTransformerBlock(nn.Module):
+        """Tree-biased exterior attention with role-routed program memory."""
+
+        def __init__(
+            self,
+            *,
+            hidden_dim: int,
+            heads: int,
+            dropout: float,
+            feedforward_multiplier: int,
+            maximum_relative_position: int,
+            use_tree_relations: bool,
+            role_routed_program_attention: bool,
+            role_adapter_dim: int,
+        ) -> None:
+            super().__init__()
+            if maximum_relative_position < 1 or role_adapter_dim < 0:
+                raise UgiJointSparseFlowError("invalid tree-Transformer structural support")
+            # Preserve the import surface of historical Ugi runners that load this module but never
+            # construct the challenger.  The structural primitive is needed only by this backbone.
+            from forge.model.structural_attention import BiasedMultiheadAttention
+
+            self.heads = heads
+            self.maximum_relative_position = maximum_relative_position
+            self.use_tree_relations = use_tree_relations
+            self.role_routed_program_attention = role_routed_program_attention
+            self.self_norm = nn.LayerNorm(hidden_dim)
+            self.self_attention = BiasedMultiheadAttention(hidden_dim, heads, dropout)
+            self.relation_bias = nn.Embedding(len(UGI_TREE_RELATIONS), heads)
+            # Signed within-role sequence distance plus one cross-role state.
+            self.relative_position_bias = nn.Embedding(2 * maximum_relative_position + 2, heads)
+            self.program_norm = nn.LayerNorm(hidden_dim)
+            self.program_attention = BiasedMultiheadAttention(hidden_dim, heads, dropout)
+            self.adapter_norm = nn.LayerNorm(hidden_dim)
+            self.role_adapters = (
+                nn.ModuleList(
+                    nn.Sequential(
+                        nn.Linear(hidden_dim, role_adapter_dim),
+                        nn.GELU(),
+                        nn.Dropout(dropout),
+                        nn.Linear(role_adapter_dim, hidden_dim),
+                    )
+                    for _ in ROLE_NAMES
+                )
+                if role_adapter_dim
+                else None
+            )
+            self.feedforward_norm = nn.LayerNorm(hidden_dim)
+            self.feedforward = nn.Sequential(
+                nn.Linear(hidden_dim, feedforward_multiplier * hidden_dim),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(feedforward_multiplier * hidden_dim, hidden_dim),
+            )
+            self.dropout = nn.Dropout(dropout)
+            nn.init.zeros_(self.relation_bias.weight)
+            nn.init.zeros_(self.relative_position_bias.weight)
+
+        def _self_attention_bias(
+            self,
+            relation_states: Any,
+            within_role_positions: Any,
+            role_states: Any,
+        ) -> Any:
+            batch, nodes = role_states.shape
+            if relation_states.shape != (batch, nodes, nodes):
+                raise UgiJointSparseFlowError("tree relation states are misaligned")
+            if not self.use_tree_relations:
+                return relation_states.new_zeros(
+                    (batch, self.heads, nodes, nodes), dtype=self.relation_bias.weight.dtype
+                )
+            relative = within_role_positions[:, None, :] - within_role_positions[:, :, None]
+            relative = (
+                relative.clamp(
+                    min=-self.maximum_relative_position,
+                    max=self.maximum_relative_position,
+                )
+                + self.maximum_relative_position
+            )
+            same_role = role_states[:, :, None] == role_states[:, None, :]
+            cross_role_state = 2 * self.maximum_relative_position + 1
+            relative = torch.where(same_role, relative, cross_role_state)
+            relation = self.relation_bias(relation_states).permute(0, 3, 1, 2)
+            position = self.relative_position_bias(relative).permute(0, 3, 1, 2)
+            return relation + position
+
+        def _program_attention_bias(self, role_states: Any, program_tokens: Any) -> Any | None:
+            if not self.role_routed_program_attention:
+                return None
+            if program_tokens.shape[1] != len(ROLE_NAMES) + 1:
+                raise UgiJointSparseFlowError("tree Transformer program memory changed")
+            token_indices = torch.arange(program_tokens.shape[1], device=role_states.device)
+            allowed = (token_indices[None, None, :] == 0) | (
+                token_indices[None, None, :] == role_states[:, :, None] + 1
+            )
+            return torch.where(
+                allowed[:, None],
+                program_tokens.new_zeros(()),
+                program_tokens.new_full((), -torch.inf),
+            )
+
+        def _role_adapter(self, hidden: Any, role_states: Any) -> Any:
+            if self.role_adapters is None:
+                return torch.zeros_like(hidden)
+            normalized = self.adapter_norm(hidden)
+            values = torch.stack([adapter(normalized) for adapter in self.role_adapters], dim=2)
+            selected = role_states[:, :, None, None].expand(-1, -1, 1, hidden.shape[-1])
+            return torch.gather(values, 2, selected).squeeze(2)
+
+        def forward(
+            self,
+            hidden: Any,
+            *,
+            node_mask: Any,
+            program_tokens: Any,
+            relation_states: Any,
+            within_role_positions: Any,
+            role_states: Any,
+        ) -> Any:
+            normalized = self.self_norm(hidden)
+            hidden = hidden + self.dropout(
+                self.self_attention(
+                    normalized,
+                    normalized,
+                    query_mask=node_mask,
+                    memory_mask=node_mask,
+                    attention_bias=self._self_attention_bias(
+                        relation_states,
+                        within_role_positions,
+                        role_states,
+                    ),
+                )
+            )
+            hidden = hidden * node_mask[:, :, None]
+            hidden = hidden + self.dropout(
+                self.program_attention(
+                    self.program_norm(hidden),
+                    program_tokens,
+                    query_mask=node_mask,
+                    memory_mask=torch.ones(
+                        program_tokens.shape[:2], dtype=torch.bool, device=program_tokens.device
+                    ),
+                    attention_bias=self._program_attention_bias(role_states, program_tokens),
+                )
+            )
+            hidden = hidden + self.dropout(self._role_adapter(hidden, role_states))
+            hidden = hidden + self.dropout(self.feedforward(self.feedforward_norm(hidden)))
+            return hidden * node_mask[:, :, None]
+
     class UgiJointSparseFlow(nn.Module):
         """Shared sequence denoiser for topology and chemistry variables."""
 
@@ -465,6 +733,9 @@ if nn is not None:
             backbone: str = "bidirectional_gru",
             attention_heads: int = 8,
             transformer_feedforward_multiplier: int = 4,
+            tree_relation_attention: bool = True,
+            role_routed_program_attention: bool = True,
+            role_adapter_dim: int = 0,
         ) -> None:
             super().__init__()
             if (
@@ -484,12 +755,20 @@ if nn is not None:
                 or conditioning_mode not in {"full_morphology", "size_only"}
                 or decoration_state_conditioning
                 not in {"legacy_global", "bidirectional_anchor_local"}
-                or backbone not in {"bidirectional_gru", "ugi_program_transformer"}
+                or backbone
+                not in {
+                    "bidirectional_gru",
+                    "ugi_program_transformer",
+                    "ugi_tree_program_transformer",
+                }
                 or attention_heads < 1
                 or transformer_feedforward_multiplier < 1
+                or not isinstance(tree_relation_attention, bool)
+                or not isinstance(role_routed_program_attention, bool)
+                or role_adapter_dim < 0
             ):
                 raise UgiJointSparseFlowError("invalid joint sparse architecture")
-            if backbone == "ugi_program_transformer" and (
+            if backbone in {"ugi_program_transformer", "ugi_tree_program_transformer"} and (
                 hidden_dim % attention_heads
                 or semantic_organization != "role_structured"
                 or conditioning_mode != "full_morphology"
@@ -513,6 +792,9 @@ if nn is not None:
             self.backbone = backbone
             self.attention_heads = attention_heads
             self.transformer_feedforward_multiplier = transformer_feedforward_multiplier
+            self.tree_relation_attention = tree_relation_attention
+            self.role_routed_program_attention = role_routed_program_attention
+            self.role_adapter_dim = role_adapter_dim
             self.offspring_embedding = nn.Embedding(maximum_children + 1, hidden_dim)
             self.atom_embedding = nn.Embedding(atom_classes, hidden_dim)
             self.bond_embedding = nn.Embedding(bond_classes, hidden_dim)
@@ -589,20 +871,38 @@ if nn is not None:
             )
             self.program_global_token = (
                 nn.Parameter(torch.zeros(hidden_dim))
-                if backbone == "ugi_program_transformer"
+                if backbone in {"ugi_program_transformer", "ugi_tree_program_transformer"}
+                else None
+            )
+            self.core_port_embedding = (
+                nn.Embedding(len(ROLE_NAMES), hidden_dim)
+                if backbone == "ugi_tree_program_transformer"
                 else None
             )
             self.transformer_blocks = (
                 nn.ModuleList(
-                    _UgiProgramTransformerBlock(
-                        hidden_dim=hidden_dim,
-                        heads=attention_heads,
-                        dropout=dropout,
-                        feedforward_multiplier=transformer_feedforward_multiplier,
+                    (
+                        _UgiTreeProgramTransformerBlock(
+                            hidden_dim=hidden_dim,
+                            heads=attention_heads,
+                            dropout=dropout,
+                            feedforward_multiplier=transformer_feedforward_multiplier,
+                            maximum_relative_position=max(1, maximum_component_atoms - 1),
+                            use_tree_relations=tree_relation_attention,
+                            role_routed_program_attention=role_routed_program_attention,
+                            role_adapter_dim=role_adapter_dim,
+                        )
+                        if backbone == "ugi_tree_program_transformer"
+                        else _UgiProgramTransformerBlock(
+                            hidden_dim=hidden_dim,
+                            heads=attention_heads,
+                            dropout=dropout,
+                            feedforward_multiplier=transformer_feedforward_multiplier,
+                        )
                     )
                     for _ in range(layers)
                 )
-                if backbone == "ugi_program_transformer"
+                if backbone in {"ugi_program_transformer", "ugi_tree_program_transformer"}
                 else None
             )
             self.output = nn.Sequential(
@@ -682,7 +982,7 @@ if nn is not None:
             """Return one global and three role-local coarse-program tokens."""
 
             if (
-                self.backbone != "ugi_program_transformer"
+                self.backbone not in {"ugi_program_transformer", "ugi_tree_program_transformer"}
                 or self.program_global_token is None
                 or self.count_embeddings is None
                 or self.junction_embeddings is None
@@ -699,6 +999,8 @@ if nn is not None:
                     + self.cycle_embeddings[role_index](programs[:, 6 + role_index])
                     + self.attachment_embeddings[role_index](programs[:, 9 + role_index])
                 )
+                if self.core_port_embedding is not None:
+                    token = token + self.core_port_embedding.weight[role_index][None]
                 role_tokens.append(token)
             roles = torch.stack(role_tokens, dim=1)
             global_token = roles.mean(dim=1) + self.program_global_token[None]
@@ -822,12 +1124,27 @@ if nn is not None:
                 if self.transformer_blocks is None:
                     raise UgiJointSparseFlowError("Transformer backbone is unexpectedly absent")
                 program_tokens = self._program_tokens(programs, t)
+                relation_states = (
+                    noisy_preorder_relation_states(offspring, role_states, node_mask)
+                    if self.backbone == "ugi_tree_program_transformer"
+                    else None
+                )
                 for block in self.transformer_blocks:
-                    hidden = block(
-                        hidden,
-                        node_mask=node_mask,
-                        program_tokens=program_tokens,
-                    )
+                    if self.backbone == "ugi_tree_program_transformer":
+                        hidden = block(
+                            hidden,
+                            node_mask=node_mask,
+                            program_tokens=program_tokens,
+                            relation_states=relation_states,
+                            within_role_positions=within_role_positions,
+                            role_states=role_states,
+                        )
+                    else:
+                        hidden = block(
+                            hidden,
+                            node_mask=node_mask,
+                            program_tokens=program_tokens,
+                        )
             hidden = (hidden + self.output(hidden)) * node_mask[:, :, None]
             global_hidden = hidden.sum(dim=1) / node_mask.sum(dim=1, keepdim=True).clamp(min=1)
             query = self.decoration_query(global_hidden)
@@ -1093,6 +1410,75 @@ def noise_ugi_joint_sparse_batch(
             generator,
         ),
     }
+
+
+def apply_component_role_mask(
+    noisy: dict[str, Any],
+    clean: dict[str, Any],
+    sources: dict[str, Any],
+    *,
+    probability: float,
+    generator: Any,
+) -> tuple[dict[str, Any], Any]:
+    """Replace one complete precursor role with source noise in selected examples.
+
+    This curriculum tests compositional recovery without exposing component identities or clean
+    graph relations.  Decorations are globally source-masked for selected examples because their
+    current noisy anchor may itself move between roles; retaining them would create an indirect
+    component-information channel.
+    """
+
+    if torch is None or not 0 <= probability <= 1:
+        raise UgiJointSparseFlowError("component-role mask probability must lie in [0, 1]")
+    batch = clean["node_mask"].shape[0]
+    selected = (
+        torch.rand(batch, generator=generator, device=clean["node_mask"].device) < probability
+    )
+    selected_roles = torch.full((batch,), -1, dtype=torch.long, device=clean["node_mask"].device)
+    if not bool(selected.any()):
+        return noisy, selected_roles
+    selected_roles[selected] = torch.randint(
+        len(ROLE_NAMES),
+        (int(selected.sum()),),
+        generator=generator,
+        device=selected_roles.device,
+    )
+    role_mask = (
+        clean["node_mask"] & selected[:, None] & (clean["role_states"] == selected_roles[:, None])
+    )
+    output = {key: value.clone() for key, value in noisy.items()}
+    for key, source_name in (
+        ("offspring", "offspring"),
+        ("nodes", "atoms"),
+        ("parent_bonds", "bonds"),
+    ):
+        probabilities = sources[source_name][clean["role_states"]][role_mask]
+        output[key][role_mask] = torch.multinomial(
+            probabilities,
+            1,
+            generator=generator,
+        ).squeeze(1)
+
+    slots = output["decoration_anchors"].shape[1]
+    slot_mask = selected[:, None].expand(-1, slots)
+    anchor_source = _decoration_anchor_source(clean["node_mask"], sources["decoration"])
+    anchor_probabilities = anchor_source[:, None, :].expand(-1, slots, -1)[slot_mask]
+    output["decoration_anchors"][slot_mask] = torch.multinomial(
+        anchor_probabilities,
+        1,
+        generator=generator,
+    ).squeeze(1)
+    for key, source_name in (
+        ("decoration_atoms", "decoration_atoms"),
+        ("decoration_bonds", "decoration_bonds"),
+    ):
+        output[key][slot_mask] = torch.multinomial(
+            sources[source_name],
+            int(slot_mask.sum()),
+            replacement=True,
+            generator=generator,
+        )
+    return output, selected_roles
 
 
 def _legacy_sample_ugi_joint_sparse_terminals(
@@ -1450,11 +1836,89 @@ def _pooled_ce(logits: Any, target: Any, batch: dict[str, Any], label: str) -> A
     return functional.cross_entropy(logits[mask], target[mask])
 
 
+BASE_JOINT_LOSS_TERMS = (
+    "offspring_ce",
+    "atom_ce",
+    "parent_bond_ce",
+    "closure_bond_ce",
+    "decoration_anchor_ce",
+    "decoration_atom_ce",
+    "decoration_bond_ce",
+)
+PROGRAM_CONSISTENCY_TERMS = (
+    "attachment_count_consistency",
+    "junction_budget_consistency",
+)
+
+
+def _objective_weights(
+    supplied: Mapping[str, float] | None,
+    *,
+    names: Sequence[str],
+    default: float,
+    label: str,
+) -> dict[str, float]:
+    values = {name: default for name in names}
+    if supplied is not None:
+        unknown = set(supplied).difference(names)
+        if unknown:
+            raise UgiJointSparseFlowError(f"unknown {label} terms: {sorted(unknown)}")
+        values.update({str(name): float(value) for name, value in supplied.items()})
+    if any(not np.isfinite(value) or value < 0 for value in values.values()):
+        raise UgiJointSparseFlowError(f"{label} weights must be finite and nonnegative")
+    return values
+
+
+def _program_consistency_losses(
+    predictions: dict[str, Any], clean: dict[str, Any]
+) -> dict[str, Any]:
+    """Compare soft offspring topology with the supplied coarse role program."""
+
+    logits = predictions["offspring"]
+    probabilities = logits.softmax(dim=-1)
+    child_values = torch.arange(logits.shape[-1], dtype=logits.dtype, device=logits.device)
+    expected_children = torch.einsum("bnc,c->bn", probabilities, child_values)
+    expected_junctions = torch.einsum(
+        "bnc,c->bn",
+        probabilities,
+        (child_values - 1).clamp(min=0),
+    )
+    attachment_losses = []
+    junction_losses = []
+    for role_index in range(len(ROLE_NAMES)):
+        role_mask = clean["node_mask"] & (clean["role_states"] == role_index)
+        node_counts = clean["programs"][:, role_index].to(logits.dtype).clamp(min=1)
+        target_children = (
+            clean["programs"][:, role_index] - clean["programs"][:, 9 + role_index]
+        ).to(logits.dtype)
+        predicted_children = (expected_children * role_mask).sum(dim=1)
+        attachment_losses.append(
+            functional.smooth_l1_loss(
+                predicted_children / node_counts,
+                target_children / node_counts,
+            )
+        )
+        target_junctions = clean["programs"][:, 3 + role_index].to(logits.dtype)
+        predicted_junctions = (expected_junctions * role_mask).sum(dim=1)
+        junction_losses.append(
+            functional.smooth_l1_loss(
+                predicted_junctions / node_counts,
+                target_junctions / node_counts,
+            )
+        )
+    return {
+        "attachment_count_consistency": torch.stack(attachment_losses).mean(),
+        "junction_budget_consistency": torch.stack(junction_losses).mean(),
+    }
+
+
 def ugi_joint_sparse_loss(
     predictions: dict[str, Any],
     clean: dict[str, Any],
     *,
     semantic_organization: str = "role_structured",
+    loss_weights: Mapping[str, float] | None = None,
+    consistency_weights: Mapping[str, float] | None = None,
 ) -> tuple[Any, dict[str, float]]:
     """Balance topology and chemistry while sharing one denoising backbone."""
 
@@ -1484,24 +1948,34 @@ def ugi_joint_sparse_loss(
         predictions["decoration_bonds"][decoration_mask],
         clean["decoration_bonds"][decoration_mask],
     )
-    total = (
-        offspring_loss
-        + atom_loss
-        + parent_bond_loss
-        + closure_loss
-        + decoration_anchor_loss
-        + decoration_atom_loss
-        + decoration_bond_loss
-    )
-    metrics = {
-        "offspring_ce": float(offspring_loss.detach()),
-        "atom_ce": float(atom_loss.detach()),
-        "parent_bond_ce": float(parent_bond_loss.detach()),
-        "closure_bond_ce": float(closure_loss.detach()),
-        "decoration_anchor_ce": float(decoration_anchor_loss.detach()),
-        "decoration_atom_ce": float(decoration_atom_loss.detach()),
-        "decoration_bond_ce": float(decoration_bond_loss.detach()),
+    terms = {
+        "offspring_ce": offspring_loss,
+        "atom_ce": atom_loss,
+        "parent_bond_ce": parent_bond_loss,
+        "closure_bond_ce": closure_loss,
+        "decoration_anchor_ce": decoration_anchor_loss,
+        "decoration_atom_ce": decoration_atom_loss,
+        "decoration_bond_ce": decoration_bond_loss,
     }
+    resolved_loss_weights = _objective_weights(
+        loss_weights,
+        names=BASE_JOINT_LOSS_TERMS,
+        default=1.0,
+        label="joint-loss",
+    )
+    resolved_consistency_weights = _objective_weights(
+        consistency_weights,
+        names=PROGRAM_CONSISTENCY_TERMS,
+        default=0.0,
+        label="program-consistency",
+    )
+    consistency = _program_consistency_losses(predictions, clean)
+    total = sum(resolved_loss_weights[name] * terms[name] for name in BASE_JOINT_LOSS_TERMS)
+    total = total + sum(
+        resolved_consistency_weights[name] * consistency[name] for name in PROGRAM_CONSISTENCY_TERMS
+    )
+    metrics = {name: float(value.detach()) for name, value in terms.items()}
+    metrics.update({name: float(value.detach()) for name, value in consistency.items()})
     generated_global_states = {
         "cycle_ranks",
         "attachment_counts",
@@ -1525,5 +1999,6 @@ def ugi_joint_sparse_loss(
                 "attachment_count_ce": float(attachment_loss.detach()),
             }
         )
+    metrics["unweighted_base_total"] = float(sum(terms.values()).detach())
     metrics["total"] = float(total.detach())
     return total, metrics

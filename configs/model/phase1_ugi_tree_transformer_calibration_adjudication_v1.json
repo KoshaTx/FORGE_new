@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_calibration_adjudication_config.v1",
+  "status": "frozen_before_full_calibration_outputs_exist",
+  "scientific_question": "Does any tree-aware Ugi Transformer checkpoint improve unique open-ended whole-product-novel exact-L1 yield over frozen v0 while retaining validity, exact-L1 consistency, and train-supported local, role, and tail chemistry?",
+  "inputs": {
+    "program_draw": {
+      "path": "runs/phase1-ugi-tree-transformer-calibration-program-draw-v1/9bd9ce0b79753c0c61e5a51de1083389ebce90697a305f4e666a9f3dcf07ea6d/stages/draw/artifacts/program_draw.json",
+      "sha256": "ad51b852116e03ca6ab9ed3e44fefd899795f435337a1f615564ec697aa01054"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "expected_evidence": {
+    "programs_per_checkpoint": 512,
+    "checkpoint_steps": [300, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000],
+    "reference_checkpoint_step": 3000,
+    "transformer_experiments": {
+      "phase1-ugi-tree-calibration-dense-h100-v1": "dense_corrected_schedule",
+      "phase1-ugi-tree-calibration-relations-h100-v1": "tree_relations_and_routing",
+      "phase1-ugi-tree-calibration-consistency-h100-v1": "tree_plus_balanced_consistency",
+      "phase1-ugi-tree-calibration-masking-h100-v1": "full_component_masking"
+    },
+    "reference_experiment": "phase1-ugi-v0-calibration-h100-v1",
+    "reference_arm": "v0_reference",
+    "profile": "full",
+    "replicate": 0,
+    "sampling_device": "cuda",
+    "paired_program_order": true,
+    "paired_random_streams": true,
+    "heldout_rows_used": false
+  },
+  "uncertainty": {
+    "method": "paired_nonparametric_bootstrap_over_fixed_program_indices",
+    "seed": 20260904,
+    "resamples": 10000,
+    "confidence": 0.95,
+    "interval": "percentile"
+  },
+  "gates": {
+    "absolute_noninferiority_margin": 0.02,
+    "noninferiority_metrics": [
+      "valid_fraction_per_attempt",
+      "exact_l1_yield_per_attempt",
+      "local_support_qualified_exact_l1_yield_per_attempt",
+      "role_supported_exact_l1_yield_per_attempt",
+      "tail_supported_exact_l1_yield_per_attempt",
+      "component_novelty_fraction"
+    ],
+    "minimum_effective_component_count_ratio": 0.8,
+    "primary_metric": "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt",
+    "minimum_primary_absolute_improvement": 0.02,
+    "primary_bootstrap_interval_must_exclude_zero": true
+  },
+  "selection": {
+    "eligible_candidates_only": true,
+    "order": [
+      "primary_metric_descending",
+      "tail_supported_exact_l1_yield_per_attempt_descending",
+      "role_supported_exact_l1_yield_per_attempt_descending",
+      "local_support_qualified_exact_l1_yield_per_attempt_descending",
+      "exact_l1_yield_per_attempt_descending",
+      "valid_fraction_per_attempt_descending",
+      "checkpoint_step_ascending",
+      "arm_id_ascending"
+    ],
+    "no_eligible_candidate": "freeze_no_transformer_promotion_and_report_the_negative_result"
+  },
+  "reporting": {
+    "model_and_checkpoint_selection_only": true,
+    "candidate_selection": false,
+    "heldout_selects_nothing": true,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "negative_results_are_complete_results": true
+  },
+  "nonclaims": [
+    "Calibration estimates do not constitute held-component generalization or final production performance.",
+    "Exact L1 is transform consistency, not synthesis success or route closure.",
+    "Train-supported local and role morphology are empirical support audits, not proofs of chemical possibility, safety, stability, or activity."
+  ]
+}

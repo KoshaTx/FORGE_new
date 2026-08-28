@@ -102,10 +102,16 @@ def test_ancestry_resampling_is_within_program_and_keeps_productive_rng() -> Non
 
 @cache
 def _corpus():
+    root = REPO / "results/phase1/ugi_expanded_chemistry_exemplars"
+    required = (
+        root / "assignments.csv.gz",
+        root / "semantic_products.csv.gz",
+        root / "semantic_atoms.csv.gz",
+    )
+    if any(not path.is_file() for path in required):
+        pytest.skip("legacy 421-record expanded-chemistry fixture is not materialized")
     return load_expanded_ugi_chemistry_corpus(
-        REPO / "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
-        REPO / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_products.csv.gz",
-        REPO / "results/phase1/ugi_expanded_chemistry_exemplars/semantic_atoms.csv.gz",
+        *required,
         REPO / "results/phase1/product_v3_atom_vocabulary.json",
     )
 

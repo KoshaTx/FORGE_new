@@ -1,0 +1,79 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_production_training.v1",
+  "status": "frozen_after_calibration_before_production_training",
+  "selected_model": {
+    "arm_id": "tree_relations_and_routing",
+    "checkpoint_step": 2700,
+    "candidate_id": "tree_relations_and_routing:step_2700"
+  },
+  "seed_schedule": {
+    "smoke": [20260905],
+    "full": [20260905, 20260906, 20260907]
+  },
+  "profiles": {
+    "smoke": {
+      "device": "cuda",
+      "steps": 2,
+      "batch_size": 2,
+      "checkpoint_steps": [2],
+      "maximum_weighted_training_draws": 4
+    },
+    "full": {
+      "device": "cuda",
+      "steps": 2700,
+      "batch_size": 128,
+      "checkpoint_steps": [2700],
+      "maximum_weighted_training_draws": 345600
+    }
+  },
+  "inputs": {
+    "base_config": {
+      "path": "configs/model/phase1_ugi_tree_transformer_challenger_seed0_v1.json",
+      "sha256": "cc31840b1c4823cdd379b3780b78e70c623ca87e64a53ec4efdacadf344decb3"
+    },
+    "ablation_design": {
+      "path": "configs/model/phase1_ugi_tree_transformer_ablation_ladder_v1.json",
+      "sha256": "6f913731f5158e39fdebd747cc83c6548406284894bb70464bdf034409fde56a"
+    },
+    "calibration_adjudication": {
+      "path": "results/phase1/ugi_tree_transformer_calibration_adjudication_v1/result.json",
+      "sha256": "4dccd7e2b3c704e86757be4542cafa3dd5e78e4af6978e8e3c356ae185e90f02"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_products": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz",
+      "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    }
+  },
+  "policy": {
+    "fresh_independent_training_seeds": true,
+    "train_fold_only": true,
+    "calibration_rows_select_nothing_after_freeze": true,
+    "heldout_rows_used_for_training": false,
+    "fixed_final_step": true,
+    "retry_changes_seed_or_minibatch_order": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false
+  },
+  "nonclaims": [
+    "Fresh production seeds estimate stability and do not reopen architecture or checkpoint selection.",
+    "Training uses the 66,464-product train fold only; calibration and held-out rows do not alter model parameters.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability."
+  ]
+}

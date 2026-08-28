@@ -518,6 +518,52 @@ def benchmark_shared_synthesis_program_production_accelerator(
     )
 
 
+@stage("model.shared-synthesis-program-h100-training-profile.v1")
+def profile_shared_synthesis_program_training_h100(context: RunContext) -> StageResult:
+    """Profile the frozen mixed-program training step and bounded optimization candidates."""
+
+    from experiments.phase1.multireaction.h100_training_profile import (
+        RESULT_SCHEMA,
+        run_h100_training_profile,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    result = run_h100_training_profile(
+        context.config_path,
+        context.repo,
+        context.input("production_cache"),
+        context.output_path("result.json"),
+        allocated_device=context.resources.device,
+        declared_gpu_type=context.resources.gpu_type or "",
+    )
+    baseline = result["baseline"]
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                RESULT_SCHEMA,
+            ),
+        ),
+        metrics={
+            "gates_passed": int(sum(result["gates"].values())),
+            "peak_reserved_bytes": int(result["peak_reserved_bytes"]),
+            "baseline_seconds_per_optimizer_step": float(
+                baseline["median_wall_seconds_per_optimizer_step"]
+            ),
+            "baseline_examples_per_second": float(baseline["examples_per_second_wall"]),
+        },
+        summary={
+            "status": result["status"],
+            "device": result["device"]["name"],
+            "selected_candidate": result["selected_candidate"],
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
 @stage("model.shared-synthesis-program-production-training.v1")
 def train_shared_synthesis_program_production(context: RunContext) -> StageResult:
     """Train the four frozen matched arms for one explicit replicate."""
@@ -575,6 +621,118 @@ def train_shared_synthesis_program_production(context: RunContext) -> StageResul
     )
 
 
+def _reaction_program_specialist_stage(
+    context: RunContext,
+    *,
+    profile: str,
+    topology_specialist: bool,
+) -> StageResult:
+    from experiments.phase1.multireaction.reaction_specialization import (
+        run_reaction_program_specialization,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    result = run_reaction_program_specialization(
+        context.config_path,
+        context.repo,
+        context.input("production_cache"),
+        context.output_path("."),
+        work_dir=context.work_dir,
+        profile=profile,
+        allocated_device=context.resources.device,
+        resume=context.resume,
+    )
+    suffix = "topology_specialization" if topology_specialist else "specialization"
+    checkpoint_schema = (
+        "forge.reaction_program_topology_specialist_checkpoint.v2"
+        if topology_specialist
+        else "forge.reaction_program_specialist_checkpoint.v1"
+    )
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "checkpoint",
+                "specialist_checkpoint.pt",
+                checkpoint_schema,
+            ),
+            ProducedArtifact(
+                "progress",
+                "progress.json",
+                f"forge.reaction_program_{suffix}_progress."
+                f"{'v2' if topology_specialist else 'v1'}",
+            ),
+            ProducedArtifact(
+                "result",
+                "result.json",
+                f"forge.reaction_program_{suffix}_result."
+                f"{'v2' if topology_specialist else 'v1'}",
+            ),
+        ),
+        metrics={
+            "optimizer_steps": int(result["observed"]["optimizer_steps"]),
+            "additional_examples": int(result["observed"]["additional_examples"]),
+            "cumulative_examples": int(result["observed"]["cumulative_examples"]),
+            "specialist_parameters": int(result["specialist"]["specialist_trainable_parameters"]),
+        },
+        summary={
+            "status": result["status"],
+            "target_program": result["target_program"],
+            "preflight_only": profile != "full",
+            "shared_parameters_frozen": True,
+            "topology_head_supervised": topology_specialist,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+@stage("model.reaction-program-specialization.v1")
+def train_reaction_program_specialist(context: RunContext) -> StageResult:
+    """Fine-tune one lightweight family adapter from an authenticated shared checkpoint."""
+
+    return _reaction_program_specialist_stage(
+        context,
+        profile=context.profile,
+        topology_specialist=False,
+    )
+
+
+@stage("model.reaction-program-specialization-h100-preflight.v1")
+def preflight_reaction_program_specialist_h100(context: RunContext) -> StageResult:
+    """Exercise authenticated specialist loading, a short final batch and checkpointing on H100."""
+
+    return _reaction_program_specialist_stage(
+        context,
+        profile="smoke",
+        topology_specialist=False,
+    )
+
+
+@stage("model.reaction-program-topology-specialization.v2")
+def train_reaction_program_topology_specialist(context: RunContext) -> StageResult:
+    """Fine-tune a family adapter and explicit child-count head from one frozen base."""
+
+    return _reaction_program_specialist_stage(
+        context,
+        profile=context.profile,
+        topology_specialist=True,
+    )
+
+
+@stage("model.reaction-program-topology-specialization-h100-preflight.v2")
+def preflight_reaction_program_topology_specialist_h100(
+    context: RunContext,
+) -> StageResult:
+    """Qualify the topology-specialist delta and direct objective on the target H100."""
+
+    return _reaction_program_specialist_stage(
+        context,
+        profile="h100_preflight",
+        topology_specialist=True,
+    )
+
+
 @stage("model.shared-synthesis-program-production-evaluation.v1")
 def evaluate_shared_synthesis_program_production(context: RunContext) -> StageResult:
     """Evaluate every frozen checkpoint without selecting models or candidates."""
@@ -622,6 +780,102 @@ def evaluate_shared_synthesis_program_production(context: RunContext) -> StageRe
         summary={
             "status": result["status"],
             "coverage_and_precision_reported": True,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+@stage("model.synthesis-program-layout-schedule-preflight.v1")
+def preflight_synthesis_program_layout_schedule(context: RunContext) -> StageResult:
+    """Materialize every frozen factorized layout before checkpoint evaluation."""
+
+    from experiments.phase1.multireaction.layout_schedule_preflight import (
+        RESULT_SCHEMA,
+        validate_layout_schedule,
+    )
+
+    config = context.config()
+    configured_inputs = config.get("inputs")
+    if not isinstance(configured_inputs, dict):
+        raise ValueError("layout-schedule preflight config has no input mapping")
+    require_config_inputs(context, config, labels=set(configured_inputs))
+    result = validate_layout_schedule(
+        context.config_path,
+        context.repo,
+        context.input("production_cache"),
+        context.input("training_result"),
+        context.output_path("result.json"),
+        profile=context.profile,
+        replicate=context.replicate,
+    )
+    return StageResult(
+        artifacts=(ProducedArtifact("result", "result.json", RESULT_SCHEMA),),
+        metrics={
+            "layout_cells": int(result["schedule"]["cells"]),
+            "layouts": int(result["schedule"]["layouts"]),
+            "maximum_node_count": int(result["schedule"]["maximum_node_count"]),
+        },
+        summary={
+            "status": result["status"],
+            "repair_or_retry": False,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+@stage("model.shared-synthesis-program-production-evaluation-from-pins.v1")
+def evaluate_shared_synthesis_program_production_from_pins(context: RunContext) -> StageResult:
+    """Evaluate an authenticated external checkpoint package without retraining."""
+
+    from experiments.phase1.multireaction.production_evaluation import (
+        run_synthesis_program_production_evaluation,
+    )
+
+    config = context.config()
+    configured_inputs = config.get("inputs")
+    if not isinstance(configured_inputs, dict):
+        raise ValueError("checkpoint evaluation config has no input mapping")
+    require_config_inputs(context, config, labels=set(configured_inputs))
+    result = run_synthesis_program_production_evaluation(
+        context.config_path,
+        context.repo,
+        context.input("production_cache"),
+        context.input("checkpoint_archive"),
+        context.input("training_result"),
+        context.output_path("."),
+        profile=context.profile,
+        replicate=context.replicate,
+        allocated_device=context.resources.device,
+    )
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "samples",
+                "samples.jsonl.gz",
+                "forge.synthesis_program_production_samples.v1",
+                rows=int(result["sample_rows"]),
+            ),
+            ProducedArtifact(
+                "molecule_report",
+                "molecule_report.html",
+                "forge.synthesis_program_production_molecule_report.v1",
+            ),
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.synthesis_program_production_evaluation_result.v1",
+            ),
+        ),
+        metrics={
+            "sample_rows": int(result["sample_rows"]),
+            "gates_passed": int(sum(result["gates"].values())),
+        },
+        summary={
+            "status": result["status"],
+            "checkpoint_weights_reused": True,
+            "training_calls": 0,
             "candidate_selection": False,
             "route_or_oracle_calls": 0,
         },
@@ -824,6 +1078,50 @@ def freeze_shared_synthesis_program_production_design(context: RunContext) -> St
     )
 
 
+@stage("model.mixed-repeat-training-design.v1")
+def freeze_mixed_repeat_training_design_stage(context: RunContext) -> StageResult:
+    """Derive and validate the expanded BL/LX Transformer training design."""
+
+    from experiments.phase1.multireaction.production_design import (
+        freeze_mixed_repeat_training_design,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    result = freeze_mixed_repeat_training_design(
+        context.config_path,
+        context.repo,
+        context.output_path("design.json"),
+        context.output_path("result.json"),
+    )
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "design",
+                "design.json",
+                "forge.synthesis_program_production_design_config.v1",
+            ),
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.synthesis_program_production_design_result.v1",
+            ),
+        ),
+        metrics={
+            "programs": len(result["corpus"]),
+            "training_products": sum(
+                int(value["folds"]["train"]["records"])
+                for value in result["corpus"].values()
+            ),
+            "gates_passed": int(sum(result["gates"].values())),
+        },
+        summary={
+            "status": result["status"],
+            "production_training_authorized": False,
+            "production_sampling_authorized": False,
+        },
+    )
+
 @stage("model.shared-synthesis-program-representation.v1")
 def qualify_shared_synthesis_program_representation(context: RunContext) -> StageResult:
     """Require lossless whole-product serialization across every admitted program record."""
@@ -929,6 +1227,216 @@ def build_multireaction_corpus(context: RunContext) -> StageResult:
             "biological_labels_used": False,
             "reductive_amination_substructure_rate_reported": False,
             "sampling_policy": summary["sampling_policy"],
+        },
+    )
+
+
+@stage("corpus.multireaction.reaction-enumerated-expansion.v1")
+def build_multireaction_reaction_enumerated_expansion(context: RunContext) -> StageResult:
+    """Expand BL/LX from source-linked components with exact forward programs."""
+
+    from forge.corpus.multireaction_expansion import build_multireaction_expansion
+
+    config = context.config()
+    require_config_inputs(context, config)
+    outputs = {
+        "components": context.output_path("component_registry.csv.gz"),
+        "attempts": context.output_path("enumeration_attempts.csv.gz"),
+        "atlas": context.output_path("reaction_program_atlas.csv.gz"),
+        "steps": context.output_path("reaction_program_steps.csv.gz"),
+        "semantic_atoms": context.output_path("semantic_atoms.csv.gz"),
+        "provenance": context.output_path("source_provenance.csv.gz"),
+        "splits": context.output_path("component_family_splits.csv.gz"),
+        "manifest": context.output_path("manifest.json"),
+        "result": context.output_path("result.json"),
+    }
+    result = build_multireaction_expansion(
+        context.config_path,
+        context.repo,
+        outputs=outputs,
+    )
+    summary = result["summary"]
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "components",
+                "component_registry.csv.gz",
+                "forge.multireaction_expansion_components.v1",
+                rows=int(summary["candidate_components"]),
+            ),
+            ProducedArtifact(
+                "attempts",
+                "enumeration_attempts.csv.gz",
+                "forge.multireaction_expansion_attempts.v1",
+                rows=int(summary["enumeration_attempts"]),
+            ),
+            ProducedArtifact(
+                "atlas",
+                "reaction_program_atlas.csv.gz",
+                "forge.multireaction_program_atlas.v1",
+                rows=int(summary["total_products"]),
+            ),
+            ProducedArtifact(
+                "steps",
+                "reaction_program_steps.csv.gz",
+                "forge.multireaction_program_steps.v1",
+                rows=int(summary["exact_program_steps"]),
+            ),
+            ProducedArtifact(
+                "semantic_atoms",
+                "semantic_atoms.csv.gz",
+                "forge.multireaction_semantic_atoms.v2",
+                rows=int(summary["semantic_atom_rows"]),
+            ),
+            ProducedArtifact(
+                "provenance",
+                "source_provenance.csv.gz",
+                "forge.multireaction_source_provenance.v1",
+            ),
+            ProducedArtifact(
+                "splits",
+                "component_family_splits.csv.gz",
+                "forge.multireaction_expanded_component_family_splits.v1",
+                rows=int(summary["total_products"]),
+            ),
+            ProducedArtifact(
+                "manifest",
+                "manifest.json",
+                "forge.multireaction_expansion_manifest.v1",
+            ),
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.multireaction_expansion_result.v1",
+            ),
+        ),
+        metrics={
+            "source_products": int(summary["source_products_preserved"]),
+            "computed_products": int(summary["computed_products_admitted"]),
+            "training_products": int(summary["product_folds"]["train"]),
+            "calibration_products": int(summary["product_folds"]["calibration"]),
+            "heldout_products": int(summary["product_folds"]["heldout"]),
+        },
+        summary={
+            "status": result["status"],
+            "source_executed_evidence_rewritten": False,
+            "biological_labels_used": False,
+            "computed_products_are_synthesis_success": False,
+            "reductive_amination_substructure_rate_reported": False,
+        },
+    )
+
+
+@stage("corpus.multireaction.mixed-repeat-expansion.v1")
+def build_multireaction_mixed_repeat_expansion(context: RunContext) -> StageResult:
+    """Expand BL/LX with distinct source-linked repeat components in one exact program."""
+
+    from forge.corpus.multireaction_mixed_expansion import (
+        build_multireaction_mixed_expansion,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    outputs = {
+        "components": context.output_path("component_registry.csv.gz"),
+        "attempts": context.output_path("mixed_enumeration_attempts.csv.gz"),
+        "atlas": context.output_path("reaction_program_atlas.csv.gz"),
+        "steps": context.output_path("reaction_program_steps.csv.gz"),
+        "semantic_atoms": context.output_path("semantic_atoms.csv.gz"),
+        "provenance": context.output_path("source_provenance.csv.gz"),
+        "splits": context.output_path("component_family_splits.csv.gz"),
+        "manifest": context.output_path("manifest.json"),
+        "result": context.output_path("result.json"),
+    }
+    strict_model_support = "atom_vocabulary" in config.get("inputs", {})
+    if strict_model_support:
+        outputs["support_exclusions"] = context.output_path(
+            "model_support_exclusions.csv.gz"
+        )
+    result = build_multireaction_mixed_expansion(
+        context.config_path,
+        context.repo,
+        outputs=outputs,
+    )
+    summary = result["summary"]
+    artifacts = [
+            ProducedArtifact(
+                "components",
+                "component_registry.csv.gz",
+                "forge.multireaction_expansion_components.v1",
+            ),
+            ProducedArtifact(
+                "attempts",
+                "mixed_enumeration_attempts.csv.gz",
+                "forge.multireaction_mixed_expansion_attempts.v1",
+                rows=int(summary["mixed_enumeration_attempts"]),
+            ),
+            ProducedArtifact(
+                "atlas",
+                "reaction_program_atlas.csv.gz",
+                "forge.multireaction_program_atlas.v2",
+                rows=int(summary["total_products"]),
+            ),
+            ProducedArtifact(
+                "steps",
+                "reaction_program_steps.csv.gz",
+                "forge.multireaction_program_steps.v1",
+                rows=int(summary["exact_program_steps"]),
+            ),
+            ProducedArtifact(
+                "semantic_atoms",
+                "semantic_atoms.csv.gz",
+                "forge.multireaction_semantic_atoms.v2",
+                rows=int(summary["semantic_atom_rows"]),
+            ),
+            ProducedArtifact(
+                "provenance",
+                "source_provenance.csv.gz",
+                "forge.multireaction_source_provenance.v1",
+            ),
+            ProducedArtifact(
+                "splits",
+                "component_family_splits.csv.gz",
+                "forge.multireaction_mixed_component_family_splits.v1",
+                rows=int(summary["total_products"]),
+            ),
+            ProducedArtifact(
+                "manifest",
+                "manifest.json",
+                "forge.multireaction_mixed_expansion_manifest.v1",
+            ),
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.multireaction_mixed_expansion_result.v1",
+            ),
+        ]
+    if strict_model_support:
+        artifacts.insert(
+            -2,
+            ProducedArtifact(
+                "support_exclusions",
+                "model_support_exclusions.csv.gz",
+                "forge.multireaction_model_support_exclusions.v1",
+                rows=int(summary["homogeneous_model_support_exclusions"]),
+            ),
+        )
+    return StageResult(
+        artifacts=tuple(artifacts),
+        metrics={
+            "v1_products": int(summary["v1_products_preserved"]),
+            "mixed_products": int(summary["mixed_products_admitted"]),
+            "training_products": int(summary["product_folds"]["train"]),
+            "calibration_products": int(summary["product_folds"]["calibration"]),
+            "heldout_products": int(summary["product_folds"]["heldout"]),
+        },
+        summary={
+            "status": result["status"],
+            "source_executed_evidence_rewritten": False,
+            "biological_labels_used": False,
+            "computed_products_are_synthesis_success": False,
+            "component_family_assignment_precedes_enumeration": True,
+            "reductive_amination_substructure_rate_reported": False,
         },
     )
 

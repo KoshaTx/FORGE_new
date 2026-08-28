@@ -5,7 +5,11 @@ from pathlib import Path
 
 from forge.assembly import Ugi3AssemblyAdapter
 from forge.core.io import iter_csv
-from forge.model.common_ugi_benchmark import CommonUgiAttempt, assess_common_ugi_attempts
+from forge.model.common_ugi_benchmark import (
+    CommonUgiAttempt,
+    assess_common_ugi_attempts,
+    load_ugi_identity_references,
+)
 from forge.synthesis.assessment.common_route_evidence import (
     assess_common_route_evidence,
     load_frozen_component_evidence,
@@ -54,6 +58,17 @@ def _unique_product(adapter: Ugi3AssemblyAdapter) -> tuple[str, tuple[str, ...]]
             visible = tuple(f"{role}:{row[f'{role}_smiles']}" for role in adapter.roles)
             return product, visible
     raise AssertionError("test corpus contains no unique exact-L1 product")
+
+
+def test_hash_addressed_ugi_identity_reference_is_reused_in_process() -> None:
+    roles = Ugi3AssemblyAdapter.from_registry(REGISTRY).roles
+
+    first = load_ugi_identity_references(ASSIGNMENTS, roles=roles)
+    second = load_ugi_identity_references(ASSIGNMENTS, roles=roles)
+
+    assert first[0] is second[0]
+    assert first[1] is second[1]
+    assert first[2] is second[2]
 
 
 def test_common_assessor_uses_method_visible_inventory_for_open_endedness() -> None:

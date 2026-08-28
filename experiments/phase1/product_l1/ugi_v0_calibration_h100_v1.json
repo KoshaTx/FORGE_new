@@ -1,0 +1,33 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-v0-calibration-h100-v1",
+  "description": "Matched 512-program calibration of the frozen v0 step-3000 checkpoint.",
+  "root_seed": 20260901,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [{
+    "id": "calibration",
+    "implementation": "evaluate.ugi.v0-calibration-checkpoint.v1",
+    "needs": [],
+    "config": {"path": "configs/model/phase1_ugi_tree_transformer_checkpoint_calibration_v1.json", "sha256": "d11b9e5f93053e167161119c5e22cc4e644c281e4c56fd16ed58b63d9e561dd5"},
+    "inputs": {
+      "program_draw": {"path": "runs/phase1-ugi-tree-transformer-calibration-program-draw-v1/9bd9ce0b79753c0c61e5a51de1083389ebce90697a305f4e666a9f3dcf07ea6d/stages/draw/artifacts/program_draw.json", "sha256": "ad51b852116e03ca6ab9ed3e44fefd899795f435337a1f615564ec697aa01054"},
+      "closure_checkpoint": {"path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt", "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"},
+      "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"},
+      "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+      "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+      "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+      "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+      "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"},
+      "reference_checkpoint": {"path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt", "sha256": "4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50"}
+    },
+    "outputs": {
+      "result": {"path": "result.json", "schema_version": "forge.ugi_reference_checkpoint_calibration.v1"},
+      "checkpoint_calibrations": {"path": "checkpoint_calibrations.tar", "schema_version": "forge.ugi_tree_transformer_checkpoint_calibration_archive.v1"}
+    },
+    "resources": {"device": "cuda", "precision": "float32", "cpus": 8, "workers": 0, "memory_mb": 49152, "timeout_seconds": 86400, "gpu_type": "H100!"},
+    "determinism": {"mode": "strict", "stream": "ugi-v0-calibration"}
+  }],
+  "metadata": {"authorization": "Setup only; paid launch requires explicit user approval", "arm_id": "v0_reference", "checkpoint_selection": false, "heldout_rows_used": false},
+  "nonclaims": ["Calibration selects no molecule or prospective candidate.", "Exact L1 is transform consistency, not synthesis success."]
+}

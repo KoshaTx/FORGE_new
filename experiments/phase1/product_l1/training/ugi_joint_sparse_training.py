@@ -27,6 +27,7 @@ from forge.corpus.ugi_morphology_corpus import (
 from forge.model.defog_feasibility import sha256_file
 from forge.model.ugi_joint_sparse_flow import (
     UgiJointSparseFlow,
+    apply_component_role_mask,
     collate_ugi_joint_sparse_records,
     joint_sparse_source_marginals,
     noise_ugi_joint_sparse_batch,
@@ -206,6 +207,7 @@ def _loss_on_records(
     seed: int,
     device: Any,
     semantic_organization: str = "role_structured",
+    objective: dict[str, Any] | None = None,
 ) -> dict[str, float]:
     rng = np.random.default_rng(seed)
     generator = torch.Generator(device=device).manual_seed(seed + 1)
@@ -248,7 +250,11 @@ def _loss_on_records(
                 decoration_bonds=noisy["decoration_bonds"],
             )
             _, metrics = ugi_joint_sparse_loss(
-                predictions, batch, semantic_organization=semantic_organization
+                predictions,
+                batch,
+                semantic_organization=semantic_organization,
+                loss_weights=(objective or {}).get("loss_weights"),
+                consistency_weights=(objective or {}).get("program_consistency_weights"),
             )
             for key, value in metrics.items():
                 collected.setdefault(key, []).append(value)
@@ -291,6 +297,59 @@ def _validated_checkpoint_steps(runtime: dict[str, Any]) -> tuple[int, ...]:
     return requested
 
 
+def _training_objective(config: dict[str, Any]) -> dict[str, Any]:
+    """Validate optional loss balancing and component-level denoising controls."""
+
+    objective = dict(config.get("objective", {}))
+    expected = {"loss_weights", "program_consistency_weights", "role_block_mask_probability"}
+    unknown = set(objective).difference(expected)
+    if unknown:
+        raise UgiJointSparseTrainingError(f"unknown joint objective fields: {sorted(unknown)}")
+    loss_weights = dict(objective.get("loss_weights", {}))
+    consistency_weights = dict(objective.get("program_consistency_weights", {}))
+    try:
+        role_block_mask_probability = float(objective.get("role_block_mask_probability", 0.0))
+    except (TypeError, ValueError) as error:
+        raise UgiJointSparseTrainingError("invalid role-block mask probability") from error
+    if not 0 <= role_block_mask_probability <= 1:
+        raise UgiJointSparseTrainingError("role-block mask probability must lie in [0, 1]")
+    return {
+        "loss_weights": {str(key): float(value) for key, value in loss_weights.items()},
+        "program_consistency_weights": {
+            str(key): float(value) for key, value in consistency_weights.items()
+        },
+        "role_block_mask_probability": role_block_mask_probability,
+    }
+
+
+def _learning_rate_at_step(runtime: dict[str, Any], step: int) -> float:
+    """Return the deterministic constant or warmup-cosine learning rate."""
+
+    base = float(runtime["learning_rate"])
+    schedule = dict(runtime.get("learning_rate_schedule", {}))
+    mode = str(schedule.get("mode", "constant"))
+    if mode == "constant":
+        if set(schedule).difference({"mode"}):
+            raise UgiJointSparseTrainingError("constant learning-rate schedule has extra fields")
+        return base
+    if mode != "warmup_cosine" or set(schedule) != {
+        "mode",
+        "warmup_steps",
+        "minimum_learning_rate_ratio",
+    }:
+        raise UgiJointSparseTrainingError("invalid warmup-cosine learning-rate schedule")
+    total = int(runtime["steps"])
+    warmup = int(schedule["warmup_steps"])
+    minimum_ratio = float(schedule["minimum_learning_rate_ratio"])
+    if not 0 < warmup < total or not 0 <= minimum_ratio <= 1 or not 1 <= step <= total:
+        raise UgiJointSparseTrainingError("invalid warmup-cosine learning-rate support")
+    if step <= warmup:
+        return base * step / warmup
+    progress = (step - warmup) / (total - warmup)
+    cosine = 0.5 * (1.0 + np.cos(np.pi * progress))
+    return base * (minimum_ratio + (1.0 - minimum_ratio) * cosine)
+
+
 def train_ugi_joint_sparse(
     config_path: Path,
     repo: Path,
@@ -306,6 +365,7 @@ def train_ugi_joint_sparse(
     if torch is None:
         raise UgiJointSparseTrainingError("joint sparse training requires torch")
     config = json.loads(config_path.read_text())
+    config_sha256 = sha256_file(config_path)
     # Semantics experiment knobs. Absent from every production config, so existing runs are
     # unaffected and reproduce bit-identically.
     coverage_split = config.get("coverage_split")
@@ -354,6 +414,10 @@ def train_ugi_joint_sparse(
         raise UgiJointSparseTrainingError("joint sparse fold counts changed")
     mode = "smoke" if smoke else "full"
     runtime = dict(config[mode])
+    objective = _training_objective(config)
+    # Validate the complete schedule before any model or optimizer state is written.
+    for schedule_step in (1, int(runtime["steps"])):
+        _learning_rate_at_step(runtime, schedule_step)
     model_config = dict(config["model"])
     if smoke:
         model_config.update(runtime.pop("model_overrides"))
@@ -436,6 +500,7 @@ def train_ugi_joint_sparse(
     )
     rng = np.random.default_rng(seed + 2)
     generator = torch.Generator(device=device).manual_seed(seed + 1)
+    role_mask_generator = torch.Generator(device=device).manual_seed(seed + 3)
     losses: list[dict[str, float]] = []
     evaluations: list[dict[str, Any]] = []
     latest_path = output_dir / "checkpoint_latest.pt"
@@ -475,6 +540,7 @@ def train_ugi_joint_sparse(
                 torch.cuda.get_rng_state_all() if device.type == "cuda" else None
             ),
             "torch_training_generator_state": generator.get_state(),
+            "torch_role_mask_generator_state": role_mask_generator.get_state(),
             "losses": losses,
         }
 
@@ -487,6 +553,10 @@ def train_ugi_joint_sparse(
             "optimizer_state": optimizer.state_dict(),
             "source_marginals": sources_np,
             "inputs": inputs,
+            "effective_config_sha256": config_sha256,
+            "experiment_arm": config.get("experiment_arm"),
+            "training_objective": objective,
+            "learning_rate_schedule": dict(runtime.get("learning_rate_schedule", {})),
             "resume_state": resume_state(step),
         }
 
@@ -501,6 +571,7 @@ def train_ugi_joint_sparse(
                 seed=seed + 30_000 + source_index,
                 device=device,
                 semantic_organization=semantic_organization,
+                objective=objective,
             )
             for source_index, (source, records) in enumerate(diagnostic_by_source.items())
         }
@@ -515,6 +586,7 @@ def train_ugi_joint_sparse(
                 seed=seed + 20_000,
                 device=device,
                 semantic_organization=semantic_organization,
+                objective=objective,
             ),
             "diagnostic_loss": _macro_average_metrics(diagnostic_loss_by_source),
             "diagnostic_loss_by_source": diagnostic_loss_by_source,
@@ -536,6 +608,20 @@ def train_ugi_joint_sparse(
             raise UgiJointSparseTrainingError("resume checkpoint schema changed")
         if checkpoint.get("model_config") != model_config or checkpoint.get("inputs") != inputs:
             raise UgiJointSparseTrainingError("resume checkpoint contract differs from this run")
+        if checkpoint.get("effective_config_sha256", config_sha256) != config_sha256:
+            raise UgiJointSparseTrainingError("resume effective training config changed")
+        if checkpoint.get("experiment_arm", config.get("experiment_arm")) != config.get(
+            "experiment_arm"
+        ):
+            raise UgiJointSparseTrainingError("resume experiment arm changed")
+        checkpoint_objective = checkpoint.get(
+            "training_objective",
+            _training_objective({}),
+        )
+        if checkpoint_objective != objective or checkpoint.get(
+            "learning_rate_schedule", {}
+        ) != dict(runtime.get("learning_rate_schedule", {})):
+            raise UgiJointSparseTrainingError("resume objective or learning-rate schedule changed")
         state = checkpoint.get("resume_state")
         if not isinstance(state, dict):
             raise UgiJointSparseTrainingError("legacy checkpoint lacks deterministic resume state")
@@ -561,8 +647,22 @@ def train_ugi_joint_sparse(
         # Generator state is serialized as a CPU ByteTensor even when the generator itself
         # targets CUDA.  ``set_state`` performs the device-specific restore internally.
         generator.set_state(state["torch_training_generator_state"].cpu())
+        role_mask_state = state.get("torch_role_mask_generator_state")
+        if role_mask_state is None:
+            if objective["role_block_mask_probability"]:
+                raise UgiJointSparseTrainingError(
+                    "resume checkpoint lacks component-role mask generator state"
+                )
+        else:
+            role_mask_generator.set_state(role_mask_state.cpu())
         for snapshot in checkpoint_snapshots:
             snapshot_path = Path(str(snapshot["path"]))
+            if not snapshot_path.is_absolute():
+                if snapshot_path.name != str(snapshot["path"]):
+                    raise UgiJointSparseTrainingError(
+                        "resume checkpoint snapshot path is not one local filename"
+                    )
+                snapshot_path = output_dir / snapshot_path
             if not snapshot_path.is_file() or sha256_file(snapshot_path) != snapshot["sha256"]:
                 raise UgiJointSparseTrainingError(
                     f"resume checkpoint snapshot is missing or changed: {snapshot_path}"
@@ -580,6 +680,9 @@ def train_ugi_joint_sparse(
     model.train()
     for step in range(start_step, int(runtime["steps"]) + 1):
         completed_step = step
+        learning_rate = _learning_rate_at_step(runtime, step)
+        for group in optimizer.param_groups:
+            group["lr"] = learning_rate
         indices = rng.choice(
             len(train_records),
             size=int(runtime["batch_size"]),
@@ -600,6 +703,13 @@ def train_ugi_joint_sparse(
         )
         t = torch.rand(len(local), generator=generator, device=device).clamp(0.02, 0.98)
         noisy = noise_ugi_joint_sparse_batch(batch, sources, t, generator)
+        noisy, masked_roles = apply_component_role_mask(
+            noisy,
+            batch,
+            sources,
+            probability=float(objective["role_block_mask_probability"]),
+            generator=role_mask_generator,
+        )
         predictions = model(
             offspring=noisy["offspring"],
             nodes=noisy["nodes"],
@@ -616,7 +726,11 @@ def train_ugi_joint_sparse(
             decoration_bonds=noisy["decoration_bonds"],
         )
         loss, metrics = ugi_joint_sparse_loss(
-            predictions, batch, semantic_organization=semantic_organization
+            predictions,
+            batch,
+            semantic_organization=semantic_organization,
+            loss_weights=objective["loss_weights"],
+            consistency_weights=objective["program_consistency_weights"],
         )
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
@@ -624,7 +738,15 @@ def train_ugi_joint_sparse(
             model.parameters(), float(runtime["gradient_clip_norm"])
         )
         optimizer.step()
-        losses.append({"step": step, **metrics, "gradient_norm": float(gradient_norm)})
+        losses.append(
+            {
+                "step": step,
+                **metrics,
+                "gradient_norm": float(gradient_norm),
+                "learning_rate": learning_rate,
+                "role_block_masked_examples": int((masked_roles >= 0).sum()),
+            }
+        )
         if step % int(runtime["eval_every"]) == 0 or step == int(runtime["steps"]):
             model.eval()
             evaluation = evaluate(step)
@@ -667,7 +789,7 @@ def train_ugi_joint_sparse(
                 checkpoint_snapshots.append(
                     {
                         "step": step,
-                        "path": str(snapshot_path),
+                        "path": snapshot_path.name,
                         "sha256": sha256_file(snapshot_path),
                     }
                 )
@@ -711,6 +833,9 @@ def train_ugi_joint_sparse(
             "selection_mode": partition.selection_mode,
         },
         "model": model_config,
+        "effective_config_sha256": config_sha256,
+        "experiment_arm": config.get("experiment_arm"),
+        "objective": objective,
         "runtime": runtime,
         "sampling": {
             **sampling,

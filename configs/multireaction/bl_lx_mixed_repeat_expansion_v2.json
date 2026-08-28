@@ -1,0 +1,98 @@
+{
+  "schema_version": "forge.multireaction_mixed_expansion_config.v1",
+  "task": "Exposure-balanced BL/LX mixed-repeat reaction-enumerated expansion",
+  "seed": 20260828,
+  "inputs": {
+    "component_registry": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "homogeneous_atlas": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "homogeneous_attempts": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/enumeration_attempts.csv.gz",
+      "sha256": "8f3d49fe389b03650e590e93b4427a5ee822746470febacf56a7a9bd63e3c8cb"
+    },
+    "homogeneous_provenance": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/source_provenance.csv.gz",
+      "sha256": "e2b010b04a144a28033758d6379db3c50a5bac27fd5916c11d8f6083d095684e"
+    },
+    "homogeneous_result": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/result.json",
+      "sha256": "0574e4c322fc011b350f7cc2c8baaefa3bd121de36f0bcf32d3721e8ace47cc6"
+    },
+    "homogeneous_semantic_atoms": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/semantic_atoms.csv.gz",
+      "sha256": "af37fc051b4b36b4321c322ed03f7cb13f762489f2c68a0dd488f8f34378a71a"
+    },
+    "homogeneous_splits": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "homogeneous_steps": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_steps.csv.gz",
+      "sha256": "513c77f376f6c720556ac6b8651399592d7a172d13e382ad27286762070218ed"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    }
+  },
+  "target_products_by_program_fold": {
+    "bl_2023_repeated_aza_michael": {
+      "train": 30000,
+      "calibration": 8000,
+      "heldout": 8000
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "train": 30000,
+      "calibration": 8000,
+      "heldout": 8000
+    }
+  },
+  "policy": {
+    "identity": "canonical_constitutional_smiles",
+    "allowed_elements": [
+      "C",
+      "N",
+      "O"
+    ],
+    "maximum_product_heavy_atoms": 194,
+    "maximum_forward_outcomes": 512,
+    "maximum_forward_states": 4096,
+    "component_family_assignment_precedes_enumeration": true,
+    "evidence_stratum_mass": {
+      "source_executed": 0.5,
+      "computed_homogeneous_transform_consistency": 0.25,
+      "computed_mixed_transform_consistency": 0.25
+    },
+    "source_activity_labels_inherited": false,
+    "computed_product_is_observed_synthesis": false,
+    "computed_product_is_route_closed": false,
+    "uniform_cartesian_enumeration": false
+  },
+  "execution": {
+    "candidate_multiplier_by_program_fold": {
+      "bl_2023_repeated_aza_michael": {
+        "train": 2.25,
+        "calibration": 3.0,
+        "heldout": 4.5
+      },
+      "lx_2024_repeated_reductive_amination": {
+        "train": 2.5,
+        "calibration": 3.0,
+        "heldout": 3.25
+      }
+    },
+    "maximum_candidate_counter": 20000000,
+    "origin_batch_size": 1024,
+    "workers": 4,
+    "worker_chunksize": 16
+  }
+}

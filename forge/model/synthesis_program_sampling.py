@@ -18,6 +18,7 @@ from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_flow import (
     collate_synthesis_program_layouts,
     decode_synthesis_program_argmax,
+    resolve_synthesis_program_source_marginals,
     restore_synthesis_program_fixed_states,
 )
 from forge.model.sparse_topology_feasibility import (
@@ -31,6 +32,11 @@ from forge.model.sparse_topology_feasibility import (
 from forge.model.synthesis_program_graph import SynthesisProgramGraphRecord
 from forge.model.synthesis_program_training import build_synthesis_program_flow
 from forge.model.tensor_checkpoint import TensorCheckpointError, decode_tensor_state
+from forge.model.ugi_transformer_topology import (
+    UgiTransformerTopologyError,
+    UgiTransformerTopologyPolicy,
+    decode_ugi_exact_topology,
+)
 
 try:
     import torch
@@ -43,9 +49,13 @@ TERMINAL_DECODE_POLICIES = (
     "strict_valence_topology_argmax",
 )
 LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY = "strict_local_chemistry_argmax"
+PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_program_topology_argmax"
+COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_ugi_program_coupled_conditional"
 SUPPORTED_TERMINAL_DECODE_POLICIES = (
     *TERMINAL_DECODE_POLICIES,
     LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+    PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+    COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
 )
 
 
@@ -157,13 +167,20 @@ def load_synthesis_program_checkpoint(
         raise SynthesisProgramSamplingError("checkpoint model-state hash mismatch")
     node_marginal = np.asarray(package.get("node_marginal"), dtype=np.float64)
     bond_marginal = np.asarray(package.get("bond_marginal"), dtype=np.float64)
+    expected_prefix = (len(vocabulary.program_states), len(vocabulary.role_states))
+    global_sources = node_marginal.shape == (len(atom_vocabulary),) and bond_marginal.shape == (
+        int(model_config["bond_classes"]),
+    )
+    program_role_sources = node_marginal.shape == (
+        *expected_prefix,
+        len(atom_vocabulary),
+    ) and bond_marginal.shape == (*expected_prefix, int(model_config["bond_classes"]))
     if (
-        node_marginal.shape != (len(atom_vocabulary),)
-        or bond_marginal.shape != (int(model_config["bond_classes"]),)
+        not (global_sources or program_role_sources)
         or np.any(node_marginal <= 0)
         or np.any(bond_marginal <= 0)
-        or not np.isclose(node_marginal.sum(), 1.0)
-        or not np.isclose(bond_marginal.sum(), 1.0)
+        or not np.allclose(node_marginal.sum(axis=-1), 1.0)
+        or not np.allclose(bond_marginal.sum(axis=-1), 1.0)
     ):
         raise SynthesisProgramSamplingError("checkpoint source marginals are invalid")
     model.eval()
@@ -174,6 +191,25 @@ def _move(batch: Mapping[str, Any], device: Any) -> dict[str, Any]:
     return {key: value.to(device) for key, value in batch.items()}
 
 
+def _restore_fixed_states_in_place(
+    state: dict[str, Any], layout: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Restore immutable adapter states without cloning six complete state tensors."""
+
+    fields = {
+        "nodes": "fixed_atom_mask",
+        "parents": "fixed_parent_mask",
+        "parent_bonds": "fixed_parent_bond_mask",
+        "closure_left": "fixed_closure_endpoint_mask",
+        "closure_right": "fixed_closure_endpoint_mask",
+        "closure_bonds": "fixed_closure_bond_mask",
+    }
+    for field, mask_name in fields.items():
+        mask = layout[mask_name]
+        state[field][mask] = layout[field][mask]
+    return state
+
+
 def _initial_state(
     layout: Mapping[str, Any],
     node_marginal: Any,
@@ -182,16 +218,21 @@ def _initial_state(
 ) -> dict[str, Any]:
     batch, nodes = layout["node_mask"].shape
     closures = layout["closure_mask"].shape[1]
+    node_source, parent_bond_source, closure_bond_source = (
+        resolve_synthesis_program_source_marginals(layout, node_marginal, bond_marginal)
+    )
+
+    def draw(source: Any, shape: tuple[int, int]) -> Any:
+        if source.ndim == 1:
+            probabilities = source[None].expand(shape[0] * shape[1], -1)
+        else:
+            probabilities = source.reshape(shape[0] * shape[1], -1)
+        return torch.multinomial(probabilities, 1, generator=generator).reshape(shape)
+
     state = {
-        "nodes": torch.multinomial(
-            node_marginal, batch * nodes, replacement=True, generator=generator
-        ).reshape(batch, nodes),
-        "parent_bonds": torch.multinomial(
-            bond_marginal, batch * nodes, replacement=True, generator=generator
-        ).reshape(batch, nodes),
-        "closure_bonds": torch.multinomial(
-            bond_marginal, batch * closures, replacement=True, generator=generator
-        ).reshape(batch, closures),
+        "nodes": draw(node_source, (batch, nodes)),
+        "parent_bonds": draw(parent_bond_source, (batch, nodes)),
+        "closure_bonds": draw(closure_bond_source, (batch, closures)),
     }
     parent_candidates = _parent_candidate_mask(layout["node_mask"])
     parent_probabilities = parent_candidates.to(torch.float32)
@@ -214,10 +255,16 @@ def _initial_state(
             endpoint_probabilities[active_closures], 1, generator=generator
         ).squeeze(1)
     state["parent_bonds"][:, 0] = 0
-    return restore_synthesis_program_fixed_states(state, layout)
+    return _restore_fixed_states_in_place(state, layout)
 
 
 def _fixed_state_exact(state: Mapping[str, Any], layout: Mapping[str, Any]) -> bool:
+    return bool(_fixed_state_exact_tensor(state, layout).item())
+
+
+def _fixed_state_exact_tensor(state: Mapping[str, Any], layout: Mapping[str, Any]) -> Any:
+    """Return the fixed-state audit as a device scalar without forcing synchronization."""
+
     fields = {
         "nodes": "fixed_atom_mask",
         "parents": "fixed_parent_mask",
@@ -226,10 +273,37 @@ def _fixed_state_exact(state: Mapping[str, Any], layout: Mapping[str, Any]) -> b
         "closure_right": "fixed_closure_endpoint_mask",
         "closure_bonds": "fixed_closure_bond_mask",
     }
-    return all(
-        torch.equal(state[field][layout[mask]], layout[field][layout[mask]])
-        for field, mask in fields.items()
-    )
+    exact = torch.ones((), dtype=torch.bool, device=state["nodes"].device)
+    for field, mask in fields.items():
+        exact = exact & torch.all(state[field][layout[mask]] == layout[field][layout[mask]])
+    return exact
+
+
+def _fixed_state_exact_records(
+    state: Mapping[str, Any], records: Sequence[SynthesisProgramGraphRecord]
+) -> bool:
+    """Audit a CPU terminal batch directly against its record-level immutable states."""
+
+    fields = {
+        "nodes": ("fixed_atom_mask", "node_states"),
+        "parents": ("fixed_parent_bond_mask", "parents"),
+        "parent_bonds": ("fixed_parent_bond_mask", "parent_bonds"),
+        "closure_left": ("fixed_closure_bond_mask", "closure_left"),
+        "closure_right": ("fixed_closure_bond_mask", "closure_right"),
+        "closure_bonds": ("fixed_closure_bond_mask", "closure_bonds"),
+    }
+    for index, record in enumerate(records):
+        for field, (mask_name, target_name) in fields.items():
+            mask = getattr(record, mask_name)
+            target = (
+                record.graph.node_states
+                if target_name == "node_states"
+                else getattr(record.graph, target_name)
+            )
+            observed = state[field][index, : len(target)].numpy()
+            if not np.array_equal(observed[mask], target[mask]):
+                return False
+    return True
 
 
 def _terminal_smiles(
@@ -287,12 +361,98 @@ def _argmax_allowed(logits: np.ndarray, valid: np.ndarray) -> int | None:
     return int(np.argmax(masked))
 
 
+def _exact_role_morphology_targets(
+    record: SynthesisProgramGraphRecord,
+) -> dict[int, tuple[int, int, int, int]]:
+    """Read one explicit, internally consistent morphology target per semantic role."""
+
+    states = record.role_morphology_states
+    if states is None:
+        raise SynthesisProgramSamplingError(
+            "exact program-topology decoding requires explicit role morphology states"
+        )
+    targets: dict[int, tuple[int, int, int, int]] = {}
+    for role_state in sorted(set(int(value) for value in record.role_states)):
+        if role_state <= 0:
+            continue
+        values = states[record.role_states == role_state]
+        unique = np.unique(values, axis=0)
+        if unique.shape != (1, 4) or np.any(unique[0] < 1):
+            raise SynthesisProgramSamplingError(
+                "exact role morphology must be positive and constant within each role"
+            )
+        targets[role_state] = tuple(int(value) - 1 for value in unique[0])
+    return targets
+
+
+def _terminal_role_morphology(
+    record: SynthesisProgramGraphRecord,
+    *,
+    parents: np.ndarray,
+    closure_left: np.ndarray,
+    closure_right: np.ndarray,
+    parent_edge_mask: np.ndarray | None = None,
+) -> dict[int, tuple[int, int, int, int]]:
+    """Measure the same four coarse coordinates used by the conditioning tensor."""
+
+    core = record.core_position_states > 1
+    output: dict[int, tuple[int, int, int, int]] = {}
+    for role_state in sorted(set(int(value) for value in record.role_states)):
+        if role_state <= 0:
+            continue
+        role = record.role_states == role_state
+        exterior_indices = set(np.flatnonzero(role & ~core).tolist())
+        child_counts = {node: 0 for node in exterior_indices}
+        attachments = 0
+        for child in range(1, record.node_count):
+            if parent_edge_mask is not None and not bool(parent_edge_mask[child]):
+                continue
+            parent = int(parents[child])
+            if child in exterior_indices and parent in exterior_indices:
+                child_counts[parent] += 1
+            elif (
+                child in exterior_indices
+                and bool(core[parent])
+                and int(record.role_states[parent]) == role_state
+            ) or (
+                parent in exterior_indices
+                and bool(core[child])
+                and int(record.role_states[child]) == role_state
+            ):
+                attachments += 1
+        cycles = 0
+        for left, right in zip(closure_left, closure_right, strict=True):
+            left_index = int(left)
+            right_index = int(right)
+            if left_index in exterior_indices and right_index in exterior_indices:
+                cycles += 1
+            elif (
+                left_index in exterior_indices
+                and bool(core[right_index])
+                and int(record.role_states[right_index]) == role_state
+            ) or (
+                right_index in exterior_indices
+                and bool(core[left_index])
+                and int(record.role_states[left_index]) == role_state
+            ):
+                attachments += 1
+        output[role_state] = (
+            len(exterior_indices),
+            sum(max(children - 1, 0) for children in child_counts.values()),
+            cycles,
+            attachments,
+        )
+    return output
+
+
 def _strict_terminal_record(
     predictions: Mapping[str, np.ndarray],
     index: int,
     record: SynthesisProgramGraphRecord,
     atom_vocabulary: Sequence[AtomState],
     local_chemistry_support: LocalChemistrySupport | None = None,
+    *,
+    enforce_program_topology: bool = False,
 ) -> tuple[dict[str, np.ndarray] | None, str | None]:
     """Decode one exact-size graph under topology and valence support, without fallback."""
 
@@ -320,6 +480,18 @@ def _strict_terminal_record(
     minimum_used = np.zeros(count, dtype=np.int64)
     degrees = np.zeros(count, dtype=np.int64)
     occupied: set[tuple[int, int]] = set()
+    component_instances = np.zeros(count, dtype=np.int64)
+    for component_index, block in enumerate(record.component_blocks, start=1):
+        component_instances[block.start : block.stop] = component_index
+    core = record.core_position_states
+    role_by_state = {block.role_state: block.role for block in record.component_blocks}
+    try:
+        role_names = tuple(role_by_state[int(value)] for value in record.role_states)
+    except KeyError:
+        return None, "unnamed_semantic_role"
+    morphology_targets = (
+        _exact_role_morphology_targets(record) if enforce_program_topology else None
+    )
 
     # Reserve immutable adapter edges first so variable choices cannot consume their capacity.
     for child in np.flatnonzero(record.fixed_parent_bond_mask):
@@ -348,23 +520,41 @@ def _strict_terminal_record(
                 minimum_used[child] + 2 <= maximum_capacities[child]
                 and minimum_used[parent] + 2 <= maximum_capacities[parent]
             )
+            if enforce_program_topology and (
+                component_instances[parent] != component_instances[child]
+            ):
+                valid[parent] = False
+            if enforce_program_topology and valid[parent]:
+                trial_parents = parents.copy()
+                trial_parents[child] = parent
+                observed = _terminal_role_morphology(
+                    record,
+                    parents=trial_parents,
+                    closure_left=np.empty(0, dtype=np.int64),
+                    closure_right=np.empty(0, dtype=np.int64),
+                    parent_edge_mask=(
+                        record.fixed_parent_bond_mask | (np.arange(count, dtype=np.int64) <= child)
+                    ),
+                )
+                assert morphology_targets is not None
+                role_state = int(record.role_states[child])
+                target = morphology_targets[role_state]
+                # Counts and cycles are layout-level invariants.  During tree construction only
+                # junction and core-attachment budgets can increase.
+                if observed[role_state][1] > target[1] or observed[role_state][3] > target[3]:
+                    valid[parent] = False
         parent = _argmax_allowed(predictions["parents"][index, child, :count], valid)
         if parent is None:
-            return None, "parent_capacity_exhausted"
+            reason = (
+                "program_topology_parent_unavailable"
+                if enforce_program_topology
+                else "parent_capacity_exhausted"
+            )
+            return None, reason
         parents[child] = parent
         degrees[[child, parent]] += 1
         minimum_used[[child, parent]] += 2
         occupied.add((parent, child))
-
-    component_instances = np.zeros(count, dtype=np.int64)
-    for component_index, block in enumerate(record.component_blocks, start=1):
-        component_instances[block.start : block.stop] = component_index
-    core = record.core_position_states
-    role_by_state = {block.role_state: block.role for block in record.component_blocks}
-    try:
-        role_names = tuple(role_by_state[int(value)] for value in record.role_states)
-    except KeyError:
-        return None, "unnamed_semantic_role"
 
     for slot in np.flatnonzero(record.fixed_closure_bond_mask):
         slot = int(slot)
@@ -403,6 +593,22 @@ def _strict_terminal_record(
                 semantic_pair = component_instances[left] == component_instances[right] or (
                     int(core[left]) > 1 and int(core[right]) > 1
                 )
+                if enforce_program_topology:
+                    role_state = int(record.role_states[left])
+                    current = _terminal_role_morphology(
+                        record,
+                        parents=parents,
+                        closure_left=closure_left[:slot],
+                        closure_right=closure_right[:slot],
+                    )
+                    assert morphology_targets is not None
+                    semantic_pair = (
+                        component_instances[left] == component_instances[right]
+                        and int(core[left]) == 1
+                        and int(core[right]) == 1
+                        and role_state == int(record.role_states[right])
+                        and current[role_state][2] < morphology_targets[role_state][2]
+                    )
                 if (
                     not semantic_pair
                     or minimum_used[left] + 2 > maximum_capacities[left]
@@ -444,6 +650,17 @@ def _strict_terminal_record(
         occupied.add((left, right))
         topology_neighbors[left].add(right)
         topology_neighbors[right].add(left)
+
+    if enforce_program_topology:
+        assert morphology_targets is not None
+        observed_morphology = _terminal_role_morphology(
+            record,
+            parents=parents,
+            closure_left=closure_left,
+            closure_right=closure_right,
+        )
+        if observed_morphology != morphology_targets:
+            return None, "program_morphology_exactness_failure"
 
     neighbors = [set() for _ in range(count)]
     for left, right in occupied:
@@ -693,6 +910,8 @@ def decode_synthesis_program_strict_argmax(
     records: Sequence[SynthesisProgramGraphRecord],
     atom_vocabulary: Sequence[AtomState],
     local_chemistry_support: LocalChemistrySupport | None = None,
+    *,
+    enforce_program_topology: bool = False,
 ) -> tuple[dict[str, Any], tuple[str | None, ...]]:
     """Decode once under strict support; infeasible attempts abstain and are never repaired."""
 
@@ -711,8 +930,29 @@ def decode_synthesis_program_strict_argmax(
             "closure_bonds",
         }
     }
+    # Strict decoding is an RDKit/NumPy terminal operation.  Keep its output on CPU: the previous
+    # implementation copied predictions GPU->CPU, then performed thousands of tiny decoded-state
+    # copies CPU->GPU only for the caller to immediately copy every state GPU->CPU again.
+    cpu_layout = {
+        key: value.detach().to("cpu")
+        for key, value in layout.items()
+        if key
+        in {
+            "nodes",
+            "parents",
+            "parent_bonds",
+            "closure_left",
+            "closure_right",
+            "closure_bonds",
+            "fixed_atom_mask",
+            "fixed_parent_mask",
+            "fixed_parent_bond_mask",
+            "fixed_closure_endpoint_mask",
+            "fixed_closure_bond_mask",
+        }
+    }
     terminal = {
-        field: torch.zeros_like(layout[field])
+        field: torch.zeros_like(cpu_layout[field])
         for field in (
             "nodes",
             "parents",
@@ -722,7 +962,7 @@ def decode_synthesis_program_strict_argmax(
             "closure_bonds",
         )
     }
-    terminal = restore_synthesis_program_fixed_states(terminal, layout)
+    terminal = restore_synthesis_program_fixed_states(terminal, cpu_layout)
     reasons: list[str | None] = []
     for index, record in enumerate(records):
         decoded, reason = _strict_terminal_record(
@@ -731,15 +971,16 @@ def decode_synthesis_program_strict_argmax(
             record,
             atom_vocabulary,
             local_chemistry_support,
+            enforce_program_topology=enforce_program_topology,
         )
         reasons.append(reason)
         if decoded is None:
             continue
         for field, values in decoded.items():
             terminal[field][index, : len(values)] = torch.as_tensor(
-                values, dtype=terminal[field].dtype, device=terminal[field].device
+                values, dtype=terminal[field].dtype
             )
-    return restore_synthesis_program_fixed_states(terminal, layout), tuple(reasons)
+    return restore_synthesis_program_fixed_states(terminal, cpu_layout), tuple(reasons)
 
 
 def sample_synthesis_program_products(
@@ -759,6 +1000,7 @@ def sample_synthesis_program_products(
     role_state_mapping: Mapping[int, int] | None = None,
     terminal_decode_policy: str = "unconstrained_argmax",
     local_chemistry_support: LocalChemistrySupport | None = None,
+    ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate from semantic layouts while exposing only Ugi adapter-fixed graph states."""
 
@@ -777,36 +1019,51 @@ def sample_synthesis_program_products(
         raise SynthesisProgramSamplingError(
             "strict local-chemistry decoding and its support policy must be supplied together"
         )
+    coupled_ugi_topology = terminal_decode_policy == COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY
+    if coupled_ugi_topology != (ugi_topology_policy is not None):
+        raise SynthesisProgramSamplingError(
+            "coupled Ugi topology decoding and its explicit support policy must be supplied together"
+        )
     resolved_device = torch.device(device)
     repeated = tuple(record for record in records for _ in range(samples_per_program))
     maximum_closures = int(model.maximum_closures)
     node_p0 = torch.as_tensor(node_marginal, dtype=torch.float32, device=resolved_device)
     bond_p0 = torch.as_tensor(bond_marginal, dtype=torch.float32, device=resolved_device)
     generator = torch.Generator(device=resolved_device).manual_seed(seed)
+    topology_generator = torch.Generator(device="cpu").manual_seed(seed + 1)
     outputs: list[dict[str, Any]] = []
     fixed_failures = 0
     strict_abstentions: Counter[str] = Counter()
     model.eval()
-    with torch.no_grad():
+    with torch.inference_mode():
         for offset in range(0, len(repeated), batch_size):
             local = repeated[offset : offset + batch_size]
-            layout = _move(
-                collate_synthesis_program_layouts(
-                    local,
-                    maximum_closures=maximum_closures,
-                    conditioning_mode=conditioning_mode,
-                    program_state_mapping=program_state_mapping,
-                    role_state_mapping=role_state_mapping,
-                ),
-                resolved_device,
+            cpu_layout = collate_synthesis_program_layouts(
+                local,
+                maximum_closures=maximum_closures,
+                conditioning_mode=conditioning_mode,
+                program_state_mapping=program_state_mapping,
+                role_state_mapping=role_state_mapping,
+            )
+            has_variable_parents = bool(cpu_layout["parent_variable_mask"].any())
+            has_variable_closure_endpoints = bool(
+                cpu_layout["closure_endpoint_variable_mask"].any()
+            )
+            layout = _move(cpu_layout, resolved_device)
+            node_source, parent_bond_source, closure_bond_source = (
+                resolve_synthesis_program_source_marginals(layout, node_p0, bond_p0)
             )
             state = _initial_state(layout, node_p0, bond_p0, generator)
-            fixed_failures += int(not _fixed_state_exact(state, layout))
+            fixed_failure_checks = [~_fixed_state_exact_tensor(state, layout)]
             parent_candidates = _parent_candidate_mask(layout["node_mask"])
             endpoint_candidates = _endpoint_candidate_mask(layout["node_mask"], maximum_closures)
+            time_grid = torch.arange(
+                sample_steps, dtype=torch.float32, device=resolved_device
+            ) / float(sample_steps)
+            terminal_time = torch.ones((len(local),), device=resolved_device)
             for step in range(sample_steps):
                 t_value = step / sample_steps
-                t = torch.full((len(local),), t_value, device=resolved_device)
+                t = time_grid[step].expand(len(local))
                 predictions = model(
                     nodes=state["nodes"],
                     parents=state["parents"],
@@ -826,17 +1083,18 @@ def sample_synthesis_program_products(
                     repeat_group_states=layout["repeat_group_states"],
                     component_position_states=layout["component_position_states"],
                     component_instance_states=layout["component_instance_states"],
+                    role_morphology_states=layout["role_morphology_states"],
                 )
                 state["nodes"] = rstar_step(
                     state["nodes"],
                     predictions["nodes"].softmax(dim=-1),
-                    node_p0,
+                    node_source,
                     t_value,
                     1.0 / sample_steps,
                     layout["atom_variable_mask"],
                     generator,
                 )
-                if bool(layout["parent_variable_mask"].any()):
+                if has_variable_parents:
                     state["parents"] = pointer_rstar_step(
                         state["parents"],
                         predictions["parents"],
@@ -846,20 +1104,20 @@ def sample_synthesis_program_products(
                         1.0 / sample_steps,
                         generator,
                     )
-                for field, mask_name in (
-                    ("parent_bonds", "parent_bond_variable_mask"),
-                    ("closure_bonds", "closure_bond_variable_mask"),
+                for field, mask_name, source in (
+                    ("parent_bonds", "parent_bond_variable_mask", parent_bond_source),
+                    ("closure_bonds", "closure_bond_variable_mask", closure_bond_source),
                 ):
                     state[field] = rstar_step(
                         state[field],
                         predictions[field].softmax(dim=-1),
-                        bond_p0,
+                        source,
                         t_value,
                         1.0 / sample_steps,
                         layout[mask_name],
                         generator,
                     )
-                if bool(layout["closure_endpoint_variable_mask"].any()):
+                if has_variable_closure_endpoints:
                     for field in ("closure_left", "closure_right"):
                         state[field] = pointer_rstar_step(
                             state[field],
@@ -870,8 +1128,8 @@ def sample_synthesis_program_products(
                             1.0 / sample_steps,
                             generator,
                         )
-                state = restore_synthesis_program_fixed_states(state, layout)
-                fixed_failures += int(not _fixed_state_exact(state, layout))
+                state = _restore_fixed_states_in_place(state, layout)
+                fixed_failure_checks.append(~_fixed_state_exact_tensor(state, layout))
             terminal_predictions = model(
                 nodes=state["nodes"],
                 parents=state["parents"],
@@ -879,7 +1137,7 @@ def sample_synthesis_program_products(
                 closure_left=state["closure_left"],
                 closure_right=state["closure_right"],
                 closure_bonds=state["closure_bonds"],
-                t=torch.ones(len(local), device=resolved_device),
+                t=terminal_time,
                 node_mask=layout["node_mask"],
                 child_mask=layout["child_mask"],
                 closure_mask=layout["closure_mask"],
@@ -891,10 +1149,83 @@ def sample_synthesis_program_products(
                 repeat_group_states=layout["repeat_group_states"],
                 component_position_states=layout["component_position_states"],
                 component_instance_states=layout["component_instance_states"],
+                role_morphology_states=layout["role_morphology_states"],
             )
+            topology_reasons: list[str | None] = [None] * len(local)
+            if coupled_ugi_topology:
+                assert ugi_topology_policy is not None
+                topology_state = {key: value.clone() for key, value in state.items()}
+                for index, record in enumerate(local):
+                    try:
+                        decoded_topology = decode_ugi_exact_topology(
+                            terminal_predictions,
+                            index=index,
+                            record=record,
+                            policy=ugi_topology_policy,
+                            generator=topology_generator,
+                        )
+                    except UgiTransformerTopologyError as error:
+                        topology_reasons[index] = f"ugi_topology_coupling_failure:{error}"
+                        continue
+                    count = record.node_count
+                    closure_count = record.graph.closure_count
+                    topology_state["parents"][index, :count] = torch.as_tensor(
+                        decoded_topology.parents,
+                        dtype=topology_state["parents"].dtype,
+                        device=resolved_device,
+                    )
+                    if closure_count:
+                        topology_state["closure_left"][index, :closure_count] = torch.as_tensor(
+                            decoded_topology.closure_left,
+                            dtype=topology_state["closure_left"].dtype,
+                            device=resolved_device,
+                        )
+                        topology_state["closure_right"][index, :closure_count] = torch.as_tensor(
+                            decoded_topology.closure_right,
+                            dtype=topology_state["closure_right"].dtype,
+                            device=resolved_device,
+                        )
+                topology_state = _restore_fixed_states_in_place(topology_state, layout)
+                # Chemistry is predicted after, and therefore conditional on, the exact tree and
+                # feasible closure endpoints.  This is the factorization that made the native Ugi
+                # model reliable; the Transformer remains the shared denoiser.
+                terminal_predictions = model(
+                    nodes=topology_state["nodes"],
+                    parents=topology_state["parents"],
+                    parent_bonds=topology_state["parent_bonds"],
+                    closure_left=topology_state["closure_left"],
+                    closure_right=topology_state["closure_right"],
+                    closure_bonds=topology_state["closure_bonds"],
+                    t=terminal_time,
+                    node_mask=layout["node_mask"],
+                    child_mask=layout["child_mask"],
+                    closure_mask=layout["closure_mask"],
+                    program_states=layout["program_states"],
+                    role_states=layout["role_states"],
+                    core_position_states=layout["core_position_states"],
+                    program_depths=layout["program_depths"],
+                    adapter_mask=layout["adapter_mask"],
+                    repeat_group_states=layout["repeat_group_states"],
+                    component_position_states=layout["component_position_states"],
+                    component_instance_states=layout["component_instance_states"],
+                    role_morphology_states=layout["role_morphology_states"],
+                )
+                # The exact topology is already decoded.  One-hot pointer scores let the common
+                # strict chemistry decoder preserve it while retaining all valence checks.
+                pointer_predictions = dict(terminal_predictions)
+                parent_logits = torch.full_like(pointer_predictions["parents"], -1e9)
+                parent_logits.scatter_(-1, topology_state["parents"].unsqueeze(-1), 1e9)
+                pointer_predictions["parents"] = parent_logits
+                for field in ("closure_left", "closure_right"):
+                    endpoint_logits = torch.full_like(pointer_predictions[field], -1e9)
+                    endpoint_logits.scatter_(-1, topology_state[field].unsqueeze(-1), 1e9)
+                    pointer_predictions[field] = endpoint_logits
+                terminal_predictions = pointer_predictions
             if terminal_decode_policy in {
                 "strict_valence_topology_argmax",
                 LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
             }:
                 terminal, abstention_reasons = decode_synthesis_program_strict_argmax(
                     terminal_predictions,
@@ -902,11 +1233,35 @@ def sample_synthesis_program_products(
                     local,
                     atom_vocabulary,
                     local_chemistry_support,
+                    enforce_program_topology=(
+                        terminal_decode_policy
+                        in {
+                            PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                            COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                        }
+                    ),
                 )
+                if coupled_ugi_topology:
+                    abstention_reasons = tuple(
+                        topology_reason if topology_reason is not None else chemistry_reason
+                        for topology_reason, chemistry_reason in zip(
+                            topology_reasons, abstention_reasons, strict=True
+                        )
+                    )
             else:
                 terminal = decode_synthesis_program_argmax(terminal_predictions, layout)
                 abstention_reasons = (None,) * len(local)
-            fixed_failures += int(not _fixed_state_exact(terminal, layout))
+            if terminal_decode_policy in {
+                "strict_valence_topology_argmax",
+                LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+            }:
+                fixed_failures += int(not _fixed_state_exact_records(terminal, local))
+            else:
+                fixed_failure_checks.append(~_fixed_state_exact_tensor(terminal, layout))
+            fixed_failures += int(torch.stack(fixed_failure_checks).sum().item())
+            terminal_cpu = {field: values.detach().to("cpu") for field, values in terminal.items()}
             for index, record in enumerate(local):
                 count = record.node_count
                 closure_count = record.graph.closure_count
@@ -916,48 +1271,35 @@ def sample_synthesis_program_products(
                     smiles = None
                 else:
                     smiles = _terminal_smiles(
-                        terminal,
+                        terminal_cpu,
                         index,
                         count,
                         closure_count,
                         atom_vocabulary,
                     )
                 exact_fields = {
-                    "nodes": bool(
-                        torch.equal(
-                            terminal["nodes"][index, :count].cpu(),
-                            torch.from_numpy(record.graph.node_states),
-                        )
+                    "nodes": np.array_equal(
+                        terminal_cpu["nodes"][index, :count].numpy(),
+                        record.graph.node_states,
                     ),
-                    "parents": bool(
-                        torch.equal(
-                            terminal["parents"][index, :count].cpu(),
-                            torch.from_numpy(record.graph.parents),
-                        )
+                    "parents": np.array_equal(
+                        terminal_cpu["parents"][index, :count].numpy(), record.graph.parents
                     ),
-                    "parent_bonds": bool(
-                        torch.equal(
-                            terminal["parent_bonds"][index, :count].cpu(),
-                            torch.from_numpy(record.graph.parent_bonds),
-                        )
+                    "parent_bonds": np.array_equal(
+                        terminal_cpu["parent_bonds"][index, :count].numpy(),
+                        record.graph.parent_bonds,
                     ),
-                    "closure_left": bool(
-                        torch.equal(
-                            terminal["closure_left"][index, :closure_count].cpu(),
-                            torch.from_numpy(record.graph.closure_left),
-                        )
+                    "closure_left": np.array_equal(
+                        terminal_cpu["closure_left"][index, :closure_count].numpy(),
+                        record.graph.closure_left,
                     ),
-                    "closure_right": bool(
-                        torch.equal(
-                            terminal["closure_right"][index, :closure_count].cpu(),
-                            torch.from_numpy(record.graph.closure_right),
-                        )
+                    "closure_right": np.array_equal(
+                        terminal_cpu["closure_right"][index, :closure_count].numpy(),
+                        record.graph.closure_right,
                     ),
-                    "closure_bonds": bool(
-                        torch.equal(
-                            terminal["closure_bonds"][index, :closure_count].cpu(),
-                            torch.from_numpy(record.graph.closure_bonds),
-                        )
+                    "closure_bonds": np.array_equal(
+                        terminal_cpu["closure_bonds"][index, :closure_count].numpy(),
+                        record.graph.closure_bonds,
                     ),
                 }
                 target_values = {
@@ -973,7 +1315,7 @@ def sample_synthesis_program_products(
                     if exact:
                         continue
                     size = closure_count if field.startswith("closure") else count
-                    observed = terminal[field][index, :size].cpu().numpy()
+                    observed = terminal_cpu[field][index, :size].numpy()
                     mismatch_positions[field] = np.flatnonzero(
                         observed != target_values[field]
                     ).tolist()
@@ -986,6 +1328,14 @@ def sample_synthesis_program_products(
                         "valid": smiles is not None,
                         "constraint_abstention_reason": abstention_reason,
                         "local_chemistry_policy_applied": local_chemistry_support is not None,
+                        "program_topology_policy_applied": (
+                            terminal_decode_policy
+                            in {
+                                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                            }
+                        ),
+                        "topology_coupling_second_pass_applied": coupled_ugi_topology,
                         "exact_target_graph": smiles == record.graph.canonical_smiles,
                         "exact_tensor": all(exact_fields.values()),
                         "exact_fields": exact_fields,
@@ -1014,6 +1364,23 @@ def sample_synthesis_program_products(
         "strict_constraint_abstentions": sum(strict_abstentions.values()),
         "strict_constraint_abstention_reasons": dict(sorted(strict_abstentions.items())),
         "local_chemistry_policy_applied": local_chemistry_support is not None,
+        "program_topology_policy_applied": (
+            terminal_decode_policy
+            in {
+                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+            }
+        ),
+        "topology_coupling_second_pass_applied": coupled_ugi_topology,
+        "topology_selection": (
+            "exact_program_conditional_sample_then_argmax_chemistry"
+            if coupled_ugi_topology
+            else None
+        ),
+        "topology_seed": seed + 1 if coupled_ugi_topology else None,
+        "ugi_topology_policy": (
+            None if ugi_topology_policy is None else ugi_topology_policy.to_mapping()
+        ),
         "by_program": by_program,
         "repairs": dict(Counter()),
     }
@@ -1021,7 +1388,9 @@ def sample_synthesis_program_products(
 
 __all__ = [
     "CHECKPOINT_SCHEMA",
+    "COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY",
     "LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY",
+    "PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY",
     "SUPPORTED_TERMINAL_DECODE_POLICIES",
     "TERMINAL_DECODE_POLICIES",
     "SynthesisProgramSamplingError",

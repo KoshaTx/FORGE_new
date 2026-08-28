@@ -1,0 +1,102 @@
+{
+  "schema_version": "forge.ugi_transformer_morphology_projection_comparison_config.v1",
+  "status": "frozen_before_paired_execution",
+  "inputs": {
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "full_checkpoint_archive": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar",
+      "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"
+    },
+    "full_production_design": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json",
+      "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"
+    },
+    "full_training_result": {
+      "path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json",
+      "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "program_draw": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "reduced_checkpoint_archive": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar",
+      "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"
+    },
+    "reduced_production_design": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json",
+      "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"
+    },
+    "reduced_training_result": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json",
+      "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    }
+  },
+  "arms": {
+    "reduced_projection": {
+      "arm_id": "bl_core_constrained_repeat_aware",
+      "checkpoint_step": 1700,
+      "method_id": "forge_mixed_transformer_reduced_projection_seed0",
+      "role_morphology_conditioning": false
+    },
+    "full_role_morphology": {
+      "arm_id": "full_role_morphology_transformer",
+      "checkpoint_step": 1700,
+      "method_id": "forge_mixed_transformer_full_role_morphology_seed0",
+      "role_morphology_conditioning": true
+    }
+  },
+  "profiles": {
+    "full": {
+      "device": "cuda",
+      "program_count": 3072,
+      "sample_steps": 32,
+      "batch_size": 32,
+      "flow_seed": 20260825,
+      "terminal_decoder_mode": "argmax",
+      "terminal_decoder_seed": null,
+      "terminal_decode_policy": "strict_valence_topology_argmax"
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "flow_seed_matched": true,
+    "method_blind_assessment": true,
+    "negative_results_reported": true,
+    "oracle_calls": 0,
+    "paired_program_order": true,
+    "repairs_or_retries": false,
+    "route_calls": 0,
+    "training_calls": 0
+  },
+  "decision_rule": {
+    "primary_metric": "exact_l1_yield_per_attempt",
+    "absolute_margin": 0.02
+  },
+  "nonclaims": [
+    "This single-checkpoint, single-seed comparison does not estimate independently trained model variance.",
+    "A matched flow seed does not prove that every internal random draw is coupled across distinct checkpoints.",
+    "The comparison isolates the declared full role-morphology conditioning intervention, not the Transformer backbone against v0.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability or route certification.",
+    "No training, route, oracle, biological or candidate-selection call occurs."
+  ]
+}

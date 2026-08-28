@@ -1,0 +1,27 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-reaction-specialist-bl-seed0-h100",
+  "description": "Train the BL adapter to the frozen 384,000-example cumulative exposure contract on one independently allocated exact H100.",
+  "root_seed": 20260828,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "specialize_bl",
+      "implementation": "model.reaction-program-specialization.v1",
+      "needs": [],
+      "config": {"path": "configs/multireaction/reaction_specialist_bl_v1.json", "sha256": "668e9eb00bd603b8871c764ef0623c2b1478928ff601a0a0592e985fa934840a"},
+      "inputs": {
+        "base_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "base_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "base_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"}
+      },
+      "outputs": {"checkpoint": {"path": "specialist_checkpoint.pt", "schema_version": "forge.reaction_program_specialist_checkpoint.v1"}, "progress": {"path": "progress.json", "schema_version": "forge.reaction_program_specialization_progress.v1"}, "result": {"path": "result.json", "schema_version": "forge.reaction_program_specialization_result.v1"}},
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 172800, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "reaction-specialist-bl-seed0"}
+    }
+  ],
+  "metadata": {"requires_verified_group_preflight": true, "cumulative_exposure": 384000, "component_vocabulary": false},
+  "nonclaims": ["Seed 0 development does not establish independently trained replication.", "Exact L1 replay is transform consistency, not route certification or synthesis success."]
+}

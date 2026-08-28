@@ -1,0 +1,51 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-mixed-representation",
+  "description": "Qualify the full shared Ugi plus 92,000-product BL/LX mixed-repeat representation before building a training cache.",
+  "root_seed": 20260827,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "representation",
+      "implementation": "model.shared-synthesis-program-representation.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/shared_synthesis_program_representation_mixed_v1.json",
+        "sha256": "1c769134d15f2d5babca4340e61c77244a45b0094b290c7d2d6b13cb7909a74b"
+      },
+      "inputs": {
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "ugi_corpus_result": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/result.json", "sha256": "1b655ce6389f50c7310a21a287997793c592ca93de064d53bafacaee24f663a6"},
+        "ugi_semantic_products": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz", "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"},
+        "ugi_semantic_atoms": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        "multireaction_corpus_result": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/result.json", "sha256": "5fa8e4f8bbc79ea4d286b1193262a9cf4bdea56a1ddeecfaf17363c387c5e980"},
+        "multireaction_atlas": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz", "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"},
+        "multireaction_semantic_atoms": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/semantic_atoms.csv.gz", "sha256": "962db4a740bae18c3cadd330e2c7a3f5c0deb3ac120b45f1d681ab962ea1e8a0"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.shared_synthesis_program_representation_result.v1"}
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 8192,
+        "timeout_seconds": 7200,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "shared-mixed-representation"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-27 user instruction to connect the verified BL/LX expansion to shared training",
+    "scientific_identity": "full_mixed_repeat_shared_reaction_program_coordinates"
+  },
+  "nonclaims": [
+    "Representation qualification is not model-quality or synthesis-success evidence.",
+    "The auxiliary products are reaction-enumerated support, not route-certified products.",
+    "No production GPU launch is authorized by this experiment."
+  ]
+}

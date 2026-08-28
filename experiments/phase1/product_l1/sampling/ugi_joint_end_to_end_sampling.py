@@ -36,9 +36,12 @@ from forge.corpus.ugi_held_component_gate import (
     load_ugi_reaction_contract,
 )
 from forge.model.defog_feasibility import sha256_file
+from forge.model.local_chemistry_support import LocalChemistrySupport
 from forge.model.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.model.ugi_chemistry_flow import (
+    UgiChemistryFlowError,
     UgiChemistrySample,
+    UgiTerminalDecodeError,
     chemistry_sample_statistics,
     chemistry_sample_to_molecule,
     valence_constrained_terminal_sample,
@@ -66,6 +69,37 @@ class UgiJointEndToEndSamplingError(RuntimeError):
 
 
 REFERENCE_COMPARISON_MODES = ("full", "deferred")
+MOLECULE_FAILURE_SCHEMA = "forge.ugi_molecule_construction_failure.v1"
+
+
+def _runtime_failure_detail(error: BaseException, *, stage: str) -> dict[str, Any]:
+    """Return a stable subtype plus the original exception evidence."""
+
+    message = str(error)
+    lowered = message.lower()
+    if "kekul" in lowered or "aromatic" in lowered:
+        code = "aromaticity_or_kekulization_failure"
+    elif "valence" in lowered:
+        code = "atom_valence_failure"
+    elif "sanitize" in lowered:
+        code = "rdkit_sanitization_failure"
+    elif isinstance(error, UgiChemistryFlowError):
+        code = "chemistry_topology_contract_failure"
+    else:
+        code = "unclassified_runtime_failure"
+    return {
+        "schema_version": MOLECULE_FAILURE_SCHEMA,
+        "stage": stage,
+        "code": code,
+        "exception_type": type(error).__name__,
+        "message": message,
+    }
+
+
+def _terminal_failure_detail(error: BaseException) -> dict[str, Any]:
+    if isinstance(error, UgiTerminalDecodeError):
+        return error.to_mapping()
+    return _runtime_failure_detail(error, stage="terminal_decode")
 
 
 def _validate_reference_comparison_mode(mode: str) -> None:
@@ -153,6 +187,9 @@ def joint_sampling_result_matches_request(
     terminal_decoder_seed: int | None,
     terminal_temperature: float,
     checkpoint_filename: str,
+    device: str | None = None,
+    local_chemistry_policy_sha256: str | None = None,
+    local_chemistry_constraint_scope: str | None = None,
 ) -> bool:
     """Return whether a persisted receipt can safely satisfy one exact request."""
 
@@ -172,6 +209,11 @@ def joint_sampling_result_matches_request(
         and decoder.get("mode") == terminal_decoder_mode
         and decoder.get("seed") == terminal_decoder_seed
         and decoder.get("temperature") == terminal_temperature
+        and decoder.get("local_chemistry_policy_sha256")
+        == local_chemistry_policy_sha256
+        and decoder.get("local_chemistry_constraint_scope")
+        == local_chemistry_constraint_scope
+        and (device is None or sampling.get("device") == str(torch.device(device)))
         and Path(str(checkpoint)).name == checkpoint_filename
     )
 
@@ -492,11 +534,34 @@ def complete_ugi_joint_terminals(
     terminal_bond_temperature: float | None = None,
     terminal_decoration_temperature: float | None = None,
     terminal_atom_temperatures_by_origin: Sequence[float] | None = None,
+    local_chemistry_support: LocalChemistrySupport | None = None,
+    program_id: str | None = None,
+    local_chemistry_constraint_scope: str = "role_edges_cycles_bounds",
 ) -> UgiJointTerminalCompletion:
     """Complete sparse terminals into sanitized products and exact components."""
 
     if torch is None or len(terminals) != len(program_metadata):
         raise UgiJointEndToEndSamplingError("terminal completion inputs are misaligned")
+    if local_chemistry_constraint_scope not in {
+        "role_edges_only",
+        "role_edges_cycles_bounds",
+    }:
+        raise UgiJointEndToEndSamplingError(
+            "unsupported role-local chemistry constraint scope"
+        )
+    if local_chemistry_support is not None:
+        if program_id is None:
+            raise UgiJointEndToEndSamplingError(
+                "role-local chemistry support requires an explicit program id"
+            )
+        if tuple(local_chemistry_support.atom_states) != tuple(corpus.atom_vocabulary):
+            raise UgiJointEndToEndSamplingError(
+                "role-local policy atom vocabulary differs from the sampling corpus"
+            )
+    elif program_id is not None:
+        raise UgiJointEndToEndSamplingError(
+            "a role-local chemistry program id requires a support policy"
+        )
     closure_generator = torch.Generator()
     closure_generator.set_state(closure_generator_state)
     terminal_generator = None
@@ -605,6 +670,7 @@ def complete_ugi_joint_terminals(
                     ],
                 }
             )
+        decode_failure: dict[str, Any] | None = None
         try:
             decoded = valence_constrained_terminal_sample(
                 condition,
@@ -619,9 +685,13 @@ def complete_ugi_joint_terminals(
                 bond_temperature=terminal_bond_temperature,
                 decoration_temperature=terminal_decoration_temperature,
                 atom_temperatures_by_origin=terminal_atom_temperatures_by_origin,
+                local_chemistry_support=local_chemistry_support,
+                program_id=program_id,
+                local_chemistry_constraint_scope=local_chemistry_constraint_scope,
             )
-        except RuntimeError:
+        except RuntimeError as error:
             decoded = None
+            decode_failure = _terminal_failure_detail(error)
         conditions.append(condition)
         samples.append(decoded)
         rows.append(
@@ -642,6 +712,8 @@ def complete_ugi_joint_terminals(
                     if terminal_atom_temperatures_by_origin is not None
                     else None
                 ),
+                "terminal_failure_detail": decode_failure,
+                "molecule_failure_detail": None,
             }
         )
     molecules = []
@@ -680,10 +752,13 @@ def complete_ugi_joint_terminals(
             if l1_reaction is not None:
                 _annotate_l1_terminal_admission(row, l1_reaction)
             molecules.append(molecule)
-        except (ValueError, RuntimeError):
+        except (ValueError, RuntimeError) as error:
             row["smiles"] = None
             row["valid"] = False
             row["failure_type"] = "MoleculeSanitizationFailure"
+            row["molecule_failure_detail"] = _runtime_failure_detail(
+                error, stage="molecule_construction"
+            )
             row["component_smiles_by_role"] = None
             row["component_reconstruction_valid"] = False
             row["component_reconstruction_error"] = "product molecule is invalid"
@@ -723,16 +798,23 @@ def sample_ugi_joint_end_to_end(
     terminal_bond_temperature: float | None = None,
     terminal_decoration_temperature: float | None = None,
     terminal_atom_temperatures_by_origin: Sequence[float] | None = None,
+    local_chemistry_policy_path: Path | None = None,
+    local_chemistry_program_id: str | None = None,
+    local_chemistry_constraint_scope: str = "role_edges_cycles_bounds",
     program_offset: int = 0,
     program_limit: int | None = None,
     reference_comparison_mode: str = "full",
     render: bool = True,
     record_timing: bool = True,
+    device: str = "cpu",
 ) -> dict[str, Any]:
     """Generate on the exact same global programs used by the staged probe."""
 
     if torch is None:
         raise UgiJointEndToEndSamplingError("joint end-to-end sampling requires torch")
+    resolved_device = torch.device(device)
+    if resolved_device.type == "cuda" and not torch.cuda.is_available():
+        raise UgiJointEndToEndSamplingError("CUDA sampling was requested but CUDA is unavailable")
     _validate_reference_comparison_mode(reference_comparison_mode)
     if output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
         raise UgiJointEndToEndSamplingError(f"output directory is nonempty: {output_dir}")
@@ -782,12 +864,29 @@ def sample_ugi_joint_end_to_end(
         **architecture,
     )
     model.load_state_dict(joint_checkpoint["model_state"])
+    model.to(resolved_device)
     closure_model = _closure_model(closure_checkpoint)
     l1_reaction = (
         load_ugi_reaction_contract(qualified_reactions_path)
         if evaluate_exact_l1_terminal_admission and qualified_reactions_path is not None
         else None
     )
+    if local_chemistry_policy_path is not None:
+        if local_chemistry_program_id is None:
+            raise UgiJointEndToEndSamplingError(
+                "a local chemistry policy requires an explicit program id"
+            )
+        local_chemistry_support = LocalChemistrySupport.from_mapping(
+            json.loads(local_chemistry_policy_path.read_text())
+        )
+        local_chemistry_policy_sha256 = sha256_file(local_chemistry_policy_path)
+    else:
+        if local_chemistry_program_id is not None:
+            raise UgiJointEndToEndSamplingError(
+                "a local chemistry program id requires a policy"
+            )
+        local_chemistry_support = None
+        local_chemistry_policy_sha256 = None
     start = time.perf_counter()
     terminals, joint_sampling = sample_ugi_joint_sparse_terminals(
         model,
@@ -799,11 +898,15 @@ def sample_ugi_joint_end_to_end(
         sample_steps=sample_steps,
         batch_size=batch_size,
         seed=seed,
-        device="cpu",
+        device=str(resolved_device),
         allowed_ring_sizes=closure_checkpoint["allowed_ring_sizes"],
         maximum_heavy_degree=int(closure_checkpoint["maximum_heavy_degree"]),
         maximum_adjacent_branch_runs=maximum_adjacent_branch_runs,
     )
+    # Terminal molecule construction and RDKit admission are CPU work.  The restartable sampler has
+    # already converted every flowed terminal tensor to NumPy, so moving the small output heads back
+    # here avoids device mismatches without changing any categorical draw.
+    model.to("cpu")
     closure_generator_state = torch.Generator().manual_seed(seed + 1).get_state()
     if terminal_decoder_mode != "argmax":
         resolved_terminal_seed = (
@@ -834,6 +937,9 @@ def sample_ugi_joint_end_to_end(
         terminal_bond_temperature=terminal_bond_temperature,
         terminal_decoration_temperature=terminal_decoration_temperature,
         terminal_atom_temperatures_by_origin=terminal_atom_temperatures_by_origin,
+        local_chemistry_support=local_chemistry_support,
+        program_id=local_chemistry_program_id,
+        local_chemistry_constraint_scope=local_chemistry_constraint_scope,
     )
     rows = list(completion.rows)
     molecules = list(completion.molecules)
@@ -865,6 +971,7 @@ def sample_ugi_joint_end_to_end(
         "reference_comparison_status": "pending",
         "sampling": {
             **joint_sampling,
+            "device": str(resolved_device),
             "sampling_seconds": sampling_seconds,
             "total_seconds": sampling_seconds,
             "matched_global_programs": len(programs),
@@ -883,7 +990,22 @@ def sample_ugi_joint_end_to_end(
                     if terminal_atom_temperatures_by_origin is not None
                     else None
                 ),
+                "local_chemistry_policy_sha256": local_chemistry_policy_sha256,
+                "local_chemistry_program_id": local_chemistry_program_id,
+                "local_chemistry_constraint_scope": (
+                    local_chemistry_constraint_scope
+                    if local_chemistry_support is not None
+                    else None
+                ),
             },
+            "local_chemistry_policy": (
+                {
+                    "path": str(local_chemistry_policy_path),
+                    "sha256": local_chemistry_policy_sha256,
+                }
+                if local_chemistry_policy_path is not None
+                else None
+            ),
             "qualified_reactions": (
                 {
                     "path": str(qualified_reactions_path),

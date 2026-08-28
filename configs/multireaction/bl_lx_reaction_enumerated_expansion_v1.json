@@ -1,0 +1,103 @@
+{
+  "schema_version": "forge.multireaction_expansion_config.v1",
+  "task": "Source-linked BL/LX component expansion and exact reaction-program enumeration",
+  "seed": 20260827,
+  "inputs": {
+    "lnpdb": {
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "source_atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "source_steps": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_steps.csv.gz",
+      "sha256": "3f30e27622bcff03d1272dcc03673dc4b2d6563c1b0f9fc70f851705d584cc9d"
+    },
+    "source_semantic_atoms": {
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "source_splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "source_provenance": {
+      "path": "results/phase1/multireaction_program_corpus_v1/source_provenance.csv.gz",
+      "sha256": "389b3d1ddb150bbacfa3ecdc9c3810453d8ec0bce3e1fcb2a8085b9ac2496e6a"
+    },
+    "source_result": {
+      "path": "results/phase1/multireaction_program_corpus_v1/result.json",
+      "sha256": "df6f06fc1a4f9239ee24cbd46e0de8805a5e5063e3e9087379182868695e401d"
+    }
+  },
+  "programs": [
+    {
+      "program_id": "bl_2023_repeated_aza_michael",
+      "accumulator_source_slots": [
+        "head"
+      ],
+      "repeat_source_slots": [
+        "linker",
+        "tail1",
+        "tail2",
+        "tail3",
+        "tail4"
+      ]
+    },
+    {
+      "program_id": "lx_2024_repeated_reductive_amination",
+      "accumulator_source_slots": [
+        "head"
+      ],
+      "repeat_source_slots": [
+        "linker",
+        "tail1",
+        "tail2",
+        "tail3",
+        "tail4"
+      ]
+    }
+  ],
+  "policy": {
+    "identity": "canonical_constitutional_smiles",
+    "allowed_elements": [
+      "C",
+      "N",
+      "O"
+    ],
+    "maximum_component_heavy_atoms": 96,
+    "maximum_product_heavy_atoms": 194,
+    "maximum_forward_outcomes": 512,
+    "maximum_forward_states": 4096,
+    "family_fingerprint": {
+      "kind": "ECFP4",
+      "radius": 2,
+      "bits": 2048,
+      "similarity_threshold": 0.75,
+      "include_chirality": false
+    },
+    "family_split_fractions": {
+      "train": 0.7,
+      "calibration": 0.15,
+      "heldout": 0.15
+    },
+    "evidence_stratum_mass": {
+      "source_executed": 0.5,
+      "computed_transform_consistency": 0.5
+    },
+    "source_activity_labels_inherited": false,
+    "computed_product_is_observed_synthesis": false,
+    "computed_product_is_route_closed": false,
+    "uniform_product_row_sampling_allowed": false
+  }
+}

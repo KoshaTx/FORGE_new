@@ -254,6 +254,69 @@ class RegistryRepeatedReactionProgram:
             enumerated_outcomes_by_step=tuple(outcome_counts),
         )
 
+    def forward_traces(
+        self,
+        terminal_head_smiles: str,
+        repeated_component_smiles: Sequence[str],
+        *,
+        maximum_outcomes: int = 512,
+        maximum_states: int = 4096,
+    ) -> tuple[ReactionProgramTrace, ...]:
+        """Enumerate deterministic forward lineages without an exponential reverse search.
+
+        Repeated-library enumeration starts from known components, so forward dynamic programming
+        is both cheaper and more direct than generating a product and rediscovering its inputs by
+        retrosynthesis.  One lexicographically stable lineage is retained per constitutional state;
+        ``atom_origins`` still rejects any semantic ambiguity along that exact lineage.
+        """
+
+        steps = len(repeated_component_smiles)
+        if steps < self.spec.minimum_steps or steps > self.spec.maximum_steps:
+            raise ReactionProgramError(
+                f"program {self.spec.program_id} received {steps} steps outside "
+                f"[{self.spec.minimum_steps}, {self.spec.maximum_steps}]"
+            )
+        if isinstance(maximum_states, bool) or maximum_states < 1:
+            raise ReactionProgramError("maximum_states must be a positive integer")
+        head = _canonical(terminal_head_smiles)[0]
+        current: dict[str, tuple[str, ...]] = {head: ()}
+        ordered_repeats: list[str] = []
+        for repeated_value in repeated_component_smiles:
+            repeated = _canonical(repeated_value)[0]
+            ordered_repeats.append(repeated)
+            following: dict[str, tuple[str, ...]] = {}
+            for accumulator, lineage in sorted(current.items()):
+                layer = self._forward_layer(
+                    (accumulator,), repeated, maximum_outcomes=maximum_outcomes
+                )
+                if layer.saturated:
+                    raise ReactionProgramError(
+                        f"program {self.spec.program_id} forward step reached "
+                        f"maximum_outcomes={maximum_outcomes}"
+                    )
+                for product in layer.products:
+                    candidate = (*lineage, product)
+                    incumbent = following.get(product)
+                    if incumbent is None or candidate < incumbent:
+                        following[product] = candidate
+            if not following:
+                return ()
+            if len(following) > maximum_states:
+                raise ReactionProgramError(
+                    f"program {self.spec.program_id} exceeded maximum_states={maximum_states}"
+                )
+            current = following
+        return tuple(
+            ReactionProgramTrace(
+                program_id=self.spec.program_id,
+                reaction_id=self.spec.reaction_id,
+                terminal_head_smiles=head,
+                repeated_component_smiles=tuple(ordered_repeats),
+                intermediate_product_smiles=lineage,
+            )
+            for _, lineage in sorted(current.items())
+        )
+
     def decompose(
         self,
         product_smiles: str,

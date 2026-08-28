@@ -8924,3 +8924,892 @@ preserved unchanged.
   lipid realism, diversity, novelty, held-component improvement or seed stability from exact-L1
   yield alone. Run the common assessment against v0 before deciding whether the Transformer
   supersedes the historical model, and retain this as a single-seed Ugi-only result.
+
+## 2026-08-26 - Implement the tree-aware Ugi Transformer development challenger
+
+- Added a tree-aware sparse Transformer that derives parent, child, sibling, ancestor and descendant
+  relations from the current noisy offspring state at every forward pass. It never consumes the
+  clean target tree. Invalid intermediate forests are handled by a deterministic fail-soft relation
+  construction rather than by exposing terminal topology.
+- Added one global Ugi-core token, three role-specific core-port tokens, node-to-program routing that
+  exposes only the global and matching role token, role-specific residual adapters, attachment- and
+  junction-program consistency losses and whole-role source masking. Existing GRU and dense
+  Transformer backbones and the restartable constrained sampler retain their original interfaces.
+- Froze a development-only seed-0 contract at 3,000 optimizer steps and 384,000 weighted train-fold
+  draws, matching qualified v0 development exposure rather than the previous 5,100-step schedule.
+  Calibration remains diagnostic and held-out products select nothing. The four-arm ablation ladder
+  and molecular promotion gates are fixed in
+  `configs/model/phase1_ugi_tree_transformer_ablation_ladder_v1.json`.
+- The final fused-attention source completed the local two-step smoke as run
+  `80ecb70a02397009d127efb4240fc91d921419c8d0291364285c850c55bc1988`; strict reproduction was
+  byte-identical for every declared artifact. A one-thread CPU forward microbenchmark measured 1.21
+  ms/batch for the dense program Transformer and 1.49 ms/batch for the tree-aware challenger at
+  batch 4, 30 nodes, width 96 and two layers. This is an engineering overhead measurement, not an
+  H100 throughput or scientific result. Moving the structural kernel from manual attention to
+  scaled-dot-product attention reduced tree-model latency from 1.72 to 1.49 ms/batch in the same
+  representative setup.
+- `make verify` authenticated all 30 vendored assets. A clean-cache 1,866-node test run reproduced
+  189 known historical/missing-artifact failure nodes and introduced zero new failures against the
+  frozen baseline. The suite remains blocked on the unchanged 54 files in
+  `docs/missing_test_inputs.txt`; none was fabricated or converted into a scientific pass. The
+  attributable engineering record is
+  `results/phase1/ugi_tree_transformer_engineering_v1/result.json` (SHA-256
+  `8ca0a063e9ee192acc4abb6b6e9c4516de673a5e4fd6d5f64d6ee2259d603300`).
+- **Decision:** the challenger is implementation-qualified for an H100 preflight, but no paid launch
+  is authorized by this entry and no improvement over v0 has been measured. Run the matched
+  development ladder and common molecular calibration before promoting a checkpoint or making an
+  exact-L1, realism, novelty or held-component claim.
+
+## 2026-08-26 - Freeze matched tree-Transformer execution and calibration contracts
+
+- Added a single exact-H100 descriptor whose smoke replicate exercises the most demanding
+  component-masking arm and whose four full replicates map one-to-one to the dense corrected,
+  tree-relational, balanced-consistency and full component-masking arms. Every arm uses the same
+  train fold, initialization/minibatch seed, 3,000 steps, batch 128, 384,000 weighted draws and
+  ten-checkpoint grid. The runtime envelope now states Modal's real 24-hour cap and preserves
+  authenticated resume checkpoints.
+- Removed `held_component_exact_l1_per_1000` from calibration-based checkpoint selection. It remains
+  a non-selecting held-out diagnostic only. Held-out products cannot select an architecture,
+  checkpoint, temperature or threshold.
+- Froze 512 calibration-fold morphology programs before remote training: 256 from the observed Ugi
+  union and 256 from expanded exact-forward support, balanced within source over calibration-role
+  classes. Run `9bd9ce0b79753c0c61e5a51de1083389ebce90697a305f4e666a9f3dcf07ea6d`
+  reproduced byte-identically; the program artifact SHA-256 is
+  `ad51b852116e03ca6ab9ed3e44fefd899795f435337a1f615564ec697aa01054`.
+- Added an authenticated, restartable evaluator that samples every prespecified checkpoint on the
+  same ordered programs and random streams, retains failures in the denominator and runs the shared
+  exact-L1, lipid-realism, local-chemistry and role-morphology assessors. Checkpoint selection is
+  deferred to cross-arm/v0 adjudication; candidate selection is absent.
+- `make verify` authenticated all 30 vendored assets. The locked `uv` full suite collected 1,871
+  nodes and reproduced 189 known missing-artifact failures with zero new failures; 54 historical
+  inputs remain absent. `make test` itself is miswired to a Homebrew Python 3.14 environment without
+  pytest, so the locked `uv` environment supplied the actual test result.
+- The planned exact-H100 preflight did **not** start. The execution layer rejected transfer of the
+  private source and pinned molecular inputs to Modal without a new explicit approval. The frozen v0
+  step-3000 checkpoint is also absent locally and must be retrieved from its private Modal volume
+  before matched v0 calibration resampling. The attributable readiness record is
+  `results/phase1/ugi_tree_transformer_execution_readiness_v1/result.json`.
+- **Decision:** preserve the implementation and calibration draw exactly. Do not claim any model
+  improvement. After explicit transfer/compute approval, run the exact-H100 smoke; launch all four
+  full arms only after it verifies, then retrieve and resample v0 on the same calibration draw.
+
+## 2026-08-26 - Complete the exact-H100 tree-Transformer development ladder
+
+- The first remote preflight failed before optimizer step zero because the stage wrote its generated
+  effective config inside the trainer output directory, which the trainer correctly requires to be
+  empty for a fresh run. The stage now keeps that config beside the trainer directory. Focused runtime
+  and tree-Transformer tests passed before rerunning; no scientific gate, dataset or model setting was
+  changed.
+- The repaired two-step exact-H100 preflight completed and independently verified as run
+  `bd92ce73a6c92b390dfdd7e4d558bd2cc423002ae3ef5ba09e229a99b8c5eb16`. It exercised the most
+  demanding `full_component_masking` arm on CUDA/float32 with Modal accelerator request `H100!`.
+- All four matched 3,000-step development arms then completed and independently verified: dense
+  corrected schedule `7a4fa03792fa47547292e9f93e9aef7c5ab291cf24d89122e0d28a5fd104a1bc`,
+  tree relations and routing `bb7a9515d57269765a62b400c19cbb3571a9b244d1ccb3e323f6e4595a9dea82`,
+  tree plus balanced consistency
+  `0e575860ba665b816df6b659db8fcc19da6385681d0128e11655d35726461267`, and full component masking
+  `a204c61a5d6c0658d4bb785885d02161cf9f5bf6140e663836d62b846bc6cb53`. Each preserves all ten
+  prespecified checkpoint snapshots, the same 66,464 train products, 15,800 calibration products,
+  384,000 weighted train draws and zero held-out selection.
+- The attributable execution record is
+  `results/phase1/ugi_tree_transformer_development_h100_v1/result.json`. The historical v0 volume was
+  located in the separately configured `nitya` Modal workspace. After explicit cross-workspace
+  authorization, exactly
+  `/ugi_decoration_coupling_v1_challenger_ba78c781ba17/checkpoint_step_3000.pt` was downloaded from
+  `nitya/forge-phase1-training`. The 14,032,416-byte local checkpoint matches its frozen expected
+  SHA-256 `4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50`.
+- **Decision:** training completion alone selects no architecture or checkpoint. Do not compare the
+  arms using their differently weighted training objectives and do not claim exact-L1, realism,
+  novelty or held-component improvement. Run the frozen 512-program molecular calibration for every
+  checkpoint and the matched v0 assessment before promotion.
+
+## 2026-08-26 - Qualify the matched tree-Transformer molecular calibration for launch
+
+- Added one paired four-program exact-H100 execution preflight, four independent full Transformer
+  calibration descriptors and one full frozen-v0 descriptor. Each full Transformer job evaluates
+  all ten prespecified checkpoints on the same 512 ordered calibration programs and random streams;
+  v0 uses the same programs, sampler settings and assessors. Every descriptor requests `H100!`,
+  CUDA and float32, retains every failed attempt in the denominator and performs no repair, retry,
+  route, oracle or candidate-selection call.
+- Corrected the shared joint sampler so reverse flow runs on the descriptor-selected CUDA device;
+  terminal graph construction and RDKit assessment remain on CPU. Resume receipts are now bound to
+  the requested device, preventing a CPU partial result from being admitted to a CUDA run.
+- Froze the cross-arm/v0 rule before opening any full calibration result. A Transformer checkpoint
+  must improve unique open-ended, whole-product-novel exact-L1 yield by at least 0.02 with a paired
+  95% bootstrap interval above zero; it must be noninferior within 0.02 on validity, exact-L1, local
+  support, role support, tail support and component novelty, and retain at least 80% of v0 effective
+  component count. The method-blind adjudicator reconstructs every metric from authenticated attempt
+  ledgers using 10,000 fixed-seed paired program-index bootstrap resamples. If no checkpoint passes,
+  no Transformer is promoted and the negative result is complete.
+- All six descriptors pass `forge doctor`; all 30 vendored inputs verify. Thirty-five focused tests
+  pass. The clean-cache full suite collected 1,877 nodes and reproduced 189 known failures from the
+  54 documented missing historical inputs, with zero new failure nodes.
+- The attributable readiness result is
+  `results/phase1/ugi_tree_transformer_calibration_readiness_v1/result.json`. Its executable source
+  SHA-256 is `38bcb7a74de881fcbd968ec3d219c2f43e25a3ed1d54fb8c17c80548715118ae`.
+- **Decision:** the calibration is implementation-ready but paid compute is not authorized by this
+  entry. After explicit approval, run and independently verify the exact-H100 preflight; only then
+  launch the four full Transformer jobs and the full v0 job in parallel and apply the frozen
+  adjudicator. Do not claim model improvement before that result exists.
+
+## 2026-08-26 - Promote the tree-relational Transformer from matched molecular calibration
+
+- The first approved exact-H100 preflight failed before scientific work because the Modal upload
+  omitted a hash-pinned transitive config input,
+  `configs/multireaction/common_ugi_baseline_protocol_v1.json`. The runtime now derives one bounded,
+  authenticated upload closure from exact `path`/`sha256` config pins and uses that same closure for
+  planning and transfer. Forty-three focused runtime/calibration tests passed; no dataset, model,
+  sampler, seed, assessor or scientific gate changed.
+- The corrected two-stage preflight completed and independently verified as run
+  `087a5fedb957b44acff63d3ee1c51798005c2c872715fbd99b024ff2305ae75c`. All five approved full jobs
+  then completed and independently verified with executable source SHA-256
+  `a632c678e42132c2913364b6f64b15b9b7785a43683e8662c16dbfdde80d8af9`: dense corrected
+  `f37fa5cb2e0607d891f38d1e2f59d5fccb734ab9526b5d747a48f6d0a2e6fa87`, tree relations and routing
+  `a225f5c6157df76bfd65e3652f443703e6ef0602e74ab63f9bba1132a8a719fe`, tree plus balanced
+  consistency `2b6b3058d6223f68c906d487671d68f6b2eaa7765a02120fa9f0813d668418a8`, full component masking
+  `68f11969b3b22dc72e093a899774282574d469c7b945ff7092107ed838d11eff`, and frozen v0 reference
+  `7fe0144146697bba82879a57ed646f0bbeb2ab331c029aa908ee4e3071c62336`.
+- The frozen 10,000-resample paired adjudicator selected exactly one of 40 Transformer checkpoints:
+  `tree_relations_and_routing:step_2700`. On the 512 calibration programs, its primary unique
+  open-ended, whole-product-novel exact-L1 yield was 0.8633 versus 0.8301 for v0, an absolute paired
+  improvement of 0.0332 (95% bootstrap interval 0.0039 to 0.0410). It retained validity 0.9863,
+  exact-L1 0.9785, local support 0.9492, role support 0.4805, tail support 0.5820, component novelty
+  0.8922 and 87.2% of v0 effective component count. Every frozen promotion and noninferiority check
+  passed. Higher raw-novelty early checkpoints failed at least one prespecified support gate and were
+  not selected.
+- The attributable adjudication is
+  `results/phase1/ugi_tree_transformer_calibration_adjudication_v1/result.json` (SHA-256
+  `4dccd7e2b3c704e86757be4542cafa3dd5e78e4af6978e8e3c356ae185e90f02`); the run ledger is
+  `results/phase1/ugi_tree_transformer_calibration_execution_v1/result.json` (SHA-256
+  `99a8972e97ead7c75a7cacef35f9dac090d179023ee091833b64d9786c796a0a`). Final verification
+  authenticated all 30 vendored assets; 45 focused tests passed and seven skipped. The locked full
+  suite reproduced exactly the 189 frozen missing-artifact failure nodes with no additions or
+  removals. `make test` remains environment-blocked because it invokes Homebrew Python 3.14 without
+  pytest; that target executed no test and was not treated as a pass.
+- **Decision:** promote the tree-relations-and-routing architecture at checkpoint 2700 to the next
+  Ugi-only evaluation stage. This is a calibration-based architecture/checkpoint decision, not a
+  held-component or final production result. It does not establish synthesis success, route closure,
+  biological activity, procurement, or seed stability.
+
+## 2026-08-26 - Freeze the fresh-seed Ugi tree-relational production evaluation
+
+- Froze the calibrated `tree_relations_and_routing` architecture at step 2700 before production
+  training. The production contract uses three fresh independent training seeds (`20260905`,
+  `20260906`, `20260907`), exactly 2,700 steps and 345,600 realism-weighted train-fold draws per
+  seed. Calibration or held-out rows cannot select a later checkpoint, architecture or threshold.
+- Each seed is evaluated once on the same ordered 3,072-program component-family stress draw with
+  eight stochastic reverse-flow steps, terminal temperature 1.0 and no repair or retry. Because this
+  draw appeared in earlier diagnostics, held-component strata are descriptive rather than a pristine
+  final test. Conditioning on held-family morphology does not establish regeneration of the exact
+  unseen component identity.
+- Froze aggregation by independent training seed, reporting the mean and sample standard deviation
+  across three seeds. Molecule attempts are not treated as independent replicates. Prespecified
+  validity, exact-L1, open-ended-yield, novelty, local-support, role-support, tail-support and
+  effective-component-count gates classify either a qualified production result or a completed
+  negative result; they never trigger reselection.
+- The descriptor is doctor-ready on exact `H100!` and all 30 vendored inputs verify. Fifty-six
+  focused training, sampling, evaluation, aggregation and runtime tests pass; seven tests skip only
+  because the legacy 421-record expanded-chemistry fixture is not materialized. The full 1,877-node
+  suite reproduces the exact 189-node historical missing-artifact failure set recorded in the
+  repository, with zero new failure nodes. Ruff and `git diff --check` pass.
+- The attributable readiness record is
+  `results/phase1/ugi_tree_relational_production_readiness_v1/result.json` (SHA-256
+  `2f8f1451cb40e282a46ba6727dc90d2232df8e3b8023aa8db3c596cc51004b57`). Its executable source
+  SHA-256 is `f7941230d416b0c170baabb84079314bc933c0e86fa88b4f594e7b11b9b09c65`.
+- **Decision:** paid compute is not authorized by this entry. After explicit private-source-transfer
+  and paid-compute approval, run one exact-H100 smoke preflight. Only if it independently verifies,
+  launch the three fresh-seed full jobs in parallel and apply the frozen aggregate adjudicator. This
+  readiness result is not evidence of final Ugi performance, synthesis success, route closure,
+  procurement or biological activity.
+
+## 2026-08-26 - Fail the first production preflight on an inherited split label
+
+- The approved exact-H100 smoke request
+  `b0c1902357546a698ecb7635fec7b12dffaab7fcbbce7619939440f0a46a18db` failed closed in the training
+  stage before any optimizer step or scientific evaluation. No full production job was launched.
+  The derived production config disabled calibration-based selection but inherited the base
+  calibration config's `development_split` label, which the existing trainer correctly rejects
+  unless calibration early stopping is active.
+- Corrected only the derived partition contract to the trainer's existing `fixed_train_only` mode
+  with `fixed_final_step` selection. The train fold, architecture, selected duration, seeds, sampler,
+  assessors, attempt budgets and scientific gates did not change. The production regression test now
+  calls the runtime partition validator directly, so a builder-only test cannot miss this mismatch.
+- The failure receipt is
+  `results/phase1/ugi_tree_relational_production_preflight_attempt1_v1/result.json` (SHA-256
+  `a77d4991abb0c1a9ba805796358cbddb85baacbdcf4be0f77a5d2ec94c05e026`). The corrected readiness
+  receipt is `results/phase1/ugi_tree_relational_production_readiness_v2/result.json` (SHA-256
+  `86ed4c50fdd97f3574101afc66e48da14e3fd2e0db1ae00d1ef628f16845b6a2`), with executable source
+  SHA-256 `94bb0384b14accf8cd8bce866a3b43d3d1707c471abf6e9b64fb6f035479811c`.
+- **Decision:** the first paid preflight authorization has been consumed by the failed attempt. Do
+  not infer permission for a second paid H100 attempt. Obtain fresh approval for the corrected smoke
+  retry and launch the three full fresh-seed jobs only if that retry independently verifies.
+
+## 2026-08-26 - Complete the fresh-seed Ugi tree-relational evaluation as a negative result
+
+- The corrected exact-H100 smoke run
+  `9c8579eb1a36a3f2756a0c2823994df6b35aeca52d616361d3fe11088894cc12` completed and independently
+  verified. The three authorized full runs then completed without restart and independently verified:
+  seed `20260905` run `2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81`,
+  seed `20260906` run `0bbd58b8e87a344861f7b6b8c88843c368d429adb2a1be328324e895991bc0d8`,
+  and seed `20260907` run `779a97f358b334ddfd30e70006116fe9619d334aec573ebce3437da4d8603975`.
+  Every run used executable source SHA-256
+  `94bb0384b14accf8cd8bce866a3b43d3d1707c471abf6e9b64fb6f035479811c` and contributed exactly
+  3,072 attempts.
+- Across independent training seeds, validity was `0.9571 +/- 0.0047`, exact-L1 yield was
+  `0.9365 +/- 0.0116`, and local-support-qualified exact-L1 yield was `0.8631 +/- 0.0157` (mean and
+  sample standard deviation). These missed the frozen mean validity floor `0.97`, frozen mean
+  exact-L1 floor `0.95`, and per-seed local-support floor `0.88`; seed `20260906` also missed the
+  per-seed exact-L1 floor `0.93` at `0.9287`. No threshold is relaxed after observing the result.
+- The main open-endedness and support-retention checks did pass: unique open-ended exact-L1 yield was
+  `0.8239 +/- 0.0113`, component novelty was `0.8916 +/- 0.0228`, role-supported exact-L1 yield was
+  `0.5372 +/- 0.0503`, tail-supported exact-L1 yield was `0.6026 +/- 0.0473`, and mean effective
+  component count retained `0.9277` of the fixed historical v0 reference. Whole-product novelty to
+  train was `0.9269 +/- 0.0131`. The held-component result (`20.51 +/- 2.78` exact-L1 products per
+  1,000 attempts) remains descriptive because the stress draw was previously used.
+- The attributable aggregate is
+  `results/phase1/ugi_tree_relational_production_aggregate_v1/result.json` (SHA-256
+  `2bdf30b4ad6d738988cb72d6a2170c63825a7d39513d028580e4bee3c93724a7`). It authenticates every
+  run/evaluation input and treats training seed, not molecule row, as the replication unit.
+- **Decision:** classify the frozen experiment as `negative_full_ugi_evaluation`. The Transformer
+  preserves the intended open-ended generation, novelty, role support, tail support and component
+  diversity, but it is not production-qualified because constitutional validity, exact Ugi replay
+  and local chemistry support are not yet stable enough across seeds. Do not promote this result by
+  changing thresholds or selecting the best seed. Any follow-up must be a separately frozen
+  diagnostic or new model/sampler experiment.
+
+## 2026-08-26 - Attribute the Ugi tree-relational production failures before retraining
+
+- Ran the frozen, non-selecting failure-attribution diagnostic over all 9,216 saved production
+  attempts. It made no generator, synthesis-planner, proposal-engine or route-oracle calls and did
+  not alter any production gate. The attempt-level join was authenticated against the three run
+  manifests, evaluation-detail archives, aggregate result and pinned local-chemistry policy.
+- The mutually exclusive outcomes were 7,954 exact-L1 locally supported products (`86.3064%`), 677
+  exact-L1 products with unsupported local chemistry (`7.3459%`), 280 invalid terminal-support
+  outcomes (`3.0382%`), 190 valid native-forward-exact products on which the method-blind retro
+  assessor abstained (`2.0616%`), and 115 molecule-sanitization failures (`1.2478%`). Thus the
+  largest nonpassing class is unsupported local chemistry, while terminal feasibility accounts for
+  280 of 395 invalid attempts (`70.8861%`).
+- All valid saved samples reconstruct exactly through their native component traces. The 190 valid
+  exact-L1 misses are therefore assessor-coverage failures rather than failures of native forward
+  assembly. They concentrate on multi-nitrogen heads and ambiguous native forward outcomes: the
+  abstention rate rises from about `0.48%` for one- or two-nitrogen heads to `50.0%` for four
+  nitrogens and `82.6%` for five nitrogens; no product with one native forward outcome abstained.
+- The 677 locally unsupported exact-L1 products contain 898 unsupported edge occurrences. The
+  dominant product-level signature is an N--O single bond (462 products; `68.24%` of this class),
+  followed by C=N double (106), F--N single (49), O--S single (47), and N--S single (31). These
+  signatures were recomputed from the pinned policy rather than trusted from stored labels.
+- Terminal-support failures are associated with the sampled head topology: all 280 occurred when
+  the amine-head cycle rank was one. The saved attempts do not preserve the exact terminal decoder
+  exception subtype, so distinguishing atom-state, bond-state, aromatic-state and sanitization
+  causes requires instrumentation in a new diagnostic run; it cannot be recovered honestly from
+  these archives.
+- The attributable result is
+  `results/phase1/ugi_tree_relational_failure_attribution_v1/result.json` (SHA-256
+  `d6e5ef6adf29d7aba98545fbba9cb515e7570e734f6a9bb8dc8af494b181f70a`); its complete attempt ledger
+  is `results/phase1/ugi_tree_relational_failure_attribution_v1/attempt_attributions.jsonl.gz`
+  (SHA-256 `068af1ed562004a71276f501f74a131b228afa108501e361d74c72b2b328c9ce`). A clean rerun produced
+  byte-identical files. All 30 vendored inputs verify, focused tests pass, and the full suite
+  reproduces exactly the recorded 189-node historical missing-artifact failure set with zero new
+  failures.
+- **Decision:** do not launch an unchanged retraining run. First preserve exact terminal decoder
+  failure subtypes, then qualify role-local support masks or losses for the dominant unsupported
+  bond signatures without introducing a finite component vocabulary, and independently test a
+  broader method-blind Ugi retro policy against the native forward traces. Only after those bounded
+  interventions are frozen should a new sampler or training experiment run.
+
+## 2026-08-26 - Qualify typed decoding and a bounded role-edge intervention without retraining
+
+- Added typed terminal-decoder failures that retain the failing stage, stable reason code and local
+  node or edge context. Molecule-construction failures now separately retain an aromaticity,
+  valence, sanitization, topology-contract or unclassified runtime subtype. Neither path repairs a
+  molecule, retries a draw or removes a failed attempt from the denominator.
+- Refactored the Ugi reverse adapter to expose transform-consistent reverse/forward candidates
+  separately from registry-qualified exact-L1 traces. On all 190 valid native-forward-exact
+  production attempts where the method-blind exact-L1 assessor abstained, the native component
+  trace was recovered by the transform-consistency diagnostic but failed the frozen registry handle
+  policy. There were zero admissible exact-L1 promotions. Rejections included 117 three-site, 21
+  four-site and 6 five-site amine heads, plus 47 two-aldehyde-site components; some products fail
+  more than one role. This is a substrate-scope result, not permission to broaden the registry.
+- The training-fold-only v2 role-local policy detects all 677 previously attributed unsupported-edge
+  exact-L1 products, contains 27 role-edge and 12 role-cycle signatures from 66,464 training
+  records, and stores no component identity. The attributable readiness result is
+  `results/phase1/ugi_tree_relational_intervention_readiness_v1/result.json` (SHA-256
+  `965117522442807f42a9c6b33ab5a8a35ecfc9997934e675636b9b7916a1c82c`); its retro ledger is
+  `retro_attempts.jsonl.gz` (SHA-256
+  `f9b51aeea7386db2aa818b9c38f2d10bc7d8e184aa14b7e478f1a303b1e3e206`).
+- A first 32-attempt paired CPU smoke applied role edges, complete role-cycle signatures and
+  component hard bounds together. It removed unsupported chemistry but reduced locally supported
+  exact-L1 products from the paired original 30/32 to 28/32 by rejecting two otherwise locally
+  supported cyclic-head products. Preserve this broad-scope smoke as an over-constrained negative
+  result; its result SHA-256 is
+  `2bf6619e9f07d50173acb769758d9072738b18d23df840f846b83f486830ca3f`.
+- Froze a narrower follow-up that masks only exact training-supported role/element/bond signatures,
+  the failure axis responsible for the dominant N--O and other exotic bonds. On the same 32
+  programs and random streams, it produced 31 valid products, 30 registry-qualified exact-L1
+  products and 30 locally supported exact-L1 products. It therefore retained all 30 paired-original
+  locally supported products while reducing locally unsupported exact-L1 products from 2 to 0.
+  N--O and O--O product fractions were both zero. The remaining terminal failure is now precisely
+  recorded as `role_local_bond_state_unavailable` on an amine-head cycle edge. The attributable
+  result, including executable-source pins, is
+  `results/phase1/ugi_tree_relational_edge_constrained_resampling_smoke_v3/result.json` (SHA-256
+  `f08e53bfeecf52c719be409a9672e1874ff7f732d2679e4570f4ccd6924462a2`). Its sampling ledger is
+  byte-identical to the clean reproduction (SHA-256
+  `3248864107446ecfa913058057a825d10a7a18141a377fa957d2ad1178beed26`). The earlier v1 result is
+  superseded because it omitted explicit executable-source pins; v2 is superseded because the final
+  renderer-free import boundary and blinded-runner dependency manifest were applied afterward.
+- Verification closed with all 30 vendored assets authenticated, 30 focused intervention and import
+  tests passing, no Ruff or whitespace errors, and the repository-wide test cache restored to the
+  frozen 189 expected failures with zero new or unexpectedly resolved failures.
+- **Decision:** keep the completed three-seed production result negative and keep the registry
+  exact-L1 gate unchanged. Do not retrain yet. The edge-only frozen-checkpoint sampler has passed a
+  paired structural preflight and is ready for one full 3,072-attempt seed-0 diagnostic on exact
+  H100 compute. That paid run requires explicit authorization; it is not launched by this entry.
+
+## 2026-08-27 - Preserve the full role-edge constrained resampling as a negative result
+
+- Ran the explicitly authorized 3,072-attempt seed-0 frozen-checkpoint diagnostic on one exact
+  `NVIDIA H100 80GB HBM3`. The downloaded run
+  `phase1-ugi-tree-relational-edge-constrained-resampling-seed0-h100-v1/7b5a8d26bf75f9579e6bad7be39f57d32e41b9584fcecc56368187057838f8e9`
+  passed independent manifest verification. Its source SHA-256 is
+  `e02120a4ca762dfe3c21e159d9a08869216ed482fdc85b7fa74ecd939376a6c7`, and its result and diagnostic
+  archive SHA-256 values are respectively
+  `08728a9158b3efcd7689a396a9b7d85fbdb77df58789fd6a637b3ba35381347d` and
+  `07e57aab0d2ff835c33edbe3e70a35d6e4366c9cbcc04b9ff69520d52ea2371f`.
+- The constrained sampler produced 2,935 valid products (95.54%), 2,875 exact-L1 products (93.59%)
+  and 2,843 local-support-qualified exact-L1 products (92.55%). Relative to the same 3,072 original
+  attempts, it retained 98.53% of raw exact-L1 products and increased local-support-qualified
+  exact-L1 products from 2,664 to 2,843. All attempts remained in the denominator; there were 112
+  typed terminal failures and 25 typed molecule-sanitization failures.
+- N--O and O--O product fractions were both zero, but one small three- or four-membered oxygen-ring
+  product remained. More importantly, 32 exact-L1 products (1.04% of attempts) still failed the
+  independently frozen broader local-chemistry assessment. The zero-unsupported-product gate
+  therefore failed. The 32-attempt CPU smoke did not expose this residual at production scale.
+- Structural diversity remained high (mean pairwise ECFP4 distance 0.675) and 90.43% of valid
+  products were novel to the training set, but the realism C2ST AUC was 0.960, so the generated and
+  observed lipid distributions remain readily distinguishable.
+- **Decision:** preserve this run as `negative_constrained_sampling_result`. Do not relax the local
+  support gate, rerun the same job, or promote the constrained sampler. The result localizes the next
+  engineering question to the mismatch between the role-edge generation mask and the broader
+  method-blind local-chemistry assessor; it does not justify another blind retraining run.
+- Verification authenticated all 30 vendored assets, passed the 22 focused experiment, Modal and
+  architecture tests, passed Ruff and whitespace checks, and returned the complete suite to the
+  exact frozen 189-node missing-artifact baseline with zero new or unexpectedly resolved failures.
+
+## 2026-08-27 - Freeze source-linked BL/LX reaction-enumerated structural support
+
+- Added a common component-family splitter used by Ugi and the BL/LX expansion. Components are
+  clustered and assigned to train, calibration or heldout before any product enumeration. The
+  `amine_head` namespace is shared across BL and LX to prevent cross-reaction leakage; BL acrylate
+  and LX aldehyde repeat-component families remain reaction-specific.
+- Preserved all 764 exact source-executed products and added a distinct
+  `admit_transform_consistency` structural-supervision disposition. Computed products can supervise
+  whole-graph and exact semantic-coordinate learning, but are never promoted to observed synthesis,
+  synthesis success, L2/L3 route closure, procurement or biological evidence.
+- Enumerated 24,231 source-linked component pairs with exact registry-backed forward programs. The
+  build admitted 22,187 new transform-consistent products and abstained on 1,434 attempts: 1,260
+  produced other than one constitutional product, 143 exceeded declared model support, 15 had
+  ambiguous atom origins and 16 represented eight products with multiple component factorizations.
+  Another 610 computed attempts duplicated source-executed products and were superseded by the
+  stronger source evidence.
+- The final corpus has 22,951 products and 1,461,956 exact semantic-atom rows. BL has 4,757 train,
+  2,350 calibration and 1,551 heldout products; LX has 6,904 train, 3,372 calibration and 4,017
+  heldout products. Within every program and fold, source-executed and computed strata each receive
+  0.5 total mass, with inverse component-family-size weighting. The model loader tensorized every
+  record without truncation at the declared 194-heavy-atom support and normalized each fold's
+  weights to one.
+- The original source-corpus files and fold assignments remain frozen. The expanded structural-
+  family contract changes 443 source-product fold labels in a new versioned split rather than
+  rewriting the older exact-component split.
+- Run `8836d21ced6526431f779cfe3209455d4fd31574652def2a8ce5bb5ef538fd37`
+  passed manifest verification and an independent strict reproduction with byte-identical outputs.
+  The attributable result is
+  `results/phase1/bl_lx_reaction_enumerated_expansion_v1/result.json` (SHA-256
+  `0574e4c322fc011b350f7cc2c8baaefa3bd121de36f0bcf32d3721e8ace47cc6`). The configuration SHA-256
+  is `ea62ab4ead3f25adedaa4854555a493432ec290154d35a076a61e996e1818999`.
+- **Decision:** use this source-balanced expansion as the versioned BL/LX structural-training input
+  for the next model experiment. It closes the data-volume and loader-readiness question, not model
+  performance. Do not launch paid training or claim multi-reaction generalization from this corpus
+  build alone.
+
+## 2026-08-27 - Freeze heterogeneous BL/LX reaction-enumerated support at demonstrated capacity
+
+- Added deterministic mixed-repeat enumeration so one BL or LX program can use distinct
+  source-linked repeat components at different reactive sites. Component structural families are
+  assigned before product construction, product folds retain heldout-precedence, and homogeneous
+  tuples remain in the earlier evidence layer.
+- Preserved the same exact one-product forward-replay, constitutional support, semantic-origin and
+  enumerated-set factorization gates. No component identity enters model conditioning, no biological
+  label is inherited, and computed rows remain reaction-enumerated support rather than observed
+  synthesis, synthesis-success or route-closure evidence.
+- A frozen Ugi-raw-count target failed closed. BL/train admitted 35,217 uniquely factorized mixed
+  products against 61,707 required additions. The attributable negative result is
+  `results/phase1/bl_lx_mixed_repeat_capacity_v1/result.json` (SHA-256
+  `b99c483f16326490877a41db36c9a684869d4a30e0e74ab6571ab6831890fcf7`). The factorization gate
+  was not relaxed.
+- Froze an exposure-balanced replacement with 30,000 train, 8,000 calibration and 8,000 heldout
+  products for each of BL and LX. The final 92,000-product corpus preserves 22,951 v1 products and
+  adds 69,049 mixed-repeat products from 187,337 fixed attempts. It contains 194,126 exact program
+  steps and 5,563,294 exact semantic-atom rows.
+- Source-executed, homogeneous computed and mixed computed rows receive 0.5, 0.25 and 0.25 mass
+  within every program/fold; inverse component-family-size weighting applies inside each stratum.
+  Thus family exposure is controlled without claiming equal raw support to Ugi.
+- Run `6dbe714882f4a5df448b661ace4c8e790f6f03a1dba756e4bcbc168ddfdaf6ea` passed independent
+  manifest verification and strict reproduction; all nine artifacts were byte-identical. The
+  attributable result is `results/phase1/bl_lx_mixed_repeat_expansion_v1/result.json` (SHA-256
+  `67c464bd191cec9d0bc3e6bef84079c49316a72f465f18ddcd5b494847c0ad76`) and the production config
+  SHA-256 is `2b2d96177351bddcc57fcc61ef0d66e5a55007cf2cb7b1fd86889cbd1882f7a5`.
+- Verification authenticated all 30 vendored assets. The clean-cache suite collected 1,919 nodes
+  and reproduced 189 known missing-artifact failures with zero new failures. Ruff, focused tests and
+  mypy passed. The broader `check-core` wrapper remains blocked before testing by 13 unrelated
+  pre-existing provenance drifts in the shared dirty worktree; none is an input to this corpus.
+- **Decision:** use the exposure-balanced mixed-repeat corpus as the next BL/LX structural-training
+  input. Do not weaken the uniqueness gate or describe computed products as observed chemistry.
+  This closes the virtual-library volume question; model performance still requires a new versioned
+  training experiment and is not established by corpus construction alone.
+
+## 2026-08-27 - Qualify the mixed BL/LX corpus against model support and close the local training handoff
+
+- The first full shared-representation census of the 92,000-product mixed BL/LX corpus failed
+  closed. It identified 2,185 homogeneous computed products outside the frozen Phase 1 model
+  support: 2,107 exceeded three graph closures and 78 used atom states absent from the pinned
+  vocabulary. The representation gate and vocabulary were not relaxed.
+- Added a versioned model-support-qualified rebuild that applies the pinned atom vocabulary and
+  three-closure limit before admission, records every exclusion, and deterministically refills the
+  existing 30,000 train, 8,000 calibration and 8,000 heldout quotas for each family. All 764
+  source-executed products remain present. The final 92,000 rows comprise 20,002 supported
+  homogeneous computed and 71,234 mixed computed products in addition to the source rows. The
+  result is `results/phase1/bl_lx_mixed_repeat_expansion_v2/result.json` (SHA-256
+  `5fa8e4f8bbc79ea4d286b1193262a9cf4bdea56a1ddeecfaf17363c387c5e980`).
+- The superseding representation census passed all eight gates for 204,386 Ugi/BL/LX products and
+  9,841,801 atoms, with the full 194-heavy-atom and three-closure bounds represented exactly. The
+  result is `results/phase1/shared_synthesis_program_mixed_representation_v1/result.json` (SHA-256
+  `426666c7f59dc6f5ec6143dc06d23cbfaef6c51af475ef20c53cdc6bbbed8ed7`).
+- Derived the expanded-data design from the qualified Transformer contract. All 13 gates pass; the
+  four arms, three seeds, matched compute, equal family mass, fixed-final checkpoint policy and Ugi
+  retention rules are unchanged. The design remains launch-blocked. Packed all 204,386 products in
+  a deterministic numeric-only 13.7 MB cache with exact folds, zero fixed-state failures and no raw
+  family-count sampling. The cache SHA-256 is
+  `249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114`.
+- The first optimizer smoke then failed closed because the count-only sampling prior assumed every
+  repeated role instance had the same atom count. Mixed products correctly violate that assumption.
+  Replaced the scalar size draw with an exchangeable sorted size-multiset draw, retaining counts but
+  no component identity, order, SMILES or fragment. The rerun completed two deterministic optimizer
+  steps with two examples from each family, finite losses and zero fixed-state failures. Its result
+  is `results/phase1/shared_synthesis_program_mixed_training_smoke_v1/result.json` (SHA-256
+  `cf17c4d4a16178bbe67c3304dc6e49bfa9b4a0ff912c83ed584bf398f0525843`).
+- Strict independent reproductions were byte-identical for the support-qualified corpus (run
+  `bde0ca3187cb035344743320a6fdf4daddce525d769b957f0c367e3c96e74992`), representation
+  (`d4aac5a22e29cf0ce8652a5901c9464d10f4756cd50bb46dde86b32c99966e1e`), derived design
+  (`dbc212f574084626d9feee51e5f173ed91f18c9c7ea10e85ab615dfdc82761ef`), packed cache
+  (`d003f48b609dba8ca43de7e71008535234e819ff02b2e9a73960ef363c986431`) and training smoke
+  (`55b264409716252067177d30d5f164d897ae84e0e24e25cfdf52fddc3dc38802`). Vendored data
+  verification passed 30/30; 58 focused tests, Ruff and mypy passed.
+- The repository-wide suite still does not pass because historical result files are absent. It now
+  reports the 189 frozen missing-artifact failures plus one unrelated paper-renderer expectation
+  mismatch introduced elsewhere in the pre-existing dirty worktree. The mismatch is
+  `test_completed_evidence_renderer_uses_only_pinned_nonselecting_results`; this task does not alter
+  that renderer or rewrite the frozen failure baseline.
+- **Decision:** the expanded shared Transformer pipeline is locally execution-ready. Treat the
+  corpus as reaction-enumerated support and the smoke as infrastructure only. Do not claim improved
+  BL/LX generation until a new production run is evaluated, and do not upload private inputs or
+  launch paid exact-H100 work without explicit authorization.
+
+## 2026-08-27 - Optimize the shared Transformer training hot path without changing its contract
+
+- Profiled the full 5,289,901-parameter Ugi/BL/LX Transformer on a source-balanced batch drawn from
+  the frozen 204,386-record packed cache. The measured hot path was attention plus the three-family
+  balanced backward; packed-cache materialization and collation took a representative 1.58 ms for
+  a production-size 32-record CPU batch and was not the limiting path.
+- Replaced materialized attention scores/probabilities with PyTorch scaled-dot-product attention,
+  while retaining the same query/key/value/output parameters and additive graph/program masks.
+  Removed a per-layer CUDA host synchronization from the shared structural-attention validator; CPU
+  callers retain the defensive empty-memory check.
+- Rewrote repeat-component consistency to gather only admitted matched positions before evaluating
+  class-valued atom and bond differences. On the pinned benchmark batch this reduced evaluated
+  class-valued pair elements from 4,604,256 to 4,212 (99.91%) without changing the loss. The
+  optimizer update is now launched before detached metrics cross the accelerator boundary, avoiding
+  a backward-to-AdamW host synchronization bubble without changing parameters or diagnostics.
+- The nine-repeat deterministic CPU benchmark improved the median forward, loss and equal-family
+  PCGrad backward time from 0.33830 s to 0.30421 s (1.112x). Losses were identical, maximum absolute
+  gradient difference was 4.77e-7 inside the frozen tolerance, graph-bias outputs were bit-identical,
+  and standalone PCGrad gradients remained bit-identical. The attributable result is
+  `results/phase1/shared_synthesis_program_training_performance_v1/result.json` (SHA-256
+  `81e6247e951cda82634511e39a381e7215dad12e793e7b350e3ace8f0061390b`).
+- The actual two-step training/evaluation DAG completed and verified as run
+  `197d0c26c5e0962be9a8d1cf86dfb72cadf07dfd34354e6ffe83cfdd35b234f7`; an independent strict
+  reproduction was byte-identical for all six published artifacts.
+- **Decision:** retain these contract-preserving optimizations for subsequent training. This CPU
+  result establishes implementation equivalence and a local speedup, not exact-H100 throughput.
+  Keep deterministic float32, the full 194-heavy-atom support, the frozen source-balanced mixture
+  and per-family PCGrad unchanged. A current exact-GPU preflight is still required before estimating
+  production wall time or enabling mixed precision, compilation or alternative batch geometry.
+
+## 2026-08-27 - Retain eager true FP32 after exact-H100 optimization qualification
+
+- Ran two authenticated, verified profiles on an exact NVIDIA H100 80GB HBM3 using the frozen
+  5,289,901-parameter mixed Ugi/BL/LX Transformer, source-balanced 32 x 4 PCGrad step and full
+  194-heavy-atom support. The eager true-FP32 baseline measured 0.35855 s per optimizer step
+  (351.63 examples/s), reserved 1.71 GB at peak and replayed losses and final parameters exactly.
+- BF16 eager and compiled execution were slower than true FP32 and changed the three-step parameter
+  update by 17.85% in relative L2. FP32 compilation was 1.092x faster but changed the update by
+  18.42%; variable padded sequence lengths triggered repeated recompilation. These modes failed
+  their prespecified numerical-equivalence gates.
+- Increasing the microbatch from 32 x 4 to 64 x 2 or 128 x 1 was 1.349x and 1.320x faster,
+  respectively, but changed where per-family PCGrad projection occurs and changed the update by
+  about 24.5%. These are different scientific optimizers and were not promoted.
+- At the user's explicit request, separately qualified TF32 rather than assuming it was equivalent.
+  TF32 eager changed the update by only 0.46% in relative L2, but was 1.2% slower than the matched
+  true-FP32 baseline. TF32 plus compilation was only 1.032x faster and inherited the 18.43%
+  compile-path update drift. Neither cleared the frozen promotion gates.
+- The attributable summary is
+  `results/phase1/shared_synthesis_program_mixed_h100_profile_v1/result.json` (SHA-256
+  `1d39ab70653998660c29525185bf8bd8d3888357b757a6484c9dc237fb70adeb`); its two verified source
+  artifacts have SHA-256 values
+  `b06bc0994b0ce277b487dbc76c30756d991de1a50df441a991b1c4ce203b138f` and
+  `447b4ea784b366c6dd2c2d54909b0bd568c4d8240345cb0f81ae610de4a055d5`.
+- **Decision:** retain deterministic eager true FP32, the 32 x 4 batch geometry, equal-family source
+  balancing, PCGrad and full 194-atom support. Do not enable TF32, BF16, compilation or a new batch
+  geometry: none produced a contract-preserving speedup. The next optimization target is the
+  variable-shape collation/attention schedule or the PCGrad implementation itself, measured without
+  changing its mathematical partition.
+
+## 2026-08-27 - Complete recovered seed-0 mixed-family training and support-conditioned evaluation
+
+- The authorized exact-H100 conditioned-arm run was externally interrupted at optimizer step 1,475,
+  not by a numerical or model failure. Its deterministic restart checkpoint was intact. Resuming the
+  same content-addressed workspace completed all 1,700 prescribed steps, 217,600 examples, five
+  fixed checkpoints and zero fixed-state failures. The final model-state SHA-256 is
+  `ea9afefa77fe4a473bf5911c0b63e10dfdf652aff44090ad8b009c9f3a324dd0`.
+- The first evaluation then failed closed before model sampling because independently factorized BL
+  role-size draws could combine into a graph larger than the declared 194-heavy-atom support. This
+  was a count-prior support bug, not evidence about the trained model. Replaced rejection-prone
+  independent draws with the exact factorized role-size product law conditioned on total size at
+  most 194. This performs no clipping, repair, retry, attempt dropping, component lookup or heldout
+  access.
+- The corrected preflight materialized all 16,896 frozen layouts across 18 evaluation cells. Every
+  layout was in support; the observed maxima were 194 atoms for BL, 166 for LX and 63 for Ugi. The
+  local and remote preflight results were byte-identical with SHA-256
+  `8ec7aa67c2875a6e3f5bde26bca26e0aa57fc20840eb4452ab7451f2047f6677`.
+- Evaluation-only run `f06674c61e3019aa5c54dbefb8e44fb1c36bacc7fffda9235e64a713eedc3d5f`
+  completed on the recovered checkpoints with zero training, repair, retry, route, oracle or
+  candidate-selection calls. At the fixed final checkpoint and 3,072 heldout attempts per family,
+  exact-L1 yield was 70.41% for BL, 30.34% for LX and 72.01% for Ugi. Raw validity was 70.48%,
+  40.98% and 89.36%, respectively. Exact forward-replay precision was 100% for every family;
+  decomposition coverage was 99.91%, 74.03% and 80.58%.
+- The full attributable evaluation result has SHA-256
+  `c9dff27cfe2e4c010456828d9d93664380727da1d5d9671977b50676fe550217`.
+  The compact result is
+  `results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/result.json` (SHA-256
+  `8c9123decbc53df1d0ee215d1bf26dde7b315a4e3741738e62070ec934673859`).
+- **Decision:** seed 0 is a positive execution result for Ugi and BL, with exact-L1 yield near 72%
+  and perfect admitted forward replay. LX remains the limiting family at 30.3% exact-L1 yield.
+  Do not report across-seed variance, robustness or baseline superiority until matched seeds 1 and
+  2 and the prespecified comparisons run under the same support-conditioned layout contract.
+
+## 2026-08-27 - Admit full role-local morphology as a bounded Transformer projection ablation
+
+- Audited the frozen v0-versus-mixed comparison and identified an information asymmetry: v0
+  receives per-role exterior size, junction budget, cycle rank and core-attachment count, whereas
+  the frozen mixed Transformer receives role layout sizes and only a global closure count. This is
+  a confound in any claim about the GRU and Transformer backbones themselves.
+- Added four node-aligned, categorical role-local program coordinates to the shared Transformer
+  memory. Zero is an explicit unconditioned state and observed nonnegative integers use `value + 1`,
+  so a conditioned zero-junction role is distinguishable from missing conditioning. The coordinates
+  contain no component identifier, molecular fragment, fingerprint or finite component vocabulary.
+- The values are derived deterministically from exact training graphs. The factorized sampling prior
+  now draws role morphology conditional on role sizes and conditions the finite product law on the
+  existing three-closure support without clipping, repair, retry or attempt dropping. Frozen models
+  remain compatible and ignore the new states unless `role_morphology_conditioning=true`.
+- Across the 204,386-record mixed cache, observed maxima are 160 exterior atoms, 29 junction units,
+  three cycles and eight core attachments; the embeddings retain the already declared 194-atom and
+  three-closure architectural support. The full intervention has 5,442,541 parameters versus
+  5,328,685 for the frozen repeat-aware reference.
+- Local run `e96e19e170922e23e626e6d5f8cd0742c75711c7247984d262531f44393971e2`
+  completed the two-step balanced Ugi/BL/LX training, strict checkpoint reload and Ugi sampling DAG.
+  All execution gates passed, fixed-state failures were zero and route, oracle, repair, retry and
+  candidate-selection calls were zero. The result SHA-256 is
+  `a15cc924bc4f9bc26df5efa99f5651f89f7fb47179cf8c92b031b55fe583de4e`.
+- **Decision:** run one exact-H100 seed-0 intervention under the unchanged 1,700-step, 32 x 4,
+  equal-family PCGrad schedule and compare it on the same ordered 3,072 Ugi programs. Treat this as
+  a projection ablation. Do not attribute an improvement to the Transformer backbone alone or
+  claim across-seed robustness unless the full-information result first passes and is replicated.
+
+## 2026-08-28 - Retain output-exact Ugi sampling and assessment optimizations
+
+- Profiled one frozen 3,072-attempt assessment before changing the implementation. Wall time was
+  47.96 s; the dominant cumulative costs were rebuilding Ugi identity references (16.88 s),
+  rebuilding the observed-lipid realism reference (13.31 s) and the frozen C2ST (10.18 s). Exact-L1
+  decomposition itself used only 1.34 s. Added content-addressed, in-process caches keyed by the
+  resolved input paths, file SHA-256 values and complete frozen policy/role tuple. A second matched
+  arm then completed in 19.18 s with every selected metric unchanged.
+- Tested three-way threaded assessment as an explicit alternative. It regressed cold and warm wall
+  time to 129.26 s and 62.55 s because RDKit and sklearn oversubscribed the available CPU. This
+  negative result is retained; assessor execution remains sequential.
+- Removed repeated CUDA synchronization from fixed-state audits, kept strict terminal decoding on
+  CPU after one batched logits transfer, eliminated per-sample CPU-to-GPU-to-CPU terminal copies,
+  restored adapter-fixed states in place under inference mode and reused per-batch time tensors.
+  The batch size, RNG stream geometry, 32 denoising steps, strict decoder, support and all scientific
+  gates remained fixed. A local 64-program checkpoint comparison reproduced the complete sample and
+  receipt rows exactly; the final in-place change reduced its CPU wall time from 17.69 s to 16.11 s.
+- Repeated the gated two-checkpoint, 3,072-attempt-per-checkpoint experiment on an exact NVIDIA H100
+  80GB HBM3. The post-preflight comparison interval fell from 369 s to 244 s (1.512x, 33.88% less
+  wall time). More importantly, the complete comparison result and detail archive were byte-identical
+  to the prior run, with SHA-256 values
+  `9a3eda0a90adfc81dcd563506b5a7bf1bfd3225f963d1b77257f46eea6762028` and
+  `3d327b7f8d589f22a7deef5a79c9de3e3259ba0ad4f663d8e22fd5707611b481`.
+- The attributable benchmark is
+  `results/phase1/ugi_sampling_evaluation_performance_v1/result.json` (SHA-256
+  `95b24439a70be0e144d1166c3bb9d48014075cf5eb07bedddbdad48769094565`). The optimized verified run
+  is `44fe4d98fd34af48deed183d718b455c09c1fe0419a0b773caf101cecf61c678`.
+- **Decision:** retain the content-addressed reference caches and output-exact sampler changes.
+  Reject thread-parallel assessment. Do not change inference batch geometry, precision, sample
+  steps, declared molecular support or terminal policy without a separate numerical and
+  distributional equivalence qualification.
+
+## 2026-08-28 - Freeze exposure-matched shared-plus-specialist reaction models
+
+- Audited the authenticated full-role-morphology Transformer rather than attributing its Ugi gap to
+  architecture alone. Its 1,700-step equal-family schedule exposed the shared model to 68,000 Ugi,
+  74,800 BL and 74,800 LX train-fold rows. The qualified v0 development checkpoint saw 384,000 Ugi
+  draws (3,000 steps x effective batch 128). The mixed Transformer's Ugi path was therefore short by
+  316,000 examples; it did not receive comparable Ugi training exposure.
+- Added zero-initialized residual specialists after every shared Transformer block. A newly attached
+  specialist is output-identical to the authenticated shared checkpoint before training. Only
+  148,992 specialist parameters are trainable (2.66% of the combined model); all 5,442,541 shared
+  parameters remain frozen. Specialist checkpoints contain only the delta plus authenticated base,
+  cache, seed and exposure receipts.
+- Froze exact cumulative exposure at 384,000 rows for each family. Ugi receives 316,000 additional
+  source-balanced train-fold draws in 2,469 optimizer steps, ending with microbatches 32/32/32. BL
+  and LX each receive 309,200 additional draws in 2,416 steps, ending with 32/32/16. The short final
+  update is explicit; no record is added through batch padding and no heldout row is accessed.
+- Added an opt-in exact program-topology decoder. It fixes only declared reaction-core assembly
+  edges, confines generated interior edges to their precursor component and requires exact
+  per-role exterior-size, junction, cycle and core-attachment coordinates. It contains no component
+  identity or finite component inventory. Infeasible attempts abstain once; repair and retry remain
+  prohibited. Legacy terminal policies are unchanged for historical comparisons.
+- The authenticated CPU smoke used the real final shared checkpoint, conserved its six-row test
+  exposure through a short final microbatch, produced zero fixed-state failures and passed every
+  no-heldout/no-repair/no-route gate. The result is
+  `results/phase1/reaction_specialist_ugi_smoke_v1/result.json` (SHA-256
+  `2aed7c7730dba055e85463a73796cedd18ca6bbc5d7089ab4107accde95b87c2`); the delta checkpoint SHA-256
+  is `882146c85096673eef11677cb6a166e77680c77ba8dbbf9dca8a4e57b6288f7c`.
+- Froze Modal group `phase1-reaction-specialists-seed0-h100`: one exact-H100 execution preflight
+  gates three independently allocated, parallel family-specialist experiments. The Ugi experiment
+  is followed on its accelerator by a paired 3,072-program comparison with v0 using method-blind
+  exact-L1, validity, local-chemistry, lipid-realism, diversity and novelty assessment. Ugi example
+  exposure is matched; total pretraining compute and model factorization are explicitly not called
+  matched.
+- `make verify` authenticated all 30 vendored inputs. The 99-test focused model, sampler, training,
+  orchestration and assessment suite passed. The repository-wide test cache still contains 190
+  failures: 189 are inherited baseline failures dominated by 54 documented missing historical
+  artifacts, and one is the already observed completed-evidence renderer mismatch outside this
+  implementation. The specialist experiment is locally qualified, but the repository as a whole is
+  therefore not represented as globally green.
+- **Decision:** use shared pretraining plus exact family specialists as the next bounded test of the
+  exposure diagnosis. Do not discard the shared Transformer, unfreeze its backbone, train on raw
+  family counts, or claim superiority from the smoke. A fresh paid H100 launch still requires the
+  user's explicit authorization; negative or non-inferior outcomes remain first-class results.
+
+### Production-launch correction
+
+- The user authorized one paid exact-H100 preflight followed by three paid exact-H100 specialist
+  experiments in parallel. Initial Modal app `ap-yHRYnVNFRWOsOcSW2RtRrf` was stopped before a
+  preflight receipt or production result was admitted after inspection showed that the generic DAG
+  runner executes every topological stage sequentially inside one accelerator allocation. The
+  descriptor's parallel metadata did not change that runtime behavior.
+- Replaced that invalid execution shape with a strict Modal group contract: one standalone
+  preflight experiment, followed only on exit code zero by three concurrently launched standalone
+  Ugi, BL and LX experiment requests. Each member requests its own exact `H100!`; the Ugi request
+  alone continues to the paired v0 assessment. Group members pin their complete experiment
+  descriptors and the group planner requires one common executable source fingerprint.
+- The corrected group dry-run passed with group SHA-256
+  `8a1f2707a504fdc55b5419b046431d515de84f40324f1458d7c86fe1d44fe92a` and source SHA-256
+  `c306cb61c0f25285fdbe82316ebceb2f227a3c9d2ddfcdd4d3d387c90e01454e`. Its preflight request is
+  `e29f71d43060146481ecd94dff856aa82518dbe71ffcb188fd4f7c3711cb2d59`; independently allocated
+  Ugi, BL and LX requests are respectively
+  `4cf7e072e5ed0a6372be4f9f71378bcbe0ab89f449cdb94a2d6a0e98f0635fce`,
+  `6d82b1221d2e8b4d37b1ffa8e56122d3425a0a326e4cb2ad6ef562c85bc564b0` and
+  `7260c46a9e9b23cad5938ef89fea1d21b01f8816e9133f10a2bd6f980e6ce66e`.
+  All 20 group/runtime/specialist tests and the broader 110-test model, sampler and experiment
+  regression set passed; all 30 vendored inputs verified.
+- **Decision:** the stopped app is inadmissible and must not be resumed. The corrected group requires
+  a fresh paid authorization because the first launch consumed the prior authorization and the
+  executable source fingerprint changed during the orchestration repair.
+
+## 2026-08-28 - Preserve completed reaction specialists and recover Ugi assessment without retraining
+
+- The user authorized the corrected exact-H100 group. Preflight run
+  `34d287c7022d9b9b602ee379b676c707b23b2c943982f5dbf0c84d7f61554c4e` completed and verified,
+  after which Ugi, BL and LX received independent exact-H100 allocations concurrently. Executable
+  source SHA-256 at launch was
+  `a42ff9bb93cb8bab7fc8d41907a2df8e840fff06e89df78ed9495c832b76b109`.
+- BL run `beba255a969b06b7b730c93d8a4cd085e9e1dc973718be6b6306f3e13badb6d2` and LX run
+  `cb87b261bc5d0c4cc0b6442579c4bd2e9a69ee7ce816efad34fac1d620f8cfb2` completed and verified.
+  Each reached exactly 384,000 cumulative train-fold examples in 2,416 optimizer steps, with zero
+  fixed-state failures, heldout access, repairs, retries, route calls or oracle calls. Their delta
+  checkpoint SHA-256 values are respectively
+  `42977fea0e89312bc4f7f67f9bcd7b89074a4027d28ab06422e8c734388da414` and
+  `978541e440fe71a4c97106519d6c5dede9b81008d911c228180d0abab10820d3`.
+- Ugi training in remote run
+  `aada90e0d50f69fbbf2bc465f38c84e970ee1bd3a8610885ec1fcec071f0d0e9` also completed its exact
+  384,000-example exposure contract in 2,469 optimizer steps and passed every training gate. Its
+  authenticated delta checkpoint, result and progress SHA-256 values are
+  `7f28c776052da19600f770b3f0341abc9514f3029b01d742069c41233a08ae08`,
+  `404fa21eff57ae5aae6e8788030414921d7d1cd77c16ed5ae3e75cc5615a711c` and
+  `d3a2adfbb53e7dfb297867275ae46e8ab083c0451eeb65c930b27c4497c3c725`. They are preserved under
+  `results/phase1/reaction_specialist_ugi_seed0_h100_v1/`.
+- The Ugi job failed only after sampling and method-blind assessment, when the decision writer
+  requested the frozen per-attempt open-ended exact-L1 metric but the selected-metric projection
+  exposed only its per-1,000-attempt form. Added the algebraically identical per-attempt label,
+  made decision metrics config-driven and fail-closed, and added a standalone recovery descriptor
+  that requires the adjacent specialist checkpoint and training result as explicit hash-pinned
+  inputs. The recovery has one evaluation stage and declares zero training calls.
+- `make verify` authenticated all 30 vendored assets. The 12-test focused specialist/recovery suite
+  passed and the exact-H100 smoke plan resolved all pinned uploads. The repository-wide suite still
+  fails on the already documented historical result-artifact gaps and stale frozen-output
+  expectations; no missing evidence was fabricated and no gate was relaxed.
+- **Decision:** BL, LX and Ugi specialist training are complete and must not be rerun. Run one new
+  paid exact-H100 four-program recovery preflight; only if it verifies, run the full 3,072-program
+  Ugi-specialist-versus-v0 assessment from the preserved checkpoint. This follow-up consumes a new
+  paid authorization because the assessment source and descriptor have changed.
+
+### Recovery-preflight result-labeling correction
+
+- Authorized recovery request
+  `f871ba6a20650cd3f07525d0e8ed71d8af4460e13237492273274e10f433ff0b` ran on an exact H100 and
+  failed closed before the full assessment was launched. On the four-program smoke draw, the mixed
+  specialist produced fewer than two unique valid molecules, so pairwise ECFP4 diversity was
+  correctly `null`; the selected-metric projection incorrectly coerced that optional diagnostic
+  to `float`.
+- Optional small-sample metrics now preserve `null`, and cross-method deltas remain unavailable
+  when either method lacks the metric. Metric key sets must still match, and every metric used by
+  the frozen decision rule is checked separately and fails closed if unavailable. This changes no
+  molecule, sampler, assessor denominator, decision threshold or trained parameter.
+- The 13-test focused suite passes. The corrected request is
+  `b92febec1644671ffd3724e2435f820d3cd5ba8707a1ae558f55897e3f8e3539` under source SHA-256
+  `a3c82712edd2b15304801d6c712b46f32cc81eef380c97ae35b8fab09aba07cf`.
+- **Decision:** the failed smoke is an inadmissible engineering preflight, not a scientific result.
+  It consumed the prior paid authorization. Do not launch a corrected smoke or the full assessment
+  without a fresh explicit authorization.
+
+### Verified recovery and full Ugi-specialist comparison
+
+- The user authorized one corrected exact-H100 recovery preflight and a gated full assessment.
+  Four-program preflight run
+  `acd519cd4b4ff320f2cb8ff65fb347b1b9ec979d8fd380d0a9d423e627399a13` completed and independently
+  verified all nine execution gates. Only then was the full assessment launched.
+- Full exact-H100 run `323ed40d62a18fa6de6012e293a828f7d1027a0b2fc6a6b40f798a4726b0b39c`
+  completed and independently verified under source SHA-256
+  `a3c82712edd2b15304801d6c712b46f32cc81eef380c97ae35b8fab09aba07cf`. The result and detail
+  archive SHA-256 values are respectively
+  `a7b9512974261b5b00c7f45d8a63005acfb1845d0e7012c4bf7dac975ce478d5` and
+  `59216245cc6f7c2211684db85dfacd98a42dfb277cf9556fbb4a220c13e69c7e`.
+- On the same ordered 3,072 programs per method, the exposure-matched Ugi specialist achieved
+  5.31% validity, 5.27% exact-L1 yield and 3.87% local-support-qualified exact-L1 yield. Frozen v0
+  achieved 97.56%, 97.17% and 95.48%, respectively. The primary unique open-ended,
+  whole-product-novel exact-L1 rate was 4.95% for the specialist and 75.33% for v0, a -70.38
+  percentage-point specialist-minus-v0 difference.
+- The specialist had higher component novelty conditional on a successful decomposition (93.83%
+  versus 78.32%) and every specialist valid product was novel to training, but these conditional
+  values do not compensate for its 5.31% attempt-level validity. No repair, retry, route call,
+  oracle call, candidate selection or additional training occurred.
+- **Decision:** reject the shared-plus-Ugi-specialist arm under the frozen gate and retain v0 as the
+  qualified Ugi reference. Exposure matching through lightweight residual adapters did not close
+  the Transformer validity or exact-L1 gap. Do not launch more specialist seeds or BL/LX evaluation
+  solely from this result; first attribute the Ugi failure to topology decoding, adapter capacity,
+  or incompatibility between frozen shared features and the specialist delta using the saved
+  attempt ledger.
+
+## 2026-08-28 - Qualify an explicit topology-coupled Transformer correction
+
+- The strongest loose-decoding full-role-morphology Transformer achieved 81.22% exact-L1 yield on
+  the frozen 3,072-program Ugi draw, versus 97.17% for v0. Inspection identified a factorization
+  mismatch: v0 learns child counts and constructs a program-feasible forest before decoding
+  chemistry, whereas the mixed Transformer predicted every parent and closure independently and
+  checked the requested topology only after decoding.
+- Added a child-count head with direct exterior-offspring cross-entropy and role-local
+  junction-budget consistency. Added one exact Ugi topology conditional that conserves exterior
+  size, junction count, cycle rank and core attachments under the pinned 5/6/7-member ring,
+  heavy-degree and role-local branch-spacing support. Chemistry is then predicted in a second
+  Transformer pass conditioned on that topology. This selects no stored component or fragment and
+  does not repair or retry a completed product.
+- The exhaustive CPU support preflight constructed exact requested morphology for all 3,072 frozen
+  programs: 1,040 zero-cycle, 1,845 one-cycle, 186 two-cycle and one three-cycle row, with zero
+  failures or mismatches. The result is
+  `results/phase1/ugi_transformer_topology_support_preflight_v2/result.json` (SHA-256
+  `b7721f4231f11942634ad5de5421c467924d324fcc50129bbdf7ed80e396e9f2`).
+- The authenticated CPU training smoke passed every gate. It updated only 149,764 Ugi adapter plus
+  child-count-head parameters while keeping 5,442,541 shared parameters frozen, conserved its exact
+  eight-example exposure, produced zero fixed-state failures and reduced its two-step smoke loss
+  from 4.0050 to 2.5642. Verified run ID is
+  `d3e95ace6c9e8fd8a17bab909a70e69119b9938ce02d4f8321fcb187272f8a13`.
+- Froze one fail-closed exact-H100 sequence: execution preflight, exposure-matched seed-0 topology
+  specialization to 384,000 cumulative Ugi examples, then one paired 3,072-program comparison with
+  v0 using the existing method-blind assessors. The local readiness receipt is
+  `results/phase1/ugi_transformer_topology_correction_v2/result.json`.
+- `make verify` authenticated all 30 vendored assets and the 53-test focused Transformer,
+  topology-decoder, specialist, sampler, experiment and evidence suite passed. The repository-wide
+  suite remains non-green with 191 cached failing/error node IDs dominated by missing historical
+  result artifacts; the only architecture-boundary failure is a pre-existing untracked legacy
+  experiment-group descriptor. No topology-correction test appears in that failure cache, and the
+  repository is not represented as globally green.
+- **Decision:** the implementation and full frozen program support are qualified locally, but the
+  scientific gap is not yet called fixed. A paid H100 launch still requires explicit authorization.
+  Claim closure only if the paired production assessment actually matches or exceeds the frozen v0
+  reference without weakening validity, local-support, novelty or no-repair gates; preserve a
+  negative outcome if it does not.
+
+## 2026-08-28 - Replace frozen topology specialization with matched end-to-end shared retraining
+
+- The user chose to integrate the transferable v0 biases into the shared Ugi/BL/LX Transformer and
+  retrain the complete model, rather than continue with a frozen shared backbone plus a Ugi-only
+  topology specialist. The new production model has 5,593,463 trainable parameters; no shared
+  parameter is frozen and no reaction-specific GRU is attached.
+- Added smoothed program/role-conditioned atom and bond noise marginals with program and global
+  backoff. Every atom and bond state retains strictly positive support in every cell. The production
+  experiment contains a matched global-source control because the program/role source may be
+  retained only if it improves held-component generation without component-catalog collapse.
+- Added equal-present-role chemistry loss, direct exterior child-count and junction-budget
+  objectives, program-routed terminal-node chemistry and closure output heads, and a second
+  chemistry prediction pass conditioned on the exact training topology. These mechanisms are
+  program-generic and use role, topology and reaction-program coordinates; they do not select a
+  predefined head, linker, tail, fragment or component.
+- Froze seed 0 at 9,000 optimizer steps, effective batch size 128, equal Ugi/BL/LX family mass and
+  checkpoints 100/500/1,700/4,500/9,000. This gives each family 384,000 examples. The paid
+  descriptor first runs a three-step exact-H100 preflight and launches the two matched production
+  arms only if that stage completes.
+- Registered smoke run `c4d2dd73329a89fd82515a114b7fbdfc0a0957e3882b95ee5df14e19381dce7c`
+  completed and independently verified. Both arms trained, checkpointed and sampled; all fixed
+  states were exact, both source arms had equal parameter counts, all program/role marginals had
+  full support, and route, oracle and candidate-selection calls were zero. The hash-pinned readiness
+  receipt is `results/phase1/shared_bias_end_to_end_retraining_v1/readiness.json`.
+- **Decision:** the end-to-end retraining implementation is locally qualified. Do not call the v0
+  gap closed, promote the program/role source, or use either arm for paper claims until the exact-H100
+  preflight and fixed step-9,000 evaluation complete. Paid H100 execution remains a separate
+  explicitly approved action.
+
+## 2026-08-28 - Preserve the failed shared-bias H100 preflight and correct its scope binding
+
+- The user authorized one paid three-step exact-H100 preflight followed, only on verification, by
+  both seed-0 9,000-step end-to-end arms. Modal app
+  `ap-92X4FDC8pNaV51h3LNySnF` ran request
+  `700d92de4f0efb90e13fa66de64ec04e319b0e2eec25b98578e8f7e1d08c9a9a` under source SHA-256
+  `29713623b41cabcaafab39ac19c0f074bb0018c6db9c55c94a53174877945706`.
+- The preflight trained both three-step arms but failed closed before completing evaluation because
+  the generic evaluator interpreted every `full` device profile as a production-quality evaluation
+  and rejected the intentionally bounded preflight sampling budget. This was experiment wiring, not
+  a model, memory, CUDA, or scientific failure. The production stage did not launch.
+- Corrected the evaluator to bind reduced full-device budgets only to the explicit
+  `h100_preflight` execution scope. The `production` scope still rejects any deviation from 32 flow
+  steps, 512 calibration samples, 3,072 held-out samples per supported program, or the uncapped
+  component-disjoint fold. An explicit regression test confirms that substituting the preflight
+  budget into production still fails.
+- The 18-test focused evaluator/preflight suite passed, formatting and lint passed, and corrected
+  local smoke run `33098fe9cb4c01397c503a079104195e018ab3266a9d3c7a6a13a79a02035011`
+  completed both arms with a verified stage-manifest SHA-256 of
+  `dfc9e021a35267982ed44df414bb53ed7303e7add28ae0250e92afe1a6f2ffb5`.
+- **Decision:** preserve the failed preflight as an inadmissible engineering result and do not launch
+  production from it. The corrected retry is frozen as request
+  `c96e086fc971c392acd8386d62e5e783aa705be19b7aa3535b7ab81c050088ef` under source SHA-256
+  `ed0cb774636583adf5799d70850ea1766d721ba0762cd4b492360ce2008b8007`; because the one-preflight
+  authorization was consumed, a new paid retry requires fresh explicit authorization.

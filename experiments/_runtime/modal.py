@@ -5,13 +5,15 @@ from __future__ import annotations
 import subprocess
 import sys
 import tempfile
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
 from experiments._runtime.errors import BackendError
 from experiments._runtime.source import source_fingerprint
 from experiments._runtime.spec import ExperimentSpec
-from forge.core.hashing import sha256_file, sha256_json
+from forge.core.hashing import PinError, resolve_pin, sha256_file, sha256_json
+from forge.core.io import read_json_object
 
 
 def modal_volume_relative_path(path: Path, volume_root: Path) -> str:
@@ -33,6 +35,85 @@ def modal_run_staging_paths(local_run: Path) -> tuple[Path, Path]:
     staged_run = staging_root / local_run.name
     staged_run.mkdir()
     return staging_root, staged_run
+
+
+def _config_dependency_uploads(repo: Path, config_path: Path) -> dict[str, Path]:
+    """Resolve the recursive ``inputs`` closure of one hash-pinned JSON configuration.
+
+    Experiment specifications pin their stage configs and immediate data inputs.  Assessment
+    configs may themselves compose other pinned configs and data.  Modal must upload that closure,
+    while the remote assessment code remains responsible for independently verifying every pin.
+    Only top-level ``inputs`` mappings are traversed, so arbitrary result/provenance records are
+    never mistaken for execution dependencies.
+    """
+
+    repo = repo.resolve()
+    uploads: dict[str, Path] = {}
+    visited: set[Path] = set()
+
+    def visit(path: Path, *, depth: int) -> None:
+        resolved = path.resolve()
+        if resolved in visited or resolved.suffix.lower() != ".json":
+            return
+        visited.add(resolved)
+        value = read_json_object(
+            resolved,
+            error=BackendError,
+            label=f"Modal configuration dependency {resolved.relative_to(repo)}",
+        )
+        inputs = value.get("inputs")
+        if inputs is None:
+            return
+        if not isinstance(inputs, Mapping):
+            raise BackendError(
+                f"Modal configuration inputs must be an object: {resolved.relative_to(repo)}"
+            )
+        for label, pin in sorted(inputs.items()):
+            # Some historical documents use an ``inputs`` object for metadata-bearing evidence
+            # records.  They are not ``resolve_pin`` contracts and are loaded only by their owning
+            # workflow.  Traverse the runtime's exact two-field pin type and leave all other
+            # records alone.
+            if not isinstance(pin, Mapping) or set(pin) != {"path", "sha256"}:
+                continue
+            try:
+                dependency = resolve_pin(
+                    pin,
+                    repo,
+                    label=f"{resolved.relative_to(repo)}:{label}",
+                )
+            except PinError as error:
+                raise BackendError(str(error)) from error
+            relative = dependency.relative_to(repo).as_posix()
+            uploads[relative] = dependency
+            # Active experiment configs compose at most two configuration layers below the stage
+            # config.  At that boundary, upload every declared input but do not recursively walk
+            # into data registries that happen to be JSON and carry their own archival ``inputs``.
+            if depth < 2:
+                visit(dependency, depth=depth + 1)
+
+    visit(config_path, depth=0)
+    return uploads
+
+
+def modal_upload_paths(repo: Path, spec_path: Path) -> dict[str, Path]:
+    """Return the complete authenticated file set required by one remote experiment."""
+
+    repo = repo.resolve()
+    spec_path = spec_path.resolve()
+    spec = ExperimentSpec.load(spec_path)
+    uploads: dict[str, Path] = {str(spec_path.relative_to(repo)): spec_path}
+    for stage in spec.stages:
+        config_path = stage.config.resolve(repo)
+        uploads[stage.config.path] = config_path
+        uploads.update(_config_dependency_uploads(repo, config_path))
+        for pin in stage.inputs.values():
+            uploads[pin.path] = pin.resolve(repo)
+    for relative in ("pyproject.toml", "uv.lock"):
+        path = repo / relative
+        if not path.is_file():
+            raise BackendError(f"Modal execution requires {relative}")
+        uploads[relative] = path
+    return dict(sorted(uploads.items()))
 
 
 def modal_request_plan(
@@ -62,15 +143,7 @@ def modal_request_plan(
     if None in gpu_types or len(gpu_types) > 1:
         raise BackendError("all CUDA stages in one Modal DAG must declare the same gpu_type")
 
-    uploads: dict[str, Path] = {str(spec_path.relative_to(repo)): spec_path}
-    for stage in spec.stages:
-        for pin in (stage.config, *stage.inputs.values()):
-            uploads[pin.path] = pin.resolve(repo)
-    for relative in ("pyproject.toml", "uv.lock"):
-        path = repo / relative
-        if not path.is_file():
-            raise BackendError(f"Modal execution requires {relative}")
-        uploads[relative] = path
+    uploads = modal_upload_paths(repo, spec_path)
     source_sha256 = source_fingerprint(repo)
     request_id = str(
         sha256_json(
@@ -156,5 +229,6 @@ __all__ = [
     "launch_modal",
     "modal_request_plan",
     "modal_run_staging_paths",
+    "modal_upload_paths",
     "modal_volume_relative_path",
 ]

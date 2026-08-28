@@ -15,6 +15,7 @@ from experiments.phase1.product_l1.sampling.ugi_joint_end_to_end_sampling import
     _slice_matched_programs,
     complete_ugi_joint_terminals,
     flow_endpoint_chemistry_sample,
+    joint_sampling_result_matches_request,
     sample_ugi_joint_end_to_end,
 )
 from experiments.phase1.product_l1.training.ugi_training_cache import load_ugi_training_cache
@@ -24,6 +25,34 @@ from forge.model.ugi_joint_sparse_flow import UgiJointSparseTerminal
 from forge.model.ugi_morphology_program import UgiMorphologyProgram
 
 torch = pytest.importorskip("torch")
+
+
+def test_persisted_sampling_receipt_is_bound_to_the_execution_device() -> None:
+    result = {
+        "status": "complete_sampling_reference_deferred",
+        "seed": 17,
+        "samples": [{"valid": False}],
+        "sampling": {
+            "program_offset": 0,
+            "program_limit": 1,
+            "matched_global_programs": 1,
+            "device": "cuda",
+            "terminal_decoder": {"mode": "stochastic", "seed": 19, "temperature": 1.0},
+        },
+        "checkpoints": {"joint": "/tmp/checkpoint_step_0300.pt"},
+    }
+
+    request = {
+        "seed": 17,
+        "program_offset": 0,
+        "program_limit": 1,
+        "terminal_decoder_mode": "stochastic",
+        "terminal_decoder_seed": 19,
+        "terminal_temperature": 1.0,
+        "checkpoint_filename": "checkpoint_step_0300.pt",
+    }
+    assert joint_sampling_result_matches_request(result, **request, device="cuda")
+    assert not joint_sampling_result_matches_request(result, **request, device="cpu")
 
 
 @pytest.fixture(scope="module")
@@ -314,4 +343,19 @@ def test_stochastic_terminal_completion_requires_explicit_rng_state(
             allowed_ring_sizes=(5, 6),
             maximum_heavy_degree=4,
             terminal_decoder_mode=decoder_mode,
+        )
+
+
+def test_terminal_completion_rejects_unknown_local_constraint_scope() -> None:
+    with pytest.raises(UgiJointEndToEndSamplingError, match="constraint scope"):
+        complete_ugi_joint_terminals(
+            None,
+            None,
+            (),
+            SimpleNamespace(atom_vocabulary=()),
+            program_metadata=(),
+            closure_generator_state=torch.Generator().manual_seed(17).get_state(),
+            allowed_ring_sizes=(5, 6),
+            maximum_heavy_degree=4,
+            local_chemistry_constraint_scope="unknown",
         )

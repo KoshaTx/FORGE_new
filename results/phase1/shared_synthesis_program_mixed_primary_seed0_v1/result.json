@@ -1,0 +1,135 @@
+{
+  "schema_version": "forge.synthesis_program_mixed_primary_seed0_result.v1",
+  "status": "pass",
+  "utc_date": "2026-08-27",
+  "training": {
+    "arm_id": "bl_core_constrained_repeat_aware",
+    "replicate": 0,
+    "seed": 20260825,
+    "optimizer_steps": 1700,
+    "final_model_state_sha256": "ea9afefa77fe4a473bf5911c0b63e10dfdf652aff44090ad8b009c9f3a324dd0"
+  },
+  "evaluation": {
+    "experiment_id": "phase1-shared-synthesis-program-mixed-primary-seed0-evaluation-h100",
+    "run_id": "f06674c61e3019aa5c54dbefb8e44fb1c36bacc7fffda9235e64a713eedc3d5f",
+    "source_sha256": "081a0db766cb5f0f2246a5e62998421319b8ab13e714c1b7809264262efca8d7",
+    "checkpoint_step": 1700,
+    "checkpoint_selection": "fixed_final_step",
+    "heldout_attempts_per_program": 3072,
+    "sample_rows_all_checkpoints_and_splits": 16896,
+    "terminal_decode_policy": "strict_valence_topology_argmax",
+    "layout_prior": "exact factorized training-fold count law conditioned on the declared 194-heavy-atom support"
+  },
+  "heldout_final_checkpoint": {
+    "bl_2023_repeated_aza_michael": {
+      "attempts": 3072,
+      "raw_valid_fraction": 0.7047526041666666,
+      "connected_fraction": 0.7047526041666666,
+      "exact_l1_decomposition_coverage": 0.9990762124711317,
+      "exact_forward_replay_precision": 1.0,
+      "exact_l1_yield_per_attempt": 0.7041015625,
+      "unique_fraction": 0.8905311778290993,
+      "internal_diversity": 0.5856003851397467,
+      "component_novelty_fraction": 0.9902120717781403,
+      "whole_lipid_novelty_fraction": 0.9635103926096997,
+      "unique_exact_l1_products_per_1000_attempts": 626.953125,
+      "unique_open_ended_exact_l1_products_per_1000_attempts": 187.82552083333334
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "attempts": 3072,
+      "raw_valid_fraction": 0.4098307291666667,
+      "connected_fraction": 0.4098307291666667,
+      "exact_l1_decomposition_coverage": 0.7402700555996823,
+      "exact_forward_replay_precision": 1.0,
+      "exact_l1_yield_per_attempt": 0.3033854166666667,
+      "unique_fraction": 0.9547259729944401,
+      "internal_diversity": 0.7484393938078073,
+      "component_novelty_fraction": 1.0,
+      "whole_lipid_novelty_fraction": 0.9857029388403494,
+      "unique_exact_l1_products_per_1000_attempts": 286.4583333333333,
+      "unique_open_ended_exact_l1_products_per_1000_attempts": 74.21875
+    },
+    "ugi_3cr_agile": {
+      "attempts": 3072,
+      "raw_valid_fraction": 0.8935546875,
+      "connected_fraction": 0.8935546875,
+      "exact_l1_decomposition_coverage": 0.8058287795992713,
+      "exact_forward_replay_precision": 1.0,
+      "exact_l1_yield_per_attempt": 0.7200520833333334,
+      "unique_fraction": 0.9577413479052823,
+      "internal_diversity": 0.6559825789767944,
+      "component_novelty_fraction": 0.9624604251469923,
+      "whole_lipid_novelty_fraction": 0.9981785063752276,
+      "unique_exact_l1_products_per_1000_attempts": 686.5234375,
+      "unique_open_ended_exact_l1_products_per_1000_attempts": 669.2708333333334
+    }
+  },
+  "equal_family_mean": {
+    "raw_valid_fraction": 0.6693793402777777,
+    "exact_l1_decomposition_coverage": 0.8483916825566951,
+    "exact_forward_replay_precision": 1.0,
+    "exact_l1_yield_per_attempt": 0.5758463541666666,
+    "unique_exact_l1_products_per_1000_attempts": 533.3116319444445,
+    "unique_open_ended_exact_l1_products_per_1000_attempts": 310.4383680555556
+  },
+  "heldout_component_disjoint": {
+    "bl_2023_repeated_aza_michael": {
+      "records": 8000,
+      "fixed_noise_exact_tensor_fraction": 0.033,
+      "heldout_denoising_loss_at_t_0_5": 2.225382617473602
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "records": 8000,
+      "fixed_noise_exact_tensor_fraction": 0.00025,
+      "heldout_denoising_loss_at_t_0_5": 5.032871870040894
+    },
+    "ugi_3cr_agile": {
+      "records": 30122,
+      "fixed_noise_exact_tensor_fraction": 0.002622667817541996,
+      "heldout_denoising_loss_at_t_0_5": 4.291274472296408
+    }
+  },
+  "gates": {
+    "all_16896_layouts_within_194_atom_support": true,
+    "all_evaluation_gates_passed": true,
+    "coverage_and_precision_reported": true,
+    "fixed_state_failures_zero": true,
+    "support_overflow_zero": true,
+    "repairs_or_retries_absent": true,
+    "training_calls_in_evaluation_zero": true,
+    "route_or_oracle_calls_zero": true,
+    "heldout_is_nonselecting": true
+  },
+  "artifacts": {
+    "checkpoint_archive": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar",
+      "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"
+    },
+    "training_result": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json",
+      "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"
+    },
+    "layout_schedule_preflight": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/layout_schedule_preflight_result.json",
+      "sha256": "8ec7aa67c2875a6e3f5bde26bca26e0aa57fc20840eb4452ab7451f2047f6677"
+    },
+    "evaluation_result": {
+      "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/evaluation_result.json",
+      "sha256": "c9dff27cfe2e4c010456828d9d93664380727da1d5d9671977b50676fe550217"
+    },
+    "samples": {
+      "path": "runs/phase1-shared-synthesis-program-mixed-primary-seed0-evaluation-h100/f06674c61e3019aa5c54dbefb8e44fb1c36bacc7fffda9235e64a713eedc3d5f/stages/evaluation/artifacts/samples.jsonl.gz",
+      "sha256": "586b143d40522f4dea75f6ab87c967f6760ca14a8351a2de33bad8a29d75561d"
+    }
+  },
+  "interpretation": {
+    "positive": "Seed 0 generates high-yield exact-L1 Ugi and BL products with perfect forward-replay precision among admitted decompositions.",
+    "limitation": "LX remains the weakest family at 30.3% exact-L1 yield and requires replication before any final cross-family claim.",
+    "across_seed_claim_authorized": false
+  },
+  "nonclaims": [
+    "One seed does not establish across-seed robustness or variance.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "These results do not establish superiority to an external baseline."
+  ]
+}

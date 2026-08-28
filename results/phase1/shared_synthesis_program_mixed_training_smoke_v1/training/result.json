@@ -1,0 +1,252 @@
+{
+  "arms": {
+    "bl_core_constrained_repeat_aware": {
+      "arm_id": "bl_core_constrained_repeat_aware",
+      "batch_program_counts": {
+        "bl_2023_repeated_aza_michael": 1,
+        "lx_2024_repeated_reductive_amination": 1,
+        "ugi_3cr_agile": 1
+      },
+      "candidate_selection": false,
+      "checkpoints": [
+        {
+          "filename": "checkpoint_step_1.pt",
+          "model_state_sha256": "6b537d8c8130c0ac1eeb018c5fdd0f765cebf2b80d59d368f6a4f9f8f67383f8",
+          "sha256": "0cde0bdb5830b4de624751c4878a982b9d2299ce40b469594aead5c0585b066c",
+          "step": 1
+        },
+        {
+          "filename": "checkpoint_step_2.pt",
+          "model_state_sha256": "7c383a5cb3085c480202078e87d2a9498ea269bca2d6bc592d1eaf00a26727a0",
+          "sha256": "a203e953366cd1fafb66336004f54affe3ffe27847b8e69213c86b1f9408900d",
+          "step": 2
+        }
+      ],
+      "conditioning": "program",
+      "effective_batch_size": 3,
+      "examples_seen": 6,
+      "examples_seen_by_program": {
+        "bl_2023_repeated_aza_michael": 2,
+        "lx_2024_repeated_reductive_amination": 2,
+        "ugi_3cr_agile": 2
+      },
+      "final_loss": {
+        "gradient_norm": 12.68574333190918,
+        "program_1_backbone_bond_ce": 1.25914466381073,
+        "program_1_closure_bond_ce": 1.6295660734176636,
+        "program_1_closure_left_ce": 3.8283865451812744,
+        "program_1_closure_right_ce": 3.829376697540283,
+        "program_1_core_consistency_ce": 3.496630907058716,
+        "program_1_node_ce": 4.3153839111328125,
+        "program_1_parent_pointer_ce": 3.4077844619750977,
+        "program_1_repeat_consistency_mse": 0.01081767212599516,
+        "program_1_repeat_consistency_pairs": 11.0,
+        "program_1_role_consistency_ce": 1.630403995513916,
+        "program_1_semantic_total": 19.55410385131836,
+        "program_1_total": 18.269641876220703,
+        "program_2_backbone_bond_ce": 1.165892481803894,
+        "program_2_closure_bond_ce": 1.3913294076919556,
+        "program_2_closure_left_ce": 3.399470806121826,
+        "program_2_closure_right_ce": 3.4031271934509277,
+        "program_2_core_consistency_ce": 2.9188072681427,
+        "program_2_node_ce": 4.927917003631592,
+        "program_2_parent_pointer_ce": 3.134096622467041,
+        "program_2_repeat_consistency_mse": 0.006092521362006664,
+        "program_2_repeat_consistency_pairs": 9.0,
+        "program_2_role_consistency_ce": 2.370940685272217,
+        "program_2_semantic_total": 18.74579429626465,
+        "program_2_total": 17.421833038330078,
+        "program_3_backbone_bond_ce": 1.3060256242752075,
+        "program_3_closure_bond_ce": 0.0,
+        "program_3_closure_left_ce": 0.0,
+        "program_3_closure_right_ce": 0.0,
+        "program_3_core_consistency_ce": 2.9419803619384766,
+        "program_3_node_ce": 4.519938945770264,
+        "program_3_parent_pointer_ce": 3.189037561416626,
+        "program_3_repeat_consistency_mse": 0.0,
+        "program_3_repeat_consistency_pairs": 0.0,
+        "program_3_role_consistency_ce": 2.1590540409088135,
+        "program_3_semantic_total": 10.290260314941406,
+        "program_3_total": 9.015002250671387,
+        "step": 2
+      },
+      "fixed_state_failures": 0,
+      "gradient_balancing": {
+        "method": "equal_family_mass_deterministic_pcgrad",
+        "micro_batches": 2,
+        "projected_conflicts": 0
+      },
+      "initial_loss": {
+        "gradient_norm": 12.479878425598145,
+        "program_1_backbone_bond_ce": 1.2934340238571167,
+        "program_1_closure_bond_ce": 1.3973444700241089,
+        "program_1_closure_left_ce": 3.8012452125549316,
+        "program_1_closure_right_ce": 3.6469874382019043,
+        "program_1_core_consistency_ce": 3.2175869941711426,
+        "program_1_node_ce": 4.1025390625,
+        "program_1_parent_pointer_ce": 3.348203659057617,
+        "program_1_repeat_consistency_mse": 0.0,
+        "program_1_repeat_consistency_pairs": 0.0,
+        "program_1_role_consistency_ce": 1.6032958030700684,
+        "program_1_semantic_total": 18.79497528076172,
+        "program_1_total": 17.589754104614258,
+        "program_2_backbone_bond_ce": 1.2992647886276245,
+        "program_2_closure_bond_ce": 1.338241457939148,
+        "program_2_closure_left_ce": 3.6768970489501953,
+        "program_2_closure_right_ce": 3.7195444107055664,
+        "program_2_core_consistency_ce": 2.9865806102752686,
+        "program_2_node_ce": 4.251636505126953,
+        "program_2_parent_pointer_ce": 3.343071699142456,
+        "program_2_repeat_consistency_mse": 0.0,
+        "program_2_repeat_consistency_pairs": 0.0,
+        "program_2_role_consistency_ce": 2.1153206825256348,
+        "program_2_semantic_total": 18.904130935668945,
+        "program_2_total": 17.6286563873291,
+        "program_3_backbone_bond_ce": 1.326568841934204,
+        "program_3_closure_bond_ce": 1.4327175617218018,
+        "program_3_closure_left_ce": 3.5392744541168213,
+        "program_3_closure_right_ce": 3.0836479663848877,
+        "program_3_core_consistency_ce": 3.047581434249878,
+        "program_3_node_ce": 4.938876152038574,
+        "program_3_parent_pointer_ce": 3.086242198944092,
+        "program_3_repeat_consistency_mse": 0.0,
+        "program_3_repeat_consistency_pairs": 0.0,
+        "program_3_role_consistency_ce": 2.221379518508911,
+        "program_3_semantic_total": 18.724567413330078,
+        "program_3_total": 17.407325744628906,
+        "step": 1
+      },
+      "model_state_excludes_component_identity": true,
+      "optimizer_steps": 2,
+      "oracle_calls": 0,
+      "parameter_count": 76250,
+      "program_id_mapping": null,
+      "program_mass": {
+        "bl_2023_repeated_aza_michael": 0.33333333333333326,
+        "lx_2024_repeated_reductive_amination": 0.33333333333333337,
+        "ugi_3cr_agile": 0.3333333333333333
+      },
+      "route_calls": 0,
+      "schema_version": "forge.synthesis_program_production_arm_result.v1",
+      "seed": 20260825,
+      "status": "complete"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-27",
+    "profiles": [
+      "smoke"
+    ],
+    "scope": "Local CPU optimizer and evaluation smoke only. Paid accelerator training and private-source upload remain blocked pending explicit authorization.",
+    "source": "user instruction to implement the expanded BL/LX shared-training preparation"
+  },
+  "cache": {
+    "bytes": 13727905,
+    "logical_path": "cache.npz",
+    "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+  },
+  "checkpoint_archive": {
+    "bytes": 696320,
+    "logical_path": "checkpoints.tar",
+    "sha256": "eeb5189fc03f1d81758d85afba308bcde3d0d567d4e9059ea636f01e0a915633"
+  },
+  "config": {
+    "bytes": 4282,
+    "path": "configs/multireaction/shared_mixed_training_smoke_v1.json",
+    "sha256": "ad13ac227d5754674953c1111fb6c7fceccaba62b2bbb7a5b3de1d026f97c8c6"
+  },
+  "design": {
+    "bytes": 9597,
+    "logical_path": "study_design.json",
+    "sha256": "07be7b81e0b9af85bc33a3990ac1b37546e665330b233e5093adce7e240d2afa"
+  },
+  "gates": {
+    "all_declared_arms_complete": true,
+    "candidate_selection_absent": true,
+    "fact_generous_has_strictly_more_parameters": true,
+    "fact_matched_parameter_count_equals_full": true,
+    "fixed_state_failures_zero": true,
+    "route_or_oracle_calls_zero": true
+  },
+  "model": {
+    "adapter_dim": 16,
+    "architecture": "reaction_program_graph_transformer",
+    "attention_heads": 4,
+    "bond_classes": 4,
+    "component_ids_enter_neural_tensors": false,
+    "dropout": 0.0,
+    "expert_count": 3,
+    "fragment_tokens_enter_neural_tensors": false,
+    "gradient_balancing": {
+      "group_identity": "source_program_state",
+      "method": "equal_family_mass_deterministic_pcgrad",
+      "norm_amplification": false
+    },
+    "hidden_dim": 32,
+    "layers": 1,
+    "maximum_closures": 3,
+    "maximum_heavy_atoms": 194,
+    "semantic_objective": {
+      "core_consistency_weight": 0.25,
+      "repeat_consistency_weight": 0.25,
+      "role_consistency_weight": 0.25,
+      "state_balancing": "equal_present_semantic_state_mass"
+    },
+    "source_probability_floor": 1e-05
+  },
+  "nonclaims": [
+    "No arm is a candidate source.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Held-reaction-family transfer is a secondary robustness stress test and not a hard gate."
+  ],
+  "profile": "smoke",
+  "replicate": 0,
+  "run_kind": "smoke",
+  "runtime": {
+    "checkpoint_steps": [
+      1,
+      2
+    ],
+    "cpu_threads": 2,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "effective_batch_size": 3,
+    "gradient_accumulation_steps": 1,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.0001,
+    "micro_batch_size": 3,
+    "optimizer_steps": 2,
+    "precision": "float32",
+    "restart_interval_steps": 1,
+    "weight_decay": 5e-05
+  },
+  "schema_version": "forge.synthesis_program_production_training_result.v1",
+  "seed": 20260825,
+  "source_marginals": {
+    "bond": [
+      0.8591286268213533,
+      0.04896128337680672,
+      0.008125285010790483,
+      0.08378480479104959
+    ],
+    "node": [
+      0.8135388601612945,
+      0.07795336616023382,
+      0.0008050825729640061,
+      0.023623322848223313,
+      0.002390915840279227,
+      0.0002546681259001037,
+      0.0001486320984418439,
+      2.2897930527108712e-07,
+      0.08072986678308938,
+      6.195026377237779e-05,
+      2.2897930527108712e-07,
+      0.0004924192285798585,
+      2.2897930527108712e-07,
+      2.2897930527108712e-07
+    ],
+    "policy": "shared_three_program_training_mixture_for_every_arm"
+  },
+  "status": "pass"
+}

@@ -42,6 +42,20 @@ def _summary(*, amine_size: int, fixed_signature: tuple[tuple[object, ...], ...]
         blocks=((3, amine_size, ((10, 1),)), *UGI_BLOCKS[1:]),
         fixed_signature=fixed_signature,
         weight=0.5,
+        role_morphology=(
+            (
+                3,
+                (
+                    amine_size - 1,
+                    0,
+                    0,
+                    2 if fixed_signature == TWO_HEAD_ATTACHMENTS else 1,
+                ),
+            ),
+            (4, (0, 0, 0, 0)),
+            (5, (4, 0, 0, 1)),
+            (6, (6, 0, 0, 1)),
+        ),
     )
 
 
@@ -102,6 +116,28 @@ def test_factorized_layout_support_gate_exhausts_each_semantic_bundle() -> None:
     }
 
 
+def test_role_morphology_layout_broadcasts_the_full_coarse_program() -> None:
+    records = _prior().sample(
+        "ugi_3cr_agile",
+        sample_count=8,
+        seed=19,
+        role_morphology_conditioning=True,
+    )
+    for record in records:
+        assert record.role_morphology_states is not None
+        for role_state in (3, 4, 5, 6):
+            values = record.role_morphology_states[record.role_states == role_state]
+            assert len(values) > 0
+            assert (values == values[0]).all()
+        assert (
+            sum(
+                int(record.role_morphology_states[record.role_states == role][0, 2]) - 1
+                for role in (3, 4, 5, 6)
+            )
+            == record.graph.closure_count
+        )
+
+
 def test_repeated_components_retain_their_own_reaction_core_signature() -> None:
     signature = ((2, 1), (3, 2), (4, 1))
     blocks = (
@@ -119,6 +155,64 @@ def test_repeated_components_retain_their_own_reaction_core_signature() -> None:
             sorted((state, int((core[start:stop] == state).sum())) for state in (2, 3, 4))
         )
         assert observed == signature
+
+
+def test_factorized_layout_accepts_distinct_sizes_for_repeated_roles() -> None:
+    signature = ((3, 1), (4, 1))
+    summary = _RecordSummary(
+        depth=2,
+        closure_count=0,
+        blocks=(
+            (1, 5, ((2, 1),)),
+            (2, 8, signature),
+            (2, 11, signature),
+        ),
+        fixed_signature=(),
+        weight=1.0,
+    )
+    prior = object.__new__(SynthesisProgramLayoutPrior)
+    prior.maximum_heavy_atoms = 64
+    prior._distributions = {"bl": _compile_program_distribution((summary,))}
+
+    _, _, blocks, _ = prior._sample_fields("bl", np.random.default_rng(11))
+
+    assert blocks == [
+        (1, 5, ((2, 1),)),
+        (2, 8, signature),
+        (2, 11, signature),
+    ]
+
+
+def test_factorized_role_sizes_are_sampled_from_exact_support_conditioned_law() -> None:
+    summaries = (
+        _RecordSummary(
+            depth=1,
+            closure_count=0,
+            blocks=((1, 150, ()), (2, 40, ())),
+            fixed_signature=(),
+            weight=0.5,
+        ),
+        _RecordSummary(
+            depth=1,
+            closure_count=0,
+            blocks=((1, 10, ()), (2, 180, ())),
+            fixed_signature=(),
+            weight=0.5,
+        ),
+    )
+    prior = object.__new__(SynthesisProgramLayoutPrior)
+    prior.maximum_heavy_atoms = 194
+    prior._distributions = {"program": _compile_program_distribution(summaries)}
+
+    rng = np.random.default_rng(1779023141640653592)
+    observed: set[tuple[int, int]] = set()
+    for _ in range(4096):
+        _, _, blocks, _ = prior._sample_fields("program", rng)
+        sizes = tuple(size for _, size, _ in blocks)
+        assert sum(sizes) <= prior.maximum_heavy_atoms
+        observed.add(sizes)
+
+    assert observed == {(10, 40), (10, 180), (150, 40)}
 
 
 def test_factorized_summary_contains_counts_but_no_component_identity() -> None:

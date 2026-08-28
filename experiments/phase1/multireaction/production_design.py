@@ -6,17 +6,19 @@ candidate, call a route engine, or authorize a production launch.
 
 from __future__ import annotations
 
+import copy
 import math
 from collections import Counter, defaultdict
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from forge.core.hashing import pin_record, resolve_pin
+from forge.core.hashing import artifact_record, pin_record, resolve_pin, sha256_file
 from forge.core.io import iter_csv, read_json_object, write_json
 
 CONFIG_SCHEMA = "forge.synthesis_program_production_design_config.v1"
 RESULT_SCHEMA = "forge.synthesis_program_production_design_result.v1"
+MIXED_DESIGN_CONFIG_SCHEMA = "forge.mixed_repeat_training_design_config.v1"
 PROGRAMS = (
     "ugi_3cr_agile",
     "bl_2023_repeated_aza_michael",
@@ -57,6 +59,38 @@ REQUIRED_RETENTION_METRICS = {
 
 class SynthesisProgramProductionDesignError(ValueError):
     """The proposed matched-production design violates a frozen scientific constraint."""
+
+
+def _auxiliary_corpus_passed(
+    result: Mapping[str, Any],
+    *,
+    paths: Mapping[str, Path],
+) -> bool:
+    """Accept only the source corpus or its authenticated mixed-repeat successor."""
+
+    if result.get("schema_version") == "forge.multireaction_lnpdb_result.v1":
+        programs = result.get("programs")
+        return (
+            result.get("status") == "pass"
+            and isinstance(programs, Mapping)
+            and all(
+                isinstance(row, Mapping) and row.get("gate") == "pass"
+                for row in programs.values()
+            )
+        )
+    if result.get("schema_version") != "forge.multireaction_mixed_expansion_result.v1":
+        return False
+    artifacts = result.get("artifacts")
+    summary = result.get("summary")
+    if not isinstance(artifacts, Mapping) or not isinstance(summary, Mapping):
+        return False
+    return (
+        result.get("status") == "complete_bl_lx_mixed_repeat_expansion"
+        and int(summary.get("total_products", -1)) == 92_000
+        and isinstance(artifacts.get("splits"), Mapping)
+        and artifacts["splits"].get("sha256")
+        == sha256_file(paths["multireaction_splits"])
+    )
 
 
 def _mapping(value: object, *, label: str) -> Mapping[str, Any]:
@@ -580,12 +614,9 @@ def freeze_shared_production_comparison_design(
             bool(value) for value in _mapping(integration.get("gates"), label="gates").values()
         ),
         "ugi_corpus_passed": ugi_result.get("status") == "pass",
-        "auxiliary_corpus_passed": multireaction_result.get("status") == "pass"
-        and all(
-            _mapping(row, label=program_id).get("gate") == "pass"
-            for program_id, row in _mapping(
-                multireaction_result.get("programs"), label="programs"
-            ).items()
+        "auxiliary_corpus_passed": _auxiliary_corpus_passed(
+            multireaction_result,
+            paths=paths,
         ),
     }
     if transformer is not None:
@@ -643,10 +674,171 @@ def freeze_shared_production_comparison_design(
     return result
 
 
+def freeze_mixed_repeat_training_design(
+    config_path: Path,
+    repo: Path,
+    design_path: Path,
+    result_path: Path,
+) -> dict[str, Any]:
+    """Derive the expanded-data design from the qualified Transformer contract.
+
+    This keeps architecture, compute, controls, evaluation and noninferiority rules identical while
+    replacing only the authenticated auxiliary corpus and its exact fold counts.  The derived full
+    design remains launch-blocked and is independently validated by the standard design freezer.
+    """
+
+    config = read_json_object(
+        config_path,
+        error=SynthesisProgramProductionDesignError,
+        label="mixed-repeat training design",
+    )
+    if config.get("schema_version") != MIXED_DESIGN_CONFIG_SCHEMA:
+        raise SynthesisProgramProductionDesignError(
+            "unsupported mixed-repeat training design schema"
+        )
+    raw_inputs = _mapping(config.get("inputs"), label="inputs")
+    required_inputs = {
+        "base_design",
+        "representation_config",
+        "representation_result",
+        "multireaction_splits",
+        "multireaction_corpus_result",
+    }
+    if set(raw_inputs) != required_inputs:
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat design inputs changed"
+        )
+    paths = {
+        label: resolve_pin(record, repo, label=label)
+        for label, record in raw_inputs.items()
+    }
+    base = read_json_object(
+        paths["base_design"],
+        error=SynthesisProgramProductionDesignError,
+        label="base Transformer production design",
+    )
+    if (
+        base.get("schema_version") != CONFIG_SCHEMA
+        or base.get("model", {}).get("architecture")
+        != "reaction_program_graph_transformer"
+    ):
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat design requires the qualified Transformer base"
+        )
+    representation = read_json_object(
+        paths["representation_result"],
+        error=SynthesisProgramProductionDesignError,
+        label="mixed-repeat representation result",
+    )
+    representation_config_pin = pin_record(paths["representation_config"], repo)
+    if (
+        representation.get("status") != "pass"
+        or not all(bool(value) for value in representation.get("gates", {}).values())
+        or {
+            "path": representation.get("config", {}).get("path"),
+            "sha256": representation.get("config", {}).get("sha256"),
+        }
+        != {
+            "path": representation_config_pin["path"],
+            "sha256": representation_config_pin["sha256"],
+        }
+    ):
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat representation has not passed for its pinned config"
+        )
+    mixed_result = read_json_object(
+        paths["multireaction_corpus_result"],
+        error=SynthesisProgramProductionDesignError,
+        label="mixed-repeat corpus result",
+    )
+    if not _auxiliary_corpus_passed(mixed_result, paths=paths):
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat corpus has not passed its model-support contract"
+        )
+    counts = _mapping(config.get("expected_fold_counts"), label="expected_fold_counts")
+    if set(counts) != {PROGRAMS[1], PROGRAMS[2]}:
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat fold counts must cover BL and LX"
+        )
+    expected_counts = {
+        program_id: {
+            fold: _positive_int(
+                _mapping(counts[program_id], label=program_id).get(fold),
+                label=f"{program_id}.{fold}",
+            )
+            for fold in FOLDS
+        }
+        for program_id in (PROGRAMS[1], PROGRAMS[2])
+    }
+    if any(
+        value != {"train": 30_000, "calibration": 8_000, "heldout": 8_000}
+        for value in expected_counts.values()
+    ):
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat design must retain the qualified equal BL/LX support"
+        )
+    repeat_weight = _number(
+        config.get("repeat_consistency_weight"),
+        label="repeat_consistency_weight",
+    )
+    if repeat_weight != 0.25:
+        raise SynthesisProgramProductionDesignError(
+            "mixed-repeat design changed the calibrated repeat-consistency weight"
+        )
+
+    design = copy.deepcopy(base)
+    design["seed"] = int(config["seed"])
+    for label in (
+        "representation_config",
+        "representation_result",
+        "multireaction_splits",
+        "multireaction_corpus_result",
+    ):
+        # Design inputs are executable pins, not result-artifact records; keep the strict
+        # two-field shape required by ``resolve_pin``.
+        design["inputs"][label] = dict(raw_inputs[label])
+    for program_id, values in expected_counts.items():
+        design["programs"][program_id]["expected_fold_counts"] = values
+        design["programs"][program_id]["evidence_role"] = (
+            "reaction_enumerated_structural_support"
+        )
+    design["model"]["semantic_objective"]["repeat_consistency_weight"] = repeat_weight
+    design["execution"]["production_launch_authorized"] = False
+    design["decision"]["production_training_authorized"] = False
+    design["decision"]["next_authority_required"] = (
+        "explicit authorization for paid exact-H100 preflight and production training"
+    )
+    design["derivation"] = {
+        "config": pin_record(config_path, repo),
+        "base_design": pin_record(paths["base_design"], repo),
+        "changed_fields": [
+            "representation_config_and_result",
+            "multireaction_corpus_result_and_splits",
+            "bl_lx_expected_fold_counts",
+            "repeat_consistency_weight",
+        ],
+    }
+    design["nonclaims"] = [
+        *base["nonclaims"],
+        "The expanded BL/LX products are reaction-enumerated support, not observed syntheses or route-certified products.",
+    ]
+    write_json(design_path, design)
+    result = freeze_shared_production_comparison_design(design_path, repo, result_path)
+    # The runner moves stage outputs out of its ``.partial`` directory after this function
+    # returns.  Record the derived design as a logical sibling artifact so the receipt never
+    # contains a dead staging path.
+    result["config"] = artifact_record(design_path, logical_path="design.json")
+    result["derivation"] = design["derivation"]
+    write_json(result_path, result)
+    return result
+
+
 __all__ = [
     "CONFIG_SCHEMA",
+    "MIXED_DESIGN_CONFIG_SCHEMA",
     "RESULT_SCHEMA",
     "SynthesisProgramProductionDesignError",
     "freeze_shared_production_comparison_design",
+    "freeze_mixed_repeat_training_design",
     "validate_production_design_contract",
 ]

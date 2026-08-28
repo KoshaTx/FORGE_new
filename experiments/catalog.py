@@ -10,6 +10,15 @@ SPECIFICATIONS = {
     "installation-smoke": "experiments/installation_smoke/experiment.json",
     "phase1-corpus": "experiments/phase1/corpus/experiment.json",
     "phase1-multireaction-corpus": "experiments/phase1/multireaction/experiment.json",
+    "phase1-bl-lx-reaction-enumerated-expansion": (
+        "experiments/phase1/multireaction/bl_lx_reaction_enumerated_expansion.json"
+    ),
+    "phase1-bl-lx-mixed-repeat-expansion": (
+        "experiments/phase1/multireaction/bl_lx_mixed_repeat_expansion.json"
+    ),
+    "phase1-bl-lx-model-support-mixed-repeat-expansion": (
+        "experiments/phase1/multireaction/bl_lx_mixed_repeat_expansion_v2.json"
+    ),
     "phase1-multireaction-training-smoke": ("experiments/phase1/multireaction/training_smoke.json"),
     "phase1-multireaction-overfit": "experiments/phase1/multireaction/overfit.json",
     "phase1-reaction-program-transformer-overfit": (
@@ -102,6 +111,34 @@ SPECIFICATIONS = {
     "phase1-ugi-train-exposure-calibration-h100": (
         "experiments/phase1/multireaction/ugi_train_exposure_calibration_h100.json"
     ),
+    "phase1-reaction-specialist-preflight-seed0-h100": (
+        "experiments/phase1/multireaction/reaction_specialist_preflight_seed0_h100.json"
+    ),
+    "phase1-reaction-specialist-ugi-seed0-h100": (
+        "experiments/phase1/multireaction/reaction_specialist_ugi_seed0_h100.json"
+    ),
+    "phase1-reaction-specialist-ugi-v0-evaluation-recovery-seed0-h100": (
+        "experiments/phase1/multireaction/"
+        "reaction_specialist_ugi_v0_evaluation_recovery_seed0_h100.json"
+    ),
+    "phase1-reaction-specialist-bl-seed0-h100": (
+        "experiments/phase1/multireaction/reaction_specialist_bl_seed0_h100.json"
+    ),
+    "phase1-reaction-specialist-lx-seed0-h100": (
+        "experiments/phase1/multireaction/reaction_specialist_lx_seed0_h100.json"
+    ),
+    "phase1-reaction-topology-specialist-ugi-h100-preflight-v2": (
+        "experiments/phase1/multireaction/"
+        "reaction_topology_specialist_ugi_h100_preflight_v2.json"
+    ),
+    "phase1-reaction-topology-specialist-ugi-smoke-v2": (
+        "experiments/phase1/multireaction/"
+        "reaction_topology_specialist_ugi_smoke_v2.json"
+    ),
+    "phase1-reaction-topology-specialist-ugi-seed0-h100-v2": (
+        "experiments/phase1/multireaction/"
+        "reaction_topology_specialist_ugi_seed0_h100_v2.json"
+    ),
     "phase1-bl-core-constrained-production-smoke": (
         "experiments/phase1/multireaction/bl_core_constrained_production_smoke.json"
     ),
@@ -129,6 +166,42 @@ SPECIFICATIONS = {
     "phase1-potency-study-corpus": "experiments/phase1/hela_potency/data.json",
     "phase1-shared-synthesis-program-representation": (
         "experiments/phase1/multireaction/shared_representation.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-representation": (
+        "experiments/phase1/multireaction/shared_mixed_representation.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-training-design": (
+        "experiments/phase1/multireaction/shared_mixed_training_design.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-production-cache": (
+        "experiments/phase1/multireaction/shared_mixed_production_cache.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-training-smoke": (
+        "experiments/phase1/multireaction/shared_mixed_training_smoke.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-h100-training-profile": (
+        "experiments/phase1/multireaction/shared_mixed_h100_training_profile.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-h100-tf32-profile": (
+        "experiments/phase1/multireaction/shared_mixed_h100_tf32_profile.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-primary-seed0-h100": (
+        "experiments/phase1/multireaction/shared_mixed_primary_seed0_h100.json"
+    ),
+    "phase1-shared-synthesis-program-mixed-primary-seed0-evaluation-h100": (
+        "experiments/phase1/multireaction/shared_mixed_primary_seed0_evaluation_h100.json"
+    ),
+    "phase1-shared-mixed-role-morphology-smoke": (
+        "experiments/phase1/multireaction/shared_mixed_role_morphology_smoke.json"
+    ),
+    "phase1-shared-mixed-role-morphology-seed0-h100": (
+        "experiments/phase1/multireaction/shared_mixed_role_morphology_seed0_h100.json"
+    ),
+    "phase1-shared-bias-end-to-end-smoke": (
+        "experiments/phase1/multireaction/shared_bias_end_to_end_smoke.json"
+    ),
+    "phase1-shared-bias-end-to-end-seed0-h100": (
+        "experiments/phase1/multireaction/shared_bias_end_to_end_seed0_h100.json"
     ),
     "phase1-shared-synthesis-program-integration": (
         "experiments/phase1/multireaction/shared_integration.json"
@@ -162,6 +235,50 @@ SPECIFICATIONS = {
     ),
     "phase1-ugi-v0-port-transformer-seed0-sampling-v1": (
         "experiments/phase1/product_l1/ugi_v0_port_transformer_seed0_sampling_v1.json"
+    ),
+    "phase1-ugi-tree-transformer-challenger-smoke-v1": (
+        "experiments/phase1/product_l1/ugi_tree_transformer_challenger_smoke_v1.json"
+    ),
+    "phase1-ugi-tree-transformer-calibration-program-draw-v1": (
+        "experiments/phase1/product_l1/ugi_tree_transformer_calibration_program_draw_v1.json"
+    ),
+    "phase1-ugi-tree-transformer-development-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_transformer_development_h100_v1.json"
+    ),
+    "phase1-ugi-tree-transformer-calibration-h100-preflight-v1": (
+        "experiments/phase1/product_l1/" "ugi_tree_transformer_calibration_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-tree-calibration-dense-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_calibration_dense_h100_v1.json"
+    ),
+    "phase1-ugi-tree-calibration-relations-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_calibration_relations_h100_v1.json"
+    ),
+    "phase1-ugi-tree-calibration-consistency-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_calibration_consistency_h100_v1.json"
+    ),
+    "phase1-ugi-tree-calibration-masking-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_calibration_masking_h100_v1.json"
+    ),
+    "phase1-ugi-v0-calibration-h100-v1": (
+        "experiments/phase1/product_l1/ugi_v0_calibration_h100_v1.json"
+    ),
+    "phase1-ugi-v0-current-program-comparison-h100-preflight-v1": (
+        "experiments/phase1/product_l1/" "ugi_v0_current_program_comparison_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-v0-current-program-comparison-h100-v1": (
+        "experiments/phase1/product_l1/ugi_v0_current_program_comparison_h100_v1.json"
+    ),
+    "phase1-ugi-transformer-morphology-projection-comparison-h100-v1": (
+        "experiments/phase1/product_l1/"
+        "ugi_transformer_morphology_projection_comparison_h100_v1.json"
+    ),
+    "phase1-ugi-tree-relational-production-h100-v1": (
+        "experiments/phase1/product_l1/ugi_tree_relational_production_h100_v1.json"
+    ),
+    "phase1-ugi-tree-relational-edge-constrained-resampling-seed0-h100-v1": (
+        "experiments/phase1/product_l1/"
+        "ugi_tree_relational_edge_constrained_resampling_seed0_h100_v1.json"
     ),
 }
 

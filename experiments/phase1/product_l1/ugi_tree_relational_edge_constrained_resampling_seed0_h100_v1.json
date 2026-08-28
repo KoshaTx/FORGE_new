@@ -1,0 +1,103 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-tree-relational-edge-constrained-resampling-seed0-h100-v1",
+  "description": "Full paired seed-0 evaluation-only resampling of the frozen Ugi tree-Transformer with training-supported role-edge masks.",
+  "root_seed": 20260905,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "resampling",
+      "implementation": "evaluate.ugi.tree-relational-edge-constrained-resampling.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_tree_relational_constrained_resampling_v2.json",
+        "sha256": "fe27b6f2b07ed3e1ee306b8963e164550bc135e59fa66abf16facbcc45d29e22"
+      },
+      "inputs": {
+        "checkpoint": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/stages/train/artifacts/checkpoint_best.pt",
+          "sha256": "c20f72c10589a0633a393928ceb34e6eb7a966b3474eacf3a955def290065cbe"
+        },
+        "closure_checkpoint": {
+          "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+          "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+        },
+        "prepared_cache": {
+          "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+          "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+        },
+        "program_draw": {
+          "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+          "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+        },
+        "qualified_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "common_ugi_assessment_config": {
+          "path": "configs/multireaction/common_ugi_assessment_v1.json",
+          "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+        },
+        "lipid_realism_config": {
+          "path": "configs/multireaction/common_lipid_realism_v1.json",
+          "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+        },
+        "local_chemistry_config": {
+          "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+          "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+        },
+        "role_local_policy": {
+          "path": "results/phase1/local_morphology_support_v2/policy.json",
+          "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+        },
+        "intervention_readiness": {
+          "path": "results/phase1/ugi_tree_relational_intervention_readiness_v1/result.json",
+          "sha256": "965117522442807f42a9c6b33ab5a8a35ecfc9997934e675636b9b7916a1c82c"
+        },
+        "broad_scope_smoke": {
+          "path": "results/phase1/ugi_tree_relational_constrained_resampling_smoke_v1/result.json",
+          "sha256": "2bf6619e9f07d50173acb769758d9072738b18d23df840f846b83f486830ca3f"
+        },
+        "original_seed0_evaluation_details": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/stages/evaluate/artifacts/evaluation_details.tar",
+          "sha256": "6abcdc1bfec670985f6f40078a1895b6a6445c88ec77e609d1fe9b907a914a18"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_tree_transformer_constrained_resampling.v1"
+        },
+        "diagnostic_details": {
+          "path": "diagnostic_details.tar",
+          "schema_version": "forge.ugi_tree_transformer_constrained_resampling_archive.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 21600,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-tree-relational-edge-constrained-resampling-seed0-h100-v1"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-26 user authorized the full paid exact-H100 frozen-checkpoint diagnostic after the paired CPU preflight passed",
+    "scientific_result": true,
+    "training_calls": 0,
+    "attempts": 3072
+  },
+  "nonclaims": [
+    "This evaluation-only run does not retrain or change the frozen checkpoint.",
+    "No repair, retry, candidate selection, route call or oracle call is permitted.",
+    "A training-supported local edge is not evidence of synthesis success, route closure, stability, safety or activity."
+  ]
+}

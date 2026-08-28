@@ -8,7 +8,10 @@ from typing import Any, cast
 
 from forge.model.phase1_flow import SparseWholeLipidFlow, _gather_training_nodes
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
-from forge.model.reaction_program_flow import synthesis_program_flow_loss
+from forge.model.reaction_program_flow import (
+    synthesis_program_chemistry_loss,
+    synthesis_program_flow_loss,
+)
 
 try:
     import torch
@@ -53,14 +56,21 @@ if nn is not None:
             q = self.query(query).reshape(batch, queries, self.heads, self.head_dim).transpose(1, 2)
             k = self.key(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
             v = self.value(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
-            scores = torch.einsum("bhqd,bhkd->bhqk", q, k) / math.sqrt(self.head_dim)
             if attention_bias is not None:
-                if attention_bias.shape != scores.shape:
+                if attention_bias.shape != (batch, self.heads, queries, keys):
                     raise ReactionProgramTransformerError("attention bias shape is inconsistent")
-                scores = scores + attention_bias
-            scores = scores.masked_fill(~memory_mask[:, None, None, :], -1e9)
-            probabilities = self.dropout(torch.softmax(scores, dim=-1))
-            context = torch.einsum("bhqk,bhkd->bhqd", probabilities, v)
+                attention_mask = attention_bias.masked_fill(
+                    ~memory_mask[:, None, None, :], -torch.inf
+                )
+            else:
+                attention_mask = memory_mask[:, None, None, :]
+            context = functional.scaled_dot_product_attention(
+                q,
+                k,
+                v,
+                attn_mask=attention_mask,
+                dropout_p=self.dropout.p if self.training else 0.0,
+            )
             context = context.transpose(1, 2).reshape(batch, queries, hidden_dim)
             return self.output(context) * query_mask[:, :, None]
 
@@ -74,7 +84,9 @@ if nn is not None:
             heads: int,
             dropout: float,
             maximum_heavy_atoms: int,
+            maximum_closures: int,
             repeat_group_conditioning: bool = False,
+            role_morphology_conditioning: bool = False,
         ) -> None:
             super().__init__()
             self.vocabulary = vocabulary
@@ -85,6 +97,19 @@ if nn is not None:
             self.token_type = nn.Embedding(3, hidden_dim)
             self.position = nn.Embedding(maximum_heavy_atoms, hidden_dim)
             self.repeat_group_conditioning = repeat_group_conditioning
+            self.role_morphology_conditioning = role_morphology_conditioning
+            self.role_morphology_embeddings = (
+                nn.ModuleList(
+                    (
+                        nn.Embedding(maximum_heavy_atoms + 2, hidden_dim),
+                        nn.Embedding(maximum_heavy_atoms + 2, hidden_dim),
+                        nn.Embedding(maximum_closures + 2, hidden_dim),
+                        nn.Embedding(maximum_heavy_atoms + 2, hidden_dim),
+                    )
+                )
+                if role_morphology_conditioning
+                else None
+            )
             self.repeat_group = (
                 nn.Embedding(len(vocabulary.role_states), hidden_dim)
                 if repeat_group_conditioning
@@ -116,6 +141,7 @@ if nn is not None:
             role_isolated_attention: bool = False,
             repeat_group_states: Any | None = None,
             component_position_states: Any | None = None,
+            role_morphology_states: Any | None = None,
         ) -> tuple[Any, Any, Any]:
             batch, nodes = role_states.shape
             if (
@@ -154,6 +180,22 @@ if nn is not None:
                     + self.repeat_group(repeat_group_states)
                     + self.component_position(component_position_states)
                 )
+            if self.role_morphology_conditioning:
+                if (
+                    role_morphology_states is None
+                    or role_morphology_states.shape != (batch, nodes, 4)
+                    or self.role_morphology_embeddings is None
+                ):
+                    raise ReactionProgramTransformerError(
+                        "role-local morphology token shapes disagree"
+                    )
+                for field, embedding in enumerate(self.role_morphology_embeddings):
+                    values = role_morphology_states[:, :, field]
+                    if torch.any(values < 0) or torch.any(values >= embedding.num_embeddings):
+                        raise ReactionProgramTransformerError(
+                            "role-local morphology state lies outside declared support"
+                        )
+                    node_tokens = node_tokens + embedding(values)
             tokens = torch.cat((program_token[:, None], depth_token[:, None], node_tokens), dim=1)
             token_mask = torch.cat(
                 (
@@ -238,6 +280,30 @@ if nn is not None:
             weights = program_summary.new_ones((program_summary.shape[0], 1))
             return self.adapter(hidden), weights
 
+    class _ZeroInitializedSpecialistAdapter(nn.Module):
+        """One lightweight reaction specialist that is initially an exact identity delta."""
+
+        def __init__(self, hidden_dim: int, adapter_dim: int, dropout: float) -> None:
+            super().__init__()
+            if adapter_dim < 1:
+                raise ReactionProgramTransformerError(
+                    "specialist adapter dimension must be positive"
+                )
+            self.adapter = nn.Sequential(
+                nn.Linear(hidden_dim, adapter_dim),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(adapter_dim, hidden_dim),
+            )
+            # A newly attached specialist must reproduce the authenticated shared checkpoint
+            # exactly before its first update.  Zeroing only the terminal projection preserves a
+            # useful random input projection while making the residual identically zero.
+            nn.init.zeros_(self.adapter[-1].weight)
+            nn.init.zeros_(self.adapter[-1].bias)
+
+        def forward(self, hidden: Any) -> Any:
+            return self.adapter(hidden)
+
     class ReactionProgramTransformerBlock(nn.Module):
         """Graph self-attention, program cross-attention and program-routed adaptation."""
 
@@ -252,6 +318,7 @@ if nn is not None:
             program_cross_attention: bool,
             routed_adapters: bool,
             role_isolated_attention: bool,
+            specialist_adapter_dim: int = 0,
         ) -> None:
             super().__init__()
             self.self_norm = nn.LayerNorm(hidden_dim)
@@ -271,6 +338,15 @@ if nn is not None:
                 _RoutedAdapter(hidden_dim, expert_count, adapter_dim, dropout)
                 if routed_adapters
                 else _SharedAdapter(hidden_dim, adapter_dim, dropout)
+            )
+            self.specialist_adapter = (
+                _ZeroInitializedSpecialistAdapter(
+                    hidden_dim,
+                    specialist_adapter_dim,
+                    dropout,
+                )
+                if specialist_adapter_dim > 0
+                else None
             )
             self.dropout = nn.Dropout(dropout)
 
@@ -335,7 +411,10 @@ if nn is not None:
                 )
             normalized = self.ffn_norm(hidden)
             routed, weights = self.routed_adapter(normalized, program_summary)
-            hidden = hidden + self.dropout(self.ffn(normalized) + routed)
+            update = self.ffn(normalized) + routed
+            if self.specialist_adapter is not None:
+                update = update + self.specialist_adapter(normalized)
+            hidden = hidden + self.dropout(update)
             return hidden * node_mask[:, :, None], weights
 
     class ReactionProgramGraphTransformer(nn.Module):
@@ -360,6 +439,10 @@ if nn is not None:
             role_isolated_attention: bool = False,
             role_specific_parameters: bool = False,
             repeat_group_conditioning: bool = False,
+            role_morphology_conditioning: bool = False,
+            specialist_adapter_dim: int = 0,
+            maximum_children: int = 0,
+            program_routed_output_heads: bool = False,
         ) -> None:
             super().__init__()
             if layers < 1:
@@ -375,6 +458,18 @@ if nn is not None:
             self.role_isolated_attention = role_isolated_attention
             self.role_specific_parameters = role_specific_parameters
             self.repeat_group_conditioning = repeat_group_conditioning
+            self.role_morphology_conditioning = role_morphology_conditioning
+            self.specialist_adapter_dim = specialist_adapter_dim
+            self.maximum_children = maximum_children
+            self.program_routed_output_heads = program_routed_output_heads
+            if specialist_adapter_dim < 0:
+                raise ReactionProgramTransformerError(
+                    "specialist adapter dimension cannot be negative"
+                )
+            if maximum_children < 0:
+                raise ReactionProgramTransformerError(
+                    "maximum child-count support cannot be negative"
+                )
             if role_specific_parameters and not role_isolated_attention:
                 raise ReactionProgramTransformerError(
                     "role-specific parameters require role-isolated attention"
@@ -385,7 +480,9 @@ if nn is not None:
                 heads,
                 dropout,
                 maximum_heavy_atoms,
+                maximum_closures,
                 repeat_group_conditioning=repeat_group_conditioning,
+                role_morphology_conditioning=role_morphology_conditioning,
             )
             # Reuse the qualified sparse state embeddings and output parameterization, but not its
             # message-passing blocks.
@@ -412,6 +509,7 @@ if nn is not None:
                         program_cross_attention=(layerwise_program_cross_attention or index == 0),
                         routed_adapters=routed_adapters,
                         role_isolated_attention=role_isolated_attention,
+                        specialist_adapter_dim=specialist_adapter_dim,
                     )
                     for index in range(layers)
                 )
@@ -432,6 +530,7 @@ if nn is not None:
                             ),
                             routed_adapters=routed_adapters,
                             role_isolated_attention=True,
+                            specialist_adapter_dim=specialist_adapter_dim,
                         )
                         for index in range(layers)
                     )
@@ -442,6 +541,19 @@ if nn is not None:
             )
             self.role_output = nn.Linear(hidden_dim, len(vocabulary.role_states))
             self.core_output = nn.Linear(hidden_dim, len(vocabulary.core_position_states))
+            self.offspring_output = (
+                nn.Linear(hidden_dim, maximum_children + 1) if maximum_children > 0 else None
+            )
+            self.terminal_chemistry_adapter = (
+                _RoutedAdapter(hidden_dim, expert_count, adapter_dim, dropout)
+                if program_routed_output_heads
+                else None
+            )
+            self.closure_output_adapter = (
+                _RoutedAdapter(hidden_dim, expert_count, adapter_dim, dropout)
+                if program_routed_output_heads
+                else None
+            )
 
         def _graph_bias(
             self,
@@ -491,6 +603,7 @@ if nn is not None:
             repeat_group_states: Any | None = None,
             component_position_states: Any | None = None,
             component_instance_states: Any | None = None,
+            role_morphology_states: Any | None = None,
         ) -> dict[str, Any]:
             del component_instance_states  # Loss-only coordinate; never a learned identity token.
             program_tokens, program_mask, program_summary = self.program_encoder(
@@ -502,6 +615,7 @@ if nn is not None:
                 role_isolated_attention=self.role_isolated_attention,
                 repeat_group_states=repeat_group_states,
                 component_position_states=component_position_states,
+                role_morphology_states=role_morphology_states,
             )
             hidden = (
                 self.state.node_embedding(nodes) + self.state.time_embedding(t[:, None])[:, None]
@@ -550,6 +664,23 @@ if nn is not None:
                         layer_weights.append(weights)
                     expert_weights.append(torch.stack(layer_weights, dim=1).mean(dim=1))
 
+            chemistry_hidden = hidden
+            terminal_expert_weights = None
+            if self.terminal_chemistry_adapter is not None:
+                child_counts = torch.zeros_like(parents)
+                batch_indices = torch.arange(parents.shape[0], device=parents.device)[:, None]
+                batch_indices = batch_indices.expand_as(parents)
+                child_counts.index_put_(
+                    (batch_indices[child_mask], parents[child_mask]),
+                    torch.ones_like(parents[child_mask]),
+                    accumulate=True,
+                )
+                terminal_mask = node_mask & (child_counts == 0)
+                terminal_update, terminal_expert_weights = self.terminal_chemistry_adapter(
+                    hidden, program_summary
+                )
+                chemistry_hidden = hidden + terminal_update * terminal_mask[:, :, None]
+
             parent_logits = torch.einsum(
                 "bid,bjd->bij", self.state.parent_query(hidden), self.state.parent_key(hidden)
             ) / math.sqrt(self.hidden_dim)
@@ -561,9 +692,9 @@ if nn is not None:
                     core_position_states[:, None, :] > 1
                 )
                 parent_logits = parent_logits.masked_fill(~(same_role | core_attachment), -1e9)
-            parent_hidden = _gather_training_nodes(hidden, parents)
+            parent_hidden = _gather_training_nodes(chemistry_hidden, parents)
             parent_bond_logits = self.state.backbone_bond_output(
-                torch.cat((hidden, parent_hidden), dim=-1)
+                torch.cat((chemistry_hidden, parent_hidden), dim=-1)
             )
             batch, maximum_closures = closure_left.shape
             slots = self.state.closure_slots(torch.arange(maximum_closures, device=nodes.device))[
@@ -587,6 +718,12 @@ if nn is not None:
                     dim=-1,
                 )
             )
+            closure_expert_weights = None
+            if self.closure_output_adapter is not None:
+                closure_update, closure_expert_weights = self.closure_output_adapter(
+                    closure_hidden, program_summary
+                )
+                closure_hidden = closure_hidden + closure_update
             closure_key = self.state.closure_node_key(hidden)
             left_logits = torch.einsum(
                 "bkd,bnd->bkn", self.state.closure_left_query(closure_hidden), closure_key
@@ -594,8 +731,8 @@ if nn is not None:
             right_logits = torch.einsum(
                 "bkd,bnd->bkn", self.state.closure_right_query(closure_hidden), closure_key
             ) / math.sqrt(self.hidden_dim)
-            return {
-                "nodes": self.state.node_output(hidden),
+            output = {
+                "nodes": self.state.node_output(chemistry_hidden),
                 "parents": parent_logits,
                 "parent_bonds": parent_bond_logits,
                 "closure_left": left_logits,
@@ -607,6 +744,12 @@ if nn is not None:
                 "core_position_states": self.core_output(hidden),
                 "expert_weights": torch.stack(expert_weights, dim=1),
             }
+            if self.offspring_output is not None:
+                output["offspring"] = self.offspring_output(hidden)
+            if terminal_expert_weights is not None and closure_expert_weights is not None:
+                output["terminal_chemistry_expert_weights"] = terminal_expert_weights
+                output["closure_output_expert_weights"] = closure_expert_weights
+            return output
 
 else:  # pragma: no cover
 
@@ -631,7 +774,13 @@ def _balanced_state_cross_entropy(logits: Any, targets: Any, mask: Any) -> Any:
 def _repeat_component_consistency(
     predictions: Mapping[str, Any], clean: Mapping[str, Any]
 ) -> tuple[Any, Any]:
-    """Align matched positions across repeated components without assigning step identities."""
+    """Align matched positions across repeated components without dense state broadcasts.
+
+    The equivalence relation itself is only ``[batch, nodes, nodes]``.  Materializing atom- and
+    bond-state differences for every possible pair adds a final class dimension even though almost
+    every pair is masked out.  Gather the admitted pairs first so memory and backward work scale
+    with the number of supervised repeat pairs rather than ``nodes**2 * classes``.
+    """
 
     repeat_groups = clean.get("repeat_group_states")
     component_positions = clean.get("component_position_states")
@@ -654,24 +803,121 @@ def _repeat_component_consistency(
     )
     pair_mask &= upper[None]
     node_probabilities = torch.softmax(predictions["nodes"], dim=-1)
-    node_distance = (
-        (node_probabilities[:, :, None, :] - node_probabilities[:, None, :, :])
-        .square()
-        .mean(dim=-1)
-    )
     pair_count = pair_mask.sum()
-    node_loss = (node_distance * pair_mask).sum() / pair_count.clamp(min=1)
+    pair_batch, pair_left, pair_right = pair_mask.nonzero(as_tuple=True)
+    node_difference = (
+        node_probabilities[pair_batch, pair_left] - node_probabilities[pair_batch, pair_right]
+    )
+    node_loss = node_difference.square().mean(dim=-1).sum() / pair_count.clamp(min=1)
 
-    bond_pair_mask = pair_mask & clean["child_mask"][:, :, None] & clean["child_mask"][:, None, :]
+    bond_pair_mask = (
+        clean["child_mask"][pair_batch, pair_left] & clean["child_mask"][pair_batch, pair_right]
+    )
     bond_probabilities = torch.softmax(predictions["parent_bonds"], dim=-1)
-    bond_distance = (
-        (bond_probabilities[:, :, None, :] - bond_probabilities[:, None, :, :])
-        .square()
-        .mean(dim=-1)
+    bond_difference = (
+        bond_probabilities[pair_batch[bond_pair_mask], pair_left[bond_pair_mask]]
+        - bond_probabilities[pair_batch[bond_pair_mask], pair_right[bond_pair_mask]]
     )
     bond_count = bond_pair_mask.sum()
-    bond_loss = (bond_distance * bond_pair_mask).sum() / bond_count.clamp(min=1)
+    bond_loss = bond_difference.square().mean(dim=-1).sum() / bond_count.clamp(min=1)
     return node_loss + bond_loss, pair_count
+
+
+def synthesis_program_offspring_targets(
+    clean: Mapping[str, Any],
+    *,
+    maximum_children: int,
+) -> tuple[Any, Any]:
+    """Derive exterior child counts from sparse parents without fragment identities.
+
+    The target is node-local topology in the existing serialization.  Only edges between exterior
+    atoms in the same anonymous origin component contribute; adapter-owned core attachments and
+    reaction-core edges remain outside the learned offspring channel.
+    """
+
+    if maximum_children < 1:
+        raise ReactionProgramTransformerError("offspring supervision requires positive support")
+    required = {
+        "parents",
+        "child_mask",
+        "node_mask",
+        "core_position_states",
+        "component_instance_states",
+    }
+    if not required.issubset(clean):
+        raise ReactionProgramTransformerError("offspring supervision is missing graph coordinates")
+    parents = clean["parents"]
+    batch, nodes = parents.shape
+    batch_indices = torch.arange(batch, device=parents.device)[:, None].expand(batch, nodes)
+    parent_core = clean["core_position_states"].gather(1, parents)
+    parent_components = clean["component_instance_states"].gather(1, parents)
+    exterior = clean["core_position_states"] == 1
+    internal_children = (
+        clean["child_mask"]
+        & exterior
+        & (parent_core == 1)
+        & (clean["component_instance_states"] == parent_components)
+    )
+    targets = torch.zeros_like(parents)
+    targets.index_put_(
+        (batch_indices[internal_children], parents[internal_children]),
+        torch.ones_like(parents[internal_children]),
+        accumulate=True,
+    )
+    mask = clean["node_mask"] & exterior & (clean["component_instance_states"] > 0)
+    if torch.any(targets[mask] > maximum_children):
+        raise ReactionProgramTransformerError(
+            "observed offspring target exceeds declared child-count support"
+        )
+    return targets, mask
+
+
+def _offspring_program_consistency(
+    predictions: Mapping[str, Any],
+    clean: Mapping[str, Any],
+) -> tuple[Any, Any]:
+    """Match expected role-local junction budgets to the supplied coarse program."""
+
+    logits = predictions.get("offspring")
+    morphology = clean.get("role_morphology_states")
+    if logits is None or morphology is None:
+        raise ReactionProgramTransformerError(
+            "program topology consistency requires offspring logits and morphology states"
+        )
+    maximum_children = int(logits.shape[-1]) - 1
+    _, exterior_mask = synthesis_program_offspring_targets(
+        clean,
+        maximum_children=maximum_children,
+    )
+    child_states = torch.arange(logits.shape[-1], dtype=logits.dtype, device=logits.device)
+    junction_contributions = torch.clamp(child_states - 1, min=0)
+    expected_by_node = torch.einsum(
+        "bnc,c->bn", torch.softmax(logits, dim=-1), junction_contributions
+    )
+    losses = []
+    comparisons = logits.new_zeros((), dtype=torch.int64)
+    maximum_role = int(clean["role_states"].max().item())
+    for role_state in range(1, maximum_role + 1):
+        role_mask = exterior_mask & (clean["role_states"] == role_state)
+        active = role_mask.any(dim=1)
+        conditioned = (morphology[:, :, 1] > 0) & (clean["role_states"] == role_state)
+        active &= conditioned.any(dim=1)
+        if not bool(active.any()):
+            continue
+        predicted = (expected_by_node * role_mask).sum(dim=1)
+        # Morphology coordinates store zero as unconditioned and observed values at value + 1.
+        target = morphology[:, :, 1].masked_fill(~conditioned, 0).max(dim=1).values - 1
+        node_counts = role_mask.sum(dim=1).clamp(min=1).to(logits.dtype)
+        losses.append(
+            functional.smooth_l1_loss(
+                predicted[active] / node_counts[active],
+                target[active].to(logits.dtype) / node_counts[active],
+            )
+        )
+        comparisons = comparisons + active.sum()
+    if not losses:
+        return logits.new_zeros(()), comparisons
+    return torch.stack(losses).mean(), comparisons
 
 
 def reaction_program_transformer_loss(
@@ -681,14 +927,36 @@ def reaction_program_transformer_loss(
     role_weight: float,
     core_weight: float,
     repeat_consistency_weight: float = 0.0,
+    offspring_weight: float = 0.0,
+    junction_consistency_weight: float = 0.0,
+    chemistry_loss_balancing: str = "pooled",
+    topology_conditioned_predictions: Mapping[str, Any] | None = None,
+    topology_conditioned_chemistry_weight: float = 0.0,
     materialize_metrics: bool = True,
 ) -> tuple[Any, dict[str, Any]]:
     """Combine graph flow with state-balanced precursor-role and reaction-core consistency."""
 
-    if role_weight < 0.0 or core_weight < 0.0 or repeat_consistency_weight < 0.0:
+    if any(
+        value < 0.0
+        for value in (
+            role_weight,
+            core_weight,
+            repeat_consistency_weight,
+            offspring_weight,
+            junction_consistency_weight,
+            topology_conditioned_chemistry_weight,
+        )
+    ):
         raise ReactionProgramTransformerError("semantic loss weights must be nonnegative")
+    if chemistry_loss_balancing not in {"pooled", "equal_present_role_mass"}:
+        raise ReactionProgramTransformerError(
+            f"unsupported chemistry loss balancing: {chemistry_loss_balancing!r}"
+        )
     base, metrics = synthesis_program_flow_loss(
-        predictions, clean, materialize_metrics=materialize_metrics
+        predictions,
+        clean,
+        balance_chemistry_by_role=chemistry_loss_balancing == "equal_present_role_mass",
+        materialize_metrics=materialize_metrics,
     )
     role = _balanced_state_cross_entropy(
         predictions["role_states"], clean["role_states"], clean["node_mask"]
@@ -699,17 +967,56 @@ def reaction_program_transformer_loss(
         clean["node_mask"],
     )
     repeat_consistency, repeat_pairs = _repeat_component_consistency(predictions, clean)
+    offspring = base.new_zeros(())
+    junction_consistency = base.new_zeros(())
+    junction_comparisons = base.new_zeros((), dtype=torch.int64)
+    topology_conditioned_chemistry = base.new_zeros(())
+    if topology_conditioned_chemistry_weight > 0.0:
+        if topology_conditioned_predictions is None:
+            raise ReactionProgramTransformerError(
+                "topology-conditioned chemistry was enabled without its second prediction pass"
+            )
+        topology_conditioned_chemistry, _ = synthesis_program_chemistry_loss(
+            topology_conditioned_predictions,
+            clean,
+            balance_by_role=chemistry_loss_balancing == "equal_present_role_mass",
+        )
+    if offspring_weight > 0.0 or junction_consistency_weight > 0.0:
+        offspring_logits = predictions.get("offspring")
+        if offspring_logits is None:
+            raise ReactionProgramTransformerError(
+                "topology objective was enabled without an offspring prediction head"
+            )
+        offspring_targets, offspring_mask = synthesis_program_offspring_targets(
+            clean,
+            maximum_children=int(offspring_logits.shape[-1]) - 1,
+        )
+        offspring = _balanced_state_cross_entropy(
+            offspring_logits,
+            offspring_targets,
+            offspring_mask,
+        )
+        junction_consistency, junction_comparisons = _offspring_program_consistency(
+            predictions, clean
+        )
     total = (
         base
         + role_weight * role
         + core_weight * core
         + repeat_consistency_weight * repeat_consistency
+        + offspring_weight * offspring
+        + junction_consistency_weight * junction_consistency
+        + topology_conditioned_chemistry_weight * topology_conditioned_chemistry
     )
     semantic_metrics = {
         "role_consistency_ce": role.detach(),
         "core_consistency_ce": core.detach(),
         "repeat_consistency_mse": repeat_consistency.detach(),
         "repeat_consistency_pairs": repeat_pairs.detach(),
+        "offspring_ce": offspring.detach(),
+        "junction_budget_consistency": junction_consistency.detach(),
+        "junction_budget_comparisons": junction_comparisons.detach(),
+        "topology_conditioned_chemistry_ce": topology_conditioned_chemistry.detach(),
         "semantic_total": total.detach(),
     }
     if materialize_metrics:
@@ -735,6 +1042,11 @@ def per_program_transformer_losses(
     role_weight: float,
     core_weight: float,
     repeat_consistency_weight: float = 0.0,
+    offspring_weight: float = 0.0,
+    junction_consistency_weight: float = 0.0,
+    chemistry_loss_balancing: str = "pooled",
+    topology_conditioned_predictions: Mapping[str, Any] | None = None,
+    topology_conditioned_chemistry_weight: float = 0.0,
     program_states: tuple[int, ...] | None = None,
     materialize_metrics: bool = True,
 ) -> tuple[dict[int, Any], dict[str, Any]]:
@@ -760,6 +1072,15 @@ def per_program_transformer_losses(
             role_weight=role_weight,
             core_weight=core_weight,
             repeat_consistency_weight=repeat_consistency_weight,
+            offspring_weight=offspring_weight,
+            junction_consistency_weight=junction_consistency_weight,
+            chemistry_loss_balancing=chemistry_loss_balancing,
+            topology_conditioned_predictions=(
+                _slice_batch(topology_conditioned_predictions, indices)
+                if topology_conditioned_predictions is not None
+                else None
+            ),
+            topology_conditioned_chemistry_weight=topology_conditioned_chemistry_weight,
             materialize_metrics=materialize_metrics,
         )
         losses[int(program_state)] = loss

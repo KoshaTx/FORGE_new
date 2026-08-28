@@ -29,6 +29,7 @@ from forge.core.io import (
     read_jsonl,
     stable_json,
     write_csv,
+    write_csv_iter,
     write_json,
     write_jsonl,
 )
@@ -136,6 +137,20 @@ def test_write_csv_gzips_by_extension(tmp_path: Path) -> None:
     write_csv(plain, ROWS, FIELDS)
     assert gzip.decompress(packed.read_bytes()) == plain.read_bytes()
     assert read_csv(packed) == read_csv(plain)
+
+
+@pytest.mark.parametrize("suffix", (".csv", ".csv.gz"))
+def test_streaming_csv_writer_is_deterministic_and_content_identical(
+    tmp_path: Path, suffix: str
+) -> None:
+    buffered = tmp_path / f"buffered{suffix}"
+    streamed = tmp_path / f"streamed{suffix}"
+    repeated = tmp_path / f"repeated{suffix}"
+    write_csv(buffered, ROWS, FIELDS)
+    write_csv_iter(streamed, iter(ROWS), FIELDS)
+    write_csv_iter(repeated, iter(ROWS), FIELDS)
+    assert read_csv(streamed) == read_csv(buffered)
+    assert streamed.read_bytes() == repeated.read_bytes()
 
 
 def test_jsonl_round_trips(tmp_path: Path) -> None:

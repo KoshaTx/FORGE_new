@@ -1,0 +1,35 @@
+{
+  "schema_version": "forge.reaction_specialist_ugi_v0_comparison_config.v1",
+  "inputs": {
+    "base_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+    "base_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+    "base_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+    "closure_checkpoint": {"path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt", "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"},
+    "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+    "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+    "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+    "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"},
+    "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+    "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+    "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+    "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"},
+    "specialist_checkpoint": {"path": "results/phase1/reaction_specialist_ugi_seed0_h100_v1/specialist_checkpoint.pt", "sha256": "7f28c776052da19600f770b3f0341abc9514f3029b01d742069c41233a08ae08"},
+    "specialist_result": {"path": "results/phase1/reaction_specialist_ugi_seed0_h100_v1/result.json", "sha256": "404fa21eff57ae5aae6e8788030414921d7d1cd77c16ed5ae3e75cc5615a711c"},
+    "v0_checkpoint": {"path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt", "sha256": "4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50"}
+  },
+  "base_checkpoint": {"arm_id": "full_role_morphology_transformer", "step": 1700},
+  "matched_ugi_exposure": 384000,
+  "profiles": {
+    "smoke": {"device": "cuda", "program_count": 4, "sample_steps": 2, "batch_size": 4, "flow_seed": 20260828, "terminal_decoder_mode": "argmax", "terminal_decoder_seed": null, "current_terminal_decode_policy": "strict_program_topology_argmax", "maximum_adjacent_branch_runs": [2, 1, 1]},
+    "full": {"device": "cuda", "program_count": 3072, "sample_steps": 32, "batch_size": 32, "flow_seed": 20260828, "terminal_decoder_mode": "argmax", "terminal_decoder_seed": null, "current_terminal_decode_policy": "strict_program_topology_argmax", "maximum_adjacent_branch_runs": [2, 1, 1]}
+  },
+  "policy": {"candidate_selection": false, "method_blind_assessment": true, "negative_results_reported": true, "oracle_calls": 0, "paired_program_order": true, "repairs_or_retries": false, "route_calls": 0, "training_calls": 0},
+  "decision_rule": {"primary_metric": "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt", "absolute_margin": 0.02, "reliability_metrics": ["valid_fraction_per_attempt", "exact_l1_yield_per_attempt", "local_support_qualified_exact_l1_yield_per_attempt"]},
+  "nonclaims": [
+    "This seed-0 comparison does not estimate independently trained model variance.",
+    "Ugi example exposure is matched, but total pretraining compute is not.",
+    "The architectures retain their native factorizations and constrained argmax decoders.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "This recovery evaluates the original hash-pinned production checkpoint and performs no retraining."
+  ]
+}

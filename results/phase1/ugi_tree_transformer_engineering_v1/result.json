@@ -1,0 +1,105 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_engineering.v1",
+  "status": "engineering_complete_scientific_evaluation_pending",
+  "date": "2026-08-26",
+  "inputs": {
+    "structural_attention": {
+      "path": "forge/model/structural_attention.py",
+      "sha256": "fcf4138bdf197a1683955c62056feb57496152913b2179fbc74f181bace26edc"
+    },
+    "joint_sparse_flow": {
+      "path": "forge/model/ugi_joint_sparse_flow.py",
+      "sha256": "c101f73158db8b81e8f68d85f914125de020a74d8b9d887c7b56f68b2ad6e008"
+    },
+    "training": {
+      "path": "experiments/phase1/product_l1/training/ugi_joint_sparse_training.py",
+      "sha256": "d2791c14d5f2778dd7c756ac7d0681e8265ec9f598d21b7dceb94c0fa9f6d491"
+    },
+    "challenger_config": {
+      "path": "configs/model/phase1_ugi_tree_transformer_challenger_seed0_v1.json",
+      "sha256": "bbe689884b6c2153471fbb0952e22af01a38dd200b83d3b34c04323e7c662f78"
+    },
+    "ablation_ladder": {
+      "path": "configs/model/phase1_ugi_tree_transformer_ablation_ladder_v1.json",
+      "sha256": "7ca2ddb7378bc1ae78bf2e002ebf9ede4f3146f239e7bd821ffa823aceec6db0"
+    },
+    "smoke_descriptor": {
+      "path": "experiments/phase1/product_l1/ugi_tree_transformer_challenger_smoke_v1.json",
+      "sha256": "2cd999ae5692caaf721aa6134e2246a8df98d197a6996a53af9b3f8bc6a8172e"
+    }
+  },
+  "implementation": {
+    "backbone": "ugi_tree_program_transformer",
+    "tree_relations_use_current_noisy_offspring_only": true,
+    "role_routed_program_attention": true,
+    "role_adapters": true,
+    "program_consistency_losses": true,
+    "whole_role_source_masking": true,
+    "warmup_cosine_schedule": true,
+    "sampler_interface_changed": false
+  },
+  "cpu_forward_microbenchmark": {
+    "purpose": "Representative engineering overhead check; not a training-throughput or scientific result.",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "torch": "2.13.0",
+    "torch_threads": 1,
+    "batch_size": 4,
+    "nodes_per_example": 30,
+    "hidden_dim": 96,
+    "layers": 2,
+    "attention_heads": 4,
+    "warmup_forwards": 1,
+    "timed_forwards": 10,
+    "manual_attention_reference": {
+      "dense_program_transformer_ms_per_batch": 1.26,
+      "tree_program_transformer_ms_per_batch": 1.72,
+      "tree_latency_overhead_percent": 36.5
+    },
+    "scaled_dot_product_attention": {
+      "dense_program_transformer_ms_per_batch": 1.21,
+      "tree_program_transformer_ms_per_batch": 1.49,
+      "tree_latency_overhead_percent": 23.1,
+      "tree_latency_reduction_from_manual_percent": 13.4
+    },
+    "dense_program_transformer_ms_per_batch": 1.21,
+    "tree_program_transformer_ms_per_batch": 1.49,
+    "tree_latency_overhead_percent": 23.1,
+    "interpretation": "The structural path remains vectorized but adds measurable CPU work. H100 throughput and memory remain unmeasured until an authorized preflight."
+  },
+  "smoke": {
+    "run_id": "80ecb70a02397009d127efb4240fc91d921419c8d0291364285c850c55bc1988",
+    "profile": "smoke",
+    "backend": "local",
+    "status": "complete",
+    "strict_reproduction_status": "reproduced",
+    "strict_reproduction_byte_identical": true,
+    "artifact_sha256": {
+      "checkpoint": "d490732e08cda1f0d495dbe41ebb0d57121189d032104ce949a011eacca0987b",
+      "checkpoint_latest": "70ee81f6fe77c3bcc289757a5f982b6065cac3f8b6193086f43913fe8dc788f0",
+      "checkpoint_snapshots": "90cd29f003b66911ad5a9fc249f1c229c853980fe24634ade7007d60da350683",
+      "progress": "d396dd7b57cfe06c81ad3666ce37823d8e407ab660f78ae278b9aea9dbc89362",
+      "result": "7b6d2d7d5921cb90c6f43ebd249738307ef4e83278a4aac0bc5f73012321c274"
+    }
+  },
+  "verification": {
+    "vendored_assets_verified": 30,
+    "focused_and_core_tests_passed": 94,
+    "focused_tests_skipped_for_documented_missing_asset": 7,
+    "full_suite_collected_nodes": 1866,
+    "full_suite_known_failure_nodes": 189,
+    "full_suite_new_failures": 0,
+    "documented_missing_historical_inputs": 54,
+    "baseline_status": "blocked_known_failures",
+    "baseline_report": {
+      "path": "results/maintenance/root_package_architecture_v1/test_baseline.json",
+      "sha256": "1ac8c6aab163fe6c808244cc4ee19d7bfc5ae1133d96811dd39d1bee33a5e0b6"
+    }
+  },
+  "scientific_status": {
+    "beats_v0": "not_tested",
+    "exact_l1": "not_measured_at_scientific_scale",
+    "lipid_realism": "not_measured",
+    "held_component_generalization": "not_measured",
+    "paid_gpu_launch_authorized_by_this_result": false
+  }
+}

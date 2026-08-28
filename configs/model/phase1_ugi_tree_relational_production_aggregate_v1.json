@@ -1,0 +1,71 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_production_aggregate_config.v1",
+  "status": "frozen_before_fresh_production_seeds",
+  "experiment_id": "phase1-ugi-tree-relational-production-h100-v1",
+  "expected_training_seeds": [20260905, 20260906, 20260907],
+  "selected_model": {
+    "arm_id": "tree_relations_and_routing",
+    "checkpoint_step": 2700,
+    "candidate_id": "tree_relations_and_routing:step_2700"
+  },
+  "inputs": {
+    "program_draw": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "v0_reference_assessment": {
+      "path": "results/phase1/ugi_v0_production_transformer_assessment_v1/result.json",
+      "sha256": "da9a1a45ecaa21cfcce6764c9a1498c8d896bc17eb089ae9372dd8fe41bc820c"
+    }
+  },
+  "reported_metrics": [
+    "valid_fraction_per_attempt",
+    "exact_l1_yield_per_attempt",
+    "unique_exact_l1_products_per_attempt",
+    "unique_open_ended_exact_l1_products_per_attempt",
+    "whole_product_novel_to_train_fraction",
+    "component_novelty_fraction",
+    "effective_component_count",
+    "local_support_qualified_exact_l1_yield_per_attempt",
+    "role_supported_exact_l1_yield_per_attempt",
+    "tail_supported_exact_l1_yield_per_attempt",
+    "held_component_exact_l1_products_per_1000_attempts",
+    "mean_pairwise_ecfp4_distance",
+    "realism_c2st_auc"
+  ],
+  "gates": {
+    "per_seed_minimums": {
+      "valid_fraction_per_attempt": 0.95,
+      "exact_l1_yield_per_attempt": 0.93,
+      "unique_open_ended_exact_l1_products_per_attempt": 0.75,
+      "component_novelty_fraction": 0.75,
+      "local_support_qualified_exact_l1_yield_per_attempt": 0.88,
+      "role_supported_exact_l1_yield_per_attempt": 0.35,
+      "tail_supported_exact_l1_yield_per_attempt": 0.45
+    },
+    "mean_minimums": {
+      "valid_fraction_per_attempt": 0.97,
+      "exact_l1_yield_per_attempt": 0.95,
+      "unique_open_ended_exact_l1_products_per_attempt": 0.80,
+      "component_novelty_fraction": 0.80
+    },
+    "minimum_mean_effective_component_count_ratio_to_v0": 0.8
+  },
+  "policy": {
+    "architecture_or_checkpoint_reselection": false,
+    "heldout_rows_descriptive_only": true,
+    "negative_result_completes_experiment": true,
+    "training_seed_is_unit_of_replication": true,
+    "molecule_rows_are_not_independent_replicates": true,
+    "reductive_amination_substructure_rate_reported": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false
+  },
+  "nonclaims": [
+    "The fixed historical v0 checkpoint is a descriptive reference, not a three-training-seed comparator.",
+    "The component-family stress draw is not a pristine final test and cannot support model selection.",
+    "Held-component exact-L1 yield is diagnostic and is not a production qualification gate.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability."
+  ]
+}

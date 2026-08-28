@@ -1,0 +1,41 @@
+{
+  "arms": [
+    "bl_core_constrained_repeat_aware"
+  ],
+  "calls": {
+    "oracle": 0,
+    "route": 0
+  },
+  "candidate_selection": false,
+  "evaluation": {
+    "bytes": 22575,
+    "logical_path": "result.json",
+    "sha256": "357ca8336a72a0982a0fc3de22bbf1313aae892a0e899820bbf9a2dc47cb3645"
+  },
+  "evaluation_split": "calibration_and_heldout",
+  "held_reaction_family_hard_gate": false,
+  "nonclaims": [
+    "No arm is a candidate source.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Held-reaction-family transfer is a secondary robustness stress test and not a hard gate."
+  ],
+  "parameter_counts": {
+    "bl_core_constrained_repeat_aware": 76250
+  },
+  "profile": "smoke",
+  "replicate": 0,
+  "samples": {
+    "bytes": 1390,
+    "logical_path": "samples.jsonl.gz",
+    "sha256": "d29f022cc109061e6837b3d1d08f3b16a9990489544d2bcdffb5d3c55a9f6b97"
+  },
+  "schema_version": "forge.transformer_mechanism_study_result.v1",
+  "seed": 20260825,
+  "status": "pass",
+  "study": "bl_core_constrained_production",
+  "training": {
+    "bytes": 9638,
+    "logical_path": "result.json",
+    "sha256": "5eae6320eb700e5768a56adc73e177ce98ca93799bedbe773e4ef1fad7720479"
+  }
+}

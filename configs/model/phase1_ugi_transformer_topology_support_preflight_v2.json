@@ -1,0 +1,23 @@
+{
+  "schema_version": "forge.ugi_transformer_topology_support_preflight_config.v2",
+  "seed": 20260829,
+  "expected_programs": 3072,
+  "maximum_children": 3,
+  "inputs": {
+    "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+    "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+    "topology_closure_config": {"path": "configs/model/phase1_ugi_closure_expanded.json", "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"},
+    "topology_morphology_config": {"path": "configs/model/phase1_ugi_morphology_expanded.json", "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"}
+  },
+  "policy": {
+    "one_conditional_topology_draw_per_program": true,
+    "candidate_selection": false,
+    "chemistry_generation_calls": 0,
+    "repairs": 0,
+    "heldout_used_for_model_or_policy_selection": false
+  },
+  "nonclaims": [
+    "Topology support does not establish chemical validity or exact-L1 yield.",
+    "This diagnostic does not train, select a checkpoint, or generate candidates."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "cache": {
+    "bytes": 13727905,
+    "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+    "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+  },
+  "config": {
+    "bytes": 2375,
+    "path": "configs/multireaction/shared_mixed_primary_seed0_evaluation_v1.json",
+    "sha256": "5529f553ee2358e74a18ec249f768d4826c3c3a928c5e6ac0f60c3785b1446a0"
+  },
+  "design": {
+    "bytes": 9597,
+    "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json",
+    "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"
+  },
+  "gates": {
+    "all_frozen_layout_cells_materialized": true,
+    "all_layouts_within_declared_support": true,
+    "clipping_absent": true,
+    "dropped_attempts_zero": true,
+    "heldout_structure_access_zero": true,
+    "repair_absent": true,
+    "retry_absent": true
+  },
+  "profile": "full",
+  "replicate": 0,
+  "sampling_law": "factorized training-fold role-size product conditioned exactly on declared maximum heavy-atom support",
+  "schedule": {
+    "by_program": {
+      "bl_2023_repeated_aza_michael": {
+        "cells": 6,
+        "layouts": 5632,
+        "maximum_node_count": 194
+      },
+      "lx_2024_repeated_reductive_amination": {
+        "cells": 6,
+        "layouts": 5632,
+        "maximum_node_count": 166
+      },
+      "ugi_3cr_agile": {
+        "cells": 6,
+        "layouts": 5632,
+        "maximum_node_count": 63
+      }
+    },
+    "cells": 18,
+    "layouts": 16896,
+    "maximum_node_count": 194
+  },
+  "schema_version": "forge.synthesis_program_layout_schedule_preflight.v1",
+  "seed": 20260825,
+  "status": "pass",
+  "support": {
+    "maximum_closures": 3,
+    "maximum_heavy_atoms": 194
+  },
+  "training_result": {
+    "bytes": 10738,
+    "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json",
+    "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"
+  }
+}

@@ -26,6 +26,7 @@ from forge.model.synthesis_program_training import (
     synthesis_program_fixed_state_exact_tensor,
     synthesis_program_forward,
     synthesis_program_forward_loss,
+    synthesis_program_topology_conditioned_forward,
 )
 from forge.model.training_restart import (
     TrainingRestartError,
@@ -431,6 +432,14 @@ def _train_arm(
                     model, clean, node_p0, bond_p0, t, generator
                 )
                 objective = arm_model_config["semantic_objective"]
+                topology_conditioned_weight = float(
+                    objective.get("topology_conditioned_chemistry_weight", 0.0)
+                )
+                topology_conditioned_predictions = (
+                    synthesis_program_topology_conditioned_forward(model, clean, noisy, t)
+                    if topology_conditioned_weight > 0.0
+                    else None
+                )
                 family_losses, metrics = per_program_transformer_losses(
                     predictions,
                     clean,
@@ -439,6 +448,15 @@ def _train_arm(
                     repeat_consistency_weight=float(
                         objective.get("repeat_consistency_weight", 0.0)
                     ),
+                    offspring_weight=float(objective.get("offspring_weight", 0.0)),
+                    junction_consistency_weight=float(
+                        objective.get("junction_consistency_weight", 0.0)
+                    ),
+                    chemistry_loss_balancing=str(
+                        objective.get("chemistry_loss_balancing", "pooled")
+                    ),
+                    topology_conditioned_predictions=topology_conditioned_predictions,
+                    topology_conditioned_chemistry_weight=topology_conditioned_weight,
                     program_states=active_program_states,
                     materialize_metrics=False,
                 )
@@ -483,6 +501,10 @@ def _train_arm(
         gradient_norm = torch.nn.utils.clip_grad_norm_(
             model.parameters(), float(runtime["gradient_clip_norm"])
         )
+        # Launch parameter updates before the metrics cross the accelerator boundary.  The
+        # diagnostics are detached from model state, so this preserves the exact update while
+        # avoiding a host synchronization bubble between backward and AdamW.
+        optimizer.step()
         metric_keys = sorted(step_metrics)
         published = (
             torch.stack(
@@ -500,7 +522,6 @@ def _train_arm(
         gradient_norm_value, conflict_value, fixed_failure_value = published[-3:]
         balancing_diagnostics["projected_conflicts"] += int(conflict_value)
         fixed_state_failures += int(fixed_failure_value)
-        optimizer.step()
         completed_steps = optimizer_step
         losses.append(
             {

@@ -10,11 +10,13 @@ from __future__ import annotations
 from collections import Counter, defaultdict, deque
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from itertools import product
 from typing import Any
 
 import numpy as np
 
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model.reaction_program_flow import derive_role_morphology_states
 from forge.model.sparse_topology_feasibility import SparseGraphRecord
 from forge.model.synthesis_program_graph import (
     SynthesisProgramComponentBlock,
@@ -33,6 +35,8 @@ class _RecordSummary:
     blocks: tuple[tuple[int, int, tuple[tuple[int, int], ...]], ...]
     fixed_signature: tuple[tuple[Any, ...], ...]
     weight: float
+    role_morphology: tuple[tuple[int, tuple[int, int, int, int]], ...] = ()
+    program_topology_signature: tuple[tuple[Any, ...], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -64,8 +68,12 @@ class _ProgramDistribution:
     depth: _WeightedSupport
     closure_count: _WeightedSupport
     semantic_bundle_by_depth: Mapping[int, _WeightedSupport]
-    component_size_by_bundle: Mapping[
+    component_sizes_by_bundle: Mapping[
         tuple[int, tuple[Any, ...], int, tuple[tuple[int, int], ...]],
+        _WeightedSupport,
+    ]
+    role_morphology_by_sizes: Mapping[
+        tuple[int, tuple[Any, ...], int, tuple[int, ...]],
         _WeightedSupport,
     ]
 
@@ -93,12 +101,20 @@ def _compile_program_distribution(summaries: Sequence[_RecordSummary]) -> _Progr
     weights = [summary.weight for summary in summaries]
     bundle_values: dict[int, list[tuple[Any, ...]]] = defaultdict(list)
     bundle_weights: dict[int, list[float]] = defaultdict(list)
-    size_values: dict[tuple[int, tuple[Any, ...], int, tuple[tuple[int, int], ...]], list[int]] = (
-        defaultdict(list)
-    )
+    size_values: dict[
+        tuple[int, tuple[Any, ...], int, tuple[tuple[int, int], ...]],
+        list[tuple[int, ...]],
+    ] = defaultdict(list)
     size_weights: dict[
         tuple[int, tuple[Any, ...], int, tuple[tuple[int, int], ...]], list[float]
     ] = defaultdict(list)
+    morphology_values: dict[
+        tuple[int, tuple[Any, ...], int, tuple[int, ...]],
+        list[tuple[int, int, int, int]],
+    ] = defaultdict(list)
+    morphology_weights: dict[tuple[int, tuple[Any, ...], int, tuple[int, ...]], list[float]] = (
+        defaultdict(list)
+    )
     for summary in summaries:
         bundle = _semantic_bundle(summary)
         bundle_values[summary.depth].append(bundle)
@@ -109,13 +125,23 @@ def _compile_program_distribution(summaries: Sequence[_RecordSummary]) -> _Progr
         for role_state, size, core_signature in summary.blocks:
             by_component_signature[(int(role_state), core_signature)].append(int(size))
         for (role_state, core_signature), local_sizes in by_component_signature.items():
-            if len(set(local_sizes)) != 1:
-                raise SynthesisProgramLayoutError(
-                    "identical repeated-component signatures have unequal atom counts"
-                )
+            # Repeated reaction roles are exchangeable, but their components need not have equal
+            # sizes.  Retain the sorted size multiset as a count-only joint draw.  This preserves
+            # within-product morphology without retaining component order, identity, or SMILES.
             key = (summary.depth, bundle, role_state, core_signature)
-            size_values[key].append(local_sizes[0])
+            size_values[key].append(tuple(sorted(local_sizes)))
             size_weights[key].append(summary.weight)
+        morphology_by_role = dict(summary.role_morphology)
+        sizes_by_role: dict[int, list[int]] = defaultdict(list)
+        for role_state, size, _ in summary.blocks:
+            sizes_by_role[int(role_state)].append(int(size))
+        for role_state, local_sizes in sizes_by_role.items():
+            morphology = morphology_by_role.get(role_state)
+            if morphology is None:
+                continue
+            key = (summary.depth, bundle, role_state, tuple(sorted(local_sizes)))
+            morphology_values[key].append(morphology)
+            morphology_weights[key].append(summary.weight)
     return _ProgramDistribution(
         depth=_WeightedSupport.build(depth_values, weights),
         closure_count=_WeightedSupport.build(closure_values, weights),
@@ -123,11 +149,68 @@ def _compile_program_distribution(summaries: Sequence[_RecordSummary]) -> _Progr
             depth: _WeightedSupport.build(values, bundle_weights[depth])
             for depth, values in bundle_values.items()
         },
-        component_size_by_bundle={
+        component_sizes_by_bundle={
             key: _WeightedSupport.build(values, size_weights[key])
             for key, values in size_values.items()
         },
+        role_morphology_by_sizes={
+            key: _WeightedSupport.build(values, morphology_weights[key])
+            for key, values in morphology_values.items()
+        },
     )
+
+
+def _support_conditioned_component_sizes(
+    distribution: _ProgramDistribution,
+    *,
+    depth: int,
+    bundle: tuple[Any, ...],
+    maximum_heavy_atoms: int,
+) -> _WeightedSupport:
+    """Compile the factorized role-size law conditional on declared graph support.
+
+    Role-size multisets remain independent under the learned count prior, but an independently
+    combined draw can be larger than the model's declared atom support even though every source
+    record was in support.  Enumerating the small, finite count supports lets us sample the exact
+    product law conditioned on total size, rather than retrying, clipping, or dropping an attempt.
+    """
+
+    multiplicity_pattern, _ = bundle
+    role_supports: list[_WeightedSupport] = []
+    for (role_state, core_signature), multiplicity in multiplicity_pattern:
+        support = distribution.component_sizes_by_bundle[
+            (depth, bundle, int(role_state), core_signature)
+        ]
+        if any(len(values) != int(multiplicity) for values in support.values):
+            raise SynthesisProgramLayoutError("component-size support changed role multiplicity")
+        role_supports.append(support)
+
+    admitted: list[tuple[tuple[int, ...], ...]] = []
+    weights: list[float] = []
+    for indices in product(*(range(len(support.values)) for support in role_supports)):
+        values = tuple(
+            tuple(int(value) for value in support.values[index])
+            for support, index in zip(role_supports, indices, strict=True)
+        )
+        if sum(sum(role_sizes) for role_sizes in values) > maximum_heavy_atoms:
+            continue
+        admitted.append(values)
+        weights.append(
+            float(
+                np.prod(
+                    [
+                        support.probabilities[index]
+                        for support, index in zip(role_supports, indices, strict=True)
+                    ],
+                    dtype=np.float64,
+                )
+            )
+        )
+    if not admitted:
+        raise SynthesisProgramLayoutError(
+            "factorized component-size law has no mass within declared support"
+        )
+    return _WeightedSupport.build(admitted, weights)
 
 
 def _fixed_signature(record: SynthesisProgramGraphRecord) -> tuple[tuple[Any, ...], ...]:
@@ -166,6 +249,49 @@ def _fixed_signature(record: SynthesisProgramGraphRecord) -> tuple[tuple[Any, ..
     return tuple(sorted(rows))
 
 
+def _program_topology_signature(
+    record: SynthesisProgramGraphRecord,
+) -> tuple[tuple[Any, ...], ...]:
+    """Compile exact reaction edges without retaining component identity or variable interiors.
+
+    Adapter-fixed edges are always retained.  For programs such as LX whose reaction-core atom
+    identities remain generated, bonds between two declared core coordinates are also retained.
+    Endpoint booleans encode core versus exterior position, not whether the atom state is fixed.
+    """
+
+    rows: list[tuple[Any, ...]] = []
+
+    def append(left: int, right: int, bond: int) -> None:
+        endpoints = tuple(
+            sorted(
+                (
+                    int(record.core_position_states[index]),
+                    int(record.role_states[index]),
+                    bool(record.core_position_states[index] > 1),
+                )
+                for index in (left, right)
+            )
+        )
+        rows.append((*endpoints, int(bond)))
+
+    for child in range(1, record.node_count):
+        parent = int(record.graph.parents[child])
+        if bool(record.fixed_parent_bond_mask[child]) or (
+            int(record.core_position_states[child]) > 1
+            and int(record.core_position_states[parent]) > 1
+        ):
+            append(child, parent, int(record.graph.parent_bonds[child]))
+    for slot in range(record.graph.closure_count):
+        left = int(record.graph.closure_left[slot])
+        right = int(record.graph.closure_right[slot])
+        if bool(record.fixed_closure_bond_mask[slot]) or (
+            int(record.core_position_states[left]) > 1
+            and int(record.core_position_states[right]) > 1
+        ):
+            append(left, right, int(record.graph.closure_bonds[slot]))
+    return tuple(sorted(rows))
+
+
 def _summarize_program(
     cache: SynthesisProgramProductionCache,
     program_id: str,
@@ -179,6 +305,7 @@ def _summarize_program(
     fixed_node_states: dict[int, int] = {}
     for cache_index, weight in zip(indices, source, strict=True):
         record = cache.record(int(cache_index))
+        morphology_states = derive_role_morphology_states(record)
         for position in np.flatnonzero(record.fixed_atom_mask):
             core_state = int(record.core_position_states[position])
             node_state = int(record.graph.node_states[position])
@@ -211,6 +338,20 @@ def _summarize_program(
                 ),
                 fixed_signature=_fixed_signature(record),
                 weight=float(weight),
+                role_morphology=tuple(
+                    (
+                        role_state,
+                        tuple(
+                            int(value) - 1
+                            for value in morphology_states[
+                                int(np.flatnonzero(record.role_states == role_state)[0])
+                            ]
+                        ),
+                    )
+                    for role_state in sorted(set(int(value) for value in record.role_states))
+                    if role_state > 0
+                ),
+                program_topology_signature=_program_topology_signature(record),
             )
         )
     if not summaries:
@@ -227,11 +368,60 @@ class SynthesisProgramLayoutPrior:
         self.maximum_closures = int(cache.metadata["support"]["maximum_closures"])
         self._distributions: dict[str, _ProgramDistribution] = {}
         self._fixed_node_states: dict[str, dict[int, int]] = {}
+        self._program_topology_signatures: dict[str, dict[int, tuple[tuple[Any, ...], ...]]] = {}
+        self._repeated_role_states: dict[str, int | None] = {}
+        self._conditioned_component_sizes: dict[
+            tuple[str, int, tuple[Any, ...]], _WeightedSupport
+        ] = {}
         for program_id in cache.vocabulary.program_states[1:]:
             summaries, fixed_node_states = _summarize_program(cache, program_id)
             self._distributions[program_id] = _compile_program_distribution(summaries)
             self._fixed_node_states[program_id] = fixed_node_states
+            by_depth: dict[int, set[tuple[tuple[Any, ...], ...]]] = defaultdict(set)
+            maximum_multiplicity: Counter[int] = Counter()
+            for summary in summaries:
+                by_depth[int(summary.depth)].add(summary.program_topology_signature)
+                local = Counter(int(role) for role, _, _ in summary.blocks)
+                for role, count in local.items():
+                    maximum_multiplicity[role] = max(maximum_multiplicity[role], count)
+            if not fixed_node_states and any(len(values) != 1 for values in by_depth.values()):
+                raise SynthesisProgramLayoutError(
+                    f"reaction-program topology varies within one depth for {program_id}"
+                )
+            self._program_topology_signatures[program_id] = {
+                depth: next(iter(values))
+                for depth, values in by_depth.items()
+                if len(values) == 1
+            }
+            repeated = [role for role, count in maximum_multiplicity.items() if count > 1]
+            if len(repeated) > 1:
+                raise SynthesisProgramLayoutError(
+                    f"reaction program has multiple repeated roles: {program_id}"
+                )
+            self._repeated_role_states[program_id] = repeated[0] if repeated else None
         self.validate_support()
+
+    def _component_size_support(
+        self,
+        program_id: str,
+        depth: int,
+        bundle: tuple[Any, ...],
+    ) -> _WeightedSupport:
+        cache = getattr(self, "_conditioned_component_sizes", None)
+        if cache is None:
+            cache = {}
+            self._conditioned_component_sizes = cache
+        key = (program_id, depth, bundle)
+        support = cache.get(key)
+        if support is None:
+            support = _support_conditioned_component_sizes(
+                self._distributions[program_id],
+                depth=depth,
+                bundle=bundle,
+                maximum_heavy_atoms=self.maximum_heavy_atoms,
+            )
+            cache[key] = support
+        return support
 
     def _sample_fields(self, program_id: str, rng: np.random.Generator) -> tuple[
         int,
@@ -244,15 +434,102 @@ class SynthesisProgramLayoutPrior:
         closure_count = int(distribution.closure_count.sample(rng))
         bundle = distribution.semantic_bundle_by_depth[depth].sample(rng)
         multiplicity_pattern, fixed_signature = bundle
+        joint_sizes = self._component_size_support(program_id, depth, bundle).sample(rng)
         blocks: list[tuple[int, int, tuple[tuple[int, int], ...]]] = []
-        for (role_state, core_signature), multiplicity in multiplicity_pattern:
-            size = int(
-                distribution.component_size_by_bundle[
-                    (depth, bundle, int(role_state), core_signature)
-                ].sample(rng)
-            )
-            blocks.extend((int(role_state), size, core_signature) for _ in range(int(multiplicity)))
+        for ((role_state, core_signature), multiplicity), sizes in zip(
+            multiplicity_pattern,
+            joint_sizes,
+            strict=True,
+        ):
+            if len(sizes) != int(multiplicity):
+                raise SynthesisProgramLayoutError(
+                    "sampled component-size multiset changed role multiplicity"
+                )
+            blocks.extend((int(role_state), size, core_signature) for size in sizes)
         return depth, closure_count, blocks, fixed_signature
+
+    def _sample_role_morphology(
+        self,
+        *,
+        program_id: str,
+        depth: int,
+        blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
+        fixed_signature: tuple[tuple[Any, ...], ...],
+        rng: np.random.Generator,
+    ) -> dict[int, tuple[int, int, int, int]]:
+        """Draw complete role-local programs conditioned on the sampled role sizes.
+
+        Role programs remain component-identity free.  Their small categorical supports are
+        combined exactly and conditioned on the model's global closure bound rather than retried.
+        """
+
+        distribution = self._distributions[program_id]
+        bundle = (
+            tuple(
+                sorted(
+                    Counter((role, core_signature) for role, _, core_signature in blocks).items()
+                )
+            ),
+            fixed_signature,
+        )
+        sizes_by_role: dict[int, list[int]] = defaultdict(list)
+        for role_state, size, _ in blocks:
+            sizes_by_role[int(role_state)].append(int(size))
+        roles = tuple(sorted(sizes_by_role))
+        supports = []
+        for role_state in roles:
+            key = (depth, bundle, role_state, tuple(sorted(sizes_by_role[role_state])))
+            try:
+                supports.append(distribution.role_morphology_by_sizes[key])
+            except KeyError as error:
+                raise SynthesisProgramLayoutError(
+                    "sampled role sizes have no role-local morphology support"
+                ) from error
+        admitted: list[tuple[int, ...]] = []
+        weights: list[float] = []
+        for indices in product(*(range(len(support.values)) for support in supports)):
+            values = tuple(
+                support.values[index] for support, index in zip(supports, indices, strict=True)
+            )
+            if sum(int(value[2]) for value in values) > self.maximum_closures:
+                continue
+            admitted.append(indices)
+            weights.append(
+                float(
+                    np.prod(
+                        [
+                            support.probabilities[index]
+                            for support, index in zip(supports, indices, strict=True)
+                        ],
+                        dtype=np.float64,
+                    )
+                )
+            )
+        if not admitted:
+            raise SynthesisProgramLayoutError(
+                "role-local morphology law has no mass within closure support"
+            )
+        probabilities = np.asarray(weights, dtype=np.float64)
+        probabilities /= probabilities.sum()
+        selected = admitted[int(rng.choice(len(admitted), p=probabilities))]
+        return {
+            role_state: tuple(int(value) for value in support.values[index])
+            for role_state, support, index in zip(roles, supports, selected, strict=True)
+        }
+
+    @staticmethod
+    def _attach_role_morphology(
+        record: SynthesisProgramGraphRecord,
+        morphology: Mapping[int, tuple[int, int, int, int]],
+    ) -> SynthesisProgramGraphRecord:
+        from dataclasses import replace
+
+        states = np.zeros((record.node_count, 4), dtype=np.int64)
+        for role_state, values in morphology.items():
+            states[record.role_states == int(role_state)] = np.asarray(values, dtype=np.int64) + 1
+        if np.any((record.role_states > 0) & np.all(states == 0, axis=1)):
+            raise SynthesisProgramLayoutError("role-local morphology does not cover the layout")
+        return replace(record, role_morphology_states=states)
 
     def validate_support(self) -> dict[str, int]:
         """Exhaust every finite semantic bundle at its smallest admitted role sizes."""
@@ -263,15 +540,23 @@ class SynthesisProgramLayoutPrior:
             for depth, bundle_support in sorted(distribution.semantic_bundle_by_depth.items()):
                 for bundle_index, bundle in enumerate(bundle_support.values):
                     multiplicity_pattern, fixed_signature = bundle
+                    self._component_size_support(program_id, depth, bundle)
                     blocks: list[tuple[int, int, tuple[tuple[int, int], ...]]] = []
                     for (role_state, core_signature), multiplicity in multiplicity_pattern:
-                        sizes = distribution.component_size_by_bundle[
+                        size_multisets = distribution.component_sizes_by_bundle[
                             (depth, bundle, int(role_state), core_signature)
                         ].values
-                        size_support_count += len(sizes)
+                        size_support_count += len(size_multisets)
+                        smallest = min(
+                            size_multisets,
+                            key=lambda values: (sum(values), values),
+                        )
+                        if len(smallest) != int(multiplicity):
+                            raise SynthesisProgramLayoutError(
+                                "component-size support changed role multiplicity"
+                            )
                         blocks.extend(
-                            (int(role_state), int(min(sizes)), core_signature)
-                            for _ in range(int(multiplicity))
+                            (int(role_state), int(size), core_signature) for size in smallest
                         )
                     closure_count = int(max(distribution.closure_count.values))
                     if self._fixed_node_states[program_id]:
@@ -574,6 +859,7 @@ class SynthesisProgramLayoutPrior:
         blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
         fixed_signature: Sequence[tuple[Any, ...]],
         sample_index: int,
+        repeated_role_state: int | None = None,
     ) -> SynthesisProgramGraphRecord:
         """Lay out one two-role repeated program with an adapter-fixed reaction junction."""
 
@@ -589,10 +875,18 @@ class SynthesisProgramLayoutPrior:
         if depth == 1:
             # At depth one both roles are singletons.  The repeat component is the role with the
             # richer per-step core signature; this criterion is semantic and count-only.
-            repeated_role = max(
-                by_role,
-                key=lambda role: sum(count for _, count in by_role[role][0][2]),
+            repeated_role = (
+                repeated_role_state
+                if repeated_role_state is not None
+                else max(
+                    by_role,
+                    key=lambda role: sum(count for _, count in by_role[role][0][2]),
+                )
             )
+            if repeated_role not in by_role:
+                raise SynthesisProgramLayoutError(
+                    "declared repeated role is absent from the sampled layout"
+                )
             singleton_role = next(role for role in by_role if role != repeated_role)
         elif len(singleton_roles) == 1 and len(repeated_roles) == 1:
             singleton_role = singleton_roles[0]
@@ -652,7 +946,9 @@ class SynthesisProgramLayoutPrior:
         sample_index: int,
     ) -> SynthesisProgramGraphRecord:
         role_multiplicities = Counter(role for role, _, _ in blocks)
-        if all(count == 1 for count in role_multiplicities.values()):
+        if all(count == 1 for count in role_multiplicities.values()) and self._fixed_node_states[
+            program_id
+        ]:
             return self._ugi_layout(
                 program_id=program_id,
                 depth=depth,
@@ -668,6 +964,7 @@ class SynthesisProgramLayoutPrior:
             blocks=blocks,
             fixed_signature=fixed_signature,
             sample_index=sample_index,
+            repeated_role_state=getattr(self, "_repeated_role_states", {}).get(program_id),
         )
 
     def _record(
@@ -735,6 +1032,8 @@ class SynthesisProgramLayoutPrior:
         *,
         sample_count: int,
         seed: int,
+        role_morphology_conditioning: bool = False,
+        exact_program_topology: bool = False,
     ) -> tuple[SynthesisProgramGraphRecord, ...]:
         """Draw count-only layouts for one requested program without target-graph reuse."""
 
@@ -744,13 +1043,28 @@ class SynthesisProgramLayoutPrior:
         output: list[SynthesisProgramGraphRecord] = []
         for sample_index in range(sample_count):
             depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
-            if self._fixed_node_states[program_id]:
+            morphology = None
+            if role_morphology_conditioning:
+                morphology = self._sample_role_morphology(
+                    program_id=program_id,
+                    depth=depth,
+                    blocks=blocks,
+                    fixed_signature=fixed,
+                    rng=rng,
+                )
+                closures = sum(int(values[2]) for values in morphology.values())
+            topology = (
+                self._program_topology_signatures[program_id][depth]
+                if exact_program_topology and not self._fixed_node_states[program_id]
+                else fixed
+            )
+            if self._fixed_node_states[program_id] or (exact_program_topology and topology):
                 record = self._fixed_core_layout(
                     program_id=program_id,
                     depth=depth,
                     closure_count=closures,
                     blocks=blocks,
-                    fixed_signature=fixed,
+                    fixed_signature=topology,
                     sample_index=sample_index,
                 )
             else:
@@ -762,6 +1076,8 @@ class SynthesisProgramLayoutPrior:
                     sample_index=sample_index,
                     rng=rng,
                 )
+            if morphology is not None:
+                record = self._attach_role_morphology(record, morphology)
             output.append(record)
         return tuple(output)
 

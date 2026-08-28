@@ -77,16 +77,9 @@ image = (
 
 
 def _upload_paths(spec_path: Path) -> dict[str, Path]:
-    from experiments._runtime.spec import ExperimentSpec
+    from experiments._runtime.modal import modal_upload_paths
 
-    spec = ExperimentSpec.load(spec_path)
-    paths = {str(spec_path.relative_to(LOCAL_REPO)): spec_path}
-    for stage in spec.stages:
-        for pin in (stage.config, *stage.inputs.values()):
-            paths[pin.path] = pin.resolve(LOCAL_REPO)
-    paths["pyproject.toml"] = LOCAL_REPO / "pyproject.toml"
-    paths["uv.lock"] = LOCAL_REPO / "uv.lock"
-    return paths
+    return modal_upload_paths(LOCAL_REPO, spec_path)
 
 
 @app.function(

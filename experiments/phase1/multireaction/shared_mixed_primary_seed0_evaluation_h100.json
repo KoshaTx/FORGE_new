@@ -1,0 +1,173 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-mixed-primary-seed0-evaluation-h100",
+  "description": "Preflight every frozen count-only layout, then evaluate the recovered seed-0 Transformer checkpoints on one exact H100 without retraining.",
+  "root_seed": 20260825,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "layout_preflight",
+      "implementation": "model.synthesis-program-layout-schedule-preflight.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/shared_mixed_primary_seed0_evaluation_v1.json",
+        "sha256": "5529f553ee2358e74a18ec249f768d4826c3c3a928c5e6ac0f60c3785b1446a0"
+      },
+      "inputs": {
+        "production_design": {
+          "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json",
+          "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+          "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "qualified_reaction_families": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        },
+        "qualified_ugi_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "multireaction_atlas": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+        },
+        "training_result": {
+          "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json",
+          "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_layout_schedule_preflight.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 16384,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "shared-mixed-primary-seed0-layout-preflight"
+      }
+    },
+    {
+      "id": "evaluation",
+      "implementation": "model.shared-synthesis-program-production-evaluation-from-pins.v1",
+      "needs": [
+        "layout_preflight"
+      ],
+      "config": {
+        "path": "configs/multireaction/shared_mixed_primary_seed0_evaluation_v1.json",
+        "sha256": "5529f553ee2358e74a18ec249f768d4826c3c3a928c5e6ac0f60c3785b1446a0"
+      },
+      "inputs": {
+        "production_design": {
+          "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json",
+          "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+          "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "qualified_reaction_families": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        },
+        "qualified_ugi_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "multireaction_atlas": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+        },
+        "training_result": {
+          "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json",
+          "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"
+        },
+        "checkpoint_archive": {
+          "path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar",
+          "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"
+        }
+      },
+      "outputs": {
+        "molecule_report": {
+          "path": "molecule_report.html",
+          "schema_version": "forge.synthesis_program_production_molecule_report.v1"
+        },
+        "samples": {
+          "path": "samples.jsonl.gz",
+          "schema_version": "forge.synthesis_program_production_samples.v1"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_production_evaluation_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 85000,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "shared-mixed-primary-seed0-evaluation"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-27 continuation of the explicitly authorized seed-0 exact-H100 training-and-evaluation run after preserving the completed checkpoint",
+    "scientific_result": true,
+    "training_calls": 0,
+    "checkpoint_weights_reused": true,
+    "paid_launch_is_fail_closed": true
+  },
+  "nonclaims": [
+    "This evaluation-only run does not retrain or change the frozen checkpoint.",
+    "Seed 0 alone does not establish across-seed robustness.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "No heldout product selects a checkpoint, model, decoder or threshold."
+  ]
+}

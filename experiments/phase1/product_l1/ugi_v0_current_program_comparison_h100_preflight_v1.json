@@ -1,0 +1,42 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-v0-current-program-comparison-h100-preflight-v1",
+  "description": "Exact-H100 four-program execution preflight for the frozen v0 versus mixed-Transformer comparison.",
+  "root_seed": 20260825,
+  "profiles": ["smoke"],
+  "replicates": {"smoke": 1},
+  "stages": [
+    {
+      "id": "comparison",
+      "implementation": "evaluate.ugi.v0-current-program-comparison.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_v0_current_program_comparison_v1.json",
+        "sha256": "68ec8c0a0eeae8851bab750a5129c91c9c3be72dea486f818bd0b433f0f92914"
+      },
+      "inputs": {
+        "checkpoint_archive": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar", "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"},
+        "closure_checkpoint": {"path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt", "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"},
+        "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+        "current_training_result": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json", "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"},
+        "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+        "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+        "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "production_design": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json", "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"},
+        "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+        "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+        "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"},
+        "v0_checkpoint": {"path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt", "sha256": "4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.ugi_v0_current_program_comparison.v1"},
+        "comparison_details": {"path": "comparison_details.tar", "schema_version": "forge.ugi_v0_current_program_comparison_archive.v1"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 8, "workers": 0, "memory_mb": 49152, "timeout_seconds": 1800, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-v0-current-program-preflight"}
+    }
+  ],
+  "metadata": {"authorization": "Setup only; paid launch requires explicit user approval", "scientific_result": false, "programs_per_method": 4, "training_calls": 0},
+  "nonclaims": ["A passing execution preflight is not a model comparison or scientific result.", "No training, route, oracle, biological or candidate-selection call occurs."]
+}

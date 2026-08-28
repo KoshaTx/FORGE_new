@@ -19,9 +19,13 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from rdkit import Chem, DataStructs, rdBase
-from rdkit.Chem import rdFingerprintGenerator
+from rdkit import Chem, rdBase
 
+from forge.corpus.component_splits import (
+    FOLDS,
+    family_fold_map,
+    similarity_families,
+)
 from forge.corpus.r0_splits import sha256_bytes, sha256_file
 from forge.corpus.r1_prime_audit import compile_reactions, load_reaction_definitions
 from forge.model.vocabulary import load_atom_vocabulary
@@ -34,7 +38,6 @@ ROLES = (
     "oxoester_aldehyde_body_tail",
     "isocyanide_tail",
 )
-FOLDS = ("train", "calibration", "heldout")
 REGISTRY_FIELDS = (
     "component_id",
     "role",
@@ -280,44 +283,12 @@ def _similarity_families(
     smiles: Sequence[str], fingerprint: Mapping[str, Any], role: str
 ) -> dict[str, str]:
     """Return connected fingerprint families, guaranteeing no cross-family pair at threshold."""
-
-    ordered = sorted(smiles)
-    generator = rdFingerprintGenerator.GetMorganGenerator(
-        radius=int(fingerprint["radius"]),
-        fpSize=int(fingerprint["bits"]),
-        includeChirality=bool(fingerprint["include_chirality"]),
+    return similarity_families(
+        smiles,
+        fingerprint,
+        role,
+        error=ComponentExpansionError,
     )
-    fps = [generator.GetFingerprint(_canonical(value, "family component")[1]) for value in ordered]
-    adjacency: list[list[int]] = [[] for _ in ordered]
-    threshold = float(fingerprint["similarity_threshold"])
-    for index, current in enumerate(fps):
-        similarities = DataStructs.BulkTanimotoSimilarity(current, fps[:index])
-        for other, similarity in enumerate(similarities):
-            if similarity >= threshold:
-                adjacency[index].append(other)
-                adjacency[other].append(index)
-    components: list[list[int]] = []
-    unseen = set(range(len(ordered)))
-    while unseen:
-        start = min(unseen)
-        unseen.remove(start)
-        stack = [start]
-        component: list[int] = []
-        while stack:
-            node = stack.pop()
-            component.append(node)
-            for neighbor in adjacency[node]:
-                if neighbor in unseen:
-                    unseen.remove(neighbor)
-                    stack.append(neighbor)
-        components.append(sorted(component))
-    assignments: dict[str, str] = {}
-    for component in components:
-        members = [ordered[index] for index in component]
-        digest = hashlib.sha256((role + "\0" + "\0".join(members)).encode()).hexdigest()[:16]
-        family_id = f"{role}-{digest}"
-        assignments.update({member: family_id for member in members})
-    return assignments
 
 
 def _family_fold_map(
@@ -327,32 +298,13 @@ def _family_fold_map(
     role: str,
 ) -> dict[str, str]:
     """Greedily balance complete families while keeping every family intact."""
-
-    total = sum(len(values) for values in family_members.values())
-    targets = {fold: total * float(fractions[fold]) for fold in FOLDS}
-    counts = {fold: 0 for fold in FOLDS}
-    ordered = sorted(
+    return family_fold_map(
         family_members,
-        key=lambda family: (
-            -len(family_members[family]),
-            hashlib.sha256(f"{seed}\0{role}\0{family}".encode()).hexdigest(),
-        ),
+        fractions,
+        seed,
+        role,
+        error=ComponentExpansionError,
     )
-    assignments: dict[str, str] = {}
-    for family in ordered:
-        remaining = {fold: targets[fold] - counts[fold] for fold in FOLDS}
-        fold = max(
-            FOLDS,
-            key=lambda value: (
-                remaining[value],
-                hashlib.sha256(f"{seed}\0{role}\0{family}\0{value}".encode()).hexdigest(),
-            ),
-        )
-        assignments[family] = fold
-        counts[fold] += len(family_members[family])
-    if len(ordered) >= len(FOLDS) and set(assignments.values()) != set(FOLDS):
-        raise ComponentExpansionError(f"family assignment left an empty {role} fold")
-    return assignments
 
 
 def _csv_gzip_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:

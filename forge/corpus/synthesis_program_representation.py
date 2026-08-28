@@ -13,6 +13,7 @@ from typing import Any
 import numpy as np
 
 from forge.core.io import iter_csv, read_json_object, stable_json, write_json
+from forge.corpus.reaction_program_records import admits_reaction_program_structure
 from forge.model.defog_feasibility import sha256_file
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.synthesis_program_graph import (
@@ -156,6 +157,60 @@ def _resolve_inputs(
             "bytes": path.stat().st_size,
         }
     return paths, receipts
+
+
+def _validate_corpus_result(
+    *,
+    label: str,
+    path: Path,
+    paths: Mapping[str, Path],
+) -> None:
+    """Validate either a source corpus or its admitted mixed-repeat expansion.
+
+    The representation census predates the heterogeneous repeated-component expansion.  Keeping
+    the input label stable preserves the downstream cache contract, while the schema check below
+    prevents an arbitrary ``status`` string from being treated as qualified data.  Expansion
+    receipts must also authenticate the exact atlas and semantic-atom files being censused.
+    """
+
+    result = read_json_object(
+        path,
+        error=SynthesisProgramRepresentationError,
+        label=label,
+    )
+    if label == "ugi_corpus_result":
+        if result.get("status") != "pass":
+            raise SynthesisProgramRepresentationError(f"source corpus is not passed: {label}")
+        return
+    if result.get("schema_version") == "forge.multireaction_lnpdb_result.v1":
+        if result.get("status") != "pass":
+            raise SynthesisProgramRepresentationError(f"source corpus is not passed: {label}")
+        return
+    if result.get("schema_version") != "forge.multireaction_mixed_expansion_result.v1":
+        raise SynthesisProgramRepresentationError(
+            "unsupported multi-reaction corpus result schema"
+        )
+    if result.get("status") != "complete_bl_lx_mixed_repeat_expansion":
+        raise SynthesisProgramRepresentationError(
+            "mixed-repeat expansion is not complete"
+        )
+    artifacts = result.get("artifacts")
+    if not isinstance(artifacts, dict):
+        raise SynthesisProgramRepresentationError(
+            "mixed-repeat expansion has no artifact receipts"
+        )
+    for artifact_label, input_label in (
+        ("atlas", "multireaction_atlas"),
+        ("semantic_atoms", "multireaction_semantic_atoms"),
+    ):
+        receipt = artifacts.get(artifact_label)
+        if (
+            not isinstance(receipt, dict)
+            or receipt.get("sha256") != sha256_file(paths[input_label])
+        ):
+            raise SynthesisProgramRepresentationError(
+                f"mixed-repeat expansion does not authenticate {input_label}"
+            )
 
 
 def synthesis_program_contracts(config: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
@@ -422,7 +477,7 @@ def _census_multireaction(
     atlas = (
         row
         for row in iter_csv(paths["multireaction_atlas"])
-        if row["disposition"] == "admit_exact" and row["semantic_origin_status"] == "exact"
+        if admits_reaction_program_structure(row)
     )
     atom_groups = _group_semantic_rows(
         iter_csv(paths["multireaction_semantic_atoms"]),
@@ -517,11 +572,7 @@ def qualify_shared_synthesis_program_representation(
             f"representation inputs changed: {sorted(set(paths).symmetric_difference(required_inputs))}"
         )
     for label in ("ugi_corpus_result", "multireaction_corpus_result"):
-        source_result = read_json_object(
-            paths[label], error=SynthesisProgramRepresentationError, label=label
-        )
-        if source_result.get("status") != "pass":
-            raise SynthesisProgramRepresentationError(f"source corpus is not passed: {label}")
+        _validate_corpus_result(label=label, path=paths[label], paths=paths)
 
     contracts = synthesis_program_contracts(config)
     ugi_contracts = [value for value in contracts.values() if value["source"] == "ugi"]

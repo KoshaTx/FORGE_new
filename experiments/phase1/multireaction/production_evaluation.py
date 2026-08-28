@@ -41,6 +41,7 @@ from forge.model.synthesis_program_layout import (
 )
 from forge.model.synthesis_program_sampling import (
     LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+    PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
     SUPPORTED_TERMINAL_DECODE_POLICIES,
     sample_synthesis_program_products,
 )
@@ -67,6 +68,46 @@ SAMPLES_SCHEMA = "forge.synthesis_program_production_samples.v1"
 
 class SynthesisProgramProductionEvaluationError(ValueError):
     """A fixed-checkpoint evaluation violates the frozen comparison contract."""
+
+
+def _validate_evaluation_budget(
+    config: Mapping[str, Any],
+    design: Mapping[str, Any],
+    *,
+    profile: str,
+) -> str:
+    """Bind reduced full-device budgets to an explicit execution-only preflight scope."""
+
+    execution_scope = str(config.get("execution_scope", "production"))
+    if execution_scope not in {"production", "h100_preflight"}:
+        raise SynthesisProgramProductionEvaluationError(
+            f"unsupported evaluation execution scope: {execution_scope!r}"
+        )
+    if execution_scope == "h100_preflight" and profile != "full":
+        raise SynthesisProgramProductionEvaluationError(
+            "H100 preflight evaluation must use the full-device profile"
+        )
+    if profile == "full" and execution_scope == "production":
+        runtime = config[profile]
+        frozen = design["evaluation"]["native_sampling"]
+        expected = {
+            "sample_steps": int(frozen["flow_steps"]),
+            "calibration_samples": int(
+                frozen["calibration_samples_per_supported_program_per_checkpoint_per_seed"]
+            ),
+            "heldout_samples": int(
+                frozen["heldout_samples_per_supported_program_at_final_checkpoint_per_seed"]
+            ),
+        }
+        if any(runtime.get(key) != value for key, value in expected.items()):
+            raise SynthesisProgramProductionEvaluationError(
+                "full evaluation budget differs from the frozen design"
+            )
+        if runtime.get("component_disjoint_record_limit") is not None:
+            raise SynthesisProgramProductionEvaluationError(
+                "full component-disjoint evaluation cannot cap the heldout fold"
+            )
+    return execution_scope
 
 
 def _load_checkpoint(
@@ -495,25 +536,7 @@ def run_synthesis_program_production_evaluation(
         raise SynthesisProgramProductionEvaluationError(
             "evaluation device and allocated stage device differ"
         )
-    if profile == "full":
-        frozen = design["evaluation"]["native_sampling"]
-        expected = {
-            "sample_steps": int(frozen["flow_steps"]),
-            "calibration_samples": int(
-                frozen["calibration_samples_per_supported_program_per_checkpoint_per_seed"]
-            ),
-            "heldout_samples": int(
-                frozen["heldout_samples_per_supported_program_at_final_checkpoint_per_seed"]
-            ),
-        }
-        if any(runtime.get(key) != value for key, value in expected.items()):
-            raise SynthesisProgramProductionEvaluationError(
-                "full evaluation budget differs from the frozen design"
-            )
-        if runtime.get("component_disjoint_record_limit") is not None:
-            raise SynthesisProgramProductionEvaluationError(
-                "full component-disjoint evaluation cannot cap the heldout fold"
-            )
+    execution_scope = _validate_evaluation_budget(config, design, profile=profile)
     raw_record_limit = runtime.get("component_disjoint_record_limit")
     record_limit = None if raw_record_limit is None else int(raw_record_limit)
     if record_limit is not None and record_limit < 1:
@@ -639,6 +662,15 @@ def run_synthesis_program_production_evaluation(
                                     program_id,
                                     sample_count=count,
                                     seed=layout_seed,
+                                    role_morphology_conditioning=bool(
+                                        package["model_config"].get(
+                                            "role_morphology_conditioning", False
+                                        )
+                                    ),
+                                    exact_program_topology=(
+                                        terminal_decode_policy
+                                        == PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY
+                                    ),
                                 )
                             except SynthesisProgramLayoutError as error:
                                 raise SynthesisProgramProductionEvaluationError(
@@ -940,11 +972,13 @@ def run_synthesis_program_production_evaluation(
             for split in step.values()
             for metrics in split.values()
         ),
+        "layout_prior_is_exactly_support_conditioned": True,
     }
     result = {
         "schema_version": RESULT_SCHEMA,
         "status": "pass" if all(gates.values()) else "fail",
-        "run_kind": "production" if profile == "full" else "smoke",
+        "run_kind": execution_scope if profile == "full" else "smoke",
+        "execution_scope": execution_scope,
         "profile": profile,
         "replicate": replicate,
         "seed": seed,
@@ -989,6 +1023,15 @@ def run_synthesis_program_production_evaluation(
         },
         "calls": {"route": 0, "oracle": 0},
         "terminal_decode_policy": terminal_decode_policy,
+        "layout_prior": {
+            "source": "training_fold_factorized_count_only_program_prior",
+            "support_conditioning": "exact_product_law_conditioned_on_maximum_heavy_atoms",
+            "maximum_heavy_atoms": prior.maximum_heavy_atoms,
+            "clipping": False,
+            "repair": False,
+            "retry": False,
+            "dropped_attempts": 0,
+        },
         "local_chemistry_support": (
             pin_record(paths["local_chemistry_support"], repo)
             if local_chemistry_support is not None

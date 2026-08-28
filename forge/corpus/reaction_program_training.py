@@ -12,6 +12,7 @@ import numpy as np
 
 from forge.assembly import ReactionProgramSpec
 from forge.core.io import read_csv_rows, read_json_object
+from forge.corpus.reaction_program_records import admits_reaction_program_structure
 from forge.model.defog_feasibility import AtomState
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_graph import (
@@ -152,7 +153,7 @@ def load_reaction_program_training_corpus(
     atlas = {
         row["record_id"]: row
         for row in atlas_rows
-        if row["disposition"] == "admit_exact" and row["semantic_origin_status"] == "exact"
+        if admits_reaction_program_structure(row)
     }
     splits = {row["record_id"]: row for row in split_rows}
     if set(atlas) != set(splits):

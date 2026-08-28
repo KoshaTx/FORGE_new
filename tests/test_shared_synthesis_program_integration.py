@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -13,7 +14,9 @@ from forge.model.reaction_program_flow import (
     collate_synthesis_program_layouts,
     collate_synthesis_program_records,
     decode_synthesis_program_argmax,
+    derive_role_morphology_states,
     noise_synthesis_program_batch,
+    resolve_synthesis_program_source_marginals,
     synthesis_program_flow_loss,
 )
 from forge.model.sparse_topology_feasibility import (
@@ -199,6 +202,35 @@ def test_shared_noising_and_decoder_leave_ugi_fixed_states_exact() -> None:
     assert torch.equal(decoded["parent_bonds"][:, 0], clean["parent_bonds"][:, 0])
 
 
+def test_program_role_sources_resolve_by_program_and_role_with_program_level_closures() -> None:
+    cache = _cache()
+    clean = collate_synthesis_program_records(cache.records, maximum_closures=3)
+    programs = len(cache.vocabulary.program_states)
+    roles = len(cache.vocabulary.role_states)
+    atoms = len(cache.atom_vocabulary)
+    node_sources = torch.arange(programs * roles * atoms, dtype=torch.float32).reshape(
+        programs, roles, atoms
+    )
+    node_sources = node_sources.softmax(dim=-1)
+    bond_sources = torch.arange(programs * roles * 4, dtype=torch.float32).reshape(
+        programs, roles, 4
+    )
+    bond_sources = bond_sources.softmax(dim=-1)
+    nodes, parent_bonds, closure_bonds = resolve_synthesis_program_source_marginals(
+        clean, node_sources, bond_sources
+    )
+    expected_nodes = node_sources[clean["program_states"][:, None], clean["role_states"]]
+    assert torch.equal(nodes, expected_nodes)
+    assert torch.equal(
+        parent_bonds,
+        bond_sources[clean["program_states"][:, None], clean["role_states"]],
+    )
+    assert torch.equal(
+        closure_bonds,
+        bond_sources[clean["program_states"], 0][:, None].expand_as(closure_bonds),
+    )
+
+
 def test_strict_decoder_recovers_feasible_targets_without_repair() -> None:
     cache = _cache()
     records = cache.records
@@ -211,6 +243,56 @@ def test_strict_decoder_recovers_feasible_targets_without_repair() -> None:
         records,
         cache.atom_vocabulary,
     )
+    assert reasons == (None,) * len(records)
+    for row, record in enumerate(records):
+        for field in (
+            "nodes",
+            "parents",
+            "parent_bonds",
+            "closure_left",
+            "closure_right",
+            "closure_bonds",
+        ):
+            expected = getattr(record.graph, field if field != "nodes" else "node_states")
+            count = record.graph.closure_count if field.startswith("closure") else record.node_count
+            assert torch.equal(terminal[field][row, :count], torch.from_numpy(expected))
+
+
+def test_exact_program_decoder_recovers_all_family_targets_without_repair() -> None:
+    cache = _cache()
+    records = []
+    for record in cache.records:
+        core = record.core_position_states > 1
+        fixed_parents = record.fixed_parent_bond_mask.copy()
+        for child in range(1, record.node_count):
+            parent = int(record.graph.parents[child])
+            fixed_parents[child] |= bool(core[child] and core[parent])
+        fixed_closures = record.fixed_closure_bond_mask.copy()
+        for slot, (left, right) in enumerate(
+            zip(record.graph.closure_left, record.graph.closure_right, strict=True)
+        ):
+            fixed_closures[slot] |= bool(core[int(left)] and core[int(right)])
+        records.append(
+            replace(
+                record,
+                role_morphology_states=derive_role_morphology_states(record),
+                fixed_parent_bond_mask=fixed_parents,
+                fixed_closure_bond_mask=fixed_closures,
+            )
+        )
+    records = tuple(records)
+    clean = collate_synthesis_program_records(records, maximum_closures=3)
+    layout = collate_synthesis_program_layouts(records, maximum_closures=3)
+    predictions = _target_predictions(clean, len(cache.atom_vocabulary))
+
+    terminal, reasons = decode_synthesis_program_strict_argmax(
+        predictions,
+        layout,
+        records,
+        cache.atom_vocabulary,
+        enforce_program_topology=True,
+    )
+
     assert reasons == (None,) * len(records)
     for row, record in enumerate(records):
         for field in (

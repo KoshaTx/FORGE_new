@@ -368,6 +368,41 @@ def _command_experiment_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def _modal_group_path(repo: Path, value: str) -> Path:
+    candidate = Path(value)
+    path = candidate if candidate.is_absolute() else repo / candidate
+    resolved = path.resolve()
+    try:
+        resolved.relative_to(repo)
+    except ValueError as error:
+        raise ValueError(f"Modal experiment group escapes the repository: {value!r}") from error
+    if not resolved.is_file():
+        raise FileNotFoundError(f"Modal experiment group not found: {resolved}")
+    return resolved
+
+
+def _command_experiment_plan_modal_group(args: argparse.Namespace) -> int:
+    from experiments._runtime.modal_group import modal_group_plan
+
+    repo = _repo()
+    _print(modal_group_plan(repo, _modal_group_path(repo, args.group)))
+    return 0
+
+
+def _command_experiment_run_modal_group(args: argparse.Namespace) -> int:
+    from experiments._runtime.modal_group import launch_modal_group
+
+    repo = _repo()
+    _print(
+        launch_modal_group(
+            repo,
+            _modal_group_path(repo, args.group),
+            resume=args.resume,
+        )
+    )
+    return 0
+
+
 def _command_experiment_verify(args: argparse.Namespace) -> int:
     repo = _repo()
     if args.backend != "local":
@@ -517,6 +552,120 @@ def _command_experiment_adjudicate_local_morphology_seed0(
             resolve(args.config),
             repo,
             resolve(args.output),
+        )
+    )
+    return 0
+
+
+def _command_experiment_adjudicate_tree_transformer_calibration(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.product_l1.evaluation.ugi_tree_transformer_calibration_adjudication import (  # noqa: E501
+        adjudicate_tree_transformer_calibration,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        adjudicate_tree_transformer_calibration(
+            [resolve(value) for value in args.runs],
+            resolve(args.config),
+            repo,
+            resolve(args.output),
+        )
+    )
+    return 0
+
+
+def _command_experiment_aggregate_tree_transformer_production(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.product_l1.evaluation.ugi_tree_transformer_production_aggregate import (  # noqa: E501
+        aggregate_tree_transformer_production,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        aggregate_tree_transformer_production(
+            [resolve(value) for value in args.runs],
+            resolve(args.config),
+            repo,
+            resolve(args.output),
+        )
+    )
+    return 0
+
+
+def _command_experiment_diagnose_tree_transformer_production(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.product_l1.evaluation.ugi_tree_transformer_failure_attribution import (  # noqa: E501
+        diagnose_tree_transformer_failures,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        diagnose_tree_transformer_failures(
+            resolve(args.config),
+            repo,
+            resolve(args.output_dir),
+        )
+    )
+    return 0
+
+
+def _command_experiment_qualify_tree_transformer_interventions(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.product_l1.evaluation.ugi_tree_transformer_intervention_readiness import (  # noqa: E501
+        diagnose_tree_transformer_interventions,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        diagnose_tree_transformer_interventions(
+            resolve(args.config),
+            repo,
+            resolve(args.output_dir),
+        )
+    )
+    return 0
+
+
+def _command_experiment_resample_tree_transformer_constrained(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.product_l1.evaluation.ugi_tree_transformer_constrained_resampling import (  # noqa: E501
+        run_tree_transformer_constrained_resampling,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        run_tree_transformer_constrained_resampling(
+            resolve(args.config),
+            repo,
+            resolve(args.output_dir),
+            profile=args.profile,
+            device=args.device,
         )
     )
     return 0
@@ -976,6 +1125,21 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("run_id")
     status.set_defaults(function=_command_experiment_status)
 
+    plan_modal_group = experiment_commands.add_parser(
+        "plan-modal-group",
+        help="validate a fail-closed Modal preflight plus parallel experiment group",
+    )
+    plan_modal_group.add_argument("group")
+    plan_modal_group.set_defaults(function=_command_experiment_plan_modal_group)
+
+    run_modal_group = experiment_commands.add_parser(
+        "run-modal-group",
+        help="run one Modal preflight then independently allocate the parallel group members",
+    )
+    run_modal_group.add_argument("group")
+    run_modal_group.add_argument("--resume", action="store_true")
+    run_modal_group.set_defaults(function=_command_experiment_run_modal_group)
+
     verify_run = experiment_commands.add_parser(
         "verify-run", help="verify a run from its downloaded self-contained manifests"
     )
@@ -1057,6 +1221,122 @@ def build_parser() -> argparse.ArgumentParser:
     )
     adjudicate_local_morphology.set_defaults(
         function=_command_experiment_adjudicate_local_morphology_seed0
+    )
+
+    adjudicate_tree_calibration = experiment_commands.add_parser(
+        "adjudicate-tree-transformer-calibration",
+        help="select a Ugi tree-Transformer checkpoint from four paired runs and frozen v0",
+    )
+    adjudicate_tree_calibration.add_argument("runs", nargs=5)
+    adjudicate_tree_calibration.add_argument(
+        "--config",
+        default=(
+            "configs/model/"
+            "phase1_ugi_tree_transformer_calibration_adjudication_v1.json"
+        ),
+    )
+    adjudicate_tree_calibration.add_argument(
+        "--output",
+        default=(
+            "results/phase1/"
+            "ugi_tree_transformer_calibration_adjudication_v1/result.json"
+        ),
+    )
+    adjudicate_tree_calibration.set_defaults(
+        function=_command_experiment_adjudicate_tree_transformer_calibration
+    )
+
+    aggregate_tree_production = experiment_commands.add_parser(
+        "aggregate-tree-transformer-production",
+        help="aggregate the three fresh selected Ugi tree-Transformer production seeds",
+    )
+    aggregate_tree_production.add_argument("runs", nargs=3)
+    aggregate_tree_production.add_argument(
+        "--config",
+        default=(
+            "configs/model/"
+            "phase1_ugi_tree_relational_production_aggregate_v1.json"
+        ),
+    )
+    aggregate_tree_production.add_argument(
+        "--output",
+        default=(
+            "results/phase1/"
+            "ugi_tree_relational_production_aggregate_v1/result.json"
+        ),
+    )
+    aggregate_tree_production.set_defaults(
+        function=_command_experiment_aggregate_tree_transformer_production
+    )
+
+    diagnose_tree_production = experiment_commands.add_parser(
+        "diagnose-tree-transformer-production",
+        help="attribute the frozen three-seed Ugi tree-Transformer production failures",
+    )
+    diagnose_tree_production.add_argument(
+        "--config",
+        default=(
+            "configs/model/"
+            "phase1_ugi_tree_relational_failure_attribution_v1.json"
+        ),
+    )
+    diagnose_tree_production.add_argument(
+        "--output-dir",
+        default=(
+            "results/phase1/"
+            "ugi_tree_relational_failure_attribution_v1"
+        ),
+    )
+    diagnose_tree_production.set_defaults(
+        function=_command_experiment_diagnose_tree_transformer_production
+    )
+
+    qualify_tree_interventions = experiment_commands.add_parser(
+        "qualify-tree-transformer-interventions",
+        help="qualify typed decoding, role-local masks and Ugi retro diagnostics",
+    )
+    qualify_tree_interventions.add_argument(
+        "--config",
+        default=(
+            "configs/model/"
+            "phase1_ugi_tree_relational_intervention_readiness_v1.json"
+        ),
+    )
+    qualify_tree_interventions.add_argument(
+        "--output-dir",
+        default=(
+            "results/phase1/"
+            "ugi_tree_relational_intervention_readiness_v1"
+        ),
+    )
+    qualify_tree_interventions.set_defaults(
+        function=_command_experiment_qualify_tree_transformer_interventions
+    )
+
+    constrained_tree_resampling = experiment_commands.add_parser(
+        "resample-tree-transformer-constrained",
+        help="resample the frozen seed-0 checkpoint with role-local terminal masks",
+    )
+    constrained_tree_resampling.add_argument(
+        "--config",
+        default=(
+            "configs/model/"
+            "phase1_ugi_tree_relational_constrained_resampling_v2.json"
+        ),
+    )
+    constrained_tree_resampling.add_argument(
+        "--output-dir",
+        default=(
+            "results/phase1/"
+            "ugi_tree_relational_edge_constrained_resampling_smoke_v3"
+        ),
+    )
+    constrained_tree_resampling.add_argument(
+        "--profile", choices=("smoke", "full"), default="smoke"
+    )
+    constrained_tree_resampling.add_argument("--device", default="cpu")
+    constrained_tree_resampling.set_defaults(
+        function=_command_experiment_resample_tree_transformer_constrained
     )
 
     diagnose_production = experiment_commands.add_parser(

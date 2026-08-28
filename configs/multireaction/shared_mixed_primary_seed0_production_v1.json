@@ -1,0 +1,157 @@
+{
+  "schema_version": "forge.transformer_mechanism_study_config.v1",
+  "study": "bl_core_constrained_production",
+  "repeat_consistency_weight": 0.25,
+  "inputs": {
+    "base_design": {
+      "path": "results/phase1/shared_synthesis_program_mixed_design_v1/design.json",
+      "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "profiles": [
+      "full"
+    ],
+    "date": "2026-08-27",
+    "scope": "Train and evaluate only replicate seed 0 of the final repeat-aware, source-balanced conditioned Ugi/BL/LX Transformer on one exact H100 after the same-DAG preflight passes.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "smoke": {
+    "training": {
+      "device": "cpu",
+      "precision": "float32",
+      "deterministic_algorithms": true,
+      "cpu_threads": 2,
+      "optimizer_steps": 2,
+      "micro_batch_size": 3,
+      "gradient_accumulation_steps": 1,
+      "effective_batch_size": 3,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.00005,
+      "gradient_clip_norm": 1.0,
+      "checkpoint_steps": [
+        1,
+        2
+      ],
+      "restart_interval_steps": 1,
+      "model_overrides": {
+        "hidden_dim": 32,
+        "layers": 1,
+        "attention_heads": 4,
+        "adapter_dim": 16,
+        "dropout": 0.0
+      }
+    },
+    "evaluation": {
+      "device": "cpu",
+      "checkpoint_steps": [
+        1,
+        2
+      ],
+      "sample_steps": 2,
+      "batch_size": 2,
+      "calibration_samples": 2,
+      "heldout_samples": 2,
+      "component_disjoint_record_limit": 2,
+      "terminal_decode_policy": "strict_valence_topology_argmax"
+    }
+  },
+  "full": {
+    "training": {
+      "device": "cuda",
+      "precision": "float32",
+      "deterministic_algorithms": true,
+      "cpu_threads": 4,
+      "optimizer_steps": 1700,
+      "micro_batch_size": 32,
+      "gradient_accumulation_steps": 4,
+      "effective_batch_size": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.00005,
+      "gradient_clip_norm": 1.0,
+      "checkpoint_steps": [
+        100,
+        500,
+        1000,
+        1500,
+        1700
+      ],
+      "restart_interval_steps": 25
+    },
+    "evaluation": {
+      "device": "cuda",
+      "checkpoint_steps": [
+        100,
+        500,
+        1000,
+        1500,
+        1700
+      ],
+      "sample_steps": 32,
+      "batch_size": 32,
+      "calibration_samples": 512,
+      "heldout_samples": 3072,
+      "component_disjoint_record_limit": null,
+      "terminal_decode_policy": "strict_valence_topology_argmax"
+    }
+  },
+  "checkpoint_selection": "fixed_final_step_without_calibration_selection",
+  "candidate_selection": false,
+  "route_calls": 0,
+  "oracle_calls": 0,
+  "launch_gate": {
+    "required_predecessor_stage": "preflight",
+    "expected_parameter_count": 5328685,
+    "precision": "float32",
+    "allow_tf32": false,
+    "micro_batch_size": 32,
+    "gradient_accumulation_steps": 4,
+    "maximum_heavy_atoms": 194
+  },
+  "promotion": {
+    "expanded_data_smoke": {
+      "path": "results/phase1/shared_synthesis_program_mixed_training_smoke_v1/result.json",
+      "sha256": "cf17c4d4a16178bbe67c3304dc6e49bfa9b4a0ff912c83ed584bf398f0525843"
+    },
+    "promoted_arm": "bl_core_constrained_repeat_aware",
+    "model_override": "repeat_group_conditioning=true",
+    "changed_from_smoke": "full 1700-step training and prespecified calibration-plus-heldout evaluation; architecture, cache, source balancing, optimizer and decoder are unchanged"
+  },
+  "nonclaims": [
+    "Training completion alone is not model-quality evidence.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability or route certification.",
+    "The strict decoder applies adapter-declared support without repair or retry.",
+    "No component identity or finite component vocabulary enters neural tensors.",
+    "Heldout products do not select the model, checkpoint, decoder or threshold.",
+    "The current R1 corpus is reaction-enumerated support, not route-certified."
+  ]
+}

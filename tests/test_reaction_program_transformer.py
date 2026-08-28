@@ -1,16 +1,48 @@
 from __future__ import annotations
 
+import math
+
 import pytest
 
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_transformer import (
     ReactionProgramGraphTransformer,
+    _repeat_component_consistency,
     balanced_pcgrad_backward,
     per_program_transformer_losses,
     reaction_program_transformer_loss,
+    synthesis_program_offspring_targets,
 )
 
 torch = pytest.importorskip("torch")
+
+
+def _dense_repeat_consistency(
+    predictions: dict[str, torch.Tensor], clean: dict[str, torch.Tensor]
+) -> torch.Tensor:
+    groups = clean["repeat_group_states"]
+    positions = clean["component_position_states"]
+    instances = clean["component_instance_states"]
+    active = (groups > 0) & clean["node_mask"] & (clean["core_position_states"] == 1)
+    pairs = (
+        active[:, :, None]
+        & active[:, None, :]
+        & (groups[:, :, None] == groups[:, None, :])
+        & (positions[:, :, None] == positions[:, None, :])
+        & (instances[:, :, None] != instances[:, None, :])
+    )
+    pairs &= torch.triu(torch.ones_like(pairs[0]), diagonal=1)[None]
+    node_probabilities = torch.softmax(predictions["nodes"], dim=-1)
+    node_distances = (
+        (node_probabilities[:, :, None] - node_probabilities[:, None]).square().mean(dim=-1)
+    )
+    node_loss = (node_distances * pairs).sum() / pairs.sum().clamp(min=1)
+    bond_pairs = pairs & clean["child_mask"][:, :, None] & clean["child_mask"][:, None, :]
+    bond_probabilities = torch.softmax(predictions["parent_bonds"], dim=-1)
+    bond_distances = (
+        (bond_probabilities[:, :, None] - bond_probabilities[:, None]).square().mean(dim=-1)
+    )
+    return node_loss + (bond_distances * bond_pairs).sum() / bond_pairs.sum().clamp(min=1)
 
 
 def _batch() -> dict[str, torch.Tensor]:
@@ -41,6 +73,10 @@ def _batch() -> dict[str, torch.Tensor]:
         "component_instance_states": torch.tensor([[1, 1, 2, 2, 3, 3]] * batch),
         "component_position_states": torch.tensor([[1, 2, 1, 2, 1, 2]] * batch),
         "repeat_group_states": torch.tensor([[2, 2, 2, 2, 0, 0]] * batch),
+        "role_morphology_states": torch.tensor(
+            [[[3, 1, 1, 2], [3, 1, 1, 2], [3, 2, 1, 2], [3, 2, 1, 2], [3, 1, 2, 2], [3, 1, 2, 2]]]
+            * batch
+        ),
         "adapter_mask": node_mask.clone(),
         "atom_variable_mask": node_mask.clone(),
         "parent_variable_mask": child_mask.clone(),
@@ -123,6 +159,125 @@ def test_transformer_cross_attends_in_every_layer_and_balances_family_gradients(
     assert "program_1_role_consistency_ce" in metrics
 
 
+def test_program_routed_terminal_and_closure_heads_are_trained_inside_shared_model() -> None:
+    torch.manual_seed(18)
+    model = _model(program_routed_output_heads=True).eval()
+    batch = _batch()
+    model_inputs = {
+        key: value
+        for key, value in batch.items()
+        if key
+        not in {
+            "source_program_states",
+            "atom_variable_mask",
+            "parent_variable_mask",
+            "parent_bond_variable_mask",
+            "closure_endpoint_variable_mask",
+            "closure_bond_variable_mask",
+        }
+    }
+    with torch.no_grad():
+        output = model(**model_inputs)
+    assert output["terminal_chemistry_expert_weights"].shape == (3, 3)
+    assert output["closure_output_expert_weights"].shape == (3, 3)
+    assert torch.allclose(output["terminal_chemistry_expert_weights"].sum(dim=-1), torch.ones(3))
+
+
+def test_topology_conditioned_second_pass_directly_supervises_chemistry() -> None:
+    torch.manual_seed(181)
+    model = _model().eval()
+    clean = _batch()
+    model_inputs = {
+        key: value
+        for key, value in clean.items()
+        if key
+        not in {
+            "source_program_states",
+            "atom_variable_mask",
+            "parent_variable_mask",
+            "parent_bond_variable_mask",
+            "closure_endpoint_variable_mask",
+            "closure_bond_variable_mask",
+        }
+    }
+    with torch.no_grad():
+        predictions = model(**model_inputs)
+    exact = {key: value.clone() for key, value in predictions.items()}
+    for field in ("nodes", "parent_bonds", "closure_bonds"):
+        exact[field].fill_(-20.0)
+        exact[field].scatter_(-1, clean[field].unsqueeze(-1), 20.0)
+    _, metrics = reaction_program_transformer_loss(
+        predictions,
+        clean,
+        role_weight=0.0,
+        core_weight=0.0,
+        chemistry_loss_balancing="equal_present_role_mass",
+        topology_conditioned_predictions=exact,
+        topology_conditioned_chemistry_weight=1.0,
+    )
+    assert metrics["topology_conditioned_chemistry_ce"] == pytest.approx(0.0, abs=1e-6)
+
+
+def test_transformer_predicts_and_learns_exact_exterior_offspring_counts() -> None:
+    torch.manual_seed(19)
+    model = _model(maximum_children=3).eval()
+    clean = _batch()
+    clean["core_position_states"] = torch.ones_like(clean["core_position_states"])
+    clean["component_instance_states"] = torch.ones_like(clean["component_instance_states"])
+    clean["role_states"] = torch.ones_like(clean["role_states"])
+    clean["role_morphology_states"] = torch.tensor(
+        [[[7, 2, 1, 2]] * clean["nodes"].shape[1]] * clean["nodes"].shape[0]
+    )
+    model_inputs = {
+        key: value
+        for key, value in clean.items()
+        if key
+        not in {
+            "source_program_states",
+            "atom_variable_mask",
+            "parent_variable_mask",
+            "parent_bond_variable_mask",
+            "closure_endpoint_variable_mask",
+            "closure_bond_variable_mask",
+        }
+    }
+    with torch.no_grad():
+        predictions = model(**model_inputs)
+    targets, mask = synthesis_program_offspring_targets(clean, maximum_children=3)
+
+    assert predictions["offspring"].shape == (3, 6, 4)
+    assert torch.equal(targets[0], torch.tensor([1, 2, 1, 1, 0, 0]))
+    assert torch.all(mask)
+
+    exact_logits = torch.full_like(predictions["offspring"], -20.0)
+    exact_logits.scatter_(2, targets[:, :, None], 20.0)
+    exact = {**predictions, "offspring": exact_logits}
+    uniform = {**predictions, "offspring": torch.zeros_like(exact_logits)}
+    _, exact_metrics = reaction_program_transformer_loss(
+        exact,
+        clean,
+        role_weight=0.0,
+        core_weight=0.0,
+        offspring_weight=1.0,
+        junction_consistency_weight=1.0,
+    )
+    _, uniform_metrics = reaction_program_transformer_loss(
+        uniform,
+        clean,
+        role_weight=0.0,
+        core_weight=0.0,
+        offspring_weight=1.0,
+        junction_consistency_weight=1.0,
+    )
+    assert exact_metrics["offspring_ce"] == pytest.approx(0.0, abs=1e-6)
+    assert exact_metrics["junction_budget_consistency"] == pytest.approx(0.0, abs=1e-6)
+    assert uniform_metrics["offspring_ce"] > exact_metrics["offspring_ce"]
+    assert (
+        uniform_metrics["junction_budget_consistency"]
+        > exact_metrics["junction_budget_consistency"]
+    )
+
+
 def test_transformer_is_deterministic_and_program_conditioning_changes_output() -> None:
     batch = _batch()
     model_inputs = {
@@ -150,6 +305,38 @@ def test_transformer_is_deterministic_and_program_conditioning_changes_output() 
         changed_output = first(**changed)["nodes"]
     assert torch.equal(first_output, second_output)
     assert not torch.equal(first_output, changed_output)
+
+
+def test_scaled_dot_product_attention_matches_materialized_reference() -> None:
+    torch.manual_seed(29)
+    attention = _model(layers=1).blocks[0].self_attention.eval()
+    query = torch.randn((2, 6, 32))
+    memory = torch.randn((2, 7, 32))
+    query_mask = torch.tensor([[True] * 6, [True] * 4 + [False] * 2])
+    memory_mask = torch.tensor([[True] * 7, [True] * 5 + [False] * 2])
+    bias = torch.randn((2, 4, 6, 7)) * 0.1
+    batch, queries, hidden = query.shape
+    keys = memory.shape[1]
+    q = attention.query(query).reshape(batch, queries, attention.heads, attention.head_dim)
+    k = attention.key(memory).reshape(batch, keys, attention.heads, attention.head_dim)
+    v = attention.value(memory).reshape(batch, keys, attention.heads, attention.head_dim)
+    q, k, v = (value.transpose(1, 2) for value in (q, k, v))
+    scores = torch.einsum("bhqd,bhkd->bhqk", q, k) / math.sqrt(attention.head_dim)
+    scores = (scores + bias).masked_fill(~memory_mask[:, None, None], -torch.inf)
+    probabilities = torch.softmax(scores, dim=-1)
+    reference = torch.einsum("bhqk,bhkd->bhqd", probabilities, v)
+    reference = attention.output(reference.transpose(1, 2).reshape(batch, queries, hidden))
+    reference *= query_mask[:, :, None]
+
+    observed = attention(
+        query,
+        memory,
+        query_mask=query_mask,
+        memory_mask=memory_mask,
+        attention_bias=bias,
+    )
+
+    assert torch.allclose(observed, reference, rtol=1e-5, atol=1e-6)
 
 
 def test_program_memory_preserves_node_alignment() -> None:
@@ -201,6 +388,53 @@ def test_repeat_group_conditioning_uses_position_but_not_component_identity() ->
     assert not torch.equal(reference, repeat_removed)
 
 
+def test_role_local_morphology_conditioning_changes_output_without_component_identity() -> None:
+    torch.manual_seed(34)
+    model = _model(role_morphology_conditioning=True).eval()
+    batch = _batch()
+    model_inputs = {
+        key: value
+        for key, value in batch.items()
+        if key
+        not in {
+            "source_program_states",
+            "atom_variable_mask",
+            "parent_variable_mask",
+            "parent_bond_variable_mask",
+            "closure_endpoint_variable_mask",
+            "closure_bond_variable_mask",
+        }
+    }
+    changed = dict(model_inputs)
+    changed["role_morphology_states"] = model_inputs["role_morphology_states"].clone()
+    changed["role_morphology_states"][:, :2, 1] += 1
+    with torch.no_grad():
+        reference = model(**model_inputs)["nodes"]
+        intervention = model(**changed)["nodes"]
+    assert not torch.equal(reference, intervention)
+
+
+def test_role_local_morphology_conditioning_requires_explicit_states() -> None:
+    model = _model(role_morphology_conditioning=True).eval()
+    batch = _batch()
+    model_inputs = {
+        key: value
+        for key, value in batch.items()
+        if key
+        not in {
+            "source_program_states",
+            "atom_variable_mask",
+            "parent_variable_mask",
+            "parent_bond_variable_mask",
+            "closure_endpoint_variable_mask",
+            "closure_bond_variable_mask",
+            "role_morphology_states",
+        }
+    }
+    with pytest.raises(Exception, match="role-local morphology token shapes"):
+        model(**model_inputs)
+
+
 def test_repeat_consistency_loss_aligns_matched_exterior_positions() -> None:
     torch.manual_seed(35)
     batch = _batch()
@@ -245,6 +479,33 @@ def test_repeat_consistency_loss_aligns_matched_exterior_positions() -> None:
     assert aligned_metrics["repeat_consistency_mse"] == pytest.approx(0.0)
     assert aligned_metrics["repeat_consistency_pairs"] > 0
     assert misaligned_metrics["repeat_consistency_mse"] > 0.0
+
+
+def test_sparse_repeat_consistency_matches_dense_value_and_gradients() -> None:
+    torch.manual_seed(36)
+    batch = _batch()
+    sparse_predictions = {
+        "nodes": torch.randn((3, 6, 5), requires_grad=True),
+        "parent_bonds": torch.randn((3, 6, 4), requires_grad=True),
+    }
+    dense_predictions = {
+        key: value.detach().clone().requires_grad_() for key, value in sparse_predictions.items()
+    }
+
+    sparse_loss, sparse_pairs = _repeat_component_consistency(sparse_predictions, batch)
+    dense_loss = _dense_repeat_consistency(dense_predictions, batch)
+    sparse_loss.backward()
+    dense_loss.backward()
+
+    assert sparse_pairs > 0
+    assert float(sparse_loss.detach()) == pytest.approx(float(dense_loss.detach()), abs=1e-7)
+    for key in sparse_predictions:
+        assert torch.allclose(
+            sparse_predictions[key].grad,
+            dense_predictions[key].grad,
+            rtol=1e-5,
+            atol=1e-7,
+        )
 
 
 def test_factorized_control_prevents_cross_role_identity_messages() -> None:

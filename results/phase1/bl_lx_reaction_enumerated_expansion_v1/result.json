@@ -1,0 +1,222 @@
+{
+  "artifacts": {
+    "atlas": {
+      "bytes": 561334,
+      "logical_path": "reaction_program_atlas.csv.gz",
+      "schema_version": "forge.multireaction_program_atlas.v1",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "attempts": {
+      "bytes": 577226,
+      "logical_path": "enumeration_attempts.csv.gz",
+      "schema_version": "forge.multireaction_expansion_attempts.v1",
+      "sha256": "8f3d49fe389b03650e590e93b4427a5ee822746470febacf56a7a9bd63e3c8cb"
+    },
+    "components": {
+      "bytes": 253713,
+      "logical_path": "component_registry.csv.gz",
+      "schema_version": "forge.multireaction_expansion_components.v1",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "provenance": {
+      "bytes": 29948,
+      "logical_path": "source_provenance.csv.gz",
+      "schema_version": "forge.multireaction_source_provenance.v1",
+      "sha256": "e2b010b04a144a28033758d6379db3c50a5bac27fd5916c11d8f6083d095684e"
+    },
+    "semantic_atoms": {
+      "bytes": 4406762,
+      "logical_path": "semantic_atoms.csv.gz",
+      "schema_version": "forge.multireaction_semantic_atoms.v2",
+      "sha256": "af37fc051b4b36b4321c322ed03f7cb13f762489f2c68a0dd488f8f34378a71a"
+    },
+    "splits": {
+      "bytes": 834428,
+      "logical_path": "component_family_splits.csv.gz",
+      "schema_version": "forge.multireaction_expanded_component_family_splits.v1",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "steps": {
+      "bytes": 872808,
+      "logical_path": "reaction_program_steps.csv.gz",
+      "schema_version": "forge.multireaction_program_steps.v1",
+      "sha256": "513c77f376f6c720556ac6b8651399592d7a172d13e382ad27286762070218ed"
+    }
+  },
+  "claims_boundary": {
+    "component_family_assignment_precedes_enumeration": true,
+    "computed_transform_consistency_is_observed_synthesis": false,
+    "computed_transform_consistency_is_route_closure": false,
+    "computed_transform_consistency_is_synthesis_success": false,
+    "reductive_amination_substructure_hit_rate_reported": false,
+    "source_activity_labels_inherited": false,
+    "source_executed_evidence_rewritten": false,
+    "training_must_use_source_balanced_weight": true
+  },
+  "config": {
+    "bytes": 3347,
+    "path": "configs/multireaction/bl_lx_reaction_enumerated_expansion_v1.json",
+    "sha256": "ea62ab4ead3f25adedaa4854555a493432ec290154d35a076a61e996e1818999"
+  },
+  "inputs": {
+    "lnpdb": {
+      "bytes": 20118803,
+      "path": "data/vendor/lnpdb_fc7c389.csv",
+      "sha256": "3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3"
+    },
+    "program_config": {
+      "bytes": 4020,
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "bytes": 31686,
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "source_atlas": {
+      "bytes": 21508,
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "source_provenance": {
+      "bytes": 34408,
+      "path": "results/phase1/multireaction_program_corpus_v1/source_provenance.csv.gz",
+      "sha256": "389b3d1ddb150bbacfa3ecdc9c3810453d8ec0bce3e1fcb2a8085b9ac2496e6a"
+    },
+    "source_result": {
+      "bytes": 2840,
+      "path": "results/phase1/multireaction_program_corpus_v1/result.json",
+      "sha256": "df6f06fc1a4f9239ee24cbd46e0de8805a5e5063e3e9087379182868695e401d"
+    },
+    "source_semantic_atoms": {
+      "bytes": 168746,
+      "path": "results/phase1/multireaction_program_corpus_v1/semantic_atoms.csv.gz",
+      "sha256": "ca49423ce3c78931770f7f8a8bc49cfab26ade2801b4fe62cd43da539e17ad83"
+    },
+    "source_splits": {
+      "bytes": 12977,
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "source_steps": {
+      "bytes": 22950,
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_steps.csv.gz",
+      "sha256": "3f30e27622bcff03d1272dcc03673dc4b2d6563c1b0f9fc70f851705d584cc9d"
+    }
+  },
+  "policy": {
+    "allowed_elements": [
+      "C",
+      "N",
+      "O"
+    ],
+    "computed_product_is_observed_synthesis": false,
+    "computed_product_is_route_closed": false,
+    "evidence_stratum_mass": {
+      "computed_transform_consistency": 0.5,
+      "source_executed": 0.5
+    },
+    "family_fingerprint": {
+      "bits": 2048,
+      "include_chirality": false,
+      "kind": "ECFP4",
+      "radius": 2,
+      "similarity_threshold": 0.75
+    },
+    "family_split_fractions": {
+      "calibration": 0.15,
+      "heldout": 0.15,
+      "train": 0.7
+    },
+    "identity": "canonical_constitutional_smiles",
+    "maximum_component_heavy_atoms": 96,
+    "maximum_forward_outcomes": 512,
+    "maximum_forward_states": 4096,
+    "maximum_product_heavy_atoms": 194,
+    "source_activity_labels_inherited": false,
+    "uniform_product_row_sampling_allowed": false
+  },
+  "schema_version": "forge.multireaction_expansion_result.v1",
+  "seed": 20260827,
+  "status": "complete_bl_lx_reaction_enumerated_expansion",
+  "summary": {
+    "admission_reasons": {
+      "computed_transform_candidate": 601,
+      "fails_repeated_program_handle_policy": 428,
+      "outside_declared_component_support": 218,
+      "source_executed_component": 96
+    },
+    "admitted_by_program_role": {
+      "bl_2023_repeated_aza_michael|accumulator": 302,
+      "bl_2023_repeated_aza_michael|repeat": 33,
+      "lx_2024_repeated_reductive_amination|accumulator": 317,
+      "lx_2024_repeated_reductive_amination|repeat": 45
+    },
+    "admitted_components": 697,
+    "ambiguous_component_factorization_products": 8,
+    "attempt_abstention_reasons": {
+      "computed product duplicates source-executed product": 610,
+      "forward_product_outside_declared_model_support": 143,
+      "forward_program_did_not_resolve_one_product": 1260,
+      "multiple_component_factorizations": 16,
+      "semantic_origin_error:precursor-role or core-position states are ambiguous under graph symmetry": 15
+    },
+    "attempt_dispositions": {
+      "abstain": 1434,
+      "admit_transform_consistency": 22187,
+      "source_product_precedence": 610
+    },
+    "candidate_components": 1343,
+    "computed_duplicates_of_source_products": 610,
+    "computed_products_admitted": 22187,
+    "enumeration_attempts": 24231,
+    "exact_program_steps": 53555,
+    "family_fold_counts": {
+      "aldehyde_tail|calibration": 7,
+      "aldehyde_tail|heldout": 7,
+      "aldehyde_tail|train": 31,
+      "alkyl_acrylate_or_acrylamide_tail|calibration": 5,
+      "alkyl_acrylate_or_acrylamide_tail|heldout": 5,
+      "alkyl_acrylate_or_acrylamide_tail|train": 23,
+      "amine_head|calibration": 95,
+      "amine_head|heldout": 94,
+      "amine_head|train": 430
+    },
+    "invalid_lnpdb_component_strings": {
+      "bl_2023_repeated_aza_michael|accumulator|head": 254,
+      "bl_2023_repeated_aza_michael|repeat|tail1": 95,
+      "lx_2024_repeated_reductive_amination|accumulator|head": 254,
+      "lx_2024_repeated_reductive_amination|repeat|tail1": 95
+    },
+    "product_folds": {
+      "calibration": 5722,
+      "heldout": 5568,
+      "train": 11661
+    },
+    "products_by_evidence": {
+      "computed_transform_consistency": 22187,
+      "source_executed": 764
+    },
+    "products_by_program_fold": {
+      "bl_2023_repeated_aza_michael|calibration": 2350,
+      "bl_2023_repeated_aza_michael|heldout": 1551,
+      "bl_2023_repeated_aza_michael|train": 4757,
+      "lx_2024_repeated_reductive_amination|calibration": 3372,
+      "lx_2024_repeated_reductive_amination|heldout": 4017,
+      "lx_2024_repeated_reductive_amination|train": 6904
+    },
+    "sampling_policy": "equal program mass, fixed evidence-stratum mass, inverse family size",
+    "semantic_atom_rows": 1461956,
+    "shared_split_namespaces": {
+      "aldehyde_tail": 45,
+      "alkyl_acrylate_or_acrylamide_tail": 33,
+      "amine_head": 317
+    },
+    "source_executed_components": 96,
+    "source_products_preserved": 764,
+    "source_products_with_new_family_fold": 443,
+    "total_products": 22951
+  },
+  "task": "Source-linked BL/LX component expansion and exact reaction-program enumeration"
+}

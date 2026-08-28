@@ -1,0 +1,84 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_production_evaluation_config.v1",
+  "status": "frozen_before_fresh_production_seeds",
+  "selected_model": {
+    "arm_id": "tree_relations_and_routing",
+    "checkpoint_step": 2700,
+    "candidate_id": "tree_relations_and_routing:step_2700"
+  },
+  "inputs": {
+    "program_draw": {
+      "path": "results/phase1/forge_held_family_stage2_v1/program_draw.json",
+      "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"
+    },
+    "closure_checkpoint": {
+      "path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt",
+      "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"
+    },
+    "prepared_cache": {
+      "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+      "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    }
+  },
+  "profiles": {
+    "smoke": {
+      "program_count": 4,
+      "sample_steps": 8,
+      "batch_size": 4,
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0,
+      "maximum_adjacent_branch_runs": [2, 1, 1]
+    },
+    "full": {
+      "program_count": 3072,
+      "sample_steps": 8,
+      "batch_size": 16,
+      "terminal_decoder_mode": "stochastic",
+      "terminal_temperature": 1.0,
+      "maximum_adjacent_branch_runs": [2, 1, 1]
+    }
+  },
+  "seed_derivation": {
+    "flow_seed_offset": 100000,
+    "terminal_decoder_seed_offset": 200000,
+    "derived_from_training_seed": true
+  },
+  "policy": {
+    "same_ordered_programs_across_training_seeds": true,
+    "component_family_stress_draw_previously_used": true,
+    "heldout_rows_descriptive_only": true,
+    "heldout_selects_architecture_checkpoint_or_threshold": false,
+    "component_identifiers_exposed_to_model": false,
+    "repairs_or_retries": false,
+    "route_calls": 0,
+    "oracle_calls": 0,
+    "candidate_selection": false,
+    "reductive_amination_substructure_rate_reported": false
+  },
+  "nonclaims": [
+    "The component-family stress draw was used by earlier diagnostics and is descriptive rather than a pristine final test.",
+    "Conditioning on a held-family-derived morphology program does not demonstrate regeneration of an unseen component identity.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability or route closure.",
+    "No repair, retry, route, oracle or candidate-selection call occurs."
+  ]
+}

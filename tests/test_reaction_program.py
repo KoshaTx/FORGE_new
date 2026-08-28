@@ -52,7 +52,19 @@ def test_aza_michael_program_recovers_and_replays_one_step() -> None:
     )
     assert str(canonical_connected_constitution(row["IL_SMILES"])) in products.products
     assert not products.saturated
+    forward_traces = adapter.forward_traces(
+        traces[0].terminal_head_smiles,
+        traces[0].repeated_component_smiles,
+    )
+    assert len(forward_traces) == 1
+    assert forward_traces[0].intermediate_product_smiles[-1] == (
+        traces[0].intermediate_product_smiles[-1]
+    )
     origins = adapter.atom_origins(traces[0])
+    assert (
+        adapter.atom_origins(forward_traces[0]).canonical_product_smiles
+        == origins.canonical_product_smiles
+    )
     assert len(origins.atom_origins) == 63
     assert set(origins.atom_origins) == {"accumulator", "repeat"}
     assert Counter(origins.core_positions) == {
@@ -94,7 +106,19 @@ def test_reductive_amination_program_recovers_ordered_repeated_steps() -> None:
         traces[0].repeated_component_smiles,
         row["IL_SMILES"],
     ).exact
+    forward_traces = adapter.forward_traces(
+        traces[0].terminal_head_smiles,
+        traces[0].repeated_component_smiles,
+    )
+    assert len(forward_traces) == 2
+    assert traces[0].intermediate_product_smiles[-1] in {
+        trace.intermediate_product_smiles[-1] for trace in forward_traces
+    }
     origins = adapter.atom_origins(traces[0])
+    assert any(
+        adapter.atom_origins(trace).canonical_product_smiles == origins.canonical_product_smiles
+        for trace in forward_traces
+    )
     assert len(origins.atom_origins) == 58
     assert set(origins.atom_origins) == {"accumulator", "repeat"}
     assert Counter(origins.core_positions) == {"": 54, "map_1": 2, "map_2": 2}

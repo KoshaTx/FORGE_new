@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import math
 import platform
 import statistics
 import time
@@ -45,6 +46,55 @@ SCHEMA = "forge.transformer_training_performance_benchmark.v1"
 
 class TransformerTrainingBenchmarkError(ValueError):
     """The benchmark input or equivalence contract is invalid."""
+
+
+def _reference_attention_forward(
+    attention: Any,
+    query: Any,
+    memory: Any,
+    *,
+    query_mask: Any,
+    memory_mask: Any,
+    attention_bias: Any | None = None,
+) -> Any:
+    """Pre-optimization materialized score/probability attention."""
+
+    batch, queries, hidden_dim = query.shape
+    keys = memory.shape[1]
+    q = (
+        attention.query(query)
+        .reshape(batch, queries, attention.heads, attention.head_dim)
+        .transpose(1, 2)
+    )
+    k = (
+        attention.key(memory)
+        .reshape(batch, keys, attention.heads, attention.head_dim)
+        .transpose(1, 2)
+    )
+    v = (
+        attention.value(memory)
+        .reshape(batch, keys, attention.heads, attention.head_dim)
+        .transpose(1, 2)
+    )
+    scores = torch.einsum("bhqd,bhkd->bhqk", q, k) / math.sqrt(attention.head_dim)
+    if attention_bias is not None:
+        scores = scores + attention_bias
+    scores = scores.masked_fill(~memory_mask[:, None, None, :], -1e9)
+    probabilities = torch.softmax(scores, dim=-1)
+    context = torch.einsum("bhqk,bhkd->bhqd", probabilities, v)
+    context = context.transpose(1, 2).reshape(batch, queries, hidden_dim)
+    return attention.output(context) * query_mask[:, :, None]
+
+
+def _prepare_attention_implementation(model: Any, *, reference: bool) -> None:
+    """Disable attention dropout for a paired kernel-equivalence benchmark."""
+
+    for module in model.modules():
+        if module.__class__.__name__ != "_MaskedMultiheadAttention":
+            continue
+        module.dropout.p = 0.0
+        if reference:
+            module.forward = types.MethodType(_reference_attention_forward, module)
 
 
 def _reference_graph_bias(
@@ -116,6 +166,40 @@ def _reference_repeat_consistency(predictions: Mapping[str, Any], clean: Mapping
     bond_distance = (bond_p[:, :, None, :] - bond_p[:, None, :, :]).square().mean(dim=-1)
     bond_loss = (bond_distance * bond_mask).sum() / bond_mask.sum().clamp(min=1)
     return node_loss + bond_loss
+
+
+def _repeat_state_work(
+    clean: Mapping[str, Any], *, node_classes: int, bond_classes: int
+) -> dict[str, int | float]:
+    """Count class-valued pair differences evaluated by dense and sparse formulations."""
+
+    groups = clean["repeat_group_states"]
+    positions = clean["component_position_states"]
+    instances = clean["component_instance_states"]
+    active = (groups > 0) & clean["node_mask"] & (clean["core_position_states"] == 1)
+    pairs = (
+        active[:, :, None]
+        & active[:, None, :]
+        & (groups[:, :, None] == groups[:, None, :])
+        & (positions[:, :, None] == positions[:, None, :])
+        & (instances[:, :, None] != instances[:, None, :])
+    )
+    nodes = groups.shape[1]
+    pairs &= torch.triu(
+        torch.ones((nodes, nodes), dtype=torch.bool, device=groups.device), diagonal=1
+    )[None]
+    node_pairs = int(pairs.sum())
+    bond_pairs = int((pairs & clean["child_mask"][:, :, None] & clean["child_mask"][:, None]).sum())
+    batch = groups.shape[0]
+    dense = int(batch * nodes * nodes * (node_classes + bond_classes))
+    sparse = int(node_pairs * node_classes + bond_pairs * bond_classes)
+    return {
+        "admitted_node_pairs": node_pairs,
+        "admitted_bond_pairs": bond_pairs,
+        "dense_class_valued_pair_elements": dense,
+        "sparse_class_valued_pair_elements": sparse,
+        "work_reduction_fraction": 1.0 - sparse / dense,
+    }
 
 
 def _slice_batch(values: Mapping[str, Any], indices: Any) -> dict[str, Any]:
@@ -356,6 +440,7 @@ def run_transformer_training_benchmark(
             "component_instance_states",
             "component_position_states",
             "repeat_group_states",
+            "role_morphology_states",
             "adapter_mask",
         )
     }
@@ -399,6 +484,7 @@ def run_transformer_training_benchmark(
     def run_once(reference: bool, run_seed: int, collect: bool) -> dict[str, Any]:
         model = build_model()
         model.load_state_dict(state, strict=True)
+        _prepare_attention_implementation(model, reference=reference)
         if reference:
             model._graph_bias = types.MethodType(_reference_graph_bias, model)
         torch.manual_seed(run_seed)
@@ -510,6 +596,11 @@ def run_transformer_training_benchmark(
     graph_optimized_median = statistics.median(graph_optimized_times)
     pcgrad_reference_median = statistics.median(pcgrad_reference_times)
     pcgrad_optimized_median = statistics.median(pcgrad_optimized_times)
+    repeat_work = _repeat_state_work(
+        clean,
+        node_classes=node_classes,
+        bond_classes=int(model_config["bond_classes"]),
+    )
     gates = {
         "losses_numerically_equivalent": bool(
             np.allclose(
@@ -537,6 +628,10 @@ def run_transformer_training_benchmark(
         ),
         "graph_bias_median_faster": graph_optimized_median < graph_reference_median,
         "pcgrad_median_faster": pcgrad_optimized_median < pcgrad_reference_median,
+        "repeat_state_work_reduced": (
+            repeat_work["sparse_class_valued_pair_elements"]
+            < repeat_work["dense_class_valued_pair_elements"]
+        ),
     }
     result = {
         "schema_version": SCHEMA,
@@ -546,6 +641,10 @@ def run_transformer_training_benchmark(
             "cache": artifact_record(cache_path),
             "implementation": artifact_record(Path(__file__)),
             "transformer": artifact_record(repo / "forge/model/reaction_program_transformer.py"),
+            "training_loop": artifact_record(
+                repo / "experiments/phase1/multireaction/production_training.py"
+            ),
+            "shared_attention": artifact_record(repo / "forge/model/structural_attention.py"),
         },
         "environment": {
             "platform": platform.platform(),
@@ -559,7 +658,8 @@ def run_transformer_training_benchmark(
             "batch_size": len(records),
             "padded_nodes": int(clean["nodes"].shape[1]),
             "parameters": sum(parameter.numel() for parameter in base_model.parameters()),
-            "scope": "forward_loss_and_equal_family_pcgrad_backward",
+            "scope": "forward_loss_and_equal_family_pcgrad_backward_with_attention_dropout_zero",
+            "attention_dropout_probability": 0.0,
             "reference_seconds": reference_times,
             "optimized_seconds": optimized_times,
             "reference_median_seconds": reference_median,
@@ -584,6 +684,7 @@ def run_transformer_training_benchmark(
                 "optimized_median_seconds": pcgrad_optimized_median,
                 "median_speedup": pcgrad_reference_median / pcgrad_optimized_median,
             },
+            "repeat_consistency": repeat_work,
         },
         "equivalence": {
             "maximum_absolute_loss_difference": loss_difference,

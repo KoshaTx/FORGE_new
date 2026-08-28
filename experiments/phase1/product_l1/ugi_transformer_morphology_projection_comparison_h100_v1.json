@@ -1,0 +1,79 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-transformer-morphology-projection-comparison-h100-v1",
+  "description": "Gated exact-H100 paired comparison of reduced and full role-morphology mixed Transformers on the same 3,072 Ugi programs.",
+  "root_seed": 20260825,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "preflight",
+      "implementation": "evaluate.ugi.transformer-morphology-projection-comparison.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_transformer_morphology_projection_preflight_v1.json",
+        "sha256": "449ee993180392201ea33a18cb4c00541a61d2f9e204c70adbbc29d7fe09ae94"
+      },
+      "inputs": {
+        "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+        "full_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "full_production_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "full_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+        "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+        "reduced_checkpoint_archive": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar", "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"},
+        "reduced_production_design": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json", "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"},
+        "reduced_training_result": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json", "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"},
+        "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.ugi_transformer_morphology_projection_comparison.v1"},
+        "comparison_details": {"path": "comparison_details.tar", "schema_version": "forge.ugi_transformer_morphology_projection_comparison_archive.v1"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 8, "workers": 0, "memory_mb": 49152, "timeout_seconds": 3600, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-transformer-morphology-projection-preflight"}
+    },
+    {
+      "id": "comparison",
+      "implementation": "evaluate.ugi.transformer-morphology-projection-comparison.v1",
+      "needs": ["preflight"],
+      "config": {
+        "path": "configs/model/phase1_ugi_transformer_morphology_projection_comparison_v1.json",
+        "sha256": "c3d7c7a396b030cb4aa80bdbb7eba15be25ef5c2d0c03d0c969d3914cb029b9f"
+      },
+      "inputs": {
+        "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+        "full_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "full_production_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "full_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+        "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+        "reduced_checkpoint_archive": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/checkpoints.tar", "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"},
+        "reduced_production_design": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json", "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"},
+        "reduced_training_result": {"path": "results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json", "sha256": "aa188ea0c3e8a125bc150c213b06fbb9914395a1522226f5f76398b5bc3cc647"},
+        "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.ugi_transformer_morphology_projection_comparison.v1"},
+        "comparison_details": {"path": "comparison_details.tar", "schema_version": "forge.ugi_transformer_morphology_projection_comparison_archive.v1"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 8, "workers": 0, "memory_mb": 49152, "timeout_seconds": 86400, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-transformer-morphology-projection-production"}
+    }
+  ],
+  "metadata": {
+    "authorization": "Explicit user request to extend the Transformer and test whether the richer reaction-program projection performs better.",
+    "scientific_result": true,
+    "programs_per_method": 3072,
+    "training_calls": 0
+  },
+  "nonclaims": [
+    "This is a single-checkpoint, single-seed projection ablation.",
+    "Exact L1 is transform consistency, not synthesis-success probability.",
+    "No training, route, oracle, biological or candidate-selection call occurs."
+  ]
+}

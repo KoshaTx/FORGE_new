@@ -252,6 +252,52 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, Any]], fieldnames: Sequenc
     atomic_write(path, gzip_bytes(payload) if path.suffix == ".gz" else payload)
 
 
+def write_csv_iter(
+    path: Path,
+    rows: Iterable[Mapping[str, Any]],
+    fieldnames: Sequence[str],
+) -> None:
+    """Stream a deterministic CSV artifact to an atomic destination.
+
+    Large atom-level ledgers should not first materialize millions of row dictionaries or a second
+    complete uncompressed byte copy.  Gzip metadata is deterministic and CSV line endings match
+    :func:`csv_gz_bytes`; the compressed deflate stream is intentionally produced incrementally.
+    """
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    os.close(descriptor)
+    try:
+        with open(temporary, "wb") as raw_handle:
+            compressed = (
+                gzip.GzipFile(filename="", fileobj=raw_handle, mode="wb", mtime=0)
+                if path.suffix == ".gz"
+                else None
+            )
+            binary_handle = compressed if compressed is not None else raw_handle
+            text_handle = io.TextIOWrapper(binary_handle, encoding="utf-8", newline="")
+            writer = csv.DictWriter(
+                text_handle,
+                fieldnames=fieldnames,
+                lineterminator="\n",
+            )
+            writer.writeheader()
+            writer.writerows(rows)
+            text_handle.flush()
+            text_handle.detach()
+            if compressed is not None:
+                compressed.close()
+            raw_handle.flush()
+            os.fsync(raw_handle.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
 def write_jsonl(path: Path, records: Iterable[Any]) -> None:
     payload = jsonl_bytes(records)
     atomic_write(path, gzip_bytes(payload) if path.suffix == ".gz" else payload)
@@ -274,6 +320,7 @@ __all__ = [
     "stable_json",
     "stable_json_bytes",
     "write_csv",
+    "write_csv_iter",
     "write_json",
     "write_jsonl",
 ]

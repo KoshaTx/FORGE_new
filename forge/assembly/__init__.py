@@ -30,6 +30,8 @@ from forge.assembly.ugi3 import (
     Ugi3AssemblyAdapter,
     Ugi3AssemblyError,
     Ugi3DecompositionTrace,
+    Ugi3RoleHandleAssessment,
+    Ugi3TransformConsistentCandidate,
 )
 
 __all__ = [
@@ -50,6 +52,8 @@ __all__ = [
     "Ugi3AssemblyAdapter",
     "Ugi3AssemblyError",
     "Ugi3DecompositionTrace",
+    "Ugi3RoleHandleAssessment",
+    "Ugi3TransformConsistentCandidate",
     "repair_template_hydrogens",
     "load_compiled_registry_reaction",
 ]

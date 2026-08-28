@@ -30,6 +30,48 @@ class Ugi3DecompositionTrace:
 
 
 @dataclass(frozen=True)
+class Ugi3RoleHandleAssessment:
+    """Registry handle-policy evidence for one reverse-decomposed component."""
+
+    role: str
+    raw_handle_matches: int
+    symmetry_distinct_handle_sites: int
+    forbidden_substructure_match: bool
+    passes_registry_handle_policy: bool
+
+    def to_mapping(self) -> dict[str, Any]:
+        return {
+            "role": self.role,
+            "raw_handle_matches": self.raw_handle_matches,
+            "symmetry_distinct_handle_sites": self.symmetry_distinct_handle_sites,
+            "forbidden_substructure_match": self.forbidden_substructure_match,
+            "passes_registry_handle_policy": self.passes_registry_handle_policy,
+        }
+
+
+@dataclass(frozen=True)
+class Ugi3TransformConsistentCandidate:
+    """One reverse trace that replays exactly, before registry-handle admission."""
+
+    product_smiles: str
+    components: tuple[tuple[str, str], ...]
+    handle_assessments: tuple[Ugi3RoleHandleAssessment, ...]
+
+    @property
+    def registry_handle_qualified(self) -> bool:
+        return all(value.passes_registry_handle_policy for value in self.handle_assessments)
+
+    def as_mapping(self) -> dict[str, Any]:
+        return {
+            "product_smiles": self.product_smiles,
+            "components_by_role": dict(self.components),
+            "handle_assessments": [value.to_mapping() for value in self.handle_assessments],
+            "registry_handle_qualified": self.registry_handle_qualified,
+            "forward_replay_exact": True,
+        }
+
+
+@dataclass(frozen=True)
 class Ugi3AssemblyAdapter:
     """Exact forward validation through the hash-pinned qualified registry."""
 
@@ -145,6 +187,31 @@ class Ugi3AssemblyAdapter:
     ) -> tuple[Ugi3DecompositionTrace, ...]:
         """Enumerate handle-qualified reverse traces and retain exact forward round trips."""
 
+        candidates = self.transform_consistent_decomposition_candidates(
+            product_smiles,
+            maximum_outcomes=maximum_outcomes,
+        )
+        return tuple(
+            Ugi3DecompositionTrace(
+                product_smiles=candidate.product_smiles,
+                components=candidate.components,
+            )
+            for candidate in candidates
+            if candidate.registry_handle_qualified
+        )
+
+    def transform_consistent_decomposition_candidates(
+        self,
+        product_smiles: str,
+        *,
+        maximum_outcomes: int = 128,
+    ) -> tuple[Ugi3TransformConsistentCandidate, ...]:
+        """Return exact reverse/forward traces without upgrading failed handle policy.
+
+        This method is diagnostic. A transform-consistent candidate that fails a registry handle
+        policy remains ineligible for exact L1 and must not be reported as route-certified.
+        """
+
         from forge.corpus.ugi_held_component_gate import reaction_handle_qualification
 
         if isinstance(maximum_outcomes, bool) or maximum_outcomes < 1:
@@ -160,17 +227,16 @@ class Ugi3AssemblyAdapter:
             raise Ugi3AssemblyError(
                 f"Ugi reverse decomposition reached maximum_outcomes={maximum_outcomes}"
             )
-        traces: set[tuple[tuple[str, str], ...]] = set()
+        candidates: dict[tuple[tuple[str, str], ...], Ugi3TransformConsistentCandidate] = {}
         policies = self._compiled.definition.reactant_roles
         for outcome in outcomes:
             if len(outcome) != len(self.roles):
                 continue
             components: list[tuple[str, str]] = []
-            qualified = True
+            assessments: list[Ugi3RoleHandleAssessment] = []
             for index, (role, fragment) in enumerate(zip(self.roles, outcome, strict=True)):
                 repaired = repair_template_hydrogens(fragment)
                 if repaired is None:
-                    qualified = False
                     break
                 smiles, molecule = repaired
                 handle_check = reaction_handle_qualification(
@@ -179,22 +245,41 @@ class Ugi3AssemblyAdapter:
                     forbidden=self._compiled.forbidden[index],
                     allowed_site_multiplicity=policies[index].allowed_site_multiplicity,
                 )
-                if not handle_check["passes_registry_handle_policy"]:
-                    qualified = False
-                    break
                 components.append((role, smiles))
-            if not qualified:
+                assessments.append(
+                    Ugi3RoleHandleAssessment(
+                        role=role,
+                        raw_handle_matches=int(handle_check["raw_handle_matches"]),
+                        symmetry_distinct_handle_sites=int(
+                            handle_check["symmetry_distinct_handle_sites"]
+                        ),
+                        forbidden_substructure_match=bool(
+                            handle_check["forbidden_substructure_match"]
+                        ),
+                        passes_registry_handle_policy=bool(
+                            handle_check["passes_registry_handle_policy"]
+                        ),
+                    )
+                )
+            if len(components) != len(self.roles):
                 continue
             trace = tuple(components)
             forward_check = self.check_forward(
                 dict(trace), canonical, maximum_outcomes=maximum_outcomes
             )
             if forward_check.exact and not forward_check.saturated:
-                traces.add(trace)
-        return tuple(
-            Ugi3DecompositionTrace(product_smiles=canonical, components=trace)
-            for trace in sorted(traces)
-        )
+                candidates[trace] = Ugi3TransformConsistentCandidate(
+                    product_smiles=canonical,
+                    components=trace,
+                    handle_assessments=tuple(assessments),
+                )
+        return tuple(candidates[trace] for trace in sorted(candidates))
 
 
-__all__ = ["Ugi3AssemblyAdapter", "Ugi3AssemblyError", "Ugi3DecompositionTrace"]
+__all__ = [
+    "Ugi3AssemblyAdapter",
+    "Ugi3AssemblyError",
+    "Ugi3DecompositionTrace",
+    "Ugi3RoleHandleAssessment",
+    "Ugi3TransformConsistentCandidate",
+]

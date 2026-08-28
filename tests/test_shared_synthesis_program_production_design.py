@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import copy
 import json
+import tempfile
 from pathlib import Path
 
 import pytest
 
 from experiments.phase1.multireaction.production_design import (
     SynthesisProgramProductionDesignError,
+    freeze_mixed_repeat_training_design,
     freeze_shared_production_comparison_design,
     validate_production_design_contract,
 )
@@ -15,6 +17,7 @@ from forge.core.hashing import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/multireaction/shared_production_comparison_design_v1.json"
+MIXED_CONFIG = REPO / "configs/multireaction/shared_mixed_training_design_v1.json"
 
 
 def _config() -> dict[str, object]:
@@ -155,3 +158,25 @@ def test_design_accepts_only_the_qualified_transformer_balancing_contract() -> N
     config["model"]["gradient_balancing"]["norm_amplification"] = True
     with pytest.raises(SynthesisProgramProductionDesignError, match="family-balancing"):
         validate_production_design_contract(config)
+
+
+def test_mixed_repeat_design_changes_only_authenticated_data_contract() -> None:
+    # The derived design is itself an authenticated input and therefore must live below the repo.
+    with tempfile.TemporaryDirectory(prefix="mixed-design-test-", dir=REPO / "runs") as directory:
+        design_path = Path(directory) / "design.json"
+        result_path = Path(directory) / "result.json"
+        result = freeze_mixed_repeat_training_design(
+            MIXED_CONFIG,
+            REPO,
+            design_path,
+            result_path,
+        )
+        design = json.loads(design_path.read_text())
+
+        assert result["status"] == "design_frozen_launch_blocked"
+        assert all(result["gates"].values())
+        assert result["corpus"]["bl_2023_repeated_aza_michael"]["records"] == 46_000
+        assert result["corpus"]["lx_2024_repeated_reductive_amination"]["records"] == 46_000
+        assert design["model"]["semantic_objective"]["repeat_consistency_weight"] == 0.25
+        assert design["execution"]["production_launch_authorized"] is False
+        assert design["decision"]["production_training_authorized"] is False

@@ -1,0 +1,79 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-reaction-topology-specialist-ugi-seed0-h100-v2",
+  "description": "Train the exposure-matched Ugi topology specialist, then compare exact program-coupled Transformer generation with v0 on the same 3,072 ordered programs.",
+  "root_seed": 20260828,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "preflight",
+      "implementation": "model.reaction-program-topology-specialization-h100-preflight.v2",
+      "needs": [],
+      "config": {"path": "configs/multireaction/reaction_topology_specialist_ugi_v2.json", "sha256": "a97890cccb928e7ad7e5b12e09770367d5a7d7efedcc8060ac845ed125566885"},
+      "inputs": {
+        "base_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "base_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "base_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"}
+      },
+      "outputs": {
+        "checkpoint": {"path": "specialist_checkpoint.pt", "schema_version": "forge.reaction_program_topology_specialist_checkpoint.v2"},
+        "progress": {"path": "progress.json", "schema_version": "forge.reaction_program_topology_specialization_progress.v2"},
+        "result": {"path": "result.json", "schema_version": "forge.reaction_program_topology_specialization_result.v2"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 3600, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "reaction-topology-specialist-ugi-preflight-v2"}
+    },
+    {
+      "id": "specialize_ugi",
+      "implementation": "model.reaction-program-topology-specialization.v2",
+      "needs": ["preflight"],
+      "config": {"path": "configs/multireaction/reaction_topology_specialist_ugi_v2.json", "sha256": "a97890cccb928e7ad7e5b12e09770367d5a7d7efedcc8060ac845ed125566885"},
+      "inputs": {
+        "base_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "base_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "base_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"}
+      },
+      "outputs": {
+        "checkpoint": {"path": "specialist_checkpoint.pt", "schema_version": "forge.reaction_program_topology_specialist_checkpoint.v2"},
+        "progress": {"path": "progress.json", "schema_version": "forge.reaction_program_topology_specialization_progress.v2"},
+        "result": {"path": "result.json", "schema_version": "forge.reaction_program_topology_specialization_result.v2"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 172800, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "reaction-topology-specialist-ugi-seed0-v2"}
+    },
+    {
+      "id": "compare_ugi_v0",
+      "implementation": "evaluate.ugi.reaction-topology-specialist-v0-comparison.v2",
+      "needs": ["specialize_ugi"],
+      "config": {"path": "configs/model/phase1_reaction_topology_specialist_ugi_v0_comparison_v2.json", "sha256": "f2ed7065852939e250494d5382cff81610cadf0fecb2b4f61983420dd2e801ba"},
+      "inputs": {
+        "base_checkpoint_archive": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/checkpoints.tar", "sha256": "8bee7b42b25f60e5f400783189a160a754f4187de46728c80c115805803ca92f"},
+        "base_training_result": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/training/result.json", "sha256": "eed8dc03a786a0bbf8c5a3c4909f62452bd74a817e243c3d21533627e9ea90bd"},
+        "base_design": {"path": "runs/phase1-shared-mixed-role-morphology-seed0-h100/7763bd4f949c7724cf28a75f8cef37bafc31fa775c4c304ce33f1c813154e134/stages/study/artifacts/study_design.json", "sha256": "1b15c02c36e1fd97c8048ec053ebdcfb15b6255221f71f03108ccd7b84a8738d"},
+        "closure_checkpoint": {"path": "results/phase1/ugi_closure_expanded_full/checkpoint_best.pt", "sha256": "a97507ac6a9eeba41d0cc351666cffdd21069d13bc78c0db671ab3a30c710b5d"},
+        "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+        "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+        "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"},
+        "prepared_cache": {"path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt", "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "program_draw": {"path": "results/phase1/forge_held_family_stage2_v1/program_draw.json", "sha256": "a4adbb942c24d44336622d60387631d0042c25e213ccf869e5b122c851cb8266"},
+        "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+        "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"},
+        "topology_closure_config": {"path": "configs/model/phase1_ugi_closure_expanded.json", "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"},
+        "topology_morphology_config": {"path": "configs/model/phase1_ugi_morphology_expanded.json", "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"},
+        "v0_checkpoint": {"path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_3000.pt", "sha256": "4a9dc01ec1bcc83cd18c257185b18fe2b66b2b19d93a12ed44f696b490bbad50"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.reaction_topology_specialist_ugi_v0_comparison_result.v2"},
+        "comparison_details": {"path": "comparison_details.tar", "schema_version": "forge.reaction_topology_specialist_ugi_v0_comparison_archive.v2"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 172800, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "reaction-topology-specialist-ugi-v0-comparison-v2"}
+    }
+  ],
+  "metadata": {"requires_verified_preflight_stage": true, "cumulative_exposure": 384000, "component_vocabulary": false, "paired_v0_assessment": true},
+  "nonclaims": ["Seed 0 development does not establish independently trained replication.", "Exact L1 replay is transform consistency, not route certification or synthesis success."]
+}

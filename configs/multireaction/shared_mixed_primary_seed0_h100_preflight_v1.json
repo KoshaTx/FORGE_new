@@ -1,0 +1,62 @@
+{
+  "schema_version": "forge.synthesis_program_h100_training_profile_config.v1",
+  "inputs": {
+    "production_design": {
+      "path": "results/phase1/shared_synthesis_program_mixed_design_v1/design.json",
+      "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "production_training_config": {
+      "path": "configs/multireaction/shared_mixed_training_smoke_v1.json",
+      "sha256": "ad13ac227d5754674953c1111fb6c7fceccaba62b2bbb7a5b3de1d026f97c8c6"
+    },
+    "cpu_performance_result": {
+      "path": "results/phase1/shared_synthesis_program_training_performance_v1/result.json",
+      "sha256": "81e6247e951cda82634511e39a381e7215dad12e793e7b350e3ace8f0061390b"
+    },
+    "smoke_training_result": {
+      "path": "results/phase1/shared_synthesis_program_mixed_training_smoke_v1/result.json",
+      "sha256": "cf17c4d4a16178bbe67c3304dc6e49bfa9b4a0ff912c83ed584bf398f0525843"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-27",
+    "scope": "Exercise the exact repeat-aware final conditioned architecture, source-balanced 32 x 4 PCGrad step and 194-atom support on one exact H100 immediately before the authorized seed-0 production run.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "profile": {
+    "arm_id": "shared_three_program_conditioned",
+    "arm_overrides": {
+      "role": "final_forge_conditioned"
+    },
+    "model_overrides": {
+      "repeat_group_conditioning": true
+    },
+    "expected_parameter_count": 5328685,
+    "seed": 20260825,
+    "minimum_memory_gib": 78.0,
+    "maximum_memory_gib": 82.0,
+    "warmup_optimizer_steps": 2,
+    "measured_optimizer_steps": 3,
+    "minimum_promotion_speedup": 1.0,
+    "equivalence_tolerances": {},
+    "candidates": [
+      {
+        "id": "fp32_eager",
+        "precision": "float32",
+        "compile": false,
+        "allow_tf32": false,
+        "equivalence_tolerance": "not_applicable"
+      }
+    ]
+  },
+  "nonclaims": [
+    "This preflight is an execution gate and not a model-quality result.",
+    "No checkpoint, molecule, route, oracle or candidate is produced or selected.",
+    "Failure prevents the downstream production stage from starting."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_failure_attribution_config.v1",
+  "status": "frozen_after_negative_full_ugi_evaluation",
+  "experiment_id": "phase1-ugi-tree-relational-production-h100-v1",
+  "source_sha256": "94bb0384b14accf8cd8bce866a3b43d3d1707c471abf6e9b64fb6f035479811c",
+  "expected_training_seeds": [
+    20260905,
+    20260906,
+    20260907
+  ],
+  "attempts_per_seed": 3072,
+  "inputs": {
+    "aggregate": {
+      "path": "results/phase1/ugi_tree_relational_production_aggregate_v1/result.json",
+      "sha256": "2bdf30b4ad6d738988cb72d6a2170c63825a7d39513d028580e4bee3c93724a7"
+    },
+    "local_chemistry_support": {
+      "path": "results/phase1/local_chemistry_support_v1/policy.json",
+      "sha256": "855c64ff810ab3266ba9630fdc243423842d932e79305eb8e8eeb438f66bef34"
+    },
+    "runs": [
+      {
+        "seed": 20260905,
+        "run_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/run.json",
+          "sha256": "36d0e56eda3081dd96c8ea329fd998eb8081a313c397cb5747068f25883f3526"
+        },
+        "evaluation_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/stages/evaluate/manifest.json",
+          "sha256": "40cab1ebb16d46b1895d00f93c651f371c2e4f39945b033e316549543a868473"
+        },
+        "evaluation_details": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/stages/evaluate/artifacts/evaluation_details.tar",
+          "sha256": "6abcdc1bfec670985f6f40078a1895b6a6445c88ec77e609d1fe9b907a914a18"
+        }
+      },
+      {
+        "seed": 20260906,
+        "run_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/0bbd58b8e87a344861f7b6b8c88843c368d429adb2a1be328324e895991bc0d8/run.json",
+          "sha256": "bc2a6795ff43cb8856e72648a4a48a4eaf83d62b3ffbe338c35532b28e0c4c1c"
+        },
+        "evaluation_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/0bbd58b8e87a344861f7b6b8c88843c368d429adb2a1be328324e895991bc0d8/stages/evaluate/manifest.json",
+          "sha256": "567c4f0b643c02c0932acd959c3de0bc848dc981b9a24f36fc32c87d7c91ce14"
+        },
+        "evaluation_details": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/0bbd58b8e87a344861f7b6b8c88843c368d429adb2a1be328324e895991bc0d8/stages/evaluate/artifacts/evaluation_details.tar",
+          "sha256": "7ef2e0636bc818ee6075bf1b48ed3d4c7b40572edc8cf968293e8b5ca884c70d"
+        }
+      },
+      {
+        "seed": 20260907,
+        "run_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/779a97f358b334ddfd30e70006116fe9619d334aec573ebce3437da4d8603975/run.json",
+          "sha256": "df0d02dd69686948d4c75b50a7251d0bd917689c08fbd90707b805f4ef5dd060"
+        },
+        "evaluation_manifest": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/779a97f358b334ddfd30e70006116fe9619d334aec573ebce3437da4d8603975/stages/evaluate/manifest.json",
+          "sha256": "1ad306e2c65f7203263e6149e85f2a34f4d219bf9a7007fc2e8e48bb217e972b"
+        },
+        "evaluation_details": {
+          "path": "runs/phase1-ugi-tree-relational-production-h100-v1/779a97f358b334ddfd30e70006116fe9619d334aec573ebce3437da4d8603975/stages/evaluate/artifacts/evaluation_details.tar",
+          "sha256": "62a95c3fcb1ca64a3edffffbb5a78150fcc94848e41eb2eaabbb74abe5e363aa"
+        }
+      }
+    ]
+  },
+  "policy": {
+    "primary_categories": [
+      "invalid_terminal_support",
+      "invalid_molecule_sanitization",
+      "valid_native_forward_exact_retro_abstention",
+      "exact_l1_unsupported_local_chemistry",
+      "exact_l1_local_supported"
+    ],
+    "attempt_order_must_be_exact": true,
+    "native_forward_and_method_blind_retro_reported_separately": true,
+    "unsupported_edge_signatures_recomputed_from_pinned_policy": true,
+    "top_edge_signatures": 20,
+    "heldout_used_for_model_checkpoint_threshold_or_policy_selection": false,
+    "gate_or_threshold_changes": false,
+    "candidate_selection": false,
+    "route_calls": 0,
+    "oracle_calls": 0
+  },
+  "nonclaims": [
+    "Failure attribution does not replace or relax the completed negative production decision.",
+    "A method-blind retro-decomposition abstention is not proof that native forward assembly failed.",
+    "An unsupported local edge is an abstention under bounded train-fold support, not proof of chemical impossibility.",
+    "The saved terminal-support and sanitization rows do not retain their internal exception subtype; exact subtype recovery would require a newly instrumented run."
+  ]
+}

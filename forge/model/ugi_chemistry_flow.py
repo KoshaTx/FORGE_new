@@ -14,6 +14,7 @@ from rdkit import Chem
 from forge.corpus.ugi_chemistry_corpus import UgiChemistryRecord
 from forge.model.adapter_node_conditioning import AdapterNodeConditioning
 from forge.model.defog_feasibility import AtomState, _rstar_step
+from forge.model.local_chemistry_support import LocalChemistrySupport, tree_path_indices
 from forge.model.phase1_flow import DeterministicSparseFlowBlock
 from forge.model.ugi_adapter_features import ORIGIN_TO_INDEX
 from forge.model.ugi_chemistry_interface import (
@@ -40,6 +41,29 @@ except ModuleNotFoundError:  # pragma: no cover - optional dependency
 
 class UgiChemistryFlowError(RuntimeError):
     """Raised when Ugi chemistry tensors violate their topology contract."""
+
+
+TERMINAL_DECODE_FAILURE_SCHEMA = "forge.ugi_terminal_decode_failure.v1"
+
+
+class UgiTerminalDecodeError(UgiChemistryFlowError):
+    """One typed, serializable terminal-support failure."""
+
+    def __init__(self, code: str, stage: str, **context: int | str | bool) -> None:
+        if not code or not stage:
+            raise ValueError("terminal decode failure code and stage must be nonempty")
+        self.code = code
+        self.stage = stage
+        self.context = dict(sorted(context.items()))
+        super().__init__(f"{stage}:{code}")
+
+    def to_mapping(self) -> dict[str, Any]:
+        return {
+            "schema_version": TERMINAL_DECODE_FAILURE_SCHEMA,
+            "stage": self.stage,
+            "code": self.code,
+            "context": self.context,
+        }
 
 
 TERMINAL_DECODER_MODES = (
@@ -1004,6 +1028,9 @@ def valence_constrained_terminal_sample(
     bond_temperature: float | None = None,
     decoration_temperature: float | None = None,
     atom_temperatures_by_origin: Sequence[float] | None = None,
+    local_chemistry_support: LocalChemistrySupport | None = None,
+    program_id: str | None = None,
+    local_chemistry_constraint_scope: str = "role_edges_cycles_bounds",
 ) -> UgiChemistrySample:
     """Decode terminal logits only within valence-feasible sparse support.
 
@@ -1015,6 +1042,35 @@ def valence_constrained_terminal_sample(
 
     node_count = condition.node_count
     closure_count = condition.closure_count
+    if local_chemistry_constraint_scope not in {
+        "role_edges_only",
+        "role_edges_cycles_bounds",
+    }:
+        raise UgiChemistryFlowError("unsupported role-local chemistry constraint scope")
+    if local_chemistry_support is not None:
+        if program_id is None:
+            raise UgiChemistryFlowError(
+                "role-local terminal decoding requires an explicit program_id"
+            )
+        if tuple(local_chemistry_support.atom_states) != tuple(atom_vocabulary):
+            raise UgiChemistryFlowError(
+                "role-local chemistry atom vocabulary differs from the decoder vocabulary"
+            )
+        role_by_origin = {index: name for name, index in ORIGIN_TO_INDEX.items()}
+        try:
+            role_names = tuple(role_by_origin[int(value)] for value in condition.origin_states)
+        except KeyError as error:
+            raise UgiChemistryFlowError(
+                "condition contains an origin absent from the role-local policy"
+            ) from error
+        if any(role == "adapter_unspecified" for role in role_names):
+            raise UgiChemistryFlowError(
+                "condition contains an adapter-unspecified role during Ugi decoding"
+            )
+        for role in sorted(set(role_names)):
+            local_chemistry_support.component_support_bounds(program_id, role)
+    else:
+        role_names = tuple("" for _ in range(node_count))
     atom_choice_mode, bond_choice_mode, decoration_choice_mode = _terminal_choice_modes(mode)
     atom_temperatures, resolved_bond_temperature, resolved_decoration_temperature = (
         _terminal_channel_temperatures(
@@ -1054,11 +1110,13 @@ def valence_constrained_terminal_sample(
 
     cycle_edges: set[tuple[int, int]] = set()
     cycle_nodes_by_closure: list[set[int]] = []
+    cycle_paths_by_closure: list[tuple[int, ...]] = []
     for left, right in zip(condition.closure_left, condition.closure_right, strict=True):
         path_edges = _tree_path_edges(parents, int(left), int(right))
         path_edges.add(tuple(sorted((int(left), int(right)))))
         cycle_edges.update(path_edges)
         cycle_nodes_by_closure.append({node for edge in path_edges for node in edge})
+        cycle_paths_by_closure.append(tree_path_indices(parents, int(left), int(right)))
     nodes_in_cycles = {node for group in cycle_nodes_by_closure for node in group}
 
     node_logits = terminal["nodes"][batch_index, :node_count].detach().cpu()
@@ -1079,8 +1137,78 @@ def valence_constrained_terminal_sample(
             atom_states[node] = raw_states[node] = state_index
             assigned[node] = True
 
+    role_nodes = {
+        role: tuple(index for index, observed in enumerate(role_names) if observed == role)
+        for role in sorted(set(role_names))
+    }
+
+    def atom_is_role_locally_allowed(node: int, state: AtomState) -> bool:
+        if local_chemistry_support is None:
+            return True
+        assert program_id is not None
+        role = role_names[node]
+        bounds = local_chemistry_support.component_support_bounds(program_id, role)
+        nodes = role_nodes[role]
+        if local_chemistry_constraint_scope == "role_edges_cycles_bounds":
+            assigned_symbols = [
+                atom_vocabulary[int(atom_states[index])].symbol
+                for index in nodes
+                if assigned[index] and index != node
+            ]
+            remaining_after = sum(not assigned[index] and index != node for index in nodes)
+            carbon = assigned_symbols.count("C") + int(state.symbol == "C")
+            hetero = (
+                len(assigned_symbols)
+                - assigned_symbols.count("C")
+                + int(state.symbol != "C")
+            )
+            if (
+                carbon > bounds.carbon_atoms_max
+                or carbon + remaining_after < bounds.carbon_atoms_min
+                or hetero > bounds.heteroatoms_max
+                or hetero + remaining_after < bounds.heteroatoms_min
+            ):
+                return False
+        for neighbor in neighbors[node]:
+            if not assigned[neighbor] or neighbor == node:
+                continue
+            neighbor_state = atom_vocabulary[int(atom_states[neighbor])]
+            if not local_chemistry_support.allows_role_edge_for_any_bond(
+                program_id,
+                role,
+                state.symbol,
+                role_names[neighbor],
+                neighbor_state.symbol,
+            ):
+                return False
+        if (
+            local_chemistry_constraint_scope == "role_edges_cycles_bounds"
+            and local_chemistry_support.enforces_role_cycles
+        ):
+            for cycle in cycle_paths_by_closure:
+                if node not in cycle:
+                    continue
+                others = tuple(index for index in cycle if index != node)
+                if not all(assigned[index] for index in others):
+                    continue
+                signature = (
+                    (role, state.symbol),
+                    *(
+                        (
+                            role_names[index],
+                            atom_vocabulary[int(atom_states[index])].symbol,
+                        )
+                        for index in others
+                    ),
+                )
+                if not local_chemistry_support.allows_role_cycle(program_id, signature):
+                    return False
+        return True
+
     def atom_is_allowed(node: int, state: AtomState) -> bool:
         if state.aromatic and node not in nodes_in_cycles:
+            return False
+        if not atom_is_role_locally_allowed(node, state):
             return False
         if not forbid_oxygen_oxygen_bonds or state.symbol != "O":
             return True
@@ -1092,15 +1220,33 @@ def valence_constrained_terminal_sample(
     for node in range(node_count):
         if condition.fixed_atom_mask[node]:
             continue
-        valid = torch.tensor(
+        valence_valid = torch.tensor(
             [
-                _atom_valence_units(state) >= minimum_units[node] and atom_is_allowed(node, state)
+                _atom_valence_units(state) >= minimum_units[node]
                 for state in atom_vocabulary
             ],
             dtype=torch.bool,
         )
+        valid = torch.tensor(
+            [
+                bool(valence_valid[index]) and atom_is_allowed(node, state)
+                for index, state in enumerate(atom_vocabulary)
+            ],
+            dtype=torch.bool,
+        )
         if not bool(valid.any()):
-            raise UgiChemistryFlowError("topology has no valence-feasible atom state")
+            code = (
+                "role_local_atom_state_unavailable"
+                if bool(valence_valid.any()) and local_chemistry_support is not None
+                else "no_valence_feasible_atom_state"
+            )
+            raise UgiTerminalDecodeError(
+                code,
+                "atom_state",
+                node=node,
+                origin=role_names[node] if local_chemistry_support is not None else "unconditioned",
+                minimum_valence_units=int(minimum_units[node]),
+            )
         raw_states[node] = _masked_terminal_choice(
             node_logits[node],
             valid,
@@ -1131,7 +1277,16 @@ def valence_constrained_terminal_sample(
                 dtype=torch.bool,
             )
             if not bool(valid.any()):
-                raise UgiChemistryFlowError("aromatic node lacks a nonaromatic feasible state")
+                raise UgiTerminalDecodeError(
+                    "nonaromatic_state_unavailable",
+                    "aromatic_cycle_consistency",
+                    node=node,
+                    origin=(
+                        role_names[node]
+                        if local_chemistry_support is not None
+                        else "unconditioned"
+                    ),
+                )
             atom_states[node] = _masked_terminal_choice(
                 node_logits[node],
                 valid,
@@ -1152,7 +1307,8 @@ def valence_constrained_terminal_sample(
 
     def choose_bond(logits: Any, left: int, right: int, *, cycle_edge: bool) -> int:
         spare = min(capacities[left] - used_units[left], capacities[right] - used_units[right])
-        valid = torch.tensor(_BOND_VALENCE_UNITS <= 2 + max(0, int(spare)))
+        valence_valid = torch.tensor(_BOND_VALENCE_UNITS <= 2 + max(0, int(spare)))
+        valid = valence_valid.clone()
         left_aromatic = atom_vocabulary[int(atom_states[left])].aromatic
         right_aromatic = atom_vocabulary[int(atom_states[right])].aromatic
         if cycle_edge and left_aromatic and right_aromatic:
@@ -1160,8 +1316,43 @@ def valence_constrained_terminal_sample(
             valid[3] = bool(spare >= 1)
         else:
             valid[3] = False
+        valence_and_aromatic_valid = valid.clone()
+        if local_chemistry_support is not None:
+            assert program_id is not None
+            left_symbol = atom_vocabulary[int(atom_states[left])].symbol
+            right_symbol = atom_vocabulary[int(atom_states[right])].symbol
+            for bond in range(len(valid)):
+                if valid[bond] and not local_chemistry_support.allows_role_edge(
+                    program_id,
+                    role_names[left],
+                    left_symbol,
+                    bond,
+                    role_names[right],
+                    right_symbol,
+                ):
+                    valid[bond] = False
         if not bool(valid.any()):
-            raise UgiChemistryFlowError("no valence-feasible bond state")
+            code = (
+                "role_local_bond_state_unavailable"
+                if bool(valence_and_aromatic_valid.any())
+                and local_chemistry_support is not None
+                else "no_valence_feasible_bond_state"
+            )
+            raise UgiTerminalDecodeError(
+                code,
+                "bond_state",
+                left=left,
+                right=right,
+                left_origin=(
+                    role_names[left] if local_chemistry_support is not None else "unconditioned"
+                ),
+                right_origin=(
+                    role_names[right]
+                    if local_chemistry_support is not None
+                    else "unconditioned"
+                ),
+                cycle_edge=cycle_edge,
+            )
         selected = _masked_terminal_choice(
             logits,
             valid,
@@ -1201,7 +1392,7 @@ def valence_constrained_terminal_sample(
 
     if maximum_decorations == 1:
         anchor_logits = terminal["decoration_anchor"][batch_index].detach().cpu()
-        if decoration_choice_mode == "argmax":
+        if decoration_choice_mode == "argmax" and local_chemistry_support is None:
             decoration_anchor = int(anchor_logits.argmax())
             if decoration_anchor:
                 anchor = decoration_anchor - 1
@@ -1211,7 +1402,18 @@ def valence_constrained_terminal_sample(
             valid_anchors = torch.ones_like(anchor_logits, dtype=torch.bool)
             for encoded_anchor in range(1, anchor_logits.numel()):
                 anchor = encoded_anchor - 1
-                valid_anchors[encoded_anchor] = bool(capacities[anchor] - used_units[anchor] >= 4)
+                allowed = bool(capacities[anchor] - used_units[anchor] >= 4)
+                if allowed and local_chemistry_support is not None:
+                    assert program_id is not None
+                    allowed = local_chemistry_support.allows_role_edge(
+                        program_id,
+                        role_names[anchor],
+                        atom_vocabulary[int(atom_states[anchor])].symbol,
+                        1,
+                        role_names[anchor],
+                        "O",
+                    )
+                valid_anchors[encoded_anchor] = allowed
             decoration_anchor = _masked_terminal_choice(
                 anchor_logits,
                 valid_anchors,
@@ -1263,9 +1465,22 @@ def valence_constrained_terminal_sample(
                 for bond_index, units in enumerate(_BOND_VALENCE_UNITS):
                     if bond_index == 3:
                         continue
-                    if int(units) <= capacities[anchor] - used_units[anchor] and int(
-                        units
-                    ) <= _atom_valence_units(state):
+                    locally_allowed = True
+                    if local_chemistry_support is not None:
+                        assert program_id is not None
+                        locally_allowed = local_chemistry_support.allows_role_edge(
+                            program_id,
+                            role_names[anchor],
+                            atom_vocabulary[int(atom_states[anchor])].symbol,
+                            bond_index,
+                            role_names[anchor],
+                            state.symbol,
+                        )
+                    if (
+                        locally_allowed
+                        and int(units) <= capacities[anchor] - used_units[anchor]
+                        and int(units) <= _atom_valence_units(state)
+                    ):
                         feasible_pairs.append((atom_index, bond_index))
                         pair_scores.append(float(atom_logits[atom_index] + bond_logits[bond_index]))
             if not feasible_pairs:

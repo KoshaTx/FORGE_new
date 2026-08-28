@@ -1,0 +1,284 @@
+{
+  "artifacts": {
+    "atlas": {
+      "bytes": 2692898,
+      "logical_path": "reaction_program_atlas.csv.gz",
+      "schema_version": "forge.multireaction_program_atlas.v2",
+      "sha256": "a520303c3f4a4a43f4c7290382bcd54d4d8b709ac4de4d50720d31217d88dca0"
+    },
+    "attempts": {
+      "bytes": 6925087,
+      "logical_path": "mixed_enumeration_attempts.csv.gz",
+      "schema_version": "forge.multireaction_mixed_expansion_attempts.v1",
+      "sha256": "14a4da8519d6169e86cceb2e1d363ea47e3ecda613b08a4d78b7f1e666cc17b8"
+    },
+    "components": {
+      "bytes": 253713,
+      "logical_path": "component_registry.csv.gz",
+      "schema_version": "forge.multireaction_expansion_components.v1",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "provenance": {
+      "bytes": 29948,
+      "logical_path": "source_provenance.csv.gz",
+      "schema_version": "forge.multireaction_source_provenance.v1",
+      "sha256": "e2b010b04a144a28033758d6379db3c50a5bac27fd5916c11d8f6083d095684e"
+    },
+    "semantic_atoms": {
+      "bytes": 16971640,
+      "logical_path": "semantic_atoms.csv.gz",
+      "schema_version": "forge.multireaction_semantic_atoms.v2",
+      "sha256": "16316834e72fd8d695d55fc9b605ffe2030c8f544bf2227b054c5e8f939c5a2f"
+    },
+    "splits": {
+      "bytes": 3432177,
+      "logical_path": "component_family_splits.csv.gz",
+      "schema_version": "forge.multireaction_mixed_component_family_splits.v1",
+      "sha256": "7b9816ddd3605b9048bc0188c7f2aee41c24c8c90f99db711f73528b6e6678c3"
+    },
+    "steps": {
+      "bytes": 3808599,
+      "logical_path": "reaction_program_steps.csv.gz",
+      "schema_version": "forge.multireaction_program_steps.v1",
+      "sha256": "59acf1fd808c37d6260e74fd26a2f8cfe9707ac35807256de441e4ebf7cef1ee"
+    }
+  },
+  "claims_boundary": {
+    "component_family_assignment_precedes_enumeration": true,
+    "homogeneous_v1_products_rewritten": false,
+    "mixed_transform_consistency_is_observed_synthesis": false,
+    "mixed_transform_consistency_is_route_closure": false,
+    "mixed_transform_consistency_is_synthesis_success": false,
+    "reductive_amination_substructure_hit_rate_reported": false,
+    "source_activity_labels_inherited": false,
+    "source_executed_evidence_rewritten": false,
+    "training_must_use_source_balanced_weight": true
+  },
+  "config": {
+    "bytes": 3702,
+    "path": "configs/multireaction/bl_lx_mixed_repeat_expansion_v2.json",
+    "sha256": "2b2d96177351bddcc57fcc61ef0d66e5a55007cf2cb7b1fd86889cbd1882f7a5"
+  },
+  "execution": {
+    "candidate_multiplier_by_program_fold": {
+      "bl_2023_repeated_aza_michael": {
+        "calibration": 3.0,
+        "heldout": 4.5,
+        "train": 2.25
+      },
+      "lx_2024_repeated_reductive_amination": {
+        "calibration": 3.0,
+        "heldout": 3.25,
+        "train": 2.5
+      }
+    },
+    "maximum_candidate_counter": 20000000,
+    "origin_batch_size": 1024,
+    "worker_chunksize": 16,
+    "workers": 4
+  },
+  "inputs": {
+    "component_registry": {
+      "bytes": 253713,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "homogeneous_atlas": {
+      "bytes": 561334,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "homogeneous_attempts": {
+      "bytes": 577226,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/enumeration_attempts.csv.gz",
+      "sha256": "8f3d49fe389b03650e590e93b4427a5ee822746470febacf56a7a9bd63e3c8cb"
+    },
+    "homogeneous_provenance": {
+      "bytes": 29948,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/source_provenance.csv.gz",
+      "sha256": "e2b010b04a144a28033758d6379db3c50a5bac27fd5916c11d8f6083d095684e"
+    },
+    "homogeneous_result": {
+      "bytes": 8588,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/result.json",
+      "sha256": "0574e4c322fc011b350f7cc2c8baaefa3bd121de36f0bcf32d3721e8ace47cc6"
+    },
+    "homogeneous_semantic_atoms": {
+      "bytes": 4406762,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/semantic_atoms.csv.gz",
+      "sha256": "af37fc051b4b36b4321c322ed03f7cb13f762489f2c68a0dd488f8f34378a71a"
+    },
+    "homogeneous_splits": {
+      "bytes": 834428,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "homogeneous_steps": {
+      "bytes": 872808,
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_steps.csv.gz",
+      "sha256": "513c77f376f6c720556ac6b8651399592d7a172d13e382ad27286762070218ed"
+    },
+    "program_config": {
+      "bytes": 4020,
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "bytes": 31686,
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    }
+  },
+  "policy": {
+    "allowed_elements": [
+      "C",
+      "N",
+      "O"
+    ],
+    "component_family_assignment_precedes_enumeration": true,
+    "computed_product_is_observed_synthesis": false,
+    "computed_product_is_route_closed": false,
+    "evidence_stratum_mass": {
+      "computed_homogeneous_transform_consistency": 0.25,
+      "computed_mixed_transform_consistency": 0.25,
+      "source_executed": 0.5
+    },
+    "identity": "canonical_constitutional_smiles",
+    "maximum_forward_outcomes": 512,
+    "maximum_forward_states": 4096,
+    "maximum_product_heavy_atoms": 194,
+    "source_activity_labels_inherited": false,
+    "uniform_cartesian_enumeration": false
+  },
+  "schema_version": "forge.multireaction_mixed_expansion_result.v1",
+  "seed": 20260828,
+  "status": "complete_bl_lx_mixed_repeat_expansion",
+  "summary": {
+    "exact_program_steps": 194126,
+    "group_summaries": {
+      "bl_2023_repeated_aza_michael|calibration": {
+        "attempt_dispositions": {
+          "abstain": 7124,
+          "admit_mixed_transform_consistency": 5650,
+          "quota_not_selected": 4176
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 494,
+          "forward_product_outside_declared_model_support": 1,
+          "forward_program_did_not_resolve_one_product": 7123,
+          "outside deterministic fold quota": 3682
+        },
+        "requested_candidates": 16950,
+        "selected_products": 5650
+      },
+      "bl_2023_repeated_aza_michael|heldout": {
+        "attempt_dispositions": {
+          "abstain": 18996,
+          "admit_mixed_transform_consistency": 6449,
+          "quota_not_selected": 3576
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 719,
+          "forward_program_did_not_resolve_one_product": 18996,
+          "outside deterministic fold quota": 2857
+        },
+        "requested_candidates": 29021,
+        "selected_products": 6449
+      },
+      "bl_2023_repeated_aza_michael|train": {
+        "attempt_dispositions": {
+          "abstain": 27248,
+          "admit_mixed_transform_consistency": 25243,
+          "quota_not_selected": 4306
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 357,
+          "forward_product_outside_declared_model_support": 1,
+          "forward_program_did_not_resolve_one_product": 27247,
+          "outside deterministic fold quota": 3949
+        },
+        "requested_candidates": 56797,
+        "selected_products": 25243
+      },
+      "lx_2024_repeated_reductive_amination|calibration": {
+        "attempt_dispositions": {
+          "abstain": 6264,
+          "admit_mixed_transform_consistency": 4628,
+          "existing_product_precedence": 4,
+          "quota_not_selected": 2988
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 483,
+          "forward_program_did_not_resolve_one_product": 6248,
+          "mixed product duplicates v1 corpus product": 4,
+          "multiple_component_factorizations_in_enumerated_request_set": 7,
+          "outside deterministic fold quota": 2505,
+          "semantic_origin_error:precursor-role or core-position states are ambiguous under graph symmetry": 9
+        },
+        "requested_candidates": 13884,
+        "selected_products": 4628
+      },
+      "lx_2024_repeated_reductive_amination|heldout": {
+        "attempt_dispositions": {
+          "abstain": 5922,
+          "admit_mixed_transform_consistency": 3983,
+          "existing_product_precedence": 6,
+          "quota_not_selected": 3034
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 111,
+          "forward_program_did_not_resolve_one_product": 5907,
+          "mixed product duplicates v1 corpus product": 6,
+          "multiple_component_factorizations_in_enumerated_request_set": 13,
+          "outside deterministic fold quota": 2923,
+          "semantic_origin_error:precursor-role or core-position states are ambiguous under graph symmetry": 2
+        },
+        "requested_candidates": 12945,
+        "selected_products": 3983
+      },
+      "lx_2024_repeated_reductive_amination|train": {
+        "attempt_dispositions": {
+          "abstain": 24268,
+          "admit_mixed_transform_consistency": 23096,
+          "existing_product_precedence": 40,
+          "quota_not_selected": 10336
+        },
+        "attempt_reasons": {
+          "deterministic fold quota already filled": 418,
+          "forward_program_did_not_resolve_one_product": 24137,
+          "mixed product duplicates v1 corpus product": 40,
+          "multiple_component_factorizations_in_enumerated_request_set": 93,
+          "outside deterministic fold quota": 9918,
+          "semantic_origin_error:precursor-role or core-position states are ambiguous under graph symmetry": 38
+        },
+        "requested_candidates": 57740,
+        "selected_products": 23096
+      }
+    },
+    "mixed_enumeration_attempts": 187337,
+    "mixed_products_admitted": 69049,
+    "product_folds": {
+      "calibration": 16000,
+      "heldout": 16000,
+      "train": 60000
+    },
+    "products_by_evidence": {
+      "computed_homogeneous_transform_consistency": 22187,
+      "computed_mixed_transform_consistency": 69049,
+      "source_executed": 764
+    },
+    "products_by_program_fold": {
+      "bl_2023_repeated_aza_michael|calibration": 8000,
+      "bl_2023_repeated_aza_michael|heldout": 8000,
+      "bl_2023_repeated_aza_michael|train": 30000,
+      "lx_2024_repeated_reductive_amination|calibration": 8000,
+      "lx_2024_repeated_reductive_amination|heldout": 8000,
+      "lx_2024_repeated_reductive_amination|train": 30000
+    },
+    "sampling_policy": "equal program mass; 0.5 source, 0.25 homogeneous computed, 0.25 mixed computed; inverse component-family size",
+    "semantic_atom_rows": 5563294,
+    "total_products": 92000,
+    "v1_products_preserved": 22951
+  },
+  "task": "Exposure-balanced BL/LX mixed-repeat reaction-enumerated expansion"
+}

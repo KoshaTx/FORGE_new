@@ -1,0 +1,273 @@
+{
+  "arms": {
+    "bl_core_constrained_repeat_aware": {
+      "arm_id": "bl_core_constrained_repeat_aware",
+      "batch_program_counts": {
+        "bl_2023_repeated_aza_michael": 11,
+        "lx_2024_repeated_reductive_amination": 11,
+        "ugi_3cr_agile": 10
+      },
+      "candidate_selection": false,
+      "checkpoints": [
+        {
+          "filename": "checkpoint_step_100.pt",
+          "model_state_sha256": "479a79a8167869bccc7cf0df23bcb6431a55e2237cbfd3236c1c67550b74ce01",
+          "sha256": "9030688b947fad6446b3a6c81fc80b944d6c551e3dc80d784db4c83b00e6bef0",
+          "step": 100
+        },
+        {
+          "filename": "checkpoint_step_500.pt",
+          "model_state_sha256": "a095f4daf5232fa11aec7b77260f8a02bc371ac33c3919e7a6153327edb0cd35",
+          "sha256": "e4b5e185fe5a9e54f7f44270850be70e7dcacfb7da2da2c4af7a3dc45a386580",
+          "step": 500
+        },
+        {
+          "filename": "checkpoint_step_1000.pt",
+          "model_state_sha256": "60c943a0b7bf233d6a622f3e9d489688522a87bdf55a1bc8284c208377711c38",
+          "sha256": "8e6f8bfb03b61ba137a803db8c06b4b633242e4a2cec4dde1b2666ab60ba5bc2",
+          "step": 1000
+        },
+        {
+          "filename": "checkpoint_step_1500.pt",
+          "model_state_sha256": "5b3da14029cf3df4ba9018b03301d4e3b6546987f1ebf4dfc3c0b1e060672b8c",
+          "sha256": "f0592c54f67b8a2a5218324294d824064ca29fdd3261f28ed12ed082bd1c463d",
+          "step": 1500
+        },
+        {
+          "filename": "checkpoint_step_1700.pt",
+          "model_state_sha256": "ea9afefa77fe4a473bf5911c0b63e10dfdf652aff44090ad8b009c9f3a324dd0",
+          "sha256": "01761fbaa2dc162081901da3f528d7c76b963d4e9834fce9960fb8cc75a01e25",
+          "step": 1700
+        }
+      ],
+      "conditioning": "program",
+      "effective_batch_size": 128,
+      "examples_seen": 217600,
+      "examples_seen_by_program": {
+        "bl_2023_repeated_aza_michael": 74800,
+        "lx_2024_repeated_reductive_amination": 74800,
+        "ugi_3cr_agile": 68000
+      },
+      "final_loss": {
+        "gradient_norm": 4.437453269958496,
+        "program_1_backbone_bond_ce": 0.09423425793647766,
+        "program_1_closure_bond_ce": 0.04037843644618988,
+        "program_1_closure_left_ce": 0.41867145895957947,
+        "program_1_closure_right_ce": 0.35750097036361694,
+        "program_1_core_consistency_ce": 0.12884832918643951,
+        "program_1_node_ce": 0.11593978106975555,
+        "program_1_parent_pointer_ce": 0.17772547900676727,
+        "program_1_repeat_consistency_mse": 0.01551949605345726,
+        "program_1_repeat_consistency_pairs": 276.25,
+        "program_1_role_consistency_ce": 0.018170062452554703,
+        "program_1_semantic_total": 1.2450847625732422,
+        "program_1_total": 1.2044503688812256,
+        "program_2_backbone_bond_ce": 0.1310013383626938,
+        "program_2_closure_bond_ce": 0.14198556542396545,
+        "program_2_closure_left_ce": 0.4219638705253601,
+        "program_2_closure_right_ce": 0.6170669794082642,
+        "program_2_core_consistency_ce": 0.17816415429115295,
+        "program_2_node_ce": 0.22454822063446045,
+        "program_2_parent_pointer_ce": 0.30071091651916504,
+        "program_2_repeat_consistency_mse": 0.06887035071849823,
+        "program_2_repeat_consistency_pairs": 138.75,
+        "program_2_role_consistency_ce": 0.050300635397434235,
+        "program_2_semantic_total": 1.9116108417510986,
+        "program_2_total": 1.8372769355773926,
+        "program_3_backbone_bond_ce": 0.15495212376117706,
+        "program_3_closure_bond_ce": 0.17853833734989166,
+        "program_3_closure_left_ce": 0.851166844367981,
+        "program_3_closure_right_ce": 0.39422115683555603,
+        "program_3_core_consistency_ce": 0.033811651170253754,
+        "program_3_node_ce": 0.24094119668006897,
+        "program_3_parent_pointer_ce": 0.2129475176334381,
+        "program_3_repeat_consistency_mse": 0.0,
+        "program_3_repeat_consistency_pairs": 0.0,
+        "program_3_role_consistency_ce": 0.055490195751190186,
+        "program_3_semantic_total": 2.0550928115844727,
+        "program_3_total": 2.0327670574188232,
+        "step": 1700
+      },
+      "fixed_state_failures": 0,
+      "gradient_balancing": {
+        "method": "equal_family_mass_deterministic_pcgrad",
+        "micro_batches": 6800,
+        "projected_conflicts": 17924
+      },
+      "initial_loss": {
+        "gradient_norm": 33.64138412475586,
+        "program_1_backbone_bond_ce": 1.9724807739257812,
+        "program_1_closure_bond_ce": 1.4979068040847778,
+        "program_1_closure_left_ce": 4.052422046661377,
+        "program_1_closure_right_ce": 4.061470031738281,
+        "program_1_core_consistency_ce": 2.845130205154419,
+        "program_1_node_ce": 2.3920748233795166,
+        "program_1_parent_pointer_ce": 3.799417018890381,
+        "program_1_repeat_consistency_mse": 0.015579650178551674,
+        "program_1_repeat_consistency_pairs": 191.25,
+        "program_1_role_consistency_ce": 1.5199666023254395,
+        "program_1_semantic_total": 18.870941162109375,
+        "program_1_total": 17.775772094726562,
+        "program_2_backbone_bond_ce": 1.807300329208374,
+        "program_2_closure_bond_ce": 1.5621635913848877,
+        "program_2_closure_left_ce": 3.9294939041137695,
+        "program_2_closure_right_ce": 3.8776798248291016,
+        "program_2_core_consistency_ce": 3.734602928161621,
+        "program_2_node_ce": 2.2594847679138184,
+        "program_2_parent_pointer_ce": 3.654468059539795,
+        "program_2_repeat_consistency_mse": 0.014755724929273129,
+        "program_2_repeat_consistency_pairs": 155.75,
+        "program_2_role_consistency_ce": 2.024991989135742,
+        "program_2_semantic_total": 18.534177780151367,
+        "program_2_total": 17.09058952331543,
+        "program_3_backbone_bond_ce": 1.9536378383636475,
+        "program_3_closure_bond_ce": 1.4145437479019165,
+        "program_3_closure_left_ce": 3.512002944946289,
+        "program_3_closure_right_ce": 3.412616014480591,
+        "program_3_core_consistency_ce": 3.2044641971588135,
+        "program_3_node_ce": 1.7534286975860596,
+        "program_3_parent_pointer_ce": 3.1209716796875,
+        "program_3_repeat_consistency_mse": 0.0,
+        "program_3_repeat_consistency_pairs": 0.0,
+        "program_3_role_consistency_ce": 3.4202795028686523,
+        "program_3_semantic_total": 16.823387145996094,
+        "program_3_total": 15.167201042175293,
+        "step": 1
+      },
+      "model_state_excludes_component_identity": true,
+      "optimizer_steps": 1700,
+      "oracle_calls": 0,
+      "parameter_count": 5328685,
+      "program_id_mapping": null,
+      "program_mass": {
+        "bl_2023_repeated_aza_michael": 0.33333333333333326,
+        "lx_2024_repeated_reductive_amination": 0.33333333333333337,
+        "ugi_3cr_agile": 0.3333333333333333
+      },
+      "route_calls": 0,
+      "schema_version": "forge.synthesis_program_production_arm_result.v1",
+      "seed": 20260825,
+      "status": "complete"
+    }
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-27",
+    "profiles": [
+      "full"
+    ],
+    "scope": "Train and evaluate only replicate seed 0 of the final repeat-aware, source-balanced conditioned Ugi/BL/LX Transformer on one exact H100 after the same-DAG preflight passes.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "cache": {
+    "bytes": 13727905,
+    "logical_path": "cache.npz",
+    "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+  },
+  "checkpoint_archive": {
+    "bytes": 107182080,
+    "logical_path": "checkpoints.tar",
+    "sha256": "a9dbc020eb0c7d0a5f5dce8d9e064be2a4e2df27830ae5db01d6e0ca805b32bf"
+  },
+  "config": {
+    "bytes": 5469,
+    "path": "configs/multireaction/shared_mixed_primary_seed0_production_v1.json",
+    "sha256": "07661ef3ee4e26d1ba09402aac905ce34a0b5bfd529798f7b8de9d9fc4a8cf6e"
+  },
+  "design": {
+    "bytes": 9597,
+    "logical_path": "study_design.json",
+    "sha256": "47bf2b69d03bd303db5ad27a36b9d3bd9b1a9aa52643c4405144f0da47e42df2"
+  },
+  "gates": {
+    "all_declared_arms_complete": true,
+    "candidate_selection_absent": true,
+    "fact_generous_has_strictly_more_parameters": true,
+    "fact_matched_parameter_count_equals_full": true,
+    "fixed_state_failures_zero": true,
+    "route_or_oracle_calls_zero": true
+  },
+  "model": {
+    "adapter_dim": 64,
+    "architecture": "reaction_program_graph_transformer",
+    "attention_heads": 8,
+    "bond_classes": 4,
+    "component_ids_enter_neural_tensors": false,
+    "dropout": 0.1,
+    "expert_count": 3,
+    "fragment_tokens_enter_neural_tensors": false,
+    "gradient_balancing": {
+      "group_identity": "source_program_state",
+      "method": "equal_family_mass_deterministic_pcgrad",
+      "norm_amplification": false
+    },
+    "hidden_dim": 192,
+    "layers": 6,
+    "maximum_closures": 3,
+    "maximum_heavy_atoms": 194,
+    "semantic_objective": {
+      "core_consistency_weight": 0.25,
+      "repeat_consistency_weight": 0.25,
+      "role_consistency_weight": 0.25,
+      "state_balancing": "equal_present_semantic_state_mass"
+    },
+    "source_probability_floor": 1e-05
+  },
+  "nonclaims": [
+    "No arm is a candidate source.",
+    "Exact L1 replay is transform consistency, not synthesis-success probability.",
+    "Held-reaction-family transfer is a secondary robustness stress test and not a hard gate."
+  ],
+  "profile": "full",
+  "replicate": 0,
+  "run_kind": "production",
+  "runtime": {
+    "checkpoint_steps": [
+      100,
+      500,
+      1000,
+      1500,
+      1700
+    ],
+    "cpu_threads": 4,
+    "deterministic_algorithms": true,
+    "device": "cuda",
+    "effective_batch_size": 128,
+    "gradient_accumulation_steps": 4,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.0001,
+    "micro_batch_size": 32,
+    "optimizer_steps": 1700,
+    "precision": "float32",
+    "restart_interval_steps": 25,
+    "weight_decay": 5e-05
+  },
+  "schema_version": "forge.synthesis_program_production_training_result.v1",
+  "seed": 20260825,
+  "source_marginals": {
+    "bond": [
+      0.8591286268213533,
+      0.04896128337680672,
+      0.008125285010790483,
+      0.08378480479104959
+    ],
+    "node": [
+      0.8135388601612945,
+      0.07795336616023382,
+      0.0008050825729640061,
+      0.023623322848223313,
+      0.002390915840279227,
+      0.0002546681259001037,
+      0.0001486320984418439,
+      2.2897930527108712e-07,
+      0.08072986678308938,
+      6.195026377237779e-05,
+      2.2897930527108712e-07,
+      0.0004924192285798585,
+      2.2897930527108712e-07,
+      2.2897930527108712e-07
+    ],
+    "policy": "shared_three_program_training_mixture_for_every_arm"
+  },
+  "status": "pass"
+}

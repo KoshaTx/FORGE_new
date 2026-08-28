@@ -6,10 +6,12 @@ import pytest
 
 from experiments._runtime.errors import BackendError
 from experiments._runtime.modal import (
+    _config_dependency_uploads,
     modal_request_plan,
     modal_run_staging_paths,
     modal_volume_relative_path,
 )
+from forge.core.hashing import sha256_file
 
 REPO = Path(__file__).resolve().parents[1]
 SPEC = REPO / "experiments" / "installation_smoke" / "experiment.json"
@@ -44,6 +46,37 @@ def test_modal_plan_refuses_mps_without_launching() -> None:
             replicate=0,
             device="mps",
         )
+
+
+def test_modal_config_dependency_closure_uploads_nested_pins(tmp_path: Path) -> None:
+    data = tmp_path / "data.bin"
+    data.write_bytes(b"assessment reference")
+    child = tmp_path / "child.json"
+    child.write_text(
+        '{"inputs":{"data":{"path":"data.bin","sha256":"'
+        + sha256_file(data)
+        + '"}}}'
+    )
+    root = tmp_path / "root.json"
+    root.write_text(
+        '{"inputs":{"child":{"path":"child.json","sha256":"'
+        + sha256_file(child)
+        + '"}}}'
+    )
+
+    uploads = _config_dependency_uploads(tmp_path, root)
+
+    assert uploads == {"child.json": child, "data.bin": data}
+
+
+def test_modal_config_dependency_closure_rejects_nested_drift(tmp_path: Path) -> None:
+    data = tmp_path / "data.bin"
+    data.write_bytes(b"changed")
+    root = tmp_path / "root.json"
+    root.write_text('{"inputs":{"data":{"path":"data.bin","sha256":"' + "0" * 64 + '"}}}')
+
+    with pytest.raises(BackendError, match="pinned input.*changed"):
+        _config_dependency_uploads(tmp_path, root)
 
 
 def test_modal_image_syncs_from_the_local_uv_project() -> None:

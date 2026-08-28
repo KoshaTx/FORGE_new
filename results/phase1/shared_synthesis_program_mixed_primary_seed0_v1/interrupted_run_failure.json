@@ -1,0 +1,14 @@
+{
+  "error": {
+    "message": "",
+    "type": "KeyboardInterrupt"
+  },
+  "experiment_id": "phase1-shared-synthesis-program-mixed-primary-seed0-h100",
+  "fingerprint": "7d3e349cdea8b79eb82eea11cb42b6ba291229fe88129c02412eae08480db721",
+  "run_id": "9f01d883e1895a607917ca86593822c31a331813bc88125b643e4a64417bbbf5",
+  "schema_version": "forge.stage_failure.v1",
+  "stage_id": "study",
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/experiments/_runtime/runner.py\", line 519, in run\n    result = self.backend.execute(function, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/experiments/_runtime/backends/local.py\", line 53, in execute\n    result = function(context)\n             ^^^^^^^^^^^^^^^^^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/experiments/phase1/multireaction/stages.py\", line 245, in run_transformer_mechanism_study_stage\n    result = run_transformer_mechanism_study(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/experiments/phase1/multireaction/mechanism_study.py\", line 661, in run_transformer_mechanism_study\n    results[arm_id] = _train_arm(\n                      ^^^^^^^^^^^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/experiments/phase1/multireaction/production_training.py\", line 459, in _train_arm\n    diagnostic = balanced_pcgrad_backward(\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/forge/model/reaction_program_transformer.py\", line 804, in balanced_pcgrad_backward\n    raw = [\n          ^\n  File \"/forge-workspace/jobs/f421c239dc7eed195788cc48fc911c7755b40067ae6afb8bc9956c2dab162a80/repo/forge/model/reaction_program_transformer.py\", line 805, in <listcomp>\n    torch.autograd.grad(\n  File \"/.uv/.venv/lib/python3.11/site-packages/torch/autograd/__init__.py\", line 594, in grad\n    result = _engine_run_backward(\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/.uv/.venv/lib/python3.11/site-packages/torch/autograd/graph.py\", line 979, in _engine_run_backward\n    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyboardInterrupt\n",
+  "utc": "2026-08-27T21:20:34+00:00"
+}

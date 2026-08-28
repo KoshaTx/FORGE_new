@@ -67,6 +67,116 @@ component is held out, calibration if none is held out and at least one is calib
 otherwise. Training weights give each program equal total weight within a fold; raw family counts
 never become the training prior.
 
+## Reaction-enumerated component expansion
+
+The source-executed corpus is supplemented by a separate, explicitly weaker layer built by
+`phase1-bl-lx-reaction-enumerated-expansion`. It mines only source-linked LNPDB component fields,
+applies the frozen registry handle policies, groups components into ECFP4 structural families, and
+assigns complete families to folds **before** enumerating products. The `amine_head` namespace is
+shared between BL and LX, so an amine family cannot enter training through one reaction and appear
+held out through the other. Repeat-component namespaces remain reaction-specific.
+
+For each admitted head/repeat pair, the registry-backed program executes the repeat component once
+per reactive head hydrogen. A computed product enters structural training only when forward
+execution resolves exactly one constitutional product, the product remains inside the declared
+C/N/O and 194-heavy-atom support, and exact precursor-role and reaction-core atom origins are
+recoverable. Ambiguous site choices, multiple component factorizations, unsupported products and
+semantic-origin ambiguity abstain. The original 764 source-executed products always take precedence
+over duplicate computed products.
+
+The verified expansion contains 22,187 computed transform-consistent products plus all 764
+source-executed products. BL contributes 4,757 train, 2,350 calibration and 1,551 heldout products;
+LX contributes 6,904 train, 3,372 calibration and 4,017 heldout products. The expanded structural-
+family split changes the fold label of 443 source products relative to the earlier exact-component
+split; this is a new versioned training split and does not rewrite the frozen source-corpus
+artifacts. Within each program and fold, source-executed and computed products receive 0.5 sampling
+mass each, with inverse structural-family-size weighting inside each stratum. Uniform sampling over
+the Cartesian library is prohibited.
+
+Computed rows are labeled `admit_transform_consistency`, never `admit_exact`. They establish exact
+registry-transform replay and model-ready semantic coordinates only. They are not observations of
+synthesis, synthesis-success probabilities, route closure, procurement closure or biological
+activity. Component-level source traceability is retained in `component_registry.csv.gz`; measured
+product provenance remains separately preserved in `source_provenance.csv.gz`.
+
+Run `make phase1-bl-lx-reaction-enumerated-expansion` to build, verify and byte-reproduce the
+artifacts. The frozen result is
+`results/phase1/bl_lx_reaction_enumerated_expansion_v1/result.json` (SHA-256
+`0574e4c322fc011b350f7cc2c8baaefa3bd121de36f0bcf32d3721e8ace47cc6`).
+
+### Heterogeneous repeated-component expansion
+
+The second expansion layer allows a repeated-reaction program to use different source-linked
+repeat components at different reactive sites. Repeat-component multisets are drawn
+deterministically only after structural families have been assigned to folds. Homogeneous tuples
+are excluded from this layer because they are already represented by the first expansion. Every
+candidate must resolve to one constitutional product under the frozen registry transform, remain
+within the declared C/N/O and 194-heavy-atom support, and recover exact precursor-role and
+reaction-core semantics. Products with more than one component factorization in the enumerated
+request set abstain globally before fold quotas are filled.
+
+An initial raw-count target matching the Ugi corpus failed closed: BL/train admitted 35,217 uniquely
+factorized mixed products against a quota of 61,707 additions. The failure is frozen at
+`results/phase1/bl_lx_mixed_repeat_capacity_v1/result.json` (SHA-256
+`b99c483f16326490877a41db36c9a684869d4a30e0e74ab6571ab6831890fcf7`). No chemistry or
+factorization gate was relaxed. The production contract instead freezes equal per-program support
+of 30,000 train, 8,000 calibration and 8,000 heldout products, then equalizes model exposure with
+sampling weights rather than inflating raw support.
+
+The verified corpus contains 92,000 products: 22,951 preserved v1 products and 69,049 newly admitted
+mixed-repeat products. BL contributes 37,342 mixed products and LX contributes 31,707. Within each
+program and fold, source-executed, homogeneous computed and mixed computed strata receive 0.5,
+0.25 and 0.25 sampling mass respectively, with inverse component-family-size weighting inside a
+stratum. Mixed rows store the exact ordered repeat sequence in
+`repeat_component_smiles_json`; downstream readers retain compatibility with the singular v1 field.
+
+Run `make phase1-bl-lx-mixed-repeat-expansion` to build, verify and byte-reproduce the artifacts.
+Run `6dbe714882f4a5df448b661ace4c8e790f6f03a1dba756e4bcbc168ddfdaf6ea` passed manifest
+verification and strict byte reproduction. The frozen result is
+`results/phase1/bl_lx_mixed_repeat_expansion_v1/result.json` (SHA-256
+`67c464bd191cec9d0bc3e6bef84079c49316a72f465f18ddcd5b494847c0ad76`). These products are
+reaction-enumerated structural support. They are not observed syntheses, synthesis-success
+probabilities, L2/L3 route closure, procurement closure or biological evidence.
+
+### Model-support qualification and shared-training handoff
+
+The 92,000-product volume contract above was not sufficient by itself. A first full representation
+census failed closed because 78 preserved homogeneous computed products used atom states absent
+from the pinned Phase 1 vocabulary and 2,107 exceeded the declared three-closure support. The
+superseding `phase1-bl-lx-model-support-mixed-repeat-expansion` applies those already-frozen model
+bounds during enumeration, records all 2,185 exclusions, and deterministically refills the same
+30,000/8,000/8,000 BL and LX fold quotas. No source-executed product is excluded and no model bound
+is relaxed. The final evidence composition is 764 source-executed, 20,002 supported homogeneous
+computed and 71,234 mixed computed products. Its result is
+`results/phase1/bl_lx_mixed_repeat_expansion_v2/result.json` (SHA-256
+`5fa8e4f8bbc79ea4d286b1193262a9cf4bdea56a1ddeecfaf17363c387c5e980`).
+
+`phase1-shared-synthesis-program-mixed-representation` then represented all 204,386 admitted Ugi,
+BL and LX products and all 9,841,801 atoms without truncation. It observed the full 194-heavy-atom,
+three-closure support, preserved BL depths one through four and LX depths one through six, and had
+zero fixed-core-policy failures. The attributable receipt is
+`results/phase1/shared_synthesis_program_mixed_representation_v1/result.json` (SHA-256
+`426666c7f59dc6f5ec6143dc06d23cbfaef6c51af475ef20c53cdc6bbbed8ed7`).
+
+The derived training design changes only authenticated corpus/representation pins, the BL/LX fold
+counts, and the previously calibrated repeat-consistency weight. Architecture, four matched arms,
+three independent seeds, 1,700 optimizer steps, effective batch 128, equal family mass, fixed-final
+checkpoint selection, Ugi retention gates and nonselecting controls remain unchanged. Its 13 design
+gates pass, but paid production launch remains explicitly blocked. The deterministic 204,386-record
+numeric-only cache is
+`results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz` (SHA-256
+`249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114`).
+
+The first expanded-cache optimizer smoke exposed a count-prior defect: distinct components in one
+repeated role can have unequal atom counts. The layout prior now samples a joint sorted size
+multiset for each repeated role. This remains a count-only prior and retains no component ordering,
+identity, SMILES or fragment. After that correction, the two-step local smoke completed with equal
+Ugi/BL/LX exposure, finite losses, zero fixed-state failures, no route/oracle calls and no candidate
+selection. Its outputs are frozen under
+`results/phase1/shared_synthesis_program_mixed_training_smoke_v1/`. This is an execution gate, not
+model-quality evidence. An exact-H100 preflight and production training still require a separate,
+explicit paid-compute and private-upload authorization.
+
 ## Model and experiment boundary
 
 `ReactionProgramVocabulary` and `ReactionProgramConditioning` expose program, precursor role,
@@ -77,7 +187,7 @@ not assigned artificial step identities because those identities can be non-iden
 product-graph symmetry. `AdapterNodeConditioning` accepts adapter-defined state cardinalities instead
 of assuming the Ugi vocabulary. Existing Ugi behavior is preserved by backwards-compatible defaults.
 
-The active corpus DAG is `phase1-multireaction-corpus`. It writes:
+The source-executed corpus DAG is `phase1-multireaction-corpus`. It writes:
 
 - `reaction_program_atlas.csv.gz`;
 - `reaction_program_steps.csv.gz`;

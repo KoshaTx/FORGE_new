@@ -95,6 +95,7 @@ def _forward(
         repeat_group_states=clean["repeat_group_states"],
         component_position_states=clean["component_position_states"],
         component_instance_states=clean["component_instance_states"],
+        role_morphology_states=clean["role_morphology_states"],
     )
     loss, metrics = synthesis_program_flow_loss(predictions, clean)
     return loss, metrics, predictions, noisy
@@ -215,6 +216,7 @@ def _zero_fixed_equivalence(
             repeat_group_states=clean["repeat_group_states"],
             component_position_states=clean["component_position_states"],
             component_instance_states=clean["component_instance_states"],
+            role_morphology_states=clean["role_morphology_states"],
         )
         shared_loss, shared_metrics = synthesis_program_flow_loss(predictions, clean)
         generic_loss, generic_metrics = _masked_sparse_losses(predictions, clean)
@@ -419,6 +421,7 @@ def run_shared_synthesis_program_training(
                 repeat_group_states=clean["repeat_group_states"],
                 component_position_states=clean["component_position_states"],
                 component_instance_states=clean["component_instance_states"],
+                role_morphology_states=clean["role_morphology_states"],
             )
             objective = model_config["semantic_objective"]
             family_losses, metrics = per_program_transformer_losses(

@@ -17,6 +17,7 @@ from forge.assembly import (
     Ugi3AssemblyError,
 )
 from forge.core.io import iter_csv
+from forge.corpus.reaction_program_records import repeat_component_smiles
 
 
 class ReactionProgramEvaluationError(ValueError):
@@ -81,8 +82,8 @@ def load_reaction_program_training_references(
         training_components[program_id].setdefault(spec.accumulator_role, set()).add(
             _canonical_component(row["terminal_head_smiles"])
         )
-        training_components[program_id].setdefault(spec.repeat_role, set()).add(
-            _canonical_component(row["repeat_component_smiles"])
+        training_components[program_id].setdefault(spec.repeat_role, set()).update(
+            _canonical_component(smiles) for smiles in repeat_component_smiles(row)
         )
         observed.add(record_id)
     if observed != set(split_programs):

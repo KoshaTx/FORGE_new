@@ -8,6 +8,7 @@ from typing import Any
 from forge.assembly import RegistryRepeatedReactionProgram
 from forge.core.hashing import pin_record, resolve_pin, sha256_file
 from forge.core.io import atomic_write, pretty_json_bytes, read_csv_rows, read_json_object
+from forge.corpus.reaction_program_records import repeat_component_smiles
 from forge.corpus.reaction_program_training import load_reaction_program_training_corpus
 from forge.model.reaction_program_evaluation import evaluate_reaction_program_samples
 from forge.model.reaction_program_sampling import (
@@ -149,7 +150,7 @@ def run_multireaction_sampling(
         if row["record_id"] in training_ids:
             program_id = row["program_id"]
             training_components[program_id]["terminal_head"].add(row["terminal_head_smiles"])
-            training_components[program_id]["repeat_component"].add(row["repeat_component_smiles"])
+            training_components[program_id]["repeat_component"].update(repeat_component_smiles(row))
     for record in corpus.records_by_fold["train"]:
         training_products[record.program_id].add(record.graph.canonical_smiles)
     evaluation = evaluate_reaction_program_samples(

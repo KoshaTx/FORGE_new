@@ -1,0 +1,321 @@
+{
+  "config": {
+    "bytes": 11305,
+    "logical_path": "design.json",
+    "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+  },
+  "corpus": {
+    "bl_2023_repeated_aza_michael": {
+      "folds": {
+        "calibration": {
+          "maximum_record_weight": 0.00833333333333,
+          "minimum_record_weight": 3.14538541135e-07,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 0.9999999999995396,
+          "records": 8000
+        },
+        "heldout": {
+          "maximum_record_weight": 0.005,
+          "minimum_record_weight": 3.05549039006e-07,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 0.9999999999996793,
+          "records": 8000
+        },
+        "train": {
+          "maximum_record_weight": 0.0018230749197,
+          "minimum_record_weight": 7.71375305064e-08,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 1.0000000000004252,
+          "records": 30000
+        }
+      },
+      "records": 46000,
+      "weight_field": "source_balanced_weight"
+    },
+    "lx_2024_repeated_reductive_amination": {
+      "folds": {
+        "calibration": {
+          "maximum_record_weight": 0.0690789473684,
+          "minimum_record_weight": 4.05095563997e-07,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 1.0000000000002311,
+          "records": 8000
+        },
+        "heldout": {
+          "maximum_record_weight": 0.0384615384615,
+          "minimum_record_weight": 3.41511745487e-07,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 0.9999999999993937,
+          "records": 8000
+        },
+        "train": {
+          "maximum_record_weight": 0.015350877193,
+          "minimum_record_weight": 2.37383747416e-08,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 0.9999999999997147,
+          "records": 30000
+        }
+      },
+      "records": 46000,
+      "weight_field": "source_balanced_weight"
+    },
+    "ugi_3cr_agile": {
+      "folds": {
+        "calibration": {
+          "maximum_record_weight": 1.0,
+          "minimum_record_weight": 0.000740740740741,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 3731.8959048820466,
+          "records": 15800
+        },
+        "heldout": {
+          "maximum_record_weight": 1.0,
+          "minimum_record_weight": 0.000189393939394,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 7481.705512866386,
+          "records": 30122
+        },
+        "train": {
+          "maximum_record_weight": 1.0,
+          "minimum_record_weight": 0.000151515151515,
+          "normalized_within_program_mass": 1.0,
+          "raw_weight_sum": 3027.242505050542,
+          "records": 66464
+        }
+      },
+      "records": 112386,
+      "weight_field": "family_balance_weight_raw"
+    }
+  },
+  "decision": {
+    "controls_are_nonselecting": true,
+    "design_scope": "Freeze the post-negative-result Transformer four-arm comparison without launching training or sampling.",
+    "next_authority_required": "explicit authorization for paid exact-H100 preflight and production training",
+    "primary_comparison": "ugi_only_conditioned_vs_shared_three_program_conditioned",
+    "production_training_authorized": false
+  },
+  "derivation": {
+    "base_design": {
+      "bytes": 10483,
+      "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+      "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+    },
+    "changed_fields": [
+      "representation_config_and_result",
+      "multireaction_corpus_result_and_splits",
+      "bl_lx_expected_fold_counts",
+      "repeat_consistency_weight"
+    ],
+    "config": {
+      "bytes": 1463,
+      "path": "configs/multireaction/shared_mixed_training_design_v1.json",
+      "sha256": "1484fa14aa5d18e06dcfcdac8bf0f310f0da92884835a55791db442333fa4c73"
+    }
+  },
+  "evaluation_contract": {
+    "candidate_selection": false,
+    "checkpoint_policy": {
+      "calibration_is_diagnostic_only": true,
+      "heldout_selects_model_or_threshold": false,
+      "render_random_and_worst_case_molecules": true,
+      "selection_fold": "none_fixed_final_step"
+    },
+    "component_disjoint_metrics": [
+      "fixed_noise_exact_tensor_fraction",
+      "exact_l1_decomposition_coverage",
+      "exact_forward_replay_precision"
+    ],
+    "forbidden_metrics": [
+      "reductive_amination_substructure_hit_rate"
+    ],
+    "held_reaction_family": {
+      "hard_gate": false,
+      "reported": true,
+      "status": "secondary_robustness_stress_test"
+    },
+    "native_sampling": {
+      "calibration_samples_per_supported_program_per_checkpoint_per_seed": 512,
+      "flow_steps": 32,
+      "heldout_samples_per_supported_program_at_final_checkpoint_per_seed": 3072,
+      "layout_source": "training_fold_factorized_count_only_program_prior",
+      "repairs_or_retries": false
+    },
+    "oracle_calls": 0,
+    "per_family_metrics": [
+      "raw_valid_fraction",
+      "connected_fraction",
+      "exact_l1_decomposition_coverage",
+      "exact_forward_replay_precision",
+      "decomposition_abstention_fraction",
+      "decomposition_ambiguity_fraction",
+      "internal_diversity",
+      "unique_fraction",
+      "effective_component_count",
+      "component_novelty_fraction",
+      "whole_lipid_novelty_fraction",
+      "fixed_state_failures",
+      "support_overflow_count"
+    ],
+    "route_calls": 0
+  },
+  "gates": {
+    "auxiliary_corpus_passed": true,
+    "checkpoint_and_holdout_policy_frozen": true,
+    "controls_nonselecting": true,
+    "full_sparse_support_frozen": true,
+    "integration_gate_passed": true,
+    "per_family_metrics_frozen": true,
+    "production_launch_blocked": true,
+    "program_priors_frozen": true,
+    "representation_gate_passed": true,
+    "training_compute_matched": true,
+    "transformer_qualification_passed": true,
+    "ugi_corpus_passed": true,
+    "ugi_retention_gates_frozen": true
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "bytes": 1963,
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "integration_qualification": {
+      "bytes": 1934,
+      "path": "results/phase1/shared_synthesis_program_training_integration_v1/qualification/result.json",
+      "sha256": "ecfd968181e3729843d4ccac6f3a7d046dc8475ff23e5ead49fbe2193c74cad1"
+    },
+    "multireaction_corpus_result": {
+      "bytes": 12627,
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/result.json",
+      "sha256": "5fa8e4f8bbc79ea4d286b1193262a9cf4bdea56a1ddeecfaf17363c387c5e980"
+    },
+    "multireaction_splits": {
+      "bytes": 3418046,
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "representation_config": {
+      "bytes": 3352,
+      "path": "configs/multireaction/shared_synthesis_program_representation_mixed_v1.json",
+      "sha256": "1c769134d15f2d5babca4340e61c77244a45b0094b290c7d2d6b13cb7909a74b"
+    },
+    "representation_result": {
+      "bytes": 8467,
+      "path": "results/phase1/shared_synthesis_program_mixed_representation_v1/result.json",
+      "sha256": "426666c7f59dc6f5ec6143dc06d23cbfaef6c51af475ef20c53cdc6bbbed8ed7"
+    },
+    "transformer_qualification": {
+      "bytes": 2901,
+      "path": "results/phase1/reaction_program_transformer_overfit_v1/result.json",
+      "sha256": "2e51fcf71f2daf791b9913d9e2dc0859f0d8fc8d346a855f4a0e4b4ea534081b"
+    },
+    "ugi_assignments": {
+      "bytes": 4044135,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_corpus_result": {
+      "bytes": 3814,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/result.json",
+      "sha256": "1b655ce6389f50c7310a21a287997793c592ca93de064d53bafacaee24f663a6"
+    }
+  },
+  "matched_compute": {
+    "arms": 4,
+    "checkpoint_selection": "fixed_final_step",
+    "checkpoint_steps": [
+      100,
+      500,
+      1000,
+      1500,
+      1700
+    ],
+    "effective_batch_size": 128,
+    "examples_per_arm_per_replicate": 217600,
+    "expected_weighted_examples_per_arm_per_replicate": {
+      "shared_three_program_conditioned": {
+        "bl_2023_repeated_aza_michael": 72533.33333333333,
+        "lx_2024_repeated_reductive_amination": 72533.33333333333,
+        "ugi_3cr_agile": 72533.33333333333
+      },
+      "shared_three_program_null": {
+        "bl_2023_repeated_aza_michael": 72533.33333333333,
+        "lx_2024_repeated_reductive_amination": 72533.33333333333,
+        "ugi_3cr_agile": 72533.33333333333
+      },
+      "shared_three_program_program_id_cyclic": {
+        "bl_2023_repeated_aza_michael": 72533.33333333333,
+        "lx_2024_repeated_reductive_amination": 72533.33333333333,
+        "ugi_3cr_agile": 72533.33333333333
+      },
+      "ugi_only_conditioned": {
+        "bl_2023_repeated_aza_michael": 0.0,
+        "lx_2024_repeated_reductive_amination": 0.0,
+        "ugi_3cr_agile": 217600.0
+      }
+    },
+    "optimizer_steps_per_arm_per_replicate": 1700,
+    "replicates": 3,
+    "total_planned_optimizer_steps": 20400
+  },
+  "nonclaims": [
+    "This design receipt is not a production training result or production launch authorization.",
+    "Auxiliary-family exact replay is transform consistency, not synthesis-success probability or route certification.",
+    "BL and LX are computational extensions and do not inherit Ugi prospective or biological validation.",
+    "The held-reaction-family analysis is a secondary stress test and is not a hard pass/fail gate.",
+    "The completed sparse-MPNN comparison remains an immutable negative baseline.",
+    "Transformer architecture qualification does not establish held-component or multi-reaction generalization.",
+    "The expanded BL/LX products are reaction-enumerated support, not observed syntheses or route-certified products."
+  ],
+  "production_sampling_authorized": false,
+  "production_training_authorized": false,
+  "schema_version": "forge.synthesis_program_production_design_result.v1",
+  "seed": 20260827,
+  "status": "design_frozen_launch_blocked",
+  "ugi_retention_contract": {
+    "absolute_gates": {
+      "fixed_state_failures": {
+        "maximum": 0
+      },
+      "support_overflow_count": {
+        "maximum": 0
+      }
+    },
+    "baseline_arm": "ugi_only_conditioned",
+    "challenger_arm": "shared_three_program_conditioned",
+    "decision_rule": {
+      "confidence_level": 0.95,
+      "method": "paired_seed_hierarchical_bootstrap",
+      "pass_rule": "point_estimate_and_one_sided_upper_confidence_bound_within_margin",
+      "resamples": 10000,
+      "seed": 20260828
+    },
+    "relative_noninferiority_gates": {
+      "component_novelty_fraction": {
+        "maximum_absolute_drop": 0.05
+      },
+      "connected_fraction": {
+        "maximum_absolute_drop": 0.01
+      },
+      "effective_component_count": {
+        "minimum_ratio": 0.8
+      },
+      "exact_forward_replay_precision": {
+        "maximum_absolute_drop": 0.01,
+        "minimum_absolute_value": 0.95
+      },
+      "exact_l1_decomposition_coverage": {
+        "maximum_absolute_drop": 0.03
+      },
+      "held_component_exact_l1_decomposition_coverage": {
+        "maximum_absolute_drop": 0.05
+      },
+      "internal_diversity": {
+        "maximum_absolute_drop": 0.05
+      },
+      "raw_valid_fraction": {
+        "maximum_absolute_drop": 0.02
+      }
+    }
+  }
+}

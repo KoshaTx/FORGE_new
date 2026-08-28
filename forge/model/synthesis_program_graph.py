@@ -63,6 +63,11 @@ class SynthesisProgramGraphRecord:
     fixed_atom_mask: np.ndarray
     fixed_parent_bond_mask: np.ndarray
     fixed_closure_bond_mask: np.ndarray
+    # Optional node-aligned coarse program coordinates.  Column order is exterior-node count,
+    # junction budget, cycle rank and core-attachment count.  Zero is the unconditioned state;
+    # observed integer values are stored at value + 1.  Exact cache records derive this view at
+    # collation time, while synthetic sampling layouts may supply an explicit program projection.
+    role_morphology_states: np.ndarray | None = None
 
     def __post_init__(self) -> None:
         node_count = self.graph.node_count
@@ -82,6 +87,12 @@ class SynthesisProgramGraphRecord:
             or not self.component_blocks
         ):
             raise SynthesisProgramGraphError("synthesis-program graph metadata is inconsistent")
+        if self.role_morphology_states is not None and (
+            self.role_morphology_states.shape != (node_count, 4)
+            or not np.issubdtype(self.role_morphology_states.dtype, np.integer)
+            or np.any(self.role_morphology_states < 0)
+        ):
+            raise SynthesisProgramGraphError("role-local morphology states are inconsistent")
         cursor = 0
         for block in self.component_blocks:
             if block.start != cursor or block.stop > node_count:
@@ -101,9 +112,19 @@ class SynthesisProgramGraphRecord:
             raise SynthesisProgramGraphError("the root sentinel cannot be a fixed parent bond")
         if np.any(
             self.fixed_parent_bond_mask
-            & ~(self.fixed_atom_mask | self.fixed_atom_mask[self.graph.parents])
+            & ~(
+                self.fixed_atom_mask
+                | self.fixed_atom_mask[self.graph.parents]
+                | (
+                    (self.core_position_states > 1)
+                    & (self.core_position_states[self.graph.parents] > 1)
+                )
+            )
         ):
-            raise SynthesisProgramGraphError("a fixed parent bond must touch an adapter-fixed atom")
+            raise SynthesisProgramGraphError(
+                "a fixed parent bond must touch an adapter-fixed atom or join declared "
+                "reaction-core coordinates"
+            )
         for slot, fixed in enumerate(self.fixed_closure_bond_mask.tolist()):
             if not fixed:
                 continue

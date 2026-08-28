@@ -1,0 +1,39 @@
+{
+  "schema_version": "forge.modal_experiment_group.v1",
+  "group_id": "phase1-reaction-specialists-seed0-h100",
+  "description": "Run one verified exact-H100 preflight, then allocate independent exact H100s to the Ugi, BL and LX specialists in parallel; the Ugi member performs the paired v0 assessment after training.",
+  "preflight": {
+    "id": "preflight",
+    "experiment": "phase1-reaction-specialist-preflight-seed0-h100",
+    "spec_sha256": "d545c64d4d34191271a0df7526e6aff254b444661eb27941e50edc33c391fcf7",
+    "profile": "full",
+    "replicate": 0,
+    "device": "cuda"
+  },
+  "parallel": [
+    {
+      "id": "ugi",
+      "experiment": "phase1-reaction-specialist-ugi-seed0-h100",
+      "spec_sha256": "6f85cc7f80a41fef7ee4f0f4e3bfa9f98385f87a531a99832d904a636b4af05b",
+      "profile": "full",
+      "replicate": 0,
+      "device": "cuda"
+    },
+    {
+      "id": "bl",
+      "experiment": "phase1-reaction-specialist-bl-seed0-h100",
+      "spec_sha256": "d2fc95f062fb6075b27349313857031d2fa47d2ff3a84b5a77a600d573426301",
+      "profile": "full",
+      "replicate": 0,
+      "device": "cuda"
+    },
+    {
+      "id": "lx",
+      "experiment": "phase1-reaction-specialist-lx-seed0-h100",
+      "spec_sha256": "286dfbb0b9f7892a97c4233949ee6ef8fef9c4be00f9ba969491423cef7e0ee3",
+      "profile": "full",
+      "replicate": 0,
+      "device": "cuda"
+    }
+  ]
+}

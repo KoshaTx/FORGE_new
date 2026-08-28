@@ -88,16 +88,12 @@ def _mechanism_arms(program_mass: dict[str, float]) -> dict[str, dict[str, Any]]
         "no_role_loss": {
             **common,
             "role": "mechanism_ablation",
-            "model_overrides": overrides(
-                {"semantic_objective": {"role_consistency_weight": 0.0}}
-            ),
+            "model_overrides": overrides({"semantic_objective": {"role_consistency_weight": 0.0}}),
         },
         "no_core_loss": {
             **common,
             "role": "mechanism_ablation",
-            "model_overrides": overrides(
-                {"semantic_objective": {"core_consistency_weight": 0.0}}
-            ),
+            "model_overrides": overrides({"semantic_objective": {"core_consistency_weight": 0.0}}),
         },
         "no_routed_adapters": {
             **common,
@@ -213,6 +209,27 @@ def _bl_core_constrained_production_arms(
     }
 
 
+def _role_morphology_projection_arms(
+    program_mass: dict[str, float], repeat_consistency_weight: float
+) -> dict[str, dict[str, Any]]:
+    """Add the missing full role-local morphology coordinates to the final Transformer."""
+
+    return {
+        "full_role_morphology_transformer": {
+            "role": "projection_ablation_intervention",
+            "conditioning": "program",
+            "program_mass": program_mass,
+            "evaluation_programs": ["ugi_3cr_agile"],
+            "candidate_source": False,
+            "model_overrides": {
+                "repeat_group_conditioning": True,
+                "role_morphology_conditioning": True,
+                "semantic_objective": {"repeat_consistency_weight": repeat_consistency_weight},
+            },
+        }
+    }
+
+
 def _ugi_train_exposure_arms(
     program_mass: dict[str, float],
     repeat_consistency_weight: float,
@@ -240,6 +257,49 @@ def _ugi_train_exposure_arms(
                 "semantic_objective": {"repeat_consistency_weight": repeat_consistency_weight},
             },
         }
+    }
+
+
+def _shared_bias_retraining_arms(
+    program_mass: dict[str, float], repeat_consistency_weight: float
+) -> dict[str, dict[str, Any]]:
+    """Return the matched global-source and role-source end-to-end retraining arms."""
+
+    shared_model = {
+        "repeat_group_conditioning": True,
+        "role_morphology_conditioning": True,
+        "program_routed_output_heads": True,
+        "maximum_children": 3,
+        "semantic_objective": {
+            "repeat_consistency_weight": repeat_consistency_weight,
+            "offspring_weight": 1.0,
+            "junction_consistency_weight": 0.5,
+            "chemistry_loss_balancing": "equal_present_role_mass",
+            "topology_conditioned_chemistry_weight": 1.0,
+        },
+    }
+    common = {
+        "conditioning": "program",
+        "program_mass": program_mass,
+        "evaluation_programs": list(program_mass),
+        "candidate_source": False,
+    }
+    return {
+        "shared_bias_global_source_control": {
+            **common,
+            "role": "matched_source_control",
+            "source_marginal_mode": "global",
+            "model_overrides": {**shared_model, "source_marginal_mode": "global"},
+        },
+        "shared_bias_program_role_source": {
+            **common,
+            "role": "end_to_end_intervention",
+            "source_marginal_mode": "program_role_full_support",
+            "model_overrides": {
+                **shared_model,
+                "source_marginal_mode": "program_role_full_support",
+            },
+        },
     }
 
 
@@ -274,6 +334,14 @@ def _study_arms(config: dict[str, Any], programs: tuple[str, ...]) -> dict[str, 
             )
         mass = {program: 1.0 / len(programs) for program in programs}
         return _bl_core_constrained_production_arms(mass, weight)
+    if study == "role_morphology_projection_ablation":
+        weight = float(config.get("repeat_consistency_weight", -1.0))
+        if weight <= 0.0:
+            raise TransformerMechanismStudyError(
+                "role-morphology ablation requires a positive repeat-consistency weight"
+            )
+        mass = {program: 1.0 / len(programs) for program in programs}
+        return _role_morphology_projection_arms(mass, weight)
     if study == "ugi_train_exposure_calibration":
         weight = float(config.get("repeat_consistency_weight", -1.0))
         if weight <= 0.0:
@@ -287,6 +355,14 @@ def _study_arms(config: dict[str, Any], programs: tuple[str, ...]) -> dict[str, 
             )
         mass = {program: 1.0 / len(programs) for program in programs}
         return _ugi_train_exposure_arms(mass, weight, counts)
+    if study == "shared_bias_end_to_end_retraining":
+        weight = float(config.get("repeat_consistency_weight", -1.0))
+        if weight <= 0.0:
+            raise TransformerMechanismStudyError(
+                "shared-bias retraining requires a positive repeat-consistency weight"
+            )
+        mass = {program: 1.0 / len(programs) for program in programs}
+        return _shared_bias_retraining_arms(mass, weight)
     raise TransformerMechanismStudyError(f"unsupported study: {study!r}")
 
 
@@ -391,6 +467,9 @@ def _run_repair_calibration(
                                 "bl_lx_repair_calibration",
                                 program_id,
                                 "layout",
+                            ),
+                            role_morphology_conditioning=bool(
+                                package["model_config"].get("role_morphology_conditioning", False)
                             ),
                         )
                         rows, sampling = sample_synthesis_program_products(
@@ -549,8 +628,17 @@ def run_transformer_mechanism_study(
     )
     if config.get("schema_version") != CONFIG_SCHEMA:
         raise TransformerMechanismStudyError("unsupported mechanism study config")
-    if config.get("authorization", {}).get("authorized") is not True:
+    authorization = config.get("authorization", {})
+    if authorization.get("authorized") is not True:
         raise TransformerMechanismStudyError("mechanism study is not authorized")
+    authorized_profiles = authorization.get("profiles")
+    if authorized_profiles is not None and (
+        not isinstance(authorized_profiles, list)
+        or profile not in {str(value) for value in authorized_profiles}
+    ):
+        raise TransformerMechanismStudyError(
+            f"mechanism study profile is not authorized: {profile}"
+        )
     raw_inputs = config.get("inputs")
     required = {
         "base_design",
@@ -572,9 +660,27 @@ def run_transformer_mechanism_study(
     )
     programs = tuple(base["programs"])
     arms = _study_arms(config, programs)
+    execution_scope = str(config.get("execution_scope", "production"))
+    if execution_scope not in {"production", "h100_preflight"}:
+        raise TransformerMechanismStudyError(
+            f"unsupported mechanism-study execution scope: {execution_scope!r}"
+        )
     study_design = _deep_merge(base, {"training": {"arms": arms}})
     # Preserve all base training fields that the narrow merge above did not replace.
     study_design["training"] = {**base["training"], "arms": arms}
+    if config["study"] == "shared_bias_end_to_end_retraining":
+        full_training = config["full"]["training"]
+        for key in (
+            "optimizer_steps",
+            "micro_batch_size",
+            "gradient_accumulation_steps",
+            "effective_batch_size",
+            "learning_rate",
+            "weight_decay",
+            "gradient_clip_norm",
+            "checkpoint_steps",
+        ):
+            study_design["training"][key] = full_training[key]
     if config["study"] == "ugi_train_exposure_calibration":
         expanded_batch_size = sum(int(value) for value in config["batch_program_counts"].values())
         study_design["training"].update(
@@ -591,8 +697,12 @@ def run_transformer_mechanism_study(
     }
     study_design["decision"] = {
         "design_scope": str(config["study"]),
+        "execution_scope": execution_scope,
         "controls_are_nonselecting": True,
-        "production_training_authorized": not repair_calibration,
+        "production_training_authorized": (
+            not repair_calibration and profile == "full" and execution_scope == "production"
+        ),
+        "smoke_training_authorized": profile == "smoke",
         "calibration_training_authorized": repair_calibration,
         "held_reaction_family_is_secondary": config["study"] == "held_reaction_family",
     }
@@ -642,12 +752,37 @@ def run_transformer_mechanism_study(
             bond_classes=int(base_model["bond_classes"]),
             probability_floor=float(base_model["source_probability_floor"]),
         )
+        role_node_marginal = role_bond_marginal = None
+        if config["study"] == "shared_bias_end_to_end_retraining":
+            role_node_marginal, role_bond_marginal = cache.program_role_source_marginals(
+                reference_measure,
+                node_classes=len(cache.atom_vocabulary),
+                bond_classes=int(base_model["bond_classes"]),
+                probability_floor=float(base_model["source_probability_floor"]),
+                backoff_strength=float(config["source_backoff_strength"]),
+            )
         results = {}
         for arm_id, arm in arms.items():
             model_config = _deep_merge(base_model, dict(arm.get("model_overrides", {})))
             arm_without_override = {
                 key: value for key, value in arm.items() if key != "model_overrides"
             }
+            source_mode = str(arm.get("source_marginal_mode", "global"))
+            if source_mode == "global":
+                arm_node_marginal, arm_bond_marginal = node_marginal, bond_marginal
+            elif (
+                source_mode == "program_role_full_support"
+                and role_node_marginal is not None
+                and role_bond_marginal is not None
+            ):
+                arm_node_marginal, arm_bond_marginal = (
+                    role_node_marginal,
+                    role_bond_marginal,
+                )
+            else:
+                raise TransformerMechanismStudyError(
+                    f"unsupported or unavailable source marginal mode: {source_mode!r}"
+                )
             results[arm_id] = _train_arm(
                 arm_id=arm_id,
                 arm=arm_without_override,
@@ -661,8 +796,8 @@ def run_transformer_mechanism_study(
                 device=device,
                 work_dir=arm_work,
                 resume=resume,
-                node_marginal=node_marginal,
-                bond_marginal=bond_marginal,
+                node_marginal=arm_node_marginal,
+                bond_marginal=arm_bond_marginal,
             )
     finally:
         cache.close()
@@ -672,7 +807,7 @@ def run_transformer_mechanism_study(
     training_result = {
         "schema_version": "forge.synthesis_program_production_training_result.v1",
         "status": "pass",
-        "run_kind": "production" if profile == "full" else "smoke",
+        "run_kind": execution_scope if profile == "full" else "smoke",
         "profile": profile,
         "replicate": replicate,
         "seed": seed,
@@ -682,11 +817,23 @@ def run_transformer_mechanism_study(
         "cache": artifact_record(paths["production_cache"]),
         "model": base_model,
         "runtime": runtime,
-        "source_marginals": {
-            "policy": "shared_three_program_training_mixture_for_every_arm",
-            "node": node_marginal.tolist(),
-            "bond": bond_marginal.tolist(),
-        },
+        "source_marginals": (
+            {
+                "policy": "matched_global_and_smoothed_program_role_full_support",
+                "backoff_strength": float(config["source_backoff_strength"]),
+                "global": {"node": node_marginal.tolist(), "bond": bond_marginal.tolist()},
+                "program_role": {
+                    "node": role_node_marginal.tolist(),
+                    "bond": role_bond_marginal.tolist(),
+                },
+            }
+            if config["study"] == "shared_bias_end_to_end_retraining"
+            else {
+                "policy": "shared_three_program_training_mixture_for_every_arm",
+                "node": node_marginal.tolist(),
+                "bond": bond_marginal.tolist(),
+            }
+        ),
         "arms": results,
         "checkpoint_archive": artifact_record(archive_path),
         "gates": {
@@ -706,6 +853,29 @@ def run_transformer_mechanism_study(
                 int(results["fact_generous"]["parameter_count"])
                 > int(results["fact_matched"]["parameter_count"])
                 if config["study"] == "mechanism_and_factorized"
+                else True
+            ),
+            "matched_source_arms_have_equal_parameter_count": (
+                len({int(value["parameter_count"]) for value in results.values()}) == 1
+                if config["study"] == "shared_bias_end_to_end_retraining"
+                else True
+            ),
+            "full_parameter_count_matches_freeze": (
+                all(
+                    int(value["parameter_count"]) == int(config["expected_full_parameter_count"])
+                    for value in results.values()
+                )
+                if config["study"] == "shared_bias_end_to_end_retraining" and profile == "full"
+                else True
+            ),
+            "program_role_sources_are_full_support": (
+                bool(
+                    role_node_marginal is not None
+                    and role_bond_marginal is not None
+                    and (role_node_marginal > 0).all()
+                    and (role_bond_marginal > 0).all()
+                )
+                if config["study"] == "shared_bias_end_to_end_retraining"
                 else True
             ),
         },
@@ -744,6 +914,7 @@ def run_transformer_mechanism_study(
         )
     evaluation_config = {
         "schema_version": "forge.synthesis_program_production_evaluation_config.v1",
+        "execution_scope": execution_scope,
         "inputs": {
             "production_design": _input_pin(design_path, repo, logical_path="study_design.json"),
             "production_cache": _input_pin(paths["production_cache"], repo),
@@ -796,6 +967,7 @@ def run_transformer_mechanism_study(
         "schema_version": RESULT_SCHEMA,
         "status": "pass" if evaluation["status"] == "pass" else "fail",
         "study": config["study"],
+        "execution_scope": execution_scope,
         "profile": profile,
         "replicate": replicate,
         "seed": seed,

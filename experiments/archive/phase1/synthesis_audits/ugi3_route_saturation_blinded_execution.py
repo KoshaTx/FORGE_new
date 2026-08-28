@@ -36,12 +36,12 @@ import numpy as np
 import yaml
 from rdkit import rdBase
 
-from forge.corpus.r1_prime_audit import sha256_file
 from experiments.phase1.product_l1.sampling.ugi_blinded_headless_sampling import (
     HeadlessRuntime,
     preflight_headless_runtime,
     sample_headless_runtime,
 )
+from forge.corpus.r1_prime_audit import sha256_file
 from forge.potency.annotations import ROLE_NAMES
 from forge.synthesis.assessment.ugi3_route_registry_pair_contract import (
     PRIVATE_COMPONENT_TRANSITION_FIELDS,
@@ -179,6 +179,11 @@ RUNTIME_DEPENDENCY_MODULES = (
     "experiments.phase1.product_l1.sampling.ugi_joint_sparse_sampling",
     "experiments.phase1.product_l1.training",
     "experiments.phase1.product_l1.training.ugi_training_cache",
+    "forge.assembly",
+    "forge.assembly.api",
+    "forge.assembly.program",
+    "forge.assembly.registry",
+    "forge.assembly.ugi3",
     "forge.chemistry",
     "forge.chemistry.descriptors",
     "forge.chemistry.reactive_sites",
@@ -190,6 +195,7 @@ RUNTIME_DEPENDENCY_MODULES = (
     "forge.core.seeds",
     "forge.core.types",
     "forge.corpus",
+    "forge.corpus.component_splits",
     "forge.corpus.phase1",
     "forge.corpus.phase1_data",
     "forge.corpus.r0_splits",
@@ -206,9 +212,12 @@ RUNTIME_DEPENDENCY_MODULES = (
     "forge.model.defog_feasibility",
     "forge.model.lipid_context",
     "forge.model.lipid_support_skeleton",
+    "forge.model.local_chemistry_support",
     "forge.model.phase1_flow",
     "forge.model.phase1_tree_topology_flow",
+    "forge.model.reaction_program_conditioning",
     "forge.model.sparse_topology_feasibility",
+    "forge.model.synthesis_program_graph",
     "forge.model.ugi_adapter_features",
     "forge.model.ugi_chemistry_flow",
     "forge.model.ugi_chemistry_interface",

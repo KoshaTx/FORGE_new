@@ -1,6 +1,8 @@
 .PHONY: help vendor vendor-partial verify verify-partial verify-pins verify-pins-code \
 	archive-pins doctor experiment-list experiment-smoke phase1-corpus-run \
 	phase1-multireaction-corpus \
+	phase1-bl-lx-reaction-enumerated-expansion phase1-bl-lx-mixed-repeat-expansion \
+	phase1-bl-lx-model-support-mixed-repeat-expansion \
 	phase1-potency-study-corpus \
 	phase1-multireaction-training-smoke \
 	phase1-multireaction-overfit \
@@ -9,6 +11,10 @@
 	phase1-finite-component-catalogue-smoke \
 	phase1-finite-component-catalogue-full \
 	phase1-shared-synthesis-program-representation \
+	phase1-shared-synthesis-program-mixed-representation \
+	phase1-shared-synthesis-program-mixed-training-design \
+	phase1-shared-synthesis-program-mixed-production-cache \
+	phase1-shared-synthesis-program-mixed-training-smoke \
 	phase1-shared-synthesis-program-integration \
 	phase1-shared-synthesis-program-production-design \
 	phase1-shared-synthesis-program-production-cache \
@@ -21,6 +27,7 @@
 EXPECT_PINS ?= 822
 EXPECT_PINS_ALL ?= 2416
 CODE_DRIFT_BACKLOG ?= 4
+UV_RUN ?= uv run
 
 help:
 	@echo "FORGE — authorized M0 and bounded Phase 1 work. Read AGENTS.md first."
@@ -37,6 +44,9 @@ help:
 	@echo "  make experiment-smoke            exercise the installation/runtime pipeline"
 	@echo "  make phase1-corpus-run            rebuild the Phase 1 corpus DAG"
 	@echo "  make phase1-multireaction-corpus  rebuild source-grounded multi-reaction programs"
+	@echo "  make phase1-bl-lx-reaction-enumerated-expansion  build BL/LX virtual program support"
+	@echo "  make phase1-bl-lx-mixed-repeat-expansion  build heterogeneous BL/LX program support"
+	@echo "  make phase1-bl-lx-model-support-mixed-repeat-expansion  rebuild support-qualified BL/LX data"
 	@echo "  make phase1-potency-study-corpus  rebuild the single-source LNPDB study view"
 	@echo "  make phase1-multireaction-training-smoke  run conditioned train/sample smoke"
 	@echo "  make phase1-multireaction-overfit  run the fail-closed reaction-core overfit gate"
@@ -45,6 +55,10 @@ help:
 	@echo "  make phase1-finite-component-catalogue-smoke  verify the catalogue baseline"
 	@echo "  make phase1-finite-component-catalogue-full  run all three matched CPU replicates"
 	@echo "  make phase1-shared-synthesis-program-representation  qualify the full shared graph"
+	@echo "  make phase1-shared-synthesis-program-mixed-representation  qualify expanded BL/LX graph support"
+	@echo "  make phase1-shared-synthesis-program-mixed-training-design  freeze expanded-data training design"
+	@echo "  make phase1-shared-synthesis-program-mixed-production-cache  rebuild expanded-data packed cache"
+	@echo "  make phase1-shared-synthesis-program-mixed-training-smoke  run local expanded-data optimizer smoke"
 	@echo "  make phase1-shared-synthesis-program-integration  qualify shared cache/model/sampling"
 	@echo "  make phase1-shared-synthesis-program-production-design  freeze matched design only"
 	@echo "  make phase1-shared-synthesis-program-production-cache  rebuild the packed full cache"
@@ -104,6 +118,21 @@ phase1-multireaction-corpus:
 	python3 -m cli experiment verify phase1-multireaction-corpus --profile full
 	python3 -m cli experiment reproduce phase1-multireaction-corpus --profile full
 
+phase1-bl-lx-reaction-enumerated-expansion:
+	python3 -m cli experiment run phase1-bl-lx-reaction-enumerated-expansion --profile full --resume
+	python3 -m cli experiment verify phase1-bl-lx-reaction-enumerated-expansion --profile full
+	python3 -m cli experiment reproduce phase1-bl-lx-reaction-enumerated-expansion --profile full
+
+phase1-bl-lx-mixed-repeat-expansion:
+	python3 -m cli experiment run phase1-bl-lx-mixed-repeat-expansion --profile full --resume
+	python3 -m cli experiment verify phase1-bl-lx-mixed-repeat-expansion --profile full
+	python3 -m cli experiment reproduce phase1-bl-lx-mixed-repeat-expansion --profile full
+
+phase1-bl-lx-model-support-mixed-repeat-expansion:
+	python3 -m cli experiment run phase1-bl-lx-model-support-mixed-repeat-expansion --profile full --resume
+	python3 -m cli experiment verify phase1-bl-lx-model-support-mixed-repeat-expansion --profile full
+	python3 -m cli experiment reproduce phase1-bl-lx-model-support-mixed-repeat-expansion --profile full
+
 phase1-potency-study-corpus:
 	python3 -m cli experiment run phase1-potency-study-corpus --profile full --resume
 	python3 -m cli experiment verify phase1-potency-study-corpus --profile full
@@ -148,6 +177,26 @@ phase1-shared-synthesis-program-representation:
 	python3 -m cli experiment run phase1-shared-synthesis-program-representation --profile full --resume
 	python3 -m cli experiment verify phase1-shared-synthesis-program-representation --profile full
 	python3 -m cli experiment reproduce phase1-shared-synthesis-program-representation --profile full
+
+phase1-shared-synthesis-program-mixed-representation:
+	python3 -m cli experiment run phase1-shared-synthesis-program-mixed-representation --profile full --resume
+	python3 -m cli experiment verify phase1-shared-synthesis-program-mixed-representation --profile full
+	python3 -m cli experiment reproduce phase1-shared-synthesis-program-mixed-representation --profile full
+
+phase1-shared-synthesis-program-mixed-training-design:
+	python3 -m cli experiment run phase1-shared-synthesis-program-mixed-training-design --profile full --resume
+	python3 -m cli experiment verify phase1-shared-synthesis-program-mixed-training-design --profile full
+	python3 -m cli experiment reproduce phase1-shared-synthesis-program-mixed-training-design --profile full
+
+phase1-shared-synthesis-program-mixed-production-cache:
+	python3 -m cli experiment run phase1-shared-synthesis-program-mixed-production-cache --profile full --resume
+	python3 -m cli experiment verify phase1-shared-synthesis-program-mixed-production-cache --profile full
+	python3 -m cli experiment reproduce phase1-shared-synthesis-program-mixed-production-cache --profile full
+
+phase1-shared-synthesis-program-mixed-training-smoke:
+	python3 -m cli experiment run phase1-shared-synthesis-program-mixed-training-smoke --profile smoke --resume
+	python3 -m cli experiment verify phase1-shared-synthesis-program-mixed-training-smoke --profile smoke
+	python3 -m cli experiment reproduce phase1-shared-synthesis-program-mixed-training-smoke --profile smoke
 
 phase1-shared-synthesis-program-integration:
 	python3 -m cli experiment run phase1-shared-synthesis-program-integration --profile smoke --resume
@@ -258,6 +307,9 @@ typecheck:
 		forge/synthesis/assessment/common_route_evidence.py \
 		forge/corpus/training_cache.py \
 		forge/corpus/lnpdb.py forge/corpus/multireaction.py \
+		forge/corpus/component_splits.py forge/corpus/multireaction_expansion.py \
+		forge/corpus/multireaction_mixed_expansion.py \
+		forge/corpus/reaction_program_records.py \
 		forge/corpus/reaction_program_training.py \
 		forge/corpus/synthesis_program_representation.py \
 		forge/corpus/synthesis_program_training.py forge/potency/study_data.py
@@ -268,6 +320,9 @@ check-core: verify-pins typecheck
 	python3 -m ruff check forge cli experiments/_runtime experiments/phase1 tools \
 		tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
 		tests/test_reaction_program.py tests/test_multireaction_corpus.py \
+		tests/test_multireaction_expansion.py \
+		tests/test_multireaction_mixed_expansion.py \
+		tests/test_reaction_program_records.py \
 		tests/test_multireaction_qualification.py \
 		tests/test_multireaction_training.py \
 		tests/test_finite_component_catalogue_baseline.py \
@@ -292,6 +347,9 @@ check-core: verify-pins typecheck
 		tests/test_pinned_sources_are_tracked.py
 	python3 -m pytest -q tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
 		tests/test_reaction_program.py tests/test_multireaction_corpus.py \
+		tests/test_multireaction_expansion.py \
+		tests/test_multireaction_mixed_expansion.py \
+		tests/test_reaction_program_records.py \
 		tests/test_multireaction_qualification.py \
 		tests/test_multireaction_training.py \
 		tests/test_finite_component_catalogue_baseline.py \
@@ -316,7 +374,7 @@ check-core: verify-pins typecheck
 		tests/test_pinned_sources_are_tracked.py
 
 test:
-	PYTHONPATH=. python3 -m pytest -q
+	PYTHONPATH=. $(UV_RUN) python -m pytest -q
 
 lint:
 	python3 -m ruff check forge cli experiments/_runtime experiments/phase1 tools tests

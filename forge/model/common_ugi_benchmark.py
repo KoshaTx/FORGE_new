@@ -11,12 +11,14 @@ from __future__ import annotations
 import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Literal, cast
 
 from rdkit import Chem, rdBase
 
 from forge.assembly import Ugi3AssemblyAdapter
+from forge.core.hashing import sha256_file
 from forge.core.io import iter_csv, iter_jsonl, write_jsonl
 from forge.model.reaction_program_evaluation import (
     adjudicate_reaction_program_rows,
@@ -206,12 +208,18 @@ def write_attempt_ledger(path: Path, attempts: Sequence[CommonUgiAttempt]) -> No
     )
 
 
-def load_ugi_identity_references(
+@lru_cache(maxsize=8)
+def _load_ugi_identity_references_cached(
     assignments_path: Path,
-    *,
-    roles: Sequence[str],
+    roles: tuple[str, ...],
+    assignments_sha256: str,
 ) -> tuple[set[str], dict[str, set[str]], dict[str, set[str]]]:
-    """Load train products/components and component-heldout identities from the frozen split."""
+    """Parse one immutable assignment ledger once per process and content digest."""
+
+    # The digest is part of the cache key.  Keep the name explicit even though the caller has
+    # already calculated it: omitting it would let in-process file replacement return stale
+    # scientific references for the same path.
+    del assignments_sha256
 
     training_products: set[str] = set()
     training_components: dict[str, set[str]] = {role: set() for role in roles}
@@ -245,6 +253,21 @@ def load_ugi_identity_references(
     ):
         raise CommonUgiBenchmarkError("Ugi identity reference support is empty")
     return training_products, training_components, held_components
+
+
+def load_ugi_identity_references(
+    assignments_path: Path,
+    *,
+    roles: Sequence[str],
+) -> tuple[set[str], dict[str, set[str]], dict[str, set[str]]]:
+    """Load train and held identities, reusing only content-addressed immutable references."""
+
+    resolved = assignments_path.resolve()
+    return _load_ugi_identity_references_cached(
+        resolved,
+        tuple(roles),
+        str(sha256_file(resolved)),
+    )
 
 
 def assess_common_ugi_attempts(

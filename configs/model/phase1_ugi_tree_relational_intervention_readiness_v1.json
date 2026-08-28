@@ -1,0 +1,60 @@
+{
+  "schema_version": "forge.ugi_tree_transformer_intervention_readiness_config.v1",
+  "status": "frozen_after_failure_attribution_before_constrained_resampling",
+  "expected_training_seeds": [20260905, 20260906, 20260907],
+  "attempts_per_seed": 3072,
+  "expected_retro_abstentions": 190,
+  "expected_local_unsupported_exact_l1": 677,
+  "inputs": {
+    "failure_attribution": {
+      "path": "results/phase1/ugi_tree_relational_failure_attribution_v1/result.json",
+      "sha256": "d6e5ef6adf29d7aba98545fbba9cb515e7570e734f6a9bb8dc8af494b181f70a"
+    },
+    "attempt_attributions": {
+      "path": "results/phase1/ugi_tree_relational_failure_attribution_v1/attempt_attributions.jsonl.gz",
+      "sha256": "068af1ed562004a71276f501f74a131b228afa108501e361d74c72b2b328c9ce"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "role_local_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "evaluation_details": [
+      {
+        "seed": 20260905,
+        "path": "runs/phase1-ugi-tree-relational-production-h100-v1/2735dbfb4276ba21a792808f954a76607158e1ac29df3990422c0b63e7b96c81/stages/evaluate/artifacts/evaluation_details.tar",
+        "sha256": "6abcdc1bfec670985f6f40078a1895b6a6445c88ec77e609d1fe9b907a914a18"
+      },
+      {
+        "seed": 20260906,
+        "path": "runs/phase1-ugi-tree-relational-production-h100-v1/0bbd58b8e87a344861f7b6b8c88843c368d429adb2a1be328324e895991bc0d8/stages/evaluate/artifacts/evaluation_details.tar",
+        "sha256": "7ef2e0636bc818ee6075bf1b48ed3d4c7b40572edc8cf968293e8b5ca884c70d"
+      },
+      {
+        "seed": 20260907,
+        "path": "runs/phase1-ugi-tree-relational-production-h100-v1/779a97f358b334ddfd30e70006116fe9619d334aec573ebce3437da4d8603975/stages/evaluate/artifacts/evaluation_details.tar",
+        "sha256": "62a95c3fcb1ca64a3edffffbb5a78150fcc94848e41eb2eaabbb74abe5e363aa"
+      }
+    ]
+  },
+  "policy": {
+    "registry_handle_gate_unchanged": true,
+    "transform_consistency_reported_separately_from_exact_l1": true,
+    "native_component_traces_used_for_diagnostic_comparison_only": true,
+    "role_local_policy_is_training_fold_only": true,
+    "component_identities_in_decoder_policy": false,
+    "production_thresholds_changed": false,
+    "candidate_selection": false,
+    "generation_calls": 0,
+    "route_calls": 0,
+    "oracle_calls": 0
+  },
+  "nonclaims": [
+    "Transform-consistent reverse decomposition is not registry-qualified exact L1 when a component fails the frozen handle policy.",
+    "A role-local mask records training-supported local chemistry, not synthesis success or route closure.",
+    "This diagnostic qualifies interventions for a new experiment; it does not replace or promote the completed negative production result."
+  ]
+}

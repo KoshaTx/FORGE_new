@@ -134,17 +134,50 @@ results/m0_10/*
 !results/phase1/
 results/phase1/*
 !results/phase1/data_contract.json
+!results/phase1/ugi_tree_transformer_engineering_v1/
+results/phase1/ugi_tree_transformer_engineering_v1/*
+!results/phase1/ugi_tree_transformer_engineering_v1/result.json
 !results/phase1/external_baseline_route_union_readiness_v1/
 results/phase1/external_baseline_route_union_readiness_v1/*
 !results/phase1/external_baseline_route_union_readiness_v1/result.json
 !results/phase1/multireaction_program_corpus_v1/
 !results/phase1/multireaction_program_corpus_v1/*
+!results/phase1/bl_lx_reaction_enumerated_expansion_v1/
+!results/phase1/bl_lx_reaction_enumerated_expansion_v1/*
+!results/phase1/bl_lx_mixed_repeat_capacity_v1/
+!results/phase1/bl_lx_mixed_repeat_capacity_v1/result.json
+!results/phase1/bl_lx_mixed_repeat_expansion_v1/
+!results/phase1/bl_lx_mixed_repeat_expansion_v1/*
+!results/phase1/bl_lx_mixed_repeat_expansion_v2/
+!results/phase1/bl_lx_mixed_repeat_expansion_v2/*
 !results/phase1/potency_study_corpus_v1/
 !results/phase1/potency_study_corpus_v1/result.json
 !results/phase1/potency_study_corpus_v1/observations.csv.gz
 !results/phase1/shared_synthesis_program_representation_v1/
 results/phase1/shared_synthesis_program_representation_v1/*
 !results/phase1/shared_synthesis_program_representation_v1/result.json
+!results/phase1/shared_synthesis_program_mixed_representation_v1/
+results/phase1/shared_synthesis_program_mixed_representation_v1/*
+!results/phase1/shared_synthesis_program_mixed_representation_v1/result.json
+!results/phase1/shared_synthesis_program_mixed_design_v1/
+!results/phase1/shared_synthesis_program_mixed_design_v1/*
+!results/phase1/shared_synthesis_program_mixed_cache_v1/
+!results/phase1/shared_synthesis_program_mixed_cache_v1/*
+!results/phase1/shared_synthesis_program_mixed_training_smoke_v1/
+!results/phase1/shared_synthesis_program_mixed_training_smoke_v1/**
+!results/phase1/shared_synthesis_program_training_performance_v1/
+!results/phase1/shared_synthesis_program_training_performance_v1/result.json
+!results/phase1/shared_synthesis_program_mixed_h100_profile_v1/
+!results/phase1/shared_synthesis_program_mixed_h100_profile_v1/result.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/
+results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/*
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/interrupted_run_failure.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/evaluation_result.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/layout_schedule_preflight_result.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/recovery_result.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/result.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/study_design.json
+!results/phase1/shared_synthesis_program_mixed_primary_seed0_v1/training_result.json
 !results/phase1/shared_synthesis_program_training_integration_v1/
 results/phase1/shared_synthesis_program_training_integration_v1/*
 !results/phase1/shared_synthesis_program_training_integration_v1/cache.json
@@ -243,6 +276,14 @@ paper/**/*.out
 paper/**/*.toc
 paper/**/*.synctex.gz
 paper/**/missfont.log
+
+# Per-figure proof sheets. Each figures/*/ carries a preview.tex that builds the figure
+# standalone so it can be looked at without recompiling the manuscript. The preview.tex is
+# source and is tracked; the PDF it builds and the rasterisations taken off that PDF are
+# churn on every redraw, like the .aux and .log above.
+paper/**/figures/**/preview.pdf
+paper/**/figures/**/prev-*.png
+paper/**/figures/**/big-*.png
 
 # Local scratch, not part of the project record.
 .codex/

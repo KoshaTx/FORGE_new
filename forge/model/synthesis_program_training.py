@@ -52,6 +52,14 @@ def build_synthesis_program_flow(
             role_isolated_attention=bool(model_config.get("role_isolated_attention", False)),
             role_specific_parameters=bool(model_config.get("role_specific_parameters", False)),
             repeat_group_conditioning=bool(model_config.get("repeat_group_conditioning", False)),
+            role_morphology_conditioning=bool(
+                model_config.get("role_morphology_conditioning", False)
+            ),
+            specialist_adapter_dim=int(model_config.get("specialist_adapter_dim", 0)),
+            maximum_children=int(model_config.get("maximum_children", 0)),
+            program_routed_output_heads=bool(
+                model_config.get("program_routed_output_heads", False)
+            ),
         ).to(device)
     if architecture not in {"sparse_mpnn", "reaction_program_sparse_whole_lipid_flow"}:
         raise SynthesisProgramTrainingPrimitiveError(
@@ -109,6 +117,7 @@ def collate_synthesis_program_training_batch(
         batch["component_instance_states"].zero_()
         batch["component_position_states"].zero_()
         batch["repeat_group_states"].zero_()
+        batch["role_morphology_states"].zero_()
         return batch
     if conditioning != "cyclic_program_id_only_roles_core_and_depth_retained":
         raise SynthesisProgramTrainingPrimitiveError(
@@ -144,13 +153,20 @@ def synthesis_program_forward(
     """Noise learnable states and run the shared sparse flow once."""
 
     noisy = noise_synthesis_program_batch(clean, node_marginal, bond_marginal, t, generator)
-    predictions = model(
-        nodes=noisy["nodes"],
-        parents=noisy["parents"],
-        parent_bonds=noisy["parent_bonds"],
-        closure_left=noisy["closure_left"],
-        closure_right=noisy["closure_right"],
-        closure_bonds=noisy["closure_bonds"],
+    predictions = _synthesis_program_predict(model, clean, noisy, t)
+    return predictions, noisy
+
+
+def _synthesis_program_predict(
+    model: Any, clean: Mapping[str, Any], state: Mapping[str, Any], t: Any
+) -> dict[str, Any]:
+    return model(
+        nodes=state["nodes"],
+        parents=state["parents"],
+        parent_bonds=state["parent_bonds"],
+        closure_left=state["closure_left"],
+        closure_right=state["closure_right"],
+        closure_bonds=state["closure_bonds"],
         t=t,
         node_mask=clean["node_mask"],
         child_mask=clean["child_mask"],
@@ -163,8 +179,22 @@ def synthesis_program_forward(
         repeat_group_states=clean["repeat_group_states"],
         component_position_states=clean["component_position_states"],
         component_instance_states=clean["component_instance_states"],
+        role_morphology_states=clean["role_morphology_states"],
     )
-    return predictions, noisy
+
+
+def synthesis_program_topology_conditioned_forward(
+    model: Any,
+    clean: Mapping[str, Any],
+    noisy: Mapping[str, Any],
+    t: Any,
+) -> dict[str, Any]:
+    """Predict chemistry from the same corruption after replacing topology with its target."""
+
+    conditioned = dict(noisy)
+    for field in ("parents", "closure_left", "closure_right"):
+        conditioned[field] = clean[field]
+    return _synthesis_program_predict(model, clean, conditioned, t)
 
 
 def synthesis_program_forward_loss(
@@ -255,4 +285,5 @@ __all__ = [
     "synthesis_program_forward",
     "synthesis_program_forward_loss",
     "synthesis_program_reconstruction_metrics",
+    "synthesis_program_topology_conditioned_forward",
 ]

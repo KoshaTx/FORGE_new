@@ -1,0 +1,54 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-tree-transformer-calibration-program-draw-v1",
+  "description": "Freeze 512 source- and calibration-role-balanced morphology programs before tree-Transformer training.",
+  "root_seed": 20260831,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "draw",
+      "implementation": "corpus.ugi.calibration-program-draw.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/model/phase1_ugi_tree_transformer_calibration_program_draw_v1.json",
+        "sha256": "e6ea988782b987568cfaf26c48e50ef8c4c5ae9c01f1f7195344e627aa6bdaa2"
+      },
+      "inputs": {
+        "prepared_cache": {
+          "path": "results/phase1/ugi_balanced_training_cache_v2/ugi_training_cache.pt",
+          "sha256": "b862b7a54c0cb325f0a962fea42a78138df1a81c88b9c0e86d56b6448e519c46"
+        }
+      },
+      "outputs": {
+        "program_draw": {
+          "path": "program_draw.json",
+          "schema_version": "forge.ugi_tree_transformer_calibration_program_draw.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 8192,
+        "timeout_seconds": 900,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-tree-transformer-calibration-program-draw"
+      }
+    }
+  ],
+  "metadata": {
+    "frozen_before_tree_transformer_training": true,
+    "selection_fold": "calibration",
+    "heldout_rows_used": false,
+    "paired_across_arms_and_checkpoints": true
+  },
+  "nonclaims": [
+    "This experiment selects no molecule or candidate.",
+    "The calibration draw is not a held-out performance estimate."
+  ]
+}

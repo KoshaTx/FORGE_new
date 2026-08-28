@@ -1,0 +1,25 @@
+{
+  "schema_version": "forge.multireaction_mixed_expansion_capacity_result.v1",
+  "status": "negative_ugi_matched_quota_not_supported",
+  "date": "2026-08-27",
+  "config": {
+    "path": "configs/multireaction/bl_lx_mixed_repeat_expansion_v1.json",
+    "sha256": "45254b0cd8ab7fdc7b9ba9e64580eab230dd9a3f9181ba1e79abf20cbc228a39"
+  },
+  "failure_evidence": {
+    "path": "runs/phase1-bl-lx-mixed-repeat-expansion/64afe0adba00cf8de31d8e49a011018b975db2aeb9e5cb2f4c9c822827e4a6dc/failures/expansion/2026-08-27T15-15-02+00-00.json",
+    "sha256": "8cffee087d4f81691562d9e287ea32230af797667fcb657f24a46e616f91db1b"
+  },
+  "program_id": "bl_2023_repeated_aza_michael",
+  "fold": "train",
+  "required_mixed_products": 61707,
+  "admitted_unique_factorization_products": 35217,
+  "gate": "fail",
+  "decision": "Preserve exact forward replay and enumerated-set factorization abstention. Replace raw Ugi-count matching with a smaller balanced corpus and equalize program exposure through source-balanced sampling weights.",
+  "claims_boundary": {
+    "chemical_gate_relaxed": false,
+    "failed_quota_reported": true,
+    "computed_products_are_observed_synthesis": false,
+    "computed_products_are_route_closed": false
+  }
+}

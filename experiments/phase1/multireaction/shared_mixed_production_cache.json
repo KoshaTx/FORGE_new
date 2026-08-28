@@ -1,0 +1,50 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-shared-synthesis-program-mixed-production-cache",
+  "description": "Build and qualify the packed 204,386-product Ugi/BL/LX cache for expanded-data shared Transformer training.",
+  "root_seed": 20260827,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "cache",
+      "implementation": "model.shared-synthesis-program-production-cache.v1",
+      "needs": [],
+      "config": {"path": "configs/multireaction/shared_mixed_production_cache_v1.json", "sha256": "ba2fe503b5dce1a1d0f3f791af82cfc6058bf728ac9750c3aa42c7071cf7ba29"},
+      "inputs": {
+        "production_design": {"path": "results/phase1/shared_synthesis_program_mixed_design_v1/design.json", "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"},
+        "representation_config": {"path": "configs/multireaction/shared_synthesis_program_representation_mixed_v1.json", "sha256": "1c769134d15f2d5babca4340e61c77244a45b0094b290c7d2d6b13cb7909a74b"},
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "ugi_semantic_products": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_products.csv.gz", "sha256": "13fd0204fe4a7d1402c47e4fce0ac5cce0c78410c5c8fbfbde48c552fc00da1d"},
+        "ugi_semantic_atoms": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz", "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"},
+        "multireaction_atlas": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz", "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"},
+        "multireaction_semantic_atoms": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/semantic_atoms.csv.gz", "sha256": "962db4a740bae18c3cadd330e2c7a3f5c0deb3ac120b45f1d681ab962ea1e8a0"},
+        "multireaction_splits": {"path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz", "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"}
+      },
+      "outputs": {
+        "cache": {"path": "cache.npz", "schema_version": "forge.synthesis_program_production_cache.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.synthesis_program_production_cache_result.v1"}
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 14400,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "shared-mixed-production-cache"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-27 user instruction to connect the verified BL/LX expansion to shared training",
+    "scientific_identity": "support_qualified_full_shared_training_cache"
+  },
+  "nonclaims": [
+    "The cache is infrastructure, not model-generalization evidence.",
+    "Cached BL/LX products are reaction-enumerated support, not route-certified products.",
+    "The cache contains no biological labels or finite component identities."
+  ]
+}

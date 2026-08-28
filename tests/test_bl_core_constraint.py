@@ -81,6 +81,10 @@ def test_packed_bl_core_cache_and_factorized_layout_preserve_semantic_support() 
         training_support = {_bundle(record) for record in bl_records}
         sampled = prior.sample(PROGRAM, sample_count=256, seed=20260824)
         assert {_bundle(record) for record in sampled}.issubset(training_support)
+        failed_production_seed = 1779023141640653592
+        production_draw = prior.sample(PROGRAM, sample_count=512, seed=failed_production_seed)
+        assert len(production_draw) == 512
+        assert all(record.graph.node_count <= prior.maximum_heavy_atoms for record in production_draw)
         assert all(
             record.graph.node_states[index]
             == prior._fixed_node_states[PROGRAM][int(record.core_position_states[index])]

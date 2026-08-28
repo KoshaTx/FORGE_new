@@ -57,3 +57,22 @@ def test_registry_example_has_an_exact_open_decomposition() -> None:
         for role, smiles in components.items()
     }
     assert adapter.check_forward(traces[0].as_mapping(), expected).exact
+
+
+def test_transform_consistent_candidate_does_not_bypass_registry_handle_policy() -> None:
+    adapter = Ugi3AssemblyAdapter.from_registry(REGISTRY)
+    product = "CCCCCCCCCCC(=O)CCCCCCC(NC1CNC(N)OC1)C(=O)NCCC(C)CCC"
+
+    candidates = adapter.transform_consistent_decomposition_candidates(product)
+
+    assert adapter.decompose(product) == ()
+    assert len(candidates) == 1
+    assert candidates[0].registry_handle_qualified is False
+    assessments = {
+        value.role: value for value in candidates[0].handle_assessments
+    }
+    assert assessments["amine_head"].symmetry_distinct_handle_sites == 3
+    assert assessments["amine_head"].passes_registry_handle_policy is False
+    assert assessments["oxoester_aldehyde_body_tail"].passes_registry_handle_policy is True
+    assert assessments["isocyanide_tail"].passes_registry_handle_policy is True
+    assert candidates[0].as_mapping()["forward_replay_exact"] is True

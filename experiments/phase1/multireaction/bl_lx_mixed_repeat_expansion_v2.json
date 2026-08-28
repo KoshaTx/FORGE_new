@@ -1,0 +1,63 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-bl-lx-model-support-mixed-repeat-expansion",
+  "description": "Build the superseding 92,000-product BL/LX corpus after enforcing the pinned atom vocabulary and three-closure model support.",
+  "root_seed": 20260828,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "expansion",
+      "implementation": "corpus.multireaction.mixed-repeat-expansion.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/bl_lx_mixed_repeat_expansion_v3.json",
+        "sha256": "08fbfddede3c32ba63c9693365685a7259e94ba966ad2bfe74a2c254cd9a31e8"
+      },
+      "inputs": {
+        "atom_vocabulary": {"path": "results/phase1/product_v3_atom_vocabulary.json", "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"},
+        "component_registry": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz", "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"},
+        "homogeneous_atlas": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz", "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"},
+        "homogeneous_attempts": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/enumeration_attempts.csv.gz", "sha256": "8f3d49fe389b03650e590e93b4427a5ee822746470febacf56a7a9bd63e3c8cb"},
+        "homogeneous_provenance": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/source_provenance.csv.gz", "sha256": "e2b010b04a144a28033758d6379db3c50a5bac27fd5916c11d8f6083d095684e"},
+        "homogeneous_result": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/result.json", "sha256": "0574e4c322fc011b350f7cc2c8baaefa3bd121de36f0bcf32d3721e8ace47cc6"},
+        "homogeneous_semantic_atoms": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/semantic_atoms.csv.gz", "sha256": "af37fc051b4b36b4321c322ed03f7cb13f762489f2c68a0dd488f8f34378a71a"},
+        "homogeneous_splits": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz", "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"},
+        "homogeneous_steps": {"path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_steps.csv.gz", "sha256": "513c77f376f6c720556ac6b8651399592d7a172d13e382ad27286762070218ed"},
+        "program_config": {"path": "configs/multireaction/lnpdb_reaction_programs_v1.json", "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"},
+        "qualified_reaction_families": {"path": "data/vendor/qualified_reaction_families_v1.json", "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"}
+      },
+      "outputs": {
+        "components": {"path": "component_registry.csv.gz", "schema_version": "forge.multireaction_expansion_components.v1"},
+        "attempts": {"path": "mixed_enumeration_attempts.csv.gz", "schema_version": "forge.multireaction_mixed_expansion_attempts.v1"},
+        "atlas": {"path": "reaction_program_atlas.csv.gz", "schema_version": "forge.multireaction_program_atlas.v2"},
+        "steps": {"path": "reaction_program_steps.csv.gz", "schema_version": "forge.multireaction_program_steps.v1"},
+        "semantic_atoms": {"path": "semantic_atoms.csv.gz", "schema_version": "forge.multireaction_semantic_atoms.v2"},
+        "provenance": {"path": "source_provenance.csv.gz", "schema_version": "forge.multireaction_source_provenance.v1"},
+        "splits": {"path": "component_family_splits.csv.gz", "schema_version": "forge.multireaction_mixed_component_family_splits.v1"},
+        "support_exclusions": {"path": "model_support_exclusions.csv.gz", "schema_version": "forge.multireaction_model_support_exclusions.v1"},
+        "manifest": {"path": "manifest.json", "schema_version": "forge.multireaction_mixed_expansion_manifest.v1"},
+        "result": {"path": "result.json", "schema_version": "forge.multireaction_mixed_expansion_result.v1"}
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 4,
+        "memory_mb": 12288,
+        "timeout_seconds": 14400,
+        "gpu_type": null
+      },
+      "determinism": {"mode": "strict", "stream": "bl-lx-model-support-mixed-expansion"}
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-27 user instruction to prepare expanded BL/LX shared training",
+    "scientific_identity": "model_support_qualified_bl_lx_reaction_enumerated_support"
+  },
+  "nonclaims": [
+    "Computed products are reaction-enumerated support, not observed syntheses or route-certified products.",
+    "Model-support exclusion is not a chemistry-success label.",
+    "No activity labels, route calls, oracle calls or candidate selection are present."
+  ]
+}

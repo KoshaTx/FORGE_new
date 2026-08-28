@@ -206,6 +206,7 @@ def test_failed_attempts_never_enter_the_structural_manifold(tmp_path: Path) -> 
 
     policy = RealismPolicy.from_mapping(_policy())
     reference = build_realism_reference(r0_path, split_path, policy)
+    assert build_realism_reference(r0_path, split_path, policy) is reference
     rows, result = assess_lipid_realism(_attempts(), reference, policy)
     assert rows[1]["native_status"] == "failed"
     assert rows[1]["connected"] is False

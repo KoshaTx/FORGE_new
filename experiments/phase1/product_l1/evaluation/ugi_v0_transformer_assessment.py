@@ -182,8 +182,8 @@ def native_samples_to_attempts(
 ) -> tuple[CommonUgiAttempt, ...]:
     """Convert every native attempt, retaining failures in the denominator."""
 
-    if method_id not in METHOD_IDS:
-        raise UgiV0TransformerAssessmentError(f"unsupported comparison method: {method_id}")
+    if not method_id or not method_id.strip():
+        raise UgiV0TransformerAssessmentError("comparison method ID must be nonempty")
     return tuple(
         CommonUgiAttempt(
             method_id=method_id,
@@ -464,12 +464,15 @@ def assess_role_morphology(
     return rows, assessment
 
 
-def _selected_metrics(
+def selected_ugi_metrics(
     common: Mapping[str, Any],
     realism: Mapping[str, Any],
     local: Mapping[str, Any],
     morphology: Mapping[str, Any],
 ) -> dict[str, float | int | None]:
+    def optional_float(value: Any) -> float | None:
+        return None if value is None else float(value)
+
     common_metrics = common["common_assessment"]["metrics"]
     realism_assessment = realism["assessment"]
     local_assessment = local["assessment"]
@@ -484,15 +487,31 @@ def _selected_metrics(
         "unique_open_ended_exact_l1_products_per_attempt": float(
             common_metrics["unique_open_ended_exact_l1_products_per_attempt"]
         ),
-        "whole_product_novel_to_train_fraction": float(
+        "unique_whole_product_novel_exact_l1_products_per_attempt": float(
+            common_metrics["unique_whole_product_novel_exact_l1_products_per_1000_attempts"]
+        )
+        / 1000.0,
+        "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt": float(
+            common_metrics[
+                "unique_open_ended_whole_product_novel_exact_l1_products_per_1000_attempts"
+            ]
+        )
+        / 1000.0,
+        "whole_product_novel_to_train_fraction": optional_float(
             common_metrics["whole_product_novel_to_train_fraction"]
         ),
-        "component_novelty_fraction": float(common_metrics["component_novelty_fraction"]),
-        "effective_component_count": float(common_metrics["effective_component_count"]),
+        "component_novelty_fraction": optional_float(
+            common_metrics["component_novelty_fraction"]
+        ),
+        "effective_component_count": optional_float(
+            common_metrics["effective_component_count"]
+        ),
         "held_component_exact_l1_products_per_1000_attempts": float(
             common_metrics["held_component_exact_l1_products_per_1000_attempts"]
         ),
-        "mean_pairwise_ecfp4_distance": float(common_metrics["mean_pairwise_ecfp4_distance"]),
+        "mean_pairwise_ecfp4_distance": optional_float(
+            common_metrics["mean_pairwise_ecfp4_distance"]
+        ),
         "local_support_qualified_exact_l1_yield_per_attempt": float(
             local_assessment["local_support_qualified_exact_l1_yield_per_attempt"]
         ),
@@ -509,7 +528,9 @@ def _selected_metrics(
             if manifold["classifier_two_sample"]["status"] == "estimated"
             else None
         ),
-        "realism_internal_diversity": float(molecular["mean_pairwise_ecfp4_distance_among_unique"]),
+        "realism_internal_diversity": optional_float(
+            molecular["mean_pairwise_ecfp4_distance_among_unique"]
+        ),
         "role_supported_exact_l1_yield_per_attempt": float(
             morphology["fractions_per_attempt"]["exact_l1_products_with_any_fully_supported_trace"]
         ),
@@ -527,6 +548,104 @@ def _selected_metrics(
         "nitrogen_oxygen_bond_product_fraction_per_attempt": float(
             morphology["fractions_per_attempt"].get("products_with_nitrogen_oxygen_bonds", 0.0)
         ),
+    }
+
+
+def assess_native_ugi_method(
+    native_rows: Sequence[Mapping[str, Any]],
+    *,
+    method_id: str,
+    seed_label: int,
+    repo: Path,
+    output_dir: Path,
+    common_ugi_assessment_config: Path,
+    lipid_realism_config: Path,
+    local_chemistry_config: Path,
+    role_morphology_policy: Path,
+    support: LocalChemistrySupport | None = None,
+) -> dict[str, Any]:
+    """Apply the shared assessors to one complete native sample ledger."""
+
+    output_dir.mkdir(parents=True, exist_ok=False)
+    attempts_path = output_dir / "attempts.jsonl.gz"
+    write_attempt_ledger(
+        attempts_path,
+        native_samples_to_attempts(native_rows, method_id=method_id, seed_label=seed_label),
+    )
+    common_dir = output_dir / "common"
+    common = run_common_ugi_assessment(
+        common_ugi_assessment_config,
+        repo,
+        attempts_path,
+        common_dir,
+        method_id=method_id,
+        seed=seed_label,
+        expected_attempts=len(native_rows),
+    )
+    realism_dir = output_dir / "realism"
+    realism = run_lipid_realism_assessment(
+        lipid_realism_config,
+        repo,
+        attempts_path,
+        realism_dir,
+        method_id=method_id,
+        seed=seed_label,
+        expected_attempts=len(native_rows),
+    )
+    local_dir = output_dir / "local_chemistry"
+    local = run_local_chemistry_assessment(
+        local_chemistry_config,
+        repo,
+        common_dir / "assessed_attempts.jsonl.gz",
+        local_dir,
+        method_id=method_id,
+        seed=seed_label,
+        expected_attempts=len(native_rows),
+    )
+    resolved_support = support or LocalChemistrySupport.from_mapping(
+        read_json_object(
+            role_morphology_policy,
+            error=UgiV0TransformerAssessmentError,
+            label="role morphology policy",
+        )
+    )
+    if not resolved_support.enforces_role_cycles:
+        raise UgiV0TransformerAssessmentError("role morphology policy lacks complete cycles")
+    morphology_rows, morphology = assess_role_morphology(
+        common_dir / "assessed_attempts.jsonl.gz",
+        method_id=method_id,
+        seed_label=seed_label,
+        support=resolved_support,
+    )
+    morphology_path = output_dir / "role_morphology_attempts.jsonl.gz"
+    write_jsonl(
+        morphology_path,
+        [
+            {"schema_version": MORPHOLOGY_ATTEMPT_SCHEMA, "rows": len(morphology_rows)},
+            *morphology_rows,
+        ],
+    )
+    morphology_result_path = output_dir / "role_morphology_result.json"
+    morphology_result = {
+        "schema_version": "forge.ugi_role_morphology_assessment.v1",
+        "status": "pass",
+        "method_id": method_id,
+        "seed": seed_label,
+        "attempts": artifact_record(attempts_path),
+        "common_assessed_attempts": artifact_record(common_dir / "assessed_attempts.jsonl.gz"),
+        "assessed_role_morphology": artifact_record(morphology_path),
+        "policy": pin_record(role_morphology_policy, repo),
+        "assessment": morphology,
+        "candidate_selection": False,
+    }
+    write_json(morphology_result_path, morphology_result)
+    return {
+        "attempts": artifact_record(attempts_path),
+        "common_assessment": artifact_record(common_dir / "result.json"),
+        "lipid_realism": artifact_record(realism_dir / "result.json"),
+        "local_chemistry": artifact_record(local_dir / "result.json"),
+        "role_morphology": artifact_record(morphology_result_path),
+        "metrics": selected_ugi_metrics(common, realism, local, morphology),
     }
 
 
@@ -680,80 +799,18 @@ def run_ugi_v0_transformer_assessment(
         raise UgiV0TransformerAssessmentError("role morphology policy lacks complete cycles")
     methods: dict[str, Any] = {}
     for method_id, native_rows in zip(METHOD_IDS, (v0_rows, transformer_rows), strict=True):
-        method_dir = output_dir / method_id
-        method_dir.mkdir()
-        attempts_path = method_dir / "attempts.jsonl.gz"
-        write_attempt_ledger(
-            attempts_path,
-            native_samples_to_attempts(native_rows, method_id=method_id, seed_label=seed_label),
-        )
-        common_dir = method_dir / "common"
-        common = run_common_ugi_assessment(
-            inputs["common_ugi_assessment_config"],
-            repo,
-            attempts_path,
-            common_dir,
-            method_id=method_id,
-            seed=seed_label,
-            expected_attempts=expected_attempts,
-        )
-        realism_dir = method_dir / "realism"
-        realism = run_lipid_realism_assessment(
-            inputs["lipid_realism_config"],
-            repo,
-            attempts_path,
-            realism_dir,
-            method_id=method_id,
-            seed=seed_label,
-            expected_attempts=expected_attempts,
-        )
-        local_dir = method_dir / "local_chemistry"
-        local = run_local_chemistry_assessment(
-            inputs["local_chemistry_config"],
-            repo,
-            common_dir / "assessed_attempts.jsonl.gz",
-            local_dir,
-            method_id=method_id,
-            seed=seed_label,
-            expected_attempts=expected_attempts,
-        )
-        morphology_rows, morphology = assess_role_morphology(
-            common_dir / "assessed_attempts.jsonl.gz",
+        methods[method_id] = assess_native_ugi_method(
+            native_rows,
             method_id=method_id,
             seed_label=seed_label,
+            repo=repo,
+            output_dir=output_dir / method_id,
+            common_ugi_assessment_config=inputs["common_ugi_assessment_config"],
+            lipid_realism_config=inputs["lipid_realism_config"],
+            local_chemistry_config=inputs["local_chemistry_config"],
+            role_morphology_policy=inputs["role_morphology_policy"],
             support=support,
         )
-        morphology_path = method_dir / "role_morphology_attempts.jsonl.gz"
-        write_jsonl(
-            morphology_path,
-            [
-                {"schema_version": MORPHOLOGY_ATTEMPT_SCHEMA, "rows": len(morphology_rows)},
-                *morphology_rows,
-            ],
-        )
-        morphology_result_path = method_dir / "role_morphology_result.json"
-        morphology_result = {
-            "schema_version": "forge.ugi_role_morphology_assessment.v1",
-            "status": "pass",
-            "method_id": method_id,
-            "seed": seed_label,
-            "attempts": artifact_record(attempts_path),
-            "common_assessed_attempts": artifact_record(common_dir / "assessed_attempts.jsonl.gz"),
-            "assessed_role_morphology": artifact_record(morphology_path),
-            "policy": pin_record(inputs["role_morphology_policy"], repo),
-            "assessment": morphology,
-            "candidate_selection": False,
-        }
-        write_json(morphology_result_path, morphology_result)
-        selected = _selected_metrics(common, realism, local, morphology)
-        methods[method_id] = {
-            "attempts": artifact_record(attempts_path),
-            "common_assessment": artifact_record(common_dir / "result.json"),
-            "lipid_realism": artifact_record(realism_dir / "result.json"),
-            "local_chemistry": artifact_record(local_dir / "result.json"),
-            "role_morphology": artifact_record(morphology_result_path),
-            "metrics": selected,
-        }
 
     v0_metrics = methods[METHOD_IDS[0]]["metrics"]
     transformer_metrics = methods[METHOD_IDS[1]]["metrics"]
@@ -816,7 +873,9 @@ __all__ = [
     "MORPHOLOGY_ATTEMPT_SCHEMA",
     "RESULT_SCHEMA",
     "UgiV0TransformerAssessmentError",
+    "assess_native_ugi_method",
     "assess_role_morphology",
     "native_samples_to_attempts",
     "run_ugi_v0_transformer_assessment",
+    "selected_ugi_metrics",
 ]

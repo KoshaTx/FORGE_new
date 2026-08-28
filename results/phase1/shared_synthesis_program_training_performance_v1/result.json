@@ -1,0 +1,242 @@
+{
+  "benchmark": {
+    "attention_dropout_probability": 0.0,
+    "batch_size": 12,
+    "median_speedup": 1.1120693404296538,
+    "observed_outcome": "faster",
+    "optimized_median_seconds": 0.30420674988999963,
+    "optimized_seconds": [
+      0.3094246247783303,
+      0.30554320802912116,
+      0.3004977088421583,
+      0.302344708237797,
+      0.30420674988999963,
+      0.3022687081247568,
+      0.315653667319566,
+      0.307198790833354,
+      0.30287362495437264
+    ],
+    "padded_nodes": 146,
+    "parameters": 5289901,
+    "reference_median_seconds": 0.33829899970442057,
+    "reference_seconds": [
+      0.34048733301460743,
+      0.33368295803666115,
+      0.3343237079679966,
+      0.3362670410424471,
+      0.3352899579331279,
+      0.3385692499577999,
+      0.3422364997677505,
+      0.33829899970442057,
+      0.342098250053823
+    ],
+    "repeats": 9,
+    "scope": "forward_loss_and_equal_family_pcgrad_backward_with_attention_dropout_zero",
+    "seed": 20260823
+  },
+  "components": {
+    "graph_bias": {
+      "median_speedup": 1.782802721930734,
+      "optimized_median_seconds": 0.0003610420972108841,
+      "optimized_seconds": [
+        0.0004425002261996269,
+        0.0004210839979350567,
+        0.0003793751820921898,
+        0.00035308394581079483,
+        0.0003675417974591255,
+        0.00036283303052186966,
+        0.0003899582661688328,
+        0.00035466719418764114,
+        0.0003504999913275242,
+        0.0003548748791217804,
+        0.000352540984749794,
+        0.00034962501376867294,
+        0.000344875268638134,
+        0.0003620418719947338,
+        0.0003737080842256546,
+        0.0003610420972108841,
+        0.00039125001057982445,
+        0.0003937496803700924,
+        0.00034966692328453064,
+        0.00035187508910894394,
+        0.0003692912869155407,
+        0.00035904161632061005,
+        0.0003781248815357685,
+        0.0003700000233948231,
+        0.0003498750738799572,
+        0.000355415977537632,
+        0.00034395884722471237,
+        0.0003870842047035694,
+        0.0003625419922173023,
+        0.00034679193049669266,
+        0.00038116704672574997,
+        0.0003698328509926796,
+        0.0003682081587612629,
+        0.00036966660991311073,
+        0.00035408418625593185,
+        0.0003565410152077675,
+        0.00034849997609853745,
+        0.0003481251187622547,
+        0.0003554169088602066,
+        0.0003500841557979584,
+        0.00036408379673957825,
+        0.0003627086989581585,
+        0.0003921668976545334,
+        0.0003466671332716942,
+        0.00034900009632110596
+      ],
+      "reference_median_seconds": 0.0006436668336391449,
+      "reference_seconds": [
+        0.0007377080619335175,
+        0.0007561659440398216,
+        0.0009261248633265495,
+        0.0006466247141361237,
+        0.0006385417655110359,
+        0.0006492077372968197,
+        0.0007869997061789036,
+        0.0006762081757187843,
+        0.0006436668336391449,
+        0.0006282920949161053,
+        0.0006442503072321415,
+        0.0006883339956402779,
+        0.0006274166516959667,
+        0.0006268331781029701,
+        0.0006639589555561543,
+        0.0006387908942997456,
+        0.0006514168344438076,
+        0.0006977911107242107,
+        0.0006272499449551105,
+        0.0006314162164926529,
+        0.0006400421261787415,
+        0.0006402498111128807,
+        0.0006412090733647346,
+        0.0007813749834895134,
+        0.0006452919915318489,
+        0.000632250215858221,
+        0.0006377501413226128,
+        0.0006447499617934227,
+        0.0006430423818528652,
+        0.0006459169089794159,
+        0.0007516248151659966,
+        0.0006459997966885567,
+        0.00063737528398633,
+        0.0008341660723090172,
+        0.000670167151838541,
+        0.0006432081572711468,
+        0.0006307079456746578,
+        0.0006320001557469368,
+        0.0006368327885866165,
+        0.000634124968200922,
+        0.0006503327749669552,
+        0.0007432498969137669,
+        0.0006426251493394375,
+        0.0006281672976911068,
+        0.0006179581396281719
+      ]
+    },
+    "pcgrad_backward": {
+      "median_speedup": 1.092625180497533,
+      "optimized_median_seconds": 0.22971120802685618,
+      "optimized_seconds": [
+        0.23887425009161234,
+        0.25911633437499404,
+        0.22697541723027825,
+        0.22868866706267,
+        0.23257241724058986,
+        0.2281860001385212,
+        0.22928095888346434,
+        0.23065716726705432,
+        0.22971120802685618
+      ],
+      "reference_median_seconds": 0.25098825013265014,
+      "reference_seconds": [
+        0.25098825013265014,
+        0.25305358273908496,
+        0.24861912475898862,
+        0.25008645793423057,
+        0.2543286248110235,
+        0.24961574980989099,
+        0.25073779188096523,
+        0.25138233276084065,
+        0.2521011661738157
+      ]
+    },
+    "repeat_consistency": {
+      "admitted_bond_pairs": 234,
+      "admitted_node_pairs": 234,
+      "dense_class_valued_pair_elements": 4604256,
+      "sparse_class_valued_pair_elements": 4212,
+      "work_reduction_fraction": 0.999085194220304
+    }
+  },
+  "environment": {
+    "cpu_threads": 4,
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.11.15",
+    "torch": "2.13.0"
+  },
+  "equivalence": {
+    "gradient_tolerance": {
+      "atol": 1e-07,
+      "rtol": 1e-05
+    },
+    "loss_tolerance": {
+      "atol": 1e-07,
+      "rtol": 1e-06
+    },
+    "maximum_absolute_gradient_difference": 4.76837158203125e-07,
+    "maximum_absolute_loss_difference": 0.0,
+    "optimized_conflicts": 0,
+    "reference_conflicts": 0
+  },
+  "gates": {
+    "conflict_count_identical": true,
+    "gradients_numerically_equivalent": true,
+    "graph_bias_bit_identical": true,
+    "graph_bias_median_faster": true,
+    "losses_numerically_equivalent": true,
+    "pcgrad_conflict_count_identical": true,
+    "pcgrad_gradients_bit_identical": true,
+    "pcgrad_median_faster": true,
+    "repeat_state_work_reduced": true
+  },
+  "inputs": {
+    "cache": {
+      "bytes": 13727905,
+      "logical_path": "cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "config": {
+      "bytes": 11305,
+      "logical_path": "design.json",
+      "sha256": "c285361670917485233871be4c72b6b2bc6c641e9921e140296475376fb0d3d6"
+    },
+    "implementation": {
+      "bytes": 29020,
+      "logical_path": "transformer_training_benchmark.py",
+      "sha256": "0ac957b97a16f266246c6d24a1a4bdf89c4c68ccde3e82e1061fa56b4755e72c"
+    },
+    "shared_attention": {
+      "bytes": 4706,
+      "logical_path": "structural_attention.py",
+      "sha256": "b1b145e7dd4a118be77ebff4c073e446d4afd7839c667dfa1ef2faaa694b895a"
+    },
+    "training_loop": {
+      "bytes": 35018,
+      "logical_path": "production_training.py",
+      "sha256": "92524fbd5105b7442dbc334f70af88607a43a9113646461076f02629681d30cb"
+    },
+    "transformer": {
+      "bytes": 39456,
+      "logical_path": "reaction_program_transformer.py",
+      "sha256": "0df9147b090c0baf6ac7a57a0d32d3595a7c7a97b0300e7ccd6d4dec338fb2de"
+    }
+  },
+  "nonclaims": [
+    "This CPU benchmark does not establish CUDA throughput.",
+    "The benchmark does not change the frozen data mixture or scientific objective.",
+    "A current exact-GPU preflight remains required before any paid full launch."
+  ],
+  "schema_version": "forge.transformer_training_performance_benchmark.v1",
+  "status": "pass"
+}

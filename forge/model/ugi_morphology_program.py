@@ -760,6 +760,92 @@ def _sample_attached_offspring_with_exact_budget(
     return output
 
 
+def decode_attached_offspring_with_exact_budget(
+    logits: Any,
+    *,
+    junction_budget: int,
+    attachment_count: int = 1,
+) -> np.ndarray:
+    """Return the highest-scoring exactly feasible attached forest deterministically.
+
+    This is the max-product counterpart of the conditional sampler above.  Feasibility is carried
+    in the dynamic-programming state, so the result is constructed under the requested size,
+    attachment and junction coordinates rather than repaired after an unconstrained decode.
+    """
+
+    try:
+        import torch
+    except ModuleNotFoundError as exc:  # pragma: no cover - optional dependency
+        raise UgiMorphologyProgramError("attached-tree decoding requires torch") from exc
+    if logits.ndim != 2 or logits.shape[0] < 1 or logits.shape[1] < 2:
+        raise UgiMorphologyProgramError("offspring logits must be [nodes, child classes]")
+    node_count, child_classes = logits.shape
+    maximum_children = child_classes - 1
+    if not attached_program_feasible(
+        node_count,
+        junction_budget,
+        maximum_children,
+        attachment_count,
+    ):
+        raise UgiMorphologyProgramError("declared attached-tree program is infeasible")
+    scores = logits.to(torch.float64)
+    suffix: list[dict[tuple[int, int], Any]] = [dict() for _ in range(node_count + 1)]
+    suffix[node_count][(0, 0)] = scores.new_tensor(0.0)
+    for position in range(node_count - 1, -1, -1):
+        positions_including_current = node_count - position
+        for pending in range(1, positions_including_current + 1):
+            for budget in range(junction_budget + 1):
+                candidates = []
+                for children in range(maximum_children + 1):
+                    state = _attached_choice_valid(
+                        position=position,
+                        pending=pending,
+                        remaining_budget=budget,
+                        children=children,
+                        node_count=node_count,
+                    )
+                    if state is not None and state in suffix[position + 1]:
+                        candidates.append(scores[position, children] + suffix[position + 1][state])
+                if candidates:
+                    suffix[position][(pending, budget)] = torch.stack(candidates).max()
+    initial = (attachment_count, junction_budget)
+    if initial not in suffix[0]:
+        raise UgiMorphologyProgramError("exact attached-tree decoder found no completion")
+
+    output = np.zeros(node_count, dtype=np.int64)
+    pending, remaining_budget = initial
+    for position in range(node_count):
+        candidates: list[tuple[float, int, tuple[int, int]]] = []
+        for children in range(maximum_children + 1):
+            state = _attached_choice_valid(
+                position=position,
+                pending=pending,
+                remaining_budget=remaining_budget,
+                children=children,
+                node_count=node_count,
+            )
+            if state is None or state not in suffix[position + 1]:
+                continue
+            value = float((scores[position, children] + suffix[position + 1][state]).item())
+            # Lower child counts win exact ties.  This makes the contract deterministic across
+            # devices without changing any non-tied neural preference.
+            candidates.append((value, -children, state))
+        if not candidates:
+            raise UgiMorphologyProgramError("exact attached-tree traceback lost feasibility")
+        _, negative_children, state = max(candidates)
+        children = -negative_children
+        output[position] = children
+        pending, remaining_budget = state
+    if not attached_tree_matches_program(
+        output,
+        node_count=node_count,
+        junction_budget=junction_budget,
+        attachment_count=attachment_count,
+    ):
+        raise UgiMorphologyProgramError("exact attached-tree decoder violated its contract")
+    return output
+
+
 def sample_attached_offspring_with_exact_budget(
     logits: Any,
     *,
