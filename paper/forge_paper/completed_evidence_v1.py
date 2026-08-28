@@ -1066,20 +1066,19 @@ def render_completed_evidence_v1(
         "\n".join(_common_mean_row(method, common[method]) for method in FORMULATION_METHOD_ORDER)
         + "\n",
     )
-    # A rule before each group, and before our own model so it reads as its own block. Never
-    # before the first heading: that line is the first token of the \input file, and the \hline
-    # preceding the \input would pull it into its lookahead and reject it as a misplaced \noalign.
+    # Reaction-space, then whole-molecule, then matched controls, then our own model, each group
+    # separated by a rule alone. The bold in-table headings these replace cost a row each and
+    # widened column one enough to shrink every number; the reader gets the grouping from the
+    # rules and the ordering. No rule may come first: that line is the first token of the \input
+    # file, and the \hline before the \input pulls it into its lookahead and rejects it there.
     common_benchmark_lines = [
-        r"\textbf{Reaction-space baselines} & & & & & & \\",
         *(
             _common_mean_row(method, common[method])
             for method in REACTION_SPACE_EXTERNAL_METHOD_ORDER
         ),
         r"\midrule",
-        r"\textbf{Whole-molecule baselines} & & & & & & \\",
         *(_common_mean_row(method, common[method]) for method in GENERIC_EXTERNAL_METHOD_ORDER),
         r"\midrule",
-        r"\textbf{Matched controls} & & & & & & \\",
         *(_common_mean_row(method, common[method]) for method in FORMULATION_METHOD_ORDER),
         *_internal_common_lines(common),
     ]

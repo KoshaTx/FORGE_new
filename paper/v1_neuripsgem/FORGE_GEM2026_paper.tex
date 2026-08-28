@@ -179,7 +179,13 @@ directly available, a bounded recursive search returns either a computational sy
 supported by reaction and supplier evidence or an explicit unresolved or search-censored outcome.
 
 We evaluate one shared model across an AGILE-type amine--aldehyde--isocyanide Ugi three-component
-reaction, repeated aza-Michael addition and repeated reductive amination. These experiments test
+reaction, repeated aza-Michael addition and repeated reductive amination. The Ugi reaction joins an
+amine head, an aldehyde and an isocyanide in a single step into an $\alpha$-amino amide carrying two
+hydrophobic regions \citep{xu2024agile}. The other two attach hydrophobic components one at a time to
+the reactive amines of a single head, by conjugate addition of an amine to an acrylate
+\citep{li2023combinatorial} or by reductive amination of an aldehyde \citep{xue2024barcoding}. Each
+hydrophobic component carries one reactive handle, so the head's reactive sites bound how many
+attach. These experiments test
 generalization across specified reaction programs, not zero-shot support for arbitrary chemistry.
 This short paper reports the principal computational findings; Appendix~\ref{app:preliminaries}
 through Appendix~\ref{app:atlas} give the complete formulation, the full reporting contract, the
@@ -224,18 +230,14 @@ available starting material; otherwise it abstains.
 \resizebox{\textwidth}{!}{\input{../v1/figures/forge_algorithm_schematic/schematic_body.tex}}
 \caption{\textbf{FORGE generates complete ionizable-lipid graphs within reaction-program
 coordinates.}
-The reaction program specifies how molecular regions participate in an assembly without choosing
-their structures from a finite inventory.
-FORGE generates the complete molecular graph, verifies that the specified reaction reconstructs it,
-and recursively expands unavailable precursors until every branch terminates in evidence-qualified
-starting materials or the framework abstains.
-$\Pi_P$ restores every coordinate the reaction program fixes and leaves the rest at the values
-just sampled.
-Haloed positions are the reaction-core positions $k_i$ marks.
-In the Ugi-core inset, each atom carries the colour of the component it comes from; the carbonyl
-oxygen is grey because the assembly template introduces it and no precursor contributes it.
-Exact replay and route closure are computational checks and do not establish experimental synthesis
-success.}
+A reaction program specifies how molecular regions participate in an assembly without choosing their
+structures from a finite inventory. FORGE generates the whole graph, verifies that the specified
+reaction reconstructs it, then recursively expands unavailable precursors, terminating each branch
+in an evidence-qualified starting material or an explicit abstention.
+$\Pi_P$ restores the coordinates the program fixes and leaves the rest as sampled; haloed positions
+are the reaction-core positions $k_i$ marks. In the Ugi-core inset each atom takes the colour of its
+source component, and the carbonyl oxygen is grey because the template introduces it.
+Replay and route closure are computational checks, not evidence of experimental synthesis.}
 \label{fig:forge-overview}
 \end{figure*}
 
@@ -392,20 +394,27 @@ training catalogue. The whole-molecule baselines have no reaction program, so th
 same post-hoc assessment applied to every method.
 $\dagger$, a zero imposed by a finite component action space, not an empirical
 failure; N/E, not estimable. No published values from the original baseline papers are inserted.
+$\uparrow$ marks a column in which higher is better. Diversity carries no arrow because it is
+diagnostic rather than directional: high mean pairwise distance over a collapsed effective
+component count is not a better result, and is read against $N_{\mathrm{eff}}$ in Table~\ref{tab:production-comparison}.
 Definitions and seed-level values: Appendix~\ref{app:results}.}
 \label{tab:ugi-common-benchmark}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.2pt}
-% The generated rows put long italic group labels in column 1. Left unconstrained they set the
-% table's natural width, and \resizebox then shrinks every number to about 5pt. Fixing column 1
-% lets the numeric columns, not the labels, decide the scale.
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.45cm}cccccc@{}}
+% Column 1 is fixed so the numeric columns, not the model names, decide the table's natural
+% width. The generated rows separate the three baseline groups with a rule and no heading.
+% 3.3cm is the widest model name ("Learned inventory selector", 92.4pt) plus a little; the
+% \resizebox is a guard, since the header arrows push the natural width just past the block.
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}cccccc@{}}
 \toprule
-Method & Valid & Exact L1 & Unique L1 & Open-ended & Held-comp. & Diversity \\
+Models & Valid $\uparrow$ & Exact L1 $\uparrow$ & Unique L1 $\uparrow$ & Open-ended $\uparrow$ &
+Held-comp. $\uparrow$ & Diversity \\
 \midrule
 \input{../v1/generated/common_ugi_benchmark_completed_rows.tex}%
 \end{tabular}
+}
 \end{table}
 
 \paragraph{Recursive synthesis programs connect generated lipids to evidence-qualified materials.}
@@ -1130,18 +1139,25 @@ Results are never pooled across reaction programs.}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
+% Transposed against generated/production_comparison_rows.tex, which is still written arm-major:
+% metrics are the rows and the ten program/arm combinations are the columns. The cells are
+% therefore inlined rather than \input and do not track that artifact. Re-render it with
+% `cli paper render-completed-evidence-v1` and these numbers must be re-copied by hand.
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{llcccccc}
+\begin{tabular}{@{}lcccccccccc@{}}
 \hline
-Program & Arm &
-Valid./Conn. &
-Decomp./Replay &
-Abst./Ambig. &
-Exact-L1/attempt &
-Whole/Comp. novelty &
-Diversity/$N_{\mathrm{eff}}$ \\
+& \multicolumn{4}{c}{Ugi} & \multicolumn{3}{c}{Aza-Michael}
+& \multicolumn{3}{c}{Reductive amination} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+& Ugi-only & FORGE & Shared null & Cyclic & FORGE & Shared null & Cyclic
+& FORGE & Shared null & Cyclic \\
 \hline
-\input{../v1/generated/production_comparison_rows.tex}%
+Valid./Conn. & 28.0/28.0 & \cellcolor{forgerow}86.6/86.6 & 19.5/19.5 & 43.4/43.4 & \cellcolor{forgerow}77.5/77.5 & 16.5/16.5 & 25.7/25.7 & \cellcolor{forgerow}36.5/36.5 & 15.4/15.4 & 21.4/21.4 \\
+Decomp./Replay & 89.9/100.0 & \cellcolor{forgerow}90.7/100.0 & 58.8/100.0 & 92.7/100.0 & \cellcolor{forgerow}100.0/100.0 & 24.3/100.0 & 15.2/100.0 & \cellcolor{forgerow}84.3/100.0 & 85.4/100.0 & 84.9/100.0 \\
+Abst./Ambig. & 10.1/0.0 & \cellcolor{forgerow}9.3/0.0 & 41.2/0.0 & 7.3/0.0 & \cellcolor{forgerow}0.0/54.9 & 75.7/0.1 & 84.8/0.0 & \cellcolor{forgerow}15.7/74.1 & 14.6/70.7 & 15.1/74.6 \\
+Exact-L1/attempt & $25.4\pm12.0$ & \cellcolor{forgerow}$78.7\pm10.1$ & $11.4\pm1.1$ & $40.2\pm0.7$ & \cellcolor{forgerow}$77.5\pm3.7$ & $4.0\pm0.8$ & $3.8\pm0.6$ & \cellcolor{forgerow}$31.3\pm14.3$ & $13.2\pm1.3$ & $18.1\pm0.8$ \\
+Whole/Comp. novelty & 99.8/92.4 & \cellcolor{forgerow}99.8/96.2 & 100.0/99.9 & 99.9/90.1 & \cellcolor{forgerow}99.7/99.2 & 99.9/99.7 & 99.8/98.3 & \cellcolor{forgerow}98.1/100.0 & 99.5/100.0 & 96.2/100.0 \\
+Diversity/$N_{\mathrm{eff}}$ & 0.597/134.8 & \cellcolor{forgerow}0.621/320.8 & 0.754/219.9 & 0.562/138.0 & \cellcolor{forgerow}0.521/156.9 & 0.635/111.3 & 0.388/51.5 & \cellcolor{forgerow}0.624/102.9 & 0.615/77.2 & 0.570/34.8 \\
 \end{tabular}
 }
 \end{table*}
@@ -1256,7 +1272,7 @@ does not establish detectable cross-role dependence in the present data.
 The five Transformer intervention rows change only the named mechanism from the full model; the two
 FACT rows instead generate precursor roles independently at matched or increased capacity. All arms
 use identical data folds, corruption, context schedule, checkpoint rule and sampling budget. Entries
-report the mean and [95\% seed-bootstrap interval] across three independent training seeds.
+report the mean $\pm$ sample standard deviation across three independent training seeds.
 Held-out loss is the mean denoising loss at $t=0.5$ across the three component-disjoint program partitions.
 Cross-role fidelity is the Frobenius distance to the held-out residualized descriptor matrix, for
 which lower values indicate closer agreement. Exact-L1 yields use all 3,072 attempts per program
@@ -1265,7 +1281,7 @@ and seed as the denominator.}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.0pt}
-\makebox[\textwidth][c]{\resizebox{1.34\textwidth}{!}{%
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}ccccccc@{}}
 \hline
 Arm &
@@ -1279,7 +1295,7 @@ Diversity \\
 \hline
 \input{../v1/generated/architecture_ablation_rows.tex}%
 \end{tabular}
-}}
+}
 \end{table*}
 
 Removing layerwise program cross-attention reduced mean exact-L1 yield by 54.5 products per 1,000
@@ -1353,21 +1369,28 @@ as paired resampling units.}
 \label{tab:catalogue-comparison}
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2.4pt}
-\makebox[\textwidth][c]{\resizebox{1.34\textwidth}{!}{%
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{1.7cm}ccccccc@{}}
+\setlength{\tabcolsep}{4pt}
+% Transposed against generated/catalogue_comparison_rows.tex, which is still written row-major:
+% seven metrics against six arms overruns the text block as columns and fits as rows. The cells
+% are therefore inlined rather than \input, and do not track that artifact. Re-render it with
+% `cli paper render-completed-evidence-v1` and these numbers must be re-copied by hand.
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccc@{}}
 \hline
-Program & Method & Valid/1k &
-Exact L1/1k &
-Unique L1/1k &
-Open-ended/1k &
-Whole nov. &
-Comp. nov. &
-Diversity/$N_{\mathrm{eff}}$ \\
+& \multicolumn{2}{c}{Ugi} & \multicolumn{2}{c}{Aza-Michael}
+& \multicolumn{2}{c}{Reductive amination} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+& FORGE & Finite cat. & FORGE & Finite cat. & FORGE & Finite cat. \\
 \hline
-\input{../v1/generated/catalogue_comparison_rows.tex}%
+Valid/1k & \cellcolor{forgerow}866.0 & 1000.0 & \cellcolor{forgerow}774.6 & 723.2 & \cellcolor{forgerow}365.0 & 1000.0 \\
+Exact L1/1k & \cellcolor{forgerow}786.8 & 1000.0 & \cellcolor{forgerow}774.6 & 723.2 & \cellcolor{forgerow}312.7 & 1000.0 \\
+Unique L1/1k & \cellcolor{forgerow}751.2 & 837.6 & \cellcolor{forgerow}738.0 & 147.5 & \cellcolor{forgerow}279.7 & 52.1 \\
+Open-ended/1k & \cellcolor{forgerow}729.3 & 0.0 & \cellcolor{forgerow}313.9 & 0.0 & \cellcolor{forgerow}34.8 & 0.0 \\
+Whole nov. & \cellcolor{forgerow}99.8 & 16.9 & \cellcolor{forgerow}99.7 & 39.8 & \cellcolor{forgerow}98.1 & 44.8 \\
+Comp. nov. & \cellcolor{forgerow}96.2 & 0.0 & \cellcolor{forgerow}99.2 & 0.0 & \cellcolor{forgerow}100.0 & 0.0 \\
+Diversity/$N_{\mathrm{eff}}$ & \cellcolor{forgerow}0.621/320.8 & 0.719/86.4 & \cellcolor{forgerow}0.521/156.9 & 0.402/23.4 & \cellcolor{forgerow}0.624/102.9 & 0.514/16.9 \\
 \end{tabular}
-}}
+}
 \end{table}
 \begin{figure}[H]
 \centering
@@ -1618,32 +1641,6 @@ Method & Valid products & Decomp. coverage & Replay precision & Abstention & Amb
 \input{../v1/generated/common_ugi_decomposition_rows.tex}%
 \end{tabular}
 \end{table}
-
-\begin{table}[H]
-\caption{\textbf{Finite component inventories and source-product coverage.}
-Inventory size counts unique constitutional components visible to the method at generation time.
-Product coverage requires that every required role component is present in that inventory.
-The held-component fold is never used to construct an inventory.}
-\label{tab:baseline-inventory-coverage}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{4.0pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccc}
-\hline
-Method & Amine & Aldehyde & Isocyanide & Train coverage & Calibration coverage & Held-comp. coverage \\
-\hline
-\input{../v1/generated/inventory_coverage_completed_rows.tex}%
-Shared-null + post-hoc & N/P & N/P & N/P & N/P & N/P & N/P \\
-FACT-matched & N/P & N/P & N/P & N/P & N/P & N/P \\
-FACT-generous & N/P & N/P & N/P & N/P & N/P & N/P \\
-FORGE Transformer & N/P & N/P & N/P & N/P & N/P & N/P \\
-\hline
-\end{tabular}
-}
-\end{table}
-
-\clearpage
 
 \clearpage
 

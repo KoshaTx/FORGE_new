@@ -59,5 +59,6 @@ def test_v1_renderer_writes_only_hash_verified_seed_rows(tmp_path) -> None:
     output = repo / "generated"
     result = render_v1_results(config, repo, rows, output, strict=False)
     assert result["status"] == "partial_nonpublication_preview"
-    assert (output / "common_ugi_benchmark_rows.tex").read_text().startswith("Method & 1.00")
+    # One seed, so the cell is the bare mean: no $\pm$ spread is asserted from a single sample.
+    assert (output / "common_ugi_benchmark_rows.tex").read_text().startswith("Method & $1.0$")
     assert result["candidate_selection"] is False

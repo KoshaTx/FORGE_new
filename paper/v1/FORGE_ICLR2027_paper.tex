@@ -1028,7 +1028,7 @@ does not establish detectable cross-role dependence in the present data.
 The five Transformer intervention rows change only the named mechanism from the full model; the two
 FACT rows instead generate precursor roles independently at matched or increased capacity. All arms
 use identical data folds, corruption, context schedule, checkpoint rule and sampling budget. Entries
-report the mean and [95\% seed-bootstrap interval] across three independent training seeds.
+report the mean $\pm$ sample standard deviation across three independent training seeds.
 Held-out loss is the mean denoising loss at $t=0.5$ across the three component-disjoint program partitions.
 Cross-role fidelity is the Frobenius distance to the held-out residualized descriptor matrix, for
 which lower values indicate closer agreement. Exact-L1 yields use all 3,072 attempts per program
@@ -1037,7 +1037,7 @@ and seed as the denominator.}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.0pt}
-\makebox[\textwidth][c]{\resizebox{1.34\textwidth}{!}{%
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}ccccccc@{}}
 \hline
 Arm &
@@ -1051,7 +1051,7 @@ Diversity \\
 \hline
 \input{generated/architecture_ablation_rows.tex}%
 \end{tabular}
-}}
+}
 \end{table*}
 
 Removing layerwise program cross-attention reduced mean exact-L1 yield by 54.5 products per 1,000

@@ -28,7 +28,11 @@ def test_completed_evidence_renderer_uses_only_pinned_nonselecting_results(tmp_p
         "Learned inventory selector" in (generated / "common_ugi_formulation_rows.tex").read_text()
     )
     benchmark = (generated / "common_ugi_benchmark_completed_rows.tex").read_text()
-    assert "Reaction-space external baselines" in benchmark
+    # The group headings are named in the caption, not in the table, so the groups are asserted
+    # through a member of each: reaction-space, whole-molecule, matched control, then our own.
+    assert "RGFN" in benchmark
+    assert "DeFoG unconditional" in benchmark
+    assert "Finite catalogue oracle" in benchmark
     assert "FORGE Transformer" in benchmark
     assert "N/E" in (generated / "common_ugi_decomposition_rows.tex").read_text()
     assert "DeFoG unconditional" in (generated / "lipid_realism_rows.tex").read_text()

@@ -395,6 +395,7 @@ def _bootstrap_summary(
         if len(available) != len(values):
             output[metric] = {
                 "mean": None,
+                "sd": None,
                 "ci95_low": None,
                 "ci95_high": None,
                 "available_seeds": len(available),
@@ -405,6 +406,10 @@ def _bootstrap_summary(
         bootstraps = vector[indices].mean(axis=1)
         output[metric] = {
             "mean": float(vector.mean()),
+            # Sample sd, matching the mean $\pm$ sd the other tables report. The bootstrap
+            # bounds are still carried in the ledger: at three seeds a 95% percentile interval
+            # is pinned to [min, max], since the all-minimum resample already holds 1/27.
+            "sd": float(vector.std(ddof=1)) if len(vector) > 1 else None,
             "ci95_low": float(np.quantile(bootstraps, 0.025)),
             "ci95_high": float(np.quantile(bootstraps, 0.975)),
             "available_seeds": len(available),
@@ -419,7 +424,10 @@ def _tex_escape(value: str) -> str:
 def _tex_metric(value: Mapping[str, float | int | None]) -> str:
     if value["mean"] is None:
         return "N/R"
-    return f"{value['mean']:.2f} [{value['ci95_low']:.2f}, {value['ci95_high']:.2f}]"
+    if value["sd"] is None:
+        # One seed carries no spread; printing $\pm0.0$ would assert a variance we did not measure.
+        return rf"${value['mean']:.1f}$"
+    return rf"${value['mean']:.1f}\pm{value['sd']:.1f}$"
 
 
 def _write_tex_rows(
