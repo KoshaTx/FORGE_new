@@ -639,6 +639,95 @@ def attached_program_feasible(
     return (0, 0) in states
 
 
+@dataclass(frozen=True)
+class _AttachedProgramSchedule:
+    """Transition structure of the exact attached-tree dynamic program.
+
+    Which ``(pending, budget, incoming_run)`` states are reachable, and which child count moves
+    between them, is decided entirely by the declared program coordinates.  It does not depend on
+    a single neural score.  Enumerating it once per program shape and reusing it turns the
+    per-sample cost from a Python walk over every state-and-child pair into a handful of tensor
+    operations, without changing which terms are combined or in what order.
+    """
+
+    states: tuple[tuple[tuple[int, int, int], ...], ...]
+    transitions: tuple[np.ndarray, ...]
+    initial_index: int | None
+
+
+@cache
+def _attached_program_schedule(
+    *,
+    node_count: int,
+    junction_budget: int,
+    maximum_children: int,
+    attachment_count: int,
+    branch_limit: int,
+) -> _AttachedProgramSchedule:
+    """Enumerate the reachable suffix states and their child-indexed successors."""
+
+    # A branch-run budget at least as large as the tree can never bind: the run counter increases
+    # by at most one per position, so ``next_run`` is bounded by ``node_count``.  Every state that
+    # the traceback can actually reach then has a suffix value independent of its run coordinate,
+    # by backward induction from the all-zero terminal row.  Carrying the coordinate anyway
+    # multiplies the state space by ``node_count`` and computes each value ``node_count`` times.
+    unbounded_runs = branch_limit >= node_count
+    run_values = (0,) if unbounded_runs else tuple(range(branch_limit + 1))
+    terminal_states = tuple((0, 0, run) for run in run_values)
+    states: list[tuple[tuple[int, int, int], ...]] = [()] * (node_count + 1)
+    states[node_count] = terminal_states
+    transitions: list[np.ndarray] = [
+        np.empty((0, maximum_children + 1), dtype=np.int64) for _ in range(node_count)
+    ]
+    index_by_state: dict[tuple[int, int, int], int] = {
+        state: index for index, state in enumerate(terminal_states)
+    }
+    for position in range(node_count - 1, -1, -1):
+        positions_including_current = node_count - position
+        current: list[tuple[int, int, int]] = []
+        rows: list[list[int]] = []
+        for pending in range(1, positions_including_current + 1):
+            for budget in range(junction_budget + 1):
+                for incoming_run in run_values:
+                    row = [-1] * (maximum_children + 1)
+                    present = False
+                    for children in range(maximum_children + 1):
+                        state = _attached_choice_valid(
+                            position=position,
+                            pending=pending,
+                            remaining_budget=budget,
+                            children=children,
+                            node_count=node_count,
+                        )
+                        next_run = incoming_run + 1 if children >= 2 else 0
+                        successor_run = 0 if unbounded_runs else next_run
+                        suffix_state = None if state is None else (*state, successor_run)
+                        if (
+                            (unbounded_runs or next_run <= branch_limit)
+                            and suffix_state is not None
+                            and suffix_state in index_by_state
+                        ):
+                            row[children] = index_by_state[suffix_state]
+                            present = True
+                    if present:
+                        current.append((pending, budget, incoming_run))
+                        rows.append(row)
+        states[position] = tuple(current)
+        transitions[position] = (
+            np.asarray(rows, dtype=np.int64)
+            if rows
+            else np.empty((0, maximum_children + 1), dtype=np.int64)
+        )
+        index_by_state = {state: index for index, state in enumerate(current)}
+    initial_state = (attachment_count, junction_budget, 0)
+    initial_index = states[0].index(initial_state) if initial_state in set(states[0]) else None
+    return _AttachedProgramSchedule(
+        states=tuple(states),
+        transitions=tuple(transitions),
+        initial_index=initial_index,
+    )
+
+
 def _sample_attached_offspring_with_exact_budget(
     logits: Any,
     *,
@@ -670,86 +759,51 @@ def _sample_attached_offspring_with_exact_budget(
     branch_limit = (
         node_count if maximum_adjacent_branch_run is None else maximum_adjacent_branch_run
     )
-    suffix: list[dict[tuple[int, int, int], Any]] = [dict() for _ in range(node_count + 1)]
-    for incoming_run in range(branch_limit + 1):
-        suffix[node_count][(0, 0, incoming_run)] = logits.new_tensor(
-            0.0,
-            dtype=torch.float64,
-        )
-    for position in range(node_count - 1, -1, -1):
-        positions_including_current = node_count - position
-        for pending in range(1, positions_including_current + 1):
-            for budget in range(junction_budget + 1):
-                for incoming_run in range(branch_limit + 1):
-                    terms = []
-                    for children in range(maximum_children + 1):
-                        state = _attached_choice_valid(
-                            position=position,
-                            pending=pending,
-                            remaining_budget=budget,
-                            children=children,
-                            node_count=node_count,
-                        )
-                        next_run = incoming_run + 1 if children >= 2 else 0
-                        suffix_state = None if state is None else (*state, next_run)
-                        if (
-                            next_run <= branch_limit
-                            and suffix_state is not None
-                            and suffix_state in suffix[position + 1]
-                        ):
-                            terms.append(
-                                log_probabilities[position, children]
-                                + suffix[position + 1][suffix_state]
-                            )
-                    if terms:
-                        suffix[position][(pending, budget, incoming_run)] = torch.logsumexp(
-                            torch.stack(terms),
-                            dim=0,
-                        )
-    initial_state = (attachment_count, junction_budget, 0)
-    if initial_state not in suffix[0]:
+    schedule = _attached_program_schedule(
+        node_count=int(node_count),
+        junction_budget=int(junction_budget),
+        maximum_children=int(maximum_children),
+        attachment_count=int(attachment_count),
+        branch_limit=int(branch_limit),
+    )
+    if schedule.initial_index is None:
         raise UgiMorphologyProgramError(
             "exact attached-tree decoder found no branch-run-compatible completion"
         )
 
+    # Backward pass.  Every reachable state at one position is combined in a single reduction over
+    # the child axis.  Absent moves carry -inf, which contributes exp(-inf) = 0 to the logsumexp
+    # sum and is therefore an exact additive identity: the surviving terms are the same float64
+    # values, in the same child order, as the per-state stack this replaces.
+    suffix_values: list[Any] = [None] * (node_count + 1)
+    suffix_values[node_count] = log_probabilities.new_zeros(len(schedule.states[node_count]))
+    for position in range(node_count - 1, -1, -1):
+        transition = torch.from_numpy(schedule.transitions[position])
+        valid = transition >= 0
+        gathered = suffix_values[position + 1][transition.clamp(min=0)]
+        terms = log_probabilities[position][None, :] + gathered
+        suffix_values[position] = torch.logsumexp(terms.masked_fill(~valid, -torch.inf), dim=1)
+
     output = np.zeros(node_count, dtype=np.int64)
-    pending = attachment_count
-    remaining_budget = junction_budget
-    current_branch_run = 0
+    state_index = schedule.initial_index
     for position in range(node_count):
-        choices = []
-        states = []
-        weights = []
-        for children in range(maximum_children + 1):
-            state = _attached_choice_valid(
-                position=position,
-                pending=pending,
-                remaining_budget=remaining_budget,
-                children=children,
-                node_count=node_count,
-            )
-            next_run = current_branch_run + 1 if children >= 2 else 0
-            suffix_state = None if state is None else (*state, next_run)
-            if (
-                next_run > branch_limit
-                or suffix_state is None
-                or suffix_state not in suffix[position + 1]
-            ):
-                continue
-            choices.append(children)
-            states.append(suffix_state)
-            weights.append(
-                log_probabilities[position, children] + suffix[position + 1][suffix_state]
-            )
+        transition = schedule.transitions[position][state_index]
+        choices = np.flatnonzero(transition >= 0)
+        # The same two float64 numbers, added in the same ascending-child order as the per-choice
+        # stack this replaces, so the softmax and the generator draw are unchanged.
+        weights = (
+            log_probabilities[position][torch.from_numpy(choices)]
+            + suffix_values[position + 1][torch.from_numpy(transition[choices])]
+        )
         selected = int(
             torch.multinomial(
-                torch.stack(weights).softmax(dim=0),
+                weights.softmax(dim=0),
                 1,
                 generator=generator,
             )
         )
-        output[position] = choices[selected]
-        pending, remaining_budget, current_branch_run = states[selected]
+        output[position] = int(choices[selected])
+        state_index = int(transition[choices[selected]])
     if not attached_tree_matches_program(
         output,
         node_count=node_count,

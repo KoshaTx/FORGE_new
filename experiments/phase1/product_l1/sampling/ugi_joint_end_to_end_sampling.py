@@ -110,12 +110,12 @@ def _validate_reference_comparison_mode(mode: str) -> None:
         )
 
 
-def _resolve_prepared_cache_path(
+def _resolve_prepared_cache(
     repo: Path,
     joint_checkpoint: dict[str, Any],
     prepared_cache_path: Path | None,
-) -> Path | None:
-    """Resolve a checkpoint's pinned cache without trusting a machine-local training path."""
+) -> tuple[Path, str] | None:
+    """Resolve and authenticate a checkpoint's pinned cache, returning its verified digest."""
 
     cache_record = joint_checkpoint.get("inputs", {}).get("prepared_cache")
     if cache_record is None:
@@ -142,7 +142,40 @@ def _resolve_prepared_cache_path(
             "prepared training cache differs from the checkpoint pin: "
             f"expected {expected}, observed {observed}"
         )
-    return cache_path
+    return cache_path, observed
+
+
+def _resolve_prepared_cache_path(
+    repo: Path,
+    joint_checkpoint: dict[str, Any],
+    prepared_cache_path: Path | None,
+) -> Path | None:
+    """Resolve a checkpoint's pinned cache without trusting a machine-local training path."""
+
+    resolved = _resolve_prepared_cache(repo, joint_checkpoint, prepared_cache_path)
+    return None if resolved is None else resolved[0]
+
+
+_PREPARED_CORPUS_CACHE: dict[tuple[str, str], Any] = {}
+
+
+def _load_prepared_corpus(cache_path: Path, cache_sha256: str) -> Any:
+    """Return the pinned corpus, unpickling one prepared cache at most once per process.
+
+    A sampling run is sharded, and each shard previously unpickled the whole multi-hundred-megabyte
+    training cache again to read two small immutable attributes from it: the atom vocabulary and
+    the Ugi core schema.  The key is the caller's already-verified SHA-256 of that file, so a hit
+    means identical authenticated bytes and cannot produce a different corpus.  Only the corpus is
+    retained; the per-fold training records are not, so the training folds are not held resident
+    between shards.
+    """
+
+    key = (str(cache_path.resolve()), cache_sha256)
+    corpus = _PREPARED_CORPUS_CACHE.get(key)
+    if corpus is None:
+        corpus, _ = load_ugi_training_cache(cache_path)
+        _PREPARED_CORPUS_CACHE[key] = corpus
+    return corpus
 
 
 def _complete_reference_comparison(
@@ -838,9 +871,9 @@ def sample_ugi_joint_end_to_end(
         ),
     )
     assignment_path = str(joint_checkpoint["inputs"]["assignments"]["path"])
-    cache_path = _resolve_prepared_cache_path(repo, joint_checkpoint, prepared_cache_path)
-    if cache_path is not None:
-        corpus, _ = load_ugi_training_cache(cache_path)
+    resolved_cache = _resolve_prepared_cache(repo, joint_checkpoint, prepared_cache_path)
+    if resolved_cache is not None:
+        corpus = _load_prepared_corpus(*resolved_cache)
     else:
         corpus = _load_expanded_chemistry(repo)
     reference_corpus = None

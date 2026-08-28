@@ -285,6 +285,10 @@ paper/**/figures/**/preview.pdf
 paper/**/figures/**/prev-*.png
 paper/**/figures/**/big-*.png
 
+# Agent worktrees. Each is a full checkout of this repository living inside it, so an
+# unqualified `git add -A` would otherwise stage a copy of the tree into itself.
+.claude/worktrees/
+
 # Local scratch, not part of the project record.
 .codex/
 output/

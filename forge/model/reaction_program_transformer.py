@@ -42,6 +42,20 @@ if nn is not None:
             self.output = nn.Linear(hidden_dim, hidden_dim)
             self.dropout = nn.Dropout(dropout)
 
+        def project_memory(self, memory: Any) -> tuple[Any, Any]:
+            """Project one memory tensor into per-head keys and values.
+
+            Split out so a caller whose memory is constant across many queries can project it once
+            and hand the identical tensors back through ``memory_key_value``.  The arithmetic is
+            the same expression that ``forward`` would evaluate, so reuse is bit-exact rather than
+            merely equivalent.
+            """
+
+            batch, keys, _ = memory.shape
+            k = self.key(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
+            v = self.value(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
+            return k, v
+
         def forward(
             self,
             query: Any,
@@ -50,12 +64,15 @@ if nn is not None:
             query_mask: Any,
             memory_mask: Any,
             attention_bias: Any | None = None,
+            memory_key_value: tuple[Any, Any] | None = None,
         ) -> Any:
             batch, queries, hidden_dim = query.shape
-            keys = memory.shape[1]
             q = self.query(query).reshape(batch, queries, self.heads, self.head_dim).transpose(1, 2)
-            k = self.key(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
-            v = self.value(memory).reshape(batch, keys, self.heads, self.head_dim).transpose(1, 2)
+            if memory_key_value is None:
+                k, v = self.project_memory(memory)
+            else:
+                k, v = memory_key_value
+            keys = k.shape[2]
             if attention_bias is not None:
                 if attention_bias.shape != (batch, self.heads, queries, keys):
                     raise ReactionProgramTransformerError("attention bias shape is inconsistent")
@@ -258,8 +275,16 @@ if nn is not None:
             )
             self.gate = nn.Linear(hidden_dim, expert_count)
 
-        def forward(self, hidden: Any, program_summary: Any) -> tuple[Any, Any]:
-            weights = torch.softmax(self.gate(program_summary), dim=-1)
+        def gate_weights(self, program_summary: Any) -> Any:
+            """Route on the program summary alone, so the routing is constant per program batch."""
+
+            return torch.softmax(self.gate(program_summary), dim=-1)
+
+        def forward(
+            self, hidden: Any, program_summary: Any, *, weights: Any | None = None
+        ) -> tuple[Any, Any]:
+            if weights is None:
+                weights = self.gate_weights(program_summary)
             expert_values = torch.stack([expert(hidden) for expert in self.experts], dim=2)
             update = torch.einsum("be,bned->bnd", weights, expert_values)
             return update, weights
@@ -276,8 +301,14 @@ if nn is not None:
                 nn.Linear(adapter_dim, hidden_dim),
             )
 
-        def forward(self, hidden: Any, program_summary: Any) -> tuple[Any, Any]:
-            weights = program_summary.new_ones((program_summary.shape[0], 1))
+        def gate_weights(self, program_summary: Any) -> Any:
+            return program_summary.new_ones((program_summary.shape[0], 1))
+
+        def forward(
+            self, hidden: Any, program_summary: Any, *, weights: Any | None = None
+        ) -> tuple[Any, Any]:
+            if weights is None:
+                weights = self.gate_weights(program_summary)
             return self.adapter(hidden), weights
 
     class _ZeroInitializedSpecialistAdapter(nn.Module):
@@ -303,6 +334,51 @@ if nn is not None:
 
         def forward(self, hidden: Any) -> Any:
             return self.adapter(hidden)
+
+    class ReactionProgramMemory:
+        """Encoded program semantics plus every projection of them that a batch can reuse.
+
+        The reaction program is clean context: program state, precursor roles, reaction-core
+        positions, depth, adapter mask, repeat groups, component positions and role morphology.
+        None of those move while the graph state is denoised, so for one sampling batch the encoded
+        memory, each block's cross-attention keys and values, and each routed adapter's gate are
+        the same tensors at every one of the flow steps.  Computing them once and handing back the
+        identical tensors is bit-exact reuse, not an approximation.
+
+        Modules are held by strong reference in the cache keys so an ``id`` can never be recycled
+        onto a different module while this memory is alive.
+        """
+
+        __slots__ = ("tokens", "mask", "summary", "_key_values", "_adapter_weights", "_sources")
+
+        def __init__(self, tokens: Any, mask: Any, summary: Any, sources: tuple[Any, ...]) -> None:
+            self.tokens = tokens
+            self.mask = mask
+            self.summary = summary
+            self._sources = sources
+            self._key_values: dict[int, tuple[Any, tuple[Any, Any]]] = {}
+            self._adapter_weights: dict[int, tuple[Any, Any]] = {}
+
+        def matches(self, sources: tuple[Any, ...]) -> bool:
+            """Require the exact conditioning tensors this memory was encoded from."""
+
+            return len(sources) == len(self._sources) and all(
+                left is right for left, right in zip(sources, self._sources, strict=True)
+            )
+
+        def key_value(self, attention: Any) -> tuple[Any, Any]:
+            entry = self._key_values.get(id(attention))
+            if entry is None:
+                entry = (attention, attention.project_memory(self.tokens))
+                self._key_values[id(attention)] = entry
+            return entry[1]
+
+        def adapter_weights(self, adapter: Any) -> Any:
+            entry = self._adapter_weights.get(id(adapter))
+            if entry is None:
+                entry = (adapter, adapter.gate_weights(self.summary))
+                self._adapter_weights[id(adapter)] = entry
+            return entry[1]
 
     class ReactionProgramTransformerBlock(nn.Module):
         """Graph self-attention, program cross-attention and program-routed adaptation."""
@@ -360,6 +436,7 @@ if nn is not None:
             program_summary: Any,
             graph_bias: Any,
             role_states: Any,
+            program_memory: Any | None = None,
         ) -> tuple[Any, Any]:
             normalized = self.self_norm(hidden)
             if self.role_isolated_attention:
@@ -407,10 +484,23 @@ if nn is not None:
                         query_mask=node_mask,
                         memory_mask=program_mask,
                         attention_bias=cross_bias,
+                        memory_key_value=(
+                            None
+                            if program_memory is None
+                            else program_memory.key_value(self.cross_attention)
+                        ),
                     )
                 )
             normalized = self.ffn_norm(hidden)
-            routed, weights = self.routed_adapter(normalized, program_summary)
+            routed, weights = self.routed_adapter(
+                normalized,
+                program_summary,
+                weights=(
+                    None
+                    if program_memory is None
+                    else program_memory.adapter_weights(self.routed_adapter)
+                ),
+            )
             update = self.ffn(normalized) + routed
             if self.specialist_adapter is not None:
                 update = update + self.specialist_adapter(normalized)
@@ -582,6 +672,71 @@ if nn is not None:
             relations[active_batches, active_right, active_left] = 4
             return self.relation_bias(relations).permute(0, 3, 1, 2)
 
+        @staticmethod
+        def _program_memory_sources(
+            *,
+            program_states: Any,
+            role_states: Any,
+            core_position_states: Any,
+            program_depths: Any,
+            adapter_mask: Any,
+            repeat_group_states: Any | None,
+            component_position_states: Any | None,
+            role_morphology_states: Any | None,
+        ) -> tuple[Any, ...]:
+            return (
+                program_states,
+                role_states,
+                core_position_states,
+                program_depths,
+                adapter_mask,
+                repeat_group_states,
+                component_position_states,
+                role_morphology_states,
+            )
+
+        def prepare_program_memory(
+            self,
+            *,
+            program_states: Any,
+            role_states: Any,
+            core_position_states: Any,
+            program_depths: Any,
+            adapter_mask: Any,
+            repeat_group_states: Any | None = None,
+            component_position_states: Any | None = None,
+            role_morphology_states: Any | None = None,
+        ) -> Any:
+            """Encode the batch's reaction program once for reuse across its denoising steps.
+
+            Hand the result to ``forward(..., program_memory=...)`` with the *same* conditioning
+            tensor objects.  ``forward`` verifies that identity and fails closed otherwise, so a
+            stale memory cannot silently condition a different batch.
+            """
+
+            sources = self._program_memory_sources(
+                program_states=program_states,
+                role_states=role_states,
+                core_position_states=core_position_states,
+                program_depths=program_depths,
+                adapter_mask=adapter_mask,
+                repeat_group_states=repeat_group_states,
+                component_position_states=component_position_states,
+                role_morphology_states=role_morphology_states,
+            )
+            tokens, mask, summary = self.program_encoder(
+                program_states=program_states,
+                role_states=role_states,
+                core_position_states=core_position_states,
+                program_depths=program_depths,
+                adapter_mask=adapter_mask,
+                role_isolated_attention=self.role_isolated_attention,
+                repeat_group_states=repeat_group_states,
+                component_position_states=component_position_states,
+                role_morphology_states=role_morphology_states,
+            )
+            return ReactionProgramMemory(tokens, mask, summary, sources)
+
         def forward(
             self,
             *,
@@ -604,19 +759,38 @@ if nn is not None:
             component_position_states: Any | None = None,
             component_instance_states: Any | None = None,
             role_morphology_states: Any | None = None,
+            program_memory: Any | None = None,
         ) -> dict[str, Any]:
             del component_instance_states  # Loss-only coordinate; never a learned identity token.
-            program_tokens, program_mask, program_summary = self.program_encoder(
-                program_states=program_states,
-                role_states=role_states,
-                core_position_states=core_position_states,
-                program_depths=program_depths,
-                adapter_mask=adapter_mask,
-                role_isolated_attention=self.role_isolated_attention,
-                repeat_group_states=repeat_group_states,
-                component_position_states=component_position_states,
-                role_morphology_states=role_morphology_states,
-            )
+            if program_memory is None:
+                program_memory = self.prepare_program_memory(
+                    program_states=program_states,
+                    role_states=role_states,
+                    core_position_states=core_position_states,
+                    program_depths=program_depths,
+                    adapter_mask=adapter_mask,
+                    repeat_group_states=repeat_group_states,
+                    component_position_states=component_position_states,
+                    role_morphology_states=role_morphology_states,
+                )
+            elif not program_memory.matches(
+                self._program_memory_sources(
+                    program_states=program_states,
+                    role_states=role_states,
+                    core_position_states=core_position_states,
+                    program_depths=program_depths,
+                    adapter_mask=adapter_mask,
+                    repeat_group_states=repeat_group_states,
+                    component_position_states=component_position_states,
+                    role_morphology_states=role_morphology_states,
+                )
+            ):
+                raise ReactionProgramTransformerError(
+                    "supplied program memory was encoded from different conditioning tensors"
+                )
+            program_tokens = program_memory.tokens
+            program_mask = program_memory.mask
+            program_summary = program_memory.summary
             hidden = (
                 self.state.node_embedding(nodes) + self.state.time_embedding(t[:, None])[:, None]
             )
@@ -641,6 +815,7 @@ if nn is not None:
                         program_summary=program_summary,
                         graph_bias=graph_bias,
                         role_states=role_states,
+                        program_memory=program_memory,
                     )
                     expert_weights.append(weights)
             else:
@@ -659,6 +834,7 @@ if nn is not None:
                             program_summary=program_summary,
                             graph_bias=graph_bias,
                             role_states=role_states,
+                            program_memory=program_memory,
                         )
                         hidden = torch.where(role_mask[:, :, None], candidate, hidden)
                         layer_weights.append(weights)
@@ -677,7 +853,9 @@ if nn is not None:
                 )
                 terminal_mask = node_mask & (child_counts == 0)
                 terminal_update, terminal_expert_weights = self.terminal_chemistry_adapter(
-                    hidden, program_summary
+                    hidden,
+                    program_summary,
+                    weights=program_memory.adapter_weights(self.terminal_chemistry_adapter),
                 )
                 chemistry_hidden = hidden + terminal_update * terminal_mask[:, :, None]
 
@@ -721,7 +899,9 @@ if nn is not None:
             closure_expert_weights = None
             if self.closure_output_adapter is not None:
                 closure_update, closure_expert_weights = self.closure_output_adapter(
-                    closure_hidden, program_summary
+                    closure_hidden,
+                    program_summary,
+                    weights=program_memory.adapter_weights(self.closure_output_adapter),
                 )
                 closure_hidden = closure_hidden + closure_update
             closure_key = self.state.closure_node_key(hidden)

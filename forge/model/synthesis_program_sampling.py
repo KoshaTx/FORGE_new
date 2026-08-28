@@ -210,6 +210,50 @@ def _restore_fixed_states_in_place(
     return state
 
 
+def _program_conditioning(model: Any, layout: Mapping[str, Any]) -> dict[str, Any]:
+    """Freeze one batch's clean program context, encoding it once where the model allows reuse.
+
+    Every coordinate here is layout semantics: masks, program state, precursor roles, reaction-core
+    positions, depth, repeat groups, component positions and role morphology.  None of them is
+    denoised, so they are identical at all `sample_steps` calls and at the terminal call.  Models
+    that expose ``prepare_program_memory`` additionally return their encoded program tokens, the
+    per-block cross-attention projections of those tokens and the per-adapter routing weights, all
+    of which are functions of these same fixed coordinates.  The model validates that the memory
+    was built from these exact tensors and fails closed otherwise.
+    """
+
+    conditioning = {
+        field: layout[field]
+        for field in (
+            "node_mask",
+            "child_mask",
+            "closure_mask",
+            "program_states",
+            "role_states",
+            "core_position_states",
+            "program_depths",
+            "adapter_mask",
+            "repeat_group_states",
+            "component_position_states",
+            "component_instance_states",
+            "role_morphology_states",
+        )
+    }
+    prepare = getattr(model, "prepare_program_memory", None)
+    if prepare is not None:
+        conditioning["program_memory"] = prepare(
+            program_states=layout["program_states"],
+            role_states=layout["role_states"],
+            core_position_states=layout["core_position_states"],
+            program_depths=layout["program_depths"],
+            adapter_mask=layout["adapter_mask"],
+            repeat_group_states=layout["repeat_group_states"],
+            component_position_states=layout["component_position_states"],
+            role_morphology_states=layout["role_morphology_states"],
+        )
+    return conditioning
+
+
 def _initial_state(
     layout: Mapping[str, Any],
     node_marginal: Any,
@@ -292,6 +336,9 @@ def _fixed_state_exact_records(
         "closure_right": ("fixed_closure_bond_mask", "closure_right"),
         "closure_bonds": ("fixed_closure_bond_mask", "closure_bonds"),
     }
+    # One host view per field, then per-record slicing of that view.  The audit previously built a
+    # fresh NumPy array for every field of every record, which is six conversions per sample.
+    views = {field: state[field].numpy() for field in fields}
     for index, record in enumerate(records):
         for field, (mask_name, target_name) in fields.items():
             mask = getattr(record, mask_name)
@@ -300,7 +347,7 @@ def _fixed_state_exact_records(
                 if target_name == "node_states"
                 else getattr(record.graph, target_name)
             )
-            observed = state[field][index, : len(target)].numpy()
+            observed = views[field][index, : len(target)]
             if not np.array_equal(observed[mask], target[mask]):
                 return False
     return True
@@ -352,6 +399,45 @@ def _terminal_smiles(
 
 def _available_valence_units(state: AtomState) -> int:
     return _maximum_valence_units(state) - 2 * int(state.explicit_hydrogens)
+
+
+_ATOM_CAPACITY_CACHE: dict[int, tuple[Sequence[AtomState], np.ndarray]] = {}
+_BOND_UNIT_CACHE: dict[int, np.ndarray] = {}
+
+
+def _atom_capacity_table(atom_vocabulary: Sequence[AtomState]) -> np.ndarray:
+    """Return the frozen per-state valence capacities for one atom vocabulary.
+
+    The table is a pure function of the vocabulary, but the strict decoder rebuilt it once per
+    decoded record.  The vocabulary is held by reference in the cache value so its ``id`` cannot be
+    recycled onto a different vocabulary while the entry is live.
+    """
+
+    entry = _ATOM_CAPACITY_CACHE.get(id(atom_vocabulary))
+    if entry is None:
+        table = np.asarray(
+            [_available_valence_units(state) for state in atom_vocabulary], dtype=np.int64
+        )
+        table.setflags(write=False)
+        entry = (atom_vocabulary, table)
+        _ATOM_CAPACITY_CACHE[id(atom_vocabulary)] = entry
+    return entry[1]
+
+
+def _bond_unit_table(bond_classes: int) -> np.ndarray:
+    """Return bond valence units on the host without a per-record device transfer.
+
+    ``BOND_VALENCE_UNITS`` is a small constant torch tensor.  Reading it per decoded record forced
+    a device-to-host copy for every sample in the batch, which on an accelerator is a full
+    synchronization each time.  It is the same four numbers on every call.
+    """
+
+    table = _BOND_UNIT_CACHE.get(bond_classes)
+    if table is None:
+        table = BOND_VALENCE_UNITS[:bond_classes].cpu().numpy().astype(np.int64)
+        table.setflags(write=False)
+        _BOND_UNIT_CACHE[bond_classes] = table
+    return table
 
 
 def _argmax_allowed(logits: np.ndarray, valid: np.ndarray) -> int | None:
@@ -461,10 +547,8 @@ def _strict_terminal_record(
     bond_classes = predictions["parent_bonds"].shape[-1]
     if BOND_VALENCE_UNITS is None or bond_classes > len(BOND_VALENCE_UNITS):
         return None, "unsupported_bond_vocabulary"
-    bond_units = BOND_VALENCE_UNITS[:bond_classes].cpu().numpy().astype(np.int64)
-    atom_capacities = np.asarray(
-        [_available_valence_units(state) for state in atom_vocabulary], dtype=np.int64
-    )
+    bond_units = _bond_unit_table(bond_classes)
+    atom_capacities = _atom_capacity_table(atom_vocabulary)
     maximum_capacity = int(atom_capacities.max())
     maximum_capacities = np.full(record.node_count, maximum_capacity, dtype=np.int64)
     for node in np.flatnonzero(record.fixed_atom_mask):
@@ -511,20 +595,22 @@ def _strict_terminal_record(
     if np.any(minimum_used > maximum_capacities):
         return None, "fixed_parent_valence_exceeds_support"
 
+    node_positions = np.arange(count, dtype=np.int64)
+    parent_headroom = minimum_used + 2 <= maximum_capacities
     for child in range(1, count):
         if record.fixed_parent_bond_mask[child]:
             continue
+        # The child's own headroom does not depend on the candidate parent, so the whole
+        # admissible-parent row is one vectorized comparison rather than a Python scan over every
+        # earlier node.  ``parent_headroom`` tracks ``minimum_used + 2 <= maximum_capacities``
+        # incrementally; only the two endpoints of an accepted edge can change it.
         valid = np.zeros(count, dtype=np.bool_)
-        for parent in range(child):
-            valid[parent] = (
-                minimum_used[child] + 2 <= maximum_capacities[child]
-                and minimum_used[parent] + 2 <= maximum_capacities[parent]
-            )
-            if enforce_program_topology and (
-                component_instances[parent] != component_instances[child]
-            ):
-                valid[parent] = False
-            if enforce_program_topology and valid[parent]:
+        if parent_headroom[child]:
+            valid[:child] = parent_headroom[:child]
+            if enforce_program_topology:
+                valid[:child] &= component_instances[:child] == component_instances[child]
+        if enforce_program_topology:
+            for parent in np.flatnonzero(valid).tolist():
                 trial_parents = parents.copy()
                 trial_parents[child] = parent
                 observed = _terminal_role_morphology(
@@ -532,9 +618,7 @@ def _strict_terminal_record(
                     parents=trial_parents,
                     closure_left=np.empty(0, dtype=np.int64),
                     closure_right=np.empty(0, dtype=np.int64),
-                    parent_edge_mask=(
-                        record.fixed_parent_bond_mask | (np.arange(count, dtype=np.int64) <= child)
-                    ),
+                    parent_edge_mask=(record.fixed_parent_bond_mask | (node_positions <= child)),
                 )
                 assert morphology_targets is not None
                 role_state = int(record.role_states[child])
@@ -554,6 +638,9 @@ def _strict_terminal_record(
         parents[child] = parent
         degrees[[child, parent]] += 1
         minimum_used[[child, parent]] += 2
+        parent_headroom[[child, parent]] = (
+            minimum_used[[child, parent]] + 2 <= maximum_capacities[[child, parent]]
+        )
         occupied.add((parent, child))
 
     for slot in np.flatnonzero(record.fixed_closure_bond_mask):
@@ -1061,6 +1148,7 @@ def sample_synthesis_program_products(
                 sample_steps, dtype=torch.float32, device=resolved_device
             ) / float(sample_steps)
             terminal_time = torch.ones((len(local),), device=resolved_device)
+            conditioning = _program_conditioning(model, layout)
             for step in range(sample_steps):
                 t_value = step / sample_steps
                 t = time_grid[step].expand(len(local))
@@ -1072,18 +1160,7 @@ def sample_synthesis_program_products(
                     closure_right=state["closure_right"],
                     closure_bonds=state["closure_bonds"],
                     t=t,
-                    node_mask=layout["node_mask"],
-                    child_mask=layout["child_mask"],
-                    closure_mask=layout["closure_mask"],
-                    program_states=layout["program_states"],
-                    role_states=layout["role_states"],
-                    core_position_states=layout["core_position_states"],
-                    program_depths=layout["program_depths"],
-                    adapter_mask=layout["adapter_mask"],
-                    repeat_group_states=layout["repeat_group_states"],
-                    component_position_states=layout["component_position_states"],
-                    component_instance_states=layout["component_instance_states"],
-                    role_morphology_states=layout["role_morphology_states"],
+                    **conditioning,
                 )
                 state["nodes"] = rstar_step(
                     state["nodes"],
@@ -1138,18 +1215,7 @@ def sample_synthesis_program_products(
                 closure_right=state["closure_right"],
                 closure_bonds=state["closure_bonds"],
                 t=terminal_time,
-                node_mask=layout["node_mask"],
-                child_mask=layout["child_mask"],
-                closure_mask=layout["closure_mask"],
-                program_states=layout["program_states"],
-                role_states=layout["role_states"],
-                core_position_states=layout["core_position_states"],
-                program_depths=layout["program_depths"],
-                adapter_mask=layout["adapter_mask"],
-                repeat_group_states=layout["repeat_group_states"],
-                component_position_states=layout["component_position_states"],
-                component_instance_states=layout["component_instance_states"],
-                role_morphology_states=layout["role_morphology_states"],
+                **conditioning,
             )
             topology_reasons: list[str | None] = [None] * len(local)
             if coupled_ugi_topology:
@@ -1197,18 +1263,7 @@ def sample_synthesis_program_products(
                     closure_right=topology_state["closure_right"],
                     closure_bonds=topology_state["closure_bonds"],
                     t=terminal_time,
-                    node_mask=layout["node_mask"],
-                    child_mask=layout["child_mask"],
-                    closure_mask=layout["closure_mask"],
-                    program_states=layout["program_states"],
-                    role_states=layout["role_states"],
-                    core_position_states=layout["core_position_states"],
-                    program_depths=layout["program_depths"],
-                    adapter_mask=layout["adapter_mask"],
-                    repeat_group_states=layout["repeat_group_states"],
-                    component_position_states=layout["component_position_states"],
-                    component_instance_states=layout["component_instance_states"],
-                    role_morphology_states=layout["role_morphology_states"],
+                    **conditioning,
                 )
                 # The exact topology is already decoded.  One-hot pointer scores let the common
                 # strict chemistry decoder preserve it while retaining all valence checks.
