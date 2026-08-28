@@ -9875,3 +9875,84 @@ preserved unchanged.
   changed, and this wall-time work is not a scientific result. Assessment remains sequential across
   ledgers; process-level parallelism across independent (program, seed) assessments is the largest
   remaining lever and requires its own authorization and qualification.
+
+## 2026-08-28 - Attribute the production evaluation stage and remove its repeated chemistry
+
+- The two preceding wall-time entries were measured on subsets. Nobody had profiled the stage the
+  paid run actually executes, `model.shared-synthesis-program-production-evaluation-from-pins.v1`.
+  Added `make evaluation-profile`, i.e. `PYTHONPATH=.:tools python3 -m forge_maintenance
+  evaluation-profile`, which runs the real entry point against the frozen seed-0 program-role pins
+  on CPU. It keeps the frozen five checkpoints, three programs, 32 flow steps, batch 128 and the
+  `strict_valence_topology_argmax` decoder, reduces only the per-cell sample counts, and binds that
+  reduction to the config's own `h100_preflight` execution scope so a reduced budget can never
+  claim production status. It wraps the functions the evaluation already calls and reports
+  exclusive wall time per phase; the wrappers are removed afterwards.
+- Two structural findings correct a standing assumption. The frozen assessors associated with this
+  arm - the common Ugi assessment, the whole-lipid realism assessor, its classifier two-sample test
+  and the method-blind route evidence - are not in this stage. It emits the attempt ledgers and
+  those assessors run as later stages, so the 2026-08-28 assessment work does not touch this one.
+  And there is no repeated per-checkpoint work to hoist: the production cache, the factorized
+  layout prior and both reference ledgers are each built exactly once, and unpacking plus rebuilding
+  all five checkpoints costs 0.28 s. Per-run overhead outside the evaluation body is also not the
+  problem: hashing the 112.6 MB checkpoint archive takes 0.047 s, the repository source fingerprint
+  0.055 s and importing torch and RDKit 0.60 s.
+- The cold attribution of a 3,072-attempt run was 625.0 s: the model forward 456.9 s (73.1%), exact
+  reverse decomposition with forward replay 61.0 s (9.8%), the R-star updates 35.0 s (5.6%), the
+  training reference ledgers 26.1 s (4.2%), the Ugi identity references 16.9 s (2.7%) and the
+  layout prior 13.7 s (2.2%). Everything else together is under 1.5%, including the O(n^2) pairwise
+  ECFP4 diversity. The forward's 73% is an artifact of profiling on CPU: it is the only phase the
+  H100 accelerates, so what the paid run actually pays for is the 130.5 s device-independent
+  remainder, which runs at exactly the speed measured here.
+- Inside that remainder, exact decomposition is one program. Per valid row it cost 105.7 ms for
+  `lx_2024_repeated_reductive_amination` against 7.55 ms for `bl_2023_repeated_aza_michael` and
+  0.35 ms for `ugi_3cr_agile`, and it is extremely heavy tailed: over 200 LX rows the median was
+  7.27 ms, the slowest single row 38.5 s, and the slowest ten rows 94.5% of the total. The reverse
+  search rebuilds the same one-step assemblies 3.40x on average within a single decomposition -
+  once to confirm a candidate disconnection, then again as the shared prefix of every forward
+  replay - so the transform now takes a caller-owned reuse table, created per public call and
+  discarded with it. The one-step assembly is a pure function of the accumulator SMILES, the repeat
+  SMILES and the outcome bound given the frozen registry transform, and an unparseable input still
+  raises on its first, uncached occurrence. Separately, `load_reaction_program_training_references`
+  now memoizes canonicalization per distinct source string, because its 66,464 train-fold Ugi rows
+  draw on 295 distinct precursor constitutions and its 60,000 multi-reaction rows on 219 terminal
+  heads and 54 repeat components. Product SMILES are all distinct and remain a per-row parse.
+- Measured by alternating the pristine and changed trees within each round and taking the minimum
+  over three rounds, because the host carried unrelated load throughout. Exact decomposition of the
+  same 3,072-row ledger fell from 33.63 s to 12.18 s (2.76x), LX alone from 30.95 s to 10.00 s
+  (3.10x), and the training reference ledgers from 27.74 s to 13.78 s (2.01x). Projected onto the
+  frozen 16,896-attempt budget, including a separate probe that measured the uncapped
+  46,122-record component-disjoint reconstruction, this takes the stage's device-independent floor
+  from about 368 s to about 205 s. The attributable record is
+  `results/maintenance/production_evaluation_cpu_performance_v1/result.json` (SHA-256
+  `68e1486f7aed31cff6abd25d5c69f81447bfa96f5eafccd63030ce513c753838`).
+- Output identity is the acceptance criterion. All six alternating runs produced the combined
+  digest `78bc51f82bac9c0690141e016f5ac2b021ba7d6039efac20f57fccd16e744351` over every reference
+  set, every adjudicated row and every evaluated metric. Two complete end-to-end profiled runs, one
+  per tree, emitted byte-identical artifacts: `samples.jsonl.gz`
+  `c564d21ddf7bd7ed3b226e8b1e3396e57218e6268d473f4111bc92667feb1f40`, `molecule_report.html`
+  `ac2440ee80e3389596878b8306f25007c92d616d268869df46301610fe12042f` and the common Ugi attempt
+  ledger `ab418ebfd91cc86760467f5b29d80d2c59e5c305853c6ff14e867b93733cc650`, with an identical
+  `result.json` apart from its own artifact receipts.
+  `tests/test_evaluation_reuse_identity.py` re-derives each rewritten quantity a second, naive way -
+  the pre-change one-step assembly with no reuse table, and a fresh canonicalization per occurrence -
+  requires exact equality, requires the fixture to actually exercise the reuse, and requires invalid
+  input to keep failing.
+- Measured and rejected: the deferred process pool. Sampling and assessment are interleaved per
+  cell inside the one process that holds the CUDA context, so a fork-based pool is unsafe; a
+  spawn-only pool is not, because the workers re-enter the interpreter and import only RDKit and
+  the assembly adapters, and it produced identical rows. On 2,246 valid rows it returned 12.06 s serial against 6.58 s on four workers (1.83x) and
+  6.14 s on eight (1.96x). Doubling the workers buys almost nothing because the workload is bounded
+  by one item, not by throughput: on the changed tree a single LX product still takes 13.70 s, which
+  is 53.2% of its whole 600-row ledger, so no pool of any width can finish that ledger faster than
+  13.70 s. The production container also reserves four CPUs. That is a small, concurrency-risky gain
+  inside a paid CUDA process on top of a change that already removed three times more, so it is not
+  adopted.
+- **Decision:** retain the per-call forward-layer reuse table and the reference canonicalization
+  memo. Do not add a process pool to the evaluation stage. No gate, denominator, threshold, policy
+  field or frozen selection changed, and this wall-time work is not a scientific result. Ten times
+  end-to-end is not reachable: after this change the stage's device-independent floor is about
+  205 s at the frozen budget, of which about 41 s is one-time setup that must parse 126,464 distinct
+  reference products and exhaust the fail-closed layout support, about 85 s is a reverse search
+  whose cost sits in a handful of pathological products, and about 26 s is the uncapped
+  component-disjoint reconstruction. Even a four-worker pool applied everywhere lands near 3x from
+  the pre-change baseline, not 10x, and the single worst product bounds it from below.

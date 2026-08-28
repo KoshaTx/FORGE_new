@@ -34,6 +34,27 @@ def _canonical_component(smiles: str) -> str:
     return Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
 
 
+class _CanonicalMemo:
+    """Reuse :func:`_canonical_component` per distinct source string within one reference build.
+
+    Canonicalization has no state and no dependence on row order, and only accepted strings are
+    stored, so this returns exactly what a fresh call would return and raises exactly where a
+    fresh call would raise.
+    """
+
+    __slots__ = ("_values",)
+
+    def __init__(self) -> None:
+        self._values: dict[str, str] = {}
+
+    def __call__(self, smiles: str) -> str:
+        canonical = self._values.get(smiles)
+        if canonical is None:
+            canonical = _canonical_component(smiles)
+            self._values[smiles] = canonical
+        return canonical
+
+
 def load_reaction_program_training_references(
     *,
     ugi_assignments: Path,
@@ -50,13 +71,19 @@ def load_reaction_program_training_references(
     training_components: dict[str, dict[str, set[str]]] = {
         program_id: {} for program_id in program_ids
     }
+    # These ledgers repeat a small component inventory across a large product table: 66,464
+    # train-fold Ugi rows draw on 295 distinct precursor constitutions, and 60,000 multi-reaction
+    # rows on 219 terminal heads and 54 repeat components.  Canonicalization is a pure function of
+    # the source string, so memoize it.  Only validated strings are stored, so an invalid one still
+    # raises on the first row that carries it, exactly as it did before.
+    canonical = _CanonicalMemo()
     for row in iter_csv(ugi_assignments):
         if row.get("primary_product_fold") != "train":
             continue
-        training_products[ugi_program_id].add(_canonical_component(row["canonical_product_smiles"]))
+        training_products[ugi_program_id].add(canonical(row["canonical_product_smiles"]))
         for role in ugi_roles:
             training_components[ugi_program_id].setdefault(role, set()).add(
-                _canonical_component(row[f"{role}_smiles"])
+                canonical(row[f"{role}_smiles"])
             )
 
     split_programs: dict[str, str] = {}
@@ -79,12 +106,12 @@ def load_reaction_program_training_references(
                 f"multi-reaction training identity changed for {record_id}"
             )
         spec = repeated_program_specs[program_id]
-        training_products[program_id].add(_canonical_component(row["canonical_product_smiles"]))
+        training_products[program_id].add(canonical(row["canonical_product_smiles"]))
         training_components[program_id].setdefault(spec.accumulator_role, set()).add(
-            _canonical_component(row["terminal_head_smiles"])
+            canonical(row["terminal_head_smiles"])
         )
         training_components[program_id].setdefault(spec.repeat_role, set()).update(
-            _canonical_component(smiles) for smiles in repeat_component_smiles(row)
+            canonical(smiles) for smiles in repeat_component_smiles(row)
         )
         observed.add(record_id)
     if observed != set(split_programs):

@@ -91,6 +91,30 @@ def _command_assessment_benchmark(args: argparse.Namespace) -> int:
     return 0
 
 
+def _command_evaluation_profile(args: argparse.Namespace) -> int:
+    from forge_maintenance.evaluation_profile import profile_production_evaluation
+
+    repo = _repo()
+    arm = repo / "results/phase1" / args.arm
+    output = _optional(repo, args.output)
+    result = profile_production_evaluation(
+        repo,
+        config_path=_under(repo, args.config),
+        cache_path=_under(repo, args.cache),
+        checkpoint_archive_path=arm / "checkpoints.tar",
+        training_result_path=arm / "training_result.json",
+        output_dir=_optional(repo, args.work_dir) or repo / "build/evaluation_profile",
+        calibration_samples=int(args.calibration_samples),
+        heldout_samples=int(args.heldout_samples),
+        component_disjoint_record_limit=int(args.component_disjoint_record_limit),
+    )
+    if output is not None:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n")
+    _print(result)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="forge_maintenance", description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -117,6 +141,25 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark.add_argument("--ledger-dir")
     benchmark.add_argument("--output")
     benchmark.set_defaults(function=_command_assessment_benchmark)
+
+    evaluation = commands.add_parser(
+        "evaluation-profile",
+        help="attribute CPU wall time across the real production evaluation stage",
+    )
+    evaluation.add_argument("--arm", default="shared_bias_parallel_program_role_seed0_v2")
+    evaluation.add_argument(
+        "--config",
+        default="configs/multireaction/shared_bias_parallel_program_role_seed0_evaluation_v2.json",
+    )
+    evaluation.add_argument(
+        "--cache", default="results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz"
+    )
+    evaluation.add_argument("--calibration-samples", default=32)
+    evaluation.add_argument("--heldout-samples", default=192)
+    evaluation.add_argument("--component-disjoint-record-limit", default=64)
+    evaluation.add_argument("--work-dir")
+    evaluation.add_argument("--output")
+    evaluation.set_defaults(function=_command_evaluation_profile)
     return parser
 
 

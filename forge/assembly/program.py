@@ -167,31 +167,65 @@ class RegistryRepeatedReactionProgram:
             registry_sha256=observed,
         )
 
+    def _single_forward_layer(
+        self,
+        accumulator_smiles: str,
+        repeated: Chem.Mol,
+        *,
+        maximum_outcomes: int,
+    ) -> _ForwardLayer:
+        """Apply the frozen transform once, to one accumulator and one already-parsed repeat."""
+
+        _, accumulator = _canonical(accumulator_smiles)
+        with rdBase.BlockLogs():
+            outcomes = self._reaction.forward.RunReactants(
+                (accumulator, repeated), maxProducts=maximum_outcomes
+            )
+        products: set[str] = set()
+        for outcome in outcomes:
+            if len(outcome) != 1:
+                continue
+            repaired = repair_template_hydrogens(outcome[0])
+            if repaired is not None:
+                products.add(repaired[0])
+        return _ForwardLayer(tuple(sorted(products)), len(outcomes) >= maximum_outcomes)
+
     def _forward_layer(
         self,
         accumulator_smiles: Sequence[str],
         repeated_smiles: str,
         *,
         maximum_outcomes: int,
+        memo: dict[tuple[str, str, int], _ForwardLayer] | None = None,
     ) -> _ForwardLayer:
+        """Union one repeat step over the given accumulators.
+
+        ``memo`` is an optional caller-owned reuse table for the single-accumulator step.  That
+        step is a pure function of the accumulator SMILES, the repeat SMILES and the outcome
+        bound, given this program's frozen registry transform, so reusing it cannot change any
+        product, saturation flag or raised error: an accumulator or repeat that fails to parse
+        raises on its first, uncached occurrence and never reaches the table.  The reverse search
+        in :meth:`decompose` revisits the same one-step assemblies several times per product --
+        once while testing a candidate disconnection and again inside every forward replay that
+        shares its prefix -- and that repetition is what the table removes.
+        """
+
         if isinstance(maximum_outcomes, bool) or maximum_outcomes < 2:
             raise ReactionProgramError("maximum_outcomes must be an integer of at least two")
         _, repeated = _canonical(repeated_smiles)
         products: set[str] = set()
         saturated = False
         for accumulator_smiles_value in accumulator_smiles:
-            _, accumulator = _canonical(accumulator_smiles_value)
-            with rdBase.BlockLogs():
-                outcomes = self._reaction.forward.RunReactants(
-                    (accumulator, repeated), maxProducts=maximum_outcomes
+            key = (accumulator_smiles_value, repeated_smiles, maximum_outcomes)
+            layer = None if memo is None else memo.get(key)
+            if layer is None:
+                layer = self._single_forward_layer(
+                    accumulator_smiles_value, repeated, maximum_outcomes=maximum_outcomes
                 )
-            saturated = saturated or len(outcomes) >= maximum_outcomes
-            for outcome in outcomes:
-                if len(outcome) != 1:
-                    continue
-                repaired = repair_template_hydrogens(outcome[0])
-                if repaired is not None:
-                    products.add(repaired[0])
+                if memo is not None:
+                    memo[key] = layer
+            products.update(layer.products)
+            saturated = saturated or layer.saturated
         return _ForwardLayer(tuple(sorted(products)), saturated)
 
     def check_forward(
@@ -201,12 +235,14 @@ class RegistryRepeatedReactionProgram:
         product_smiles: str,
         *,
         maximum_outcomes: int = 512,
+        memo: dict[tuple[str, str, int], _ForwardLayer] | None = None,
     ) -> ReactionProgramCheck:
         target, _ = _canonical(product_smiles)
         products = self.forward_products(
             terminal_head_smiles,
             repeated_component_smiles,
             maximum_outcomes=maximum_outcomes,
+            memo=memo,
         )
         steps = len(repeated_component_smiles)
         return ReactionProgramCheck(
@@ -224,6 +260,7 @@ class RegistryRepeatedReactionProgram:
         repeated_component_smiles: Sequence[str],
         *,
         maximum_outcomes: int = 512,
+        memo: dict[tuple[str, str, int], _ForwardLayer] | None = None,
     ) -> ForwardAssemblyProducts:
         """Execute a complete repeated program and return every unique final product."""
 
@@ -237,7 +274,9 @@ class RegistryRepeatedReactionProgram:
         outcome_counts: list[int] = []
         saturated = False
         for repeated in repeated_component_smiles:
-            layer = self._forward_layer(current, repeated, maximum_outcomes=maximum_outcomes)
+            layer = self._forward_layer(
+                current, repeated, maximum_outcomes=maximum_outcomes, memo=memo
+            )
             current = layer.products
             outcome_counts.append(len(current))
             saturated = saturated or layer.saturated
@@ -281,13 +320,14 @@ class RegistryRepeatedReactionProgram:
         head = _canonical(terminal_head_smiles)[0]
         current: dict[str, tuple[str, ...]] = {head: ()}
         ordered_repeats: list[str] = []
+        memo: dict[tuple[str, str, int], _ForwardLayer] = {}
         for repeated_value in repeated_component_smiles:
             repeated = _canonical(repeated_value)[0]
             ordered_repeats.append(repeated)
             following: dict[str, tuple[str, ...]] = {}
             for accumulator, lineage in sorted(current.items()):
                 layer = self._forward_layer(
-                    (accumulator,), repeated, maximum_outcomes=maximum_outcomes
+                    (accumulator,), repeated, maximum_outcomes=maximum_outcomes, memo=memo
                 )
                 if layer.saturated:
                     raise ReactionProgramError(
@@ -338,6 +378,12 @@ class RegistryRepeatedReactionProgram:
         visited: set[tuple[str, int]] = {(target, 0)}
         traces: set[tuple[str, tuple[str, ...], tuple[str, ...]]] = set()
         explored = 0
+        # One reuse table per decomposition.  The reverse search rebuilds the same single-step
+        # assemblies repeatedly -- every accepted candidate is re-assembled once to confirm it,
+        # and then again as the first step of each forward replay that shares its prefix -- and
+        # the deepest products are exactly where that repetition compounds.  The table is
+        # discarded with the call, so nothing accumulates across a ledger.
+        memo: dict[tuple[str, str, int], _ForwardLayer] = {}
         while queue:
             current_smiles, removed_repeats, reverse_lineage = queue.popleft()
             explored += 1
@@ -384,7 +430,10 @@ class RegistryRepeatedReactionProgram:
                 if expected_repeat is not None and repeated_smiles != expected_repeat:
                     continue
                 rebuilt = self._forward_layer(
-                    (accumulator_smiles,), repeated_smiles, maximum_outcomes=maximum_outcomes
+                    (accumulator_smiles,),
+                    repeated_smiles,
+                    maximum_outcomes=maximum_outcomes,
+                    memo=memo,
                 )
                 if current_smiles not in rebuilt.products or rebuilt.saturated:
                     continue
@@ -409,6 +458,7 @@ class RegistryRepeatedReactionProgram:
                         ordered_repeats,
                         target,
                         maximum_outcomes=maximum_outcomes,
+                        memo=memo,
                     )
                     if check.exact and not check.saturated:
                         traces.add((accumulator_smiles, ordered_repeats, intermediates))

@@ -22,7 +22,8 @@
 	phase1-shared-synthesis-program-production-modal-plan \
 	phase1-training-smoke phase1-training-modal-plan phase1-sampling-smoke \
 	phase1-sampling-reproduce paper-experiment-readiness paper-verify manuscript-pdf manuscript-iclr \
-	paper-bundle code-survey test-baseline-report assessment-benchmark typecheck check-core \
+	paper-bundle code-survey test-baseline-report assessment-benchmark evaluation-profile \
+	typecheck check-core \
 	test lint fmt clean
 
 EXPECT_PINS ?= 822
@@ -76,6 +77,7 @@ help:
 	@echo "  make test / lint / fmt            repository quality gates"
 	@echo "  make code-survey                  classify historical code without deleting it"
 	@echo "  make assessment-benchmark         time and digest the CPU Ugi assessor suite"
+	@echo "  make evaluation-profile           attribute the production evaluation's wall time"
 	@echo "  make paper-verify / paper-bundle  verify or package paper evidence"
 
 vendor:
@@ -270,6 +272,15 @@ test-baseline-report:
 assessment-benchmark:
 	PYTHONPATH=.:tools python3 -m forge_maintenance assessment-benchmark \
 		--output build/assessment_benchmark/result.json
+
+# CPU only. Runs the real production evaluation entry point against the frozen seed-0 pins under
+# the config's own h100_preflight scope -- every checkpoint, program, flow step, batch shape and
+# decoder unchanged, only the per-cell sample counts reduced -- and attributes its wall time.
+evaluation-profile:
+	PYTHONPATH=.:tools python3 -m forge_maintenance evaluation-profile \
+		--calibration-samples 128 --heldout-samples 384 \
+		--component-disjoint-record-limit 128 \
+		--output build/evaluation_profile/result.json
 
 typecheck:
 	MYPYPATH=.:tools:paper python3 -m mypy forge/core forge/chemistry forge/assembly cli
