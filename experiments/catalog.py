@@ -212,6 +212,10 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/"
         "shared_bias_parallel_program_role_seed0_evaluation_h100_v2.json"
     ),
+    "phase1-shared-bias-parallel-program-role-seed0-core-saturation-h100-v2": (
+        "experiments/phase1/multireaction/"
+        "shared_bias_parallel_program_role_seed0_core_saturation_h100_v2.json"
+    ),
     "phase1-shared-bias-parallel-program-role-seed0-h100-v2": (
         "experiments/phase1/multireaction/shared_bias_parallel_program_role_seed0_h100_v2.json"
     ),
