@@ -18,6 +18,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.arrows,fit,backgrounds}
 \usepackage{array}
@@ -43,6 +45,7 @@
 % Formal statements use a quiet lavender field to separate assumptions and guarantees from the
 % surrounding argument. The box may break across pages; proofs intentionally remain unboxed.
 \definecolor{forgeformalbg}{HTML}{F0EFFF}
+\definecolor{forgerow}{HTML}{E9E7FB}
 \tcbset{
   forge formal block/.style={
     enhanced jigsaw,
@@ -103,7 +106,7 @@
   \makebox[\atlasrankwidth]{\raisebox{-0.5\height}{\footnotesize\color{atlasink}#1}}}
 \newcommand{\atlashead}[2]{\makebox[#1]{\footnotesize\scshape #2}}
 
-\title{Synthesis-Grounded Generative Design of Ionizable Lipids}
+\title{FORGE: Reaction-Guided Generative Design of Ionizable Lipids}
 
 \author{Anonymous authors\\Paper under double-blind review}
 
@@ -112,21 +115,24 @@
 \maketitle
 
 \begin{abstract}
-Many ionizable-lipid discovery platforms define candidates by combining predefined heads, linkers
-and hydrophobic components, which preserves experimental tractability but fixes the molecular
-vocabulary before design begins. Whole-molecule generators can leave that vocabulary, yet they do
-not by themselves identify how newly generated component chemistry can be assembled or prepared.
-Here we introduce FORGE, a synthesis-grounded generative framework that represents each design as a
-complete molecular graph coupled to a reaction program. FORGE uses precursor roles, reaction-core
-positions and program depth as semantic coordinates while generating every atom and bond without
-component identifiers or fragment tokens. Across three ionizable-lipid reaction programs, FORGE
-achieved exact level-one (L1) transform-consistent yields of $78.7\%$, $77.5\%$ and $31.3\%$ for
-Ugi, repeated aza-Michael addition and repeated reductive amination, respectively. Relative to
-null generation followed by post-hoc filtering, the corresponding improvements were
-\ForgeNullUgiDifferencePP, \ForgeNullBLDifferencePP{} and \ForgeNullLXDifferencePP{} percentage
-points. Against an exact train-only catalogue assembler, FORGE generated open-ended exact-L1
-products whose recovered precursor identities were outside the supplied catalogue, whereas this
-quantity was structurally zero for the catalogue method. In a bounded, route-blinded Ugi
+Ionizable lipids are essential for RNA delivery, but their discovery largely depends on synthesizing
+and screening libraries assembled from predefined reactants. This strategy preserves a clear
+synthesis route while limiting the chemical space that can be explored. De novo molecular generation
+could expand this space, yet existing whole-molecule models do not retain the reaction information
+needed to assemble their designs. We introduce FORGE(\textbf{F}low-Matched, \textbf{O}pen-ended \textbf{R}eaction-\textbf{G}uided \textbf{G}eneration \textbf{E}xploration), a synthesis-grounded generative framework that
+uses known reaction chemistry to design ionizable lipids without restricting generation to a fixed
+reactant catalogue. FORGE represents each synthesis route through precursor roles, reaction-core
+positions, transformation order and coarse molecular architecture, while generating the complete
+molecule at atom-and-bond resolution. The model does not receive component identifiers, stored
+precursor graphs or fragment tokens. We evaluated FORGE on an AGILE-type Ugi three-component
+reaction, repeated aza-Michael addition and repeated reductive amination. Across three independent
+seeds, FORGE achieved exact level-one (exact-L1) transform-consistent yields of $78.7\pm10.1\%$,
+$77.5\pm3.7\%$ and $31.3\pm14.3\%$, respectively. Matched whole-molecule generation followed by
+post-hoc reaction filtering yielded $11.4\pm1.1\%$, $4.0\pm0.8\%$ and $13.2\pm1.3\%$; the paired
+differences were \ForgeNullUgiDifferencePP, \ForgeNullBLDifferencePP{} and
+\ForgeNullLXDifferencePP{} percentage points. FORGE also generated exact-L1 products with precursor
+identities absent from the corresponding training component catalogues in all three reactions, a
+quantity that is structurally zero for a finite-catalogue assembler. In a bounded, route-blinded Ugi
 shortlist, \ForgeRouteCompleteProducts{} of \ForgeRouteAdmitted{} admitted products closed to
 complete computational synthesis dossiers; the remaining products were explicitly unresolved or
 search-censored rather than called unsynthesizable.
@@ -135,51 +141,72 @@ search-censored rather than called unsynthesizable.
 \section{Introduction}
 
 Lipid nanoparticles (LNPs) deliver nucleic-acid therapeutics including small interfering RNA, mRNA
-vaccines and \emph{in vivo} genome-editing reagents
+vaccines and in vivo genome-editing reagents
 \citep{adams2018patisiran,polack2020safety,baden2021efficacy,gillmore2021crispr}.
-Within each LNP the ionizable lipid supports nucleic-acid complexation and influences particle
-assembly and endosomal escape, making its structure a central determinant of function
-\citep{cullis2017lipid,hou2021lipid}. Small changes to headgroup and hydrophobic structure can
-substantially alter delivery, yet their effects depend on the complete molecular context and do not
-consistently follow simple design rules
-\citep{cheng2020selective,han2021ionizable,hatit2023nanoparticle}. Discovery therefore commonly
-relies on preparing modular chemical libraries and screening the resulting LNPs experimentally
+Within each LNP, the ionizable lipid supports nucleic-acid complexation, particle assembly and
+endosomal escape, making its chemical structure a major determinant of delivery
+\citep{cullis2017lipid,hou2021lipid}.
+Small changes to the headgroup or hydrophobic domains can substantially alter function. Their effects
+depend on the complete molecular structure and do not follow simple design rules
+\citep{cheng2020selective,han2021ionizable,hatit2023nanoparticle}.
+Researchers therefore discover ionizable lipids by defining modular precursor libraries,
+synthesizing combinations and screening the resulting LNPs experimentally
 \citep{akinc2008combinatorial,love2010lipidlike,li2024accelerating,xu2024agile}.
+This strategy preserves synthetic tractability and supports systematic testing within defined
+chemical families, while limiting the search to components selected before design begins.
 
-Generative approaches incorporate synthesis either by restricting generation to predefined components
-or by evaluating synthesizability after generation
-\citep{gao2020synthesizability,gao2022amortized,koziarski2024rgfn}. Restriction preserves an explicit
-assembly path but confines the search to structures the supplied inventory can build. Post-hoc
-filtering leaves generation unconstrained, but the model never learns which regions must behave as
-particular precursors or which bonds the intended reaction must form; the filter can only accept or
-reject a finished molecule. We ask how reaction knowledge can guide de novo ionizable-lipid
-generation without making a predefined component vocabulary the model's output space.
+De novo molecular generation has the potential to extend ionizable-lipid discovery beyond fixed
+precursor libraries. Current synthesis-aware generators construct molecules by selecting reactants
+and applying predefined transformations
+\citep{gao2022amortized,koziarski2024rgfn,cretu2025synflownet}.
+This construction retains an explicit assembly route and limits generated molecules to the supplied
+reactant inventory. Whole-molecule generators can propose structures beyond a fixed inventory, but
+their outputs do not retain the precursor roles and transformations needed to assemble each design
+\citep{qin2025defog,lee2025genmol}.
+Other approaches estimate synthesizability after generation without incorporating the intended
+assembly chemistry into the generative process \citep{gao2020synthesizability}; the filter can only
+accept or reject a finished molecule. Recent studies have also applied de novo generative models to
+ionizable lipids \citep{ou2024deep}. The missing capability is generation of
+complete molecular structures under known reaction chemistry while leaving precursor identities open.
 
-FORGE conditions generation on a reaction program that specifies which precursor roles participate,
-where bonds are formed or changed, and how transformations are ordered, but not the molecular
-identities of the precursors. Each generated product is decomposed into role-compatible precursors
-and the specified reaction is replayed to test whether the original graph is recovered exactly.
-Precursors that are not directly available are expanded recursively until every branch reaches an
-available starting material; designs with an unsupported preparation step are excluded from the
-route-complete set. We evaluate three ionizable-lipid assembly chemistries: an AGILE-type
-amine--aldehyde--isocyanide Ugi three-component reaction, repeated aza-Michael addition, and repeated
-reductive amination. These experiments test generalization across specified reaction programs, not
-zero-shot support for arbitrary chemistry. This short paper reports the principal computational
-findings; Appendix~\ref{app:preliminaries} through Appendix~\ref{app:atlas} give the complete
-formulation, the full reporting contract, the theoretical results and a generated-structure atlas.
+We introduce FORGE, which conditions generation on a reaction program that specifies the assembly
+chemistry, precursor roles, reaction-core positions, transformation order and coarse molecular
+architecture, while leaving precursor identities unspecified. FORGE generates complete molecular
+graphs at atom-and-bond resolution without component identifiers, stored precursor graphs or fragment
+tokens. Each completed graph is decomposed into its implied precursors, and exact forward replay of
+the specified assembly reaction must reconstruct the generated molecule. For precursors that are not
+directly available, a bounded recursive search returns either a computational synthesis dossier
+supported by reaction and supplier evidence or an explicit unresolved or search-censored outcome.
+
+We evaluate one shared model across an AGILE-type amine--aldehyde--isocyanide Ugi three-component
+reaction, repeated aza-Michael addition and repeated reductive amination. These experiments test
+generalization across specified reaction programs, not zero-shot support for arbitrary chemistry.
+This short paper reports the principal computational findings; Appendix~\ref{app:preliminaries}
+through Appendix~\ref{app:atlas} give the complete formulation, the full reporting contract, the
+theoretical results and a sample of generated structures.
+We summarize our main contributions as follows.
+
+\begin{itemize}
+    \item \textbf{Open-ended whole-graph generation.} FORGE generates complete molecular graphs
+    using known reaction chemistry while leaving precursor identities open, and does not select from
+    stored reactants or fragment vocabularies.
+    \item \textbf{Conditioning acts on generation, not on filtering.} Matched controls across three
+    assembly programs show that reaction-program conditioning increases exact transform-consistent
+    generation relative to whole-molecule generation followed by post-hoc filtering.
+    \item \textbf{Exact assembly outside a finite catalogue.} Across all three programs, FORGE
+    generates exact assemblies whose recovered precursor identities lie outside the corresponding
+    training component catalogues, a quantity that is structurally zero for finite-catalogue
+    assemblers.
+\end{itemize}
 
 \section{FORGE}
 
-We formulate ionizable-lipid design as conditional generation under a specified reaction program,
-while leaving precursor identities unspecified.
-Let $G\in\mathcal{G}$ denote a complete ionizable-lipid graph and $P\in\mathcal{P}$ a reaction
-program specifying the assembly chemistry, precursor roles, reaction-core positions, and
-transformation order.
-FORGE models the conditional distribution $p_\theta(G\mid P)$ without access to precursor
-identifiers, stored component graphs, or fragment tokens.
-Given $P$, FORGE must generate a complete molecular graph $G$ and either construct a complete
-synthesis program for $G$ or abstain. Writing $\mathfrak{T}$ for the space of recursive synthesis
-programs and $\bot$ for an explicit abstention outcome,
+FORGE generates complete ionizable-lipid graphs under specified assembly chemistry while leaving
+precursor identities open. Let $G\in\mathcal{G}$ denote a complete ionizable-lipid graph and
+$P\in\mathcal{P}$ a reaction program. FORGE models $p_\theta(G\mid P)$ without access to precursor
+identifiers, stored component graphs or fragment tokens. Given $P$, FORGE must generate $G$ and
+either construct a complete synthesis program for it or abstain. Writing $\mathfrak{T}$ for the space
+of recursive synthesis programs and $\bot$ for an explicit abstention outcome,
 \begin{equation}
     G\sim p_\theta(\cdot\mid P),
     \qquad
@@ -192,20 +219,44 @@ constructs $T$ from the completed graph without modifying it. FORGE accepts $(G,
 passes molecular and exact-assembly verification and $T$ traces every required precursor to an
 available starting material; otherwise it abstains.
 
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{\input{../v1/figures/forge_algorithm_schematic/schematic_body.tex}}
+\caption{\textbf{FORGE generates complete ionizable-lipid graphs within reaction-program
+coordinates.}
+The reaction program specifies how molecular regions participate in an assembly without choosing
+their structures from a finite inventory.
+FORGE generates the complete molecular graph, verifies that the specified reaction reconstructs it,
+and recursively expands unavailable precursors until every branch terminates in evidence-qualified
+starting materials or the framework abstains.
+$\Pi_P$ restores every coordinate the reaction program fixes and leaves the rest at the values
+just sampled.
+Haloed positions are the reaction-core positions $k_i$ marks.
+In the Ugi-core inset, each atom carries the colour of the component it comes from; the carbonyl
+oxygen is grey because the assembly template introduces it and no precursor contributes it.
+Exact replay and route closure are computational checks and do not establish experimental synthesis
+success.}
+\label{fig:forge-overview}
+\end{figure*}
+
+Figure~\ref{fig:forge-overview} summarizes how the reaction program enters generation,
+what the flow is free to resample, and what the assembly reaction forms.
+\paragraph{Reaction programs.}
 A reaction program is a tuple $P=(c,d,\mathbf{r},\mathbf{k},M)$, where $c$ identifies the ordered
 assembly chemistry, $d$ is the program depth, $\mathbf{r}$ assigns precursor roles, $\mathbf{k}$
 marks reaction-core positions, and $M$ specifies coarse per-role morphology as four integers per
-role: exterior atom count, junction budget, cycle rank and attachment count. $M$ sets only coarse
-structural constraints; the model generates the exact topology, atoms and bonds of each region.
-FORGE samples $M$ from a training-fold morphology prior and then generates $G$ conditioned on the
-resulting program, so that
+role: exterior atom count, junction budget, cycle rank and attachment count. $M$ constrains coarse
+molecular architecture while leaving the exact topology, atoms, bonds and precursor identities
+unspecified. FORGE samples $M$ from a training-fold morphology prior and then generates $G$
+conditioned on the resulting program, so that
 $p_\theta(G,M\mid c)=p_{\mathrm{prog}}(M\mid c)\,p_\theta(G\mid M,c)$.
-For each graph position $i$, FORGE combines learned embeddings of program identity, program depth,
-precursor role and reaction-core position,
+At graph position $i$, the program embedding combines learned embeddings of program identity, program
+depth, precursor role and reaction-core position,
 $h_i^P=\operatorname{LN}(e_c(c)+e_d(d)+e_r(r_i)+e_k(k_i))$.
-These coordinates tell the generator which precursor role each position plays and whether it lies in
-the reaction core, but not which molecular structure should occupy that role.
+This embedding identifies the position's precursor role and reaction-core status without encoding a
+component identity.
 
+\paragraph{Discrete flow generation.}
 FORGE proceeds in four stages: the program specifies roles, core positions, order and coarse
 morphology; a conditional discrete flow generates every atom, bond and topology state under it; a
 reverse transform decomposes the product and the corresponding forward transform must reconstruct it
@@ -222,7 +273,7 @@ reaction consistency or probability under a trained model.
 The chemistry adapter marks the atom, pointer and bond states that $P$ fixes. FORGE holds those
 constant while corrupting the remaining states along the linear probability path and predicting their
 clean values from $(X_t,t,P)$. Writing $\mathcal{Q}$ for the six state families,
-$m_j^{(q)}(P)\in\{0,1\}$ for whether coordinate $j$ remains variable under $P$, and
+$m_j^{(q)}(P)\in\{0,1\}$ for whether coordinate $j$ remains variable under $P$,
 $\mu_{\mathrm{bal}}$ for the frozen program-balanced training distribution, and
 $\ell^{(q)}_j(\theta)=-\log p_\theta(X_{G,j}^{(q)}\mid X_t,t,P)$ for the per-coordinate denoising
 term, FORGE minimizes
@@ -251,32 +302,33 @@ and termination results.
 \section{Results}
 
 \paragraph{Setting.}
-We evaluate three assembly programs, with Ugi as the deeply supervised case, repeated aza-Michael
+We evaluated three assembly programs, with Ugi as the deeply supervised case, repeated aza-Michael
 addition as a second family, and repeated reductive amination as a lighter stress test, across four
 matched training arms: Ugi-only conditioning, shared conditioning, shared training without program
-information, and shared training with cyclically incorrect program labels. All arms share
-architecture, optimization budget and attempts per program, and we evaluate the prespecified final
+information, and shared training with cyclically incorrect program labels. All arms shared
+architecture, optimization budget and attempts per program, and we evaluated the prespecified final
 checkpoint from each of three independent seeds. The primary metric is exact-L1 yield per generation
 attempt: generated graphs passing molecular validity, program-aware decomposition and exact forward
-replay, divided by total attempts. Training uses only the component-disjoint training folds, and
-held-out products neither enter training nor select checkpoints. Generated molecules are not treated
-as independent replicates. Appendix~\ref{app:results} states the full protocol, including the
+replay, divided by total attempts. Training used only the component-disjoint training folds, and
+held-out products neither entered training nor selected checkpoints. Generated molecules are not
+treated as independent replicates. Appendix~\ref{app:results} states the full protocol, including the
 external-baseline admission rules.
 
-\paragraph{One shared model learns three assembly programs.}
+\paragraph{Generalizing across reaction programs.}
 Across 3,072 held-out generation attempts per program in each of three independent training seeds,
-the final conditioned model achieved exact-L1 yields of $78.7\pm10.1\%$ for Ugi
+the conditioned model achieved exact-L1 yields of $78.7\pm10.1\%$ for Ugi
 ($72.3\%$, $90.3\%$ and $73.5\%$ by seed), $77.5\pm3.7\%$ for repeated aza-Michael
 addition ($76.5\%$, $81.5\%$ and $74.3\%$), and $31.3\pm14.3\%$ for repeated reductive
 amination ($38.6\%$, $14.8\%$ and $40.4\%$) (mean $\pm$ sample standard deviation;
 Table~\ref{tab:gem-shared-programs}).
-Exact forward-replay precision was $100\%$ in every program and seed, but mean decomposition
-ambiguity was $54.9\%$ for aza-Michael addition and $74.1\%$ for reductive amination, and the latter
-varied substantially between seeds. Relative to the Ugi-only model, shared training changed Ugi
-exact-L1 yield by \ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed interval
+Exact forward-replay precision was $100\%$ in every program and seed. Mean decomposition ambiguity
+was $54.9\%$ for aza-Michael addition and $74.1\%$ for reductive amination, and reductive amination
+also varied substantially between seeds, indicating less consistent learning in this lower-data
+setting. Relative to the Ugi-only model, shared training changed Ugi exact-L1 yield by
+\ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed interval
 \ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP), met every prespecified Ugi-retention gate,
 and produced zero fixed-state violations and zero support overflows across 27,648 held-out attempts.
-One conditional flow can therefore learn the three specified reaction-program coordinates without
+One conditional flow therefore learned the three specified reaction-program coordinates without
 erasing the deeply supported Ugi behavior.
 
 \begin{table}[H]
@@ -296,7 +348,7 @@ Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%)
 \end{tabular}
 \end{table}
 
-\paragraph{Reaction semantics alter generation rather than merely filtering its output.}
+\paragraph{Reaction information changes generation rather than merely filtering its output.}
 Under matched attempt budgets, conditioned generation produced 786.8, 774.6 and 312.7 exact-L1
 products per 1,000 attempts for Ugi, repeated aza-Michael and repeated reductive amination, compared
 with 114.4, 39.7 and 131.7 for matched null generation followed by post-hoc filtering. The paired
@@ -313,10 +365,10 @@ inference, with the trained network and Ugi request fixed, reduced exact-L1 yiel
 nulled (\ForgeSemanticNullCoordinatesDifferencePP{} points, 95\% interval
 \ForgeSemanticNullCoordinatesCILowPP{} to \ForgeSemanticNullCoordinatesCIHighPP), whereas the
 aza-Michael-token contrast was unresolved at \ForgeSemanticBLTokenDifferencePP{} points. The
-coordinates affect generation, but the evidence does not support an equal or individually
-identifiable effect for every coordinate.
+reaction program therefore changes molecular generation before downstream verification, but the
+evidence does not support an equal or individually identifiable effect for every coordinate.
 
-\paragraph{Whole-graph generation produces precursor identities beyond a finite vocabulary.}
+\paragraph{Whole-graph generation extends beyond finite catalogues.}
 Table~\ref{tab:ugi-common-benchmark} compares FORGE with external synthesis-aware generators, matched
 controls and a finite-catalogue oracle under one common Ugi benchmark, normalizing every yield by
 generation attempts. The learned finite-inventory selector reached $1000.0\pm0.0$ exact-L1 products
@@ -328,14 +380,17 @@ FORGE; GenMol/SAFE produced $627.5\pm6.2$ valid connected outputs but no exact U
 RGFN emitted no admissible output under the strict native contract. Against the train-only assembler,
 FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 and 16.9. Reaction
 consistency, open-ended identity generation and recovery of reserved components therefore trade off
-separately.
+separately. Representative Ugi products show exact decompositions into precursor identities outside
+the visible training inventory (Table~\ref{tab:forge-generated-samples}).
 
 \begin{table}[H]
 \caption{\textbf{Common Ugi benchmark for external generators and matched controls.}
 Yields per 1,000 generation attempts under one component-disjoint split, three-seed protocol and
 common exact-L1 verifier (mean $\pm$ sample standard deviation). Open-ended: exactly one
 verifier-returned decomposition with a component constitution absent from the method-visible
-training catalogue. $\dagger$, a zero imposed by a finite component action space, not an empirical
+training catalogue. The whole-molecule baselines have no reaction program, so their exact-L1 yields come from the
+same post-hoc assessment applied to every method.
+$\dagger$, a zero imposed by a finite component action space, not an empirical
 failure; N/E, not estimable. No published values from the original baseline papers are inserted.
 Definitions and seed-level values: Appendix~\ref{app:results}.}
 \label{tab:ugi-common-benchmark}
@@ -354,11 +409,12 @@ Method & Valid & Exact L1 & Unique L1 & Open-ended & Held-comp. & Diversity \\
 \end{table}
 
 \paragraph{Recursive synthesis programs connect generated lipids to evidence-qualified materials.}
-Route assessment is method-blind, and a reaction sequence counts as a complete dossier only when the
-final assembly and every upstream step pass exact forward verification and every terminal material
-closes under the frozen evidence policy. The frozen union contained
-\ForgeCommonRouteUnionComponents{} distinct role--constitution components, of which the exact-source
-library closed \ForgeCommonRouteEvidenceCompleteComponents{}; FORGE therefore produced
+Exact-L1 verification establishes the specified final assembly reaction but does not establish a
+complete synthesis route. Route assessment is method-blind, and a reaction sequence counts as a
+complete dossier only when the final assembly and every upstream step pass exact forward
+verification and every terminal material closes under the frozen evidence policy. The frozen union
+contained \ForgeCommonRouteUnionComponents{} distinct role--constitution components, of which the
+exact-source library closed \ForgeCommonRouteEvidenceCompleteComponents{}; FORGE therefore produced
 \ForgeCommonRouteForgeExactPerThousand{} exact-L1 products per 1,000 attempts but
 \ForgeCommonRouteForgeCompletePerThousand{} complete dossiers and
 \ForgeCommonRouteForgeAbstentionPerThousand{} abstentions under that library. In the bounded cascade
@@ -367,41 +423,69 @@ over a frozen, route-blinded shortlist of \ForgeRouteCandidates{} distinct Ugi p
 and \ForgeRouteCompleteProducts{} closed, with \ForgeRouteUnresolvedProducts{} unresolved and
 \ForgeRouteCensoredProducts{} search-censored. Most unresolved components were absent from the
 bounded evidence index and were never expanded, so this measures closure under a frozen cascade
-rather than molecular synthesizability.
+rather than molecular synthesizability. We record incomplete bounded route searches as abstentions
+because they do not demonstrate unsynthesizability.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.72\textwidth]{figures/forge_generated_samples_v2/forge_generated_samples.png}
+\begin{table}[H]
 \caption{\textbf{Deterministic examples of open-ended FORGE ionizable-lipid graphs.}
 Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
-constitution outside the method-visible training inventory. Left, the graph sampled jointly by FORGE;
-center, precursor origins recovered by exact atom-mapped forward replay, halos marking the Ugi core;
-right, the exact precursor constitutions returned by the verifier. Colors are semantic coordinates,
-not a vocabulary the model selects from. These are display examples, not experimental candidates, and
-exact L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
+constitution outside the method-visible training inventory. Left, the graph sampled jointly by
+FORGE; centre, precursor origins recovered by exact atom-mapped forward replay, halos marking the
+Ugi core; right, the exact precursor constitutions returned by the verifier. Purple denotes the
+amine-derived head, teal the aldehyde-derived body and tail, orange the isocyanide-derived tail and
+grey the assembly-introduced oxygen; these are semantic coordinates recovered by replay, not a
+vocabulary the model selects from. These are display examples, not experimental candidates, and
+exact-L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
 rule and twelve further examples: Appendix~\ref{app:atlas}.}
-\label{fig:forge-generated-samples}
-\end{figure}
+\label{tab:forge-generated-samples}
+\centering
+% Each cell is its own hash-pinned PNG emitted by the sample producer alongside the composite,
+% the same way the atlas emits one file per row, so nothing here is cropped out of a larger image.
+\newlength{\samplerowheight}\setlength{\samplerowheight}{2.28cm}
+\newlength{\sampleproductwidth}\setlength{\sampleproductwidth}{3.53cm}
+\newlength{\samplesemanticwidth}\setlength{\samplesemanticwidth}{5.87cm}
+\newlength{\sampleprecursorwidth}\setlength{\sampleprecursorwidth}{3.80cm}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{@{}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{}}
+\toprule
+\atlashead{\sampleproductwidth}{Generated lipid}
+& \atlashead{\samplesemanticwidth}{Reaction-program coordinates}
+& \atlashead{\sampleprecursorwidth}{Exact L1 building blocks}\\
+\midrule
+\addlinespace[1.2mm]
+\input{../v1/figures/forge_generated_samples_v2/sample_rows.tex}\\
+\addlinespace[0.6mm]
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 
-FORGE couples whole-graph generation to reaction programs and recursive synthesis programs, so the
-model can generate new molecular structures while exact forward replay and recursive routing keep
-accepted products connected to chemistry.
+We present FORGE, a generative framework that uses known assembly chemistry during whole-molecule
+generation while leaving precursor identities open. Across an AGILE-type Ugi three-component
+reaction, repeated aza-Michael addition and repeated reductive amination, reaction-program
+conditioning increased exact-L1 yield relative to matched whole-molecule generation followed by
+post-hoc filtering, and FORGE generated exact assemblies with precursor identities outside the
+corresponding training catalogues. Reaction information can therefore guide molecular generation
+without limiting the search to enumerated components.
 
 The evidence is strongest for AGILE-type Ugi 3-CR; repeated aza-Michael addition is a second
-computational family and repeated reductive amination a lighter stress test. The study is
+computational family and repeated reductive amination a lighter stress test, showing lower exact-L1
+yield, greater decomposition ambiguity and substantial between-seed variation. The study is
 computational, supports only three qualified assembly programs and operates within a bounded
-molecular graph space. Exact route closure does not establish experimental synthesis success, and the
-bounded HeLa diagnostic does not establish biological activity. Several prespecified outcomes did not
-favor FORGE and are reported in full in Appendix~\ref{app:results}: native recovery of specifically
-reserved held components remained weak at \ForgeHeldComponentPerThousand{} products per 1,000
-attempts, no evaluated method reproduced the held-out observed-lipid distribution, joint denoising was
-not uniformly superior to role isolation across programs, and neither synthesis tilting nor the nested
-potency proposal improved its matched terminal endpoint.
-Within these limits, reaction programs provide a practical coordinate system for expanding molecular
-identity without disconnecting generative design from assembly chemistry.
-
+molecular graph space. Exact forward replay verifies structural consistency with the final assembly
+reaction but does not establish precursor availability, experimental synthesis success, lipid
+activity or RNA delivery, and the bounded HeLa diagnostic does not establish biological activity.
+Several prespecified outcomes did not favor FORGE and are reported in full in
+Appendix~\ref{app:results}: native recovery of specifically reserved held components remained weak at
+\ForgeHeldComponentPerThousand{} products per 1,000 attempts, no evaluated method reproduced the
+held-out observed-lipid distribution, joint denoising was not uniformly superior to role isolation
+across programs, and neither synthesis tilting nor the nested potency proposal improved its matched
+terminal endpoint. Experimental synthesis, LNP formulation and in vitro delivery studies will be
+required to determine whether the generated lipids retain the predicted assembly properties and
+produce functional RNA delivery. Within these limits, reaction programs provide a practical
+coordinate system for expanding molecular identity without disconnecting generative design from
+assembly chemistry.
 \bibliography{../v0/forge,../v1/references}
 \bibliographystyle{../v0/iclr2027_conference}
 
@@ -411,7 +495,9 @@ identity without disconnecting generative design from assembly chemistry.
 \section{Preliminaries}
 \label{app:preliminaries}
 
-This appendix restores the background that the short-paper body compresses.
+Appendices A through F are supplementary and are excluded from the five-page short-paper
+limit, as are the references. They give the full formulation, the complete reporting contract, 
+the theoretical results and a generated-structure atlas.
 
 \subsection{Ionizable-lipid structure and modular assembly}
 
@@ -548,26 +634,8 @@ FORGE is organized into four stages:
     available starting materials and abstains when a route cannot be completed.
 \end{enumerate}
 
-Figure~\ref{fig:forge-overview} summarizes how FORGE separates reaction semantics from molecular
-identity and connects whole-graph generation to recursive synthesis-program construction.
 
-\begin{figure*}[t]
-\centering
-\resizebox{\textwidth}{!}{\input{../v1/figures/forge_algorithm_schematic/schematic_body.tex}}
-\caption{\textbf{FORGE generates complete ionizable-lipid graphs within reaction-program
-coordinates.}
-The reaction program specifies how molecular regions participate in an assembly without choosing
-their structures from a finite inventory.
-FORGE generates the complete molecular graph, verifies that the specified reaction reconstructs it,
-and recursively expands unavailable precursors until every branch terminates in evidence-qualified
-starting materials or the framework abstains.
-In the reaction-core inset, each atom carries the colour of the component it comes from; the
-carbonyl oxygen is grey because the assembly template introduces it and no precursor contributes
-it.
-Exact replay and route closure are computational checks and do not establish experimental synthesis
-success.}
-\label{fig:forge-overview}
-\end{figure*}
+
 
 \subsection{Synthesis-grounded design task}
 
@@ -1008,7 +1076,7 @@ the final conditioned model achieved exact-L1 yields of $78.7\pm10.1\%$ for Ugi
 ($72.3\%$, $90.3\%$ and $73.5\%$ by seed), $77.5\pm3.7\%$ for repeated aza-Michael
 addition ($76.5\%$, $81.5\%$ and $74.3\%$), and $31.3\pm14.3\%$ for repeated reductive
 amination ($38.6\%$, $14.8\%$ and $40.4\%$) (mean $\pm$ sample standard deviation;
-Figure~\ref{fig:shared-programs} and Table~\ref{tab:production-comparison}).
+Table~\ref{tab:shared-programs} and Table~\ref{tab:production-comparison}).
 Exact forward-replay precision was $100\%$ in every program and seed. However, mean
 decomposition ambiguity was $54.9\%$ for repeated aza-Michael addition and $74.1\%$ for
 repeated reductive amination, and the latter program showed substantial between-seed variation.
@@ -1025,31 +1093,27 @@ The final conditioned model produced zero fixed-state violations and zero suppor
 Together, these results support the conclusion that one conditional flow can learn the three
 specified reaction-program coordinates without erasing the deeply supported Ugi behavior.
 
-\begin{figure*}[t]
+\begin{table*}[t]
+\caption{\textbf{A shared model learns multiple ionizable-lipid assembly programs.}
+Exact-L1 yield (\%) and transform verification, reported separately for Ugi, repeated aza-Michael
+addition and repeated reductive amination. Cells show means and sample standard deviations across
+three independent training seeds. Shared conditioning improved Ugi exact-L1 yield over Ugi-only
+training by \ForgeUgiRetentionDifferencePP{} percentage points (95\% paired-seed bootstrap interval
+\ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP). The Ugi-only arm is evaluated only on
+Ugi, and results are not pooled across reaction programs. All values here and in
+Table~\ref{tab:production-comparison} are hash verified.}
+\label{tab:shared-programs}
 \centering
-\fbox{
-\parbox{0.94\linewidth}{
-\centering
-\textbf{Exact-L1 yield (\%) and transform verification across three seeds}\\[3pt]
-\resizebox{0.98\linewidth}{!}{%
+\small
+\setlength{\tabcolsep}{4.6pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \hline
 Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%) \\
 \hline
 \input{../v1/generated/shared_program_figure_rows.tex}%
-\end{tabular}}\\[4pt]
-Shared conditioning improved Ugi exact-L1 yield over Ugi-only training by
-\ForgeUgiRetentionDifferencePP{} percentage points (95\% interval
-\ForgeUgiRetentionCILowPP{} to \ForgeUgiRetentionCIHighPP).
-}}
-\caption{\textbf{A shared model learns multiple ionizable-lipid assembly programs.}
-Results are reported separately for Ugi, repeated aza-Michael addition and repeated reductive
-amination. Cells show means and sample standard deviations across three independent training seeds.
-The stated Ugi contrast uses a 95\% paired-seed bootstrap interval.
-The Ugi-only arm is evaluated only on Ugi, and results are not pooled across reaction programs.
-All values in this figure and Table~\ref{tab:production-comparison} are hash verified.}
-\label{fig:shared-programs}
-\end{figure*}
+\end{tabular}}
+\end{table*}
 
 \begin{table*}[t]
 \caption{\textbf{Matched production comparison across reaction programs.}
@@ -1088,7 +1152,7 @@ Under matched attempt budgets, conditioned generation produced
 786.8, 774.6 and 312.7 exact-L1 products per 1,000 attempts for Ugi, repeated aza-Michael and
 repeated reductive amination, compared with 114.4, 39.7 and 131.7 for matched null generation
 followed by post-hoc filtering
-(Figure~\ref{fig:semantic-controls}a--c).
+(Table~\ref{tab:catalogue-ceiling}).
 The paired conditioned-minus-post-hoc differences were
 \ForgeNullUgiDifferencePP{} percentage points for Ugi (95\% interval
 \ForgeNullUgiCILowPP{} to \ForgeNullUgiCIHighPP), \ForgeNullBLDifferencePP{} for aza-Michael
@@ -1143,22 +1207,20 @@ components.
 \begin{table*}[t]
 \caption{\textbf{Method-blind structural-realism diagnostic.}
 Every entry is mean $\pm$ sample standard deviation across three training seeds and retains all
-3,072 requested attempts in the denominator. Support is the declared C/N/O/P/S and 194-heavy-atom
-space. FP and descriptor P/C report manifold precision per 1,000 attempts and coverage of the
-source-study-held-out R0 reference in percent. Desc. W is the normalized descriptor Wasserstein
-distance; lower is closer. C2ST is grouped classifier two-sample area under the receiver operating
-characteristic curve; 0.5 is indistinguishable. Unique is conditioned on connected outputs.
-$N_{\mathrm{eff}}$ is the Shannon effective molecule count. N/E denotes a metric that cannot be
+3,072 requested attempts in the denominator. FP and descriptor P/C report manifold precision per
+1,000 attempts and coverage of the source-study-held-out R0 reference in percent. C2ST is grouped
+classifier two-sample area under the receiver operating characteristic curve; 0.5 is
+indistinguishable. $N_{\mathrm{eff}}$ is the Shannon effective molecule count. N/E denotes a metric that cannot be
 estimated. This post-hoc structural diagnostic is not a property, activity or synthesis-success
 score.}
 \label{tab:lipid-realism}
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2.2pt}
+\setlength{\tabcolsep}{1.6pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lccccccccc}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}cccccc@{}}
 \hline
-Method & Connected/1k & Support/1k & FP P/C & Desc. P/C & Desc. W & C2ST & Unique (\%) & $N_{\mathrm{eff}}$ & Diversity \\
+Method & Connected/1k & FP P/C & Desc. P/C & C2ST & $N_{\mathrm{eff}}$ & Diversity \\
 \hline
 \input{../v1/generated/lipid_realism_rows.tex}%
 \end{tabular}
@@ -1202,9 +1264,9 @@ and seed as the denominator.}
 \label{tab:architecture-ablations}
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2.8pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lccccccc}
+\setlength{\tabcolsep}{2.0pt}
+\makebox[\textwidth][c]{\resizebox{1.34\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}ccccccc@{}}
 \hline
 Arm &
 Held-out loss &
@@ -1217,7 +1279,7 @@ Diversity \\
 \hline
 \input{../v1/generated/architecture_ablation_rows.tex}%
 \end{tabular}
-}
+}}
 \end{table*}
 
 Removing layerwise program cross-attention reduced mean exact-L1 yield by 54.5 products per 1,000
@@ -1234,7 +1296,7 @@ Ugi products per 1,000 attempts, averaged across the three independent seeds. Th
 values were 313.9 for aza-Michael addition and 34.8 for reductive amination. The finite-component
 assembler produced zero by construction because every sampled product uses only components from
 the training catalogue
-(Figure~\ref{fig:semantic-controls}d--f and Table~\ref{tab:catalogue-comparison}).
+(Table~\ref{tab:catalogue-ceiling} and Table~\ref{tab:catalogue-comparison}).
 The catalogue achieved exact-L1 yields of 1,000.0, 723.2 and 1,000.0 products per 1,000 attempts,
 compared with 786.8, 774.6 and 312.7 for FORGE. The corresponding raw validities were 1,000.0,
 723.2 and 1,000.0 for the catalogue and 866.0, 774.6 and 365.0 for FORGE.
@@ -1256,33 +1318,28 @@ tradeoff: the exact finite catalogue has high transform consistency, whereas who
 can produce exact-L1 products whose recovered precursor identities are not restricted to that
 inventory.
 
-\begin{figure}[H]
+\begin{table}[H]
+\caption{\textbf{Reaction conditioning improves sampling efficiency without imposing a finite
+component vocabulary.}
+FORGE compared with a train-only finite-component assembler that receives exact forward chemistry
+and the same per-program attempt budget, as means across three independent training seeds. The
+comparisons use identical molecular support and final reaction adapters and make no L2-planner,
+biological-oracle or candidate-selection calls. The finite catalogue has zero component-novel yield
+by construction. Nulling all program coordinates reduced factual Ugi exact-L1 yield from
+\ForgeSemanticFactualPercent\% to \ForgeSemanticNullCoordinatesPercent\%; substituting the
+reductive-amination token reduced it to \ForgeSemanticLXTokenPercent\%.}
+\label{tab:catalogue-ceiling}
 \centering
-\fbox{
-\parbox{0.94\linewidth}{
-\centering
-\textbf{Exact assembly versus the finite-catalogue ceiling}\\[3pt]
-\resizebox{0.98\linewidth}{!}{%
+\small
+\setlength{\tabcolsep}{4.6pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \hline
 Program & FORGE L1/1k & Catalogue L1/1k & FORGE open-ended/1k & Catalogue open-ended/1k \\
 \hline
 \input{../v1/generated/catalogue_figure_rows.tex}%
-\end{tabular}}\\[4pt]
-Nulling all program coordinates reduced factual Ugi exact-L1 yield from
-\ForgeSemanticFactualPercent\% to \ForgeSemanticNullCoordinatesPercent\%; substituting the
-reductive-amination token reduced it to \ForgeSemanticLXTokenPercent\%.
-}}
-\caption{\textbf{Reaction conditioning improves sampling efficiency without imposing a finite
-component vocabulary.}
-The inset reports inference-time coordinate interventions, and the table compares FORGE with a
-train-only finite-component assembler that receives exact forward chemistry and the same per-program
-attempt budget. Values are means across three independent training seeds.
-The comparisons use identical molecular support and final reaction adapters and make no L2-planner,
-biological-oracle or candidate-selection calls.
-The finite catalogue has zero open-ended yield by construction.}
-\label{fig:semantic-controls}
-\end{figure}
+\end{tabular}}
+\end{table}
 
 \begin{table}[H]
 \caption{\textbf{Whole-graph generation versus a finite-component assembler.}
@@ -1296,9 +1353,9 @@ as paired resampling units.}
 \label{tab:catalogue-comparison}
 \centering
 \scriptsize
-\setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{llccccccc}
+\setlength{\tabcolsep}{2.4pt}
+\makebox[\textwidth][c]{\resizebox{1.34\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{1.7cm}ccccccc@{}}
 \hline
 Program & Method & Valid/1k &
 Exact L1/1k &
@@ -1310,8 +1367,27 @@ Diversity/$N_{\mathrm{eff}}$ \\
 \hline
 \input{../v1/generated/catalogue_comparison_rows.tex}%
 \end{tabular}
-}
+}}
 \end{table}
+\begin{figure}[H]
+\centering
+\def\forgedatadir{../v1/generated/}
+\input{../v1/figures/forge_tradeoff/tradeoff_body.tex}
+\caption{\textbf{Reaction consistency and escape from a finite component vocabulary are separate
+axes.} Common Ugi benchmark, per 1,000 generation attempts, mean and sample standard deviation over
+three seeds. Filled points are methods with no component vocabulary; they track $y\approx x$ because
+almost every exact-L1 product they return is outside a vocabulary they do not have, so the diagonal
+is a property of that family rather than a result. Open markers are finite-vocabulary methods, whose
+outside-vocabulary yield is zero by Theorem~\ref{thm:catalogue-bound} rather than by measurement:
+every catalogue attempt uses catalogue components. The two families measure $y$ against different
+references, so a filled point's $y$ is not comparable with an open point's $y$; the comparable
+component-novel metric against one fixed training catalogue is
+Table~\ref{tab:catalogue-comparison}. What the figure shows is position along the diagonal: FORGE
+reaches $786.8\pm100.8$ exact-L1 products, against $296.7\pm186.0$ for the next open-ended method,
+while the two methods that exceed it on the horizontal axis cannot leave the floor.}
+\label{fig:tradeoff}
+\end{figure}
+
 
 \subsection{Native recovery of held components remains weak}
 
@@ -1395,34 +1471,30 @@ The proposal engines added graph-consistent hypotheses but closed no additional 
 Most unresolved components were absent from the bounded evidence index and were never expanded, so
 the result measures closure under this frozen cascade rather than molecular synthesizability.
 
-\begin{figure*}[t]
+\begin{table*}[t]
+\caption{\textbf{Recursive synthesis programs produce auditable computational dossiers.}
+Bounded route-cascade dispositions, reporting the count and denominator at every stage; no stage is
+normalized to a later survivor set without stating that denominator. All \ForgeRouteCandidates{}
+shortlist products passed exact-L1 reverification and one product was support-censored before route
+assessment; proposal engines added hypotheses but no additional exact route closure. An L2 step is
+admitted only when its evidence tier permits the claimed reaction scope and its forward transform
+reconstructs the intended precursor. A terminal branch closes only with a current, dated supplier
+record for an exact constitutional match. Computational route closure establishes transform
+consistency and evidence-qualified terminal materials, not experimental synthesis success.}
+\label{tab:route-dispositions}
 \centering
-\fbox{
-\parbox{0.94\linewidth}{
-\centering
-\textbf{Bounded route-cascade dispositions}\\[3pt]
+\small
+\setlength{\tabcolsep}{4.6pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrr}
 \hline
 Unit & Population & Complete & Unresolved & Censored \\
 \hline
-Products & 256 & 19 & 236 & 1 \\
-Unique components & 158 & 36 & 120 & 2 \\
+Products & \ForgeRouteCandidates{} & \ForgeRouteCompleteProducts{} & \ForgeRouteUnresolvedProducts{} & \ForgeRouteCensoredProducts{} \\
+Unique components & \ForgeRouteComponents{} & \ForgeRouteCompleteComponents{} & \ForgeRouteUnresolvedComponents{} & \ForgeRouteCensoredComponents{} \\
 \hline
-\end{tabular}\\[4pt]
-All 256 shortlist products passed exact-L1 reverification; one product was support-censored before
-route assessment. Proposal engines added hypotheses but no additional exact route closure.
-}}
-\caption{\textbf{Recursive synthesis programs produce auditable computational dossiers.}
-Panel a reports the count and denominator at every stage; no stage is normalized to a later
-survivor set without stating that denominator.
-An L2 step is admitted only when its evidence tier permits the claimed reaction scope and its
-forward transform reconstructs the intended precursor.
-A terminal branch closes only with a current, dated supplier record for an exact constitutional
-match.
-Computational route closure establishes transform consistency and evidence-qualified terminal
-materials, not experimental synthesis success.}
-\label{fig:synthesis-dossiers}
-\end{figure*}
+\end{tabular}}
+\end{table*}
 
 \subsection{Guidance diagnostics define the limits of additional optimization}
 
@@ -2082,7 +2154,7 @@ claim about routes outside $\mathcal{B}$.
 \label{app:atlas}
 
 Table~\ref{tab:forge-generated-atlas} reports 12 deterministic display examples
-from the same frozen seed-0 Ugi population used in Figure~\ref{fig:forge-generated-samples}. The
+from the same frozen seed-0 Ugi population used in Table~\ref{tab:forge-generated-samples}. The
 display begins with the lowest constitutional SHA-256 rank and then applies ECFP4 MaxMin selection
 among the 23 eligible, constitutionally unique products. This promotes visual coverage without using
 activity, route closure, procurement evidence or human preference. Each row includes the canonical

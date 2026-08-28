@@ -83,7 +83,32 @@ class CompletedEvidenceV1Error(ValueError):
     """Completed evidence is missing, changed, or incompatible with manuscript rendering."""
 
 
+def _highlight_forge_rows(text: str) -> str:
+    """Tint the rows reporting our own model so it is findable in a dense comparison.
+
+    Applied to every ``*_rows.tex`` artifact so the highlight cannot drift between tables. The
+    method name is the first cell in most tables and the second where a program is reported
+    first, so both are checked. Requires ``colortbl`` and a ``forgerow`` colour in the preamble.
+    """
+
+    lines = []
+    for line in text.split("\n"):
+        cells = line.split("&")
+        if not any(cell.strip().startswith("FORGE") for cell in cells[:2]):
+            lines.append(line)
+            continue
+        # \cellcolor rather than \rowcolor: \rowcolor expands to \noalign, and these files are
+        # \input immediately after an \hline, whose lookahead pulls the first token of the file
+        # and then rejects it as a misplaced \noalign. \cellcolor is safe anywhere in a row.
+        body, _, tail = line.rpartition(r"\\")
+        painted = "&".join(r"\cellcolor{forgerow}" + cell for cell in body.split("&"))
+        lines.append(painted + r"\\" + tail)
+    return "\n".join(lines)
+
+
 def _write_text(path: Path, text: str) -> None:
+    if path.name.endswith("_rows.tex"):
+        text = _highlight_forge_rows(text)
     atomic_write(path, text.encode("utf-8"))
 
 
@@ -686,6 +711,22 @@ def _realism_summary_tex(
     return rf"${mean:.{digits}f}\pm{sd:.{digits}f}$"
 
 
+def _internal_common_lines(common: Mapping[str, Any]) -> list[str]:
+    """Internal comparison rows, with a rule set immediately before our own model.
+
+    FORMULATION_METHOD_ORDER holds only the learned selector, so a rule placed between the two
+    orders splits the matched controls rather than setting FORGE apart. The rule is anchored to
+    the FORGE row itself so it stays correct if either order changes.
+    """
+
+    lines: list[str] = []
+    for method in INTERNAL_COMMON_METHOD_ORDER:
+        if method == "forge_transformer":
+            lines.append(r"\midrule")
+        lines.append(_common_mean_row(method, common[method]))
+    return lines
+
+
 def _lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
     order = (
         "rgfn",
@@ -700,10 +741,13 @@ def _lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
         metrics = result["methods"][method]["metrics"]
         cells = (
             COMMON_METHOD_NAMES[method],
+            # Six metrics, not nine. within_declared_support tracked connected_fraction to within a
+            # rounding step in every row but the catalogue oracle, and normalized_descriptor_
+            # wasserstein and unique_fraction_among_connected are cited nowhere in the manuscript.
+            # Ten columns forced \resizebox to shrink the table past legibility; these three were
+            # the ones carrying no argument. They remain in the result mapping and can be restored
+            # here if a later claim needs them.
             _realism_summary_tex(metrics, "connected_fraction_per_attempt", digits=1, scale=1000.0),
-            _realism_summary_tex(
-                metrics, "within_declared_support_fraction_per_attempt", digits=1, scale=1000.0
-            ),
             _realism_summary_tex(
                 metrics, "fingerprint_manifold_precision_per_attempt", digits=1, scale=1000.0
             )
@@ -714,9 +758,7 @@ def _lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
             )
             + "/"
             + _realism_summary_tex(metrics, "descriptor_manifold_coverage", digits=2, scale=100.0),
-            _realism_summary_tex(metrics, "normalized_descriptor_wasserstein", digits=3),
             _realism_summary_tex(metrics, "grouped_c2st_auc", digits=3),
-            _realism_summary_tex(metrics, "unique_fraction_among_connected", digits=1, scale=100.0),
             _realism_summary_tex(metrics, "effective_molecule_count", digits=1),
             _realism_summary_tex(metrics, "internal_diversity", digits=3),
         )
@@ -917,6 +959,7 @@ def render_completed_evidence_v1(
         ),
     ]
     for program in PROGRAMS[1:]:
+        production_lines.append(r"\midrule")
         production_lines.extend(
             [
                 _production_row(program, "FORGE conditioned", final_arm[program]),
@@ -970,7 +1013,9 @@ def render_completed_evidence_v1(
     _write_text(output_dir / "shared_program_figure_rows.tex", "\n".join(figure2_lines) + "\n")
 
     catalogue_lines = []
-    for program in PROGRAMS:
+    for index, program in enumerate(PROGRAMS):
+        if index:
+            catalogue_lines.append(r"\midrule")
         catalogue_lines.extend(
             [
                 _catalogue_row(program, "FORGE", final_arm[program], catalogue=False),
@@ -1021,17 +1066,22 @@ def render_completed_evidence_v1(
         "\n".join(_common_mean_row(method, common[method]) for method in FORMULATION_METHOD_ORDER)
         + "\n",
     )
+    # A rule before each group, and before our own model so it reads as its own block. Never
+    # before the first heading: that line is the first token of the \input file, and the \hline
+    # preceding the \input would pull it into its lookahead and reject it as a misplaced \noalign.
     common_benchmark_lines = [
-        r"\textit{Reaction-space external baselines} & & & & & & \\",
+        r"\textbf{Reaction-space baselines} & & & & & & \\",
         *(
             _common_mean_row(method, common[method])
             for method in REACTION_SPACE_EXTERNAL_METHOD_ORDER
         ),
-        r"\textit{Generic whole-molecule external baselines with common post-hoc assessment} & & & & & & \\",
+        r"\midrule",
+        r"\textbf{Whole-molecule baselines} & & & & & & \\",
         *(_common_mean_row(method, common[method]) for method in GENERIC_EXTERNAL_METHOD_ORDER),
-        r"\textit{Matched controls and formulation baselines} & & & & & & \\",
+        r"\midrule",
+        r"\textbf{Matched controls} & & & & & & \\",
         *(_common_mean_row(method, common[method]) for method in FORMULATION_METHOD_ORDER),
-        *(_common_mean_row(method, common[method]) for method in INTERNAL_COMMON_METHOD_ORDER),
+        *_internal_common_lines(common),
     ]
     _write_text(
         output_dir / "common_ugi_benchmark_completed_rows.tex",

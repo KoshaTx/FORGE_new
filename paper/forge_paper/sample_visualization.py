@@ -905,6 +905,133 @@ def _draw_precursor_card(
     _paste_contain(canvas, image, (box[0] + 8, box[1] + 52, box[2] - 8, box[3] - 8), padding=3)
 
 
+def _render_semantic_cells(
+    selected: Sequence[dict[str, Any]],
+    semantic_config: Mapping[str, Any],
+    output_dir: Path,
+) -> list[str]:
+    """Render each row's three panels as their own images and return LaTeX rows.
+
+    The composite in :func:`_render_semantic_figure` is one canvas with fixed coordinates, so a
+    table built from it has to crop panels back out by viewport. This emits the same panels
+    separately, the way the atlas does, and returns rows the manuscript can \\input. Both outputs
+    come from the same selection, so they cannot disagree.
+    """
+
+    palette = semantic_config["origin_palette"]
+    rows: list[str] = []
+    for index, sample in enumerate(selected, start=1):
+        stem = f"forge_generated_sample_row_{index:02d}"
+
+        # The subtitle and halo note the composite carries are set below four point at column
+        # width, so they are dropped here and left to the caption, which says the same thing.
+        product_canvas = Image.new("RGBA", (900, 560), (255, 255, 255, 255))
+        product_draw = ImageDraw.Draw(product_canvas, "RGBA")
+        product_draw.text((18, 16), f"SAMPLE {index:02d}", font=_font(24, bold=True), fill=_MUTED)
+        product_draw.text(
+            (18, 52),
+            f"FORGE-Ugi-{int(sample['attempt_index']):04d}",
+            font=_font(34, bold=True),
+            fill=_TEXT,
+        )
+        _paste_contain(
+            product_canvas,
+            _rdkit_2d(str(sample["canonical_smiles"]), 880, 460, font_size=32),
+            (8, 100, 892, 552),
+            padding=6,
+        )
+        _save_cell(product_canvas, output_dir / f"{stem}_product.png")
+
+        semantic_canvas = Image.new("RGBA", (1420, 470), (255, 255, 255, 255))
+        _paste_contain(
+            semantic_canvas,
+            _semantic_product_image(
+                str(sample["canonical_smiles"]),
+                sample["atom_origins"],
+                sample["reaction_core_atom_indices"],
+                palette,
+                width=1400,
+                height=464,
+            ),
+            (6, 4, 1414, 466),
+            padding=4,
+        )
+        _save_cell(semantic_canvas, output_dir / f"{stem}_semantic.png")
+
+        precursor_canvas = Image.new("RGBA", (950, 560), (255, 255, 255, 255))
+        precursor_draw = ImageDraw.Draw(precursor_canvas, "RGBA")
+        half_gap = 18
+        half_width = (930 - 10 - half_gap) // 2
+        _draw_precursor_card(
+            precursor_canvas,
+            precursor_draw,
+            box=(10, 12, 10 + half_width, 254),
+            role="amine_head",
+            smiles=str(sample["components_by_role"]["amine_head"]),
+            palette=palette,
+            wide=False,
+        )
+        _draw_precursor_card(
+            precursor_canvas,
+            precursor_draw,
+            box=(10 + half_width + half_gap, 12, 930, 254),
+            role="isocyanide_tail",
+            smiles=str(sample["components_by_role"]["isocyanide_tail"]),
+            palette=palette,
+            wide=False,
+        )
+        _draw_precursor_card(
+            precursor_canvas,
+            precursor_draw,
+            box=(10, 274, 930, 548),
+            role="oxoester_aldehyde_body_tail",
+            smiles=str(sample["components_by_role"]["oxoester_aldehyde_body_tail"]),
+            palette=palette,
+            wide=True,
+        )
+        _save_cell(precursor_canvas, output_dir / f"{stem}_precursors.png")
+
+        rows.append(
+            "\n".join(
+                (
+                    r"\begin{minipage}[c][\samplerowheight][c]{\sampleproductwidth}\centering",
+                    rf"\includegraphics[width=\linewidth]{{{_FIGDIR}/{stem}_product.png}}",
+                    r"\end{minipage}",
+                    r"&",
+                    r"\begin{minipage}[c][\samplerowheight][c]{\samplesemanticwidth}\centering",
+                    rf"\includegraphics[width=\linewidth]{{{_FIGDIR}/{stem}_semantic.png}}",
+                    r"\end{minipage}",
+                    r"&",
+                    r"\begin{minipage}[c][\samplerowheight][c]{\sampleprecursorwidth}\centering",
+                    rf"\includegraphics[width=\linewidth]{{{_FIGDIR}/{stem}_precursors.png}}",
+                    r"\end{minipage}",
+                )
+            )
+        )
+    return rows
+
+
+def _save_cell(canvas: "Image.Image", path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    canvas.convert("RGB").save(path, format="PNG", dpi=(300, 300), optimize=True)
+
+
+_FIGDIR = "figures/forge_generated_samples_v2"
+
+
+def _write_sample_rows(rows: Sequence[str], path: Path) -> None:
+    """Write the table rows, leaving the final row unterminated.
+
+    A file that ends in ``\\\\`` breaks the caller: the row terminator scans for an optional
+    argument, the scan crosses the end of the input file, and the ``\\noalign`` that follows the
+    ``\\input`` is then rejected. The manuscript supplies the last terminator instead.
+    """
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    body = "\\\\\n\\addlinespace[2.2mm]\n".join(rows)
+    atomic_write(path, (body + "\n").encode("utf-8"))
+
+
 def _render_semantic_figure(
     selected: Sequence[dict[str, Any]],
     semantic_config: Mapping[str, Any],
@@ -1561,6 +1688,10 @@ def render_forge_generated_sample_figure(
     else:
         rendered_rows = _annotate_semantic_rows(selected, inputs, mode_config)
         _render_semantic_figure(rendered_rows, mode_config, png_path)
+        _write_sample_rows(
+            _render_semantic_cells(rendered_rows, mode_config, output_dir),
+            output_dir / "sample_rows.tex",
+        )
     selected_path = output_dir / "selected_samples.json"
     selection_receipt = {
         "schema_version": "forge.paper.forge_generated_sample_selection.v1",

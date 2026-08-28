@@ -437,6 +437,27 @@ def _write_tex_rows(
         + r" \\"
         for identifier in order
     ]
+    # Same convention as the completed-evidence tables: tint the row reporting our own model.
+    # \cellcolor, not \rowcolor: see the note in completed_evidence_v1._highlight_forge_rows.
+    def _tint(line: str) -> str:
+        if not line.split("&")[0].strip().startswith("FORGE"):
+            return line
+        body, _, tail = line.rpartition(r"\\")
+        return "&".join(r"\cellcolor{forgerow}" + c for c in body.split("&")) + r"\\" + tail
+
+    lines = [_tint(line) for line in lines]
+    # A rule where the family changes, and before our own model. Never on the first line: these
+    # files are \input straight after an \hline, whose lookahead would reject a leading \noalign.
+    separated: list[str] = []
+    for index, line in enumerate(lines):
+        label = line.split("&")[0]
+        if index and ("FACT" in label or r"\cellcolor" in label):
+            if not separated[-1].startswith(r"\midrule") and "FACT" not in separated[-1].split("&")[0]:
+                separated.append(r"\midrule")
+            elif r"\cellcolor" in label:
+                separated.append(r"\midrule")
+        separated.append(line)
+    lines = separated
     atomic_write(path, ("\n".join(lines) + "\n").encode())
 
 

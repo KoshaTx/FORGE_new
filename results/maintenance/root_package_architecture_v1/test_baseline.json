@@ -1,7 +1,7 @@
 {
   "baseline_failure_count": 201,
-  "collected_node_count": 1822,
-  "current_failure_count": 201,
+  "collected_node_count": 1954,
+  "current_failure_count": 190,
   "documented_missing_inputs": {
     "available": [],
     "available_count": 0,
@@ -75,16 +75,31 @@
       "sha256": "e000ae58f8695384d6e27aa5e8dd6992e3fba8b63a8df6d17aedc53b0196cce8"
     },
     "observation": {
-      "bytes": 23553,
+      "bytes": 22224,
       "path": "results/maintenance/root_package_architecture_v1/observed_failures.json",
-      "sha256": "723fa66b5ada36c5fcbacaa604b85f372709c2834be2d359db9370d8842d5a32"
+      "sha256": "298bbfa75431ad3bfa207ecaf6e69c9df69b28b7c9de5aef22a8e2c525fe3f49"
     }
   },
-  "new_failures": [],
-  "no_new_failures": true,
+  "new_failures": [
+    "tests/test_completed_evidence_v1.py::test_completed_evidence_renderer_uses_only_pinned_nonselecting_results"
+  ],
+  "no_new_failures": false,
   "ready": false,
-  "resolved_failures": [],
+  "resolved_failures": [
+    "tests/test_ugi_joint_end_to_end_sampling.py::test_stochastic_terminal_completion_requires_explicit_rng_state[atom_bond_stochastic]",
+    "tests/test_ugi_joint_end_to_end_sampling.py::test_stochastic_terminal_completion_requires_explicit_rng_state[bond_stochastic]",
+    "tests/test_ugi_joint_end_to_end_sampling.py::test_stochastic_terminal_completion_requires_explicit_rng_state[decoration_bond_stochastic]",
+    "tests/test_ugi_joint_end_to_end_sampling.py::test_stochastic_terminal_completion_requires_explicit_rng_state[stochastic]",
+    "tests/test_ugi_joint_end_to_end_sampling.py::test_terminal_completion_is_restartable_at_the_closure_rng_boundary",
+    "tests/test_ugi_joint_sparse_flow.py::test_anchor_local_decoration_state_is_bidirectionally_conditioned",
+    "tests/test_ugi_joint_sparse_flow.py::test_decoration_state_noise_matches_sampling_on_absent_slots",
+    "tests/test_ugi_joint_sparse_flow.py::test_every_expanded_record_has_an_exact_joint_sparse_projection",
+    "tests/test_ugi_joint_sparse_flow.py::test_joint_sparse_model_shares_topology_and_chemistry_backbone",
+    "tests/test_ugi_joint_sparse_flow.py::test_restartable_sampler_is_bitwise_equal_to_frozen_monolithic_schedule",
+    "tests/test_ugi_joint_sparse_flow.py::test_size_only_model_does_not_receive_clean_branch_cycle_or_attachment_programs",
+    "tests/test_ugi_joint_sparse_flow.py::test_size_only_sampler_generates_global_topology_fields_from_sizes"
+  ],
   "schema_version": "forge.test_baseline_report.v1",
   "stale_cache_nodes": [],
-  "status": "blocked_known_failures"
+  "status": "regression"
 }

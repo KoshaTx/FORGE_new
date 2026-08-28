@@ -1,0 +1,69 @@
+<!-- FORGE reachable-space figure: artwork only. Every text and math label is placed by the TikZ
+     overlay in space_figure.tex so it is set in the document's own font. Colours are the paper's
+     origin_palette plus the accept green already used by the algorithm schematic.
+     Claim discipline encoded here: the outer region is the DECLARED bounded support, not "all
+     graphs"; the catalogue region is what a train-only finite assembler can reach by construction;
+     the FORGE region is exact-L1 verified products, which is verifier-relative, not proven escape. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">
+  <defs>
+    <radialGradient id="support" cx="0.5" cy="0.45" r="0.72">
+      <stop offset="0"   stop-color="#C9C2EA" stop-opacity="0.34"/>
+      <stop offset="0.7" stop-color="#C9C2EA" stop-opacity="0.16"/>
+      <stop offset="1"   stop-color="#C9C2EA" stop-opacity="0.03"/>
+    </radialGradient>
+    <linearGradient id="forgefill" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#168C8C" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#168C8C" stop-opacity="0.12"/>
+    </linearGradient>
+    <pattern id="cat" width="9" height="9" patternTransform="rotate(38)" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="#8A5AC2" fill-opacity="0.07"/>
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#8A5AC2" stroke-width="3" stroke-opacity="0.42"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#545B6B"/>
+    </marker>
+    <marker id="arrowlite" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#9AA1B2"/>
+    </marker>
+  </defs>
+
+  <!-- declared bounded graph space -->
+  <path d="M245,60 C420,20 690,18 900,52 C1035,74 1075,180 1040,282
+           C1000,392 760,412 545,398 C350,386 215,360 190,268
+           C170,190 175,88 245,60 Z"
+        fill="url(#support)" stroke="#9AA1B2" stroke-width="1.6" stroke-opacity="0.55"
+        stroke-dasharray="7 5"/>
+
+  <!-- exact-L1 products reachable by whole-graph generation -->
+  <path d="M395,110 C560,78 760,86 862,132 C942,168 946,268 872,314
+           C782,370 570,368 462,332 C374,302 336,232 358,176
+           C368,148 378,118 395,110 Z"
+        fill="url(#forgefill)" stroke="#168C8C" stroke-width="2.2" stroke-opacity="0.85"/>
+
+  <!-- what a train-only finite catalogue can assemble, by construction a bounded island -->
+  <path d="M452,178 C512,152 596,156 630,196 C660,232 634,290 566,300
+           C500,310 448,286 436,244 C428,214 432,190 452,178 Z"
+        fill="url(#cat)" stroke="#8A5AC2" stroke-width="2.1" stroke-opacity="0.9"/>
+
+  <!-- products whose routes closed under the frozen exact-evidence library -->
+  <path d="M646,224 C686,206 730,214 744,244 C756,272 730,300 692,302
+           C654,304 630,282 632,256 C633,240 638,230 646,224 Z"
+        fill="#2E8B57" fill-opacity="0.26" stroke="#2E8B57" stroke-width="2"/>
+
+  <!-- reserved held components: inside the declared support, almost never reached -->
+  <g fill="#E39532" fill-opacity="0.95">
+    <circle cx="962" cy="112" r="5.4"/><circle cx="990" cy="146" r="5.4"/>
+    <circle cx="952" cy="168" r="5.4"/><circle cx="1004" cy="196" r="5.4"/>
+    <circle cx="936" cy="212" r="5.4"/>
+  </g>
+
+  <!-- sampling trajectory from noise into the space -->
+  <circle cx="96" cy="250" r="10" fill="#9AA1B2"/>
+  <circle cx="96" cy="250" r="20" fill="#9AA1B2" fill-opacity="0.20"/>
+  <path d="M118,246 C190,206 268,286 344,226" fill="none" stroke="#545B6B"
+        stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <!-- open-ended products: exact-L1 but outside the catalogue island -->
+  <path d="M700,150 C740,132 786,140 806,162" fill="none" stroke="#9AA1B2"
+        stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#arrowlite)"/>
+</svg>
