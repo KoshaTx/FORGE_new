@@ -673,10 +673,12 @@ def run_synthesis_program_production_evaluation(
                                     ),
                                 )
                             except SynthesisProgramLayoutError as error:
+                                # Carry the layout reason forward: this runs on paid accelerators,
+                                # where re-reading the cause costs another run.
                                 raise SynthesisProgramProductionEvaluationError(
                                     "factorized layout support failed for "
                                     f"arm={arm_id}, checkpoint={step}, split={split_name}, "
-                                    f"program={program_id}, seed={layout_seed}"
+                                    f"program={program_id}, seed={layout_seed}: {error}"
                                 ) from error
                             rows, sampling = sample_synthesis_program_products(
                                 model,

@@ -28,6 +28,12 @@ class SynthesisProgramLayoutError(ValueError):
     """A factorized layout cannot satisfy the declared program support."""
 
 
+# Size draws whose role-morphology law has no mass inside the closure bound are redrawn rather
+# than raised.  The bound is a fail-closed stop: a program whose size law cannot reach a feasible
+# assignment in this many draws is misspecified, and silently looping would hide that.
+_ROLE_MORPHOLOGY_REDRAW_LIMIT = 64
+
+
 @dataclass(frozen=True)
 class _RecordSummary:
     depth: int
@@ -448,20 +454,15 @@ class SynthesisProgramLayoutPrior:
             blocks.extend((int(role_state), size, core_signature) for size in sizes)
         return depth, closure_count, blocks, fixed_signature
 
-    def _sample_role_morphology(
+    def _role_morphology_supports(
         self,
         *,
         program_id: str,
         depth: int,
         blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
         fixed_signature: tuple[tuple[Any, ...], ...],
-        rng: np.random.Generator,
-    ) -> dict[int, tuple[int, int, int, int]]:
-        """Draw complete role-local programs conditioned on the sampled role sizes.
-
-        Role programs remain component-identity free.  Their small categorical supports are
-        combined exactly and conditioned on the model's global closure bound rather than retried.
-        """
+    ) -> tuple[tuple[int, ...], list[Any]]:
+        """Return the role-local morphology support for one drawn size assignment."""
 
         distribution = self._distributions[program_id]
         bundle = (
@@ -485,6 +486,58 @@ class SynthesisProgramLayoutPrior:
                 raise SynthesisProgramLayoutError(
                     "sampled role sizes have no role-local morphology support"
                 ) from error
+        return roles, supports
+
+    def _role_morphology_admits_closure_budget(
+        self,
+        *,
+        program_id: str,
+        depth: int,
+        blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
+        fixed_signature: tuple[tuple[Any, ...], ...],
+    ) -> bool:
+        """Report whether this size assignment leaves the closure-conditioned law any mass.
+
+        The morphology law is a product over role states conditioned on the global closure bound,
+        so it has mass exactly when the per-role minimum cycle ranks already sum within that bound:
+        the combination attaining every minimum is admissible whenever any combination is.  Sizes
+        are drawn before this conditioning, so a draw can land where no combination fits, and the
+        product is then empty through no fault of the model.  Checking here consumes no randomness.
+        """
+
+        try:
+            _, supports = self._role_morphology_supports(
+                program_id=program_id,
+                depth=depth,
+                blocks=blocks,
+                fixed_signature=fixed_signature,
+            )
+        except SynthesisProgramLayoutError:
+            return False
+        minimum = sum(min(int(value[2]) for value in support.values) for support in supports)
+        return minimum <= self.maximum_closures
+
+    def _sample_role_morphology(
+        self,
+        *,
+        program_id: str,
+        depth: int,
+        blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
+        fixed_signature: tuple[tuple[Any, ...], ...],
+        rng: np.random.Generator,
+    ) -> dict[int, tuple[int, int, int, int]]:
+        """Draw complete role-local programs conditioned on the sampled role sizes.
+
+        Role programs remain component-identity free.  Their small categorical supports are
+        combined exactly and conditioned on the model's global closure bound rather than retried.
+        """
+
+        roles, supports = self._role_morphology_supports(
+            program_id=program_id,
+            depth=depth,
+            blocks=blocks,
+            fixed_signature=fixed_signature,
+        )
         admitted: list[tuple[int, ...]] = []
         weights: list[float] = []
         for indices in product(*(range(len(support.values)) for support in supports)):
@@ -1043,6 +1096,23 @@ class SynthesisProgramLayoutPrior:
         output: list[SynthesisProgramGraphRecord] = []
         for sample_index in range(sample_count):
             depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
+            if role_morphology_conditioning:
+                # Role sizes are drawn before the morphology law is conditioned on the closure
+                # bound, so a draw can land where the conditioned product has no mass at all.
+                # Redraw those sizes rather than failing the run: the rejected region is a
+                # property of the size law, not of the model being evaluated.  A feasible draw
+                # consumes no extra randomness here, so programs that never reject are unchanged.
+                attempts = 1
+                while not self._role_morphology_admits_closure_budget(
+                    program_id=program_id, depth=depth, blocks=blocks, fixed_signature=fixed
+                ):
+                    if attempts >= _ROLE_MORPHOLOGY_REDRAW_LIMIT:
+                        raise SynthesisProgramLayoutError(
+                            "role-local morphology law has no mass within closure support for "
+                            f"{program_id} after {attempts} size redraws"
+                        )
+                    depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
+                    attempts += 1
             morphology = None
             if role_morphology_conditioning:
                 morphology = self._sample_role_morphology(
