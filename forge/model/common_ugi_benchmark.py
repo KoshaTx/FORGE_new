@@ -225,24 +225,35 @@ def _load_ugi_identity_references_cached(
     training_components: dict[str, set[str]] = {role: set() for role in roles}
     held_components: dict[str, set[str]] = {role: set() for role in roles}
     seen = 0
+    # A component ledger repeats a small precursor inventory across every product row: the balanced
+    # Ugi corpus carries 112,386 rows but only a few hundred distinct component constitutions.
+    # Canonicalization is a pure function of the source string, so memoize it per role.  The key
+    # keeps the role so that an invalid component still fails on the same row with the same role
+    # named, and only validated components are ever stored.
+    component_canonical: dict[tuple[str, str], str] = {}
     with rdBase.BlockLogs():
         for row in iter_csv(assignments_path):
             seen += 1
             product = Chem.MolFromSmiles(row["canonical_product_smiles"])
             if product is None:
                 raise CommonUgiBenchmarkError("Ugi assignment contains an invalid product")
-            if row["primary_product_fold"] == "train":
+            train_row = row["primary_product_fold"] == "train"
+            if train_row:
                 training_products.add(
                     Chem.MolToSmiles(product, canonical=True, isomericSmiles=False)
                 )
             for role in roles:
-                molecule = Chem.MolFromSmiles(row[f"{role}_smiles"])
-                if molecule is None or len(Chem.GetMolFrags(molecule)) != 1:
-                    raise CommonUgiBenchmarkError(
-                        f"Ugi assignment contains an invalid {role} component"
-                    )
-                canonical = Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
-                if row["primary_product_fold"] == "train":
+                source = row[f"{role}_smiles"]
+                canonical = component_canonical.get((role, source))
+                if canonical is None:
+                    molecule = Chem.MolFromSmiles(source)
+                    if molecule is None or len(Chem.GetMolFrags(molecule)) != 1:
+                        raise CommonUgiBenchmarkError(
+                            f"Ugi assignment contains an invalid {role} component"
+                        )
+                    canonical = Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
+                    component_canonical[(role, source)] = canonical
+                if train_row:
                     training_components[role].add(canonical)
                 if row[f"{role}_family_fold"] == "heldout":
                     held_components[role].add(canonical)

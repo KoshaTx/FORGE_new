@@ -22,7 +22,8 @@
 	phase1-shared-synthesis-program-production-modal-plan \
 	phase1-training-smoke phase1-training-modal-plan phase1-sampling-smoke \
 	phase1-sampling-reproduce paper-experiment-readiness paper-verify manuscript-pdf manuscript-iclr \
-	paper-bundle code-survey test-baseline-report typecheck check-core test lint fmt clean
+	paper-bundle code-survey test-baseline-report assessment-benchmark typecheck check-core \
+	test lint fmt clean
 
 EXPECT_PINS ?= 822
 EXPECT_PINS_ALL ?= 2416
@@ -74,6 +75,7 @@ help:
 	@echo "  make paper-experiment-readiness   audit every v1 result and baseline obligation"
 	@echo "  make test / lint / fmt            repository quality gates"
 	@echo "  make code-survey                  classify historical code without deleting it"
+	@echo "  make assessment-benchmark         time and digest the CPU Ugi assessor suite"
 	@echo "  make paper-verify / paper-bundle  verify or package paper evidence"
 
 vendor:
@@ -262,6 +264,12 @@ code-survey:
 test-baseline-report:
 	PYTHONPATH=.:tools:paper python3 -m forge_maintenance test-report \
 		--output results/maintenance/root_package_architecture_v1/test_baseline.json
+
+# CPU only. Times the frozen Ugi assessor suite over three 3,072-attempt ledgers and digests every
+# emitted row and metric, so a performance change can be shown to be output-exact.
+assessment-benchmark:
+	PYTHONPATH=.:tools python3 -m forge_maintenance assessment-benchmark \
+		--output build/assessment_benchmark/result.json
 
 typecheck:
 	MYPYPATH=.:tools:paper python3 -m mypy forge/core forge/chemistry forge/assembly cli

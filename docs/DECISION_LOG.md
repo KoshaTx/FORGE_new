@@ -9813,3 +9813,65 @@ preserved unchanged.
   `c96e086fc971c392acd8386d62e5e783aa705be19b7aa3535b7ab81c050088ef` under source SHA-256
   `ed0cb774636583adf5799d70850ea1766d721ba0762cd4b492360ce2008b8007`; because the one-preflight
   authorization was consumed, a new paid retry requires fresh explicit authorization.
+
+## 2026-08-28 - Bound the assessor's classifier thread pool and reuse assessment work
+
+- Built one reproducible CPU assessment benchmark before changing anything: `make
+  assessment-benchmark`, i.e. `PYTHONPATH=.:tools python3 -m forge_maintenance
+  assessment-benchmark`. It derives three deterministic 3,072-attempt ledgers from the hash-pinned
+  Ugi corpus and constitutional R0 - 2,000 corpus products, 800 observed lipids, 64 disconnected
+  products, 32 unparseable products, 88 native invalid and 88 native failed attempts, interleaved by
+  a seeded digest - runs the common Ugi, frozen route-evidence and whole-lipid realism assessors
+  over each, and emits a SHA-256 over every emitted attempt row and every metric. The ledger bytes
+  are deterministic and their SHA-256 values are recorded. The local-chemistry and role-morphology
+  assessors are outside the benchmark because their pinned policy artifacts are absent from this
+  checkout; neither was changed.
+- The cold profile attributed a 47.96 s single-ledger run as: rebuilding the Ugi identity reference
+  16.0 s, the observed-lipid realism reference 13.0 s, the grouped classifier two-sample test
+  11.1 s, whole-lipid descriptor vectors 11.4 s, exact-L1 reverse decomposition with exact forward
+  replay 1.4 s, and pairwise ECFP4 diversity 1.2 s computed twice.
+- The single largest cost was not chemistry. The frozen C2ST fits a boosted tree on 4,096 rows and
+  24 features; on this 16-core host that took 27.87 s at the default OpenMP thread count and 1.51 s
+  at one thread, an 18x difference spent in fork/join barriers on a problem far below the size where
+  the estimator's parallel regions pay off. Its five fold AUCs are bit-identical at 1, 2, 4, 8 and
+  16 threads, so the pool is now bounded through `threadpoolctl` and `C2ST_OPENMP_THREADS`. A
+  process-wide `OMP_NUM_THREADS=1` was measured and rejected: it took the pre-change tree from
+  80.74 s to 66.19 s but made the realism reference build slower, 9.57 s to 13.27 s.
+- Retained five output-exact reuse changes. The Ugi identity reference memoizes component
+  canonicalization per role, because the 112,386-row balanced corpus contains only 424 distinct
+  component constitutions. The realism reference parses each selected R0 lipid once instead of once
+  for its descriptors and again for its fingerprint. Internal diversity reuses the fingerprints the
+  realism pass already computed. A single-program ledger reuses its overall evaluation for the
+  per-program block rather than recomputing it, including its O(n^2) pairwise diversity, and that
+  diversity reuses the molecules the evaluator already parsed. Exact forward replay records one
+  verdict per reverse trace instead of replaying the reaction for every duplicate reverse outcome
+  and re-parsing the same product each time. The lipid root rule resolves its lexicographic
+  tie-break one coordinate at a time, so whole-graph eccentricity and the canonical ranking are
+  usually never computed, and its traversals walk a materialized adjacency list.
+- Measured by alternating the pristine and changed trees inside each round on one host and taking
+  the minimum over three rounds, because the host carried unrelated user load throughout. On three
+  3,072-attempt ledgers in the production thread configuration the workload fell from 132.87 s to
+  44.95 s (2.96x); the cold first seed from 68.47 s to 28.98 s (2.36x) and the warm steady state
+  from 32.08 s to 7.90 s per seed (4.06x). With both arms pinned to one OpenMP thread, which removes
+  the classifier effect from both, the same workload fell from 49.16 s to 37.71 s (1.30x) and its
+  cold start from 33.08 s to 22.28 s (1.48x). The attributable result is
+  `results/maintenance/ugi_assessment_cpu_performance_v1/result.json`.
+- Output identity is the acceptance criterion, not a summary comparison. All twelve runs - two
+  trees, two thread configurations, three rounds - produced the same combined digest
+  `7f9dfcfb4247be8341001c7317c3ca48a72517ffc75a5a5a25bee897379c2b2b` over every common-assessed
+  attempt row, the complete common Ugi assessment, every route-assessed row and result, and every
+  realism-assessed row and result. `tests/test_assessment_output_identity.py` re-derives each
+  rewritten quantity a second, naive way - the pre-change breadth-first traversal, the per-row
+  canonicalization, a second evaluation pass, a fresh parse for every fingerprint, and the
+  classifier at a different thread count - and requires exact equality.
+- Measured but not adopted: a process pool over the two cold reference builds does beat serial with
+  bit-identical output, start-up included - 6,144 whole-lipid descriptor vectors 6.249 s serial
+  versus 2.822 s on eight workers, and 112,386 identity product parses plus canonicalization 8.081 s
+  serial versus 1.009 s on sixteen workers. It is deferred rather than rejected: the production
+  assessor runs in the same process as GPU sampling, so any pool must be spawn-only and CUDA-safe,
+  which is a separate qualification against a paid run.
+- **Decision:** retain the bounded classifier thread pool and the five reuse changes. Do not set a
+  process-wide thread limit. No policy field, denominator, threshold, tolerance or frozen selection
+  changed, and this wall-time work is not a scientific result. Assessment remains sequential across
+  ledgers; process-level parallelism across independent (program, seed) assessments is the largest
+  remaining lever and requires its own authorization and qualification.

@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from collections import Counter
 from collections.abc import Mapping, Sequence, Set
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -172,14 +173,23 @@ def effective_count(values: Sequence[str]) -> float | None:
     return math.exp(entropy)
 
 
-def _mean_pairwise_distance(smiles_values: Sequence[str]) -> float | None:
+def _mean_pairwise_distance(
+    smiles_values: Sequence[str], molecules: Mapping[str, Any] | None = None
+) -> float | None:
+    """Mean pairwise ECFP4 distance over the unique constitutions in a sample.
+
+    ``molecules`` lets a caller that has already parsed these exact SMILES hand the graphs over.
+    A molecule is still required for every unique value, so a missing or unparseable one fails the
+    same way it would on a fresh parse.
+    """
+
     unique = sorted(set(smiles_values))
     if len(unique) < 2:
         return None
     generator = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048)
     fingerprints = []
     for smiles in unique:
-        molecule = Chem.MolFromSmiles(smiles)
+        molecule = Chem.MolFromSmiles(smiles) if molecules is None else molecules.get(smiles)
         if molecule is None:
             raise ReactionProgramEvaluationError("valid sample failed metric parsing")
         fingerprints.append(generator.GetFingerprint(molecule))
@@ -329,7 +339,9 @@ def _evaluate_rows(
         "unique_fraction": _fraction(unique_valid, len(valid_rows)),
         "whole_product_novel_to_train": novel_products,
         "whole_product_novel_to_train_fraction": _fraction(novel_products, len(valid_rows)),
-        "mean_pairwise_ecfp4_distance": _mean_pairwise_distance(smiles_values),
+        "mean_pairwise_ecfp4_distance": _mean_pairwise_distance(
+            smiles_values, dict(zip(smiles_values, molecules, strict=True))
+        ),
         "exact_l1_program": len(exact_rows),
         "exact_l1_yield_per_attempt": _fraction(len(exact_rows), sample_count),
         "unique_exact_l1_products": unique_exact_l1_products,
@@ -418,20 +430,28 @@ def evaluate_reaction_program_samples(
     if not rows:
         raise ReactionProgramEvaluationError("sample evaluation requires at least one row")
     program_ids = sorted({str(row["program_id"]) for row in rows})
-    return {
-        "overall": _evaluate_rows(
-            rows,
-            training_products=training_products,
-            training_components=training_components,
-        ),
-        "per_program": {
+    overall = _evaluate_rows(
+        rows,
+        training_products=training_products,
+        training_components=training_components,
+    )
+    if len(program_ids) == 1 and all(row["program_id"] == program_ids[0] for row in rows):
+        # A single-program ledger's per-program filter reproduces the overall row sequence exactly,
+        # and `_evaluate_rows` is a pure function of that sequence and the frozen references, so the
+        # second pass -- including its O(n^2) pairwise diversity -- can only recompute this result.
+        per_program = {program_ids[0]: deepcopy(overall)}
+    else:
+        per_program = {
             program_id: _evaluate_rows(
                 [row for row in rows if row["program_id"] == program_id],
                 training_products=training_products,
                 training_components=training_components,
             )
             for program_id in program_ids
-        },
+        }
+    return {
+        "overall": overall,
+        "per_program": per_program,
         "coverage_and_precision_reported": True,
         "reductive_amination_substructure_rate_reported": False,
     }

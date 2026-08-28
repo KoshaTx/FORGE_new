@@ -228,6 +228,10 @@ class Ugi3AssemblyAdapter:
                 f"Ugi reverse decomposition reached maximum_outcomes={maximum_outcomes}"
             )
         candidates: dict[tuple[tuple[str, str], ...], Ugi3TransformConsistentCandidate] = {}
+        # Reverse enumeration returns the same precursor tuple more than once for a symmetric
+        # product.  Exact forward replay is a pure function of that tuple and this product, so
+        # record each verdict once instead of replaying the reaction per duplicate outcome.
+        replayed: dict[tuple[tuple[str, str], ...], bool] = {}
         policies = self._compiled.definition.reactant_roles
         for outcome in outcomes:
             if len(outcome) != len(self.roles):
@@ -264,10 +268,15 @@ class Ugi3AssemblyAdapter:
             if len(components) != len(self.roles):
                 continue
             trace = tuple(components)
-            forward_check = self.check_forward(
-                dict(trace), canonical, maximum_outcomes=maximum_outcomes
-            )
-            if forward_check.exact and not forward_check.saturated:
+            exact_round_trip = replayed.get(trace)
+            if exact_round_trip is None:
+                # `canonical` was produced by this module's canonicalizer from a validated connected
+                # product, so replaying against it is `check_forward` without re-parsing and
+                # re-canonicalizing the same product string once per candidate.
+                forward = self.forward_products(dict(trace), maximum_outcomes=maximum_outcomes)
+                exact_round_trip = canonical in forward.products and not forward.saturated
+                replayed[trace] = exact_round_trip
+            if exact_round_trip:
                 candidates[trace] = Ugi3TransformConsistentCandidate(
                     product_smiles=canonical,
                     components=trace,

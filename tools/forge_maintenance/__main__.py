@@ -16,6 +16,8 @@ from typing import Any
 from forge_maintenance.code_survey import survey_code
 from forge_maintenance.test_baseline import build_test_baseline_report
 
+DEFAULT_BENCHMARK_SEEDS = (20260825, 20260826, 20260827)
+
 DEFAULT_CONTRACT = Path("configs/reproduction/iclr2027.json")
 
 
@@ -74,6 +76,21 @@ def _command_test_report(args: argparse.Namespace) -> int:
     return 0 if result["no_new_failures"] else 1
 
 
+def _command_assessment_benchmark(args: argparse.Namespace) -> int:
+    from forge_maintenance.assessment_benchmark import run_benchmark
+
+    repo = _repo()
+    seeds = [int(value) for value in args.seed] if args.seed else list(DEFAULT_BENCHMARK_SEEDS)
+    ledger_dir = _optional(repo, args.ledger_dir) or repo / "build/assessment_benchmark"
+    result = run_benchmark(repo, seeds=seeds, ledger_dir=ledger_dir)
+    output = _optional(repo, args.output)
+    if output is not None:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n")
+    _print(result)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="forge_maintenance", description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -91,6 +108,15 @@ def build_parser() -> argparse.ArgumentParser:
     report.add_argument("--observed-output")
     report.add_argument("--output")
     report.set_defaults(function=_command_test_report)
+
+    benchmark = commands.add_parser(
+        "assessment-benchmark",
+        help="time the CPU Ugi assessor suite and digest every emitted row and metric",
+    )
+    benchmark.add_argument("--seed", action="append")
+    benchmark.add_argument("--ledger-dir")
+    benchmark.add_argument("--output")
+    benchmark.set_defaults(function=_command_assessment_benchmark)
     return parser
 
 
