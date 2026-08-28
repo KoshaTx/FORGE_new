@@ -27,6 +27,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.neighbors import NearestNeighbors
+from threadpoolctl import threadpool_limits
 
 from forge.core.hashing import sha256_file, sha256_json
 from forge.core.io import iter_csv
@@ -36,6 +37,11 @@ from forge.model.lipid_context import (
     rooted_distances,
     select_lipid_polar_root,
 )
+
+# Thread pool used for the frozen classifier two-sample test.  This is a wall-time setting only:
+# the estimator is deterministic for a fixed random state and returns bit-identical fold AUCs at
+# every thread count, and this benchmark's matrices are too small for its OpenMP regions to pay off.
+C2ST_OPENMP_THREADS = 1
 
 REFERENCE_SCHEMA = "forge.common_lipid_realism_reference.v1"
 ASSESSMENT_SCHEMA = "forge.common_lipid_realism_assessment.v1"
@@ -217,20 +223,29 @@ def _descriptor_vector(molecule: Chem.Mol) -> np.ndarray:
         raise CommonLipidRealismError("descriptor input contains no heavy atoms")
     root = select_lipid_polar_root(molecule)
     distances = rooted_distances(molecule, root)
-    regions = assign_lipid_regions(molecule, root)
+    regions = assign_lipid_regions(molecule, root, distances=distances)
     region_counts = np.bincount(regions, minlength=3)
-    element_counts = Counter(atom.GetSymbol() for atom in atoms)
-    branches = sum(atom.GetAtomicNum() > 1 and atom.GetDegree() >= 3 for atom in atoms)
-    tail_branches = sum(
-        atom.GetAtomicNum() > 1 and atom.GetDegree() >= 3 and int(regions[atom.GetIdx()]) == 2
-        for atom in atoms
-    )
+    # One pass over the atoms instead of five.  Every accumulator below is the same sum over the
+    # same atom order as the per-descriptor comprehensions it replaces; only the number of calls
+    # back into RDKit for the same symbol, degree and charge changes.
+    element_counts: Counter[str] = Counter()
+    branches = 0
+    tail_branches = 0
+    formal_charge = 0
+    absolute_formal_charge = 0
+    for atom in atoms:
+        element_counts[atom.GetSymbol()] += 1
+        charge = atom.GetFormalCharge()
+        formal_charge += charge
+        absolute_formal_charge += abs(charge)
+        if atom.GetAtomicNum() > 1 and atom.GetDegree() >= 3:
+            branches += 1
+            if int(regions[atom.GetIdx()]) == 2:
+                tail_branches += 1
     unsaturated = sum(
         not bond.GetIsAromatic() and bond.GetBondTypeAsDouble() > 1.0
         for bond in molecule.GetBonds()
     )
-    formal_charge = sum(atom.GetFormalCharge() for atom in atoms)
-    absolute_formal_charge = sum(abs(atom.GetFormalCharge()) for atom in atoms)
     values = (
         heavy_atoms,
         Descriptors.MolWt(molecule),  # type: ignore[attr-defined]
@@ -263,15 +278,6 @@ def _descriptor_vector(molecule: Chem.Mol) -> np.ndarray:
     return vector
 
 
-def _parse_reference_molecule(row: ReferenceMolecule) -> Chem.Mol:
-    parsed = _canonical_connected(row.canonical_smiles)
-    if parsed is None or parsed[0] != row.canonical_smiles:
-        raise CommonLipidRealismError(
-            f"frozen reference molecule is no longer a canonical connected graph: {row.structure_id}"
-        )
-    return parsed[1]
-
-
 def _robust_scale(matrix: np.ndarray) -> RobustDescriptorScale:
     if matrix.ndim != 2 or matrix.shape[0] < 2 or matrix.shape[1] != len(DESCRIPTOR_NAMES):
         raise CommonLipidRealismError("descriptor scaling reference is too small or malformed")
@@ -299,7 +305,12 @@ def _reference_rows(
     r0_path: Path,
     splits_path: Path,
     policy: RealismPolicy,
-) -> tuple[tuple[ReferenceMolecule, ...], tuple[ReferenceMolecule, ...], dict[str, Any]]:
+) -> tuple[
+    tuple[ReferenceMolecule, ...],
+    tuple[ReferenceMolecule, ...],
+    dict[str, Any],
+    dict[str, Chem.Mol],
+]:
     split_by_id: dict[str, dict[str, str]] = {}
     for row in iter_csv(splits_path):
         required = {"r0_structure_id", "source_study_group_id", "source_study_fold"}
@@ -310,6 +321,10 @@ def _reference_rows(
     counts: Counter[str] = Counter()
     seen_ids: set[str] = set()
     seen_smiles: set[str] = set()
+    # Every eligible constitution is parsed and canonicality-checked here.  Keeping the accepted
+    # molecules lets the descriptor and fingerprint passes reuse them instead of re-parsing and
+    # re-canonicalizing the selected rows; only the selected ones survive this function.
+    eligible_molecules: dict[str, Chem.Mol] = {}
     for row in iter_csv(r0_path):
         required = {
             "r0_structure_id",
@@ -344,6 +359,7 @@ def _reference_rows(
         if canonical in seen_smiles:
             raise CommonLipidRealismError("constitutional R0 contains duplicate molecular graphs")
         seen_smiles.add(canonical)
+        eligible_molecules[structure_id] = molecule
         populations[fold].append(
             ReferenceMolecule(
                 structure_id=structure_id,
@@ -393,7 +409,10 @@ def _reference_rows(
             "outside-support reference rows are counted and excluded, not silently dropped": True,
         },
     }
-    return training, heldout, audit
+    selected = {
+        row.structure_id: eligible_molecules[row.structure_id] for row in (*training, *heldout)
+    }
+    return training, heldout, audit, selected
 
 
 def _fingerprint_radii(fingerprints: tuple[Any, ...], neighbors: int) -> np.ndarray:
@@ -425,25 +444,27 @@ def _build_realism_reference_cached(
     # earlier reference.  The files were hash-pinned by the caller before reaching this function.
     del r0_sha256, splits_sha256
 
-    training, heldout, audit = _reference_rows(r0_path, splits_path, policy)
+    training, heldout, audit, molecules = _reference_rows(r0_path, splits_path, policy)
     training_matrix = np.asarray(
-        [_descriptor_vector(_parse_reference_molecule(row)) for row in training]
+        [_descriptor_vector(molecules[row.structure_id]) for row in training]
     )
     scale = _robust_scale(training_matrix)
+    # Use each held-out reference once instead of parsing it for its descriptors and again for its
+    # fingerprint.  The fingerprint is still taken from a molecule that no descriptor pass has
+    # touched, so the reference manifold is built from exactly the same bit vectors as before.
+    heldout_molecules = [molecules[row.structure_id] for row in heldout]
+    generator = rdFingerprintGenerator.GetMorganGenerator(
+        radius=policy.fingerprint_radius, fpSize=policy.fingerprint_bits
+    )
+    fingerprints = tuple(generator.GetFingerprint(molecule) for molecule in heldout_molecules)
     heldout_matrix = scale.transform(
-        np.asarray([_descriptor_vector(_parse_reference_molecule(row)) for row in heldout])
+        np.asarray([_descriptor_vector(molecule) for molecule in heldout_molecules])
     )
     neighbors = NearestNeighbors(n_neighbors=policy.manifold_neighbors + 1, metric="euclidean")
     descriptor_distances = neighbors.fit(heldout_matrix).kneighbors(
         heldout_matrix, return_distance=True
     )[0]
     descriptor_radii = descriptor_distances[:, -1]
-    generator = rdFingerprintGenerator.GetMorganGenerator(
-        radius=policy.fingerprint_radius, fpSize=policy.fingerprint_bits
-    )
-    fingerprints = tuple(
-        generator.GetFingerprint(_parse_reference_molecule(row)) for row in heldout
-    )
     fingerprint_radii = _fingerprint_radii(fingerprints, policy.manifold_neighbors)
     audit = {
         **audit,
@@ -516,8 +537,16 @@ def _effective_count(canonical_smiles: Sequence[str]) -> float:
 
 
 def _internal_diversity(
-    canonical_smiles: Sequence[str], policy: RealismPolicy
+    canonical_smiles: Sequence[str],
+    policy: RealismPolicy,
+    fingerprints_by_smiles: Mapping[str, Any],
 ) -> tuple[float | None, int]:
+    """Mean pairwise ECFP distance over a frozen sample of the unique generated constitutions.
+
+    The caller has already fingerprinted every connected generated molecule under this policy's
+    Morgan settings, so those bit vectors are reused rather than re-parsed and recomputed.
+    """
+
     unique = sorted(set(canonical_smiles))
     selected = _ranked_sample(
         [ReferenceMolecule(value, value, value) for value in unique],
@@ -527,10 +556,7 @@ def _internal_diversity(
     )
     if len(selected) < 2:
         return None, len(selected)
-    generator = rdFingerprintGenerator.GetMorganGenerator(
-        radius=policy.fingerprint_radius, fpSize=policy.fingerprint_bits
-    )
-    fingerprints = [generator.GetFingerprint(_parse_reference_molecule(row)) for row in selected]
+    fingerprints = [fingerprints_by_smiles[row.canonical_smiles] for row in selected]
     distances: list[float] = []
     for index, fingerprint in enumerate(fingerprints[:-1]):
         similarities = DataStructs.BulkTanimotoSimilarity(fingerprint, fingerprints[index + 1 :])
@@ -612,20 +638,27 @@ def _classifier_two_sample(
         }
     splitter = StratifiedGroupKFold(n_splits=folds, shuffle=True, random_state=policy.c2st_seed)
     aucs = []
-    for train_indices, test_indices in splitter.split(features, labels, groups):
-        if len(set(labels[train_indices])) != 2 or len(set(labels[test_indices])) != 2:
-            continue
-        classifier = HistGradientBoostingClassifier(
-            max_iter=policy.c2st_max_iterations, random_state=policy.c2st_seed
-        )
-        classifier.fit(features[train_indices], labels[train_indices])
-        aucs.append(
-            float(
-                roc_auc_score(
-                    labels[test_indices], classifier.predict_proba(features[test_indices])[:, 1]
+    # The frozen C2ST fits a boosted tree on a few thousand rows and two dozen features.  That is
+    # far below the size where the estimator's OpenMP regions pay for themselves: on a 16-core host
+    # the default thread count spends its time in fork/join barriers and the estimator runs an order
+    # of magnitude slower than on one thread.  The estimator is deterministic for a fixed
+    # ``random_state`` and its fold AUCs are bit-identical at 1, 2, 4, 8 and 16 threads, so limiting
+    # the pool changes only the wall time.  See tests/test_assessment_output_identity.py.
+    with threadpool_limits(limits=C2ST_OPENMP_THREADS, user_api="openmp"):
+        for train_indices, test_indices in splitter.split(features, labels, groups):
+            if len(set(labels[train_indices])) != 2 or len(set(labels[test_indices])) != 2:
+                continue
+            classifier = HistGradientBoostingClassifier(
+                max_iter=policy.c2st_max_iterations, random_state=policy.c2st_seed
+            )
+            classifier.fit(features[train_indices], labels[train_indices])
+            aucs.append(
+                float(
+                    roc_auc_score(
+                        labels[test_indices], classifier.predict_proba(features[test_indices])[:, 1]
+                    )
                 )
             )
-        )
     if not aucs:
         return {"status": "not_estimable", "reason": "no_valid_grouped_folds"}
     return {
@@ -692,11 +725,10 @@ def assess_lipid_realism(
         rows.append(row)
 
     fingerprint_covered = np.zeros(len(reference.heldout), dtype=bool)
+    heldout_fingerprints = list(reference.heldout_fingerprints)
     for item in generated:
         similarities = np.asarray(
-            DataStructs.BulkTanimotoSimilarity(
-                item["fingerprint"], list(reference.heldout_fingerprints)
-            ),
+            DataStructs.BulkTanimotoSimilarity(item["fingerprint"], heldout_fingerprints),
             dtype=np.float64,
         )
         distances = 1.0 - similarities
@@ -756,7 +788,11 @@ def assess_lipid_realism(
         for smiles, item in unique_items.items()
         if item["within_support"]
     }
-    diversity, diversity_rows = _internal_diversity(canonical_smiles, policy)
+    diversity, diversity_rows = _internal_diversity(
+        canonical_smiles,
+        policy,
+        {smiles: item["fingerprint"] for smiles, item in unique_items.items()},
+    )
     result = {
         "schema_version": ASSESSMENT_SCHEMA,
         "status": "pass",

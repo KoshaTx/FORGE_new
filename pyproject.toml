@@ -11,6 +11,9 @@ dependencies = [
     "numpy>=1.24",
     "pandas>=2.0",
     "scikit-learn>=1.3",
+    # Already a scikit-learn dependency; declared because the realism assessor imports it directly
+    # to bound the classifier two-sample test's OpenMP pool.
+    "threadpoolctl>=3.1",
     "pyyaml>=6.0",
     "tqdm>=4.65",
 ]
