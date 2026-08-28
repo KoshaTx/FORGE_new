@@ -132,12 +132,10 @@ SPECIFICATIONS = {
         "reaction_topology_specialist_ugi_h100_preflight_v2.json"
     ),
     "phase1-reaction-topology-specialist-ugi-smoke-v2": (
-        "experiments/phase1/multireaction/"
-        "reaction_topology_specialist_ugi_smoke_v2.json"
+        "experiments/phase1/multireaction/" "reaction_topology_specialist_ugi_smoke_v2.json"
     ),
     "phase1-reaction-topology-specialist-ugi-seed0-h100-v2": (
-        "experiments/phase1/multireaction/"
-        "reaction_topology_specialist_ugi_seed0_h100_v2.json"
+        "experiments/phase1/multireaction/" "reaction_topology_specialist_ugi_seed0_h100_v2.json"
     ),
     "phase1-bl-core-constrained-production-smoke": (
         "experiments/phase1/multireaction/bl_core_constrained_production_smoke.json"
@@ -202,6 +200,12 @@ SPECIFICATIONS = {
     ),
     "phase1-shared-bias-end-to-end-seed0-h100": (
         "experiments/phase1/multireaction/shared_bias_end_to_end_seed0_h100.json"
+    ),
+    "phase1-shared-bias-parallel-global-seed0-h100-v2": (
+        "experiments/phase1/multireaction/shared_bias_parallel_global_seed0_h100_v2.json"
+    ),
+    "phase1-shared-bias-parallel-program-role-seed0-h100-v2": (
+        "experiments/phase1/multireaction/shared_bias_parallel_program_role_seed0_h100_v2.json"
     ),
     "phase1-shared-synthesis-program-integration": (
         "experiments/phase1/multireaction/shared_integration.json"

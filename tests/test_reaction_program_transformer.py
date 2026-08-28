@@ -13,6 +13,11 @@ from forge.model.reaction_program_transformer import (
     reaction_program_transformer_loss,
     synthesis_program_offspring_targets,
 )
+from forge.model.synthesis_program_training import (
+    synthesis_program_forward,
+    synthesis_program_paired_topology_forward,
+    synthesis_program_topology_conditioned_forward,
+)
 
 torch = pytest.importorskip("torch")
 
@@ -571,3 +576,65 @@ def test_family_balancing_preserves_unused_parameter_semantics_and_accumulates()
     balanced_pcgrad_backward(losses, model, scale=0.5, materialize_diagnostics=False)
     assert shared.grad.item() == pytest.approx(-0.25)
     assert first_only.grad.item() == pytest.approx(0.5)
+
+
+def test_batched_vjp_pcgrad_matches_sequential_shared_parameter_gradients() -> None:
+    torch.manual_seed(203)
+    sequential = torch.nn.Linear(4, 3)
+    batched = torch.nn.Linear(4, 3)
+    batched.load_state_dict(sequential.state_dict())
+    inputs = torch.randn((9, 4))
+
+    def losses(model: torch.nn.Module) -> dict[int, torch.Tensor]:
+        output = model(inputs)
+        return {
+            family: output[start : start + 3].square().mean()
+            for family, start in ((1, 0), (2, 3), (3, 6))
+        }
+
+    sequential_diagnostic = balanced_pcgrad_backward(
+        losses(sequential), sequential, backend="sequential"
+    )
+    batched_diagnostic = balanced_pcgrad_backward(losses(batched), batched, backend="batched_vjp")
+
+    assert sequential_diagnostic["projected_conflicts"] == batched_diagnostic["projected_conflicts"]
+    assert sequential_diagnostic["raw_gradient_norms"] == pytest.approx(
+        batched_diagnostic["raw_gradient_norms"], abs=1e-7
+    )
+    for left, right in zip(sequential.parameters(), batched.parameters(), strict=True):
+        assert torch.equal(left.grad, right.grad)
+
+
+def test_paired_topology_forward_matches_two_calls_without_dropout() -> None:
+    class EchoModel(torch.nn.Module):
+        def forward(self, **values: torch.Tensor) -> dict[str, torch.Tensor]:
+            return {
+                field: values[field].to(torch.float32).unsqueeze(-1)
+                for field in (
+                    "nodes",
+                    "parents",
+                    "parent_bonds",
+                    "closure_left",
+                    "closure_right",
+                    "closure_bonds",
+                )
+            }
+
+    clean = _batch()
+    node_marginal = torch.full((5,), 0.2)
+    bond_marginal = torch.full((4,), 0.25)
+    t = torch.tensor([0.2, 0.5, 0.8])
+    sequential_generator = torch.Generator().manual_seed(211)
+    paired_generator = torch.Generator().manual_seed(211)
+
+    predictions, noisy = synthesis_program_forward(
+        EchoModel(), clean, node_marginal, bond_marginal, t, sequential_generator
+    )
+    topology = synthesis_program_topology_conditioned_forward(EchoModel(), clean, noisy, t)
+    paired_predictions, paired_noisy, paired_topology = synthesis_program_paired_topology_forward(
+        EchoModel(), clean, node_marginal, bond_marginal, t, paired_generator
+    )
+
+    assert all(torch.equal(noisy[key], paired_noisy[key]) for key in noisy)
+    assert all(torch.equal(predictions[key], paired_predictions[key]) for key in predictions)
+    assert all(torch.equal(topology[key], paired_topology[key]) for key in topology)

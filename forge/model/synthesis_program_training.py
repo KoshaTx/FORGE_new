@@ -15,6 +15,11 @@ from forge.model.reaction_program_flow import (
 )
 from forge.model.synthesis_program_graph import SynthesisProgramGraphRecord
 
+try:
+    import torch
+except ModuleNotFoundError:  # pragma: no cover - optional training dependency
+    torch = None  # type: ignore[assignment]
+
 
 class SynthesisProgramTrainingPrimitiveError(ValueError):
     """A shared training batch violates its conditioning or fixed-state contract."""
@@ -197,6 +202,57 @@ def synthesis_program_topology_conditioned_forward(
     return _synthesis_program_predict(model, clean, conditioned, t)
 
 
+def synthesis_program_paired_topology_forward(
+    model: Any,
+    clean: Mapping[str, Any],
+    node_marginal: Any,
+    bond_marginal: Any,
+    t: Any,
+    generator: Any,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Run noisy- and target-topology predictions in one accelerator-sized model call.
+
+    The two halves contain the same examples and corruption.  Only the topology fields differ.
+    This preserves the topology-conditioned objective while replacing two small Transformer calls
+    with one larger call that uses accelerator matrix units more effectively.
+    """
+
+    if torch is None:
+        raise SynthesisProgramTrainingPrimitiveError("paired topology forward requires torch")
+    noisy = noise_synthesis_program_batch(clean, node_marginal, bond_marginal, t, generator)
+    batch_size = int(t.shape[0])
+    paired_clean = {
+        key: (
+            torch.cat((value, value), dim=0)
+            if torch.is_tensor(value) and value.ndim > 0 and int(value.shape[0]) == batch_size
+            else value
+        )
+        for key, value in clean.items()
+    }
+    conditioned = dict(noisy)
+    for field in ("parents", "closure_left", "closure_right"):
+        conditioned[field] = clean[field]
+    paired_state = {
+        key: torch.cat((value, conditioned[key]), dim=0) for key, value in noisy.items()
+    }
+    paired_predictions = _synthesis_program_predict(
+        model,
+        paired_clean,
+        paired_state,
+        torch.cat((t, t), dim=0),
+    )
+    predictions: dict[str, Any] = {}
+    topology_predictions: dict[str, Any] = {}
+    for key, value in paired_predictions.items():
+        if not torch.is_tensor(value) or value.ndim == 0 or int(value.shape[0]) != 2 * batch_size:
+            raise SynthesisProgramTrainingPrimitiveError(
+                f"paired topology output is not batch-aligned: {key}"
+            )
+        predictions[key] = value[:batch_size]
+        topology_predictions[key] = value[batch_size:]
+    return predictions, noisy, topology_predictions
+
+
 def synthesis_program_forward_loss(
     model: Any,
     clean: Mapping[str, Any],
@@ -283,6 +339,7 @@ __all__ = [
     "synthesis_program_fixed_state_exact",
     "synthesis_program_fixed_state_exact_tensor",
     "synthesis_program_forward",
+    "synthesis_program_paired_topology_forward",
     "synthesis_program_forward_loss",
     "synthesis_program_reconstruction_metrics",
     "synthesis_program_topology_conditioned_forward",

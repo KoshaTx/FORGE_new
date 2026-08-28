@@ -362,7 +362,15 @@ def _study_arms(config: dict[str, Any], programs: tuple[str, ...]) -> dict[str, 
                 "shared-bias retraining requires a positive repeat-consistency weight"
             )
         mass = {program: 1.0 / len(programs) for program in programs}
-        return _shared_bias_retraining_arms(mass, weight)
+        arms = _shared_bias_retraining_arms(mass, weight)
+        selected_arm_id = config.get("selected_arm_id")
+        if selected_arm_id is None:
+            return arms
+        if not isinstance(selected_arm_id, str) or selected_arm_id not in arms:
+            raise TransformerMechanismStudyError(
+                f"unsupported shared-bias arm selection: {selected_arm_id!r}"
+            )
+        return {selected_arm_id: arms[selected_arm_id]}
     raise TransformerMechanismStudyError(f"unsupported study: {study!r}")
 
 

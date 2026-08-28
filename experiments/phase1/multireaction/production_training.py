@@ -26,6 +26,7 @@ from forge.model.synthesis_program_training import (
     synthesis_program_fixed_state_exact_tensor,
     synthesis_program_forward,
     synthesis_program_forward_loss,
+    synthesis_program_paired_topology_forward,
     synthesis_program_topology_conditioned_forward,
 )
 from forge.model.training_restart import (
@@ -44,6 +45,12 @@ CONFIG_SCHEMA = "forge.synthesis_program_production_training_config.v1"
 RESULT_SCHEMA = "forge.synthesis_program_production_training_result.v1"
 CHECKPOINT_SCHEMA = "forge.synthesis_program_production_checkpoint.v1"
 RESTART_SCHEMA = "forge.synthesis_program_production_restart.v1"
+
+_TRAINING_OPTIMIZATION_DEFAULTS = {
+    "padding_aware_quantile_bins": 1,
+    "pcgrad_backend": "sequential",
+    "topology_conditioned_forward_mode": "sequential",
+}
 
 
 class SynthesisProgramProductionTrainingError(ValueError):
@@ -131,7 +138,34 @@ def _validate_runtime(
         raise SynthesisProgramProductionTrainingError("checkpoint schedule is invalid")
     if int(runtime["restart_interval_steps"]) < 1:
         raise SynthesisProgramProductionTrainingError("restart interval is invalid")
+    _training_optimization(runtime)
     return runtime, model
+
+
+def _training_optimization(runtime: Mapping[str, Any]) -> dict[str, Any]:
+    """Return one explicit, validated execution-only optimization policy."""
+
+    raw = runtime.get("optimization", {})
+    if not isinstance(raw, Mapping) or set(raw).difference(_TRAINING_OPTIMIZATION_DEFAULTS):
+        raise SynthesisProgramProductionTrainingError(
+            "training optimization policy contains unsupported fields"
+        )
+    policy = {**_TRAINING_OPTIMIZATION_DEFAULTS, **dict(raw)}
+    bins = policy["padding_aware_quantile_bins"]
+    if isinstance(bins, bool) or not isinstance(bins, int) or bins < 1:
+        raise SynthesisProgramProductionTrainingError(
+            "padding-aware quantile bins must be a positive integer"
+        )
+    if policy["pcgrad_backend"] not in {"sequential", "batched_vjp"}:
+        raise SynthesisProgramProductionTrainingError("unsupported PCGrad execution backend")
+    if policy["topology_conditioned_forward_mode"] not in {
+        "sequential",
+        "paired_batch",
+    }:
+        raise SynthesisProgramProductionTrainingError(
+            "unsupported topology-conditioned forward mode"
+        )
+    return policy
 
 
 def _restart_identity(
@@ -159,6 +193,8 @@ class _StratifiedProgramSampler:
     indices: tuple[np.ndarray, ...]
     probabilities: tuple[np.ndarray, ...]
     fixed_batch_counts: tuple[int, ...] | None = None
+    size_sorted_indices: tuple[np.ndarray, ...] | None = None
+    size_cumulative_probabilities: tuple[np.ndarray, ...] | None = None
 
     def batch_counts(self, batch_size: int) -> tuple[int, ...]:
         """Return the deterministic per-family row allocation for one microbatch."""
@@ -176,13 +212,45 @@ class _StratifiedProgramSampler:
         base, remainder = divmod(batch_size, len(self.program_states))
         return tuple(base + int(index < remainder) for index in range(len(self.program_states)))
 
-    def sample(self, batch_size: int, rng: np.random.Generator) -> np.ndarray:
+    def sample(
+        self,
+        batch_size: int,
+        rng: np.random.Generator,
+        *,
+        padding_aware_quantile_bins: int = 1,
+    ) -> np.ndarray:
         counts = self.batch_counts(batch_size)
         selected: list[int] = []
-        for count, indices, probabilities in zip(
-            counts, self.indices, self.probabilities, strict=True
-        ):
-            selected.extend(rng.choice(indices, size=count, replace=True, p=probabilities).tolist())
+        if padding_aware_quantile_bins < 1:
+            raise SynthesisProgramProductionTrainingError(
+                "padding-aware quantile bins must be positive"
+            )
+        if padding_aware_quantile_bins == 1:
+            for count, indices, probabilities in zip(
+                counts, self.indices, self.probabilities, strict=True
+            ):
+                selected.extend(
+                    rng.choice(indices, size=count, replace=True, p=probabilities).tolist()
+                )
+        else:
+            if self.size_sorted_indices is None or self.size_cumulative_probabilities is None:
+                raise SynthesisProgramProductionTrainingError(
+                    "padding-aware sampling was requested without compiled size distributions"
+                )
+            # Drawing one shared quantile interval aligns molecule sizes across families.  Because
+            # the interval is uniform and draws are uniform inside it, every unconditional draw is
+            # still Uniform(0, 1); inverse-CDF sampling therefore preserves each exact categorical
+            # source measure and retains nonzero probability for every supported record.
+            quantile_bin = int(rng.integers(padding_aware_quantile_bins))
+            for count, indices, cumulative in zip(
+                counts,
+                self.size_sorted_indices,
+                self.size_cumulative_probabilities,
+                strict=True,
+            ):
+                draws = (quantile_bin + rng.random(count)) / padding_aware_quantile_bins
+                positions = np.searchsorted(cumulative, draws, side="right")
+                selected.extend(indices[positions].tolist())
         values = np.asarray(selected, dtype=np.int64)
         rng.shuffle(values)
         return values
@@ -200,6 +268,9 @@ def _compile_stratified_program_sampler(
     program_ids: list[str] = []
     family_indices: list[np.ndarray] = []
     family_probabilities: list[np.ndarray] = []
+    size_sorted_indices: list[np.ndarray] = []
+    size_cumulative_probabilities: list[np.ndarray] = []
+    node_counts = np.diff(cache.arrays["node_offsets"])
     for program_state, program in enumerate(cache.vocabulary.program_states[1:], start=1):
         indices = cache.indices(program_id=program, fold="train")
         weights = measure[indices]
@@ -209,7 +280,13 @@ def _compile_stratified_program_sampler(
         program_states.append(program_state)
         program_ids.append(program)
         family_indices.append(indices)
-        family_probabilities.append(weights / total)
+        probabilities = weights / total
+        family_probabilities.append(probabilities)
+        order = np.lexsort((indices, node_counts[indices]))
+        size_sorted_indices.append(indices[order])
+        cumulative = np.cumsum(probabilities[order])
+        cumulative[-1] = 1.0
+        size_cumulative_probabilities.append(cumulative)
     if not program_states:
         raise SynthesisProgramProductionTrainingError(
             "Transformer arm has no active reaction family"
@@ -237,6 +314,8 @@ def _compile_stratified_program_sampler(
         indices=tuple(family_indices),
         probabilities=tuple(family_probabilities),
         fixed_batch_counts=fixed_batch_counts,
+        size_sorted_indices=tuple(size_sorted_indices),
+        size_cumulative_probabilities=tuple(size_cumulative_probabilities),
     )
 
 
@@ -386,6 +465,7 @@ def _train_arm(
     target_steps = int(runtime["optimizer_steps"])
     checkpoint_steps = set(int(value) for value in runtime["checkpoint_steps"])
     restart_interval = int(runtime["restart_interval_steps"])
+    optimization = _training_optimization(runtime)
     active_program_states = (
         stratified_sampler.program_states if stratified_sampler is not None else ()
     )
@@ -401,7 +481,11 @@ def _train_arm(
                     raise SynthesisProgramProductionTrainingError(
                         "Transformer sampler was not compiled"
                     )
-                selected = stratified_sampler.sample(micro_batch, rng)
+                selected = stratified_sampler.sample(
+                    micro_batch,
+                    rng,
+                    padding_aware_quantile_bins=int(optimization["padding_aware_quantile_bins"]),
+                )
             else:
                 selected = rng.choice(support, size=micro_batch, replace=True, p=probabilities)
             records = cache.records(selected)
@@ -428,18 +512,28 @@ def _train_arm(
                     per_program_transformer_losses,
                 )
 
-                predictions, noisy = synthesis_program_forward(
-                    model, clean, node_p0, bond_p0, t, generator
-                )
                 objective = arm_model_config["semantic_objective"]
                 topology_conditioned_weight = float(
                     objective.get("topology_conditioned_chemistry_weight", 0.0)
                 )
-                topology_conditioned_predictions = (
-                    synthesis_program_topology_conditioned_forward(model, clean, noisy, t)
-                    if topology_conditioned_weight > 0.0
-                    else None
-                )
+                if (
+                    topology_conditioned_weight > 0.0
+                    and optimization["topology_conditioned_forward_mode"] == "paired_batch"
+                ):
+                    predictions, noisy, topology_conditioned_predictions = (
+                        synthesis_program_paired_topology_forward(
+                            model, clean, node_p0, bond_p0, t, generator
+                        )
+                    )
+                else:
+                    predictions, noisy = synthesis_program_forward(
+                        model, clean, node_p0, bond_p0, t, generator
+                    )
+                    topology_conditioned_predictions = (
+                        synthesis_program_topology_conditioned_forward(model, clean, noisy, t)
+                        if topology_conditioned_weight > 0.0
+                        else None
+                    )
                 family_losses, metrics = per_program_transformer_losses(
                     predictions,
                     clean,
@@ -479,6 +573,7 @@ def _train_arm(
                         model,
                         scale=1.0 / accumulation,
                         materialize_diagnostics=False,
+                        backend=str(optimization["pcgrad_backend"]),
                     )
                     balancing_diagnostics["micro_batches"] += 1
                     step_conflicts += diagnostic["projected_conflicts"]
@@ -562,6 +657,7 @@ def _train_arm(
                 "batch_program_counts": (
                     dict(arm["batch_program_counts"]) if "batch_program_counts" in arm else None
                 ),
+                "training_optimization": optimization,
                 "design_sha256": str(sha256_file(design_path)),
                 "cache_sha256": str(sha256_file(cache_path)),
             }
@@ -625,6 +721,7 @@ def _train_arm(
         "examples_seen_by_program": examples_seen_by_program,
         "parameter_count": parameter_count,
         "effective_batch_size": micro_batch * accumulation,
+        "training_optimization": optimization,
         "fixed_state_failures": fixed_state_failures,
         "initial_loss": losses[0],
         "final_loss": losses[-1],

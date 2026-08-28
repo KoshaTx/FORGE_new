@@ -54,6 +54,29 @@ def test_retraining_contract_is_end_to_end_matched_and_fixed_at_step_9000() -> N
     assert config["full"]["training"]["effective_batch_size"] == 128
 
 
+def test_parallel_arm_configs_select_one_matched_arm_with_exact_family_balance() -> None:
+    design = read_json_object(DESIGN)
+    programs = tuple(design["programs"])
+    expected = {
+        "shared_bias_global_source_control",
+        "shared_bias_program_role_source",
+    }
+    selected = set()
+    for arm_id in sorted(expected):
+        path = REPO / "configs/multireaction" / f"shared_bias_parallel_{arm_id}_v2.json"
+        config = read_json_object(path)
+        arms = _study_arms(config, programs)
+        assert set(arms) == {arm_id}
+        runtime = config["full"]["training"]
+        assert runtime["micro_batch_size"] == 63
+        assert runtime["gradient_accumulation_steps"] == 2
+        assert runtime["effective_batch_size"] == 126
+        assert runtime["optimizer_steps"] == 9143
+        assert runtime["optimizer_steps"] * 42 == 384006
+        selected.update(arms)
+    assert selected == expected
+
+
 def test_full_shared_model_parameter_count_matches_frozen_launch_gate() -> None:
     config = read_json_object(CONFIG)
     design = read_json_object(DESIGN)

@@ -1095,6 +1095,7 @@ def balanced_pcgrad_backward(
     *,
     scale: float = 1.0,
     materialize_diagnostics: bool = True,
+    backend: str = "sequential",
 ) -> dict[str, Any]:
     """Give families equal loss mass and deterministically project conflicting gradients.
 
@@ -1107,27 +1108,63 @@ def balanced_pcgrad_backward(
         raise ReactionProgramTransformerError(
             "PCGrad requires at least two programs and positive scale"
         )
+    if backend not in {"sequential", "batched_vjp"}:
+        raise ReactionProgramTransformerError(f"unsupported PCGrad backend: {backend!r}")
     parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
     ordered = sorted(losses)
-    raw = [
-        torch.autograd.grad(
-            losses[program], parameters, retain_graph=index + 1 < len(ordered), allow_unused=True
+    if backend == "batched_vjp":
+        stacked_losses = torch.stack([losses[program] for program in ordered])
+        batched = torch.autograd.grad(
+            stacked_losses,
+            parameters,
+            grad_outputs=torch.eye(
+                len(ordered), dtype=stacked_losses.dtype, device=stacked_losses.device
+            ),
+            is_grads_batched=True,
+            allow_unused=True,
         )
-        for index, program in enumerate(ordered)
-    ]
-    availability = [[gradient is not None for gradient in gradients] for gradients in raw]
-    flat_gradients = torch.stack(
-        [
-            torch.cat(
-                [
-                    (gradient if gradient is not None else torch.zeros_like(parameter)).reshape(-1)
-                    for gradient, parameter in zip(gradients, parameters, strict=True)
-                ]
+        # The production Transformer is a shared parameter graph: every parameter participating in
+        # one family participates in every family.  A tensor absent from the batched VJP is therefore
+        # absent from all rows.  Keeping this backend explicit prevents it from being silently used
+        # by future family-exclusive architectures.
+        availability = [[gradient is not None for gradient in batched] for _ in ordered]
+        flat_gradients = torch.cat(
+            [
+                (
+                    gradient.reshape(len(ordered), -1)
+                    if gradient is not None
+                    else parameter.new_zeros((len(ordered), parameter.numel()))
+                )
+                for gradient, parameter in zip(batched, parameters, strict=True)
+            ],
+            dim=1,
+        )
+        del batched
+    else:
+        raw = [
+            torch.autograd.grad(
+                losses[program],
+                parameters,
+                retain_graph=index + 1 < len(ordered),
+                allow_unused=True,
             )
-            for gradients in raw
+            for index, program in enumerate(ordered)
         ]
-    )
-    del raw
+        availability = [[gradient is not None for gradient in gradients] for gradients in raw]
+        flat_gradients = torch.stack(
+            [
+                torch.cat(
+                    [
+                        (gradient if gradient is not None else torch.zeros_like(parameter)).reshape(
+                            -1
+                        )
+                        for gradient, parameter in zip(gradients, parameters, strict=True)
+                    ]
+                )
+                for gradients in raw
+            ]
+        )
+        del raw
     norms = torch.linalg.vector_norm(flat_gradients, dim=1)
     conflicts = torch.zeros((), dtype=torch.int64, device=flat_gradients.device)
     pairwise_dots = flat_gradients @ flat_gradients.transpose(0, 1)
@@ -1191,6 +1228,7 @@ def balanced_pcgrad_backward(
         "raw_gradient_norms": raw_gradient_norms,
         "family_weighting": "equal_loss_mass_without_norm_amplification",
         "projected_conflicts": projected_conflicts,
+        "backend": backend,
     }
 
 

@@ -59,9 +59,7 @@ def test_mechanism_ablations_are_one_factor_changes_from_final_forge() -> None:
         )
 
     production = json.loads(
-        (
-            REPO / "experiments/phase1/multireaction/transformer_mechanism_study.json"
-        ).read_text()
+        (REPO / "experiments/phase1/multireaction/transformer_mechanism_study.json").read_text()
     )
     preflight = json.loads(
         (
@@ -268,6 +266,41 @@ def test_stratified_sampler_preserves_historical_and_expanded_batch_counts() -> 
         match="do not sum to the runtime microbatch size",
     ):
         expanded.sample(41, np.random.default_rng(9))
+
+
+def test_padding_aware_sampler_preserves_marginals_and_reduces_batch_maximum() -> None:
+    family_indices = tuple(
+        np.asarray([offset + 10, offset + 100], dtype=np.int64) for offset in (0, 200, 400)
+    )
+    probabilities = tuple(np.asarray([0.9, 0.1]) for _ in family_indices)
+    cumulative = tuple(np.asarray([0.9, 1.0]) for _ in family_indices)
+    sampler = _StratifiedProgramSampler(
+        program_states=(1, 2, 3),
+        program_ids=("ugi", "bl", "lx"),
+        indices=family_indices,
+        probabilities=probabilities,
+        size_sorted_indices=family_indices,
+        size_cumulative_probabilities=cumulative,
+    )
+    random_rng = np.random.default_rng(219)
+    coupled_rng = np.random.default_rng(219)
+    random_maxima = []
+    coupled_maxima = []
+    coupled_large = np.zeros(3, dtype=np.int64)
+    samples = 20_000
+    for _ in range(samples):
+        random_draw = sampler.sample(3, random_rng)
+        coupled_draw = sampler.sample(3, coupled_rng, padding_aware_quantile_bins=10)
+        random_maxima.append(max(int(value) % 200 for value in random_draw))
+        coupled_maxima.append(max(int(value) % 200 for value in coupled_draw))
+        for family, values in enumerate(family_indices):
+            coupled_large[family] += int(values[1] in coupled_draw)
+
+    assert np.allclose(coupled_large / samples, np.full(3, 0.1), atol=0.01)
+    assert np.mean(coupled_maxima) < np.mean(random_maxima) * 0.7
+    first = sampler.sample(3, np.random.default_rng(221), padding_aware_quantile_bins=10)
+    second = sampler.sample(3, np.random.default_rng(221), padding_aware_quantile_bins=10)
+    assert np.array_equal(first, second)
 
 
 def test_ugi_exposure_descriptors_pin_local_preflight_and_full_contracts() -> None:
