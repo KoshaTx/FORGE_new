@@ -13,7 +13,7 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 
 | Requirement | Status |
 | --- | --- |
-| Up to 5 pages, excluding references and appendix | Body ends on page 5; references begin on page 6 |
+| Up to 5 pages, excluding references and appendix | **Not yet compliant:** body ends on page 8; a separate prose/model condensation pass is required |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
 | Maximum 50 MB | 1.5 MB |
@@ -41,8 +41,9 @@ must not be done.
 ## What moved where
 
 The body keeps the abstract, a condensed introduction, the FORGE formulation including the
-program-masked training objective, four result paragraphs and a short discussion, with two tables and
-one figure. Everything else is appendix, which the venue does not count:
+program-masked training objective, four result paragraphs and a short discussion. Three tables carry
+the conditioned-generation, common-benchmark and route-closure results; two figures show the framework
+and deterministic generated examples. Everything else is appendix, which the venue does not count:
 
 | Appendix | Source in `paper/v1` |
 | --- | --- |
@@ -54,13 +55,17 @@ one figure. Everything else is appendix, which the venue does not count:
 | F Generated-structure atlas | appendix section of the same name |
 
 The appendix was assembled by slicing those section ranges out of
-`paper/v1/FORGE_ICLR2027_paper.tex` rather than by retyping, so appendix prose is byte-identical to
-the manuscript apart from three mechanical changes:
+`paper/v1/FORGE_ICLR2027_paper.tex` rather than by retyping. It retains the full-manuscript evidence
+and wording except for the following explicit presentation changes:
 
 1. `\input{generated/...}` and `\input{figures/...}` were retargeted to `../v1/...`.
-2. The two floats the body now owns (`tab:ugi-common-benchmark`, `fig:forge-generated-samples`) were
-   dropped from the appendix so their labels are not multiply defined. A comment marks each site.
-3. Three appendix tables and the overview diagram were widened or stepped down one type size. They
+2. Floats owned by the body (`tab:gem-shared-programs`, `tab:ugi-common-benchmark`,
+   `tab:route-dispositions`, and `fig:forge-generated-samples`) are not repeated in the appendix. A
+   comment marks the corresponding appendix sites.
+3. The concise catalogue-ceiling table is omitted because the detailed catalogue comparison retains
+   all of its claims. The compute-parity table is omitted because unavailable training-time fields
+   preclude a cross-method compute-matching claim; its generated receipt is retained.
+4. Three appendix tables and the overview diagram were widened or stepped down one type size. They
    were sized against the v1 build, which loads `times`; neither the NeurIPS template nor the GEM
    style file does, and the wider default face pushed them past the text block.
 

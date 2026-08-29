@@ -388,14 +388,16 @@ erasing the deeply supported Ugi behavior.
 \caption{\textbf{Shared learning across three specified assembly programs.}
 Verified exact-L1 yield (\%) and transform verification per program, as mean $\pm$ sample standard deviation
 over three training seeds. Results are never pooled across programs. Per-arm and per-seed values:
-Appendix~\ref{app:results}.}
+Appendix~\ref{app:results}. Decomposition coverage is conditioned on valid products. Replay is a
+verifier invariant, not a measure of learned performance.}
 \label{tab:gem-shared-programs}
 \centering
 \small
 \setlength{\tabcolsep}{4.6pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%) \\
+Program & FORGE conditioned & Shared null & Cyclic program &
+\shortstack{Decomp. coverage /\\ replay invariant (\%)} \\
 \midrule
 \input{../v1/generated/shared_program_figure_rows.tex}%
 \end{tabular}
@@ -439,7 +441,7 @@ FORGE effective component counts were 320.8, 156.9 and 102.9 versus 86.4, 23.4 a
 consistency, verifier-recovered component novelty and recovery of reserved components therefore
 trade off separately. This component-level diagnostic is not a direct test of product-level strong
 catalogue escape. Representative Ugi products show exact decompositions into precursor identities
-outside the visible training inventory (Table~\ref{tab:forge-generated-samples}).
+outside the visible training inventory (Figure~\ref{fig:forge-generated-samples}).
 
 \begin{table}[H]
 \caption{\textbf{Common Ugi benchmark for external generators and matched controls.}
@@ -490,9 +492,28 @@ and \ForgeRouteCompleteProducts{} closed, with \ForgeRouteUnresolvedProducts{} u
 \ForgeRouteCensoredProducts{} search-censored. Most unresolved components were absent from the
 bounded evidence index and were never expanded, so this measures closure under a frozen cascade
 rather than molecular synthesizability. We record incomplete bounded route searches as abstentions
-because they do not demonstrate unsynthesizability.
+because they do not demonstrate unsynthesizability (Table~\ref{tab:route-dispositions}).
 
 \begin{table}[H]
+\caption{\textbf{Bounded route assessment returns auditable outcomes.}
+The route-blinded shortlist contains distinct Ugi products that passed exact-L1 reverification.
+Complete denotes closure under the frozen upstream-reaction evidence and terminal-material policy;
+unresolved and censored outcomes are abstentions, not evidence of unsynthesizability.}
+\label{tab:route-dispositions}
+\centering
+\small
+\setlength{\tabcolsep}{5.5pt}
+\begin{tabular}{lrrrr}
+\toprule
+Unit & Population & Complete & Unresolved & Censored \\
+\midrule
+Products & \ForgeRouteCandidates{} & \ForgeRouteCompleteProducts{} & \ForgeRouteUnresolvedProducts{} & \ForgeRouteCensoredProducts{} \\
+Unique components & \ForgeRouteComponents{} & \ForgeRouteCompleteComponents{} & \ForgeRouteUnresolvedComponents{} & \ForgeRouteCensoredComponents{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
 \caption{\textbf{Deterministic examples of component-novel FORGE ionizable-lipid graphs.}
 Each row is one seed-0 Ugi product with a unique exact-L1 decomposition and a recovered precursor
 constitution outside the method-visible training inventory. Left, the graph sampled jointly by
@@ -502,15 +523,27 @@ amine-derived head, teal the aldehyde-derived body and tail, orange the isocyani
 grey the assembly-introduced oxygen; these are semantic coordinates recovered by replay, not a
 vocabulary the model selects from. These are display examples, not experimental candidates, and
 exact-L1 replay is a structural diagnostic, not evidence of activity or synthesis success. Selection
-rule and twelve further examples: Appendix~\ref{app:atlas}.}
-\label{tab:forge-generated-samples}
+rule and the complete twelve-example atlas: Appendix~\ref{app:atlas}.}
+\label{fig:forge-generated-samples}
 \centering
 % Each cell is its own hash-pinned PNG emitted by the sample producer alongside the composite,
 % the same way the atlas emits one file per row, so nothing here is cropped out of a larger image.
-\newlength{\samplerowheight}\setlength{\samplerowheight}{2.28cm}
+\newlength{\samplerowheight}\setlength{\samplerowheight}{1.78cm}
 \newlength{\sampleproductwidth}\setlength{\sampleproductwidth}{3.53cm}
 \newlength{\samplesemanticwidth}\setlength{\samplesemanticwidth}{5.87cm}
 \newlength{\sampleprecursorwidth}\setlength{\sampleprecursorwidth}{3.80cm}
+\newcommand{\gemsamplerow}[1]{%
+\begin{minipage}[c][\samplerowheight][c]{\sampleproductwidth}\centering
+\includegraphics[width=\linewidth]{figures/forge_generated_samples_v2/forge_generated_sample_row_#1_product.png}
+\end{minipage}
+&
+\begin{minipage}[c][\samplerowheight][c]{\samplesemanticwidth}\centering
+\includegraphics[width=\linewidth]{figures/forge_generated_samples_v2/forge_generated_sample_row_#1_semantic.png}
+\end{minipage}
+&
+\begin{minipage}[c][\samplerowheight][c]{\sampleprecursorwidth}\centering
+\includegraphics[width=\linewidth]{figures/forge_generated_samples_v2/forge_generated_sample_row_#1_precursors.png}
+\end{minipage}}
 \setlength{\tabcolsep}{0pt}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{}}
@@ -520,12 +553,14 @@ rule and twelve further examples: Appendix~\ref{app:atlas}.}
 & \atlashead{\sampleprecursorwidth}{Exact L1 building blocks}\\
 \midrule
 \addlinespace[1.2mm]
-\input{../v1/figures/forge_generated_samples_v2/sample_rows.tex}\\
+\gemsamplerow{01}\\
+\addlinespace[2.2mm]
+\gemsamplerow{02}\\
 \addlinespace[0.6mm]
 \bottomrule
 \end{tabular}
 }
-\end{table}
+\end{figure}
 
 \section{Discussion}
 
@@ -1374,7 +1409,7 @@ the final conditioned model achieved verified exact-L1 yields of $78.7\pm10.1\%$
 ($72.3\%$, $90.3\%$ and $73.5\%$ by seed), $77.5\pm3.7\%$ for repeated aza-Michael
 addition ($76.5\%$, $81.5\%$ and $74.3\%$), and $31.3\pm14.3\%$ for repeated reductive
 amination ($38.6\%$, $14.8\%$ and $40.4\%$) (mean $\pm$ sample standard deviation;
-Table~\ref{tab:shared-programs} and Table~\ref{tab:production-comparison}).
+Table~\ref{tab:gem-shared-programs} and Table~\ref{tab:production-comparison}).
 Every verifier-returned trace passed forward replay, as required by the verifier invariant. However, mean exact-
 decomposition ambiguity was $54.9\%$ for repeated aza-Michael addition and $74.1\%$ for
 repeated reductive amination, and the latter program showed substantial between-seed variation.
@@ -1391,27 +1426,7 @@ The final conditioned model recorded zero fixed-coordinate violations and zero s
 Together, these results support the conclusion that one conditional flow can learn the three
 specified reaction-program coordinates without erasing the deeply supported Ugi behavior.
 
-\begin{table*}[t]
-\caption{\textbf{Shared learning across three specified ionizable-lipid assembly programs.}
-Verified exact-L1 yield (\%) and transform verification, reported separately for Ugi, repeated aza-Michael
-addition and repeated reductive amination. Cells show means and sample standard deviations across
-three independent training seeds. Shared conditioning changed verified Ugi exact-L1 yield relative
-to Ugi-only training by \ForgeUgiRetentionDifferencePP{} percentage points, with paired differences
-\ForgeUgiRetentionSeedDifferencesPP{} across the three seeds. The Ugi-only arm is evaluated only on
-Ugi, and results are not pooled across reaction programs. All values here and in
-Table~\ref{tab:production-comparison} are hash verified.}
-\label{tab:shared-programs}
-\centering
-\small
-\setlength{\tabcolsep}{4.6pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccc}
-\hline
-Program & FORGE conditioned & Shared null & Cyclic program & Decomp./replay (\%) \\
-\hline
-\input{../v1/generated/shared_program_figure_rows.tex}%
-\end{tabular}}
-\end{table*}
+% The compact shared-program table is in the main paper as Table~\ref{tab:gem-shared-programs}.
 
 \begin{table*}[t]
 \caption{\textbf{Matched production comparison across reaction programs.}
@@ -1465,7 +1480,7 @@ Under matched attempt budgets, conditioned generation produced
 786.8, 774.6 and 312.7 verified exact-L1 products per 1,000 attempts for Ugi, repeated aza-Michael and
 repeated reductive amination, compared with 114.4, 39.7 and 131.7 for matched null generation
 followed by post-hoc filtering
-(Table~\ref{tab:catalogue-ceiling}).
+(Table~\ref{tab:production-comparison}).
 The paired conditioned-minus-post-hoc differences were
 \ForgeNullUgiDifferencePP{} percentage points for Ugi (three-seed range
 \ForgeNullUgiRangeLowPP{} to \ForgeNullUgiRangeHighPP{}), \ForgeNullBLDifferencePP{} for
@@ -1609,8 +1624,7 @@ At the matched sampling budget, FORGE produced 729.3 verifier-recovered componen
 products per 1,000 attempts, averaged across the three independent seeds. The corresponding
 values were 313.9 for aza-Michael addition and 34.8 for reductive amination. The finite-component
 assembler produced zero by construction because every sampled product uses only components from
-the training catalogue
-(Table~\ref{tab:catalogue-ceiling} and Table~\ref{tab:catalogue-comparison}).
+the training catalogue (Table~\ref{tab:catalogue-comparison}).
 The catalogue achieved exact-L1 yields of 1,000.0, 723.2 and 1,000.0 products per 1,000 attempts,
 compared with 786.8, 774.6 and 312.7 for FORGE. The corresponding raw validities were 1,000.0,
 723.2 and 1,000.0 for the catalogue and 866.0, 774.6 and 365.0 for FORGE.
@@ -1631,29 +1645,6 @@ $0\%$ of the calibration and component-disjoint held-out products. Its Cartesian
 component-program inputs rather than unique forward products. The exact finite catalogue has high
 transform consistency, whereas whole-graph generation can produce verified exact-L1 products with
 verifier-recovered precursor identities absent from that inventory.
-
-\begin{table}[H]
-\caption{\textbf{Reaction conditioning improves sampling efficiency without imposing a finite
-component vocabulary.}
-FORGE compared with a train-only finite-component assembler that receives exact forward chemistry
-and the same per-program attempt budget, as means across three independent training seeds. The
-comparisons use identical molecular support and final reaction adapters and make no L2-planner,
-biological-oracle or candidate-selection calls. The finite catalogue has zero component-novel yield
-by construction. Nulling all program coordinates reduced factual Ugi exact-L1 yield from
-\ForgeSemanticFactualPercent\% to \ForgeSemanticNullCoordinatesPercent\%; substituting the
-reductive-amination token reduced it to \ForgeSemanticLXTokenPercent\%.}
-\label{tab:catalogue-ceiling}
-\centering
-\small
-\setlength{\tabcolsep}{4.6pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccc}
-\hline
-Program & FORGE L1/1k & Catalogue L1/1k & FORGE comp.-novel/1k & Catalogue comp.-novel/1k \\
-\hline
-\input{../v1/generated/catalogue_figure_rows.tex}%
-\end{tabular}}
-\end{table}
 
 \begin{table}[H]
 \caption{\textbf{Whole-graph generation versus a finite-component assembler.}
@@ -1764,30 +1755,7 @@ The proposal engines added graph-consistent hypotheses but closed no additional 
 Most unresolved components were absent from the bounded evidence index and were never expanded, so
 the result measures closure under this frozen cascade rather than molecular synthesizability.
 
-\begin{table*}[t]
-\caption{\textbf{Recursive synthesis programs produce auditable computational dossiers.}
-Bounded route-cascade dispositions, reporting the count and denominator at every stage; no stage is
-normalized to a later survivor set without stating that denominator. All \ForgeRouteCandidates{}
-shortlist products passed exact-L1 reverification and one product was support-censored before route
-assessment; proposal engines added hypotheses but no additional exact route closure. An L2 step is
-admitted only when its evidence tier permits the claimed reaction scope and its forward transform
-reconstructs the intended precursor. A terminal branch closes only with a current, dated supplier
-record for an exact constitutional match. Computational route closure establishes transform
-consistency and evidence-qualified terminal materials, not experimental synthesis success.}
-\label{tab:route-dispositions}
-\centering
-\small
-\setlength{\tabcolsep}{4.6pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrr}
-\hline
-Unit & Population & Complete & Unresolved & Censored \\
-\hline
-Products & \ForgeRouteCandidates{} & \ForgeRouteCompleteProducts{} & \ForgeRouteUnresolvedProducts{} & \ForgeRouteCensoredProducts{} \\
-Unique components & \ForgeRouteComponents{} & \ForgeRouteCompleteComponents{} & \ForgeRouteUnresolvedComponents{} & \ForgeRouteCensoredComponents{} \\
-\hline
-\end{tabular}}
-\end{table*}
+% Route dispositions are promoted to the main paper as Table~\ref{tab:route-dispositions}.
 
 \subsection{Guidance diagnostics define the limits of additional optimization}
 
@@ -1849,32 +1817,11 @@ activity, delivery or experimental potency.
 \section{Extended computational reporting tables}
 \label{app:reporting}
 
-The following tables define the complete reporting contract for the common Ugi benchmark. Completed
-matched controls, the learned inventory selector and three external generators are populated from
-hash-pinned three-seed results. The method-blind L2/L3 evidence assessment is reported in
-Table~\ref{tab:route-evidence-baselines}.
-
-\begin{table}[H]
-\caption{\textbf{Training and sampling parity for the common Ugi benchmark.}
-Generator calls and attempted products are reported separately from reaction-predictor, verifier,
-planner, and oracle calls. A method is not described as compute-matched when any required quantity
-is unavailable. N/R means not recorded by the frozen run; N/P means not applicable.}
-\label{tab:baseline-compute-parity}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3.0pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccccc}
-\hline
-Method & Params. & Train steps & GPU-hours & Sample steps & Attempts & Reaction calls & Route calls & Oracle calls \\
-\hline
-\input{../v1/generated/compute_parity_external_rows.tex}%
-Finite catalogue oracle & N/P & N/P & N/R & N/P & $3\times3{,}072$ & N/R & 0 & 0 \\
-Shared-null + post-hoc & N/R & N/R & N/R & N/R & $3\times3{,}072$ & N/R & 0 & 0 \\
-\input{../v1/generated/compute_parity_completed_rows.tex}%
-\end{tabular}
-}
-\end{table}
+The following tables define the complete numerical reporting contract for the common Ugi benchmark.
+Completed matched controls, the learned inventory selector and three external generators are
+populated from hash-pinned three-seed results. The method-blind L2/L3 evidence assessment is reported
+in Table~\ref{tab:route-evidence-baselines}. Compute accounting remains in the generated evidence
+receipt; unavailable training-time fields preclude a cross-method compute-matching claim.
 
 \begin{table}[H]
 \caption{\textbf{Seed-level common Ugi benchmark results.}
@@ -2571,7 +2518,7 @@ admitted reaction set, or a later supplier snapshot.
 \label{app:atlas}
 
 Table~\ref{tab:forge-generated-atlas} reports 12 deterministic display examples
-from the same frozen seed-0 Ugi population used in Table~\ref{tab:forge-generated-samples}. The
+from the same frozen seed-0 Ugi population used in Figure~\ref{fig:forge-generated-samples}. The
 display begins with the lowest constitutional SHA-256 rank and then applies ECFP4 MaxMin selection
 among the 23 eligible, constitutionally unique products. This promotes visual coverage without using
 activity, route closure, procurement evidence or human preference. Each row includes the canonical
