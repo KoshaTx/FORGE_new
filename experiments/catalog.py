@@ -208,6 +208,18 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/"
         "shared_bias_parallel_global_seed0_evaluation_h100_v2.json"
     ),
+    "phase1-transformer-production-ablation-core-saturation-seed0-h100": (
+        "experiments/phase1/multireaction/"
+        "transformer_production_ablation_core_saturation_seed0_h100.json"
+    ),
+    "phase1-transformer-production-ablation-core-saturation-seed1-h100": (
+        "experiments/phase1/multireaction/"
+        "transformer_production_ablation_core_saturation_seed1_h100.json"
+    ),
+    "phase1-transformer-production-ablation-core-saturation-seed2-h100": (
+        "experiments/phase1/multireaction/"
+        "transformer_production_ablation_core_saturation_seed2_h100.json"
+    ),
     "phase1-shared-bias-parallel-global-seed0-core-saturation-h100-v2": (
         "experiments/phase1/multireaction/"
         "shared_bias_parallel_global_seed0_core_saturation_h100_v2.json"

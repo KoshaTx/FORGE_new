@@ -1,0 +1,174 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-transformer-production-ablation-core-saturation-seed1-h100",
+  "description": "Re-evaluate all four frozen production-comparison arms at replicate 1 under the reaction-core saturation terminal decoder, without retraining.",
+  "root_seed": 20260826,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "layout_preflight",
+      "implementation": "model.synthesis-program-layout-schedule-preflight.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/transformer_production_core_saturation_v1.json",
+        "sha256": "f3a9583ff81dbdd63063379a5ad04e05020f2f9532d19292a841be14ec1de582"
+      },
+      "inputs": {
+        "production_design": {
+          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+          "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "qualified_reaction_families": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        },
+        "qualified_ugi_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "multireaction_atlas": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+        },
+        "training_result": {
+          "path": "results/phase1/transformer_production_ablation_seed1_v1/training_result.json",
+          "sha256": "b8e26e321f650c7dddeaebc483fe15e11cdae7335c003e7dd351db2e72c4017b"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_layout_schedule_preflight.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 16384,
+        "timeout_seconds": 1800,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "transformer-production-ablation-core-saturation-seed1-layout-preflight"
+      }
+    },
+    {
+      "id": "evaluation",
+      "implementation": "model.shared-synthesis-program-production-evaluation-from-pins.v1",
+      "needs": [
+        "layout_preflight"
+      ],
+      "config": {
+        "path": "configs/multireaction/transformer_production_core_saturation_v1.json",
+        "sha256": "f3a9583ff81dbdd63063379a5ad04e05020f2f9532d19292a841be14ec1de582"
+      },
+      "inputs": {
+        "production_design": {
+          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+          "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+        },
+        "program_config": {
+          "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+          "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+        },
+        "qualified_reaction_families": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        },
+        "qualified_ugi_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "multireaction_atlas": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+        },
+        "training_result": {
+          "path": "results/phase1/transformer_production_ablation_seed1_v1/training_result.json",
+          "sha256": "b8e26e321f650c7dddeaebc483fe15e11cdae7335c003e7dd351db2e72c4017b"
+        },
+        "checkpoint_archive": {
+          "path": "results/phase1/transformer_production_ablation_seed1_v1/checkpoints.tar",
+          "sha256": "585afd8ac9c69d9b31534d02aa5258d19afbd106a9374ce5d5b076b6adf5f5d4"
+        }
+      },
+      "outputs": {
+        "molecule_report": {
+          "path": "molecule_report.html",
+          "schema_version": "forge.synthesis_program_production_molecule_report.v1"
+        },
+        "samples": {
+          "path": "samples.jsonl.gz",
+          "schema_version": "forge.synthesis_program_production_samples.v1"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.synthesis_program_production_evaluation_result.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 4,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 85000,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "transformer-production-ablation-core-saturation-seed1-evaluation"
+      }
+    }
+  ],
+  "metadata": {
+    "authorization": "2026-08-28 decode-time re-evaluation of the frozen production-comparison arms; no training call, checkpoints reused unchanged from the completed three-seed run",
+    "scientific_result": true,
+    "training_calls": 0,
+    "checkpoint_weights_reused": true,
+    "paid_launch_is_fail_closed": true
+  },
+  "nonclaims": [
+    "This evaluation-only run does not retrain or change the frozen checkpoints.",
+    "The original production comparison decoded with unconstrained argmax; this run differs from it only in the terminal decoder.",
+    "The decoder injects the qualified transform's own core contract, so exact-L1 under it does not measure whether the model alone learned that core.",
+    "Adjudication is unchanged: registry reverse transform, handle qualification and exact forward replay, abstentions never counted as successes.",
+    "One replicate alone does not establish across-seed robustness; the three replicates are aggregated as the frozen design prescribes."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "full": {
+    "batch_size": 32,
+    "calibration_samples": 512,
+    "checkpoint_steps": [
+      100,
+      500,
+      1000,
+      1500,
+      1700
+    ],
+    "component_disjoint_record_limit": null,
+    "device": "cuda",
+    "heldout_samples": 3072,
+    "sample_steps": 32,
+    "terminal_decode_policy": "strict_reaction_core_saturation_argmax"
+  },
+  "inputs": {
+    "multireaction_atlas": {
+      "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+      "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+      "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
+      "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+    },
+    "production_design": {
+      "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+      "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "schema_version": "forge.synthesis_program_production_evaluation_config.v1",
+  "smoke": {
+    "batch_size": 2,
+    "calibration_samples": 1,
+    "checkpoint_steps": [
+      1,
+      2
+    ],
+    "component_disjoint_record_limit": 2,
+    "device": "cpu",
+    "heldout_samples": 2,
+    "sample_steps": 2,
+    "terminal_decode_policy": "strict_reaction_core_saturation_argmax"
+  }
+}
