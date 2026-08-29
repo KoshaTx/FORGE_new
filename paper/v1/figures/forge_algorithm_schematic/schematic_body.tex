@@ -33,6 +33,7 @@
   statelab/.style={text=peri!85!black, font=\small},
   lead/.style={-{Stealth[length=3pt,width=3pt]}, draw=peri!75, line width=0.6pt},
 ]
+\path[use as bounding box] (-0.45,-4.15) rectangle (14.65,3.55);
 
 \def\sxa{4.54}     % the three state columns, 3.70 apart
 \def\cx{8.24}
@@ -70,13 +71,6 @@
 % than stopping at it.
 % A vignette, sized a little larger than the drawing so the fade carries past both plates
 % instead of stopping level with them.
-\shade[rounded corners=2.4cm, inner color=groundcore, outer color=white]
-  (-1.50,-5.27) rectangle (15.85,4.29);
-% Soft basins under the two endpoints, marking where the program enters and the route leaves.
-\shade[inner color=peri!22, outer color=white] (\inx,\ya) circle (1.05);
-\shade[inner color=cyanacc!22, outer color=white] (\outx,\ya) circle (1.05);
-
-
 %% ================================================================ role strata
 % The vertical direction is the role coordinate: one stratum per precursor role, and every atom is
 % drawn inside its own stratum. This is what makes the background a coordinate system rather than a

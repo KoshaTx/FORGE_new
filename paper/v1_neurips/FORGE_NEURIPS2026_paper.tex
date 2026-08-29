@@ -1,19 +1,22 @@
-% FORGE, GEM workshop (NeurIPS 2026) short-paper build.
+% FORGE, Generative and Experimental Perspectives for Biomolecular Design workshop at NeurIPS 2026.
 %
-% This manuscript is a condensation of paper/v1. Every reported quantitative result is expanded
+% This manuscript is derived from the six-page GEM condensation of paper/v1. Every reported quantitative result is expanded
 % from hash-pinned macros or generated row files under ../v1/generated; descriptive N/P and N/R
 % support-contract cells contain no measured value. Editing a measured value here without reissuing
 % its artifact would break the correspondence.
 %
-% Venue contract: short papers are limited to 6 pages excluding references and appendix, must use the
-% NeurIPS 2026 main-conference template with the GEM style file substituted, and are anonymous for
-% double-blind review. The body therefore ends before \bibliography; everything else is appendix.
+% Venue contract: this workshop submission uses the NeurIPS 2026 double-blind workshop format.
 
 \documentclass{article}
 
-% Retain the NeurIPS 2026 main-conference shell packages, replacing only its style file with the
-% workshop-supplied GEM style as required by the call for papers.
-\usepackage{GEM_workshop_2026}
+% Anonymous NeurIPS 2026 workshop submission mode. Do not add `final` or `preprint` here.
+\usepackage[dblblindworkshop]{neurips_2026}
+\workshoptitle{Generative and Experimental Perspectives for Biomolecular Design}
+% The upstream anonymous-workshop style retains the generic conference notice. Identify the
+% destination explicitly while preserving anonymous-review mode.
+\makeatletter
+\renewcommand{\@noticestring}{Submitted to the Generative and Experimental Perspectives for Biomolecular Design workshop at NeurIPS 2026. Do not distribute.}
+\makeatother
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -37,10 +40,6 @@
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
-
-% Dense result tables can force the next float to a later page. Keep inter-paragraph and inter-float
-% spacing stable instead of stretching that glue to bottom-align an otherwise underfull page.
-\raggedbottom
 
 % Figures and generated rows are read from the v1 manuscript directory so that this build and the
 % full manuscript can never disagree about a number.
@@ -209,7 +208,6 @@ corresponding training catalogues. These experiments evaluate shared learning ac
 reaction programs and do not claim zero-shot support for arbitrary chemistry or strong product-level
 catalogue escape.
 
-\paragraph{Contributions.}
 We summarize our main contributions as follows.
 \begin{itemize}
 \setlength{\itemsep}{0pt}
@@ -569,7 +567,7 @@ joint denoising and no matched improvement from synthesis or potency guidance
 outside scope. Within these limits, reaction programs expand molecular identity while retaining a
 verifiable connection to assembly chemistry.
 \bibliography{../v0/forge,../v1/references}
-\bibliographystyle{../v0/iclr2027_conference}
+\bibliographystyle{plainnat}
 
 \clearpage
 \appendix
@@ -577,8 +575,8 @@ verifiable connection to assembly chemistry.
 \section{Preliminaries}
 \label{app:preliminaries}
 
-Appendices A through F are supplementary and are excluded from the six-page short-paper
-limit, as are the references. They give the full formulation, the complete reporting contract, 
+Appendices A through F are supplementary and are excluded from the six-page content limit,
+as are the references. They give the full formulation, the complete reporting contract,
 the theoretical results and a generated-structure atlas.
 
 \subsection{Ionizable-lipid structure and modular assembly}
@@ -2627,6 +2625,5 @@ These are deterministic display examples, not experimental candidates.}
 \input{../v1/figures/forge_generated_sample_atlas_core_saturation_v1/atlas_rows.tex}%
 \end{longtable}
 \endgroup
-
 
 \end{document}

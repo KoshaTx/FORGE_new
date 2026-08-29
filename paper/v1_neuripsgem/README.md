@@ -13,7 +13,7 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 
 | Requirement | Status |
 | --- | --- |
-| Up to 5 pages, excluding references and appendix | **Not yet compliant:** body ends on page 8; a separate prose/model condensation pass is required |
+| Up to 6 pages, excluding references and appendix | **Compliant:** Discussion ends and References begin on page 6 |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
 | Maximum 50 MB | 1.7 MB |
