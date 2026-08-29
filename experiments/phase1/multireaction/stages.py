@@ -800,11 +800,15 @@ def preflight_synthesis_program_layout_schedule(context: RunContext) -> StageRes
     if not isinstance(configured_inputs, dict):
         raise ValueError("layout-schedule preflight config has no input mapping")
     require_config_inputs(context, config, labels=set(configured_inputs))
+    # Matches the from-pins evaluation stage: one specification may pin a training receipt per
+    # replicate, so the preflight resolves the same replicate-indexed name when it is present.
+    indexed = f"training_result_r{context.replicate}"
+    training_result = context.input(indexed if indexed in configured_inputs else "training_result")
     result = validate_layout_schedule(
         context.config_path,
         context.repo,
         context.input("production_cache"),
-        context.input("training_result"),
+        training_result,
         context.output_path("result.json"),
         profile=context.profile,
         replicate=context.replicate,
@@ -838,12 +842,26 @@ def evaluate_shared_synthesis_program_production_from_pins(context: RunContext) 
     if not isinstance(configured_inputs, dict):
         raise ValueError("checkpoint evaluation config has no input mapping")
     require_config_inputs(context, config, labels=set(configured_inputs))
+
+    def _per_replicate(label: str) -> Any:
+        """Prefer a replicate-indexed pin so one spec can cover every replicate.
+
+        A run that trains in place gets its replicate's weights from the seed the runner supplies.
+        A run that evaluates frozen checkpoints cannot: the weights differ per replicate and must
+        be pinned. Naming them ``<label>_r<replicate>`` lets one specification carry all of them,
+        which is what keeps the replicates adjudicable as one frozen experiment rather than as
+        several. The unindexed name stays supported for single-replicate specs.
+        """
+
+        indexed = f"{label}_r{context.replicate}"
+        return context.input(indexed if indexed in configured_inputs else label)
+
     result = run_synthesis_program_production_evaluation(
         context.config_path,
         context.repo,
         context.input("production_cache"),
-        context.input("checkpoint_archive"),
-        context.input("training_result"),
+        _per_replicate("checkpoint_archive"),
+        _per_replicate("training_result"),
         context.output_path("."),
         profile=context.profile,
         replicate=context.replicate,

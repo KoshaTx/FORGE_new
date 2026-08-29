@@ -29,10 +29,18 @@ TRANSFORMER_EXPERIMENT_IDS = frozenset(
     {
         "phase1-transformer-synthesis-program-production",
         "phase1-transformer-synthesis-program-production-h100",
+        # Evaluation-only recoveries of those same frozen checkpoints.
+        "phase1-transformer-production-ablation-core-saturation-seed0-h100",
+        "phase1-transformer-production-ablation-core-saturation-seed1-h100",
+        "phase1-transformer-production-ablation-core-saturation-seed2-h100",
     }
 )
 TRAINING_IMPLEMENTATION = "model.shared-synthesis-program-production-training.v1"
 EVALUATION_IMPLEMENTATION = "model.shared-synthesis-program-production-evaluation.v1"
+LAYOUT_PREFLIGHT_IMPLEMENTATION = "model.synthesis-program-layout-schedule-preflight.v1"
+EVALUATION_FROM_PINS_IMPLEMENTATION = (
+    "model.shared-synthesis-program-production-evaluation-from-pins.v1"
+)
 CATALOGUE_EXPERIMENT_ID = "phase1-finite-component-catalogue-baseline"
 CATALOGUE_IMPLEMENTATION = "model.finite-component-catalogue-baseline.v1"
 CATALOGUE_RESULT_SCHEMA = "forge.finite_component_catalogue_baseline_result.v1"
@@ -77,6 +85,44 @@ def _artifact_path(
     return path
 
 
+def _pinned_input_path(
+    run_dir: Path,
+    manifest: Mapping[str, Any],
+    label: str,
+    *,
+    repo: Path,
+) -> Path:
+    """Resolve one hash-pinned external input of a stage, verifying it byte for byte.
+
+    A run that evaluates frozen checkpoints does not produce the training receipt; it declares it
+    as an input pinned by SHA-256.  Resolving it here keeps the receipt's provenance checkable at
+    adjudication time rather than taking the run's word for it.
+    """
+
+    inputs = manifest.get("external_inputs")
+    if not isinstance(inputs, Mapping) or label not in inputs:
+        raise SynthesisProgramProductionAdjudicationError(
+            f"evaluation stage omits required pinned input {label!r}"
+        )
+    record = inputs[label]
+    if not isinstance(record, Mapping):
+        raise SynthesisProgramProductionAdjudicationError(
+            f"pinned input {label!r} record is malformed"
+        )
+    path = (repo / str(record.get("path", ""))).resolve()
+    try:
+        path.relative_to(repo.resolve())
+    except ValueError as error:
+        raise SynthesisProgramProductionAdjudicationError(
+            f"pinned input {label!r} escapes the repository"
+        ) from error
+    if not path.is_file() or str(sha256_file(path)) != record.get("sha256"):
+        raise SynthesisProgramProductionAdjudicationError(
+            f"pinned input {label!r} is missing or changed"
+        )
+    return path
+
+
 def _load_production_run(run_dir: Path) -> dict[str, Any]:
     run_dir = run_dir.resolve()
     verify_run_directory(run_dir)
@@ -93,16 +139,30 @@ def _load_production_run(run_dir: Path) -> dict[str, Any]:
         raise SynthesisProgramProductionAdjudicationError(
             "adjudication requires a complete full-profile Transformer production run"
         )
+    # Two admissible run shapes. A run that trained its own model carries the training receipt as a
+    # stage artifact.  A run that evaluated frozen checkpoints carries the same receipt as a
+    # hash-pinned external input of its evaluation stage, alongside the checkpoint archive that
+    # receipt describes.  The second is not a weaker provenance claim: the receipt is pinned by
+    # SHA-256 rather than merely produced in place, and every identity check below still applies.
     stages = run.get("stages")
-    if not isinstance(stages, Mapping) or set(stages) != {"training", "evaluation"}:
+    stage_names = set(stages) if isinstance(stages, Mapping) else set()
+    trained_in_run = stage_names == {"training", "evaluation"}
+    evaluated_from_pins = stage_names == {"layout_preflight", "evaluation"}
+    if not (trained_in_run or evaluated_from_pins):
         raise SynthesisProgramProductionAdjudicationError(
-            "production run must contain exactly training and evaluation stages"
+            "production run must contain training and evaluation, "
+            "or layout_preflight and evaluation from pinned checkpoints"
         )
+    expected = (
+        (("training", TRAINING_IMPLEMENTATION), ("evaluation", EVALUATION_IMPLEMENTATION))
+        if trained_in_run
+        else (
+            ("layout_preflight", LAYOUT_PREFLIGHT_IMPLEMENTATION),
+            ("evaluation", EVALUATION_FROM_PINS_IMPLEMENTATION),
+        )
+    )
     manifests: dict[str, dict[str, Any]] = {}
-    for stage_id, implementation in (
-        ("training", TRAINING_IMPLEMENTATION),
-        ("evaluation", EVALUATION_IMPLEMENTATION),
-    ):
+    for stage_id, implementation in expected:
         manifest = read_json_object(
             run_dir / "stages" / stage_id / "manifest.json",
             error=SynthesisProgramProductionAdjudicationError,
@@ -114,7 +174,12 @@ def _load_production_run(run_dir: Path) -> dict[str, Any]:
             )
         manifests[stage_id] = manifest
 
-    training_path = _artifact_path(run_dir, "training", manifests["training"], "result")
+    if trained_in_run:
+        training_path = _artifact_path(run_dir, "training", manifests["training"], "result")
+    else:
+        training_path = _pinned_input_path(
+            run_dir, manifests["evaluation"], "training_result", repo=run_dir.parents[2]
+        )
     evaluation_path = _artifact_path(run_dir, "evaluation", manifests["evaluation"], "result")
     samples_path = _artifact_path(run_dir, "evaluation", manifests["evaluation"], "samples")
     training = read_json_object(
@@ -150,7 +215,10 @@ def _load_production_run(run_dir: Path) -> dict[str, Any]:
         raise SynthesisProgramProductionAdjudicationError(
             f"replicate {replicate} did not pass its evaluation gates"
         )
-    training_inputs = manifests["training"].get("external_inputs")
+    # Both stages must agree on the design they were run against.  In a from-pins run the
+    # layout preflight is the stage that stands opposite evaluation, and it takes the same design.
+    first_stage = "training" if trained_in_run else "layout_preflight"
+    training_inputs = manifests[first_stage].get("external_inputs")
     evaluation_inputs = manifests["evaluation"].get("external_inputs")
     if not isinstance(training_inputs, Mapping) or not isinstance(evaluation_inputs, Mapping):
         raise SynthesisProgramProductionAdjudicationError(

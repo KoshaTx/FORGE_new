@@ -16,6 +16,18 @@
     "terminal_decode_policy": "strict_reaction_core_saturation_argmax"
   },
   "inputs": {
+    "checkpoint_archive_r0": {
+      "path": "results/phase1/transformer_production_ablation_seed0_v1/checkpoints.tar",
+      "sha256": "8410936b311326c206b42f4e41da19a29c6265f28111142936cac4e55812924a"
+    },
+    "checkpoint_archive_r1": {
+      "path": "results/phase1/transformer_production_ablation_seed1_v1/checkpoints.tar",
+      "sha256": "585afd8ac9c69d9b31534d02aa5258d19afbd106a9374ce5d5b076b6adf5f5d4"
+    },
+    "checkpoint_archive_r2": {
+      "path": "results/phase1/transformer_production_ablation_seed2_v1/checkpoints.tar",
+      "sha256": "301cf92cbeba47a5859f1a1e664ffa76ed75e8e84a7e1ee4a9525e46eb82447e"
+    },
     "multireaction_atlas": {
       "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
       "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
@@ -43,6 +55,18 @@
     "qualified_ugi_reactions": {
       "path": "data/vendor/qualified_reactions_v1.json",
       "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "training_result_r0": {
+      "path": "results/phase1/transformer_production_ablation_seed0_v1/training_result.json",
+      "sha256": "f0afa783cfa7cc82710bd260c4e35275ef6dd2a3b98cb9eb78f3c566784eba58"
+    },
+    "training_result_r1": {
+      "path": "results/phase1/transformer_production_ablation_seed1_v1/training_result.json",
+      "sha256": "b8e26e321f650c7dddeaebc483fe15e11cdae7335c003e7dd351db2e72c4017b"
+    },
+    "training_result_r2": {
+      "path": "results/phase1/transformer_production_ablation_seed2_v1/training_result.json",
+      "sha256": "fe247c35495d56861f46e6eb408371b9058dec9b5c2faedf65321d1071375e20"
     },
     "ugi_assignments": {
       "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",

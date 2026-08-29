@@ -1457,6 +1457,33 @@ Results are never pooled across reaction programs.}
 }
 \end{table*}
 
+% PLACEHOLDER TABLE. Two rows carry measured seed-0 values; the global-source row is pending its
+% evaluation under the same decoder. Replace the inlined cells with a generated \input before
+% submission, and extend all rows to the design's three replicate seeds.
+\begin{table}[H]
+\caption{\textbf{Decoder and source-marginal ablations of the final model.} Ugi held-out attempts
+for the 9,143-step shared model, which is the model reported elsewhere in this paper. The two
+ablations are independent: the decoder rows share one set of trained weights and differ only in
+terminal decoding, while the source rows share one decoder and differ only in the marginal the
+corruption starts from. Decoding under the reaction-core saturation policy holds the aldehyde-derived
+$\alpha$-carbon at one hydrogen and the isocyanide-derived amide nitrogen at one hydrogen, which the
+qualified transform fixes; it changes which graph is produced, never how it is adjudicated.
+\emph{Provisional: seed~0 only, and the global-source row is not yet measured.}}
+\label{tab:decoder-source-ablation}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Source marginal & Terminal decoder & Valid & Exact-L1 coverage & Exact-L1 \\
+\midrule
+\cellcolor{forgerow}Program-role &\cellcolor{forgerow} Core saturation &\cellcolor{forgerow} 95.2 &\cellcolor{forgerow} 99.9 &\cellcolor{forgerow} 95.1 \\
+Program-role & Valence topology only & 95.3 & 78.4 & 74.7 \\
+Global & Core saturation & \multicolumn{3}{c}{\textit{pending}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{table}[H]
 \caption{\textbf{Exact verified-L1 counts for the final conditioned model.}
 Each row reports the numerator, fixed attempt denominator and resulting percentage for one

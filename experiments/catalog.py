@@ -228,6 +228,10 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/"
         "transformer_mechanism_ablation_core_saturation_seed2_h100.json"
     ),
+    "phase1-transformer-production-ablation-core-saturation-h100": (
+        "experiments/phase1/multireaction/"
+        "transformer_production_ablation_core_saturation_h100.json"
+    ),
     "phase1-transformer-production-ablation-core-saturation-seed0-h100": (
         "experiments/phase1/multireaction/"
         "transformer_production_ablation_core_saturation_seed0_h100.json"
