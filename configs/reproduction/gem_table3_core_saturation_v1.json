@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.gem_table3_route_assessment_config.v1",
+  "status": "frozen_before_route_blind_assessment",
+  "inputs": {
+    "assessed_attempts": [
+      {
+        "path": "results/phase1/forge_transformer_core_saturation_common_assessment_seed0_v2/assessed_attempts.jsonl.gz",
+        "sha256": "41d3ae8a2fd6cf219d4cb78c9010635349d7ce435183ea770c71b9d842b81967"
+      },
+      {
+        "path": "results/phase1/forge_transformer_core_saturation_common_assessment_seed1_v2/assessed_attempts.jsonl.gz",
+        "sha256": "528fc876a67d8906428614ee02d4d02fa7813c8387133de72b51ca93d3395bc6"
+      },
+      {
+        "path": "results/phase1/forge_transformer_core_saturation_common_assessment_seed2_v2/assessed_attempts.jsonl.gz",
+        "sha256": "46126bd2c8dc0275e7639d8eb91c52e6c99eb2e0f5507522b03de2ccc838e859"
+      }
+    ],
+    "route_evidence_result": {
+      "path": "results/phase1/forge_transformer_core_saturation_route_evidence_v1/result.json",
+      "sha256": "0413b6e26142e5fd63ee81c7792fa9a31ea57c4ef1685554757b73a24a3f5b12"
+    },
+    "component_evidence": {
+      "path": "results/phase1/forge_transformer_core_saturation_route_evidence_v1/component_evidence.jsonl.gz",
+      "sha256": "118b1415c8d2830770040ae9bddb593ee853cfe1b0a882952e2b0e175c82f659"
+    }
+  },
+  "population": {
+    "method_id": "forge_transformer",
+    "seeds": [20260825, 20260826, 20260827],
+    "sample_size": 256,
+    "eligibility": "valid_unique_exact_l1_with_one_forward_verified_trace",
+    "product_identity": "canonical_constitutional_smiles",
+    "root_trace_resolution": "lexicographically_first_role_constitution_tuple",
+    "ordering": "sha256_of_salt_and_canonical_product",
+    "salt": "forge-gem-table3-core-saturation-v1"
+  },
+  "policy": {
+    "route_or_oracle_calls": 0,
+    "family_projection_can_close": false,
+    "proposal_only_route_can_close": false,
+    "missing_evidence_is_unsynthesizable": false,
+    "complete_requires_every_component_strict_complete": true,
+    "candidate_selection": false
+  }
+}

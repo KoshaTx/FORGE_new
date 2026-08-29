@@ -33,6 +33,11 @@ TRANSFORMER_EXPERIMENT_IDS = frozenset(
         "phase1-transformer-production-ablation-core-saturation-seed0-h100",
         "phase1-transformer-production-ablation-core-saturation-seed1-h100",
         "phase1-transformer-production-ablation-core-saturation-seed2-h100",
+        # Evaluation-only recoveries of the final shared-bias program-role checkpoints under the
+        # qualified reaction-core-saturation decoder.
+        "phase1-shared-bias-parallel-program-role-seed0-core-saturation-h100-v2",
+        "phase1-shared-bias-parallel-program-role-seed1-core-saturation-h100-v2",
+        "phase1-shared-bias-parallel-program-role-seed2-core-saturation-h100-v2",
     }
 )
 TRAINING_IMPLEMENTATION = "model.shared-synthesis-program-production-training.v1"

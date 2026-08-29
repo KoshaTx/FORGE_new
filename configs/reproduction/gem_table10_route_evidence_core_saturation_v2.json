@@ -1,0 +1,29 @@
+{
+  "schema_version": "forge.gem_table10_route_evidence_config.v1",
+  "status": "frozen_after_final_common_ugi_adjudication",
+  "common_assessment_config": {
+    "path": "configs/reproduction/natbiotech_v1_completed_evidence_v1.json",
+    "sha256": "d08445ad00f68d9bc77637cff061b59c1b577ee08133364ad40fd7635314b39f"
+  },
+  "route_adjudication": {
+    "path": "results/phase1/common_ugi_method_blind_route_adjudication_core_saturation_v2/result.json",
+    "sha256": "a11e51611b3e9ba51dd16aef7f56f2e1adabde36945fe259248e2d5097ef23bf"
+  },
+  "route_evidence": {
+    "path": "results/phase1/common_ugi_method_blind_route_evidence_core_saturation_v2/result.json",
+    "sha256": "f829cb6a1da7d5c1bb83fca10aadf07b54fd171c8992ff3682e011f981c2c65b"
+  },
+  "attempts_per_method_per_seed": 3072,
+  "expected_seeds": [20260825, 20260826, 20260827],
+  "method_order": [
+    "rgfn",
+    "defog_unconditional",
+    "genmol_safe",
+    "finite_catalogue_oracle",
+    "learned_inventory_selector",
+    "shared_null_posthoc",
+    "fact_matched",
+    "forge_transformer"
+  ],
+  "candidate_selection": false
+}

@@ -235,6 +235,127 @@ def _command_paper_render_completed_evidence_v1(args: argparse.Namespace) -> int
     return 0
 
 
+def _command_paper_render_gem_table1(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table1_final_evidence
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    output = Path(args.output) if Path(args.output).is_absolute() else repo / args.output
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table1_final_evidence(config, repo, output, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table2_forge(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table2_forge_row
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table2_forge_row(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table3(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table3_route_assessment
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    output = Path(args.output) if Path(args.output).is_absolute() else repo / args.output
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table3_route_assessment(config, repo, output, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table4(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table4_production_comparison
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table4_production_comparison(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table5(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table5_decoder_source_ablation
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table5_decoder_source_ablation(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table6(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table6_exact_l1_counts
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table6_exact_l1_counts(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table7(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table7_lipid_realism
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table7_lipid_realism(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table8(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table8_architecture_ablations
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table8_architecture_ablations(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table9(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table9_catalogue_comparison
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    rows = Path(args.rows) if Path(args.rows).is_absolute() else repo / args.rows
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table9_catalogue_comparison(config, repo, rows, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_table10(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_table10_route_evidence
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    output = Path(args.output) if Path(args.output).is_absolute() else repo / args.output
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_table10_route_evidence(config, repo, output, result_path=result))
+    return 0
+
+
+def _command_paper_render_gem_tables12_13(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_tables12_and_13
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    output = Path(args.output) if Path(args.output).is_absolute() else repo / args.output
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_tables12_and_13(config, repo, output, result_path=result))
+    return 0
+
+
 def _command_paper_render_forge_samples(args: argparse.Namespace) -> int:
     from forge_paper import render_forge_generated_sample_figure
 
@@ -519,6 +640,35 @@ def _command_experiment_adjudicate_final_production(args: argparse.Namespace) ->
     return 0
 
 
+def _command_experiment_adjudicate_core_saturation_production(
+    args: argparse.Namespace,
+) -> int:
+    repo = _repo()
+    from experiments.phase1.multireaction.core_saturation_adjudication import (
+        adjudicate_core_saturation_production,
+    )
+
+    def resolve(values: list[str]) -> list[Path]:
+        return [Path(value) if Path(value).is_absolute() else repo / value for value in values]
+
+    catalogue = Path(args.catalogue_adjudication)
+    if not catalogue.is_absolute():
+        catalogue = repo / catalogue
+    output = Path(args.output) if Path(args.output).is_absolute() else repo / args.output
+    _print(
+        adjudicate_core_saturation_production(
+            resolve(args.final_runs),
+            resolve(args.ugi_only_runs),
+            resolve(args.null_runs),
+            resolve(args.cyclic_runs),
+            catalogue,
+            repo,
+            output,
+        )
+    )
+    return 0
+
+
 def _command_experiment_adjudicate_local_chemistry_resampling(
     args: argparse.Namespace,
 ) -> int:
@@ -711,6 +861,31 @@ def _command_experiment_assess_common_ugi(args: argparse.Namespace) -> int:
             attempts,
             output,
             method_id=args.method,
+            seed=args.seed,
+            expected_attempts=args.expected_attempts,
+        )
+    )
+    return 0
+
+
+def _command_experiment_supersede_common_ugi_method_label(args: argparse.Namespace) -> int:
+    repo = _repo()
+    from experiments.phase1.multireaction.attempt_label_supersession import (
+        supersede_common_ugi_method_label,
+    )
+
+    def resolve(value: str) -> Path:
+        path = Path(value)
+        return path if path.is_absolute() else repo / path
+
+    _print(
+        supersede_common_ugi_method_label(
+            resolve(args.attempts),
+            resolve(args.evaluation_result),
+            resolve(args.output),
+            repo,
+            source_method_id=args.source_method,
+            target_method_id=args.target_method,
             seed=args.seed,
             expected_attempts=args.expected_attempts,
         )
@@ -1048,6 +1223,174 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render_completed.set_defaults(function=_command_paper_render_completed_evidence_v1)
 
+    render_gem_table1 = paper_commands.add_parser(
+        "render-gem-table1",
+        help="render GEM Table 1 from matched conditioned, null and cyclic evaluations",
+    )
+    render_gem_table1.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table1_core_saturation_complete_v1.json",
+    )
+    render_gem_table1.add_argument("--output", default="paper/v1/generated")
+    render_gem_table1.add_argument(
+        "--result", default="results/phase1/gem_table1_core_saturation_complete_v1/result.json"
+    )
+    render_gem_table1.set_defaults(function=_command_paper_render_gem_table1)
+
+    render_gem_table2 = paper_commands.add_parser(
+        "render-gem-table2-forge",
+        help="render only the completed final FORGE row of GEM Table 2",
+    )
+    render_gem_table2.add_argument(
+        "--config",
+        default="configs/reproduction/natbiotech_v1_completed_evidence_v1.json",
+    )
+    render_gem_table2.add_argument(
+        "--rows", default="paper/v1/generated/common_ugi_benchmark_completed_rows.tex"
+    )
+    render_gem_table2.add_argument(
+        "--result", default="results/phase1/gem_table2_forge_row_v1/result.json"
+    )
+    render_gem_table2.set_defaults(function=_command_paper_render_gem_table2_forge)
+
+    render_gem_table3 = paper_commands.add_parser(
+        "render-gem-table3",
+        help="assess and render GEM Table 3 from final Transformer products",
+    )
+    render_gem_table3.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table3_core_saturation_v1.json",
+    )
+    render_gem_table3.add_argument("--output", default="paper/v1/generated")
+    render_gem_table3.add_argument(
+        "--result", default="results/phase1/gem_table3_core_saturation_v1/result.json"
+    )
+    render_gem_table3.set_defaults(function=_command_paper_render_gem_table3)
+
+    render_gem_table4 = paper_commands.add_parser(
+        "render-gem-table4",
+        help="render the matched three-arm production comparison",
+    )
+    render_gem_table4.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table1_core_saturation_complete_v1.json",
+    )
+    render_gem_table4.add_argument(
+        "--rows", default="paper/v1/generated/production_comparison_transposed_rows.tex"
+    )
+    render_gem_table4.add_argument(
+        "--result", default="results/phase1/gem_table4_production_comparison_v1/result.json"
+    )
+    render_gem_table4.set_defaults(function=_command_paper_render_gem_table4)
+
+    render_gem_table5 = paper_commands.add_parser(
+        "render-gem-table5",
+        help="render the completed seed-0 decoder/source ablation table",
+    )
+    render_gem_table5.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table5_decoder_source_ablation_v1.json",
+    )
+    render_gem_table5.add_argument(
+        "--rows", default="paper/v1/generated/decoder_source_ablation_rows.tex"
+    )
+    render_gem_table5.add_argument(
+        "--result", default="results/phase1/gem_table5_decoder_source_ablation_v1/result.json"
+    )
+    render_gem_table5.set_defaults(function=_command_paper_render_gem_table5)
+
+    render_gem_table6 = paper_commands.add_parser(
+        "render-gem-table6",
+        help="render exact verified-L1 counts for the final three-seed model",
+    )
+    render_gem_table6.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table1_core_saturation_final_v1.json",
+    )
+    render_gem_table6.add_argument(
+        "--rows", default="paper/v1/generated/production_seed_exact_counts_rows.tex"
+    )
+    render_gem_table6.add_argument(
+        "--result", default="results/phase1/gem_table6_exact_l1_counts_v1/result.json"
+    )
+    render_gem_table6.set_defaults(function=_command_paper_render_gem_table6)
+
+    render_gem_table7 = paper_commands.add_parser(
+        "render-gem-table7",
+        help="render the six-method structural-realism diagnostic",
+    )
+    render_gem_table7.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table7_lipid_realism_v1.json",
+    )
+    render_gem_table7.add_argument("--rows", default="paper/v1/generated/lipid_realism_rows.tex")
+    render_gem_table7.add_argument(
+        "--result", default="results/phase1/gem_table7_lipid_realism_v1/result.json"
+    )
+    render_gem_table7.set_defaults(function=_command_paper_render_gem_table7)
+
+    render_gem_table8 = paper_commands.add_parser(
+        "render-gem-table8",
+        help="render the matched three-seed Transformer architecture ablations",
+    )
+    render_gem_table8.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table8_architecture_ablations_v1.json",
+    )
+    render_gem_table8.add_argument(
+        "--rows", default="paper/v1/generated/architecture_ablation_rows.tex"
+    )
+    render_gem_table8.add_argument(
+        "--result", default="results/phase1/gem_table8_architecture_ablations_v1/result.json"
+    )
+    render_gem_table8.set_defaults(function=_command_paper_render_gem_table8)
+
+    render_gem_table9 = paper_commands.add_parser(
+        "render-gem-table9",
+        help="render the final-model versus finite-catalogue comparison",
+    )
+    render_gem_table9.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table9_catalogue_comparison_v1.json",
+    )
+    render_gem_table9.add_argument(
+        "--rows", default="paper/v1/generated/catalogue_comparison_transposed_rows.tex"
+    )
+    render_gem_table9.add_argument(
+        "--result", default="results/phase1/gem_table9_catalogue_comparison_v1/result.json"
+    )
+    render_gem_table9.set_defaults(function=_command_paper_render_gem_table9)
+
+    render_gem_table10 = paper_commands.add_parser(
+        "render-gem-table10",
+        help="render the final method-blind common-Ugi route-evidence table",
+    )
+    render_gem_table10.add_argument(
+        "--config",
+        default="configs/reproduction/gem_table10_route_evidence_core_saturation_v2.json",
+    )
+    render_gem_table10.add_argument("--output", default="paper/v1/generated")
+    render_gem_table10.add_argument(
+        "--result",
+        default="results/phase1/gem_table10_route_evidence_core_saturation_v2/result.json",
+    )
+    render_gem_table10.set_defaults(function=_command_paper_render_gem_table10)
+
+    render_gem_tables12_13 = paper_commands.add_parser(
+        "render-gem-tables12-13",
+        help="render common-Ugi seed and decomposition reporting tables",
+    )
+    render_gem_tables12_13.add_argument(
+        "--config",
+        default="configs/reproduction/natbiotech_v1_completed_evidence_v1.json",
+    )
+    render_gem_tables12_13.add_argument("--output", default="paper/v1/generated")
+    render_gem_tables12_13.add_argument(
+        "--result",
+        default="results/phase1/gem_tables12_13_common_ugi_v1/result.json",
+    )
+    render_gem_tables12_13.set_defaults(function=_command_paper_render_gem_tables12_13)
+
     render_samples = paper_commands.add_parser(
         "render-forge-samples",
         help="render the deterministic display-only FORGE generated-lipid figure",
@@ -1189,6 +1532,26 @@ def build_parser() -> argparse.ArgumentParser:
         function=_command_experiment_adjudicate_final_production
     )
 
+    adjudicate_core_saturation = experiment_commands.add_parser(
+        "adjudicate-core-saturation-production",
+        help="aggregate the final graph Transformer with separately retrained matched controls",
+    )
+    adjudicate_core_saturation.add_argument("final_runs", nargs=3)
+    adjudicate_core_saturation.add_argument("--ugi-only-runs", nargs=3, required=True)
+    adjudicate_core_saturation.add_argument("--null-runs", nargs=3, required=True)
+    adjudicate_core_saturation.add_argument("--cyclic-runs", nargs=3, required=True)
+    adjudicate_core_saturation.add_argument(
+        "--catalogue-adjudication",
+        default="results/phase1/final_bl_core_production_adjudication_v1/result.json",
+    )
+    adjudicate_core_saturation.add_argument(
+        "--output",
+        default="results/phase1/shared_bias_core_saturation_adjudication_v1/result.json",
+    )
+    adjudicate_core_saturation.set_defaults(
+        function=_command_experiment_adjudicate_core_saturation_production
+    )
+
     adjudicate_local_chemistry = experiment_commands.add_parser(
         "adjudicate-local-chemistry-resampling",
         help="aggregate and audit three verified constrained frozen-checkpoint resampling runs",
@@ -1230,17 +1593,11 @@ def build_parser() -> argparse.ArgumentParser:
     adjudicate_tree_calibration.add_argument("runs", nargs=5)
     adjudicate_tree_calibration.add_argument(
         "--config",
-        default=(
-            "configs/model/"
-            "phase1_ugi_tree_transformer_calibration_adjudication_v1.json"
-        ),
+        default=("configs/model/" "phase1_ugi_tree_transformer_calibration_adjudication_v1.json"),
     )
     adjudicate_tree_calibration.add_argument(
         "--output",
-        default=(
-            "results/phase1/"
-            "ugi_tree_transformer_calibration_adjudication_v1/result.json"
-        ),
+        default=("results/phase1/" "ugi_tree_transformer_calibration_adjudication_v1/result.json"),
     )
     adjudicate_tree_calibration.set_defaults(
         function=_command_experiment_adjudicate_tree_transformer_calibration
@@ -1253,17 +1610,11 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_tree_production.add_argument("runs", nargs=3)
     aggregate_tree_production.add_argument(
         "--config",
-        default=(
-            "configs/model/"
-            "phase1_ugi_tree_relational_production_aggregate_v1.json"
-        ),
+        default=("configs/model/" "phase1_ugi_tree_relational_production_aggregate_v1.json"),
     )
     aggregate_tree_production.add_argument(
         "--output",
-        default=(
-            "results/phase1/"
-            "ugi_tree_relational_production_aggregate_v1/result.json"
-        ),
+        default=("results/phase1/" "ugi_tree_relational_production_aggregate_v1/result.json"),
     )
     aggregate_tree_production.set_defaults(
         function=_command_experiment_aggregate_tree_transformer_production
@@ -1275,17 +1626,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     diagnose_tree_production.add_argument(
         "--config",
-        default=(
-            "configs/model/"
-            "phase1_ugi_tree_relational_failure_attribution_v1.json"
-        ),
+        default=("configs/model/" "phase1_ugi_tree_relational_failure_attribution_v1.json"),
     )
     diagnose_tree_production.add_argument(
         "--output-dir",
-        default=(
-            "results/phase1/"
-            "ugi_tree_relational_failure_attribution_v1"
-        ),
+        default=("results/phase1/" "ugi_tree_relational_failure_attribution_v1"),
     )
     diagnose_tree_production.set_defaults(
         function=_command_experiment_diagnose_tree_transformer_production
@@ -1297,17 +1642,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     qualify_tree_interventions.add_argument(
         "--config",
-        default=(
-            "configs/model/"
-            "phase1_ugi_tree_relational_intervention_readiness_v1.json"
-        ),
+        default=("configs/model/" "phase1_ugi_tree_relational_intervention_readiness_v1.json"),
     )
     qualify_tree_interventions.add_argument(
         "--output-dir",
-        default=(
-            "results/phase1/"
-            "ugi_tree_relational_intervention_readiness_v1"
-        ),
+        default=("results/phase1/" "ugi_tree_relational_intervention_readiness_v1"),
     )
     qualify_tree_interventions.set_defaults(
         function=_command_experiment_qualify_tree_transformer_interventions
@@ -1319,17 +1658,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     constrained_tree_resampling.add_argument(
         "--config",
-        default=(
-            "configs/model/"
-            "phase1_ugi_tree_relational_constrained_resampling_v2.json"
-        ),
+        default=("configs/model/" "phase1_ugi_tree_relational_constrained_resampling_v2.json"),
     )
     constrained_tree_resampling.add_argument(
         "--output-dir",
-        default=(
-            "results/phase1/"
-            "ugi_tree_relational_edge_constrained_resampling_smoke_v3"
-        ),
+        default=("results/phase1/" "ugi_tree_relational_edge_constrained_resampling_smoke_v3"),
     )
     constrained_tree_resampling.add_argument(
         "--profile", choices=("smoke", "full"), default="smoke"
@@ -1377,6 +1710,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     assess_common.add_argument("--output", required=True)
     assess_common.set_defaults(function=_command_experiment_assess_common_ugi)
+
+    supersede_common_label = experiment_commands.add_parser(
+        "supersede-common-ugi-method-label",
+        help="hash-pin a metadata-only correction to one internal common-Ugi method label",
+    )
+    supersede_common_label.add_argument("attempts")
+    supersede_common_label.add_argument("--evaluation-result", required=True)
+    supersede_common_label.add_argument("--source-method", required=True)
+    supersede_common_label.add_argument("--target-method", required=True)
+    supersede_common_label.add_argument("--seed", required=True, type=int)
+    supersede_common_label.add_argument("--expected-attempts", required=True, type=int)
+    supersede_common_label.add_argument("--output", required=True)
+    supersede_common_label.set_defaults(
+        function=_command_experiment_supersede_common_ugi_method_label
+    )
 
     assess_v0_transformer = experiment_commands.add_parser(
         "assess-ugi-v0-transformer",

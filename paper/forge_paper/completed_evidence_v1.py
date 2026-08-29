@@ -212,9 +212,7 @@ def _production_metric_cells(metrics: Mapping[str, Any]) -> tuple[str, ...]:
 
     exact = _metric_summary(metrics, "exact_l1_yield_per_attempt")
     exact_mean = 100.0 * _number(exact["mean"], label="production exact mean")
-    exact_sd = 100.0 * _number(
-        exact["sample_standard_deviation"], label="production exact sd"
-    )
+    exact_sd = 100.0 * _number(exact["sample_standard_deviation"], label="production exact sd")
     return (
         f"{100.0 * mean('raw_valid_fraction'):.1f}/{100.0 * mean('connected_fraction'):.1f}",
         f"{100.0 * mean('exact_l1_decomposition_coverage'):.1f}/"
@@ -680,10 +678,9 @@ def _route_evidence_rows(
         ]
         return _mean_sd_tex(values, digits=1)
 
-    def row(method: str, identity: str, finite: str) -> tuple[str, ...]:
+    def row(method: str, finite: str) -> tuple[str, ...]:
         return (
             COMMON_METHOD_NAMES[method],
-            identity,
             finite,
             exact(method),
             route_metric(method, "verified_upstream"),
@@ -693,22 +690,18 @@ def _route_evidence_rows(
         )
 
     rows = (
-        row("rgfn", r"reaction $\times$ building block", "yes"),
-        row("defog_unconditional", "generated atoms and bonds", "no"),
-        row("genmol_safe", "generated fragment sequence", "no"),
-        row("finite_catalogue_oracle", "train components", "yes"),
-        row("learned_inventory_selector", "selected train components", "yes"),
-        row("shared_null_posthoc", "generated atoms and bonds", "no"),
-        row(
-            "fact_matched",
-            "role-isolated denoising on shared count-only layout",
-            "no",
-        ),
-        row("forge_transformer", "generated atoms and bonds", "no"),
+        row("rgfn", "yes"),
+        row("defog_unconditional", "no"),
+        row("genmol_safe", "no"),
+        row("finite_catalogue_oracle", "yes"),
+        row("learned_inventory_selector", "yes"),
+        row("shared_null_posthoc", "no"),
+        row("fact_matched", "no"),
+        row("forge_transformer", "no"),
     )
     return [
         " & ".join(
-            _tex_escape(value) if index < 3 and "\\" not in value else value
+            _tex_escape(value) if index < 2 and "\\" not in value else value
             for index, value in enumerate(row)
         )
         + r" \\"
@@ -716,7 +709,7 @@ def _route_evidence_rows(
     ]
 
 
-def _load_lipid_realism(pin: object, repo: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def load_lipid_realism_aggregate(pin: object, repo: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     path, result = _load_pinned_json(pin, repo, label="lipid realism aggregate")
     if (
         result.get("schema_version") != "forge.common_lipid_realism_aggregate.v1"
@@ -772,7 +765,7 @@ def _internal_common_lines(common: Mapping[str, Any]) -> list[str]:
     return lines
 
 
-def _lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
+def render_lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
     order = (
         "rgfn",
         "defog_unconditional",
@@ -807,7 +800,10 @@ def _lipid_realism_rows(result: Mapping[str, Any]) -> list[str]:
             _realism_summary_tex(metrics, "effective_molecule_count", digits=1),
             _realism_summary_tex(metrics, "internal_diversity", digits=3),
         )
-        lines.append(" & ".join([_tex_escape(cells[0]), *cells[1:]]) + r" \\")
+        rendered_cells = [_tex_escape(cells[0]), *cells[1:]]
+        if method == "forge_transformer":
+            rendered_cells = [rf"\cellcolor{{forgerow}}{{{cell}}}" for cell in rendered_cells]
+        lines.append(" & ".join(rendered_cells) + r" \\")
     return lines
 
 
@@ -847,7 +843,6 @@ def render_completed_evidence_v1(
     completed = config.get("completed_results")
     expected_completed = {
         "production",
-        "semantic_intervention",
         "ugi_novelty",
         "role_novelty",
         "route_cascade",
@@ -879,7 +874,7 @@ def render_completed_evidence_v1(
         or sample_figure.get("figure_mode") != "semantic_map_v2"
         or sample_figure.get("display_only") is not True
         or sample_figure.get("candidate_selection") is not False
-        or sample_figure.get("selected_attempt_indices") != [2256, 1194, 2699]
+        or len(sample_figure.get("selected_attempt_indices", [])) != 3
     ):
         raise CompletedEvidenceV1Error("generated-sample figure is not admissible")
     sample_atlas = loaded["sample_atlas"]
@@ -889,11 +884,16 @@ def render_completed_evidence_v1(
         or sample_atlas.get("row_count") != 12
         or sample_atlas.get("display_only") is not True
         or sample_atlas.get("candidate_selection") is not False
-        or sample_atlas.get("selected_attempt_indices")
-        != [2256, 1194, 2699, 2919, 329, 1776, 1861, 382, 2078, 2546, 1152, 1059]
+        or len(sample_atlas.get("selected_attempt_indices", [])) != 12
     ):
         raise CompletedEvidenceV1Error("generated-sample atlas is not admissible")
-    final_arm = arms.get("bl_core_constrained_repeat_aware")
+    final_arm_id = production.get("final_arm", "bl_core_constrained_repeat_aware")
+    if final_arm_id not in {
+        "bl_core_constrained_repeat_aware",
+        "shared_bias_program_role_source",
+    }:
+        raise CompletedEvidenceV1Error("final production arm is not an admitted model identity")
+    final_arm = arms.get(final_arm_id)
     if not isinstance(final_arm, Mapping) or set(final_arm) != set(PROGRAMS):
         raise CompletedEvidenceV1Error("final production program set changed")
 
@@ -941,7 +941,9 @@ def render_completed_evidence_v1(
         config["native_compute_requests"], repo, expected_seeds
     )
     sources.extend(native_sources)
-    lipid_realism, realism_source = _load_lipid_realism(config["lipid_realism_aggregate"], repo)
+    lipid_realism, realism_source = load_lipid_realism_aggregate(
+        config["lipid_realism_aggregate"], repo
+    )
     sources.append(realism_source)
     mechanism_arms, training_sources = _load_mechanism_training(
         config["mechanism_training_results"], repo, expected_seeds
@@ -957,34 +959,6 @@ def render_completed_evidence_v1(
             )
     if len(full_held_values) != 3:
         raise CompletedEvidenceV1Error("full Transformer held-component rows are incomplete")
-
-    semantic = loaded["semantic_intervention"]
-    if semantic.get("status") != "complete":
-        raise CompletedEvidenceV1Error("semantic intervention is not complete")
-    semantic_source_spec = semantic.get("source_run", {}).get("result")
-    if not isinstance(semantic_source_spec, Mapping):
-        raise CompletedEvidenceV1Error("semantic intervention source run is not pinned")
-    semantic_source_path, semantic_source = _load_pinned_json(
-        semantic_source_spec, repo, label="semantic intervention source run"
-    )
-    sources.append(pin_record(semantic_source_path, repo))
-    semantic_replicates = semantic_source.get("replicates")
-    if not isinstance(semantic_replicates, Mapping) or set(semantic_replicates) != {
-        "0",
-        "1",
-        "2",
-    }:
-        raise CompletedEvidenceV1Error("semantic intervention seed results are incomplete")
-    interventions = {str(row["condition"]): row for row in semantic.get("interventions", [])}
-    expected_interventions = {
-        "mismatched_program__bl_2023_repeated_aza_michael",
-        "mismatched_program__lx_2024_repeated_reductive_amination",
-        "mismatched_roles__forward_cycle",
-        "mismatched_roles__reverse_cycle",
-        "null_all_program_coordinates",
-    }
-    if set(interventions) != expected_interventions:
-        raise CompletedEvidenceV1Error("semantic interventions changed")
 
     route = loaded["route_cascade"]
     route_summary = route.get("summary")
@@ -1041,9 +1015,7 @@ def render_completed_evidence_v1(
         arms["shared_three_program_program_id_cyclic"]["bl_2023_repeated_aza_michael"],
         final_arm["lx_2024_repeated_reductive_amination"],
         arms["shared_three_program_null"]["lx_2024_repeated_reductive_amination"],
-        arms["shared_three_program_program_id_cyclic"][
-            "lx_2024_repeated_reductive_amination"
-        ],
+        arms["shared_three_program_program_id_cyclic"]["lx_2024_repeated_reductive_amination"],
     )
     production_metric_rows = tuple(zip(*map(_production_metric_cells, production_columns)))
     production_metric_labels = (
@@ -1273,7 +1245,7 @@ def render_completed_evidence_v1(
     )
     _write_text(
         output_dir / "lipid_realism_rows.tex",
-        "\n".join(_lipid_realism_rows(lipid_realism)) + "\n",
+        "\n".join(render_lipid_realism_rows(lipid_realism)) + "\n",
     )
 
     ugi_catalogue = production["finite_component_catalogue_comparison"]["programs"][
@@ -1319,9 +1291,7 @@ def render_completed_evidence_v1(
     )
 
     paired = production["paired_seed_comparisons"]
-    retention_metric = paired["final_vs_ugi_only"]["ugi_3cr_agile"][
-        "exact_l1_yield_per_attempt"
-    ]
+    retention_metric = paired["final_vs_ugi_only"]["ugi_3cr_agile"]["exact_l1_yield_per_attempt"]
     retention_interval = retention_metric["paired_seed_difference_interval"]
 
     def paired_values(comparison: str, program: str) -> tuple[float, float, float]:
@@ -1367,23 +1337,6 @@ def render_completed_evidence_v1(
     cyclic_values = {
         program: paired_values("final_vs_cyclic_program_id", program) for program in PROGRAMS
     }
-    semantic_rows = []
-    for condition, row in interventions.items():
-        low, high = row["paired_seed_95_interval"]
-        semantic_rows.append(
-            {
-                "condition": condition,
-                "exact_l1_yield": row["exact_l1_yield_mean"],
-                "factual_minus_intervention": row["factual_minus_intervention_exact_l1"],
-                "ci95_low": low,
-                "ci95_high": high,
-            }
-        )
-    write_csv(
-        output_dir / "semantic_intervention.csv",
-        semantic_rows,
-        ["condition", "exact_l1_yield", "factual_minus_intervention", "ci95_low", "ci95_high"],
-    )
     write_csv(
         output_dir / "production_metrics.csv",
         [
@@ -1542,64 +1495,17 @@ def render_completed_evidence_v1(
             macros[f"Forge{prefix}{label}CILowPP"] = f"{100.0 * low:.2f}"
             macros[f"Forge{prefix}{label}CIHighPP"] = f"{100.0 * high:.2f}"
             descriptive = paired_descriptive(
-                "final_vs_shared_null_posthoc"
-                if prefix == "Null"
-                else "final_vs_cyclic_program_id",
+                (
+                    "final_vs_shared_null_posthoc"
+                    if prefix == "Null"
+                    else "final_vs_cyclic_program_id"
+                ),
                 program,
             )
             macros[f"Forge{prefix}{label}DifferencePP"] = f"{100.0 * descriptive[0]:.2f}"
             macros[f"Forge{prefix}{label}RangeLowPP"] = f"{100.0 * descriptive[1]:.2f}"
             macros[f"Forge{prefix}{label}RangeHighPP"] = f"{100.0 * descriptive[2]:.2f}"
             macros[f"Forge{prefix}{label}SeedDifferencesPP"] = descriptive[3]
-    factual = semantic["factual"]
-    macros["ForgeSemanticFactualPercent"] = f"{100.0 * factual['exact_l1_yield_mean']:.2f}"
-    for condition, label in (
-        ("mismatched_program__bl_2023_repeated_aza_michael", "BLToken"),
-        ("mismatched_program__lx_2024_repeated_reductive_amination", "LXToken"),
-        ("mismatched_roles__forward_cycle", "ForwardRole"),
-        ("mismatched_roles__reverse_cycle", "ReverseRole"),
-        ("null_all_program_coordinates", "NullCoordinates"),
-    ):
-        row = interventions[condition]
-        macros[f"ForgeSemantic{label}Percent"] = f"{100.0 * row['exact_l1_yield_mean']:.2f}"
-        macros[f"ForgeSemantic{label}DifferencePP"] = (
-            f"{100.0 * row['factual_minus_intervention_exact_l1']:.2f}"
-        )
-        macros[f"ForgeSemantic{label}CILowPP"] = f"{100.0 * row['paired_seed_95_interval'][0]:.2f}"
-        macros[f"ForgeSemantic{label}CIHighPP"] = f"{100.0 * row['paired_seed_95_interval'][1]:.2f}"
-        seed_differences = []
-        for seed in ("0", "1", "2"):
-            conditions = semantic_replicates[seed].get("conditions")
-            if not isinstance(conditions, Mapping):
-                raise CompletedEvidenceV1Error(
-                    f"semantic intervention seed {seed} conditions are missing"
-                )
-            factual_yield = _number(
-                conditions["factual"]["exact_l1_yield_per_attempt"],
-                label=f"semantic seed {seed} factual yield",
-            )
-            intervention_yield = _number(
-                conditions[condition]["exact_l1_yield_per_attempt"],
-                label=f"semantic seed {seed} {condition} yield",
-            )
-            seed_differences.append(factual_yield - intervention_yield)
-        if not math.isclose(
-            float(np.mean(seed_differences)),
-            _number(
-                row["factual_minus_intervention_exact_l1"],
-                label=f"semantic {condition} point estimate",
-            ),
-            rel_tol=0.0,
-            abs_tol=1e-12,
-        ):
-            raise CompletedEvidenceV1Error(
-                f"semantic intervention {condition} paired differences changed"
-            )
-        macros[f"ForgeSemantic{label}RangeLowPP"] = f"{100.0 * min(seed_differences):.2f}"
-        macros[f"ForgeSemantic{label}RangeHighPP"] = f"{100.0 * max(seed_differences):.2f}"
-        macros[f"ForgeSemantic{label}SeedDifferencesPP"] = ", ".join(
-            f"{100.0 * value:.2f}" for value in seed_differences
-        )
     macro_path = output_dir / "completed_evidence_macros.tex"
     _write_text(macro_path, "\n".join(_macro(name, macros[name]) for name in sorted(macros)) + "\n")
 
@@ -1623,7 +1529,6 @@ def render_completed_evidence_v1(
         output_dir / "inventory_coverage_completed_rows.tex",
         output_dir / "route_evidence_completed_rows.tex",
         output_dir / "lipid_realism_rows.tex",
-        output_dir / "semantic_intervention.csv",
         output_dir / "production_metrics.csv",
         output_dir / "catalogue_tradeoff.csv",
         macro_path,

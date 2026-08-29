@@ -1,0 +1,31 @@
+{
+  "schema_version": "forge.common_ugi_method_blind_route_evidence_config.v1",
+  "status": "frozen_after_union_before_evidence_lookup",
+  "inputs": {
+    "union_result": {
+      "path": "results/phase1/forge_transformer_core_saturation_route_union_v1/result.json",
+      "sha256": "75d47dd9596e756f20c5268f2a122fe515e248e634c04f6272af654c321c1731"
+    },
+    "blind_worklist": {
+      "path": "results/phase1/forge_transformer_core_saturation_route_union_v1/blind_worklist.jsonl.gz",
+      "sha256": "c8681ca8a9e765f0d16bd5737871a64888aba1a13a9396e98879ba5306931e7a"
+    },
+    "source_result": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "source_component_ledger": {
+      "path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    }
+  },
+  "policy": {
+    "source_scope": "preexisting_exact_source_ugi_component_dossiers",
+    "unknown_disposition": "explicit_missing_knowledge_abstention",
+    "family_projection_can_close": false,
+    "proposal_only_route_can_close": false,
+    "method_identity_available_to_builder": false,
+    "complete_requires_verified_upstream_and_terminal_evidence": true
+  },
+  "candidate_selection": false
+}

@@ -8,6 +8,7 @@ from experiments._runtime.spec import ExperimentSpec
 from experiments.phase1.multireaction.mechanism_study import _deep_merge, _study_arms
 from experiments.phase1.multireaction.production_evaluation import (
     SynthesisProgramProductionEvaluationError,
+    _select_evaluation_snapshots,
     _validate_evaluation_budget,
 )
 from forge.core.io import read_json_object
@@ -145,3 +146,28 @@ def test_preflight_budget_is_explicitly_execution_only_without_weakening_product
         match="full evaluation budget differs from the frozen design",
     ):
         _validate_evaluation_budget(invalid_production, design, profile="full")
+
+
+def test_evaluation_selects_only_requested_authenticated_checkpoints() -> None:
+    snapshots = [
+        {"step": step, "filename": f"checkpoint_step_{step}.pt"}
+        for step in (100, 500, 1700, 4500, 9143)
+    ]
+
+    selected = _select_evaluation_snapshots(
+        snapshots,
+        [9143],
+        arm_id="shared_bias_program_role_source",
+    )
+
+    assert [snapshot["step"] for snapshot in selected] == [9143]
+
+
+def test_evaluation_rejects_a_checkpoint_absent_from_authenticated_training() -> None:
+    snapshots = [{"step": 100, "filename": "checkpoint_step_100.pt"}]
+
+    with pytest.raises(
+        SynthesisProgramProductionEvaluationError,
+        match="checkpoints absent",
+    ):
+        _select_evaluation_snapshots(snapshots, [9143], arm_id="arm")

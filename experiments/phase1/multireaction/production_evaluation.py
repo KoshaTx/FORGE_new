@@ -187,6 +187,41 @@ def _validate_archive_members(archive: tarfile.TarFile, training: Mapping[str, A
     return expected
 
 
+def _select_evaluation_snapshots(
+    snapshots: Sequence[Mapping[str, Any]],
+    requested_steps: Sequence[int],
+    *,
+    arm_id: str,
+) -> tuple[Mapping[str, Any], ...]:
+    """Select the authenticated checkpoints requested by the evaluation contract.
+
+    Training archives retain every prespecified checkpoint for provenance and restartability.  A
+    downstream evaluation may intentionally assess only a subset, most commonly the final frozen
+    checkpoint.  Selection is exact and fail closed: requested steps must be sorted, unique and
+    present once in the authenticated training result.
+    """
+
+    requested = tuple(int(value) for value in requested_steps)
+    if not requested or requested != tuple(sorted(set(requested))) or requested[0] < 1:
+        raise SynthesisProgramProductionEvaluationError(
+            "evaluation checkpoint steps must be positive, unique and sorted"
+        )
+    by_step: dict[int, Mapping[str, Any]] = {}
+    for snapshot in snapshots:
+        step = int(snapshot["step"])
+        if step in by_step:
+            raise SynthesisProgramProductionEvaluationError(
+                f"training result repeats checkpoint {step} for arm {arm_id}"
+            )
+        by_step[step] = snapshot
+    missing = [step for step in requested if step not in by_step]
+    if missing:
+        raise SynthesisProgramProductionEvaluationError(
+            f"evaluation requests checkpoints absent from arm {arm_id}: {missing}"
+        )
+    return tuple(by_step[step] for step in requested)
+
+
 def _metric_contract(
     evaluation: Mapping[str, Any],
     *,
@@ -631,7 +666,11 @@ def run_synthesis_program_production_evaluation(
                     )
                 checkpoint_metrics[arm_id] = {}
                 component_disjoint_metrics[arm_id] = {}
-                snapshots = training["arms"][arm_id]["checkpoints"]
+                snapshots = _select_evaluation_snapshots(
+                    training["arms"][arm_id]["checkpoints"],
+                    runtime["checkpoint_steps"],
+                    arm_id=arm_id,
+                )
                 for snapshot in snapshots:
                     step = int(snapshot["step"])
                     member_name = f"{arm_id}/{snapshot['filename']}"

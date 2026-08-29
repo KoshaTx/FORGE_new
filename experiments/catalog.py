@@ -208,6 +208,23 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/"
         "shared_bias_parallel_global_seed0_evaluation_h100_v2.json"
     ),
+    "phase1-shared-bias-parallel-program-role-seed1-core-saturation-h100-v2": (
+        "experiments/phase1/multireaction/"
+        "shared_bias_parallel_program_role_seed1_core_saturation_h100_v2.json"
+    ),
+    "phase1-shared-bias-parallel-program-role-seed2-core-saturation-h100-v2": (
+        "experiments/phase1/multireaction/"
+        "shared_bias_parallel_program_role_seed2_core_saturation_h100_v2.json"
+    ),
+    "phase1-shared-bias-cyclic-core-saturation-h100": (
+        "experiments/phase1/multireaction/shared_bias_cyclic_core_saturation_h100.json"
+    ),
+    "phase1-shared-bias-shared-null-core-saturation-h100": (
+        "experiments/phase1/multireaction/shared_bias_shared_null_core_saturation_h100.json"
+    ),
+    "phase1-shared-bias-ugi-only-core-saturation-h100": (
+        "experiments/phase1/multireaction/shared_bias_ugi_only_core_saturation_h100.json"
+    ),
     "phase1-shared-bias-program-role-core-saturation-seed1-h100": (
         "experiments/phase1/multireaction/"
         "shared_bias_program_role_core_saturation_seed1_h100.json"

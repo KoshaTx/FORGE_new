@@ -1011,7 +1011,7 @@ def _render_semantic_cells(
     return rows
 
 
-def _save_cell(canvas: "Image.Image", path: Path) -> None:
+def _save_cell(canvas: Image.Image, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     canvas.convert("RGB").save(path, format="PNG", dpi=(300, 300), optimize=True)
 
@@ -1480,7 +1480,11 @@ def render_forge_generated_sample_atlas(
             "constitutional_graph_2d_with_canonical_smiles",
             "decorated_3d_view",
         ]
-        or layout.get("latex_asset_prefix") != "figures/forge_generated_sample_atlas_v1"
+        or not isinstance(layout.get("latex_asset_prefix"), str)
+        or not str(layout["latex_asset_prefix"]).startswith(
+            "figures/forge_generated_sample_atlas_"
+        )
+        or ".." in str(layout["latex_asset_prefix"])
     ):
         raise ForgeSampleFigureError("FORGE sample-atlas layout changed")
 

@@ -284,6 +284,22 @@ def _shared_bias_retraining_arms(
         "evaluation_programs": list(program_mass),
         "candidate_source": False,
     }
+    role_source = {
+        "source_marginal_mode": "program_role_full_support",
+        "model_overrides": {
+            **shared_model,
+            "source_marginal_mode": "program_role_full_support",
+        },
+    }
+    programs = list(program_mass)
+    if "ugi_3cr_agile" not in programs:
+        raise TransformerMechanismStudyError(
+            "shared-bias retraining expects the Ugi program in the shared mixture"
+        )
+    ugi_only_mass = {program: 1.0 if program == "ugi_3cr_agile" else 0.0 for program in programs}
+    cyclic_mapping = {
+        program: programs[(index + 1) % len(programs)] for index, program in enumerate(programs)
+    }
     return {
         "shared_bias_global_source_control": {
             **common,
@@ -293,12 +309,29 @@ def _shared_bias_retraining_arms(
         },
         "shared_bias_program_role_source": {
             **common,
+            **role_source,
             "role": "end_to_end_intervention",
-            "source_marginal_mode": "program_role_full_support",
-            "model_overrides": {
-                **shared_model,
-                "source_marginal_mode": "program_role_full_support",
-            },
+        },
+        # The three production-comparison controls, retrained on the role-source
+        # architecture so the conditioning claim is read off one decoder.
+        "ugi_only_conditioned": {
+            **common,
+            **role_source,
+            "role": "primary_baseline",
+            "program_mass": ugi_only_mass,
+        },
+        "shared_three_program_null": {
+            **common,
+            **role_source,
+            "role": "nonselecting_control",
+            "conditioning": "null_all_program_coordinates",
+        },
+        "shared_three_program_program_id_cyclic": {
+            **common,
+            **role_source,
+            "role": "nonselecting_control",
+            "conditioning": "cyclic_program_id_only_roles_core_and_depth_retained",
+            "program_id_mapping": cyclic_mapping,
         },
     }
 
@@ -365,7 +398,15 @@ def _study_arms(config: dict[str, Any], programs: tuple[str, ...]) -> dict[str, 
         arms = _shared_bias_retraining_arms(mass, weight)
         selected_arm_id = config.get("selected_arm_id")
         if selected_arm_id is None:
-            return arms
+            # The study's declared pair. The production-comparison controls are
+            # additional arms and must be selected by name.
+            return {
+                arm_id: arms[arm_id]
+                for arm_id in (
+                    "shared_bias_global_source_control",
+                    "shared_bias_program_role_source",
+                )
+            }
         if not isinstance(selected_arm_id, str) or selected_arm_id not in arms:
             raise TransformerMechanismStudyError(
                 f"unsupported shared-bias arm selection: {selected_arm_id!r}"
@@ -727,6 +768,26 @@ def run_transformer_mechanism_study(
                 "Strict decoding abstains without repair or retry when exact support is infeasible.",
             ]
         )
+    # Evaluation may intentionally select a strict subset of authenticated training checkpoints.
+    # Catch missing or non-final schedules before a single optimizer step while allowing the common
+    # production case that evaluates only the final frozen checkpoint.
+    if not repair_calibration:
+        training_steps = sorted(
+            int(value) for value in config[profile]["training"]["checkpoint_steps"]
+        )
+        evaluation_steps = sorted(
+            int(value) for value in config[profile]["evaluation"]["checkpoint_steps"]
+        )
+        if (
+            not evaluation_steps
+            or not set(evaluation_steps).issubset(training_steps)
+            or evaluation_steps[-1] != training_steps[-1]
+        ):
+            raise TransformerMechanismStudyError(
+                "evaluation checkpoint steps must be a nonempty subset of training checkpoints "
+                "and end at the final training checkpoint; "
+                f"training={training_steps} evaluation={evaluation_steps}"
+            )
     output_dir.mkdir(parents=True, exist_ok=True)
     design_path = output_dir / "study_design.json"
     write_json(design_path, study_design)

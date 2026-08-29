@@ -42,13 +42,15 @@ def test_completed_evidence_renderer_uses_only_pinned_nonselecting_results(tmp_p
     assert "\\TABLEPENDING" not in route_rows
     assert "FORGE Transformer" in route_rows
     assert "DeFoG + AiZynthFinder" not in route_rows
+    assert "generated atoms and bonds" not in route_rows
+    assert "reaction $\\times$ building block" not in route_rows
     assert "route" not in (generated / "common_ugi_completed_rows.tex").read_text().lower()
     assert "ForgeRouteCompleteProducts" in (generated / "completed_evidence_macros.tex").read_text()
     macros = (generated / "completed_evidence_macros.tex").read_text()
     assert "ForgeUgiRetentionRangeLowPP" in macros
     assert "ForgeNullUgiSeedDifferencesPP" in macros
-    assert "ForgeSemanticNullCoordinatesRangeLowPP" in macros
-    assert "ForgeSemanticNullCoordinatesSeedDifferencesPP" in macros
+    assert "ForgeSemanticNullCoordinatesRangeLowPP" not in macros
+    assert "ForgeSemanticNullCoordinatesSeedDifferencesPP" not in macros
     production_transposed = (generated / "production_comparison_transposed_rows.tex").read_text()
     assert "Exact-L1/attempt" in production_transposed
     assert "\\cellcolor{forgerow}" in production_transposed

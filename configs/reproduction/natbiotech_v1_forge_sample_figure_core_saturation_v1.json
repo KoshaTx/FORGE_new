@@ -1,0 +1,59 @@
+{
+  "schema_version": "forge.paper.forge_generated_sample_figure_config.v2",
+  "status": "frozen_display_only",
+  "inputs": {
+    "common_assessment_result": {
+      "path": "results/phase1/forge_transformer_core_saturation_common_assessment_seed0_v2/result.json",
+      "sha256": "9a382239ee17b37697c14d17dc423f84117217319166289fa8e140a113a8ec41"
+    },
+    "common_assessed_attempts": {
+      "path": "results/phase1/forge_transformer_core_saturation_common_assessment_seed0_v2/assessed_attempts.jsonl.gz",
+      "sha256": "41d3ae8a2fd6cf219d4cb78c9010635349d7ce435183ea770c71b9d842b81967"
+    },
+    "realism_assessment_result": {
+      "path": "results/phase1/forge_transformer_core_saturation_lipid_realism_seed0_v1/result.json",
+      "sha256": "6f89814192bbe36a139f7e05d5a0b2b6504e77fbc03799eb3d741476a88f26ad"
+    },
+    "realism_assessed_attempts": {
+      "path": "results/phase1/forge_transformer_core_saturation_lipid_realism_seed0_v1/assessed_attempts.jsonl.gz",
+      "sha256": "4fda46b3ee1fa7ae00390b460d5f63f3b32c6945584326b695cee45afcffb12d"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "selection": {
+    "method_id": "forge_transformer",
+    "seed": 20260825,
+    "program_id": "ugi_3cr_agile",
+    "display_count": 3,
+    "required_exact_l1_trace_count": 1,
+    "require_method_visible_open_ended": true,
+    "require_descriptor_manifold_member": true,
+    "require_declared_support": true,
+    "deduplicate_by": "canonical_constitution",
+    "rank_by": "sha256_seeded_ecfp4_maxmin",
+    "fingerprint_radius": 2,
+    "fingerprint_bits": 2048,
+    "expected_eligible_unique": 93,
+    "expected_selected_attempt_indices": [2713, 1763, 1403]
+  },
+  "semantic_map": {
+    "reaction_id": "ugi_3cr_agile",
+    "max_forward_outcomes_per_product": 128,
+    "origin_palette": {
+      "amine_head": "#8A5AC2",
+      "oxoester_aldehyde_body_tail": "#168C8C",
+      "isocyanide_tail": "#E39532",
+      "assembly_introduced": "#596579"
+    },
+    "highlight_reaction_core": true
+  },
+  "display_only": true,
+  "candidate_selection": false
+}
