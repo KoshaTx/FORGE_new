@@ -19,13 +19,21 @@
         "sha256": "f3a9583ff81dbdd63063379a5ad04e05020f2f9532d19292a841be14ec1de582"
       },
       "inputs": {
-        "production_design": {
-          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
-          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+        "multireaction_atlas": {
+          "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+          "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+          "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
         },
         "production_cache": {
           "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
           "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+        },
+        "production_design": {
+          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
         },
         "program_config": {
           "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
@@ -42,14 +50,6 @@
         "ugi_assignments": {
           "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
           "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
-        },
-        "multireaction_atlas": {
-          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
-          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
-        },
-        "multireaction_splits": {
-          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
-          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
         },
         "training_result": {
           "path": "results/phase1/transformer_production_ablation_seed0_v1/training_result.json",
@@ -87,13 +87,21 @@
         "sha256": "f3a9583ff81dbdd63063379a5ad04e05020f2f9532d19292a841be14ec1de582"
       },
       "inputs": {
-        "production_design": {
-          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
-          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
+        "multireaction_atlas": {
+          "path": "results/phase1/multireaction_program_corpus_v1/reaction_program_atlas.csv.gz",
+          "sha256": "421facddd3b4893be9f358be59f40da25b54d4de7ed8b43844a5d9efebfb28e1"
+        },
+        "multireaction_splits": {
+          "path": "results/phase1/multireaction_program_corpus_v1/component_disjoint_splits.csv.gz",
+          "sha256": "31e1157895c67644073e45d064563daa2cdeecdadba8c7fc21a42facd4214923"
         },
         "production_cache": {
           "path": "results/phase1/shared_synthesis_program_production_cache_v1/cache.npz",
           "sha256": "db1e71b836b42d817cb658c469973db1722af2f1388292c79201c861ad33db41"
+        },
+        "production_design": {
+          "path": "configs/multireaction/shared_production_comparison_transformer_v1.json",
+          "sha256": "c54d03038a2370dc41b0deebe1438eccbc5e90dbce5b1d9ec308e2f2d7c2ff4a"
         },
         "program_config": {
           "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
@@ -110,14 +118,6 @@
         "ugi_assignments": {
           "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
           "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
-        },
-        "multireaction_atlas": {
-          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
-          "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
-        },
-        "multireaction_splits": {
-          "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
-          "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
         },
         "training_result": {
           "path": "results/phase1/transformer_production_ablation_seed0_v1/training_result.json",
