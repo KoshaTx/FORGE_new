@@ -16,16 +16,21 @@ Taken from <https://www.gembio.ai/> on 26 August 2026.
 | Up to 5 pages, excluding references and appendix | **Not yet compliant:** body ends on page 8; a separate prose/model condensation pass is required |
 | NeurIPS 2026 main-conference template, GEM style file substituted | `\usepackage{GEM_workshop_2026}` |
 | Anonymous, one round of double-blind review | Style file's default branch; `\iclrfinalcopy` is not called |
-| Maximum 50 MB | 1.5 MB |
+| Maximum 50 MB | 1.7 MB |
 | Deadline 30 August 2026, 11:59 PM AoE, via OpenReview | Not submitted by this repository |
 
 `GEM_workshop_2026.sty` is the workshop's file, downloaded unmodified from the link on the call for
-papers. Note that its running head reads "Under review at the GEM workshop, ICLR 2026": the workshop
-appears to have carried the string over from the previous edition. It is left as shipped rather than
-corrected, because every submission built from their file will carry the same head.
+papers. Its SHA-256 is
+`7409882ae8d1e9651039222a3328298ca65d168d89565cf5c0580403d766ad19`. Note that its running head
+reads "Under review at the GEM workshop, ICLR 2026": the workshop appears to have carried the string
+over from the previous edition. It is left as shipped rather than corrected, because every
+submission built from their file will carry the same head.
 
 `NEURIPS_2026_reference_template.tex` is the unmodified NeurIPS 2026 skeleton, kept only so the
-substitution the call for papers asks for can be checked against the original.
+substitution the call for papers asks for can be checked against the original. Its SHA-256 is
+`cf4cee7991665306d1daaa3985be4feec7f8889d6d072ffa12f99a8e1537d797`. The active manuscript retains
+the shell's encoding, font-encoding, `nicefrac`, `microtype`, hyperlink, URL, table and color
+packages, and replaces only `\usepackage{neurips_2026}` with `\usepackage{GEM_workshop_2026}`.
 
 ## Where the numbers come from
 

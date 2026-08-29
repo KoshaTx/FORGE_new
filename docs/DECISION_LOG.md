@@ -10243,3 +10243,43 @@ preserved unchanged.
 - **Decision:** Table 10 is complete and contains no TBD cells. Treat exact forward replay as L1,
   retain zero downstream counts and abstentions as first-class results, and do not interpret the
   sparse admitted-evidence closure rate as a learned synthesis-success estimate.
+
+## 2026-08-29 - Generate every quantitative GEM prose claim from pinned evidence
+
+- Audited the main text and extended-results prose against the final generated Tables 1--13 and
+  replaced handwritten quantitative claims with generated LaTeX macros. This corrected stale
+  common-Ugi prose values: FORGE produced $963.9\pm21.4$ verified exact-L1 products and
+  $862.6\pm19.2$ distinct exact-L1 products per 1,000 attempts; the common assessment recovered 13
+  exact-L1 products containing a designated held component in 9,216 attempts, or $1.4\pm1.7$ per
+  1,000 attempts across three independently trained seeds.
+- The new renderer pins the final common-Ugi assessment, structural-realism diagnostic,
+  architecture ablation, finite-catalogue comparison, route assessment, novelty audit and guidance
+  diagnostic. It validates their source hashes and emits one manuscript macro artifact, preventing
+  tables and narrative claims from drifting independently.
+- The attributable result is
+  `results/phase1/gem_prose_results_core_saturation_v1/result.json` (SHA-256
+  `3017469291413a0548f3f7c658ae486f9fdf55e16538ff4509b9c8c795fd4810`). The frozen renderer config
+  and generated macro file have SHA-256
+  `4e5c6cfe2fadfa2dbc929a7a95f55afde52d4ef7d79d17af626be5e7057536e5` and
+  `57aa5e7f39536d067fb8c76c607db48950b2ca53baea6d2dc20c38e635b26429`, respectively, and are
+  regenerated with `forge paper render-gem-prose-results`.
+- **Decision:** Quantitative GEM prose must use the generated `ForgeProse*` macros. Do not manually
+  transcribe result numbers from tables, older checkpoints or superseded assessments.
+
+## 2026-08-29 - Verify the official NeurIPS 2026 and GEM submission templates
+
+- Downloaded the NeurIPS 2026 main-conference formatting archive linked by the GEM call for papers
+  and the workshop style linked from Google Drive. The repository's
+  `NEURIPS_2026_reference_template.tex` and `GEM_workshop_2026.sty` match the official files
+  byte-for-byte, with SHA-256
+  `cf4cee7991665306d1daaa3985be4feec7f8889d6d072ffa12f99a8e1537d797` and
+  `7409882ae8d1e9651039222a3328298ca65d168d89565cf5c0580403d766ad19`, respectively.
+- Aligned the active preamble with the main-conference shell by retaining its UTF-8 input encoding,
+  T1 font encoding, `nicefrac` and `microtype` packages while replacing only
+  `\usepackage{neurips_2026}` with `\usepackage{GEM_workshop_2026}`. The rebuilt anonymous PDF is
+  letter-sized, 40 pages and 1.7 MB, uses embedded Type 1 fonts and contains no overfull boxes or
+  undefined references.
+- **Decision:** Preserve the workshop style exactly as distributed, including its inherited ICLR
+  2026 running-head string. The format and 50 MB gates pass, but the short-paper body still reaches
+  page 8 and therefore remains above GEM's five-page body limit; template compliance does not resolve
+  the separate condensation requirement.

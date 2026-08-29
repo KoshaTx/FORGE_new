@@ -10,6 +10,7 @@ from forge_paper.experiment_matrix import (
     ExperimentMatrixError,
     diagnose_experiment_matrix,
 )
+from forge_paper.gem_prose_results import GemProseResultsError, render_gem_prose_results
 from forge_paper.gem_table1 import GemTable1Error, render_gem_table1_final_evidence
 from forge_paper.gem_table2 import GemTable2Error, render_gem_table2_forge_row
 from forge_paper.gem_table3 import GemTable3Error, render_gem_table3_route_assessment
@@ -51,6 +52,7 @@ __all__ = [
     "GemTable8Error",
     "GemTable9Error",
     "GemTables12And13Error",
+    "GemProseResultsError",
     "diagnose_experiment_matrix",
     "diagnose_paper",
     "render_v1_results",
@@ -68,5 +70,6 @@ __all__ = [
     "render_gem_table8_architecture_ablations",
     "render_gem_table9_catalogue_comparison",
     "render_gem_tables12_and_13",
+    "render_gem_prose_results",
     "verify_paper",
 ]

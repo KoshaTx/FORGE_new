@@ -356,6 +356,17 @@ def _command_paper_render_gem_tables12_13(args: argparse.Namespace) -> int:
     return 0
 
 
+def _command_paper_render_gem_prose_results(args: argparse.Namespace) -> int:
+    from forge_paper import render_gem_prose_results
+
+    repo = _repo()
+    config = Path(args.config) if Path(args.config).is_absolute() else repo / args.config
+    macros = Path(args.macros) if Path(args.macros).is_absolute() else repo / args.macros
+    result = Path(args.result) if Path(args.result).is_absolute() else repo / args.result
+    _print(render_gem_prose_results(config, repo, macros, result_path=result))
+    return 0
+
+
 def _command_paper_render_forge_samples(args: argparse.Namespace) -> int:
     from forge_paper import render_forge_generated_sample_figure
 
@@ -1391,6 +1402,22 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render_gem_tables12_13.set_defaults(function=_command_paper_render_gem_tables12_13)
 
+    render_gem_prose_results = paper_commands.add_parser(
+        "render-gem-prose-results",
+        help="render every computed number cited in GEM result prose",
+    )
+    render_gem_prose_results.add_argument(
+        "--config",
+        default="configs/reproduction/gem_prose_results_core_saturation_v1.json",
+    )
+    render_gem_prose_results.add_argument(
+        "--macros", default="paper/v1/generated/gem_prose_results_macros.tex"
+    )
+    render_gem_prose_results.add_argument(
+        "--result", default="results/phase1/gem_prose_results_core_saturation_v1/result.json"
+    )
+    render_gem_prose_results.set_defaults(function=_command_paper_render_gem_prose_results)
+
     render_samples = paper_commands.add_parser(
         "render-forge-samples",
         help="render the deterministic display-only FORGE generated-lipid figure",
@@ -1593,11 +1620,11 @@ def build_parser() -> argparse.ArgumentParser:
     adjudicate_tree_calibration.add_argument("runs", nargs=5)
     adjudicate_tree_calibration.add_argument(
         "--config",
-        default=("configs/model/" "phase1_ugi_tree_transformer_calibration_adjudication_v1.json"),
+        default=("configs/model/phase1_ugi_tree_transformer_calibration_adjudication_v1.json"),
     )
     adjudicate_tree_calibration.add_argument(
         "--output",
-        default=("results/phase1/" "ugi_tree_transformer_calibration_adjudication_v1/result.json"),
+        default=("results/phase1/ugi_tree_transformer_calibration_adjudication_v1/result.json"),
     )
     adjudicate_tree_calibration.set_defaults(
         function=_command_experiment_adjudicate_tree_transformer_calibration
@@ -1610,11 +1637,11 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_tree_production.add_argument("runs", nargs=3)
     aggregate_tree_production.add_argument(
         "--config",
-        default=("configs/model/" "phase1_ugi_tree_relational_production_aggregate_v1.json"),
+        default=("configs/model/phase1_ugi_tree_relational_production_aggregate_v1.json"),
     )
     aggregate_tree_production.add_argument(
         "--output",
-        default=("results/phase1/" "ugi_tree_relational_production_aggregate_v1/result.json"),
+        default=("results/phase1/ugi_tree_relational_production_aggregate_v1/result.json"),
     )
     aggregate_tree_production.set_defaults(
         function=_command_experiment_aggregate_tree_transformer_production
@@ -1626,11 +1653,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     diagnose_tree_production.add_argument(
         "--config",
-        default=("configs/model/" "phase1_ugi_tree_relational_failure_attribution_v1.json"),
+        default=("configs/model/phase1_ugi_tree_relational_failure_attribution_v1.json"),
     )
     diagnose_tree_production.add_argument(
         "--output-dir",
-        default=("results/phase1/" "ugi_tree_relational_failure_attribution_v1"),
+        default=("results/phase1/ugi_tree_relational_failure_attribution_v1"),
     )
     diagnose_tree_production.set_defaults(
         function=_command_experiment_diagnose_tree_transformer_production
@@ -1642,11 +1669,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     qualify_tree_interventions.add_argument(
         "--config",
-        default=("configs/model/" "phase1_ugi_tree_relational_intervention_readiness_v1.json"),
+        default=("configs/model/phase1_ugi_tree_relational_intervention_readiness_v1.json"),
     )
     qualify_tree_interventions.add_argument(
         "--output-dir",
-        default=("results/phase1/" "ugi_tree_relational_intervention_readiness_v1"),
+        default=("results/phase1/ugi_tree_relational_intervention_readiness_v1"),
     )
     qualify_tree_interventions.set_defaults(
         function=_command_experiment_qualify_tree_transformer_interventions
@@ -1658,11 +1685,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     constrained_tree_resampling.add_argument(
         "--config",
-        default=("configs/model/" "phase1_ugi_tree_relational_constrained_resampling_v2.json"),
+        default=("configs/model/phase1_ugi_tree_relational_constrained_resampling_v2.json"),
     )
     constrained_tree_resampling.add_argument(
         "--output-dir",
-        default=("results/phase1/" "ugi_tree_relational_edge_constrained_resampling_smoke_v3"),
+        default=("results/phase1/ugi_tree_relational_edge_constrained_resampling_smoke_v3"),
     )
     constrained_tree_resampling.add_argument(
         "--profile", choices=("smoke", "full"), default="smoke"
