@@ -790,7 +790,12 @@ def run_synthesis_program_production_evaluation(
     expected_steps = [int(value) for value in runtime["checkpoint_steps"]]
     common_attempt_artifacts = {}
     common_attempt_dir = output_dir / "common_ugi_attempts"
+    # Which training arm the manuscript reports as FORGE. The 9,143-step shared-bias arm supersedes
+    # the earlier 1,700-step arms: it carries the same three programs at matched exposure and is the
+    # model the reported numbers now come from. The earlier aliases stay so the frozen comparison
+    # runs that produced them still resolve.
     method_aliases = {
+        "shared_bias_program_role_source": "forge_transformer",
         "shared_three_program_conditioned": "forge_transformer",
         "shared_null_posthoc": "shared_null_posthoc",
         "full_transformer": "forge_transformer",
