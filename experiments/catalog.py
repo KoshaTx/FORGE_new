@@ -208,6 +208,14 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/"
         "shared_bias_parallel_global_seed0_evaluation_h100_v2.json"
     ),
+    "phase1-shared-bias-program-role-core-saturation-seed1-h100": (
+        "experiments/phase1/multireaction/"
+        "shared_bias_program_role_core_saturation_seed1_h100.json"
+    ),
+    "phase1-shared-bias-program-role-core-saturation-seed2-h100": (
+        "experiments/phase1/multireaction/"
+        "shared_bias_program_role_core_saturation_seed2_h100.json"
+    ),
     "phase1-transformer-mechanism-ablation-core-saturation-seed0-h100": (
         "experiments/phase1/multireaction/"
         "transformer_mechanism_ablation_core_saturation_seed0_h100.json"
