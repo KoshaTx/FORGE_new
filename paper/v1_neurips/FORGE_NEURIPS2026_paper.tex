@@ -136,10 +136,10 @@
 \begin{abstract}
 Ionizable lipids are essential for RNA delivery, but their discovery largely depends on synthesizing
 and screening libraries assembled from predefined reactants. This strategy preserves a clear
-synthesis route while limiting the chemical space that can be explored. De novo generation could
+synthesis route while limiting the chemical space that can be explored. \emph{De novo} generation could
 expand this space, yet whole-molecule models do not retain the reaction information needed to
-assemble their designs. We introduce FORGE (Flow-matched, Open-ended, Route-resolved Generation and
-Exploration), which uses known reaction chemistry to design ionizable lipids without restricting
+assemble their designs. We introduce FORGE (\textbf{F}low-matched, \textbf{O}pen-ended,
+\textbf{R}oute-resolved \textbf{G}eneration and \textbf{E}xploration), which uses known reaction chemistry to design ionizable lipids without restricting
 generation to a fixed reactant catalogue. Each reaction program specifies precursor roles,
 reaction-core positions, transformation order and coarse molecular architecture, while FORGE
 generates the complete molecule at atom-and-bond resolution without component identifiers, stored
@@ -149,17 +149,16 @@ Across three independent seeds, verified exact level-one (exact-L1) yields were
 \ForgeTableOneConditionedUgiYield\%, \ForgeTableOneConditionedBLYield\% and
 \ForgeTableOneConditionedLXYield\%, versus \ForgeTableOneNullUgiYield\%,
 \ForgeTableOneNullBLYield\% and \ForgeTableOneNullLXYield\% for matched whole-molecule generation
-followed by post-hoc verification. FORGE also generated verified decompositions containing precursor
-constitutions absent from the corresponding training catalogues in all three reactions. This is
-component-level novelty, not proof of strong product-level catalogue escape. These results show that
-known reaction chemistry can guide de novo molecular generation while preserving the information
-needed to verify assembly.
+followed by post-hoc verification. FORGE also generated exact-L1 products with precursor identities absent from the
+corresponding training component catalogues across all three reactions, a capability unavailable to
+finite-catalogue assemblers. These results establish that known reaction chemistry can guide
+\emph{de novo} molecular generation while preserving the information needed to verify assembly.
 \end{abstract}
 
 \section{Introduction}
 
 Lipid nanoparticles (LNPs) deliver nucleic-acid therapeutics including small interfering RNA, mRNA
-vaccines, and in vivo genome-editing reagents
+vaccines, and \emph{in vivo} genome-editing reagents
 \citep{adams2018patisiran,polack2020safety,baden2021efficacy,gillmore2021crispr}. Within each LNP,
 the ionizable lipid supports nucleic-acid complexation, particle assembly, and endosomal escape,
 making its chemical structure a major determinant of delivery
@@ -172,7 +171,7 @@ synthesizing combinations, and screening the resulting LNPs experimentally
 preserves synthetic tractability and supports systematic testing within defined chemical families,
 while limiting the search to components selected before design begins.
 
-De novo molecular generation has the potential to extend ionizable-lipid discovery beyond fixed
+\emph{De novo} molecular generation has the potential to extend ionizable-lipid discovery beyond fixed
 precursor libraries. Current synthesis-aware generators construct molecules by selecting reactants
 and applying predefined transformations
 \citep{gao2022amortized,koziarski2024rgfn,cretu2025synflownet,rekesh2025syncogen}. This construction
@@ -181,13 +180,13 @@ While whole-molecule generators can propose structures beyond a fixed inventory,
 not retain the precursor roles and transformations needed to assemble each design
 \citep{qin2025defog,lee2025genmol}. Other approaches estimate synthesizability after generation
 without incorporating the intended assembly chemistry into the generative process
-\citep{gao2020synthesizability}. Recent studies have also applied de novo generative models to
+\citep{gao2020synthesizability}. Recent studies have also applied \emph{de novo} generative models to
 ionizable lipids \citep{ou2024deep,zhao2024generative}. The missing capability, however, is generation
 of complete molecular structures under known reaction chemistry while leaving precursor identities
 open.
 
-To mitigate this, we introduce FORGE (Flow-matched, Open-ended, Route-resolved Generation and
-Exploration), a generative model that uses known reaction chemistry to design ionizable lipids beyond
+To mitigate this, we introduce FORGE (\textbf{F}low-matched, \textbf{O}pen-ended,
+\textbf{R}oute-resolved \textbf{G}eneration and \textbf{E}xploration), a generative model that uses known reaction chemistry to design ionizable lipids beyond
 a fixed reactant catalogue. Each reaction program contains the assembly chemistry, precursor roles,
 reaction-core positions, transformation order, and coarse molecular architecture while leaving
 precursor identities unspecified. FORGE generates complete molecular graphs at atom-and-bond
