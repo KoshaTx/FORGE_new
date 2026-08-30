@@ -181,6 +181,23 @@ def morphology_residuals(
     return test_y - test_design @ coefficients
 
 
+def _cluster_bootstrap_members(groups: np.ndarray) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+    """Index each cluster once instead of rescanning every row in every bootstrap replicate."""
+
+    unique = np.asarray(sorted(set(str(value) for value in groups)), dtype=object)
+    members = {str(cluster): np.flatnonzero(groups == cluster) for cluster in unique}
+    return unique, members
+
+
+def _resampled_cluster_indices(
+    rng: np.random.Generator,
+    unique: np.ndarray,
+    members: Mapping[str, np.ndarray],
+) -> np.ndarray:
+    chosen = rng.choice(unique, size=len(unique), replace=True)
+    return np.concatenate([members[str(cluster)] for cluster in chosen])
+
+
 def clustered_bootstrap_interval(
     values: Sequence[float],
     clusters: Sequence[str],
@@ -196,15 +213,14 @@ def clustered_bootstrap_interval(
     groups = np.asarray(clusters, dtype=object)
     if scores.ndim != 1 or groups.shape != scores.shape or replicates < 100:
         raise PotencyAdapterGuidanceError("clustered bootstrap contract is invalid")
-    unique = np.asarray(sorted(set(str(value) for value in groups)), dtype=object)
+    unique, members = _cluster_bootstrap_members(groups)
     if len(unique) < 2:
         raise PotencyAdapterGuidanceError("clustered bootstrap needs at least two clusters")
     truth = None if labels is None else np.asarray(labels)
     rng = np.random.default_rng(seed)
     sampled: list[float] = []
     for _ in range(replicates):
-        chosen = rng.choice(unique, size=len(unique), replace=True)
-        indices = np.concatenate([np.flatnonzero(groups == cluster) for cluster in chosen])
+        indices = _resampled_cluster_indices(rng, unique, members)
         try:
             value = (
                 roc_auc(truth[indices], scores[indices])
@@ -248,12 +264,11 @@ def clustered_auroc_difference_interval(
     groups = np.asarray(clusters, dtype=object)
     if not (truth.shape == real.shape == shuffled.shape == groups.shape) or replicates < 100:
         raise PotencyAdapterGuidanceError("paired AUROC bootstrap inputs are malformed")
-    unique = np.asarray(sorted(set(str(value) for value in groups)), dtype=object)
+    unique, members = _cluster_bootstrap_members(groups)
     rng = np.random.default_rng(seed)
     differences: list[float] = []
     for _ in range(replicates):
-        chosen = rng.choice(unique, size=len(unique), replace=True)
-        indices = np.concatenate([np.flatnonzero(groups == cluster) for cluster in chosen])
+        indices = _resampled_cluster_indices(rng, unique, members)
         try:
             differences.append(
                 roc_auc(truth[indices], real[indices]) - roc_auc(truth[indices], shuffled[indices])
@@ -299,6 +314,105 @@ def per_record_masked_nll(predictions: Mapping[str, Any], clean: Mapping[str, An
         losses += (point * mask).sum(dim=1) / counts.clamp(min=1)
         present += active.to(losses.dtype)
     return losses / present.clamp(min=1)
+
+
+def ordinal_nll_matrix(predictions: Sequence[Mapping[str, Any]], clean: Mapping[str, Any]) -> Any:
+    """Stack per-record reconstruction NLL under ordered percentile requests."""
+
+    if torch is None or len(predictions) < 2:
+        raise PotencyAdapterGuidanceError("ordinal NLL requires at least two predictions")
+    values = [per_record_masked_nll(prediction, clean) for prediction in predictions]
+    if len({tuple(value.shape) for value in values}) != 1:
+        raise PotencyAdapterGuidanceError("ordinal prediction batches changed shape")
+    return torch.stack(values, dim=1)
+
+
+def ordinal_contrastive_loss(
+    nll: Any,
+    target_quantiles: Any,
+    *,
+    anchors: Sequence[float],
+    margin: float,
+) -> tuple[Any, Any]:
+    """Prefer requests closer to the observed percentile over counterfactual requests."""
+
+    if torch is None:
+        raise PotencyAdapterGuidanceError("ordinal contrast requires torch")
+    anchor_values = torch.as_tensor(anchors, dtype=nll.dtype, device=nll.device)
+    targets = torch.as_tensor(target_quantiles, dtype=nll.dtype, device=nll.device)
+    if (
+        nll.ndim != 2
+        or targets.ndim != 1
+        or nll.shape[0] != targets.shape[0]
+        or nll.shape[1] != len(anchor_values)
+        or len(anchor_values) < 2
+        or not bool(torch.isfinite(nll).all())
+        or not bool(torch.isfinite(targets).all())
+        or not bool(torch.all(anchor_values[1:] > anchor_values[:-1]))
+        or margin <= 0.0
+    ):
+        raise PotencyAdapterGuidanceError("ordinal contrast inputs are malformed")
+    distances = torch.abs(targets[:, None] - anchor_values[None, :])
+    nearest = torch.argmin(distances, dim=1)
+    primary = nll.gather(1, nearest[:, None]).mean()
+    comparisons: list[Any] = []
+    for closer in range(len(anchor_values)):
+        for farther in range(len(anchor_values)):
+            ordered = distances[:, closer] + 1e-6 < distances[:, farther]
+            if bool(ordered.any()):
+                comparisons.append(
+                    functional.relu(float(margin) + nll[ordered, closer] - nll[ordered, farther])
+                )
+    if not comparisons:
+        raise PotencyAdapterGuidanceError("ordinal targets induce no ordered anchor pairs")
+    contrast = torch.cat(comparisons).mean()
+    return primary, contrast
+
+
+def ordinal_direction_score(nll: Any) -> Any:
+    """Positive means the molecule is reconstructed better under the highest request."""
+
+    if torch is None or nll.ndim != 2 or nll.shape[1] < 2:
+        raise PotencyAdapterGuidanceError("ordinal direction requires an N-by-K NLL matrix")
+    return nll[:, 0] - nll[:, -1]
+
+
+def ordinal_monotonicity_rows(
+    nll: Sequence[Sequence[float]],
+    target_quantiles: Sequence[float],
+    *,
+    anchors: Sequence[float],
+) -> dict[str, np.ndarray]:
+    """Return direct per-record anchor-choice and strict outer-quartile monotonicity checks."""
+
+    values = np.asarray(nll, dtype=np.float64)
+    targets = np.asarray(target_quantiles, dtype=np.float64)
+    anchor_values = np.asarray(anchors, dtype=np.float64)
+    if (
+        values.ndim != 2
+        or targets.ndim != 1
+        or values.shape[0] != len(targets)
+        or values.shape[1] != len(anchor_values)
+        or len(anchor_values) != 3
+        or not np.isfinite(values).all()
+        or not np.isfinite(targets).all()
+        or not np.all(anchor_values[1:] > anchor_values[:-1])
+    ):
+        raise PotencyAdapterGuidanceError("ordinal monotonicity inputs are malformed")
+    nearest = np.argmin(np.abs(targets[:, None] - anchor_values[None, :]), axis=1)
+    anchor_correct = np.argmin(values, axis=1) == nearest
+    low = targets <= 0.25
+    high = targets >= 0.75
+    outer = low | high
+    monotonic = np.zeros(len(targets), dtype=bool)
+    monotonic[low] = (values[low, 0] < values[low, 1]) & (values[low, 1] < values[low, 2])
+    monotonic[high] = (values[high, 2] < values[high, 1]) & (values[high, 1] < values[high, 0])
+    return {
+        "anchor_correct": anchor_correct,
+        "outer_quartile": outer,
+        "outer_monotonic": monotonic,
+        "direction_score": values[:, 0] - values[:, -1],
+    }
 
 
 def masked_retention_kl(
@@ -360,6 +474,72 @@ def signal_gate(
     return {**checks, "passes": all(checks.values())}
 
 
+def clustered_mean_difference_interval(
+    real_values: Sequence[float],
+    shuffled_values: Sequence[float],
+    clusters: Sequence[str],
+    *,
+    replicates: int,
+    seed: int,
+) -> dict[str, float | int]:
+    """Pair two per-record metrics while resampling complete component clusters."""
+
+    real = np.asarray(real_values, dtype=np.float64)
+    shuffled = np.asarray(shuffled_values, dtype=np.float64)
+    groups = np.asarray(clusters, dtype=object)
+    if (
+        not (real.shape == shuffled.shape == groups.shape)
+        or real.ndim != 1
+        or not len(real)
+        or not np.isfinite(real).all()
+        or not np.isfinite(shuffled).all()
+        or replicates < 100
+    ):
+        raise PotencyAdapterGuidanceError("paired mean bootstrap inputs are malformed")
+    unique, members = _cluster_bootstrap_members(groups)
+    if len(unique) < 2:
+        raise PotencyAdapterGuidanceError("paired mean bootstrap needs two component clusters")
+    rng = np.random.default_rng(seed)
+    differences: list[float] = []
+    for _ in range(replicates):
+        indices = _resampled_cluster_indices(rng, unique, members)
+        differences.append(float(np.mean(real[indices] - shuffled[indices])))
+    return {
+        "clusters": int(len(unique)),
+        "valid_replicates": len(differences),
+        "lower_95": float(np.quantile(differences, 0.025)),
+        "median": float(np.quantile(differences, 0.5)),
+        "upper_95": float(np.quantile(differences, 0.975)),
+    }
+
+
+def monotonicity_gate(
+    *,
+    real_outer_fraction: float,
+    shuffled_outer_fraction: float,
+    outer_difference_lower: float,
+    real_anchor_accuracy: float,
+    shuffled_anchor_accuracy: float,
+    anchor_difference_lower: float,
+    thresholds: Mapping[str, float],
+) -> dict[str, bool]:
+    """Require direct q10/q50/q90 ordering beyond the paired shuffled-label control."""
+
+    checks = {
+        "minimum_outer_monotonic_fraction": real_outer_fraction
+        >= float(thresholds["minimum_outer_monotonic_fraction"]),
+        "minimum_outer_monotonic_gap": real_outer_fraction - shuffled_outer_fraction
+        >= float(thresholds["minimum_outer_monotonic_gap"]),
+        "outer_monotonic_gap_lcb_positive": outer_difference_lower > 0.0,
+        "minimum_anchor_accuracy": real_anchor_accuracy
+        >= float(thresholds["minimum_anchor_accuracy"]),
+        "minimum_anchor_accuracy_gap": real_anchor_accuracy - shuffled_anchor_accuracy
+        >= float(thresholds["minimum_anchor_accuracy_gap"]),
+        "anchor_accuracy_gap_lcb_positive": anchor_difference_lower > 0.0,
+    }
+    return {**checks, "passes": all(checks.values())}
+
+
 def promotion_gate(
     metrics: Mapping[str, float], thresholds: Mapping[str, float]
 ) -> dict[str, bool]:
@@ -396,13 +576,19 @@ def promotion_gate(
 __all__ = [
     "PotencyAdapterGuidanceError",
     "PotencyObservation",
+    "clustered_mean_difference_interval",
     "clustered_bootstrap_interval",
     "clustered_auroc_difference_interval",
     "deterministic_permutation",
     "map_to_training_ecdf",
     "masked_retention_kl",
+    "monotonicity_gate",
     "morphology_residuals",
     "normalized_agile_label",
+    "ordinal_contrastive_loss",
+    "ordinal_direction_score",
+    "ordinal_monotonicity_rows",
+    "ordinal_nll_matrix",
     "per_record_masked_nll",
     "promotion_gate",
     "quartile_balanced_sample",

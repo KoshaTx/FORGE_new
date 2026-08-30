@@ -76,6 +76,7 @@ class RunContext:
     seed_plan: SeedPlan
     resume: bool = False
     _derived_seeds: dict[str, int] = field(default_factory=dict, init=False, repr=False)
+    _progress_committer: Callable[[], None] | None = field(default=None, init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.inputs = MappingProxyType(dict(self.inputs))
@@ -135,6 +136,17 @@ class RunContext:
         ):  # defensive: SeedPlan is deterministic, but fail if that ever changes.
             raise StageError(f"seed key {key!r} derived two different values")
         return value
+
+    def commit_progress(self) -> None:
+        """Publish restartable scratch progress when the backend supports durable commits."""
+
+        if self._progress_committer is not None:
+            self._progress_committer()
+
+    def _set_progress_committer(self, committer: Callable[[], None] | None) -> None:
+        """Install the backend-owned durable-progress boundary."""
+
+        self._progress_committer = committer
 
     @property
     def derived_seeds(self) -> Mapping[str, int]:

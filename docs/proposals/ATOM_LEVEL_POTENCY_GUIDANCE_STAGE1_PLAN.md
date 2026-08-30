@@ -14,14 +14,14 @@ why the previous attempt failed, and the four gates below. This document is only
 
 | Need | Existing artifact | Why it matters |
 |---|---|---|
-| Component-disjoint split | `results/m0_07/oracle_split_manifest.json`, `held_aldehyde_5fold` | Already frozen, five folds, **zero `test_group_leakage`**, train/calibration/test rows recorded per fold. Inventing a new split would be both wasteful and less defensible. |
-| Labelled endpoints | `results/m0_07/agile_oracle_curated.csv.gz` | The 1,100 measured products, already reconciled. |
+| Component-disjoint splits | `results/m0_07/oracle_split_assignments.csv.gz`, `held_head_5fold` and `held_aldehyde_isocyanide_pair_5fold` | Already frozen, five folds per scheme, with held-component groups recorded. Inventing a new split would be both wasteful and less defensible. |
+| Labelled endpoints | `results/phase1/potency_study_corpus_v2/observations.csv.gz` | The 1,100 single-compound `LNPDB::YX_2024::HeLa` products under the consolidated source contract. |
 | Completed-molecule oracle | `forge/potency/oracle/oracle_production.py` | Stays the final assessor and is not retrained or modified. |
 | Frozen encoder | the shared Transformer checkpoint | Frozen. Only the head trains. |
 | Conformal machinery | `evaluation_contract` in the split manifest (split conformal, absolute residual) | Gives a ready interval procedure rather than a bespoke one. |
 
-**Do not create a new split.** If a fold structure other than `held_aldehyde_5fold` is needed,
-that is a change to the pre-registration and must be argued before it is coded.
+**Do not create a new split.** The direct-value result must pass both frozen component-disjoint
+schemes; a different fold structure requires a new scientific decision before implementation.
 
 ## 1. Data path
 
@@ -47,7 +47,7 @@ that product and record the count. Do not repair, and do not silently drop.
 
 ## 3. Evaluation, per fold and per time bin
 
-For each of the five folds and each of three time bins (early, middle, late):
+For each of the five folds in both split schemes and each of three time bins (early, middle, late):
 
 - Predict on the fold's held-out components.
 - Report a ranking statistic and its interval against a **shuffled-label control** trained
@@ -75,8 +75,8 @@ All four must hold, and each was set before any code ran:
 
 ## 5. Artifacts
 
-- `results/phase1/ugi_partial_state_value_head_v1/result.json` — per fold, per time bin, per
-  gate: statistic, interval, control statistic, held-out component count, abstention count.
+- The run-managed `result.json` and `evaluation_scores.csv.gz` — per fold, per time bin, per gate:
+  statistic, interval, control statistic, held-out component count and abstention count.
 - The pinned dataset digest, the frozen encoder state hash, and every seed.
 - One decision-log entry stating the outcome and, on a pass, the exact gate numbers that would
   have to be quoted in any Stage 2 authorization.
@@ -100,3 +100,23 @@ tested before four fifths of the compute is spent.
 - No oracle calls, no new biological measurements, no candidate selection.
 - No retraining of FORGE or of the completed-molecule predictor.
 - No claim, at any outcome, about in-vivo behaviour.
+
+## 8. Node-preserving representation amendment
+
+The first direct-value cross-fit failed the held-head gate after pooling the final Transformer layer
+to global and per-role means. The next bounded test therefore changes only the frozen representation
+and scalar head:
+
+1. retain the node axis from each of the final four shared Transformer layers;
+2. learn one global and three role-restricted attention readouts for the Ugi amine, aldehyde and
+   isocyanide regions;
+3. expose pairwise amine--aldehyde, amine--isocyanide and aldehyde--isocyanide interaction features;
+4. include the frozen denoiser's predicted clean atom, parent-bond and closure-bond probabilities;
+5. fit the scalar scorer separately while checking the generator state hash before and after feature
+   extraction.
+
+This amendment does not alter the dataset, component-disjoint folds, target, corruption process,
+shuffled-label control, morphology residualization, signal thresholds or promotion rule. It is a
+test of whether the frozen generator contains mTP-relevant node-local information that the original
+mean-pooled representation discarded. The paid ten-fold execution and every nonzero guidance run
+remain separately gated.

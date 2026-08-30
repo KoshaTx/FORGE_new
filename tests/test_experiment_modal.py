@@ -1,17 +1,23 @@
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import pytest
 
 from experiments._runtime.errors import BackendError
 from experiments._runtime.modal import (
+    MODAL_CALL_RECEIPT_SCHEMA,
     _config_dependency_uploads,
+    inspect_or_collect_modal,
+    launch_modal,
+    modal_call_receipt_path,
     modal_request_plan,
     modal_run_staging_paths,
     modal_volume_relative_path,
 )
 from forge.core.hashing import sha256_file
+from forge.core.io import write_json
 
 REPO = Path(__file__).resolve().parents[1]
 SPEC = REPO / "experiments" / "installation_smoke" / "experiment.json"
@@ -52,16 +58,10 @@ def test_modal_config_dependency_closure_uploads_nested_pins(tmp_path: Path) -> 
     data = tmp_path / "data.bin"
     data.write_bytes(b"assessment reference")
     child = tmp_path / "child.json"
-    child.write_text(
-        '{"inputs":{"data":{"path":"data.bin","sha256":"'
-        + sha256_file(data)
-        + '"}}}'
-    )
+    child.write_text('{"inputs":{"data":{"path":"data.bin","sha256":"' + sha256_file(data) + '"}}}')
     root = tmp_path / "root.json"
     root.write_text(
-        '{"inputs":{"child":{"path":"child.json","sha256":"'
-        + sha256_file(child)
-        + '"}}}'
+        '{"inputs":{"child":{"path":"child.json","sha256":"' + sha256_file(child) + '"}}}'
     )
 
     uploads = _config_dependency_uploads(tmp_path, root)
@@ -125,3 +125,64 @@ def test_modal_run_staging_preserves_the_content_addressed_run_name(tmp_path: Pa
     finally:
         staged_run.rmdir()
         staging_root.rmdir()
+
+
+def test_detached_modal_launch_spawns_and_returns_a_receipt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commands: list[list[str]] = []
+
+    def fake_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del kwargs
+        commands.append(command)
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr("experiments._runtime.modal.subprocess.run", fake_run)
+    monkeypatch.setattr(
+        "experiments._runtime.modal.modal_request_plan",
+        lambda *args, **kwargs: {"request_id": "a" * 64},
+    )
+    assert (
+        launch_modal(
+            REPO,
+            SPEC,
+            profile="smoke",
+            replicate=0,
+            device=None,
+            resume=False,
+            detached=True,
+        )
+        == 0
+    )
+    assert len(commands) == 1
+    assert "--detach" in commands[0]
+    assert "--launch-only" in commands[0]
+
+
+def test_modal_receipt_poll_never_submits_new_compute(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt = modal_call_receipt_path(tmp_path, "a" * 64)
+    write_json(
+        receipt,
+        {
+            "function_call_id": "fc-test",
+            "request_id": "a" * 64,
+            "schema_version": MODAL_CALL_RECEIPT_SCHEMA,
+            "status": "launched",
+        },
+    )
+    commands: list[list[str]] = []
+
+    def fake_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del kwargs
+        commands.append(command)
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr("experiments._runtime.modal.subprocess.run", fake_run)
+    assert inspect_or_collect_modal(tmp_path, receipt, status_only=True) == 0
+    assert len(commands) == 1
+    assert "--call-receipt" in commands[0]
+    assert "--status-only" in commands[0]
+    assert "--launch-only" not in commands[0]

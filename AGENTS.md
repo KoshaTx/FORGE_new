@@ -191,6 +191,26 @@ A task is complete when **all** of these hold:
 - Profile before non-trivial optimization and record a representative before/after benchmark. A
   performance change must preserve tests, schemas, provenance, and scientific results.
 
+### Remote compute durability — mandatory
+
+- Launch every long-running or billable Modal training, cross-fit, production evaluation, and
+  aggregate job in **detached mode**. A local shell, Codex session, network connection, or heartbeat
+  must never own the lifetime of paid remote computation.
+- Use attached Modal execution only for short preflights and smoke tests that are intentionally
+  disposable and inexpensive to rerun. The generic attached `forge experiment run ... --backend
+  modal` path is not an acceptable launcher for a long-running paid job unless it has been changed
+  to submit detached work.
+- Before waiting, persist the Modal application/function-call identifier, request ID, source digest,
+  configuration digest, and input pins. Monitoring, artifact collection, and verification must be
+  separate restartable operations.
+- Persist progress to the Modal volume at the natural unit of work: training checkpoints for model
+  fitting, completed folds plus score ledgers for cross-fitting, and completed shards for evaluation.
+  Commit these records incrementally; do not wait until the entire stage returns to publish all
+  recoverable work.
+- A local-client disconnect is an operational failure, not a scientific result. Preserve its failure
+  record, admit no incomplete metrics, and never automatically retry a paid job. Diagnose first and
+  obtain fresh execution authorization before spending again.
+
 ## Task-specific workflows
 
 Repository-scoped skills live under `.claude/skills/` and provide focused checklists without bloating

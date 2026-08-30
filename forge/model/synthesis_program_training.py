@@ -178,7 +178,14 @@ def _synthesis_program_predict(
     t: Any,
     *,
     potency_condition: Any | None = None,
+    return_hidden_state: bool = False,
+    return_hidden_layers: int = 0,
 ) -> dict[str, Any]:
+    optional: dict[str, Any] = {}
+    if return_hidden_state:
+        optional["return_hidden_state"] = True
+    if return_hidden_layers:
+        optional["return_hidden_layers"] = int(return_hidden_layers)
     return model(
         nodes=state["nodes"],
         parents=state["parents"],
@@ -200,6 +207,7 @@ def _synthesis_program_predict(
         component_instance_states=clean["component_instance_states"],
         role_morphology_states=clean["role_morphology_states"],
         potency_condition=potency_condition,
+        **optional,
     )
 
 

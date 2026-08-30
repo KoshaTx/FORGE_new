@@ -1,0 +1,93 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-hela-potency-ordinal-adapter-smoke-v2",
+  "description": "Exercise paired real/shuffled q10/q50/q90 adapter fitting and direct percentile-monotonicity scoring without authorizing nonzero guidance.",
+  "root_seed": 20260830,
+  "profiles": [
+    "smoke"
+  ],
+  "replicates": {
+    "smoke": 1
+  },
+  "stages": [
+    {
+      "id": "crossfit",
+      "implementation": "potency.ugi-ordinal-adapter-crossfit.v2",
+      "needs": [],
+      "config": {
+        "path": "configs/bio/phase1_ugi_hela_potency_adapter_ordinal_v2.json",
+        "sha256": "2e7bbc90d3476487a08d68ba634da918eecb5afe4a9cec524a20c3db2f584d25"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+          "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+        },
+        "base_training_result": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+          "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+        },
+        "base_design": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+          "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+          "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+        },
+        "potency_observations": {
+          "path": "results/phase1/potency_study_corpus_v2/observations.csv.gz",
+          "sha256": "7773f88c64e1793b9b6a5d188b8805d48d0542749554e2aba43af7c157d6886f"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "oracle_split_assignments": {
+          "path": "results/m0_07/oracle_split_assignments.csv.gz",
+          "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+        }
+      },
+      "outputs": {
+        "adapter_bundle": {
+          "path": "adapter_bundle.tar",
+          "schema_version": "forge.ugi_hela_potency_ordinal_adapter_bundle.v2"
+        },
+        "evaluation_scores": {
+          "path": "evaluation_scores.csv.gz",
+          "schema_version": "forge.ugi_hela_potency_ordinal_score.v2"
+        },
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_hela_potency_ordinal_adapter_crossfit_result.v2"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 2,
+        "workers": 0,
+        "memory_mb": 32768,
+        "timeout_seconds": 3600,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-hela-potency-ordinal-adapter-smoke-v2"
+      }
+    }
+  ],
+  "metadata": {
+    "diagnostic_only": true,
+    "base_generator_frozen": true,
+    "paired_real_shuffled_controls": true,
+    "direct_percentile_monotonicity_tested": true,
+    "full_adapter_fit_authorized": false,
+    "nonzero_generation_authorized": false
+  },
+  "nonclaims": [
+    "This smoke run is not a potency-guidance result.",
+    "The available assay grid contains no new measured head or tail chemotypes.",
+    "No guided production sampling, synthesis call, or candidate selection is authorized."
+  ]
+}

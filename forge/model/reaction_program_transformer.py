@@ -910,7 +910,18 @@ if nn is not None:
             role_morphology_states: Any | None = None,
             program_memory: Any | None = None,
             potency_condition: PotencyCondition | PotencyConditionBatch | None = None,
+            return_hidden_state: bool = False,
+            return_hidden_layers: int = 0,
         ) -> dict[str, Any]:
+            if (
+                isinstance(return_hidden_layers, bool)
+                or not isinstance(return_hidden_layers, int)
+                or return_hidden_layers < 0
+                or return_hidden_layers > self.layers
+            ):
+                raise ReactionProgramTransformerError(
+                    "return_hidden_layers must be an integer between zero and the layer count"
+                )
             del component_instance_states  # Loss-only coordinate; never a learned identity token.
             if program_memory is None:
                 program_memory = self.prepare_program_memory(
@@ -963,6 +974,7 @@ if nn is not None:
                 parents, closure_left, closure_right, child_mask, closure_mask
             )
             expert_weights = []
+            hidden_layers = []
             if self.role_blocks is None:
                 # Every shared block attends over the same node memory, so the absent-key fill is
                 # layer independent.  Applying it once here is bit-identical to applying it inside
@@ -984,6 +996,8 @@ if nn is not None:
                         flow_time=t,
                     )
                     expert_weights.append(weights)
+                    if return_hidden_layers:
+                        hidden_layers.append(hidden)
             else:
                 # Each semantic role has its own full-depth denoiser. Roles are scattered back only
                 # onto their own nodes, so no role-specific parameters can alter another role.
@@ -1008,6 +1022,8 @@ if nn is not None:
                         hidden = torch.where(role_mask[:, :, None], candidate, hidden)
                         layer_weights.append(weights)
                     expert_weights.append(torch.stack(layer_weights, dim=1).mean(dim=1))
+                    if return_hidden_layers:
+                        hidden_layers.append(hidden)
 
             chemistry_hidden = hidden
             terminal_expert_weights = None
@@ -1098,6 +1114,13 @@ if nn is not None:
             if terminal_expert_weights is not None and closure_expert_weights is not None:
                 output["terminal_chemistry_expert_weights"] = terminal_expert_weights
                 output["closure_output_expert_weights"] = closure_expert_weights
+            if return_hidden_state:
+                # Exposed only on explicit request so the ordinary denoising output contract is
+                # unchanged.  Downstream diagnostic heads must detach or evaluate the backbone
+                # under no-grad; returning this tensor does not authorize backbone fine-tuning.
+                output["hidden_state"] = hidden
+            if return_hidden_layers:
+                output["hidden_layers"] = torch.stack(hidden_layers[-return_hidden_layers:], dim=1)
             return output
 
 else:  # pragma: no cover

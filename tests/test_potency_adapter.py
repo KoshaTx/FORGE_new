@@ -3,6 +3,10 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
+from experiments.phase1.hela_potency.potency_adapter_ordinal import (
+    _load_fold_progress,
+    _write_fold_progress,
+)
 from forge.model.defog_feasibility import _model_state_sha256
 from forge.model.potency_adapter import (
     PotencyAdapterError,
@@ -19,10 +23,18 @@ from forge.model.reaction_program_transformer import (
     ReactionProgramGraphTransformer,
     ReactionProgramTransformerError,
 )
+from forge.potency.adapter_failure_attribution import (
+    factorial_dataset_summary,
+    label_variance_summary,
+)
 from forge.potency.adapter_guidance import (
     clustered_auroc_difference_interval,
+    clustered_mean_difference_interval,
     deterministic_permutation,
     map_to_training_ecdf,
+    monotonicity_gate,
+    ordinal_contrastive_loss,
+    ordinal_monotonicity_rows,
     promotion_gate,
     quartile_balanced_sample,
     roc_auc,
@@ -255,3 +267,112 @@ def test_promotion_gate_requires_gain_and_generator_noninferiority() -> None:
     assert promotion_gate(metrics, thresholds)["passes"]
     metrics["guided_exact_l1_fraction"] = 0.70
     assert not promotion_gate(metrics, thresholds)["passes"]
+
+
+def test_failure_attribution_counts_independent_factorial_support() -> None:
+    rows = [
+        {"source_lipid_name": "A1_B1_C1", "model_smiles": "C", "label_value": "0.0"},
+        {"source_lipid_name": "A1_B1_C2", "model_smiles": "CC", "label_value": "1.0"},
+        {"source_lipid_name": "A2_B1_C1", "model_smiles": "CCC", "label_value": "2.0"},
+        {"source_lipid_name": "A2_B1_C2", "model_smiles": "CCCC", "label_value": "3.0"},
+    ]
+    geometry = factorial_dataset_summary(rows)
+    assert geometry["rows"] == 4
+    assert geometry["unique_heads"] == 2
+    assert geometry["unique_aldehyde_isocyanide_pairs"] == 2
+    assert geometry["complete_cartesian_library"]
+    variance = label_variance_summary(rows)
+    assert variance["additive_head_plus_pair_r2"] == pytest.approx(1.0)
+    assert variance["unreplicated_interaction_or_noise_fraction"] == pytest.approx(0.0)
+
+
+def test_ordinal_contrast_and_monotonicity_use_counterfactual_requests() -> None:
+    nll = torch.tensor(
+        [
+            [0.1, 0.4, 0.9],
+            [0.8, 0.3, 0.1],
+            [0.5, 0.1, 0.6],
+        ],
+        requires_grad=True,
+    )
+    targets = torch.tensor([0.05, 0.95, 0.5])
+    primary, contrast = ordinal_contrastive_loss(
+        nll,
+        targets,
+        anchors=(0.1, 0.5, 0.9),
+        margin=0.1,
+    )
+    assert primary.item() == pytest.approx(0.1)
+    assert contrast.item() == pytest.approx(0.0)
+    (primary + contrast).backward()
+    assert torch.isfinite(nll.grad).all()
+    rows = ordinal_monotonicity_rows(
+        nll.detach().numpy(),
+        targets.numpy(),
+        anchors=(0.1, 0.5, 0.9),
+    )
+    assert rows["anchor_correct"].tolist() == [True, True, True]
+    assert rows["outer_monotonic"].tolist() == [True, True, False]
+
+
+def test_monotonicity_gate_requires_paired_shuffled_separation() -> None:
+    clusters = ["a", "a", "b", "b", "c", "c", "d", "d"]
+    interval = clustered_mean_difference_interval(
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        clusters,
+        replicates=200,
+        seed=9,
+    )
+    assert interval["lower_95"] == pytest.approx(1.0)
+    thresholds = {
+        "minimum_outer_monotonic_fraction": 0.3,
+        "minimum_outer_monotonic_gap": 0.05,
+        "minimum_anchor_accuracy": 0.45,
+        "minimum_anchor_accuracy_gap": 0.05,
+    }
+    assert monotonicity_gate(
+        real_outer_fraction=0.6,
+        shuffled_outer_fraction=0.2,
+        outer_difference_lower=0.1,
+        real_anchor_accuracy=0.7,
+        shuffled_anchor_accuracy=0.4,
+        anchor_difference_lower=0.1,
+        thresholds=thresholds,
+    )["passes"]
+    assert not monotonicity_gate(
+        real_outer_fraction=0.6,
+        shuffled_outer_fraction=0.58,
+        outer_difference_lower=-0.01,
+        real_anchor_accuracy=0.7,
+        shuffled_anchor_accuracy=0.69,
+        anchor_difference_lower=-0.02,
+        thresholds=thresholds,
+    )["passes"]
+
+
+def test_ordinal_fold_progress_is_restartable_and_fingerprint_bound(tmp_path) -> None:
+    path = tmp_path / "held_head_5fold__fold_0.json"
+    record = {"fold": 0, "scheme": "held_head_5fold", "test_rows": 2}
+    rows = [{"label": "A1B1C1"}, {"label": "A2B1C1"}]
+    _write_fold_progress(
+        path,
+        fold_signature="b" * 64,
+        fold_record=record,
+        evaluation_rows=rows,
+    )
+    restored_record, restored_rows = _load_fold_progress(
+        path,
+        expected_signature="b" * 64,
+        expected_test_rows=2,
+        expected_evaluation_rows=2,
+    )
+    assert restored_record == record
+    assert restored_rows == rows
+    with pytest.raises(ValueError, match="fold progress is invalid"):
+        _load_fold_progress(
+            path,
+            expected_signature="c" * 64,
+            expected_test_rows=2,
+            expected_evaluation_rows=2,
+        )

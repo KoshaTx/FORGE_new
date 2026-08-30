@@ -106,7 +106,76 @@ variation.
 ## Implementation and authorization state
 
 The code path, config, CPU smoke experiment, adapter overlay format, sampler condition, statistical
-gates, and promotion rule are implemented. The full adapter fit and every nonzero guided-generation
-run remain disabled in the frozen config until separately authorized. The smoke run exercises
-engineering only and cannot qualify a scientific time bin.
+gates, and promotion rule are implemented. The full cross-fit was subsequently authorized and run
+under `configs/bio/phase1_ugi_hela_potency_adapter_full_v1.json`. It completed all ten
+component-disjoint folds but qualified no middle or late flow-time bin because the real-label
+adapter did not exceed the shuffled-label control by the frozen AUROC margin. No final adapter was
+promoted. Every nonzero guided-generation run remains disabled, and the matched generation
+experiment must not run from this negative result.
 
+## Paired ordinal v2 diagnostic
+
+The v1 failure attribution identified two correctable design problems: its real-label and shuffled-
+label arms did not begin from the same adapter state, and ordinary endpoint denoising did not force
+the network to use the requested percentile. The v2 diagnostic addresses those problems without
+changing the frozen generator or running guided generation.
+
+For every optimizer step, the real and shuffled arms now receive the same measured molecules,
+retention molecules, flow times, corruptions, initialization, optimizer settings, and update count.
+Their only difference is the assignment of measured potency percentiles. Every measured molecule is
+evaluated under three counterfactual requests, `q10`, `q50`, and `q90`. The primary loss reconstructs
+the molecule under its nearest percentile anchor; an ordinal margin term requires closer anchors to
+reconstruct it better than farther anchors. A paired receipt records these invariants for every fold.
+
+Validation retains the five held-head and five held-aldehyde/isocyanide-pair folds. In addition to
+the v1 AUROC and morphology-residual gates, each flow-time bin must now show both:
+
+- strict `q10 < q50 < q90` reconstruction preference for low-potency products and the reverse
+  preference for high-potency products, with an outer-quartile monotonic fraction of at least `0.30`,
+  a real-minus-shuffled gap of at least `0.05`, and a paired cluster-bootstrap lower bound above
+  zero;
+- nearest-anchor accuracy of at least `0.45`, a real-minus-shuffled gap of at least `0.05`, and a
+  paired cluster-bootstrap lower bound above zero.
+
+Only a middle or late flow-time bin that passes every original signal gate and both direct ordinal
+gates under both component-disjoint schemes can produce a checkpoint. No checkpoint authorizes
+nonzero guidance; that still requires a separate decision after the cross-fit result is reviewed.
+
+The measured data limitation is unchanged. `YX_2024::HeLa` contains 1,100 products but only 20
+independent heads and 55 independent aldehyde/isocyanide pairs. It contains no newly measured head
+or tail chemotypes beyond that factorial grid. The implementation records this explicitly and does
+not fabricate examples or pool noncomparable assays from other studies. Acquiring genuinely new
+measured chemotypes would strengthen future transfer tests, but prospective measurement is outside
+the present computational paper and is not an execution task here.
+
+The v2 config is
+`configs/bio/phase1_ugi_hela_potency_adapter_ordinal_v2.json`. Its full cross-fit and every nonzero
+guided-generation run remain disabled pending separate explicit authorization.
+
+## Direct partial-state value diagnostic
+
+The completed v2 result showed that reconstruction under requested percentiles is an unnecessarily
+indirect potency objective: its strongest held-pair middle-time arm contained directional signal but
+failed the prespecified nearest-anchor accuracy gate. The next bounded diagnostic therefore predicts
+the final HeLa mTP value directly rather than inferring it from which percentile reconstructs the
+molecule most easily.
+
+The authenticated Transformer remains in evaluation mode with every parameter frozen. On explicit
+request only, it exposes its final node representations for a corrupted state. A small value head
+pools these representations by global mean, global maximum and declared Ugi precursor role, appends
+flow-time features, and predicts a scalar training-fold-standardized mTP value. It receives no
+component identifiers, stored precursor graphs or fragment tokens. A Huber regression term is paired
+with a within-batch ordinal contrast, so both value calibration and ranking are trained directly.
+
+The complete 1,100-product LNPDB YX HeLa factorial is evaluated under the existing five held-head
+and five held aldehyde/isocyanide-pair folds. Real and shuffled heads share exact initialization,
+partial-state features, molecule batches and optimizer draws; only the training-label permutation
+differs. Evaluation remains separate at early, middle and late flow times and retains the original
+AUROC, morphology-residual Spearman, shuffled-control and clustered-bootstrap gates. A heavy-atom-
+count prediction head over the same frozen summaries is a structural plumbing control. Only middle
+or late bins passing every gate under both split schemes can produce a value-head checkpoint.
+
+The implementation is frozen in
+`configs/bio/phase1_ugi_hela_partial_state_value_v1.json`. Its verified local smoke is engineering
+evidence only. On 2026-08-30 the user explicitly authorized the full H100 cross-fit. A passing
+cross-fit still does not authorize nonzero guided generation.

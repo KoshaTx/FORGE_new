@@ -480,7 +480,10 @@ def _command_experiment_run(args: argparse.Namespace) -> int:
             replicate=args.replicate,
             device=args.device,
             resume=args.resume,
+            detached=not args.attached,
         )
+    if args.attached:
+        raise ExperimentError("--attached applies only to the Modal backend")
     result = _runner(repo, args.backend).run(
         spec_path,
         profile=args.profile,
@@ -498,6 +501,26 @@ def _command_experiment_run(args: argparse.Namespace) -> int:
         }
     )
     return 0
+
+
+def _command_experiment_modal_status(args: argparse.Namespace) -> int:
+    from experiments._runtime.modal import inspect_or_collect_modal
+
+    repo = _repo()
+    receipt = Path(args.receipt)
+    if not receipt.is_absolute():
+        receipt = repo / receipt
+    return inspect_or_collect_modal(repo, receipt, status_only=True)
+
+
+def _command_experiment_modal_collect(args: argparse.Namespace) -> int:
+    from experiments._runtime.modal import inspect_or_collect_modal
+
+    repo = _repo()
+    receipt = Path(args.receipt)
+    if not receipt.is_absolute():
+        receipt = repo / receipt
+    return inspect_or_collect_modal(repo, receipt, status_only=False)
 
 
 def _modal_group_path(repo: Path, value: str) -> Path:
@@ -1489,7 +1512,26 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("--replicate", type=int, default=0)
         if name == "run":
             command.add_argument("--resume", action="store_true")
+            command.add_argument(
+                "--attached",
+                action="store_true",
+                help="keep a disposable Modal smoke attached; Modal runs detach by default",
+            )
         command.set_defaults(function=function)
+
+    modal_status = experiment_commands.add_parser(
+        "modal-status",
+        help="poll a detached Modal call receipt without submitting new work",
+    )
+    modal_status.add_argument("receipt")
+    modal_status.set_defaults(function=_command_experiment_modal_status)
+
+    modal_collect = experiment_commands.add_parser(
+        "modal-collect",
+        help="wait for and verify artifacts from a detached Modal call receipt",
+    )
+    modal_collect.add_argument("receipt")
+    modal_collect.set_defaults(function=_command_experiment_modal_collect)
 
     status = experiment_commands.add_parser("status")
     status.add_argument("run_id")

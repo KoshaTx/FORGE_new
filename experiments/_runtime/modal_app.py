@@ -8,6 +8,7 @@ import os
 import shutil
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -128,7 +129,10 @@ def execute_experiment(
             f"remote source changed: expected {expected_source_sha256}, found {observed_source}"
         )
     load_catalog()
-    runner = ExperimentRunner(repo, backend=ModalRuntimeBackend())
+    runner = ExperimentRunner(
+        repo,
+        backend=ModalRuntimeBackend(progress_commit=experiment_volume.commit),
+    )
     result = runner.run(
         repo / experiment_path,
         profile=profile,
@@ -207,15 +211,80 @@ def _download_run(remote_path: str, local_path: Path) -> None:
 
 @app.local_entrypoint()
 def main(
-    experiment: str,
-    profile: str,
+    experiment: str = "",
+    profile: str = "",
     replicate: int = 0,
     device: str = "",
     resume: bool = False,
+    launch_only: bool = False,
+    call_receipt: str = "",
+    status_only: bool = False,
 ) -> None:
-    """Upload verified pins, allocate the declared envelope, execute, and download."""
+    """Launch detached work, or inspect and collect a previously launched call."""
 
-    from experiments._runtime.modal import modal_request_plan
+    from experiments._runtime.modal import (
+        MODAL_CALL_RECEIPT_SCHEMA,
+        modal_call_receipt_path,
+        modal_request_plan,
+    )
+    from forge.core.io import read_json_object, write_json
+
+    if call_receipt:
+        if experiment or profile or launch_only or resume or device or replicate:
+            raise RuntimeError("call-receipt mode cannot include launch arguments")
+        receipt_path = (LOCAL_REPO / call_receipt).resolve()
+        try:
+            receipt_path.relative_to((LOCAL_REPO / "runs" / "_modal_calls").resolve())
+        except ValueError as error:
+            raise RuntimeError("Modal call receipt escapes runs/_modal_calls") from error
+        receipt = read_json_object(
+            receipt_path,
+            error=RuntimeError,
+            label="Modal experiment call receipt",
+        )
+        if (
+            receipt.get("schema_version") != MODAL_CALL_RECEIPT_SCHEMA
+            or receipt.get("status") != "launched"
+            or not isinstance(receipt.get("function_call_id"), str)
+        ):
+            raise RuntimeError("invalid Modal experiment call receipt")
+        function_call = modal.FunctionCall.from_id(receipt["function_call_id"])
+        if status_only:
+            try:
+                result = function_call.get(timeout=0)
+            except (modal.exception.TimeoutError, TimeoutError):
+                print(
+                    json.dumps(
+                        {
+                            "function_call_id": receipt["function_call_id"],
+                            "request_id": receipt["request_id"],
+                            "schema_version": "forge.modal_experiment_call_status.v1",
+                            "status": "running",
+                        },
+                        indent=2,
+                        sort_keys=True,
+                    )
+                )
+                return
+        else:
+            result = function_call.get()
+        for key in ("experiment_id", "source_sha256"):
+            if result.get(key) != receipt.get(key):
+                raise RuntimeError(f"detached Modal result changed {key}")
+        local_run = LOCAL_REPO / "runs" / result["experiment_id"] / result["run_id"]
+        if not status_only:
+            _download_run(result["remote_run_path"], local_run)
+            result["local_run_path"] = str(local_run)
+            result["verification"] = "downloaded artifacts match remote manifests"
+        result["function_call_id"] = receipt["function_call_id"]
+        result["request_id"] = receipt["request_id"]
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return
+
+    if status_only:
+        raise RuntimeError("--status-only requires --call-receipt")
+    if not experiment or not profile:
+        raise RuntimeError("launch mode requires --experiment and --profile")
 
     spec_path = (LOCAL_REPO / experiment).resolve()
     request = modal_request_plan(
@@ -237,7 +306,7 @@ def main(
         gpu=envelope["gpu_type"],
         timeout=min(86_400, int(envelope["timeout_seconds"]) + 300),
     )
-    result = remote_function.remote(
+    arguments = (
         request["request_id"],
         str(spec_path.relative_to(LOCAL_REPO)),
         profile,
@@ -246,6 +315,37 @@ def main(
         resume,
         request["source_sha256"],
     )
+    if launch_only:
+        receipt_path = modal_call_receipt_path(LOCAL_REPO, request["request_id"])
+        if receipt_path.exists():
+            raise RuntimeError(
+                "detached Modal call receipt already exists; inspect or collect it instead of "
+                f"launching a duplicate: {receipt_path}"
+            )
+        function_call = remote_function.spawn(*arguments)
+        receipt = {
+            "device": device or None,
+            "experiment": str(spec_path.relative_to(LOCAL_REPO)),
+            "experiment_id": request["experiment_id"],
+            "function_call_id": function_call.object_id,
+            "launched_utc": datetime.now(timezone.utc).isoformat(),
+            "profile": profile,
+            "replicate": replicate,
+            "request_id": request["request_id"],
+            "resource_envelope": request["resource_envelope"],
+            "resume": resume,
+            "schema_version": MODAL_CALL_RECEIPT_SCHEMA,
+            "source_sha256": request["source_sha256"],
+            "spec_sha256": request["spec_sha256"],
+            "status": "launched",
+            "uploads": request["uploads"],
+        }
+        write_json(receipt_path, receipt)
+        receipt["receipt_path"] = str(receipt_path)
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return
+
+    result = remote_function.remote(*arguments)
     local_run = LOCAL_REPO / "runs" / result["experiment_id"] / result["run_id"]
     _download_run(result["remote_run_path"], local_run)
     result["local_run_path"] = str(local_run)

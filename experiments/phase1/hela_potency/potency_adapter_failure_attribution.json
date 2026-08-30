@@ -1,0 +1,82 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-hela-potency-adapter-failure-attribution",
+  "description": "Attribute the verified negative Ugi HeLa potency-adapter result from pinned data and cross-fit evidence without fitting or generation.",
+  "root_seed": 20260830,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "diagnosis",
+      "implementation": "potency.ugi-adapter-failure-attribution.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/bio/phase1_ugi_hela_potency_adapter_failure_attribution_v1.json",
+        "sha256": "f2fa443753e8943fb17a1a23b5d9b15a19bb5f025dc0951dbab37b3d5df9b6ae"
+      },
+      "inputs": {
+        "adapter_config": {
+          "path": "configs/bio/phase1_ugi_hela_potency_adapter_full_v1.json",
+          "sha256": "f3e14d90a4798cf5c58a8a668111d51d9d2ac9b4ed8cf73002ed6cf1eeb9ccbb"
+        },
+        "completed_molecule_oracle": {
+          "path": "results/phase1/oracle_campaign_selection.json",
+          "sha256": "21d5348a9ffe929658af60ca1dcdcd58ab8dc654e3c893c80741cff829ddd7cc"
+        },
+        "crossfit_manifest": {
+          "path": "runs/phase1-ugi-hela-potency-adapter-full-h100/3d419201bfd6be86ba4620551023519d510639d8e69a9ae7eb02a0973c1ceedb/stages/crossfit/manifest.json",
+          "sha256": "9711ebe5398663f8be552c2c564f93745f84490c783c96a9255247ea41616906"
+        },
+        "crossfit_result": {
+          "path": "runs/phase1-ugi-hela-potency-adapter-full-h100/3d419201bfd6be86ba4620551023519d510639d8e69a9ae7eb02a0973c1ceedb/stages/crossfit/artifacts/result.json",
+          "sha256": "8b161434abd23c8531e5bfe58ccf1689c41f5d4e2bad7f42705c744cf46d9b5a"
+        },
+        "oracle_split_assignments": {
+          "path": "results/m0_07/oracle_split_assignments.csv.gz",
+          "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+        },
+        "potency_observations": {
+          "path": "results/phase1/potency_study_corpus_v2/observations.csv.gz",
+          "sha256": "7773f88c64e1793b9b6a5d188b8805d48d0542749554e2aba43af7c157d6886f"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_hela_potency_adapter_failure_attribution.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float64",
+        "cpus": 1,
+        "workers": 0,
+        "memory_mb": 4096,
+        "timeout_seconds": 600,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-hela-potency-adapter-failure-attribution-v1"
+      }
+    }
+  ],
+  "metadata": {
+    "read_only": true,
+    "model_fit": false,
+    "guided_generation": false,
+    "gate_relaxed": false
+  },
+  "nonclaims": [
+    "This diagnosis does not authorize another potency-guidance run.",
+    "The negative adapter result does not establish absence of terminal whole-molecule HeLa signal."
+  ]
+}

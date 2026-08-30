@@ -16,9 +16,7 @@ from experiments._runtime.modal_group import (
 from experiments._runtime.spec import ExperimentSpec
 
 REPO = Path(__file__).resolve().parents[1]
-GROUP_PATH = (
-    REPO / "experiments/phase1/multireaction/reaction_specialists_seed0_h100.json"
-)
+GROUP_PATH = REPO / "experiments/phase1/multireaction/reaction_specialists_seed0_h100.json"
 
 
 def test_reaction_specialist_group_allocates_independent_exact_h100_specs() -> None:
@@ -109,11 +107,7 @@ def test_modal_group_launches_three_production_requests_concurrently(
         "modal_request_plan",
         lambda repo, spec_path, **kwargs: {
             "request_id": request_ids[
-                next(
-                    member_id
-                    for member_id in request_ids
-                    if f"_{member_id}_" in spec_path.name
-                )
+                next(member_id for member_id in request_ids if f"_{member_id}_" in spec_path.name)
             ]
         },
     )
@@ -138,7 +132,7 @@ def test_modal_group_launches_three_production_requests_concurrently(
 
     assert maximum_active == 3
     assert result["parallel_exit_codes"] == {"bl": 0, "lx": 0, "ugi": 0}
-    assert result["status"] == "complete"
+    assert result["status"] == "launched"
 
 
 def test_modal_group_refuses_source_drift_after_preflight(

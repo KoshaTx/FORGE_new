@@ -156,9 +156,7 @@ def modal_group_plan(repo: Path, group_path: Path) -> dict[str, Any]:
         "group_sha256": str(sha256_file(group_path)),
         "source_sha256": next(iter(source_sha256s)),
         "preflight": requests[group.preflight.member_id],
-        "parallel": {
-            member.member_id: requests[member.member_id] for member in group.parallel
-        },
+        "parallel": {member.member_id: requests[member.member_id] for member in group.parallel},
     }
 
 
@@ -172,7 +170,7 @@ def launch_modal_group(
     resume: bool = False,
     launch: LaunchFunction = launch_modal,
 ) -> dict[str, Any]:
-    """Run the preflight synchronously, then allocate every production member in parallel."""
+    """Run the preflight synchronously, then detach every production member in parallel."""
 
     plan = modal_group_plan(repo, group_path)
     group = ModalExperimentGroup.load(group_path)
@@ -184,6 +182,7 @@ def launch_modal_group(
         replicate=group.preflight.replicate,
         device=group.preflight.device,
         resume=resume,
+        detached=False,
     )
     if preflight_status != 0:
         raise BackendError(
@@ -220,6 +219,7 @@ def launch_modal_group(
                 replicate=member.replicate,
                 device=member.device,
                 resume=resume,
+                detached=True,
             ): member.member_id
             for member in group.parallel
         }
@@ -235,7 +235,7 @@ def launch_modal_group(
         "source_sha256": plan["source_sha256"],
         "preflight_exit_code": preflight_status,
         "parallel_exit_codes": dict(sorted(statuses.items())),
-        "status": "complete",
+        "status": "launched",
     }
 
 

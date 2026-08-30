@@ -209,6 +209,7 @@ def _joined_observations(
         joined.append(
             {
                 "label": normalized_agile_label(row["source_lipid_name"]),
+                "source_lipid_name": row["source_lipid_name"],
                 "cache_index": cache_index,
                 "model_smiles": smiles,
                 "potency": value,

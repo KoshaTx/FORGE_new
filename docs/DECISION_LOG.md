@@ -10302,3 +10302,258 @@ preserved unchanged.
   engineering result only; two optimizer updates and one fold are not scientific evidence.
 - Full adapter fitting and all nonzero potency-conditioned generation remain unauthorized. No oracle,
   synthesis, proposal-engine, candidate-selection, or prospective action was run.
+
+## 2026-08-30 — Full Ugi HeLa potency-adapter cross-fit fails the signal gate
+
+- After explicit authorization, ran the full frozen-backbone diagnostic on one exact NVIDIA H100
+  80GB HBM3. The run completed all five held-head folds and all five held
+  aldehyde/isocyanide-pair folds, fitting matched real-label and deterministic shuffled-label
+  adapters for 500 updates per fold and arm over the 1,100 single-compound
+  `LNPDB::YX_2024::HeLa` observations.
+- No eligible flow-time bin passed the prespecified gate in both split schemes. The middle-time real
+  AUROC values were `0.6151` for held heads and `0.6189` for held aldehyde/isocyanide pairs, but the
+  real-minus-shuffled AUROC differences were only `0.0169` and `0.0206`, below the frozen `0.05`
+  minimum. The held-head middle morphology-residual Spearman lower bound was also below zero.
+- The verified Modal run ID is
+  `3d419201bfd6be86ba4620551023519d510639d8e69a9ae7eb02a0973c1ceedb`. Its result and
+  deterministic adapter-bundle SHA-256 values are
+  `8b161434abd23c8531e5bfe58ccf1689c41f5d4e2bad7f42705c744cf46d9b5a` and
+  `0d0d1a0824c77837983d3f6b3f4e011405a8e162f58bb5cbe6ebb39ff8bbd2f4`.
+- **Decision:** Preserve this as a negative result. Do not promote an adapter checkpoint and do not
+  run nonzero potency-conditioned generation. No oracle, synthesis, proposal-engine,
+  candidate-selection or prospective action was run.
+
+## 2026-08-30 — Attribute the potency-adapter failure to limited independent support and a non-identifying objective
+
+- Audited the verified negative H100 result against the complete LNPDB potency ledger, exact Ugi
+  assignments, component-disjoint splits and frozen completed-molecule oracle. The 1,100 YX HeLa
+  products form one complete `20 heads × 55 aldehyde/isocyanide pairs` factorial. Each fold fits 770
+  products but only 16 distinct heads or 44 distinct tail pairs; the headline product count is not
+  the independent sample count for unseen-component transfer.
+- Head means explain 33.1% of label variance, tail-pair means explain 18.3% and their additive model
+  explains 51.4%. The remaining 48.6% is unreplicated head–tail interaction and measurement noise,
+  which the current dataset cannot separate. The frozen completed-molecule D-MPNN nevertheless has
+  post-selection test Spearman `0.612`, so the result does not imply that terminal molecular
+  structure lacks useful HeLa ranking signal.
+- Gross optimization failure was excluded: mean real-label denoising loss fell from `1.021` to
+  `0.289`, gradients remained finite and nonzero, and the real arm ended below the shuffled arm.
+  However, the maximum eligible held-component real-minus-shuffled AUROC was only `0.023` versus the
+  frozen `0.05` requirement. This supports the diagnosis that primary endpoint denoising can learn a
+  generic Ugi-domain adjustment while mostly ignoring the target percentile.
+- Other LNPDB HeLa studies do not simply solve the support problem. JC_2023 contributes 180 matched
+  exact-Ugi products but no new heads, three new aldehydes and one new isocyanide relative to YX;
+  LM_2019 contributes no products under the exact frozen Ugi join. Their within-study normalized
+  endpoints must not be naively pooled.
+- The verified local attribution run ID is
+  `9aa17fbd0becb33ea03398ac1ff0e87578b0f1440826ca2f9d969cb6e5ff739e`; its result SHA-256 is
+  `04815252b20cd0c1feff1c29312d2de1342d16b1c2c50da1827122d68015238b`.
+- **Decision:** Do not add more combinations of the same 20-by-55 components, train longer blindly
+  or relax the gate. A future proposal, if separately authorized, should use paired identical
+  molecule batches and adapter initialization for real/shuffled arms, an explicit counterfactual
+  ordinal objective over `q10/q50/q90`, and a per-record score ledger that audits percentile
+  monotonicity. New independently measured head and tail chemotypes are the data priority.
+
+## 2026-08-30 — Implement the paired q10/q50/q90 potency-adapter diagnostic
+
+- Implemented a v2 frozen-backbone adapter cross-fit in which real-label and shuffled-label controls
+  share their exact adapter initialization, measured and retention batches, flow times, corruptions,
+  optimizer settings and update count. The sole intervention is the real versus deterministically
+  permuted percentile assignment.
+- Added an explicit counterfactual ordinal objective over `q10`, `q50` and `q90`, together with a
+  per-record score ledger. Promotion now requires the original held-component signal gates and
+  direct percentile monotonicity and nearest-anchor accuracy beyond the paired shuffled control.
+- The config records the actual data support: 1,100 products from one LNPDB YX HeLa factorial, but
+  only 20 heads, 55 aldehyde/isocyanide pairs and zero newly measured chemotypes. No synthetic data
+  or cross-study assay pooling was introduced.
+- The verified CPU engineering smoke used one held-head fold, two updates and 660 held-out
+  molecule/time rows. Run ID:
+  `052c304b5ade850d3e21276608605a6669cb0cad263810b8b6ad56105ee53a79`. Its result,
+  score-ledger and deterministic bundle SHA-256 values are
+  `7ad6e250085a746c64ee5385fef0ac22f8b9dc440def83f6acc9f195c05a18f4`,
+  `070d3796b7498f2641c01e04c2a0201f7bdd08c2f7a2a7c6c20a334bbcc04ec8` and
+  `5a48ecc7310c98c149ffd648677ac42b03a74b52f349a7f6dd9097e71e02bd3f`.
+
+## 2026-08-30 — The full paired ordinal potency-adapter gate fails
+
+- Completed and independently verified all ten component-disjoint folds on one exact H100: five
+  held-head folds and five held aldehyde/isocyanide-pair folds, with paired real-label and
+  shuffled-label `q10/q50/q90` adapters. The input remained the complete 1,100-product YX HeLa
+  factorial with 20 independent heads and 55 independent aldehyde/isocyanide pairs; no new
+  measured chemotypes or cross-study pooling was introduced.
+- The strongest result occurred in the held-pair middle bin. Real-label direction AUROC was
+  `0.6368` versus `0.5025` for the paired shuffled control; residual Spearman was `0.1926`. This bin
+  passed the frozen directional signal subgate. Its real-label anchor accuracy was only `0.3918`,
+  below the frozen `0.45` minimum, so it failed the ordinal monotonicity gate. No middle or late bin
+  passed both the held-head and held-pair schemes.
+- The verified run status is `signal_gate_fail`, with `active_time_bins=[]` and no promoted adapter
+  checkpoint. Run ID:
+  `1655526204163b9f2e9dc36adf66783c8744d7e7e0e8e393d0462a9aed0e393b`; detached Modal function
+  call: `fc-01M19TNWYMCJDT9CGXYS49GEEX`; request:
+  `3bdd4881e745d2e541edeb25cd73482b9bb314f1e6dd2f77a15fe5d4b21e02ed`.
+- Result, evaluation-ledger and deterministic adapter-bundle SHA-256 values are
+  `4dc2fae865fd83b12722c38fe7c6674d914ef4aac8d7a32631c4547e1d94f18b`,
+  `190fc4432697d0530f4e91f680796136340449e456716bc67bef56e3f62717c1` and
+  `c95bed0d3235840b3f326960cb698c9879bee59c9224fb367e7fea8c986b6e67`.
+- **Decision:** Preserve the partial predictive signal as a negative diagnostic result. Do not run
+  nonzero potency-guided generation, promote a checkpoint, select candidates, or make a
+  potency-improvement claim. No synthesis, proposal-engine or generation call was run.
+- **Decision:** The v2 implementation is ready for a full cross-fit, but that paid fit remains
+  unauthorized. The two-step smoke is not scientific signal evidence. Nonzero guided generation
+  remains disabled, and prospective collection of new measured chemotypes remains outside the
+  computational paper.
+
+## 2026-08-30 — Require detached execution for long paid Modal jobs
+
+- The explicitly authorized full q10/q50/q90 potency-adapter cross-fit was launched through the
+  generic attached Modal backend as application `ap-5R5dGXi6h740970YFSnguU`, request
+  `8562128095ca16eea54660e79ea25b5206ebeaa5563e6b951abfab2cb9125e78`, and remote run
+  `4af8494e3999214bca39289859870888a7041043eeb53db656ca5674e5cdf89a`.
+- The remote process completed the fold-fitting and evaluation loops and had entered aggregate
+  monotonicity bootstrapping when the local client disconnected. Modal propagated cancellation to
+  the H100 worker and recorded `KeyboardInterrupt`; the partial stage contained no completed score
+  ledger or admissible result. This is an operational failure, not evidence for or against the
+  potency signal. No guided generation, synthesis call, or candidate selection ran.
+- The surviving remote `partial.json` and stage-failure record have SHA-256
+  `3855945445909e23d67b0d2dfba0f5f97989b50b1ad48e4c886ba40e6d81c648` and
+  `a8c1adf9fb9131ce90af58747cd1a004f7e122029ba55cbb5e01b18ddbaad317`, respectively.
+- **Decision:** all long-running or billable Modal work must be submitted detached, record its remote
+  identity before waiting, persist restartable progress incrementally, and use separate monitor and
+  collection operations. Attached execution is limited to disposable preflights and smoke tests.
+  Paid retries are never automatic and require fresh authorization.
+- The generic Modal runner now submits detached calls by default and atomically writes a local
+  receipt containing the function-call ID, request ID, source/specification digests, resource
+  envelope and every uploaded input pin. `forge experiment modal-status RECEIPT` polls without
+  launching work, while `forge experiment modal-collect RECEIPT` downloads and verifies a completed
+  run. Modal experiment groups retain an attached preflight but detach every production member.
+- The ordinal cross-fit now writes a signature-bound fold record and score ledger after each fold and
+  explicitly commits that progress to the Modal volume. A matching `--resume` skips completed folds;
+  a mismatched signature fails closed. Cluster membership is indexed once for bootstrap resampling,
+  reducing a representative 1,100-row, 55-cluster, 2,000-resample paired-mean interval from `0.9469`
+  to `0.0289` seconds (32.8x) while preserving identical quantiles.
+- End-to-end local smoke run
+  `b5476da6019c2b91ad3902f6f6e8ca01d5ccc182cb1b38fa3436aa5077cf30b3` completed and independently
+  verified all three declared artifacts. Its result, score ledger and bundle retain SHA-256
+  `7ad6e250085a746c64ee5385fef0ac22f8b9dc440def83f6acc9f195c05a18f4`,
+  `070d3796b7498f2641c01e04c2a0201f7bdd08c2f7a2a7c6c20a334bbcc04ec8` and
+  `5a48ecc7310c98c149ffd648677ac42b03a74b52f349a7f6dd9097e71e02bd3f`.
+
+## 2026-08-30 — Replace indirect reconstruction scoring with a direct partial-state mTP head
+
+- Implemented a small role-aware graph-level value head over the authenticated frozen FORGE
+  Transformer. The model pools the complete partial-state node representation globally and by Ugi
+  precursor role, then predicts scalar HeLa mTP directly. It receives no component identity, stored
+  precursor graph or fragment token, and the base-generator state hash is checked before and after
+  feature extraction.
+- Frozen paired real-versus-shuffled training: both heads share exact initialization, molecule
+  batches, corrupted partial states and optimizer draws; only the deterministic mTP-label
+  permutation differs. Cross-fitting retains all five held-head and five held
+  aldehyde/isocyanide-pair folds, early/middle/late scoring, train-only morphology residualization,
+  clustered intervals and the existing signal thresholds. A heavy-atom-count head checks the same
+  representation and training path independently of the potency label.
+- Verified the local CPU engineering smoke over one held-head fold and all three flow-time bins. The
+  generator remained bitwise frozen at model-state SHA-256
+  `cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3`. Run ID:
+  `d7bda14e2472c8b5041499645457a43d7026ef02438643d5c4e5ad49aa7a2218`. Result,
+  score-ledger and empty fail-closed bundle SHA-256 values are
+  `2054ec9841993b03f8996f8699e55682affc3ace0f39d813c122f785d624a0b6`,
+  `ba7d8dfd741ca3bfda7100608724ac7bbbefa177619bbf1a96c409c0ef7e9282` and
+  `84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652`.
+- **Decision:** the two-update smoke is plumbing evidence, not potency evidence. Full ten-fold H100
+  fitting remains disabled until separately authorized. No value checkpoint was promoted, and no
+  nonzero guidance, generation, oracle, synthesis, proposal-engine or candidate-selection call ran.
+
+## 2026-08-30 — Launch the authorized direct partial-state mTP cross-fit
+
+- The user explicitly authorized the paid exact-H100 ten-fold direct partial-state value-head
+  cross-fit. The frozen contract uses five held-head folds and five held
+  aldehyde/isocyanide-pair folds, paired real-label and shuffled-label heads, early/middle/late
+  flow-time evaluation, 1,000 updates per fold, two corruption replicas and 2,000 clustered
+  bootstrap resamples. It does not authorize guided generation.
+- The detached Modal call is `fc-01M1A3MC1YX4TTHBK575RVKYKE` under request
+  `2f0392c25caccdbfff2352ec7c2181626863fb4a7e1dc41803d3524885d61a6e`. The source and experiment
+  specification SHA-256 values are
+  `7e69bcf7186718673fbf513d603f94eb961a39a2a1654072c96d6590217240e2` and
+  `c86d9406ae184a9c73bcc7e0c4d31c54ce90959817dd1d20eaa3a8005a155076`; the pinned biological
+  config SHA-256 is `13fc8e8b90b5b47fcf177181869d7b851d0531fd65fa501d9055c93a813ecf62`.
+- The run was launched at `2026-08-30T19:51:34.789043+00:00` on an exact H100 with four CPUs,
+  64 GB system memory and a 14,400-second timeout. A non-launching status poll confirmed that the
+  detached call remained active after startup. Each completed fold is persisted with a
+  signature-bound progress record so an authenticated resume cannot mix incompatible inputs or
+  settings.
+- **Decision:** collect and adjudicate the cross-fit after it finishes. Even if the frozen signal
+  gate passes, do not run nonzero potency guidance, generation, synthesis, proposal-engine calls or
+  candidate selection without separate explicit authorization.
+
+## 2026-08-30 — The direct partial-state mTP head fails the full component-generalization gate
+
+- The detached exact-H100 run completed and its remote manifests were independently collected and
+  verified locally. Run ID:
+  `250b591d55e90859ad01868549f258f67025c44d18017e36f25b00b2a88feea7`; detached Modal call:
+  `fc-01M1A3MC1YX4TTHBK575RVKYKE`; request:
+  `2f0392c25caccdbfff2352ec7c2181626863fb4a7e1dc41803d3524885d61a6e`.
+- The direct value head showed reproducible signal when aldehyde/isocyanide pairs were held out. Its
+  real-label AUROC was `0.7021`, `0.7020` and `0.7114` in the early, middle and late bins, versus
+  shuffled-label AUROCs of `0.5181`, `0.5414` and `0.5490`. Residual Spearman values were `0.3489`,
+  `0.3805` and `0.4085`; all three pair-held-out bins passed the frozen signal subgate.
+- The same model failed on held-out amine heads. Real-label AUROC was `0.4939`, `0.4991` and
+  `0.5007` in the early, middle and late bins, with residual Spearman values of `-0.1913`, `-0.1701`
+  and `-0.1772`. None of the held-head bins separated from the paired shuffled control or passed the
+  signal gate. The heavy-atom-count sanity head passed in all six bins, showing that the frozen
+  partial-state representation and value-head training path can recover a strong structural signal.
+- The final status is `signal_gate_fail` with `active_time_bins=[]`. The authenticated base generator
+  remained frozen; the run made zero oracle and synthesis calls and performed no guided generation.
+  Result, 6,600-row evaluation ledger and empty fail-closed bundle SHA-256 values are
+  `8e077178453165728170ca65a64fef911746737b7d21da23f4703f644a4339e0`,
+  `f8771b14743d4c6ad2f0841216596520c2f66c79ca02b3e8aecff4c0c9b15334` and
+  `84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652`.
+- **Decision:** preserve this as a signal-limited negative result. Do not promote a value head or run
+  nonzero potency guidance from this dataset. The factorial supplies many pair combinations but only
+  20 independent amine heads; it supports pair interpolation but does not establish transfer to an
+  unseen head chemotype.
+
+## 2026-08-30 — Qualify a node-preserving layerwise attention representation
+
+- The failed direct value head had consumed only the final Transformer layer after global mean/max
+  and per-role mean pooling. That negative result did not test whether node-local or intermediate-
+  layer representations contain component-generalizing mTP signal.
+- Implemented a separate value scorer over the frozen FORGE generator. It preserves every node from
+  the final four Transformer layers; learns global, amine-head, aldehyde-region and isocyanide-region
+  attention queries; includes three explicit role-pair interaction vectors; and consumes the frozen
+  denoiser's predicted clean atom, parent-bond and closure-bond probabilities. The generator exposes
+  these features only on explicit request, and its ordinary prediction contract is unchanged.
+- The existing scientific gate is unchanged: five held-head and five held aldehyde/isocyanide-pair
+  folds, paired real/shuffled initialization and batches, train-only morphology residualization,
+  heavy-atom-count sanity, and separate early/middle/late evaluation. A pass still requires both
+  split schemes; no favorable subset can promote the scorer by itself.
+- Verified local smoke run
+  `b710bba90a2f662f8fd1970d72c9e4c64aaa7d38f5563f46a196d1e5128544eb` exercised the authenticated
+  1,100-row dataset and real frozen checkpoint. Its feature geometry was four layers, at most 60
+  observed nodes, hidden width 192, 14 atom classes and four bond classes. The generator remained
+  frozen at model-state SHA-256
+  `cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3`.
+  Result, 220-row score ledger and empty fail-closed bundle SHA-256 values are
+  `11df3562c15b6beefd361f743b8f4516316e3fd9bd176a340c2cc49352bec9e9`,
+  `a61077b5594d3a009ac32da2850719cc707cd7f80418cf84517eb6bd6d5a2c49` and
+  `84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652`.
+- **Decision:** the two-update local smoke is engineering evidence only. The full paid ten-fold
+  cross-fit remains disabled pending explicit execution authorization. Do not promote a scorer or
+  run nonzero guidance, generation, oracle, synthesis, proposal-engine or candidate-selection calls
+  from the smoke result.
+
+## 2026-08-30 — Launch the authorized node-preserving mTP cross-fit
+
+- The user explicitly authorized the paid exact-H100 ten-fold cross-fit of the node-preserving
+  layerwise attention scorer. The authenticated config SHA-256 is
+  `4f37306a478490c2c3a8d9f2908dddd8f4c465cae5acea807aa997cc01c84f46`; the experiment-specification
+  SHA-256 is `551a3ed724d59cf7b237f44bf4b018a0abb08441cc82aea4a793c0bc121af933`.
+- Submitted detached Modal function call `fc-01M1A7C9BRN464MEMKGSNX3KTR` under request
+  `7870f607d5ea3339dd3559777206ac2e819fa7c12a04c152ab9dc20e866bcebb` at
+  `2026-08-30T20:57:04.027440+00:00`. The exact resource envelope is one `H100!`, four CPUs,
+  64 GB system memory and a 14,400-second timeout. Receipt SHA-256:
+  `6f524aad5c50fa1edc109030a31a333ce35856dac2c99d9d8376163dcf26b08c`.
+- A separate non-launching status poll reported `running`. Fold progress is signature-bound and
+  committed incrementally, so collection or an authenticated resume does not depend on this local
+  session.
+- **Decision:** collect and adjudicate the completed cross-fit against the unchanged held-head and
+  held-pair gate. This authorization covers no guided generation, synthesis, proposal-engine call or
+  candidate selection. A pass still requires separate authorization before any nonzero guidance.

@@ -15,6 +15,8 @@ from experiments._runtime.spec import ExperimentSpec
 from forge.core.hashing import PinError, resolve_pin, sha256_file, sha256_json
 from forge.core.io import read_json_object
 
+MODAL_CALL_RECEIPT_SCHEMA = "forge.modal_experiment_call.v1"
+
 
 def modal_volume_relative_path(path: Path, volume_root: Path) -> str:
     """Return a stable logical path even when Modal resolves a mounted volume symlink."""
@@ -35,6 +37,16 @@ def modal_run_staging_paths(local_run: Path) -> tuple[Path, Path]:
     staged_run = staging_root / local_run.name
     staged_run.mkdir()
     return staging_root, staged_run
+
+
+def modal_call_receipt_path(repo: Path, request_id: str) -> Path:
+    """Return the deterministic local receipt path for one detached request."""
+
+    if len(request_id) != 64 or any(
+        character not in "0123456789abcdef" for character in request_id
+    ):
+        raise BackendError(f"invalid Modal request id: {request_id!r}")
+    return repo.resolve() / "runs" / "_modal_calls" / f"{request_id}.json"
 
 
 def _config_dependency_uploads(repo: Path, config_path: Path) -> dict[str, Path]:
@@ -165,6 +177,7 @@ def modal_request_plan(
         "profile": profile,
         "replicate": replicate,
         "request_id": request_id,
+        "spec_sha256": str(sha256_file(spec_path)),
         "resource_envelope": {
             "cpus": max(resource.cpus for resource in resources),
             "gpu_type": next(iter(gpu_types), None),
@@ -194,6 +207,7 @@ def launch_modal(
     replicate: int,
     device: str | None,
     resume: bool,
+    detached: bool = False,
 ) -> int:
     """Invoke the one generic Modal program; never fall back to local execution."""
 
@@ -209,24 +223,73 @@ def launch_modal(
         "-m",
         "modal",
         "run",
-        str(repo / "experiments" / "_runtime" / "modal_app.py"),
-        "--experiment",
-        str(spec_path.relative_to(repo)),
-        "--profile",
-        profile,
-        "--replicate",
-        str(replicate),
     ]
+    if detached:
+        command.append("--detach")
+    command.extend(
+        [
+            str(repo / "experiments" / "_runtime" / "modal_app.py"),
+            "--experiment",
+            str(spec_path.relative_to(repo)),
+            "--profile",
+            profile,
+            "--replicate",
+            str(replicate),
+        ]
+    )
     if device is not None:
         command.extend(("--device", device))
     if resume:
         command.append("--resume")
+    if detached:
+        command.append("--launch-only")
+    completed = subprocess.run(command, cwd=repo, check=False)
+    return int(completed.returncode)
+
+
+def inspect_or_collect_modal(repo: Path, receipt_path: Path, *, status_only: bool) -> int:
+    """Poll or collect an already detached call without submitting new compute."""
+
+    repo = repo.resolve()
+    receipt_path = receipt_path.resolve()
+    try:
+        relative = receipt_path.relative_to(repo)
+    except ValueError as error:
+        raise BackendError(
+            f"Modal call receipt is outside the repository: {receipt_path}"
+        ) from error
+    receipt = read_json_object(
+        receipt_path,
+        error=BackendError,
+        label="Modal experiment call receipt",
+    )
+    if (
+        receipt.get("schema_version") != MODAL_CALL_RECEIPT_SCHEMA
+        or receipt.get("status") != "launched"
+        or not isinstance(receipt.get("function_call_id"), str)
+        or not isinstance(receipt.get("request_id"), str)
+    ):
+        raise BackendError(f"invalid Modal experiment call receipt: {receipt_path}")
+    command = [
+        sys.executable,
+        "-m",
+        "modal",
+        "run",
+        str(repo / "experiments" / "_runtime" / "modal_app.py"),
+        "--call-receipt",
+        str(relative),
+    ]
+    if status_only:
+        command.append("--status-only")
     completed = subprocess.run(command, cwd=repo, check=False)
     return int(completed.returncode)
 
 
 __all__ = [
+    "MODAL_CALL_RECEIPT_SCHEMA",
+    "inspect_or_collect_modal",
     "launch_modal",
+    "modal_call_receipt_path",
     "modal_request_plan",
     "modal_run_staging_paths",
     "modal_upload_paths",

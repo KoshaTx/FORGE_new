@@ -143,7 +143,7 @@ assemble their designs. We introduce FORGE (\textbf{F}low-matched, \textbf{O}pen
 generation to a fixed reactant catalogue. Each reaction program specifies precursor roles,
 reaction-core positions, transformation order and coarse molecular architecture, while FORGE
 generates the complete molecule at atom-and-bond resolution without component identifiers, stored
-precursor graphs or fragment tokens. We evaluated one shared model on an AGILE-type
+precursor graphs or fragment tokens. We evaluated one shared model on an 
 amine--aldehyde--isocyanide Ugi 3-CR, repeated aza-Michael addition and repeated reductive amination.
 Across three independent seeds, verified exact level-one (exact-L1) yields were
 \ForgeTableOneConditionedUgiYield\%, \ForgeTableOneConditionedBLYield\% and
@@ -203,9 +203,8 @@ achieves verified exact-L1 yields of \ForgeTableOneConditionedUgiYield\%,
 \ForgeTableOneConditionedBLYield\%, and \ForgeTableOneConditionedLXYield\%, respectively, exceeding
 matched whole-molecule generation followed by post-hoc verification in every program. FORGE also
 produces verified exact assemblies with recovered precursor constitutions absent from the
-corresponding training catalogues. These experiments evaluate shared learning across specified
-reaction programs and do not claim zero-shot support for arbitrary chemistry or strong product-level
-catalogue escape.
+corresponding training catalogues. These experiments evaluate generalization across specified
+reaction programs and do not claim zero-shot support for arbitrary chemistry.
 
 We summarize our main contributions as follows.
 \begin{itemize}
