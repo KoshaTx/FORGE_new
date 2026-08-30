@@ -1,0 +1,189 @@
+{
+  "schema_version": "forge.ugi_hela_potency_adapter_config.v1",
+  "status": "implementation_frozen_nonexecuting",
+  "task": "Qualify a frozen-backbone Ugi Transformer adapter for percentile-conditioned HeLa mTP generation before any nonzero guided sampling",
+  "seed": 20260829,
+  "authorization": {
+    "adapter_fit_execution_authorized": false,
+    "nonzero_generation_authorized": false,
+    "synthesis_calls_authorized": false,
+    "proposal_calls_authorized": false,
+    "candidate_selection_authorized": false
+  },
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "potency_observations": {
+      "path": "results/phase1/potency_study_corpus_v2/observations.csv.gz",
+      "sha256": "7773f88c64e1793b9b6a5d188b8805d48d0542749554e2aba43af7c157d6886f"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "oracle_split_assignments": {
+      "path": "results/m0_07/oracle_split_assignments.csv.gz",
+      "sha256": "7d988dfb59620cd121c88840858f6f9c42a7cb8d3c511bb83b8e3065d8fb86a2"
+    }
+  },
+  "base": {
+    "arm_id": "shared_bias_program_role_source",
+    "checkpoint_step": 9143,
+    "backbone_policy": "immutable",
+    "output_head_policy": "immutable"
+  },
+  "condition": {
+    "policy_id": "ugi_hela_mtp_percentile_adapter_v1",
+    "endpoint_id": "expt_Hela",
+    "source_endpoint": "LNPDB::YX_2024::HeLa",
+    "target_quantile": 0.9,
+    "retention_quantile": 0.5,
+    "quantile_support": [
+      0.0,
+      1.0
+    ],
+    "out_of_support": "fail"
+  },
+  "adapter": {
+    "placement": "every_transformer_layer_after_ffn_normalization",
+    "bottleneck_dim": 16,
+    "condition_dim": 32,
+    "zero_initialized_terminal_projection": true,
+    "conditions": [
+      "target_quantile",
+      "flow_time"
+    ],
+    "null_condition_bypasses_adapter": true
+  },
+  "training": {
+    "optimizer": "adamw",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "retention_weight": 1.0,
+    "label_sampling": "equal_training_fold_mtp_quartile_mass",
+    "retention_sampling": "ugi_train_fold_source_weighted",
+    "label_target": "training_fold_mid_ecdf_quantile",
+    "pcgrad": false,
+    "base_model_mode": "eval_with_gradients_only_through_adapter"
+  },
+  "validation": {
+    "schemes": [
+      "held_head_5fold",
+      "held_aldehyde_isocyanide_pair_5fold"
+    ],
+    "time_bins": [
+      {
+        "name": "early",
+        "interval": [
+          0.0,
+          0.3333333333333333
+        ],
+        "evaluation_time": 0.16666666666666666
+      },
+      {
+        "name": "middle",
+        "interval": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "evaluation_time": 0.5
+      },
+      {
+        "name": "late",
+        "interval": [
+          0.6666666666666666,
+          1.0
+        ],
+        "evaluation_time": 0.8333333333333334
+      }
+    ],
+    "eligible_time_bins": [
+      "middle",
+      "late"
+    ],
+    "score": "null_denoising_nll_minus_q90_denoising_nll_on_identical_corruption",
+    "high_potency_label": "held_value_at_or_above_training_fold_ecdf_q75",
+    "morphology_residual": "train_only_linear_fit_over_role_local_morphology",
+    "shuffled_control": "deterministic_train_label_permutation",
+    "clustered_bootstrap": {
+      "replicates": 2000,
+      "seed": 20260829,
+      "unit": "held_component_group_within_fold"
+    },
+    "gates": {
+      "minimum_auroc": 0.6,
+      "minimum_residual_spearman": 0.15,
+      "minimum_shuffle_auroc_gap": 0.05
+    }
+  },
+  "smoke": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 2,
+    "optimizer_steps": 2,
+    "labelled_batch_size": 4,
+    "retention_batch_size": 4,
+    "evaluation_batch_size": 4
+  },
+  "full": {
+    "device": "cuda",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 4,
+    "optimizer_steps": 500,
+    "labelled_batch_size": 64,
+    "retention_batch_size": 64,
+    "evaluation_batch_size": 64
+  },
+  "generation_milestone": {
+    "status": "specified_but_not_authorized",
+    "development_attempts_per_arm": 1024,
+    "production_attempts_per_seed_per_arm": 3072,
+    "production_base_seeds": 3,
+    "sample_steps": 32,
+    "repair_or_retry": false,
+    "arms": [
+      "null_condition",
+      "potency_q90",
+      "shuffled_label_q90",
+      "posthoc_ranking_of_null_samples"
+    ],
+    "oracle_budget": "minimum_applicability_eligible_count_across_arms_per_pattern",
+    "oracle_order": "potency_blind_deterministic_hash",
+    "primary_metric": "unique_conservative_high_verified_exact_l1_products_per_1000_attempts",
+    "promotion_gates": {
+      "minimum_relative_gain": 0.2,
+      "minimum_absolute_gain_per_1000": 5.0,
+      "paired_program_bootstrap_lower_strictly_positive": true,
+      "maximum_validity_drop": 0.05,
+      "maximum_exact_l1_drop": 0.05,
+      "minimum_distinct_fraction": 0.9,
+      "minimum_effective_count_fraction": 0.8,
+      "fixed_state_failures": 0,
+      "support_overflows": 0
+    }
+  },
+  "reporting": {
+    "three_seed_summary": "mean_sample_sd_and_seed_range",
+    "three_seed_bootstrap_confidence_interval": false,
+    "attempt_counts_reported": true,
+    "biological_activity_claim": false,
+    "measured_potency_claim": false
+  }
+}

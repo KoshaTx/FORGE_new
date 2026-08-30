@@ -61,6 +61,8 @@ def build_synthesis_program_flow(
                 model_config.get("role_morphology_conditioning", False)
             ),
             specialist_adapter_dim=int(model_config.get("specialist_adapter_dim", 0)),
+            potency_adapter_dim=int(model_config.get("potency_adapter_dim", 0)),
+            potency_condition_dim=int(model_config.get("potency_condition_dim", 32)),
             maximum_children=int(model_config.get("maximum_children", 0)),
             program_routed_output_heads=bool(
                 model_config.get("program_routed_output_heads", False)
@@ -154,16 +156,28 @@ def synthesis_program_forward(
     bond_marginal: Any,
     t: Any,
     generator: Any,
+    potency_condition: Any | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Noise learnable states and run the shared sparse flow once."""
 
     noisy = noise_synthesis_program_batch(clean, node_marginal, bond_marginal, t, generator)
-    predictions = _synthesis_program_predict(model, clean, noisy, t)
+    predictions = _synthesis_program_predict(
+        model,
+        clean,
+        noisy,
+        t,
+        potency_condition=potency_condition,
+    )
     return predictions, noisy
 
 
 def _synthesis_program_predict(
-    model: Any, clean: Mapping[str, Any], state: Mapping[str, Any], t: Any
+    model: Any,
+    clean: Mapping[str, Any],
+    state: Mapping[str, Any],
+    t: Any,
+    *,
+    potency_condition: Any | None = None,
 ) -> dict[str, Any]:
     return model(
         nodes=state["nodes"],
@@ -185,6 +199,7 @@ def _synthesis_program_predict(
         component_position_states=clean["component_position_states"],
         component_instance_states=clean["component_instance_states"],
         role_morphology_states=clean["role_morphology_states"],
+        potency_condition=potency_condition,
     )
 
 
@@ -193,13 +208,20 @@ def synthesis_program_topology_conditioned_forward(
     clean: Mapping[str, Any],
     noisy: Mapping[str, Any],
     t: Any,
+    potency_condition: Any | None = None,
 ) -> dict[str, Any]:
     """Predict chemistry from the same corruption after replacing topology with its target."""
 
     conditioned = dict(noisy)
     for field in ("parents", "closure_left", "closure_right"):
         conditioned[field] = clean[field]
-    return _synthesis_program_predict(model, clean, conditioned, t)
+    return _synthesis_program_predict(
+        model,
+        clean,
+        conditioned,
+        t,
+        potency_condition=potency_condition,
+    )
 
 
 def synthesis_program_paired_topology_forward(
@@ -209,6 +231,7 @@ def synthesis_program_paired_topology_forward(
     bond_marginal: Any,
     t: Any,
     generator: Any,
+    potency_condition: Any | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Run noisy- and target-topology predictions in one accelerator-sized model call.
 
@@ -235,11 +258,25 @@ def synthesis_program_paired_topology_forward(
     paired_state = {
         key: torch.cat((value, conditioned[key]), dim=0) for key, value in noisy.items()
     }
+    paired_condition = potency_condition
+    if potency_condition is not None:
+        from forge.model.potency_conditioning import PotencyConditionBatch
+
+        if isinstance(potency_condition, PotencyConditionBatch):
+            paired_condition = PotencyConditionBatch(
+                endpoint_id=potency_condition.endpoint_id,
+                target_quantiles=torch.cat(
+                    (potency_condition.target_quantiles, potency_condition.target_quantiles),
+                    dim=0,
+                ),
+                policy_id=potency_condition.policy_id,
+            )
     paired_predictions = _synthesis_program_predict(
         model,
         paired_clean,
         paired_state,
         torch.cat((t, t), dim=0),
+        potency_condition=paired_condition,
     )
     predictions: dict[str, Any] = {}
     topology_predictions: dict[str, Any] = {}

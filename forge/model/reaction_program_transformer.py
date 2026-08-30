@@ -7,6 +7,12 @@ from collections.abc import Mapping
 from typing import Any, cast
 
 from forge.model.phase1_flow import SparseWholeLipidFlow, _gather_training_nodes
+from forge.model.potency_conditioning import (
+    PotencyAdapterPolicy,
+    PotencyCondition,
+    PotencyConditionBatch,
+    PotencyConditioningError,
+)
 from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_flow import (
     synthesis_program_chemistry_loss,
@@ -341,6 +347,39 @@ if nn is not None:
         def forward(self, hidden: Any) -> Any:
             return self.adapter(hidden)
 
+    class _ZeroInitializedPotencyAdapter(nn.Module):
+        """Percentile- and time-conditioned residual that begins as an exact zero map."""
+
+        def __init__(self, hidden_dim: int, adapter_dim: int, condition_dim: int) -> None:
+            super().__init__()
+            if adapter_dim < 1 or condition_dim < 1:
+                raise ReactionProgramTransformerError("potency adapter support is invalid")
+            self.hidden_input = nn.Linear(hidden_dim, adapter_dim)
+            self.condition = nn.Sequential(
+                nn.Linear(6, condition_dim),
+                nn.GELU(),
+                nn.Linear(condition_dim, adapter_dim),
+            )
+            self.output = nn.Linear(adapter_dim, hidden_dim)
+            nn.init.zeros_(self.output.weight)
+            nn.init.zeros_(self.output.bias)
+
+        def forward(self, hidden: Any, quantiles: Any, t: Any, active: Any) -> Any:
+            features = torch.stack(
+                (
+                    quantiles,
+                    torch.sin(math.pi * quantiles),
+                    torch.cos(math.pi * quantiles),
+                    t,
+                    torch.sin(math.pi * t),
+                    torch.cos(math.pi * t),
+                ),
+                dim=-1,
+            )
+            condition = self.condition(features)[:, None, :]
+            update = self.output(functional.gelu(self.hidden_input(hidden) + condition))
+            return update * active[:, None, None]
+
     class ReactionProgramMemory:
         """Encoded program semantics plus every projection of them that a batch can reuse.
 
@@ -401,6 +440,8 @@ if nn is not None:
             routed_adapters: bool,
             role_isolated_attention: bool,
             specialist_adapter_dim: int = 0,
+            potency_adapter_dim: int = 0,
+            potency_condition_dim: int = 32,
         ) -> None:
             super().__init__()
             self.self_norm = nn.LayerNorm(hidden_dim)
@@ -430,6 +471,15 @@ if nn is not None:
                 if specialist_adapter_dim > 0
                 else None
             )
+            self.potency_adapter = (
+                _ZeroInitializedPotencyAdapter(
+                    hidden_dim,
+                    potency_adapter_dim,
+                    potency_condition_dim,
+                )
+                if potency_adapter_dim > 0
+                else None
+            )
             self.dropout = nn.Dropout(dropout)
 
         def forward(
@@ -444,6 +494,9 @@ if nn is not None:
             role_states: Any,
             program_memory: Any | None = None,
             graph_bias_is_masked: bool = False,
+            potency_quantiles: Any | None = None,
+            potency_active: Any | None = None,
+            flow_time: Any | None = None,
         ) -> tuple[Any, Any]:
             normalized = self.self_norm(hidden)
             if self.role_isolated_attention:
@@ -514,6 +567,17 @@ if nn is not None:
             update = self.ffn(normalized) + routed
             if self.specialist_adapter is not None:
                 update = update + self.specialist_adapter(normalized)
+            if self.potency_adapter is not None and potency_quantiles is not None:
+                if potency_active is None or flow_time is None:
+                    raise ReactionProgramTransformerError(
+                        "potency adapter requires quantiles, activity mask and flow time"
+                    )
+                update = update + self.potency_adapter(
+                    normalized,
+                    potency_quantiles,
+                    flow_time,
+                    potency_active,
+                )
             hidden = hidden + self.dropout(update)
             return hidden * node_mask[:, :, None], weights
 
@@ -541,6 +605,8 @@ if nn is not None:
             repeat_group_conditioning: bool = False,
             role_morphology_conditioning: bool = False,
             specialist_adapter_dim: int = 0,
+            potency_adapter_dim: int = 0,
+            potency_condition_dim: int = 32,
             maximum_children: int = 0,
             program_routed_output_heads: bool = False,
         ) -> None:
@@ -560,12 +626,17 @@ if nn is not None:
             self.repeat_group_conditioning = repeat_group_conditioning
             self.role_morphology_conditioning = role_morphology_conditioning
             self.specialist_adapter_dim = specialist_adapter_dim
+            self.potency_adapter_dim = potency_adapter_dim
+            self.potency_condition_dim = potency_condition_dim
+            self.potency_policy: PotencyAdapterPolicy | None = None
             self.maximum_children = maximum_children
             self.program_routed_output_heads = program_routed_output_heads
             if specialist_adapter_dim < 0:
                 raise ReactionProgramTransformerError(
                     "specialist adapter dimension cannot be negative"
                 )
+            if potency_adapter_dim < 0 or potency_condition_dim < 1:
+                raise ReactionProgramTransformerError("potency adapter dimensions are invalid")
             if maximum_children < 0:
                 raise ReactionProgramTransformerError(
                     "maximum child-count support cannot be negative"
@@ -610,6 +681,8 @@ if nn is not None:
                         routed_adapters=routed_adapters,
                         role_isolated_attention=role_isolated_attention,
                         specialist_adapter_dim=specialist_adapter_dim,
+                        potency_adapter_dim=potency_adapter_dim,
+                        potency_condition_dim=potency_condition_dim,
                     )
                     for index in range(layers)
                 )
@@ -631,6 +704,8 @@ if nn is not None:
                             routed_adapters=routed_adapters,
                             role_isolated_attention=True,
                             specialist_adapter_dim=specialist_adapter_dim,
+                            potency_adapter_dim=potency_adapter_dim,
+                            potency_condition_dim=potency_condition_dim,
                         )
                         for index in range(layers)
                     )
@@ -654,6 +729,68 @@ if nn is not None:
                 if program_routed_output_heads
                 else None
             )
+
+        def configure_potency_policy(self, policy: PotencyAdapterPolicy) -> None:
+            """Attach the exact support policy carried by a potency-adapter overlay."""
+
+            if self.potency_adapter_dim < 1:
+                raise ReactionProgramTransformerError("model has no potency adapters")
+            self.potency_policy = policy
+
+        def _bind_potency_condition(
+            self,
+            condition: PotencyCondition | PotencyConditionBatch | None,
+            *,
+            t: Any,
+            program_states: Any,
+        ) -> tuple[Any | None, Any | None]:
+            if condition is None:
+                return None, None
+            policy = self.potency_policy
+            if self.potency_adapter_dim < 1 or policy is None:
+                raise ReactionProgramTransformerError(
+                    "potency conditioning requires an authenticated adapter policy"
+                )
+            if (
+                condition.endpoint_id != policy.endpoint_id
+                or condition.policy_id != policy.policy_id
+            ):
+                raise ReactionProgramTransformerError("potency condition does not match its policy")
+            try:
+                program_index = self.vocabulary.program_states.index(policy.program_id)
+            except ValueError as error:
+                raise ReactionProgramTransformerError(
+                    "potency policy program is absent from the model vocabulary"
+                ) from error
+            if torch.any(program_states != program_index):
+                raise ReactionProgramTransformerError(
+                    "potency conditioning is admitted only for its declared reaction program"
+                )
+            if isinstance(condition, PotencyCondition):
+                quantiles = t.new_full((t.shape[0],), condition.target_quantile)
+            elif isinstance(condition, PotencyConditionBatch):
+                quantiles = condition.target_quantiles
+                if not hasattr(quantiles, "shape") or quantiles.shape != t.shape:
+                    raise ReactionProgramTransformerError(
+                        "potency target batch shape differs from flow-time batch"
+                    )
+                quantiles = quantiles.to(device=t.device, dtype=t.dtype)
+            else:  # pragma: no cover - guarded by the public type contract
+                raise ReactionProgramTransformerError("unsupported potency condition type")
+            if (
+                not bool(torch.isfinite(quantiles).all())
+                or bool(torch.any(quantiles < policy.minimum_quantile))
+                or bool(torch.any(quantiles > policy.maximum_quantile))
+            ):
+                raise ReactionProgramTransformerError(
+                    "potency target lies outside the authenticated quantile support"
+                )
+            active = torch.zeros_like(t, dtype=torch.bool)
+            for lower, upper in policy.active_time_intervals:
+                # The last interval includes t=1 so terminal prediction can be conditioned.
+                within = (t >= lower) & (t <= upper if upper == 1.0 else t < upper)
+                active |= within
+            return quantiles, active.to(dtype=t.dtype)
 
         def _graph_bias(
             self,
@@ -772,6 +909,7 @@ if nn is not None:
             component_instance_states: Any | None = None,
             role_morphology_states: Any | None = None,
             program_memory: Any | None = None,
+            potency_condition: PotencyCondition | PotencyConditionBatch | None = None,
         ) -> dict[str, Any]:
             del component_instance_states  # Loss-only coordinate; never a learned identity token.
             if program_memory is None:
@@ -803,6 +941,14 @@ if nn is not None:
             program_tokens = program_memory.tokens
             program_mask = program_memory.mask
             program_summary = program_memory.summary
+            try:
+                potency_quantiles, potency_active = self._bind_potency_condition(
+                    potency_condition,
+                    t=t,
+                    program_states=program_states,
+                )
+            except PotencyConditioningError as error:
+                raise ReactionProgramTransformerError(str(error)) from error
             hidden = (
                 self.state.node_embedding(nodes) + self.state.time_embedding(t[:, None])[:, None]
             )
@@ -833,6 +979,9 @@ if nn is not None:
                         role_states=role_states,
                         program_memory=program_memory,
                         graph_bias_is_masked=True,
+                        potency_quantiles=potency_quantiles,
+                        potency_active=potency_active,
+                        flow_time=t,
                     )
                     expert_weights.append(weights)
             else:
@@ -852,6 +1001,9 @@ if nn is not None:
                             graph_bias=graph_bias,
                             role_states=role_states,
                             program_memory=program_memory,
+                            potency_quantiles=potency_quantiles,
+                            potency_active=potency_active,
+                            flow_time=t,
                         )
                         hidden = torch.where(role_mask[:, :, None], candidate, hidden)
                         layer_weights.append(weights)

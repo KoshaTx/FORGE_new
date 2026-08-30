@@ -14,6 +14,7 @@ from forge.core.io import read_json_object
 from forge.flow import rstar_step
 from forge.model.defog_feasibility import AtomState, _model_state_sha256, graph_to_molecule
 from forge.model.local_chemistry_support import LocalChemistrySupport, tree_path_indices
+from forge.model.potency_conditioning import PotencyCondition
 from forge.model.reaction_core_saturation import (
     BoundReactionCoreSaturation,
     ReactionCoreSaturationPolicy,
@@ -1152,6 +1153,7 @@ def sample_synthesis_program_products(
     local_chemistry_support: LocalChemistrySupport | None = None,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
     reaction_core_saturation_policy: ReactionCoreSaturationPolicy | None = None,
+    potency_condition: Any | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate from semantic layouts while exposing only Ugi adapter-fixed graph states."""
 
@@ -1164,6 +1166,10 @@ def sample_synthesis_program_products(
         or terminal_decode_policy not in SUPPORTED_TERMINAL_DECODE_POLICIES
     ):
         raise SynthesisProgramSamplingError("invalid shared synthesis-program sampling request")
+    if potency_condition is not None and not isinstance(potency_condition, PotencyCondition):
+        raise SynthesisProgramSamplingError(
+            "sampling accepts only one scalar potency condition for the complete batch"
+        )
     if (terminal_decode_policy == LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY) != (
         local_chemistry_support is not None
     ):
@@ -1241,6 +1247,7 @@ def sample_synthesis_program_products(
                     closure_right=state["closure_right"],
                     closure_bonds=state["closure_bonds"],
                     t=t,
+                    potency_condition=potency_condition,
                     **conditioning,
                 )
                 state["nodes"] = rstar_step(
@@ -1296,6 +1303,7 @@ def sample_synthesis_program_products(
                 closure_right=state["closure_right"],
                 closure_bonds=state["closure_bonds"],
                 t=terminal_time,
+                potency_condition=potency_condition,
                 **conditioning,
             )
             topology_reasons: list[str | None] = [None] * len(local)
@@ -1344,6 +1352,7 @@ def sample_synthesis_program_products(
                     closure_right=topology_state["closure_right"],
                     closure_bonds=topology_state["closure_bonds"],
                     t=terminal_time,
+                    potency_condition=potency_condition,
                     **conditioning,
                 )
                 # The exact topology is already decoded.  One-hot pointer scores let the common
@@ -1491,6 +1500,15 @@ def sample_synthesis_program_products(
         "exact_tensor": sum(bool(row["exact_tensor"]) for row in outputs),
         "fixed_state_failures": fixed_failures,
         "terminal_decode_policy": terminal_decode_policy,
+        "potency_condition": (
+            None
+            if potency_condition is None
+            else {
+                "endpoint_id": potency_condition.endpoint_id,
+                "target_quantile": potency_condition.target_quantile,
+                "policy_id": potency_condition.policy_id,
+            }
+        ),
         "strict_constraint_abstentions": sum(strict_abstentions.values()),
         "strict_constraint_abstention_reasons": dict(sorted(strict_abstentions.items())),
         "local_chemistry_policy_applied": local_chemistry_support is not None,

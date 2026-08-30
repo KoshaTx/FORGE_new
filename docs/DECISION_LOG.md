@@ -10283,3 +10283,22 @@ preserved unchanged.
   2026 running-head string. The format and 50 MB gates pass, but the short-paper body still reaches
   page 8 and therefore remains above GEM's five-page body limit; template compliance does not resolve
   the separate condensation requirement.
+## 2026-08-29 — Implement bounded Ugi HeLa percentile-adapter diagnostic; keep execution closed
+
+- Implemented a zero-initialized per-layer Transformer adapter conditioned on HeLa target percentile
+  and flow time. The authenticated shared generator and output heads remain frozen, and the null
+  condition bypasses the adapter exactly.
+- Frozen component-disjoint signal gates over held heads and held aldehyde/isocyanide pairs, including
+  a deterministic shuffled-label control and a train-only morphology-residual check.
+- Frozen the matched null, `q=0.9`, shuffled-label, and post-hoc generation comparison and its
+  per-attempt promotion rule in
+  `configs/bio/phase1_ugi_hela_potency_adapter_v1.json`.
+- Verified the local CPU smoke path over the 1,100 single-compound LNPDB `YX_2024::HeLa` records.
+  The verified experiment-run ID is
+  `dc6b70fce9af03cca70e9bcdae6bf7cd9dde6a305668b001c2e1b7e6219b3bd7`; its result and
+  deterministic adapter-bundle SHA-256 values are
+  `a197b732aebf15cda97e8dc287cf3b0d4d4d39191978e581736335e701988b6a` and
+  `6ec6246dc15254c918d0d6fc05bebb6527abe7acc22a2cf0e1725a806b53b623`. This is an
+  engineering result only; two optimizer updates and one fold are not scientific evidence.
+- Full adapter fitting and all nonzero potency-conditioned generation remain unauthorized. No oracle,
+  synthesis, proposal-engine, candidate-selection, or prospective action was run.

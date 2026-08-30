@@ -162,6 +162,9 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/external_ugi_common_export.json"
     ),
     "phase1-potency-study-corpus": "experiments/phase1/hela_potency/data.json",
+    "phase1-ugi-hela-potency-adapter-smoke": (
+        "experiments/phase1/hela_potency/potency_adapter_smoke.json"
+    ),
     "phase1-shared-synthesis-program-representation": (
         "experiments/phase1/multireaction/shared_representation.json"
     ),
