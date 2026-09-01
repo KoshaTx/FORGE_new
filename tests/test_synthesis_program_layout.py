@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import replace
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -9,6 +11,7 @@ from forge.model.synthesis_program_layout import (
     _compile_program_distribution,
     _RecordSummary,
 )
+from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
 
 UGI_BLOCKS = (
     (3, 2, ((10, 1),)),
@@ -54,7 +57,7 @@ def _summary(*, amine_size: int, fixed_signature: tuple[tuple[object, ...], ...]
             ),
             (4, (0, 0, 0, 0)),
             (5, (4, 0, 0, 1)),
-            (6, (6, 0, 0, 1)),
+            (6, (6, 1, 0, 1)),
         ),
     )
 
@@ -71,6 +74,15 @@ def _prior() -> SynthesisProgramLayoutPrior:
             "isocyanide_tail",
             "oxoester_aldehyde_body_tail",
         ),
+        role_to_index={
+            "unassigned": 0,
+            "aldehyde_tail": 1,
+            "alkyl_tail": 2,
+            "amine_head": 3,
+            "assembly_introduced": 4,
+            "isocyanide_tail": 5,
+            "oxoester_aldehyde_body_tail": 6,
+        },
         program_to_index={"ugi_3cr_agile": 1},
     )
     prior.maximum_heavy_atoms = 194
@@ -136,6 +148,101 @@ def test_role_morphology_layout_broadcasts_the_full_coarse_program() -> None:
             )
             == record.graph.closure_count
         )
+
+
+def test_ugi_chemotype_conditions_role_sizes_without_component_identity() -> None:
+    policy = UgiEsterChemotypePolicy(
+        reaction_id="ugi_3cr_agile",
+        amine_role="amine_head",
+        aldehyde_role="oxoester_aldehyde_body_tail",
+        isocyanide_role="isocyanide_tail",
+        registry_path=Path("qualified.json"),
+        registry_sha256="registry-sha",
+        training_assignments_path=Path("assignments.csv.gz"),
+        training_assignments_sha256="assignments-sha",
+        minimum_role_exterior_atoms=(
+            ("amine_head", 2),
+            ("oxoester_aldehyde_body_tail", 5),
+            ("isocyanide_tail", 4),
+        ),
+        maximum_role_exterior_atoms=(
+            ("amine_head", 2),
+            ("oxoester_aldehyde_body_tail", 8),
+            ("isocyanide_tail", 6),
+        ),
+        minimum_ester_side_carbons=1,
+        minimum_ester_long_side_carbons=2,
+        minimum_amine_exterior_nitrogens=1,
+        maximum_amine_exterior_nitrogens=1,
+        morphology_quantile=0.25,
+    )
+    records = _prior().sample(
+        "ugi_3cr_agile",
+        sample_count=64,
+        seed=29,
+        role_morphology_conditioning=True,
+        ugi_ester_chemotype_policy=policy,
+    )
+
+    for record in records:
+        assert record.role_morphology_states is not None
+        for role, minimum in policy.minimum_role_exterior_atoms:
+            role_state = _prior().vocabulary.role_to_index[role]
+            observed = record.role_morphology_states[record.role_states == role_state][0]
+            assert int(observed[0]) - 1 >= minimum
+        aldehyde_state = _prior().vocabulary.role_to_index[policy.aldehyde_role]
+        aldehyde = record.role_morphology_states[record.role_states == aldehyde_state][0] - 1
+        assert tuple(int(value) for value in aldehyde[1:]) == (1, 0, 1)
+
+
+def test_measured_ugi_joint_prior_retains_only_count_programs() -> None:
+    policy = UgiEsterChemotypePolicy(
+        reaction_id="ugi_3cr_agile",
+        amine_role="amine_head",
+        aldehyde_role="oxoester_aldehyde_body_tail",
+        isocyanide_role="isocyanide_tail",
+        registry_path=Path("qualified.json"),
+        registry_sha256="registry-sha",
+        training_assignments_path=Path("assignments.csv.gz"),
+        training_assignments_sha256="assignments-sha",
+        minimum_role_exterior_atoms=(
+            ("amine_head", 1),
+            ("oxoester_aldehyde_body_tail", 6),
+            ("isocyanide_tail", 4),
+        ),
+        maximum_role_exterior_atoms=(
+            ("amine_head", 2),
+            ("oxoester_aldehyde_body_tail", 6),
+            ("isocyanide_tail", 4),
+        ),
+        minimum_ester_side_carbons=1,
+        minimum_ester_long_side_carbons=2,
+        minimum_amine_exterior_nitrogens=1,
+        maximum_amine_exterior_nitrogens=1,
+        morphology_quantile=0.25,
+        measured_training_product_ids=("measured-a", "measured-b"),
+    )
+    summaries = (
+        replace(
+            _summary(amine_size=2, fixed_signature=ONE_HEAD_ATTACHMENT),
+            record_id="measured-a",
+        ),
+        replace(
+            _summary(amine_size=3, fixed_signature=TWO_HEAD_ATTACHMENTS),
+            record_id="measured-b",
+        ),
+        replace(
+            _summary(amine_size=2, fixed_signature=ONE_HEAD_ATTACHMENT),
+            record_id="virtual-library-row",
+        ),
+    )
+
+    support = _prior()._compile_ugi_measured_joint_layout_support(summaries, policy=policy)
+
+    assert len(support.values) == 2
+    assert np.isclose(support.probabilities.sum(), 1.0)
+    assert "measured-a" not in repr(support.values)
+    assert "measured-b" not in repr(support.values)
 
 
 def test_repeated_components_retain_their_own_reaction_core_signature() -> None:

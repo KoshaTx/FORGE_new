@@ -1,0 +1,57 @@
+{
+  "schema_version": "forge.ugi_matched_lipid_realism_config.v1",
+  "scientific_question": "Per requested Ugi generation attempt, does the frozen method produce diverse complete graphs near source-adjudicated measured held-out Ugi lipids?",
+  "inputs": {
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "reference": {
+    "kind": "source_adjudicated_measured_ugi",
+    "evaluation_fold": "heldout"
+  },
+  "policy": {
+    "allowed_elements": ["C", "N", "O", "P", "S"],
+    "maximum_heavy_atoms": 194,
+    "train_reference_limit": 480,
+    "heldout_reference_limit": 588,
+    "selection_seed": 20260831,
+    "manifold_neighbors": 5,
+    "fingerprint_radius": 2,
+    "fingerprint_bits": 2048,
+    "distance_chunk_size": 128,
+    "internal_diversity_limit": 1024,
+    "c2st_folds": 5,
+    "c2st_minimum_rows_per_class": 50,
+    "c2st_maximum_rows_per_class": 480,
+    "c2st_max_iterations": 200,
+    "c2st_seed": 20260831
+  },
+  "metrics": {
+    "primary": [
+      "fingerprint_manifold_precision_per_requested_attempt",
+      "fingerprint_manifold_coverage",
+      "descriptor_manifold_precision_per_requested_attempt",
+      "descriptor_manifold_coverage",
+      "grouped_classifier_two_sample_auc"
+    ],
+    "secondary": [
+      "connected_fraction_per_attempt",
+      "effective_molecule_count",
+      "mean_pairwise_ecfp4_distance_among_unique",
+      "nearest_reference_tanimoto",
+      "normalized_descriptor_wasserstein"
+    ],
+    "attempt_denominator_includes_invalid_failed_duplicate_and_out_of_support": true,
+    "fingerprint_and_descriptor_manifolds_reported_separately": true,
+    "no_result_selected_thresholds": true,
+    "qed_excluded": true
+  },
+  "nonclaims": [
+    "Held-out Ugi structural proximity is not ionization, formulation, delivery or biological activity.",
+    "Manifold membership is not proof that a molecule is synthesizable.",
+    "Virtual Ugi products are not used as structural-realism reference molecules.",
+    "This assessment performs no route, oracle, repair, retry or candidate-selection calls."
+  ]
+}

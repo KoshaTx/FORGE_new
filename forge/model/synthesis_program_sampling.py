@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Mapping, Sequence
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -37,11 +38,16 @@ from forge.model.sparse_topology_feasibility import (
 from forge.model.synthesis_program_graph import SynthesisProgramGraphRecord
 from forge.model.synthesis_program_training import build_synthesis_program_flow
 from forge.model.tensor_checkpoint import TensorCheckpointError, decode_tensor_state
+from forge.model.ugi_amine_semantic_program import UgiAmineSemanticTarget
+from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
+from forge.model.ugi_role_chemistry_prior import UgiRoleChemistryPrior
 from forge.model.ugi_transformer_topology import (
+    UGI_PROGRAM_ID,
     UgiTransformerTopologyError,
     UgiTransformerTopologyPolicy,
     decode_ugi_exact_topology,
 )
+from forge.potency.annotations import ROLE_NAMES
 
 try:
     import torch
@@ -49,6 +55,14 @@ except ModuleNotFoundError:  # pragma: no cover - optional training dependency
     torch = None  # type: ignore[assignment]
 
 CHECKPOINT_SCHEMA = "forge.synthesis_program_sparse_flow_checkpoint.v1"
+JOINT_SAMPLING_FACTORIZATION = "joint"
+LEARNED_TOPOLOGY_THEN_CHEMISTRY_FACTORIZATION = "learned_topology_then_chemistry"
+SUPPORTED_SAMPLING_FACTORIZATIONS = frozenset(
+    {
+        JOINT_SAMPLING_FACTORIZATION,
+        LEARNED_TOPOLOGY_THEN_CHEMISTRY_FACTORIZATION,
+    }
+)
 TERMINAL_DECODE_POLICIES = (
     "unconstrained_argmax",
     "strict_valence_topology_argmax",
@@ -57,12 +71,94 @@ LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY = "strict_local_chemistry_argmax"
 PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_program_topology_argmax"
 COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY = "strict_ugi_program_coupled_conditional"
 CORE_SATURATION_TERMINAL_DECODE_POLICY = "strict_reaction_core_saturation_argmax"
+ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY = (
+    "strict_role_local_closure_chemistry_core_saturation_argmax"
+)
+UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY = (
+    "strict_ugi_topology_role_local_chemistry_core_saturation"
+)
+UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY = (
+    "strict_ugi_topology_role_local_chemistry_core_saturation_stochastic"
+)
+UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY = (
+    "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+)
+UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY = (
+    "strict_ugi_ester_topology_role_local_chemistry_core_saturation_stochastic"
+)
+UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
+)
+LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
+        ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
+)
+PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+        COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
+)
+PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        *PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES,
+        ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+    }
+)
+COMPONENT_CONFINED_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        *PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES,
+    }
+)
+CORE_SATURATION_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        CORE_SATURATION_TERMINAL_DECODE_POLICY,
+        ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
+)
 SUPPORTED_TERMINAL_DECODE_POLICIES = (
     *TERMINAL_DECODE_POLICIES,
     LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
     PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
     COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
     CORE_SATURATION_TERMINAL_DECODE_POLICY,
+    ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+    UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+    UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+    UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+)
+STOCHASTIC_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
+)
+UGI_ESTER_TERMINAL_DECODE_POLICIES = frozenset(
+    {
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    }
 )
 STRICT_TERMINAL_DECODE_POLICIES = frozenset(
     {
@@ -71,6 +167,11 @@ STRICT_TERMINAL_DECODE_POLICIES = frozenset(
         PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
         COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
         CORE_SATURATION_TERMINAL_DECODE_POLICY,
+        ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
     }
 )
 
@@ -318,6 +419,160 @@ def _initial_state(
     return _restore_fixed_states_in_place(state, layout)
 
 
+def _draw_source_categorical(
+    source: Any,
+    shape: tuple[int, int],
+    *,
+    generator: Any,
+) -> Any:
+    """Draw one categorical source state per requested coordinate."""
+
+    count = shape[0] * shape[1]
+    if count == 0:
+        return torch.zeros(shape, dtype=torch.long, device=source.device)
+    if source.ndim == 1:
+        probabilities = source[None].expand(count, -1)
+    elif source.ndim == 3 and tuple(source.shape[:2]) == shape:
+        probabilities = source.reshape(count, -1)
+    else:
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry source has incompatible support"
+        )
+    return torch.multinomial(probabilities, 1, generator=generator).reshape(shape)
+
+
+def _initial_topology_conditioned_chemistry_state(
+    topology_state: Mapping[str, Any],
+    layout: Mapping[str, Any],
+    node_source: Any,
+    parent_bond_source: Any,
+    closure_bond_source: Any,
+    active_examples: Any,
+    *,
+    generator: Any,
+) -> dict[str, Any]:
+    """Reset only variable chemistry while preserving one already constructed topology."""
+
+    state = {field: values.clone() for field, values in topology_state.items()}
+    example_mask = active_examples[:, None]
+    for field, source, mask_name in (
+        ("nodes", node_source, "atom_variable_mask"),
+        ("parent_bonds", parent_bond_source, "parent_bond_variable_mask"),
+        ("closure_bonds", closure_bond_source, "closure_bond_variable_mask"),
+    ):
+        drawn = _draw_source_categorical(
+            source,
+            tuple(state[field].shape),
+            generator=generator,
+        )
+        active = layout[mask_name] & example_mask
+        state[field][active] = drawn[active]
+    state["parent_bonds"][:, 0] = 0
+    return _restore_fixed_states_in_place(state, layout)
+
+
+def _topology_conditioned_chemistry_flow(
+    model: Any,
+    topology_state: Mapping[str, Any],
+    layout: Mapping[str, Any],
+    conditioning: Mapping[str, Any],
+    node_source: Any,
+    parent_bond_source: Any,
+    closure_bond_source: Any,
+    active_examples: Any,
+    *,
+    steps: int,
+    generator: Any,
+    potency_condition: Any | None,
+) -> tuple[dict[str, Any], list[Any]]:
+    """Denoise chemistry repeatedly while projecting onto one fixed sampled topology.
+
+    This is the topology-first factorization used by the native Ugi model: parents and closure
+    endpoints are constructed once, variable atom and bond states are redrawn from their declared
+    source, and the neural denoiser is refreshed before every chemistry-only R-star transition.
+    """
+
+    if steps < 2 or not bool(active_examples.any()):
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry flow requires at least two steps and one active row"
+        )
+    state = _initial_topology_conditioned_chemistry_state(
+        topology_state,
+        layout,
+        node_source,
+        parent_bond_source,
+        closure_bond_source,
+        active_examples,
+        generator=generator,
+    )
+    topology_fields = ("parents", "closure_left", "closure_right")
+    topology_snapshot = {field: state[field].clone() for field in topology_fields}
+    active = {
+        "nodes": layout["atom_variable_mask"] & active_examples[:, None],
+        "parent_bonds": layout["parent_bond_variable_mask"] & active_examples[:, None],
+        "closure_bonds": layout["closure_bond_variable_mask"] & active_examples[:, None],
+    }
+    sources = {
+        "nodes": node_source,
+        "parent_bonds": parent_bond_source,
+        "closure_bonds": closure_bond_source,
+    }
+    fixed_failure_checks = [~_fixed_state_exact_tensor(state, layout)]
+    topology_exact = torch.ones((), dtype=torch.bool, device=state["nodes"].device)
+    for step in range(steps):
+        t_value = step / steps
+        t = torch.full(
+            (state["nodes"].shape[0],),
+            t_value,
+            dtype=torch.float32,
+            device=state["nodes"].device,
+        )
+        predictions = model(
+            nodes=state["nodes"],
+            parents=state["parents"],
+            parent_bonds=state["parent_bonds"],
+            closure_left=state["closure_left"],
+            closure_right=state["closure_right"],
+            closure_bonds=state["closure_bonds"],
+            t=t,
+            potency_condition=potency_condition,
+            **conditioning,
+        )
+        for field in ("nodes", "parent_bonds", "closure_bonds"):
+            state[field] = rstar_step(
+                state[field],
+                predictions[field].softmax(dim=-1),
+                sources[field],
+                t_value,
+                1.0 / steps,
+                active[field],
+                generator,
+            )
+        state = _restore_fixed_states_in_place(state, layout)
+        fixed_failure_checks.append(~_fixed_state_exact_tensor(state, layout))
+        for field in topology_fields:
+            topology_exact = topology_exact & torch.equal(state[field], topology_snapshot[field])
+    if not bool(topology_exact.item()):
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry flow changed a parent or closure endpoint"
+        )
+    terminal_time = torch.ones(
+        (state["nodes"].shape[0],), dtype=torch.float32, device=state["nodes"].device
+    )
+    terminal_predictions = model(
+        nodes=state["nodes"],
+        parents=state["parents"],
+        parent_bonds=state["parent_bonds"],
+        closure_left=state["closure_left"],
+        closure_right=state["closure_right"],
+        closure_bonds=state["closure_bonds"],
+        t=terminal_time,
+        potency_condition=potency_condition,
+        **conditioning,
+    )
+    return terminal_predictions, fixed_failure_checks
+
+
 def _fixed_state_exact(state: Mapping[str, Any], layout: Mapping[str, Any]) -> bool:
     return bool(_fixed_state_exact_tensor(state, layout).item())
 
@@ -463,6 +718,207 @@ def _argmax_allowed(logits: np.ndarray, valid: np.ndarray) -> int | None:
     return int(np.argmax(masked))
 
 
+def _sample_allowed(
+    logits: np.ndarray,
+    valid: np.ndarray,
+    *,
+    generator: np.random.Generator,
+    temperature: float,
+) -> int | None:
+    """Draw once from model probabilities restricted to the declared support."""
+
+    if (
+        logits.ndim != 1
+        or valid.shape != logits.shape
+        or not np.any(valid)
+        or not np.isfinite(temperature)
+        or temperature <= 0
+    ):
+        return None
+    allowed = np.flatnonzero(valid)
+    scaled = np.asarray(logits[allowed], dtype=np.float64) / temperature
+    scaled -= np.max(scaled)
+    probabilities = np.exp(scaled)
+    total = float(probabilities.sum())
+    if not np.isfinite(total) or total <= 0:
+        return None
+    probabilities /= total
+    return int(generator.choice(allowed, p=probabilities))
+
+
+def _distances_to_reaction_core(
+    neighbors: Sequence[set[int]], core_position_states: np.ndarray
+) -> np.ndarray:
+    """Return unweighted graph distance to the nearest reaction-core atom."""
+
+    distances = np.full(len(neighbors), -1, dtype=np.int64)
+    frontier = [int(node) for node in np.flatnonzero(core_position_states > 1)]
+    if not frontier:
+        return distances
+    distances[frontier] = 0
+    while frontier:
+        node = frontier.pop(0)
+        for target in neighbors[node]:
+            if distances[target] >= 0:
+                continue
+            distances[target] = distances[node] + 1
+            frontier.append(target)
+    return distances
+
+
+def _generated_ring_support(
+    generated_cycles: Sequence[Sequence[int]],
+) -> tuple[frozenset[int], frozenset[tuple[int, int]]]:
+    """Return generated ring nodes and edges from tree paths closed by each closure."""
+
+    nodes: set[int] = set()
+    edges: set[tuple[int, int]] = set()
+    for raw_cycle in generated_cycles:
+        cycle = tuple(int(node) for node in raw_cycle)
+        if len(cycle) < 3:
+            continue
+        nodes.update(cycle)
+        edges.update(tuple(sorted(pair)) for pair in zip(cycle[:-1], cycle[1:], strict=True))
+        edges.add(tuple(sorted((cycle[0], cycle[-1]))))
+    return frozenset(nodes), frozenset(edges)
+
+
+def _ugi_ester_motif_constraints(
+    predictions: Mapping[str, np.ndarray],
+    index: int,
+    record: SynthesisProgramGraphRecord,
+    atom_vocabulary: Sequence[AtomState],
+    parents: np.ndarray,
+    closure_left: np.ndarray,
+    closure_right: np.ndarray,
+    neighbors: Sequence[set[int]],
+    policy: UgiEsterChemotypePolicy,
+) -> tuple[dict[int, str], dict[tuple[int, int], int]] | None:
+    """Select the highest-scoring feasible C(=O)-O-C placement in the requested role."""
+
+    if record.program_id != policy.reaction_id:
+        return {}, {}
+    blocks = [block for block in record.component_blocks if block.role == policy.aldehyde_role]
+    if len(blocks) != 1:
+        return None
+    block = blocks[0]
+    exterior = {
+        node
+        for node in range(block.start, block.stop)
+        if int(record.core_position_states[node]) == 1 and not bool(record.fixed_atom_mask[node])
+    }
+    if len(exterior) < 5:
+        return None
+
+    edge_logits: dict[tuple[int, int], np.ndarray] = {}
+    edge_fixed: dict[tuple[int, int], bool] = {}
+    for child in range(1, record.node_count):
+        pair = tuple(sorted((child, int(parents[child]))))
+        edge_logits[pair] = predictions["parent_bonds"][index, child]
+        edge_fixed[pair] = bool(record.fixed_parent_bond_mask[child])
+    for slot, (left, right) in enumerate(zip(closure_left, closure_right, strict=True)):
+        pair = tuple(sorted((int(left), int(right))))
+        edge_logits[pair] = predictions["closure_bonds"][index, slot]
+        edge_fixed[pair] = bool(record.fixed_closure_bond_mask[slot])
+
+    capacities = _atom_capacity_table(atom_vocabulary)
+
+    def atom_score(node: int, symbol: str, required_units: int) -> float | None:
+        eligible = [
+            state
+            for state, atom in enumerate(atom_vocabulary)
+            if atom.symbol == symbol
+            and atom.formal_charge == 0
+            and not atom.aromatic
+            and int(capacities[state]) >= required_units
+        ]
+        if not eligible:
+            return None
+        return max(float(predictions["nodes"][index, node, state]) for state in eligible)
+
+    best: tuple[float, dict[int, str], dict[tuple[int, int], int]] | None = None
+    for center in sorted(exterior):
+        center_neighbors = sorted(neighbors[center] & exterior)
+        if len(center_neighbors) != 3:
+            continue
+        leaf_neighbors = [node for node in center_neighbors if len(neighbors[node]) == 1]
+        bridge_neighbors = [node for node in center_neighbors if len(neighbors[node]) == 2]
+        for carbonyl_oxygen in leaf_neighbors:
+            for ester_oxygen in bridge_neighbors:
+                alkoxy = next(iter(neighbors[ester_oxygen] - {center}), -1)
+                carbon_substituents = [
+                    node for node in center_neighbors if node not in {carbonyl_oxygen, ester_oxygen}
+                ]
+                if (
+                    alkoxy not in exterior
+                    or len(carbon_substituents) != 1
+                    or len({center, carbonyl_oxygen, ester_oxygen, alkoxy, *carbon_substituents})
+                    != 5
+                ):
+                    continue
+                blocked = frozenset((center, ester_oxygen))
+
+                def exterior_component_size(start: int) -> int:
+                    visited = {start}
+                    frontier = [start]
+                    while frontier:
+                        node = frontier.pop()
+                        for target in neighbors[node] & exterior:
+                            if frozenset((node, target)) == blocked or target in visited:
+                                continue
+                            visited.add(target)
+                            frontier.append(target)
+                    return len(visited)
+
+                carbon_counts = sorted(
+                    (
+                        exterior_component_size(center) - 1,
+                        exterior_component_size(ester_oxygen) - 1,
+                    )
+                )
+                if (
+                    carbon_counts[0] < policy.minimum_ester_side_carbons
+                    or carbon_counts[1] < policy.minimum_ester_long_side_carbons
+                ):
+                    continue
+                carbon_substituent = carbon_substituents[0]
+                forced_atoms = {
+                    center: "C",
+                    carbonyl_oxygen: "O",
+                    ester_oxygen: "O",
+                    alkoxy: "C",
+                    carbon_substituent: "C",
+                }
+                forced_bonds = {
+                    tuple(sorted((center, carbonyl_oxygen))): 1,
+                    tuple(sorted((center, ester_oxygen))): 0,
+                    tuple(sorted((ester_oxygen, alkoxy))): 0,
+                    tuple(sorted((center, carbon_substituent))): 0,
+                }
+                if any(pair not in edge_logits or edge_fixed[pair] for pair in forced_bonds):
+                    continue
+                node_requirements = {
+                    center: 8,
+                    carbonyl_oxygen: 4,
+                    ester_oxygen: 4,
+                    alkoxy: 2 * len(neighbors[alkoxy]),
+                    carbon_substituent: 2 * len(neighbors[carbon_substituent]),
+                }
+                scores = [
+                    atom_score(node, symbol, node_requirements[node])
+                    for node, symbol in forced_atoms.items()
+                ]
+                if any(value is None for value in scores):
+                    continue
+                score = sum(float(value) for value in scores if value is not None) + sum(
+                    float(edge_logits[pair][bond]) for pair, bond in forced_bonds.items()
+                )
+                candidate = (score, forced_atoms, forced_bonds)
+                if best is None or candidate[0] > best[0]:
+                    best = candidate
+    return None if best is None else (best[1], best[2])
+
+
 def _exact_role_morphology_targets(
     record: SynthesisProgramGraphRecord,
 ) -> dict[int, tuple[int, int, int, int]]:
@@ -547,6 +1003,338 @@ def _terminal_role_morphology(
     return output
 
 
+def _ugi_topology_support_failure(
+    record: SynthesisProgramGraphRecord,
+    *,
+    parents: np.ndarray,
+    closure_left: np.ndarray,
+    closure_right: np.ndarray,
+    policy: UgiTransformerTopologyPolicy,
+    ester_policy: UgiEsterChemotypePolicy | None,
+) -> str | None:
+    """Validate a learned Ugi topology against the frozen structural support.
+
+    The learned parent and closure heads remain responsible for selecting the topology. This
+    check only removes structures outside measured training support; it does not construct an
+    alternative tree, retry an attempt, or copy a component graph.
+    """
+
+    if record.program_id != UGI_PROGRAM_ID:
+        return "learned_ugi_topology_applied_to_other_program"
+    neighbors = [set() for _ in range(record.node_count)]
+    tree_neighbors = [set() for _ in range(record.node_count)]
+    exterior_children = np.zeros(record.node_count, dtype=np.int64)
+    for child in range(1, record.node_count):
+        parent = int(parents[child])
+        neighbors[child].add(parent)
+        neighbors[parent].add(child)
+        tree_neighbors[child].add(parent)
+        tree_neighbors[parent].add(child)
+        if (
+            int(record.core_position_states[child]) == 1
+            and int(record.core_position_states[parent]) == 1
+            and int(record.role_states[child]) == int(record.role_states[parent])
+        ):
+            exterior_children[parent] += 1
+    for left, right in zip(closure_left, closure_right, strict=True):
+        left_index = int(left)
+        right_index = int(right)
+        neighbors[left_index].add(right_index)
+        neighbors[right_index].add(left_index)
+    exterior = record.core_position_states == 1
+    if any(len(neighbors[node]) > policy.maximum_heavy_degree for node in np.flatnonzero(exterior)):
+        return "learned_ugi_topology_heavy_degree_outside_support"
+
+    role_by_state = {block.role_state: block.role for block in record.component_blocks}
+    role_limits = dict(zip(ROLE_NAMES, policy.maximum_adjacent_branch_run_by_role, strict=True))
+    branched = exterior & (exterior_children >= 2)
+    for role_state, role in role_by_state.items():
+        pending = set(np.flatnonzero(branched & (record.role_states == int(role_state))).tolist())
+        maximum_run = 0
+        while pending:
+            start = pending.pop()
+            stack = [start]
+            size = 0
+            while stack:
+                node = stack.pop()
+                size += 1
+                adjacent = pending.intersection(tree_neighbors[node])
+                pending.difference_update(adjacent)
+                stack.extend(adjacent)
+            maximum_run = max(maximum_run, size)
+        if maximum_run > role_limits.get(role, 0):
+            return f"learned_ugi_topology_adjacent_branch_run_outside_support:{role}"
+
+    for slot, (left, right) in enumerate(zip(closure_left, closure_right, strict=True)):
+        cycle = tree_path_indices(parents, int(left), int(right))
+        ring_size = len(cycle)
+        allowed = policy.allowed_ring_sizes
+        left_role_state = int(record.role_states[int(left)])
+        left_role = role_by_state.get(left_role_state)
+        if (
+            ester_policy is not None
+            and left_role == ester_policy.amine_role
+            and left_role_state == int(record.role_states[int(right)])
+        ):
+            exterior_count = sum(
+                int(value) == left_role_state and int(core_state) == 1
+                for value, core_state in zip(
+                    record.role_states, record.core_position_states, strict=True
+                )
+            )
+            allowed = ester_policy.allowed_amine_cycle_sizes(exterior_count)
+        if ring_size not in allowed:
+            return f"learned_ugi_topology_ring_size_outside_support:{slot}"
+    return None
+
+
+def _carbon_skeleton_diameter_from_states(
+    nodes: Sequence[int],
+    *,
+    known: Mapping[int, int],
+    neighbors: Sequence[set[int]],
+    atom_vocabulary: Sequence[AtomState],
+) -> int:
+    carbon = {
+        int(node)
+        for node in nodes
+        if int(node) in known and atom_vocabulary[int(known[int(node)])].symbol == "C"
+    }
+    if not carbon:
+        return 0
+    maximum_edges = 0
+    for start in carbon:
+        distances = {start: 0}
+        queue = [start]
+        for current in queue:
+            for neighbor in neighbors[current]:
+                if neighbor in carbon and neighbor not in distances:
+                    distances[neighbor] = distances[current] + 1
+                    queue.append(neighbor)
+        maximum_edges = max(maximum_edges, max(distances.values()))
+    return maximum_edges + 1
+
+
+def _select_ugi_amine_atom_states(
+    predictions: Mapping[str, np.ndarray],
+    index: int,
+    record: SynthesisProgramGraphRecord,
+    atom_vocabulary: Sequence[AtomState],
+    atom_capacities: np.ndarray,
+    minimum_used: np.ndarray,
+    neighbors: Sequence[set[int]],
+    triangles: Sequence[tuple[int, int, int]],
+    generated_cycles: Sequence[Sequence[int]],
+    role_names: Sequence[str],
+    local_chemistry_support: LocalChemistrySupport,
+    policy: UgiEsterChemotypePolicy,
+    chemistry_prior: UgiRoleChemistryPrior | None = None,
+    chemistry_prior_strength: float = 0.0,
+    distances_to_core: np.ndarray | None = None,
+    ring_nodes: frozenset[int] = frozenset(),
+    semantic_target: UgiAmineSemanticTarget | None = None,
+) -> tuple[dict[int, int] | None, str | None]:
+    """Choose one globally feasible measured-like amine exterior under model scores.
+
+    Without an explicit semantic target, the legacy measured-quantile C/N policy is retained.  With
+    a target, every exact C/N/O placement matching its total composition and carbon-skeleton
+    diameter is enumerated.  The head exterior has at most eight atoms, so this is a bounded exact
+    conditional readout rather than rejection, repair or component lookup.
+    """
+
+    if record.program_id != policy.reaction_id:
+        return {}, None
+    blocks = [block for block in record.component_blocks if block.role == policy.amine_role]
+    if len(blocks) != 1:
+        return None, "ugi_amine_role_block_unavailable"
+    block = blocks[0]
+    exterior = tuple(
+        node
+        for node in range(block.start, block.stop)
+        if int(record.core_position_states[node]) == 1 and not bool(record.fixed_atom_mask[node])
+    )
+    if not exterior:
+        return None, "ugi_amine_exterior_unavailable"
+    fixed_states = {
+        int(node): int(record.graph.node_states[node])
+        for node in np.flatnonzero(record.fixed_atom_mask)
+    }
+    best_score: float | None = None
+    best_states: dict[int, int] | None = None
+    symbol_assignments: list[dict[int, str]] = []
+    if semantic_target is None:
+        minimum_n = int(policy.minimum_amine_exterior_nitrogens)
+        maximum_n = min(int(policy.maximum_amine_exterior_nitrogens), len(exterior))
+        for nitrogen_count in range(minimum_n, maximum_n + 1):
+            for nitrogen_nodes in combinations(exterior, nitrogen_count):
+                nitrogen_set = set(nitrogen_nodes)
+                symbol_assignments.append(
+                    {node: ("N" if node in nitrogen_set else "C") for node in exterior}
+                )
+    else:
+        fixed_block_symbols = Counter(
+            atom_vocabulary[fixed_states[node]].symbol
+            for node in range(block.start, block.stop)
+            if node in fixed_states
+        )
+        target_counts = {
+            "N": int(semantic_target.nitrogen_atoms),
+            "O": int(semantic_target.oxygen_atoms),
+        }
+        target_counts["C"] = block.atom_count - target_counts["N"] - target_counts["O"]
+        required = {
+            symbol: target_counts[symbol] - int(fixed_block_symbols[symbol])
+            for symbol in ("C", "N", "O")
+        }
+        if (
+            any(count < 0 for count in required.values())
+            or sum(required.values()) != len(exterior)
+            or any(
+                symbol not in {"C", "N", "O"} and count > 0
+                for symbol, count in fixed_block_symbols.items()
+            )
+        ):
+            return None, "ugi_amine_semantic_composition_unavailable"
+        for nitrogen_nodes in combinations(exterior, required["N"]):
+            nitrogen_set = set(nitrogen_nodes)
+            remaining = tuple(node for node in exterior if node not in nitrogen_set)
+            for oxygen_nodes in combinations(remaining, required["O"]):
+                oxygen_set = set(oxygen_nodes)
+                symbol_assignments.append(
+                    {
+                        node: ("N" if node in nitrogen_set else "O" if node in oxygen_set else "C")
+                        for node in exterior
+                    }
+                )
+    stages: Counter[str] = Counter()
+    for symbols_by_node in symbol_assignments:
+        selected: dict[int, int] = {}
+        score = 0.0
+        feasible = True
+        for node in exterior:
+            symbol = symbols_by_node[node]
+            valid = np.asarray(
+                [
+                    atom.symbol == symbol
+                    and atom.formal_charge == 0
+                    and not atom.aromatic
+                    and int(atom_capacities[state]) >= int(minimum_used[node])
+                    for state, atom in enumerate(atom_vocabulary)
+                ],
+                dtype=np.bool_,
+            )
+            state = _argmax_allowed(predictions["nodes"][index, node], valid)
+            if state is None:
+                feasible = False
+                break
+            selected[node] = state
+            score += float(predictions["nodes"][index, node, state])
+            if chemistry_prior is not None and chemistry_prior_strength > 0:
+                if distances_to_core is None or int(distances_to_core[node]) < 1:
+                    feasible = False
+                    break
+                bias = chemistry_prior.atom_log_bias(
+                    role=block.role,
+                    depth=int(distances_to_core[node]),
+                    degree=len(neighbors[node]),
+                    in_ring=node in ring_nodes,
+                    atom_vocabulary=atom_vocabulary,
+                )
+                score += chemistry_prior_strength * float(bias[state])
+        if not feasible:
+            continue
+        stages["atom_capacity"] += 1
+        known = {**fixed_states, **selected}
+        if any(node not in known for node in range(block.start, block.stop)):
+            continue
+        symbols = [atom_vocabulary[known[node]].symbol for node in range(block.start, block.stop)]
+        carbon_atoms = symbols.count("C")
+        heavy_atoms = len(symbols)
+        if semantic_target is not None and _carbon_skeleton_diameter_from_states(
+            range(block.start, block.stop),
+            known=known,
+            neighbors=neighbors,
+            atom_vocabulary=atom_vocabulary,
+        ) != int(semantic_target.carbon_skeleton_diameter):
+            continue
+        stages["carbon_diameter"] += 1
+        if semantic_target is not None:
+            block_nodes = set(range(block.start, block.stop))
+            reactive_amine_sites = sum(
+                atom_vocabulary[known[node]].symbol == "N"
+                and 1 <= sum(neighbor in block_nodes for neighbor in neighbors[node]) <= 2
+                for node in block_nodes
+            )
+            if not 1 <= reactive_amine_sites <= 2:
+                continue
+        stages["registry_handle"] += 1
+        if not local_chemistry_support.component_is_within_observed_support(
+            record.program_id,
+            block.role,
+            heavy_atoms=heavy_atoms,
+            carbon_atoms=carbon_atoms,
+            heteroatoms=heavy_atoms - carbon_atoms,
+        ):
+            continue
+        stages["component_support"] += 1
+        if any(
+            left in known
+            and right in known
+            and not local_chemistry_support.allows_role_edge_for_any_bond(
+                record.program_id,
+                role_names[left],
+                atom_vocabulary[known[left]].symbol,
+                role_names[right],
+                atom_vocabulary[known[right]].symbol,
+            )
+            for left in range(record.node_count)
+            for right in neighbors[left]
+            if left < right
+        ):
+            continue
+        stages["edge_support"] += 1
+        if any(
+            all(node in known for node in triangle)
+            and not local_chemistry_support.allows_role_triangle(
+                record.program_id,
+                ((role_names[node], atom_vocabulary[known[node]].symbol) for node in triangle),
+            )
+            for triangle in triangles
+        ):
+            continue
+        stages["triangle_support"] += 1
+        if local_chemistry_support.enforces_role_cycles and any(
+            all(node in known for node in cycle)
+            and not local_chemistry_support.allows_role_cycle(
+                record.program_id,
+                ((role_names[node], atom_vocabulary[known[node]].symbol) for node in cycle),
+            )
+            for cycle in generated_cycles
+        ):
+            continue
+        stages["cycle_support"] += 1
+        if best_score is None or score > best_score:
+            best_score = score
+            best_states = selected
+    if best_states is not None:
+        return best_states, None
+    if not symbol_assignments:
+        return None, "ugi_amine_semantic_composition_unavailable"
+    stage_reasons = (
+        ("atom_capacity", "ugi_amine_atom_capacity_unavailable"),
+        ("carbon_diameter", "ugi_amine_carbon_diameter_unavailable"),
+        ("registry_handle", "ugi_amine_registry_handle_unavailable"),
+        ("component_support", "ugi_amine_component_support_unavailable"),
+        ("edge_support", "ugi_amine_edge_support_unavailable"),
+        ("triangle_support", "ugi_amine_triangle_support_unavailable"),
+        ("cycle_support", "ugi_amine_cycle_support_unavailable"),
+    )
+    for stage, reason in stage_reasons:
+        if stages[stage] == 0:
+            return None, reason
+    return None, "ugi_amine_global_atom_assignment_unavailable"
+
+
 def _strict_terminal_record(
     predictions: Mapping[str, np.ndarray],
     index: int,
@@ -555,7 +1343,17 @@ def _strict_terminal_record(
     local_chemistry_support: LocalChemistrySupport | None = None,
     *,
     enforce_program_topology: bool = False,
+    enforce_program_cycles: bool = False,
+    confine_generated_edges: bool = False,
     core_saturation: BoundReactionCoreSaturation | None = None,
+    terminal_generator: np.random.Generator | None = None,
+    terminal_temperature: float = 1.0,
+    ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
+    ugi_role_chemistry_prior: UgiRoleChemistryPrior | None = None,
+    ugi_role_chemistry_prior_strength: float = 0.0,
+    ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
+    ugi_amine_semantic_target: UgiAmineSemanticTarget | None = None,
+    topology_only: bool = False,
 ) -> tuple[dict[str, np.ndarray] | None, str | None]:
     """Decode one exact-size graph under topology and valence support, without fallback."""
 
@@ -591,7 +1389,9 @@ def _strict_terminal_record(
     except KeyError:
         return None, "unnamed_semantic_role"
     morphology_targets = (
-        _exact_role_morphology_targets(record) if enforce_program_topology else None
+        _exact_role_morphology_targets(record)
+        if enforce_program_topology or enforce_program_cycles
+        else None
     )
 
     # The qualified transform pins the hydrogen count, and therefore the exact heavy-atom
@@ -601,10 +1401,10 @@ def _strict_terminal_record(
     # edge stays inside one component block and a generated closure joins two exterior atoms.
     required_core_units: np.ndarray | None = None
     core_constrained = core_saturation is not None and core_saturation.applies_to(record)
-    component_confined = (
+    component_confined = confine_generated_edges or (
         core_constrained and core_saturation.policy.component_confined_generated_edges
     )
-    exterior_only_closures = (
+    exterior_only_closures = confine_generated_edges or (
         core_constrained and core_saturation.policy.exterior_only_generated_closures
     )
     if core_constrained:
@@ -663,8 +1463,23 @@ def _strict_terminal_record(
                 role_state = int(record.role_states[child])
                 target = morphology_targets[role_state]
                 # Counts and cycles are layout-level invariants.  During tree construction only
-                # junction and core-attachment budgets can increase.
-                if observed[role_state][1] > target[1] or observed[role_state][3] > target[3]:
+                # junction and core-attachment budgets can increase.  The upper-bound checks
+                # prevent overshoot; the remaining-child bounds also prevent the greedy model
+                # score from consuming the last opportunity to meet a positive budget.  This is
+                # constrained MAP decoding of the learned parent logits, not a retry or a
+                # constructive replacement topology.
+                remaining_variable_children = sum(
+                    not bool(record.fixed_parent_bond_mask[future])
+                    and int(record.role_states[future]) == role_state
+                    for future in range(child + 1, count)
+                )
+                current = observed[role_state]
+                if (
+                    current[1] > target[1]
+                    or current[3] > target[3]
+                    or current[1] + remaining_variable_children < target[1]
+                    or current[3] + remaining_variable_children < target[3]
+                ):
                     valid[parent] = False
         parent = _argmax_allowed(predictions["parents"][index, child, :count], valid)
         if parent is None:
@@ -728,7 +1543,7 @@ def _strict_terminal_record(
                         and int(core[left]) == 1
                         and int(core[right]) == 1
                     )
-                if enforce_program_topology:
+                if enforce_program_topology or enforce_program_cycles:
                     role_state = int(record.role_states[left])
                     current = _terminal_role_morphology(
                         record,
@@ -779,9 +1594,13 @@ def _strict_terminal_record(
                         closure_left[slot], closure_right[slot] = left, right
         if best is None:
             return None, (
-                "reaction_core_exterior_closure_unavailable"
-                if exterior_only_closures and not enforce_program_topology
-                else "closure_pair_unavailable"
+                "program_role_closure_unavailable"
+                if enforce_program_cycles and not enforce_program_topology
+                else (
+                    "reaction_core_exterior_closure_unavailable"
+                    if exterior_only_closures and not enforce_program_topology
+                    else "closure_pair_unavailable"
+                )
             )
         _, left, right = best
         degrees[[left, right]] += 1
@@ -800,6 +1619,19 @@ def _strict_terminal_record(
         )
         if observed_morphology != morphology_targets:
             return None, "program_morphology_exactness_failure"
+    elif enforce_program_cycles:
+        assert morphology_targets is not None
+        observed_morphology = _terminal_role_morphology(
+            record,
+            parents=parents,
+            closure_left=closure_left,
+            closure_right=closure_right,
+        )
+        if any(
+            observed_morphology[role_state][2] != target[2]
+            for role_state, target in morphology_targets.items()
+        ):
+            return None, "program_role_cycle_exactness_failure"
 
     neighbors = [set() for _ in range(count)]
     for left, right in occupied:
@@ -817,6 +1649,75 @@ def _strict_terminal_record(
         for slot in range(closure_count)
         if not record.fixed_closure_bond_mask[slot]
     ]
+    distances_to_core = _distances_to_reaction_core(neighbors, record.core_position_states)
+    if (
+        ugi_role_chemistry_prior is not None
+        and ugi_role_chemistry_prior_strength > 0
+        and np.any(distances_to_core < 0)
+    ):
+        return None, "reaction_core_distance_unavailable"
+    ring_nodes, ring_edges = _generated_ring_support(generated_cycles)
+
+    forced_atom_symbols: dict[int, str] = {}
+    forced_bonds: dict[tuple[int, int], int] = {}
+    if ugi_ester_chemotype_policy is not None:
+        motif = _ugi_ester_motif_constraints(
+            predictions,
+            index,
+            record,
+            atom_vocabulary,
+            parents,
+            closure_left,
+            closure_right,
+            neighbors,
+            ugi_ester_chemotype_policy,
+        )
+        if motif is None:
+            return None, "ugi_aldehyde_ester_topology_unavailable"
+        forced_atom_symbols, forced_bonds = motif
+
+    if ugi_topology_policy is not None:
+        topology_failure = _ugi_topology_support_failure(
+            record,
+            parents=parents,
+            closure_left=closure_left,
+            closure_right=closure_right,
+            policy=ugi_topology_policy,
+            ester_policy=ugi_ester_chemotype_policy,
+        )
+        if topology_failure is not None:
+            return None, topology_failure
+    if topology_only:
+        return {
+            "parents": parents,
+            "closure_left": closure_left,
+            "closure_right": closure_right,
+        }, None
+
+    preselected_atom_states: dict[int, int] = {}
+    if ugi_ester_chemotype_policy is not None and local_chemistry_support is not None:
+        selected_amine, amine_failure = _select_ugi_amine_atom_states(
+            predictions,
+            index,
+            record,
+            atom_vocabulary,
+            atom_capacities,
+            minimum_used,
+            neighbors,
+            triangles,
+            generated_cycles,
+            role_names,
+            local_chemistry_support,
+            ugi_ester_chemotype_policy,
+            chemistry_prior=ugi_role_chemistry_prior,
+            chemistry_prior_strength=ugi_role_chemistry_prior_strength,
+            distances_to_core=distances_to_core,
+            ring_nodes=ring_nodes,
+            semantic_target=ugi_amine_semantic_target,
+        )
+        if selected_amine is None:
+            return None, amine_failure or "ugi_amine_global_atom_assignment_unavailable"
+        preselected_atom_states.update(selected_amine)
 
     node_states = np.zeros(count, dtype=np.int64)
     capacities = np.zeros(count, dtype=np.int64)
@@ -831,6 +1732,41 @@ def _strict_terminal_record(
                 return None, "component_heavy_atoms_outside_observed_local_support"
     for node in range(count):
         valid = atom_capacities >= minimum_used[node]
+        if (
+            ugi_ester_chemotype_policy is not None
+            and record.program_id == ugi_ester_chemotype_policy.reaction_id
+            and int(record.core_position_states[node]) == 1
+        ):
+            role = role_names[node]
+            allowed_symbols = (
+                ({"C", "N", "O"} if ugi_amine_semantic_target is not None else {"C", "N"})
+                if role == ugi_ester_chemotype_policy.amine_role
+                else (
+                    {forced_atom_symbols.get(node, "C")}
+                    if role == ugi_ester_chemotype_policy.aldehyde_role
+                    else ({"C"} if role == ugi_ester_chemotype_policy.isocyanide_role else None)
+                )
+            )
+            if allowed_symbols is not None:
+                valid &= np.asarray(
+                    [
+                        atom.symbol in allowed_symbols
+                        and atom.formal_charge == 0
+                        and not atom.aromatic
+                        for atom in atom_vocabulary
+                    ],
+                    dtype=np.bool_,
+                )
+        if node in forced_atom_symbols:
+            required_symbol = forced_atom_symbols[node]
+            valid &= np.asarray(
+                [
+                    atom.symbol == required_symbol and atom.formal_charge == 0 and not atom.aromatic
+                    for atom in atom_vocabulary
+                ],
+                dtype=np.bool_,
+            )
+        pre_local_valid = valid.copy()
         if local_chemistry_support is not None:
             block = block_by_node[node]
             bounds = local_chemistry_support.component_support_bounds(record.program_id, block.role)
@@ -920,14 +1856,72 @@ def _strict_terminal_record(
                     else "fixed_atom_valence_exceeds_support"
                 )
                 return None, reason
+        elif node in preselected_atom_states:
+            state = int(preselected_atom_states[node])
+            if state >= len(atom_vocabulary) or not valid[state]:
+                return None, "ugi_amine_global_atom_assignment_invariant_failure"
         else:
-            selected = _argmax_allowed(predictions["nodes"][index, node], valid)
-            if selected is None:
-                reason = (
-                    "atom_local_chemistry_state_unavailable"
-                    if local_chemistry_support is not None
-                    else "atom_valence_state_unavailable"
+            node_logits = predictions["nodes"][index, node]
+            if (
+                ugi_role_chemistry_prior is not None
+                and ugi_role_chemistry_prior_strength > 0
+                and record.program_id == ugi_role_chemistry_prior.reaction_id
+                and int(record.core_position_states[node]) == 1
+            ):
+                node_logits = node_logits + ugi_role_chemistry_prior_strength * (
+                    ugi_role_chemistry_prior.atom_log_bias(
+                        role=role_names[node],
+                        depth=int(distances_to_core[node]),
+                        degree=len(neighbors[node]),
+                        in_ring=node in ring_nodes,
+                        atom_vocabulary=atom_vocabulary,
+                    )
                 )
+            selected = (
+                _argmax_allowed(node_logits, valid)
+                if terminal_generator is None
+                else _sample_allowed(
+                    node_logits,
+                    valid,
+                    generator=terminal_generator,
+                    temperature=terminal_temperature,
+                )
+            )
+            if selected is None:
+                if local_chemistry_support is None:
+                    reason = "atom_valence_state_unavailable"
+                elif not np.any(pre_local_valid):
+                    reason = "atom_chemotype_or_valence_state_unavailable"
+                else:
+                    block = block_by_node[node]
+                    bounds = local_chemistry_support.component_support_bounds(
+                        record.program_id, block.role
+                    )
+                    assigned_symbols = [
+                        atom_vocabulary[int(node_states[index])].symbol
+                        for index in range(block.start, node)
+                    ]
+                    assigned_carbons = assigned_symbols.count("C")
+                    assigned_heteroatoms = len(assigned_symbols) - assigned_carbons
+                    remaining_after_node = block.stop - node - 1
+                    count_feasible = pre_local_valid.copy()
+                    for candidate_state, atom in enumerate(atom_vocabulary):
+                        if not count_feasible[candidate_state]:
+                            continue
+                        carbon_atoms = assigned_carbons + int(atom.symbol == "C")
+                        heteroatoms = assigned_heteroatoms + int(atom.symbol != "C")
+                        if (
+                            carbon_atoms > bounds.carbon_atoms_max
+                            or carbon_atoms + remaining_after_node < bounds.carbon_atoms_min
+                            or heteroatoms > bounds.heteroatoms_max
+                            or heteroatoms + remaining_after_node < bounds.heteroatoms_min
+                        ):
+                            count_feasible[candidate_state] = False
+                    reason = (
+                        f"atom_component_count_state_unavailable:{block.role}"
+                        if not np.any(count_feasible)
+                        else f"atom_local_graph_state_unavailable:{block.role}"
+                    )
                 return None, reason
             state = selected
         node_states[node] = state
@@ -968,6 +1962,9 @@ def _strict_terminal_record(
     for kind, slot, left, right in variable_edges:
         spare = min(int(capacities[left] - used[left]), int(capacities[right] - used[right]))
         valid = bond_units <= 2 + spare
+        forced_bond = forced_bonds.get(tuple(sorted((left, right))))
+        if forced_bond is not None:
+            valid &= np.arange(len(valid), dtype=np.int64) == forced_bond
         for bond, units in enumerate(bond_units):
             if units == 3 and not (
                 atom_vocabulary[node_states[left]].aromatic
@@ -988,7 +1985,36 @@ def _strict_terminal_record(
                 ):
                     valid[bond] = False
         logits = predictions["parent_bonds" if kind == "parent" else "closure_bonds"][index, slot]
-        bond = _argmax_allowed(logits, valid)
+        if (
+            ugi_role_chemistry_prior is not None
+            and ugi_role_chemistry_prior_strength > 0
+            and record.program_id == ugi_role_chemistry_prior.reaction_id
+            and role_names[left] == role_names[right]
+            and int(record.core_position_states[left]) == 1
+            and int(record.core_position_states[right]) == 1
+        ):
+            logits = logits + ugi_role_chemistry_prior_strength * (
+                ugi_role_chemistry_prior.bond_log_bias(
+                    role=role_names[left],
+                    depth=min(int(distances_to_core[left]), int(distances_to_core[right])),
+                    in_ring=tuple(sorted((left, right))) in ring_edges,
+                    symbols=(
+                        atom_vocabulary[int(node_states[left])].symbol,
+                        atom_vocabulary[int(node_states[right])].symbol,
+                    ),
+                    bond_classes=len(valid),
+                )
+            )
+        bond = (
+            _argmax_allowed(logits, valid)
+            if terminal_generator is None
+            else _sample_allowed(
+                logits,
+                valid,
+                generator=terminal_generator,
+                temperature=terminal_temperature,
+            )
+        )
         if bond is None:
             qualifier = "local_chemistry" if local_chemistry_support is not None else "valence"
             return None, f"{kind}_bond_{qualifier}_unavailable"
@@ -1061,12 +2087,29 @@ def decode_synthesis_program_strict_argmax(
     local_chemistry_support: LocalChemistrySupport | None = None,
     *,
     enforce_program_topology: bool = False,
+    enforce_program_cycles: bool = False,
+    confine_generated_edges: bool = False,
     core_saturation: BoundReactionCoreSaturation | None = None,
+    terminal_generator: np.random.Generator | None = None,
+    terminal_temperature: float = 1.0,
+    ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
+    ugi_role_chemistry_prior: UgiRoleChemistryPrior | None = None,
+    ugi_role_chemistry_prior_strength: float = 0.0,
+    ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
+    ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget | None] | None = None,
 ) -> tuple[dict[str, Any], tuple[str | None, ...]]:
     """Decode once under strict support; infeasible attempts abstain and are never repaired."""
 
     if len(records) != int(layout["node_mask"].shape[0]):
         raise SynthesisProgramSamplingError("strict decoder batch and record counts disagree")
+    if ugi_amine_semantic_targets is None:
+        semantic_targets: tuple[UgiAmineSemanticTarget | None, ...] = (None,) * len(records)
+    else:
+        semantic_targets = tuple(ugi_amine_semantic_targets)
+        if len(semantic_targets) != len(records):
+            raise SynthesisProgramSamplingError(
+                "strict decoder semantic-target and record counts disagree"
+            )
     cpu_predictions = {
         key: value.detach().to("cpu").numpy()
         for key, value in predictions.items()
@@ -1114,7 +2157,7 @@ def decode_synthesis_program_strict_argmax(
     }
     terminal = restore_synthesis_program_fixed_states(terminal, cpu_layout)
     reasons: list[str | None] = []
-    for index, record in enumerate(records):
+    for index, (record, semantic_target) in enumerate(zip(records, semantic_targets, strict=True)):
         decoded, reason = _strict_terminal_record(
             cpu_predictions,
             index,
@@ -1122,7 +2165,16 @@ def decode_synthesis_program_strict_argmax(
             atom_vocabulary,
             local_chemistry_support,
             enforce_program_topology=enforce_program_topology,
+            enforce_program_cycles=enforce_program_cycles,
+            confine_generated_edges=confine_generated_edges,
             core_saturation=core_saturation,
+            terminal_generator=terminal_generator,
+            terminal_temperature=terminal_temperature,
+            ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+            ugi_role_chemistry_prior=ugi_role_chemistry_prior,
+            ugi_role_chemistry_prior_strength=ugi_role_chemistry_prior_strength,
+            ugi_topology_policy=ugi_topology_policy,
+            ugi_amine_semantic_target=semantic_target,
         )
         reasons.append(reason)
         if decoded is None:
@@ -1132,6 +2184,68 @@ def decode_synthesis_program_strict_argmax(
                 values, dtype=terminal[field].dtype
             )
     return restore_synthesis_program_fixed_states(terminal, cpu_layout), tuple(reasons)
+
+
+def decode_synthesis_program_strict_topology(
+    predictions: Mapping[str, Any],
+    records: Sequence[SynthesisProgramGraphRecord],
+    atom_vocabulary: Sequence[AtomState],
+    local_chemistry_support: LocalChemistrySupport,
+    *,
+    core_saturation: BoundReactionCoreSaturation,
+    ugi_topology_policy: UgiTransformerTopologyPolicy,
+    ugi_ester_chemotype_policy: UgiEsterChemotypePolicy,
+) -> tuple[dict[str, Any], tuple[str | None, ...]]:
+    """Select one learned, support-constrained topology per Ugi attempt without chemistry.
+
+    Parent and closure scores come from the Transformer after its ordinary joint flow. The
+    provisional chemistry is discarded. Invalid topology attempts abstain once; no alternate
+    topology is proposed and no accepted state is repaired.
+    """
+
+    cpu_predictions = {
+        key: value.detach().to("cpu").numpy()
+        for key, value in predictions.items()
+        if key
+        in {
+            "nodes",
+            "parents",
+            "parent_bonds",
+            "closure_left",
+            "closure_right",
+            "closure_bonds",
+        }
+    }
+    maximum_nodes = max(record.node_count for record in records)
+    maximum_closures = max(record.graph.closure_count for record in records)
+    topology = {
+        "parents": torch.zeros((len(records), maximum_nodes), dtype=torch.long),
+        "closure_left": torch.zeros((len(records), maximum_closures), dtype=torch.long),
+        "closure_right": torch.zeros((len(records), maximum_closures), dtype=torch.long),
+    }
+    reasons: list[str | None] = []
+    for index, record in enumerate(records):
+        decoded, reason = _strict_terminal_record(
+            cpu_predictions,
+            index,
+            record,
+            atom_vocabulary,
+            local_chemistry_support,
+            enforce_program_topology=True,
+            enforce_program_cycles=True,
+            confine_generated_edges=True,
+            core_saturation=core_saturation,
+            ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+            ugi_topology_policy=ugi_topology_policy,
+            topology_only=True,
+        )
+        reasons.append(reason)
+        if decoded is None:
+            continue
+        for field in topology:
+            values = decoded[field]
+            topology[field][index, : len(values)] = torch.as_tensor(values, dtype=torch.long)
+    return topology, tuple(reasons)
 
 
 def sample_synthesis_program_products(
@@ -1149,10 +2263,19 @@ def sample_synthesis_program_products(
     conditioning_mode: str = "program",
     program_state_mapping: Mapping[int, int] | None = None,
     role_state_mapping: Mapping[int, int] | None = None,
+    sampling_factorization: str = JOINT_SAMPLING_FACTORIZATION,
     terminal_decode_policy: str = "unconstrained_argmax",
+    terminal_seed: int | None = None,
+    terminal_temperature: float = 1.0,
+    topology_conditioned_chemistry_steps: int = 0,
+    topology_conditioned_chemistry_seed: int | None = None,
     local_chemistry_support: LocalChemistrySupport | None = None,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
     reaction_core_saturation_policy: ReactionCoreSaturationPolicy | None = None,
+    ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
+    ugi_role_chemistry_prior: UgiRoleChemistryPrior | None = None,
+    ugi_role_chemistry_prior_strength: float = 0.0,
+    ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget] | None = None,
     potency_condition: Any | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate from semantic layouts while exposing only Ugi adapter-fixed graph states."""
@@ -1163,6 +2286,7 @@ def sample_synthesis_program_products(
         or samples_per_program < 1
         or sample_steps < 2
         or batch_size < 1
+        or sampling_factorization not in SUPPORTED_SAMPLING_FACTORIZATIONS
         or terminal_decode_policy not in SUPPORTED_TERMINAL_DECODE_POLICIES
     ):
         raise SynthesisProgramSamplingError("invalid shared synthesis-program sampling request")
@@ -1170,23 +2294,88 @@ def sample_synthesis_program_products(
         raise SynthesisProgramSamplingError(
             "sampling accepts only one scalar potency condition for the complete batch"
         )
-    if (terminal_decode_policy == LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY) != (
+    stochastic_terminal = terminal_decode_policy in STOCHASTIC_TERMINAL_DECODE_POLICIES
+    if stochastic_terminal != (terminal_seed is not None):
+        raise SynthesisProgramSamplingError(
+            "stochastic terminal decoding requires one explicit terminal seed, and argmax "
+            "decoding must not receive one"
+        )
+    if not np.isfinite(terminal_temperature) or terminal_temperature <= 0:
+        raise SynthesisProgramSamplingError("terminal temperature must be finite and positive")
+    topology_conditioned_chemistry = topology_conditioned_chemistry_steps > 0
+    if topology_conditioned_chemistry_steps == 1 or topology_conditioned_chemistry_steps < 0:
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry flow must be disabled or use at least two steps"
+        )
+    if topology_conditioned_chemistry != (topology_conditioned_chemistry_seed is not None):
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry flow requires one explicit seed, and the disabled "
+            "flow must not receive one"
+        )
+    if (
+        not np.isfinite(ugi_role_chemistry_prior_strength)
+        or ugi_role_chemistry_prior_strength < 0
+        or (ugi_role_chemistry_prior_strength > 0 and ugi_role_chemistry_prior is None)
+    ):
+        raise SynthesisProgramSamplingError(
+            "a nonzero Ugi chemistry-prior strength and one explicit prior must be supplied together"
+        )
+    if ugi_role_chemistry_prior is not None and (
+        ugi_ester_chemotype_policy is None
+        or ugi_role_chemistry_prior.reaction_id != ugi_ester_chemotype_policy.reaction_id
+    ):
+        raise SynthesisProgramSamplingError(
+            "the soft Ugi chemistry prior must bind the active ester-chemotype reaction"
+        )
+    if ugi_amine_semantic_targets is not None and (
+        len(ugi_amine_semantic_targets) != len(records)
+        or any(record.program_id != UGI_PROGRAM_ID for record in records)
+        or ugi_ester_chemotype_policy is None
+        or ugi_topology_policy is None
+    ):
+        raise SynthesisProgramSamplingError(
+            "Ugi amine semantic targets require one target per Ugi record and the exact Ugi "
+            "topology/chemotype policies"
+        )
+    if (terminal_decode_policy in LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES) != (
         local_chemistry_support is not None
     ):
         raise SynthesisProgramSamplingError(
             "strict local-chemistry decoding and its support policy must be supplied together"
         )
-    coupled_ugi_topology = terminal_decode_policy == COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY
+    coupled_ugi_topology = terminal_decode_policy in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
     if coupled_ugi_topology != (ugi_topology_policy is not None):
         raise SynthesisProgramSamplingError(
             "coupled Ugi topology decoding and its explicit support policy must be supplied together"
         )
-    if (terminal_decode_policy == CORE_SATURATION_TERMINAL_DECODE_POLICY) != (
+    if topology_conditioned_chemistry and not coupled_ugi_topology:
+        raise SynthesisProgramSamplingError(
+            "topology-conditioned chemistry flow requires a Ugi topology-aware decoder"
+        )
+    learned_topology_then_chemistry = (
+        sampling_factorization == LEARNED_TOPOLOGY_THEN_CHEMISTRY_FACTORIZATION
+    )
+    if learned_topology_then_chemistry and (
+        not topology_conditioned_chemistry
+        or terminal_decode_policy not in UGI_ESTER_TERMINAL_DECODE_POLICIES
+        or any(record.program_id != UGI_PROGRAM_ID for record in records)
+    ):
+        raise SynthesisProgramSamplingError(
+            "learned topology-then-chemistry sampling requires only Ugi records, the strict Ugi "
+            "ester decoder, and at least two chemistry-flow steps"
+        )
+    if (terminal_decode_policy in CORE_SATURATION_TERMINAL_DECODE_POLICIES) != (
         reaction_core_saturation_policy is not None
     ):
         raise SynthesisProgramSamplingError(
             "strict reaction-core saturation decoding and its registry contract must be supplied "
             "together"
+        )
+    if (terminal_decode_policy in UGI_ESTER_TERMINAL_DECODE_POLICIES) != (
+        ugi_ester_chemotype_policy is not None
+    ):
+        raise SynthesisProgramSamplingError(
+            "the Ugi ester-stratum decoder and its registry-bound policy must be supplied together"
         )
     core_saturation: BoundReactionCoreSaturation | None = None
     if reaction_core_saturation_policy is not None:
@@ -1200,11 +2389,28 @@ def sample_synthesis_program_products(
         core_saturation = reaction_core_saturation_policy.bind(core_position_states)
     resolved_device = torch.device(device)
     repeated = tuple(record for record in records for _ in range(samples_per_program))
+    repeated_semantic_targets: tuple[UgiAmineSemanticTarget | None, ...] = (
+        (None,) * len(repeated)
+        if ugi_amine_semantic_targets is None
+        else tuple(
+            target for target in ugi_amine_semantic_targets for _ in range(samples_per_program)
+        )
+    )
     maximum_closures = int(model.maximum_closures)
     node_p0 = torch.as_tensor(node_marginal, dtype=torch.float32, device=resolved_device)
     bond_p0 = torch.as_tensor(bond_marginal, dtype=torch.float32, device=resolved_device)
     generator = torch.Generator(device=resolved_device).manual_seed(seed)
     topology_generator = torch.Generator(device="cpu").manual_seed(seed + 1)
+    topology_conditioned_chemistry_generator = (
+        None
+        if topology_conditioned_chemistry_seed is None
+        else torch.Generator(device=resolved_device).manual_seed(
+            int(topology_conditioned_chemistry_seed)
+        )
+    )
+    terminal_generator = (
+        None if terminal_seed is None else np.random.default_rng(int(terminal_seed))
+    )
     outputs: list[dict[str, Any]] = []
     fixed_failures = 0
     strict_abstentions: Counter[str] = Counter()
@@ -1212,6 +2418,7 @@ def sample_synthesis_program_products(
     with torch.inference_mode():
         for offset in range(0, len(repeated), batch_size):
             local = repeated[offset : offset + batch_size]
+            local_semantic_targets = repeated_semantic_targets[offset : offset + batch_size]
             cpu_layout = collate_synthesis_program_layouts(
                 local,
                 maximum_closures=maximum_closures,
@@ -1307,54 +2514,141 @@ def sample_synthesis_program_products(
                 **conditioning,
             )
             topology_reasons: list[str | None] = [None] * len(local)
-            if coupled_ugi_topology:
+            topology_diagnostics: list[dict[str, Any] | None] = [None] * len(local)
+            batch_has_coupled_ugi = coupled_ugi_topology and any(
+                record.program_id == UGI_PROGRAM_ID for record in local
+            )
+            if batch_has_coupled_ugi:
                 assert ugi_topology_policy is not None
                 topology_state = {key: value.clone() for key, value in state.items()}
-                for index, record in enumerate(local):
-                    try:
-                        decoded_topology = decode_ugi_exact_topology(
-                            terminal_predictions,
-                            index=index,
-                            record=record,
-                            policy=ugi_topology_policy,
-                            generator=topology_generator,
+                if learned_topology_then_chemistry:
+                    assert local_chemistry_support is not None
+                    assert core_saturation is not None
+                    assert ugi_ester_chemotype_policy is not None
+                    learned_topology, learned_reasons = decode_synthesis_program_strict_topology(
+                        terminal_predictions,
+                        local,
+                        atom_vocabulary,
+                        local_chemistry_support,
+                        core_saturation=core_saturation,
+                        ugi_topology_policy=ugi_topology_policy,
+                        ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+                    )
+                    topology_reasons = list(learned_reasons)
+                    for index, record in enumerate(local):
+                        if topology_reasons[index] is not None:
+                            continue
+                        count = record.node_count
+                        closure_count = record.graph.closure_count
+                        for field in ("parents", "closure_left", "closure_right"):
+                            size = count if field == "parents" else closure_count
+                            topology_state[field][index, :size] = learned_topology[field][
+                                index, :size
+                            ].to(resolved_device)
+                        topology_diagnostics[index] = {
+                            "source": "transformer_parent_and_closure_heads",
+                            "parents": learned_topology["parents"][index, :count].tolist(),
+                            "closure_left": learned_topology["closure_left"][
+                                index, :closure_count
+                            ].tolist(),
+                            "closure_right": learned_topology["closure_right"][
+                                index, :closure_count
+                            ].tolist(),
+                        }
+                else:
+                    for index, record in enumerate(local):
+                        if record.program_id != UGI_PROGRAM_ID:
+                            continue
+                        try:
+                            decoded_topology = decode_ugi_exact_topology(
+                                terminal_predictions,
+                                index=index,
+                                record=record,
+                                policy=ugi_topology_policy,
+                                generator=topology_generator,
+                                ester_chemotype_policy=ugi_ester_chemotype_policy,
+                                amine_semantic_target=local_semantic_targets[index],
+                                local_chemistry_support=local_chemistry_support,
+                            )
+                        except UgiTransformerTopologyError as error:
+                            topology_reasons[index] = f"ugi_topology_coupling_failure:{error}"
+                            continue
+                        count = record.node_count
+                        closure_count = record.graph.closure_count
+                        topology_state["parents"][index, :count] = torch.as_tensor(
+                            decoded_topology.parents,
+                            dtype=topology_state["parents"].dtype,
+                            device=resolved_device,
                         )
-                    except UgiTransformerTopologyError as error:
-                        topology_reasons[index] = f"ugi_topology_coupling_failure:{error}"
-                        continue
-                    count = record.node_count
-                    closure_count = record.graph.closure_count
-                    topology_state["parents"][index, :count] = torch.as_tensor(
-                        decoded_topology.parents,
-                        dtype=topology_state["parents"].dtype,
+                        if closure_count:
+                            topology_state["closure_left"][index, :closure_count] = torch.as_tensor(
+                                decoded_topology.closure_left,
+                                dtype=topology_state["closure_left"].dtype,
+                                device=resolved_device,
+                            )
+                            topology_state["closure_right"][index, :closure_count] = (
+                                torch.as_tensor(
+                                    decoded_topology.closure_right,
+                                    dtype=topology_state["closure_right"].dtype,
+                                    device=resolved_device,
+                                )
+                            )
+                        topology_diagnostics[index] = {
+                            "source": "constructive_offspring_head",
+                            "parents": decoded_topology.parents.tolist(),
+                            "closure_left": decoded_topology.closure_left.tolist(),
+                            "closure_right": decoded_topology.closure_right.tolist(),
+                            "offspring_by_role": [
+                                values.tolist() for values in decoded_topology.offspring_by_role
+                            ],
+                        }
+                topology_state = _restore_fixed_states_in_place(topology_state, layout)
+                if topology_conditioned_chemistry:
+                    assert topology_conditioned_chemistry_generator is not None
+                    active_examples = torch.as_tensor(
+                        [
+                            record.program_id == UGI_PROGRAM_ID
+                            and (
+                                not learned_topology_then_chemistry
+                                or topology_reasons[index] is None
+                            )
+                            for index, record in enumerate(local)
+                        ],
+                        dtype=torch.bool,
                         device=resolved_device,
                     )
-                    if closure_count:
-                        topology_state["closure_left"][index, :closure_count] = torch.as_tensor(
-                            decoded_topology.closure_left,
-                            dtype=topology_state["closure_left"].dtype,
-                            device=resolved_device,
+                    if bool(active_examples.any()):
+                        terminal_predictions, chemistry_fixed_checks = (
+                            _topology_conditioned_chemistry_flow(
+                                model,
+                                topology_state,
+                                layout,
+                                conditioning,
+                                node_source,
+                                parent_bond_source,
+                                closure_bond_source,
+                                active_examples,
+                                steps=topology_conditioned_chemistry_steps,
+                                generator=topology_conditioned_chemistry_generator,
+                                potency_condition=potency_condition,
+                            )
                         )
-                        topology_state["closure_right"][index, :closure_count] = torch.as_tensor(
-                            decoded_topology.closure_right,
-                            dtype=topology_state["closure_right"].dtype,
-                            device=resolved_device,
-                        )
-                topology_state = _restore_fixed_states_in_place(topology_state, layout)
-                # Chemistry is predicted after, and therefore conditional on, the exact tree and
-                # feasible closure endpoints.  This is the factorization that made the native Ugi
-                # model reliable; the Transformer remains the shared denoiser.
-                terminal_predictions = model(
-                    nodes=topology_state["nodes"],
-                    parents=topology_state["parents"],
-                    parent_bonds=topology_state["parent_bonds"],
-                    closure_left=topology_state["closure_left"],
-                    closure_right=topology_state["closure_right"],
-                    closure_bonds=topology_state["closure_bonds"],
-                    t=terminal_time,
-                    potency_condition=potency_condition,
-                    **conditioning,
-                )
+                        fixed_failure_checks.extend(chemistry_fixed_checks)
+                else:
+                    # Chemistry is predicted after, and therefore conditional on, the exact tree
+                    # and feasible closure endpoints.  The optional flow above strengthens this
+                    # one-pass factorization by repeatedly refreshing the denoiser on that tree.
+                    terminal_predictions = model(
+                        nodes=topology_state["nodes"],
+                        parents=topology_state["parents"],
+                        parent_bonds=topology_state["parent_bonds"],
+                        closure_left=topology_state["closure_left"],
+                        closure_right=topology_state["closure_right"],
+                        closure_bonds=topology_state["closure_bonds"],
+                        t=terminal_time,
+                        potency_condition=potency_condition,
+                        **conditioning,
+                    )
                 # The exact topology is already decoded.  One-hot pointer scores let the common
                 # strict chemistry decoder preserve it while retaining all valence checks.
                 pointer_predictions = dict(terminal_predictions)
@@ -1374,12 +2668,25 @@ def sample_synthesis_program_products(
                     atom_vocabulary,
                     local_chemistry_support,
                     core_saturation=core_saturation,
+                    terminal_generator=terminal_generator,
+                    terminal_temperature=terminal_temperature,
+                    ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+                    ugi_role_chemistry_prior=ugi_role_chemistry_prior,
+                    ugi_role_chemistry_prior_strength=ugi_role_chemistry_prior_strength,
+                    ugi_topology_policy=(
+                        ugi_topology_policy if learned_topology_then_chemistry else None
+                    ),
+                    ugi_amine_semantic_targets=local_semantic_targets,
                     enforce_program_topology=(
-                        terminal_decode_policy
-                        in {
-                            PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                            COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                        }
+                        terminal_decode_policy in PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES
+                        and (not coupled_ugi_topology or batch_has_coupled_ugi)
+                    ),
+                    enforce_program_cycles=(
+                        terminal_decode_policy in PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES
+                    ),
+                    confine_generated_edges=(
+                        terminal_decode_policy in COMPONENT_CONFINED_TERMINAL_DECODE_POLICIES
+                        and (not coupled_ugi_topology or batch_has_coupled_ugi)
                     ),
                 )
                 if coupled_ugi_topology:
@@ -1465,16 +2772,74 @@ def sample_synthesis_program_products(
                         "constraint_abstention_reason": abstention_reason,
                         "local_chemistry_policy_applied": local_chemistry_support is not None,
                         "program_topology_policy_applied": (
-                            terminal_decode_policy
-                            in {
-                                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                            }
+                            terminal_decode_policy in PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES
+                            and (
+                                terminal_decode_policy
+                                not in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
+                                or record.program_id == UGI_PROGRAM_ID
+                            )
                         ),
-                        "topology_coupling_second_pass_applied": coupled_ugi_topology,
+                        "program_role_cycle_policy_applied": (
+                            terminal_decode_policy in PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES
+                        ),
+                        "component_confined_policy_applied": (
+                            terminal_decode_policy in COMPONENT_CONFINED_TERMINAL_DECODE_POLICIES
+                            and (
+                                terminal_decode_policy
+                                not in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
+                                or record.program_id == UGI_PROGRAM_ID
+                            )
+                        ),
+                        "topology_coupling_second_pass_applied": (
+                            coupled_ugi_topology and record.program_id == UGI_PROGRAM_ID
+                        ),
+                        "topology_conditioned_chemistry_flow_applied": (
+                            topology_conditioned_chemistry
+                            and record.program_id == UGI_PROGRAM_ID
+                            and (
+                                not learned_topology_then_chemistry
+                                or topology_reasons[index] is None
+                            )
+                        ),
+                        "sampling_factorization": sampling_factorization,
+                        "learned_topology_flow_applied": (
+                            learned_topology_then_chemistry
+                            and record.program_id == UGI_PROGRAM_ID
+                            and topology_reasons[index] is None
+                        ),
                         "reaction_core_saturation_policy_applied": (
                             core_saturation is not None and core_saturation.applies_to(record)
                         ),
+                        "ugi_ester_chemotype_policy_applied": (
+                            ugi_ester_chemotype_policy is not None
+                            and record.program_id == ugi_ester_chemotype_policy.reaction_id
+                        ),
+                        "ugi_role_chemistry_prior_applied": (
+                            ugi_role_chemistry_prior is not None
+                            and ugi_role_chemistry_prior_strength > 0
+                            and record.program_id == ugi_role_chemistry_prior.reaction_id
+                        ),
+                        "ugi_amine_semantic_target_applied": (
+                            local_semantic_targets[index] is not None
+                        ),
+                        "requested_ugi_amine_semantic_target": (
+                            None
+                            if local_semantic_targets[index] is None
+                            else local_semantic_targets[index].to_mapping()
+                        ),
+                        "requested_role_morphology": (
+                            {
+                                next(
+                                    block.role
+                                    for block in record.component_blocks
+                                    if block.role_state == state
+                                ): list(values)
+                                for state, values in _exact_role_morphology_targets(record).items()
+                            }
+                            if record.role_morphology_states is not None
+                            else None
+                        ),
+                        "sampled_topology": topology_diagnostics[index],
                         "exact_target_graph": smiles == record.graph.canonical_smiles,
                         "exact_tensor": all(exact_fields.values()),
                         "exact_fields": exact_fields,
@@ -1499,7 +2864,40 @@ def sample_synthesis_program_products(
         "exact_target_graph": sum(bool(row["exact_target_graph"]) for row in outputs),
         "exact_tensor": sum(bool(row["exact_tensor"]) for row in outputs),
         "fixed_state_failures": fixed_failures,
+        "sampling_factorization": sampling_factorization,
+        "learned_topology_flow_applied": any(
+            bool(row["learned_topology_flow_applied"]) for row in outputs
+        ),
+        "topology_proposal_context": (
+            "joint_flow_with_provisional_chemistry_then_discard_chemistry"
+            if learned_topology_then_chemistry
+            else None
+        ),
         "terminal_decode_policy": terminal_decode_policy,
+        "terminal_seed": terminal_seed,
+        "terminal_temperature": terminal_temperature,
+        "topology_conditioned_chemistry_steps": topology_conditioned_chemistry_steps,
+        "topology_conditioned_chemistry_seed": topology_conditioned_chemistry_seed,
+        "topology_conditioned_chemistry_flow_applied": any(
+            bool(row["topology_conditioned_chemistry_flow_applied"]) for row in outputs
+        ),
+        "topology_conditioned_chemistry_neural_evaluations_per_batch": (
+            topology_conditioned_chemistry_steps + 1 if topology_conditioned_chemistry else 0
+        ),
+        "topology_conditioned_chemistry_source_reset": topology_conditioned_chemistry,
+        "terminal_chemistry_readout": (
+            "support_constrained_soft_prior_categorical_atom_and_bond_draw"
+            if stochastic_terminal and ugi_role_chemistry_prior_strength > 0
+            else (
+                "support_constrained_categorical_atom_and_bond_draw"
+                if stochastic_terminal
+                else (
+                    "support_constrained_soft_prior_atom_and_bond_argmax"
+                    if ugi_role_chemistry_prior_strength > 0
+                    else "support_constrained_atom_and_bond_argmax"
+                )
+            )
+        ),
         "potency_condition": (
             None
             if potency_condition is None
@@ -1512,20 +2910,82 @@ def sample_synthesis_program_products(
         "strict_constraint_abstentions": sum(strict_abstentions.values()),
         "strict_constraint_abstention_reasons": dict(sorted(strict_abstentions.items())),
         "local_chemistry_policy_applied": local_chemistry_support is not None,
-        "program_topology_policy_applied": (
-            terminal_decode_policy
-            in {
-                PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
-                COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
-            }
+        "program_topology_policy_applied": any(
+            bool(row["program_topology_policy_applied"]) for row in outputs
         ),
-        "topology_coupling_second_pass_applied": coupled_ugi_topology,
+        "program_role_cycle_policy_applied": (
+            terminal_decode_policy in PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES
+        ),
+        "component_confined_policy_applied": any(
+            bool(row["component_confined_policy_applied"]) for row in outputs
+        ),
+        "topology_coupling_second_pass_applied": any(
+            bool(row["topology_coupling_second_pass_applied"]) for row in outputs
+        ),
         "topology_selection": (
-            "exact_program_conditional_sample_then_argmax_chemistry"
-            if coupled_ugi_topology
-            else None
+            (
+                "transformer_parent_and_closure_flow_then_support_constrained_topology_"
+                f"then_{topology_conditioned_chemistry_steps}_step_conditioned_chemistry_flow_"
+                "then_argmax_chemistry"
+            )
+            if learned_topology_then_chemistry
+            else (
+                (
+                    "measured_joint_program_then_constructive_ester_and_role_local_cycle_topology_"
+                    + (
+                        f"then_{topology_conditioned_chemistry_steps}_step_conditioned_chemistry_flow_"
+                        "then_sequential_masked_categorical_chemistry"
+                        if topology_conditioned_chemistry and stochastic_terminal
+                        else (
+                            f"then_{topology_conditioned_chemistry_steps}_step_conditioned_"
+                            "chemistry_flow_then_argmax_chemistry"
+                            if topology_conditioned_chemistry
+                            else (
+                                "then_sequential_masked_categorical_chemistry"
+                                if stochastic_terminal
+                                else "then_argmax_chemistry"
+                            )
+                        )
+                    )
+                )
+                if (
+                    ugi_ester_chemotype_policy is not None
+                    and any(bool(row["topology_coupling_second_pass_applied"]) for row in outputs)
+                )
+                else (
+                    (
+                        "exact_program_conditional_sample_"
+                        f"then_{topology_conditioned_chemistry_steps}_step_conditioned_chemistry_flow_"
+                        "then_sequential_masked_categorical_chemistry"
+                        if topology_conditioned_chemistry and stochastic_terminal
+                        else (
+                            "exact_program_conditional_sample_"
+                            f"then_{topology_conditioned_chemistry_steps}_step_conditioned_"
+                            "chemistry_flow_then_argmax_chemistry"
+                            if topology_conditioned_chemistry
+                            else (
+                                "exact_program_conditional_sample_then_sequential_masked_"
+                                "categorical_chemistry"
+                                if stochastic_terminal
+                                else "exact_program_conditional_sample_then_argmax_chemistry"
+                            )
+                        )
+                    )
+                    if any(bool(row["topology_coupling_second_pass_applied"]) for row in outputs)
+                    else None
+                )
+            )
         ),
-        "topology_seed": seed + 1 if coupled_ugi_topology else None,
+        "terminal_neural_refresh_after_each_choice": False,
+        "topology_seed": (
+            seed
+            if learned_topology_then_chemistry
+            else (
+                seed + 1
+                if any(bool(row["topology_coupling_second_pass_applied"]) for row in outputs)
+                else None
+            )
+        ),
         "ugi_topology_policy": (
             None if ugi_topology_policy is None else ugi_topology_policy.to_mapping()
         ),
@@ -1535,6 +2995,31 @@ def sample_synthesis_program_products(
             if reaction_core_saturation_policy is None
             else reaction_core_saturation_policy.to_mapping()
         ),
+        "ugi_ester_chemotype_policy_applied": ugi_ester_chemotype_policy is not None,
+        "ugi_ester_chemotype_policy": (
+            None if ugi_ester_chemotype_policy is None else ugi_ester_chemotype_policy.to_mapping()
+        ),
+        "ugi_role_chemistry_prior_applied": (
+            ugi_role_chemistry_prior is not None and ugi_role_chemistry_prior_strength > 0
+        ),
+        "ugi_role_chemistry_prior_strength": ugi_role_chemistry_prior_strength,
+        "ugi_role_chemistry_prior": (
+            None if ugi_role_chemistry_prior is None else ugi_role_chemistry_prior.to_mapping()
+        ),
+        "ugi_amine_semantic_target_applied": ugi_amine_semantic_targets is not None,
+        "ugi_amine_semantic_joint_support_applied": (
+            ugi_amine_semantic_targets is not None and local_chemistry_support is not None
+        ),
+        "ugi_amine_semantic_target_policy": (
+            None
+            if ugi_amine_semantic_targets is None
+            else {
+                "source": "identity-free measured-Ugi train-fold conditional program",
+                "fields": list(ugi_amine_semantic_targets[0].to_mapping()),
+                "sampling": "one semantic draw and one exact conditional decode without retry",
+                "topology_conditioning": "nonempty train-fold local-chemistry support",
+            }
+        ),
         "by_program": by_program,
         "repairs": dict(Counter()),
     }
@@ -1542,13 +3027,26 @@ def sample_synthesis_program_products(
 
 __all__ = [
     "CHECKPOINT_SCHEMA",
+    "COMPONENT_CONFINED_TERMINAL_DECODE_POLICIES",
+    "CORE_SATURATION_TERMINAL_DECODE_POLICIES",
     "CORE_SATURATION_TERMINAL_DECODE_POLICY",
     "COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY",
+    "LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES",
     "LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY",
+    "PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES",
+    "PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES",
     "PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY",
+    "ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY",
     "STRICT_TERMINAL_DECODE_POLICIES",
     "SUPPORTED_TERMINAL_DECODE_POLICIES",
     "TERMINAL_DECODE_POLICIES",
+    "UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES",
+    "UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY",
+    "UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY",
+    "UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY",
+    "UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY",
+    "UGI_ESTER_TERMINAL_DECODE_POLICIES",
+    "STOCHASTIC_TERMINAL_DECODE_POLICIES",
     "SynthesisProgramSamplingError",
     "load_synthesis_program_checkpoint",
     "decode_synthesis_program_strict_argmax",

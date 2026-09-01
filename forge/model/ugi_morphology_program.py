@@ -728,6 +728,105 @@ def _attached_program_schedule(
     )
 
 
+def attached_forest_structured_nll(
+    logits: Any,
+    targets: Any,
+    *,
+    junction_budget: int,
+    attachment_count: int = 1,
+    maximum_adjacent_branch_run: int | None = None,
+) -> Any:
+    """Exact negative log likelihood under the constructive attached-tree grammar.
+
+    ``logits`` may be one ``[nodes, classes]`` score matrix or a batch of matrices with one
+    shared morphology signature.  The partition function sums only offspring words accepted by
+    the same node-count, junction, attachment and branch-run grammar used by the constructive
+    sampler.  This makes supervision act on complete topology decisions rather than independent
+    per-node child labels.
+    """
+
+    try:
+        import torch
+    except ModuleNotFoundError as exc:  # pragma: no cover - optional dependency
+        raise UgiMorphologyProgramError("structured topology loss requires torch") from exc
+    squeeze = logits.ndim == 2
+    if squeeze:
+        logits = logits[None]
+        targets = targets[None]
+    if (
+        logits.ndim != 3
+        or targets.ndim != 2
+        or logits.shape[:2] != targets.shape
+        or logits.shape[1] < 1
+        or logits.shape[2] < 2
+    ):
+        raise UgiMorphologyProgramError(
+            "structured topology loss expects [batch,nodes,classes] logits and targets"
+        )
+    node_count = int(logits.shape[1])
+    maximum_children = int(logits.shape[2]) - 1
+    if not attached_program_feasible(
+        node_count,
+        junction_budget,
+        maximum_children,
+        attachment_count,
+    ):
+        raise UgiMorphologyProgramError("structured topology program is infeasible")
+    branch_limit = (
+        node_count if maximum_adjacent_branch_run is None else maximum_adjacent_branch_run
+    )
+    if branch_limit < 0:
+        raise UgiMorphologyProgramError("structured topology branch-run support is invalid")
+    schedule = _attached_program_schedule(
+        node_count=node_count,
+        junction_budget=int(junction_budget),
+        maximum_children=maximum_children,
+        attachment_count=int(attachment_count),
+        branch_limit=int(branch_limit),
+    )
+    if schedule.initial_index is None:
+        raise UgiMorphologyProgramError(
+            "structured topology grammar contains no supported completion"
+        )
+
+    scores = logits.to(torch.float32)
+    device = scores.device
+    batch_size = int(scores.shape[0])
+    suffix = scores.new_zeros((batch_size, len(schedule.states[node_count])))
+    for position in range(node_count - 1, -1, -1):
+        transition = torch.as_tensor(
+            schedule.transitions[position], dtype=torch.long, device=device
+        )
+        valid = transition >= 0
+        gathered = suffix[:, transition.clamp(min=0)]
+        terms = scores[:, position, None, :] + gathered
+        suffix = torch.logsumexp(terms.masked_fill(~valid[None], -torch.inf), dim=-1)
+    log_partition = suffix[:, schedule.initial_index]
+
+    target_states = targets.to(device=device, dtype=torch.long)
+    if torch.any((target_states < 0) | (target_states > maximum_children)):
+        raise UgiMorphologyProgramError("structured topology target exceeds child support")
+    state_index = torch.full((batch_size,), schedule.initial_index, dtype=torch.long, device=device)
+    batch_index = torch.arange(batch_size, device=device)
+    target_score = scores.new_zeros(batch_size)
+    target_supported = torch.ones(batch_size, dtype=torch.bool, device=device)
+    for position in range(node_count):
+        transition = torch.as_tensor(
+            schedule.transitions[position], dtype=torch.long, device=device
+        )
+        children = target_states[:, position]
+        target_score += scores[batch_index, position, children]
+        next_state = transition[state_index.clamp(min=0), children]
+        target_supported &= next_state >= 0
+        state_index = next_state
+    if not bool(target_supported.all()):
+        raise UgiMorphologyProgramError(
+            "training offspring target lies outside the declared constructive grammar"
+        )
+    losses = log_partition - target_score
+    return losses[0] if squeeze else losses
+
+
 def _sample_attached_offspring_with_exact_budget(
     logits: Any,
     *,
@@ -898,6 +997,81 @@ def decode_attached_offspring_with_exact_budget(
     ):
         raise UgiMorphologyProgramError("exact attached-tree decoder violated its contract")
     return output
+
+
+def enumerate_attached_offspring_with_exact_budget(
+    *,
+    node_count: int,
+    junction_budget: int,
+    maximum_children: int,
+    attachment_count: int = 1,
+    maximum_adjacent_branch_run: int | None = None,
+    maximum_enumerated_nodes: int = 12,
+) -> tuple[np.ndarray, ...]:
+    """Enumerate every supported attached-forest word for a small exact program.
+
+    This utility is reserved for bounded semantic coordinates whose feasibility cannot be carried
+    by the ordinary count-only dynamic-programming state.  It performs no rejection, retry or
+    repair: the returned tuple is the complete declared support in deterministic lexical order.
+    """
+
+    if (
+        node_count < 1
+        or node_count > maximum_enumerated_nodes
+        or maximum_children < 1
+        or junction_budget < 0
+        or not 1 <= attachment_count <= node_count
+        or (
+            maximum_adjacent_branch_run is not None
+            and maximum_adjacent_branch_run < 0
+        )
+        or not attached_program_feasible(
+            node_count,
+            junction_budget,
+            maximum_children,
+            attachment_count,
+        )
+    ):
+        raise UgiMorphologyProgramError(
+            "attached-forest enumeration request is outside bounded support"
+        )
+    partial = np.zeros(node_count, dtype=np.int64)
+    output: list[np.ndarray] = []
+
+    def visit(position: int, pending: int, remaining_budget: int) -> None:
+        if position == node_count:
+            if pending != 0 or remaining_budget != 0:
+                return
+            candidate = partial.copy()
+            if (
+                maximum_adjacent_branch_run is not None
+                and maximum_adjacent_branch_graph_run(
+                    candidate, attachment_count=attachment_count
+                )
+                > maximum_adjacent_branch_run
+            ):
+                return
+            output.append(candidate)
+            return
+        for children in range(maximum_children + 1):
+            state = _attached_choice_valid(
+                position=position,
+                pending=pending,
+                remaining_budget=remaining_budget,
+                children=children,
+                node_count=node_count,
+            )
+            if state is None:
+                continue
+            partial[position] = children
+            visit(position + 1, *state)
+
+    visit(0, attachment_count, junction_budget)
+    if not output:
+        raise UgiMorphologyProgramError(
+            "attached-forest enumeration found no supported completion"
+        )
+    return tuple(output)
 
 
 def sample_attached_offspring_with_exact_budget(

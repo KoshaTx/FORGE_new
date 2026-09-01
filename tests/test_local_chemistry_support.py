@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -14,7 +15,10 @@ from forge.model.local_chemistry_support import (
     assess_product_local_chemistry,
     build_local_chemistry_support,
 )
-from forge.model.reaction_program_flow import collate_synthesis_program_layouts
+from forge.model.reaction_program_flow import (
+    collate_synthesis_program_layouts,
+    derive_role_morphology_states,
+)
 from forge.model.sparse_topology_feasibility import SparseGraphRecord
 from forge.model.synthesis_program_graph import (
     SynthesisProgramComponentBlock,
@@ -151,6 +155,52 @@ def _prefer_record_topology(
     ):
         predictions["closure_left"][0, slot, int(left)] = 20.0
         predictions["closure_right"][0, slot, int(right)] = 20.0
+
+
+def _two_role_ring_record() -> SynthesisProgramGraphRecord:
+    """One supported five-ring in role 1 and an unsupported chain in role 2."""
+
+    node_count = 10
+    parents = np.asarray((0, 0, 1, 2, 3, 0, 5, 6, 7, 8), dtype=np.int64)
+    edges = np.zeros((node_count, node_count), dtype=np.int8)
+    for child in range(1, node_count):
+        edges[child, int(parents[child])] = 1
+        edges[int(parents[child]), child] = 1
+    edges[0, 4] = edges[4, 0] = 1
+    graph = SparseGraphRecord(
+        structure_id="two-role-five-ring",
+        canonical_smiles="C1CCCC1CCCCC",
+        node_states=np.zeros(node_count, dtype=np.int64),
+        parents=parents,
+        parent_bonds=np.zeros(node_count, dtype=np.int64),
+        closure_left=np.asarray([0], dtype=np.int64),
+        closure_right=np.asarray([4], dtype=np.int64),
+        closure_bonds=np.zeros(1, dtype=np.int64),
+        edges=edges,
+    )
+    record = SynthesisProgramGraphRecord(
+        graph=graph,
+        canonical_atom_order=np.arange(node_count, dtype=np.int64),
+        program_id=PROGRAM,
+        program_state=1,
+        program_depth=1,
+        role_states=np.asarray((1,) * 5 + (2,) * 5, dtype=np.int64),
+        core_position_states=np.ones(node_count, dtype=np.int64),
+        component_blocks=(
+            SynthesisProgramComponentBlock("head", 1, 0, 5),
+            SynthesisProgramComponentBlock("tail", 2, 5, 10),
+        ),
+        fixed_atom_mask=np.asarray(
+            (True, False, False, False, False, True, False, False, False, False),
+            dtype=np.bool_,
+        ),
+        fixed_parent_bond_mask=np.asarray(
+            (False, False, False, False, False, True, False, False, False, False),
+            dtype=np.bool_,
+        ),
+        fixed_closure_bond_mask=np.zeros(1, dtype=np.bool_),
+    )
+    return replace(record, role_morphology_states=derive_role_morphology_states(record))
 
 
 def test_local_chemistry_policy_roundtrips_without_component_identity() -> None:
@@ -301,6 +351,34 @@ def test_local_decoder_uses_complete_role_conditioned_ring_morphology() -> None:
     assert not support.allows_any_role_cycle(PROGRAM, ("tail",) * 4)
     assert unsupported_reasons == ("closure_pair_unavailable",)
     assert supported_reasons == (None,)
+
+
+def test_role_local_cycle_policy_keeps_a_supported_ring_in_its_requested_role() -> None:
+    record = _two_role_ring_record()
+    support = build_local_chemistry_support((record,), ATOM_VOCABULARY)
+    layout = collate_synthesis_program_layouts((record,), maximum_closures=1)
+    predictions = _predictions(layout)
+    _prefer_record_topology(predictions, record)
+    # Prefer a five-membered ring in the tail. The combined constraints must ignore it because
+    # the sampled program requested one head ring and zero tail rings.
+    predictions["closure_left"][0, 0, 5] = 100.0
+    predictions["closure_right"][0, 0, 9] = 100.0
+
+    terminal, reasons = decode_synthesis_program_strict_argmax(
+        predictions,
+        layout,
+        (record,),
+        ATOM_VOCABULARY,
+        support,
+        enforce_program_cycles=True,
+        confine_generated_edges=True,
+    )
+
+    assert reasons == (None,)
+    assert {
+        int(terminal["closure_left"][0, 0]),
+        int(terminal["closure_right"][0, 0]),
+    } == {0, 4}
 
 
 def test_local_decoder_policy_binding_fails_closed() -> None:

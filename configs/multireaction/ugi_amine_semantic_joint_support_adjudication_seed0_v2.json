@@ -1,0 +1,61 @@
+{
+  "schema_version": "forge.ugi_amine_semantic_joint_support_adjudication_config.v1",
+  "scientific_question": "Does complete topology-local-chemistry support retain the seed-0 measured-Ugi role-realism improvement of amine-semantic conditioning while preserving exact assembly and diversity within the frozen margins?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    }
+  },
+  "arms": {
+    "count_only": {
+      "archive_member": "count_only/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_count_only_ugi_program",
+      "seed": 0
+    },
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "count_only",
+  "treatment_arm": "amine_semantic",
+  "expected_attempts": 3072,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "promotion_gate": {
+    "effective_component_count_minimum_retained_ratio": 0.8,
+    "exact_l1_noninferiority_margin": 0.02,
+    "local_support_noninferiority_margin": 0.02,
+    "mean_pairwise_ecfp4_distance_noninferiority_margin": 0.05,
+    "require_uniform_role_panel_improvement": true,
+    "require_zero_program_support_abstentions": true,
+    "unique_exact_l1_noninferiority_margin": 0.05,
+    "validity_noninferiority_margin": 0.02
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development adjudication, not an across-training-seed or held-out model claim.",
+    "The adjudicator performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The measured-Ugi role panel is primary; broad-R0 C2ST is retained only as a secondary compatibility diagnostic.",
+    "Promotion does not establish activity, synthesis success, formulation performance or biological efficacy."
+  ]
+}

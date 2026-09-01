@@ -1,0 +1,80 @@
+{
+  "schema_version": "forge.synthesis_program_production_evaluation_config.v1",
+  "execution_scope": "production",
+  "inputs": {
+    "production_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "program_config": {
+      "path": "configs/multireaction/lnpdb_reaction_programs_v1.json",
+      "sha256": "a7aba87a63e3bcf34c61fa7951fbb7a77340641ed852993b4221d3b77072f021"
+    },
+    "qualified_reaction_families": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "local_chemistry_support": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "topology_closure_config": {
+      "path": "configs/model/phase1_ugi_closure_expanded.json",
+      "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+    },
+    "topology_morphology_config": {
+      "path": "configs/model/phase1_ugi_morphology_expanded.json",
+      "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+    }
+  },
+  "smoke": {
+    "device": "cpu",
+    "checkpoint_steps": [9143],
+    "sample_steps": 32,
+    "batch_size": 8,
+    "calibration_samples": 2,
+    "heldout_samples": 8,
+    "component_disjoint_record_limit": 2,
+    "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+  },
+  "diagnostic": {
+    "device": "cpu",
+    "checkpoint_steps": [9143],
+    "sample_steps": 32,
+    "batch_size": 16,
+    "calibration_samples": 2,
+    "heldout_samples": 64,
+    "component_disjoint_record_limit": 2,
+    "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+  },
+  "full": {
+    "device": "cuda",
+    "checkpoint_steps": [9143],
+    "sample_steps": 32,
+    "batch_size": 128,
+    "calibration_samples": 512,
+    "heldout_samples": 3072,
+    "component_disjoint_record_limit": null,
+    "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+  }
+}

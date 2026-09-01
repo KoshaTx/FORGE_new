@@ -1,0 +1,55 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "Does the joint measured-plus-virtual Ugi specialization move generated exact-L1 precursor-role morphology closer to the group-balanced measured Ugi train-development reference than the frozen base checkpoint?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-joint-lipid-specialist-seed0-h100-v5/5bcfcbacc378c9a35b896147596c49ecf6951562e5e165b66febcfb19b81cf9a/stages/compare_base/artifacts/comparison_details.tar",
+      "sha256": "119530bdc872433e698163a5e2d2382a63ec8601862dcb67a3638d8365c94272"
+    }
+  },
+  "arms": {
+    "base": {
+      "archive_member": "base_assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_base_topology_first",
+      "seed": 0
+    },
+    "joint_lipid_specialist": {
+      "archive_member": "specialist_assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_ugi_joint_lipid_specialist_topology_first",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "base",
+  "expected_attempts": 3072,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development re-adjudication, not a held-out or across-training-seed model claim.",
+    "The assay performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The panel reports directional consistency without a confidence interval or significance claim.",
+    "C2ST is a secondary diagnostic and does not determine the panel classification.",
+    "No intervention is promoted from this diagnostic without a separately frozen production comparison."
+  ]
+}

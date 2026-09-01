@@ -1073,6 +1073,792 @@ def evaluate_ugi_reaction_topology_specialist_v0_comparison_stage(
     )
 
 
+def _require_successful_ugi_chemistry_preflight(
+    config: dict[str, Any],
+    preflight: dict[str, Any],
+) -> None:
+    """Reject production unless the real 64-program H100 preflight passed every gate."""
+
+    expected_preflight = config.get("profiles", {}).get("h100_preflight", {})
+    expected_program_count = expected_preflight.get("program_count")
+    preflight_gates = preflight.get("preflight_gates")
+    if (
+        preflight.get("status") != "complete"
+        or preflight.get("profile") != "h100_preflight"
+        or preflight.get("programs_per_method") != expected_program_count
+        or not isinstance(preflight_gates, dict)
+        or not preflight_gates
+        or not all(value is True for value in preflight_gates.values())
+    ):
+        raise StageError(
+            "chemistry-specialist production evaluation requires a successful authenticated "
+            f"{expected_program_count}-program h100_preflight result"
+        )
+
+
+def _ugi_chemistry_specialist_base_comparison_stage(
+    context: RunContext,
+    *,
+    dependency_stage: str | None,
+    result_schema: str,
+    archive_schema: str,
+    run_profile: str | None = None,
+    gate_dependency_stage: str | None = None,
+) -> StageResult:
+    """Run one versioned chemistry-only Ugi comparison stage."""
+
+    from experiments.phase1.product_l1.evaluation.ugi_chemistry_specialist_comparison import (
+        run_ugi_chemistry_specialist_comparison,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    if gate_dependency_stage is not None:
+        preflight_artifact = context.dependency(gate_dependency_stage, "result")
+        preflight = json.loads(preflight_artifact.path.read_text())
+        _require_successful_ugi_chemistry_preflight(config, preflight)
+    if dependency_stage is None:
+        required_recovery = {"specialist_checkpoint", "specialist_result"}
+        if not required_recovery.issubset(context.inputs):
+            raise StageError(
+                "standalone chemistry-specialist comparison requires pinned checkpoint and "
+                "result inputs"
+            )
+        specialist_checkpoint = context.input("specialist_checkpoint")
+        if context.input("specialist_result") != specialist_checkpoint.with_name("result.json"):
+            raise StageError(
+                "standalone chemistry-specialist result must be adjacent to checkpoint"
+            )
+    else:
+        specialist_checkpoint = context.dependency(dependency_stage, "checkpoint").path
+    work = context.work_dir / "ugi_chemistry_specialist_base_comparison"
+    result = run_ugi_chemistry_specialist_comparison(
+        context.config_path,
+        specialist_checkpoint,
+        context.repo,
+        work,
+        profile=run_profile or context.profile,
+        device=context.resources.device,
+        resume=context.resume,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("comparison_details.tar"),
+        base=work,
+    )
+    base = result["methods"]["base"]["metrics"]
+    specialist_method_key = str(result.get("specialist_method_key", "chemistry_specialist"))
+    specialist = result["methods"][specialist_method_key]["metrics"]
+    delta_key = f"{specialist_method_key}_minus_base"
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                result_schema,
+            ),
+            ProducedArtifact(
+                "comparison_details",
+                "comparison_details.tar",
+                archive_schema,
+                rows=int(result["programs_per_method"]),
+            ),
+        ),
+        metrics={
+            "programs_per_method": int(result["programs_per_method"]),
+            "base_exact_l1": float(base["exact_l1_yield_per_attempt"]),
+            "specialist_exact_l1": float(specialist["exact_l1_yield_per_attempt"]),
+            "exact_l1_delta": float(result[delta_key]["exact_l1_yield_per_attempt"]),
+        },
+        summary={
+            "promotion_decision": str(result["promotion_decision"]),
+            "training_calls": 0,
+            "repairs_or_retries": False,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+@stage("evaluate.ugi.chemistry-specialist-base-comparison.v3")
+def evaluate_ugi_chemistry_specialist_base_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare a chemistry-only Ugi delta with its frozen base on paired programs."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_chemistry_specialist_comparison_result.v3",
+        archive_schema="forge.ugi_chemistry_specialist_comparison_archive.v3",
+    )
+
+
+@stage("evaluate.ugi.chemistry-specialist-base-comparison-preflight.v4")
+def evaluate_ugi_chemistry_specialist_base_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate the real sampler on measured-Ugi joint morphology support."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="preflight",
+        result_schema="forge.ugi_chemistry_specialist_comparison_result.v4",
+        archive_schema="forge.ugi_chemistry_specialist_comparison_archive.v4",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.chemistry-specialist-base-comparison.v4")
+def evaluate_ugi_chemistry_specialist_base_comparison_v4_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare a chemistry-only Ugi delta on measured-Ugi joint programs."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_chemistry_specialist_comparison_result.v4",
+        archive_schema="forge.ugi_chemistry_specialist_comparison_archive.v4",
+    )
+
+
+@stage("evaluate.ugi.chemistry-specialist-base-comparison-preflight-recovery.v4")
+def evaluate_ugi_chemistry_specialist_base_comparison_preflight_recovery_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate the real sampler using a pinned completed chemistry specialist."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage=None,
+        result_schema="forge.ugi_chemistry_specialist_comparison_result.v4",
+        archive_schema="forge.ugi_chemistry_specialist_comparison_archive.v4",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.chemistry-specialist-base-comparison-recovery.v4")
+def evaluate_ugi_chemistry_specialist_base_comparison_recovery_stage(
+    context: RunContext,
+) -> StageResult:
+    """Evaluate a pinned completed chemistry specialist on measured-Ugi programs."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage=None,
+        result_schema="forge.ugi_chemistry_specialist_comparison_result.v4",
+        archive_schema="forge.ugi_chemistry_specialist_comparison_archive.v4",
+        gate_dependency_stage="comparison_preflight",
+    )
+
+
+@stage("evaluate.ugi.joint-lipid-specialist-base-comparison-preflight.v5")
+def evaluate_ugi_joint_lipid_specialist_base_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate joint-prior Ugi adaptation on the paired measured-morphology sampler."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="preflight",
+        result_schema="forge.ugi_joint_lipid_specialist_comparison_result.v5",
+        archive_schema="forge.ugi_joint_lipid_specialist_comparison_archive.v5",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.joint-lipid-specialist-base-comparison.v5")
+def evaluate_ugi_joint_lipid_specialist_base_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare the full-output joint-prior Ugi adapter with its exact frozen base."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_joint_lipid_specialist_comparison_result.v5",
+        archive_schema="forge.ugi_joint_lipid_specialist_comparison_archive.v5",
+        gate_dependency_stage="comparison_preflight",
+    )
+
+
+@stage("evaluate.ugi.role-local-specialist-base-comparison-preflight.v6")
+def evaluate_ugi_role_local_specialist_base_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate role-local Ugi decoding on the paired measured-morphology sampler."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="preflight",
+        result_schema="forge.ugi_role_local_specialist_comparison_result.v6",
+        archive_schema="forge.ugi_role_local_specialist_comparison_archive.v6",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.role-local-specialist-base-comparison.v6")
+def evaluate_ugi_role_local_specialist_base_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare the role-local Ugi tree decoder with its exact frozen base."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_role_local_specialist_comparison_result.v6",
+        archive_schema="forge.ugi_role_local_specialist_comparison_archive.v6",
+        gate_dependency_stage="comparison_preflight",
+    )
+
+
+@stage("evaluate.ugi.measured-only-full-model-base-comparison-preflight.v7")
+def evaluate_ugi_measured_only_full_model_base_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate the measured-only full-model diagnostic on its paired sampler."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="preflight",
+        result_schema="forge.ugi_measured_only_full_model_comparison_result.v7",
+        archive_schema="forge.ugi_measured_only_full_model_comparison_archive.v7",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.measured-only-full-model-base-comparison.v7")
+def evaluate_ugi_measured_only_full_model_base_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare the measured-only full-model fine-tune with its exact frozen base."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_measured_only_full_model_comparison_result.v7",
+        archive_schema="forge.ugi_measured_only_full_model_comparison_archive.v7",
+        gate_dependency_stage="comparison_preflight",
+    )
+
+
+@stage("evaluate.ugi.structured-topology-specialist-base-comparison-preflight.v8")
+def evaluate_ugi_structured_topology_specialist_base_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Gate grammar-normalized Ugi topology scoring on paired measured morphologies."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="preflight",
+        result_schema="forge.ugi_structured_topology_specialist_comparison_result.v8",
+        archive_schema="forge.ugi_structured_topology_specialist_comparison_archive.v8",
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.structured-topology-specialist-base-comparison.v8")
+def evaluate_ugi_structured_topology_specialist_base_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare the structured Ugi topology head with its exact frozen base."""
+
+    return _ugi_chemistry_specialist_base_comparison_stage(
+        context,
+        dependency_stage="specialize_ugi",
+        result_schema="forge.ugi_structured_topology_specialist_comparison_result.v8",
+        archive_schema="forge.ugi_structured_topology_specialist_comparison_archive.v8",
+        run_profile="h100_preflight",
+    )
+
+
+def _require_successful_ugi_group_balanced_program_prior_preflight(
+    config: dict[str, Any], preflight: dict[str, Any]
+) -> None:
+    """Require the real 256-program H100 execution gate before the full comparison."""
+
+    expected = config.get("profiles", {}).get("h100_preflight", {}).get("program_count")
+    checks = preflight.get("preflight_checks")
+    if (
+        preflight.get("schema_version")
+        != "forge.ugi_group_balanced_program_prior_comparison_result.v1"
+        or preflight.get("status") != "complete"
+        or preflight.get("profile") != "h100_preflight"
+        or preflight.get("programs_per_method") != expected
+        or not isinstance(checks, dict)
+        or not checks
+        or not all(value is True for value in checks.values())
+    ):
+        raise StageError(
+            "group-balanced program-prior production comparison requires a successful "
+            f"authenticated {expected}-program H100 preflight"
+        )
+
+
+def _ugi_group_balanced_program_prior_comparison_stage(
+    context: RunContext,
+    *,
+    run_profile: str,
+    gate_dependency_stage: str | None = None,
+) -> StageResult:
+    """Run the identity-free occurrence- versus group-balanced program-law comparison."""
+
+    from experiments.phase1.product_l1.evaluation.ugi_group_balanced_program_prior_comparison import (
+        run_ugi_group_balanced_program_prior_comparison,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    if gate_dependency_stage is not None:
+        preflight = json.loads(context.dependency(gate_dependency_stage, "result").path.read_text())
+        _require_successful_ugi_group_balanced_program_prior_preflight(config, preflight)
+    work = context.work_dir / "ugi_group_balanced_program_prior_comparison"
+    result = run_ugi_group_balanced_program_prior_comparison(
+        context.config_path,
+        context.repo,
+        work,
+        profile=run_profile,
+        device=context.resources.device,
+        resume=context.resume,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("comparison_details.tar"),
+        base=work,
+    )
+    control = result["methods"]["occurrence_weighted"]["metrics"]
+    treatment = result["methods"]["group_balanced"]["metrics"]
+    delta = result["group_balanced_minus_occurrence_weighted"]
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.ugi_group_balanced_program_prior_comparison_result.v1",
+            ),
+            ProducedArtifact(
+                "comparison_details",
+                "comparison_details.tar",
+                "forge.ugi_group_balanced_program_prior_comparison_archive.v1",
+                rows=int(result["programs_per_method"]),
+            ),
+        ),
+        metrics={
+            "programs_per_method": int(result["programs_per_method"]),
+            "occurrence_weighted_exact_l1": float(control["exact_l1_yield_per_attempt"]),
+            "group_balanced_exact_l1": float(treatment["exact_l1_yield_per_attempt"]),
+            "realism_c2st_delta": (
+                None if delta["realism_c2st_auc"] is None else float(delta["realism_c2st_auc"])
+            ),
+        },
+    )
+
+
+@stage("evaluate.ugi.group-balanced-program-prior-comparison-preflight.v1")
+def evaluate_ugi_group_balanced_program_prior_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Run the paid execution-only H100 preflight for the new program law."""
+
+    return _ugi_group_balanced_program_prior_comparison_stage(
+        context,
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.group-balanced-program-prior-comparison.v1")
+def evaluate_ugi_group_balanced_program_prior_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Run the full matched base-model realism comparison after preflight."""
+
+    return _ugi_group_balanced_program_prior_comparison_stage(
+        context,
+        run_profile="full",
+        gate_dependency_stage="preflight",
+    )
+
+
+def _require_successful_ugi_amine_semantic_program_preflight(
+    config: dict[str, Any], preflight: dict[str, Any]
+) -> None:
+    """Require the real 256-program H100 semantic-support gate before production."""
+
+    expected = config.get("profiles", {}).get("h100_preflight", {}).get("program_count")
+    checks = preflight.get("preflight_checks")
+    if (
+        preflight.get("schema_version")
+        != "forge.ugi_amine_semantic_program_comparison_result.v1"
+        or preflight.get("status") != "complete"
+        or preflight.get("profile") != "h100_preflight"
+        or preflight.get("programs_per_method") != expected
+        or not isinstance(checks, dict)
+        or not checks
+        or not all(value is True for value in checks.values())
+    ):
+        raise StageError(
+            "amine-semantic production comparison requires a successful authenticated "
+            f"{expected}-program H100 preflight"
+        )
+
+
+def _ugi_amine_semantic_program_comparison_stage(
+    context: RunContext,
+    *,
+    run_profile: str,
+    gate_dependency_stage: str | None = None,
+) -> StageResult:
+    """Run the paired count-only versus identity-free amine-semantic comparison."""
+
+    from experiments.phase1.product_l1.evaluation.ugi_amine_semantic_program_comparison import (
+        run_ugi_amine_semantic_program_comparison,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    if gate_dependency_stage is not None:
+        preflight = json.loads(context.dependency(gate_dependency_stage, "result").path.read_text())
+        _require_successful_ugi_amine_semantic_program_preflight(config, preflight)
+    work = context.work_dir / "ugi_amine_semantic_program_comparison"
+    result = run_ugi_amine_semantic_program_comparison(
+        context.config_path,
+        context.repo,
+        work,
+        profile=run_profile,
+        device=context.resources.device,
+        resume=context.resume,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("comparison_details.tar"),
+        base=work,
+    )
+    control = result["methods"]["count_only"]["metrics"]
+    treatment = result["methods"]["amine_semantic"]["metrics"]
+    delta = result["amine_semantic_minus_count_only"]
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.ugi_amine_semantic_program_comparison_result.v1",
+            ),
+            ProducedArtifact(
+                "comparison_details",
+                "comparison_details.tar",
+                "forge.ugi_amine_semantic_program_comparison_archive.v1",
+                rows=int(result["programs_per_method"]),
+            ),
+        ),
+        metrics={
+            "programs_per_method": int(result["programs_per_method"]),
+            "count_only_exact_l1": float(control["exact_l1_yield_per_attempt"]),
+            "amine_semantic_exact_l1": float(treatment["exact_l1_yield_per_attempt"]),
+            "realism_c2st_delta": (
+                None if delta["realism_c2st_auc"] is None else float(delta["realism_c2st_auc"])
+            ),
+        },
+    )
+
+
+@stage("evaluate.ugi.amine-semantic-program-comparison-preflight.v1")
+def evaluate_ugi_amine_semantic_program_comparison_preflight_stage(
+    context: RunContext,
+) -> StageResult:
+    """Run the paid execution-only H100 preflight for semantic head support."""
+
+    return _ugi_amine_semantic_program_comparison_stage(
+        context,
+        run_profile="h100_preflight",
+    )
+
+
+@stage("evaluate.ugi.amine-semantic-program-comparison.v1")
+def evaluate_ugi_amine_semantic_program_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Run the full paired semantic-program comparison after its strict preflight."""
+
+    return _ugi_amine_semantic_program_comparison_stage(
+        context,
+        run_profile="full",
+        gate_dependency_stage="preflight",
+    )
+
+
+@stage("evaluate.ugi.amine-semantic-joint-support-adjudication.v1")
+def evaluate_ugi_amine_semantic_joint_support_adjudication_stage(
+    context: RunContext,
+) -> StageResult:
+    """Apply the frozen measured-Ugi role panel to the full joint-support comparison."""
+
+    from experiments.phase1.multireaction.ugi_amine_semantic_joint_support_adjudication import (
+        run_ugi_amine_semantic_joint_support_adjudication,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    comparison_result = context.dependency("compare_full", "result").path
+    comparison_archive = context.dependency("compare_full", "comparison_details").path
+    work = context.work_dir / "ugi_amine_semantic_joint_support_adjudication"
+    result = run_ugi_amine_semantic_joint_support_adjudication(
+        context.config_path,
+        context.repo,
+        comparison_result,
+        comparison_archive,
+        work,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("adjudication_details.tar"),
+        base=work,
+    )
+    treatment = result["panel_comparison"]["comparisons"]["amine_semantic"]
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.ugi_amine_semantic_joint_support_adjudication.v1",
+            ),
+            ProducedArtifact(
+                "adjudication_details",
+                "adjudication_details.tar",
+                "forge.ugi_amine_semantic_joint_support_adjudication_archive.v1",
+                rows=int(result["expected_attempts_per_arm"]),
+            ),
+        ),
+        metrics={
+            "promotion_decision": str(result["promotion_decision"]),
+            "role_primary_metrics_improved": int(treatment["primary_metrics_improved"]),
+            "role_primary_metrics_total": int(treatment["primary_metrics_total"]),
+            "exact_l1_delta": float(
+                result["sampler_metric_delta"]["exact_l1_yield_per_attempt"]
+            ),
+        },
+    )
+
+
+@stage("evaluate.ugi.role-chemistry-prior-comparison.v1")
+def evaluate_ugi_role_chemistry_prior_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Calibrate identity-free train-fold local chemistry statistics at terminal decode."""
+
+    from experiments.phase1.product_l1.evaluation.ugi_role_chemistry_prior_comparison import (
+        run_ugi_role_chemistry_prior_comparison,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    run_profile = "h100_preflight" if context.resources.device == "cuda" else "smoke"
+    work = context.work_dir / "ugi_role_chemistry_prior_comparison"
+    result = run_ugi_role_chemistry_prior_comparison(
+        context.config_path,
+        context.repo,
+        work,
+        profile=run_profile,
+        device=context.resources.device,
+        resume=context.resume,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("comparison_details.tar"),
+        base=work,
+    )
+    methods = list(result["methods"].values())
+    reference = next(value for value in methods if float(value["strength"]) == 0.0)
+    estimated = [value for value in methods if value["metrics"].get("realism_c2st_auc") is not None]
+    best = min(estimated, key=lambda value: float(value["metrics"]["realism_c2st_auc"]))
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                "forge.ugi_role_chemistry_prior_comparison_result.v1",
+            ),
+            ProducedArtifact(
+                "comparison_details",
+                "comparison_details.tar",
+                "forge.ugi_role_chemistry_prior_comparison_archive.v1",
+                rows=int(result["programs_per_method"]) * len(methods),
+            ),
+        ),
+        metrics={
+            "programs_per_method": int(result["programs_per_method"]),
+            "lambda_zero_exact_l1": float(reference["metrics"]["exact_l1_yield_per_attempt"]),
+            "lambda_zero_realism_c2st": float(reference["metrics"]["realism_c2st_auc"]),
+            "best_observed_realism_c2st": float(best["metrics"]["realism_c2st_auc"]),
+        },
+        summary={
+            "selection_decision": str(result["selection_decision"]),
+            "selected_strength": result["selected_strength"],
+            "training_calls": 0,
+            "repairs_or_retries": False,
+            "component_identity_conditioning": False,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+def _ugi_terminal_chemistry_comparison_stage(
+    context: RunContext,
+    *,
+    flow_comparison: bool,
+    factorization_comparison: bool = False,
+) -> StageResult:
+    from experiments.phase1.product_l1.evaluation.ugi_terminal_chemistry_temperature_comparison import (
+        run_ugi_learned_topology_then_chemistry_comparison,
+        run_ugi_terminal_chemistry_temperature_comparison,
+        run_ugi_topology_conditioned_chemistry_flow_comparison,
+    )
+
+    config = context.config()
+    require_config_inputs(context, config)
+    run_profile = "h100_preflight" if context.resources.device == "cuda" else "smoke"
+    if factorization_comparison:
+        stem = "ugi_learned_topology_then_chemistry_comparison"
+        runner = run_ugi_learned_topology_then_chemistry_comparison
+        result_schema = "forge.ugi_learned_topology_then_chemistry_comparison_result.v1"
+        archive_schema = "forge.ugi_learned_topology_then_chemistry_comparison_archive.v1"
+    elif flow_comparison:
+        stem = "ugi_topology_conditioned_chemistry_flow_comparison"
+        runner = run_ugi_topology_conditioned_chemistry_flow_comparison
+        result_schema = "forge.ugi_topology_conditioned_chemistry_flow_comparison_result.v1"
+        archive_schema = "forge.ugi_topology_conditioned_chemistry_flow_comparison_archive.v1"
+    else:
+        stem = "ugi_terminal_chemistry_temperature_comparison"
+        runner = run_ugi_terminal_chemistry_temperature_comparison
+        result_schema = "forge.ugi_terminal_chemistry_temperature_comparison_result.v1"
+        archive_schema = "forge.ugi_terminal_chemistry_temperature_comparison_archive.v1"
+    work = context.work_dir / stem
+    result = runner(
+        context.config_path,
+        context.repo,
+        work,
+        profile=run_profile,
+        device=context.resources.device,
+        resume=context.resume,
+    )
+    _copy(work / "result.json", context.output_path("result.json"))
+    detail_files = [
+        path for path in work.rglob("*") if path.is_file() and path.name != "result.json"
+    ]
+    _deterministic_tar(
+        detail_files,
+        context.output_path("comparison_details.tar"),
+        base=work,
+    )
+    methods = list(result["methods"].values())
+    reference = result["methods"][str(result["reference_method"])]
+    estimated = [value for value in methods if value["metrics"].get("realism_c2st_auc") is not None]
+    best = min(estimated, key=lambda value: float(value["metrics"]["realism_c2st_auc"]))
+    reference_prefix = "constructive_topology" if factorization_comparison else "argmax"
+    return StageResult(
+        artifacts=(
+            ProducedArtifact(
+                "result",
+                "result.json",
+                result_schema,
+            ),
+            ProducedArtifact(
+                "comparison_details",
+                "comparison_details.tar",
+                archive_schema,
+                rows=int(result["programs_per_method"]) * len(methods),
+            ),
+        ),
+        metrics={
+            "programs_per_method": int(result["programs_per_method"]),
+            f"{reference_prefix}_exact_l1": float(
+                reference["metrics"]["exact_l1_yield_per_attempt"]
+            ),
+            f"{reference_prefix}_realism_c2st": float(reference["metrics"]["realism_c2st_auc"]),
+            "best_observed_realism_c2st": float(best["metrics"]["realism_c2st_auc"]),
+        },
+        summary={
+            "selection_decision": str(result["selection_decision"]),
+            (
+                "selected_topology_conditioned_chemistry_steps"
+                if flow_comparison and not factorization_comparison
+                else (
+                    "selected_sampling_factorization"
+                    if factorization_comparison
+                    else "selected_temperature"
+                )
+            ): result[
+                (
+                    "selected_topology_conditioned_chemistry_steps"
+                    if flow_comparison and not factorization_comparison
+                    else (
+                        "selected_sampling_factorization"
+                        if factorization_comparison
+                        else "selected_temperature"
+                    )
+                )
+            ],
+            "training_calls": 0,
+            "repairs_or_retries": False,
+            "component_identity_conditioning": False,
+            "candidate_selection": False,
+            "route_or_oracle_calls": 0,
+        },
+    )
+
+
+@stage("evaluate.ugi.terminal-chemistry-temperature-comparison.v1")
+def evaluate_ugi_terminal_chemistry_temperature_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Calibrate sequential masked chemistry draws against measured Ugi structures."""
+
+    return _ugi_terminal_chemistry_comparison_stage(context, flow_comparison=False)
+
+
+@stage("evaluate.ugi.topology-conditioned-chemistry-flow-comparison.v1")
+def evaluate_ugi_topology_conditioned_chemistry_flow_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare one-pass chemistry with repeated denoising on one constructed Ugi topology."""
+
+    return _ugi_terminal_chemistry_comparison_stage(context, flow_comparison=True)
+
+
+@stage("evaluate.ugi.learned-topology-then-chemistry-comparison.v1")
+def evaluate_ugi_learned_topology_then_chemistry_comparison_stage(
+    context: RunContext,
+) -> StageResult:
+    """Compare learned topology flow with the frozen constructive Ugi topology decoder."""
+
+    return _ugi_terminal_chemistry_comparison_stage(
+        context,
+        flow_comparison=True,
+        factorization_comparison=True,
+    )
+
+
 @stage("generate.ugi.closure-train.v1")
 def train_ugi_closure_stage(context: RunContext) -> StageResult:
     """Train the sparse closure scorer with resumable optimizer and RNG state."""

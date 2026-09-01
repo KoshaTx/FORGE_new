@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -7,11 +9,15 @@ import pytest
 import torch
 
 from forge.model.defog_feasibility import AtomState
+from forge.model.local_chemistry_support import build_local_chemistry_support
 from forge.model.reaction_core_saturation import (
     ReactionCoreSaturationError,
     ReactionCoreSaturationPolicy,
 )
-from forge.model.reaction_program_flow import collate_synthesis_program_layouts
+from forge.model.reaction_program_flow import (
+    collate_synthesis_program_layouts,
+    derive_role_morphology_states,
+)
 from forge.model.sparse_topology_feasibility import SparseGraphRecord
 from forge.model.synthesis_program_graph import (
     SynthesisProgramComponentBlock,
@@ -19,12 +25,15 @@ from forge.model.synthesis_program_graph import (
 )
 from forge.model.synthesis_program_sampling import (
     CORE_SATURATION_TERMINAL_DECODE_POLICY,
+    ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+    UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
     SynthesisProgramSamplingError,
     decode_synthesis_program_strict_argmax,
     sample_synthesis_program_products,
 )
 
 REGISTRY = Path("data/vendor/qualified_reactions_v1.json")
+REPO = Path(__file__).resolve().parents[1]
 REGISTRY_SHA256 = "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
 PROGRAM = "ugi_3cr_agile"
 CORE_POSITION_STATES = (
@@ -215,6 +224,31 @@ def test_saturation_holds_exactly_on_every_constrained_decode() -> None:
         assert int(used[6]) == 4, preferred  # map_4 amide nitrogen stays N-H
 
 
+def test_core_saturation_composes_with_exact_program_and_local_support() -> None:
+    record = _record()
+    record = replace(record, role_morphology_states=derive_role_morphology_states(record))
+    support = build_local_chemistry_support((record,), ATOM_VOCABULARY)
+    layout = collate_synthesis_program_layouts((record,), maximum_closures=0)
+    predictions = _predictions(layout, {4: 3, 8: 7})
+    core_saturation = ReactionCoreSaturationPolicy.from_qualified_registry(
+        REGISTRY, expected_sha256=REGISTRY_SHA256
+    ).bind(CORE_POSITION_STATES)
+
+    terminal, reasons = decode_synthesis_program_strict_argmax(
+        predictions,
+        layout,
+        (record,),
+        ATOM_VOCABULARY,
+        support,
+        enforce_program_topology=True,
+        core_saturation=core_saturation,
+    )
+
+    assert reasons == (None,)
+    assert int(terminal["parents"][0, 4]) == 3
+    assert int(terminal["parents"][0, 8]) == 7
+
+
 def test_policy_and_terminal_decoder_must_be_supplied_together() -> None:
     policy = ReactionCoreSaturationPolicy.from_qualified_registry(REGISTRY)
     with pytest.raises(SynthesisProgramSamplingError):
@@ -246,6 +280,81 @@ def test_policy_and_terminal_decoder_must_be_supplied_together() -> None:
             terminal_decode_policy="strict_valence_topology_argmax",
             reaction_core_saturation_policy=policy,
         )
+    with pytest.raises(SynthesisProgramSamplingError, match="local-chemistry"):
+        sample_synthesis_program_products(
+            object(),
+            (_record(),),
+            ATOM_VOCABULARY,
+            np.full(len(ATOM_VOCABULARY), 1 / len(ATOM_VOCABULARY)),
+            np.full(4, 0.25),
+            samples_per_program=1,
+            sample_steps=2,
+            batch_size=1,
+            seed=0,
+            device="cpu",
+            terminal_decode_policy=ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+            reaction_core_saturation_policy=policy,
+        )
+    with pytest.raises(SynthesisProgramSamplingError, match="reaction-core saturation"):
+        sample_synthesis_program_products(
+            object(),
+            (_record(),),
+            ATOM_VOCABULARY,
+            np.full(len(ATOM_VOCABULARY), 1 / len(ATOM_VOCABULARY)),
+            np.full(4, 0.25),
+            samples_per_program=1,
+            sample_steps=2,
+            batch_size=1,
+            seed=0,
+            device="cpu",
+            terminal_decode_policy=ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY,
+            local_chemistry_support=build_local_chemistry_support((_record(),), ATOM_VOCABULARY),
+        )
+
+
+@pytest.mark.parametrize("seed", (0, 1, 2))
+def test_final_checkpoint_configs_bind_the_composed_role_local_decoder(seed: int) -> None:
+    path = (
+        REPO
+        / "configs/multireaction"
+        / f"shared_bias_parallel_program_role_seed{seed}_supported_decoder_v1.json"
+    )
+    config = json.loads(path.read_text())
+
+    assert config["inputs"]["local_chemistry_support"] == {
+        "path": "results/phase1/local_morphology_support_v2/policy.json",
+        "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538",
+    }
+    for profile in ("smoke", "full"):
+        assert (
+            config[profile]["terminal_decode_policy"] == ROLE_LOCAL_SUPPORTED_TERMINAL_DECODE_POLICY
+        )
+        assert config[profile]["checkpoint_steps"] == [9143]
+
+
+@pytest.mark.parametrize("seed", (0, 1, 2))
+def test_final_checkpoint_configs_bind_topology_first_supported_decoder(seed: int) -> None:
+    path = (
+        REPO
+        / "configs/multireaction"
+        / f"shared_bias_parallel_program_role_seed{seed}_topology_supported_decoder_v1.json"
+    )
+    config = json.loads(path.read_text())
+
+    assert config["inputs"]["topology_closure_config"] == {
+        "path": "configs/model/phase1_ugi_closure_expanded.json",
+        "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba",
+    }
+    assert config["inputs"]["topology_morphology_config"] == {
+        "path": "configs/model/phase1_ugi_morphology_expanded.json",
+        "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6",
+    }
+    for profile in ("smoke", "full"):
+        assert (
+            config[profile]["terminal_decode_policy"]
+            == UGI_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY
+        )
+        assert config[profile]["checkpoint_steps"] == [9143]
 
 
 def test_the_contract_does_not_touch_another_program() -> None:

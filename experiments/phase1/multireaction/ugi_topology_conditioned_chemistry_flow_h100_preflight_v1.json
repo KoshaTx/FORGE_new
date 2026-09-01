@@ -1,0 +1,72 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-topology-conditioned-chemistry-flow-h100-preflight-v1",
+  "description": "Compare one-pass Ugi chemistry with 8- and 16-step chemistry-only flow on one frozen constructive topology.",
+  "root_seed": 20260831,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "compare",
+      "implementation": "evaluate.ugi.topology-conditioned-chemistry-flow-comparison.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/ugi_topology_conditioned_chemistry_flow_seed0_v1.json",
+        "sha256": "a11e474ec2cf66752c1709c922cd72a7c407823a2b9e7f27df42a718aebf8702"
+      },
+      "inputs": {
+        "base_comparison_config": {
+          "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_v4.json",
+          "sha256": "f36f22876c1339ecf2ad0c9ddd8921b08962364e7d1579515fb1224b882106b3"
+        },
+        "ugi_matched_realism_config": {
+          "path": "configs/multireaction/ugi_matched_lipid_realism_calibration_v1.json",
+          "sha256": "48cdfff5be992ddbb680b6a5d3b843d1479e9b847e710ec7842bac132f128058"
+        },
+        "specialist_checkpoint": {
+          "path": "runs/phase1-ugi-contextual-chemistry-specialist-seed0-h100-v4/40212e844e74b52aca1b6b67ff50c6d99ad2843d89af296843a235800f28ec8b/stages/specialize_ugi/artifacts/specialist_checkpoint.pt",
+          "sha256": "0bf1d594fe3a17ca2b31762e88fac896ba674f30cd05022952a75cf6bba34eec"
+        },
+        "specialist_result": {
+          "path": "runs/phase1-ugi-contextual-chemistry-specialist-seed0-h100-v4/40212e844e74b52aca1b6b67ff50c6d99ad2843d89af296843a235800f28ec8b/stages/specialize_ugi/artifacts/result.json",
+          "sha256": "e6086dd0e3e1540f2d82f02c945e19061ddb9fa9995d03e6034c5ae4080ad3e0"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_topology_conditioned_chemistry_flow_comparison_result.v1"
+        },
+        "comparison_details": {
+          "path": "comparison_details.tar",
+          "schema_version": "forge.ugi_topology_conditioned_chemistry_flow_comparison_archive.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 3600,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-topology-conditioned-chemistry-flow-preflight-v1"
+      }
+    }
+  ],
+  "metadata": {
+    "checkpoint_training_calls": 0,
+    "candidate_selection": false,
+    "component_vocabulary": false,
+    "heldout_reference_access": false,
+    "repairs_or_retries": false
+  },
+  "nonclaims": [
+    "This preflight uses one frozen seed-0 checkpoint and is not independent retraining replication.",
+    "The measured-Ugi calibration reference is not the heldout confirmation set.",
+    "Exact-L1 replay is transform consistency, not synthesis-success probability."
+  ]
+}

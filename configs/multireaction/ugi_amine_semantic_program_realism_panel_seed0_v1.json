@@ -1,0 +1,55 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "Does identity-free amine-semantic conditioning move exact-L1 precursor-role morphology closer to the group-balanced measured Ugi train-development reference than the paired count-only program, despite its failed global C2ST and validity gates?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-amine-semantic-program-seed0-h100-v1/3a2acb9ec4e00e90cdd1ad39a2ec8979389d7610190ab7a70d6719c506732a35/stages/compare_full/artifacts/comparison_details.tar",
+      "sha256": "255c133442d10437b5017ffde516452039eabccef659876769b935e6ff80f1af"
+    }
+  },
+  "arms": {
+    "count_only": {
+      "archive_member": "count_only/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_count_only_ugi_program",
+      "seed": 0
+    },
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "count_only",
+  "expected_attempts": 3072,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development re-adjudication, not a held-out or across-training-seed model claim.",
+    "The assay performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The panel reports directional consistency without a confidence interval or significance claim.",
+    "C2ST is a secondary diagnostic and does not determine the panel classification.",
+    "A role-panel improvement cannot override a failed validity or exact-L1 non-inferiority gate."
+  ]
+}

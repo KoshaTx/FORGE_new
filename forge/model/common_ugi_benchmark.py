@@ -290,35 +290,9 @@ def assess_common_ugi_attempts(
     """Apply molecular validity, exact L1 replay, novelty and held-component assessment."""
 
     checked = validate_attempt_ledger([attempt.to_mapping() for attempt in attempts])
+    rows = adjudicate_ugi_attempts(checked, adapter=adapter)
     training_products, training_components, held_components = load_ugi_identity_references(
         assignments_path, roles=adapter.roles
-    )
-    rows: list[dict[str, Any]] = []
-    with rdBase.BlockLogs():
-        for attempt in checked:
-            molecule = (
-                Chem.MolFromSmiles(attempt.product_smiles)
-                if attempt.status == "generated" and attempt.product_smiles is not None
-                else None
-            )
-            connected = molecule is not None and len(Chem.GetMolFrags(molecule)) == 1
-            row = {
-                **attempt.to_mapping(),
-                "schema_version": ASSESSED_ATTEMPT_SCHEMA,
-                "program_id": UGI_PROGRAM_ID,
-                "valid": bool(connected),
-                "canonical_smiles": (
-                    Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
-                    if connected
-                    else None
-                ),
-            }
-            rows.append(row)
-    adjudicate_reaction_program_rows(
-        rows,
-        adapters={UGI_PROGRAM_ID: adapter},
-        repeated_program_specs={},
-        ugi_program_id=UGI_PROGRAM_ID,
     )
     evaluated = evaluate_reaction_program_samples(
         rows,
@@ -403,11 +377,55 @@ def assess_common_ugi_attempts(
     return rows, result
 
 
+def adjudicate_ugi_attempts(
+    attempts: Sequence[CommonUgiAttempt],
+    *,
+    adapter: Ugi3AssemblyAdapter,
+) -> list[dict[str, Any]]:
+    """Validate molecules and attach exact Ugi traces without loading identity references.
+
+    This is the method-blind structural portion of the common Ugi assessment.  Keeping it separate
+    lets development diagnostics use exact precursor roles without reading held-component or
+    held-product identities from the assignment ledger.
+    """
+
+    checked = validate_attempt_ledger([attempt.to_mapping() for attempt in attempts])
+    rows: list[dict[str, Any]] = []
+    with rdBase.BlockLogs():
+        for attempt in checked:
+            molecule = (
+                Chem.MolFromSmiles(attempt.product_smiles)
+                if attempt.status == "generated" and attempt.product_smiles is not None
+                else None
+            )
+            connected = molecule is not None and len(Chem.GetMolFrags(molecule)) == 1
+            row = {
+                **attempt.to_mapping(),
+                "schema_version": ASSESSED_ATTEMPT_SCHEMA,
+                "program_id": UGI_PROGRAM_ID,
+                "valid": bool(connected),
+                "canonical_smiles": (
+                    Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=False)
+                    if connected
+                    else None
+                ),
+            }
+            rows.append(row)
+    adjudicate_reaction_program_rows(
+        rows,
+        adapters={UGI_PROGRAM_ID: adapter},
+        repeated_program_specs={},
+        ugi_program_id=UGI_PROGRAM_ID,
+    )
+    return rows
+
+
 __all__ = [
     "ASSESSED_ATTEMPT_SCHEMA",
     "ATTEMPT_SCHEMA",
     "CommonUgiAttempt",
     "CommonUgiBenchmarkError",
+    "adjudicate_ugi_attempts",
     "assess_common_ugi_attempts",
     "load_attempt_ledger",
     "load_ugi_identity_references",

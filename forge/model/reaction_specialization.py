@@ -22,7 +22,37 @@ class ReactionSpecializationError(ValueError):
 
 
 SPECIALIST_PARAMETER_TOKEN = ".specialist_adapter."
+CHEMISTRY_SPECIALIST_PARAMETER_TOKENS = (
+    "chemistry_specialist_adapter.",
+    "closure_chemistry_specialist_adapter.",
+    "contextual_chemistry_layers.",
+    "contextual_closure_chemistry_layers.",
+)
 TOPOLOGY_PARAMETER_PREFIX = "offspring_output."
+ROLE_LOCAL_DECODER_PARAMETER_TOKEN = "role_local_tree_decoder."
+STRUCTURED_TOPOLOGY_PARAMETER_TOKEN = "structured_topology_head."
+
+
+def _is_selected_specialist_parameter(
+    name: str,
+    *,
+    include_topology_head: bool,
+    chemistry_only: bool,
+    role_local_decoder_only: bool,
+    structured_topology_only: bool,
+    full_model: bool,
+) -> bool:
+    if full_model:
+        return True
+    if role_local_decoder_only:
+        return ROLE_LOCAL_DECODER_PARAMETER_TOKEN in name
+    if structured_topology_only:
+        return STRUCTURED_TOPOLOGY_PARAMETER_TOKEN in name
+    if chemistry_only:
+        return any(token in name for token in CHEMISTRY_SPECIALIST_PARAMETER_TOKENS)
+    return SPECIALIST_PARAMETER_TOKEN in name or (
+        include_topology_head and name.startswith(TOPOLOGY_PARAMETER_PREFIX)
+    )
 
 
 @dataclass(frozen=True)
@@ -106,14 +136,40 @@ def specialist_parameter_names(
     model: Any,
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> tuple[str, ...]:
     """Return the complete and only trainable state of a reaction specialist."""
+
+    if (
+        sum(
+            (
+                include_topology_head,
+                chemistry_only,
+                role_local_decoder_only,
+                structured_topology_only,
+                full_model,
+            )
+        )
+        > 1
+    ):
+        raise ReactionSpecializationError(
+            "specialization parameter policies are mutually exclusive"
+        )
 
     names = tuple(
         name
         for name, _ in model.named_parameters()
-        if SPECIALIST_PARAMETER_TOKEN in name
-        or (include_topology_head and name.startswith(TOPOLOGY_PARAMETER_PREFIX))
+        if _is_selected_specialist_parameter(
+            name,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=full_model,
+        )
     )
     if not names:
         raise ReactionSpecializationError("model has no reaction-specialist adapters")
@@ -129,16 +185,30 @@ def initialize_specialist_from_shared_state(
     shared_state: Mapping[str, Any],
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> tuple[str, ...]:
     """Load a shared checkpoint and require every new key to be in the declared delta."""
 
     if torch is None:
         raise ReactionSpecializationError("specialist initialization requires torch")
+    if full_model:
+        model.load_state_dict(shared_state, strict=True)
+        return ()
     incompatible = model.load_state_dict(shared_state, strict=False)
     missing = tuple(sorted(incompatible.missing_keys))
     unexpected = tuple(sorted(incompatible.unexpected_keys))
     selected = set(
-        specialist_parameter_names(model, include_topology_head=include_topology_head)
+        specialist_parameter_names(
+            model,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=False,
+        )
     )
     # Parameters and persistent state currently coincide for both declared modules.  Compare the
     # complete state-key set explicitly so a later buffer cannot enter the delta silently.
@@ -154,10 +224,21 @@ def freeze_shared_parameters(
     model: Any,
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> tuple[str, ...]:
     """Freeze the authenticated backbone and enable only the declared specialist delta."""
 
-    names = specialist_parameter_names(model, include_topology_head=include_topology_head)
+    names = specialist_parameter_names(
+        model,
+        include_topology_head=include_topology_head,
+        chemistry_only=chemistry_only,
+        role_local_decoder_only=role_local_decoder_only,
+        structured_topology_only=structured_topology_only,
+        full_model=full_model,
+    )
     selected = set(names)
     for name, parameter in model.named_parameters():
         parameter.requires_grad_(name in selected)
@@ -171,18 +252,39 @@ def specialist_state_dict(
     model: Any,
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> dict[str, Any]:
     """Copy only the lightweight trained delta for authenticated persistence."""
 
+    if full_model:
+        return {
+            name: value.detach().cpu().clone() for name, value in sorted(model.state_dict().items())
+        }
     expected = set(
-        specialist_parameter_names(model, include_topology_head=include_topology_head)
+        specialist_parameter_names(
+            model,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=False,
+        )
     )
     state = model.state_dict()
     observed = {
         name
         for name in state
-        if SPECIALIST_PARAMETER_TOKEN in name
-        or (include_topology_head and name.startswith(TOPOLOGY_PARAMETER_PREFIX))
+        if _is_selected_specialist_parameter(
+            name,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=False,
+        )
     }
     if observed != expected:
         raise ReactionSpecializationError("specialist parameter and state keys disagree")
@@ -194,15 +296,37 @@ def apply_specialist_state(
     delta: Mapping[str, Any],
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> None:
     """Overlay one specialist delta while rejecting missing, extra, or malformed tensors."""
 
+    state = model.state_dict()
+    if full_model:
+        if set(delta) != set(state):
+            raise ReactionSpecializationError("full-model checkpoint keys changed")
+        for name in sorted(state):
+            value = delta[name]
+            if not hasattr(value, "shape") or tuple(value.shape) != tuple(state[name].shape):
+                raise ReactionSpecializationError(
+                    f"full-model checkpoint tensor changed shape: {name}"
+                )
+            state[name].copy_(value.to(device=state[name].device, dtype=state[name].dtype))
+        return
     expected = set(
-        specialist_parameter_names(model, include_topology_head=include_topology_head)
+        specialist_parameter_names(
+            model,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=False,
+        )
     )
     if set(delta) != expected:
         raise ReactionSpecializationError("specialist delta keys changed")
-    state = model.state_dict()
     for name in sorted(expected):
         value = delta[name]
         if not hasattr(value, "shape") or tuple(value.shape) != tuple(state[name].shape):
@@ -214,19 +338,33 @@ def specialist_parameter_report(
     model: Any,
     *,
     include_topology_head: bool = False,
+    chemistry_only: bool = False,
+    role_local_decoder_only: bool = False,
+    structured_topology_only: bool = False,
+    full_model: bool = False,
 ) -> dict[str, int | float]:
     """Report the exact delta size relative to the shared-plus-specialist model."""
 
     selected = set(
-        specialist_parameter_names(model, include_topology_head=include_topology_head)
+        specialist_parameter_names(
+            model,
+            include_topology_head=include_topology_head,
+            chemistry_only=chemistry_only,
+            role_local_decoder_only=role_local_decoder_only,
+            structured_topology_only=structured_topology_only,
+            full_model=full_model,
+        )
     )
     total = sum(parameter.numel() for parameter in model.parameters())
     specialist = sum(
-        parameter.numel()
-        for name, parameter in model.named_parameters()
-        if name in selected
+        parameter.numel() for name, parameter in model.named_parameters() if name in selected
     )
-    if total < 1 or specialist < 1 or specialist >= total:
+    if (
+        total < 1
+        or specialist < 1
+        or specialist > total
+        or (not full_model and specialist == total)
+    ):
         raise ReactionSpecializationError("specialist parameter accounting is invalid")
     return {
         "total_parameters": total,
@@ -247,7 +385,10 @@ def optimizer_parameters(model: Any) -> Sequence[Any]:
 
 __all__ = [
     "ExactExposureSchedule",
+    "CHEMISTRY_SPECIALIST_PARAMETER_TOKENS",
     "ReactionSpecializationError",
+    "ROLE_LOCAL_DECODER_PARAMETER_TOKEN",
+    "STRUCTURED_TOPOLOGY_PARAMETER_TOKEN",
     "SPECIALIST_PARAMETER_TOKEN",
     "TOPOLOGY_PARAMETER_PREFIX",
     "apply_specialist_state",

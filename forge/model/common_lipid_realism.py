@@ -44,8 +44,16 @@ from forge.model.lipid_context import (
 C2ST_OPENMP_THREADS = 1
 
 REFERENCE_SCHEMA = "forge.common_lipid_realism_reference.v1"
+UGI_MATCHED_REFERENCE_SCHEMA = "forge.ugi_matched_lipid_realism_reference.v1"
+UGI_DEVELOPMENT_REFERENCE_SCHEMA = "forge.ugi_development_lipid_realism_reference.v1"
 ASSESSMENT_SCHEMA = "forge.common_lipid_realism_assessment.v1"
 ATTEMPT_ASSESSMENT_SCHEMA = "forge.common_lipid_realism_attempt.v1"
+
+UGI_PRECURSOR_ROLES = (
+    "amine_head",
+    "oxoester_aldehyde_body_tail",
+    "isocyanide_tail",
+)
 
 DESCRIPTOR_NAMES = (
     "heavy_atoms",
@@ -176,6 +184,19 @@ class ReferenceMolecule:
 
 
 @dataclass(frozen=True)
+class UgiMeasuredReferenceMolecule:
+    """One measured Ugi product and its exact source components."""
+
+    structure_id: str
+    canonical_smiles: str
+    group_id: str
+    components_by_role: tuple[tuple[str, str], ...]
+
+    def components(self) -> dict[str, str]:
+        return dict(self.components_by_role)
+
+
+@dataclass(frozen=True)
 class RobustDescriptorScale:
     center: np.ndarray
     scale: np.ndarray
@@ -196,6 +217,15 @@ class RealismReference:
     descriptor_radii: np.ndarray
     fingerprint_radii: np.ndarray
     audit: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class UgiDevelopmentReference:
+    """Group-balanced development partitions drawn only from measured train-fold Ugi lipids."""
+
+    realism: RealismReference
+    scaling: tuple[UgiMeasuredReferenceMolecule, ...]
+    evaluation: tuple[UgiMeasuredReferenceMolecule, ...]
 
 
 def _canonical_connected(smiles: str) -> tuple[str, Chem.Mol] | None:
@@ -281,6 +311,21 @@ def _descriptor_vector(molecule: Chem.Mol) -> np.ndarray:
 def _robust_scale(matrix: np.ndarray) -> RobustDescriptorScale:
     if matrix.ndim != 2 or matrix.shape[0] < 2 or matrix.shape[1] != len(DESCRIPTOR_NAMES):
         raise CommonLipidRealismError("descriptor scaling reference is too small or malformed")
+    center = np.median(matrix, axis=0)
+    q25, q75 = np.quantile(matrix, (0.25, 0.75), axis=0)
+    scale = q75 - q25
+    standard = matrix.std(axis=0)
+    scale = np.where(scale > 1e-12, scale, np.where(standard > 1e-12, standard, 1.0))
+    return RobustDescriptorScale(center=center, scale=scale)
+
+
+def fit_robust_descriptor_scale(matrix: np.ndarray) -> RobustDescriptorScale:
+    """Fit the frozen median/IQR convention to any explicit feature matrix."""
+
+    if matrix.ndim != 2 or matrix.shape[0] < 2 or matrix.shape[1] < 1:
+        raise CommonLipidRealismError("feature scaling reference is too small or malformed")
+    if not np.isfinite(matrix).all():
+        raise CommonLipidRealismError("feature scaling reference contains non-finite values")
     center = np.median(matrix, axis=0)
     q25, q75 = np.quantile(matrix, (0.25, 0.75), axis=0)
     scale = q75 - q25
@@ -415,6 +460,190 @@ def _reference_rows(
     return training, heldout, audit, selected
 
 
+def _ugi_reference_rows(
+    assignments_path: Path,
+    policy: RealismPolicy,
+    *,
+    evaluation_fold: str,
+) -> tuple[
+    tuple[ReferenceMolecule, ...],
+    tuple[ReferenceMolecule, ...],
+    dict[str, Any],
+    dict[str, Chem.Mol],
+]:
+    """Select a measured Ugi reference without using virtual enumeration as realism evidence."""
+
+    if evaluation_fold not in {"calibration", "heldout"}:
+        raise CommonLipidRealismError("Ugi realism evaluation fold must be calibration or heldout")
+    roles = ("amine_head", "oxoester_aldehyde_body_tail", "isocyanide_tail")
+    required = {
+        "product_id",
+        "canonical_product_smiles",
+        "primary_product_fold",
+        "is_source_adjudicated_measured_product",
+        *(f"{role}_family_id" for role in roles),
+    }
+    populations: dict[str, list[ReferenceMolecule]] = {"train": [], evaluation_fold: []}
+    molecules: dict[str, Chem.Mol] = {}
+    counts: Counter[str] = Counter()
+    seen_ids: set[str] = set()
+    seen_smiles: set[str] = set()
+    for row in iter_csv(assignments_path):
+        if not required.issubset(row):
+            raise CommonLipidRealismError("Ugi assignment schema changed")
+        if str(row["is_source_adjudicated_measured_product"]).lower() not in {"1", "true"}:
+            counts["excluded_not_source_adjudicated_measured"] += 1
+            continue
+        fold = str(row["primary_product_fold"])
+        counts[f"measured_{fold}"] += 1
+        if fold not in populations:
+            continue
+        structure_id = str(row["product_id"])
+        if not structure_id or structure_id in seen_ids:
+            raise CommonLipidRealismError(
+                "measured Ugi reference contains a missing or duplicate product identity"
+            )
+        seen_ids.add(structure_id)
+        parsed = _canonical_connected(str(row["canonical_product_smiles"]))
+        if parsed is None:
+            raise CommonLipidRealismError(
+                f"measured Ugi reference contains an invalid constitution: {structure_id}"
+            )
+        canonical, molecule = parsed
+        if canonical != row["canonical_product_smiles"]:
+            raise CommonLipidRealismError(
+                f"measured Ugi reference constitution is not canonical: {structure_id}"
+            )
+        if not _within_support(molecule, policy):
+            counts[f"excluded_{fold}_outside_declared_support"] += 1
+            continue
+        if canonical in seen_smiles:
+            raise CommonLipidRealismError(
+                "measured Ugi reference contains duplicate molecular constitutions"
+            )
+        seen_smiles.add(canonical)
+        group_id = "|".join(str(row[f"{role}_family_id"]) for role in roles)
+        if not all(str(row[f"{role}_family_id"]) for role in roles):
+            raise CommonLipidRealismError("measured Ugi reference lacks a component-family group")
+        populations[fold].append(
+            ReferenceMolecule(
+                structure_id=structure_id,
+                canonical_smiles=canonical,
+                group_id=group_id,
+            )
+        )
+        molecules[structure_id] = molecule
+    training = _ranked_sample(
+        populations["train"],
+        population="measured_ugi_train",
+        seed=policy.selection_seed,
+        limit=policy.train_reference_limit,
+    )
+    heldout = _ranked_sample(
+        populations[evaluation_fold],
+        population=f"measured_ugi_{evaluation_fold}",
+        seed=policy.selection_seed,
+        limit=policy.heldout_reference_limit,
+    )
+    if len(training) <= policy.manifold_neighbors or len(heldout) <= policy.manifold_neighbors:
+        raise CommonLipidRealismError(
+            "measured Ugi reference is too small for the frozen manifold estimator"
+        )
+    audit = {
+        "schema_version": UGI_MATCHED_REFERENCE_SCHEMA,
+        "reference_population": (
+            f"source-adjudicated measured Ugi {evaluation_fold} lipids within the declared "
+            "common atom and size support"
+        ),
+        "scaling_population": "source-adjudicated measured Ugi train fold only",
+        "evaluation_fold": evaluation_fold,
+        "source_counts": dict(sorted(counts.items())),
+        "eligible_within_support": {
+            "train": len(populations["train"]),
+            evaluation_fold: len(populations[evaluation_fold]),
+        },
+        "selected": {"train": len(training), evaluation_fold: len(heldout)},
+        "selection_sha256": {
+            "train": str(
+                sha256_json([(row.structure_id, row.canonical_smiles) for row in training])
+            ),
+            evaluation_fold: str(
+                sha256_json([(row.structure_id, row.canonical_smiles) for row in heldout])
+            ),
+        },
+        "selection": "SHA-256 rank without replacement; independent of method outputs",
+        "grouping": "exact ordered Ugi component-family triple",
+        "virtual_products_used_as_realism_reference": False,
+        "support": {
+            "allowed_elements": sorted(policy.allowed_elements),
+            "maximum_heavy_atoms": policy.maximum_heavy_atoms,
+            "outside-support reference rows are counted and excluded, not silently dropped": True,
+        },
+    }
+    selected = {row.structure_id: molecules[row.structure_id] for row in (*training, *heldout)}
+    return training, heldout, audit, selected
+
+
+def _materialize_realism_reference(
+    training: tuple[ReferenceMolecule, ...],
+    heldout: tuple[ReferenceMolecule, ...],
+    audit: dict[str, Any],
+    molecules: Mapping[str, Chem.Mol],
+    policy: RealismPolicy,
+) -> RealismReference:
+    """Build descriptor and fingerprint manifolds from an already selected reference."""
+
+    training_matrix = np.asarray(
+        [_descriptor_vector(molecules[row.structure_id]) for row in training]
+    )
+    scale = _robust_scale(training_matrix)
+    heldout_molecules = [molecules[row.structure_id] for row in heldout]
+    generator = rdFingerprintGenerator.GetMorganGenerator(
+        radius=policy.fingerprint_radius, fpSize=policy.fingerprint_bits
+    )
+    fingerprints = tuple(generator.GetFingerprint(molecule) for molecule in heldout_molecules)
+    heldout_matrix = scale.transform(
+        np.asarray([_descriptor_vector(molecule) for molecule in heldout_molecules])
+    )
+    neighbors = NearestNeighbors(n_neighbors=policy.manifold_neighbors + 1, metric="euclidean")
+    descriptor_distances = neighbors.fit(heldout_matrix).kneighbors(
+        heldout_matrix, return_distance=True
+    )[0]
+    descriptor_radii = descriptor_distances[:, -1]
+    fingerprint_radii = _fingerprint_radii(fingerprints, policy.manifold_neighbors)
+    audit = {
+        **audit,
+        "descriptors": list(DESCRIPTOR_NAMES),
+        "descriptor_scaling": {
+            "center": f"{audit['scaling_population']} median",
+            "scale": (
+                f"{audit['scaling_population']} IQR, then standard deviation, then one for "
+                "constant features"
+            ),
+        },
+        "manifold": {
+            "neighbors": policy.manifold_neighbors,
+            "fingerprint": {
+                "kind": "Morgan bit vector",
+                "radius": policy.fingerprint_radius,
+                "bits": policy.fingerprint_bits,
+                "distance": "one minus Tanimoto similarity",
+            },
+            "descriptor_distance": "Euclidean after frozen robust training-reference scaling",
+        },
+    }
+    return RealismReference(
+        training=training,
+        heldout=heldout,
+        scale=scale,
+        heldout_descriptors=heldout_matrix,
+        heldout_fingerprints=fingerprints,
+        descriptor_radii=descriptor_radii,
+        fingerprint_radii=fingerprint_radii,
+        audit=audit,
+    )
+
+
 def _fingerprint_radii(fingerprints: tuple[Any, ...], neighbors: int) -> np.ndarray:
     if len(fingerprints) <= neighbors:
         raise CommonLipidRealismError("fingerprint reference is too small")
@@ -444,56 +673,7 @@ def _build_realism_reference_cached(
     # earlier reference.  The files were hash-pinned by the caller before reaching this function.
     del r0_sha256, splits_sha256
 
-    training, heldout, audit, molecules = _reference_rows(r0_path, splits_path, policy)
-    training_matrix = np.asarray(
-        [_descriptor_vector(molecules[row.structure_id]) for row in training]
-    )
-    scale = _robust_scale(training_matrix)
-    # Use each held-out reference once instead of parsing it for its descriptors and again for its
-    # fingerprint.  The fingerprint is still taken from a molecule that no descriptor pass has
-    # touched, so the reference manifold is built from exactly the same bit vectors as before.
-    heldout_molecules = [molecules[row.structure_id] for row in heldout]
-    generator = rdFingerprintGenerator.GetMorganGenerator(
-        radius=policy.fingerprint_radius, fpSize=policy.fingerprint_bits
-    )
-    fingerprints = tuple(generator.GetFingerprint(molecule) for molecule in heldout_molecules)
-    heldout_matrix = scale.transform(
-        np.asarray([_descriptor_vector(molecule) for molecule in heldout_molecules])
-    )
-    neighbors = NearestNeighbors(n_neighbors=policy.manifold_neighbors + 1, metric="euclidean")
-    descriptor_distances = neighbors.fit(heldout_matrix).kneighbors(
-        heldout_matrix, return_distance=True
-    )[0]
-    descriptor_radii = descriptor_distances[:, -1]
-    fingerprint_radii = _fingerprint_radii(fingerprints, policy.manifold_neighbors)
-    audit = {
-        **audit,
-        "descriptors": list(DESCRIPTOR_NAMES),
-        "descriptor_scaling": {
-            "center": "R0_train median",
-            "scale": "R0_train IQR, then standard deviation, then one for constant features",
-        },
-        "manifold": {
-            "neighbors": policy.manifold_neighbors,
-            "fingerprint": {
-                "kind": "Morgan bit vector",
-                "radius": policy.fingerprint_radius,
-                "bits": policy.fingerprint_bits,
-                "distance": "one minus Tanimoto similarity",
-            },
-            "descriptor_distance": "Euclidean after frozen robust R0_train scaling",
-        },
-    }
-    return RealismReference(
-        training=training,
-        heldout=heldout,
-        scale=scale,
-        heldout_descriptors=heldout_matrix,
-        heldout_fingerprints=fingerprints,
-        descriptor_radii=descriptor_radii,
-        fingerprint_radii=fingerprint_radii,
-        audit=audit,
-    )
+    return _materialize_realism_reference(*_reference_rows(r0_path, splits_path, policy), policy)
 
 
 def build_realism_reference(
@@ -511,6 +691,246 @@ def build_realism_reference(
         policy,
         str(sha256_file(resolved_r0)),
         str(sha256_file(resolved_splits)),
+    )
+
+
+@lru_cache(maxsize=8)
+def _build_ugi_realism_reference_cached(
+    assignments_path: Path,
+    policy: RealismPolicy,
+    evaluation_fold: str,
+    assignments_sha256: str,
+) -> RealismReference:
+    del assignments_sha256
+    return _materialize_realism_reference(
+        *_ugi_reference_rows(
+            assignments_path,
+            policy,
+            evaluation_fold=evaluation_fold,
+        ),
+        policy,
+    )
+
+
+def build_ugi_realism_reference(
+    assignments_path: Path,
+    policy: RealismPolicy,
+    *,
+    evaluation_fold: str,
+) -> RealismReference:
+    """Build a measured, reaction-matched Ugi reference from the frozen product split."""
+
+    resolved = assignments_path.resolve()
+    return _build_ugi_realism_reference_cached(
+        resolved,
+        policy,
+        evaluation_fold,
+        str(sha256_file(resolved)),
+    )
+
+
+def _ugi_development_rank(
+    row: UgiMeasuredReferenceMolecule,
+    *,
+    seed: int,
+) -> tuple[str, str]:
+    digest = hashlib.sha256(
+        f"{seed}|measured_ugi_train_development|{row.group_id}|{row.structure_id}|"
+        f"{row.canonical_smiles}".encode()
+    ).hexdigest()
+    return digest, row.structure_id
+
+
+@lru_cache(maxsize=8)
+def _build_ugi_development_realism_reference_cached(
+    assignments_path: Path,
+    policy: RealismPolicy,
+    rows_per_group_per_partition: int,
+    split_seed: int,
+    assignments_sha256: str,
+) -> UgiDevelopmentReference:
+    del assignments_sha256
+    required = {
+        "product_id",
+        "canonical_product_smiles",
+        "primary_product_fold",
+        "is_source_adjudicated_measured_product",
+        *(f"{role}_family_id" for role in UGI_PRECURSOR_ROLES),
+        *(f"{role}_smiles" for role in UGI_PRECURSOR_ROLES),
+    }
+    counts: Counter[str] = Counter()
+    records_by_group: dict[str, list[UgiMeasuredReferenceMolecule]] = {}
+    molecules: dict[str, Chem.Mol] = {}
+    seen_ids: set[str] = set()
+    seen_smiles: set[str] = set()
+    for row in iter_csv(assignments_path):
+        if not required.issubset(row):
+            raise CommonLipidRealismError("Ugi assignment schema changed")
+        if str(row["is_source_adjudicated_measured_product"]).lower() not in {"1", "true"}:
+            counts["ignored_not_source_adjudicated_measured"] += 1
+            continue
+        fold = str(row["primary_product_fold"])
+        counts[f"measured_{fold}"] += 1
+        if fold != "train":
+            # Development calibration is deliberately train-fold-only.  In particular, do not
+            # parse or fingerprint calibration or held-out product structures here.
+            counts["ignored_measured_non_train_before_structure_access"] += 1
+            continue
+        structure_id = str(row["product_id"])
+        if not structure_id or structure_id in seen_ids:
+            raise CommonLipidRealismError(
+                "measured Ugi development reference contains a missing or duplicate identity"
+            )
+        seen_ids.add(structure_id)
+        parsed = _canonical_connected(str(row["canonical_product_smiles"]))
+        if parsed is None:
+            raise CommonLipidRealismError(
+                f"measured Ugi train reference contains an invalid constitution: {structure_id}"
+            )
+        canonical, molecule = parsed
+        if canonical != row["canonical_product_smiles"]:
+            raise CommonLipidRealismError(
+                f"measured Ugi train constitution is not canonical: {structure_id}"
+            )
+        if not _within_support(molecule, policy):
+            counts["excluded_train_outside_declared_support"] += 1
+            continue
+        if canonical in seen_smiles:
+            raise CommonLipidRealismError(
+                "measured Ugi train reference contains duplicate molecular constitutions"
+            )
+        seen_smiles.add(canonical)
+        component_rows: list[tuple[str, str]] = []
+        for role in UGI_PRECURSOR_ROLES:
+            component = _canonical_connected(str(row[f"{role}_smiles"]))
+            if component is None:
+                raise CommonLipidRealismError(
+                    f"measured Ugi train reference contains an invalid {role} component"
+                )
+            component_rows.append((role, component[0]))
+        group_id = "|".join(str(row[f"{role}_family_id"]) for role in UGI_PRECURSOR_ROLES)
+        if not all(str(row[f"{role}_family_id"]) for role in UGI_PRECURSOR_ROLES):
+            raise CommonLipidRealismError(
+                "measured Ugi train reference lacks a component-family group"
+            )
+        record = UgiMeasuredReferenceMolecule(
+            structure_id=structure_id,
+            canonical_smiles=canonical,
+            group_id=group_id,
+            components_by_role=tuple(component_rows),
+        )
+        records_by_group.setdefault(group_id, []).append(record)
+        molecules[structure_id] = molecule
+    if len(records_by_group) < policy.c2st_folds:
+        raise CommonLipidRealismError(
+            "measured Ugi train development reference has too few component-family groups"
+        )
+    scaling: list[UgiMeasuredReferenceMolecule] = []
+    evaluation: list[UgiMeasuredReferenceMolecule] = []
+    required_per_group = 2 * rows_per_group_per_partition
+    group_sizes: dict[str, int] = {}
+    for group_id, records in sorted(records_by_group.items()):
+        ranked = sorted(records, key=lambda item: _ugi_development_rank(item, seed=split_seed))
+        group_sizes[group_id] = len(ranked)
+        if len(ranked) < required_per_group:
+            raise CommonLipidRealismError(
+                f"measured Ugi train group {group_id!r} has {len(ranked)} rows; "
+                f"need at least {required_per_group}"
+            )
+        scaling.extend(ranked[:rows_per_group_per_partition])
+        evaluation.extend(ranked[rows_per_group_per_partition : 2 * rows_per_group_per_partition])
+    if len(scaling) > policy.train_reference_limit:
+        raise CommonLipidRealismError("balanced development scaling reference exceeds its limit")
+    if len(evaluation) > policy.heldout_reference_limit:
+        raise CommonLipidRealismError("balanced development evaluation reference exceeds its limit")
+    training_rows = tuple(
+        ReferenceMolecule(row.structure_id, row.canonical_smiles, row.group_id) for row in scaling
+    )
+    evaluation_rows = tuple(
+        ReferenceMolecule(row.structure_id, row.canonical_smiles, row.group_id)
+        for row in evaluation
+    )
+    audit = {
+        "schema_version": UGI_DEVELOPMENT_REFERENCE_SCHEMA,
+        "reference_population": (
+            "source-adjudicated measured Ugi train-fold group-balanced development lipids "
+            "within the declared common atom and size support"
+        ),
+        "scaling_population": (
+            "source-adjudicated measured Ugi train-fold group-balanced development partition only"
+        ),
+        "evaluation_fold": "train_development",
+        "source_counts": dict(sorted(counts.items())),
+        "eligible_train_groups": len(records_by_group),
+        "eligible_train_rows": sum(group_sizes.values()),
+        "rows_per_group_per_partition": rows_per_group_per_partition,
+        "selected": {
+            "development_scaling": len(training_rows),
+            "development_evaluation": len(evaluation_rows),
+        },
+        "selection_sha256": {
+            "development_scaling": str(
+                sha256_json([(row.structure_id, row.canonical_smiles) for row in training_rows])
+            ),
+            "development_evaluation": str(
+                sha256_json([(row.structure_id, row.canonical_smiles) for row in evaluation_rows])
+            ),
+        },
+        "selection": (
+            "SHA-256 rank within every measured train-fold component-family group without "
+            "replacement; independent of method outputs"
+        ),
+        "grouping": "exact ordered Ugi component-family triple with equal selected group mass",
+        "group_sizes_before_balancing": dict(sorted(group_sizes.items())),
+        "virtual_products_used_as_realism_reference": False,
+        "calibration_or_heldout_product_structures_accessed": False,
+        "support": {
+            "allowed_elements": sorted(policy.allowed_elements),
+            "maximum_heavy_atoms": policy.maximum_heavy_atoms,
+            "outside-support train rows are counted and excluded, not silently dropped": True,
+        },
+    }
+    selected_molecules = {
+        row.structure_id: molecules[row.structure_id] for row in (*scaling, *evaluation)
+    }
+    realism = _materialize_realism_reference(
+        training_rows,
+        evaluation_rows,
+        audit,
+        selected_molecules,
+        policy,
+    )
+    return UgiDevelopmentReference(
+        realism=realism,
+        scaling=tuple(scaling),
+        evaluation=tuple(evaluation),
+    )
+
+
+def build_ugi_development_realism_reference(
+    assignments_path: Path,
+    policy: RealismPolicy,
+    *,
+    rows_per_group_per_partition: int,
+    split_seed: int,
+) -> UgiDevelopmentReference:
+    """Build a deterministic, group-balanced development reference from measured train rows."""
+
+    if (
+        isinstance(rows_per_group_per_partition, bool)
+        or not isinstance(rows_per_group_per_partition, int)
+        or rows_per_group_per_partition <= 0
+    ):
+        raise CommonLipidRealismError("rows_per_group_per_partition must be positive")
+    if isinstance(split_seed, bool) or not isinstance(split_seed, int) or split_seed < 0:
+        raise CommonLipidRealismError("development split_seed must be non-negative")
+    resolved = assignments_path.resolve()
+    return _build_ugi_development_realism_reference_cached(
+        resolved,
+        policy,
+        rows_per_group_per_partition,
+        split_seed,
+        str(sha256_file(resolved)),
     )
 
 
@@ -580,16 +1000,23 @@ def _normalized_wasserstein(generated: np.ndarray, reference: np.ndarray) -> dic
         "by_descriptor": {
             name: float(distances[index]) for index, name in enumerate(DESCRIPTOR_NAMES)
         },
-        "scale": "R0_train robust standardized descriptor units",
+        "scale": "reference-training robust standardized descriptor units",
     }
 
 
-def _classifier_two_sample(
+def grouped_classifier_two_sample(
     unique_generated: Mapping[str, np.ndarray],
-    reference: RealismReference,
+    reference_rows: Sequence[ReferenceMolecule],
+    reference_vectors: Mapping[str, np.ndarray],
     policy: RealismPolicy,
+    *,
+    feature_names: Sequence[str],
+    generated_population: str = "generated_c2st",
+    reference_population: str = "heldout_c2st",
 ) -> dict[str, Any]:
-    available = min(len(unique_generated), len(reference.heldout))
+    """Run the frozen grouped C2ST on arbitrary deterministic molecular feature vectors."""
+
+    available = min(len(unique_generated), len(reference_rows))
     if available < policy.c2st_minimum_rows_per_class:
         return {
             "status": "not_estimable",
@@ -600,26 +1027,30 @@ def _classifier_two_sample(
     rows_per_class = min(available, policy.c2st_maximum_rows_per_class)
     generated_rows = _ranked_sample(
         [ReferenceMolecule(value, value, value) for value in unique_generated],
-        population="generated_c2st",
+        population=generated_population,
         seed=policy.c2st_seed,
         limit=rows_per_class,
     )
     reference_rows = _ranked_sample(
-        reference.heldout,
-        population="heldout_c2st",
+        reference_rows,
+        population=reference_population,
         seed=policy.c2st_seed,
         limit=rows_per_class,
     )
     generated_matrix = np.asarray(
         [unique_generated[row.canonical_smiles] for row in generated_rows], dtype=np.float64
     )
-    reference_by_smiles = {
-        row.canonical_smiles: reference.heldout_descriptors[index]
-        for index, row in enumerate(reference.heldout)
-    }
     reference_matrix = np.asarray(
-        [reference_by_smiles[row.canonical_smiles] for row in reference_rows], dtype=np.float64
+        [reference_vectors[row.structure_id] for row in reference_rows], dtype=np.float64
     )
+    expected_features = len(feature_names)
+    if (
+        generated_matrix.shape != (rows_per_class, expected_features)
+        or reference_matrix.shape != (rows_per_class, expected_features)
+        or not np.isfinite(generated_matrix).all()
+        or not np.isfinite(reference_matrix).all()
+    ):
+        raise CommonLipidRealismError("C2ST feature matrix shape or finiteness changed")
     features = np.vstack((reference_matrix, generated_matrix))
     labels = np.concatenate(
         (np.zeros(rows_per_class, dtype=np.int64), np.ones(rows_per_class, dtype=np.int64))
@@ -667,12 +1098,28 @@ def _classifier_two_sample(
         "auc_folds": aucs,
         "rows_per_class": rows_per_class,
         "folds": len(aucs),
-        "features": list(DESCRIPTOR_NAMES),
-        "grouping": (
-            "real lipids by frozen source-study group; generated molecules by exact constitution"
-        ),
+        "features": list(feature_names),
+        "grouping": ("reference lipids by frozen group; generated molecules by exact constitution"),
         "interpretation": "0.5 is indistinguishable; larger values are easier to distinguish",
     }
+
+
+def _classifier_two_sample(
+    unique_generated: Mapping[str, np.ndarray],
+    reference: RealismReference,
+    policy: RealismPolicy,
+) -> dict[str, Any]:
+    reference_vectors = {
+        row.structure_id: reference.heldout_descriptors[index]
+        for index, row in enumerate(reference.heldout)
+    }
+    return grouped_classifier_two_sample(
+        unique_generated,
+        reference.heldout,
+        reference_vectors,
+        policy,
+        feature_names=DESCRIPTOR_NAMES,
+    )
 
 
 def assess_lipid_realism(
@@ -815,7 +1262,7 @@ def assess_lipid_realism(
             "internal_diversity_unique_molecules_used": diversity_rows,
         },
         "empirical_lipid_manifold": {
-            "reference": "source-study-held-out observed constitutional R0 lipids",
+            "reference": reference.audit["reference_population"],
             "fingerprint": manifold_summary("fingerprint_manifold_member", fingerprint_covered),
             "descriptor": manifold_summary("descriptor_manifold_member", descriptor_covered),
             "nearest_reference_tanimoto": _quantiles(
@@ -862,9 +1309,17 @@ __all__ = [
     "ASSESSMENT_SCHEMA",
     "ATTEMPT_ASSESSMENT_SCHEMA",
     "DESCRIPTOR_NAMES",
+    "UGI_DEVELOPMENT_REFERENCE_SCHEMA",
+    "UGI_PRECURSOR_ROLES",
     "CommonLipidRealismError",
     "RealismPolicy",
     "RealismReference",
+    "UgiDevelopmentReference",
+    "UgiMeasuredReferenceMolecule",
     "assess_lipid_realism",
     "build_realism_reference",
+    "build_ugi_development_realism_reference",
+    "build_ugi_realism_reference",
+    "fit_robust_descriptor_scale",
+    "grouped_classifier_two_sample",
 ]

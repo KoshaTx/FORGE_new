@@ -1,0 +1,548 @@
+{
+  "amine_semantic_minus_count_only": {
+    "component_novelty_fraction": -0.038085619505047186,
+    "descriptor_manifold_coverage": 0.0,
+    "descriptor_manifold_precision_per_attempt": 0.0234375,
+    "effective_component_count": -0.5004327010878455,
+    "exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "fingerprint_manifold_coverage": 0.0,
+    "fingerprint_manifold_precision_per_attempt": 0.0,
+    "held_component_exact_l1_products_per_1000_attempts": 0.0,
+    "local_support_qualified_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "mean_pairwise_ecfp4_distance": 0.004872773503512784,
+    "nitrogen_oxygen_bond_product_fraction_per_attempt": 0.0,
+    "oxygen_oxygen_bond_product_fraction_per_attempt": 0.0,
+    "realism_c2st_auc": 0.07377286560335017,
+    "realism_internal_diversity": 0.004872773503512784,
+    "role_supported_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "small_oxygen_ring_product_fraction_per_attempt": 0.0,
+    "tail_supported_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "unique_exact_l1_products_per_attempt": 0.01595052083333337,
+    "unique_open_ended_exact_l1_products_per_attempt": 0.013671875,
+    "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt": 0.013671875,
+    "unique_whole_product_novel_exact_l1_products_per_attempt": 0.013671875,
+    "valid_fraction_per_attempt": 0.00032552083333337034,
+    "whole_product_novel_to_train_fraction": -0.038085619505047186
+  },
+  "calls": {
+    "oracle": 0,
+    "route": 0,
+    "training": 0
+  },
+  "candidate_selection": false,
+  "inputs": {
+    "amine_semantic_program_draw": {
+      "bytes": 1698830,
+      "path": "results/phase1/ugi_amine_semantic_program_draw_seed0_v2/program_draw.json",
+      "sha256": "d26b79fd3f1aa34a1ea7725343e151bdc5732d57469fe251231e821d713a661b"
+    },
+    "base_checkpoint_archive": {
+      "bytes": 112568320,
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_design": {
+      "bytes": 10098,
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "base_training_result": {
+      "bytes": 31378,
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "common_ugi_assessment_config": {
+      "bytes": 760,
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "config": {
+      "bytes": 5325,
+      "path": "configs/multireaction/ugi_amine_semantic_joint_support_comparison_seed0_v2.json",
+      "sha256": "a20fc13f43303206e61cab2b53758b3a08f1e58b239b3924c408649c52eab91f"
+    },
+    "lipid_realism_config": {
+      "bytes": 2370,
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "bytes": 1244,
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    },
+    "production_cache": {
+      "bytes": 13727905,
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "bytes": 5116,
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "role_morphology_policy": {
+      "bytes": 25609,
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "topology_closure_config": {
+      "bytes": 1867,
+      "path": "configs/model/phase1_ugi_closure_expanded.json",
+      "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+    },
+    "topology_morphology_config": {
+      "bytes": 2461,
+      "path": "configs/model/phase1_ugi_morphology_expanded.json",
+      "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+    },
+    "ugi_assignments": {
+      "bytes": 4044135,
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "methods": {
+    "amine_semantic": {
+      "assessment": {
+        "bytes": 2601,
+        "logical_path": "result_index.json",
+        "sha256": "36ede842860c70b2367880cef14755d614d06346489a4dfec06f8969a8fe8434"
+      },
+      "metrics": {
+        "component_novelty_fraction": 0.9609375,
+        "descriptor_manifold_coverage": 0.00048828125,
+        "descriptor_manifold_precision_per_attempt": 0.026692708333333332,
+        "effective_component_count": 35.36871692963922,
+        "exact_l1_yield_per_attempt": 1.0,
+        "fingerprint_manifold_coverage": 0.0,
+        "fingerprint_manifold_precision_per_attempt": 0.0,
+        "held_component_exact_l1_products_per_1000_attempts": 0.0,
+        "local_support_qualified_exact_l1_yield_per_attempt": 1.0,
+        "mean_pairwise_ecfp4_distance": 0.4412176947671558,
+        "nitrogen_oxygen_bond_product_fraction_per_attempt": 0.0,
+        "oxygen_oxygen_bond_product_fraction_per_attempt": 0.0,
+        "realism_c2st_auc": 0.9781284645143759,
+        "realism_internal_diversity": 0.4412176947671557,
+        "role_supported_exact_l1_yield_per_attempt": 1.0,
+        "small_oxygen_ring_product_fraction_per_attempt": 0.0,
+        "tail_supported_exact_l1_yield_per_attempt": 1.0,
+        "unique_exact_l1_products_per_attempt": 0.2936197916666667,
+        "unique_open_ended_exact_l1_products_per_attempt": 0.2906901041666667,
+        "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt": 0.2906901041666667,
+        "unique_whole_product_novel_exact_l1_products_per_attempt": 0.2906901041666667,
+        "valid_fraction_per_attempt": 1.0,
+        "whole_product_novel_to_train_fraction": 0.9609375
+      },
+      "program_support_abstentions": 0,
+      "sampling": {
+        "bytes": 7213977,
+        "logical_path": "result.json",
+        "sha256": "e161f3c9a52b0f2745e949f2da1f8f6f44bc068b9b7b2fada0ec5c5b94cf0ce2"
+      },
+      "sampling_summary": {
+        "by_program": {
+          "ugi_3cr_agile": {
+            "exact_target_graph": 0,
+            "exact_tensor": 0,
+            "samples": 3072,
+            "strict_constraint_abstentions": 0,
+            "valid": 3072
+          }
+        },
+        "component_confined_policy_applied": true,
+        "exact_target_graph": 0,
+        "exact_tensor": 0,
+        "fixed_state_failures": 0,
+        "learned_topology_flow_applied": false,
+        "local_chemistry_policy_applied": true,
+        "potency_condition": null,
+        "program_role_cycle_policy_applied": true,
+        "program_topology_policy_applied": true,
+        "reaction_core_saturation_policy": {
+          "component_confined_generated_edges": true,
+          "core_position_valence_units": {
+            "ugi_3cr_agile:map_2": 6,
+            "ugi_3cr_agile:map_4": 4
+          },
+          "derivation": "atom_mapped_product_template_explicit_hydrogen_count",
+          "exterior_only_generated_closures": true,
+          "reaction_id": "ugi_3cr_agile",
+          "registry_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/data/vendor/qualified_reactions_v1.json",
+          "registry_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "reaction_core_saturation_policy_applied": true,
+        "repairs": {},
+        "samples": 3072,
+        "sampling_factorization": "joint",
+        "strict_constraint_abstention_reasons": {},
+        "strict_constraint_abstentions": 0,
+        "terminal_chemistry_readout": "support_constrained_atom_and_bond_argmax",
+        "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation",
+        "terminal_neural_refresh_after_each_choice": false,
+        "terminal_seed": null,
+        "terminal_temperature": 1.0,
+        "topology_conditioned_chemistry_flow_applied": false,
+        "topology_conditioned_chemistry_neural_evaluations_per_batch": 0,
+        "topology_conditioned_chemistry_seed": null,
+        "topology_conditioned_chemistry_source_reset": false,
+        "topology_conditioned_chemistry_steps": 0,
+        "topology_coupling_second_pass_applied": true,
+        "topology_proposal_context": null,
+        "topology_seed": 2026090103,
+        "topology_selection": "measured_joint_program_then_constructive_ester_and_role_local_cycle_topology_then_argmax_chemistry",
+        "ugi_amine_semantic_joint_support_applied": true,
+        "ugi_amine_semantic_target_applied": true,
+        "ugi_amine_semantic_target_policy": {
+          "fields": [
+            "heavy_atom_graph_diameter",
+            "carbon_skeleton_diameter",
+            "nitrogen_atoms",
+            "oxygen_atoms"
+          ],
+          "sampling": "one semantic draw and one exact conditional decode without retry",
+          "source": "identity-free measured-Ugi train-fold conditional program",
+          "topology_conditioning": "nonempty train-fold local-chemistry support"
+        },
+        "ugi_ester_chemotype_policy": {
+          "aldehyde_non_motif_exterior_elements": [
+            "C"
+          ],
+          "aldehyde_role": "oxoester_aldehyde_body_tail",
+          "amine_cycle_sizes_by_exterior_count": {
+            "5": [
+              5
+            ],
+            "6": [
+              6
+            ],
+            "7": [
+              5
+            ],
+            "8": [
+              5,
+              6
+            ],
+            "9": [
+              6
+            ]
+          },
+          "amine_exterior_elements": [
+            "C",
+            "N"
+          ],
+          "amine_role": "amine_head",
+          "component_identity_conditioning": false,
+          "descriptor_equivalent_motif": "C(=O)-O-C",
+          "generated_exterior_formal_charge": 0,
+          "isocyanide_exterior_elements": [
+            "C"
+          ],
+          "isocyanide_role": "isocyanide_tail",
+          "maximum_amine_exterior_nitrogens": 1,
+          "maximum_role_exterior_atoms": {
+            "amine_head": 8,
+            "isocyanide_tail": 16,
+            "oxoester_aldehyde_body_tail": 25
+          },
+          "measured_training_product_count": 480,
+          "measured_training_product_ids_sha256": "81a149407cffeae634236921c2664d79e0bf92a97b0dfcb16211e0ea3660a0b0",
+          "minimum_amine_exterior_nitrogens": 1,
+          "minimum_constructive_aldehyde_exterior_atoms": 18,
+          "minimum_ester_long_side_carbons": 10,
+          "minimum_ester_side_carbons": 6,
+          "minimum_role_exterior_atoms": {
+            "amine_head": 6,
+            "isocyanide_tail": 12,
+            "oxoester_aldehyde_body_tail": 17
+          },
+          "morphology_program_sampling": "occurrence_weighted_joint_count_only_programs_from_measured_training_products",
+          "morphology_quantile": 0.25,
+          "morphology_reference": "unique source-adjudicated measured role components in the Ugi train fold",
+          "reaction_id": "ugi_3cr_agile",
+          "registry_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/data/vendor/qualified_reactions_v1.json",
+          "registry_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+          "requested_chemotype": "canonical_ester_bearing_hydrophobic_ugi_lipid",
+          "required_by_ugi_transform": false,
+          "training_assignments_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "training_assignments_sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "ugi_ester_chemotype_policy_applied": true,
+        "ugi_role_chemistry_prior": null,
+        "ugi_role_chemistry_prior_applied": false,
+        "ugi_role_chemistry_prior_strength": 0.0,
+        "ugi_topology_policy": {
+          "allowed_ring_sizes": [
+            5,
+            6,
+            7
+          ],
+          "maximum_adjacent_branch_run_by_role": {
+            "amine_head": 2,
+            "isocyanide_tail": 1,
+            "oxoester_aldehyde_body_tail": 1
+          },
+          "maximum_heavy_degree": 4
+        },
+        "valid": 3072
+      }
+    },
+    "count_only": {
+      "assessment": {
+        "bytes": 2696,
+        "logical_path": "result_index.json",
+        "sha256": "f0ade32d9643afd93e1794a91b91005778f939c6a40f4d7e1f731eb88e55159a"
+      },
+      "metrics": {
+        "component_novelty_fraction": 0.9990231195050472,
+        "descriptor_manifold_coverage": 0.00048828125,
+        "descriptor_manifold_precision_per_attempt": 0.0032552083333333335,
+        "effective_component_count": 35.869149630727065,
+        "exact_l1_yield_per_attempt": 0.9996744791666666,
+        "fingerprint_manifold_coverage": 0.0,
+        "fingerprint_manifold_precision_per_attempt": 0.0,
+        "held_component_exact_l1_products_per_1000_attempts": 0.0,
+        "local_support_qualified_exact_l1_yield_per_attempt": 0.9996744791666666,
+        "mean_pairwise_ecfp4_distance": 0.436344921263643,
+        "nitrogen_oxygen_bond_product_fraction_per_attempt": 0.0,
+        "oxygen_oxygen_bond_product_fraction_per_attempt": 0.0,
+        "realism_c2st_auc": 0.9043555989110257,
+        "realism_internal_diversity": 0.43634492126364294,
+        "role_supported_exact_l1_yield_per_attempt": 0.9996744791666666,
+        "small_oxygen_ring_product_fraction_per_attempt": 0.0,
+        "tail_supported_exact_l1_yield_per_attempt": 0.9996744791666666,
+        "unique_exact_l1_products_per_attempt": 0.2776692708333333,
+        "unique_open_ended_exact_l1_products_per_attempt": 0.2770182291666667,
+        "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt": 0.2770182291666667,
+        "unique_whole_product_novel_exact_l1_products_per_attempt": 0.2770182291666667,
+        "valid_fraction_per_attempt": 0.9996744791666666,
+        "whole_product_novel_to_train_fraction": 0.9990231195050472
+      },
+      "program_support_abstentions": 1,
+      "sampling": {
+        "bytes": 6784901,
+        "logical_path": "result.json",
+        "sha256": "8d5ffc2af76c6939d461f23c0db4aba4f6aaa22f2e855987e62f84e3314e225b"
+      },
+      "sampling_summary": {
+        "by_program": {
+          "ugi_3cr_agile": {
+            "exact_target_graph": 0,
+            "exact_tensor": 1,
+            "samples": 3072,
+            "strict_constraint_abstentions": 1,
+            "valid": 3071
+          }
+        },
+        "component_confined_policy_applied": true,
+        "exact_target_graph": 0,
+        "exact_tensor": 1,
+        "fixed_state_failures": 0,
+        "learned_topology_flow_applied": false,
+        "local_chemistry_policy_applied": true,
+        "potency_condition": null,
+        "program_role_cycle_policy_applied": true,
+        "program_topology_policy_applied": true,
+        "reaction_core_saturation_policy": {
+          "component_confined_generated_edges": true,
+          "core_position_valence_units": {
+            "ugi_3cr_agile:map_2": 6,
+            "ugi_3cr_agile:map_4": 4
+          },
+          "derivation": "atom_mapped_product_template_explicit_hydrogen_count",
+          "exterior_only_generated_closures": true,
+          "reaction_id": "ugi_3cr_agile",
+          "registry_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/data/vendor/qualified_reactions_v1.json",
+          "registry_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "reaction_core_saturation_policy_applied": true,
+        "repairs": {},
+        "samples": 3072,
+        "sampling_factorization": "joint",
+        "strict_constraint_abstention_reasons": {
+          "ugi_topology_coupling_failure:exact Ugi tree cannot realize its declared cycle rank": 1
+        },
+        "strict_constraint_abstentions": 1,
+        "terminal_chemistry_readout": "support_constrained_atom_and_bond_argmax",
+        "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation",
+        "terminal_neural_refresh_after_each_choice": false,
+        "terminal_seed": null,
+        "terminal_temperature": 1.0,
+        "topology_conditioned_chemistry_flow_applied": false,
+        "topology_conditioned_chemistry_neural_evaluations_per_batch": 0,
+        "topology_conditioned_chemistry_seed": null,
+        "topology_conditioned_chemistry_source_reset": false,
+        "topology_conditioned_chemistry_steps": 0,
+        "topology_coupling_second_pass_applied": true,
+        "topology_proposal_context": null,
+        "topology_seed": 2026090103,
+        "topology_selection": "measured_joint_program_then_constructive_ester_and_role_local_cycle_topology_then_argmax_chemistry",
+        "ugi_amine_semantic_joint_support_applied": false,
+        "ugi_amine_semantic_target_applied": false,
+        "ugi_amine_semantic_target_policy": null,
+        "ugi_ester_chemotype_policy": {
+          "aldehyde_non_motif_exterior_elements": [
+            "C"
+          ],
+          "aldehyde_role": "oxoester_aldehyde_body_tail",
+          "amine_cycle_sizes_by_exterior_count": {
+            "5": [
+              5
+            ],
+            "6": [
+              6
+            ],
+            "7": [
+              5
+            ],
+            "8": [
+              5,
+              6
+            ],
+            "9": [
+              6
+            ]
+          },
+          "amine_exterior_elements": [
+            "C",
+            "N"
+          ],
+          "amine_role": "amine_head",
+          "component_identity_conditioning": false,
+          "descriptor_equivalent_motif": "C(=O)-O-C",
+          "generated_exterior_formal_charge": 0,
+          "isocyanide_exterior_elements": [
+            "C"
+          ],
+          "isocyanide_role": "isocyanide_tail",
+          "maximum_amine_exterior_nitrogens": 1,
+          "maximum_role_exterior_atoms": {
+            "amine_head": 8,
+            "isocyanide_tail": 16,
+            "oxoester_aldehyde_body_tail": 25
+          },
+          "measured_training_product_count": 480,
+          "measured_training_product_ids_sha256": "81a149407cffeae634236921c2664d79e0bf92a97b0dfcb16211e0ea3660a0b0",
+          "minimum_amine_exterior_nitrogens": 1,
+          "minimum_constructive_aldehyde_exterior_atoms": 18,
+          "minimum_ester_long_side_carbons": 10,
+          "minimum_ester_side_carbons": 6,
+          "minimum_role_exterior_atoms": {
+            "amine_head": 6,
+            "isocyanide_tail": 12,
+            "oxoester_aldehyde_body_tail": 17
+          },
+          "morphology_program_sampling": "occurrence_weighted_joint_count_only_programs_from_measured_training_products",
+          "morphology_quantile": 0.25,
+          "morphology_reference": "unique source-adjudicated measured role components in the Ugi train fold",
+          "reaction_id": "ugi_3cr_agile",
+          "registry_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/data/vendor/qualified_reactions_v1.json",
+          "registry_sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf",
+          "requested_chemotype": "canonical_ester_bearing_hydrophobic_ugi_lipid",
+          "required_by_ugi_transform": false,
+          "training_assignments_path": "/__modal/volumes/vo-Fgdi3wXuF44Z8wKSLGEG2V/jobs/c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7/repo/results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "training_assignments_sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "ugi_ester_chemotype_policy_applied": true,
+        "ugi_role_chemistry_prior": null,
+        "ugi_role_chemistry_prior_applied": false,
+        "ugi_role_chemistry_prior_strength": 0.0,
+        "ugi_topology_policy": {
+          "allowed_ring_sizes": [
+            5,
+            6,
+            7
+          ],
+          "maximum_adjacent_branch_run_by_role": {
+            "amine_head": 2,
+            "isocyanide_tail": 1,
+            "oxoester_aldehyde_body_tail": 1
+          },
+          "maximum_heavy_degree": 4
+        },
+        "valid": 3071
+      }
+    }
+  },
+  "nonclaims": [
+    "This is a frozen-checkpoint generative-factorization intervention, not model retraining or component selection.",
+    "The treatment consumes only graph diameter and N/O count semantics drawn from measured Ugi train products; it consumes no precursor identity, graph, SMILES or fragment token.",
+    "The topology is drawn once from the exact joint semantic and train-fold local-chemistry support; no repair or retry is permitted.",
+    "No realism or paper claim is authorized unless the full paired experiment passes every frozen promotion gate under the measured-Ugi role panel."
+  ],
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "heldout_training_access": false,
+    "method_blind_assessment": true,
+    "paired_coarse_program_order": true,
+    "paired_flow_random_stream": true,
+    "repairs_or_retries": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "preflight_checks": {
+    "c2st_estimable": true,
+    "control_valid_fraction_sufficient": true,
+    "program_support_abstentions_zero": false,
+    "semantic_valid_fraction_sufficient": true
+  },
+  "profile": "full",
+  "program_pairing": {
+    "identical_coarse_programs": true,
+    "intervention": "amine heavy-graph diameter, carbon diameter and N/O counts",
+    "same_flow_random_seed": true
+  },
+  "programs_per_method": 3072,
+  "promotion_checks": {
+    "effective_component_count_preserved": true,
+    "effective_component_count_retained_ratio": 0.9860483812345762,
+    "exact_l1_preserved": true,
+    "local_support_preserved": true,
+    "pairwise_diversity_preserved": true,
+    "realism_improved": false,
+    "required_metrics_estimable": true,
+    "unique_exact_l1_preserved": true,
+    "validity_preserved": true
+  },
+  "promotion_decision": "do_not_promote",
+  "promotion_gate": {
+    "effective_component_count_minimum_retained_ratio": 0.8,
+    "exact_l1_noninferiority_margin": 0.02,
+    "local_support_noninferiority_margin": 0.02,
+    "mean_pairwise_ecfp4_distance_noninferiority_margin": 0.05,
+    "realism_c2st_required_reduction": 0.02,
+    "unique_exact_l1_noninferiority_margin": 0.05,
+    "validity_noninferiority_margin": 0.02
+  },
+  "schema_version": "forge.ugi_amine_semantic_program_comparison_result.v1",
+  "semantic_support_audit": {
+    "all_pairs_supported": true,
+    "attempts": 3072,
+    "component_identity_conditioning": false,
+    "joint_supported_topologies": 2331,
+    "local_chemistry_support_conditioned": true,
+    "maximum_children": 3,
+    "maximum_feasible_topologies_per_pair": 88,
+    "maximum_semantic_topologies_before_local_support_per_pair": 88,
+    "minimum_feasible_topologies_per_pair": 1,
+    "minimum_semantic_topologies_before_local_support_per_pair": 1,
+    "pairs_with_local_support_filtering": 18,
+    "semantic_topologies_before_local_support": 2520,
+    "topologies_removed_by_local_support": 189,
+    "unique_program_target_pairs": 90,
+    "unsupported_pairs": []
+  },
+  "status": "complete",
+  "structural_checks": {
+    "attempt_denominator_matched": true,
+    "candidate_selection_absent": true,
+    "coarse_program_sequence_identical": true,
+    "component_identity_conditioning_absent": true,
+    "method_blind_assessment_shared": true,
+    "no_repairs_or_retries": true,
+    "route_or_oracle_calls_zero": true,
+    "semantic_target_support_complete": true,
+    "training_calls_zero": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "forge.ugi_group_balanced_program_draw_config.v1",
+  "scientific_question": "Can equal component-family-group weighting remove the Cartesian-product morphology skew while retaining only count-level, component-free Ugi reaction programs?",
+  "inputs": {
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "sample_count": 3072,
+  "seed": 2026090101,
+  "policy": {
+    "weighting": "equal_family_group_then_equal_eligible_product",
+    "sampling": "one categorical draw per attempt without rejection or retry",
+    "component_or_family_ids_enter_program": false,
+    "heldout_access": false
+  },
+  "nonclaims": [
+    "Family identifiers are used only to estimate group weights and never enter a sampled program or neural tensor.",
+    "The draw contains no product identities, precursor identities, molecular graphs, SMILES, or fragment tokens.",
+    "This artifact performs no model training, molecular generation, repair, retry, routing, oracle calls, or candidate selection.",
+    "Program-distribution proximity alone does not establish generated-molecule realism."
+  ]
+}

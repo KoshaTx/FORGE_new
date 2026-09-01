@@ -1,0 +1,100 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-structured-topology-specialist-seed0-h100-v8",
+  "description": "Train only a grammar-normalized Ugi topology head on the frozen Transformer, then run the paired 256-program promotion gate.",
+  "root_seed": 20260831,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "preflight",
+      "implementation": "model.reaction-program-structured-topology-specialization-h100-preflight.v8",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/reaction_structured_topology_specialist_ugi_seed0_v8.json",
+        "sha256": "a06f98118e039c1c6f55d7e1bcebeeff270c147e7146f6aa98d3a675780a041a"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar", "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"},
+        "base_training_result": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json", "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"},
+        "base_design": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json", "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "topology_closure_config": {"path": "configs/model/phase1_ugi_closure_expanded.json", "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"},
+        "topology_morphology_config": {"path": "configs/model/phase1_ugi_morphology_expanded.json", "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"}
+      },
+      "outputs": {
+        "checkpoint": {"path": "specialist_checkpoint.pt", "schema_version": "forge.reaction_program_structured_topology_specialist_checkpoint.v8"},
+        "progress": {"path": "progress.json", "schema_version": "forge.reaction_program_structured_topology_specialization_progress.v8"},
+        "result": {"path": "result.json", "schema_version": "forge.reaction_program_structured_topology_specialization_result.v8"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 3600, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-structured-topology-preflight-v8"}
+    },
+    {
+      "id": "specialize_ugi",
+      "implementation": "model.reaction-program-structured-topology-specialization.v8",
+      "needs": ["preflight"],
+      "config": {
+        "path": "configs/multireaction/reaction_structured_topology_specialist_ugi_seed0_v8.json",
+        "sha256": "a06f98118e039c1c6f55d7e1bcebeeff270c147e7146f6aa98d3a675780a041a"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar", "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"},
+        "base_training_result": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json", "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"},
+        "base_design": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json", "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "topology_closure_config": {"path": "configs/model/phase1_ugi_closure_expanded.json", "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"},
+        "topology_morphology_config": {"path": "configs/model/phase1_ugi_morphology_expanded.json", "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"}
+      },
+      "outputs": {
+        "checkpoint": {"path": "specialist_checkpoint.pt", "schema_version": "forge.reaction_program_structured_topology_specialist_checkpoint.v8"},
+        "progress": {"path": "progress.json", "schema_version": "forge.reaction_program_structured_topology_specialization_progress.v8"},
+        "result": {"path": "result.json", "schema_version": "forge.reaction_program_structured_topology_specialization_result.v8"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 4, "workers": 0, "memory_mb": 49152, "timeout_seconds": 21600, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-structured-topology-specialist-seed0-v8"}
+    },
+    {
+      "id": "compare_base",
+      "implementation": "evaluate.ugi.structured-topology-specialist-base-comparison.v8",
+      "needs": ["specialize_ugi"],
+      "config": {
+        "path": "configs/multireaction/ugi_structured_topology_specialist_base_comparison_seed0_v8.json",
+        "sha256": "5042269f3a6ad94af8d22c8db9488c7b8206a93921590426256f0561ba4226fd"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar", "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"},
+        "base_training_result": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json", "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"},
+        "base_design": {"path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json", "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"},
+        "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+        "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+        "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+        "role_morphology_policy": {"path": "results/phase1/local_morphology_support_v2/policy.json", "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"},
+        "topology_closure_config": {"path": "configs/model/phase1_ugi_closure_expanded.json", "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"},
+        "topology_morphology_config": {"path": "configs/model/phase1_ugi_morphology_expanded.json", "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"},
+        "common_ugi_assessment_config": {"path": "configs/multireaction/common_ugi_assessment_v1.json", "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"},
+        "lipid_realism_config": {"path": "configs/multireaction/common_lipid_realism_v1.json", "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"},
+        "local_chemistry_config": {"path": "configs/multireaction/common_local_chemistry_assessment_v1.json", "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"}
+      },
+      "outputs": {
+        "result": {"path": "result.json", "schema_version": "forge.ugi_structured_topology_specialist_comparison_result.v8"},
+        "comparison_details": {"path": "comparison_details.tar", "schema_version": "forge.ugi_structured_topology_specialist_comparison_archive.v8"}
+      },
+      "resources": {"device": "cuda", "precision": "float32", "cpus": 8, "workers": 0, "memory_mb": 49152, "timeout_seconds": 3600, "gpu_type": "H100!"},
+      "determinism": {"mode": "strict", "stream": "ugi-structured-topology-256-gate-v8"}
+    }
+  ],
+  "metadata": {
+    "additional_ugi_training_draws": 66464,
+    "frozen_shared_transformer": true,
+    "frozen_chemistry_outputs": true,
+    "grammar_normalized_topology": true,
+    "component_vocabulary": false,
+    "candidate_selection": false,
+    "paired_gate_programs": 256
+  },
+  "nonclaims": [
+    "Seed-0 development does not establish independently trained replication.",
+    "The experiment makes no potency, synthesis-success or biological-activity claim."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "forge.ugi_amine_semantic_program_draw_config.v1",
+  "scientific_question": "Can an identity-free train-derived head semantic coordinate expose compactness and composition missing from the existing count-only Ugi program without changing the frozen coarse program sequence?",
+  "inputs": {
+    "comparison_details_archive": {
+      "path": "runs/phase1-ugi-group-balanced-program-prior-seed0-h100-v1/2c8c2c26b158de49c072896802166c8d2f9d24a4fc26300bf15a7d90c1a1da44/stages/compare_full/artifacts/comparison_details.tar",
+      "sha256": "b4f239efdb83b6c63dccc32eb34f30454ff0204d3197ee1dd957aa48097a093b"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "sample_count": 3072,
+  "semantic_seed": 2026090103,
+  "policy": {
+    "coarse_program_sequence": "frozen occurrence-weighted measured-train draw",
+    "semantic_weighting": "equal amine-family mass within exact coarse amine program",
+    "sampling": "one conditional categorical draw per attempt without rejection or retry",
+    "component_or_family_ids_enter_program": false,
+    "heldout_access": false
+  },
+  "nonclaims": [
+    "The semantic target contains only graph diameter and N/O count coordinates; it contains no product, component, family, graph, SMILES or fragment identity.",
+    "This artifact accesses source-adjudicated measured Ugi train products only and does not access calibration or held-out product structures.",
+    "This artifact performs no molecular generation, model training, repair, retry, routing, oracle calls or candidate selection.",
+    "A train-derived target distribution does not establish generated-molecule realism until a paired method-blind generation experiment passes the frozen promotion gates."
+  ]
+}

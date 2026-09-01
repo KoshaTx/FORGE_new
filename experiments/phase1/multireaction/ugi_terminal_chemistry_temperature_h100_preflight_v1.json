@@ -1,0 +1,64 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-terminal-chemistry-temperature-h100-preflight-v1",
+  "description": "Calibrate seeded sequential masked terminal chemistry on one matched 256-program Ugi seed-0 H100 preflight using only the measured Ugi calibration reference.",
+  "root_seed": 20260831,
+  "profiles": ["full"],
+  "replicates": {"full": 1},
+  "stages": [
+    {
+      "id": "compare_terminal_temperatures",
+      "implementation": "evaluate.ugi.terminal-chemistry-temperature-comparison.v1",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/ugi_terminal_chemistry_temperature_comparison_seed0_v1.json",
+        "sha256": "4b3135d04c7fc88f8b549daab48cbb00f21994a301ffe7793d684a9cb9bbdb73"
+      },
+      "inputs": {
+        "base_comparison_config": {
+          "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_recovery_v4.json",
+          "sha256": "289ce5f8501dcb364404e2e6861bb08db47943894744649f0e57a6c01e7c8fbf"
+        },
+        "ugi_matched_realism_config": {
+          "path": "configs/multireaction/ugi_matched_lipid_realism_calibration_v1.json",
+          "sha256": "48cdfff5be992ddbb680b6a5d3b843d1479e9b847e710ec7842bac132f128058"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_terminal_chemistry_temperature_comparison_result.v1"
+        },
+        "comparison_details": {
+          "path": "comparison_details.tar",
+          "schema_version": "forge.ugi_terminal_chemistry_temperature_comparison_archive.v1"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 7200,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-terminal-chemistry-temperature-h100-preflight-v1"
+      }
+    }
+  ],
+  "metadata": {
+    "training_calls": 0,
+    "programs_per_method": 256,
+    "paired_program_source": "measured_training_joint_count_prior",
+    "reference_population": "source-adjudicated measured Ugi calibration lipids",
+    "component_vocabulary": false,
+    "candidate_selection": false
+  },
+  "nonclaims": [
+    "Seed-0 terminal-policy calibration does not establish independently trained replication.",
+    "Calibration-reference structural proximity does not establish potency, formulation performance or synthesis success."
+  ]
+}

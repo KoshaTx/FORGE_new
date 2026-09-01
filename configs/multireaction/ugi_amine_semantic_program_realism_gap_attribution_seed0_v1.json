@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Which signed role-local descriptor mismatches separate the count-only Ugi program from the identity-free amine-semantic program, and why did the semantic intervention worsen measured-Ugi realism?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "runs/phase1-ugi-amine-semantic-program-seed0-h100-v1/3a2acb9ec4e00e90cdd1ad39a2ec8979389d7610190ab7a70d6719c506732a35/stages/compare_full/artifacts/result.json",
+      "sha256": "4d996d463f60b9bf6c5c29f0568d0eee57ae4582069d5cb2b6d61f80449355bd"
+    }
+  },
+  "arms": {
+    "count_only": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_semantic_program_realism_gap_attribution_seed0_v1/inputs/count_only/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "f14a4ac3997c4d2567365b779adc1dc884d8cc34fefc7996c5690c895127cb33"
+      },
+      "method_id": "forge_seed0_count_only_ugi_program",
+      "seed": 0
+    },
+    "amine_semantic": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_semantic_program_realism_gap_attribution_seed0_v1/inputs/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "8ae59defcf6e32c2a044bcf7e62c84ad15c7edd947e1f15087f9eb87cfcb95ce"
+      },
+      "method_id": "forge_seed0_amine_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "count_only",
+  "expected_attempts": 3072,
+  "top_k": 16,
+  "nonclaims": [
+    "This is a seed-0 train-fold-only diagnostic and is not an across-training-seed or held-out model claim.",
+    "Signed descriptor shifts diagnose distributional mismatch; they are not biological activity, formulation, delivery, synthesis-success, or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls, or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

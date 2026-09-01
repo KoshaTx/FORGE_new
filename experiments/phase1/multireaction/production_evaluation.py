@@ -41,10 +41,14 @@ from forge.model.synthesis_program_layout import (
     SynthesisProgramLayoutPrior,
 )
 from forge.model.synthesis_program_sampling import (
-    CORE_SATURATION_TERMINAL_DECODE_POLICY,
-    LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY,
-    PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY,
+    CORE_SATURATION_TERMINAL_DECODE_POLICIES,
+    LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES,
+    PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES,
+    PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES,
+    STOCHASTIC_TERMINAL_DECODE_POLICIES,
     SUPPORTED_TERMINAL_DECODE_POLICIES,
+    UGI_ESTER_TERMINAL_DECODE_POLICIES,
+    UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES,
     sample_synthesis_program_products,
 )
 from forge.model.synthesis_program_training import (
@@ -55,6 +59,8 @@ from forge.model.synthesis_program_training import (
     synthesis_program_forward,
     synthesis_program_reconstruction_metrics,
 )
+from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
+from forge.model.ugi_transformer_topology import UgiTransformerTopologyPolicy
 
 from .production_randomness import production_seed
 
@@ -544,10 +550,16 @@ def run_synthesis_program_production_evaluation(
         "multireaction_atlas",
         "multireaction_splits",
     }
-    optional = {"local_chemistry_support"}
-    if (
-        frozenset(paths) not in {frozenset(required), frozenset(required | optional)}
-        or paths["production_cache"].resolve() != cache_path.resolve()
+    local_input = {"local_chemistry_support"}
+    topology_inputs = {"topology_closure_config", "topology_morphology_config"}
+    admitted_inputs = {
+        frozenset(required),
+        frozenset(required | local_input),
+        frozenset(required | topology_inputs),
+        frozenset(required | local_input | topology_inputs),
+    }
+    if frozenset(paths) not in admitted_inputs or (
+        paths["production_cache"].resolve() != cache_path.resolve()
     ):
         raise SynthesisProgramProductionEvaluationError("evaluation inputs changed")
     design = read_json_object(
@@ -585,6 +597,11 @@ def run_synthesis_program_production_evaluation(
         raise SynthesisProgramProductionEvaluationError(
             f"unsupported production terminal decoder: {terminal_decode_policy!r}"
         )
+    terminal_temperature = float(runtime.get("terminal_temperature", 1.0))
+    if not np.isfinite(terminal_temperature) or terminal_temperature <= 0:
+        raise SynthesisProgramProductionEvaluationError(
+            "terminal decoder temperature must be finite and positive"
+        )
     device = torch.device(allocated_device)
     if device.type == "cuda" and not torch.cuda.is_available():
         raise SynthesisProgramProductionEvaluationError("CUDA requested but unavailable")
@@ -619,20 +636,56 @@ def run_synthesis_program_production_evaluation(
             raise SynthesisProgramProductionEvaluationError(
                 "local chemistry and production-cache atom vocabularies differ"
             )
-    if (terminal_decode_policy == LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICY) != (
+    if (terminal_decode_policy in LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES) != (
         local_chemistry_support is not None
     ):
         raise SynthesisProgramProductionEvaluationError(
             "local chemistry support must be present exactly for its terminal decoder"
         )
+    topology_inputs_present = topology_inputs.issubset(paths)
+    if (terminal_decode_policy in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES) != (
+        topology_inputs_present
+    ):
+        raise SynthesisProgramProductionEvaluationError(
+            "coupled Ugi topology support must be present exactly for its terminal decoder"
+        )
+    ugi_topology_policy = None
+    if topology_inputs_present:
+        closure = read_json_object(
+            paths["topology_closure_config"],
+            error=SynthesisProgramProductionEvaluationError,
+            label="Ugi closure topology support",
+        )
+        morphology = read_json_object(
+            paths["topology_morphology_config"],
+            error=SynthesisProgramProductionEvaluationError,
+            label="Ugi morphology topology support",
+        )
+        try:
+            ugi_topology_policy = UgiTransformerTopologyPolicy.from_support_documents(
+                closure, morphology
+            )
+        except ValueError as error:
+            raise SynthesisProgramProductionEvaluationError(
+                "pinned Ugi topology policy is malformed"
+            ) from error
     # The core-saturation contract needs no new artifact: it is read from the qualified reaction
     # registry that this evaluation already pins by sha256.
     reaction_core_saturation_policy = None
-    if terminal_decode_policy == CORE_SATURATION_TERMINAL_DECODE_POLICY:
+    if terminal_decode_policy in CORE_SATURATION_TERMINAL_DECODE_POLICIES:
         reaction_core_saturation_policy = ReactionCoreSaturationPolicy.from_qualified_registry(
             paths["qualified_ugi_reactions"],
             reaction_id="ugi_3cr_agile",
             expected_sha256=str(config["inputs"]["qualified_ugi_reactions"]["sha256"]),
+        )
+    ugi_ester_chemotype_policy = None
+    if terminal_decode_policy in UGI_ESTER_TERMINAL_DECODE_POLICIES:
+        ugi_ester_chemotype_policy = UgiEsterChemotypePolicy.from_qualified_registry(
+            paths["qualified_ugi_reactions"],
+            training_assignments_path=paths["ugi_assignments"],
+            reaction_id="ugi_3cr_agile",
+            expected_sha256=str(config["inputs"]["qualified_ugi_reactions"]["sha256"]),
+            expected_training_assignments_sha256=str(config["inputs"]["ugi_assignments"]["sha256"]),
         )
     all_rows: list[dict[str, Any]] = []
     checkpoint_metrics: dict[str, Any] = {}
@@ -640,7 +693,10 @@ def run_synthesis_program_production_evaluation(
     design_sha256 = str(sha256_file(paths["production_design"]))
     cache_sha256 = str(sha256_file(cache_path))
     try:
-        prior = SynthesisProgramLayoutPrior(cache)
+        prior = SynthesisProgramLayoutPrior(
+            cache,
+            ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+        )
         training_products, training_components = load_reaction_program_training_references(
             ugi_assignments=paths["ugi_assignments"],
             multireaction_atlas=paths["multireaction_atlas"],
@@ -707,6 +763,13 @@ def run_synthesis_program_production_evaluation(
                             sampling_seed = production_seed(
                                 seed, arm_id, step, split_name, program_id, "flow"
                             )
+                            terminal_seed = (
+                                production_seed(
+                                    seed, arm_id, step, split_name, program_id, "terminal"
+                                )
+                                if terminal_decode_policy in STOCHASTIC_TERMINAL_DECODE_POLICIES
+                                else None
+                            )
                             try:
                                 layouts = prior.sample(
                                     program_id,
@@ -719,7 +782,18 @@ def run_synthesis_program_production_evaluation(
                                     ),
                                     exact_program_topology=(
                                         terminal_decode_policy
-                                        == PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICY
+                                        in PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES
+                                        and (
+                                            terminal_decode_policy
+                                            not in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
+                                            or program_id == "ugi_3cr_agile"
+                                        )
+                                    ),
+                                    ugi_ester_chemotype_policy=(
+                                        ugi_ester_chemotype_policy
+                                        if ugi_ester_chemotype_policy is not None
+                                        and program_id == ugi_ester_chemotype_policy.reaction_id
+                                        else None
                                     ),
                                 )
                             except SynthesisProgramLayoutError as error:
@@ -744,8 +818,12 @@ def run_synthesis_program_production_evaluation(
                                 conditioning_mode=sampling_conditioning,
                                 program_state_mapping=state_mapping,
                                 terminal_decode_policy=terminal_decode_policy,
+                                terminal_seed=terminal_seed,
+                                terminal_temperature=terminal_temperature,
                                 local_chemistry_support=local_chemistry_support,
+                                ugi_topology_policy=ugi_topology_policy,
                                 reaction_core_saturation_policy=reaction_core_saturation_policy,
+                                ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
                             )
                             adjudicate_reaction_program_rows(
                                 rows,
@@ -762,6 +840,8 @@ def run_synthesis_program_production_evaluation(
                                         "replicate": replicate,
                                         "seed": seed,
                                         "terminal_decode_policy": terminal_decode_policy,
+                                        "terminal_seed": terminal_seed,
+                                        "terminal_temperature": terminal_temperature,
                                     }
                                 )
                             evaluation = evaluate_reaction_program_samples(
@@ -785,6 +865,12 @@ def run_synthesis_program_production_evaluation(
                                     "repairs": dict(sampling["repairs"]),
                                     "local_chemistry_policy_applied": bool(
                                         sampling["local_chemistry_policy_applied"]
+                                    ),
+                                    "program_role_cycle_policy_applied": bool(
+                                        sampling["program_role_cycle_policy_applied"]
+                                    ),
+                                    "reaction_core_saturation_policy_applied": bool(
+                                        sampling["reaction_core_saturation_policy_applied"]
                                     ),
                                 }
                             )
@@ -1019,8 +1105,54 @@ def run_synthesis_program_production_evaluation(
         "terminal_decode_policy_recorded": all(
             row.get("terminal_decode_policy") == terminal_decode_policy for row in all_rows
         ),
+        "terminal_readout_binding_exact": all(
+            (row.get("terminal_seed") is not None)
+            == (terminal_decode_policy in STOCHASTIC_TERMINAL_DECODE_POLICIES)
+            and float(row.get("terminal_temperature", -1.0)) == terminal_temperature
+            for row in all_rows
+        ),
         "local_chemistry_policy_binding_exact": all(
             bool(row.get("local_chemistry_policy_applied")) == (local_chemistry_support is not None)
+            for row in all_rows
+        ),
+        "program_role_cycle_policy_binding_exact": all(
+            bool(row.get("program_role_cycle_policy_applied"))
+            == (terminal_decode_policy in PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES)
+            for row in all_rows
+        ),
+        "program_topology_policy_binding_exact": all(
+            bool(row.get("program_topology_policy_applied"))
+            == (
+                terminal_decode_policy in PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES
+                and (
+                    terminal_decode_policy not in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
+                    or row.get("program_id") == "ugi_3cr_agile"
+                )
+            )
+            for row in all_rows
+        ),
+        "ugi_topology_second_pass_binding_exact": all(
+            bool(row.get("topology_coupling_second_pass_applied"))
+            == (
+                row.get("program_id") == "ugi_3cr_agile"
+                and terminal_decode_policy in UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES
+            )
+            for row in all_rows
+        ),
+        "reaction_core_saturation_policy_binding_exact": all(
+            bool(row.get("reaction_core_saturation_policy_applied"))
+            == (
+                row.get("program_id") == "ugi_3cr_agile"
+                and terminal_decode_policy in CORE_SATURATION_TERMINAL_DECODE_POLICIES
+            )
+            for row in all_rows
+        ),
+        "ugi_ester_chemotype_policy_binding_exact": all(
+            bool(row.get("ugi_ester_chemotype_policy_applied"))
+            == (
+                row.get("program_id") == "ugi_3cr_agile"
+                and terminal_decode_policy in UGI_ESTER_TERMINAL_DECODE_POLICIES
+            )
             for row in all_rows
         ),
         "no_repairs_or_retries": all(
@@ -1081,6 +1213,7 @@ def run_synthesis_program_production_evaluation(
         },
         "calls": {"route": 0, "oracle": 0},
         "terminal_decode_policy": terminal_decode_policy,
+        "terminal_temperature": terminal_temperature,
         "layout_prior": {
             "source": "training_fold_factorized_count_only_program_prior",
             "support_conditioning": "exact_product_law_conditioned_on_maximum_heavy_atoms",
@@ -1094,6 +1227,18 @@ def run_synthesis_program_production_evaluation(
             pin_record(paths["local_chemistry_support"], repo)
             if local_chemistry_support is not None
             else None
+        ),
+        "ugi_topology_support": (
+            None
+            if ugi_topology_policy is None
+            else {
+                "closure": pin_record(paths["topology_closure_config"], repo),
+                "morphology": pin_record(paths["topology_morphology_config"], repo),
+                "policy": ugi_topology_policy.to_mapping(),
+            }
+        ),
+        "ugi_ester_chemotype_policy": (
+            None if ugi_ester_chemotype_policy is None else ugi_ester_chemotype_policy.to_mapping()
         ),
         "reaction_core_saturation_policy": (
             None

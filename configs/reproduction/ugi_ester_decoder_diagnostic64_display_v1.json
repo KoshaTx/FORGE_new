@@ -1,0 +1,80 @@
+{
+  "schema_version": "forge.paper.forge_generated_sample_atlas_config.v2",
+  "status": "frozen_display_only",
+  "inputs": {
+    "common_assessment_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_ugi_ester_decoder_diagnostic64_common_assessment_v1/result.json",
+      "sha256": "300a17657df0391c238f1c30d32a8c66dcd16dc6b1788f76e16b7ae7f05981cc"
+    },
+    "common_assessed_attempts": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_ugi_ester_decoder_diagnostic64_common_assessment_v1/assessed_attempts.jsonl.gz",
+      "sha256": "98ff276cf56eef0754e359dfb5daf627bfe645e034b0afefa0ae219420a6d02a"
+    },
+    "realism_assessment_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_ugi_ester_decoder_diagnostic64_lipid_realism_v1/result.json",
+      "sha256": "0b1bf3a80eb12eee6597e15fa818b187dfe05de6a096d445a3fcc5ac1b27fdda"
+    },
+    "realism_assessed_attempts": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_ugi_ester_decoder_diagnostic64_lipid_realism_v1/assessed_attempts.jsonl.gz",
+      "sha256": "1882c609f769bc4850f8d42d123b450052f8f2f6b39adda4ce3676a014876672"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "selection": {
+    "method_id": "forge_transformer",
+    "seed": 20260825,
+    "program_id": "ugi_3cr_agile",
+    "display_count": 7,
+    "required_exact_l1_trace_count": 1,
+    "require_method_visible_open_ended": true,
+    "require_descriptor_manifold_member": true,
+    "require_declared_support": true,
+    "deduplicate_by": "canonical_constitution",
+    "rank_by": "sha256_seeded_ecfp4_maxmin",
+    "fingerprint_radius": 2,
+    "fingerprint_bits": 2048,
+    "expected_eligible_unique": 7,
+    "expected_selected_attempt_indices": [33, 38, 60, 26, 37, 39, 34]
+  },
+  "semantic_map": {
+    "reaction_id": "ugi_3cr_agile",
+    "max_forward_outcomes_per_product": 128,
+    "origin_palette": {
+      "amine_head": "#8A5AC2",
+      "oxoester_aldehyde_body_tail": "#168C8C",
+      "isocyanide_tail": "#E39532",
+      "assembly_introduced": "#596579"
+    },
+    "highlight_reaction_core": true
+  },
+  "conformer": {
+    "generator": "rdkit_etkdgv3",
+    "random_seed": 20260825,
+    "optimizer": "mmff94s_with_uff_fallback",
+    "max_iterations": 400,
+    "embedding_fallback": "etkdgv3_random_coordinates",
+    "maximum_embedding_iterations": 1000,
+    "render_hydrogens": false,
+    "views_per_molecule": 1,
+    "color_mode": "origin_bonds_with_element_atoms",
+    "view_rotation_policy": "display_rank_modulo_three"
+  },
+  "layout": {
+    "include_canonical_smiles": true,
+    "latex_asset_prefix": "figures/forge_generated_sample_atlas_ugi_ester_decoder_diagnostic64_v1",
+    "columns": [
+      "display_diversity_rank",
+      "constitutional_graph_2d_with_canonical_smiles",
+      "decorated_3d_view"
+    ]
+  },
+  "display_only": true,
+  "candidate_selection": false
+}

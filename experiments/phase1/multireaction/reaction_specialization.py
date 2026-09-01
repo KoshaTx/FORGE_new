@@ -20,6 +20,7 @@ from forge.core.hashing import artifact_record, pin_record, resolve_pin, sha256_
 from forge.core.io import read_json_object, stable_json, write_json
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
 from forge.model.defog_feasibility import _model_state_sha256
+from forge.model.reaction_program_flow import synthesis_program_chemistry_loss
 from forge.model.reaction_program_transformer import per_program_transformer_losses
 from forge.model.reaction_specialization import (
     apply_specialist_state,
@@ -34,6 +35,7 @@ from forge.model.synthesis_program_training import (
     build_synthesis_program_flow,
     collate_synthesis_program_training_batch,
     move_tensors,
+    synthesis_program_chemistry_conditioned_forward,
     synthesis_program_fixed_state_exact_tensor,
     synthesis_program_forward,
 )
@@ -43,6 +45,13 @@ from forge.model.training_restart import (
     capture_training_random_state,
     restore_training_random_state,
 )
+from forge.model.ugi_joint_lipid_prior import UgiJointLipidPrior, UgiJointLipidPriorError
+from forge.model.ugi_structured_topology import (
+    UgiStructuredTopologyError,
+    ugi_structured_topology_loss,
+)
+from forge.model.ugi_transformer_topology import UgiTransformerTopologyPolicy
+from forge.potency.annotations import ROLE_NAMES
 
 try:
     import torch
@@ -58,6 +67,48 @@ TOPOLOGY_CONFIG_SCHEMA = "forge.reaction_program_topology_specialization_config.
 TOPOLOGY_RESULT_SCHEMA = "forge.reaction_program_topology_specialization_result.v2"
 TOPOLOGY_CHECKPOINT_SCHEMA = "forge.reaction_program_topology_specialist_checkpoint.v2"
 TOPOLOGY_RESTART_SCHEMA = "forge.reaction_program_topology_specialist_restart.v2"
+CHEMISTRY_CONFIG_SCHEMA = "forge.reaction_program_chemistry_specialization_config.v3"
+CHEMISTRY_RESULT_SCHEMA = "forge.reaction_program_chemistry_specialization_result.v3"
+CHEMISTRY_CHECKPOINT_SCHEMA = "forge.reaction_program_chemistry_specialist_checkpoint.v3"
+CHEMISTRY_RESTART_SCHEMA = "forge.reaction_program_chemistry_specialist_restart.v3"
+CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA = (
+    "forge.reaction_program_contextual_chemistry_specialization_config.v4"
+)
+CONTEXTUAL_CHEMISTRY_RESULT_SCHEMA = (
+    "forge.reaction_program_contextual_chemistry_specialization_result.v4"
+)
+CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA = (
+    "forge.reaction_program_contextual_chemistry_specialist_checkpoint.v4"
+)
+CONTEXTUAL_CHEMISTRY_RESTART_SCHEMA = (
+    "forge.reaction_program_contextual_chemistry_specialist_restart.v4"
+)
+JOINT_LIPID_CONFIG_SCHEMA = "forge.reaction_program_joint_lipid_specialization_config.v5"
+JOINT_LIPID_RESULT_SCHEMA = "forge.reaction_program_joint_lipid_specialization_result.v5"
+JOINT_LIPID_CHECKPOINT_SCHEMA = "forge.reaction_program_joint_lipid_specialist_checkpoint.v5"
+JOINT_LIPID_RESTART_SCHEMA = "forge.reaction_program_joint_lipid_specialist_restart.v5"
+ROLE_LOCAL_CONFIG_SCHEMA = "forge.reaction_program_role_local_specialization_config.v6"
+ROLE_LOCAL_RESULT_SCHEMA = "forge.reaction_program_role_local_specialization_result.v6"
+ROLE_LOCAL_CHECKPOINT_SCHEMA = "forge.reaction_program_role_local_specialist_checkpoint.v6"
+ROLE_LOCAL_RESTART_SCHEMA = "forge.reaction_program_role_local_specialist_restart.v6"
+MEASURED_ONLY_FULL_CONFIG_SCHEMA = "forge.reaction_program_measured_only_full_finetune_config.v7"
+MEASURED_ONLY_FULL_RESULT_SCHEMA = "forge.reaction_program_measured_only_full_finetune_result.v7"
+MEASURED_ONLY_FULL_CHECKPOINT_SCHEMA = (
+    "forge.reaction_program_measured_only_full_finetune_checkpoint.v7"
+)
+MEASURED_ONLY_FULL_RESTART_SCHEMA = "forge.reaction_program_measured_only_full_finetune_restart.v7"
+STRUCTURED_TOPOLOGY_CONFIG_SCHEMA = (
+    "forge.reaction_program_structured_topology_specialization_config.v8"
+)
+STRUCTURED_TOPOLOGY_RESULT_SCHEMA = (
+    "forge.reaction_program_structured_topology_specialization_result.v8"
+)
+STRUCTURED_TOPOLOGY_CHECKPOINT_SCHEMA = (
+    "forge.reaction_program_structured_topology_specialist_checkpoint.v8"
+)
+STRUCTURED_TOPOLOGY_RESTART_SCHEMA = (
+    "forge.reaction_program_structured_topology_specialist_restart.v8"
+)
 BASE_CHECKPOINT_SCHEMA = "forge.synthesis_program_production_checkpoint.v1"
 
 
@@ -83,7 +134,17 @@ def load_reaction_program_specialist(
     base = package.get("base") if isinstance(package, Mapping) else None
     if (
         not isinstance(package, dict)
-        or package.get("schema_version") not in {CHECKPOINT_SCHEMA, TOPOLOGY_CHECKPOINT_SCHEMA}
+        or package.get("schema_version")
+        not in {
+            CHECKPOINT_SCHEMA,
+            TOPOLOGY_CHECKPOINT_SCHEMA,
+            CHEMISTRY_CHECKPOINT_SCHEMA,
+            CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA,
+            JOINT_LIPID_CHECKPOINT_SCHEMA,
+            ROLE_LOCAL_CHECKPOINT_SCHEMA,
+            MEASURED_ONLY_FULL_CHECKPOINT_SCHEMA,
+            STRUCTURED_TOPOLOGY_CHECKPOINT_SCHEMA,
+        }
         or package.get("trusted_local_checkpoint") is not True
         or package.get("cache_sha256") != cache_sha256
         or not isinstance(base, Mapping)
@@ -99,18 +160,96 @@ def load_reaction_program_specialist(
         device=device,
     )
     topology_specialist = package["schema_version"] == TOPOLOGY_CHECKPOINT_SCHEMA
-    expected_policy = "adapter_plus_offspring_head" if topology_specialist else "adapter_only"
+    chemistry_specialist = package["schema_version"] in {
+        CHEMISTRY_CHECKPOINT_SCHEMA,
+        CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA,
+    }
+    contextual_chemistry_specialist = (
+        package["schema_version"] == CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA
+    )
+    joint_lipid_specialist = package["schema_version"] == JOINT_LIPID_CHECKPOINT_SCHEMA
+    role_local_specialist = package["schema_version"] == ROLE_LOCAL_CHECKPOINT_SCHEMA
+    measured_only_full_model = package["schema_version"] == MEASURED_ONLY_FULL_CHECKPOINT_SCHEMA
+    structured_topology_specialist = (
+        package["schema_version"] == STRUCTURED_TOPOLOGY_CHECKPOINT_SCHEMA
+    )
+    if chemistry_specialist or role_local_specialist or structured_topology_specialist:
+        target_program = str(package.get("target_program"))
+        target_index = cache.vocabulary.program_to_index.get(target_program)
+        program_index_field = (
+            "contextual_chemistry_program_index"
+            if contextual_chemistry_specialist
+            else "role_local_decoder_program_index"
+            if role_local_specialist
+            else "structured_topology_program_index"
+            if structured_topology_specialist
+            else "chemistry_specialist_program_index"
+        )
+        if (
+            target_index is None
+            or package.get("target_program_index") != target_index
+            or package.get("model_config", {}).get(program_index_field) != target_index
+        ):
+            raise ReactionProgramSpecializationError("specialist target-program binding changed")
+    expected_policy = (
+        "adapter_plus_offspring_head"
+        if topology_specialist
+        else "contextual_chemistry_refinement_only"
+        if contextual_chemistry_specialist
+        else "chemistry_output_adapters_only"
+        if chemistry_specialist
+        else "joint_lipid_adapter_only"
+        if joint_lipid_specialist
+        else "role_local_tree_decoder_only"
+        if role_local_specialist
+        else "full_model_measured_only"
+        if measured_only_full_model
+        else "structured_ugi_topology_head_only"
+        if structured_topology_specialist
+        else "adapter_only"
+    )
     if package.get("delta_parameter_policy", "adapter_only") != expected_policy:
         raise ReactionProgramSpecializationError("specialist delta policy changed")
+    if joint_lipid_specialist or role_local_specialist or measured_only_full_model:
+        training_measure = package.get("training_measure")
+        realized_mass = (
+            training_measure.get("realized_mass") if isinstance(training_measure, Mapping) else None
+        )
+        if (
+            package.get("target_program") != "ugi_3cr_agile"
+            or not isinstance(training_measure, Mapping)
+            or training_measure.get("schema_version") != "forge.ugi_joint_lipid_training_measure.v1"
+            or training_measure.get("reaction_id") != package.get("target_program")
+            or training_measure.get("product_ids_enter_neural_tensors") is not False
+            or (
+                measured_only_full_model
+                and (
+                    not isinstance(realized_mass, Mapping)
+                    or not np.isclose(float(realized_mass.get("measured", -1.0)), 1.0)
+                    or not np.isclose(float(realized_mass.get("exploration", -1.0)), 0.0)
+                )
+            )
+        ):
+            raise ReactionProgramSpecializationError(
+                "joint-lipid specialist training measure changed"
+            )
     initialize_specialist_from_shared_state(
         model,
         base_package["model_state"],
         include_topology_head=topology_specialist,
+        chemistry_only=chemistry_specialist,
+        role_local_decoder_only=role_local_specialist,
+        structured_topology_only=structured_topology_specialist,
+        full_model=measured_only_full_model,
     )
     apply_specialist_state(
         model,
         package["specialist_state"],
         include_topology_head=topology_specialist,
+        chemistry_only=chemistry_specialist,
+        role_local_decoder_only=role_local_specialist,
+        structured_topology_only=structured_topology_specialist,
+        full_model=measured_only_full_model,
     )
     if _model_state_sha256(model) != package.get("combined_model_state_sha256"):
         raise ReactionProgramSpecializationError("combined specialist model state changed")
@@ -161,7 +300,9 @@ def _load_base_package(
         try:
             member = archive.getmember(member_name)
         except KeyError as error:
-            raise ReactionProgramSpecializationError("base archive omits the final checkpoint") from error
+            raise ReactionProgramSpecializationError(
+                "base archive omits the final checkpoint"
+            ) from error
         if not member.isfile() or member.name != member_name:
             raise ReactionProgramSpecializationError("base checkpoint member is not a regular file")
         handle = archive.extractfile(member)
@@ -219,17 +360,152 @@ def run_reaction_program_specialization(
         label="reaction specialization config",
     )
     schema_version = config.get("schema_version")
+    supported_schemas = {
+        CONFIG_SCHEMA,
+        TOPOLOGY_CONFIG_SCHEMA,
+        CHEMISTRY_CONFIG_SCHEMA,
+        CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA,
+        JOINT_LIPID_CONFIG_SCHEMA,
+        ROLE_LOCAL_CONFIG_SCHEMA,
+        MEASURED_ONLY_FULL_CONFIG_SCHEMA,
+        STRUCTURED_TOPOLOGY_CONFIG_SCHEMA,
+    }
     supported_profiles = (
         {"smoke", "h100_preflight", "full"}
-        if schema_version == TOPOLOGY_CONFIG_SCHEMA
+        if schema_version
+        in {
+            TOPOLOGY_CONFIG_SCHEMA,
+            CHEMISTRY_CONFIG_SCHEMA,
+            CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA,
+            JOINT_LIPID_CONFIG_SCHEMA,
+            ROLE_LOCAL_CONFIG_SCHEMA,
+            MEASURED_ONLY_FULL_CONFIG_SCHEMA,
+            STRUCTURED_TOPOLOGY_CONFIG_SCHEMA,
+        }
         else {"smoke", "full"}
     )
-    if schema_version not in {CONFIG_SCHEMA, TOPOLOGY_CONFIG_SCHEMA} or profile not in (
-        supported_profiles
-    ):
+    if schema_version not in supported_schemas or profile not in supported_profiles:
         raise ReactionProgramSpecializationError("unsupported specialization config or profile")
     topology_specialist = schema_version == TOPOLOGY_CONFIG_SCHEMA
+    chemistry_specialist = schema_version in {
+        CHEMISTRY_CONFIG_SCHEMA,
+        CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA,
+    }
+    contextual_chemistry_specialist = schema_version == CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA
+    joint_lipid_specialist = schema_version == JOINT_LIPID_CONFIG_SCHEMA
+    role_local_specialist = schema_version == ROLE_LOCAL_CONFIG_SCHEMA
+    measured_only_full_model = schema_version == MEASURED_ONLY_FULL_CONFIG_SCHEMA
+    structured_topology_specialist = schema_version == STRUCTURED_TOPOLOGY_CONFIG_SCHEMA
+    chemistry_checkpoint_schema = (
+        CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA
+        if contextual_chemistry_specialist
+        else CHEMISTRY_CHECKPOINT_SCHEMA
+    )
+    chemistry_result_schema = (
+        CONTEXTUAL_CHEMISTRY_RESULT_SCHEMA
+        if contextual_chemistry_specialist
+        else CHEMISTRY_RESULT_SCHEMA
+    )
+    chemistry_restart_schema = (
+        CONTEXTUAL_CHEMISTRY_RESTART_SCHEMA
+        if contextual_chemistry_specialist
+        else CHEMISTRY_RESTART_SCHEMA
+    )
+    chemistry_progress_schema = (
+        "forge.reaction_program_contextual_chemistry_specialization_progress.v4"
+        if contextual_chemistry_specialist
+        else "forge.reaction_program_chemistry_specialization_progress.v3"
+    )
+    chemistry_delta_policy = (
+        "contextual_chemistry_refinement_only"
+        if contextual_chemistry_specialist
+        else "chemistry_output_adapters_only"
+    )
+    chemistry_program_index_field = (
+        "contextual_chemistry_program_index"
+        if contextual_chemistry_specialist
+        else "chemistry_specialist_program_index"
+    )
+    restart_schema = (
+        TOPOLOGY_RESTART_SCHEMA
+        if topology_specialist
+        else chemistry_restart_schema
+        if chemistry_specialist
+        else JOINT_LIPID_RESTART_SCHEMA
+        if joint_lipid_specialist
+        else ROLE_LOCAL_RESTART_SCHEMA
+        if role_local_specialist
+        else MEASURED_ONLY_FULL_RESTART_SCHEMA
+        if measured_only_full_model
+        else STRUCTURED_TOPOLOGY_RESTART_SCHEMA
+        if structured_topology_specialist
+        else RESTART_SCHEMA
+    )
+    checkpoint_schema = (
+        TOPOLOGY_CHECKPOINT_SCHEMA
+        if topology_specialist
+        else chemistry_checkpoint_schema
+        if chemistry_specialist
+        else JOINT_LIPID_CHECKPOINT_SCHEMA
+        if joint_lipid_specialist
+        else ROLE_LOCAL_CHECKPOINT_SCHEMA
+        if role_local_specialist
+        else MEASURED_ONLY_FULL_CHECKPOINT_SCHEMA
+        if measured_only_full_model
+        else STRUCTURED_TOPOLOGY_CHECKPOINT_SCHEMA
+        if structured_topology_specialist
+        else CHECKPOINT_SCHEMA
+    )
+    result_schema = (
+        TOPOLOGY_RESULT_SCHEMA
+        if topology_specialist
+        else chemistry_result_schema
+        if chemistry_specialist
+        else JOINT_LIPID_RESULT_SCHEMA
+        if joint_lipid_specialist
+        else ROLE_LOCAL_RESULT_SCHEMA
+        if role_local_specialist
+        else MEASURED_ONLY_FULL_RESULT_SCHEMA
+        if measured_only_full_model
+        else STRUCTURED_TOPOLOGY_RESULT_SCHEMA
+        if structured_topology_specialist
+        else RESULT_SCHEMA
+    )
+    progress_schema = (
+        "forge.reaction_program_topology_specialization_progress.v2"
+        if topology_specialist
+        else chemistry_progress_schema
+        if chemistry_specialist
+        else "forge.reaction_program_joint_lipid_specialization_progress.v5"
+        if joint_lipid_specialist
+        else "forge.reaction_program_role_local_specialization_progress.v6"
+        if role_local_specialist
+        else "forge.reaction_program_measured_only_full_finetune_progress.v7"
+        if measured_only_full_model
+        else "forge.reaction_program_structured_topology_specialization_progress.v8"
+        if structured_topology_specialist
+        else "forge.reaction_program_specialization_progress.v1"
+    )
+    delta_parameter_policy = (
+        "adapter_plus_offspring_head"
+        if topology_specialist
+        else chemistry_delta_policy
+        if chemistry_specialist
+        else "joint_lipid_adapter_only"
+        if joint_lipid_specialist
+        else "role_local_tree_decoder_only"
+        if role_local_specialist
+        else "full_model_measured_only"
+        if measured_only_full_model
+        else "structured_ugi_topology_head_only"
+        if structured_topology_specialist
+        else "adapter_only"
+    )
     topology_objective = config.get("topology_specialization")
+    structured_topology_objective = config.get("structured_topology_specialization")
+    chemistry_objective = config.get("chemistry_specialization")
+    role_local_objective = config.get("role_local_decoder")
+    measured_only_objective = config.get("measured_only_finetune")
     if topology_specialist:
         if (
             not isinstance(topology_objective, Mapping)
@@ -246,22 +522,198 @@ def run_reaction_program_specialization(
         raise ReactionProgramSpecializationError(
             "adapter-only specialization cannot declare a topology objective"
         )
+    if structured_topology_specialist:
+        expected_support = [
+            "node_count",
+            "junction_budget",
+            "cycle_rank",
+            "attachment_count",
+            "maximum_adjacent_branch_run",
+            "feasible_ring_edges",
+        ]
+        if (
+            config.get("target_program") != "ugi_3cr_agile"
+            or int(config.get("structured_topology_adapter_dim", 0)) < 1
+            or not isinstance(structured_topology_objective, Mapping)
+            or set(structured_topology_objective)
+            != {
+                "closure_weight",
+                "decoder",
+                "maximum_children",
+                "support_coordinates",
+                "tree_weight",
+            }
+            or structured_topology_objective.get("decoder") != "exact_ugi_role_grammar"
+            or list(structured_topology_objective.get("support_coordinates", []))
+            != expected_support
+            or int(structured_topology_objective.get("maximum_children", 0)) < 1
+            or float(structured_topology_objective.get("tree_weight", 0.0)) <= 0.0
+            or float(structured_topology_objective.get("closure_weight", -1.0)) < 0.0
+        ):
+            raise ReactionProgramSpecializationError(
+                "structured topology specialization objective is incomplete"
+            )
+    elif structured_topology_objective is not None:
+        raise ReactionProgramSpecializationError(
+            "non-structured specialization cannot declare a structured topology objective"
+        )
+    if chemistry_specialist:
+        expected_chemistry_objective: dict[str, Any] = {
+            "balance_by_role": True,
+            "topology_conditioning": "target_parents_and_closure_endpoints",
+            "trainable_outputs": ["nodes", "parent_bonds", "closure_bonds"],
+        }
+        if contextual_chemistry_specialist:
+            expected_chemistry_objective["context_features"] = [
+                "precursor_role",
+                "reaction_core_position",
+                "typed_one_hop_tree_neighbors",
+                "typed_closure_neighbors",
+                "heavy_degree",
+            ]
+        if (
+            not isinstance(chemistry_objective, Mapping)
+            or dict(chemistry_objective) != expected_chemistry_objective
+        ):
+            raise ReactionProgramSpecializationError(
+                "chemistry specialization objective is incomplete"
+            )
+        if contextual_chemistry_specialist and (
+            int(config.get("contextual_chemistry_layers", 0)) < 1
+            or int(config.get("contextual_chemistry_adapter_dim", 0)) < 1
+            or int(config.get("contextual_chemistry_degree_buckets", 0)) < 2
+            or "chemistry_specialist_adapter_dim" in config
+        ):
+            raise ReactionProgramSpecializationError(
+                "contextual chemistry refinement dimensions are invalid"
+            )
+    elif chemistry_objective is not None:
+        raise ReactionProgramSpecializationError(
+            "non-chemistry specialization cannot declare a chemistry objective"
+        )
+    if role_local_specialist:
+        expected_role_local_objective = {
+            "core_updated": False,
+            "cross_role_attention": True,
+            "local_context": [
+                "node_hidden",
+                "parent_hidden",
+                "mean_child_hidden",
+                "cross_role_summary",
+            ],
+            "trainable_outputs": [
+                "nodes",
+                "parents",
+                "parent_bonds",
+                "closure_left",
+                "closure_right",
+                "closure_bonds",
+            ],
+        }
+        if (
+            config.get("target_program") != "ugi_3cr_agile"
+            or int(config.get("role_local_decoder_adapter_dim", 0)) < 1
+            or not isinstance(role_local_objective, Mapping)
+            or dict(role_local_objective) != expected_role_local_objective
+        ):
+            raise ReactionProgramSpecializationError("role-local decoder objective is incomplete")
+    elif role_local_objective is not None:
+        raise ReactionProgramSpecializationError(
+            "non-role-local specialization cannot declare a role-local decoder objective"
+        )
+    if measured_only_full_model:
+        expected_measured_only_objective = {
+            "initialization": "authenticated_shared_checkpoint",
+            "optimizer_state": "reset",
+            "training_rows": "source_adjudicated_measured_train_only",
+            "trainable_scope": "all_model_parameters",
+        }
+        if (
+            config.get("target_program") != "ugi_3cr_agile"
+            or not isinstance(measured_only_objective, Mapping)
+            or dict(measured_only_objective) != expected_measured_only_objective
+        ):
+            raise ReactionProgramSpecializationError(
+                "measured-only full-model objective is incomplete"
+            )
+    elif measured_only_objective is not None:
+        raise ReactionProgramSpecializationError(
+            "non-measured-only specialization cannot declare full-model fine-tuning"
+        )
+    joint_lipid_policy = config.get("joint_lipid_prior")
+    if joint_lipid_specialist or role_local_specialist or measured_only_full_model:
+        if (
+            config.get("target_program") != "ugi_3cr_agile"
+            or not isinstance(joint_lipid_policy, Mapping)
+            or set(joint_lipid_policy)
+            != {
+                "component_ids_enter_neural_tensors",
+                "exploration_mass",
+                "exploration_weighting",
+                "measured_mass",
+                "measured_weighting",
+            }
+            or joint_lipid_policy.get("component_ids_enter_neural_tensors") is not False
+            or joint_lipid_policy.get("measured_weighting")
+            != "uniform_unique_constitutional_product"
+            or joint_lipid_policy.get("exploration_weighting") != "frozen_source_weights"
+            or (
+                measured_only_full_model
+                and (
+                    isinstance(joint_lipid_policy.get("measured_mass"), bool)
+                    or not isinstance(joint_lipid_policy.get("measured_mass"), (int, float))
+                    or joint_lipid_policy.get("measured_mass") != 1.0
+                    or isinstance(joint_lipid_policy.get("exploration_mass"), bool)
+                    or not isinstance(joint_lipid_policy.get("exploration_mass"), (int, float))
+                    or joint_lipid_policy.get("exploration_mass") != 0.0
+                )
+            )
+        ):
+            raise ReactionProgramSpecializationError(
+                "joint-lipid specialization policy is incomplete"
+            )
+    elif joint_lipid_policy is not None:
+        raise ReactionProgramSpecializationError(
+            "non-joint specialization cannot declare a joint-lipid prior"
+        )
     authorization = config.get("authorization")
     if not isinstance(authorization, Mapping) or authorization.get("authorized") is not True:
         raise ReactionProgramSpecializationError("reaction specialization is not authorized")
     inputs = config.get("inputs")
-    if not isinstance(inputs, Mapping) or set(inputs) != {
+    expected_inputs = {
         "base_checkpoint_archive",
         "base_training_result",
         "base_design",
         "production_cache",
-    }:
-        raise ReactionProgramSpecializationError("specialization input contract changed")
-    paths = {
-        label: resolve_pin(pin, repo, label=label) for label, pin in inputs.items()
     }
+    if joint_lipid_specialist or role_local_specialist or measured_only_full_model:
+        expected_inputs.add("ugi_assignments")
+    if structured_topology_specialist:
+        expected_inputs.update({"topology_closure_config", "topology_morphology_config"})
+    if not isinstance(inputs, Mapping) or set(inputs) != expected_inputs:
+        raise ReactionProgramSpecializationError("specialization input contract changed")
+    paths = {label: resolve_pin(pin, repo, label=label) for label, pin in inputs.items()}
     if paths["production_cache"].resolve() != cache_path.resolve():
         raise ReactionProgramSpecializationError("stage cache differs from the pinned cache")
+    structured_topology_policy = None
+    if structured_topology_specialist:
+        try:
+            structured_topology_policy = UgiTransformerTopologyPolicy.from_support_documents(
+                read_json_object(
+                    paths["topology_closure_config"],
+                    error=ReactionProgramSpecializationError,
+                    label="structured topology closure support",
+                ),
+                read_json_object(
+                    paths["topology_morphology_config"],
+                    error=ReactionProgramSpecializationError,
+                    label="structured topology morphology support",
+                ),
+            )
+        except ValueError as error:
+            raise ReactionProgramSpecializationError(
+                "structured topology support policy is malformed"
+            ) from error
     runtime = config.get(profile)
     if not isinstance(runtime, Mapping):
         raise ReactionProgramSpecializationError("specialization runtime is missing")
@@ -300,7 +752,9 @@ def run_reaction_program_specialization(
     )
     observed_exposure = training["arms"][str(base["arm_id"])]["examples_seen_by_program"]
     if int(observed_exposure.get(target_program, -1)) != existing_examples:
-        raise ReactionProgramSpecializationError("declared initial exposure differs from base evidence")
+        raise ReactionProgramSpecializationError(
+            "declared initial exposure differs from base evidence"
+        )
     package, member_name = _load_base_package(
         archive_path=paths["base_checkpoint_archive"],
         training=training,
@@ -313,14 +767,55 @@ def run_reaction_program_specialization(
         device=device,
     )
     model_config = dict(package["model_config"])
-    model_config["specialist_adapter_dim"] = int(config["specialist_adapter_dim"])
+    if contextual_chemistry_specialist:
+        model_config["contextual_chemistry_layers"] = int(config["contextual_chemistry_layers"])
+        model_config["contextual_chemistry_adapter_dim"] = int(
+            config["contextual_chemistry_adapter_dim"]
+        )
+        model_config["contextual_chemistry_degree_buckets"] = int(
+            config["contextual_chemistry_degree_buckets"]
+        )
+    elif chemistry_specialist:
+        model_config["chemistry_specialist_adapter_dim"] = int(
+            config["chemistry_specialist_adapter_dim"]
+        )
+    elif role_local_specialist:
+        model_config["role_local_decoder_adapter_dim"] = int(
+            config["role_local_decoder_adapter_dim"]
+        )
+    elif structured_topology_specialist:
+        model_config["structured_topology_adapter_dim"] = int(
+            config["structured_topology_adapter_dim"]
+        )
+    elif not measured_only_full_model:
+        model_config["specialist_adapter_dim"] = int(config["specialist_adapter_dim"])
     if topology_specialist:
         assert isinstance(topology_objective, Mapping)
         model_config["maximum_children"] = int(topology_objective["maximum_children"])
+    elif structured_topology_specialist:
+        assert isinstance(structured_topology_objective, Mapping)
+        model_config["maximum_children"] = int(structured_topology_objective["maximum_children"])
     cache = SynthesisProgramProductionCache(cache_path)
+    joint_lipid_measure_receipt: dict[str, Any] | None = None
     try:
         if target_program not in cache.vocabulary.program_to_index:
             raise ReactionProgramSpecializationError("target program is absent from the cache")
+        if contextual_chemistry_specialist:
+            model_config["contextual_chemistry_program_index"] = int(
+                cache.vocabulary.program_to_index[target_program]
+            )
+        elif chemistry_specialist:
+            model_config["chemistry_specialist_program_index"] = int(
+                cache.vocabulary.program_to_index[target_program]
+            )
+        elif role_local_specialist:
+            model_config["role_local_decoder_program_index"] = int(
+                cache.vocabulary.program_to_index[target_program]
+            )
+        elif structured_topology_specialist:
+            model_config["structured_topology_program_index"] = int(
+                cache.vocabulary.program_to_index[target_program]
+            )
         model = build_synthesis_program_flow(
             vocabulary=cache.vocabulary,
             node_classes=len(cache.atom_vocabulary),
@@ -331,25 +826,53 @@ def run_reaction_program_specialization(
             model,
             package["model_state"],
             include_topology_head=topology_specialist,
+            chemistry_only=chemistry_specialist,
+            role_local_decoder_only=role_local_specialist,
+            structured_topology_only=structured_topology_specialist,
+            full_model=measured_only_full_model,
         )
         trainable_names = freeze_shared_parameters(
             model,
             include_topology_head=topology_specialist,
+            chemistry_only=chemistry_specialist,
+            role_local_decoder_only=role_local_specialist,
+            structured_topology_only=structured_topology_specialist,
+            full_model=measured_only_full_model,
         )
         parameter_report = specialist_parameter_report(
             model,
             include_topology_head=topology_specialist,
+            chemistry_only=chemistry_specialist,
+            role_local_decoder_only=role_local_specialist,
+            structured_topology_only=structured_topology_specialist,
+            full_model=measured_only_full_model,
         )
         optimizer = torch.optim.AdamW(
             optimizer_parameters(model),
             lr=float(runtime["learning_rate"]),
             weight_decay=float(runtime["weight_decay"]),
         )
-        program_mass = {
-            program: float(program == target_program)
-            for program in cache.vocabulary.program_states[1:]
-        }
-        measure = cache.training_measure(program_mass)
+        if joint_lipid_specialist or role_local_specialist or measured_only_full_model:
+            assert isinstance(joint_lipid_policy, Mapping)
+            try:
+                joint_prior = UgiJointLipidPrior.from_training_assignments(
+                    paths["ugi_assignments"],
+                    measured_mass=float(joint_lipid_policy["measured_mass"]),
+                    exploration_mass=float(joint_lipid_policy["exploration_mass"]),
+                    reaction_id=target_program,
+                    expected_sha256=str(sha256_file(paths["ugi_assignments"])),
+                )
+                measure, joint_lipid_measure_receipt = joint_prior.training_measure(cache)
+            except UgiJointLipidPriorError as error:
+                raise ReactionProgramSpecializationError(
+                    "joint-lipid training measure is invalid"
+                ) from error
+        else:
+            program_mass = {
+                program: float(program == target_program)
+                for program in cache.vocabulary.program_states[1:]
+            }
+            measure = cache.training_measure(program_mass)
         support = np.flatnonzero(measure > 0)
         probabilities = measure[support]
         probabilities /= probabilities.sum()
@@ -376,9 +899,7 @@ def run_reaction_program_specialization(
 
         def restart_payload() -> dict[str, Any]:
             return {
-                "schema_version": (
-                    TOPOLOGY_RESTART_SCHEMA if topology_specialist else RESTART_SCHEMA
-                ),
+                "schema_version": restart_schema,
                 "restart_identity": identity,
                 "completed_steps": completed_steps,
                 "additional_examples_seen": additional_examples_seen,
@@ -386,6 +907,10 @@ def run_reaction_program_specialization(
                 "specialist_state": specialist_state_dict(
                     model,
                     include_topology_head=topology_specialist,
+                    chemistry_only=chemistry_specialist,
+                    role_local_decoder_only=role_local_specialist,
+                    structured_topology_only=structured_topology_specialist,
+                    full_model=measured_only_full_model,
                 ),
                 "optimizer_state": optimizer.state_dict(),
                 "losses": losses,
@@ -396,8 +921,7 @@ def run_reaction_program_specialization(
             payload = torch.load(restart_path, map_location=device, weights_only=False)
             if (
                 not isinstance(payload, dict)
-                or payload.get("schema_version")
-                != (TOPOLOGY_RESTART_SCHEMA if topology_specialist else RESTART_SCHEMA)
+                or payload.get("schema_version") != restart_schema
                 or payload.get("restart_identity") != identity
             ):
                 raise ReactionProgramSpecializationError("specialist restart contract changed")
@@ -405,6 +929,10 @@ def run_reaction_program_specialization(
                 model,
                 payload["specialist_state"],
                 include_topology_head=topology_specialist,
+                chemistry_only=chemistry_specialist,
+                role_local_decoder_only=role_local_specialist,
+                structured_topology_only=structured_topology_specialist,
+                full_model=measured_only_full_model,
             )
             optimizer.load_state_dict(payload["optimizer_state"])
             completed_steps = int(payload["completed_steps"])
@@ -412,9 +940,13 @@ def run_reaction_program_specialization(
             fixed_state_failures = int(payload["fixed_state_failures"])
             losses = list(payload["losses"])
             try:
-                restore_training_random_state(payload["random_state"], rng, generator, device=device)
+                restore_training_random_state(
+                    payload["random_state"], rng, generator, device=device
+                )
             except TrainingRestartError as error:
-                raise ReactionProgramSpecializationError("specialist restart RNG is invalid") from error
+                raise ReactionProgramSpecializationError(
+                    "specialist restart RNG is invalid"
+                ) from error
         if completed_steps > len(schedule.optimizer_steps):
             raise ReactionProgramSpecializationError("restart step exceeds exact schedule")
         expected_seen = sum(sum(step) for step in schedule.optimizer_steps[:completed_steps])
@@ -442,29 +974,63 @@ def run_reaction_program_specialization(
                     device,
                 )
                 t = torch.rand(micro_size, generator=generator, device=device).clamp(0.02, 0.98)
-                predictions, noisy = synthesis_program_forward(
-                    model, clean, node_p0, bond_p0, t, generator
-                )
-                family_losses, _ = per_program_transformer_losses(
-                    predictions,
-                    clean,
-                    role_weight=float(objective["role_consistency_weight"]),
-                    core_weight=float(objective["core_consistency_weight"]),
-                    repeat_consistency_weight=float(objective.get("repeat_consistency_weight", 0.0)),
-                    offspring_weight=(
-                        float(topology_objective["offspring_weight"])
-                        if topology_specialist
-                        else 0.0
-                    ),
-                    junction_consistency_weight=(
-                        float(topology_objective["junction_consistency_weight"])
-                        if topology_specialist
-                        else 0.0
-                    ),
-                    program_states=(target_state,),
-                    materialize_metrics=False,
-                )
-                loss = family_losses[target_state]
+                if chemistry_specialist:
+                    predictions, noisy = synthesis_program_chemistry_conditioned_forward(
+                        model, clean, node_p0, bond_p0, t, generator
+                    )
+                    loss, _ = synthesis_program_chemistry_loss(
+                        predictions,
+                        clean,
+                        balance_by_role=True,
+                    )
+                elif structured_topology_specialist:
+                    assert isinstance(structured_topology_objective, Mapping)
+                    assert structured_topology_policy is not None
+                    predictions, noisy = synthesis_program_forward(
+                        model, clean, node_p0, bond_p0, t, generator
+                    )
+                    try:
+                        loss, _ = ugi_structured_topology_loss(
+                            predictions,
+                            clean,
+                            role_indices={
+                                role: int(cache.vocabulary.role_to_index[role])
+                                for role in ROLE_NAMES
+                            },
+                            policy=structured_topology_policy,
+                            tree_weight=float(structured_topology_objective["tree_weight"]),
+                            closure_weight=float(structured_topology_objective["closure_weight"]),
+                        )
+                    except (KeyError, UgiStructuredTopologyError) as error:
+                        raise ReactionProgramSpecializationError(
+                            "structured topology batch violated its frozen grammar"
+                        ) from error
+                else:
+                    predictions, noisy = synthesis_program_forward(
+                        model, clean, node_p0, bond_p0, t, generator
+                    )
+                    family_losses, _ = per_program_transformer_losses(
+                        predictions,
+                        clean,
+                        role_weight=float(objective["role_consistency_weight"]),
+                        core_weight=float(objective["core_consistency_weight"]),
+                        repeat_consistency_weight=float(
+                            objective.get("repeat_consistency_weight", 0.0)
+                        ),
+                        offspring_weight=(
+                            float(topology_objective["offspring_weight"])
+                            if topology_specialist
+                            else 0.0
+                        ),
+                        junction_consistency_weight=(
+                            float(topology_objective["junction_consistency_weight"])
+                            if topology_specialist
+                            else 0.0
+                        ),
+                        program_states=(target_state,),
+                        materialize_metrics=False,
+                    )
+                    loss = family_losses[target_state]
                 fraction = micro_size / step_examples
                 (loss * fraction).backward()
                 step_loss += loss.detach() * fraction
@@ -476,9 +1042,11 @@ def run_reaction_program_specialization(
                 optimizer_parameters(model), float(runtime["gradient_clip_norm"])
             )
             optimizer.step()
-            published = torch.stack(
-                (step_loss, gradient_norm.detach(), step_fixed.to(torch.float32))
-            ).cpu().tolist()
+            published = (
+                torch.stack((step_loss, gradient_norm.detach(), step_fixed.to(torch.float32)))
+                .cpu()
+                .tolist()
+            )
             completed_steps = step_index + 1
             fixed_state_failures += int(published[2])
             losses.append(
@@ -495,11 +1063,7 @@ def run_reaction_program_specialization(
                 write_json(
                     output_dir / "progress.json",
                     {
-                        "schema_version": (
-                            "forge.reaction_program_topology_specialization_progress.v2"
-                            if topology_specialist
-                            else "forge.reaction_program_specialization_progress.v1"
-                        ),
+                        "schema_version": progress_schema,
                         "target_program": target_program,
                         "completed_steps": completed_steps,
                         "target_steps": len(schedule.optimizer_steps),
@@ -511,11 +1075,11 @@ def run_reaction_program_specialization(
                 )
 
         if additional_examples_seen != schedule.additional_examples:
-            raise ReactionProgramSpecializationError("final exposure does not match the exact target")
+            raise ReactionProgramSpecializationError(
+                "final exposure does not match the exact target"
+            )
         checkpoint = {
-            "schema_version": (
-                TOPOLOGY_CHECKPOINT_SCHEMA if topology_specialist else CHECKPOINT_SCHEMA
-            ),
+            "schema_version": checkpoint_schema,
             "trusted_local_checkpoint": True,
             "target_program": target_program,
             "seed": seed,
@@ -523,9 +1087,20 @@ def run_reaction_program_specialization(
             "specialist_state": specialist_state_dict(
                 model,
                 include_topology_head=topology_specialist,
+                chemistry_only=chemistry_specialist,
+                role_local_decoder_only=role_local_specialist,
+                structured_topology_only=structured_topology_specialist,
+                full_model=measured_only_full_model,
             ),
-            "delta_parameter_policy": (
-                "adapter_plus_offspring_head" if topology_specialist else "adapter_only"
+            "delta_parameter_policy": delta_parameter_policy,
+            "target_program_index": (
+                int(model_config[chemistry_program_index_field])
+                if chemistry_specialist
+                else int(model_config["role_local_decoder_program_index"])
+                if role_local_specialist
+                else int(model_config["structured_topology_program_index"])
+                if structured_topology_specialist
+                else None
             ),
             "combined_model_state_sha256": _model_state_sha256(model),
             "base": {
@@ -538,13 +1113,19 @@ def run_reaction_program_specialization(
             "node_marginal": package["node_marginal"],
             "bond_marginal": package["bond_marginal"],
             "exposure": schedule.to_mapping(),
+            "training_measure": joint_lipid_measure_receipt,
+            "structured_topology_policy": (
+                structured_topology_policy.to_mapping()
+                if structured_topology_policy is not None
+                else None
+            ),
         }
         atomic_torch_save(checkpoint_path, checkpoint)
     finally:
         cache.close()
 
     result = {
-        "schema_version": TOPOLOGY_RESULT_SCHEMA if topology_specialist else RESULT_SCHEMA,
+        "schema_version": result_schema,
         "status": "pass" if fixed_state_failures == 0 else "fail",
         "profile": profile,
         "target_program": target_program,
@@ -557,6 +1138,7 @@ def run_reaction_program_specialization(
             "model_state_sha256": str(base["model_state_sha256"]),
         },
         "exposure": schedule.to_mapping(),
+        "training_measure": joint_lipid_measure_receipt,
         "observed": {
             "additional_examples": additional_examples_seen,
             "cumulative_examples": existing_examples + additional_examples_seen,
@@ -565,14 +1147,58 @@ def run_reaction_program_specialization(
         },
         "specialist": {
             **parameter_report,
-            "adapter_dimension": int(config["specialist_adapter_dim"]),
+            "adapter_dimension": (
+                0
+                if measured_only_full_model
+                else int(
+                    config[
+                        "contextual_chemistry_adapter_dim"
+                        if contextual_chemistry_specialist
+                        else "chemistry_specialist_adapter_dim"
+                        if chemistry_specialist
+                        else "role_local_decoder_adapter_dim"
+                        if role_local_specialist
+                        else "structured_topology_adapter_dim"
+                        if structured_topology_specialist
+                        else "specialist_adapter_dim"
+                    ]
+                )
+            ),
             "trainable_parameter_names": list(trainable_names),
             "initial_missing_parameter_names": list(missing),
-            "delta_parameter_policy": (
-                "adapter_plus_offspring_head" if topology_specialist else "adapter_only"
+            "delta_parameter_policy": delta_parameter_policy,
+            "target_program_index": (
+                int(model_config[chemistry_program_index_field])
+                if chemistry_specialist
+                else int(model_config["role_local_decoder_program_index"])
+                if role_local_specialist
+                else int(model_config["structured_topology_program_index"])
+                if structured_topology_specialist
+                else None
+            ),
+            "contextual_layers": (
+                int(config["contextual_chemistry_layers"]) if contextual_chemistry_specialist else 0
+            ),
+            "contextual_degree_buckets": (
+                int(config["contextual_chemistry_degree_buckets"])
+                if contextual_chemistry_specialist
+                else 0
             ),
         },
         "topology_objective": dict(topology_objective) if topology_specialist else None,
+        "structured_topology_objective": (
+            dict(structured_topology_objective) if structured_topology_specialist else None
+        ),
+        "structured_topology_policy": (
+            structured_topology_policy.to_mapping()
+            if structured_topology_policy is not None
+            else None
+        ),
+        "chemistry_objective": dict(chemistry_objective) if chemistry_specialist else None,
+        "role_local_decoder": (dict(role_local_objective) if role_local_specialist else None),
+        "measured_only_finetune": (
+            dict(measured_only_objective) if measured_only_full_model else None
+        ),
         "initial_loss": losses[0],
         "final_loss": losses[-1],
         "checkpoint": artifact_record(checkpoint_path),
@@ -581,11 +1207,94 @@ def run_reaction_program_specialization(
             "cumulative_exposure_matches_target": (
                 existing_examples + additional_examples_seen == target_examples
             ),
-            "shared_parameters_frozen": parameter_report["shared_frozen_parameters"] > 0,
-            "specialist_delta_only": len(trainable_names) == len(missing),
+            **(
+                {
+                    "full_model_parameter_scope_exact": (
+                        parameter_report["shared_frozen_parameters"] == 0
+                        and parameter_report["specialist_trainable_parameters"]
+                        == parameter_report["total_parameters"]
+                        and len(trainable_names) == len(tuple(model.named_parameters()))
+                        and not missing
+                    )
+                }
+                if measured_only_full_model
+                else {
+                    "shared_parameters_frozen": parameter_report["shared_frozen_parameters"] > 0,
+                    "specialist_delta_only": len(trainable_names) == len(missing),
+                }
+            ),
             "topology_head_supervised": (
                 not topology_specialist
                 or any(name.startswith("offspring_output.") for name in trainable_names)
+            ),
+            "structured_topology_head_supervised": (
+                not structured_topology_specialist
+                or all(
+                    any(
+                        name.startswith(f"structured_topology_head.{field}.")
+                        for name in trainable_names
+                    )
+                    for field in ("offspring", "closure_left", "closure_right")
+                )
+            ),
+            **(
+                {}
+                if measured_only_full_model
+                else {
+                    "topology_outputs_frozen": (
+                        not chemistry_specialist
+                        or all(
+                            not name.startswith("offspring_output.")
+                            and ".specialist_adapter." not in name
+                            for name in trainable_names
+                        )
+                    )
+                }
+            ),
+            "specialist_program_binding_exact": (
+                not (
+                    chemistry_specialist or role_local_specialist or structured_topology_specialist
+                )
+                or int(
+                    model_config[
+                        "role_local_decoder_program_index"
+                        if role_local_specialist
+                        else "structured_topology_program_index"
+                        if structured_topology_specialist
+                        else chemistry_program_index_field
+                    ]
+                )
+                == target_state
+            ),
+            "structured_grammar_policy_pinned": (
+                not structured_topology_specialist or structured_topology_policy is not None
+            ),
+            "contextual_features_declared": (
+                not contextual_chemistry_specialist
+                or list(chemistry_objective["context_features"])
+                == [
+                    "precursor_role",
+                    "reaction_core_position",
+                    "typed_one_hop_tree_neighbors",
+                    "typed_closure_neighbors",
+                    "heavy_degree",
+                ]
+            ),
+            "joint_lipid_measure_exact": (
+                not (joint_lipid_specialist or role_local_specialist or measured_only_full_model)
+                or (
+                    isinstance(joint_lipid_measure_receipt, Mapping)
+                    and np.isclose(
+                        float(joint_lipid_measure_receipt["realized_mass"]["measured"]),
+                        float(joint_lipid_policy["measured_mass"]),
+                    )
+                    and np.isclose(
+                        float(joint_lipid_measure_receipt["realized_mass"]["exploration"]),
+                        float(joint_lipid_policy["exploration_mass"]),
+                    )
+                    and joint_lipid_measure_receipt["product_ids_enter_neural_tensors"] is False
+                    and joint_lipid_measure_receipt["component_ids_enter_neural_tensors"] is False
+                )
             ),
             "fixed_state_failures_zero": fixed_state_failures == 0,
             "train_fold_source_measure_used": True,
@@ -596,7 +1305,16 @@ def run_reaction_program_specialization(
         "nonclaims": [
             "A completed specialist run is not model-quality evidence without frozen evaluation.",
             "Exact L1 replay is transform consistency, not synthesis-success probability.",
-            "The specialist sees source-balanced train-fold rows only and no component identifiers.",
+            (
+                "The full model sees only the 480 source-adjudicated measured Ugi train-fold "
+                "products during this diagnostic fine-tune and no product or component identifiers."
+                if measured_only_full_model
+                else "The specialist sees the frozen measured/exploration Ugi train-fold mixture "
+                "and no product or component identifiers."
+                if joint_lipid_specialist or role_local_specialist
+                else "The specialist sees source-balanced train-fold rows only and no component "
+                "identifiers."
+            ),
         ],
     }
     if not all(result["gates"].values()):
@@ -609,6 +1327,24 @@ def run_reaction_program_specialization(
 
 __all__ = [
     "CHECKPOINT_SCHEMA",
+    "CHEMISTRY_CHECKPOINT_SCHEMA",
+    "CHEMISTRY_CONFIG_SCHEMA",
+    "CHEMISTRY_RESULT_SCHEMA",
+    "CONTEXTUAL_CHEMISTRY_CHECKPOINT_SCHEMA",
+    "CONTEXTUAL_CHEMISTRY_CONFIG_SCHEMA",
+    "CONTEXTUAL_CHEMISTRY_RESULT_SCHEMA",
+    "JOINT_LIPID_CHECKPOINT_SCHEMA",
+    "JOINT_LIPID_CONFIG_SCHEMA",
+    "JOINT_LIPID_RESULT_SCHEMA",
+    "MEASURED_ONLY_FULL_CHECKPOINT_SCHEMA",
+    "MEASURED_ONLY_FULL_CONFIG_SCHEMA",
+    "MEASURED_ONLY_FULL_RESULT_SCHEMA",
+    "ROLE_LOCAL_CHECKPOINT_SCHEMA",
+    "ROLE_LOCAL_CONFIG_SCHEMA",
+    "ROLE_LOCAL_RESULT_SCHEMA",
+    "STRUCTURED_TOPOLOGY_CHECKPOINT_SCHEMA",
+    "STRUCTURED_TOPOLOGY_CONFIG_SCHEMA",
+    "STRUCTURED_TOPOLOGY_RESULT_SCHEMA",
     "CONFIG_SCHEMA",
     "RESULT_SCHEMA",
     "TOPOLOGY_CHECKPOINT_SCHEMA",

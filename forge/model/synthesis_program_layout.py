@@ -22,6 +22,7 @@ from forge.model.synthesis_program_graph import (
     SynthesisProgramComponentBlock,
     SynthesisProgramGraphRecord,
 )
+from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
 
 
 class SynthesisProgramLayoutError(ValueError):
@@ -43,6 +44,7 @@ class _RecordSummary:
     weight: float
     role_morphology: tuple[tuple[int, tuple[int, int, int, int]], ...] = ()
     program_topology_signature: tuple[tuple[Any, ...], ...] = ()
+    record_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -358,6 +360,7 @@ def _summarize_program(
                     if role_state > 0
                 ),
                 program_topology_signature=_program_topology_signature(record),
+                record_id=cache.record_id(int(cache_index)),
             )
         )
     if not summaries:
@@ -368,7 +371,12 @@ def _summarize_program(
 class SynthesisProgramLayoutPrior:
     """Program-specific factorized count prior fitted to the weighted training fold."""
 
-    def __init__(self, cache: SynthesisProgramProductionCache) -> None:
+    def __init__(
+        self,
+        cache: SynthesisProgramProductionCache,
+        *,
+        ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
+    ) -> None:
         self.vocabulary = cache.vocabulary
         self.maximum_heavy_atoms = int(cache.metadata["support"]["maximum_heavy_atoms"])
         self.maximum_closures = int(cache.metadata["support"]["maximum_closures"])
@@ -379,6 +387,7 @@ class SynthesisProgramLayoutPrior:
         self._conditioned_component_sizes: dict[
             tuple[str, int, tuple[Any, ...]], _WeightedSupport
         ] = {}
+        self._ugi_measured_joint_layout_support: _WeightedSupport | None = None
         for program_id in cache.vocabulary.program_states[1:]:
             summaries, fixed_node_states = _summarize_program(cache, program_id)
             self._distributions[program_id] = _compile_program_distribution(summaries)
@@ -395,9 +404,7 @@ class SynthesisProgramLayoutPrior:
                     f"reaction-program topology varies within one depth for {program_id}"
                 )
             self._program_topology_signatures[program_id] = {
-                depth: next(iter(values))
-                for depth, values in by_depth.items()
-                if len(values) == 1
+                depth: next(iter(values)) for depth, values in by_depth.items() if len(values) == 1
             }
             repeated = [role for role, count in maximum_multiplicity.items() if count > 1]
             if len(repeated) > 1:
@@ -405,7 +412,82 @@ class SynthesisProgramLayoutPrior:
                     f"reaction program has multiple repeated roles: {program_id}"
                 )
             self._repeated_role_states[program_id] = repeated[0] if repeated else None
+            if (
+                ugi_ester_chemotype_policy is not None
+                and program_id == ugi_ester_chemotype_policy.reaction_id
+            ):
+                self._ugi_measured_joint_layout_support = (
+                    self._compile_ugi_measured_joint_layout_support(
+                        summaries,
+                        policy=ugi_ester_chemotype_policy,
+                    )
+                )
         self.validate_support()
+
+    def _compile_ugi_measured_joint_layout_support(
+        self,
+        summaries: Sequence[_RecordSummary],
+        *,
+        policy: UgiEsterChemotypePolicy,
+    ) -> _WeightedSupport:
+        """Fit a count-only whole-program law to measured training products.
+
+        Product identifiers select the frozen training-fold rows only.  The retained categorical
+        support contains depth, component sizes, core counts and coarse role morphology; it contains
+        no identifier, atom state, bond state, SMILES or component graph.  Sampling the whole tuple
+        preserves measured head/tail correlations rather than independently recombining role
+        marginals.
+        """
+
+        requested = frozenset(policy.measured_training_product_ids)
+        if not requested:
+            raise SynthesisProgramLayoutError(
+                "measured Ugi joint-program sampling has no training product IDs"
+            )
+        role_states = {
+            role: int(self.vocabulary.role_to_index[role])
+            for role in (policy.amine_role, policy.aldehyde_role, policy.isocyanide_role)
+        }
+        observed: set[str] = set()
+        values: list[tuple[Any, ...]] = []
+        for summary in summaries:
+            if summary.record_id not in requested:
+                continue
+            assert summary.record_id is not None
+            observed.add(summary.record_id)
+            morphology = dict(summary.role_morphology)
+            if any(role_state not in morphology for role_state in role_states.values()):
+                raise SynthesisProgramLayoutError(
+                    "measured Ugi row lacks one precursor-role morphology"
+                )
+            if any(
+                not policy.minimum_topology_exterior_atoms(role)
+                <= int(morphology[role_state][0])
+                <= policy.maximum_exterior_atoms(role)
+                for role, role_state in role_states.items()
+            ):
+                continue
+            aldehyde = morphology[role_states[policy.aldehyde_role]]
+            if tuple(int(value) for value in aldehyde[1:]) != (1, 0, 1):
+                continue
+            values.append(
+                (
+                    int(summary.depth),
+                    summary.blocks,
+                    summary.fixed_signature,
+                    summary.role_morphology,
+                )
+            )
+        missing = requested - observed
+        if missing:
+            raise SynthesisProgramLayoutError(
+                f"production cache lacks {len(missing)} measured Ugi training products"
+            )
+        if not values:
+            raise SynthesisProgramLayoutError(
+                "measured Ugi training products have no mass in the requested chemotype"
+            )
+        return _WeightedSupport.build(values, [1.0] * len(values))
 
     def _component_size_support(
         self,
@@ -454,6 +536,91 @@ class SynthesisProgramLayoutPrior:
             blocks.extend((int(role_state), size, core_signature) for size in sizes)
         return depth, closure_count, blocks, fixed_signature
 
+    def _sample_fields_conditioned_on_ugi_chemotype(
+        self,
+        program_id: str,
+        rng: np.random.Generator,
+        *,
+        ugi_ester_role_state: int,
+        ugi_minimum_exterior_by_state: Mapping[int, int],
+        ugi_maximum_exterior_by_state: Mapping[int, int],
+    ) -> tuple[
+        int,
+        int,
+        list[tuple[int, int, tuple[tuple[int, int], ...]]],
+        tuple[tuple[Any, ...], ...],
+    ]:
+        """Draw exactly from the finite count prior conditioned on the Ugi chemotype."""
+
+        cache = getattr(self, "_ugi_chemotype_field_support", None)
+        if cache is None:
+            cache = {}
+            self._ugi_chemotype_field_support = cache
+        key = (
+            program_id,
+            ugi_ester_role_state,
+            tuple(sorted(ugi_minimum_exterior_by_state.items())),
+            tuple(sorted(ugi_maximum_exterior_by_state.items())),
+        )
+        support = cache.get(key)
+        if support is None:
+            distribution = self._distributions[program_id]
+            admitted: list[
+                tuple[
+                    int,
+                    tuple[tuple[int, int, tuple[tuple[int, int], ...]], ...],
+                    tuple[tuple[Any, ...], ...],
+                ]
+            ] = []
+            weights: list[float] = []
+            for depth_index, raw_depth in enumerate(distribution.depth.values):
+                depth = int(raw_depth)
+                bundle_support = distribution.semantic_bundle_by_depth[depth]
+                for bundle_index, bundle in enumerate(bundle_support.values):
+                    multiplicity_pattern, fixed_signature = bundle
+                    size_support = self._component_size_support(program_id, depth, bundle)
+                    for size_index, joint_sizes in enumerate(size_support.values):
+                        blocks: list[tuple[int, int, tuple[tuple[int, int], ...]]] = []
+                        for ((role_state, core_signature), multiplicity), sizes in zip(
+                            multiplicity_pattern,
+                            joint_sizes,
+                            strict=True,
+                        ):
+                            if len(sizes) != int(multiplicity):
+                                raise SynthesisProgramLayoutError(
+                                    "sampled component-size multiset changed role multiplicity"
+                                )
+                            blocks.extend(
+                                (int(role_state), int(size), core_signature) for size in sizes
+                            )
+                        if not self._role_morphology_admits_closure_budget(
+                            program_id=program_id,
+                            depth=depth,
+                            blocks=blocks,
+                            fixed_signature=fixed_signature,
+                            ugi_ester_role_state=ugi_ester_role_state,
+                            ugi_minimum_exterior_by_state=ugi_minimum_exterior_by_state,
+                            ugi_maximum_exterior_by_state=ugi_maximum_exterior_by_state,
+                        ):
+                            continue
+                        admitted.append((depth, tuple(blocks), fixed_signature))
+                        weights.append(
+                            float(
+                                distribution.depth.probabilities[depth_index]
+                                * bundle_support.probabilities[bundle_index]
+                                * size_support.probabilities[size_index]
+                            )
+                        )
+            if not admitted:
+                raise SynthesisProgramLayoutError(
+                    "factorized Ugi layout prior has no mass in the requested chemotype"
+                )
+            support = _WeightedSupport.build(admitted, weights)
+            cache[key] = support
+        depth, blocks, fixed_signature = support.sample(rng)
+        closure_count = int(self._distributions[program_id].closure_count.sample(rng))
+        return int(depth), closure_count, list(blocks), fixed_signature
+
     def _role_morphology_supports(
         self,
         *,
@@ -495,6 +662,9 @@ class SynthesisProgramLayoutPrior:
         depth: int,
         blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
         fixed_signature: tuple[tuple[Any, ...], ...],
+        ugi_ester_role_state: int | None = None,
+        ugi_minimum_exterior_by_state: Mapping[int, int] | None = None,
+        ugi_maximum_exterior_by_state: Mapping[int, int] | None = None,
     ) -> bool:
         """Report whether this size assignment leaves the closure-conditioned law any mass.
 
@@ -506,7 +676,7 @@ class SynthesisProgramLayoutPrior:
         """
 
         try:
-            _, supports = self._role_morphology_supports(
+            roles, supports = self._role_morphology_supports(
                 program_id=program_id,
                 depth=depth,
                 blocks=blocks,
@@ -514,8 +684,36 @@ class SynthesisProgramLayoutPrior:
             )
         except SynthesisProgramLayoutError:
             return False
-        minimum = sum(min(int(value[2]) for value in support.values) for support in supports)
-        return minimum <= self.maximum_closures
+        for indices in product(*(range(len(support.values)) for support in supports)):
+            values = tuple(
+                support.values[index] for support, index in zip(supports, indices, strict=True)
+            )
+            if sum(int(value[2]) for value in values) > self.maximum_closures:
+                continue
+            if ugi_minimum_exterior_by_state is not None and any(
+                int(values[roles.index(role_state)][0]) < minimum
+                for role_state, minimum in ugi_minimum_exterior_by_state.items()
+            ):
+                continue
+            if ugi_maximum_exterior_by_state is not None and any(
+                int(values[roles.index(role_state)][0]) > maximum
+                for role_state, maximum in ugi_maximum_exterior_by_state.items()
+            ):
+                continue
+            if ugi_ester_role_state is not None:
+                role_program = values[roles.index(ugi_ester_role_state)]
+                # With one attachment, a descriptor-equivalent C(=O)-O-C tree has exactly one
+                # bifurcation: the carbonyl oxygen is one leaf and the alkoxy side is the other
+                # branch.  Conditioning on this exact program lets the topology decoder construct
+                # the requested chemotype without rejection.
+                if not (
+                    int(role_program[1]) == 1
+                    and int(role_program[2]) == 0
+                    and int(role_program[3]) == 1
+                ):
+                    continue
+            return True
+        return False
 
     def _sample_role_morphology(
         self,
@@ -525,6 +723,9 @@ class SynthesisProgramLayoutPrior:
         blocks: Sequence[tuple[int, int, tuple[tuple[int, int], ...]]],
         fixed_signature: tuple[tuple[Any, ...], ...],
         rng: np.random.Generator,
+        ugi_ester_role_state: int | None = None,
+        ugi_minimum_exterior_by_state: Mapping[int, int] | None = None,
+        ugi_maximum_exterior_by_state: Mapping[int, int] | None = None,
     ) -> dict[int, tuple[int, int, int, int]]:
         """Draw complete role-local programs conditioned on the sampled role sizes.
 
@@ -546,6 +747,24 @@ class SynthesisProgramLayoutPrior:
             )
             if sum(int(value[2]) for value in values) > self.maximum_closures:
                 continue
+            if ugi_minimum_exterior_by_state is not None and any(
+                int(values[roles.index(role_state)][0]) < minimum
+                for role_state, minimum in ugi_minimum_exterior_by_state.items()
+            ):
+                continue
+            if ugi_maximum_exterior_by_state is not None and any(
+                int(values[roles.index(role_state)][0]) > maximum
+                for role_state, maximum in ugi_maximum_exterior_by_state.items()
+            ):
+                continue
+            if ugi_ester_role_state is not None:
+                role_program = values[roles.index(ugi_ester_role_state)]
+                if not (
+                    int(role_program[1]) == 1
+                    and int(role_program[2]) == 0
+                    and int(role_program[3]) == 1
+                ):
+                    continue
             admitted.append(indices)
             weights.append(
                 float(
@@ -999,9 +1218,10 @@ class SynthesisProgramLayoutPrior:
         sample_index: int,
     ) -> SynthesisProgramGraphRecord:
         role_multiplicities = Counter(role for role, _, _ in blocks)
-        if all(count == 1 for count in role_multiplicities.values()) and self._fixed_node_states[
-            program_id
-        ]:
+        if (
+            all(count == 1 for count in role_multiplicities.values())
+            and self._fixed_node_states[program_id]
+        ):
             return self._ugi_layout(
                 program_id=program_id,
                 depth=depth,
@@ -1087,15 +1307,89 @@ class SynthesisProgramLayoutPrior:
         seed: int,
         role_morphology_conditioning: bool = False,
         exact_program_topology: bool = False,
+        ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
     ) -> tuple[SynthesisProgramGraphRecord, ...]:
         """Draw count-only layouts for one requested program without target-graph reuse."""
 
         if program_id not in self._distributions or sample_count < 1:
             raise SynthesisProgramLayoutError("invalid factorized layout request")
+        if ugi_ester_chemotype_policy is not None and (
+            program_id != "ugi_3cr_agile"
+            or not role_morphology_conditioning
+            or ugi_ester_chemotype_policy.reaction_id != program_id
+            or any(
+                role not in self.vocabulary.role_to_index
+                for role in (
+                    ugi_ester_chemotype_policy.amine_role,
+                    ugi_ester_chemotype_policy.aldehyde_role,
+                    ugi_ester_chemotype_policy.isocyanide_role,
+                )
+            )
+        ):
+            raise SynthesisProgramLayoutError(
+                "the ester chemotype prior requires a named Ugi role and morphology conditioning"
+            )
+        ugi_ester_role_state = (
+            None
+            if ugi_ester_chemotype_policy is None
+            else int(self.vocabulary.role_to_index[ugi_ester_chemotype_policy.aldehyde_role])
+        )
+        ugi_minimum_exterior_by_state = (
+            None
+            if ugi_ester_chemotype_policy is None
+            else {
+                int(self.vocabulary.role_to_index[role]): (
+                    ugi_ester_chemotype_policy.minimum_topology_exterior_atoms(role)
+                )
+                for role in (
+                    ugi_ester_chemotype_policy.amine_role,
+                    ugi_ester_chemotype_policy.aldehyde_role,
+                    ugi_ester_chemotype_policy.isocyanide_role,
+                )
+            }
+        )
+        ugi_maximum_exterior_by_state = (
+            None
+            if ugi_ester_chemotype_policy is None
+            else {
+                int(self.vocabulary.role_to_index[role]): (
+                    ugi_ester_chemotype_policy.maximum_exterior_atoms(role)
+                )
+                for role in (
+                    ugi_ester_chemotype_policy.amine_role,
+                    ugi_ester_chemotype_policy.aldehyde_role,
+                    ugi_ester_chemotype_policy.isocyanide_role,
+                )
+            }
+        )
         rng = np.random.default_rng(seed)
         output: list[SynthesisProgramGraphRecord] = []
         for sample_index in range(sample_count):
-            depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
+            morphology = None
+            if (
+                ugi_ester_chemotype_policy is not None
+                and getattr(self, "_ugi_measured_joint_layout_support", None) is not None
+            ):
+                depth, blocks, fixed, measured_morphology = (
+                    self._ugi_measured_joint_layout_support.sample(rng)
+                )
+                depth = int(depth)
+                blocks = list(blocks)
+                morphology = dict(measured_morphology)
+                closures = sum(int(values[2]) for values in morphology.values())
+            elif ugi_ester_chemotype_policy is not None:
+                assert ugi_ester_role_state is not None
+                assert ugi_minimum_exterior_by_state is not None
+                assert ugi_maximum_exterior_by_state is not None
+                depth, closures, blocks, fixed = self._sample_fields_conditioned_on_ugi_chemotype(
+                    program_id,
+                    rng,
+                    ugi_ester_role_state=ugi_ester_role_state,
+                    ugi_minimum_exterior_by_state=ugi_minimum_exterior_by_state,
+                    ugi_maximum_exterior_by_state=ugi_maximum_exterior_by_state,
+                )
+            else:
+                depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
             if role_morphology_conditioning:
                 # Role sizes are drawn before the morphology law is conditioned on the closure
                 # bound, so a draw can land where the conditioned product has no mass at all.
@@ -1104,8 +1398,18 @@ class SynthesisProgramLayoutPrior:
                 # consumes no extra randomness here, so programs that never reject are unchanged.
                 attempts = 1
                 while not self._role_morphology_admits_closure_budget(
-                    program_id=program_id, depth=depth, blocks=blocks, fixed_signature=fixed
+                    program_id=program_id,
+                    depth=depth,
+                    blocks=blocks,
+                    fixed_signature=fixed,
+                    ugi_ester_role_state=ugi_ester_role_state,
+                    ugi_minimum_exterior_by_state=ugi_minimum_exterior_by_state,
+                    ugi_maximum_exterior_by_state=ugi_maximum_exterior_by_state,
                 ):
+                    if ugi_ester_chemotype_policy is not None:
+                        raise SynthesisProgramLayoutError(
+                            "exact chemotype-conditioned layout support became inconsistent"
+                        )
                     if attempts >= _ROLE_MORPHOLOGY_REDRAW_LIMIT:
                         raise SynthesisProgramLayoutError(
                             "role-local morphology law has no mass within closure support for "
@@ -1113,14 +1417,16 @@ class SynthesisProgramLayoutPrior:
                         )
                     depth, closures, blocks, fixed = self._sample_fields(program_id, rng)
                     attempts += 1
-            morphology = None
-            if role_morphology_conditioning:
+            if role_morphology_conditioning and morphology is None:
                 morphology = self._sample_role_morphology(
                     program_id=program_id,
                     depth=depth,
                     blocks=blocks,
                     fixed_signature=fixed,
                     rng=rng,
+                    ugi_ester_role_state=ugi_ester_role_state,
+                    ugi_minimum_exterior_by_state=ugi_minimum_exterior_by_state,
+                    ugi_maximum_exterior_by_state=ugi_maximum_exterior_by_state,
                 )
                 closures = sum(int(values[2]) for values in morphology.values())
             topology = (

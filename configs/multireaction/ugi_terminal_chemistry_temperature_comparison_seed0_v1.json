@@ -1,0 +1,70 @@
+{
+  "schema_version": "forge.ugi_terminal_chemistry_temperature_comparison_config.v1",
+  "inputs": {
+    "base_comparison_config": {
+      "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_recovery_v4.json",
+      "sha256": "289ce5f8501dcb364404e2e6861bb08db47943894744649f0e57a6c01e7c8fbf"
+    },
+    "ugi_matched_realism_config": {
+      "path": "configs/multireaction/ugi_matched_lipid_realism_calibration_v1.json",
+      "sha256": "48cdfff5be992ddbb680b6a5d3b843d1479e9b847e710ec7842bac132f128058"
+    }
+  },
+  "profiles": {
+    "smoke": {
+      "device": "cpu",
+      "program_count": 64,
+      "sample_steps": 2,
+      "batch_size": 16,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "terminal_seed": 2026083103,
+      "temperatures": [0.35, 0.55, 0.75, 1.0]
+    },
+    "h100_preflight": {
+      "device": "cuda",
+      "program_count": 256,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "terminal_seed": 2026083103,
+      "temperatures": [0.35, 0.55, 0.75, 1.0]
+    },
+    "full": {
+      "device": "cuda",
+      "program_count": 3072,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "terminal_seed": 2026083103,
+      "temperatures": [0.35, 0.55, 0.75, 1.0]
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "heldout_reference_access": false,
+    "method_blind_assessment": true,
+    "paired_program_order": true,
+    "paired_flow_stream": true,
+    "paired_terminal_uniform_stream": true,
+    "repairs_or_retries": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "selection_gate": {
+    "exact_l1_noninferiority_margin": 0.02,
+    "local_support_noninferiority_margin": 0.02,
+    "realism_c2st_required_reduction": 0.02,
+    "unique_exact_l1_required_increase": 0.10,
+    "validity_noninferiority_margin": 0.02
+  },
+  "nonclaims": [
+    "This is seed-0 terminal-policy calibration, not independent retraining replication.",
+    "The calibration reference contains only 32 source-adjudicated measured Ugi lipids and cannot support a final held-out claim.",
+    "The sequential decoder updates hard chemical feasibility after each choice but does not rerun the Transformer after each choice.",
+    "No molecule is repaired, retried, routed, ranked or selected as a candidate."
+  ]
+}

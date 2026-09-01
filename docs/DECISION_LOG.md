@@ -10557,3 +10557,1198 @@ preserved unchanged.
 - **Decision:** collect and adjudicate the completed cross-fit against the unchanged held-head and
   held-pair gate. This authorization covers no guided generation, synthesis, proposal-engine call or
   candidate selection. A pass still requires separate authorization before any nonzero guidance.
+
+## 2026-08-30 — Port the v0 role-local closure contract to the final shared Transformer
+
+- A generated Ugi exemplar exposed a 14-membered isocyanide-derived ring even though its sampled
+  morphology requested a cycle in the amine role. The completed 9,143-step production evaluation
+  had applied reaction-core saturation, but not role-local cycle placement or the frozen
+  training-derived local-morphology policy.
+- Added terminal policy
+  `strict_role_local_closure_chemistry_core_saturation_argmax`. In one no-repair decode it
+  preserves adapter-fixed states, applies the qualified Ugi core-saturation contract, assigns every
+  generated closure to a role whose sampled cycle budget remains open, and admits only
+  training-supported role-local edge and cycle signatures. The frozen Ugi support admits 5-, 6-
+  and 7-membered amine rings and 6-membered isocyanide rings; it stores no component identity.
+- An initial smoke that required exact agreement with all four coarse morphology coordinates was
+  correctly rejected as overconstrained: greedy parent decoding caused widespread
+  `program_morphology_exactness_failure`. The retained policy therefore enforces the v0-relevant
+  closure role and local ring support at decode time; exact junction-count topology remains a
+  separate topology-first architectural intervention rather than a hidden retry.
+- The final seed-0 CPU smoke reused the frozen step-9,143 checkpoint with 32 sampling steps and
+  eight held-out attempts per program. Valid and verified exact-L1 yields were 3/8 Ugi, 4/8 BL and
+  5/8 LX. Every accepted Ugi sample had maximum ring size at most six; no repair or retry occurred.
+  This tiny run is feasibility evidence, not a replacement production estimate. Result and sample
+  ledger SHA-256 values are
+  `1a113fe3a3ad4d3ec897697c7c53d555057e576f1a0bf741511457d2a2a731a8` and
+  `032b5fc83b18e0f8aa71bc06a625fec776015bc3e490a428dd3338523cf6896a`.
+- Three full-profile configs now bind the same composed policy to the frozen seed-0, seed-1 and
+  seed-2 checkpoints at 3,072 held-out attempts per program. No training or paid production
+  evaluation was launched, and no existing manuscript number was changed.
+
+## 2026-08-30 — Qualify a measured-Ugi display chemotype for the shared Transformer
+
+- The first ester-capable Ugi decoder diagnostic preserved the final shared Transformer, exact
+  program decomposition and no-repair sampling contract, but an ester alone was not enough to
+  recover the visual morphology of the source AGILE lipids. It returned 46 valid exact-L1 products
+  in 64 attempts with 100% decomposition coverage and replay precision among valid products, yet
+  only 7 of 46 fell inside the frozen R0 descriptor manifold. Several products retained a short
+  hydrophobic arm or an unusually large polar region. This is preserved as a negative result: local
+  functional-group correctness does not determine whole-lipid morphology.
+- Added an optional display-only Ugi chemotype policy derived from hash-pinned, unique measured
+  training-fold components in `ugi_balanced_chemistry_corpus_v2`. Its interquartile exterior-size
+  support is 6--8 atoms for the amine head, 17--25 for the aldehyde-derived body/tail and 12--16 for
+  the isocyanide tail. The aldehyde-derived ester must separate carbon-capable sides containing at
+  least 6 and 10 atoms. Required handles are read from the qualified reaction registry. Generated
+  exterior atoms remain role-local and neutral; the policy contains no component identities,
+  stored component graphs, fragment tokens or completed products.
+- The morphology prior now samples exactly from its finite support conditioned on that chemotype,
+  rather than using an unreliable bounded rejection loop. The topology decoder applies the same
+  support before selecting chemistry. Invalid or unsupported draws abstain; no repair, retry or
+  accepted-product replacement is permitted.
+- In the final 64-attempt seed-0 diagnostic, 21 products were valid and verified exact-L1
+  (32.8125% per attempt). Decomposition coverage and exact forward-replay precision were both 100%
+  among valid products; all 21 were constitutionally distinct and contained a component absent from
+  the training catalogue. The stricter yield is a property of this fail-closed display stratum and
+  does not replace the production-model estimates. Result, common-assessment and realism-assessment
+  SHA-256 values are `75db42bbdc3b64375ef5647398bfc5606c34bff4332fb53a5dab46ef8ac0708b`,
+  `52c5297ddc8123bcac936eab5ce1ec043c92f062091d5e56e790578ee6378510` and
+  `2a8c78d46d32af81fa775a342c4e2279b48a95bf6fe3c76b9724e1a5706d29aa`.
+- The frozen method-blind R0 realism assessor classified none of the 21 products as descriptor- or
+  fingerprint-manifold members. This result is retained and must not be converted into a realism
+  claim. The display criterion is instead the prespecified measured-Ugi role morphology above.
+  Deterministic ECFP4 max-min selection chose attempt indices 42, 43, 60, 14, 39, 3, 27 and 21.
+  The display-result and reproduction-config SHA-256 values are
+  `811c90b06990b6f9e7ff64c51f60e8067706a6159066a7baa817a4904a39b65d` and
+  `309a7b1371120bae23abdd96be9dea619bf93e1f01a62cef543c9c3d7cd591c9`.
+- **Decision:** use this policy only to produce auditable Ugi structure illustrations from the newest
+  model and decoder. Do not change manuscript metrics, infer activity or experimental synthesis
+  success, or promote the policy to the production sampler without a matched three-seed evaluation.
+  No model was retrained and no paper asset was replaced in this diagnostic.
+
+## 2026-08-30 — Construct measured Ugi morphology before chemistry decoding
+
+- Superseded the rejection-heavy display decoder above without changing its historical artifacts.
+  The failure was ordering: the former policy drew a broad virtual-library topology and only then
+  asked whether it could host an ester-bearing measured-like lipid. The new decoder samples one
+  complete, count-only morphology program from the source-adjudicated measured **training-fold**
+  products, constructs an exactly compatible topology, and only then asks the frozen Transformer
+  for atom and bond identities. No measured product ID, SMILES, atom state, bond state, component
+  graph or fragment token enters the generated state.
+- The measured training subset contains 480 products and 220 distinct complete count programs.
+  Sampling preserves their joint head/tail size, junction, cycle and attachment relation rather
+  than independently recombining role marginals. The aldehyde-derived role is constructed with one
+  ester-capable bifurcation and the measured carbon-arm floors. Amine closure sizes are conditioned
+  on measured head size: 5-membered at exterior size 7, and 5- or 6-membered at size 8. This removed
+  the 7-membered cyclic heads responsible for every remaining chemistry abstention.
+- The bounded seed-0 diagnostic reused the final step-9,143 shared Transformer checkpoint and the
+  reaction-core-saturation decoder. All 64 of 64 held-out Ugi attempts were connected, valid,
+  exactly decomposable and exactly replayed, with zero repairs, retries or constraint abstentions.
+  There were 51 distinct exact-L1 products (796.875 per 1,000 attempts), an effective molecule count
+  of 46.49 and mean pairwise ECFP4 distance 0.403 among unique molecules. Every attempt had a
+  verifier-recovered precursor absent from the training component catalogue.
+- The method-blind R0 assay still placed zero products inside its fingerprint or descriptor
+  manifold and estimated a generated-versus-reference classifier AUC of 0.913. The cleaner
+  hydrophobic arms and 5-/6-membered heads are therefore a display-quality improvement, not evidence
+  of empirical-manifold realism, biological activity or experimental synthesis success.
+- Result, sample-ledger, common-assessment and realism-assessment SHA-256 values are
+  `6ccb5626136fadd65f748c2c7b440af63b6cc3b550b9f6d7f261033829d04849`,
+  `df8fc4a4e375ea03f3fad3d29a55c8e904e2d086742793a636b594160fb7ef17`,
+  `b2c9e4607fb45d2f85b608b85b13b7f8b009c4afc4d10f3f9aeb7d00f583082a` and
+  `fc3df621d9953344a586e528853f6a6389db2308b2b53cec891a7065cdf417e1`.
+- **Decision:** retain the final 96.4% three-seed production estimate unchanged. The 64-attempt
+  result qualifies this no-retraining morphology-first path for audited illustrations; promoting it
+  as the production sampler requires a matched three-seed, 3,072-attempt evaluation. Do not infer
+  potency, route completeness or experimental success from this diagnostic.
+
+## 2026-08-30 — Freeze a topology-preserving Ugi chemistry-specialization experiment
+
+- Audited the final shared Transformer before adding another objective. Its production training
+  already includes a topology-conditioned chemistry pass, role-balanced chemistry loss and
+  program-routed output heads. The missing intervention was therefore not another topology loss,
+  but a reaction-specific chemistry delta that cannot change the sampled topology.
+- Added two zero-initialized output adapters after the shared hidden state: one feeds atom and
+  parent-bond logits and the other feeds closure-bond logits. Parent-pointer, closure-endpoint,
+  offspring, role and core logits do not consume either delta. Unit checks establish exact
+  bit-for-bit agreement with the base model before training and invariant topology logits after a
+  deliberately nonzero chemistry delta.
+- The v3 specialization runner freezes all 5,593,463 shared parameters and trains only 49,664
+  adapter parameters (0.8801% of the combined model) on source-balanced Ugi training draws. It
+  supplies target parent pointers and closure endpoints, and optimizes role-balanced atom,
+  parent-bond and closure-bond cross entropy only. The full seed-0 contract adds exactly 66,464
+  weighted draws from the frozen training fold to the authenticated step-9,143 base exposure.
+- The paired evaluator gives the base and specialist the same ordered morphology programs, flow
+  seed, 32-step budget, topology-first Ugi layout, strict reaction-core decoder and method-blind
+  realism/local-chemistry assessors. Promotion requires exact-L1, validity and local-support
+  non-inferiority within 2 percentage points plus a 0.02 reduction in C2ST AUC. A negative result is
+  preserved as `do_not_promote`; it does not fail the execution contract.
+- A one-update CPU training smoke passed every exposure, fixed-state, frozen-parameter and
+  no-repair gate, including exact binding to the Ugi program state so the trained delta is a no-op
+  for BL and LX. The two-step paired sampling smoke also passed every structural gate and correctly
+  returned `not_estimable` for the scientific promotion decision. Result SHA-256 values are
+  `cea078d75b0661f42830961c356e1826f17a62d9876bcef5a9ccb1885a0a473f` and
+  `263530eecfb4bb2afb3fb7cf904f37aa2c693871771612363f06b2a1b2bddf2c`.
+- **Decision:** the implementation is qualified for the pinned H100 preflight and seed-0
+  development run. No paid run was launched, no manuscript metric was changed and no realism,
+  potency, route-completeness or synthesis-success claim is supported by the smoke tests.
+
+## 2026-08-30 — Reject the first chemistry-specialist production comparison as program-policy mismatched
+
+- With explicit user approval, launched and collected detached exact-H100 run
+  `1cd32408515c472c20429c0f34c3899b7fe029b5127244026f5ae2bbb6006250` under Modal function
+  call `fc-01M1ASMHA89P80A15PZAXZ3SVT`. The downloaded run independently matches its remote
+  manifests. The preflight and full specialization stages passed every frozen-parameter,
+  source-measure, exposure-conservation, no-repair and fixed-state gate.
+- The specialist trained 49,664 chemistry-only parameters for exactly 66,464 additional Ugi
+  training draws. Its checkpoint SHA-256 is
+  `e35d05ae72becf289f26e15f5aa558d4f51ece0c79a4543ef646d2d4499ff348`; the specialization
+  result SHA-256 is `c3af40ef723fc630e306f7bb4d44732f2a3f8032f79bb59fce9c72b5bd804a69`.
+- The paired 3,072-attempt comparison is not scientifically estimable. Both the frozen base and
+  chemistry specialist returned 16 valid verified exact-L1 products (0.5208%). The comparison
+  config supplied the broad `forge_held_family_stage2_v1` morphology draw to a decoder whose Ugi
+  ester chemotype is explicitly supported only on measured-training joint morphology programs.
+  The earlier 64-row smoke already records that all broad rows abstained for incompatible head,
+  aldehyde-body/tail, cycle-rank or ester-chemotype requests. The production aggregate reproduces
+  the same incompatibility signature; it does not measure the adapter's effect on an admissible
+  Ugi program distribution.
+- The comparison result SHA-256 is
+  `4a1d57b34ab77bd64cf452c98838471160b7c7991832a637605c4192a87935cd`. Its promotion decision is
+  `not_estimable`; no manuscript number or model claim changes.
+- **Decision:** do not promote or reject the chemistry adapter from this run. A superseding
+  comparison must draw one frozen, paired 3,072-row program sequence from the measured-Ugi joint
+  count prior used by the qualified morphology-first decoder. Its preflight must execute the real
+  32-step sampler and fail if any requested program lies outside the bound chemotype support. The
+  result artifact must retain per-arm sampling summaries, including constraint-abstention reasons,
+  rather than only their hashes.
+
+## 2026-08-30 — Repair the chemistry-specialist program distribution and preflight
+
+- Added a superseding v4 comparison that deterministically draws paired Ugi programs from the
+  measured-training joint count prior bound to the ester chemotype decoder. It no longer consumes
+  the incompatible broad held-family program draw. The draw records only exterior counts,
+  junctions, cycle ranks and attachment counts; it contains no component identity, graph, fragment
+  or product token.
+- The v4 result embeds each arm's full sampling summary and archives the generated paired program
+  draw. A new exact-H100 comparison preflight executes 64 programs at the real 32-step budget and
+  fails before full specialization unless both arms have at least 75% validity, C2ST is estimable
+  and program-support abstentions are zero.
+- The paired CPU smoke drew 64 supported programs. Both frozen-base and one-update smoke specialist
+  paths returned 64/64 valid verified exact-L1 products with zero topology-coupling or chemistry
+  abstentions, confirming that the v3 program-policy mismatch is removed. This two-step smoke is an
+  execution check, not model-quality evidence. The result and paired-program-draw SHA-256 values are
+  `cc2ed5d4729cb4e592b14129a162f6847fd04c5296d8feb3ee9a358045daa598` and
+  `313b78b97a60314b974f2a3449eff7ad6e7ac8626119374b091af44eb0ce32a1`.
+- The valid 66,464-draw specialist checkpoint from the first run is recovered by exact hash, so the
+  superseding request performs zero retraining. It runs only the 64-program real preflight and, if
+  that passes, the full paired evaluation. The recovery config and experiment descriptor SHA-256
+  values are `289ce5f8501dcb364404e2e6861bb08db47943894744649f0e57a6c01e7c8fbf` and
+  `c2dfda62daa14a416b54e8a1d48e013fec5726d3c88566503e98aa59a1e73a8f`. The Modal request plan
+  resolves to exact `H100!`, source SHA-256
+  `42247b22b9c3202d027f0c18c40ab7092f25a3c10ce6cbb88a586ec9629d859b` and request ID
+  `e8a7fb1f53541535bb456e6730b6c8eabb22e409b2c49fd11bf208ccb77d38c3`.
+- **Decision:** the corrected v4 experiment is ready but not launched. It requires a new explicit
+  authorization because it uploads changed private source and starts a distinct paid H100 request.
+
+## 2026-08-30 — Do not promote the Ugi chemistry specialist; repair the preflight orchestration
+
+- With explicit user approval, submitted detached exact-H100 function call
+  `fc-01M1AV405H5KTEX32HXJ82KSR9` under request
+  `e8a7fb1f53541535bb456e6730b6c8eabb22e409b2c49fd11bf208ccb77d38c3`. Downloaded run
+  `21076b069f29e2993b7ebfc9dd87be655981d519a99ee0b2c0852842c6ec2703` matches its remote
+  manifests. Receipt, run-manifest and paired-result SHA-256 values are
+  `6cdd7314fbcecaec2dce98cc5e0b128393e8e657effc52db1ce7104ad8b3814a`,
+  `cc10242f7cfce67a54fafa1532008870ca3fb234ed454582a931f5d85a5faa8f` and
+  `933f2a0eb9f90b7ca80ed36f798bf474ab86d4a0523edd5baf768c279f294e83`.
+- On the paired 3,072-program measured-Ugi draw, the frozen base returned 3,071 valid verified
+  exact-L1 products (99.9674%) and the chemistry specialist returned 3,072 (100%). The specialist
+  increased distinct exact-L1 products from 829 to 1,099 and effective component count from 35.57
+  to 42.14. Its realism C2ST AUC decreased only from 0.90495 to 0.90179, a 0.00316 reduction rather
+  than the frozen 0.02 requirement. The scientific decision is therefore `do_not_promote`. There
+  were zero training, repair, retry, route, oracle or candidate-selection calls.
+- The run exposed an orchestration defect. The stage named `comparison_preflight` inherited the
+  experiment's `full` profile and ran all 3,072 programs instead of the intended 64-program
+  `h100_preflight`. One frozen-base attempt then reported
+  `ugi_topology_coupling_failure:exact Ugi tree cannot realize its declared cycle rank`, making the
+  zero-support-abstention gate false; because the result enforced preflight gates only under the
+  `h100_preflight` profile, the dependent stage still ran. The paired scientific result is retained
+  as negative development evidence, but this execution must not be described as a correctly gated
+  64-program preflight.
+- The stage adapter now forces the preflight implementation to use the authenticated
+  `h100_preflight` profile and makes the production stage re-read the dependency result, requiring
+  `status=complete`, profile `h100_preflight`, exactly 64 paired programs and every preflight gate
+  true before sampling. This is a local orchestration repair; no additional paid work was launched.
+- **Decision:** retain the frozen base and do not promote the Ugi chemistry specialist. Do not
+  change manuscript production metrics from this seed-0 development comparison. A fresh paid rerun
+  is neither automatic nor authorized; if requested, it must use a new hash-pinned source/spec plan
+  and separate explicit approval.
+
+## 2026-08-30 — Add an identity-free soft Ugi local-chemistry prior and qualify its CPU path
+
+- Attributed the remaining frozen-checkpoint realism gap after exact topology/core decoding to
+  local chemistry placement rather than reaction validity. The intervention adds only aggregated
+  train-fold log-frequency terms to terminal atom and bond logits, conditioned on precursor role,
+  graph distance from the reaction core, heavy-atom degree, ring membership, endpoint elements and
+  bond order. Hard support, topology construction, exact-L1 replay and the Transformer checkpoint
+  are unchanged.
+- The prior is built from one deterministic representative per unique source-adjudicated measured
+  train-fold role component: 15 amine heads, 8 aldehyde body/tails and 4 isocyanide tails. It stores
+  49 atom-context and 45 bond-context count rows plus input and aggregate hashes. It stores no
+  product IDs, component SMILES, precursor graphs or fragment tokens. Strength zero skips every
+  additive term; a regression test confirms identical sampled rows to the no-prior decoder.
+- The matched 64-program CPU smoke completed four strengths with zero abstentions, 100% validity,
+  100% verified exact-L1 yield and no repair, retry, route, oracle, training or candidate-selection
+  calls. C2ST changed from 0.91875 at lambda zero to 0.89310 at lambda one and 0.89235 at lambda two,
+  while mean pairwise ECFP4 distance fell from 0.42102 to 0.36698 and 0.35815. This establishes a
+  plausible realism/diversity trade-off, not a promotion result. The smoke is explicitly
+  `diagnostic_only`; result SHA-256 is
+  `2f549bd0d2a2f47f41397b96cc6432f0dbc9e58644ac099ee50acab26ea3eb75`.
+- The frozen H100 decision gate now requires at least a 0.02 C2ST reduction while retaining
+  validity, exact-L1 and local-support yield within 0.02, unique exact-L1 yield within 0.05 and mean
+  pairwise ECFP4 distance within 0.05. The upload-ready 256-program H100 descriptor and comparison
+  config SHA-256 values are
+  `81f7f5293df6b08d0e4023db76c5d6ee1e8c846f6216aa51ca81a25ac1492b4e` and
+  `5b29b9546e88a2fdf99b21f985925494084041e7c6aab4b830d65a9653a09119`.
+- **Decision:** the soft-prior implementation and local execution path are qualified. No strength
+  is promoted from the CPU smoke, no manuscript result changes, and no paid H100 run has been
+  launched. The next scientific action is the separately authorized 256-program exact-H100
+  preflight; it must stop if no nonzero strength satisfies every frozen gate.
+
+## 2026-08-31 — Do not promote the identity-free soft Ugi local-chemistry prior
+
+- With explicit user approval, submitted detached exact-H100 function call
+  `fc-01M1AZFAWERFS0AQX724FR17AM` under request
+  `85c6a2c82bc6190854e487ce550a87a846e03e778426a0e5fa7b63beb2307aba`. Downloaded run
+  `e7c1abd00965dc0cbcc4e6a6c2971154966a5f1e1b7cd3bee2dd66b673e824b3` matches its remote
+  manifests. Receipt, run-manifest and result SHA-256 values are
+  `c42fff209e486a264429cebd1de29c56ff5ab287026b78934211a2e1ebc28e82`,
+  `013f9a4d2fcc374dc7a6a9d3cba0a7d5d670f018bb30b44502bc4735f56ba192` and
+  `fec27513ab23346f9971ffabbebeb62e5984a113ed99dadbcb9b368dc85b40b5`.
+- Across the paired 256-program sweep, lambda zero and every nonzero strength returned 100%
+  validity, verified exact-L1 yield and local-support-qualified exact-L1 yield. The realism C2ST
+  AUC was 0.91364 at lambda zero, 0.91364 at 0.25 and 0.5, 0.91351 at 1.0 and 0.91429 at 2.0;
+  therefore no strength achieved the required 0.02 reduction.
+- Increasing the prior instead reduced exploration. Unique exact-L1 yield fell from 0.67969 at
+  lambda zero to 0.64844, 0.54688 and 0.51172 at strengths 0.5, 1.0 and 2.0. Mean pairwise ECFP4
+  distance fell from 0.42326 to 0.39026, 0.35398 and 0.33317 at those strengths. There were zero
+  training, repair, retry, route, oracle or candidate-selection calls.
+- **Decision:** `stop`; do not promote this soft frequency prior, do not use it for production
+  sampling and do not change manuscript results. The exact topology/core decoder remains qualified,
+  but improving structural realism requires learned contextual chemistry or a better conditional
+  representation rather than stronger terminal frequency reweighting.
+
+## 2026-08-31 — Implement a chemistry-only contextual graph refinement stream
+
+- Replaced the rejected terminal frequency intervention with a learned, zero-initialized Ugi
+  chemistry delta. Each of two refinement layers receives the frozen Transformer state plus
+  precursor role, reaction-core position, heavy degree, typed one-hop parent/child neighbors and
+  typed closure neighbors. The delta feeds only atom, parent-bond and closure-bond predictions;
+  parent pointers, closure endpoints, child counts, role labels and core labels remain on the
+  authenticated shared stream.
+- The contextual delta contains 420,864 trainable parameters, 6.998% of the combined model. Its
+  output projections start at zero, so attaching it reproduces the base checkpoint exactly. The
+  source-balanced training contract retains one additional 66,464-draw Ugi train-fold exposure,
+  role-balanced atom/bond losses, exact target topology during chemistry denoising, deterministic
+  float32 execution and no heldout, component-identity, fragment, route or biological inputs.
+- The two-update CPU smoke passed every structural gate with zero fixed-state failures. Its result
+  SHA-256 is `6b69f015c57ee71ca83435069508a3b0b1cafdd1034c914e814ab2858976f2f0`.
+  A paired 64-program, two-step execution smoke returned 100% validity and verified exact-L1 for
+  both the base and contextual delta, with every matched-budget and no-repair gate true. As expected
+  after only two optimizer updates, C2ST remained 0.91875; this is execution evidence only and its
+  result SHA-256 is `e595a6b7d21059ad6dcab59da316648bdbd935359bced9390feaaa861ababbea`.
+- The frozen training config and four-stage exact-H100 descriptor SHA-256 values are
+  `5216dbda28a79e9bcb381c9e5c45bf7dca7eb6964175a14cf6f7d425e4300f7a` and
+  `c7aae6b97af2b8dfb8ae571f2dfa491592a92b84882fed69a60962a9d24313a6`. The sequence is:
+  contextual-gradient preflight, 64-program real-sampler preflight, full 66,464-draw specialization
+  only if both preflights pass, then the paired 3,072-program base comparison.
+- **Decision:** implementation and CPU execution are qualified, but no model is promoted and no
+  manuscript result changes. No paid H100 work has been launched. A paid run requires separate
+  explicit authorization of this exact four-stage descriptor.
+
+## 2026-08-31 — Do not promote the contextual Ugi chemistry specialist
+
+- With explicit user approval, submitted detached exact-H100 function call
+  `fc-01M1B1Z6S7CD37DNETBGTGPPJD` under request
+  `617165d6c528d268292353124a6bf66085231f6468571f5ab75d05b74ac2a10f`. Downloaded run
+  `40212e844e74b52aca1b6b67ff50c6d99ad2843d89af296843a235800f28ec8b` passed independent
+  four-stage manifest verification. Receipt, run-manifest and paired-result SHA-256 values are
+  `1b9ab5a11cd3c28bf028723e0f63403079bbac0bd074612373162ac7d215a607`,
+  `5e89bc83da66312cb228b45eb45f7b85df4f5d42f81782d1d828c605419c3232` and
+  `78d8935edefda10869d923f32e44dbdd4472f6254743ec1d7e57bae37caffeb0`.
+- The two-update training preflight and paired 64-program real-sampler preflight passed. The gated
+  production stage then consumed exactly 66,464 additional source-balanced Ugi train-fold draws in
+  528 optimizer steps, with zero held-out access, fixed-state failures, repairs, retries, route calls,
+  oracle calls or candidate selection. Only the 420,864 contextual chemistry parameters were
+  trained; the authenticated shared model and all topology outputs remained frozen.
+- In the paired 3,072-program evaluation, the contextual specialist returned 3,072 valid verified
+  exact-L1 products versus 3,071 for the base. Unique exact-L1 products increased from 829
+  (26.99% per attempt) to 1,289 (41.96%), and effective component count increased from 35.57 to
+  42.91. Mean pairwise ECFP4 distance decreased from 0.4353 to 0.4219.
+- The prespecified realism improvement did not close. Realism C2ST AUC decreased only from 0.90495
+  to 0.90136, a 0.00359 reduction versus the required 0.02. The full base arm also recorded one
+  fail-closed topology-support abstention while the specialist recorded none; all other matched-budget
+  and no-intervention structural gates passed.
+- **Decision:** `do_not_promote`. The learned contextual chemistry stream preserves exact assembly
+  and materially increases unique output count, but it does not make generated structures
+  sufficiently less distinguishable from measured Ugi lipids under the frozen realism gate. Retain
+  the authenticated base decoder for manuscript results and treat this seed-0 run as negative
+  development evidence; do not launch more seeds or alter manuscript claims without a new decision.
+
+## 2026-08-31 — Add measured-Ugi realism and sequential masked chemistry calibration
+
+- Replaced the chemically mismatched broad-R0-only development diagnostic with an additional
+  reaction-matched reference. Descriptor scaling uses the 480 source-adjudicated measured Ugi
+  train-fold products; calibration uses the separately frozen 32 measured calibration products,
+  and the 588 measured held-out products remain a distinct final-confirmation reference. Virtual
+  Ugi enumeration is never treated as empirical realism evidence. The train, calibration and
+  held-out selection SHA-256 values are
+  `4728535c1facf7fb005c598fb4ae8443c1470c1469409cc9cfadfd4220bc3bc6`,
+  `36e2b713713da754b28df5190d76e2df60586d2bc4e9e9faad479d88e37686cb` and
+  `af750fcc6cba97ba3d919c546c5e5c5f31d49e7bf7d21ae3196350dcf162e34e`.
+- Added a seeded stochastic form of the exact ester-aware Ugi terminal decoder. It retains the
+  measured joint morphology draw, constructive ester and role-local-cycle topology, fixed
+  reaction core, component-confined edges, valence masks and train-derived local chemistry
+  support. Atoms and bonds are drawn once in serialization order while each accepted choice
+  updates the remaining hard feasibility masks. There is no repair, retry, component selection or
+  fragment vocabulary. The current implementation does not rerun the Transformer after every
+  accepted atom or bond, and records that limitation explicitly.
+- The local 64-program smoke compared argmax with temperatures 0.35, 0.55, 0.75 and 1.0 under one
+  paired program draw, flow stream and terminal-uniform stream. Every arm returned 64/64 valid,
+  locally supported, verified exact-L1 products with zero abstentions or repairs. Unique exact-L1
+  yield was 62/64 for argmax and 63/64 for every stochastic arm. Measured-Ugi calibration C2ST was
+  0.75 for every arm; mean pairwise ECFP4 distance ranged from 0.4032 to 0.4056 versus 0.4074 for
+  argmax. This smoke establishes execution identity and constraint preservation, not a realism
+  improvement. Result SHA-256 is
+  `6001604e13ad5ddcbf6858fc60f1e05e65480678897efcb30a35945be024755a`.
+- The upload-ready exact-H100 preflight uses 256 paired programs and the same four prespecified
+  temperatures. Advancement requires at least a 0.02 measured-Ugi calibration C2ST reduction and
+  a 0.10 increase in unique exact-L1 yield while keeping validity, exact-L1 and local-support yield
+  within 0.02 of argmax. Its experiment and comparison-config SHA-256 values are
+  `930f28cd118da5cb38d3a10e6e618d969464cd177c8b541a213e1274100a40af` and
+  `4b3135d04c7fc88f8b549daab48cbb00f21994a301ffe7793d684a9cb9bbdb73`.
+- **Decision:** implementation and local execution are qualified, but no stochastic temperature is
+  promoted from the smoke and manuscript results remain unchanged. No paid H100 work has been
+  launched. The next permitted action is the separately authorized H100 preflight; the 588-product
+  held-out reference may be accessed only once after a calibration arm passes every frozen gate.
+
+## 2026-08-31 — Add the missing fixed-topology chemistry flow and qualify its local path
+
+- Audited the native Ugi and shared Transformer samplers. The native Ugi path reruns its chemistry
+  denoiser at every reverse-flow transition on one fixed topology. The shared topology-first path
+  instead completed the joint flow, replaced its topology with the constructive Ugi topology and
+  performed only one terminal chemistry prediction. Its sequential terminal decoder updated hard
+  feasibility masks but never refreshed the neural probabilities after accepting chemistry states.
+- Added an optional topology-conditioned chemistry flow that is disabled by default. Once the
+  constructive topology is frozen, it redraws only variable atom and bond states from the declared
+  program/role source, performs a seeded 8- or 16-step chemistry-only R-star path, recomputes the
+  Transformer before every transition and then applies the existing strict terminal decoder.
+  Parent pointers, closure endpoints, roles, reaction-core states and every adapter-fixed coordinate
+  are invariant. There is no structural repair, retry, component selection, fragment vocabulary,
+  training, route call, oracle call or candidate selection.
+- The paired 64-program CPU smoke used the frozen seed-0 contextual specialist and the measured-Ugi
+  calibration reference. One-pass argmax, 8-step flow and 16-step flow each returned 64/64 valid,
+  locally supported, verified exact-L1 products with zero support abstentions or repairs. Unique
+  exact-L1 yield changed from 59/64 (92.19%) to 62/64 (96.88%) at eight steps, then fell to 57/64
+  (89.06%) at sixteen steps. Mean pairwise ECFP4 distance changed from 0.3974 to 0.3898 and 0.3728;
+  measured-Ugi calibration C2ST remained 0.75 in all three arms. The eight-step result is a useful
+  diversity signal, but the 64-row smoke and 32-product calibration reference do not establish a
+  realism improvement or satisfy the frozen promotion gate.
+- The result and paired-program ledger SHA-256 values are
+  `cd6ef7d7b35338f27ed644398436b4777b4b72a8238ab788073063332daf28a3` and
+  `608c65e38ab4b968e02569aa283d046f5538818d4f9a410922a330995adcad60`.
+  An upload-ready 256-program exact-H100 preflight is registered with experiment/config SHA-256
+  values `fda6a01c2def95d2a4ee77c21b23279bd8c519e3beaaf23ecd2dda16f14a7281` and
+  `a11e474ec2cf66752c1709c922cd72a7c407823a2b9e7f27df42a718aebf8702`.
+- **Decision:** qualify the implementation and advance the 8-versus-16-step factorization to the
+  separately authorized H100 calibration preflight. Do not promote either arm, access the measured
+  Ugi heldout reference, change manuscript results or launch paid compute from this smoke alone.
+
+## 2026-08-31 — Stop the topology-conditioned chemistry-flow intervention
+
+- With explicit user approval, submitted detached exact-H100 function call
+  `fc-01M1B6KETCR42C0JASY72G8BM9` under request
+  `e5e4097ccda7a111a824df787aeebf0cf6c9d4624f63fa3d57f6cdb87b72d1ab`. Downloaded run
+  `1a0090b399c9cc05de085b47e8b875432c13cca2ab85f2f5708e1d44c4326cce` passed independent
+  manifest verification. Receipt, run-manifest, comparison-result and details-archive SHA-256 values
+  are `e0ebde0f938fd40666b30c545c66bdda47c6dad4e69194f694d40291a6988cad`,
+  `e6d9bf9f886e748365192e0f2a23c0838010638c7468e997b22caaa45cefcf70`,
+  `d8fbe4d793aacf10222bd3fd0cf5d3df10d66263e9627b744b242df13acf43b7` and
+  `97a3a616e0235254c026a2c0ae11315f28e72436337983b3b116ba239163d26a`.
+- On 256 paired Ugi programs, argmax, eight-step chemistry flow and sixteen-step chemistry flow each
+  returned 256/256 valid, locally supported, verified exact-L1 products, with zero abstentions,
+  repairs, training, route calls, oracle calls or candidate selection. The fixed-topology flow
+  therefore preserved the hard assembly contract.
+- Neither intervention improved the frozen measured-Ugi realism diagnostic: C2ST AUC remained
+  `0.75` in all three arms. Unique exact-L1 yield decreased from 190/256 (`74.22%`) for argmax to
+  184/256 (`71.88%`) at eight steps and 188/256 (`73.44%`) at sixteen steps. Effective component
+  count also decreased from `33.82` to `32.53` and `30.99`, respectively.
+- **Decision:** `stop`. Neither chemistry-flow arm satisfied the prespecified requirement of at least
+  a `0.02` C2ST reduction and a `0.10` unique exact-L1 increase. Do not access the 588-product
+  measured heldout reference, launch the 3,072-program comparison, promote either intervention or
+  change manuscript claims. The missing sequential denoising path is not the remaining explanation
+  for the realism gap under this frozen calibration assay.
+
+## 2026-08-31 — Replace the underpowered realism diagnostic with a train-only role assay
+
+- Audited the 32-product measured-Ugi calibration reference used by the stopped chemistry-flow
+  experiment. It contains only two component-family groups, so its grouped classifier uses two valid
+  folds and returned the coarse mean AUC `0.75` for all three arms. The diagnostic therefore could
+  not resolve the head/tail differences visible in the generated structures.
+- Added a development-only reference using source-adjudicated measured Ugi **train-fold** products.
+  It selects two scaling and two evaluation products from each of 28 component-family groups, giving
+  two disjoint 56-product partitions with equal group mass. Calibration and held-out rows are skipped
+  before product or component parsing; the 588-product held-out set remains untouched. A measured
+  scaling-versus-evaluation control returned five-fold C2ST AUC `0.49985`, while a prespecified
+  four-standard-unit head/tail corruption returned `1.0`, so the replacement assay detects a known
+  morphology shift without manufacturing separation between its two measured partitions.
+- Added continuous role-aware distances over exact recovered amine, aldehyde and isocyanide
+  components, including head heteroatom/ring structure, tail length, branching, carbon-skeleton
+  diameter, ring size, oxygen-containing rings and head-tail asymmetry. The assay reports normalized
+  Wasserstein distance, energy distance, RBF MMD, nearest-reference distance and grouped C2ST; it
+  does not select candidates or call generation, routes or oracles.
+- Corrected the Ugi aldehyde support audit to compare its frozen product-origin bounds after excluding
+  the one aldehyde oxygen restored only by exact inverse transformation. Raw complete-precursor atom
+  counts remain in the ledger. The previous convention falsely labelled every recovered aldehyde
+  component unsupported because it compared three complete-precursor oxygens with a two-oxygen
+  product-origin bound.
+- Reassessed the same 256 paired attempts. Argmax, eight-step and sixteen-step chemistry flow retained
+  unambiguous verified exact-L1 fractions of `1.0`. Their role C2ST AUC values were `0.90045`,
+  `0.89258` and `0.88712`; role energy distances were `1.56033`, `1.55533` and `1.51267`; and role
+  MMD-squared values were `0.14805`, `0.14746` and `0.14334`. The sixteen-step flow therefore makes
+  small improvements on the role-aware distances, but its global normalized Wasserstein distance
+  worsens from `0.34071` to `0.35013` and unique exact products fall from 190 to 188.
+- The aggregate result SHA-256 is
+  `781b112ebc9c4828fbd6de4a3a7bfa0d2b1d8207c338d42078a670161d0508a7`.
+- **Decision:** the old C2ST was underpowered and masked small changes, but measurement was not the
+  whole problem. The generated role distributions remain readily distinguishable from measured Ugi
+  train-development lipids, and neither chemistry-flow arm is promoted. Use the new continuous
+  train-only role metrics for subsequent development; preserve the held-out set for a separately
+  authorized final confirmation only after a future intervention passes a frozen development gate.
+
+## 2026-08-31 — Build the identity-free joint Ugi lipid-prior specialization
+
+- The shared Transformer already receives all role-local morphology coordinates and its program
+  encoder can model cross-role interactions, but its frozen Ugi training measure is dominated by the
+  reaction-enumerated virtual support. Added a development-only full-output Ugi adapter trained from
+  the authenticated shared checkpoint under an explicit whole-product mixture: `0.5` mass uniform
+  over the 480 unique source-adjudicated measured train-fold products and `0.5` mass over the
+  remaining 65,984 train-fold products under their frozen source weights.
+- Product identifiers are used only to align immutable cache rows. They, component identifiers,
+  stored graphs and fragment tokens are excluded from neural tensors. The emitted training-measure
+  receipt records the assignment-file hash and a hash of the measured record-ID set without exposing
+  those identifiers. Held-out rows receive exactly zero probability.
+- Registered an exact-H100 development sequence comprising a 252-draw training preflight, a paired
+  64-program sampler preflight, 66,464 additional Ugi training draws and a paired 3,072-program base
+  comparison. Inference uses the existing measured-joint morphology draw, constructive Ugi topology,
+  strict reaction-core decoder and method-blind realism/L1 assessors. Promotion requires at least a
+  0.02 realism-C2ST reduction while remaining within 0.02 of the base for validity, exact-L1 and
+  local-support-qualified exact-L1 yield.
+- The eight-example CPU training smoke passed two optimizer steps with zero fixed-state failures and
+  realized measured/exploration masses of `0.49999999999999994/0.5`. Its result and checkpoint
+  SHA-256 values are `a78fecfa5379969d930551ce4b21c546e4719d1a082ae354246686cfa1b12adf`
+  and `e3b1e6ade892b92d834273a05022d52a3767fdd7f7d29f2ea7254576b388343e`.
+  The paired 64-program, two-step CPU comparison completed every structural gate; its result SHA-256
+  is `3575d480545fe43b7457d7a672e33554d3d7c4d09108f5a4ea80364cb768ecfb`.
+- **Decision:** the implementation and local checkpoint/evaluation path are qualified. The tiny smoke
+  is not model-quality evidence and does not promote the adapter or change manuscript results. No
+  paid H100 job had been launched at implementation closeout; that required a separate exact
+  execution authorization.
+
+## 2026-08-31 — Launch the gated exact-H100 joint Ugi lipid-prior experiment
+
+- Following explicit authorization to upload the current private source and pinned inputs, submitted
+  detached Modal function call `fc-01M1CC8NYPNRQ1BMMB8HTXVV3T` under request
+  `414cc519c81f2499ee700e01efd6042412c56a4c14b2c5d877f0535a1c6139bb`.
+  The uploaded source SHA-256 is
+  `477a57edbf368faf0b91a5379f6d5ed03725d101ab85dd430aeef1c1d16dfdd0`; the experiment-spec
+  SHA-256 is `d3c38e8566449f0be6a9698fa588dde81a2ed2ea9e8880a75c527d0aabad9144`.
+- The detached sequence is fail-closed: exact-H100 adapter preflight, paired 64-program sampler
+  preflight, 66,464-draw specialization, then the paired 3,072-program base comparison. A failed
+  preflight prevents the downstream paid stages. The first status check reported `running`.
+- **Decision:** treat the run as active, not as evidence. Do not promote the adapter or change any
+  manuscript result until the completed remote artifacts are downloaded and independently verified.
+
+## 2026-08-31 — Reject the joint Ugi lipid-prior specialist on the realism gate
+
+- Detached run `5bcfcbacc378c9a35b896147596c49ecf6951562e5e165b66febcfb19b81cf9a`
+  completed all four stages and was downloaded with independent manifest verification. Both H100
+  preflights passed. The full adapter consumed exactly 66,464 additional Ugi train-fold draws in 528
+  optimizer steps, reached cumulative exposure 450,470, preserved the exact 0.5/0.5
+  measured/exploration measure and recorded zero fixed-state failures.
+- On 3,072 paired measured-morphology programs, the frozen base and specialist both returned 100%
+  valid, local-support-qualified and verified exact-L1 products, with zero small oxygen rings, N--O
+  products or O--O products. Unique exact-L1 yield increased from `0.27930` to `0.30632` and effective
+  component count increased from `35.78` to `39.21`.
+- The prespecified realism improvement did not occur. The broad R0 whole-lipid C2ST AUC increased
+  from `0.90051` to `0.90386` (delta `+0.00335`; lower is better), rather than decreasing by the
+  required `0.02`. Descriptor-manifold precision also decreased from `0.00358` to `0.00260`.
+- The specialization-result and paired-comparison-result SHA-256 values are
+  `eaecbffbe1ae77bb2bc07b97aa631a7dfbd62cedc0a6654b1e5ab644104f15d9` and
+  `c6777c15688a3dd63e7e5bd714a22c3da7f9edf530a8944de57411c9b735fa90`.
+- **Decision:** `do_not_promote`. The whole-product 50:50 measured/exploration training measure
+  preserves assembly validity and modestly improves uniqueness, but it does not close the measured
+  lipid-realism gap. Do not change manuscript results or run additional seeds from this intervention.
+
+## 2026-08-31 — Rescore the joint Ugi specialist with the role-aware realism panel
+
+- Re-adjudicated the frozen 3,072-attempt base and joint-specialist ledgers without training,
+  generation, repair, retry, routing, oracle calls or candidate selection. The reference is the
+  group-balanced measured-Ugi train-development split: 28 component-family groups contribute two
+  scaling and two evaluation rows each. Calibration and held-out product structures were not
+  accessed.
+- Froze normalized role-descriptor Wasserstein distance, energy distance and RBF MMD-squared as the
+  primary panel. Each is reported both per accepted attempt and after deduplicating exact-L1 product
+  constitutions. Grouped C2ST and nearest-reference distance are secondary diagnostics. The panel
+  uses no result-selected numerical cutoff: lower is better, and it records whether all six primary
+  comparisons improve, worsen or are mixed.
+- The joint specialist worsened all six primary comparisons. Attempt-weighted Wasserstein, energy
+  and MMD-squared changed from `0.29245`, `1.50836` and `0.14293` to `0.30488`, `1.62362` and
+  `0.15420`. Unique-product-weighted values changed from `0.30974`, `1.74770` and `0.16817` to
+  `0.33534`, `2.04941` and `0.19776`. Secondary role C2ST increased from `0.88379` to `0.90045`
+  and nearest-reference distance increased under both weightings. Lower is better throughout.
+- Both arms retained 3,072/3,072 unambiguous verified exact-L1 attempts. The specialist increased
+  distinct exact-L1 products from 858 to 941, but the additional diversity moved farther from the
+  measured role distribution.
+- The aggregate result SHA-256 is
+  `cf98b3c8eea643c847f647f212679762d5b43736b3ee2379d7533e6938e15625`.
+- **Decision:** retain `do_not_promote`. The realism conclusion is not an artifact of the original
+  broad whole-lipid C2ST metric or duplicate weighting. Future interventions must be evaluated with
+  this three-distance role panel; C2ST remains a secondary diagnostic. This seed-0 development
+  result makes no across-training-seed or held-out inference.
+
+## 2026-08-31 — Attribute the Ugi gap to topology and qualify a role-local decoder
+
+- Ran a deterministic teacher-forced attribution audit on 96 Ugi train-fold records from the
+  authenticated step-9,143 shared Transformer. No generation, candidate selection, routing, oracle
+  call or held-out product access occurred. At flow time `0.5`, parent-pointer accuracy was only
+  `0.67388` for the amine exterior and `0.51500` for the isocyanide exterior, versus `0.88754` for
+  the aldehyde exterior. Supplying target topology increased amine atom accuracy from `0.92792` to
+  `0.95675` and amine parent-bond accuracy from `0.97991` to `0.99845`. The result SHA-256 is
+  `61f3b0801d5c9d2458ea2d60a7de5c0f5feb7670ebccd4501ed7972d347c2f71`.
+- Added a zero-initialized Ugi role-local tree decoder to the frozen shared Transformer. It pools
+  exterior states by precursor role, exchanges cross-role summaries, and conditions each role's
+  residual on the node, its current parent, mean current children and the cross-role context. Only
+  this decoder is trainable; reaction-core positions remain unchanged, and the zero initialization
+  makes attachment bit-identical to the frozen base before specialization.
+- Bound the intervention to the same `0.5/0.5` measured/exploration Ugi train-fold measure used by
+  the rejected generic adapter, so the future comparison isolates decoder factorization. The CPU
+  smoke consumed eight examples in two optimizer steps, reduced its observed training loss from
+  `0.77861` to `0.45305`, and recorded zero fixed-state failures. Its result and checkpoint SHA-256
+  values are `8e651a7cd1167d47ca653a61f5e7d341e0f31f3d43db907716a5afedcd9ea904` and
+  `1013ebf37d0b89132ff59a8ce5bb12ce51b52d6ba04c5fba90a1a632b01eb723`.
+- The paired 64-program CPU smoke completed with 100% valid, local-support-qualified and verified
+  exact-L1 output in both arms, no abstentions and every structural/provenance gate true. As
+  expected for a two-step smoke, it produced no measured quality difference; its result SHA-256 is
+  `24f7194ae49c2d19e3f81eb68ae5050f85c883a0721b9a90d33c61cc93ac7167`.
+- Registered the gated exact-H100 sequence at
+  `experiments/phase1/multireaction/ugi_role_local_decoder_seed0_h100_v6.json`: training preflight,
+  paired sampler preflight, 66,464-draw role-local specialization and paired 3,072-program
+  evaluation. The experiment-spec SHA-256 is
+  `cbe6362ad56c88a5d8acd538b961dc3972577e680aa83fb251eed6a845dcb7a8`.
+- **Decision:** the measured error supports testing role-local topology factorization, and the local
+  implementation path is qualified. The smoke is not model-quality evidence, does not promote the
+  decoder and does not alter manuscript results. No paid H100 execution has been launched; a
+  separate exact authorization is required.
+
+## 2026-08-31 — Launch the gated exact-H100 Ugi role-local decoder experiment
+
+- Following explicit user authorization, uploaded the current private FORGE source and all pinned
+  inputs and submitted detached Modal function call `fc-01M1CXZJG15S8DZJXMG7RSZ0SY` under request
+  `5298746551bea81d4284addeaab545fc2feebae42a3df7baaed24d760f89a408`.
+- The uploaded source SHA-256 is
+  `a76fee371d6b807c1752428669727533a51cf9521891936d4399b19511b1ce87`; the frozen experiment-spec
+  SHA-256 is `cbe6362ad56c88a5d8acd538b961dc3972577e680aa83fb251eed6a845dcb7a8`.
+  The local detached-call receipt is
+  `runs/_modal_calls/5298746551bea81d4284addeaab545fc2feebae42a3df7baaed24d760f89a408.json`.
+- The sequence remains fail-closed: the exact-H100 role-local training preflight gates the paired
+  64-program sampling preflight; both gate the 66,464-draw specialization; the completed specialist
+  and preflight then gate the paired 3,072-program evaluation. The first independent status check
+  reported `running`.
+- **Decision:** treat the detached call as active rather than evidence. Do not promote the decoder or
+  change manuscript results until all remote artifacts are collected, independently verified and
+  rescored with the frozen train-only role-realism panel.
+
+## 2026-08-31 — Reject the Ugi role-local decoder on the frozen realism panel
+
+- Detached Modal call `fc-01M1CXZJG15S8DZJXMG7RSZ0SY` completed all four gated stages. The remote
+  artifacts were downloaded to run
+  `9dbe4e61505a9d2ab56cd4c2ce796a1c206147aec59fb9c6a9ce87435b54cfad` and independently matched
+  their manifests. Both exact-H100 preflights passed.
+- The specialist consumed exactly 66,464 additional Ugi train-fold draws in 528 optimizer steps,
+  reached cumulative exposure 450,470, preserved the exact measured/exploration masses and recorded
+  zero fixed-state failures. The full specialization-result SHA-256 is
+  `dc3b24af73080f11e3425c0f45a79dc84bac51afda9c0a7a7649bc6c029ff0c4`.
+- On 3,072 paired measured-morphology programs, both the frozen base and role-local specialist
+  returned 3,072/3,072 valid, locally supported, verified exact-L1 products. The specialist reduced
+  distinct exact-L1 products from 858 (`27.93%` per attempt) to 819 (`26.66%`) and effective
+  component count from `35.78` to `34.98`. The paired-comparison result SHA-256 is
+  `99f9a66b476324160360a5b385dcf7e4d10480997a5ce3d033e7143060b1eaf3`.
+- The frozen train-only role panel classified the intervention as `uniformly_worsened`: all six
+  primary comparisons increased, where lower is better. Attempt-weighted Wasserstein, energy and
+  MMD-squared changed from `0.29245`, `1.50836`, `0.14293` to `0.29857`, `1.58579`, `0.15021`.
+  Unique-product-weighted values changed from `0.30974`, `1.74770`, `0.16817` to `0.32770`,
+  `1.97008`, `0.19003`. The panel-result SHA-256 is
+  `8c5c1e680ba3e8d70c42a806e33fa9a69b8a595f8b1273c4c6d9ca0db3798db2`.
+- **Decision:** `do_not_promote`. The role-local residual preserves the exact assembly contract but
+  does not improve measured Ugi realism and reduces unique output. Do not run more seeds or change
+  manuscript results from this intervention. The outcome reinforces that improving teacher-forced
+  parent prediction alone does not resolve the train-to-generation morphology mismatch under the
+  current constructive topology sampler.
+
+## 2026-08-31 — Qualify a measured-only full-model Ugi capacity diagnostic locally
+
+- Froze a held-in capacity diagnostic that initializes from the authenticated shared step-9,143
+  checkpoint, resets optimizer state, samples only the 480 source-adjudicated measured Ugi
+  train-fold products during additional fine-tuning, and updates all model parameters. The full
+  contract uses exactly 66,464 additional draws; component or product identities never enter neural
+  tensors. This tests whether the current representation and sampler can recover the measured
+  training distribution when virtual-library dilution is removed. It is not a generalization test.
+- The eight-example CPU smoke completed two optimizer steps with all 5,593,463 parameters trainable,
+  zero fixed-state failures, no held-out access and an exact realized measured/exploration mass of
+  `1.0/0.0`. The result and checkpoint SHA-256 values are
+  `f38d859a9db60381af88526eaa927479df31c371fe0a7a06827ba77257a4f32a` and
+  `86cbddb0cb7d7ecf2a2f86cf6c283749cdfe0e1fd44c8aae670f20b51243c305`.
+- The paired 64-program, two-step CPU comparison completed with identical program order, matched
+  attempt denominators, no repair or retry and every structural gate true. Both arms happened to
+  return 64/64 valid verified exact-L1 outputs; this tiny smoke is plumbing evidence only and is not
+  interpreted as a realism or model-quality result. Its result SHA-256 is
+  `22862d57d12f1d4a2991370a8e5dfb463ba835f75aef98198cc22645cf53af3c`.
+- Registered the gated exact-H100 sequence at
+  `experiments/phase1/multireaction/ugi_measured_only_full_model_seed0_h100_v7.json`: full-model
+  training preflight, paired sampler preflight, 66,464-draw measured-only fine-tuning and paired
+  3,072-program evaluation. The experiment-spec SHA-256 is
+  `fff73ad62c90536a8480c5ea8bc5b1de5a13afe6a335652dd80cc201153330ca`.
+- **Decision:** the implementation path is locally qualified, but no model-quality conclusion or
+  checkpoint promotion is supported. No paid H100 execution has been launched; it requires a
+  separate exact authorization. The frozen train-only role-realism panel will make the capacity
+  decision after remote artifacts are collected.
+
+## 2026-08-31 — Launch the gated exact-H100 measured-only full-model diagnostic
+
+- Following explicit user authorization, uploaded the current private FORGE source and all pinned
+  inputs and submitted detached Modal function call `fc-01M1D3BXE5VFGHDPMGG9C9ZRHD` under request
+  `501ade7fe0bc0848f58a625981a5895211be1509a2d32307ebe742daa05b984c`.
+- The uploaded source SHA-256 is
+  `3afdd4d4db0e78820bb3931619a9dddd550fc337e7060c1f33a3a55293b12553`; the frozen experiment-spec
+  SHA-256 is `fff73ad62c90536a8480c5ea8bc5b1de5a13afe6a335652dd80cc201153330ca`.
+  The local detached-call receipt is
+  `runs/_modal_calls/501ade7fe0bc0848f58a625981a5895211be1509a2d32307ebe742daa05b984c.json`.
+- The sequence remains fail-closed: the full-model training preflight gates the paired 64-program
+  sampling preflight; both gate the 66,464-draw measured-only fine-tune; the completed fine-tune and
+  sampler preflight then gate the paired 3,072-program evaluation. The first independent status
+  check reported `running`.
+- **Decision:** treat the detached call as active rather than evidence. Do not promote the model or
+  change manuscript results until all remote artifacts are collected, independently verified and
+  rescored with the frozen train-only role-realism panel.
+
+## 2026-08-31 — Reject measured-only full-model Ugi fine-tuning on the frozen realism panel
+
+- Detached Modal call `fc-01M1D3BXE5VFGHDPMGG9C9ZRHD` completed all four gated stages. The remote
+  artifacts were collected into run
+  `29e92d87e7396c57c2fccb229d327d370490fb4572883f1d25e4e906f63615e5`; the independent run verifier
+  authenticated all four stages and all ten declared artifacts against their manifests.
+- The fine-tune consumed exactly 66,464 additional draws in 528 optimizer steps, sampled only from
+  the 480 source-adjudicated measured Ugi train products. All 5,593,463 parameters were trainable,
+  the realized measured/exploration mass was `1.0/0.0`, training loss decreased from `0.76191` to
+  `0.03264`, and every frozen provenance and execution gate passed. The specialization-result and
+  checkpoint SHA-256 values are
+  `a6eda46d92b718964decae4aabed1383fd1bb78b25d7d786208849b8478d4e4b` and
+  `533b5d1d0bad5fe5ee674a98cc4f9e9b402c52623b258210d4ad6fdbcc138692`.
+- On 3,072 paired measured-morphology programs, the frozen base returned 3,072 valid verified
+  exact-L1 products and the fine-tuned model returned 3,032 (`98.70%`; delta `-1.30` percentage
+  points). Distinct exact-L1 products decreased from 843 to 642, effective component count decreased
+  from `35.13` to `33.48`, and broad whole-lipid C2ST AUC increased from `0.90425` to `0.90543`
+  (lower is better). The paired-comparison result SHA-256 is
+  `54fe75b8d654e387a2d0ffb8bcc7f6deba91ebfe5597f98be142923aba31659f`.
+- The frozen train-only role panel classified the intervention as `uniformly_worsened`: all six
+  primary comparisons increased. Attempt-weighted Wasserstein, energy and MMD-squared changed from
+  `0.29610`, `1.53487`, `0.14537` to `0.32085`, `1.77704`, `0.16820`. Unique-product-weighted values
+  changed from `0.30590`, `1.66274`, `0.15946` to `0.32594`, `1.84524`, `0.17603`. Secondary role
+  C2ST AUC increased from `0.88712` to `0.96530`. The panel-result SHA-256 is
+  `e4f87eb7cb6d1b2e7cc89f8ccc2f441969c2563ff6c3af479d07812366ad3d8b`.
+- **Decision:** `do_not_promote`. Removing virtual-library exposure during full-model fine-tuning
+  does not recover the measured Ugi distribution and instead causes additional collapse while
+  slightly reducing exact-L1 yield. This rules out simple virtual/measured mixture dilution as the
+  primary explanation under the current training and constructive sampling factorization. Do not
+  run additional seeds or change manuscript results from this held-in seed-0 diagnostic.
+
+## 2026-08-31 — Qualify the learned-topology-then-chemistry sampler locally
+
+- Implemented an opt-in Ugi sampling factorization that first runs the ordinary joint discrete
+  flow, selects one parent/closure topology from the Transformer's terminal topology heads under
+  the frozen program and local-support constraints, discards the provisional chemistry, resets
+  chemistry from the declared source law, and runs a chemistry-only flow with the selected topology
+  fixed. The existing production sampler remains the default.
+- Parent decoding now applies a feasibility look-ahead so a greedy model score cannot consume the
+  final opportunity to meet the exact role junction or core-attachment budget. Unsuccessful
+  topology proposals abstain once; no topology, molecule or chemistry state is repaired or retried.
+- The deterministic four-program CPU smoke completed end to end with zero training, routing,
+  oracle or candidate-selection calls. The constructive reference returned four valid exact-L1
+  products. The two-step learned-topology arm abstained on all four attempts: three lacked a
+  topology capable of hosting the requested aldehyde ester and one proposed an unsupported ring
+  size. This is low-step plumbing evidence, not a model-quality estimate. The comparison-result
+  SHA-256 is `1529660b798072bce65d6cd13b5080b84b128492ab7cc6e5bfe3fe9b05c64d25`.
+- Registered the 256-program, 32-step exact-H100 preflight as
+  `phase1-ugi-learned-topology-then-chemistry-h100-preflight-v1`. It compares the new factorization
+  with the paired constructive-topology reference using the same frozen checkpoint, program draw,
+  flow stream, chemistry-source stream, 16 chemistry steps and method-blind realism assessment.
+- **Decision:** the implementation and fail-closed accounting are locally qualified, but the sampler
+  is not promoted and no realism or exact-L1 claim is supported. The exact-H100 preflight has not
+  run and requires separate paid-execution authorization.
+
+## 2026-08-31 — Launch the learned-topology-then-chemistry exact-H100 preflight
+
+- Following explicit user authorization, uploaded the current private FORGE source and hash-pinned
+  inputs to Modal and launched only the 256-program exact-H100 preflight. The 3,072-program
+  production profile was not launched.
+- Detached function call `fc-01M1DCCWYPJD510MVBCZR8QSN4` is bound to request
+  `7ab680820f7b20b7adb90d41eeb3bed564f2de376a9d0a9412438acf9469295e`. The uploaded source
+  SHA-256 is `237e9ac907874ef36120f9acecf240d4b08d22087b4978797d57fda70a481b26`; the frozen experiment
+  specification SHA-256 is `c36be5f4d2963e4260ce747ae2389580968c3f7599323b9ab569d8a598b41e21`.
+  The local receipt is
+  `runs/_modal_calls/7ab680820f7b20b7adb90d41eeb3bed564f2de376a9d0a9412438acf9469295e.json`.
+- The first independent status poll reported `running`.
+- **Decision:** treat the detached call as active rather than evidence. Do not promote the sampler or
+  launch the production comparison until the preflight completes, its artifacts are collected and
+  independently verified, and the frozen paired gate is adjudicated.
+
+## 2026-08-31 — Stop the learned-topology-then-chemistry sampler after exact-H100 preflight
+
+- Detached Modal call `fc-01M1DCCWYPJD510MVBCZR8QSN4` completed. The self-contained run was
+  collected at run ID `5a9a49a424380106c16d2fac527429caa0df452bb15a12e46e6655f13f03aa7c`;
+  `forge experiment verify-run` authenticated its one stage and both declared artifacts against the
+  downloaded manifests. The result and comparison-archive SHA-256 values are
+  `035e55dab2b031c48051f2bd025619897415159aa983f0cede30fa1a2ba90157` and
+  `6713dc4168bd91e0c24f97fd31e46fd43c9552d1f0feaa037d135f0e54195f3f`.
+- On the same 256 measured-morphology programs, the constructive-topology reference returned
+  256/256 valid verified exact-L1 products, including 188 distinct products. The learned-topology
+  factorization returned 45/256 valid verified exact-L1 products (`17.58%`), including 41 distinct
+  products (`16.02%` per attempt). These counts were independently rederived from the archived
+  method-blind attempt ledgers; every exact-L1 row had a forward-verified trace, each arm made exactly
+  256 generator calls and neither arm made route or oracle calls.
+- Relative to the constructive reference, learned topology changed valid, exact-L1 and locally
+  supported exact-L1 yield by `-82.42` percentage points and distinct exact-L1 yield by `-57.42`
+  points. Realism C2ST AUC was unchanged at `0.75` rather than decreasing by the required `0.02`;
+  mean pairwise ECFP4 distance changed from `0.38067` to `0.37629`, and effective component count
+  from `30.99` to `25.58`.
+- The frozen gate returned `stop`: the arm exceeded the `2`-point validity, exact-L1 and local-support
+  non-inferiority margins, did not achieve the required C2ST reduction and did not achieve the
+  required `10`-point increase in distinct exact-L1 yield.
+- **Decision:** do not promote this factorization and do not launch its 3,072-program production
+  comparison. The result supports the diagnosis that terminal Transformer parent/closure scores,
+  under the present training objective and strict single-proposal decoder, do not recover the
+  requested Ugi topology reliably enough to replace the constructive program decoder.
+
+## 2026-08-31 — Qualify grammar-normalized Ugi topology specialization locally
+
+- Added a zero-initialized structured topology head to the authenticated shared Transformer. The
+  head contributes residual offspring and closure-endpoint scores for Ugi only; the shared
+  Transformer, atom and bond chemistry outputs, reaction-core decoder and existing constructive
+  Ugi grammar remain frozen. The head contains 13,386 trainable parameters, or `0.239%` of the
+  resulting 5,606,849-parameter model.
+- Replaced independent parent-label supervision for this intervention with an exact structured
+  likelihood over complete attached-forest offspring words admitted by the requested node-count,
+  junction, attachment and adjacent-branch-run conditions. Cyclic roles use the exact likelihood of
+  every feasible ordering of the target closure set under the same ring-size and heavy-degree policy
+  used at decoding. Component and product identifiers do not enter the objective.
+- The deterministic eight-example CPU smoke completed two optimizer steps, consumed exactly eight
+  additional source-balanced Ugi train-fold draws, preserved every fixed program coordinate and
+  reduced loss from `0.188108` to `0.160831`. Every frozen exposure, parameter-scope, program-binding,
+  grammar, held-out-access and no-repair gate passed. The training result and delta-checkpoint
+  SHA-256 values are `ccf82ac6eb451c753a1fdbaafdbf50574a5a6f79bda6c9a342cbd0e8984b6214`
+  and `0c97823a51cbbc5dcf558ef4201082690a5e7b662e56eb346fbe4a48a4fbe136`.
+- The paired eight-program CPU sampling smoke successfully reconstructed the frozen base plus delta,
+  used identical programs and random streams, and passed all denominator, method-blind assessment,
+  parameter-scope, no-repair and no-oracle structural gates. Its result SHA-256 is
+  `b729fa23cde0e541015da24dfddf4fd206844a65512e49fbd4dac34589d5204d`. This tiny run is plumbing
+  evidence only and is not interpreted as a model-quality result.
+- Registered the gated exact-H100 sequence at
+  `experiments/phase1/multireaction/ugi_structured_topology_specialist_seed0_h100_v8.json`: a
+  128-draw training preflight, the exact 66,464-draw structured-head specialization and a paired
+  256-program development assessment. The experiment-spec SHA-256 is
+  `daf46ab7b8b9cd75390ecf95025d9174af0428239399b7fd7cf9991e7156a8d1`.
+- **Decision:** the learned-topology failure is now targeted at training rather than patched at
+  sampling. The implementation is locally qualified, but the head is not promoted and no realism or
+  exact-L1 improvement is claimed. No paid exact-H100 work has been launched; that requires a
+  separate explicit execution authorization.
+
+## 2026-08-31 — Launch the gated structured-topology exact-H100 experiment
+
+- Following explicit user authorization, uploaded the current private FORGE source and hash-pinned
+  inputs to Modal and launched detached function call `fc-01M1DH9D9A1BVFE4NW0B27DKZW` under
+  request `33b174a160a60738aa76f1795c7a1157c154d3a6eec5da114f8e7a2d29c23695`.
+- The uploaded source SHA-256 is
+  `482b9d82a87e21c937550f485f0f4c6458adceb01fadef9f8107448f4384351c`; the frozen experiment-spec
+  SHA-256 is `daf46ab7b8b9cd75390ecf95025d9174af0428239399b7fd7cf9991e7156a8d1`.
+  The local receipt is
+  `runs/_modal_calls/33b174a160a60738aa76f1795c7a1157c154d3a6eec5da114f8e7a2d29c23695.json`.
+- The sequence runs one exact-H100 128-draw training preflight; only a successful preflight permits
+  the 66,464-draw structured-head specialization, followed by the paired 256-program assessment.
+  It does not launch a 3,072-program production comparison. The first independent status poll
+  reported `running`.
+- **Decision:** treat the remote call as active rather than evidence. Do not promote the structured
+  head or change reported model results until the artifacts are collected, independently verified
+  and adjudicated under the frozen paired gate.
+
+## 2026-09-01 — Do not promote grammar-normalized Ugi topology specialization
+
+- Detached Modal call `fc-01M1DH9D9A1BVFE4NW0B27DKZW` completed all three gated stages. The
+  watcher collected run `3f8ff4a5562a9a6f1c4e6b47ffd37c800a58897bfb5e98d370e349eadb0cfff2`,
+  and every downloaded artifact matched its remote manifest.
+- The 128-draw exact-H100 preflight passed. Full specialization then consumed exactly 66,464
+  additional source-balanced Ugi train-fold draws in 520 optimizer steps, reached cumulative
+  exposure 450,470, recorded zero fixed-state failures and kept all 5,593,463 shared parameters
+  frozen. Only the 13,386-parameter structured topology delta was trained. The specialization result
+  and checkpoint SHA-256 values are
+  `2f7eb0a1a2ea26272dfff557aed24c5e2fd36473cbbaabbd46819707f28ff2e1` and
+  `dab120dc5ab14963cbfdabfa5cbf49808ae871695cb8d39c11f1631e80f6393a`.
+- On 256 paired measured-morphology programs, both the frozen base and structured specialist
+  returned 256/256 valid, locally supported, verified exact-L1 products. Distinct exact-L1 products
+  increased only from 160 (`62.50%` per attempt) to 162 (`63.28%`). The realism C2ST AUC was
+  unchanged at `0.91364`, mean pairwise ECFP4 distance decreased from `0.42693` to `0.42335`, and
+  effective component count decreased from `32.72` to `32.46`.
+- The frozen gate returned `do_not_promote`: exact-L1 and validity were preserved, but the required
+  `0.02` realism-C2ST reduction was not achieved. The paired comparison result and archive SHA-256
+  values are `6be9e539ee1d67ec0689aa9d248ef6eda9b2e7e42aec9d1067f3ad9c05e9518f`
+  and `b2f47f8dde8e56d13a67e2f1adacc355c98ac4273b38101ee3a3aeee8ad28c96`.
+- **Decision:** do not promote this topology head, run more seeds or launch a 3,072-program
+  comparison. Structured topology supervision successfully preserves the constructive decoder's
+  exact-L1 behavior but does not make the generated products measurably closer to the measured Ugi
+  distribution under the frozen panel.
+
+## 2026-09-01 — Attribute the remaining Ugi realism gap to the measured-program law
+
+- Added the signed, role-local diagnostic
+  `experiments/phase1/multireaction/ugi_role_realism_gap_attribution.py` and froze its result at
+  `results/phase1/ugi_structured_topology_realism_gap_attribution_seed0_v1/result.json`. It reuses
+  the exact group-balanced measured-train reference and the method-blind assessed-attempt ledgers;
+  it performs no training, generation or candidate selection.
+- The dominant base-model mismatches are oversized and imbalanced tails and an elongated amine
+  carbon skeleton. Attempt-weighted normalized Wasserstein distances were `1.452` for two-tail
+  carbon asymmetry, `1.378` for amine carbon-skeleton diameter and `1.014` for aldehyde carbon
+  count. The structured-topology specialist changed these quantities only marginally, consistent
+  with its unchanged `0.91364` realism C2ST AUC.
+- The existing exact ester decoder samples uniformly over each of the 198 eligible measured Ugi
+  training rows. Those rows occupy 20 component-family triples with sizes from 3 to 30, so this law
+  gives larger Cartesian-product families more mass. It also excludes 282 of the 480 measured
+  training products, spanning 8 of 28 family triples, because they lie outside the already frozen
+  ester-decoder program support. The latter exclusion remains explicit and is not relaxed here.
+- Under the eligible-row law, expected two-tail exterior size is `36.33` nodes and expected
+  exterior-node asymmetry is `8.33`. Giving each eligible component-family triple equal mass and
+  each row within a triple equal mass changes these to `34.60` and `6.60`; under the decoder's fixed
+  ester/carbon accounting, the corresponding expected carbon-tail asymmetry changes from about
+  `6.33` to `4.60`. This identifies program-law weighting as a concrete contributor to the observed
+  tail mismatch rather than attributing it to the Transformer alone.
+
+## 2026-09-01 — Qualify an identity-free group-balanced Ugi program prior locally
+
+- Implemented `forge/model/ugi_measured_joint_program_prior.py`. Component-family identifiers are
+  used only to estimate equal group mass from source-adjudicated train-fold products. The resulting
+  63-state categorical support contains only per-role node counts, junction budgets, cycle ranks
+  and attachment counts; it contains no product or component identity, graph, SMILES or fragment.
+- Froze a deterministic 3,072-program draw at
+  `results/phase1/ugi_group_balanced_program_draw_seed0_v1/program_draw.json` (SHA-256
+  `6d2ac2cb2d67933b38ed8687ade27b15c988615603ee1451d028d5836f971975`). Its sampled expectations
+  reproduce the compiled law: tail exterior size `34.586` versus `34.600`, with no heldout access,
+  training, molecular generation, repair, retry, route, oracle or candidate-selection calls.
+- Added a matched frozen-checkpoint comparison and the staged exact-H100 specification
+  `phase1-ugi-group-balanced-program-prior-seed0-h100-v1`. The occurrence-weighted and
+  group-balanced arms use the same model, attempt count, program seed, flow seed, constructive
+  decoder, verifier and method-blind realism panel. Their program sequences intentionally differ
+  because the program law is the intervention.
+- The CPU smoke passed end to end: both arms returned 8/8 valid, locally supported, verified
+  exact-L1 products with zero program-support abstentions and no repair or retry. C2ST is not
+  estimable at eight attempts, so this is an execution qualification only.
+- **Decision:** the smallest principled intervention is locally qualified. Do not promote it from
+  projected program statistics or the smoke. A paid 256-program exact-H100 preflight, followed only
+  on execution-gate success by the 3,072-program comparison, requires explicit authorization. The
+  full promotion rule additionally requires a `0.02` C2ST reduction while preserving validity,
+  verified exact-L1, local support, pairwise diversity, unique exact-L1 yield and at least 80% of
+  effective component count.
+
+## 2026-09-01 — Launch the gated group-balanced Ugi program-prior comparison
+
+- The user explicitly authorized uploading the current private FORGE source, frozen checkpoint and
+  hash-pinned molecular inputs to Modal and running the paid exact-H100 256-program-per-arm
+  preflight, followed only on preflight success by the paid 3,072-program-per-arm comparison. The
+  authorization excludes training, repair, retry, routing, oracle calls and candidate selection.
+- Launched detached Modal function call `fc-01M1DQF4WY6Q0KHWYYWTJA1PF1` under request
+  `50c93b41f5f6d3c0b9de32b8dfd20bdf96bee2f418ae64de44a2464d07d2703e`. The uploaded source
+  SHA-256 is `5a0899208585563215149793ba48a7341e6764e33ba613f4cfb35e3f3028d660`; the frozen experiment
+  specification SHA-256 is `892326834b5fb33557ca771461de65601238d714248305cf573186fc86c6c422`.
+  The local receipt is
+  `runs/_modal_calls/50c93b41f5f6d3c0b9de32b8dfd20bdf96bee2f418ae64de44a2464d07d2703e.json`.
+- The first independent status poll reported `running`.
+- **Decision:** treat the detached call as active rather than as scientific evidence. The full stage
+  must remain gated on the 256-program preflight, and no intervention is promoted until collected
+  artifacts pass hash verification and the frozen promotion adjudicator.
+
+## 2026-09-01 — Group-balanced Ugi program-prior preflight passes execution gates
+
+- The committed exact-H100 preflight manifest has fingerprint
+  `727efcb27903afb267ea3c3958f38ebf6e8326aee4e6e1363d468a0875124055`. Its result and archive
+  SHA-256 values are `7a5b01c8bb24a2ab8521e1644d9c6c578b5490ce5cc2eeb24340785ff91e3b99`
+  and `d59a120e47f376dd20fa218202ea8fd4f058fe89191772ac053390482d75d041`.
+- Both 256-program arms returned 256/256 valid, locally supported, verified exact-L1 products with
+  zero program-support abstentions, repairs, retries, training, route calls, oracle calls or candidate
+  selection. The preflight therefore passed its execution gate and the prespecified DAG entered the
+  3,072-program-per-arm comparison.
+- The small preflight did not satisfy the scientific promotion rule. Realism C2ST AUC changed from
+  `0.91163` under the occurrence-weighted law to `0.91429` under the group-balanced law, a worsening
+  of `0.00266` rather than the required reduction of at least `0.02`. Unique exact-L1 yield decreased
+  from `0.60547` to `0.53125`, while pairwise ECFP4 distance increased from `0.41371` to `0.42050`
+  and effective component count decreased from `31.58` to `28.18`.
+- **Decision:** treat these 256-program findings as preflight diagnostics only. Allow the already
+  authorized full comparison to finish, then adjudicate exclusively from its collected and verified
+  manifests; do not relax the frozen gates or promote the group-balanced prior from this preflight.
+
+## 2026-09-01 — Do not promote the group-balanced Ugi program prior
+
+- The paid exact-H100 comparison completed at run
+  `2c8c2c26b158de49c072896802166c8d2f9d24a4fc26300bf15a7d90c1a1da44`. The generic collector
+  independently downloaded and verified the run against the remote manifests. The full-stage
+  manifest fingerprint is `6a777f3d1f0e120c06695cd2a7c5875c029a2e35224fa8dc087ec2a7d9bb6381`;
+  its result and detail-archive SHA-256 values are
+  `eb9f938927704c1accb0d7d5d91ffd32a3e0845c5a84733401f383aef1c82902` and
+  `b4f239efdb83b6c63dccc32eb34f30454ff0204d3197ee1dd957aa48097a093b`.
+- Across 3,072 attempts per arm, realism C2ST AUC changed from `0.90436` under the
+  occurrence-weighted program law to `0.90297` under the group-balanced law. The `0.00138`
+  reduction is far below the frozen required reduction of `0.02`.
+- Validity, local-support-qualified exact-L1 yield and verified exact-L1 yield were preserved:
+  the occurrence-weighted arm returned 3,071/3,072 and the group-balanced arm 3,072/3,072.
+  Pairwise ECFP4 distance increased from `0.43634` to `0.44223`, and the effective component-count
+  retained ratio was `0.90084`. Unique exact-L1 yield nevertheless decreased from `0.27767` to
+  `0.23535`, a `0.04232` absolute loss.
+- Both arms recorded zero fixed-state failures, repairs, retries, training, route calls, oracle calls
+  and candidate selection. The intervention therefore preserved the scientific contract but failed
+  its realism-improvement gate; the frozen adjudicator returned `do_not_promote`.
+- **Decision:** stop the group-balanced-program-prior branch and do not run additional seeds. The
+  measured-Ugi realism gap is not primarily explained by occurrence weighting over the existing
+  63 count-only program states. Use the full method-blind ledgers to localize the residual role and
+  chemistry mismatch before implementing another intervention.
+
+## 2026-09-01 — Qualify identity-free measured-amine semantic support locally
+
+- The full group-prior ledgers localized the residual mismatch to the amine head: normalized
+  Wasserstein distances were `0.4384` for the aggregate amine panel, including `1.364` for
+  carbon-skeleton diameter. Implemented a train-fold-only conditional program over heavy-atom
+  diameter, carbon-skeleton diameter and N/O counts. Its sampled state contains four integers and
+  no product identity, component identity, graph, SMILES or fragment token.
+- Froze 3,072 semantic draws at
+  `results/phase1/ugi_amine_semantic_program_draw_seed0_v2/program_draw.json` (SHA-256
+  `d26b79fd3f1aa34a1ea7725343e151bdc5732d57469fe251231e821d713a661b`). The compiler used 198
+  ester-policy-eligible measured Ugi train products and retained explicit exclusion of the other 282
+  measured train products; it accessed no heldout products.
+- The first eight-program smoke exposed two empty topology/composition intersections and two
+  transform-consistent products whose recovered amines had three reactive N--H sites, outside the
+  frozen registry multiplicity of one or two. The decoder was corrected by conditioning its one-shot
+  topology support jointly on both semantic diameters, element composition, neutral-atom degree
+  capacity and the registry handle multiplicity. This is support conditioning, not repair, retry or
+  verifier-based candidate selection.
+- The superseding CPU smoke at
+  `results/phase1/ugi_amine_semantic_program_comparison_seed0_v1/smoke_v5/result.json` (SHA-256
+  `7b247de9f28fb5bda32a41139a1f91b6018bc8514b1c07681f681a699406afc4`) returned 8/8 valid,
+  locally supported, verified exact-L1 products in both arms, with zero abstentions, repairs,
+  retries, training, route calls, oracle calls or candidate selection. C2ST is intentionally not
+  estimable at eight attempts. Its receipt also records that all eight requested semantic pairs
+  had nonempty exact topology support.
+- Exhaustively audited the complete frozen draw before any further GPU request. All 3,072 rows,
+  spanning 90 distinct coarse-program/semantic pairs, have nonempty exact topology support; the
+  feasible support ranges from 1 to 88 topologies per pair and no pair is unsupported. The audit
+  result is `results/phase1/ugi_amine_semantic_support_audit_seed0_v1/result.json` (SHA-256
+  `ada019a2c4375607c19bb72efd4c15aae2efe29dd7ce3156b6b3fd16479ea8ba`) and records zero model,
+  generation, training, repair, retry, route, oracle or candidate-selection calls.
+- Added the strict two-stage H100 descriptor
+  `phase1-ugi-amine-semantic-program-seed0-h100-v1` (SHA-256
+  `6c5c932962a2901fa54665485012ef765629a61e9c84b6cf39e43ecb82b39dc0`). All config and molecular
+  pins resolve and verify locally. The full 3,072-program stage cannot run unless the 256-program
+  preflight is complete and every execution check passes.
+- **Decision:** the amine-semantic factorization is locally qualified but not promoted. Do not infer
+  a realism improvement from eight examples. A new paid H100 authorization is required because the
+  preceding authorization was consumed by the completed group-prior experiment.
+
+## 2026-09-01 — Launch the gated amine-semantic Ugi comparison
+
+- The user explicitly authorized uploading the current private FORGE source, frozen checkpoint,
+  semantic-program draw and hash-pinned molecular inputs to Modal and running the paid exact-H100
+  256-program-per-arm preflight, followed only when every frozen preflight gate passes by the paid
+  3,072-program-per-arm comparison. The authorization excludes training, repair, retry, routing,
+  oracle calls and candidate selection.
+- The immutable request resolved to
+  `19df8c462881d60892bb4e01b1a03a952837e98e555065dbc774aa7d0aec4ee8`; no prior receipt existed,
+  so it was submitted exactly once. The uploaded source SHA-256 is
+  `cb0a48a601ec67cbae3b6c9bdcfcf35092125d74ff123d1b2d941f33e370a65d`, and the frozen experiment
+  specification SHA-256 is
+  `6c5c932962a2901fa54665485012ef765629a61e9c84b6cf39e43ecb82b39dc0`.
+- Modal accepted detached function call `fc-01M1DVGGA1GE3FAGQR407KF7CS` on the exact `H100!`
+  resource contract. The local receipt is
+  `runs/_modal_calls/19df8c462881d60892bb4e01b1a03a952837e98e555065dbc774aa7d0aec4ee8.json`, and the first
+  independent status poll reported `running`.
+- **Decision:** treat the detached call as active execution rather than scientific evidence. The
+  full comparison remains mechanically dependent on every 256-program preflight check, and the
+  intervention cannot be promoted until the returned artifacts are collected, hash-verified and
+  adjudicated against the frozen non-inferiority and realism gates.
+
+## 2026-09-01 — Do not promote the amine-semantic Ugi factorization
+
+- The gated exact-H100 experiment completed at run
+  `3a2acb9ec4e00e90cdd1ad39a2ec8979389d7610190ab7a70d6719c506732a35`. The generic collector
+  downloaded the results and independently verified them against the remote manifests. The full
+  stage fingerprint is `69ffac14dc2d5379aa950be2216e3550d9d0cd3b4286c15a5f39b7b8a9040fd1`;
+  its result and detail-archive SHA-256 values are
+  `4d996d463f60b9bf6c5c29f0568d0eee57ae4582069d5cb2b6d61f80449355bd` and
+  `255c133442d10437b5017ffde516452039eabccef659876769b935e6ff80f1af`.
+- Across 3,072 paired attempts per arm, realism C2ST AUC worsened from `0.90436` for the count-only
+  program to `0.97471` for the amine-semantic program, an increase of `0.07036` rather than the
+  required decrease of at least `0.02`.
+- Valid and verified exact-L1 yield decreased from 3,071/3,072 (`99.97%`) to 2,815/3,072
+  (`91.63%`), violating the frozen two-percentage-point non-inferiority margins. The semantic arm
+  recorded 257 one-shot abstentions with reason `ugi_amine_cycle_support_unavailable`; the control
+  recorded one abstention. The static semantic-pair audit therefore did not capture the complete
+  runtime cycle-compatibility constraint and cannot be used as a sufficient preflight invariant.
+- Unique exact-L1 yield decreased from `27.77%` to `25.78%` but remained within its five-point
+  non-inferiority margin. Pairwise ECFP4 distance changed from `0.43634` to `0.43499`, and the
+  effective-component-count retained ratio was `0.93609`; those diversity gates passed. Both arms
+  recorded zero training, repair, retry, route or oracle calls and no candidate selection.
+- **Decision:** the frozen adjudicator returned `do_not_promote`. Stop this amine-semantic
+  factorization and do not run additional seeds. Its coarse diameter/composition conditioning does
+  not address the measured-Ugi distributional gap and introduces an unmodeled runtime
+  cycle-compatibility failure. Preserve the result as a negative finding; any successor must first
+  define and audit the full joint runtime support rather than reusing this incomplete support check.
+
+## 2026-09-01 — Correct the amine-semantic realism adjudication using the frozen measured-Ugi panel
+
+- The preceding adjudication used `configs/multireaction/common_lipid_realism_v1.json`, whose
+  scientific question is occupancy of the source-study-held-out broad observed-lipid R0 manifold.
+  That C2ST is a compatibility diagnostic, not the frozen primary assay for measured-Ugi role
+  realism. The pre-existing primary panel is
+  `configs/multireaction/ugi_development_lipid_realism_v3.json`: a group-balanced,
+  source-adjudicated measured-Ugi train-fold panel with role-normalized Wasserstein, role energy
+  distance and role RBF MMD evaluated under both attempt and unique-product weighting. Its C2ST is
+  explicitly secondary.
+- Rescoring the same hash-verified ledgers under that frozen panel produced
+  `results/phase1/ugi_amine_semantic_program_realism_panel_seed0_v1/result.json`. All six primary
+  comparisons improved. Attempt-weighted normalized Wasserstein changed from `0.29325` to
+  `0.22744`, energy distance from `1.51370` to `1.02497`, and RBF MMD from `0.14333` to `0.09584`.
+  Unique-product-weighted values changed from `0.31035` to `0.24373`, `1.71983` to `1.25790`, and
+  `0.16531` to `0.11969`, respectively. The secondary role C2ST also improved from `0.92727` to
+  `0.80015`.
+- Signed role-local attribution in
+  `results/phase1/ugi_amine_semantic_program_realism_gap_attribution_seed0_v1/result.json`
+  localized the largest gain to the intended amine carbon-skeleton diameter: its normalized
+  Wasserstein contribution decreased by `1.171` attempt-weighted and `1.293` unique-weighted.
+  The semantic coordinate therefore does address the dominant measured-Ugi mismatch.
+- The experiment still cannot be promoted: valid and verified exact-L1 yield fell by `8.33`
+  percentage points because 257 one-shot topology choices had no locally supported atom assignment.
+  Every failure was `ugi_amine_cycle_support_unavailable`. This is a decoder-support factorization
+  defect, not evidence that the measured-Ugi semantic target failed.
+- **Superseding decision:** retain the semantic program as a positive seed-0 development signal,
+  but do not promote the current sequential topology-before-chemistry decoder or run more seeds.
+  The smallest successor must condition the one-shot topology choice on complete train-fold local
+  chemistry support, preserve the existing no-repair/no-retry contract, and recover exact-L1
+  non-inferiority before any new paid comparison. Keep broad-R0 C2ST as a secondary compatibility
+  diagnostic; do not substitute it for the frozen measured-Ugi role panel.
+
+## 2026-09-01 — Qualify complete one-shot amine topology–chemistry support locally
+
+- Implemented the smallest successor to the failed sequential decoder. Before drawing one amine
+  topology, FORGE now requires at least one C/N/O assignment that simultaneously satisfies the
+  requested semantic target, neutral-atom degree capacity, registry amine-handle multiplicity,
+  train-fold component bounds, role-local edge support, triangle support and complete fundamental
+  cycle support. The topology is still drawn exactly once from the neural topology law. The change
+  performs no completed-product filtering, repair, retry, component lookup or retraining, and the
+  constructive reaction-core decoder is unchanged.
+- Replaced the insufficient topology-only preflight invariant with the same complete support
+  predicate used by runtime decoding. The exhaustive audit at
+  `results/phase1/ugi_amine_semantic_joint_support_audit_seed0_v2/result.json` (SHA-256
+  `17d9b865e9373c705962349f7556478039fc604a2e09c4daa6135eb383430b48`) covered all 3,072 frozen
+  requests and 90 unique program–target pairs. It removed 189 locally incompatible topologies from
+  18 pairs while retaining between 1 and 88 jointly supported topologies for every pair; no pair is
+  unsupported. The audit records zero model, generation, training, repair, retry, route, oracle or
+  candidate-selection calls and no held-out access.
+- The targeted CPU smoke deliberately included the first affected frozen pair rather than reusing
+  the earlier unaffected eight-row prefix. Across 16 paired programs, three pairs required local
+  support filtering and 30 impossible topologies were removed. Both count-only and amine-semantic
+  arms returned 16/16 valid, locally supported, verified exact-L1 products with zero abstentions,
+  fixed-state failures, repairs or retries. The result is
+  `results/phase1/ugi_amine_semantic_joint_support_seed0_v2/targeted_smoke/result.json` (SHA-256
+  `69adb0cf037f3d37e800f2e6c10c32d64f51949aab9f6aa33a810adcedd608ed`). Sixteen attempts are
+  intentionally insufficient for a realism claim.
+- The frozen measured-Ugi role assessor also consumed both actual 16-attempt ledgers end to end.
+  All six descriptive primary distances moved in the intended direction: normalized Wasserstein
+  changed from `0.32605` to `0.25247`, energy distance from `1.75830` to `1.25913`, and RBF MMD
+  from `0.15914` to `0.10878` under both attempt and unique-product weighting because every smoke
+  product was unique. The count-only and treatment result SHA-256 values are
+  `985d011042095644f4609ed37b2e6bddf2967a6f61f6c8c9af202d996b9e4349` and
+  `ba79e53da245b93df80342c02dbcfbb8304033d86ff2870327e0402a4c414027`. These are pipeline and
+  directional smoke diagnostics only; they do not replace the prespecified 3,072-attempt gate.
+- Added a final dependency-bound adjudicator that combines the sampler non-inferiority gates with
+  the frozen measured-Ugi role panel. Promotion requires all six primary role distances to improve,
+  while validity, verified exact-L1, local-support yield, unique exact-L1 yield, pairwise diversity
+  and effective component count remain within their pre-existing margins. Broad-R0 C2ST is recorded
+  only as a secondary compatibility diagnostic. The adjudicator rejects artifacts that do not
+  record the complete joint-support, no-repair decoder.
+- Froze the no-launch experiment
+  `phase1-ugi-amine-semantic-joint-support-seed0-h100-v2`. Local planning verified every pin and
+  registered stage, yielding request ID
+  `c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7`, source SHA-256
+  `1ace7ae8339fb40617b91b7ffda433d5594ff84c653441ab064745079b661419` and specification SHA-256
+  `266f5df5e1d418c66702be9e6437f948fbab05d2868a3b809fd6608761fde254`.
+- **Decision:** the joint-support decoder is locally qualified but not promoted. Do not infer a
+  full-budget realism or non-inferiority result from the static audit or 16-program smoke. A new
+  explicit paid authorization is required for its exact-H100 256-program preflight and gated
+  3,072-program comparison; the final CPU adjudication runs only after the full stage completes.
+
+## 2026-09-01 — Joint-support H100 comparison launched
+
+- The user explicitly authorized uploading the private FORGE source, frozen checkpoint,
+  semantic-program draw and hash-pinned inputs, and running the gated paid exact-H100 experiment
+  `phase1-ugi-amine-semantic-joint-support-seed0-h100-v2`.
+- Immediately before launch, local planning reproduced request ID
+  `c790e0d81ac1cf83424ac79765e7d0d098083472b09de96fe19c465fc70b2af7`, source SHA-256
+  `1ace7ae8339fb40617b91b7ffda433d5594ff84c653441ab064745079b661419` and specification SHA-256
+  `266f5df5e1d418c66702be9e6437f948fbab05d2868a3b809fd6608761fde254`. No existing request receipt
+  was present.
+- Modal accepted the detached run as function call `fc-01M1F3VT743P2G9FYDCYM5E7RP` at
+  `2026-09-01T18:31:50.746362+00:00`. The 256-program-per-arm preflight is a mechanical gate for
+  the 3,072-program-per-arm comparison; CPU measured-Ugi adjudication depends on successful
+  completion of the full comparison. The experiment performs no training, repair, retry, routing,
+  oracle calls or candidate selection.
+- The exact-H100 preflight passed and mechanically launched the full comparison. In the preflight,
+  both arms returned 256/256 valid, locally supported, verified exact-L1 products with zero repairs
+  or program-support abstentions. The completed preflight result SHA-256 is
+  `be5cbff3ce03241e49e9de34234a90221c51d1373ca18bb38c2cb195544fbbe4`.
+- The paid full comparison completed before the downstream CPU stage. The count-only arm returned
+  3,071/3,072 valid, locally supported, verified exact-L1 products; its single fail-closed outcome
+  was an exact-tree cycle-rank incompatibility. The joint-support amine-semantic arm returned
+  3,072/3,072 valid, locally supported, verified exact-L1 products with zero abstentions or repairs.
+  Unique exact-L1 yield increased from `0.27767` to `0.29362`, mean pairwise ECFP4 distance from
+  `0.43634` to `0.44122`, and effective component count retained ratio was `0.98605`. The full
+  comparison result and archive SHA-256 values are
+  `ac132d4c552184cdb08bd962718206d63da546511f15186cc67be5d8782eec98` and
+  `5aa48ca1cca2d6e1a3b2b0db9dce97a5bee88d0c9b0cdbbf601a25c6e9a0766b`.
+- The remote CPU adjudication then failed before producing a scientific result because its frozen
+  config expected invented method labels rather than the canonical method identities already stored
+  in the two attempt ledgers. No H100 output was lost and no generation was repeated. The config was
+  corrected to the ledger identities only; the gate, metric panel, attempts and all molecular
+  evidence were unchanged. The corrected config SHA-256 is
+  `220f4666ee36c4d88a160578291c14e173ee02fcfb0b6a2fcbb43380b56350ea`.
+- The corrected CPU adjudicator consumed the completed 3,072-attempt ledgers. All six primary
+  measured-Ugi role distances improved. Under attempt weighting, normalized Wasserstein changed
+  from `0.29325` to `0.23254`, energy distance from `1.51370` to `1.03292`, and RBF MMD2 from
+  `0.14333` to `0.09669`. Under unique-product weighting, the same metrics changed from `0.31035`
+  to `0.24324`, `1.71983` to `1.23071`, and `0.16531` to `0.11704`. Every frozen chemistry,
+  diversity and support non-inferiority check also passed. Broad-R0 C2ST worsened from `0.90436` to
+  `0.97813`; as prespecified, that heterogeneous-corpus diagnostic is secondary and non-gating.
+  The hash-pinned adjudication result is
+  `results/phase1/ugi_amine_semantic_joint_support_adjudication_seed0_v2/result.json` (SHA-256
+  `9ec3c3a9f7b866bf158c74a3f776e4daad066d3651f41cd0c8cca73dfa377bab`).
+- **Decision:** promote the joint-support amine-semantic decoder for seed-0 development. This is a
+  train-fold measured-Ugi development result, not an across-training-seed or held-out model claim.
+  It supports the conclusion that jointly constraining topology and local chemistry materially
+  improves the measured-Ugi role distribution without sacrificing verified exact assembly,
+  validity, diversity or effective component count.
+- The repaired experiment specification plans cleanly without relaunching any compute. Its
+  superseding no-launch request ID is
+  `9cef32ab07639b8fcd4bdbba533a4b9123910b1ff9cbdbb6bc742e5739ef70f4`, with unchanged source
+  SHA-256 `1ace7ae8339fb40617b91b7ffda433d5594ff84c653441ab064745079b661419` and specification
+  SHA-256 `f6d855ada567b6441f21e3393436565051f7607f47b94f95898cd1148324e05e`.

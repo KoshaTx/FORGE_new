@@ -1,0 +1,214 @@
+{
+  "arms": {
+    "amine_semantic": {
+      "assessment": {
+        "bytes": 33809,
+        "logical_path": "amine_semantic/result.json",
+        "sha256": "35b39ea49c80e6660682f27e21003d59af5b8630b7ffe7d706db3f8994efef0e"
+      },
+      "summary": {
+        "attempt_role_energy_distance": 1.0329205205191698,
+        "attempt_role_nearest_reference_distance_mean": 2.421938193872396,
+        "attempt_role_normalized_wasserstein": 0.23253899835422212,
+        "attempt_role_rbf_mmd2": 0.09668555918793742,
+        "connected_fraction_per_attempt": 1.0,
+        "exact_l1_unambiguous_fraction_per_attempt": 1.0,
+        "global_c2st_auc": 0.7331818181818182,
+        "global_normalized_wasserstein": 0.28799115597563807,
+        "role_c2st_auc": 0.7956060606060605,
+        "role_c2st_folds": 5,
+        "role_energy_distance": 1.2307127807536995,
+        "role_nearest_reference_distance_mean": 2.613501279959561,
+        "role_normalized_wasserstein": 0.2432446184139432,
+        "role_rbf_mmd2": 0.11703853139762188,
+        "unique_connected_products": 902,
+        "unique_exact_l1_products": 902,
+        "unique_role_energy_distance": 1.2307127807536995,
+        "unique_role_nearest_reference_distance_mean": 2.613501279959561,
+        "unique_role_normalized_wasserstein": 0.2432446184139432,
+        "unique_role_rbf_mmd2": 0.11703853139762188
+      }
+    },
+    "count_only": {
+      "assessment": {
+        "bytes": 33836,
+        "logical_path": "count_only/result.json",
+        "sha256": "94628b1b6bcf3afcabbc4d549b0215c3d7ece0cad0f1fc46417232a39f2ba7bc"
+      },
+      "summary": {
+        "attempt_role_energy_distance": 1.5136952762958966,
+        "attempt_role_nearest_reference_distance_mean": 2.405508480047328,
+        "attempt_role_normalized_wasserstein": 0.2932457861790303,
+        "attempt_role_rbf_mmd2": 0.1433260176537543,
+        "connected_fraction_per_attempt": 0.9996744791666666,
+        "exact_l1_unambiguous_fraction_per_attempt": 0.9996744791666666,
+        "global_c2st_auc": 0.9293939393939393,
+        "global_normalized_wasserstein": 0.3816774779989502,
+        "role_c2st_auc": 0.9272727272727274,
+        "role_c2st_folds": 5,
+        "role_energy_distance": 1.7198322035419826,
+        "role_nearest_reference_distance_mean": 2.597070087201348,
+        "role_normalized_wasserstein": 0.31034537527954176,
+        "role_rbf_mmd2": 0.1653081656773343,
+        "unique_connected_products": 853,
+        "unique_exact_l1_products": 853,
+        "unique_role_energy_distance": 1.7198322035419826,
+        "unique_role_nearest_reference_distance_mean": 2.597070087201348,
+        "unique_role_normalized_wasserstein": 0.31034537527954176,
+        "unique_role_rbf_mmd2": 0.1653081656773343
+      }
+    }
+  },
+  "broad_r0_c2st": {
+    "baseline": 0.9043555989110257,
+    "status": "secondary_compatibility_diagnostic",
+    "treatment": 0.9781284645143759,
+    "treatment_minus_baseline": 0.07377286560335017,
+    "used_for_promotion": false
+  },
+  "calls": {
+    "candidate_selection": 0,
+    "generation": 0,
+    "oracle": 0,
+    "repair": 0,
+    "retry": 0,
+    "route": 0,
+    "training": 0
+  },
+  "effective_component_count_retained_ratio": 0.9860483812345762,
+  "expected_attempts_per_arm": 3072,
+  "inputs": {
+    "comparison_archive": {
+      "bytes": 655360,
+      "logical_path": "compare_full/comparison_details.tar",
+      "sha256": "5aa48ca1cca2d6e1a3b2b0db9dce97a5bee88d0c9b0cdbbf601a25c6e9a0766b"
+    },
+    "comparison_result": {
+      "bytes": 24403,
+      "logical_path": "compare_full/result.json",
+      "sha256": "ac132d4c552184cdb08bd962718206d63da546511f15186cc67be5d8782eec98"
+    },
+    "config": {
+      "bytes": 2479,
+      "path": "configs/multireaction/ugi_amine_semantic_joint_support_adjudication_seed0_v2.json",
+      "sha256": "220f4666ee36c4d88a160578291c14e173ee02fcfb0b6a2fcbb43380b56350ea"
+    },
+    "development_realism_config": {
+      "bytes": 2750,
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    }
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development adjudication, not an across-training-seed or held-out model claim.",
+    "The adjudicator performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The measured-Ugi role panel is primary; broad-R0 C2ST is retained only as a secondary compatibility diagnostic.",
+    "Promotion does not establish activity, synthesis success, formulation performance or biological efficacy."
+  ],
+  "panel_comparison": {
+    "baseline_arm": "count_only",
+    "comparisons": {
+      "amine_semantic": {
+        "by_weighting": {
+          "attempt_weighted": {
+            "role_energy_distance": {
+              "arm": 1.0329205205191698,
+              "arm_minus_baseline": -0.4807747557767268,
+              "baseline": 1.5136952762958966,
+              "direction": "improved"
+            },
+            "role_normalized_wasserstein": {
+              "arm": 0.23253899835422212,
+              "arm_minus_baseline": -0.06070678782480818,
+              "baseline": 0.2932457861790303,
+              "direction": "improved"
+            },
+            "role_rbf_mmd2": {
+              "arm": 0.09668555918793742,
+              "arm_minus_baseline": -0.04664045846581688,
+              "baseline": 0.1433260176537543,
+              "direction": "improved"
+            }
+          },
+          "unique_product_weighted": {
+            "role_energy_distance": {
+              "arm": 1.2307127807536995,
+              "arm_minus_baseline": -0.48911942278828313,
+              "baseline": 1.7198322035419826,
+              "direction": "improved"
+            },
+            "role_normalized_wasserstein": {
+              "arm": 0.2432446184139432,
+              "arm_minus_baseline": -0.06710075686559855,
+              "baseline": 0.31034537527954176,
+              "direction": "improved"
+            },
+            "role_rbf_mmd2": {
+              "arm": 0.11703853139762188,
+              "arm_minus_baseline": -0.048269634279712426,
+              "baseline": 0.1653081656773343,
+              "direction": "improved"
+            }
+          }
+        },
+        "classification": "uniformly_improved",
+        "inference": "none_seed0_development_only",
+        "primary_metrics_improved": 6,
+        "primary_metrics_total": 6
+      }
+    },
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better"
+  },
+  "promotion_checks": {
+    "effective_component_count_preserved": true,
+    "exact_l1_preserved": true,
+    "fixed_state_contract_preserved": true,
+    "local_support_preserved": true,
+    "no_repairs": true,
+    "pairwise_diversity_preserved": true,
+    "program_support_abstentions_zero": true,
+    "role_panel_uniformly_improved": true,
+    "unique_exact_l1_preserved": true,
+    "validity_preserved": true
+  },
+  "promotion_decision": "promote_seed0_development",
+  "promotion_gate": {
+    "effective_component_count_minimum_retained_ratio": 0.8,
+    "exact_l1_noninferiority_margin": 0.02,
+    "local_support_noninferiority_margin": 0.02,
+    "mean_pairwise_ecfp4_distance_noninferiority_margin": 0.05,
+    "require_uniform_role_panel_improvement": true,
+    "require_zero_program_support_abstentions": true,
+    "unique_exact_l1_noninferiority_margin": 0.05,
+    "validity_noninferiority_margin": 0.02
+  },
+  "sampler_metric_delta": {
+    "component_novelty_fraction": -0.038085619505047186,
+    "descriptor_manifold_coverage": 0.0,
+    "descriptor_manifold_precision_per_attempt": 0.0234375,
+    "effective_component_count": -0.5004327010878455,
+    "exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "fingerprint_manifold_coverage": 0.0,
+    "fingerprint_manifold_precision_per_attempt": 0.0,
+    "held_component_exact_l1_products_per_1000_attempts": 0.0,
+    "local_support_qualified_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "mean_pairwise_ecfp4_distance": 0.004872773503512784,
+    "nitrogen_oxygen_bond_product_fraction_per_attempt": 0.0,
+    "oxygen_oxygen_bond_product_fraction_per_attempt": 0.0,
+    "realism_c2st_auc": 0.07377286560335017,
+    "realism_internal_diversity": 0.004872773503512784,
+    "role_supported_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "small_oxygen_ring_product_fraction_per_attempt": 0.0,
+    "tail_supported_exact_l1_yield_per_attempt": 0.00032552083333337034,
+    "unique_exact_l1_products_per_attempt": 0.01595052083333337,
+    "unique_open_ended_exact_l1_products_per_attempt": 0.013671875,
+    "unique_open_ended_whole_product_novel_exact_l1_products_per_attempt": 0.013671875,
+    "unique_whole_product_novel_exact_l1_products_per_attempt": 0.013671875,
+    "valid_fraction_per_attempt": 0.00032552083333337034,
+    "whole_product_novel_to_train_fraction": -0.038085619505047186
+  },
+  "schema_version": "forge.ugi_amine_semantic_joint_support_adjudication.v1",
+  "scientific_question": "Does complete topology-local-chemistry support retain the seed-0 measured-Ugi role-realism improvement of amine-semantic conditioning while preserving exact assembly and diversity within the frozen margins?",
+  "status": "complete"
+}

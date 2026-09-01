@@ -12,8 +12,17 @@ from experiments.phase1.multireaction.lipid_realism_assessment import (
 )
 from forge.core.hashing import sha256_file
 from forge.core.io import write_csv, write_json
-from forge.model.common_lipid_realism import RealismPolicy, assess_lipid_realism
+from forge.model.common_lipid_realism import (
+    RealismPolicy,
+    assess_lipid_realism,
+    build_ugi_development_realism_reference,
+    build_ugi_realism_reference,
+)
 from forge.model.common_ugi_benchmark import CommonUgiAttempt, write_attempt_ledger
+from forge.model.ugi_development_realism import (
+    ROLE_DESCRIPTOR_NAMES,
+    ugi_role_descriptor_vector,
+)
 
 
 def _canonical(smiles: str) -> str:
@@ -63,6 +72,94 @@ def _write_reference(repo: Path) -> tuple[Path, Path]:
     write_csv(r0_path, structures, list(structures[0]))
     write_csv(split_path, assignments, list(assignments[0]))
     return r0_path, split_path
+
+
+def _write_ugi_reference(repo: Path) -> Path:
+    train = [
+        "CCCCCCCCNCCO",
+        "CCCCCCCCCCNCCO",
+        "CCCCCCN(CCO)CCCCCC",
+        "CCCCCCCCN(CCO)CCCC",
+        "CCCCCCOC(=O)CNCCCCC",
+        "CCCCCCCCNC(=O)CO",
+    ]
+    calibration = [
+        "CCCCCCCCCCNCCCO",
+        "CCCCCCCN(CCO)CCCCCCC",
+        "CCCCCCCCOC(=O)CNCCCC",
+        "CCCCCCCCNCCCO",
+        "CCCCCCN(CCCO)CCCCCC",
+        "CCCCCCCCNC(=O)CCO",
+    ]
+    rows: list[dict[str, str]] = []
+    for fold, molecules in (("train", train), ("calibration", calibration)):
+        for index, smiles in enumerate(molecules):
+            rows.append(
+                {
+                    "product_id": f"{fold}:{index}",
+                    "canonical_product_smiles": _canonical(smiles),
+                    "primary_product_fold": fold,
+                    "is_source_adjudicated_measured_product": "true",
+                    "amine_head_family_id": f"amine:{index % 3}",
+                    "oxoester_aldehyde_body_tail_family_id": f"aldehyde:{index % 2}",
+                    "isocyanide_tail_family_id": f"isocyanide:{index % 4}",
+                }
+            )
+    rows.append(
+        {
+            "product_id": "virtual:0",
+            "canonical_product_smiles": _canonical("CCCCCCCCCCCCNCCO"),
+            "primary_product_fold": "calibration",
+            "is_source_adjudicated_measured_product": "false",
+            "amine_head_family_id": "amine:virtual",
+            "oxoester_aldehyde_body_tail_family_id": "aldehyde:virtual",
+            "isocyanide_tail_family_id": "isocyanide:virtual",
+        }
+    )
+    path = repo / "ugi_assignments.csv.gz"
+    write_csv(path, rows, list(rows[0]))
+    return path
+
+
+def _write_group_balanced_ugi_development_reference(repo: Path) -> Path:
+    rows: list[dict[str, str]] = []
+    for group in range(5):
+        for member in range(4):
+            chain = 4 + group * 4 + member
+            rows.append(
+                {
+                    "product_id": f"train:{group}:{member}",
+                    "canonical_product_smiles": _canonical("C" * chain + "NCCO"),
+                    "primary_product_fold": "train",
+                    "is_source_adjudicated_measured_product": "true",
+                    "amine_head_family_id": f"amine:{group}",
+                    "oxoester_aldehyde_body_tail_family_id": f"aldehyde:{group}",
+                    "isocyanide_tail_family_id": f"isocyanide:{group}",
+                    "amine_head_smiles": _canonical("NCCN(C)C"),
+                    "oxoester_aldehyde_body_tail_smiles": _canonical(
+                        "C" * (5 + group + member) + "C(=O)OCC=O"
+                    ),
+                    "isocyanide_tail_smiles": _canonical("[C-]#[N+]" + "C" * (5 + group + member)),
+                }
+            )
+    for fold in ("calibration", "heldout"):
+        rows.append(
+            {
+                "product_id": f"{fold}:unread",
+                "canonical_product_smiles": "not-a-molecule",
+                "primary_product_fold": fold,
+                "is_source_adjudicated_measured_product": "true",
+                "amine_head_family_id": "unread",
+                "oxoester_aldehyde_body_tail_family_id": "unread",
+                "isocyanide_tail_family_id": "unread",
+                "amine_head_smiles": "not-a-component",
+                "oxoester_aldehyde_body_tail_smiles": "not-a-component",
+                "isocyanide_tail_smiles": "not-a-component",
+            }
+        )
+    path = repo / "ugi_development_assignments.csv.gz"
+    write_csv(path, rows, list(rows[0]))
+    return path
 
 
 def _policy() -> dict[str, object]:
@@ -215,6 +312,72 @@ def test_failed_attempts_never_enter_the_structural_manifold(tmp_path: Path) -> 
     assert (
         result["empirical_lipid_manifold"]["fingerprint"]["precision_per_requested_attempt"] <= 0.75
     )
+
+
+def test_ugi_matched_reference_uses_only_measured_rows_and_preserves_the_fold(
+    tmp_path: Path,
+) -> None:
+    assignments = _write_ugi_reference(tmp_path)
+    policy = RealismPolicy.from_mapping(_policy())
+    reference = build_ugi_realism_reference(
+        assignments,
+        policy,
+        evaluation_fold="calibration",
+    )
+
+    assert len(reference.training) == 6
+    assert len(reference.heldout) == 6
+    assert all(row.structure_id.startswith("train:") for row in reference.training)
+    assert all(row.structure_id.startswith("calibration:") for row in reference.heldout)
+    assert reference.audit["virtual_products_used_as_realism_reference"] is False
+    assert reference.audit["source_counts"]["excluded_not_source_adjudicated_measured"] == 1
+    assert reference.audit["evaluation_fold"] == "calibration"
+    assert reference.audit["scaling_population"] == (
+        "source-adjudicated measured Ugi train fold only"
+    )
+
+
+def test_ugi_development_reference_is_group_balanced_and_never_parses_nontrain_products(
+    tmp_path: Path,
+) -> None:
+    assignments = _write_group_balanced_ugi_development_reference(tmp_path)
+    policy_value = _policy()
+    policy_value["train_reference_limit"] = 10
+    policy_value["heldout_reference_limit"] = 10
+    policy_value["c2st_maximum_rows_per_class"] = 10
+    reference = build_ugi_development_realism_reference(
+        assignments,
+        RealismPolicy.from_mapping(policy_value),
+        rows_per_group_per_partition=1,
+        split_seed=29,
+    )
+
+    assert len(reference.scaling) == 5
+    assert len(reference.evaluation) == 5
+    assert len({row.group_id for row in reference.scaling}) == 5
+    assert len({row.group_id for row in reference.evaluation}) == 5
+    assert reference.realism.audit["calibration_or_heldout_product_structures_accessed"] is False
+    assert (
+        reference.realism.audit["source_counts"][
+            "ignored_measured_non_train_before_structure_access"
+        ]
+        == 2
+    )
+
+
+def test_ugi_role_descriptor_exposes_tail_ring_size_and_oxygen_rings() -> None:
+    vector = ugi_role_descriptor_vector(
+        {
+            "amine_head": "NCCN(C)C",
+            "oxoester_aldehyde_body_tail": "O=CC1CCCCCO1",
+            "isocyanide_tail": "[C-]#[N+]CCCCCCCC",
+        }
+    )
+    by_name = dict(zip(ROLE_DESCRIPTOR_NAMES, vector, strict=True))
+
+    assert by_name["aldehyde_ring_count"] == 1.0
+    assert by_name["aldehyde_largest_ring_size"] == 7.0
+    assert by_name["aldehyde_oxygen_ring_count"] == 1.0
 
 
 def _minimal_seed_result(method: str, seed: int, connected: float) -> dict[str, object]:

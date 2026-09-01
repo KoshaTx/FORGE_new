@@ -33,13 +33,18 @@ from experiments.phase1.product_l1.evaluation.ugi_v0_transformer_assessment impo
 from forge.core.hashing import artifact_record, pin_record, resolve_pin, sha256_file
 from forge.core.io import read_json_object, write_json
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model.local_chemistry_support import LocalChemistrySupport
+from forge.model.reaction_core_saturation import ReactionCoreSaturationPolicy
 from forge.model.reaction_program_flow import derive_role_morphology_states
 from forge.model.synthesis_program_layout import (
     SynthesisProgramLayoutError,
     SynthesisProgramLayoutPrior,
 )
 from forge.model.synthesis_program_sampling import sample_synthesis_program_products
+from forge.model.ugi_amine_semantic_program import UgiAmineSemanticTarget
+from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
 from forge.model.ugi_morphology_program import UgiMorphologyProgram
+from forge.model.ugi_role_chemistry_prior import UgiRoleChemistryPrior
 from forge.model.ugi_transformer_topology import UgiTransformerTopologyPolicy
 from forge.potency.annotations import ROLE_NAMES
 
@@ -250,6 +255,7 @@ def _current_sampling_request(
     runtime: Mapping[str, Any],
     device: str,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
+    ugi_amine_semantic_target_sha256: str | None = None,
 ) -> dict[str, Any]:
     request = {
         "batch_size": int(runtime["batch_size"]),
@@ -263,8 +269,21 @@ def _current_sampling_request(
         "terminal_decode_policy": str(runtime["current_terminal_decode_policy"]),
         "terminal_decoder_seed": runtime.get("terminal_decoder_seed"),
     }
+    if "terminal_temperature" in runtime:
+        request["terminal_temperature"] = float(runtime["terminal_temperature"])
+    if "sampling_factorization" in runtime:
+        request["sampling_factorization"] = str(runtime["sampling_factorization"])
+    if "topology_conditioned_chemistry_steps" in runtime:
+        request["topology_conditioned_chemistry_steps"] = int(
+            runtime["topology_conditioned_chemistry_steps"]
+        )
+        request["topology_conditioned_chemistry_seed"] = runtime.get(
+            "topology_conditioned_chemistry_seed"
+        )
     if ugi_topology_policy is not None:
         request["ugi_topology_policy"] = ugi_topology_policy.to_mapping()
+    if ugi_amine_semantic_target_sha256 is not None:
+        request["ugi_amine_semantic_target_sha256"] = ugi_amine_semantic_target_sha256
     return request
 
 
@@ -279,10 +298,22 @@ def _load_or_sample_current(
     arm_id: str,
     checkpoint_step: int,
     programs: Sequence[UgiMorphologyProgram],
+    program_draw_sha256: str | None = None,
     specialist_checkpoint: Path | None = None,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
+    local_chemistry_support: LocalChemistrySupport | None = None,
+    reaction_core_saturation_policy: ReactionCoreSaturationPolicy | None = None,
+    ugi_ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
+    ugi_role_chemistry_prior: UgiRoleChemistryPrior | None = None,
+    ugi_role_chemistry_prior_strength: float = 0.0,
+    ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget] | None = None,
+    ugi_amine_semantic_target_sha256: str | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any], Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
+    if (ugi_amine_semantic_targets is None) != (ugi_amine_semantic_target_sha256 is None):
+        raise UgiV0CurrentProgramComparisonError(
+            "semantic targets and their frozen draw digest must be supplied together"
+        )
     result_path = output_dir / "result.json"
     training = read_json_object(
         inputs["current_training_result"],
@@ -305,13 +336,27 @@ def _load_or_sample_current(
     request = _current_sampling_request(
         config_sha256=config_sha256,
         checkpoint_sha256=str(snapshot["sha256"]),
-        program_draw_sha256=sha256_file(inputs["program_draw"]),
+        program_draw_sha256=(
+            program_draw_sha256
+            if program_draw_sha256 is not None
+            else sha256_file(inputs["program_draw"])
+        ),
         runtime=runtime,
         device=device,
         ugi_topology_policy=ugi_topology_policy,
+        ugi_amine_semantic_target_sha256=ugi_amine_semantic_target_sha256,
     )
     if specialist_checkpoint is not None:
         request["specialist_checkpoint_sha256"] = sha256_file(specialist_checkpoint)
+    if local_chemistry_support is not None:
+        request["local_chemistry_support"] = local_chemistry_support.to_mapping()
+    if reaction_core_saturation_policy is not None:
+        request["reaction_core_saturation_policy"] = reaction_core_saturation_policy.to_mapping()
+    if ugi_ester_chemotype_policy is not None:
+        request["ugi_ester_chemotype_policy"] = ugi_ester_chemotype_policy.to_mapping()
+    if ugi_role_chemistry_prior is not None:
+        request["ugi_role_chemistry_prior"] = ugi_role_chemistry_prior.to_mapping()
+        request["ugi_role_chemistry_prior_strength"] = ugi_role_chemistry_prior_strength
     if result_path.is_file():
         result = read_json_object(
             result_path,
@@ -339,7 +384,10 @@ def _load_or_sample_current(
         raise UgiV0CurrentProgramComparisonError("CUDA sampling was requested but unavailable")
     role_morphology_conditioning = False
     try:
-        prior = SynthesisProgramLayoutPrior(cache)
+        prior = SynthesisProgramLayoutPrior(
+            cache,
+            ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+        )
         layouts = tuple(
             project_program_for_mixed_transformer(prior, program, sample_index=index)
             for index, program in enumerate(programs)
@@ -376,9 +424,7 @@ def _load_or_sample_current(
                     "specialist checkpoint does not target Ugi"
                 )
         conditioning, state_mapping = _conditioning_contract(package, cache)
-        role_morphology_conditioning = bool(
-            model.role_morphology_conditioning
-        )
+        role_morphology_conditioning = bool(model.role_morphology_conditioning)
         node_marginal = package["node_marginal"].detach().cpu().numpy()
         bond_marginal = package["bond_marginal"].detach().cpu().numpy()
         rows, sampling = sample_synthesis_program_products(
@@ -394,16 +440,43 @@ def _load_or_sample_current(
             device=device,
             conditioning_mode=conditioning,
             program_state_mapping=state_mapping,
+            sampling_factorization=str(runtime.get("sampling_factorization", "joint")),
             terminal_decode_policy=str(runtime["current_terminal_decode_policy"]),
-            local_chemistry_support=None,
+            terminal_seed=(
+                None
+                if runtime.get("terminal_decoder_seed") is None
+                else int(runtime["terminal_decoder_seed"])
+            ),
+            terminal_temperature=float(runtime.get("terminal_temperature", 1.0)),
+            topology_conditioned_chemistry_steps=int(
+                runtime.get("topology_conditioned_chemistry_steps", 0)
+            ),
+            topology_conditioned_chemistry_seed=(
+                None
+                if runtime.get("topology_conditioned_chemistry_seed") is None
+                else int(runtime["topology_conditioned_chemistry_seed"])
+            ),
+            local_chemistry_support=local_chemistry_support,
             ugi_topology_policy=ugi_topology_policy,
+            reaction_core_saturation_policy=reaction_core_saturation_policy,
+            ugi_ester_chemotype_policy=ugi_ester_chemotype_policy,
+            ugi_role_chemistry_prior=ugi_role_chemistry_prior,
+            ugi_role_chemistry_prior_strength=ugi_role_chemistry_prior_strength,
+            ugi_amine_semantic_targets=ugi_amine_semantic_targets,
         )
     finally:
         cache.close()
     if len(rows) != len(programs):
         raise UgiV0CurrentProgramComparisonError("mixed sampler changed the attempt denominator")
     normalized = []
-    for index, (row, program) in enumerate(zip(rows, programs, strict=True)):
+    semantic_targets: Sequence[UgiAmineSemanticTarget | None] = (
+        (None,) * len(programs)
+        if ugi_amine_semantic_targets is None
+        else ugi_amine_semantic_targets
+    )
+    for index, (row, program, semantic_target) in enumerate(
+        zip(rows, programs, semantic_targets, strict=True)
+    ):
         value = {
             "pipeline_index": index,
             "program": {
@@ -414,6 +487,11 @@ def _load_or_sample_current(
             },
             "smiles": row.get("canonical_smiles") if row.get("valid") is True else None,
             "valid": row.get("valid") is True,
+            "constraint_abstention_reason": row.get("constraint_abstention_reason"),
+            "sampled_topology": row.get("sampled_topology"),
+            "ugi_amine_semantic_target": (
+                None if semantic_target is None else semantic_target.to_mapping()
+            ),
         }
         normalized.append(value)
     result = {

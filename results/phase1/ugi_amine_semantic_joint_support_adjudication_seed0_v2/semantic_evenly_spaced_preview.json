@@ -1,0 +1,55 @@
+{
+  "image": {
+    "path": "results/phase1/ugi_amine_semantic_joint_support_adjudication_seed0_v2/semantic_evenly_spaced_preview.png",
+    "sha256": "914cbb47943cc964a6125e2a7e47fa5f63dabf6aff0833549838c69895a1aec5"
+  },
+  "rendering": {
+    "columns": 3,
+    "rdkit": "2026.03.5",
+    "rows": 2
+  },
+  "rows": [
+    {
+      "attempt_index": 0,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCOC(=O)CCCCCC(NN1CCCCC1)C(=O)NCCCCCCCCCCCCCCCC"
+    },
+    {
+      "attempt_index": 512,
+      "canonical_smiles": "CCCCCCCCCCCCCCCC(=O)OCCCCCCCC(NCCN(CC)CC)C(=O)NCCCCCCCCCCCCCC"
+    },
+    {
+      "attempt_index": 1024,
+      "canonical_smiles": "CCCC=CCC=CCCCC(=O)OCCCCCCCCCC(NC(C)N1CCCCC1)C(=O)NCCCCCCCCCCCC"
+    },
+    {
+      "attempt_index": 1536,
+      "canonical_smiles": "CCCCCCCCCCCCCCOC(=O)CCCCCCCCC(NCCN(CC)CC)C(=O)NCCCCCCCCCCCC"
+    },
+    {
+      "attempt_index": 2048,
+      "canonical_smiles": "CCCCCCCCCCCCCC(=O)OCCCCCCCC(NC1(N)CCN(C)C1)C(=O)NCCCCCCCCCCCC"
+    },
+    {
+      "attempt_index": 2560,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCNC(=O)C(CCCCCCCOC(=O)CCCCCCCCCCCCCCC)NC1CCN(CC)C1"
+    }
+  ],
+  "schema_version": "forge.joint_support_preview.v1",
+  "selection": {
+    "candidate_selection": false,
+    "indices": [
+      0,
+      512,
+      1024,
+      1536,
+      2048,
+      2560
+    ],
+    "policy": "six_fixed_evenly_spaced_attempt_indices"
+  },
+  "source_archive": {
+    "member": "amine_semantic/assessment/attempts.jsonl.gz",
+    "path": "results/phase1/ugi_amine_semantic_joint_support_adjudication_seed0_v2/dependencies/compare_full/comparison_details.tar",
+    "sha256": "5aa48ca1cca2d6e1a3b2b0db9dce97a5bee88d0c9b0cdbbf601a25c6e9a0766b"
+  }
+}

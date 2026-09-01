@@ -18,6 +18,7 @@ from forge.model.ugi_morphology_program import (
     attached_tree_matches_program,
     component_weighted_offspring_marginals,
     component_weighted_program_pool,
+    enumerate_attached_offspring_with_exact_budget,
     maximum_adjacent_branch_graph_run,
     preorder_attached_forest_to_parents,
     sample_attached_offspring_with_exact_budget,
@@ -215,6 +216,28 @@ def test_cycle_aware_decoder_excludes_nonclosable_branch_word() -> None:
     assert offspring.tolist() != [1, 1, 2, 0, 0]
 
 
+def test_small_exact_program_enumeration_is_complete_and_deterministic() -> None:
+    words = enumerate_attached_offspring_with_exact_budget(
+        node_count=4,
+        junction_budget=1,
+        maximum_children=2,
+        attachment_count=1,
+        maximum_adjacent_branch_run=1,
+    )
+
+    assert [word.tolist() for word in words] == [
+        [1, 2, 0, 0],
+        [2, 0, 1, 0],
+        [2, 1, 0, 0],
+    ]
+    assert all(
+        attached_tree_matches_program(
+            word, node_count=4, junction_budget=1, attachment_count=1
+        )
+        for word in words
+    )
+
+
 def test_cycle_decoder_uses_neutral_constrained_fallback_without_repair(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -239,3 +262,4 @@ def test_cycle_decoder_uses_neutral_constrained_fallback_without_repair(
     )
 
     assert offspring.tolist() == closable.tolist()
+    enumerate_attached_offspring_with_exact_budget,

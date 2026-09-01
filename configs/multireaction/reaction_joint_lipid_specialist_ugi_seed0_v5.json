@@ -1,0 +1,96 @@
+{
+  "schema_version": "forge.reaction_program_joint_lipid_specialization_config.v5",
+  "target_program": "ugi_3cr_agile",
+  "seed": 2026083102,
+  "specialist_adapter_dim": 64,
+  "joint_lipid_prior": {
+    "measured_mass": 0.5,
+    "exploration_mass": 0.5,
+    "measured_weighting": "uniform_unique_constitutional_product",
+    "exploration_weighting": "frozen_source_weights",
+    "component_ids_enter_neural_tensors": false
+  },
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "exposure": {
+    "existing_examples": 384006,
+    "target_examples": 450470,
+    "reference": "one additional 66,464-draw Ugi budget: 50% uniform over the 480 unique measured train products and 50% over the remaining train-fold support under frozen source weights"
+  },
+  "authorization": {
+    "authorized": true,
+    "date": "2026-08-31",
+    "scope": "Implement and qualify a seed-0 full-output Ugi adapter under an identity-free joint measured/exploration training measure; paid execution requires a separate exact launch authorization.",
+    "source": "explicit user instruction in the repository collaboration thread"
+  },
+  "smoke": {
+    "device": "cpu",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 2,
+    "additional_examples": 8,
+    "micro_batch_size": 2,
+    "effective_batch_size": 4,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "restart_interval_steps": 1
+  },
+  "h100_preflight": {
+    "device": "cuda",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 4,
+    "additional_examples": 252,
+    "micro_batch_size": 63,
+    "effective_batch_size": 126,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "restart_interval_steps": 1
+  },
+  "full": {
+    "device": "cuda",
+    "precision": "float32",
+    "deterministic_algorithms": true,
+    "cpu_threads": 4,
+    "micro_batch_size": 63,
+    "effective_batch_size": 126,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "restart_interval_steps": 25
+  },
+  "nonclaims": [
+    "This seed-0 development run is not independently trained replication.",
+    "Product identifiers align immutable train-fold rows but never enter neural tensors.",
+    "The measured-product stratum is a whole-lipid training distribution, not a component vocabulary.",
+    "Exact-L1 replay is transform consistency, not synthesis-success probability."
+  ]
+}

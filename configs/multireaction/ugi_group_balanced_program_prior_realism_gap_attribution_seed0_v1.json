@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Which signed role-local descriptor mismatches remain after replacing the occurrence-weighted measured-Ugi count-program law with the group-balanced identity-free law, and which mismatches did that intervention actually reduce?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "runs/phase1-ugi-group-balanced-program-prior-seed0-h100-v1/2c8c2c26b158de49c072896802166c8d2f9d24a4fc26300bf15a7d90c1a1da44/stages/compare_full/artifacts/result.json",
+      "sha256": "eb9f938927704c1accb0d7d5d91ffd32a3e0845c5a84733401f383aef1c82902"
+    }
+  },
+  "arms": {
+    "occurrence_weighted": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_group_balanced_program_prior_realism_gap_attribution_seed0_v1/inputs/occurrence_weighted/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "1463f19085ec4e2c77d3a025d54c20626fec9e32aff1a686c64013d7432ed412"
+      },
+      "method_id": "forge_seed0_occurrence_weighted_measured_program_prior",
+      "seed": 0
+    },
+    "group_balanced": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_group_balanced_program_prior_realism_gap_attribution_seed0_v1/inputs/group_balanced/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "e6594dcd9e1af9a3ca77d20ca84195d4b8b1065f3086f3b3c54405f5c09c7395"
+      },
+      "method_id": "forge_seed0_group_balanced_measured_program_prior",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "occurrence_weighted",
+  "expected_attempts": 3072,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a seed-0 train-fold-only diagnostic and is not an across-training-seed or held-out model claim.",
+    "Signed descriptor shifts diagnose distributional mismatch; they are not biological activity, formulation, delivery, synthesis-success, or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls, or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

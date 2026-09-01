@@ -61,6 +61,42 @@ def build_synthesis_program_flow(
                 model_config.get("role_morphology_conditioning", False)
             ),
             specialist_adapter_dim=int(model_config.get("specialist_adapter_dim", 0)),
+            chemistry_specialist_adapter_dim=int(
+                model_config.get("chemistry_specialist_adapter_dim", 0)
+            ),
+            chemistry_specialist_program_index=(
+                None
+                if model_config.get("chemistry_specialist_program_index") is None
+                else int(model_config["chemistry_specialist_program_index"])
+            ),
+            contextual_chemistry_layers=int(model_config.get("contextual_chemistry_layers", 0)),
+            contextual_chemistry_adapter_dim=int(
+                model_config.get("contextual_chemistry_adapter_dim", 0)
+            ),
+            contextual_chemistry_program_index=(
+                None
+                if model_config.get("contextual_chemistry_program_index") is None
+                else int(model_config["contextual_chemistry_program_index"])
+            ),
+            contextual_chemistry_degree_buckets=int(
+                model_config.get("contextual_chemistry_degree_buckets", 8)
+            ),
+            role_local_decoder_adapter_dim=int(
+                model_config.get("role_local_decoder_adapter_dim", 0)
+            ),
+            role_local_decoder_program_index=(
+                None
+                if model_config.get("role_local_decoder_program_index") is None
+                else int(model_config["role_local_decoder_program_index"])
+            ),
+            structured_topology_adapter_dim=int(
+                model_config.get("structured_topology_adapter_dim", 0)
+            ),
+            structured_topology_program_index=(
+                None
+                if model_config.get("structured_topology_program_index") is None
+                else int(model_config["structured_topology_program_index"])
+            ),
             potency_adapter_dim=int(model_config.get("potency_adapter_dim", 0)),
             potency_condition_dim=int(model_config.get("potency_condition_dim", 32)),
             maximum_children=int(model_config.get("maximum_children", 0)),
@@ -232,6 +268,24 @@ def synthesis_program_topology_conditioned_forward(
     )
 
 
+def synthesis_program_chemistry_conditioned_forward(
+    model: Any,
+    clean: Mapping[str, Any],
+    node_marginal: Any,
+    bond_marginal: Any,
+    t: Any,
+    generator: Any,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Noise chemistry once and predict it while holding target topology fixed.
+
+    This is the efficient fine-tuning primitive for chemistry-only specialists.  Unlike the paired
+    joint-training helper, it does not compute an unused noisy-topology forward pass.
+    """
+
+    noisy = noise_synthesis_program_batch(clean, node_marginal, bond_marginal, t, generator)
+    return synthesis_program_topology_conditioned_forward(model, clean, noisy, t), noisy
+
+
 def synthesis_program_paired_topology_forward(
     model: Any,
     clean: Mapping[str, Any],
@@ -387,6 +441,7 @@ __all__ = [
     "move_tensors",
     "synthesis_program_fixed_state_exact",
     "synthesis_program_fixed_state_exact_tensor",
+    "synthesis_program_chemistry_conditioned_forward",
     "synthesis_program_forward",
     "synthesis_program_paired_topology_forward",
     "synthesis_program_forward_loss",

@@ -347,6 +347,299 @@ if nn is not None:
         def forward(self, hidden: Any) -> Any:
             return self.adapter(hidden)
 
+    class _ZeroInitializedContextualChemistryLayer(nn.Module):
+        """Chemistry-only local graph refinement that starts as an exact identity delta."""
+
+        def __init__(
+            self,
+            *,
+            hidden_dim: int,
+            adapter_dim: int,
+            role_states: int,
+            core_states: int,
+            bond_classes: int,
+            degree_buckets: int,
+            dropout: float,
+        ) -> None:
+            super().__init__()
+            if adapter_dim < 1 or degree_buckets < 2:
+                raise ReactionProgramTransformerError("contextual chemistry support is invalid")
+            self.degree_buckets = degree_buckets
+            self.node_input = nn.Linear(hidden_dim, adapter_dim)
+            self.neighbor_input = nn.Linear(hidden_dim, adapter_dim)
+            self.role = nn.Embedding(role_states, adapter_dim)
+            self.core = nn.Embedding(core_states, adapter_dim)
+            self.bond = nn.Embedding(bond_classes, adapter_dim)
+            self.degree = nn.Embedding(degree_buckets, adapter_dim)
+            self.norm = nn.LayerNorm(adapter_dim)
+            self.ffn = nn.Sequential(
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(adapter_dim, adapter_dim),
+                nn.GELU(),
+                nn.Dropout(dropout),
+            )
+            self.output = nn.Linear(adapter_dim, hidden_dim)
+            nn.init.zeros_(self.output.weight)
+            nn.init.zeros_(self.output.bias)
+
+        def forward(
+            self,
+            hidden: Any,
+            *,
+            parents: Any,
+            parent_bonds: Any,
+            closure_left: Any,
+            closure_right: Any,
+            closure_bonds: Any,
+            node_mask: Any,
+            child_mask: Any,
+            closure_mask: Any,
+            role_states: Any,
+            core_position_states: Any,
+        ) -> Any:
+            """Aggregate typed one-hop tree and closure context without changing topology."""
+
+            batch, nodes, _ = hidden.shape
+            adapter_dim = self.node_input.out_features
+            projected = self.neighbor_input(hidden)
+            aggregate = hidden.new_zeros((batch, nodes, adapter_dim))
+            degree = parents.new_zeros((batch, nodes))
+
+            parent_index = parents.clamp(min=0, max=nodes - 1)
+            gather_index = parent_index[:, :, None].expand(-1, -1, adapter_dim)
+            parent_features = torch.gather(projected, 1, gather_index)
+            tree_bond = self.bond(parent_bonds)
+            child_weight = child_mask[:, :, None].to(hidden.dtype)
+            aggregate += (parent_features + tree_bond) * child_weight
+            aggregate.scatter_add_(
+                1,
+                gather_index,
+                (projected + tree_bond) * child_weight,
+            )
+            degree += child_mask.to(degree.dtype)
+            degree.scatter_add_(1, parent_index, child_mask.to(degree.dtype))
+
+            closure_index_left = closure_left.clamp(min=0, max=nodes - 1)
+            closure_index_right = closure_right.clamp(min=0, max=nodes - 1)
+            left_gather = closure_index_left[:, :, None].expand(-1, -1, adapter_dim)
+            right_gather = closure_index_right[:, :, None].expand(-1, -1, adapter_dim)
+            left_features = torch.gather(projected, 1, left_gather)
+            right_features = torch.gather(projected, 1, right_gather)
+            closure_bond = self.bond(closure_bonds)
+            closure_weight = closure_mask[:, :, None].to(hidden.dtype)
+            aggregate.scatter_add_(
+                1,
+                left_gather,
+                (right_features + closure_bond) * closure_weight,
+            )
+            aggregate.scatter_add_(
+                1,
+                right_gather,
+                (left_features + closure_bond) * closure_weight,
+            )
+            closure_degree = closure_mask.to(degree.dtype)
+            degree.scatter_add_(1, closure_index_left, closure_degree)
+            degree.scatter_add_(1, closure_index_right, closure_degree)
+
+            normalized_neighbors = aggregate / degree.clamp(min=1)[:, :, None]
+            degree_state = degree.clamp(max=self.degree_buckets - 1)
+            context = (
+                self.node_input(hidden)
+                + normalized_neighbors
+                + self.role(role_states)
+                + self.core(core_position_states)
+                + self.degree(degree_state)
+            )
+            update = self.output(self.ffn(self.norm(context)))
+            return update * node_mask[:, :, None]
+
+    class _ZeroInitializedContextualClosureChemistryLayer(nn.Module):
+        """Closure-bond refinement driven by the learned endpoint chemistry stream."""
+
+        def __init__(self, hidden_dim: int, adapter_dim: int, dropout: float) -> None:
+            super().__init__()
+            if adapter_dim < 1:
+                raise ReactionProgramTransformerError(
+                    "contextual closure chemistry support is invalid"
+                )
+            self.input = nn.Linear(3 * hidden_dim, adapter_dim)
+            self.ffn = nn.Sequential(
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(adapter_dim, adapter_dim),
+                nn.GELU(),
+                nn.Dropout(dropout),
+            )
+            self.output = nn.Linear(adapter_dim, hidden_dim)
+            nn.init.zeros_(self.output.weight)
+            nn.init.zeros_(self.output.bias)
+
+        def forward(
+            self,
+            closure_hidden: Any,
+            left_hidden: Any,
+            right_hidden: Any,
+            *,
+            closure_mask: Any,
+        ) -> Any:
+            context = torch.cat((closure_hidden, left_hidden, right_hidden), dim=-1)
+            update = self.output(self.ffn(self.input(context)))
+            return update * closure_mask[:, :, None]
+
+    class _ZeroInitializedRoleLocalTreeDecoder(nn.Module):
+        """Role-specific tree refinement with an explicit cross-role communication bottleneck.
+
+        The shared Transformer remains the whole-product coordinator.  This decoder pools each
+        precursor-derived exterior, lets the role summaries attend to one another, and then applies
+        a distinct parent/child-aware residual network to every semantic role.  Its terminal
+        projections are zero initialized, so attaching it reproduces an authenticated shared
+        checkpoint exactly before fine-tuning.
+        """
+
+        def __init__(
+            self,
+            *,
+            hidden_dim: int,
+            adapter_dim: int,
+            role_states: int,
+            heads: int,
+            dropout: float,
+        ) -> None:
+            super().__init__()
+            if adapter_dim < 1 or role_states < 2:
+                raise ReactionProgramTransformerError("role-local tree decoder support is invalid")
+            self.role_states = role_states
+            self.role_embedding = nn.Embedding(role_states, hidden_dim)
+            self.role_norm = nn.LayerNorm(hidden_dim)
+            self.cross_role_attention = _MaskedMultiheadAttention(
+                hidden_dim,
+                heads,
+                dropout,
+            )
+            self.role_decoders = nn.ModuleList(
+                nn.Sequential(
+                    nn.Linear(4 * hidden_dim, adapter_dim),
+                    nn.GELU(),
+                    nn.Dropout(dropout),
+                    nn.Linear(adapter_dim, hidden_dim),
+                )
+                for _ in range(role_states)
+            )
+            for decoder in self.role_decoders:
+                nn.init.zeros_(decoder[-1].weight)
+                nn.init.zeros_(decoder[-1].bias)
+
+        def forward(
+            self,
+            hidden: Any,
+            *,
+            parents: Any,
+            node_mask: Any,
+            child_mask: Any,
+            role_states: Any,
+            core_position_states: Any,
+            active: Any,
+        ) -> Any:
+            batch, nodes, hidden_dim = hidden.shape
+            if (
+                parents.shape != (batch, nodes)
+                or node_mask.shape != (batch, nodes)
+                or child_mask.shape != (batch, nodes)
+                or role_states.shape != (batch, nodes)
+                or core_position_states.shape != (batch, nodes)
+                or active.shape != (batch,)
+            ):
+                raise ReactionProgramTransformerError(
+                    "role-local tree decoder tensor shapes disagree"
+                )
+            exterior_mask = node_mask & (core_position_states == 1) & (role_states > 0)
+            role_ids = torch.arange(self.role_states, device=hidden.device)
+            membership = exterior_mask[:, :, None] & (role_states[:, :, None] == role_ids)
+            present = membership.any(dim=1)
+            counts = membership.sum(dim=1).clamp(min=1).to(hidden.dtype)
+            summaries = (
+                torch.einsum(
+                    "bnr,bnd->brd",
+                    membership.to(hidden.dtype),
+                    hidden,
+                )
+                / counts[:, :, None]
+            )
+            summaries = summaries + self.role_embedding(role_ids)[None]
+            attended = self.cross_role_attention(
+                self.role_norm(summaries),
+                summaries,
+                query_mask=present,
+                memory_mask=present,
+            )
+            role_context = summaries + attended
+
+            parent_hidden = _gather_training_nodes(hidden, parents)
+            parent_indices = parents.clamp(min=0, max=nodes - 1)
+            gather_indices = parent_indices[:, :, None].expand(-1, -1, hidden_dim)
+            child_sum = hidden.new_zeros(hidden.shape)
+            child_sum.scatter_add_(
+                1,
+                gather_indices,
+                hidden * child_mask[:, :, None].to(hidden.dtype),
+            )
+            child_count = hidden.new_zeros((batch, nodes))
+            child_count.scatter_add_(
+                1,
+                parent_indices,
+                child_mask.to(hidden.dtype),
+            )
+            child_mean = child_sum / child_count.clamp(min=1)[:, :, None]
+
+            update = hidden.new_zeros(hidden.shape)
+            for role_index in range(1, self.role_states):
+                role_mask = exterior_mask & (role_states == role_index)
+                context = role_context[:, role_index, :][:, None].expand(-1, nodes, -1)
+                features = torch.cat((hidden, parent_hidden, child_mean, context), dim=-1)
+                candidate = self.role_decoders[role_index](features)
+                update = torch.where(role_mask[:, :, None], candidate, update)
+            return update * active[:, None, None].to(hidden.dtype)
+
+    class _ZeroInitializedStructuredTopologyHead(nn.Module):
+        """Residual topology scores consumed only through the exact Ugi grammar.
+
+        The shared Transformer remains the source of node context.  This small head learns how to
+        rank complete role-local topology decisions while the downstream decoder enforces node,
+        junction, attachment, cycle and branch-run support exactly.  Zero-initialized terminal
+        projections make attaching the head an exact identity operation before specialization.
+        """
+
+        def __init__(
+            self,
+            *,
+            hidden_dim: int,
+            adapter_dim: int,
+            maximum_children: int,
+            maximum_closures: int,
+        ) -> None:
+            super().__init__()
+            if adapter_dim < 1 or maximum_children < 1 or maximum_closures < 1:
+                raise ReactionProgramTransformerError(
+                    "structured topology-head dimensions are invalid"
+                )
+            self.norm = nn.LayerNorm(hidden_dim)
+            self.input = nn.Linear(hidden_dim, adapter_dim)
+            self.offspring = nn.Linear(adapter_dim, maximum_children + 1)
+            self.closure_left = nn.Linear(adapter_dim, maximum_closures)
+            self.closure_right = nn.Linear(adapter_dim, maximum_closures)
+            for output in (self.offspring, self.closure_left, self.closure_right):
+                nn.init.zeros_(output.weight)
+                nn.init.zeros_(output.bias)
+
+        def forward(self, hidden: Any) -> tuple[Any, Any, Any]:
+            features = functional.gelu(self.input(self.norm(hidden)))
+            return (
+                self.offspring(features),
+                self.closure_left(features).transpose(1, 2),
+                self.closure_right(features).transpose(1, 2),
+            )
+
     class _ZeroInitializedPotencyAdapter(nn.Module):
         """Percentile- and time-conditioned residual that begins as an exact zero map."""
 
@@ -605,6 +898,16 @@ if nn is not None:
             repeat_group_conditioning: bool = False,
             role_morphology_conditioning: bool = False,
             specialist_adapter_dim: int = 0,
+            chemistry_specialist_adapter_dim: int = 0,
+            chemistry_specialist_program_index: int | None = None,
+            contextual_chemistry_layers: int = 0,
+            contextual_chemistry_adapter_dim: int = 0,
+            contextual_chemistry_program_index: int | None = None,
+            contextual_chemistry_degree_buckets: int = 8,
+            role_local_decoder_adapter_dim: int = 0,
+            role_local_decoder_program_index: int | None = None,
+            structured_topology_adapter_dim: int = 0,
+            structured_topology_program_index: int | None = None,
             potency_adapter_dim: int = 0,
             potency_condition_dim: int = 32,
             maximum_children: int = 0,
@@ -626,6 +929,16 @@ if nn is not None:
             self.repeat_group_conditioning = repeat_group_conditioning
             self.role_morphology_conditioning = role_morphology_conditioning
             self.specialist_adapter_dim = specialist_adapter_dim
+            self.chemistry_specialist_adapter_dim = chemistry_specialist_adapter_dim
+            self.chemistry_specialist_program_index = chemistry_specialist_program_index
+            self.contextual_chemistry_layer_count = contextual_chemistry_layers
+            self.contextual_chemistry_adapter_dim = contextual_chemistry_adapter_dim
+            self.contextual_chemistry_program_index = contextual_chemistry_program_index
+            self.contextual_chemistry_degree_buckets = contextual_chemistry_degree_buckets
+            self.role_local_decoder_adapter_dim = role_local_decoder_adapter_dim
+            self.role_local_decoder_program_index = role_local_decoder_program_index
+            self.structured_topology_adapter_dim = structured_topology_adapter_dim
+            self.structured_topology_program_index = structured_topology_program_index
             self.potency_adapter_dim = potency_adapter_dim
             self.potency_condition_dim = potency_condition_dim
             self.potency_policy: PotencyAdapterPolicy | None = None
@@ -634,6 +947,72 @@ if nn is not None:
             if specialist_adapter_dim < 0:
                 raise ReactionProgramTransformerError(
                     "specialist adapter dimension cannot be negative"
+                )
+            if chemistry_specialist_adapter_dim < 0:
+                raise ReactionProgramTransformerError(
+                    "chemistry specialist adapter dimension cannot be negative"
+                )
+            if (chemistry_specialist_adapter_dim > 0) != (
+                chemistry_specialist_program_index is not None
+            ):
+                raise ReactionProgramTransformerError(
+                    "chemistry specialist dimension and target program must be declared together"
+                )
+            if chemistry_specialist_program_index is not None and not (
+                1 <= chemistry_specialist_program_index < len(vocabulary.program_states)
+            ):
+                raise ReactionProgramTransformerError(
+                    "chemistry specialist target program index is outside the vocabulary"
+                )
+            contextual_declared = contextual_chemistry_layers > 0
+            if (
+                contextual_chemistry_layers < 0
+                or contextual_chemistry_adapter_dim < 0
+                or contextual_chemistry_degree_buckets < 2
+                or contextual_declared
+                != (
+                    contextual_chemistry_adapter_dim > 0
+                    and contextual_chemistry_program_index is not None
+                )
+            ):
+                raise ReactionProgramTransformerError(
+                    "contextual chemistry layers, dimension and target must be declared together"
+                )
+            if contextual_chemistry_program_index is not None and not (
+                1 <= contextual_chemistry_program_index < len(vocabulary.program_states)
+            ):
+                raise ReactionProgramTransformerError(
+                    "contextual chemistry target program index is outside the vocabulary"
+                )
+            if role_local_decoder_adapter_dim < 0 or (
+                (role_local_decoder_adapter_dim > 0)
+                != (role_local_decoder_program_index is not None)
+            ):
+                raise ReactionProgramTransformerError(
+                    "role-local decoder dimension and target program must be declared together"
+                )
+            if role_local_decoder_program_index is not None and not (
+                1 <= role_local_decoder_program_index < len(vocabulary.program_states)
+            ):
+                raise ReactionProgramTransformerError(
+                    "role-local decoder target program index is outside the vocabulary"
+                )
+            if structured_topology_adapter_dim < 0 or (
+                (structured_topology_adapter_dim > 0)
+                != (structured_topology_program_index is not None)
+            ):
+                raise ReactionProgramTransformerError(
+                    "structured topology dimension and target program must be declared together"
+                )
+            if structured_topology_program_index is not None and not (
+                1 <= structured_topology_program_index < len(vocabulary.program_states)
+            ):
+                raise ReactionProgramTransformerError(
+                    "structured topology target program index is outside the vocabulary"
+                )
+            if structured_topology_adapter_dim > 0 and maximum_children < 1:
+                raise ReactionProgramTransformerError(
+                    "structured topology requires a child-count support"
                 )
             if potency_adapter_dim < 0 or potency_condition_dim < 1:
                 raise ReactionProgramTransformerError("potency adapter dimensions are invalid")
@@ -727,6 +1106,69 @@ if nn is not None:
             self.closure_output_adapter = (
                 _RoutedAdapter(hidden_dim, expert_count, adapter_dim, dropout)
                 if program_routed_output_heads
+                else None
+            )
+            # These adapters are deliberately downstream of every topology head.  They can refine
+            # atom and bond identities for one chemistry without changing parent pointers, closure
+            # endpoints, child counts, role labels or core labels.  Their terminal projections are
+            # zero initialized, so attaching them is an exact identity operation before training.
+            self.chemistry_specialist_adapter = (
+                _ZeroInitializedSpecialistAdapter(
+                    hidden_dim,
+                    chemistry_specialist_adapter_dim,
+                    dropout,
+                )
+                if chemistry_specialist_adapter_dim > 0
+                else None
+            )
+            self.closure_chemistry_specialist_adapter = (
+                _ZeroInitializedSpecialistAdapter(
+                    hidden_dim,
+                    chemistry_specialist_adapter_dim,
+                    dropout,
+                )
+                if chemistry_specialist_adapter_dim > 0
+                else None
+            )
+            self.contextual_chemistry_layers = nn.ModuleList(
+                _ZeroInitializedContextualChemistryLayer(
+                    hidden_dim=hidden_dim,
+                    adapter_dim=contextual_chemistry_adapter_dim,
+                    role_states=len(vocabulary.role_states),
+                    core_states=len(vocabulary.core_position_states),
+                    bond_classes=bond_classes,
+                    degree_buckets=contextual_chemistry_degree_buckets,
+                    dropout=dropout,
+                )
+                for _ in range(contextual_chemistry_layers)
+            )
+            self.contextual_closure_chemistry_layers = nn.ModuleList(
+                _ZeroInitializedContextualClosureChemistryLayer(
+                    hidden_dim,
+                    contextual_chemistry_adapter_dim,
+                    dropout,
+                )
+                for _ in range(contextual_chemistry_layers)
+            )
+            self.role_local_tree_decoder = (
+                _ZeroInitializedRoleLocalTreeDecoder(
+                    hidden_dim=hidden_dim,
+                    adapter_dim=role_local_decoder_adapter_dim,
+                    role_states=len(vocabulary.role_states),
+                    heads=heads,
+                    dropout=dropout,
+                )
+                if role_local_decoder_adapter_dim > 0
+                else None
+            )
+            self.structured_topology_head = (
+                _ZeroInitializedStructuredTopologyHead(
+                    hidden_dim=hidden_dim,
+                    adapter_dim=structured_topology_adapter_dim,
+                    maximum_children=maximum_children,
+                    maximum_closures=maximum_closures,
+                )
+                if structured_topology_adapter_dim > 0
                 else None
             )
 
@@ -1025,6 +1467,18 @@ if nn is not None:
                     if return_hidden_layers:
                         hidden_layers.append(hidden)
 
+            if self.role_local_tree_decoder is not None:
+                hidden = hidden + self.role_local_tree_decoder(
+                    hidden,
+                    parents=parents,
+                    node_mask=node_mask,
+                    child_mask=child_mask,
+                    role_states=role_states,
+                    core_position_states=core_position_states,
+                    active=program_states == self.role_local_decoder_program_index,
+                )
+                hidden *= node_mask[:, :, None]
+
             chemistry_hidden = hidden
             terminal_expert_weights = None
             if self.terminal_chemistry_adapter is not None:
@@ -1043,6 +1497,35 @@ if nn is not None:
                     weights=program_memory.adapter_weights(self.terminal_chemistry_adapter),
                 )
                 chemistry_hidden = hidden + terminal_update * terminal_mask[:, :, None]
+            if self.chemistry_specialist_adapter is not None:
+                chemistry_update = self.chemistry_specialist_adapter(chemistry_hidden)
+                chemistry_update *= (program_states == self.chemistry_specialist_program_index)[
+                    :, None, None
+                ]
+                chemistry_hidden = chemistry_hidden + chemistry_update
+                chemistry_hidden *= node_mask[:, :, None]
+            if self.contextual_chemistry_layers:
+                contextual_program_mask = (
+                    program_states == self.contextual_chemistry_program_index
+                )[:, None, None]
+                for chemistry_layer in self.contextual_chemistry_layers:
+                    chemistry_update = chemistry_layer(
+                        chemistry_hidden,
+                        parents=parents,
+                        parent_bonds=parent_bonds,
+                        closure_left=closure_left,
+                        closure_right=closure_right,
+                        closure_bonds=closure_bonds,
+                        node_mask=node_mask,
+                        child_mask=child_mask,
+                        closure_mask=closure_mask,
+                        role_states=role_states,
+                        core_position_states=core_position_states,
+                    )
+                    chemistry_hidden = chemistry_hidden + (
+                        chemistry_update * contextual_program_mask
+                    )
+                    chemistry_hidden *= node_mask[:, :, None]
 
             parent_logits = torch.einsum(
                 "bid,bjd->bij", self.state.parent_query(hidden), self.state.parent_key(hidden)
@@ -1089,6 +1572,29 @@ if nn is not None:
                     weights=program_memory.adapter_weights(self.closure_output_adapter),
                 )
                 closure_hidden = closure_hidden + closure_update
+            closure_chemistry_hidden = closure_hidden
+            if self.closure_chemistry_specialist_adapter is not None:
+                closure_update = self.closure_chemistry_specialist_adapter(closure_hidden)
+                closure_update *= (program_states == self.chemistry_specialist_program_index)[
+                    :, None, None
+                ]
+                closure_chemistry_hidden = closure_hidden + closure_update
+            if self.contextual_closure_chemistry_layers:
+                chemistry_left_hidden = _gather_training_nodes(chemistry_hidden, closure_left)
+                chemistry_right_hidden = _gather_training_nodes(chemistry_hidden, closure_right)
+                contextual_program_mask = (
+                    program_states == self.contextual_chemistry_program_index
+                )[:, None, None]
+                for chemistry_layer in self.contextual_closure_chemistry_layers:
+                    closure_update = chemistry_layer(
+                        closure_chemistry_hidden,
+                        chemistry_left_hidden,
+                        chemistry_right_hidden,
+                        closure_mask=closure_mask,
+                    )
+                    closure_chemistry_hidden = closure_chemistry_hidden + (
+                        closure_update * contextual_program_mask
+                    )
             closure_key = self.state.closure_node_key(hidden)
             left_logits = torch.einsum(
                 "bkd,bnd->bkn", self.state.closure_left_query(closure_hidden), closure_key
@@ -1102,7 +1608,7 @@ if nn is not None:
                 "parent_bonds": parent_bond_logits,
                 "closure_left": left_logits,
                 "closure_right": right_logits,
-                "closure_bonds": self.state.closure_bond_output(closure_hidden),
+                "closure_bonds": self.state.closure_bond_output(closure_chemistry_hidden),
                 "node_count": self.state.node_count_logits[None].expand(batch, -1),
                 "closure_count": self.state.closure_count_logits[None].expand(batch, -1),
                 "role_states": self.role_output(hidden),
@@ -1111,6 +1617,24 @@ if nn is not None:
             }
             if self.offspring_output is not None:
                 output["offspring"] = self.offspring_output(hidden)
+            if self.structured_topology_head is not None:
+                if self.offspring_output is None:
+                    raise ReactionProgramTransformerError(
+                        "structured topology head has no base child-count logits"
+                    )
+                offspring_residual, left_residual, right_residual = self.structured_topology_head(
+                    hidden
+                )
+                active = (program_states == self.structured_topology_program_index).to(hidden.dtype)
+                output["structured_offspring"] = output["offspring"] + (
+                    offspring_residual * active[:, None, None]
+                )
+                output["structured_closure_left"] = left_logits + (
+                    left_residual * active[:, None, None]
+                )
+                output["structured_closure_right"] = right_logits + (
+                    right_residual * active[:, None, None]
+                )
             if terminal_expert_weights is not None and closure_expert_weights is not None:
                 output["terminal_chemistry_expert_weights"] = terminal_expert_weights
                 output["closure_output_expert_weights"] = closure_expert_weights

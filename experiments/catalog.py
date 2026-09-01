@@ -128,14 +128,59 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/reaction_specialist_lx_seed0_h100.json"
     ),
     "phase1-reaction-topology-specialist-ugi-h100-preflight-v2": (
-        "experiments/phase1/multireaction/"
-        "reaction_topology_specialist_ugi_h100_preflight_v2.json"
+        "experiments/phase1/multireaction/reaction_topology_specialist_ugi_h100_preflight_v2.json"
     ),
     "phase1-reaction-topology-specialist-ugi-smoke-v2": (
-        "experiments/phase1/multireaction/" "reaction_topology_specialist_ugi_smoke_v2.json"
+        "experiments/phase1/multireaction/reaction_topology_specialist_ugi_smoke_v2.json"
     ),
     "phase1-reaction-topology-specialist-ugi-seed0-h100-v2": (
-        "experiments/phase1/multireaction/" "reaction_topology_specialist_ugi_seed0_h100_v2.json"
+        "experiments/phase1/multireaction/reaction_topology_specialist_ugi_seed0_h100_v2.json"
+    ),
+    "phase1-ugi-chemistry-specialist-seed0-h100-v3": (
+        "experiments/phase1/multireaction/ugi_chemistry_specialist_seed0_h100_v3.json"
+    ),
+    "phase1-ugi-chemistry-specialist-evaluation-recovery-seed0-h100-v4": (
+        "experiments/phase1/multireaction/"
+        "ugi_chemistry_specialist_evaluation_recovery_seed0_h100_v4.json"
+    ),
+    "phase1-ugi-role-chemistry-prior-h100-preflight-v1": (
+        "experiments/phase1/multireaction/ugi_role_chemistry_prior_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-terminal-chemistry-temperature-h100-preflight-v1": (
+        "experiments/phase1/multireaction/ugi_terminal_chemistry_temperature_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-topology-conditioned-chemistry-flow-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_topology_conditioned_chemistry_flow_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-learned-topology-then-chemistry-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_learned_topology_then_chemistry_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-contextual-chemistry-specialist-seed0-h100-v4": (
+        "experiments/phase1/multireaction/ugi_contextual_chemistry_specialist_seed0_h100_v4.json"
+    ),
+    "phase1-ugi-joint-lipid-specialist-seed0-h100-v5": (
+        "experiments/phase1/multireaction/ugi_joint_lipid_specialist_seed0_h100_v5.json"
+    ),
+    "phase1-ugi-role-local-decoder-seed0-h100-v6": (
+        "experiments/phase1/multireaction/ugi_role_local_decoder_seed0_h100_v6.json"
+    ),
+    "phase1-ugi-measured-only-full-model-seed0-h100-v7": (
+        "experiments/phase1/multireaction/ugi_measured_only_full_model_seed0_h100_v7.json"
+    ),
+    "phase1-ugi-structured-topology-specialist-seed0-h100-v8": (
+        "experiments/phase1/multireaction/ugi_structured_topology_specialist_seed0_h100_v8.json"
+    ),
+    "phase1-ugi-group-balanced-program-prior-seed0-h100-v1": (
+        "experiments/phase1/multireaction/" "ugi_group_balanced_program_prior_seed0_h100_v1.json"
+    ),
+    "phase1-ugi-amine-semantic-program-seed0-h100-v1": (
+        "experiments/phase1/multireaction/ugi_amine_semantic_program_seed0_h100_v1.json"
+    ),
+    "phase1-ugi-amine-semantic-joint-support-seed0-h100-v2": (
+        "experiments/phase1/multireaction/"
+        "ugi_amine_semantic_joint_support_seed0_h100_v2.json"
     ),
     "phase1-bl-core-constrained-production-smoke": (
         "experiments/phase1/multireaction/bl_core_constrained_production_smoke.json"
@@ -232,8 +277,7 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/shared_bias_parallel_global_seed0_h100_v2.json"
     ),
     "phase1-shared-bias-parallel-global-seed0-evaluation-h100-v2": (
-        "experiments/phase1/multireaction/"
-        "shared_bias_parallel_global_seed0_evaluation_h100_v2.json"
+        "experiments/phase1/multireaction/shared_bias_parallel_global_seed0_evaluation_h100_v2.json"
     ),
     "phase1-shared-bias-parallel-program-role-seed1-core-saturation-h100-v2": (
         "experiments/phase1/multireaction/"
@@ -253,12 +297,10 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/shared_bias_ugi_only_core_saturation_h100.json"
     ),
     "phase1-shared-bias-program-role-core-saturation-seed1-h100": (
-        "experiments/phase1/multireaction/"
-        "shared_bias_program_role_core_saturation_seed1_h100.json"
+        "experiments/phase1/multireaction/shared_bias_program_role_core_saturation_seed1_h100.json"
     ),
     "phase1-shared-bias-program-role-core-saturation-seed2-h100": (
-        "experiments/phase1/multireaction/"
-        "shared_bias_program_role_core_saturation_seed2_h100.json"
+        "experiments/phase1/multireaction/shared_bias_program_role_core_saturation_seed2_h100.json"
     ),
     "phase1-transformer-mechanism-ablation-core-saturation-seed0-h100": (
         "experiments/phase1/multireaction/"
@@ -273,8 +315,7 @@ SPECIFICATIONS = {
         "transformer_mechanism_ablation_core_saturation_seed2_h100.json"
     ),
     "phase1-transformer-production-ablation-core-saturation-h100": (
-        "experiments/phase1/multireaction/"
-        "transformer_production_ablation_core_saturation_h100.json"
+        "experiments/phase1/multireaction/transformer_production_ablation_core_saturation_h100.json"
     ),
     "phase1-transformer-production-ablation-core-saturation-seed0-h100": (
         "experiments/phase1/multireaction/"
@@ -316,7 +357,7 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/shared_production_training.json"
     ),
     "phase1-shared-synthesis-program-production-accelerator-benchmark-a100-40gb": (
-        "experiments/phase1/multireaction/" "shared_production_accelerator_benchmark_a100_40gb.json"
+        "experiments/phase1/multireaction/shared_production_accelerator_benchmark_a100_40gb.json"
     ),
     "phase1-shared-synthesis-program-production-accelerator-benchmark-l4": (
         "experiments/phase1/multireaction/shared_production_accelerator_benchmark_l4.json"
@@ -346,7 +387,7 @@ SPECIFICATIONS = {
         "experiments/phase1/product_l1/ugi_tree_transformer_development_h100_v1.json"
     ),
     "phase1-ugi-tree-transformer-calibration-h100-preflight-v1": (
-        "experiments/phase1/product_l1/" "ugi_tree_transformer_calibration_h100_preflight_v1.json"
+        "experiments/phase1/product_l1/ugi_tree_transformer_calibration_h100_preflight_v1.json"
     ),
     "phase1-ugi-tree-calibration-dense-h100-v1": (
         "experiments/phase1/product_l1/ugi_tree_calibration_dense_h100_v1.json"
@@ -364,7 +405,7 @@ SPECIFICATIONS = {
         "experiments/phase1/product_l1/ugi_v0_calibration_h100_v1.json"
     ),
     "phase1-ugi-v0-current-program-comparison-h100-preflight-v1": (
-        "experiments/phase1/product_l1/" "ugi_v0_current_program_comparison_h100_preflight_v1.json"
+        "experiments/phase1/product_l1/ugi_v0_current_program_comparison_h100_preflight_v1.json"
     ),
     "phase1-ugi-v0-current-program-comparison-h100-v1": (
         "experiments/phase1/product_l1/ugi_v0_current_program_comparison_h100_v1.json"

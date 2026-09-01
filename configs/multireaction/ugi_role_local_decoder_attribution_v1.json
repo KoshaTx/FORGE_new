@@ -1,0 +1,38 @@
+{
+  "schema_version": "forge.ugi_role_local_decoder_attribution_config.v1",
+  "scientific_question": "For the authenticated shared Ugi Transformer, which precursor roles lose clean-state reconstruction because topology is noisy, and which errors remain when exact target topology is teacher forced?",
+  "target_program": "ugi_3cr_agile",
+  "seed": 2026083104,
+  "records": 96,
+  "batch_size": 16,
+  "flow_times": [0.2, 0.5, 0.8],
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "nonclaims": [
+    "This is a deterministic train-fold attribution diagnostic, not a held-out model-quality result.",
+    "Teacher forcing measures conditional reconstruction and is not a generation procedure.",
+    "The audit performs no training, molecular generation, repair, retry, routing, oracle calls or candidate selection."
+  ]
+}

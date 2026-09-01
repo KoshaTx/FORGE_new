@@ -1,0 +1,72 @@
+{
+  "schema_version": "forge.ugi_development_lipid_realism_config.v1",
+  "scientific_question": "Do exact Ugi outputs preserve measured train-fold head and tail morphology under a group-balanced, role-aware development assay?",
+  "inputs": {
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_ugi_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "reference": {
+    "kind": "source_adjudicated_measured_ugi_train_group_balanced",
+    "rows_per_group_per_partition": 2,
+    "split_seed": 20260831
+  },
+  "policy": {
+    "allowed_elements": ["C", "N", "O", "P", "S"],
+    "maximum_heavy_atoms": 194,
+    "train_reference_limit": 128,
+    "heldout_reference_limit": 128,
+    "selection_seed": 20260831,
+    "manifold_neighbors": 5,
+    "fingerprint_radius": 2,
+    "fingerprint_bits": 2048,
+    "distance_chunk_size": 128,
+    "internal_diversity_limit": 1024,
+    "c2st_folds": 5,
+    "c2st_minimum_rows_per_class": 20,
+    "c2st_maximum_rows_per_class": 128,
+    "c2st_max_iterations": 200,
+    "c2st_seed": 20260831
+  },
+  "metrics": {
+    "primary": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "secondary": [
+      "role_grouped_classifier_two_sample_auc",
+      "role_nearest_reference_distance",
+      "connected_fraction_per_attempt",
+      "global_normalized_descriptor_wasserstein",
+      "nearest_reference_tanimoto"
+    ],
+    "attempt_denominator_includes_invalid_failed_duplicate_and_out_of_support": true,
+    "fingerprint_and_descriptor_manifolds_reported_separately": true,
+    "no_result_selected_thresholds": true,
+    "qed_excluded": true
+  },
+  "role_metrics": {
+    "exact_trace_policy": "unambiguous_verified_exact_l1_only",
+    "continuous_metrics": [
+      "normalized_wasserstein",
+      "energy_distance",
+      "rbf_mmd2",
+      "nearest_reference_distance"
+    ],
+    "sanity_shift_standardized_units": 4.0,
+    "heldout_product_access": false
+  },
+  "nonclaims": [
+    "This is a train-fold-only development diagnostic and is not a held-out model claim.",
+    "Measured calibration and held-out product structures are not accessed by this assessment.",
+    "Role-distribution proximity is not ionization, formulation, delivery, biological activity or synthesis success.",
+    "C2ST is a secondary classifier diagnostic and is not the realism promotion objective.",
+    "This assessment performs no generation, training, route, oracle, repair, retry or candidate-selection calls."
+  ]
+}

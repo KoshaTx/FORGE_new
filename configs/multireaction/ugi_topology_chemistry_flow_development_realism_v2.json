@@ -1,0 +1,37 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v1",
+  "scientific_question": "Do topology-conditioned chemistry-flow updates improve measured Ugi role morphology relative to the same contextual specialist decoded by argmax?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v2.json",
+      "sha256": "949b4ac52073ee3678ae219c9add44f3a90e12797ec9a0acb50528541e784503"
+    },
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-topology-conditioned-chemistry-flow-h100-preflight-v1/1a0090b399c9cc05de085b47e8b875432c13cca2ab85f2f5708e1d44c4326cce/stages/compare/artifacts/comparison_details.tar",
+      "sha256": "97a3a616e0235254c026a2c0ae11315f28e72436337983b3b116ba239163d26a"
+    }
+  },
+  "arms": {
+    "argmax": {
+      "archive_member": "argmax/assessment/attempts.jsonl.gz",
+      "method_id": "forge_ugi_contextual_specialist_argmax",
+      "seed": 0
+    },
+    "chemistry_flow_8": {
+      "archive_member": "chemistry_flow_8/assessment/attempts.jsonl.gz",
+      "method_id": "forge_ugi_contextual_specialist_chemistry_flow_8",
+      "seed": 0
+    },
+    "chemistry_flow_16": {
+      "archive_member": "chemistry_flow_16/assessment/attempts.jsonl.gz",
+      "method_id": "forge_ugi_contextual_specialist_chemistry_flow_16",
+      "seed": 0
+    }
+  },
+  "expected_attempts": 256,
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development comparison, not a held-out model claim.",
+    "The assay performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "No intervention is promoted from this diagnostic without a separately frozen production comparison."
+  ]
+}

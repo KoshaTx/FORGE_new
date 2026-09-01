@@ -222,6 +222,22 @@ def _component_morphology(
     heavy = molecule.GetNumHeavyAtoms()
     carbon = sum(atom.GetAtomicNum() == 6 for atom in atoms)
     hetero = heavy - carbon
+    support_heavy = heavy
+    support_hetero = hetero
+    support_count_convention = "complete_precursor"
+    if role == "oxoester_aldehyde_body_tail":
+        # The support policy was fitted to product-origin atoms. Exact inverse Ugi decomposition
+        # restores one aldehyde oxygen absent from that representation, so compare like with like
+        # while retaining the complete precursor counts in the audit ledger.
+        if support_heavy < 1 or support_hetero < 1:
+            raise UgiV0TransformerAssessmentError(
+                "exact aldehyde precursor lacks its inverse-transform-restored oxygen"
+            )
+        support_heavy -= 1
+        support_hetero -= 1
+        support_count_convention = (
+            "product_origin_excludes_inverse_transform_restored_aldehyde_oxygen"
+        )
     bounds = support.component_support_bounds(UGI_PROGRAM_ID, role)
     cycles = tuple(molecule.GetRingInfo().AtomRings())
     unsupported_cycles = sum(
@@ -242,18 +258,21 @@ def _component_morphology(
         "heavy_atoms": heavy,
         "carbon_atoms": carbon,
         "heteroatoms": hetero,
+        "support_heavy_atoms": support_heavy,
+        "support_heteroatoms": support_hetero,
+        "support_count_convention": support_count_convention,
         "branch_atoms": branch_atoms,
         "rings": len(cycles),
         "oxygen_containing_rings": oxygen_rings,
         "unsupported_role_ring_signatures": unsupported_cycles,
         "within_observed_hard_bounds": bounds.contains(
-            heavy_atoms=heavy,
+            heavy_atoms=support_heavy,
             carbon_atoms=carbon,
-            heteroatoms=hetero,
+            heteroatoms=support_hetero,
         ),
         "within_training_q01_q99_diagnostic": (
             bounds.carbon_atoms_q01 <= carbon <= bounds.carbon_atoms_q99
-            and bounds.heteroatoms_q01 <= hetero <= bounds.heteroatoms_q99
+            and bounds.heteroatoms_q01 <= support_hetero <= bounds.heteroatoms_q99
         ),
     }
 
@@ -478,6 +497,7 @@ def selected_ugi_metrics(
     local_assessment = local["assessment"]
     manifold = realism_assessment["empirical_lipid_manifold"]
     molecular = realism_assessment["molecular_output"]
+    morphology_fractions = morphology.get("fractions_per_attempt") or {}
     return {
         "valid_fraction_per_attempt": float(common_metrics["valid_fraction"]),
         "exact_l1_yield_per_attempt": float(common_metrics["exact_l1_yield_per_attempt"]),
@@ -500,12 +520,8 @@ def selected_ugi_metrics(
         "whole_product_novel_to_train_fraction": optional_float(
             common_metrics["whole_product_novel_to_train_fraction"]
         ),
-        "component_novelty_fraction": optional_float(
-            common_metrics["component_novelty_fraction"]
-        ),
-        "effective_component_count": optional_float(
-            common_metrics["effective_component_count"]
-        ),
+        "component_novelty_fraction": optional_float(common_metrics["component_novelty_fraction"]),
+        "effective_component_count": optional_float(common_metrics["effective_component_count"]),
         "held_component_exact_l1_products_per_1000_attempts": float(
             common_metrics["held_component_exact_l1_products_per_1000_attempts"]
         ),
@@ -532,21 +548,19 @@ def selected_ugi_metrics(
             molecular["mean_pairwise_ecfp4_distance_among_unique"]
         ),
         "role_supported_exact_l1_yield_per_attempt": float(
-            morphology["fractions_per_attempt"]["exact_l1_products_with_any_fully_supported_trace"]
+            morphology_fractions.get("exact_l1_products_with_any_fully_supported_trace", 0.0)
         ),
         "tail_supported_exact_l1_yield_per_attempt": float(
-            morphology["fractions_per_attempt"]["exact_l1_products_with_any_supported_tail_trace"]
+            morphology_fractions.get("exact_l1_products_with_any_supported_tail_trace", 0.0)
         ),
         "small_oxygen_ring_product_fraction_per_attempt": float(
-            morphology["fractions_per_attempt"].get(
-                "products_with_three_or_four_membered_oxygen_rings", 0.0
-            )
+            morphology_fractions.get("products_with_three_or_four_membered_oxygen_rings", 0.0)
         ),
         "oxygen_oxygen_bond_product_fraction_per_attempt": float(
-            morphology["fractions_per_attempt"].get("products_with_oxygen_oxygen_bonds", 0.0)
+            morphology_fractions.get("products_with_oxygen_oxygen_bonds", 0.0)
         ),
         "nitrogen_oxygen_bond_product_fraction_per_attempt": float(
-            morphology["fractions_per_attempt"].get("products_with_nitrogen_oxygen_bonds", 0.0)
+            morphology_fractions.get("products_with_nitrogen_oxygen_bonds", 0.0)
         ),
     }
 

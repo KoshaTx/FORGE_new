@@ -48,7 +48,7 @@ def test_role_morphology_uses_exact_l1_components(tmp_path: Path) -> None:
             {
                 "components_by_role": {
                     "amine_head": "NCCN(C)C",
-                    "oxoester_aldehyde_body_tail": "CCCCCCCC(=O)CCCC=O",
+                    "oxoester_aldehyde_body_tail": "CCCCCCCC(=O)OCCCC=O",
                     "isocyanide_tail": "[C-]#[N+]CCCCCCCC",
                 }
             }
@@ -74,6 +74,12 @@ def test_role_morphology_uses_exact_l1_components(tmp_path: Path) -> None:
     assert result["counts"]["exact_l1_products_with_any_supported_tail_trace"] == 1
     assert result["precision_among_exact_l1"]["any_supported_tail_trace"] == 1.0
     assert result["training_fold_only_policy"] is True
+    aldehyde = rows[0]["trace_assessments"][0]["components_by_role"]["oxoester_aldehyde_body_tail"]
+    assert aldehyde["heteroatoms"] == 3
+    assert aldehyde["support_heteroatoms"] == 2
+    assert aldehyde["support_count_convention"] == (
+        "product_origin_excludes_inverse_transform_restored_aldehyde_oxygen"
+    )
 
 
 def test_selected_metrics_expose_the_frozen_open_ended_novel_primary_per_attempt() -> None:
@@ -115,10 +121,7 @@ def test_selected_metrics_expose_the_frozen_open_ended_novel_primary_per_attempt
     metrics = selected_ugi_metrics(common, realism, local, morphology)
 
     assert metrics["unique_whole_product_novel_exact_l1_products_per_attempt"] == 0.25
-    assert (
-        metrics["unique_open_ended_whole_product_novel_exact_l1_products_per_attempt"]
-        == 0.125
-    )
+    assert metrics["unique_open_ended_whole_product_novel_exact_l1_products_per_attempt"] == 0.125
 
 
 def test_selected_metrics_preserve_unavailable_small_sample_diagnostics() -> None:

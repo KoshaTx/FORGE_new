@@ -1,0 +1,78 @@
+{
+  "schema_version": "forge.ugi_topology_conditioned_chemistry_flow_comparison_config.v1",
+  "inputs": {
+    "base_comparison_config": {
+      "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_v4.json",
+      "sha256": "f36f22876c1339ecf2ad0c9ddd8921b08962364e7d1579515fb1224b882106b3"
+    },
+    "ugi_matched_realism_config": {
+      "path": "configs/multireaction/ugi_matched_lipid_realism_calibration_v1.json",
+      "sha256": "48cdfff5be992ddbb680b6a5d3b843d1479e9b847e710ec7842bac132f128058"
+    },
+    "specialist_checkpoint": {
+      "path": "runs/phase1-ugi-contextual-chemistry-specialist-seed0-h100-v4/40212e844e74b52aca1b6b67ff50c6d99ad2843d89af296843a235800f28ec8b/stages/specialize_ugi/artifacts/specialist_checkpoint.pt",
+      "sha256": "0bf1d594fe3a17ca2b31762e88fac896ba674f30cd05022952a75cf6bba34eec"
+    },
+    "specialist_result": {
+      "path": "runs/phase1-ugi-contextual-chemistry-specialist-seed0-h100-v4/40212e844e74b52aca1b6b67ff50c6d99ad2843d89af296843a235800f28ec8b/stages/specialize_ugi/artifacts/result.json",
+      "sha256": "e6086dd0e3e1540f2d82f02c945e19061ddb9fa9995d03e6034c5ae4080ad3e0"
+    }
+  },
+  "profiles": {
+    "smoke": {
+      "device": "cpu",
+      "program_count": 64,
+      "sample_steps": 2,
+      "batch_size": 16,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "chemistry_flow_seed": 2026083104,
+      "chemistry_flow_steps": [8, 16]
+    },
+    "h100_preflight": {
+      "device": "cuda",
+      "program_count": 256,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "chemistry_flow_seed": 2026083104,
+      "chemistry_flow_steps": [8, 16]
+    },
+    "full": {
+      "device": "cuda",
+      "program_count": 3072,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "layout_seed": 2026083101,
+      "flow_seed": 2026083102,
+      "chemistry_flow_seed": 2026083104,
+      "chemistry_flow_steps": [8, 16]
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "heldout_reference_access": false,
+    "method_blind_assessment": true,
+    "paired_program_order": true,
+    "paired_flow_stream": true,
+    "paired_chemistry_source_stream": true,
+    "repairs_or_retries": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "selection_gate": {
+    "exact_l1_noninferiority_margin": 0.02,
+    "local_support_noninferiority_margin": 0.02,
+    "realism_c2st_required_reduction": 0.02,
+    "unique_exact_l1_required_increase": 0.10,
+    "validity_noninferiority_margin": 0.02
+  },
+  "nonclaims": [
+    "This seed-0 sampler comparison uses one frozen trained model and is not independent retraining replication.",
+    "The calibration reference contains only 32 source-adjudicated measured Ugi lipids and cannot support a final heldout claim.",
+    "The intervention changes only the sampling factorization after topology construction; it performs no training.",
+    "No molecule is repaired, retried, routed, ranked or selected as a candidate."
+  ]
+}

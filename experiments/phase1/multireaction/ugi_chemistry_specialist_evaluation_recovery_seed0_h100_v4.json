@@ -1,0 +1,210 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "phase1-ugi-chemistry-specialist-evaluation-recovery-seed0-h100-v4",
+  "description": "Preflight and evaluate the frozen completed Ugi chemistry specialist against its base on one paired 3,072-program measured-joint morphology draw, with zero retraining.",
+  "root_seed": 20260830,
+  "profiles": [
+    "full"
+  ],
+  "replicates": {
+    "full": 1
+  },
+  "stages": [
+    {
+      "id": "comparison_preflight",
+      "implementation": "evaluate.ugi.chemistry-specialist-base-comparison-preflight-recovery.v4",
+      "needs": [],
+      "config": {
+        "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_recovery_v4.json",
+        "sha256": "289ce5f8501dcb364404e2e6861bb08db47943894744649f0e57a6c01e7c8fbf"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+          "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+        },
+        "base_training_result": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+          "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+        },
+        "base_design": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+          "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+          "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+        },
+        "qualified_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "role_morphology_policy": {
+          "path": "results/phase1/local_morphology_support_v2/policy.json",
+          "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+        },
+        "topology_closure_config": {
+          "path": "configs/model/phase1_ugi_closure_expanded.json",
+          "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+        },
+        "topology_morphology_config": {
+          "path": "configs/model/phase1_ugi_morphology_expanded.json",
+          "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+        },
+        "common_ugi_assessment_config": {
+          "path": "configs/multireaction/common_ugi_assessment_v1.json",
+          "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+        },
+        "lipid_realism_config": {
+          "path": "configs/multireaction/common_lipid_realism_v1.json",
+          "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+        },
+        "local_chemistry_config": {
+          "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+          "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+        },
+        "specialist_checkpoint": {
+          "path": "runs/phase1-ugi-chemistry-specialist-seed0-h100-v3/1cd32408515c472c20429c0f34c3899b7fe029b5127244026f5ae2bbb6006250/stages/specialize_ugi/artifacts/specialist_checkpoint.pt",
+          "sha256": "e35d05ae72becf289f26e15f5aa558d4f51ece0c79a4543ef646d2d4499ff348"
+        },
+        "specialist_result": {
+          "path": "runs/phase1-ugi-chemistry-specialist-seed0-h100-v3/1cd32408515c472c20429c0f34c3899b7fe029b5127244026f5ae2bbb6006250/stages/specialize_ugi/artifacts/result.json",
+          "sha256": "c3af40ef723fc630e306f7bb4d44732f2a3f8032f79bb59fce9c72b5bd804a69"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_chemistry_specialist_comparison_result.v4"
+        },
+        "comparison_details": {
+          "path": "comparison_details.tar",
+          "schema_version": "forge.ugi_chemistry_specialist_comparison_archive.v4"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 3600,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-chemistry-specialist-comparison-recovery-preflight-v4"
+      }
+    },
+    {
+      "id": "compare_base",
+      "implementation": "evaluate.ugi.chemistry-specialist-base-comparison-recovery.v4",
+      "needs": [
+        "comparison_preflight"
+      ],
+      "config": {
+        "path": "configs/multireaction/ugi_chemistry_specialist_base_comparison_seed0_recovery_v4.json",
+        "sha256": "289ce5f8501dcb364404e2e6861bb08db47943894744649f0e57a6c01e7c8fbf"
+      },
+      "inputs": {
+        "base_checkpoint_archive": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+          "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+        },
+        "base_training_result": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+          "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+        },
+        "base_design": {
+          "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+          "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+        },
+        "production_cache": {
+          "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+          "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+        },
+        "qualified_reactions": {
+          "path": "data/vendor/qualified_reactions_v1.json",
+          "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+        },
+        "ugi_assignments": {
+          "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+          "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+        },
+        "role_morphology_policy": {
+          "path": "results/phase1/local_morphology_support_v2/policy.json",
+          "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+        },
+        "topology_closure_config": {
+          "path": "configs/model/phase1_ugi_closure_expanded.json",
+          "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+        },
+        "topology_morphology_config": {
+          "path": "configs/model/phase1_ugi_morphology_expanded.json",
+          "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+        },
+        "common_ugi_assessment_config": {
+          "path": "configs/multireaction/common_ugi_assessment_v1.json",
+          "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+        },
+        "lipid_realism_config": {
+          "path": "configs/multireaction/common_lipid_realism_v1.json",
+          "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+        },
+        "local_chemistry_config": {
+          "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+          "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+        },
+        "specialist_checkpoint": {
+          "path": "runs/phase1-ugi-chemistry-specialist-seed0-h100-v3/1cd32408515c472c20429c0f34c3899b7fe029b5127244026f5ae2bbb6006250/stages/specialize_ugi/artifacts/specialist_checkpoint.pt",
+          "sha256": "e35d05ae72becf289f26e15f5aa558d4f51ece0c79a4543ef646d2d4499ff348"
+        },
+        "specialist_result": {
+          "path": "runs/phase1-ugi-chemistry-specialist-seed0-h100-v3/1cd32408515c472c20429c0f34c3899b7fe029b5127244026f5ae2bbb6006250/stages/specialize_ugi/artifacts/result.json",
+          "sha256": "c3af40ef723fc630e306f7bb4d44732f2a3f8032f79bb59fce9c72b5bd804a69"
+        }
+      },
+      "outputs": {
+        "result": {
+          "path": "result.json",
+          "schema_version": "forge.ugi_chemistry_specialist_comparison_result.v4"
+        },
+        "comparison_details": {
+          "path": "comparison_details.tar",
+          "schema_version": "forge.ugi_chemistry_specialist_comparison_archive.v4"
+        }
+      },
+      "resources": {
+        "device": "cuda",
+        "precision": "float32",
+        "cpus": 8,
+        "workers": 0,
+        "memory_mb": 49152,
+        "timeout_seconds": 21600,
+        "gpu_type": "H100!"
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "ugi-chemistry-specialist-base-comparison-recovery-v4"
+      }
+    }
+  ],
+  "metadata": {
+    "requires_verified_sampler_preflight": true,
+    "training_calls": 0,
+    "recovered_specialist_checkpoint_sha256": "e35d05ae72becf289f26e15f5aa558d4f51ece0c79a4543ef646d2d4499ff348",
+    "paired_program_source": "measured_training_joint_count_prior",
+    "base_and_topology_outputs_frozen": true,
+    "component_vocabulary": false,
+    "paired_base_assessment": true,
+    "supersedes_program_policy_mismatched_v3": true
+  },
+  "nonclaims": [
+    "Seed-0 development does not establish independently trained replication.",
+    "The experiment makes no potency, synthesis-success or biological-activity claim."
+  ]
+}

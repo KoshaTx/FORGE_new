@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Which signed head, aldehyde-tail, isocyanide-tail, and cross-tail morphology shifts dominate the measured-Ugi realism gap, and did structured-topology specialization materially reduce them?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "results/phase1/ugi_structured_topology_specialist_realism_panel_seed0_v1/result.json",
+      "sha256": "ba9ab4a7125ca5ee975187b4bda53e5b45f615d1cd4189d8345a503f92e646ac"
+    }
+  },
+  "arms": {
+    "base": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_structured_topology_specialist_realism_panel_seed0_v1/base/ugi_assessed_attempts.jsonl.gz",
+        "sha256": "b59aea70169c3a8295e4494c4d0bc6b400f5cfcef18e84d204c97cc33b3028bb"
+      },
+      "method_id": "forge_seed0_base_topology_first",
+      "seed": 0
+    },
+    "structured_topology_specialist": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_structured_topology_specialist_realism_panel_seed0_v1/structured_topology_specialist/ugi_assessed_attempts.jsonl.gz",
+        "sha256": "52e5c6c0498b1d07aaf7e0ad85a42f9af14c49f2a3a393ade0a4b38c8245b49c"
+      },
+      "method_id": "forge_seed0_ugi_structured_topology_specialist",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "base",
+  "expected_attempts": 256,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a seed-0 train-fold-only diagnostic and is not an across-training-seed or held-out model claim.",
+    "Signed descriptor shifts diagnose distributional mismatch; they are not biological activity, formulation, delivery, synthesis-success, or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls, or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}
