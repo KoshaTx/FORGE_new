@@ -173,14 +173,68 @@ SPECIFICATIONS = {
         "experiments/phase1/multireaction/ugi_structured_topology_specialist_seed0_h100_v8.json"
     ),
     "phase1-ugi-group-balanced-program-prior-seed0-h100-v1": (
-        "experiments/phase1/multireaction/" "ugi_group_balanced_program_prior_seed0_h100_v1.json"
+        "experiments/phase1/multireaction/ugi_group_balanced_program_prior_seed0_h100_v1.json"
     ),
     "phase1-ugi-amine-semantic-program-seed0-h100-v1": (
         "experiments/phase1/multireaction/ugi_amine_semantic_program_seed0_h100_v1.json"
     ),
     "phase1-ugi-amine-semantic-joint-support-seed0-h100-v2": (
+        "experiments/phase1/multireaction/ugi_amine_semantic_joint_support_seed0_h100_v2.json"
+    ),
+    "phase1-ugi-all-role-semantic-seed0-h100-v1": (
+        "experiments/phase1/multireaction/ugi_all_role_semantic_seed0_h100_v1.json"
+    ),
+    "phase1-ugi-joint-all-role-semantic-seed0-h100-v2": (
+        "experiments/phase1/multireaction/ugi_joint_all_role_semantic_seed0_h100_v2.json"
+    ),
+    "phase1-ugi-mog-semantic-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/ugi_mog_semantic_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-mog-joint-realism-seed0-h100-preflight-v2": (
+        "experiments/phase1/multireaction/ugi_mog_joint_realism_seed0_h100_preflight_v2.json"
+    ),
+    "phase1-ugi-local-chemistry-mog-seed0-h100-preflight-v1": (
         "experiments/phase1/multireaction/"
-        "ugi_amine_semantic_joint_support_seed0_h100_v2.json"
+        "ugi_local_chemistry_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-atom-local-chemistry-mog-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_atom_local_chemistry_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-atom-trust-region-mog-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_atom_trust_region_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-context-support-mog-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_context_support_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-whole-head-support-mog-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_whole_head_support_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-binary-whole-head-support-mog-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_binary_whole_head_support_mog_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-whole-head-trajectory-trust-region-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_whole_head_trajectory_trust_region_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-morphology-diversity-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_morphology_diversity_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-amine-substitution-semantic-seed0-h100-preflight-v3": (
+        "experiments/phase1/multireaction/"
+        "ugi_amine_substitution_semantic_seed0_h100_preflight_v3.json"
+    ),
+    "phase1-ugi-amine-donor-branch-factorial-seed0-h100-preflight-v1": (
+        "experiments/phase1/multireaction/"
+        "ugi_amine_donor_branch_factorial_seed0_h100_preflight_v1.json"
+    ),
+    "phase1-ugi-complete-semantic-seed0-h100-v1": (
+        "experiments/phase1/multireaction/ugi_complete_semantic_seed0_h100_v1.json"
     ),
     "phase1-bl-core-constrained-production-smoke": (
         "experiments/phase1/multireaction/bl_core_constrained_production_smoke.json"

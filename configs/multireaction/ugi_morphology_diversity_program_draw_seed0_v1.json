@@ -1,0 +1,33 @@
+{
+  "schema_version": "forge.ugi_morphology_diversity_program_draw_config.v1",
+  "scientific_question": "Can a bounded entropy increase over the same measured-train joint morphology support expose materially more coarse Ugi architecture modes without introducing new support or selecting completed molecules?",
+  "inputs": {
+    "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+    "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+    "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"}
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "sample_count": 3072,
+  "seed": 2026090205,
+  "temperature_selection": {
+    "calibration_attempts": 256,
+    "candidate_temperatures": [1.0, 1.25, 1.5, 2.0, 3.0],
+    "maximum_kl_from_measured_prior": 0.15,
+    "minimum_expected_unique_ratio": 1.15
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_or_family_identity_conditioning": false,
+    "heldout_access": false,
+    "iid_attempts": true,
+    "repair_or_retry": false,
+    "support": "unchanged_source_adjudicated_measured_train_joint_modes",
+    "temperature_selected_analytically_before_generation": true
+  },
+  "nonclaims": [
+    "The intervention changes only probabilities over identity-free morphology and semantic modes already observed in the source-adjudicated measured Ugi training fold.",
+    "Temperature is selected analytically from the frozen prior before molecular generation; generated molecules and evaluation results cannot select it.",
+    "This draw performs no model training, molecule generation, filtering, repair, retry, routing, oracle call or completed-product candidate selection.",
+    "A broader requested-program distribution is not itself evidence that generated molecules are more realistic or morphologically diverse."
+  ]
+}

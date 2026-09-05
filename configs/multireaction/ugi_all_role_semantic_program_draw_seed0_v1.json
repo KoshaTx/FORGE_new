@@ -1,0 +1,38 @@
+{
+  "schema_version": "forge.ugi_all_role_semantic_program_draw_config.v1",
+  "scientific_question": "Can one low-capacity identity-free joint semantic program capture measured Ugi head, ester-arm and tail relationships that remain missing from the frozen amine-semantic decoder?",
+  "inputs": {
+    "amine_semantic_program_draw": {
+      "path": "results/phase1/ugi_amine_semantic_program_draw_seed0_v2/program_draw.json",
+      "sha256": "d26b79fd3f1aa34a1ea7725343e151bdc5732d57469fe251231e821d713a661b"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "sample_count": 3072,
+  "semantic_seed": 2026090104,
+  "policy": {
+    "coarse_program_sequence": "frozen amine-semantic joint-support draw",
+    "semantic_weighting": "equal component-family-triple mass within exact complete coarse program",
+    "sampling": "one joint categorical draw per attempt without rejection or retry",
+    "component_or_family_ids_enter_program": false,
+    "heldout_access": false
+  },
+  "nonclaims": [
+    "The joint semantic target contains only graph-derived integer morphology and chemistry counts; it contains no product, component, family, graph, SMILES or fragment identity.",
+    "The prior uses source-adjudicated measured Ugi training products only and does not access calibration or held-out product structures.",
+    "This artifact performs no molecular generation, model training, repair, retry, routing, oracle calls or candidate selection.",
+    "A train-derived semantic target does not establish generated-molecule realism until the paired method-blind experiment passes every frozen promotion gate."
+  ]
+}

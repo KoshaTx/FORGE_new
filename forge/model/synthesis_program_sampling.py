@@ -38,8 +38,19 @@ from forge.model.sparse_topology_feasibility import (
 from forge.model.synthesis_program_graph import SynthesisProgramGraphRecord
 from forge.model.synthesis_program_training import build_synthesis_program_flow
 from forge.model.tensor_checkpoint import TensorCheckpointError, decode_tensor_state
-from forge.model.ugi_amine_semantic_program import UgiAmineSemanticTarget
+from forge.model.ugi_all_role_semantic_program import UgiAllRoleSemanticTarget
+from forge.model.ugi_amine_semantic_program import (
+    UgiAmineSemanticTarget,
+    amine_local_substitution_metrics,
+)
 from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
+from forge.model.ugi_mog_semantic_guidance import (
+    UgiMogSemanticGuidancePolicy,
+    replace_amine_semantics,
+    replace_directional_ester_semantics,
+    replace_tail_unsaturation_semantics,
+)
+from forge.model.ugi_morphology_program import UgiMorphologyProgram
 from forge.model.ugi_role_chemistry_prior import UgiRoleChemistryPrior
 from forge.model.ugi_transformer_topology import (
     UGI_PROGRAM_ID,
@@ -86,6 +97,9 @@ UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY = (
 UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY = (
     "strict_ugi_ester_topology_role_local_chemistry_core_saturation_stochastic"
 )
+UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY = (
+    "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided"
+)
 UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES = frozenset(
     {
         COUPLED_UGI_TOPOLOGY_TERMINAL_DECODE_POLICY,
@@ -93,6 +107,7 @@ UGI_TOPOLOGY_COUPLED_TERMINAL_DECODE_POLICIES = frozenset(
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES = frozenset(
@@ -103,6 +118,7 @@ LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES = frozenset(
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES = frozenset(
@@ -113,6 +129,7 @@ PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES = frozenset(
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 PROGRAM_CYCLE_TERMINAL_DECODE_POLICIES = frozenset(
@@ -134,6 +151,7 @@ CORE_SATURATION_TERMINAL_DECODE_POLICIES = frozenset(
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 SUPPORTED_TERMINAL_DECODE_POLICIES = (
@@ -147,17 +165,20 @@ SUPPORTED_TERMINAL_DECODE_POLICIES = (
     UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
     UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
     UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+    UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
 )
 STOCHASTIC_TERMINAL_DECODE_POLICIES = frozenset(
     {
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 UGI_ESTER_TERMINAL_DECODE_POLICIES = frozenset(
     {
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 STRICT_TERMINAL_DECODE_POLICIES = frozenset(
@@ -172,6 +193,7 @@ STRICT_TERMINAL_DECODE_POLICIES = frozenset(
         UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY,
         UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY,
+        UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY,
     }
 )
 
@@ -746,6 +768,43 @@ def _sample_allowed(
     return int(generator.choice(allowed, p=probabilities))
 
 
+def _sample_mog_chemistry_allowed(
+    logits: np.ndarray,
+    valid: np.ndarray,
+    local_scores: np.ndarray,
+    *,
+    policy: UgiMogSemanticGuidancePolicy,
+    generator: np.random.Generator,
+    rank_weight: float | None = None,
+) -> int | None:
+    """Draw one hard-supported chemistry state from the complete MOG rank law."""
+
+    allowed = np.flatnonzero(valid)
+    if allowed.size == 0:
+        return None
+    model_scores = np.asarray(logits, dtype=np.float64)[allowed]
+    semantic_distances = np.zeros(allowed.size, dtype=np.float64)
+    chemistry_scores = np.asarray(local_scores, dtype=np.float64)[allowed]
+    joint_scores = np.zeros(allowed.size, dtype=np.float64) if policy.uses_joint_realism else None
+    probabilities = (
+        policy.atom_chemistry_probabilities(
+            model_scores,
+            semantic_distances,
+            chemistry_scores,
+            joint_scores,
+        )
+        if rank_weight is None
+        else policy.chemistry_probabilities(
+            model_scores,
+            semantic_distances,
+            chemistry_scores,
+            joint_scores,
+            rank_weight=rank_weight,
+        )
+    )
+    return int(generator.choice(allowed, p=probabilities))
+
+
 def _distances_to_reaction_core(
     neighbors: Sequence[set[int]], core_position_states: np.ndarray
 ) -> np.ndarray:
@@ -764,6 +823,57 @@ def _distances_to_reaction_core(
             distances[target] = distances[node] + 1
             frontier.append(target)
     return distances
+
+
+def _ugi_program_from_record(record: SynthesisProgramGraphRecord) -> UgiMorphologyProgram:
+    """Recover the complete coarse Ugi program without reading component identities."""
+
+    states = record.role_morphology_states
+    if states is None:
+        raise SynthesisProgramSamplingError(
+            "joint-realism guidance requires explicit role morphology states"
+        )
+    values_by_role: dict[str, tuple[int, int, int, int]] = {}
+    for role in ROLE_NAMES:
+        blocks = [block for block in record.component_blocks if block.role == role]
+        if len(blocks) != 1:
+            raise SynthesisProgramSamplingError(
+                "joint-realism guidance requires each Ugi role exactly once"
+            )
+        block = blocks[0]
+        values = np.unique(states[block.start : block.stop], axis=0)
+        if values.shape != (1, 4) or np.any(values[0] < 1):
+            raise SynthesisProgramSamplingError(
+                "joint-realism guidance encountered an invalid role morphology"
+            )
+        values_by_role[role] = tuple(int(value) - 1 for value in values[0])
+    return UgiMorphologyProgram(
+        node_counts=tuple(values_by_role[role][0] for role in ROLE_NAMES),
+        junction_budgets=tuple(values_by_role[role][1] for role in ROLE_NAMES),
+        cycle_ranks=tuple(values_by_role[role][2] for role in ROLE_NAMES),
+        attachment_counts=tuple(values_by_role[role][3] for role in ROLE_NAMES),
+    )
+
+
+def _induced_graph_diameter(nodes: Sequence[int], neighbors: Sequence[set[int]]) -> int:
+    """Return the number of vertices on the longest shortest path in one induced component."""
+
+    selected = {int(node) for node in nodes}
+    if not selected:
+        return 0
+    maximum_edges = 0
+    for start in selected:
+        distances = {start: 0}
+        queue = [start]
+        for current in queue:
+            for neighbor in neighbors[current]:
+                if neighbor in selected and neighbor not in distances:
+                    distances[neighbor] = distances[current] + 1
+                    queue.append(neighbor)
+        if len(distances) != len(selected):
+            return 0
+        maximum_edges = max(maximum_edges, max(distances.values()))
+    return maximum_edges + 1
 
 
 def _generated_ring_support(
@@ -793,6 +903,12 @@ def _ugi_ester_motif_constraints(
     closure_right: np.ndarray,
     neighbors: Sequence[set[int]],
     policy: UgiEsterChemotypePolicy,
+    distances_to_core: np.ndarray | None = None,
+    ring_nodes: frozenset[int] = frozenset(),
+    ring_edges: frozenset[tuple[int, int]] = frozenset(),
+    all_role_semantic_target: UgiAllRoleSemanticTarget | None = None,
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
+    terminal_generator: np.random.Generator | None = None,
 ) -> tuple[dict[int, str], dict[tuple[int, int], int]] | None:
     """Select the highest-scoring feasible C(=O)-O-C placement in the requested role."""
 
@@ -809,6 +925,15 @@ def _ugi_ester_motif_constraints(
     }
     if len(exterior) < 5:
         return None
+    attachment_roots = {
+        node
+        for node in exterior
+        if bool(record.fixed_parent_bond_mask[node])
+        and int(record.core_position_states[int(record.graph.parents[node])]) > 1
+    }
+    if len(attachment_roots) != 1:
+        return None
+    attachment_root = next(iter(attachment_roots))
 
     edge_logits: dict[tuple[int, int], np.ndarray] = {}
     edge_fixed: dict[tuple[int, int], bool] = {}
@@ -836,7 +961,28 @@ def _ugi_ester_motif_constraints(
             return None
         return max(float(predictions["nodes"][index, node, state]) for state in eligible)
 
-    best: tuple[float, dict[int, str], dict[tuple[int, int], int]] | None = None
+    candidates: list[
+        tuple[
+            float,
+            float,
+            float | None,
+            float | None,
+            dict[int, str],
+            dict[tuple[int, int], int],
+        ]
+    ] = []
+    joint_program = (
+        None
+        if semantic_guidance_policy is None or not semantic_guidance_policy.uses_joint_realism
+        else _ugi_program_from_record(record)
+    )
+    if joint_program is not None and all_role_semantic_target is None:
+        return None
+    if (
+        joint_program is not None
+        and all_role_semantic_target.tail_pair.aldehyde_alkoxy_handle_side_carbons == 0
+    ):
+        return None
     for center in sorted(exterior):
         center_neighbors = sorted(neighbors[center] & exterior)
         if len(center_neighbors) != 3:
@@ -858,7 +1004,7 @@ def _ugi_ester_motif_constraints(
                     continue
                 blocked = frozenset((center, ester_oxygen))
 
-                def exterior_component_size(start: int) -> int:
+                def exterior_component(start: int) -> set[int]:
                     visited = {start}
                     frontier = [start]
                     while frontier:
@@ -868,19 +1014,71 @@ def _ugi_ester_motif_constraints(
                                 continue
                             visited.add(target)
                             frontier.append(target)
-                    return len(visited)
+                    return visited
 
-                carbon_counts = sorted(
-                    (
-                        exterior_component_size(center) - 1,
-                        exterior_component_size(ester_oxygen) - 1,
-                    )
-                )
+                sides = (exterior_component(center), exterior_component(ester_oxygen))
+                exterior_carbon_counts = [len(sides[0]) - 1, len(sides[1]) - 1]
+                # The measured ester-side policy is defined on recovered aldehyde precursors.
+                # The exterior omits the fixed aldehyde-derived reaction-core carbon, so restore
+                # that carbon before applying either the measured support floor or the exact target.
+                full_carbon_counts = exterior_carbon_counts.copy()
+                full_carbon_counts[0 if attachment_root in sides[0] else 1] += 1
+                carbon_counts = tuple(sorted(full_carbon_counts))
                 if (
                     carbon_counts[0] < policy.minimum_ester_side_carbons
                     or carbon_counts[1] < policy.minimum_ester_long_side_carbons
                 ):
                     continue
+                requested_sides = (
+                    None
+                    if all_role_semantic_target is None
+                    else (
+                        all_role_semantic_target.tail_pair.aldehyde_ester_short_side_carbons,
+                        all_role_semantic_target.tail_pair.aldehyde_ester_long_side_carbons,
+                    )
+                )
+                if (
+                    requested_sides is not None
+                    and semantic_guidance_policy is None
+                    and carbon_counts != requested_sides
+                ):
+                    continue
+                requested_directional_sides = (
+                    None
+                    if all_role_semantic_target is None
+                    or all_role_semantic_target.tail_pair.aldehyde_alkoxy_handle_side_carbons == 0
+                    else (
+                        all_role_semantic_target.tail_pair.aldehyde_alkoxy_handle_side_carbons,
+                        all_role_semantic_target.tail_pair.aldehyde_acyl_side_carbons,
+                    )
+                )
+                if requested_directional_sides is not None:
+                    root_on_alkoxy_side = attachment_root in sides[1]
+                    directional_sides = (
+                        int(full_carbon_counts[1]),
+                        int(full_carbon_counts[0]),
+                    )
+                    allowed_directional = (
+                        {requested_directional_sides}
+                        if semantic_guidance_policy is None
+                        else set(
+                            semantic_guidance_policy.aldehyde_directional_pairs_within_band(
+                                alkoxy_handle_carbons=requested_directional_sides[0],
+                                acyl_carbons=requested_directional_sides[1],
+                            )
+                        )
+                    )
+                    if not root_on_alkoxy_side or directional_sides not in allowed_directional:
+                        continue
+                    semantic_distance = (
+                        0.0
+                        if semantic_guidance_policy is None
+                        else semantic_guidance_policy.aldehyde_distance(
+                            directional_sides, requested_directional_sides
+                        )
+                    )
+                else:
+                    semantic_distance = 0.0
                 carbon_substituent = carbon_substituents[0]
                 forced_atoms = {
                     center: "C",
@@ -913,10 +1111,609 @@ def _ugi_ester_motif_constraints(
                 score = sum(float(value) for value in scores if value is not None) + sum(
                     float(edge_logits[pair][bond]) for pair, bond in forced_bonds.items()
                 )
-                candidate = (score, forced_atoms, forced_bonds)
-                if best is None or candidate[0] > best[0]:
-                    best = candidate
-    return None if best is None else (best[1], best[2])
+                joint_score = (
+                    None
+                    if joint_program is None
+                    else semantic_guidance_policy.joint_realism_scores(
+                        joint_program,
+                        (
+                            replace_directional_ester_semantics(
+                                all_role_semantic_target,
+                                directional_sides,
+                            ),
+                        ),
+                    )[0]
+                )
+                local_score = None
+                if semantic_guidance_policy is not None and (
+                    semantic_guidance_policy.uses_local_chemistry_bonds
+                ):
+                    chemistry_prior = semantic_guidance_policy.local_chemistry_prior
+                    if chemistry_prior is None or distances_to_core is None:
+                        return None
+                    local_evidence: list[float] = []
+                    if semantic_guidance_policy.uses_coordinate_local_chemistry_atoms:
+                        for node, symbol in forced_atoms.items():
+                            bias = semantic_guidance_policy.atom_local_scores(
+                                role=policy.aldehyde_role,
+                                depth=int(distances_to_core[node]),
+                                degree=len(neighbors[node]),
+                                in_ring=node in ring_nodes,
+                                atom_vocabulary=atom_vocabulary,
+                            )
+                            eligible = [
+                                state
+                                for state, atom in enumerate(atom_vocabulary)
+                                if atom.symbol == symbol
+                                and atom.formal_charge == 0
+                                and not atom.aromatic
+                                and int(capacities[state]) >= node_requirements[node]
+                            ]
+                            if not eligible:
+                                return None
+                            local_evidence.append(max(float(bias[state]) for state in eligible))
+                    for pair, bond in forced_bonds.items():
+                        left, right = pair
+                        local_evidence.append(
+                            float(
+                                semantic_guidance_policy.bond_local_scores(
+                                    role=policy.aldehyde_role,
+                                    depth=min(
+                                        int(distances_to_core[left]),
+                                        int(distances_to_core[right]),
+                                    ),
+                                    in_ring=pair in ring_edges,
+                                    symbols=(forced_atoms[left], forced_atoms[right]),
+                                    bond_classes=len(edge_logits[pair]),
+                                )[bond]
+                            )
+                        )
+                    local_score = semantic_guidance_policy.aggregate_local_scores(local_evidence)
+                candidates.append(
+                    (
+                        score,
+                        semantic_distance,
+                        joint_score,
+                        local_score,
+                        forced_atoms,
+                        forced_bonds,
+                    )
+                )
+    if not candidates:
+        return None
+    if (
+        semantic_guidance_policy is None
+        or not semantic_guidance_policy.uses_ranked_terminal_chemistry
+    ):
+        selected = max(range(len(candidates)), key=lambda value: candidates[value][0])
+    else:
+        if terminal_generator is None:
+            return None
+        model_scores = [candidate[0] for candidate in candidates]
+        semantic_distances = [candidate[1] for candidate in candidates]
+        joint_scores = (
+            [float(candidate[2]) for candidate in candidates]
+            if semantic_guidance_policy.uses_joint_realism
+            else None
+        )
+        local_scores = (
+            [float(candidate[3]) for candidate in candidates]
+            if semantic_guidance_policy.uses_local_chemistry_bonds
+            else None
+        )
+        probabilities = (
+            semantic_guidance_policy.bond_chemistry_probabilities(
+                model_scores,
+                semantic_distances,
+                local_scores,
+                joint_scores,
+            )
+            if local_scores is not None
+            else semantic_guidance_policy.probabilities(
+                model_scores,
+                semantic_distances,
+                joint_scores,
+            )
+        )
+        selected = int(terminal_generator.choice(len(candidates), p=probabilities))
+    candidate = candidates[selected]
+    return candidate[4], candidate[5]
+
+
+def _select_ugi_all_role_tail_bonds(
+    predictions: Mapping[str, np.ndarray],
+    index: int,
+    record: SynthesisProgramGraphRecord,
+    atom_vocabulary: Sequence[AtomState],
+    node_states: np.ndarray,
+    parents: np.ndarray,
+    closure_left: np.ndarray,
+    closure_right: np.ndarray,
+    minimum_used: np.ndarray,
+    capacities: np.ndarray,
+    bond_units: np.ndarray,
+    role_names: Sequence[str],
+    local_chemistry_support: LocalChemistrySupport,
+    existing_forced_bonds: Mapping[tuple[int, int], int],
+    target: UgiAllRoleSemanticTarget,
+    distances_to_core: np.ndarray | None = None,
+    ring_edges: frozenset[tuple[int, int]] = frozenset(),
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
+    terminal_generator: np.random.Generator | None = None,
+) -> tuple[dict[tuple[int, int], int] | None, str | None]:
+    """Choose exact tail unsaturation globally under model scores and valence support.
+
+    Every eligible C--C edge receives exactly one state in the returned map.  The search is small:
+    measured Ugi tails contain at most two optional C--C unsaturations, so enumeration is bounded by
+    pairs of edges rather than by the full bond-state product space.
+    """
+
+    if record.program_id != UGI_PROGRAM_ID:
+        return dict(existing_forced_bonds), None
+    if len(bond_units) < 3 or tuple(int(value) for value in bond_units[:3]) != (2, 4, 6):
+        return None, "ugi_all_role_tail_bond_vocabulary_changed"
+
+    # Distances from genuine hydrophobic termini complement the existing distance-to-core
+    # coordinate.  A role attachment can be degree one in the induced role graph, so termini are
+    # identified in the complete generated topology and must be carbon.  This excludes the
+    # reaction-core attachment and the ester oxygen without using a component identity.
+    adjacency = [set() for _ in range(record.node_count)]
+    for child in range(1, record.node_count):
+        parent = int(parents[child])
+        if 0 <= parent < record.node_count:
+            adjacency[parent].add(child)
+            adjacency[child].add(parent)
+    for left, right in zip(closure_left, closure_right, strict=True):
+        left_index = int(left)
+        right_index = int(right)
+        if 0 <= left_index < record.node_count and 0 <= right_index < record.node_count:
+            adjacency[left_index].add(right_index)
+            adjacency[right_index].add(left_index)
+    symbols = tuple(atom_vocabulary[int(state)].symbol for state in node_states)
+    terminal_offsets = np.full(record.node_count, -1, dtype=np.int64)
+    for role in sorted(set(role_names)):
+        frontier = [
+            node
+            for node in range(record.node_count)
+            if role_names[node] == role and symbols[node] == "C" and len(adjacency[node]) == 1
+        ]
+        for node in frontier:
+            terminal_offsets[node] = 0
+        cursor = 0
+        while cursor < len(frontier):
+            node = frontier[cursor]
+            cursor += 1
+            for neighbor in sorted(adjacency[node]):
+                if role_names[neighbor] != role or terminal_offsets[neighbor] >= 0:
+                    continue
+                terminal_offsets[neighbor] = terminal_offsets[node] + 1
+                frontier.append(neighbor)
+
+    metadata: dict[tuple[int, int], tuple[str, int, np.ndarray]] = {}
+    for child in range(1, record.node_count):
+        if record.fixed_parent_bond_mask[child]:
+            continue
+        parent = int(parents[child])
+        pair = tuple(sorted((parent, child)))
+        metadata[pair] = ("parent", child, predictions["parent_bonds"][index, child])
+    for slot, (left, right) in enumerate(zip(closure_left, closure_right, strict=True)):
+        if record.fixed_closure_bond_mask[slot]:
+            continue
+        pair = tuple(sorted((int(left), int(right))))
+        metadata[pair] = ("closure", slot, predictions["closure_bonds"][index, slot])
+
+    desired = {
+        "oxoester_aldehyde_body_tail": (
+            int(target.tail_pair.aldehyde_carbon_carbon_double_bonds),
+            int(target.tail_pair.aldehyde_carbon_carbon_triple_bonds),
+        ),
+        "isocyanide_tail": (
+            int(target.tail_pair.isocyanide_carbon_carbon_double_bonds),
+            int(target.tail_pair.isocyanide_carbon_carbon_triple_bonds),
+        ),
+    }
+    selected_forced = dict(existing_forced_bonds)
+
+    def assignment_is_feasible(candidate: Mapping[tuple[int, int], int]) -> bool:
+        used = minimum_used.copy()
+        for pair, bond in candidate.items():
+            if pair not in metadata or bond < 0 or bond >= len(bond_units):
+                return False
+            left, right = pair
+            extra = int(bond_units[bond]) - 2
+            used[[left, right]] += extra
+            if used[left] > capacities[left] or used[right] > capacities[right]:
+                return False
+            if not local_chemistry_support.allows_role_edge(
+                record.program_id,
+                role_names[left],
+                symbols[left],
+                bond,
+                role_names[right],
+                symbols[right],
+            ):
+                return False
+        return True
+
+    for role, (double_count, triple_count) in desired.items():
+        eligible = tuple(
+            pair
+            for pair in sorted(metadata)
+            if role_names[pair[0]] == role_names[pair[1]] == role
+            and int(record.core_position_states[pair[0]]) == 1
+            and int(record.core_position_states[pair[1]]) == 1
+            and symbols[pair[0]] == symbols[pair[1]] == "C"
+            and pair not in selected_forced
+        )
+        count_options = (
+            ((double_count, triple_count),)
+            if semantic_guidance_policy is None
+            or (
+                semantic_guidance_policy.tail_unsaturation_count_tolerance == 0
+                and semantic_guidance_policy.tail_unsaturation_count_strategy
+                not in {"frequency_resampled", "smoothed_frequency_resampled"}
+            )
+            else semantic_guidance_policy.tail_unsaturation_count_options(
+                role=role,
+                requested_double_count=double_count,
+                requested_triple_count=triple_count,
+            )
+        )
+        # score, semantic distance, local support, C=C count, C#C count, assignment
+        candidates: list[
+            tuple[float, float, float | None, int, int, dict[tuple[int, int], int]]
+        ] = []
+        for candidate_double_count, candidate_triple_count in count_options:
+            if candidate_double_count + candidate_triple_count > len(eligible):
+                continue
+            semantic_distance = float(
+                abs(candidate_double_count - double_count)
+                + abs(candidate_triple_count - triple_count)
+            )
+            for double_edges in combinations(eligible, candidate_double_count):
+                double_set = frozenset(double_edges)
+                remaining = tuple(pair for pair in eligible if pair not in double_set)
+                triple_edge_sets = combinations(remaining, candidate_triple_count)
+                for triple_edges in triple_edge_sets:
+                    triple_set = frozenset(triple_edges)
+                    assignment = {
+                        pair: (1 if pair in double_set else 2 if pair in triple_set else 0)
+                        for pair in eligible
+                    }
+                    complete = {**selected_forced, **assignment}
+                    if not assignment_is_feasible(complete):
+                        continue
+                    score = sum(float(metadata[pair][2][bond]) for pair, bond in assignment.items())
+                    local_score = None
+                    if semantic_guidance_policy is not None and (
+                        semantic_guidance_policy.uses_local_chemistry_bonds
+                    ):
+                        chemistry_prior = semantic_guidance_policy.local_chemistry_prior
+                        if chemistry_prior is None or distances_to_core is None:
+                            return None, "ugi_local_chemistry_reference_unavailable"
+                        scored_assignment = tuple(
+                            (pair, bond)
+                            for pair, bond in assignment.items()
+                            if not (
+                                semantic_guidance_policy.local_chemistry_unsaturation_position_only
+                                and bond == 0
+                            )
+                        )
+                        # A saturated assignment is itself measured-supported.  When only the
+                        # unsaturation positions are scored there are no selected non-single edges,
+                        # so it receives the strongest support tier rather than an empty minimum.
+                        local_score = (
+                            4.0
+                            if not scored_assignment
+                            else semantic_guidance_policy.aggregate_local_scores(
+                                [
+                                    float(
+                                        semantic_guidance_policy.bond_local_scores(
+                                            role=role,
+                                            depth=min(
+                                                int(distances_to_core[pair[0]]),
+                                                int(distances_to_core[pair[1]]),
+                                            ),
+                                            in_ring=pair in ring_edges,
+                                            symbols=(symbols[pair[0]], symbols[pair[1]]),
+                                            bond_classes=len(bond_units),
+                                            terminal_offset=(
+                                                min(
+                                                    int(terminal_offsets[pair[0]]),
+                                                    int(terminal_offsets[pair[1]]),
+                                                )
+                                                if terminal_offsets[pair[0]] >= 0
+                                                and terminal_offsets[pair[1]] >= 0
+                                                else None
+                                            ),
+                                        )[bond]
+                                    )
+                                    for pair, bond in scored_assignment
+                                ]
+                            )
+                        )
+                        minimum_tier = semantic_guidance_policy.local_chemistry_unsaturation_minimum_support_tier
+                        if (
+                            minimum_tier is not None
+                            and scored_assignment
+                            and local_score < float(minimum_tier)
+                        ):
+                            continue
+                    candidates.append(
+                        (
+                            score,
+                            semantic_distance,
+                            local_score,
+                            candidate_double_count,
+                            candidate_triple_count,
+                            assignment,
+                        )
+                    )
+        if not candidates:
+            return None, f"ugi_all_role_tail_unsaturation_assignment_unavailable:{role}"
+        if (
+            semantic_guidance_policy is None
+            or not semantic_guidance_policy.uses_ranked_terminal_bonds
+        ):
+            selected = max(range(len(candidates)), key=lambda value: candidates[value][0])
+        else:
+            if terminal_generator is None:
+                return None, "ugi_all_role_tail_guidance_generator_unavailable"
+            model_scores = [candidate[0] for candidate in candidates]
+            semantic_distances = [candidate[1] for candidate in candidates]
+            joint_scores = (
+                [
+                    float(
+                        semantic_guidance_policy.joint_realism_scores(
+                            _ugi_program_from_record(record),
+                            (
+                                replace_tail_unsaturation_semantics(
+                                    target,
+                                    role=role,
+                                    double_count=candidate[3],
+                                    triple_count=candidate[4],
+                                ),
+                            ),
+                        )[0]
+                    )
+                    for candidate in candidates
+                ]
+                if semantic_guidance_policy.uses_joint_realism
+                else None
+            )
+            local_scores = (
+                [float(candidate[2]) for candidate in candidates]
+                if semantic_guidance_policy.uses_local_chemistry_bonds
+                else None
+            )
+
+            def candidate_terminal_pattern(
+                candidate_index: int,
+            ) -> tuple[tuple[int, ...], tuple[int, ...]] | None:
+                double_offsets: list[int] = []
+                triple_offsets: list[int] = []
+                for pair, bond in candidates[candidate_index][5].items():
+                    if bond not in {1, 2}:
+                        continue
+                    if terminal_offsets[pair[0]] < 0 or terminal_offsets[pair[1]] < 0:
+                        return None
+                    offset_value = min(
+                        int(terminal_offsets[pair[0]]),
+                        int(terminal_offsets[pair[1]]),
+                    )
+                    (double_offsets if bond == 1 else triple_offsets).append(offset_value)
+                return tuple(sorted(double_offsets)), tuple(sorted(triple_offsets))
+
+            measured_terminal_patterns: dict[
+                tuple[tuple[int, ...], tuple[int, ...]], int
+            ] | None = None
+            if semantic_guidance_policy.tail_unsaturation_position_strategy in {
+                "measured_joint_terminal_pattern",
+                "measured_joint_terminal_pattern_ranked",
+            }:
+                chemistry_prior = semantic_guidance_policy.local_chemistry_prior
+                if chemistry_prior is None:
+                    return None, "ugi_local_chemistry_reference_unavailable"
+                measured_terminal_patterns = {
+                    (double_offsets, triple_offsets): count
+                    for double_offsets, triple_offsets, count in (
+                        chemistry_prior.unsaturation_pattern_frequencies(role)
+                    )
+                }
+                if not measured_terminal_patterns:
+                    return None, f"ugi_tail_unsaturation_pattern_unavailable:{role}"
+                if (
+                    semantic_guidance_policy.tail_unsaturation_position_strategy
+                    == "measured_joint_terminal_pattern_ranked"
+                ):
+                    assert local_scores is not None
+                    # Five is one rank above the strongest coordinatewise-support tier.  It changes
+                    # only the ordering within a measured count class; the existing entropy mixture
+                    # keeps every chemically valid assignment eligible.
+                    local_scores = [
+                        5.0
+                        if candidate_terminal_pattern(candidate_index)
+                        in measured_terminal_patterns
+                        else score
+                        for candidate_index, score in enumerate(local_scores)
+                    ]
+
+            def ranked_probabilities(candidate_indices: Sequence[int]) -> np.ndarray:
+                subset_model = [model_scores[value] for value in candidate_indices]
+                subset_semantic = [semantic_distances[value] for value in candidate_indices]
+                subset_joint = (
+                    None
+                    if joint_scores is None
+                    else [joint_scores[value] for value in candidate_indices]
+                )
+                if local_scores is not None:
+                    return semantic_guidance_policy.bond_chemistry_probabilities(
+                        subset_model,
+                        subset_semantic,
+                        [local_scores[value] for value in candidate_indices],
+                        subset_joint,
+                    )
+                return semantic_guidance_policy.probabilities(
+                    subset_model,
+                    subset_semantic,
+                    subset_joint,
+                )
+
+            if (
+                semantic_guidance_policy.tail_unsaturation_position_strategy
+                == "measured_joint_terminal_pattern"
+            ):
+                assert measured_terminal_patterns is not None
+                indices_by_pattern: dict[
+                    tuple[tuple[int, ...], tuple[int, ...]], list[int]
+                ] = {}
+                for candidate_index in range(len(candidates)):
+                    pattern = candidate_terminal_pattern(candidate_index)
+                    if pattern is None:
+                        continue
+                    if pattern in measured_terminal_patterns:
+                        indices_by_pattern.setdefault(pattern, []).append(candidate_index)
+                if not indices_by_pattern:
+                    return None, f"ugi_tail_unsaturation_pattern_unavailable:{role}"
+                pattern_keys = tuple(sorted(indices_by_pattern))
+                pattern_probabilities = np.asarray(
+                    [float(measured_terminal_patterns[key]) for key in pattern_keys],
+                    dtype=np.float64,
+                )
+                if not np.isfinite(pattern_probabilities).all() or not np.all(
+                    pattern_probabilities > 0
+                ):
+                    return None, f"ugi_tail_unsaturation_pattern_frequency_invalid:{role}"
+                pattern_probabilities /= pattern_probabilities.sum()
+                selected_pattern = pattern_keys[
+                    int(
+                        terminal_generator.choice(
+                            len(pattern_keys), p=pattern_probabilities
+                        )
+                    )
+                ]
+                selected_indices = tuple(indices_by_pattern[selected_pattern])
+                selected = int(
+                    terminal_generator.choice(
+                        selected_indices,
+                        p=ranked_probabilities(selected_indices),
+                    )
+                )
+            elif semantic_guidance_policy.tail_unsaturation_count_strategy in {
+                "grouped_downward",
+                "frequency_downward",
+                "frequency_resampled",
+                "smoothed_frequency_resampled",
+            }:
+                group_keys = tuple(
+                    sorted({(candidate[3], candidate[4]) for candidate in candidates})
+                )
+                indices_by_group = {
+                    key: tuple(
+                        candidate_index
+                        for candidate_index, candidate in enumerate(candidates)
+                        if (candidate[3], candidate[4]) == key
+                    )
+                    for key in group_keys
+                }
+
+                def log_mean_exp(values: Sequence[float]) -> float:
+                    array = np.asarray(values, dtype=np.float64)
+                    maximum = float(np.max(array))
+                    return maximum + float(np.log(np.exp(array - maximum).mean()))
+
+                group_model_scores = [
+                    log_mean_exp([model_scores[value] for value in indices_by_group[key]])
+                    for key in group_keys
+                ]
+                group_semantic_distances = [
+                    semantic_distances[indices_by_group[key][0]] for key in group_keys
+                ]
+                group_joint_scores = (
+                    None
+                    if joint_scores is None
+                    else [joint_scores[indices_by_group[key][0]] for key in group_keys]
+                )
+                group_local_scores = (
+                    None
+                    if local_scores is None
+                    else [
+                        max(local_scores[value] for value in indices_by_group[key])
+                        for key in group_keys
+                    ]
+                )
+                if (
+                    semantic_guidance_policy.tail_unsaturation_count_strategy
+                    in {
+                        "frequency_downward",
+                        "frequency_resampled",
+                        "smoothed_frequency_resampled",
+                    }
+                ):
+                    chemistry_prior = semantic_guidance_policy.local_chemistry_prior
+                    if chemistry_prior is None:
+                        return None, "ugi_local_chemistry_reference_unavailable"
+                    measured_counts = {
+                        (double_count, triple_count): count
+                        for double_count, triple_count, count in (
+                            chemistry_prior.unsaturation_count_frequencies(role)
+                        )
+                    }
+                    smoothing = (
+                        float(
+                            chemistry_prior.smoothing
+                            if semantic_guidance_policy.tail_unsaturation_frequency_pseudocount
+                            is None
+                            else semantic_guidance_policy.tail_unsaturation_frequency_pseudocount
+                        )
+                        if semantic_guidance_policy.tail_unsaturation_count_strategy
+                        == "smoothed_frequency_resampled"
+                        else 0.0
+                    )
+                    group_probabilities = np.asarray(
+                        [float(measured_counts.get(key, 0)) + smoothing for key in group_keys],
+                        dtype=np.float64,
+                    )
+                    if not np.isfinite(group_probabilities).all() or not np.any(
+                        group_probabilities > 0
+                    ):
+                        return None, f"ugi_tail_unsaturation_frequency_unavailable:{role}"
+                    group_probabilities /= group_probabilities.sum()
+                else:
+                    group_probabilities = (
+                        semantic_guidance_policy.bond_chemistry_probabilities(
+                            group_model_scores,
+                            group_semantic_distances,
+                            group_local_scores,
+                            group_joint_scores,
+                        )
+                        if group_local_scores is not None
+                        else semantic_guidance_policy.probabilities(
+                            group_model_scores,
+                            group_semantic_distances,
+                            group_joint_scores,
+                        )
+                    )
+                selected_group = group_keys[
+                    int(terminal_generator.choice(len(group_keys), p=group_probabilities))
+                ]
+                selected_indices = indices_by_group[selected_group]
+                selected = int(
+                    terminal_generator.choice(
+                        selected_indices,
+                        p=ranked_probabilities(selected_indices),
+                    )
+                )
+            else:
+                all_indices = tuple(range(len(candidates)))
+                selected = int(
+                    terminal_generator.choice(
+                        all_indices,
+                        p=ranked_probabilities(all_indices),
+                    )
+                )
+        selected_forced.update(candidates[selected][5])
+    return selected_forced, None
 
 
 def _exact_role_morphology_targets(
@@ -1132,7 +1929,11 @@ def _select_ugi_amine_atom_states(
     chemistry_prior_strength: float = 0.0,
     distances_to_core: np.ndarray | None = None,
     ring_nodes: frozenset[int] = frozenset(),
+    ring_edges: frozenset[tuple[int, int]] = frozenset(),
     semantic_target: UgiAmineSemanticTarget | None = None,
+    all_role_semantic_target: UgiAllRoleSemanticTarget | None = None,
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
+    terminal_generator: np.random.Generator | None = None,
 ) -> tuple[dict[int, int] | None, str | None]:
     """Choose one globally feasible measured-like amine exterior under model scores.
 
@@ -1159,8 +1960,16 @@ def _select_ugi_amine_atom_states(
         int(node): int(record.graph.node_states[node])
         for node in np.flatnonzero(record.fixed_atom_mask)
     }
-    best_score: float | None = None
-    best_states: dict[int, int] | None = None
+    candidates: list[
+        tuple[float, float, float | None, float | None, object | None, dict[int, int]]
+    ] = []
+    joint_program = (
+        None
+        if semantic_guidance_policy is None or not semantic_guidance_policy.uses_joint_realism
+        else _ugi_program_from_record(record)
+    )
+    if joint_program is not None and all_role_semantic_target is None:
+        return None, "ugi_joint_realism_complete_target_unavailable"
     symbol_assignments: list[dict[int, str]] = []
     if semantic_target is None:
         minimum_n = int(policy.minimum_amine_exterior_nitrogens)
@@ -1210,6 +2019,7 @@ def _select_ugi_amine_atom_states(
     for symbols_by_node in symbol_assignments:
         selected: dict[int, int] = {}
         score = 0.0
+        local_evidence_scores: list[float] = []
         feasible = True
         for node in exterior:
             symbol = symbols_by_node[node]
@@ -1229,6 +2039,21 @@ def _select_ugi_amine_atom_states(
                 break
             selected[node] = state
             score += float(predictions["nodes"][index, node, state])
+            if semantic_guidance_policy is not None and (
+                semantic_guidance_policy.uses_coordinate_local_chemistry_atoms
+            ):
+                rank_prior = semantic_guidance_policy.local_chemistry_prior
+                if rank_prior is None or distances_to_core is None:
+                    feasible = False
+                    break
+                rank_bias = semantic_guidance_policy.atom_local_scores(
+                    role=block.role,
+                    depth=int(distances_to_core[node]),
+                    degree=len(neighbors[node]),
+                    in_ring=node in ring_nodes,
+                    atom_vocabulary=atom_vocabulary,
+                )
+                local_evidence_scores.append(float(rank_bias[state]))
             if chemistry_prior is not None and chemistry_prior_strength > 0:
                 if distances_to_core is None or int(distances_to_core[node]) < 1:
                     feasible = False
@@ -1250,13 +2075,22 @@ def _select_ugi_amine_atom_states(
         symbols = [atom_vocabulary[known[node]].symbol for node in range(block.start, block.stop)]
         carbon_atoms = symbols.count("C")
         heavy_atoms = len(symbols)
-        if semantic_target is not None and _carbon_skeleton_diameter_from_states(
+        carbon_diameter = _carbon_skeleton_diameter_from_states(
             range(block.start, block.stop),
             known=known,
             neighbors=neighbors,
             atom_vocabulary=atom_vocabulary,
-        ) != int(semantic_target.carbon_skeleton_diameter):
-            continue
+        )
+        actual_donors: int | None = None
+        actual_branches: int | None = None
+        if semantic_target is not None:
+            tolerance = (
+                0
+                if semantic_guidance_policy is None
+                else semantic_guidance_policy.amine_carbon_skeleton_diameter_tolerance
+            )
+            if abs(carbon_diameter - int(semantic_target.carbon_skeleton_diameter)) > tolerance:
+                continue
         stages["carbon_diameter"] += 1
         if semantic_target is not None:
             block_nodes = set(range(block.start, block.stop))
@@ -1267,6 +2101,25 @@ def _select_ugi_amine_atom_states(
             )
             if not 1 <= reactive_amine_sites <= 2:
                 continue
+            if semantic_target.hydrogen_bond_donors is not None:
+                ordered_nodes = tuple(range(block.start, block.stop))
+                actual_donors, actual_branches = amine_local_substitution_metrics(
+                    tuple(atom_vocabulary[known[node]].symbol for node in ordered_nodes),
+                    tuple(
+                        sum(neighbor in block_nodes for neighbor in neighbors[node])
+                        for node in ordered_nodes
+                    ),
+                )
+                if abs(actual_donors - semantic_target.hydrogen_bond_donors) > (
+                    0
+                    if semantic_guidance_policy is None
+                    else semantic_guidance_policy.amine_hydrogen_bond_donors_tolerance
+                ) or abs(actual_branches - semantic_target.heavy_branch_atoms) > (
+                    0
+                    if semantic_guidance_policy is None
+                    else semantic_guidance_policy.amine_heavy_branch_atoms_tolerance
+                ):
+                    continue
         stages["registry_handle"] += 1
         if not local_chemistry_support.component_is_within_observed_support(
             record.program_id,
@@ -1293,6 +2146,32 @@ def _select_ugi_amine_atom_states(
         ):
             continue
         stages["edge_support"] += 1
+        head_arrangement_label: object | None = None
+        if (
+            semantic_guidance_policy is not None
+            and semantic_guidance_policy.uses_local_chemistry_atoms
+            and semantic_guidance_policy.local_chemistry_score_mode == "support_tier"
+        ):
+            exterior_set = set(exterior)
+            for left in exterior:
+                for right in neighbors[left]:
+                    if right not in exterior_set or left >= right:
+                        continue
+                    adjacency_score = semantic_guidance_policy.edge_symbol_local_score(
+                        role=block.role,
+                        depth=min(
+                            int(distances_to_core[left]),
+                            int(distances_to_core[right]),
+                        ),
+                        in_ring=tuple(sorted((left, right))) in ring_edges,
+                        symbols=(
+                            atom_vocabulary[known[left]].symbol,
+                            atom_vocabulary[known[right]].symbol,
+                        ),
+                    )
+                    if adjacency_score is None:
+                        raise RuntimeError("support-tier adjacency score is unavailable")
+                    local_evidence_scores.append(float(adjacency_score))
         if any(
             all(node in known for node in triangle)
             and not local_chemistry_support.allows_role_triangle(
@@ -1313,11 +2192,135 @@ def _select_ugi_amine_atom_states(
         ):
             continue
         stages["cycle_support"] += 1
-        if best_score is None or score > best_score:
-            best_score = score
-            best_states = selected
-    if best_states is not None:
-        return best_states, None
+        if (
+            semantic_guidance_policy is not None
+            and semantic_guidance_policy.local_chemistry_score_mode
+            in {
+                "whole_head_support_tier",
+                "whole_head_support_binary",
+                "whole_head_support_distance",
+            }
+        ):
+            if distances_to_core is None:
+                return None, "ugi_head_arrangement_reference_unavailable"
+            whole_head_score = semantic_guidance_policy.amine_head_arrangement_support_score(
+                nodes=exterior,
+                symbols_by_node={
+                    node: atom_vocabulary[state].symbol for node, state in known.items()
+                },
+                depths_by_node={node: int(distances_to_core[node]) for node in exterior},
+                neighbors=neighbors,
+                ring_nodes=ring_nodes,
+            )
+            local_evidence_scores.append(whole_head_score)
+            chemistry_reference = semantic_guidance_policy.local_chemistry_prior
+            if chemistry_reference is None:
+                return None, "ugi_head_arrangement_reference_unavailable"
+            head_arrangement_label = chemistry_reference.amine_head_arrangement_signatures(
+                nodes=exterior,
+                symbols_by_node={
+                    node: atom_vocabulary[state].symbol for node, state in known.items()
+                },
+                depths_by_node={node: int(distances_to_core[node]) for node in exterior},
+                neighbors=neighbors,
+                ring_nodes=ring_nodes,
+            )[0]
+        semantic_distance = (
+            0.0
+            if semantic_target is None
+            else float(abs(carbon_diameter - semantic_target.carbon_skeleton_diameter))
+            + (
+                0.0
+                if semantic_target.hydrogen_bond_donors is None
+                else float(
+                    abs(actual_donors - semantic_target.hydrogen_bond_donors)
+                    + abs(actual_branches - semantic_target.heavy_branch_atoms)
+                )
+            )
+        )
+        joint_score = None
+        if joint_program is not None:
+            heavy_diameter = _induced_graph_diameter(
+                range(block.start, block.stop),
+                neighbors,
+            )
+            if heavy_diameter < 1 or semantic_target is None:
+                continue
+            candidate_amine = UgiAmineSemanticTarget(
+                heavy_atom_graph_diameter=heavy_diameter,
+                carbon_skeleton_diameter=carbon_diameter,
+                nitrogen_atoms=semantic_target.nitrogen_atoms,
+                oxygen_atoms=semantic_target.oxygen_atoms,
+                hydrogen_bond_donors=actual_donors,
+                heavy_branch_atoms=actual_branches,
+            )
+            joint_score = semantic_guidance_policy.joint_realism_scores(
+                joint_program,
+                (replace_amine_semantics(all_role_semantic_target, candidate_amine),),
+            )[0]
+        candidates.append(
+            (
+                score,
+                semantic_distance,
+                joint_score,
+                (
+                    semantic_guidance_policy.aggregate_local_scores(local_evidence_scores)
+                    if semantic_guidance_policy is not None
+                    and semantic_guidance_policy.uses_local_chemistry_atoms
+                    else None
+                ),
+                head_arrangement_label,
+                selected,
+            )
+        )
+    if candidates:
+        if (
+            semantic_guidance_policy is None
+            or not semantic_guidance_policy.uses_ranked_terminal_chemistry
+        ):
+            choice = max(range(len(candidates)), key=lambda value: candidates[value][0])
+        else:
+            if terminal_generator is None:
+                return None, "ugi_amine_semantic_guidance_generator_unavailable"
+            model_scores = [candidate[0] for candidate in candidates]
+            semantic_distances = [candidate[1] for candidate in candidates]
+            joint_scores = (
+                [float(candidate[2]) for candidate in candidates]
+                if semantic_guidance_policy.uses_joint_realism
+                else None
+            )
+            local_scores = (
+                [float(candidate[3]) for candidate in candidates]
+                if semantic_guidance_policy.uses_local_chemistry_atoms
+                else None
+            )
+            if local_scores is None:
+                probabilities = semantic_guidance_policy.probabilities(
+                    model_scores,
+                    semantic_distances,
+                    joint_scores,
+                )
+            elif semantic_guidance_policy.local_chemistry_score_mode in {
+                "whole_head_support_tier",
+                "whole_head_support_binary",
+                "whole_head_support_distance",
+            }:
+                probabilities = semantic_guidance_policy.whole_head_chemistry_probabilities(
+                    model_scores,
+                    semantic_distances,
+                    local_scores,
+                    joint_scores,
+                    group_labels=[candidate[4] for candidate in candidates],
+                )
+            else:
+                probabilities = semantic_guidance_policy.atom_chemistry_probabilities(
+                    model_scores,
+                    semantic_distances,
+                    local_scores,
+                    joint_scores,
+                )
+            choice = int(terminal_generator.choice(len(candidates), p=probabilities))
+        return candidates[choice][5], None
     if not symbol_assignments:
         return None, "ugi_amine_semantic_composition_unavailable"
     stage_reasons = (
@@ -1353,9 +2356,19 @@ def _strict_terminal_record(
     ugi_role_chemistry_prior_strength: float = 0.0,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
     ugi_amine_semantic_target: UgiAmineSemanticTarget | None = None,
+    ugi_all_role_semantic_target: UgiAllRoleSemanticTarget | None = None,
+    ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
     topology_only: bool = False,
 ) -> tuple[dict[str, np.ndarray] | None, str | None]:
     """Decode one exact-size graph under topology and valence support, without fallback."""
+
+    if ugi_amine_semantic_target is not None and ugi_all_role_semantic_target is not None:
+        return None, "ugi_semantic_target_modes_are_mutually_exclusive"
+    effective_amine_semantic_target = (
+        ugi_all_role_semantic_target.amine
+        if ugi_all_role_semantic_target is not None
+        else ugi_amine_semantic_target
+    )
 
     count = record.node_count
     closure_count = record.graph.closure_count
@@ -1651,10 +2664,12 @@ def _strict_terminal_record(
     ]
     distances_to_core = _distances_to_reaction_core(neighbors, record.core_position_states)
     if (
-        ugi_role_chemistry_prior is not None
-        and ugi_role_chemistry_prior_strength > 0
-        and np.any(distances_to_core < 0)
-    ):
+        (ugi_role_chemistry_prior is not None and ugi_role_chemistry_prior_strength > 0)
+        or (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_local_chemistry
+        )
+    ) and np.any(distances_to_core < 0):
         return None, "reaction_core_distance_unavailable"
     ring_nodes, ring_edges = _generated_ring_support(generated_cycles)
 
@@ -1671,6 +2686,12 @@ def _strict_terminal_record(
             closure_right,
             neighbors,
             ugi_ester_chemotype_policy,
+            distances_to_core=distances_to_core,
+            ring_nodes=ring_nodes,
+            ring_edges=ring_edges,
+            all_role_semantic_target=ugi_all_role_semantic_target,
+            semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
+            terminal_generator=terminal_generator,
         )
         if motif is None:
             return None, "ugi_aldehyde_ester_topology_unavailable"
@@ -1713,7 +2734,11 @@ def _strict_terminal_record(
             chemistry_prior_strength=ugi_role_chemistry_prior_strength,
             distances_to_core=distances_to_core,
             ring_nodes=ring_nodes,
-            semantic_target=ugi_amine_semantic_target,
+            ring_edges=ring_edges,
+            semantic_target=effective_amine_semantic_target,
+            all_role_semantic_target=ugi_all_role_semantic_target,
+            semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
+            terminal_generator=terminal_generator,
         )
         if selected_amine is None:
             return None, amine_failure or "ugi_amine_global_atom_assignment_unavailable"
@@ -1739,7 +2764,7 @@ def _strict_terminal_record(
         ):
             role = role_names[node]
             allowed_symbols = (
-                ({"C", "N", "O"} if ugi_amine_semantic_target is not None else {"C", "N"})
+                ({"C", "N", "O"} if effective_amine_semantic_target is not None else {"C", "N"})
                 if role == ugi_ester_chemotype_policy.amine_role
                 else (
                     {forced_atom_symbols.get(node, "C")}
@@ -1862,6 +2887,23 @@ def _strict_terminal_record(
                 return None, "ugi_amine_global_atom_assignment_invariant_failure"
         else:
             node_logits = predictions["nodes"][index, node]
+            mog_local_scores: np.ndarray | None = None
+            if (
+                ugi_mog_semantic_guidance_policy is not None
+                and ugi_mog_semantic_guidance_policy.uses_coordinate_local_chemistry_atoms
+                and record.program_id == UGI_PROGRAM_ID
+                and int(record.core_position_states[node]) == 1
+            ):
+                chemistry_prior = ugi_mog_semantic_guidance_policy.local_chemistry_prior
+                if chemistry_prior is None:
+                    return None, "ugi_local_chemistry_reference_unavailable"
+                mog_local_scores = ugi_mog_semantic_guidance_policy.atom_local_scores(
+                    role=role_names[node],
+                    depth=int(distances_to_core[node]),
+                    degree=len(neighbors[node]),
+                    in_ring=node in ring_nodes,
+                    atom_vocabulary=atom_vocabulary,
+                )
             if (
                 ugi_role_chemistry_prior is not None
                 and ugi_role_chemistry_prior_strength > 0
@@ -1877,16 +2919,31 @@ def _strict_terminal_record(
                         atom_vocabulary=atom_vocabulary,
                     )
                 )
-            selected = (
-                _argmax_allowed(node_logits, valid)
-                if terminal_generator is None
-                else _sample_allowed(
+            if mog_local_scores is not None:
+                if terminal_generator is None:
+                    return None, "ugi_local_chemistry_guidance_generator_unavailable"
+                selected = _sample_mog_chemistry_allowed(
                     node_logits,
                     valid,
+                    mog_local_scores,
+                    policy=ugi_mog_semantic_guidance_policy,
                     generator=terminal_generator,
-                    temperature=terminal_temperature,
                 )
-            )
+            else:
+                deterministic_terminal_chemistry = (
+                    ugi_mog_semantic_guidance_policy is not None
+                    and not ugi_mog_semantic_guidance_policy.uses_ranked_terminal_chemistry
+                )
+                selected = (
+                    _argmax_allowed(node_logits, valid)
+                    if terminal_generator is None or deterministic_terminal_chemistry
+                    else _sample_allowed(
+                        node_logits,
+                        valid,
+                        generator=terminal_generator,
+                        temperature=terminal_temperature,
+                    )
+                )
             if selected is None:
                 if local_chemistry_support is None:
                     reason = "atom_valence_state_unavailable"
@@ -1949,6 +3006,33 @@ def _strict_terminal_record(
         # Bond-order selection below must not spend a pinned core position's stated valence on a
         # higher bond order either, so the realized capacities carry the same ceiling.
         capacities = np.minimum(capacities, maximum_capacities)
+    if ugi_all_role_semantic_target is not None:
+        if local_chemistry_support is None:
+            return None, "ugi_all_role_semantic_local_support_unavailable"
+        selected_tail_bonds, tail_bond_failure = _select_ugi_all_role_tail_bonds(
+            predictions,
+            index,
+            record,
+            atom_vocabulary,
+            node_states,
+            parents,
+            closure_left,
+            closure_right,
+            minimum_used,
+            capacities,
+            bond_units,
+            role_names,
+            local_chemistry_support,
+            forced_bonds,
+            ugi_all_role_semantic_target,
+            distances_to_core=distances_to_core,
+            ring_edges=ring_edges,
+            semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
+            terminal_generator=terminal_generator,
+        )
+        if selected_tail_bonds is None:
+            return None, tail_bond_failure or "ugi_all_role_tail_bond_assignment_unavailable"
+        forced_bonds = selected_tail_bonds
     used = minimum_used.copy()
     variable_edges: list[tuple[str, int, int, int]] = []
     for child in range(1, count):
@@ -1985,6 +3069,50 @@ def _strict_terminal_record(
                 ):
                     valid[bond] = False
         logits = predictions["parent_bonds" if kind == "parent" else "closure_bonds"][index, slot]
+        mog_local_scores: np.ndarray | None = None
+        whole_head_amine_bond_support = (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.local_chemistry_score_mode
+            in {
+                "whole_head_support_tier",
+                "whole_head_support_binary",
+                "whole_head_support_distance",
+            }
+            and ugi_mog_semantic_guidance_policy.whole_head_hard_bond_support
+            and record.program_id == UGI_PROGRAM_ID
+            and role_names[left] == role_names[right] == "amine_head"
+            and int(record.core_position_states[left]) == 1
+            and int(record.core_position_states[right]) == 1
+        )
+        ranked_local_bond = (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_local_chemistry_bonds
+            and record.program_id == UGI_PROGRAM_ID
+            and role_names[left] == role_names[right]
+            and int(record.core_position_states[left]) == 1
+            and int(record.core_position_states[right]) == 1
+        )
+        if whole_head_amine_bond_support or ranked_local_bond:
+            assert ugi_mog_semantic_guidance_policy is not None
+            chemistry_prior = ugi_mog_semantic_guidance_policy.local_chemistry_prior
+            if chemistry_prior is None:
+                return None, "ugi_local_chemistry_reference_unavailable"
+            local_bond_support = ugi_mog_semantic_guidance_policy.bond_local_scores(
+                role=role_names[left],
+                depth=min(int(distances_to_core[left]), int(distances_to_core[right])),
+                in_ring=tuple(sorted((left, right))) in ring_edges,
+                symbols=(
+                    atom_vocabulary[int(node_states[left])].symbol,
+                    atom_vocabulary[int(node_states[right])].symbol,
+                ),
+                bond_classes=len(valid),
+            )
+            if whole_head_amine_bond_support:
+                valid &= local_bond_support >= (
+                    ugi_mog_semantic_guidance_policy.minimum_whole_head_support_tier
+                )
+            if ranked_local_bond:
+                mog_local_scores = local_bond_support
         if (
             ugi_role_chemistry_prior is not None
             and ugi_role_chemistry_prior_strength > 0
@@ -2005,16 +3133,42 @@ def _strict_terminal_record(
                     bond_classes=len(valid),
                 )
             )
-        bond = (
-            _argmax_allowed(logits, valid)
-            if terminal_generator is None
-            else _sample_allowed(
+        if mog_local_scores is not None:
+            if terminal_generator is None:
+                return None, "ugi_local_chemistry_guidance_generator_unavailable"
+            bond = _sample_mog_chemistry_allowed(
                 logits,
                 valid,
+                mog_local_scores,
+                policy=ugi_mog_semantic_guidance_policy,
                 generator=terminal_generator,
-                temperature=terminal_temperature,
+                rank_weight=(
+                    ugi_mog_semantic_guidance_policy.effective_local_chemistry_bond_rank_weight
+                ),
             )
-        )
+        else:
+            deterministic_terminal_chemistry = (
+                ugi_mog_semantic_guidance_policy is not None
+                and not ugi_mog_semantic_guidance_policy.uses_ranked_terminal_chemistry
+            )
+            deterministic_terminal_bonds = (
+                ugi_mog_semantic_guidance_policy is not None
+                and not ugi_mog_semantic_guidance_policy.uses_ranked_terminal_bonds
+            )
+            bond = (
+                _argmax_allowed(logits, valid)
+                if (
+                    terminal_generator is None
+                    or deterministic_terminal_chemistry
+                    or deterministic_terminal_bonds
+                )
+                else _sample_allowed(
+                    logits,
+                    valid,
+                    generator=terminal_generator,
+                    temperature=terminal_temperature,
+                )
+            )
         if bond is None:
             qualifier = "local_chemistry" if local_chemistry_support is not None else "valence"
             return None, f"{kind}_bond_{qualifier}_unavailable"
@@ -2097,11 +3251,23 @@ def decode_synthesis_program_strict_argmax(
     ugi_role_chemistry_prior_strength: float = 0.0,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
     ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget | None] | None = None,
+    ugi_all_role_semantic_targets: Sequence[UgiAllRoleSemanticTarget | None] | None = None,
+    ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
 ) -> tuple[dict[str, Any], tuple[str | None, ...]]:
     """Decode once under strict support; infeasible attempts abstain and are never repaired."""
 
     if len(records) != int(layout["node_mask"].shape[0]):
         raise SynthesisProgramSamplingError("strict decoder batch and record counts disagree")
+    has_amine_targets = ugi_amine_semantic_targets is not None and any(
+        target is not None for target in ugi_amine_semantic_targets
+    )
+    has_all_role_targets = ugi_all_role_semantic_targets is not None and any(
+        target is not None for target in ugi_all_role_semantic_targets
+    )
+    if has_amine_targets and has_all_role_targets:
+        raise SynthesisProgramSamplingError(
+            "amine-only and all-role semantic target batches are mutually exclusive"
+        )
     if ugi_amine_semantic_targets is None:
         semantic_targets: tuple[UgiAmineSemanticTarget | None, ...] = (None,) * len(records)
     else:
@@ -2109,6 +3275,14 @@ def decode_synthesis_program_strict_argmax(
         if len(semantic_targets) != len(records):
             raise SynthesisProgramSamplingError(
                 "strict decoder semantic-target and record counts disagree"
+            )
+    if ugi_all_role_semantic_targets is None:
+        all_role_targets: tuple[UgiAllRoleSemanticTarget | None, ...] = (None,) * len(records)
+    else:
+        all_role_targets = tuple(ugi_all_role_semantic_targets)
+        if len(all_role_targets) != len(records):
+            raise SynthesisProgramSamplingError(
+                "strict decoder all-role-target and record counts disagree"
             )
     cpu_predictions = {
         key: value.detach().to("cpu").numpy()
@@ -2157,7 +3331,9 @@ def decode_synthesis_program_strict_argmax(
     }
     terminal = restore_synthesis_program_fixed_states(terminal, cpu_layout)
     reasons: list[str | None] = []
-    for index, (record, semantic_target) in enumerate(zip(records, semantic_targets, strict=True)):
+    for index, (record, semantic_target, all_role_target) in enumerate(
+        zip(records, semantic_targets, all_role_targets, strict=True)
+    ):
         decoded, reason = _strict_terminal_record(
             cpu_predictions,
             index,
@@ -2175,6 +3351,8 @@ def decode_synthesis_program_strict_argmax(
             ugi_role_chemistry_prior_strength=ugi_role_chemistry_prior_strength,
             ugi_topology_policy=ugi_topology_policy,
             ugi_amine_semantic_target=semantic_target,
+            ugi_all_role_semantic_target=all_role_target,
+            ugi_mog_semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
         )
         reasons.append(reason)
         if decoded is None:
@@ -2276,6 +3454,8 @@ def sample_synthesis_program_products(
     ugi_role_chemistry_prior: UgiRoleChemistryPrior | None = None,
     ugi_role_chemistry_prior_strength: float = 0.0,
     ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget] | None = None,
+    ugi_all_role_semantic_targets: Sequence[UgiAllRoleSemanticTarget] | None = None,
+    ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
     potency_condition: Any | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Generate from semantic layouts while exposing only Ugi adapter-fixed graph states."""
@@ -2337,6 +3517,61 @@ def sample_synthesis_program_products(
             "Ugi amine semantic targets require one target per Ugi record and the exact Ugi "
             "topology/chemotype policies"
         )
+    if ugi_all_role_semantic_targets is not None and (
+        len(ugi_all_role_semantic_targets) != len(records)
+        or any(record.program_id != UGI_PROGRAM_ID for record in records)
+        or ugi_ester_chemotype_policy is None
+        or ugi_topology_policy is None
+        or local_chemistry_support is None
+    ):
+        raise SynthesisProgramSamplingError(
+            "Ugi all-role semantic targets require one target per Ugi record and the exact Ugi "
+            "topology, chemotype, and local-chemistry policies"
+        )
+    if ugi_amine_semantic_targets is not None and ugi_all_role_semantic_targets is not None:
+        raise SynthesisProgramSamplingError(
+            "amine-only and all-role semantic targets are mutually exclusive"
+        )
+    mog_guidance = (
+        terminal_decode_policy == UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY
+    )
+    if mog_guidance != (ugi_mog_semantic_guidance_policy is not None):
+        raise SynthesisProgramSamplingError(
+            "the MOG-style terminal decoder and one explicit semantic-guidance policy must be "
+            "supplied together"
+        )
+    if mog_guidance and ugi_all_role_semantic_targets is None:
+        raise SynthesisProgramSamplingError(
+            "MOG-style semantic guidance requires one all-role target per Ugi attempt"
+        )
+    if (
+        mog_guidance
+        and ugi_mog_semantic_guidance_policy.uses_joint_realism
+        and ugi_mog_semantic_guidance_policy.joint_realism_scorer is None
+    ):
+        raise SynthesisProgramSamplingError(
+            "joint-realism MOG guidance requires one bound measured-train reference"
+        )
+    if (
+        mog_guidance
+        and ugi_mog_semantic_guidance_policy.uses_local_reference
+        and ugi_mog_semantic_guidance_policy.local_chemistry_prior is None
+    ):
+        raise SynthesisProgramSamplingError(
+            "local-chemistry MOG guidance requires one bound measured-train reference"
+        )
+    if (
+        mog_guidance
+        and ugi_mog_semantic_guidance_policy.uses_local_reference
+        and (
+            ugi_ester_chemotype_policy is None
+            or ugi_mog_semantic_guidance_policy.local_chemistry_prior.reaction_id
+            != ugi_ester_chemotype_policy.reaction_id
+        )
+    ):
+        raise SynthesisProgramSamplingError(
+            "local-chemistry MOG guidance must bind the active Ugi reaction"
+        )
     if (terminal_decode_policy in LOCAL_CHEMISTRY_TERMINAL_DECODE_POLICIES) != (
         local_chemistry_support is not None
     ):
@@ -2396,6 +3631,13 @@ def sample_synthesis_program_products(
             target for target in ugi_amine_semantic_targets for _ in range(samples_per_program)
         )
     )
+    repeated_all_role_targets: tuple[UgiAllRoleSemanticTarget | None, ...] = (
+        (None,) * len(repeated)
+        if ugi_all_role_semantic_targets is None
+        else tuple(
+            target for target in ugi_all_role_semantic_targets for _ in range(samples_per_program)
+        )
+    )
     maximum_closures = int(model.maximum_closures)
     node_p0 = torch.as_tensor(node_marginal, dtype=torch.float32, device=resolved_device)
     bond_p0 = torch.as_tensor(bond_marginal, dtype=torch.float32, device=resolved_device)
@@ -2419,6 +3661,7 @@ def sample_synthesis_program_products(
         for offset in range(0, len(repeated), batch_size):
             local = repeated[offset : offset + batch_size]
             local_semantic_targets = repeated_semantic_targets[offset : offset + batch_size]
+            local_all_role_targets = repeated_all_role_targets[offset : offset + batch_size]
             cpu_layout = collate_synthesis_program_layouts(
                 local,
                 maximum_closures=maximum_closures,
@@ -2568,7 +3811,9 @@ def sample_synthesis_program_products(
                                 generator=topology_generator,
                                 ester_chemotype_policy=ugi_ester_chemotype_policy,
                                 amine_semantic_target=local_semantic_targets[index],
+                                all_role_semantic_target=local_all_role_targets[index],
                                 local_chemistry_support=local_chemistry_support,
+                                semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
                             )
                         except UgiTransformerTopologyError as error:
                             topology_reasons[index] = f"ugi_topology_coupling_failure:{error}"
@@ -2677,6 +3922,8 @@ def sample_synthesis_program_products(
                         ugi_topology_policy if learned_topology_then_chemistry else None
                     ),
                     ugi_amine_semantic_targets=local_semantic_targets,
+                    ugi_all_role_semantic_targets=local_all_role_targets,
+                    ugi_mog_semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
                     enforce_program_topology=(
                         terminal_decode_policy in PROGRAM_TOPOLOGY_TERMINAL_DECODE_POLICIES
                         and (not coupled_ugi_topology or batch_has_coupled_ugi)
@@ -2827,6 +4074,42 @@ def sample_synthesis_program_products(
                             if local_semantic_targets[index] is None
                             else local_semantic_targets[index].to_mapping()
                         ),
+                        "ugi_all_role_semantic_target_applied": (
+                            local_all_role_targets[index] is not None
+                        ),
+                        "ugi_mog_semantic_guidance_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                        ),
+                        "ugi_joint_semantic_realism_guidance_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                            and ugi_mog_semantic_guidance_policy.uses_joint_realism
+                        ),
+                        "ugi_local_chemistry_mog_guidance_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                            and ugi_mog_semantic_guidance_policy.uses_local_chemistry
+                        ),
+                        "ugi_local_atom_chemistry_mog_guidance_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                            and ugi_mog_semantic_guidance_policy.uses_local_chemistry_atoms
+                        ),
+                        "ugi_local_bond_chemistry_mog_guidance_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                            and ugi_mog_semantic_guidance_policy.uses_local_chemistry_bonds
+                        ),
+                        "ugi_whole_head_topology_support_applied": (
+                            ugi_mog_semantic_guidance_policy is not None
+                            and ugi_mog_semantic_guidance_policy.whole_head_topology_support
+                        ),
+                        "ugi_local_atom_chemistry_total_variation_radius": (
+                            None
+                            if ugi_mog_semantic_guidance_policy is None
+                            else ugi_mog_semantic_guidance_policy.local_chemistry_atom_total_variation_radius
+                        ),
+                        "requested_ugi_all_role_semantic_target": (
+                            None
+                            if local_all_role_targets[index] is None
+                            else local_all_role_targets[index].to_mapping()
+                        ),
                         "requested_role_morphology": (
                             {
                                 next(
@@ -2886,15 +4169,27 @@ def sample_synthesis_program_products(
         ),
         "topology_conditioned_chemistry_source_reset": topology_conditioned_chemistry,
         "terminal_chemistry_readout": (
-            "support_constrained_soft_prior_categorical_atom_and_bond_draw"
-            if stochastic_terminal and ugi_role_chemistry_prior_strength > 0
-            else (
-                "support_constrained_categorical_atom_and_bond_draw"
-                if stochastic_terminal
+            (
+                "support_constrained_topology_ranked_atom_and_bond_argmax"
+                if not ugi_mog_semantic_guidance_policy.uses_ranked_terminal_chemistry
                 else (
-                    "support_constrained_soft_prior_atom_and_bond_argmax"
-                    if ugi_role_chemistry_prior_strength > 0
-                    else "support_constrained_atom_and_bond_argmax"
+                    "support_constrained_mog_ranked_categorical_atom_draw_and_bond_argmax"
+                    if not ugi_mog_semantic_guidance_policy.uses_ranked_terminal_bonds
+                    else "support_constrained_mog_ranked_categorical_atom_and_bond_draw"
+                )
+            )
+            if mog_guidance and ugi_mog_semantic_guidance_policy is not None
+            else (
+                "support_constrained_soft_prior_categorical_atom_and_bond_draw"
+                if stochastic_terminal and ugi_role_chemistry_prior_strength > 0
+                else (
+                    "support_constrained_categorical_atom_and_bond_draw"
+                    if stochastic_terminal
+                    else (
+                        "support_constrained_soft_prior_atom_and_bond_argmax"
+                        if ugi_role_chemistry_prior_strength > 0
+                        else "support_constrained_atom_and_bond_argmax"
+                    )
                 )
             )
         ),
@@ -3003,6 +4298,47 @@ def sample_synthesis_program_products(
             ugi_role_chemistry_prior is not None and ugi_role_chemistry_prior_strength > 0
         ),
         "ugi_role_chemistry_prior_strength": ugi_role_chemistry_prior_strength,
+        "ugi_mog_semantic_guidance_applied": mog_guidance,
+        "ugi_mog_semantic_guidance_policy": (
+            None
+            if ugi_mog_semantic_guidance_policy is None
+            else ugi_mog_semantic_guidance_policy.to_mapping()
+        ),
+        "ugi_joint_semantic_realism_guidance_applied": (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_joint_realism
+        ),
+        "ugi_joint_semantic_realism_reference": (
+            None
+            if ugi_mog_semantic_guidance_policy is None
+            else ugi_mog_semantic_guidance_policy.joint_realism_audit()
+        ),
+        "ugi_local_chemistry_mog_guidance_applied": (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_local_chemistry
+        ),
+        "ugi_local_atom_chemistry_mog_guidance_applied": (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_local_chemistry_atoms
+        ),
+        "ugi_local_bond_chemistry_mog_guidance_applied": (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.uses_local_chemistry_bonds
+        ),
+        "ugi_whole_head_topology_support_applied": (
+            ugi_mog_semantic_guidance_policy is not None
+            and ugi_mog_semantic_guidance_policy.whole_head_topology_support
+        ),
+        "ugi_local_atom_chemistry_total_variation_radius": (
+            None
+            if ugi_mog_semantic_guidance_policy is None
+            else ugi_mog_semantic_guidance_policy.local_chemistry_atom_total_variation_radius
+        ),
+        "ugi_local_chemistry_mog_reference": (
+            None
+            if ugi_mog_semantic_guidance_policy is None
+            else ugi_mog_semantic_guidance_policy.local_chemistry_audit()
+        ),
         "ugi_role_chemistry_prior": (
             None if ugi_role_chemistry_prior is None else ugi_role_chemistry_prior.to_mapping()
         ),
@@ -3017,6 +4353,22 @@ def sample_synthesis_program_products(
                 "source": "identity-free measured-Ugi train-fold conditional program",
                 "fields": list(ugi_amine_semantic_targets[0].to_mapping()),
                 "sampling": "one semantic draw and one exact conditional decode without retry",
+                "topology_conditioning": "nonempty train-fold local-chemistry support",
+            }
+        ),
+        "ugi_all_role_semantic_target_applied": ugi_all_role_semantic_targets is not None,
+        "ugi_all_role_semantic_joint_support_applied": (
+            ugi_all_role_semantic_targets is not None and local_chemistry_support is not None
+        ),
+        "ugi_all_role_semantic_target_policy": (
+            None
+            if ugi_all_role_semantic_targets is None
+            else {
+                "source": "identity-free measured-Ugi train-fold joint conditional program",
+                "fields": list(ugi_all_role_semantic_targets[0].to_mapping()),
+                "sampling": (
+                    "one all-role semantic draw and one exact conditional decode without retry"
+                ),
                 "topology_conditioning": "nonempty train-fold local-chemistry support",
             }
         ),
@@ -3045,6 +4397,7 @@ __all__ = [
     "UGI_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY",
     "UGI_ESTER_TOPOLOGY_ROLE_LOCAL_TERMINAL_DECODE_POLICY",
     "UGI_ESTER_TOPOLOGY_ROLE_LOCAL_STOCHASTIC_TERMINAL_DECODE_POLICY",
+    "UGI_ESTER_TOPOLOGY_ROLE_LOCAL_MOG_TERMINAL_DECODE_POLICY",
     "UGI_ESTER_TERMINAL_DECODE_POLICIES",
     "STOCHASTIC_TERMINAL_DECODE_POLICIES",
     "SynthesisProgramSamplingError",

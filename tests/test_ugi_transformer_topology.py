@@ -38,6 +38,9 @@ from forge.model.ugi_role_chemistry_prior import UgiRoleChemistryPrior
 from forge.model.ugi_transformer_topology import (
     UgiLocalSemanticTopology,
     UgiTransformerTopologyPolicy,
+    _amine_topology_support_context,
+    _full_directional_ester_side_carbon_counts_for_tree,
+    _full_ester_side_carbon_counts_for_tree,
     _has_ester_capable_tree,
     _sample_constructive_ester_offspring,
     _select_role_closures,
@@ -107,6 +110,55 @@ def test_amine_semantic_topology_enumeration_conditions_on_complete_head_diamete
     assert topologies[0].closures == ()
 
 
+def test_topology_support_context_is_rooted_at_the_reaction_core() -> None:
+    topology = UgiLocalSemanticTopology(
+        offspring=np.asarray((1, 1, 0), dtype=np.int64),
+        closures=(),
+    )
+
+    nodes, depths, neighbors, ring_nodes = _amine_topology_support_context(
+        topology,
+        attachment_count=1,
+    )
+
+    assert nodes == (0, 1, 2)
+    assert depths == {0: 1, 1: 2, 2: 3}
+    assert neighbors[0] == {1, 3}
+    assert ring_nodes == frozenset()
+
+
+def test_constructive_ester_topology_conditions_on_exact_precursor_side_lengths() -> None:
+    offspring = _sample_constructive_ester_offspring(
+        torch.zeros((17, 4)),
+        generator=torch.Generator().manual_seed(101),
+        minimum_side_carbons=6,
+        minimum_long_side_carbons=10,
+        exact_full_side_carbons=(6, 10),
+    )
+    parents = preorder_attached_forest_to_parents(offspring, attachment_count=1)
+
+    assert (6, 10) in _full_ester_side_carbon_counts_for_tree(parents)
+    assert _has_ester_capable_tree(
+        parents,
+        minimum_side_carbons=6,
+        minimum_long_side_carbons=10,
+    )
+
+
+def test_constructive_ester_topology_preserves_alkoxy_handle_direction() -> None:
+    offspring = _sample_constructive_ester_offspring(
+        torch.zeros((17, 4)),
+        generator=torch.Generator().manual_seed(101),
+        minimum_side_carbons=6,
+        minimum_long_side_carbons=10,
+        exact_full_side_carbons=(6, 10),
+        exact_alkoxy_handle_and_acyl_side_carbons=(6, 10),
+    )
+    parents = preorder_attached_forest_to_parents(offspring, attachment_count=1)
+
+    assert (6, 10) in _full_directional_ester_side_carbon_counts_for_tree(parents)
+
+
 def test_amine_semantic_topology_excludes_unqualified_three_site_amine_assignment() -> None:
     topologies = enumerate_amine_semantic_topologies(
         node_count=4,
@@ -130,6 +182,29 @@ def test_amine_semantic_topology_excludes_nitrogen_on_degree_four_branch() -> No
     assert not amine_semantic_topology_supports_target(
         topology,
         target=UgiAmineSemanticTarget(3, 1, 2, 0),
+        attachment_count=1,
+    )
+
+
+def test_amine_semantic_topology_enforces_donor_and_branch_semantics() -> None:
+    topology = UgiLocalSemanticTopology(
+        offspring=np.asarray([3, 0, 0, 0], dtype=np.int64),
+        closures=(),
+    )
+
+    assert amine_semantic_topology_supports_target(
+        topology,
+        target=UgiAmineSemanticTarget(3, 3, 1, 0, 1, 1),
+        attachment_count=1,
+    )
+    assert not amine_semantic_topology_supports_target(
+        topology,
+        target=UgiAmineSemanticTarget(3, 3, 1, 0, 0, 1),
+        attachment_count=1,
+    )
+    assert not amine_semantic_topology_supports_target(
+        topology,
+        target=UgiAmineSemanticTarget(3, 3, 1, 0, 1, 2),
         attachment_count=1,
     )
 
@@ -541,7 +616,7 @@ def test_ugi_ester_chemotype_is_a_registry_bound_decode_condition() -> None:
         "oxoester_aldehyde_body_tail": 17,
         "isocyanide_tail": 12,
     }
-    assert ester_policy.minimum_constructive_aldehyde_exterior_atoms == 18
+    assert ester_policy.minimum_constructive_aldehyde_exterior_atoms == 17
     assert ester_policy.minimum_amine_exterior_nitrogens == 1
     assert ester_policy.maximum_amine_exterior_nitrogens == 1
     assert dict(ester_policy.amine_cycle_sizes_by_exterior_count) == {

@@ -1,0 +1,70 @@
+{
+  "schema_version": "forge.ugi_all_role_semantic_adjudication_config.v1",
+  "scientific_question": "Does the complete-lipid joint semantic decoder materially improve measured-Ugi realism over the frozen amine-semantic joint-support baseline while preserving exact assembly and discovery capacity?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_binary_whole_head_support_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "treatment_arm": "all_role_semantic",
+  "expected_attempts": 256,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "promotion_gate": {
+    "effective_component_count_minimum_retained_ratio": 0.95,
+    "exact_l1_absolute_minimum": 0.95,
+    "exact_l1_noninferiority_margin": 0.01,
+    "require_uniform_role_panel_improvement": true,
+    "require_zero_program_support_abstentions": true,
+    "unique_exact_l1_minimum_retained_ratio": 0.95,
+    "validity_absolute_minimum": 0.95
+  },
+  "visual_review": {
+    "blinded": true,
+    "required_after_quantitative_gate": true,
+    "criteria": [
+      "tail morphology is at least as plausible as the frozen baseline",
+      "head-tail balance is visibly improved",
+      "no recurrent unsupported ring or heteroatom pathology is introduced"
+    ]
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development adjudication, not an across-training-seed or paper-level realism claim.",
+    "The adjudicator performs no training, generation, filtering, repair, retry, routing, oracle calls or candidate selection.",
+    "The treatment uses only aggregate measured-Ugi training-fold support and no precursor identities, stored component graphs or fragment tokens.",
+    "A quantitative pass requires a blinded fixed-index visual review before seed-0 promotion.",
+    "Promotion does not establish activity, synthesis success, formulation performance or biological efficacy."
+  ]
+}

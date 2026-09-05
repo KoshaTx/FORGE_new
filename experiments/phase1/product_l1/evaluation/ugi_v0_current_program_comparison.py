@@ -41,8 +41,10 @@ from forge.model.synthesis_program_layout import (
     SynthesisProgramLayoutPrior,
 )
 from forge.model.synthesis_program_sampling import sample_synthesis_program_products
+from forge.model.ugi_all_role_semantic_program import UgiAllRoleSemanticTarget
 from forge.model.ugi_amine_semantic_program import UgiAmineSemanticTarget
 from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
+from forge.model.ugi_mog_semantic_guidance import UgiMogSemanticGuidancePolicy
 from forge.model.ugi_morphology_program import UgiMorphologyProgram
 from forge.model.ugi_role_chemistry_prior import UgiRoleChemistryPrior
 from forge.model.ugi_transformer_topology import UgiTransformerTopologyPolicy
@@ -256,6 +258,8 @@ def _current_sampling_request(
     device: str,
     ugi_topology_policy: UgiTransformerTopologyPolicy | None = None,
     ugi_amine_semantic_target_sha256: str | None = None,
+    ugi_all_role_semantic_target_sha256: str | None = None,
+    ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
 ) -> dict[str, Any]:
     request = {
         "batch_size": int(runtime["batch_size"]),
@@ -284,6 +288,10 @@ def _current_sampling_request(
         request["ugi_topology_policy"] = ugi_topology_policy.to_mapping()
     if ugi_amine_semantic_target_sha256 is not None:
         request["ugi_amine_semantic_target_sha256"] = ugi_amine_semantic_target_sha256
+    if ugi_all_role_semantic_target_sha256 is not None:
+        request["ugi_all_role_semantic_target_sha256"] = ugi_all_role_semantic_target_sha256
+    if ugi_mog_semantic_guidance_policy is not None:
+        request["ugi_mog_semantic_guidance_policy"] = ugi_mog_semantic_guidance_policy.to_mapping()
     return request
 
 
@@ -308,11 +316,22 @@ def _load_or_sample_current(
     ugi_role_chemistry_prior_strength: float = 0.0,
     ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget] | None = None,
     ugi_amine_semantic_target_sha256: str | None = None,
+    ugi_all_role_semantic_targets: Sequence[UgiAllRoleSemanticTarget] | None = None,
+    ugi_all_role_semantic_target_sha256: str | None = None,
+    ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any], Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     if (ugi_amine_semantic_targets is None) != (ugi_amine_semantic_target_sha256 is None):
         raise UgiV0CurrentProgramComparisonError(
             "semantic targets and their frozen draw digest must be supplied together"
+        )
+    if (ugi_all_role_semantic_targets is None) != (ugi_all_role_semantic_target_sha256 is None):
+        raise UgiV0CurrentProgramComparisonError(
+            "all-role semantic targets and their frozen draw digest must be supplied together"
+        )
+    if ugi_amine_semantic_targets is not None and ugi_all_role_semantic_targets is not None:
+        raise UgiV0CurrentProgramComparisonError(
+            "amine-only and all-role semantic targets are mutually exclusive"
         )
     result_path = output_dir / "result.json"
     training = read_json_object(
@@ -345,6 +364,8 @@ def _load_or_sample_current(
         device=device,
         ugi_topology_policy=ugi_topology_policy,
         ugi_amine_semantic_target_sha256=ugi_amine_semantic_target_sha256,
+        ugi_all_role_semantic_target_sha256=ugi_all_role_semantic_target_sha256,
+        ugi_mog_semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
     )
     if specialist_checkpoint is not None:
         request["specialist_checkpoint_sha256"] = sha256_file(specialist_checkpoint)
@@ -463,6 +484,8 @@ def _load_or_sample_current(
             ugi_role_chemistry_prior=ugi_role_chemistry_prior,
             ugi_role_chemistry_prior_strength=ugi_role_chemistry_prior_strength,
             ugi_amine_semantic_targets=ugi_amine_semantic_targets,
+            ugi_all_role_semantic_targets=ugi_all_role_semantic_targets,
+            ugi_mog_semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
         )
     finally:
         cache.close()
@@ -474,8 +497,13 @@ def _load_or_sample_current(
         if ugi_amine_semantic_targets is None
         else ugi_amine_semantic_targets
     )
-    for index, (row, program, semantic_target) in enumerate(
-        zip(rows, programs, semantic_targets, strict=True)
+    all_role_targets: Sequence[UgiAllRoleSemanticTarget | None] = (
+        (None,) * len(programs)
+        if ugi_all_role_semantic_targets is None
+        else ugi_all_role_semantic_targets
+    )
+    for index, (row, program, semantic_target, all_role_target) in enumerate(
+        zip(rows, programs, semantic_targets, all_role_targets, strict=True)
     ):
         value = {
             "pipeline_index": index,
@@ -491,6 +519,9 @@ def _load_or_sample_current(
             "sampled_topology": row.get("sampled_topology"),
             "ugi_amine_semantic_target": (
                 None if semantic_target is None else semantic_target.to_mapping()
+            ),
+            "ugi_all_role_semantic_target": (
+                None if all_role_target is None else all_role_target.to_mapping()
             ),
         }
         normalized.append(value)

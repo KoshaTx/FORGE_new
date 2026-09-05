@@ -1,0 +1,37 @@
+{
+  "schema_version": "forge.ugi_joint_all_role_substitution_semantic_program_draw_config.v3",
+  "scientific_question": "Does adding measured-train amine substitution semantics to the coherent Ugi program law remove the dominant hydrogen-bond-donor and head-branch realism gap without component identities?",
+  "inputs": {
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    }
+  },
+  "reaction_id": "ugi_3cr_agile",
+  "sample_count": 3072,
+  "seed": 2026090205,
+  "policy": {
+    "weighting": "equal_family_group_then_equal_eligible_product_joint_program_semantics",
+    "sampling": "one joint categorical draw per attempt without rejection or retry",
+    "paired_amine_target": "identical_between_baseline_and_treatment",
+    "aldehyde_direction": "reactive_aldehyde_on_alkoxy_ester_side",
+    "component_or_family_ids_enter_program": false,
+    "heldout_access": false,
+    "amine_substitution_semantics": "exact_hydrogen_bond_donors_and_heavy_branch_atoms"
+  },
+  "nonclaims": [
+    "The sampled state contains only graph-derived morphology and local chemistry coordinates; it contains no product, component, family, graph, SMILES or fragment identity.",
+    "The joint prior uses source-adjudicated measured Ugi training products only and does not access calibration or held-out product structures.",
+    "Hydrogen-bond-donor and branch counts are local structural semantics, not biological activity or synthesis-success scores.",
+    "This artifact performs no molecular generation, model training, repair, retry, routing, oracle calls or candidate selection.",
+    "No realism claim is authorized until a paired method-blind experiment passes every frozen gate."
+  ]
+}

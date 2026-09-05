@@ -1,0 +1,55 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "Does rank-weighted stochastic all-role decoding improve all six measured-Ugi role-distribution distances over the frozen amine-semantic joint-support decoder at the completed 256-program preflight scale?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-mog-semantic-seed0-h100-preflight-v1/4ea4a498f56ac137647116b1f37caa3683a91fcafeeea5aa09a39b7a75d5989d/stages/preflight/artifacts/comparison_details.tar",
+      "sha256": "cbe42d8e87a7864ba2faecd7fcbd26c6fd8f22e3e1cb448114bc6a3f8c939246"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "mog_all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "expected_attempts": 256,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only diagnostic over an already completed 256-program preflight, not a full-budget or across-training-seed model claim.",
+    "The reassessment performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The panel reports directional consistency without a confidence interval or significance claim.",
+    "C2ST is secondary and does not determine the panel classification.",
+    "A favorable role panel cannot override any validity, exact-L1, unique-yield or effective-count gate."
+  ]
+}

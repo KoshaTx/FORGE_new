@@ -1,0 +1,46 @@
+{
+  "schema_version": "forge.ugi_all_role_semantic_visual_review_config.v1",
+  "scientific_question": "Does the quantitatively promoted complete-lipid semantic decoder visibly improve Ugi tail morphology and head-tail balance without introducing recurrent unsupported chemistry?",
+  "inputs": {},
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_all_role_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "expected_attempts": 3072,
+  "attempt_indices": [23, 329, 333, 467, 543, 580, 743, 762, 813, 858, 982, 1004, 1086, 1321, 1369, 1655, 1688, 1691, 1754, 1762, 1880, 2012, 2469, 2840],
+  "blinding_seed": 2026090106,
+  "criteria": [
+    "tail_morphology_preference",
+    "head_tail_balance_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "fixed_indices_selected_before_generation": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "The visual review is a blinded seed-0 development assessment, not an activity or synthesis-success claim.",
+    "Fixed attempt indices were frozen before production outputs existed; no molecule may be replaced because it is invalid, unattractive or difficult to render.",
+    "The packet contains no method identities. The separately emitted blinding key must remain sealed until every review field is complete.",
+    "A visual-review preference is secondary to the prespecified quantitative realism and chemistry-preservation gates."
+  ]
+}

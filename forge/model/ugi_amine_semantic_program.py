@@ -2,10 +2,12 @@
 
 The ordinary morphology program fixes only node, junction, cycle and attachment counts.  Those
 coordinates cannot distinguish a compact measured head from an elongated head with the same
-counts.  This module compiles a train-fold-only conditional law over three graph-derived amine
-semantics: heavy-atom graph diameter, carbon-skeleton diameter, and total nitrogen/oxygen counts.
+counts.  This module compiles a train-fold-only conditional law over graph-derived amine
+semantics: heavy-atom graph diameter, carbon-skeleton diameter, total nitrogen/oxygen counts and,
+in the optional substitution-aware representation, hydrogen-bond-donor and heavy-atom branch
+counts.
 
-Component and family identifiers are estimator metadata only.  A sampled target contains four
+Component and family identifiers are estimator metadata only.  A sampled target contains a few
 integers and no product identity, component identity, graph, SMILES or fragment token.
 """
 
@@ -18,6 +20,7 @@ from typing import Any
 
 import numpy as np
 from rdkit import Chem
+from rdkit.Chem import rdMolDescriptors
 
 from forge.chemistry.descriptors import component_chemotype_metrics, connected_molecule
 from forge.core.hashing import sha256_file, sha256_json
@@ -37,7 +40,7 @@ class UgiAmineSemanticProgramError(ValueError):
 
 
 AmineProgramKey = tuple[int, int, int, int]
-TargetKey = tuple[int, int, int, int]
+TargetKey = tuple[int, ...]
 
 
 @dataclass(frozen=True, order=True)
@@ -48,15 +51,17 @@ class UgiAmineSemanticTarget:
     carbon_skeleton_diameter: int
     nitrogen_atoms: int
     oxygen_atoms: int
+    hydrogen_bond_donors: int | None = None
+    heavy_branch_atoms: int | None = None
 
     def __post_init__(self) -> None:
-        values = (
+        core_values = (
             self.heavy_atom_graph_diameter,
             self.carbon_skeleton_diameter,
             self.nitrogen_atoms,
             self.oxygen_atoms,
         )
-        if any(isinstance(value, bool) or not isinstance(value, int) for value in values):
+        if any(isinstance(value, bool) or not isinstance(value, int) for value in core_values):
             raise UgiAmineSemanticProgramError("amine semantic target must contain integers")
         if (
             self.heavy_atom_graph_diameter < 1
@@ -65,36 +70,104 @@ class UgiAmineSemanticTarget:
             or self.oxygen_atoms < 0
         ):
             raise UgiAmineSemanticProgramError("amine semantic target is outside graph support")
+        substitution_values = (self.hydrogen_bond_donors, self.heavy_branch_atoms)
+        if (substitution_values[0] is None) != (substitution_values[1] is None):
+            raise UgiAmineSemanticProgramError(
+                "amine substitution semantics must be jointly specified"
+            )
+        if substitution_values[0] is not None:
+            if any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in substitution_values
+            ):
+                raise UgiAmineSemanticProgramError("amine semantic target must contain integers")
+            if (
+                self.hydrogen_bond_donors < 0
+                or self.heavy_branch_atoms < 0
+                or self.hydrogen_bond_donors > self.nitrogen_atoms + self.oxygen_atoms
+            ):
+                raise UgiAmineSemanticProgramError(
+                    "amine substitution semantics are outside graph support"
+                )
 
     @property
     def key(self) -> TargetKey:
-        return (
+        base = (
             self.heavy_atom_graph_diameter,
             self.carbon_skeleton_diameter,
             self.nitrogen_atoms,
             self.oxygen_atoms,
         )
+        if self.hydrogen_bond_donors is None:
+            return base
+        return (*base, self.hydrogen_bond_donors, self.heavy_branch_atoms)
 
     def to_mapping(self) -> dict[str, int]:
-        return {
+        output = {
             "heavy_atom_graph_diameter": self.heavy_atom_graph_diameter,
             "carbon_skeleton_diameter": self.carbon_skeleton_diameter,
             "nitrogen_atoms": self.nitrogen_atoms,
             "oxygen_atoms": self.oxygen_atoms,
         }
+        if self.hydrogen_bond_donors is not None:
+            output.update(
+                {
+                    "hydrogen_bond_donors": self.hydrogen_bond_donors,
+                    "heavy_branch_atoms": self.heavy_branch_atoms,
+                }
+            )
+        return output
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> UgiAmineSemanticTarget:
-        if set(value) != {
+        base = {
             "heavy_atom_graph_diameter",
             "carbon_skeleton_diameter",
             "nitrogen_atoms",
             "oxygen_atoms",
-        }:
+        }
+        substitution = {"hydrogen_bond_donors", "heavy_branch_atoms"}
+        if set(value) not in {frozenset(base), frozenset(base | substitution)}:
             raise UgiAmineSemanticProgramError("amine semantic target fields changed")
         if any(isinstance(item, bool) or not isinstance(item, int) for item in value.values()):
             raise UgiAmineSemanticProgramError("amine semantic target must contain integers")
         return cls(**dict(value))
+
+    @classmethod
+    def from_key(cls, value: TargetKey) -> UgiAmineSemanticTarget:
+        """Restore either the frozen four-coordinate or substitution-aware target key."""
+
+        if len(value) not in {4, 6}:
+            raise UgiAmineSemanticProgramError("amine semantic target key width changed")
+        return cls(*value)
+
+
+def amine_local_substitution_metrics(
+    symbols: Sequence[str], degrees: Sequence[int]
+) -> tuple[int, int]:
+    """Return donor and branch counts on the decoder's neutral saturated head support.
+
+    This is deliberately not a generic HBD calculator.  The terminal Ugi head decoder admits
+    non-aromatic, formally neutral C/N/O atoms and training-supported saturated amine-head bonds.
+    Within that declared support, neutral N with heavy degree at most two and neutral O with heavy
+    degree one are hydrogen-bond donors.
+    """
+
+    if len(symbols) != len(degrees) or not symbols:
+        raise UgiAmineSemanticProgramError("amine local substitution state is malformed")
+    if any(symbol not in {"C", "N", "O"} for symbol in symbols) or any(
+        isinstance(degree, bool) or not isinstance(degree, (int, np.integer)) or degree < 1
+        for degree in degrees
+    ):
+        raise UgiAmineSemanticProgramError(
+            "amine local substitution state is outside decoder support"
+        )
+    donors = sum(
+        (symbol == "N" and int(degree) <= 2) or (symbol == "O" and int(degree) == 1)
+        for symbol, degree in zip(symbols, degrees, strict=True)
+    )
+    branches = sum(int(degree) >= 3 for degree in degrees)
+    return int(donors), int(branches)
 
 
 def amine_program_key(program: UgiMorphologyProgram) -> AmineProgramKey:
@@ -109,7 +182,9 @@ def amine_program_key(program: UgiMorphologyProgram) -> AmineProgramKey:
     )
 
 
-def amine_semantic_target(smiles: str) -> UgiAmineSemanticTarget:
+def amine_semantic_target(
+    smiles: str, *, include_substitution_semantics: bool = False
+) -> UgiAmineSemanticTarget:
     """Project one complete measured amine precursor to identity-free graph coordinates."""
 
     molecule = connected_molecule(smiles, label="measured Ugi amine")
@@ -128,6 +203,14 @@ def amine_semantic_target(smiles: str) -> UgiAmineSemanticTarget:
         carbon_skeleton_diameter=(int(metrics["carbon_subgraph_diameter"]) + int(carbon_atoms > 0)),
         nitrogen_atoms=int(metrics["nitrogen_atoms"]),
         oxygen_atoms=int(metrics["oxygen_atoms"]),
+        hydrogen_bond_donors=(
+            int(rdMolDescriptors.CalcNumHBD(molecule)) if include_substitution_semantics else None
+        ),
+        heavy_branch_atoms=(
+            sum(atom.GetAtomicNum() > 1 and atom.GetDegree() >= 3 for atom in molecule.GetAtoms())
+            if include_substitution_semantics
+            else None
+        ),
     )
 
 
@@ -153,7 +236,7 @@ def build_equal_family_conditional_distribution(
             for target in targets:
                 mass[target.key] = mass.get(target.key, 0.0) + row_mass
         keys = tuple(sorted(mass))
-        targets = tuple(UgiAmineSemanticTarget(*key) for key in keys)
+        targets = tuple(UgiAmineSemanticTarget.from_key(key) for key in keys)
         probabilities = np.asarray([mass[key] for key in keys], dtype=np.float64)
         probabilities /= probabilities.sum()
         if np.any(probabilities <= 0) or not np.isclose(probabilities.sum(), 1.0):
@@ -309,6 +392,7 @@ __all__ = [
     "UgiAmineSemanticProgramError",
     "UgiAmineSemanticTarget",
     "UgiMeasuredAmineSemanticPrior",
+    "amine_local_substitution_metrics",
     "amine_program_key",
     "amine_semantic_target",
     "build_equal_family_conditional_distribution",

@@ -1,0 +1,58 @@
+{
+  "schema_version": "forge.ugi_development_visual_review_config.v1",
+  "scientific_question": "Does the quantitatively improved train-fold local-chemistry MOG decoder visibly improve Ugi tail morphology and head-tail balance without introducing unsupported rings or heteroatom pathologies?",
+  "inputs": {
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-local-chemistry-mog-seed0-h100-preflight-v1/a9b124db9a49de8b84d57f1b619e1ed499b76523491245c17f38fb66bb0cb18a/stages/preflight/artifacts/comparison_details.tar",
+      "sha256": "4c54ba9993c9e25ed44ac5578f75b3e531c3be0f58dde62c4bbcdd05723d4ea6"
+    },
+    "realism_panel_result": {
+      "path": "results/phase1/ugi_local_chemistry_mog_preflight_realism_panel_seed0_v1/result.json",
+      "sha256": "687bfbaf971d71565d071581493542e3b3c3adda1905cf22b6c7747d5b606c42"
+    }
+  },
+  "arms": {
+    "complete_semantic_mog": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "complete_semantic_local_chemistry_mog": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_local_chemistry_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "complete_semantic_mog",
+  "treatment_arm": "complete_semantic_local_chemistry_mog",
+  "expected_attempts": 256,
+  "attempt_indices": [2, 10, 13, 17, 24, 29, 36, 37, 41, 43, 73, 75, 83, 118, 147, 149, 154, 160, 193, 215, 223, 230, 244, 249],
+  "selection_seed": 2026090311,
+  "blinding_seed": 2026090312,
+  "criteria": [
+    "tail_morphology_preference",
+    "head_tail_balance_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "indices_selected_by_output_blind_rng_before_review": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "This is a blinded seed-0 development review at the completed 256-program preflight scale, not a full-budget or across-training-seed model claim.",
+    "The attempt indices were selected by a declared output-blind random draw before visual inspection; no molecule was selected, filtered, repaired, retried or replaced.",
+    "Visual morphology preference is a development diagnostic and does not establish synthesis success, stability, safety, ionization, delivery or biological activity.",
+    "The blinding key must remain sealed until every review field is complete."
+  ]
+}

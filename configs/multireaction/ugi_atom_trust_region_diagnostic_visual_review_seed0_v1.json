@@ -1,0 +1,58 @@
+{
+  "schema_version": "forge.ugi_development_visual_review_config.v1",
+  "scientific_question": "Which visible head or tail changes accompany the quantitatively improved but diversity-rejected atom-guidance trust-region arm?",
+  "inputs": {
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-atom-trust-region-mog-seed0-h100-preflight-v1/b162a49cafd00fa84936c8ae530eaedd4e755c92147d7047cc54cf26078c725f/stages/preflight/artifacts/comparison_details.tar",
+      "sha256": "c8bd227892c059867bc6809c87d7054b88c98c99e979e869bc3ed491ce407e45"
+    },
+    "realism_panel_result": {
+      "path": "results/phase1/ugi_atom_trust_region_mog_preflight_adjudication_seed0_v1/realism_panel/result.json",
+      "sha256": "ba412b937d5e65416e4e39e4213a15eb798577887c094708b5c516535866b75d"
+    }
+  },
+  "arms": {
+    "complete_semantic_mog": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "atom_trust_region_mog": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_atom_trust_region_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "complete_semantic_mog",
+  "treatment_arm": "atom_trust_region_mog",
+  "expected_attempts": 256,
+  "attempt_indices": [24, 26, 27, 45, 56, 62, 74, 76, 82, 83, 97, 121, 132, 136, 143, 167, 170, 179, 189, 190, 200, 203, 231, 244],
+  "selection_seed": 2026090319,
+  "blinding_seed": 2026090320,
+  "criteria": [
+    "tail_morphology_preference",
+    "head_tail_balance_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "indices_selected_by_output_blind_rng_before_review": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "The treatment already failed the frozen effective-component gate; this packet is diagnostic and cannot reverse or promote that decision.",
+    "The attempt indices and blinding seed were frozen before generation in the governing adjudication protocol.",
+    "No molecule is selected, filtered, repaired, retried or replaced.",
+    "Visual morphology does not establish synthesis success, stability, safety, ionization, delivery or biological activity."
+  ]
+}

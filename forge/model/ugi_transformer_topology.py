@@ -16,10 +16,20 @@ import numpy as np
 
 from forge.model.local_chemistry_support import LocalChemistrySupport
 from forge.model.synthesis_program_graph import SynthesisProgramGraphRecord
-from forge.model.ugi_amine_semantic_program import UgiAmineSemanticTarget
+from forge.model.ugi_all_role_semantic_program import UgiAllRoleSemanticTarget
+from forge.model.ugi_amine_semantic_program import (
+    UgiAmineSemanticTarget,
+    amine_local_substitution_metrics,
+)
 from forge.model.ugi_closure_placement import feasible_next_closures
 from forge.model.ugi_ester_chemotype import UgiEsterChemotypePolicy
+from forge.model.ugi_mog_semantic_guidance import (
+    UgiMogSemanticGuidancePolicy,
+    replace_amine_semantics,
+    replace_directional_ester_semantics,
+)
 from forge.model.ugi_morphology_program import (
+    UgiMorphologyProgram,
     UgiMorphologyProgramError,
     enumerate_attached_offspring_with_exact_budget,
     preorder_attached_forest_to_parents,
@@ -228,6 +238,12 @@ def _amine_semantic_symbol_assignments(
         topology.closures,
         attachment_count=attachment_count,
     )
+    local_degrees = tuple(len(neighbors) for neighbors in adjacency)
+    if (
+        target.heavy_branch_atoms is not None
+        and sum(degree >= 3 for degree in local_degrees) != target.heavy_branch_atoms
+    ):
+        return ()
     exterior = tuple(range(exterior_count))
     output: list[tuple[str, ...]] = []
     for nitrogen_nodes in combinations(exterior, exterior_nitrogens):
@@ -247,13 +263,17 @@ def _amine_semantic_symbol_assignments(
             if _induced_node_diameter(adjacency, carbon_set) != target.carbon_skeleton_diameter:
                 continue
             reactive_sites = sum(1 <= len(adjacency[node]) <= 2 for node in nitrogen_set)
-            if 1 <= reactive_sites <= 2:
-                output.append(
-                    tuple(
-                        "N" if node in nitrogen_set else "O" if node in oxygen_set else "C"
-                        for node in range(exterior_count + 1)
-                    )
-                )
+            if not 1 <= reactive_sites <= 2:
+                continue
+            symbols = tuple(
+                "N" if node in nitrogen_set else "O" if node in oxygen_set else "C"
+                for node in range(exterior_count + 1)
+            )
+            if target.hydrogen_bond_donors is not None:
+                donors, branches = amine_local_substitution_metrics(symbols, local_degrees)
+                if donors != target.hydrogen_bond_donors or branches != target.heavy_branch_atoms:
+                    continue
+            output.append(symbols)
     return tuple(output)
 
 
@@ -292,6 +312,46 @@ def _semantic_topology_tree_path(
     return tuple(reversed(path))
 
 
+def _amine_topology_support_context(
+    topology: UgiLocalSemanticTopology,
+    *,
+    attachment_count: int,
+) -> tuple[tuple[int, ...], dict[int, int], dict[int, set[int]], frozenset[int]]:
+    """Describe one complete rooted head shape in the train-reference coordinate system."""
+
+    adjacency, virtual_core = _semantic_topology_adjacency(
+        topology.offspring,
+        topology.closures,
+        attachment_count=attachment_count,
+    )
+    nodes = tuple(range(len(topology.offspring)))
+    depths = {virtual_core: 0}
+    queue = [virtual_core]
+    for current in queue:
+        for neighbor in sorted(adjacency[current]):
+            if neighbor not in depths:
+                depths[neighbor] = depths[current] + 1
+                queue.append(neighbor)
+    if any(node not in depths for node in nodes):
+        raise UgiTransformerTopologyError("amine topology is disconnected from its core anchor")
+    ring_nodes: set[int] = set()
+    for left, right in topology.closures:
+        ring_nodes.update(
+            _semantic_topology_tree_path(
+                topology,
+                left=int(left),
+                right=int(right),
+                attachment_count=attachment_count,
+            )
+        )
+    return (
+        nodes,
+        {node: depths[node] for node in nodes},
+        {node: set(adjacency[node]) for node in range(len(adjacency))},
+        frozenset(ring_nodes).intersection(nodes),
+    )
+
+
 def _assignment_has_local_chemistry_support(
     topology: UgiLocalSemanticTopology,
     symbols: Sequence[str],
@@ -328,9 +388,7 @@ def _assignment_has_local_chemistry_support(
         for left in range(len(adjacency))
         for middle in range(left + 1, len(adjacency))
         for right in range(middle + 1, len(adjacency))
-        if middle in adjacency[left]
-        and right in adjacency[left]
-        and right in adjacency[middle]
+        if middle in adjacency[left] and right in adjacency[left] and right in adjacency[middle]
     )
     if any(
         not support.allows_role_triangle(
@@ -508,21 +566,94 @@ def _sample_amine_semantic_topology(
     policy: UgiTransformerTopologyPolicy,
     allowed_ring_sizes: Sequence[int] | None,
     local_chemistry_support: LocalChemistrySupport | None,
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None,
+    program: UgiMorphologyProgram,
+    all_role_target: UgiAllRoleSemanticTarget | None,
     generator: Any,
 ) -> tuple[np.ndarray, list[int], list[int]]:
     """Draw once from the neural topology law conditioned on measured head semantics."""
 
-    candidates = enumerate_amine_semantic_topologies(
-        node_count=int(logits.shape[0]),
-        junction_budget=junction_budget,
-        cycle_rank=cycle_rank,
-        attachment_count=attachment_count,
-        target=target,
-        maximum_children=int(logits.shape[1]) - 1,
-        policy=policy,
-        allowed_ring_sizes=allowed_ring_sizes,
-        local_chemistry_support=local_chemistry_support,
+    target_band = (
+        (target,)
+        if semantic_guidance_policy is None
+        else semantic_guidance_policy.amine_targets_within_band(target)
     )
+    by_key: dict[
+        tuple[tuple[int, ...], tuple[tuple[int, int], ...]],
+        tuple[UgiLocalSemanticTopology, float, float | None],
+    ] = {}
+    if (
+        semantic_guidance_policy is not None
+        and semantic_guidance_policy.uses_joint_realism
+        and all_role_target is None
+    ):
+        raise UgiTransformerTopologyError(
+            "joint-realism topology guidance requires a complete all-role target"
+        )
+    for candidate_target in target_band:
+        distance = (
+            0.0
+            if semantic_guidance_policy is None
+            else semantic_guidance_policy.amine_distance(candidate_target, target)
+        )
+        for candidate in enumerate_amine_semantic_topologies(
+            node_count=int(logits.shape[0]),
+            junction_budget=junction_budget,
+            cycle_rank=cycle_rank,
+            attachment_count=attachment_count,
+            target=candidate_target,
+            maximum_children=int(logits.shape[1]) - 1,
+            policy=policy,
+            allowed_ring_sizes=allowed_ring_sizes,
+            local_chemistry_support=local_chemistry_support,
+        ):
+            key = (
+                tuple(int(value) for value in candidate.offspring.tolist()),
+                tuple((int(left), int(right)) for left, right in candidate.closures),
+            )
+            joint_score = (
+                None
+                if semantic_guidance_policy is None
+                or not semantic_guidance_policy.uses_joint_realism
+                else semantic_guidance_policy.joint_realism_scores(
+                    program,
+                    (replace_amine_semantics(all_role_target, candidate_target),),
+                )[0]
+            )
+            previous = by_key.get(key)
+            if previous is None or (distance, -(joint_score or 0.0)) < (
+                previous[1],
+                -(previous[2] or 0.0),
+            ):
+                by_key[key] = (candidate, distance, joint_score)
+    ordered = tuple(by_key[key] for key in sorted(by_key))
+    candidates = tuple(candidate for candidate, _, _ in ordered)
+    semantic_distances = tuple(distance for _, distance, _ in ordered)
+    joint_realism_scores = (
+        None
+        if semantic_guidance_policy is None or not semantic_guidance_policy.uses_joint_realism
+        else tuple(float(score) for _, _, score in ordered if score is not None)
+    )
+    topology_support_scores = None
+    if (
+        semantic_guidance_policy is not None
+        and semantic_guidance_policy.whole_head_topology_support
+    ):
+        topology_support_scores = tuple(
+            semantic_guidance_policy.amine_head_topology_support_score(
+                nodes=context[0],
+                depths_by_node=context[1],
+                neighbors=context[2],
+                ring_nodes=context[3],
+            )
+            for context in (
+                _amine_topology_support_context(
+                    candidate,
+                    attachment_count=attachment_count,
+                )
+                for candidate in candidates
+            )
+        )
     if not candidates:
         raise UgiTransformerTopologyError(
             "coarse amine program has no joint semantic and local-chemistry support"
@@ -561,11 +692,22 @@ def _sample_amine_semantic_topology(
             right_output.append(global_right)
         candidate_scores.append(score)
         oriented_edges.append((left_output, right_output))
-    selected = int(
-        torch.multinomial(
-            torch.stack(candidate_scores).softmax(dim=0), 1, generator=generator
-        ).item()
-    )
+    if semantic_guidance_policy is None:
+        probabilities = torch.stack(candidate_scores).softmax(dim=0)
+    else:
+        probabilities = torch.as_tensor(
+            semantic_guidance_policy.probabilities(
+                [float(value) for value in candidate_scores],
+                semantic_distances,
+                joint_realism_scores,
+                topology_support_scores,
+                local_chemistry_rank_weight=(
+                    semantic_guidance_policy.effective_whole_head_topology_rank_weight
+                ),
+            ),
+            dtype=torch.float64,
+        )
+    selected = int(torch.multinomial(probabilities, 1, generator=generator).item())
     left, right = oriented_edges[selected]
     return candidates[selected].offspring.copy(), left, right
 
@@ -671,12 +813,23 @@ def decode_ugi_exact_topology(
     generator: Any,
     ester_chemotype_policy: UgiEsterChemotypePolicy | None = None,
     amine_semantic_target: UgiAmineSemanticTarget | None = None,
+    all_role_semantic_target: UgiAllRoleSemanticTarget | None = None,
     local_chemistry_support: LocalChemistrySupport | None = None,
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
 ) -> UgiExactTopology:
     """Condition one Transformer endpoint on an exact feasible Ugi morphology program."""
 
     if torch is None or record.program_id != UGI_PROGRAM_ID:
         raise UgiTransformerTopologyError("exact coupled topology currently supports Ugi only")
+    if amine_semantic_target is not None and all_role_semantic_target is not None:
+        raise UgiTransformerTopologyError(
+            "amine-only and all-role semantic targets are mutually exclusive"
+        )
+    effective_amine_target = (
+        all_role_semantic_target.amine
+        if all_role_semantic_target is not None
+        else amine_semantic_target
+    )
     offspring_field = (
         "structured_offspring" if "structured_offspring" in predictions else "offspring"
     )
@@ -689,6 +842,12 @@ def decode_ugi_exact_topology(
     if offspring_field not in predictions:
         raise UgiTransformerTopologyError("Transformer checkpoint has no offspring topology head")
     targets = _role_targets(record)
+    program = UgiMorphologyProgram(
+        node_counts=tuple(targets[role][0] for role in ROLE_NAMES),
+        junction_budgets=tuple(targets[role][1] for role in ROLE_NAMES),
+        cycle_ranks=tuple(targets[role][2] for role in ROLE_NAMES),
+        attachment_counts=tuple(targets[role][3] for role in ROLE_NAMES),
+    )
     parents = record.graph.parents.copy()
     closure_left = np.zeros(record.graph.closure_count, dtype=np.int64)
     closure_right = np.zeros(record.graph.closure_count, dtype=np.int64)
@@ -742,10 +901,10 @@ def decode_ugi_exact_topology(
                 "requested ester chemotype is incompatible with the sampled morphology program"
             )
         semantic_closures: tuple[list[int], list[int]] | None = None
-        if amine_semantic_target is not None and role == "amine_head":
+        if effective_amine_target is not None and role == "amine_head":
             offspring, semantic_left, semantic_right = _sample_amine_semantic_topology(
                 logits=logits,
-                target=amine_semantic_target,
+                target=effective_amine_target,
                 junction_budget=junction_budget,
                 cycle_rank=cycle_rank,
                 attachment_count=attachment_count,
@@ -767,6 +926,9 @@ def decode_ugi_exact_topology(
                     else None
                 ),
                 local_chemistry_support=local_chemistry_support,
+                semantic_guidance_policy=semantic_guidance_policy,
+                program=program,
+                all_role_target=all_role_semantic_target,
                 generator=generator,
             )
             semantic_closures = (semantic_left, semantic_right)
@@ -779,6 +941,27 @@ def decode_ugi_exact_topology(
                     minimum_long_side_carbons=(
                         ester_chemotype_policy.minimum_ester_long_side_carbons
                     ),
+                    exact_full_side_carbons=(
+                        None
+                        if all_role_semantic_target is None
+                        else (
+                            all_role_semantic_target.tail_pair.aldehyde_ester_short_side_carbons,
+                            all_role_semantic_target.tail_pair.aldehyde_ester_long_side_carbons,
+                        )
+                    ),
+                    exact_alkoxy_handle_and_acyl_side_carbons=(
+                        None
+                        if all_role_semantic_target is None
+                        or all_role_semantic_target.tail_pair.aldehyde_alkoxy_handle_side_carbons
+                        == 0
+                        else (
+                            all_role_semantic_target.tail_pair.aldehyde_alkoxy_handle_side_carbons,
+                            all_role_semantic_target.tail_pair.aldehyde_acyl_side_carbons,
+                        )
+                    ),
+                    semantic_guidance_policy=semantic_guidance_policy,
+                    program=program,
+                    all_role_target=all_role_semantic_target,
                 )
             except UgiMorphologyProgramError as error:
                 raise UgiTransformerTopologyError(str(error)) from error
@@ -874,6 +1057,11 @@ def _sample_constructive_ester_offspring(
     generator: Any,
     minimum_side_carbons: int,
     minimum_long_side_carbons: int,
+    exact_full_side_carbons: tuple[int, int] | None = None,
+    exact_alkoxy_handle_and_acyl_side_carbons: tuple[int, int] | None = None,
+    semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
+    program: UgiMorphologyProgram | None = None,
+    all_role_target: UgiAllRoleSemanticTarget | None = None,
 ) -> np.ndarray:
     """Sample exactly from one-junction trees that can host the requested ester chemotype.
 
@@ -889,30 +1077,81 @@ def _sample_constructive_ester_offspring(
             "constructive ester topology requires [nodes, at least three child classes] logits"
         )
     node_count = int(logits.shape[0])
-    required_nodes = int(minimum_side_carbons + minimum_long_side_carbons + 2)
+    # The two precursor carbon arms share the ester cut and include the fixed
+    # aldehyde-derived reaction-core carbon, which is absent from this exterior.
+    # The exterior does contain the two ester oxygens, hence C_short + C_long + 1.
+    required_nodes = int(minimum_side_carbons + minimum_long_side_carbons + 1)
     if node_count < required_nodes:
         raise UgiMorphologyProgramError(
             "aldehyde exterior is too small for the requested ester carbon-arm support"
         )
 
+    if semantic_guidance_policy is not None and (
+        exact_full_side_carbons is None or exact_alkoxy_handle_and_acyl_side_carbons is None
+    ):
+        raise UgiMorphologyProgramError(
+            "semantic ester guidance requires one complete directional target"
+        )
+    raw_candidates = _enumerate_constructive_ester_offspring(
+        node_count=node_count,
+        minimum_side_carbons=minimum_side_carbons,
+        minimum_long_side_carbons=minimum_long_side_carbons,
+        exact_full_side_carbons=(
+            exact_full_side_carbons if semantic_guidance_policy is None else None
+        ),
+        exact_alkoxy_handle_and_acyl_side_carbons=(
+            exact_alkoxy_handle_and_acyl_side_carbons if semantic_guidance_policy is None else None
+        ),
+    )
     candidates: list[np.ndarray] = []
-    for prefix_nodes in range(1, node_count - 2):
-        chain_nodes = node_count - prefix_nodes - 2
-        if chain_nodes < 2:
-            continue
-        chain = [1] * (chain_nodes - 1) + [0]
-        for first_child, second_child in (([0], chain), (chain, [0])):
-            offspring = np.asarray(
-                [1] * prefix_nodes + [2] + first_child + second_child,
-                dtype=np.int64,
+    semantic_distances: list[float] = []
+    joint_realism_scores: list[float] = []
+    if semantic_guidance_policy is None:
+        candidates.extend(raw_candidates)
+        semantic_distances.extend(0.0 for _ in raw_candidates)
+    else:
+        assert exact_alkoxy_handle_and_acyl_side_carbons is not None
+        allowed = set(
+            semantic_guidance_policy.aldehyde_directional_pairs_within_band(
+                alkoxy_handle_carbons=exact_alkoxy_handle_and_acyl_side_carbons[0],
+                acyl_carbons=exact_alkoxy_handle_and_acyl_side_carbons[1],
             )
-            parents = preorder_attached_forest_to_parents(offspring, attachment_count=1)
-            if _has_ester_capable_tree(
-                parents,
-                minimum_side_carbons=minimum_side_carbons,
-                minimum_long_side_carbons=minimum_long_side_carbons,
-            ):
-                candidates.append(offspring)
+        )
+        allowed = {
+            pair
+            for pair in allowed
+            if min(pair) >= minimum_side_carbons and max(pair) >= minimum_long_side_carbons
+        }
+        for candidate in raw_candidates:
+            supported = _full_directional_ester_side_carbon_counts_for_tree(
+                preorder_attached_forest_to_parents(candidate, attachment_count=1)
+            )
+            eligible = sorted(allowed.intersection(supported))
+            if not eligible:
+                continue
+            candidates.append(candidate)
+            semantic_distances.append(
+                min(
+                    semantic_guidance_policy.aldehyde_distance(
+                        pair, exact_alkoxy_handle_and_acyl_side_carbons
+                    )
+                    for pair in eligible
+                )
+            )
+            if semantic_guidance_policy.uses_joint_realism:
+                if program is None or all_role_target is None:
+                    raise UgiMorphologyProgramError(
+                        "joint-realism ester guidance requires a complete program and target"
+                    )
+                scores = semantic_guidance_policy.joint_realism_scores(
+                    program,
+                    tuple(
+                        replace_directional_ester_semantics(all_role_target, pair)
+                        for pair in eligible
+                    ),
+                )
+                assert scores is not None
+                joint_realism_scores.append(max(scores))
     if not candidates:
         raise UgiMorphologyProgramError(
             "constructive ester topology has no support for the requested carbon arms"
@@ -926,31 +1165,96 @@ def _sample_constructive_ester_offspring(
             for value in candidates
         ]
     )
-    selected = int(
-        torch.multinomial(candidate_scores.softmax(dim=0), 1, generator=generator).item()
-    )
+    if semantic_guidance_policy is None:
+        probabilities = candidate_scores.softmax(dim=0)
+    else:
+        probabilities = torch.as_tensor(
+            semantic_guidance_policy.probabilities(
+                [float(value) for value in candidate_scores],
+                semantic_distances,
+                (joint_realism_scores if semantic_guidance_policy.uses_joint_realism else None),
+            ),
+            dtype=torch.float64,
+        )
+    selected = int(torch.multinomial(probabilities, 1, generator=generator).item())
     return candidates[selected]
 
 
-def _has_ester_capable_tree(
-    parents: np.ndarray,
+def _enumerate_constructive_ester_offspring(
     *,
+    node_count: int,
     minimum_side_carbons: int,
     minimum_long_side_carbons: int,
-) -> bool:
-    """Return whether one tree can host a descriptor-equivalent C(=O)-O-C motif."""
+    exact_full_side_carbons: tuple[int, int] | None = None,
+    exact_alkoxy_handle_and_acyl_side_carbons: tuple[int, int] | None = None,
+) -> tuple[np.ndarray, ...]:
+    """Enumerate all one-junction exterior trees supporting the requested ester arms."""
 
+    candidates: list[np.ndarray] = []
+    for prefix_nodes in range(1, node_count - 2):
+        chain_nodes = node_count - prefix_nodes - 2
+        if chain_nodes < 2:
+            continue
+        chain = [1] * (chain_nodes - 1) + [0]
+        for first_child, second_child in (([0], chain), (chain, [0])):
+            offspring = np.asarray(
+                [1] * prefix_nodes + [2] + first_child + second_child,
+                dtype=np.int64,
+            )
+            parents = preorder_attached_forest_to_parents(offspring, attachment_count=1)
+            if (
+                _has_ester_capable_tree(
+                    parents,
+                    minimum_side_carbons=minimum_side_carbons,
+                    minimum_long_side_carbons=minimum_long_side_carbons,
+                )
+                and (
+                    exact_full_side_carbons is None
+                    or exact_full_side_carbons in _full_ester_side_carbon_counts_for_tree(parents)
+                )
+                and (
+                    exact_alkoxy_handle_and_acyl_side_carbons is None
+                    or exact_alkoxy_handle_and_acyl_side_carbons
+                    in _full_directional_ester_side_carbon_counts_for_tree(parents)
+                )
+            ):
+                candidates.append(offspring)
+    return tuple(candidates)
+
+
+def _full_ester_side_carbon_counts_for_tree(
+    parents: np.ndarray,
+) -> frozenset[tuple[int, int]]:
+    """Return precursor-level ester carbon-arm counts realizable by one exterior tree.
+
+    The exterior tree omits the aldehyde carbonyl oxygen and keeps the aldehyde carbon as a fixed
+    reaction-core atom.  The latter is represented here as one virtual carbon attached to the
+    tree root, so the returned counts match the recovered precursor rather than the product-only
+    exterior.
+    """
+
+    roots = np.flatnonzero(parents < 0).tolist()
+    if len(roots) != 1:
+        return frozenset()
     neighbors = [set() for _ in range(len(parents))]
     for child, parent in enumerate(parents.tolist()):
         if parent < 0:
             continue
         neighbors[child].add(parent)
         neighbors[parent].add(child)
+    output: set[tuple[int, int]] = set()
+    root = int(roots[0])
+
+    def complete_degree(node: int) -> int:
+        # The local exterior omits the fixed reaction-core neighbour of its root.  Ester motif
+        # roles are classified on the complete product graph, so account for that neighbour here.
+        return len(neighbors[node]) + int(node == root)
+
     for center, adjacent in enumerate(neighbors):
-        if len(adjacent) != 3:
+        if complete_degree(center) != 3:
             continue
-        leaves = [node for node in adjacent if len(neighbors[node]) == 1]
-        bridges = [node for node in adjacent if len(neighbors[node]) == 2]
+        leaves = [node for node in adjacent if complete_degree(node) == 1]
+        bridges = [node for node in adjacent if complete_degree(node) == 2]
         for leaf in leaves:
             for bridge in bridges:
                 alkoxy = next(iter(neighbors[bridge] - {center}), -1)
@@ -959,7 +1263,7 @@ def _has_ester_capable_tree(
                     continue
                 blocked = frozenset((center, bridge))
 
-                def component_size(start: int) -> int:
+                def component(start: int) -> set[int]:
                     visited = {start}
                     frontier = [start]
                     while frontier:
@@ -969,18 +1273,91 @@ def _has_ester_capable_tree(
                                 continue
                             visited.add(target)
                             frontier.append(target)
-                    return len(visited)
+                    return visited
 
-                # Every non-motif exterior node is carbon under this chemotype.  One oxygen lies
-                # on each side of the ester C--O cut, so subtracting one converts side size to the
-                # number of carbon atoms the terminal chemistry can realize.
-                carbon_counts = sorted((component_size(center) - 1, component_size(bridge) - 1))
-                if (
-                    carbon_counts[0] >= minimum_side_carbons
-                    and carbon_counts[1] >= minimum_long_side_carbons
-                ):
-                    return True
-    return False
+                sides = (component(center), component(bridge))
+                counts = [len(sides[0]) - 1, len(sides[1]) - 1]
+                counts[0 if root in sides[0] else 1] += 1
+                output.add(tuple(sorted((int(counts[0]), int(counts[1])))))
+    return frozenset(output)
+
+
+def _full_directional_ester_side_carbon_counts_for_tree(
+    parents: np.ndarray,
+) -> frozenset[tuple[int, int]]:
+    """Return alkoxy-handle/acyl carbon counts supported by one exterior tree.
+
+    The attachment root is adjacent to the fixed aldehyde-derived reaction-core carbon.  A tuple
+    is emitted only when that root lies on the alkoxy side of the ester, matching the directional
+    arrangement observed in the measured AGILE-type training aldehydes.
+    """
+
+    roots = np.flatnonzero(parents < 0).tolist()
+    if len(roots) != 1:
+        return frozenset()
+    root = int(roots[0])
+    neighbors = [set() for _ in range(len(parents))]
+    for child, parent in enumerate(parents.tolist()):
+        if parent < 0:
+            continue
+        neighbors[child].add(parent)
+        neighbors[parent].add(child)
+
+    def complete_degree(node: int) -> int:
+        return len(neighbors[node]) + int(node == root)
+
+    output: set[tuple[int, int]] = set()
+    for center, adjacent in enumerate(neighbors):
+        if complete_degree(center) != 3:
+            continue
+        leaves = [node for node in adjacent if complete_degree(node) == 1]
+        bridges = [node for node in adjacent if complete_degree(node) == 2]
+        for leaf in leaves:
+            for bridge in bridges:
+                alkoxy = next(iter(neighbors[bridge] - {center}), -1)
+                substituents = adjacent - {leaf, bridge}
+                if alkoxy < 0 or len(substituents) != 1 or alkoxy in substituents:
+                    continue
+                blocked = frozenset((center, bridge))
+
+                def component(start: int) -> set[int]:
+                    visited = {start}
+                    frontier = [start]
+                    while frontier:
+                        node = frontier.pop()
+                        for target in neighbors[node]:
+                            if frozenset((node, target)) == blocked or target in visited:
+                                continue
+                            visited.add(target)
+                            frontier.append(target)
+                    return visited
+
+                acyl_side = component(center)
+                alkoxy_side = component(bridge)
+                if root not in alkoxy_side:
+                    continue
+                acyl_carbons = len(acyl_side) - 1
+                alkoxy_handle_carbons = len(alkoxy_side) - 1 + 1
+                output.add((int(alkoxy_handle_carbons), int(acyl_carbons)))
+    return frozenset(output)
+
+
+def _has_ester_capable_tree(
+    parents: np.ndarray,
+    *,
+    minimum_side_carbons: int,
+    minimum_long_side_carbons: int,
+) -> bool:
+    """Return whether one tree can host a precursor-level C(=O)-O-C motif.
+
+    The local exterior omits one fixed aldehyde-derived reaction-core carbon.  Reuse the exact
+    precursor-level counter so topology support and terminal chemistry cannot disagree by one atom.
+    """
+
+    return any(
+        short_side >= minimum_side_carbons and long_side >= minimum_long_side_carbons
+        for short_side, long_side in _full_ester_side_carbon_counts_for_tree(parents)
+    )
 
 
 __all__ = [
@@ -991,4 +1368,7 @@ __all__ = [
     "UgiTransformerTopologyPolicy",
     "decode_ugi_exact_topology",
     "enumerate_amine_semantic_topologies",
+    "_enumerate_constructive_ester_offspring",
+    "_full_directional_ester_side_carbon_counts_for_tree",
+    "_full_ester_side_carbon_counts_for_tree",
 ]

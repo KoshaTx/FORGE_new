@@ -1,0 +1,161 @@
+{
+  "schema_version": "forge.ugi_all_role_semantic_program_comparison_config.v1",
+  "scientific_question": "Can a 0.05 total-variation trust region over complete amine-head assignments preserve the visual realism signal of measured whole-head support without reducing exact-L1 or component diversity?",
+  "inputs": {
+    "all_role_semantic_program_draw": {
+      "path": "results/phase1/ugi_joint_substitution_semantic_program_draw_seed0_v6/program_draw.json",
+      "sha256": "ad5f6afdbd074ba2a11459ab7a74e276f17f9701dddce8522bf04f7f95133f7a"
+    },
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "semantic_atoms": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_atoms.csv.gz",
+      "sha256": "08f6241aa64eb0e9a94594f0678f7c81da796b13e392cfacfb2336e8b1e671a1"
+    },
+    "semantic_bonds": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/semantic_bonds.csv.gz",
+      "sha256": "d8a6abe9ffea84ff6e5aa5e247dd9135121134c4de11d61e3b08bdec467a5101"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "topology_closure_config": {
+      "path": "configs/model/phase1_ugi_closure_expanded.json",
+      "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+    },
+    "topology_morphology_config": {
+      "path": "configs/model/phase1_ugi_morphology_expanded.json",
+      "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+    },
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143
+  },
+  "baseline_semantic_guidance": {
+    "amine_heavy_atom_graph_diameter_tolerance": 1,
+    "amine_carbon_skeleton_diameter_tolerance": 1,
+    "aldehyde_ester_side_carbons_tolerance": 1,
+    "model_rank_weight": 1,
+    "semantic_rank_weight": 1,
+    "rank_temperature": 0.75,
+    "uniform_probability_mass": 0.25
+  },
+  "semantic_guidance": {
+    "amine_heavy_atom_graph_diameter_tolerance": 1,
+    "amine_carbon_skeleton_diameter_tolerance": 1,
+    "aldehyde_ester_side_carbons_tolerance": 1,
+    "model_rank_weight": 1,
+    "semantic_rank_weight": 1,
+    "local_chemistry_rank_weight": 1,
+    "local_chemistry_score_mode": "whole_head_support_binary",
+    "rank_temperature": 0.75,
+    "uniform_probability_mass": 0.25,
+    "whole_head_total_variation_radius": 0.05
+  },
+  "profiles": {
+    "smoke": {
+      "device": "cpu",
+      "program_count": 16,
+      "sample_steps": 2,
+      "batch_size": 16,
+      "flow_seed": 2026090351,
+      "baseline_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "treatment_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "baseline_terminal_decoder_seed": 2026090352,
+      "treatment_terminal_decoder_seed": 2026090352,
+      "terminal_temperature": 1
+    },
+    "h100_preflight": {
+      "device": "cuda",
+      "program_count": 256,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "flow_seed": 2026090351,
+      "baseline_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "treatment_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "baseline_terminal_decoder_seed": 2026090352,
+      "treatment_terminal_decoder_seed": 2026090352,
+      "terminal_temperature": 1
+    },
+    "full": {
+      "device": "cuda",
+      "program_count": 3072,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "flow_seed": 2026090351,
+      "baseline_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "treatment_terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation_mog_guided",
+      "baseline_terminal_decoder_seed": 2026090352,
+      "treatment_terminal_decoder_seed": 2026090352,
+      "terminal_temperature": 1
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "heldout_training_access": false,
+    "method_blind_assessment": true,
+    "paired_coarse_program_order": true,
+    "paired_flow_random_stream": true,
+    "repairs_or_retries": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "preflight_gate": {
+    "exact_l1_absolute_minimum": 0.95,
+    "exact_l1_noninferiority_margin": 0.01,
+    "minimum_baseline_valid_fraction": 0.95,
+    "minimum_treatment_valid_fraction": 0.95,
+    "require_zero_program_support_abstentions": true
+  },
+  "full_promotion_gate": {
+    "attempt_weighted_realism_metrics_improved": "all_prespecified_metrics",
+    "effective_component_count_retention_minimum": 0.95,
+    "exact_l1_absolute_minimum": 0.95,
+    "unique_exact_l1_yield_retention_minimum": 0.95,
+    "valid_fraction_minimum": 0.95
+  },
+  "nonclaims": [
+    "This is a frozen-checkpoint component-trajectory trust-region intervention, not generator retraining, component selection or post-hoc filtering.",
+    "The complete feasible amine-head assignment law moves by at most 0.05 total variation from the Transformer-plus-semantic baseline law for each requested program.",
+    "The reference uses unique source-adjudicated measured Ugi training-fold components and contains no precursor identities, stored graphs or fragment tokens.",
+    "Each arm decodes every paired attempt exactly once. No repair, retry, routing, oracle call or completed-product candidate selection is permitted.",
+    "No realism or paper claim is authorized unless a full paired method-blind experiment passes every frozen quantitative and visual promotion gate."
+  ]
+}

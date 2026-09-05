@@ -1,0 +1,54 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "Does the complete-lipid joint semantic decoder improve all six measured-Ugi role-distribution distances over the frozen amine-semantic joint-support decoder while preserving the paired attempt budget?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "results/phase1/ugi_binary_whole_head_support_vs_amine_joint_support_cpu_attribution_seed0_v1/comparison_details.tar",
+      "sha256": "835eed21f81b8e604f63fb1f4d3fbddac5b2ae97b6ecc943fc07746ca7975590"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_binary_whole_head_support_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "expected_attempts": 256,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only development comparison, not an across-training-seed or paper-level realism claim.",
+    "The reassessment performs no training, generation, filtering, repair, retry, routing, oracle calls or candidate selection.",
+    "The six prespecified measured-Ugi role metrics are primary and are interpreted descriptively without inferential intervals.",
+    "A favorable role panel cannot override validity, exact-L1, unique-yield, effective-count or blinded visual gates."
+  ]
+}

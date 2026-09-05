@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Which signed head, aldehyde-tail, isocyanide-tail, and cross-tail descriptor shifts still separate the frozen MOG-semantic sampler from measured Ugi training lipids, and did joint semantic-density ranking reduce any of them?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "runs/phase1-ugi-mog-joint-realism-seed0-h100-preflight-v2/63231e5ec4d710df7b19fde355b1f833e4c13988deeacfc7c0e345d96bab18b6/stages/preflight/artifacts/result.json",
+      "sha256": "84bf5ab79231681733a773f99c7f0e54a699db091d9ba52a094f35fe217f8028"
+    }
+  },
+  "arms": {
+    "mog_semantic": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_mog_joint_realism_preflight_details_v2/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "1f5fa5f68255e015631cb6a49c1f032fe7d24e6f6262d20e188c46d033c0c6ba"
+      },
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "mog_joint_realism": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_mog_joint_realism_preflight_details_v2/all_role_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "4307df2ffb5e201032e50abc5baf061a291f4b451e97ad29fc2992b7ff07d691"
+      },
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "mog_semantic",
+  "expected_attempts": 256,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a seed-0 train-fold-only failure-attribution diagnostic, not a held-out model claim.",
+    "Signed role-descriptor shifts diagnose structural distribution mismatch; they are not biological activity, formulation performance, synthesis success, or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls, or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Which measured-Ugi head, tail and joint morphology coordinates explain the realism loss caused by entropy-calibrated morphology reweighting?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "results/phase1/ugi_morphology_diversity_preflight_realism_panel_seed0_v1/result.json",
+      "sha256": "bdf5c1da305c6c4496d1bc7c390527c9efa7807f0b1dff8aff7f78b2c497726e"
+    }
+  },
+  "arms": {
+    "original_joint_law": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_morphology_diversity_preflight_realism_panel_seed0_v1/original_joint_law/ugi_assessed_attempts.jsonl.gz",
+        "sha256": "96a7fe2bf7f4c25615b4bb1b0d7d066c038a054edd50f77be660c3be9027d2a6"
+      },
+      "method_id": "forge_seed0_local_chemistry_original_joint_program_law",
+      "seed": 0
+    },
+    "entropy_calibrated_joint_law": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_morphology_diversity_preflight_realism_panel_seed0_v1/entropy_calibrated_joint_law/ugi_assessed_attempts.jsonl.gz",
+        "sha256": "3f0952a1ced247eb98e19c8168be199d6ac81bb18912fe64a17051ef60a44834"
+      },
+      "method_id": "forge_seed0_local_chemistry_entropy_calibrated_joint_program_law",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "original_joint_law",
+  "expected_attempts": 256,
+  "top_k": 12,
+  "nonclaims": [
+    "This diagnostic reuses completed seed-0 outputs and performs no training or molecular generation.",
+    "It accesses only the source-adjudicated measured Ugi training-fold development reference.",
+    "Signed role-descriptor shifts diagnose the intervention but do not establish biological activity or experimental synthesis success."
+  ]
+}

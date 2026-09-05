@@ -7,6 +7,7 @@ from forge.model.ugi_amine_semantic_program import (
     UgiAmineSemanticProgramError,
     UgiAmineSemanticTarget,
     UgiMeasuredAmineSemanticPrior,
+    amine_local_substitution_metrics,
     amine_program_key,
     amine_semantic_target,
     build_equal_family_conditional_distribution,
@@ -36,6 +37,23 @@ def test_amine_semantic_target_is_graph_derived_and_identity_free() -> None:
         "nitrogen_atoms",
         "oxygen_atoms",
     }
+
+
+def test_substitution_aware_amine_target_adds_only_local_integer_semantics() -> None:
+    target = amine_semantic_target("CN1CCN(CCN)CC1", include_substitution_semantics=True)
+
+    assert target.hydrogen_bond_donors == 1
+    assert target.heavy_branch_atoms == 2
+    assert UgiAmineSemanticTarget.from_mapping(target.to_mapping()) == target
+    assert UgiAmineSemanticTarget.from_key(target.key) == target
+    assert set(target.to_mapping()).difference(UgiAmineSemanticTarget(4, 3, 2, 0).to_mapping()) == {
+        "hydrogen_bond_donors",
+        "heavy_branch_atoms",
+    }
+
+
+def test_local_substitution_metrics_match_saturated_neutral_head_support() -> None:
+    assert amine_local_substitution_metrics(("N", "C", "N", "C", "O"), (1, 2, 3, 3, 1)) == (2, 2)
 
 
 def test_amine_semantic_target_fails_closed_on_unrepresented_elements() -> None:

@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.ugi_development_visual_review_config.v1",
+  "scientific_question": "Does identity-free complete-head topology support alone visibly improve Ugi tail morphology and head-tail balance without introducing unsupported local chemistry?",
+  "inputs": {
+    "comparison_archive": {
+      "path": "results/phase1/ugi_topology_support_only_vs_amine_joint_support_cpu_seed0_v1/comparison_details.tar",
+      "sha256": "b97f2ff5375bce1561b5b76006c011e77283c916d501454e4eade717a1b98a37"
+    },
+    "realism_panel_result": {
+      "path": "results/phase1/ugi_topology_support_only_realism_panel_seed0_v1/result.json",
+      "sha256": "1f5085385b7e00b5a8965e6f67a4d8c020729e2410ed0d1cb8b6a887e58eb895"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_context_support_complete_semantic_ugi_program_toposupport_topow1000",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "treatment_arm": "all_role_semantic",
+  "expected_attempts": 256,
+  "attempt_indices": [
+    3,
+    15,
+    18,
+    19,
+    51,
+    62,
+    63,
+    67,
+    85,
+    93,
+    125,
+    134,
+    139,
+    159,
+    165,
+    189,
+    198,
+    219,
+    231,
+    236,
+    237,
+    243,
+    244,
+    247
+  ],
+  "selection_seed": 2026090353,
+  "blinding_seed": 2026090423,
+  "criteria": [
+    "tail_morphology_preference",
+    "head_tail_balance_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "indices_selected_by_output_blind_rng_before_review": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "This is a blinded seed-0 development review, not an activity, synthesis-success or across-training-seed claim.",
+    "The attempt indices were frozen by an output-blind random draw before this intervention existed; no molecule is selected, replaced, filtered, repaired or retried.",
+    "The packet contains no method identities and the blinding key remains separate until every review field is complete.",
+    "Visual preference cannot override any prespecified quantitative or chemistry-preservation gate."
+  ]
+}

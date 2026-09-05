@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.ugi_development_visual_review_config.v1",
+  "scientific_question": "After quantitative rejection, did completed-head support improve head arrangement or whole-lipid plausibility enough to justify a diversity-preserving successor?",
+  "inputs": {
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-whole-head-support-mog-seed0-h100-preflight-v1/6c4c053054a9aa55616d28f3e8b297bc16b0f9964ad7946afdd9c7b4642b6232/stages/preflight/artifacts/comparison_details.tar",
+      "sha256": "4776259a0bd880ef4210aa573f1641a5337053828dd79acd4b3ee861f813b109"
+    },
+    "realism_panel_result": {
+      "path": "results/phase1/ugi_whole_head_support_mog_preflight_adjudication_seed0_v1/realism_panel/result.json",
+      "sha256": "9e2a72c04d537405ad1cce6067cab59c6893b3f81c1bcdb4a3b607e6b135d569"
+    }
+  },
+  "arms": {
+    "complete_semantic_mog": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "whole_head_support_mog": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_whole_head_support_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "complete_semantic_mog",
+  "treatment_arm": "whole_head_support_mog",
+  "expected_attempts": 256,
+  "attempt_indices": [
+    0,
+    11,
+    54,
+    55,
+    63,
+    74,
+    93,
+    95,
+    104,
+    111,
+    123,
+    130,
+    139,
+    143,
+    148,
+    156,
+    166,
+    186,
+    188,
+    224,
+    226,
+    235,
+    238,
+    245
+  ],
+  "selection_seed": 2026090343,
+  "blinding_seed": 2026090344,
+  "criteria": [
+    "head_arrangement_preference",
+    "overall_lipid_plausibility_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "indices_selected_by_output_blind_rng_before_review": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "This packet is a post-rejection failure-attribution diagnostic and cannot promote the rejected whole-head intervention.",
+    "The attempt indices and arm blinding were frozen before the paid outputs existed; no molecule is selected, replaced, repaired or retried.",
+    "The packet tests whether the whole-head signal itself is visually useful before any successor spends additional compute.",
+    "The review is not evidence of activity, synthesis success or across-seed generalization."
+  ]
+}

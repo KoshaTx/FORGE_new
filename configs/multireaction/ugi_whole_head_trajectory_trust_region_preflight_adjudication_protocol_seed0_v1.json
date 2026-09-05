@@ -1,0 +1,123 @@
+{
+  "schema_version": "forge.ugi_development_adjudication_protocol.v1",
+  "scientific_question": "Can a 0.05 total-variation trust region over complete amine-head assignments retain at least 95% of component diversity while preserving the measured whole-head realism signal?",
+  "inputs": {
+    "comparison_config": {
+      "path": "configs/multireaction/ugi_whole_head_trajectory_trust_region_vs_complete_semantic_seed0_v1.json",
+      "sha256": "c6533f82fe1d7d2afa54614bac96851cbe5dfeb08fb805e5ae4282326976fb3d"
+    },
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "experiment_descriptor": {
+      "path": "experiments/phase1/multireaction/ugi_whole_head_trajectory_trust_region_seed0_h100_preflight_v1.json",
+      "sha256": "fd245dc1b1f5138cfbb6db3dfd12ae045f1c77bf9044bae50146c8103b28a040"
+    }
+  },
+  "arms": {
+    "complete_semantic_mog": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "comparison_method_key": "amine_semantic",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "whole_head_trajectory_trust_region_mog": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "comparison_method_key": "all_role_semantic",
+      "method_id": "forge_seed0_mog_binary_whole_head_tv050_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "complete_semantic_mog",
+  "treatment_arm": "whole_head_trajectory_trust_region_mog",
+  "expected_attempts": 256,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "promotion_gate": {
+    "effective_component_count_minimum_retained_ratio": 0.95,
+    "exact_l1_absolute_minimum": 0.95,
+    "exact_l1_noninferiority_margin": 0.01,
+    "require_uniform_role_panel_improvement": true,
+    "require_zero_program_support_abstentions": true,
+    "unique_exact_l1_minimum_retained_ratio": 0.95,
+    "validity_absolute_minimum": 0.95
+  },
+  "visual_review": {
+    "attempt_indices": [
+      1,
+      10,
+      26,
+      46,
+      50,
+      58,
+      77,
+      84,
+      97,
+      101,
+      115,
+      123,
+      124,
+      161,
+      163,
+      173,
+      190,
+      196,
+      217,
+      227,
+      230,
+      233,
+      243,
+      247
+    ],
+    "selection_seed": 2026090355,
+    "blinding_seed": 2026090356,
+    "criteria": [
+      "head_arrangement_preference",
+      "overall_lipid_plausibility_preference",
+      "unsupported_ring_or_heteroatom_pathology"
+    ],
+    "decision_rule": {
+      "maximum_treatment_pathology_pairs": 2,
+      "minimum_assessable_pairs_per_criterion": 20,
+      "minimum_net_treatment_preferences": 4,
+      "require_treatment_pathologies_no_more_than_baseline": true,
+      "require_treatment_preference_majority": true
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "include_invalid_or_failed_attempts_in_visual_review": true,
+    "indices_selected_before_generation": true,
+    "repair_or_retry": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "nonclaims": [
+    "This is a seed-0 frozen-checkpoint development preflight, not an across-training-seed or paper-level realism claim.",
+    "The complete feasible amine-head assignment law moves by at most 0.05 total variation from the Transformer-plus-semantic baseline law for every requested program.",
+    "The intervention uses only aggregate measured-training support signatures and no precursor identities, stored component graphs or fragment tokens.",
+    "All six primary distribution comparisons and all visual-review indices and gates were fixed before paid outputs existed.",
+    "The adjudication performs no generation, training, filtering, repair, retry, routing, oracle calls or candidate selection.",
+    "A quantitative pass requires a completed blinded visual review before any full-budget experiment may be proposed."
+  ]
+}

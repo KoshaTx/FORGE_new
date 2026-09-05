@@ -37,7 +37,7 @@ def _lower_quantile(values: list[int], quantile: float) -> int:
     return int(ordered[math.floor(quantile * (len(ordered) - 1))])
 
 
-def _ester_side_carbon_counts(smiles: str) -> tuple[int, int] | None:
+def ester_side_carbon_counts(smiles: str) -> tuple[int, int] | None:
     """Return carbon counts on both sides of one unambiguous C(=O)-O-C bond."""
 
     molecule = Chem.MolFromSmiles(smiles)
@@ -93,6 +93,88 @@ def _ester_side_carbon_counts(smiles: str) -> tuple[int, int] | None:
         sum(molecule.GetAtomWithIdx(node).GetSymbol() == "C" for node in side) for side in sides
     )
     return int(counts[0]), int(counts[1])
+
+
+def aldehyde_ester_directional_carbon_counts(smiles: str) -> tuple[int, int] | None:
+    """Return alkoxy-handle and acyl-side carbon counts for one oxoester aldehyde.
+
+    AGILE-type ester-bearing aldehydes place the reactive aldehyde on the alkoxy side of one
+    unambiguous ``C(=O)-O-C`` motif.  Unlike :func:`ester_side_carbon_counts`, this projection keeps
+    that direction: the first value is the carbon count on the alkoxy side containing the aldehyde
+    handle, and the second is the carbon count on the acyl side.  Molecules with an ambiguous ester
+    or aldehyde, or with the aldehyde on the acyl side, are outside this directional support.
+    """
+
+    molecule = Chem.MolFromSmiles(smiles)
+    if molecule is None:
+        raise UgiEsterChemotypeError(f"training component no longer parses: {smiles}")
+    ester_candidates: list[tuple[int, int]] = []
+    for atom in molecule.GetAtoms():
+        if atom.GetSymbol() != "C":
+            continue
+        double_oxygen = []
+        single_oxygen = []
+        carbon_neighbors = []
+        for neighbor in atom.GetNeighbors():
+            bond = molecule.GetBondBetweenAtoms(atom.GetIdx(), neighbor.GetIdx())
+            if neighbor.GetSymbol() == "O" and bond.GetBondType() == Chem.BondType.DOUBLE:
+                double_oxygen.append(neighbor)
+            elif neighbor.GetSymbol() == "O" and bond.GetBondType() == Chem.BondType.SINGLE:
+                single_oxygen.append(neighbor)
+            elif neighbor.GetSymbol() == "C":
+                carbon_neighbors.append(neighbor)
+        for oxygen in single_oxygen:
+            if (
+                len(double_oxygen) == 1
+                and carbon_neighbors
+                and any(
+                    neighbor.GetSymbol() == "C" and neighbor.GetIdx() != atom.GetIdx()
+                    for neighbor in oxygen.GetNeighbors()
+                )
+            ):
+                ester_candidates.append((atom.GetIdx(), oxygen.GetIdx()))
+    if len(ester_candidates) != 1:
+        return None
+    ester_center, ester_oxygen = ester_candidates[0]
+    aldehyde_query = Chem.MolFromSmarts("[CX3H1]=[OX1]")
+    if aldehyde_query is None:  # pragma: no cover - constant RDKit query
+        raise UgiEsterChemotypeError("aldehyde handle query no longer parses")
+    aldehyde_carbons = {
+        int(match[0])
+        for match in molecule.GetSubstructMatches(aldehyde_query)
+        if int(match[0]) != ester_center
+    }
+    if len(aldehyde_carbons) != 1:
+        return None
+    aldehyde_carbon = next(iter(aldehyde_carbons))
+    blocked = frozenset((ester_center, ester_oxygen))
+
+    def component(start: int) -> set[int]:
+        visited = {start}
+        frontier = [start]
+        while frontier:
+            node = frontier.pop()
+            for neighbor in molecule.GetAtomWithIdx(node).GetNeighbors():
+                target = int(neighbor.GetIdx())
+                if frozenset((node, target)) == blocked or target in visited:
+                    continue
+                visited.add(target)
+                frontier.append(target)
+        return visited
+
+    acyl_side = component(ester_center)
+    alkoxy_side = component(ester_oxygen)
+    if (
+        acyl_side & alkoxy_side
+        or len(acyl_side | alkoxy_side) != molecule.GetNumAtoms()
+        or aldehyde_carbon not in alkoxy_side
+    ):
+        return None
+
+    def carbon_count(nodes: set[int]) -> int:
+        return sum(molecule.GetAtomWithIdx(node).GetSymbol() == "C" for node in nodes)
+
+    return int(carbon_count(alkoxy_side)), int(carbon_count(acyl_side))
 
 
 @dataclass(frozen=True)
@@ -237,7 +319,7 @@ class UgiEsterChemotypePolicy:
         ester_sides = [
             value
             for smiles in sorted(unique_components[by_kind["aldehyde"][0]])
-            if (value := _ester_side_carbon_counts(smiles)) is not None
+            if (value := ester_side_carbon_counts(smiles)) is not None
         ]
         if not ester_sides:
             raise UgiEsterChemotypeError(
@@ -315,9 +397,14 @@ class UgiEsterChemotypePolicy:
 
     @property
     def minimum_constructive_aldehyde_exterior_atoms(self) -> int:
-        """Smallest exterior containing both carbon arms and the two ester oxygens."""
+        """Smallest exterior containing both precursor arms and the two ester oxygens.
 
-        return int(self.minimum_ester_side_carbons + self.minimum_ester_long_side_carbons + 2)
+        The measured arm counts include the fixed aldehyde-derived reaction-core carbon.  That
+        carbon is not part of the generated exterior, so the exterior contains one fewer carbon
+        than the sum of the two precursor-level arm counts.
+        """
+
+        return int(self.minimum_ester_side_carbons + self.minimum_ester_long_side_carbons + 1)
 
     def minimum_topology_exterior_atoms(self, role: str) -> int:
         """Strengthen the measured floor only when exact chemotype feasibility requires it."""
@@ -379,4 +466,13 @@ class UgiEsterChemotypePolicy:
         }
 
 
-__all__ = ["UgiEsterChemotypeError", "UgiEsterChemotypePolicy"]
+# Backward-compatible private alias retained for older audits.
+_ester_side_carbon_counts = ester_side_carbon_counts
+
+
+__all__ = [
+    "aldehyde_ester_directional_carbon_counts",
+    "UgiEsterChemotypeError",
+    "UgiEsterChemotypePolicy",
+    "ester_side_carbon_counts",
+]

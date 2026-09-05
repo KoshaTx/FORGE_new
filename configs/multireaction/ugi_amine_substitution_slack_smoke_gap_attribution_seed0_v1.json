@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Does bounded rank-weighted donor and branch slack preserve the local amine-head realism gain without exact-target diversity collapse in the paired CPU smoke?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "results/phase1/ugi_amine_substitution_slack_program_comparison_seed0_v5/smoke/result.json",
+      "sha256": "ef43f146aea6a80d0aac205eca9f8a69ae6e4754adab9d060cac61e22bdf3f95"
+    }
+  },
+  "arms": {
+    "frozen_mog_semantic": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_substitution_slack_program_comparison_seed0_v5/smoke/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "c77295fcc493e06404f8cce69352420bae8f199f09b62b4bf8589541ec74069a"
+      },
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "substitution_slack": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_substitution_slack_program_comparison_seed0_v5/smoke/all_role_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "8e1baa4347070597121e915d89a8fd5e69d02deed51f9721608f6ebcd94930c5"
+      },
+      "method_id": "forge_seed0_mog_substitution_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "frozen_mog_semantic",
+  "expected_attempts": 16,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a 16-attempt CPU smoke diagnostic, not a model-performance or paper claim.",
+    "Signed role-descriptor shifts diagnose structural distribution mismatch; they are not biological activity, synthesis success or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

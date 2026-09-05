@@ -1,0 +1,56 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "Does train-fold local-chemistry ranking improve all six measured-Ugi role-distribution distances over the otherwise matched complete-semantic MOG decoder at the completed 256-program preflight scale?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "runs/phase1-ugi-local-chemistry-mog-seed0-h100-preflight-v1/a9b124db9a49de8b84d57f1b619e1ed499b76523491245c17f38fb66bb0cb18a/stages/preflight/artifacts/comparison_details.tar",
+      "sha256": "4c54ba9993c9e25ed44ac5578f75b3e531c3be0f58dde62c4bbcdd05723d4ea6"
+    }
+  },
+  "arms": {
+    "complete_semantic_mog": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "complete_semantic_local_chemistry_mog": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_local_chemistry_complete_semantic_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "complete_semantic_mog",
+  "expected_attempts": 256,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This is a seed-0 train-fold-only diagnostic over an already completed 256-program preflight, not a full-budget or across-training-seed model claim.",
+    "The reassessment performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "The local-chemistry score uses aggregate train-fold context frequencies and no component identities or stored component graphs.",
+    "The panel reports directional consistency without a confidence interval or significance claim.",
+    "C2ST is secondary and does not determine the panel classification.",
+    "A favorable role panel cannot override validity, exact-L1, unique-yield, effective-count or blinded visual gates."
+  ]
+}

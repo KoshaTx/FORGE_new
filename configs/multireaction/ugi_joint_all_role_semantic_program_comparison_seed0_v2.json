@@ -1,0 +1,113 @@
+{
+  "schema_version": "forge.ugi_all_role_semantic_program_comparison_config.v1",
+  "scientific_question": "Does a coherent measured-train joint program with paired head semantics and directional aldehyde geometry improve complete Ugi lipid realism beyond its matched amine-semantic baseline while preserving exact assembly, validity and discovery capacity?",
+  "inputs": {
+    "all_role_semantic_program_draw": {
+      "path": "results/phase1/ugi_joint_all_role_semantic_program_draw_seed0_v2/program_draw.json",
+      "sha256": "7399b3f4341426ae48027d66211fca853281a995e0f212db0e2d4aa040273b3e"
+    },
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "topology_closure_config": {
+      "path": "configs/model/phase1_ugi_closure_expanded.json",
+      "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+    },
+    "topology_morphology_config": {
+      "path": "configs/model/phase1_ugi_morphology_expanded.json",
+      "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+    },
+    "common_ugi_assessment_config": {
+      "path": "configs/multireaction/common_ugi_assessment_v1.json",
+      "sha256": "01a8279a90c4fab7721047313236a930515abd2137702b08a66d1b77377efd4e"
+    },
+    "lipid_realism_config": {
+      "path": "configs/multireaction/common_lipid_realism_v1.json",
+      "sha256": "a671b7453a46b0103feabb536116235302e0559f72d3b002fb0b67f2d936f855"
+    },
+    "local_chemistry_config": {
+      "path": "configs/multireaction/common_local_chemistry_assessment_v1.json",
+      "sha256": "6bbbfab9b9e9d947b5c26597d5b42ec66cea974fa0a331cdc904c9331b91db98"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143
+  },
+  "profiles": {
+    "smoke": {
+      "device": "cpu",
+      "program_count": 16,
+      "sample_steps": 2,
+      "batch_size": 16,
+      "flow_seed": 2026090102,
+      "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+    },
+    "h100_preflight": {
+      "device": "cuda",
+      "program_count": 256,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "flow_seed": 2026090102,
+      "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+    },
+    "full": {
+      "device": "cuda",
+      "program_count": 3072,
+      "sample_steps": 32,
+      "batch_size": 128,
+      "flow_seed": 2026090102,
+      "terminal_decode_policy": "strict_ugi_ester_topology_role_local_chemistry_core_saturation"
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "component_identity_conditioning": false,
+    "heldout_training_access": false,
+    "method_blind_assessment": true,
+    "paired_coarse_program_order": true,
+    "paired_flow_random_stream": true,
+    "repairs_or_retries": false,
+    "route_or_oracle_calls": 0,
+    "training_calls": 0
+  },
+  "preflight_gate": {
+    "exact_l1_absolute_minimum": 0.95,
+    "exact_l1_noninferiority_margin": 0.01,
+    "minimum_baseline_valid_fraction": 0.95,
+    "minimum_treatment_valid_fraction": 0.95,
+    "require_zero_program_support_abstentions": true
+  },
+  "nonclaims": [
+    "This is a frozen-checkpoint decoder intervention, not model retraining, component selection or post-hoc filtering.",
+    "The program and complete semantic target are sampled together from one train-only joint law; both arms receive the identical amine target.",
+    "The treatment additionally preserves the measured alkoxy-aldehyde/acyl ester direction and tail semantics without receiving a precursor identity, graph, SMILES or fragment token.",
+    "Each arm decodes every paired attempt exactly once. No repair, retry, routing, oracle call or candidate selection is permitted.",
+    "Seed-0 promotion requires the separate measured-Ugi role-panel adjudicator and does not establish across-training-seed robustness, activity or synthesis success."
+  ]
+}

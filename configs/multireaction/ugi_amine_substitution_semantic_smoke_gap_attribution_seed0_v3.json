@@ -1,0 +1,41 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Did exact amine hydrogen-bond-donor and branch semantics reduce the dominant measured-train head mismatch in the paired CPU smoke?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "realism_comparison_result": {
+      "path": "results/phase1/ugi_amine_substitution_semantic_program_comparison_seed0_v3/smoke/result.json",
+      "sha256": "204dc75ec1b352e22f6b7c0aaccad2d841758fb785613a94b49d5aa122f21c44"
+    }
+  },
+  "arms": {
+    "frozen_mog_semantic": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_substitution_semantic_program_comparison_seed0_v3/smoke/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "c77295fcc493e06404f8cce69352420bae8f199f09b62b4bf8589541ec74069a"
+      },
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "substitution_semantic": {
+      "assessed_attempts": {
+        "path": "results/phase1/ugi_amine_substitution_semantic_program_comparison_seed0_v3/smoke/all_role_semantic/assessment/common/assessed_attempts.jsonl.gz",
+        "sha256": "60e298d038eec3700b4a6bc8b8b2ad3ec391fb9db759b56441d515e9e7dd032b"
+      },
+      "method_id": "forge_seed0_mog_substitution_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "frozen_mog_semantic",
+  "expected_attempts": 16,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a 16-attempt CPU smoke diagnostic, not a model-performance or paper claim.",
+    "Signed role-descriptor shifts diagnose structural distribution mismatch; they are not biological activity, synthesis success or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

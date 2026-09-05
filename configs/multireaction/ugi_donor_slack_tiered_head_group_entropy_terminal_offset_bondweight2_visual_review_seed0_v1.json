@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.ugi_development_visual_review_config.v1",
+  "scientific_question": "Does tiered complete-head support with a 99% arrangement-class entropy floor visibly improve Ugi tail morphology and head-tail balance without introducing unsupported local chemistry?",
+  "inputs": {
+    "comparison_archive": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/comparison_details.tar",
+      "sha256": "a62efa6e0a13d56933876471116a39214a724cc4edb0ddc8eb863579e28d5538"
+    },
+    "realism_panel_result": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_realism_panel_seed0_v1/result.json",
+      "sha256": "f4b637731bfd9be58350a6f476f764898aa56bf605ca8652402db907dc1b4677"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_whole_head_support_complete_semantic_ugi_program_bonddepth064_unsatpos_terminaloffset_toposupport_donorslack1_frequencyresampled_unif0350_bondunif0300_grp0990_bondw2000",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "treatment_arm": "all_role_semantic",
+  "expected_attempts": 256,
+  "attempt_indices": [
+    6,
+    19,
+    24,
+    30,
+    32,
+    39,
+    46,
+    48,
+    55,
+    63,
+    98,
+    125,
+    126,
+    130,
+    132,
+    140,
+    154,
+    172,
+    188,
+    202,
+    206,
+    231,
+    233,
+    251
+  ],
+  "selection_seed": 2026090461,
+  "blinding_seed": 2026090462,
+  "criteria": [
+    "tail_morphology_preference",
+    "head_tail_balance_preference",
+    "unsupported_ring_or_heteroatom_pathology"
+  ],
+  "decision_rule": {
+    "maximum_treatment_pathology_pairs": 2,
+    "minimum_assessable_pairs_per_criterion": 20,
+    "minimum_net_treatment_preferences": 4,
+    "require_treatment_pathologies_no_more_than_baseline": true,
+    "require_treatment_preference_majority": true
+  },
+  "policy": {
+    "candidate_selection": false,
+    "indices_selected_by_output_blind_rng_before_review": true,
+    "include_invalid_or_failed_attempts": true,
+    "independent_left_right_blinding_per_pair": true,
+    "repair_or_retry": false,
+    "render_complete_molecule_only": true
+  },
+  "nonclaims": [
+    "This is a blinded seed-0 development review, not an activity, synthesis-success or across-training-seed claim.",
+    "The attempt indices were frozen by an output-blind random draw before any output from this intervention was viewed; no molecule is selected, replaced, filtered, repaired or retried.",
+    "The packet contains no method identities and the blinding key remains separate until every review field is complete.",
+    "Visual preference cannot override any prespecified quantitative or chemistry-preservation gate."
+  ]
+}

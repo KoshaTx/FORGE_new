@@ -1,0 +1,29 @@
+{
+  "schema_version": "forge.ugi_role_realism_gap_attribution_config.v1",
+  "scientific_question": "Does exact branch conditioning with bounded donor slack preserve the measured amine-head realism improvement in the paired CPU smoke?",
+  "inputs": {
+    "development_realism_config": {"path": "configs/multireaction/ugi_development_lipid_realism_v3.json", "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"},
+    "realism_comparison_result": {"path": "results/phase1/ugi_amine_donor_slack_branch_exact_comparison_seed0_v1/smoke/result.json", "sha256": "4e297b560949c834b3ef2cfb77e693db11bb867120e10ccd2164f7a97b72e4fc"}
+  },
+  "arms": {
+    "frozen_mog_semantic": {
+      "assessed_attempts": {"path": "results/phase1/ugi_amine_donor_slack_branch_exact_comparison_seed0_v1/smoke/amine_semantic/assessment/common/assessed_attempts.jsonl.gz", "sha256": "c77295fcc493e06404f8cce69352420bae8f199f09b62b4bf8589541ec74069a"},
+      "method_id": "forge_seed0_mog_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "donor_slack_branch_exact": {
+      "assessed_attempts": {"path": "results/phase1/ugi_amine_donor_slack_branch_exact_comparison_seed0_v1/smoke/all_role_semantic/assessment/common/assessed_attempts.jsonl.gz", "sha256": "4093ce77f69545c0833641d5c717e4ccf3c07bdd0a9260345c116b7c356985a2"},
+      "method_id": "forge_seed0_mog_substitution_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "frozen_mog_semantic",
+  "expected_attempts": 16,
+  "top_k": 12,
+  "nonclaims": [
+    "This is a 16-attempt CPU factorial smoke diagnostic, not a model-performance or paper claim.",
+    "Signed role-descriptor shifts diagnose structural distribution mismatch; they are not biological activity, synthesis success or candidate-quality scores.",
+    "The diagnostic performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "Only unambiguous verified exact-L1 traces enter the role-descriptor analysis."
+  ]
+}

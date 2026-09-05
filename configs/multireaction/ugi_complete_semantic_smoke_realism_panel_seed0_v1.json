@@ -1,0 +1,54 @@
+{
+  "schema_version": "forge.ugi_development_realism_comparison_config.v2",
+  "scientific_question": "At local smoke scale, does the complete identity-free Ugi semantic decoder move all six measured-train role-distribution metrics in the favorable direction relative to the frozen amine joint-support baseline?",
+  "inputs": {
+    "development_realism_config": {
+      "path": "configs/multireaction/ugi_development_lipid_realism_v3.json",
+      "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"
+    },
+    "comparison_archive": {
+      "path": "results/phase1/ugi_complete_semantic_vs_joint_support_comparison_seed0_v1/local_smoke/comparison_details.tar",
+      "sha256": "e87713047266cb1f9183c81f1c22a535bf53bcdf89a8a291b24b268830474a87"
+    }
+  },
+  "arms": {
+    "amine_semantic": {
+      "archive_member": "amine_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_amine_semantic_joint_support_ugi_program",
+      "seed": 0
+    },
+    "all_role_semantic": {
+      "archive_member": "all_role_semantic/assessment/attempts.jsonl.gz",
+      "method_id": "forge_seed0_mog_substitution_semantic_joint_support_ugi_program",
+      "seed": 0
+    }
+  },
+  "baseline_arm": "amine_semantic",
+  "expected_attempts": 16,
+  "metric_panel": {
+    "primary_metrics": [
+      "role_normalized_wasserstein",
+      "role_energy_distance",
+      "role_rbf_mmd2"
+    ],
+    "weightings": [
+      "attempt_weighted",
+      "unique_product_weighted"
+    ],
+    "secondary_metrics": [
+      "role_c2st_auc",
+      "role_nearest_reference_distance_mean",
+      "global_normalized_wasserstein",
+      "global_c2st_auc"
+    ],
+    "decision_rule": "descriptive_directional_consistency",
+    "direction": "lower_is_better",
+    "inference": "none_seed0_development_only"
+  },
+  "nonclaims": [
+    "This sixteen-attempt smoke panel is a directional mechanism diagnostic and cannot pass or fail the frozen H100 promotion gate.",
+    "The reassessment performs no training, generation, repair, retry, routing, oracle calls or candidate selection.",
+    "C2ST is secondary and does not determine the panel classification.",
+    "No result establishes activity, synthesis success, formulation performance or biological efficacy."
+  ]
+}
