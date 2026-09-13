@@ -1,0 +1,63 @@
+{
+  "cart_changes": 0,
+  "created_at_utc": "2026-09-13T17:15:52.679987+00:00",
+  "evidence_admitted": false,
+  "inputs": {
+    "public_endpoint_definition": {
+      "bytes": 735326,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_runtime_probe/plusMinusInputAvailability.js",
+      "sha256": "6cdff21e5013225d8d2fc2d64e3371871411262a7aa74ca7071b0071707bc13c"
+    },
+    "script": {
+      "bytes": 2782,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_stock_probe.py",
+      "sha256": "eed211a4443c45aa002e8f121a57248aa2bf089548055e6b9e9cdcaf382b6f92"
+    }
+  },
+  "purchases": 0,
+  "records": [
+    {
+      "http_status": 200,
+      "method": "POST",
+      "part": "AC295061000",
+      "reference_zip_only_not_user_address": true,
+      "request": {
+        "bytes": 191,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_stock_responses/AC295061000_request.json",
+        "sha256": "c50b60d208c0e812ef7e020196299eb1b8a4b2e02d20a651ef99e4e42169acbe"
+      },
+      "requested_at_utc": "2026-09-13T17:15:52.306257+00:00",
+      "resolved_url": "https://www.fishersci.com/shop/products/service/availability",
+      "response": {
+        "bytes": 4329,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_stock_responses/AC295061000_response.txt",
+        "sha256": "8b514cee2adbe10ec6c7d2a60327d29471b04cc6bca4677d92b6eea6c0cbd6a2"
+      },
+      "status": "saved_requires_review",
+      "url": "https://www.fishersci.com/shop/products/service/availability"
+    },
+    {
+      "http_status": 200,
+      "method": "POST",
+      "part": "19242225G",
+      "reference_zip_only_not_user_address": true,
+      "request": {
+        "bytes": 189,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_stock_responses/19242225G_request.json",
+        "sha256": "73e87337d298e9581407e1b1832cd649a8e58ddc822da6be82f73ea5b7683609"
+      },
+      "requested_at_utc": "2026-09-13T17:15:52.557862+00:00",
+      "resolved_url": "https://www.fishersci.com/shop/products/service/availability",
+      "response": {
+        "bytes": 4191,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_stock_responses/19242225G_response.txt",
+        "sha256": "19c146a10d9a36fc1dfbb9e2ba08cb3fb2ad334eecfd722f833c8b7dcacdd956"
+      },
+      "status": "saved_requires_review",
+      "url": "https://www.fishersci.com/shop/products/service/availability"
+    }
+  ],
+  "schema_version": "forge.public_supplier_stock_probe.v1",
+  "scope": "Public availability lookup for reference ZIP 10001; not a user destination or order.",
+  "supplier_messages": 0
+}

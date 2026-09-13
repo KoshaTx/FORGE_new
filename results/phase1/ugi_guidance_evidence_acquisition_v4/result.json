@@ -1,0 +1,855 @@
+{
+  "acquisition": {
+    "archive_asset_count": 29,
+    "archive_compressed_bytes": 1922000,
+    "http_status_counts": {
+      "200": 23,
+      "403": 5
+    },
+    "public_get_requests": 24,
+    "public_guest_availability_post_requests": 4,
+    "random_sampling_used": false
+  },
+  "created_at_utc": "2026-09-13T18:11:03.700036+00:00",
+  "files": [
+    {
+      "bytes": 23276,
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    {
+      "bytes": 15367,
+      "path": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+      "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"
+    },
+    {
+      "bytes": 2168,
+      "path": "configs/route/phase1_ugi3_high_leverage_tail_terminals_v1.json",
+      "sha256": "bd67f7427d94bf7ac26550a6ddd82bf0474e81131e10e408daaf6938a1aeabb5"
+    },
+    {
+      "bytes": 2720,
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+      "sha256": "5951ae7d0fca7896e611a48da68450aab63dd64e2fd853ff2e458d9b0ccfcabe"
+    },
+    {
+      "bytes": 1631,
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
+      "sha256": "ec16ed0ec407354cae3efa58b68db935fa9c74aa4fef7988fd5871964896c6cb"
+    },
+    {
+      "bytes": 743197,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_01/chemimpex_03599.html",
+      "sha256": "cbaab14d62262b51484ef708b78ecefbdd55042950014d14e47d3a6cdb9a7e56"
+    },
+    {
+      "bytes": 235,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_01/pubchem_cid71552.json",
+      "sha256": "b3155d742516d53bfcfc34550eca4933c2dba6b5cd1684919044e559060eaa7c"
+    },
+    {
+      "bytes": 6405,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_01/receipt.json",
+      "sha256": "e6b59ad3689da4a8ce5fc288310700976001c4700185d79bea6b042618a5a26b"
+    },
+    {
+      "bytes": 341946,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_02/fisher_ac295061000.html",
+      "sha256": "bf62bebd3d195416fe3a2549a8e377334429a3f3b8255400b32c060286635492"
+    },
+    {
+      "bytes": 755,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_02/pubchem_terminal_identities.json",
+      "sha256": "ebe302ffb4bf083e8cd4bbd6584c6592310226c7fe8f7a055e3893f218502ff9"
+    },
+    {
+      "bytes": 7828,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_02/receipt.json",
+      "sha256": "4528d036234f46ea48ec34794254fd337ac27558e53afe7556d1be2a1fd4c91b"
+    },
+    {
+      "bytes": 241,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_03/pubchem_stearolic_acid.json",
+      "sha256": "511b2a5a7e5f835e992bcdb55581ddcc9fc3ba6082084418b79fc0a222defe66"
+    },
+    {
+      "bytes": 16602,
+      "path": "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py",
+      "sha256": "67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf"
+    },
+    {
+      "bytes": 14577,
+      "path": "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py",
+      "sha256": "0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40"
+    },
+    {
+      "bytes": 15694,
+      "path": "provenance/recovery/ugi_guidance_evidence_acquisition_v4.json",
+      "sha256": "393cfa46f681cf2532325bdd9e0badeddecbc49358700b20f5e4f5705a64e20c"
+    },
+    {
+      "bytes": 263,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/0c248c4dd2700a6c4f8380c88abc6586839c6d120d3608bebca99ac28b892ca5.gz",
+      "sha256": "c90fb7122305501d2b06aa6c068de968b784d48bd805c0090b48e72cdef80559"
+    },
+    {
+      "bytes": 478,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc.gz",
+      "sha256": "24ebacad94ba0400916378e17b6be43a2225bc89635934a1327c8cafb0e180de"
+    },
+    {
+      "bytes": 265,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/25ea1675d44761923f9ba5a6d474409490aca45b67eafcb5333c9ce4b9a97826.gz",
+      "sha256": "3e8ed50e4b5d48f750b3c905271ef975d47ee22a0ae0c318e32eb30ace1ad43d"
+    },
+    {
+      "bytes": 310213,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/28b45321d4f964a046fb33b8bad567bdfa3d8aae32e36854d2da33448cc121aa.gz",
+      "sha256": "dc240cabe453db83614c8a9a9e4f59e4b6218ffa0dec156b396527ceb07484ba"
+    },
+    {
+      "bytes": 309024,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/432fd4ded3b01960b204471452fd92b08902c51a9e20cad3bd28f34948360a18.gz",
+      "sha256": "6df79c9f0e9afc002b6d1c2c7405284d840d21109468757b599de6e699dde91c"
+    },
+    {
+      "bytes": 110564,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/47b730bf83a50cf073ce496b448a01dfdabc60d284ad8a4b5d09b9b3a6fa9e35.gz",
+      "sha256": "319bd6c4f4ee40c46b22faf58e46dfafdef155ad46bafc04686897a79dde121c"
+    },
+    {
+      "bytes": 264,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/4b5c716878c916b1bbcf3a08c0cd200f5e66c9e41d7e4454cac107562a4ce5b6.gz",
+      "sha256": "c6eadd622fa6b903b585cbf128e3a36a97bdd5f1b1b5924f7759be8c5293590c"
+    },
+    {
+      "bytes": 410672,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/5b92a2e5f2ead016ab32195ecbcd97e306f190c9e961b56ef66ceb4cf4d1d510.gz",
+      "sha256": "be500362961bc4ed741e1dad2057222c4ca2cff8adea5837f23ba04d4e18f0b2"
+    },
+    {
+      "bytes": 7447,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/6dcb67155edb420773b69d91a9099dc103bf7d9616fe2b241554e4b89b80d9d4.gz",
+      "sha256": "8a0c38226455ab0dc3b02fa02967bcfc3d5004c96659fc46a478f03cb8c7a47a"
+    },
+    {
+      "bytes": 1707,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/6e279db68eea5988f80c68b72f155e789401e49b001d9d8044f71f799f72bdd7.gz",
+      "sha256": "a681b74fa3e566621ed08139b7ce2d2efd56592b9e4c59314ef3b15193804c97"
+    },
+    {
+      "bytes": 257,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/6fc8d3fc114d548f528956602e3f8384985b54188377b6dac1b7125fc6f97b67.gz",
+      "sha256": "6f96eb41edcd82094066c0973fba57aff966bed9b4ac4bb27febd59682d1e419"
+    },
+    {
+      "bytes": 10874,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/78d6697413723ba4cd4a3a0a74d294a4035cf7553b6b4419dd0d49b028b274fe.gz",
+      "sha256": "9a40dccd4573b791b2b3ab28e786c4ea5a6d6246c9565ddcb348923ad5c5caeb"
+    },
+    {
+      "bytes": 17831,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/8768d278e57970e68c7c0abf5ce199a97eeac8fb8e157c91e58232e60fd06479.gz",
+      "sha256": "6b177e55ef9372c098d5e69cfc76f169bb7a5f92d9b6487be418762901d4212b"
+    },
+    {
+      "bytes": 3087,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/87eec732de2897cf98aa3ecd9e6e6e408635b82b25b0cf120cb1ad76509284c8.gz",
+      "sha256": "6dbc125e5caa660e37e749967f049e4730a3058c10f8b89c044d9a40cf1fbdd7"
+    },
+    {
+      "bytes": 92422,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/8f5abfc48909cddff6e25c511a78b806a347862dcd98adbc09d3d8707530206e.gz",
+      "sha256": "fe3ff3a86b785e1abd18c4ffef339df9ac7e4fcf7b8d68210fd97ab7c767fac4"
+    },
+    {
+      "bytes": 223,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/908881a75c4c5b90b8babeb100377c679e9b7fb1f7f9478a1b19d770d77ff396.gz",
+      "sha256": "0a99a194f42b91cc92da916594f2483461020d941a7f0579a2bcfc9d2a0b6b7b"
+    },
+    {
+      "bytes": 3654,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/98404594416bfe97d9a4080b9b082e3b221cb31713058a34d2f26cad7d7319b5.gz",
+      "sha256": "68da8ec868318924b1f0ccbc89cc487689e255d1831ffcbcddbc373f80396329"
+    },
+    {
+      "bytes": 10919,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/a1a7e9d9e6ac5a5340d20a14824d6d2f310da090b156c8c2e9a1361e4d929785.gz",
+      "sha256": "0d9b4e8b67565ff9df8dfce5b7da48d4534becc21e57015312e2cccfb42ad76d"
+    },
+    {
+      "bytes": 381552,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/a48c7fba4227a0b39c7334f9754724f2bd942624ff716d1ba031f16dd29e34b3.gz",
+      "sha256": "dd8147864c8fb283fedb0bf27699d94b0df531fccf01a8062a76fff959d481fa"
+    },
+    {
+      "bytes": 1506,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/afe056a3611ef4b747f8a664e3b5f06b0c23a08b61201c04edb835986b062d3b.gz",
+      "sha256": "9a9a54629d13a596925697671a35f95112491b2330c55bf0aa256d00dff5d8c5"
+    },
+    {
+      "bytes": 263,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/b05cfdbd1936f51a282307dfbd23e6fc65c28bfa2a2b3e84b4622559c00e9e25.gz",
+      "sha256": "49d56497150a9705c4833717a625d4bf560caac17981f7e89ec301257d6ec134"
+    },
+    {
+      "bytes": 512,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/c324fb39c7cc44314b86b7160f8ed09de77d86366a56a075778e6c04aaf637ae.gz",
+      "sha256": "984617b243a8bb10f5b44d23897d3cd97706670b45a4c29bfd12dcfc10776a21"
+    },
+    {
+      "bytes": 10799,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/c5e0c58dc0119b33fe101608c50c636d89aca9de42bf689790c36e22b3324a3d.gz",
+      "sha256": "a3363df43373f18f5c72c796cd4dbd62b19115869dabc7e541e5d9401da3010f"
+    },
+    {
+      "bytes": 69856,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/c9433ac9199bc475e5a416cb410ac7c8e424d98e9ccc72f245ff588aff8f7086.gz",
+      "sha256": "79b1280efc832e5b378f5ae3f25f5417c6c106bed0f2506c089811698adb5f86"
+    },
+    {
+      "bytes": 3089,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/cdbe95202cf24a65df2588f4e48d398ca046a55e50407b0013d144a3d9423919.gz",
+      "sha256": "eb835e05793498f16fbc0883dc5a815c5fbe960d587d7258156572baa7ef8b39"
+    },
+    {
+      "bytes": 19387,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/d600816fd4d59dbbc99f7788c08dfac21c867207ea48fe62204289f62605e4ed.gz",
+      "sha256": "dbe54308bc3e1b404c45a8b671c570b540ae2409cfa84cbf97d8a5f61fb07945"
+    },
+    {
+      "bytes": 855,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/d7498d592d8abecc2e6c0b5b2e5e8f3ffd5c103a6609c65e10ec6fbddcc4c4a8.gz",
+      "sha256": "7e1170a86045728ffe1b761752eedcc75c6b14243720fb51279ac16c22ef32e3"
+    },
+    {
+      "bytes": 7110,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/f2791d0075a03427633ead21105aff8473683f1fcd606ec26f24be65cabdc38b.gz",
+      "sha256": "bd3340846d8de5670554f13b694e9270bbd6c18321cad12ed67205af085c2297"
+    },
+    {
+      "bytes": 136907,
+      "path": "provenance/recovery/ugi_guidance_evidence_v4/assets/fad994ef8ecf34607d7190259c5271bab962ab53aa55bc7610c3026154daaad6.gz",
+      "sha256": "fed9fe2c7953d67e2ba533548121e51a3c98a03e7dce5908a874e345fe0c60ae"
+    },
+    {
+      "bytes": 3754,
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    {
+      "bytes": 14189,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    {
+      "bytes": 28955,
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/remaining_inputs.json",
+      "sha256": "3c613a186ebfeb4c8935a67adf6e1a9a560ac8fce8e5201ab64c8d39552102ee"
+    },
+    {
+      "bytes": 19632,
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/result.json",
+      "sha256": "dc43d8645b6412a86c59c83a75dbb02492d21abc5342250c47f9e7ba9d82007e"
+    },
+    {
+      "bytes": 22714,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/closeout.json",
+      "sha256": "ad03b77e4964dc3b08440eb06a4c28eeed8e15e7ba666338419f4dd87b1e540c"
+    },
+    {
+      "bytes": 1633,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/cyclohexylamine_terminal_evidence_20260913.json",
+      "sha256": "d62e38c996dbb7ce76d23869bfc04d975fb519f3f222add96e6f640ac9a177ea"
+    },
+    {
+      "bytes": 4075,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/cyclohexylamine_terminal_qualification.json",
+      "sha256": "99c1606a3454bd5f3657b243780ec6cd8a470947abb92925449b39368f691891"
+    },
+    {
+      "bytes": 3183,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/fetch_sources.py",
+      "sha256": "0a50a970c9b9770d21deaa5e7f5c8b5a95cf7962b8e6c9ff3104e21f89c8b5ad"
+    },
+    {
+      "bytes": 7735,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/qualify_cyclohexylamine.py",
+      "sha256": "a84bf7aacf776e4847f6589e9e59702b53b8b44604e052a168efe249f99b164f"
+    },
+    {
+      "bytes": 1403,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/requests_02.json",
+      "sha256": "9dbb1889fdafd3418c57259e15ac74d890d1ed5e5f2b65df53d4d3df4a759acf"
+    },
+    {
+      "bytes": 69847,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/result.json",
+      "sha256": "55a420986a6912d6cdc57c116ffe1522018c882b2486e82a6448ea9aabe7e694"
+    },
+    {
+      "bytes": 23138,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/route_source_recheck.json",
+      "sha256": "aa2d94a3441f49d886bf0dae9a2fd707a89a91f684a5ade586faf10c5d3e7416"
+    },
+    {
+      "bytes": 735326,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_runtime_probe/plusMinusInputAvailability.js",
+      "sha256": "6cdff21e5013225d8d2fc2d64e3371871411262a7aa74ca7071b0071707bc13c"
+    },
+    {
+      "bytes": 2843,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_variant_stock_probe.py",
+      "sha256": "975d8ba7918752463882dc57a5452546986c9e1c7670769c42c9493c1da34564"
+    },
+    {
+      "bytes": 4287,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_variant_stock_responses/AC295060250_response.txt",
+      "sha256": "819bafafcdb60417b04bd6cfd2c809b035e7139d6d6fa43b3b17c8e4bd033073"
+    },
+    {
+      "bytes": 6450,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_variant_stock_responses/receipt.json",
+      "sha256": "a8602fcc202a257f50701b4c920f260b26c6b100929eb91d360bb253d9df9ddc"
+    },
+    {
+      "bytes": 3232,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/archive_sources.py",
+      "sha256": "0643eb431d71da540f44ec11dbe8a66304e2b32aeecaa77a99f90de480975c88"
+    },
+    {
+      "bytes": 5382,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/bromotridecane_aa.html",
+      "sha256": "87eec732de2897cf98aa3ecd9e6e6e408635b82b25b0cf120cb1ad76509284c8"
+    },
+    {
+      "bytes": 406,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/bromotridecane_ambeed.html",
+      "sha256": "4b5c716878c916b1bbcf3a08c0cd200f5e66c9e41d7e4454cac107562a4ce5b6"
+    },
+    {
+      "bytes": 406,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/heptadecanal_ambeed.html",
+      "sha256": "0c248c4dd2700a6c4f8380c88abc6586839c6d120d3608bebca99ac28b892ca5"
+    },
+    {
+      "bytes": 43969,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/heptadecanal_bld.html",
+      "sha256": "a1a7e9d9e6ac5a5340d20a14824d6d2f310da090b156c8c2e9a1361e4d929785"
+    },
+    {
+      "bytes": 14755,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/oppolzer_openalex.json",
+      "sha256": "1e1858ebe0361644a15c7199948342c3aaa988793dda1216ab0a34ca504f463c"
+    },
+    {
+      "bytes": 364,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/oppolzer_semanticscholar.json",
+      "sha256": "4f571cd4869a194ffe4b1ce172e60515e92e05ae656fefece8e51857b6963d80"
+    },
+    {
+      "bytes": 8617,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/receipt.json",
+      "sha256": "4efbdf1eec2e31671d5480e04bead01e730cae28de1273cfd6debdbf1d6501e2"
+    },
+    {
+      "bytes": 5382,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/stearolic_aa.html",
+      "sha256": "cdbe95202cf24a65df2588f4e48d398ca046a55e50407b0013d144a3d9423919"
+    },
+    {
+      "bytes": 406,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/stearolic_ambeed.html",
+      "sha256": "b05cfdbd1936f51a282307dfbd23e6fc65c28bfa2a2b3e84b4622559c00e9e25"
+    },
+    {
+      "bytes": 317434,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/stearolic_fisher_5g.html",
+      "sha256": "c9433ac9199bc475e5a416cb410ac7c8e424d98e9ccc72f245ff588aff8f7086"
+    },
+    {
+      "bytes": 29499,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/bld_common.js",
+      "sha256": "6dcb67155edb420773b69d91a9099dc103bf7d9616fe2b241554e4b89b80d9d4"
+    },
+    {
+      "bytes": 79035,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/bld_product_detail.js",
+      "sha256": "8768d278e57970e68c7c0abf5ce199a97eeac8fb8e157c91e58232e60fd06479"
+    },
+    {
+      "bytes": 43864,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/bromotridecane_bld.html",
+      "sha256": "78d6697413723ba4cd4a3a0a74d294a4035cf7553b6b4419dd0d49b028b274fe"
+    },
+    {
+      "bytes": 4352,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/receipt.json",
+      "sha256": "3b66368f5dbc6f5844dee308cb199c913c6120d99ca7b72b27c1f1e0b2023817"
+    },
+    {
+      "bytes": 43054,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/stearolic_bld.html",
+      "sha256": "c5e0c58dc0119b33fe101608c50c636d89aca9de42bf689790c36e22b3324a3d"
+    },
+    {
+      "bytes": 4748,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/bld_hex.js",
+      "sha256": "6e279db68eea5988f80c68b72f155e789401e49b001d9d8044f71f799f72bdd7"
+    },
+    {
+      "bytes": 73087,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/bld_js.js",
+      "sha256": "d600816fd4d59dbbc99f7788c08dfac21c867207ea48fe62204289f62605e4ed"
+    },
+    {
+      "bytes": 1998,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/bromotridecane_bld_price.json",
+      "sha256": "7c381baaaa8aca43d7f30edc090c946f4116c25821309baa27627b7eac89c9d4"
+    },
+    {
+      "bytes": 2080,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/heptadecanal_bld_price.json",
+      "sha256": "1f5d0c339df43a33ac62522a5b8e9b7a1b5d61d40c7b2c60ea0de2a164f9e68d"
+    },
+    {
+      "bytes": 726300,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/heptadecanal_chemimpex.html",
+      "sha256": "fad994ef8ecf34607d7190259c5271bab962ab53aa55bc7610c3026154daaad6"
+    },
+    {
+      "bytes": 6445,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/receipt.json",
+      "sha256": "42aa4bdd67c9b6305d8554e6ecd29ea5a667603dbf605d4ffd17ca38ad5c920c"
+    },
+    {
+      "bytes": 842,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/stearolic_bld_price.json",
+      "sha256": "abf0ede3d09f3d9b3e2e489345d48894e143ccc0637c08e1fbafd947bba49b0f"
+    },
+    {
+      "bytes": 4323,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_04/receipt.json",
+      "sha256": "3d62e7e8a58a24dbbe495671b96d49d5609284c3a700fc96b5f5b0de5353aa58"
+    },
+    {
+      "bytes": 18579,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_04/stearolic_combiblocks.html",
+      "sha256": "98404594416bfe97d9a4080b9b082e3b221cb31713058a34d2f26cad7d7319b5"
+    },
+    {
+      "bytes": 1520,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_04/stearolic_orgsyn.html",
+      "sha256": "d7498d592d8abecc2e6c0b5b2e5e8f3ffd5c103a6609c65e10ec6fbddcc4c4a8"
+    },
+    {
+      "bytes": 323851,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_04/stearolic_orgsyn.pdf",
+      "sha256": "28b45321d4f964a046fb33b8bad567bdfa3d8aae32e36854d2da33448cc121aa"
+    },
+    {
+      "bytes": 655120,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_04/stearolic_tebubio.html",
+      "sha256": "47b730bf83a50cf073ce496b448a01dfdabc60d284ad8a4b5d09b9b3a6fa9e35"
+    },
+    {
+      "bytes": 8650,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_05/fisher_protected_propargyl.jpg",
+      "sha256": "f2791d0075a03427633ead21105aff8473683f1fcd606ec26f24be65cabdc38b"
+    },
+    {
+      "bytes": 1778,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_05/receipt.json",
+      "sha256": "9f43cd86b8077447fd4d983e272c1be77a50bc41832e00276f5d5389457a8dfa"
+    },
+    {
+      "bytes": 1042,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/bld_request.cjs",
+      "sha256": "99d66c74bd5a11f315d8cde15470a1fec7de7cff0023b73455e26e6bf8ff4aeb"
+    },
+    {
+      "bytes": 8088,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/closeout.py",
+      "sha256": "545ccdff5f474a3c298b847f76591ea57f3fa235a2e0e82c432a91151e7e7402"
+    },
+    {
+      "bytes": 1376,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/focused-tests.xml",
+      "sha256": "c324fb39c7cc44314b86b7160f8ed09de77d86366a56a075778e6c04aaf637ae"
+    },
+    {
+      "bytes": 331685,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/previews/orgsyn-1.png",
+      "sha256": "432fd4ded3b01960b204471452fd92b08902c51a9e20cad3bd28f34948360a18"
+    },
+    {
+      "bytes": 436500,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/previews/orgsyn-2.png",
+      "sha256": "5b92a2e5f2ead016ab32195ecbcd97e306f190c9e961b56ef66ceb4cf4d1d510"
+    },
+    {
+      "bytes": 408235,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/previews/orgsyn-3.png",
+      "sha256": "a48c7fba4227a0b39c7334f9754724f2bd942624ff716d1ba031f16dd29e34b3"
+    },
+    {
+      "bytes": 104316,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/previews/orgsyn-4.png",
+      "sha256": "8f5abfc48909cddff6e25c511a78b806a347862dcd98adbc09d3d8707530206e"
+    },
+    {
+      "bytes": 3946,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/probe_stock.py",
+      "sha256": "458c3978e7908bc1b52f6f0208d0bbf60404a76c144497dc7412ff5fc6446986"
+    },
+    {
+      "bytes": 15445,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/qualify_terminals.py",
+      "sha256": "bd5651f8d633e19d51786ff65c2b60e31b8323ae2298df6e48bccca2cd224070"
+    },
+    {
+      "bytes": 1226,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/requests_01.json",
+      "sha256": "c552b9a6c58b8e860e4d509df9eee7a6283e0ae51ef2dff981447154dbc07f27"
+    },
+    {
+      "bytes": 512,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/requests_02.json",
+      "sha256": "03433e7dc8a1b5022e7932a37e37ebde2a807e0a301b48d91c6200871609d3ee"
+    },
+    {
+      "bytes": 885,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/requests_03.json",
+      "sha256": "c047c2efefd35f60e30035caec8ddf7b15e6d627f3e78470bf297e9fb552e2de"
+    },
+    {
+      "bytes": 557,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/requests_04.json",
+      "sha256": "b68a7129d17ff19a38eae18e774118f6c2c1c88cb4d66898653f31418a29aef0"
+    },
+    {
+      "bytes": 213,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/requests_05.json",
+      "sha256": "46213ad4dfeac94462d9bec7debb3a6619498c3849466a7af825240db56e5efb"
+    },
+    {
+      "bytes": 3204,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/review.json",
+      "sha256": "002f15f090076c63d3caae22ea2b099a51290441a8bdd49739039c4e9b595e04"
+    },
+    {
+      "bytes": 321,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/AAL0129406_request.json",
+      "sha256": "e090a54ac75df6c60afcc8aa7eb498934350d480c24de99fa67eb62774cfd60a"
+    },
+    {
+      "bytes": 4325,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/AAL0129406_response.txt",
+      "sha256": "afe056a3611ef4b747f8a664e3b5f06b0c23a08b61201c04edb835986b062d3b"
+    },
+    {
+      "bytes": 280,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD151911_request.json",
+      "sha256": "36ee8bda6057eba6ece8aa56c3b9720c85e0e25c19c0a462a1e14f963b67aaaf"
+    },
+    {
+      "bytes": 715,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD151911_response.txt",
+      "sha256": "908881a75c4c5b90b8babeb100377c679e9b7fb1f7f9478a1b19d770d77ff396"
+    },
+    {
+      "bytes": 280,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD305903_request.json",
+      "sha256": "9cd5fcd2284732e2676e8b5d1c9d1d6dab6ab97474e27751f2eceed7ebcc96b2"
+    },
+    {
+      "bytes": 2932,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD305903_response.txt",
+      "sha256": "25ea1675d44761923f9ba5a6d474409490aca45b67eafcb5333c9ce4b9a97826"
+    },
+    {
+      "bytes": 276,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD57579_request.json",
+      "sha256": "4bd19937f369eb5f19e2237922eec6eec1d6a3b66a7e4fbd1c299a4d6216d8f1"
+    },
+    {
+      "bytes": 2612,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD57579_response.txt",
+      "sha256": "6fc8d3fc114d548f528956602e3f8384985b54188377b6dac1b7125fc6f97b67"
+    },
+    {
+      "bytes": 4946,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/receipt.json",
+      "sha256": "d3cef02b817abf065133b9c931f6d7edf122ad65e9505df21316fdbb2edb6ca1"
+    },
+    {
+      "bytes": 16959,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/terminal_qualification.json",
+      "sha256": "9fec6ad0695e4886972b426c4bf28fb7d45dcb560d1e1336ba512f7c1ff8569d"
+    },
+    {
+      "bytes": 1066,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    },
+    {
+      "bytes": 2562,
+      "path": "tests/test_current_sampler_preflight.py",
+      "sha256": "2882f6d98e03f524c752c810f9f3389215f3815bc32d575385a28c053279fee5"
+    },
+    {
+      "bytes": 7244,
+      "path": "tests/test_pinned_sources_are_tracked.py",
+      "sha256": "3a82c64d967d5f7b532506025c4e041b807f62e1d7bb63cac8f3df7e5db72c0b"
+    },
+    {
+      "bytes": 988776,
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  ],
+  "fresh_evidence": {
+    "additional_observations": [
+      {
+        "accessed_utc": "2026-09-13T17:54:30.189075+00:00",
+        "availability_basis": "Public has_stock_quantityusa flag, displayed as in stock by supplier JS",
+        "availability_lifetime_days": 30,
+        "available_packs": [
+          {
+            "pack_size": "1g",
+            "purity": "97%"
+          },
+          {
+            "pack_size": "250mg",
+            "purity": "97%"
+          },
+          {
+            "pack_size": "5g",
+            "purity": "97%"
+          }
+        ],
+        "bottle_counts_known": false,
+        "canonical_smiles": "CCCCCCCCCCCCCCCCC=O",
+        "cas": "629-90-3",
+        "catalog_number": "BD305903",
+        "disposition": "admit_exact_terminal_observation",
+        "expires_utc": "2026-10-13T17:54:30.189075+00:00",
+        "region": "US",
+        "source_assets": [
+          {
+            "bytes": 43969,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_01/heptadecanal_bld.html",
+            "sha256": "a1a7e9d9e6ac5a5340d20a14824d6d2f310da090b156c8c2e9a1361e4d929785"
+          },
+          {
+            "bytes": 2080,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/heptadecanal_bld_price.json",
+            "sha256": "1f5d0c339df43a33ac62522a5b8e9b7a1b5d61d40c7b2c60ea0de2a164f9e68d"
+          },
+          {
+            "bytes": 2932,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD305903_response.txt",
+            "sha256": "25ea1675d44761923f9ba5a6d474409490aca45b67eafcb5333c9ce4b9a97826"
+          }
+        ],
+        "source_duplicate_rows_collapsed": 4,
+        "supplier": "BLD Pharm"
+      },
+      {
+        "accessed_utc": "2026-09-13T17:54:30.593079+00:00",
+        "availability_basis": "Public has_stock_quantityusa flag, displayed as in stock by supplier JS",
+        "availability_lifetime_days": 30,
+        "available_packs": [
+          {
+            "pack_size": "1g",
+            "purity": "98%"
+          },
+          {
+            "pack_size": "25g",
+            "purity": "98%"
+          },
+          {
+            "pack_size": "5g",
+            "purity": "98%"
+          }
+        ],
+        "bottle_counts_known": false,
+        "canonical_smiles": "CCCCCCCCCCCCCBr",
+        "cas": "765-09-3",
+        "catalog_number": "BD57579",
+        "disposition": "admit_exact_terminal_observation",
+        "expires_utc": "2026-10-13T17:54:30.593079+00:00",
+        "region": "US",
+        "source_assets": [
+          {
+            "bytes": 43864,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_02/bromotridecane_bld.html",
+            "sha256": "78d6697413723ba4cd4a3a0a74d294a4035cf7553b6b4419dd0d49b028b274fe"
+          },
+          {
+            "bytes": 1998,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_03/bromotridecane_bld_price.json",
+            "sha256": "7c381baaaa8aca43d7f30edc090c946f4116c25821309baa27627b7eac89c9d4"
+          },
+          {
+            "bytes": 2612,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/stock_responses/BD57579_response.txt",
+            "sha256": "6fc8d3fc114d548f528956602e3f8384985b54188377b6dac1b7125fc6f97b67"
+          }
+        ],
+        "source_duplicate_rows_collapsed": 3,
+        "supplier": "BLD Pharm"
+      },
+      {
+        "accessed_utc": "2026-09-13T17:17:14.453415+00:00",
+        "availability_basis": "Positive public fulfillment quote for one EA, zero backorder",
+        "availability_lifetime_days": 30,
+        "available_packs": [
+          {
+            "pack_size": "25g",
+            "purity": "98%"
+          }
+        ],
+        "canonical_smiles": "C#CCOC1CCCCO1",
+        "cas": "6089-04-9",
+        "catalog_number": "AC295060250",
+        "disposition": "admit_exact_terminal_observation",
+        "drawing_review": "Supplier image visually checked; matches the frozen constitutional graph",
+        "expires_utc": "2026-10-13T17:17:14.453415+00:00",
+        "identifier_resolution": "Full supplier key reproduced using FixedH; exact graph round trip",
+        "reference_zip_only_not_user_address": "10001",
+        "region": "US",
+        "shipped_direct_from_supplier": true,
+        "source_assets": [
+          {
+            "bytes": 341946,
+            "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_02/fisher_ac295061000.html",
+            "sha256": "bf62bebd3d195416fe3a2549a8e377334429a3f3b8255400b32c060286635492"
+          },
+          {
+            "bytes": 4287,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/supplier_variant_stock_responses/AC295060250_response.txt",
+            "sha256": "819bafafcdb60417b04bd6cfd2c809b035e7139d6d6fa43b3b17c8e4bd033073"
+          },
+          {
+            "bytes": 8650,
+            "path": "results/phase1/ugi_guidance_evidence_acquisition_v4/batch_05/fisher_protected_propargyl.jpg",
+            "sha256": "f2791d0075a03427633ead21105aff8473683f1fcd606ec26f24be65cabdc38b"
+          }
+        ],
+        "standard_inchi_key": "HQAXHIGPGBPPFU-UHFFFAOYSA-N",
+        "stocked_item_at_fisher": false,
+        "supplier": "Thermo Scientific Chemicals via Fisher Scientific",
+        "supplier_inchi_key": "HQAXHIGPGBPPFU-UHFFFAOYNA-N"
+      }
+    ],
+    "additional_qualified_observations": 3,
+    "complete_routes_reassessed": 0,
+    "identified_target_materials": 5,
+    "main_article_visually_authenticated": false,
+    "new_primary_route_lead": {
+      "disposition_for_current_route": "abstain",
+      "doi": "10.15227/orgsyn.037.0077",
+      "finding": "Primary source reports preparing exact stearolic acid from oleic acid through a brominated intermediate. The scheme, final identity and prose agree at this source-inspection level.",
+      "nonclaim": "This is a separately preserved computational route lead, not a recovered old source, a qualified route extension, or a wet-lab proposal. No planner budget or gate is changed.",
+      "pages_inspected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "procedure_locator": "PDF page 2; notes and references on page 3",
+      "reason_codes": [
+        "new_route_requires_registry_qualification",
+        "new_terminal_evidence_not_qualified",
+        "not_the_frozen_c18_route"
+      ],
+      "scheme_locator": "PDF page 2, three scheme arrows above the Procedure section",
+      "source": "batch_04/stearolic_orgsyn.pdf",
+      "title": "Stearolic acid"
+    },
+    "previous_cyclohexylamine_snapshot": {
+      "accessed_utc": "2026-09-13T16:55:56.195949+00:00",
+      "expires_utc": "2026-09-20T16:55:56.195949+00:00",
+      "interpretation": "Exact supplier availability only; no Ugi success or cumulative route closure claim.",
+      "region": "US",
+      "retrieval_channel": "direct_primary_supplier_product_page_archive"
+    },
+    "qualification_scope": "Exact terminal observations only; no cumulative source admission",
+    "total_qualified_target_material_observations": 4
+  },
+  "historical_recovery": {
+    "inventory_basis": "Prior authenticated v2 inventory; no old paths restored this pass",
+    "new_exact_historical_recoveries_in_this_pass": 0,
+    "recovered": 30,
+    "unavailable": 25
+  },
+  "policy": {
+    "candidate_selection": false,
+    "gates_relaxed": false,
+    "generation_calls": 0,
+    "guidance_calls": 0,
+    "guidance_run_ready": false,
+    "historical_pins_changed": false,
+    "paid_remote_jobs": 0,
+    "purchases": 0,
+    "supplier_messages": 0,
+    "training_calls": 0
+  },
+  "remaining_work": [
+    "Acquire qualifying current US availability evidence for exact stearolic acid; checked sources do not establish it.",
+    "Authenticate the original Oppolzer main article's relevant procedure and schemes; the SI and transcription do not complete that check.",
+    "Build and qualify a separately versioned cumulative source, exact-route outputs, synthesis-value controls and guidance preflight before any nonzero guidance.",
+    "Exact historical replay alternatively requires the original unavailable sources/code; fresh observations cannot replace those bytes."
+  ],
+  "schema_version": "forge.guidance_evidence_acquisition_closeout.v2",
+  "status": "four_target_terminal_observations_qualified_guidance_blocked",
+  "validation": {
+    "focused_current_run": {
+      "passed": 8,
+      "tests": 8
+    },
+    "global_phase1_definition_of_done_met": false,
+    "prior_frozen_source_failure": [
+      {
+        "message": "third_wave_head_terminals input pin mismatch: supplier_page",
+        "type": "Ugi3CumulativeProductionSourceError"
+      }
+    ],
+    "prior_v3_full_suite_not_rerun_this_pass": {
+      "error": 21,
+      "failure": 167,
+      "passed": 2338,
+      "skipped": 92,
+      "tests": 2618
+    },
+    "terminal_check_count": 17,
+    "terminal_checks": {
+      "AC295060250": {
+        "expired_and_future_evidence_rejected": true,
+        "fixed_h_exact_graph_round_trip": true,
+        "positive_fulfillment_quote_passed": true,
+        "wrong_full_key_rejected": true,
+        "zero_stock_rejected": true
+      },
+      "BD305903": {
+        "atom_order_invariant": true,
+        "conflicting_stock_rows_rejected": true,
+        "expired_and_future_evidence_rejected": true,
+        "positive_stock_passed": true,
+        "wrong_graph_rejected": true,
+        "zero_stock_rejected": true
+      },
+      "BD57579": {
+        "atom_order_invariant": true,
+        "conflicting_stock_rows_rejected": true,
+        "expired_and_future_evidence_rejected": true,
+        "positive_stock_passed": true,
+        "wrong_graph_rejected": true,
+        "zero_stock_rejected": true
+      }
+    },
+    "vendor_assets_verified": 30,
+    "verification_semantics": "Verifies bytes and the recorded assessment; does not renew availability"
+  }
+}

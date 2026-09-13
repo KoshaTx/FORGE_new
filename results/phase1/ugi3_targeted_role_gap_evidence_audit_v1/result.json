@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "product_impact_ledger.csv.gz": {
+      "schema_version": "phase1_ugi3_targeted_role_gap_product_impact.v1",
+      "sha256": "e32ad68ac7d8ec80589997337da7718bc3a152d2c8a3c902b9d8cb28ba4762c0"
+    }
+  },
+  "claims_boundary": {
+    "head_procurement_terminal_is_time_limited": true,
+    "homologue_evidence_can_close_exact_isocyanide_route": false,
+    "partner_marketplace_listing_is_distinguished_from_legacy_manufacturer_listing": true,
+    "production_synthesis_guidance": false,
+    "synthesis_success_probability": false
+  },
+  "config_sha256": "a4c2f40eed36187e4acae4872394cd97890f7215e90a84d1aabeb5419cde2941",
+  "input_sha256": {
+    "agile_supplement": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9",
+    "audit_source": "bb0ef5fcb1e6336a9377ab8d1a5cf4809fcabde1d974a2a6d982113181b04187",
+    "evidence_pack": "0d6a8c1e8c45101df8329c3c99e15c11d6f70c6ae81ad1ece2ce23be9bae73da",
+    "paper_reviews": "57cfc457aeabdcbd6cd5d18460dbe215afe1176460448d07f7d87d3fa027846c",
+    "product_impact_ledger": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e",
+    "qualifier_source": "9af0a1830b092f62fe4e79e386b74811e2339a1d0eb9174cfa6952506f8ca55b",
+    "readiness_ledger": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d",
+    "targeted_aldehyde_result": "40fae7dc1b3695a696217cb388a8a43bf9922f6a5604500fb2021552dc98714a",
+    "targeted_overlay_result": "22d025e5c684e0bdc21b875dc1482fefb86cca3e7109b0b2e27c2971169b037b"
+  },
+  "schema_version": "phase1_ugi3_targeted_role_gap_evidence_audit.v1",
+  "summary": {
+    "exact_head_terminals_admitted": 1,
+    "generated_head_occurrences": 39,
+    "generated_products": 1007,
+    "generated_products_complete_after": 29,
+    "generated_products_complete_before": 24,
+    "isocyanide_abstentions": 1,
+    "newly_complete_generated_products": 5,
+    "products_one_exact_isocyanide_gap_from_completion": 4,
+    "registry_complete_components_after": 46,
+    "registry_complete_components_before": 45,
+    "remaining_gap_count_distribution": {
+      "0": 29,
+      "1": 209,
+      "2": 433,
+      "3": 336
+    },
+    "targets_adjudicated": 2,
+    "unresolved_isocyanide_occurrences_after_head_closure": 68
+  },
+  "target_adjudications": [
+    {
+      "canonical_smiles": "NCCCN1CCCCC1",
+      "component_id": "ugi-component-0f9b1dfb401dcebcc56e",
+      "disposition": "admit_exact_terminal",
+      "evidence_channel": "current_preferred_partner_marketplace_listing",
+      "role": "amine_head"
+    },
+    {
+      "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCC",
+      "component_id": "ugi-component-b30930b8c5e8b606c770",
+      "disposition": "abstain",
+      "evidence_channel": "nonclosing_neighboring_homologue_precedent",
+      "role": "isocyanide_tail"
+    }
+  ]
+}

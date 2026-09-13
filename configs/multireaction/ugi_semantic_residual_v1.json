@@ -1,0 +1,159 @@
+{
+  "schema_version": "forge.ugi_semantic_residual_config.v1",
+  "scientific_question": "Can the four existing baseline amine semantic coordinates improve frozen-model legal head-placement ranking beyond matched extra fitting without changing the decoder?",
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_training_config": {
+      "path": "configs/multireaction/shared_bias_parallel_shared_bias_program_role_source_v2.json",
+      "sha256": "672e0fdb44c332411c6ce138740ea7733d0ed4291b6fe5c4bef7d8ab049b67db"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "coverage_rows": {
+      "path": "results/phase1/ugi_semantic_residual_coverage_v1/rows.jsonl",
+      "sha256": "c4642419c5bb85bfe71e663a1cd6084a5c7ce0604e089e362c24cc85accf1264"
+    },
+    "coverage_result": {
+      "path": "results/phase1/ugi_semantic_residual_coverage_v1/result.json",
+      "sha256": "437e2de17b473f2c92ee682c9770bdd919c16f61fc29f79f3149a7d8d6928895"
+    },
+    "protocol": {
+      "path": "docs/PHASE1_UGI_SEMANTIC_RESIDUAL_PROTOCOL.md",
+      "sha256": "71d0a63acedc10e18d2f0a08100a3f2ac421834d44fc93b505654d7d334ca30a"
+    },
+    "improvement_protocol": {
+      "path": "docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md",
+      "sha256": "d97d8a608c31545139dc6e03748a341c24114594224b12bff6ba5d1f0a52962c"
+    }
+  },
+  "sources": {
+    "forge/model/ugi_semantic_residual.py": {
+      "path": "forge/model/ugi_semantic_residual.py",
+      "sha256": "b03c6e35341e41cdf5a343cf724bea588f3629add9f91b4ea7f147efe1caa706"
+    },
+    "forge/model/ugi_semantic_placement.py": {
+      "path": "forge/model/ugi_semantic_placement.py",
+      "sha256": "dcbd74b9730d470072717065b2bd4c602604ec6f90be4bd04b9b267f070f8030"
+    },
+    "forge/model/ugi_sampling_trace.py": {
+      "path": "forge/model/ugi_sampling_trace.py",
+      "sha256": "a321ecccdb40f4b5b37d116a8a0e8b6e093e50cd02293ef9a8c9264be86a1050"
+    },
+    "experiments/phase1/multireaction/ugi_semantic_residual.py": {
+      "path": "experiments/phase1/multireaction/ugi_semantic_residual.py",
+      "sha256": "ed48c3564b775d54bdf20b67f798e0db02904bba2d2e0c679cebd9ae3f263270"
+    },
+    "forge/model/synthesis_program_sampling.py": {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    "forge/model/reaction_program_transformer.py": {
+      "path": "forge/model/reaction_program_transformer.py",
+      "sha256": "a5bda0628d277e77ef90f113f398e6f81e4b63808c475c57e669e7134e3411d0"
+    },
+    "forge/model/synthesis_program_training.py": {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    "forge/model/reaction_program_flow.py": {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "caddb8afef9db47b51cb15259492c3a582a621271249286d68646beea4014b9c"
+    },
+    "forge/corpus/synthesis_program_production_cache.py": {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    },
+    "experiments/phase1/multireaction/reaction_specialization.py": {
+      "path": "experiments/phase1/multireaction/reaction_specialization.py",
+      "sha256": "a86cbf6d16418f988cd01ca2afda68548388ba7e20fabac6249375c041a1e674"
+    },
+    "experiments/phase1/multireaction/ugi_realism_diagnostic_suite.py": {
+      "path": "experiments/phase1/multireaction/ugi_realism_diagnostic_suite.py",
+      "sha256": "097aa86a110f3e95cc6aeb1c92f391e1bf42fe0870e784321d14373eaa80fb08"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "target_program": "ugi_3cr_agile",
+  "amine_role": "amine_head",
+  "partition": {
+    "product_domain": "forge.ugi_semantic_residual_product_partition.v1:2026090819:"
+  },
+  "draws": {
+    "fit": 1024,
+    "component_disjoint": 256,
+    "repeated_component": 256
+  },
+  "flow_times": [
+    0.2,
+    0.5,
+    0.8,
+    0.95
+  ],
+  "semantic_scales": [
+    10,
+    10,
+    4,
+    4
+  ],
+  "feature_batch_size": 64,
+  "training_batch_size": 64,
+  "optimizer_steps": 64,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip_norm": 1.0,
+  "cpu_threads": 2,
+  "device": "cpu",
+  "precision": "float32",
+  "seeds": {
+    "draws": 2026090820,
+    "noise": 2026090821,
+    "order": 2026090822,
+    "initialization": 2026090823
+  },
+  "policy": {
+    "backbone_training": false,
+    "molecular_generation": false,
+    "heldout_structure_access": false,
+    "remote_compute": false,
+    "gate_changes": false,
+    "final_checkpoint_only": true
+  },
+  "nonclaims": [
+    "Development reconstruction on existing TRAIN is not demonstrated molecular realism or independent backbone generalization.",
+    "Applicability covers 1966/66464 TRAIN products and 0.2720 percent of the original Ugi source measure; excluded rows are retained in the census.",
+    "The fixed component-evaluation population has seven distinct amines, not 256 independent components. Repeated draws and four time points are dependent.",
+    "Both arms receive exact clean target topology; generated-topology robustness is unmeasured.",
+    "Zero semantic columns have no data gradients in the control; equal parameter count is not equal effective feature capacity.",
+    "All generation realism, validity, exact-L1, diversity, novelty, visual calibration and confirmation requirements remain necessary."
+  ]
+}

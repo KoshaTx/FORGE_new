@@ -13312,3 +13312,2447 @@ preserved unchanged.
   the Ugi ester policy makes the aldehyde role a one-junction chain pair and the isocyanide role a
   linear chain. Once those constraints are satisfied, only ester position and supported
   unsaturation remain available to alter tail appearance.
+
+## 2026-09-08 — Realism attribution separates support, reconstruction, and evaluator limitations
+
+- Implemented a bounded local diagnostic workbench using the FORGE engineering and ML research
+  workflows, with three separately owned audits and independent cross-review. Existing model
+  weights, sampling code, chemistry gates, reference definitions, and historical experiments were
+  not changed. No new molecular generation, training, routing, oracle, remote-compute, biological
+  optimization, or prospective candidate selection occurred in these diagnostics.
+- The support audit reproduces **231/480** admitted measured training products and **249** exclusions.
+  All exclusions in this population arise from exterior atom-count bounds. Measured components
+  with any admitted product decrease from **15/8/4 to 11/7/3**, and family triples from **28 to 20**.
+  Under equal family-group weighting against the unchanged full train-development reference,
+  all-measured versus admitted-measured Wasserstein/energy/MMD-squared are respectively
+  **0.042030/0.060523/0.003695** and **0.106725/0.178539/0.014479**. These overlapping empirical
+  reference controls demonstrate admission-induced shift, not a generator attainability bound.
+- The frozen-checkpoint probe uses 16 measured TRAIN products spanning every measured component,
+  three flow times, and paired noisy chemistry. At time 0.5, target-topology substitution changes
+  actually corrupted amine atom accuracy **12/22 to 20/22**, aldehyde atom accuracy **15/28 to 19/28**,
+  and aldehyde bond accuracy **20/34 to 31/34**. Denominators are coordinates in a deliberately
+  diverse small training panel, not independent held-out molecules or rollout success rates.
+- Corrected an architectural assumption: the authenticated checkpoint already has
+  `model_config.semantic_objective.topology_conditioned_chemistry_weight=1.0`. Its training config
+  enables the second pass and the recorded Ugi auxiliary loss is **0.1159082651**. Top-level base
+  design snapshots omit the arm override; the audit records that omission rather than inferring
+  the trained objective from defaults. Rich decoder semantic targets remain absent from the
+  explicit forward interface, but no causal benefit from adding them is established. The separate
+  rank-law probe is off-policy categorical analysis, not attribution of actual terminal choices.
+- Evaluator resolution is limited: **183/803** distinct combined products occupy **81** descriptor
+  collision classes. The saved treatment's overall amine fingerprint proximity improves, while
+  novel amine attempts decrease **189 to 137**. Among **124** pairs with both heads novel versus
+  all training components, Morgan/atom-pair distance differences are **+0.00018/+0.00289** with
+  intervals spanning zero. Among **64** pairs with both aldehyde components novel, distances
+  increase **+0.30135/+0.20240**. Novelty strata are post-treatment and these are descriptive
+  within-seed resemblance measures, not causal effects, calibrated realism, or efficacy evidence.
+- Prepared eight identical-graph redraw pairs and four measured controls. Pair kind, side, and
+  depiction are randomized independently of source; mechanical identity checks pass. Reviewer
+  judgments remain **pending**. Historical language about saturation or compactness motivates
+  calibration but does not itself prove reviewer bias.
+- The suite supports local execution, collection, verified stage reuse, preserved failed attempts,
+  and read-only authentication. Cross-review found and fixed collected-result substitution and
+  false completed-calibration verification gaps. A fresh integrated replay exactly reproduces
+  all compared support, model, and evaluator scientific fields and evaluator artifact hashes.
+  The collection, replay, and replay-equivalence result SHA-256 values are respectively
+  `f0ea1a457d4bb238bc0a85b110694c8b15aaf14c30236460202eb2d4a2ffb749`,
+  `42efb89c67bbea1eb565f092317a17c4cd2042810298a80bd9a9a92d55c317f8`, and
+  `9cdb3cf139bea8481bbf5bdfce3e7b2405ec72b5ee43874bde5b7acb834d8f6c`.
+- **Decision:** retain the workbench and the negative findings; **do not promote a model**. The
+  previous description of the bottleneck as solely visual topology was too narrow: support shift,
+  novelty-dependent resemblance, residual reconstruction error, and uncalibrated review must
+  remain separate. Actual terminal-trajectory attribution is still unmeasured. Any subsequent
+  intervention must test a specified mechanism and retain full-reference, novelty, validity,
+  diversity, and exact-L1 reporting without relaxing the frozen gates. Detailed commands and
+  interpretation are in `docs/PHASE1_UGI_REALISM_DIAGNOSTIC_WORKBENCH.md`.
+- **Verification limitation:** all 30 vendor assets verify; 53 focused diagnostic/provenance tests,
+  touched-file Black/Ruff, and whitespace checks pass. The final full suite reports **2,052 passed,
+  170 failed, 21 setup errors, and 92 skipped/xfail**, with no failures in the new audits. Remaining
+  failures include missing historical artifacts and unchanged pin/catalog/legacy-contract issues;
+  none were relaxed or skipped. Global Phase 1 definition of done is not met. The preserved
+  validation report at `results/phase1/ugi_realism_diagnostic_validation_v1/result.json` has SHA-256
+  `cdf2c7c5abc7c20966650e66d3d1568ddcb11458f6590e2a88081c480403b992`.
+
+## 2026-09-08 — Resume realism validation with strict test contracts and artifact accounting
+
+- Reauthenticated the saved realism suite and integrated replay. Their implementation inventory,
+  scientific outputs, historical configurations, and model weights remain unchanged.
+- Corrected two independently reviewed test assumptions. Architecture discovery explicitly owns
+  the Modal batch manifest alongside catalogued individual experiments, retains exhaustive JSON
+  discovery, and validates group/member identity, exact spec hashes, profiles, and replicates.
+  The FlowER end-to-end test uses isolated temporary inputs with byte-identical required evidence
+  and explicitly distinguishes absent, matching, and mismatching optional receipts. Absence does
+  not acquire an observed hash, mismatch retains its blocker, all cases retain demotion, and a
+  required-input mismatch cannot write a result. No production gate, skip, or xfail was changed.
+- The prior FlowER `hash_matches` failure was a workstation-dependent test assumption, rather
+  than a defect in the production receipt schema. The frozen installation-smoke `pyproject.toml`
+  mismatch remains an operational authentication failure; its historical pin was not rewritten.
+- Accounted for all **191** prior failing/error nodes by first visible cause: **40** historical
+  source identity/resolver failures, **138** historical result/cache failures or errors, **10**
+  sealed-artifact failures or errors, and the **three** separately diagnosed test/pin cases.
+  The report retains exact paths, expected hashes and their declarations, scoped local-search
+  evidence, and unresolved cases. It does not claim to enumerate every transitive prerequisite.
+  Its path is `results/phase1/ugi_realism_diagnostic_validation_followup_v1/artifact_triage.json`,
+  SHA-256 `870babee56f40894ac034d2d007f776f954cc38fb78f8d5ef36ea09a4cd1429b`.
+- Exact source copies for five unarchived historical identities exist in the predecessor checkout.
+  These require supported archival resolution; restoring retired `src/` paths would violate the
+  current architecture. No matching missing result artifacts were located in the scoped search.
+  Historical evidence was neither regenerated nor substituted, and sealed structures were not read.
+- **Decision:** preserve the diagnostic findings and repair test semantics without promoting a
+  model or claiming restored historical evidence. Repository-wide completion continues to depend
+  on the actual full-suite outcome; reviewer calibration remains pending.
+- **Verification:** all **75** focused tests and **30** vendor checks pass, along with Black/Ruff
+  for the two repaired test files. Full `make test` reports **2,057 passed, 168 failed, 21 setup
+  errors, and 92 skipped/xfail** across **2,338** cases. Both targeted failing nodes are resolved;
+  there are **no new failed nodes** relative to the preserved baseline. The original suite and
+  replay continue to verify. The follow-up report is
+  `results/phase1/ugi_realism_diagnostic_validation_followup_v1/result.json`, SHA-256
+  `71ee98e1b818597f9cac1fa4e1f40f50bbe476ddde227f4bc6d68bfc3025cc50`. Global Phase 1 definition
+  of done remains **unmet**; the remaining failures were neither relaxed nor quarantined.
+
+
+## 2026-09-08 — Passive Ugi replay identifies selection-law changes; realism goal remains active
+
+- The active objective is improved lipid realism with preserved structural validity, exact Ugi
+  reconstruction, diversity and novelty, without weakening any gate. Frozen requirements remain;
+  `docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md` adds observed no-loss requirements.
+- Replayed the complete first 128-request batch of the frozen amine baseline and audited failed
+  tiered-head treatment. Endpoint-only controls and full decision traces match in every output,
+  terminal tensor and captured RNG state; both reproduce saved historical products and topology.
+  Detailed decisions were prespecified for attempts 0–15. Four sampler invocations decode 512
+  attempts per replay, including duplicate control/observed executions; these are local CPU
+  replays, not a new trained model, intervention or prospective selection.
+- Both arms retain **128/128** validity and exact constitutional Ugi reconstruction. Distinct
+  exact-L1 products increase **100 to 114**, effective component count **29.5685 to 34.4265**,
+  and mean pairwise ECFP4 distance **0.412159 to 0.461797**. But all-attempt novel-component
+  incidence decreases **119 to 86/128**, as does whole-product novelty; distinct novel exact-L1
+  products decrease **96 to 81**. Novel amine/aldehyde incidences decrease **99/92 to 69/46**.
+  Aldehyde effective count falls despite increasing distinct counts. The old treatment therefore
+  fails the active objective even with perfect validity and exact L1.
+- Tracing separates candidate-internal scoring, stochastic choices, deterministic assignments,
+  count-group selection and conditional bond positions. Among decisions with multiple candidates,
+  baseline/treatment amine-topology neural-max selections are **13/14 versus 7/14**; amine-chemistry
+  selections are **10/10 versus 2/10**. Candidate populations can differ across arms. These are
+  descriptive selection-law observations, not proof that higher neural scores mean better realism
+  or that guidance causally harms realism. Sixteen aldehyde count draws bypass neural scores via
+  measured frequencies; sixteen isocyanide count populations are singletons.
+- TRAIN-only assessment masks nontrain rows before molecular interpretation and retains all-attempt
+  novelty denominators. The existing cache loads packed arrays for every fold but materializes
+  only TRAIN records for layouts; no heldout structure is interpreted, decomposed or fingerprinted.
+  Whole-product identity is constitutional; exact L1 uses reverse decomposition plus forward
+  reconstruction, never the sampler's layout-placeholder exactness fields.
+- Preserved the first replay's final-receipt failure caused by passing provenance byte metadata to
+  a strict input-pin API. Added a regression test and executed a fresh corrected replay. Its result
+  is `results/phase1/ugi_sampling_trace_v2/result.json`, SHA-256
+  `84ee1e1a394f4adda02b7d71485c84fc64eb83f17d2823d338875a449b07ce60`.
+  Independently reviewed analysis is `results/phase1/ugi_sampling_trace_analysis_v1/result.json`,
+  SHA-256 `9f1cbd61829d757cadd69fe169077d660ce9ac304203fdb75b81d52224f02274`.
+  An earlier offline-analysis source included in the broad pre-run snapshot is archived verbatim
+  under the replay's `source_archive/`; it was not executed by the sampler. The corrected analysis
+  has its own source pin. Historical outputs and failure receipts remain unchanged.
+- **Next test, not yet a positive finding:** one bond-logit refresh after all atom states are
+  committed, before variable bond selection, on the original baseline. First implement a bounded
+  oracle TRAIN response probe, preserving evaluated noisy bonds while supplying correct atom and
+  forced ester commitments. This differs from previously failed extra chemistry-flow steps; it
+  cannot improve earlier head placement or establish robustness to incorrect generated atoms.
+  No new sampler intervention or training is admitted by this diagnostic result. The goal remains
+  active and no model is promoted. Commands and limitations are in the diagnostic workbench.
+
+- **Validation:** all **96** final focused checks and all **30** vendor checks pass; the eight new
+  Python files pass Black/Ruff. Full-suite execution reports **2,097 passed, 168 failed, 21 setup
+  errors, and 92 skipped/xfail** across 2,378 cases, with the same failed-node set as the prior
+  preserved baseline. That full run began before the last offline-analysis corrections and three
+  added regression tests; the final focused run covers those changes. The separate upcoming
+  committed-bond probe is outside this receipt. Validation provenance is
+  `results/phase1/ugi_sampling_trace_validation_v1/result.json`, SHA-256
+  `47b108454f1b7d8f2db10b91487f46820aecf0a40dee64236842bdd5b50c3b79`.
+  Global Phase 1 definition of done remains unmet; no failing check was weakened or skipped.
+
+
+## 2026-09-08 — Correct committed chemistry improves TRAIN confidence but fails refresh advancement
+
+- Implemented and independently reviewed the fixed prerequisite in
+  `docs/PHASE1_UGI_COMMITTED_BOND_REFRESH_PROTOCOL.md`. It uses the authenticated frozen
+  step-9143 model, six forward evaluations, CPU float32 and no training, molecular generation,
+  routing, oracle service, heldout interpretation, repair or candidate selection.
+- Sixteen deterministically selected measured TRAIN products cover every admitted measured
+  component (**11 amines, 7 aldehydes, 3 isocyanides**) within the unchanged **231/480** admission
+  census. Selection and oracle ester masks were recorded before prediction. Both conditions
+  receive exact target topology. Only atom states and forced ester bonds change; every evaluated
+  uncommitted bond input remains identical. The contrast therefore combines atom and ester
+  commitments; it is not attribution to atom states alone.
+- At flow time **0.5**, corrupted amine-bond accuracy improves **7/9 to 9/9**; aldehyde remains
+  **11/14** and isocyanide **8/8**. Equal-role corrupted target NLL improves
+  **0.6464525661 to 0.3500242723**, with **2 corrections and 0 regressions**. Exact recovery of
+  all uncommitted bond vectors improves **9/16 to 10/16**. This time passes its prespecified gate.
+- At flow time **0.9**, the stale condition is already correct on all seven corrupted bonds:
+  **2/2 amine, 4/4 aldehyde, 1/1 isocyanide**, unchanged after refresh. Equal-role target NLL
+  improves **0.0503436571 to 0.0480369219**, but there are **0 corrections**. All-uncommitted
+  bond-vector recovery remains **13/16**. This time fails the explicit requirement for an actual
+  correction. Both times have nonempty role strata and identical-input repeat logit difference
+  **0.0**. No per-role accuracy loss is hidden by pooled reporting.
+- **Decision: do not advance to the sampler intervention.** Both times were required to pass.
+  Preserve the accuracy-ceiling result and do not replace the correction criterion with improved
+  confidence. This does not prove a refresh can never help; the fixed TRAIN probe does not
+  establish incremental late-time accuracy or generated-commitment robustness. No model weights
+  or sampler behavior changed. Realism improvement remains unproven and the goal remains active.
+- The reproducible result is `results/phase1/ugi_committed_bond_probe_v1/result.json`, SHA-256
+  `7486e37ba6bea4bf7f3fe41b124bb54f42c8a383ee2d8dd9693d1433d82b7164`.
+  The adjacent `decision.json` authenticates inputs, sources, configuration and tensor artifacts.
+  Run with `uv run python -m experiments.phase1.multireaction.ugi_committed_bond_probe --repo-root .
+  --config configs/multireaction/ugi_committed_bond_probe_v1.json --output-dir <fresh-repo-path>`.
+  These are descriptive TRAIN-coordinate results, not heldout performance or improved realism.
+
+- **Next hypothesis, design only:** expose the same four amine semantic values already available
+  to the frozen baseline decoder (heavy-atom diameter, carbon-skeleton diameter, N count, O count)
+  to a small nonlinear residual amine-atom predictor over detached frozen-backbone hidden states.
+  A semantic-only additive class bias would cancel when ranking candidates with identical
+  composition; the residual must interact with position-dependent hidden states. Compare with
+  an otherwise matched residual lacking rich semantics and the untouched backbone. Preserve
+  decoder requests, legal placements, topology, fixed coordinates and non-amine outputs. First
+  audit target-extractor coverage and source-balanced exposure; do not silently discard unsupported
+  training rows. Evaluate constitutional placement ranking, not only supplied composition, and
+  distinguish any residual-training subdivision of TRAIN from a heldout test of the backbone.
+  This is unimplemented and unexecuted; it does not bypass the failed bond-refresh criterion or
+  authorize a promotion claim. A complete matched training/evaluation contract remains to be frozen.
+
+- **Final validation:** **106** focused tests and **30** vendored-asset checks pass. Probe
+  Black/Ruff checks pass. The final full run covers current Python/test files and reports
+  **2,110 passed, 168 failed, 21 setup errors, and 92 skipped/xfail** across **2,391** cases,
+  with no new failed nodes relative to the saved baseline. No scientific or test gate was
+  weakened, and global Phase 1 definition of done remains unmet. Logs, XML, source/test hashes,
+  exact failure-node comparison and the executable summary are preserved in
+  `results/phase1/ugi_committed_bond_probe_validation_v1/`; validation result SHA-256
+  `9e57a27b80bc97bf55ed506dceb9999673fac50fbe55167ee0be0b6d1a6aab45`.
+
+## 2026-09-08 — Existing amine semantics do not pass the matched residual development gate
+
+- Froze `docs/PHASE1_UGI_SEMANTIC_RESIDUAL_PROTOCOL.md` before fitting: compare the untouched
+  step-9143 backbone with identical 13,582-parameter residual heads receiving either its existing
+  four amine semantic coordinates or zeros. Corrections affect variable amine atom logits only.
+  The backbone, decoder, legal support, production requests, and scientific gates are unchanged.
+  This is a reconstruction experiment with exact target topology, not generated-lipid evaluation.
+- A complete TRAIN census retains **66,464 products and 185 amines**. The four-coordinate extractor
+  accepts **173 amines**; the 12 unsupported amines span **5,242 products and 9.72%** of the original
+  source-weighted measure. Existing program admission plus extraction leaves **1,966 products**
+  and **0.2720%** of that measure. This declares the experiment's narrow applicability; it neither
+  expands nor silently reduces production support. The census and independent verification are in
+  `results/phase1/ugi_semantic_residual_coverage_v1/`; census result SHA-256 is
+  `437e2de17b473f2c92ee682c9770bdd919c16f61fc29f79f3149a7d8d6928895`.
+- The prespecified component/product hash split was not retried. Applicable fitting, component-
+  evaluation, and repeated-component populations contain **1,313/311/342 products** and
+  **56/7/49 amines**. Only three component-evaluation amines share a coarse-program/semantic
+  combination with fitting. Source-weighted draws sample **49/6/39 amines** respectively; every
+  repeated-evaluation draw's amine occurs in the actual fitting draws. The backbone has already
+  seen TRAIN, so these are residual-fitting partitions, not independent backbone generalization.
+- Both residuals receive the same **1,024 fitting draws at four flow times**, **4,096 exact
+  exposures**, initialization, and **64 AdamW updates**. Their original final states are retained
+  under `results/phase1/ugi_semantic_residual_v1/`. The first evaluation failed before its first
+  placement metric because sparse cached records omit dense edge storage. The fixed helper uses
+  the existing sparse terminal reconstruction and passes dense/empty-cache and closure-bond
+  regressions. A hash-pinned recovery reuses every feature, draw, and final checkpoint with zero
+  additional fitting; original sources and the failure remain archived. It does not choose a new
+  seed, split, hyperparameter, checkpoint, or outcome-dependent subset.
+- The completed component-disjoint stage has **920** multi-candidate draw/time cases. Correct
+  selected placements are **847 baseline, 848 control, and 848 semantic**. All three have **104**
+  singleton cases and **68** absent-target cases; absent targets remain in the primary denominator
+  when their candidate population is non-singleton. Among cases with a present target and multiple
+  candidates, baseline already selects correctly **847/852** times. Genuinely corrupted atom
+  accuracy is **955/1,188 baseline, 926/1,188 control, and 928/1,188 semantic**. Thus the semantic
+  arm ties extra fitting on the primary measure and loses atom accuracy against the backbone.
+- **Decision:** this arm fails necessary advancement requirements and will not enter a sampler
+  intervention. A tiny placement gain over baseline alone does not establish semantic benefit.
+  This bounded single-seed result does not prove that all semantic conditioning is ineffective.
+  The user's realism goal remains active and unmet; the frozen committed-bond probe also remains
+  stopped.
+- Completed all **6,144** candidate evaluations (three arms, two populations, four times).
+  Repeated-component correct selection falls from **502/540 baseline to 494/540 in both fitted
+  arms**, even though corrupted-atom accuracy rises from **1,012/1,389 to 1,083/1,389 control and
+  1,082/1,389 semantic**. Coordinate accuracy and constrained placement quality must remain
+  separate. Independent per-component replay finds the two fitted heads select **identical atom
+  assignments and constitutional graphs in every one of 2,048 paired evaluation cases**. Against
+  baseline, their shared component-disjoint change is three corrections and two regressions;
+  their repeated-component change is six corrections and fourteen regressions. No paired target
+  presence is lost, and legal candidate symbol universes remain unchanged.
+- Evaluation-only recovery completes in **735.12 seconds**, with **zero backbone forward calls
+  and zero additional optimizer updates**. All result/config/input/source/recovery pins and the
+  unchanged selection authenticate; reconstructed primary counts match the saved summaries.
+  Final result `results/phase1/ugi_semantic_residual_v2/result.json` SHA-256:
+  `eaf8d8a323953582a22a49e3c36e5f83e46a5f2327da2c08c9ba689d24d05ad7`.
+  Component/time evidence is in `results/phase1/ugi_semantic_residual_component_analysis_v1/`.
+  The original source archive and recovery manifest are in
+  `results/phase1/ugi_semantic_residual_recovery_v1/`. These are descriptive, teacher-forced
+  reconstruction results; no molecular generation, model promotion, or completed realism review
+  occurred. Component-analysis result SHA-256:
+  `f7a150b329173debdef39ebf5b0376c5b1bbd649122fa5f76c1c5ade65cdb1a4`.
+- **Final validation:** **181 focused tests**, all **30** vendor checks, and Black/Ruff for all six
+  new Python files pass. The full suite reports **2,185 passed, 168 failed, 21 setup errors, and
+  92 skipped/xfail** across **2,466 cases**. Failure nodes and kinds exactly match the preceding
+  baseline; no failures were hidden or skipped. Source/test/config hashes match before and after
+  the full run. The interrupted initial validation attempt is preserved separately. Logs, XML,
+  hash inventories and the executable validation script are in
+  `results/phase1/ugi_semantic_residual_validation_v1/`; final report SHA-256:
+  `57ed293eb14470fe4c1ba818b33aab59a92fb9b3a9468c70d355a4565269c87e`.
+  Repository-wide Phase 1 definition of done remains unmet. The realism goal remains active;
+  neither this failed development arm nor successful software validation is a realism improvement.
+
+## 2026-09-08 — Candidate scoring audit and complete-graph successor
+
+- Exact saved-feature replay explains seven repeated-component regressions in the failed semantic
+  residual: atom cross-entropy improves while the selector's neutral-state N/C margin worsens at
+  an aromatic-nitrogen position. The selector does not score the aromatic class that the predictor
+  gets right. In one case both models predict all seven atom classes correctly, NLL sum improves
+  **0.11853 to 0.02477**, and the legal-placement margin reverses **+0.66332 to -1.25738**.
+  Six ether-head regressions instead reflect worse C/O placement evidence. These mechanisms do
+  not explain every pooled atom change and do not rehabilitate the failed residual. The audit
+  reproduces every saved candidate score exactly with four small-head forwards and zero backbone,
+  selector, generation or training calls. See
+  `results/phase1/ugi_semantic_residual_margin_audit_v1/`; result SHA-256
+  `9d1321e52ecbf989c1c342a84d8a79c400962ce6d44e342893a3d1294eefe037`.
+- The support audit retains all 1,024 fitting draws: **51** lack a correct head placement;
+  **240** have placement positives whose exact target aromatic bonds are masked by the full
+  terminal bond rule after neutral/nonaromatic atom selection; **733** are not ruled out by those
+  two partial checks. None of these counts is a full terminal success rate; alternative Kekule
+  encodings remain unassessed. The absent target heads pass the registry handle predicate but
+  fail the decoder's degree-only reactive-N proxy. That mismatch does not authorize expanding
+  frozen saturated-head support. Result:
+  `results/phase1/ugi_semantic_candidate_support_audit_v1/result.json`, SHA-256
+  `d8624c6fbd9f0b8abf3ffe4a374744e53baa4cfb2419f90b9392f81ac20f8d8c`.
+- Prepared a distinct bounded successor: a complete-candidate graph residual on the existing
+  amine and constructive ester topology sets, with unchanged raw logits and support. Its local
+  degree control shares initialization and fitting exposure; the graph arm adds neighbor
+  interactions. The protocol fixes the comparison before fitting and requires separate success
+  for both roles. This differs from the earlier failed additive structured-topology residual.
+  Full graph-class probability retains every serialized candidate's original mass, including
+  graph-equivalent alternatives. Native noisy topology feeds the frozen backbone; target topology
+  is used for labels only, apart from the baseline's original coarse conditioning.
+- The two-role split preserves the original **1,966/66,464** applicability subset and its
+  **0.0027200822105018616** source mass. Fit/amine-disjoint/aldehyde-disjoint/repeated pools contain
+  **938/292/582/248** products. Both role-specific withheld component sets are absent from fitting;
+  the evaluation populations overlap in **94** eligible and **26** sampled products. All TRAIN
+  `program_depths` are one, a synthesis-step state rather than target graph depth. Selection
+  preflight: `results/phase1/ugi_candidate_graph_selection_preflight_v1/result.json`, SHA-256
+  `b985c442880d3e80aea26e5ee6a18244179c414ff0b7dd08ab48e8d9127b38fd`.
+- **Access incident:** during API exploration an agent materialized calibration cache record
+  **66464**, mistaking literal fold state 1 for TRAIN. Only layout metadata was printed; no
+  candidate enumeration, feature extraction, labels, fitting or evaluation used that record.
+  The record is excluded from subsequent fixtures and measurements. The implementation uses
+  metadata-resolved TRAIN membership before materialization. This is disclosed in
+  `results/phase1/ugi_candidate_graph_access_incident_v1/result.json`, SHA-256
+  `b9ef5d5a96b6eec49549e5f23862f22be177c900674922426d948d8d18ec4353`;
+  no claim of zero non-TRAIN record inspection throughout this development session is made.
+- Initial software checks pass (**122 tests**). The first integrated attempt stopped during
+  candidate construction, before any backbone feature extraction or fitting, on a root-alignment
+  ordering error. Its failure receipt and authenticated original source archive remain in
+  `results/phase1/ugi_candidate_graph_residual_v1/`. The root-ordering gate remains unchanged;
+  the diagnosis and repaired execution are recorded below. No realism gain is claimed.
+- The root-ordering failure was reproduced in the **unchanged** original helper on TRAIN record
+  **8075**, with no categorical choice and no RNG advancement. V2 therefore records the entire
+  choice law as unavailable while preserving its raw enumeration and failing candidate index;
+  no candidate is removed to make a choice succeed. V1 and V2 selections are byte-identical.
+- The repaired fixed-budget run completed in **41.51 seconds**, with **112** frozen-backbone
+  forwards and **64** updates for each **11,009-parameter** head. It **fails both role gates**.
+  Amine-disjoint correct graph-class decisions change **794/1,024 to 774/1,024**; aldehyde-disjoint
+  decisions change **905/1,024 to 902/1,024**. On reachable competing-class cases, amine target
+  probability/NLL change **0.835418/0.348460 to 0.807411/0.548124**; aldehyde values change
+  **0.910032/0.221407 to 0.898330/0.230764**. The graph head also loses to the matched degree
+  control. Repeated-component head/aldehyde decisions improve **662 to 669** and **805 to 843**,
+  but these gains cannot rescue the withheld-component regressions. The populations contain
+  respectively **12** withheld amines and **6** withheld aldehydes; repeated draws and times are
+  dependent. These are TRAIN diagnostics relative to residual fitting, not independent backbone
+  generalization or generation-quality measurements.
+- **Decision: reject this arm; do not integrate or generate with it.** Its result is
+  `results/phase1/ugi_candidate_graph_residual_v2/result.json`, SHA-256
+  `0638c2e8a8bbc8037d2d006a5e9ed7725dbbb3b0089a5cd3a5e6824c24184857`.
+  Every graph-class probability retains original serialization multiplicity; all unlearnable
+  cases remain in the exposure denominator. The backbone, raw logits, structural support and
+  goal requirements remain unchanged. Successful software execution is not realism improvement.
+- A synthetic 512-candidate gradient benchmark validates the two-pass chain-rule implementation:
+  saved-autograd storage decreases **30,322,083 to 7,594,624 bytes**, median time increases
+  **10.28 to 16.02 ms**, loss is identical, and maximum gradient difference is **2.91e-11**.
+  This is saved-tensor storage, not RSS. Actual study sets contain at most **116** candidates and
+  **30** nodes, so its 128-candidate chunks do not realize that stress-case memory reduction.
+  The benchmark and exact historical source archive are preserved under
+  `results/phase1/ugi_candidate_graph_gradient_benchmark_v1/` and
+  `results/phase1/ugi_candidate_graph_gradient_benchmark_archive_v1/`.
+- **Final verification:** **307 focused tests** and all **30** vendor checks pass, as do Black/Ruff
+  on the eight new Python files and whitespace checks. The full suite reports **2,311 passed,
+  168 failed, 21 setup errors, and 92 skipped/xfail** across **2,592 cases**. The failed node/kind
+  set exactly matches the preceding baseline, with no new-test failures and no source/test/config
+  drift. Global Phase 1 definition of done remains unmet. Full evidence:
+  `results/phase1/ugi_candidate_graph_residual_validation_v1/result.json`, SHA-256
+  `0d1c17a3d64dfc8a723826ac93b85a57e83e18a80c71449ae4b2c7cf52d8e855`.
+- Independent saved-result audit authenticates **891** dependencies and reproduces all **18,432**
+  evaluation rows, paired summaries and gate decisions. Two withheld amines account for **27/38**
+  amine regressions; one familiar aldehyde contributes **36/40** repeated-component corrections
+  and occupies **675/1,024** fitting draws. This concentration supports the measured transfer
+  limitation without identifying overfitting as its unique cause. The audit explicitly separates
+  checkpoint authentication plus the runner's final-state equality assertion from an independent
+  comparison of two saved backbone snapshots. Result:
+  `results/phase1/ugi_candidate_graph_residual_analysis_v1/result.json`, SHA-256
+  `2459e1d206f67116d7b0c573c91d3096f538feccdbb82271f2fc28bbddc84ab9`.
+
+## 2026-09-08 — Candidate-conditioned chemistry helps the head probe but fails the combined gate
+
+- Ran the prespecified local frozen-backbone completion probe on the first 16 saved draws in
+  each previous residual-disjoint role population, at times 0.5 and 0.95. These remain TRAIN
+  records for the backbone. A uses original topology scores; B adds strict-completion confidence
+  from the baseline's shared chemistry pass; C uses candidate-specific chemistry passes. Repeated
+  draws and times are dependent observations. No
+  fitting, new support, candidate pruning, treatment priors, or gate changes were introduced.
+- Among **22** reachable competing-class amine cases, target probability changes
+  **0.951599/0.969025/0.992700** for A/B/C, NLL is **0.068169/0.041375/0.007660**, and correct
+  graph-class decisions are **21/21/22**. Among **32** aldehyde cases, probabilities are
+  **0.947259/0.997086/0.996087**, NLL **0.079284/0.003059/0.004070**, and correct decisions
+  **31/32/32**. C loses to B on aldehyde probability and NLL; the required two-role gate fails.
+- **Decision: reject the combined candidate-conditioned rule.** No role combination, coefficient,
+  flow time, or evaluation panel was changed after inspecting the outputs. The amine finding is
+  a narrow development observation, not evidence of improved generated lipid realism. A future
+  distinct hypothesis would need a separately specified test and could not reuse this panel as
+  its independent confirmation.
+- All **64** cases remain recorded: eight unavailable amine choice laws and four aldehyde cases
+  with failed amine backgrounds produce paired whole-case fallbacks. The latter four stay in
+  the primary aldehyde denominator. All **2,380** attempted counterfactual completions pass the
+  existing final molecular reconstruction check; exact Ugi L1 was not independently verified.
+  These are molecular decoding attempts, not a matched production generation comparison.
+- The preflight counted **1,254** C examples against the fixed cap of **4,096** before any model
+  forward. Background abstentions leave **1,190** executed C examples. The completed run uses
+  **180** frozen model forwards, **1,306** model-example evaluations, **56** background decodes,
+  zero training calls, and zero remote calls, in **87.60 seconds**. The model state, original
+  decoder, source inputs, and preservation requirements remain unchanged.
+- **Verification:** 15 focused tests, Black/Ruff, input authentication, and source-drift checks
+  pass. The result-only probe leaves the preceding repository-wide failures unresolved; global
+  Phase 1 completion and the realism goal remain unmet. The prior calibration-layout incident
+  remains explicitly disclosed; this probe uses authenticated TRAIN membership before access.
+  Protocol, runnable command, complete tensors/choices/failures, and validation are retained at
+  `results/phase1/ugi_candidate_conditioned_completion_probe_v1/`. Result SHA-256:
+  `a850a742dcf4ba55b08fd4e32ec6211d4fadd555af25e138579aadbc486debf2`; validation SHA-256:
+  `63c9b1ddcdbed46645bc6db5010ebfba3056df8807cbd25ee4062cde8058dd31`.
+- Independent audit authenticates **1,912** unique dependency, source, and artifact pins and
+  recomputes all **64** original score vectors and **2,380** completion confidences (maximum
+  arithmetic difference **2.84e-14**), class probabilities, fallbacks, and the failed gate.
+  The **52** candidate/background input matches give identical terminal arrays despite small
+  single-example/batched float32 differences; no scores or tolerances were replaced. Audit:
+  `results/phase1/ugi_candidate_conditioned_completion_probe_v1/analysis/result.json`, SHA-256
+  `36cc3dd5369b28caa376cbfe8a7d057e24ebac1e31fff549dbb181c88dfd674c`.
+
+## 2026-09-08 — Shared-chemistry rescoring improves descriptors but fails diversity preservation
+
+- Froze and executed one local **256-request** generation experiment with the original step-9143
+  checkpoint, request order, four amine coordinates, 32 flow steps, batch size 128, float32 CPU
+  model arithmetic, and two threads. The hypothesis was selected **post hoc** from control B of
+  the rejected candidate-conditioned completion probe; that earlier TRAIN result is motivation,
+  not confirmation. The new rule scores original ordered topology alternatives using A plus
+  shared-B strict-completion confidence, coefficient **1**, with dedicated seed **2026090831**.
+  Both roles use the original complete background before simultaneous installation. The
+  production sampler, model weights, support, chemistry gates and preservation requirements
+  remain unchanged. Protocol: `docs/PHASE1_UGI_SHARED_CHEMISTRY_RESCORING_PROTOCOL.md`.
+- Passive capture reproduces every baseline control row, summary, terminal array and RNG state,
+  and all **256** historical row projections. Coefficient zero bypasses scoring/reselection and
+  preserves original states, products and RNG. The baseline reproduces **256/256** valid exact-L1
+  products, **170** distinct products, effective component count **31.399251893**, mean pairwise
+  ECFP4 distance **0.4162727467**, and **236/256** products containing a novel component.
+- The successor also yields **256/256** valid, connected, exactly verified Ugi L1 products with
+  zero final abstentions/fixed-state violations. All six full measured-TRAIN role-descriptor
+  distances improve: attempt-weighted Wasserstein/energy/MMD² change by
+  **-0.0077459622/-0.0189352136/-0.0015148386**, and unique-product-weighted values by
+  **-0.0120739998/-0.0366177352/-0.0034971925**. These are descriptor resemblance measurements,
+  not calibrated lipid realism, efficacy, synthesis-success probabilities, or independent
+  confirmation. Actual blinded visual calibration/review remains pending.
+- **Decision: reject this arm.** Distinct exact-L1 products decrease **170→169** and mean pairwise
+  distance decreases **0.4162727467→0.4141914312**, failing the prespecified observed no-loss
+  requirements. Their small size does not permit changing the gate and does not by itself
+  establish population-level degradation. Effective component count increases **31.39925→32.13926**,
+  any-component and whole-product novelty increase **236→237**, and distinct novel exact-L1
+  products remain **161**. These aggregate passes do not replace the failed diversity measures.
+- Role-level reporting exposes a further tradeoff: novel amines increase **189→191/256**, while
+  novel aldehydes decrease **186→170/256**. Distinct amine/aldehyde/isocyanide components change
+  **25/46/3→27/46/3**, and role effective counts **17.04062/22.61511/2.97516→18.19086/22.71854/2.97516**.
+  All isocyanides remain familiar. The authenticated historical failed treatment is retained as
+  a control with **215** distinct products but only **170/256** any-component-novel products.
+- Among **184** paired attempts with both amines novel versus all TRAIN, Morgan-count/atom-pair
+  distance changes are **-0.009188/-0.005361**; among **170** both-novel aldehyde pairs they are
+  **-0.002530/-0.002342**. All four within-seed intervals include zero. The overall aldehyde
+  atom-pair change is **-0.011612**, interval **[-0.017535,-0.005797]**, alongside lower novel-aldehyde
+  incidence. These post-treatment strata are descriptive and do not isolate a causal effect.
+- Complete preflight and execution retain all **11,574** candidate completions under the fixed
+  **16,384** cap. Every completion passes strict/final-molecule checks; no whole-product fallback,
+  candidate filtering, repair or retry occurs. Scoring uses **645** chunked strict-decoder calls
+  and **512** topology draws; the successor uses **two** final neural forwards/strict decodes for
+  **256** products. Including both baseline executions, neural work totals **138** forwards and
+  **17,664** model-example evaluations. The run takes **652.33 seconds**, with zero training or
+  remote calls. Source/input/model-state checks pass; the historical calibration-layout incident
+  remains pinned and contributes no data to this TRAIN-only experiment.
+- Independent audit authenticates **3,763** files, recomputes all **11,574** A scores exactly and
+  B confidences within **1.42e-14**, verifies masks, candidate multiplicity, fallbacks, RNG and
+  call accounting, and reproduces the failed gate. **98** product identities change. All **91**
+  focused tests, explicit-file Black/Ruff on eight Python files, and all **30** vendor checks
+  pass. The prior full repository failure report remains authoritative; the full suite was not
+  rerun for this result-only experiment. Global Phase 1 definition of done and the realism goal
+  remain unmet. No coefficient/seed/role-specific rescue, promotion, or fresh confirmation run
+  was selected from these results.
+- Runnable commands, complete artifacts, archived source bytes and interpretation are in
+  `results/phase1/ugi_shared_chemistry_rescoring_v1/README.md`. Experiment result SHA-256:
+  `39c68bef2a0973d1fd2fbbaaf42b2e7be0965e900b475fbb083370597ae06a2d`; independent audit SHA-256:
+  `5566f4b4ed0d5ed6025512604d2bbbb28fe8dd1a2f39b69d0a40fc2f05a4ab07`; implementation validation:
+  `80cdfb75e440b2fb5adc4190629cb1fc10a6165e8553cf707c0096617f752905`.
+
+## 2026-09-08 — Matched topology draws separate completion scoring from sampling variation
+
+- The rejected shared-chemistry experiment changed its topology RNG stream as well as its
+  scores. A saved-law audit finds mean A-to-A+confidence total variation **0.2740** for amines
+  and **0.2546** for aldehydes; nine observed head changes occur under unchanged laws.
+  Mean aldehyde entropy falls **0.4590→0.07793 nats**, with maximum probability **0.8392→0.9716**.
+  Concentration within requests does not establish molecular diversity loss across different
+  contexts. Conditional expected topology switches under fresh A and A+confidence are **109.64**
+  and **122.45** of 256, versus **117** observed parent changes; these calculations make no draws
+  and are not molecular-quality effects. Audit SHA-256:
+  `24061eac3c3a140cf609a394f982514bbdbab4a5e5f43da07682734f1d534931`.
+- Froze `docs/PHASE1_UGI_SHARED_CHEMISTRY_RNG_CONTROL_PROTOCOL.md` before new control selections
+  or products. The diagnostic preserves the rejected parent, coefficient **1**, seed
+  **2026090831**, all **256** requests, candidate ordering/multiplicity, B-completion eligibility,
+  original background and every gate. It neither selects a new seed nor substitutes a new
+  baseline for the user's preservation requirements.
+- Stage 1 restores TRAIN-derived sampling-visible records without a model, checks every layout
+  tensor/ID, and exactly replays all **256** native topologies and RNG states with the unchanged
+  three-role decoder. Two persistent A-only/A+confidence RNG chains reproduce the saved
+  probabilities and A+confidence choices, remain aligned after every role draw, and match
+  all saved product boundaries. It uses **512** multinomial calls per arm and zero model or
+  molecular calls, in **18.86 seconds**. A-only differs from native pointers in **103** requests;
+  A+confidence differs from matched A-only in **110**, with no fallback.
+- Stage 2 executes the matched A-only pointers through the same frozen-model chemistry and
+  strict decoder: **two** forwards, **256** model examples, two strict decodes, and 256 final
+  molecular validations, in **60.64 seconds**. All **256/256** A-only products are valid,
+  connected and exact-Ugi-L1 verified by the existing assessor, with no abstention, fixed violation,
+  repair or retry. Model/source/input checks pass; no training or remote call occurs.
+- With identical new random draws, adding confidence changes distinct exact-L1 products
+  **172→169**, effective component count **32.44172→32.13926**, mean pairwise ECFP4 distance
+  **0.4161200→0.4141914**, and distinct novel exact-L1 products **162→161**. Any-component and
+  whole-product novelty increase **233→237/256**, but novel aldehydes fall **190→170/256** while
+  novel amines increase **188→191/256**. Isocyanides remain unchanged and familiar. The
+  original native comparator remains **170** distinct, pairwise **0.4162727**, and **236/256**
+  any-component-novel products; neither the parent nor the redraw control passes its full
+  preservation rule.
+- All six descriptor distances improve for A+confidence versus matched A-only: attempt-weighted
+  Wasserstein/energy/MMD² differences are **-0.005077067/-0.012671942/-0.000946443**, and unique-product
+  differences **-0.002348104/-0.005877815/-0.000264034**. All six also improve under A-only redrawing
+  relative to native, including unique-product energy **0.3300297023→0.2992897824**, compared with
+  **0.2934119671** for A+confidence. This demonstrates material sampling variation on reused
+  development requests; it is not a population or across-seed effect estimate.
+- **Decision:** retain the failed shared-chemistry arm and this attribution control without
+  promotion, tolerance changes or seed/weight searches. The confidence contribution is
+  measurable under the declared conditional coupling, with adverse diversity and role-novelty
+  tradeoffs. Actual visual calibration and fresh confirmation remain pending; improved lipid
+  realism under the full objective is not demonstrated.
+- A distinct unresolved readout issue is that amine selection maximizes atom-only scores,
+  ester placement maximizes partial-motif scores, and bond assignment proceeds greedily.
+  Current B confidence scores one resulting completion. A future bounded diagnostic could
+  separate best-completed-placement score from mass over existing deterministically completed
+  placements. It has **not run**, is distinct from the prior per-symbol state-marginalization
+  no-op, and would not compute the entire legal bond-assignment partition or itself authorize
+  another generation arm.
+- **Validation:** all **43** focused tests, explicit-file Black/Ruff on four Python files, and
+  all **30** vendor assets pass. The previous repository-wide failure report is retained;
+  the full suite was not rerun for this isolated diagnostic. Global Phase 1 definition of done
+  and the active realism goal remain unmet. Runnable commands, source archives, complete
+  three-condition metrics and limits are in
+  `results/phase1/ugi_shared_chemistry_rng_control_v1/README.md`. Decision replay SHA-256:
+  `fb76fba2942a3552f954ccf0f112692a7d95c7e145a3a198e7ef0e9b5c3c68a0`; molecular control SHA-256:
+  `308466cbea41a2368e2f45f2c99a290a4d182a34b9c6be0a8e84283d55266ee8`; validation SHA-256:
+  `6aabc64b392aab376ed1df21e53c116d0dc7c04313d8eba5f234af7619de3eee`.
+- Independent saved-output audit authenticates **3,821** files and verifies all reported
+  contrasts, denominators, two final forwards/decodes and unchanged parent gate. A-only
+  redrawing changes **85** product identities versus native; A+confidence changes **105**
+  versus matched A-only, comprising **62** changed heads and **57** changed aldehyde components,
+  with isocyanides unchanged. Every equal-pointer match has equal product identity. Chemical
+  assessments and Stage 1 RNG execution are authenticated, not rerun by this audit. Its result
+  SHA-256 is `529bc75959216ea5ea156ed9e29f094b82cf1902b7e56f0e49bb23c20c0eb99e`.
+
+## 2026-09-08 — Finite placement mass exposes a limited scoring mechanism, not improved realism
+
+- Defined `docs/PHASE1_UGI_COMPLETION_PLACEMENT_PROBE_PROTOCOL.md` before execution: fixed
+  requests 0–7 from the saved native B contexts, every original ordered amine/aldehyde topology,
+  at most 1,024 original strict completions plus 16,384 placement replays. Original support,
+  semantic conditions, logits, atom vocabulary, core policy, registry, chemistry gates and
+  TRAIN-only layout construction remain unchanged. No checkpoint/model construction, neural
+  forward, topology draw, fitting, remote job or sampled successor arm occurs.
+- The first attempt failed before any strict or molecular call because a provenance check
+  compared coordinate counts against saved coordinate-index lists. Preserved its original
+  config, source bytes and failure receipt. Corrected the comparison to exact indices and
+  added two regression tests without changing the panel, candidate pools, scores or limits.
+  The corrected config SHA-256 is
+  `aac01e64f30556b72755482d19ce3652d2652d5eca5f12dd1c69493ff11a139d`.
+- Completed **286** original topology observations and **577** placement replays in
+  **248.827 seconds**. All **863** completed-molecule checks pass structural validity and exact
+  constitutional Ugi reverse/forward reconstruction; **206** unique products require actual
+  adjudication, with memoized verdicts retained for every repeated attempt. All original
+  selector choices reproduce complete tensors, reasons, scores and constitutional products;
+  fixed states, pointers and other-role chemistry remain invariant. There are no selector,
+  strict, molecular or exact-L1 failures, and all **16** request/role laws are available.
+- Amine: **140** topologies and **373** placements, with **zero** better-than-greedy full-score
+  completions. Finite completion-mass corrections vary across topologies in requests 0, 2 and 6;
+  the largest change in the normalized A-plus-completion law is **0.0832419** total variation.
+  Aldehyde: **146** topologies and **204** placements; **14** topologies have a better full-score
+  placement, with largest gap **3.47748208**. However, best-versus-greedy law changes are at most
+  **2.441855e-8**, and finite-mass-versus-greedy changes at most **8.956009e-5**. Those score gaps
+  lie where the normalized topology law assigns negligible mass in this panel.
+- All replay states are distinct serializations within their respective topology, so exact-state
+  deduplication removes none. The 373 amine states nevertheless span only **334 constitutional
+  groups summed within topology**, with **23/140** topologies containing multiple serializations
+  of the same product. Aldehyde states span 204 such groups. Serialized completion mass must not
+  be interpreted as molecular diversity. It covers only the image of the existing placement
+  selectors under deterministic bond completion, not all legal bond assignments or graphs.
+- The prespecified necessary mechanistic signal passes for both roles. **Decision:** retain this
+  finding, preserve the rejected shared-chemistry arm, and inspect remaining bond-completion
+  uncertainty before another sampler trial. The amine result concerns finite completion mass;
+  it does not reveal a greedy-placement error. The aldehyde result has very small law impact.
+  These observations do not demonstrate improved realism, diversity/novelty preservation,
+  generalization or a useful model intervention. Visual calibration and fresh confirmation remain
+  pending, and the original no-loss objective remains active with every gate unchanged.
+- Result SHA-256 is `94e2008bc56b16afe24e6ac72653553d55a382f16c65de4dec4ac836fdb050e2`.
+  Independent audit authenticates **5,529** files and reproduces score/dedup/law calculations,
+  with maximum full-score difference **1.421086e-14**. Its SHA-256 is
+  `e4cdb09c40d85caab23003f953f681505cd91fc7a9139963b5efbcc7b2e51c44`; interpretation supplement
+  SHA-256 is `b57af709eb2dbb33ba498aeba46b3e118ee1f0ccec2dcb43a57b318cd5ceb170`.
+  Chemical/exact-L1 verdicts and selector pools are authenticated receipts, not rerun by this
+  independent audit. Commands and limitations are in
+  `results/phase1/ugi_completion_placement_probe_v1/README.md`.
+- **Validation:** 50 focused tests pass, four experimental Python files pass Black/Ruff, and all
+  30 vendored assets verify. The prior full-suite failure report remains an input; no global
+  rerun or successful Phase 1 definition of done is claimed. The preserved latest full result
+  has 2,311 passed, 168 failed, 21 errors and 92 skipped/xfail. Current validation SHA-256 is
+  `cb40e03f0a6ae83470db629b313e275eaa74325acdc06ff61b13527ab3f24682`.
+
+## 2026-09-08 — Alternative bond completions have insufficient scoring impact
+
+- Froze `docs/PHASE1_UGI_BOND_COMPLETION_PROBE_PROTOCOL.md` before observing bond-choice masks.
+  Reused all **286** original topology contexts for requests 0–7 from the placement probe,
+  with the same saved predictions, original atom placements, role masks, TRAIN-only record
+  restoration and original strict decoder. The bounded experiment changes one originally
+  allowed bond decision and recomputes its entire greedy suffix. It neither samples a new
+  topology nor changes a model, production sampler, chemistry gate or preservation threshold.
+- The complete census contains **1,004** head alternatives and **4,675** aldehyde alternatives.
+  Executed **286 original captures, 286 identity controls and 5,679 alternative replays** in
+  **386.581 seconds**. All **6,251** molecular validations and exact constitutional Ugi
+  reverse/forward verdicts pass; **3,531** unique products require actual adjudication, with
+  retained memoized verdicts for repeated products. No branch or role-isolation failure occurs.
+  All original terminal arrays, scores and receipts reproduce, and all **16** role/request
+  comparisons are available. Model construction/forwards, training, topology draws and remote
+  calls are zero; source/input pins and global RNG state remain unchanged.
+- Neither role has any completion with a better full-role score than its original greedy
+  completion. Adding the finite alternative mass changes the normalized topology law by at
+  most **0.00003435045** total variation for amine and **0.00021924243** for aldehyde. Both fail
+  the prespecified **0.01** practical screen. Nonconstant score corrections alone are
+  insufficient, and no statistical or across-seed effect is inferred from these eight requests.
+- Recomputed suffixes change **694** head allowed masks and no later head selected states;
+  aldehyde replays change **4,115** suffix masks and **40** later selected states. These are
+  decision counts across replays, not independent trials. After identity deduplication, head
+  neighborhoods contain **1,144** serialized states and **1,037** constitutional groups summed
+  within topology, with multiplicity in **31/140** topologies. Aldehyde has **4,821/4,821**.
+  Finite serialized mass is not a molecular-diversity measure or a full legal bond partition.
+- **Decision: stop this mechanism.** The fixed-atom one-decision neighborhood supplies no
+  practical reason for a successor generation arm. Do not extend its panel, retune its score,
+  relax its screen or promote the rejected shared-chemistry arm. The result does not establish
+  improved realism or preservation of diversity and novelty in a generated population.
+  Actual blinded visual calibration and fresh confirmation remain pending; the original
+  realism objective remains active with every gate unchanged.
+- Independent saved-output audit authenticates **4,374** files and verifies original/identity
+  reproduction, alternative completeness, logits/argmaxes, valence/forced constraints, changed
+  suffixes, all scores, deduplication, laws and call counts. Maximum score recomputation error
+  is **1.421086e-14**. Registry mask admission and chemical/exact-L1 judgments are authenticated
+  evaluator receipts, not independently rerun chemistry. Result SHA-256:
+  `9ca55f973d48505cda69d68d55fbc5e17ac19789881583e75c28a701088e2a6f`; audit SHA-256:
+  `b502a82ba707e40319f3a2fdc4b977f65c9e84891e0ead7bc5c1b07dd10727ed`.
+- **Validation:** 46 focused tests, Black/Ruff for four experimental Python files, whitespace
+  checks and all 30 vendor assets pass. The previous full-suite report remains failing with
+  2,311 passed, 168 failures, 21 errors and 92 skipped/xfail; this isolated diagnostic does not
+  rerun or resolve it. Global Phase 1 definition of done remains unmet. Commands, frozen
+  sources, receipts and limits are in `results/phase1/ugi_bond_completion_probe_v1/README.md`.
+  Validation SHA-256: `94e0596620eeae87fc643f1bf34daab0c7aa22543ed508f0fc5ef2bde8962771`.
+- **Next hypothesis, not an executed intervention:** source review identifies a distinct time-tag
+  contrast. `production_training.py:508` clamps training time to **[0.02, 0.98]**, creating actual
+  training mass at 0.98. Terminal A/B run at **1.0**. B retains the completed native flow's
+  chemistry while replacing its topology; it does not accidentally reuse an earlier flow state.
+  A fixed 1.0-versus-0.98 audit could test endpoint sensitivity on identical saved inputs and
+  repair/copying on prespecified TRAIN controls. Small time extrapolation alone is not causal
+  evidence, and lower copying on generated inputs is not known-target correction. Prior probes
+  did not isolate this contrast; a protocol must freeze identity controls, role-specific
+  corrupted/uncorrupted comparisons and practical criteria before forwards. No time sweep,
+  new model call or sampler trial has been executed for this hypothesis.
+- Broad structure-only pretraining remains conditional. Current residual component partitions
+  are within backbone TRAIN, not evidence of independently held backbone components. Historical
+  broad checkpoints use a different architecture, and broader data cannot remove frozen support
+  exclusions. A current-backbone comparison still requires a specified reachable gap,
+  protocol-specific decontamination, representation/coverage qualification and a frozen
+  experiment/budget contract under `PHASE1_UGI_FIRST_PRODUCTION_PLAN.md`. This review does not
+  qualify or launch that arm.
+
+## 2026-09-08 — Highest-trained-time readout changes confidence but does not improve repair
+
+- Froze `docs/PHASE1_UGI_ENDPOINT_TIME_PROBE_PROTOCOL.md`: compare only **1.0 versus 0.98**
+  under the same checkpoint, inputs, masks and conditioning. The trained time boundary is a
+  hypothesis, not evidence of a sampler defect. Generated B retains native endpoint chemistry
+  while replacing topology; TRAIN controls use the original q(0.98) corruption with target
+  topology. The control distribution deliberately matches .98, so its NLL improvement alone
+  cannot demonstrate a benefit on generated endpoints with unknown effective noise level.
+- The first attempt stopped in **1.165 seconds** before model preparation, forwards or noising:
+  the parent-provenance helper required `used_inputs` from an older result schema that instead
+  supplies `source_snapshot`. Preserved config/source bytes and the zero-call failure. Explicit
+  schema-specific authentication now verifies every required snapshot source; eight regressions
+  and a real read-only parent/context preflight pass. No panel, seed, time, budget, score or gate
+  changed. Corrected config SHA-256:
+  `ef842ac22239bf4af33b6ba6e993bf889fb4c0380cdd372ba8b7e77d86ba3aef`.
+- Completed **20 forwards / 2,432 examples** in **42.875 seconds**. Original full-128 A/B
+  predictions and the B repeat reproduce exactly before the time intervention. Every paired
+  input, model state and source/input pin remains unchanged; global RNG is unchanged after
+  preparation. Four local-generator corruption batches cover all **480 measured TRAIN records**
+  in cache order; the frozen **231 admitted** records form the primary population. No training,
+  decoding, new molecular/L1 assessment, topology sampling or remote execution occurs.
+- Primary corrupted head accuracy stays **16/20**, and aldehyde stays **16/22**, with zero
+  corrected or harmed argmax coordinates in those strata. NLL nevertheless decreases by
+  **0.00667495** and **0.02490642**, respectively. This is improved probability on the target
+  without improved discrete recovery. Time 1 already repairs most of these constructed errors,
+  which contradicts a universal pure-copy interpretation of this TRAIN control.
+- Primary unchanged head accuracy stays **3,151/3,151** and clean head **3,171/3,171**.
+  Aldehyde unchanged accuracy declines **9,677/9,713→9,675/9,713**, and clean accuracy declines
+  **9,700/9,735→9,698/9,735**. Both roles' clean and unchanged NLL increases. These controls
+  share records and components; their failures are not independent trials. The all-480
+  secondary population also has zero corrupted-coordinate argmax changes; aldehyde unchanged
+  counts decline **19,406→19,401** and clean counts **19,457→19,453**. Full denominators and
+  isocyanide results are retained without changing the primary population.
+- All **286** saved original completions and **16** request/role laws remain in the generated
+  comparison. Original A scores and completed states are fixed; only B logits change. Maximum
+  law total variation is **0.004165264** for head and **0.000610189** for aldehyde, both below
+  the prespecified **0.01** screen. Generated input-agreement counts remain **107/107** head,
+  **310/310** aldehyde and **217/220** isocyanide coordinates at both tags. Generated inputs
+  have no known target, and these scores do not describe newly decoded .98 molecules.
+- **Decision: stop this time-tag hypothesis.** It supplies no net TRAIN repair, introduces
+  aldehyde preservation regressions, and lacks the required generated-law effect. Do not
+  sweep lower times, substitute seeds or promote a model. Existing rejected arms and every
+  realism/preservation gate remain unchanged. The full objective, actual blinded calibration,
+  fresh confirmation and global Phase 1 definition of done remain unmet.
+- Result SHA-256: `f60fdbe8e932897825524488c79038654ccd25408a577586e0ce6682b0bb178e`.
+  Independent NumPy audit authenticates **5,638** files and recomputes **25,920** metric rows,
+  all aggregates/scores/laws and the failed decision, with maximum difference **9.094947e-13**.
+  Model/noising counts and prior chemistry/L1 judgments are authenticated receipts, not
+  independently rerun execution. Audit SHA-256:
+  `d30de9a07ced92be76995ea4c71dce5aecb4d45af4fa2ad27353cd1e32224724`.
+- **Validation:** 123 focused tests, eight-file Black/Ruff, whitespace checks and all 30 vendor
+  assets pass. Prior full-suite failures remain: 2,311 passed, 168 failed, 21 errors and 92
+  skipped/xfail; the global suite was not rerun for these isolated scripts. A bounded local
+  lookup did not recover the missing C16 step ledger required by frozen route tests; its
+  expected SHA-256 remains `81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93`.
+  No replacement data or weakened checks were introduced. Commands and limits are in
+  `results/phase1/ugi_endpoint_time_probe_v1/README.md`. Validation SHA-256:
+  `edccfd9b120ccdfd9be622faefc0553b5ded8021dce814f9caeb19122bdd1c5f`.
+- Source review leaves one distinction untested: expose the existing four baseline head targets
+  to the trainable backbone before message passing. Original morphology inputs carry topology
+  summaries; the prior semantic residual uses detached hidden states and changes only final
+  amine atom logits, while measured-only full-model fitting adds no conditioning fields.
+  Their negative results remain intact. This distinction does not establish usefulness or
+  predict tail improvement; a future test would need matched informative/zero conditioning,
+  initialization, exposures, corruption, objective and support before any generation claim.
+  No such backbone-conditioning experiment has run in this diagnostic.
+
+## 2026-09-09 — Explicit head conditioning inside a trainable backbone fails matched advancement
+
+- Tested the distinct conditioning mechanism identified after the endpoint-time diagnostic:
+  the existing four baseline head specifications enter valid amine-role hidden states before
+  the first attention block. The original checkpoint is copied into informative and zero-target
+  arms with identical zero-initialized affine projections; all original weights can train.
+  This differs from the previous detached final-logit residual. It does not isolate injection
+  location alone relative to that historical experiment, since trainable adaptation also changes.
+- Reused the exact old source-weighted 1,024/256/256 draws, component/product subdivisions,
+  four times, native corruption seeds and fitting permutation. All structures belong to original
+  backbone TRAIN. The 1,966-product applicability subset remains 0.272008221% of the original
+  Ugi source measure; all exclusions remain in the frozen coverage ledger. No split, support,
+  target coordinate, gate or production sampler was changed.
+- Each arm received 64 AdamW updates covering 4,096 product-time exposures, with original
+  learning rate 0.0001, weight decay 0.00005 and clipping 1.0. Every actual checkpoint objective
+  coefficient was wired explicitly, including role-balanced chemistry, offspring/junction terms
+  and the target-topology chemistry second pass. Source review found that the generic
+  specialization runner omits that pass; this probe does not use that incomplete training branch.
+  Dropout is deliberately disabled in both arms, so the entire original stochastic training
+  procedure is not claimed to be replayed. Only final checkpoints were evaluated.
+- **Failed necessary criteria.** On 920 component-disjoint non-singleton placement attempts,
+  baseline/control/semantic correctness is **847/849/849**. The informative arm has no advantage
+  over matched fitting. On 540 repeated-component non-singleton attempts, correctness is
+  **502/488/488**. The respective complete populations retain 1,024 attempts each, including
+  104/468 singletons, 0/16 empty candidate sets and 68/28 absent targets. Candidate symbol
+  universes, paired target presence and all denominators remain identical across arms.
+- With target topology, corrupted head atom correctness on the component-disjoint panel falls
+  **955/1,188 to 903/1,188** in both fitted arms, while corrupted aldehyde atom correctness rises
+  **891/1,169 to 1,096/1,169** in both. Native-noisy semantic parent-pointer correctness falls
+  **4,663 to 4,515 of 5,412** head coordinates, **17,723 to 16,772 of 19,248** aldehyde coordinates,
+  and **8,241 to 7,255 of 13,224** isocyanide coordinates. These are serialized reconstruction
+  measures; they are not new generated-molecule validity or exact-L1 measurements.
+- The complete attempt took **255.245909 seconds**, with **451** model forwards, **28,864** model
+  examples, **128** optimizer updates, **96** native corruption calls over **6,144** examples,
+  and **6,144** diagnostic placement selector calls. Both initial prediction identities, all
+  original target-topology prediction hashes, fitting exposure/input parity, original checkpoint
+  preservation, fit RNG identity and source reauthentication pass. No molecular sampling,
+  remote compute, biological/routing calls, prospective selection or model promotion occurred.
+- Independent saved-training audit authenticates **2,044** files, all **96** original replay
+  batches, all **128** fitting input hashes, saved initial predictions/RNG and final/restart
+  checkpoints without model, noising, gradient or chemistry calls. Both arms change 333
+  backbone-state tensors; control semantic projection weights stay zero and informative weights
+  have norm 0.0459169. Gradient/loss values remain authenticated execution receipts rather than
+  independently recomputed gradients or losses. The intervention was exercised; the failed
+  placement advantage cannot be presented as a successful information-conditioning result.
+- Config SHA-256 is `9c2966adf9b64dc06239dce5be7410d615f9d02b8fa6209ca1175f7575c876b2`;
+  result SHA-256 is `928edcefd33b268f3f22997c563b47f13993cf4b3be743daac7decc0283df47a`;
+  training-audit SHA-256 is `eb8cb464515376146b107f90891edf5ef39c4639e5d80afcefd87f605c936f94`.
+  Protocol: `docs/PHASE1_UGI_BACKBONE_SEMANTIC_PROBE_PROTOCOL.md`; code, archived sources,
+  raw tensors, ledgers and commands: `results/phase1/ugi_backbone_semantic_probe_v1/`.
+- **Decision:** stop this bounded arm and retain the negative finding. No selected-time,
+  longer-fit, seed or learning-rate rescue was run. This single additional-training experiment
+  does not prove explicit conditioning cannot help under every possible model or training budget.
+  It establishes no improved lipid realism, generated validity, exact L1, diversity or novelty.
+  The user goal remains unmet, with every original improvement and preservation requirement intact.
+- Independent numeric audit rederives **192** prediction batches, **10,368** coordinate-statistic
+  rows, **6,144** ordered placement reports and **20,136** candidate scores, with maximum numeric
+  difference **3.64e-12**, and reproduces the failed gate. The fitted arms make identical placement
+  decisions across all **2,048** attempts, including empty cases. Relative to baseline, both make
+  **3 corrections/1 regression** on the disjoint panel and **12 corrections/26 regressions** on the
+  repeated-component panel. Audit SHA-256:
+  `dc3c4439283c6ee50d42aa380a9ddb6241608500912b3c96deb2e284220004b3`.
+- **Validation:** 139 focused tests, all 30 vendored assets, eight experiment/test Python files
+  and both independent auditors pass their checks. The validation receipt reauthenticates every
+  frozen input, source and output; SHA-256:
+  `132be7dc8e6f241436143a08c571b0b16f25d6901f26f687514e18b738c44415`.
+  The repository-wide suite was not rerun for these isolated experimental files and documentation.
+  Its preceding preserved result remains **2,311 passed, 168 failures, 21 errors, 92 skipped/xfail**;
+  no full-suite pass or Phase 1 definition-of-done claim is made.
+
+## 2026-09-09 — Preserve the realism goal and prepare actual human calibration capture
+
+- A further read-only review of native sampling and the latest failed conditioning probe found
+  no new implementation defect or evidence-supported intervention to launch. The active baseline
+  has `baseline_semantic_guidance: null`; the frequency-resampled tail-unsaturation choice belongs
+  to the rejected treatment. Native role priors, state forwarding and fixed-coordinate restoration
+  agree with their declared training/sampling contracts. This bounded source review does not prove
+  the sampler is optimal or all possible future interventions would fail. No new training,
+  molecular generation, remote compute or model promotion occurred in this continuation.
+- The frozen goal protocol still requires actual human calibration outcomes. Prepared a blank
+  offline form at `results/phase1/ugi_realism_human_review_v1/review.html` from the existing
+  evaluator-v2 packet and sheet. All twelve pairs and all twenty-four SVG byte sequences, order
+  and A/B labels are preserved. The separate key was not read. No actual reviewer judgments
+  were supplied or generated. Original packet SHA-256:
+  `2937135c5c8461bacce040bf1f4732b10a14f68387a628ed0c2f5d460b0c30f7`;
+  form SHA-256: `91f8583668dd6d09c49dee40f14104223912bc7c4586a9ae6c717b688e828062`.
+- Capture accepts independent abstentions and inconsistent judgments, which can themselves be
+  calibration evidence. Low/medium/high confidence is descriptive metadata with no scoring
+  weight or threshold. Explicit concern choices distinguish an unanswered draft from a completed
+  unassessable response. Human authorship and pre-unblinding assertions remain reviewer
+  declarations, not independent verification of expertise, authorship or blindness.
+- Added a write-once ingestion command that authenticates original inputs, generated form,
+  source hashes and manifest metadata, then preserves exact submitted bytes and a provenance
+  receipt. Successful receipt status is
+  `human_ratings_received_calibration_adjudication_pending`; ingestion neither reads the key
+  nor scores a pass. The twelve calibration pairs cannot replace the separate frozen visual
+  comparison requirements. No gate, model weight, novelty/diversity target or L1 requirement changed.
+- **Validation:** 52 synthetic-fixture tests pass, including browser-export/Python-ingestion
+  compatibility, abstention preservation, incomplete/tampered-input rejection and immutable
+  receipts. All four capture source/test files plus the validation writer pass Black/Ruff;
+  all 30 vendored assets verify. Browser discovery returned no available browser, so a visual
+  UI check was not performed. The source snapshot and check evidence are preserved in
+  `results/phase1/ugi_realism_human_review_v1/validation/`; result SHA-256:
+  `8735777c20b0bf50391dc6fb2f3aaf7cf686381e0db3fc000bd82bfd057bb2c5`.
+  The full repository suite was not rerun for these isolated capture files. Its preceding
+  preserved result remains 2,311 passed, 168 failures, 21 errors and 92 skipped/xfail.
+- **Decision:** retain all negative findings and the unchanged goal. No improved lipid realism,
+  completed calibration, model promotion or global Phase 1 completion is established. Actual
+  human ratings are the next missing scientific input; no automatic reviewer substitutes for them.
+
+## 2026-09-09 — Human calibration received; depiction affects plausibility preferences
+
+- Received the user's completed twelve-pair review, reviewer ID **Rahul**, exported at
+  `2026-09-09T14:14:10.072Z`. Both human-review and pre-unblinding attestations are present.
+  They remain declarations rather than independent verification of authorship, expertise or
+  blindness. The exact submitted bytes were preserved at
+  `results/phase1/ugi_realism_human_review_v1/received/reviewer_001/review.json`, SHA-256
+  `b14652288a59fdba2f85b6c239f09ead2fb7a8d9c3a66d9b022812eb527b9fff`.
+  The original download and preserved copy match. This resolves the missing-review-data blocker.
+- Recorded a descriptive analysis plan after schema validation and immutable ingestion, before
+  analytical inspection of ratings and key. The frozen evaluator specifies identity answers,
+  redraw ties and response fields, but **no human-calibration pass threshold**. None was invented
+  after seeing the answers. Identity judgments are correct for **10/12** pairs: **8/8** identical
+  redraws and **2/4** different measured-control pairs, with no abstentions. All twelve confidence
+  responses are high, including the two identity errors; confidence was not used as a weight.
+- Redraw preferences are **A: 3, B: 4, tie: 1**, with no preference abstentions. Concern flags agree
+  within **8/8** identical pairs: both sides flagged in five and neither flagged in three. This
+  establishes consistency within the packet, not chemical correctness of the flags. Measured
+  controls prefer the saved treatment in **3/4** pairs and measured structures in **1/4**; concern
+  flags are present for **1/4** measured slots and **0/4** treatment slots. Measured provenance is
+  not a preference ground truth, and these controls are not a matched baseline/treatment test.
+- A separately labeled **exploratory post-outcome inspection** finds that all **7/7** directional
+  redraw preferences select the 0-degree, non-reversed depiction. Rotation and atom-order reversal
+  vary together, so their individual effects cannot be identified. Several comments explicitly
+  discuss legibility. These observations show presentation sensitivity in the plausibility field;
+  none of the original preferences was retroactively converted to a tie.
+- C07 and C08 were labeled constitutionally identical despite different authenticated graphs.
+  C07 changes the amine head linker (`NCCN1CCCC1` versus `NCCCN1CCCC1`); C08 changes methyl to
+  ethyl substitution (`CN(C)CCCN` versus `CCN(CC)CCCN`). Both also change the aldehyde-derived
+  tail length while retaining the same isocyanide component. Small-drawing comments motivate a
+  legibility improvement but do not establish the cause of the errors. Ionization, toxicity and
+  enzyme-related comments remain unverified reviewer hypotheses, not biological optimization
+  targets or grounds for excluding qualified measured structures.
+- The descriptive analyzer authenticates the plan, capture/form/source lineage and frozen key,
+  joins every pair, retains denominators and independent abstentions, and preserves verbatim
+  reasons. Independent source and scientific reviews agree with the recorded results. Summary
+  SHA-256: `70a9930ddb36f61f7f4636aa101c088cf718b6d55ed4b8422435699ae2895b2a`;
+  exploratory inspection SHA-256:
+  `0f37f1884a6f8a6c58a8420711b98f1bc58cfb7c8a1ac1bec92edbec2b709694`.
+  Reports, sources, input hashes and commands are under
+  `results/phase1/ugi_realism_human_review_v1/analysis/reviewer_001_v1/`.
+- **Validation:** 75 focused tests pass, all eight checked Python files pass Black/Ruff, and all
+  30 vendored assets verify. Validation receipt SHA-256:
+  `ca99a5de08556401b4c76bdd85cf3a5e41f663f7ab1197188dada583e8b85d34`.
+  The full repository suite was not rerun for these isolated analysis files; its preceding
+  preserved failing report remains authoritative. No global Phase 1 completion is claimed.
+- **Decision:** retain the human outcomes and every failed model result. A future review should
+  distinguish legibility from structural plausibility using readable complete graphs and a
+  separately specified fresh packet. The now-unblinded cases cannot become fresh confirmation
+  or be selectively rescored. Existing visual, validity, exact-L1, diversity, novelty and full
+  measured-reference requirements remain unchanged. No new training, molecular generation,
+  model promotion or demonstrated improvement in lipid realism occurred in this analysis.
+
+## 2026-09-09 — Fresh baseline review separates plausibility from drawing legibility
+
+- Resumed the unchanged realism goal after receiving and analyzing the user's human review.
+  No model has yet demonstrated improved realism with all validity, independent exact-Ugi,
+  diversity and novelty requirements preserved. The completed original review and every failed
+  model result remain immutable; the follow-up does not rescore the old cases.
+- Froze `docs/PHASE1_UGI_REVIEW_SEPARATION_PROTOCOL.md` and the v1 configuration before selecting
+  new graphs. The twelve-pair design includes eight fresh measured-TRAIN identical-graph redraws
+  and four diagnostic active-baseline/measured-TRAIN pairs. Both input pools exclude the canonical
+  union of all sixteen distinct graphs in the recorded prior calibration packet. The saved baseline
+  pool has **170 unique graphs from 256 eligible attempts**, with no prior-packet overlap; the
+  measured pool has **466/480 graphs** after fourteen prior-packet exclusions. Selection uses
+  unique complete graphs and separate frozen selection/order/side/style RNG streams, with all
+  eligible baseline attempt membership retained. No appearance, score or reviewer comment was
+  used to choose individual graphs.
+- A synthetic preflight found that RDKit's original flexible canvas did not preserve the requested
+  coordinate scale: measured ratios ranged **22.0268926459–23.7707340620**. Before real selection,
+  recorded a rendering-only v2 amendment specifying padded explicit canvases and verified fixed
+  scale. The original config and failed preflight are preserved. All **24** actual depictions now
+  preserve complete graph identity, every bond and finite canvas bounds, with coordinate scale
+  **23.999999999999847–24.000000000000156**. Maximum width and height across the packet are
+  **1,258 px** and **1,010 px**, respectively; the form preserves intrinsic dimensions and offers
+  common 100%, 150% and 200% zoom for each pair.
+- The new offline form asks chemical plausibility independently of presentation and asks drawing
+  legibility last. It retains explicit independent abstentions, concern choices, confidence,
+  optional reasons and human/pre-unblinding attestations. All answers start blank, and capture
+  preserves unexpected or inconsistent responses without changing or scoring them. The public
+  form contains no source labels, SMILES, pair kinds or answer key. It preserves all twenty-four
+  SVG byte strings from the authenticated public packet. No new training, model evaluation,
+  molecular generation or remote computation occurred; existing graphs were parsed and depicted.
+- Packet result SHA-256:
+  `0f0dc27dce1279330ab31649beb9e3d71e9d28cfb9751758c69e56e22e749285`.
+  Form manifest SHA-256:
+  `c7c255748fb0796bbb5994c4112952454a8581d915cc488073111e0f1753f87a`.
+  The ready form is `results/phase1/ugi_realism_review_separation_v1/form/review.html`;
+  its directory includes runnable preparation, capture, validation and recoverable source records.
+- **Validation:** all **89 focused tests** pass, comprising 84 synthetic packet/form/capture
+  tests and five pinned-source checks; all 30 vendored assets verify. Independent scientific and
+  source review found no blocking defect. Four representative complete drawings were rendered
+  and visually checked for legibility and clipping. Browser access was unavailable, so live UI
+  appearance remains unverified; synthetic JavaScript DOM tests cover zoom and export behavior.
+  The full repository suite was not rerun for these isolated files. The preceding preserved result
+  remains **2,311 passed, 168 failures, 21 errors and 92 skipped/xfail**; global Phase 1 completion
+  is not claimed.
+- **Decision:** obtain the fresh human judgments before using this review to nominate a structural
+  defect in the active baseline. These source controls are not a matched intervention, measured
+  origin is not preference ground truth, and the joint instruction/presentation change does not
+  identify a causal renderer effect. No calibration threshold was added and no promotion gate
+  changed. The goal remains active and unmet; review readiness does not demonstrate improved
+  lipid realism.
+- The sealed validation receipt authenticates 74 input/source records and archives nine sources,
+  including exact form regeneration and the representative-render inspection chain. Its path is
+  `results/phase1/ugi_realism_review_separation_v1/validation/receipt_v1/result.json`, SHA-256
+  `229cc84fa23010b7ce0402f24bbdae810521fe958602e63405ce36169da2c526`. All eight new Python
+  implementation/test/validation files pass Black and Ruff.
+
+## 2026-09-09 — Freeze separated-review analysis before fresh human responses
+
+- The preceding goal turn made concrete progress by producing and validating the fresh review
+  packet. A scoped check of the current capture directory and expected completed-download name
+  found no fresh R01–R12 responses. The latest backbone semantic probe remains at its preserved
+  failed necessary-criteria result, and no improvement or model promotion is established.
+- Before reading any fresh responses, froze
+  `docs/PHASE1_UGI_SEPARATED_REVIEW_ANALYSIS_PLAN.md` and its configuration
+  `configs/multireaction/ugi_separated_review_analysis_v1.json`, SHA-256
+  `41cd805126f432c03c2939eda5bffa5b37a555ade21a4c11b91e329322e3512e`. Independent scientific
+  review found no blocking issue. The plan retains all twelve pairs, independent abstentions,
+  the full sixteen-cell plausibility/legibility cross-tabulation, explicit resolved denominators,
+  redraw-only joint-style associations, concern consistency, diagnostic controls by origin,
+  unweighted confidence and verbatim responses. No acceptance threshold or inferential test is added.
+- Implemented `results/phase1/ugi_realism_review_separation_v1/analyze_review.py`. It requires
+  explicit plan, capture-receipt and form-manifest hashes; validates the sealed completed human
+  export before accessing the actual private key; binds that key to the frozen packet; archives
+  executed sources; and preserves failed analyses without admitting a scientific result. The
+  original public form and original human review remain unchanged. Runtime source review found
+  no blocking issue. Development used synthetic responses and synthetic keys only.
+- **Validation:** all **122 focused tests** pass: 33 new synthetic analysis tests and the existing
+  89 packet/form/capture/source-tracking checks. All three new Python analysis/test/readiness files
+  pass Black/Ruff. The input/source snapshots and test counts are preserved at
+  `results/phase1/ugi_realism_review_separation_v1/analysis_readiness_v1/result.json`, SHA-256
+  `51008cb32f788539af5e8d59c406c80a8b8ba17ea1457c39bfb2fb0d4cb1b462`. The full repository
+  suite was not rerun; the preceding global failures remain unresolved.
+- **Decision:** analysis preparation is complete; scientific analysis awaits the fresh completed
+  review. No further reviewer-surrogate output, new training or molecular generation was used to
+  fill that missing input. Improved lipid realism remains unproven and the goal remains active
+  with every structural-validity, exact-Ugi, diversity, novelty and promotion requirement intact.
+
+## 2026-09-09 — Fresh review answers received as a chat table
+
+- Received all twelve R01–R12 response rows in the user's message. Preserved the visible message
+  text and an unscored transcription under
+  `results/phase1/ugi_realism_review_separation_v1/chat_submission_001/`. This is chat-origin data,
+  not a browser-exported file; the saved text is not claimed to preserve transport-level bytes.
+  The line-wrapped R08 plausibility answer was joined as `unassessable`; case was normalized to
+  the fixed enums; no optional reasons were supplied. No substantive rating was changed.
+- Response transcription SHA-256:
+  `df367751f82f2258fdf95d3fe8c926e3c76325329672ae3692ac24ca4831c411`.
+  Source/input-pinned transcription receipt SHA-256:
+  `62ed869edcdfe5fe720df80c4d265425f18b6e485604415c1da8c9cf26380d49`.
+  The transcription script passes Black/Ruff. The frozen ingestion, scorer and gates are unchanged.
+- Reviewer identity and the new review's human/pre-unblinding attestations are not supplied in
+  the table. Requested those declarations before admitting a completed capture or parsing the
+  fresh key. The original review's attestations do not establish them for this new packet.
+  The response artifact therefore remains `responses_received_reviewer_attestations_pending`;
+  no calibration outcome, model improvement or promotion is claimed from this transcription.
+
+## 2026-09-09 — Attested fresh review shows redraw consistency and baseline structural concerns
+
+- The user explicitly confirmed reviewer identity **Rahul**, personal human judgment and review
+  before opening the answer key. Preserved that response and the original question alongside
+  the chat table. Serialized the unchanged ratings into the frozen capture schema, with the UTC
+  timestamp explicitly identified as assistant serialization time. Chat-origin provenance remains
+  separate from the strict capture schema; no browser download or independent authorship proof
+  is implied. The pending transcription was preserved unchanged.
+- Validated and sealed the completed export before unblinding the exact packet key, then ran the
+  prespecified analyzer. Constitution judgments are correct for **12/12** pairs: **8/8** redraws
+  and **4/4** different-graph controls. All eight redraws receive chemical-plausibility ties and
+  drawing-legibility ties. Redraw concern flags agree for **8/8**, with seven both-no and one
+  both-yes (R10). All twelve legibility answers are ties. The both-directional redraw concordance
+  denominator is zero, so its fraction is `null`, not a perfect score.
+- In the four diagnostic controls, the measured structure is preferred in **3/4** pairs and
+  one preference is unassessable; baseline is preferred in **0/4**. Concern flags are present in
+  **4/4 baseline** and **2/4 measured** control presentations. Both sides are concerning in R08
+  and R09; only the baseline is concerning in R02 and R07. Confidence counts are high **7**,
+  medium **4**, low **1**, with no weighting. All reasons are blank; no reason was supplied by
+  software. These are small-packet descriptive results, not population estimates or a new
+  calibration threshold. Different graphs, instructions and rendering prevent causal attribution
+  of changes from the earlier review.
+- Completed export/sealed review SHA-256:
+  `c7e9047f71c0ccfb091e1135b61816c67c7d4cd0b1b6e96a39bdd5c1b503773a`.
+  Capture receipt SHA-256:
+  `8d9fd376f29cd51ebfcc78b09a7f22257a713633270d7d55b7c95487df8d3208`.
+  Analysis result at
+  `results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/result.json`, SHA-256
+  `460925b983b0a0c75d38f018daea55cffb8751b87970e08e519e0e1115f49538`.
+- Independent recomputation confirmed every summary field, the original chat rows, raw concern
+  choices, attestation and sealed byte identity. The actual analyzer sources match those in the
+  preserved **122-test** passing readiness report. Additional provenance verification authenticated
+  **81 input/source records**, including recoverable source archives and chat-origin receipts;
+  verification SHA-256: `f9c17ab2c404ffa14ae9a64f688c0702b27f54a2f6428760462c93995c0f9811`.
+  New serialization and verification scripts pass Black/Ruff. Tests and the globally failing
+  repository suite were not rerun for this data-only execution; no global completion is claimed.
+- **Decision:** the fresh human-review input is now available. Inspect the flagged baseline
+  structures against unchanged TRAIN support and retain the measured concern controls. The
+  comparisons vary head, ester orientation and tail length together; requested optional
+  atom/bond-specific notes for R02B and R07B. The ratings justify localization work, not an
+  automatic motif ban or a stronger repetition of previously failed head-support interventions.
+  No new model training, generation, promotion or demonstrated realism improvement occurred in
+  the review analysis.
+
+## 2026-09-09 — Post-review TRAIN audit localizes a head-arrangement mismatch
+
+- Inventoried every labelled head edge and unordered length-two path in unique measured TRAIN,
+  all-TRAIN and saved baseline components. The post-review N–C–N pattern means a nonaromatic
+  central carbon with two single bonds to nitrogen. It occurs in **0/15** unique measured TRAIN
+  heads, **1/185** unique all-TRAIN heads, **11/25** unique baseline heads and **90/256** baseline
+  attempts. The single all-TRAIN example is the unmeasured head `CN(C)CN`. Direct N–N bonds occur
+  in **4/15**, **5/185**, **10/25** and **72/256**, respectively. Unique-component and attempt
+  weighting remain separate; neither pattern is promoted to an invalidity or chemical-risk rule.
+- All four reviewed baseline heads are novel versus measured and all-TRAIN catalogs. R02B and
+  R08B still match measured **six-coordinate** semantic targets. R07B and R09A match measured
+  four-coordinate targets but have no matching six-coordinate TRAIN target. This demonstrates
+  a descriptor-resolution limitation on actual flagged examples, without identifying the cause
+  of the human concern. Related nitrogen connectivity in measured controls remains in the audit.
+- The existing aldehyde directional-count helper abstains on **163/256** baseline attempts,
+  **26/46** unique baseline aldehydes and **31/75** unique all-TRAIN aldehydes, versus **0/8**
+  unique measured aldehydes. These are helper-support abstentions, not invalid exact-L1 outputs.
+  All **256** baseline attempts remain accounted for with zero loader abstentions.
+- The runnable audit and full inventories are under
+  `results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/structural_audit/`.
+  Result SHA-256: `16f22ae6a1db4859bf218339d1a1a7ee9b31ec0522171cc122962a4bc081770c`.
+  Input/source authentication, complete inventory counts, TRAIN-before-structure access and
+  unchanged RNG checks pass; sources are archived and Black/Ruff pass. This is deterministic
+  saved-data analysis with no model inference, training or molecular generation.
+- **Decision:** inspect the saved complete-head candidate laws to distinguish legal support from
+  ranking, including coordinate-preserving alternatives. Do not treat absence of this arrangement
+  as improved realism, repeat the rejected generic whole-head support intervention, or change a
+  validity, novelty, diversity or exact-Ugi requirement. This exploration follows the ratings
+  and is not a prespecified confirmatory result.
+
+## 2026-09-09 — Saved trace separates conditional head support from the chosen arrangement
+
+- Reused all **51** complete terminal amine assignments in the original **16** traced baseline
+  attempts. Authenticated the original **128-row** historical prefix, passive-observation control,
+  terminal/RNG state, vocabulary and relevant source pins. The audit reads cache metadata only
+  and uses saved node/edge arrays; it performs no model inference or molecular construction.
+- Selected attempts **2, 6, 7, 8, 13 and 15** contain the post-review N–C–N pattern. All **6/6**
+  have an alternative without that pattern preserving the original four-coordinate request;
+  **5/6** have an alternative preserving the selected head's six-coordinate key. All captured
+  head bonds are single and every candidate's atom capacities accommodate those saved bonds.
+  These are conditional head assignments on selected topologies, not validated alternative
+  complete products or a rollout-level diversity result.
+- Reviewed **R08B** is attempt **6**. The selected candidate has six-key `[6,5,2,0,1,2]`, neural
+  score **101.36301216483116** and actual probability **1**. Its pattern-free alternative has
+  six-key `[6,5,2,0,2,2]`, score **95.65345001220703** and probability **0**. The alternative
+  preserves the original four-coordinate target but changes donor count **1 to 2**; no alternative
+  in this request removes the pattern while preserving all six coordinates. The recorded
+  selection law is first neural argmax, and all three candidate semantic distances are zero.
+- Saved result:
+  `results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/saved_trace_audit/result.json`,
+  SHA-256 `a55d5986067b19c0e27821ea0dfb20e9df948e7f2373e741a8f024361134dda9`.
+  Eight synthetic checks and Black/Ruff pass; read-only `--verify` recomputes the exact scientific
+  payload and authenticates archived sources. Independent review of the preceding structural
+  audit reproduced all counts and semantic matches and authenticated its **80** declared files.
+- **Decision:** the selected arrangement is not forced by the original four-coordinate request
+  in these six cases. This localizes support versus ranking; it does not establish that another
+  arrangement score would improve realism or preserve diversity. Inspect exact head identity
+  among the saved alternatives before attributing a benefit to novelty. Preserve the failed
+  whole-head, candidate-graph and semantic-residual interventions as relevant counterevidence.
+
+## 2026-09-09 — Exact candidate identities distinguish novelty from assignment multiplicity
+
+- Compared all **51** saved conditional head assignments with the authenticated TRAIN and
+  baseline head inventory using exact labelled-graph isomorphism. Element, charge, aromaticity,
+  isotope, radical and hydrogen labels are retained; the reactive-N marker is stored separately
+  from constitutional precursor identity. All **16** selected assignments reproduce their
+  known precursor identities. All candidates satisfy the saved single-head-bond and core-boundary
+  capacities. There are **22** distinct candidate heads and **11** distinct selected heads across
+  these original sixteen attempts; no new hypothetical molecule was constructed.
+- Among the six selected N–C–N-positive requests, alternatives without that pattern preserving
+  four coordinates comprise **16 assignments / 7 heads**, including **10 assignments / 4 heads**
+  novel versus all TRAIN. Same-six alternatives comprise **11 assignments / 4 heads**, including
+  **9 assignments / 3 heads** novel versus all TRAIN. Novelty versus measured TRAIN gives the
+  same counts. Attempt **6/R08B** still lacks a same-six alternative without N–C–N.
+- The same-six alternatives that are both novel and free of direct N–N comprise **8 assignments
+  / 2 heads** across attempts **2, 7, 8 and 15**. Those four requests already share **2** selected
+  heads, so this is **not evidence of a diversity loss**. It shows why assignment multiplicity
+  must not be called molecular diversity. The other novel same-six alternative, in attempt **13**,
+  retains direct N–N. Including familiar alternatives, the same-six N–N-free set has **10
+  assignments / 3 heads**; its extra familiar head is `NC1CCNCC1`. No nitrogen pattern is banned.
+- Result and runnable audit:
+  `results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/candidate_novelty_audit/`,
+  result SHA-256 `776113ec19aa4246a81bc976e384d992a2f21ae79c055f3def9ca83f84ce0c8a`.
+  Four synthetic checks, Black/Ruff and exact read-only replay pass. An independent implementation
+  reproduces every candidate/reference match and pairwise constitutional-class equality; the
+  original trace scores, probabilities and state labels were independently checked as well.
+- **Decision:** conditional novel alternatives exist inside current support, but their availability
+  establishes neither improved realism nor whole-product preservation. Do not infer benefit or
+  harm from candidate multiplicity. A successor must distinguish its mechanism from the rejected
+  support and reranking interventions and demonstrate the entire frozen head/tail, structural,
+  exact-Ugi, diversity, novelty and fresh-confirmation requirements. No model was changed,
+  generated output selected, gate weakened or realism-improvement goal achieved by these audits.
+- **Final scoped validation:** the combined new trace/identity checks report **12 passed**, zero
+  failures, errors or skips. All eight exercised Python files pass Black/Ruff; scientific input
+  hashes remain unchanged. Logs, JUnit and the source-pinned validation receipt are at
+  `results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/post_review_validation_v1/`,
+  result SHA-256 `2f4cecd18bceb5a280b8624172a5612d8b219de8e0cc09b44256e9497aa41c88`.
+  The original scorer's 122 passing readiness checks remain applicable to its unchanged source.
+  No global suite was rerun; its prior failures and the unmet Phase 1 definition of done remain.
+
+## 2026-09-09 — Resumed realism investigation tests rooted assignment-score averaging
+
+- The user explicitly resumed work toward improved lipid realism with unchanged structural
+  validity, exact Ugi reconstruction, diversity, novelty and gates. Continued from the attested
+  human review and authenticated saved candidates. The goal service still reports its earlier
+  blocked state; the available goal tools do not provide an active/resume status operation.
+  This administrative state is separate from the research progress recorded here.
+- Tested a bounded serialization hypothesis using all **51** saved assignments from the original
+  **16** baseline trace attempts. Exact graph equivalence preserves the reactive core nitrogen,
+  bonds, element, charge, aromaticity, hydrogen, isotope and radical labels. There are **39**
+  rooted classes summed within attempts; **12** have two equivalent assignments, and all twelve
+  have unequal saved neural scores. The largest within-class range is **8.74127833545208**.
+  Original first-argmax selection reproduces for every attempt.
+- Compared two fixed, exploratory class-score summaries with the original maximum: arithmetic
+  mean and temperature-one log-mean-exp, each normalized by the number of represented equivalent
+  assignments. Arithmetic mean changes the preferred class only in attempts **7, 8 and 15**;
+  log-mean-exp changes only **7**. Every change replaces a novel N–C–N head with a measured-familiar
+  N–N head and changes donor count. Reviewed **R08B/attempt 6** has three singleton rooted classes
+  and remains unchanged. An annotation such as motif absence does not enter grouping or scoring.
+- The saved baseline explicitly has no chemistry prior or semantic guidance, so these scores
+  are sums of neural atom logits. The active training path uses fixed canonical records and the
+  architecture uses learned global position features and distinct parent/child/closure relations;
+  component-local position embeddings are conditional on `repeat_group_conditioning`, whose
+  activation was not separately authenticated in this audit. Unequal scores do not establish an equivariance
+  defect or isolate why the reviewer flagged a structure. The counterfactual averages are not
+  molecular probabilities, new generation, or a calibrated measure of realism.
+- Result, runnable audit, source archive and six-test report are under
+  `results/phase1/ugi_rooted_assignment_score_audit_v1/`; result SHA-256
+  `0bf75f8b33fcaf59164c7df9d65334e8e962c4643e3470b2968bb3a6c19ffb09`.
+  Six focused tests, Black/Ruff and exact read-only scientific replay pass. This uses no molecular
+  construction, model inference, training, generation, remote compute or random draws.
+- **Decision:** these class averages do not justify a sampler intervention. Their only changed
+  preferences trade the observed pattern for familiarity and changed semantics. Preserve prior
+  whole-head and candidate-residual negative results, keep all gates intact, and retain the goal
+  as unmet. The separate aromatic-state restriction was already audited in the frozen support
+  study (`d8624c6fbd9f0b8abf3ffe4a374744e53baa4cfb2419f90b9392f81ac20f8d8c`); do not relaunch it
+  as a new mechanism or expand saturated-head support under this goal.
+
+## 2026-09-09 — Saved comparisons do not supply a qualified realism successor
+
+- Inventoried **27** named historical comparisons against the current frozen baseline using all
+  eight additive aggregate no-loss requirements. All retain observed validity and exact-L1 yield;
+  **26** lose any-component and whole-product novelty, **14** lose effective component count,
+  **15** lose unique novel exact-L1 yield, and one each loses unique exact-L1 yield or mean pairwise
+  fingerprint distance. Failures overlap. Eighteen existing full measured-TRAIN descriptor panels
+  report improvement in all six distances; nine are absent at the inventoried paths. This is a
+  bounded retrospective inventory, not a claim to have screened every historical run.
+- The sole aggregate preservation pass is
+  `ugi_topology_only_context_support_vs_amine_joint_support_cpu_seed0_v1`: **251** unique exact-L1
+  products, effective component count **58.312639**, mean pairwise distance **0.508218**, **237/256**
+  any-component and whole-product novel products, and **233** unique novel exact-L1 products.
+  Its aldehyde novelty falls **186 to 151/256**, while amine novelty rises **189 to 207/256**.
+  Role-level losses are disclosed separately, without inventing an additional hard gate.
+- All 256 saved baseline sample dictionaries and the program projection match the frozen
+  comparator exactly. The only summary difference is an absent historical field now explicitly
+  false. Shared coarse requests and flow seed are recorded, but complete terminal random-draw
+  coupling across the decoder laws is not established.
+- Preserve the original automated visual rejection: reviewer
+  `codex_blinded_structural_review_2026-09-04_topology_only_v1` favored treatment versus baseline
+  **2 versus 19** for head-tail balance and **2 versus 13** for tail morphology, with **4 versus 1**
+  pathologies. This is not actual human evidence. No new review packet, re-review rescue, model
+  promotion or confirmation was performed. The arm lacks the complete evidence required by the goal.
+- The inventory authenticates **276 current consumed input files** and the saved assessment
+  chains. Three historical configuration pins differ from current bytes; each expected hash,
+  current hash and failed authentication is preserved. This does not authenticate every historical
+  execution source. The numerical lead has no detected historical-input mismatch. The first strict
+  audit failure and its executed source are retained; no old pin was changed to make it pass.
+- Runnable inventory, archived source, complete comparisons and validation are under
+  `results/phase1/ugi_saved_arm_preservation_inventory_v1/`; result SHA-256
+  `f45c3294c07c87ed43d6c95c60a8689c07673ed062b6685971ea72703b3da651`.
+  Five focused tests, Black/Ruff and read-only replay pass. Independent review reproduces all
+  216 aggregate comparisons and verifies all 13,824 ordered ledger rows. Global test failures
+  remain unresolved. **Decision:** no saved arm qualifies; retain every gate and negative result.
+
+## 2026-09-09 — Correct atom context helps TRAIN reconstruction; predicted context harms heads
+
+- The user reactivated the unchanged realism goal; the goal service now reports **active**.
+  Tested a distinct atom-to-atom hypothesis after the saved-score and historical-arm audits:
+  retain a focal atom's noisy input while correcting only other variable atoms in its precursor
+  component. Unlike earlier topology rescoring or atom-to-bond refresh, this isolates the response
+  of an atom prediction to other atom identities. No model weight or production sampler changed.
+- Froze an oracle-context protocol before new predictions. Reused all **16** original measured,
+  admitted TRAIN products from the committed-bond probe, both saved corruptions (**0.5/0.9**),
+  and all **682** variable atoms at each time. Target topology, noisy bonds, fixed states, the
+  focal input, other components and conditioning remain identical. Only vocabulary metadata is
+  read from the production cache; no new corruption, molecular decoding, exact-L1 assessment,
+  heldout structure interpretation, training or remote execution occurs.
+- Correct context passes the limited necessary screen. At time 0.5, corrupted-head accuracy
+  stays **10/16** with **one correction and one regression**; target NLL improves
+  **1.177054 to 0.733580**, and unchanged-head correctness improves **89/97 to 94/97**.
+  At 0.9, corrupted-head accuracy stays **4/8**, with target NLL **1.165445 to 1.151880**.
+  Corrupted aldehyde accuracy improves **20/27 to 23/27** at 0.5 and **3/7 to 4/7** at 0.9.
+  No net corrupted-head accuracy gain occurs, and oracle context does not establish robustness
+  to generated mistakes or improved realism.
+- Before the follow-up forwards, froze the sole replacement of correct context by original
+  stale full-vocabulary argmax predictions. These counterfactual input tensors are not assumed
+  chemically valid or decoded into molecules. The evaluated focal input is still unchanged.
+  At 0.5 this worsens corrupted-head accuracy **10/16 to 9/16**, increases NLL **1.177054 to
+  1.682511**, and worsens unchanged-head accuracy **89/97 to 87/97**. Across both times there
+  are **zero corrupted-head corrections**. Aldehyde gains persist, but do not offset the failed
+  head requirements. **Decision:** stop this deterministic predicted-context refresh; no selected
+  time, role rescue, scalar sweep or generation trial follows.
+- Both probes reproduce the original sixteen-row predictions and identical-input repeats
+  exactly. Expanded 32-row batches differ from historical predictions by at most **4.30e-6**;
+  every treatment comparison uses identical expanded batch geometry. Each execution uses
+  **134 forwards / 4,124 examples**. An import-format-only oracle replay reproduces every
+  scientific field and focal array exactly; including it, all executions total **402 forwards /
+  12,372 examples**. This is repeated development evidence, not independent confirmation.
+- The initial artifact-pin format failure stopped before model construction; its failure,
+  source and config are retained. The reader now preserves both digest and optional byte-length
+  checks. A separate verifier discrepancy came from JSON-sorted role keys changing per-record
+  list order. Restoring the original role sequence fixes verification without rewriting numerical
+  evidence. Archived executed sources authenticate independently of disclosed current verifier
+  changes. The original checkpoint also confirms `repeat_group_conditioning=true`; the earlier
+  saved-score audit had conservatively left that activation unverified.
+- Code, both prespecified exploratory protocols, all attempts, raw focal logits and commands:
+  `results/phase1/ugi_atom_context_probe_v1/`. Oracle result SHA-256
+  `fdc73efaffbbb36f40a0af867c3ac335ec7d302448ad1c852bc4cab68df0688d`; predicted-context result
+  `bc270ed11972a820dd4438c1a23ccbc54719a60f542e8e319bf3bc4664faca3f`.
+  Eleven focused tests and Black/Ruff pass. Read-only verification reproduces inputs, statistics
+  and decisions; an independent scalar score calculation differs by at most **4.71e-16**.
+  Validation SHA-256: `a9f1e4734d974d7bfd5853c1eb5e98ad32bb32118f2b9a98d0a51ffc164625ac`.
+  The global suite was not rerun, its prior failures remain, and Phase 1 definition of done is unmet.
+- The result rules out this particular use of atomwise guesses. It does not test scoring complete
+  legal chemistry alternatives jointly, establish a successful successor, or prove the full goal.
+  Any distinct mechanism still needs a discriminating prerequisite, all frozen matched realism
+  and preservation checks, actual head/tail review and fresh confirmation. The goal remains active.
+
+## 2026-09-09 — Complete-assignment context improves one TRAIN head decision
+
+- Froze a distinct composite-score hypothesis before candidate enumeration and predictions:
+  compare the unchanged shared marginal head scores with conditional scores that use each full
+  candidate's other atom identities. Each focal atom retains its original noisy input; bonds,
+  target topology, other components, fixed states and conditioning remain unchanged. The earlier
+  deterministic predicted-neighbor refresh remains rejected; no time or role rescue was applied.
+- Reused the original sixteen measured, admitted TRAIN records and saved times **0.5/0.9**.
+  Every cache record and its canonical identity are checked after TRAIN membership; reconstructed
+  conditioning matches the saved tensors. The loader accesses packed arrays for all folds, but
+  no unselected or heldout structure is restored or interpreted. The original selector and
+  chemistry policies supply all **32 cases / 96 ordered assignments** with no unavailable pool,
+  invalid candidate reconstruction, discarded candidate or removed target.
+- The score sums full-vocabulary focal log probabilities under candidate-specific context.
+  It is a finite-pool composite conditional score, not normalized molecular likelihood,
+  calibrated realism or synthesis probability. Constitutional equivalence labels come from
+  the existing sparse reconstruction helper; correct-class mass sums all correct assignment
+  probabilities while retaining serialization multiplicity.
+- At 0.5, exact head constitution improves **14/16 to 15/16**; at 0.9 it remains **16/16**.
+  Mean correct-class NLL among the **10** available non-singleton pools per time improves
+  **0.406932 to 0.213906** and **0.090275 to 0.074629**, respectively. The sole corrected case
+  is record 4, `EUGI-57e7847a785a578072f6`, at 0.5: candidate 2 becomes correct candidate 5
+  in the original seven-assignment pool. There are no lost correct choices. Reused products,
+  components and times are dependent development observations, not confirmation.
+- The prespecified head-mechanism screen passes. **Decision:** permit a separate combined-role
+  prerequisite; do not infer tail morphology or generated validity, exact L1, diversity, novelty
+  or realism. No model was promoted and no generation arm was run. The full objective and every
+  original preservation, appearance and fresh-confirmation requirement remain unchanged.
+- Execution takes **6.53 seconds**, with **78 forwards / 1,340 model examples**, **32** selector
+  observations, **16** semantic projections and **48** first-time candidate constitutional
+  reconstructions, reused at the second time. The complete preflight is below its fixed
+  16,384-example cap. Model state and RNG are unchanged during inference. Both historical
+  predictions and identical-input repeats reproduce exactly. No training, new corruption,
+  molecular sampling, remote calls or heldout structural interpretation occurs.
+- Protocol, code, full inputs, original candidate pools, per-case logits and source archives:
+  `results/phase1/ugi_joint_atom_assignment_probe_v1/`. Config SHA-256
+  `8549cb82c92c96f75f6bb5c0dc4aae3eb6272ae02cc23944853e0af1b7fde2ea`; result SHA-256
+  `40e6eeed2e4d5730a01b2acede356bbf95d5aaf08e98418843670c95c86f753b`.
+  Eight focused tests and three-file Black/Ruff pass. Verification reconstructs every executed
+  query input digest and independently recomputes scalar probabilities, assignment scores and
+  choices, with maximum score difference **7.11e-15**. Verification SHA-256:
+  `e9ba8643aaf7f99a1bbeb7950a30b63ae6c2bf5726ae500794db0de4fbb60547`.
+  Neural and RDKit operations are authenticated execution receipts, not repeated by this audit.
+  Global tests were not rerun; their prior failures and the unmet Phase 1 definition of done remain.
+
+## 2026-09-09 — Full head/tail completion rejects the isolated head-context lead
+
+- Ran the prespecified combined-role prerequisite on the same sixteen measured TRAIN products
+  and saved times 0.5/0.9. Retained all **64 role/time cases and 144 original ordered candidate
+  completions**, with no failed molecular or independent exact constitutional Ugi L1 verdicts.
+  Explicit original-choice replays reproduce every terminal tensor and reason. These are TRAIN
+  counterfactual checks, not validity estimates for new generated products.
+- Compared the actual hierarchical selector A, complete-role shared-log-probability score B,
+  and complete-role candidate-context focal score C. Each C query retains its saved noisy focal
+  input and changes only other variable chemistry in the same role. Vocabularies, topology,
+  conditioning, fixed states, original candidate multiplicity and all constraints are preserved.
+- Every arm reconstructs **52/64** roles: amine **14/16 and 15/16**, aldehyde **10/16 and 13/16**
+  at times 0.5 and 0.9 respectively. C changes one assignment but corrects no complete role.
+  In non-singleton target-present pools, amine correct-class NLL B→C is
+  **0.370413→0.234450** and **0.045974→0.063138**; aldehyde is **0.005185→0.000316** and
+  **0.003461→0.003685**. Both 0.9 comparisons worsen and pooled correctness does not improve.
+  The prespecified combined screen therefore fails; no generation pilot follows this arm.
+- **Correction to the preceding head-only interpretation:** the one isolated correction is
+  the aromatic target `EUGI-57e7847a785a578072f6`. Candidate 5 fixes its element assignment,
+  while the full decoder selects nonaromatic atom states and masks aromatic bonds. The earlier
+  head-only reconstruction retained target bonds; that gain is not a usable full-decoder gain
+  under the frozen support. This instantiates the already documented aromatic restriction,
+  not a new mechanism or authorization to expand support. Both times retain this absent target
+  in the denominator. Original size/layout admission did not imply full terminal attainability.
+- The other **nine** target-absent cases are aldehyde components with an atom-exact candidate
+  but one or two differing bonds. Shared argmax prefers the wrong state at all **eleven** such
+  coordinates; the saved conditional logits correct only **one**, in a two-error case. No
+  complete tail is corrected. These are serialized coordinate diagnostics; the independent
+  constitutional labels remain authoritative. No additional model or molecular calls were
+  needed for this explanation, and it does not rehabilitate the failed score.
+- Preserved preparation 0001's operational failure: one strict call stopped because cached
+  records lacked explicit role morphology. Preparation 0002 attaches the existing derived
+  morphology and proves complete conditioning equality before decoding. The **209** total
+  strict calls, including that failure, remain below 512. No gate was disabled. Scoring uses
+  **306 forwards / 6,792 examples** below 32,768, in **10.59 s** on CPU float32 with two threads.
+  Historical and repeat predictions agree exactly; checkpoint and inference RNG are unchanged.
+  No training, new noising, flow generation, remote computation or heldout structure interpretation
+  occurs. The existing cache constructor loads packed arrays for all folds; selected TRAIN
+  membership is checked before materializing or interpreting records.
+- Code, config, preserved failure, source archives, candidates, logits and reports are under
+  `results/phase1/ugi_joint_role_completion_probe_v1/`. Successful preparation SHA-256:
+  `64105872708a23b41ad0d1b03843cebbfef20f8db4b8113d46b0dcd99a1b946e`; scoring result:
+  `8943399149cb838631ab7f73b2b8b73eb44d0e6f9fb2488468ff114df7d08879`.
+  Read-only verification reconstructs **3,380** focal queries, **152** input-batch hashes and
+  all scores/choices, with maximum scalar difference **1.42e-14**; verification SHA-256:
+  `33c22d5d06d1c0a6c187e6318811b6c4a9a591bcab9049aab00e9cc2184679fe`.
+  Saved-tensor explanation SHA-256:
+  `fc59b00ab1678356df94c412289976a310e96e82c3bc1685dd337953b3bb8046`.
+- **Decision:** stop this combined context score; no selective time/role/coefficient rescue,
+  aromatic-support expansion or model promotion. Preserve the user's active realism goal and
+  every validity, exact-L1, diversity, novelty, full-reference, human-review and fresh-confirmation
+  requirement. A future mechanism needs a demonstrated complete legal correction; the isolated
+  head gain is insufficient. **28** focused boundary/replay tests and six-file Black/Ruff pass.
+  Global tests were not rerun for these result-directory diagnostics; prior failures and the
+  unmet Phase 1 definition of done remain explicitly in force.
+
+## 2026-09-09 — Guarded repetition preserves validity but does not restore baseline novelty
+
+- Tested a distinct sampling mechanism on all **256** original program requests. Within each
+  original conditional legal pool, discourage already drawn anonymous classes by moving toward
+  their unvisited complement, subject to preserving the original candidate entropy, anonymous
+  class entropy and minimum candidate probability. Use the maximum feasible mixture with
+  conservative numerical rounding, not a tuned strength. Every originally positive candidate
+  remains available. TRAIN identities, descriptor scores and reviewer labels never enter the
+  policy. The history-dependent outputs are order-sensitive and are not independent replicates.
+- The original step-9143 guided sampler reproduces all **256** saved products, topology states
+  and abstentions. The disabled intervention also reproduces complete terminal tensors, reasons
+  and RNG states exactly. The enabled intervention uses the same captured model predictions and
+  layouts, with one completion per attempt and no filtering, repair or retries. Count/pattern
+  group laws, topology, fixed chemistry, support bounds and model weights remain unchanged.
+- All three populations pass molecular validity and independent exact constitutional Ugi L1
+  for **256/256** attempts. Frozen baseline / native guided / guarded repetition have respectively
+  **170/215/214** distinct exact-L1 products, effective component counts
+  **31.3993/36.4392/36.9724**, and **161/161/164** distinct novel exact-L1 products. However,
+  both any-component novelty and whole-product novelty are **236/170/175**. Guarded repetition
+  passes six of eight aggregate no-loss checks and fails both novelty checks versus baseline.
+  Mean pairwise ECFP4 distance increases **0.416273 to 0.475509**; this does not repair novelty loss.
+- Per-role novelty remains lower than baseline: amine **189/137/142**, aldehyde **186/86/88**,
+  isocyanide **0/0/0**. Distinct amines are **25/51/51**, aldehydes **46/76/77**, isocyanides
+  **3/3/3**. Amine effective counts are **17.0406/32.3767/33.1798**; aldehyde counts are
+  **22.6151/18.6038/18.9621**. Distinct count, effective count and novelty incidence remain
+  separate measurements; no new per-role hard threshold is introduced.
+- Among **1,024** targeted draws across **47** contexts, **222** revisit a context and **115**
+  change their categorical law. This changes **32** products: seventeen amine components and
+  fifteen aldehyde components. All isocyanide choices contain one anonymous class. Discouraging
+  repeats within these existing pools is insufficient to recover the full novelty gap in this
+  run; it does not establish a general impossibility result under the frozen gates.
+- Run time is **89.93 s**, CPU float32 with two threads, **68 forwards / 8,704 model examples**,
+  **256** native flow attempts and **768** strict completions including disabled and enabled
+  replays. No training, remote, routing or potency calls occur. The full TRAIN identity reference
+  is loaded only after intervention sampling. The cache constructor loads packed arrays across
+  folds, but only TRAIN layouts are materialized and interpreted. Historical baseline generation
+  is reused; all three arms receive fresh common molecular/L1/diversity/novelty assessment.
+- Independent verification reconstructs every categorical law in both modes with zero scalar
+  difference, checks terminal/fixed-state/RNG identity and reruns assessment on all **768**
+  outputs, reproducing every assessed row and metric. Model predictions are authenticated
+  captured artifacts; the verifier makes no new model or generation calls. **11** boundary tests
+  and five-file Black/Ruff pass. Global tests were not rerun for these result-directory scripts;
+  their previously recorded failures and the unmet Phase 1 definition of done remain.
+- Code, frozen protocol, config, source archives, ledgers and commands are retained under
+  `results/phase1/ugi_guarded_repetition_probe_v1/`. Result SHA-256:
+  `b388c0b23521aa27faad08281b1318d6cb227e423b17f916199883c3cd66ff43`; verification SHA-256:
+  `52084be0edb389d5fe2ab553d04bfb5315afe5725766a4b507032bb6a47e894a`; role-summary SHA-256:
+  `da1f14f6c1f83140b93a0bdb4fdced43dd5aa5e4da8cf29d4f84ff659533ecf2`.
+- **Decision:** stop guarded repetition before any descriptor or reviewer expansion. No strength
+  sweep or model promotion follows this failed preservation screen. The user's full realism
+  objective stays active with every structural-validity, exact-L1, diversity, novelty,
+  full-reference, actual human-review and fresh-confirmation requirement unchanged.
+
+## 2026-09-09 — Local path correlations transfer but fail the saved-head preservation screen
+
+- Tested a distinct local count model after the failed guarded-repetition arm. Fit correlations
+  between two adjacent bonds in every unique all-TRAIN amine, divided by an independent endpoint
+  frequency reference. Of **185** components, **184** contribute one total unit of path mass;
+  pathless `CN` remains in every denominator with zero correlation evidence. There is no
+  Cartesian product weighting, whole-head lookup, motif ban, learned neural residual or
+  tuned score-mixture coefficient. Marginal and joint pseudocounts are fixed at one. The model
+  retains positive support for unseen endpoint labels; unseen centers contribute zero evidence.
+- A fixed SHA-256 two-fold split contains **107/78** components. Fitting only the opposite fold
+  gives mean local log-correlation evidence **0.111159** over all **185** held-component scores
+  and **0.132391** over the **15** measured TRAIN heads. Positive/negative/zero counts are
+  **147/37/1** overall and **13/2/0** for measured TRAIN. These are count-model subdivisions of
+  backbone TRAIN, not an independent backbone-generalization result. The normalized local
+  feature distribution is not a normalized molecular likelihood or chemical plausibility scale.
+- The full-TRAIN descriptive fit scores all **51** original legal conditional head assignments
+  across the saved **16** requests. Choose maximum correlation with original neural-score/order
+  tie breaks; attach exact identity, novelty, semantic and motif annotations only afterward.
+  **Nine** requests change constitutional head. Several prefer novel alternatives, including
+  the saved R08B head context. Nevertheless, novel-head incidence falls **12 to 11/16** and
+  distinct heads **11 to 10**. Both fixed early preservation screens fail. Original
+  four-coordinate requests remain unchanged; some donor/branch coordinates change within the
+  original candidate pools. No alternative is filtered or chemically reclassified.
+- N–C–N-positive choices decrease **6 to 0** and direct-N–N choices **4 to 3**. These are
+  post-review descriptive annotations, not new validity or realism criteria. The result shows
+  why reducing a highlighted pattern cannot by itself demonstrate the requested improvement.
+  The early conditional-head screen does not prove a complete 256-product aggregate failure
+  and introduces no additional per-role hard gate into the full goal. No tail-quality, new
+  molecular-validity, exact-L1 or human-preference result is inferred.
+- **Decision:** stop this specific count score at its predefined prerequisite. Do not rescue it
+  with a motif penalty, measured-only fit, smoothing/mixture sweep or generation run. The local
+  predictive signal is retained as a finding; the full realism goal stays active and unmet.
+  Model weights, chemical support and every original preservation, full-reference, actual
+  human-review and fresh-confirmation requirement remain unchanged.
+- Execution uses saved graph/count arithmetic only: three empirical table fits and zero
+  neural-model, neural-training, molecule-construction, generation, remote, routing or potency
+  calls. Independent verification
+  uses exact rational count weights, independently enumerates graph paths and recomputes every
+  component/candidate score, choice and primary screen. Maximum table/scalar differences are
+  **7.11e-15/5.55e-16**. Prior chemical-capacity and exact-identity judgments are authenticated
+  receipts, not newly executed molecular/L1 checks. **Ten** focused tests and five-file
+  Black/Ruff pass. Global tests were not rerun; prior failures and unmet Phase 1 definition of
+  done remain. Sources, fixed protocol, config, tables, score ledgers, validation and commands:
+  `results/phase1/ugi_local_path_correlation_v1/`. Result SHA-256:
+  `0cb2c0be5e8cfbef925fea03659438512e03b9a24750ebe91a56ed6439acee6a`; verification SHA-256:
+  `e52f6775245be1f66ee3003db2adf27af51bde79ee27b028c6016812f944d57e`.
+
+## 2026-09-09 — Trajectory evidence pooling retains novelty but loses aggregate diversity
+
+- Ran a distinct full **256-request** comparison using the original amine-semantic baseline.
+  Capture every native pre-transition chemistry state, re-evaluate the **32** earlier states on
+  the same final constructed topology at their original times, and equally average their
+  full-vocabulary probabilities with the original final prediction. Preserve the final
+  coordinate's log-sum-exp when returning to float32 logits, so the existing partial-motif
+  scorer retains its original arbitrary coordinate offsets. There is no time window, selected
+  role, tuned weight, new noise draw, extra trajectory step or topology reselection.
+- The complete native baseline reproduces all **256** historical products, topology states and
+  abstentions. Disabled decoding reproduces complete terminal tensors and reasons. Two repeated
+  final inputs reproduce exact chemistry logits. The pooled intervention preserves fixed logits,
+  pointer logits, fixed terminal states, support and the original baseline decoder gates. Earlier
+  bond labels are serialized coordinates after pointer substitution; this is not same-edge
+  molecular trajectory tracking or a normalized whole-molecule probability model.
+- Baseline and pooled outputs are both **256/256** valid, connected and independently verified
+  exact constitutional Ugi L1, with no abstentions or ambiguous decompositions. Any-component
+  and whole-product novelty increase **236 to 240/256**. However, distinct exact-L1 products
+  decrease **170 to 166**, effective component count **31.3993 to 28.9475**, mean pairwise ECFP4
+  distance **0.416273 to 0.402194**, and distinct novel exact-L1 products **161 to 157**. Four of
+  eight original aggregate no-loss checks fail. Increased novelty incidence does not repair
+  these diversity losses.
+- Head novelty/distinct/effective counts change **189/25/17.0406 to 195/29/18.2195**; aldehyde
+  values change **186/46/22.6151 to 179/33/16.5738**. Isocyanides remain **0/3/2.9752**.
+  These per-role findings disclose the opposing effects without adding a hard per-role gate
+  or authorizing a favorable-role rescue. The failed guided control retains its historical
+  generation and receives the same freshly executed TRAIN-only assessment as both new populations.
+- The run takes **87.89 s** on CPU float32 with two threads: one checkpoint construction,
+  **134 root forwards / 17,152 model examples**, **256 native flow attempts**, **256 intervention
+  attempts** and **768 strict completions** including identity controls. No training, remote,
+  routing or potency calls occur. Global RNG and model weights are unchanged. TRAIN identities
+  enter only after sampling; only TRAIN cache layouts are materialized and interpreted.
+- Independent verification authenticates source/input pins and projected input tensors, then
+  recomputes the probability pool with NumPy: every final float32 value is identical. It
+  reconstructs **512** captured terminal products and repeats common molecular and independent
+  exact-L1/TRAIN assessment over all **768** arm attempts. Neural predictions are authenticated
+  execution artifacts, not new verifier forwards. **Nine** focused boundary tests and four-file
+  Black/Ruff pass. Global tests were not rerun; prior failures and the unmet Phase 1 definition
+  of done remain. Complete code, protocol, captures, logits, outputs, commands and validation:
+  `results/phase1/ugi_trajectory_evidence_pool_v1/`. Result SHA-256:
+  `852dc201a3a83a6e11aa3ceb7747ccab1d7a769627301f64736275629d0f5db7`; verification SHA-256:
+  `e79d105fbbd24a161b4b2113121bbab86449b497e8ef4db465b5dbc06f9e7556`.
+- **Decision:** stop trajectory evidence pooling at the failed preservation screen. Do not tune
+  windows, role selection, weights or temperatures, and do not proceed to descriptor/reviewer
+  expansion for this arm. The full realism goal remains active and unachieved, with every
+  original gate, actual human-review requirement and fresh-confirmation requirement retained.
+
+## 2026-09-09 — Ester probability normalization preserves structure but fails full-reference realism
+
+- Tested a distinct scoring mechanism on all **256** original baseline requests, using only the
+  saved native final logits from the trajectory capture. The ester selector sums raw logits over
+  different coordinate subsets. A fixed additive coordinate shift preserves every softmax
+  probability (maximum difference **3.33e-16**) but changes **3** raw choices. Subtracting each
+  selected coordinate's full-vocabulary logsumexp makes selection invariant to those offsets.
+  This retains the original eligible-state maximum convention; it is not a whole-graph likelihood.
+- The intervention changes **7** ester choices/products among **307** original feasible placements.
+  Every original strict terminal is reproduced first. All **256/256** successor outputs remain
+  valid, connected and independently verified exact constitutional Ugi L1, with no abstentions,
+  fixed-state changes, topology changes or changes to head/isocyanide chemistry. Unique exact-L1
+  products remain **170**, unique novel exact-L1 products **161**, and any-component/whole-product
+  novelty **236/256**. Effective component count increases **31.399252 to 31.858752**. Aldehyde
+  novel/distinct/effective counts change **186/46/22.615107 to 190/48/23.622563**. No new hard
+  per-role gate, candidate filter, model call, generator training, routing, potency or remote work.
+- The original raw preservation Boolean fails on diversity **0.41627274674046033 versus
+  0.41627274674046**. An exact arithmetic follow-up proves that the unique-product fingerprint
+  multisets and all **14,365** rational pair distances are identical. Thus mathematical diversity
+  is exactly equal; the discrepancy is floating summation after changed SMILES ordering, not a
+  chemical diversity loss. Preserve the original failed report. No tolerance, threshold change,
+  pair removal or shared production-metric edit was used to establish equality.
+- A documented post-result follow-up first found **7** changed role descriptor vectors, then
+  ran the unchanged full group-balanced measured-TRAIN reference and all original sanity
+  controls for baseline, normalized and nearest failed guided arms. Attempt/unique Wasserstein
+  differences are **-0.000233049/-0.000168970**, but energy differences are
+  **+0.000956811/+0.000227794**, and MMD-squared differences **+0.000124691/+0.000075523**.
+  **Four of six original realism requirements fail.** Correcting offset dependence does not
+  demonstrate lipid realism improvement. This failure is independent of the raw diversity Boolean.
+- Primary replay takes **74.31 s** and **512** strict record completions, with no model construction
+  or forward call. Independent verification executes **1,024** original ester selectors under
+  raw, normalized and probability-preserving shifted inputs, reconstructs **512** terminal
+  products and repeats **768** common TRAIN-only molecular/L1 assessments. NumPy score differences
+  are at most **2.85e-14**. Separate full-array reference calculations agree within **2.67e-15**
+  and reproduce all six strict decisions. Eight focused tests and eight-file Black/Ruff pass.
+  The initial reference wrapper's metric-key failure and source are retained; the corrected
+  wrapper uses existing schema keys. Diagnostic C2ST fits are disclosed separately from the
+  unchanged generator. Global tests were not rerun; previous failures and unmet Phase 1 DoD remain.
+- Code, protocols, full candidate ledger, output tensors, numerical proof, reference reports,
+  verification and validation are retained in `results/phase1/ugi_ester_probability_gauge_v1/`.
+  Primary result SHA-256: `a3b3acafe5dc602a702ed64a49da9ab7babdba3a18ae6a81f95b61f3ef5cdd86`.
+  Full-reference result: `23e269790408ff7e31c4a5cb92bf3c3e41ebfaa3091e3f8730a67ec7af75be11`;
+  independent reference verification: `c03a6a2893f6bbf20bb4cde9b2d2527b702f3af2812ed808b704fea091546ef1`.
+- **Decision:** stop ester probability normalization as a realism intervention; do not tune a
+  blend or expand human review for this failed arm. Preserve the scoring and arithmetic findings.
+  No model promotion or global readiness is established. The user's full goal remains active.
+
+## 2026-09-09 — Full-component chemical context passes predictive qualification
+
+- Tested a distinct atom-compatibility mechanism with all **185 TRAIN amines / 75 TRAIN
+  aldehydes**, including **15 / 8** measured components and **1,817 / 1,444** atoms. This replaces
+  the earlier narrow product-layout applicability subset as supervision for this auxiliary model;
+  it does not change the original corpus, backbone, generation support or chemistry gates.
+  Every atom is evaluated with its entire element/charge/aromaticity token masked. Neighbors'
+  tokens and bond-labelled adjacency remain visible; no component identity, source flag, global
+  composition, hydrogen count, SMILES token or absolute position enters the network.
+- A three-layer, 32-wide graph model and a degree/bond-count control share initial parameters
+  and every source-balanced fitting query. The control suppresses neighbor messages, leaving
+  inactive parameters; effective capacity is not matched. Each fitting batch has 16 uniformly
+  sampled component/focal-atom queries from each role/source stratum. Every source component
+  has equal weight within its stratum; Cartesian product multiplicity contributes no extra mass.
+- The initial v1 split puts all **8** measured aldehydes in one fold. It completes two fits
+  (**512 updates / 32,768 queries**) before detecting the other fold's empty fitting stratum.
+  Preserve the partial predictions and operational failure, without admitting a qualification.
+  V2 deterministically alternates the original hash-ranked identities within each role/source
+  stratum and preflights both folds before fitting. No prediction-based partition or seed search.
+- The four corrected fits use **1,024 updates / 65,536 queries**, taking **8.70 s** locally.
+  All **6,522** out-of-fold predictions cover every original TRAIN component and atom once per
+  arm. Source-balanced component log loss improves **0.732312 to 0.525731** for heads and
+  **0.269156 to 0.098583** for aldehydes. Measured-component losses improve **0.716341 to
+  0.470377** and **0.302725 to 0.108282**. Both roles pass every prespecified predictive criterion.
+  Source-balanced accuracy rises **0.730571 to 0.778458** and **0.920371 to 0.962382**. Unmeasured
+  head component accuracy slightly falls **0.748039 to 0.747092**, which remains disclosed.
+- Independent verification reconstructs component graphs, stratified folds and all 512 distinct
+  fitting batches, authenticates all 16 recovery checkpoints and reproduces every final excluded-
+  fold logit exactly. It does not re-execute the four fitting trajectories. Result SHA-256:
+  `956f0b99c27e8fa4621edb436c78671e08c1e11ddd575a77dc30d4a7df7ad9fc`; verification:
+  `29d0b296e2160e6c3341661b35786a0f2eb5b022919dcce26f05955d753690cb`.
+- After qualification, fitted one context model on all 260 components with the same 256-update
+  budget and separately frozen seeds. All components receive fitting exposures. A complete
+  training replay reproduces every loss, gradient norm and model/optimizer/RNG checkpoint exactly.
+  The full-fit v1 source is retained with an import-order finding; the current v2 runner corrects
+  ordering and reproduces all payloads and checkpoint bytes. Count the 256-step training replay
+  and 256-step format-correction replay explicitly, without treating them as additional selected
+  model variants. Across partial qualification, corrected qualification, full fitting and these
+  repeats, **2,304 optimizer updates / 147,456 training atom queries** were executed locally.
+- Current scorer: `results/phase1/ugi_component_cavity_full_fit_v2/attempt_0001/checkpoint_0256.pt`,
+  SHA-256 `bfae12e8b4f492aa8544b856d357e5ee12ad7485fef790403ee5cc6182bf3ff8`;
+  model-state SHA-256 `7950ac8b35342dff741f3584117158d6219b7f91b071af010b551d40dab075bf`.
+  Current fitting result SHA-256 `15c7dbcb140f00dcac333c9f135fd40211dd81f73db7956b171bec98d3755c75`;
+  exact-equivalence receipt `ad790cff82d47005097af43169b449a588b8b5a7d1755cb2e4786e67077ff63a`.
+- Ten focused tests and ten current experiment/verification Python files pass Black/Ruff. Global
+  tests were not rerun; prior failures and unmet Phase 1 DoD remain. No molecular generation,
+  original-backbone inference, remote work, routing or potency call occurs. Artifacts, protocols,
+  failure records and commands are in `results/phase1/ugi_component_cavity_probe_v1/`,
+  `ugi_component_cavity_probe_v2/`, `ugi_component_cavity_full_fit_v1/` and
+  `ugi_component_cavity_full_fit_v2/` under the same results prefix.
+- **Decision:** qualify this scorer for a separately specified matched decoder integration.
+  Predictive compatibility on original TRAIN subdivisions does not establish whole-molecule
+  likelihood, improved generated realism, validity, exact Ugi, diversity or novelty. Those
+  generation, full-reference, graph, actual human-review and fresh-confirmation gates all remain
+  necessary. The full goal remains active and unachieved.
+
+## 2026-09-09 — Qualified component-cavity scorer loses diversity in decoder integration
+
+- Froze one deterministic head-plus-ester integration of the qualified full-component cavity
+  model. Each original placement receives the mean masked-atom log probability of its complete
+  precursor; original neural score and first index break ties. No coefficient, temperature,
+  identity feature, novelty filter, role selection or generated-data fitting was introduced.
+  All **772 head / 307 ester choices** and their serialization multiplicities remain available
+  across the original **256** saved native requests. Existing topology, semantics and chemistry
+  gates remain fixed. This test does not compose earlier failed scoring interventions.
+- All native terminal tensors, constitutional products and disabled-score controls reproduce
+  exactly. Registry-derived precursor views match independent exact Ugi inverse traces for
+  all baseline products. Every candidate preserves topology, fixed chemistry and other roles;
+  jointly selected head/ester graphs equal the independently scored inputs. Original RNG states
+  and the auxiliary checkpoint are unchanged. No failed candidate is removed or repaired.
+- The treatment changes **125 head / 10 ester choices** and **128 products**. Validity and exact
+  Ugi L1 remain **256/256**, with no abstentions. However unique exact-L1 products fall **170 to
+  166**, effective component count **31.399252 to 28.826881**, mean ECFP4 distance **0.416273 to
+  0.402742**, and unique novel exact-L1 products **161 to 158**. These are four failed aggregate
+  preservation requirements, not a floating-point equality anomaly. Any-component and whole-
+  product novelty both rise **236 to 237**, which does not offset the other failures.
+- Per-role disclosure: novel head attempts fall **189 to 166**, distinct heads **25 to 19**, and
+  effective heads **17.040618 to 13.186222**. Novel aldehyde attempts rise **186 to 195** while
+  distinct/effective aldehyde counts remain **46 / 22.615107**. Isocyanides remain the same three
+  familiar components. No new per-role hard gate was used. Predictive atom-context qualification
+  does not establish preservation of generated molecular diversity under this selector.
+- The primary run takes **214.38 seconds**, with **1,335 strict completions**, **107 distinct
+  role graphs / 1,878 masked-atom queries / 107 cavity forwards**, and **512** baseline/final
+  molecular serializations. All three populations, including the original failed guided control,
+  receive fresh common TRAIN-only assessment after selection. Extra finite-pool completion and
+  inference are explicitly counted; no equal-compute sampling-ablation claim is made.
+- Independent verification assembles model inputs separately and reproduces all logits exactly.
+  NumPy log-probability arithmetic differs by at most **3.34e-16**, with identical choices. It
+  reruns **1,079** strict completions, checks all candidate and final tensor identities, and uses
+  **587** independently inverted candidate tensor states to verify every scored precursor.
+  All three assessments and all eight preservation decisions reproduce exactly. Verification
+  adds **1,878 queries / 107 cavity forwards**. No optimizer steps, original-backbone forwards,
+  flow transitions, routing, potency or remote calls occur in either execution.
+- Four focused tests and five current Python files pass Black/Ruff. Global tests were not rerun;
+  prior failures and unmet Phase 1 DoD remain. Protocol, source archives, exact commands, complete
+  selector/score ledgers, output tensors, common assessments and verification are retained in
+  `results/phase1/ugi_component_cavity_decoder_v1/`. Primary result SHA-256:
+  `0480900c7f57dc176b20568d147ee0f0b14a7abfd50ab85ff9b7805c590b9568`;
+  independent verification: `0c9d956c9df0d0e456ab80158a6d697192a1dec89bef605a81e716bc367b96bf`.
+  Validation receipt: `b205a560c26b8cdb651da03bd6a6451c29e8e46f6b1a9e25106d09191ff754da`.
+- **Decision:** stop this deterministic cavity-selection intervention. Do not tune a blend,
+  temperature, single-role rescue or post-selection novelty correction. The six full-reference
+  realism metrics and a new human panel are not advanced for this failed arm. Preserve the
+  predictive qualification separately from this negative generation result. No model promotion
+  or realism improvement is established; the user's full goal remains active and unachieved.
+
+## 2026-09-09 — Joint atom/bond distribution fails source and bond qualification
+
+- Tested a distinct autoregressive atom-and-bond law after rejecting deterministic cavity
+  selection. Every query hides its focal and future labels, retaining only an untyped precursor
+  skeleton, role and a random visible prefix. Multiplying conditional categorical probabilities
+  gives a normalized law over labelled token assignments for a fixed order; feasibility still
+  belongs to the unchanged decoder. This qualification does not sample molecules or change the
+  failed cavity arm's coefficient, temperature, roles or candidates.
+- Retained all **185 TRAIN heads / 75 TRAIN aldehydes** and the verified component-disjoint folds.
+  A three-layer graph model and matched degree/prefix control share initialization and every
+  source-balanced exposure. Both see visible prefix composition and incident known/unknown bond
+  counts; only graph neighbor messages differ. Effective capacity is not matched because the
+  control has inactive neighbor parameters. No source flag, identity or true future composition
+  enters either model. Four fixed random orders cover every coordinate for final evaluation.
+- Source-balanced component joint NLL improves **0.458687 to 0.428732** for heads and **0.208845
+  to 0.187147** for aldehydes. Head atom/bond NLL both improve, as does aldehyde atom NLL.
+  However, **measured-head joint NLL worsens 0.363606 to 0.383018**, and **aldehyde bond NLL
+  worsens 0.167428 to 0.193286**. These violate two prespecified requirements. Measured aldehyde
+  joint NLL improves **0.214606 to 0.192325**; uniform-law comparisons pass for both roles.
+- Head atom accuracy falls **0.740143 to 0.726743** overall and **0.787924 to 0.724598** for
+  measured heads, while unmeasured-head accuracy improves **0.692361 to 0.728887**. Aldehyde
+  atom accuracy improves **0.918920 to 0.929554**, but bond accuracy falls **0.952293 to 0.944540**.
+  Keep these field/source disagreements rather than interpreting pooled NLL as universal benefit.
+- Four fits take **54.57 seconds**, with **4,096 updates / 262,144 fitting coordinate queries**.
+  Final evaluation uses **50,784 queries / 796 forwards**, with another four forwards / 256 queries
+  for uniform initial-law identity. The larger budget than the historical cavity experiment was
+  specified before results; comparison with that historical arm does not isolate objective alone.
+  No original-backbone, molecular-generation, remote, routing or potency calls occur.
+- Six correctness tests pass, including prefix isolation and exhaustive finite-space joint
+  normalization, along with permutation, padding, focal-input and symmetric-edge checks. Five
+  current Python files pass Black/Ruff. Independent verification reconstructs all TRAIN graphs,
+  folds and **2,048** paired fitting batches, authenticates 16 recovery checkpoints and exactly
+  reproduces all **50,784** final prediction queries. Independently aligned NumPy NLL differs by
+  at most **4.0e-15**, with agreeing source-balanced means and identical qualification decisions.
+  Optimizer trajectories are not rerun. Global tests were not repeated; their preserved failures
+  and unmet Phase 1 definition of done remain.
+- Protocol, sources, component data, every exposure/order, training logs, checkpoints, predictions,
+  tests and verification are retained in `results/phase1/ugi_component_joint_law_v1/`.
+  Primary result SHA-256: `bc9e9985873fa70bc19e15a335e4652f7401b034827b0a48e13b85b3696d8753`;
+  independent verification: `10a0583bedc7b4e20aae29dafbc86c3c121cc4a4ce5e915befc1bad26cbd8fcb`.
+  Validation receipt: `e5a89d581a286c0cc34e1bb94fbda44823ae416816b9d4efe31b7066911fbf78`.
+- **Decision:** stop this specified joint-law arm before full fitting or generation. Do not select
+  extra epochs, source weights, random orders or field/role rescue from these results. This is
+  evidence about one model and budget, not an impossibility result for autoregressive chemistry.
+  No model promotion or generated-realism claim follows; the full user goal remains active.
+
+## 2026-09-09 — Full-reference program projection preserves validity but loses diversity and novelty
+
+- Tested a distinct correction to admission-induced program shift. The original prior conditions
+  on 231 admitted measured TRAIN products across 20 family triples. The new law gives all 480
+  measured TRAIN products equal family-group weight across all 28 triples, then projects their
+  mass onto the same 231 admitted program/semantic wire modes. Cost is unweighted integer L1
+  in the 16 program/head features actually consumed by the original baseline. Exact nearest-state
+  ties split in proportion to original prior mass; every original mode remains positive. No
+  chemistry support, gate, model weight, component identity input or decoder rule changes.
+- Reconstructed the original prior digest and all 3,072 original requests exactly. Rational
+  recomputation and an independent integer network-flow solver reproduce the original linear
+  programs: coarse full-TRAIN transport cost falls **277/84 (3.297619) to 2**. The full projected
+  3,072-request draw also replays. This is an optimized TRAIN program-law property, not evidence
+  of improved molecular realism. The 231 wire modes contain 120 distinct consumed states;
+  effective consumed states decrease **82.025 to 74.683**, and expected distinct consumed states
+  at 256 draws decrease **84.350 to 81.708**. These losses were disclosed before generation.
+- Froze a 256-versus-256 local generation comparison with the original checkpoint, strict
+  four-head-target decoder, flow seed, 32 steps, batch size 128, float32 and two CPU threads.
+  Original baseline forward input hashes, complete final predictions, layouts, terminal tensors
+  and historical product rows match exactly. The projected arm uses the first 256 already-frozen
+  requests. Equal seeds do not imply per-coordinate noise identity when program requests change.
+- All **256/256** projected products remain valid and have exact constitutional Ugi L1
+  reconstruction, with zero abstentions or fixed-state violations. However, all six diversity/
+  novelty requirements fail: unique exact-L1 products **170 to 169**, effective component count
+  **31.399252 to 29.596307**, mean pairwise ECFP4 distance **0.416273 to 0.405922**, any-component
+  novelty **236 to 232**, whole-product novelty **236 to 232**, and unique novel exact-L1 products
+  **161 to 157**. Denominators remain all 256 attempted requests.
+- Head novel attempts decrease **189 to 184**, with 25 distinct heads in both arms and effective
+  head count **17.041 to 16.436**. Aldehyde novelty decreases **186 to 185**, distinct components
+  **46 to 43**, and effective count **22.615 to 20.979**. Isocyanides remain three familiar
+  components with no novelty; effective count falls **2.975 to 2.785**. The nearest failed guided
+  control receives the same fresh TRAIN-only assessment. No role-level loss is hidden by pooling.
+- Generation takes **91.88 seconds**, one checkpoint construction, **136 model forwards /
+  17,408 examples**, and **512 attempts / strict completions**. Model parameters and global RNG
+  remain unchanged. The existing factory constructs an unused TRAIN chemistry reference; neither
+  arm applies guidance. No training, remote compute, routing, potency, repairs, retries or output
+  filtering occurs. Frozen human calibration is already complete and was not repeated.
+- **Decision:** stop the specified program projection after its preservation failure. Do not
+  tune transport costs, tie rules, roles or seeds against these outputs. Full descriptor realism,
+  new human review and confirmation are not run for this failed arm. These single-seed results
+  reject this intervention, not every possible program prior. The user goal remains active and
+  unachieved; no model is promoted. Artifacts and commands are retained in
+  `results/phase1/ugi_full_reference_program_projection_v1/` and
+  `results/phase1/ugi_program_projection_generation_v1/`.
+- Program-law result SHA-256:
+  `44088cd65ed15f304a712f285ac76abeae29c36c3d3e4d527de98e2ef26398ec`;
+  exact-law verification: `c5bcbb8731486fcbad3ec3818298e08a6226c56a13346937d56f32d8659482a0`;
+  molecular comparison: `ffc939dbe34714bc73ae2e69b37e018013f042025abddee6829e78a7fcfe86f0`.
+- Independent verification reconstructs every request layout, exactly replays **512** strict
+  completions from captured predictions, serializes all terminal products and reproduces all
+  **768** TRAIN-only assessed attempts, per-role summaries and preservation decisions. It does
+  not rerun model flow trajectories. All four batches have padded dimensions **128 by 54 nodes /
+  128 by 3 closures**; equal padded dimensions still do not prove identity of active role noise.
+  The first verifier completed scientific checks but failed while hashing a synthetic PyTorch
+  `_ops.py` module path. Its receipt/log are preserved; the actual-file manifest fix and fresh
+  complete verification succeed. Four program-law and six fixed-state tests pass, as do
+  Black/Ruff for all seven Python files. Global tests were not rerun; their preserved failures
+  leave the Phase 1 definition of done unmet.
+- Molecular verification SHA-256:
+  `9a9147a03f1bcf89d963f75348ecf9f48eca25f8f137c2526adc28e19b501852`;
+  validation receipt: `7101e062c74b48c62a4a525c832cca7d8caddc8fe0be18c537a87f5ca866d83d`.
+
+## 2026-09-09 — Complete-graph contrast ranking fails measured-head qualification
+
+- After the failed program projection, tested a new complete-graph preference objective rather
+  than rescuing the rejected cavity selector or atom/bond autoregressive model. Constructed
+  same-bond-type two-edge switches for all **185 TRAIN heads / 75 TRAIN aldehydes**, preserving
+  atom states and composition, each atom's incident bond types, original registry handle matches,
+  and four head coordinates or directional ester carbon counts. All original sources, including
+  those outside current generator support, remain in the data. No production gate is expanded.
+- The frozen construction enumerates **29,178** proposals: **8,778 retained**, **11,376
+  disconnected**, **2,583 existing-edge collisions**, **90 changed handles**, and **6,351 changed
+  role coordinates**. Every rejected proposal is retained in the ledger. Constitutional
+  deduplication gives **978 role-labelled graphs**. Other known TRAIN graphs in a source pool
+  are positives too; unobserved alternatives are not labelled chemically implausible. Exact
+  reverse-switch recovery passes. Full pool-overlap closure yields **254 groups**, allocated
+  deterministically to two folds with no exact alternative-graph overlap.
+- Data qualification passes, with informative alternatives in every role/source/fold stratum.
+  However, only **95 heads (8 measured / 87 unmeasured)** and **23 aldehydes (2 measured /
+  21 unmeasured)** have informative pools. Each excluded fold has only one informative measured
+  aldehyde. Singleton and all-positive pools remain in all primary denominators. These limits
+  prevent interpreting a pooled score as broad measured-component transfer.
+- Froze a 32-wide, three-layer graph energy trained by complete-pool cross-entropy against
+  uniform known-positive mass. Inputs are atom tokens, bond-labelled adjacency and role, without
+  identity, source flags, absolute position or global descriptors. A bag model using only atom
+  tokens and incident bond counts is analytically uniform because that multiset is invariant
+  within each pool. This untrained uniform baseline does not match learned capacity or compute;
+  the comparison tests conditional connectivity signal, not calibrated open-world likelihood.
+- Two fixed 256-update fits use equal source/role strata and final-only evaluation. Head
+  source-balanced cross-entropy worsens **0.613233 to 1.024014**, and measured-head loss worsens
+  **0.524012 to 1.437158**. These violate two frozen requirements. Unmeasured-head loss improves
+  **0.702453 to 0.610869**; source-balanced top-choice accuracy improves **0.664599 to 0.791176**.
+  Better top-choice accuracy does not offset the probability-score failures.
+- Aldehyde source-balanced loss improves **0.819916 to 0.716121**, with measured/unmeasured
+  loss **0.740866 to 0.672118 / 0.898966 to 0.760123**. Its source-balanced top-choice accuracy
+  changes **0.735074 to 0.740672**. Nevertheless, neither informative measured-aldehyde pool
+  receives a correct top choice: the reported measured-source accuracy of **6/8** comes from
+  uninformative pools. Informative-only accuracy is **0/2**. This disagreement is disclosed even
+  though the separately specified aldehyde qualification checks pass.
+- Data construction takes **3.66 seconds**. Fitting takes **5.37 seconds**, **512 optimizer
+  updates / 16,384 source-pool exposures / 50,897 deduplicated graph evaluations**. Final
+  excluded-fold evaluation covers **978 graphs / 17 forwards**, plus two initialization checks.
+  These auxiliary model fits do not modify the original generator. No original-backbone calls,
+  product generation, routing, potency, remote compute, repairs or candidate selection occurs.
+- Independent data verification reconstructs every proposal and retained graph, positive labels
+  and exact reverse operations; a separate NetworkX connected-component calculation verifies
+  pool-overlap groups. Frozen chemistry-coordinate and partition-allocation helpers are shared,
+  not claimed as independent chemical standards. Model verification reconstructs all **512**
+  fitting batches and source exposures, authenticates eight recovery checkpoints, and reproduces
+  all **978** final graph scores exactly. NumPy cross-entropy differs by at most **7.11e-15** and
+  gives identical qualification decisions. Optimizer trajectories are not rerun.
+- Five data and eight model/objective tests pass. One test emits a scalar-inspection PyTorch
+  warning while its numeric/gradient checks pass. All eight Python files pass Black/Ruff.
+  Global tests were not rerun; their preserved failures and unmet Phase 1 definition of done
+  remain. Complete protocols, code, source archives, proposal/partition ledgers, fitting records,
+  checkpoints, evaluation scores, verifiers and commands are in
+  `results/phase1/ugi_degree_preserving_contrast_v1/` and
+  `results/phase1/ugi_conditional_graph_energy_v1/`.
+- Data result/verification SHA-256 values:
+  `cfadd2543a87367be7b6ba77fa8e10b226c8aaf646b1a678861e344debd756d1` /
+  `656f983dbaf0447914f21a587ae3224bb039a7cfaa2abf3594b6c3eb978199fa`.
+  Model result/verification:
+  `10c223bd27e58962311b12f0d46a7d683174baaf9236779725f4cb30826467f1` /
+  `a39a71f62cbdaf466f5d06d2344df32f44cf056e53174133ec185cdeb5d92bc4`.
+  Validation receipt: `9d0c156bf57d4584606e0cee96b05280958a0c792983e7a4d8031c0ea790d340`.
+- **Decision:** stop this conditional-energy model before full fitting or native-decoder
+  integration. Do not choose extra epochs, seeds, source weights, roles, temperatures or model
+  sizes from these results. The negative result narrows this mechanism; it does not prove
+  complete-graph scoring impossible. No generated-realism improvement or promotion follows.
+  The full user goal remains active, with every original preservation and realism gate intact.
+
+## 2026-09-09 — Broad TRAIN local contexts do not qualify pretraining
+
+- Following the conditional graph-energy failure on measured heads, froze a corpus-availability
+  audit before parsing R0 structures. It asks whether the broad observed TRAIN corpus adds
+  local atom contexts missing from the original Ugi TRAIN components. No transfer model,
+  probability score, decoder change or product generation follows from this audit.
+- Authenticated the constitutional R0 and source-study split. All **10,591 TRAIN** rows are
+  parsed, with every eligibility/exclusion receipt retained; **4,638 non-TRAIN** rows are masked
+  before structure-field access. The conservative registry Ugi product-template screen excludes
+  **1,594** TRAIN molecules. The retained **8,997** complete molecules span **13** source-study
+  groups and **14–282** heavy atoms, contributing **583,991** atom observations. No unknown
+  current native atom states, disconnected graphs or original pretraining-ineligible TRAIN rows
+  were found. No molecules are truncated, no blocks are harvested and no Ugi roles are fabricated.
+- The unordered two-bond walk key masks the entire focal atom token at every visit, retaining
+  neighboring tokens and bonds. Matching support requires that key and the separately recorded
+  actual focal token. All **185 heads / 75 aldehydes** query original TRAIN components in the
+  opposite fixed graph-overlap fold. An additional **25 head / 46 aldehyde** distinct saved
+  baseline components query all original TRAIN components. All **4,551** atom observations and
+  their original component references, supporting broad molecule counts and study counts remain
+  available; counts are focal observations, not distinct context types.
+- Broad contexts add support for **3/127 measured-head** atom observations, all carbon, and
+  **0/183 measured-aldehyde** observations. Among measured-head non-carbon observations,
+  original support is **30/35**, broad support **28/35**, and broad adds **0** of the missing five.
+  Measured aldehyde non-carbon support is **24/24 original / 16/24 broad**, with no additions.
+  Unmeasured heads gain **190/1,690** total observations, including **41/387** non-carbon;
+  unmeasured aldehydes gain **4/1,261**, including **0/139** non-carbon. Saved novel heads gain
+  **7/171** total, including **2/50** non-carbon; novel aldehydes gain **2/950**, including
+  **0/120** non-carbon. These are availability contrasts, not realism or plausibility scores.
+- Independent verification reparses all TRAIN graphs and rebuilds all contexts and support
+  sets using a separate signature implementation. All **480 measured TRAIN products** match
+  the conservative template screen. Summary arithmetic shares the frozen aggregation helper.
+  The audit runs in **12.32 seconds**; audit and verifier make zero model-fitting, neural
+  inference, product-generation or remote calls. The local feature can miss cycles and longer
+  dependencies; template exclusion is not complete held-component decontamination, and atom
+  vocabulary compatibility does not establish identical-backbone representation support.
+- The initial fifth unit test segfaulted while using a template borrowed from a temporary
+  RDKit reaction; its command, exit **139**, original source and evidence limits are preserved.
+  The corrected v2 test retains the reaction owner and copies the template: **five tests pass**.
+  The pinned audit runner already retains the owner, completed, and agrees with independent
+  verification. The failed preflight is not represented as successful. Black/Ruff pass for all
+  five Python files. Global tests were not rerun; the existing Phase 1 validation limit remains.
+- **Decision:** this local-context result does not qualify or launch broad pretraining, and
+  does not prove longer-range transfer impossible. No realism improvement or model promotion
+  is demonstrated; every original preservation, realism and human-review gate remains intact.
+  Protocol, commands, source archive, ledgers and validation are under
+  `results/phase1/ugi_broad_context_audit_v1/`. Result/verification SHA-256:
+  `bc67453027a89bb7cd0b7f931a39bafbffd60e40f0ddcb2ec86d66ae2f8e7f04` /
+  `3527881866ab322cfb58c5cf0696f9e95aa8d5540d9d03bdcd6eae23e0c01878`.
+  Validation: `ecc31358eea8b2706bf3a3046bba78d3ba6cc712a63d75e2c44918f0fdd80593`.
+
+## 2026-09-09 — Complete graph diagnostics and prepare the first human comparison of the saved lead
+
+- Revisited the sole aggregate-preservation pass from the already verified 27-arm inventory,
+  `ugi_topology_only_context_support_vs_amine_joint_support_cpu_seed0_v1`. All eight aggregate
+  preservation checks and six full measured-TRAIN descriptor comparisons pass in the saved
+  results. The historical automated visual rejection remains intact. It is not independent human
+  evidence; the required actual human model comparison is absent. The user's completed 12-pair
+  calibration is retained and is not requested again or treated as a model comparison.
+- Froze a first-human-appraisal protocol before new graph diagnostics or form construction.
+  This is a retrospective choice of a historical quantitative lead, not a new model, rerun or
+  fresh confirmation. No historical failure is deleted. All **256 attempts per arm**, complete
+  TRAIN novelty catalogs and unique measured TRAIN component references are retained.
+- Graph distances disagree with the descriptor improvements. Treatment-minus-baseline mean
+  Morgan/atom-pair distances are **+0.087558/+0.141493** for heads across all 256 pairs and
+  **+0.051246/+0.114953** across **158** pairs where both heads are novel to all TRAIN components.
+  Aldehyde differences are **+0.141164/+0.048926** overall and **+0.248090/+0.142992** across
+  **103** both-novel pairs. Each descriptive interval lies above zero. Positive means farther
+  from measured references. These post-treatment, single-seed comparisons do not add a gate,
+  establish a causal effect, or calibrate realism; all negative results remain in the evidence.
+- Head novelty rises **189 to 207/256**, with distinct heads **25 to 127**. Aldehyde novelty falls
+  **186 to 151/256**, with distinct aldehydes **46 to 54**. Isocyanides remain three familiar
+  components. Role-level losses remain explicit despite aggregate preservation passing.
+- Prepared an offline 24-pair form using exactly the original selected attempts and all **48
+  original SVG drawings**. Each drawing reproduces byte-for-byte from its archived sample and
+  agrees with the assessed exact-L1 product. Only pair order and A/B positions are randomized
+  anew, with seed **2026091001**. No molecule is filtered, replaced, repaired or redrawn. Public
+  files contain no arm identities, prior judgments, analysis paths or pairing key; every rating
+  starts blank. Zoom and draft/complete JSON export are available. Legibility is recorded
+  separately and cannot modify the unchanged scientific criteria, thresholds or denominators.
+- Human capture requires all 24 rows, reviewer identity matching the existing calibration,
+  explicit human and pre-key attestations, unchanged criteria and rule, and exact form identity.
+  Raw responses and the receipt are saved before private-key access. The current v2 receiver
+  additionally checks the original blank template and recomputes the expected key. Static
+  inspection found a missing file-receipt argument in unexecuted v1; its frozen source is retained
+  and v2 fixes it. No actual human capture has failed and no synthetic fixture is human evidence.
+- Independent verification rebuilds **1,536 component rows / 3,072 distances**, all paired means
+  and **2,000**-replicate intervals with seed **2026091000**, and verifies every fixed pair and
+  SVG side mapping. All **480** measured TRAIN products supply the reference; **45,922**
+  non-TRAIN assignment rows are skipped before structure access. Twelve focused tests and
+  Black/Ruff for seven Python files pass. H01/H24 drawings were rendered at 150% and checked for
+  visible labels, bonds and complete structures; no scientific reviewer ratings were entered.
+- The Browser runtime reported no connected browser, so full browser interaction remains
+  unverified. Node exercised the export contract; localhost HTTP returned exact public form bytes
+  and 404 for private key/result routes. Initial sandbox bind/access denials were resolved by
+  authorized loopback execution. The public form is at `http://127.0.0.1:8864/review.html` while
+  server session **31951** runs, with an offline copy under `attempt_0001/public/review.html`.
+- **Decision:** request the actual human model comparison, retaining automated and graph
+  negatives. A human failure ends this appraisal without seeking another reviewer as a rescue;
+  a human pass is mixed development evidence and requires separately frozen fresh-request
+  confirmation. No model is promoted, no gate is weakened and the full realism goal remains
+  active and unachieved. No training, neural inference, generation, routing, potency or remote
+  computation occurred. Global repository tests were not rerun; their preserved failure baseline
+  still leaves the Phase 1 definition of done unmet.
+- Protocol, form, response tooling, ledgers and commands are under
+  `results/phase1/ugi_topology_support_human_review_v1/`. Result/verification SHA-256:
+  `a82bc7fdc2f7b0039f9caa8a56f37daa3ca9bf798375333ac4f9d9c214e4bfe5` /
+  `b3fe3b14c0ceac94d77dc946df99ae280fe017f127085dab1c6ba4fef5f80e0f`.
+  Validation: `ccbf52dd8c2da6514f65a2a903ed9033018af2374f240352e1306f93786cf6c9`.
+
+## 2026-09-10 — User-requested AI appraisal completes all 24 pairs and finds no realism improvement
+
+- The user asked the assistant to complete the pending comparison. Completed all **24 pairs / 48
+  molecular drawings** as an explicitly labelled AI appraisal, with a reason and confidence for
+  every pair. This is not an independent or human review: the assistant prepared the packet and
+  knew previous aggregate results. Human and pre-unblinding attestations remain false. The
+  completed human calibration is preserved; no human model-comparison response was fabricated.
+- Froze the full ratings before this appraisal's arm counting. Head/tail-balance judgments favor
+  baseline **10**, treatment **1**, with **8 ties and 5 unassessable**. Tail-morphology judgments
+  are **24 ties**. Drawing legibility is also 24 ties and is excluded from scientific scoring.
+  Saturation, depiction compactness and ester drawing direction alone were not treated as an
+  advantage. Three head preferences are explicitly weak, support-uncertain judgments.
+- Eight definite visual concern flags all map to the treatment. Graph checks on all 48 depicted
+  products confirm all eight as head-ring triple bonds: **seven six-membered rings and one
+  five-membered ring**, versus zero in the depicted baseline products. All visual flags agree
+  with this graph feature. Twelve pathology judgments remain unassessable and four are neither;
+  these do not qualify chemical support. Ring membership is an exact saved-graph observation,
+  not a measurement of compound instability, synthesis failure or biological performance.
+- Applying the original thresholds descriptively to the AI ratings fails: head assessability
+  **19/24 < 20**, no tail preference advantage, and **8** treatment flags exceed the maximum of
+  **2** and the baseline count. These AI counts cannot satisfy the human-review requirement.
+  The earlier automated rejection and all graph-distance negatives remain in the evidence.
+- Verified input, renderer and all drawing hashes; independently checked preference tallies;
+  repeated summarization reproduced all five output files byte-for-byte. The completed HTML
+  contains all 24 pairs and all unchanged SVGs, with no attestation inputs. The unchanged human
+  validator rejects the AI ratings with false attestations. Black/Ruff pass for two report scripts.
+  No model implementation, weights, generation, training, gates or historical results changed.
+  Global tests were not rerun; the existing failure baseline and unmet Phase 1 definition of done
+  remain. **Decision: no model promotion; improved realism is not demonstrated.**
+- Completed drawings, ratings, graph checks and reproducible summarizer are under
+  `results/phase1/ugi_topology_support_ai_review_v1/`; open `review.html` for the filled review.
+  Ratings SHA-256: `2c7750d59b80e6a83344f6acef3a9aff6eca61ae934d1cbd74144583a390a272`.
+  Summary SHA-256: `fd821bec9661a4bedd990667db3b292685a47a90fdcf7c3059c00008d49d4132`.
+  Reproduce with `UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python
+  results/phase1/ugi_topology_support_ai_review_v1/summarize.py`.
+
+## 2026-09-10 — Joint atom–bond dependence fails the frozen head-denoising advancement test
+
+- Implemented the user-authorized bounded qualification of coordinated atom/bond predictions.
+  All **260 TRAIN components** (185 heads, 75 aldehydes) retain their existing stratified,
+  component-disjoint development folds. The query hides both endpoint atom labels and their
+  bond label on a known complete untyped skeleton. No component is excluded by size or current
+  production admission; no sealed holdout is accessed. This auxiliary task does not qualify
+  native generation trajectories or measure whole-lipid realism.
+- Four CPU fits use matched encoder initialization, queries and **1,024 updates each**. Batches
+  balance measured/unmeasured head/aldehyde strata. Independent and joint readouts have different
+  capacities (**20,108 versus 36,224 total parameters**), explicitly disclosed. The complete
+  **8 × 8 × 4** token table has **238** dependence directions, including chemically invalid
+  states; this is not a complete pool of valid molecular completions. Joint tables are projected
+  onto marginals from the auxiliary independent model, not the deployed backbone.
+- The first execution finished both fold-0 fits but failed numerically at projection error
+  **1.40384204e-9**, above **1e-10**, after 10,000 IPF iterations. Its source, failure and
+  checkpoints remain preserved. A separately frozen numerical recovery accelerates the same
+  convex projection with Newton steps. Exact checkpoint, exposure, model-source and fitting-AST
+  checks permit reuse of the two completed fits. Only the remaining two train: total fitting
+  stays at **4,096 optimizer updates / 262,144 query exposures**. No floor, tolerance relaxation,
+  substituted distribution, additional seed or extra fitting epoch was introduced.
+- The completed **9,261-query** evaluation has the following equal-component mean joint NLL,
+  in nats per three-token query; lower is better:
+
+  | Role/source stratum | Independent | Raw joint | Joint with preserved marginals |
+  | --- | ---: | ---: | ---: |
+  | Measured head (15 components) | 1.120147 | 1.055094 | 1.165433 |
+  | Unmeasured head (170 components) | 1.512590 | 1.349447 | 1.644748 |
+  | Measured aldehyde (8 components) | 0.483786 | 0.401708 | 0.417388 |
+  | Unmeasured aldehyde (67 components) | 0.500236 | 0.386440 | 0.434672 |
+
+- Both head strata fail the prespecified requirement; both aldehyde strata pass. Joint argmax
+  accuracy improves in all four, but cannot override the NLL failures. Raw joint NLL improves
+  in all four but changes the marginals and was only a secondary diagnostic. The result does
+  not identify the cause of the head regression. Conditional entropy decreases; neither this
+  nor marginal preservation demonstrates preservation of molecular diversity or novelty.
+- Final maximum marginal error is **9.94447e-11**, and the dependence-destroyed control agrees
+  with the product law within **8.88179e-16**. Read-only verification reconstructs every source
+  graph, fold and query and reproduces all final logits exactly. Independent NumPy arithmetic
+  checks feasibility, convex optimality and NLL decisions: maximum additive log-ratio residual
+  **7.31859e-13**, maximum NLL difference **3.55271e-15**. The verifier shares model/query/source
+  helpers; it does not claim independent implementation of those helpers or optimizer replay.
+- Preserved six exact historical source identities in the existing content-addressed archive,
+  retaining all previous entries. This resolves the original failed-run source pin and retains
+  test/verifier bytes before a test import-format fix and historical-source authentication update.
+  Scientific runtime helpers must still match current pinned bytes. Both configs, checkpoints,
+  scientific results and the original successful verification receipt remain unchanged.
+- **Decision: `stop_dependency_probe`.** The frozen rule requires improvement in every stratum,
+  so this arm receives no role-specific rescue, further fitting, production integration or
+  molecular generation. No original-backbone, routing, potency or remote calls occurred.
+  Existing structural-validity, exact-Ugi, diversity, novelty and human-review gates remain
+  intact. Improved realism is not demonstrated; the full goal is unachieved.
+- Protocol, numerical-recovery record, ledgers, results and runnable read-only verification
+  command are in `results/phase1/ugi_joint_denoising_probe_v1/README.md`. Scientific result
+  SHA-256: `f5731129f910f786dfb39998b6d0313dc00c91f35f693085149108a111470bfe`.
+  Current verification receipt SHA-256:
+  `4709e2c27df4a1dcd1fc51d540055ebc85853ebc0430a2757f075dea1b5e561d`.
+- **Validation:** all 30 vendored assets verify; all **21 focused tests** and five-file
+  Black/Ruff checks pass. Full repository tests report **2,327 passed, 168 failed, 21 setup
+  errors and 92 skipped/xfail** across **2,608 cases**. The failed node/outcome-kind set exactly
+  matches the preserved preceding baseline, with no failures in the new probe. The full run
+  began before the final test-format and verification-maintenance edits; the final focused
+  checks and read-only replay ran afterward. No global success or single unchanged source
+  snapshot across every check is claimed. Global Phase 1 definition of done remains unmet.
+  Logs, report/source hashes and failure comparison are in this task's `validation.json`,
+  SHA-256 `273a03c410daf046369c0470a48c2f9d8f0a4a5586deaa22099ce3549a589fe7`.
+
+## 2026-09-11 — Redirect work from realism experiments to guidance readiness
+
+- The user paused the realism-improvement effort and requested a focus on guidance. Preserve
+  the failed realism experiments without claiming that improvement is impossible or that the
+  realism goal was achieved. Synthesis guidance is the stated working direction; potency remains
+  separately subject to its existing applicability and signal gates.
+- Reviewed the existing controller, synthesis-readiness contract and historical decision records.
+  The earlier graded-readiness audit reports **2 guided versus 3 post-hoc route-ready products**
+  and mixed utility in only **5/48** intermediate groups. Its summary survives, but four pinned
+  underlying artifacts are unavailable locally: the original run result, diagnostics, support
+  audit and terminal-panel readiness result. The semantic-proposal result authenticates. These
+  historical counts were not independently replayed this turn; exact missing paths and hashes
+  are preserved in the new audit.
+- Kept the newer component-dossier resolution standard separate from strict adjudicated route
+  closure. Neither proposal scores nor family projections can replace exact evidence. Frozen
+  availability is interpreted at its historical assessment time; no current-stock claim,
+  procurement activity or prospective work is introduced.
+- Defined the next bounded work in `docs/PHASE1_GUIDANCE_RESTART.md`: bind the unchanged current
+  comparison baseline and an explicit synthesis-value standard, qualify exact lambda-zero
+  behavior on that sampler, and freeze a passive completed-rollout test of within-program value
+  contrast before nonzero guidance. Later checkpoints are a hypothesis, not an established
+  improvement. Preserve matched budgets and validity, exact-Ugi, diversity and novelty gates.
+- **Validation:** all **11 existing synthetic controller tests pass**. The inventory script passes
+  Black/Ruff and records source/report hashes. No fitting, molecular generation, routing,
+  potency scoring or remote computation occurred. The full suite was not rerun for this inventory
+  and planning change; its preserved failure baseline and unmet Phase 1 definition of done remain.
+  Production guidance is not qualified or launched. Audit:
+  `results/phase1/ugi_guidance_restart_v1/result.json`, SHA-256
+  `2701edfe674dd31206f84a260e9900846cdd4b88ec850dcc2d84ddd081be79a8`.
+
+## 2026-09-11 — Current-sampler zero observation passes; route contrast blocked by evidence recovery
+
+- Ran the user-authorized bounded first step of the guidance restart, using the frozen shared
+  backbone at step 9143 and its original first batch of **128** programs. Control and passive
+  zero-strength observation use the same seed, 32 flow steps, float32 CPU computation and
+  unchanged decoder. Five identity-controller checkpoints at steps **8/16/24/28/31** used
+  explicitly synthetic unequal values, with no route calls or ancestry changes.
+- All full output rows, sampling summaries, terminal states and captured sampler RNG states
+  are identical, with **34 model forwards per run**. Historical comparison passes for its
+  declared saved fields. All **128/128** attempts are structurally valid, connected and exact-Ugi
+  reconstructable. The repeated batch has **100 unique products**, **119 whole-product-novel
+  attempts**, and mean pairwise ECFP4 distance **0.4121592150**. Novel amine/aldehyde/isocyanide
+  attempts are **99/92/0** against the complete TRAIN reference. These are preserved baseline
+  statistics, not a guidance benefit or independent replicate evidence.
+- The real cumulative-source loader fails authentication at the targeted-aldehyde audit-source
+  pin. **14** source-qualified builder inputs are unavailable and **27** loader paths are
+  missing. An expanded direct-input inventory across **12** available configs contains **61**
+  unavailable declarations (**55** distinct path/hash pairs), including missing historical
+  source identities and evidence ledgers. These inventories overlap and do not certify full
+  dependency closure. Exact paths, expected hashes and the recorded error are preserved.
+- **Decision:** preserve the successful passive zero-observation check, but block the passive
+  route-value contrast until source evidence authenticates. No candidate route assessment,
+  training, oracle, remote computation, candidate selection or gate modification occurred.
+  Trajectory resumption, nonzero ancestry changes, useful route-value contrast and matched
+  guidance benefit remain unqualified. Missing knowledge was not assigned zero utility, and
+  broader dossier-resolution labels were not substituted for strict exact closure.
+- Result: `results/phase1/ugi_current_sampler_guidance_preflight_v1/result.json`, SHA-256
+  `cbe9dac9b0a20a9a5b0dc21b0eb51d65991f510be924e6ce08d37ea1b8a53ad8`.
+  Independent read-only verification recomputes preservation from raw artifacts; its result
+  SHA-256 is `1f54c3abea635034fce26ff163a090ba4f0ebab0a4e42864e177e0f2b0410070`.
+  The direct-input recovery manifest under `verification_0001/` has SHA-256
+  `649e3855a5192eeb058677bb5849cf4df0fed6b0a9dc1025e5be65f9af284e44`.
+- **Scoped validation:** **31 focused tests pass**, all **30** vendored assets verify, and
+  all four new Python source/test files pass Black/Ruff. The broader guidance objective remains
+  incomplete. Full repository validation is recorded separately; no global pass is implied.
+- **Full validation:** `make verify && make test` reports **2,337 passed, 168 failed, 21 setup
+  errors and 92 skipped/xfail** across **2,618 cases**. The failing test-identity/outcome-kind
+  set exactly matches the preserved preceding run, with no failures in the ten new preflight
+  cases. The source and tests remained unchanged during this full run. Thread caps bound local
+  CPU use; no tests or gates were relaxed. Global Phase 1 definition of done remains unmet.
+  The complete logs, JUnit reports and comparison are retained in
+  `results/phase1/ugi_current_sampler_guidance_validation_v1/result.json`, SHA-256
+  `1b873ec1e3eee2d7f7f59aef793ad23c6dc7d77c2ee9a7dc6eecf8de3efb1e42`.
+
+## 2026-09-11 — Recover 19 exact guidance input identities; original result ledgers still unavailable
+
+- At the user's request, searched for the original unavailable guidance inputs without changing
+  expected hashes or evidence gates. Of **55** distinct unavailable identities in the preflight's
+  direct-input manifest, recovered **19**: **ten historical source files** and **nine original
+  PDFs**. Every restored identity authenticates against its unchanged SHA-256.
+- Recovered the ten source files from Git commit
+  `cc947f5af590084cfb3a1c1eaa0e358883f995af` and appended them to the existing content-addressed
+  archive. All previous archive entries are preserved; active Python modules were not replaced.
+  The nine PDFs came from original public publisher, author, patent and supplier repositories.
+  Their URLs and hashes are recorded in
+  `provenance/recovery/ugi_guidance_public_documents_v1.json`; files are restored under their
+  original source-cache paths. The rejected source-conflict patent remains rejected evidence.
+- The search included both local FORGE repositories and worktrees, reachable and unreachable Git
+  objects, candidate local files, the original GitHub repository's current tree, release and
+  Actions artifact listings, and input-directory metadata from **189** surviving FORGE Modal
+  jobs. Sixteen rate-limited metadata reads were rechecked sequentially; no matching evidence
+  folders were found. No paid compute job was launched. Some Downloads paths were inaccessible
+  under macOS filesystem permissions; no claim of exhaustive backup coverage is made.
+- **36 identities remain unavailable:** **28 result artifacts**, **seven cached source records**
+  and **one historical synthesis-value source revision**. No historical result ledger was
+  recovered. The direct-input inventory is not a complete transitive closure. All **27** missing
+  cumulative-loader paths remain missing.
+- The actual loader now clears the recovered code/literature inputs and fails at the original
+  `product_gap_ledger`,
+  `results/phase1/ugi3_l2_coverage_priority_audit_v1/product_gap_ledger.csv.gz`, expected SHA-256
+  `a8ddbce7284de247b17c7e6cd017f8f1d86a16eb11f567214322377e17f4ae48`.
+  The remaining exact identities are listed in
+  `results/phase1/ugi_guidance_artifact_recovery_v1/remaining_inputs.json`.
+- **Decision:** retain the verified recovery and require original missing evidence/result bytes
+  before resuming the passive route-value study. Do not replace historical availability with
+  current observations or synthesize plausible ledgers. No fitting, molecular generation,
+  candidate route assessment, biological scoring, candidate selection or evidence re-adjudication
+  occurred during recovery. Further details are in `docs/PHASE1_GUIDANCE_ARTIFACT_RECOVERY.md`.
+- **Validation:** all **30** vendored assets verify and **12** focused archive, source-provenance
+  and preflight tests pass. Full repository validation reports **2,337 passed, 168 failed,
+  21 setup errors and 92 skipped/xfail** across **2,618 cases**. The failing test-identity/outcome-kind
+  set exactly matches the preserved pre-recovery run, with no additions or removals. No tests or
+  gates were relaxed; global Phase 1 definition of done remains unmet. The final recovery report
+  at `results/phase1/ugi_guidance_artifact_recovery_v1/result.json` has SHA-256
+  `059703ab4afb201a830dc1956c83b31787b5ae45d401b8afd9bdcaea388dd76b`.
+
+## 2026-09-11 — Recover the missing priority ledger and downstream audits by exact replay
+
+- The user requested continued recovery. All eight frozen inputs of the coverage-priority audit
+  were still present and authenticated. Replaying that audit reproduced the original
+  `product_gap_ledger.csv.gz` SHA-256
+  `a8ddbce7284de247b17c7e6cd017f8f1d86a16eb11f567214322377e17f4ae48`, its exact original result,
+  and both companion priority ledgers. The previous conclusion that this ledger required an
+  external backup was too broad; deterministic replay provides authenticated recovery here.
+- Recovered **15 original result artifacts** across the priority, targeted-aldehyde, exact-overlay,
+  role-gap and first two head-terminal audits. Eleven are in the original 55-identity missing-input
+  inventory; four are additional dependencies. Recovered three additional source files from Git
+  commit `cc947f5af590084cfb3a1c1eaa0e358883f995af` and appended them to the existing archive.
+  **30/55** original identities now authenticate; **25 remain unavailable**.
+- The exact overlay required original code and a separately installed Python **3.14.2** / RDKit
+  **2026.03.4** environment. Current code's renamed assessment schema did not reproduce historical
+  bytes and was rejected. Original-code replay then differed only in 200 source-locator strings
+  containing the workstation root. Recovery serialization preserved that original namespace and
+  retained the full byte-identity and software-version checks. Head-result input paths required
+  the same historical namespace. Only complete outputs matching the pre-existing SHA-256 pins
+  were restored; no scientific values, original input pins or expected output hashes were changed.
+- The actual cumulative source loader advances to the third-wave supplier-page pin. Its missing
+  original HTML has SHA-256
+  `b8473f5749707bdb9adecca9a017132333d7aa14607ad3a7efc60006b0f9b518`. Today's downloaded page
+  differs and was rejected; a public web-archive lookup returned no matching 2026 captures.
+  Historical availability observations remain frozen. No generation, fitting, biological scoring,
+  paid remote job or guidance experiment occurred. Historical registry assessments were replayed.
+- **Decision:** retain exact recovered artifacts and preserve failed replay attempts. Guidance
+  remains blocked on the remaining historical evidence. The permanent recovery receipt is
+  `provenance/recovery/ugi_guidance_replayed_artifacts_v2.json`; scripts, candidate bytes, input
+  pins and the updated missing-input inventory are under
+  `results/phase1/ugi_guidance_artifact_recovery_v2/`.
+- **Validation and preservation:** all 18 recovered files are staged and match their original
+  hashes in both the working tree and Git index. The 15 result artifacts total **196,515 bytes**
+  and are explicitly tracked. All **166** successful-replay implementation-pin checks pass.
+  All **30** vendor assets verify; **13** focused tests pass. The full suite reports **2,338 passed,
+  167 failed, 21 setup errors and 92 skipped/xfail** across **2,618 cases**, with no added failing
+  test identities and one resolved exact-overlay artifact failure. Global Phase 1 definition of
+  done remains unmet. Final report SHA-256:
+  `dc43d8645b6412a86c59c83a75dbb02492d21abc5342250c47f9e7ba9d82007e`.
+
+## 2026-09-13 — Acquire separate guidance evidence and qualify one fresh terminal
+
+- Continued the user's authorized evidence recovery. Eighteen public-source retrievals yielded
+  nine HTTP-200 responses, seven preserved error responses and two transport failures. The
+  acquisition package archives 20 files with raw and compressed hashes; compressed size is
+  **566,183 bytes**. A further five bounded PubChem response candidates did not match the missing
+  historical identity hash. Historical direct-input recovery remains **30/55**, with **25**
+  unavailable identities. No existing expected hash was changed.
+- Fresh PubChem responses match all **five** needed terminal graphs, formulas and InChIKeys;
+  atom-order checks pass. One unrelated extra CID is explicitly excluded. Identity evidence is
+  separate from availability, and every original terminal snapshot in this subset has expired.
+- The direct Chem-Impex cyclohexylamine page supports five same-day SKUs. A separately versioned
+  record passes the existing exact-terminal supplier validator and retains the original seven-day
+  lifetime. Rehashed removal of stock labels, a wrong registry graph, an expired snapshot and a
+  future-dated snapshot are rejected. This qualifies **one fresh terminal only**; it does not
+  refresh prior cumulative route counts or qualify any new complete route.
+- Follow-up inspection of Fisher's public page scripts enabled eight read-only exact-SKU stock
+  lookups using reference ZIP **10001**, not a user address. The protected-alcohol **25 g** pack
+  returns one available unit, zero backordered units, an in-stock display and a 2026-09-13 shipping
+  date. Seven other replies return zero available quantity and backorders or supplier estimates,
+  including every checked listing for the other three materials. This positive observation still
+  requires separate source qualification; backorders are not admitted as current stock or treated
+  as chemical impossibility. All source flags, including supplier fulfillment, are retained in
+  `supplier_stock_summary.json`. The bounded lookup is not a survey of every supplier.
+- A new Thermo specification supports stearolic-acid identity but not stock. Its displayed print
+  date is preserved despite being one calendar day after the UTC acquisition date. Supplier
+  contact, cart changes and purchases were not performed.
+- Saved a new Oppolzer article transcription and the university's bibliographic record. The
+  university file requires login. Rendered and visually checked original ACS SI pages 4–6,
+  including exact compound 8d characterization and its reported 52% yield. The transcription
+  contains the general oxidation procedure but omits usable scheme images; primary-article
+  visual verification remains incomplete and the new C18 route remains unqualified.
+- **Decision:** retain the new source package and single-terminal qualification separately from
+  historical replay. The frozen cumulative loader still fails at the original third-wave supplier
+  hash. Guidance remains blocked; there is no model-improvement finding. Current stock evidence
+  for the three materials with only backorder/estimate replies and the full primary article remain
+  acquisition gaps; the positive protected-alcohol observation also needs source qualification.
+  The cumulative source/route/value checks remain pending. No training, molecular
+  generation, candidate selection or paid computation occurred.
+- The permanent acquisition receipt is
+  `provenance/recovery/ugi_guidance_evidence_acquisition_v3.json`. The later single-terminal
+  qualification is
+  `results/phase1/ugi_guidance_evidence_acquisition_v3/cyclohexylamine_terminal_qualification.json`.
+  Details and verification commands are in `docs/PHASE1_GUIDANCE_ARTIFACT_RECOVERY.md`.
+- **Validation:** all 30 vendor assets verify; acquisition/archive hashes and six terminal
+  qualification checks pass. The focused run reports **19 passed and three unchanged historical
+  third-wave failures**. All nine acquisition Python files pass Black/Ruff. The full run reports
+  **2,338 passed, 167 failed, 21 setup errors and 92 skipped/xfail** across **2,618 cases**; the
+  failing identity/outcome set is identical to the preceding recovery run. No tests or gates were
+  relaxed, and global Phase 1 definition of done remains unmet. Final closeout SHA-256:
+  `ad03b77e4964dc3b08440eb06a4c28eeed8e15e7ba666338419f4dd87b1e540c`.
+- Raw follow-up pages, supplier scripts and validation logs are preserved as nine additional
+  compressed artifacts; none of their original bytes were reformatted. The follow-up archive
+  receipt and restoration command verify all 29 source/log archives and refuse to overwrite
+  different existing files. Authored-file and staged whitespace checks pass.
+
+## 2026-09-13 — Qualify three additional fresh terminal observations for guidance evidence
+
+- Continued the authorized public-source acquisition. Twenty-four GET requests and four guest
+  availability lookups yielded **23 HTTP-200 and five HTTP-403 responses**. Preserved all responses
+  with source dates, request records and hashes. No accounts, carts or supplier messages were used.
+- Fresh BLD observations qualify exact **heptadecanal BD305903** and **1-bromotridecane BD57579**
+  identities with positive US stock flags and priced packs. The public display script establishes
+  flag semantics; no bottle count is inferred. Duplicate stock rows are collapsed only when
+  identical, and conflicting duplicates fail. A 100 g bromotridecane row without a positive
+  public price is excluded from the admitted pack list.
+- The prior Fisher **AC295060250** protected-alcohol observation now qualifies separately. Its
+  complete supplier InChIKey is reproduced with FixedH and round-trips to the exact frozen graph;
+  the alternate standard key and inspected supplier drawing are retained. The stock response is
+  a supplier fulfillment quote, not Fisher warehouse stock. The original **30-day** lifetime is
+  retained for these three observations; no old evidence is refreshed in place.
+- Together with the earlier seven-day cyclohexylamine record, **four of the five identified
+  target materials** have qualified current observations at this assessment time. **Zero**
+  complete routes are reassessed. Historical recovery remains **30/55**, with **25** unavailable
+  identities, and the fresh observations do not repair the frozen cumulative-loader pins.
+- Exact stearolic acid still lacks qualifying current US stock evidence in the checked sources:
+  BLD flags are zero and the additional Fisher 5 g pack is backordered. A hidden stock label in
+  a UK listing is not admitted. These bounded observations do not imply universal unavailability.
+- Retrieved the primary Organic Syntheses stearolic-acid paper (DOI **10.15227/orgsyn.037.0077**)
+  and visually inspected all four PDF pages. This is a separate computational route lead that
+  still requires registry and terminal qualification; it does not replace the frozen C18 route.
+  OpenAlex and Semantic Scholar do not supply an open original Oppolzer main article. Its
+  procedure/scheme visual authentication remains incomplete despite the available SI and
+  transcription. No route budget or evidence tier was changed.
+- **Decision:** preserve the new observations and negative acquisition results, then require
+  remaining source evidence and separate cumulative source/route/value qualification before
+  guidance. There is no model-improvement finding. Production modules, old configs, gates,
+  model weights and sampling policy were unchanged; no training, generation, guidance run,
+  candidate selection, purchase or paid computation occurred in this pass.
+- **Validation:** all **17** additional terminal checks and **eight** focused provenance/preflight
+  tests pass; all **30** vendor assets verify. Four authored Python files pass Black/Ruff and the
+  JavaScript helper passes syntax checking. Exact qualification and summary replay pass.
+  The **29** raw source/log assets are preserved in **1,922,000 compressed bytes** with exact
+  restoration checks. The prior full suite was not rerun for this acquisition-only follow-up:
+  **2,338 passed, 167 failed, 21 setup errors and 92 skipped/xfail** remains the latest full result.
+  Global Phase 1 definition of done remains unmet.
+- Current report: `results/phase1/ugi_guidance_evidence_acquisition_v4/result.json`, SHA-256
+  `8fdccd1d57ff8341fdf8a5206b140ee8352cd99fe55e7022d2ec75e744bf806a`. The source archive receipt is
+  `provenance/recovery/ugi_guidance_evidence_acquisition_v4.json`; commands and limitations are in
+  `docs/PHASE1_GUIDANCE_ARTIFACT_RECOVERY.md`.
+
+## 2026-09-13 — Preserve further supplier leads; article access remains unresolved
+
+- Followed the user's renewed acquisition request with **11** public requests: **eight HTTP-200**,
+  one HTTP-403, one HTTP-412 and one transport failure. All responses and failures are retained.
+- Aaron Chemicals AR003V4D lists exact stearolic acid in **250 mg and 1 g packs at 80% purity**
+  with global-stock labels and positive prices. Exact graph, full InChIKey and formula match the
+  frozen identity; the supplier drawing was visually checked. Older indexed 98% packs are not
+  current evidence. Item-specific US fulfillment is not established by the fetched product and
+  supporting pages, so the observation remains **abstained**. No universal purity threshold was
+  introduced and the observed grade was not relabeled as the historical 99.90% material.
+- BenchChem requires a quote and lacks item-specific purity/US fulfillment evidence. Apollo has
+  no populated pack rows. ChemScene, TargetMol and Sigma/Combi-Blocks access outcomes do not
+  establish stock. **Zero** additional terminals or complete routes are admitted; the qualified
+  target-material total remains **four of five**. No claim of universal unavailability follows.
+- The author's university publication page returns to the same restricted repository record.
+  The publisher's public Figshare record contains only the already recovered SI. The original
+  main article (DOI **10.1021/jo000463n**) still needs an accessible licensed PDF for the required
+  procedure/scheme visual inspection. No author/supplier contact, purchase, credential use or
+  access-control bypass occurred.
+- **Validation:** four descriptive source checks pass; exact archive restoration and offline
+  replay pass; the authored script passes Black/Ruff. Repository-wide tests were not rerun for
+  this acquisition-only pass. The prior failing full-suite result remains current and global
+  Phase 1 definition of done remains unmet. Old sources, pins and gates are unchanged; no
+  training, generation, route assessment or guidance experiment occurred.
+- Report: `results/phase1/ugi_guidance_evidence_acquisition_v5/result.json`, SHA-256
+  `6bcd2f0cd3c540878c59838eda50174068057fdf842cc722c96cb68706494591`. Exact sources are stored as
+  compressed assets under `provenance/recovery/ugi_guidance_evidence_v5/assets/`.
+
+
+## 2026-09-13 — Supplied primary article closes the exact C18 oxidation evidence gap
+
+- Preserved the user-provided Oppolzer main article, DOI **10.1021/jo000463n**, at
+  `results/phase1/ugi_guidance_primary_article_audit_v1/jo000463n.pdf`, SHA-256
+  `b510d36a265e2c0edcf46ad707c79e82498d0a27d8497168fdc99c4f039262df`. Bibliography, DOI,
+  scheme, procedure and compound labels were visually authenticated against all five article
+  pages and the original hash-pinned SI pages 2–6. The library download watermark is preserved;
+  no identity with a different historical article file is asserted.
+- Scheme 2 (journal page 4766), Table 1 row d (4767), the complete general oxidation procedure
+  (4769), and SI entries **7d** (page 3) and **8d** (page 5) support the exact C18 alcohol-to-aldehyde
+  conversion. Both Table 1 and the SI report **52% isolated yield**. Conditions agree with the
+  frozen config. The general **10 mmol** scale is not assigned to the compound-specific **0.72 g**
+  isolation; the specific batch scale remains unreported.
+- The frozen registry supplies the transform and roles. One eligible site yields one exact target;
+  **19 heavy atoms** retain their identities, the carbon skeleton and terminal alkyne are preserved,
+  and only the C–O bond order changes. Formula accounting is **C18H34O → C18H32O**, with the expected
+  two-hydrogen substrate loss; full oxidant/byproduct mass balance is not asserted. All **100** seeded
+  atom-order permutations preserve forward identity and repository-adjudicator output. Wrong
+  substrate and target identities are rejected before transform application.
+- **Decision:** admit one exact, source-executed and characterized **L2 oxidation step**. The earlier
+  article access/procedure/scheme gap is closed. No reaction-family scope, complete C18 route,
+  current L3 availability, synthesis-success probability, or guidance readiness is inferred. The
+  remaining terminal evidence and combined source/route/value qualification remain outstanding.
+  Historical pins and gates are unchanged; no training, molecular generation, candidate selection,
+  supplier contact, purchase or remote computation occurred.
+- **Validation:** **17** focused repository tests and **five** new source-defect checks pass; all
+  **30** vendor assets verify, Black/Ruff pass, and read-only audit replay is exact. A development
+  pin-wrapper failure and its original source are retained; the corrected caller passes only the
+  path and hash to the strict pin verifier while retaining byte counts in the report. Full tests
+  were not rerun for this bounded evidence follow-up; their prior failures and unmet global Phase 1
+  definition of done remain explicitly preserved.
+- Report SHA-256: `77a759c2d66166ae72f9bfe7d32a779a06d251ff46d1cbcd5c5cdc7865eea98a`.
+  Validation SHA-256: `b2987c97c057d64398a8c6dac320ebc5d9354de423a6f85b9e5713b9a30001da`.
+  Review, commands and remaining requirements: `docs/PHASE1_GUIDANCE_ARTIFACT_RECOVERY.md`.
+
+## 2026-09-13 — Fifth guidance target material gains fresh terminal evidence
+
+- Continued the authorized public-source search for exact stearolic acid. PubChem CID 68167's
+  deposited supplier links supplied discovery pointers; database membership was not treated as
+  inventory. Thirty-seven public GET attempts yielded 23 HTTP-200 responses, six HTTP-403 responses,
+  two HTTP-501 responses and six transport failures. Failed attempts are preserved.
+- Accel Scientific **EC003WL5**, CAS **506-24-1**, displays **250 mg, 1 g and 5 g** packs at **98%**
+  purity as **Global Stock**. Displayed SMILES, formula, derived full InChIKey and visually inspected
+  drawing match the frozen exact acid. The supplier's shipping page explicitly offers the United
+  States as a destination. Admit a fresh **exact terminal observation** of supplier-reported global
+  stock offered for US shipment. This does not establish US warehouse inventory, physical stock
+  quantities, a confirmed delivery date or experimental synthesis success.
+- Preserve the terms' request for availability confirmation and inconsistent website/jurisdiction
+  wording. These terms are not the stock or identity evidence. No inquiry was sent. The observed
+  **98%** material is not represented as the historical **99.90%** MCE grade, and no new minimum
+  purity rule is introduced. The unchanged C18 contract accepts the exact identity, recorded purity,
+  explicit stock observation and frozen 30-day lifetime. The snapshot expires at
+  **2026-10-13T21:09:01.311431Z**; replay does not refresh it.
+- All **five identified target material identities** now have fresh qualified terminal observations
+  at the recorded assessment. The previous four observations retain their own expiry dates,
+  including the cyclohexylamine record's September 20 expiry. Complete routes reassessed: **zero**.
+  No missing historical artifact was restored or replaced. The read-only historical loader still
+  fails with `third_wave_head_terminals input pin mismatch: supplier_page`.
+- Preserve negative and ambiguous supplier evidence: AstaTech's quantity-one public stock endpoint
+  returns **Back order** for 1 g and 5 g; Biorbyt's four variants have zero stock/BackOrder offers;
+  Alfa Chemistry's displayed formula and mass conflict with the target. Neither stock-looking
+  metadata, prices, generic dispatch estimates nor transport failures override these findings.
+- **Decision:** use the new evidence only in a separately versioned combined source qualification.
+  Exact-route outputs, structured synthesis values, nontrivial dossier closure and zero-guidance
+  equivalence still need qualification before any nonzero guidance. No model-realism gain follows
+  from this source acquisition. Gates, historical pins, model weights and sampling policies remain
+  unchanged; no purchases, supplier messages, candidate selection, generation, training or paid jobs.
+- **Focused validation:** 20 tests pass, including 12 new terminal checks for wrong graphs/keys,
+  missing stock/purity, backorders, absent US shipping, atom-order invariance, expiry and observation
+  substitution. A rejected development serializer used `+00:00` where the unchanged contract
+  requires `Z`; its original code, observation and failing report are preserved. The corrected
+  serializer passes the existing contract, Black/Ruff and exact offline source replay.
+- Acquisition report SHA-256:
+  `3dc6468dee3401c1410a341388327d12d93d395d1e2e2b29048f3639f2188176`.
+  Terminal observation SHA-256:
+  `d9b00e385153a2dc852fa910f90a0ba7584ad9574f6df9c8603cdb97da97c146`.
+  Assets, review, terminal record and read-only source check are under
+  `results/phase1/ugi_guidance_evidence_acquisition_v6/`; raw HTML/drawings have 24 exact compressed
+  archives. Commands and limits are in `docs/PHASE1_GUIDANCE_ARTIFACT_RECOVERY.md`.
+- **Final validation:** all 30 vendor assets verify. Full `make test`: **2,338 passed, 167 failed,
+  21 setup errors, 92 skipped/xfail**, matching the prior full-run totals; the global Phase 1
+  definition of done remains unmet. No claim that every remaining failure was diagnosed. All 20
+  focused tests pass, as do touched-source Black/Ruff and staged whitespace checks. Full and focused
+  logs/JUnit reports are preserved as exact compressed bytes; validation report SHA-256 is
+  `14c76e1c12326193e2948c342fc71f12d9a1ba6e5fafa4d2dd575c97b42a2be8`.

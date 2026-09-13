@@ -1,0 +1,44 @@
+{
+  "schema_version": "forge.ugi_realism_diagnostic_suite_config.v1",
+  "scientific_question": "Attribute structural realism gaps to empirical support, frozen-checkpoint predictions, and evaluator resolution without new generation, training, or gate changes.",
+  "stages": {
+    "support": {
+      "config": {
+        "path": "configs/multireaction/ugi_realism_support_audit_v1.json",
+        "sha256": "7bda8f7e60ecf059c054cd9a47c75b781fe9bd7a6e9809f7b6dc98790a005d7b"
+      },
+      "collected_result": {
+        "path": "results/phase1/ugi_realism_support_audit_v1/result.json",
+        "sha256": "4cd49217c0ebfc73b7adefe5f68d7463bc91659a9fdfd7ba1b4dfe25973a35b3"
+      }
+    },
+    "model": {
+      "config": {
+        "path": "configs/multireaction/ugi_realism_model_attribution_v1.json",
+        "sha256": "fb7e636a2322b74a7832155faeda8280cf391e37aaf4d4b75dd78b2abfb25bde"
+      },
+      "collected_result": {
+        "path": "results/phase1/ugi_realism_model_attribution_v2/result.json",
+        "sha256": "986a5eaa5c848181e8407d30c5c8569acddc3d27bc5c80a8477a8687a1cfddc4"
+      }
+    },
+    "evaluator": {
+      "config": {
+        "path": "configs/multireaction/ugi_realism_evaluator_audit_v1.json",
+        "sha256": "30368261bd653edb63662b1e7651a00f55a078766164412b15970d723af5674c"
+      },
+      "collected_result": {
+        "path": "results/phase1/ugi_realism_evaluator_audit_v2/result.json",
+        "sha256": "0df4c2ed09918fa69eb6d2b93e2d0925a285ad069a9731f95359f2236fd9118f"
+      }
+    }
+  },
+  "policy": {
+    "training_calls": 0,
+    "generation_calls": 0,
+    "remote_compute": false,
+    "heldout_structure_access": false,
+    "candidate_selection": false,
+    "promotion_gate_changes": false
+  }
+}

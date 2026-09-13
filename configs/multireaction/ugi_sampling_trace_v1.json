@@ -1,0 +1,60 @@
+{
+  "schema_version": "forge.ugi_sampling_trace_config.v1",
+  "scientific_question": "Attribute actual topology and terminal chemistry choices in an unchanged frozen-checkpoint baseline and failed realism treatment, preserving all output and RNG states, before choosing a mechanism-specific realism intervention.",
+  "inputs": {
+    "comparison_config": {
+      "path": "configs/multireaction/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1.json",
+      "sha256": "16da5e2a80cd9bdc1385b1a10d5b888f78d126a005fa930dd07bf64d7dd42763"
+    },
+    "historical_baseline_sampling": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/sampling/result.json",
+      "sha256": "bf30289c02198c855aa275c77483f59526dc98e66b54c5f28fde48318f335282"
+    },
+    "historical_treatment_sampling": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/all_role_semantic/sampling/result.json",
+      "sha256": "eb500f916197e48aff7729c36a16bcdb999437219eee9833778be112759c4216"
+    },
+    "improvement_protocol": {
+      "path": "docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md",
+      "sha256": "d97d8a608c31545139dc6e03748a341c24114594224b12bff6ba5d1f0a52962c"
+    }
+  },
+  "checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "runtime": {
+    "program_count": 128,
+    "cpu_threads": 2,
+    "selected_attempts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "max_events": 20000,
+    "max_candidates": 50000
+  },
+  "policy": {
+    "training_calls": 0,
+    "route_or_oracle_calls": 0,
+    "heldout_or_calibration_structure_access": false,
+    "candidate_selection": false,
+    "repairs_or_retries": false,
+    "promotion_gate_changes": false
+  }
+}

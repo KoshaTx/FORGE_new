@@ -1,0 +1,193 @@
+{
+  "artifacts": {
+    "product_closure_impact_ledger.csv.gz": {
+      "bytes": 16338,
+      "sha256": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e"
+    },
+    "route_verification_ledger.csv.gz": {
+      "bytes": 768,
+      "sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+    }
+  },
+  "audit_policy": {
+    "diagnostic_only": true,
+    "expected_baseline_complete_products": 3,
+    "expected_direct_procurement_records": 2,
+    "expected_exact_route_records": 3,
+    "expected_generated_products": 1007,
+    "expected_prioritized_targets": 5,
+    "expected_unresolved_predeclared_targets": 1,
+    "maximum_forward_products_considered": 8,
+    "permit_analogue_evidence_as_closure": false,
+    "permit_family_projection_as_closure": false,
+    "required_forward_product_count": 1,
+    "required_route_disposition": "admit_exact",
+    "required_unresolved_disposition": "abstain"
+  },
+  "claims_boundary": {
+    "admission_policy": "Only exact-identity current procurement or an exact-substrate, isolated-product literature procedure with product-specific analytical evidence may close a component.",
+    "family_precedent_policy": "Primary-alcohol oxidation precedent for a different chain length remains retrieval or ranking evidence and does not close an exact target.",
+    "outcome_semantics": "A complete component dossier means either the exact aldehyde is a current accepted terminal or its exact oxidation route terminates at an accepted current alcohol. It is not a calibrated probability of prospective Ugi synthesis success.",
+    "scope": "This bounded evidence pack adjudicates four exact aldehydes prioritized before source retrieval. It does not qualify primary-alcohol oxidation as a general substrate-scope template."
+  },
+  "generated_utc": "2026-08-02T03:09:40Z",
+  "inputs": {
+    "audit_source": {
+      "path": "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
+      "sha256": "67883f8135b98f9b363a9d8a66640e2fb7c78435fdff2a6c262824a16428da5a"
+    },
+    "busta_source": {
+      "path": "data/source_cache/phase1_targeted_l2/BUSTA_2016/BustaEtAl_2016_Phytochem.pdf",
+      "sha256": "398d4f2ec3db0b37c077f55b5655b1b6afe7da512d32c6fa0ef2d2b720e6e54f"
+    },
+    "cli_source": {
+      "path": "scripts/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
+      "sha256": "5ced6837da97f1a32644e9e5e0d9fa7ad6089b63530b821c9b167358dcab34ba"
+    },
+    "evidence_pack": {
+      "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
+      "sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb"
+    },
+    "kovalerchik_source": {
+      "path": "data/source_cache/phase1_targeted_l2/KOVALERCHIK_2022/marinedrugs-20-00265-v2.pdf",
+      "sha256": "ec598e1a6d36459aead7fa80c5e362bd0972ac7f706eb789cb2a630fd5d78b2c"
+    },
+    "mo_source": {
+      "path": "data/source_cache/phase1_targeted_l2/TYPHONOSIDES/supporting_information.pdf",
+      "sha256": "7555da9839da7ab3019cc3aba27d0ab969cb80d92223839f624ee2c00b46b0a3"
+    },
+    "oxidation_variant": {
+      "path": "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
+      "sha256": "e726e6a2ef194200cdf4afc6e6f6313a74d8dea8803be5a0dfe920466c4e725b"
+    },
+    "priority_result": {
+      "path": "results/phase1/ugi3_l2_coverage_priority_audit_v1/result.json",
+      "sha256": "01e9cbb2f52dfb4ebe5b97221183fb1bc0a309d7ed52e4ff4a4f39d93def86ea"
+    },
+    "product_gap_ledger": {
+      "path": "results/phase1/ugi3_l2_coverage_priority_audit_v1/product_gap_ledger.csv.gz",
+      "sha256": "a8ddbce7284de247b17c7e6cd017f8f1d86a16eb11f567214322377e17f4ae48"
+    },
+    "qualified_forward_source": {
+      "path": "src/forge/route/qualified_forward.py",
+      "sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    },
+    "route_readiness_ledger": {
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "route_readiness_result": {
+      "path": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    },
+    "terminal_procurement": {
+      "path": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+      "sha256": "84577b3ce3aa450eb54bd90f8a1c67cc43c66d40e87425d4385912c3580a2960"
+    },
+    "upstream_registry": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    }
+  },
+  "safe_claim": "Four predeclared high-impact aldehydes gained exact route or current procurement closure under a fail-closed evidence policy; one target remained an abstention. This diagnostic increases complete dossiers in the frozen generated audit but does not qualify a general oxidation template or authorize production synthesis guidance.",
+  "schema_version": "phase1_ugi3_targeted_aldehyde_evidence_audit.v1",
+  "summary": {
+    "abstained_targets": 1,
+    "admitted_exact_targets": 4,
+    "current_direct_procurement_terminals": 2,
+    "exact_routes_with_current_l3_closure": 3,
+    "exact_source_routes_forward_verified": 3,
+    "generated_products": 1007,
+    "generated_products_complete_after": 24,
+    "generated_products_complete_before": 3,
+    "newly_complete_generated_products": 21,
+    "newly_completed_products_by_target": {
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCC=O": 5,
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O": 6,
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O": 6,
+      "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCCC=O": 4
+    },
+    "prioritized_exact_targets": 5,
+    "registry_route_complete_components_after": 45,
+    "registry_route_complete_components_before": 41,
+    "remaining_gap_count_distribution": {
+      "0": 24,
+      "1": 202,
+      "2": 423,
+      "3": 358
+    }
+  },
+  "target_adjudications": [
+    {
+      "all_exact_routes_forward_verified": false,
+      "canonical_smiles": "CCCCCCCCCCC=O",
+      "component_id": "ugi-component-10647807421b4e2c2c47",
+      "direct_procurement_complete": true,
+      "disposition": "admit_exact",
+      "exact_route_count": 0,
+      "newly_completed_products_attributed": 5,
+      "primary_closure_mode": "direct_procurement",
+      "readiness_category_before": "outside_route_support",
+      "role": "oxoester_aldehyde_body_tail",
+      "route_complete_after": true,
+      "route_complete_before": false
+    },
+    {
+      "all_exact_routes_forward_verified": true,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCC=O",
+      "component_id": "ugi-component-277115bc675440f61724",
+      "direct_procurement_complete": true,
+      "disposition": "admit_exact",
+      "exact_route_count": 1,
+      "newly_completed_products_attributed": 6,
+      "primary_closure_mode": "direct_procurement",
+      "readiness_category_before": "family_projected_only",
+      "role": "oxoester_aldehyde_body_tail",
+      "route_complete_after": true,
+      "route_complete_before": false
+    },
+    {
+      "all_exact_routes_forward_verified": true,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCCC=O",
+      "component_id": "ugi-component-6895b1b938ea2c6e1f6f",
+      "direct_procurement_complete": false,
+      "disposition": "admit_exact",
+      "exact_route_count": 1,
+      "newly_completed_products_attributed": 6,
+      "primary_closure_mode": "exact_l2_to_current_l3",
+      "readiness_category_before": "family_projected_only",
+      "role": "oxoester_aldehyde_body_tail",
+      "route_complete_after": true,
+      "route_complete_before": false
+    },
+    {
+      "all_exact_routes_forward_verified": false,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCC=O",
+      "component_id": "ugi-component-d9e577f23ff7cd2696c1",
+      "direct_procurement_complete": false,
+      "disposition": "abstain",
+      "exact_route_count": 0,
+      "newly_completed_products_attributed": 0,
+      "primary_closure_mode": "abstain_missing_exact_evidence",
+      "readiness_category_before": "outside_route_support",
+      "role": "oxoester_aldehyde_body_tail",
+      "route_complete_after": false,
+      "route_complete_before": false
+    },
+    {
+      "all_exact_routes_forward_verified": true,
+      "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCC=O",
+      "component_id": "ugi-component-7442c18fff083c4e8641",
+      "direct_procurement_complete": false,
+      "disposition": "admit_exact",
+      "exact_route_count": 1,
+      "newly_completed_products_attributed": 4,
+      "primary_closure_mode": "exact_l2_to_current_l3",
+      "readiness_category_before": "family_projected_only",
+      "role": "oxoester_aldehyde_body_tail",
+      "route_complete_after": true,
+      "route_complete_before": false
+    }
+  ],
+  "task": "Validate the bounded exact-evidence expansion and quantify deterministic component and product-dossier closure"
+}

@@ -1,0 +1,84 @@
+{
+  "artifact": {
+    "bytes": 1633,
+    "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/cyclohexylamine_terminal_evidence_20260913.json",
+    "sha256": "d62e38c996dbb7ce76d23869bfc04d975fb519f3f222add96e6f640ac9a177ea"
+  },
+  "availability_lifetime_days": 7,
+  "checks": {
+    "existing_supplier_validator_passed": true,
+    "expired_snapshot_rejected": true,
+    "future_snapshot_rejected": true,
+    "rehashed_missing_stock_labels_rejected": true,
+    "stock_skus_checked_individually": true,
+    "wrong_registry_graph_rejected": true
+  },
+  "component_id": "ugi-component-642c1e8985c43a1287ec",
+  "component_key": "amine_head\tNC1CCCCC1",
+  "created_at_utc": "2026-09-13T17:08:15.122487+00:00",
+  "gates_relaxed": false,
+  "generation_calls": 0,
+  "guidance_run_ready": false,
+  "historical_pins_changed": false,
+  "inputs": {
+    "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json": {
+      "bytes": 2720,
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+      "sha256": "5951ae7d0fca7896e611a48da68450aab63dd64e2fd853ff2e458d9b0ccfcabe"
+    },
+    "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json": {
+      "bytes": 1631,
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
+      "sha256": "ec16ed0ec407354cae3efa58b68db935fa9c74aa4fef7988fd5871964896c6cb"
+    },
+    "data/source_cache/ugi_guidance_evidence_20260913/batch_01/chemimpex_03599.html": {
+      "bytes": 743197,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_01/chemimpex_03599.html",
+      "sha256": "cbaab14d62262b51484ef708b78ecefbdd55042950014d14e47d3a6cdb9a7e56"
+    },
+    "data/source_cache/ugi_guidance_evidence_20260913/batch_01/receipt.json": {
+      "bytes": 6405,
+      "path": "data/source_cache/ugi_guidance_evidence_20260913/batch_01/receipt.json",
+      "sha256": "e6b59ad3689da4a8ce5fc288310700976001c4700185d79bea6b042618a5a26b"
+    },
+    "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py": {
+      "bytes": 16602,
+      "path": "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py",
+      "sha256": "67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf"
+    },
+    "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py": {
+      "bytes": 14577,
+      "path": "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py",
+      "sha256": "0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40"
+    },
+    "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz": {
+      "bytes": 14189,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "results/phase1/ugi_guidance_evidence_acquisition_v3/qualify_cyclohexylamine.py": {
+      "bytes": 7735,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/qualify_cyclohexylamine.py",
+      "sha256": "a84bf7aacf776e4847f6589e9e59702b53b8b44604e052a168efe249f99b164f"
+    },
+    "results/phase1/ugi_guidance_evidence_acquisition_v3/result.json": {
+      "bytes": 69847,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v3/result.json",
+      "sha256": "55a420986a6912d6cdc57c116ffe1522018c882b2486e82a6448ea9aabe7e694"
+    }
+  },
+  "newly_qualified_routes": 0,
+  "purchase_or_contact_actions": 0,
+  "qualified_terminal_count": 1,
+  "schema_version": "forge.exact_terminal_evidence_qualification.v1",
+  "scope": "Single supplier terminal only; earlier cumulative product counts are not reassessed.",
+  "snapshot": {
+    "accessed_utc": "2026-09-13T16:55:56.195949+00:00",
+    "expires_utc": "2026-09-20T16:55:56.195949+00:00",
+    "interpretation": "Exact supplier availability only; no Ugi success or cumulative route closure claim.",
+    "region": "US",
+    "retrieval_channel": "direct_primary_supplier_product_page_archive"
+  },
+  "status": "one_fresh_exact_terminal_qualified",
+  "supersedes_acquisition_review_for": "chemimpex_cyclohexylamine_only"
+}

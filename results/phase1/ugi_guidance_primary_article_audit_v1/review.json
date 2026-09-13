@@ -1,0 +1,213 @@
+{
+  "schema_version": "forge.primary_article_chemistry_review.v1",
+  "review_id": "oppolzer_2001_exact_c18_oxidation_primary_v1",
+  "review_method": "automated_assistant_visual_source_adjudication",
+  "independent_human_chemist_review_claimed": false,
+  "bibliography": {
+    "doi": "10.1021/jo000463n",
+    "authors": [
+      "Wolfgang Oppolzer",
+      "Rumen N. Radinov",
+      "Emad El-Sayed"
+    ],
+    "title": "Catalytic Asymmetric Synthesis of Macrocyclic (E)-Allylic Alcohols from omega-Alkynals via Intramolecular 1-Alkenylzinc/Aldehyde Additions",
+    "journal": "Journal of Organic Chemistry",
+    "year": 2001,
+    "volume": 66,
+    "pages": "4766-4770",
+    "identity_checks": [
+      "Title, authors, volume and journal pagination visually match the supplied article.",
+      "DOI 10.1021/jo000463n appears on journal page 4766; JO000463N appears on page 4770.",
+      "Compound labels, Table 1 yield and generic oxidation procedure agree with the original hash-authenticated supplement."
+    ],
+    "byte_identity_scope": "User-provided publisher-formatted PDF with a library download watermark; not asserted byte-identical to a historical article file."
+  },
+  "source_assets": {
+    "jo000463n.pdf": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/jo000463n.pdf",
+      "sha256": "b510d36a265e2c0edcf46ad707c79e82498d0a27d8497168fdc99c4f039262df"
+    },
+    "jo000463n_si_001.pdf": {
+      "path": "data/source_cache/phase1_ugi3_exact_alkynyl_aldehydes/oppolzer_jo000463n_si_001.pdf",
+      "sha256": "1a2307e79ce92c5f41dac9b9247bf61d78ec6cae7499bb3ff7f6754c5227889b"
+    }
+  },
+  "source_reviews": {
+    "primary": {
+      "source_asset": {
+        "filename": "jo000463n.pdf",
+        "expected_sha256": "b510d36a265e2c0edcf46ad707c79e82498d0a27d8497168fdc99c4f039262df",
+        "chemistry_pages": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "review_status": "visually_reviewed"
+      }
+    },
+    "supplement": {
+      "source_asset": {
+        "filename": "jo000463n_si_001.pdf",
+        "expected_sha256": "1a2307e79ce92c5f41dac9b9247bf61d78ec6cae7499bb3ff7f6754c5227889b",
+        "chemistry_pages": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "review_status": "visually_reviewed"
+      },
+      "l2_route_families": [
+        {
+          "route_family_id": "ugi3_exact_c18_primary_alcohol_oxidation_v1",
+          "source_locator": "Article PDF p1 / journal 4766 Scheme 2 Method A; PDF p2 / 4767 Table 1 row d (z=13, C18, 8d 52% A); PDF p4 / 4769 General Procedure for the Parikh-Doering Oxidation of 7; SI PDF p3 compound 7d and p5 compound 8d.",
+          "target": {
+            "name": "17-octadecynal (8d)",
+            "smiles": "C#CCCCCCCCCCCCCCCCC=O"
+          },
+          "steps": [
+            {
+              "reactant_smiles": "C#CCCCCCCCCCCCCCCCCO",
+              "product_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+              "source_reactant_label": "7d",
+              "source_product_label": "8d",
+              "conditions": {
+                "substrate_scale": "omega-alkynol 7, 10 mmol",
+                "reagents": "triethylamine, 14 mL, 100.44 mmol; sulfur trioxide-pyridine complex, 5.6 g, 35.18 mmol",
+                "solvents": "dry dichloromethane, 9 mL; DMSO, 35 mL",
+                "atmosphere": "dry argon",
+                "operation": "Room temperature for 2-5 h",
+                "workup": "Water quench, ether extraction, 0.2 M HCl/water/brine washes, MgSO4 drying and SiO2 chromatography with n-pentane/ether 10:1"
+              },
+              "isolated_yield_percent": 52
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "reported_reaction": {
+    "level": "L2",
+    "scope": "one_exact_primary_alcohol_to_aldehyde_step",
+    "reactant": {
+      "source_name": "17-Octadecyn-1-ol",
+      "source_label": "7d",
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCCCO",
+      "inchi_key": "DECQPLALTVMKDO-UHFFFAOYSA-N",
+      "role": "exact_c18_terminal_alkynol",
+      "locator": "SI PDF p3"
+    },
+    "product": {
+      "source_name": "17-Octadecynal",
+      "source_label": "8d",
+      "canonical_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+      "inchi_key": "YOMSVUMSXJCTEL-UHFFFAOYSA-N",
+      "role": "oxoester_aldehyde_body_tail",
+      "locator": "SI PDF p5"
+    },
+    "site_assignment": "The single primary alcohol at carbon 1 becomes the carbon-1 aldehyde. The terminal alkyne at carbons 17-18 is retained; no Ugi assembly is performed here.",
+    "conditions": {
+      "substrate_scale": "omega-alkynol 7, 10 mmol",
+      "reagents": "triethylamine, 14 mL, 100.44 mmol; sulfur trioxide-pyridine complex, 5.6 g, 35.18 mmol",
+      "solvents": "dry dichloromethane, 9 mL; DMSO, 35 mL",
+      "atmosphere": "dry argon",
+      "operation": "Room temperature for 2-5 h",
+      "workup": "Water quench, ether extraction, 0.2 M HCl/water/brine washes, MgSO4 drying and SiO2 chromatography with n-pentane/ether 10:1"
+    },
+    "conditions_locator": "Article PDF p4 / journal 4769 right column, complete general oxidation procedure.",
+    "conditions_scope": "General procedure for series 7, not a separately stated batch scale for compound 7d.",
+    "catalyst": "No separate catalyst specified for this oxidation.",
+    "equivalents_derived_from_general_10_mmol_scale": {
+      "triethylamine": 10.044,
+      "sulfur_trioxide_pyridine": 3.518
+    },
+    "outcome": "reported_success_isolated_and_characterized",
+    "isolated_yield_percent": 52,
+    "yield_locators": [
+      "Article PDF p2 / journal 4767 Table 1 row d, 8d Method A",
+      "SI PDF p5 compound 8d"
+    ],
+    "product_specific_isolated_mass_g": 0.72,
+    "product_specific_reaction_scale_mmol": null,
+    "product_characterization": {
+      "appearance": "white crystals",
+      "melting_point_celsius": [
+        45,
+        47
+      ],
+      "recrystallization_solvent": "pentane",
+      "proton_nmr_aldehyde_ppm": 9.77,
+      "carbon_nmr_aldehyde_ppm": 202.92,
+      "carbon_nmr_alkyne_ppm": [
+        84.82,
+        68.01
+      ],
+      "ir_bands_wavenumber_cm_minus_1": [
+        3307,
+        1721
+      ],
+      "reported_ms_m_z": 264,
+      "available_methods": [
+        "melting point",
+        "1H NMR",
+        "13C NMR",
+        "IR",
+        "MS"
+      ]
+    },
+    "reactant_characterization": {
+      "isolated_mass_g": 3.26,
+      "isolated_yield_percent": 82,
+      "melting_point_celsius": [
+        62,
+        64
+      ],
+      "available_methods": [
+        "melting point",
+        "1H NMR",
+        "13C NMR",
+        "IR",
+        "MS",
+        "elemental analysis"
+      ]
+    },
+    "scale_discrepancy_preserved": "The generic procedure lists 10 mmol; the compound-specific SI lists 0.72 g at 52%. Do not assign the generic scale to the specific 8d batch or infer an unstated batch scale.",
+    "reference_chain": {
+      "scheme_links_7_to_8": true,
+      "table_links_exact_c18_member_to_method_a": true,
+      "complete_general_oxidation_procedure_present": true,
+      "product_specific_characterization_present": true,
+      "required_preparation_link_unavailable": false,
+      "method_background_reference": "Mancuso and Swern, Synthesis 1981, 165. The article itself supplies the operative oxidation procedure."
+    }
+  },
+  "rendering": {
+    "primary_command": "pdftoppm -scale-to 1900 -png results/phase1/ugi_guidance_primary_article_audit_v1/jo000463n.pdf /private/tmp/forge-oppolzer-primary",
+    "primary_pages_inspected": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "supplement_pages_inspected": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "supplement_preview_directory": "results/phase1/ugi_guidance_evidence_acquisition_v3/previews",
+    "notes": "Rendered page images are reproducible visual aids. Exact source PDFs are the authenticated evidence assets."
+  },
+  "scope_limits": [
+    "No reaction-family or homologue qualification.",
+    "No current terminal-availability observation is added.",
+    "This review does not requalify the complete three-step C18 route or cumulative synthesis-value source.",
+    "No biological label, synthesis-success probability or model-realism improvement follows from this evidence.",
+    "No historical pin is replaced."
+  ]
+}

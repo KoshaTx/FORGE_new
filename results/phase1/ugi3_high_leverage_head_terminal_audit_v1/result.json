@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "product_impact_ledger.csv.gz": {
+      "schema_version": "phase1_ugi3_high_leverage_head_terminal_product_impact.v1",
+      "sha256": "9786f877e648cd490e84131bc63a9c1951605af4c7c64d616a6cbc6e609fbc36"
+    }
+  },
+  "assessment_as_of_utc": "2026-08-02T04:30:00Z",
+  "availability_expires_utc": "2026-09-01T04:30:00Z",
+  "inputs": {
+    "audit_source": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/src/forge/route/ugi3_high_leverage_head_terminals.py",
+      "sha256": "63577f935737a06b38397aa4e58ca71c85fb16c4d39a9ffa9232d0c86a84d2e2"
+    },
+    "evidence_pack": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/configs/route/phase1_ugi3_high_leverage_head_terminals_v1.json",
+      "sha256": "b0e9fdaa527839f650939ee4b247604cacd5672d4df5ea01a51236d97c335add"
+    },
+    "prior_product_impact": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/product_impact_ledger.csv.gz",
+      "sha256": "e32ad68ac7d8ec80589997337da7718bc3a152d2c8a3c902b9d8cb28ba4762c0"
+    },
+    "prior_result": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/result.json",
+      "sha256": "2d4cb30d844b6dfafe7aafb8c2eaae001104cce3b5cd618fdc98586cf0bdfeca"
+    },
+    "qualifier_source": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/scripts/phase1_audit_ugi3_high_leverage_head_terminals.py",
+      "sha256": "8c36490fd5fd00a3981792336dd0bcdcc83007557b9abbd6f766ced4ef7bb973"
+    },
+    "readiness_ledger": {
+      "path": "/Users/rmaganti/Desktop/thesis_projects_ML/forge/results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    }
+  },
+  "limitations": [
+    "These exact records close current L3 procurement only; they do not establish experimental Ugi success.",
+    "The source pages were rendered through a web index because direct HTTP archival failed; candidate lock requires a fresh availability check.",
+    "This bounded audit does not authorize production synthesis guidance."
+  ],
+  "policy": {
+    "availability_refresh_required_before_candidate_lock": true,
+    "diagnostic_only": true,
+    "direct_procurement_requires_current_item_level_availability": true,
+    "direct_procurement_requires_exact_identity": true,
+    "family_or_analogue_evidence_can_close": false,
+    "production_synthesis_guidance": false
+  },
+  "schema_version": "phase1_ugi3_high_leverage_head_terminal_audit.v1",
+  "summary": {
+    "exact_head_terminals_admitted": 2,
+    "generated_products": 1007,
+    "generated_products_complete_after": 38,
+    "generated_products_complete_before": 29,
+    "generated_target_occurrences": 35,
+    "newly_complete_generated_products": 9,
+    "newly_complete_products_by_target": {
+      "amine_head\tCC(C)(C)N": 4,
+      "amine_head\tCC(C)N": 5
+    },
+    "registry_complete_components_after": 48,
+    "registry_complete_components_before": 46,
+    "remaining_gap_count_distribution": {
+      "0": 38,
+      "1": 217,
+      "2": 425,
+      "3": 327
+    },
+    "target_occurrences": {
+      "amine_head\tCC(C)(C)N": 10,
+      "amine_head\tCC(C)N": 25
+    }
+  }
+}

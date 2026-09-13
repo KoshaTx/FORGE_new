@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-09-13T21:02:51.825152+00:00",
+  "evidence_admitted": false,
+  "historical_pins_changed": false,
+  "inputs": {
+    "requests": {
+      "bytes": 647,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/requests_01.json",
+      "sha256": "28e8db3838d757e1f53085919e4f2962511c7ed980d293af724f8652f2290cbf"
+    },
+    "script": {
+      "bytes": 3183,
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_guidance_evidence_acquisition_v3/fetch_sources.py",
+      "sha256": "0a50a970c9b9770d21deaa5e7f5c8b5a95cf7962b8e6c9ff3104e21f89c8b5ad"
+    }
+  },
+  "purchase_or_contact_actions": 0,
+  "records": [
+    {
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "error_type": "URLError",
+      "filename": "stearolic_indofine.html",
+      "id": "stearolic_indofine",
+      "requested_at_utc": "2026-09-13T21:02:51.813900+00:00",
+      "status": "retrieval_failed",
+      "url": "https://www.indofinechemical.com/details.aspx?Sku=10-1890"
+    },
+    {
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "error_type": "URLError",
+      "filename": "stearolic_alfa.html",
+      "id": "stearolic_alfa",
+      "requested_at_utc": "2026-09-13T21:02:51.814162+00:00",
+      "status": "retrieval_failed",
+      "url": "https://lipids.alfa-chemistry.com/product/9-octadecynoic-acid-cas-506-24-1-316977.html"
+    },
+    {
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "error_type": "URLError",
+      "filename": "stearolic_cymit.html",
+      "id": "stearolic_cymit",
+      "requested_at_utc": "2026-09-13T21:02:51.814290+00:00",
+      "status": "retrieval_failed",
+      "url": "https://cymitquimica.com/en/products/10-F774246/506-24-1/octadec-9-ynoic-acid/"
+    },
+    {
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "error_type": "URLError",
+      "filename": "stearolic_mce.html",
+      "id": "stearolic_mce",
+      "requested_at_utc": "2026-09-13T21:02:51.814407+00:00",
+      "status": "retrieval_failed",
+      "url": "https://www.medchemexpress.com/9-octadecynoic-acid.html"
+    }
+  ],
+  "schema_version": "forge.public_source_acquisition.v1"
+}

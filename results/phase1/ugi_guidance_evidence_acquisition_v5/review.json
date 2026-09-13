@@ -1,0 +1,50 @@
+{
+  "schema_version": "forge.guidance_followup_review.v1",
+  "scope": "Public-source acquisition only; no source or route admission",
+  "supplier_review": {
+    "aaron": {
+      "source": "batch_01/stearolic_aaron.html",
+      "catalog_number": "AR003V4D",
+      "finding": "The actual pack table lists 250mg and 1g, both 80% purity and Global Stock, with positive prices. The exact CAS, graph and formula agree with the frozen stearolic-acid identity. The supplier drawing was visually inspected and agrees.",
+      "indexed_page_discrepancy": "Web search for the same URL returned older indexed 50mg and 100mg packs at 98%; those indexed values are not used as current evidence.",
+      "disposition": "abstain",
+      "reason": "The product page establishes global stock, but the supporting ordering/terms pages do not establish item-specific US fulfillment. The observed 80% grade is retained and is not represented as the prior 99.90% grade.",
+      "nonclaim": "No new universal purity threshold is introduced; neither global stock nor a lower grade proves chemical impossibility."
+    },
+    "benchchem": {
+      "source": "batch_03/stearolic_benchchem.html",
+      "finding": "The page says In Stock, but its transaction surface requests a quote to obtain pricing and availability. It does not supply item-specific purity or a current US fulfillment observation.",
+      "disposition": "abstain"
+    },
+    "apollo": {
+      "source": "batch_01/stearolic_apollo.html",
+      "finding": "The stock table has UK/US column headings and no populated pack rows. These headings are not positive inventory evidence.",
+      "disposition": "abstain"
+    },
+    "chemscene": {"finding": "Direct product request returned HTTP 403.", "disposition": "abstain"},
+    "targetmol": {"finding": "Direct product request returned HTTP 412. Indexed pack rows say Inquiry; the nearby in-stock legend does not qualify availability.", "disposition": "abstain"},
+    "sigma_combiblocks": {"finding": "The public US product request ended without a response. No availability was inferred from the indexed identity listing.", "disposition": "abstain"}
+  },
+  "article_review": {
+    "doi": "10.1021/jo000463n",
+    "author_page": "batch_01/oppolzer_unige_author.html",
+    "author_page_finding": "Publication 210 has the title, authors, journal pages, abstract, DOI and the same restricted UNIGE repository link; it provides no additional full-text file.",
+    "publisher_metadata": "batch_02/oppolzer_figshare_metadata.json",
+    "publisher_metadata_finding": "The publisher's public Figshare record contains only jo000463n_si_001.pdf, the already recovered supplement, not the main article.",
+    "primary_main_article_recovered": false,
+    "disposition": "abstain",
+    "remaining_access": "An accessible licensed copy of the original main article is required for the outstanding procedure/scheme inspection. No purchase, author contact, credential use, or access-control bypass was performed.",
+    "skill_requirement": "Render the cited chemistry pages and neighboring pages to images. Inspect schemes visually.",
+    "skill_path": ".claude/skills/forge-adjudicate-chemistry-evidence/SKILL.md"
+  },
+  "local_setup_note": "An optional BeautifulSoup inspection failed because bs4 is not installed. Standard-library HTML parsing was used instead, without adding a dependency.",
+  "guidance_run_ready": false,
+  "historical_pins_changed": false,
+  "gates_relaxed": false,
+  "new_terminal_admissions": 0,
+  "route_assessments": 0,
+  "generation_calls": 0,
+  "training_calls": 0,
+  "purchases": 0,
+  "supplier_or_author_messages": 0
+}

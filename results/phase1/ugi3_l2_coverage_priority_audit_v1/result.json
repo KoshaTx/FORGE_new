@@ -1,0 +1,1299 @@
+{
+  "artifacts": {
+    "chemotype_priority_ledger.csv.gz": {
+      "bytes": 1787,
+      "sha256": "d48f4bc11f647733f1a3c35e01779bdba65344f191aba731274f9c799a4f3a17"
+    },
+    "component_priority_ledger.csv.gz": {
+      "bytes": 7559,
+      "sha256": "fb7b8650ab5a9211667bd50462d327446909b5575e2f8fbbcf0c95d294d5ac35"
+    },
+    "product_gap_ledger.csv.gz": {
+      "bytes": 18837,
+      "sha256": "a8ddbce7284de247b17c7e6cd017f8f1d86a16eb11f567214322377e17f4ae48"
+    }
+  },
+  "chemotype_policy": {
+    "fragment_vocabulary_used": false,
+    "signature": "role_plus_graph_derived_length_independent_architecture_counts",
+    "structural_analogy_is_route_evidence": false
+  },
+  "claims_boundary": {
+    "catalog_absence_is_chemical_incompatibility": false,
+    "family_projection_is_exact_source_evidence": false,
+    "priority_rank_is_synthesis_feasibility": false,
+    "single_gap_counterfactual_is_observed_synthesis_success": false,
+    "structural_analogy_is_route_evidence": false
+  },
+  "config": {
+    "path": "configs/route/phase1_ugi3_l2_coverage_priority_audit_v1.json",
+    "sha256": "2bd33c5749ecec6a313fe800ad0121e66f05566af0c625b0c06f523ade5b3cac"
+  },
+  "generated_utc": "2026-08-01T00:00:00Z",
+  "identity_policy": {
+    "component_identity": "exact_role_plus_canonical_constitutional_smiles",
+    "stereochemistry": "excluded"
+  },
+  "inputs": {
+    "component_dossier_ledger": {
+      "bytes": 2979,
+      "path": "results/phase1/ugi3_complete_computational_dossiers/component_dossier_ledger.csv.gz",
+      "sha256": "73f20af60ba3635a5cb5426d034c860e3596d9309d9749a232e378d39ca5fa5a"
+    },
+    "component_registry": {
+      "bytes": 23048,
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "dossier_result": {
+      "bytes": 3950,
+      "path": "results/phase1/ugi3_complete_computational_dossiers/result.json",
+      "sha256": "74d2cd6d6b4ba0175927ce5be689a79822e7c72aa6536425f72893fc2874b0ea"
+    },
+    "generated_component_provenance_ledger": {
+      "bytes": 47349,
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/component_provenance_ledger.csv.gz",
+      "sha256": "4fb0414f42eb37738ca9e26015084d3ab544fb6f7eea31c61073f14033723eb6"
+    },
+    "generated_product_provenance_ledger": {
+      "bytes": 19460,
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/product_provenance_ledger.csv.gz",
+      "sha256": "cb401b548aa88ed7895e2d04c6929bd1b17395557a97cb96b26841f6dd4d0d7d"
+    },
+    "generated_provenance_result": {
+      "bytes": 6986,
+      "path": "results/phase1/ugi_postselection_provenance_audit_v1/result.json",
+      "sha256": "1db7917885e8d2905eebe2faebdc40a92d8a3458bb5b47ed89ec372a7c7610cb"
+    },
+    "route_readiness_ledger": {
+      "bytes": 14189,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/component_readiness_ledger.csv.gz",
+      "sha256": "722e42dda35e550fa211c95f66098edddee741af838a468a8931c49c3e0bc99d"
+    },
+    "route_readiness_result": {
+      "bytes": 8558,
+      "path": "results/phase1/ugi3_production_registry_route_readiness/result.json",
+      "sha256": "d748eae9c9373d2cd4b420c9e17fb21dfa214f355135f766ed3081934f9cbf4d"
+    }
+  },
+  "priority_policy": {
+    "chemotype_order": "single_gap_products_per_exact_component_then_product_reach",
+    "chemotype_priority_limit": 20,
+    "component_priority_limit": 20,
+    "minimum_generated_occurrences": 2,
+    "primary_order": "guaranteed_single_gap_products_then_generated_products",
+    "single_gap_frontier_budgets": [
+      1,
+      2,
+      3,
+      5,
+      10,
+      20
+    ]
+  },
+  "provenance_policy": {
+    "catalog_absent_tier": "not_assessed_missing_route_knowledge",
+    "no_similarity_promotion": true,
+    "transfer_source_class": "cross_platform_hydrophobic_transfer"
+  },
+  "route_evidence_policy": {
+    "catalog_absence_is_incompatibility": false,
+    "family_projection_is_exact_evidence": false,
+    "no_routes_asserted_by_this_audit": true,
+    "route_complete_categories": [
+      "accepted_terminal",
+      "exact_source_forward_verified_l3_closed"
+    ]
+  },
+  "safe_claim": "The frozen local evidence identifies repeated exact component and graph-derived chemotype gaps that are efficient priorities for subsequent evidence retrieval and bounded planning. These priorities are missing-knowledge targets, not inferred routes or chemical incompatibilities.",
+  "schema_version": "phase1_ugi3_l2_coverage_priority.v1",
+  "scope": {
+    "biological_activity_assessed": false,
+    "candidate_selection_performed": false,
+    "chemical_incompatibility_inferred": false,
+    "literature_search_performed": false,
+    "local_frozen_evidence_only": true,
+    "route_planning_performed": false,
+    "synthesis_feasibility_assessed": false
+  },
+  "status": "complete_nonselecting_l2_coverage_priority_audit",
+  "summary": {
+    "baseline_static_route_complete_products": 3,
+    "chemical_incompatibility_evidenced_components": 0,
+    "generated_component_occurrences": 3021,
+    "generated_noncomplete_component_occurrences": 2372,
+    "generated_occurrences_by_role_and_provenance": {
+      "amine_head": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 120,
+              "route_evidence_not_assessed": 114
+            },
+            "noncomplete": 234,
+            "route_complete": 0,
+            "total": 234
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 612
+            },
+            "noncomplete": 612,
+            "route_complete": 0,
+            "total": 612
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 19,
+              "route_complete": 142
+            },
+            "noncomplete": 19,
+            "route_complete": 142,
+            "total": 161
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 612,
+          "exact_substrate_route_unreported": 139,
+          "route_complete": 142,
+          "route_evidence_not_assessed": 114
+        },
+        "noncomplete": 865,
+        "route_complete": 142,
+        "total": 1007
+      },
+      "isocyanide_tail": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 63,
+              "exact_substrate_route_unreported": 82
+            },
+            "noncomplete": 145,
+            "route_complete": 0,
+            "total": 145
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 318
+            },
+            "noncomplete": 318,
+            "route_complete": 0,
+            "total": 318
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 122,
+              "route_complete": 422
+            },
+            "noncomplete": 122,
+            "route_complete": 422,
+            "total": 544
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 318,
+          "exact_substrate_route_evidence_missing": 185,
+          "exact_substrate_route_unreported": 82,
+          "route_complete": 422
+        },
+        "noncomplete": 585,
+        "route_complete": 422,
+        "total": 1007
+      },
+      "oxoester_aldehyde_body_tail": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 16,
+              "exact_substrate_route_unreported": 195
+            },
+            "noncomplete": 211,
+            "route_complete": 0,
+            "total": 211
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 448
+            },
+            "noncomplete": 448,
+            "route_complete": 0,
+            "total": 448
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 263,
+              "route_complete": 85
+            },
+            "noncomplete": 263,
+            "route_complete": 85,
+            "total": 348
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 448,
+          "exact_substrate_route_evidence_missing": 279,
+          "exact_substrate_route_unreported": 195,
+          "route_complete": 85
+        },
+        "noncomplete": 922,
+        "route_complete": 85,
+        "total": 1007
+      }
+    },
+    "generated_products": 1007,
+    "generated_route_complete_component_occurrences": 649,
+    "generated_unique_components": 610,
+    "generated_unique_components_by_role_and_provenance": {
+      "amine_head": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 15,
+              "route_evidence_not_assessed": 21
+            },
+            "noncomplete": 36,
+            "route_complete": 0,
+            "total": 36
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 287
+            },
+            "noncomplete": 287,
+            "route_complete": 0,
+            "total": 287
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 2,
+              "route_complete": 10
+            },
+            "noncomplete": 2,
+            "route_complete": 10,
+            "total": 12
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 287,
+          "exact_substrate_route_unreported": 17,
+          "route_complete": 10,
+          "route_evidence_not_assessed": 21
+        },
+        "noncomplete": 325,
+        "route_complete": 10,
+        "total": 335
+      },
+      "isocyanide_tail": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 11,
+              "exact_substrate_route_unreported": 4
+            },
+            "noncomplete": 15,
+            "route_complete": 0,
+            "total": 15
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 127
+            },
+            "noncomplete": 127,
+            "route_complete": 0,
+            "total": 127
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 2,
+              "route_complete": 6
+            },
+            "noncomplete": 2,
+            "route_complete": 6,
+            "total": 8
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 127,
+          "exact_substrate_route_evidence_missing": 13,
+          "exact_substrate_route_unreported": 4,
+          "route_complete": 6
+        },
+        "noncomplete": 144,
+        "route_complete": 6,
+        "total": 150
+      },
+      "oxoester_aldehyde_body_tail": {
+        "by_provenance": {
+          "admitted_transferred_or_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 1,
+              "exact_substrate_route_unreported": 9
+            },
+            "noncomplete": 10,
+            "route_complete": 0,
+            "total": 10
+          },
+          "graph_absent_from_frozen_424_component_catalog": {
+            "by_route_work_state": {
+              "catalog_absent_route_evidence_not_assessed": 105
+            },
+            "noncomplete": 105,
+            "route_complete": 0,
+            "total": 105
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 9,
+              "route_complete": 1
+            },
+            "noncomplete": 9,
+            "route_complete": 1,
+            "total": 10
+          }
+        },
+        "by_route_work_state": {
+          "catalog_absent_route_evidence_not_assessed": 105,
+          "exact_substrate_route_evidence_missing": 10,
+          "exact_substrate_route_unreported": 9,
+          "route_complete": 1
+        },
+        "noncomplete": 124,
+        "route_complete": 1,
+        "total": 125
+      }
+    },
+    "products_by_noncomplete_component_count": {
+      "0": 3,
+      "1": 116,
+      "2": 408,
+      "3": 480
+    },
+    "products_with_two_or_three_gaps": 888,
+    "registry_by_role_and_provenance": {
+      "amine_head": {
+        "by_provenance": {
+          "admitted_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 56,
+              "route_evidence_not_assessed": 184
+            },
+            "noncomplete": 240,
+            "route_complete": 0,
+            "total": 240
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 7,
+              "route_complete": 17
+            },
+            "noncomplete": 7,
+            "route_complete": 17,
+            "total": 24
+          }
+        },
+        "by_route_work_state": {
+          "exact_substrate_route_unreported": 63,
+          "route_complete": 17,
+          "route_evidence_not_assessed": 184
+        },
+        "noncomplete": 247,
+        "route_complete": 17,
+        "total": 264
+      },
+      "isocyanide_tail": {
+        "by_provenance": {
+          "admitted_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 34,
+              "exact_substrate_route_unreported": 10
+            },
+            "noncomplete": 44,
+            "route_complete": 0,
+            "total": 44
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_route_present_l3_open": 1,
+              "exact_substrate_route_evidence_missing": 2,
+              "route_complete": 6
+            },
+            "noncomplete": 3,
+            "route_complete": 6,
+            "total": 9
+          }
+        },
+        "by_route_work_state": {
+          "exact_route_present_l3_open": 1,
+          "exact_substrate_route_evidence_missing": 36,
+          "exact_substrate_route_unreported": 10,
+          "route_complete": 6
+        },
+        "noncomplete": 47,
+        "route_complete": 6,
+        "total": 53
+      },
+      "oxoester_aldehyde_body_tail": {
+        "by_provenance": {
+          "admitted_cross_platform_transferred_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 6,
+              "route_complete": 1
+            },
+            "noncomplete": 6,
+            "route_complete": 1,
+            "total": 7
+          },
+          "admitted_expanded_known_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_unreported": 38
+            },
+            "noncomplete": 38,
+            "route_complete": 0,
+            "total": 38
+          },
+          "original_ugi_component": {
+            "by_route_work_state": {
+              "exact_substrate_route_evidence_missing": 45,
+              "route_complete": 17
+            },
+            "noncomplete": 45,
+            "route_complete": 17,
+            "total": 62
+          }
+        },
+        "by_route_work_state": {
+          "exact_substrate_route_evidence_missing": 51,
+          "exact_substrate_route_unreported": 38,
+          "route_complete": 18
+        },
+        "noncomplete": 89,
+        "route_complete": 18,
+        "total": 107
+      }
+    },
+    "registry_components": 424,
+    "registry_noncomplete_components": 383,
+    "registry_route_complete_components": 41,
+    "repeated_noncomplete_exact_components": 239,
+    "single_gap_priority_frontier": [
+      {
+        "all_gap_sets_unlocked_by_selected_components": 6,
+        "guaranteed_single_gap_products_unlocked": 6,
+        "selected_component_keys": [
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 1,
+        "target_budget": 1
+      },
+      {
+        "all_gap_sets_unlocked_by_selected_components": 12,
+        "guaranteed_single_gap_products_unlocked": 12,
+        "selected_component_keys": [
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 2,
+        "target_budget": 2
+      },
+      {
+        "all_gap_sets_unlocked_by_selected_components": 17,
+        "guaranteed_single_gap_products_unlocked": 17,
+        "selected_component_keys": [
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 3,
+        "target_budget": 3
+      },
+      {
+        "all_gap_sets_unlocked_by_selected_components": 26,
+        "guaranteed_single_gap_products_unlocked": 26,
+        "selected_component_keys": [
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 5,
+        "target_budget": 5
+      },
+      {
+        "all_gap_sets_unlocked_by_selected_components": 45,
+        "guaranteed_single_gap_products_unlocked": 40,
+        "selected_component_keys": [
+          "isocyanide_tail\t[C-]#[N+]CCCCCCCCCCCCC",
+          "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCC(=O)CCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 10,
+        "target_budget": 10
+      },
+      {
+        "all_gap_sets_unlocked_by_selected_components": 79,
+        "guaranteed_single_gap_products_unlocked": 56,
+        "selected_component_keys": [
+          "amine_head\tCCC1CCNCC1",
+          "amine_head\tNCCCN1CCCCC1",
+          "isocyanide_tail\t[C-]#[N+]CC(=O)C(C)(C)CC",
+          "isocyanide_tail\t[C-]#[N+]CCCCCCCCCCCCC",
+          "isocyanide_tail\t[C-]#[N+]CCCCCCCCCCCCCCC",
+          "oxoester_aldehyde_body_tail\tC#CCCCCCCCCC(=O)CCCC=O",
+          "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tC#CCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCC(=O)CCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCC(=O)CCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCC(=O)CCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCCC=O",
+          "oxoester_aldehyde_body_tail\tCCCCCCCCCCCCCCCCCCCCCCC=O"
+        ],
+        "selected_components": 20,
+        "target_budget": 20
+      }
+    ],
+    "single_gap_products": 116,
+    "top_chemotype_priorities": [
+      {
+        "admitted_registry_components_same_chemotype": 14,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "generated_gap_occurrences": 556,
+        "generated_products_touched": 556,
+        "global_priority_rank": 1,
+        "missing_exact_components": 17,
+        "noncomplete_registry_components_same_chemotype": 13,
+        "repeated_missing_exact_components": 16,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 1,
+        "route_complete_registry_components_same_chemotype": 1,
+        "single_gap_products": 35,
+        "single_gap_products_per_missing_component": 2.0588235294117645,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 0,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=1|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-73c75eba2d4ee41b",
+        "generated_gap_occurrences": 124,
+        "generated_products_touched": 124,
+        "global_priority_rank": 2,
+        "missing_exact_components": 13,
+        "noncomplete_registry_components_same_chemotype": 0,
+        "repeated_missing_exact_components": 9,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 2,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 8,
+        "single_gap_products_per_missing_component": 0.6153846153846154,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 0,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=1|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "isocyanide_tail-3d8ccde7dfdc8355",
+        "generated_gap_occurrences": 53,
+        "generated_products_touched": 53,
+        "global_priority_rank": 3,
+        "missing_exact_components": 4,
+        "noncomplete_registry_components_same_chemotype": 0,
+        "repeated_missing_exact_components": 3,
+        "role": "isocyanide_tail",
+        "role_priority_rank": 1,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 2,
+        "single_gap_products_per_missing_component": 0.5,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 0,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=2|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=2|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-b43c8a9e205ef0a4",
+        "generated_gap_occurrences": 114,
+        "generated_products_touched": 114,
+        "global_priority_rank": 4,
+        "missing_exact_components": 33,
+        "noncomplete_registry_components_same_chemotype": 0,
+        "repeated_missing_exact_components": 19,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 3,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 14,
+        "single_gap_products_per_missing_component": 0.42424242424242425,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 3,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-2c83ceb10f44475b",
+        "generated_gap_occurrences": 34,
+        "generated_products_touched": 34,
+        "global_priority_rank": 5,
+        "missing_exact_components": 5,
+        "noncomplete_registry_components_same_chemotype": 3,
+        "repeated_missing_exact_components": 4,
+        "role": "amine_head",
+        "role_priority_rank": 1,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 2,
+        "single_gap_products_per_missing_component": 0.4,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 15,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "isocyanide_tail-7f782fd04fc67e85",
+        "generated_gap_occurrences": 183,
+        "generated_products_touched": 183,
+        "global_priority_rank": 6,
+        "missing_exact_components": 13,
+        "noncomplete_registry_components_same_chemotype": 9,
+        "repeated_missing_exact_components": 11,
+        "role": "isocyanide_tail",
+        "role_priority_rank": 2,
+        "route_complete_registry_components_same_chemotype": 6,
+        "single_gap_products": 5,
+        "single_gap_products_per_missing_component": 0.38461538461538464,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 0,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=2|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=1|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=2|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-f4facb655258ddf7",
+        "generated_gap_occurrences": 26,
+        "generated_products_touched": 26,
+        "global_priority_rank": 7,
+        "missing_exact_components": 14,
+        "noncomplete_registry_components_same_chemotype": 0,
+        "repeated_missing_exact_components": 5,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 4,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 5,
+        "single_gap_products_per_missing_component": 0.35714285714285715,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 0,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=2|adjacent_carbon_branch_edges=1|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-067a7f9f1d845838",
+        "generated_gap_occurrences": 27,
+        "generated_products_touched": 27,
+        "global_priority_rank": 8,
+        "missing_exact_components": 10,
+        "noncomplete_registry_components_same_chemotype": 0,
+        "repeated_missing_exact_components": 7,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 5,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 2,
+        "single_gap_products_per_missing_component": 0.2,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 6,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=3|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-566ca357a21689bf",
+        "generated_gap_occurrences": 18,
+        "generated_products_touched": 18,
+        "global_priority_rank": 9,
+        "missing_exact_components": 10,
+        "noncomplete_registry_components_same_chemotype": 5,
+        "repeated_missing_exact_components": 5,
+        "role": "amine_head",
+        "role_priority_rank": 2,
+        "route_complete_registry_components_same_chemotype": 1,
+        "single_gap_products": 2,
+        "single_gap_products_per_missing_component": 0.2,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 29,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-baecdb7d5d7dd574",
+        "generated_gap_occurrences": 155,
+        "generated_products_touched": 155,
+        "global_priority_rank": 10,
+        "missing_exact_components": 36,
+        "noncomplete_registry_components_same_chemotype": 29,
+        "repeated_missing_exact_components": 21,
+        "role": "amine_head",
+        "role_priority_rank": 3,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 7,
+        "single_gap_products_per_missing_component": 0.19444444444444445,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 27,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=2|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-110e69a6fdb0a212",
+        "generated_gap_occurrences": 121,
+        "generated_products_touched": 121,
+        "global_priority_rank": 11,
+        "missing_exact_components": 28,
+        "noncomplete_registry_components_same_chemotype": 21,
+        "repeated_missing_exact_components": 15,
+        "role": "amine_head",
+        "role_priority_rank": 4,
+        "route_complete_registry_components_same_chemotype": 6,
+        "single_gap_products": 5,
+        "single_gap_products_per_missing_component": 0.17857142857142858,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 26,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=2|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-c2bcce89b83f40fb",
+        "generated_gap_occurrences": 112,
+        "generated_products_touched": 112,
+        "global_priority_rank": 12,
+        "missing_exact_components": 26,
+        "noncomplete_registry_components_same_chemotype": 20,
+        "repeated_missing_exact_components": 17,
+        "role": "amine_head",
+        "role_priority_rank": 5,
+        "route_complete_registry_components_same_chemotype": 6,
+        "single_gap_products": 4,
+        "single_gap_products_per_missing_component": 0.15384615384615385,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 4,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=2|adjacent_carbon_branch_edges=1|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-613b93032a9b8043",
+        "generated_gap_occurrences": 52,
+        "generated_products_touched": 52,
+        "global_priority_rank": 13,
+        "missing_exact_components": 26,
+        "noncomplete_registry_components_same_chemotype": 4,
+        "repeated_missing_exact_components": 5,
+        "role": "amine_head",
+        "role_priority_rank": 6,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 4,
+        "single_gap_products_per_missing_component": 0.15384615384615385,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 4,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=2|adjacent_carbon_branch_edges=0|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-64a6feaeeda1e86b",
+        "generated_gap_occurrences": 37,
+        "generated_products_touched": 37,
+        "global_priority_rank": 14,
+        "missing_exact_components": 28,
+        "noncomplete_registry_components_same_chemotype": 4,
+        "repeated_missing_exact_components": 5,
+        "role": "amine_head",
+        "role_priority_rank": 7,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 4,
+        "single_gap_products_per_missing_component": 0.14285714285714285,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 9,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=2|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-31f14b4f42fae654",
+        "generated_gap_occurrences": 15,
+        "generated_products_touched": 15,
+        "global_priority_rank": 15,
+        "missing_exact_components": 7,
+        "noncomplete_registry_components_same_chemotype": 9,
+        "repeated_missing_exact_components": 4,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 6,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 1,
+        "single_gap_products_per_missing_component": 0.14285714285714285,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 8,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=1|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-75dc79e9d4fdff2c",
+        "generated_gap_occurrences": 80,
+        "generated_products_touched": 80,
+        "global_priority_rank": 16,
+        "missing_exact_components": 37,
+        "noncomplete_registry_components_same_chemotype": 8,
+        "repeated_missing_exact_components": 13,
+        "role": "amine_head",
+        "role_priority_rank": 8,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 5,
+        "single_gap_products_per_missing_component": 0.13513513513513514,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 4,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=1|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=1|adjacent_carbon_branch_edges=0|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-8c6f63cc8c31dd16",
+        "generated_gap_occurrences": 126,
+        "generated_products_touched": 126,
+        "global_priority_rank": 17,
+        "missing_exact_components": 32,
+        "noncomplete_registry_components_same_chemotype": 4,
+        "repeated_missing_exact_components": 18,
+        "role": "amine_head",
+        "role_priority_rank": 9,
+        "route_complete_registry_components_same_chemotype": 0,
+        "single_gap_products": 4,
+        "single_gap_products_per_missing_component": 0.125,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 11,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=1|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=1|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=1|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-0ce9e6c26a55109f",
+        "generated_gap_occurrences": 33,
+        "generated_products_touched": 33,
+        "global_priority_rank": 18,
+        "missing_exact_components": 8,
+        "noncomplete_registry_components_same_chemotype": 10,
+        "repeated_missing_exact_components": 5,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 7,
+        "route_complete_registry_components_same_chemotype": 1,
+        "single_gap_products": 1,
+        "single_gap_products_per_missing_component": 0.125,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 32,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=0|oxygen_atoms=3|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=0|carbonyl_count=2|ester_like_carbonyl_count=1|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "oxoester_aldehyde_body_tail-7cd38bc40f951a3b",
+        "generated_gap_occurrences": 12,
+        "generated_products_touched": 12,
+        "global_priority_rank": 19,
+        "missing_exact_components": 8,
+        "noncomplete_registry_components_same_chemotype": 26,
+        "repeated_missing_exact_components": 2,
+        "role": "oxoester_aldehyde_body_tail",
+        "role_priority_rank": 8,
+        "route_complete_registry_components_same_chemotype": 6,
+        "single_gap_products": 1,
+        "single_gap_products_per_missing_component": 0.125,
+        "structural_analogy_is_route_evidence": false
+      },
+      {
+        "admitted_registry_components_same_chemotype": 17,
+        "architecture_fields_json": "[\"nitrogen_atoms\", \"oxygen_atoms\", \"sulfur_atoms\", \"phosphorus_atoms\", \"halogen_atoms\", \"carbon_carbon_double_bonds\", \"carbon_carbon_triple_bonds\", \"carbon_branch_atoms\", \"adjacent_carbon_branch_edges\", \"ring_count\", \"carbonyl_count\", \"ester_like_carbonyl_count\", \"amide_like_carbonyl_count\", \"ether_oxygen_count\"]",
+        "architecture_signature": "nitrogen_atoms=3|oxygen_atoms=0|sulfur_atoms=0|phosphorus_atoms=0|halogen_atoms=0|carbon_carbon_double_bonds=0|carbon_carbon_triple_bonds=0|carbon_branch_atoms=0|adjacent_carbon_branch_edges=0|ring_count=1|carbonyl_count=0|ester_like_carbonyl_count=0|amide_like_carbonyl_count=0|ether_oxygen_count=0",
+        "chemotype_id": "amine_head-bea75b3ab72f639e",
+        "generated_gap_occurrences": 17,
+        "generated_products_touched": 17,
+        "global_priority_rank": 20,
+        "missing_exact_components": 13,
+        "noncomplete_registry_components_same_chemotype": 16,
+        "repeated_missing_exact_components": 3,
+        "role": "amine_head",
+        "role_priority_rank": 10,
+        "route_complete_registry_components_same_chemotype": 1,
+        "single_gap_products": 1,
+        "single_gap_products_per_missing_component": 0.07692307692307693,
+        "structural_analogy_is_route_evidence": false
+      }
+    ],
+    "top_exact_component_priorities": [
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 82,
+        "generated_products": 82,
+        "priority_rank": 1,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 6,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 67,
+        "generated_products": 67,
+        "priority_rank": 2,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 6,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "admitted_expanded_known_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "upstream_route_not_reported",
+        "generated_occurrences": 51,
+        "generated_products": 51,
+        "priority_rank": 3,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_unreported",
+        "single_gap_products_guaranteed_unlocked": 5,
+        "static_route_evidence_category": "outside_route_support",
+        "static_route_readiness_tier": "outside_route_support",
+        "structural_provenance_stratum": "admitted_transferred_or_expanded_known_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "admitted_expanded_known_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "upstream_route_not_reported",
+        "generated_occurrences": 27,
+        "generated_products": 27,
+        "priority_rank": 4,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_unreported",
+        "single_gap_products_guaranteed_unlocked": 5,
+        "static_route_evidence_category": "outside_route_support",
+        "static_route_readiness_tier": "outside_route_support",
+        "structural_provenance_stratum": "admitted_transferred_or_expanded_known_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 50,
+        "generated_products": 50,
+        "priority_rank": 5,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 4,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCC(=O)CCCCCCCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b43c8a9e205ef0a4",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 9,
+        "generated_products": 9,
+        "priority_rank": 6,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 4,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "C#CCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-73c75eba2d4ee41b",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 44,
+        "generated_products": 44,
+        "priority_rank": 7,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 3,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "C#CCCCCCCCCCCCCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-73c75eba2d4ee41b",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 23,
+        "generated_products": 23,
+        "priority_rank": 8,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 3,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCC",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "isocyanide_tail-7f782fd04fc67e85",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 68,
+        "generated_products": 68,
+        "priority_rank": 9,
+        "repeated_component": true,
+        "role": "isocyanide_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 56,
+        "generated_products": 56,
+        "priority_rank": 10,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "NCCCN1CCCCC1",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "admitted_expanded_known_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "amine_head-c2bcce89b83f40fb",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 39,
+        "generated_products": 39,
+        "priority_rank": 11,
+        "repeated_component": true,
+        "role": "amine_head",
+        "route_work_state": "route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "missing_route_knowledge",
+        "structural_provenance_stratum": "admitted_transferred_or_expanded_known_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCC(=O)CCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b43c8a9e205ef0a4",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 20,
+        "generated_products": 20,
+        "priority_rank": 12,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "[C-]#[N+]CC(=O)C(C)(C)CC",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "isocyanide_tail-3d8ccde7dfdc8355",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 17,
+        "generated_products": 17,
+        "priority_rank": 13,
+        "repeated_component": true,
+        "role": "isocyanide_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCC(=O)CCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b43c8a9e205ef0a4",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 9,
+        "generated_products": 9,
+        "priority_rank": 14,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "C#CCCCCCCCCC(=O)CCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-f4facb655258ddf7",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 8,
+        "generated_products": 8,
+        "priority_rank": 15,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "CCC1CCNCC1",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "amine_head-8c6f63cc8c31dd16",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 5,
+        "generated_products": 5,
+        "priority_rank": 16,
+        "repeated_component": true,
+        "role": "amine_head",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 2,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "[C-]#[N+]CCCCCCCCCCCCCCC",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "original_current_ugi_catalog_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "isocyanide_tail-7f782fd04fc67e85",
+        "gap_class": "exact_substrate_route_evidence_and_forward_verification_required",
+        "generated_occurrences": 54,
+        "generated_products": 54,
+        "priority_rank": 17,
+        "repeated_component": true,
+        "role": "isocyanide_tail",
+        "route_work_state": "exact_substrate_route_evidence_missing",
+        "single_gap_products_guaranteed_unlocked": 1,
+        "static_route_evidence_category": "family_projected_only",
+        "static_route_readiness_tier": "family_projected_only",
+        "structural_provenance_stratum": "original_ugi_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCC=O",
+        "catalog_membership": "false",
+        "catalog_provenance_substratum": "graph_absent_from_frozen_catalog",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "route_evidence_not_assessed",
+        "generated_occurrences": 52,
+        "generated_products": 52,
+        "priority_rank": 18,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "catalog_absent_route_evidence_not_assessed",
+        "single_gap_products_guaranteed_unlocked": 1,
+        "static_route_evidence_category": "missing_route_knowledge",
+        "static_route_readiness_tier": "not_assessed_missing_route_knowledge",
+        "structural_provenance_stratum": "graph_absent_from_frozen_424_component_catalog"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "admitted_expanded_known_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "upstream_route_not_reported",
+        "generated_occurrences": 37,
+        "generated_products": 37,
+        "priority_rank": 19,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_unreported",
+        "single_gap_products_guaranteed_unlocked": 1,
+        "static_route_evidence_category": "outside_route_support",
+        "static_route_readiness_tier": "outside_route_support",
+        "structural_provenance_stratum": "admitted_transferred_or_expanded_known_component"
+      },
+      {
+        "canonical_smiles": "CCCCCCCCCCCCCCC=O",
+        "catalog_membership": "true",
+        "catalog_provenance_substratum": "admitted_expanded_known_component",
+        "chemical_incompatibility_evidenced": false,
+        "chemotype_id": "oxoester_aldehyde_body_tail-b546ad97cfa93fe0",
+        "gap_class": "upstream_route_not_reported",
+        "generated_occurrences": 27,
+        "generated_products": 27,
+        "priority_rank": 20,
+        "repeated_component": true,
+        "role": "oxoester_aldehyde_body_tail",
+        "route_work_state": "exact_substrate_route_unreported",
+        "single_gap_products_guaranteed_unlocked": 1,
+        "static_route_evidence_category": "outside_route_support",
+        "static_route_readiness_tier": "outside_route_support",
+        "structural_provenance_stratum": "admitted_transferred_or_expanded_known_component"
+      }
+    ],
+    "unique_noncomplete_chemotypes": 34,
+    "unique_noncomplete_exact_components": 593
+  },
+  "task": "Bounded L2 evidence-coverage priorities for frozen generated Ugi components"
+}

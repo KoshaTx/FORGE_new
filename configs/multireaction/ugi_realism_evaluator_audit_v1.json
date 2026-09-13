@@ -1,0 +1,83 @@
+{
+  "schema_version": "forge.ugi_realism_evaluator_audit_config.v1",
+  "scientific_question": "Do frozen descriptors collapse distinct saved molecular arrangements, and do supplementary graph distances and identical-graph redraw controls expose evaluator limitations?",
+  "inputs": {
+    "baseline_assessment_index": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/result_index.json",
+      "sha256": "002e2bd52a3d1d88d4100c2f991fa055aa62c1599087c2357f264b07dd61fb30"
+    },
+    "treatment_assessment_index": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/all_role_semantic/assessment/result_index.json",
+      "sha256": "56b70496a86e1f166aa35f457b58057e66fb29ec879471145da6adcc33035ef0"
+    },
+    "baseline_common_result": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/common/result.json",
+      "sha256": "be3a43d20dadc91c418724f6a7962400409ca25562315dd39dff0b392fe2dae8"
+    },
+    "treatment_common_result": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/all_role_semantic/assessment/common/result.json",
+      "sha256": "04f8059b16b4525f6e2c685a55ad9338bf221850cc1dfdfcf34eabfb8d9d0b70"
+    },
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "baseline": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+      "sha256": "2e0fdc000d90bf298bdeef2015e0bf356312276f37ea755438952ccd1eaec7b2"
+    },
+    "treatment": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/all_role_semantic/assessment/common/assessed_attempts.jsonl.gz",
+      "sha256": "44747da507d9a316380287f0a65cbd78d005d8574e1a785dcf9c0d1ac32564e8"
+    },
+    "previous_review": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_visual_review_seed0_v1/review_sheet.json",
+      "sha256": "397f3ba1937a69651b5286d34bbc1796964f73d842a6d719c47dcb4cb2ded089"
+    },
+    "comparison": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/result.json",
+      "sha256": "7cee509438e908c694fb025aacdb502ec3724715f056db9255e59fd654a081dc"
+    }
+  },
+  "sources": {
+    "forge/model/ugi_realism_evaluator_audit.py": {
+      "path": "forge/model/ugi_realism_evaluator_audit.py",
+      "sha256": "dcecc224d1b3e62194f786f3fac053cbc08fdded608c2f1da5e8b424b58c5581"
+    },
+    "forge/model/ugi_development_realism.py": {
+      "path": "forge/model/ugi_development_realism.py",
+      "sha256": "537053ba9bd7096d3d93073c660758dd3a54db5a09e98e0f3928b0c34e43bf8c"
+    },
+    "forge/model/common_lipid_realism.py": {
+      "path": "forge/model/common_lipid_realism.py",
+      "sha256": "75dd951152459c49baa4ca595ef23f7e49553f88c5c56c0f52c50ba83df3b22d"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/core/io.py": {
+      "path": "forge/core/io.py",
+      "sha256": "ba75c512988109feba889d75ef153c20b5493f5ce0e6acd6c777c6573af0f914"
+    },
+    "experiments/phase1/multireaction/ugi_realism_evaluator_audit.py": {
+      "path": "experiments/phase1/multireaction/ugi_realism_evaluator_audit.py",
+      "sha256": "b6b7d09fa0db74475cbc95b742f986487bed561c1b09810d127aeaaf6f438ad5"
+    }
+  },
+  "expected_attempts": 256,
+  "seed": 2026090803,
+  "bootstrap_replicates": 2000,
+  "invariance_pairs": 8,
+  "positive_control_pairs": 4,
+  "policy": {
+    "train_only": true,
+    "new_model_or_generation_calls": false,
+    "modify_frozen_gates": false,
+    "automatic_visual_adjudication": false,
+    "fingerprints": ["morgan_count_radius2", "atom_pair_count"],
+    "reference_weighting": "unique components within each precursor role",
+    "uncertainty": "paired attempt bootstrap; descriptive within one saved seed",
+    "novelty_reference": "measured train and complete train catalogs separately"
+  }
+}

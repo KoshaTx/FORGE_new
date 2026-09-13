@@ -22,6 +22,14 @@ LIBRARY_PACKAGES = {
 }
 REMOVED_LIBRARY_PACKAGES = {"audit", "bio", "cli", "data", "design", "experiment", "route", "value"}
 
+# Group manifests are consumed by the Modal group runner, not ExperimentSpec. Keep their
+# ownership explicit so an unknown JSON file cannot disappear behind a schema filter.
+OWNED_MODAL_GROUPS = {
+    "phase1-reaction-specialists-seed0-h100": Path(
+        "experiments/phase1/multireaction/reaction_specialists_seed0_h100.json"
+    ),
+}
+
 
 def _imports(path: Path) -> set[str]:
     tree = ast.parse(path.read_text(), filename=str(path))
@@ -94,16 +102,41 @@ def test_cli_is_an_application_boundary_not_a_library_dependency() -> None:
 
 
 def test_catalog_owns_every_active_experiment_specification() -> None:
+    from experiments._runtime.spec import ExperimentSpec
     from experiments.catalog import SPECIFICATIONS
 
     declared = {Path(path) for path in SPECIFICATIONS.values()}
+    groups = set(OWNED_MODAL_GROUPS.values())
+    assert len(declared) == len(SPECIFICATIONS)
+    assert len(groups) == len(OWNED_MODAL_GROUPS)
+    assert declared.isdisjoint(groups)
     discovered = {
         path.relative_to(REPO)
         for path in (REPO / "experiments").rglob("*.json")
         if "configs" not in path.parts and "archive" not in path.parts
     }
-    assert declared == discovered
-    assert all(path.parts[0] == "experiments" for path in declared)
+    assert declared | groups == discovered
+    assert all(path.parts[0] == "experiments" for path in declared | groups)
+    for experiment_id, path in SPECIFICATIONS.items():
+        assert ExperimentSpec.load(REPO / path).experiment_id == experiment_id
+
+
+def test_owned_modal_groups_reference_pinned_catalog_experiments() -> None:
+    from experiments._runtime.modal_group import ModalExperimentGroup
+    from experiments._runtime.spec import ExperimentSpec
+    from experiments.catalog import SPECIFICATIONS
+
+    for group_id, path in OWNED_MODAL_GROUPS.items():
+        group = ModalExperimentGroup.load(REPO / path)
+        assert group.group_id == group_id
+        for member in (group.preflight, *group.parallel):
+            assert member.experiment in SPECIFICATIONS
+            resolved = member.resolve(REPO)
+            assert resolved == (REPO / SPECIFICATIONS[member.experiment]).resolve()
+            spec = ExperimentSpec.load(resolved)
+            assert spec.experiment_id == member.experiment
+            assert member.profile in spec.profiles
+            assert member.replicate < spec.replicates[member.profile]
 
 
 def test_archived_producers_are_importable_but_not_a_supported_cli_surface() -> None:

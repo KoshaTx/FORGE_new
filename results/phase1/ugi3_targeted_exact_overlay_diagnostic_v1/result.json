@@ -1,0 +1,165 @@
+{
+  "artifacts": {
+    "assessment_ledger.json.gz": {
+      "schema_version": "phase1_ugi3_targeted_exact_overlay_assessments.v1",
+      "sha256": "b2fa938a14b2e44259ff1cac7efb027c07543e01fe4d31475d86c0b0f31bc06d"
+    }
+  },
+  "claims_boundary": {
+    "dynamic_general_route_planner": false,
+    "family_or_analogue_evidence_can_close": false,
+    "production_synthesis_guidance": false,
+    "scope": "bounded_exact_evidence_overlay_diagnostic",
+    "synthesis_success_probability": false
+  },
+  "config_sha256": "b073de4a2684f01558089bfd5176df283333630c5e9ac90a60ad3c4f5afeb165",
+  "input_sha256": {
+    "diagnostic_source": "4830dcfc98075f690df77762d694fed7513e4a852b7816edefcd9d68d4f407e2",
+    "hybrid_config": "d13ab4be85ef26820718a673e9ad5ea2bf80f2ec4ebbff269cf41f21dffd690a",
+    "hybrid_ledger": "2002a770ad3683aff3274b39de3fe327b1dfe2269eaf5224b1ae41231c184ea2",
+    "hybrid_result": "05905d2a5f7eee83cf5a7028d89bcb3e5374959789ecc7ed3c2a692ed75bcbbf",
+    "overlay_source": "d98244bcd71cd4b677fd64b151fe55d1a1689b98bc32b6fcd05286c12e8806af",
+    "qualifier_source": "0ed35fff72545c383e030142b723766af2747b3a59f22127b5ffa6879df45461",
+    "targeted_audit_config": "b271127faeb78eebcb00c3c23e5e8e0c810f1aa08ddd3c8587c3bb00df403e42",
+    "targeted_audit_result": "40fae7dc1b3695a696217cb388a8a43bf9922f6a5604500fb2021552dc98714a",
+    "targeted_product_ledger": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e",
+    "targeted_route_ledger": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+  },
+  "prerequisite_metadata": {
+    "hybrid": {
+      "admitted_qualified_templates": 0,
+      "channels": {
+        "exact_baseline": 40,
+        "exact_evidence_l3_open": 1,
+        "exact_identity_retrieval": 1,
+        "family_projection": 87,
+        "no_admitted_route": 106,
+        "provenance_priority": 189
+      },
+      "exact_retrieval_component_id": "ugi-component-50d403b09b1f4ce09cd5",
+      "exact_retrieval_forward_products": [
+        "CCCCCCCCCCCCC(C=O)CCCCCCCCCC"
+      ],
+      "exact_retrieval_l3_state": "current_closed",
+      "exact_retrieval_source_record_id": "jl-2024-b16-2-decyltetradecan-1-ol"
+    },
+    "hybrid_reproduction": {
+      "current_software_versions": [
+        [
+          "python",
+          "3.14.2"
+        ],
+        [
+          "rdkit",
+          "2026.03.4"
+        ]
+      ],
+      "ledger_byte_identical": true,
+      "mode": "software_version_only_migration",
+      "other_result_differences": 0,
+      "stored_software_versions": [
+        [
+          "python",
+          "3.14.2"
+        ],
+        [
+          "rdkit",
+          "2025.09.6"
+        ]
+      ]
+    },
+    "targeted_overlay": {
+      "audit_result_sha256": "40fae7dc1b3695a696217cb388a8a43bf9922f6a5604500fb2021552dc98714a",
+      "evidence_pack_sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb",
+      "product_ledger_sha256": "764d83c94561faaf99da1e48bbfa6a2f42ea7c60bf5520bb5ec2a8ddd0aff40e",
+      "records": [
+        {
+          "channel": "targeted_exact_procurement",
+          "component_id": "ugi-component-10647807421b4e2c2c47",
+          "route_id": null,
+          "target": {
+            "canonical_smiles": "CCCCCCCCCCC=O",
+            "product_context_smiles": [],
+            "role": "oxoester_aldehyde_body_tail"
+          }
+        },
+        {
+          "channel": "targeted_exact_procurement",
+          "component_id": "ugi-component-277115bc675440f61724",
+          "route_id": null,
+          "target": {
+            "canonical_smiles": "CCCCCCCCCCCCCCCCCC=O",
+            "product_context_smiles": [],
+            "role": "oxoester_aldehyde_body_tail"
+          }
+        },
+        {
+          "channel": "targeted_exact_route",
+          "component_id": "ugi-component-6895b1b938ea2c6e1f6f",
+          "route_id": "mo_2018_eicosanal_pcc",
+          "target": {
+            "canonical_smiles": "CCCCCCCCCCCCCCCCCCCC=O",
+            "product_context_smiles": [],
+            "role": "oxoester_aldehyde_body_tail"
+          }
+        },
+        {
+          "channel": "targeted_exact_route",
+          "component_id": "ugi-component-7442c18fff083c4e8641",
+          "route_id": "busta_2016_docosanal_pcc",
+          "target": {
+            "canonical_smiles": "CCCCCCCCCCCCCCCCCCCCCC=O",
+            "product_context_smiles": [],
+            "role": "oxoester_aldehyde_body_tail"
+          }
+        }
+      ],
+      "retained_unselected_exact_route_alternatives": 1,
+      "route_ledger_sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3",
+      "schema_version": "phase1_ugi3_targeted_exact_overlay.v1",
+      "selected_direct_terminals": 2,
+      "selected_exact_targets": 4,
+      "selected_recursive_routes": 2,
+      "unresolved_abstentions": 1
+    }
+  },
+  "schema_version": "phase1_ugi3_targeted_exact_overlay_diagnostic.v1",
+  "summary": {
+    "admitted_components": 424,
+    "baseline_outcomes": {
+      "complete": 41,
+      "missing_knowledge": 277,
+      "outside_support": 106
+    },
+    "newly_closed_by_overlay_channel": {
+      "targeted_exact_procurement": 2,
+      "targeted_exact_route": 2
+    },
+    "newly_closed_components": 4,
+    "overlay_outcomes": {
+      "complete": 45,
+      "missing_knowledge": 274,
+      "outside_support": 105
+    },
+    "overlay_outcomes_by_role": {
+      "amine_head": {
+        "complete": 17,
+        "missing_knowledge": 189,
+        "outside_support": 58
+      },
+      "isocyanide_tail": {
+        "complete": 6,
+        "missing_knowledge": 37,
+        "outside_support": 10
+      },
+      "oxoester_aldehyde_body_tail": {
+        "complete": 22,
+        "missing_knowledge": 48,
+        "outside_support": 37
+      }
+    },
+    "overlay_verifier_calls": 3,
+    "selected_exact_overlay_targets": 4,
+    "unresolved_abstentions": 1
+  }
+}

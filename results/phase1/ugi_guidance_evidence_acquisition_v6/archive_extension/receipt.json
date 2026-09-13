@@ -1,0 +1,58 @@
+{
+  "added_archives": [
+    {
+      "archive": {
+        "bytes": 1130,
+        "path": "provenance/recovery/ugi_guidance_evidence_v6/assets/ce9cd1381fa8b06060d9133d36eae99872b3a61ebbfebc16b92c4b4abd72076e.gz",
+        "sha256": "7ab908edf48d63ceeefca571996fd3cb5ca42d644791a0761c527fb058a75e62"
+      },
+      "original": {
+        "bytes": 3961,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/development_attempt_001/terminal-tests.xml",
+        "sha256": "ce9cd1381fa8b06060d9133d36eae99872b3a61ebbfebc16b92c4b4abd72076e"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 23496,
+        "path": "provenance/recovery/ugi_guidance_evidence_v6/assets/22bf545f44ae11725f1ec8c79f9d79fbf75e24a0cd88f8f772836de756c91d1b.gz",
+        "sha256": "155535452e56eb84bddf5c4eb245ccb3f264834838eca758614145a0a5978deb"
+      },
+      "original": {
+        "bytes": 344031,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/batch_05/pubchem_supplier_records_0.json",
+        "sha256": "22bf545f44ae11725f1ec8c79f9d79fbf75e24a0cd88f8f772836de756c91d1b"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 11753,
+        "path": "provenance/recovery/ugi_guidance_evidence_v6/assets/b1ce6dea12ace7b8596dad8e184ebde4e44fbf7909bfdec16247606dba74444d.gz",
+        "sha256": "45529409afa616766d8e2c5139dd3bb5e40162af115549d10092651a707426f0"
+      },
+      "original": {
+        "bytes": 254622,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/batch_05/pubchem_supplier_records_60.json",
+        "sha256": "b1ce6dea12ace7b8596dad8e184ebde4e44fbf7909bfdec16247606dba74444d"
+      }
+    }
+  ],
+  "input_result": {
+    "bytes": 34896,
+    "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/result.json",
+    "sha256": "d109dc4daaf7123153199fbee8d0d048936e4f24c65e0d7b8112f082d01b5165"
+  },
+  "output_result": {
+    "bytes": 36513,
+    "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/result.json",
+    "sha256": "3dc6468dee3401c1410a341388327d12d93d395d1e2e2b29048f3639f2188176"
+  },
+  "preserved_original_result": {
+    "bytes": 34896,
+    "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/archive_extension/original_result.json",
+    "sha256": "d109dc4daaf7123153199fbee8d0d048936e4f24c65e0d7b8112f082d01b5165"
+  },
+  "purpose": "Preserve exact raw JUnit whitespace and large PubChem records as compressed bytes. Existing generic restore verifier handles these added entries without source changes.",
+  "schema_version": "forge.source_archive_extension.v1",
+  "scientific_payload_changed": false
+}

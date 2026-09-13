@@ -1,0 +1,59 @@
+{
+  "schema_version": "forge.current_sampler_guidance_preflight.v1",
+  "scientific_question": "Does passive zero-strength observation preserve the current frozen sampler, and can the strict historical route-evidence source authenticate?",
+  "inputs": {
+    "trace_config": {
+      "path": "configs/multireaction/ugi_sampling_trace_v1.json",
+      "sha256": "842a13eb3a541bccb6f49fc3579314af82dcf5e8a124480d76f0e22fbcacadc0"
+    },
+    "source_config": {
+      "path": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+      "sha256": "ea07140ccfa668ad66804da368a489fe017b2e295bacbab68dc0b219a836928c"
+    },
+    "historical_guidance_config": {
+      "path": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+      "sha256": "fd50551dec47126d8a0aded212f9946f3eaa07fb1d9f562f3bbbb848bd830478"
+    },
+    "protocol": {
+      "path": "docs/PHASE1_CURRENT_GUIDANCE_PREFLIGHT.md",
+      "sha256": "f85e4c10fe50b854c53d28a436e33c055b9a89b1867c0800f15b5956e43df85c"
+    },
+    "runner": {
+      "path": "experiments/phase1/synthesis_guidance/current_sampler_preflight.py",
+      "sha256": "410fc621fb3aedba08aeb28c7a4bd977e4731be5f058e904ae07ae3adff940cd"
+    },
+    "observer": {
+      "path": "experiments/phase1/synthesis_guidance/guidance/current_sampler_zero.py",
+      "sha256": "83a9cf104487319cb0a8faefc11af3b650540eb1c1f90c07875cfbad777f1362"
+    },
+    "observer_tests": {
+      "path": "tests/test_current_sampler_zero_guidance.py",
+      "sha256": "4afb17d8732f71ba4ca707f9b1f440993f87ffedb9c91f77b2d6d2dd59a8a9bd"
+    },
+    "runner_tests": {
+      "path": "tests/test_current_sampler_preflight.py",
+      "sha256": "2882f6d98e03f524c752c810f9f3389215f3815bc32d575385a28c053279fee5"
+    }
+  },
+  "runtime": {
+    "program_count": 128,
+    "sample_steps": 32,
+    "checkpoints": [
+      8,
+      16,
+      24,
+      28,
+      31
+    ]
+  },
+  "policy": {
+    "guidance_strength": 0.0,
+    "training_calls": 0,
+    "candidate_route_assessment_calls": 0,
+    "oracle_calls": 0,
+    "remote_compute": false,
+    "heldout_structure_access": false,
+    "candidate_selection": false,
+    "gate_changes": false
+  }
+}

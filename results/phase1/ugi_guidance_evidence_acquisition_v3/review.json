@@ -1,0 +1,73 @@
+{
+  "schema_version": "forge.guidance_acquisition_review.v1",
+  "scope": "Newly acquired source records for the remaining direct-input recovery gaps; not complete transitive guidance qualification.",
+  "source_reviews": [
+    {
+      "source_id": "chemimpex_cyclohexylamine",
+      "claim": "Current item-level supplier availability observation",
+      "status": "direct_observation_available_for_separate_qualification",
+      "disposition": "abstain",
+      "reason_codes": ["new_evidence_version_not_yet_qualified", "historical_hash_mismatch"],
+      "locator": "Product title, CAS and purity fields; size selector; embedded application/json product variants and formatted lead_time; JSON-LD offers",
+      "observations": "Five pack sizes have Ships Today labels and positive variant availability. The 205L variant has a later shipping date and is not counted as same-day stock. Generic Unavailable fallback text coexists with the populated variant data.",
+      "historical_record_restored": false
+    },
+    {
+      "source_id": "tci_heptadecanal",
+      "claim": "Current supplier availability",
+      "status": "direct_access_denied_index_observation_retained",
+      "disposition": "abstain",
+      "reason_codes": ["direct_supplier_response_403", "index_capture_is_not_a_live_stock_observation"],
+      "observations": "The web index labels the primary page as crawled six days ago. Its US/Japan stock table is retained with that age; retrieval time is not relabeled as the stock observation time."
+    },
+    {
+      "source_id": "tci_bromotridecane",
+      "claim": "Current supplier availability",
+      "status": "direct_access_denied_stale_index",
+      "disposition": "abstain",
+      "reason_codes": ["direct_supplier_response_403", "index_capture_seven_months_old"],
+      "observations": "An alternative Fisher supplier page was saved and identifies the exact material; its retrieved HTML does not establish current item-level stock."
+    },
+    {
+      "source_id": "sigma_protected_propargyl_alcohol",
+      "claim": "Current supplier availability",
+      "status": "direct_timeout_availability_requires_cart",
+      "disposition": "abstain",
+      "reason_codes": ["direct_supplier_timeout", "stock_not_explicit_in_accessible_page"],
+      "observations": "The indexed Sigma page instructs checking the cart for availability. Fisher provides an exact product listing without an explicit current stock response in the saved HTML; Wako returned 404. No cart was changed."
+    },
+    {
+      "source_id": "mce_stearolic_acid",
+      "claim": "Current supplier availability",
+      "status": "direct_access_denied_identity_sources_only",
+      "disposition": "abstain",
+      "reason_codes": ["direct_supplier_response_403", "no_verified_item_level_stock"],
+      "observations": "Exact identity is supported by the retrieved PubChem response and Thermo specification. TargetMol direct access returned 412; its search result has inquiry-only item rows. INDOFINE retrieval failed TLS verification, which was not disabled."
+    },
+    {
+      "source_id": "thermo_stearolic_acid_spec",
+      "claim": "Product identity",
+      "status": "identity_specification_visually_checked",
+      "disposition": "abstain",
+      "reason_codes": ["identity_only_no_route_or_stock_admission"],
+      "locator": "Product specification, page 1",
+      "observations": "The displayed CAS, formula, InChIKey and SMILES identify the configured stearolic-acid terminal. The PDF displays print date 2026-09-14 although retrieved on 2026-09-13 UTC; this is preserved and is not used to date a stock observation."
+    },
+    {
+      "source_id": "oppolzer_lookchem_transcription",
+      "claim": "C18 oxidation procedure chain",
+      "status": "new_transcription_saved_primary_article_access_incomplete",
+      "evidence_basis": "exact_executed_characterized",
+      "disposition": "abstain",
+      "reason_codes": ["historical_transcription_hash_mismatch", "primary_article_visual_procedure_check_pending"],
+      "doi": "10.1021/jo000463n",
+      "locators": ["New article transcription, printed page 4769, general Parikh-Doering procedure", "Original ACS SI page 5, compound 8d, with neighboring pages 4 and 6 visually inspected"],
+      "observations": "The original SI visibly reports compound 8d, 17-octadecynal, its 52 percent isolated yield and product-specific characterization. The new transcription supplies the general-procedure text, but contains no usable scheme images. The university record identifies the published article and labels its main file Login required; no restricted file was downloaded. Product characterization alone does not complete the new route qualification."
+    }
+  ],
+  "newly_qualified_routes": 0,
+  "newly_qualified_terminal_records": 0,
+  "historical_pins_changed": false,
+  "gates_relaxed": false,
+  "guidance_run_ready": false
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "forge.primary_article_audit_validation.v1",
+  "created_at_utc": "2026-09-13T20:57:33.877625+00:00",
+  "status": "focused_source_and_mechanical_checks_pass",
+  "inputs": {
+    "results/phase1/ugi_guidance_primary_article_audit_v1/result.json": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/result.json",
+      "sha256": "77a759c2d66166ae72f9bfe7d32a779a06d251ff46d1cbcd5c5cdc7865eea98a",
+      "bytes": 12462
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/review.json": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/review.json",
+      "sha256": "6f6062b682388300ad3807b9551204dcc3ed5a0aebc5b4746691b67fee2a3292",
+      "bytes": 8262
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/audit.py": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/audit.py",
+      "sha256": "b44f035c059e4278502840b595c0bf21db8e878cb49c02a10f89e3d7fc80e8bc",
+      "bytes": 12516
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/test_audit.py": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/test_audit.py",
+      "sha256": "78cd0e6ee63bd1b0789ac9a4109fbeb86d89efca40e8db411ea9e02586bbf8eb",
+      "bytes": 1927
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/verify.log": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc",
+      "bytes": 1066
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/replay.log": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/replay.log",
+      "sha256": "f80e3217bdb664ce19adee24c5f59b25f50d68f8616e5a4fceb7902df9a74c5e",
+      "bytes": 56
+    },
+    "results/phase1/ugi_guidance_primary_article_audit_v1/style.log": {
+      "path": "results/phase1/ugi_guidance_primary_article_audit_v1/style.log",
+      "sha256": "9eb733fa613daf31970f09ffe0a6f10862dfddb7a1743bedfab9e81b7ecab364",
+      "bytes": 75
+    }
+  },
+  "test_reports": {
+    "focused-tests": {
+      "counts": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 17
+      },
+      "xml": {
+        "path": "results/phase1/ugi_guidance_primary_article_audit_v1/focused-tests.xml",
+        "sha256": "97fe0ab53ddd42979da6f166ffda135ac5d4ee648d891e5b44ac4d939aac809c",
+        "bytes": 2612
+      },
+      "log": {
+        "path": "results/phase1/ugi_guidance_primary_article_audit_v1/focused-tests.log",
+        "sha256": "f44919a3367dc52929a8af8f8919d5f9536d2eb90b5c6c6d38b1e58904be21bc",
+        "bytes": 80
+      }
+    },
+    "adversarial-tests": {
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 5
+      },
+      "xml": {
+        "path": "results/phase1/ugi_guidance_primary_article_audit_v1/adversarial-tests.xml",
+        "sha256": "67d12ed9c10c5325bd394db3d7a00e9fe687cfad0560dfe14412405459be31a0",
+        "bytes": 1300
+      },
+      "log": {
+        "path": "results/phase1/ugi_guidance_primary_article_audit_v1/adversarial-tests.log",
+        "sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+        "bytes": 80
+      }
+    }
+  },
+  "checks": {
+    "vendor_assets_verified": 30,
+    "article_audit_read_only_replay": true,
+    "black_and_ruff": true,
+    "atom_order_checks": 100,
+    "molecular_generation_calls": 0
+  },
+  "commands": {
+    "mechanical_and_source_replay": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/ugi_guidance_primary_article_audit_v1/audit.py --verify",
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_m0_05_source_evidence_adjudication.py tests/test_qualified_forward.py tests/test_pinned_sources_are_tracked.py",
+    "adversarial": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q results/phase1/ugi_guidance_primary_article_audit_v1/test_audit.py",
+    "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify"
+  },
+  "development_failure": {
+    "path": "results/phase1/ugi_guidance_primary_article_audit_v1/development_attempt_001/failure.json",
+    "resolved": true,
+    "note": "Initial read-only replay rejected the bytes metadata key; final caller passes the strict path/sha256 pair and preserves byte counts separately."
+  },
+  "full_repository_tests_rerun": false,
+  "global_phase1_definition_of_done_met": false,
+  "limitations": [
+    "Full-suite failures preserved from prior acquisition pass; no repository-wide pass claimed.",
+    "Source review plus transform consistency qualifies a single L2 evidence record; no complete route, current L3 availability or production guidance admission."
+  ]
+}

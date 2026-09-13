@@ -1,0 +1,8 @@
+{
+  "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify",
+  "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/forge-evidence-v6-validation/full-tests.xml' make test",
+  "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q results/phase1/ugi_guidance_evidence_acquisition_v6/test_qualify.py tests/test_current_sampler_preflight.py tests/test_pinned_sources_are_tracked.py --junitxml=/private/tmp/forge-evidence-v6-validation/focused-tests.xml",
+  "replay": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/ugi_guidance_evidence_acquisition_v6/qualify.py --verify",
+  "style": "Black --check and Ruff check for qualify.py, test_qualify.py and save_validation.py in results/phase1/ugi_guidance_evidence_acquisition_v6/",
+  "collection": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/ugi_guidance_evidence_acquisition_v6/save_validation.py /private/tmp/forge-evidence-v6-validation"
+}

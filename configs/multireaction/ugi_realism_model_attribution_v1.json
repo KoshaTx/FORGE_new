@@ -1,0 +1,106 @@
+{
+  "schema_version": "forge.ugi_realism_model_attribution_config.v1",
+  "scientific_question": "Where does measured-train reconstruction lose structural preferences under noisy topology, and how much does rank normalization plus uniform mixing change confidence on identical categorical training supports?",
+  "target_program": "ugi_3cr_agile",
+  "roles": ["amine_head", "oxoester_aldehyde_body_tail", "isocyanide_tail"],
+  "seed": 2026090801,
+  "records": 16,
+  "batch_size": 16,
+  "flow_times": [0.2, 0.5, 0.8],
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 2,
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_training_config": {
+      "path": "configs/multireaction/shared_bias_parallel_shared_bias_program_role_source_v2.json",
+      "sha256": "672e0fdb44c332411c6ce138740ea7733d0ed4291b6fe5c4bef7d8ab049b67db"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "decoder_comparison_config": {
+      "path": "configs/multireaction/ugi_donor_slack_tiered_head_topologytier_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1.json",
+      "sha256": "5c56f3547d10b9f9376cdc2fb68db5cf8d9f515ec2ee3448f1e052b53436d96e"
+    }
+  },
+  "sources": {
+    "attribution_metrics": {
+      "path": "forge/model/ugi_realism_model_attribution.py",
+      "sha256": "ccf0a0ccd8ada79dce20b4037d11ea383686b892c0601ab45a4dea1fcf7c2040"
+    },
+    "attribution_runner": {
+      "path": "experiments/phase1/multireaction/ugi_realism_model_attribution.py",
+      "sha256": "4b5d6ea25f10357d2246ab038802d75b2c486c46b630cfe996171b0aada2f857"
+    },
+    "training_primitives": {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    "noising_and_masks": {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "caddb8afef9db47b51cb15259492c3a582a621271249286d68646beea4014b9c"
+    },
+    "transformer": {
+      "path": "forge/model/reaction_program_transformer.py",
+      "sha256": "a5bda0628d277e77ef90f113f398e6f81e4b63808c475c57e669e7134e3411d0"
+    },
+    "graph_representation": {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    "sparse_pointer_support": {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    },
+    "rank_law": {
+      "path": "forge/model/ugi_mog_semantic_guidance.py",
+      "sha256": "d1d17871015a735e2137d74270742a30a146a1be2b304673efa8d79b54010223"
+    },
+    "cache_loader": {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    },
+    "checkpoint_loader": {
+      "path": "experiments/phase1/multireaction/reaction_specialization.py",
+      "sha256": "a86cbf6d16418f988cd01ca2afda68548388ba7e20fabac6249375c041a1e674"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "policy": {
+    "candidate_selection": false,
+    "training_calls": 0,
+    "generation_calls": 0,
+    "route_or_oracle_calls": 0,
+    "heldout_or_calibration_structure_access": false,
+    "biological_conditioning": false
+  },
+  "nonclaims": [
+    "The 16 train products maximize component coverage; their scores are diagnostic and not unbiased population or held-out quality estimates.",
+    "Target-topology teacher forcing preserves exactly the same noisy chemistry. It is an off-policy reconstruction diagnostic, not a generation procedure.",
+    "The rank-law probe isolates the existing rank/uniform mathematical law on identical categorical training supports with equal other scores. Those supports are not complete admissible terminal-decoder arrangements, so its confidence shifts do not measure actual molecular rollout changes or realism.",
+    "Coordinate losses and this interface audit do not imply that a whole-graph Transformer lacks learned correlations.",
+    "No training, molecular rollout, repair, retry, model promotion, biological conditioning, candidate selection, routing or oracle calls occur."
+  ]
+}

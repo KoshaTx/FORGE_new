@@ -1,0 +1,139 @@
+{
+  "acquisition_result_status": "five_target_material_observations_qualified_combined_routes_pending",
+  "created_at_utc": "2026-09-13T21:29:20.704405+00:00",
+  "global_phase1_definition_of_done_met": false,
+  "inputs": [
+    {
+      "bytes": 36513,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/result.json",
+      "sha256": "3dc6468dee3401c1410a341388327d12d93d395d1e2e2b29048f3639f2188176"
+    },
+    {
+      "bytes": 14587,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/qualify.py",
+      "sha256": "d2aefd376445d74700e125a56f6d7296c469c12989f904ec44ee656b04652dba"
+    },
+    {
+      "bytes": 4378,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/test_qualify.py",
+      "sha256": "51aad03bea1d9dc74917eb3c67e6bbcc7b06812fd2db22518dbafb75451808ec"
+    },
+    {
+      "bytes": 3943,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/save_validation.py",
+      "sha256": "ae05934125d9a36d01f81fdaac36ca62da691f55a606c5249e8c87c569453f20"
+    },
+    {
+      "bytes": 24637,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/route_source_check.json",
+      "sha256": "6ce1ff81256721939a1d37739cd5d6fa5a1ef5f4a4c7e81ee42536f6e9f18c9a"
+    },
+    {
+      "bytes": 23276,
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    {
+      "bytes": 3754,
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    {
+      "bytes": 988776,
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  ],
+  "log_archives": [
+    {
+      "archive": {
+        "bytes": 77560,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/validation_logs/full-tests.xml.gz",
+        "sha256": "babe2998fe6cafe292a797ec62a8a8528e19acc2f81f97664c16fa9221e15981"
+      },
+      "original": {
+        "bytes": 644821,
+        "filename": "full-tests.xml",
+        "sha256": "cb3199149854ee97b2f022ed17c957f6a5ed55ddcc38c4bf8b33485b6ffb8ad5"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 23937,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/validation_logs/full-tests.log.gz",
+        "sha256": "f6b501df43b3147839e5fc0b7c7179aee09107619c1ee494611e3e1774e0f947"
+      },
+      "original": {
+        "bytes": 246728,
+        "filename": "full-tests.log",
+        "sha256": "ecc387d58d951ca2bd795376559b2d4d20d6bfdf315d5ba5ce402f244d543a7b"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 838,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/validation_logs/focused-tests.xml.gz",
+        "sha256": "d9a9e7acfafc2c1da20c45c6f83c1a8fb2455b806d4a995fea4924d9de75a9b0"
+      },
+      "original": {
+        "bytes": 3275,
+        "filename": "focused-tests.xml",
+        "sha256": "85169c945859e5ec61f14490a53629629381d27aec85430c1905383cd6734527"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 33,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/validation_logs/focused-tests.log.gz",
+        "sha256": "2d100c6a78d312d2bf1867563cc3f698a1044690d7ccb73cd9b236dbd69fe506"
+      },
+      "original": {
+        "bytes": 80,
+        "filename": "focused-tests.log",
+        "sha256": "c66ef7936b32d2201bf6eb901cf69cbc8e71996669c38afe1f70ad40098e04a3"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 478,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/validation_logs/verify.log.gz",
+        "sha256": "24ebacad94ba0400916378e17b6be43a2225bc89635934a1327c8cafb0e180de"
+      },
+      "original": {
+        "bytes": 1066,
+        "filename": "verify.log",
+        "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+      }
+    }
+  ],
+  "notes": [
+    "New acquisition tests live under results/ and are explicitly included in the focused command, not the repository-default testpaths.",
+    "Skipped counts include the JUnit representation of xfail. No failing repository checks were changed or skipped in this pass.",
+    "Acquisition replay and touched-source Black/Ruff passed separately; exact command list is in validation_commands.json.",
+    "Archive extension changes storage metadata only; original result and extension receipt are retained."
+  ],
+  "schema_version": "forge.guidance_acquisition_validation.v1",
+  "test_reports": {
+    "focused-tests": {
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 20,
+        "skipped": 0,
+        "tests": 20
+      },
+      "duration_seconds": 20.928
+    },
+    "full-tests": {
+      "counts": {
+        "errors": 21,
+        "failures": 167,
+        "passed": 2338,
+        "skipped": 92,
+        "tests": 2618
+      },
+      "duration_seconds": 493.524
+    }
+  },
+  "vendor_verification_log_contains_success": true
+}

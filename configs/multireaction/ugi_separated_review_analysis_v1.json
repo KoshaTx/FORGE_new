@@ -1,0 +1,71 @@
+{
+  "schema_version": "forge.ugi_realism_separated_review_analysis_plan.v1",
+  "created_at_utc": "2026-09-09T16:43:29.558071+00:00",
+  "timing": "before reading any fresh R01-R12 human responses; real packet already prepared and representative depictions inspected",
+  "inputs": {
+    "packet_result": {
+      "path": "results/phase1/ugi_realism_review_separation_v1/packet_attempt_0001/packet_result.json",
+      "sha256": "0f0dc27dce1279330ab31649beb9e3d71e9d28cfb9751758c69e56e22e749285",
+      "bytes": 35336
+    },
+    "form_manifest": {
+      "path": "results/phase1/ugi_realism_review_separation_v1/form/build_manifest.json",
+      "sha256": "c7c255748fb0796bbb5994c4112952454a8581d915cc488073111e0f1753f87a",
+      "bytes": 7734
+    },
+    "blinding_key": {
+      "path": "results/phase1/ugi_realism_review_separation_v1/packet_attempt_0001/blinding_key.json",
+      "sha256": "728a2417571d35cf6fd20c4494828e7244f0b62f8d618e38beb09dfb60e1c5ca",
+      "bytes": 41429
+    },
+    "analysis_protocol": {
+      "path": "docs/PHASE1_UGI_SEPARATED_REVIEW_ANALYSIS_PLAN.md",
+      "sha256": "7742ff44f23386c1c9cdbdabc84911a4cd4e7adda8abec952cb3e467d7458310",
+      "bytes": 4286
+    }
+  },
+  "population": {
+    "identical_graph_redrawing": 8,
+    "baseline_measured_diagnostic": 4
+  },
+  "pair_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+  ],
+  "summaries": [
+    "identity_by_population",
+    "preferences_by_population",
+    "redraw_preference_cross_tabulation",
+    "redraw_directional_concordance",
+    "redraw_joint_depiction_association",
+    "redraw_concern_consistency",
+    "diagnostic_preferences_and_concerns_by_origin",
+    "confidence_by_population",
+    "all_joined_verbatim_rows"
+  ],
+  "policy": {
+    "descriptive_only": true,
+    "preserve_all_rows_and_abstentions": true,
+    "confidence_weighting": false,
+    "p_values": false,
+    "bootstrap": false,
+    "automatic_response_correction": false,
+    "calibration_pass_rule": null,
+    "model_promotion": false,
+    "goal_achieved": false,
+    "new_training": false,
+    "new_generation": false,
+    "biological_interpretation": false
+  },
+  "development": "synthetic responses and synthetic keys only; actual key parsed only after completed captured review is validated"
+}

@@ -1,0 +1,259 @@
+"""Read-only prediction replay and an independent NumPy convex optimality certificate."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+import torch
+
+from experiments._runtime.historical import resolve_pinned_input
+from experiments.phase1.multireaction.ugi_joint_denoising_probe import resolve, validate_data
+from forge.core.hashing import pin_record
+from forge.core.io import read_json_object, write_json
+from forge.model.ugi_joint_denoising import EdgeBlockLaw, collate, make_queries
+
+
+def numpy_projection(raw_logits, targets):
+    """Direct probability-space scaling, independently implemented from the log-space solver."""
+    value = np.exp(raw_logits - raw_logits.max(axis=(1, 2, 3), keepdims=True))
+    value /= value.sum(axis=(1, 2, 3), keepdims=True)
+    for _ in range(10000):
+        for axis, marginal in enumerate(targets, 1):
+            reduced = tuple(i for i in (1, 2, 3) if i != axis)
+            observed = value.sum(axis=reduced)
+            shape = [len(value), 1, 1, 1]
+            shape[axis] = value.shape[axis]
+            value *= (marginal / observed).reshape(shape)
+        error = max(
+            float(
+                np.max(np.abs(value.sum(axis=tuple(i for i in (1, 2, 3) if i != axis)) - marginal))
+            )
+            for axis, marginal in enumerate(targets, 1)
+        )
+        if error < 1e-12:
+            return value, error
+    raise ValueError("independent IPF did not converge")
+
+
+def certify_projection(raw_logits, targets, log_q):
+    """Verify feasibility and additive log-density-ratio optimality for positive tables."""
+    if not np.isfinite(raw_logits).all() or not np.isfinite(log_q).all():
+        raise ValueError("this certificate requires strictly positive finite joint laws")
+    q = np.exp(log_q)
+    error = max(
+        float(np.max(np.abs(q.sum(axis=tuple(j for j in (1, 2, 3) if j != axis)) - target)))
+        for axis, target in enumerate(targets, 1)
+    )
+    normalization = float(np.max(np.abs(q.sum(axis=(1, 2, 3)) - 1)))
+    if max(error, normalization) > 1e-10:
+        raise ValueError("projection is not feasible at the unchanged tolerance")
+    shape = q.shape[1:]
+    indices = np.indices(shape).reshape(len(shape), -1).T
+    design = np.stack(
+        [np.ones(len(indices))]
+        + [
+            (indices[:, axis] == k).astype(float)
+            for axis, size in enumerate(shape)
+            for k in range(size - 1)
+        ],
+        axis=1,
+    )
+    ratio = (log_q - raw_logits).reshape(len(q), -1).T
+    potentials = np.linalg.lstsq(design, ratio, rcond=None)[0]
+    residual = float(np.max(np.abs(ratio - design @ potentials)))
+    if residual > 1e-7:
+        raise ValueError("joint table fails the information-projection optimality certificate")
+    return q, error, residual
+
+
+def verify(repo, result_path, output):
+    if output.exists():
+        raise ValueError("verification output must be fresh")
+    result = read_json_object(result_path)
+    archived_audit_sources = []
+    # Test/verification maintenance may follow a run; executed scientific helpers must still
+    # match current bytes. Historical authentication never substitutes code during this replay.
+    audit_paths = {
+        "tests/test_ugi_joint_denoising.py",
+        "experiments/phase1/multireaction/ugi_joint_denoising_verify.py",
+    }
+    for pin in result["inputs"].values():
+        if pin["path"] in audit_paths:
+            authenticated = resolve_pinned_input(repo, pin["path"], pin["sha256"])
+            if authenticated != (repo / pin["path"]).resolve():
+                archived_audit_sources.append(
+                    {"original": pin, "authenticated_archive": pin_record(authenticated, repo)}
+                )
+        else:
+            resolve(pin, repo)
+    for pin in result["artifacts"].values():
+        resolve(pin, repo)
+    config = read_json_object(resolve(result["config"], repo))
+    data = read_json_object(resolve(config["inputs"]["data"], repo))
+    inventory = read_json_object(resolve(config["inputs"]["inventory"], repo))
+    if validate_data(data, inventory) != result["coverage"]:
+        raise ValueError("source graph or partition verification disagrees")
+    graphs, runtime = data["components"], config["runtime"]
+    atoms, bonds = len(data["node_alphabet"]), len(data["bond_alphabet"])
+    old_threads = torch.get_num_threads()
+    max_probability_error = max_nll_error = max_kkt_error = 0.0
+    forwards = checked_queries = 0
+    component_losses = {i: [] for i in range(len(graphs))}
+    try:
+        torch.set_num_threads(runtime["cpu_threads"])
+        with torch.random.fork_rng(devices=[]), torch.no_grad():
+            for fold in (0, 1):
+                folder = result_path.parent / f"fold_{fold}"
+                expected = make_queries(
+                    graphs,
+                    fold,
+                    training=True,
+                    seed=runtime["exposure_seed"] + fold,
+                    updates=runtime["updates_per_fit"],
+                    per_stratum=runtime["per_stratum"],
+                )
+                if json.loads((folder / "exposures.json").read_text()) != expected:
+                    raise ValueError("fitting exposure reconstruction differs")
+                queries = make_queries(
+                    graphs, fold, training=False, seed=runtime["evaluation_seed"] + fold
+                )
+                if queries != json.loads((folder / "evaluation_queries.json").read_text()):
+                    raise ValueError("excluded-fold query reconstruction differs")
+                models = []
+                initials = []
+                for is_joint, name in ((False, "independent"), (True, "joint")):
+                    model = EdgeBlockLaw(atoms, bonds, joint=is_joint).eval()
+                    checkpoint = torch.load(
+                        folder / name / f"checkpoint_{runtime['updates_per_fit']:04d}.pt",
+                        weights_only=True,
+                    )
+                    if checkpoint["step"] != runtime["updates_per_fit"]:
+                        raise ValueError("wrong final fitting checkpoint")
+                    model.load_state_dict(checkpoint["model"], strict=True)
+                    models.append(model)
+                    initials.append(torch.load(folder / name / "initial.pt", weights_only=True))
+                for name in initials[0]:
+                    if name in initials[1] and not torch.equal(
+                        initials[0][name], initials[1][name]
+                    ):
+                        raise ValueError("initial encoders differ")
+                stores = torch.load(folder / "tables.pt", weights_only=True)
+                rows = json.loads((folder / "predictions.json").read_text())
+                if (
+                    len(rows) != len(queries)
+                    or len(stores)
+                    != (len(queries) + runtime["evaluation_batch_size"] - 1)
+                    // runtime["evaluation_batch_size"]
+                ):
+                    raise ValueError("stored query coverage differs")
+                for batch, start in enumerate(
+                    range(0, len(queries), runtime["evaluation_batch_size"])
+                ):
+                    chunk = queries[start : start + runtime["evaluation_batch_size"]]
+                    inputs, target = collate(graphs, chunk, atoms, bonds)
+                    logits = tuple(value.double() for value in models[0](**inputs))
+                    raw = models[1](**inputs).double()
+                    forwards += 2
+                    stored = stores[batch]
+                    if not all(
+                        torch.equal(a, b)
+                        for a, b in zip(logits, stored["independent_logits"], strict=True)
+                    ):
+                        raise ValueError("independent predictions do not replay exactly")
+                    if not torch.equal(raw, stored["joint_logits"]) or not torch.equal(
+                        target, stored["targets"]
+                    ):
+                        raise ValueError("joint predictions or labels do not replay exactly")
+                    probabilities = []
+                    for value in logits:
+                        a = value.numpy()
+                        p = np.exp(a - a.max(axis=1, keepdims=True))
+                        probabilities.append(p / p.sum(axis=1, keepdims=True))
+                    projected, error, kkt_error = certify_projection(
+                        raw.numpy(), probabilities, stored["projected_log_probabilities"].numpy()
+                    )
+                    max_kkt_error = max(max_kkt_error, kkt_error)
+                    max_probability_error = max(max_probability_error, error)
+                    for i, query in enumerate(chunk):
+                        labels = target[i].tolist()
+                        nll = -float(np.log(projected[(i, *labels)]))
+                        marginal_nll = -sum(
+                            float(np.log(p[i, label]))
+                            for p, label in zip(probabilities, labels, strict=True)
+                        )
+                        original = rows[start + i]
+                        nll_error = max(
+                            abs(nll - original["projected_nll"]),
+                            abs(marginal_nll - original["independent_nll"]),
+                        )
+                        max_nll_error = max(max_nll_error, nll_error)
+                        if nll_error > 1e-6:
+                            raise ValueError("independent query NLL disagrees")
+                        component_losses[query["component_index"]].append((nll, marginal_nll))
+                    checked_queries += len(chunk)
+    finally:
+        torch.set_num_threads(old_threads)
+    checks = {}
+    for key, row in result["summary"]["strata"].items():
+        role, source = key.split(":")
+        selected = [
+            np.mean(component_losses[i], axis=0)
+            for i, g in enumerate(graphs)
+            if g["role"] == role and g["measured"] == (source == "measured")
+        ]
+        projected, independent = np.mean(selected, axis=0)
+        if (
+            abs(projected - row["projected_nll"]) > 1e-6
+            or abs(independent - row["independent_nll"]) > 1e-6
+        ):
+            raise ValueError("independent stratum NLL differs")
+        checks[key] = {
+            "joint_nll_improves": bool(
+                independent - projected > config["advancement"]["minimum_nll_improvement"]
+            ),
+            "joint_nll_below_uniform": bool(projected < np.log(atoms * atoms * bonds)),
+        }
+    if checks != result["checks"]:
+        raise ValueError("independent advancement decisions differ")
+    receipt = {
+        "schema_version": "forge.ugi_joint_denoising_verification.v1",
+        "status": "verified",
+        "inputs": {
+            "result": pin_record(result_path, repo),
+            "verifier": pin_record(Path(__file__), repo),
+            "historical_resolver": pin_record(repo / "experiments/_runtime/historical.py", repo),
+            "historical_manifest": pin_record(repo / "provenance/frozen-code/manifest.json", repo),
+        },
+        "archived_audit_sources": archived_audit_sources,
+        "executed_scientific_helpers_match_current_pinned_bytes": True,
+        "checked_queries": checked_queries,
+        "model_forwards": forwards,
+        "maximum_marginal_error_independent_numpy": max_probability_error,
+        "maximum_kkt_residual": max_kkt_error,
+        "maximum_nll_difference": max_nll_error,
+        "decision": result["decision"],
+        "all_source_graphs_and_folds_reconstructed": True,
+        "all_fitting_exposures_and_evaluation_queries_reconstructed": True,
+        "initial_encoders_equal": True,
+        "all_final_logits_replayed_exactly": True,
+        "independent_numpy_optimality_certificate_and_stratum_decisions_agree": True,
+        "optimizer_trajectories_reexecuted": False,
+        "shared_helpers": ["model", "query builder", "collator", "source validation"],
+        "original_backbone_calls": 0,
+        "molecular_generation_calls": 0,
+        "goal_achieved": False,
+    }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    write_json(output, receipt)
+    return receipt
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--result", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    print(verify(Path.cwd().resolve(), args.result.resolve(), args.output.resolve())["status"])

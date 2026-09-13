@@ -1,0 +1,44 @@
+{
+  "schema_version": "forge.guidance_source_review.v1",
+  "scope": "Fresh source acquisition and exact terminal observations; no historical evidence replacement",
+  "remaining_supplier_gap": {
+    "name": "stearolic acid",
+    "cas": "506-24-1",
+    "bld": "BD151911 has zero public stock flags for its 100mg pack in every reported region; 1-2 weeks is a supplier lead-time remark, not observed stock.",
+    "fisher": "The additional 5g Thermo listing AAL0129406 is backordered. Its response estimates October 2, 2026 and reports availableQuantity=0.",
+    "combiblocks": "The public search redirects to login. No authenticated lookup was attempted.",
+    "tebubio": "The fetched UK listing contains In stock inside a hidden container (lines 5231-5243). It does not establish visible item availability or US fulfillment and is not admitted.",
+    "interpretation": "No qualifying current US availability established in the checked sources; no claim of universal unavailability."
+  },
+  "article_access": {
+    "doi": "10.1021/jo000463n",
+    "openalex": "Closed; no open full-text repository or PDF URL returned.",
+    "semantic_scholar": "Closed; no openAccessPdf URL returned.",
+    "existing_sources": "The exact original publisher SI and the fresh public article transcription remain available as recorded in v3. The original main article's schemes/procedure page have not been visually authenticated.",
+    "disposition_for_new_complete_route_qualification": "abstain"
+  },
+  "new_primary_route_lead": {
+    "doi": "10.15227/orgsyn.037.0077",
+    "title": "Stearolic acid",
+    "source": "batch_04/stearolic_orgsyn.pdf",
+    "pages_inspected": [1, 2, 3, 4],
+    "scheme_locator": "PDF page 2, three scheme arrows above the Procedure section",
+    "procedure_locator": "PDF page 2; notes and references on page 3",
+    "finding": "Primary source reports preparing exact stearolic acid from oleic acid through a brominated intermediate. The scheme, final identity and prose agree at this source-inspection level.",
+    "disposition_for_current_route": "abstain",
+    "reason_codes": ["new_route_requires_registry_qualification", "new_terminal_evidence_not_qualified", "not_the_frozen_c18_route"],
+    "nonclaim": "This is a separately preserved computational route lead, not a recovered old source, a qualified route extension, or a wet-lab proposal. No planner budget or gate is changed."
+  },
+  "local_access_notes": {
+    "browser": "No browser connection was available. Supplier evidence was obtained through public unauthenticated APIs; no account access was performed.",
+    "bld_guest_api": "The unchanged supplier JavaScript's public request formatter was used with its ordinary guest response. No login state was changed. The public has_stock flags are not bottle counts.",
+    "local_setup_errors": "Initial local probe setup failed on a repository-root calculation and a missing JavaScript helper. Both occurred before any availability request; no paid job or network query was retried by those failures."
+  },
+  "historical_pins_changed": false,
+  "gates_relaxed": false,
+  "supplier_messages": 0,
+  "purchases": 0,
+  "generation_calls": 0,
+  "training_calls": 0,
+  "guidance_calls": 0
+}

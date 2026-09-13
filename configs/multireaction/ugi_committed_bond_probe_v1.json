@@ -1,0 +1,150 @@
+{
+  "schema_version": "forge.ugi_committed_bond_probe_config.v1",
+  "scientific_question": "Does refreshing the frozen model after oracle correct atom states and ester commitments improve target likelihood and accuracy on identically corrupted uncommitted bonds of measured admitted TRAIN products?",
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_training_config": {
+      "path": "configs/multireaction/shared_bias_parallel_shared_bias_program_role_source_v2.json",
+      "sha256": "672e0fdb44c332411c6ce138740ea7733d0ed4291b6fe5c4bef7d8ab049b67db"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "program_draw": {
+      "path": "results/phase1/ugi_joint_substitution_semantic_program_draw_seed0_v6/program_draw.json",
+      "sha256": "ad5f6afdbd074ba2a11459ab7a74e276f17f9701dddce8522bf04f7f95133f7a"
+    },
+    "protocol": {
+      "path": "docs/PHASE1_UGI_COMMITTED_BOND_REFRESH_PROTOCOL.md",
+      "sha256": "fb9aa066c9769056d04c73b52fd45e93694e71586d155f65417314ca3d4c40a1"
+    }
+  },
+  "sources": {
+    "attribution_metrics": {
+      "path": "forge/model/ugi_realism_model_attribution.py",
+      "sha256": "ccf0a0ccd8ada79dce20b4037d11ea383686b892c0601ab45a4dea1fcf7c2040"
+    },
+    "attribution_runner": {
+      "path": "experiments/phase1/multireaction/ugi_realism_model_attribution.py",
+      "sha256": "4b5d6ea25f10357d2246ab038802d75b2c486c46b630cfe996171b0aada2f857"
+    },
+    "training_primitives": {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    "noising_and_masks": {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "caddb8afef9db47b51cb15259492c3a582a621271249286d68646beea4014b9c"
+    },
+    "transformer": {
+      "path": "forge/model/reaction_program_transformer.py",
+      "sha256": "a5bda0628d277e77ef90f113f398e6f81e4b63808c475c57e669e7134e3411d0"
+    },
+    "graph_representation": {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    "sparse_pointer_support": {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    },
+    "rank_law": {
+      "path": "forge/model/ugi_mog_semantic_guidance.py",
+      "sha256": "d1d17871015a735e2137d74270742a30a146a1be2b304673efa8d79b54010223"
+    },
+    "cache_loader": {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    },
+    "checkpoint_loader": {
+      "path": "experiments/phase1/multireaction/reaction_specialization.py",
+      "sha256": "a86cbf6d16418f988cd01ca2afda68548388ba7e20fabac6249375c041a1e674"
+    },
+    "program_policy": {
+      "path": "forge/model/ugi_measured_joint_program_prior.py",
+      "sha256": "8e9816e7f2c2ce88f8a4723e01473574d71332373412dee99c4b9596c67efaa3"
+    },
+    "ester_policy": {
+      "path": "forge/model/ugi_ester_chemotype.py",
+      "sha256": "bb4a818e4109e18884577a632b33003b32e28499e576d20945056290824c68c3"
+    },
+    "probe_metrics": {
+      "path": "forge/model/ugi_committed_bond_probe.py",
+      "sha256": "1e65ec521e5f3692cf39da28c19205291d1e9b0050c4ca69ec93b8054762716e"
+    },
+    "probe_runner": {
+      "path": "experiments/phase1/multireaction/ugi_committed_bond_probe.py",
+      "sha256": "0482c0028477e46f64c40aa007e92952cadcdcbb38a4dc886eca16a9841c6621"
+    },
+    "source_snapshot": {
+      "path": "experiments/phase1/multireaction/ugi_realism_diagnostic_suite.py",
+      "sha256": "097aa86a110f3e95cc6aeb1c92f391e1bf42fe0870e784321d14373eaa80fb08"
+    },
+    "terminal_commitments": {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    }
+  },
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "target_program": "ugi_3cr_agile",
+  "roles": [
+    "amine_head",
+    "oxoester_aldehyde_body_tail",
+    "isocyanide_tail"
+  ],
+  "seed": 2026090817,
+  "records": 16,
+  "flow_times": [
+    0.5,
+    0.9
+  ],
+  "cpu_threads": 2,
+  "device": "cpu",
+  "precision": "float32",
+  "repeat_atol": 1e-06,
+  "policy": {
+    "training_calls": 0,
+    "generation_calls": 0,
+    "route_or_oracle_calls": 0,
+    "heldout_or_calibration_structure_access": false,
+    "candidate_selection": false,
+    "promotion_gate_changes": false,
+    "source_adjudicated_measured_train_only": true,
+    "existing_program_support_required": true,
+    "all_admitted_components_required": true,
+    "morphology_quantile": 0.25
+  },
+  "nonclaims": [
+    "This is an oracle TRAIN sensitivity probe, not evidence of generated robustness, realism, generalization or efficacy.",
+    "The fixed 16-product panel covers admitted measured TRAIN components; it is not an unbiased population estimate.",
+    "Both conditions receive exact target topology; refreshed receives correct atom states and only the existing ester commitments. No evaluated bond input changes.",
+    "Every committed bond is excluded from the metrics. Actually corrupted and unchanged uncommitted coordinates are reported separately.",
+    "The advancement gate must pass separately at both times and cannot pool away a role or time regression. Empty corrupted-role strata are insufficient evidence.",
+    "No training, generation, candidate selection, routing, potency oracle calls, heldout molecular interpretation, or production sampler modification occurs."
+  ]
+}

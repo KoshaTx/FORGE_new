@@ -1,0 +1,539 @@
+{
+  "candidate_assessment_calls": 0,
+  "created_at_utc": "2026-09-13T21:22:47.265589+00:00",
+  "generation_calls": 0,
+  "guidance_calls": 0,
+  "inputs": [
+    {
+      "bytes": 4298,
+      "path": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+      "sha256": "ea07140ccfa668ad66804da368a489fe017b2e295bacbab68dc0b219a836928c"
+    },
+    {
+      "bytes": 7895,
+      "path": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+      "sha256": "fd50551dec47126d8a0aded212f9946f3eaa07fb1d9f562f3bbbb848bd830478"
+    },
+    {
+      "bytes": 13672,
+      "path": "experiments/phase1/synthesis_guidance/current_sampler_preflight.py",
+      "sha256": "410fc621fb3aedba08aeb28c7a4bd977e4731be5f058e904ae07ae3adff940cd"
+    },
+    {
+      "bytes": 42143,
+      "path": "experiments/phase1/synthesis_guidance/sources/ugi3_cumulative_production_source.py",
+      "sha256": "661486af2f5bfd768f282a0c5645b8a96cd3dd041ed61f99e3ca5d092736ae67"
+    },
+    {
+      "bytes": 16045,
+      "path": "experiments/phase1/synthesis_guidance/sources/ugi3_source_qualified_cumulative_inputs.py",
+      "sha256": "1193049e2f1a7c3d0ad679114f8cb8efdf97fd71202078ff4b5effb84514d1cf"
+    }
+  ],
+  "interpretation": "Historical source authentication only; new terminal observation is not substituted into historical inputs.",
+  "result": {
+    "assessment_as_of_utc": "2026-08-03T17:30:13Z",
+    "candidate_assessment_calls": 0,
+    "current_availability_claim": false,
+    "errors": [
+      {
+        "message": "third_wave_head_terminals input pin mismatch: supplier_page",
+        "type": "Ugi3CumulativeProductionSourceError"
+      }
+    ],
+    "expected_cumulative_source_inputs_sha256": "0fca91fae36da762eda53695405ec74cf5f9eacd19aee6ca3e4495a6a4d427c6",
+    "loader_paths": {
+      "exact_assessment": {
+        "exists": true,
+        "path": "results/phase1/ugi3_exact_evidence_source/assessment_ledger.json.gz"
+      },
+      "exact_c16_assessment": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c16/assessment.json.gz"
+      },
+      "exact_c16_config": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c16/config.json"
+      },
+      "exact_c16_result": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c16/result.json"
+      },
+      "exact_c16_step_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c16/step_verification_ledger.json.gz"
+      },
+      "exact_c18_assessment": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c18/assessment.json.gz"
+      },
+      "exact_c18_config": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c18/config.json"
+      },
+      "exact_c18_result": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c18/result.json"
+      },
+      "exact_c18_step_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/exact_c18/step_verification_ledger.json.gz"
+      },
+      "exact_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_exact_evidence_source.json"
+      },
+      "exact_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_exact_evidence_source/result.json"
+      },
+      "fresh_v2_component_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v2/component_synthesis_values.json.gz"
+      },
+      "fresh_v2_config": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v2/config.json"
+      },
+      "fresh_v2_product_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v2/product_synthesis_values.json.gz"
+      },
+      "fresh_v2_result": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v2/result.json"
+      },
+      "fresh_v3_component_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v3/component_synthesis_values.json.gz"
+      },
+      "fresh_v3_config": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v3/config.json"
+      },
+      "fresh_v3_product_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v3/product_synthesis_values.json.gz"
+      },
+      "fresh_v3_result": {
+        "exists": false,
+        "path": "results/phase1/ugi3_source_qualified_cumulative_inputs_v1/fresh_v3/result.json"
+      },
+      "high_leverage_head_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_high_leverage_head_terminal_audit_v1.json"
+      },
+      "high_leverage_head_product_ledger": {
+        "exists": true,
+        "path": "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/product_impact_ledger.csv.gz"
+      },
+      "high_leverage_head_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_high_leverage_head_terminal_audit_v1/result.json"
+      },
+      "hybrid_assessment": {
+        "exists": true,
+        "path": "results/phase1/ugi3_hybrid_search/assessment_ledger.json.gz"
+      },
+      "hybrid_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_hybrid_search.json"
+      },
+      "hybrid_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_hybrid_search/result.json"
+      },
+      "role_gap_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json"
+      },
+      "role_gap_product_ledger": {
+        "exists": true,
+        "path": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/product_impact_ledger.csv.gz"
+      },
+      "role_gap_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/result.json"
+      },
+      "second_wave_head_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_second_wave_head_terminal_audit_v1.json"
+      },
+      "second_wave_head_product_ledger": {
+        "exists": true,
+        "path": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz"
+      },
+      "second_wave_head_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_second_wave_head_terminal_audit_v1/result.json"
+      },
+      "targeted_aldehyde_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json"
+      },
+      "targeted_aldehyde_product_ledger": {
+        "exists": true,
+        "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/product_closure_impact_ledger.csv.gz"
+      },
+      "targeted_aldehyde_result": {
+        "exists": true,
+        "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json"
+      },
+      "targeted_aldehyde_route_ledger": {
+        "exists": true,
+        "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz"
+      },
+      "third_wave_head_config": {
+        "exists": true,
+        "path": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json"
+      },
+      "third_wave_head_product_ledger": {
+        "exists": false,
+        "path": "results/phase1/ugi3_third_wave_head_terminal_audit_v1/product_impact_ledger.csv.gz"
+      },
+      "third_wave_head_result": {
+        "exists": false,
+        "path": "results/phase1/ugi3_third_wave_head_terminal_audit_v1/result.json"
+      }
+    },
+    "pinned_inputs": {
+      "builder_runner": {
+        "expected": {
+          "path": "scripts/phase1_build_ugi3_source_qualified_cumulative_inputs.py",
+          "sha256": "30abb1f7286c50e7fb5f0a109a418a1ef168ea8b263dcd2a28df0ad5011c53f9"
+        },
+        "resolved": {
+          "bytes": 1855,
+          "path": "provenance/frozen-code/sha256/30/30abb1f7286c50e7fb5f0a109a418a1ef168ea8b263dcd2a28df0ad5011c53f9",
+          "sha256": "30abb1f7286c50e7fb5f0a109a418a1ef168ea8b263dcd2a28df0ad5011c53f9"
+        },
+        "status": "authenticated"
+      },
+      "builder_source": {
+        "expected": {
+          "path": "src/forge/route/ugi3_source_qualified_cumulative_inputs.py",
+          "sha256": "6c4b7dc4c8a4a5680bc178701e9c29669a4adc2b75606ce776c11475a015b9a3"
+        },
+        "resolved": {
+          "bytes": 15985,
+          "path": "provenance/frozen-code/sha256/6c/6c4b7dc4c8a4a5680bc178701e9c29669a4adc2b75606ce776c11475a015b9a3",
+          "sha256": "6c4b7dc4c8a4a5680bc178701e9c29669a4adc2b75606ce776c11475a015b9a3"
+        },
+        "status": "authenticated"
+      },
+      "builder_tests": {
+        "expected": {
+          "path": "tests/test_ugi3_source_qualified_cumulative_inputs.py",
+          "sha256": "73f4787ce2ae6cb59491d60d15eaac7d1efaf14e4596869156b6d55bd6c8ecd4"
+        },
+        "resolved": {
+          "bytes": 1117,
+          "path": "provenance/frozen-code/sha256/73/73f4787ce2ae6cb59491d60d15eaac7d1efaf14e4596869156b6d55bd6c8ecd4",
+          "sha256": "73f4787ce2ae6cb59491d60d15eaac7d1efaf14e4596869156b6d55bd6c8ecd4"
+        },
+        "status": "authenticated"
+      },
+      "exact_c16_assessment": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz at 97bdd52114c83388d4c9146e1e2569c6ab786903ca62a6004cc2d0017ee75a10",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c16_route_v1/assessment.json.gz",
+          "sha256": "97bdd52114c83388d4c9146e1e2569c6ab786903ca62a6004cc2d0017ee75a10"
+        },
+        "status": "unavailable"
+      },
+      "exact_c16_config": {
+        "expected": {
+          "path": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+          "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"
+        },
+        "resolved": {
+          "bytes": 15367,
+          "path": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+          "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"
+        },
+        "status": "authenticated"
+      },
+      "exact_c16_result": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c16_route_v1/result.json at 99ab8ff669df0e4eb97564abf6ba9ec6b713cdb59c0265a966f101121b4031f4",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c16_route_v1/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c16_route_v1/result.json",
+          "sha256": "99ab8ff669df0e4eb97564abf6ba9ec6b713cdb59c0265a966f101121b4031f4"
+        },
+        "status": "unavailable"
+      },
+      "exact_c16_steps": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz at 81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+          "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+        },
+        "status": "unavailable"
+      },
+      "exact_c18_assessment": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz at d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c18_route_v1/assessment.json.gz",
+          "sha256": "d791cb7e70e53588b6a2888404c7e7a100abc00ccd4e41e409f8f57ab1dc4b6b"
+        },
+        "status": "unavailable"
+      },
+      "exact_c18_config": {
+        "expected": {
+          "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+          "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+        },
+        "resolved": {
+          "bytes": 11457,
+          "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+          "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+        },
+        "status": "authenticated"
+      },
+      "exact_c18_result": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c18_route_v1/result.json at eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c18_route_v1/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c18_route_v1/result.json",
+          "sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+        },
+        "status": "unavailable"
+      },
+      "exact_c18_steps": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz at 459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+          "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b"
+        },
+        "status": "unavailable"
+      },
+      "exact_route_replay": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/synthesis_source_exact_route_replay_v1/result.json at 855436b3eab7388a5f5b02578ce5b27105754cbdcb4f48b504d27c4ee101848d",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/synthesis_source_exact_route_replay_v1/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/synthesis_source_exact_route_replay_v1/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/synthesis_source_exact_route_replay_v1/result.json",
+          "sha256": "855436b3eab7388a5f5b02578ce5b27105754cbdcb4f48b504d27c4ee101848d"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v2_component_values": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz at f66656a7bd0971701f387b0bd6278f9f9578b2195770f6671c6e7cc8f56a94e1",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/component_synthesis_values.json.gz",
+          "sha256": "f66656a7bd0971701f387b0bd6278f9f9578b2195770f6671c6e7cc8f56a94e1"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v2_config": {
+        "expected": {
+          "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json",
+          "sha256": "bc7e0318610b186dbfc602da686483a11867bd60e682b3c9617c840fa09195f7"
+        },
+        "resolved": {
+          "bytes": 6133,
+          "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json",
+          "sha256": "bc7e0318610b186dbfc602da686483a11867bd60e682b3c9617c840fa09195f7"
+        },
+        "status": "authenticated"
+      },
+      "fresh_v2_product_values": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz at 7fdd08e2e4e3c5e28229d29bbf5bc91444a911640d073982354fd985fb287489",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/product_synthesis_values.json.gz",
+          "sha256": "7fdd08e2e4e3c5e28229d29bbf5bc91444a911640d073982354fd985fb287489"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v2_result": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json at 8d0b0e1195bba39b7bf3318675e788f72fd3d0f83e5ef71d7b4082c202bf2841",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v2/result.json",
+          "sha256": "8d0b0e1195bba39b7bf3318675e788f72fd3d0f83e5ef71d7b4082c202bf2841"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v3_component_values": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz at 4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz",
+          "sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v3_config": {
+        "expected": {
+          "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json",
+          "sha256": "84bafa51a90cadd87a888ae92ef3d81a9d82746c17a72b93eddb239fc0210d96"
+        },
+        "resolved": {
+          "bytes": 5448,
+          "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json",
+          "sha256": "84bafa51a90cadd87a888ae92ef3d81a9d82746c17a72b93eddb239fc0210d96"
+        },
+        "status": "authenticated"
+      },
+      "fresh_v3_product_values": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz at 258081bae46f5e3416e9c7efba4de01b60d5f0661503ce3b757793afbac79206",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/product_synthesis_values.json.gz",
+          "sha256": "258081bae46f5e3416e9c7efba4de01b60d5f0661503ce3b757793afbac79206"
+        },
+        "status": "unavailable"
+      },
+      "fresh_v3_result": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json at 442e5c01f5c69b505a6767ff48dfb25b9f381233b5086509aec1e32c43163abf",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/result.json",
+          "sha256": "442e5c01f5c69b505a6767ff48dfb25b9f381233b5086509aec1e32c43163abf"
+        },
+        "status": "unavailable"
+      },
+      "source_qualification": {
+        "errors": [
+          {
+            "message": "pinned input hash mismatch: no current or archived bytes match results/phase1/synthesis_value_source_qualification_v1/result.json at 7b72a64e2bc53fbe55aed6751610e9426c735a41553dc95556da123269fd2ad4",
+            "type": "HistoricalPinArchiveError"
+          },
+          {
+            "message": "pinned input for results/phase1/synthesis_value_source_qualification_v1/result.json is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/synthesis_value_source_qualification_v1/result.json",
+            "type": "PinError"
+          }
+        ],
+        "expected": {
+          "path": "results/phase1/synthesis_value_source_qualification_v1/result.json",
+          "sha256": "7b72a64e2bc53fbe55aed6751610e9426c735a41553dc95556da123269fd2ad4"
+        },
+        "status": "unavailable"
+      },
+      "value_source": {
+        "expected": {
+          "path": "src/forge/value/synthesis.py",
+          "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        "resolved": {
+          "bytes": 22507,
+          "path": "provenance/frozen-code/sha256/6e/6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189",
+          "sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        "status": "authenticated"
+      }
+    },
+    "source_loader_calls": 1,
+    "status": "source_authentication_failed"
+  },
+  "schema_version": "forge.guidance_read_only_route_source_check.v1"
+}

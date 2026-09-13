@@ -1,0 +1,110 @@
+{
+  "schema_version": "forge.ugi_realism_review_separation_config.v1",
+  "inputs": {
+    "assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "baseline": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/common/assessed_attempts.jsonl.gz",
+      "sha256": "2e0fdc000d90bf298bdeef2015e0bf356312276f37ea755438952ccd1eaec7b2"
+    },
+    "baseline_assessment_index": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/result_index.json",
+      "sha256": "002e2bd52a3d1d88d4100c2f991fa055aa62c1599087c2357f264b07dd61fb30"
+    },
+    "baseline_common_result": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/amine_semantic/assessment/common/result.json",
+      "sha256": "be3a43d20dadc91c418724f6a7962400409ca25562315dd39dff0b392fe2dae8"
+    },
+    "comparison": {
+      "path": "results/phase1/ugi_donor_slack_tiered_head_group_entropy_terminal_offset_bondweight2_vs_amine_joint_support_cpu_seed0_v1/result.json",
+      "sha256": "7cee509438e908c694fb025aacdb502ec3724715f056db9255e59fd654a081dc"
+    },
+    "evaluator_config": {
+      "path": "configs/multireaction/ugi_realism_evaluator_audit_v1.json",
+      "sha256": "30368261bd653edb63662b1e7651a00f55a078766164412b15970d723af5674c",
+      "bytes": 4613
+    },
+    "evaluator_result": {
+      "path": "results/phase1/ugi_realism_evaluator_audit_v2/result.json",
+      "sha256": "0df4c2ed09918fa69eb6d2b93e2d0925a285ad069a9731f95359f2236fd9118f",
+      "bytes": 411936
+    },
+    "prior_key": {
+      "path": "results/phase1/ugi_realism_evaluator_audit_v2/blinding_key.json",
+      "sha256": "5e8cedec584a88d07957a9d87f591f947eab5e7441ab66e129443034a6665066",
+      "bytes": 22280
+    },
+    "human_summary": {
+      "path": "results/phase1/ugi_realism_human_review_v1/analysis/reviewer_001_v1/summary/result.json",
+      "sha256": "70a9930ddb36f61f7f4636aa101c088cf718b6d55ed4b8422435699ae2895b2a",
+      "bytes": 21625
+    },
+    "protocol": {
+      "path": "docs/PHASE1_UGI_REVIEW_SEPARATION_PROTOCOL.md",
+      "sha256": "0ba21badc121711b9eb3834fc45fafd40032f61e5cc882a93d2a195e731ebdb5",
+      "bytes": 6216
+    },
+    "improvement_protocol": {
+      "path": "docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md",
+      "sha256": "d97d8a608c31545139dc6e03748a341c24114594224b12bff6ba5d1f0a52962c",
+      "bytes": 8496
+    },
+    "pyproject": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47",
+      "bytes": 3754
+    },
+    "lock": {
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942",
+      "bytes": 988776
+    },
+    "preceding_config": {
+      "path": "configs/multireaction/ugi_realism_review_separation_v1.json",
+      "sha256": "946ff850d9123258b95a287449267b80cdfe42a18d08364b0bdef1a5b4684e57",
+      "bytes": 4060
+    },
+    "rendering_amendment": {
+      "path": "docs/PHASE1_UGI_REVIEW_SEPARATION_RENDERING_V2.md",
+      "sha256": "63f5310e725dd52a08d60f77217244ef9aeca0b80bc019fd8220becd6374acc7",
+      "bytes": 2228
+    }
+  },
+  "expected_attempts": 256,
+  "population": {
+    "identical_graph_redrawing": 8,
+    "baseline_measured_diagnostic": 4
+  },
+  "seeds": {
+    "selection": 2026090911,
+    "pair_order": 2026090912,
+    "side": 2026090913,
+    "style": 2026090914
+  },
+  "rendering": {
+    "canvas": "intrinsic_padded_fixed_scale",
+    "scaling_factor": 24.0,
+    "fixed_font_size": 18,
+    "bond_line_width": 2.2,
+    "padding": 0.04,
+    "include_metadata": false,
+    "fixed_bond_length": 24.0,
+    "label_margin_px": 36
+  },
+  "policy": {
+    "train_only": true,
+    "freshness_scope": "complete graphs absent from the original twelve-pair human calibration packet",
+    "baseline_sampling_unit": "unique complete constitutional graph",
+    "measured_sampling_unit": "unique measured TRAIN complete constitutional graph",
+    "distinct_baseline_measured_identities": true,
+    "new_model_calls": false,
+    "new_generation_calls": false,
+    "new_training_calls": false,
+    "remote_compute": false,
+    "modify_gates": false,
+    "automatic_judgments": false,
+    "calibration_pass_rule": null
+  }
+}

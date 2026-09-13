@@ -1,0 +1,93 @@
+{
+  "created_at_utc": "2026-09-13T21:03:28.252098+00:00",
+  "evidence_admitted": false,
+  "historical_pins_changed": false,
+  "inputs": {
+    "requests": {
+      "bytes": 647,
+      "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/requests_01.json",
+      "sha256": "28e8db3838d757e1f53085919e4f2962511c7ed980d293af724f8652f2290cbf"
+    },
+    "script": {
+      "bytes": 3183,
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_guidance_evidence_acquisition_v3/fetch_sources.py",
+      "sha256": "0a50a970c9b9770d21deaa5e7f5c8b5a95cf7962b8e6c9ff3104e21f89c8b5ad"
+    }
+  },
+  "purchase_or_contact_actions": 0,
+  "records": [
+    {
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
+      "error_type": "URLError",
+      "filename": "stearolic_indofine.html",
+      "id": "stearolic_indofine",
+      "requested_at_utc": "2026-09-13T21:03:27.387188+00:00",
+      "status": "retrieval_failed",
+      "url": "https://www.indofinechemical.com/details.aspx?Sku=10-1890"
+    },
+    {
+      "completed_at_utc": "2026-09-13T21:03:28.251958+00:00",
+      "filename": "stearolic_alfa.html",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 13 Sep 2026 21:03:28 GMT",
+        "ETag": null,
+        "Last-Modified": null
+      },
+      "http_status": 200,
+      "id": "stearolic_alfa",
+      "requested_at_utc": "2026-09-13T21:03:27.387503+00:00",
+      "resolved_url": "https://lipids.alfa-chemistry.com/product/9-octadecynoic-acid-cas-506-24-1-316977.html",
+      "response": {
+        "bytes": 77689,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/batch_01_network/stearolic_alfa.html",
+        "sha256": "9a16b15ba18affc61d86b9b24c1b0514e065b55048ab8f8818201e6758ab18cd"
+      },
+      "status": "saved_response_requires_content_review",
+      "url": "https://lipids.alfa-chemistry.com/product/9-octadecynoic-acid-cas-506-24-1-316977.html"
+    },
+    {
+      "completed_at_utc": "2026-09-13T21:03:27.645307+00:00",
+      "filename": "stearolic_cymit.html",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 13 Sep 2026 21:03:27 GMT",
+        "ETag": "\"16rzu3i8qe53d6t\"",
+        "Last-Modified": null
+      },
+      "http_status": 200,
+      "id": "stearolic_cymit",
+      "requested_at_utc": "2026-09-13T21:03:27.387619+00:00",
+      "resolved_url": "https://cymitquimica.com/en/products/10-F774246/506-24-1/octadec-9-ynoic-acid/",
+      "response": {
+        "bytes": 157146,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/batch_01_network/stearolic_cymit.html",
+        "sha256": "ca8553770b1c16061c77373db003ac79f375c2abeedb93c8f74b2fde61be671a"
+      },
+      "status": "saved_response_requires_content_review",
+      "url": "https://cymitquimica.com/en/products/10-F774246/506-24-1/octadec-9-ynoic-acid/"
+    },
+    {
+      "completed_at_utc": "2026-09-13T21:03:27.474075+00:00",
+      "filename": "stearolic_mce.html",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 13 Sep 2026 21:03:27 GMT",
+        "ETag": null,
+        "Last-Modified": null
+      },
+      "http_status": 403,
+      "id": "stearolic_mce",
+      "requested_at_utc": "2026-09-13T21:03:27.387741+00:00",
+      "resolved_url": "https://www.medchemexpress.com/9-octadecynoic-acid.html",
+      "response": {
+        "bytes": 4914,
+        "path": "results/phase1/ugi_guidance_evidence_acquisition_v6/batch_01_network/stearolic_mce.html",
+        "sha256": "1bb44e135b92bc83c621c2e88bf00e6a8f50b2bdd4d3c7b82194edc94f39ba13"
+      },
+      "status": "saved_response_requires_content_review",
+      "url": "https://www.medchemexpress.com/9-octadecynoic-acid.html"
+    }
+  ],
+  "schema_version": "forge.public_source_acquisition.v1"
+}

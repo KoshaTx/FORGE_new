@@ -1,0 +1,110 @@
+{
+  "advancement": {
+    "all_four_strata_required": true,
+    "minimum_nll_improvement": 1e-06
+  },
+  "inputs": {
+    "data": {
+      "bytes": 700614,
+      "path": "results/phase1/ugi_component_joint_law_v1/attempt_0001/data.json",
+      "sha256": "60b1d1e6ced3ac5ff519b7f0a5f8d1beae42be80339881a5932c5eb0de6d1d9b"
+    },
+    "experiments/phase1/multireaction/ugi_joint_denoising_probe.py": {
+      "bytes": 17291,
+      "path": "experiments/phase1/multireaction/ugi_joint_denoising_probe.py",
+      "sha256": "b5dfdb91231b06738baa0fd018ce4e0c7a9d8f64a5e6fcb2e1a200618bfbe6ad"
+    },
+    "forge/core/hashing.py": {
+      "bytes": 7873,
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/core/io.py": {
+      "bytes": 12637,
+      "path": "forge/core/io.py",
+      "sha256": "ba75c512988109feba889d75ef153c20b5493f5ce0e6acd6c777c6573af0f914"
+    },
+    "forge/model/joint_categorical.py": {
+      "bytes": 5685,
+      "path": "forge/model/joint_categorical.py",
+      "sha256": "1d7658b850f692ad6860a0b4e2b5e21f69b2b27e8fd641e949cd951c59c0faaf"
+    },
+    "forge/model/ugi_joint_denoising.py": {
+      "bytes": 9749,
+      "path": "forge/model/ugi_joint_denoising.py",
+      "sha256": "230463b93946599277731476dfdd6c87266fac55adc96fc700618f3be6fa7d66"
+    },
+    "goal_protocol": {
+      "bytes": 8496,
+      "path": "docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md",
+      "sha256": "d97d8a608c31545139dc6e03748a341c24114594224b12bff6ba5d1f0a52962c"
+    },
+    "inventory": {
+      "bytes": 1075563,
+      "path": "results/phase1/ugi_realism_review_separation_v1/analysis/reviewer_001_v1/structural_audit/result.json",
+      "sha256": "16f22ae6a1db4859bf218339d1a1a7ee9b31ec0522171cc122962a4bc081770c"
+    },
+    "prior_data_result": {
+      "bytes": 19098,
+      "path": "results/phase1/ugi_component_joint_law_v1/attempt_0001/result.json",
+      "sha256": "bc9e9985873fa70bc19e15a335e4652f7401b034827b0a48e13b85b3696d8753"
+    },
+    "prior_data_verification": {
+      "bytes": 1481,
+      "path": "results/phase1/ugi_component_joint_law_v1/verification_0001/result.json",
+      "sha256": "10a0583bedc7b4e20aae29dafbc86c3c121cc4a4ce5e915befc1bad26cbd8fcb"
+    },
+    "proposal": {
+      "bytes": 8467,
+      "path": "results/phase1/ugi_joint_denoising_proposal_v1/PROPOSAL.md",
+      "sha256": "5e2ccd459afdeba8f8c4e36f2d5168d5b25fc45613e923749f295e9691da19cf"
+    },
+    "protocol": {
+      "bytes": 5554,
+      "path": "results/phase1/ugi_joint_denoising_probe_v1/PROTOCOL.md",
+      "sha256": "009c832ce30cc48d9b1b22b94dc6e53380b18997bde70c429be2e3f6d4f351d7"
+    },
+    "pyproject.toml": {
+      "bytes": 3754,
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "tests/test_ugi_joint_denoising.py": {
+      "bytes": 7017,
+      "path": "tests/test_ugi_joint_denoising.py",
+      "sha256": "1392e3ee200167d0fccc094dd7d94536a7960759bc4fc69de478943e22d9adb3"
+    },
+    "uv.lock": {
+      "bytes": 988776,
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  },
+  "policy": {
+    "gate_changes": false,
+    "molecular_generation_calls": 0,
+    "original_backbone_calls": 0,
+    "remote_compute": false
+  },
+  "projection": {
+    "max_iterations": 10000,
+    "tolerance": 1e-10
+  },
+  "runtime": {
+    "checkpoint_interval": 256,
+    "cpu_threads": 2,
+    "device": "cpu",
+    "evaluation_batch_size": 128,
+    "evaluation_seed": 2026091120,
+    "exposure_seed": 2026091110,
+    "fits": 4,
+    "gradient_clip": 1.0,
+    "initial_seed": 2026091100,
+    "learning_rate": 0.001,
+    "per_stratum": 16,
+    "precision": "float32",
+    "updates_per_fit": 1024,
+    "weight_decay": 0.0001
+  },
+  "schema_version": "forge.ugi_joint_denoising_probe_config.v1"
+}

@@ -1,0 +1,184 @@
+{
+  "base_checkpoint": {
+    "arm_id": "shared_bias_program_role_source",
+    "step": 9143,
+    "member_sha256": "5da2ac426a11b5f56f7720d140feddf8a7bcee206a5f57f66873300cebcbbf66",
+    "model_state_sha256": "cbf9db937e1d721d850cb117046268ee09774c6eae70b225d750db516aa585d3"
+  },
+  "target_program": "ugi_3cr_agile",
+  "flow_times": [
+    0.2,
+    0.5,
+    0.8,
+    0.95
+  ],
+  "feature_batch_size": 64,
+  "training_batch_size": 64,
+  "optimizer_steps": 64,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip_norm": 1.0,
+  "cpu_threads": 2,
+  "device": "cpu",
+  "precision": "float32",
+  "schema_version": "forge.ugi_candidate_graph_residual_config.v1",
+  "scientific_question": "Do nonadditive complete-candidate graph interactions improve head and aldehyde target-class reconstruction on actual unchanged decoder support beyond a degree-only control?",
+  "inputs": {
+    "base_checkpoint_archive": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/checkpoints.tar",
+      "sha256": "10d77b9d8e947d40fe2aaa91ecd68448ff068e08339cecd4c47d862e96e39142"
+    },
+    "base_training_result": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/training_result.json",
+      "sha256": "44fab52d5427f654d2a24e395b77c00d2d8c7122f5ed67b51cbcc8675f870485"
+    },
+    "base_training_config": {
+      "path": "configs/multireaction/shared_bias_parallel_shared_bias_program_role_source_v2.json",
+      "sha256": "672e0fdb44c332411c6ce138740ea7733d0ed4291b6fe5c4bef7d8ab049b67db"
+    },
+    "base_design": {
+      "path": "results/phase1/shared_bias_parallel_program_role_seed0_v2/study_design.json",
+      "sha256": "d0f206f52ae708e5ffa1e3150a5c8f1513db35d4c5d912160e89e907b7aaefbd"
+    },
+    "production_cache": {
+      "path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz",
+      "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "role_morphology_policy": {
+      "path": "results/phase1/local_morphology_support_v2/policy.json",
+      "sha256": "50dc654b215c2b1e952910cb5a4b5dc228824ac2a61731ca4c8a20035c680538"
+    },
+    "coverage_rows": {
+      "path": "results/phase1/ugi_semantic_residual_coverage_v1/rows.jsonl",
+      "sha256": "c4642419c5bb85bfe71e663a1cd6084a5c7ce0604e089e362c24cc85accf1264"
+    },
+    "coverage_result": {
+      "path": "results/phase1/ugi_semantic_residual_coverage_v1/result.json",
+      "sha256": "437e2de17b473f2c92ee682c9770bdd919c16f61fc29f79f3149a7d8d6928895"
+    },
+    "improvement_protocol": {
+      "path": "docs/PHASE1_UGI_REALISM_IMPROVEMENT_PROTOCOL.md",
+      "sha256": "d97d8a608c31545139dc6e03748a341c24114594224b12bff6ba5d1f0a52962c"
+    },
+    "protocol": {
+      "path": "docs/PHASE1_UGI_CANDIDATE_GRAPH_RESIDUAL_PROTOCOL.md",
+      "sha256": "6bdd41df31bfbab2f845a704595e106b5f1638fee9b331ee89479b04989889d5"
+    },
+    "access_incident": {
+      "path": "results/phase1/ugi_candidate_graph_access_incident_v1/result.json",
+      "sha256": "b9ef5d5a96b6eec49549e5f23862f22be177c900674922426d948d8d18ec4353"
+    },
+    "topology_closure_config": {
+      "path": "configs/model/phase1_ugi_closure_expanded.json",
+      "sha256": "8149b8d493716fdf589b6cc508c9798e9aac03d1392370eb25a65445751e7cba"
+    },
+    "topology_morphology_config": {
+      "path": "configs/model/phase1_ugi_morphology_expanded.json",
+      "sha256": "085b681eb7a12eb5d12767a9537d7a91f275283d4f31973f0be71143b8ec36f6"
+    }
+  },
+  "sources": {
+    "experiments/phase1/multireaction/ugi_candidate_graph_residual.py": {
+      "path": "experiments/phase1/multireaction/ugi_candidate_graph_residual.py",
+      "sha256": "3292faa7e65cef92144049b2a85bfc1e04429288a36da1d4710bc632978dab76"
+    },
+    "experiments/phase1/multireaction/ugi_candidate_graph_coverage.py": {
+      "path": "experiments/phase1/multireaction/ugi_candidate_graph_coverage.py",
+      "sha256": "aa267b9042a2be8c55ea5e960754ee364f8325f64e3fa94a7dc93d1d9b9b1642"
+    },
+    "forge/model/ugi_candidate_graph_residual.py": {
+      "path": "forge/model/ugi_candidate_graph_residual.py",
+      "sha256": "79b817ccdb2dedbd997c56bd89b2fae630a46ab7848a6fc857bc995e69840ad3"
+    },
+    "forge/model/ugi_topology_candidates.py": {
+      "path": "forge/model/ugi_topology_candidates.py",
+      "sha256": "77e3308ce28ca4e1c58e82725cd42e2d096f66faacf94027cc82a73674917f27"
+    },
+    "forge/model/ugi_transformer_topology.py": {
+      "path": "forge/model/ugi_transformer_topology.py",
+      "sha256": "0703100a1ac8d14da6b1f68cdc96ebc65b8aebe858e634ce504052e87a0ed44f"
+    },
+    "forge/model/ugi_morphology_program.py": {
+      "path": "forge/model/ugi_morphology_program.py",
+      "sha256": "65d775b204503fd19315b9654069bb20ece37cf32bab0de407bee215c7e37e5d"
+    },
+    "forge/model/ugi_ester_chemotype.py": {
+      "path": "forge/model/ugi_ester_chemotype.py",
+      "sha256": "bb4a818e4109e18884577a632b33003b32e28499e576d20945056290824c68c3"
+    },
+    "forge/model/local_chemistry_support.py": {
+      "path": "forge/model/local_chemistry_support.py",
+      "sha256": "710d9e05561c47bb0be79362044f2a1b77d98b2eb78d620c8edbf617ce72329e"
+    },
+    "forge/model/synthesis_program_training.py": {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    "forge/model/reaction_program_flow.py": {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "caddb8afef9db47b51cb15259492c3a582a621271249286d68646beea4014b9c"
+    },
+    "forge/model/reaction_program_transformer.py": {
+      "path": "forge/model/reaction_program_transformer.py",
+      "sha256": "a5bda0628d277e77ef90f113f398e6f81e4b63808c475c57e669e7134e3411d0"
+    },
+    "forge/corpus/synthesis_program_production_cache.py": {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    },
+    "experiments/phase1/multireaction/reaction_specialization.py": {
+      "path": "experiments/phase1/multireaction/reaction_specialization.py",
+      "sha256": "a86cbf6d16418f988cd01ca2afda68548388ba7e20fabac6249375c041a1e674"
+    },
+    "experiments/phase1/multireaction/ugi_realism_diagnostic_suite.py": {
+      "path": "experiments/phase1/multireaction/ugi_realism_diagnostic_suite.py",
+      "sha256": "097aa86a110f3e95cc6aeb1c92f391e1bf42fe0870e784321d14373eaa80fb08"
+    }
+  },
+  "partition": {
+    "component_domain": "forge.ugi_candidate_graph_component_partition.v1:2026090824:",
+    "product_domain": "forge.ugi_candidate_graph_product_partition.v1:2026090824:",
+    "bucket_count": 5,
+    "evaluation_bucket": 0
+  },
+  "draws": {
+    "fit": 1024,
+    "amine_disjoint": 256,
+    "aldehyde_disjoint": 256,
+    "repeated_component": 256
+  },
+  "candidate_chunk_size": 128,
+  "width": 32,
+  "seeds": {
+    "draws": 2026090825,
+    "noise": 2026090826,
+    "order": 2026090827,
+    "initialization": 2026090828
+  },
+  "policy": {
+    "backbone_training": false,
+    "molecular_generation": false,
+    "remote_compute": false,
+    "gate_changes": false,
+    "final_checkpoint_only": true,
+    "feature_records_train_only": true
+  },
+  "nonclaims": [
+    "TRAIN reconstruction is not demonstrated generated lipid realism or independent backbone generalization.",
+    "Existing narrow program/semantic applicability is reported with all original excluded rows and source mass.",
+    "Native noisy-state features do not replace parents or closure endpoints with target topology.",
+    "Graph equivalence concerns colored heavy skeletons, not full constitutional lipid identity or terminal chemistry attainability.",
+    "The two disjoint evaluation populations overlap; repeated draws and flow times are dependent.",
+    "Degree-only and graph arms have identical parameter counts but different effective use of neighbor weights.",
+    "An unplanned calibration-layout inspection during API development is disclosed in the pinned access incident; that record contributes no features, labels or scientific measurements.",
+    "Every original realism, structural validity, exact-L1, diversity, novelty, reviewer calibration and fresh confirmation requirement remains necessary."
+  ]
+}

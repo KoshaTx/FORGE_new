@@ -1,0 +1,468 @@
+"""Bounded, source-pinned TRAIN qualification of marginal-preserving joint edge predictions."""
+
+from __future__ import annotations
+
+import argparse
+import ast
+import hashlib
+import json
+import math
+import shutil
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+import torch
+from rdkit import Chem, rdBase
+
+from forge.core.hashing import pin_record, resolve_pin
+from forge.core.io import read_json_object, write_json
+from forge.model.joint_categorical import (
+    independent_log_joint,
+    marginals,
+    project_joint,
+    support_dimension,
+)
+from forge.model.ugi_joint_denoising import (
+    EdgeBlockLaw,
+    collate,
+    make_queries,
+    summarize,
+    train_loss,
+)
+
+
+def resolve(record, repo):
+    return resolve_pin({key: record[key] for key in ("path", "sha256")}, repo, label="joint probe")
+
+
+def validate_data(data, inventory):
+    """Recover complete TRAIN graphs independently from the source inventory before fitting."""
+    selected = {}
+    for key in ("head_component_inventory", "aldehyde_component_inventory"):
+        for row in inventory[key]:
+            if row["in_all_train"]:
+                selected[key, row["canonical_smiles"]] = row
+    roles = sorted(data["coverage"])
+    expected = {}
+    for role, key in zip(
+        roles, ("head_component_inventory", "aldehyde_component_inventory"), strict=True
+    ):
+        for (kind, smiles), row in selected.items():
+            if kind == key:
+                expected[role, smiles] = row
+    graphs = data["components"]
+    identities = [(g["role"], g["canonical_smiles"]) for g in graphs]
+    if len(set(identities)) != len(graphs) or set(identities) != set(expected):
+        raise ValueError("complete TRAIN component coverage differs")
+    for graph in graphs:
+        mol = Chem.MolFromSmiles(graph["canonical_smiles"])
+        if mol is None or len(Chem.GetMolFrags(mol)) != 1:
+            raise ValueError("unparseable or disconnected TRAIN component")
+        labels = [
+            [a.GetAtomicNum(), a.GetFormalCharge(), a.GetIsAromatic()] for a in mol.GetAtoms()
+        ]
+        edges = sorted(
+            [
+                min(b.GetBeginAtomIdx(), b.GetEndAtomIdx()),
+                max(b.GetBeginAtomIdx(), b.GetEndAtomIdx()),
+                data["bond_alphabet"].index(str(b.GetBondType())),
+            ]
+            for b in mol.GetBonds()
+        )
+        if not edges or labels != graph["labels"] or edges != graph["bond_edges"]:
+            raise ValueError("saved TRAIN labels or edges differ from original source")
+        if [data["node_alphabet"].index(label) for label in labels] != graph["tokens"]:
+            raise ValueError("atom alphabet or tokens differ")
+        if (
+            graph["measured"]
+            != expected[graph["role"], graph["canonical_smiles"]]["in_measured_train"]
+        ):
+            raise ValueError("component source stratum differs")
+        if graph["role_index"] != roles.index(graph["role"]):
+            raise ValueError("component role encoding differs")
+    strata = []
+    for role in roles:
+        for measured in (True, False):
+            members = [g for g in graphs if g["role"] == role and g["measured"] == measured]
+
+            def rank(g):
+                domain = f"forge.ugi_component_cavity.v1:2026090902:{role}:{g['canonical_smiles']}"
+                return hashlib.sha256(domain.encode()).hexdigest(), g["canonical_smiles"]
+
+            ordered = sorted(members, key=rank)
+            if any(g["fold"] != i % 2 for i, g in enumerate(ordered)) or len(ordered) < 2:
+                raise ValueError("frozen stratified component partition differs")
+            strata.append(
+                {
+                    "role": role,
+                    "measured": measured,
+                    "components": len(members),
+                    "fold_counts": [sum(g["fold"] == f for g in members) for f in (0, 1)],
+                }
+            )
+    return {
+        "components": len(graphs),
+        "strata": strata,
+        "all_source_graphs_reconstructed": True,
+        "all_original_folds_reconstructed": True,
+        "excluded_components": 0,
+    }
+
+
+def fit(graphs, queries, config, fold, joint, output, atom_classes, bond_classes):
+    runtime = config["runtime"]
+    torch.manual_seed(runtime["initial_seed"] + fold)
+    model = EdgeBlockLaw(atom_classes, bond_classes, joint=joint)
+    optimizer = torch.optim.AdamW(
+        model.parameters(), lr=runtime["learning_rate"], weight_decay=runtime["weight_decay"]
+    )
+    output.mkdir()
+    torch.save(model.state_dict(), output / "initial.pt")
+    history = []
+    started = time.monotonic()
+    for step, batch in enumerate(queries, 1):
+        inputs, targets = collate(graphs, batch, atom_classes, bond_classes)
+        optimizer.zero_grad(set_to_none=True)
+        loss = train_loss(model(**inputs), targets, joint=joint)
+        if not torch.isfinite(loss):
+            raise ValueError("nonfinite fitting loss")
+        loss.backward()
+        norm = torch.nn.utils.clip_grad_norm_(model.parameters(), runtime["gradient_clip"])
+        if not torch.isfinite(norm):
+            raise ValueError("nonfinite fitting gradient")
+        optimizer.step()
+        history.append({"step": step, "loss": float(loss.detach()), "gradient_norm": float(norm)})
+        if step % runtime["checkpoint_interval"] == 0 or step == len(queries):
+            torch.save(
+                {
+                    "step": step,
+                    "model": model.state_dict(),
+                    "optimizer": optimizer.state_dict(),
+                    "rng": torch.get_rng_state(),
+                },
+                output / f"checkpoint_{step:04d}.pt",
+            )
+            write_json(output / "training.json", history)
+            print(f"fold={fold} joint={joint} checkpoint={step}", flush=True)
+    return model.eval(), {
+        "updates": len(history),
+        "queries": sum(map(len, queries)),
+        "duration_seconds": time.monotonic() - started,
+        "parameters": sum(p.numel() for p in model.parameters()),
+    }
+
+
+def recovered_fit(
+    repo, config, paths, recovery, folder, fitting, atom_classes, bond_classes, joint
+):
+    """Reuse completed fitting only when its source, data, settings and exposures are unchanged."""
+    previous = read_json_object(paths[recovery["previous_config"]])
+    if any(previous[key] != config[key] for key in ("runtime", "advancement")):
+        raise ValueError("recovered fitting settings differ")
+    for name in ("data", "inventory", "forge/model/ugi_joint_denoising.py"):
+        if previous["inputs"][name]["sha256"] != config["inputs"][name]["sha256"]:
+            raise ValueError("recovered fitting source or data differ")
+
+    def fit_ast(path):
+        tree = ast.parse(path.read_text())
+        return ast.dump(
+            next(
+                node
+                for node in tree.body
+                if isinstance(node, ast.FunctionDef) and node.name == "fit"
+            )
+        )
+
+    if fit_ast(paths[recovery["previous_runner_archive"]]) != fit_ast(Path(__file__)):
+        raise ValueError("fitting implementation changed since checkpoint")
+    if json.loads(paths[recovery["exposures"]].read_text()) != fitting:
+        raise ValueError("recovered fitting exposures differ")
+    folder.mkdir()
+    for name, input_key in recovery["files"].items():
+        if Path(name).name != name:
+            raise ValueError("recovery output name must be a basename")
+        shutil.copyfile(paths[input_key], folder / name)
+    final = folder / f"checkpoint_{config['runtime']['updates_per_fit']:04d}.pt"
+    saved = torch.load(final, weights_only=True)
+    if saved["step"] != config["runtime"]["updates_per_fit"]:
+        raise ValueError("recovery checkpoint has wrong update count")
+    model = EdgeBlockLaw(atom_classes, bond_classes, joint=joint).eval()
+    model.load_state_dict(saved["model"], strict=True)
+    return model, {
+        **recovery["report"],
+        "reused_completed_fit": True,
+        "optimizer_updates_this_execution": 0,
+        "checkpoint_input": pin_record(final, repo),
+    }
+
+
+def evaluate(graphs, queries, independent, joint, config, output, atom_classes, bond_classes):
+    rows, stores = [], []
+    runtime, policy = config["runtime"], config["projection"]
+    with torch.no_grad():
+        for start in range(0, len(queries), runtime["evaluation_batch_size"]):
+            chunk = queries[start : start + runtime["evaluation_batch_size"]]
+            inputs, target = collate(graphs, chunk, atom_classes, bond_classes)
+            logits = tuple(value.double() for value in independent(**inputs))
+            raw = joint(**inputs).double()
+            probabilities = tuple(value.softmax(-1) for value in logits)
+            factorized = independent_log_joint(probabilities)
+            raw_log = raw - torch.logsumexp(raw.flatten(1), 1)[:, None, None, None]
+            projection = project_joint(raw_log, probabilities, **policy)
+            q = projection.log_probabilities
+            null = project_joint(
+                independent_log_joint(marginals(raw_log.exp())), probabilities, **policy
+            )
+            null_error = float((null.log_probabilities.exp() - factorized.exp()).abs().max())
+            if null_error > policy["tolerance"]:
+                raise ValueError("dependence-destroyed control disagrees with independent law")
+            index = (target[:, 0] * atom_classes + target[:, 1]) * bond_classes + target[:, 2]
+            nll = {
+                name: -law.flatten(1).gather(1, index[:, None]).squeeze(1)
+                for name, law in (
+                    ("independent", factorized),
+                    ("raw_joint", raw_log),
+                    ("projected", q),
+                )
+            }
+            correct = {
+                name: law.flatten(1).argmax(-1) == index
+                for name, law in (
+                    ("independent", factorized),
+                    ("raw_joint", raw_log),
+                    ("projected", q),
+                )
+            }
+            entropy = {
+                name: -(law.exp() * law).flatten(1).sum(-1)
+                for name, law in (("independent", factorized), ("projected", q))
+            }
+            for i, query in enumerate(chunk):
+                row = {
+                    "component_index": query["component_index"],
+                    "edge": query["edge"],
+                    "mask_probability": query["mask_probability"],
+                    **{f"{name}_nll": float(value[i]) for name, value in nll.items()},
+                    **{f"{name}_accuracy": int(value[i]) for name, value in correct.items()},
+                    **{f"{name}_entropy": float(value[i]) for name, value in entropy.items()},
+                    "maximum_marginal_error_in_batch": projection.maximum_marginal_error,
+                    "dependence_destroyed_error_in_batch": null_error,
+                    "ipf_iterations_in_batch": projection.iterations,
+                    "newton_iterations_in_batch": projection.newton_iterations,
+                }
+                for axis, name in enumerate(("left_atom", "right_atom", "bond")):
+                    row[f"{name}_nll"] = float(-logits[axis][i].log_softmax(-1)[target[i, axis]])
+                    row[f"{name}_accuracy"] = int(logits[axis][i].argmax() == target[i, axis])
+                rows.append(row)
+            stores.append(
+                {
+                    "independent_logits": logits,
+                    "joint_logits": raw,
+                    "projected_log_probabilities": q,
+                    "targets": target,
+                }
+            )
+    write_json(output / "predictions.json", rows)
+    torch.save(stores, output / "tables.pt")
+    return rows
+
+
+def run(repo: Path, config_path: Path, output: Path):
+    if output.exists():
+        raise ValueError(f"fresh output directory required: {output}")
+    config = read_json_object(config_path)
+    if config["schema_version"] != "forge.ugi_joint_denoising_probe_config.v1":
+        raise ValueError("unexpected probe config schema")
+    paths = {name: resolve(pin, repo) for name, pin in config["inputs"].items()}
+    data = read_json_object(paths["data"])
+    inventory = read_json_object(paths["inventory"])
+    coverage = validate_data(data, inventory)
+    graphs = data["components"]
+    runtime = config["runtime"]
+    if runtime["device"] != "cpu" or runtime["precision"] != "float32" or runtime["fits"] != 4:
+        raise ValueError("only the frozen bounded CPU fitting policy is supported")
+    atom_classes, bond_classes = len(data["node_alphabet"]), len(data["bond_alphabet"])
+    shape = (atom_classes, atom_classes, bond_classes)
+    output.mkdir(parents=True)
+    snapshot = {**config["inputs"], "config": pin_record(config_path, repo)}
+    write_json(output / "source_snapshot.json", snapshot)
+    for pin in snapshot.values():
+        source = resolve(pin, repo)
+        destination = output / "source_archive" / source.relative_to(repo)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    write_json(output / "coverage.json", coverage)
+    positive = np.ones(shape, dtype=bool)
+    deterministic = np.zeros(shape, dtype=bool)
+    deterministic[0, 0, 0] = True
+    feasibility = {
+        "state_shape": list(shape),
+        "states": math.prod(shape),
+        "full_support_dependence_dimension": support_dimension(positive),
+        "deterministic_active_face_dimension": support_dimension(deterministic),
+        "scope": "Complete masked-token table; chemical completion support not asserted",
+    }
+    write_json(output / "feasibility.json", feasibility)
+    if feasibility["full_support_dependence_dimension"] <= 0:
+        raise ValueError("no dependence freedom in full token table")
+    started = time.monotonic()
+    old_threads, old_determinism = (
+        torch.get_num_threads(),
+        torch.are_deterministic_algorithms_enabled(),
+    )
+    all_rows, calls = [], []
+    try:
+        torch.set_num_threads(runtime["cpu_threads"])
+        torch.use_deterministic_algorithms(True)
+        with torch.random.fork_rng(devices=[]):
+            for fold in (0, 1):
+                folder = output / f"fold_{fold}"
+                folder.mkdir()
+                fitting = make_queries(
+                    graphs,
+                    fold,
+                    training=True,
+                    seed=runtime["exposure_seed"] + fold,
+                    updates=runtime["updates_per_fit"],
+                    per_stratum=runtime["per_stratum"],
+                )
+                testing = make_queries(
+                    graphs, fold, training=False, seed=runtime["evaluation_seed"] + fold
+                )
+                write_json(folder / "exposures.json", fitting)
+                write_json(folder / "evaluation_queries.json", testing)
+                models = []
+                for is_joint, name in ((False, "independent"), (True, "joint")):
+                    recovery = config.get("recoveries", {}).get(f"{fold}:{name}")
+                    if recovery:
+                        model, report = recovered_fit(
+                            repo,
+                            config,
+                            paths,
+                            recovery,
+                            folder / name,
+                            fitting,
+                            atom_classes,
+                            bond_classes,
+                            is_joint,
+                        )
+                    else:
+                        model, report = fit(
+                            graphs,
+                            fitting,
+                            config,
+                            fold,
+                            is_joint,
+                            folder / name,
+                            atom_classes,
+                            bond_classes,
+                        )
+                        report["optimizer_updates_this_execution"] = report["updates"]
+                    models.append(model)
+                    calls.append({"fold": fold, "arm": name, **report})
+                all_rows.extend(
+                    evaluate(graphs, testing, *models, config, folder, atom_classes, bond_classes)
+                )
+    except Exception as exc:
+        write_json(
+            output / "failure.json",
+            {
+                "status": "operational_failure",
+                "error": repr(exc),
+                "elapsed_seconds": time.monotonic() - started,
+                "completed_fits": calls,
+                "source_snapshot": pin_record(output / "source_snapshot.json", repo),
+            },
+        )
+        raise
+    finally:
+        torch.set_num_threads(old_threads)
+        torch.use_deterministic_algorithms(old_determinism)
+    summary = summarize(graphs, all_rows)
+    checks = {
+        stratum: {
+            "joint_nll_improves": row["independent_nll"] - row["projected_nll"]
+            > config["advancement"]["minimum_nll_improvement"],
+            "joint_nll_below_uniform": row["projected_nll"] < math.log(math.prod(shape)),
+        }
+        for stratum, row in summary["strata"].items()
+    }
+    passed = all(all(check.values()) for check in checks.values())
+    artifacts = {
+        str(p.relative_to(output)): pin_record(p, repo)
+        for p in sorted(output.rglob("*"))
+        if p.is_file() and "source_archive" not in p.parts
+    }
+    result = {
+        "schema_version": "forge.ugi_joint_denoising_probe.v1",
+        "status": "complete",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "decision": "qualified_for_native_transition_probe" if passed else "stop_dependency_probe",
+        "config": pin_record(config_path, repo),
+        "inputs": snapshot,
+        "artifacts": artifacts,
+        "coverage": coverage,
+        "feasibility": feasibility,
+        "summary": summary,
+        "checks": checks,
+        "maximum_marginal_error": max(r["maximum_marginal_error_in_batch"] for r in all_rows),
+        "maximum_null_control_error": max(
+            r["dependence_destroyed_error_in_batch"] for r in all_rows
+        ),
+        "fits": calls,
+        "evaluation_queries": len(all_rows),
+        "duration_seconds": time.monotonic() - started,
+        "versions": {
+            "torch": str(torch.__version__),
+            "numpy": np.__version__,
+            "rdkit": rdBase.rdkitVersion,
+        },
+        "calls": {
+            "optimizer_updates": sum(r["updates"] for r in calls),
+            "optimizer_updates_this_execution": sum(
+                r["optimizer_updates_this_execution"] for r in calls
+            ),
+            "fitting_queries": sum(r["queries"] for r in calls),
+            "evaluation_model_forwards": 2
+            * sum(
+                math.ceil(
+                    sum(g["fold"] == fold and len(g["bond_edges"]) * 3 for g in graphs)
+                    / runtime["evaluation_batch_size"]
+                )
+                for fold in (0, 1)
+            ),
+            "original_backbone_forwards": 0,
+            "molecular_generation": 0,
+            "remote_compute": 0,
+        },
+        "goal_achieved": False,
+        "model_promoted": False,
+        "phase1_definition_of_done_met": False,
+        "nonclaims": [
+            "Auxiliary masked-edge task, not deployed R-star transition qualification.",
+            "Complete token tables are not valid molecular candidate pools.",
+            "Fixed conditional marginals do not guarantee full-product diversity or novelty.",
+            "No human realism evidence or generated-model improvement is established.",
+        ],
+    }
+    write_json(output / "result.json", result)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    args = parser.parse_args()
+    result = run(Path.cwd().resolve(), args.config.resolve(), args.output_dir.resolve())
+    print(
+        json.dumps(
+            {"decision": result["decision"], "strata": result["summary"]["strata"]}, indent=2
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

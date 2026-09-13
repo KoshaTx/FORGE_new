@@ -1,0 +1,7 @@
+{
+  "status": "verification_failed_during_development",
+  "error": "PinError: malformed input pin: expected exactly path and sha256",
+  "cause": "pin_record also emits bytes, while resolve_pin accepts only path and sha256",
+  "resolution": "Pass the explicit path/sha256 pair to the strict verifier; keep bytes in the report. No input validation gate relaxed.",
+  "scientific_result_admitted": false
+}

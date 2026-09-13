@@ -1,0 +1,36 @@
+{
+  "schema_version": "forge.ugi_realism_support_audit_config.v1",
+  "scientific_question": "Which measured train structures are excluded by the existing Ugi program policy, and how much descriptor shift does that empirical admission induce against the unchanged full train-development reference?",
+  "inputs": {
+    "production_cache": {"path": "results/phase1/shared_synthesis_program_mixed_cache_v1/cache.npz", "sha256": "249b92744c22109cd5994ad831555df85575bfb6bd58010dce71517e5e881114"},
+    "ugi_assignments": {"path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz", "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"},
+    "qualified_reactions": {"path": "data/vendor/qualified_reactions_v1.json", "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"},
+    "program_draw": {"path": "results/phase1/ugi_joint_substitution_semantic_program_draw_seed0_v6/program_draw.json", "sha256": "ad5f6afdbd074ba2a11459ab7a74e276f17f9701dddce8522bf04f7f95133f7a"},
+    "development_realism_config": {"path": "configs/multireaction/ugi_development_lipid_realism_v3.json", "sha256": "d8f2523aa2d838e554f7e9d887898c795128464a9a8a260b8441e292b6fc8bf2"}
+  },
+  "sources": {
+    "program_policy": {"path": "forge/model/ugi_measured_joint_program_prior.py", "sha256": "8e9816e7f2c2ce88f8a4723e01473574d71332373412dee99c4b9596c67efaa3"},
+    "ester_policy": {"path": "forge/model/ugi_ester_chemotype.py", "sha256": "bb4a818e4109e18884577a632b33003b32e28499e576d20945056290824c68c3"},
+    "development_reference": {"path": "forge/model/common_lipid_realism.py", "sha256": "75dd951152459c49baa4ca595ef23f7e49553f88c5c56c0f52c50ba83df3b22d"},
+    "development_metrics": {"path": "forge/model/ugi_development_realism.py", "sha256": "537053ba9bd7096d3d93073c660758dd3a54db5a09e98e0f3928b0c34e43bf8c"},
+    "production_cache": {"path": "forge/corpus/synthesis_program_production_cache.py", "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"}
+  },
+  "seed": 20260908,
+  "policy": {
+    "fold": "train",
+    "measured_only": true,
+    "admission": "existing_program_admitted_by_ester_policy",
+    "full_reference_preserved": true,
+    "maximum_replicated_rows": 10000,
+    "morphology_quantile": 0.25,
+    "training_generation_route_or_oracle_calls": 0
+  },
+  "nonclaims": [
+    "This is a train-only empirical reference control, not a held-out model claim or proof of complete graph attainability.",
+    "Admitted measured structures and their descriptor distances are not a possible generator best-case bound.",
+    "The full frozen reference and original metric definitions are preserved; the admitted-reference subset is supplemental and may lose group balance.",
+    "Measured populations overlap the train-development reference; these are descriptive controls and carry no independent generalization estimate.",
+    "Counts refer to measured empirical products, components and families; combinatorial products do not add independent component evidence.",
+    "This audit performs no training, generation, candidate selection, routing, oracle calls or biological optimization."
+  ]
+}

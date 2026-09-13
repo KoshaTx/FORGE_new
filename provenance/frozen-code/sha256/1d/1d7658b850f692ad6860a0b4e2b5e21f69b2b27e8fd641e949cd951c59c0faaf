@@ -1,0 +1,133 @@
+"""Finite categorical information projection with explicit structural-zero failures."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+import numpy as np
+import torch
+from scipy.optimize import linprog
+
+
+@dataclass(frozen=True)
+class JointProjection:
+    log_probabilities: torch.Tensor
+    iterations: int
+    maximum_marginal_error: float
+
+
+def marginals(probabilities: torch.Tensor) -> tuple[torch.Tensor, ...]:
+    """Marginalize a batch of complete joint tables, keeping the leading batch axis."""
+    return tuple(
+        probabilities.sum(tuple(j for j in range(1, probabilities.ndim) if j != i))
+        for i in range(1, probabilities.ndim)
+    )
+
+
+def independent_log_joint(targets: tuple[torch.Tensor, ...]) -> torch.Tensor:
+    """Form the exact product law, including zero-probability categories."""
+    if len(targets) < 2:
+        raise ValueError("at least two categorical marginals required")
+    result = None
+    for i, target in enumerate(targets):
+        shape = [target.shape[0]] + [1] * len(targets)
+        shape[i + 1] = target.shape[1]
+        value = target.log().reshape(shape)
+        result = value if result is None else result + value
+    return result
+
+
+def support_dimension(support: np.ndarray) -> int:
+    """Affine dimension of normalized laws with fixed compatible marginals on this face."""
+    indices = np.argwhere(support)
+    if not len(indices):
+        raise ValueError("empty joint support")
+    matrix = np.stack(
+        [
+            (indices[:, axis] == category).astype(float)
+            for axis, size in enumerate(support.shape)
+            for category in range(size)
+        ]
+    )
+    return int(len(indices) - np.linalg.matrix_rank(matrix))
+
+
+def _structural_zero_feasibility(log_reference, targets):
+    """Check feasibility before IPF when reference structural zeros constrain the table."""
+    for row in range(len(log_reference)):
+        support = torch.isfinite(log_reference[row]).cpu().numpy()
+        if support.all():
+            continue
+        indices = np.argwhere(support)
+        if not len(indices):
+            raise ValueError(f"empty reference support at batch row {row}")
+        matrix = np.stack(
+            [
+                (indices[:, axis] == category).astype(float)
+                for axis, size in enumerate(support.shape)
+                for category in range(size)
+            ]
+        )
+        rhs = np.concatenate([target[row].cpu().numpy() for target in targets])
+        feasible = linprog(
+            np.zeros(len(indices)), A_eq=matrix, b_eq=rhs, bounds=(0, None), method="highs"
+        )
+        if not feasible.success:
+            raise ValueError(f"marginals infeasible on reference support at batch row {row}")
+
+
+def project_joint(
+    log_reference: torch.Tensor,
+    targets: tuple[torch.Tensor, ...],
+    *,
+    tolerance: float = 1e-10,
+    max_iterations: int = 10000,
+) -> JointProjection:
+    """Minimize KL(q || reference) with fixed marginals using log-space IPF.
+
+    This numerical primitive makes no claim about molecule validity or diversity. It performs
+    inference only; callers must not use its convergence-dependent loop as a training gradient.
+    """
+    if log_reference.ndim != len(targets) + 1 or len(targets) < 2:
+        raise ValueError("joint dimensions and marginal count disagree")
+    if tolerance <= 0 or not np.isfinite(tolerance) or max_iterations < 1:
+        raise ValueError("invalid IPF convergence policy")
+    if (
+        not len(log_reference)
+        or torch.isnan(log_reference).any()
+        or torch.isposinf(log_reference).any()
+    ):
+        raise ValueError("reference must be a nonempty finite-or-negative-infinity log table")
+    with torch.no_grad():
+        reference = log_reference.detach().to(dtype=torch.float64)
+        checked = tuple(
+            t.detach().to(device=reference.device, dtype=torch.float64) for t in targets
+        )
+        for axis, target in enumerate(checked, 1):
+            if target.shape != (reference.shape[0], reference.shape[axis]):
+                raise ValueError("marginal shape disagrees with joint table")
+            if not torch.isfinite(target).all() or (target < 0).any():
+                raise ValueError("marginals must be finite and nonnegative")
+            if (target.sum(-1) - 1).abs().max() > 1e-12:
+                raise ValueError("each marginal must sum to one")
+        _structural_zero_feasibility(reference, checked)
+        q = reference - torch.logsumexp(reference.flatten(1), 1).reshape([-1] + [1] * len(checked))
+        for iteration in range(1, max_iterations + 1):
+            for axis, target in enumerate(checked, 1):
+                reduce_axes = tuple(j for j in range(1, q.ndim) if j != axis)
+                current = torch.logsumexp(q, reduce_axes)
+                if ((target > 0) & ~torch.isfinite(current)).any():
+                    raise ValueError("positive marginal has no remaining reference support")
+                shape = [q.shape[0]] + [1] * len(checked)
+                shape[axis] = q.shape[axis]
+                # Zero target categories remove that entire face. Avoid -inf - -inf.
+                shift = torch.where(
+                    target > 0, target.log() - current, torch.full_like(current, -torch.inf)
+                )
+                q = q + shift.reshape(shape)
+            error = max(
+                float((a - b).abs().max()) for a, b in zip(marginals(q.exp()), checked, strict=True)
+            )
+            if error <= tolerance:
+                return JointProjection(q, iteration, error)
+        raise ValueError(f"IPF did not converge in {max_iterations} iterations; error={error:.9g}")
