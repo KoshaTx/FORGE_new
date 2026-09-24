@@ -75,8 +75,11 @@ The [author guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines) allow
 main text at initial submission, with references and appendices excluded. The AI-use and optional
 reproducibility statements are also excluded. Do not change the official margins or font sizes.
 
-The AI-use statement records the formatting, editorial and mathematical assistance used for this conversion. Authors must
-complete the broader AI-use disclosure and review description before treating this as a submission.
+The AI-use statement records the author-declared research, software, analysis and writing assistance.
+The ethics statement distinguishes computational evidence from the exploratory mouse measurements;
+animal procedures were approved by Children's Hospital of Philadelphia, as confirmed by the author.
+The protocol number is omitted at the author's request. The reproducibility statement
+links to the appendix account of historical source provenance and archive-access limitations.
 
 ## Overleaf
 

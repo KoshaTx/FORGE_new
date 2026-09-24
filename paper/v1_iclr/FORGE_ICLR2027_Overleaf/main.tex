@@ -907,20 +907,26 @@ complete the frozen computational synthesis dossiers. Candidate-specific synthes
 L2/L3 evidence required by that assessor are distinct from a reporter-imaging measurement.
 
 \subsection*{AI use statement}
-Generative AI assistance was used to adapt the manuscript's LaTeX formatting, file organization
-and bibliography presentation to the ICLR template, and to reorganize and expand the main text
-using existing appendix material and cited literature. AI assistance was also used for the
-full-manuscript language revision, mathematical review, citation checks, consistency review and
-presentation of author-supplied experimental records.
-% Author review required before submission: disclose any additional AI use in research, code,
-% analysis, or writing, and describe the authors' review of AI-assisted work.
+Generative AI tools assisted with conceptual and methodological development, software implementation
+and debugging, experimental design and diagnostic analysis, interpretation of computational results,
+literature search and summarization, and drafting and editing the manuscript. The authors are
+responsible for the final code, reported results, citations and conclusions, including material
+produced with AI assistance.
+
+\subsection*{Ethics statement}
+This work evaluates ionizable-lipid generation computationally and includes exploratory mouse
+bioluminescence measurements with three synthesized FORGE lipids. Animal procedures were approved
+by Children's Hospital of Philadelphia. Molecular design systems can be misused. Chemical validity, exact assembly verification, synthesis-route evidence and predicted
+properties do not establish safety or biological efficacy. The reported mouse measurements do not
+establish tolerability, tissue selectivity or therapeutic efficacy. Generated compounds without
+experimental measurements remain computational candidates requiring further evaluation before use.
 
 \subsection*{Reproducibility statement}
-The model is defined in Section~\ref{sec:method}; encoding, training, sampling and verification
-details are specified in Appendix~\ref{app:forge}. Experimental
-protocols, evaluation definitions, extended results and seed-level tables are provided in
-Appendix~\ref{app:results}. Assumptions and proofs of the formal claims
-appear in Appendix~\ref{app:theory}.
+The Methods and Appendix specify the molecular representation, conditional discrete flow, numerical
+sampler, exact assembly verification, route assessment, benchmark protocols and evaluation metrics.
+Appendix~\ref{app:repro} summarizes randomization, historical implementation provenance and the
+access limitations of the standalone manuscript archive. Seed-level results appear in
+Appendix~\ref{app:results}; assumptions and proofs appear in Appendix~\ref{app:theory}.
 
 \bibliographystyle{iclr2027_conference}
 \bibliography{forge,references}
@@ -1336,12 +1342,14 @@ qualified reaction registry.
 Algorithm~\ref{alg:forge-inference} records every generation attempt, including failures in
 molecular validation, exact replay or route completion.
 
-% Allow the long procedure to continue across pages without shrinking its text.
+% Ruled caption and procedure; paragraph spacing is internal to the algorithmic list.
 \begingroup
+\setlength{\parskip}{0pt}
+\hrule height 0.8pt\kern 2pt
 \refstepcounter{algorithm}
-\noindent\textbf{Algorithm~\thealgorithm.} FORGE generation and fail-closed synthesis-program construction.
+\noindent\textbf{Algorithm~\thealgorithm} FORGE generation and fail-closed synthesis-program construction.
 \label{alg:forge-inference}
-\par
+\par\nobreak\kern 2pt\hrule height 0.4pt\nobreak
 \begin{algorithmic}[1]
 \Require trained coordinate predictors, chemistry $c$, program prior $p_{\rm prog}(\cdot\mid c)$,
 integers $L_{\rm samp}\geq1$ and $B\geq0$, recorded seed $s$, route contract $\mathfrak B$
@@ -1390,7 +1398,31 @@ $\mathcal D_{\rm out}\gets[\,]$; $\mathcal L_{\rm out}\gets[\,]$; $\mathcal H\ge
 \EndFor
 \State \Return $\mathcal D_{\rm out},\mathcal L_{\rm out},\mathcal H$
 \end{algorithmic}
+\nopagebreak\hrule height 0.8pt
 \endgroup
+
+\subsection{Reproducibility and artifact provenance}
+\label{app:repro}
+
+The computational results use the historical shared three-family model. Training-seed labels
+0, 1 and 2 correspond to random-number seeds 20260825, 20260826 and 20260827, respectively
+(Table~\ref{tab:production-seed-counts}). Each comparison retains its declared training split,
+attempt budget, checkpoint rule and evaluator. The manuscript provenance records identify the
+source artifacts for the reported tables and figures through SHA-256 hashes.
+
+The historical source verification matched the complete seed-0 evaluation-source fingerprint to
+a retained code snapshot. No exact match was recovered for the seed-1 and seed-2 evaluation-source
+fingerprint among the retained snapshots inspected, and a complete training-source manifest was
+not recovered. These limits and the checked per-seed settings are recorded in the accompanying
+\nolinkurl{mathematical_review.json}. Current development code does not establish the historical
+implementation used for those runs.
+
+The standalone manuscript archive contains the LaTeX source, generated tables, figure assets and
+provenance records. It does not bundle the training corpora, model checkpoints, full evaluation
+ledgers or a complete historical training-environment and compute manifest. Independent end-to-end
+reruns therefore require access to the corresponding historical run artifacts. The supplied
+experimental images and ROI values are included; the unresolved experimental details are described
+in Section~\ref{sec:in-vivo} and Appendix~\ref{app:in-vivo-methods}.
 
 \clearpage
 
@@ -2056,7 +2088,7 @@ The four reported ROI values are reproduced in Figure~\ref{fig:in-vivo}.
 % Pending protocol completion: purification, analytical identity/purity, exact molar composition,
 % PEG-lipid identity, mixing and buffer exchange, mouse strain/sex/age, administration route,
 % luciferin dose/route/delay, instrument/settings, ROI units/background correction, biological n,
-% treatment/site assignments, and institution/protocol approval. The supplied draft states IV
+% treatment/site assignments. The supplied draft states IV
 % administration, but the anatomical/site assignment needs author confirmation before inclusion.
 % Candidate IDs/SMILES and generating checkpoint IDs are also needed for the experimental record.
 

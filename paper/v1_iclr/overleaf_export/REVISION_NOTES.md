@@ -30,7 +30,7 @@ The author confirmed that FORGE-1, FORGE-2 and FORGE-3 came from the historical 
 
 The Results, abstract, introduction, discussion and experimental methods now acknowledge this exploratory experiment. The comparison is descriptive; no replicate count, error bars, statistical significance, organ targeting, tolerability or therapeutic efficacy is inferred. The PNAS synthesis reference is Chen et al. (2023), DOI 10.1073/pnas.2309472120.
 
-Before submission, the experimental record still needs biological replicate counts, animal/site allocation, signal units and background correction, the final administration/imaging protocol, formulation and analytical details, animal ethics information, and candidate/checkpoint identifiers. The supplied draft states intravenous administration, but this route is omitted from manuscript prose pending confirmation of the treatment/site assignments. No new experiments were initiated.
+Before submission, the experimental record still needs biological replicate counts, animal/site allocation, signal units and background correction, the final administration/imaging protocol, formulation and analytical details, and candidate/checkpoint identifiers. The supplied draft states intravenous administration, but this route is omitted from manuscript prose pending confirmation of the treatment/site assignments. No new experiments were initiated.
 
 ## Figure presentation
 
@@ -41,6 +41,15 @@ The generated two-dimensional examples and atlas use monochrome vector drawings 
 their saved structures. The assembly schemes use the same thin gray bonds and dark atom labels.
 The atlas pairs each generated graph and its canonical SMILES with exact L1 building blocks,
 replacing the decorated 3D column. The original experimental drawings and mouse image are retained. `figures/chemical_drawings/rendering_record.json` records the redraw inputs and outputs.
+
+## Disclosure statements
+
+The AI-use statement now includes the research, software, analysis and writing roles declared by the
+author, with author responsibility for final outputs. The ethics statement acknowledges the three
+synthesized lipids and exploratory mouse measurements already included in the paper. The author confirmed approval by
+Children's Hospital of Philadelphia and requested omission of the protocol number. The reproducibility statement uses
+FORGE terminology and points to the new artifact-provenance subsection, including the historical
+source limitations and the bulk artifacts absent from the standalone manuscript archive.
 
 ## Build validation
 

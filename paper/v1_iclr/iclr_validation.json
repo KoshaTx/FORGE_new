@@ -1,22 +1,22 @@
 {
   "schema_version": 2,
-  "validated_at": "2026-09-24T23:40:52.541749+00:00",
+  "validated_at": "2026-09-24T23:56:43.481551+00:00",
   "scope": "Mathematical and editorial revision with author-supplied exploratory imaging; no training or production evaluation rerun.",
   "artifacts": {
     "FORGE_ICLR2027_paper.tex": {
-      "sha256": "04c625f0118f1a0d2ae7a1b3791fb45abc4e296d95f31d230efac064fd495348"
+      "sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958"
     },
     "FORGE_ICLR2027_paper.pdf": {
-      "sha256": "42ee5b9fc340a191159db756031573b1102ea553ccc940f568b7c3bbcc6f8b3e"
+      "sha256": "fdd44cf19820e59a07e202119107d224b268d5b4aaf55fdb55d790f986d95759"
     },
     "FORGE_ICLR2027_Overleaf.zip": {
-      "sha256": "d8588edec5d2ecb30134d6c36273c19bfc9e2732290e1391ae7faeb407dd9d30"
+      "sha256": "8bf562ac0a4de83cbfe041b8a85d4bce86e36ad1eacf5c65873d088c512d09b0"
     },
     "iclr_provenance.json": {
-      "sha256": "b5d72b3590fd2e751f18d21fa7c31ad4a19ef74187f1cb40c9062ef5b701e4aa"
+      "sha256": "22221e71abf2194a33458dc40c0721059427e706190a3ca739a8dd930861ea78"
     },
     "mathematical_review.json": {
-      "sha256": "3b4977bd508caab98e0ae8f1c6ca6605aeea603edb06a4d0db4ccc7effd3f965"
+      "sha256": "2849cb62a7c65982d6a41c38eef467324848b2dfcd685d014c66a0275b5e1994"
     }
   },
   "build": {
@@ -26,10 +26,10 @@
     "latex_warnings": [],
     "unresolved_references_or_citations": false,
     "overfull_boxes": false,
-    "underfull_box_messages": 9
+    "underfull_box_messages": 10
   },
   "layout": {
-    "total_pages": 39,
+    "total_pages": 40,
     "main_text_last_page": 12,
     "appendix_sections": [
       "Method and implementation details",
@@ -62,7 +62,7 @@
         4
       ]
     },
-    "visual_review": "After the prior full manuscript review, pages 5, 6, 10, 11, 36, 37, 38 and 39 were rendered and inspected for the current figure revisions. Molecular identity and formal charges were preserved; headings, precursor panels, captions, axes, legend and reference line were checked. No clipping or overlaps remained.",
+    "visual_review": "After the prior full manuscript review, pages 5, 6, 10, 11, 36, 37, 38 and 39 were rendered and inspected for the current figure revisions. Molecular identity and formal charges were preserved; headings, precursor panels, captions, axes, legend and reference line were checked. No clipping or overlaps remained. Algorithm 1 and adjacent pages were rendered and inspected after the ruled-layout revision; the numbered procedure, caption rules, font size and cross-references were checked. Pages 12, 13, 21, 22 and 23 were rendered and inspected for the disclosure statements, bibliography transition, preserved algorithm and new reproducibility subsection.",
     "appendix_guide_removed": true,
     "page_budget_editing": "Deferred at user request; no page-limit compliance claim."
   },
@@ -95,9 +95,8 @@
     "exact candidate IDs or canonical structures and checkpoint IDs",
     "lipid purification, identity and purity records",
     "full formulation ratio, PEG-lipid and preparation method",
-    "mouse strain, sex, age, ethics protocol",
-    "luciferin dose, route and imaging delay",
-    "Broader AI-use disclosure and author review."
+    "mouse strain, sex, age",
+    "luciferin dose, route and imaging delay"
   ],
   "table_method_label_revision": {
     "files": 5,
@@ -151,5 +150,23 @@
     "molecular_identities_preserved": true,
     "original_images_preserved": true,
     "atlas_second_column": "Exact L1 building blocks"
+  },
+  "algorithm_presentation": {
+    "format": "Ruled caption and block; bold Require and Ensure; existing numbered and indented steps.",
+    "algorithm_body_unchanged": true,
+    "font_size_unchanged": true,
+    "reference_label": "alg:forge-inference",
+    "page": 21,
+    "checked_algorithm_steps": 38
+  },
+  "disclosure_statements": {
+    "ai_use": "Author-declared conceptual, methodological, software, experimental-design, analytical, literature and writing assistance, with author responsibility.",
+    "ethics": "Computational and exploratory mouse evidence distinguished; approving institution confirmed by author.",
+    "approving_institution": "Children's Hospital of Philadelphia",
+    "protocol_number": "omitted at author request",
+    "reproducibility": "FORGE terminology; new app:repro subsection reports seeds, historical provenance and standalone archive-access limitations.",
+    "cross_references_resolved": true,
+    "statements_page": 12,
+    "reproducibility_appendix_page": 22
   }
 }

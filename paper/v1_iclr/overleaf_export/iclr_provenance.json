@@ -321,7 +321,7 @@
     "pre_expansion_manuscript_sha256": "d6b8e73a226bb0b45b702cd453c39cca8ab4f3b592fb983700d156b4d256180e",
     "canonical_manuscript": {
       "path": "FORGE_ICLR2027_paper.tex",
-      "sha256": "04c625f0118f1a0d2ae7a1b3791fb45abc4e296d95f31d230efac064fd495348"
+      "sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958"
     },
     "promoted_material": [
       {
@@ -444,7 +444,7 @@
     },
     "mathematical_review": {
       "local": "mathematical_review.json",
-      "sha256": "3b4977bd508caab98e0ae8f1c6ca6605aeea603edb06a4d0db4ccc7effd3f965",
+      "sha256": "2849cb62a7c65982d6a41c38eef467324848b2dfcd685d014c66a0275b5e1994",
       "corrections": "REVISION_NOTES.md"
     },
     "experimental_extension": {
@@ -494,13 +494,28 @@
       "generated_examples": "Generated lipid and exact L1 building blocks; middle coordinate column omitted.",
       "atlas": "Twelve frozen products and SMILES paired with their exact L1 building blocks; balanced column widths.",
       "chemistry_style": "Monochrome gray bonds and dark atom labels; supplied experimental drawings retained."
+    },
+    "algorithm_presentation": {
+      "format": "Ruled caption and block; bold Require and Ensure; existing numbered and indented steps.",
+      "algorithm_body_unchanged": true,
+      "font_size_unchanged": true,
+      "reference_label": "alg:forge-inference"
+    },
+    "disclosure_statements": {
+      "ai_use": "Author-declared conceptual, methodological, software, experimental-design, analytical, literature and writing assistance, with author responsibility.",
+      "ethics": "Computational and exploratory mouse evidence distinguished; approving institution confirmed by author.",
+      "approving_institution": "Children's Hospital of Philadelphia",
+      "protocol_number": "omitted at author request",
+      "reproducibility": "FORGE terminology; new app:repro subsection reports seeds, historical provenance and standalone archive-access limitations."
     }
   },
   "experimental_inputs": [
     {
       "local": "experimental/in_vivo/evidence_record.json",
-      "sha256": "4bef9615726b97a218d4ca8931c7196e2bc0f43afcbb5f5ea71ba2fa7beec680",
-      "classification": "transcription and provenance of author-supplied records"
+      "sha256": "3f3352fd316249da70daa9aabf1795ab8ab43674278ace1166c0a715e3c51612",
+      "classification": "transcription and provenance of author-supplied records",
+      "original_snapshot_sha256": "4bef9615726b97a218d4ca8931c7196e2bc0f43afcbb5f5ea71ba2fa7beec680",
+      "local_revision": "Recorded author confirmation of animal-study approval by Children's Hospital of Philadelphia; protocol number omitted at author request."
     },
     {
       "local": "experimental/in_vivo/forge_1_structure_supplied.png",

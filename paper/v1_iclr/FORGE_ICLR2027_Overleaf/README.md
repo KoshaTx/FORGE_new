@@ -17,8 +17,10 @@ lipid structures and the four reported ROI signals. This experimental extension
 remains a working draft pending the protocol, replication and units information
 listed in `experimental/in_vivo/evidence_record.json`. No new experiments were run.
 
-Page-budget editing is deferred. Authors must complete the broader AI-use disclosure
-and review description before submission.
+Page-budget editing is deferred. The AI-use statement records author-declared assistance.
+The ethics statement records approval by Children's Hospital of Philadelphia; the protocol
+number is omitted at the author's request. Appendix A.8 describes historical source provenance
+and access limitations of the standalone manuscript archive.
 
 Molecular drawings are vector PDFs with editable SVG masters in `figures/chemical_drawings/`.
 The saved structure receipts and `render.py` reproduce them with RDKit and rsvg-convert.
