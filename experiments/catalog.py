@@ -488,6 +488,7 @@ def load_catalog() -> None:
     # Importing this allow-listed module applies its @stage decorators. Experiment JSON is never
     # allowed to name an import path or execute arbitrary Python.
     import experiments.phase1.hela_potency.stages  # noqa: F401
+    import experiments.phase1.multireaction.compose_lipid_training  # noqa: F401
     import experiments.phase1.multireaction.stages  # noqa: F401
     import experiments.phase1.product_l1.stages  # noqa: F401
 

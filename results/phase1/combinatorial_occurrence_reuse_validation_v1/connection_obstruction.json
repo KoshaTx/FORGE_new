@@ -1,0 +1,3770 @@
+{
+  "inputs": [
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_validation_v1/report_connection_obstruction.py",
+      "sha256": "de5ce256960ef077859cd7a46e77a8f8fce8c85edc9c1428c3dbb5e8a0c54856"
+    },
+    {
+      "path": "forge/model/precursor_reuse_projection.py",
+      "sha256": "b8994ee70024feda752c92735e6f55336f3001a41feff9b896bf43c0803cbd94"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json",
+      "sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459"
+    },
+    {
+      "path": "results/phase1/combinatorial_reuse_admission_discovery_v1/result.json",
+      "sha256": "6251fb0c9bc6a9e894a2c5dac2d104df6a13e7f3e7393525a122360ab0161912"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json",
+      "sha256": "b218cf52fb5f261bfe477e2725ed44de7385be773326b98af0532f3a56974a70"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/terminals.jsonl",
+      "sha256": "207e802b04bcabdd605b6e4b0390448935cefbc13e1e0e68f984da5a6c5469e4"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/layouts.json",
+      "sha256": "dd5e1735c39c321599b16f855ecfbe0dcc48efa11344aa28f0e1e2b432906ac2"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/plans.json",
+      "sha256": "48ef36256a47eb2709618485996190fd95b0212460b368e97bfecc837f1f5c01"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/proposals.jsonl",
+      "sha256": "4fcc86c064c9e0260159828d9dc1748512de484b679b16abbffe265e7dc67e84"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/result.json",
+      "sha256": "6d1d7eb112c4d3201b67f9505db6015224b148b3cb289fcd2ad0325687d5b7bc"
+    },
+    {
+      "path": "results/phase1/combinatorial_reuse_admission_confirmation_1_v1/result.json",
+      "sha256": "06fd6ab2e769699e3d2a969269d10dda11e18d92587947736279d3bc3b714da3"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/result.json",
+      "sha256": "652c793fc55be97a764736dffa23ccff077030afccc2c749ec033a8f8d12ce41"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/terminals.jsonl",
+      "sha256": "56cfd26a1b294716772dce331b35aba0eaf7eab531a3448a6acd5266a27c5d7e"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/layouts.json",
+      "sha256": "0f22cce5fc6032b9e06443860d4c07c18e1aef9b6eb9869e3cfb226616885ff0"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/plans.json",
+      "sha256": "0cefa02a6c1302a221f9966532e57bdca0665e4b871b2a298f8f00f14d2f3f72"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/proposals.jsonl",
+      "sha256": "4c22897dabe65b1c7fb70e533bebe94729f2f0d78b31e4e94059ad4aa6946e3e"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/result.json",
+      "sha256": "9a52eea7c1b08fa3f8d5dd574e632c10f5b48dba75bf59440cf92e98a33c591c"
+    },
+    {
+      "path": "results/phase1/combinatorial_reuse_admission_confirmation_2_v1/result.json",
+      "sha256": "4de61318c530865cc405749cd94b0bb28d24b23ea77e643829277952fcc41246"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/result.json",
+      "sha256": "9ab31f2dccc8970b605376abbe33ba2fc8df410010ee74114a4b08c172b63374"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/terminals.jsonl",
+      "sha256": "55425b37a4535397b75559efa5f8703cef25c934decefa4e0f205bdc91eff4f7"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/layouts.json",
+      "sha256": "6d9b8e49444f1c9dc7f3474eadf43b1342b498438e3c30e430f2b353afdf5028"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/plans.json",
+      "sha256": "3700cf1638159ad1a050452e174f2bc2dba2167f176f5f4c62aedce69ac83f7c"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/proposals.jsonl",
+      "sha256": "cbdc09898bdeb8f0764db01c577bd8ba53951a0c6c4ad6f9343efd77206a6837"
+    }
+  ],
+  "interpretation": "When no donor delta is zero, whole-occurrence copying with fixed external edges cannot pass the current edge-count gate. This does not justify raising the cycle budget; interiors and connections require a joint proposal.",
+  "invariant": "With m occurrences, internal edge counts k_i and fixed external edges, copying donor d changes the total edge count by m*k_d - sum(k_i).",
+  "populations": {
+    "discovery": {
+      "attempts_blocked_for_every_donor_by_edge_count": 22,
+      "attempts_with_proposals": 40,
+      "rows": [
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            13,
+            13,
+            9,
+            -35
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            21,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 705
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 706
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 707
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            14,
+            14,
+            10,
+            -38
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            21,
+            21,
+            20,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 709
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 713
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            14,
+            14,
+            2,
+            -30
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            21,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 714
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            18,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 715
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 716
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 717
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 719
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 721
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            3,
+            -1,
+            -9
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 724
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 726
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            12,
+            12,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 727
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -1,
+            -5
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            15,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 729
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 730
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 731
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            6,
+            2,
+            -2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 732
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 733
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            7,
+            -21
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            20,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 734
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 736
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            9,
+            9,
+            9,
+            -27
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 738
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 740
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 741
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 743
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 744
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 745
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            12,
+            12,
+            4,
+            -28
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            23,
+            21,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 746
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 747
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 748
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 749
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            7,
+            -21
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 751
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 756
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            21,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 759
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 760
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            7,
+            -21
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 763
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 764
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            15,
+            15,
+            11,
+            -41
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            23,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 765
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            3,
+            -9
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 766
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 767
+        }
+      ]
+    },
+    "replication_1": {
+      "attempts_blocked_for_every_donor_by_edge_count": 37,
+      "attempts_with_proposals": 85,
+      "rows": [
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1408
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            5,
+            5,
+            5,
+            -15
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1410
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1411
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1412
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1413
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1414
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1415
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            4,
+            0,
+            -4,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            17
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1417
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1421
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1424
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            18,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1427
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1428
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1429
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1432
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1434
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1435
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1437
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1438
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1439
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            23
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1440
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1441
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1442
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1445
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1446
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            12,
+            12,
+            4,
+            -28
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            20,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1447
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -2,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1448
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1449
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            19,
+            19,
+            3,
+            -41
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            20,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1451
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1453
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            22,
+            18,
+            -2,
+            -38
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            25,
+            24,
+            19,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1454
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1455
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1456
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1457
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1458
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1459
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1460
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1461
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1462
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            9,
+            5,
+            1,
+            -15
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1465
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1466
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1467
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1468
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            15,
+            15,
+            11,
+            -41
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            23,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1469
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            3,
+            -1,
+            -9
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1470
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1472
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1474
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1476
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            4,
+            4,
+            -8
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            20
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1482
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1483
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1484
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            4,
+            4,
+            -8
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1485
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1487
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1488
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -1,
+            -5
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1489
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            20
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1490
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1491
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1492
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            20,
+            20,
+            0,
+            -40
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            25,
+            25,
+            20,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1493
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1496
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            12,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1497
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            1,
+            -1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1498
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1499
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1500
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1501
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1502
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1503
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            12,
+            12,
+            8,
+            -32
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            21,
+            11
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1504
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1506
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1507
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1511
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -4
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1512
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1513
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1515
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1516
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1518
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1520
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            13,
+            13,
+            5,
+            -31
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            22,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1521
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            7,
+            -21
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            20,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1522
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1523
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1524
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1526
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1527
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -2,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1528
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1531
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            4,
+            4,
+            -8,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17,
+            14,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1533
+        }
+      ]
+    },
+    "replication_2": {
+      "attempts_blocked_for_every_donor_by_edge_count": 50,
+      "attempts_with_proposals": 94,
+      "rows": [
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1408
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            17,
+            17,
+            9,
+            -43
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            23,
+            21,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1409
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1410
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1413
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1414
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            11,
+            11,
+            11,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1415
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            5,
+            1,
+            -3,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1417
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1418
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            3,
+            -9
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1419
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            7,
+            -21
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            19,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1420
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1421
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            15,
+            15,
+            11,
+            -41
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            23,
+            22,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1423
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -4
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            22,
+            20
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1424
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            0,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            21,
+            20,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1425
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1426
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1427
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1428
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1429
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1430
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1431
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -2,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1432
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1433
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            18
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1434
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1435
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1436
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            11,
+            7,
+            11,
+            -29
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            19,
+            20,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1438
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1440
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -4
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            23,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1441
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            14,
+            14,
+            2,
+            -30
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            23,
+            20,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1442
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            12,
+            12,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1445
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            20
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1447
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1448
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            4,
+            4,
+            -4,
+            -4
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17,
+            15,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1449
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            8,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1450
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1451
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            18,
+            14,
+            14,
+            -46
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            21,
+            21,
+            6
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1452
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1453
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1454
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            18,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1456
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            15,
+            11,
+            7,
+            -33
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            23,
+            22,
+            21,
+            11
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1457
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1458
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1459
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1460
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            11,
+            11,
+            11
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1461
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1462
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1463
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            21,
+            21
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1465
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            18,
+            18,
+            2,
+            -38
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            25,
+            25,
+            21,
+            11
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1467
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            17,
+            17,
+            17,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1468
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1471
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1474
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            13,
+            9,
+            13,
+            -35
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            22,
+            21,
+            22,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1475
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            10,
+            10,
+            6,
+            -26
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            18,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1477
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1479
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1481
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            15,
+            11,
+            7,
+            -33
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            21,
+            20,
+            19,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1482
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            21,
+            17,
+            13,
+            -51
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            23,
+            22,
+            6
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1483
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -1,
+            -5
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            15,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1484
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1485
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -3,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1487
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1489
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1490
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1491
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1492
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1493
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1494
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            4,
+            1,
+            -5
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1495
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            19,
+            19,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1496
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1497
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            17,
+            17,
+            13,
+            -47
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            23,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1498
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            12,
+            12,
+            12,
+            -36
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            24,
+            24,
+            24,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1500
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            12,
+            12,
+            12,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1502
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            7
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1503
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            5,
+            5,
+            1,
+            -11
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            15,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1504
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            7,
+            7,
+            -1,
+            -13
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            18,
+            16,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1505
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            7
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1506
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1508
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            -2,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1509
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            15
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1510
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1513
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            11,
+            11,
+            11,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1514
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            2,
+            2,
+            2,
+            -6
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            16,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1515
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1519
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            10,
+            10
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1521
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            -2,
+            1
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            18,
+            17,
+            18
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1522
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            18,
+            18,
+            14,
+            -50
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            19,
+            3
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1524
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            20,
+            20,
+            19
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1526
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            1,
+            -3
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9,
+            9,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1528
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1529
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            9,
+            9
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1530
+        },
+        {
+          "depth": 4,
+          "edge_count_deltas_by_donor": [
+            3,
+            3,
+            -1,
+            -5
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            16,
+            16,
+            15,
+            14
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1531
+        },
+        {
+          "depth": 3,
+          "edge_count_deltas_by_donor": [
+            1,
+            1,
+            -2
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            14,
+            14,
+            13
+          ],
+          "no_existing_donor_can_preserve_edge_count": true,
+          "sample_index": 1532
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            12,
+            12
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1533
+        },
+        {
+          "depth": 2,
+          "edge_count_deltas_by_donor": [
+            0,
+            0
+          ],
+          "family": "urea_amine_isocyanate",
+          "internal_edge_counts": [
+            8,
+            8
+          ],
+          "no_existing_donor_can_preserve_edge_count": false,
+          "sample_index": 1535
+        }
+      ]
+    }
+  },
+  "random_sampling_used": false,
+  "schema_version": "forge.occurrence_connection_obstruction.v1"
+}

@@ -1,0 +1,45 @@
+{
+  "families": {
+    "ketone_ugi4": {
+      "reaction_id": "source_ketone_ugi4",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "carboxylic_acid": "carboxylic_acid",
+        "coupled_ketone": "coupled_ketone",
+        "isocyanide": "isocyanide"
+      }
+    }
+  },
+  "inputs": {
+    "canonical_config": {
+      "path": "configs/multireaction/compose_lipid_supplied_ketone_ugi4_v1.json",
+      "sha256": "718a9e6f985dc0f3e564994171ce78838d26f6f3698c0caf71d5cf9f23d94473"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "role_profiles": {
+      "path": "results/phase1/compose_lipid_ketone_ugi4_source_v1/source-role-profiles.json",
+      "sha256": "6060892c6cacc4ba6fe91edf9cc14f25c25315327ce6609c4158eab8574487c6"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "one_supplied_complete_component_per_role_quantity_one",
+    "population": "current_full_preparation_eligible_only",
+    "retained_handles": "source_role_atom_provenance_excluding_consumed_sites",
+    "role_binding": "explicit_source_lane_bijection_with_original_instances_retained",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_fixed_profiles_config.v1"
+}

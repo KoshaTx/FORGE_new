@@ -1,0 +1,18 @@
+{
+  "candidate_selection": false,
+  "cpu_threads": 2,
+  "inputs": {
+    "pilot_config": {
+      "path": "configs/multireaction/combinatorial_training_pilot_v1.json",
+      "sha256": "98f247457f5dc8878082aca015449175aff271031be6997ce803dd36aabcf600"
+    },
+    "pilot_result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/result.json",
+      "sha256": "e8ad3a9734290d7f299096745a1ce1f23e52a5b196f3e996615071c44d79ebad"
+    }
+  },
+  "remote_compute": false,
+  "schema_version": "forge.combinatorial_generation_config.v1",
+  "scientific_question": "Recover an inference checkpoint exactly matching the frozen balanced twelve-family pilot before attempting generation.",
+  "stage": "checkpoint"
+}

@@ -1,0 +1,54 @@
+{
+  "experimental_execution_admitted": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v2/audit_new_replays.py",
+    "sha256": "3b948dfd687e4a505258bae1cb9a188e8b3f06a2f6f027aae12120c9eab52cc2"
+  },
+  "inputs": {
+    "catalog": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+      "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+    },
+    "miao_drawn_precursors": {
+      "path": "results/phase1/compose_lipid_supplied_miao_cyclic_v2/result.json",
+      "sha256": "4357d4cbb73fba0c1d32b2ed8017d6d918194652ec20361f7f4bf66630192fd0"
+    },
+    "miao_initial": {
+      "path": "results/phase1/compose_lipid_supplied_miao_cyclic_v1/result.json",
+      "sha256": "6a029b4d79e61a7bfd7045f9c0f87d9bcfdd3b7a997994de4247bedcb2cae8bc"
+    },
+    "thiol_yne": {
+      "path": "results/phase1/compose_lipid_supplied_thiol_yne_v1/result.json",
+      "sha256": "480a6d54519fb762d4a3f2f3feadfba38c31ee79bd8f60589914b328d50f1b06"
+    }
+  },
+  "miao_initial": {
+    "complete_precursors": {
+      "42ed62bae5ca590714fa1816513b3c98237cc77a5118aa87974217b5a50c6137": "[C-]#[N+]CC(=O)OC(C)(C)C"
+    },
+    "disposition": "Initial isolated Iso5 ethyl scope does not include the corpus Iso6 tert-butyl precursor; zero is a preserved valid negative result.",
+    "exact": 0,
+    "isocyanide_ids": {
+      "42ed62bae5ca590714fa1816513b3c98237cc77a5118aa87974217b5a50c6137": 1469
+    },
+    "rows": 1469
+  },
+  "miao_source_library_extension": {
+    "disposition": "Primary Fig. 1b generic cyclic ester plus explicit Fig. 1c Iso4/5/6 support the bounded computed net graph. Isolated characterization remains Iso5 only.",
+    "exact": 1469,
+    "rows": 1469
+  },
+  "schema_version": "forge.compose_lipid_source_scope_audit.v1",
+  "seed": 0,
+  "thiol_yne": {
+    "disposition": "Every row reconstructs the supplied source graph, but out-of-scope precursor atoms remain excluded. Source alkyl-thiol scope is not broadened just because a product matches.",
+    "exact": 5605,
+    "failed_terminal_constraints": {
+      "thiol_first:elements": 906,
+      "thiol_second:elements": 906
+    },
+    "rows": 6511,
+    "unresolved": 906
+  },
+  "training_admitted": false
+}

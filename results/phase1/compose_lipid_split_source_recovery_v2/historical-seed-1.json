@@ -1,0 +1,56 @@
+{
+  "assignment_failures": 28,
+  "elapsed_seconds": 13.417192708002403,
+  "failed_fields": {
+    "split": 28
+  },
+  "full_universe_group_selection_performed": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/replay_historical_seed.py",
+    "sha256": "f951ac535d1d09093b952029b286f179b4dfe837a11778c4f47ae96b2553294a"
+  },
+  "inputs": {
+    "config": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/configs/corpus/post_instruction_generator_splits_v8.json",
+      "sha256": "777136aa72fe341e8620416fbe8fad3a096c8c6696ba0d4c8bb4730a494069ba"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "loader": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_historical_selected_groups_v2.py",
+      "sha256": "064ad00fd0431e40b1712fd0e553fe5e472429204fe830e2ef5907a9a19d2f83"
+    },
+    "original_records": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/records.jsonl.gz",
+      "sha256": "13e092f953cf9314d14745fd4547d7cf158dbedebd8f3b830ff7e2fc2f4c1ec9"
+    },
+    "parent": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/result.json",
+      "sha256": "2fd5c7059a14d8bb8eaa7b486c032707f6f25ac5489c988cb4a5bfa87cce3227"
+    },
+    "registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "source_algorithm": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/generator_splits.py",
+      "sha256": "4e4770a83c9a00132db83d9562ce4e025c2777fa0afdf1d7aca1ebf76750ef44"
+    }
+  },
+  "pass": false,
+  "python_hash_seed": 1,
+  "rows": 200000,
+  "schema_version": "forge.compose_lipid_historical_hash_seed_replay.v1",
+  "seed": "post_instruction_broad_lipid_generator_split_v8_candidate_1",
+  "selected_groups": null,
+  "source_assignments_changed": false,
+  "training_admitted": false,
+  "upstream_pure_functions_executed": true,
+  "upstream_source_modified": false
+}

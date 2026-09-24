@@ -1,0 +1,34 @@
+{
+  "acceptance": "Every run must increase full-depth exact reconstruction and preserve every declared metric for each family. Report all runs, original failures, every proposal and all rejections.",
+  "admission_sources": {
+    "experiments/phase1/multireaction/combinatorial_reuse_admission.py": "c35a36175cb12b0eb689ca7dbca58cf001a2206795ca413d1450425f9e1664f5",
+    "forge/model/precursor_reuse_admission.py": "2c190a7b603b487af5887bc7e2c9427a73fad4b6e96b00a53dc1fc9439502533"
+  },
+  "inference_limit": "Fresh TRAIN layout/noise replication, not heldout generalization or improved learned weights. Count preservation is partly guaranteed by the algorithm.",
+  "runs": [
+    {
+      "config": "configs/multireaction/combinatorial_graph_reuse_confirmation_1_v1.json",
+      "sampling": {
+        "attempts_per_family": 128,
+        "batch_size": 16,
+        "flow_seed": 2026091512,
+        "flow_steps": 32,
+        "layout_seed": 2026091511
+      },
+      "sha256": "600b6894355e60257b5c3be5e147ec261a44b3a4d85a038bef7d6092b9ca720d"
+    },
+    {
+      "config": "configs/multireaction/combinatorial_graph_reuse_confirmation_2_v1.json",
+      "sampling": {
+        "attempts_per_family": 128,
+        "batch_size": 16,
+        "flow_seed": 2026091522,
+        "flow_steps": 32,
+        "layout_seed": 2026091521
+      },
+      "sha256": "c7e151c1b66db9b620e3840fb497c22b64025a424acdc1ec5bdd24cd047850f2"
+    }
+  ],
+  "schema_version": "forge.combinatorial_reuse_confirmation_protocol.v1",
+  "selection": "Explicit TRAIN novelty and multiplicity-constrained admission; minimum graph edits, then SMILES, then donor."
+}

@@ -1,0 +1,232 @@
+"""Evaluate and verify constrained selection of authenticated graph-copy proposals."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import tempfile
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+
+from rdkit import rdBase
+
+from experiments._runtime.historical import resolve_pinned_input
+from experiments.phase1.multireaction.combinatorial_generation import _pin, _write
+from experiments.phase1.multireaction.combinatorial_graph_reuse import compare
+from experiments.phase1.multireaction.combinatorial_graph_reuse_verify import (
+    verify as verify_parent,
+)
+from experiments.phase1.multireaction.combinatorial_reuse_pilot import _digest, assess_rows
+from forge.assembly.families import load_assembly_libraries
+from forge.core.hashing import resolve_pin, sha256_file
+from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model.precursor_reuse import PrecursorReuseError
+from forge.model.precursor_reuse_admission import admit_completions
+
+SCHEMA = "forge.combinatorial_reuse_admission.v1"
+POLICY = {
+    "uses_train_product_membership": True,
+    "uses_current_family_product_counts": True,
+    "selection": "minimum_graph_edits_then_smiles_then_donor",
+    "retain_all_original_attempts": True,
+    "gate_changes": False,
+    "neural_generation_calls": 0,
+    "training_calls": 0,
+    "heldout_record_use": False,
+    "prospective_candidate_selection": False,
+    "model_promotion": False,
+}
+SOURCES = (
+    "forge/model/precursor_reuse_admission.py",
+    "experiments/phase1/multireaction/combinatorial_reuse_admission.py",
+    "experiments/phase1/multireaction/combinatorial_graph_reuse_verify.py",
+)
+
+
+def calculate(repo: Path, config_path: Path) -> tuple[dict, list[dict], list[dict]]:
+    config = json.loads(config_path.read_text())
+    if config.get("schema_version") != SCHEMA + "_config" or config.get("policy") != POLICY:
+        raise PrecursorReuseError("admission configuration policy/schema changed")
+    parent_path = resolve_pin(config["parent_result"], repo, label="graph-copy parent")
+    verify_parent(repo, parent_path)
+    parent = json.loads(parent_path.read_text())
+    inputs = parent["inputs"]
+    dataset = json.loads((repo / inputs["dataset_config"]["path"]).read_text())
+    libraries = load_assembly_libraries(
+        [(repo / p["path"], p["sha256"]) for p in parent["registry_inputs"]],
+        expected_families=dataset["programs"],
+    )
+
+    def read(name: str):
+        text = (repo / parent["artifacts"][name]["path"]).read_text()
+        return (
+            [json.loads(s) for s in text.splitlines()]
+            if name.endswith("jsonl")
+            else json.loads(text)
+        )
+
+    originals = [r for r in read("attempts.jsonl") if r["arm"] == "baseline"]
+    with SynthesisProgramProductionCache(repo / inputs["cache"]["path"]) as cache:
+        records = cache.records([r["index"] for r in read("layouts.json")])
+        train = {cache.canonical_smiles(int(i)) for i in cache.indices(fold="train")}
+    components = {
+        r["constitution_id"]
+        for r in json.loads((repo / inputs["component_partitions"]["path"]).read_text())
+        if r["fold"] == "train"
+    }
+    decisions = admit_completions(originals, read("completions.jsonl"), train)
+    raw = [
+        {
+            "sample_index": o["sample_index"],
+            "program_id": o["program_id"],
+            "layout_record_id": o["layout_record_id"],
+            "canonical_smiles": d["selected_smiles"],
+            "valid": d["selected_smiles"] is not None,
+            "constraint_abstention_reason": o["constraint_abstention_reason"],
+        }
+        for o, d in zip(originals, decisions, strict=True)
+    ]
+    with rdBase.BlockLogs():
+        completed = assess_rows(raw, records, "graph_reuse", dataset, libraries, train, components)
+    rows = originals + completed
+    metrics = compare(rows, sorted(libraries))
+    if not metrics["all_family_preservation_screen_passed"]:
+        raise PrecursorReuseError("admission violated a preservation invariant")
+    return (
+        {
+            **metrics,
+            "admission_dispositions": dict(Counter(d["disposition"] for d in decisions)),
+            "proposal_checks": dict(
+                Counter(p["status"] for d in decisions for p in d["proposal_checks"])
+            ),
+            "parent_graph_copy_proposals": parent["graph_copy_proposals"],
+            "parent_additional_assembly_checks": parent["additional_assembly_checks"],
+            "assessment_checks": sum(r["valid_connected"] for r in completed),
+            "reference_train_products": len(train),
+            "reference_train_components": len(components),
+        },
+        rows,
+        decisions,
+    )
+
+
+def run(repo: Path, config_path: Path, output_dir: Path) -> dict:
+    repo = repo.resolve()
+    config_path, output = (repo / config_path).resolve(), (repo / output_dir).resolve()
+    if not config_path.is_relative_to(repo) or not output.is_relative_to(repo) or output.exists():
+        raise PrecursorReuseError("config/output must be local and output fresh")
+    config_pin = _pin(config_path, repo)
+    sources = [_pin(repo / p, repo) for p in SOURCES]
+    config = json.loads(config_path.read_text())
+    metrics, rows, decisions = calculate(repo, config_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".reuse-admission-", dir=output.parent) as temp:
+        work = Path(temp)
+        for name, values in (("attempts.jsonl", rows), ("admissions.jsonl", decisions)):
+            with (work / name).open("w") as stream:
+                for row in values:
+                    stream.write(json.dumps(row, sort_keys=True, allow_nan=False) + "\n")
+        for pin in [config_pin, *sources, config["parent_result"]]:
+            resolve_pin(pin, repo, label="final admission authentication")
+        result = {
+            "schema_version": SCHEMA,
+            "status": "numerical_complete",
+            "config": config_pin,
+            "parent_result": config["parent_result"],
+            "sources": sources,
+            "created_at_utc": datetime.now(timezone.utc).isoformat(),
+            "policy": POLICY,
+            **metrics,
+            "nonclaims": [
+                "This is explicit TRAIN novelty and population-count constrained selection, not a learned-model improvement.",
+                "Preservation of the listed count metrics follows partly by construction; it is not statistical noninferiority or preservation of every chemical diversity measure.",
+                "The parent uses source-derived TRAIN layouts and extra bounded exact-program checks. No new-layout autonomy, heldout generalization, realism or L2/L3 closure is established.",
+                "Every original attempt and rejected proposal is retained; the output includes original failures when no completion is admitted.",
+            ],
+            "artifacts": {
+                p.name: {
+                    "path": str((output / p.name).relative_to(repo)),
+                    "sha256": str(sha256_file(p)),
+                }
+                for p in sorted(work.iterdir())
+            },
+        }
+        _write(work / "result.json", result)
+        os.rename(work, output)
+    return result
+
+
+def verify(repo: Path, result_path: Path) -> dict:
+    repo = repo.resolve()
+    result_path = (repo / result_path).resolve()
+    result = json.loads(result_path.read_text())
+    if (
+        result.get("schema_version") != SCHEMA
+        or result.get("status") != "numerical_complete"
+        or result.get("policy") != POLICY
+        or {p["path"] for p in result["sources"]} != set(SOURCES)
+    ):
+        raise PrecursorReuseError("invalid admission result contract")
+    for pin in [
+        result["config"],
+        result["parent_result"],
+        *result["artifacts"].values(),
+    ]:
+        resolve_pin(pin, repo, label="admission verification")
+    for pin in result["sources"]:
+        if set(pin) != {"path", "sha256"}:
+            raise ValueError("malformed admission source pin")
+        resolve_pinned_input(repo, pin["path"], pin["sha256"])
+    config_path = repo / result["config"]["path"]
+    if json.loads(config_path.read_text())["parent_result"] != result["parent_result"]:
+        raise PrecursorReuseError("admission parent substituted")
+    metrics, rows, decisions = calculate(repo, config_path)
+    if any(result[k] != value for k, value in metrics.items()):
+        raise PrecursorReuseError("admission summary/decision differs from recomputation")
+    for name, expected in (("attempts.jsonl", rows), ("admissions.jsonl", decisions)):
+        actual = [
+            json.loads(s)
+            for s in (repo / result["artifacts"][name]["path"]).read_text().splitlines()
+        ]
+        if _digest(actual) != _digest(expected):
+            raise PrecursorReuseError("admission ledger differs from recomputation")
+    return {
+        "status": "verified",
+        "result_sha256": str(sha256_file(result_path)),
+        "attempts_recomputed": len(rows),
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--verify", type=Path)
+    args = parser.parse_args()
+    if args.verify:
+        result = verify(args.repo_root, args.verify)
+    elif args.config and args.output_dir:
+        result = run(args.repo_root, args.config, args.output_dir)
+    else:
+        parser.error("provide --verify or both --config and --output-dir")
+    print(
+        json.dumps(
+            {
+                k: result[k]
+                for k in (
+                    "status",
+                    "total_exact_gain",
+                    "all_family_preservation_screen_passed",
+                    "attempts_recomputed",
+                )
+                if k in result
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

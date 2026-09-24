@@ -1,0 +1,898 @@
+{
+  "artifacts": {
+    "attempt_audit.jsonl": {
+      "path": "results/phase1/combinatorial_repeat_audit_v1/attempt_audit.jsonl",
+      "sha256": "7d151db247636d206b6a402b9be437684afd45635855d8c096a8dbc4b40d3b66"
+    }
+  },
+  "audited_attempts": 896,
+  "by_arm_family_depth": [
+    {
+      "arm": "trained",
+      "attempts": 21,
+      "classifications": {
+        "no_verified_first_step": 8,
+        "original_exact_program": 13
+      },
+      "diagnostic_fraction_all_attempts": 0.6190476190476191,
+      "diagnostic_full_depth_attempts": 13,
+      "family": "amide_coupling_acid_amine",
+      "original_exact": 13,
+      "original_exact_fraction_all_attempts": 0.6190476190476191,
+      "requested_depth": 1,
+      "valid_connected": 21
+    },
+    {
+      "arm": "trained",
+      "attempts": 43,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 20,
+        "no_verified_first_step": 2,
+        "only_shorter_policy_valid_program": 3,
+        "original_exact_program": 18
+      },
+      "diagnostic_fraction_all_attempts": 0.8837209302325582,
+      "diagnostic_full_depth_attempts": 38,
+      "family": "amide_coupling_acid_amine",
+      "original_exact": 18,
+      "original_exact_fraction_all_attempts": 0.4186046511627907,
+      "requested_depth": 2,
+      "valid_connected": 43
+    },
+    {
+      "arm": "trained",
+      "attempts": 13,
+      "classifications": {
+        "original_exact_program": 13
+      },
+      "diagnostic_fraction_all_attempts": 1.0,
+      "diagnostic_full_depth_attempts": 13,
+      "family": "aza_michael_amine_acrylate",
+      "original_exact": 13,
+      "original_exact_fraction_all_attempts": 1.0,
+      "requested_depth": 1,
+      "valid_connected": 13
+    },
+    {
+      "arm": "trained",
+      "attempts": 51,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 33,
+        "invalid_graph": 9,
+        "original_exact_program": 1,
+        "role_policy_blocks_first_step": 8
+      },
+      "diagnostic_fraction_all_attempts": 0.6666666666666666,
+      "diagnostic_full_depth_attempts": 34,
+      "family": "aza_michael_amine_acrylate",
+      "original_exact": 1,
+      "original_exact_fraction_all_attempts": 0.0196078431372549,
+      "requested_depth": 2,
+      "valid_connected": 42
+    },
+    {
+      "arm": "trained",
+      "attempts": 5,
+      "classifications": {
+        "original_exact_program": 5
+      },
+      "diagnostic_fraction_all_attempts": 1.0,
+      "diagnostic_full_depth_attempts": 5,
+      "family": "carbamate_amine_chloroformate",
+      "original_exact": 5,
+      "original_exact_fraction_all_attempts": 1.0,
+      "requested_depth": 1,
+      "valid_connected": 5
+    },
+    {
+      "arm": "trained",
+      "attempts": 59,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 38,
+        "only_shorter_policy_valid_program": 3,
+        "original_exact_program": 16,
+        "role_policy_blocks_first_step": 2
+      },
+      "diagnostic_fraction_all_attempts": 0.9152542372881356,
+      "diagnostic_full_depth_attempts": 54,
+      "family": "carbamate_amine_chloroformate",
+      "original_exact": 16,
+      "original_exact_fraction_all_attempts": 0.2711864406779661,
+      "requested_depth": 2,
+      "valid_connected": 59
+    },
+    {
+      "arm": "trained",
+      "attempts": 17,
+      "classifications": {
+        "no_verified_first_step": 7,
+        "original_exact_program": 10
+      },
+      "diagnostic_fraction_all_attempts": 0.5882352941176471,
+      "diagnostic_full_depth_attempts": 10,
+      "family": "epoxide_opening_amine",
+      "original_exact": 10,
+      "original_exact_fraction_all_attempts": 0.5882352941176471,
+      "requested_depth": 1,
+      "valid_connected": 17
+    },
+    {
+      "arm": "trained",
+      "attempts": 47,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 28,
+        "no_verified_first_step": 3,
+        "only_shorter_policy_valid_program": 6,
+        "original_exact_program": 9,
+        "role_policy_blocks_first_step": 1
+      },
+      "diagnostic_fraction_all_attempts": 0.7872340425531915,
+      "diagnostic_full_depth_attempts": 37,
+      "family": "epoxide_opening_amine",
+      "original_exact": 9,
+      "original_exact_fraction_all_attempts": 0.19148936170212766,
+      "requested_depth": 2,
+      "valid_connected": 47
+    },
+    {
+      "arm": "trained",
+      "attempts": 17,
+      "classifications": {
+        "no_verified_first_step": 8,
+        "original_exact_program": 9
+      },
+      "diagnostic_fraction_all_attempts": 0.5294117647058824,
+      "diagnostic_full_depth_attempts": 9,
+      "family": "iphos_amine_dioxaphospholane",
+      "original_exact": 9,
+      "original_exact_fraction_all_attempts": 0.5294117647058824,
+      "requested_depth": 1,
+      "valid_connected": 17
+    },
+    {
+      "arm": "trained",
+      "attempts": 47,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 23,
+        "invalid_graph": 4,
+        "no_verified_first_step": 6,
+        "only_shorter_policy_valid_program": 6,
+        "original_exact_program": 1,
+        "role_policy_blocks_first_step": 7
+      },
+      "diagnostic_fraction_all_attempts": 0.5106382978723404,
+      "diagnostic_full_depth_attempts": 24,
+      "family": "iphos_amine_dioxaphospholane",
+      "original_exact": 1,
+      "original_exact_fraction_all_attempts": 0.02127659574468085,
+      "requested_depth": 2,
+      "valid_connected": 43
+    },
+    {
+      "arm": "trained",
+      "attempts": 10,
+      "classifications": {
+        "no_verified_first_step": 3,
+        "original_exact_program": 7
+      },
+      "diagnostic_fraction_all_attempts": 0.7,
+      "diagnostic_full_depth_attempts": 7,
+      "family": "reductive_amination_amine_aldehyde",
+      "original_exact": 7,
+      "original_exact_fraction_all_attempts": 0.7,
+      "requested_depth": 1,
+      "valid_connected": 10
+    },
+    {
+      "arm": "trained",
+      "attempts": 54,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 41,
+        "no_verified_first_step": 2,
+        "only_shorter_policy_valid_program": 2,
+        "original_exact_program": 9
+      },
+      "diagnostic_fraction_all_attempts": 0.9259259259259259,
+      "diagnostic_full_depth_attempts": 50,
+      "family": "reductive_amination_amine_aldehyde",
+      "original_exact": 9,
+      "original_exact_fraction_all_attempts": 0.16666666666666666,
+      "requested_depth": 2,
+      "valid_connected": 54
+    },
+    {
+      "arm": "trained",
+      "attempts": 32,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 23,
+        "invalid_graph": 1,
+        "no_verified_first_step": 4,
+        "only_shorter_policy_valid_program": 1,
+        "original_exact_program": 2,
+        "role_policy_blocks_first_step": 1
+      },
+      "diagnostic_fraction_all_attempts": 0.78125,
+      "diagnostic_full_depth_attempts": 25,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 2,
+      "original_exact_fraction_all_attempts": 0.0625,
+      "requested_depth": 2,
+      "valid_connected": 31
+    },
+    {
+      "arm": "trained",
+      "attempts": 3,
+      "classifications": {
+        "no_verified_first_step": 2,
+        "only_shorter_policy_valid_program": 1
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 3,
+      "valid_connected": 3
+    },
+    {
+      "arm": "trained",
+      "attempts": 29,
+      "classifications": {
+        "different_coreactants_only_at_requested_depth": 2,
+        "invalid_graph": 3,
+        "no_verified_first_step": 5,
+        "only_shorter_policy_valid_program": 8,
+        "original_exact_program": 1,
+        "role_policy_blocks_first_step": 10
+      },
+      "diagnostic_fraction_all_attempts": 0.10344827586206896,
+      "diagnostic_full_depth_attempts": 3,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 1,
+      "original_exact_fraction_all_attempts": 0.034482758620689655,
+      "requested_depth": 4,
+      "valid_connected": 26
+    },
+    {
+      "arm": "untrained",
+      "attempts": 21,
+      "classifications": {
+        "invalid_graph": 10,
+        "no_verified_first_step": 10,
+        "original_exact_program": 1
+      },
+      "diagnostic_fraction_all_attempts": 0.047619047619047616,
+      "diagnostic_full_depth_attempts": 1,
+      "family": "amide_coupling_acid_amine",
+      "original_exact": 1,
+      "original_exact_fraction_all_attempts": 0.047619047619047616,
+      "requested_depth": 1,
+      "valid_connected": 11
+    },
+    {
+      "arm": "untrained",
+      "attempts": 43,
+      "classifications": {
+        "invalid_graph": 41,
+        "no_verified_first_step": 2
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "amide_coupling_acid_amine",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 2
+    },
+    {
+      "arm": "untrained",
+      "attempts": 13,
+      "classifications": {
+        "invalid_graph": 8,
+        "no_verified_first_step": 5
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "aza_michael_amine_acrylate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 1,
+      "valid_connected": 5
+    },
+    {
+      "arm": "untrained",
+      "attempts": 51,
+      "classifications": {
+        "invalid_graph": 49,
+        "no_verified_first_step": 2
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "aza_michael_amine_acrylate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 2
+    },
+    {
+      "arm": "untrained",
+      "attempts": 5,
+      "classifications": {
+        "invalid_graph": 5
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "carbamate_amine_chloroformate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 1,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 59,
+      "classifications": {
+        "invalid_graph": 59
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "carbamate_amine_chloroformate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 17,
+      "classifications": {
+        "invalid_graph": 17
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "epoxide_opening_amine",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 1,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 47,
+      "classifications": {
+        "invalid_graph": 47
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "epoxide_opening_amine",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 17,
+      "classifications": {
+        "invalid_graph": 17
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "iphos_amine_dioxaphospholane",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 1,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 47,
+      "classifications": {
+        "invalid_graph": 47
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "iphos_amine_dioxaphospholane",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 10,
+      "classifications": {
+        "invalid_graph": 10
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "reductive_amination_amine_aldehyde",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 1,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 54,
+      "classifications": {
+        "invalid_graph": 54
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "reductive_amination_amine_aldehyde",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 32,
+      "classifications": {
+        "invalid_graph": 32
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 2,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 3,
+      "classifications": {
+        "invalid_graph": 3
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 3,
+      "valid_connected": 0
+    },
+    {
+      "arm": "untrained",
+      "attempts": 29,
+      "classifications": {
+        "invalid_graph": 29
+      },
+      "diagnostic_fraction_all_attempts": 0.0,
+      "diagnostic_full_depth_attempts": 0,
+      "family": "urea_amine_isocyanate",
+      "original_exact": 0,
+      "original_exact_fraction_all_attempts": 0.0,
+      "requested_depth": 4,
+      "valid_connected": 0
+    }
+  ],
+  "classifications_by_arm": {
+    "trained": {
+      "different_coreactants_only_at_requested_depth": 208,
+      "invalid_graph": 17,
+      "no_verified_first_step": 50,
+      "only_shorter_policy_valid_program": 30,
+      "original_exact_program": 114,
+      "role_policy_blocks_first_step": 29
+    },
+    "untrained": {
+      "invalid_graph": 428,
+      "no_verified_first_step": 19,
+      "original_exact_program": 1
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_repeat_audit_v1.json",
+    "sha256": "b91aba9b7be9927f4f7f403f4dec95011526e16d6ef923c3b5d83306dabd6638"
+  },
+  "controls_selection": "first cache indices per TRAIN family/depth, before diagnostic results",
+  "created_at_utc": "2026-09-14T13:22:57.979417+00:00",
+  "duration_seconds": 5.0546721670543775,
+  "environment": {
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "rdkit": "2026.03.5"
+  },
+  "families": [
+    "amide_coupling_acid_amine",
+    "aza_michael_amine_acrylate",
+    "carbamate_amine_chloroformate",
+    "epoxide_opening_amine",
+    "iphos_amine_dioxaphospholane",
+    "reductive_amination_amine_aldehyde",
+    "urea_amine_isocyanate"
+  ],
+  "gates": {
+    "all_diagnostics_search_complete": true,
+    "all_saved_attempts_in_repeated_families_audited": true,
+    "all_training_controls_recovered": true,
+    "original_results_reproduced_without_changes": true
+  },
+  "inherited_sampling_seed": 2026091402,
+  "inputs": {
+    "attempts": {
+      "path": "results/phase1/combinatorial_generation_v1/attempts.jsonl",
+      "sha256": "113edda03896117d6ec07725e0e56c257bb266d1a6254dbb8bab3537bcd16bc8"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "generation_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    }
+  },
+  "nonclaims": [
+    "Mixed-reactant diagnostic matches are outside the original identical-repeat contract and remain unaccepted.",
+    "Failure to reconstruct through this bounded registry does not prove chemical impossibility.",
+    "Shorter witnesses show partial registry consistency, not proof that the model omitted a particular bond.",
+    "Differences across depths use different sampled layouts and are descriptive, not causal depth effects.",
+    "No new training, molecular sampling, holdout evaluation, experimental synthesis or model promotion occurred."
+  ],
+  "policy": {
+    "candidate_selection": false,
+    "gate_changes": false,
+    "generation_calls": 0,
+    "heldout_record_use": false,
+    "remote_compute": false,
+    "training_calls": 0
+  },
+  "precision": "Every returned full or shorter program strictly forward-replays; source-adjudicated chemical precision remains unmeasured.",
+  "prior_generation_verification": {
+    "attempts_verified": 1536,
+    "result_sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815",
+    "scientific_fields_and_artifacts_replay_identical": null,
+    "status": "verified",
+    "witnesses_forward_replayed": 448
+  },
+  "random_sampling_used": false,
+  "registry_pins": [
+    {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    }
+  ],
+  "schema_version": "forge.combinatorial_repeat_audit.v1",
+  "search_limits": {
+    "maximum_expansions": 16384,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096
+  },
+  "sources": [
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_repeat_audit.py",
+      "sha256": "40db80964fe41180a6467476d24d9f5a6d68879a646ff76cc6af69d0e0e5c226"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generation_verify.py",
+      "sha256": "05eedebcd48dd6ee85fc43e012ebbcbec9125b06547cfdb0d550cf81fed29199"
+    },
+    {
+      "path": "forge/assembly/library_repeat_audit.py",
+      "sha256": "005a232b68fceccdf873b295da2e36c3dca9140205e945ff89b511dc84f157ae"
+    },
+    {
+      "path": "forge/assembly/library_generation.py",
+      "sha256": "869d6f2de87bf6da206d63398398a966cae4c5476452a380a277bbac57084a2a"
+    },
+    {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    {
+      "path": "forge/assembly/library_programs.py",
+      "sha256": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f"
+    },
+    {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    }
+  ],
+  "status": "complete",
+  "train_controls": [
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "amide_coupling_acid_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "056de5abc854aa69cad7159aa07b2330289dfc653a8a87f57f2512be370880b6",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "amide_coupling_acid_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "06647515da26c9aa3489045a040db50778f8fa5d1f79a130ea10a0a8ef127968",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "amide_coupling_acid_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "008cc695137c71b7d7d26f57816375617fc0fda1ee6d8a3c56a29fa24e37f2b1",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "amide_coupling_acid_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "012c570b41505887445d7616849d8db9f6eddca339a14d16d730b8e137462a5d",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "aza_michael_amine_acrylate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0041ba09cd72c8dee207791571a12311dd0134b10da5d957300350dbc5b957f9",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "aza_michael_amine_acrylate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "00811716e2d7b721c4c073a15a88085b7bcb51dda6ea44a3f9cbbcb634b365c8",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "aza_michael_amine_acrylate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0022997249d9adda882adb455386218bbb8e218af5540a579a91c3ab0b8c8743",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "aza_michael_amine_acrylate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "00dcc71427435f74415d1d8a7d9fa11db17373d198fc9ebcd649e0868318946e",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "carbamate_amine_chloroformate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "03e64001cbc732808ab57dc2b07286ddc7407bcf159d8853d506e5ba8f2bbedb",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "carbamate_amine_chloroformate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0585ae8848258104a58bf39d070a51fa3747ba2151b6b4551aaf4d9980bc8288",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "carbamate_amine_chloroformate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0060fa9eeba28c41f41f37be3973532f681bac1a5f35761dc6252a0497e59bb1",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "carbamate_amine_chloroformate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0071c3cc879c0cd5edf9dd5c826206d8d781aaadcfffe60bfaa0576e9e370d28",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "epoxide_opening_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0153bc234acb108ff031721353a7364e2ff69c07c360f3505f543a5e112b6180",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "epoxide_opening_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "02b77f5f582d43f4de3f2bd83d09cce69f1f4256845d883c237dd71254c1e10d",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "epoxide_opening_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "00251d4048ad63bb9ed3c8c355465f12e0ecc89d4be5ff8b4ab13bb9dacdafde",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "epoxide_opening_amine",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "004eeab37f2780768687b9811b8515cd1849c20e4e0928cf4885442382224440",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "iphos_amine_dioxaphospholane",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "014af18d913c7620ec432781fd35d2ae48d39252b667e02b7ce5ea6a1cb43fa3",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "iphos_amine_dioxaphospholane",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "018c0d94e93caa1e886068faeef9498dbe60eacb85d540470642f0c4dd1261d9",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "iphos_amine_dioxaphospholane",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0025b1dd052a521d264eeaf9b0eebf6a5198214a828223a5b76db19a7efbcd2f",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "iphos_amine_dioxaphospholane",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "002ce824fd1ef15ba57b52dfe653c1305bc96e12634a80ef1ba86e03ebe42454",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "reductive_amination_amine_aldehyde",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "00ffcd5e0b000b5bd440591dc156a3c58f4a5b113c236917ffa6757317bfe21a",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "reductive_amination_amine_aldehyde",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0162f1860bd93136aff28c8b96a75ac8c3c502ac65d473e9268e6660794a544a",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "reductive_amination_amine_aldehyde",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "003aa0472dcedc9bbfb59b33e6ebd49094ea2c387b64689e8556f8b410ca1447",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "reductive_amination_amine_aldehyde",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0056bb7eb8df9ba469d46ca0f5bbfff946ab4571be7c77b7f80ec142981c4b64",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "01b19074a366134f145129756d8233be76a31f1c7fdecc3d0f6ad7387599b43e",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "04d6def441039b205f3b17381fe7980407f40271671943bb24986fbefea3195b",
+      "requested_depth": 1
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0107216ef811d152e18578d618681bd98030d0c26bef75aed16cca98e10ca21e",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "01197a269a8310ea8c899c355b02eb4f65af14e1edeed6d71d8f8359604c8bd5",
+      "requested_depth": 2
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "005987e84c1eee79f20eb6365c354cf63efe018ada1fdcf04cb244f16976da51",
+      "requested_depth": 3
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "03e6bc7b125f3abb107b0661a5f7f84a225e6884318a28a4d1cbff1e0c63fb7f",
+      "requested_depth": 3
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "001187b2150154360db1ae416dcf678f992a9a2a39734433eef3d418197e92ba",
+      "requested_depth": 4
+    },
+    {
+      "classification": "original_exact_program",
+      "diagnostic_status": "complete",
+      "family": "urea_amine_isocyanate",
+      "fold": "train",
+      "original_status": "exact_computed_program",
+      "record_id": "0040f41b88d45dd15c56edde704e92dee295392a962302bd1de2481d2dc04716",
+      "requested_depth": 4
+    }
+  ]
+}

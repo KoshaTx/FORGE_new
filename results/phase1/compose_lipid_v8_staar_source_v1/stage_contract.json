@@ -1,0 +1,83 @@
+{
+  "architecture_subfamily": "staar_sequential_aibjck",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "family": "thiolactone_aminolysis_michael",
+  "initial_role": "thiolactone_region",
+  "maximum_reactive_sites_within_declared_size_support": 96,
+  "precision_limit": "Primary source controls and adversarial examples do not establish corpus-wide chemical precision, experimental bank membership, yield or pKa.",
+  "product_constraints": {
+    "formal_charge": 0,
+    "required_queries": [
+      {
+        "minimum_matches": 1,
+        "name": "surviving_nonacyl_basic_candidate",
+        "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+      }
+    ]
+  },
+  "program_id": "source_staar_two_stage",
+  "schema_version": "forge.source_sequential_contract.v1",
+  "scope": "Ordinary neutral N-acyl homocysteine-thiolactone STAAR architecture. Permanently cationic, ester-linked head and modified thiolactone-linker comparators are separate source programs, not admitted by this definition.",
+  "source_locator": "Pe\u00f1a et al. 10.1038/s42004-025-01516-z, Figures 1a/2/3 and Methods STAAR synthesis; SI pages 3-5",
+  "stages": [
+    {
+      "accumulator_role": "thiolactone_region",
+      "added_role": "amine_head",
+      "net_byproducts": {
+        "formal_charge": 0
+      },
+      "reaction_id": "source_staar_thiolactone_aminolysis",
+      "reaction_template": "[CX3:1]1(=[OX1:2])[SX2:3][CH2:4][CH2:5][CH1:6]1[NX3H1:7][CX3:8](=[OX1:9])[#6:10].{{amine}}>>[C:1](=[O:2])([N:11])[CH:6]([CH2:5][CH2:4][SH:3])[NH:7][C:8](=[O:9])[#6:10]",
+      "source_step": "Nucleophilic opening of the N-acyl homocysteine thiolactone exposes a thiol.",
+      "thiolactone_handle": "[CX3]1(=[OX1])[SX2][CH2][CH2][CH1]1[NX3H1][CX3](=[OX1])[#6]"
+    },
+    {
+      "accumulator_role": "thiol_intermediate",
+      "acrylate_handle": "[CH2]=[CH1][CX3](=[OX1])[OX2][#6]",
+      "added_role": "acrylate_tail",
+      "net_byproducts": {
+        "formal_charge": 0
+      },
+      "parent_interface_restriction": {
+        "from": "[#7,#8:6]",
+        "to": "[OX2:6]"
+      },
+      "parent_reaction": "thiol_michael_thioether",
+      "reaction_id": "source_staar_thiol_acrylate_addition",
+      "source_step": "The exposed thiol adds to the acrylate beta carbon; the full ester tail is retained."
+    }
+  ],
+  "terminal_constraints": {
+    "acrylate_tail": {
+      "allow_aromatic_atoms": false,
+      "allowed_atomic_numbers": [
+        6,
+        8
+      ],
+      "formal_charge": 0
+    },
+    "amine_head": {
+      "allowed_atomic_numbers": [
+        6,
+        7,
+        8
+      ],
+      "formal_charge": 0
+    },
+    "thiolactone_region": {
+      "allow_aromatic_atoms": false,
+      "allowed_atomic_numbers": [
+        6,
+        7,
+        8,
+        16
+      ],
+      "exact_element_counts": {
+        "N": 1,
+        "S": 1
+      },
+      "formal_charge": 0
+    }
+  }
+}

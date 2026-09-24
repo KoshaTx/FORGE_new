@@ -1,0 +1,61 @@
+{
+  "black": {
+    "command": [
+      "uv",
+      "run",
+      "black",
+      "--check",
+      "forge/synthesis/engine/single_step_benchmark_manifest.py",
+      "tests/test_single_step_manifest_source_relocation.py",
+      "results/phase1/compose_lipid_v8_manifest_recovery_v1/replay.py"
+    ],
+    "duration_seconds": 0.239183290861547,
+    "exit_code": 0
+  },
+  "focused-tests": {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q",
+      "tests/test_single_step_benchmark_manifest.py",
+      "tests/test_single_step_manifest_source_relocation.py",
+      "tests/test_core_input_locations.py",
+      "tests/test_architecture_boundaries.py",
+      "--tb=short",
+      "--junitxml=results/phase1/compose_lipid_v8_manifest_recovery_v1/focused-tests.xml"
+    ],
+    "duration_seconds": 3.5252871660050005,
+    "exit_code": 0
+  },
+  "full-tests": {
+    "command": [
+      "make",
+      "test"
+    ],
+    "duration_seconds": 580.0659390829969,
+    "exit_code": 2,
+    "pytest_addopts": "--tb=short --junitxml=results/phase1/compose_lipid_v8_manifest_recovery_v1/full-tests.xml"
+  },
+  "ruff": {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "forge/synthesis/engine/single_step_benchmark_manifest.py",
+      "tests/test_single_step_manifest_source_relocation.py",
+      "results/phase1/compose_lipid_v8_manifest_recovery_v1/replay.py"
+    ],
+    "duration_seconds": 0.026216458063572645,
+    "exit_code": 0
+  },
+  "vendor-verify": {
+    "command": [
+      "make",
+      "verify"
+    ],
+    "duration_seconds": 0.1530392081476748,
+    "exit_code": 0
+  }
+}

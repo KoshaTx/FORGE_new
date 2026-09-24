@@ -1,0 +1,288 @@
+{
+  "expected_rows_by_family": {
+    "acetal_aldehyde_diol": 1989,
+    "amide_coupling_acid_amine": 16590,
+    "aza_michael_amine_acrylate": 16590,
+    "carbamate_amine_chloroformate": 16590,
+    "disulfide_coupling": 780,
+    "epoxide_opening_amine": 16590,
+    "iphos_amine_dioxaphospholane": 16590,
+    "passerini_3cr": 77571,
+    "reductive_amination_amine_aldehyde": 21654,
+    "thiol_michael_thioether": 1521,
+    "ugi_3cr_agile": 222768,
+    "urea_amine_isocyanate": 55032
+  },
+  "frozen_identity_sources": [
+    {
+      "fold_fields": [
+        "source_study_fold",
+        "headgroup_fold",
+        "linker_scaffold_fold",
+        "component_family_fold"
+      ],
+      "identity_field": "leakage_group_id",
+      "identity_kind": "frozen_constitutional_digest",
+      "input": "m0_original_folds"
+    },
+    {
+      "fold_fields": [
+        "source_study_fold",
+        "headgroup_fold",
+        "linker_scaffold_fold",
+        "component_family_fold"
+      ],
+      "identity_field": "leakage_group_id",
+      "identity_kind": "frozen_constitutional_digest",
+      "input": "m0_constitutional_folds"
+    },
+    {
+      "fold_fields": [
+        "primary_product_fold"
+      ],
+      "identity_field": "canonical_product_smiles",
+      "input": "ugi_original_assignments"
+    },
+    {
+      "fold_fields": [
+        "held_amine_head_fold"
+      ],
+      "identity_field": "amine_head_smiles",
+      "input": "ugi_original_assignments"
+    },
+    {
+      "fold_fields": [
+        "held_oxoester_aldehyde_body_tail_fold"
+      ],
+      "identity_field": "oxoester_aldehyde_body_tail_smiles",
+      "input": "ugi_original_assignments"
+    },
+    {
+      "fold_fields": [
+        "held_isocyanide_tail_fold"
+      ],
+      "identity_field": "isocyanide_tail_smiles",
+      "input": "ugi_original_assignments"
+    },
+    {
+      "fold_fields": [
+        "primary_product_fold"
+      ],
+      "identity_field": "canonical_product_smiles",
+      "input": "ugi_assignments"
+    },
+    {
+      "fold_fields": [
+        "amine_head_family_fold"
+      ],
+      "identity_field": "amine_head_smiles",
+      "input": "ugi_assignments"
+    },
+    {
+      "fold_fields": [
+        "oxoester_aldehyde_body_tail_family_fold"
+      ],
+      "identity_field": "oxoester_aldehyde_body_tail_smiles",
+      "input": "ugi_assignments"
+    },
+    {
+      "fold_fields": [
+        "isocyanide_tail_family_fold"
+      ],
+      "identity_field": "isocyanide_tail_smiles",
+      "input": "ugi_assignments"
+    },
+    {
+      "fold_fields": [
+        "family_fold"
+      ],
+      "identity_field": "canonical_smiles",
+      "input": "ugi_components"
+    },
+    {
+      "fold_fields": [
+        "family_fold"
+      ],
+      "identity_field": "canonical_smiles",
+      "input": "multireaction_components"
+    },
+    {
+      "fold_fields": [
+        "product_fold"
+      ],
+      "identity_field": "canonical_product_smiles",
+      "identity_input": "multireaction_original_atlas",
+      "input": "multireaction_original_splits",
+      "join_key": "record_id"
+    },
+    {
+      "fold_fields": [
+        "product_fold"
+      ],
+      "identity_field": "canonical_product_smiles",
+      "identity_input": "multireaction_atlas",
+      "input": "multireaction_splits",
+      "join_key": "record_id"
+    }
+  ],
+  "inputs": {
+    "building_blocks": {
+      "path": "data/vendor/building_block_pool_v1.json",
+      "sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "corpus": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "m0_constitutional_folds": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "m0_original_folds": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_components": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "multireaction_original_atlas": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "multireaction_original_splits": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "single_event_ledger": {
+      "path": "results/phase1/combinatorial_libraries_v1/row_qualification.jsonl.gz",
+      "sha256": "245d3fdb357b5c58e706dc0d1ecb05c653d07e941cd42ce0d38d5e2feb21123c"
+    },
+    "single_event_result": {
+      "path": "results/phase1/combinatorial_libraries_v1/result.json",
+      "sha256": "c08ce9c0a6ec4d30ab469f4bb8688c94aaeb54d673cd2d0bf86d7bdc23b80e2f"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_components": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "ugi_original_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "limits": {
+    "maximum_expansions": 16384,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096
+  },
+  "programs": {
+    "acetal_aldehyde_diol": {
+      "accumulator_role": null,
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 1,
+      "target_scope": "precursor_or_neutral_structure_support"
+    },
+    "amide_coupling_acid_amine": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "aza_michael_amine_acrylate": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "carbamate_amine_chloroformate": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "disulfide_coupling": {
+      "accumulator_role": null,
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 1,
+      "target_scope": "precursor_or_neutral_structure_support"
+    },
+    "epoxide_opening_amine": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "iphos_amine_dioxaphospholane": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "passerini_3cr": {
+      "accumulator_role": null,
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 1,
+      "target_scope": "precursor_or_neutral_structure_support"
+    },
+    "reductive_amination_amine_aldehyde": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    },
+    "thiol_michael_thioether": {
+      "accumulator_role": null,
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 1,
+      "target_scope": "precursor_or_neutral_structure_support"
+    },
+    "ugi_3cr_agile": {
+      "accumulator_role": null,
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 1,
+      "target_scope": "assembly_support"
+    },
+    "urea_amine_isocyanate": {
+      "accumulator_role": "amine_head",
+      "evidence_basis": "computed_transform_consistency",
+      "maximum_steps": 12,
+      "target_scope": "assembly_support"
+    }
+  },
+  "registries": [
+    "ugi_registry",
+    "family_registry"
+  ],
+  "role_policy": "strict_registry_every_step",
+  "schema_version": "forge.combinatorial_program_dataset_config.v1",
+  "scientific_question": "Recover minimal computed reaction sequences without loosening role policy, and build exact-identity-disjoint partitions preserving prior holdout guards.",
+  "seed": 20260913,
+  "split_fractions": {
+    "calibration": 0.15,
+    "heldout": 0.15,
+    "train": 0.7
+  },
+  "weight_policy": "mean_source_realism_weight_then_equal_family_mass",
+  "workers": 2
+}

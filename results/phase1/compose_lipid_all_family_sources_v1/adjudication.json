@@ -1,0 +1,139 @@
+{
+  "ambiguity_controls": [
+    {
+      "components": {
+        "amine_head": "CNC",
+        "maleate": "COC(=O)C=CC(=O)OCC"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C9H17NO4",
+      "expected_forward_product_count": 2,
+      "expected_product": "COC(=O)C(N(C)C)CC(=O)OCC",
+      "family": "maleate_addition",
+      "interpretation": "Synthetic attribution control; no experimental failure claim.",
+      "label": "asymmetric_maleate_no_orientation_selection",
+      "reaction_id": "source_maleate_single_addition_per_nitrogen"
+    },
+    {
+      "components": {
+        "acid_tail": "CCCC(=O)O",
+        "aminoalcohol_head": "CN(CCO)CCCO"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C10H21NO3",
+      "expected_forward_product_count": 2,
+      "expected_product": "CCCC(=O)OCCN(C)CCCO",
+      "family": "o_esterification",
+      "interpretation": "Synthetic attribution control; no experimental failure claim.",
+      "label": "nonequivalent_alcohols_no_site_selection",
+      "reaction_id": "source_aminoalcohol_o_esterification"
+    }
+  ],
+  "assets": {
+    "esterification_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/nn2c07822_si_001.pdf",
+      "sha256": "17dbc706d03466803dbe61d853e808717b5cdc95e12e22c733ec100bcf651305"
+    },
+    "maleate_main": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate_article.xml",
+      "sha256": "bfaaa8e80b791cbe472875a07645d1902736fac2ecb20825a5fb23c576dc86bb"
+    },
+    "maleate_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/media-1.pdf",
+      "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    }
+  },
+  "derivation": {
+    "path": "results/phase1/compose_lipid_all_family_sources_v1/build_registry.py",
+    "sha256": "d41f06d3865ddcc7b31f40d08de187aec0b23f5519de4159d3d446ad3fece277"
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "limitations": [
+    "Maleate source is a preprint (10.1101/2025.02.25.640222), not a peer-reviewed report. Thiol entries and unresolved asymmetric orientation remain unqualified.",
+    "Maleate 5D8 procedure prints 0.25 mmol as 0.25 eq against 0.1 mmol head. Preserve the discrepancy; 2.5 molar ratio is arithmetic, not a repaired source quote.",
+    "AA3-DLin full main-text synthesis procedure is not recovered. SI supplies graph, mechanism and analytical controls only; no exact source-execution admission.",
+    "Constitutional stereo-free reconstruction neither assigns new stereocenters nor claims stereoselectivity.",
+    "Source controls qualify a computed graph transformation, not experimental success for corpus analogues. All enumeration bounds and ambiguous products remain explicit."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+    "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+  },
+  "schema_version": "forge.repeated_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "amine_head": "CN(C)CCCNCCCN",
+        "maleate": "CCCCCCCCOC(=O)C=CC(=O)OCCCCCCCC"
+      },
+      "events": 2,
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C48H93N3O8",
+      "expected_forward_product_count": 1,
+      "expected_product": "CN(C)CCCN(CCCNC(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC",
+      "family": "maleate_addition",
+      "label": "maleate_5D8",
+      "locator": "SI PDF pp. 1,7-8; Fig. 1 reactants and Figs. 6-7 5D8 drawing/MS/NMR",
+      "reaction_id": "source_maleate_single_addition_per_nitrogen"
+    },
+    {
+      "components": {
+        "acid_tail": "CCCCCC=CCC=CCCCCCCCC(=O)O",
+        "aminoalcohol_head": "OCCN1CCN(CCO)CC1"
+      },
+      "events": 2,
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C44H78N2O4",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCOC(=O)CCCCCCCC=CCC=CCCCCC)CC1",
+      "family": "o_esterification",
+      "label": "esterification_AA3_DLin",
+      "locator": "SI PDF pp. 3-5; Figs. S1-S3; drawn AA3-DLin and MS 699.60352",
+      "reaction_id": "source_aminoalcohol_o_esterification"
+    }
+  ],
+  "source_extraction": {
+    "maleate": {
+      "analytical_evidence": "SI Fig. 6 formula C48H93N3O8, exact mass 839.70, [M+H]+ 840.7008 and [M+2H]2+ 420.8540; Fig. 7 NMR. Spectra not independently reinterpreted.",
+      "atmosphere": null,
+      "doi": "10.1101/2025.02.25.640222",
+      "pmid": "40060499",
+      "product": "5D8",
+      "reactants": [
+        "amine 5",
+        "dioctyl maleate D8"
+      ],
+      "reagents": "None for neutral soluble components; TEA for salts; isopropanol for insoluble amines.",
+      "route_level": "L1",
+      "stoichiometry": "General procedure: 1.25 equivalents per NH2/NH/SH; 5D8 example 0.1 mmol amine and 0.25 mmol maleate.",
+      "temperature_c": 80,
+      "time_h": 24,
+      "workup": "Selected products silica purified with DCM/MeOH/NH4OH gradient; initial library screens use crude material.",
+      "yield": "Typical library yield >80%; not recorded as a product-specific isolated yield."
+    },
+    "o_esterification": {
+      "analytical_evidence": "SI Figs. S2-S3 drawing, MS peak 699.60352 and NMR. Caption MW 699 retained as nominal source statement; computed neutral exact mass is 698.59616.",
+      "atmosphere": null,
+      "catalyst": "Candida antarctica lipase B",
+      "doi": "10.1021/acsnano.2c07822",
+      "equivalents": null,
+      "pmid": "36269150",
+      "product": "AA3-DLin",
+      "reactants": [
+        "1,4-bis(2-hydroxyethyl)piperazine",
+        "linoleic acid, twice"
+      ],
+      "route_level": "L1",
+      "solvent": null,
+      "temperature_c": null,
+      "time_h": null,
+      "workup": null,
+      "yield": null
+    }
+  },
+  "training_admitted": false
+}

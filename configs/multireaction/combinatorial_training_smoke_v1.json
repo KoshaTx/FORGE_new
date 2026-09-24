@@ -1,0 +1,39 @@
+{
+  "schema_version": "forge.combinatorial_training_smoke_config.v1",
+  "seed": 913,
+  "expected_programs": 12,
+  "record_selection": "lexicographically_first_train_record_per_program",
+  "inputs": {
+    "cache_result": {
+      "path": "results/phase1/combinatorial_program_cache_v2/result.json",
+      "sha256": "5d766f29c3c777be3b6744c63bd54a1b9e770e19f03a30d19db8909b5045a602"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "cache_config": {
+      "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+      "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+    }
+  },
+  "model": {
+    "architecture": "reaction_program_sparse_whole_lipid_flow",
+    "hidden_dim": 32,
+    "layers": 2,
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "dropout": 0.0,
+    "bond_classes": 4
+  },
+  "optimization": {
+    "optimizer_steps_per_replica": 1,
+    "determinism_replicas": 2,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "flow_time": 0.5,
+    "gradient_clip_norm": 1.0,
+    "source_probability_floor": 0.00001,
+    "cpu_threads": 1
+  }
+}

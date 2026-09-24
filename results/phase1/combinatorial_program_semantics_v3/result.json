@@ -1,0 +1,433 @@
+{
+  "artifacts": {
+    "semantic_failures.jsonl.gz": {
+      "path": "results/phase1/combinatorial_program_semantics_v3/semantic_failures.jsonl.gz",
+      "sha256": "482e1229ecf752e346718cda67a963bf57f3d386d93ee65f5d07de1a5d02c877"
+    },
+    "semantic_records.jsonl.gz": {
+      "path": "results/phase1/combinatorial_program_semantics_v3/semantic_records.jsonl.gz",
+      "sha256": "681125904126159a71a2470c78c9fb0113aecc89935ea0a951559a5142d89c54"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_program_semantics_v1.json",
+    "sha256": "3de95f770611227f2c56ba8ebe9495b6c31dc8c9a0ae233514d523e9c1865778"
+  },
+  "created_at_utc": "2026-09-14T02:35:26.502275+00:00",
+  "duration_seconds": 153.64830695895944,
+  "environment": {
+    "rdkit": "2026.03.5",
+    "workers": 4
+  },
+  "failures": {
+    "acetal_aldehyde_diol": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "amide_coupling_acid_amine": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "aza_michael_amine_acrylate": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "carbamate_amine_chloroformate": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "disulfide_coupling": {
+      "calibration": {
+        "semantic_exact_replay_failed": 7
+      },
+      "heldout": {
+        "semantic_exact_replay_failed": 6
+      },
+      "train": {
+        "semantic_exact_replay_failed": 26
+      }
+    },
+    "epoxide_opening_amine": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "iphos_amine_dioxaphospholane": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "passerini_3cr": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "reductive_amination_amine_aldehyde": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "thiol_michael_thioether": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "ugi_3cr_agile": {
+      "calibration": {},
+      "heldout": {},
+      "train": {}
+    },
+    "urea_amine_isocyanate": {
+      "calibration": {},
+      "heldout": {},
+      "train": {
+        "semantic_exact_replay_failed": 1
+      }
+    }
+  },
+  "gates": {
+    "all_declared_core_positions_observed": true,
+    "all_observed_roles_equal_contract": true,
+    "all_selected_products_accounted": true,
+    "every_family_has_exact_required_fold_semantics": true,
+    "full_graph_support_preserved": true,
+    "raw_family_count_sampling_absent": true
+  },
+  "generator_sampling_calls": 0,
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "products": {
+      "path": "results/phase1/library_program_dataset_v1/products.csv.gz",
+      "sha256": "81009f3f5437d8b88963df26b539e97004c8a80952ae90e2e6e55dce108f49da"
+    },
+    "program_dataset_result": {
+      "path": "results/phase1/library_program_dataset_v1/result.json",
+      "sha256": "04d0a2c9981727de4879a41b640c6ef11d4b1f0564cca18f0eb75401904de28a"
+    },
+    "programs": {
+      "path": "results/phase1/library_program_dataset_v1/programs.jsonl.gz",
+      "sha256": "964f38cba65e23e4070732a62f0e9e986b2c8ca4f39d24343295d167e2c0d928"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "nonclaims": [
+    "Exact atom semantics are computed transform consistency, not source-executed synthesis or route closure.",
+    "Ambiguous origin/core assignments abstain; no arbitrary atom mapping enters model state.",
+    "The semantic cache source contains no component identifiers, component SMILES, fingerprints or biological labels.",
+    "Passing this representation gate is not evidence of trained twelve-family performance or improved realism."
+  ],
+  "representation": {
+    "abstentions": 40,
+    "fixed_core_programs": [
+      "aza_michael_amine_acrylate",
+      "ugi_3cr_agile"
+    ],
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 131,
+    "maximum_origin_components": 4,
+    "program_vocabulary": {
+      "core_position_states": [
+        "unconditioned",
+        "exterior",
+        "acetal_aldehyde_diol:map_1",
+        "acetal_aldehyde_diol:map_3_or_map_6",
+        "acetal_aldehyde_diol:map_4_or_map_5",
+        "amide_coupling_acid_amine:map_1",
+        "amide_coupling_acid_amine:map_2",
+        "amide_coupling_acid_amine:map_4",
+        "aza_michael_amine_acrylate:map_1",
+        "aza_michael_amine_acrylate:map_2",
+        "aza_michael_amine_acrylate:map_3",
+        "aza_michael_amine_acrylate:map_4",
+        "aza_michael_amine_acrylate:map_5",
+        "aza_michael_amine_acrylate:map_6",
+        "carbamate_amine_chloroformate:map_1",
+        "carbamate_amine_chloroformate:map_2",
+        "carbamate_amine_chloroformate:map_3",
+        "carbamate_amine_chloroformate:map_4",
+        "disulfide_coupling:map_1",
+        "disulfide_coupling:map_2",
+        "epoxide_opening_amine:map_1",
+        "epoxide_opening_amine:map_2",
+        "epoxide_opening_amine:map_3",
+        "epoxide_opening_amine:map_4",
+        "iphos_amine_dioxaphospholane:map_1",
+        "iphos_amine_dioxaphospholane:map_2",
+        "iphos_amine_dioxaphospholane:map_3",
+        "iphos_amine_dioxaphospholane:map_4",
+        "iphos_amine_dioxaphospholane:map_5",
+        "iphos_amine_dioxaphospholane:map_6",
+        "iphos_amine_dioxaphospholane:map_7",
+        "passerini_3cr:map_1",
+        "passerini_3cr:map_2",
+        "passerini_3cr:map_3",
+        "passerini_3cr:map_4",
+        "passerini_3cr:map_5",
+        "passerini_3cr:map_6",
+        "passerini_3cr:map_7",
+        "reductive_amination_amine_aldehyde:map_1",
+        "reductive_amination_amine_aldehyde:map_2",
+        "thiol_michael_thioether:map_1",
+        "thiol_michael_thioether:map_2",
+        "thiol_michael_thioether:map_3",
+        "thiol_michael_thioether:map_4",
+        "thiol_michael_thioether:map_5",
+        "thiol_michael_thioether:map_6",
+        "ugi_3cr_agile:map_1",
+        "ugi_3cr_agile:map_2",
+        "ugi_3cr_agile:map_3",
+        "ugi_3cr_agile:map_4",
+        "ugi_3cr_agile:template_introduced_0",
+        "urea_amine_isocyanate:map_1",
+        "urea_amine_isocyanate:map_2",
+        "urea_amine_isocyanate:map_3",
+        "urea_amine_isocyanate:map_4"
+      ],
+      "maximum_steps": 4,
+      "program_states": [
+        "unconditioned",
+        "acetal_aldehyde_diol",
+        "amide_coupling_acid_amine",
+        "aza_michael_amine_acrylate",
+        "carbamate_amine_chloroformate",
+        "disulfide_coupling",
+        "epoxide_opening_amine",
+        "iphos_amine_dioxaphospholane",
+        "passerini_3cr",
+        "reductive_amination_amine_aldehyde",
+        "thiol_michael_thioether",
+        "ugi_3cr_agile",
+        "urea_amine_isocyanate"
+      ],
+      "role_states": [
+        "unassigned",
+        "aldehyde_body",
+        "aldehyde_tail",
+        "alkyl_acrylate_or_acrylamide_tail",
+        "alkyl_epoxide_tail",
+        "amine_head",
+        "assembly_introduced",
+        "carboxylic_acid_tail",
+        "chloroformate_tail",
+        "diol_linker",
+        "dioxaphospholane_tail",
+        "isocyanate_tail",
+        "isocyanide_tail",
+        "oxoester_aldehyde_body_tail",
+        "thiol_head_or_tail",
+        "thiol_tail"
+      ]
+    },
+    "records": 68831,
+    "selected_records": 68871,
+    "sha256": "64acbbcca9623fe5e3b26720e146df1ef641cffca0dd9a22955110b3f2ca6510",
+    "ugi_source_mapping_multiplicity_distribution": {
+      "1": 29449,
+      "2": 8896
+    },
+    "universal_selected_mapping": false
+  },
+  "schema_version": "forge.combinatorial_program_semantics.v1",
+  "selected_fold_counts": {
+    "acetal_aldehyde_diol": {
+      "calibration": 114,
+      "heldout": 49,
+      "train": 624
+    },
+    "amide_coupling_acid_amine": {
+      "calibration": 63,
+      "heldout": 192,
+      "train": 1386
+    },
+    "aza_michael_amine_acrylate": {
+      "calibration": 21,
+      "heldout": 72,
+      "train": 2065
+    },
+    "carbamate_amine_chloroformate": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2016
+    },
+    "disulfide_coupling": {
+      "calibration": 28,
+      "heldout": 21,
+      "train": 351
+    },
+    "epoxide_opening_amine": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2013
+    },
+    "iphos_amine_dioxaphospholane": {
+      "calibration": 28,
+      "heldout": 96,
+      "train": 1953
+    },
+    "passerini_3cr": {
+      "calibration": 171,
+      "heldout": 672,
+      "train": 13728
+    },
+    "reductive_amination_amine_aldehyde": {
+      "calibration": 133,
+      "heldout": 140,
+      "train": 1512
+    },
+    "thiol_michael_thioether": {
+      "calibration": 21,
+      "heldout": 18,
+      "train": 858
+    },
+    "ugi_3cr_agile": {
+      "calibration": 133,
+      "heldout": 2100,
+      "train": 36112
+    },
+    "urea_amine_isocyanate": {
+      "calibration": 17,
+      "heldout": 171,
+      "train": 1725
+    }
+  },
+  "semantic_depth_counts": {
+    "acetal_aldehyde_diol": {
+      "1": 787
+    },
+    "amide_coupling_acid_amine": {
+      "1": 144,
+      "2": 1497
+    },
+    "aza_michael_amine_acrylate": {
+      "1": 177,
+      "2": 1981
+    },
+    "carbamate_amine_chloroformate": {
+      "1": 174,
+      "2": 1976
+    },
+    "disulfide_coupling": {
+      "1": 361
+    },
+    "epoxide_opening_amine": {
+      "1": 174,
+      "2": 1973
+    },
+    "iphos_amine_dioxaphospholane": {
+      "1": 171,
+      "2": 1906
+    },
+    "passerini_3cr": {
+      "1": 14571
+    },
+    "reductive_amination_amine_aldehyde": {
+      "1": 168,
+      "2": 1617
+    },
+    "thiol_michael_thioether": {
+      "1": 897
+    },
+    "ugi_3cr_agile": {
+      "1": 38345
+    },
+    "urea_amine_isocyanate": {
+      "1": 71,
+      "2": 516,
+      "3": 238,
+      "4": 1087
+    }
+  },
+  "semantic_fold_counts": {
+    "acetal_aldehyde_diol": {
+      "calibration": 114,
+      "heldout": 49,
+      "train": 624
+    },
+    "amide_coupling_acid_amine": {
+      "calibration": 63,
+      "heldout": 192,
+      "train": 1386
+    },
+    "aza_michael_amine_acrylate": {
+      "calibration": 21,
+      "heldout": 72,
+      "train": 2065
+    },
+    "carbamate_amine_chloroformate": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2016
+    },
+    "disulfide_coupling": {
+      "calibration": 21,
+      "heldout": 15,
+      "train": 325
+    },
+    "epoxide_opening_amine": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2013
+    },
+    "iphos_amine_dioxaphospholane": {
+      "calibration": 28,
+      "heldout": 96,
+      "train": 1953
+    },
+    "passerini_3cr": {
+      "calibration": 171,
+      "heldout": 672,
+      "train": 13728
+    },
+    "reductive_amination_amine_aldehyde": {
+      "calibration": 133,
+      "heldout": 140,
+      "train": 1512
+    },
+    "thiol_michael_thioether": {
+      "calibration": 21,
+      "heldout": 18,
+      "train": 858
+    },
+    "ugi_3cr_agile": {
+      "calibration": 133,
+      "heldout": 2100,
+      "train": 36112
+    },
+    "urea_amine_isocyanate": {
+      "calibration": 17,
+      "heldout": 171,
+      "train": 1724
+    }
+  },
+  "sources": {
+    "experiments/phase1/multireaction/combinatorial_program_semantics.py": "292153ea40a873cb501d776e8805e8999a097d57fbed4eda7ae5c6853c3f166a",
+    "forge/assembly/families.py": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4",
+    "forge/assembly/library_programs.py": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f",
+    "forge/assembly/library_semantics.py": "e63eb49511d27e249b50217b48df164eb1134935670386075362be4ebd8093bb",
+    "forge/corpus/combinatorial_program_semantics.py": "74e22ef768e64092153f52b882a53fbe8d43e3a135525228706cbce418cffab0",
+    "forge/model/reaction_program_conditioning.py": "309bce163306f8adc4a7035daecdbbf309101981a6bceb242bdca98cbf060d7a",
+    "forge/model/synthesis_program_graph.py": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9",
+    "forge/potency/annotations.py": "9ffeee87446623832a7030df0bce1a10285a7857aa7dc7dddcef306f59bfe18e",
+    "forge/synthesis/engine/qualified_forward.py": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+  },
+  "status": "pass",
+  "training_calls": 0
+}

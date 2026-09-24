@@ -1,0 +1,109 @@
+{
+  "artifacts": {
+    "binding.json": {
+      "path": "results/phase1/compose_lipid_role_binding_v1/binding.json",
+      "sha256": "cd4d7781341a790f48f128335c5fa4816fdb375bd50cab74d32ac512d3f3a1fb"
+    },
+    "replay.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_role_binding_v1/replay.jsonl.gz",
+      "sha256": "d9e0495f92a9a0525a961e43d6e507ecc33a64f5d588c8cf195bcd39519dace4"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_role_binding_v1.json",
+    "sha256": "7eecf0491c2cf7b0f50ed0992c8b3466d852049a737e1869b80ecf6acfe702fd"
+  },
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/source_event.py": {
+      "path": "forge/assembly/source_event.py",
+      "sha256": "77a7317f18b604a2ad1a0142f518b147c18cf86d90ff5b53dad4d301dfb92289"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_family_replay.py": {
+      "path": "forge/corpus/compose_lipid_family_replay.py",
+      "sha256": "6e7aea1999e8ec5ae0ec1ffbf235663d1071879a1e3fcd50cdb763d8d3837fc0"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_role_binding.py": {
+      "path": "forge/corpus/compose_lipid_role_binding.py",
+      "sha256": "d24313e64129aa8b8baa98189549825c4540e42bc10d58a61da22e6ffd37885e"
+    },
+    "forge/corpus/compose_lipid_source_event.py": {
+      "path": "forge/corpus/compose_lipid_source_event.py",
+      "sha256": "37984fe16ddca6bba0445b15d9c289fe9c58ef4274c81ddd26ec0d3e62367e9e"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    }
+  },
+  "inputs": {
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "prior_program": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_program_v1/result.json",
+      "sha256": "7d4d247fdacf590a49737771e77f3bfbc1492da92253f5d813c3f8cde3be5f6a"
+    },
+    "source_config": {
+      "path": "configs/multireaction/compose_lipid_v8_ugi3_program_v1.json",
+      "sha256": "d28338a5967a3b541e8d1cfaf0df13704d98e411524ee6fa40de6a2db1e4f1a7"
+    }
+  },
+  "policy": {
+    "binding_evidence": "prior_exact_precursor_structures_on_current_eligible_population",
+    "binding_fixed_before_forward_replay": true,
+    "component_quantities": "exactly_one_per_declared_single_event_role",
+    "experimental_execution_admitted": false,
+    "family": "aldehyde_ugi3",
+    "product_matching_used_to_choose_binding": false,
+    "seed": 0,
+    "training_admitted": false,
+    "training_calls": 0,
+    "unresolved_or_conflicting_binding": "fail_closed"
+  },
+  "schema_version": "forge.compose_lipid_role_binding.v1",
+  "status": "role_concordance_checked_and_supplied_recipes_replayed",
+  "summary": {
+    "family": "aldehyde_ugi3",
+    "replay": {
+      "exact_computed_reconstruction": 955
+    },
+    "witness_rows": 955
+  }
+}

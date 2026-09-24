@@ -1,0 +1,64 @@
+{
+  "schema_version": "forge.source_precursor_scaffolds.v1",
+  "evidence_basis": "computed_transform_consistency",
+  "disposition": "admit_transform_consistency",
+  "families": {
+    "reductive_amination": {
+      "precursor_role": "coupled_aldehyde",
+      "events": 1,
+      "net_byproducts_per_event": {"O": 1},
+      "stoichiometry_interpretation": "Formal net oxygen removal: aldehyde plus amine plus two hydrogen equivalents yields product plus water. Hydride-donor and workup speciation are not modeled; O alone is not asserted to be a physical byproduct.",
+      "source_stage_order": ["amine_aldehyde_condensation", "imine_or_iminium_reduction"],
+      "scaffolds": [
+        {
+          "id": "jiang_aldol_diester",
+          "architecture_subfamily": "jiang_nebulized_ester_aldehyde",
+          "locator": "Jiang SI PDF pp. 3-5: Scheme 1, aldehydes 5a/5b and final IR-19-Pyrazole/IR-117-17 schemes",
+          "core_smarts": "[CX3H1:1](=[OX1])[CH]([CH2][CH2][CH2][CH2][OX2:11][CX3:12](=[OX1])[#6])[CH]([OX2H1])[CH2][CH2][CH2][CH2][CH2][OX2:21][CX3:22](=[OX1])[#6]",
+          "anchor_map": 1,
+          "cut_bond_maps": [[11,12],[21,22]],
+          "identical_detached_arms": true,
+          "arm_atomic_numbers": [0,6,8],
+          "arm_aromatic_atoms_allowed": false
+        }
+      ]
+    },
+    "aryl_reductive_amination": {
+      "precursor_role": "coupled_aldehyde",
+      "events": 1,
+      "net_byproducts_per_event": {"O": 1},
+      "stoichiometry_interpretation": "Formal net oxygen removal: aldehyde plus amine plus two hydrogen equivalents yields product plus water. Hydride-donor and workup speciation are not modeled; O alone is not asserted to be a physical byproduct.",
+      "source_stage_order": ["amine_aldehyde_condensation", "imine_or_iminium_reduction"],
+      "scaffolds": [
+        {
+          "id": "xue_A2",
+          "architecture_subfamily": "xue_a2_aryl_core",
+          "locator": "Xue SI PDF pp. 2 and 8: Supplementary Figs. 1 and 18; 3,5-diacylated benzaldehyde",
+          "core_smarts": "[CX3H1:1](=[OX1])-[c]1[cH][c]([OX2:11][CX3:12](=[OX1])[#6])[cH][c]([OX2:21][CX3:22](=[OX1])[#6])[cH]1",
+          "anchor_map": 1,
+          "cut_bond_maps": [[11,12],[21,22]],
+          "identical_detached_arms": true,
+          "arm_atomic_numbers": [0,6,8],
+          "arm_aromatic_atoms_allowed": false
+        },
+        {
+          "id": "xue_A3",
+          "architecture_subfamily": "xue_a3_aryl_core",
+          "locator": "Xue SI PDF pp. 5-7: Supplementary Figs. 12-17; displayed products have 2,4,6-triacylated benzaldehyde cores",
+          "core_smarts": "[CX3H1:1](=[OX1])-[c]1[c]([OX2:11][CX3:12](=[OX1])[#6])[cH][c]([OX2:21][CX3:22](=[OX1])[#6])[cH][c]1[OX2:31][CX3:32](=[OX1])[#6]",
+          "anchor_map": 1,
+          "cut_bond_maps": [[11,12],[21,22],[31,32]],
+          "identical_detached_arms": true,
+          "arm_atomic_numbers": [0,6,8],
+          "arm_aromatic_atoms_allowed": false
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Scaffold predicates are independently transcribed from primary chemistry figures, not fitted to the observed corpus reconstruction rate.",
+    "Identical acyl arms and fixed scaffold positions implement the delivered v8 family invariant. This does not prove experimental source-bank membership of a designed variant.",
+    "Jiang's head/site variants and Xue's designed tail variants retain computed-only evidence. Source route closure for their precursor syntheses is not admitted.",
+    "Xue Supplementary Fig. 12 draws a dihydroxy aldehyde input while showing triacylated products; Methods names the trihydroxy precursor but calls the acid heptanoic in an example named 2-methylhexanoate. Preserve this source conflict; no exact precursor-route execution is admitted."
+  ]
+}

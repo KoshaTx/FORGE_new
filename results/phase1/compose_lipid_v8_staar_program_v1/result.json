@@ -1,0 +1,368 @@
+{
+  "artifacts": {
+    "programs.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_staar_program_v1/programs.jsonl.gz",
+      "sha256": "438c57eaa943dfb7f0aa00b9ef428f4da426d162142491a2dfdc5bef6a642682"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_staar_program_v1.json",
+    "sha256": "af621eb44c9d8334a30d129d4d8a47285673a474f2de3104d16b3a1b59614a54"
+  },
+  "created_at_utc": "2026-09-18T20:03:51.113557+00:00",
+  "implementation": {
+    "forge/assembly/api.py": {
+      "path": "forge/assembly/api.py",
+      "sha256": "bb77b94c91ee0bbba62ff9a83a1d3d31a4d280bf13b8a508537817b19d7efa60"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/sequential_program.py": {
+      "path": "forge/assembly/sequential_program.py",
+      "sha256": "41a74b9d6df72bd98d3356123fcb87220d72f050f309bf862306faa16fca3c8f"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_sequential.py": {
+      "path": "forge/corpus/compose_lipid_sequential.py",
+      "sha256": "6eca9272b8a675b85445014697d355b2d371f7400e6f9d46c4bbe01c125af5ee"
+    },
+    "forge/corpus/compose_lipid_source_event.py": {
+      "path": "forge/corpus/compose_lipid_source_event.py",
+      "sha256": "37984fe16ddca6bba0445b15d9c289fe9c58ef4274c81ddd26ec0d3e62367e9e"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    }
+  },
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/adjudication.json",
+      "sha256": "f7337945c66ea4605f50c4d9b72a14ce3b294f09a387e4a1571fc418a30d9df9"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_staar_source_program_v1.json",
+      "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+    }
+  },
+  "policy": {
+    "fit_population": "enforced_product_protection_preparation_view",
+    "generation_calls": 0,
+    "provider_heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_sequential.v1",
+  "source_controls": {
+    "A4B2C3": {
+      "computed_protonated_mz": 684.57075539609,
+      "family": "thiolactone_aminolysis_michael",
+      "neutral_formula": "C39H77N3O4S",
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 39,
+            "H": 77,
+            "N": 3,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 39,
+            "H": 77,
+            "N": 3,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O",
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C",
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCSCCC(=O)OCC(CCCC)CCCCCC)C(=O)NCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCSCCC(=O)OCC(CCCC)CCCCCC)C(=O)NCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "acrylate_tail": "C=CC(=O)OCC(CCCC)CCCCCC",
+              "amine_head": "CN(C)CCN",
+              "thiolactone_region": "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "acrylate_tail": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "amine_head": {
+            "checks": {
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "thiolactone_region": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_N": true,
+              "element_count_S": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          }
+        }
+      }
+    },
+    "A4B2C8_CP-LC-0729": {
+      "computed_protonated_mz": 740.63335565209,
+      "family": "thiolactone_aminolysis_michael",
+      "neutral_formula": "C43H85N3O4S",
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 43,
+            "H": 85,
+            "N": 3,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 43,
+            "H": 85,
+            "N": 3,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O",
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCSCCC(NC(=O)C(CCCCCC)CCCCCCCC)C(=O)NCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCSCCC(NC(=O)C(CCCCCC)CCCCCCCC)C(=O)NCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "acrylate_tail": "C=CC(=O)OCC(CCCCCC)CCCCCCCC",
+              "amine_head": "CN(C)CCN",
+              "thiolactone_region": "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "acrylate_tail": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "amine_head": {
+            "checks": {
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "thiolactone_region": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_N": true,
+              "element_count_S": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          }
+        }
+      }
+    }
+  },
+  "status": "source_sequential_programs_evaluated_training_unqualified",
+  "summary": {
+    "by_family": {
+      "thiolactone_aminolysis_michael": {
+        "by_status": {
+          "computed_consistent": 9314
+        },
+        "component_label_conflicts": 0,
+        "computed_consistency_pass": 9314,
+        "consistent_with_known_protected_precursor": 2792,
+        "eligible_after_known_exclusions": 6522,
+        "rows": 9314,
+        "training_admitted": 0
+      }
+    },
+    "precision_scope": "Independent source controls and adversarial tests check the declared program, not experimental source-bank membership, yield, pKa or corpus-wide decomposition precision.",
+    "remaining_holds": [
+      "global_precursor_protection_incomplete",
+      "precursor_holdouts_unqualified",
+      "remaining_family_programs_unqualified",
+      "final_balanced_train_dataset_unbuilt",
+      "repository_full_tests_fail"
+    ],
+    "training_admitted": 0,
+    "training_ready": false
+  }
+}

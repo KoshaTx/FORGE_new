@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 376, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 355, in main
+    result = run(args.repo_root, args.config, args.output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 267, in run
+    "".join(json.dumps(r, sort_keys=True, allow_nan=False) + "\n" for r in values)
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 267, in <genexpr>
+    "".join(json.dumps(r, sort_keys=True, allow_nan=False) + "\n" for r in values)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

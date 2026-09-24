@@ -1,0 +1,196 @@
+{
+  "all_twelve_have_new_contexts": false,
+  "artifacts": {
+    "component_pool.json": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/component_pool.json",
+      "sha256": "5fb3c2374df27925d890651af57cfa6eecc6cf1d06116ce8e877c5b4d1146fd5"
+    },
+    "layouts.json": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/layouts.json",
+      "sha256": "18bc60cb4a97f12bf3481c979110ff0d52067d8910689e6a91419f41b205e03b"
+    },
+    "trials.jsonl": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/trials.jsonl",
+      "sha256": "df9b0a7a00bc06eb67f175864c864ae8d7a8f73e38a8dd1954dc6dfd9ad2674c"
+    }
+  },
+  "by_family": {
+    "acetal_aldehyde_diol": {
+      "pool_sizes_by_role": {
+        "aldehyde_tail": 43,
+        "diol_linker": 48
+      },
+      "product_compilation_status_counts": {
+        "qualified": 256
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "amide_coupling_acid_amine": {
+      "pool_sizes_by_role": {
+        "amine_head": 34,
+        "carboxylic_acid_tail": 20
+      },
+      "product_compilation_status_counts": {
+        "qualified": 317
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 26
+    },
+    "aza_michael_amine_acrylate": {
+      "pool_sizes_by_role": {
+        "alkyl_acrylate_or_acrylamide_tail": 34,
+        "amine_head": 36
+      },
+      "product_compilation_status_counts": {
+        "qualified": 348
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 130
+    },
+    "carbamate_amine_chloroformate": {
+      "pool_sizes_by_role": {
+        "amine_head": 32,
+        "chloroformate_tail": 36
+      },
+      "product_compilation_status_counts": {
+        "qualified": 403
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 29
+    },
+    "disulfide_coupling": {
+      "pool_sizes_by_role": {
+        "thiol_head_or_tail": 45,
+        "thiol_tail": 45
+      },
+      "product_compilation_status_counts": {
+        "qualified": 253,
+        "semantic_abstention": 3
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 124
+    },
+    "epoxide_opening_amine": {
+      "pool_sizes_by_role": {
+        "alkyl_epoxide_tail": 24,
+        "amine_head": 39
+      },
+      "product_compilation_status_counts": {
+        "qualified": 390
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 62
+    },
+    "iphos_amine_dioxaphospholane": {
+      "pool_sizes_by_role": {
+        "amine_head": 34,
+        "dioxaphospholane_tail": 25
+      },
+      "product_compilation_status_counts": {
+        "qualified": 346
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 92
+    },
+    "passerini_3cr": {
+      "pool_sizes_by_role": {
+        "aldehyde_body": 40,
+        "carboxylic_acid_tail": 42,
+        "isocyanide_tail": 37
+      },
+      "product_compilation_status_counts": {
+        "qualified": 262
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "reductive_amination_amine_aldehyde": {
+      "pool_sizes_by_role": {
+        "aldehyde_tail": 39,
+        "amine_head": 47
+      },
+      "product_compilation_status_counts": {
+        "outside_graph_support": 6,
+        "qualified": 336
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 178
+    },
+    "thiol_michael_thioether": {
+      "pool_sizes_by_role": {
+        "alkyl_acrylate_or_acrylamide_tail": 40,
+        "thiol_tail": 39
+      },
+      "product_compilation_status_counts": {
+        "qualified": 256
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "ugi_3cr_agile": {
+      "pool_sizes_by_role": {
+        "amine_head": 50,
+        "isocyanide_tail": 37,
+        "oxoester_aldehyde_body_tail": 38
+      },
+      "product_compilation_status_counts": {
+        "qualified": 384
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 94
+    },
+    "urea_amine_isocyanate": {
+      "pool_sizes_by_role": {
+        "amine_head": 24,
+        "isocyanate_tail": 27
+      },
+      "product_compilation_status_counts": {
+        "qualified": 485,
+        "semantic_abstention": 2
+      },
+      "trials": 256,
+      "unique_novel_sparse_flow_contexts": 88
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_context_expansion_v1.json",
+    "sha256": "c57a470d3fb078bcc200199f53b05a698676fe90eb7fc7a27c8af55311a0f86b"
+  },
+  "created_at_utc": "2026-09-14T16:23:38.138712+00:00",
+  "duration_seconds": 73.05471758299973,
+  "forward_expansions": 4740,
+  "layout_audit": {
+    "path": "results/phase1/combinatorial_generated_layouts_v1/result.json",
+    "sha256": "df6f1e3c03ce7662706bc75b247c3e9f9b8b6c250d2c668451a39db8e9b68322"
+  },
+  "nonclaims": [
+    "Registry-enumerated proposal products are not neural outputs or evidence of improved model quality.",
+    "All proposals use generated precursor pools from an earlier TRAIN-seeded run. No independent holdout, unconditional layout generation or experimental synthesis claim is established.",
+    "Novelty is an exact context-membership diagnostic; ignored metadata cannot establish a new sparse-flow context."
+  ],
+  "policy": {
+    "all_trials_and_paths_retained": true,
+    "component_draws": "uniform_by_role_with_replacement",
+    "component_pool": "unique_precursors_of_qualified_generated_programs",
+    "depth_draws": "uniform_allowed_depths",
+    "gate_changes": false,
+    "heldout_use": false,
+    "neural_generation_calls": 0,
+    "proposal_products_are_neural_outputs": false,
+    "remote_compute": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.combinatorial_context_expansion.v1",
+  "sources": [
+    {
+      "path": "forge/model/generated_program_expansion.py",
+      "sha256": "aae0f9f682bea60b9ab87bf755bbd3112c4c7ec384a0a94b1d92d2e23612f4e1"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_context_expansion.py",
+      "sha256": "75661a1a3766317261feb612e04c9fa851c0da9889ab94d159ce4554d5711968"
+    }
+  ],
+  "status": "numerical_complete"
+}

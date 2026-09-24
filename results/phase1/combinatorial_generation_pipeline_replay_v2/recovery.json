@@ -1,0 +1,76 @@
+{
+  "executed_source_path": "results/phase1/combinatorial_generation_pipeline_validation_v1/recover_replay.py",
+  "inputs": [
+    {
+      "path": "configs/multireaction/combinatorial_generation_pipeline_replay_v2.json",
+      "sha256": "93efd6e7c266626aeae7400504ba90370697f87cd0c0b9a87cabe2d02abfee96"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/graph/complete.json",
+      "sha256": "6d66bd2d00491ace746e3eb835e78b62623a468279b90656a67d6b0ffcbfe28c"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/graph/attempt_0001/config.json",
+      "sha256": "2cac22fe703bbdb0bf11e3d86aa8522ca4c726ae25693b2b7eec154e8b394d2b"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/graph/attempt_0001/output/result.json",
+      "sha256": "9eacc28c975db8d1520253bbd35b0840176ec7c28fde6d107417a5da675acb21"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/admission/complete.json",
+      "sha256": "af85c29560232b20b29748f2fbf29710d72e6e18645f815195122a0133faa349"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/admission/attempt_0001/config.json",
+      "sha256": "d70a7423c08d7c62de990c0a4f2c7737a6a3ec3a388d9ad32473d427722e6b9b"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/admission/attempt_0001/output/result.json",
+      "sha256": "abe426c8b4606323a3bacfc20faa6d07dbd5c1e9e00d155848981b585ea1f9aa"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/occurrence/complete.json",
+      "sha256": "b1c2d2f52c59de27927cfc2ebf3472695fd2183278ce92921bdbacb8302b6a68"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/occurrence/attempt_0001/config.json",
+      "sha256": "8a7bf85790e383eca58e101d6bf91431e204802922b4dbefbd88c903bc27bdc0"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/occurrence/attempt_0001/output/result.json",
+      "sha256": "c68ff1302b1379facc3871a4cd40f1bf5ef4544a15e724a8f922a06c76d5440c"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/connection/complete.json",
+      "sha256": "c8b2a3c3fcb5f8f698c6aa768eea9eb6e08761ce47128a15d06ca2be931d0e5b"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/connection/attempt_0001/config.json",
+      "sha256": "ce3de57fc79478cbf60e330eca356a4e91ad41bc953deea239e1bc9a046dd556"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/connection/attempt_0001/output/result.json",
+      "sha256": "7c1fa3b9f92e1da2055a38eae948ceadaa6923aba3f3b0041ef8935db7173fc5"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/source_core/complete.json",
+      "sha256": "5b2664a92617dbf5bd21a7a2537eaf804257531edea8dd13f78afcf1e88f4758"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/source_core/attempt_0001/config.json",
+      "sha256": "55ffbd26d1b56809d8ec333c24b9ccc63aa2a0060f9720ec9a4e93d7c0549f4a"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/source_core/attempt_0001/output/result.json",
+      "sha256": "e34f5d3c7899a8e5d039c021542f107086486f355fddc11e4c6c9344cc39d76e"
+    }
+  ],
+  "next_command": "Resume the revised request; the pipeline verifies every adopted stage before publishing its result.",
+  "source": {
+    "path": "results/phase1/combinatorial_generation_pipeline_validation_v1/preformat_attempt/recover_replay.py",
+    "sha256": "f965db2f3ca4fd61b24879c8246e90e5e285a0eeb26a76648d385100ab0620ba"
+  },
+  "source_snapshot_note": "Exact executed recovery code retained before formatting its active copy.",
+  "status": "stage_configs_identical_under_revised_orchestration_request"
+}

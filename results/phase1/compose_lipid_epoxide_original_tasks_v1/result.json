@@ -1,0 +1,178 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_epoxide_original_tasks_v1/selected-tasks.jsonl.gz",
+    "sha256": "52c6b1710872debdf799597adc4858693dfd20e3e2c60657a06b838cf0592cfe"
+  },
+  "chemistry_qualified": false,
+  "component_structure_comparison_performed": false,
+  "dispositions": {
+    "original_task_bytes_authenticated": 3765
+  },
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_original_binding.py": {
+      "path": "forge/corpus/compose_lipid_original_binding.py",
+      "sha256": "3eee2692e6a06069b86ee5fcf93ce99394fb3ae2748bf794a56dccb6c0b4e71d"
+    },
+    "results/phase1/compose_lipid_epoxide_source_v1/audit_original_inputs.py": {
+      "path": "results/phase1/compose_lipid_epoxide_source_v1/audit_original_inputs.py",
+      "sha256": "1e3f27ee58539fee863d6a88e8edcc6cd49ded41f794d4b0cec82c91423fcaa2"
+    }
+  },
+  "inputs": {
+    "constructions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+      "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+    },
+    "export_receipt": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/receipt.json",
+      "sha256": "e1d4658d211466ec2d035f49c864f8a0969e4e5a1e3898358c56422820284587"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "task_receipt": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/receipt.json",
+      "sha256": "9a7113f6386375a5ebe2eb1012d5c3da25d599493d6515721737ee2d81802fb4"
+    }
+  },
+  "rows": 3765,
+  "schema_version": "forge.epoxide_eligible_original_task_extraction.v1",
+  "seed": 0,
+  "selection_before_molecular_record_decoding": true,
+  "task_shards": {
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/00.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/00.jsonl.gz",
+      "sha256": "e9f3fa012acb8787913e03ca7f56e4ec908534435f9f2798d54ef68079529149"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/01.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/01.jsonl.gz",
+      "sha256": "4963122985532fd01485a876a03572a528fc4b4bc24a89eb5b97b73cf4ba5253"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/02.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/02.jsonl.gz",
+      "sha256": "85229fc87e1f55eb218f7e7cce368fdab6dad066567ea4fe6b8b980d229dc9d1"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/03.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/03.jsonl.gz",
+      "sha256": "d5f52eed8d665793222aee56f02d1e5facd5853ac8b207be57ff2442e83ad3f0"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/04.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/04.jsonl.gz",
+      "sha256": "31ce434c84dd03221ecb12143acc158fe520939c7467735e39a3c825ef5d938f"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/05.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/05.jsonl.gz",
+      "sha256": "a77d0204d2f0abc4317154e36516b7a3a3b9c79d1a00f23840776e83d506fbc6"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/06.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/06.jsonl.gz",
+      "sha256": "3cb47c2d7b7eef2c8730fd3c5a26d5edc5abbea7e1886e19b1ba56a3d2874012"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/07.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/07.jsonl.gz",
+      "sha256": "13e7a7ff9be8fe1fbe633f0e0964600ae08cb6d113908b7cb01bff10b5dfcf89"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/08.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/08.jsonl.gz",
+      "sha256": "dee5b12dbeac942a3a0f6bb4d426af96f8874f8df58dbcce2395f65c39339046"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/09.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/09.jsonl.gz",
+      "sha256": "e2303b24ced27b43e8210cbbe954a06920e5489a9cf3b26fcd85ff83024bc67f"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/10.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/10.jsonl.gz",
+      "sha256": "66538b0583b920820c9ee2982fc9fe8da4a32f66b77ea310804c3a2c67da497a"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/11.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/11.jsonl.gz",
+      "sha256": "76841afdac5825d7d5837d5dea24eff4e00d99baa6a7605c7000da15e4b29d15"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/12.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/12.jsonl.gz",
+      "sha256": "a3f57fc3cf8d5625d8997dbdaae8dbd43f751a4377b8efcac29b0279c1a54271"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/13.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/13.jsonl.gz",
+      "sha256": "c772c6165006f94255f9f967f9b6fbc61b03c0446bf3f07193a204d0e71faa57"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/14.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/14.jsonl.gz",
+      "sha256": "80a40614dfdd5bb6d4a2ef29db67264240e0b4ce26663dae7334d3bcd174a725"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/15.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/15.jsonl.gz",
+      "sha256": "8283123955cfa0cbf2da08904e2ce10642cd91860043a44000913526521acf93"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/16.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/16.jsonl.gz",
+      "sha256": "cd1361ac3179a0d20b209360cdc5c991352139873fdac095d9883a68d32b3560"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/17.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/17.jsonl.gz",
+      "sha256": "8b893ad0346a1b50a1ea81a0d15d27935a102f7a53cb74b79b683cdb87bdc3fd"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/18.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/18.jsonl.gz",
+      "sha256": "02c49348b31db3f83c37713b2fbd5e3652669f25a83da6051a43669a9bbdbc64"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/19.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/19.jsonl.gz",
+      "sha256": "54c724029c89a741e4e593d312285572bff27aebf7e6134c107dce8dce3f8390"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/20.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/20.jsonl.gz",
+      "sha256": "eb6212006946bc3100f397cc7cfe0e00d134f943c8a10218dd767fe07094030d"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/21.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/21.jsonl.gz",
+      "sha256": "6985b28bad700969d4996340978d5086e506f59fff0bfe4b423779f737415c07"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/22.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/22.jsonl.gz",
+      "sha256": "a8cfb33deb8f4e93feb360016a9fe54257223da79d2248ff39cdd1a622fd3003"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/23.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/23.jsonl.gz",
+      "sha256": "f7138eeda61116b8a7357c5281f2e22b7f7e0211f8117bbb91b58281b0de1e8d"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/24.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/24.jsonl.gz",
+      "sha256": "59cce4c57337e91a6316912ee3c3958a7469ddc7f1c0b0b384fff7e336e94f10"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/25.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/25.jsonl.gz",
+      "sha256": "5cad913f0357d3d0ecc4b9c9a5df14a30028070bcd9ffdabe4677fe539150700"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/26.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/26.jsonl.gz",
+      "sha256": "628625791f03da252be48ebc9ae93c4f1555e8c5de842250b2cbfe61a3e2f4bc"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/27.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/27.jsonl.gz",
+      "sha256": "90f4fbe791472b357629b0261b1b7d5398f0111ebc42bbd268bcdc0da63924a5"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/28.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/28.jsonl.gz",
+      "sha256": "5e47bf0d5733b7501f5fc330412fe7e535521d266b7fa9646fcd4abef106d2a7"
+    },
+    "artifacts/corpus_build_v2/family_10_anderson_epoxide_enumeration_v8/tasks/29.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_10_anderson_epoxide_enumeration_v8/tasks/29.jsonl.gz",
+      "sha256": "f26ba0eb13066ca4f65815d73b5b4c5078d8d6ef628ac78d187268180575eadb"
+    }
+  },
+  "training_admitted": false
+}

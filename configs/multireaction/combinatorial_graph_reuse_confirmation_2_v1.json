@@ -1,0 +1,49 @@
+{
+  "acceptance": "Paired parent proposals for the frozen two-run constrained-admission confirmation protocol. Preserve every original output and proposal; no parent promotion.",
+  "alternative_explanation": "Exact gains may require extra gate-guided search, while copied components could reduce diversity or novelty or leave core errors unresolved.",
+  "cpu_threads": 2,
+  "hypothesis": "Copying a generated co-reactant graph under separately qualified correspondence eliminates identity inconsistency while retaining generated precursor novelty.",
+  "inputs": {
+    "baseline_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "component_partitions": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "novelty_used_for_selection": false,
+    "remote_compute": false,
+    "selection": "minimum_graph_edits_then_smiles_then_donor",
+    "training_calls": 0
+  },
+  "sampling": {
+    "attempts_per_family": 128,
+    "batch_size": 16,
+    "flow_seed": 2026091522,
+    "flow_steps": 32,
+    "layout_seed": 2026091521
+  },
+  "schema_version": "forge.combinatorial_graph_reuse.v1_config",
+  "scientific_question": "Can bounded graph-copy completion improve full-depth repeated programs without degrading any family validity, exact reconstruction, diversity or novelty metric?",
+  "stopping_rule": "One bounded donor proposal per qualified generated occurrence. Preserve every original, proposal, rejection and fallback. No best-seed selection or post-result extension of this run.",
+  "use_saved_layouts": false
+}

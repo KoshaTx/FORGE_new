@@ -1,0 +1,51 @@
+{
+  "accumulator_role": "amine_head",
+  "architecture_qualified": false,
+  "event_count_field": "events",
+  "family": "a3_amine_aldehyde_alkyne",
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/adjudication.json",
+      "sha256": "6c2e8450f53cd1e1dad98b6e8ae31a0116082cafbc7e8b342d860bd8b8b62159"
+    },
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "precursor_dictionary": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/precursors.jsonl.gz",
+      "sha256": "71b43339935347062fee1e05f0eb3adf8acc3b9efc4d980a9cadacfd69f2c0e0"
+    },
+    "prior_construction": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/construction_supervision.jsonl.gz",
+      "sha256": "860744d5dbda12bc13968ebe907f99a6889b6ad0b130fea5a629fabdb0e7fb6f"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_a3_source_program_v1.json",
+      "sha256": "acaf53a4783cbb1eda1d4903e62b34fcd1505c3201313c3a16712a2d1d63628c"
+    }
+  },
+  "policy": {
+    "fit_population": "protected_train",
+    "generation_calls": 0,
+    "heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "reaction_id": "a3_amine_aldehyde_terminal_alkyne",
+  "role_fields": {
+    "aldehyde": "aldehyde_id",
+    "alkyne": "alkyne_id",
+    "amine_head": "head_id"
+  },
+  "schema_version": "forge.compose_lipid_repeated_source_config.v1",
+  "scope": "Cross-version opaque precursor IDs supply candidates only. Full forward and declared-side inverse replay is mandatory; missing IDs, site ambiguity and source architecture conflict remain unqualified. No per-row architecture is inferred from resemblance.",
+  "search_bounds": {
+    "maximum_events": 32,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  },
+  "training_ready": false
+}

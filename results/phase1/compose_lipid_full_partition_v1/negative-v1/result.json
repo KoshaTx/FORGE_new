@@ -1,0 +1,20 @@
+{
+  "cause": "Successful identity checks encode absence of an error as empty string; the initial merge treated non-null empty strings as unresolved. Conservative false exclusion, no training admission.",
+  "implementation_snapshots": {
+    "forge/corpus/compose_lipid_full_partition.py": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/negative-v1/compose_lipid_full_partition.py",
+      "sha256": "e479915738c5a2eb4d5d4ba48267a48b66830c221e27167696c28a2babec53aa"
+    },
+    "results/phase1/compose_lipid_full_partition_v1/build.py": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/negative-v1/build.py",
+      "sha256": "f7e22b1251fc9205b7db90caa64dc1591e7459fc9b652e0bbc64b3bfb7e24fc9"
+    }
+  },
+  "negative_receipt": {
+    "path": "results/phase1/compose_lipid_full_partition_v1/audit/result.json",
+    "sha256": "cf78ec15632502bb5e2ee4156a400091278884715837565736e8ccf70503d7c2"
+  },
+  "schema_version": "forge.partition_negative_audit.v1",
+  "training_admitted": false,
+  "training_calls": 0
+}

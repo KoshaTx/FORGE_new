@@ -1,0 +1,51 @@
+{
+  "catalogue": {
+    "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+    "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+  },
+  "contracts": {
+    "a3_thiol": {
+      "path": "configs/multireaction/compose_lipid_supplied_thiol_a3_v1.json",
+      "sha256": "2a8ad697e449cd085529166c95516aef1f8e2046afb50fd6c1f87ed49faf522e"
+    },
+    "maleate_ester": {
+      "path": "configs/multireaction/compose_lipid_supplied_maleate_ester_v1.json",
+      "sha256": "004a8f6da2fb552674c0c0a12a1c30411ba029fa4cb421676aac882314547486"
+    },
+    "michael": {
+      "path": "configs/multireaction/compose_lipid_supplied_michael_v1.json",
+      "sha256": "9eac136d10a7bf11aefaa492823835d03a87f6d6d9f21e2bc48f6b919f61ee15"
+    }
+  },
+  "families": [
+    "a3_amine_aldehyde_alkyne",
+    "aza_michael_acrylamide",
+    "aza_michael_acrylate",
+    "disulfide_michael",
+    "maleate_addition",
+    "o_esterification"
+  ],
+  "index": {
+    "path": "results/phase1/compose_lipid_evidence_index_v1/index/result.json",
+    "sha256": "61ad9f44432f37154d24b0b30c2a23894cc194c1f4fc77b2c9be4ba8ec410c4e"
+  },
+  "policy": {
+    "annotation": "all_bounded_forward_semantic_states_and_constitutional_symmetry_invariance",
+    "population": "all_current_eligible_exact_records_in_declared_program_families",
+    "preserve": "global_component_ids_source_roles_and_quantities",
+    "program_selection": "source_family_and_original_maleate_mechanism",
+    "record_cap": null,
+    "size_filter": null,
+    "targets_used_for_program_selection": false,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "runtime": {
+    "batch_size": 256,
+    "device": "cpu",
+    "maximum_pending_batches": 4,
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_program_origins_config.v1",
+  "seed": 0
+}

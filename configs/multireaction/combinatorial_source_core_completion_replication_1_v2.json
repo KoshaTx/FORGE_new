@@ -1,0 +1,58 @@
+{
+  "acceptance": "Positive incremental exact-program gain in each of the three saved populations, with no decrease in any of the eight frozen metrics in any of the twelve families. Original invalid and exact outputs remain unchanged.",
+  "baseline_result": {
+    "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/result.json",
+    "sha256": "db16a7bd8f8249d729ff46674b567251371d5efb161ced94927f2ecb73a199fe"
+  },
+  "cpu_threads": 2,
+  "implementation_revision": "v2: skip graph comparison for immutable invalid original; failed attempt preserved",
+  "policy": {
+    "admission": "existing_train_novelty_and_product_multiplicity_rule",
+    "all_attempts_retained": true,
+    "core_proposals_per_attempt": 1,
+    "gate_changes": false,
+    "heldout_use": false,
+    "model_promotion": false,
+    "neural_trajectories": "exact_replay_of_existing_layouts_and_noise",
+    "original_atom_and_edge_counts_preserved": true,
+    "original_invalid_and_exact_outputs_immutable": true,
+    "remote_compute": false,
+    "retries": 0,
+    "source_context": "existing_TRAIN_layout_plus_its_computed_program_core",
+    "source_precursor_interiors_copied": false,
+    "training_calls": 0
+  },
+  "purpose": "replication_1",
+  "schema_version": "forge.combinatorial_source_core_completion.v1_config",
+  "source_pins": [
+    {
+      "path": "forge/model/source_core_completion.py",
+      "sha256": "9e9b125719200758a57420a1f5fbca54832c956c075b3572b53cddfe97d0e529"
+    },
+    {
+      "path": "forge/model/fixed_closure_decoding.py",
+      "sha256": "415b4f6924d47743671ab86bc5f8cfbf185c029d226e31d0b688334d8ebed803"
+    },
+    {
+      "path": "forge/model/combinatorial_core_scaffold.py",
+      "sha256": "3c0ff91483ce25550780745607415df220ce0072b4c9ea2a1bea7811db6ebfb4"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/precursor_reuse_projection.py",
+      "sha256": "b8994ee70024feda752c92735e6f55336f3001a41feff9b896bf43c0803cbd94"
+    },
+    {
+      "path": "forge/model/precursor_reuse_admission.py",
+      "sha256": "2c190a7b603b487af5887bc7e2c9427a73fad4b6e96b00a53dc1fc9439502533"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_source_core_completion.py",
+      "sha256": "24a3247a346aa9a0154f01e3b342fcaae71ca19c17e917659c99d703f624e6b3"
+    }
+  ],
+  "stopping_rule": "Exactly one core terminal proposal per saved attempt. Replay the existing layouts and neural trajectories exactly. No redraws, added seeds, training, gate relaxation or outcome-dependent budget extension."
+}

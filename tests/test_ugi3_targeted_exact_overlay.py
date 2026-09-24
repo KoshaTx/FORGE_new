@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments._runtime.historical import resolve_pinned_input
 from experiments.archive.phase1.synthesis_audits.ugi3_targeted_exact_overlay_diagnostic import (
     Ugi3TargetedExactOverlayDiagnosticError,
     _verify_hybrid_reproduction,
@@ -26,7 +27,7 @@ from forge.synthesis.evidence.ugi3_targeted_exact_overlay import (
 
 REPO = Path(__file__).resolve().parents[1]
 AUDIT_CONFIG = REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json"
-AUDIT_INPUT_PATHS = {
+_DECLARED_AUDIT_INPUT_PATHS = {
     "audit_source": REPO / "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
     "cli_source": REPO
     / "experiments/archive/producers/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
@@ -49,6 +50,20 @@ AUDIT_INPUT_PATHS = {
     "oxidation_variant": REPO
     / "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
     "qualified_forward_source": REPO / "src/forge/route/qualified_forward.py",
+}
+
+# Historical source is authenticated by original path and digest; data pins and all
+# scientific replay/adversarial assertions remain unchanged.
+_CONFIGURED_INPUTS = json.loads(AUDIT_CONFIG.read_text())["inputs"]
+AUDIT_INPUT_PATHS = {
+    name: (
+        resolve_pinned_input(
+            REPO, _CONFIGURED_INPUTS[name]["asset"], _CONFIGURED_INPUTS[name]["expected_sha256"]
+        )
+        if _CONFIGURED_INPUTS[name]["asset"].startswith(("src/", "scripts/"))
+        else path
+    )
+    for name, path in _DECLARED_AUDIT_INPUT_PATHS.items()
 }
 STORED_RESULT = REPO / "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json"
 STORED_ROUTE_LEDGER = REPO / (

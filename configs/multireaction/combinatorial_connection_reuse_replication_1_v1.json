@@ -1,0 +1,29 @@
+{
+  "acceptance": "Positive incremental exact-program gain in each saved run, with no decrease in any declared preservation metric in any of the twelve families. Original invalid and exact attempts remain unchanged; depth-specific outcomes are descriptive.",
+  "baseline_result": {
+    "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/result.json",
+    "sha256": "6d1d7eb112c4d3201b67f9505db6015224b148b3cb289fcd2ad0325687d5b7bc"
+  },
+  "maximum_canonical_matches": 4096,
+  "policy": {
+    "all_exact_witnesses_and_atom_mappings_must_agree": true,
+    "connections_must_match_registry_template_core_positions": true,
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "original_atom_and_edge_counts_preserved": true,
+    "original_exact_outputs_immutable": true,
+    "prospective_candidate_selection": false,
+    "remote_compute": false,
+    "reuse_existing_novelty_and_multiplicity_admission": true,
+    "source_atom_values_copied": false,
+    "source_interior_edges_copied": false,
+    "source_program_connections_used": true,
+    "target": "all_repeated_programs",
+    "training_calls": 0
+  },
+  "purpose": "replication_1",
+  "schema_version": "forge.combinatorial_connection_reuse.v1_config",
+  "stopping_rule": "One proposal per qualified occurrence, all attempts/proposals/abstentions retained. No post-result parameter changes or gate relaxation; preserve negative outcomes."
+}

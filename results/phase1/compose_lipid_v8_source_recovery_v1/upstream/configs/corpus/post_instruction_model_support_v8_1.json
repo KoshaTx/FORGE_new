@@ -1,0 +1,66 @@
+{
+  "schema": "post_instruction_model_support_v8_1",
+  "corpus_receipt": "artifacts/corpus_build_v2/post_instruction_balanced_release_v8/receipt.json",
+  "corpus_receipt_sha256": "0b2c2e1af825f19685572b22267723ffd9bc55ed70be5f79278dfd84c067521e",
+  "split_receipt": "artifacts/corpus_build_v2/post_instruction_generator_splits_v8_1/receipt.json",
+  "split_receipt_sha256": "3deffe014847cef3625e08bd2f6d1959d63e9b1445d4f12d5e8c5d8cbc98d8d3",
+  "target_measure_receipt": "artifacts/corpus_build_v2/post_instruction_target_measure_v8_1/receipt.json",
+  "target_measure_receipt_sha256": "85e2a5fc99e9c9f6e5400bb46fb67c9a3b9ca8199cd0aad1f579e47d6f17fcc6",
+  "program_package_receipt_sha256": "5a812979b7e8a65b2ff6f67ec8fde0f09a48cd0f958b41000ae2e1760a3c1a19",
+  "program_volume_dir": "post_instruction_program_packages_v8_1_final",
+  "forge_port_receipt": "artifacts/modeling/forge_inductive_bias_port_v1_final/receipt.json",
+  "forge_port_receipt_sha256": "8a09496b4782e9da991e230d3a4dcff852f1986f74f3866dec2064bf933a7edf",
+  "base_role_ontology": "artifacts/corpus_build_v2/lnpdb_complete_reference_workload_v1/role_ontology.json",
+  "base_role_ontology_sha256": "5d2382b68c80853ef375e1931223eba268cee6080eb525cbc4d3e1ac3137c9ee",
+  "role_extensions": {
+    "alcohol_amine_or_thiol_precursor": "multifunctional_nucleophile",
+    "alkynoic_acid": "carboxylic_acid",
+    "amine_nucleophile": "amine",
+    "carboxylic_acid_or_acyl_precursor": "carboxylic_acid",
+    "conjugated_carbonyl_acceptor": "activated_alkene",
+    "head_carboxylic_acid": "carboxylic_acid",
+    "source_alcohol": "alcohol",
+    "source_carboxylic_acid": "carboxylic_acid",
+    "source_primary_amine": "amine",
+    "thiol_left": "thiol",
+    "thiol_nucleophile": "thiol",
+    "thiol_right": "thiol"
+  },
+  "allowed_atom_classes": [
+    ["Br", 1],
+    ["C", 4],
+    ["N", 3],
+    ["O", 2],
+    ["P", 5],
+    ["S", 2],
+    ["S", 6]
+  ],
+  "expected": {
+    "corpus_targets": 200000,
+    "train_targets": 159782,
+    "calibration_targets": 19975,
+    "test_targets": 19975,
+    "reference_targets": 268,
+    "training_families": 23,
+    "program_targets": 159782,
+    "program_steps": 286492,
+    "worker_shards": 30
+  },
+  "health_training": {
+    "steps": 6000,
+    "batch_size": 4,
+    "seed": 909560
+  },
+  "calibration": {
+    "per_family_cap": 512,
+    "selection_seed": 909562
+  },
+  "n_slots": 96,
+  "max_virtual_heavy_atoms": 80,
+  "max_source_anchor_heavy_atoms": 96,
+  "output_volume_dir": "post_instruction_model_support_v8_1",
+  "gpu_used": false,
+  "biology_used": false,
+  "beae_outcomes_used": false,
+  "training_admissible": false
+}

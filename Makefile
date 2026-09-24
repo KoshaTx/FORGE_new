@@ -24,12 +24,23 @@
 	phase1-sampling-reproduce paper-experiment-readiness paper-verify manuscript-pdf manuscript-iclr \
 	paper-bundle code-survey test-baseline-report assessment-benchmark evaluation-profile \
 	typecheck check-core \
-	test lint fmt clean
+	test test-full test-one test-preparation test-training lint fmt clean
 
 EXPECT_PINS ?= 822
 EXPECT_PINS_ALL ?= 2416
 CODE_DRIFT_BACKLOG ?= 4
 UV_RUN ?= uv run
+
+# Development checks for the current complete-source lipid preparation pipeline.
+# Select by responsibility, so newly added ComposeLipid tests are included automatically.
+PREPARATION_TESTS := $(sort $(wildcard tests/test_compose_lipid*.py) \
+	tests/test_source_instance_coordinates.py tests/test_qualified_program_cache.py \
+	tests/test_mapped_program_cache.py tests/test_remaining_program_origins.py \
+	tests/test_introduced_source_coordinates.py tests/test_staged_atom_origins.py \
+	tests/test_program_atom_origins.py tests/test_constitutional_program_graph.py \
+	tests/test_synthesis_program_graph.py)
+PREPARATION_PYTEST_ARGS ?=
+TEST_PYTEST_ARGS ?=
 
 help:
 	@echo "FORGE — authorized M0 and bounded Phase 1 work. Read AGENTS.md first."
@@ -72,6 +83,10 @@ help:
 	@echo "  make phase1-sampling-reproduce    require byte-identical sampling outputs"
 	@echo ""
 	@echo "Quality and paper"
+	@echo "  make test-one TEST=path[::case]   affected test file or case while editing"
+	@echo "  make test-preparation            fast checks while preparing the all-family dataset"
+	@echo "  make test-training OUTPUT=dir    current training validation; no historical experiments"
+	@echo "  make test / test-full            complete repository acceptance suite"
 	@echo "  make check-core                   architecture, typing, provenance, and tests"
 	@echo "  make paper-experiment-readiness   audit every v1 result and baseline obligation"
 	@echo "  make test / lint / fmt            repository quality gates"
@@ -394,6 +409,20 @@ check-core: verify-pins typecheck
 
 test:
 	PYTHONPATH=. $(UV_RUN) python -m pytest -q
+
+test-full: test
+
+test-one:
+	@test -n "$(strip $(TEST))" || { echo "Set TEST to the affected pytest file or node ID."; exit 2; }
+	PYTHONPATH=. $(UV_RUN) python -m pytest -q $(TEST) $(TEST_PYTEST_ARGS)
+
+test-preparation:
+	@echo "Preparation integration checks; use test-one while editing."
+	PYTHONPATH=. $(UV_RUN) python -m pytest -q $(PREPARATION_TESTS) $(PREPARATION_PYTEST_ARGS)
+
+test-training:
+	@test -n "$(strip $(OUTPUT))" || { echo "Set OUTPUT to a new validation receipt directory."; exit 2; }
+	PYTHONPATH=.:tools $(UV_RUN) python -m experiments.phase1.multireaction.compose_lipid_validation --output "$(OUTPUT)"
 
 lint:
 	python3 -m ruff check forge cli experiments/_runtime experiments/phase1 tools tests

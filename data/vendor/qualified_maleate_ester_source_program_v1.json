@@ -1,0 +1,193 @@
+{
+  "curation": {
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false,
+    "source_execution_admitted": false
+  },
+  "reactions": [
+    {
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]);!$(N[C&H1]([C&H2][C&X3](=[O&X1])*)-[C&X3](=[O&X1])[#7,#8;#8]):1].[C&H1:2](=[C&H1:3][C&X3:4](=[O&X1:5])[#7,#8;#8:6])-[C&X3:7](=[O&X1:8])[#7,#8;#8:9]>>[N:1][C&H1:2]([C&H2:3][C&X3:4](=[O&X1:5])[*:6])-[C&X3:7](=[O&X1:8])[#7,#8;#8:9]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "exceptions": "Main procedure allows TEA for salts and isopropanol for insoluble amines.",
+        "solvent": [],
+        "temperature_c": 80,
+        "time_h": 24
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_all_family_sources_v1/build_registry.py",
+          "sha256": "d41f06d3865ddcc7b31f40d08de187aec0b23f5519de4159d3d446ad3fece277"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "michael": {
+            "path": "data/vendor/qualified_michael_source_program_v1.json",
+            "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[C&H1](=[C&H1][C&X3](=[O&X1])[#7,#8;#8])-[C&X3](=[O&X1])[#7,#8;#8]"
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]);!$(N[C&H1]([C&H2][C&X3](=[O&X1])*)-[C&X3](=[O&X1])[#7,#8;#8])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "maleate",
+          "required_handle_smarts": "[C&H1](=[C&H1][C&X3](=[O&X1])[#7,#8;#8])-[C&X3](=[O&X1])[#7,#8;#8]"
+        }
+      ],
+      "reaction_id": "source_maleate_single_addition_per_nitrogen",
+      "reaction_version": 1,
+      "selectivity_policy": "One addition per neutral non-acyl primary/secondary nitrogen, with all eligible sites and maleate orientations enumerated. Asymmetric or partial-occupancy constitutional ambiguity abstains. Thiol mechanism is outside this entry. Existing succinate-bound N is excluded.",
+      "source_program": {
+        "accumulator_role": "amine_head",
+        "event_count_field": "occupancy",
+        "maximum_events": 7,
+        "net_byproducts_per_event": {
+          "formal_charge": 0
+        },
+        "repeated_roles": [
+          "maleate"
+        ]
+      },
+      "sources": [
+        {
+          "identifier": "10.1101/2025.02.25.640222",
+          "kind": "doi",
+          "locator": "Main combinatorial synthesis; SI Fig. 1 and Figs. 6-7 (PDF pp. 1,7-8), 5D8",
+          "publication_status": "preprint"
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[C&X3:1](=[O&X1:2])[O&X2&H1:3].[O&X2&H1:4][C&X4:5]>>[C:1](=[O:2])-[O:4][C:5]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "Candida antarctica lipase B"
+        ],
+        "procedure_status": "Full main-text synthesis procedure not recovered; no exact-execution admission.",
+        "solvent": null,
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_all_family_sources_v1/build_registry.py",
+          "sha256": "d41f06d3865ddcc7b31f40d08de187aec0b23f5519de4159d3d446ad3fece277"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "michael": {
+            "path": "data/vendor/qualified_michael_source_program_v1.json",
+            "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "acid_tail",
+          "required_handle_smarts": "[CX3](=[OX1])[OX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]",
+            "[CX3](=[OX1])[OX2H1]"
+          ],
+          "name": "aminoalcohol_head",
+          "required_handle_smarts": "[O&X2&H1][C&X4]"
+        }
+      ],
+      "reaction_id": "source_aminoalcohol_o_esterification",
+      "reaction_version": 1,
+      "selectivity_policy": "Aliphatic alcohol O esterification only, monocarboxylic acid, no competing free amine on either component. Enumerate all OH sites and require a unique final constitutional product. Net water per ester. OH oxygen retained, a transform convention rather than isotope evidence.",
+      "source_program": {
+        "accumulator_role": "aminoalcohol_head",
+        "event_count_field": "occupancy",
+        "maximum_events": 3,
+        "net_byproducts_per_event": {
+          "H": 2,
+          "O": 1,
+          "formal_charge": 0
+        },
+        "repeated_roles": [
+          "acid_tail"
+        ]
+      },
+      "sources": [
+        {
+          "identifier": "10.1021/acsnano.2c07822",
+          "kind": "doi",
+          "locator": "SI Figs. S1-S3 (PDF pp. 3-5), AA3-DLin"
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "esterification_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/nn2c07822_si_001.pdf",
+      "sha256": "17dbc706d03466803dbe61d853e808717b5cdc95e12e22c733ec100bcf651305"
+    },
+    "maleate_main": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate_article.xml",
+      "sha256": "bfaaa8e80b791cbe472875a07645d1902736fac2ecb20825a5fb23c576dc86bb"
+    },
+    "maleate_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/media-1.pdf",
+      "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    }
+  }
+}

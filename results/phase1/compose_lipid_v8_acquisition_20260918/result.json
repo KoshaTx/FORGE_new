@@ -1,0 +1,216 @@
+{
+  "coverage_from_decomposition_key": {
+    "architecture_subfamily_count": 55,
+    "family_count": 23,
+    "family_names": [
+      "a3_amine_aldehyde_alkyne",
+      "acid_epoxide_diester_multistep",
+      "aema_aza_thiol_addition",
+      "aldehyde_ugi3",
+      "aldehyde_ugi4",
+      "alpha_isocyanoester_dihydroimidazole",
+      "amine_alkylation",
+      "amine_epoxide_opening",
+      "aryl_reductive_amination",
+      "aza_michael_acrylamide",
+      "aza_michael_acrylate",
+      "disulfide_michael",
+      "epoxide_opening_o_acylation",
+      "iphos_ring_opening",
+      "ketone_isocyanide_amide",
+      "ketone_ugi4",
+      "maleate_addition",
+      "o_esterification",
+      "passerini_3cr",
+      "preassembled_thiol_yne_tail_amidation",
+      "reductive_amination",
+      "thiolactone_aminolysis_michael",
+      "vitamin_b5_multistep"
+    ],
+    "family_universe_rows": {
+      "a3_amine_aldehyde_alkyne": 70016,
+      "acid_epoxide_diester_multistep": 232240,
+      "aema_aza_thiol_addition": 13865,
+      "aldehyde_ugi3": 18842,
+      "aldehyde_ugi4": 222029,
+      "alpha_isocyanoester_dihydroimidazole": 219036,
+      "amine_alkylation": 188272,
+      "amine_epoxide_opening": 97439,
+      "aryl_reductive_amination": 48090,
+      "aza_michael_acrylamide": 31239,
+      "aza_michael_acrylate": 33619,
+      "disulfide_michael": 254389,
+      "epoxide_opening_o_acylation": 42805,
+      "iphos_ring_opening": 184345,
+      "ketone_isocyanide_amide": 271560,
+      "ketone_ugi4": 91395,
+      "maleate_addition": 68463,
+      "o_esterification": 24948,
+      "passerini_3cr": 128352,
+      "preassembled_thiol_yne_tail_amidation": 465048,
+      "reductive_amination": 61320,
+      "thiolactone_aminolysis_michael": 334859,
+      "vitamin_b5_multistep": 80398
+    }
+  },
+  "created_at_utc": "2026-09-18T13:01:05.941817+00:00",
+  "documentation_notes": [
+    "The current delivered release documents 23 reaction-program families, not the twelve families of the earlier FORGE source.",
+    "Three reported_* reference groups are not reaction-program families.",
+    "The provider checksum file covers the three data archives. README and decomposition keys have acquisition hashes, not provider-supplied checksum verification.",
+    "Decomposition keys specify chemistry, role multiplicities, metadata-to-role mappings and source citations; they do not supply an ID-to-SMILES table or atom-level partitions.",
+    "README section 2 states 2,971,570 non-anchor universe rows; this differs from its universe total minus anchor total (3,182,837 - 11,267 = 3,171,570). Source bytes are retained unchanged; no row-level anchor audit has been performed.",
+    "README describes graph-level reaction enumeration and training_admissible=false. Source anchors and virtual enumerations have different evidence status.",
+    "README declares a cross-family source-study overlap involving PMID 38409275; its split-leakage audit is referenced but not included among the seven delivered files."
+  ],
+  "files": [
+    {
+      "checksum_matches": true,
+      "google_drive_file_id": "11SKxas4I9bKDgcRbnHEercK0Ay81cFJH",
+      "name": "accepted_targets.jsonl.gz",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/accepted_targets.jsonl.gz",
+      "provider_checksum_available": true,
+      "provider_sha256": "0d363b9602421f3db3b4553ef28330da1342744960b3b341a9e05f24efc095b3",
+      "sha256": "0d363b9602421f3db3b4553ef28330da1342744960b3b341a9e05f24efc095b3",
+      "size_bytes": 33914327,
+      "source_url": "https://drive.google.com/file/d/11SKxas4I9bKDgcRbnHEercK0Ay81cFJH/view"
+    },
+    {
+      "checksum_matches": true,
+      "google_drive_file_id": "1dEGKh_LiHWIF-JzTyGYNOQIjLP9NawkE",
+      "name": "assignments.jsonl.gz",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/assignments.jsonl.gz",
+      "provider_checksum_available": true,
+      "provider_sha256": "c99324118408adfd4e83ccbe1576977d86375d9c7d077b1ce288e07a98b6e15d",
+      "sha256": "c99324118408adfd4e83ccbe1576977d86375d9c7d077b1ce288e07a98b6e15d",
+      "size_bytes": 33201567,
+      "source_url": "https://drive.google.com/file/d/1dEGKh_LiHWIF-JzTyGYNOQIjLP9NawkE/view"
+    },
+    {
+      "google_drive_file_id": "1gFfiZzaDoq0SPU5cVa2WFxADgbO6wPZL",
+      "name": "family_decomposition_key.json",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "preserved_document": {
+        "path": "results/phase1/compose_lipid_v8_acquisition_20260918/source_docs/family_decomposition_key.json",
+        "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d",
+        "size_bytes": 53779
+      },
+      "provider_checksum_available": false,
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d",
+      "size_bytes": 53779,
+      "source_url": "https://drive.google.com/file/d/1gFfiZzaDoq0SPU5cVa2WFxADgbO6wPZL/view"
+    },
+    {
+      "google_drive_file_id": "1AbLepsmToEjTuFjWahwsLOWwYZBPb8V9",
+      "name": "FAMILY_DECOMPOSITION_KEY.md",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/FAMILY_DECOMPOSITION_KEY.md",
+      "preserved_document": {
+        "path": "results/phase1/compose_lipid_v8_acquisition_20260918/source_docs/FAMILY_DECOMPOSITION_KEY.md",
+        "sha256": "9bec6f410a7ed8ea7c7dfd144d8b0a2ff19fffdea33836c7a20222a450fa7d05",
+        "size_bytes": 40466
+      },
+      "provider_checksum_available": false,
+      "sha256": "9bec6f410a7ed8ea7c7dfd144d8b0a2ff19fffdea33836c7a20222a450fa7d05",
+      "size_bytes": 40466,
+      "source_url": "https://drive.google.com/file/d/1AbLepsmToEjTuFjWahwsLOWwYZBPb8V9/view"
+    },
+    {
+      "checksum_matches": true,
+      "google_drive_file_id": "1CuWK6pBeo-wma5OEVI1Txw7AYr7SclTh",
+      "name": "global_candidates.jsonl.gz",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/global_candidates.jsonl.gz",
+      "provider_checksum_available": true,
+      "provider_sha256": "05e3151e4cb44cec63d5752202ffd8b4691134bae40126bdc86d33326e9fca30",
+      "sha256": "05e3151e4cb44cec63d5752202ffd8b4691134bae40126bdc86d33326e9fca30",
+      "size_bytes": 536590782,
+      "source_url": "https://drive.google.com/file/d/1CuWK6pBeo-wma5OEVI1Txw7AYr7SclTh/view"
+    },
+    {
+      "google_drive_file_id": "1BR8bGZ1wMkpeFJxMpuai7l6DvsaznrVu",
+      "name": "README.md",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/README.md",
+      "preserved_document": {
+        "path": "results/phase1/compose_lipid_v8_acquisition_20260918/source_docs/README.md",
+        "sha256": "0e12f7cf8d97d893b531800409e93a4310e020209315e7487b8ec9395f176050",
+        "size_bytes": 15357
+      },
+      "provider_checksum_available": false,
+      "sha256": "0e12f7cf8d97d893b531800409e93a4310e020209315e7487b8ec9395f176050",
+      "size_bytes": 15357,
+      "source_url": "https://drive.google.com/file/d/1BR8bGZ1wMkpeFJxMpuai7l6DvsaznrVu/view"
+    },
+    {
+      "google_drive_file_id": "1q_svR1c86vKTJrIaRCOfWqlD8oplDLLc",
+      "name": "SHA256SUMS",
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/SHA256SUMS",
+      "preserved_document": {
+        "path": "results/phase1/compose_lipid_v8_acquisition_20260918/source_docs/SHA256SUMS",
+        "sha256": "674e22f74937b6ab2fa4176e58e9cc66610fdbe775a2a05c383d4b645d52e04c",
+        "size_bytes": 272
+      },
+      "provider_checksum_available": false,
+      "sha256": "674e22f74937b6ab2fa4176e58e9cc66610fdbe775a2a05c383d4b645d52e04c",
+      "size_bytes": 272,
+      "source_url": "https://drive.google.com/file/d/1q_svR1c86vKTJrIaRCOfWqlD8oplDLLc/view"
+    }
+  ],
+  "integration": {
+    "existing_splits_changed": false,
+    "existing_vendored_data_replaced": false,
+    "gate_changes": false,
+    "generation_calls": 0,
+    "performed": false,
+    "required_followup": "Version the 23-program mapping and qualify exact decomposition and forward reconstruction before admitting new training data.",
+    "training_calls": 0
+  },
+  "provider_declared_release": {
+    "balanced_release_rows": 200000,
+    "balanced_split_rows": {
+      "calibration": 19975,
+      "reference": 268,
+      "test": 19975,
+      "train": 159782
+    },
+    "reference_only_rows": 268,
+    "size_band": "Provider model_supported is <=80 heavy atoms; larger molecules remain in the downloaded universe. No FORGE support limit is changed.",
+    "source_anchor_rows": 11267,
+    "universe_rows": 3182837
+  },
+  "schema_version": "forge.compose_lipid_source_acquisition.v1",
+  "source": {
+    "acquisition_date": "2026-09-18",
+    "folder_url": "https://drive.google.com/drive/folders/1IemlQW9eX8G2WyqsjkupW6JwuWFLru7Q?usp=sharing",
+    "local_directory": "data/source_cache/compose_lipid_drive_2026-09-18",
+    "provider_snapshot_date": "2026-09-17",
+    "release_name": "COMPOSE-Lipid v8"
+  },
+  "status": "acquired_verified_not_integrated",
+  "validation_scope": "Download authenticity, complete archive decompression, newline counts, and documentation preservation. No model-quality, reaction qualification, or repository-wide test claim.",
+  "verification": {
+    "all_archives_decompress_with_valid_crc": true,
+    "all_folder_files_downloaded": true,
+    "all_sizes_match_listing": true,
+    "command": "shasum -a 256 -c SHA256SUMS",
+    "data_files_verified": 3,
+    "exit_code": 0,
+    "folder_listing": {
+      "path": "results/phase1/compose_lipid_v8_acquisition_20260918/folder_listing.json",
+      "sha256": "a9c6a328e913384c55b459bf0d2ae6244ebb0bc5df57b8cf9bd4ceff0021a13a",
+      "size_bytes": 1501
+    },
+    "gzip_checks": {
+      "path": "results/phase1/compose_lipid_v8_acquisition_20260918/gzip_checks.json",
+      "sha256": "016d2638c3b8af67cc2e380c69f5f5630a578e701df6b9a31f1512c5926a6809",
+      "size_bytes": 1242
+    },
+    "line_counts_match_readme": true,
+    "log": {
+      "path": "results/phase1/compose_lipid_v8_acquisition_20260918/checksum_verification.log",
+      "sha256": "a0ca99d508dc9042b1b7a8d4d0532190ee342e296ece77a9f458ab6fcbcac96c",
+      "size_bytes": 86
+    },
+    "molecule_graphs_inspected": false,
+    "row_schema_validated": false,
+    "working_directory": "data/source_cache/compose_lipid_drive_2026-09-18"
+  }
+}

@@ -1,0 +1,460 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_supplied_thiol_a3_v1/replay.jsonl.gz",
+    "sha256": "8b5104338b6a4a530caa2a2b7dfbb360f1d7b61bed083ba52efbe7ba38b2ae1f"
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_supplied_thiol_a3_v1.json",
+    "sha256": "2a8ad697e449cd085529166c95516aef1f8e2046afb50fd6c1f87ed49faf522e"
+  },
+  "controls": {
+    "Han_11(aB)2": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 36,
+            "H": 56,
+            "N": 2,
+            "O": 2,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 36,
+            "H": 56,
+            "N": 2,
+            "O": 2,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCN(CC)CCN",
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+          ],
+          [
+            2,
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+            "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCN(CC)CCN"
+          ],
+          [
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+          ],
+          [
+            "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1",
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+          ],
+          [
+            2,
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+            "CCN(CC)CCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+          ],
+          [
+            "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+          ],
+          [
+            "CCN(CC)CCN"
+          ]
+        ]
+      }
+    },
+    "Han_31hP-M": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 21,
+            "H": 32,
+            "N": 2,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 21,
+            "H": 32,
+            "N": 2,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCN(CC)CCNC",
+            "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCN(CC)CCNC"
+          ],
+          [
+            "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1",
+            "CCN(CC)CCNC"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+          ],
+          [
+            "CCN(CC)CCNC"
+          ]
+        ]
+      }
+    },
+    "a3_unresolved_amine_site": {
+      "kind": "ambiguity_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 7,
+            "H": 16,
+            "N": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 7,
+            "H": 16,
+            "N": 2,
+            "O": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CNCCN",
+            "CC#CCN(C)CCN"
+          ],
+          [
+            1,
+            "CNCCN",
+            "CC#CCNCCNC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CNCCN"
+          ],
+          [
+            "CC#CCN(C)CCN",
+            "CC#CCNCCNC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CC#CCNCCNC",
+            "CNCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CC#CCNCCNC"
+          ],
+          [
+            "CNCCN"
+          ]
+        ]
+      }
+    },
+    "asymmetric_maleate_thiol_ambiguous_orientation": {
+      "kind": "ambiguity_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 11,
+            "H": 21,
+            "N": 1,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 11,
+            "H": 21,
+            "N": 1,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CN(C)CCS",
+            "CCOC(=O)C(CC(=O)OC)SCCN(C)C"
+          ],
+          [
+            1,
+            "CN(C)CCS",
+            "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CN(C)CCS"
+          ],
+          [
+            "CCOC(=O)C(CC(=O)OC)SCCN(C)C",
+            "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCOC(=O)CC(SCCN(C)C)C(=O)OC",
+            "CN(C)CCS"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+          ],
+          [
+            "CN(C)CCS"
+          ]
+        ]
+      }
+    },
+    "maleate_library_49D8": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 24,
+            "H": 47,
+            "N": 1,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 24,
+            "H": 47,
+            "N": 1,
+            "O": 4,
+            "S": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CN(C)CCS",
+            "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CN(C)CCS"
+          ],
+          [
+            "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC",
+            "CN(C)CCS"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+          ],
+          [
+            "CN(C)CCS"
+          ]
+        ]
+      }
+    }
+  },
+  "environment": {
+    "python": "3.11.15",
+    "rdkit": "2026.03.5"
+  },
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_current_replay.py": {
+      "path": "forge/corpus/compose_lipid_current_replay.py",
+      "sha256": "f7bb5d9da5a7bcfaab74ecfd88f8bcc74a0db37a9315b30a8b920e9c5aab0618"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_supplied_replay.py": {
+      "path": "forge/corpus/compose_lipid_supplied_replay.py",
+      "sha256": "bfcd79a95ffdcb1b631d17d04f530da446cd69a6da1c0c6e2f0b04ff2e9c2221"
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_thiol_maleate_a3_program_v1.json",
+      "sha256": "3938325bf401a0f8a8bddce47840cbd1d9afb268993edf409e0702f6555ee033"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/thiol-a3-adjudication.json",
+      "sha256": "7a4803e4cedcfc225b5fc1678d2e31dddb07de55d8e189ff17c7e8c670f6c65d"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "supplied_instance_quantities_checked_against_metadata_when_present",
+    "population": "current_full_preparation_eligible_only",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_current_replay.v1",
+  "status": "computed_replay_complete_training_unqualified",
+  "summary": {
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "exact_computed_reconstruction": 1866,
+        "failed_unique_forward_exact": 1214,
+        "rows": 3080,
+        "unresolved_computed_reconstruction": 1214
+      },
+      "maleate_addition": {
+        "exact_computed_reconstruction": 1285,
+        "failed_declared_event_count_replayed": 1097,
+        "failed_unique_declared_side_inverse": 1097,
+        "failed_unique_forward_exact": 1097,
+        "outside_registry_event_support": 989,
+        "rows": 3371,
+        "unresolved_computed_reconstruction": 1097
+      }
+    },
+    "totals": {
+      "exact_computed_reconstruction": 3151,
+      "failed_declared_event_count_replayed": 1097,
+      "failed_unique_declared_side_inverse": 1097,
+      "failed_unique_forward_exact": 2311,
+      "outside_registry_event_support": 989,
+      "rows": 6451,
+      "unresolved_computed_reconstruction": 2311
+    }
+  }
+}

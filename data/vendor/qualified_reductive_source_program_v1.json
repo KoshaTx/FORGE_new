@@ -1,0 +1,345 @@
+{
+  "reactions": [
+    {
+      "additional_required_query": {
+        "exact_count": 1,
+        "role": "coupled_aldehyde",
+        "smarts": "[CX3H1]=[OX1]"
+      },
+      "architecture": "reductive-amination amino lipid",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3H1:2]=[OX1:3]>>[N:1][CH2:2]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [],
+        "temperature_c": null,
+        "time_h": null
+      },
+      "curation": {
+        "disposition": "admit_transform_consistency",
+        "evidence_basis": "computed_transform_consistency",
+        "experimental_execution_admitted": false
+      },
+      "implementation": {
+        "builder": {
+          "path": "results/phase1/compose_lipid_v8_reductive_source_v1/build_registry.py",
+          "sha256": "9a838ec1bfbde40b8453e4d52fc58b78d74426e420a3e17a88ac49f7e5e95c11"
+        },
+        "functional_group_registry": {
+          "path": "data/vendor/qualified_a3_source_program_v2.json",
+          "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+        },
+        "parent_registry": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        }
+      },
+      "known_negative_examples": [
+        {
+          "expected": "",
+          "reactants": [
+            "CCCCCCCCCCCCN",
+            "CCCCC(=O)CCCC"
+          ],
+          "reason": "ketone is not an aldehyde handle here"
+        }
+      ],
+      "known_positive_examples": [
+        {
+          "expected": "CN(CCCn1cccn1)CC(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCCCCCCCC",
+          "reactants": [
+            "CNCCCn1cccn1",
+            "O=CC(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCCCCCCCC"
+          ],
+          "reason": "Jiang_IR_19_Pyrazole; independent source drawing and formula"
+        },
+        {
+          "expected": "CCCCN(CCCC)CCCNCC(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCC=CCCCCC",
+          "reactants": [
+            "CCCCN(CCCC)CCCN",
+            "O=CC(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCC=CCCCCC"
+          ],
+          "reason": "Jiang_IR_117_17; independent source drawing and formula"
+        }
+      ],
+      "precursor_scaffolds": {
+        "events": 1,
+        "net_byproducts_per_event": {
+          "O": 1
+        },
+        "precursor_role": "coupled_aldehyde",
+        "scaffolds": [
+          {
+            "anchor_map": 1,
+            "architecture_subfamily": "jiang_nebulized_ester_aldehyde",
+            "arm_aromatic_atoms_allowed": false,
+            "arm_atomic_numbers": [
+              0,
+              6,
+              8
+            ],
+            "core_smarts": "[CX3H1:1](=[OX1])[CH]([CH2][CH2][CH2][CH2][OX2:11][CX3:12](=[OX1])[#6])[CH]([OX2H1])[CH2][CH2][CH2][CH2][CH2][OX2:21][CX3:22](=[OX1])[#6]",
+            "cut_bond_maps": [
+              [
+                11,
+                12
+              ],
+              [
+                21,
+                22
+              ]
+            ],
+            "id": "jiang_aldol_diester",
+            "identical_detached_arms": true,
+            "locator": "Jiang SI PDF pp. 3-5: Scheme 1, aldehydes 5a/5b and final IR-19-Pyrazole/IR-117-17 schemes"
+          }
+        ],
+        "source_stage_order": [
+          "amine_aldehyde_condensation",
+          "imine_or_iminium_reduction"
+        ],
+        "stoichiometry_interpretation": "Formal net oxygen removal: aldehyde plus amine plus two hydrogen equivalents yields product plus water. Hydride-donor and workup speciation are not modeled; O alone is not asserted to be a physical byproduct."
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[CX3H1]=[OX1]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "coupled_aldehyde",
+          "required_handle_smarts": "[$([C&X3&H1](=[O&X1])[C&H1]([C&H2][C&H2][C&H2][C&H2][O&X2][C&X3](=[O&X1])[#6])[C&H1]([O&X2&H1])[C&H2][C&H2][C&H2][C&H2][C&H2][O&X2][C&X3](=[O&X1])[#6])]"
+        }
+      ],
+      "reaction_id": "source_reductive_amination",
+      "reaction_version": 1,
+      "selectivity_policy": "Amine condenses with an aldehyde and is reduced to a new C-N bond (secondary/tertiary amine). Aldehydes only (ketones give the ketone-reductive-amination variant, excluded here); the carbonyl oxygen leaves as water.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41565-023-01548-3",
+          "kind": "doi",
+          "locator": "Pinned source scaffolds and controls specify exact figure/procedure locators"
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free Phase 1 identity."
+    },
+    {
+      "additional_required_query": {
+        "exact_count": 1,
+        "role": "coupled_aldehyde",
+        "smarts": "[CX3H1]=[OX1]"
+      },
+      "architecture": "reductive-amination amino lipid",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3H1:2]=[OX1:3]>>[N:1][CH2:2]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [],
+        "temperature_c": null,
+        "time_h": null
+      },
+      "curation": {
+        "disposition": "admit_transform_consistency",
+        "evidence_basis": "computed_transform_consistency",
+        "experimental_execution_admitted": false
+      },
+      "implementation": {
+        "builder": {
+          "path": "results/phase1/compose_lipid_v8_reductive_source_v1/build_registry.py",
+          "sha256": "9a838ec1bfbde40b8453e4d52fc58b78d74426e420a3e17a88ac49f7e5e95c11"
+        },
+        "functional_group_registry": {
+          "path": "data/vendor/qualified_a3_source_program_v2.json",
+          "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+        },
+        "parent_registry": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        }
+      },
+      "known_negative_examples": [
+        {
+          "expected": "",
+          "reactants": [
+            "CCCCCCCCCCCCN",
+            "CCCCC(=O)CCCC"
+          ],
+          "reason": "ketone is not an aldehyde handle here"
+        }
+      ],
+      "known_positive_examples": [
+        {
+          "expected": "CN(C)CCNCc1cc(OC(=O)C(CC)CCCC)cc(OC(=O)C(CC)CCCC)c1",
+          "reactants": [
+            "CN(C)CCN",
+            "O=Cc1cc(OC(=O)C(CC)CCCC)cc(OC(=O)C(CC)CCCC)c1"
+          ],
+          "reason": "Xue_5_A2_7b2; independent source drawing and formula"
+        }
+      ],
+      "precursor_scaffolds": {
+        "events": 1,
+        "net_byproducts_per_event": {
+          "O": 1
+        },
+        "precursor_role": "coupled_aldehyde",
+        "scaffolds": [
+          {
+            "anchor_map": 1,
+            "architecture_subfamily": "xue_a2_aryl_core",
+            "arm_aromatic_atoms_allowed": false,
+            "arm_atomic_numbers": [
+              0,
+              6,
+              8
+            ],
+            "core_smarts": "[CX3H1:1](=[OX1])-[c]1[cH][c]([OX2:11][CX3:12](=[OX1])[#6])[cH][c]([OX2:21][CX3:22](=[OX1])[#6])[cH]1",
+            "cut_bond_maps": [
+              [
+                11,
+                12
+              ],
+              [
+                21,
+                22
+              ]
+            ],
+            "id": "xue_A2",
+            "identical_detached_arms": true,
+            "locator": "Xue SI PDF pp. 2 and 8: Supplementary Figs. 1 and 18; 3,5-diacylated benzaldehyde"
+          },
+          {
+            "anchor_map": 1,
+            "architecture_subfamily": "xue_a3_aryl_core",
+            "arm_aromatic_atoms_allowed": false,
+            "arm_atomic_numbers": [
+              0,
+              6,
+              8
+            ],
+            "core_smarts": "[CX3H1:1](=[OX1])-[c]1[c]([OX2:11][CX3:12](=[OX1])[#6])[cH][c]([OX2:21][CX3:22](=[OX1])[#6])[cH][c]1[OX2:31][CX3:32](=[OX1])[#6]",
+            "cut_bond_maps": [
+              [
+                11,
+                12
+              ],
+              [
+                21,
+                22
+              ],
+              [
+                31,
+                32
+              ]
+            ],
+            "id": "xue_A3",
+            "identical_detached_arms": true,
+            "locator": "Xue SI PDF pp. 5-7: Supplementary Figs. 12-17; displayed products have 2,4,6-triacylated benzaldehyde cores"
+          }
+        ],
+        "source_stage_order": [
+          "amine_aldehyde_condensation",
+          "imine_or_iminium_reduction"
+        ],
+        "stoichiometry_interpretation": "Formal net oxygen removal: aldehyde plus amine plus two hydrogen equivalents yields product plus water. Hydride-donor and workup speciation are not modeled; O alone is not asserted to be a physical byproduct."
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[CX3H1]=[OX1]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "coupled_aldehyde",
+          "required_handle_smarts": "[$([C&X3&H1](=[O&X1])-c1[c&H1]c([O&X2][C&X3](=[O&X1])[#6])[c&H1]c([O&X2][C&X3](=[O&X1])[#6])[c&H1]1),$([C&X3&H1](=[O&X1])-c1c([O&X2][C&X3](=[O&X1])[#6])[c&H1]c([O&X2][C&X3](=[O&X1])[#6])[c&H1]c1[O&X2][C&X3](=[O&X1])[#6])]"
+        }
+      ],
+      "reaction_id": "source_aryl_reductive_amination",
+      "reaction_version": 1,
+      "selectivity_policy": "Amine condenses with an aldehyde and is reduced to a new C-N bond (secondary/tertiary amine). Aldehydes only (ketones give the ketone-reductive-amination variant, excluded here); the carbonyl oxygen leaves as water.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41467-024-45422-9",
+          "kind": "doi",
+          "locator": "Pinned source scaffolds and controls specify exact figure/procedure locators"
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free Phase 1 identity."
+    }
+  ],
+  "schema_version": "forge.source_reductive_program_registry.v1",
+  "source_assets": {
+    "controls.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/controls.json",
+      "sha256": "46f6c2b8b0ebf9d8374c912557f6fae3e5e9e48f3dfca6ddd3e650ee4b304cd5"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "jiang-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-article.html",
+      "sha256": "cb56040d438e8f9a5599213945f5e15a47f74407c8686efe7459b00b427e23f5"
+    },
+    "jiang-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-si.pdf",
+      "sha256": "febe59fae4f5d6bbd11ed754785c1618cc38171b9ec53d14d0956c56b758b220"
+    },
+    "scaffolds.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/scaffolds.json",
+      "sha256": "a423d8da03b31eb4020b1a78081e9b7a23ced3fa4d43344686c8ad8faa2519b2"
+    },
+    "xue-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-article.html",
+      "sha256": "2af22147eb934f7ce1d338be6f41baff15b9f03dfa07f1834dda5ba7afa390f6"
+    },
+    "xue-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-si.pdf",
+      "sha256": "7f5b1c6413e4db3b09cb86296139ba76848b06de96b7165942643233ad6a3e2c"
+    }
+  }
+}

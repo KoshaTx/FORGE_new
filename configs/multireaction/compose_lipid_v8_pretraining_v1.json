@@ -1,0 +1,95 @@
+{
+  "expected_train_rows": 149736,
+  "import_result": {
+    "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+    "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+  },
+  "neutral_monovalent_extensions": [
+    "Br",
+    "Cl"
+  ],
+  "policy": {
+    "fit_split": "protected_train",
+    "generation_calls": 0,
+    "heldout_structure_access": false,
+    "random_sampling_used": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "related_transforms": {
+    "aldehyde_ugi3": {
+      "limit": 128,
+      "reaction_id": "ugi_3cr_agile",
+      "registry_input": "ugi_registry",
+      "registry_to_source_roles": {
+        "amine_head": "amine",
+        "isocyanide_tail": "isocyanide",
+        "oxoester_aldehyde_body_tail": "aldehyde"
+      }
+    },
+    "amine_epoxide_opening": {
+      "limit": 128,
+      "reaction_id": "epoxide_opening_amine",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "alkyl_epoxide_tail": "epoxide_tail",
+        "amine_head": "amine_head"
+      }
+    },
+    "aryl_reductive_amination": {
+      "limit": 128,
+      "reaction_id": "reductive_amination_amine_aldehyde",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "aldehyde_tail": "coupled_aldehyde",
+        "amine_head": "amine_head"
+      }
+    },
+    "aza_michael_acrylate": {
+      "limit": 128,
+      "reaction_id": "aza_michael_amine_acrylate",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "alkyl_acrylate_or_acrylamide_tail": "acceptor_tail",
+        "amine_head": "amine_head"
+      }
+    },
+    "iphos_ring_opening": {
+      "limit": 128,
+      "reaction_id": "iphos_amine_dioxaphospholane",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "dioxaphospholane_tail": "phosphate_tail"
+      }
+    },
+    "passerini_3cr": {
+      "limit": 128,
+      "reaction_id": "passerini_3cr",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "aldehyde_body": "aldehyde_tail",
+        "carboxylic_acid_tail": "amine_acid_head",
+        "isocyanide_tail": "isocyanide_tail"
+      }
+    },
+    "reductive_amination": {
+      "limit": 128,
+      "reaction_id": "reductive_amination_amine_aldehyde",
+      "registry_input": "family_registry",
+      "registry_to_source_roles": {
+        "aldehyde_tail": "coupled_aldehyde",
+        "amine_head": "amine_head"
+      }
+    }
+  },
+  "schema_version": "forge.compose_lipid_pretraining_config.v1",
+  "source_lookup": {
+    "branch": "dataset/source-corrected-corpus-v3",
+    "observed_commit": "9a4e5884720b883918052db0733a316d0e47caaa",
+    "repository": "git@github.com:KoshaTx/compose_lipid.git",
+    "v8_registry_present": false
+  },
+  "source_program_equivalence_claimed": false
+}

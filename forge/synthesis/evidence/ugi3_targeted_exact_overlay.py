@@ -17,6 +17,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.input_locations import results_match_after_input_relocation
 from forge.core.io import read_json_object
 from forge.synthesis.engine.planner import (
     AvailabilityState,
@@ -119,7 +120,13 @@ def load_targeted_exact_overlay(
         input_paths=audit_input_paths,
     )
     stored_result = _load_json(stored_audit_result_path, label="stored targeted audit result")
-    if stored_result != fresh_result:
+    if not results_match_after_input_relocation(
+        stored_result,
+        fresh_result,
+        repo=Path.cwd(),
+        specifications=_load_json(audit_config_path, label="audit config")["inputs"],
+        input_paths=audit_input_paths,
+    ):
         raise Ugi3TargetedExactOverlayError(
             "stored targeted audit result is not reproducible from frozen inputs"
         )

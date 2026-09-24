@@ -1,0 +1,51 @@
+{
+  "families": {
+    "aryl_reductive_amination": {
+      "reaction_id": "source_aryl_reductive_amination",
+      "role_fields": {
+        "amine_head": "head_id",
+        "coupled_aldehyde": "aldehyde_id"
+      }
+    },
+    "reductive_amination": {
+      "reaction_id": "source_reductive_amination",
+      "role_fields": {
+        "amine_head": "head_id",
+        "coupled_aldehyde": "aldehyde_id"
+      }
+    }
+  },
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/adjudication.json",
+      "sha256": "d43ebede7ae3a5364918eb4f2460992ac10184118040e9384ae046f397268869"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_reductive_source_program_v1.json",
+      "sha256": "1ea04fc84a11f47482ce94eb3312e4b4de09ecd280e1e9ec871fa44d86954e81"
+    }
+  },
+  "policy": {
+    "fit_population": "enforced_product_protection_preparation_view",
+    "generation_calls": 0,
+    "provider_heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_scaffold_event_config.v1",
+  "search_bounds": {
+    "maximum_events": 1,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

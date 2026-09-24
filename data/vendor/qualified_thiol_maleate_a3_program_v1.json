@@ -1,0 +1,249 @@
+{
+  "curation": {
+    "evidence_basis": "computed_transform_consistency",
+    "experimental_execution_admitted": false,
+    "training_admitted": false
+  },
+  "reactions": [
+    {
+      "atom_mapped_reaction_smarts": "[SX2H1:1].[C&H1:2](=[C&H1:3][C&X3:4](=[O&X1:5])[#7,#8;#8:6])-[C&X3:7](=[O&X1:8])[#7,#8;#8:9]>>[S:1][C&H1:2]([C&H2:3][C&X3:4](=[O&X1:5])[*:6])-[C&X3:7](=[O&X1:8])[#7,#8;#8:9]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "exceptions": "Main procedure allows TEA for salts and isopropanol for insoluble amines.",
+        "solvent": [],
+        "temperature_c": 80,
+        "time_h": 24
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_all_family_sources_v1/build_thiol_a3_registry.py",
+          "sha256": "93403a34c2351f51676feb18c030d3ffb1486eed570aa594794d753fe5b375d0"
+        },
+        "kind": "source_qualified_program_overlay",
+        "parent_registries": {
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "maleate": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "thiol_head",
+          "required_handle_smarts": "[SX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]",
+            "[SX2H1]"
+          ],
+          "name": "maleate",
+          "required_handle_smarts": "[C&H1](=[C&H1][C&X3](=[O&X1])[#7,#8;#8])-[C&X3](=[O&X1])[#7,#8;#8]"
+        }
+      ],
+      "reaction_id": "source_thiol_maleate_addition",
+      "reaction_version": 1,
+      "selectivity_policy": "Separate monothiol mechanism; tertiary amine topology retained. Free NH competitors excluded. All complete maleate orientations enumerated. No pooling with the amine mechanism.",
+      "source_program": {
+        "accumulator_role": "thiol_head",
+        "event_count_field": "occupancy",
+        "maximum_events": 1,
+        "net_byproducts_per_event": {
+          "formal_charge": 0
+        },
+        "repeated_roles": [
+          "maleate"
+        ]
+      },
+      "sources": [
+        {
+          "identifier": "10.1101/2025.02.25.640222",
+          "kind": "doi",
+          "locator": "Main Fig. 1a-b reaction and library; SI Fig. 1 (PDF p. 1), thiol 49 and D8. Product is the explicit library combination of these source-drawn ingredients and generic drawn S-addition graph; no individual 49D8 spectrum claimed.",
+          "publication_status": "preprint"
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "architecture_conflicts": [
+        {
+          "disposition": "reject_claim",
+          "id": "han_asymmetric_event_count",
+          "reason": "The cited amine31 asymmetric procedure and Fig3e support one event, not two ordered events. This does not imply other repeated A3 products are impossible.",
+          "source_key_field": "architecture_subfamilies.han_ordered_two_event_asymmetric"
+        },
+        {
+          "disposition": "abstain",
+          "id": "31hP-M_CuCl_amount",
+          "locator": "SI PDF5 Supplementary Method2",
+          "reason": "CuCl is printed as 0.2 mmol and 0.1 equivalents for 0.2 mmol limiting substrate. Both values are preserved; no corrected amount or exact execution label is inferred."
+        }
+      ],
+      "architecture_qualified": false,
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3;$([C;H1,H2]);!$([C]-[!#6]):2]=[OX1:3].[CX2H1:4]#[CX2:5]>>[N:1][C:2][C:4]#[C:5]",
+      "experimental_execution_admitted": false,
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_all_family_sources_v1/build_thiol_a3_registry.py",
+          "sha256": "93403a34c2351f51676feb18c030d3ffb1486eed570aa594794d753fe5b375d0"
+        },
+        "kind": "source_qualified_program_overlay",
+        "parent_registries": {
+          "a3": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          },
+          "source_adjudication": {
+            "path": "results/phase1/compose_lipid_v8_a3_source_v1/adjudication-v2.json",
+            "sha256": "ab3ebf50a052e462c54cc0bff88bb90ffd0dcbaf6405d04cda575fb499b0fa2f"
+          }
+        }
+      },
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "aldehyde",
+          "required_handle_smarts": "[CX3;H1,H2;!$([C]-[!#6])](=[OX1])"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "alkyne",
+          "required_handle_smarts": "[CX2H1]#[CX2]"
+        }
+      ],
+      "reaction_id": "source_fixed_components_repeated_a3",
+      "reaction_version": 2,
+      "selectivity_policy": "One complete fixed aldehyde and alkyne identity repeated at all declared N-H events. No ordered heterogeneous program or target-directed site selection. Virtual computed consistency only; the source-key claim that Han asymmetric libraries require two ordered events is rejected, and is never admitted as a label.",
+      "source_program": {
+        "accumulator_role": "amine_head",
+        "event_count_field": "events",
+        "maximum_events": 6,
+        "net_byproducts_per_event": {
+          "H": 2,
+          "O": 1,
+          "formal_charge": 0
+        },
+        "repeated_roles": [
+          "aldehyde",
+          "alkyne"
+        ]
+      },
+      "sources": [
+        {
+          "identifier": "10.1038/s41551-024-01267-7",
+          "kind": "doi",
+          "locator": "Main Methods p.1421; SI PDF pp.5-7, control 11(aB)2 and 31hP-M; prior source adjudication preserved."
+        }
+      ],
+      "status": "qualified_for_enumeration"
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "a3_12951_2024_2919_MOESM1_ESM.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM1_ESM.pdf",
+      "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427"
+    },
+    "a3_12951_2024_2919_MOESM2_ESM.docx": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM2_ESM.docx",
+      "sha256": "208b48e7f29485bb1590cf767f174f7735a2acadd265cec5f0630c9b8478c693"
+    },
+    "a3_acquisition-followup.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition-followup.json",
+      "sha256": "f5ceba8267c5624b835457eae6ac4fb5fcac7d007a6cae747f9ab6d64232a994"
+    },
+    "a3_acquisition.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition.json",
+      "sha256": "509b88d6bf93e6050a7daf1f74365c94303c806079c5c692ae61cfbb69d6c545"
+    },
+    "a3_extraction.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/extraction.json",
+      "sha256": "4e9d45846eca968f108fbe544983c6809f63d1e4514fe69efac3466aefe019fa"
+    },
+    "a3_han-epmc.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-epmc.json",
+      "sha256": "c62e3bcca097aa9cf71a1589264b1e2661690991b54e3e2068a7429487f952c2"
+    },
+    "a3_han-si-media.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-si-media.pdf",
+      "sha256": "672330505add810c8f06b1bfe93e52921bdc093cb7d47794ddc04a9414418dd0"
+    },
+    "a3_han.html": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.html",
+      "sha256": "dfa99704fd97e7266ea215edb502a3b3b5c66b41e467adc52e726661a9d8a64e"
+    },
+    "a3_han.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.pdf",
+      "sha256": "df5d0ca78a22588f0561c8a391eb840b7bf389b442944b6486dd98004b7ee325"
+    },
+    "a3_lu-supplements.zip": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu-supplements.zip",
+      "sha256": "987bdc87479e62e9e4e7c054e5f6608b6ee65ca2f8be7c0a0dd157730d55fa7b"
+    },
+    "a3_lu.xml": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu.xml",
+      "sha256": "a22d525bad915040b237e8838bfec3fcdd417d73ad787334a94bd48b59d04550"
+    },
+    "esterification_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/nn2c07822_si_001.pdf",
+      "sha256": "17dbc706d03466803dbe61d853e808717b5cdc95e12e22c733ec100bcf651305"
+    },
+    "maleate_main": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate_article.xml",
+      "sha256": "bfaaa8e80b791cbe472875a07645d1902736fac2ecb20825a5fb23c576dc86bb"
+    },
+    "maleate_main_fig1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate-main-fig1.jpg",
+      "sha256": "207a3daa4c541e9107b4618112583cdba4e7658de1c56c25aca694116ebf4a7a"
+    },
+    "maleate_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/media-1.pdf",
+      "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    }
+  }
+}

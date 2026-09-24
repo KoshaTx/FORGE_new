@@ -29,6 +29,10 @@ from forge.synthesis.engine.proposal_engine import (
     ProposalRequest,
     SingleStepRetrosynthesisProposal,
 )
+from forge.synthesis.engine.single_step_benchmark_manifest import (
+    SingleStepBenchmarkManifestError,
+    _implementation_evidence,
+)
 
 BENCHMARK_SPEC_SCHEMA_VERSION = "forge.single_step_proposal_lane_qualification_benchmark.v1"
 BENCHMARK_BINDING_SCHEMA_VERSION = "forge.single_step_proposal_benchmark_runner_binding.v1"
@@ -78,6 +82,35 @@ def _positive_integer(value: Any, *, label: str) -> int:
     if result < 1:
         raise BenchmarkContractError(f"{label} must be positive")
     return result
+
+
+def _artifact_evidence(repo: Path, record: Mapping[str, Any], *, label: str) -> Path:
+    """Authenticate frozen bytes; only implementation source may use reviewed relocation.
+
+    Source is attribution evidence, never imported or executed. Data and configuration
+    stay at their declared locations, and all original SHA-256 checks remain exact.
+    """
+    relative = record.get("path")
+    if not isinstance(relative, str) or not relative or ".." in Path(relative).parts:
+        raise BenchmarkContractError(f"artifact path is malformed: {label}")
+    path = (repo / relative).resolve()
+    try:
+        path.relative_to(repo.resolve())
+    except ValueError as exc:
+        raise BenchmarkContractError(f"artifact escapes repository: {label}") from exc
+    digest = _sha256(record.get("sha256"), label=f"{label} SHA-256")
+    if Path(relative).suffix == ".py":
+        try:
+            path = _implementation_evidence(repo, dict(record), label=label)
+        except SingleStepBenchmarkManifestError as exc:
+            raise BenchmarkContractError(
+                f"artifact source authentication failed: {label}: {exc}"
+            ) from exc
+    if not path.is_file():
+        raise BenchmarkContractError(f"artifact is missing: {path}")
+    if _sha256_file(path) != digest:
+        raise BenchmarkContractError(f"artifact SHA-256 mismatch: {label}")
+    return path
 
 
 @dataclass(frozen=True)
@@ -211,16 +244,7 @@ def load_frozen_benchmark_contract(
         relative = record.get("path")
         if not isinstance(relative, str) or not relative:
             raise BenchmarkContractError(f"runner artifact path is malformed: {label}")
-        path = (repo_root / relative).resolve()
-        try:
-            path.relative_to(repo_root.resolve())
-        except ValueError as exc:
-            raise BenchmarkContractError(f"runner artifact escapes repository: {label}") from exc
-        if not path.is_file():
-            raise BenchmarkContractError(f"runner artifact is missing: {path}")
-        if _sha256_file(path) != _sha256(record.get("sha256"), label=f"{label} SHA-256"):
-            raise BenchmarkContractError(f"runner artifact SHA-256 mismatch: {label}")
-        authenticated[str(label)] = path
+        authenticated[str(label)] = _artifact_evidence(repo_root, record, label=str(label))
 
     required_binding_artifacts = {
         "frozen_manifest_bound_benchmark",
@@ -299,15 +323,7 @@ def load_frozen_benchmark_contract(
             raise BenchmarkContractError(f"benchmark artifact path is malformed: {label}")
         if any(relative.startswith(prefix) for prefix in forbidden):
             raise BenchmarkContractError(f"benchmark artifact enters forbidden input: {label}")
-        path = (repo_root / relative).resolve()
-        try:
-            path.relative_to(repo_root.resolve())
-        except ValueError as exc:
-            raise BenchmarkContractError(f"benchmark artifact escapes repository: {label}") from exc
-        if not path.is_file():
-            raise BenchmarkContractError(f"benchmark artifact is missing: {path}")
-        if _sha256_file(path) != _sha256(record.get("sha256"), label=f"{label} SHA-256"):
-            raise BenchmarkContractError(f"benchmark artifact SHA-256 mismatch: {label}")
+        _artifact_evidence(repo_root, record, label=str(label))
 
     resolver_receipt = binding_artifacts.get("independent_l2_forward_resolver_config")
     if not isinstance(resolver_receipt, Mapping):

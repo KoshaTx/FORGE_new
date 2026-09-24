@@ -1,0 +1,35 @@
+{
+  "inputs": {
+    "iphos_deprotonated": {
+      "path": "results/phase1/compose_lipid_supplied_iphos_deprotonated_v1/result.json",
+      "sha256": "c0d61d2e52140d6604fb4d4bc1e770fe04894e73f20c689568ad95df6ec4fedc"
+    },
+    "iphos_neutral": {
+      "path": "results/phase1/compose_lipid_supplied_iphos_neutral_proton_transfer_v1/result.json",
+      "sha256": "952222f3b12f65a98ea2ad78be435ec162d20f37343b02d3fcb3b6d22690e450"
+    },
+    "iphos_zwitterion": {
+      "path": "results/phase1/compose_lipid_supplied_iphos_zwitterion_v1/result.json",
+      "sha256": "8dcff15d54bbcff56c6e8399beb7fdef204e7a7af35e7898b6e4695be8c2440a"
+    },
+    "ketone_ugi4": {
+      "path": "results/phase1/compose_lipid_supplied_ketone_ugi4_profiles_v1/result.json",
+      "sha256": "564f38bf10b742fca61764b98bd30b63e3ada9f5d069c34db5507871f4dd8233"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "previous_report": {
+      "path": "results/phase1/compose_lipid_readiness_extension_v1/result.json",
+      "sha256": "4121357b25bc0758f853cc065ec9b1d763eafbb7ed1503c18819a03527ed311e"
+    }
+  },
+  "replay_inputs": [
+    "ketone_ugi4",
+    "iphos_neutral",
+    "iphos_zwitterion",
+    "iphos_deprotonated"
+  ],
+  "schema_version": "forge.compose_lipid_readiness_merge_config.v1"
+}

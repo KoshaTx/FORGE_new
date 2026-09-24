@@ -1,0 +1,114 @@
+{
+  "assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/article.xml",
+      "sha256": "ebcfa04432209827f712e74b41558c042c0b4b9d531f0d436a642b4e8d0f61b0"
+    },
+    "control_transcriptions": {
+      "path": "results/phase1/compose_lipid_han_db_source_v1/control-transcriptions.json",
+      "sha256": "965d1c56701766424ff96a113dcde205021ef6669d1a988847aab8f1985f13aa"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/41467_2024_45537_MOESM1_ESM.pdf",
+      "sha256": "b7ae2f3241f451fd49579fb88338cd3b0dabee0c92836978d4a4701afb03b2b3"
+    }
+  },
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "families": {
+    "epoxide_opening_o_acylation": {
+      "program_id": "source_han_db_two_grouped_stages",
+      "registry_to_source_roles": {
+        "acyl_tail": "acyl_tail",
+        "amine_head": "amine_head",
+        "epoxide_tail": "epoxide_tail"
+      }
+    }
+  },
+  "limitations": [
+    "2.4 reagent equivalents per stage do not replace the two incorporated copies.",
+    "The source reagent is acyl chloride, not a substituted carboxylic-acid surrogate; net byproduct is two HCl.",
+    "Table S1 calculated values match neutral exact masses. Observed values are preserved without imposing an unreported exact ion assignment.",
+    "Uniqueness is required at source-stage endpoints; all within-stage event paths are preserved without a claim of experimental event order."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_han_db_grouped_source_program_v1.json",
+    "sha256": "5bcb31bd969061a49408115858fd1f896f055ff513aaa2ba8a08a10ae015d32f"
+  },
+  "regression_controls": [
+    {
+      "components": {
+        "acyl_tail": "CCCCCC(=O)Cl",
+        "amine_head": "NCCNC",
+        "epoxide_tail": "CCCCC1CO1"
+      },
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C27H54N2O4",
+      "expected_product": "CNCCN(CC(OC(=O)CCCCC)CCCC)CC(OC(=O)CCCCC)CCCC",
+      "expected_stage_widths": [
+        1,
+        2,
+        0
+      ],
+      "family": "epoxide_opening_o_acylation",
+      "label": "unprotected_head_NH_competitor",
+      "required_failed_checks": [
+        "unique_each_completed_source_stage",
+        "unique_forward_exact"
+      ]
+    }
+  ],
+  "schema_version": "forge.grouped_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "acyl_tail": "CCCCCC(=O)Cl",
+        "amine_head": "CN(C)CCCN",
+        "epoxide_tail": "CCCCC1CO1"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C29H58N2O4",
+      "expected_product": "CN(C)CCCN(CC(OC(=O)CCCCC)CCCC)CC(OC(=O)CCCCC)CCCC",
+      "expected_stage_products": [
+        "CN(C)CCCN(CC(O)CCCC)CC(O)CCCC",
+        "CN(C)CCCN(CC(OC(=O)CCCCC)CCCC)CC(OC(=O)CCCCC)CCCC"
+      ],
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "epoxide_opening_o_acylation",
+      "label": "1-6-6",
+      "source_asset": "supplement"
+    },
+    {
+      "components": {
+        "acyl_tail": "CCCCCCCC(=O)Cl",
+        "amine_head": "CN(C)CCCN",
+        "epoxide_tail": "CCCCCCCCC1CO1"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C41H82N2O4",
+      "expected_product": "CN(C)CCCN(CC(OC(=O)CCCCCCC)CCCCCCCC)CC(OC(=O)CCCCCCC)CCCCCCCC",
+      "expected_stage_products": [
+        "CN(C)CCCN(CC(O)CCCCCCCC)CC(O)CCCCCCCC",
+        "CN(C)CCCN(CC(OC(=O)CCCCCCC)CCCCCCCC)CC(OC(=O)CCCCCCC)CCCCCCCC"
+      ],
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "epoxide_opening_o_acylation",
+      "label": "1-10-8",
+      "source_asset": "supplement"
+    }
+  ],
+  "training_admitted": false
+}

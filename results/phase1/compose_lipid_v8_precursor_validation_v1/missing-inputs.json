@@ -1,0 +1,2964 @@
+{
+  "basis": "first failing preconditions in completed JUnit; not an exhaustive dependency graph or causal diagnosis",
+  "counts": {
+    "cases_with_explicit_missing_path": 106,
+    "distinct_missing_paths_reported": 48,
+    "failing_or_error_cases": 148,
+    "missing_legacy_source_paths": 6,
+    "missing_other_artifact_paths": 42
+  },
+  "failure_preconditions": {
+    "tests.test_l2_forward_resolver::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: could not read resolver scope ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+      ]
+    },
+    "tests.test_l2_forward_resolver::test_real_resolver_replays_one_development_exact_pair_without_graph2edits": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+      ]
+    },
+    "tests.test_phase1_v5_morphology_config::test_v5_representation_config_is_hash_pinned_and_nonredundant": {
+      "kind": "failure",
+      "message": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/r0_lipid_morphology_audit.json').is_file",
+      "missing_paths_in_first_error": [
+        "results/phase1/r0_lipid_morphology_audit.json"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark::test_bound_production_contract_authenticates_but_remains_nonexecuting": {
+      "kind": "failure",
+      "message": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "missing_paths_in_first_error": [
+        "src/forge/route/l2_forward_resolver.py"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark::test_hidden_truth_hash_or_output_grid_mutation_fails_closed": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark::test_preflight_blocks_before_target_loader_or_lane_engine_is_called": {
+      "kind": "failure",
+      "message": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "missing_paths_in_first_error": [
+        "src/forge/route/l2_forward_resolver.py"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark::test_runner_rejects_a_resolver_not_bound_to_the_contract": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+      ]
+    },
+    "tests.test_single_step_proposal_benchmark_v3::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts": {
+      "kind": "failure",
+      "message": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "missing_paths_in_first_error": [
+        "src/forge/route/l2_forward_resolver.py"
+      ]
+    },
+    "tests.test_single_step_proposal_lane_qualification_spec::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout": {
+      "kind": "failure",
+      "message": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/src/forge/route/proposal_engine.py').is_file",
+      "missing_paths_in_first_error": [
+        "src/forge/route/proposal_engine.py"
+      ]
+    },
+    "tests.test_synthesis_source_exact_route_replay::test_exact_c18_and_c16_source_replays_are_behavior_preserving": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "missing_paths_in_first_error": [
+        "src/forge/value/synthesis.py"
+      ]
+    },
+    "tests.test_synthesis_source_qualification::test_source_qualification_owns_all_behavior_preserving_replays": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "missing_paths_in_first_error": [
+        "src/forge/value/synthesis.py"
+      ]
+    },
+    "tests.test_synthesis_source_supersession::test_full_replay_is_behavior_preserving_and_does_not_rewrite_history": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_synthesis_value_audit_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_complete_computational_dossiers::test_frozen_complete_dossier_census_is_exact_and_conservative": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz"
+      ]
+    },
+    "tests.test_ugi3_complete_computational_dossiers::test_frozen_config_hashes_match_inputs": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz"
+      ]
+    },
+    "tests.test_ugi3_family_applicability_census::test_config_pins_every_frozen_input": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_graded_family_evidence_audit_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_family_applicability_census::test_final_projected_family_census_is_deterministic_and_nonqualifying": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_graded_family_evidence_audit_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_coverage_v4::test_exact_c18_refresh_changes_only_one_component_identity": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_coverage_v5::test_base_v4_independently_has_expected_c16_occurrence_branches": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_coverage_v5::test_exact_c16_refresh_changes_one_component_record_only": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_coverage_v5::test_product_metadata_and_non_target_values_remain_unchanged": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_coverage_v6::test_v6_requalifies_v5_without_changing_values": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_priority_v4::test_v4_priority_config_pins_frozen_v5_inputs": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+      ]
+    },
+    "tests.test_ugi3_fresh_pool_route_priority_v4::test_v5_priority_refresh_is_deterministic_nonselecting_and_evidence_preserving": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+      ]
+    },
+    "tests.test_ugi3_frozen_parent_component_ledger::test_exactly_one_authorized_c18_reversion_preserves_all_other_v5_records": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi3_frozen_parent_component_ledger::test_input_hash_change_fails_closed": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "missing_paths_in_first_error": [
+        "scripts/phase1_freeze_ugi3_parent_component_ledger.py"
+      ]
+    },
+    "tests.test_ugi3_frozen_parent_component_ledger::test_lineage_is_hash_bound_to_final_v5_and_immutable_v3": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_frozen_parent_component_ledger::test_no_family_homologue_pair_or_holdout_promotion": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_frozen_parent_component_ledger::test_parent_ledger_is_accepted_by_downstream_loader_without_building_pair": {
+      "kind": "failure",
+      "message": "forge.synthesis.assessment.ugi3_route_registry_pair_builder.Ugi3RouteRegistryPairBuilderError: invalid final component ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz"
+      ]
+    },
+    "tests.test_ugi3_graded_family_evidence_audit::test_config_pins_every_frozen_input": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+      ]
+    },
+    "tests.test_ugi3_graded_family_evidence_audit::test_final_v5_graded_audit_is_deterministic_nonselecting_and_nonprobabilistic": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+      ]
+    },
+    "tests.test_ugi3_high_leverage_route_evidence_worklist::test_every_component_is_missing_knowledge_nonpromoting_and_exactly_grouped": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_priority_v4/result.json"
+      ]
+    },
+    "tests.test_ugi3_high_leverage_route_evidence_worklist::test_required_leaves_and_missing_evidence_are_explicit": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_priority_v4/result.json"
+      ]
+    },
+    "tests.test_ugi3_high_leverage_route_evidence_worklist::test_worklist_is_cardinality_minimal_and_matches_frozen_25pct_audit": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_priority_v4/result.json"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_checked_in_builder_is_bound_and_immutable_after_materialization": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_duplicate_exact_component_identity_is_rejected": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_incomplete_owned_c18_assessment_is_rejected": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_parent_hash_mismatch_fails_closed": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_parent_with_c18_already_complete_is_rejected": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_builder::test_repinned_broader_c18_config_fails_reproduction": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_frozen_protocol_validates_in_isolated_prereveal_view": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_future_dated_protocol_freeze_fails_closed": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_incomplete_c18_l3_evidence_fails_closed": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_live_protocol_fails_closed_after_one_shot_reveal": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/seal.json"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_retry_replanning_or_post_reveal_evidence_policy_cannot_be_relaxed": {
+      "kind": "error",
+      "message": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_route_saturation_holdout_v1/sample"
+      ]
+    },
+    "tests.test_ugi3_route_registry_pair_contract::test_snapshot_and_binding_hashes_are_deterministic": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_exact_c18_route_v1/result.json"
+      ]
+    },
+    "tests.test_ugi3_source_qualified_cumulative_inputs::test_source_qualified_inputs_reproduce_all_historical_science": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.sources.ugi3_source_qualified_cumulative_inputs.Ugi3SourceQualifiedCumulativeInputsError: source_qualification hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'",
+      "missing_paths_in_first_error": [
+        "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+      ]
+    },
+    "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived": {
+      "kind": "failure",
+      "message": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "missing_paths_in_first_error": [
+        "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+      ]
+    },
+    "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine": {
+      "kind": "failure",
+      "message": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "missing_paths_in_first_error": [
+        "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+      ]
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_blindness_receipt_is_invariant_to_arm_labels": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_component_targets_are_arm_independent": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_config_schema_and_scope_are_frozen": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_conservative_high_is_resolved_from_an_authoritative_source": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_every_candidate_carries_exact_constitutional_l1": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_drift_fails_closed": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_matches_frozen_expectation": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_potency_resolution_fails_closed_on_identity_mismatch": {
+      "kind": "error",
+      "message": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_tampered_input_hash_fails_closed": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'input pin changed'\n  Actual message: 'input pin is not a regular file: shortlist_result'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate": {
+      "kind": "failure",
+      "message": "forge.corpus.ugi_chemistry_corpus.UgiChemistryCorpusError: could not read /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
+        "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz:"
+      ]
+    },
+    "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_fresh_schedule_materializes_sampler_programs_without_outcomes": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_candidate_schedule_v2/schedule.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_production_candidate_schedule_v2/schedule.json"
+      ]
+    },
+    "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_terminal_admission_is_separate_from_exact_l1": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json"
+      ]
+    },
+    "tests.test_ugi_current_source_zero_guidance_requalification::test_committed_current_source_receipt_matches_builder": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_current_source_zero_guidance_requalification::test_current_source_and_locked_zero_guidance_values_requalify": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_requalify_ugi_current_source_zero_guidance.py",
+      "missing_paths_in_first_error": [
+        "scripts/phase1_requalify_ugi_current_source_zero_guidance.py"
+      ]
+    },
+    "tests.test_ugi_decoration_checkpoint_confirmation_policy::test_confirmation_policy_is_frozen_and_hashes_inputs": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt"
+      ]
+    },
+    "tests.test_ugi_decoration_coupling_production_fresh_census::test_fresh_census_programs_and_implementation_are_hash_pinned": {
+      "kind": "failure",
+      "message": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json').is_file",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_decoration_coupling_production_refit_policy::test_production_refit_selection_and_data_hashes_are_frozen": {
+      "kind": "failure",
+      "message": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json').is_file",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json"
+      ]
+    },
+    "tests.test_ugi_dynamic_frozen_prior_terminal_census::test_production_config_is_hash_pinned_and_calibration_only": {
+      "kind": "failure",
+      "message": "experiments.phase1.product_l1.sampling.terminal_census.UgiDynamicTerminalCensusError: frozen_programs is missing or is not a real file",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_dynamic_frozen_prior_terminal_census_validator::test_production_validator_config_is_pinned_and_read_only": {
+      "kind": "failure",
+      "message": "experiments.archive.phase1.design_audits.ugi_dynamic_frozen_prior_terminal_census_validator.UgiDynamicTerminalCensusValidationError: census_source pin changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_is_deterministic": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_restores_realistic_branch_support": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_graded_route_readiness_evaluator::test_frozen_evidence_and_proposal_indices_load": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz"
+      ]
+    },
+    "tests.test_ugi_grouped_zero_guidance_identity::test_current_restartable_v2_preserves_all_old_batch_partitions": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json"
+      ]
+    },
+    "tests.test_ugi_grouped_zero_guidance_identity::test_current_runner_plan_remains_fail_closed_for_nonzero_execution": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_nonzero_guidance_runner_v1/plan.json"
+      ]
+    },
+    "tests.test_ugi_grouped_zero_guidance_identity::test_frozen_first_assignment_expands_to_sixteen_groups_of_four": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_hela_potency_diagnostic::test_calibration_median_and_lower_values_are_neutral": {
+      "kind": "failure",
+      "message": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_hela_potency_diagnostic::test_policy_regenerates_only_two_calibration_scales": {
+      "kind": "failure",
+      "message": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_hela_potency_diagnostic_readiness::test_historical_checkpoint_coverage_is_reproduced_exactly": {
+      "kind": "failure",
+      "message": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_high_potency_challenger_adjudication::test_fresh_challenger_closes_potency_tilt_without_reopening_applicability": {
+      "kind": "failure",
+      "message": "experiments.phase1.hela_potency.morphology.ugi_high_potency_challenger_adjudication.HighPotencyChallengerAdjudicationError: invalid input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json"
+      ]
+    },
+    "tests.test_ugi_joint_kernel_lambda_zero_identity::test_contract_authenticates_schedule_and_structural_gate": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_joint_kernel_lambda_zero_identity::test_exact_measured_candidate_is_structurally_neutral": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_joint_kernel_lambda_zero_identity::test_fake_lane_runs_existing_identity_gate_and_captures_one_arm": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_morphology_terminal_generation::test_frozen_matched_terminal_contract_has_full_three_arm_budget": {
+      "kind": "failure",
+      "message": "experiments.phase1.product_l1.sampling.ugi_matched_morphology_terminal_generation.UgiMatchedMorphologyTerminalGenerationError: pin changed: runner",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_morphology_terminal_generation::test_schedule_validation_rejects_a_tampered_program_hash": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json"
+      ]
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_calibration_returns_none_for_no_signal_or_safeguard_failure": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_calibration_selects_smallest_passing_maximizer": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_evaluation_promotes_only_when_every_paired_seed_wins": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_evaluation_rejects_incomplete_matrix_compute_drift_and_oracle_escape": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_finite_library_cannot_claim_beyond_catalog_primary_endpoint": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_matched_synthesis_experiment::test_frozen_plan_authenticates_and_derives_matched_schedule_budget": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_nonzero_guidance_runner::test_blocked_runner_plan_rederives_all_frozen_assignments": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_pins_all_seed_program_assignments": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_rejects_rehashed_program_tampering": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_postselection_branching::test_frozen_branching_audit_is_deterministic_and_detects_tail_spacing_shift": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_postselection_branching::test_frozen_config_hashes_match_inputs": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_postselection_held_component::test_postselection_evaluation_recomputes_deterministically": {
+      "kind": "failure",
+      "message": "forge.corpus.ugi_postselection_held_component.UgiPostselectionHeldComponentError: missing input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_held_component_program_probe_v1_512.json"
+      ]
+    },
+    "tests.test_ugi_postselection_provenance::test_frozen_config_hashes_match_every_input": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_postselection_provenance::test_full_frozen_audit_matches_expected_counts_and_is_byte_deterministic": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_potency_promotion_failure_audit::test_frozen_potency_failure_is_attributed_without_promoting_tilt": {
+      "kind": "failure",
+      "message": "experiments.archive.phase1.potency_audits.ugi_potency_promotion_failure_audit.PotencyPromotionFailureAuditError: invalid input JSON: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_morphology_potency_matched_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_production_generator_manifest::test_production_generator_manifest_authenticates_all_pinned_artifacts": {
+      "kind": "failure",
+      "message": "AssertionError: results/phase1/ugi_program_prior_v4_selection_samples_1024.json\nassert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v4_selection_samples_1024.json').is_file",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_program_prior_v4_selection_samples_1024.json"
+      ]
+    },
+    "tests.test_ugi_production_generator_manifest::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_product_l1_production_generator_v2.json"
+      ]
+    },
+    "tests.test_ugi_production_generator_manifest::test_v3_production_generator_manifest_freezes_refit_selection": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v3.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_product_l1_production_generator_v3.json"
+      ]
+    },
+    "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration changed]": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'declaration changed'\n  Actual message: 'binary_utility_source hash changed'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_pins_one_nonzero_synthesis_only_assignment": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_production_synthesis_guidance_seam_v4.UgiProductionSynthesisGuidanceSeamV4Error: binary_utility_source hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_terminal_route_evaluator::test_factory_derives_production_context_and_exact_internal_roles": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_terminal_route_evaluator::test_factory_rejects_wrong_l1_identity_exact_expiry_and_mutated_graph_support": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'context or internal-role qualification failed'\n  Actual message: 'cumulative production Ugi source failed authentication'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_terminal_route_evaluator::test_runtime_budget_clone_context_candidate_and_checkpoint_fail_closed": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_terminal_route_evaluator::test_terminal_aware_factory_uses_composer_bound_cache_and_external_assessment": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[program_draw]": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact program_draw SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_config]": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_config SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_result]": {
+      "kind": "failure",
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_result SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_real_frozen_config_builds_only_the_typed_deterministic_schedule": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_route_reservation_is_derived_from_typed_context_and_scaled_exactly": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_config::test_terminal_decoder_identity_matches_selected_generator_lane_exactly": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_production_zero_guidance_seam_v3::test_v3_seam_config_pins_complete_adapter_and_audit_chain": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_seam_v3.UgiProductionZeroGuidanceSeamV3Error: grouped_schedule hash changed",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_program_prior_all_fold::test_all_fold_prior_strictly_extends_development_support": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v2.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_program_prior_v2.json"
+      ]
+    },
+    "tests.test_ugi_promoted_morphology_proposal::test_promoted_proposal_preserves_complete_support": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.guidance.ugi_promoted_morphology_proposal.UgiPromotedMorphologyProposalError: pin changed: baseline_full_ledger",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_proposal_augmented_route_readiness::test_frozen_proposal_augmented_readiness_is_deterministic": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_arm_label_cannot_change_zero_guidance_terminal_or_trace_bytes": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_generator_support_context_must_match_schedule_checkpoint": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_malformed_offspring_word_is_not_repaired_from_program_or_product": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_reconstruction_valid]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_smiles_by_role]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[offspring_by_role]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[program]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[smiles]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[valid]": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_native_component_identity_is_not_recovered_again_when_missing": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_native_record_is_a_copy_not_a_mutable_view_of_completion_row": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_real_frozen_sample_preserves_every_native_eligibility_field_exactly": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_restartable_terminal_support_adapter::test_schedule_must_bind_exact_native_program_bytes": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_route_completion_utility::test_censored_product_retains_none_and_receives_no_bonus": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi_route_completion_utility::test_nonexact_l1_cannot_receive_positive_bonus_or_evidence_upgrade": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz"
+      ]
+    },
+    "tests.test_ugi_route_completion_utility::test_v6_utility_census_and_sparse_signal_are_frozen": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json"
+      ]
+    },
+    "tests.test_ugi_selected_guidance_adapter_v2::test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy": {
+      "kind": "failure",
+      "message": "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.UgiSelectedRestartableGeneratorError: missing v2 production generator manifest: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_product_l1_production_generator_v2.json"
+      ]
+    },
+    "tests.test_ugi_selected_guidance_adapter_v2::test_v2_restartable_final_matches_direct_independent_stream_callback": {
+      "kind": "failure",
+      "message": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+      ]
+    },
+    "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_fail_semantically_even_under_rehashed_payload": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json"
+      ]
+    },
+    "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_require_complete_canonical_coverage": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json"
+      ]
+    },
+    "tests.test_ugi_selected_guidance_adapter_v3::test_frozen_v2_sources_remain_byte_identical": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/product/ugi_selected_restartable_generator_v2.py'",
+      "missing_paths_in_first_error": [
+        "src/forge/product/ugi_selected_restartable_generator_v2.py"
+      ]
+    },
+    "tests.test_ugi_selected_restartable_generator::test_callback_seals_independently_nonexact_native_row_without_retry": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_selected_restartable_generator::test_callback_seals_invalid_native_row_without_retry": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_selected_restartable_generator::test_invalid_and_nonexact_rows_are_sealed_without_route_support": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_selected_restartable_generator::test_program_decoder_requires_and_recovers_exact_canonical_bytes": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+      ]
+    },
+    "tests.test_ugi_source_guidance_prerequisite_requalification::test_l3_statement_is_frozen_assessment_only": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json"
+      ]
+    },
+    "tests.test_ugi_source_guidance_prerequisite_requalification::test_requalifies_only_zero_guidance_prerequisites_against_v6": {
+      "kind": "failure",
+      "message": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json"
+      ]
+    },
+    "tests.test_ugi_synthesis_guidance_failure_audit::test_frozen_failure_audit_rejects_synthesis_tilt": {
+      "kind": "failure",
+      "message": "experiments.archive.phase1.synthesis_value_audits.ugi_synthesis_guidance_failure_audit.UgiSynthesisGuidanceFailureAuditError: input changed: guidance_result",
+      "missing_paths_in_first_error": []
+    },
+    "tests.test_ugi_zero_guidance_typed_audit::test_existing_zero_seam_is_partitioned_without_false_censors": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_production_zero_guidance_seam_v2/run.json"
+      ]
+    },
+    "tests.test_ugi_zero_guidance_typed_audit::test_missing_support_record_fails_closed": {
+      "kind": "failure",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'",
+      "missing_paths_in_first_error": [
+        "results/phase1/ugi_production_zero_guidance_seam_v2/run.json"
+      ]
+    }
+  },
+  "inputs": {
+    "configs/bio/phase1_ugi_continuous_novelty_matched_ranking_v1.json": {
+      "path": "configs/bio/phase1_ugi_continuous_novelty_matched_ranking_v1.json",
+      "sha256": "81cdd03466834bfba36d740a2ef6f6670c1efcf0421cace459e1010b26b36a2b"
+    },
+    "configs/bio/phase1_ugi_fresh_pool_oracle_audit_v1.json": {
+      "path": "configs/bio/phase1_ugi_fresh_pool_oracle_audit_v1.json",
+      "sha256": "8569f091e02aa76a976e3a07243ff7c82e1dcdd5b7dc78d1a04b973361d49581"
+    },
+    "configs/bio/phase1_ugi_high_potency_challenger_continuous_ranking_v1.json": {
+      "path": "configs/bio/phase1_ugi_high_potency_challenger_continuous_ranking_v1.json",
+      "sha256": "400eb8d2120b1f869019ebd2ee8232d8ff645c77008460fbd4e2026b1603e6e8"
+    },
+    "configs/bio/phase1_ugi_morphology_high_potency_proposal_v1.json": {
+      "path": "configs/bio/phase1_ugi_morphology_high_potency_proposal_v1.json",
+      "sha256": "267571b93ca248c6aa02147eecbe023617a23b389a4f9923d44ff4203993b2c9"
+    },
+    "configs/bio/phase1_ugi_production_terminal_ranking_v1.json": {
+      "path": "configs/bio/phase1_ugi_production_terminal_ranking_v1.json",
+      "sha256": "452e2d3139e499536d8b82752d12aef7c0209c765829eebb69b86b1cc0a22fef"
+    },
+    "configs/model/phase1_product_morphology_v5.json": {
+      "path": "configs/model/phase1_product_morphology_v5.json",
+      "sha256": "10710cda119fdd37698b9c8ec74df4bfa291cbbf5087e69a8e457033994ddee3"
+    },
+    "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json": {
+      "path": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+      "sha256": "a10b4fbd3f1f4400cc9c4e02ae67a57f9b1a2486e3f28115f57a4bbfb7d73bb4"
+    },
+    "configs/model/phase1_ugi_bond_stochastic_confirmation_v1.json": {
+      "path": "configs/model/phase1_ugi_bond_stochastic_confirmation_v1.json",
+      "sha256": "c1137ca4f67b9dbcaa4c63d12b5a1de3afbffbc07e25270ed0e346fdcd44216c"
+    },
+    "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v1.json": {
+      "path": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v1.json",
+      "sha256": "e6b9becd3a44fcf3656717f9d0edaeb71d8fcd5b1fe9560528bd5ab784f037eb"
+    },
+    "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v2.json": {
+      "path": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v2.json",
+      "sha256": "ee98a91bbe3a132586ac2df1e90a011fa940c87f8b46f5c4038f09221b689f76"
+    },
+    "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json": {
+      "path": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json",
+      "sha256": "c60f3bf6699f46659109a44e2efa52e422c39b3941f26debd54253cd614e8070"
+    },
+    "configs/model/phase1_ugi_branch_spacing_independent_program_draw_v1.json": {
+      "path": "configs/model/phase1_ugi_branch_spacing_independent_program_draw_v1.json",
+      "sha256": "dd3f1ee8ed572095a1a598a2b813fa95d30a2d1a79b2db4cf583acbe61709857"
+    },
+    "configs/model/phase1_ugi_candidate_eligibility_audit_v1.json": {
+      "path": "configs/model/phase1_ugi_candidate_eligibility_audit_v1.json",
+      "sha256": "6c303ea9dae34fb9e3b270dd06337151ebfe7fe989eb082dff9e1e14451f8884"
+    },
+    "configs/model/phase1_ugi_candidate_eligibility_audit_v2.json": {
+      "path": "configs/model/phase1_ugi_candidate_eligibility_audit_v2.json",
+      "sha256": "6b9abb3d2a2597a1274ef646fcda05aa223f5e6c4808421d7c3e36a3cd049aaf"
+    },
+    "configs/model/phase1_ugi_chemistry_bias_attribution_v1.json": {
+      "path": "configs/model/phase1_ugi_chemistry_bias_attribution_v1.json",
+      "sha256": "6c1ee74f3e65cf6fbc24ac2e1b9664a4085ace42f17f52251e3bf9d2cdbba618"
+    },
+    "configs/model/phase1_ugi_chemistry_expanded.json": {
+      "path": "configs/model/phase1_ugi_chemistry_expanded.json",
+      "sha256": "40f00e0bb1e885b42f54ead33df62af6c512ebf2268d2fa59051bda652fcdf75"
+    },
+    "configs/model/phase1_ugi_complete_morphology_proposal_v1.json": {
+      "path": "configs/model/phase1_ugi_complete_morphology_proposal_v1.json",
+      "sha256": "53083b70393f8e2815d39154daa8d2d714908f93cfc1b830f37051d394c2b580"
+    },
+    "configs/model/phase1_ugi_constrained_stochastic_production_candidates_v2.json": {
+      "path": "configs/model/phase1_ugi_constrained_stochastic_production_candidates_v2.json",
+      "sha256": "c6abc339830490fac7faa8f16f61c128dbef03cc7cd773fc4e0319e32f4326cc"
+    },
+    "configs/model/phase1_ugi_current_source_zero_guidance_requalification_v1.json": {
+      "path": "configs/model/phase1_ugi_current_source_zero_guidance_requalification_v1.json",
+      "sha256": "c006f8d53bd76f80110cb1d97fc95fdd28eb28b8b3e2ce87f875b66f709120e1"
+    },
+    "configs/model/phase1_ugi_decoration_checkpoint_confirmation_policy_v1.json": {
+      "path": "configs/model/phase1_ugi_decoration_checkpoint_confirmation_policy_v1.json",
+      "sha256": "ea3fbe18bf8f9c3020465f8e3445d0b2b76294a5ff5c56517f2849704359618d"
+    },
+    "configs/model/phase1_ugi_decoration_coupling_production_fresh_census_v1.json": {
+      "path": "configs/model/phase1_ugi_decoration_coupling_production_fresh_census_v1.json",
+      "sha256": "fd50430261826bcb94ddeb1a8dbc245c2af8893f4809784bae69c95647657b74"
+    },
+    "configs/model/phase1_ugi_decoration_coupling_production_refit_v1.json": {
+      "path": "configs/model/phase1_ugi_decoration_coupling_production_refit_v1.json",
+      "sha256": "302da24e29068453e9b554973781b6c49e044a5a7a122b5c6a686ac7454e128a"
+    },
+    "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json": {
+      "path": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+      "sha256": "7500db52feb13f644d9a9585df649ec36b051b1792c9543fb0db5840f1542602"
+    },
+    "configs/model/phase1_ugi_full_corpus_branch_exploration_candidates_v1.json": {
+      "path": "configs/model/phase1_ugi_full_corpus_branch_exploration_candidates_v1.json",
+      "sha256": "a0996b3dc95c0662c049e52c2bd243a23a29eff033b9b35ada25efa32096dc7a"
+    },
+    "configs/model/phase1_ugi_graded_route_readiness_guidance_v1.json": {
+      "path": "configs/model/phase1_ugi_graded_route_readiness_guidance_v1.json",
+      "sha256": "497e44a062cf4b04cb64687a6fd0b7d5965224a98e90b73ebe58126a4f1ccbb8"
+    },
+    "configs/model/phase1_ugi_grouped_smc_schedule_qualification_v1.json": {
+      "path": "configs/model/phase1_ugi_grouped_smc_schedule_qualification_v1.json",
+      "sha256": "312057bed68b1c12111fef4d033cd6e7d736b908965e2f25fb4690cf7fffadaf"
+    },
+    "configs/model/phase1_ugi_grouped_zero_guidance_identity_v1.json": {
+      "path": "configs/model/phase1_ugi_grouped_zero_guidance_identity_v1.json",
+      "sha256": "328b78ccf82c88699b0d2f883489ffbd59a4794a013bb04eea687d9d89a28ff3"
+    },
+    "configs/model/phase1_ugi_hela_potency_guidance_readiness_v1.json": {
+      "path": "configs/model/phase1_ugi_hela_potency_guidance_readiness_v1.json",
+      "sha256": "f2e645cc2a347b5533db1cb387d546264647c5f68f34b2b131b467996c52de76"
+    },
+    "configs/model/phase1_ugi_joint_kernel_bounded_schedule_v1.json": {
+      "path": "configs/model/phase1_ugi_joint_kernel_bounded_schedule_v1.json",
+      "sha256": "01e3b14cd8842083ca4fce2d63ef82b4ea7bb559a6d42492c563c59503f08d14"
+    },
+    "configs/model/phase1_ugi_joint_kernel_lambda_zero_identity_v1.json": {
+      "path": "configs/model/phase1_ugi_joint_kernel_lambda_zero_identity_v1.json",
+      "sha256": "84623dbafccb66b95ccc00fa10db2f803e2345cf8bb984bc5174812bba232ecf"
+    },
+    "configs/model/phase1_ugi_joint_sparse.json": {
+      "path": "configs/model/phase1_ugi_joint_sparse.json",
+      "sha256": "4ac9306091b5fe20bf32fd31e2ba2bd507612b6bf765cf55c94ac27ba328c03f"
+    },
+    "configs/model/phase1_ugi_matched_morphology_terminal_generation_v1.json": {
+      "path": "configs/model/phase1_ugi_matched_morphology_terminal_generation_v1.json",
+      "sha256": "70321a67920ef3a9f84ac086c85d395840a41af6412d9dede6b0c102fec41dfd"
+    },
+    "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json": {
+      "path": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json",
+      "sha256": "0834c51bf68b5d242e0ab22a5e9fb2bcc825f317989d63c6af9c695779ea897c"
+    },
+    "configs/model/phase1_ugi_nonzero_guidance_runner_v1.json": {
+      "path": "configs/model/phase1_ugi_nonzero_guidance_runner_v1.json",
+      "sha256": "52d4b2ae87cd99b7cf54059abb3bd2866bf5479ff0db1701d71e39bdebe0fd6f"
+    },
+    "configs/model/phase1_ugi_postselection_branching_audit_v1.json": {
+      "path": "configs/model/phase1_ugi_postselection_branching_audit_v1.json",
+      "sha256": "bb6c5428d231395ec85ed9ca6159f8ace2554ba4e98338c0efe3d009898560b9"
+    },
+    "configs/model/phase1_ugi_postselection_provenance_audit_v1.json": {
+      "path": "configs/model/phase1_ugi_postselection_provenance_audit_v1.json",
+      "sha256": "ffe6be8ecce694fecaf8baed8da8034fd67bc255a45a9dcea346a715e67f45f9"
+    },
+    "configs/model/phase1_ugi_product_l1_postselection_held_component_stress_v1.json": {
+      "path": "configs/model/phase1_ugi_product_l1_postselection_held_component_stress_v1.json",
+      "sha256": "07899965880df531773ff8587493b6570cd41e1e9ecaea653a757e9048f786e4"
+    },
+    "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
+      "sha256": "3510f186297a0793f8c76a6c18e77d7a2e95a7c18c52a9f0e5f768377b959b4c"
+    },
+    "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v2.json": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v2.json",
+      "sha256": "da147ebe1be7584e62ec035e48b69d7f7f6f27294ab91ee45dc0d3ac0557e07e"
+    },
+    "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json": {
+      "path": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+      "sha256": "92544cab4e67c34b1d6ae122122322a7b5fae802347aad223cec0bed7ec7be22"
+    },
+    "configs/model/phase1_ugi_production_refit_fresh_census_v1.json": {
+      "path": "configs/model/phase1_ugi_production_refit_fresh_census_v1.json",
+      "sha256": "da8737a431b55b038e54a75ec7182774c48bea39e13937897c6a4fa1f05738fa"
+    },
+    "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json": {
+      "path": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+      "sha256": "fd50551dec47126d8a0aded212f9946f3eaa07fb1d9f562f3bbbb848bd830478"
+    },
+    "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v1.json": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v1.json",
+      "sha256": "d4787a83b6dbdf5302e74d9699692db0b03198a773d5f4ec8a57c31b7b6016ea"
+    },
+    "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json",
+      "sha256": "90e46be17073adb848bd856bbc5cbebb0591a60b92cdd2adce1de04e6433b7cd"
+    },
+    "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json",
+      "sha256": "91d19cc7063e7010da94b1f5aa7daa08f70ff267bda088a445c281aa32680d1c"
+    },
+    "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json": {
+      "path": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+      "sha256": "0a12d7f0291ea2699b740ec06d160333eb31996c3d64025a7d14cd2553874342"
+    },
+    "configs/model/phase1_ugi_program_prior_challenger_v1.json": {
+      "path": "configs/model/phase1_ugi_program_prior_challenger_v1.json",
+      "sha256": "a42fee8f316dfb214f6ff5220e3351f1b833485a387ab08cbf119fec32d6507a"
+    },
+    "configs/model/phase1_ugi_restartable_sampler_equivalence_v1.json": {
+      "path": "configs/model/phase1_ugi_restartable_sampler_equivalence_v1.json",
+      "sha256": "4831748424f898c6dbcec1c8b01228d717443d76b7008d46bc8a658ddacab20d"
+    },
+    "configs/model/phase1_ugi_restartable_sampler_equivalence_v2.json": {
+      "path": "configs/model/phase1_ugi_restartable_sampler_equivalence_v2.json",
+      "sha256": "c34b8b9fa70fee228f79bb86f61fb6b6e04c72c2cf0540ae8a97aa4e5d9f589c"
+    },
+    "configs/model/phase1_ugi_route_aware_panel_feasibility_v1.json": {
+      "path": "configs/model/phase1_ugi_route_aware_panel_feasibility_v1.json",
+      "sha256": "5371ee2d58f8fa9c959011ae377dc227b6063378122a674cb382b80f841853b0"
+    },
+    "configs/model/phase1_ugi_route_aware_panel_feasibility_v2.json": {
+      "path": "configs/model/phase1_ugi_route_aware_panel_feasibility_v2.json",
+      "sha256": "7aaece8f1b2088aa0393fe8857b8d9a19f3dc52a1874e27b85fcbd1410c28953"
+    },
+    "configs/model/phase1_ugi_route_aware_panel_feasibility_v3.json": {
+      "path": "configs/model/phase1_ugi_route_aware_panel_feasibility_v3.json",
+      "sha256": "cbabeb9637ab911e975909077f25a0546fa2bef15e7b7ecfc172f542dd139cd6"
+    },
+    "configs/model/phase1_ugi_route_completion_utility_v1.json": {
+      "path": "configs/model/phase1_ugi_route_completion_utility_v1.json",
+      "sha256": "bc781d6d2af71b5c0ad40482ad354c240b16856950693f4c82b54fc12fb29dca"
+    },
+    "configs/model/phase1_ugi_selected_v2_full_equivalence_v1.json": {
+      "path": "configs/model/phase1_ugi_selected_v2_full_equivalence_v1.json",
+      "sha256": "87d08dfaea20422a715d815e94024a5e744c742ea1d05c3bc89b00302f18f79d"
+    },
+    "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v1.json": {
+      "path": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v1.json",
+      "sha256": "909c5c7b3fe383a62456ca7b39cca8db0c1c4df225054e3b28cfcc074e748787"
+    },
+    "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json": {
+      "path": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json",
+      "sha256": "03d49697c17e6c6087fb8617ec4fd7b9541997a5c06321efa1f5ceafa43f60d8"
+    },
+    "configs/model/phase1_ugi_source_guidance_prerequisite_requalification_v1.json": {
+      "path": "configs/model/phase1_ugi_source_guidance_prerequisite_requalification_v1.json",
+      "sha256": "3ac7e569c830a501d2c892ee5053e191745fc39381e7176b8949ab105d634335"
+    },
+    "configs/model/phase1_ugi_tail_chemotype_audit_v1.json": {
+      "path": "configs/model/phase1_ugi_tail_chemotype_audit_v1.json",
+      "sha256": "7953bbfece04f40711a4478d22f36166feed9761e4484f0b2eeebdedab75c011"
+    },
+    "configs/model/phase1_ugi_tail_chemotype_audit_v2.json": {
+      "path": "configs/model/phase1_ugi_tail_chemotype_audit_v2.json",
+      "sha256": "de7bf966eb379d51009276c0a2099f74236f4f40cb36294da6bb3e0e65489881"
+    },
+    "configs/model/phase1_ugi_v3_nonselecting_shadow_gate_v1.json": {
+      "path": "configs/model/phase1_ugi_v3_nonselecting_shadow_gate_v1.json",
+      "sha256": "2aba9173ff0deca8f9c67f2a233f6c29e8c5a203b51b402bd5d8d930c783f153"
+    },
+    "configs/route/graph2edits_l2_forward_resolver_v1.json": {
+      "path": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+      "sha256": "3cb6012f4bbd73d198159ffcf1f765f45fc0cf526b2ed93e0a836fc7d01cdf04"
+    },
+    "configs/route/phase1_synthesis_source_exact_route_replay_v1.json": {
+      "path": "configs/route/phase1_synthesis_source_exact_route_replay_v1.json",
+      "sha256": "046df61553f3155226cf0a5c5a317573e35630309886d6d01386c2314b2f725b"
+    },
+    "configs/route/phase1_synthesis_source_supersession_audit_v1.json": {
+      "path": "configs/route/phase1_synthesis_source_supersession_audit_v1.json",
+      "sha256": "d8c5f90b58f7fe61ead7a991e6225e4c8506fbb3249ba7f827f3a2edfa5b33f4"
+    },
+    "configs/route/phase1_synthesis_value_source_qualification_v1.json": {
+      "path": "configs/route/phase1_synthesis_value_source_qualification_v1.json",
+      "sha256": "8d57ccb8a8836a66d352333681486a12eddea6a9bdbbc9b3a2eb0826aad2bfc6"
+    },
+    "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json": {
+      "path": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+      "sha256": "d1abd0dab7671be94392ddaeadcd0ae13ef93d7a262bd3d3f41a0e596d28cc48"
+    },
+    "configs/route/phase1_ugi3_complete_computational_dossiers.json": {
+      "path": "configs/route/phase1_ugi3_complete_computational_dossiers.json",
+      "sha256": "a8f4b9032efd7a7ff58a4ce0fe5577befeedecfcbeac913cba9ab2431e2687bb"
+    },
+    "configs/route/phase1_ugi3_exact_c16_route_v1.json": {
+      "path": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+      "sha256": "72079699d839967de8e5290195e6d0cfe0b38cc03a0c527f7c71119fcb213527"
+    },
+    "configs/route/phase1_ugi3_exact_c18_route_v1.json": {
+      "path": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+      "sha256": "84c025d5c8df3bf00bbf7c2150e6039febc1f2c3936a251dcc22b25a9d2fda76"
+    },
+    "configs/route/phase1_ugi3_family_applicability_census_v1.json": {
+      "path": "configs/route/phase1_ugi3_family_applicability_census_v1.json",
+      "sha256": "f697e3d8db59cbd58904209062aedc3e02b939de0d6954bb21f90d2a182d6894"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v1.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v1.json",
+      "sha256": "c51be038a819843959d47340b4cf55a2478663e03b2385b0b16be4a81d204d39"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json",
+      "sha256": "bc7e0318610b186dbfc602da686483a11867bd60e682b3c9617c840fa09195f7"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json",
+      "sha256": "84bafa51a90cadd87a888ae92ef3d81a9d82746c17a72b93eddb239fc0210d96"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json",
+      "sha256": "393788b917523a74cd81c093026bb1bb8bb049d0f36185c6ad5f3c35fb01a69d"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+      "sha256": "38fb52131bcb4c79f122a19a7997da3fe4c8d7e6f6fa229add4b3fbc5c9e35c3"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json",
+      "sha256": "2a77a52ceaaa8f6e983ef80017d3d4a023707078d01416a3d4dbe16c7bc3f183"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_priority_v3.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_priority_v3.json",
+      "sha256": "53cd1c88463c3b47b20cc44ed44a7e955a4101d0f199ca932c8634df12a1d2ab"
+    },
+    "configs/route/phase1_ugi3_fresh_pool_route_priority_v4.json": {
+      "path": "configs/route/phase1_ugi3_fresh_pool_route_priority_v4.json",
+      "sha256": "22e18b44d592b106546222e917f5ff4b80121716b3ab3cde4cfea1f78b91118c"
+    },
+    "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json": {
+      "path": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+      "sha256": "fcd82034b58bfbaadcf346a5aa4a590c5617530a8754920ddd27810bc1cc0e11"
+    },
+    "configs/route/phase1_ugi3_graded_family_evidence_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_graded_family_evidence_audit_v1.json",
+      "sha256": "7080422192e98cab422ac6ebf95420ae252138b61bb0a38c646f1af75b855de7"
+    },
+    "configs/route/phase1_ugi3_high_leverage_route_evidence_worklist_v1.json": {
+      "path": "configs/route/phase1_ugi3_high_leverage_route_evidence_worklist_v1.json",
+      "sha256": "e84568458502e5a76019654c543ed1f9df6b947b54d0d0e6993b9cbf5e39ee79"
+    },
+    "configs/route/phase1_ugi3_route_gap_triage_v1.json": {
+      "path": "configs/route/phase1_ugi3_route_gap_triage_v1.json",
+      "sha256": "eac9572ca8cf2cd224576a17ecddcb5fc92a73c7e562c41b146e0d4ac3956fe5"
+    },
+    "configs/route/phase1_ugi3_route_gap_triage_v2.json": {
+      "path": "configs/route/phase1_ugi3_route_gap_triage_v2.json",
+      "sha256": "ba76df7051cf275cad9c495c7dedca234d649c171b21e340e61e3466d0e8bb3b"
+    },
+    "configs/route/phase1_ugi3_route_gap_triage_v3.json": {
+      "path": "configs/route/phase1_ugi3_route_gap_triage_v3.json",
+      "sha256": "433d435006fd7bc605a3322dc1083a63bc3d9bc260cc30aa038a90bef214ca52"
+    },
+    "configs/route/phase1_ugi3_route_gap_triage_v4.json": {
+      "path": "configs/route/phase1_ugi3_route_gap_triage_v4.json",
+      "sha256": "6d4a45013a5a8055b261bb4e2ffc497620ae97cc69a1bf4bd4def4a72028878d"
+    },
+    "configs/route/phase1_ugi3_route_gap_triage_v5.json": {
+      "path": "configs/route/phase1_ugi3_route_gap_triage_v5.json",
+      "sha256": "39ca8b4c649ad7f0622e99a809eb78fe15545ea51112c70e22a95cace1387416"
+    },
+    "configs/route/phase1_ugi3_route_registry_pair_builder_v1.json": {
+      "path": "configs/route/phase1_ugi3_route_registry_pair_builder_v1.json",
+      "sha256": "3fd955ed7cff7db682c3d97461e0a2d25c618cba6b151f0ae3399b7311962a9f"
+    },
+    "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json": {
+      "path": "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json",
+      "sha256": "36666eefdc8b0347191165041ea84cc7d9ce977f71442e2e961b79cabb0cd80b"
+    },
+    "configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json": {
+      "path": "configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json",
+      "sha256": "4ef005f8f33508fa2e336fa379ffdee7e747ec422f6925bb05da2c2c58063f58"
+    },
+    "configs/route/phase1_ugi3_route_saturation_holdout_v1.json": {
+      "path": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+      "sha256": "c76b43fb59bd4802f5bf8596c8b2095ff8abfd59448b26e75c1f41264b679a79"
+    },
+    "configs/route/phase1_ugi3_source_neutral_proposal_adjudication_v1.json": {
+      "path": "configs/route/phase1_ugi3_source_neutral_proposal_adjudication_v1.json",
+      "sha256": "80756ac1d16808768a897a3d6a3deb3594e85e61b5dd77d07942437f418137de"
+    },
+    "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json": {
+      "path": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+      "sha256": "ea07140ccfa668ad66804da368a489fe017b2e295bacbab68dc0b219a836928c"
+    },
+    "configs/route/phase1_ugi3_synthesis_value_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_synthesis_value_audit_v1.json",
+      "sha256": "f99a73ef7a5bdb8f2e5a0312eb467cf4712e0c58e95efc0909dc0db7092df806"
+    },
+    "configs/route/phase1_ugi3_synthesis_value_audit_v2.json": {
+      "path": "configs/route/phase1_ugi3_synthesis_value_audit_v2.json",
+      "sha256": "73a4ceed0cfa45138696ab0789ff44b969ef50c52148e4f6c382014386b064f3"
+    },
+    "configs/route/phase1_ugi3_synthesis_value_audit_v3.json": {
+      "path": "configs/route/phase1_ugi3_synthesis_value_audit_v3.json",
+      "sha256": "ddac5a9d658d3aac6412baf64c202bb31527104b48887dd4680e3e8ea88fcf6f"
+    },
+    "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+      "sha256": "5951ae7d0fca7896e611a48da68450aab63dd64e2fd853ff2e458d9b0ccfcabe"
+    },
+    "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json": {
+      "path": "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json",
+      "sha256": "def677e84fbb4837d8c51c74d18d2582a0d113ef883bdbc4e0427bd1bdc6ebb9"
+    },
+    "configs/route/phase1_ugi_proposal_augmented_route_readiness_v1.json": {
+      "path": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v1.json",
+      "sha256": "03277624fff40e4de10ca529ab682f8ecf0519c8360aea073fcc34b921175f1c"
+    },
+    "configs/route/phase1_ugi_proposal_augmented_route_readiness_v2.json": {
+      "path": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v2.json",
+      "sha256": "dcfcffdaf2bcfbefb57636bb8d6adb67855fc8e4b43153e3680735058cc97e32"
+    },
+    "configs/route/phase1_ugi_proposal_augmented_route_readiness_v3.json": {
+      "path": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v3.json",
+      "sha256": "912ce225b594a5b4ee808e49d2e8e2b2e82cd41d12a5e3d3d3dfd635b558d150"
+    },
+    "configs/route/phase1_ugi_route_aware_decision_package_v1.json": {
+      "path": "configs/route/phase1_ugi_route_aware_decision_package_v1.json",
+      "sha256": "c5e7cff0e0aa22abae2f636d692d4a4843650cd4d8b70fb3118402dd1866c4c9"
+    },
+    "configs/route/single_step_proposal_benchmark_runner_binding_v1.json": {
+      "path": "configs/route/single_step_proposal_benchmark_runner_binding_v1.json",
+      "sha256": "08683e515cc4e90261089aba164b3a92411a46bc75f358bfe6f804047fc796b7"
+    },
+    "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json": {
+      "path": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+      "sha256": "2211c468a6ffec619604a583bce62349baa8385a2e7d41680fd57d2bd48fc84e"
+    },
+    "results/phase1/compose_lipid_v8_precursor_validation_v1/inventory_missing.py": {
+      "path": "results/phase1/compose_lipid_v8_precursor_validation_v1/inventory_missing.py",
+      "sha256": "23db1f73315422f9b0d6ab06d7458da06e95a2ef2172387856507a5780f771e0"
+    },
+    "results/phase1/compose_lipid_v8_staar_validation_v1/full-tests.xml.gz": {
+      "path": "results/phase1/compose_lipid_v8_staar_validation_v1/full-tests.xml.gz",
+      "sha256": "939514880ccb64f109fc8065ce5fed5cc7d2886a1d4e85ddea404cdc38d19de6"
+    }
+  },
+  "missing_inputs": [
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed",
+        "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived",
+        "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+          "expected_sha256": "b8473f5749707bdb9adecca9a017132333d7aa14607ad3a7efc60006b0f9b518"
+        }
+      ],
+      "path": "data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_phase1_v5_morphology_config::test_v5_representation_config_is_hash_pinned_and_nonredundant"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_product_morphology_v5.json",
+          "expected_sha256": "0d3e5da95a19c3e53d04de123d3b47e5ee6932ef6c7fe190fa8ff0dc2aa06036"
+        }
+      ],
+      "path": "results/phase1/r0_lipid_morphology_audit.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/r0_lipid_morphology_audit.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/r0_lipid_morphology_audit.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_complete_computational_dossiers::test_frozen_complete_dossier_census_is_exact_and_conservative",
+        "tests.test_ugi3_complete_computational_dossiers::test_frozen_config_hashes_match_inputs"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_complete_computational_dossiers.json",
+          "expected_sha256": "87e667fcf53e951421e66a6b7878b1f6eee44622996c91774a46199e31aff1bc"
+        }
+      ],
+      "path": "results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_l2_forward_resolver::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked",
+        "tests.test_l2_forward_resolver::test_real_resolver_replays_one_development_exact_pair_without_graph2edits",
+        "tests.test_single_step_proposal_benchmark::test_hidden_truth_hash_or_output_grid_mutation_fails_closed",
+        "tests.test_single_step_proposal_benchmark::test_runner_rejects_a_resolver_not_bound_to_the_contract",
+        "tests.test_single_step_proposal_benchmark::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/graph2edits_l2_forward_resolver_v1.json",
+          "expected_sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+        },
+        {
+          "configuration": "configs/route/phase1_synthesis_source_exact_route_replay_v1.json",
+          "expected_sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+          "expected_sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+        },
+        {
+          "configuration": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+          "expected_sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+        }
+      ],
+      "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_route_registry_pair_contract::test_snapshot_and_binding_hashes_are_deterministic"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_synthesis_source_exact_route_replay_v1.json",
+          "expected_sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json",
+          "expected_sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_registry_pair_builder_v1.json",
+          "expected_sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+          "expected_sha256": "eabf54d2983b4dde25ad3a0a084e018098d7a227a5cedb0cfa82b43522bd7475"
+        }
+      ],
+      "path": "results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_exact_c18_route_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_exact_c18_route_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_fresh_pool_route_coverage_v4::test_exact_c18_refresh_changes_only_one_component_identity"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json",
+          "expected_sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_priority_v3.json",
+          "expected_sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+          "expected_sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+          "expected_sha256": "4a036a436ba30fcb5b212877cebef5585bb8559be1cc209b421cb746fadd7e0f"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_fresh_pool_route_coverage_v5::test_exact_c16_refresh_changes_one_component_record_only"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+          "expected_sha256": "2343ecfb56f4e6e3e8423ada26088b9354e0a230be8297c165b35db1d0744550"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_fresh_pool_route_coverage_v5::test_base_v4_independently_has_expected_c16_occurrence_branches",
+        "tests.test_ugi3_fresh_pool_route_coverage_v5::test_product_metadata_and_non_target_values_remain_unchanged"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+          "expected_sha256": "7a65b5f30d7746f1ca0b3ecd4e7cfd54c61d5cf65a81dcee39df729de95fa2c0"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_frozen_parent_component_ledger::test_exactly_one_authorized_c18_reversion_preserves_all_other_v5_records"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_synthesis_source_supersession_audit_v1.json",
+          "expected_sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json",
+          "expected_sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_priority_v4.json",
+          "expected_sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+          "expected_sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_graded_family_evidence_audit_v1.json",
+          "expected_sha256": "570c3f43857e30d650e7ef6e21d25a5e0755766d41e6b0b91667b3fbe8a4cd63"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_fresh_pool_route_coverage_v6::test_v6_requalifies_v5_without_changing_values",
+        "tests.test_ugi3_fresh_pool_route_priority_v4::test_v4_priority_config_pins_frozen_v5_inputs",
+        "tests.test_ugi3_fresh_pool_route_priority_v4::test_v5_priority_refresh_is_deterministic_nonselecting_and_evidence_preserving",
+        "tests.test_ugi3_graded_family_evidence_audit::test_config_pins_every_frozen_input",
+        "tests.test_ugi3_graded_family_evidence_audit::test_final_v5_graded_audit_is_deterministic_nonselecting_and_nonprobabilistic"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_synthesis_source_supersession_audit_v1.json",
+          "expected_sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json",
+          "expected_sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_priority_v4.json",
+          "expected_sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+          "expected_sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_graded_family_evidence_audit_v1.json",
+          "expected_sha256": "6f80724272a0e82a6bde6ce6581ce0383a016b452bc132a86a6289b51f34bc95"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_route_completion_utility::test_censored_product_retains_none_and_receives_no_bonus",
+        "tests.test_ugi_route_completion_utility::test_nonexact_l1_cannot_receive_positive_bonus_or_evidence_upgrade"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_route_completion_utility_v1.json",
+          "expected_sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_source_guidance_prerequisite_requalification_v1.json",
+          "expected_sha256": "1afc543d50e7b5d8230ae54ec8edae33c73933a8b55434634c21f88b532972b5"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_route_completion_utility::test_v6_utility_census_and_sparse_signal_are_frozen",
+        "tests.test_ugi_source_guidance_prerequisite_requalification::test_l3_statement_is_frozen_assessment_only",
+        "tests.test_ugi_source_guidance_prerequisite_requalification::test_requalifies_only_zero_guidance_prerequisites_against_v6"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_route_completion_utility_v1.json",
+          "expected_sha256": "339d11287ad1489336c1e949dab001aad05a169fa97dbe48c15c2b9857fec722"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_source_guidance_prerequisite_requalification_v1.json",
+          "expected_sha256": "339d11287ad1489336c1e949dab001aad05a169fa97dbe48c15c2b9857fec722"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_high_leverage_route_evidence_worklist::test_every_component_is_missing_knowledge_nonpromoting_and_exactly_grouped",
+        "tests.test_ugi3_high_leverage_route_evidence_worklist::test_required_leaves_and_missing_evidence_are_explicit",
+        "tests.test_ugi3_high_leverage_route_evidence_worklist::test_worklist_is_cardinality_minimal_and_matches_frozen_25pct_audit"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_high_leverage_route_evidence_worklist_v1.json",
+          "expected_sha256": "adae9a7b111e6a715e63b705f11b8e6270c747541f192ec799cc29d7977a0211"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v5.json",
+          "expected_sha256": "adae9a7b111e6a715e63b705f11b8e6270c747541f192ec799cc29d7977a0211"
+        }
+      ],
+      "path": "results/phase1/ugi3_fresh_pool_route_priority_v4/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_frozen_parent_component_ledger::test_parent_ledger_is_accepted_by_downstream_loader_without_building_pair",
+        "tests.test_ugi3_route_registry_pair_builder::test_checked_in_builder_is_bound_and_immutable_after_materialization"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_route_registry_pair_builder_v1.json",
+          "expected_sha256": "dfbeeb0e94377a1e4da2192c073f932123168514388a209c51a5427c98b21491"
+        }
+      ],
+      "path": "results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_frozen_parent_component_ledger::test_lineage_is_hash_bound_to_final_v5_and_immutable_v3",
+        "tests.test_ugi3_frozen_parent_component_ledger::test_no_family_homologue_pair_or_holdout_promotion"
+      ],
+      "known_configuration_pins": [],
+      "path": "results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_graded_route_readiness_evaluator::test_frozen_evidence_and_proposal_indices_load",
+        "tests.test_ugi_proposal_augmented_route_readiness::test_frozen_proposal_augmented_readiness_is_deterministic"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_graded_route_readiness_guidance_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_family_applicability_census_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_source_neutral_proposal_adjudication_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v2.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_proposal_augmented_route_readiness_v3.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_route_aware_decision_package_v1.json",
+          "expected_sha256": "26d96faa5194429df85af8477c74395c2cf35db46d143b5d1fac5024d9d827ad"
+        }
+      ],
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_family_applicability_census::test_config_pins_every_frozen_input",
+        "tests.test_ugi3_family_applicability_census::test_final_projected_family_census_is_deterministic_and_nonqualifying"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_family_applicability_census_v1.json",
+          "expected_sha256": "da179092251cda471feabe63a35bffa6d9f752f2b09c5d5d5b87456e55d88dc0"
+        }
+      ],
+      "path": "results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_route_registry_pair_builder::test_duplicate_exact_component_identity_is_rejected",
+        "tests.test_ugi3_route_registry_pair_builder::test_incomplete_owned_c18_assessment_is_rejected",
+        "tests.test_ugi3_route_registry_pair_builder::test_parent_hash_mismatch_fails_closed",
+        "tests.test_ugi3_route_registry_pair_builder::test_parent_with_c18_already_complete_is_rejected",
+        "tests.test_ugi3_route_registry_pair_builder::test_repinned_broader_c18_config_fails_reproduction",
+        "tests.test_ugi3_route_registry_pair_contract::test_frozen_protocol_validates_in_isolated_prereveal_view",
+        "tests.test_ugi3_route_registry_pair_contract::test_future_dated_protocol_freeze_fails_closed",
+        "tests.test_ugi3_route_registry_pair_contract::test_incomplete_c18_l3_evidence_fails_closed",
+        "tests.test_ugi3_route_registry_pair_contract::test_retry_replanning_or_post_reveal_evidence_policy_cannot_be_relaxed"
+      ],
+      "known_configuration_pins": [],
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/sample",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_route_saturation_holdout_v1/sample"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_route_saturation_holdout_v1/sample"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_route_registry_pair_contract::test_live_protocol_fails_closed_after_one_shot_reveal"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v1.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v2.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v3.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v4.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_gap_triage_v5.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_registry_pair_protocol_v1.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_saturation_blinded_execution_v1.json",
+          "expected_sha256": "551843130c434916691a2e3855e833f572bad007dc3a6d3605566325b3de34a1"
+        }
+      ],
+      "path": "results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_route_saturation_holdout_v1/seal.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_route_saturation_holdout_v1/seal.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_synthesis_source_supersession::test_full_replay_is_behavior_preserving_and_does_not_rewrite_history"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_synthesis_source_supersession_audit_v1.json",
+          "expected_sha256": "a1137d14b876a3dc53167e28dbfb55b1fb54acd845d3cdffe37d25e6aa7d7f27"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_synthesis_value_audit_v2.json",
+          "expected_sha256": "a1137d14b876a3dc53167e28dbfb55b1fb54acd845d3cdffe37d25e6aa7d7f27"
+        }
+      ],
+      "path": "results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi3_synthesis_value_audit_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi3_synthesis_value_audit_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_postselection_branching::test_frozen_branching_audit_is_deterministic_and_detects_tail_spacing_shift",
+        "tests.test_ugi_postselection_branching::test_frozen_config_hashes_match_inputs",
+        "tests.test_ugi_postselection_provenance::test_frozen_config_hashes_match_every_input",
+        "tests.test_ugi_postselection_provenance::test_full_frozen_audit_matches_expected_counts_and_is_byte_deterministic",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_arm_label_cannot_change_zero_guidance_terminal_or_trace_bytes",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_generator_support_context_must_match_schedule_checkpoint",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_malformed_offspring_word_is_not_repaired_from_program_or_product",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_reconstruction_valid]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_smiles_by_role]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[offspring_by_role]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[program]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[smiles]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[valid]",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_native_component_identity_is_not_recovered_again_when_missing",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_native_record_is_a_copy_not_a_mutable_view_of_completion_row",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_real_frozen_sample_preserves_every_native_eligibility_field_exactly",
+        "tests.test_ugi_restartable_terminal_support_adapter::test_schedule_must_bind_exact_native_program_bytes",
+        "tests.test_ugi_selected_restartable_generator::test_callback_seals_independently_nonexact_native_row_without_retry",
+        "tests.test_ugi_selected_restartable_generator::test_callback_seals_invalid_native_row_without_retry",
+        "tests.test_ugi_selected_restartable_generator::test_invalid_and_nonexact_rows_are_sealed_without_route_support",
+        "tests.test_ugi_selected_restartable_generator::test_program_decoder_requires_and_recovers_exact_canonical_bytes"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_candidate_eligibility_audit_v1.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_candidate_eligibility_audit_v2.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_postselection_branching_audit_v1.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_postselection_provenance_audit_v1.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_tail_chemotype_audit_v1.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_v3_nonselecting_shadow_gate_v1.json",
+          "expected_sha256": "9066554cbf5009f68fafd136fef795e3c81dd71a772223b45ac48049661df12a"
+        }
+      ],
+      "path": "results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_current_source_zero_guidance_requalification::test_committed_current_source_receipt_matches_builder"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_grouped_smc_schedule_qualification_v1.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_nonzero_guidance_runner_v1.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v1.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v2.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v3.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json",
+          "expected_sha256": "50367fffbeebf699f77ff8ee709da505ab7c2c3a856dbaa935740f35c6d56187"
+        }
+      ],
+      "path": "results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_decoration_coupling_production_refit_policy::test_production_refit_selection_and_data_hashes_are_frozen"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_decoration_coupling_production_refit_v1.json",
+          "expected_sha256": "613642d5e94dd62fc25dff3bc83c306aa73ef34f7934c60b8ebf39ff8e8f0cd5"
+        }
+      ],
+      "path": "results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_terminal_admission_is_separate_from_exact_l1"
+      ],
+      "known_configuration_pins": [],
+      "path": "results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_decoration_coupling_production_fresh_census::test_fresh_census_programs_and_implementation_are_hash_pinned"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_constrained_stochastic_production_candidates_v2.json",
+          "expected_sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_decoration_coupling_production_fresh_census_v1.json",
+          "expected_sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_full_corpus_branch_exploration_candidates_v1.json",
+          "expected_sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi_bounded_hybrid_route_cascade_v1.json",
+          "expected_sha256": "0905dcc05fad7f89f97a9a8f5ff66045e82b47b9aedd422e0ca9efcf7da32985"
+        }
+      ],
+      "path": "results/phase1/ugi_decoration_coupling_production_refit_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_decoration_checkpoint_confirmation_policy::test_confirmation_policy_is_frozen_and_hashes_inputs"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_decoration_checkpoint_confirmation_policy_v1.json",
+          "expected_sha256": "420360d4f95d54abd4f7d0b5cb9b1caddabe6adfa6db77f3c7fa7fc5a96b2778"
+        }
+      ],
+      "path": "results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_chemistry_expanded.json",
+          "expected_sha256": "55ff0c328da8b8d064e6657e57f2c2b0554dfbb918dc6695a9bc64a651c23d56"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_joint_sparse.json",
+          "expected_sha256": "55ff0c328da8b8d064e6657e57f2c2b0554dfbb918dc6695a9bc64a651c23d56"
+        }
+      ],
+      "path": "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate"
+      ],
+      "known_configuration_pins": [],
+      "path": "results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz:",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz:"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz:"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_grouped_zero_guidance_identity::test_frozen_first_assignment_expands_to_sixteen_groups_of_four",
+        "tests.test_ugi_nonzero_guidance_runner::test_blocked_runner_plan_rederives_all_frozen_assignments",
+        "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_pins_all_seed_program_assignments",
+        "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_rejects_rehashed_program_tampering",
+        "tests.test_ugi_selected_guidance_adapter_v2::test_v2_restartable_final_matches_direct_independent_stream_callback"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_grouped_zero_guidance_identity_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_hela_potency_guidance_readiness_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_joint_kernel_bounded_schedule_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_nonzero_guidance_runner_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_full_equivalence_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v1.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json",
+          "expected_sha256": "2c1bca3c7ab2f48c970840b84587fadaa597d361a2539f6443b1e951796951ca"
+        }
+      ],
+      "path": "results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_postselection_held_component::test_postselection_evaluation_recomputes_deterministically"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_product_l1_postselection_held_component_stress_v1.json",
+          "expected_sha256": "6b16f867fb72e92222df25cbd510b3acc586a2dde38a16e7c4afe63c669bc630"
+        }
+      ],
+      "path": "results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_held_component_program_probe_v1_512.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_held_component_program_probe_v1_512.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_matched_morphology_terminal_generation::test_schedule_validation_rejects_a_tampered_program_hash"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_matched_morphology_terminal_generation_v1.json",
+          "expected_sha256": "df342bbbfcda8b84f8e7b9095cee061c3563ede17e1e750d86db7f8d370fce44"
+        }
+      ],
+      "path": "results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_high_potency_challenger_adjudication::test_fresh_challenger_closes_potency_tilt_without_reopening_applicability"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/bio/phase1_ugi_morphology_high_potency_proposal_v1.json",
+          "expected_sha256": "91839b27d54bc73c55dd471eb52e125e601d4b1a2219e8fe5548cfb305df5ed8"
+        }
+      ],
+      "path": "results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_potency_promotion_failure_audit::test_frozen_potency_failure_is_attributed_without_promoting_tilt"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/bio/phase1_ugi_continuous_novelty_matched_ranking_v1.json",
+          "expected_sha256": "00d31aa474cabc0ffef225410d8bdd6e7cc00b8869e740f77bc3286c4755f3ca"
+        },
+        {
+          "configuration": "configs/bio/phase1_ugi_high_potency_challenger_continuous_ranking_v1.json",
+          "expected_sha256": "00d31aa474cabc0ffef225410d8bdd6e7cc00b8869e740f77bc3286c4755f3ca"
+        },
+        {
+          "configuration": "configs/bio/phase1_ugi_production_terminal_ranking_v1.json",
+          "expected_sha256": "00d31aa474cabc0ffef225410d8bdd6e7cc00b8869e740f77bc3286c4755f3ca"
+        }
+      ],
+      "path": "results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_morphology_potency_matched_v1/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_morphology_potency_matched_v1/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_grouped_zero_guidance_identity::test_current_runner_plan_remains_fail_closed_for_nonzero_execution"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_grouped_zero_guidance_identity_v1.json",
+          "expected_sha256": "8d71321ff5dd33e0bd84f23185db6f3a5b54c59c069d1c73d3ce8af3351ab635"
+        }
+      ],
+      "path": "results/phase1/ugi_nonzero_guidance_runner_v1/plan.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_production_generator_manifest::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy",
+        "tests.test_ugi_selected_guidance_adapter_v2::test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/bio/phase1_ugi_fresh_pool_oracle_audit_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_audit_v2.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v2.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_route_aware_panel_feasibility_v3.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_full_equivalence_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_tail_chemotype_audit_v2.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+          "expected_sha256": "7fd0e763a1460290601d6accf31ecb96b2e9ebea325f2b2cdceb8174316a3059"
+        }
+      ],
+      "path": "results/phase1/ugi_product_l1_production_generator_v2.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_product_l1_production_generator_v2.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_product_l1_production_generator_v2.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_production_generator_manifest::test_v3_production_generator_manifest_freezes_refit_selection"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_production_refit_fresh_census_v1.json",
+          "expected_sha256": "35afaadb15347b94f0c00c29a161a6471baf7e1e8a2112299355a817f85592af"
+        }
+      ],
+      "path": "results/phase1/ugi_product_l1_production_generator_v3.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_product_l1_production_generator_v3.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_product_l1_production_generator_v3.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_fresh_schedule_materializes_sampler_programs_without_outcomes"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_constrained_stochastic_production_candidates_v2.json",
+          "expected_sha256": "70b134ebbf9a009db206f810e027905a705bee97f5263f41798bc1ad1790b5f8"
+        }
+      ],
+      "path": "results/phase1/ugi_production_candidate_schedule_v2/schedule.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_production_candidate_schedule_v2/schedule.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_production_candidate_schedule_v2/schedule.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_zero_guidance_typed_audit::test_existing_zero_seam_is_partitioned_without_false_censors",
+        "tests.test_ugi_zero_guidance_typed_audit::test_missing_support_record_fails_closed"
+      ],
+      "known_configuration_pins": [],
+      "path": "results/phase1/ugi_production_zero_guidance_seam_v2/run.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_production_zero_guidance_seam_v2/run.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_production_zero_guidance_seam_v2/run.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_program_prior_all_fold::test_all_fold_prior_strictly_extends_development_support"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_bond_stochastic_confirmation_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_branch_spacing_independent_program_draw_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_chemistry_bias_attribution_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_complete_morphology_proposal_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_product_l1_v2_fresh_pool_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_program_prior_challenger_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_route_saturation_holdout_v1.json",
+          "expected_sha256": "eaaef78b498148fc484665cc9e6a0b6c765cf42aeaefde0ff32eedf3608d7558"
+        }
+      ],
+      "path": "results/phase1/ugi_program_prior_v2.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_program_prior_v2.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_program_prior_v2.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_production_generator_manifest::test_production_generator_manifest_authenticates_all_pinned_artifacts"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_architecture_checkpoint_selection_policy_v3.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v2.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_branch_spacing_challenger_diagnostic_v3.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_grouped_smc_schedule_qualification_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_joint_kernel_bounded_schedule_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_restartable_sampler_equivalence_v1.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_restartable_sampler_equivalence_v2.json",
+          "expected_sha256": "10f468743cfc6231c8546982bfddfd501d87c0bca507c61f043bffed436d3e32"
+        }
+      ],
+      "path": "results/phase1/ugi_program_prior_v4_selection_samples_1024.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_program_prior_v4_selection_samples_1024.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_program_prior_v4_selection_samples_1024.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_grouped_zero_guidance_identity::test_current_restartable_v2_preserves_all_old_batch_partitions"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_grouped_zero_guidance_identity_v1.json",
+          "expected_sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_matched_synthesis_guidance_preregistration_v1.json",
+          "expected_sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_rehearsal_v2.json",
+          "expected_sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json",
+          "expected_sha256": "30a52af9e1d65458668ad2282b3e54706cd7b91e0015d8de94891d156be08c2a"
+        }
+      ],
+      "path": "results/phase1/ugi_restartable_sampler_equivalence_v2/result.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_fail_semantically_even_under_rehashed_payload",
+        "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_require_complete_canonical_coverage"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_dynamic_frozen_prior_terminal_census_v1.json",
+          "expected_sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_joint_kernel_lambda_zero_identity_v1.json",
+          "expected_sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+          "expected_sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+          "expected_sha256": "4baf6a9a1bde3b017ad46f1bc39c2bf9d3ca4957421c18788ffbd9b646468691"
+        }
+      ],
+      "path": "results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/forge/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi3_frozen_parent_component_ledger::test_input_hash_change_fails_closed"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+          "expected_sha256": "2decd029f23e145f214517c2cdee2135f20fcdd0ecd2572306243730491d223e"
+        }
+      ],
+      "path": "scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/scripts/phase1_freeze_ugi3_parent_component_ledger.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/scripts/phase1_freeze_ugi3_parent_component_ledger.py"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_current_source_zero_guidance_requalification::test_current_source_and_locked_zero_guidance_values_requalify"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_current_source_zero_guidance_requalification_v1.json",
+          "expected_sha256": "22bb2b10ab8198b244027772f41608dccc53261d4161e5db72be191c585a67f2"
+        }
+      ],
+      "path": "scripts/phase1_requalify_ugi_current_source_zero_guidance.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/scripts/phase1_requalify_ugi_current_source_zero_guidance.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/scripts/phase1_requalify_ugi_current_source_zero_guidance.py"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_ugi_selected_guidance_adapter_v3::test_frozen_v2_sources_remain_byte_identical"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_production_synthesis_guidance_seam_v4.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v2.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_production_zero_guidance_seam_v3.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_full_equivalence_v1.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v1.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_selected_v2_pool_singleton_equivalence_v2.json",
+          "expected_sha256": "b632f401dc8b6d313433647c52481a0d2fba3eced4c493cfaa114c84d2ee5f52"
+        }
+      ],
+      "path": "src/forge/product/ugi_selected_restartable_generator_v2.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/src/forge/product/ugi_selected_restartable_generator_v2.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/src/forge/product/ugi_selected_restartable_generator_v2.py"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_single_step_proposal_benchmark::test_bound_production_contract_authenticates_but_remains_nonexecuting",
+        "tests.test_single_step_proposal_benchmark::test_preflight_blocks_before_target_loader_or_lane_engine_is_called",
+        "tests.test_single_step_proposal_benchmark_v3::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/single_step_proposal_benchmark_runner_binding_v1.json",
+          "expected_sha256": "fdf0e24bd54d02c18aa7157cd915a3ebb5e9bc327923f8d98a18e457edbd3ac9"
+        }
+      ],
+      "path": "src/forge/route/l2_forward_resolver.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/src/forge/route/l2_forward_resolver.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/src/forge/route/l2_forward_resolver.py"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_single_step_proposal_lane_qualification_spec::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+          "expected_sha256": "761ae3cd142ddc9bbb98f4181b3c975e0e4b4aba3e386eb4c81ed1ccdd2f68d8"
+        }
+      ],
+      "path": "src/forge/route/proposal_engine.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/src/forge/route/proposal_engine.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/src/forge/route/proposal_engine.py"
+        }
+      ]
+    },
+    {
+      "affected_first_failure_ids": [
+        "tests.test_synthesis_source_exact_route_replay::test_exact_c18_and_c16_source_replays_are_behavior_preserving",
+        "tests.test_synthesis_source_qualification::test_source_qualification_owns_all_behavior_preserving_replays"
+      ],
+      "known_configuration_pins": [
+        {
+          "configuration": "configs/model/phase1_ugi_current_source_zero_guidance_requalification_v1.json",
+          "expected_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        {
+          "configuration": "configs/model/phase1_ugi_source_guidance_prerequisite_requalification_v1.json",
+          "expected_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        {
+          "configuration": "configs/route/phase1_synthesis_value_source_qualification_v1.json",
+          "expected_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_blinded_headless_dependency_manifest_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_exact_c16_route_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_exact_c18_route_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v2.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v3.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v4.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v5.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_fresh_pool_route_coverage_v6.json",
+          "expected_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_frozen_parent_component_ledger_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_source_qualified_cumulative_inputs_v1.json",
+          "expected_sha256": "6e77063f45012144912883f16a12698eda809446635c94d59d1ab6211993f189"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_synthesis_value_audit_v1.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_synthesis_value_audit_v2.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        },
+        {
+          "configuration": "configs/route/phase1_ugi3_synthesis_value_audit_v3.json",
+          "expected_sha256": "dba5b11067513e4f431f78f3b9a316dfe0d58c5f046210c170c55b9a0e241e3c"
+        }
+      ],
+      "path": "src/forge/value/synthesis.py",
+      "same_relative_path_local_recovery_candidates": [
+        {
+          "exists": true,
+          "path": "/Users/rahulmaganti/Kosha/forge/src/forge/value/synthesis.py"
+        },
+        {
+          "exists": false,
+          "path": "/Users/rahulmaganti/Kosha/results/src/forge/value/synthesis.py"
+        }
+      ]
+    }
+  ],
+  "random_sampling_used": false,
+  "recovery_rule": "Restore exact pinned bytes only. Source relocations require reviewed path/digest bindings; no substitutions, changed pins, skipped tests or regenerated paid jobs.",
+  "schema_version": "forge.compose_lipid_test_input_inventory.v1",
+  "sealed_holdouts_read": false,
+  "seed": 0
+}

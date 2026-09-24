@@ -1,0 +1,88 @@
+{
+  "created_at_utc": "2026-09-14T18:41:54.190268+00:00",
+  "historical_sources": [
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/__init__.py",
+      "sha256": "686172cff1bc979af050cf8f98384a1e0d5a745518f906cc1518ceaa280b9040"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/bio/__init__.py",
+      "sha256": "d24f53f9372d809a201129b9af83f88f1ffaed1dcb15e192f6c0d4ec8bb9dea2"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/bio/ugi_semantic_annotations.py",
+      "sha256": "7f806a479dcc7a2c5eadf738dd429136c82568ba1f902498746092abc86e70a1"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/product/__init__.py",
+      "sha256": "1db43186ab65ff46ab1ac5627486d121573eb7706f97567012ae5d46059c11af"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/product/defog_feasibility.py",
+      "sha256": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/product/ugi_l1_origin_annotations.py",
+      "sha256": "d981c44fbec2bab25c46d031163739c6fb31c0be7574c76c2bab085de01718b3"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/route/__init__.py",
+      "sha256": "b3dd8f0fa8f168331eecd34324682b236c25afb985fe9fbbb98a13e78732ae75"
+    },
+    {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/route/qualified_forward.py",
+      "sha256": "0a06be48ed62c0865838117d28a5e360985ddc8175cafd66ace011980b2f88c8"
+    }
+  ],
+  "inputs": {
+    "authority": {
+      "path": "configs/model/phase1_ugi_chemistry.json",
+      "sha256": "6418b42047d8cea91e6fa5cf1f040a1fd73a390b07b8b10f89cd7cf17b401547"
+    },
+    "config": {
+      "path": "configs/model/phase1_ugi_l1_semantics.json",
+      "sha256": "feb16fbd9b81bdda33dc92e6e257146fa355e67a639d7d2f52dcf26ee2396954"
+    },
+    "historical_tree": {
+      "path": "results/phase1/ugi_guidance_artifact_recovery_v2/original_code_tree.json",
+      "sha256": "3e258e41d4950c1f6300cf5010534355b4d780c8e5fadfc7c9e485ecbde83a4d"
+    },
+    "measured_atoms": {
+      "path": "results/m0_07/ugi_semantic_atoms.csv.gz",
+      "sha256": "e1f893d84ddfee19ea50fadfa7b5a4a9b3044866168dbdc9d9ee73c2388a71fe"
+    },
+    "measured_bonds": {
+      "path": "results/m0_07/ugi_semantic_bonds.csv.gz",
+      "sha256": "4b0c402339d3734ff96824ea1cf83bf8d14daecf67dbefadba46e10f48382b97"
+    },
+    "measured_component_mappings": {
+      "path": "results/m0_07/ugi_semantic_component_mappings.csv.gz",
+      "sha256": "16692b89b614ccbca9ef85745a345f2b4a6dfbfbe85603b30c1594331ba961f5"
+    },
+    "measured_products": {
+      "path": "results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    },
+    "qualified_reactions": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "script": {
+      "path": "results/phase1/combinatorial_repository_readiness_v1/recover_l1_annotations.py",
+      "sha256": "e6d39c0033b4ee427c8a983dd4c075989d882ea267653b37197193f372cedb70"
+    },
+    "ugi_l1_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "new_product_generation_calls": 0,
+  "purpose": "exact recovery of existing annotations, with all frozen annotation gates",
+  "python": "3.11.15",
+  "schema_version": "forge.l1_annotation_recovery_request.v1",
+  "training_calls": 0
+}

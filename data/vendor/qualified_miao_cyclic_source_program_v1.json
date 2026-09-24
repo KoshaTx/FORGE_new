@@ -1,0 +1,135 @@
+{
+  "curation": {
+    "atom_origin_policy": "All two-carbonyl-arm atoms remain in one ketone precursor. Iso5 C3/N4/alpha-C5 and amine N1 form the source-drawn five-membered ring. The source drawing supports the net graph, not isolated mechanistic intermediates.",
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false
+  },
+  "reactions": [
+    {
+      "architecture": "One primary amine and complete ketone plus source Iso5 ethyl isocyanoacetate give the drawn dihydroimidazole ring; no acyclic branch equivalence.",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3;H0;!$([C]-[!#6]):2]=[OX1].[#6&-&H0&-:3]#[#7&+&H0&+:4]-[#6&H2&+0:5]-[#6&H0&+0:6](=[#8&H0&+0:7])-[#8&H0&+0:8]-[#6&H2&+0:9]-[#6&H3&+0:10]>>[N:1]1-[C&H0:2]-[C&+0&H1:3]=[N&H0&+0:4]-[#6&H1&+0:5]-1-[#6&H0&+0:6](=[#8&H0&+0:7])-[#8&H0&+0:8]-[#6&H2&+0:9]-[#6&H3&+0:10]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": [
+          28.4,
+          34.0
+        ],
+        "solvent": [
+          "anhydrous dichloromethane",
+          "ethanol"
+        ],
+        "temperature_c": null,
+        "temperature_text": "room temperature",
+        "time_h": null,
+        "time_text": "overnight"
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_miao_cyclic_source_v1/build_registry.py",
+          "sha256": "3499c3fb0c67797811fb817ae4c575c272cfdbf5bf1c5b9c9b18c5be447f2266"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "ketone_and_amine_queries": {
+            "path": "data/vendor/qualified_ketone_ugi4_source_program_v1.json",
+            "sha256": "2b0930725739e587e63792ba754473e164216ea15fba464417f58b221398eef9"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "net_byproducts": {
+        "H": 2,
+        "O": 1,
+        "formal_charge": 0
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract; no neutralization or salt stripping is applied and none is required for these substrates.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "coupled_ketone",
+          "required_handle_smarts": "[CX3;H0;!$([C]-[!#6])](=[OX1])"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "name": "isocyanide",
+          "required_handle_smarts": "[#6&-&H0&-]#[#7&+&H0&+]-[#6&H2&+0]-[#6&H0&+0](=[#8&H0&+0])-[#8&H0&+0]-[#6&H2&+0]-[#6&H3&+0]"
+        }
+      ],
+      "reaction_id": "source_miao_ethyl_isocyanoacetate_cyclization",
+      "reaction_version": 1,
+      "retained_queries": [
+        {
+          "minimum_matches": 1,
+          "name": "distinct_head_basic_nitrogen",
+          "role": "amine_head",
+          "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+        }
+      ],
+      "selectivity_policy": "Primary reacting NH2; exact source Iso5; one complete ketone; all unfiltered site outcomes must be unique. Preserve distinct unconsumed head basic N in this bounded program. Other source isocyanides and head scopes require separate programs.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41587-019-0247-3",
+          "kind": "doi",
+          "locator": "Main Figs. 1b-c and 3a; SI PDF pp. 2-3 (printed 1-2), A12 and A2 procedures and characterization; PDF p. 5 (printed 4), structure interpretation.",
+          "notes": "Computed net-transform consistency only. Proposed intermediate sequence is not treated as observed. Distinct head nitrogen is a deliberately narrower computational scope than the generic schematic."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; no stereoselectivity claim."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_figure_1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig1.png",
+      "sha256": "609d8d856f79e32f25a2b3296139c1f681cd67c6457f1b84041f2221f3233548"
+    },
+    "main_figure_3": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig3.png",
+      "sha256": "92338f18227551f9ae30acff1eaece3ec8ad4cc6fb207d0b0076d790638b4546"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/miao-si.pdf",
+      "sha256": "92d495da953b31003011e7b3e0c44b3fc16f91067e0975abda0c794773c53987"
+    }
+  }
+}

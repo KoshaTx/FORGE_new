@@ -1,0 +1,68 @@
+{
+  "assets": {
+    "main_figure_1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig1.png",
+      "sha256": "609d8d856f79e32f25a2b3296139c1f681cd67c6457f1b84041f2221f3233548"
+    },
+    "main_figure_3": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig3.png",
+      "sha256": "92338f18227551f9ae30acff1eaece3ec8ad4cc6fb207d0b0076d790638b4546"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/miao-si.pdf",
+      "sha256": "92d495da953b31003011e7b3e0c44b3fc16f91067e0975abda0c794773c53987"
+    },
+    "supplement_printed_page_3": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/pages/page-04.png",
+      "sha256": "a01c5a9a15c34e19eb62bc8c096861e64909277bcea59f499a8d784600a2b3bb"
+    },
+    "supplement_printed_page_4": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/pages/page-05.png",
+      "sha256": "db6509f477d0c5492a0b5232540771efb23980b415bf8166c57e4e107b6f1edd"
+    }
+  },
+  "conclusion": "The local supplement is available and has been inspected. Missing branch-specific control evidence, not a missing PDF, prevents this review from qualifying the proposed acyclic executor. No assertion of chemical impossibility or experimental failure is made.",
+  "date": "2026-09-21",
+  "disposition": "abstain",
+  "doi": "10.1038/s41587-019-0247-3",
+  "evidence_basis": "family_precedent",
+  "experimental_execution_admitted": false,
+  "family": "ketone_isocyanide_amide",
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v8/audit_miao_acyclic.py",
+    "sha256": "6fbbbe51054ff043623a6d68106483bd94f28fbd3bfd1415a29f0d5aac0289f9"
+  },
+  "inputs": {
+    "source_family_claims": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    }
+  },
+  "observations": [
+    {
+      "locator": "Main Fig. 1b",
+      "observation": "The generic primary-amine scheme draws imine, acyclic amide and dihydroimidazole alternatives separated by 'or'. It does not by itself assign a unique product to each secondary-amine library tuple."
+    },
+    {
+      "locator": "Main Fig. 1c",
+      "observation": "The source library includes both primary and secondary amine drawings. Their inclusion is library evidence, not isolated-product identity evidence for every secondary-amine combination."
+    },
+    {
+      "locator": "Main Fig. 3a; SI Note 2, printed pages 3-4, lines 113-121",
+      "observation": "The local secondary amine discussed here is in the proposed cyclization intermediate. This sentence does not establish the separate secondary-amine-reactant acyclic branch claimed in the generator metadata."
+    },
+    {
+      "locator": "SI Note 1, named product headings; printed page 3",
+      "observation": "The inspected isolated-product characterization concerns dihydroimidazole products. It does not supply an independently identified acyclic product control for the proposed corpus executor."
+    }
+  ],
+  "pmid": "31570898",
+  "remaining_evidence": [
+    "An independently identified acyclic product and complete precursor tuple, with a source procedure locator and applicable branch-selection evidence.",
+    "A qualified registry-backed atom/bond transformation and explicit carbonyl oxygen accounting, tested against that independent source control."
+  ],
+  "schema_version": "forge.chemistry_source_scope_review.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0
+}

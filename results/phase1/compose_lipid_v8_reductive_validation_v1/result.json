@@ -1,0 +1,1189 @@
+{
+  "artifacts": {
+    "black.log": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/black.log",
+      "sha256": "7657c5ec367da2c8d4deead1b5f1f8eca9c1b89120ad13df7f855ca4005696b6"
+    },
+    "execution.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/execution.json",
+      "sha256": "65c894ed87192bb60d9f6aa3a1ece38af6100f9bc37d048fc5b7443fbe3cd197"
+    },
+    "focused-tests.log": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/focused-tests.log",
+      "sha256": "7bc2db295eccd77bc3cffb4a37b126df91f6a772731556e537af54a4cb40fec6"
+    },
+    "focused-tests.xml": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/focused-tests.xml",
+      "sha256": "d5072ca967b4def8f5dec5e5275f76e15b95d224fa1c43d915e5540947e80f00"
+    },
+    "full-test-execution.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-test-execution.json",
+      "sha256": "bbe6396988372a3d94d25b0e42d084a765a919438e78b2c2bd379241b0242ac2"
+    },
+    "full-test-source-snapshot.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-test-source-snapshot.json",
+      "sha256": "3d885d4cb2006e38ca931181ed200c0757969bf63f35e63901c8b8ab3772b51f"
+    },
+    "full-tests.log.gz": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-tests.log.gz",
+      "sha256": "9f1e78b9a4b96be063a51613f7158db0b1fd0a13255fbb5e2832399838d7735e"
+    },
+    "full-tests.xml.gz": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-tests.xml.gz",
+      "sha256": "2181e490b56e53ce3d34a016c3ce5a134cc810791ea9e9f8300ed7f4ad4750ca"
+    },
+    "multiplicity-probe.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity-probe.json",
+      "sha256": "be73c2eca2c4decde43907a99069e8e883baa6fe128df19596e623696aa0bec5"
+    },
+    "multiplicity-probe.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity-probe.jsonl.gz",
+      "sha256": "c2037e1d3d7cf7422a154edfbdccb2fe9f4a337962a7647f814cec4c373f834f"
+    },
+    "multiplicity_probe.py": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity_probe.py",
+      "sha256": "4f8f2cb22917b194b6e0de6eda595c023a55940f92511a780846f61b468f7616"
+    },
+    "ruff.log": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "vendor-verify.log": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/vendor-verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    },
+    "verification.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/verification.json",
+      "sha256": "8f346888d43a94bd4d697fb6cd87188919153eec503e04b99607045dfc7c658b"
+    }
+  },
+  "black_pass": true,
+  "commands": {
+    "execution": [
+      "uv",
+      "run",
+      "python",
+      "-m",
+      "experiments.phase1.multireaction.compose_lipid_scaffold_event",
+      "--repo-root",
+      ".",
+      "--config",
+      "configs/multireaction/compose_lipid_v8_reductive_program_v1.json",
+      "--output-dir",
+      "results/phase1/compose_lipid_v8_reductive_program_v1"
+    ],
+    "focused": "uv run pytest -q tests/test_a3_source_boundary.py tests/test_compose_lipid.py tests/test_compose_lipid_components.py tests/test_compose_lipid_pretraining.py tests/test_compose_lipid_protection.py tests/test_compose_lipid_repeated_inverse.py tests/test_compose_lipid_repeated_source.py tests/test_compose_lipid_representation.py tests/test_compose_lipid_scaffold_event.py tests/test_compose_lipid_source_event.py tests/test_compose_lipid_source_program.py tests/test_pinned_sources_are_tracked.py tests/test_precursor_scaffolds.py tests/test_repeated_components.py tests/test_repeated_inverse.py tests/test_source_event.py",
+    "full": {
+      "command": [
+        "make",
+        "test"
+      ],
+      "duration_seconds": 585.3837052499875,
+      "exit_code": 2,
+      "pytest_addopts": "--tb=short --junitxml=results/phase1/compose_lipid_v8_reductive_validation_v1/full-tests.xml"
+    },
+    "multiplicity_probe": "uv run python results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity_probe.py",
+    "recount": "uv run python results/phase1/compose_lipid_v8_reductive_validation_v1/summarize.py",
+    "vendor": "make verify",
+    "verification": [
+      "uv",
+      "run",
+      "python",
+      "-m",
+      "experiments.phase1.multireaction.compose_lipid_scaffold_event",
+      "--repo-root",
+      ".",
+      "--verify",
+      "results/phase1/compose_lipid_v8_reductive_program_v1/result.json"
+    ]
+  },
+  "failure_comparison": {
+    "baseline": {
+      "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+      "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+    },
+    "new_failure_or_error_ids": [],
+    "new_scaffold_audit_failures": [],
+    "resolved_failure_or_error_ids": []
+  },
+  "family_count": 23,
+  "family_scope": {
+    "a3_amine_aldehyde_alkyne": {
+      "architecture_subfamilies": [
+        "lu_single_event_formaldehyde",
+        "han_symmetric_a3",
+        "han_ordered_two_event_asymmetric"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5554,
+        "excluded_prior_protected_product": 2,
+        "prior_exact_identity_overlap": 71,
+        "rows": 5556
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "acid_epoxide_diester_multistep": {
+      "architecture_subfamilies": [
+        "acid_epoxide_site_ordered_12_diester"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 8318,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 1,
+        "rows": 8318
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aema_aza_thiol_addition": {
+      "architecture_subfamilies": [
+        "g1_exact_occupancy",
+        "higher_generation_aema",
+        "unsaturated_periphery_aema"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 3294,
+        "excluded_prior_protected_product": 20,
+        "prior_exact_identity_overlap": 259,
+        "rows": 3314
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aldehyde_ugi3": {
+      "additional_single_event_evidence": {
+        "receipt": {
+          "path": "results/phase1/compose_lipid_v8_ugi3_program_v1/result.json",
+          "sha256": "7d4d247fdacf590a49737771e77f3bfbc1492da92253f5d813c3f8cde3be5f6a"
+        },
+        "summary": {
+          "by_status": {
+            "computed_consistent": 2577,
+            "excluded_no_exact_inverse": 130,
+            "excluded_source_or_replay_failure": 122
+          },
+          "check_failures": {
+            "unique_unfiltered_forward_exact": 122
+          },
+          "component_label_conflicts": 0,
+          "computed_consistency_pass": 2577,
+          "eligible_after_known_exclusions": 1063,
+          "full_source_family_architecture_qualified": false,
+          "historical_protected_precursor": 1636,
+          "remaining_holds": [
+            "global_precursor_protection_incomplete",
+            "precursor_holdouts_unqualified",
+            "source_reagent_bank_and_architecture_assignment_unqualified",
+            "remaining_families_unqualified",
+            "final_balanced_train_dataset_unbuilt",
+            "repository_full_tests_fail"
+          ],
+          "rows": 2829,
+          "shared_single_event_invariant_qualified": true,
+          "training_admitted": 0,
+          "training_ready": false
+        }
+      },
+      "architecture_subfamilies": [
+        "agile_biodegradable_ugi3",
+        "bowen_pnas_dual_tail_ugi3"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 2829,
+        "excluded_prior_protected_product": 138,
+        "prior_exact_identity_overlap": 1517,
+        "rows": 2967
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aldehyde_ugi4": {
+      "architecture_subfamilies": [
+        "bowen_4cr_ordinary",
+        "lumi_ordinary_source_parented",
+        "lumi_specialized_fixed"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 8450,
+        "excluded_prior_protected_product": 24,
+        "prior_exact_identity_overlap": 385,
+        "rows": 8474
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "alpha_isocyanoester_dihydroimidazole": {
+      "architecture_subfamilies": [
+        "miao_cyclic_dihydroimidazole"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 8279,
+        "excluded_prior_protected_product": 8,
+        "prior_exact_identity_overlap": 69,
+        "rows": 8287
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "amine_alkylation": {
+      "architecture_subfamilies": [
+        "ren_bromoester_n_alkylation",
+        "reference_clinical_n_alkylation"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 7819,
+        "excluded_prior_protected_product": 2,
+        "prior_exact_identity_overlap": 24,
+        "rows": 7821
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "amine_epoxide_opening": {
+      "architecture_subfamilies": [
+        "anderson_ordinary_epoxide_lipidoid",
+        "paracyclophane_three_arm_epoxide",
+        "han_db_aminoalcohol_intermediate",
+        "hepes_or_source_specific_epoxide_core"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 6296,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 19,
+        "rows": 6296
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aryl_reductive_amination": {
+      "additional_source_scaffold_program_evidence": {
+        "receipt": {
+          "path": "results/phase1/compose_lipid_v8_reductive_program_v1/result.json",
+          "sha256": "91bf8f3d068d86a70c1f25e179f539bb9035ab2636c31a05b3701d1bb9d3dfeb"
+        },
+        "source_bank_membership_qualified": false,
+        "summary": {
+          "by_computed_architecture": {
+            "xue_a2_aryl_core": 2038,
+            "xue_a3_aryl_core": 2520
+          },
+          "by_status": {
+            "computed_consistent": 4558,
+            "excluded_forward_or_stoichiometry": 153,
+            "excluded_missing_component_labels": 13
+          },
+          "component_label_conflicts": 153,
+          "computed_consistency_pass": 4558,
+          "consistent_with_known_protected_precursor": 2278,
+          "eligible_after_known_exclusions": 2280,
+          "rows": 4724,
+          "training_admitted": 0
+        }
+      },
+      "architecture_subfamilies": [
+        "xue_a2_aryl_core",
+        "xue_a3_aryl_core"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 4724,
+        "excluded_prior_protected_product": 12,
+        "prior_exact_identity_overlap": 135,
+        "rows": 4736
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aza_michael_acrylamide": {
+      "additional_repeated_program_evidence": {
+        "receipt": {
+          "path": "results/phase1/compose_lipid_v8_michael_program_v2/result.json",
+          "sha256": "cd7d3389f1ea2ea95add131164bf5bdab8dfcd8cc0cee14cf33eefc79896a841"
+        },
+        "source_architecture_assignment_complete": false,
+        "summary": {
+          "by_declared_occupancy": {
+            "2": 3105,
+            "3": 1456,
+            "4": 318
+          },
+          "by_status": {
+            "computed_consistent": 4879
+          },
+          "component_label_conflicts": 0,
+          "computed_consistency_pass": 4879,
+          "consistent_with_known_protected_precursor": 2503,
+          "eligible_after_known_exclusions": 2376,
+          "rows": 4879,
+          "training_admitted": 0
+        }
+      },
+      "architecture_subfamilies": [
+        "lipidoid_2008_n_series_full_occupancy",
+        "partial_occupancy_acrylamide"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 4879,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 14,
+        "rows": 4879
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "aza_michael_acrylate": {
+      "additional_repeated_program_evidence": {
+        "receipt": {
+          "path": "results/phase1/compose_lipid_v8_michael_program_v2/result.json",
+          "sha256": "cd7d3389f1ea2ea95add131164bf5bdab8dfcd8cc0cee14cf33eefc79896a841"
+        },
+        "source_architecture_assignment_complete": false,
+        "summary": {
+          "by_declared_occupancy": {
+            "2": 3131,
+            "3": 1641,
+            "4": 293,
+            "None": 311
+          },
+          "by_status": {
+            "computed_consistent": 5065,
+            "excluded_missing_or_invalid_program_metadata": 311
+          },
+          "component_label_conflicts": 0,
+          "computed_consistency_pass": 5065,
+          "consistent_with_known_protected_precursor": 2516,
+          "eligible_after_known_exclusions": 2549,
+          "rows": 5376,
+          "training_admitted": 0
+        }
+      },
+      "architecture_subfamilies": [
+        "lipidoid_2008_o_series_full_occupancy",
+        "paracyclophane_three_arm_acrylate",
+        "ricinoleic_complete_acrylate",
+        "multiarm_dendron_acrylate",
+        "akinc_or_whitehead_ordinary_acrylate"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5376,
+        "excluded_prior_protected_product": 24,
+        "prior_exact_identity_overlap": 429,
+        "rows": 5400
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "disulfide_michael": {
+      "architecture_subfamilies": [
+        "single_site_ldil",
+        "multi_site_symmetric_ldil",
+        "four_arm_4a3_scc"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 7671,
+        "excluded_prior_protected_product": 3,
+        "prior_exact_identity_overlap": 56,
+        "rows": 7674
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "epoxide_opening_o_acylation": {
+      "architecture_subfamilies": [
+        "han_db_two_stage_four_arm_rocket"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5033,
+        "excluded_prior_protected_product": 15,
+        "prior_exact_identity_overlap": 203,
+        "rows": 5048
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "iphos_ring_opening": {
+      "architecture_subfamilies": [
+        "iphos_single_zwitterion_nA1Pm",
+        "iphos_multi_zwitterion_nAxPm",
+        "iphos_pretailed_amine_architectures"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 6970,
+        "excluded_prior_protected_product": 18,
+        "prior_exact_identity_overlap": 179,
+        "rows": 6988
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "ketone_isocyanide_amide": {
+      "architecture_subfamilies": [
+        "miao_acyclic_secondary_amine_amide"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 9000,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 21,
+        "rows": 9000
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "ketone_ugi4": {
+      "architecture_subfamilies": [
+        "linear_coupled_ketone_arms",
+        "unsaturated_or_branched_coupled_ketone",
+        "cyclic_coupled_ketone",
+        "interface_acyl_vs_hydrophobic_acyl"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5875,
+        "excluded_prior_protected_product": 2,
+        "prior_exact_identity_overlap": 15,
+        "rows": 5877
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "maleate_addition": {
+      "architecture_subfamilies": [
+        "amine_symmetric_maleate",
+        "thiol_symmetric_maleate",
+        "asymmetric_maleate_orientations"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5409,
+        "excluded_prior_protected_product": 17,
+        "prior_exact_identity_overlap": 243,
+        "rows": 5426
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "o_esterification": {
+      "architecture_subfamilies": [
+        "h1_single_oh_single_tail",
+        "h2_diol_two_repeated_tails",
+        "h3_triol_three_repeated_tails"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 4762,
+        "excluded_prior_protected_product": 9,
+        "prior_exact_identity_overlap": 103,
+        "rows": 4771
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "passerini_3cr": {
+      "architecture_subfamilies": [
+        "passerini_amine_acid_head_dual_tail"
+      ],
+      "complete_source_program_qualified_on_inspected_train": true,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 7007,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 0,
+        "rows": 7007
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "preassembled_thiol_yne_tail_amidation": {
+      "architecture_subfamilies": [
+        "li_two_arm_glycerol_mimetic",
+        "li_same_platform_unsaturated_head_followup"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 10504,
+        "excluded_prior_protected_product": 30,
+        "prior_exact_identity_overlap": 321,
+        "rows": 10534
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "reductive_amination": {
+      "additional_source_scaffold_program_evidence": {
+        "receipt": {
+          "path": "results/phase1/compose_lipid_v8_reductive_program_v1/result.json",
+          "sha256": "91bf8f3d068d86a70c1f25e179f539bb9035ab2636c31a05b3701d1bb9d3dfeb"
+        },
+        "source_bank_membership_qualified": false,
+        "summary": {
+          "by_computed_architecture": {
+            "jiang_nebulized_ester_aldehyde": 5800
+          },
+          "by_status": {
+            "computed_consistent": 5800,
+            "excluded_missing_component_labels": 10
+          },
+          "component_label_conflicts": 0,
+          "computed_consistency_pass": 5800,
+          "consistent_with_known_protected_precursor": 1987,
+          "eligible_after_known_exclusions": 3813,
+          "rows": 5810,
+          "training_admitted": 0
+        }
+      },
+      "architecture_subfamilies": [
+        "jiang_nebulized_ester_aldehyde"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 5810,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 17,
+        "rows": 5810
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "thiolactone_aminolysis_michael": {
+      "architecture_subfamilies": [
+        "staar_sequential_aibjck",
+        "staar_permanent_cationic_reference"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 9314,
+        "excluded_prior_protected_product": 52,
+        "prior_exact_identity_overlap": 560,
+        "rows": 9366
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    },
+    "vitamin_b5_multistep": {
+      "architecture_subfamilies": [
+        "vitamin_b5_i7_two_event",
+        "vitamin_b5_i8_three_ester",
+        "vitamin_b5_i9_dual_tail_head_linkage"
+      ],
+      "complete_source_program_qualified_on_inspected_train": false,
+      "current_product_exclusions": {
+        "eligible_for_program_preparation": 6187,
+        "excluded_prior_protected_product": 0,
+        "prior_exact_identity_overlap": 1,
+        "rows": 6187
+      },
+      "previous_evidence": {
+        "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+        "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+      },
+      "training_admitted": 0
+    }
+  },
+  "focused": {
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 225,
+      "skipped_or_xfail": 0,
+      "tests": 225
+    },
+    "duration_seconds": 25.159,
+    "errors": {},
+    "failures": {}
+  },
+  "full": {
+    "counts": {
+      "errors": 21,
+      "failures": 131,
+      "passed": 2846,
+      "skipped_or_xfail": 92,
+      "tests": 3090
+    },
+    "duration_seconds": 584.514,
+    "errors": {
+      "tests.test_single_step_benchmark_manifest::test_adversarial_controls_are_valid_wrong_role_assignments": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_every_target_is_a_valid_connected_constitution": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_real_manifest_is_deterministic_disjoint_and_truth_separated": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_visibility_masks_hide_exact_truth_and_complete_held_families": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_duplicate_exact_component_identity_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_incomplete_owned_c18_assessment_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_hash_mismatch_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_with_c18_already_complete_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_repinned_broader_c18_config_fails_reproduction": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_frozen_protocol_validates_in_isolated_prereveal_view": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_future_dated_protocol_freeze_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_incomplete_c18_l3_evidence_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_retry_replanning_or_post_reveal_evidence_policy_cannot_be_relaxed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_blindness_receipt_is_invariant_to_arm_labels": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_component_targets_are_arm_independent": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_config_schema_and_scope_are_frozen": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_conservative_high_is_resolved_from_an_authoritative_source": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_every_candidate_carries_exact_constitutional_l1": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_drift_fails_closed": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_matches_frozen_expectation": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_potency_resolution_fails_closed_on_identity_mismatch": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\""
+    },
+    "failures": {
+      "tests.test_l2_forward_resolver::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: could not read resolver scope ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_l2_forward_resolver::test_real_resolver_replays_one_development_exact_pair_without_graph2edits": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_phase1_v5_morphology_config::test_v5_representation_config_is_hash_pinned_and_nonredundant": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/r0_lipid_morphology_audit.json').is_file",
+      "tests.test_single_step_proposal_benchmark::test_bound_production_contract_authenticates_but_remains_nonexecuting": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_hidden_truth_hash_or_output_grid_mutation_fails_closed": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_preflight_blocks_before_target_loader_or_lane_engine_is_called": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_runner_rejects_a_resolver_not_bound_to_the_contract": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark_v3::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_lane_qualification_spec::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/src/forge/route/proposal_engine.py').is_file",
+      "tests.test_synthesis_source_exact_route_replay::test_exact_c18_and_c16_source_replays_are_behavior_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_qualification::test_source_qualification_owns_all_behavior_preserving_replays": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_supersession::test_full_replay_is_behavior_preserving_and_does_not_rewrite_history": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_complete_dossier_census_is_exact_and_conservative": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz'",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "tests.test_ugi3_family_applicability_census::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_family_applicability_census::test_final_projected_family_census_is_deterministic_and_nonqualifying": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_fresh_pool_route_coverage_v4::test_exact_c18_refresh_changes_only_one_component_identity": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_base_v4_independently_has_expected_c16_occurrence_branches": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_exact_c16_refresh_changes_one_component_record_only": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_product_metadata_and_non_target_values_remain_unchanged": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v6::test_v6_requalifies_v5_without_changing_values": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v4_priority_config_pins_frozen_v5_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v5_priority_refresh_is_deterministic_nonselecting_and_evidence_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_exactly_one_authorized_c18_reversion_preserves_all_other_v5_records": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_input_hash_change_fails_closed": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_lineage_is_hash_bound_to_final_v5_and_immutable_v3": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_no_family_homologue_pair_or_holdout_promotion": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_parent_ledger_is_accepted_by_downstream_loader_without_building_pair": "forge.synthesis.assessment.ugi3_route_registry_pair_builder.Ugi3RouteRegistryPairBuilderError: invalid final component ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_graded_family_evidence_audit::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_graded_family_evidence_audit::test_final_v5_graded_audit_is_deterministic_nonselecting_and_nonprobabilistic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_every_component_is_missing_knowledge_nonpromoting_and_exactly_grouped": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_required_leaves_and_missing_evidence_are_explicit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_worklist_is_cardinality_minimal_and_matches_frozen_25pct_audit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_route_registry_pair_builder::test_checked_in_builder_is_bound_and_immutable_after_materialization": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_route_registry_pair_contract::test_live_protocol_fails_closed_after_one_shot_reveal": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "tests.test_ugi3_route_registry_pair_contract::test_snapshot_and_binding_hashes_are_deterministic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "tests.test_ugi3_source_qualified_cumulative_inputs::test_source_qualified_inputs_reproduce_all_historical_science": "experiments.phase1.synthesis_guidance.sources.ugi3_source_qualified_cumulative_inputs.Ugi3SourceQualifiedCumulativeInputsError: source_qualification hash changed",
+      "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_tampered_input_hash_fails_closed": "AssertionError: Regex pattern did not match.\n  Expected regex: 'input pin changed'\n  Actual message: 'input pin is not a regular file: shortlist_result'",
+      "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate": "forge.corpus.ugi_chemistry_corpus.UgiChemistryCorpusError: could not read /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_fresh_schedule_materializes_sampler_programs_without_outcomes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_candidate_schedule_v2/schedule.json'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_terminal_admission_is_separate_from_exact_l1": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_committed_current_source_receipt_matches_builder": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_current_source_and_locked_zero_guidance_values_requalify": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_requalify_ugi_current_source_zero_guidance.py",
+      "tests.test_ugi_decoration_checkpoint_confirmation_policy::test_confirmation_policy_is_frozen_and_hashes_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt",
+      "tests.test_ugi_decoration_coupling_production_fresh_census::test_fresh_census_programs_and_implementation_are_hash_pinned": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json').is_file",
+      "tests.test_ugi_decoration_coupling_production_refit_policy::test_production_refit_selection_and_data_hashes_are_frozen": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json').is_file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census::test_production_config_is_hash_pinned_and_calibration_only": "experiments.phase1.product_l1.sampling.terminal_census.UgiDynamicTerminalCensusError: frozen_programs is missing or is not a real file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census_validator::test_production_validator_config_is_pinned_and_read_only": "experiments.archive.phase1.design_audits.ugi_dynamic_frozen_prior_terminal_census_validator.UgiDynamicTerminalCensusValidationError: census_source pin changed",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_is_deterministic": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_restores_realistic_branch_support": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_graded_route_readiness_evaluator::test_frozen_evidence_and_proposal_indices_load": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_restartable_v2_preserves_all_old_batch_partitions": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_runner_plan_remains_fail_closed_for_nonzero_execution": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_frozen_first_assignment_expands_to_sixteen_groups_of_four": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_hela_potency_diagnostic::test_calibration_median_and_lower_values_are_neutral": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic::test_policy_regenerates_only_two_calibration_scales": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic_readiness::test_historical_checkpoint_coverage_is_reproduced_exactly": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_high_potency_challenger_adjudication::test_fresh_challenger_closes_potency_tilt_without_reopening_applicability": "experiments.phase1.hela_potency.morphology.ugi_high_potency_challenger_adjudication.HighPotencyChallengerAdjudicationError: invalid input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_contract_authenticates_schedule_and_structural_gate": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_exact_measured_candidate_is_structurally_neutral": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_fake_lane_runs_existing_identity_gate_and_captures_one_arm": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_frozen_matched_terminal_contract_has_full_three_arm_budget": "experiments.phase1.product_l1.sampling.ugi_matched_morphology_terminal_generation.UgiMatchedMorphologyTerminalGenerationError: pin changed: runner",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_schedule_validation_rejects_a_tampered_program_hash": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json'",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_returns_none_for_no_signal_or_safeguard_failure": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_selects_smallest_passing_maximizer": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_promotes_only_when_every_paired_seed_wins": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_rejects_incomplete_matrix_compute_drift_and_oracle_escape": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_finite_library_cannot_claim_beyond_catalog_primary_endpoint": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_frozen_plan_authenticates_and_derives_matched_schedule_budget": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_nonzero_guidance_runner::test_blocked_runner_plan_rederives_all_frozen_assignments": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_pins_all_seed_program_assignments": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_rejects_rehashed_program_tampering": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_branching_audit_is_deterministic_and_detects_tail_spacing_shift": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_held_component::test_postselection_evaluation_recomputes_deterministically": "forge.corpus.ugi_postselection_held_component.UgiPostselectionHeldComponentError: missing input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "tests.test_ugi_postselection_provenance::test_frozen_config_hashes_match_every_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_provenance::test_full_frozen_audit_matches_expected_counts_and_is_byte_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_potency_promotion_failure_audit::test_frozen_potency_failure_is_attributed_without_promoting_tilt": "experiments.archive.phase1.potency_audits.ugi_potency_promotion_failure_audit.PotencyPromotionFailureAuditError: invalid input JSON: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "tests.test_ugi_production_generator_manifest::test_production_generator_manifest_authenticates_all_pinned_artifacts": "AssertionError: results/phase1/ugi_program_prior_v4_selection_samples_1024.json\nassert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v4_selection_samples_1024.json').is_file",
+      "tests.test_ugi_production_generator_manifest::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json'",
+      "tests.test_ugi_production_generator_manifest::test_v3_production_generator_manifest_freezes_refit_selection": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v3.json'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration changed]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'declaration changed'\n  Actual message: 'binary_utility_source hash changed'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_pins_one_nonzero_synthesis_only_assignment": "experiments.phase1.synthesis_guidance.guidance.ugi_production_synthesis_guidance_seam_v4.UgiProductionSynthesisGuidanceSeamV4Error: binary_utility_source hash changed",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_derives_production_context_and_exact_internal_roles": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_rejects_wrong_l1_identity_exact_expiry_and_mutated_graph_support": "AssertionError: Regex pattern did not match.\n  Expected regex: 'context or internal-role qualification failed'\n  Actual message: 'cumulative production Ugi source failed authentication'",
+      "tests.test_ugi_production_terminal_route_evaluator::test_runtime_budget_clone_context_candidate_and_checkpoint_fail_closed": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_terminal_aware_factory_uses_composer_bound_cache_and_external_assessment": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[program_draw]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact program_draw SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_config]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_config SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_result]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_result SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_real_frozen_config_builds_only_the_typed_deterministic_schedule": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_route_reservation_is_derived_from_typed_context_and_scaled_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_terminal_decoder_identity_matches_selected_generator_lane_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_seam_v3::test_v3_seam_config_pins_complete_adapter_and_audit_chain": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_seam_v3.UgiProductionZeroGuidanceSeamV3Error: grouped_schedule hash changed",
+      "tests.test_ugi_program_prior_all_fold::test_all_fold_prior_strictly_extends_development_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v2.json'",
+      "tests.test_ugi_promoted_morphology_proposal::test_promoted_proposal_preserves_complete_support": "experiments.phase1.synthesis_guidance.guidance.ugi_promoted_morphology_proposal.UgiPromotedMorphologyProposalError: pin changed: baseline_full_ledger",
+      "tests.test_ugi_proposal_augmented_route_readiness::test_frozen_proposal_augmented_readiness_is_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_arm_label_cannot_change_zero_guidance_terminal_or_trace_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_generator_support_context_must_match_schedule_checkpoint": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_malformed_offspring_word_is_not_repaired_from_program_or_product": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_reconstruction_valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_smiles_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[offspring_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[program]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[smiles]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_component_identity_is_not_recovered_again_when_missing": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_record_is_a_copy_not_a_mutable_view_of_completion_row": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_real_frozen_sample_preserves_every_native_eligibility_field_exactly": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_schedule_must_bind_exact_native_program_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_route_completion_utility::test_censored_product_retains_none_and_receives_no_bonus": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_nonexact_l1_cannot_receive_positive_bonus_or_evidence_upgrade": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_v6_utility_census_and_sparse_signal_are_frozen": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy": "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.UgiSelectedRestartableGeneratorError: missing v2 production generator manifest: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_restartable_final_matches_direct_independent_stream_callback": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_fail_semantically_even_under_rehashed_payload": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_require_complete_canonical_coverage": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_frozen_v2_sources_remain_byte_identical": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/product/ugi_selected_restartable_generator_v2.py'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_independently_nonexact_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_invalid_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_invalid_and_nonexact_rows_are_sealed_without_route_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_program_decoder_requires_and_recovers_exact_canonical_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_l3_statement_is_frozen_assessment_only": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_requalifies_only_zero_guidance_prerequisites_against_v6": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_synthesis_guidance_failure_audit::test_frozen_failure_audit_rejects_synthesis_tilt": "experiments.archive.phase1.synthesis_value_audits.ugi_synthesis_guidance_failure_audit.UgiSynthesisGuidanceFailureAuditError: input changed: guidance_result",
+      "tests.test_ugi_zero_guidance_typed_audit::test_existing_zero_seam_is_partitioned_without_false_censors": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'",
+      "tests.test_ugi_zero_guidance_typed_audit::test_missing_support_record_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'"
+    }
+  },
+  "full_run_scope": "Completed after all production and test changes in this increment. The later multiplicity probe and this recount are separate diagnostics.",
+  "full_snapshot_unchanged": {
+    "Makefile": true,
+    "experiments/phase1/multireaction/compose_lipid_scaffold_event.py": true,
+    "forge/assembly/precursor_scaffolds.py": true,
+    "forge/corpus/compose_lipid_scaffold_event.py": true,
+    "pyproject.toml": true,
+    "tests/test_compose_lipid_scaffold_event.py": true,
+    "tests/test_precursor_scaffolds.py": true,
+    "uv.lock": true
+  },
+  "inputs": {
+    "Makefile": {
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    "configs/multireaction/compose_lipid_v8_reductive_program_v1.json": {
+      "path": "configs/multireaction/compose_lipid_v8_reductive_program_v1.json",
+      "sha256": "2cf215ceb4eaf4febaf24cf202f4eb7c6f41f412883062ee58209aff705c4e1e"
+    },
+    "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "data/vendor/qualified_reductive_source_program_v1.json": {
+      "path": "data/vendor/qualified_reductive_source_program_v1.json",
+      "sha256": "1ea04fc84a11f47482ce94eb3312e4b4de09ecd280e1e9ec871fa44d86954e81"
+    },
+    "experiments/phase1/multireaction/compose_lipid_scaffold_event.py": {
+      "path": "experiments/phase1/multireaction/compose_lipid_scaffold_event.py",
+      "sha256": "6fa9741d4241d8d279da0e039eca0f7a7262f35eb42faba8f7b48f90f824f5aa"
+    },
+    "forge/assembly/api.py": {
+      "path": "forge/assembly/api.py",
+      "sha256": "bb77b94c91ee0bbba62ff9a83a1d3d31a4d280bf13b8a508537817b19d7efa60"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/precursor_scaffolds.py": {
+      "path": "forge/assembly/precursor_scaffolds.py",
+      "sha256": "35d75eac9d66447b4535b747742d454153b081d49903ab91c6fe56c3bf3f18c7"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/repeated_inverse.py": {
+      "path": "forge/assembly/repeated_inverse.py",
+      "sha256": "fc505b8bd5ce10ead65c7309e9bc3b3120932894c4e7b3f44cec5ff254ba1054"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_scaffold_event.py": {
+      "path": "forge/corpus/compose_lipid_scaffold_event.py",
+      "sha256": "cae3a299902c288defcc82584b7c28566fd6d738ade8e1728b286452c9907cda"
+    },
+    "forge/corpus/compose_lipid_source_event.py": {
+      "path": "forge/corpus/compose_lipid_source_event.py",
+      "sha256": "37984fe16ddca6bba0445b15d9c289fe9c58ef4274c81ddd26ec0d3e62367e9e"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    },
+    "pyproject.toml": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "results/phase1/compose_lipid_v8_a3_validation_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_validation_v1/result.json",
+      "sha256": "88a386b95c5ee9ce67c7251b1001b8c6d344b8a085b588c721c99d7c2036f1b1"
+    },
+    "results/phase1/compose_lipid_v8_michael_validation_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_michael_validation_v1/result.json",
+      "sha256": "bbba291412b1edb7fb518b578ac129b632dcf2400b14476561aedecabb25e27f"
+    },
+    "results/phase1/compose_lipid_v8_product_protection_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "results/phase1/compose_lipid_v8_reductive_program_v1/programs.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_reductive_program_v1/programs.jsonl.gz",
+      "sha256": "d95074273d3e55f754188fc0df3f4baf2b9511cec72bd92245d6b9278ef36605"
+    },
+    "results/phase1/compose_lipid_v8_reductive_program_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_program_v1/result.json",
+      "sha256": "91bf8f3d068d86a70c1f25e179f539bb9035ab2636c31a05b3701d1bb9d3dfeb"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/adjudication.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/adjudication.json",
+      "sha256": "d43ebede7ae3a5364918eb4f2460992ac10184118040e9384ae046f397268869"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/controls.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/controls.json",
+      "sha256": "46f6c2b8b0ebf9d8374c912557f6fae3e5e9e48f3dfca6ddd3e650ee4b304cd5"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-article.html",
+      "sha256": "cb56040d438e8f9a5599213945f5e15a47f74407c8686efe7459b00b427e23f5"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-si.pdf",
+      "sha256": "febe59fae4f5d6bbd11ed754785c1618cc38171b9ec53d14d0956c56b758b220"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/scaffolds.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/scaffolds.json",
+      "sha256": "a423d8da03b31eb4020b1a78081e9b7a23ced3fa4d43344686c8ad8faa2519b2"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/xue-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-article.html",
+      "sha256": "2af22147eb934f7ce1d338be6f41baff15b9f03dfa07f1834dda5ba7afa390f6"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/xue-fig1.acquisition.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-fig1.acquisition.json",
+      "sha256": "35ce9efe38744d616ec6f124da352cfbd307f52d6c170405fffc16047e528dd8"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/xue-fig1.jpg": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-fig1.jpg",
+      "sha256": "cd83eff8ee3ba823a9bece0d47b25e203ddf6c34efde7f954b3c556ded981b35"
+    },
+    "results/phase1/compose_lipid_v8_reductive_source_v1/xue-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-si.pdf",
+      "sha256": "7f5b1c6413e4db3b09cb86296139ba76848b06de96b7165942643233ad6a3e2c"
+    },
+    "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity_probe.py": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity_probe.py",
+      "sha256": "4f8f2cb22917b194b6e0de6eda595c023a55940f92511a780846f61b468f7616"
+    },
+    "results/phase1/compose_lipid_v8_reductive_validation_v1/summarize.py": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/summarize.py",
+      "sha256": "ef570d0f2c018f164cd5eeee9efbea6d1c02f944c97d1e910006bfc42713daa0"
+    },
+    "tests/test_a3_source_boundary.py": {
+      "path": "tests/test_a3_source_boundary.py",
+      "sha256": "d7e9be0bb88b045efd887240f74a29f89e744fa25e6164b559de60c935dcf5dd"
+    },
+    "tests/test_compose_lipid.py": {
+      "path": "tests/test_compose_lipid.py",
+      "sha256": "4d032a3e7feb168ed1875a950ae42ad90ad6db4db2c9c4d9c4d590a0a2a29286"
+    },
+    "tests/test_compose_lipid_components.py": {
+      "path": "tests/test_compose_lipid_components.py",
+      "sha256": "2adbf1d6822aa94b39cb68596bcde7a7339f5be883c30b9befc9a32bcc31a9cc"
+    },
+    "tests/test_compose_lipid_pretraining.py": {
+      "path": "tests/test_compose_lipid_pretraining.py",
+      "sha256": "ab43a76b57e3198065885735044343f6a017fdc1dfafd8684c0520b5c8220b00"
+    },
+    "tests/test_compose_lipid_protection.py": {
+      "path": "tests/test_compose_lipid_protection.py",
+      "sha256": "e24531e619e4b99387a5466a58441b9dff26b46813c0612e81d741c97dc45189"
+    },
+    "tests/test_compose_lipid_repeated_inverse.py": {
+      "path": "tests/test_compose_lipid_repeated_inverse.py",
+      "sha256": "7c655377be7100520e61077182dc837bb073738a1a947cb62451fbfc56c2661c"
+    },
+    "tests/test_compose_lipid_repeated_source.py": {
+      "path": "tests/test_compose_lipid_repeated_source.py",
+      "sha256": "0d6aa9d16e55eb8972768931242c11fece338fac080ff2f8072296d9d4d17779"
+    },
+    "tests/test_compose_lipid_representation.py": {
+      "path": "tests/test_compose_lipid_representation.py",
+      "sha256": "eb00c7a06abf0cf747c2ea88cf70ba889cf0a7a04135b92e7bcae82c6ee4b6ca"
+    },
+    "tests/test_compose_lipid_scaffold_event.py": {
+      "path": "tests/test_compose_lipid_scaffold_event.py",
+      "sha256": "06269a0555eaa41ae0140e261159339d55123ffeb0c0ad539d81dde16ddb1611"
+    },
+    "tests/test_compose_lipid_source_event.py": {
+      "path": "tests/test_compose_lipid_source_event.py",
+      "sha256": "415153989ede6e3827c3fa5d0137a2439063fd237a721e17f9e10ea51b56c839"
+    },
+    "tests/test_compose_lipid_source_program.py": {
+      "path": "tests/test_compose_lipid_source_program.py",
+      "sha256": "f4eb0f220cfe0a33afb67bf3b2911935134253897ed123902bf04084cf4fe550"
+    },
+    "tests/test_pinned_sources_are_tracked.py": {
+      "path": "tests/test_pinned_sources_are_tracked.py",
+      "sha256": "3a82c64d967d5f7b532506025c4e041b807f62e1d7bb63cac8f3df7e5db72c0b"
+    },
+    "tests/test_precursor_scaffolds.py": {
+      "path": "tests/test_precursor_scaffolds.py",
+      "sha256": "4da15125a0362bdac449872c20389063c48042a4428ba9d4d703adadb0d6e940"
+    },
+    "tests/test_repeated_components.py": {
+      "path": "tests/test_repeated_components.py",
+      "sha256": "ae66e9398aa474ef29cc5a4711e80b0e53d32ae272433cb923219a13052508c3"
+    },
+    "tests/test_repeated_inverse.py": {
+      "path": "tests/test_repeated_inverse.py",
+      "sha256": "6e0254a647ae347fb5592340cab6b20496282726b1d16a740a9d8404674d4262"
+    },
+    "tests/test_source_event.py": {
+      "path": "tests/test_source_event.py",
+      "sha256": "8466340d6abdcf7acb4b9a26b46101096f9e4f020abaf30d388a89da99587654"
+    },
+    "uv.lock": {
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  },
+  "latest_full_suite_reference": {
+    "counts": {
+      "errors": 21,
+      "failures": 131,
+      "passed": 2846,
+      "skipped_or_xfail": 92,
+      "tests": 3090
+    },
+    "log": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-tests.log.gz",
+      "sha256": "9f1e78b9a4b96be063a51613f7158db0b1fd0a13255fbb5e2832399838d7735e"
+    },
+    "receipt": "this_receipt.full",
+    "snapshot": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-test-source-snapshot.json",
+      "sha256": "3d885d4cb2006e38ca931181ed200c0757969bf63f35e63901c8b8ab3772b51f"
+    },
+    "xml": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/full-tests.xml.gz",
+      "sha256": "2181e490b56e53ce3d34a016c3ce5a134cc810791ea9e9f8300ed7f4ad4750ca"
+    }
+  },
+  "multiplicity_probe": {
+    "candidate_replay_counts": {
+      "balanced": 153,
+      "candidates": 153,
+      "complete_search": 153,
+      "computed_consistency_pass": 0,
+      "forward_product_count_distribution": {
+        "2": 153
+      },
+      "target_in_forward_products": 153
+    },
+    "inferred_heads_by_source_code": {
+      "H1": [
+        "CN(CCN)CCN"
+      ],
+      "H11": [
+        "NCCCN"
+      ],
+      "H2": [
+        "CN(CCCN)CCCN"
+      ],
+      "H3": [
+        "NCCN1CCN(CCN)CC1"
+      ]
+    },
+    "receipt": {
+      "path": "results/phase1/compose_lipid_v8_reductive_validation_v1/multiplicity-probe.json",
+      "sha256": "be73c2eca2c4decde43907a99069e8e883baa6fe128df19596e623696aa0bec5"
+    },
+    "rows": 153,
+    "rows_by_source_head_code": {
+      "H1": 44,
+      "H11": 50,
+      "H2": 35,
+      "H3": 24
+    }
+  },
+  "new_test_count": 26,
+  "new_test_count_in_full_run": 26,
+  "nonclaims": [
+    "Source-scaffold consistency is assessed on the enforced preparation population, not all provider TRAIN rows.",
+    "Complete coupled aldehydes retain the source core and identical arms; scaffold checks are not experimental bank membership.",
+    "Primary controls and adversarial tests do not calibrate corpus-wide chemical precision or experimental selectivity.",
+    "The two-event diagnostic is outside the one-event key and preserves every competing forward product.",
+    "No L2 route, global precursor holdout or complete 23-family training-readiness claim is made.",
+    "The repository-wide suite remains failing; no historical checks were skipped or relaxed."
+  ],
+  "phase1_definition_of_done_met": false,
+  "program_summary": {
+    "by_family": {
+      "aryl_reductive_amination": {
+        "by_computed_architecture": {
+          "xue_a2_aryl_core": 2038,
+          "xue_a3_aryl_core": 2520
+        },
+        "by_status": {
+          "computed_consistent": 4558,
+          "excluded_forward_or_stoichiometry": 153,
+          "excluded_missing_component_labels": 13
+        },
+        "component_label_conflicts": 153,
+        "computed_consistency_pass": 4558,
+        "consistent_with_known_protected_precursor": 2278,
+        "eligible_after_known_exclusions": 2280,
+        "rows": 4724,
+        "training_admitted": 0
+      },
+      "reductive_amination": {
+        "by_computed_architecture": {
+          "jiang_nebulized_ester_aldehyde": 5800
+        },
+        "by_status": {
+          "computed_consistent": 5800,
+          "excluded_missing_component_labels": 10
+        },
+        "component_label_conflicts": 0,
+        "computed_consistency_pass": 5800,
+        "consistent_with_known_protected_precursor": 1987,
+        "eligible_after_known_exclusions": 3813,
+        "rows": 5810,
+        "training_admitted": 0
+      }
+    },
+    "precision_scope": "Primary controls and adversarial checks validate source-scaffold transform consistency, not corpus-wide chemical precision, experimental source-bank membership or selectivity.",
+    "remaining_holds": [
+      "global_precursor_protection_incomplete",
+      "precursor_holdouts_unqualified",
+      "remaining_family_programs_unqualified",
+      "final_balanced_train_dataset_unbuilt",
+      "repository_full_tests_fail"
+    ],
+    "training_admitted": 0,
+    "training_ready": false
+  },
+  "random_sampling_used": false,
+  "ruff_pass": true,
+  "schema_version": "forge.compose_lipid_reductive_validation.v1",
+  "status": "source_scaffold_programs_replayed_training_unqualified",
+  "training_calls": 0,
+  "training_ready": false,
+  "training_rows_admitted": 0,
+  "vendor_assets_verified": 30
+}

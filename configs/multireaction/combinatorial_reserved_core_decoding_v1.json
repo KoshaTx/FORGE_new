@@ -1,0 +1,111 @@
+{
+  "acceptance": "Report all attempts and all eight existing per-family preservation metrics. Any validity, reconstruction, diversity or novelty loss prevents replacing the existing pipeline. Paired exact improvement is mechanism evidence only; compare against the existing pipeline separately.",
+  "alternative_explanation": "Loss of precursor repetition, connectivity or exterior chemistry could dominate even with a correct local core.",
+  "cpu_threads": 2,
+  "inputs": {
+    "baseline_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "completed_result": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "component_partitions": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "count_layout_result": {
+      "path": "results/phase1/combinatorial_count_layout_generation_v1/result.json",
+      "sha256": "28c23a451e80652b039aa5655cc4d7e13410105931b368c808e7e3fc8affa59c"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    }
+  },
+  "interpretation": "Paired replay of the ordered core experiment at identical layouts and model scores. The reservation correction is the only added decoder step. All eight per-family preservation metrics remain required.",
+  "policy": {
+    "all_attempts_retained": true,
+    "automatic_promotion": false,
+    "core_draws_per_layout": 1,
+    "core_source": "weighted_all_TRAIN_registry_replayed_semantics_core_only",
+    "gate_changes": false,
+    "heldout_use": false,
+    "immutable_edge_reservation": "fixed_tree_and_closure_before_variable_parents",
+    "layout_order": "weighted_TRAIN_core_only_traversal_shared_by_both_arms",
+    "pairing": "one_neural_trajectory_and_identical_terminal_scores",
+    "remote_compute": false,
+    "retry_unrepresentable_core": false,
+    "scope": "terminal_constraint_diagnostic",
+    "source_precursor_interiors_used": false,
+    "source_product_layouts_used": false,
+    "training_calls": 0
+  },
+  "question": "Does reserving fixed-ring valence before variable parent choices remove the acetal failures while retaining every unchanged atom, bond, graph and exact-program gate?",
+  "sampling": {
+    "attempts_per_family": 64,
+    "batch_size": 16,
+    "core_seed": 2026091702,
+    "flow_seed": 2026091703,
+    "flow_steps": 32,
+    "layout_seed": 2026091603,
+    "order_seed": 2026091704
+  },
+  "schema_version": "forge.combinatorial_reserved_core_decoding.v1_config",
+  "source_pins": [
+    {
+      "path": "forge/model/combinatorial_layout_prior.py",
+      "sha256": "dd360c8133ffa5e249c65d58f78f8ae777fc5899e759fb64c067dfe987e0d4a9"
+    },
+    {
+      "path": "forge/model/synthesis_program_layout.py",
+      "sha256": "05ac21ca8aacaeb353a8ccc8ef7b9f909d5bf030e329cb97cffb96fc0fe3fe39"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/generated_program_layout.py",
+      "sha256": "812f1aa3573ca1a470d23d1241aeefefa392a094b908e3ea75948f84aed3d8be"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_count_layout_generation.py",
+      "sha256": "44a10e27f55601925294099d1e625ceff4b2f1c9639b353d1b35e03ef356d686"
+    },
+    {
+      "path": "forge/model/combinatorial_core_scaffold.py",
+      "sha256": "3c0ff91483ce25550780745607415df220ce0072b4c9ea2a1bea7811db6ebfb4"
+    },
+    {
+      "path": "forge/model/paired_core_decoding.py",
+      "sha256": "b286235da29322ceb443bf22d38a768ea5ae14a9558235cc42844e6decdae7bf"
+    },
+    {
+      "path": "forge/model/combinatorial_core_order.py",
+      "sha256": "10398e0541e89960ef9396101675b5684e91b5e35a622bf3cff1c26afe44ca95"
+    },
+    {
+      "path": "forge/model/fixed_closure_decoding.py",
+      "sha256": "415b4f6924d47743671ab86bc5f8cfbf185c029d226e31d0b688334d8ebed803"
+    },
+    {
+      "path": "forge/model/paired_reserved_core_decoding.py",
+      "sha256": "9837a3e2c953bbcfe0fcae175d23581389fca3f546db3ba677866fa447790302"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_reserved_core_decoding.py",
+      "sha256": "eb8b88b8d7bea6aa1cc1cc5c11f029c2b5e1f229f3240be1d95448c4ade21011"
+    }
+  ],
+  "stopping_rule": "Exactly 64 layouts per family, one weighted core alternative per layout, one neural trajectory per layout. No redraw for unsupported serialization, seed search, extra training or outcome-dependent budget extension."
+}

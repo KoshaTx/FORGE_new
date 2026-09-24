@@ -1,0 +1,238 @@
+{
+  "artifacts": {
+    "atom_vocabulary.json": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/atom_vocabulary.json",
+      "sha256": "46faf2f2ecc6e721e600f4ef0879020ca6d162ecd366e2bb0ac666aa491b96ac"
+    },
+    "failures.json": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/failures.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  },
+  "by_family": {
+    "a3_amine_aldehyde_alkyne": {
+      "bond_support_covered": 5556,
+      "exact_roundtrips": 5556,
+      "rows": 5556,
+      "valence_covered": 5556
+    },
+    "acid_epoxide_diester_multistep": {
+      "bond_support_covered": 8318,
+      "exact_roundtrips": 8318,
+      "rows": 8318,
+      "valence_covered": 8318
+    },
+    "aema_aza_thiol_addition": {
+      "bond_support_covered": 3314,
+      "exact_roundtrips": 3314,
+      "rows": 3314,
+      "valence_covered": 3314
+    },
+    "aldehyde_ugi3": {
+      "bond_support_covered": 2967,
+      "exact_roundtrips": 2967,
+      "rows": 2967,
+      "valence_covered": 2967
+    },
+    "aldehyde_ugi4": {
+      "bond_support_covered": 8474,
+      "exact_roundtrips": 8474,
+      "rows": 8474,
+      "valence_covered": 8474
+    },
+    "alpha_isocyanoester_dihydroimidazole": {
+      "bond_support_covered": 8287,
+      "exact_roundtrips": 8287,
+      "rows": 8287,
+      "valence_covered": 8287
+    },
+    "amine_alkylation": {
+      "bond_support_covered": 7821,
+      "exact_roundtrips": 7821,
+      "rows": 7821,
+      "valence_covered": 7821
+    },
+    "amine_epoxide_opening": {
+      "bond_support_covered": 6296,
+      "exact_roundtrips": 6296,
+      "rows": 6296,
+      "valence_covered": 6296
+    },
+    "aryl_reductive_amination": {
+      "bond_support_covered": 4736,
+      "exact_roundtrips": 4736,
+      "rows": 4736,
+      "valence_covered": 4736
+    },
+    "aza_michael_acrylamide": {
+      "bond_support_covered": 4879,
+      "exact_roundtrips": 4879,
+      "rows": 4879,
+      "valence_covered": 4879
+    },
+    "aza_michael_acrylate": {
+      "bond_support_covered": 5400,
+      "exact_roundtrips": 5400,
+      "rows": 5400,
+      "valence_covered": 5400
+    },
+    "disulfide_michael": {
+      "bond_support_covered": 7674,
+      "exact_roundtrips": 7674,
+      "rows": 7674,
+      "valence_covered": 7674
+    },
+    "epoxide_opening_o_acylation": {
+      "bond_support_covered": 5048,
+      "exact_roundtrips": 5048,
+      "rows": 5048,
+      "valence_covered": 5048
+    },
+    "iphos_ring_opening": {
+      "bond_support_covered": 6988,
+      "exact_roundtrips": 6988,
+      "rows": 6988,
+      "valence_covered": 6988
+    },
+    "ketone_isocyanide_amide": {
+      "bond_support_covered": 9000,
+      "exact_roundtrips": 9000,
+      "rows": 9000,
+      "valence_covered": 9000
+    },
+    "ketone_ugi4": {
+      "bond_support_covered": 5877,
+      "exact_roundtrips": 5877,
+      "rows": 5877,
+      "valence_covered": 5877
+    },
+    "maleate_addition": {
+      "bond_support_covered": 5426,
+      "exact_roundtrips": 5426,
+      "rows": 5426,
+      "valence_covered": 5426
+    },
+    "o_esterification": {
+      "bond_support_covered": 4771,
+      "exact_roundtrips": 4771,
+      "rows": 4771,
+      "valence_covered": 4771
+    },
+    "passerini_3cr": {
+      "bond_support_covered": 7007,
+      "exact_roundtrips": 7007,
+      "rows": 7007,
+      "valence_covered": 7007
+    },
+    "preassembled_thiol_yne_tail_amidation": {
+      "bond_support_covered": 10534,
+      "exact_roundtrips": 10534,
+      "rows": 10534,
+      "valence_covered": 10534
+    },
+    "reductive_amination": {
+      "bond_support_covered": 5810,
+      "exact_roundtrips": 5810,
+      "rows": 5810,
+      "valence_covered": 5810
+    },
+    "thiolactone_aminolysis_michael": {
+      "bond_support_covered": 9366,
+      "exact_roundtrips": 9366,
+      "rows": 9366,
+      "valence_covered": 9366
+    },
+    "vitamin_b5_multistep": {
+      "bond_support_covered": 6187,
+      "exact_roundtrips": 6187,
+      "rows": 6187,
+      "valence_covered": 6187
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_representation_v1.json",
+    "sha256": "fbfdc418ee83c66a5580f54c9b5c9403b1c46f3b14b7d740b8d7ef8dca21dc5d"
+  },
+  "created_at_utc": "2026-09-18T13:58:34.162423+00:00",
+  "generation_calls": 0,
+  "heldout_graphs_parsed": false,
+  "implementation": {
+    "forge/corpus/compose_lipid_representation.py": {
+      "path": "forge/corpus/compose_lipid_representation.py",
+      "sha256": "28877c26550fde45cb5cac9938d9110bea5d9934f4f63ca15b1c955b935438bd"
+    },
+    "forge/model/defog_feasibility.py": {
+      "path": "forge/model/defog_feasibility.py",
+      "sha256": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0"
+    },
+    "forge/model/qualified_vocabulary.py": {
+      "path": "forge/model/qualified_vocabulary.py",
+      "sha256": "f759aeff8d5d364ac9c8b40e7bd63cc38bef224d3bfbba85be84307b8ebbc334"
+    },
+    "forge/model/sparse_topology_feasibility.py": {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    }
+  },
+  "maximum_observed": {
+    "atoms": 96,
+    "closures": 8
+  },
+  "model_smoke": {
+    "device": "cpu",
+    "finite": true,
+    "output_shapes": {
+      "closure_bonds": [
+        26,
+        8,
+        3
+      ],
+      "closure_left": [
+        26,
+        8,
+        96
+      ],
+      "closure_right": [
+        26,
+        8,
+        96
+      ],
+      "nodes": [
+        26,
+        96,
+        8
+      ],
+      "parent_bonds": [
+        26,
+        96,
+        3
+      ],
+      "parents": [
+        26,
+        96,
+        96
+      ]
+    },
+    "precision": "float32",
+    "records": 26,
+    "seed": 0,
+    "training_steps": 0
+  },
+  "pretraining_audit": {
+    "path": "results/phase1/compose_lipid_v8_pretraining_v1/result.json",
+    "sha256": "d7696020e636fc7d1eea326fe4c19bb6ee56f51f6d1bc6bac7c96151afc96145"
+  },
+  "random_sampling_used": false,
+  "refit_on_final_precursor_protected_train_required": true,
+  "remaining_gates": [
+    "v8_executable_program_registry_not_published_at_named_source_branch",
+    "related_transform_replays_do_not_establish_source_program_equivalence",
+    "precursor_structure_guards_incomplete_for_unreconstructed_programs"
+  ],
+  "schema_version": "forge.compose_lipid_representation.v1",
+  "seed": 0,
+  "status": "representation_pass_training_unqualified",
+  "train_rows": 149736,
+  "training_admitted": false,
+  "training_calls": 0
+}

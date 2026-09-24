@@ -1,0 +1,10 @@
+{
+  "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_compose_lipid_source_program.py tests/test_assembly_families.py tests/test_compose_lipid.py tests/test_compose_lipid_pretraining.py tests/test_compose_lipid_components.py tests/test_compose_lipid_representation.py --junitxml=results/phase1/compose_lipid_v8_passerini_validation_v1/focused-tests.xml",
+  "fresh_replay": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_source_program --config configs/multireaction/compose_lipid_v8_passerini_program_v1.json --output-dir results/phase1/compose_lipid_v8_passerini_replay_v1",
+  "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/forge-v8-passerini-full-tests.xml' uv run make test",
+  "run": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_source_program --config configs/multireaction/compose_lipid_v8_passerini_program_v1.json --output-dir results/phase1/compose_lipid_v8_passerini_program_v1",
+  "summarize": "python3 results/phase1/compose_lipid_v8_passerini_validation_v1/summarize.py",
+  "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run make verify",
+  "verify_program": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_source_program --verify results/phase1/compose_lipid_v8_passerini_program_v1/result.json",
+  "verify_replay": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_source_program --verify results/phase1/compose_lipid_v8_passerini_replay_v1/result.json"
+}

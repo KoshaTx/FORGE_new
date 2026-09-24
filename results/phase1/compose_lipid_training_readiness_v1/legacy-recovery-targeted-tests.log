@@ -1,0 +1,49 @@
+.F.........xFFssssF                                                      [100%]
+=================================== FAILURES ===================================
+______ test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout ______
+tests/test_single_step_proposal_lane_qualification_spec.py:173: in test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout
+    assert path.is_file()
+E   AssertionError: assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json').is_file
+______ test_comparison_rows_fail_semantically_even_under_rehashed_payload ______
+tests/test_ugi_selected_guidance_adapter_v3.py:53: in test_comparison_rows_fail_semantically_even_under_rehashed_payload
+    rows = json.loads(ROWS.read_text())
+                      ^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'
+___________ test_comparison_rows_require_complete_canonical_coverage ___________
+tests/test_ugi_selected_guidance_adapter_v3.py:61: in test_comparison_rows_require_complete_canonical_coverage
+    rows = json.loads(ROWS.read_text())
+                      ^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'
+_________________ test_frozen_v2_sources_remain_byte_identical _________________
+tests/test_ugi_selected_guidance_adapter_v3.py:128: in test_frozen_v2_sources_remain_byte_identical
+    assert adapter_v3._file_sha256(V2_GUIDANCE_SOURCE) == EXPECTED_V2_GUIDANCE_SOURCE_SHA256
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/synthesis_guidance/adapters/selected_v3.py:131: in _file_sha256
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1050: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/product/ugi_selected_guidance_adapter_v2.py'
+=========================== short test summary info ============================
+FAILED tests/test_single_step_proposal_lane_qualification_spec.py::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout
+FAILED tests/test_ugi_selected_guidance_adapter_v3.py::test_comparison_rows_fail_semantically_even_under_rehashed_payload
+FAILED tests/test_ugi_selected_guidance_adapter_v3.py::test_comparison_rows_require_complete_canonical_coverage
+FAILED tests/test_ugi_selected_guidance_adapter_v3.py::test_frozen_v2_sources_remain_byte_identical

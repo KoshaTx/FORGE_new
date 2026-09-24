@@ -1,0 +1,3562 @@
+{
+  "controls": {
+    "a3": {
+      "Han_11(aB)2": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 36,
+              "H": 56,
+              "N": 2,
+              "O": 2,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 36,
+              "H": 56,
+              "N": 2,
+              "O": 2,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CCN(CC)CCN",
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+            ],
+            [
+              2,
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+              "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CCN(CC)CCN"
+            ],
+            [
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+            ],
+            [
+              "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1",
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+            ],
+            [
+              2,
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+              "CCN(CC)CCN"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+            ],
+            [
+              "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+            ],
+            [
+              "CCN(CC)CCN"
+            ]
+          ]
+        }
+      },
+      "Han_31hP-M": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 21,
+              "H": 32,
+              "N": 2,
+              "O": 5,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 21,
+              "H": 32,
+              "N": 2,
+              "O": 5,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CCN(CC)CCNC",
+              "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CCN(CC)CCNC"
+            ],
+            [
+              "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1",
+              "CCN(CC)CCNC"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+            ],
+            [
+              "CCN(CC)CCNC"
+            ]
+          ]
+        }
+      },
+      "a3_unresolved_amine_site": {
+        "kind": "ambiguity_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 7,
+              "H": 16,
+              "N": 2,
+              "O": 1,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 7,
+              "H": 16,
+              "N": 2,
+              "O": 1,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CNCCN",
+              "CC#CCN(C)CCN"
+            ],
+            [
+              1,
+              "CNCCN",
+              "CC#CCNCCNC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CNCCN"
+            ],
+            [
+              "CC#CCN(C)CCN",
+              "CC#CCNCCNC"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CC#CCNCCNC",
+              "CNCCN"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CC#CCNCCNC"
+            ],
+            [
+              "CNCCN"
+            ]
+          ]
+        }
+      },
+      "asymmetric_maleate_thiol_ambiguous_orientation": {
+        "kind": "ambiguity_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 11,
+              "H": 21,
+              "N": 1,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 11,
+              "H": 21,
+              "N": 1,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CN(C)CCS",
+              "CCOC(=O)C(CC(=O)OC)SCCN(C)C"
+            ],
+            [
+              1,
+              "CN(C)CCS",
+              "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(C)CCS"
+            ],
+            [
+              "CCOC(=O)C(CC(=O)OC)SCCN(C)C",
+              "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCOC(=O)CC(SCCN(C)C)C(=O)OC",
+              "CN(C)CCS"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCOC(=O)CC(SCCN(C)C)C(=O)OC"
+            ],
+            [
+              "CN(C)CCS"
+            ]
+          ]
+        }
+      },
+      "maleate_library_49D8": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 24,
+              "H": 47,
+              "N": 1,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 24,
+              "H": 47,
+              "N": 1,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CN(C)CCS",
+              "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(C)CCS"
+            ],
+            [
+              "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC",
+              "CN(C)CCS"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCCCCCCCOC(=O)CC(SCCN(C)C)C(=O)OCCCCCCCC"
+            ],
+            [
+              "CN(C)CCS"
+            ]
+          ]
+        }
+      }
+    },
+    "base": {
+      "aldehyde_ugi3": {
+        "AGILE_H9": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCC=CCCCCCCCCNC(=O)C(CCCOC(=O)CCCCCCC)NN1CCCCC1"
+          ],
+          "inverse_candidate_count": 1,
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 0,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 13,
+                "role": "oxoester_aldehyde_body_tail"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide_tail"
+              }
+            ]
+          ]
+        },
+        "AGILE_R6": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCCCCCCCCC(NCCCN(CC)CC)C(=O)NCCCCCCCCCCC"
+          ],
+          "inverse_candidate_count": 1,
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 8,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 15,
+                "role": "oxoester_aldehyde_body_tail"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide_tail"
+              }
+            ]
+          ]
+        },
+        "Chen_iso_A11B5C1": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)CCC(C)CCCCC)NCCN1CCCC1"
+          ],
+          "inverse_candidate_count": 1,
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 0,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 17,
+                "role": "oxoester_aldehyde_body_tail"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide_tail"
+              }
+            ]
+          ]
+        }
+      },
+      "aldehyde_ugi4": {
+        "Li_119_23": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(C(=O)NC12CC3CC(CC(C3)C1)C2)N(CCCN(C)C)C(=O)CCCCCCCC=CCCCCCCCC"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 6,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 25,
+                "role": "oxoester_aldehyde_body_tail"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide_tail"
+              },
+              {
+                "atom_map": 5,
+                "canonical_reactant_atom_index": 17,
+                "role": "carboxylic_acid_tail"
+              }
+            ]
+          ]
+        }
+      },
+      "michael": {
+        "Akinc_1L10": {
+          "kind": "source_controls",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 30,
+                "H": 59,
+                "N": 1,
+                "O": 5,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 30,
+                "H": 59,
+                "N": 1,
+                "O": 5,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "COCCCN",
+                "CCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCOC(=O)CCNCCCOC",
+                "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "COCCCN"
+              ],
+              [
+                "CCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC",
+                "CCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCOC(=O)CCNCCCOC",
+                "COCCCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                "COCCCN"
+              ]
+            ]
+          }
+        },
+        "Akinc_1L12": {
+          "kind": "source_controls",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 34,
+                "H": 67,
+                "N": 1,
+                "O": 5,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 34,
+                "H": 67,
+                "N": 1,
+                "O": 5,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "COCCCN",
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC",
+                "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "COCCCN"
+              ],
+              [
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC",
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC",
+                "COCCCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+              ],
+              [
+                "COCCCN"
+              ]
+            ]
+          }
+        },
+        "Akinc_1N12": {
+          "kind": "source_controls",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 34,
+                "H": 69,
+                "N": 3,
+                "O": 3,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 34,
+                "H": 69,
+                "N": 3,
+                "O": 3,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "COCCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "COCCCN"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC",
+                "COCCCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+              ],
+              [
+                "COCCCN"
+              ]
+            ]
+          }
+        },
+        "Akinc_98N12_5_1_unresolved_without_attachment_sites": {
+          "kind": "ambiguity_controls",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 81,
+                "H": 163,
+                "N": 9,
+                "O": 5,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 81,
+                "H": 163,
+                "N": 9,
+                "O": 5,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": false
+            },
+            "computed_consistency_pass": false,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "NCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+              ],
+              [
+                1,
+                "NCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "NCCNCCNCCN"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                1,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                1,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                2,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                3,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                4,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "NCCNCCNCCN"
+              ],
+              [
+                5,
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+                "NCCNCCNCCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+              ],
+              [
+                "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+                "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+              ],
+              [
+                "NCCNCCNCCN"
+              ]
+            ]
+          }
+        }
+      },
+      "passerini_3cr": {
+        "H1A1B1": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "retained_amine_in_acid_head": true,
+            "source_map_bonds_match": true,
+            "unique_forward_exact": true,
+            "unique_inverse_exact": true
+          },
+          "qualified": true
+        },
+        "H2A4-Ole": {
+          "checks": {
+            "full_element_hydrogen_charge_balance": true,
+            "retained_amine_in_acid_head": true,
+            "source_map_bonds_match": true,
+            "unique_forward_exact": true,
+            "unique_inverse_exact": true
+          },
+          "qualified": true
+        }
+      },
+      "reductive": {
+        "Jiang_IR_117_17": {
+          "family": "reductive_amination",
+          "formula": "C59H110N2O5",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 59,
+                "H": 110,
+                "N": 2,
+                "O": 6,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 59,
+                "H": 110,
+                "N": 2,
+                "O": 6,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "CCCCN(CCCC)CCCN",
+                "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)CNCCCN(CCCC)CCCC"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "CCCCN(CCCC)CCCN"
+              ],
+              [
+                "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)CNCCCN(CCCC)CCCC"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)CNCCCN(CCCC)CCCC",
+                "CCCCN(CCCC)CCCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)CNCCCN(CCCC)CCCC"
+              ],
+              [
+                "CCCCN(CCCC)CCCN"
+              ]
+            ]
+          },
+          "scaffold": {
+            "additional_handle_count_pass": true,
+            "canonical_precursor": "CCCCCC=CCC=CCCCCCCCC(=O)OCCCCCC(O)C(C=O)CCCCOC(=O)CCCCCCCC=CCC=CCCCCC",
+            "complete_precursor_retained": true,
+            "complete_search": true,
+            "computed_scaffold_pass": true,
+            "experimental_source_bank_membership": false,
+            "witnesses": [
+              {
+                "architecture_subfamily": "jiang_nebulized_ester_aldehyde",
+                "checks": {
+                  "arm_aromaticity": true,
+                  "arm_elements": true,
+                  "identical_arms": true,
+                  "one_core_and_all_arms_detached": true
+                },
+                "core_fragments": [
+                  "*OCCCCCC(O)C(C=O)CCCCO*"
+                ],
+                "detached_arm_fragments": [
+                  "*C(=O)CCCCCCCC=CCC=CCCCCC",
+                  "*C(=O)CCCCCCCC=CCC=CCCCCC"
+                ],
+                "scaffold_id": "jiang_aldol_diester"
+              }
+            ]
+          }
+        },
+        "Jiang_IR_19_Pyrazole": {
+          "family": "reductive_amination",
+          "formula": "C55H101N3O5",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 55,
+                "H": 101,
+                "N": 3,
+                "O": 6,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 55,
+                "H": 101,
+                "N": 3,
+                "O": 6,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "CNCCCn1cccn1",
+                "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)CN(C)CCCn1cccn1"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "CNCCCn1cccn1"
+              ],
+              [
+                "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)CN(C)CCCn1cccn1"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)CN(C)CCCn1cccn1",
+                "CNCCCn1cccn1"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(O)C(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)CN(C)CCCn1cccn1"
+              ],
+              [
+                "CNCCCn1cccn1"
+              ]
+            ]
+          },
+          "scaffold": {
+            "additional_handle_count_pass": true,
+            "canonical_precursor": "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(O)C(C=O)CCCCOC(=O)CCCCCCCC=CCCCCCCCC",
+            "complete_precursor_retained": true,
+            "complete_search": true,
+            "computed_scaffold_pass": true,
+            "experimental_source_bank_membership": false,
+            "witnesses": [
+              {
+                "architecture_subfamily": "jiang_nebulized_ester_aldehyde",
+                "checks": {
+                  "arm_aromaticity": true,
+                  "arm_elements": true,
+                  "identical_arms": true,
+                  "one_core_and_all_arms_detached": true
+                },
+                "core_fragments": [
+                  "*OCCCCCC(O)C(C=O)CCCCO*"
+                ],
+                "detached_arm_fragments": [
+                  "*C(=O)CCCCCCCC=CCCCCCCCC",
+                  "*C(=O)CCCCCCCC=CCCCCCCCC"
+                ],
+                "scaffold_id": "jiang_aldol_diester"
+              }
+            ]
+          }
+        },
+        "Xue_5_A2_7b2": {
+          "family": "aryl_reductive_amination",
+          "formula": "C27H46N2O4",
+          "replay": {
+            "balance": {
+              "product_and_byproducts": {
+                "C": 27,
+                "H": 46,
+                "N": 2,
+                "O": 5,
+                "formal_charge": 0
+              },
+              "reactants": {
+                "C": 27,
+                "H": 46,
+                "N": 2,
+                "O": 5,
+                "formal_charge": 0
+              }
+            },
+            "bound_reasons": [],
+            "checks": {
+              "complete_search": true,
+              "declared_event_count_replayed": true,
+              "full_element_hydrogen_charge_balance": true,
+              "unique_declared_side_inverse": true,
+              "unique_forward_exact": true
+            },
+            "computed_consistency_pass": true,
+            "experimental_selectivity_qualified": false,
+            "forward_edges": [
+              [
+                1,
+                "CN(C)CCN",
+                "CCCCC(CC)C(=O)Oc1cc(CNCCN(C)C)cc(OC(=O)C(CC)CCCC)c1"
+              ]
+            ],
+            "forward_layers": [
+              [
+                "CN(C)CCN"
+              ],
+              [
+                "CCCCC(CC)C(=O)Oc1cc(CNCCN(C)C)cc(OC(=O)C(CC)CCCC)c1"
+              ]
+            ],
+            "inverse_scope": "conditioned_on_declared_fixed_side_components",
+            "physical_event_order_qualified": false,
+            "reverse_edges": [
+              [
+                1,
+                "CCCCC(CC)C(=O)Oc1cc(CNCCN(C)C)cc(OC(=O)C(CC)CCCC)c1",
+                "CN(C)CCN"
+              ]
+            ],
+            "reverse_layers": [
+              [
+                "CCCCC(CC)C(=O)Oc1cc(CNCCN(C)C)cc(OC(=O)C(CC)CCCC)c1"
+              ],
+              [
+                "CN(C)CCN"
+              ]
+            ]
+          },
+          "scaffold": {
+            "additional_handle_count_pass": true,
+            "canonical_precursor": "CCCCC(CC)C(=O)Oc1cc(C=O)cc(OC(=O)C(CC)CCCC)c1",
+            "complete_precursor_retained": true,
+            "complete_search": true,
+            "computed_scaffold_pass": true,
+            "experimental_source_bank_membership": false,
+            "witnesses": [
+              {
+                "architecture_subfamily": "xue_a2_aryl_core",
+                "checks": {
+                  "arm_aromaticity": true,
+                  "arm_elements": true,
+                  "identical_arms": true,
+                  "one_core_and_all_arms_detached": true
+                },
+                "core_fragments": [
+                  "*Oc1cc(C=O)cc(O*)c1"
+                ],
+                "detached_arm_fragments": [
+                  "*C(=O)C(CC)CCCC",
+                  "*C(=O)C(CC)CCCC"
+                ],
+                "scaffold_id": "xue_A2"
+              }
+            ]
+          }
+        },
+        "Xue_A3_7b2": {
+          "family": "aryl_reductive_amination",
+          "formula": "C31H48O7",
+          "scaffold": {
+            "additional_handle_count_pass": true,
+            "canonical_precursor": "CCCCC(CC)C(=O)Oc1cc(OC(=O)C(CC)CCCC)c(C=O)c(OC(=O)C(CC)CCCC)c1",
+            "complete_precursor_retained": true,
+            "complete_search": true,
+            "computed_scaffold_pass": true,
+            "experimental_source_bank_membership": false,
+            "witnesses": [
+              {
+                "architecture_subfamily": "xue_a3_aryl_core",
+                "checks": {
+                  "arm_aromaticity": true,
+                  "arm_elements": true,
+                  "identical_arms": true,
+                  "one_core_and_all_arms_detached": true
+                },
+                "core_fragments": [
+                  "*Oc1cc(O*)c(C=O)c(O*)c1"
+                ],
+                "detached_arm_fragments": [
+                  "*C(=O)C(CC)CCCC",
+                  "*C(=O)C(CC)CCCC",
+                  "*C(=O)C(CC)CCCC"
+                ],
+                "scaffold_id": "xue_A3"
+              }
+            ]
+          }
+        }
+      },
+      "thiolactone_aminolysis_michael": {
+        "A4B2C3": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 39,
+              "H": 77,
+              "N": 3,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 39,
+              "H": 77,
+              "N": 3,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_stage_inventories_balance": true,
+            "complete_search": true,
+            "every_stage_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_forward_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O",
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+            ],
+            [
+              2,
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C",
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCSCCC(=O)OCC(CCCC)CCCCCC)C(=O)NCCN(C)C"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+            ],
+            [
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+            ],
+            [
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCSCCC(=O)OCC(CCCC)CCCCCC)C(=O)NCCN(C)C"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "acrylate_tail": "C=CC(=O)OCC(CCCC)CCCCCC",
+                "amine_head": "CN(C)CCN",
+                "thiolactone_region": "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+              }
+            ],
+            "complete_search": true,
+            "states_by_depth": [
+              1,
+              1,
+              1
+            ],
+            "transitions": 2
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "stage_balance_checks": [
+            true,
+            true
+          ],
+          "terminal_constraints": {
+            "acrylate_tail": {
+              "checks": {
+                "aromaticity": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiolactone_region": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_N": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          }
+        },
+        "A4B2C8_CP-LC-0729": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 43,
+              "H": 85,
+              "N": 3,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 43,
+              "H": 85,
+              "N": 3,
+              "O": 4,
+              "S": 1,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_stage_inventories_balance": true,
+            "complete_search": true,
+            "every_stage_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_forward_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O",
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+            ],
+            [
+              2,
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C",
+              "CCCCCCCCC(CCCCCC)COC(=O)CCSCCC(NC(=O)C(CCCCCC)CCCCCCCC)C(=O)NCCN(C)C"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+            ],
+            [
+              "CCCCCCCCC(CCCCCC)C(=O)NC(CCS)C(=O)NCCN(C)C"
+            ],
+            [
+              "CCCCCCCCC(CCCCCC)COC(=O)CCSCCC(NC(=O)C(CCCCCC)CCCCCCCC)C(=O)NCCN(C)C"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "acrylate_tail": "C=CC(=O)OCC(CCCCCC)CCCCCCCC",
+                "amine_head": "CN(C)CCN",
+                "thiolactone_region": "CCCCCCCCC(CCCCCC)C(=O)NC1CCSC1=O"
+              }
+            ],
+            "complete_search": true,
+            "states_by_depth": [
+              1,
+              1,
+              1
+            ],
+            "transitions": 2
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "stage_balance_checks": [
+            true,
+            true
+          ],
+          "terminal_constraints": {
+            "acrylate_tail": {
+              "checks": {
+                "aromaticity": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiolactone_region": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_N": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          }
+        }
+      }
+    },
+    "han": {
+      "1-10-8": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 41,
+              "Cl": 2,
+              "H": 84,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 41,
+              "Cl": 2,
+              "H": 84,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_event_inventories_balance": true,
+            "complete_search": true,
+            "every_declared_event_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_completed_source_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "declared_quantities": {
+            "acyl_tail": 2,
+            "amine_head": 1,
+            "epoxide_tail": 2
+          },
+          "event_balance_checks": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "event_searches": [
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CN(C)CCCN"
+                ],
+                [
+                  "CCCCCCCCC(O)CNCCCN(C)C"
+                ],
+                [
+                  "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC"
+                ]
+              ],
+              "stage": 1
+            },
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC"
+                ],
+                [
+                  "CCCCCCCCC(O)CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC"
+                ],
+                [
+                  "CCCCCCCCC(CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC)OC(=O)CCCCCCC"
+                ]
+              ],
+              "stage": 2
+            }
+          ],
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              1,
+              "CN(C)CCCN",
+              "CCCCCCCCC(O)CNCCCN(C)C"
+            ],
+            [
+              1,
+              2,
+              "CCCCCCCCC(O)CNCCCN(C)C",
+              "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC"
+            ],
+            [
+              2,
+              1,
+              "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC",
+              "CCCCCCCCC(O)CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC"
+            ],
+            [
+              2,
+              2,
+              "CCCCCCCCC(O)CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC",
+              "CCCCCCCCC(CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC)OC(=O)CCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(C)CCCN"
+            ],
+            [
+              "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC"
+            ],
+            [
+              "CCCCCCCCC(CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC)OC(=O)CCCCCCC"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "acyl_tail": "CCCCCCCC(=O)Cl",
+                "amine_head": "CN(C)CCCN",
+                "epoxide_tail": "CCCCCCCCC1CO1"
+              }
+            ],
+            "complete_search": true,
+            "inverse_scope": "all_complete_tuples_with_one_repeated_identity_per_declared_stage_role",
+            "stage_searches": [
+              {
+                "product": "CCCCCCCCC(CN(CCCN(C)C)CC(CCCCCCCC)OC(=O)CCCCCCC)OC(=O)CCCCCCC",
+                "search": {
+                  "bound_reasons": [],
+                  "candidate_components": [
+                    {
+                      "acyl_tail": "CCCCCCCC(=O)Cl",
+                      "aminoalcohol_head": "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC"
+                    }
+                  ],
+                  "complete_search": true,
+                  "declared_events": 2,
+                  "experimental_selectivity_qualified": false,
+                  "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+                  "physical_event_order_qualified": false,
+                  "states_by_depth": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "transitions": 2
+                },
+                "stage": 2
+              },
+              {
+                "product": "CCCCCCCCC(O)CN(CCCN(C)C)CC(O)CCCCCCCC",
+                "search": {
+                  "bound_reasons": [],
+                  "candidate_components": [
+                    {
+                      "amine_head": "CN(C)CCCN",
+                      "epoxide_tail": "CCCCCCCCC1CO1"
+                    }
+                  ],
+                  "complete_search": true,
+                  "declared_events": 2,
+                  "experimental_selectivity_qualified": false,
+                  "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+                  "physical_event_order_qualified": false,
+                  "states_by_depth": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "transitions": 2
+                },
+                "stage": 1
+              }
+            ],
+            "states_by_stage": [
+              1,
+              1,
+              1
+            ],
+            "total_event_states": 5,
+            "transitions": 4
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "terminal_constraints": {
+            "acyl_tail": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_Cl": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "epoxide_tail": {
+              "checks": {
+                "aromaticity": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          },
+          "within_stage_event_order_qualified": false
+        }
+      },
+      "1-6-6": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 29,
+              "Cl": 2,
+              "H": 60,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 29,
+              "Cl": 2,
+              "H": 60,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_event_inventories_balance": true,
+            "complete_search": true,
+            "every_declared_event_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_completed_source_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "declared_quantities": {
+            "acyl_tail": 2,
+            "amine_head": 1,
+            "epoxide_tail": 2
+          },
+          "event_balance_checks": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "event_searches": [
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CN(C)CCCN"
+                ],
+                [
+                  "CCCCC(O)CNCCCN(C)C"
+                ],
+                [
+                  "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC"
+                ]
+              ],
+              "stage": 1
+            },
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC"
+                ],
+                [
+                  "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(O)CCCC"
+                ],
+                [
+                  "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(CCCC)OC(=O)CCCCC"
+                ]
+              ],
+              "stage": 2
+            }
+          ],
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              1,
+              "CN(C)CCCN",
+              "CCCCC(O)CNCCCN(C)C"
+            ],
+            [
+              1,
+              2,
+              "CCCCC(O)CNCCCN(C)C",
+              "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC"
+            ],
+            [
+              2,
+              1,
+              "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC",
+              "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(O)CCCC"
+            ],
+            [
+              2,
+              2,
+              "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(O)CCCC",
+              "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(CCCC)OC(=O)CCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(C)CCCN"
+            ],
+            [
+              "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC"
+            ],
+            [
+              "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(CCCC)OC(=O)CCCCC"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "acyl_tail": "CCCCCC(=O)Cl",
+                "amine_head": "CN(C)CCCN",
+                "epoxide_tail": "CCCCC1CO1"
+              }
+            ],
+            "complete_search": true,
+            "inverse_scope": "all_complete_tuples_with_one_repeated_identity_per_declared_stage_role",
+            "stage_searches": [
+              {
+                "product": "CCCCCC(=O)OC(CCCC)CN(CCCN(C)C)CC(CCCC)OC(=O)CCCCC",
+                "search": {
+                  "bound_reasons": [],
+                  "candidate_components": [
+                    {
+                      "acyl_tail": "CCCCCC(=O)Cl",
+                      "aminoalcohol_head": "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC"
+                    }
+                  ],
+                  "complete_search": true,
+                  "declared_events": 2,
+                  "experimental_selectivity_qualified": false,
+                  "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+                  "physical_event_order_qualified": false,
+                  "states_by_depth": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "transitions": 2
+                },
+                "stage": 2
+              },
+              {
+                "product": "CCCCC(O)CN(CCCN(C)C)CC(O)CCCC",
+                "search": {
+                  "bound_reasons": [],
+                  "candidate_components": [
+                    {
+                      "amine_head": "CN(C)CCCN",
+                      "epoxide_tail": "CCCCC1CO1"
+                    }
+                  ],
+                  "complete_search": true,
+                  "declared_events": 2,
+                  "experimental_selectivity_qualified": false,
+                  "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+                  "physical_event_order_qualified": false,
+                  "states_by_depth": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "transitions": 2
+                },
+                "stage": 1
+              }
+            ],
+            "states_by_stage": [
+              1,
+              1,
+              1
+            ],
+            "total_event_states": 5,
+            "transitions": 4
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "terminal_constraints": {
+            "acyl_tail": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_Cl": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "epoxide_tail": {
+              "checks": {
+                "aromaticity": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          },
+          "within_stage_event_order_qualified": false
+        }
+      },
+      "unprotected_head_NH_competitor": {
+        "kind": "regression_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 27,
+              "Cl": 2,
+              "H": 56,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 27,
+              "Cl": 2,
+              "H": 56,
+              "N": 2,
+              "O": 4,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_event_inventories_balance": true,
+            "complete_search": true,
+            "every_declared_event_replayed": false,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": false,
+            "unique_each_completed_source_stage": false,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "declared_quantities": {
+            "acyl_tail": 2,
+            "amine_head": 1,
+            "epoxide_tail": 2
+          },
+          "event_balance_checks": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "event_searches": [
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CNCCN"
+                ],
+                [
+                  "CCCCC(O)CN(C)CCN",
+                  "CCCCC(O)CNCCNC"
+                ],
+                [
+                  "CCCCC(O)CN(CCNC)CC(O)CCCC",
+                  "CCCCC(O)CNCCN(C)CC(O)CCCC"
+                ]
+              ],
+              "stage": 1
+            },
+            {
+              "declared_events": 2,
+              "layers": [
+                [
+                  "CCCCC(O)CN(CCNC)CC(O)CCCC",
+                  "CCCCC(O)CNCCN(C)CC(O)CCCC"
+                ],
+                [],
+                []
+              ],
+              "stage": 2
+            }
+          ],
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              1,
+              "CNCCN",
+              "CCCCC(O)CN(C)CCN"
+            ],
+            [
+              1,
+              1,
+              "CNCCN",
+              "CCCCC(O)CNCCNC"
+            ],
+            [
+              1,
+              2,
+              "CCCCC(O)CN(C)CCN",
+              "CCCCC(O)CNCCN(C)CC(O)CCCC"
+            ],
+            [
+              1,
+              2,
+              "CCCCC(O)CNCCNC",
+              "CCCCC(O)CN(CCNC)CC(O)CCCC"
+            ],
+            [
+              1,
+              2,
+              "CCCCC(O)CNCCNC",
+              "CCCCC(O)CNCCN(C)CC(O)CCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CNCCN"
+            ],
+            [
+              "CCCCC(O)CN(CCNC)CC(O)CCCC",
+              "CCCCC(O)CNCCN(C)CC(O)CCCC"
+            ],
+            []
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [],
+            "complete_search": true,
+            "inverse_scope": "all_complete_tuples_with_one_repeated_identity_per_declared_stage_role",
+            "stage_searches": [
+              {
+                "product": "CCCCCC(=O)OC(CCCC)CN(CCNC)CC(CCCC)OC(=O)CCCCC",
+                "search": {
+                  "bound_reasons": [],
+                  "candidate_components": [],
+                  "complete_search": true,
+                  "declared_events": 2,
+                  "experimental_selectivity_qualified": false,
+                  "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+                  "physical_event_order_qualified": false,
+                  "states_by_depth": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "transitions": 0
+                },
+                "stage": 2
+              }
+            ],
+            "states_by_stage": [
+              1,
+              0,
+              0
+            ],
+            "total_event_states": 1,
+            "transitions": 0
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "terminal_constraints": {
+            "acyl_tail": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_Cl": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "epoxide_tail": {
+              "checks": {
+                "aromaticity": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          },
+          "within_stage_event_order_qualified": false
+        }
+      }
+    },
+    "ketone_ugi4": {
+      "FO_32": {
+        "kind": "source_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": true,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCC#CCCOC(=O)CCCC(CCCC(=O)OCCC#CCCCCCC)(C(=O)NCCCC)N(CCCN(C)C)C(=O)CCCCC(=O)OC(CCCCCCCC)CCCCCCCC"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [
+            {
+              "distinct_head_basic_nitrogen": [
+                1
+              ]
+            }
+          ],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 6,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 16,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              },
+              {
+                "atom_map": 5,
+                "canonical_reactant_atom_index": 24,
+                "role": "carboxylic_acid"
+              }
+            ]
+          ]
+        }
+      },
+      "asymmetric_two_primary_amines": {
+        "kind": "regression_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": true,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": false,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": false,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCNC(=O)C(C)(CC)N(CCCN(C)CCN)C(=O)CC",
+            "CCNC(=O)C(C)(CC)N(CCN(C)CCCN)C(=O)CC"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [
+            {
+              "distinct_head_basic_nitrogen": [
+                1,
+                8
+              ]
+            }
+          ],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 4,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 2,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              },
+              {
+                "atom_map": 5,
+                "canonical_reactant_atom_index": 2,
+                "role": "carboxylic_acid"
+              }
+            ]
+          ]
+        }
+      },
+      "cross_role_basic_nitrogen_cannot_rescue_head": {
+        "kind": "regression_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": false,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": false,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCNC(=O)C(C)(CC)N(CC)C(=O)CCN(C)C"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 2,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 2,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              },
+              {
+                "atom_map": 5,
+                "canonical_reactant_atom_index": 5,
+                "role": "carboxylic_acid"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "maleate_ester": {
+      "asymmetric_maleate_no_orientation_selection": {
+        "kind": "ambiguity_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 9,
+              "H": 17,
+              "N": 1,
+              "O": 4,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 9,
+              "H": 17,
+              "N": 1,
+              "O": 4,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CNC",
+              "CCOC(=O)C(CC(=O)OC)N(C)C"
+            ],
+            [
+              1,
+              "CNC",
+              "CCOC(=O)CC(C(=O)OC)N(C)C"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CNC"
+            ],
+            [
+              "CCOC(=O)C(CC(=O)OC)N(C)C",
+              "CCOC(=O)CC(C(=O)OC)N(C)C"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCOC(=O)CC(C(=O)OC)N(C)C",
+              "CNC"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCOC(=O)CC(C(=O)OC)N(C)C"
+            ],
+            [
+              "CNC"
+            ]
+          ]
+        }
+      },
+      "esterification_AA3_DLin": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 44,
+              "H": 82,
+              "N": 2,
+              "O": 6,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 44,
+              "H": 82,
+              "N": 2,
+              "O": 6,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "OCCN1CCN(CCO)CC1",
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1"
+            ],
+            [
+              2,
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1",
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCOC(=O)CCCCCCCC=CCC=CCCCCC)CC1"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "OCCN1CCN(CCO)CC1"
+            ],
+            [
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1"
+            ],
+            [
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCOC(=O)CCCCCCCC=CCC=CCCCCC)CC1"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCOC(=O)CCCCCCCC=CCC=CCCCCC)CC1",
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1"
+            ],
+            [
+              2,
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1",
+              "OCCN1CCN(CCO)CC1"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCOC(=O)CCCCCCCC=CCC=CCCCCC)CC1"
+            ],
+            [
+              "CCCCCC=CCC=CCCCCCCCC(=O)OCCN1CCN(CCO)CC1"
+            ],
+            [
+              "OCCN1CCN(CCO)CC1"
+            ]
+          ]
+        }
+      },
+      "maleate_5D8": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 48,
+              "H": 93,
+              "N": 3,
+              "O": 8,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 48,
+              "H": 93,
+              "N": 3,
+              "O": 8,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CN(C)CCCNCCCN",
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C"
+            ],
+            [
+              1,
+              "CN(C)CCCNCCCN",
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C",
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC",
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(C)CCCNCCCN"
+            ],
+            [
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C",
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC"
+            ],
+            [
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC",
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C"
+            ],
+            [
+              1,
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC",
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C",
+              "CN(C)CCCNCCCN"
+            ],
+            [
+              2,
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC",
+              "CN(C)CCCNCCCN"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCCCCCCCOC(=O)CC(NCCCN(CCCN(C)C)C(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC)C(=O)OCCCCCCCC"
+            ],
+            [
+              "CCCCCCCCOC(=O)CC(C(=O)OCCCCCCCC)N(CCCN)CCCN(C)C",
+              "CCCCCCCCOC(=O)CC(NCCCNCCCN(C)C)C(=O)OCCCCCCCC"
+            ],
+            [
+              "CN(C)CCCNCCCN"
+            ]
+          ]
+        }
+      },
+      "nonequivalent_alcohols_no_site_selection": {
+        "kind": "ambiguity_controls",
+        "replay": {
+          "balance": {
+            "product_and_byproducts": {
+              "C": 10,
+              "H": 23,
+              "N": 1,
+              "O": 4,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 10,
+              "H": 23,
+              "N": 1,
+              "O": 4,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "complete_search": true,
+            "declared_event_count_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "unique_declared_side_inverse": true,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "CN(CCO)CCCO",
+              "CCCC(=O)OCCCN(C)CCO"
+            ],
+            [
+              1,
+              "CN(CCO)CCCO",
+              "CCCC(=O)OCCN(C)CCCO"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "CN(CCO)CCCO"
+            ],
+            [
+              "CCCC(=O)OCCCN(C)CCO",
+              "CCCC(=O)OCCN(C)CCCO"
+            ]
+          ],
+          "inverse_scope": "conditioned_on_declared_fixed_side_components",
+          "physical_event_order_qualified": false,
+          "reverse_edges": [
+            [
+              1,
+              "CCCC(=O)OCCN(C)CCCO",
+              "CN(CCO)CCCO"
+            ]
+          ],
+          "reverse_layers": [
+            [
+              "CCCC(=O)OCCN(C)CCCO"
+            ],
+            [
+              "CN(CCO)CCCO"
+            ]
+          ]
+        }
+      }
+    },
+    "miao": {
+      "A12_Iso5_2DC18": {
+        "kind": "source_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": true,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCC=CCCCCCCCC1(CCCCCCCC=CCCCCCCCC)C=NC(C(=O)OCC)N1CCCN(C)C"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [
+            {
+              "distinct_head_basic_nitrogen": [
+                1
+              ]
+            }
+          ],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 6,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 17,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              }
+            ]
+          ]
+        }
+      },
+      "A2_Iso5_2DC18": {
+        "kind": "source_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": true,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": true,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCCCCCCCC=CCCCCCCCC1(CCCCCCCC=CCCCCCCCC)C=NC(C(=O)OCC)N1CCCN1CCCC1"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [
+            {
+              "distinct_head_basic_nitrogen": [
+                4
+              ]
+            }
+          ],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 0,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 17,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              }
+            ]
+          ]
+        }
+      },
+      "non_equivalent_primary_amines": {
+        "kind": "regression_controls",
+        "replay": {
+          "checks": {
+            "distinct_source_role_handles_retained": true,
+            "full_element_hydrogen_charge_balance": true,
+            "source_reactive_site_witness": true,
+            "unique_unfiltered_forward_exact": false,
+            "unique_unfiltered_inverse_exact": true
+          },
+          "computed_consistency_pass": false,
+          "experimental_execution_admitted": false,
+          "forward_products": [
+            "CCOC(=O)C1N=CC(C)(CC)N1CCCN(C)CCN",
+            "CCOC(=O)C1N=CC(C)(CC)N1CCN(C)CCCN"
+          ],
+          "inverse_candidate_count": 1,
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "retained_source_role_witnesses": [
+            {
+              "distinct_head_basic_nitrogen": [
+                1,
+                8
+              ]
+            }
+          ],
+          "site_witnesses": [
+            [
+              {
+                "atom_map": 1,
+                "canonical_reactant_atom_index": 4,
+                "role": "amine_head"
+              },
+              {
+                "atom_map": 2,
+                "canonical_reactant_atom_index": 2,
+                "role": "coupled_ketone"
+              },
+              {
+                "atom_map": 3,
+                "canonical_reactant_atom_index": 0,
+                "role": "isocyanide"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "thiol_yne": {
+      "Fig1A_library_B7C6": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 26,
+              "H": 55,
+              "N": 3,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 26,
+              "H": 55,
+              "N": 3,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_stage_inventories_balance": true,
+            "complete_search": true,
+            "declared_component_equalities": true,
+            "every_stage_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_forward_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "C#CCCCC(=O)O",
+              "CCCCCCSCC(CCCC(=O)O)SCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCSCC(CCCC(=O)O)SCCCCCC",
+              "CCCCCCSCC(CCCC(=O)N1CCN(CCN(C)C)CC1)SCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "C#CCCCC(=O)O"
+            ],
+            [
+              "CCCCCCSCC(CCCC(=O)O)SCCCCCC"
+            ],
+            [
+              "CCCCCCSCC(CCCC(=O)N1CCN(CCN(C)C)CC1)SCCCCCC"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "alkynoic_linker": "C#CCCCC(=O)O",
+                "amine_head": "CN(C)CCN1CCNCC1",
+                "thiol_first": "CCCCCCS",
+                "thiol_second": "CCCCCCS"
+              }
+            ],
+            "complete_search": true,
+            "states_by_depth": [
+              1,
+              1,
+              1
+            ],
+            "transitions": 2
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "stage_balance_checks": [
+            true,
+            true
+          ],
+          "terminal_constraints": {
+            "alkynoic_linker": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_O": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_first": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_second": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          }
+        }
+      },
+      "Fig1B_A1C11": {
+        "kind": "source_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 31,
+              "H": 66,
+              "N": 2,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 31,
+              "H": 66,
+              "N": 2,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_stage_inventories_balance": true,
+            "complete_search": true,
+            "declared_component_equalities": true,
+            "every_stage_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_forward_stage": true,
+            "unique_forward_exact": true
+          },
+          "computed_consistency_pass": true,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "C#CCCC(=O)O",
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC",
+              "CCCCCCCCCCCSCC(CCC(=O)NCCN(C)C)SCCCCCCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "C#CCCC(=O)O"
+            ],
+            [
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC"
+            ],
+            [
+              "CCCCCCCCCCCSCC(CCC(=O)NCCN(C)C)SCCCCCCCCCCC"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "alkynoic_linker": "C#CCCC(=O)O",
+                "amine_head": "CN(C)CCN",
+                "thiol_first": "CCCCCCCCCCCS",
+                "thiol_second": "CCCCCCCCCCCS"
+              }
+            ],
+            "complete_search": true,
+            "states_by_depth": [
+              1,
+              1,
+              1
+            ],
+            "transitions": 2
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "stage_balance_checks": [
+            true,
+            true
+          ],
+          "terminal_constraints": {
+            "alkynoic_linker": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_O": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_first": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_second": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          }
+        }
+      },
+      "non_equivalent_head_amines": {
+        "kind": "regression_controls",
+        "replay": {
+          "balance": {
+            "product_and_net_byproducts": {
+              "C": 33,
+              "H": 71,
+              "N": 3,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            },
+            "reactants": {
+              "C": 33,
+              "H": 71,
+              "N": 3,
+              "O": 2,
+              "S": 2,
+              "formal_charge": 0
+            }
+          },
+          "bound_reasons": [],
+          "checks": {
+            "all_stage_inventories_balance": true,
+            "complete_search": true,
+            "declared_component_equalities": true,
+            "every_stage_replayed": true,
+            "full_element_hydrogen_charge_balance": true,
+            "product_constraints": true,
+            "terminal_constraints": true,
+            "unique_complete_inverse": true,
+            "unique_each_forward_stage": false,
+            "unique_forward_exact": false
+          },
+          "computed_consistency_pass": false,
+          "experimental_selectivity_qualified": false,
+          "forward_edges": [
+            [
+              1,
+              "C#CCCC(=O)O",
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC",
+              "CCCCCCCCCCCSCC(CCC(=O)NCCCN(C)CCN)SCCCCCCCCCCC"
+            ],
+            [
+              2,
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC",
+              "CCCCCCCCCCCSCC(CCC(=O)NCCN(C)CCCN)SCCCCCCCCCCC"
+            ]
+          ],
+          "forward_layers": [
+            [
+              "C#CCCC(=O)O"
+            ],
+            [
+              "CCCCCCCCCCCSCC(CCC(=O)O)SCCCCCCCCCCC"
+            ],
+            [
+              "CCCCCCCCCCCSCC(CCC(=O)NCCCN(C)CCN)SCCCCCCCCCCC",
+              "CCCCCCCCCCCSCC(CCC(=O)NCCN(C)CCCN)SCCCCCCCCCCC"
+            ]
+          ],
+          "inverse": {
+            "bound_reasons": [],
+            "candidate_components": [
+              {
+                "alkynoic_linker": "C#CCCC(=O)O",
+                "amine_head": "CN(CCN)CCCN",
+                "thiol_first": "CCCCCCCCCCCS",
+                "thiol_second": "CCCCCCCCCCCS"
+              }
+            ],
+            "complete_search": true,
+            "states_by_depth": [
+              1,
+              1,
+              1
+            ],
+            "transitions": 2
+          },
+          "product_constraints": {
+            "checks": {
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "stage_balance_checks": [
+            true,
+            true,
+            true
+          ],
+          "terminal_constraints": {
+            "alkynoic_linker": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_O": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "amine_head": {
+              "checks": {
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_first": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            },
+            "thiol_second": {
+              "checks": {
+                "aromaticity": true,
+                "element_count_S": true,
+                "elements": true,
+                "formal_charge": true
+              },
+              "pass": true,
+              "query_counts": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "equivalent": true,
+  "largest_per_family_included": true,
+  "parallel_cold_seconds": 3.5267591250594705,
+  "parallel_sha256": "b8787e9ff0320bc902755cb1557fa108c35b7bf51becc20073cc49328283076a",
+  "parallel_warm_seconds": 0.383328250143677,
+  "request": {
+    "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/request.json",
+    "sha256": "911f77f9c62e16addf8b84db2eda7904a819923a71379edbd4a1837b03628016"
+  },
+  "rows": 116,
+  "sample_targets": [
+    "0005498599d1839dd4d95a8b0c7600a5833465a74355f0503edf853a3d70f5d6",
+    "0005b272014c5dbf7e7828d7a6a33861949c6855bbbaccd167472ab3496ad220",
+    "000a2f23eb79b26c33a5600bab670377d839f92097582c20ba458c1744f70636",
+    "000c5719655315af934cc3c3ee2e6ba070682a045759d311e87f04611d026f71",
+    "000f8bf8e39dc60e5b3c2a8e97f98c57a4162be8af0d7f6a47ee9e02dac3dd23",
+    "00114e32cf8ea277c4ea0e1e1dea1111535ce6a1c2a8f489ddc6b1f5f76cda54",
+    "0011679ea8c9548c99c790edeee3871aaadcd4a23e563c9e6c38f4be217a2b5e",
+    "0013d058e26da4c1efdb5c9c03821f8559321373e3b87a391535b2b09e3c01f7",
+    "9b43cb9a3934b54921839e0296a8a004b5f0875c6dcf1750fb9765549317096f",
+    "00149cecd991cc1f82dcaf548fb42ea4bcb1de01a01893d72aec3323a747e2d1",
+    "002c792c3037eb01cfdb23cfe24cddd1b93d46f521ba8c43b6b51945b9f22e1a",
+    "0060e678ea646387563f7ae13f2bfac679ccfdb45c714f036cf110ab3bb2313f",
+    "006b39347475f412d741358dee715caa3d42727a6081369220c1740d87a4cbb4",
+    "00830a526771db4f5393e01312ba696ea663bca7b76c7517d8a46af5f843ee04",
+    "009ea7b70624ae2fe4b4699b986b88d26e45b23bbf1ab032863564a98fe4922e",
+    "00a96988699461dde15add6a5842a47e0e53e7f9e4fbd156d6b715481cb79675",
+    "00c2ec06e8937313cdf4abfed347b8a45c7e0994a69d94478058b5364fd10093",
+    "3e09824338ee7a82b624a5a3b56c630a4f945c2f7ff658f3b00047ff2e9d457a",
+    "0001594743199c5b391746720ddf10490753138dbb7455fe19251509656268f4",
+    "0001a46f8e5376b0539ec3c8287ed05f1faba2b7d021cbdfda1a530f0954e5f1",
+    "000240605ca0e8dc3ebf78b122ed684a1add602ed682e6189399bd526be0d5d2",
+    "00035ecff8953d338636dac1ab44f8a19b20a0e0daa80884d81fb251a3acc7bc",
+    "0004101aee531cbe7913b33894a8af8e6a7b5d81b71b5c32b094073fb513df8f",
+    "0005b03357778ab2e06735132b4daf38850bff64990ec885988f4d3e5d747260",
+    "0007b06dee4d652aaa998403edcea5327808c189fd589cf19b158e895761dc00",
+    "0008529071b881cd90048ebb169047cf0bf7cb7fb36cff47a335e3394bf8a3ea",
+    "84eb9640a9e1613bc5994e5a2ef0930e68bb19228c950bda2f32b71ce5a1ee78",
+    "0001d43d2466fbd56a8a6b8620d85883736363ee3a6808e1fe2126297b18ec87",
+    "0001fe503bd8872c1bd17d666ee6e502f5032fae55255bf1d549bc5ec06ba354",
+    "0003a0cbe964e83c04230340348dbbeaacc98ad50690470dff4ec2c25c9a6c8d",
+    "00055ef1242562c1f033e69a57c2f49325b25e27b1f02038815fb660d1c2f55e",
+    "00074dd19df4c7c7b67b4e922f5f9cdd29ac8b331bcf12d3db6eb1fd95d5fa5b",
+    "00094b0147f661d3e557b04f43733a4aa37b6c6edb8fd79391ab5fa6d3d47517",
+    "000c4e4842b722b07c64de252a836d3a8b195ca439dccdad60fd256a0d88800d",
+    "000e8eaf61c969fd4ca8c3029caa24a1592d98b3d9902193eda1a67dff0aa4c6",
+    "44cdf4920a1ca4ea3faba81f99ed96d1339e598b5c3f6febaf878c0357e1c77c",
+    "000004e267a04d1557bde7593f8b2b850b2b8a08a52cb29804ac60111498de86",
+    "0003a60672b9304f7572a486db5bbaad97dfcbaf5dc135b2ecba47abd34af321",
+    "0008399421f8a287b48d747aa284e799986e064c5f368646d574b83491cd28b0",
+    "000d1d7f5cd7871b3101057eb2b23b165624fbb026f7b1367ca32ce9e62b6ac7",
+    "00126f53a26565124f25b7c0a661a01ace99143fd45d827df6f0c3b0b5cab4a4",
+    "00139194193af399f345fe522b67ff301ca2b51e56a173fc9c5e5d1c277d62d9",
+    "001ba2b7560dc1060518997d8405f56aed5a6d785bbb276f3abb39ef4a66a367",
+    "001cceb2e7d5f287c29770cd7fd384d0282d7fe1b95078a1b44d23c99f8f4fda",
+    "0001a0b8ff224888d102dce0a02e327cb0c60e1bffc7629fb156f54728ae8302",
+    "0009fc42d92c116d5f9e672c37e56e98b13def038b2d1bebbff14ed08ab6c4d6",
+    "000a9c1479009376263389894c60d8a54c7d82dc51c0b56d614d555368283dd1",
+    "000dd26db83580e8d612974ef4be84a11b182f339ee1b1d7daaa27d332ee7504",
+    "00139692f394f1a7797cd7e1e8140b4926ed947ca3b0c62184fc04a970abcff1",
+    "001449a3ab6a91b72f08a5711054e833d892a8432665f80583214cf05d5f1ce1",
+    "0017a2e1608b9415b9453c0cbd99f585ec62e6bf97765fd7c3717ae8c219c1a5",
+    "001d58e8bb48c90f45848165ff92bdf110f713b96a840885f42ed2cb3b3d5eea",
+    "016a7d020676d2bff658e668ad56726f5105a5b5cb4b9214115dbf759b810e47",
+    "00014b242d1193b35c44eb27ef333ad42e2054f288c5a3889662f9ddac9ea3ac",
+    "000ac1576fb6a2a6c72cc5a196e463239f05f48616d67efd6432946f2ddfd03a",
+    "000bd6d4350947b09c480aa9f3aebf523fd4a13a126c252a89f8e838375a361e",
+    "000f4755ec745b3c5f2bb4067813678b38e8a07c27e2bcb1fef9016fd74ac6f7",
+    "000ffb772a602e490ced3fc7fb558cfa9aab225094f1e07c60fe8ad2d53ae292",
+    "00111cd629b8fc38f00a5ea92e5d6a662dd6c2a922721ab482eca960acd6abdd",
+    "0011f607465a6c08b872503ae69addbdde604b3507d5e9957240fd58aa847cce",
+    "0012e805600fc8b1d96c229de99110c38ac5a2b63f63927c208645101299197b",
+    "762f99ab6a6847e79483fdb881a97f46bdd36522a0c52344bfd9e96364d4a5d5",
+    "00003c8b844ac424e8dbdfd21ce97413a2f14e4fcc08efc05a66aa00f1a692ef",
+    "0002aba086439a414e7d33e0c9a947e6200deb9d62acecc91895adfad462743a",
+    "0006d8a1427a99fa44d63c99d49b8dd55c3b5f2d8b5d515c4fa44a75e514163a",
+    "00096190d0103282d3c194117106e6764fe3c1b54f8adc2fa825580886e07611",
+    "000fe391a3ee2c72f5d36d71459bf5586ac1528d9cf4d3c8cbd522e2fecbd76e",
+    "0011e74194c6b73594f0a890252e1642b63a116833c22549a1f7879af4888e47",
+    "0013e109e4b8f9f1c5e13b9a438b9498d9d16b3f1199a55fd134220b2efdfcb0",
+    "0013f249badc9cae048d526b1a0067d28e30101700a8cd4f404e3f1c065b4de7",
+    "09c1a13c0ff9cc58397627bf857af55e4458d350e0a32b508b0bcb54b69ab7a1",
+    "000078a36cba3b7d1f30b20ea2d563706eddce6bdbb6e19cf8c28f767dac3226",
+    "000f6d807d2a5352e4b8e5b4f0ecd3b7318c735c8af9f90d3d179d093df0ef6d",
+    "0015c478838a31f2ae70398db83d2fafdee48109e9d0cf04c489a28a444fe213",
+    "001ea2f6f675afbfbdd3b033c0f8675f8858fbcc9975be0ea2a1c000c0f4964b",
+    "00207691290f79a4fecffe088a13a09c8a4bf403a772de0d5631e37923f25b8b",
+    "0024677a8d35a471861d256d83e9741221b67d38e4a6c5c33f293b94d67ad167",
+    "002ec618bc29ddb1bb0f562f127382e995dd23320fbcb1ad10475809a318ff22",
+    "0032c64fc75e03de44c781af0ced67272d6a8b6516b269c8f7874a1aad3626a1",
+    "00912588cfc675177e0623558987c4d493dcb381aaf8539afeaddabe08f33c5a",
+    "00032f93051a64598e87cc2b04f49aac61019b6e2724114325906032d98e5e2a",
+    "0004ec077a7b151d5693537b19652a39501d2f89c74d145bb80a964419f040f0",
+    "0005e1253a95fd35c4192b9ae5cc37a1355e7cfd5e00ed4acf213394cd550c43",
+    "0006ef8b4fe3e435e925f3619cca0b5c7de436f3a9cd211cbce8825e9e03ef10",
+    "0009a9e2a136638a52f3feaff4fdc1df5204749b231e3c37a025de7629bada2b",
+    "000a8cf20b2631b25c298ea2525a7ca70a807daab010b9a0fac7e5cccb271b59",
+    "000b5cc881738d389b9df9b7cab2def92170ed1c378af07201435059f5e996d8",
+    "000c19a46daad5e3862382593c70355030e55353e32a36c3f53a9f912d7d2a7f",
+    "030f35b3ed54eee1780f7f64324a692c021d7a2dd8a9fc6654bf79edf44ff783",
+    "000010448330a7246e626f7506147520fee5cf9e31f128aecda11062fa2cdbde",
+    "00001beaef1c2b37ec3ec511ccc6d75297199b6a522544eba3793e3eb9d627ef",
+    "00003b0afc6355b97a89cfea00a969f461ff30c9dbda824039c3f056c6b08a41",
+    "000047e9cb1e7e0de8acf793b6f02c86bb67fc9251e61d8810c7bc5b48841b31",
+    "000119c49faf01427e6680cf284dcfb1697f921b27eed941669e0ca8b776fdb1",
+    "000154215f21220565c5aee5e6cca545dec73ef4fdc7f3771ca09e501754423d",
+    "0001587a52c52a10d8c227813d01f1c81fbd9c54ab6cd9c015be4e2d3ac27c0b",
+    "00016b89066a568a019be9fc771c215f2c1d0bd9d272e3c1cddc2bb187907d76",
+    "0fff70a918d36d5ce1882bcfb7178d8266382515041758e9a30b2695defc3e15",
+    "00006e1ec02f556d7366062ce05403a812be19244065cb0fcf430857b99d9ba3",
+    "0000ae3b5fd2c5aaff2abe7a5e73dd4808bbd892da900863370247399bd06e27",
+    "0003cced78e982e4c45d125539999fd460292e2e55b29ade22a49fd27b26b7bc",
+    "00049c5c868307ad077877708c9b36ae7aa2889e3d01c698c94c13f4a5f3e4f7",
+    "00061a86e64f7986073028c6296c065d1396c755623682caa6938daf1de0b718",
+    "0006674d126c52f94f6be9fcb8cf9b64aa7d674294fc466543dd273180135237",
+    "000a09cbddde69c09d26d2f5262e16c567fff18d2b9c2c7368ab3b5f61308a29",
+    "000ae92820533d67611e069037470368c21bef8c3645f51e898eac0bc5de6aa3",
+    "017bc467e5c5c84dc7a3def885b43c65c0328350bffc938aaeb025861a5c3372",
+    "00001e03b0a00e36167a79e9fedc3ec7dded9890f81972d8218a588cbebc1017",
+    "0000b65107578687dea3b8078e7be32191e58589e3d0ac67334982ee36bc1a92",
+    "000104abd9d5a93a05121a4e63fb62e9f43e12f9eb7bda2482c42d732c9e9b1b",
+    "0001636758d54adf0f573d919ef753e51005417f637b83d2e6a204ea3d07bc69",
+    "000168adac7dabc7afbeae62370ac8fa7e37f9b2a700ffb1a5f5943c7725ef2c",
+    "000181aae7af029994609077cb7062e44db8d3b5c27d35605e9029bd3800cc04",
+    "00021527c22170bd848ddce01389b61ff6479f51f3d4f28da600ccfc25d0a480",
+    "00023bbbe9bd6d2d4f2e7be817d32048dc6478b2781d6b1c4590415652fafd2a",
+    "0029721e771fc9a53527e2baf8a33663bf5568ee306f5223498c23344ec85226"
+  ],
+  "serial_seconds": 1.0349137501325458,
+  "serial_sha256": "b8787e9ff0320bc902755cb1557fa108c35b7bf51becc20073cc49328283076a",
+  "training_admitted": false
+}

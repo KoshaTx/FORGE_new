@@ -1,0 +1,466 @@
+{
+  "corrected_policy": {
+    "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+    "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+  },
+  "derivation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/build_historical_policy.py",
+    "sha256": "cdce542e03c1bfe1b75f85274e8d9c212749f08c950463d833834e0d5ecfa1ac"
+  },
+  "metadata_fields": [
+    "architecture_stratum",
+    "coupled_ketone_split",
+    "design_lane",
+    "distance",
+    "event_count",
+    "events",
+    "head_arm_count",
+    "interface_stratum",
+    "mechanism",
+    "occupancy",
+    "pair_lane",
+    "reported_released_tuple",
+    "series",
+    "site_disposition"
+  ],
+  "profile_executable_ast_identical": true,
+  "schema_version": "forge.compose_lipid_historical_morphology_policy.v1",
+  "scope": "Historical partition descriptors only; never modify actual complete component inventories or quantities.",
+  "signature_labels": {
+    "core": "post_instruction_family_core_v8",
+    "regional": "post_instruction_regional_topology_v8",
+    "structural": "reaction_core_regional_topology_v1"
+  },
+  "source_anchor_roles": "supplied_complete_source_instances_requiring_original_signature_replay",
+  "source_assets": {
+    "scripts/build_post_instruction_generator_splits_v8.py": {
+      "file": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/scripts/build_post_instruction_generator_splits_v8.py",
+        "sha256": "57998a562b006c1f23f4cd54edff377bf4b410f077f2b2b4488878d592584e2a"
+      },
+      "git_blob_sha1": "2811c32c6b34a919f9b3d3611a6fa7c30f4b18d7",
+      "response": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/old-split-driver-blob.json",
+        "sha256": "532e0552ffbd712c0c6b15dc266cbc1ed28fb9620be7f6fc539ea410a221e908"
+      }
+    },
+    "src/compose_lipid/data/generator_splits.py": {
+      "file": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/generator_splits.py",
+        "sha256": "4e4770a83c9a00132db83d9562ce4e025c2777fa0afdf1d7aca1ebf76750ef44"
+      },
+      "git_blob_sha1": "43d17282023ec5df46fdd52f2dac45360be45624",
+      "response": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/old-split-module-blob.json",
+        "sha256": "f08efd5d27d7942e4574ccb861f9144b0f571c90a39293e9ce7dfb81f3a9e410"
+      }
+    }
+  },
+  "source_tree": {
+    "path": "results/phase1/compose_lipid_v8_source_recovery_v1/commit-tree.json",
+    "sha256": "aadcc4a565fda9fcf2c21e3526f8bf631bbed6ddb4ce94fa8895d6bcf2266777"
+  },
+  "training_admitted": false,
+  "virtual_role_descriptors": {
+    "a3_amine_aldehyde_alkyne": [
+      {
+        "quantity": {
+          "metadata": "events"
+        },
+        "role": "aldehyde"
+      },
+      {
+        "quantity": {
+          "metadata": "events"
+        },
+        "role": "alkyne"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      }
+    ],
+    "acid_epoxide_diester_multistep": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_acid_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "epoxide"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "hydrophobic_acid"
+      }
+    ],
+    "aema_aza_thiol_addition": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_core"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "thiol_periphery"
+      }
+    ],
+    "aldehyde_ugi3": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "aldehyde"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide"
+      }
+    ],
+    "aldehyde_ugi4": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "aldehyde"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "carboxylic_acid"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide"
+      }
+    ],
+    "alpha_isocyanoester_dihydroimidazole": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "coupled_ketone"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide"
+      }
+    ],
+    "amine_alkylation": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 2
+        },
+        "role": "bromoester_arm"
+      }
+    ],
+    "amine_epoxide_opening": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "epoxide_tail"
+      }
+    ],
+    "aryl_reductive_amination": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "coupled_aldehyde"
+      }
+    ],
+    "aza_michael_acrylamide": [
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "acceptor_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      }
+    ],
+    "aza_michael_acrylate": [
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "acceptor_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      }
+    ],
+    "disulfide_michael": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "disulfide_acceptor"
+      }
+    ],
+    "epoxide_opening_o_acylation": [
+      {
+        "quantity": {
+          "constant": 2
+        },
+        "role": "acyl_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 2
+        },
+        "role": "epoxide_tail"
+      }
+    ],
+    "iphos_ring_opening": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "metadata": "event_count"
+        },
+        "role": "phosphate_tail"
+      }
+    ],
+    "ketone_isocyanide_amide": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "coupled_ketone"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide"
+      }
+    ],
+    "ketone_ugi4": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "carboxylic_acid"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "coupled_ketone"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide"
+      }
+    ],
+    "maleate_addition": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "maleate"
+      }
+    ],
+    "o_esterification": [
+      {
+        "quantity": {
+          "metadata": "occupancy"
+        },
+        "role": "acid_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "aminoalcohol_head"
+      }
+    ],
+    "passerini_3cr": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "aldehyde_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_acid_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "isocyanide_tail"
+      }
+    ],
+    "preassembled_thiol_yne_tail_amidation": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "alkynoic_linker"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 2
+        },
+        "role": "thiol_tail"
+      }
+    ],
+    "reductive_amination": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "coupled_aldehyde"
+      }
+    ],
+    "thiolactone_aminolysis_michael": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "acrylate_tail"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "amine_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "thiolactone_region"
+      }
+    ],
+    "vitamin_b5_multistep": [
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "series_head"
+      },
+      {
+        "quantity": {
+          "constant": 1
+        },
+        "role": "series_tail_design"
+      }
+    ]
+  }
+}

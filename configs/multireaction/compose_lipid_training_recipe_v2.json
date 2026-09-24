@@ -1,0 +1,84 @@
+{
+  "execution": {
+    "automatic_retries": 0,
+    "backend": "modal",
+    "checkpoint_keep_last": 2,
+    "detached": true,
+    "gpu_count": 1,
+    "gpu_type": "L4",
+    "memory_mb": 16384
+  },
+  "final_bindings_required": [
+    "frozen qualified 22-family measure",
+    "training admission",
+    "fitted noise marginals",
+    "passing GPU preflight"
+  ],
+  "gradient_clip_norm": 1.0,
+  "inputs_prepared": {
+    "atom_vocabulary": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/atom_vocabulary.json",
+      "sha256": "46faf2f2ecc6e721e600f4ef0879020ca6d162ecd366e2bb0ac666aa491b96ac"
+    },
+    "mapped_cache": {
+      "path": "results/phase1/compose_lipid_mapped_preparation_v3/cache/manifest.json",
+      "sha256": "e9616f2f86b2d53cbdc3f1d79bbd130cd6cf7df0bf4296aad2f50b3e08b3f440"
+    },
+    "population": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/result.json",
+      "sha256": "2ec46df97ae1637b6518b99ff90b832dd79ef69e471b1648bbca0a2afefe1740"
+    },
+    "verification": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/verification.json",
+      "sha256": "61f0bd33eeac2c55d86475994991bfbf4e568d9ec244618dba48536ae9ad2c91"
+    }
+  },
+  "launchable": false,
+  "model": {
+    "adapter_dim": 64,
+    "architecture": "reaction_program_graph_transformer",
+    "attention_heads": 8,
+    "bond_classes": 3,
+    "dropout": 0.1,
+    "expert_count": 3,
+    "hidden_dim": 192,
+    "layers": 6,
+    "maximum_closures": 12,
+    "maximum_heavy_atoms": 254,
+    "repeat_group_conditioning": true
+  },
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "lr": 0.0001,
+    "weight_decay": 5e-05
+  },
+  "runtime": {
+    "batch_size": 32,
+    "checkpoint_interval": 100,
+    "cpu_threads": 4,
+    "deterministic": true,
+    "maximum_cached_shards": 1,
+    "optimizer_steps": 10000,
+    "precision": "float32",
+    "workers": 0
+  },
+  "schema_version": "forge.compose_lipid_training_recipe.v1",
+  "seed": 20260922,
+  "segment_scope": "Initial bounded 10000-update segment over the entire admitted sampling support; not an epoch or a convergence claim.",
+  "semantic_weights": {
+    "core_weight": 0.25,
+    "repeat_consistency_weight": 0.25,
+    "role_weight": 0.25
+  },
+  "training_admitted": false,
+  "training_measure": {
+    "loss_reweighting": false,
+    "per_graph_probability": "1 / (22 * qualified_unique_graphs_in_family)",
+    "policy": "equal_qualified_family_mass_uniform_unique_constitutions",
+    "replacement": true
+  }
+}

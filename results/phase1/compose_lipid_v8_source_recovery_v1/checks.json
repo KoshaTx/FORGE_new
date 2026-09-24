@@ -1,0 +1,96 @@
+{
+  "black": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "black",
+      "--check",
+      "forge/synthesis/engine/single_step_proposal_benchmark.py",
+      "tests/test_single_step_proposal_lane_qualification_spec.py",
+      "tests/test_single_step_benchmark_source_relocation.py"
+    ],
+    "duration_seconds": 0.22601958294399083,
+    "exit_code": 0
+  },
+  "focused-tests": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_a3_source_boundary.py",
+      "tests/test_compose_lipid.py",
+      "tests/test_compose_lipid_components.py",
+      "tests/test_compose_lipid_pretraining.py",
+      "tests/test_compose_lipid_protection.py",
+      "tests/test_compose_lipid_repeated_inverse.py",
+      "tests/test_compose_lipid_repeated_source.py",
+      "tests/test_compose_lipid_representation.py",
+      "tests/test_compose_lipid_scaffold_event.py",
+      "tests/test_compose_lipid_sequential.py",
+      "tests/test_compose_lipid_source_event.py",
+      "tests/test_compose_lipid_source_program.py",
+      "tests/test_pinned_sources_are_tracked.py",
+      "tests/test_precursor_scaffolds.py",
+      "tests/test_repeated_components.py",
+      "tests/test_repeated_inverse.py",
+      "tests/test_sequential_program.py",
+      "tests/test_source_event.py",
+      "tests/test_compose_lipid_precursor_audit.py",
+      "tests/test_condensation_event.py",
+      "tests/test_compose_lipid_condensation_event.py",
+      "tests/test_single_step_benchmark_source_relocation.py",
+      "tests/test_single_step_manifest_source_relocation.py",
+      "tests/test_core_input_locations.py",
+      "--tb=short",
+      "--junitxml=/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_source_recovery_v1/focused-tests.xml"
+    ],
+    "duration_seconds": 29.830186791950837,
+    "exit_code": 0
+  },
+  "full-tests": {
+    "command": [
+      "make",
+      "test",
+      "UV_RUN="
+    ],
+    "duration_seconds": 640.0597486249171,
+    "exit_code": 2
+  },
+  "historical-benchmark-tests": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_single_step_proposal_benchmark.py",
+      "tests/test_single_step_proposal_benchmark_v3.py",
+      "tests/test_single_step_proposal_lane_qualification_spec.py",
+      "--tb=short",
+      "--junitxml=/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_source_recovery_v1/historical-benchmark-tests.xml"
+    ],
+    "duration_seconds": 1.0494355000555515,
+    "exit_code": 1
+  },
+  "ruff": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "ruff",
+      "check",
+      "forge/synthesis/engine/single_step_proposal_benchmark.py",
+      "tests/test_single_step_proposal_lane_qualification_spec.py",
+      "tests/test_single_step_benchmark_source_relocation.py"
+    ],
+    "duration_seconds": 0.027383209206163883,
+    "exit_code": 0
+  },
+  "vendor-verify": {
+    "command": [
+      "make",
+      "verify"
+    ],
+    "duration_seconds": 0.1935715840663761,
+    "exit_code": 0
+  }
+}

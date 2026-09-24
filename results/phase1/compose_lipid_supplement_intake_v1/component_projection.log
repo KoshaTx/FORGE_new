@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<stdin>", line 10, in <module>
+  File "results/phase1/compose_lipid_supplement_intake_v1/component_protection.py", line 160, in project
+    "implementation": pin(Path(__file__)),
+                      ^^^^^^^^^^^^^^^^^^^
+  File "results/phase1/compose_lipid_supplement_intake_v1/component_protection.py", line 24, in pin
+    return {"path": str(path.relative_to(ROOT)), "sha256": str(sha256_file(path))}
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py", line 730, in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+ValueError: 'results/phase1/compose_lipid_supplement_intake_v1/component_protection.py' is not in the subpath of '/Users/rahulmaganti/Kosha/forge_new' OR one path is relative and the other is absolute.

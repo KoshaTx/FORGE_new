@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="59" time="2.970" timestamp="2026-09-18T09:49:27.269141-04:00" hostname="Rahuls-MacBook-Pro.local"><testcase classname="tests.test_compose_lipid_pretraining" name="test_bromine_is_opt_in_and_decodes_with_one_bond" time="0.526" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_bromine_double_bond_still_abstains" time="0.001" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_existing_valence_capacities_are_bitwise_unchanged" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_extension_cannot_admit_unqualified_halogen_states[state0]" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_extension_cannot_admit_unqualified_halogen_states[state1]" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_extension_cannot_admit_unqualified_halogen_states[state2]" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_nonmonovalent_and_missing_extensions_fail" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_labels_are_opaque_and_missing_anchors_are_unresolved" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_repeated_program_cannot_pass_a_single_local_cut" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_ambiguous_and_protected_components_abstain" time="0.000" /><testcase classname="tests.test_compose_lipid_pretraining" name="test_full_check_retains_large_graphs_and_never_grants_training" time="0.028" /><testcase classname="tests.test_compose_lipid" name="test_import_preserves_universe_splits_large_graphs_and_source_flags" time="0.014" /><testcase classname="tests.test_compose_lipid" name="test_repeat_import_deterministic_artifacts_and_refuses_overwrite" time="0.019" /><testcase classname="tests.test_compose_lipid" name="test_provider_duplicate_graph_ids_preserved_but_training_quarantined" time="0.015" /><testcase classname="tests.test_compose_lipid" name="test_large_anchor_provider_size_label_does_not_drop_or_admit_graph" time="0.011" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[duplicate]" time="0.006" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[unknown_family]" time="0.005" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[bad_join]" time="0.009" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[missing_assignment]" time="0.008" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[changed_split]" time="0.007" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[changed_population]" time="0.007" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[raw_weighting]" time="0.004" /><testcase classname="tests.test_compose_lipid" name="test_invalid_release_never_publishes_partial_index[unknown_adapter]" time="0.004" /><testcase classname="tests.test_compose_lipid" name="test_tampered_input_and_published_index_are_rejected" time="0.011" /><testcase classname="tests.test_compose_lipid" name="test_roles_preserve_order_coupling_and_unresolved_anchor_metadata" time="0.000" /><testcase classname="tests.test_compose_lipid" name="test_cli_import_and_verify" time="0.034" /><testcase classname="tests.test_fixed_closure_decoding" name="test_fixed_ring_capacity_precedes_generated_parent_choices" time="0.007" /><testcase classname="tests.test_fixed_closure_decoding" name="test_no_fixed_closure_remains_exactly_the_frozen_decoder" time="0.001" /><testcase classname="tests.test_fixed_closure_decoding" name="test_impossible_immutable_valence_still_abstains" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[acetal_aldehyde_diol]" time="0.005" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[amide_coupling_acid_amine]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[aza_michael_amine_acrylate]" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[carbamate_amine_chloroformate]" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[disulfide_coupling]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[epoxide_opening_amine]" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[iphos_amine_dioxaphospholane]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[passerini_3cr]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[reductive_amination_amine_aldehyde]" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[thiol_michael_thioether]" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[ugi_3cr_agile]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_all_twelve_registry_positive_products_have_forward_replayed_witnesses[urea_amine_isocyanate]" time="0.002" /><testcase classname="tests.test_combinatorial_generation" name="test_repeated_check_uses_full_requested_depth_and_identical_reagent" time="0.003" /><testcase classname="tests.test_combinatorial_generation" name="test_saturated_and_incomplete_search_never_admits_partial_witness" time="0.001" /><testcase classname="tests.test_combinatorial_generation" name="test_summary_keeps_invalid_attempts_and_duplicate_products_in_denominators" time="0.000" /><testcase classname="tests.test_combinatorial_generation" name="test_twelve_family_sampler_does_not_copy_variable_graph_targets" time="0.128" /><testcase classname="tests.test_combinatorial_generation" name="test_saved_generation_is_verified_from_attempts_and_forward_replay" time="0.001"><failure message="forge.core.hashing.PinError: pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py">def test_saved_generation_is_verified_from_attempts_and_forward_replay():
+        result = REPO / "results/phase1/combinatorial_generation_v1/result.json"
+        if not result.exists():
+            pytest.skip("saved generation diagnostic is absent")
+&gt;       checked = verify(REPO, result)
+                  ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation.py:212: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_verify.py:38: in verify
+    resolve_pin(pin, repo, label="generation verification")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'forge/model/synthesis_program_sampling.py', 'sha256': '2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1'}
+repo = PosixPath('/Users/rahulmaganti/Kosha/forge_new')
+label = 'generation verification'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -&gt; Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+            raise PinError(f"pinned input for {label} is missing: {resolved}")
+    
+        observed = sha256_file(resolved)
+        if observed != declared:
+&gt;           raise PinError(
+                f"pinned input for {label} changed: expected {declared}, found {observed} at {resolved}"
+            )
+E           forge.core.hashing.PinError: pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py
+
+forge/core/hashing.py:143: PinError</failure></testcase><testcase classname="tests.test_combinatorial_generation" name="test_verifier_rejects_forged_result[summary]" time="0.002"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'differs|substituted'&#10;  Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'">tmp_path = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1188/test_verifier_rejects_forged_r0')
+mutation = 'summary'
+
+    @pytest.mark.parametrize("mutation", ["summary", "inputs", "claim"])
+    def test_verifier_rejects_forged_result(tmp_path, mutation):
+        source = REPO / "results/phase1/combinatorial_generation_v1/result.json"
+        if not source.exists():
+            pytest.skip("saved generation diagnostic is absent")
+        result = json.loads(source.read_text())
+        if mutation == "summary":
+            family = next(iter(result["per_arm"]["trained"]))
+            result["per_arm"]["trained"][family]["exact_program"] += 1
+        elif mutation == "inputs":
+            # Both pins still resolve; only the configured identity check catches substitution.
+            result["inputs"]["checkpoint"] = result["inputs"]["cache"]
+        else:
+            result["generation_demonstrated_all_families"] = False
+        path = tmp_path / "forged-result.json"
+        path.write_text(json.dumps(result))
+&gt;       with pytest.raises(ValueError, match="differs|substituted"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'differs|substituted'
+E         Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'
+
+tests/test_combinatorial_generation.py:234: AssertionError</failure></testcase><testcase classname="tests.test_combinatorial_generation" name="test_verifier_rejects_forged_result[inputs]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'differs|substituted'&#10;  Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'">tmp_path = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1188/test_verifier_rejects_forged_r1')
+mutation = 'inputs'
+
+    @pytest.mark.parametrize("mutation", ["summary", "inputs", "claim"])
+    def test_verifier_rejects_forged_result(tmp_path, mutation):
+        source = REPO / "results/phase1/combinatorial_generation_v1/result.json"
+        if not source.exists():
+            pytest.skip("saved generation diagnostic is absent")
+        result = json.loads(source.read_text())
+        if mutation == "summary":
+            family = next(iter(result["per_arm"]["trained"]))
+            result["per_arm"]["trained"][family]["exact_program"] += 1
+        elif mutation == "inputs":
+            # Both pins still resolve; only the configured identity check catches substitution.
+            result["inputs"]["checkpoint"] = result["inputs"]["cache"]
+        else:
+            result["generation_demonstrated_all_families"] = False
+        path = tmp_path / "forged-result.json"
+        path.write_text(json.dumps(result))
+&gt;       with pytest.raises(ValueError, match="differs|substituted"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'differs|substituted'
+E         Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'
+
+tests/test_combinatorial_generation.py:234: AssertionError</failure></testcase><testcase classname="tests.test_combinatorial_generation" name="test_verifier_rejects_forged_result[claim]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'differs|substituted'&#10;  Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'">tmp_path = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1188/test_verifier_rejects_forged_r2')
+mutation = 'claim'
+
+    @pytest.mark.parametrize("mutation", ["summary", "inputs", "claim"])
+    def test_verifier_rejects_forged_result(tmp_path, mutation):
+        source = REPO / "results/phase1/combinatorial_generation_v1/result.json"
+        if not source.exists():
+            pytest.skip("saved generation diagnostic is absent")
+        result = json.loads(source.read_text())
+        if mutation == "summary":
+            family = next(iter(result["per_arm"]["trained"]))
+            result["per_arm"]["trained"][family]["exact_program"] += 1
+        elif mutation == "inputs":
+            # Both pins still resolve; only the configured identity check catches substitution.
+            result["inputs"]["checkpoint"] = result["inputs"]["cache"]
+        else:
+            result["generation_demonstrated_all_families"] = False
+        path = tmp_path / "forged-result.json"
+        path.write_text(json.dumps(result))
+&gt;       with pytest.raises(ValueError, match="differs|substituted"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'differs|substituted'
+E         Actual message: 'pinned input for generation verification changed: expected 2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1, found e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47 at /Users/rahulmaganti/Kosha/forge_new/forge/model/synthesis_program_sampling.py'
+
+tests/test_combinatorial_generation.py:234: AssertionError</failure></testcase><testcase classname="tests.test_architecture_boundaries" name="test_scientific_library_has_only_declared_domains" time="0.001" /><testcase classname="tests.test_architecture_boundaries" name="test_removed_catch_all_namespaces_do_not_exist" time="0.000" /><testcase classname="tests.test_architecture_boundaries" name="test_library_never_depends_on_cli_or_experiment_apps" time="0.812" /><testcase classname="tests.test_architecture_boundaries" name="test_generic_runtime_has_no_forge_stage_or_application_imports" time="0.013" /><testcase classname="tests.test_architecture_boundaries" name="test_active_experiments_never_import_the_historical_archive" time="0.567" /><testcase classname="tests.test_architecture_boundaries" name="test_cli_is_an_application_boundary_not_a_library_dependency" time="0.007" /><testcase classname="tests.test_architecture_boundaries" name="test_catalog_owns_every_active_experiment_specification" time="0.050" /><testcase classname="tests.test_architecture_boundaries" name="test_owned_modal_groups_reference_pinned_catalog_experiments" time="0.002" /><testcase classname="tests.test_architecture_boundaries" name="test_archived_producers_are_importable_but_not_a_supported_cli_surface" time="0.001" /><testcase classname="tests.test_architecture_boundaries" name="test_no_deleted_package_survives_only_as_bytecode" time="0.001" /></testsuite></testsuites>

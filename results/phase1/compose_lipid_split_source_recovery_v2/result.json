@@ -1,0 +1,75 @@
+{
+  "assets": [
+    {
+      "git_blob_sha1": "12946b4eb4e7e412845017a28fb886e31abb33c4",
+      "path": "results/phase1/compose_lipid_v8_source_recovery_v1/upstream/scripts/build_post_instruction_generator_splits_v8_1.py",
+      "required_split_input": true,
+      "response": null,
+      "sha256": "d586f22b3552572297cbf3a75429698d214df8d338651f1acba610fec6aebd52",
+      "upstream_path": "scripts/build_post_instruction_generator_splits_v8_1.py"
+    },
+    {
+      "git_blob_sha1": "b5747b1d914e71268a51643764f4d5bfa60fa684",
+      "path": "results/phase1/compose_lipid_v8_source_recovery_v1/upstream/configs/corpus/post_instruction_generator_splits_v8_1.json",
+      "required_split_input": true,
+      "response": null,
+      "sha256": "c2b87270b7beb811f67c2afca38d8bc8511482de3d30c2e754abbfe7b3abb2f7",
+      "upstream_path": "configs/corpus/post_instruction_generator_splits_v8_1.json"
+    },
+    {
+      "git_blob_sha1": "3d3d40e084742f6348de08843cbce3cfa184f1d4",
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/generator_splits_v2.py",
+      "required_split_input": true,
+      "response": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/generator-splits-blob.json",
+        "sha256": "df0dd60f0bb3b2ec24a09e36e80705f59ec75a2f830b663a8eb40be577933c98"
+      },
+      "sha256": "d63c7ca51f18bf8096c8f02b73cc26b815ca664027125b65edfaf949b83274f7",
+      "upstream_path": "src/compose_lipid/data/generator_splits_v2.py"
+    },
+    {
+      "git_blob_sha1": "b58c9ac7d8c1fe9a74fae71f763c66b84ac67146",
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/training_corpus.py",
+      "required_split_input": false,
+      "response": {
+        "path": "results/phase1/compose_lipid_split_source_recovery_v2/training-corpus-blob.json",
+        "sha256": "3af348d4f26a97cdd310daca007a88ef3713db0ae59b8a94800705ee819b9df9"
+      },
+      "sha256": "be06b8be31bdb8a64dd9de2eee195860bb570430fc2d20ca554e1c963d7d16e3",
+      "upstream_path": "src/compose_lipid/data/training_corpus.py"
+    }
+  ],
+  "date": "2026-09-21",
+  "full_universe_partition_qualified": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/verify_sources.py",
+    "sha256": "548f431b0ab3496a72f4ca7e77b7dc52387d024825c66da6a0eaabfdf1779489"
+  },
+  "inputs": {
+    "original_request": {
+      "path": "results/phase1/compose_lipid_training_readiness_v1/required-split-inputs.json",
+      "sha256": "b68c6dd5bb2bd9e550f1ca7f58bd7f327bb6b66482688c3f0584bb438d66c24a"
+    },
+    "original_split_receipt": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/receipt.json",
+      "sha256": "3deffe014847cef3625e08bd2f6d1959d63e9b1445d4f12d5e8c5d8cbc98d8d3"
+    },
+    "upstream_commit": {
+      "path": "results/phase1/compose_lipid_v8_source_recovery_v1/commit.json",
+      "sha256": "7d0a48415780e09789f02edf06ed64230cf80276e48b69278bc2e24d42881d0b"
+    },
+    "upstream_tree": {
+      "path": "results/phase1/compose_lipid_v8_source_recovery_v1/commit-tree.json",
+      "sha256": "aadcc4a565fda9fcf2c21e3526f8bf631bbed6ddb4ce94fa8895d6bcf2266777"
+    }
+  },
+  "missing_required_split_files": [],
+  "next_work": "Independently reproduce supplied signatures and frozen assignments before extending partition coverage. Do not rerun group selection on the full population and thereby move prior holdouts.",
+  "required_split_files_recovered": 3,
+  "schema_version": "forge.compose_lipid_split_source_recovery.v2",
+  "seed": 0,
+  "training_admitted": false,
+  "upstream_code_executed": false,
+  "upstream_code_modified": false,
+  "upstream_commit": "9f77fb399d644e6fbab1d3d766611a81e69e85fc"
+}

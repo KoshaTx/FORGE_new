@@ -1,0 +1,98 @@
+{
+  "comparisons": [
+    {
+      "authenticated": {
+        "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_candidate/authenticated_ugi_l1_semantic_products.csv.gz",
+        "sha256": "397c51f29cadfadb295918aaffaa8aa9f3e3c63b43453cd4f24e646cf3f395f1"
+      },
+      "csv_sha256": "43c7a7bc49f731a41e37bad7618269f94a8dc378d494a473f74b4e10ce28c9bd",
+      "encoding_checks": [
+        {
+          "method": "unchanged",
+          "sha256": "231b37e3d9d4e70db7728a923060ec353649ae328869760051ce6f4190b0d134"
+        },
+        {
+          "method": "gzip_os_byte_255",
+          "sha256": "397c51f29cadfadb295918aaffaa8aa9f3e3c63b43453cd4f24e646cf3f395f1"
+        },
+        {
+          "method": "gzip_level_6_os_255",
+          "sha256": "384558b3ef0d9977e2d0744c6bd44c8a76ae7c88b9b733b58bf21a542dd90392"
+        },
+        {
+          "method": "gzip_level_9_os_255",
+          "sha256": "397c51f29cadfadb295918aaffaa8aa9f3e3c63b43453cd4f24e646cf3f395f1"
+        }
+      ],
+      "exact_original_recovered": true,
+      "expected": {
+        "path": "results/phase1/ugi_l1_semantics/ugi_l1_semantic_products.csv.gz",
+        "sha256": "397c51f29cadfadb295918aaffaa8aa9f3e3c63b43453cd4f24e646cf3f395f1"
+      },
+      "method": "gzip_os_byte_255",
+      "replayed": {
+        "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_candidate/ugi_l1_semantic_products.csv.gz",
+        "sha256": "231b37e3d9d4e70db7728a923060ec353649ae328869760051ce6f4190b0d134"
+      }
+    },
+    {
+      "authenticated": {
+        "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_candidate/authenticated_ugi_l1_semantic_atoms.csv.gz",
+        "sha256": "649865b966ab53dd70e4c3fbcff72e78d05d79813fbb4fe36273e3d87d8d8e44"
+      },
+      "csv_sha256": "72835782a013d501f0650c9bcd293680d15f832dc970472cc63fe3e54a926aa6",
+      "encoding_checks": [
+        {
+          "method": "unchanged",
+          "sha256": "0be6674b95e82c8dc0fa71b5f38a07315f0647c2d4d55b8880b7740f419b6cc9"
+        },
+        {
+          "method": "gzip_os_byte_255",
+          "sha256": "649865b966ab53dd70e4c3fbcff72e78d05d79813fbb4fe36273e3d87d8d8e44"
+        },
+        {
+          "method": "gzip_level_6_os_255",
+          "sha256": "a3ced13eca1ea76327eba32646991ad986cc702c0e27cf9609e57cf32e072752"
+        },
+        {
+          "method": "gzip_level_9_os_255",
+          "sha256": "649865b966ab53dd70e4c3fbcff72e78d05d79813fbb4fe36273e3d87d8d8e44"
+        }
+      ],
+      "exact_original_recovered": true,
+      "expected": {
+        "path": "results/phase1/ugi_l1_semantics/ugi_l1_semantic_atoms.csv.gz",
+        "sha256": "649865b966ab53dd70e4c3fbcff72e78d05d79813fbb4fe36273e3d87d8d8e44"
+      },
+      "method": "gzip_os_byte_255",
+      "replayed": {
+        "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_candidate/ugi_l1_semantic_atoms.csv.gz",
+        "sha256": "0be6674b95e82c8dc0fa71b5f38a07315f0647c2d4d55b8880b7740f419b6cc9"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-14T18:43:23.094094+00:00",
+  "historical_annotation_gates": {
+    "all_measured_semantics_reproduced": true,
+    "all_precursor_origin_regions_connected": true,
+    "all_products_annotated": true,
+    "all_products_have_exact_core": true,
+    "all_products_have_one_core_role_anchor_per_precursor": true,
+    "all_semantic_signatures_unique": true,
+    "component_counts_exact": true,
+    "measured_count_exact": true,
+    "origin_and_core_annotations_orthogonal": true,
+    "virtual_only_count_exact": true
+  },
+  "installed": false,
+  "ready_for_restoration": true,
+  "replay_result": {
+    "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_candidate/ugi_l1_semantics_result.json",
+    "sha256": "dd4e5cc36b5cd726fee4ed3bf67c0009846724e1e23c800ecf600172c9cb28e7"
+  },
+  "request": {
+    "path": "results/phase1/combinatorial_repository_readiness_v1/l1_annotations_request.json",
+    "sha256": "cf7ea47cbda71ebb802fc53ad22db0bcb61ba3a608c4ea8f058e7092b57b1f98"
+  },
+  "schema_version": "forge.l1_annotation_recovery.v1"
+}

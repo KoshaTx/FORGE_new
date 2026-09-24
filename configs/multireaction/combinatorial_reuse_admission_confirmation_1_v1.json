@@ -1,0 +1,26 @@
+{
+  "acceptance": "Frozen confirmation protocol: positive full-depth exact gain and no loss in any per-family declared count metric; report both runs.",
+  "confirmation_protocol": {
+    "path": "configs/multireaction/combinatorial_reuse_confirmation_protocol_v1.json",
+    "sha256": "17bdf3fed266edcd3bd1349d4e0aa992d11d972230b4b4419167d275ac925b75"
+  },
+  "parent_result": {
+    "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/result.json",
+    "sha256": "652c793fc55be97a764736dffa23ccff077030afccc2c749ec033a8f8d12ce41"
+  },
+  "policy": {
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "prospective_candidate_selection": false,
+    "retain_all_original_attempts": true,
+    "selection": "minimum_graph_edits_then_smiles_then_donor",
+    "training_calls": 0,
+    "uses_current_family_product_counts": true,
+    "uses_train_product_membership": true
+  },
+  "schema_version": "forge.combinatorial_reuse_admission.v1_config",
+  "scientific_question": "Can explicit count-preserving admission retain exact-program gains without decreasing any existing per-family metric?",
+  "stopping_rule": "One deterministic pass in saved attempt order over the existing bounded proposal ledger. No extra proposals, model calls, tuning or best-seed selection."
+}

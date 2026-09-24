@@ -1,0 +1,22 @@
+{
+  "acceptance": "Positive exact gain and all original per-family count metrics nondecreasing. Discovery is exploratory; confirmation uses a frozen rule and fresh layout and flow seeds.",
+  "parent_result": {
+    "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json",
+    "sha256": "b218cf52fb5f261bfe477e2725ed44de7385be773326b98af0532f3a56974a70"
+  },
+  "policy": {
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "prospective_candidate_selection": false,
+    "retain_all_original_attempts": true,
+    "selection": "minimum_graph_edits_then_smiles_then_donor",
+    "training_calls": 0,
+    "uses_current_family_product_counts": true,
+    "uses_train_product_membership": true
+  },
+  "schema_version": "forge.combinatorial_reuse_admission.v1_config",
+  "scientific_question": "Can explicit count-preserving admission retain exact-program gains without decreasing any existing per-family metric?",
+  "stopping_rule": "One deterministic pass in saved attempt order over the existing bounded proposal ledger. No extra proposals, model calls, tuning or best-seed selection."
+}

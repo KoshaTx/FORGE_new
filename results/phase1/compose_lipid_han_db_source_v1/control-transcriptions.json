@@ -1,0 +1,106 @@
+{
+  "assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/article.xml",
+      "sha256": "ebcfa04432209827f712e74b41558c042c0b4b9d531f0d436a642b4e8d0f61b0"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/41467_2024_45537_MOESM1_ESM.pdf",
+      "sha256": "b7ae2f3241f451fd49579fb88338cd3b0dabee0c92836978d4a4701afb03b2b3"
+    }
+  },
+  "controls": [
+    {
+      "analytical_ion_assignment_admitted": false,
+      "calculated_neutral_mass": 498.4396583359999,
+      "complete_components": {
+        "acyl_tail": "CCCCCC(=O)Cl",
+        "amine_head": "CN(C)CCCN",
+        "epoxide_tail": "CCCCC1CO1"
+      },
+      "expected_final_product": "CN(C)CCCN(CC(OC(=O)CCCCC)CCCC)CC(OC(=O)CCCCC)CCCC",
+      "expected_stage_1_product": "CN(C)CCCN(CC(O)CCCC)CC(O)CCCC",
+      "full_inventory_with_two_HCl_balanced": true,
+      "label": "1-6-6",
+      "neutral_formula": "C29H58N2O4",
+      "quantities": {
+        "acyl_tail": 2,
+        "amine_head": 1,
+        "epoxide_tail": 2
+      },
+      "source_locator": "SI PDF p. 3 Fig. S2 full aminoalcohol and DB graphs; p. 23 Table S1 mass entries",
+      "source_table_calculated": 498.44,
+      "source_table_observed": 499.5,
+      "stage_1_inventory_balanced": true
+    },
+    {
+      "analytical_ion_assignment_admitted": false,
+      "calculated_neutral_mass": 666.627459104,
+      "complete_components": {
+        "acyl_tail": "CCCCCCCC(=O)Cl",
+        "amine_head": "CN(C)CCCN",
+        "epoxide_tail": "CCCCCCCCC1CO1"
+      },
+      "expected_final_product": "CN(C)CCCN(CC(OC(=O)CCCCCCC)CCCCCCCC)CC(OC(=O)CCCCCCC)CCCCCCCC",
+      "expected_stage_1_product": "CN(C)CCCN(CC(O)CCCCCCCC)CC(O)CCCCCCCC",
+      "full_inventory_with_two_HCl_balanced": true,
+      "label": "1-10-8",
+      "neutral_formula": "C41H82N2O4",
+      "quantities": {
+        "acyl_tail": 2,
+        "amine_head": 1,
+        "epoxide_tail": 2
+      },
+      "source_locator": "SI PDF p. 3 Fig. S2 full aminoalcohol and DB graphs; p. 23 Table S1 mass entries",
+      "source_table_calculated": 666.63,
+      "source_table_observed": 667.8,
+      "stage_1_inventory_balanced": true
+    }
+  ],
+  "doi": "10.1038/s41467-024-45537-z",
+  "experimental_execution_admitted": false,
+  "family": "epoxide_opening_o_acylation",
+  "implementation": {
+    "path": "results/phase1/compose_lipid_han_db_source_v1/transcribe_controls.py",
+    "sha256": "dceb94b9ddb6d0662ed2a5c6823cc419874a83cab11b644a3f60b7058eb9193e"
+  },
+  "limitations": [
+    "2.4 reagent equivalents per stage do not replace the two incorporated copies.",
+    "The source reagent is acyl chloride, not a substituted carboxylic-acid surrogate; net byproduct is two HCl.",
+    "Table S1 calculated values match neutral exact masses. Observed values are preserved without imposing an unreported exact ion assignment.",
+    "Two epoxide additions constitute one documented stage and two O-acylations the next; no isolated mono-adduct intermediate is claimed.",
+    "A source-qualified grouped-stage executor and ambiguity/competing-N tests are still required."
+  ],
+  "program_qualification_pass": false,
+  "schema_version": "forge.source_control_transcriptions.v1",
+  "seed": 0,
+  "source_procedure": {
+    "locator": "Main Methods: General method for the synthesis of DB-lipidoids",
+    "salt_exception": "Excess TEA added in stage 1 when the amine is a salt.",
+    "stage_1": {
+      "amine_mmol": 0.1,
+      "epoxide_equivalents": 2.4,
+      "epoxide_mmol": 0.24,
+      "temperature_c": 80,
+      "time_h": 48
+    },
+    "stage_2": {
+      "DCM_ml": 2,
+      "TEA_equivalents": 3,
+      "TEA_mmol": 0.3,
+      "acyl_chloride_equivalents": 2.4,
+      "acyl_chloride_mmol": 0.24,
+      "temperature": "room temperature",
+      "time_h": 12,
+      "workup": "DCM and TEA removed under vacuum; crude products dissolved in EtOH"
+    }
+  },
+  "source_visual_review": {
+    "performed": true,
+    "supplement_pdf_pages": [
+      3,
+      23
+    ]
+  },
+  "training_admitted": false
+}

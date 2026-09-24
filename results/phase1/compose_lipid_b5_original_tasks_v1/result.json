@@ -1,0 +1,178 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_b5_original_tasks_v1/selected-tasks.jsonl.gz",
+    "sha256": "1d9b15eb59d838a366e0bc11d592a6f477e788e389d2eedd1704c568204ab22b"
+  },
+  "chemistry_qualified": false,
+  "component_structure_comparison_performed": false,
+  "dispositions": {
+    "original_task_bytes_authenticated": 4077
+  },
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_original_binding.py": {
+      "path": "forge/corpus/compose_lipid_original_binding.py",
+      "sha256": "3eee2692e6a06069b86ee5fcf93ce99394fb3ae2748bf794a56dccb6c0b4e71d"
+    },
+    "results/phase1/compose_lipid_b5_source_v2/extract_eligible_tasks.py": {
+      "path": "results/phase1/compose_lipid_b5_source_v2/extract_eligible_tasks.py",
+      "sha256": "4feceabf3732d0a2d124bdf6a9090437aeab8b733077e8fe02b5d0c6e243d26b"
+    }
+  },
+  "inputs": {
+    "constructions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+      "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+    },
+    "export_receipt": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/receipt.json",
+      "sha256": "e1d4658d211466ec2d035f49c864f8a0969e4e5a1e3898358c56422820284587"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "task_receipt": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/receipt.json",
+      "sha256": "5dbbdf1c3a1814e5dc6eef3e2433108b0ecb897210de47fd16feb7a17a0c069d"
+    }
+  },
+  "rows": 4077,
+  "schema_version": "forge.b5_eligible_original_task_extraction.v1",
+  "seed": 0,
+  "selection_before_molecular_record_decoding": true,
+  "task_shards": {
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/00.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/00.jsonl.gz",
+      "sha256": "6f28706b08e2f6da65858065414166b152d45ae1f37dd581ae9912149fd2519a"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/01.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/01.jsonl.gz",
+      "sha256": "db899740ca93a83ff58d21012031bddb3fabbf55715fc492580eed5018b825a2"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/02.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/02.jsonl.gz",
+      "sha256": "da6df192bb444169814cb7d15cf4b70f9efbb85e278ed67b41d8c7f99949501f"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/03.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/03.jsonl.gz",
+      "sha256": "67e1e55b7df27953bed55ae3db76d4de83942dca59a6e291bdc91c207aa6000e"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/04.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/04.jsonl.gz",
+      "sha256": "0249225032b7703dbe16eed5a2d3a851649a95adc714a6c2926fd1d39bc4f751"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/05.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/05.jsonl.gz",
+      "sha256": "04a264cc3950152f7d48269f4f63de8c30d8961a447b3f67fa23a1d03aa5fafc"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/06.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/06.jsonl.gz",
+      "sha256": "3c4e74705e527bef33802c6ac2d7d54ded4de78278e60b1b3ba9eb1aa45d74b9"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/07.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/07.jsonl.gz",
+      "sha256": "478aabdb0cfd23c6163053b29994b9b0d632ad760272939a41f6f918748eaaa1"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/08.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/08.jsonl.gz",
+      "sha256": "05aba716f730e2e9fc134c9b23b0a040564f1fc08ef7c9e3f19caa175b4b29d8"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/09.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/09.jsonl.gz",
+      "sha256": "011dfca4343fc6dec3b9fe7cf8548ffae95b35f851e69247038febf980940f0e"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/10.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/10.jsonl.gz",
+      "sha256": "47b1c6fd93fe6b55dac179e9a6e5a80819b2519ccb9be6e0c4176df57c9b5b69"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/11.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/11.jsonl.gz",
+      "sha256": "6f1b5da001ea018a91365f59013d89891d81a8252b3b8478bc7d96ee972b7f63"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/12.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/12.jsonl.gz",
+      "sha256": "31cdd35b8881299cc1412515044465eeef066dde6a6e7a5fc73c6319d8abb8ba"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/13.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/13.jsonl.gz",
+      "sha256": "b81aff5ccdc4d1e5a414f91f03fd6f8d733db03e74d946e3b7fe0203c0033534"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/14.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/14.jsonl.gz",
+      "sha256": "81a390f7c1c7403f6bf5997c952a0e98fd05cdf46a778de01d2f96a95fdef4d4"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/15.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/15.jsonl.gz",
+      "sha256": "e528c2a1f45d4103a3dacf0c6113cfc451421e36ed7dc035e8d9195e3da3002e"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/16.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/16.jsonl.gz",
+      "sha256": "057d246eaff29cd9988aedb4cb2a575895e97de1d06f708b4fa1a411bb38aa26"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/17.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/17.jsonl.gz",
+      "sha256": "d9a889992720d913ccc25623191578c792c481d393125a2592e2ad280eaa70f3"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/18.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/18.jsonl.gz",
+      "sha256": "f593c29a4565d1e10dbb332896886d0093b7cc9821eb71278168a4e4fb91fdb8"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/19.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/19.jsonl.gz",
+      "sha256": "5d0f3ca94e3c9981ccd969aeb8564209a25621002971058565ba8cea684e7447"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/20.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/20.jsonl.gz",
+      "sha256": "414bf8b64f2892360836067107f0c5107d079ca918e42124830d91192475ff33"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/21.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/21.jsonl.gz",
+      "sha256": "c4c4fc7655ed8dfb16b5e3f1b409bcfafc8f43a6e81f2d3a353667cb0b594680"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/22.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/22.jsonl.gz",
+      "sha256": "ec30bead28dc3d2a129e061b02b9b9a55b5486d4f8c14e6fc171632f77c499ea"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/23.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/23.jsonl.gz",
+      "sha256": "27e9a11cc6810f0e62b47e2e42a0582c786c092aa9677203a9332b13a4a214c2"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/24.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/24.jsonl.gz",
+      "sha256": "c3fbe5aac476167a7ed3bf69c0ccc64e0bc408b1e8f111abf07cc3b0f3a31db4"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/25.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/25.jsonl.gz",
+      "sha256": "cd1ec31241f1ea0ec266c17163a027671494ca40dc2d56600802cafdf0007923"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/26.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/26.jsonl.gz",
+      "sha256": "4a91f2c45689634985b8af6e3228a361d0b71bedffa6f9cceb42237008a6d01d"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/27.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/27.jsonl.gz",
+      "sha256": "b4c48af0959ee57187d2b666c3b10ae00b3672901bceda17eb20693c7ec5bfba"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/28.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/28.jsonl.gz",
+      "sha256": "1961c12347e1f8d38f3cbaaf474857851bc7be6e6e02e726f035db3c1ec33c70"
+    },
+    "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/29.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_23_vitamin_b5_enumeration_v8/tasks/29.jsonl.gz",
+      "sha256": "f53312f0b9a5ce56502c82a2b5d62995018563ad2efce07da9425dfb1220daab"
+    }
+  },
+  "training_admitted": false
+}

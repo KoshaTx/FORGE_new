@@ -1,0 +1,17 @@
+{
+  "affected_receipt": {
+    "path": "results/phase1/compose_lipid_role_binding_v1/result.json",
+    "sha256": "17ab4b1d28726f8ee3dd5afaa4a0368a647b20a24a60ff00a459a14920c78113"
+  },
+  "correction": "Authenticate original receipt, implementation, config, inputs and ledger by recorded hashes only; derive role witnesses only for current eligible IDs, then independently replay those IDs.",
+  "disposition": "intermediate role-binding receipt superseded; not admitted as final current-population validation",
+  "implementation_before": {
+    "path": "results/phase1/compose_lipid_full_preparation_validation_v2/role_binding_before_scope_correction.py",
+    "sha256": "d24313e64129aa8b8baa98189549825c4540e42bc10d58a61da22e6ffd37885e"
+  },
+  "issue": "Prior receipt verification called verify_source_event, which recomputed the older product-protected population rather than restricting fresh replay to the corrected intersection.",
+  "schema_version": "forge.compose_lipid_scope_correction.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0
+}

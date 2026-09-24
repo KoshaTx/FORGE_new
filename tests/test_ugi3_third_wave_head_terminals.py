@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments._runtime.historical import resolve_pinned_input
 from forge.corpus.r1_prime_audit import sha256_file
 from forge.synthesis.engine.planner import KnowledgeDisposition, KnowledgeResult, RouteTarget
 from forge.synthesis.terminals.ugi3_third_wave_head_terminals import (
@@ -15,7 +16,7 @@ from forge.synthesis.terminals.ugi3_third_wave_head_terminals import (
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json"
-INPUTS = {
+_DECLARED_INPUTS = {
     "audit_source": REPO / "src/forge/route/ugi3_third_wave_head_terminals.py",
     "evidence_pack": REPO / "configs/route/phase1_ugi3_third_wave_head_terminals_v1.json",
     "prior_product_impact": REPO
@@ -28,6 +29,20 @@ INPUTS = {
     "supplier_page": REPO
     / "data/source_cache/phase1_ugi3_third_wave_head_terminals"
     / "chemimpex_03599_2026-08-01.html",
+}
+
+# Historical source is authenticated by original path and digest; data pins and all
+# scientific replay/adversarial assertions remain unchanged.
+_CONFIGURED_INPUTS = json.loads(CONFIG.read_text())["inputs"]
+INPUTS = {
+    name: (
+        resolve_pinned_input(
+            REPO, _CONFIGURED_INPUTS[name]["asset"], _CONFIGURED_INPUTS[name]["expected_sha256"]
+        )
+        if _CONFIGURED_INPUTS[name]["asset"].startswith(("src/", "scripts/"))
+        else path
+    )
+    for name, path in _DECLARED_INPUTS.items()
 }
 
 

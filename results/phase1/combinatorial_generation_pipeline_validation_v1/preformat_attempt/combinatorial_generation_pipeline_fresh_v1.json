@@ -1,0 +1,176 @@
+{
+  "acceptance": {
+    "all_eight_metrics_preserved_in_each_family": true,
+    "novel_exact_products_in_each_family": true,
+    "positive_exact_gain_vs_connection": true,
+    "positive_exact_gain_vs_raw": true
+  },
+  "comparison": "Paired raw, admitted predecessor stages and final outputs. Extra completion and verification compute is disclosed.",
+  "cpu_threads": 2,
+  "policy": {
+    "all_attempts_retained": true,
+    "all_qualified_products_exported_without_ranking": true,
+    "family_count": 12,
+    "gate_changes": false,
+    "heldout_access": false,
+    "no_outcome_dependent_budget_extension": true,
+    "promotion": false,
+    "remote_compute": false,
+    "source_context": "TRAIN_layout_occurrences_connections_and_typed_core",
+    "stages": [
+      "graph",
+      "admission",
+      "occurrence",
+      "connection",
+      "source_core"
+    ],
+    "training_calls": 0
+  },
+  "population_mode": "fresh_train",
+  "reference_results": {
+    "admission": {
+      "path": "results/phase1/combinatorial_reuse_admission_discovery_v1/result.json",
+      "sha256": "6251fb0c9bc6a9e894a2c5dac2d104df6a13e7f3e7393525a122360ab0161912"
+    },
+    "connection": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "graph": {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json",
+      "sha256": "b218cf52fb5f261bfe477e2725ed44de7385be773326b98af0532f3a56974a70"
+    },
+    "occurrence": {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json",
+      "sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459"
+    },
+    "source_core": {
+      "path": "results/phase1/combinatorial_source_core_completion_discovery_v1/result.json",
+      "sha256": "3610292dd4b13c82b2f3f01356aa754af6e2b08eee66c11157418cb5a09f38be"
+    }
+  },
+  "sampling": {
+    "attempts_per_family": 64,
+    "batch_size": 16,
+    "flow_seed": 2026091902,
+    "flow_steps": 32,
+    "layout_seed": 2026091901
+  },
+  "schema_version": "forge.combinatorial_generation_pipeline.v1_config",
+  "scientific_question": "Does the frozen full pipeline preserve every family metric and retain incremental source-core gains on a newly sampled population?",
+  "source_pins": [
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_connection_reuse.py",
+      "sha256": "9f2936a5418031252d6f337da680a745d265d1c922d762b5bed0d9ebecc66e95"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generation.py",
+      "sha256": "b25384f16a0d7fe6bd29a3a7f62d31122e85ee1bb8aa866f282a5ad86a27de0f"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generation_pipeline.py",
+      "sha256": "08786cba075f23fc54984b5abe5ba54f598cd2a0e149d0120167d37668639781"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_graph_reuse.py",
+      "sha256": "159b4e774a1781e57b2796edb7d86a797e22980f1284a9981058243b468793b0"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_graph_reuse_verify.py",
+      "sha256": "e5da348af4ce481303d033facbc7fbfb851387be4b4bc0f42db077e652bc4707"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_occurrence_reuse.py",
+      "sha256": "e15448f73c81a79f23ad1416af9854946a0516fa51eef8192b720e95e9d6fe57"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_reuse_admission.py",
+      "sha256": "c35a36175cb12b0eb689ca7dbca58cf001a2206795ca413d1450425f9e1664f5"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_reuse_pilot.py",
+      "sha256": "8b36c8b59585600bceb75f679c830fbb2b539048915e0adaf1ea7b9b76a11e30"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_source_core_completion.py",
+      "sha256": "dc6a6f8be86d2ddf8f95849fa63a65586b869ce4ce64902a634244ae3222a471"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_training_pilot.py",
+      "sha256": "f622eb6e0b6ff4f37ee878bc62fb6fd6486ebac183f155a4a983360b96aa37e7"
+    },
+    {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    {
+      "path": "forge/assembly/library_generation.py",
+      "sha256": "869d6f2de87bf6da206d63398398a966cae4c5476452a380a277bbac57084a2a"
+    },
+    {
+      "path": "forge/assembly/library_occurrences.py",
+      "sha256": "0f8579dd03a29b9528b21132ad69d8e00e21a48c80a5f93dfb1d44324973ed4f"
+    },
+    {
+      "path": "forge/assembly/library_programs.py",
+      "sha256": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f"
+    },
+    {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    },
+    {
+      "path": "forge/model/combinatorial_core_scaffold.py",
+      "sha256": "3c0ff91483ce25550780745607415df220ce0072b4c9ea2a1bea7811db6ebfb4"
+    },
+    {
+      "path": "forge/model/defog_feasibility.py",
+      "sha256": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0"
+    },
+    {
+      "path": "forge/model/fixed_closure_decoding.py",
+      "sha256": "415b4f6924d47743671ab86bc5f8cfbf185c029d226e31d0b688334d8ebed803"
+    },
+    {
+      "path": "forge/model/precursor_occurrence_reuse.py",
+      "sha256": "4e7749e09d05c49e8a0709a7582ab2564921e21540ac2ba157eae186c9f7fbc2"
+    },
+    {
+      "path": "forge/model/precursor_reuse.py",
+      "sha256": "35e6044dee642b1ce667ae65bc3621134d2b00249e251968021d48b966293c00"
+    },
+    {
+      "path": "forge/model/precursor_reuse_admission.py",
+      "sha256": "2c190a7b603b487af5887bc7e2c9427a73fad4b6e96b00a53dc1fc9439502533"
+    },
+    {
+      "path": "forge/model/precursor_reuse_projection.py",
+      "sha256": "b8994ee70024feda752c92735e6f55336f3001a41feff9b896bf43c0803cbd94"
+    },
+    {
+      "path": "forge/model/program_connection_reuse.py",
+      "sha256": "6ffadba7256580e59edba7bbc13209d96ac52c8ce4326d81bbdfadef42bef409"
+    },
+    {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+    },
+    {
+      "path": "forge/model/source_core_completion.py",
+      "sha256": "9e9b125719200758a57420a1f5fbca54832c956c075b3572b53cddfe97d0e529"
+    },
+    {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    }
+  ],
+  "stopping_rule": "Exactly this population and seed pair; no outcome-dependent extension. Retain negative results. This is fresh TRAIN-context sampling, not sealed heldout evaluation."
+}

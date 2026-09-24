@@ -1,0 +1,184 @@
+"""Read-only verification of saved all-library generation and optional deterministic replay."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from collections import Counter
+from pathlib import Path
+
+from rdkit import Chem
+
+from experiments.phase1.multireaction.combinatorial_generation import (
+    CombinatorialGenerationError,
+    summarize,
+)
+from forge.assembly.families import load_assembly_libraries
+from forge.assembly.library_programs import replay_library_program
+from forge.core.hashing import resolve_pin, sha256_file
+from forge.corpus.library_splits import constitution_id
+from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+
+
+def verify(repo: Path, result_path: Path, replay_path: Path | None = None) -> dict:
+    repo = repo.resolve()
+    result_path = (repo / result_path).resolve()
+    result = json.loads(result_path.read_text())
+    if (
+        result.get("schema_version") != "forge.combinatorial_generation_result.v1"
+        or result.get("stage") != "generation"
+    ):
+        raise CombinatorialGenerationError("not a generation result")
+    for pin in [
+        result["config"],
+        *result["sources"],
+        *result["inputs"].values(),
+        *result["artifacts"].values(),
+    ]:
+        resolve_pin(pin, repo, label="generation verification")
+    config = json.loads((repo / result["config"]["path"]).read_text())
+    if config["inputs"] != result["inputs"]:
+        raise CombinatorialGenerationError("result substituted its configured inputs")
+    dataset = json.loads((repo / config["inputs"]["dataset_config"]["path"]).read_text())
+    libraries = load_assembly_libraries(
+        [
+            (resolve_pin(dataset["inputs"][k], repo, label=k), dataset["inputs"][k]["sha256"])
+            for k in dataset["registries"]
+        ],
+        expected_families=dataset["programs"],
+    )
+    families = sorted(libraries)
+    layouts = json.loads((repo / result["artifacts"]["layouts.json"]["path"]).read_text())
+    with SynthesisProgramProductionCache(repo / config["inputs"]["cache"]["path"]) as cache:
+        train = {cache.canonical_smiles(int(i)) for i in cache.indices(fold="train")}
+        for layout in layouts:
+            index = layout["index"]
+            record = cache.record(index)
+            if (
+                cache.fold(index) != "train"
+                or cache.record_id(index) != layout["record_id"]
+                or record.program_id != layout["family"]
+                or record.program_depth != layout["depth"]
+                or record.node_count != layout["nodes"]
+            ):
+                raise CombinatorialGenerationError("layout provenance mismatch")
+    components = {
+        r["constitution_id"]
+        for r in json.loads((repo / config["inputs"]["component_partitions"]["path"]).read_text())
+        if r["fold"] == "train"
+    }
+    rows = [
+        json.loads(line)
+        for line in (repo / result["artifacts"]["attempts.jsonl"]["path"]).read_text().splitlines()
+    ]
+    expected = {
+        (arm, family): config["sampling"]["attempts_per_family"]
+        for arm in ("untrained", "trained")
+        for family in families
+    }
+    if Counter((r["arm"], r["program_id"]) for r in rows) != expected:
+        raise CombinatorialGenerationError("attempt accounting mismatch")
+    if len({(r["arm"], r["sample_index"]) for r in rows}) != len(rows):
+        raise CombinatorialGenerationError("duplicate attempt identifier")
+    witness_count = 0
+    for row in rows:
+        layout = layouts[row["sample_index"]]
+        if (
+            row["layout_record_id"] != layout["record_id"]
+            or row["program_id"] != layout["family"]
+            or row["requested_depth"] != layout["depth"]
+        ):
+            raise CombinatorialGenerationError("attempt/layout mismatch")
+        smiles = row["canonical_smiles"]
+        mol = Chem.MolFromSmiles(smiles) if smiles else None
+        valid = mol is not None and len(Chem.GetMolFrags(mol)) == 1
+        if (
+            valid != row["valid_connected"]
+            or valid != row["valid"]
+            or row["novel_vs_train"] != (valid and smiles not in train)
+        ):
+            raise CombinatorialGenerationError("validity/novelty mismatch")
+        witnesses = row["assembly"]["programs"]
+        if bool(witnesses) != (row["assembly"]["status"] == "exact_computed_program"):
+            raise CombinatorialGenerationError("exact-program status mismatch")
+        policy = dataset["programs"][row["program_id"]]
+        if row["target_scope"] != policy["target_scope"]:
+            raise CombinatorialGenerationError("assembly versus precursor scope mismatch")
+        for witness in witnesses:
+            intermediates = witness["intermediate_products"]
+            if (
+                not valid
+                or len(intermediates) != layout["depth"]
+                or intermediates[-1] != smiles
+                or not replay_library_program(
+                    libraries[row["program_id"]],
+                    witness["components"],
+                    intermediates,
+                    accumulator_role=policy["accumulator_role"],
+                    maximum_outcomes=dataset["limits"]["maximum_outcomes"],
+                )
+            ):
+                raise CombinatorialGenerationError("saved witness failed exact forward replay")
+            witness_count += 1
+        expected_novel = bool(witnesses) and all(
+            any(constitution_id(s) not in components for s in w["components"].values())
+            for w in witnesses
+        )
+        if row["all_witnesses_have_novel_component"] != expected_novel:
+            raise CombinatorialGenerationError("component novelty mismatch")
+    summaries = {
+        arm: summarize([r for r in rows if r["arm"] == arm], families)
+        for arm in ("untrained", "trained")
+    }
+    demonstrated = {p: summaries["trained"][p]["unique_novel_exact_products"] > 0 for p in families}
+    if (
+        summaries != result["per_arm"]
+        or demonstrated != result["novel_exact_generation_demonstrated_by_family"]
+        or all(demonstrated.values()) != result["generation_demonstrated_all_families"]
+    ):
+        raise CombinatorialGenerationError("summary or demonstration claim differs from attempts")
+    replay_equal = None
+    if replay_path is not None:
+        replay = json.loads((repo / replay_path).read_text())
+        verify(repo, replay_path)
+        replay_equal = all(
+            result[k] == replay[k]
+            for k in (
+                "config",
+                "inputs",
+                "sources",
+                "per_arm",
+                "sampler",
+                "family_target_scope",
+                "novel_exact_generation_demonstrated_by_family",
+                "reference_train_product_count",
+                "reference_train_component_count",
+                "layout_policy",
+                "access",
+            )
+        ) and all(
+            result["artifacts"][k]["sha256"] == replay["artifacts"][k]["sha256"]
+            for k in result["artifacts"]
+        )
+        if not replay_equal:
+            raise CombinatorialGenerationError("generation replay differs")
+    return {
+        "status": "verified",
+        "result_sha256": str(sha256_file(result_path)),
+        "attempts_verified": len(rows),
+        "witnesses_forward_replayed": witness_count,
+        "scientific_fields_and_artifacts_replay_identical": replay_equal,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--result", type=Path, required=True)
+    parser.add_argument("--replay", type=Path)
+    args = parser.parse_args()
+    print(json.dumps(verify(args.repo_root, args.result, args.replay), indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

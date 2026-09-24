@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from types import SimpleNamespace
+
 import numpy as np
 import pytest
 
@@ -9,6 +11,7 @@ from forge.model.reaction_program_conditioning import ReactionProgramVocabulary
 from forge.model.reaction_program_flow import (
     ReactionProgramSparseFlow,
     collate_reaction_program_records,
+    derive_role_morphology_states,
 )
 from forge.model.reaction_program_graph import tensorize_reaction_program_product
 from forge.model.reaction_program_sampling import (
@@ -17,6 +20,27 @@ from forge.model.reaction_program_sampling import (
 )
 
 torch = pytest.importorskip("torch")
+
+
+def test_role_morphology_counts_branches_cycles_and_core_attachments_separately() -> None:
+    # Role 1 has four exterior atoms, a three-child junction, one exterior closure,
+    # and three core attachments. Role 3 has two exterior atoms joined through its
+    # core plus one exterior closure. Cross-role/core-only edges do not contribute.
+    roles = np.asarray([1, 1, 1, 1, 1, 1, 3, 3, 3, 0])
+    record = SimpleNamespace(
+        node_count=10,
+        role_states=roles,
+        core_position_states=np.asarray([2, 1, 1, 1, 1, 2, 1, 2, 1, 0]),
+        graph=SimpleNamespace(
+            parents=np.asarray([-1, 0, 1, 1, 1, 4, 0, 6, 7, 0]),
+            closure_left=np.asarray([2, 3, 2, 0, 6]),
+            closure_right=np.asarray([3, 5, 8, 5, 8]),
+        ),
+    )
+    result = derive_role_morphology_states(record)
+    np.testing.assert_array_equal(result[:6], np.tile([5, 3, 2, 4], (6, 1)))
+    np.testing.assert_array_equal(result[6:9], np.tile([3, 1, 2, 3], (3, 1)))
+    np.testing.assert_array_equal(result[9], [0, 0, 0, 0])
 
 
 def _record():

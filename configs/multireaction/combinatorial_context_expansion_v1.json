@@ -1,0 +1,33 @@
+{
+  "acceptance": "At least one new sparse-flow context per family, absent from all TRAIN cache contexts. This is a proposal-stage requirement, not successful neural generation. Preserve all failed expansions and compiler abstentions.",
+  "layout_audit": {
+    "path": "results/phase1/combinatorial_generated_layouts_v1/result.json",
+    "sha256": "df6f1e3c03ce7662706bc75b247c3e9f9b8b6c250d2c668451a39db8e9b68322"
+  },
+  "policy": {
+    "all_trials_and_paths_retained": true,
+    "component_draws": "uniform_by_role_with_replacement",
+    "component_pool": "unique_precursors_of_qualified_generated_programs",
+    "depth_draws": "uniform_allowed_depths",
+    "gate_changes": false,
+    "heldout_use": false,
+    "neural_generation_calls": 0,
+    "proposal_products_are_neural_outputs": false,
+    "remote_compute": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.combinatorial_context_expansion.v1_config",
+  "seed": 2026091601,
+  "source_pins": [
+    {
+      "path": "forge/model/generated_program_expansion.py",
+      "sha256": "aae0f9f682bea60b9ab87bf755bbd3112c4c7ec384a0a94b1d92d2e23612f4e1"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_context_expansion.py",
+      "sha256": "75661a1a3766317261feb612e04c9fa851c0da9889ab94d159ce4554d5711968"
+    }
+  ],
+  "stopping_rule": "Exactly 256 component/depth draws per family. No post-result budget increase or input-pool alteration.",
+  "trials_per_family": 256
+}

@@ -1,0 +1,164 @@
+{
+  "assets": {
+    "12951_2024_2919_MOESM1_ESM.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM1_ESM.pdf",
+      "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427"
+    },
+    "12951_2024_2919_MOESM2_ESM.docx": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM2_ESM.docx",
+      "sha256": "208b48e7f29485bb1590cf767f174f7735a2acadd265cec5f0630c9b8478c693"
+    },
+    "acquisition-followup.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition-followup.json",
+      "sha256": "f5ceba8267c5624b835457eae6ac4fb5fcac7d007a6cae747f9ab6d64232a994"
+    },
+    "acquisition.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition.json",
+      "sha256": "509b88d6bf93e6050a7daf1f74365c94303c806079c5c692ae61cfbb69d6c545"
+    },
+    "extraction.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/extraction.json",
+      "sha256": "4e9d45846eca968f108fbe544983c6809f63d1e4514fe69efac3466aefe019fa"
+    },
+    "han-epmc.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-epmc.json",
+      "sha256": "c62e3bcca097aa9cf71a1589264b1e2661690991b54e3e2068a7429487f952c2"
+    },
+    "han-si-media.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-si-media.pdf",
+      "sha256": "672330505add810c8f06b1bfe93e52921bdc093cb7d47794ddc04a9414418dd0"
+    },
+    "han.html": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.html",
+      "sha256": "dfa99704fd97e7266ea215edb502a3b3b5c66b41e467adc52e726661a9d8a64e"
+    },
+    "han.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.pdf",
+      "sha256": "df5d0ca78a22588f0561c8a391eb840b7bf389b442944b6486dd98004b7ee325"
+    },
+    "lu-supplements.zip": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu-supplements.zip",
+      "sha256": "987bdc87479e62e9e4e7c054e5f6608b6ee65ca2f8be7c0a0dd157730d55fa7b"
+    },
+    "lu.xml": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu.xml",
+      "sha256": "a22d525bad915040b237e8838bfec3fcdd417d73ad787334a94bd48b59d04550"
+    }
+  },
+  "conflicts": [
+    {
+      "disposition": "reject_claim",
+      "id": "han_asymmetric_event_count",
+      "reason": "The cited amine31 asymmetric procedure and Fig3e support one event, not two ordered events. This does not imply other repeated A3 products are impossible.",
+      "source_key_field": "architecture_subfamilies.han_ordered_two_event_asymmetric"
+    },
+    {
+      "disposition": "abstain",
+      "id": "31hP-M_CuCl_amount",
+      "locator": "SI PDF5 Supplementary Method2",
+      "reason": "CuCl is printed as 0.2 mmol and 0.1 equivalents for 0.2 mmol limiting substrate. Both values are preserved; no corrected amount or exact execution label is inferred."
+    }
+  ],
+  "nonclaims": [
+    "No full-family architecture qualification; the source-key conflict remains.",
+    "No v8 component is validated by matching an opaque v5 ID alone.",
+    "Controls establish computational consistency, not newly admitted experimental execution labels.",
+    "No training, heldout graph inspection or biological-label transfer."
+  ],
+  "primary_doi": "10.1038/s41551-024-01267-7",
+  "procedure_scope": {
+    "31hP-M": {
+      "4_formylbenzoic_acid_mmol": 0.2,
+      "5_hexynoic_acid_mmol": 0.2,
+      "CuCl_printed": "0.2 mmol, 0.1 equivalents (conflict)",
+      "amine31_mmol": 0.25,
+      "analytical_locator": "SI PDF5 formula C21H30N2O4; MS and proton NMR",
+      "atmosphere": "not specified",
+      "purification": "silica plug DCM; silica column 10:90 MeOH/DCM",
+      "reported_yield_percent": 79,
+      "solvent": "neat",
+      "temperature_C": 50,
+      "time_h": 48
+    },
+    "method_A": {
+      "CuCl_mmol": 0.01,
+      "alkyne_mmol": 0.25,
+      "amine11_mmol": 0.1,
+      "analytical_locator": "SI PDF6 formula C36H52N2; MS and proton NMR",
+      "atmosphere": "not specified",
+      "formaldehyde_mmol": 0.25,
+      "purification": "CombiFlash DCM to DCM/MeOH/NH4OH mixture",
+      "reported_11aB2_yield_percent": 53,
+      "solvent": "neat; formaldehyde 37% in water",
+      "temperature_C": 50,
+      "time_h": 48,
+      "workup": "Library1 crude; lead11(aB)2 purified per main Methods"
+    }
+  },
+  "registry": {
+    "path": "data/vendor/qualified_a3_source_program_v2.json",
+    "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+  },
+  "registry_correction": {
+    "original_evidence_retained": true,
+    "reason": "The first query also matched formic-acid and formamide carbonyls. The narrowed version retains only carbon-substituted aldehydes and formaldehyde; independent regression tests cover these boundaries.",
+    "scope": "aldehyde reactive-site definition"
+  },
+  "schema_version": "forge.a3_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "aldehyde": "C=O",
+        "alkyne": "C#Cc1ccc(CCCCCC)cc1",
+        "amine_head": "CCN(CC)CCN"
+      },
+      "disposition": "admit_transform_consistency",
+      "events": 2,
+      "evidence_basis": "computed_transform_consistency",
+      "expected_formula": "C36H52N2",
+      "expected_product": "CCN(CC)CCN(CC#Cc1ccc(CCCCCC)cc1)CC#Cc1ccc(CCCCCC)cc1",
+      "label": "Han_11(aB)2",
+      "locator": "Han main Methods p1421 Method A; main Fig2 amine11/alkyneB; SI PDF6 Supplementary Fig1 and product11(aB)2 characterization"
+    },
+    {
+      "components": {
+        "aldehyde": "O=Cc1ccc(C(=O)O)cc1",
+        "alkyne": "C#CCCCC(=O)O",
+        "amine_head": "CCN(CC)CCNC"
+      },
+      "disposition": "admit_transform_consistency",
+      "events": 1,
+      "evidence_basis": "computed_transform_consistency",
+      "expected_formula": "C21H30N2O4",
+      "expected_product": "CCN(CC)CCN(C)C(c1ccc(C(=O)O)cc1)C#CCCCC(=O)O",
+      "label": "Han_31hP-M",
+      "locator": "Han SI PDF5 Supplementary Method2, scheme and product31hP-M characterization"
+    }
+  ],
+  "source_findings": [
+    {
+      "finding": "Repeated coupling uses excess formaldehyde and one fixed alkyne. The SI depicts two, three, four and six events for different heads. Repetition depends on head N-H sites; it is not automatically a single event.",
+      "locator": "main Methods p1421 Method A; SI PDF6 Supplementary Fig1"
+    },
+    {
+      "finding": "Asymmetric Libraries3-5 use amine31 with one N-H site and one long-chain aldehyde/alkyne event. The v8 key describes these libraries as ordered two-event. Preserve that conflicting key and withhold architecture qualification.",
+      "locator": "main Fig3e and Methods p1421 Method B"
+    }
+  ],
+  "supersedes": {
+    "path": "results/phase1/compose_lipid_v8_a3_source_v1/adjudication.json",
+    "sha256": "6c2e8450f53cd1e1dad98b6e8ae31a0116082cafbc7e8b342d860bd8b8b62159"
+  },
+  "visual_inspection": {
+    "han-si-media.pdf": [
+      "PDF5 Supplementary Method2",
+      "PDF6 Supplementary Fig1",
+      "neighbor PDF7"
+    ],
+    "han.pdf": [
+      "PDF2 Fig1",
+      "PDF3 Fig2",
+      "PDF4 Fig3"
+    ]
+  }
+}

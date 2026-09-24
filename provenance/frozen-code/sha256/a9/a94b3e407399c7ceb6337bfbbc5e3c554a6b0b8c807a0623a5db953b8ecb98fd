@@ -1,0 +1,54 @@
+{
+  "schema_version": "forge.experiment.v1",
+  "experiment_id": "installation-smoke",
+  "description": "Verify the typed experiment runner, local environment, and pinned-input contract.",
+  "root_seed": 20260819,
+  "profiles": [
+    "smoke"
+  ],
+  "replicates": {
+    "smoke": 1
+  },
+  "stages": [
+    {
+      "id": "snapshot",
+      "implementation": "experiment.inputs_snapshot.v1",
+      "needs": [],
+      "config": {
+        "path": "experiments/installation_smoke/configs/snapshot_v1.json",
+        "sha256": "67a8ae4d8a1b207f35795c164835e1749f1cbfa1e19f91d1e0170c6e3b4527a3"
+      },
+      "inputs": {
+        "project": {
+          "path": "pyproject.toml",
+          "sha256": "1b0c4e3b43fecc3c7541e05e24e167ce58d10465ab9bb4e275fa4b430bfc7ef3"
+        }
+      },
+      "outputs": {
+        "snapshot": {
+          "path": "snapshot.json",
+          "schema_version": "forge.inputs_snapshot.v1"
+        }
+      },
+      "resources": {
+        "device": "cpu",
+        "precision": "float32",
+        "cpus": 1,
+        "workers": 0,
+        "memory_mb": 512,
+        "timeout_seconds": 60,
+        "gpu_type": null
+      },
+      "determinism": {
+        "mode": "strict",
+        "stream": "installation"
+      }
+    }
+  ],
+  "metadata": {
+    "scope": "engineering_smoke"
+  },
+  "nonclaims": [
+    "This smoke test verifies infrastructure only and is not a scientific result."
+  ]
+}

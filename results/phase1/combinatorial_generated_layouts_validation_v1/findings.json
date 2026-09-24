@@ -1,0 +1,285 @@
+{
+  "by_family": {
+    "acetal_aldehyde_diol": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 1,
+      "count_prior_valid": 62,
+      "expanded_unique_new_model_contexts": 0,
+      "generated_unique_new_model_contexts": 0,
+      "generated_unique_new_sampler_contexts": 26
+    },
+    "amide_coupling_acid_amine": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 8,
+      "count_prior_valid": 59,
+      "expanded_unique_new_model_contexts": 26,
+      "generated_unique_new_model_contexts": 0,
+      "generated_unique_new_sampler_contexts": 25
+    },
+    "aza_michael_amine_acrylate": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 13,
+      "count_prior_valid": 42,
+      "expanded_unique_new_model_contexts": 130,
+      "generated_unique_new_model_contexts": 6,
+      "generated_unique_new_sampler_contexts": 25
+    },
+    "carbamate_amine_chloroformate": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 63,
+      "expanded_unique_new_model_contexts": 29,
+      "generated_unique_new_model_contexts": 2,
+      "generated_unique_new_sampler_contexts": 21
+    },
+    "disulfide_coupling": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 20,
+      "count_prior_valid": 64,
+      "expanded_unique_new_model_contexts": 124,
+      "generated_unique_new_model_contexts": 25,
+      "generated_unique_new_sampler_contexts": 57
+    },
+    "epoxide_opening_amine": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 62,
+      "expanded_unique_new_model_contexts": 62,
+      "generated_unique_new_model_contexts": 3,
+      "generated_unique_new_sampler_contexts": 27
+    },
+    "iphos_amine_dioxaphospholane": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 33,
+      "expanded_unique_new_model_contexts": 92,
+      "generated_unique_new_model_contexts": 5,
+      "generated_unique_new_sampler_contexts": 23
+    },
+    "passerini_3cr": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 63,
+      "expanded_unique_new_model_contexts": 0,
+      "generated_unique_new_model_contexts": 0,
+      "generated_unique_new_sampler_contexts": 37
+    },
+    "reductive_amination_amine_aldehyde": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 7,
+      "count_prior_valid": 63,
+      "expanded_unique_new_model_contexts": 178,
+      "generated_unique_new_model_contexts": 10,
+      "generated_unique_new_sampler_contexts": 30
+    },
+    "thiol_michael_thioether": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 64,
+      "expanded_unique_new_model_contexts": 0,
+      "generated_unique_new_model_contexts": 0,
+      "generated_unique_new_sampler_contexts": 34
+    },
+    "ugi_3cr_agile": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 58,
+      "count_prior_valid": 64,
+      "expanded_unique_new_model_contexts": 94,
+      "generated_unique_new_model_contexts": 2,
+      "generated_unique_new_sampler_contexts": 37
+    },
+    "urea_amine_isocyanate": {
+      "count_prior_attempts": 64,
+      "count_prior_exact": 0,
+      "count_prior_valid": 55,
+      "expanded_unique_new_model_contexts": 88,
+      "generated_unique_new_model_contexts": 5,
+      "generated_unique_new_sampler_contexts": 19
+    }
+  },
+  "count_prior_preserves_completed_baseline": false,
+  "count_prior_preserves_source_layout_baseline": false,
+  "count_prior_support": {
+    "component_size_support_cells": 866,
+    "programs": 12,
+    "semantic_bundles": 33
+  },
+  "count_replay_all_scientific_fields_and_artifact_hashes_identical": true,
+  "created_at_utc": "2026-09-14T16:40:16.514550+00:00",
+  "expanded_context_coverage_families": 9,
+  "expansion_forward_calls": 4740,
+  "generated_context_coverage_families": 8,
+  "inputs": {
+    "configs/multireaction/combinatorial_context_expansion_v1.json": {
+      "path": "configs/multireaction/combinatorial_context_expansion_v1.json",
+      "sha256": "c57a470d3fb078bcc200199f53b05a698676fe90eb7fc7a27c8af55311a0f86b"
+    },
+    "configs/multireaction/combinatorial_count_layout_generation_v1.json": {
+      "path": "configs/multireaction/combinatorial_count_layout_generation_v1.json",
+      "sha256": "1632d622f660d4d8bea7868bd9dda0f948af614905f61a736979426c22e40fd5"
+    },
+    "configs/multireaction/combinatorial_generated_layouts_v1.json": {
+      "path": "configs/multireaction/combinatorial_generated_layouts_v1.json",
+      "sha256": "a8eb94551ce50731c073c8bb0cd256be79d177e1960197d9676644f91a66682b"
+    },
+    "experiments/phase1/multireaction/combinatorial_context_expansion.py": {
+      "path": "experiments/phase1/multireaction/combinatorial_context_expansion.py",
+      "sha256": "75661a1a3766317261feb612e04c9fa851c0da9889ab94d159ce4554d5711968"
+    },
+    "experiments/phase1/multireaction/combinatorial_count_layout_generation.py": {
+      "path": "experiments/phase1/multireaction/combinatorial_count_layout_generation.py",
+      "sha256": "44a10e27f55601925294099d1e625ceff4b2f1c9639b353d1b35e03ef356d686"
+    },
+    "experiments/phase1/multireaction/combinatorial_generated_layouts.py": {
+      "path": "experiments/phase1/multireaction/combinatorial_generated_layouts.py",
+      "sha256": "7ddc97db11426b8c3069f37c33b25db165bebe13256d3435345c31c93d5fe9af"
+    },
+    "forge/assembly/library_semantics.py": {
+      "path": "forge/assembly/library_semantics.py",
+      "sha256": "e63eb49511d27e249b50217b48df164eb1134935670386075362be4ebd8093bb"
+    },
+    "forge/model/combinatorial_layout_prior.py": {
+      "path": "forge/model/combinatorial_layout_prior.py",
+      "sha256": "dd360c8133ffa5e249c65d58f78f8ae777fc5899e759fb64c067dfe987e0d4a9"
+    },
+    "forge/model/generated_program_expansion.py": {
+      "path": "forge/model/generated_program_expansion.py",
+      "sha256": "aae0f9f682bea60b9ab87bf755bbd3112c4c7ec384a0a94b1d92d2e23612f4e1"
+    },
+    "forge/model/generated_program_layout.py": {
+      "path": "forge/model/generated_program_layout.py",
+      "sha256": "812f1aa3573ca1a470d23d1241aeefefa392a094b908e3ea75948f84aed3d8be"
+    },
+    "forge/model/reaction_program_flow.py": {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+    },
+    "forge/model/synthesis_program_graph.py": {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    "forge/model/synthesis_program_layout.py": {
+      "path": "forge/model/synthesis_program_layout.py",
+      "sha256": "05ac21ca8aacaeb353a8ccc8ef7b9f909d5bf030e329cb97cffb96fc0fe3fe39"
+    },
+    "forge/model/synthesis_program_sampling.py": {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    "forge/potency/annotations.py": {
+      "path": "forge/potency/annotations.py",
+      "sha256": "9ffeee87446623832a7030df0bce1a10285a7857aa7dc7dddcef306f59bfe18e"
+    },
+    "results/phase1/combinatorial_context_expansion_v1/component_pool.json": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/component_pool.json",
+      "sha256": "5fb3c2374df27925d890651af57cfa6eecc6cf1d06116ce8e877c5b4d1146fd5"
+    },
+    "results/phase1/combinatorial_context_expansion_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/layouts.json",
+      "sha256": "18bc60cb4a97f12bf3481c979110ff0d52067d8910689e6a91419f41b205e03b"
+    },
+    "results/phase1/combinatorial_context_expansion_v1/result.json": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/result.json",
+      "sha256": "ea655a97cb6e60967bd0926fa2d1ab41367020d1aa7332d3db77cb0e3322d65b"
+    },
+    "results/phase1/combinatorial_context_expansion_v1/trials.jsonl": {
+      "path": "results/phase1/combinatorial_context_expansion_v1/trials.jsonl",
+      "sha256": "df9b0a7a00bc06eb67f175864c864ae8d7a8f73e38a8dd1954dc6dfd9ad2674c"
+    },
+    "results/phase1/combinatorial_count_layout_generation_replay_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_count_layout_generation_replay_v1/attempts.jsonl",
+      "sha256": "26e621d32f8537e7686f133682907de572f2d912cc7e6807ef9cc86862aaf810"
+    },
+    "results/phase1/combinatorial_count_layout_generation_replay_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_count_layout_generation_replay_v1/layouts.json",
+      "sha256": "a1d2e2aec567a08e9024ffd4b5d017b9cdff6355ef0a28e63940261c19096c42"
+    },
+    "results/phase1/combinatorial_count_layout_generation_replay_v1/result.json": {
+      "path": "results/phase1/combinatorial_count_layout_generation_replay_v1/result.json",
+      "sha256": "55705c4e9041f813a76363a7275257b204a63950016c70c0435be23c724953de"
+    },
+    "results/phase1/combinatorial_count_layout_generation_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_count_layout_generation_v1/attempts.jsonl",
+      "sha256": "26e621d32f8537e7686f133682907de572f2d912cc7e6807ef9cc86862aaf810"
+    },
+    "results/phase1/combinatorial_count_layout_generation_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_count_layout_generation_v1/layouts.json",
+      "sha256": "a1d2e2aec567a08e9024ffd4b5d017b9cdff6355ef0a28e63940261c19096c42"
+    },
+    "results/phase1/combinatorial_count_layout_generation_v1/result.json": {
+      "path": "results/phase1/combinatorial_count_layout_generation_v1/result.json",
+      "sha256": "28c23a451e80652b039aa5655cc4d7e13410105931b368c808e7e3fc8affa59c"
+    },
+    "results/phase1/combinatorial_generated_layouts_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/attempts.jsonl",
+      "sha256": "fa611029f5153aa67087097f16c39ae8ac4268607d50ac67342b527eba41fc1b"
+    },
+    "results/phase1/combinatorial_generated_layouts_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/layouts.json",
+      "sha256": "b5ad430a154d242a1087ec5084acdceb57b2ea1b47c82f9b57f3c41c823b4bbd"
+    },
+    "results/phase1/combinatorial_generated_layouts_v1/result.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/result.json",
+      "sha256": "df6f1e3c03ce7662706bc75b247c3e9f9b8b6c250d2c668451a39db8e9b68322"
+    },
+    "results/phase1/combinatorial_generated_layouts_v1/train_layout_signatures.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/train_layout_signatures.json",
+      "sha256": "7eb6ab097e22995e1513bdf72bee1b2d8529c809c38f84b247ae1563b8ece49f"
+    },
+    "results/phase1/combinatorial_generated_layouts_validation_v1/existing_prior_preflight.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_validation_v1/existing_prior_preflight.json",
+      "sha256": "cac691193147ca2c5d55197ceff602b4bdf482b0de943d1aecb8aea002f08197"
+    },
+    "results/phase1/combinatorial_generated_layouts_validation_v1/report_findings.py": {
+      "path": "results/phase1/combinatorial_generated_layouts_validation_v1/report_findings.py",
+      "sha256": "7aded3debb059ee88618311cf337867628e2cf97351c521f9bfd471df8bf0761"
+    },
+    "results/phase1/combinatorial_program_cache_v2/cache.npz": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    }
+  },
+  "limits": [
+    "New neural context is an exploratory representation diagnostic, not a replacement for product/component novelty.",
+    "A count prior may legitimately sample a previously observed count combination while producing a novel graph. Unseen conditioning combinations in every family are not required by the user goal.",
+    "Registry recombination products are context proposals and are never counted as neural outputs.",
+    "The count-prior/source-layout comparison changes conditioning and tensor shapes; the Ugi contrast does not isolate the causal benefit of fixed reaction cores.",
+    "All unique totals sum per-family counts. No model promotion, all-family chemical realism, experimental synthesis or complete L2/L3 closure is established."
+  ],
+  "next_test": "Paired layouts with and without an explicitly qualified reaction-core scaffold; identical external atom slots, vocabulary, size/closure support, exact program checker, novelty/diversity metrics and generation budget. Preserve every failed attempt.",
+  "promoted": false,
+  "schema_version": "forge.combinatorial_generated_layout_findings.v1",
+  "status": "negative_count_prior_preserved",
+  "totals": {
+    "count_only_prior": {
+      "attempts": 768,
+      "exact_program": 107,
+      "novel_valid_attempts_vs_all_cache_train": 690,
+      "unique_novel_exact_products": 103,
+      "unique_valid_products": 694,
+      "valid_connected": 694
+    },
+    "existing_completed_pipeline": {
+      "attempts": 768,
+      "exact_program": 599,
+      "novel_valid_attempts_vs_all_cache_train": 719,
+      "unique_novel_exact_products": 548,
+      "unique_valid_products": 722,
+      "valid_connected": 750
+    },
+    "source_layout_baseline": {
+      "attempts": 768,
+      "exact_program": 378,
+      "novel_valid_attempts_vs_all_cache_train": 719,
+      "unique_novel_exact_products": 327,
+      "unique_valid_products": 721,
+      "valid_connected": 750
+    }
+  },
+  "urea_topology_counts_by_depth": {
+    "1": 1,
+    "2": 2,
+    "3": 2,
+    "4": 2
+  }
+}

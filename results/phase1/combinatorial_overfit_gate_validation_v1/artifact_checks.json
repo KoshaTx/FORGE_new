@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "all_input_pins_resolve": true,
+    "all_per_program_payloads_present": true,
+    "all_program_losses_improve": true,
+    "all_records_reconstruct_exactly": true,
+    "all_result_gates_pass": true,
+    "all_source_hashes_resolve": true,
+    "config_inputs_exact": true,
+    "fixed_states_preserved": true,
+    "focused_tests_pass": true,
+    "full_suite_failure_error_ids_equal_prior_baseline": true,
+    "loss_ratio_meets_frozen_threshold": true,
+    "no_generation_remote_compute_or_checkpoint": true,
+    "result_status_pass": true,
+    "scientific_replay_exact": true,
+    "twelve_distinct_programs": true
+  },
+  "excluded_replay_metadata": [
+    "created_at_utc",
+    "duration_seconds",
+    "environment"
+  ],
+  "inputs": {
+    "config": {
+      "path": "configs/multireaction/combinatorial_overfit_gate_v1.json",
+      "sha256": "847c62409e2fb5196a578c3c8c4099fb8302d74c4a987e4cd75568dd230290ee"
+    },
+    "focused_tests": {
+      "path": "results/phase1/combinatorial_overfit_gate_validation_v1/focused-tests.xml",
+      "sha256": "9f476da37eee693084562961a327c854752c33af1118477d0a6cd3d19a778b42"
+    },
+    "full_tests": {
+      "path": "results/phase1/combinatorial_overfit_gate_validation_v1/full-tests.xml",
+      "sha256": "e8cfcaa75a0d5da888a9dfd10d14ea31245394ceb0c5761115e77a3aa42ab1d6"
+    },
+    "prior_full_tests": {
+      "path": "results/phase1/combinatorial_shared_model_validation_v1/full-tests.xml",
+      "sha256": "405ddfb527f02ce9a5b72aa5dc3ed1bb58c4d39ece5efedab217ed5af62484e0"
+    },
+    "replay_result": {
+      "path": "results/phase1/combinatorial_overfit_gate_v1/replay_result.json",
+      "sha256": "ac0ef1493ae4e99c3b887204856c85cf99c9ca4e8d29bccd053325c4e423ef49"
+    },
+    "result": {
+      "path": "results/phase1/combinatorial_overfit_gate_v1/result.json",
+      "sha256": "82f2839b9a6fc1aaac5f4b043b949ea76cf54140b1efb03359e292583fe9bf9e"
+    }
+  },
+  "observations": {
+    "exact_tensor_records": 12,
+    "final_to_initial_loss_ratio": 5.436734477095508e-06,
+    "final_total_loss": 5.972391591058113e-05,
+    "initial_total_loss": 10.985255241394043,
+    "programs_improved": 12
+  },
+  "schema_version": "forge.combinatorial_overfit_gate_artifact_verification.v1",
+  "status": "pass",
+  "test_reports": {
+    "current_full_failure_error_count": 188,
+    "focused": {
+      "duration_seconds": 26.148000000000003,
+      "errors": 0,
+      "failures": 0,
+      "passed": 116,
+      "skipped": 0,
+      "tests": 116
+    },
+    "full": {
+      "duration_seconds": 490.1829999999897,
+      "errors": 21,
+      "failures": 167,
+      "passed": 2429,
+      "skipped": 92,
+      "tests": 2709
+    },
+    "new_full_failure_error_ids": [],
+    "prior_full_failure_error_count": 188,
+    "resolved_prior_failure_error_ids": []
+  }
+}

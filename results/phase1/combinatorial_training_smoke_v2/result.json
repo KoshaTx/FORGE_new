@@ -1,0 +1,200 @@
+{
+  "config": {
+    "path": "configs/multireaction/combinatorial_training_smoke_v1.json",
+    "sha256": "c16d3426612563e60a739ad8ba7f3401584454ffe3a4a1ff759c5dfc79b612e8"
+  },
+  "created_at_utc": "2026-09-14T02:37:31.331301+00:00",
+  "duration_seconds": 0.8411303329048678,
+  "environment": {
+    "cpu_threads": 1,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "torch": "2.13.0"
+  },
+  "gates": {
+    "all_programs_exercised_once": true,
+    "clean_batch_not_mutated": true,
+    "finite_nonzero_gradients": true,
+    "fixed_states_preserved_during_noising": true,
+    "full_declared_support_preserved": true,
+    "generation_calls_zero": true,
+    "identical_replica_results": true,
+    "loss_and_gradient_norm_finite": true,
+    "optimizer_updated_model_state": true
+  },
+  "generator_sampling_calls": 0,
+  "inputs": {
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "cache_config": {
+      "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+      "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+    },
+    "cache_result": {
+      "path": "results/phase1/combinatorial_program_cache_v2/result.json",
+      "sha256": "5d766f29c3c777be3b6744c63bd54a1b9e770e19f03a30d19db8909b5045a602"
+    }
+  },
+  "nonclaims": [
+    "A finite local optimizer step establishes plumbing only; it does not establish convergence, generation quality or improved realism.",
+    "No molecule was sampled and no checkpoint was promoted.",
+    "The smoke does not change structural, reconstruction, diversity or novelty gates."
+  ],
+  "optimizer_steps_executed": 2,
+  "optimizer_steps_per_replica": 1,
+  "remote_compute": false,
+  "replicas": [
+    {
+      "clean_batch_digest_after": "baf9d05f7fbee80524e5159ae6ce3d3e9e6c23704b0e298d2a9148553d58b83a",
+      "clean_batch_digest_before": "baf9d05f7fbee80524e5159ae6ce3d3e9e6c23704b0e298d2a9148553d58b83a",
+      "finite_gradients": true,
+      "fixed_noisy_states_exact": true,
+      "gradient_norm": 4.9361653327941895,
+      "loss": 15.71101188659668,
+      "metrics": {
+        "backbone_bond_ce": 1.3395054340362549,
+        "closure_bond_ce": 1.4279239177703857,
+        "closure_left_ce": 3.6512227058410645,
+        "closure_right_ce": 3.697190523147583,
+        "node_ce": 2.6171505451202393,
+        "parent_pointer_ce": 2.9780194759368896,
+        "total": 15.71101188659668
+      },
+      "model_digest_after": "83cdc44a55e84776e1dbda04a7368ba55308f1cff31168ff831a6828ac95af86",
+      "model_digest_before": "d700a06cdf29b96c4b0349304d4721ce93a659b249eaf962b103abe0ae99cb34",
+      "nonzero_gradient_tensors": 48,
+      "parameter_count": 54629
+    },
+    {
+      "clean_batch_digest_after": "baf9d05f7fbee80524e5159ae6ce3d3e9e6c23704b0e298d2a9148553d58b83a",
+      "clean_batch_digest_before": "baf9d05f7fbee80524e5159ae6ce3d3e9e6c23704b0e298d2a9148553d58b83a",
+      "finite_gradients": true,
+      "fixed_noisy_states_exact": true,
+      "gradient_norm": 4.9361653327941895,
+      "loss": 15.71101188659668,
+      "metrics": {
+        "backbone_bond_ce": 1.3395054340362549,
+        "closure_bond_ce": 1.4279239177703857,
+        "closure_left_ce": 3.6512227058410645,
+        "closure_right_ce": 3.697190523147583,
+        "node_ce": 2.6171505451202393,
+        "parent_pointer_ce": 2.9780194759368896,
+        "total": 15.71101188659668
+      },
+      "model_digest_after": "83cdc44a55e84776e1dbda04a7368ba55308f1cff31168ff831a6828ac95af86",
+      "model_digest_before": "d700a06cdf29b96c4b0349304d4721ce93a659b249eaf962b103abe0ae99cb34",
+      "nonzero_gradient_tensors": 48,
+      "parameter_count": 54629
+    }
+  ],
+  "schema_version": "forge.combinatorial_training_smoke.v1",
+  "selected_records": [
+    {
+      "closures": 1,
+      "heavy_atoms": 32,
+      "program_id": "acetal_aldehyde_diol",
+      "record_id": "00165f245f00623bcace4974b910827289a6ab945d51fe716f93a5472013e691"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 40,
+      "program_id": "amide_coupling_acid_amine",
+      "record_id": "008cc695137c71b7d7d26f57816375617fc0fda1ee6d8a3c56a29fa24e37f2b1"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 38,
+      "program_id": "aza_michael_amine_acrylate",
+      "record_id": "0022997249d9adda882adb455386218bbb8e218af5540a579a91c3ab0b8c8743"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 54,
+      "program_id": "carbamate_amine_chloroformate",
+      "record_id": "0060fa9eeba28c41f41f37be3973532f681bac1a5f35761dc6252a0497e59bb1"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 22,
+      "program_id": "disulfide_coupling",
+      "record_id": "00e37e9a9e5f8bce3c789c87a807ad9822b654a077378d64930438e23e822cda"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 29,
+      "program_id": "epoxide_opening_amine",
+      "record_id": "00251d4048ad63bb9ed3c8c355465f12e0ecc89d4be5ff8b4ab13bb9dacdafde"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 42,
+      "program_id": "iphos_amine_dioxaphospholane",
+      "record_id": "0025b1dd052a521d264eeaf9b0eebf6a5198214a828223a5b76db19a7efbcd2f"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 42,
+      "program_id": "passerini_3cr",
+      "record_id": "0003a2fd6a796feb8b4306d52b616d8714a1708b4e1024803d6a76f433a08cbd"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 42,
+      "program_id": "reductive_amination_amine_aldehyde",
+      "record_id": "003aa0472dcedc9bbfb59b33e6ebd49094ea2c387b64689e8556f8b410ca1447"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 36,
+      "program_id": "thiol_michael_thioether",
+      "record_id": "003518e7cd67e3ea6e0dcc64e43a151e6ecdb331d0b421ee2e963c3a04182df0"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 42,
+      "program_id": "ugi_3cr_agile",
+      "record_id": "00018f96a787467c73afb78124dab25fa68164c28aaad7afa0135290b4f1cd64"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 117,
+      "program_id": "urea_amine_isocyanate",
+      "record_id": "001187b2150154360db1ae416dcf678f992a9a2a39734433eef3d418197e92ba"
+    }
+  ],
+  "source_marginals": {
+    "bond": [
+      0.9421024861692525,
+      0.051421100843700294,
+      2.8786973846257126e-07,
+      0.006476125117308734
+    ],
+    "node": [
+      0.8655974803224745,
+      0.005294233704768697,
+      2.790621657254643e-07,
+      0.03495912229452504,
+      0.0005640361032664568,
+      0.00027655528708583584,
+      2.790621657254643e-07,
+      2.790621657254643e-07,
+      0.06864449441957526,
+      0.0001439957043712573,
+      0.004083817019862426,
+      0.020434869833241706,
+      2.790621657254643e-07,
+      2.790621657254643e-07
+    ]
+  },
+  "sources": {
+    "experiments/phase1/multireaction/combinatorial_training_smoke.py": "04e29c05b88a8de757a856ca1112d5243383a4d2e359c756262176061f55f79f",
+    "forge/corpus/combinatorial_program_cache.py": "d616f60468809906fd12deea46965d972d800b12be0a9467f8d73d54c742e8cd",
+    "forge/corpus/synthesis_program_production_cache.py": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d",
+    "forge/model/reaction_program_flow.py": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9",
+    "forge/model/synthesis_program_training.py": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+  },
+  "status": "pass"
+}

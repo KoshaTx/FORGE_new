@@ -1,0 +1,196 @@
+{
+  "config": {
+    "path": "results/phase1/compose_lipid_full_program_replay_v1/config.json",
+    "sha256": "1ca365de0810bcd93087264ef2a14a8068e2fdf03f0b7e52e34c53812488c0b5"
+  },
+  "implementation": {
+    "forge/assembly/api.py": {
+      "path": "forge/assembly/api.py",
+      "sha256": "bb77b94c91ee0bbba62ff9a83a1d3d31a4d280bf13b8a508537817b19d7efa60"
+    },
+    "forge/assembly/atom_map_variant.py": {
+      "path": "forge/assembly/atom_map_variant.py",
+      "sha256": "12a67c5934ec69bbd505857b777d83252cd13bf69456510374384c5bdaac2b42"
+    },
+    "forge/assembly/condensation_event.py": {
+      "path": "forge/assembly/condensation_event.py",
+      "sha256": "d6fd6f8ae9f281d6706e4b194d0a2cde89d09194c89485ec5d4eafdef07de342"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/grouped_program.py": {
+      "path": "forge/assembly/grouped_program.py",
+      "sha256": "859e9c1ee31003fbaa06b95f2b0af343a6176fae4fbb01e85199a5501b7b7d2f"
+    },
+    "forge/assembly/precursor_scaffolds.py": {
+      "path": "forge/assembly/precursor_scaffolds.py",
+      "sha256": "35d75eac9d66447b4535b747742d454153b081d49903ab91c6fe56c3bf3f18c7"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/repeated_inverse.py": {
+      "path": "forge/assembly/repeated_inverse.py",
+      "sha256": "fc505b8bd5ce10ead65c7309e9bc3b3120932894c4e7b3f44cec5ff254ba1054"
+    },
+    "forge/assembly/sequential_program.py": {
+      "path": "forge/assembly/sequential_program.py",
+      "sha256": "41a74b9d6df72bd98d3356123fcb87220d72f050f309bf862306faa16fca3c8f"
+    },
+    "forge/assembly/source_event.py": {
+      "path": "forge/assembly/source_event.py",
+      "sha256": "77a7317f18b604a2ad1a0142f518b147c18cf86d90ff5b53dad4d301dfb92289"
+    },
+    "forge/assembly/source_retention.py": {
+      "path": "forge/assembly/source_retention.py",
+      "sha256": "04ac3316629d99fd401578d19c04b2c8523b4ed8cdb0a90e79630f10032af82e"
+    },
+    "forge/assembly/staged_program.py": {
+      "path": "forge/assembly/staged_program.py",
+      "sha256": "2a2ece3f92677bcf6c75b2938431d2cc458aa880d0100ba882514964e0809d0c"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_condensation_event.py": {
+      "path": "forge/corpus/compose_lipid_condensation_event.py",
+      "sha256": "16c96d29cc40d56acf5f217a560dc993c5f4875fca2e7740c8a8ba7dee11de27"
+    },
+    "forge/corpus/compose_lipid_current_replay.py": {
+      "path": "forge/corpus/compose_lipid_current_replay.py",
+      "sha256": "f7bb5d9da5a7bcfaab74ecfd88f8bcc74a0db37a9315b30a8b920e9c5aab0618"
+    },
+    "forge/corpus/compose_lipid_family_replay.py": {
+      "path": "forge/corpus/compose_lipid_family_replay.py",
+      "sha256": "6e7aea1999e8ec5ae0ec1ffbf235663d1071879a1e3fcd50cdb763d8d3837fc0"
+    },
+    "forge/corpus/compose_lipid_fixed_profiles.py": {
+      "path": "forge/corpus/compose_lipid_fixed_profiles.py",
+      "sha256": "f8ecb70786e416b6b4d5cbb54c33692f7e64105811443bd62c8f5d90977c2fba"
+    },
+    "forge/corpus/compose_lipid_fixed_replay.py": {
+      "path": "forge/corpus/compose_lipid_fixed_replay.py",
+      "sha256": "421a5a5fe6e988989ca7a7525d0fcab5a589e328958154d6d3b21b0edb0f8b72"
+    },
+    "forge/corpus/compose_lipid_full_partition.py": {
+      "path": "forge/corpus/compose_lipid_full_partition.py",
+      "sha256": "0ab2389e93f2a22816c4e3654cd4012b6b34440913edd21a7eaea6aa4321fd18"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_grouped_replay.py": {
+      "path": "forge/corpus/compose_lipid_grouped_replay.py",
+      "sha256": "2e4d644db09b1c41ba070e8ff3615c3827520a2cfa1892dcfd45794fbbf7d707"
+    },
+    "forge/corpus/compose_lipid_pretraining.py": {
+      "path": "forge/corpus/compose_lipid_pretraining.py",
+      "sha256": "6b871bca7a90e3b65b12030f3a7b76d4ca1d228b3d376d6897615c8034bf8b75"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_scaffold_event.py": {
+      "path": "forge/corpus/compose_lipid_scaffold_event.py",
+      "sha256": "cae3a299902c288defcc82584b7c28566fd6d738ade8e1728b286452c9907cda"
+    },
+    "forge/corpus/compose_lipid_sequential.py": {
+      "path": "forge/corpus/compose_lipid_sequential.py",
+      "sha256": "6eca9272b8a675b85445014697d355b2d371f7400e6f9d46c4bbe01c125af5ee"
+    },
+    "forge/corpus/compose_lipid_source_event.py": {
+      "path": "forge/corpus/compose_lipid_source_event.py",
+      "sha256": "37984fe16ddca6bba0445b15d9c289fe9c58ef4274c81ddd26ec0d3e62367e9e"
+    },
+    "forge/corpus/compose_lipid_source_program.py": {
+      "path": "forge/corpus/compose_lipid_source_program.py",
+      "sha256": "ab68e3106e51ac2768da19882e87985a6e454d260d0b8fb20a362fc555f33a9a"
+    },
+    "forge/corpus/compose_lipid_source_view.py": {
+      "path": "forge/corpus/compose_lipid_source_view.py",
+      "sha256": "ddfb5a3b62a2f0b2533e7e235ddc204df9c6aace064a2b14b4b24ea34d755b04"
+    },
+    "forge/corpus/compose_lipid_staged_replay.py": {
+      "path": "forge/corpus/compose_lipid_staged_replay.py",
+      "sha256": "66a2b44934ec55ac3cea80f2b4a10b0ea39aa9225a78a0d7756820a3ee16078d"
+    },
+    "forge/corpus/compose_lipid_supplement.py": {
+      "path": "forge/corpus/compose_lipid_supplement.py",
+      "sha256": "2497dfdde678615263d3a6cf34cdddfd0710a92b8e3b15d801e3eda83c1b4cc7"
+    },
+    "forge/corpus/compose_lipid_supplied_replay.py": {
+      "path": "forge/corpus/compose_lipid_supplied_replay.py",
+      "sha256": "bfcd79a95ffdcb1b631d17d04f530da446cd69a6da1c0c6e2f0b04ff2e9c2221"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    },
+    "results/phase1/compose_lipid_full_program_replay_v1/replay.py": {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/replay.py",
+      "sha256": "e64e0b1fff76bfcbfdcbcdf4ac3666cf65e6122e940ab648e2bf2cb1f2875914"
+    },
+    "results/phase1/compose_lipid_full_replay_v1/replay_michael.py": {
+      "path": "results/phase1/compose_lipid_full_replay_v1/replay_michael.py",
+      "sha256": "2d9d0b3c3a6f3d9acf171356713257129d3272c55aadcaff0d9eb6eee1040cf4"
+    }
+  },
+  "inputs": {
+    "original_evidence": {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/population-audit.json",
+      "sha256": "618804909d2f46be5f336102c4ca032cb0089c1d6227aa4e5bc343419e4feb30"
+    },
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "previous_evidence": {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/incremental-replay-audit.json",
+      "sha256": "62e1e9635bf56941e67d2fb68065dfdc396f8213c9174c16b265f2aa9c26daae"
+    },
+    "ugi3_role_binding": {
+      "path": "results/phase1/compose_lipid_role_binding_v2/result.json",
+      "sha256": "356ad53498ee200431a648a7cbe3ebbe3f94dcf3c7865f3c5cec4bc9f3b76e66"
+    }
+  },
+  "policy": {
+    "bounds": "unchanged_qualified_program_limits",
+    "population": "current_partition_eligible_pending_only",
+    "program_choice": "fixed_declared_family_contract_no_target_choice",
+    "record_cap": null,
+    "roles_quantities_ids": "unchanged_complete_source",
+    "size_filter": null,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "runtime": {
+    "batch_size": 256,
+    "device": "cpu",
+    "maximum_pending_batches": 4,
+    "multiprocessing": "spawn",
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_parallel_program_request.v1"
+}

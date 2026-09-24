@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from typing import Any, cast
 
 from forge.model.phase1_flow import SparseWholeLipidFlow, _gather_training_nodes
@@ -139,6 +139,18 @@ if nn is not None:
                 if role_morphology_conditioning
                 else None
             )
+            self.register_buffer(
+                "_morphology_limits",
+                torch.tensor(
+                    (
+                        [embedding.num_embeddings for embedding in self.role_morphology_embeddings]
+                        if self.role_morphology_embeddings is not None
+                        else []
+                    ),
+                    dtype=torch.int64,
+                ),
+                persistent=False,
+            )
             self.repeat_group = (
                 nn.Embedding(len(vocabulary.role_states), hidden_dim)
                 if repeat_group_conditioning
@@ -218,12 +230,15 @@ if nn is not None:
                     raise ReactionProgramTransformerError(
                         "role-local morphology token shapes disagree"
                     )
+                if torch.any(
+                    (role_morphology_states < 0)
+                    | (role_morphology_states >= self._morphology_limits)
+                ):
+                    raise ReactionProgramTransformerError(
+                        "role-local morphology state lies outside declared support"
+                    )
                 for field, embedding in enumerate(self.role_morphology_embeddings):
                     values = role_morphology_states[:, :, field]
-                    if torch.any(values < 0) or torch.any(values >= embedding.num_embeddings):
-                        raise ReactionProgramTransformerError(
-                            "role-local morphology state lies outside declared support"
-                        )
                     node_tokens = node_tokens + embedding(values)
             tokens = torch.cat((program_token[:, None], depth_token[:, None], node_tokens), dim=1)
             token_mask = torch.cat(
@@ -2078,6 +2093,38 @@ def balanced_pcgrad_backward(
                 out=flat_gradients[index],
             )
             del gradients
+    return project_family_gradients(
+        flat_gradients,
+        availability,
+        parameters,
+        program_states=ordered,
+        scale=scale,
+        materialize_diagnostics=materialize_diagnostics,
+        backend=backend,
+    )
+
+
+def project_family_gradients(
+    flat_gradients: Any,
+    availability: list[list[bool]],
+    parameters: list[Any],
+    *,
+    program_states: Sequence[int],
+    scale: float = 1.0,
+    materialize_diagnostics: bool = True,
+    backend: str = "external",
+) -> dict[str, Any]:
+    """Apply the same ordered PCGrad projection to separately computed family gradients."""
+    ordered = list(program_states)
+    if (
+        len(ordered) < 2
+        or ordered != sorted(set(ordered))
+        or scale <= 0
+        or flat_gradients.shape != (len(ordered), sum(p.numel() for p in parameters))
+        or len(availability) != len(ordered)
+        or any(len(row) != len(parameters) for row in availability)
+    ):
+        raise ReactionProgramTransformerError("Invalid separately computed family gradients")
     norms = torch.linalg.vector_norm(flat_gradients, dim=1)
     conflicts = torch.zeros((), dtype=torch.int64, device=flat_gradients.device)
     pairwise_dots = flat_gradients @ flat_gradients.transpose(0, 1)

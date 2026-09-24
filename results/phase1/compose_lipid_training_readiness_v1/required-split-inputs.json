@@ -1,0 +1,30 @@
+{
+  "existing_assignment_scope": 200000,
+  "full_universe_records": 3182837,
+  "outside_supplied_assignments": 2982837,
+  "policy": "Preserve every existing holdout, selected component, morphology group, combination and study. Unassigned rows cannot be assumed TRAIN.",
+  "receipt": {
+    "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/receipt.json",
+    "sha256": "3deffe014847cef3625e08bd2f6d1959d63e9b1445d4f12d5e8c5d8cbc98d8d3"
+  },
+  "required_files": [
+    {
+      "path": "scripts/build_post_instruction_generator_splits_v8_1.py",
+      "purpose": "Original grouping algorithm or driver needed to reproduce the existing morphology/component/study holdout policy on the full universe.",
+      "sha256": "d586f22b3552572297cbf3a75429698d214df8d338651f1acba610fec6aebd52"
+    },
+    {
+      "path": "src/compose_lipid/data/generator_splits_v2.py",
+      "purpose": "Original grouping algorithm or driver needed to reproduce the existing morphology/component/study holdout policy on the full universe.",
+      "sha256": "d63c7ca51f18bf8096c8f02b73cc26b815ca664027125b65edfaf949b83274f7"
+    },
+    {
+      "path": "configs/corpus/post_instruction_generator_splits_v8_1.json",
+      "purpose": "Frozen split thresholds, seed and group policy; extends coverage without inventing new assignments.",
+      "sha256": "c2b87270b7beb811f67c2afca38d8bc8511482de3d30c2e754abbfe7b3abb2f7"
+    }
+  ],
+  "schema_version": "forge.required_full_universe_partition_inputs.v1",
+  "seed": 0,
+  "training_calls": 0
+}

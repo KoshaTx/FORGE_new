@@ -1,0 +1,156 @@
+{
+  "checks": {
+    "all_original_source_rows_and_weights_independently_checked": 464265,
+    "black_and_ruff_twelve_active_files_plus_artifact_verifier": true,
+    "dataset_artifact_and_source_hashes_verified": true,
+    "failing_tests_or_gates_modified_or_skipped": false,
+    "focused_tests_passed": 79,
+    "new_program_and_split_tests_passed": 24,
+    "strict_replay_samples_passed": 136,
+    "unique_product_rows_independently_checked": 458047,
+    "vendor_assets_verified": 30,
+    "whitespace_check": true
+  },
+  "commands": {
+    "dataset": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.library_program_dataset --repo-root . --config configs/multireaction/library_program_dataset_v1.json --output-dir results/phase1/library_program_dataset_v1",
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_assembly_families.py tests/test_combinatorial_libraries.py tests/test_library_programs.py tests/test_library_splits.py tests/test_library_program_dataset.py tests/test_assembly_ugi3.py tests/test_reaction_program.py tests/test_pinned_sources_are_tracked.py --junitxml=results/phase1/library_program_dataset_validation_v1/focused-tests.xml",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=results/phase1/library_program_dataset_validation_v1/full-tests.xml' make test",
+    "read_only_artifact_check": "PYTHONPATH=. UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/library_program_dataset_validation_v1/check_artifacts.py",
+    "verify": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify"
+  },
+  "comparison_with_previous_full_run": {
+    "all_failure_and_error_ids_identical": true,
+    "new_failing_or_error_test_ids": [],
+    "removed_failing_or_error_test_ids": []
+  },
+  "created_at_utc": "2026-09-14T01:23:55.658079+00:00",
+  "inputs": {
+    "Makefile": {
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    "configs/multireaction/library_program_dataset_v1.json": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "pyproject.toml": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "results/phase1/library_program_dataset_v1/result.json": {
+      "path": "results/phase1/library_program_dataset_v1/result.json",
+      "sha256": "04d0a2c9981727de4879a41b640c6ef11d4b1f0564cca18f0eb75401904de28a"
+    },
+    "results/phase1/library_program_dataset_validation_v1/artifact_checks.json": {
+      "path": "results/phase1/library_program_dataset_validation_v1/artifact_checks.json",
+      "sha256": "4a20c8983993296d8384ffea7f0a362d8e136d93d89d0403373b22291724ee76"
+    },
+    "results/phase1/library_program_dataset_validation_v1/check_artifacts.py": {
+      "path": "results/phase1/library_program_dataset_validation_v1/check_artifacts.py",
+      "sha256": "5c387379d297de1c0118fff23231063f3a809f871bd435d39952d9cfecdf52b1"
+    },
+    "results/phase1/library_program_dataset_validation_v1/dataset-build.log": {
+      "path": "results/phase1/library_program_dataset_validation_v1/dataset-build.log",
+      "sha256": "3414fe618356c4b1bc3f9fc87f0698fb724491fecf6660b081b986df0a875ddd"
+    },
+    "results/phase1/library_program_dataset_validation_v1/full-tests.log": {
+      "path": "results/phase1/library_program_dataset_validation_v1/full-tests.log",
+      "sha256": "94655618f5cfa7244681f4020440f44771547c5c9a5e6ff952961ed17278e6b2"
+    },
+    "results/phase1/library_program_dataset_validation_v1/verify.log": {
+      "path": "results/phase1/library_program_dataset_validation_v1/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    },
+    "results/phase1/library_program_pilot_v1/config_snapshot.json": {
+      "path": "results/phase1/library_program_pilot_v1/config_snapshot.json",
+      "sha256": "3944494921490b1df3510390b875579d4b4b88c23d37cf85998cb00a0e55bc14"
+    },
+    "results/phase1/library_program_pilot_v1/result.json": {
+      "path": "results/phase1/library_program_pilot_v1/result.json",
+      "sha256": "b757ce2b2d557a92a269c07616a30414c6ef8be52d4a5546cb5ae0bfc8d96875"
+    },
+    "results/phase1/library_program_pilot_v1/source_snapshot.py": {
+      "path": "results/phase1/library_program_pilot_v1/source_snapshot.py",
+      "sha256": "8b01346882b3b791905c775cc084e47a48cbd2c5baf565f9b7f4c5aef6469474"
+    },
+    "results/phase1/library_program_size_bound_benchmark_v1/result.json": {
+      "path": "results/phase1/library_program_size_bound_benchmark_v1/result.json",
+      "sha256": "efd5a9f0141df144be436beaeac14c50f8a1e424d3731ad3c2b344ee32b26b9d"
+    },
+    "tests/test_assembly_families.py": {
+      "path": "tests/test_assembly_families.py",
+      "sha256": "46eea99de714cca017845c14f2bbd6a7008a3074bcf8f48cdfbd98ca3bbf5211"
+    },
+    "tests/test_combinatorial_libraries.py": {
+      "path": "tests/test_combinatorial_libraries.py",
+      "sha256": "6a932f65329e081b41c72b81e75f228d1d919f58ade86029d60626b0de79e9cd"
+    },
+    "tests/test_library_program_dataset.py": {
+      "path": "tests/test_library_program_dataset.py",
+      "sha256": "d659058ed33d97752f63baaf7380d06c0752b7c3134a59feea6cf4a7744b9985"
+    },
+    "tests/test_library_programs.py": {
+      "path": "tests/test_library_programs.py",
+      "sha256": "20439a9aac670e022da37c11c6f8c0ac89ae1d22174957317d4148c516b88f07"
+    },
+    "tests/test_library_splits.py": {
+      "path": "tests/test_library_splits.py",
+      "sha256": "137d510cad26b66aad7afc04bad9a823e3d53377a5339f3985a45b03da644617"
+    },
+    "uv.lock": {
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  },
+  "notes": [
+    "All twelve families have positive-weight, uniquely policy-qualified train/calibration/heldout examples. Universal admission of all source rows remains blocked.",
+    "The full repository suite remains failing; all remaining failing/setup-error test IDs exactly match the prior twelve-library run.",
+    "Skipped counts include xfail outcomes represented as skipped in JUnit XML.",
+    "The artifact verifier authenticates files and checks source-row/weight preservation in full; its independent strict-program replay is a deterministic sample, not a full second reconstruction run.",
+    "No model training, generator sampling, model promotion, biological labels or relaxed gates are introduced."
+  ],
+  "phase1_definition_of_done_met": false,
+  "reports": {
+    "focused": {
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 79,
+        "skipped": 0,
+        "tests": 79
+      },
+      "duration_seconds": 26.336,
+      "new_program_test_failures": [],
+      "path": "results/phase1/library_program_dataset_validation_v1/focused-tests.xml",
+      "sha256": "f4421b60a4a6873d0c0c69fe7f46825565834ba7dded972f110706aa6ecd4e88"
+    },
+    "full": {
+      "counts": {
+        "errors": 21,
+        "failures": 167,
+        "passed": 2406,
+        "skipped": 92,
+        "tests": 2686
+      },
+      "duration_seconds": 640.154,
+      "new_program_test_failures": [],
+      "path": "results/phase1/library_program_dataset_validation_v1/full-tests.xml",
+      "sha256": "d670dadd179befde839227cb8ce5120dfc0bc65d8059fbc23abbde0fc6ee4624"
+    },
+    "previous-full": {
+      "counts": {
+        "errors": 21,
+        "failures": 167,
+        "passed": 2382,
+        "skipped": 92,
+        "tests": 2662
+      },
+      "duration_seconds": 493.793,
+      "new_program_test_failures": [],
+      "path": "results/phase1/combinatorial_libraries_validation_v1/full-tests.xml",
+      "sha256": "7796ccd5027f139f797844254110d9705112c72d68347576c4025b9a93c63b37"
+    }
+  },
+  "schema_version": "forge.library_program_dataset_validation.v1",
+  "status": "scoped_checks_pass_universal_corpus_admission_and_global_suite_blocked"
+}

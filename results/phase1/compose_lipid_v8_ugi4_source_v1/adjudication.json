@@ -1,0 +1,171 @@
+{
+  "assets": {
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_scheme": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/fig1.png",
+      "sha256": "11c5f65684b23aeab149d436471a1fb59c85888186c1d3c7179a0393e18b7cce"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/si.pdf",
+      "sha256": "6d537a4691d61d97288fe7b2b2991c652d1c30eaaa98db088b4d163edc25bcc3"
+    },
+    "transcriptions": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/control_transcriptions.json",
+      "sha256": "275f9b333dd3049663988fb6163a6dc83252443d0239595e497a5eee466f9584"
+    }
+  },
+  "conditions": {
+    "addition": "Oleic acid and 1-adamantyl isocyanide, then 1 mL methanol",
+    "characterization": "Product-specific QTOF mass spectrum and 1H/13C NMR provided; spectra not independently reinterpreted",
+    "isolated_amount_mmol": 0.13,
+    "isolated_mass_g": 0.12,
+    "locator": "SI printed pp. 7-8, PDF pp. 8-9, Synthesis of 119-23",
+    "preincubation": "Aldehyde and amine in 1 mL dichloromethane, room temperature, 1 h in a 4-dram glass vial",
+    "reactants_mmol_each": 0.26,
+    "reaction": "Room temperature overnight; catalyst and atmosphere not specified for final assembly",
+    "reported_yield_percent": 50,
+    "workup": "TLC monitoring followed by silica gel chromatography, 10% methanol in dichloromethane with 0.1% ammonium hydroxide"
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "family": "aldehyde_ugi4",
+  "functional_group_registry": {
+    "path": "data/vendor/qualified_a3_source_program_v2.json",
+    "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+  },
+  "limitations": [
+    "The supplement contains labeling inconsistencies in earlier tail-synthesis sections, including compound 10 under the 3-prime alcohol procedure; these are not inherited as exact L2 evidence.",
+    "The 119-23 control supports aldehyde Ugi 4CR only. It does not qualify ketone Ugi 4CR, source-bank membership of v8 products, biological labels, component synthesis, or procurement."
+  ],
+  "primary_doi": "10.1038/s41563-024-01867-3",
+  "reaction_id": "source_aldehyde_ugi4",
+  "registry": {
+    "path": "data/vendor/qualified_ugi4_source_program_v1.json",
+    "sha256": "cc42fc1dbfd88e92194cc325c62d73b425b6186eb46e6d00e3950317ec8bee5b"
+  },
+  "schema_version": "forge.source_event_adjudication.v1",
+  "source_contract": {
+    "architecture_policy": "One primary-amine aldehyde Ugi 4CR event; preserve provider precursor tuple and lane. No ketone equivalence, source-bank assignment, experimental label, L2 or L3 admission.",
+    "atom_origin_policy": "Reuse Ugi N1/C2/C3/N4 product scaffold and Passerini acid C/O query fragments. Add acid C5=O6, bond N1-C5 and map the product amide O7 to the acid hydroxy O. This is a Mumm atom-origin convention, not isotope evidence. Aldehyde oxygen leaves in the net water inventory. No physical sequence of isolated intermediates is asserted.",
+    "events": 1,
+    "net_byproducts": {
+      "H": 2,
+      "O": 1,
+      "formal_charge": 0
+    },
+    "net_element_policy": "Sum of four complete reactants equals product plus registry-declared water, including all hydrogens and net charge.",
+    "query_references": {
+      "amine_head": {
+        "input": "functional_group_registry",
+        "reaction_id": "a3_amine_aldehyde_terminal_alkyne",
+        "role": "amine_head"
+      },
+      "carboxylic_acid_tail": {
+        "input": "registry",
+        "reaction_id": "source_aldehyde_ugi4",
+        "role": "carboxylic_acid_tail"
+      },
+      "isocyanide_tail": {
+        "input": "registry",
+        "reaction_id": "source_aldehyde_ugi4",
+        "role": "isocyanide_tail"
+      },
+      "oxoester_aldehyde_body_tail": {
+        "input": "functional_group_registry",
+        "reaction_id": "a3_amine_aldehyde_terminal_alkyne",
+        "role": "aldehyde"
+      }
+    },
+    "query_scope": "Reuse functional-group identity predicates only; the A3 transform and multiplicities are not used. The frozen Ugi transform, multiplicities and all unfiltered products remain intact.",
+    "registry_to_source_roles": {
+      "amine_head": "amine",
+      "carboxylic_acid_tail": "carboxylic_acid",
+      "isocyanide_tail": "isocyanide",
+      "oxoester_aldehyde_body_tail": "aldehyde"
+    },
+    "roles": {
+      "aldehyde": 1,
+      "amine": 1,
+      "carboxylic_acid": 1,
+      "isocyanide": 1
+    },
+    "site_contract": [
+      {
+        "atom_map": 1,
+        "properties": {
+          "atomic_number": 7,
+          "formal_charge": 0,
+          "total_hydrogens": 2
+        },
+        "role": "amine_head"
+      },
+      {
+        "atom_map": 2,
+        "properties": {
+          "atomic_number": 6,
+          "formal_charge": 0,
+          "total_hydrogens": 1
+        },
+        "role": "oxoester_aldehyde_body_tail"
+      },
+      {
+        "atom_map": 3,
+        "properties": {
+          "atomic_number": 6,
+          "total_hydrogens": 0
+        },
+        "role": "isocyanide_tail"
+      },
+      {
+        "atom_map": 5,
+        "properties": {
+          "atomic_number": 6,
+          "formal_charge": 0
+        },
+        "role": "carboxylic_acid_tail"
+      }
+    ],
+    "stage_order": [
+      "source_aldehyde_ugi4"
+    ]
+  },
+  "source_controls": [
+    {
+      "components": {
+        "amine_head": "CN(C)CCCN",
+        "carboxylic_acid_tail": "CCCCCCCCC=CCCCCCCCC(=O)O",
+        "isocyanide_tail": "[C-]#[N+]C12CC3CC(CC(C3)C1)C2",
+        "oxoester_aldehyde_body_tail": "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC=O"
+      },
+      "expected_formula": "C58H105N3O4",
+      "expected_product": "CCCCCCCCC=CCCCCCCCC(=O)OCCCCCC(N(CCCN(C)C)C(=O)CCCCCCCC=CCCCCCCCC)C(=O)NC12CC3CC(CC(C3)C1)C2",
+      "experimental_execution_admitted": false,
+      "label": "Li_119_23",
+      "pdf_pages_one_based": [
+        8,
+        9,
+        10,
+        16
+      ],
+      "reported_ion_formula": "C58H106N3O4+",
+      "reported_mz_calculated": 908.81833,
+      "reported_mz_found": 908.8183,
+      "source_asset": "supplement"
+    }
+  ],
+  "training_ready": false,
+  "visual_inspection": {
+    "main": "Complete four-reactant scheme and net water loss in Figure 1 viewed",
+    "stereochemistry": "Reported oleate unsaturation and adamantane connectivity retained; E/Z and stereochemical labels removed only for the declared constitutional model",
+    "supplement_pdf_pages_one_based": [
+      8,
+      9,
+      10,
+      16,
+      17
+    ]
+  }
+}

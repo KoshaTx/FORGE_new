@@ -14,6 +14,7 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.core.hashing import sha256_bytes, sha256_file
+from forge.core.input_locations import input_location_matches, results_match_after_input_relocation
 from forge.core.io import read_json_object
 from forge.core.io import stable_json as _stable_json
 from forge.synthesis.engine.planner import (
@@ -132,8 +133,10 @@ def _validate_inputs(config: dict[str, Any], input_paths: dict[str, Path]) -> No
         if not isinstance(record, dict):
             raise Ugi3HighLeverageHeadTerminalError(f"input {label} is malformed")
         asset = record.get("asset")
-        if not isinstance(asset, str) or Path(asset).resolve() != path.resolve():
-            raise Ugi3HighLeverageHeadTerminalError(f"input {label} path changed")
+        if not input_location_matches(Path.cwd(), path, asset, record.get("expected_sha256")):
+            raise Ugi3HighLeverageHeadTerminalError(
+                f"input {label} location or pinned content invalid: {path}"
+            )
         if record.get("expected_sha256") != sha256_file(path):
             raise Ugi3HighLeverageHeadTerminalError(f"input {label} hash changed")
 
@@ -314,7 +317,13 @@ def load_high_leverage_head_terminal_overlay(
         input_paths=audit_input_paths,
     )
     stored_result = _load_json(stored_audit_result_path, label="stored head-terminal result")
-    if fresh_result != stored_result:
+    if not results_match_after_input_relocation(
+        stored_result,
+        fresh_result,
+        repo=Path.cwd(),
+        specifications=_load_json(audit_config_path, label="audit config")["inputs"],
+        input_paths=audit_input_paths,
+    ):
         raise Ugi3HighLeverageHeadTerminalError("stored head-terminal result is not reproducible")
     ledger_hash = sha256_bytes(fresh_ledger)
     if sha256_file(stored_product_ledger_path) != ledger_hash:

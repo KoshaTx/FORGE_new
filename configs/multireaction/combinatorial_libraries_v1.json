@@ -1,0 +1,48 @@
+{
+  "expected_rows_by_family": {
+    "acetal_aldehyde_diol": 1989,
+    "amide_coupling_acid_amine": 16590,
+    "aza_michael_amine_acrylate": 16590,
+    "carbamate_amine_chloroformate": 16590,
+    "disulfide_coupling": 780,
+    "epoxide_opening_amine": 16590,
+    "iphos_amine_dioxaphospholane": 16590,
+    "passerini_3cr": 77571,
+    "reductive_amination_amine_aldehyde": 21654,
+    "thiol_michael_thioether": 1521,
+    "ugi_3cr_agile": 222768,
+    "urea_amine_isocyanate": 55032
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "building_blocks": {
+      "path": "data/vendor/building_block_pool_v1.json",
+      "sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "corpus": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "maximum_outcomes": 128,
+  "registries": [
+    "ugi_registry",
+    "family_registry"
+  ],
+  "representation_samples_per_family": 16,
+  "sampling_weight": "realism_weight",
+  "schema_version": "forge.combinatorial_library_qualification_config.v1",
+  "seed": 20260913,
+  "workers": 2
+}

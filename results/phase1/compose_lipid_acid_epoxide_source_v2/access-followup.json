@@ -1,0 +1,37 @@
+{
+  "schema_version": "forge.primary_source_access_followup.v1",
+  "date": "2026-09-21",
+  "seed": 0,
+  "doi": "10.1002/adhm.202302691",
+  "pmid": "37990414",
+  "family": "acid_epoxide_diester_multistep",
+  "publisher_page": "https://advanced.onlinelibrary.wiley.com/doi/10.1002/adhm.202302691",
+  "supplement_url": "https://advanced.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002/adhm.202302691&file=adhm202302691-sup-0001-SuppMat.pdf",
+  "observations": [
+    {
+      "method": "Publisher-page link followed using web retrieval",
+      "outcome": "Indexed supplement text returned with 30-page metadata; Figure S1 caption and E12CA1A3 characterization are visible."
+    },
+    {
+      "method": "Web PDF screenshots of zero-indexed pages 1 and 2",
+      "outcome": "Both failed with cache-miss errors; no visual scheme evidence acquired."
+    },
+    {
+      "method": "curl -fL --max-time 45 using publisher supplement URL",
+      "outcome": "Both sandboxed and approved unsandboxed requests failed with exit code 6: host could not be resolved."
+    },
+    {
+      "method": "Browser entry point for publisher article",
+      "outcome": "No browser available."
+    }
+  ],
+  "next_visual_locator": "Figure S1 on PDF page 2, with neighboring E12CA1A3 characterization on PDF page 3",
+  "local_pdf_recovered": false,
+  "source_pdf_sha256": null,
+  "visual_scheme_inspection_complete": false,
+  "disposition": "abstain",
+  "interpretation": "New text access narrows the source locator but does not qualify reaction order, attachment sites or an independent reaction control. A local PDF or reproducibly captured primary-source scheme remains required.",
+  "experimental_failure_claimed": false,
+  "training_admitted": false,
+  "training_calls": 0
+}

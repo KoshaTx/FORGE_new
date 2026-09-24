@@ -1,0 +1,103 @@
+{
+  "artifacts": {
+    "program_checks.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_passerini_program_v1/program_checks.jsonl.gz",
+      "sha256": "9a6006b7775c9ab2ea090de23b80107b91aed9e0c147a9812232baa17412b386"
+    },
+    "registry.json": {
+      "path": "results/phase1/compose_lipid_v8_passerini_program_v1/registry.json",
+      "sha256": "781c28feebdd9da1fa07023e982d789cfe5c56082d396059bb7f3ccf8025fd7c"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_passerini_program_v1.json",
+    "sha256": "78e57cdf7c342260cfa7be0ccc16d4cca584808ea217ad0a399c6237703f3b04"
+  },
+  "created_at_utc": "2026-09-18T16:46:04.916246+00:00",
+  "evidence_basis": "computed_transform_consistency",
+  "family": "passerini_3cr",
+  "implementation": {
+    "forge/assembly/atom_map_variant.py": {
+      "path": "forge/assembly/atom_map_variant.py",
+      "sha256": "12a67c5934ec69bbd505857b777d83252cd13bf69456510374384c5bdaac2b42"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_pretraining.py": {
+      "path": "forge/corpus/compose_lipid_pretraining.py",
+      "sha256": "6b871bca7a90e3b65b12030f3a7b76d4ca1d228b3d376d6897615c8034bf8b75"
+    },
+    "forge/corpus/compose_lipid_source_program.py": {
+      "path": "forge/corpus/compose_lipid_source_program.py",
+      "sha256": "ab68e3106e51ac2768da19882e87985a6e454d260d0b8fb20a362fc555f33a9a"
+    }
+  },
+  "other_source_families_qualified_by_this_receipt": [],
+  "policy": {
+    "fit_population": "protected_train",
+    "generation_calls": 0,
+    "heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "pretraining_result": {
+    "path": "results/phase1/compose_lipid_v8_pretraining_v1/result.json",
+    "sha256": "d7696020e636fc7d1eea326fe4c19bb6ee56f51f6d1bc6bac7c96151afc96145"
+  },
+  "rdkit_version": "2026.03.5",
+  "remaining_holds": [
+    "global_precursor_protection_incomplete",
+    "precursor_holdouts_unqualified",
+    "remaining_families_unqualified",
+    "repository_full_tests_fail"
+  ],
+  "schema_version": "forge.compose_lipid_source_program.v1",
+  "scope": "single-event constitutional program on inspected protected TRAIN; no experimental outcome, isotope tracing, L2 or procurement claim",
+  "source_controls": {
+    "H1A1B1": {
+      "checks": {
+        "full_element_hydrogen_charge_balance": true,
+        "retained_amine_in_acid_head": true,
+        "source_map_bonds_match": true,
+        "unique_forward_exact": true,
+        "unique_inverse_exact": true
+      },
+      "qualified": true
+    },
+    "H2A4-Ole": {
+      "checks": {
+        "full_element_hydrogen_charge_balance": true,
+        "retained_amine_in_acid_head": true,
+        "source_map_bonds_match": true,
+        "unique_forward_exact": true,
+        "unique_inverse_exact": true
+      },
+      "qualified": true
+    }
+  },
+  "source_event_program_qualified": true,
+  "status": "single_family_program_qualified_training_unqualified",
+  "summary": {
+    "clear_of_known_historical_precursors": 5279,
+    "complete_program_checks_pass": 7007,
+    "historical_protected_precursor": 1728,
+    "rows": 7007
+  },
+  "training_ready": false,
+  "training_rows_admitted": 0
+}

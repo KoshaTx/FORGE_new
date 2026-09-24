@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_preparation_validation_v3/report.py", line 20, in <module>
+    from forge.corpus.compose_lipid_source_view import dump, pin  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/__init__.py", line 7, in <module>
+    from forge.corpus.phase1 import Phase1DataError, freeze_phase1_data_contract
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/phase1.py", line 8, in <module>
+    from forge.corpus.phase1_data import Phase1DataError, freeze_phase1_data_contract
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/phase1_data.py", line 15, in <module>
+    from rdkit import Chem, rdBase
+ModuleNotFoundError: No module named 'rdkit'

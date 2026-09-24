@@ -1,0 +1,85 @@
+{
+  "checks": {
+    "all_calibration_programs_improve": true,
+    "all_fixed_states_exact": true,
+    "all_input_pins_resolve": true,
+    "all_per_program_payloads_present": true,
+    "all_result_gates_pass": true,
+    "all_source_hashes_resolve": true,
+    "calibration_loss_ratio_meets_frozen_threshold": true,
+    "complete_calibration_population": true,
+    "config_inputs_exact": true,
+    "focused_tests_pass": true,
+    "full_suite_failure_error_ids_equal_prior_baseline": true,
+    "no_heldout_generation_remote_compute_or_checkpoint": true,
+    "result_status_pass": true,
+    "scientific_replay_exact": true,
+    "training_loss_ratio_meets_frozen_threshold": true,
+    "twelve_distinct_programs": true,
+    "ugi_exact_reconstruction_not_regressed": true
+  },
+  "excluded_replay_metadata": [
+    "created_at_utc",
+    "duration_seconds",
+    "environment"
+  ],
+  "inputs": {
+    "config": {
+      "path": "configs/multireaction/combinatorial_training_pilot_v1.json",
+      "sha256": "98f247457f5dc8878082aca015449175aff271031be6997ce803dd36aabcf600"
+    },
+    "focused_tests": {
+      "path": "results/phase1/combinatorial_training_pilot_validation_v1/focused-tests.xml",
+      "sha256": "c451fdd19432ba9691816f9aee4aff3c072f8a4549758ced0f3cde611e052561"
+    },
+    "full_tests": {
+      "path": "results/phase1/combinatorial_training_pilot_validation_v1/full-tests.xml",
+      "sha256": "38d48687e5aaf2483632f2d827c5887e4da48916636e4d2c4089aefd9a46004e"
+    },
+    "prior_full_tests": {
+      "path": "results/phase1/combinatorial_shared_model_validation_v1/full-tests.xml",
+      "sha256": "405ddfb527f02ce9a5b72aa5dc3ed1bb58c4d39ece5efedab217ed5af62484e0"
+    },
+    "replay_result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/replay_result.json",
+      "sha256": "53fdcc65af83b8c78f7533f7f15b287721cf6157560e42fd88aa8b2b6845b315"
+    },
+    "result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/result.json",
+      "sha256": "e8ad3a9734290d7f299096745a1ce1f23e52a5b196f3e996615071c44d79ebad"
+    }
+  },
+  "observations": {
+    "calibration_final_equal_family_mean_loss": 0.9099036007632618,
+    "calibration_final_to_initial_loss_ratio": 0.10026894347426207,
+    "calibration_initial_equal_family_mean_loss": 9.074630381408417,
+    "calibration_programs_improved": 12,
+    "training_final_to_initial_loss_ratio": 0.12652362079691482,
+    "ugi_final_exact_tensor_records": 0,
+    "ugi_initial_exact_tensor_records": 0
+  },
+  "schema_version": "forge.combinatorial_training_pilot_artifact_verification.v1",
+  "status": "pass",
+  "test_reports": {
+    "current_full_failure_error_count": 188,
+    "focused": {
+      "duration_seconds": 25.975000000000005,
+      "errors": 0,
+      "failures": 0,
+      "passed": 116,
+      "skipped": 0,
+      "tests": 116
+    },
+    "full": {
+      "duration_seconds": 480.42499999998984,
+      "errors": 21,
+      "failures": 167,
+      "passed": 2429,
+      "skipped": 92,
+      "tests": 2709
+    },
+    "new_full_failure_error_ids": [],
+    "prior_full_failure_error_count": 188,
+    "resolved_prior_failure_error_ids": []
+  }
+}

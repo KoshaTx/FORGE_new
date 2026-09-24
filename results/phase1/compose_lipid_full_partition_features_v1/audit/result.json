@@ -1,0 +1,219 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_full_partition_features_v1/audit/partition_features.sqlite",
+    "sha256": "6d31b3c5c3f58e5a2a02fdb90549fbd32b95588a7075f6bdd164a73fe35d4903"
+  },
+  "counts": {
+    "above_96_atoms": 122975,
+    "canonical_strings_changed": 0,
+    "historical_protected_rows_canonicalized": 12269,
+    "identity_qualified_rows": 3182837,
+    "imported_identities_reproduced": 159782,
+    "rows": 3182837,
+    "selected_rows_reproduced": 200000,
+    "source_study_unresolved": 365
+  },
+  "families": {
+    "a3_amine_aldehyde_alkyne": 70016,
+    "acid_epoxide_diester_multistep": 232240,
+    "aema_aza_thiol_addition": 13865,
+    "aldehyde_ugi3": 18842,
+    "aldehyde_ugi4": 222029,
+    "alpha_isocyanoester_dihydroimidazole": 219036,
+    "amine_alkylation": 188272,
+    "amine_epoxide_opening": 97439,
+    "aryl_reductive_amination": 48090,
+    "aza_michael_acrylamide": 31239,
+    "aza_michael_acrylate": 33619,
+    "disulfide_michael": 254389,
+    "epoxide_opening_o_acylation": 42805,
+    "iphos_ring_opening": 184345,
+    "ketone_isocyanide_amide": 271560,
+    "ketone_ugi4": 91395,
+    "maleate_addition": 68463,
+    "o_esterification": 24948,
+    "passerini_3cr": 128352,
+    "preassembled_thiol_yne_tail_amidation": 465048,
+    "reductive_amination": 61320,
+    "reported_lnpdb_route_unassigned": 255,
+    "reported_multistep_amino_lipid": 9,
+    "reported_reference_lipid": 4,
+    "thiolactone_aminolysis_michael": 334859,
+    "vitamin_b5_multistep": 80398
+  },
+  "historical_identity_errors": [],
+  "historical_projection_counts": {
+    "calibration": 240591,
+    "reference": 268,
+    "test": 180446,
+    "train": 2761532
+  },
+  "historical_protected_identity_matches": 24472,
+  "identity_errors": {},
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_historical_morphology.py": {
+      "path": "forge/corpus/compose_lipid_historical_morphology.py",
+      "sha256": "9542ea51905a4ee5ed23b36f8ae210db432210e36ff263b45b34458d07643ee0"
+    },
+    "forge/corpus/compose_lipid_partition_signatures.py": {
+      "path": "forge/corpus/compose_lipid_partition_signatures.py",
+      "sha256": "6e273f5710b829b935953e1e7182d489f2abae6ff71a214c8a16fe847f50e1e9"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_source_view.py": {
+      "path": "forge/corpus/compose_lipid_source_view.py",
+      "sha256": "ddfb5a3b62a2f0b2533e7e235ddc204df9c6aace064a2b14b4b24ea34d755b04"
+    },
+    "forge/corpus/compose_lipid_supplement.py": {
+      "path": "forge/corpus/compose_lipid_supplement.py",
+      "sha256": "2497dfdde678615263d3a6cf34cdddfd0710a92b8e3b15d801e3eda83c1b4cc7"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    },
+    "results/phase1/compose_lipid_full_partition_features_v1/build.py": {
+      "path": "results/phase1/compose_lipid_full_partition_features_v1/build.py",
+      "sha256": "b41db912298cb87f80689461a011ac2a4a369b19482f2facceff4bf0ba4d51e6"
+    }
+  },
+  "inputs": {
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "existing_library_components": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "existing_library_products": {
+      "path": "results/phase1/library_program_dataset_v1/products.csv.gz",
+      "sha256": "81009f3f5437d8b88963df26b539e97004c8a80952ae90e2e6e55dce108f49da"
+    },
+    "historical_group_recovery": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-frozen-group-recovery.json",
+      "sha256": "86c55e4cef10a52dde6ef753ef5a4324b00e9ecd35d0993e9d18016c5bef444c"
+    },
+    "historical_policy": {
+      "path": "data/vendor/compose_lipid_historical_morphology_policy_v1.json",
+      "sha256": "ee64de495cb0a92cf9116dd8ba27aecc19b74723642d0fe20d4986bad33064f3"
+    },
+    "import_config": {
+      "path": "configs/multireaction/compose_lipid_v8_import_v1.json",
+      "sha256": "114400f1d0f780e440d10e6264f54b2206cd77a7aea5f0bd89215efc1e747ea0"
+    },
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "m0_constitutional_folds": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "m0_original_folds": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_components": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "multireaction_original_atlas": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "multireaction_original_splits": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "original_records": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/records.jsonl.gz",
+      "sha256": "13e092f953cf9314d14745fd4547d7cf158dbedebd8f3b830ff7e2fc2f4c1ec9"
+    },
+    "prior_construction": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/construction_supervision.jsonl.gz",
+      "sha256": "860744d5dbda12bc13968ebe907f99a6889b6ad0b130fea5a629fabdb0e7fb6f"
+    },
+    "product_protection": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "selected_historical_groups": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-frozen-selected-groups.json",
+      "sha256": "5695b251b45c17fded852117a786e68969894530f3f5b6272ed6b4f1b3047ac2"
+    },
+    "source_driver": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/scripts/build_post_instruction_generator_splits_v8.py",
+      "sha256": "57998a562b006c1f23f4cd54edff377bf4b410f077f2b2b4488878d592584e2a"
+    },
+    "source_loader": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_historical_selected_groups_v2.py",
+      "sha256": "064ad00fd0431e40b1712fd0e553fe5e472429204fe830e2ef5907a9a19d2f83"
+    },
+    "source_module": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/generator_splits.py",
+      "sha256": "4e4770a83c9a00132db83d9562ce4e025c2777fa0afdf1d7aca1ebf76750ef44"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_components": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "ugi_original_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    }
+  },
+  "maximum_heavy_atoms": 254,
+  "policy": {
+    "final_partition_qualified": false,
+    "full_universe_group_selection_performed": false,
+    "reaction_decomposition_performed": false,
+    "record_cap": null,
+    "size_filter": null,
+    "source_assignments_changed": false,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "runtime": {
+    "batch_size": 512,
+    "device": "cpu",
+    "elapsed_seconds": 375.1032480420545,
+    "maximum_pending_batches": 8,
+    "rdkit": "2026.03.5",
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_full_partition_features.v1",
+  "seed": 0,
+  "unique_constitutional_identities": 3178450
+}

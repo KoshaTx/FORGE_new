@@ -1,0 +1,35 @@
+...........................................FFF                           [100%]
+=================================== FAILURES ===================================
+______________ test_third_wave_audit_is_reproducible_and_archived ______________
+tests/test_ugi3_third_wave_head_terminals.py:59: in test_third_wave_audit_is_reproducible_and_archived
+    first, first_ledger = build_third_wave_head_terminal_audit(
+forge/synthesis/terminals/ugi3_third_wave_head_terminals.py:126: in build_third_wave_head_terminal_audit
+    _validate_inputs(config, input_paths)
+forge/synthesis/terminals/ugi3_third_wave_head_terminals.py:54: in _validate_inputs
+    raise Ugi3ThirdWaveHeadTerminalError(
+E   forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html
+_________________ test_supplier_archive_tampering_fails_closed _________________
+tests/test_ugi3_third_wave_head_terminals.py:79: in test_supplier_archive_tampering_fails_closed
+    source = INPUTS["supplier_page"].read_text()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'
+_____________ test_third_wave_overlay_changes_only_cyclohexylamine _____________
+tests/test_ugi3_third_wave_head_terminals.py:109: in test_third_wave_overlay_changes_only_cyclohexylamine
+    overlay, metadata = load_third_wave_head_terminal_overlay(
+forge/synthesis/terminals/ugi3_third_wave_head_terminals.py:273: in load_third_wave_head_terminal_overlay
+    fresh_result, fresh_ledger = build_third_wave_head_terminal_audit(
+forge/synthesis/terminals/ugi3_third_wave_head_terminals.py:126: in build_third_wave_head_terminal_audit
+    _validate_inputs(config, input_paths)
+forge/synthesis/terminals/ugi3_third_wave_head_terminals.py:54: in _validate_inputs
+    raise Ugi3ThirdWaveHeadTerminalError(
+E   forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html
+=========================== short test summary info ============================
+FAILED tests/test_ugi3_third_wave_head_terminals.py::test_third_wave_audit_is_reproducible_and_archived
+FAILED tests/test_ugi3_third_wave_head_terminals.py::test_supplier_archive_tampering_fails_closed
+FAILED tests/test_ugi3_third_wave_head_terminals.py::test_third_wave_overlay_changes_only_cyclohexylamine

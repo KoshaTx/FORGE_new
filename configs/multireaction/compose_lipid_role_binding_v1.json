@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "prior_program": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_program_v1/result.json",
+      "sha256": "7d4d247fdacf590a49737771e77f3bfbc1492da92253f5d813c3f8cde3be5f6a"
+    },
+    "source_config": {
+      "path": "configs/multireaction/compose_lipid_v8_ugi3_program_v1.json",
+      "sha256": "d28338a5967a3b541e8d1cfaf0df13704d98e411524ee6fa40de6a2db1e4f1a7"
+    }
+  },
+  "policy": {
+    "binding_evidence": "prior_exact_precursor_structures_on_current_eligible_population",
+    "binding_fixed_before_forward_replay": true,
+    "component_quantities": "exactly_one_per_declared_single_event_role",
+    "experimental_execution_admitted": false,
+    "family": "aldehyde_ugi3",
+    "product_matching_used_to_choose_binding": false,
+    "seed": 0,
+    "training_admitted": false,
+    "training_calls": 0,
+    "unresolved_or_conflicting_binding": "fail_closed"
+  },
+  "schema_version": "forge.compose_lipid_role_binding_config.v1"
+}

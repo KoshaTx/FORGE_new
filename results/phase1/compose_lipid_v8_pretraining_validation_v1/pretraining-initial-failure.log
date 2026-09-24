@@ -1,0 +1,21 @@
+Inventory: 149736 TRAIN graphs, 12 atom states
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/compose_lipid_pretraining.py", line 34, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/compose_lipid_pretraining.py", line 29, in main
+    result = run_pretraining_checks(args.repo_root, args.config, args.output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_pretraining.py", line 251, in run_pretraining_checks
+    split_audit = audit_split_labels(db, catalogue)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_pretraining.py", line 99, in audit_split_labels
+    row_labels, complete = component_labels(row, catalogue[family])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_pretraining.py", line 66, in component_labels
+    roles = role_metadata(row, program)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/assembly/compose_lipid.py", line 64, in role_metadata
+    raise ComposeLipidError(f"{row['target_id']}: precursor_ids arity mismatch")
+forge.assembly.compose_lipid.ComposeLipidError: 17498c933a6485344f5f84dcdb6e3bed8663dfa23c432f8590c7c419847be086: precursor_ids arity mismatch

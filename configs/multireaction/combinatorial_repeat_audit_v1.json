@@ -1,0 +1,34 @@
+{
+  "comparison": "Reproduce the original identical-repeat check, then separately search with distinct co-reactants while preserving every step role policy and exact forward replay. No acceptance-gate substitution.",
+  "expected_repeated_families": 7,
+  "inputs": {
+    "attempts": {
+      "path": "results/phase1/combinatorial_generation_v1/attempts.jsonl",
+      "sha256": "113edda03896117d6ec07725e0e56c257bb266d1a6254dbb8bab3537bcd16bc8"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "generation_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "gate_changes": false,
+    "generation_calls": 0,
+    "heldout_record_use": false,
+    "remote_compute": false,
+    "training_calls": 0
+  },
+  "population": "Every saved attempt in both arms of all declared repeated families, including invalid attempts and depth-one controls.",
+  "schema_version": "forge.combinatorial_repeat_audit_config.v1",
+  "scientific_question": "How many saved repeated-reaction failures are isolated to identical co-reactant requirements, versus insufficient verified program depth, role-policy rejection, invalid graphs or unresolved inverse/forward reconstruction?",
+  "train_controls_per_family_depth": 2
+}

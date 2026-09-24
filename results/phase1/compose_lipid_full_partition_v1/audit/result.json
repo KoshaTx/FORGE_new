@@ -1,0 +1,255 @@
+{
+  "all_nonprotected_rows_resolved": false,
+  "all_source_rows_dispositioned": true,
+  "artifact": {
+    "path": "results/phase1/compose_lipid_full_partition_v1/audit/partition.sqlite",
+    "sha256": "cafba4f23d5827f6c6a463f53d79b5da28f309c036e4d6a374df2546592044eb"
+  },
+  "elapsed_seconds": 92.16736845788546,
+  "eligible_view_qualified": true,
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_full_partition.py": {
+      "path": "forge/corpus/compose_lipid_full_partition.py",
+      "sha256": "e479915738c5a2eb4d5d4ba48267a48b66830c221e27167696c28a2babec53aa"
+    },
+    "forge/corpus/compose_lipid_source_view.py": {
+      "path": "forge/corpus/compose_lipid_source_view.py",
+      "sha256": "ddfb5a3b62a2f0b2533e7e235ddc204df9c6aace064a2b14b4b24ea34d755b04"
+    },
+    "forge/corpus/compose_lipid_supplement.py": {
+      "path": "forge/corpus/compose_lipid_supplement.py",
+      "sha256": "2497dfdde678615263d3a6cf34cdddfd0710a92b8e3b15d801e3eda83c1b4cc7"
+    },
+    "results/phase1/compose_lipid_full_partition_v1/build.py": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/build.py",
+      "sha256": "f7e22b1251fc9205b7db90caa64dc1591e7459fc9b652e0bbc64b3bfb7e24fc9"
+    }
+  },
+  "inputs": {
+    "catalogue": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+      "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+    },
+    "component_policy": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/component_exclusion_policy.json",
+      "sha256": "0edb737485bf6932d3b7793cce02350205e098b8a74cde9867852931e8552888"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "corrected_ledger": {
+      "path": "results/phase1/compose_lipid_full_split_projection_v1/audit/projection.jsonl.gz",
+      "sha256": "6c1942f9e467ad383202ad86ebd6638d0212091cd4452edf28404beebc4172fd"
+    },
+    "corrected_receipt": {
+      "path": "results/phase1/compose_lipid_full_split_projection_v1/audit/result.json",
+      "sha256": "01244a56727271341abe1b5f86b7f3ee9d3a8bbea7fb53a7e457e54e8a3364c9"
+    },
+    "features": {
+      "path": "results/phase1/compose_lipid_full_partition_features_v1/audit/partition_features.sqlite",
+      "sha256": "6d31b3c5c3f58e5a2a02fdb90549fbd32b95588a7075f6bdd164a73fe35d4903"
+    },
+    "features_receipt": {
+      "path": "results/phase1/compose_lipid_full_partition_features_v1/audit/result.json",
+      "sha256": "bb9b2c64cca46bb97f15b13605f56a8122b517d3e5b11134f0eec83f8ce2b5ef"
+    },
+    "historical_component_receipt": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-global-component-exclusions.json",
+      "sha256": "fb6f787f25660dbe6aa4a9c11670a0a6eae2d4ac4c6d68332ee63cd1f094365a"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    }
+  },
+  "policy": {
+    "new_holdout_groups_selected": false,
+    "preparation_requires": "both_frozen_projections_train_and_no_exclusions_or_uncertainty",
+    "protected_components": "prior_union_corrected_union_resolved_historical_global_ids",
+    "protected_product_overlap": "constitutional_identity_global_closure",
+    "record_cap": null,
+    "seed": 0,
+    "size_filter": null,
+    "source_assignments_changed": false,
+    "training_admitted": false,
+    "training_calls": 0,
+    "unresolved_product_overlap": "constitutional_identity_global_closure"
+  },
+  "schema_version": "forge.compose_lipid_full_partition.v1",
+  "seed": 0,
+  "summary": {
+    "above_96_atoms": 122975,
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "protected": 33392,
+        "rows": 70016,
+        "unresolved_partition_or_study": 36624
+      },
+      "acid_epoxide_diester_multistep": {
+        "protected": 131142,
+        "rows": 232240,
+        "unresolved_partition_or_study": 101098
+      },
+      "aema_aza_thiol_addition": {
+        "protected": 8360,
+        "rows": 13865,
+        "unresolved_partition_or_study": 5505
+      },
+      "aldehyde_ugi3": {
+        "protected": 16559,
+        "rows": 18842,
+        "unresolved_partition_or_study": 2283
+      },
+      "aldehyde_ugi4": {
+        "protected": 158413,
+        "rows": 222029,
+        "unresolved_partition_or_study": 63616
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "protected": 183308,
+        "rows": 219036,
+        "unresolved_partition_or_study": 35728
+      },
+      "amine_alkylation": {
+        "protected": 95573,
+        "rows": 188272,
+        "unresolved_partition_or_study": 92699
+      },
+      "amine_epoxide_opening": {
+        "protected": 63932,
+        "rows": 97439,
+        "unresolved_partition_or_study": 33507
+      },
+      "aryl_reductive_amination": {
+        "protected": 28874,
+        "rows": 48090,
+        "unresolved_partition_or_study": 19216
+      },
+      "aza_michael_acrylamide": {
+        "protected": 21112,
+        "rows": 31239,
+        "unresolved_partition_or_study": 10127
+      },
+      "aza_michael_acrylate": {
+        "protected": 23341,
+        "rows": 33619,
+        "unresolved_partition_or_study": 10278
+      },
+      "disulfide_michael": {
+        "protected": 157556,
+        "rows": 254389,
+        "unresolved_partition_or_study": 96833
+      },
+      "epoxide_opening_o_acylation": {
+        "protected": 21343,
+        "rows": 42805,
+        "unresolved_partition_or_study": 21462
+      },
+      "iphos_ring_opening": {
+        "protected": 81027,
+        "rows": 184345,
+        "unresolved_partition_or_study": 103318
+      },
+      "ketone_isocyanide_amide": {
+        "protected": 237867,
+        "rows": 271560,
+        "unresolved_partition_or_study": 33693
+      },
+      "ketone_ugi4": {
+        "protected": 64368,
+        "rows": 91395,
+        "unresolved_partition_or_study": 27027
+      },
+      "maleate_addition": {
+        "protected": 29991,
+        "rows": 68463,
+        "unresolved_partition_or_study": 38472
+      },
+      "o_esterification": {
+        "protected": 10084,
+        "rows": 24948,
+        "unresolved_partition_or_study": 14864
+      },
+      "passerini_3cr": {
+        "protected": 66164,
+        "rows": 128352,
+        "unresolved_partition_or_study": 62188
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "protected": 204578,
+        "rows": 465048,
+        "unresolved_partition_or_study": 260470
+      },
+      "reductive_amination": {
+        "protected": 32849,
+        "rows": 61320,
+        "unresolved_partition_or_study": 28471
+      },
+      "reported_lnpdb_route_unassigned": {
+        "protected": 255,
+        "rows": 255
+      },
+      "reported_multistep_amino_lipid": {
+        "protected": 9,
+        "rows": 9
+      },
+      "reported_reference_lipid": {
+        "protected": 4,
+        "rows": 4
+      },
+      "thiolactone_aminolysis_michael": {
+        "protected": 159872,
+        "rows": 334859,
+        "unresolved_partition_or_study": 174987
+      },
+      "vitamin_b5_multistep": {
+        "protected": 80398,
+        "rows": 80398
+      }
+    },
+    "eligible_above_96_atoms": 0,
+    "eligible_maximum_heavy_atoms": null,
+    "eligible_unique_constitutions": 0,
+    "invariant_failures": 0,
+    "maximum_heavy_atoms": 254,
+    "newly_protected_via_identity_closure": 107,
+    "rows_with_protected_components": 1638397,
+    "totals": {
+      "protected": 1910371,
+      "rows": 3182837,
+      "unresolved_partition_or_study": 1272466
+    },
+    "transitions": [
+      {
+        "current": "protected",
+        "previous": "eligible_for_program_preparation",
+        "rows": 9836
+      },
+      {
+        "current": "unresolved_partition_or_study",
+        "previous": "eligible_for_program_preparation",
+        "rows": 66964
+      },
+      {
+        "current": "protected",
+        "previous": "protected",
+        "rows": 1566439
+      },
+      {
+        "current": "protected",
+        "previous": "unresolved_partition_or_study",
+        "rows": 334096
+      },
+      {
+        "current": "unresolved_partition_or_study",
+        "previous": "unresolved_partition_or_study",
+        "rows": 1205502
+      }
+    ]
+  }
+}

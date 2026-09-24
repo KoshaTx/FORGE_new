@@ -1,0 +1,64 @@
+{
+  "schema_version": "forge.source_reductive_controls.v1",
+  "transcription": "Reactants and products independently transcribed from primary drawings before forward computation. Constitutional stereo-free identities are used; formulas refer to neutral products.",
+  "controls": [
+    {
+      "label": "Jiang_IR_19_Pyrazole",
+      "family": "reductive_amination",
+      "locator": "Jiang SI PDF p. 5, lines 114-131 and displayed final assembly",
+      "components": {
+        "amine_head": "CNCCCn1cccn1",
+        "coupled_aldehyde": "O=CC(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCCCCCCCC"
+      },
+      "expected_product": "CN(CCCn1cccn1)CC(CCCCOC(=O)CCCCCCCC=CCCCCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCCCCCCCC",
+      "expected_formula": "C55H101N3O5",
+      "reported_ion_formula": "C55H102N3O5+",
+      "reported_mz_calculated": 884.78140,
+      "reported_mz_found": 884.7793,
+      "reported_isolated_yield_percent": 63
+    },
+    {
+      "label": "Jiang_IR_117_17",
+      "family": "reductive_amination",
+      "locator": "Jiang SI PDF p. 5, lines 133-152 and displayed final assembly",
+      "components": {
+        "amine_head": "CCCCN(CCCC)CCCN",
+        "coupled_aldehyde": "O=CC(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCC=CCCCCC"
+      },
+      "expected_product": "CCCCN(CCCC)CCCNCC(CCCCOC(=O)CCCCCCCC=CCC=CCCCCC)C(O)CCCCCOC(=O)CCCCCCCC=CCC=CCCCCC",
+      "expected_formula": "C59H110N2O5",
+      "reported_ion_formula": "C59H111N2O5+",
+      "reported_mz_calculated": 927.84875,
+      "reported_mz_found": 927.8480,
+      "reported_isolated_yield_percent": 61
+    },
+    {
+      "label": "Xue_5_A2_7b2",
+      "family": "aryl_reductive_amination",
+      "locator": "Xue SI PDF p. 8, Supplementary Fig. 18; main Methods Synthesis of cationic-degradable lipid libraries",
+      "components": {
+        "amine_head": "CN(C)CCN",
+        "coupled_aldehyde": "O=Cc1cc(OC(=O)C(CC)CCCC)cc(OC(=O)C(CC)CCCC)c1"
+      },
+      "expected_product": "CN(C)CCNCc1cc(OC(=O)C(CC)CCCC)cc(OC(=O)C(CC)CCCC)c1",
+      "expected_formula": "C27H46N2O4",
+      "reported_ion": "[M+H]+",
+      "reported_mz_calculated": 463.6,
+      "reported_mz_found": 463.7,
+      "reported_isolated_yield_percent": null
+    }
+  ],
+  "precursor_controls": [
+    {
+      "label": "Xue_A3_7b2",
+      "family": "aryl_reductive_amination",
+      "locator": "Xue SI PDF pp. 5-6, Supplementary Figs. 12 and 15",
+      "smiles": "O=Cc1c(OC(=O)C(CC)CCCC)cc(OC(=O)C(CC)CCCC)cc1OC(=O)C(CC)CCCC",
+      "expected_formula": "C31H48O7",
+      "expected_scaffold": "xue_A3",
+      "reported_ion": "[M+Na]+",
+      "reported_mz_calculated": 555.3,
+      "reported_mz_found": 555.3
+    }
+  ]
+}

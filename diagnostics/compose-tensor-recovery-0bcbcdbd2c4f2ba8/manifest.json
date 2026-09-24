@@ -1,0 +1,4176 @@
+{
+  "atoms": 63995147,
+  "by_family": {
+    "0": 34104,
+    "1": 101098,
+    "2": 5428,
+    "3": 2283,
+    "4": 63616,
+    "5": 35728,
+    "6": 92697,
+    "7": 33507,
+    "8": 7788,
+    "9": 10127,
+    "10": 10270,
+    "11": 96833,
+    "12": 21462,
+    "13": 62636,
+    "14": 12482,
+    "15": 27027,
+    "16": 38472,
+    "17": 10391,
+    "18": 62188,
+    "19": 260470,
+    "20": 28471,
+    "21": 174987
+  },
+  "complete": true,
+  "implementation": {
+    "path": "diagnostics/compose-full-tensors-0838c55c3871e514/cache-implementation.py",
+    "sha256": "2c88477adcbec49de3635f7525412bfc8d8665c8177fa4d92ed3d5cdc3f1bb7a"
+  },
+  "inputs": {
+    "mapped_cache": {
+      "path": "results/phase1/compose_lipid_iteration_pilot_v1/mapped-cache.json",
+      "sha256": "3b0f72ba691f0907fe0522fcc929c458d37f152130951f1a263f19115e795e77"
+    },
+    "measure": {
+      "path": "results/phase1/compose_lipid_training_cohort_v1/weights/result.json",
+      "sha256": "239d58da1c050d73c8f32dfb8c9c9c105b50e40c957dc00c5446f36da03ce988"
+    },
+    "population": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/result.json",
+      "sha256": "2ec46df97ae1637b6518b99ff90b832dd79ef69e471b1648bbca0a2afefe1740"
+    },
+    "verification": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/verification.json",
+      "sha256": "61f0bd33eeac2c55d86475994991bfbf4e568d9ec244618dba48536ae9ad2c91"
+    }
+  },
+  "maximum_atoms": 250,
+  "maximum_closures": 12,
+  "policy": {
+    "core_conditioning": "qualified_core",
+    "maximum_closures": 12,
+    "maximum_nodes": 254,
+    "node_padding": "batch",
+    "repeat_supervision": "exact_fragment"
+  },
+  "records": 1192065,
+  "schema_version": "forge.compose_lipid_tensor_cache.v1",
+  "shards": [
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000000000.npz",
+        "sha256": "574bbc6977471a5c0cb12b953c01a168d68c98d4b42833061e72a402f087ae7b"
+      },
+      "atoms": 272375,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 238,
+      "maximum_closures": 10,
+      "start": 0,
+      "stop": 4096
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000004096.npz",
+        "sha256": "6436d31b4282098aa1946dece367243a0e4a9f162a22a75ac09af7c384f25f30"
+      },
+      "atoms": 271210,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 246,
+      "maximum_closures": 12,
+      "start": 4096,
+      "stop": 8192
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000008192.npz",
+        "sha256": "c2f3c38bea089e71bc26e2367183d35e0ad41da6d5aa436f0d382dda298215fe"
+      },
+      "atoms": 271497,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 242,
+      "maximum_closures": 12,
+      "start": 8192,
+      "stop": 12288
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000012288.npz",
+        "sha256": "20f7bd4dbc842d35c0c9d61bddcf659770d91da5990c0fcdac7829af49ff5b4d"
+      },
+      "atoms": 271492,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 242,
+      "maximum_closures": 12,
+      "start": 12288,
+      "stop": 16384
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000016384.npz",
+        "sha256": "a1a678cf53f40445dd714466bfe558899d8b57eaf000318da4f804b723afc61c"
+      },
+      "atoms": 271470,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 248,
+      "maximum_closures": 10,
+      "start": 16384,
+      "stop": 20480
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000020480.npz",
+        "sha256": "47f08a4629fe4950b66928e301f5432d1d6f14cedc9cbebb7706fc9543ff6440"
+      },
+      "atoms": 270820,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 250,
+      "maximum_closures": 12,
+      "start": 20480,
+      "stop": 24576
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000024576.npz",
+        "sha256": "a4d66910105666ebefc090270de879134d71926116863120d8343708f32bf362"
+      },
+      "atoms": 273754,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 248,
+      "maximum_closures": 12,
+      "start": 24576,
+      "stop": 28672
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000028672.npz",
+        "sha256": "3367163ee59167558287da6739722ba9200362fc5056c37173e861548a7fb2ea"
+      },
+      "atoms": 269155,
+      "by_family": {
+        "0": 4096
+      },
+      "maximum_atoms": 250,
+      "maximum_closures": 12,
+      "start": 28672,
+      "stop": 32768
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000032768.npz",
+        "sha256": "15e1aa5135ff49f60d00f1a9e329ad758a803676f9624e38710d1b42a2375b60"
+      },
+      "atoms": 228286,
+      "by_family": {
+        "0": 1336,
+        "9": 2760
+      },
+      "maximum_atoms": 234,
+      "maximum_closures": 12,
+      "start": 32768,
+      "stop": 36864
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000036864.npz",
+        "sha256": "0ec4fe4f61d0e05f9ac56210fb5ebe66e6b7f644b8570b08c8b65dbbeeaf8037"
+      },
+      "atoms": 207001,
+      "by_family": {
+        "9": 4096
+      },
+      "maximum_atoms": 76,
+      "maximum_closures": 1,
+      "start": 36864,
+      "stop": 40960
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000040960.npz",
+        "sha256": "ae960879532f2fb5d5905edf7bb3cf426355eada9e174d6a5abb9e8be890941f"
+      },
+      "atoms": 208424,
+      "by_family": {
+        "9": 3271,
+        "10": 825
+      },
+      "maximum_atoms": 76,
+      "maximum_closures": 1,
+      "start": 40960,
+      "stop": 45056
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000045056.npz",
+        "sha256": "327f415f7c88f1f4921196fd41956ab2e652de5a22ab2000dcc65b1863e892b1"
+      },
+      "atoms": 209040,
+      "by_family": {
+        "10": 4096
+      },
+      "maximum_atoms": 76,
+      "maximum_closures": 1,
+      "start": 45056,
+      "stop": 49152
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000049152.npz",
+        "sha256": "eaa342b2182adc4fb25514ad054498cc29a36cf531ea7a310cccad3b5e5c43ad"
+      },
+      "atoms": 208395,
+      "by_family": {
+        "10": 4096
+      },
+      "maximum_atoms": 76,
+      "maximum_closures": 1,
+      "start": 49152,
+      "stop": 53248
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000053248.npz",
+        "sha256": "eb866e28df442f06bde7138f8ea899120d22e532f5b661f691af96f9882d7417"
+      },
+      "atoms": 320242,
+      "by_family": {
+        "10": 1110,
+        "11": 2986
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 53248,
+      "stop": 57344
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000057344.npz",
+        "sha256": "7c40e1d8c8c0791498be735865cfffabf86a06bdfb1876c892cdebd7cb2e00a6"
+      },
+      "atoms": 360115,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 57344,
+      "stop": 61440
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000061440.npz",
+        "sha256": "a09aee9b8ee6e043a51974e2f3f6f5462e94042bb7d0c990dc8e789190682737"
+      },
+      "atoms": 359547,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 61440,
+      "stop": 65536
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000065536.npz",
+        "sha256": "d0fc025343697d83ddf79eec504b9e0b0f6abcbee5cb70e11bc8349f5f8d6de1"
+      },
+      "atoms": 361839,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 65536,
+      "stop": 69632
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000069632.npz",
+        "sha256": "76de9ba86b1e9abb0efae5870f78fde55bc4b2bf26b29191bbf611dd254ee5d0"
+      },
+      "atoms": 364040,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 69632,
+      "stop": 73728
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000073728.npz",
+        "sha256": "8ff60feb59e71d7e41c126c34e9373843fb27bbf9500e189c1dce353b806871d"
+      },
+      "atoms": 362236,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 73728,
+      "stop": 77824
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000077824.npz",
+        "sha256": "059d36f1eed0c8eec4ecbe7ee56d8e67dbb994beb1ef9543a2012de8e7c1ead1"
+      },
+      "atoms": 362876,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 77824,
+      "stop": 81920
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000081920.npz",
+        "sha256": "52c1f24888cb598f76da8db63b26dd24deff45dcac3b16d059c48f143536dc7b"
+      },
+      "atoms": 361873,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 81920,
+      "stop": 86016
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000086016.npz",
+        "sha256": "2cd24731b67db9e8fdefe272ebfb246d0e6151c22a1d0f811e3b6ee2944aebbf"
+      },
+      "atoms": 361159,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 86016,
+      "stop": 90112
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000090112.npz",
+        "sha256": "9decd4984153464c61499bdc085079b2162a01547566e0969c8a6cd10a92c260"
+      },
+      "atoms": 362987,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 90112,
+      "stop": 94208
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000094208.npz",
+        "sha256": "78813e4aa90e9b9516dd4c0c269e88374082736f1e0abdb4353f5f2f6556eb00"
+      },
+      "atoms": 358420,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 94208,
+      "stop": 98304
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000098304.npz",
+        "sha256": "f1f1401addd8b8c70255c857a4ad68778b385f975701cec2936e721e0e89a94f"
+      },
+      "atoms": 359771,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 98304,
+      "stop": 102400
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000102400.npz",
+        "sha256": "9c86f3c3abb66c17b5a6f9ffc6e96dcab284351361c812acd52d1ace29857157"
+      },
+      "atoms": 359325,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 102400,
+      "stop": 106496
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000106496.npz",
+        "sha256": "341521098cc0ed70277b6a256c74bf65ecd7b38b215f3523bd6e90814d8dbb6d"
+      },
+      "atoms": 360329,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 106496,
+      "stop": 110592
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000110592.npz",
+        "sha256": "6c45ca6a8a571f70f443ccd7ed76faa36b1e15dcbe358695354258f7a12ccf8f"
+      },
+      "atoms": 361062,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 110592,
+      "stop": 114688
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000114688.npz",
+        "sha256": "c102b4612e347c6dd878571479fa1ab1e278e1e56007f8bdff4a6ee58643963b"
+      },
+      "atoms": 360698,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 114688,
+      "stop": 118784
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000118784.npz",
+        "sha256": "59f8a5c3a1a7e26c3b5c88468db2e3f760285534d90397a36767c61ccaf2a33e"
+      },
+      "atoms": 361901,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 199,
+      "maximum_closures": 2,
+      "start": 118784,
+      "stop": 122880
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000122880.npz",
+        "sha256": "3b831bfd5e373766519979ea27e6febfc078f18db9d232cf22497d9812942125"
+      },
+      "atoms": 362958,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 122880,
+      "stop": 126976
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000126976.npz",
+        "sha256": "4b10aa96205678611537ce3a5e8c44c4829df768561d61cf26e60ff019629979"
+      },
+      "atoms": 361797,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 126976,
+      "stop": 131072
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000131072.npz",
+        "sha256": "906ebefd5d954202bae986048cde4e2df72b57bdd19a69547a69de666617b620"
+      },
+      "atoms": 360603,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 131072,
+      "stop": 135168
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000135168.npz",
+        "sha256": "e516017866142a3563e073a13fe1c9ef7bf39e57fcf086986bc10608d4ca27c2"
+      },
+      "atoms": 361152,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 204,
+      "maximum_closures": 2,
+      "start": 135168,
+      "stop": 139264
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000139264.npz",
+        "sha256": "5b1ac1cbfb5edeecba6acc12c75fd91f022ae9a3102e17798c3437bc9ada5f47"
+      },
+      "atoms": 361865,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 139264,
+      "stop": 143360
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000143360.npz",
+        "sha256": "0c5c5114c2a826a79863938e267994bcaba0c769df4d6541341d6700f9d2638f"
+      },
+      "atoms": 363906,
+      "by_family": {
+        "11": 4096
+      },
+      "maximum_atoms": 209,
+      "maximum_closures": 2,
+      "start": 143360,
+      "stop": 147456
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000147456.npz",
+        "sha256": "45d8ca4308e41591867567351efaaaabebf1a882b292044477ad36ef10a977c7"
+      },
+      "atoms": 353960,
+      "by_family": {
+        "11": 3735,
+        "16": 361
+      },
+      "maximum_atoms": 220,
+      "maximum_closures": 2,
+      "start": 147456,
+      "stop": 151552
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000151552.npz",
+        "sha256": "7152eac03ca64213471aa34415dc6250d2856454a86846fc6c2c149b33e1720c"
+      },
+      "atoms": 309902,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 151552,
+      "stop": 155648
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000155648.npz",
+        "sha256": "6f357a9284d3135f578e6c43b76983ada46ac925c21701547e4f331b533f448b"
+      },
+      "atoms": 309373,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 155648,
+      "stop": 159744
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000159744.npz",
+        "sha256": "cd4d7f52e9483ad244c211e190f64c766ec68958af23dd68f5a0c4f4f51c210d"
+      },
+      "atoms": 312380,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 159744,
+      "stop": 163840
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000163840.npz",
+        "sha256": "687977a5e6e920d6b1f63e14d0e7dbbd6f9fcf3496831a7e287c9945f0158e1b"
+      },
+      "atoms": 314576,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 163840,
+      "stop": 167936
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000167936.npz",
+        "sha256": "ae9936a0cae0e06db1d9d21699ce034e35c16d998f413a547314642f27a1fa50"
+      },
+      "atoms": 307878,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 167936,
+      "stop": 172032
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000172032.npz",
+        "sha256": "c166a40ef527bf99cb5d596ba4367e0f982ff598698ec910cd5e2f82f161c723"
+      },
+      "atoms": 311848,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 172032,
+      "stop": 176128
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000176128.npz",
+        "sha256": "52a529b08f0e9a2c18620ba14c9706b5b578ee8e74e31d63506540f3ce6fd77c"
+      },
+      "atoms": 308606,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 176128,
+      "stop": 180224
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000180224.npz",
+        "sha256": "2196442ed690a0c34fe2bb84e73e905367beddf3398ebc0299305447ae4570ad"
+      },
+      "atoms": 309646,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 180224,
+      "stop": 184320
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000184320.npz",
+        "sha256": "54c30fa8fc042cae32a50f71c9666206b03792ee5086cce2c1cd14ddcbf0d69f"
+      },
+      "atoms": 307267,
+      "by_family": {
+        "16": 4096
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 184320,
+      "stop": 188416
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000188416.npz",
+        "sha256": "50f20029e2f2e600bcfbf98be916eb4c6947f4834ff38763751447411ee4ba44"
+      },
+      "atoms": 200715,
+      "by_family": {
+        "16": 1247,
+        "17": 2849
+      },
+      "maximum_atoms": 228,
+      "maximum_closures": 1,
+      "start": 188416,
+      "stop": 192512
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000192512.npz",
+        "sha256": "56e57bfc713d16ae82636eef8480566d16f8ef3609e53c4a3043f439170a29e3"
+      },
+      "atoms": 155102,
+      "by_family": {
+        "17": 4096
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 1,
+      "start": 192512,
+      "stop": 196608
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000196608.npz",
+        "sha256": "b234e7c4d5dee0422cfda39e773aa2ab2ac05af3ffa1e0712d042e07a44f9827"
+      },
+      "atoms": 159444,
+      "by_family": {
+        "17": 3446,
+        "19": 650
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 2,
+      "start": 196608,
+      "stop": 200704
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000200704.npz",
+        "sha256": "54d91558ae9c2980c78ffdb5b16eaf4f4781e08fcf0d4f24726a1dd5cd69efa9"
+      },
+      "atoms": 185749,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 200704,
+      "stop": 204800
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000204800.npz",
+        "sha256": "c4d620801242249eb9137ecef87cec58dd9abadb0689797dd04a346b7bfea95d"
+      },
+      "atoms": 185288,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 204800,
+      "stop": 208896
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000208896.npz",
+        "sha256": "8f05ecddcb73a732d6e70869a7a3f5049ab0b8b05089054cec8d86552ede71d2"
+      },
+      "atoms": 185578,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 208896,
+      "stop": 212992
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000212992.npz",
+        "sha256": "a2bc4318a438637657ee486b5b2a8d1247fa4d9145cd469ab12778cbbb4e172d"
+      },
+      "atoms": 185784,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 212992,
+      "stop": 217088
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000217088.npz",
+        "sha256": "24e81cbd1e802030cc8ff6b94eb033661f47fadf03102223e6b3680a474f4986"
+      },
+      "atoms": 185951,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 217088,
+      "stop": 221184
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000221184.npz",
+        "sha256": "7b30bd97e416d433c9f5d0d0ea611c77625268e0bbc2dc64da0546f4caa11622"
+      },
+      "atoms": 185592,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 221184,
+      "stop": 225280
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000225280.npz",
+        "sha256": "0ab54f4d138e5cf5af60c5f6bc41153de4886782eee43ea2c5402649eecafcc7"
+      },
+      "atoms": 185881,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 225280,
+      "stop": 229376
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000229376.npz",
+        "sha256": "99cef36200cf9c2c607a89ed5a69850bca2d843adc8f7e8612760a79352c5d90"
+      },
+      "atoms": 185796,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 229376,
+      "stop": 233472
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000233472.npz",
+        "sha256": "17225553259a68787e15715c5233db5d8672efe443c2f81a69b94c947d18cdfb"
+      },
+      "atoms": 186032,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 233472,
+      "stop": 237568
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000237568.npz",
+        "sha256": "623663cad56aa33718bf77b1fd0a20321922b65711e9b051c0fcde819c917496"
+      },
+      "atoms": 185298,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 237568,
+      "stop": 241664
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000241664.npz",
+        "sha256": "0c45744c2bec0851c85dc06eda84efe1dd2e918b0a0cf21c7f1a6346d040290b"
+      },
+      "atoms": 186007,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 241664,
+      "stop": 245760
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000245760.npz",
+        "sha256": "88fe8294a0e0f4256d596ab3e7e430b01359de5db1cb921ce757cafd438f87da"
+      },
+      "atoms": 186186,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 245760,
+      "stop": 249856
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000249856.npz",
+        "sha256": "c475c7043193bb1df7140fbfeff64f751fc6329b7bf1b2e36ebc6dc97411f6a1"
+      },
+      "atoms": 186293,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 249856,
+      "stop": 253952
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000253952.npz",
+        "sha256": "6296fb0762059c3c2e02db0a5b5f1f7b5b599b80c6eb4a23eb44a54d1ea07b68"
+      },
+      "atoms": 185836,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 253952,
+      "stop": 258048
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000258048.npz",
+        "sha256": "28e93d7d8681f95cc4ccb1b8cb79fefc7e750b41a4b799c6b46a8e1e45742c8f"
+      },
+      "atoms": 185750,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 258048,
+      "stop": 262144
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000262144.npz",
+        "sha256": "cc9ea152971991c9499e832b7975656c32be7ac8156424cdddcdde8b04c9f228"
+      },
+      "atoms": 185779,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 262144,
+      "stop": 266240
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000266240.npz",
+        "sha256": "650937d8c3c066471637f7e5cf2cc48c06c7cda7642adfc38d309d04b401c536"
+      },
+      "atoms": 186128,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 266240,
+      "stop": 270336
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000270336.npz",
+        "sha256": "fd21a646972a5dc3bb3245c7c05d6644c9545b3876f0a8afec571dee07d305c6"
+      },
+      "atoms": 185519,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 270336,
+      "stop": 274432
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000274432.npz",
+        "sha256": "e608b2c4c4440e4ddb977f4642628a83f243b35d860cb44d59ee06ab5e495263"
+      },
+      "atoms": 185403,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 274432,
+      "stop": 278528
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000278528.npz",
+        "sha256": "6e10fd30c01ede68316def5fd8c14379315f212e73fb57b748711686f9f8db97"
+      },
+      "atoms": 185962,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 278528,
+      "stop": 282624
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000282624.npz",
+        "sha256": "8baf8974b452180899ba8012a0b39efd0140640f956408c67a609444ef3aced0"
+      },
+      "atoms": 186010,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 282624,
+      "stop": 286720
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000286720.npz",
+        "sha256": "8c15a468d8db78899520b8c9c9faf3520bde3fd145c378476e706bb898816ac5"
+      },
+      "atoms": 185951,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 286720,
+      "stop": 290816
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000290816.npz",
+        "sha256": "9459337c3d5f386dbc18603e7d4ff824966cc4344be57e0c26e306b6fa5f8a93"
+      },
+      "atoms": 185911,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 290816,
+      "stop": 294912
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000294912.npz",
+        "sha256": "358f66cf678bf8e8f4adecd1c82a8b9c76a0ad5d4c681f367f0b85396724e9a1"
+      },
+      "atoms": 185136,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 294912,
+      "stop": 299008
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000299008.npz",
+        "sha256": "14ae8bb5894a442e31986840df02c47b2add089062bce4b7b9ed75f1bdbf8fe9"
+      },
+      "atoms": 185726,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 299008,
+      "stop": 303104
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000303104.npz",
+        "sha256": "d32a3f8770a96450e915ccf9ef80922cc24da60e11fe403b1d93d733a2c00d69"
+      },
+      "atoms": 185819,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 303104,
+      "stop": 307200
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000307200.npz",
+        "sha256": "3e7ac04672c5845bbe04e69ca144ad988c3d80cd035209730f91d6dddb579c23"
+      },
+      "atoms": 185893,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 307200,
+      "stop": 311296
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000311296.npz",
+        "sha256": "4b78a18e95e7c81fabcce95b7faf3afc86c57f12061b995c7ba9c6226707af5e"
+      },
+      "atoms": 185543,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 311296,
+      "stop": 315392
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000315392.npz",
+        "sha256": "9b959610344c5a2a6d555a3289d999320cbd403ac38c266e129ff679882a8169"
+      },
+      "atoms": 186716,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 315392,
+      "stop": 319488
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000319488.npz",
+        "sha256": "58db0aa630614e1e094582c7efb6496666e08a1f587bf8021ba7e13d10979628"
+      },
+      "atoms": 185608,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 319488,
+      "stop": 323584
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000323584.npz",
+        "sha256": "c7596c51c00fade7fc975af01b355689b420bf0e0ace83f0eb9d0e92868b4b79"
+      },
+      "atoms": 186109,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 323584,
+      "stop": 327680
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000327680.npz",
+        "sha256": "60d21382a3a8057f605d52b59e82351e13aaf547d3da6b2823e188d37637e74e"
+      },
+      "atoms": 185808,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 327680,
+      "stop": 331776
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000331776.npz",
+        "sha256": "4503bca17badd311914eb687525e6e810e7e1fe9bdd3a6bd633b536c5a63d1c6"
+      },
+      "atoms": 186002,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 331776,
+      "stop": 335872
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000335872.npz",
+        "sha256": "d0d3969d02a9219552693a1ff7fd2b4a54225923254d7a9d4f740ad7daeb6487"
+      },
+      "atoms": 185736,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 335872,
+      "stop": 339968
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000339968.npz",
+        "sha256": "3475e8ea050f7abc23af2202c130b9b295aa7de286aaaa4a3bd2f5fd780b1d6e"
+      },
+      "atoms": 186203,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 339968,
+      "stop": 344064
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000344064.npz",
+        "sha256": "773c5d8da083304869a72aa913a9d01157464b0e21c79f599b69a75f92d1488f"
+      },
+      "atoms": 185772,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 344064,
+      "stop": 348160
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000348160.npz",
+        "sha256": "30ad54641d0bb1fb09390752f18a967c7c5d6d548e28e0464e6f56a2fc7b1102"
+      },
+      "atoms": 185712,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 348160,
+      "stop": 352256
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000352256.npz",
+        "sha256": "a2a2e71c5d90a1c94cfc888ed14d0921b3867eee461408397f725aaaef7320a9"
+      },
+      "atoms": 186265,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 352256,
+      "stop": 356352
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000356352.npz",
+        "sha256": "78e4b9e0135f87757b6c37ee5820ddeb7b7adc1b03e4345ce7dd50d39b31b71f"
+      },
+      "atoms": 185230,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 356352,
+      "stop": 360448
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000360448.npz",
+        "sha256": "c63a15fe61adf19f4d4769bf42d2a0189ad2d7b606daac9af47a26514e649690"
+      },
+      "atoms": 186041,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 360448,
+      "stop": 364544
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000364544.npz",
+        "sha256": "687124e0bd3bd25645f8793497f3bacf04f42f249695759b434566ca29cda61f"
+      },
+      "atoms": 186363,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 364544,
+      "stop": 368640
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000368640.npz",
+        "sha256": "a86d7ef971c03daec720edd8299fdee9e7d5f70422b062705f86ab6eb9553f34"
+      },
+      "atoms": 185243,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 368640,
+      "stop": 372736
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000372736.npz",
+        "sha256": "a841ddd5b815ba2961019efa1b9322166ba0fd76ed47bc144f1445ebef201363"
+      },
+      "atoms": 186081,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 372736,
+      "stop": 376832
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000376832.npz",
+        "sha256": "9de0a26e404abaa3469c313bd6923666660ab65d1aecd02ad46b789de8775992"
+      },
+      "atoms": 185658,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 376832,
+      "stop": 380928
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000380928.npz",
+        "sha256": "8d4aeb3b1e79782efbec4bfce8e93f1bd46b32f124b4d3e571f51eab1874fbd8"
+      },
+      "atoms": 185337,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 380928,
+      "stop": 385024
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000385024.npz",
+        "sha256": "0f131cddf0e35df69bf4f31516e6f5b0cf5ab287b5e1cffa97f49d2e7aa6da42"
+      },
+      "atoms": 186492,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 385024,
+      "stop": 389120
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000389120.npz",
+        "sha256": "405d071a847586331f67004910bd48971391e478a3f4c6dd6fcf4fd9272883ed"
+      },
+      "atoms": 186208,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 389120,
+      "stop": 393216
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000393216.npz",
+        "sha256": "48d61026d38bc42598856ec2e0731fbf0f7085a8bb4329377f2cd3e1887a694e"
+      },
+      "atoms": 186110,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 393216,
+      "stop": 397312
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000397312.npz",
+        "sha256": "f5c6de022005f21c13e362bb1f6e9802fff227245b0dcaf5d4fef76340a3ed0e"
+      },
+      "atoms": 185726,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 397312,
+      "stop": 401408
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000401408.npz",
+        "sha256": "a2a2bd917494f1125255506d85ad5e79e6865868ee04f4e3d4df3b2313698157"
+      },
+      "atoms": 186257,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 401408,
+      "stop": 405504
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000405504.npz",
+        "sha256": "ac304f7e94ffb212ed69444d8622eb3bc3eca2da9c31a14e6baea4199328aafe"
+      },
+      "atoms": 185749,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 405504,
+      "stop": 409600
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000409600.npz",
+        "sha256": "f73e356f924870d744bf5b4cbf3d3f8ade44d0400cae78ca82bbaecadef59935"
+      },
+      "atoms": 186133,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 409600,
+      "stop": 413696
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000413696.npz",
+        "sha256": "f3c7d033025b6d0d775616e7626c9459312cc5df95c018cb238f80f6436489ba"
+      },
+      "atoms": 185709,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 413696,
+      "stop": 417792
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000417792.npz",
+        "sha256": "92688d2cbe43b9d6bfbf9b9fe7d90baff4e0b0fe88577360b57dc2e48e13f7d9"
+      },
+      "atoms": 186353,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 417792,
+      "stop": 421888
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000421888.npz",
+        "sha256": "380ec4fc49b7d792927d5122fa566ed2e537341baeca486c1eb69dd92c37c261"
+      },
+      "atoms": 185723,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 421888,
+      "stop": 425984
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000425984.npz",
+        "sha256": "cb27f84afb0082c8fdd1ed9ad21b5e754df9d1623b303cb1b669cf32bd669e1c"
+      },
+      "atoms": 186612,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 57,
+      "maximum_closures": 2,
+      "start": 425984,
+      "stop": 430080
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000430080.npz",
+        "sha256": "4be689bcc2693e91c34fe8ffc0b7211b85b980222887825fcaafc89839af4c47"
+      },
+      "atoms": 192300,
+      "by_family": {
+        "19": 3158,
+        "21": 938
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 2,
+      "start": 430080,
+      "stop": 434176
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000434176.npz",
+        "sha256": "c7c4adb7f59ebc84aead4fb4622b5741c236783a5608c1585fc2fcabc73365f2"
+      },
+      "atoms": 214862,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 434176,
+      "stop": 438272
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000438272.npz",
+        "sha256": "20333b0f18ba6dfb017419b4d7ca43b252dedb854c99463262cc7ab328ad3692"
+      },
+      "atoms": 214841,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 438272,
+      "stop": 442368
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000442368.npz",
+        "sha256": "fc20693e0a5f75681a70f336132757d900750a3e3b12825f671ee39f2fb06167"
+      },
+      "atoms": 214284,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 442368,
+      "stop": 446464
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000446464.npz",
+        "sha256": "52d3f644b62f8273bd85b8461795c227caa1115ff2651176d39c1474c95c73c8"
+      },
+      "atoms": 214550,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 446464,
+      "stop": 450560
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000450560.npz",
+        "sha256": "20dce2ec01645826028071ae850c8c68716e66c7272cb2f933afda57dbc39187"
+      },
+      "atoms": 214563,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 450560,
+      "stop": 454656
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000454656.npz",
+        "sha256": "f9fa14df24731f28772d0bd9eb493e99579d6c273aaf07ca3a94995a31513f89"
+      },
+      "atoms": 215231,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 454656,
+      "stop": 458752
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000458752.npz",
+        "sha256": "d974b31bb60e4f4aff606943f4659aa2906ccf4a757cae877d7a43af641ee730"
+      },
+      "atoms": 214295,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 458752,
+      "stop": 462848
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000462848.npz",
+        "sha256": "e224af915d5f74091a83ab72a441d7e83c8cf67eeab553b46014d799c234466d"
+      },
+      "atoms": 214501,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 462848,
+      "stop": 466944
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000466944.npz",
+        "sha256": "6ffb98151fbd0a160fdd3c1f9954afd4e5b65055c3034435fe1b7f5918f32191"
+      },
+      "atoms": 214530,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 466944,
+      "stop": 471040
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000471040.npz",
+        "sha256": "a4a304a6907035d87579315337259ec6ffaf20d75f3b69323793b4dd14f70666"
+      },
+      "atoms": 214396,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 471040,
+      "stop": 475136
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000475136.npz",
+        "sha256": "17b0b5e46e4e8272a759e9637127a98efa48c53ce1c68b7d1fcddbd85b556104"
+      },
+      "atoms": 214881,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 475136,
+      "stop": 479232
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000479232.npz",
+        "sha256": "f25574c161635be0cc79e77fae3199ee2ddb273aa7b6e7301086f8e3f23ef774"
+      },
+      "atoms": 214669,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 479232,
+      "stop": 483328
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000483328.npz",
+        "sha256": "8c9e60a6e09a72f3141d8dd00c3f3a1c81c3b796486fd7bc0ab9b36888269db9"
+      },
+      "atoms": 214269,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 483328,
+      "stop": 487424
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000487424.npz",
+        "sha256": "e1adb9eee79aace44f42c83efeb9d4a9ec30795f2fdde2980c5621f0adba9e86"
+      },
+      "atoms": 214498,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 487424,
+      "stop": 491520
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000491520.npz",
+        "sha256": "3e754876d4cce02d4ae0763efc21fc133a8d9e20ce3ee747dfc8c58c671618cc"
+      },
+      "atoms": 214670,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 491520,
+      "stop": 495616
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000495616.npz",
+        "sha256": "5fa7974cd3c8875d9e71cc9f0476509c55be2ecdee4291f0612173e4437d43ab"
+      },
+      "atoms": 214914,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 495616,
+      "stop": 499712
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000499712.npz",
+        "sha256": "0ddda6fef3fb55941a22e8b1f49ab575cd5c3179adbe8148b95ebce447700304"
+      },
+      "atoms": 214378,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 499712,
+      "stop": 503808
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000503808.npz",
+        "sha256": "ec9ede34b2b355f5572818aae80c03240c741f7f4cd3f78b3afff6e410cdb3b1"
+      },
+      "atoms": 214498,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 503808,
+      "stop": 507904
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000507904.npz",
+        "sha256": "1851f0662bef4c53dbaf845fecbc0199ad4c3ce1c2455c2d6f52dd701dc35885"
+      },
+      "atoms": 214882,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 507904,
+      "stop": 512000
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000512000.npz",
+        "sha256": "5f2c804328681a76f7f03349f56e4f155878b090ffffbee78542d46e31154f6a"
+      },
+      "atoms": 214422,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 512000,
+      "stop": 516096
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000516096.npz",
+        "sha256": "bb4c4a379d763db71b79635da1a57944e789c08b5a7b776dff1adaacd0fca5fc"
+      },
+      "atoms": 213994,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 516096,
+      "stop": 520192
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000520192.npz",
+        "sha256": "a6877b3232394696118b089c0275673daba6aac6a8eb8bf025f329cfa49fc446"
+      },
+      "atoms": 214643,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 520192,
+      "stop": 524288
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000524288.npz",
+        "sha256": "7a8704590a3fdcfe8eeb6b0018dfc52e034468771672f678788e8e15c547c46c"
+      },
+      "atoms": 214527,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 524288,
+      "stop": 528384
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000528384.npz",
+        "sha256": "c5077ff094eca5d9b23954ec6568c87eb4f310968a624a48f2b2da94e3d96b99"
+      },
+      "atoms": 214466,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 528384,
+      "stop": 532480
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000532480.npz",
+        "sha256": "1c4559ae7cd17912186ebe44a284674be0b76039a8ad9f47ed97ec1740a3f79d"
+      },
+      "atoms": 214539,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 532480,
+      "stop": 536576
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000536576.npz",
+        "sha256": "0144b05b1edb417d92090b76d148d0df602610735247b61911e176235e4f92b3"
+      },
+      "atoms": 214426,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 536576,
+      "stop": 540672
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000540672.npz",
+        "sha256": "5b930e6e64768a01d257ea33163a831e59631e453ca9cda5e60255ff1c277b40"
+      },
+      "atoms": 214700,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 540672,
+      "stop": 544768
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000544768.npz",
+        "sha256": "98ff9006f0ae321e70c5d81e2669d4c937ff09c8335f1479157ecaffd486c376"
+      },
+      "atoms": 214447,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 544768,
+      "stop": 548864
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000548864.npz",
+        "sha256": "ab1a571b86947156699bceb4d75641a205210b41bf83cd9234860e2a33ee6551"
+      },
+      "atoms": 214843,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 548864,
+      "stop": 552960
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000552960.npz",
+        "sha256": "ffe2aff7b03d3f6c74add8dbaf6e9d7a3654f801a73e82c887666d1e04ac15a6"
+      },
+      "atoms": 214800,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 552960,
+      "stop": 557056
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000557056.npz",
+        "sha256": "85648979e10154be4f4398cba40393e24fda3ec55f0ba7253642a5c81f9db8a8"
+      },
+      "atoms": 214138,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 557056,
+      "stop": 561152
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000561152.npz",
+        "sha256": "a64349564bc3612a39d8a9799509bab651236688e0f9ef3aab8e1746ce943617"
+      },
+      "atoms": 214489,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 561152,
+      "stop": 565248
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000565248.npz",
+        "sha256": "66bab56b5dcbaa94462a2fc5b8db28a567d6d39a2477873e5d99d57a16da3f80"
+      },
+      "atoms": 214115,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 565248,
+      "stop": 569344
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000569344.npz",
+        "sha256": "5a36f3d4300a0d15c520f124e4213e385476821ae5cda0ee5678e7a900b8ccca"
+      },
+      "atoms": 214572,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 569344,
+      "stop": 573440
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000573440.npz",
+        "sha256": "dd9b572be43aa9ffe0fa3b25d1cb91f910d2c89e4e588de7dc5f1dd8760b58eb"
+      },
+      "atoms": 214643,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 573440,
+      "stop": 577536
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000577536.npz",
+        "sha256": "b68c1a9a17b0aef7fb4ef256b705076d9ee9519d87be79624111b9d6fa550304"
+      },
+      "atoms": 214275,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 577536,
+      "stop": 581632
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000581632.npz",
+        "sha256": "a3eb6f9933dbed0f8b8ead11154a748e3c282b94615283e677232a5085cf5923"
+      },
+      "atoms": 214414,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 581632,
+      "stop": 585728
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000585728.npz",
+        "sha256": "73f26f0cd0b45d9f7c3f269e13d897210e0da65414a605110ddb40818e35764d"
+      },
+      "atoms": 214272,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 585728,
+      "stop": 589824
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000589824.npz",
+        "sha256": "9bf7e0c17b16e8ca222a20d0ce0970937e0c8fb7da1db30fe1b934b24bd328c2"
+      },
+      "atoms": 214667,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 589824,
+      "stop": 593920
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000593920.npz",
+        "sha256": "af4aa7c46246a14b902dc26fe7d318fa42ca1bfa23bf10d5161486c0b6618c86"
+      },
+      "atoms": 214774,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 593920,
+      "stop": 598016
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000598016.npz",
+        "sha256": "238d56024584475fce8341273fc6a4c442d483631deedf6bda6ba1e408705ded"
+      },
+      "atoms": 214466,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 598016,
+      "stop": 602112
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000602112.npz",
+        "sha256": "7436ba13aaca8ab90c7e3e7ee1a104b4a4cc5c5b7757e9e6255ff4beb4c22899"
+      },
+      "atoms": 214530,
+      "by_family": {
+        "21": 4096
+      },
+      "maximum_atoms": 62,
+      "maximum_closures": 1,
+      "start": 602112,
+      "stop": 606208
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000606208.npz",
+        "sha256": "98e40ae856e1f0548f494fbe7ab9dc7ad19c16c756c7b331811248d45f420386"
+      },
+      "atoms": 200305,
+      "by_family": {
+        "4": 2079,
+        "21": 2017
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 606208,
+      "stop": 610304
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000610304.npz",
+        "sha256": "efab8675ea51de4fde94feaea306645222b9045cab0fe7d000c8f699ac35a935"
+      },
+      "atoms": 187152,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 610304,
+      "stop": 614400
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000614400.npz",
+        "sha256": "e08707554e098932a65c18ffb99ce08d373d8ad85fbf5b90fc9d2975745ae7c5"
+      },
+      "atoms": 186812,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 8,
+      "start": 614400,
+      "stop": 618496
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000618496.npz",
+        "sha256": "3467fae1857eb63d3831548343c8b9140878f33c3698c48f9c7d3b69d78bc8ec"
+      },
+      "atoms": 187907,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 8,
+      "start": 618496,
+      "stop": 622592
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000622592.npz",
+        "sha256": "593676304e3329c2fd5ddf23e0e937bf80b58d6afd4826435107f6a3aa7989d3"
+      },
+      "atoms": 187239,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 622592,
+      "stop": 626688
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000626688.npz",
+        "sha256": "1816fa60b899632e5a71cdf1816f4b2d9f16f71070ab7170090482f454bf89bd"
+      },
+      "atoms": 187165,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 626688,
+      "stop": 630784
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000630784.npz",
+        "sha256": "83381e4254c266582c408e01ce393db268d1d14612bf8f90a18e02280903fb3c"
+      },
+      "atoms": 188349,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 630784,
+      "stop": 634880
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000634880.npz",
+        "sha256": "2abc6d4b6c6a2bac21e8c4f95686d2f9ab02ab26250b012eae507ff7b1820bc1"
+      },
+      "atoms": 187656,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 69,
+      "maximum_closures": 8,
+      "start": 634880,
+      "stop": 638976
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000638976.npz",
+        "sha256": "b0bd17d8425e42d3008ad2f37dd31f2056229f1dbf015461a5234f4b05af97b5"
+      },
+      "atoms": 188000,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 74,
+      "maximum_closures": 8,
+      "start": 638976,
+      "stop": 643072
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000643072.npz",
+        "sha256": "0e9b5eea842d8eff68cd2b4547696ee0c0d87300aad609c9df799d98699c6531"
+      },
+      "atoms": 187094,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 8,
+      "start": 643072,
+      "stop": 647168
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000647168.npz",
+        "sha256": "a34c9803c552217e57c20d0d1acca2885fa1af0ded5fb3526310ba9ee4167bdd"
+      },
+      "atoms": 187267,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 647168,
+      "stop": 651264
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000651264.npz",
+        "sha256": "afd9efa0308015698f581d419de3597dfb35a14c0edb9ba7f367c435344aed1b"
+      },
+      "atoms": 187393,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 70,
+      "maximum_closures": 8,
+      "start": 651264,
+      "stop": 655360
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000655360.npz",
+        "sha256": "2041d64574f3ed5e1587f1cdf9ec1f09928bba80811148637a1e656f996e53c3"
+      },
+      "atoms": 187703,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 74,
+      "maximum_closures": 8,
+      "start": 655360,
+      "stop": 659456
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000659456.npz",
+        "sha256": "786c34af44e29700d672241a23d3942890999b4c9ac804d51850e5850cd2cce2"
+      },
+      "atoms": 186848,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 659456,
+      "stop": 663552
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000663552.npz",
+        "sha256": "ef1abda497e66a7608cc8f405790d841af99b8b45ff8c87e8a041d46576d7ba0"
+      },
+      "atoms": 186713,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 663552,
+      "stop": 667648
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000667648.npz",
+        "sha256": "0e795adf4bae0b46f42cddb5981a9c464c992abe4d1e6f86e1836934334a1e55"
+      },
+      "atoms": 186485,
+      "by_family": {
+        "4": 4096
+      },
+      "maximum_atoms": 72,
+      "maximum_closures": 8,
+      "start": 667648,
+      "stop": 671744
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000671744.npz",
+        "sha256": "c97baee3e668e0837a7e638b57e7f6fc6de79ade1a5f43f3087077879a68713f"
+      },
+      "atoms": 167622,
+      "by_family": {
+        "4": 97,
+        "5": 3999
+      },
+      "maximum_atoms": 65,
+      "maximum_closures": 5,
+      "start": 671744,
+      "stop": 675840
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000675840.npz",
+        "sha256": "ef880504bb0ad48e31357ba13d51dad923f1c28fee2ed3602000fedf6cdf277b"
+      },
+      "atoms": 167554,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 50,
+      "maximum_closures": 2,
+      "start": 675840,
+      "stop": 679936
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000679936.npz",
+        "sha256": "e823befb89f4210b9c26b4a25773a42d3327604457560bd6d22e2a3f78932613"
+      },
+      "atoms": 167370,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 679936,
+      "stop": 684032
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000684032.npz",
+        "sha256": "a655257d8e0b1a993630461bbc8bcdcbf9948efff28dccac48b2b2d94fa63be9"
+      },
+      "atoms": 167299,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 50,
+      "maximum_closures": 2,
+      "start": 684032,
+      "stop": 688128
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000688128.npz",
+        "sha256": "3350b735ed3080f8b5fc7a2d87d8214ed9136a9a6167174536b701fe6c0c23bd"
+      },
+      "atoms": 167250,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 688128,
+      "stop": 692224
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000692224.npz",
+        "sha256": "47db4578e35c6c533c58c77ca2b6bc1f3a6556cff85d62c7791c357bfefaca50"
+      },
+      "atoms": 167248,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 50,
+      "maximum_closures": 2,
+      "start": 692224,
+      "stop": 696320
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000696320.npz",
+        "sha256": "214096b3efc88bec276621249e684e4dcecafa6696fdd112d36a7a4dabe6390c"
+      },
+      "atoms": 167651,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 50,
+      "maximum_closures": 2,
+      "start": 696320,
+      "stop": 700416
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000700416.npz",
+        "sha256": "bdaed061873e7d7465e3dd6299dee7b07a4381689cf3152c827f5c3140ec614e"
+      },
+      "atoms": 167189,
+      "by_family": {
+        "5": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 2,
+      "start": 700416,
+      "stop": 704512
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000704512.npz",
+        "sha256": "c4adb3d144c15eeb8ad8e44b717f0d5f83228e97a1f4fb2fe9b88972ff6c6d0f"
+      },
+      "atoms": 190220,
+      "by_family": {
+        "5": 3057,
+        "8": 1039
+      },
+      "maximum_atoms": 84,
+      "maximum_closures": 2,
+      "start": 704512,
+      "stop": 708608
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000708608.npz",
+        "sha256": "dcbef00eb7c744fd7104332d801ce468af269655593d974a66117a3f97d5ff99"
+      },
+      "atoms": 256017,
+      "by_family": {
+        "8": 4096
+      },
+      "maximum_atoms": 84,
+      "maximum_closures": 2,
+      "start": 708608,
+      "stop": 712704
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000712704.npz",
+        "sha256": "bc32683c80339ee65e4a983cd619fc3d2b9f2e51164ba86ce6378bed5d3bafd8"
+      },
+      "atoms": 268081,
+      "by_family": {
+        "8": 2653,
+        "15": 1443
+      },
+      "maximum_atoms": 103,
+      "maximum_closures": 7,
+      "start": 712704,
+      "stop": 716800
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000716800.npz",
+        "sha256": "17cd7374f1c0443b87320b297f1d803a5c97f9d7d8e9cbc781bebd950b2c7881"
+      },
+      "atoms": 294795,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 103,
+      "maximum_closures": 7,
+      "start": 716800,
+      "stop": 720896
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000720896.npz",
+        "sha256": "fc49fa98099fa60a39b0afa30efd515b59c25d4b82caf1a60664df1ba23b4847"
+      },
+      "atoms": 292190,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 103,
+      "maximum_closures": 7,
+      "start": 720896,
+      "stop": 724992
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000724992.npz",
+        "sha256": "482b0e74f298e6dbf084b14e5f666829114881b042b700eb994ffe52addde286"
+      },
+      "atoms": 292822,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 105,
+      "maximum_closures": 7,
+      "start": 724992,
+      "stop": 729088
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000729088.npz",
+        "sha256": "1ca01e3ba312cc29e1c7de4ce6f1cc91b9eb3f634dc032391f5af1927aa82127"
+      },
+      "atoms": 293325,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 104,
+      "maximum_closures": 7,
+      "start": 729088,
+      "stop": 733184
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000733184.npz",
+        "sha256": "b389ceebed1f8fb992555b08c7701a75f0962f47119f431a9af5ec95c02da096"
+      },
+      "atoms": 292996,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 103,
+      "maximum_closures": 7,
+      "start": 733184,
+      "stop": 737280
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000737280.npz",
+        "sha256": "c44e3795110372d2e6730d07f2685d3daa79f2b017e2d27855fc3d508311a1d3"
+      },
+      "atoms": 291751,
+      "by_family": {
+        "15": 4096
+      },
+      "maximum_atoms": 104,
+      "maximum_closures": 7,
+      "start": 737280,
+      "stop": 741376
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000741376.npz",
+        "sha256": "4db4050b93c1392cd9f55c6f75724514a16819a178f71f449f918b21b80d7b78"
+      },
+      "atoms": 212016,
+      "by_family": {
+        "15": 1008,
+        "18": 3088
+      },
+      "maximum_atoms": 103,
+      "maximum_closures": 7,
+      "start": 741376,
+      "stop": 745472
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000745472.npz",
+        "sha256": "1bdfd8669eb36c6c14c62a8a61069dc2abb868509cc9c8185e3ce5f17df49b63"
+      },
+      "atoms": 184204,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 745472,
+      "stop": 749568
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000749568.npz",
+        "sha256": "431768bb467ac404e1d1bbb39afb44db217cd6d6753c2fe9bf7bcdc5f0579d22"
+      },
+      "atoms": 183930,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 749568,
+      "stop": 753664
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000753664.npz",
+        "sha256": "b7d3dee174af46dc7140bf653f59a7069d09a83212cc7747c40ab0bd3bb9f808"
+      },
+      "atoms": 183947,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 753664,
+      "stop": 757760
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000757760.npz",
+        "sha256": "b0e4ea11622b54f1b46ea211a5b6a9cf447992e04ce0ce07978c37cd524454a5"
+      },
+      "atoms": 183778,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 757760,
+      "stop": 761856
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000761856.npz",
+        "sha256": "36acc36b2f14428ca6243048ad9ea786e4b030815a5f369361587aba9d059bca"
+      },
+      "atoms": 184093,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 761856,
+      "stop": 765952
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000765952.npz",
+        "sha256": "c95801c60e0fee9a6025a877ecbfcb96d82a818e4dd179c93578f7b333fc41b2"
+      },
+      "atoms": 184297,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 765952,
+      "stop": 770048
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000770048.npz",
+        "sha256": "a58d22e39952d7317c3a6e09851addccfd377581c985508c6214413be2cd497c"
+      },
+      "atoms": 183746,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 770048,
+      "stop": 774144
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000774144.npz",
+        "sha256": "5dc8f0275562ae47e1a7aaa4a6df9985fa59e93c9b5f39cb286519c90a589961"
+      },
+      "atoms": 183820,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 774144,
+      "stop": 778240
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000778240.npz",
+        "sha256": "491e5cad7ead340640e283832d37967b2c464f36d87222239c4271b0727a97af"
+      },
+      "atoms": 184108,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 778240,
+      "stop": 782336
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000782336.npz",
+        "sha256": "c85fd554b0c9f445ca9b30c268f28ef7b44dc5f88120f48d3a01aac3015f4f2f"
+      },
+      "atoms": 183670,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 782336,
+      "stop": 786432
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000786432.npz",
+        "sha256": "9b332d9f1220ce33e7a512173393d12e955ad4561e92a1b3764d590d7cd11efe"
+      },
+      "atoms": 183933,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 786432,
+      "stop": 790528
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000790528.npz",
+        "sha256": "b91b89338c4b1a97fc9a342b7fd47ff1b6da7405f3c7be9c284a34573c8facc2"
+      },
+      "atoms": 183836,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 790528,
+      "stop": 794624
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000794624.npz",
+        "sha256": "5856ac533a0027b85075fed3a3bf30fcea89fd492679a4b2bab2977038b2cf82"
+      },
+      "atoms": 184028,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 794624,
+      "stop": 798720
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000798720.npz",
+        "sha256": "6adc496c178ee0654c5f024867cbfe2eeef16b96f8ad2faa122e9f704c6605a9"
+      },
+      "atoms": 183807,
+      "by_family": {
+        "18": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 2,
+      "start": 798720,
+      "stop": 802816
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000802816.npz",
+        "sha256": "73167ce568df1350eca0f4090682c9b8f0c9197e3fd49e0992d52970977cd6ec"
+      },
+      "atoms": 219016,
+      "by_family": {
+        "18": 1756,
+        "20": 2340
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 802816,
+      "stop": 806912
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000806912.npz",
+        "sha256": "9b704516bbe147b84d04ebd5d93c73a92413489de3f22b292c84f65c65959513"
+      },
+      "atoms": 245588,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 806912,
+      "stop": 811008
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000811008.npz",
+        "sha256": "ff32e611b3a5ebb73ec858d2cc40c7205d4586a0700bdcfd9e4210261d41055a"
+      },
+      "atoms": 245354,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 811008,
+      "stop": 815104
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000815104.npz",
+        "sha256": "c11e4a91556a09f4c0f9f43d348723fc30153cbfe66ab0f767760f580ae5f2f2"
+      },
+      "atoms": 244805,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 815104,
+      "stop": 819200
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000819200.npz",
+        "sha256": "bc9899b24518013eff97b77e511da1184d587123bc47a09e70b8dd24ab14a38e"
+      },
+      "atoms": 244872,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 819200,
+      "stop": 823296
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000823296.npz",
+        "sha256": "43f133ca2aa7202944fdc2aaa38dca41156523fc5b5e4cde016b61a8882d6419"
+      },
+      "atoms": 245202,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 823296,
+      "stop": 827392
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000827392.npz",
+        "sha256": "27a2f22b1a6a55ea87bceb325a87eb8bb9b7de6469df1767c45a0eb65504f9af"
+      },
+      "atoms": 244957,
+      "by_family": {
+        "20": 4096
+      },
+      "maximum_atoms": 73,
+      "maximum_closures": 2,
+      "start": 827392,
+      "stop": 831488
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000831488.npz",
+        "sha256": "0de0d922d91a6348e5a55cda61c7dd04266736a3a014f1e8c79a4b118b34db7b"
+      },
+      "atoms": 219285,
+      "by_family": {
+        "13": 2541,
+        "20": 1555
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 2,
+      "start": 831488,
+      "stop": 835584
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000835584.npz",
+        "sha256": "8f82d7efbd4bf8e6d445ac6bf4bb6558fa4a9ece731d7b7681895352f37fede3"
+      },
+      "atoms": 204155,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 835584,
+      "stop": 839680
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000839680.npz",
+        "sha256": "08825c52109287aad1316643715fb4a11e65b3157d8ffad2bba31c2cc05ea0ab"
+      },
+      "atoms": 204389,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 143,
+      "maximum_closures": 0,
+      "start": 839680,
+      "stop": 843776
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000843776.npz",
+        "sha256": "f407018f6453f13377a6373aed92de3eb5d8b4d088128dc805a5e193fab10eb5"
+      },
+      "atoms": 205763,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 843776,
+      "stop": 847872
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000847872.npz",
+        "sha256": "ebcb3bbaac22772655dc8b45a724c4dc437928d9e638f1a8fa922151c522091e"
+      },
+      "atoms": 204085,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 847872,
+      "stop": 851968
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000851968.npz",
+        "sha256": "6cd21afb3f16a6ad5075d05f44e22e75460b30b7407dbc09a398a0d7f3b92a20"
+      },
+      "atoms": 204047,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 851968,
+      "stop": 856064
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000856064.npz",
+        "sha256": "17e2034ef5285429c4586d489163b6711343876bad6e80bd51a9b9fa48877be2"
+      },
+      "atoms": 203661,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 856064,
+      "stop": 860160
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000860160.npz",
+        "sha256": "f1d8d3689c2dea733a55a9dad821fc855a9474ef28fd96b8dee4d2fa267c58a3"
+      },
+      "atoms": 204237,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 860160,
+      "stop": 864256
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000864256.npz",
+        "sha256": "605da80c32f872ea4c7c4c4438635a442f6a2025bd00fd85b002a20597f596bf"
+      },
+      "atoms": 204314,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 864256,
+      "stop": 868352
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000868352.npz",
+        "sha256": "5cfdacdb6dc7c6598ea561f4995cc472a44a72b6667720cfd2ad5e31edd6cdad"
+      },
+      "atoms": 205215,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 868352,
+      "stop": 872448
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000872448.npz",
+        "sha256": "e3bb69f0356959c13dce059ec7da7a44e649db1fe596632c23daa354917db56d"
+      },
+      "atoms": 203748,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 872448,
+      "stop": 876544
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000876544.npz",
+        "sha256": "df517f4097c6f9733777e41542ad97b8385781549973682bf7a94c689e226a0c"
+      },
+      "atoms": 204676,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 876544,
+      "stop": 880640
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000880640.npz",
+        "sha256": "95d36d3d2a778e71343a59ddb184b2e02f7868241833c4c9071a217f0d0f0312"
+      },
+      "atoms": 202795,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 880640,
+      "stop": 884736
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000884736.npz",
+        "sha256": "917bb093c8ebbdcdf4d20da6dc309b74089ecd983319b18b9eeb1b307a01296b"
+      },
+      "atoms": 202649,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 884736,
+      "stop": 888832
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000888832.npz",
+        "sha256": "e882d42e20a302d5011aed9d6656f78be6b7cd3746659b33812302089a38f95e"
+      },
+      "atoms": 204700,
+      "by_family": {
+        "13": 4096
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 0,
+      "start": 888832,
+      "stop": 892928
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000892928.npz",
+        "sha256": "949167eaa5a95b7e85b8a92073a87054448902d3f6249ab0e0dad8ceb2dfecb5"
+      },
+      "atoms": 199027,
+      "by_family": {
+        "3": 1345,
+        "13": 2751
+      },
+      "maximum_atoms": 148,
+      "maximum_closures": 1,
+      "start": 892928,
+      "stop": 897024
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000897024.npz",
+        "sha256": "7977e16cae5caf215cde49a938d6393d3df57dc5be2020296743678b8dd35abc"
+      },
+      "atoms": 273316,
+      "by_family": {
+        "3": 938,
+        "12": 3158
+      },
+      "maximum_atoms": 88,
+      "maximum_closures": 1,
+      "start": 897024,
+      "stop": 901120
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000901120.npz",
+        "sha256": "eb106fda6350327756d74df36ad1b85286653a8ab9af5f9ccdee1952b8361134"
+      },
+      "atoms": 298991,
+      "by_family": {
+        "12": 4096
+      },
+      "maximum_atoms": 88,
+      "maximum_closures": 1,
+      "start": 901120,
+      "stop": 905216
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000905216.npz",
+        "sha256": "e81eb33bb56a22424e4d4f1d1f566e524e0f28772affa8e2e3a8db1656bb205e"
+      },
+      "atoms": 298377,
+      "by_family": {
+        "12": 4096
+      },
+      "maximum_atoms": 88,
+      "maximum_closures": 1,
+      "start": 905216,
+      "stop": 909312
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000909312.npz",
+        "sha256": "0f34429189fe3f95b0c1a6cceb964af438962a0898a074189bf21d13ceecc949"
+      },
+      "atoms": 298823,
+      "by_family": {
+        "12": 4096
+      },
+      "maximum_atoms": 88,
+      "maximum_closures": 1,
+      "start": 909312,
+      "stop": 913408
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000913408.npz",
+        "sha256": "eaf6e22a891c6f0bcb709b427bf76cf25d6f40b7c4e6158a86b87b803ae399a5"
+      },
+      "atoms": 299724,
+      "by_family": {
+        "12": 4096
+      },
+      "maximum_atoms": 88,
+      "maximum_closures": 1,
+      "start": 913408,
+      "stop": 917504
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000917504.npz",
+        "sha256": "9a7dc6c80a7c7e9b6eafd58571f2be606d577057e99e38ccfce826be67a2d6b5"
+      },
+      "atoms": 241585,
+      "by_family": {
+        "1": 2033,
+        "10": 143,
+        "12": 1920
+      },
+      "maximum_atoms": 96,
+      "maximum_closures": 4,
+      "start": 917504,
+      "stop": 921600
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000921600.npz",
+        "sha256": "532ace874e993cf9e9acac09b90b0b84416b7cace58250934202680971fb7bbb"
+      },
+      "atoms": 187895,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 921600,
+      "stop": 925696
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000925696.npz",
+        "sha256": "ea17907fdb71d91df27e8c336bb17fc9a171b089dfecf16e4861808084e15d22"
+      },
+      "atoms": 187070,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 925696,
+      "stop": 929792
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000929792.npz",
+        "sha256": "ee40eb4ae6159b8a87738a0b054f09c53bed3885052afbbbd932819a81ea9607"
+      },
+      "atoms": 187408,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 1,
+      "start": 929792,
+      "stop": 933888
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000933888.npz",
+        "sha256": "555d0fbfb2f8f0357882c6dfdfe39def257a6b6de2760e592750b5938780ee1a"
+      },
+      "atoms": 187859,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 55,
+      "maximum_closures": 1,
+      "start": 933888,
+      "stop": 937984
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000937984.npz",
+        "sha256": "c4d0022c9a0de87882ffdd679e85ba2910d023459c2403f8c630c57833ce127a"
+      },
+      "atoms": 187852,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 937984,
+      "stop": 942080
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000942080.npz",
+        "sha256": "e5632e27914bee86e8d3b69ffd244b74f6ef1ad90bc130319deab9fa5bf696be"
+      },
+      "atoms": 187516,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 942080,
+      "stop": 946176
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000946176.npz",
+        "sha256": "8e5460380b069ca27deebcb49a732fe477a51df6357cf8b2c479f52f182c651c"
+      },
+      "atoms": 187358,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 946176,
+      "stop": 950272
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000950272.npz",
+        "sha256": "cb01b0fddfda3488f3d2dde32ee3c668cc86dbd9406f3a17a9a66d0c0ea2fad3"
+      },
+      "atoms": 188088,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 950272,
+      "stop": 954368
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000954368.npz",
+        "sha256": "ca7bb2b886e1c8a370e25e8e62b9a05a6c8001c071e968bc7dbea212d4108387"
+      },
+      "atoms": 187095,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 954368,
+      "stop": 958464
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000958464.npz",
+        "sha256": "3472fb409be73a33d9c81bc9f4c85d304036d02646a2f9783a740b3587452639"
+      },
+      "atoms": 187799,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 958464,
+      "stop": 962560
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000962560.npz",
+        "sha256": "973c11dde56da0a2a3ce6571c08cb3009ac47bc1ee7fddc2880ef0216b81c66b"
+      },
+      "atoms": 187427,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 962560,
+      "stop": 966656
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000966656.npz",
+        "sha256": "3eaadfcccc323519edd8347c4422596cd47d1fbec713666608cf69c4028ea62c"
+      },
+      "atoms": 187423,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 966656,
+      "stop": 970752
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000970752.npz",
+        "sha256": "4338945fd52d3a6797316c8491829b2d1f5e0d3524d9d801f778f2875533bdab"
+      },
+      "atoms": 186941,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 970752,
+      "stop": 974848
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000974848.npz",
+        "sha256": "4d4da127a15ad4f940fa9bc4c3b0ef3158e95ac5fa436391e5ecceb99d4d7580"
+      },
+      "atoms": 187817,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 974848,
+      "stop": 978944
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000978944.npz",
+        "sha256": "d2729fb0e8765a824a6ab146af6fb25574e6e824c4f3b628f1f20412e4f126d6"
+      },
+      "atoms": 187758,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 978944,
+      "stop": 983040
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000983040.npz",
+        "sha256": "77da85ab3ffacabbd752cdecc7490ecb2aedc55046c4c6cbceca23a6f3bedd80"
+      },
+      "atoms": 187929,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 983040,
+      "stop": 987136
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000987136.npz",
+        "sha256": "02822627eacbe608c0e1cb2409a60d07d16bc20230a104d2e9817554858dfd54"
+      },
+      "atoms": 187046,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 987136,
+      "stop": 991232
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000991232.npz",
+        "sha256": "0a132cb615217b22c5aa022461a44bb4cb51921a2821ff3a781af0a815e3320e"
+      },
+      "atoms": 187382,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 991232,
+      "stop": 995328
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000995328.npz",
+        "sha256": "fbbc7c9b069f2c76c9a359ffacbc42ae732cbe1abfb779bdee46b0822b9f7b38"
+      },
+      "atoms": 187948,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 995328,
+      "stop": 999424
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-000999424.npz",
+        "sha256": "02565b5a1f28181b6fec335a2c50c92caa9a7baffa679c2fe84639fb7a27f4a7"
+      },
+      "atoms": 187207,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 999424,
+      "stop": 1003520
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001003520.npz",
+        "sha256": "7485fd8115296818f3b7cb2bacf4b7e31bb4f6848dbfca6aeacb6a8351deea68"
+      },
+      "atoms": 187741,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1003520,
+      "stop": 1007616
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001007616.npz",
+        "sha256": "05fda2e08339a68883cdf2e9f5ff3ba1c49ca156f99e88c5f0a18fb415ecec2d"
+      },
+      "atoms": 187422,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1007616,
+      "stop": 1011712
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001011712.npz",
+        "sha256": "c2eb886bd0af2adc20225d9c908348b218dfe4af7453be44220b2085ce0ed430"
+      },
+      "atoms": 187814,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1011712,
+      "stop": 1015808
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001015808.npz",
+        "sha256": "d66523ce181b31d198eb160a4b2b2f2fc5034f300d7af32268e52fbed1dcc786"
+      },
+      "atoms": 187449,
+      "by_family": {
+        "1": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1015808,
+      "stop": 1019904
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001019904.npz",
+        "sha256": "db289690677eb09bc1305379f2ab483d2c1c9dfa520ef083adfb5e5741ba5026"
+      },
+      "atoms": 278820,
+      "by_family": {
+        "1": 761,
+        "2": 3335
+      },
+      "maximum_atoms": 169,
+      "maximum_closures": 1,
+      "start": 1019904,
+      "stop": 1024000
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001024000.npz",
+        "sha256": "a6fd32e8d58e78540c7ec22756afc34da73ce0c0a60d9ef37e118345f1491806"
+      },
+      "atoms": 208081,
+      "by_family": {
+        "2": 399,
+        "6": 3697
+      },
+      "maximum_atoms": 169,
+      "maximum_closures": 5,
+      "start": 1024000,
+      "stop": 1028096
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001028096.npz",
+        "sha256": "69f9403a6d154873f4008bc45990fd718a468adb3856e3495dfc15baf3749da4"
+      },
+      "atoms": 199705,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1028096,
+      "stop": 1032192
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001032192.npz",
+        "sha256": "ee81860dae7bf99e926fbb9b8cbd8b412f5a0e13b759bab254097feb833a0f94"
+      },
+      "atoms": 198948,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1032192,
+      "stop": 1036288
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001036288.npz",
+        "sha256": "b10aefe6ccd00800277de01051680ddad1d4755c53da2c1a4d90bd94ee19541c"
+      },
+      "atoms": 198235,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1036288,
+      "stop": 1040384
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001040384.npz",
+        "sha256": "a7b689972b7bd4c367dc758e4182e7fe1c65c1f4fc6852ee67ff7477637836b7"
+      },
+      "atoms": 198744,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1040384,
+      "stop": 1044480
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001044480.npz",
+        "sha256": "965afc2e91a7496e092155f4c86a25310876374401aad74731d170d2902a5022"
+      },
+      "atoms": 198779,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1044480,
+      "stop": 1048576
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001048576.npz",
+        "sha256": "830d173bbd712cedc41f9f1eb202a3a89208060a3f0393f0aaebf21fa7e33474"
+      },
+      "atoms": 198311,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1048576,
+      "stop": 1052672
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001052672.npz",
+        "sha256": "3418d040dc90643088ed78371c5393691901bf165ed3aa4fd5589519a99851f8"
+      },
+      "atoms": 198631,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1052672,
+      "stop": 1056768
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001056768.npz",
+        "sha256": "198525285eadf9c0fbf8d2c9277fede1670b67cb53f133efc0bdc1d61ad44167"
+      },
+      "atoms": 198384,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1056768,
+      "stop": 1060864
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001060864.npz",
+        "sha256": "20642f73695383b065bfde93c900c24f2b445bac36ff1713c7ca11e6e483c83e"
+      },
+      "atoms": 198797,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1060864,
+      "stop": 1064960
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001064960.npz",
+        "sha256": "d2be73cc9b5ee65c314f9893128f2e25283eae651be60508c3bc81c6442a1bd8"
+      },
+      "atoms": 198586,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1064960,
+      "stop": 1069056
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001069056.npz",
+        "sha256": "c49356022232d447b64ded0b4a1a587223e5d1052a4e783a72216d7758eebc7e"
+      },
+      "atoms": 198940,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1069056,
+      "stop": 1073152
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001073152.npz",
+        "sha256": "88b6c269247c7d8336543adf81674fadc203f21cc340022c77883a85891e7884"
+      },
+      "atoms": 198383,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1073152,
+      "stop": 1077248
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001077248.npz",
+        "sha256": "848270728ad9b773367a60758215c76256bae3459a9f02cf654e7adbee83a1ef"
+      },
+      "atoms": 198764,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1077248,
+      "stop": 1081344
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001081344.npz",
+        "sha256": "6a9eda39d7c7616a96f06de4d2142391f6df9269195c2a1175856610e6a2b512"
+      },
+      "atoms": 198621,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1081344,
+      "stop": 1085440
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001085440.npz",
+        "sha256": "591645b239f1b23515dabd851140894b084ef490fb2a86ff2329f9fcaf374cbc"
+      },
+      "atoms": 198942,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1085440,
+      "stop": 1089536
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001089536.npz",
+        "sha256": "e7b50acdad16c2c36d86960c76c154537ed038ff9e0aebfeed20f6ef548faa77"
+      },
+      "atoms": 198297,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1089536,
+      "stop": 1093632
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001093632.npz",
+        "sha256": "5d5d447978fceea58b7c76f5545635cbb3071165f40ded79e64da2da63c0c18c"
+      },
+      "atoms": 198798,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1093632,
+      "stop": 1097728
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001097728.npz",
+        "sha256": "ebd7f8a46fd090cf0027c518b6bb440c99d617fb12d0c90624b2c2b20fe3bcdd"
+      },
+      "atoms": 198624,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1097728,
+      "stop": 1101824
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001101824.npz",
+        "sha256": "dae6948585df0686b0927c796b66ac88dc6c7371a8ce43065f594ae30320aa72"
+      },
+      "atoms": 199265,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1101824,
+      "stop": 1105920
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001105920.npz",
+        "sha256": "79abfaff465f707b3364ea14d8d61b7ff456ae2074ea53535c2e78513e1e7b41"
+      },
+      "atoms": 198738,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1105920,
+      "stop": 1110016
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001110016.npz",
+        "sha256": "909f10629c826de704c5ed20ad328515f7ec6d070c82c25cfa07d06e5f437103"
+      },
+      "atoms": 198480,
+      "by_family": {
+        "6": 4096
+      },
+      "maximum_atoms": 56,
+      "maximum_closures": 1,
+      "start": 1110016,
+      "stop": 1114112
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001114112.npz",
+        "sha256": "a8c604c6145a79d3c114b5902ca7df709c5e75bf57645fe739e0f4dc194fd59e"
+      },
+      "atoms": 204110,
+      "by_family": {
+        "6": 2984,
+        "7": 1112
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1114112,
+      "stop": 1118208
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001118208.npz",
+        "sha256": "90260477ce334fe687672832789c1002b17cef2000a944ca3110f487e1a0f2f8"
+      },
+      "atoms": 210395,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1118208,
+      "stop": 1122304
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001122304.npz",
+        "sha256": "665ab78fe02ec5dfd872dd5affe3c28666891c0e7108f7b4b43d3d58f3218560"
+      },
+      "atoms": 214032,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1122304,
+      "stop": 1126400
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001126400.npz",
+        "sha256": "dc0cb095381f74d3c14b7b8727b360053f7d1585e26ef82527502d49201431d1"
+      },
+      "atoms": 213431,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1126400,
+      "stop": 1130496
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001130496.npz",
+        "sha256": "f6c659db5b841f16a1b02de58c6bec08966bd24a87edfb8a01e039e1c0e66398"
+      },
+      "atoms": 213688,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1130496,
+      "stop": 1134592
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001134592.npz",
+        "sha256": "d3c83c33c4f27ed27855f5d1a6853a16f3263caa2af7e71d6223d6b8c5753f67"
+      },
+      "atoms": 213297,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1134592,
+      "stop": 1138688
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001138688.npz",
+        "sha256": "6c41590657ab9805e8fc798e69e8ac3e691612e436024fb53aef07509660fc58"
+      },
+      "atoms": 213138,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1138688,
+      "stop": 1142784
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001142784.npz",
+        "sha256": "6596e58b0dd31080d33efef982652abb47f81a794c93db6f063198e0cba9dd2d"
+      },
+      "atoms": 214579,
+      "by_family": {
+        "7": 4096
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 1,
+      "start": 1142784,
+      "stop": 1146880
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001146880.npz",
+        "sha256": "898dd43842899186a86ce07a1116e03d7099221d161a426345f51b2b6b8773e9"
+      },
+      "atoms": 212535,
+      "by_family": {
+        "7": 3723,
+        "19": 373
+      },
+      "maximum_atoms": 136,
+      "maximum_closures": 2,
+      "start": 1146880,
+      "stop": 1150976
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001150976.npz",
+        "sha256": "9c11830e628d65ade0f9378b84fafd9d68f2be9ba9f205eafb42d43567c90334"
+      },
+      "atoms": 197010,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1150976,
+      "stop": 1155072
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001155072.npz",
+        "sha256": "65e4f9ca5f042c040df379eaa25c4a729f0af2bf94ed5c4c752168bf6dd67a9d"
+      },
+      "atoms": 197191,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1155072,
+      "stop": 1159168
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001159168.npz",
+        "sha256": "d5fa353acc6917186b974e7b7f62ee279bdb3f09f6e08dfd4ccad80692d8e392"
+      },
+      "atoms": 196524,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1159168,
+      "stop": 1163264
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001163264.npz",
+        "sha256": "5a9cb4d22e96c683bdd221d1326ac51137fc17231ae98aabcc4bfc3dc707fc5f"
+      },
+      "atoms": 196851,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1163264,
+      "stop": 1167360
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001167360.npz",
+        "sha256": "3939ce87105ea406a4cb089d6af464845566c46318c827daeeeaabf9fe12c8fb"
+      },
+      "atoms": 196845,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1167360,
+      "stop": 1171456
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001171456.npz",
+        "sha256": "08db8099dc3e72e4707c5b9f6db864f74bfc241918bf57365e1b8edf2ced82f7"
+      },
+      "atoms": 196849,
+      "by_family": {
+        "19": 4096
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1171456,
+      "stop": 1175552
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001175552.npz",
+        "sha256": "b9eb97788797c8e9a60147c6957201b0d600c0d6ac0ddc41d4ade8220627aa27"
+      },
+      "atoms": 173478,
+      "by_family": {
+        "14": 1759,
+        "19": 2337
+      },
+      "maximum_atoms": 61,
+      "maximum_closures": 2,
+      "start": 1175552,
+      "stop": 1179648
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001179648.npz",
+        "sha256": "b460f4054563ee0f3145e8a99470788dac69476c8f9d1a9ee408674c268c8dd8"
+      },
+      "atoms": 141652,
+      "by_family": {
+        "14": 4096
+      },
+      "maximum_atoms": 41,
+      "maximum_closures": 2,
+      "start": 1179648,
+      "stop": 1183744
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001183744.npz",
+        "sha256": "f5bba0e6512ecd5473a736a4f66d0fa6b5b4f1948201d621b0b0fb8ca6dff5d3"
+      },
+      "atoms": 141752,
+      "by_family": {
+        "14": 4096
+      },
+      "maximum_atoms": 41,
+      "maximum_closures": 2,
+      "start": 1183744,
+      "stop": 1187840
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001187840.npz",
+        "sha256": "1370c1bc0370f049287ba3560b7ecdbcb4a12483a7e2d0cf60f799116354b4cd"
+      },
+      "atoms": 213037,
+      "by_family": {
+        "2": 1565,
+        "14": 2531
+      },
+      "maximum_atoms": 179,
+      "maximum_closures": 2,
+      "start": 1187840,
+      "stop": 1191936
+    },
+    {
+      "artifact": {
+        "path": "diagnostics/compose-full-tensors-0838c55c3871e514/shards/shard-001191936.npz",
+        "sha256": "5954f9b07bc4c04f42b4706b5167944da35b56ec7906ec231baf06d74f69a6a6"
+      },
+      "atoms": 11351,
+      "by_family": {
+        "2": 129
+      },
+      "maximum_atoms": 179,
+      "maximum_closures": 1,
+      "start": 1191936,
+      "stop": 1192065
+    }
+  ],
+  "training_admission_changed": false
+}

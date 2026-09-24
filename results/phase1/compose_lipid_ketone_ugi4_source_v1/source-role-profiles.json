@@ -1,0 +1,31 @@
+{
+  "canonical_config": {
+    "path": "configs/multireaction/compose_lipid_supplied_ketone_ugi4_v1.json",
+    "sha256": "718a9e6f985dc0f3e564994171ce78838d26f6f3698c0caf71d5cf9f23d94473"
+  },
+  "evidence": {
+    "audited_source_instances": {
+      "path": "results/phase1/compose_lipid_ketone_ugi4_source_v1/source-role-alias-audit.json",
+      "sha256": "72e928e6c3e443c6b45c55dc52bf4e9faaf1d29540ffc9e6e99b3769c2c3b742"
+    }
+  },
+  "families": {
+    "ketone_ugi4": [
+      {
+        "registry_to_source_roles": {
+          "amine_head": "amine",
+          "carboxylic_acid": "carboxylic_acid",
+          "coupled_ketone": "ketone",
+          "isocyanide": "isocyanide"
+        },
+        "required_source_metadata": {
+          "evidence_lane": "lnpdb_reported_source_identity",
+          "source_release": "lnpdb_rebalanced_corpus_v2"
+        }
+      }
+    ]
+  },
+  "rationale": "The reported-source lane uses amine and ketone for the same two chemical roles called amine_head and coupled_ketone in the generated library. Bind only that complete vocabulary in its documented lane. Preserve all original component IDs, roles, quantities and product identity; no structure inference from the product.",
+  "schema_version": "forge.source_lane_role_binding.v1",
+  "training_admitted": false
+}

@@ -1,0 +1,52 @@
+{
+  "counts": {
+    "a3_competing_forward_product_counts": {
+      "2": 1214
+    },
+    "a3_failed_checks": {
+      "complete_search": 0,
+      "declared_event_count_replayed": 0,
+      "full_element_hydrogen_charge_balance": 0,
+      "unique_declared_side_inverse": 0,
+      "unique_forward_exact": 1214
+    },
+    "maleate_amine_program_unresolved_heads": {
+      "CCN(CC)CCS": 449,
+      "CN(C)CCS": 444,
+      "SCCN1CCOCC1": 392
+    },
+    "o_esterification_unresolved_heads": {
+      "NCCN(CCO)CCO": 312,
+      "NCCNCCO": 118,
+      "OCCN1CCNCC1": 177,
+      "OCCNCCNCCO": 302
+    }
+  },
+  "dispositions": {
+    "a3": "Keep all competing final constitutional products; do not use the target to choose an attachment site.",
+    "maleate": "All 1,285 amine-program misses have source monothiol heads; separate thiol program closes them.",
+    "o_esterification": "These four head structures have free NH sites. O-selective source support is not qualified for those competitors."
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v1/analyze_unresolved.py",
+    "sha256": "bd81b88fd01b2343c71a782939346ebbdadad88799cf94eed1fca8344cff38d9"
+  },
+  "inputs": {
+    "maleate_ester": {
+      "path": "results/phase1/compose_lipid_supplied_maleate_ester_v1/result.json",
+      "sha256": "f3277cad4766c76b5901c73619cb5946346bbce6466c04905bd277f933d564e1"
+    },
+    "precursors": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+      "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+    },
+    "thiol_a3": {
+      "path": "results/phase1/compose_lipid_supplied_thiol_a3_v1/result.json",
+      "sha256": "3af07effe7f95a04c9b0b1408a67324973fb82adea0d894d6e31f85d7b08a478"
+    }
+  },
+  "schema_version": "forge.source_scope_failure_analysis.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0
+}

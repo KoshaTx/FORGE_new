@@ -1,0 +1,282 @@
+{
+  "all_twelve_families_have_novel_sparse_flow_context": false,
+  "artifacts": {
+    "attempts.jsonl": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/attempts.jsonl",
+      "sha256": "fa611029f5153aa67087097f16c39ae8ac4268607d50ac67342b527eba41fc1b"
+    },
+    "layouts.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/layouts.json",
+      "sha256": "b5ad430a154d242a1087ec5084acdceb57b2ea1b47c82f9b57f3c41c823b4bbd"
+    },
+    "train_layout_signatures.json": {
+      "path": "results/phase1/combinatorial_generated_layouts_v1/train_layout_signatures.json",
+      "sha256": "7eb6ab097e22995e1513bdf72bee1b2d8529c809c38f84b247ae1563b8ece49f"
+    }
+  },
+  "by_family": {
+    "acetal_aldehyde_diol": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 61,
+      "status_counts": {
+        "no_exact_program": 3,
+        "qualified": 61
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 391,
+        "sparse_flow_context": 225
+      },
+      "unique_novel_product_layouts": 56,
+      "unique_novel_sampler_contexts": 26,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "amide_coupling_acid_amine": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 53,
+      "status_counts": {
+        "no_exact_program": 11,
+        "qualified": 52,
+        "representation_abstention": 1
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 820,
+        "sparse_flow_context": 480
+      },
+      "unique_novel_product_layouts": 43,
+      "unique_novel_sampler_contexts": 25,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "aza_michael_amine_acrylate": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 45,
+      "status_counts": {
+        "invalid_graph": 9,
+        "no_exact_program": 12,
+        "qualified": 43
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 1144,
+        "sparse_flow_context": 544
+      },
+      "unique_novel_product_layouts": 42,
+      "unique_novel_sampler_contexts": 25,
+      "unique_novel_sparse_flow_contexts": 6
+    },
+    "carbamate_amine_chloroformate": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 77,
+      "status_counts": {
+        "no_exact_program": 3,
+        "qualified": 60,
+        "representation_abstention": 1
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 1066,
+        "sparse_flow_context": 576
+      },
+      "unique_novel_product_layouts": 56,
+      "unique_novel_sampler_contexts": 21,
+      "unique_novel_sparse_flow_contexts": 2
+    },
+    "disulfide_coupling": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 108,
+      "status_counts": {
+        "no_exact_program": 10,
+        "qualified": 54
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 320,
+        "sparse_flow_context": 251
+      },
+      "unique_novel_product_layouts": 72,
+      "unique_novel_sampler_contexts": 57,
+      "unique_novel_sparse_flow_contexts": 25
+    },
+    "epoxide_opening_amine": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 60,
+      "status_counts": {
+        "no_exact_program": 13,
+        "qualified": 50,
+        "representation_abstention": 1
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 1146,
+        "sparse_flow_context": 583
+      },
+      "unique_novel_product_layouts": 45,
+      "unique_novel_sampler_contexts": 27,
+      "unique_novel_sparse_flow_contexts": 3
+    },
+    "iphos_amine_dioxaphospholane": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 43,
+      "status_counts": {
+        "invalid_graph": 4,
+        "no_exact_program": 23,
+        "qualified": 37
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 1066,
+        "sparse_flow_context": 576
+      },
+      "unique_novel_product_layouts": 36,
+      "unique_novel_sampler_contexts": 23,
+      "unique_novel_sparse_flow_contexts": 5
+    },
+    "passerini_3cr": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 45,
+      "status_counts": {
+        "invalid_graph": 1,
+        "no_exact_program": 18,
+        "qualified": 45
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 8840,
+        "sparse_flow_context": 4275
+      },
+      "unique_novel_product_layouts": 45,
+      "unique_novel_sampler_contexts": 37,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "reductive_amination_amine_aldehyde": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 66,
+      "status_counts": {
+        "no_exact_program": 11,
+        "qualified": 53
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 697,
+        "sparse_flow_context": 480
+      },
+      "unique_novel_product_layouts": 55,
+      "unique_novel_sampler_contexts": 30,
+      "unique_novel_sparse_flow_contexts": 10
+    },
+    "thiol_michael_thioether": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 53,
+      "status_counts": {
+        "no_exact_program": 10,
+        "qualified": 53,
+        "representation_abstention": 1
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 700,
+        "sparse_flow_context": 289
+      },
+      "unique_novel_product_layouts": 49,
+      "unique_novel_sampler_contexts": 34,
+      "unique_novel_sparse_flow_contexts": 0
+    },
+    "ugi_3cr_agile": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 50,
+      "status_counts": {
+        "no_exact_program": 14,
+        "qualified": 50
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 15888,
+        "sparse_flow_context": 7980
+      },
+      "unique_novel_product_layouts": 49,
+      "unique_novel_sampler_contexts": 37,
+      "unique_novel_sparse_flow_contexts": 2
+    },
+    "urea_amine_isocyanate": {
+      "original_attempts": 64,
+      "qualified_program_layouts": 36,
+      "status_counts": {
+        "invalid_graph": 4,
+        "no_exact_program": 23,
+        "qualified": 36,
+        "representation_abstention": 1
+      },
+      "train_reference_unique_contexts": {
+        "sampler_context": 1271,
+        "sparse_flow_context": 756
+      },
+      "unique_novel_product_layouts": 36,
+      "unique_novel_sampler_contexts": 19,
+      "unique_novel_sparse_flow_contexts": 5
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_generated_layouts_v1.json",
+    "sha256": "a8eb94551ce50731c073c8bb0cd256be79d177e1960197d9676644f91a66682b"
+  },
+  "created_at_utc": "2026-09-14T16:15:53.792760+00:00",
+  "duration_seconds": 40.81148633302655,
+  "inputs": {
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "parent_result": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "semantic_config": {
+      "path": "configs/multireaction/combinatorial_program_semantics_v1.json",
+      "sha256": "3de95f770611227f2c56ba8ebe9495b6c31dc8c9a0ae233514d523e9c1865778"
+    }
+  },
+  "nonclaims": [
+    "Layouts are compiled from earlier generated graphs, not invented independently of all prior TRAIN layout ancestry.",
+    "Novel context means absent from all TRAIN cache contexts under the specified signature; morphology ignored by the sparse flow cannot establish novelty alone.",
+    "Different exact reaction programs remain alternative hypotheses, not identified experimental routes. Each witness separately passes the unchanged atom-semantics gate.",
+    "This qualification audit does not itself demonstrate generation on the new contexts or improve any molecule."
+  ],
+  "policy": {
+    "all_exact_program_alternatives_retained": true,
+    "all_original_attempts_retained": true,
+    "gate_changes": false,
+    "neural_generation_calls": 0,
+    "new_random_sampling": false,
+    "reference_fold": "train",
+    "remote_compute": false,
+    "training_calls": 0,
+    "within_witness_semantic_ambiguity": "abstain"
+  },
+  "schema_version": "forge.combinatorial_generated_layouts.v1",
+  "sources": [
+    {
+      "path": "forge/model/generated_program_layout.py",
+      "sha256": "812f1aa3573ca1a470d23d1241aeefefa392a094b908e3ea75948f84aed3d8be"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generated_layouts.py",
+      "sha256": "7ddc97db11426b8c3069f37c33b25db165bebe13256d3435345c31c93d5fe9af"
+    },
+    {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+    },
+    {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    {
+      "path": "forge/assembly/library_semantics.py",
+      "sha256": "e63eb49511d27e249b50217b48df164eb1134935670386075362be4ebd8093bb"
+    },
+    {
+      "path": "forge/potency/annotations.py",
+      "sha256": "9ffeee87446623832a7030df0bce1a10285a7857aa7dc7dddcef306f59bfe18e"
+    }
+  ],
+  "status": "numerical_complete",
+  "train_reference_records": 64316
+}

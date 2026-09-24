@@ -664,12 +664,13 @@ def sample_pointer_interpolation(
 
     probabilities = candidate_mask.to(torch.float32)
     probabilities = probabilities / probabilities.sum(dim=-1, keepdim=True).clamp(min=1.0)
-    flat_probabilities = probabilities[active_mask]
+    # Resolve the variable-length selection once; repeated boolean indexing repeats
+    # the CUDA-to-host shape synchronization even when the mask is unchanged.
+    selection = active_mask.nonzero(as_tuple=True)
+    flat_probabilities = probabilities[selection]
     noise = torch.multinomial(flat_probabilities, 1, generator=generator).squeeze(1)
     if clean.ndim == 2:
-        example_index = torch.arange(clean.shape[0], device=clean.device)[:, None].expand_as(clean)[
-            active_mask
-        ]
+        example_index = selection[0]
     else:
         raise FeasibilityError("pointer labels must have shape batch by variables")
     keep = (
@@ -680,9 +681,9 @@ def sample_pointer_interpolation(
         )
         < t[example_index]
     )
-    sampled = torch.where(keep, clean[active_mask], noise)
+    sampled = torch.where(keep, clean[selection], noise)
     output = clean.clone()
-    output[active_mask] = sampled
+    output[selection] = sampled
     return output
 
 

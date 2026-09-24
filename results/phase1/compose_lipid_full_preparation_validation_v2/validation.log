@@ -1,0 +1,21 @@
+Starting focused-tests
+Finished focused-tests: 0
+Starting vendor-verify
+Finished vendor-verify: 0
+Starting full-tests
+Finished full-tests: 2
+Traceback (most recent call last):
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_preparation_validation_v2/validate.py", line 106, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_preparation_validation_v2/validate.py", line 83, in main
+    full, issues = junit(OUT / "full-tests.xml")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_preparation_validation_v2/validate.py", line 34, in junit
+    cases = list(ET.parse(path).iter("testcase"))
+                 ^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/xml/etree/ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+  File "/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/xml/etree/ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_preparation_validation_v2/full-tests.xml'

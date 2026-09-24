@@ -1,0 +1,26 @@
+{
+  "inputs": {
+    "component_policy": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/component_exclusion_policy.json",
+      "sha256": "0edb737485bf6932d3b7793cce02350205e098b8a74cde9867852931e8552888"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "product_protection": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    }
+  },
+  "policy": {
+    "known_component_protection": "historical_union_corrected_selected_test",
+    "product_molecules_parsed": 0,
+    "required_corrected_split": "train",
+    "required_old_split": "train",
+    "seed": 0,
+    "training_admitted": false,
+    "unassigned_targets_admitted": false
+  },
+  "schema_version": "forge.compose_lipid_source_view_config.v1"
+}

@@ -1,0 +1,1495 @@
+{
+  "all_original_rows_and_weights_preserved": 464265,
+  "inputs": {
+    "building_blocks": {
+      "path": "data/vendor/building_block_pool_v1.json",
+      "sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "corpus": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "m0_constitutional_folds": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "m0_original_folds": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_components": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "multireaction_original_atlas": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "multireaction_original_splits": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "result": {
+      "path": "results/phase1/library_program_dataset_v1/result.json",
+      "sha256": "04d0a2c9981727de4879a41b640c6ef11d4b1f0564cca18f0eb75401904de28a"
+    },
+    "single_event_ledger": {
+      "path": "results/phase1/combinatorial_libraries_v1/row_qualification.jsonl.gz",
+      "sha256": "245d3fdb357b5c58e706dc0d1ecb05c653d07e941cd42ce0d38d5e2feb21123c"
+    },
+    "single_event_result": {
+      "path": "results/phase1/combinatorial_libraries_v1/result.json",
+      "sha256": "c08ce9c0a6ec4d30ab469f4bb8688c94aaeb54d673cd2d0bf86d7bdc23b80e2f"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_components": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "ugi_original_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "verifier": {
+      "path": "results/phase1/library_program_dataset_validation_v1/check_artifacts.py",
+      "sha256": "5c387379d297de1c0118fff23231063f3a809f871bd435d39952d9cfecdf52b1"
+    }
+  },
+  "limitations": [
+    "Exact strict replay is sampled; full program and partition qualification is reported by the pinned dataset builder.",
+    "Artifact integrity does not override failed dataset admission gates."
+  ],
+  "program_groups": 281973,
+  "replay_sample_selection": "First four targets per family, disposition and depth class in deterministic group-hash order.",
+  "replay_samples": [
+    {
+      "group_id": "0000755f55e673804f459e11568c52e3741c9f79e0976a3f9af599d22eab69dd",
+      "kind": [
+        "ugi_3cr_agile",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "020bf24ef178d69bc12fd248d1711fef92946ba817d9eb8d0fa654a90886251d"
+    },
+    {
+      "group_id": "0000757eefb79f73c185cf2d7808565a2665536631ceef532f91aad1cffb2802",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "c2f5d4da59be60c41deb9f27b9d28f68aaddad5ebb2625993acf7192ed663c46"
+    },
+    {
+      "group_id": "0000757eefb79f73c185cf2d7808565a2665536631ceef532f91aad1cffb2802",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "29fd90da445c11d0588c97661d564c2166aaa5435ccea2255c9eed8052c2fdf4"
+    },
+    {
+      "group_id": "0000757eefb79f73c185cf2d7808565a2665536631ceef532f91aad1cffb2802",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7ba1cb62534814003c1741091257d18d269b75e934c019a0384a81e73fe8b36f"
+    },
+    {
+      "group_id": "00009ba320743c5fe38085b7850a44b793072dc6f44d7ed843e84e235fa2144c",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "bc87507e8bf74feebd839bc17d61df5cf65f01b131e14cdfda27ebf0d3dcd96a"
+    },
+    {
+      "group_id": "00009ba320743c5fe38085b7850a44b793072dc6f44d7ed843e84e235fa2144c",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "735597a88acb78fffc480eb2f98b573234397a55c514d21e38c9f7838814f2da"
+    },
+    {
+      "group_id": "00009ba320743c5fe38085b7850a44b793072dc6f44d7ed843e84e235fa2144c",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "c2419d1e2a58d3c9be70ed7b1696d9972138c081d65d3d8abfde2269849e9c7b"
+    },
+    {
+      "group_id": "0000f43aba053e40bc05aa462ecd46412573ac52624874d157a45f09eb5bef2d",
+      "kind": [
+        "passerini_3cr",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "f0b41246c88b10676eda3332343e390d257be58046237c14803e1050692c8a14"
+    },
+    {
+      "group_id": "000125105e4e1ddf4437907defbfe22b67dba8ffef006b4543878d5f383b6ab1",
+      "kind": [
+        "passerini_3cr",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5d31d3bf2c093612ea7a8328237df60284491fbd3aac1f5f9a8e9ba461155d4c"
+    },
+    {
+      "group_id": "00017823050a4d53fef087387dde4f2de968414b4aa36c0b85a3e24bd0639bfb",
+      "kind": [
+        "ugi_3cr_agile",
+        "policy_rejected",
+        "single"
+      ],
+      "strict_replay": false,
+      "target_sha256": "2f5e2a72fc6e8248139509d80e67f77a3808c4fef4fe561438d3438f29748547"
+    },
+    {
+      "group_id": "00017823050a4d53fef087387dde4f2de968414b4aa36c0b85a3e24bd0639bfb",
+      "kind": [
+        "ugi_3cr_agile",
+        "policy_rejected",
+        "single"
+      ],
+      "strict_replay": false,
+      "target_sha256": "4ae65920e11c9b0f090d1d80713408fb5f1b45a0f6334c2319278bcfe426c241"
+    },
+    {
+      "group_id": "000186d296ef120d561fde516a821833aecc2249d847cdc0606332e0a9e0bc94",
+      "kind": [
+        "ugi_3cr_agile",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "9e35c1220eb63521fb35faf3523931d9117ef0027ce42f5b00f83701619b9090"
+    },
+    {
+      "group_id": "00019ac7d9721b8397ac250a78226888772585fa08a12c01c2773f2bc32d0ace",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "197712f689c5295e6a6d48581456cd51a31c0ba7f1a59c679b71a820544c0fea"
+    },
+    {
+      "group_id": "00019ac7d9721b8397ac250a78226888772585fa08a12c01c2773f2bc32d0ace",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "0b7165ed8e37316b2fa10cd2c0020118e80f7a9d2314182e478c6484c7ac8b71"
+    },
+    {
+      "group_id": "00019ac7d9721b8397ac250a78226888772585fa08a12c01c2773f2bc32d0ace",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "25b541423576f0d3c446e684ef908196ff29e5f5658145e9bc602c7efb777be6"
+    },
+    {
+      "group_id": "0001d9f46deb12bb8b410ee1ee8ccd7c44baedbceec5a30e5555efd2835d7c15",
+      "kind": [
+        "ugi_3cr_agile",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "33d5423c68dc71581aaa2588fb7d0865315ab68269477269fb7caa779db7d3c6"
+    },
+    {
+      "group_id": "0001eef0700a377e2cfcb9053ae1fc624f6736bbbc09a7e0cfa38e1017889c5a",
+      "kind": [
+        "passerini_3cr",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "26c6695565d8d8092f64cf507177afa6ec9d14d22472020b57f45224855e09e6"
+    },
+    {
+      "group_id": "000213741ffc33ef3149926b39e348cae390f6d2261751462627cb6337e67a26",
+      "kind": [
+        "ugi_3cr_agile",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "e23e0da214d2a207f6f7b9a2c800e194a87f36b2060de8efeffecdbd386aa5e5"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "65e5e718c3fa882c12699dde6618ea2eee7c74b6ce1b78884314d4e8a77aae72"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "39979f7d4c52e2814569207387d105699208d551f74f5625fd4daa927230486a"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "e0f72856162bed467814bb30d01b6d9f8e51741a6b4f78f0091af4ef0d28eae8"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "d74ec8382710b6aac7a94b3eaf360f31ac107fc7f2dc7e938556b6fca8a0774f"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "517e8bd783fcbf3aa69c015d7a30e7288514bad5a65c210f96364dd7cf5faa49"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ffe06d808baf8f69ba9005375b1b899c4909d84113f97f4905c9d61816dd4e02"
+    },
+    {
+      "group_id": "0002f9073950c5e85170a9b70404cbed1b61f1616b25bcb7873ae522ff7a86ed",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "4a3f908d4d2bb6bd554cdfb0658d18089f5e7df6ee8e35066959110962c1eac0"
+    },
+    {
+      "group_id": "0003f89933947827432e654ea1b9456e7d78ad6d18c36665f64de3ddc24e1143",
+      "kind": [
+        "ugi_3cr_agile",
+        "policy_rejected",
+        "single"
+      ],
+      "strict_replay": false,
+      "target_sha256": "862a958c3fd28ef173a1bb7a0d260e6ad43633b0f9ed032f59c25845f2e5c95e"
+    },
+    {
+      "group_id": "00043873465cf692c3f55fa76cc1e21549f29e3f0740ecdb85b94a7f37016787",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "76331992e13732bec6f4c5b133745c26c154c44540719c250adad0750777a07b"
+    },
+    {
+      "group_id": "00043cb2752b2cd8a5cf0769f0453312e90b5c2f5313af1379a408d05747af7b",
+      "kind": [
+        "passerini_3cr",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "0e52b2deda717697866673855d66cc0a4f28470dd769e05881ebd301d34d0380"
+    },
+    {
+      "group_id": "000444f949c246d165ea93769aa0f9ab24e1998382844b9af884262dc66aa1fb",
+      "kind": [
+        "ugi_3cr_agile",
+        "policy_rejected",
+        "single"
+      ],
+      "strict_replay": false,
+      "target_sha256": "f07bbdbf7e68b361de1722aa7bc26a2a5a461248cf97239629d5c61fc05883d1"
+    },
+    {
+      "group_id": "00060d28e0bfe364b1ec0275d53ce15a4cbb08186cc43221d7538089b3c68428",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ebd63fa73563750ed6573559a66ed9c877842da7aae34afa03c0827468005c71"
+    },
+    {
+      "group_id": "0007c8c7b0561fed4deb9e15860abc7752c81d00d56e34ed5ed09880f5a98807",
+      "kind": [
+        "urea_amine_isocyanate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "c98bce4d543a6995037129bbcec5484ba00b06568c4ebcec5f165eb152711994"
+    },
+    {
+      "group_id": "000926f6449e41dcd535210cb205cba5aa95420c716b463c5f46ecce880ef6e2",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "dc58565b52627e1fee96c6b59a4fd62f627d9107a6239d70005d225177c74812"
+    },
+    {
+      "group_id": "000926f6449e41dcd535210cb205cba5aa95420c716b463c5f46ecce880ef6e2",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "1e4f9d2c748adbd38cd8e6e2122af481080df0dbc079d8bf3ea569d886324e2f"
+    },
+    {
+      "group_id": "000926f6449e41dcd535210cb205cba5aa95420c716b463c5f46ecce880ef6e2",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "5cdb917726e3977db4543273b7f26191f89ec204495d357c9cbd544c459ed4fc"
+    },
+    {
+      "group_id": "000926f6449e41dcd535210cb205cba5aa95420c716b463c5f46ecce880ef6e2",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "acb667689d8e260833cc6d3c736d236e086208e4beed2ba0d42de9ce1c2993c0"
+    },
+    {
+      "group_id": "000980c81d260671b4dc8b46b79073ac1585df3048df352bbb5d31540eac387b",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "2ab50b2331344b111be0d745c335521398a72abf274620bca00b2287b82b4edb"
+    },
+    {
+      "group_id": "000cf95c1c79e0e8c1667cce3a8998fa332214da64ad1818af62d3980f75a7f4",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "087e987fb619f52e0b80fea6ed9689168403ec1828164d72e0def12484fdd1d9"
+    },
+    {
+      "group_id": "0010d7563827e8d1a72fec1bcac02900a470e54d1f63bb36c3c28d1b5db753c5",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "74d088d4edc99aa163b979fee3f1f7e8b80126ddc96326dabb47accd1c9783f9"
+    },
+    {
+      "group_id": "0010d7563827e8d1a72fec1bcac02900a470e54d1f63bb36c3c28d1b5db753c5",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "e3b09ec60f3d61c82d49f1d7be4a5b6ee61b400b7cafb59cba31ba15cca49a8c"
+    },
+    {
+      "group_id": "0010d7563827e8d1a72fec1bcac02900a470e54d1f63bb36c3c28d1b5db753c5",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "3e445c02256869f378b867f0728ac242a5ce0aafc3a0537bfb26589be7812ef6"
+    },
+    {
+      "group_id": "0010d7563827e8d1a72fec1bcac02900a470e54d1f63bb36c3c28d1b5db753c5",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "34c533620728a0b4f307903f309773ca8088a660fe9c510ea13760ebf82aa6ef"
+    },
+    {
+      "group_id": "00136c3a3f0d4e97694d13965a153596a08d89066819169405f836550a9bbdb8",
+      "kind": [
+        "epoxide_opening_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ba07c14ad7ff2a4872b5394e9e683cc25af0c2c1dcbb993562199ecfc221a839"
+    },
+    {
+      "group_id": "00136c3a3f0d4e97694d13965a153596a08d89066819169405f836550a9bbdb8",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "9dca7ce5d0063ca86ba92e62cb52956dd2a800f1f1d018763ee5d6d6b85eae03"
+    },
+    {
+      "group_id": "00136c3a3f0d4e97694d13965a153596a08d89066819169405f836550a9bbdb8",
+      "kind": [
+        "epoxide_opening_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "fc3d0234906c566a4b529584b77741fff1e0fa678dffdd37a4c40ab2874fcb5b"
+    },
+    {
+      "group_id": "00136c3a3f0d4e97694d13965a153596a08d89066819169405f836550a9bbdb8",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "0551bee51ce4d82bb03f59b59ca06dc1659f97c0f806d68092e39faba91ead95"
+    },
+    {
+      "group_id": "00143681baae8c08a7bc54c79524348fc4774f835ca997a4ba91259380f5bd66",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ecfeaf6324c9d528dbfd1ddde6fcc51251dd3468673ceea6b886707350521989"
+    },
+    {
+      "group_id": "001448bf59a726cb623c5b3f0d7a302f237ed3db9fbf1035e55343c3736f6076",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "58e89e54413183792f1a1888ed0352a3e2532846467e37dacd254be0306be8e0"
+    },
+    {
+      "group_id": "0017d6e2b451bead0e9a414180a18eaad7524486ca3a80873baa509445f67463",
+      "kind": [
+        "urea_amine_isocyanate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "5978f3592c9c821c1ddc0d3817d9e4b5f607a7f3adb9209935b33d9d72592773"
+    },
+    {
+      "group_id": "0017d6e2b451bead0e9a414180a18eaad7524486ca3a80873baa509445f67463",
+      "kind": [
+        "urea_amine_isocyanate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "8d4874e35a4640c3383e16f2401285bf80be015b925276ce4a5fdd26fd384e69"
+    },
+    {
+      "group_id": "0017d6e2b451bead0e9a414180a18eaad7524486ca3a80873baa509445f67463",
+      "kind": [
+        "urea_amine_isocyanate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "c2bac9029b1ccb77e562230b7387453c00974fb20bd758ac3305c70f8c7d01a3"
+    },
+    {
+      "group_id": "0017d6e2b451bead0e9a414180a18eaad7524486ca3a80873baa509445f67463",
+      "kind": [
+        "urea_amine_isocyanate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "d96b9c2cbb34f8dfcadf62728d5fec939a227bb4c1b751de6c74b9bb176e44e5"
+    },
+    {
+      "group_id": "001b3288ae30c00f58ef400b7027f8b89456990bad999d570e32360b57805ad0",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "bbd4d484b7a72198008ce9ed92661dd4002838a6244747d7020663fa1a3d5d8c"
+    },
+    {
+      "group_id": "001d71922331895e107c6500ef6543510b7b15d89ce29b6efc4bc5377e78fd5f",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "56753e6018678cbf56c1672947e482a798b61d643960c57a7f7419c7dd382199"
+    },
+    {
+      "group_id": "001d71922331895e107c6500ef6543510b7b15d89ce29b6efc4bc5377e78fd5f",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "1262b4115078b40cd5af19768b14f1d8a8685370bd213d58038d0bad8af6319f"
+    },
+    {
+      "group_id": "001d71922331895e107c6500ef6543510b7b15d89ce29b6efc4bc5377e78fd5f",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "32235ee7077b4af0fb2cf0a274f75c345dd65a216c5302f6ad60fafd3cc40eea"
+    },
+    {
+      "group_id": "001e32ee71c94000934fa38f9dbdaf85c88fa4be96f98116fb5a98ef062bfdb7",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "833c0add80e1bf82a71148b16c857513078bc222d910e9b5b0501019479b10ee"
+    },
+    {
+      "group_id": "001e32ee71c94000934fa38f9dbdaf85c88fa4be96f98116fb5a98ef062bfdb7",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "40aacfac7f2082bd9ec1f36aa294f04453a26a77c80f11feeb928c17feb23e0d"
+    },
+    {
+      "group_id": "001e32ee71c94000934fa38f9dbdaf85c88fa4be96f98116fb5a98ef062bfdb7",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "73b209d7b75b55cb7101815f00043075373ec151631ac0545346fa3ecd31cebe"
+    },
+    {
+      "group_id": "001e32ee71c94000934fa38f9dbdaf85c88fa4be96f98116fb5a98ef062bfdb7",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "9ec99d5511885142845f5b6b2f7f4fed531a33ff78cbf95e722781e677685cb6"
+    },
+    {
+      "group_id": "002698f369201549eae989c569474c229033022481b48ccaf404efb827911211",
+      "kind": [
+        "epoxide_opening_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "1444c973ee32d68651b5cb7e69b717795c260bf3c8f70db43b4b5699089c624e"
+    },
+    {
+      "group_id": "002698f369201549eae989c569474c229033022481b48ccaf404efb827911211",
+      "kind": [
+        "epoxide_opening_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "ffc498cc6a2b28804fe22daa7e65add5c04a322b35bb7df71588582120c77d4f"
+    },
+    {
+      "group_id": "002698f369201549eae989c569474c229033022481b48ccaf404efb827911211",
+      "kind": [
+        "epoxide_opening_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "4a1731b6d18e78e0202c48282975864859a63855171c8232c291521e6b100d19"
+    },
+    {
+      "group_id": "002698f369201549eae989c569474c229033022481b48ccaf404efb827911211",
+      "kind": [
+        "epoxide_opening_amine",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "ce8ca270a91025c9c214338dfb95f59c6c84256a75f3740f0cd24e5791bdfdf6"
+    },
+    {
+      "group_id": "00277b74264852b7a54313d368f74473e2ade9a3740a04c5542f5bec13271f17",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7bfffed06694236fa95537775cede64bceb0991ea317d9117174f3333a0443e5"
+    },
+    {
+      "group_id": "002949adc0b7d470622ea050edc139627791507aeadd1ca24814c947dbeed97f",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "76dccc520e4a4707629bcaf14fce125aa923076a8f9145b7310fa6697d9e907b"
+    },
+    {
+      "group_id": "002ab618bce83e4119e05cfadb38ef49b35e9412cc0b8a192b7cc2dab87f405a",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "31c675a32bc685e2a6f2a577006f7038091b3bbdd6bd9d551ab4963a30e2897a"
+    },
+    {
+      "group_id": "002b0461ef31df8549de47ce94e34510174d31cd265b8cb38fd7bfeebf2666a6",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5663dd07ce6b4b87cf1159f48877178a931f761a8af6752f3b661922fe0acd23"
+    },
+    {
+      "group_id": "002d2117728325c499ad8bfcaac2126df0803381ec3b6bdf9567489e17eab320",
+      "kind": [
+        "acetal_aldehyde_diol",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "8e55cf2a9b4163a0b7755005ec625dea3c7c82886ddb5b26692c6737ce7a9d52"
+    },
+    {
+      "group_id": "0030f8a553b8c4d253e75259aae1355d07de0c7ddb79984f522ffd9dd883f0f5",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "aa3a831506e91c3d6e40827b0e01748e43c2f800040ecf59fb3eb528936772bd"
+    },
+    {
+      "group_id": "003318fde8625727a37e98eb16da95288696a3923bc4de7a28adc75826db86d5",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "3d470ccd4711fa6ce23da3e3403b548f0ffd0983c466f340baea3ad64b0ba540"
+    },
+    {
+      "group_id": "0036db562f7785b8d22feb9d2c60c7f545275b430e6db261c23d5ff987e6b826",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "b2787427f6991b7b68dd3a198a5a5206669b1ba88b680d7ed88bed1aad814775"
+    },
+    {
+      "group_id": "0036db562f7785b8d22feb9d2c60c7f545275b430e6db261c23d5ff987e6b826",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ba6f88f84554e9416ca3d8e33f70b0456832e54178b5fc29340ccb99d0482b0e"
+    },
+    {
+      "group_id": "0036db562f7785b8d22feb9d2c60c7f545275b430e6db261c23d5ff987e6b826",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5dc0e77d8c7481b74334b67cb00f0a180bc2e05ef5ce6b8a1ab905bc051ef7cc"
+    },
+    {
+      "group_id": "0039ece7709ba61feccaa3798864885c0bb5157533660de5eeb8062c99d1f06e",
+      "kind": [
+        "disulfide_coupling",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "78ede244bbd3cb1ed34e9081b0ec097b387bb94555ffebe950bb57c5b80f33df"
+    },
+    {
+      "group_id": "003d6f11151e30cd56f278e0c832f044e7cb71e218c5beda8182fc4bb488a3d2",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "4b0d46d3463fd055f1781e00677651cdb33f9fc36ea2c1e44f3c7ad813ebb4ad"
+    },
+    {
+      "group_id": "003df216781476bd332fe722101d4ff0c08a17fae8ae76412fa3036cfd7a2fe9",
+      "kind": [
+        "thiol_michael_thioether",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "67c8fcc91457acc1e3c48330ce12bd03e5163b32adc2f79fdaf8c86ed3f5ab39"
+    },
+    {
+      "group_id": "003f3b08e97b2792efe00afd763b649d241a6af1d6e9548582c5385475349775",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "224ba8dbe7d5e7396a8b384f81e94f6a06236e8e1e8c42e2bffec00e2e54ba60"
+    },
+    {
+      "group_id": "0044d33fd02460befd1a5cbee0578a1da92d932f0422429917105d1d65bc3833",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "949e5933269daff9366201843eaf2ccd83478e5f982a987efe50598829bbf8c5"
+    },
+    {
+      "group_id": "0044d33fd02460befd1a5cbee0578a1da92d932f0422429917105d1d65bc3833",
+      "kind": [
+        "epoxide_opening_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "bd90636f6d58e7f563852db1a07bb5c27aa526398314541813326c17fdc8625a"
+    },
+    {
+      "group_id": "0044d33fd02460befd1a5cbee0578a1da92d932f0422429917105d1d65bc3833",
+      "kind": [
+        "epoxide_opening_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "565395a4e8f62487356453ba230bc61ae44efc07c271837724f8b20255d41ab7"
+    },
+    {
+      "group_id": "00491822e0880e0d81c337c505b28c084ea6413c38034780ffa9935c8d57a6d8",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "57121e1f2c311f9450980ac5d74832943e38a6a69aa701f81b47b0113934fba0"
+    },
+    {
+      "group_id": "0049865e49b775926b900cf199ac8f97665c254fc319b659dba0c1ca83bb5063",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7c90f570f1377f7f6ca54c6433140ca3bf1449acd9885ccc793c3ad97265f8cd"
+    },
+    {
+      "group_id": "0049865e49b775926b900cf199ac8f97665c254fc319b659dba0c1ca83bb5063",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "469eb48a626fc0bc86f74087aa0203e954da82d70b1d76090bf5db94e8d05db4"
+    },
+    {
+      "group_id": "0049865e49b775926b900cf199ac8f97665c254fc319b659dba0c1ca83bb5063",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "d634cee5c8149716e6b1420fa23ef42b923bdf33dc7843a60e01a1d1b03108d4"
+    },
+    {
+      "group_id": "004aa3050051621ae5b41d2ccab86419741fb011fc635fa518c2becf75ce4c27",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "ae4d0c3b23e4596db5380aed096dd5ca7c25b1be0ec301f950e0d61f61d5d0d9"
+    },
+    {
+      "group_id": "004c0719ee6e001890950d00f747c17ef4da72fe11929fc18564975d2bc09354",
+      "kind": [
+        "thiol_michael_thioether",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "4896e573f9e872f8e089579fc7e82be891dab2a76791111af5d5c7a1296aff9a"
+    },
+    {
+      "group_id": "004e609f605bb143329567b57ad3df6bba40e628dc05fbf4ccf4592438786078",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5c44a1987d848ac2c7e34b07cadc76259ce7e56a7543e1d9dc11e856c70e9241"
+    },
+    {
+      "group_id": "004f48eff4eed84ea414408bad4a92899b318ffcdb5cd6c1219029eeb476b1a1",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5ab28ed0c24dcf69abca73e28929f94c66f47b8487382afe99fd7f8b46e9d5a3"
+    },
+    {
+      "group_id": "004f48eff4eed84ea414408bad4a92899b318ffcdb5cd6c1219029eeb476b1a1",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7a332c1f6706a2ed5019257c24ae13940e9c4d2b201618c07a437c1803025ea2"
+    },
+    {
+      "group_id": "00557c71c8f47a4428f792a33a390acb444d4c1b10514550faf2b4d5d02535cb",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5ae3626a1ce6cdcafa8e3767517d96965b231f6516a784ced1f7ca32c20fff77"
+    },
+    {
+      "group_id": "00558a2acfd1d7d4640bd5fc05abfc95c9ed5dd09f4aa2fcd855587cc7fd2157",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "0617188dc8dfa6354768f86e3ab765966a14740591283686c6a45b5efa2feb0a"
+    },
+    {
+      "group_id": "00558a2acfd1d7d4640bd5fc05abfc95c9ed5dd09f4aa2fcd855587cc7fd2157",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "eacebf63f51fafad8ddfeaf1ffd508c8e6158ed3b366f87bfb0ecb8d2c857ab2"
+    },
+    {
+      "group_id": "00559a8a533b843da7a8cd24f4cb7acb342eb18613cbc6b666999e76b8f0ab31",
+      "kind": [
+        "acetal_aldehyde_diol",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "3d5107780640302b7643f50e656c7a8f7f836b5081b18b41cd392c04a3e48409"
+    },
+    {
+      "group_id": "005cc657e6921a85bdfe57c84872185bb4d0eb74060bb56aa20163adeb64ff45",
+      "kind": [
+        "thiol_michael_thioether",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5a46edccc03e08a62b9163b46fda967818820d21e671880db101f74fb142717b"
+    },
+    {
+      "group_id": "0060f5e6a3c3a88891594d0c51b2800e414549ac19ae90dc92d5dafc4cf2a559",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "5e55f900776f91cd2ea411f450b8f06b12b3483ae238949a5bbd1052d0ac2b97"
+    },
+    {
+      "group_id": "0060f5e6a3c3a88891594d0c51b2800e414549ac19ae90dc92d5dafc4cf2a559",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "7a13eb6a9c0e2b6af23708350e37d2d0a46dddf063f34097d37c40cb2ef44f67"
+    },
+    {
+      "group_id": "0060f5e6a3c3a88891594d0c51b2800e414549ac19ae90dc92d5dafc4cf2a559",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "35814d4c4175837357251c88ca0be3a944742d34c31064500cb6e4df722aba67"
+    },
+    {
+      "group_id": "0060f5e6a3c3a88891594d0c51b2800e414549ac19ae90dc92d5dafc4cf2a559",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "243f2386dd41362384e8d658eae18f6fb2bcff91b89b3befa1eae4baebac487e"
+    },
+    {
+      "group_id": "006694568bc4195589de7b4afb3d342e2058c974ada6e3d31c2ca257059b3b7e",
+      "kind": [
+        "acetal_aldehyde_diol",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "6caecc3c44df9f5f0af9cdd03f01030d3a72ac2324bdc3e0594407046d42f3ce"
+    },
+    {
+      "group_id": "0066a3dea4b946ee6969ad40d224522f24f770d0b036580d83c758e3584e0b84",
+      "kind": [
+        "acetal_aldehyde_diol",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "195eeb8d105baa3239f0449ff71c1f0fa66dbdec5d02b546e08c2441641036b9"
+    },
+    {
+      "group_id": "006d631ec4180b25ffaead716cd48b22bb608c5d05009fc366c6408e70b34d82",
+      "kind": [
+        "epoxide_opening_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "efc02299e83cdea3da6be328675c5ddc00b0b58afd2bbf4677d3103930e46bbf"
+    },
+    {
+      "group_id": "00710eee8f12ab0624a8ecde7f4b6229bf9206540014960731d6df587e634114",
+      "kind": [
+        "disulfide_coupling",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "dca94bbea9d72ecd38bb4e1ed262838f76b609d9b532a686817c19697f5079c1"
+    },
+    {
+      "group_id": "00730446509518ff2f26ac938287cd9d8671e65940cf37312ed33efa11533477",
+      "kind": [
+        "thiol_michael_thioether",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "4c207528bae9a5506df4503cc026e1552a51cfee0ae6f0d0d0659727140cb624"
+    },
+    {
+      "group_id": "0082ebf11bdbbdfc43a6c163ed915d19054fa6d1f71d8140601f276d33cc82f6",
+      "kind": [
+        "disulfide_coupling",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "a08000daefc217ccaa2e19a4d01c01f0721eabc5829a8870a6680b4d88b78689"
+    },
+    {
+      "group_id": "00989fc86b480d306ada7e57c2cb8639b65c041ba9f15226fd54cd3fbcb259bc",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "1aac78bcc3bc87d73fd40453d1c5adc630ea22235961058bfbfe2e11487c0f5c"
+    },
+    {
+      "group_id": "00a0eb941ca03e5a125d91871dd20ca59b5dc1f809e3c568af1363ea54367dbe",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "5c477615a714e71c8f8bcf4ea811026d3ed67c93025d2400adddb33e7dd3456e"
+    },
+    {
+      "group_id": "00a0eb941ca03e5a125d91871dd20ca59b5dc1f809e3c568af1363ea54367dbe",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "ambiguous",
+        "repeated"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7da38658b330aa01282ed5da664e890a56e8e8e23771f9ca75039096fb11ce0c"
+    },
+    {
+      "group_id": "00c20c0860447b8e39c191d13afdb5bb9fadbe144ff7aa4b3d31e9395dbf35e0",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "06bdb4880bd09c032a41072d6cd999bc25903f31335e78094b693b3f2efa9413"
+    },
+    {
+      "group_id": "00cf6a61f939911e3acc01f6da2d0c2654bfb20136e7dc2fd382f9e86077340d",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "78ff9255e823a90299393c5b86e481910b989faafcd67d6e7f726090f0bec86c"
+    },
+    {
+      "group_id": "00f5bcbbe4556f9c1bf4399f29e59badec7722649b8f32ced37695d30dd97431",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "45252a91deef0197f75f7c7cda64baf887444fbfb15fbc9bd71b6494069d005a"
+    },
+    {
+      "group_id": "011386cd304f98979520f7a51e4a077909e8ee1406bfba775817f59550769530",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "7f2707ac13436aef1acb951af390e9c25ec580677479f350a36bd3f07c239eef"
+    },
+    {
+      "group_id": "01215092173d223990a9d8bf7790f923e8994c757b15e59943f09e12d6c196cb",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "00811716e2d7b721c4c073a15a88085b7bcb51dda6ea44a3f9cbbcb634b365c8"
+    },
+    {
+      "group_id": "0136c72f170756eb64dcbca44d0e67fb1a3b60e4ab1a044845d8077ccb4960c7",
+      "kind": [
+        "carbamate_amine_chloroformate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "dd51f06d601fa552a0fbb68d2e06cc5f5e5313d7634b06a6de2ce45e73e37bd3"
+    },
+    {
+      "group_id": "014b3d889443ce3dd31ca17df0fe4f3b715a81ccc5ebf52c3a4c150c0d5cba84",
+      "kind": [
+        "disulfide_coupling",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "3be9205ddf0c7e0eb6d62ae2a71f7686a1aaf01e18c3684b508adfc33aa70950"
+    },
+    {
+      "group_id": "014e940b64c2682ed0213fb74f6482e23c7308360036d082aaa6e451428f93da",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "e5c7d3774cf7566e2c29d2957b4ecf1a70126a4b670a1c8eb21479cca0ca5065"
+    },
+    {
+      "group_id": "01566836ad440a158a48140c29b1bd9815faaa068561fa31e3aa4b72215f3a42",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "f3783fcb8a51bc1bbc34e6c1a787c66b74f97d7b8bce0a31fd4fed0fd38d2c92"
+    },
+    {
+      "group_id": "01566836ad440a158a48140c29b1bd9815faaa068561fa31e3aa4b72215f3a42",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "a30b991d63f72640bf3159ba7c792d1eb27f97c06f9ed51e40e489fdcc52bc64"
+    },
+    {
+      "group_id": "01566836ad440a158a48140c29b1bd9815faaa068561fa31e3aa4b72215f3a42",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "d79b0eba9d3a9b69c019a17044cd336e2b86e7d804bbc4135d417fd360c7c987"
+    },
+    {
+      "group_id": "01566836ad440a158a48140c29b1bd9815faaa068561fa31e3aa4b72215f3a42",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "74f6164faa061759d7e0dc58c25c95b6238a619c5a6315e135bc4f46d36d242c"
+    },
+    {
+      "group_id": "015e06dc84938378d189f2663c48a39cf88920df7a331d29721e94b970c932cd",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "efdafc0db8cc4a289df6db21376ca59a105117dc2bdf46aaadcd1af491bf2278"
+    },
+    {
+      "group_id": "0181a27b18c61da70c84c447a3672c1b51f610d6ee6fe274a51c8520c9b87877",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "1ca7bd31f958dfabaf131a0566391be958432289faca51929cef8c1d9bba51c4"
+    },
+    {
+      "group_id": "0181a27b18c61da70c84c447a3672c1b51f610d6ee6fe274a51c8520c9b87877",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "47a171542b3a15f32ca4c996cf36a3564686071e59c5efb76d4fa99bf9ea2848"
+    },
+    {
+      "group_id": "0181a27b18c61da70c84c447a3672c1b51f610d6ee6fe274a51c8520c9b87877",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "1cb37508e545b281bb455cd997c77f7be67c33eccb8602de3cee8a17eadccc97"
+    },
+    {
+      "group_id": "0181a27b18c61da70c84c447a3672c1b51f610d6ee6fe274a51c8520c9b87877",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "policy_rejected",
+        "repeated"
+      ],
+      "strict_replay": false,
+      "target_sha256": "0ce3fd48383256dbdb7e66141ab23382328ac8ed0bc34045e9186d448610d877"
+    },
+    {
+      "group_id": "01d169c4ce05fb839e449acfa6ddf8de4dcffb619bef8dc1398ac25168d9f6c4",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "91b991711f72d1435bca817825b8870c43a6c71fa926b486500a05756f0c108d"
+    },
+    {
+      "group_id": "01ea323dfa837af00b5eb4ca7eb68e2a365a6a7fd9d0a1ca231e686d4704e1a5",
+      "kind": [
+        "iphos_amine_dioxaphospholane",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "6dc152209c632a1d43b41ddcdd7aad346c6bb2bed931f19c80b8990633864360"
+    },
+    {
+      "group_id": "02078c9b367056e72255bf841145bbab8b9bb7fe5aa30d41a2fd6751634aa983",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "c57e1dc1cc4fce5d3e540219cb3cc141d1e0a993142d98b3e9d48908d6da7d1c"
+    },
+    {
+      "group_id": "021863c97e9da1e4f8f5d31e6afc7bf2ccf935a3806bd705fe1319d4defebc9f",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "f2a43ef0dc6842056e03cf42e8b39047c6b29f2539f7159ce752e933c89c87aa"
+    },
+    {
+      "group_id": "029551effad7da541fe5a849963dd1e2b46e2ff1f1672e39ed453cd4a71e5f27",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "aed948e41e9d9dd3ac950af1d2a7e78e151fb0562d53f25847d56aad37fb435f"
+    },
+    {
+      "group_id": "02a057093c22b05dc8a8185a204c6be15882590e410234555a7f51627f5592f7",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "c8e016e1410a5a997330062e1e36ab9864e8931d129d491983dba3aa1a020c97"
+    },
+    {
+      "group_id": "02ff1f1e7d735c61f223edd0fc9d1b0296af70753edfd7e2de3269643eb4e9e9",
+      "kind": [
+        "aza_michael_amine_acrylate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "85630c2614ab3742ecfd5ce273ffa7915b24fa08dd3554f3f1fbc77bd4126334"
+    },
+    {
+      "group_id": "0339ba0b830d3a9e00f9b45049350ea7e200514d6ff9a7df3c226d843c69ac97",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "490c4eed71ed17af97bf969c9f0e888fc3f2ffdf124023a975dcf889a14aae79"
+    },
+    {
+      "group_id": "036d3f96d6d6e63c8c61499e4cfe818e6de3eb260f818095c664de93be57888f",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "537c7b756e79b2e99b9d2009becc2e454ddc1f54e1f0016e96f0540d1a6d13cd"
+    },
+    {
+      "group_id": "03882ad7ea885c1078a042a1c8a92d015a7615708ca4ebf9c5897aaecd5773d5",
+      "kind": [
+        "reductive_amination_amine_aldehyde",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "8470ff7a573a02512c60c6572181694d9986927b1b2a500ec5be9c48bb5f1068"
+    },
+    {
+      "group_id": "03c66085df1da7555965867bb399d85157df76aca76209118510c12ee4fb1400",
+      "kind": [
+        "urea_amine_isocyanate",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "f7424ab44db53148944defc5a674d82815397aad523a3878993b1bc5a5b1c837"
+    },
+    {
+      "group_id": "04aa6b2e9ac6df2d5174397f526e00854600e5bc5f11f528d8e04564d82ab78e",
+      "kind": [
+        "amide_coupling_acid_amine",
+        "qualified",
+        "single"
+      ],
+      "strict_replay": true,
+      "target_sha256": "6d3eed1d6c5bb09a9b9979b2e4b8f27129d9a1f34e5d1526aff94a49e20297d6"
+    }
+  ],
+  "schema_version": "forge.library_program_artifact_checks.v1",
+  "status": "pass",
+  "training_mass": {
+    "acetal_aldehyde_diol": 0.08333333333333307,
+    "amide_coupling_acid_amine": 0.08333333333333356,
+    "aza_michael_amine_acrylate": 0.08333333333333401,
+    "carbamate_amine_chloroformate": 0.08333333333333305,
+    "disulfide_coupling": 0.08333333333333308,
+    "epoxide_opening_amine": 0.08333333333333329,
+    "iphos_amine_dioxaphospholane": 0.08333333333333401,
+    "passerini_3cr": 0.08333333333333479,
+    "reductive_amination_amine_aldehyde": 0.08333333333333243,
+    "thiol_michael_thioether": 0.08333333333333307,
+    "ugi_3cr_agile": 0.08333333333336598,
+    "urea_amine_isocyanate": 0.0833333333333344
+  },
+  "unique_products": 458047,
+  "verified_artifacts": {
+    "component_partitions.json": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "products.csv.gz": {
+      "path": "results/phase1/library_program_dataset_v1/products.csv.gz",
+      "sha256": "81009f3f5437d8b88963df26b539e97004c8a80952ae90e2e6e55dce108f49da"
+    },
+    "programs.jsonl.gz": {
+      "path": "results/phase1/library_program_dataset_v1/programs.jsonl.gz",
+      "sha256": "964f38cba65e23e4070732a62f0e9e986b2c8ca4f39d24343295d167e2c0d928"
+    },
+    "row_partitions.csv.gz": {
+      "path": "results/phase1/library_program_dataset_v1/row_partitions.csv.gz",
+      "sha256": "052036901754947b0e159db26f31e4853f99efa987275def9d54344da0acb301"
+    }
+  },
+  "verified_sources": {
+    "experiments/phase1/multireaction/library_program_dataset.py": "eef775546369adc46324fd0df357da26c24d588871e34e6cb007755ebec93979",
+    "forge/assembly/families.py": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4",
+    "forge/assembly/library_programs.py": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f",
+    "forge/assembly/registry.py": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037",
+    "forge/chemistry/reactive_sites.py": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964",
+    "forge/core/hashing.py": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494",
+    "forge/corpus/combinatorial_libraries.py": "990e32fc051fdd3d97e10d776e77597a3d4b0296d142602f48fca8ab32cc19b0",
+    "forge/corpus/library_program_dataset.py": "a7625c3659864f106d6da9d05bc3def3c8767629736213c8483612b62691acae",
+    "forge/corpus/library_splits.py": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+  }
+}

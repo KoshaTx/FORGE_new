@@ -1,0 +1,2569 @@
+{
+  "corpus_replay_qualified": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_b5_source_v1/audit_draft_controls.py",
+    "sha256": "7bc2dc880d590ed26e62f275c442771a811dc1de04fc671adbd8652e217861e7"
+  },
+  "inputs": {
+    "registry": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/draft-registry.json",
+      "sha256": "fc79e306ceab928b6c73ff3e1e837de16a035da39982e3a57610685e38c15016"
+    },
+    "source_controls": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    }
+  },
+  "mechanical_invariant_checks": {
+    "I71_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC",
+            "CCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C)OC(=O)C(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C)OC(=O)C(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_acid": "CN(C)CCC(=O)O",
+              "tail6_alcohol": "CCCCCCCCC(CCCCCC)C(=O)OCC(CO)OC(=O)C(CCCCCC)CCCCCCCC",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail6_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I71_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail6_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I81_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_acid": "CN(C)CCC(=O)O",
+              "r2_tail_alcohol": "CCCCCCCCCCCO",
+              "tail_acid": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "r2_tail_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I81_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "r2_tail_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I91_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)NCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)NCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I91_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I93_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 104,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 104,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)OCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)OCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCO",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I93_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 104,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 104,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I95_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 55,
+            "H": 109,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 55,
+            "H": 109,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)NCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)NCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I95_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 55,
+            "H": 109,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 55,
+            "H": 109,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I97_atom_order": {
+      "expected_computed_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 55,
+            "H": 108,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 55,
+            "H": 108,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)OCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)OCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCO",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "I97_outcome_bound": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 55,
+            "H": 108,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 55,
+            "H": 108,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [
+          "forward_outcome_bound"
+        ],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": false,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": false,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [
+            "inverse_outcome_bound"
+          ],
+          "candidate_components": [],
+          "complete_search": false,
+          "states_by_depth": [
+            1,
+            0
+          ],
+          "transitions": 0
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": false
+          },
+          "pass": false,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": false
+            },
+            "pass": false,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "heterotail_source_sites_swapped": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)NCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OCC(C)(C)C(OC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC)C(=O)NCCC(=O)NCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "homo_program_cannot_accept_heteropair": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": false,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)NCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)NCCN(C)C)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "wrong_source_head_nucleophile": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 53,
+            "H": 104,
+            "N": 2,
+            "O": 14,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": false,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)OC(C(=O)NCCC(=O)O)C(C)(C)COC(=O)CC(=O)OCC(CCCCCC)CCCCCCCC"
+          ],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true
+        ],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      }
+    },
+    "wrong_source_vitamin_b5_core": {
+      "expected_computed_consistency_pass": false,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 53,
+            "H": 105,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 54,
+            "H": 107,
+            "N": 3,
+            "O": 13,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": false,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": false,
+          "full_element_hydrogen_charge_balance": false,
+          "product_constraints": true,
+          "terminal_constraints": false,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": false,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [],
+        "forward_layers": [
+          [
+            "CC(C)(CO)CC(O)C(=O)NCCC(=O)O"
+          ],
+          [],
+          []
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_nucleophile": "CN(C)CCN",
+              "tail_acid_1": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+              "tail_acid_2": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [],
+        "terminal_constraints": {
+          "head_nucleophile": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 2
+            }
+          },
+          "tail_acid_1": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid_2": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": false,
+              "element_count_H": false,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": false
+            },
+            "pass": false,
+            "query_counts": {
+              "source_b5_complete_core": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "next_required_work": [
+    "Registry-backed complete head-scaffold/spacer grammar separated by I7/I8/I9",
+    "Primary-only source alcohols and complete paired-tail equality",
+    "Explicit original metadata-to-program binding with original roles, global IDs and quantities preserved",
+    "Adversarial and full eligible-family replay after these gates"
+  ],
+  "remaining_complete_terminal_scope_counterexamples": {
+    "I7_unequal_internal_arms": {
+      "components": {
+        "head_acid": "CN(C)CCC(=O)O",
+        "tail6_alcohol": "OCC(OC(=O)C(CCCCCC)CCCCCCCC)COC(=O)C(CCCCCC)CCCCCCCCC",
+        "vitamin_b5_core": "CC(C)(CO)[C@@H](O)C(=O)NCCC(=O)O"
+      },
+      "draft_mechanical_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 50,
+            "H": 98,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 50,
+            "H": 98,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC",
+            "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C)OC(=O)C(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)CO)OC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C)OC(=O)C(CCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_acid": "CN(C)CCC(=O)O",
+              "tail6_alcohol": "CCCCCCCCCC(CCCCCC)C(=O)OCC(CO)OC(=O)C(CCCCCC)CCCCCCCC",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1
+          ],
+          "transitions": 2
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "tail6_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      },
+      "required_final_scope_disposition": "abstain_outside_qualified_complete_precursor_design",
+      "target_for_synthetic_regression_only": "CCCCCCCCCC(CCCCCC)C(=O)OCC(COC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C)OC(=O)C(CCCCCC)CCCCCCCC",
+      "training_admitted": false
+    },
+    "I8_secondary_tail_alcohol": {
+      "components": {
+        "head_acid": "CN(C)CCC(=O)O",
+        "r2_tail_alcohol": "CCCCCCCCCC(O)C",
+        "tail_acid": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC",
+        "vitamin_b5_core": "CC(C)(CO)[C@@H](O)C(=O)NCCC(=O)O"
+      },
+      "draft_mechanical_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 46,
+            "H": 92,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            2,
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)CO",
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C"
+          ],
+          [
+            3,
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C",
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN(C)C"
+          ],
+          [
+            "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_acid": "CN(C)CCC(=O)O",
+              "r2_tail_alcohol": "CCCCCCCCCC(C)O",
+              "tail_acid": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "r2_tail_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      },
+      "required_final_scope_disposition": "abstain_outside_qualified_complete_precursor_design",
+      "target_for_synthetic_regression_only": "CCCCCCCCCC(C)OC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN(C)C",
+      "training_admitted": false
+    },
+    "I8_unreported_head_scaffold": {
+      "components": {
+        "head_acid": "O=C(O)CCN1CCCCC1",
+        "r2_tail_alcohol": "CCCCCCCCCCCO",
+        "tail_acid": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC",
+        "vitamin_b5_core": "CC(C)(CO)[C@@H](O)C(=O)NCCC(=O)O"
+      },
+      "draft_mechanical_consistency_pass": true,
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 49,
+            "H": 96,
+            "N": 2,
+            "O": 12,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN1CCCCC1"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN1CCCCC1",
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN1CCCCC1"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)CO"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(O)C(C)(C)COC(=O)CCN1CCCCC1"
+          ],
+          [
+            "CCCCCCCCCCCOC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN1CCCCC1"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "head_acid": "O=C(O)CCN1CCCCC1",
+              "r2_tail_alcohol": "CCCCCCCCCCCO",
+              "tail_acid": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+              "vitamin_b5_core": "CC(C)(CO)C(O)C(=O)NCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "head_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "r2_tail_alcohol": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "tail_acid": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "vitamin_b5_core": {
+            "checks": {
+              "aromaticity": true,
+              "element_count_C": true,
+              "element_count_H": true,
+              "element_count_N": true,
+              "element_count_O": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_source_b5_complete_core": true
+            },
+            "pass": true,
+            "query_counts": {
+              "source_b5_complete_core": 1
+            }
+          }
+        }
+      },
+      "required_final_scope_disposition": "abstain_outside_qualified_complete_precursor_design",
+      "target_for_synthetic_regression_only": "CCCCCCCCCCCOC(=O)CCNC(=O)C(OC(=O)CCCC(=O)OCC(CCCCCC)CCCCCCCC)C(C)(C)COC(=O)CCN1CCCCC1",
+      "training_admitted": false
+    }
+  },
+  "schema_version": "forge.b5_draft_adversarial_audit.v1",
+  "seed": 0,
+  "training_admitted": false
+}

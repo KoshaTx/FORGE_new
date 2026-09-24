@@ -1,0 +1,128 @@
+{
+  "artifacts": {
+    "ugi_l1_semantic_atoms.csv.gz": {
+      "bytes": 3365215,
+      "sha256": "0be6674b95e82c8dc0fa71b5f38a07315f0647c2d4d55b8880b7740f419b6cc9"
+    },
+    "ugi_l1_semantic_bonds.csv.gz": {
+      "bytes": 1790193,
+      "sha256": "1ada797b5a208bfd73fa67b588c6a460d50d0730015968bee44f8b8f69658706"
+    },
+    "ugi_l1_semantic_component_mappings.csv.gz": {
+      "bytes": 2536332,
+      "sha256": "480adca39e4a9818aa90299fc298370de24bfcd02675abfbabf4b97c96617858"
+    },
+    "ugi_l1_semantic_products.csv.gz": {
+      "bytes": 680190,
+      "sha256": "231b37e3d9d4e70db7728a923060ec353649ae328869760051ce6f4190b0d134"
+    }
+  },
+  "config": {
+    "path": "/Users/rahulmaganti/Kosha/forge_new/configs/model/phase1_ugi_l1_semantics.json",
+    "sha256": "feb16fbd9b81bdda33dc92e6e257146fa355e67a639d7d2f52dcf26ee2396954"
+  },
+  "created_at": "2026-09-14T18:43:21.896324+00:00",
+  "gates": {
+    "all_measured_semantics_reproduced": true,
+    "all_precursor_origin_regions_connected": true,
+    "all_products_annotated": true,
+    "all_products_have_exact_core": true,
+    "all_products_have_one_core_role_anchor_per_precursor": true,
+    "all_semantic_signatures_unique": true,
+    "component_counts_exact": true,
+    "measured_count_exact": true,
+    "origin_and_core_annotations_orthogonal": true,
+    "virtual_only_count_exact": true
+  },
+  "implementation": {
+    "phase1_ugi_l1_semantics": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/product/ugi_l1_origin_annotations.py",
+      "sha256": "d981c44fbec2bab25c46d031163739c6fb31c0be7574c76c2bab085de01718b3"
+    },
+    "qualified_ugi_semantics": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_guidance_artifact_recovery_v2/replay_tree/src/forge/bio/ugi_semantic_annotations.py",
+      "sha256": "7f806a479dcc7a2c5eadf738dd429136c82568ba1f902498746092abc86e70a1"
+    }
+  },
+  "inputs": {
+    "measured_atoms": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/m0_07/ugi_semantic_atoms.csv.gz",
+      "sha256": "e1f893d84ddfee19ea50fadfa7b5a4a9b3044866168dbdc9d9ee73c2388a71fe"
+    },
+    "measured_bonds": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/m0_07/ugi_semantic_bonds.csv.gz",
+      "sha256": "4b0c402339d3734ff96824ea1cf83bf8d14daecf67dbefadba46e10f48382b97"
+    },
+    "measured_component_mappings": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/m0_07/ugi_semantic_component_mappings.csv.gz",
+      "sha256": "16692b89b614ccbca9ef85745a345f2b4a6dfbfbe85603b30c1594331ba961f5"
+    },
+    "measured_products": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/m0_07/ugi_semantic_products.csv.gz",
+      "sha256": "0040e5120a2716686708fc63e64c0c373ae6aaccb68e3895e527c41b64515946"
+    },
+    "qualified_reactions": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "ugi_l1_assignments": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_variant": {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "policy": {
+    "all_origin_regions_must_be_connected": true,
+    "component_ids_in_model_state": false,
+    "measured_semantic_overlap_must_match_exactly": true,
+    "origin_source": "qualified_atom_mapped_forward_transform",
+    "precursor_origin_and_core_membership_are_orthogonal": true,
+    "substructure_inference_allowed": false
+  },
+  "schema_version": "phase1_ugi_l1_semantics.v1",
+  "software": {
+    "rdkit": "2026.03.5"
+  },
+  "status": "pass",
+  "summary": {
+    "component_counts": {
+      "amine_head": 24,
+      "isocyanide_tail": 9,
+      "oxoester_aldehyde_body_tail": 62
+    },
+    "component_mapping_rows": 566899,
+    "core_origin_atom_counts": {
+      "amine_head": 12386,
+      "assembly_introduced": 12386,
+      "isocyanide_tail": 24772,
+      "oxoester_aldehyde_body_tail": 12386
+    },
+    "core_position_origin_counts": {
+      "map_1|amine_head": 12386,
+      "map_2|oxoester_aldehyde_body_tail": 12386,
+      "map_3|isocyanide_tail": 12386,
+      "map_4|isocyanide_tail": 12386,
+      "template_introduced_0|assembly_introduced": 12386
+    },
+    "measured_products": 1100,
+    "origin_atom_counts": {
+      "amine_head": 106735,
+      "assembly_introduced": 12386,
+      "isocyanide_tail": 209264,
+      "oxoester_aldehyde_body_tail": 238514
+    },
+    "product_atoms": 566899,
+    "product_bonds": 562435,
+    "products": 12386,
+    "products_with_connected_precursor_origins": 12386,
+    "role_anchor_origin_counts": {
+      "amine_head|amine_head": 12386,
+      "isocyanide_tail|isocyanide_tail": 12386,
+      "oxoester_aldehyde_body_tail|oxoester_aldehyde_body_tail": 12386
+    },
+    "virtual_only_products": 11286
+  }
+}

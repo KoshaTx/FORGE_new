@@ -1,0 +1,54 @@
+{
+  "families": {
+    "maleate_addition": {
+      "reaction_id": "source_maleate_single_addition_per_nitrogen",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "maleate": "maleate"
+      }
+    },
+    "o_esterification": {
+      "reaction_id": "source_aminoalcohol_o_esterification",
+      "registry_to_source_roles": {
+        "acid_tail": "acid_tail",
+        "aminoalcohol_head": "aminoalcohol_head"
+      }
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+      "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/adjudication.json",
+      "sha256": "e90f7332db550be32b2ff1c0a0c96fdeab6ae91219d135f7ef73433221377e7b"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "supplied_instance_quantities_checked_against_metadata_when_present",
+    "population": "current_full_preparation_eligible_only",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_current_replay_config.v1",
+  "search_bounds": {
+    "maximum_events": 7,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

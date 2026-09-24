@@ -1,0 +1,32 @@
+{
+  "fields": {
+    "component_instance_states": {
+      "explicit_delete_occurrences": 1,
+      "parameter_present": true,
+      "value_load_occurrences": 0
+    },
+    "component_position_states": {
+      "explicit_delete_occurrences": 1,
+      "parameter_present": true,
+      "value_load_occurrences": 0
+    },
+    "repeat_group_states": {
+      "explicit_delete_occurrences": 1,
+      "parameter_present": true,
+      "value_load_occurrences": 0
+    },
+    "role_morphology_states": {
+      "explicit_delete_occurrences": 1,
+      "parameter_present": true,
+      "value_load_occurrences": 0
+    }
+  },
+  "forward_line": 670,
+  "input": {
+    "path": "forge/model/reaction_program_flow.py",
+    "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+  },
+  "interpretation": "These optional fields are accepted and discarded by this sparse model. Reaction program, role, core and depth conditioning remain active. This observation does not establish a causal explanation of repeat failures. A repeated-role group does not itself encode whether precursor identities must be identical.",
+  "method": "AST inspection of the selected sparse model forward interface; does not execute or retrain the model.",
+  "schema_version": "forge.combinatorial_repeat_interface_audit.v1"
+}

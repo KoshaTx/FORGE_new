@@ -1,0 +1,118 @@
+{
+  "created_at_utc": "2026-09-14T18:33:58.955230+00:00",
+  "inputs": {
+    "config": {
+      "bytes": 2066,
+      "path": "configs/bio/m0_07_oracle_graph_cache.json",
+      "sha256": "be28ff825decccec9d05f3e6ddfe6c91fe020b06aa4f9265293d62f7395ccbcb"
+    },
+    "curated_oracle_data": {
+      "bytes": 30259,
+      "path": "results/m0_07/agile_oracle_curated.csv.gz",
+      "sha256": "9415f1c0f40399f87d3df00c0c83a341a3776ca110e6bc98763fdcbd420a27be"
+    },
+    "graph_corpus_result": {
+      "bytes": 14257,
+      "path": "results/m0_07/oracle_graph_corpus_result.json",
+      "sha256": "8aa3dc31a4becc917c1e255217c828862995ea988cb1baf75ff7465bd8a11b2a"
+    },
+    "graph_profile_result": {
+      "bytes": 27804,
+      "path": "results/m0_07/oracle_graph_profile_result.json",
+      "sha256": "2dad16e9be14d3d0ebbbc10ec73bb594d03c626481ec5be2aaee3b5115425697"
+    },
+    "original_result": {
+      "bytes": 11662,
+      "path": "results/m0_07/oracle_graph_tensor_cache_result.json",
+      "sha256": "1b42cc48c3696f2c20797e0bb99cb102fc39039de05be4cb3446f7b61aea60f0"
+    },
+    "r0_pretraining_ledger": {
+      "bytes": 687431,
+      "path": "results/m0_07/oracle_graph_r0_pretraining.csv.gz",
+      "sha256": "d3a434282212abae9a9e688e0dde59b0f53537eeb1ec0dcff18ef63f23e0bc5f"
+    },
+    "virtual_candidate_library": {
+      "bytes": 85911,
+      "path": "data/derived/agile_virtual12k_smiles.csv.gz",
+      "sha256": "6afe54a033a8efd86c29e15a39334effc6edc3fb855fba6b61285003b847e390"
+    }
+  },
+  "policy": {
+    "generation_calls": 0,
+    "overwrite_existing_files": false,
+    "remote_jobs": 0,
+    "replace_original_result": false,
+    "restore_only_original_sha256": true,
+    "training_calls": 0
+  },
+  "schema_version": "forge.graph_cache_exact_recovery_request.v1",
+  "seed": 1729,
+  "software": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "rdkit": "2026.3.5",
+    "torch": "2.13.0"
+  },
+  "source_files": [
+    {
+      "bytes": 1895,
+      "path": "forge/core/__init__.py",
+      "sha256": "e0340d1055ea58bd2bf18a22cf08a124529606d5688524776cd23fb844a3f5a3"
+    },
+    {
+      "bytes": 7873,
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    {
+      "bytes": 12637,
+      "path": "forge/core/io.py",
+      "sha256": "ba75c512988109feba889d75ef153c20b5493f5ce0e6acd6c777c6573af0f914"
+    },
+    {
+      "bytes": 6934,
+      "path": "forge/core/records.py",
+      "sha256": "ef70d2870af08fd4f167d904252d9678555d7248d6e49f5504cc4f713eca1c16"
+    },
+    {
+      "bytes": 729,
+      "path": "forge/core/seeds.py",
+      "sha256": "a12f3a68190db0a82f0dcd60cf410ab14e13a842702494ed1d2ed1a5360b75a6"
+    },
+    {
+      "bytes": 6193,
+      "path": "forge/core/types.py",
+      "sha256": "0aaa29e944aefdb4def69813a2158816f2faca0599a571db65761c41a8c066a7"
+    },
+    {
+      "bytes": 768,
+      "path": "forge/potency/__init__.py",
+      "sha256": "d1975272537b845f7e78281f1579535fa2948cdd1a959fd58e01532a1e4632a8"
+    },
+    {
+      "bytes": 5244,
+      "path": "forge/potency/endpoint.py",
+      "sha256": "00180c2e20e7c051a7ba12a65c3b63ad3c16d961507d7a3a2fc0e553e5d275ad"
+    },
+    {
+      "bytes": 151,
+      "path": "forge/potency/oracle/__init__.py",
+      "sha256": "b3ab54d3b41db933a446f3a8a6234c68b5fb39564f76396212a471a86fca6e06"
+    },
+    {
+      "bytes": 21777,
+      "path": "forge/potency/oracle/oracle_graph.py",
+      "sha256": "132b95355f50143117fe92bdf03bfe3f5f7c2440512abb5a269733693d36a02f"
+    },
+    {
+      "bytes": 29338,
+      "path": "forge/potency/oracle/oracle_graph_cache.py",
+      "sha256": "1ee398454c529f06f4786c34572dca5ded6f03c8fc719490411e1f719caed825"
+    },
+    {
+      "bytes": 5342,
+      "path": "results/phase1/combinatorial_repository_readiness_v1/recover_graph_cache.py",
+      "sha256": "25884891100304138a1e228c57376e6d6fed6a345b34c4c3601572c890008ae5"
+    }
+  ]
+}

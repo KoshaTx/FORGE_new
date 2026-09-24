@@ -163,12 +163,35 @@ A task is complete when **all** of these hold:
 
 1. Its acceptance criteria in `docs/M0_TASKS.md`, `docs/M0_REPORT.md`, or the frozen Phase 1 config are
    met and demonstrated by a runnable command.
-2. `make verify && make test` passes.
+2. Relevant current implementation checks and input verification pass. For the new COMPOSE
+   training pipeline, use `make test-training OUTPUT=results/phase1/<new-validation-directory>`.
+   On 2026-09-22 the user explicitly removed the requirement to recover old experiment outputs or
+   pass the historical full-repository suite before training. Historical reproduction remains a
+   separate task; its missing outputs are not training blockers. Current chemistry qualification,
+   frozen holdouts, data integrity, molecular-size support and training correctness still apply.
 3. Its numeric findings are written to `results/<task_id>/` as JSON, with the input file sha256s
    recorded so the result is reproducible and attributable.
 4. `docs/DECISION_LOG.md` has a dated entry stating what was decided or measured — including negative
    results. **Negative results are first-class deliverables here.** A task that discovers the approach
    does not work has succeeded.
+
+## Test iteration
+
+Default to the affected test case or owning test file, using `make test-one TEST=path[::case]`.
+After that check passes, stop testing unless a failure, shared-interface change or unresolved
+concern justifies broader coverage. Documentation/status-only changes need no pytest run.
+Validate changed config/input pins and their affected contracts without rebuilding unrelated data.
+
+`make test-preparation` is an integration checkpoint for changes spanning the preparation pipeline,
+not an after-every-edit check. It covers ComposeLipid plus source-coordinate, atom-origin, graph
+and cache checks. Use the relevant subsystem checks for other integration changes. See
+[`docs/TESTING.md`](docs/TESTING.md) for commands and scope.
+
+Do not launch the full suite after every intermediate preparation change or status request.
+Use the relevant current pipeline validation at its readiness checkpoint. `make test-full` remains
+available for repository-wide and historical reproduction, but is not a prerequisite for new
+training. A focused pass alone is not data admission. Reuse existing results only for their exact
+source/input hashes; monitor an already running validation instead of starting another copy.
 
 ## Style
 

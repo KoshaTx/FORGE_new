@@ -1,0 +1,343 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_full_split_projection_v1/audit/projection.jsonl.gz",
+    "sha256": "6c1942f9e467ad383202ad86ebd6638d0212091cd4452edf28404beebc4172fd"
+  },
+  "elapsed_seconds": 691.5457737909164,
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_partition_projection.py": {
+      "path": "forge/corpus/compose_lipid_partition_projection.py",
+      "sha256": "a64bc03d30b6baa86a78c0a4b9cc104894f8b66ebaab9a9d880672c235dc9a38"
+    },
+    "forge/corpus/compose_lipid_partition_signatures.py": {
+      "path": "forge/corpus/compose_lipid_partition_signatures.py",
+      "sha256": "6e273f5710b829b935953e1e7182d489f2abae6ff71a214c8a16fe847f50e1e9"
+    },
+    "forge/corpus/compose_lipid_source_view.py": {
+      "path": "forge/corpus/compose_lipid_source_view.py",
+      "sha256": "ddfb5a3b62a2f0b2533e7e235ddc204df9c6aace064a2b14b4b24ea34d755b04"
+    },
+    "forge/corpus/compose_lipid_supplement.py": {
+      "path": "forge/corpus/compose_lipid_supplement.py",
+      "sha256": "2497dfdde678615263d3a6cf34cdddfd0710a92b8e3b15d801e3eda83c1b4cc7"
+    },
+    "results/phase1/compose_lipid_full_split_projection_v1/project.py": {
+      "path": "results/phase1/compose_lipid_full_split_projection_v1/project.py",
+      "sha256": "cb309b6320dcaf6a3a23b2af59999c6b13a1407904ad5af3256e6f0ab46d7e07"
+    }
+  },
+  "inputs": {
+    "assignments": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/assignments.jsonl.gz",
+      "sha256": "8c759c737fcda765d9002bdb9f603a7527427ac72761c6a531731b809cae5893"
+    },
+    "components": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_component_manifest_v8_1/components.jsonl.gz",
+      "sha256": "e49966487dedd64368ae8b5a9eea52b97630bc5665b202bef7c18452efe4e6cf"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "full_preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/split_groups.jsonl.gz",
+      "sha256": "54edee59835223c13e3ecb4910e2d2ece592881b9d321323af9c9ce8b57eae79"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "preparation_ledger": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/preparation.jsonl.gz",
+      "sha256": "76f4b129c76e3f2e24a4e62e0c117c35e77b15afb36422f0b723d1b5b04b2963"
+    },
+    "registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "selected_groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/selected_groups.json",
+      "sha256": "5530c38cdcee4dac96ce8557f133cade1ea32bb2796752d5d642962ab75b8047"
+    },
+    "selected_population_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/frozen-group-replay.json",
+      "sha256": "68243f88e2e23ca6b0b4a58736db1b0ae3cfa0165626e2bcd9f931019c089a8c"
+    }
+  },
+  "policy": {
+    "full_universe_partition_qualified": false,
+    "group_selection_repeated": false,
+    "new_rows_released_for_preparation": 0,
+    "prior_protections_removed": false,
+    "purpose": "Non-learning full-universe corrected split protection audit",
+    "reaction_decomposition_performed": false,
+    "record_cap": null,
+    "remaining_partition_gates": [
+      "historical_group_extension",
+      "constitutional_overlap",
+      "complete_source_study_identity"
+    ],
+    "size_filter": null,
+    "source_assignments_changed": false,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_full_split_projection.v1",
+  "seed": 0,
+  "summary": {
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "eligible_for_program_preparation": 3080,
+        "newly_protected": 2885,
+        "protected": 26029,
+        "rows": 70016,
+        "unresolved_partition_or_study": 40907
+      },
+      "acid_epoxide_diester_multistep": {
+        "eligible_for_program_preparation": 5279,
+        "newly_protected": 19567,
+        "protected": 80246,
+        "rows": 232240,
+        "unresolved_partition_or_study": 146715
+      },
+      "aema_aza_thiol_addition": {
+        "eligible_for_program_preparation": 2092,
+        "newly_protected": 119,
+        "protected": 7212,
+        "rows": 13865,
+        "unresolved_partition_or_study": 4561
+      },
+      "aldehyde_ugi3": {
+        "eligible_for_program_preparation": 955,
+        "newly_protected": 229,
+        "protected": 15712,
+        "rows": 18842,
+        "unresolved_partition_or_study": 2175
+      },
+      "aldehyde_ugi4": {
+        "eligible_for_program_preparation": 3222,
+        "newly_protected": 8440,
+        "protected": 133074,
+        "rows": 222029,
+        "unresolved_partition_or_study": 85733
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "eligible_for_program_preparation": 1469,
+        "newly_protected": 2506,
+        "protected": 178717,
+        "rows": 219036,
+        "unresolved_partition_or_study": 38850
+      },
+      "amine_alkylation": {
+        "eligible_for_program_preparation": 4752,
+        "newly_protected": 23896,
+        "protected": 74262,
+        "rows": 188272,
+        "unresolved_partition_or_study": 109258
+      },
+      "amine_epoxide_opening": {
+        "eligible_for_program_preparation": 3765,
+        "newly_protected": 4342,
+        "protected": 56262,
+        "rows": 97439,
+        "unresolved_partition_or_study": 37412
+      },
+      "aryl_reductive_amination": {
+        "eligible_for_program_preparation": 1793,
+        "newly_protected": 2151,
+        "protected": 23628,
+        "rows": 48090,
+        "unresolved_partition_or_study": 22669
+      },
+      "aza_michael_acrylamide": {
+        "eligible_for_program_preparation": 2011,
+        "newly_protected": 492,
+        "protected": 19525,
+        "rows": 31239,
+        "unresolved_partition_or_study": 9703
+      },
+      "aza_michael_acrylate": {
+        "eligible_for_program_preparation": 2329,
+        "newly_protected": 313,
+        "protected": 21877,
+        "rows": 33619,
+        "unresolved_partition_or_study": 9413
+      },
+      "disulfide_michael": {
+        "eligible_for_program_preparation": 3652,
+        "newly_protected": 10761,
+        "protected": 139126,
+        "rows": 254389,
+        "unresolved_partition_or_study": 111611
+      },
+      "epoxide_opening_o_acylation": {
+        "eligible_for_program_preparation": 2768,
+        "newly_protected": 2550,
+        "protected": 18995,
+        "rows": 42805,
+        "unresolved_partition_or_study": 21042
+      },
+      "iphos_ring_opening": {
+        "eligible_for_program_preparation": 5294,
+        "newly_protected": 13164,
+        "protected": 50582,
+        "rows": 184345,
+        "unresolved_partition_or_study": 128469
+      },
+      "ketone_isocyanide_amide": {
+        "eligible_for_program_preparation": 1235,
+        "newly_protected": 2100,
+        "protected": 234881,
+        "rows": 271560,
+        "unresolved_partition_or_study": 35444
+      },
+      "ketone_ugi4": {
+        "eligible_for_program_preparation": 2964,
+        "newly_protected": 3455,
+        "protected": 49650,
+        "rows": 91395,
+        "unresolved_partition_or_study": 38781
+      },
+      "maleate_addition": {
+        "eligible_for_program_preparation": 3371,
+        "newly_protected": 2374,
+        "protected": 26182,
+        "rows": 68463,
+        "unresolved_partition_or_study": 38910
+      },
+      "o_esterification": {
+        "eligible_for_program_preparation": 3287,
+        "newly_protected": 876,
+        "protected": 9604,
+        "rows": 24948,
+        "unresolved_partition_or_study": 12057
+      },
+      "passerini_3cr": {
+        "eligible_for_program_preparation": 4291,
+        "newly_protected": 10310,
+        "protected": 48720,
+        "rows": 128352,
+        "unresolved_partition_or_study": 75341
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "eligible_for_program_preparation": 6511,
+        "newly_protected": 17928,
+        "protected": 171771,
+        "rows": 465048,
+        "unresolved_partition_or_study": 286766
+      },
+      "reductive_amination": {
+        "eligible_for_program_preparation": 3209,
+        "newly_protected": 5570,
+        "protected": 28043,
+        "rows": 61320,
+        "unresolved_partition_or_study": 30068
+      },
+      "reported_lnpdb_route_unassigned": {
+        "newly_protected": 0,
+        "protected": 255,
+        "rows": 255
+      },
+      "reported_multistep_amino_lipid": {
+        "newly_protected": 0,
+        "protected": 9,
+        "rows": 9
+      },
+      "reported_reference_lipid": {
+        "newly_protected": 0,
+        "protected": 4,
+        "rows": 4
+      },
+      "thiolactone_aminolysis_michael": {
+        "eligible_for_program_preparation": 5394,
+        "newly_protected": 13745,
+        "protected": 129090,
+        "rows": 334859,
+        "unresolved_partition_or_study": 200375
+      },
+      "vitamin_b5_multistep": {
+        "eligible_for_program_preparation": 4077,
+        "newly_protected": 8489,
+        "protected": 22983,
+        "rows": 80398,
+        "unresolved_partition_or_study": 53338
+      }
+    },
+    "disposition_crossings": [
+      {
+        "corrected_projection": "train",
+        "disposition": "eligible_for_program_preparation",
+        "prior_disposition": "eligible_for_program_preparation",
+        "rows": 76800
+      },
+      {
+        "corrected_projection": "calibration",
+        "disposition": "protected",
+        "prior_disposition": "protected",
+        "rows": 120625
+      },
+      {
+        "corrected_projection": "reference",
+        "disposition": "protected",
+        "prior_disposition": "protected",
+        "rows": 268
+      },
+      {
+        "corrected_projection": "test",
+        "disposition": "protected",
+        "prior_disposition": "protected",
+        "rows": 172282
+      },
+      {
+        "corrected_projection": "train",
+        "disposition": "protected",
+        "prior_disposition": "protected",
+        "rows": 1117002
+      },
+      {
+        "corrected_projection": "calibration",
+        "disposition": "protected",
+        "prior_disposition": "unresolved_partition_or_study",
+        "rows": 119265
+      },
+      {
+        "corrected_projection": "test",
+        "disposition": "protected",
+        "prior_disposition": "unresolved_partition_or_study",
+        "rows": 36997
+      },
+      {
+        "corrected_projection": "train",
+        "disposition": "unresolved_partition_or_study",
+        "prior_disposition": "unresolved_partition_or_study",
+        "rows": 1539598
+      }
+    ],
+    "maximum_source_declared_atoms": 254,
+    "test_panel_counts_overlap": {
+      "source_study_transfer_global": 532,
+      "unseen_component_structure": 135779,
+      "unseen_exact_component_combination": 4912,
+      "unseen_regional_morphology": 69362
+    },
+    "totals": {
+      "newly_protected": 156262,
+      "rows": 3182837,
+      "selected_population_reproduced": 200000,
+      "source_declared_above_96_atoms": 122975,
+      "source_study_identity_unresolved": 365
+    }
+  }
+}

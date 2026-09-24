@@ -1,0 +1,111 @@
+{
+  "schema_version": "forge.combinatorial_overfit_gate_validation.v1",
+  "created_at_utc": "2026-09-14T03:32:10Z",
+  "status": "scoped_checks_pass_global_suite_failed",
+  "phase1_definition_of_done_met": false,
+  "base_git_head": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e",
+  "inputs": {
+    "config": {
+      "path": "configs/multireaction/combinatorial_overfit_gate_v1.json",
+      "sha256": "847c62409e2fb5196a578c3c8c4099fb8302d74c4a987e4cd75568dd230290ee"
+    },
+    "implementation": {
+      "path": "experiments/phase1/multireaction/combinatorial_overfit_gate.py",
+      "sha256": "b04e1d4e445a7f9f79feb84cf4d43dedab1122acdd2ac6e5746ecb52c405c614"
+    },
+    "test": {
+      "path": "tests/test_combinatorial_program_semantics.py",
+      "sha256": "f31421a6243afe752164db09fea0bf5e9aff8e71eed34aac0b40657cd3368452"
+    },
+    "result": {
+      "path": "results/phase1/combinatorial_overfit_gate_v1/result.json",
+      "sha256": "82f2839b9a6fc1aaac5f4b043b949ea76cf54140b1efb03359e292583fe9bf9e"
+    },
+    "replay_result": {
+      "path": "results/phase1/combinatorial_overfit_gate_v1/replay_result.json",
+      "sha256": "ac0ef1493ae4e99c3b887204856c85cf99c9ca4e8d29bccd053325c4e423ef49"
+    },
+    "artifact_checker": {
+      "path": "results/phase1/combinatorial_overfit_gate_validation_v1/check_artifacts.py",
+      "sha256": "d9db1e3a7751a0fbeafe7ee8d14c31e4c83f16d1bc26c1d99c361c1dc49e8502"
+    },
+    "artifact_checks": {
+      "path": "results/phase1/combinatorial_overfit_gate_validation_v1/artifact_checks.json",
+      "sha256": "1bcf948640a9a25fe680e3d0301e3048a635dde75ec1ea433d0fd24c5800d01a"
+    }
+  },
+  "experiment": {
+    "status": "pass",
+    "records": 12,
+    "programs": 12,
+    "optimizer_steps": 1536,
+    "initial_total_loss": 10.985255241394043,
+    "final_total_loss": 0.00005972391591058113,
+    "final_to_initial_loss_ratio": 0.000005436734477095508,
+    "programs_with_improved_loss": 12,
+    "exact_tensor_records": 12,
+    "fixed_states_preserved": true,
+    "maximum_heavy_atoms_in_gate": 68,
+    "maximum_closures_in_gate": 1,
+    "generator_sampling_calls": 0,
+    "checkpoint_retained": false,
+    "remote_compute": false
+  },
+  "checks": {
+    "frozen_acceptance_gates_pass": true,
+    "all_input_and_source_hashes_authenticate": true,
+    "independent_scientific_replay_exact": true,
+    "focused_tests_pass": true,
+    "vendored_assets_verified": 30,
+    "touched_python_black_check": true,
+    "touched_python_ruff_check": true,
+    "whitespace_check": true,
+    "full_suite_failure_error_ids_equal_prior_baseline": true,
+    "new_full_suite_failure_error_ids": 0,
+    "resolved_prior_failure_error_ids": 0
+  },
+  "test_reports": {
+    "focused": {
+      "tests": 116,
+      "passed": 116,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 26.148,
+      "xml": {
+        "path": "results/phase1/combinatorial_overfit_gate_validation_v1/focused-tests.xml",
+        "sha256": "9f476da37eee693084562961a327c854752c33af1118477d0a6cd3d19a778b42"
+      }
+    },
+    "full": {
+      "tests": 2709,
+      "passed": 2429,
+      "failures": 167,
+      "errors": 21,
+      "skipped": 92,
+      "duration_seconds": 490.183,
+      "xml": {
+        "path": "results/phase1/combinatorial_overfit_gate_validation_v1/full-tests.xml",
+        "sha256": "e8cfcaa75a0d5da888a9dfd10d14ea31245394ceb0c5761115e77a3aa42ab1d6"
+      },
+      "log": {
+        "path": "results/phase1/combinatorial_overfit_gate_validation_v1/full-tests.log",
+        "sha256": "5df21feee671bc3be0e7943e162c333b8d306d20d9dc789143c7ee085a844af1"
+      }
+    }
+  },
+  "commands": {
+    "experiment": "UV_CACHE_DIR=/private/tmp/forge-uv-cache OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 uv run python -m experiments.phase1.multireaction.combinatorial_overfit_gate --repo-root . --config configs/multireaction/combinatorial_overfit_gate_v1.json --output-dir results/phase1/combinatorial_overfit_gate_v1",
+    "artifact_check": "PYTHONPATH=. UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/combinatorial_overfit_gate_validation_v1/check_artifacts.py --repo-root . --output results/phase1/combinatorial_overfit_gate_validation_v1/artifact_checks.json",
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_assembly_families.py tests/test_combinatorial_libraries.py tests/test_library_programs.py tests/test_library_splits.py tests/test_library_program_dataset.py tests/test_library_semantics.py tests/test_combinatorial_program_semantics.py tests/test_reaction_program_flow.py tests/test_shared_synthesis_program_integration.py tests/test_synthesis_program_production_cache.py tests/test_phase1_ugi_l1_origin_annotations.py tests/test_pinned_sources_are_tracked.py",
+    "vendored_data": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/combinatorial-overfit-full.xml' make test"
+  },
+  "decision": "The shared sparse architecture passes the bounded twelve-family learning-capability gate. Freeze this result and design a limited training pilot with per-family calibration evaluation before any production-scale or realism comparison.",
+  "nonclaims": [
+    "The overfit set contains training records and one reused fixed corruption per family; it is not generalization evidence.",
+    "No molecule was generated, no checkpoint was retained or promoted, and no remote compute was used.",
+    "This result does not demonstrate improved lipid realism, synthesis success, release readiness, or preservation of generation-level validity, reconstruction, diversity, and novelty.",
+    "Repository-wide Phase 1 definition of done remains unmet because the full suite has its unchanged baseline failures."
+  ]
+}

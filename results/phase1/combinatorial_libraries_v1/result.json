@@ -1,0 +1,1647 @@
+{
+  "artifacts": {
+    "row_qualification": {
+      "path": "results/phase1/combinatorial_libraries_v1/row_qualification.jsonl.gz",
+      "sha256": "245d3fdb357b5c58e706dc0d1ecb05c653d07e941cd42ce0d38d5e2feb21123c"
+    }
+  },
+  "calls": {
+    "molecular_generation": 0,
+    "remote_compute": 0,
+    "training": 0
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_libraries_v1.json",
+    "sha256": "e205b8fd16ec4a948cee1a12e50deff95a5872b7b8d7e66d177946bc589732ad"
+  },
+  "created_at_utc": "2026-09-14T00:00:56.908910+00:00",
+  "duration_seconds": 191.28793770901393,
+  "environment": {
+    "python": "3.11.15",
+    "rdkit": "2026.03.5",
+    "workers": 2
+  },
+  "families": {
+    "acetal_aldehyde_diol": {
+      "elements": [
+        "C",
+        "O"
+      ],
+      "exact_forward_rows": 1989,
+      "issues": {},
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 54,
+      "multiple_forward_product_rows": 0,
+      "positive_weight_rows": 1989,
+      "qualified_rows": 1989,
+      "raw_row_fraction": 0.004284191140835514,
+      "realism_weight_mass": 0.00966660682667085,
+      "realism_weight_sum": 4487.867360000044,
+      "rows": 1989,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 1950,
+      "zero_weight_rows": 0
+    },
+    "amide_coupling_acid_amine": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 16239,
+        "registry_role_policy": 7470
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 120,
+      "multiple_forward_product_rows": 2778,
+      "positive_weight_rows": 16590,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.03573390197408807,
+      "realism_weight_mass": 0.061719891647663415,
+      "realism_weight_sum": 28654.386399998304,
+      "rows": 16590,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 16590,
+      "zero_weight_rows": 0
+    },
+    "aza_michael_amine_acrylate": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 16239,
+        "registry_role_policy": 7470
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 136,
+      "multiple_forward_product_rows": 2778,
+      "positive_weight_rows": 16590,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.03573390197408807,
+      "realism_weight_mass": 0.22617839205299176,
+      "realism_weight_sum": 105006.7144999936,
+      "rows": 16590,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 16590,
+      "zero_weight_rows": 0
+    },
+    "carbamate_amine_chloroformate": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 16239,
+        "registry_role_policy": 7470
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 124,
+      "multiple_forward_product_rows": 2778,
+      "positive_weight_rows": 16590,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.03573390197408807,
+      "realism_weight_mass": 0.0017867459184389668,
+      "realism_weight_sum": 829.5236199998783,
+      "rows": 16590,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 16590,
+      "zero_weight_rows": 0
+    },
+    "disulfide_coupling": {
+      "elements": [
+        "C",
+        "S"
+      ],
+      "exact_forward_rows": 780,
+      "issues": {},
+      "maximum_closures": 0,
+      "maximum_heavy_atoms": 50,
+      "multiple_forward_product_rows": 0,
+      "positive_weight_rows": 780,
+      "qualified_rows": 780,
+      "raw_row_fraction": 0.0016800749571903976,
+      "realism_weight_mass": 0.0007764911820283925,
+      "realism_weight_sum": 360.4976900000004,
+      "rows": 780,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 780,
+      "zero_weight_rows": 0
+    },
+    "epoxide_opening_amine": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 16239,
+        "registry_role_policy": 7470
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 124,
+      "multiple_forward_product_rows": 2778,
+      "positive_weight_rows": 16590,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.03573390197408807,
+      "realism_weight_mass": 0.04985188568957489,
+      "realism_weight_sum": 23144.486440000157,
+      "rows": 16590,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 16590,
+      "zero_weight_rows": 0
+    },
+    "iphos_amine_dioxaphospholane": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "P",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 16239,
+        "registry_role_policy": 7470
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 140,
+      "multiple_forward_product_rows": 2778,
+      "positive_weight_rows": 16590,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.03573390197408807,
+      "realism_weight_mass": 0.040669315507719885,
+      "realism_weight_sum": 18881.340359996673,
+      "rows": 16590,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 16590,
+      "zero_weight_rows": 0
+    },
+    "passerini_3cr": {
+      "elements": [
+        "C",
+        "N",
+        "O"
+      ],
+      "exact_forward_rows": 77571,
+      "issues": {},
+      "maximum_closures": 0,
+      "maximum_heavy_atoms": 80,
+      "multiple_forward_product_rows": 0,
+      "positive_weight_rows": 77571,
+      "qualified_rows": 77571,
+      "raw_row_fraction": 0.16708345449258505,
+      "realism_weight_mass": 0.03352529477529728,
+      "realism_weight_sum": 15564.621469998656,
+      "rows": 77571,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 76050,
+      "zero_weight_rows": 0
+    },
+    "reductive_amination_amine_aldehyde": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 459,
+      "issues": {
+        "exact_forward_reconstruction": 21195,
+        "registry_role_policy": 9753
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 120,
+      "multiple_forward_product_rows": 3624,
+      "positive_weight_rows": 21654,
+      "qualified_rows": 459,
+      "raw_row_fraction": 0.04664146554230881,
+      "realism_weight_mass": 0.2123945991371736,
+      "realism_weight_sum": 98607.38167999884,
+      "rows": 21654,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 21364,
+      "zero_weight_rows": 0
+    },
+    "thiol_michael_thioether": {
+      "elements": [
+        "C",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 1521,
+      "issues": {},
+      "maximum_closures": 0,
+      "maximum_heavy_atoms": 55,
+      "multiple_forward_product_rows": 0,
+      "positive_weight_rows": 1521,
+      "qualified_rows": 1521,
+      "raw_row_fraction": 0.0032761461665212757,
+      "realism_weight_mass": 0.014428866743384216,
+      "realism_weight_sum": 6698.8180300000395,
+      "rows": 1521,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 1521,
+      "zero_weight_rows": 0
+    },
+    "ugi_3cr_agile": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 179010,
+      "issues": {
+        "exact_forward_reconstruction": 43758,
+        "registry_role_policy": 43758
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 76,
+      "multiple_forward_product_rows": 47736,
+      "positive_weight_rows": 222768,
+      "qualified_rows": 179010,
+      "raw_row_fraction": 0.4798294077735776,
+      "realism_weight_mass": 0.3402487668365332,
+      "realism_weight_sum": 157965.59872000443,
+      "rows": 222768,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 218400,
+      "zero_weight_rows": 0
+    },
+    "urea_amine_isocyanate": {
+      "elements": [
+        "C",
+        "N",
+        "O",
+        "S"
+      ],
+      "exact_forward_rows": 351,
+      "issues": {
+        "exact_forward_reconstruction": 54681,
+        "registry_role_policy": 18009
+      },
+      "maximum_closures": 1,
+      "maximum_heavy_atoms": 131,
+      "multiple_forward_product_rows": 11520,
+      "positive_weight_rows": 22728,
+      "qualified_rows": 351,
+      "raw_row_fraction": 0.11853575005654099,
+      "realism_weight_mass": 0.008753143682523525,
+      "realism_weight_sum": 4063.77838000026,
+      "rows": 55032,
+      "saturated_rows": 0,
+      "unique_constitutional_products": 55032,
+      "zero_weight_rows": 32304
+    }
+  },
+  "gates": {
+    "all_declared_rows_scanned": true,
+    "all_families_have_positive_sampling_mass": true,
+    "all_rows_qualified": false,
+    "registry_controls_pass": true,
+    "sampled_whole_graph_roundtrips_exact": true
+  },
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "building_blocks": {
+      "path": "data/vendor/building_block_pool_v1.json",
+      "sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "corpus": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "nonclaims": [
+    "R1 is reaction-enumerated support, not twelve source-executed synthesis libraries or route certification.",
+    "Exact forward replay and registry control specificity do not estimate chemical synthesis precision or success probability.",
+    "Atom/bond vocabulary is checked on every row; full sparse encode/decode is checked only on the deterministic reported panel.",
+    "This qualification assigns no train/test folds and does not authorize feeding all R1 rows to training.",
+    "Zero realism weights are retained exactly and confer zero sampling mass; no positive floor is introduced.",
+    "Existing trained checkpoint semantics, Ugi/BL/LX repeated programs, evidence gates and heldouts are unchanged.",
+    "No improved realism, diversity, novelty, twelve-family learned generation or L2/L3 closure is established."
+  ],
+  "registry_controls": {
+    "acetal_aldehyde_diol": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "amide_coupling_acid_amine": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "aza_michael_amine_acrylate": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "carbamate_amine_chloroformate": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "disulfide_coupling": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "epoxide_opening_amine": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "iphos_amine_dioxaphospholane": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "passerini_3cr": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "reductive_amination_amine_aldehyde": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "thiol_michael_thioether": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    },
+    "ugi_3cr_agile": {
+      "negative_rejected": [
+        true,
+        true,
+        true
+      ],
+      "positive_exact": [
+        true,
+        true
+      ]
+    },
+    "urea_amine_isocyanate": {
+      "negative_rejected": [
+        true
+      ],
+      "positive_exact": [
+        true
+      ]
+    }
+  },
+  "representation_panel": {
+    "acetal_aldehyde_diol": [
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 25,
+        "source_row": 430728
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 429954
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 429743
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 42,
+        "source_row": 429671
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 430629
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 33,
+        "source_row": 429615
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 54,
+        "source_row": 430289
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 33,
+        "source_row": 429288
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 45,
+        "source_row": 430999
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 32,
+        "source_row": 429262
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 50,
+        "source_row": 429602
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 42,
+        "source_row": 429708
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 430614
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 431049
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 29,
+        "source_row": 430147
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 431018
+      }
+    ],
+    "amide_coupling_acid_amine": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 46,
+        "source_row": 450979
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 116,
+        "source_row": 457493
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 460797
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 41,
+        "source_row": 462948
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 459736
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 35,
+        "source_row": 459518
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 38,
+        "source_row": 456453
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 24,
+        "source_row": 450291
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 462872
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 454127
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 457197
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 453287
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 452162
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 71,
+        "source_row": 452833
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 33,
+        "source_row": 447920
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 463268
+      }
+    ],
+    "aza_michael_amine_acrylate": [
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 45,
+        "source_row": 222902
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 70,
+        "source_row": 229622
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 64,
+        "source_row": 229927
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 229814
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 66,
+        "source_row": 229489
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 225251
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 56,
+        "source_row": 227047
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 89,
+        "source_row": 229030
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 112,
+        "source_row": 231849
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 65,
+        "source_row": 227509
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 64,
+        "source_row": 233497
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 234920
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 85,
+        "source_row": 226505
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 41,
+        "source_row": 238105
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 116,
+        "source_row": 233504
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 108,
+        "source_row": 232354
+      }
+    ],
+    "carbamate_amine_chloroformate": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 51,
+        "source_row": 365421
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 89,
+        "source_row": 362736
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 96,
+        "source_row": 366908
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 48,
+        "source_row": 363034
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 63,
+        "source_row": 361015
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 60,
+        "source_row": 367492
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 363924
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 60,
+        "source_row": 362820
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 52,
+        "source_row": 357814
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 54,
+        "source_row": 366449
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 59,
+        "source_row": 363386
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 67,
+        "source_row": 365298
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 53,
+        "source_row": 371557
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 373506
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 72,
+        "source_row": 360921
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 373626
+      }
+    ],
+    "disulfide_coupling": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 357142
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 357135
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 357442
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 356956
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 22,
+        "source_row": 356768
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 25,
+        "source_row": 356877
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 29,
+        "source_row": 357419
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 26,
+        "source_row": 356709
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 26,
+        "source_row": 357458
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 357406
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 31,
+        "source_row": 356755
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 32,
+        "source_row": 357304
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 38,
+        "source_row": 357029
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 357071
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 31,
+        "source_row": 356761
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 27,
+        "source_row": 357099
+      }
+    ],
+    "epoxide_opening_amine": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 55,
+        "source_row": 240786
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 241508
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 41,
+        "source_row": 255486
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 91,
+        "source_row": 247097
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 38,
+        "source_row": 251320
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 50,
+        "source_row": 254262
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 240680
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 48,
+        "source_row": 242382
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 35,
+        "source_row": 243362
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 243978
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 66,
+        "source_row": 249385
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 64,
+        "source_row": 248079
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 57,
+        "source_row": 250317
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 46,
+        "source_row": 247984
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 250055
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 47,
+        "source_row": 253971
+      }
+    ],
+    "iphos_amine_dioxaphospholane": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 69,
+        "source_row": 431768
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 55,
+        "source_row": 438486
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 51,
+        "source_row": 432014
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 99,
+        "source_row": 434831
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 62,
+        "source_row": 439624
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 65,
+        "source_row": 436802
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 61,
+        "source_row": 431609
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 67,
+        "source_row": 439642
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 96,
+        "source_row": 437221
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 439028
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 48,
+        "source_row": 447094
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 57,
+        "source_row": 443378
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 97,
+        "source_row": 435381
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 60,
+        "source_row": 446779
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 49,
+        "source_row": 443769
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 120,
+        "source_row": 440361
+      }
+    ],
+    "passerini_3cr": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 71,
+        "source_row": 295533
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 68,
+        "source_row": 320610
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 62,
+        "source_row": 305457
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 46,
+        "source_row": 283921
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 53,
+        "source_row": 328804
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 62,
+        "source_row": 307452
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 63,
+        "source_row": 312919
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 62,
+        "source_row": 283753
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 55,
+        "source_row": 264966
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 59,
+        "source_row": 303436
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 35,
+        "source_row": 306181
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 65,
+        "source_row": 294659
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 305052
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 64,
+        "source_row": 321580
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 68,
+        "source_row": 320667
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 60,
+        "source_row": 281394
+      }
+    ],
+    "reductive_amination_amine_aldehyde": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 73,
+        "source_row": 345285
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 58,
+        "source_row": 351968
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 60,
+        "source_row": 347626
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 50,
+        "source_row": 340246
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 88,
+        "source_row": 345585
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 341919
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 59,
+        "source_row": 354677
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 58,
+        "source_row": 354304
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 46,
+        "source_row": 346405
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 114,
+        "source_row": 335802
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 82,
+        "source_row": 339430
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 50,
+        "source_row": 350205
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 46,
+        "source_row": 351264
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 42,
+        "source_row": 336973
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 35,
+        "source_row": 335246
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 47,
+        "source_row": 339757
+      }
+    ],
+    "thiol_michael_thioether": [
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 355588
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 26,
+        "source_row": 355491
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 30,
+        "source_row": 356506
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 355236
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 355628
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 356353
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 355753
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 35,
+        "source_row": 355199
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 30,
+        "source_row": 355222
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 356043
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 355935
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 45,
+        "source_row": 355640
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 356475
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 355465
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 33,
+        "source_row": 355809
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 355871
+      }
+    ],
+    "ugi_3cr_agile": [
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 37,
+        "source_row": 206120
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 38,
+        "source_row": 105666
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 41,
+        "source_row": 23396
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 80651
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 34,
+        "source_row": 103540
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 170620
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 119678
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 49,
+        "source_row": 53030
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 39,
+        "source_row": 7361
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 178465
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 63,
+        "source_row": 180494
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 41112
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 41,
+        "source_row": 9952
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 36,
+        "source_row": 40078
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 51,
+        "source_row": 117066
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 126047
+      }
+    ],
+    "urea_amine_isocyanate": [
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 79,
+        "source_row": 387421
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 61,
+        "source_row": 398220
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 87,
+        "source_row": 404300
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 40,
+        "source_row": 425526
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 88,
+        "source_row": 412490
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 55,
+        "source_row": 426036
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 49,
+        "source_row": 387514
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 82,
+        "source_row": 415790
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 43,
+        "source_row": 398319
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 83,
+        "source_row": 393633
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 99,
+        "source_row": 382734
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 44,
+        "source_row": 423643
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 51,
+        "source_row": 423673
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 38,
+        "source_row": 426996
+      },
+      {
+        "closures": 1,
+        "exact": true,
+        "nodes": 76,
+        "source_row": 386597
+      },
+      {
+        "closures": 0,
+        "exact": true,
+        "nodes": 83,
+        "source_row": 408246
+      }
+    ]
+  },
+  "schema_version": "forge.combinatorial_library_qualification.v1",
+  "seed": 20260913,
+  "sources": {
+    "experiments/phase1/multireaction/combinatorial_libraries.py": "03bb2f3e0b771d61d982828f74edb280154f73a71c08fac1b4620a87add1f9e3",
+    "forge/assembly/api.py": "bb77b94c91ee0bbba62ff9a83a1d3d31a4d280bf13b8a508537817b19d7efa60",
+    "forge/assembly/families.py": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4",
+    "forge/assembly/program.py": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e",
+    "forge/assembly/registry.py": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037",
+    "forge/chemistry/reactive_sites.py": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964",
+    "forge/core/hashing.py": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494",
+    "forge/corpus/combinatorial_libraries.py": "990e32fc051fdd3d97e10d776e77597a3d4b0296d142602f48fca8ab32cc19b0",
+    "forge/model/defog_feasibility.py": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0",
+    "forge/model/sparse_topology_feasibility.py": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b",
+    "forge/model/vocabulary.py": "df6b5ccbee8b804929d10a8e2403db3ece9ca5bd74d5110104da9ff51ad1b040"
+  },
+  "status": "blocked",
+  "summary": {
+    "families": 12,
+    "rows": 464265,
+    "unique_constitutional_products": 458047
+  }
+}

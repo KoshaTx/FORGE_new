@@ -1,0 +1,215 @@
+{
+  "benchmark_policy_sha256": "2211c468a6ffec619604a583bce62349baa8385a2e7d41680fd57d2bd48fc84e",
+  "config_sha256": "1b6886fca14bc585a9e857f5819592570d0f461c400a836b8987c692f2ef5e84",
+  "execution_provenance": {
+    "archived_code_executed": false,
+    "current_modules": {
+      "builder": {
+        "path": "forge/synthesis/engine/single_step_benchmark_manifest.py",
+        "sha256": "767076a96266db530f8f2599b986e0e909e0b518cacf9c78d30cbb5c7362a110"
+      },
+      "pin_validation": {
+        "path": "forge/core/hashing.py",
+        "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+      },
+      "source_hashing": {
+        "path": "forge/corpus/r1_prime_audit.py",
+        "sha256": "7d1c9bdbfc760efa5a3f58fb24eded687fc34727e7109fa2765e3f3e86f361b0"
+      },
+      "source_location_authentication": {
+        "path": "forge/core/input_locations.py",
+        "sha256": "b0d09218dc3f5fc6adf66a1b5446e8c5a54517a63fba75603805ef2422c2021d"
+      }
+    },
+    "historical_implementation_is_evidence_only": true
+  },
+  "implementation": {
+    "builder_cli": {
+      "path": "scripts/build_single_step_proposal_benchmark_manifest.py",
+      "sha256": "a5ab02fcd0d3d9a1801a634ef131cde8769bca8fe119c37686e81f8659d173d1"
+    },
+    "builder_module": {
+      "path": "src/forge/route/single_step_benchmark_manifest.py",
+      "sha256": "00f380fe4f89e3b05a4d0c40721a8b1d286d13f2cecc993cea00e0fd202733d2"
+    }
+  },
+  "implementation_source_bindings": {
+    "builder_cli": {
+      "path": "provenance/frozen-code/sha256/a5/a5ab02fcd0d3d9a1801a634ef131cde8769bca8fe119c37686e81f8659d173d1",
+      "sha256": "a5ab02fcd0d3d9a1801a634ef131cde8769bca8fe119c37686e81f8659d173d1"
+    },
+    "builder_module": {
+      "path": "provenance/frozen-code/sha256/00/00f380fe4f89e3b05a4d0c40721a8b1d286d13f2cecc993cea00e0fd202733d2",
+      "sha256": "00f380fe4f89e3b05a4d0c40721a8b1d286d13f2cecc993cea00e0fd202733d2"
+    }
+  },
+  "input_access_log_sha256": "8561dcb759ee4de3ad9003421eb8641b644283938ba67618e9b9b94b8bcfedbb",
+  "inputs_accessed": {
+    "benchmark_policy": {
+      "path": "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json",
+      "sha256": "2211c468a6ffec619604a583bce62349baa8385a2e7d41680fd57d2bd48fc84e"
+    },
+    "component_priority_ledger": {
+      "path": "results/phase1/ugi3_l2_coverage_priority_audit_v1/component_priority_ledger.csv.gz",
+      "sha256": "fb7b8650ab5a9211667bd50462d327446909b5575e2f8fbbcf0c95d294d5ac35"
+    },
+    "component_program_ledger": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_program_ledger.csv.gz",
+      "sha256": "523880bc4ad00c15e71acbd68c20962e7a152a20c601c6b7cc90b1cdedcd3edf"
+    },
+    "exact_source_step_verification": {
+      "path": "results/phase1/ugi3_exact_source_forward_verification/step_verification_ledger.csv.gz",
+      "sha256": "830dc166f6eebca25cda460d8ce156b41860c6a1a45ba605a2356caf30eb6a38"
+    },
+    "exact_source_verification_config": {
+      "path": "configs/route/phase1_ugi3_exact_source_forward_verification.json",
+      "sha256": "a5deaf1efb41ef492914767be15ad3d273b77a51ff30bbf5b967f7d4fb180405"
+    },
+    "expanded_component_exemplars": {
+      "path": "results/phase1/ugi_expanded_exemplars/component_exemplar_ledger.csv.gz",
+      "sha256": "533db59a3aa59c7c09ff1b485869ce6fab3dd70a58705336838a5db70f7c1322"
+    },
+    "source_component_routes": {
+      "path": "results/m0_09/agile_component_routes.json",
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "ugi_l1_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "outputs": {
+    "lane_targets": {
+      "filename": "lane_targets.json.gz",
+      "sha256": "60b1316b43e0074b5662f18d77cf1c17ee566d1b981642890ccc7904fd484529"
+    },
+    "scoring_truth": {
+      "filename": "scoring_truth.json.gz",
+      "sha256": "764e253d22aa523ffc0f099bd7773770f851ff901f8101964ddbebb516012a32"
+    },
+    "visibility_masks": {
+      "filename": "visibility_masks.json.gz",
+      "sha256": "039874d401363e8ab682dc9f10f6837c862d8acdc9c1136d165d596b2a52958c"
+    }
+  },
+  "policy_bound_artifacts": {
+    "development_chemotype_priority_ledger": {
+      "path": "results/phase1/ugi3_l2_coverage_priority_audit_v1/chemotype_priority_ledger.csv.gz",
+      "sha256": "d48f4bc11f647733f1a3c35e01779bdba65344f191aba731274f9c799a4f3a17"
+    },
+    "development_component_programs": {
+      "path": "results/m0_09/agile_virtual_ugi3_component_programs.json",
+      "sha256": "f7b67408b77806888aa3e514a6a889dd9ebc22407723d4c83118cd02bc31a0a4"
+    },
+    "development_exact_component_routes": {
+      "path": "results/m0_09/agile_component_routes.json",
+      "sha256": "d15010a1b55b6130eb20dad93c11431a21e99b4ab4d9662ccb60f6184ac844bb"
+    },
+    "development_lipid_route_reviews": {
+      "path": "results/m0_09/lnpdb_paper_route_reviews.json",
+      "sha256": "3606b1b6ce243eb000f2bb2bad06398936ad409883c6f34294df2120a69c52b8"
+    },
+    "development_route_gap_worklist": {
+      "path": "results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json",
+      "sha256": "7d8a0d85c61c940208ca8c513354046641c36385d3c63e1f5db55a54375a004d"
+    },
+    "exact_c16_step_verification": {
+      "path": "results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "sha256": "81ce6a63ac5616ed69b5b4ac1feff55993fe59e0be5cc516f055d1458a403e93"
+    },
+    "exact_c18_step_verification": {
+      "path": "results/phase1/ugi3_exact_c18_route_v1/step_verification_ledger.json.gz",
+      "sha256": "459632d0bf8bb00265997c55c8899fb79c08cc2d1b1508d29eb743192b49143b"
+    },
+    "graph2edits_adapter_candidate": {
+      "path": "src/forge/route/graph2edits_backend.py",
+      "sha256": "37042556568896908a63c5f2de195ffa47934e88bce649ff238f9bb712be240c"
+    },
+    "graph2edits_candidate_manifest": {
+      "path": "configs/route/graph2edits_proposal_backend_candidate_v1.json",
+      "sha256": "834d3714c7e7c2ee9b98e09ef07466b76f29038988c655a13e69a93eed4539ff"
+    },
+    "graph2edits_training_corpus_manifest": {
+      "path": "configs/route/graph2edits_usp50k_training_corpus_manifest_v1.json",
+      "sha256": "f3c109121757e9ff2b7f63a29fa88f030b9753d3e786e6f21e6c6e55db8d2720"
+    },
+    "proposal_engine_contract": {
+      "path": "src/forge/route/proposal_engine.py",
+      "sha256": "761ae3cd142ddc9bbb98f4181b3c975e0e4b4aba3e386eb4c81ed1ccdd2f68d8"
+    },
+    "qualified_l1_assembly_reaction": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "qualified_l2_exact_c16_reactions": {
+      "path": "configs/route/phase1_ugi3_exact_c16_qualified_reactions_v1.json",
+      "sha256": "0e90a1bc3b27bb34d0b033102ab405b77f55d87bfe770575873653c4d4e2b1c2"
+    },
+    "qualified_l2_exact_c18_reactions": {
+      "path": "configs/route/phase1_ugi3_exact_c18_qualified_reactions_v1.json",
+      "sha256": "5b2122be7717b5850be489b8ed77eda26fc33913ae5545da6322d658db4bd65b"
+    },
+    "qualified_l2_exact_source_reactions": {
+      "path": "configs/route/phase1_ugi3_upstream_qualified_reactions_v1.json",
+      "sha256": "a8afb8a6164c4eb149c8d58f991db9a94405a89cf46719a5970df9f2d322bd0e"
+    },
+    "targeted_aldehyde_exact_evidence": {
+      "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_v1.json",
+      "sha256": "533fcc9907ec5cf76054d2172c7e54cc68ee26cdf31911bca0e2f7caf5ff79eb"
+    },
+    "targeted_aldehyde_step_verification": {
+      "path": "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/route_verification_ledger.csv.gz",
+      "sha256": "ea92af40ee0b1c52e7e92150e79e29582e5959bc6cd46c7ee5b04a1fd72fb1b3"
+    }
+  },
+  "safety_receipt": {
+    "adversarial_targets_are_valid_connected_molecules": true,
+    "candidate_selected": false,
+    "development_sources_only": true,
+    "forbidden_inputs_accessed": [],
+    "graph2edits_backend_active": false,
+    "graph2edits_executed": false,
+    "held_family_local_mask_metadata_materialized": true,
+    "hybrid_production_lane_active": false,
+    "known_route_truth_absent_from_lane_payload": true,
+    "proposal_lane_executed": false,
+    "route_evidence_created": false,
+    "sealed_holdout_accessed": false,
+    "strict_lane_remains_production_default": true,
+    "v_syn_modified": false
+  },
+  "schema_version": "forge.single_step_benchmark_manifest_result.v1",
+  "selection_seed": 20260830,
+  "status": "frozen_development_manifest_benchmark_not_executed",
+  "summary": {
+    "adversarial_valid_connected_controls": 12,
+    "component_source_audit": {
+      "component_program_rows": 93,
+      "component_program_rows_role_unqualified": 1,
+      "qualified_constitutional_candidates": 938,
+      "role_unqualified_source_rows": {
+        "expanded_component_exemplars": 5
+      },
+      "source_rows": {
+        "component_priority_ledger": 593,
+        "expanded_component_exemplars": 424
+      }
+    },
+    "constitutional_unique_targets": 120,
+    "exact_truth_masks": 18,
+    "held_family_masks": 18,
+    "known_route_truth_records": 36,
+    "primary_strata": {
+      "adversarial_incompatibles": 12,
+      "branched_aldehydes": 12,
+      "ester_containing_aldehydes": 12,
+      "held_reaction_families": 18,
+      "heterocyclic_amine_heads": 12,
+      "isocyanide_formamide_precursors": 12,
+      "known_exact_l2_routes": 18,
+      "linear_aldehydes": 12,
+      "unsaturated_aldehydes": 12
+    },
+    "target_count": 120
+  }
+}

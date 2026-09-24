@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 375, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 354, in main
+    result = run(args.repo_root, args.config, args.output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 259, in run
+    metrics, artifacts = calculate(repo, config_path)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_source_core_completion.py", line 190, in calculate
+    molecule = Chem.MolFromSmiles(original["canonical_smiles"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: No registered converter was able to produce a C++ rvalue of type std::__1::basic_string<wchar_t, std::__1::char_traits<wchar_t>, std::__1::allocator<wchar_t>> from this Python object of type NoneType

@@ -1,0 +1,4700 @@
+{
+  "created_at_utc": "2026-09-14T15:56:40.559355+00:00",
+  "inputs": {
+    "experiments/phase1/multireaction/combinatorial_connection_reuse.py": {
+      "path": "experiments/phase1/multireaction/combinatorial_connection_reuse.py",
+      "sha256": "9f2936a5418031252d6f337da680a745d265d1c922d762b5bed0d9ebecc66e95"
+    },
+    "forge/model/program_connection_reuse.py": {
+      "path": "forge/model/program_connection_reuse.py",
+      "sha256": "6ffadba7256580e59edba7bbc13209d96ac52c8ce4326d81bbdfadef42bef409"
+    },
+    "results/phase1/combinatorial_checkpoint_v1/checkpoint.json": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/admissions.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/admissions.jsonl",
+      "sha256": "c3959ba7a33bd4da0d9c6d1507bfe9fe565ca34a591683fad4d7f46ddb509ba7"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/attempts.jsonl",
+      "sha256": "5801835ba636f8221fedc13f1a3a7e857950ac96fb8a146443f2d58e7567f377"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/plans.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/plans.json",
+      "sha256": "73f0217acc3860931284e99f6c519ddd70f7b9d8d039c6e81a32199bc3f6b8b8"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/proposals.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/proposals.jsonl",
+      "sha256": "eca0227a7597c0fbffacd5ee140ef07ca2b6ee2cc87527e197c622e2d4fdbb93"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_1_v1/admissions.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/admissions.jsonl",
+      "sha256": "e9f925723ada767cc329b27c69e81140bfdb7822f83b51e233eab892d24528e9"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_1_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/attempts.jsonl",
+      "sha256": "d6802dc5ce2e66a8aa110043afb55e56249a6b770c282d0f65e404fa82aae05f"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_1_v1/plans.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/plans.json",
+      "sha256": "ab460d650b9c52f4a91655043da19cc0fca51d4993d51d375769b0484a4772bf"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_1_v1/proposals.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/proposals.jsonl",
+      "sha256": "f818a29de114775cb3b874958c3dcd809e9c1f11e1424df12f90596c9f9093fc"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_1_v1/result.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_1_v1/result.json",
+      "sha256": "db16a7bd8f8249d729ff46674b567251371d5efb161ced94927f2ecb73a199fe"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_2_v1/admissions.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_2_v1/admissions.jsonl",
+      "sha256": "9e4eeef29804ba557207c16d818c23e7ee736f56be3176a2fce07a5940a3cde6"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_2_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_2_v1/attempts.jsonl",
+      "sha256": "acf8beebdebd2ecfd427c28a3c87bf2cdc7435ff414241b33d93f8b75b030207"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_2_v1/plans.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_2_v1/plans.json",
+      "sha256": "ffb960faeff52fc736e31d20fa5d5388bf9c060c073a0d823f97eeee39aae427"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_2_v1/proposals.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_2_v1/proposals.jsonl",
+      "sha256": "8f9564117e900171034edc5464a0ff1745700f970dae0c974e21e21309723a6b"
+    },
+    "results/phase1/combinatorial_connection_reuse_replication_2_v1/result.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replication_2_v1/result.json",
+      "sha256": "9b2f678236acc15cc4535dd50cf3d5552e39e6d53937fb341b130da9c1951a0e"
+    },
+    "results/phase1/combinatorial_connection_reuse_validation_v1/report_evidence.py": {
+      "path": "results/phase1/combinatorial_connection_reuse_validation_v1/report_evidence.py",
+      "sha256": "2be8ff03b66e7472d6164ddc3465d3b668023a6de53d1d01df41ef38d07aceba"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/layouts.json",
+      "sha256": "0f22cce5fc6032b9e06443860d4c07c18e1aef9b6eb9869e3cfb226616885ff0"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/result.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/result.json",
+      "sha256": "652c793fc55be97a764736dffa23ccff077030afccc2c749ec033a8f8d12ce41"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/terminals.jsonl": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/terminals.jsonl",
+      "sha256": "56cfd26a1b294716772dce331b35aba0eaf7eab531a3448a6acd5266a27c5d7e"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/layouts.json",
+      "sha256": "6d9b8e49444f1c9dc7f3474eadf43b1342b498438e3c30e430f2b353afdf5028"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/result.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/result.json",
+      "sha256": "9ab31f2dccc8970b605376abbe33ba2fc8df410010ee74114a4b08c172b63374"
+    },
+    "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/terminals.jsonl": {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/terminals.jsonl",
+      "sha256": "55425b37a4535397b75559efa5f8703cef25c934decefa4e0f205bdc91eff4f7"
+    },
+    "results/phase1/combinatorial_graph_reuse_discovery_v1/layouts.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/layouts.json",
+      "sha256": "dd5e1735c39c321599b16f855ecfbe0dcc48efa11344aa28f0e1e2b432906ac2"
+    },
+    "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json",
+      "sha256": "b218cf52fb5f261bfe477e2725ed44de7385be773326b98af0532f3a56974a70"
+    },
+    "results/phase1/combinatorial_graph_reuse_discovery_v1/terminals.jsonl": {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/terminals.jsonl",
+      "sha256": "207e802b04bcabdd605b6e4b0390448935cefbc13e1e0e68f984da5a6c5469e4"
+    },
+    "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json",
+      "sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459"
+    },
+    "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/result.json": {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/result.json",
+      "sha256": "6d1d7eb112c4d3201b67f9505db6015224b148b3cb289fcd2ad0325687d5b7bc"
+    },
+    "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/result.json": {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/result.json",
+      "sha256": "9a52eea7c1b08fa3f8d5dd574e632c10f5b48dba75bf59440cf92e98a33c591c"
+    },
+    "results/phase1/combinatorial_program_cache_v2/cache.npz": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "results/phase1/combinatorial_reuse_admission_confirmation_1_v1/result.json": {
+      "path": "results/phase1/combinatorial_reuse_admission_confirmation_1_v1/result.json",
+      "sha256": "06fd6ab2e769699e3d2a969269d10dda11e18d92587947736279d3bc3b714da3"
+    },
+    "results/phase1/combinatorial_reuse_admission_confirmation_2_v1/result.json": {
+      "path": "results/phase1/combinatorial_reuse_admission_confirmation_2_v1/result.json",
+      "sha256": "4de61318c530865cc405749cd94b0bb28d24b23ea77e643829277952fcc41246"
+    },
+    "results/phase1/combinatorial_reuse_admission_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_reuse_admission_discovery_v1/result.json",
+      "sha256": "6251fb0c9bc6a9e894a2c5dac2d104df6a13e7f3e7393525a122360ab0161912"
+    }
+  },
+  "interpretation": [
+    "The same-donor comparison is a diagnostic of admitted outputs, not a new randomized causal experiment.",
+    "The additional connection context is from exact source programs. Generated interiors and accumulator graphs are preserved as specified; new-layout autonomy is unmeasured.",
+    "Unique product totals sum per-family unique counts, rather than deduplicating across families."
+  ],
+  "new_random_sampling": false,
+  "runs": {
+    "discovery": {
+      "all_original_invalid_and_exact_outputs_preserved": true,
+      "all_selected_atom_count_edge_count_fixed_graph_and_generated_interior_checks_pass": true,
+      "counts": {
+        "accepted": 15,
+        "accepted_with_connection_change": 15,
+        "every_witness_has_novel_component": 15,
+        "novel_product_vs_all_train": 15,
+        "same_donor_copy_only_violates_edge_count": 6
+      },
+      "exact_gain_by_family": {
+        "acetal_aldehyde_diol": 0,
+        "amide_coupling_acid_amine": 1,
+        "aza_michael_amine_acrylate": 0,
+        "carbamate_amine_chloroformate": 1,
+        "disulfide_coupling": 0,
+        "epoxide_opening_amine": 1,
+        "iphos_amine_dioxaphospholane": 0,
+        "passerini_3cr": 0,
+        "reductive_amination_amine_aldehyde": 2,
+        "thiol_michael_thioether": 0,
+        "ugi_3cr_agile": 0,
+        "urea_amine_isocyanate": 10
+      },
+      "preservation_passes_for_every_family": true,
+      "qualification_by_family": [
+        {
+          "count": 64,
+          "family": "acetal_aldehyde_diol",
+          "status": "not_repeated"
+        },
+        {
+          "count": 21,
+          "family": "amide_coupling_acid_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 43,
+          "family": "amide_coupling_acid_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 13,
+          "family": "aza_michael_amine_acrylate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 45,
+          "family": "aza_michael_amine_acrylate",
+          "status": "qualified"
+        },
+        {
+          "count": 6,
+          "family": "aza_michael_amine_acrylate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 5,
+          "family": "carbamate_amine_chloroformate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 58,
+          "family": "carbamate_amine_chloroformate",
+          "status": "qualified"
+        },
+        {
+          "count": 1,
+          "family": "carbamate_amine_chloroformate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 64,
+          "family": "disulfide_coupling",
+          "status": "not_repeated"
+        },
+        {
+          "count": 17,
+          "family": "epoxide_opening_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 47,
+          "family": "epoxide_opening_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 17,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "not_repeated"
+        },
+        {
+          "count": 47,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 64,
+          "family": "passerini_3cr",
+          "status": "not_repeated"
+        },
+        {
+          "count": 10,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "not_repeated"
+        },
+        {
+          "count": 53,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "qualified"
+        },
+        {
+          "count": 1,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "witness_correspondence_conflict"
+        },
+        {
+          "count": 64,
+          "family": "thiol_michael_thioether",
+          "status": "not_repeated"
+        },
+        {
+          "count": 64,
+          "family": "ugi_3cr_agile",
+          "status": "not_repeated"
+        },
+        {
+          "count": 64,
+          "family": "urea_amine_isocyanate",
+          "status": "qualified"
+        }
+      ],
+      "selected": [
+        {
+          "canonical_smiles": "CCCCC(C)CCCC(C)CCCCC(=O)N(CCC1OCCCS1)C(=O)CCCCC(C)CCCC(C)CCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCC1OCCCS1",
+                    "carboxylic_acid_tail": "CCCCC(C)CCCC(C)CCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CCCC(C)CCCCC(=O)NCCC1OCCCS1",
+                    "CCCCC(C)CCCC(C)CCCCC(=O)N(CCC1OCCCS1)C(=O)CCCCC(C)CCCC(C)CCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 1,
+            "smiles": "CCCCC(C)CCCC(C)CCCCC(=O)N(CCC1OCCCS1)C(=O)CCCCC(C)CCCC(C)CCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 113
+        },
+        {
+          "canonical_smiles": "CCC=C=CCCC(C)CCCOC(=O)NCCCCSCNC(=O)OCCCC(C)CCC=C=CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCSCN",
+                    "chloroformate_tail": "CCC=C=CCCC(C)CCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=C=CCCC(C)CCCOC(=O)NCCCCSCN",
+                    "CCC=C=CCCC(C)CCCOC(=O)NCCCCSCNC(=O)OCCCC(C)CCC=C=CCC"
+                  ]
+                },
+                {
+                  "components": {
+                    "amine_head": "NCCCCSCN",
+                    "chloroformate_tail": "CCC=C=CCCC(C)CCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=C=CCCC(C)CCCOC(=O)NCSCCCCN",
+                    "CCC=C=CCCC(C)CCCOC(=O)NCCCCSCNC(=O)OCCCC(C)CCC=C=CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCC=C=CCCC(C)CCCOC(=O)NCCCCSCNC(=O)OCCCC(C)CCC=C=CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 221
+        },
+        {
+          "canonical_smiles": "CCCC=CCCCCCCCCCC(O)CN(CCCCC(C)CSCCCC)CC(O)CCCCCCCCCC=CCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "epoxide_opening_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "alkyl_epoxide_tail": "CCCC=CCCCCCCCCCC1CO1",
+                    "amine_head": "CCCCSCC(C)CCCCN"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC=CCCCCCCCCCC(O)CNCCCCC(C)CSCCCC",
+                    "CCCC=CCCCCCCCCCC(O)CN(CCCCC(C)CSCCCC)CC(O)CCCCCCCCCC=CCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 0,
+            "smiles": "CCCC=CCCCCCCCCCC(O)CN(CCCCC(C)CSCCCC)CC(O)CCCCCCCCCC=CCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 364
+        },
+        {
+          "canonical_smiles": "CCC=CCCCCCCCCCCCCCCN(CCCCCCCCCCCCCCC=CCC)C(CCCCC)CCCCC(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "reductive_amination_amine_aldehyde",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "aldehyde_tail": "CCC=CCCCCCCCCCCCCCC=O",
+                    "amine_head": "CCCCCC(N)CCCCC(C)C"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=CCCCCCCCCCCCCCCNC(CCCCC)CCCCC(C)C",
+                    "CCC=CCCCCCCCCCCCCCCN(CCCCCCCCCCCCCCC=CCC)C(CCCCC)CCCCC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 7,
+            "donor": 1,
+            "smiles": "CCC=CCCCCCCCCCCCCCCN(CCCCCCCCCCCCCCC=CCC)C(CCCCC)CCCCC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 512
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CC(C)CCC1C=C1",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "reductive_amination_amine_aldehyde",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "aldehyde_tail": "CCCCCCCCCC(C)OCCCCCC=O",
+                    "amine_head": "CC(CN)CCC1C=C1"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCC(C)OCCCCCCNCC(C)CCC1C=C1",
+                    "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CC(C)CCC1C=C1"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CC(C)CCC1C=C1",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 527
+        },
+        {
+          "canonical_smiles": "CCC=C=CCC(C)CC=CCNC(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)NCCCOCCS",
+          "connection_edge_edits": 6,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCOCCS",
+                    "isocyanate_tail": "CCC=C=CCC(C)CC=CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=C=CCC(C)CC=CCNC(=O)NCCCOCCS",
+                    "CCC=C=CCC(C)CC=CCNC(=O)N(CC=CCC(C)CC=C=CCC)C(=O)NCCCOCCS",
+                    "CCC=C=CCC(C)CC=CCNC(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)NCCCOCCS",
+                    "CCC=C=CCC(C)CC=CCNC(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)NCCCOCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 24,
+            "donor": 0,
+            "smiles": "CCC=C=CCC(C)CC=CCNC(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)N(CC=CCC(C)CC=C=CCC)C(=O)NCCCOCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 716
+        },
+        {
+          "canonical_smiles": "C=CCCCCCNC(=O)N(CCCCCC=C)C(=O)NSCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCSN",
+                    "isocyanate_tail": "C=CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "C=CCCCCCNC(=O)NSCCCCCC",
+                    "C=CCCCCCNC(=O)N(CCCCCC=C)C(=O)NSCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "C=CCCCCCNC(=O)N(CCCCCC=C)C(=O)NSCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 721
+        },
+        {
+          "canonical_smiles": "CCCCCCCCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)NC(C)(O)[SH](S)CC",
+          "connection_edge_edits": 5,
+          "copy_only_edge_count_difference": 3,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC[SH](S)C(C)(N)O",
+                    "isocyanate_tail": "CCCCCCCCC(C)CC(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCC(C)CC(C)CNC(=O)NC(C)(O)[SH](S)CC",
+                    "CCCCCCCCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)NC(C)(O)[SH](S)CC",
+                    "CCCCCCCCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)NC(C)(O)[SH](S)CC",
+                    "CCCCCCCCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)NC(C)(O)[SH](S)CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 23,
+            "donor": 0,
+            "smiles": "CCCCCCCCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)N(CC(C)CC(C)CCCCCCCC)C(=O)NC(C)(O)[SH](S)CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 729
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCSO",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCSO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCSO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCSO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 730
+        },
+        {
+          "canonical_smiles": "CCC(C)CC=C=CCCC(C)CCCCNC(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)NC(CCO)CCS",
+          "connection_edge_edits": 8,
+          "copy_only_edge_count_difference": 6,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NC(CCO)CCS",
+                    "isocyanate_tail": "CCC(C)CC=C=CCCC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CC=C=CCCC(C)CCCCNC(=O)NC(CCO)CCS",
+                    "CCC(C)CC=C=CCCC(C)CCCCNC(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)NC(CCO)CCS",
+                    "CCC(C)CC=C=CCCC(C)CCCCNC(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)NC(CCO)CCS",
+                    "CCC(C)CC=C=CCCC(C)CCCCNC(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)NC(CCO)CCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 42,
+            "donor": 0,
+            "smiles": "CCC(C)CC=C=CCCC(C)CCCCNC(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)N(CCCCC(C)CCC=C=CCC(C)CC)C(=O)NC(CCO)CCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 732
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CC)C(CO)SO",
+          "connection_edge_edits": 7,
+          "copy_only_edge_count_difference": 7,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCNC(CO)SO",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CC)C(CO)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CC)C(CO)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CC)C(CO)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CC)C(CO)SO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 33,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CC)C(CO)SO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 734
+        },
+        {
+          "canonical_smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCSCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCSCO",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCNC(=O)NCCCCSCO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)NCCCCSCO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCSCO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCSCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 2,
+            "smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCSCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 736
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCSSSCSO",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCSSSCSO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCSSSCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCSSSCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCSSSCSO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCSSSCSO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCSSSCSO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 743
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCCCCSCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCSCCCCN",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCNC(=O)NCCCCSCC",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCCCCSCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCCCCSCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 747
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCC(C)CC(C)C)C(=O)NCCC(C)CC(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CC(C)CC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCC(C)CC(C)C",
+                    "CCCCCCCNC(=O)N(CCC(C)CC(C)C)C(=O)NCCC(C)CC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 9,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCC(C)CC(C)C)C(=O)NCCC(C)CC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 748
+        }
+      ],
+      "totals": {
+        "baseline": {
+          "attempts": 768,
+          "exact_program": 584,
+          "novel_valid_attempts_vs_all_cache_train": 719,
+          "unique_novel_exact_products": 533,
+          "unique_valid_products": 722,
+          "valid_connected": 750
+        },
+        "graph_reuse": {
+          "attempts": 768,
+          "exact_program": 599,
+          "novel_valid_attempts_vs_all_cache_train": 719,
+          "unique_novel_exact_products": 548,
+          "unique_valid_products": 722,
+          "valid_connected": 750
+        }
+      },
+      "urea_by_depth": [
+        {
+          "arm": "baseline",
+          "attempts": 32,
+          "depth": 2,
+          "exact_program": 25
+        },
+        {
+          "arm": "baseline",
+          "attempts": 3,
+          "depth": 3,
+          "exact_program": 0
+        },
+        {
+          "arm": "baseline",
+          "attempts": 29,
+          "depth": 4,
+          "exact_program": 2
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 32,
+          "depth": 2,
+          "exact_program": 28
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 3,
+          "depth": 3,
+          "exact_program": 0
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 29,
+          "depth": 4,
+          "exact_program": 9
+        }
+      ]
+    },
+    "replication_1": {
+      "all_original_invalid_and_exact_outputs_preserved": true,
+      "all_selected_atom_count_edge_count_fixed_graph_and_generated_interior_checks_pass": true,
+      "counts": {
+        "accepted": 46,
+        "accepted_with_connection_change": 46,
+        "every_witness_has_novel_component": 46,
+        "novel_product_vs_all_train": 46,
+        "same_donor_copy_only_violates_edge_count": 23
+      },
+      "exact_gain_by_family": {
+        "acetal_aldehyde_diol": 0,
+        "amide_coupling_acid_amine": 3,
+        "aza_michael_amine_acrylate": 0,
+        "carbamate_amine_chloroformate": 6,
+        "disulfide_coupling": 0,
+        "epoxide_opening_amine": 1,
+        "iphos_amine_dioxaphospholane": 0,
+        "passerini_3cr": 0,
+        "reductive_amination_amine_aldehyde": 1,
+        "thiol_michael_thioether": 0,
+        "ugi_3cr_agile": 0,
+        "urea_amine_isocyanate": 35
+      },
+      "preservation_passes_for_every_family": true,
+      "qualification_by_family": [
+        {
+          "count": 128,
+          "family": "acetal_aldehyde_diol",
+          "status": "not_repeated"
+        },
+        {
+          "count": 39,
+          "family": "amide_coupling_acid_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 89,
+          "family": "amide_coupling_acid_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 17,
+          "family": "aza_michael_amine_acrylate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 105,
+          "family": "aza_michael_amine_acrylate",
+          "status": "qualified"
+        },
+        {
+          "count": 6,
+          "family": "aza_michael_amine_acrylate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 4,
+          "family": "carbamate_amine_chloroformate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 120,
+          "family": "carbamate_amine_chloroformate",
+          "status": "qualified"
+        },
+        {
+          "count": 4,
+          "family": "carbamate_amine_chloroformate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 128,
+          "family": "disulfide_coupling",
+          "status": "not_repeated"
+        },
+        {
+          "count": 28,
+          "family": "epoxide_opening_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 100,
+          "family": "epoxide_opening_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 37,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "not_repeated"
+        },
+        {
+          "count": 91,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 128,
+          "family": "passerini_3cr",
+          "status": "not_repeated"
+        },
+        {
+          "count": 16,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "not_repeated"
+        },
+        {
+          "count": 112,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "qualified"
+        },
+        {
+          "count": 128,
+          "family": "thiol_michael_thioether",
+          "status": "not_repeated"
+        },
+        {
+          "count": 128,
+          "family": "ugi_3cr_agile",
+          "status": "not_repeated"
+        },
+        {
+          "count": 128,
+          "family": "urea_amine_isocyanate",
+          "status": "qualified"
+        }
+      ],
+      "selected": [
+        {
+          "canonical_smiles": "CC=CC=CC=CC(C)CCCCCC(=O)N(C(=O)CCCCCC(C)C=CC=CC=CC)C(C)CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCC(C)N",
+                    "carboxylic_acid_tail": "CC=CC=CC=CC(C)CCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC=CC=CC=CC(C)CCCCCC(=O)NC(C)CCC",
+                    "CC=CC=CC=CC(C)CCCCCC(=O)N(C(=O)CCCCCC(C)C=CC=CC=CC)C(C)CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 10,
+            "donor": 0,
+            "smiles": "CC=CC=CC=CC(C)CCCCCC(=O)N(C(=O)CCCCCC(C)C=CC=CC=CC)C(C)CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 159
+        },
+        {
+          "canonical_smiles": "CCCNCCCN(C(=O)CCCCCC(C)CCC)C(=O)CCCCCC(C)CCC",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCNCCCN",
+                    "carboxylic_acid_tail": "CCCC(C)CCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCNCCCNC(=O)CCCCCC(C)CCC",
+                    "CCCNCCCN(C(=O)CCCCCC(C)CCC)C(=O)CCCCCC(C)CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCCNCCCN(C(=O)CCCCCC(C)CCC)C(=O)CCCCCC(C)CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 193
+        },
+        {
+          "canonical_smiles": "CC(C)C=CCCCCCC=CCCCCCC(C)CCC(=O)NCCCCCNC(=O)CCC(C)CCCCCC=CCCCCCC=CC(C)C",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCN",
+                    "carboxylic_acid_tail": "CC(C)C=CCCCCCC=CCCCCCC(C)CCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC(C)C=CCCCCCC=CCCCCCC(C)CCC(=O)NCCCCCN",
+                    "CC(C)C=CCCCCCC=CCCCCCC(C)CCC(=O)NCCCCCNC(=O)CCC(C)CCCCCC=CCCCCCC=CC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 9,
+            "donor": 0,
+            "smiles": "CC(C)C=CCCCCCC=CCCCCCC(C)CCC(=O)NCCCCCNC(=O)CCC(C)CCCCCC=CCCCCCC=CC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 250
+        },
+        {
+          "canonical_smiles": "CCC=CCCCC(C)CCCOC(=O)N(CC(C)SCCC)C(=O)OCCCC(C)CCCC=CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCSC(C)CN",
+                    "chloroformate_tail": "CCC=CCCCC(C)CCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=CCCCC(C)CCCOC(=O)NCC(C)SCCC",
+                    "CCC=CCCCC(C)CCCOC(=O)N(CC(C)SCCC)C(=O)OCCCC(C)CCCC=CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCC=CCCCC(C)CCCOC(=O)N(CC(C)SCCC)C(=O)OCCCC(C)CCCC=CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 396
+        },
+        {
+          "canonical_smiles": "CC=CCCC=CCCCCCCCCC=C(C)CCCCOC(=O)N(CSCCSSC)C(=O)OCCCCC(C)=CCCCCCCCCC=CCCC=CC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CSSCCSCN",
+                    "chloroformate_tail": "CC=CCCC=CCCCCCCCCC=C(C)CCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC=CCCC=CCCCCCCCCC=C(C)CCCCOC(=O)NCSCCSSC",
+                    "CC=CCCC=CCCCCCCCCC=C(C)CCCCOC(=O)N(CSCCSSC)C(=O)OCCCCC(C)=CCCCCCCCCC=CCCC=CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 0,
+            "smiles": "CC=CCCC=CCCCCCCCCC=C(C)CCCCOC(=O)N(CSCCSSC)C(=O)OCCCCC(C)=CCCCCCCCCC=CCCC=CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 426
+        },
+        {
+          "canonical_smiles": "CCC(C)CCCCCCCCOC(=O)N(CC(C)SSSC)C(=O)OCCCCCCCCC(C)CC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CSSSC(C)CN",
+                    "chloroformate_tail": "CCC(C)CCCCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CCCCCCCCOC(=O)NCC(C)SSSC",
+                    "CCC(C)CCCCCCCCOC(=O)N(CC(C)SSSC)C(=O)OCCCCCCCCC(C)CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 1,
+            "smiles": "CCC(C)CCCCCCCCOC(=O)N(CC(C)SSSC)C(=O)OCCCCCCCCC(C)CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 433
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCCOC(=O)NCSCCCSNC(=O)OCCCCCCCCCCCCCCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCSCCCSN",
+                    "chloroformate_tail": "CCCCCCCCCCCCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCOC(=O)NCSCCCSN",
+                    "CCCCCCCCCCCCCCCCOC(=O)NCSCCCSNC(=O)OCCCCCCCCCCCCCCCC"
+                  ]
+                },
+                {
+                  "components": {
+                    "amine_head": "NCSCCCSN",
+                    "chloroformate_tail": "CCCCCCCCCCCCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCOC(=O)NSCCCSCN",
+                    "CCCCCCCCCCCCCCCCOC(=O)NCSCCCSNC(=O)OCCCCCCCCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 4,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCCCCOC(=O)NCSCCCSNC(=O)OCCCCCCCCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 452
+        },
+        {
+          "canonical_smiles": "CCCC=CCC(C)CC=CCCCCCOC(=O)NCCCSSSNC(=O)OCCCCCC=CCC(C)CC=CCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSSSN",
+                    "chloroformate_tail": "CCCC=CCC(C)CC=CCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC=CCC(C)CC=CCCCCCOC(=O)NCCCSSSN",
+                    "CCCC=CCC(C)CC=CCCCCCOC(=O)NCCCSSSNC(=O)OCCCCCC=CCC(C)CC=CCCC"
+                  ]
+                },
+                {
+                  "components": {
+                    "amine_head": "NCCCSSSN",
+                    "chloroformate_tail": "CCCC=CCC(C)CC=CCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC=CCC(C)CC=CCCCCCOC(=O)NSSSCCCN",
+                    "CCCC=CCC(C)CC=CCCCCCOC(=O)NCCCSSSNC(=O)OCCCCCC=CCC(C)CC=CCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 0,
+            "smiles": "CCCC=CCC(C)CC=CCCCCCOC(=O)NCCCSSSNC(=O)OCCCCCC=CCC(C)CC=CCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 481
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCC(C)CCCCCOC(=O)NCCSCC(S)NC(=O)OCCCCCC(C)CCCCCCCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSCC(N)S",
+                    "chloroformate_tail": "CCCCCCCCCC(C)CCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCC(C)CCCCCOC(=O)NC(S)CSCCN",
+                    "CCCCCCCCCC(C)CCCCCOC(=O)NCCSCC(S)NC(=O)OCCCCCC(C)CCCCCCCCC"
+                  ]
+                },
+                {
+                  "components": {
+                    "amine_head": "NCCSCC(N)S",
+                    "chloroformate_tail": "CCCCCCCCCC(C)CCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCC(C)CCCCCOC(=O)NCCSCC(N)S",
+                    "CCCCCCCCCC(C)CCCCCOC(=O)NCCSCC(S)NC(=O)OCCCCCC(C)CCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 4,
+            "donor": 0,
+            "smiles": "CCCCCCCCCC(C)CCCCCOC(=O)NCCSCC(S)NC(=O)OCCCCCC(C)CCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 498
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCCC(O)CNCCSCSCNCC(O)CCCC(C)CCC",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "epoxide_opening_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "alkyl_epoxide_tail": "CCCC(C)CCCC1CO1",
+                    "amine_head": "NCCSCSCN"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCCC(O)CNCCSCSCN",
+                    "CCCC(C)CCCC(O)CNCCSCSCNCC(O)CCCC(C)CCC"
+                  ]
+                },
+                {
+                  "components": {
+                    "alkyl_epoxide_tail": "CCCC(C)CCCC1CO1",
+                    "amine_head": "NCCSCSCN"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCCC(O)CNCSCSCCN",
+                    "CCCC(C)CCCC(O)CNCCSCSCNCC(O)CCCC(C)CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 1,
+            "smiles": "CCCC(C)CCCC(O)CNCCSCSCNCC(O)CCCC(C)CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 716
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CCSCCCC1CC1",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "reductive_amination_amine_aldehyde",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "aldehyde_tail": "CCCCCCCCCC(C)OCCCCCC=O",
+                    "amine_head": "NCCSCCCC1CC1"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCC(C)OCCCCCCNCCSCCCC1CC1",
+                    "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CCSCCCC1CC1"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCCCCCCCCC(C)OCCCCCCN(CCCCCCOC(C)CCCCCCCCC)CCSCCCC1CC1",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1114
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 9,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1408
+        },
+        {
+          "canonical_smiles": "CCCCC=CCCCCCCCCNC(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)NCC[SH](S)SCS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCC[SH](S)SCS",
+                    "isocyanate_tail": "CCCCC=CCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC=CCCCCCCCCNC(=O)NCC[SH](S)SCS",
+                    "CCCCC=CCCCCCCCCNC(=O)N(CCCCCCCCC=CCCCC)C(=O)NCC[SH](S)SCS",
+                    "CCCCC=CCCCCCCCCNC(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)NCC[SH](S)SCS",
+                    "CCCCC=CCCCCCCCCNC(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)NCC[SH](S)SCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 17,
+            "donor": 0,
+            "smiles": "CCCCC=CCCCCCCCCNC(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)N(CCCCCCCCC=CCCCC)C(=O)NCC[SH](S)SCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1412
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC(O)CSCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCSCC(O)CN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCC(O)CSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCC(O)CSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC(O)CSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC(O)CSCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 7,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC(O)CSCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1414
+        },
+        {
+          "canonical_smiles": "CCC=CCCCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCCCC=CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCC=CCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=CCCCCCCCCNC(=O)NCCCCCCC",
+                    "CCC=CCCCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCCCC=CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 1,
+            "smiles": "CCC=CCCCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCCCC=CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1420
+        },
+        {
+          "canonical_smiles": "CCCCC(C)CNC(=O)N(CC(C)CCCC)C(=O)NCCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CCCCC(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CNC(=O)NCCCCCCO",
+                    "CCCCC(C)CNC(=O)N(CC(C)CCCC)C(=O)NCCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCCC(C)CNC(=O)N(CC(C)CCCC)C(=O)NCCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1424
+        },
+        {
+          "canonical_smiles": "CC(=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)NCCCCCCO)CCC(C)(C)C",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 3,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CC(=CCCCCCCCN=C=O)CCC(C)(C)C"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC(=CCCCCCCCNC(=O)NCCCCCCO)CCC(C)(C)C",
+                    "CC(=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)NCCCCCCO)CCC(C)(C)C",
+                    "CC(=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)NCCCCCCO)CCC(C)(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 20,
+            "donor": 0,
+            "smiles": "CC(=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)N(CCCCCCCC=C(C)CCC(C)(C)C)C(=O)NCCCCCCO)CCC(C)(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1427
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NSCSCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NSCSCCCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NSCSCCCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NSCSCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NSCSCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1429
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)NCCCSCCS",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSCCS",
+                    "isocyanate_tail": "CCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCNC(=O)NCCCSCCS",
+                    "CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)NCCCSCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCC)C(=O)NCCCSCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1432
+        },
+        {
+          "canonical_smiles": "CC=CCCCC(C)C(C)CCNC(=O)N(CCCOSSC)C(=O)NCCC(C)C(C)CCCC=CC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CSSOCCCN",
+                    "isocyanate_tail": "CC=CCCCC(C)C(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC=CCCCC(C)C(C)CCNC(=O)NCCCOSSC",
+                    "CC=CCCCC(C)C(C)CCNC(=O)N(CCCOSSC)C(=O)NCCC(C)C(C)CCCC=CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CC=CCCCC(C)C(C)CCNC(=O)N(CCCOSSC)C(=O)NCCC(C)C(C)CCCC=CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1433
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCSCCCC)C(=O)NCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCSCCN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCSCCCC",
+                    "CCCCCCCNC(=O)N(CCSCCCC)C(=O)NCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 4,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCSCCCC)C(=O)NCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1436
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSSSCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 8,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1437
+        },
+        {
+          "canonical_smiles": "CCCCC(C)CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)NC[SH](S)S[SH](C)S",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](S)S[SH](S)CN",
+                    "isocyanate_tail": "CCCCC(C)CCCC(C)C(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CCCC(C)C(C)CNC(=O)NC[SH](S)S[SH](C)S",
+                    "CCCCC(C)CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)NC[SH](S)S[SH](C)S",
+                    "CCCCC(C)CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)NC[SH](S)S[SH](C)S",
+                    "CCCCC(C)CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)NC[SH](S)S[SH](C)S"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 22,
+            "donor": 0,
+            "smiles": "CCCCC(C)CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)N(CC(C)C(C)CCCC(C)CCCC)C(=O)NC[SH](S)S[SH](C)S",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1442
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)SCO",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](CCN)SCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCC[SH](C)SCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCC[SH](C)SCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)SCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)SCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 9,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)SCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1448
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)NCC[SH](S)C(C)O",
+          "connection_edge_edits": 24,
+          "copy_only_edge_count_difference": 22,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(O)[SH](S)CCN",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCCCC(C)CC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)NCC[SH](S)C(C)O",
+                    "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)NCC[SH](S)C(C)O",
+                    "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)NCC[SH](S)C(C)O",
+                    "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)NCC[SH](S)C(C)O"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 7,
+            "bond_edits": 84,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCCCCC(C)CC(C)CCNC(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)N(CCC(C)CC(C)CCCCCCCCCCCCCCCC)C(=O)NCC[SH](S)C(C)O",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1454
+        },
+        {
+          "canonical_smiles": "CCC(C)CCNC(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)NCCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CCNC(=O)NCCCCCCO",
+                    "CCC(C)CCNC(=O)N(CCC(C)CC)C(=O)NCCCCCCO",
+                    "CCC(C)CCNC(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)NCCCCCCO",
+                    "CCC(C)CCNC(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)NCCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCC(C)CCNC(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)N(CCC(C)CC)C(=O)NCCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1456
+        },
+        {
+          "canonical_smiles": "CCCCCCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)NCCCSCCS",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSCCS",
+                    "isocyanate_tail": "CCCCCCCC(C)C(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCC(C)C(C)CNC(=O)NCCCSCCS",
+                    "CCCCCCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)NCCCSCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 22,
+            "donor": 0,
+            "smiles": "CCCCCCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)N(CC(C)C(C)CCCCCCC)C(=O)NCCCSCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1458
+        },
+        {
+          "canonical_smiles": "CCCCCCC(C)=CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)NC[SH](C)(O)(S)SC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 3,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CS[SH](C)(O)(S)CN",
+                    "isocyanate_tail": "CCCCCCC(C)=CCCCCCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCC(C)=CCCCCCCCC(C)CCNC(=O)NC[SH](C)(O)(S)SC",
+                    "CCCCCCC(C)=CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)NC[SH](C)(O)(S)SC",
+                    "CCCCCCC(C)=CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)NC[SH](C)(O)(S)SC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 27,
+            "donor": 0,
+            "smiles": "CCCCCCC(C)=CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)N(CCC(C)CCCCCCCC=C(C)CCCCCC)C(=O)NC[SH](C)(O)(S)SC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1460
+        },
+        {
+          "canonical_smiles": "CCCCC(C)CCNC(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)NC(CO)SCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCSC(N)CO",
+                    "isocyanate_tail": "CCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CCNC(=O)NC(CO)SCCC",
+                    "CCCCC(C)CCNC(=O)N(CCC(C)CCCC)C(=O)NC(CO)SCCC",
+                    "CCCCC(C)CCNC(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)NC(CO)SCCC",
+                    "CCCCC(C)CCNC(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)NC(CO)SCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 13,
+            "donor": 0,
+            "smiles": "CCCCC(C)CCNC(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)N(CCC(C)CCCC)C(=O)NC(CO)SCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1462
+        },
+        {
+          "canonical_smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCSCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCSCN",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCNC(=O)NCSCCCCC",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)NCSCCCCC",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCSCCCCC",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCSCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCSCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1467
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NSCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NSCCCCCO",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCNC(=O)NSCCCCCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NSCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NSCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1468
+        },
+        {
+          "canonical_smiles": "CCCCCC=CCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(COO)C(O)SS",
+          "connection_edge_edits": 9,
+          "copy_only_edge_count_difference": 7,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "OOCNC(O)SS",
+                    "isocyanate_tail": "CCCCCC=CCCCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC=CCCCCCC(C)CCNC(=O)N(COO)C(O)SS",
+                    "CCCCCC=CCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(COO)C(O)SS",
+                    "CCCCCC=CCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(COO)C(O)SS",
+                    "CCCCCC=CCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(COO)C(O)SS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 34,
+            "donor": 0,
+            "smiles": "CCCCCC=CCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(CCC(C)CCCCCC=CCCCCC)C(=O)N(COO)C(O)SS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1470
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCC(C)CCCCC(C)CCNC(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)NCS(O)(S)[SH](C)S",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](S)S(O)(S)CN",
+                    "isocyanate_tail": "CCCCCCCCCCC(C)CCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCC(C)CCCCC(C)CCNC(=O)NCS(O)(S)[SH](C)S",
+                    "CCCCCCCCCCC(C)CCCCC(C)CCNC(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)NCS(O)(S)[SH](C)S",
+                    "CCCCCCCCCCC(C)CCCCC(C)CCNC(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)NCS(O)(S)[SH](C)S"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 16,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCC(C)CCCCC(C)CCNC(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)N(CCC(C)CCCCC(C)CCCCCCCCCC)C(=O)NCS(O)(S)[SH](C)S",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1474
+        },
+        {
+          "canonical_smiles": "CCCCSCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCSCCN",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCSCCNC(=O)NCCC(C)CCC",
+                    "CCCCSCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 0,
+            "smiles": "CCCCSCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1476
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(S)SCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCC(S)SCO",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCNC(=O)NCCC(S)SCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCCC(S)SCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(S)SCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(S)SCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 11,
+            "donor": 0,
+            "smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(S)SCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1483
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)NCCC(C)CCCCC=CCCC(C)C",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 4,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CC(C)CCC=CCCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCC(C)CCCCC=CCCC(C)C",
+                    "CCCCCCCNC(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)NCCC(C)CCCCC=CCCC(C)C",
+                    "CCCCCCCNC(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)NCCC(C)CCCCC=CCCC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 19,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)N(CCC(C)CCCCC=CCCC(C)C)C(=O)NCCC(C)CCCCC=CCCC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1485
+        },
+        {
+          "canonical_smiles": "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCNC(=O)NCCCCCCC",
+                    "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)NCCCCCCC",
+                    "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 4,
+            "donor": 0,
+            "smiles": "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1488
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NC(C)C[SH](S)SS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(N)C[SH](S)SS",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCNC(=O)NC(C)C[SH](S)SS",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)NC(C)C[SH](S)SS",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NC(C)C[SH](S)SS",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NC(C)C[SH](S)SS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 13,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NC(C)C[SH](S)SS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1491
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)CCO",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](CCN)CCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCC[SH](C)CCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCC[SH](C)CCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)CCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)CCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCC[SH](C)CCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1492
+        },
+        {
+          "canonical_smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSC(C)SO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(SO)SCCN",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCNC(=O)NCCSC(C)SO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)NCCSC(C)SO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSC(C)SO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSC(C)SO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 2,
+            "smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSC(C)SO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1502
+        },
+        {
+          "canonical_smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCC(C)CS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(CS)CCCN",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCNC(=O)NCCCC(C)CS",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)NCCCC(C)CS",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCC(C)CS",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCC(C)CS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 2,
+            "smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCC(C)CS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1506
+        },
+        {
+          "canonical_smiles": "CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCC)C(=O)N(CC(C)C(C)CCC)C(=O)NC(S)CC(C)CC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 3,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCC(C)CC(N)S",
+                    "isocyanate_tail": "CCCC(C)C(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)C(C)CNC(=O)NC(S)CC(C)CC",
+                    "CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCC)C(=O)NC(S)CC(C)CC",
+                    "CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCC)C(=O)N(CC(C)C(C)CCC)C(=O)NC(S)CC(C)CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 13,
+            "donor": 1,
+            "smiles": "CCCC(C)C(C)CNC(=O)N(CC(C)C(C)CCC)C(=O)N(CC(C)C(C)CCC)C(=O)NC(S)CC(C)CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1507
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCC)C(=O)NCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 2,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1518
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCC(C)C",
+                    "CCCCCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1520
+        },
+        {
+          "canonical_smiles": "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NSCSCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NSCSCCCO",
+                    "isocyanate_tail": "CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCNC(=O)NSCSCCCO",
+                    "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)NSCSCCCO",
+                    "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NSCSCCCO",
+                    "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NSCSCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCCCCCCNC(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)N(CCCCCCCC)C(=O)NSCSCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1524
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCN)SSCS",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 4,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCNSSCS",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCNC(=O)N(CCN)SSCS",
+                    "CCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCN)SSCS",
+                    "CCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCN)SSCS",
+                    "CCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCN)SSCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 15,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCC)C(=O)N(CCN)SSCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1533
+        }
+      ],
+      "totals": {
+        "baseline": {
+          "attempts": 1536,
+          "exact_program": 1156,
+          "novel_valid_attempts_vs_all_cache_train": 1435,
+          "unique_novel_exact_products": 1042,
+          "unique_valid_products": 1421,
+          "valid_connected": 1495
+        },
+        "graph_reuse": {
+          "attempts": 1536,
+          "exact_program": 1202,
+          "novel_valid_attempts_vs_all_cache_train": 1435,
+          "unique_novel_exact_products": 1088,
+          "unique_valid_products": 1421,
+          "valid_connected": 1495
+        }
+      },
+      "urea_by_depth": [
+        {
+          "arm": "baseline",
+          "attempts": 50,
+          "depth": 2,
+          "exact_program": 36
+        },
+        {
+          "arm": "baseline",
+          "attempts": 17,
+          "depth": 3,
+          "exact_program": 1
+        },
+        {
+          "arm": "baseline",
+          "attempts": 61,
+          "depth": 4,
+          "exact_program": 8
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 50,
+          "depth": 2,
+          "exact_program": 44
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 17,
+          "depth": 3,
+          "exact_program": 7
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 61,
+          "depth": 4,
+          "exact_program": 29
+        }
+      ]
+    },
+    "replication_2": {
+      "all_original_invalid_and_exact_outputs_preserved": true,
+      "all_selected_atom_count_edge_count_fixed_graph_and_generated_interior_checks_pass": true,
+      "counts": {
+        "accepted": 51,
+        "accepted_with_connection_change": 51,
+        "every_witness_has_novel_component": 51,
+        "novel_product_vs_all_train": 51,
+        "same_donor_copy_only_violates_edge_count": 30
+      },
+      "exact_gain_by_family": {
+        "acetal_aldehyde_diol": 0,
+        "amide_coupling_acid_amine": 5,
+        "aza_michael_amine_acrylate": 0,
+        "carbamate_amine_chloroformate": 5,
+        "disulfide_coupling": 0,
+        "epoxide_opening_amine": 1,
+        "iphos_amine_dioxaphospholane": 0,
+        "passerini_3cr": 0,
+        "reductive_amination_amine_aldehyde": 1,
+        "thiol_michael_thioether": 0,
+        "ugi_3cr_agile": 0,
+        "urea_amine_isocyanate": 39
+      },
+      "preservation_passes_for_every_family": true,
+      "qualification_by_family": [
+        {
+          "count": 128,
+          "family": "acetal_aldehyde_diol",
+          "status": "not_repeated"
+        },
+        {
+          "count": 33,
+          "family": "amide_coupling_acid_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 95,
+          "family": "amide_coupling_acid_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 24,
+          "family": "aza_michael_amine_acrylate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 99,
+          "family": "aza_michael_amine_acrylate",
+          "status": "qualified"
+        },
+        {
+          "count": 5,
+          "family": "aza_michael_amine_acrylate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 5,
+          "family": "carbamate_amine_chloroformate",
+          "status": "not_repeated"
+        },
+        {
+          "count": 120,
+          "family": "carbamate_amine_chloroformate",
+          "status": "qualified"
+        },
+        {
+          "count": 3,
+          "family": "carbamate_amine_chloroformate",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 128,
+          "family": "disulfide_coupling",
+          "status": "not_repeated"
+        },
+        {
+          "count": 43,
+          "family": "epoxide_opening_amine",
+          "status": "not_repeated"
+        },
+        {
+          "count": 85,
+          "family": "epoxide_opening_amine",
+          "status": "qualified"
+        },
+        {
+          "count": 26,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "not_repeated"
+        },
+        {
+          "count": 102,
+          "family": "iphos_amine_dioxaphospholane",
+          "status": "trace_not_qualified"
+        },
+        {
+          "count": 128,
+          "family": "passerini_3cr",
+          "status": "not_repeated"
+        },
+        {
+          "count": 27,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "not_repeated"
+        },
+        {
+          "count": 100,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "qualified"
+        },
+        {
+          "count": 1,
+          "family": "reductive_amination_amine_aldehyde",
+          "status": "witness_correspondence_conflict"
+        },
+        {
+          "count": 128,
+          "family": "thiol_michael_thioether",
+          "status": "not_repeated"
+        },
+        {
+          "count": 128,
+          "family": "ugi_3cr_agile",
+          "status": "not_repeated"
+        },
+        {
+          "count": 128,
+          "family": "urea_amine_isocyanate",
+          "status": "qualified"
+        }
+      ],
+      "selected": [
+        {
+          "canonical_smiles": "C=CCC(C)CCC(=O)N(CCCCC)C(=O)CCC(C)CC=C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCN",
+                    "carboxylic_acid_tail": "C=CCC(C)CCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "C=CCC(C)CCC(=O)NCCCCC",
+                    "C=CCC(C)CCC(=O)N(CCCCC)C(=O)CCC(C)CC=C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "C=CCC(C)CCC(=O)N(CCCCC)C(=O)CCC(C)CC=C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 132
+        },
+        {
+          "canonical_smiles": "CC=CCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCC=CC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCN",
+                    "carboxylic_acid_tail": "CC=CCCCCCCCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC=CCCCCCCCCCCC(=O)NCCCCCC",
+                    "CC=CCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCC=CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 1,
+            "smiles": "CC=CCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCC=CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 133
+        },
+        {
+          "canonical_smiles": "CCCC=CCCC=CCCCC=CCCCCC(=O)N(CCCCC)C(=O)CCCCC=CCCCC=CCCC=CCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCN",
+                    "carboxylic_acid_tail": "CCCC=CCCC=CCCCC=CCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC=CCCC=CCCCC=CCCCCC(=O)NCCCCC",
+                    "CCCC=CCCC=CCCCC=CCCCCC(=O)N(CCCCC)C(=O)CCCCC=CCCCC=CCCC=CCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCC=CCCC=CCCCC=CCCCCC(=O)N(CCCCC)C(=O)CCCCC=CCCCC=CCCC=CCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 167
+        },
+        {
+          "canonical_smiles": "CCCCCCCC=CCCCCC=CCCCCCCC(=O)N(CCNCCC)C(=O)CCCCCCC=CCCCCC=CCCCCCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCNCCN",
+                    "carboxylic_acid_tail": "CCCCCCCC=CCCCCC=CCCCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCC=CCCCCC=CCCCCCCC(=O)NCCNCCC",
+                    "CCCCCCCC=CCCCCC=CCCCCCCC(=O)N(CCNCCC)C(=O)CCCCCCC=CCCCCC=CCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 0,
+            "smiles": "CCCCCCCC=CCCCCC=CCCCCCCC(=O)N(CCNCCC)C(=O)CCCCCCC=CCCCCC=CCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 212
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "amide_coupling_acid_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCN",
+                    "carboxylic_acid_tail": "CCCCCCCCCCCCCC(=O)O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCC(=O)NCCCCCC",
+                    "CCCCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 2,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCC(=O)N(CCCCCC)C(=O)CCCCCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 227
+        },
+        {
+          "canonical_smiles": "C=C(CCCCCC)CC(C)CCCCCOC(=O)N(CSCCCSC)C(=O)OCCCCCC(C)CC(=C)CCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CSCCCSCN",
+                    "chloroformate_tail": "C=C(CCCCCC)CC(C)CCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "C=C(CCCCCC)CC(C)CCCCCOC(=O)NCSCCCSC",
+                    "C=C(CCCCCC)CC(C)CCCCCOC(=O)N(CSCCCSC)C(=O)OCCCCCC(C)CC(=C)CCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 0,
+            "smiles": "C=C(CCCCCC)CC(C)CCCCCOC(=O)N(CSCCCSC)C(=O)OCCCCCC(C)CC(=C)CCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 440
+        },
+        {
+          "canonical_smiles": "CCC=CCCCCCCCCOC(=O)N(CCNSCCC)C(=O)OCCCCCCCCC=CCC",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCSNCCN",
+                    "chloroformate_tail": "CCC=CCCCCCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=CCCCCCCCCOC(=O)NCCNSCCC",
+                    "CCC=CCCCCCCCCOC(=O)N(CCNSCCC)C(=O)OCCCCCCCCC=CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCC=CCCCCCCCCOC(=O)N(CCNSCCC)C(=O)OCCCCCCCCC=CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 482
+        },
+        {
+          "canonical_smiles": "CCCCCCC=CCCCCOC(=O)N(CCCNCCC)C(=O)OCCCCC=CCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCNCCCN",
+                    "chloroformate_tail": "CCCCCCC=CCCCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCC=CCCCCOC(=O)NCCCNCCC",
+                    "CCCCCCC=CCCCCOC(=O)N(CCCNCCC)C(=O)OCCCCC=CCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCC=CCCCCOC(=O)N(CCCNCCC)C(=O)OCCCCC=CCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 499
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCC=CCOC(=O)N(CC(C)CCSO)C(=O)OCC=CCCCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(CN)CCSO",
+                    "chloroformate_tail": "CCCCCCCCCC=CCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCC=CCOC(=O)NCC(C)CCSO",
+                    "CCCCCCCCCC=CCOC(=O)N(CC(C)CCSO)C(=O)OCC=CCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 1,
+            "smiles": "CCCCCCCCCC=CCOC(=O)N(CC(C)CCSO)C(=O)OCC=CCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 504
+        },
+        {
+          "canonical_smiles": "CCCCCCCCC=CCCOC(=O)N(CCCCCCN)C(=O)OCCC=CCCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "carbamate_amine_chloroformate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCN",
+                    "chloroformate_tail": "CCCCCCCCC=CCCOC(=O)Cl"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCC=CCCOC(=O)NCCCCCCN",
+                    "CCCCCCCCC=CCCOC(=O)N(CCCCCCN)C(=O)OCCC=CCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 1,
+            "smiles": "CCCCCCCCC=CCCOC(=O)N(CCCCCCN)C(=O)OCCC=CCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 507
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCCCCCC(O)CN(CSCCCC)CC(O)CCCCCCCCCCCCCCCCCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "epoxide_opening_amine",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "alkyl_epoxide_tail": "CCCCCCCCCCCCCCCCCCCC1CO1",
+                    "amine_head": "CCCCSCN"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCCCCC(O)CNCSCCCC",
+                    "CCCCCCCCCCCCCCCCCCCC(O)CN(CSCCCC)CC(O)CCCCCCCCCCCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 4,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCCCCCCCC(O)CN(CSCCCC)CC(O)CCCCCCCCCCCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 737
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCC=CCC(C)OCCCCCCN(CCCC)CCCCCCOC(C)CC=CCCCCCCCCCCCC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "reductive_amination_amine_aldehyde",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "aldehyde_tail": "CCCCCCCCCCCCC=CCC(C)OCCCCCC=O",
+                    "amine_head": "CCCCN"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCC=CCC(C)OCCCCCCNCCCC",
+                    "CCCCCCCCCCCCC=CCC(C)OCCCCCCN(CCCC)CCCCCCOC(C)CC=CCCCCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCC=CCC(C)OCCCCCCN(CCCC)CCCCCCOC(C)CC=CCCCCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1069
+        },
+        {
+          "canonical_smiles": "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCSSCCS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSSCCS",
+                    "isocyanate_tail": "CC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC(C)CCCCNC(=O)NCCSSCCS",
+                    "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCSSCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCSSCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1413
+        },
+        {
+          "canonical_smiles": "CCCCCC(C)C=CCCC=CCCCCNC(=O)N(CCCCC=CCCC=CC(C)CCCCC)C(=O)NSCSCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCSCSN",
+                    "isocyanate_tail": "CCCCCC(C)C=CCCC=CCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC(C)C=CCCC=CCCCCNC(=O)NSCSCCCC",
+                    "CCCCCC(C)C=CCCC=CCCCCNC(=O)N(CCCCC=CCCC=CC(C)CCCCC)C(=O)NSCSCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 8,
+            "donor": 1,
+            "smiles": "CCCCCC(C)C=CCCC=CCCCCNC(=O)N(CCCCC=CCCC=CC(C)CCCCC)C(=O)NSCSCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1414
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCC(C)NC(=O)N(C(=O)N(C(=O)N(C(=O)NC(C)CS(C)(S)S)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 3,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(N)CS(C)(S)S",
+                    "isocyanate_tail": "CCCCCCCCCCCCC(C)N=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCC(C)NC(=O)NC(C)CS(C)(S)S",
+                    "CCCCCCCCCCCCC(C)NC(=O)N(C(=O)NC(C)CS(C)(S)S)C(C)CCCCCCCCCCCC",
+                    "CCCCCCCCCCCCC(C)NC(=O)N(C(=O)N(C(=O)NC(C)CS(C)(S)S)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC",
+                    "CCCCCCCCCCCCC(C)NC(=O)N(C(=O)N(C(=O)N(C(=O)NC(C)CS(C)(S)S)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 15,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCCCC(C)NC(=O)N(C(=O)N(C(=O)N(C(=O)NC(C)CS(C)(S)S)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC)C(C)CCCCCCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1419
+        },
+        {
+          "canonical_smiles": "CCCCC(C)CCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N[SH](SSS)C(C)O",
+          "connection_edge_edits": 5,
+          "copy_only_edge_count_difference": 3,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(O)[SH](N)SSS",
+                    "isocyanate_tail": "CCCCC(C)CCCC(C)CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CCCC(C)CCCCCCCCNC(=O)N[SH](SSS)C(C)O",
+                    "CCCCC(C)CCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N[SH](SSS)C(C)O",
+                    "CCCCC(C)CCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N[SH](SSS)C(C)O"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 19,
+            "donor": 0,
+            "smiles": "CCCCC(C)CCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N(CCCCCCCCC(C)CCCC(C)CCCC)C(=O)N[SH](SSS)C(C)O",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1425
+        },
+        {
+          "canonical_smiles": "CCCCCC=CC(C)CCCNC(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)NCCCSCCS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSCCS",
+                    "isocyanate_tail": "CCCCCC=CC(C)CCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC=CC(C)CCCNC(=O)NCCCSCCS",
+                    "CCCCCC=CC(C)CCCNC(=O)N(CCCC(C)C=CCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCC=CC(C)CCCNC(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)NCCCSCCS",
+                    "CCCCCC=CC(C)CCCNC(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)NCCCSCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 16,
+            "donor": 0,
+            "smiles": "CCCCCC=CC(C)CCCNC(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)N(CCCC(C)C=CCCCCC)C(=O)NCCCSCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1426
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCC(C)CCC",
+                    "CCCCCCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1427
+        },
+        {
+          "canonical_smiles": "CCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)NCCCSCCS",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSCCS",
+                    "isocyanate_tail": "CCC(C)CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CCCCCCCCNC(=O)NCCCSCCS",
+                    "CCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CC)C(=O)NCCCSCCS",
+                    "CCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)NCCCSCCS",
+                    "CCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)NCCCSCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 14,
+            "donor": 0,
+            "smiles": "CCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)N(CCCCCCCCC(C)CC)C(=O)NCCCSCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1430
+        },
+        {
+          "canonical_smiles": "CCCCCCCCC(C)CCCCNC(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)NCC[SH](S)[SH](C)O",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](O)[SH](S)CCN",
+                    "isocyanate_tail": "CCCCCCCCC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCC(C)CCCCNC(=O)NCC[SH](S)[SH](C)O",
+                    "CCCCCCCCC(C)CCCCNC(=O)N(CCCCC(C)CCCCCCCC)C(=O)NCC[SH](S)[SH](C)O",
+                    "CCCCCCCCC(C)CCCCNC(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)NCC[SH](S)[SH](C)O",
+                    "CCCCCCCCC(C)CCCCNC(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)NCC[SH](S)[SH](C)O"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 15,
+            "donor": 0,
+            "smiles": "CCCCCCCCC(C)CCCCNC(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)N(CCCCC(C)CCCCCCCC)C(=O)NCC[SH](S)[SH](C)O",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1433
+        },
+        {
+          "canonical_smiles": "CCC(C)CCCC(C)CCCC(C)CCCCNC(=O)N(CCCCC(C)CCCC(C)CCCC(C)CC)C(=O)NC(CC)CSCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCC(N)CSCO",
+                    "isocyanate_tail": "CCC(C)CCCC(C)CCCC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CCCC(C)CCCC(C)CCCCNC(=O)NC(CC)CSCO",
+                    "CCC(C)CCCC(C)CCCC(C)CCCCNC(=O)N(CCCCC(C)CCCC(C)CCCC(C)CC)C(=O)NC(CC)CSCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 10,
+            "donor": 1,
+            "smiles": "CCC(C)CCCC(C)CCCC(C)CCCCNC(=O)N(CCCCC(C)CCCC(C)CCCC(C)CC)C(=O)NC(CC)CSCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1436
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CO)C(CS)SO",
+          "connection_edge_edits": 11,
+          "copy_only_edge_count_difference": 11,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "OCNC(CS)SO",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CO)C(CS)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CO)C(CS)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CO)C(CS)SO",
+                    "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CO)C(CS)SO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 29,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCCCCCC)C(=O)N(CO)C(CS)SO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1438
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCO",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(CCN)CCO",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCNC(=O)NCCC(C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 8,
+            "donor": 0,
+            "smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCCC(C)CCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1440
+        },
+        {
+          "canonical_smiles": "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCC)CCCO",
+          "connection_edge_edits": 18,
+          "copy_only_edge_count_difference": 14,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCNCCCO",
+                    "isocyanate_tail": "CCCCC(C)CC(C)CCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCC)CCCO",
+                    "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCC)CCCO",
+                    "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCC)CCCO",
+                    "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCC)CCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 3,
+            "bond_edits": 57,
+            "donor": 0,
+            "smiles": "CCCCC(C)CC(C)CCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCCCCCCCCCCCC(C)CC(C)CCCC)C(=O)N(CCC)CCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1442
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCSCCO",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCSCCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCSCCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCSCCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCSCCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCSCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 11,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCSCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1450
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCCCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1451
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSSSCO",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 9,
+            "donor": 2,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCSSSCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1453
+        },
+        {
+          "canonical_smiles": "CC(CCO)CCNC(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(CCN)CCO",
+                    "isocyanate_tail": "CC(C)C(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC(CCO)CCNC(=O)NCCC(C)C(C)C",
+                    "CC(CCO)CCNC(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+                    "CC(CCO)CCNC(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+                    "CC(CCO)CCNC(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 15,
+            "donor": 0,
+            "smiles": "CC(CCO)CCNC(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1459
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(C(C)O)C(C)CS",
+          "connection_edge_edits": 20,
+          "copy_only_edge_count_difference": 18,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(O)NC(C)CS",
+                    "isocyanate_tail": "CCCCCCCCCCCCCC(C)CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(C(C)O)C(C)CS",
+                    "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(C(C)O)C(C)CS",
+                    "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(C(C)O)C(C)CS",
+                    "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(C(C)O)C(C)CS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 4,
+            "bond_edits": 71,
+            "donor": 0,
+            "smiles": "CCCCCCCCCCCCCC(C)CCCCCCCCNC(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(CCCCCCCCC(C)CCCCCCCCCCCCC)C(=O)N(C(C)O)C(C)CS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1467
+        },
+        {
+          "canonical_smiles": "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCS)SC(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CC(C)SNCCS",
+                    "isocyanate_tail": "CCCCCC(C)=CCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCS)SC(C)C",
+                    "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCS)SC(C)C",
+                    "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCS)SC(C)C",
+                    "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCS)SC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 31,
+            "donor": 0,
+            "smiles": "CCCCCC(C)=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCC(C)CCCC=C(C)CCCCC)C(=O)N(CCS)SC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1468
+        },
+        {
+          "canonical_smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSCCSO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 3,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSCCSO",
+                    "isocyanate_tail": "CCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCNC(=O)NCCSCCSO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)NCCSCCSO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSCCSO",
+                    "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSCCSO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 9,
+            "donor": 3,
+            "smiles": "CCCCCCNC(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)N(CCCCCC)C(=O)NCCSCCSO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1471
+        },
+        {
+          "canonical_smiles": "CC=CCCCCCCCCCC(C)=CC=C(C)CCCCNC(=O)N(CCCCSCO)C(=O)NCCCCC(C)=CC=C(C)CCCCCCCCCC=CC",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCSCO",
+                    "isocyanate_tail": "CC=CCCCCCCCCCC(C)=CC=C(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC=CCCCCCCCCCC(C)=CC=C(C)CCCCNC(=O)NCCCCSCO",
+                    "CC=CCCCCCCCCCC(C)=CC=C(C)CCCCNC(=O)N(CCCCSCO)C(=O)NCCCCC(C)=CC=C(C)CCCCCCCCCC=CC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 12,
+            "donor": 0,
+            "smiles": "CC=CCCCCCCCCCC(C)=CC=C(C)CCCCNC(=O)N(CCCCSCO)C(=O)NCCCCC(C)=CC=C(C)CCCCCCCCCC=CC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1472
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCSCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCSCCCCN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCSCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCSCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCCCSCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1481
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NCC[SH](O)[SH](C)S",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 3,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](S)[SH](O)CCN",
+                    "isocyanate_tail": "CCCCCCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCCCCCNC(=O)NCC[SH](O)[SH](C)S",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)NCC[SH](O)[SH](C)S",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NCC[SH](O)[SH](C)S",
+                    "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NCC[SH](O)[SH](C)S"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 13,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCCCCCNC(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)N(CCCCCCCCCCCCCC)C(=O)NCC[SH](O)[SH](C)S",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1484
+        },
+        {
+          "canonical_smiles": "CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)NCCCCCCS",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCS",
+                    "isocyanate_tail": "CCCCCCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCC(C)CCNC(=O)NCCCCCCS",
+                    "CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC)C(=O)NCCCCCCS",
+                    "CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)NCCCCCCS",
+                    "CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)NCCCCCCS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 10,
+            "donor": 0,
+            "smiles": "CCCCCCCCC(C)CCNC(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)N(CCC(C)CCCCCCCC)C(=O)NCCCCCCS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1487
+        },
+        {
+          "canonical_smiles": "CCCCC(C)(C)CNC(=O)N(CC(C)(C)CCCC)C(=O)N(CC(C)(C)CCCC)C(=O)NCCCCSSC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 3,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CSSCCCCN",
+                    "isocyanate_tail": "CCCCC(C)(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC(C)(C)CNC(=O)NCCCCSSC",
+                    "CCCCC(C)(C)CNC(=O)N(CC(C)(C)CCCC)C(=O)NCCCCSSC",
+                    "CCCCC(C)(C)CNC(=O)N(CC(C)(C)CCCC)C(=O)N(CC(C)(C)CCCC)C(=O)NCCCCSSC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 14,
+            "donor": 0,
+            "smiles": "CCCCC(C)(C)CNC(=O)N(CC(C)(C)CCCC)C(=O)N(CC(C)(C)CCCC)C(=O)NCCCCSSC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1489
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCCCCCC",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 5,
+            "donor": 0,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1492
+        },
+        {
+          "canonical_smiles": "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CC(C)CCCCNC(=O)NCCCCCCO",
+                    "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 0,
+            "smiles": "CC(C)CCCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1493
+        },
+        {
+          "canonical_smiles": "CCCCSCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCSCCN",
+                    "isocyanate_tail": "CC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCSCCNC(=O)NCCCCC(C)C",
+                    "CCCCSCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCCSCCNC(=O)N(CCCCC(C)C)C(=O)NCCCCC(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1494
+        },
+        {
+          "canonical_smiles": "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(C)C(C)C[SH](C)S",
+          "connection_edge_edits": 12,
+          "copy_only_edge_count_difference": 12,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CNC(C)C[SH](C)S",
+                    "isocyanate_tail": "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(C)C(C)C[SH](C)S",
+                    "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(C)C(C)C[SH](C)S",
+                    "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(C)C(C)C[SH](C)S",
+                    "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(C)C(C)C[SH](C)S"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 62,
+            "donor": 0,
+            "smiles": "CCCCCC(C)CC(C)CCC(C)=CCCCCCCCNC(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(CCCCCCCC=C(C)CCC(C)CC(C)CCCCC)C(=O)N(C)C(C)C[SH](C)S",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1500
+        },
+        {
+          "canonical_smiles": "CCCCCCCCCCNC(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)NCCCCCCC",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCCN",
+                    "isocyanate_tail": "CCCCCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCCCCNC(=O)NCCCCCCC",
+                    "CCCCCCCCCCNC(=O)N(CCCCCCCCCC)C(=O)NCCCCCCC",
+                    "CCCCCCCCCCNC(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)NCCCCCCC",
+                    "CCCCCCCCCCNC(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)NCCCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 9,
+            "donor": 1,
+            "smiles": "CCCCCCCCCCNC(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)N(CCCCCCCCCC)C(=O)NCCCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1502
+        },
+        {
+          "canonical_smiles": "CCCC(C)=CCNC(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)NCCSSCCO",
+          "connection_edge_edits": 4,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCSSCCO",
+                    "isocyanate_tail": "CCCC(C)=CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)=CCNC(=O)NCCSSCCO",
+                    "CCCC(C)=CCNC(=O)N(CC=C(C)CCC)C(=O)NCCSSCCO",
+                    "CCCC(C)=CCNC(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)NCCSSCCO",
+                    "CCCC(C)=CCNC(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)NCCSSCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 14,
+            "donor": 0,
+            "smiles": "CCCC(C)=CCNC(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)N(CC=C(C)CCC)C(=O)NCCSSCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1503
+        },
+        {
+          "canonical_smiles": "CCCCC=C=C=CCCC(C)CCNC(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)NCCCC(S)CS",
+          "connection_edge_edits": 5,
+          "copy_only_edge_count_difference": 5,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCC(S)CS",
+                    "isocyanate_tail": "CCCCC=C=C=CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCC=C=C=CCCC(C)CCNC(=O)NCCCC(S)CS",
+                    "CCCCC=C=C=CCCC(C)CCNC(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)NCCCC(S)CS",
+                    "CCCCC=C=C=CCCC(C)CCNC(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)NCCCC(S)CS",
+                    "CCCCC=C=C=CCCC(C)CCNC(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)NCCCC(S)CS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 29,
+            "donor": 0,
+            "smiles": "CCCCC=C=C=CCCC(C)CCNC(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)N(CCC(C)CCC=C=C=CCCCC)C(=O)NCCCC(S)CS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1504
+        },
+        {
+          "canonical_smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCC(CC)CO",
+          "connection_edge_edits": 6,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 1,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCC(CO)CCN",
+                    "isocyanate_tail": "CCCCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCCNC(=O)NCCC(CC)CO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)NCCC(CC)CO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCC(CC)CO",
+                    "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCC(CC)CO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 13,
+            "donor": 1,
+            "smiles": "CCCCCCCNC(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)N(CCCCCCC)C(=O)NCCC(CC)CO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1506
+        },
+        {
+          "canonical_smiles": "CCC=C=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)NCCCCCSS",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 2,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCSS",
+                    "isocyanate_tail": "CCC=C=CCCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC=C=CCCCC(C)CCNC(=O)NCCCCCSS",
+                    "CCC=C=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C=CCC)C(=O)NCCCCCSS",
+                    "CCC=C=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)NCCCCCSS",
+                    "CCC=C=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)NCCCCCSS"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 20,
+            "donor": 0,
+            "smiles": "CCC=C=CCCCC(C)CCNC(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)N(CCC(C)CCCC=C=CCC)C(=O)NCCCCCSS",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1509
+        },
+        {
+          "canonical_smiles": "CCCCCC=CCC(C)CCCCNC(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)NC[SH](O)S[SH](C)O",
+          "connection_edge_edits": 1,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](O)S[SH](O)CN",
+                    "isocyanate_tail": "CCCCCC=CCC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCC=CCC(C)CCCCNC(=O)NC[SH](O)S[SH](C)O",
+                    "CCCCCC=CCC(C)CCCCNC(=O)N(CCCCC(C)CC=CCCCCC)C(=O)NC[SH](O)S[SH](C)O",
+                    "CCCCCC=CCC(C)CCCCNC(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)NC[SH](O)S[SH](C)O",
+                    "CCCCCC=CCC(C)CCCCNC(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)NC[SH](O)S[SH](C)O"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 20,
+            "donor": 0,
+            "smiles": "CCCCCC=CCC(C)CCCCNC(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)N(CCCCC(C)CC=CCCCCC)C(=O)NC[SH](O)S[SH](C)O",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1510
+        },
+        {
+          "canonical_smiles": "CCCC=CCCCCNC(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(C)CCCCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 2,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 4,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCCCNC",
+                    "isocyanate_tail": "CCCC=CCCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC=CCCCCNC(=O)N(C)CCCCCC",
+                    "CCCC=CCCCCNC(=O)N(CCCCC=CCCC)C(=O)N(C)CCCCCC",
+                    "CCCC=CCCCCNC(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(C)CCCCCC",
+                    "CCCC=CCCCCNC(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(C)CCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 16,
+            "donor": 2,
+            "smiles": "CCCC=CCCCCNC(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(CCCCC=CCCC)C(=O)N(C)CCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1514
+        },
+        {
+          "canonical_smiles": "CCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CC)C(=O)NCCCCCCO",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCO",
+                    "isocyanate_tail": "CCC(C)CC(C)CN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCC(C)CC(C)CNC(=O)NCCCCCCO",
+                    "CCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CC)C(=O)NCCCCCCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 3,
+            "donor": 0,
+            "smiles": "CCC(C)CC(C)CNC(=O)N(CC(C)CC(C)CC)C(=O)NCCCCCCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1521
+        },
+        {
+          "canonical_smiles": "CCCCCCC(C)CCCCNC(=O)N(CCCCCCS)C(=O)NCCCCC(C)CCCCCC",
+          "connection_edge_edits": 3,
+          "copy_only_edge_count_difference": 1,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 2,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "NCCCCCCS",
+                    "isocyanate_tail": "CCCCCCC(C)CCCCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCCCC(C)CCCCNC(=O)NCCCCCCS",
+                    "CCCCCCC(C)CCCCNC(=O)N(CCCCCCS)C(=O)NCCCCC(C)CCCCCC"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 1,
+            "bond_edits": 6,
+            "donor": 0,
+            "smiles": "CCCCCCC(C)CCCCNC(=O)N(CCCCCCS)C(=O)NCCCCC(C)CCCCCC",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1525
+        },
+        {
+          "canonical_smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCC[SH](C)CCO",
+          "connection_edge_edits": 5,
+          "copy_only_edge_count_difference": 1,
+          "depth": 4,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 5,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "C[SH](CCN)CCO",
+                    "isocyanate_tail": "CCCC(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCC(C)CCNC(=O)NCC[SH](C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)NCC[SH](C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCC[SH](C)CCO",
+                    "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCC[SH](C)CCO"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 2,
+            "bond_edits": 13,
+            "donor": 0,
+            "smiles": "CCCC(C)CCNC(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)N(CCC(C)CCC)C(=O)NCC[SH](C)CCO",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1528
+        },
+        {
+          "canonical_smiles": "CCCCSCSNC(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+          "connection_edge_edits": 2,
+          "copy_only_edge_count_difference": 0,
+          "depth": 2,
+          "donor": 0,
+          "family": "urea_amine_isocyanate",
+          "proposal": {
+            "assembly": {
+              "expansions": 3,
+              "programs": [
+                {
+                  "components": {
+                    "amine_head": "CCCCSCSN",
+                    "isocyanate_tail": "CC(C)C(C)CCN=C=O"
+                  },
+                  "exact_forward_replay": true,
+                  "intermediate_products": [
+                    "CCCCSCSNC(=O)NCCC(C)C(C)C",
+                    "CCCCSCSNC(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C"
+                  ]
+                }
+              ],
+              "reason": null,
+              "status": "exact_computed_program"
+            },
+            "atom_edits": 0,
+            "bond_edits": 7,
+            "donor": 0,
+            "smiles": "CCCCSCSNC(=O)N(CCC(C)C(C)C)C(=O)NCCC(C)C(C)C",
+            "status": "exact_computed_program"
+          },
+          "sample_index": 1530
+        }
+      ],
+      "totals": {
+        "baseline": {
+          "attempts": 1536,
+          "exact_program": 1146,
+          "novel_valid_attempts_vs_all_cache_train": 1437,
+          "unique_novel_exact_products": 1033,
+          "unique_valid_products": 1420,
+          "valid_connected": 1500
+        },
+        "graph_reuse": {
+          "attempts": 1536,
+          "exact_program": 1197,
+          "novel_valid_attempts_vs_all_cache_train": 1437,
+          "unique_novel_exact_products": 1084,
+          "unique_valid_products": 1421,
+          "valid_connected": 1500
+        }
+      },
+      "urea_by_depth": [
+        {
+          "arm": "baseline",
+          "attempts": 50,
+          "depth": 2,
+          "exact_program": 30
+        },
+        {
+          "arm": "baseline",
+          "attempts": 17,
+          "depth": 3,
+          "exact_program": 5
+        },
+        {
+          "arm": "baseline",
+          "attempts": 61,
+          "depth": 4,
+          "exact_program": 3
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 50,
+          "depth": 2,
+          "exact_program": 42
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 17,
+          "depth": 3,
+          "exact_program": 7
+        },
+        {
+          "arm": "graph_reuse",
+          "attempts": 61,
+          "depth": 4,
+          "exact_program": 28
+        }
+      ]
+    }
+  },
+  "schema_version": "forge.combinatorial_connection_reuse_evidence.v1",
+  "status": "verified_selected_invariants"
+}

@@ -1,0 +1,1017 @@
+{
+  "all_populations_pass": true,
+  "created_at_utc": "2026-09-14T15:12:09.260005+00:00",
+  "inputs": [
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_validation_v1/report_evidence.py",
+      "sha256": "fd374a3727b9abd9c9b0a853dd7c9fe99e49a5c3a8058b217c37e3895b064592"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_occurrence_reuse_protocol_v1.json",
+      "sha256": "39c3d0dbc6035b06c6df6330ee43de34a8f814f9dd8934b2c584a262fc0801f3"
+    },
+    {
+      "path": "forge/assembly/library_occurrences.py",
+      "sha256": "0f8579dd03a29b9528b21132ad69d8e00e21a48c80a5f93dfb1d44324973ed4f"
+    },
+    {
+      "path": "forge/model/precursor_occurrence_reuse.py",
+      "sha256": "4e7749e09d05c49e8a0709a7582ab2564921e21540ac2ba157eae186c9f7fbc2"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_occurrence_reuse.py",
+      "sha256": "e15448f73c81a79f23ad1416af9854946a0516fa51eef8192b720e95e9d6fe57"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_occurrence_reuse_discovery_v1.json",
+      "sha256": "47dc87f1ba694c7d45fc9e05ae15b4dd487d30aaaa8cac7122ded4b0bb20cf4a"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json",
+      "sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_occurrence_reuse_replication_1_v1.json",
+      "sha256": "82a22c9bf8ddea9c3ce7fed0de42a188cf74a34d3453070926cc60d12dbe38b3"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_1_v1/result.json",
+      "sha256": "6d1d7eb112c4d3201b67f9505db6015224b148b3cb289fcd2ad0325687d5b7bc"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_occurrence_reuse_replication_2_v1.json",
+      "sha256": "dc471dacae027a6e2f325523101ff4c2d5f5c3f560abb003e1fc70006586db33"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replication_2_v1/result.json",
+      "sha256": "9a52eea7c1b08fa3f8d5dd574e632c10f5b48dba75bf59440cf92e98a33c591c"
+    },
+    {
+      "path": "results/phase1/combinatorial_occurrence_reuse_replay_v1/result.json",
+      "sha256": "3adfd7a82180e137de855a1f8398933e4e68e6d2f8863470bc526fb3c9b862e3"
+    }
+  ],
+  "limits": [
+    "These are previously saved TRAIN layout/noise populations. They are not new heldout evidence or independent model training.",
+    "The new relation is exact source-derived occurrence context. New-layout construction remains unproven.",
+    "All original denominators and unsuccessful outputs remain; count preservation still uses explicit TRAIN identity and current-family multiplicities.",
+    "Summed within-family distinct counts do not deduplicate across families. No chemical realism or L2/L3 closure is established."
+  ],
+  "populations": {
+    "discovery": {
+      "acceptance_passed": true,
+      "additional_assembly_checks": 38,
+      "additional_exact_gain": 8,
+      "deeper_urea_exact_gain": 1,
+      "graph_copy_proposals": 133,
+      "per_family_deltas": {
+        "acetal_aldehyde_diol": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "amide_coupling_acid_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "aza_michael_amine_acrylate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "carbamate_amine_chloroformate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "disulfide_coupling": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "epoxide_opening_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "iphos_amine_dioxaphospholane": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "passerini_3cr": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "reductive_amination_amine_aldehyde": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "thiol_michael_thioether": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "ugi_3cr_agile": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "urea_amine_isocyanate": {
+          "effective_product_count": 0.0,
+          "exact_program": 8,
+          "exact_with_novel_component_in_every_witness": 8,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 8,
+          "unique_novel_exact_products": 8,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        }
+      },
+      "proposal_dispositions": {
+        "changed_cycle_count": 87,
+        "exact_computed_program": 15,
+        "invalid_or_disconnected": 8,
+        "no_exact_program": 23
+      },
+      "qualification": {
+        "previous_ambiguous_atom_correspondence": 7,
+        "previous_not_repeated": 403,
+        "previous_qualified": 312,
+        "qualified": 46
+      },
+      "totals": {
+        "frozen_model": {
+          "attempts": 768,
+          "exact_program": 378,
+          "novel_valid_attempts_vs_all_cache_train": 719,
+          "unique_novel_exact_products": 327,
+          "unique_valid_products": 721,
+          "valid_connected": 750
+        },
+        "occurrence_completion": {
+          "attempts": 768,
+          "exact_program": 584,
+          "novel_valid_attempts_vs_all_cache_train": 719,
+          "unique_novel_exact_products": 533,
+          "unique_valid_products": 722,
+          "valid_connected": 750
+        },
+        "previous_completion": {
+          "attempts": 768,
+          "exact_program": 576,
+          "novel_valid_attempts_vs_all_cache_train": 719,
+          "unique_novel_exact_products": 525,
+          "unique_valid_products": 722,
+          "valid_connected": 750
+        }
+      },
+      "urea_depths": [
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 32,
+          "depth": 2,
+          "effective_product_count": 31.0,
+          "exact_program": 18,
+          "exact_program_fraction_all_attempts": 0.5625,
+          "exact_program_fraction_valid": 0.5806451612903226,
+          "exact_with_novel_component_in_every_witness": 18,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 13
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 18,
+          "novel_valid_attempts_vs_all_cache_train": 31,
+          "unique_exact_products": 18,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 18,
+          "unique_valid_products": 31,
+          "valid_connected": 31,
+          "valid_fraction": 0.96875
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 3,
+          "depth": 3,
+          "effective_product_count": 3.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "no_exact_program": 3
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 3,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 3,
+          "valid_connected": 3,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 29,
+          "depth": 4,
+          "effective_product_count": 26.0,
+          "exact_program": 1,
+          "exact_program_fraction_all_attempts": 0.034482758620689655,
+          "exact_program_fraction_valid": 0.038461538461538464,
+          "exact_with_novel_component_in_every_witness": 1,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 3,
+            "no_exact_program": 25
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 1,
+          "novel_valid_attempts_vs_all_cache_train": 26,
+          "unique_exact_products": 1,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 1,
+          "unique_valid_products": 26,
+          "valid_connected": 26,
+          "valid_fraction": 0.896551724137931
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 32,
+          "depth": 2,
+          "effective_product_count": 31.0,
+          "exact_program": 25,
+          "exact_program_fraction_all_attempts": 0.78125,
+          "exact_program_fraction_valid": 0.8064516129032258,
+          "exact_with_novel_component_in_every_witness": 25,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 6
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 25,
+          "novel_valid_attempts_vs_all_cache_train": 31,
+          "unique_exact_products": 25,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 25,
+          "unique_valid_products": 31,
+          "valid_connected": 31,
+          "valid_fraction": 0.96875
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 3,
+          "depth": 3,
+          "effective_product_count": 3.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "no_exact_program": 3
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 3,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 3,
+          "valid_connected": 3,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 29,
+          "depth": 4,
+          "effective_product_count": 26.0,
+          "exact_program": 2,
+          "exact_program_fraction_all_attempts": 0.06896551724137931,
+          "exact_program_fraction_valid": 0.07692307692307693,
+          "exact_with_novel_component_in_every_witness": 2,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 3,
+            "no_exact_program": 24
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 2,
+          "novel_valid_attempts_vs_all_cache_train": 26,
+          "unique_exact_products": 2,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 2,
+          "unique_valid_products": 26,
+          "valid_connected": 26,
+          "valid_fraction": 0.896551724137931
+        }
+      ],
+      "verification": {
+        "attempts_recomputed": 1536,
+        "result_sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459",
+        "status": "verified"
+      }
+    },
+    "replication_1": {
+      "acceptance_passed": true,
+      "additional_assembly_checks": 93,
+      "additional_exact_gain": 19,
+      "deeper_urea_exact_gain": 9,
+      "graph_copy_proposals": 288,
+      "per_family_deltas": {
+        "acetal_aldehyde_diol": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "amide_coupling_acid_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "aza_michael_amine_acrylate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "carbamate_amine_chloroformate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "disulfide_coupling": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "epoxide_opening_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "iphos_amine_dioxaphospholane": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "passerini_3cr": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "reductive_amination_amine_aldehyde": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "thiol_michael_thioether": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "ugi_3cr_agile": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "urea_amine_isocyanate": {
+          "effective_product_count": 0.0,
+          "exact_program": 19,
+          "exact_with_novel_component_in_every_witness": 19,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 19,
+          "unique_novel_exact_products": 19,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        }
+      },
+      "proposal_dispositions": {
+        "changed_cycle_count": 145,
+        "exact_computed_program": 51,
+        "invalid_or_disconnected": 50,
+        "no_exact_program": 42
+      },
+      "qualification": {
+        "previous_ambiguous_atom_correspondence": 10,
+        "previous_not_repeated": 781,
+        "previous_qualified": 644,
+        "qualified": 101
+      },
+      "totals": {
+        "frozen_model": {
+          "attempts": 1536,
+          "exact_program": 771,
+          "novel_valid_attempts_vs_all_cache_train": 1435,
+          "unique_novel_exact_products": 657,
+          "unique_valid_products": 1418,
+          "valid_connected": 1495
+        },
+        "occurrence_completion": {
+          "attempts": 1536,
+          "exact_program": 1156,
+          "novel_valid_attempts_vs_all_cache_train": 1435,
+          "unique_novel_exact_products": 1042,
+          "unique_valid_products": 1421,
+          "valid_connected": 1495
+        },
+        "previous_completion": {
+          "attempts": 1536,
+          "exact_program": 1137,
+          "novel_valid_attempts_vs_all_cache_train": 1435,
+          "unique_novel_exact_products": 1023,
+          "unique_valid_products": 1421,
+          "valid_connected": 1495
+        }
+      },
+      "urea_depths": [
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 50,
+          "depth": 2,
+          "effective_product_count": 47.07843137254902,
+          "exact_program": 26,
+          "exact_program_fraction_all_attempts": 0.52,
+          "exact_program_fraction_valid": 0.5306122448979592,
+          "exact_with_novel_component_in_every_witness": 26,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 23
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 26,
+          "novel_valid_attempts_vs_all_cache_train": 49,
+          "unique_exact_products": 25,
+          "unique_fraction_valid": 0.9795918367346939,
+          "unique_novel_exact_products": 25,
+          "unique_valid_products": 48,
+          "valid_connected": 49,
+          "valid_fraction": 0.98
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 17,
+          "depth": 3,
+          "effective_product_count": 16.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 16
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 16,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 16,
+          "valid_connected": 16,
+          "valid_fraction": 0.9411764705882353
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 61,
+          "depth": 4,
+          "effective_product_count": 51.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 10,
+            "no_exact_program": 51
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 51,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 51,
+          "valid_connected": 51,
+          "valid_fraction": 0.8360655737704918
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 50,
+          "depth": 2,
+          "effective_product_count": 47.07843137254902,
+          "exact_program": 36,
+          "exact_program_fraction_all_attempts": 0.72,
+          "exact_program_fraction_valid": 0.7346938775510204,
+          "exact_with_novel_component_in_every_witness": 36,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 13
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 36,
+          "novel_valid_attempts_vs_all_cache_train": 49,
+          "unique_exact_products": 35,
+          "unique_fraction_valid": 0.9795918367346939,
+          "unique_novel_exact_products": 35,
+          "unique_valid_products": 48,
+          "valid_connected": 49,
+          "valid_fraction": 0.98
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 17,
+          "depth": 3,
+          "effective_product_count": 16.0,
+          "exact_program": 1,
+          "exact_program_fraction_all_attempts": 0.058823529411764705,
+          "exact_program_fraction_valid": 0.0625,
+          "exact_with_novel_component_in_every_witness": 1,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 1,
+            "no_exact_program": 15
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 1,
+          "novel_valid_attempts_vs_all_cache_train": 16,
+          "unique_exact_products": 1,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 1,
+          "unique_valid_products": 16,
+          "valid_connected": 16,
+          "valid_fraction": 0.9411764705882353
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 61,
+          "depth": 4,
+          "effective_product_count": 51.0,
+          "exact_program": 8,
+          "exact_program_fraction_all_attempts": 0.13114754098360656,
+          "exact_program_fraction_valid": 0.1568627450980392,
+          "exact_with_novel_component_in_every_witness": 8,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 10,
+            "no_exact_program": 43
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 8,
+          "novel_valid_attempts_vs_all_cache_train": 51,
+          "unique_exact_products": 8,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 8,
+          "unique_valid_products": 51,
+          "valid_connected": 51,
+          "valid_fraction": 0.8360655737704918
+        }
+      ],
+      "verification": {
+        "attempts_recomputed": 3072,
+        "result_sha256": "6d1d7eb112c4d3201b67f9505db6015224b148b3cb289fcd2ad0325687d5b7bc",
+        "status": "verified"
+      }
+    },
+    "replication_2": {
+      "acceptance_passed": true,
+      "additional_assembly_checks": 83,
+      "additional_exact_gain": 18,
+      "deeper_urea_exact_gain": 8,
+      "graph_copy_proposals": 309,
+      "per_family_deltas": {
+        "acetal_aldehyde_diol": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "amide_coupling_acid_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "aza_michael_amine_acrylate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "carbamate_amine_chloroformate": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "disulfide_coupling": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "epoxide_opening_amine": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "iphos_amine_dioxaphospholane": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "passerini_3cr": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "reductive_amination_amine_aldehyde": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "thiol_michael_thioether": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "ugi_3cr_agile": {
+          "effective_product_count": 0.0,
+          "exact_program": 0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        },
+        "urea_amine_isocyanate": {
+          "effective_product_count": 0.0,
+          "exact_program": 18,
+          "exact_with_novel_component_in_every_witness": 18,
+          "novel_valid_attempts_vs_all_cache_train": 0,
+          "unique_exact_products": 18,
+          "unique_novel_exact_products": 18,
+          "unique_valid_products": 0,
+          "valid_connected": 0
+        }
+      },
+      "proposal_dispositions": {
+        "changed_cycle_count": 193,
+        "exact_computed_program": 44,
+        "invalid_or_disconnected": 33,
+        "no_exact_program": 39
+      },
+      "qualification": {
+        "previous_ambiguous_atom_correspondence": 8,
+        "previous_not_repeated": 798,
+        "previous_qualified": 625,
+        "qualified": 105
+      },
+      "totals": {
+        "frozen_model": {
+          "attempts": 1536,
+          "exact_program": 769,
+          "novel_valid_attempts_vs_all_cache_train": 1437,
+          "unique_novel_exact_products": 661,
+          "unique_valid_products": 1414,
+          "valid_connected": 1500
+        },
+        "occurrence_completion": {
+          "attempts": 1536,
+          "exact_program": 1146,
+          "novel_valid_attempts_vs_all_cache_train": 1437,
+          "unique_novel_exact_products": 1033,
+          "unique_valid_products": 1420,
+          "valid_connected": 1500
+        },
+        "previous_completion": {
+          "attempts": 1536,
+          "exact_program": 1128,
+          "novel_valid_attempts_vs_all_cache_train": 1437,
+          "unique_novel_exact_products": 1015,
+          "unique_valid_products": 1420,
+          "valid_connected": 1500
+        }
+      },
+      "urea_depths": [
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 50,
+          "depth": 2,
+          "effective_product_count": 48.07692307692308,
+          "exact_program": 20,
+          "exact_program_fraction_all_attempts": 0.4,
+          "exact_program_fraction_valid": 0.4,
+          "exact_with_novel_component_in_every_witness": 20,
+          "failure_counts": {
+            "no_exact_program": 30
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 20,
+          "novel_valid_attempts_vs_all_cache_train": 50,
+          "unique_exact_products": 20,
+          "unique_fraction_valid": 0.98,
+          "unique_novel_exact_products": 20,
+          "unique_valid_products": 49,
+          "valid_connected": 50,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 17,
+          "depth": 3,
+          "effective_product_count": 17.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "no_exact_program": 17
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 17,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 17,
+          "valid_connected": 17,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "baseline",
+          "assembly_search_abstentions": 0,
+          "attempts": 61,
+          "depth": 4,
+          "effective_product_count": 52.0,
+          "exact_program": 0,
+          "exact_program_fraction_all_attempts": 0.0,
+          "exact_program_fraction_valid": 0.0,
+          "exact_with_novel_component_in_every_witness": 0,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 9,
+            "no_exact_program": 52
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 0,
+          "novel_valid_attempts_vs_all_cache_train": 52,
+          "unique_exact_products": 0,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 0,
+          "unique_valid_products": 52,
+          "valid_connected": 52,
+          "valid_fraction": 0.8524590163934426
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 50,
+          "depth": 2,
+          "effective_product_count": 48.07692307692308,
+          "exact_program": 30,
+          "exact_program_fraction_all_attempts": 0.6,
+          "exact_program_fraction_valid": 0.6,
+          "exact_with_novel_component_in_every_witness": 30,
+          "failure_counts": {
+            "no_exact_program": 20
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 30,
+          "novel_valid_attempts_vs_all_cache_train": 50,
+          "unique_exact_products": 30,
+          "unique_fraction_valid": 0.98,
+          "unique_novel_exact_products": 30,
+          "unique_valid_products": 49,
+          "valid_connected": 50,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 17,
+          "depth": 3,
+          "effective_product_count": 17.0,
+          "exact_program": 5,
+          "exact_program_fraction_all_attempts": 0.29411764705882354,
+          "exact_program_fraction_valid": 0.29411764705882354,
+          "exact_with_novel_component_in_every_witness": 5,
+          "failure_counts": {
+            "no_exact_program": 12
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 5,
+          "novel_valid_attempts_vs_all_cache_train": 17,
+          "unique_exact_products": 5,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 5,
+          "unique_valid_products": 17,
+          "valid_connected": 17,
+          "valid_fraction": 1.0
+        },
+        {
+          "arm": "graph_reuse",
+          "assembly_search_abstentions": 0,
+          "attempts": 61,
+          "depth": 4,
+          "effective_product_count": 52.0,
+          "exact_program": 3,
+          "exact_program_fraction_all_attempts": 0.04918032786885246,
+          "exact_program_fraction_valid": 0.057692307692307696,
+          "exact_with_novel_component_in_every_witness": 3,
+          "failure_counts": {
+            "invalid_or_disconnected_graph": 9,
+            "no_exact_program": 49
+          },
+          "family": "urea_amine_isocyanate",
+          "novel_exact_attempts_vs_all_cache_train": 3,
+          "novel_valid_attempts_vs_all_cache_train": 52,
+          "unique_exact_products": 3,
+          "unique_fraction_valid": 1.0,
+          "unique_novel_exact_products": 3,
+          "unique_valid_products": 52,
+          "valid_connected": 52,
+          "valid_fraction": 0.8524590163934426
+        }
+      ],
+      "verification": {
+        "attempts_recomputed": 3072,
+        "result_sha256": "9a52eea7c1b08fa3f8d5dd574e632c10f5b48dba75bf59440cf92e98a33c591c",
+        "status": "verified"
+      }
+    }
+  },
+  "replay_verification": {
+    "attempts_recomputed": 1536,
+    "result_sha256": "3adfd7a82180e137de855a1f8398933e4e68e6d2f8863470bc526fb3c9b862e3",
+    "status": "verified"
+  },
+  "schema_version": "forge.combinatorial_occurrence_reuse_evidence.v1",
+  "scientific_payload_replay_identical": true
+}

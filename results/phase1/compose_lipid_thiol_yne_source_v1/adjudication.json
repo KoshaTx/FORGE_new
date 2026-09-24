@@ -1,0 +1,139 @@
+{
+  "assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/22902058/li-thiol-yne-main.pdf",
+      "sha256": "f87e63f1d892516c5a4db215067496e70da7cdb8e79ff1ef88df9fe81bf77ca1"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    }
+  },
+  "experimental_execution_admitted": false,
+  "families": {
+    "preassembled_thiol_yne_tail_amidation": {
+      "program_id": "source_li_thiol_yne_then_amidation",
+      "source_role_occurrences": {
+        "alkynoic_linker": [
+          "alkynoic_linker"
+        ],
+        "amine_head": [
+          "amine_head"
+        ],
+        "thiol_tail": [
+          "thiol_first",
+          "thiol_second"
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "The source 80% average yield and 70-80% estimated purity are library summaries, not labels for individual records.",
+    "Fig. 1 states 5% DMPA; the procedure states 5 mg / 0.02 mmol for 0.5 mmol acid. Preserve both descriptions.",
+    "Thiol-yne is a net stage; vinyl intermediates are not characterized by this program.",
+    "Generated precursors outside this article are computational support only."
+  ],
+  "procedure": {
+    "first_stage": {
+      "DMPA_printed": "5 mg, 0.02 mmol",
+      "THF_ml": [
+        0.5,
+        0.5,
+        0.2
+      ],
+      "UV_intensity_mw_cm2": 1.87,
+      "UV_wavelength_nm": 365,
+      "alkynoic_acid_mmol": 0.5,
+      "argon_ultrasound_degas_min": 3,
+      "thiol_equivalents": 2,
+      "time_h": 1
+    },
+    "second_stage": {
+      "DIC_ul_mmol": [
+        12,
+        0.075
+      ],
+      "HOBt_DMF_g_ml": 0.5,
+      "HOBt_solution_ul": 20,
+      "amine_mmol": 0.063,
+      "atmosphere": "argon",
+      "extraction": "Evaporate, extract with 2 ml hexane, centrifuge 10000g for 5 min, evaporate supernatant",
+      "time_h": 16,
+      "workup": "Evaporate THF, dissolve in 8 ml DCM, split into seven 1 ml batches"
+    },
+    "source_locator": "Article PDF p. 2, section 2.2"
+  },
+  "registry": {
+    "path": "data/vendor/qualified_thiol_yne_staged_source_program_v1.json",
+    "sha256": "1ce5f384fbb48e3e680e1a38f8a487c01cc19380422b367546bca8678d933598"
+  },
+  "regression_controls": [
+    {
+      "components": {
+        "alkynoic_linker": "C#CCCC(=O)O",
+        "amine_head": "NCCN(C)CCCN",
+        "thiol_first": "CCCCCCCCCCCS",
+        "thiol_second": "CCCCCCCCCCCS"
+      },
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C33H69N3OS2",
+      "expected_product": "NCCN(C)CCCNC(=O)CCC(SCCCCCCCCCCC)CSCCCCCCCCCCC",
+      "expected_stage_widths": [
+        1,
+        1,
+        2
+      ],
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "label": "non_equivalent_head_amines",
+      "required_failed_checks": [
+        "unique_each_forward_stage",
+        "unique_forward_exact"
+      ]
+    }
+  ],
+  "schema_version": "forge.staged_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "alkynoic_linker": "C#CCCC(=O)O",
+        "amine_head": "CN(C)CCN",
+        "thiol_first": "CCCCCCCCCCCS",
+        "thiol_second": "CCCCCCCCCCCS"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C31H64N2OS2",
+      "expected_product": "CN(C)CCNC(=O)CCC(SCCCCCCCCCCC)CSCCCCCCCCCCC",
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "label": "Fig1B_A1C11",
+      "source_asset": "article",
+      "source_locator": "Fig. 1B fully drawn typical structure"
+    },
+    {
+      "components": {
+        "alkynoic_linker": "C#CCCCC(=O)O",
+        "amine_head": "CN(C)CCN1CCNCC1",
+        "thiol_first": "CCCCCCS",
+        "thiol_second": "CCCCCCS"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C26H53N3OS2",
+      "expected_product": "CN(C)CCN1CCN(C(=O)CCCC(SCCCCCC)CSCCCCCC)CC1",
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "label": "Fig1A_library_B7C6",
+      "source_asset": "article",
+      "source_locator": "Fig. 1A drawn B, amine 7 and C6, combined through the Fig. 1B net graph; no individually characterized product claim"
+    }
+  ],
+  "training_admitted": false
+}

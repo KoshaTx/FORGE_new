@@ -13,9 +13,11 @@ from rdkit import Chem
 
 from forge.core.io import read_json_object
 from forge.flow import rstar_step
+from forge.model.compose_lipid_atom_aware import topology_atom_states
 from forge.model.defog_feasibility import AtomState, _model_state_sha256, graph_to_molecule
 from forge.model.local_chemistry_support import LocalChemistrySupport, tree_path_indices
 from forge.model.potency_conditioning import PotencyCondition
+from forge.model.qualified_vocabulary import QualifiedAtomVocabulary
 from forge.model.reaction_core_saturation import (
     BoundReactionCoreSaturation,
     ReactionCoreSaturationPolicy,
@@ -709,7 +711,12 @@ def _atom_capacity_table(atom_vocabulary: Sequence[AtomState]) -> np.ndarray:
     entry = _ATOM_CAPACITY_CACHE.get(id(atom_vocabulary))
     if entry is None:
         table = np.asarray(
-            [_available_valence_units(state) for state in atom_vocabulary], dtype=np.int64
+            (
+                atom_vocabulary.capacities()
+                if isinstance(atom_vocabulary, QualifiedAtomVocabulary)
+                else [_available_valence_units(state) for state in atom_vocabulary]
+            ),
+            dtype=np.int64,
         )
         table.setflags(write=False)
         entry = (atom_vocabulary, table)
@@ -1432,7 +1439,9 @@ def _select_ugi_all_role_tail_bonds(
                                 ]
                             )
                         )
-                        minimum_tier = semantic_guidance_policy.local_chemistry_unsaturation_minimum_support_tier
+                        minimum_tier = (
+                            semantic_guidance_policy.local_chemistry_unsaturation_minimum_support_tier
+                        )
                         if (
                             minimum_tier is not None
                             and scored_assignment
@@ -1504,9 +1513,9 @@ def _select_ugi_all_role_tail_bonds(
                     (double_offsets if bond == 1 else triple_offsets).append(offset_value)
                 return tuple(sorted(double_offsets)), tuple(sorted(triple_offsets))
 
-            measured_terminal_patterns: dict[
-                tuple[tuple[int, ...], tuple[int, ...]], int
-            ] | None = None
+            measured_terminal_patterns: (
+                dict[tuple[tuple[int, ...], tuple[int, ...]], int] | None
+            ) = None
             if semantic_guidance_policy.tail_unsaturation_position_strategy in {
                 "measured_joint_terminal_pattern",
                 "measured_joint_terminal_pattern_ranked",
@@ -1531,10 +1540,12 @@ def _select_ugi_all_role_tail_bonds(
                     # only the ordering within a measured count class; the existing entropy mixture
                     # keeps every chemically valid assignment eligible.
                     local_scores = [
-                        5.0
-                        if candidate_terminal_pattern(candidate_index)
-                        in measured_terminal_patterns
-                        else score
+                        (
+                            5.0
+                            if candidate_terminal_pattern(candidate_index)
+                            in measured_terminal_patterns
+                            else score
+                        )
                         for candidate_index, score in enumerate(local_scores)
                     ]
 
@@ -1564,9 +1575,7 @@ def _select_ugi_all_role_tail_bonds(
                 == "measured_joint_terminal_pattern"
             ):
                 assert measured_terminal_patterns is not None
-                indices_by_pattern: dict[
-                    tuple[tuple[int, ...], tuple[int, ...]], list[int]
-                ] = {}
+                indices_by_pattern: dict[tuple[tuple[int, ...], tuple[int, ...]], list[int]] = {}
                 for candidate_index in range(len(candidates)):
                     pattern = candidate_terminal_pattern(candidate_index)
                     if pattern is None:
@@ -1586,11 +1595,7 @@ def _select_ugi_all_role_tail_bonds(
                     return None, f"ugi_tail_unsaturation_pattern_frequency_invalid:{role}"
                 pattern_probabilities /= pattern_probabilities.sum()
                 selected_pattern = pattern_keys[
-                    int(
-                        terminal_generator.choice(
-                            len(pattern_keys), p=pattern_probabilities
-                        )
-                    )
+                    int(terminal_generator.choice(len(pattern_keys), p=pattern_probabilities))
                 ]
                 selected_indices = tuple(indices_by_pattern[selected_pattern])
                 selected = int(
@@ -1642,14 +1647,11 @@ def _select_ugi_all_role_tail_bonds(
                         for key in group_keys
                     ]
                 )
-                if (
-                    semantic_guidance_policy.tail_unsaturation_count_strategy
-                    in {
-                        "frequency_downward",
-                        "frequency_resampled",
-                        "smoothed_frequency_resampled",
-                    }
-                ):
+                if semantic_guidance_policy.tail_unsaturation_count_strategy in {
+                    "frequency_downward",
+                    "frequency_resampled",
+                    "smoothed_frequency_resampled",
+                }:
                     chemistry_prior = semantic_guidance_policy.local_chemistry_prior
                     if chemistry_prior is None:
                         return None, "ugi_local_chemistry_reference_unavailable"
@@ -2359,6 +2361,13 @@ def _strict_terminal_record(
     ugi_all_role_semantic_target: UgiAllRoleSemanticTarget | None = None,
     ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
     topology_only: bool = False,
+    qualified_core_units: np.ndarray | None = None,
+    confine_origin_edges: bool = False,
+    reserve_fixed_closures: bool = False,
+    origin_closure_roles: Sequence[int] | None = None,
+    origin_ring_sizes: Mapping[int, Sequence[int]] | None = None,
+    exact_origin_morphology: bool = False,
+    atom_aware_topology: bool = False,
 ) -> tuple[dict[str, np.ndarray] | None, str | None]:
     """Decode one exact-size graph under topology and valence support, without fallback."""
 
@@ -2384,6 +2393,24 @@ def _strict_terminal_record(
         if state >= len(atom_vocabulary):
             return None, "fixed_atom_state_outside_vocabulary"
         maximum_capacities[node] = atom_capacities[state]
+    topology_states = None
+    if atom_aware_topology:
+        if terminal_generator is not None or any(
+            value is not None
+            for value in (
+                ugi_ester_chemotype_policy,
+                ugi_role_chemistry_prior,
+                effective_amine_semantic_target,
+                ugi_mog_semantic_guidance_policy,
+            )
+        ):
+            return None, "atom_aware_topology_incompatible_chemistry_policy"
+        topology_states, reason = topology_atom_states(
+            predictions["nodes"][index, :count], record, atom_capacities, bond_units
+        )
+        if topology_states is None:
+            return None, reason
+        maximum_capacities = atom_capacities[topology_states].copy()
     parents = np.zeros(count, dtype=np.int64)
     parent_bonds = np.zeros(count, dtype=np.int64)
     closure_left = np.zeros(closure_count, dtype=np.int64)
@@ -2403,9 +2430,17 @@ def _strict_terminal_record(
         return None, "unnamed_semantic_role"
     morphology_targets = (
         _exact_role_morphology_targets(record)
-        if enforce_program_topology or enforce_program_cycles
+        if enforce_program_topology or enforce_program_cycles or exact_origin_morphology
         else None
     )
+    if origin_closure_roles is not None:
+        if len(origin_closure_roles) != closure_count or any(
+            (role != -1 if record.fixed_closure_bond_mask[slot] else role not in role_by_state)
+            for slot, role in enumerate(origin_closure_roles)
+        ):
+            return None, "invalid_origin_closure_allocation"
+        if origin_ring_sizes is None:
+            return None, "missing_origin_ring_support"
 
     # The qualified transform pins the hydrogen count, and therefore the exact heavy-atom
     # valence, of some reaction-core positions.  Reduce their capacity to that requirement so the
@@ -2426,6 +2461,33 @@ def _strict_terminal_record(
         if np.any(required_core_units[pinned] > maximum_capacities[pinned]):
             return None, "reaction_core_saturation_exceeds_atom_support"
         maximum_capacities[pinned] = required_core_units[pinned]
+    if qualified_core_units is not None:
+        if qualified_core_units.shape != (count,) or np.any(
+            (qualified_core_units >= 0) & (record.core_position_states <= 1)
+        ):
+            return None, "invalid_qualified_core_valence_condition"
+        required_core_units = qualified_core_units
+        pinned = required_core_units >= 0
+        if np.any(required_core_units[pinned] > maximum_capacities[pinned]):
+            return None, "qualified_core_valence_exceeds_atom_support"
+        maximum_capacities[pinned] = required_core_units[pinned]
+
+    if reserve_fixed_closures:
+        for slot in np.flatnonzero(record.fixed_closure_bond_mask):
+            left, right = sorted(
+                (int(record.graph.closure_left[slot]), int(record.graph.closure_right[slot]))
+            )
+            bond = int(record.graph.closure_bonds[slot])
+            if (
+                not 0 <= left < right < count
+                or (left, right) in occupied
+                or not 0 <= bond < bond_classes
+            ):
+                return None, "invalid_fixed_closure"
+            closure_left[slot], closure_right[slot], closure_bonds[slot] = left, right, bond
+            minimum_used[[left, right]] += int(bond_units[bond])
+            degrees[[left, right]] += 1
+            occupied.add((left, right))
 
     # Reserve immutable adapter edges first so variable choices cannot consume their capacity.
     for child in np.flatnonzero(record.fixed_parent_bond_mask):
@@ -2459,17 +2521,34 @@ def _strict_terminal_record(
             valid[:child] = parent_headroom[:child]
             # Core saturation confines generated tree edges to one component just as program
             # topology does, so both gates mask the admissible row the same way.
-            if enforce_program_topology or component_confined:
+            if (
+                enforce_program_topology
+                or component_confined
+                or confine_origin_edges
+                or exact_origin_morphology
+            ):
                 valid[:child] &= component_instances[:child] == component_instances[child]
-        if enforce_program_topology:
+            if reserve_fixed_closures:
+                for parent in np.flatnonzero(valid):
+                    if (int(parent), child) in occupied:
+                        valid[parent] = False
+        if enforce_program_topology or exact_origin_morphology:
             for parent in np.flatnonzero(valid).tolist():
                 trial_parents = parents.copy()
                 trial_parents[child] = parent
                 observed = _terminal_role_morphology(
                     record,
                     parents=trial_parents,
-                    closure_left=np.empty(0, dtype=np.int64),
-                    closure_right=np.empty(0, dtype=np.int64),
+                    closure_left=(
+                        closure_left[record.fixed_closure_bond_mask]
+                        if exact_origin_morphology
+                        else np.empty(0, dtype=np.int64)
+                    ),
+                    closure_right=(
+                        closure_right[record.fixed_closure_bond_mask]
+                        if exact_origin_morphology
+                        else np.empty(0, dtype=np.int64)
+                    ),
                     parent_edge_mask=(record.fixed_parent_bond_mask | (node_positions <= child)),
                 )
                 assert morphology_targets is not None
@@ -2491,7 +2570,14 @@ def _strict_terminal_record(
                     current[1] > target[1]
                     or current[3] > target[3]
                     or current[1] + remaining_variable_children < target[1]
-                    or current[3] + remaining_variable_children < target[3]
+                    or current[3]
+                    + remaining_variable_children
+                    + (
+                        int((~record.fixed_closure_bond_mask).sum())
+                        if exact_origin_morphology
+                        else 0
+                    )
+                    < target[3]
                 ):
                     valid[parent] = False
         parent = _argmax_allowed(predictions["parents"][index, child, :count], valid)
@@ -2512,6 +2598,8 @@ def _strict_terminal_record(
         occupied.add((parent, child))
 
     for slot in np.flatnonzero(record.fixed_closure_bond_mask):
+        if reserve_fixed_closures:
+            continue
         slot = int(slot)
         left = int(record.graph.closure_left[slot])
         right = int(record.graph.closure_right[slot])
@@ -2548,6 +2636,8 @@ def _strict_terminal_record(
                 semantic_pair = component_instances[left] == component_instances[right] or (
                     int(core[left]) > 1 and int(core[right]) > 1
                 )
+                if confine_origin_edges:
+                    semantic_pair = component_instances[left] == component_instances[right]
                 if exterior_only_closures:
                     # A ring that reaches a reaction-core atom, or crosses two precursor
                     # components, cannot be cut back into that transform's precursors.
@@ -2578,6 +2668,31 @@ def _strict_terminal_record(
                     or minimum_used[right] + 2 > maximum_capacities[right]
                 ):
                     continue
+                if origin_closure_roles is not None:
+                    requested_role = origin_closure_roles[slot]
+                    if not (
+                        int(record.role_states[left]) == requested_role
+                        and int(record.role_states[right]) == requested_role
+                        and component_instances[left] == component_instances[right]
+                    ):
+                        continue
+                    ring_size = len(tree_path_indices(parents, left, right))
+                    if ring_size not in origin_ring_sizes.get(requested_role, ()):
+                        continue
+                if exact_origin_morphology:
+                    trial = _terminal_role_morphology(
+                        record,
+                        parents=parents,
+                        closure_left=np.append(closure_left[:slot], left),
+                        closure_right=np.append(closure_right[:slot], right),
+                    )
+                    assert morphology_targets is not None
+                    if any(
+                        trial[r][j] > target[j]
+                        for r, target in morphology_targets.items()
+                        for j in (2, 3)
+                    ):
+                        continue
                 if local_chemistry_support is not None:
                     if local_chemistry_support.enforces_role_cycles:
                         cycle = tree_path_indices(parents, left, right)
@@ -2622,7 +2737,7 @@ def _strict_terminal_record(
         topology_neighbors[left].add(right)
         topology_neighbors[right].add(left)
 
-    if enforce_program_topology:
+    if enforce_program_topology or exact_origin_morphology:
         assert morphology_targets is not None
         observed_morphology = _terminal_role_morphology(
             record,
@@ -2881,6 +2996,10 @@ def _strict_terminal_record(
                     else "fixed_atom_valence_exceeds_support"
                 )
                 return None, reason
+        elif topology_states is not None:
+            state = int(topology_states[node])
+            if not valid[state]:
+                return None, "atom_aware_chosen_state_exceeds_chemistry_support"
         elif node in preselected_atom_states:
             state = int(preselected_atom_states[node])
             if state >= len(atom_vocabulary) or not valid[state]:
@@ -3253,11 +3372,24 @@ def decode_synthesis_program_strict_argmax(
     ugi_amine_semantic_targets: Sequence[UgiAmineSemanticTarget | None] | None = None,
     ugi_all_role_semantic_targets: Sequence[UgiAllRoleSemanticTarget | None] | None = None,
     ugi_mog_semantic_guidance_policy: UgiMogSemanticGuidancePolicy | None = None,
+    qualified_core_units: Sequence[np.ndarray] | None = None,
+    confine_origin_edges: bool = False,
+    reserve_fixed_closures: bool = False,
+    origin_closure_roles: Sequence[Sequence[int]] | None = None,
+    origin_ring_sizes: Sequence[Mapping[int, Sequence[int]]] | None = None,
+    exact_origin_morphology: bool = False,
+    topology_only: bool = False,
+    atom_aware_topology: bool = False,
 ) -> tuple[dict[str, Any], tuple[str | None, ...]]:
     """Decode once under strict support; infeasible attempts abstain and are never repaired."""
 
     if len(records) != int(layout["node_mask"].shape[0]):
         raise SynthesisProgramSamplingError("strict decoder batch and record counts disagree")
+    for value in (origin_closure_roles, origin_ring_sizes):
+        if value is not None and len(value) != len(records):
+            raise SynthesisProgramSamplingError("Origin constraints and records disagree")
+    if qualified_core_units is not None and len(qualified_core_units) != len(records):
+        raise SynthesisProgramSamplingError("qualified core conditions and records differ")
     has_amine_targets = ugi_amine_semantic_targets is not None and any(
         target is not None for target in ugi_amine_semantic_targets
     )
@@ -3353,6 +3485,18 @@ def decode_synthesis_program_strict_argmax(
             ugi_amine_semantic_target=semantic_target,
             ugi_all_role_semantic_target=all_role_target,
             ugi_mog_semantic_guidance_policy=ugi_mog_semantic_guidance_policy,
+            qualified_core_units=(
+                None if qualified_core_units is None else qualified_core_units[index]
+            ),
+            confine_origin_edges=confine_origin_edges,
+            reserve_fixed_closures=reserve_fixed_closures,
+            origin_closure_roles=(
+                None if origin_closure_roles is None else origin_closure_roles[index]
+            ),
+            origin_ring_sizes=None if origin_ring_sizes is None else origin_ring_sizes[index],
+            exact_origin_morphology=exact_origin_morphology,
+            topology_only=topology_only,
+            atom_aware_topology=atom_aware_topology,
         )
         reasons.append(reason)
         if decoded is None:

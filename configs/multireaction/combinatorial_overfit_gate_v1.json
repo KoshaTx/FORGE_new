@@ -1,0 +1,65 @@
+{
+  "schema_version": "forge.combinatorial_overfit_gate_config.v1",
+  "scientific_question": "Can one shared sparse whole-lipid flow learn an exact fixed-corruption target from every qualified combinatorial reaction family before accelerator-scale training is considered?",
+  "hypothesis": "With equal family loss mass, the shared program-conditioned architecture can reduce loss for all twelve families and exactly reconstruct the twelve bounded training examples.",
+  "alternative_explanation": "A passing optimizer smoke can coexist with program interference or insufficient shared-model capacity, so one or more families may fail to improve or reconstruct even on a fixed overfit set.",
+  "seed": 20260913,
+  "expected_programs": 12,
+  "record_selection": "lower_median_heavy_atom_count_then_record_id",
+  "inputs": {
+    "cache_result": {
+      "path": "results/phase1/combinatorial_program_cache_v2/result.json",
+      "sha256": "5d766f29c3c777be3b6744c63bd54a1b9e770e19f03a30d19db8909b5045a602"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "cache_config": {
+      "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+      "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+    },
+    "training_smoke_result": {
+      "path": "results/phase1/combinatorial_training_smoke_v2/result.json",
+      "sha256": "8fb701cbdb9e641092663a56f7fef6f4969960dcc06b3acd5ab4a1c2c3381319"
+    }
+  },
+  "model": {
+    "architecture": "reaction_program_sparse_whole_lipid_flow",
+    "hidden_dim": 64,
+    "layers": 3,
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "dropout": 0.0,
+    "bond_classes": 4
+  },
+  "optimization": {
+    "steps": 1536,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0,
+    "flow_time": 0.5,
+    "gradient_clip_norm": 1.0,
+    "source_probability_floor": 0.00001,
+    "cpu_threads": 2,
+    "corruption_policy": "one_fixed_draw_reused_for_learning_gate",
+    "family_loss_policy": "equal_program_mass",
+    "report_steps": [
+      1,
+      16,
+      64,
+      256,
+      512,
+      1024,
+      1536
+    ]
+  },
+  "acceptance": {
+    "maximum_final_to_initial_loss_ratio": 0.25,
+    "minimum_improved_programs": 12,
+    "minimum_exact_tensor_records": 12
+  },
+  "candidate_selection": false,
+  "generation_calls": 0,
+  "remote_compute": false,
+  "claim_boundary": "A bounded fixed-corruption learning-capability gate only; no generalization, generation-quality, realism, synthesis-success, or production-readiness claim."
+}

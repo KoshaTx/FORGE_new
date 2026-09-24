@@ -1,0 +1,89 @@
+{
+  "candidate_intersection": [],
+  "evidence_basis": "computed_related_transform_constraint_conflict",
+  "family": "aryl_reductive_amination",
+  "heldout_graphs_parsed": false,
+  "inputs": {
+    "component_result": {
+      "path": "results/phase1/compose_lipid_v8_components_v1/result.json",
+      "sha256": "55ff93818a30a3d6e2ddfda4145617ac9127c36de8a3a395b9beaaf909cedfa8"
+    },
+    "constraints": {
+      "path": "results/phase1/compose_lipid_v8_components_v1/candidate_constraints.jsonl.gz",
+      "sha256": "301c9b9053119c502ab1750b1a9a0d1194569839bf2d94f83bf770085881c1b3"
+    },
+    "database": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "script": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/reproduce_conflict.py",
+      "sha256": "71845c4afda93d78bb9b1b7051dbcc2c4d9c1910cd483e5a88b0ecc98f78ce83"
+    }
+  },
+  "interpretation": "One-event inverse candidates cannot represent a common source-labelled head across these TRAIN rows. This does not distinguish an incomplete related program from a metadata problem.",
+  "role": "amine_head",
+  "schema_version": "forge.compose_lipid_component_conflict_witness.v1",
+  "source_label": "{\"head_id\":\"4f0881e49fcbf21b52fb6e00c37c75617bb074dcd02b2476c0612d98a02f2fd3\"}",
+  "training_admitted": false,
+  "witnesses": [
+    {
+      "candidate_component_constitutions": [
+        "C=CC=CCCCC(=O)Oc1cc(CN)cc(OC(=O)CCCC=CC=C)c1",
+        "C=CC=CCCCC(=O)Oc1cc(CNCCCN(C)CCCN)cc(OC(=O)CCCC=CC=C)c1",
+        "C=CC=CCCCC(=O)Oc1cc(CNCCCNC)cc(OC(=O)CCCC=CC=C)c1"
+      ],
+      "source_train_record": {
+        "constitution": "C=CC=CCCCC(=O)Oc1cc(CNCCCN(C)CCCNCc2cc(OC(=O)CCCC=CC=C)cc(OC(=O)CCCC=CC=C)c2)cc(OC(=O)CCCC=CC=C)c1",
+        "heavy_atoms": 64,
+        "primary_family": "aryl_reductive_amination",
+        "primary_metadata": {
+          "aldehyde_id": "ee21b6553a6923c286c945623effa484a45911f905d8fa07ae4c42c5d21294ba",
+          "head_code": "H2",
+          "head_id": "4f0881e49fcbf21b52fb6e00c37c75617bb074dcd02b2476c0612d98a02f2fd3",
+          "tail_axis": "identical_positional_diene",
+          "tail_review_lane": "A2_two_identical_acyl_arms"
+        },
+        "route_families": [
+          "aryl_reductive_amination"
+        ],
+        "size_disposition": "model_supported",
+        "source_anchor": false,
+        "target_id": "01dca9075968cc656d26338a2b58b04ed5a1084a8553936fa57bf15d72ea023a",
+        "training_admissible": false
+      },
+      "target_id": "01dca9075968cc656d26338a2b58b04ed5a1084a8553936fa57bf15d72ea023a"
+    },
+    {
+      "candidate_component_constitutions": [
+        "C=CCCCCCCC(=O)Oc1cc(CN)cc(OC(=O)CCCCCCC=C)c1",
+        "C=CCCCCCCC(=O)Oc1cc(CNCCCN(C)CCCN)cc(OC(=O)CCCCCCC=C)c1",
+        "C=CCCCCCCC(=O)Oc1cc(CNCCCNC)cc(OC(=O)CCCCCCC=C)c1"
+      ],
+      "source_train_record": {
+        "constitution": "C=CCCCCCCC(=O)Oc1cc(CNCCCN(C)CCCNCc2cc(OC(=O)CCCCCCC=C)cc(OC(=O)CCCCCCC=C)c2)cc(OC(=O)CCCCCCC=C)c1",
+        "heavy_atoms": 68,
+        "primary_family": "aryl_reductive_amination",
+        "primary_metadata": {
+          "aldehyde_id": "e5fd9251ac8d20d2197ae4143e66b05c2a05e5f9efeaf1f57fccf94dd9073424",
+          "head_code": "H2",
+          "head_id": "4f0881e49fcbf21b52fb6e00c37c75617bb074dcd02b2476c0612d98a02f2fd3",
+          "tail_axis": "identical_positional_mono_unsaturation",
+          "tail_review_lane": "A2_two_identical_acyl_arms"
+        },
+        "route_families": [
+          "aryl_reductive_amination"
+        ],
+        "size_disposition": "model_supported",
+        "source_anchor": false,
+        "target_id": "06a46ee1a902544cb1e779b85e7cc4e5e7091c7627f5489bb82cb96fb8f236a8",
+        "training_admissible": false
+      },
+      "target_id": "06a46ee1a902544cb1e779b85e7cc4e5e7091c7627f5489bb82cb96fb8f236a8"
+    }
+  ]
+}

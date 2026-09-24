@@ -1,0 +1,97 @@
+{
+  "binding_rules": {
+    "I7": {
+      "allowed_design_lanes": [
+        "I7_head_x_paired_tail"
+      ],
+      "program": "source_b5_I7",
+      "source_role_aliases": {
+        "tail6_alcohol": "paired_tail_alcohol"
+      }
+    },
+    "I8": {
+      "allowed_design_lanes": [
+        "acid_one_component",
+        "r2_one_component",
+        "matched_body"
+      ],
+      "program": "source_b5_I8",
+      "source_role_aliases": {}
+    },
+    "I9": {
+      "program_by_design_lane": {
+        "matched_identical_tail_acids_alcohol": "source_b5_I9_homo_alcohol",
+        "matched_identical_tail_acids_amine": "source_b5_I9_homo_amine",
+        "one_tail_acid_knob_alcohol": "source_b5_I9_hetero_alcohol",
+        "one_tail_acid_knob_amine": "source_b5_I9_hetero_amine"
+      },
+      "source_role_aliases": {}
+    }
+  },
+  "corpus_replay_qualified": false,
+  "head_spacer_semantics": {
+    "repeat_smiles": "C",
+    "reported_head_repeat_count": 2,
+    "same_head_scaffold_spacer": "Positive unbranched saturated methylene chain; exact complete-graph equality to a declared source scaffold plus terminal handle. Search count is bounded by supplied component atom count, not a molecular-size exclusion. No additional substituents, NH methylation, scaffold exchange or disconnected spectators."
+  },
+  "inputs": {
+    "negative_scope_receipt": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/draft-adversarial-audit.json",
+      "sha256": "0ee086cd787e75e9c23075dae3f18361d8fadfb8625bd1982e1938b67a1df1f1"
+    },
+    "source_bindings": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/eligible-bindings.json",
+      "sha256": "1afcb25f4817db361d0844f58f3116068cc3cc632b255f79a81b8df00b3457e8"
+    },
+    "source_controls": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    }
+  },
+  "remaining_provenance_audit": "Do not infer reported/executed status from metadata strings. Inspect source-reported fixed partners for each knob lane. In particular the eligible I8 r2_one_component examples include the malonate precursor drawn as source18 in I9, whereas I8 source Fig.S2 uses glutarate11; distinguish a permitted computed internal-spacer variant from an erroneous reported-source label and preserve any conflict.",
+  "schema_version": "forge.b5_complete_terminal_scope_proposal.v1",
+  "seed": 0,
+  "source_head_grammars": {
+    "I7_head_acid": {
+      "complete_smiles_templates": [
+        "CN(C){spacer}C(=O)O",
+        "O=C(O){spacer}N1CCCC1",
+        "O=C(O){spacer}N1CCCCC1",
+        "CN1CCN({spacer}C(=O)O)CC1",
+        "O=C(O){spacer}N1CCOCC1"
+      ],
+      "source_locator": "SI PDF p.7 Fig.S1 head9a-e"
+    },
+    "I8_head_acid": {
+      "complete_smiles_templates": [
+        "CN(C){spacer}C(=O)O",
+        "O=C(O){spacer}N1CCOCC1"
+      ],
+      "source_locator": "SI PDF p.16 Fig.S2 head9a/e"
+    },
+    "I9_head_alcohol": {
+      "complete_smiles_templates": [
+        "CN(C){spacer}O",
+        "O{spacer}N1CCOCC1"
+      ],
+      "source_locator": "SI PDF p.25 Fig.S3 head25a/e"
+    },
+    "I9_head_amine": {
+      "complete_smiles_templates": [
+        "CN(C){spacer}N",
+        "N{spacer}N1CCOCC1"
+      ],
+      "source_locator": "SI PDF p.25 Fig.S3 head24a/e"
+    }
+  },
+  "status": "design_for_next_qualification_not_an_admission_contract",
+  "terminal_requirements": {
+    "I7_paired_tail_alcohol": "Exact source glycerol diester connectivity, primary free OH, two identical acyl hydrocarbon arms, no additional heteroatoms. Whole role stays one original component; internal arms are a scope check, not newly assigned component IDs.",
+    "I8_I9_tail_acid": "Complete monoalkyl dicarboxylate half ester with one free COOH, a saturated unbranched internal methylene spacer, and an ester-linked primary alcohol-derived body. Body acyclic C/H, neutral, at most one C=C. Source12y/11/18 structures and source-generation axis claims must be audited separately.",
+    "I8_matched_body": "Hydrocarbon body attached through alcohol O must exactly match the ester alkyl body of its acid tail; keep both original global IDs and both roles.",
+    "I8_r2_tail_alcohol": "Primary monohydric aliphatic alcohol. Carbon body acyclic, neutral, with at most one nonaromatic C=C as allowed by the supplied axis. No secondary OH or extra functionality.",
+    "I9_matched_identical_tail_acids": "Both full tail-acid constitutions identical, with the two source roles and their quantities preserved. Cannot replace with independent tails just because each couples.",
+    "vitamin_b5_core": "Exact full source pantothenic constitution; original global ID and raw stereo/source metadata unchanged."
+  },
+  "training_admitted": false
+}

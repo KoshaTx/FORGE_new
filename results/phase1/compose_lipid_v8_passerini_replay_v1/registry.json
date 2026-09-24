@@ -1,0 +1,108 @@
+{
+  "reactions": [
+    {
+      "architecture": "asymmetric degradable alpha-acyloxy amide (Passerini)",
+      "atom_mapped_reaction_smarts": "[CX3:1](=[OX1:2])[OX2H1:3].[CX3H1:4]=[OX1:5].[C;-1,+0;X1:6]#[N;+1,+0;X2:7]>>[C:1](=[O:2])[O:5][C&H1:4][C&+0:6](=[O:3])[N&H1&+0:7]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [],
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "artifact_hash": "dd792edc957e63ba23940603b845a5132ece61b51a755caca33c4c2711aca87d",
+        "enumerator": "compose_v4.lipids.reaction_enumeration:ReactionEnumerator",
+        "test_manifest": "tests/test_reaction_families.py"
+      },
+      "known_negative_examples": [
+        {
+          "expected": "",
+          "reactants": [
+            "CCO",
+            "CCCCCCCC=O",
+            "CCCCCCCCCCCC[N+]#[C-]"
+          ],
+          "reason": "alcohol is not a carboxylic acid"
+        }
+      ],
+      "known_positive_examples": [
+        {
+          "expected": "CCCCCCCCCCCCNC(=O)C(CCCCCCC)OC(C)=O",
+          "reactants": [
+            "CC(=O)O",
+            "CCCCCCCC=O",
+            "CCCCCCCCCCCC[N+]#[C-]"
+          ],
+          "reason": "mechanism-verified atom-mapped reconstruction"
+        }
+      ],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1,
+            2,
+            3
+          ],
+          "name": "carboxylic_acid_tail",
+          "required_handle_smarts": "[CX3](=[OX1])[OX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            4,
+            5
+          ],
+          "name": "aldehyde_body",
+          "required_handle_smarts": "[CX3H1]=[OX1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            6,
+            7
+          ],
+          "name": "isocyanide_tail",
+          "required_handle_smarts": "[C;-1,+0;X1]#[N;+1,+0;X2]"
+        }
+      ],
+      "reaction_id": "passerini_3cr_source_atom_origins_v2",
+      "reaction_version": 2,
+      "selectivity_policy": "Carboxylic acid + aldehyde + terminal isocyanide condense to an alpha-acyloxy amide. Requires a free carboxylic acid (alcohols/esters inert), an aldehyde (ketones inert), and a terminal isocyanide carbon (nitriles inert).",
+      "sources": [
+        {
+          "identifier": "10.1021/jacs.5b09084",
+          "kind": "doi",
+          "locator": "Passerini multicomponent biodegradable lipid libraries",
+          "notes": "Reaction-class primary source; mechanism-verified atom-mapped transform. Exact primary-source product example pending submission-time literature audit."
+        },
+        {
+          "identifier": "10.1073/pnas.2409572122",
+          "kind": "doi",
+          "locator": "Figure 1A, main article page 3; SI pages 3-5; molecular structures in Figure 1B and SI Figure S1",
+          "notes": "Product-only oxygen-map permutation follows the drawn Mumm rearrangement. It preserves constitutional connectivity. This is a mechanism-based atom-origin convention, not isotope-tracing evidence or an experimental outcome label for v8 enumeration."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    }
+  ],
+  "registry_version": "passerini_3cr_source_atom_origins_v2"
+}

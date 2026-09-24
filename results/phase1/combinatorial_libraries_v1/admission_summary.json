@@ -1,0 +1,83 @@
+{
+  "families": {
+    "acetal_aldehyde_diol": {
+      "positive_weight_source_rows": 1989,
+      "qualified_positive_weight_rows": 1989,
+      "qualified_rows": 1989,
+      "source_rows": 1989
+    },
+    "amide_coupling_acid_amine": {
+      "positive_weight_source_rows": 16590,
+      "qualified_positive_weight_rows": 351,
+      "qualified_rows": 351,
+      "source_rows": 16590
+    },
+    "aza_michael_amine_acrylate": {
+      "positive_weight_source_rows": 16590,
+      "qualified_positive_weight_rows": 351,
+      "qualified_rows": 351,
+      "source_rows": 16590
+    },
+    "carbamate_amine_chloroformate": {
+      "positive_weight_source_rows": 16590,
+      "qualified_positive_weight_rows": 351,
+      "qualified_rows": 351,
+      "source_rows": 16590
+    },
+    "disulfide_coupling": {
+      "positive_weight_source_rows": 780,
+      "qualified_positive_weight_rows": 780,
+      "qualified_rows": 780,
+      "source_rows": 780
+    },
+    "epoxide_opening_amine": {
+      "positive_weight_source_rows": 16590,
+      "qualified_positive_weight_rows": 351,
+      "qualified_rows": 351,
+      "source_rows": 16590
+    },
+    "iphos_amine_dioxaphospholane": {
+      "positive_weight_source_rows": 16590,
+      "qualified_positive_weight_rows": 351,
+      "qualified_rows": 351,
+      "source_rows": 16590
+    },
+    "passerini_3cr": {
+      "positive_weight_source_rows": 77571,
+      "qualified_positive_weight_rows": 77571,
+      "qualified_rows": 77571,
+      "source_rows": 77571
+    },
+    "reductive_amination_amine_aldehyde": {
+      "positive_weight_source_rows": 21654,
+      "qualified_positive_weight_rows": 459,
+      "qualified_rows": 459,
+      "source_rows": 21654
+    },
+    "thiol_michael_thioether": {
+      "positive_weight_source_rows": 1521,
+      "qualified_positive_weight_rows": 1521,
+      "qualified_rows": 1521,
+      "source_rows": 1521
+    },
+    "ugi_3cr_agile": {
+      "positive_weight_source_rows": 222768,
+      "qualified_positive_weight_rows": 179010,
+      "qualified_rows": 179010,
+      "source_rows": 222768
+    },
+    "urea_amine_isocyanate": {
+      "positive_weight_source_rows": 22728,
+      "qualified_positive_weight_rows": 144,
+      "qualified_rows": 351,
+      "source_rows": 55032
+    }
+  },
+  "input": {
+    "path": "results/phase1/combinatorial_libraries_v1/row_qualification.jsonl.gz",
+    "sha256": "245d3fdb357b5c58e706dc0d1ecb05c653d07e941cd42ce0d38d5e2feb21123c"
+  },
+  "method": "Count all rows, positive realism_weight rows, rows with empty issues, and rows satisfying both predicates; group by reaction_id.",
+  "schema_version": "forge.combinatorial_library_admission_summary.v1",
+  "training_admission": false
+}

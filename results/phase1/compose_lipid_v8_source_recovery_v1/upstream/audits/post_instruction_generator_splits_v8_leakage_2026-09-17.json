@@ -1,0 +1,67 @@
+{
+  "all_test_targets_have_a_named_panel": true,
+  "beae_used": false,
+  "biology_used": false,
+  "calibration_combination_groups": 1121,
+  "calibration_group_leakage": 0,
+  "calibration_structural_groups": 3508,
+  "combination_panel_components_unseen_in_train": 0,
+  "cross_family_source_study_overlap": [
+    {
+      "also_in_train_under": [
+        "epoxide_opening_o_acylation"
+      ],
+      "held_out_test_targets": 5,
+      "held_out_under": [
+        "amine_epoxide_opening"
+      ],
+      "pmid": "38409275",
+      "train_targets": 22
+    }
+  ],
+  "cross_family_source_study_overlap_declared": "Source-study isolation is declared per (family, study). These studies remain reachable in training through a sibling family and must not be read as fully unseen literature.",
+  "formal_evaluation_families": 23,
+  "panels_confined_to_test": true,
+  "receipt": {
+    "declared_training_admissible": false,
+    "path": "artifacts/corpus_build_v2/post_instruction_generator_splits_v8/receipt.json",
+    "pinned_receipt": true,
+    "sha256": "7f8a6294b99327260fa772d91025a77fb7ff2f11a3064f9d84e912e45f79d139",
+    "verified_bindings": {
+      "inputs": 9,
+      "outputs": 4,
+      "producers": 2
+    }
+  },
+  "reference_only_families": [
+    "reported_lnpdb_route_unassigned",
+    "reported_multistep_amino_lipid",
+    "reported_reference_lipid"
+  ],
+  "reference_targets_are_reference_only_families": true,
+  "schema": "post_instruction_generator_splits_v8_leakage_audit_v1",
+  "scope": "Chemistry-only split integrity and leakage; no model fitting or biological evaluation.",
+  "selected_combination_group_leakage": 0,
+  "selected_combination_groups": 5975,
+  "selected_precursor_leakage": 0,
+  "selected_source_studies": 9,
+  "selected_source_study_leakage": 0,
+  "selected_structural_group_leakage": 0,
+  "selected_structural_groups": 831,
+  "selected_unseen_precursors": 817,
+  "source_anchors_accounted_for": 11267,
+  "split_counts": {
+    "calibration": 19975,
+    "reference": 268,
+    "test": 19975,
+    "train": 159782
+  },
+  "status": "PASS",
+  "targets": 200000,
+  "test_panel_counts": {
+    "source_study_transfer": 828,
+    "unseen_exact_combination": 6327,
+    "unseen_precursor_identity": 7002,
+    "unseen_regional_topology": 5830
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "assets": {
+    "intake_review": {
+      "path": "results/phase1/compose_lipid_user_papers_v1/review.json",
+      "sha256": "c48ea775dc74d39d917f0d4c79cd5eed8cc3a93609ebf2fe08b855d1af75b6a6"
+    },
+    "xu_si": {
+      "path": "data/source_cache/compose_lipid_user_papers_20260922/adhm202302691-sup-0001-suppmat.pdf",
+      "sha256": "8759b3cfff38bcc38020161f64dfca4b33c4c621a709777b62eaf85be8f9b87f"
+    }
+  },
+  "experimental_execution_admitted": false,
+  "families": {
+    "acid_epoxide_diester_multistep": {
+      "program_id": "source_xu_acid_epoxide_then_aminoacid_ester",
+      "source_role_occurrences": {
+        "amine_acid_head": [
+          "amine_acid_head"
+        ],
+        "epoxide": [
+          "epoxide"
+        ],
+        "hydrophobic_acid": [
+          "hydrophobic_acid"
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Reagent amounts, full workup, isolated yield and numerical purity are not supplied by Fig. S1; no exact-execution admission.",
+    "Alcohol/acid oxygen mapping is a net-transform convention, not isotope tracing.",
+    "C3/C4/C5 analogues use a different diol route and do not expand the terminal-epoxide ring-opening claim."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_acid_epoxide_staged_source_program_v1.json",
+    "sha256": "8862c93771cd3236496f21ddb3dca8c0196e1b5e33bcbb81b87cb22e4bc2d33b"
+  },
+  "regression_controls": [
+    {
+      "components": {
+        "amine_acid_head": "CN(C)CCCC(=O)O",
+        "epoxide": "CCCCCCCCCCC1CO1",
+        "hydrophobic_acid": "O=C(O)C(CCCCCC)CCCCCCCC"
+      },
+      "disposition": "reject_claim",
+      "evidence_basis": "source_conflict",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C33H65NO4",
+      "expected_product": "CN(C)CCC(=O)OC(CCCCCCCCCC)COC(=O)C(CCCCCC)CCCCCCCC",
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "acid_epoxide_diester_multistep",
+      "label": "printed_shorter_head_name",
+      "required_failed_checks": [
+        "unique_forward_exact",
+        "full_element_hydrogen_charge_balance"
+      ],
+      "scope": "Rejection of equivalence to the source-drawn construction; not a claimed experimental failure."
+    },
+    {
+      "components": {
+        "amine_acid_head": "CN(C)CCCC(=O)O",
+        "epoxide": "CCCCCCCCCCC1CO1",
+        "hydrophobic_acid": "O=C(O)C(CCCCCC)CCCCCCCC"
+      },
+      "disposition": "reject_claim",
+      "evidence_basis": "computed_transform_consistency",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C34H67NO4",
+      "expected_product": "CN(C)CCCC(=O)OCC(CCCCCCCCCC)OC(=O)C(CCCCCC)CCCCCCCC",
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "acid_epoxide_diester_multistep",
+      "label": "head_and_hydrophobe_site_swap",
+      "required_failed_checks": [
+        "unique_forward_exact"
+      ],
+      "scope": "Rejection of equivalence to the source-drawn construction; not a claimed experimental failure."
+    }
+  ],
+  "reported_analytical_evidence": {
+    "appearance": "colorless oil",
+    "calculated_mz": 554.5143,
+    "found_mz": 554.5173,
+    "ion": "[M+H]+",
+    "ion_formula": "C34H68NO4+",
+    "source_locator": "SI p. 3",
+    "spectra": [
+      "1H NMR",
+      "13C NMR",
+      "ESI-HRMS"
+    ]
+  },
+  "schema_version": "forge.staged_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "amine_acid_head": "CN(C)CCCC(=O)O",
+        "epoxide": "CCCCCCCCCCC1CO1",
+        "hydrophobic_acid": "O=C(O)C(CCCCCC)CCCCCCCC"
+      },
+      "disposition": "admit_transform_consistency",
+      "evidence_basis": "computed_transform_consistency",
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C34H67NO4",
+      "expected_product": "CN(C)CCCC(=O)OC(CCCCCCCCCC)COC(=O)C(CCCCCC)CCCCCCCC",
+      "expected_stage_products": [
+        "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC",
+        "CN(C)CCCC(=O)OC(CCCCCCCCCC)COC(=O)C(CCCCCC)CCCCCCCC"
+      ],
+      "expected_stage_widths": [
+        1,
+        1,
+        1
+      ],
+      "family": "acid_epoxide_diester_multistep",
+      "label": "Xu_E12CA1A3_drawn_structure",
+      "source_asset": "xu_si",
+      "source_locator": "SI pp. 2-3, Fig. S1 and E12CA1A3 characterization; p. 21 step f and p. 22 analogue corroboration"
+    }
+  ],
+  "source_discrepancy": {
+    "drawn_head": "4-(dimethylamino)butanoyl",
+    "printed_name_head": "3-(dimethylamino)propanoyl",
+    "resolution_for_computed_control": "Use independently drawn structure corroborated by reported formula/mass and Fig. S23 step f; retain conflicting printed name and admit no exact-execution label."
+  },
+  "training_admitted": false
+}

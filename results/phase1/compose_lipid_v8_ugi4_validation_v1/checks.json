@@ -1,0 +1,109 @@
+{
+  "audit-verification": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "experiments.phase1.multireaction.compose_lipid_precursor_audit",
+      "--verify",
+      "results/phase1/compose_lipid_v8_precursor_audit_v2/result.json"
+    ],
+    "duration_seconds": 54.83819366712123,
+    "exit_code": 0
+  },
+  "black": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "black",
+      "--check",
+      "forge/assembly/condensation_event.py",
+      "forge/corpus/compose_lipid_condensation_event.py",
+      "experiments/phase1/multireaction/compose_lipid_condensation_event.py",
+      "tests/test_condensation_event.py",
+      "tests/test_compose_lipid_condensation_event.py",
+      "results/phase1/compose_lipid_v8_ugi4_source_v1/build_registry.py",
+      "results/phase1/compose_lipid_v8_ugi4_source_v1/check_prior_dictionary.py"
+    ],
+    "duration_seconds": 0.22121341689489782,
+    "exit_code": 0
+  },
+  "focused-tests": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_a3_source_boundary.py",
+      "tests/test_compose_lipid.py",
+      "tests/test_compose_lipid_components.py",
+      "tests/test_compose_lipid_pretraining.py",
+      "tests/test_compose_lipid_protection.py",
+      "tests/test_compose_lipid_repeated_inverse.py",
+      "tests/test_compose_lipid_repeated_source.py",
+      "tests/test_compose_lipid_representation.py",
+      "tests/test_compose_lipid_scaffold_event.py",
+      "tests/test_compose_lipid_sequential.py",
+      "tests/test_compose_lipid_source_event.py",
+      "tests/test_compose_lipid_source_program.py",
+      "tests/test_pinned_sources_are_tracked.py",
+      "tests/test_precursor_scaffolds.py",
+      "tests/test_repeated_components.py",
+      "tests/test_repeated_inverse.py",
+      "tests/test_sequential_program.py",
+      "tests/test_source_event.py",
+      "tests/test_compose_lipid_precursor_audit.py",
+      "tests/test_condensation_event.py",
+      "tests/test_compose_lipid_condensation_event.py",
+      "--tb=short",
+      "--junitxml=/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_ugi4_validation_v1/focused-tests.xml"
+    ],
+    "duration_seconds": 30.73864037496969,
+    "exit_code": 0
+  },
+  "full-tests": {
+    "command": [
+      "make",
+      "test",
+      "UV_RUN="
+    ],
+    "duration_seconds": 640.2423578330781,
+    "exit_code": 2
+  },
+  "program-verification": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "experiments.phase1.multireaction.compose_lipid_condensation_event",
+      "verify",
+      "--result",
+      "results/phase1/compose_lipid_v8_ugi4_program_v1/result.json"
+    ],
+    "duration_seconds": 83.30083604087122,
+    "exit_code": 0
+  },
+  "ruff": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "ruff",
+      "check",
+      "forge/assembly/condensation_event.py",
+      "forge/corpus/compose_lipid_condensation_event.py",
+      "experiments/phase1/multireaction/compose_lipid_condensation_event.py",
+      "tests/test_condensation_event.py",
+      "tests/test_compose_lipid_condensation_event.py",
+      "results/phase1/compose_lipid_v8_ugi4_source_v1/build_registry.py",
+      "results/phase1/compose_lipid_v8_ugi4_source_v1/check_prior_dictionary.py"
+    ],
+    "duration_seconds": 0.0752647090703249,
+    "exit_code": 0
+  },
+  "vendor-verify": {
+    "command": [
+      "make",
+      "verify"
+    ],
+    "duration_seconds": 0.22732095792889595,
+    "exit_code": 0
+  }
+}

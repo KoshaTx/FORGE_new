@@ -1,0 +1,70 @@
+{
+  "archives_inspected": 257,
+  "correction": "The user already has precursor structures and construction records from the v5 release; the unresolved issue is complete current-corpus coverage, not the absence of any such data.",
+  "existing_local_v5_files": {
+    "construction_supervision.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/construction_supervision.jsonl.gz",
+      "rows": 279687,
+      "sha256": "860744d5dbda12bc13968ebe907f99a6889b6ad0b130fea5a629fabdb0e7fb6f"
+    },
+    "precursors.jsonl.gz": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/precursors.jsonl.gz",
+      "rows": 5997,
+      "sha256": "71b43339935347062fee1e05f0eb3adf8acc3b9efc4d980a9cadacfd69f2c0e0"
+    }
+  },
+  "inputs": {
+    "FAMILY_DECOMPOSITION_KEY.md": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/FAMILY_DECOMPOSITION_KEY.md",
+      "sha256": "9bec6f410a7ed8ea7c7dfd144d8b0a2ff19fffdea33836c7a20222a450fa7d05"
+    },
+    "archive-members.json": {
+      "path": "results/phase1/compose_lipid_v8_source_presence_audit_v1/archive-members.json",
+      "sha256": "67b8862bcc5d18d13b8cf8c45137bc5a8cca57fbd3abc609ef164900c700530e"
+    },
+    "existing-v5-files.json": {
+      "path": "results/phase1/compose_lipid_v8_source_presence_audit_v1/existing-v5-files.json",
+      "sha256": "bb40b022cdbd4a7e4a5438a2d3f77b402543de3b91b0f09d887e554f2235e21a"
+    },
+    "local-file-inventory.txt.gz": {
+      "path": "results/phase1/compose_lipid_v8_source_presence_audit_v1/local-file-inventory.txt.gz",
+      "sha256": "2a4574f96001ffa5c9128b0d4f27ef9d7563ad506c2f7fd07119d8a1287b9b5b"
+    },
+    "payload-fields.json": {
+      "path": "results/phase1/compose_lipid_v8_source_presence_audit_v1/payload-fields.json",
+      "sha256": "4b2666e198714b90efd3e9593b0ec9fb499170a313d80b59b58eb41633b14963"
+    },
+    "prior_dictionary_concordance.json": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/prior_dictionary_concordance.json",
+      "sha256": "d3b831355558031491344a1d35c66f1f8aae97175808c075a6fe82c17d29deae"
+    }
+  },
+  "matching_archive_members": [],
+  "production_code_changed": false,
+  "random_sampling_used": false,
+  "readable_archives": 254,
+  "rows_field_audited": {
+    "accepted": 200000,
+    "assignments": 200000,
+    "targets": 3182837
+  },
+  "schema_version": "forge.compose_lipid_source_presence.v1",
+  "scope_limits": [
+    "Known project directories and their ignored files/worktrees were inventoried.",
+    "The downloaded corpus was audited for JSON field paths and types, not by reading held-out product graphs.",
+    "The legacy dictionary is present; its prior concordance audit leaves many v8 labels unresolved.",
+    "Downloads and Desktop could not be inspected because operating-system access was denied in prior searches.",
+    "No authenticated browser was available to inspect additional private Drive content.",
+    "Absence from these locations does not prove absence from every user storage location."
+  ],
+  "seed": 0,
+  "status": "legacy_precursor_data_present_complete_current_source_mapping_not_located",
+  "tests_rerun": false,
+  "training_calls": 0,
+  "training_ready": false,
+  "unreadable_archives": [
+    "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_epoxide_source_v1/love-si-europepmc-current.zip",
+    "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_epoxide_source_v1/love-si-europepmc.zip",
+    "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_v8_michael_source_v1/akinc-supplements.zip"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "family": "aldehyde_ugi4",
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/adjudication.json",
+      "sha256": "e8e442e336768cd8ad495df45bcb523175095bed6c86caa3555256e61f5398ab"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "functional_group_registry": {
+      "path": "data/vendor/qualified_a3_source_program_v2.json",
+      "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+    },
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_ugi4_source_program_v1.json",
+      "sha256": "cc42fc1dbfd88e92194cc325c62d73b425b6186eb46e6d00e3950317ec8bee5b"
+    }
+  },
+  "maximum_outcomes": 256,
+  "policy": {
+    "fit_population": "enforced_product_protection_preparation_view",
+    "generation_calls": 0,
+    "provider_heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "reaction_id": "source_aldehyde_ugi4",
+  "schema_version": "forge.compose_lipid_source_event_config.v1"
+}

@@ -1,0 +1,165 @@
+{
+  "ambiguity_controls": [
+    {
+      "components": {
+        "acceptor_tail": "C=CC(=O)NCCCCCCCCCCCC",
+        "amine_head": "NCCNCCNCCN"
+      },
+      "events": 5,
+      "expected_formula": "C81H163N9O5",
+      "expected_forward_product_count": 2,
+      "expected_product": "N(CCC(=O)NCCCCCCCCCCCC)(CCC(=O)NCCCCCCCCCCCC)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+      "family": "aza_michael_acrylamide",
+      "interpretation": "The source resolves and characterizes a specific isomer. An unspecified five-event program is ambiguous and must not claim that exact source-resolved attachment. This is a negative control of attribution, not an experimental failure.",
+      "label": "Akinc_98N12_5_1_unresolved_without_attachment_sites",
+      "locator": "SI PDF pp. 11-12, 98N12-5(1) drawing; PDF p. 20 Supplementary Fig. 2 reports two five-tail isomers"
+    }
+  ],
+  "assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-article.html",
+      "sha256": "39c2c11298d91861c3c04737e6f5827032d1eba9b7ffd55cccc01f0dcddafb50"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_scheme": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-fig1.jpg",
+      "sha256": "a6f68c7af40b5d74585082b517da26f5aa0488f1e2f611c820fe7aca2610afab"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-si.pdf",
+      "sha256": "c7367c7253d2f8a137d0e2508dbb775f6e47d637ee519cf2da01d4ccaefa3808"
+    }
+  },
+  "conditions": {
+    "acrylamide_duration_h": 168,
+    "acrylate_duration_h": 24,
+    "added_solvent": "none for the stated library protocol unless otherwise specified",
+    "analytical_evidence": "Product drawings, IR, NMR and high-resolution ESI values are reported for selected controls. Source spectra are not independently reinterpreted here.",
+    "atmosphere": "not specified",
+    "catalyst": "none in the stated library protocol",
+    "isolated_yields_for_controls": null,
+    "locator": "Main Methods: Library synthesis; SI p. 1 purification and characterization",
+    "precursor_scale": "200 mg of each amine per library reaction",
+    "stoichiometry": "Acrylate library default two acceptors per amine, with specified exceptions; acrylamide library uses the maximal per-amine feed ratio. Feed ratio is not evidence that every site reacted. SI Table 1 records exceptions.",
+    "temperature_c": 90,
+    "vessel": "5 mL Teflon-lined glass screw-top vial",
+    "workup": "Library mixtures cooled and used without purification unless specified. Selected compounds purified by silica chromatography using DCM/MeOH/NH4OH mixtures."
+  },
+  "created_at_utc": "2026-09-18T18:34:29.720764+00:00",
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "families": [
+    "aza_michael_acrylate",
+    "aza_michael_acrylamide"
+  ],
+  "limitations": [
+    {
+      "disposition": "abstain",
+      "reason": "The v8 O-series architecture label says full occupancy; the 2008 Methods uses a default 2:1 feed and explicit exceptions. Neither feed ratio nor that label establishes maximum substitution for every head."
+    },
+    {
+      "disposition": "abstain",
+      "reason": "Other acrylate source subfamilies (paracyclophane, ricinoleic and multiarm) still require their own source-specific occupancy and precursor-bank assignments. No source architecture is inferred by visual resemblance."
+    },
+    {
+      "disposition": "abstain",
+      "reason": "SI 1N12 lists fractional vinyl resonances although the displayed product is saturated. Preserve this analytical limitation; the computed control is not a claim of sample purity or independent experimental validation."
+    },
+    {
+      "disposition": "abstain",
+      "reason": "Computed reconstruction does not establish the chemical precision of corpus-wide inferred assignments. No source execution, yield, L2 or L3 label is admitted."
+    }
+  ],
+  "pmid": "18438401",
+  "primary_doi": "10.1038/nbt1402",
+  "registry": {
+    "path": "data/vendor/qualified_michael_source_program_v1.json",
+    "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+  },
+  "schema_version": "forge.repeated_source_adjudication.v1",
+  "source_contract": {
+    "accumulator_role": "amine_head",
+    "coupling": "The same complete acceptor is used at every declared event. N/O interfaces remain separate. No physical order inferred among commuting additions.",
+    "event_count_field": "occupancy",
+    "missing_metadata": "Exclude missing occupancy or component labels; do not infer full occupancy from available N-H sites.",
+    "post_assembly": "Methyl-iodide quaternization shown in Fig. 1 is a distinct optional step, absent from this program.",
+    "reaction_sites": "Non-acyl neutral primary/secondary amine N-H, terminal beta carbon of the bound ester or amide acceptor. Complete tail topology is preserved.",
+    "side_role": "acceptor_tail",
+    "source_supported_events": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "source_controls": [
+    {
+      "components": {
+        "acceptor_tail": "C=CC(=O)OCCCCCCCCCC",
+        "amine_head": "COCCCN"
+      },
+      "events": 2,
+      "expected_formula": "C30H59NO5",
+      "expected_product": "COCCCN(CCC(=O)OCCCCCCCCCC)CCC(=O)OCCCCCCCCCC",
+      "family": "aza_michael_acrylate",
+      "label": "Akinc_1L10",
+      "locator": "SI PDF pp. 3-4, selected characterized lipidoids, 1L10; main Fig. 1 amine 1 / O10",
+      "reported_ion": "[M+H]+",
+      "reported_ion_formula": "C30H60NO5",
+      "reported_mz_calculated": 514.4471,
+      "reported_mz_found": 514.4464
+    },
+    {
+      "components": {
+        "acceptor_tail": "C=CC(=O)OCCCCCCCCCCCC",
+        "amine_head": "COCCCN"
+      },
+      "events": 2,
+      "expected_formula": "C34H67NO5",
+      "expected_product": "COCCCN(CCC(=O)OCCCCCCCCCCCC)CCC(=O)OCCCCCCCCCCCC",
+      "family": "aza_michael_acrylate",
+      "label": "Akinc_1L12",
+      "locator": "SI PDF p. 4, 1L12; main Fig. 1 amine 1 / O12",
+      "reported_ion": "[M+H]+",
+      "reported_ion_formula": "C34H68NO5",
+      "reported_mz_calculated": 570.5097,
+      "reported_mz_found": 570.5096
+    },
+    {
+      "components": {
+        "acceptor_tail": "C=CC(=O)NCCCCCCCCCCCC",
+        "amine_head": "COCCCN"
+      },
+      "events": 2,
+      "expected_formula": "C34H69N3O3",
+      "expected_product": "COCCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+      "family": "aza_michael_acrylamide",
+      "label": "Akinc_1N12",
+      "locator": "SI PDF pp. 7-8, 1N12; main Fig. 1 amine 1 / N12",
+      "reported_ion": "[M+H]+",
+      "reported_ion_formula": "C34H70N3O3",
+      "reported_mz_calculated": 568.5417,
+      "reported_mz_found": 568.5414
+    }
+  ],
+  "training_ready": false,
+  "visual_inspection": {
+    "main": "Figure 1 complete reactants and final assemblies viewed.",
+    "structure_transcription": "Reactants and products transcribed from the displayed schemes, separately from transform output. Neutral formulas remove the one added proton from the reported [M+H]+ formula.",
+    "supplement_pdf_pages_one_based": [
+      3,
+      4,
+      7,
+      8,
+      11,
+      12,
+      20
+    ]
+  }
+}

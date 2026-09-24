@@ -1,0 +1,44 @@
+{
+  "families": {
+    "alpha_isocyanoester_dihydroimidazole": {
+      "reaction_id": "source_miao_ethyl_isocyanoacetate_cyclization",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "coupled_ketone": "coupled_ketone",
+        "isocyanide": "isocyanide"
+      }
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_miao_cyclic_source_program_v1.json",
+      "sha256": "16655b684c769e52d21dfb2117d06c75c847a4ab9400a68cfb6a7264ea7f99d2"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_miao_cyclic_source_v1/adjudication.json",
+      "sha256": "3a868473552aff2b2a96882b5b917553bfac324213601adc8b32f2b61c89282e"
+    }
+  },
+  "maximum_outcomes": 256,
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "one_supplied_complete_component_per_role_quantity_one",
+    "population": "current_full_preparation_eligible_only",
+    "retained_handles": "source_role_atom_provenance_excluding_consumed_sites",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_fixed_replay_config.v1"
+}

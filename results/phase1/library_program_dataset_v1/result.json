@@ -1,0 +1,308 @@
+{
+  "artifacts": {
+    "component_partitions.json": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "products.csv.gz": {
+      "path": "results/phase1/library_program_dataset_v1/products.csv.gz",
+      "sha256": "81009f3f5437d8b88963df26b539e97004c8a80952ae90e2e6e55dce108f49da"
+    },
+    "programs.jsonl.gz": {
+      "path": "results/phase1/library_program_dataset_v1/programs.jsonl.gz",
+      "sha256": "964f38cba65e23e4070732a62f0e9e986b2c8ca4f39d24343295d167e2c0d928"
+    },
+    "row_partitions.csv.gz": {
+      "path": "results/phase1/library_program_dataset_v1/row_partitions.csv.gz",
+      "sha256": "052036901754947b0e159db26f31e4853f99efa987275def9d54344da0acb301"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/library_program_dataset_v1.json",
+    "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+  },
+  "created_at_utc": "2026-09-14T01:21:11.570989+00:00",
+  "duration_seconds": 748.9939661670942,
+  "environment": {
+    "rdkit": "2026.03.5",
+    "workers": 2
+  },
+  "gates": {
+    "all_families_have_eligible_train_calibration_and_heldout": true,
+    "all_source_rows_have_unique_registry_qualified_programs": false,
+    "all_source_rows_preserved": true,
+    "frozen_nontraining_identities_excluded_from_training": true,
+    "no_identity_overlap_across_active_partitions": true
+  },
+  "generator_sampling_calls": 0,
+  "inputs": {
+    "building_blocks": {
+      "path": "data/vendor/building_block_pool_v1.json",
+      "sha256": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18"
+    },
+    "corpus": {
+      "path": "data/vendor/r1_reaction_enumerated_support_v1.csv",
+      "sha256": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "m0_constitutional_folds": {
+      "path": "data/splits/m0_03_constitutional/r0_fold_assignments.csv",
+      "sha256": "c9e616f4a80090c92b16fc9cdceefa4d1163da34659cb43319813fcac5e0ac4d"
+    },
+    "m0_original_folds": {
+      "path": "data/splits/m0_03/r0_fold_assignments.csv",
+      "sha256": "38d297f934812a37279d4dbd1cad99cb030d3f60caa270a66eeeb4019dc46b2c"
+    },
+    "multireaction_atlas": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/reaction_program_atlas.csv.gz",
+      "sha256": "6b5021e986e9e514ccca74dc6b6b0ccfef6dd2e9c40f209aedf6f64bb516e5c2"
+    },
+    "multireaction_components": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_registry.csv.gz",
+      "sha256": "15f77ca4ccc529f16ceb4897487074e6a4638ad51f6f13e42956b7d132c17a31"
+    },
+    "multireaction_original_atlas": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/reaction_program_atlas.csv.gz",
+      "sha256": "1202d44de9296cdb0c531951c9e3a4afaeeaee2602b6d2d929bb581614fd139b"
+    },
+    "multireaction_original_splits": {
+      "path": "results/phase1/bl_lx_reaction_enumerated_expansion_v1/component_family_splits.csv.gz",
+      "sha256": "2d379d7287037f5cfbe078543e267eac5ed600abee5463a6db6506eedf9dac83"
+    },
+    "multireaction_splits": {
+      "path": "results/phase1/bl_lx_mixed_repeat_expansion_v2/component_family_splits.csv.gz",
+      "sha256": "6c9f6a3d8d0668763a7f057a53f8782884f001f999303ce01dc68b9f28d42c8c"
+    },
+    "single_event_ledger": {
+      "path": "results/phase1/combinatorial_libraries_v1/row_qualification.jsonl.gz",
+      "sha256": "245d3fdb357b5c58e706dc0d1ecb05c653d07e941cd42ce0d38d5e2feb21123c"
+    },
+    "single_event_result": {
+      "path": "results/phase1/combinatorial_libraries_v1/result.json",
+      "sha256": "c08ce9c0a6ec4d30ab469f4bb8688c94aaeb54d673cd2d0bf86d7bdc23b80e2f"
+    },
+    "ugi_assignments": {
+      "path": "results/phase1/ugi_balanced_chemistry_corpus_v2/assignments.csv.gz",
+      "sha256": "9a50c703ed6aa919b251678c04b7a44e93b3233a12fc13b5d6697683bb5b5184"
+    },
+    "ugi_components": {
+      "path": "results/phase1/ugi_component_expansion/component_registry.csv.gz",
+      "sha256": "55784469fe0de7ff62f7a393b8af05056328e004a2bf75c215f2feb723963dfd"
+    },
+    "ugi_original_assignments": {
+      "path": "data/splits/phase1/ugi_l1_assignments.csv.gz",
+      "sha256": "2a3608520ab9ef30e465b0c35547a938583dcae3b90f9e821e5dfd00af6e6ee0"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    }
+  },
+  "nonclaims": [
+    "Programs are computed minimal constitutional traces, not source-executed syntheses or recovered experimental step order.",
+    "Raw replay outside registry policy is diagnostic only; it confers no supervision admission.",
+    "Multiple policy-valid minimal paths abstain from unique ordered-program supervision.",
+    "Every source row, failed program and mixed-partition combination remains in the ledgers; sampling weights are zero outside eligible training products.",
+    "Historical partitions are unchanged. Only identity/fold metadata is used; no R0 blocks or biological labels are extracted.",
+    "New partitions establish exact identity disjointness, not chemical similarity-family separation or an untouched external test set.",
+    "Use fresh model training for these partitions; past checkpoint exposure is not erased by making new splits.",
+    "Passing individual trace checks does not establish twelve-family model performance, realism or L2/L3 closure."
+  ],
+  "partitions": {
+    "component_identities": 489,
+    "cross_partition_identity_overlaps": 0,
+    "historical_conflicting_fold_identities": 23643,
+    "historical_identity_constraints": 223703,
+    "protected_identities_in_train": 0,
+    "quarantine_reason_counts": {
+      "cross_partition_intermediate_or_product": 0,
+      "mixed_component_partitions": 303711,
+      "protected_product_or_intermediate": 432
+    }
+  },
+  "programs": {
+    "abstention_counts_per_group_target": {
+      "append_only_frontier_above_targets": 35000,
+      "exhausted": 7252,
+      "multiple_policy_valid_minimal_paths": 18798,
+      "registry_policy_no_minimal_path": 108771
+    },
+    "groups": 281973,
+    "minimal_depth_counts_per_group_target": {
+      "1": 307194,
+      "2": 45120,
+      "3": 33186,
+      "4": 36513
+    },
+    "termination_counts": {
+      "all_targets_recovered": 279761,
+      "append_only_frontier_above_targets": 1322,
+      "exhausted": 890
+    }
+  },
+  "schema_version": "forge.combinatorial_program_dataset.v1",
+  "seed": 20260913,
+  "sources": {
+    "experiments/phase1/multireaction/library_program_dataset.py": "eef775546369adc46324fd0df357da26c24d588871e34e6cb007755ebec93979",
+    "forge/assembly/families.py": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4",
+    "forge/assembly/library_programs.py": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f",
+    "forge/assembly/registry.py": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037",
+    "forge/chemistry/reactive_sites.py": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964",
+    "forge/core/hashing.py": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494",
+    "forge/corpus/combinatorial_libraries.py": "990e32fc051fdd3d97e10d776e77597a3d4b0296d142602f48fca8ab32cc19b0",
+    "forge/corpus/library_program_dataset.py": "a7625c3659864f106d6da9d05bc3def3c8767629736213c8483612b62691acae",
+    "forge/corpus/library_splits.py": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+  },
+  "status": "blocked",
+  "summary": {
+    "families": {
+      "acetal_aldehyde_diol": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 114,
+          "heldout": 49,
+          "train": 624
+        },
+        "exact_program_rows": 1989,
+        "qualified_program_rows": 1989,
+        "source_rows": 1989
+      },
+      "amide_coupling_acid_amine": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 63,
+          "heldout": 192,
+          "train": 1386
+        },
+        "exact_program_rows": 11310,
+        "qualified_program_rows": 3666,
+        "source_rows": 16590
+      },
+      "aza_michael_amine_acrylate": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 21,
+          "heldout": 72,
+          "train": 2065
+        },
+        "exact_program_rows": 11310,
+        "qualified_program_rows": 3666,
+        "source_rows": 16590
+      },
+      "carbamate_amine_chloroformate": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 14,
+          "heldout": 120,
+          "train": 2016
+        },
+        "exact_program_rows": 11310,
+        "qualified_program_rows": 3666,
+        "source_rows": 16590
+      },
+      "disulfide_coupling": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 28,
+          "heldout": 21,
+          "train": 351
+        },
+        "exact_program_rows": 780,
+        "qualified_program_rows": 780,
+        "source_rows": 780
+      },
+      "epoxide_opening_amine": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 14,
+          "heldout": 120,
+          "train": 2013
+        },
+        "exact_program_rows": 11310,
+        "qualified_program_rows": 3666,
+        "source_rows": 16590
+      },
+      "iphos_amine_dioxaphospholane": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 28,
+          "heldout": 96,
+          "train": 1953
+        },
+        "exact_program_rows": 11310,
+        "qualified_program_rows": 3666,
+        "source_rows": 16590
+      },
+      "passerini_3cr": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 171,
+          "heldout": 672,
+          "train": 13728
+        },
+        "exact_program_rows": 77571,
+        "qualified_program_rows": 77571,
+        "source_rows": 77571
+      },
+      "reductive_amination_amine_aldehyde": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 133,
+          "heldout": 140,
+          "train": 1512
+        },
+        "exact_program_rows": 14790,
+        "qualified_program_rows": 4794,
+        "source_rows": 21654
+      },
+      "thiol_michael_thioether": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 21,
+          "heldout": 18,
+          "train": 858
+        },
+        "exact_program_rows": 1521,
+        "qualified_program_rows": 1521,
+        "source_rows": 1521
+      },
+      "ugi_3cr_agile": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 133,
+          "heldout": 2100,
+          "train": 36112
+        },
+        "exact_program_rows": 222768,
+        "qualified_program_rows": 179010,
+        "source_rows": 222768
+      },
+      "urea_amine_isocyanate": {
+        "eligible_unique_products_by_fold": {
+          "calibration": 17,
+          "heldout": 171,
+          "train": 1725
+        },
+        "exact_program_rows": 46044,
+        "qualified_program_rows": 10449,
+        "source_rows": 55032
+      }
+    },
+    "fold_counts": {
+      "calibration": 4021,
+      "heldout": 5988,
+      "quarantine": 303857,
+      "train": 144181
+    },
+    "source_rows": 464265,
+    "train_family_masses": {
+      "acetal_aldehyde_diol": 0.08333333333333334,
+      "amide_coupling_acid_amine": 0.08333333333333334,
+      "aza_michael_amine_acrylate": 0.08333333333333333,
+      "carbamate_amine_chloroformate": 0.08333333333333333,
+      "disulfide_coupling": 0.08333333333333333,
+      "epoxide_opening_amine": 0.08333333333333333,
+      "iphos_amine_dioxaphospholane": 0.08333333333333334,
+      "passerini_3cr": 0.08333333333333334,
+      "reductive_amination_amine_aldehyde": 0.08333333333333333,
+      "thiol_michael_thioether": 0.08333333333333331,
+      "ugi_3cr_agile": 0.08333333333333333,
+      "urea_amine_isocyanate": 0.08333333333333333
+    },
+    "unique_products": 458047,
+    "weight_policy": "mean_source_realism_weight_per_constitution_then_equal_family_mass_within_eligible_train"
+  },
+  "training_calls": 0
+}

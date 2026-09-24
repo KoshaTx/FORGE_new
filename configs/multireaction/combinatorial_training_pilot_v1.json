@@ -1,0 +1,77 @@
+{
+  "schema_version": "forge.combinatorial_training_pilot_config.v1",
+  "scientific_question": "Does bounded realism-weighted training of one shared sparse flow improve denoising on every qualified reaction family's complete calibration partition without accessing heldout structures or generating molecules?",
+  "hypothesis": "Equal-family balanced training will reduce paired fixed-corruption calibration loss in all twelve reaction families while preserving adapter-fixed states and Ugi exact-reconstruction behavior.",
+  "alternative_explanation": "The shared model can memorize one example per family yet fail to transfer across distinct calibration products because of family interference, inadequate capacity, or a train-calibration support shift.",
+  "seed": 20260914,
+  "expected_programs": 12,
+  "expected_evaluation_records": 750,
+  "inputs": {
+    "cache_result": {
+      "path": "results/phase1/combinatorial_program_cache_v2/result.json",
+      "sha256": "5d766f29c3c777be3b6744c63bd54a1b9e770e19f03a30d19db8909b5045a602"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "cache_config": {
+      "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+      "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+    },
+    "overfit_gate_result": {
+      "path": "results/phase1/combinatorial_overfit_gate_v1/result.json",
+      "sha256": "82f2839b9a6fc1aaac5f4b043b949ea76cf54140b1efb03359e292583fe9bf9e"
+    }
+  },
+  "model": {
+    "architecture": "reaction_program_sparse_whole_lipid_flow",
+    "hidden_dim": 64,
+    "layers": 3,
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "dropout": 0.0,
+    "bond_classes": 4
+  },
+  "training": {
+    "steps": 768,
+    "records_per_program_per_step": 1,
+    "sampling_policy": "realism_weight_within_family_equal_mass_between_families",
+    "family_loss_policy": "equal_program_mass",
+    "flow_time_policy": "uniform_bounded_per_record",
+    "minimum_flow_time": 0.02,
+    "maximum_flow_time": 0.98,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00005,
+    "gradient_clip_norm": 1.0,
+    "source_probability_floor": 0.00001,
+    "loss_window_steps": 32,
+    "report_steps": [
+      1,
+      32,
+      128,
+      256,
+      512,
+      768
+    ],
+    "cpu_threads": 2
+  },
+  "evaluation": {
+    "fold": "calibration",
+    "batch_size": 16,
+    "flow_time": 0.5,
+    "corruption_policy": "fixed_paired_draws_before_and_after_training",
+    "maximum_records_per_program": null
+  },
+  "acceptance": {
+    "maximum_final_to_initial_training_loss_ratio": 0.8,
+    "maximum_final_to_initial_calibration_loss_ratio": 0.9,
+    "minimum_improved_calibration_programs": 12,
+    "require_ugi_exact_reconstruction_not_regressed": true
+  },
+  "candidate_selection": false,
+  "generation_calls": 0,
+  "heldout_structure_access": false,
+  "remote_compute": false,
+  "claim_boundary": "A single-seed local training and paired calibration-denoising pilot only; no heldout, unconditional generation, realism, synthesis-success, or model-promotion claim."
+}

@@ -1,0 +1,49 @@
+{
+  "inputs": {
+    "project": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "specification": {
+      "path": "experiments/installation_smoke/experiment.json",
+      "sha256": "5ae015e119b4fb43210f49a5dbbbb17514eb69003124ef988f048501f43b6a42"
+    }
+  },
+  "plan": {
+    "backend": "modal",
+    "experiment_id": "installation-smoke",
+    "profile": "smoke",
+    "replicate": 0,
+    "request_id": "d341c171238a527d448f58fe0319cb6c7d9a3bce335f62edbefcaa79e9ee796a",
+    "resource_envelope": {
+      "cpus": 1,
+      "gpu_type": null,
+      "memory_mb": 512,
+      "timeout_seconds": 60
+    },
+    "run_id": null,
+    "source_sha256": "0bf5e9a37fb7782391dc8d2728ecabccaf27d090fca81f727ee16aa4b2ec7016",
+    "spec_sha256": "5ae015e119b4fb43210f49a5dbbbb17514eb69003124ef988f048501f43b6a42",
+    "uploads": {
+      "experiments/installation_smoke/configs/snapshot_v1.json": {
+        "bytes": 58,
+        "sha256": "67a8ae4d8a1b207f35795c164835e1749f1cbfa1e19f91d1e0170c6e3b4527a3"
+      },
+      "experiments/installation_smoke/experiment.json": {
+        "bytes": 1393,
+        "sha256": "5ae015e119b4fb43210f49a5dbbbb17514eb69003124ef988f048501f43b6a42"
+      },
+      "pyproject.toml": {
+        "bytes": 3754,
+        "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+      },
+      "uv.lock": {
+        "bytes": 988776,
+        "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+      }
+    },
+    "why_run_id_is_pending": "The run id includes the actual remote Python, package, CUDA, and accelerator identity."
+  },
+  "remote_jobs_launched": 0,
+  "status": "dry_run_preflight_pass"
+}

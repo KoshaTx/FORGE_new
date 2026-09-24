@@ -1,0 +1,267 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconciled/evidence.sqlite",
+    "sha256": "303e87281332a4ed3b322c22586874ae58ed949c5b84577c9bca7b3f98e98dd2"
+  },
+  "by_family": {
+    "a3_amine_aldehyde_alkyne": {
+      "eligible": 36624,
+      "exact": 34104,
+      "pending": 2520
+    },
+    "acid_epoxide_diester_multistep": {
+      "eligible": 101098,
+      "exact": 101098,
+      "pending": 0
+    },
+    "aema_aza_thiol_addition": {
+      "eligible": 5505,
+      "exact": 3565,
+      "pending": 1940
+    },
+    "aldehyde_ugi3": {
+      "eligible": 2283,
+      "exact": 2283,
+      "pending": 0
+    },
+    "aldehyde_ugi4": {
+      "eligible": 63616,
+      "exact": 63616,
+      "pending": 0
+    },
+    "alpha_isocyanoester_dihydroimidazole": {
+      "eligible": 35728,
+      "exact": 35728,
+      "pending": 0
+    },
+    "amine_alkylation": {
+      "eligible": 92699,
+      "exact": 0,
+      "pending": 92699
+    },
+    "amine_epoxide_opening": {
+      "eligible": 33507,
+      "exact": 0,
+      "pending": 33507
+    },
+    "aryl_reductive_amination": {
+      "eligible": 19216,
+      "exact": 7788,
+      "pending": 11428
+    },
+    "aza_michael_acrylamide": {
+      "eligible": 10127,
+      "exact": 10127,
+      "pending": 0
+    },
+    "aza_michael_acrylate": {
+      "eligible": 10278,
+      "exact": 10270,
+      "pending": 8
+    },
+    "disulfide_michael": {
+      "eligible": 96833,
+      "exact": 96833,
+      "pending": 0
+    },
+    "epoxide_opening_o_acylation": {
+      "eligible": 21462,
+      "exact": 21462,
+      "pending": 0
+    },
+    "iphos_ring_opening": {
+      "eligible": 103318,
+      "exact": 62636,
+      "pending": 40682
+    },
+    "ketone_isocyanide_amide": {
+      "eligible": 33693,
+      "exact": 0,
+      "pending": 33693
+    },
+    "ketone_ugi4": {
+      "eligible": 27027,
+      "exact": 27027,
+      "pending": 0
+    },
+    "maleate_addition": {
+      "eligible": 38472,
+      "exact": 38472,
+      "pending": 0
+    },
+    "o_esterification": {
+      "eligible": 14864,
+      "exact": 10391,
+      "pending": 4473
+    },
+    "passerini_3cr": {
+      "eligible": 62188,
+      "exact": 62188,
+      "pending": 0
+    },
+    "preassembled_thiol_yne_tail_amidation": {
+      "eligible": 260470,
+      "exact": 233184,
+      "pending": 27286
+    },
+    "reductive_amination": {
+      "eligible": 28471,
+      "exact": 28471,
+      "pending": 0
+    },
+    "thiolactone_aminolysis_michael": {
+      "eligible": 174987,
+      "exact": 174987,
+      "pending": 0
+    }
+  },
+  "duplicate_eligible_constitutions": 0,
+  "elapsed_seconds": 36.63371149986051,
+  "evidence_receipts": [
+    {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/population-audit.json",
+      "sha256": "618804909d2f46be5f336102c4ca032cb0089c1d6227aa4e5bc343419e4feb30"
+    },
+    {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/incremental-replay-audit.json",
+      "sha256": "62e1e9635bf56941e67d2fb68065dfdc396f8213c9174c16b265f2aa9c26daae"
+    },
+    {
+      "path": "results/phase1/compose_lipid_training_readiness_v8/incremental-replay-audit.json",
+      "sha256": "f7b61bd3968cfc14d7e109b5353f9c0835ce6e4479b9c75f29a5cc71e0653e29"
+    },
+    {
+      "path": "results/phase1/compose_lipid_training_readiness_v8/combined-replay-audit.json",
+      "sha256": "7774f45a4cd2c012ca76c8c312bd8afa2c3497d3538177a1a8d52317c928c06a"
+    },
+    {
+      "path": "results/phase1/compose_lipid_training_readiness_v9/combined-replay-audit.json",
+      "sha256": "bf0ea308514d7289dd7d2a4e9c3b62785a40f6b8856f017cd07d2c6f140883ca"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iphos_evidence_delta_v1/combined-replay-audit.json",
+      "sha256": "3dde2a24dbf491bd8136468872ceaaccb9b00b8a6a30f0a25cfdb9e372277d4f"
+    },
+    {
+      "path": "results/phase1/compose_lipid_acrylate_role_bindings_v1/audit.json",
+      "sha256": "5dd705a1b253e7e6723d6294bc4e1de23ead5b55e1d15b040fb20c73c172d3e4"
+    },
+    {
+      "path": "results/phase1/compose_lipid_aema_source_v1/reconciled/combined-replay-audit.json",
+      "sha256": "d9001984bb2bc3d96ef8c9b9c823f86e057050fe098ff017a87c5266af50a528"
+    },
+    {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconciled/combined-replay-audit.json",
+      "sha256": "3b5051007e23a330afc628f40c7241af2301d27cbbcd925066e532897d0def0c"
+    }
+  ],
+  "implementation": {
+    "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconcile.py",
+    "sha256": "7001029a7744edfe520729cefda956ef3d6eae791f5814ab235f2d1dc2d667f3"
+  },
+  "imports": {
+    "3b5051007e23a330afc628f40c7241af2301d27cbbcd925066e532897d0def0c": {
+      "eligible_attempts": 101098,
+      "exact": 101098,
+      "historical_excluded": 0,
+      "nonexact": 0,
+      "source_rows": 101098
+    },
+    "3dde2a24dbf491bd8136468872ceaaccb9b00b8a6a30f0a25cfdb9e372277d4f": {
+      "eligible_attempts": 16727,
+      "exact": 16727,
+      "historical_excluded": 0,
+      "nonexact": 0,
+      "source_rows": 16727
+    },
+    "5dd705a1b253e7e6723d6294bc4e1de23ead5b55e1d15b040fb20c73c172d3e4": {
+      "eligible_attempts": 151,
+      "exact": 143,
+      "historical_excluded": 0,
+      "nonexact": 8,
+      "source_rows": 151
+    },
+    "618804909d2f46be5f336102c4ca032cb0089c1d6227aa4e5bc343419e4feb30": {
+      "eligible_attempts": 48265,
+      "exact": 48265,
+      "historical_excluded": 6524,
+      "nonexact": 0,
+      "source_rows": 54789
+    },
+    "62e1e9635bf56941e67d2fb68065dfdc396f8213c9174c16b265f2aa9c26daae": {
+      "eligible_attempts": 109718,
+      "exact": 109567,
+      "historical_excluded": 0,
+      "nonexact": 151,
+      "source_rows": 109718
+    },
+    "7774f45a4cd2c012ca76c8c312bd8afa2c3497d3538177a1a8d52317c928c06a": {
+      "eligible_attempts": 98862,
+      "exact": 41453,
+      "historical_excluded": 0,
+      "nonexact": 57409,
+      "source_rows": 98862
+    },
+    "bf0ea308514d7289dd7d2a4e9c3b62785a40f6b8856f017cd07d2c6f140883ca": {
+      "eligible_attempts": 2262,
+      "exact": 2262,
+      "historical_excluded": 0,
+      "nonexact": 0,
+      "source_rows": 2262
+    },
+    "d9001984bb2bc3d96ef8c9b9c823f86e057050fe098ff017a87c5266af50a528": {
+      "eligible_attempts": 5505,
+      "exact": 3565,
+      "historical_excluded": 0,
+      "nonexact": 1940,
+      "source_rows": 5505
+    },
+    "f7b61bd3968cfc14d7e109b5353f9c0835ce6e4479b9c75f29a5cc71e0653e29": {
+      "eligible_attempts": 749119,
+      "exact": 701150,
+      "historical_excluded": 0,
+      "nonexact": 47969,
+      "source_rows": 749119
+    }
+  },
+  "inputs": {
+    "incremental_checkpoint": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconciled/combined-replay-audit.json",
+      "sha256": "3b5051007e23a330afc628f40c7241af2301d27cbbcd925066e532897d0def0c"
+    },
+    "partition_receipt": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "previous_index": {
+      "path": "results/phase1/compose_lipid_aema_source_v1/reconciled/result.json",
+      "sha256": "54b64ead80fd54ad4f618e1a96c0de4234b5935a8b4afa3abca33d9b3b6a7992"
+    }
+  },
+  "joint_program_representation_qualified": false,
+  "partition_inputs": {
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/partition.sqlite",
+      "sha256": "cdc482357ed35f6639feed41cdbdd0e2106c3118aa8d48537283304d42c40767"
+    }
+  },
+  "sampling_weights_fitted": false,
+  "schema_version": "forge.compose_lipid_evidence_index.v1",
+  "seed": 0,
+  "summary": {
+    "eligible": 1272466,
+    "exact": 1024230,
+    "pending": 248236
+  },
+  "training_admitted": false,
+  "training_calls": 0,
+  "update_method": "verified_database_backup_then_append_only_new_evidence"
+}

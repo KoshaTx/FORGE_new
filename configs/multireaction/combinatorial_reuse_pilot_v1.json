@@ -1,0 +1,55 @@
+{
+  "alternative_explanation": "Extra training or additional residual capacity explains any gain; topology/core errors may dominate even with equality information.",
+  "arms": [
+    "frozen",
+    "self_control",
+    "reuse",
+    "reuse_disabled"
+  ],
+  "claim_boundary": "Single-seed local diagnostic on previously inspected TRAIN layouts; no statistical noninferiority, heldout generalization, realism or promotion claim.",
+  "decision_rule": "improve_repeated_exact_and_preserve_all_family_metrics_vs_both_controls",
+  "hypothesis": "Exchanging noisy atom information across uniquely corresponding reused precursors improves the original identical-co-reactant reconstruction rate.",
+  "inputs": {
+    "baseline_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "component_partitions": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    }
+  },
+  "policy": {
+    "candidate_selection": false,
+    "checkpoint_promotion": false,
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "remote_compute": false
+  },
+  "sampling_source": "authenticated_baseline_layouts_and_noise",
+  "schema_version": "forge.combinatorial_reuse_pilot.v1_config",
+  "scientific_question": "Does explicit, separately qualified precursor-equality conditioning improve repeated exact programs while preserving all-family validity, reconstruction, diversity and novelty?",
+  "seed": 2026091403,
+  "stopping_rule": "Run one fixed-budget pilot; fail on malformed provenance, nonfinite training or changed fixed states; retain negative results and do not extend training based on outcomes.",
+  "training": {
+    "cpu_threads": 2,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.0003,
+    "maximum_flow_time": 0.98,
+    "minimum_flow_time": 0.02,
+    "steps": 384,
+    "weight_decay": 5e-05
+  }
+}

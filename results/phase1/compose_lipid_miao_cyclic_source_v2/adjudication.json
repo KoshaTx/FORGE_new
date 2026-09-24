@@ -1,0 +1,159 @@
+{
+  "assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_figure_1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig1.png",
+      "sha256": "609d8d856f79e32f25a2b3296139c1f681cd67c6457f1b84041f2221f3233548"
+    },
+    "main_figure_3": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig3.png",
+      "sha256": "92338f18227551f9ae30acff1eaece3ec8ad4cc6fb207d0b0076d790638b4546"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/miao-si.pdf",
+      "sha256": "92d495da953b31003011e7b3e0c44b3fc16f91067e0975abda0c794773c53987"
+    }
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "families": {
+    "alpha_isocyanoester_dihydroimidazole": {
+      "reaction_id": "source_miao_drawn_alpha_isocyanoacetates_cyclization",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "coupled_ketone": "coupled_ketone",
+        "isocyanide": "isocyanide"
+      },
+      "site_contract": [
+        {
+          "atom_map": 1,
+          "properties": {
+            "atomic_number": 7,
+            "formal_charge": 0,
+            "total_hydrogens": 2
+          },
+          "role": "amine_head"
+        },
+        {
+          "atom_map": 2,
+          "properties": {
+            "atomic_number": 6,
+            "formal_charge": 0,
+            "total_hydrogens": 0
+          },
+          "role": "coupled_ketone"
+        },
+        {
+          "atom_map": 3,
+          "properties": {
+            "atomic_number": 6,
+            "total_hydrogens": 0
+          },
+          "role": "isocyanide"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "A2 printed 74.1 g conflicts with 0.1 mmol and reported molecular mass; preserve the source typo, do not use as a quantitative yield/mass label.",
+    "Only the three full alpha-isocyanoacetates Iso4/5/6 explicitly drawn in Fig. 1c are in scope; individual cyclic products of Iso4 and Iso6 have no isolated characterization admitted here.",
+    "The retained separate head N policy is a narrower support scope; it does not assert that every primary amine in the family needs a second head N.",
+    "All source stereochemical annotations are retained in the source figures but removed only for the declared constitutional model. No source potency is transferred."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_miao_cyclic_source_program_v2.json",
+    "sha256": "4337529dd7bc59f98f000576a8c0228da0706cf10c89c37abecdac2cbc62320d"
+  },
+  "regression_controls": [
+    {
+      "components": {
+        "amine_head": "NCCN(C)CCCN",
+        "coupled_ketone": "CC(=O)CC",
+        "isocyanide": "CCOC(=O)C[N+]#[C-]"
+      },
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C15H30N4O2",
+      "expected_forward_product_count": 2,
+      "expected_product": "CCOC(=O)C1N=CC(C)(CC)N1CCN(C)CCCN",
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "label": "non_equivalent_primary_amines",
+      "required_failed_checks": [
+        "unique_unfiltered_forward_exact"
+      ]
+    }
+  ],
+  "schema_version": "forge.fixed_source_event_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "amine_head": "CN(C)CCCN",
+        "coupled_ketone": "CCCCCCCCC=CCCCCCCCC(=O)CCCCCCCC=CCCCCCCCC",
+        "isocyanide": "CCOC(=O)C[N+]#[C-]"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C45H85N3O2",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCOC(=O)C1N=CC(CCCCCCCC=CCCCCCCCC)(CCCCCCCC=CCCCCCCCC)N1CCCN(C)C",
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "label": "A12_Iso5_2DC18",
+      "reported_mh": 700.7,
+      "source_asset": "main_figure_3"
+    },
+    {
+      "components": {
+        "amine_head": "NCCCN1CCCC1",
+        "coupled_ketone": "CCCCCCCCC=CCCCCCCCC(=O)CCCCCCCC=CCCCCCCCC",
+        "isocyanide": "CCOC(=O)C[N+]#[C-]"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C47H87N3O2",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCOC(=O)C1N=CC(CCCCCCCC=CCCCCCCCC)(CCCCCCCC=CCCCCCCCC)N1CCCN1CCCC1",
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "label": "A2_Iso5_2DC18",
+      "reported_mh": 726.7,
+      "source_asset": "main_figure_3"
+    }
+  ],
+  "source_library_scope": {
+    "asset": "main_figure_1",
+    "evidence_basis": "computed_transform_consistency",
+    "individual_execution_admitted": false,
+    "locator": "Fig. 1b generic cyclic ester and Fig. 1c Iso4/5/6 drawings",
+    "precursors": {
+      "Iso4": "[C-]#[N+]CC(=O)OC",
+      "Iso5": "[C-]#[N+]CC(=O)OCC",
+      "Iso6": "[C-]#[N+]CC(=O)OC(C)(C)C"
+    }
+  },
+  "source_procedure": {
+    "A12": {
+      "DCM_ul": 80,
+      "amount_mmol": 0.057,
+      "each_precursor_mmol": 0.2,
+      "ethanol_ul": 120,
+      "mass_mg": 39.8,
+      "product": "yellow oil",
+      "purification": "flash chromatography",
+      "temperature": "room temperature",
+      "time": "overnight",
+      "vessel": "capped glass vial",
+      "yield_percent": 28.4
+    },
+    "A2": {
+      "DCM_ul": 120,
+      "each_precursor_mmol": 0.3,
+      "ethanol_ul": 180,
+      "printed_amount_mmol": 0.1,
+      "printed_mass": "74.1 g",
+      "printed_yield_percent": 34,
+      "procedure_ref": "A12"
+    }
+  },
+  "training_admitted": false
+}

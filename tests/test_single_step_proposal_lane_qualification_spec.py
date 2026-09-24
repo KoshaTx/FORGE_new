@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from forge.synthesis.engine.single_step_benchmark_manifest import _implementation_evidence
+
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/single_step_proposal_lane_qualification_benchmark_v1.json"
 
@@ -163,7 +165,11 @@ def test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout() -> None
     for record in spec["artifacts"].values():
         relative = record["path"]
         assert not any(relative.startswith(prefix) for prefix in forbidden)
-        path = REPO / relative
+        path = (
+            _implementation_evidence(REPO, record, label=relative)
+            if Path(relative).suffix == ".py"
+            else REPO / relative
+        )
         assert path.is_file()
         assert hashlib.sha256(path.read_bytes()).hexdigest() == record["sha256"]
 

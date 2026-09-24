@@ -104,6 +104,18 @@ def _command_data_verify(args: argparse.Namespace) -> int:
     return int(vendor_main(arguments))
 
 
+def _command_compose_lipid(args: argparse.Namespace) -> int:
+    from experiments.phase1.multireaction.compose_lipid import run_import, verify_import
+
+    repo = _repo()
+    if args.compose_action == "import":
+        result = run_import(repo, Path(args.config), Path(args.output))
+    else:
+        result = verify_import(repo, Path(args.result))
+    _print({"status": result["status"], "summary": result["summary"]})
+    return 0
+
+
 def _command_provenance_verify(args: argparse.Namespace) -> int:
     from forge_provenance.pins import main as verify_main
 
@@ -1178,6 +1190,18 @@ def build_parser() -> argparse.ArgumentParser:
     verify_data = data_commands.add_parser("verify")
     verify_data.add_argument("--allow-partial", action="store_true")
     verify_data.set_defaults(function=_command_data_verify)
+
+    compose = data_commands.add_parser(
+        "compose-lipid", help="import or verify a pinned COMPOSE corpus"
+    )
+    compose_commands = compose.add_subparsers(dest="compose_action", required=True)
+    compose_import = compose_commands.add_parser("import")
+    compose_import.add_argument("--config", required=True)
+    compose_import.add_argument("--output", required=True)
+    compose_import.set_defaults(function=_command_compose_lipid)
+    compose_verify = compose_commands.add_parser("verify")
+    compose_verify.add_argument("--result", required=True)
+    compose_verify.set_defaults(function=_command_compose_lipid)
 
     provenance = subcommands.add_parser("provenance", help="verify or archive historical pins")
     provenance_commands = provenance.add_subparsers(dest="provenance_command", required=True)

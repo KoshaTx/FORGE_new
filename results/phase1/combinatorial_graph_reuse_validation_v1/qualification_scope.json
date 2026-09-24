@@ -1,0 +1,468 @@
+{
+  "inputs": [
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_validation_v1/report_scope.py",
+      "sha256": "35767a7ef3f2b48a08db41c68931307aa175cde3041ef3cb70194c8d703d8305"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/result.json",
+      "sha256": "b218cf52fb5f261bfe477e2725ed44de7385be773326b98af0532f3a56974a70"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/layouts.json",
+      "sha256": "dd5e1735c39c321599b16f855ecfbe0dcc48efa11344aa28f0e1e2b432906ac2"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_discovery_v1/reuse_plans.json",
+      "sha256": "5f2590e23d5126019280f631e2300825a0003eaffa67a9697f082c823b5947ce"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/result.json",
+      "sha256": "652c793fc55be97a764736dffa23ccff077030afccc2c749ec033a8f8d12ce41"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/layouts.json",
+      "sha256": "0f22cce5fc6032b9e06443860d4c07c18e1aef9b6eb9869e3cfb226616885ff0"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_1_v1/reuse_plans.json",
+      "sha256": "576a142766ea75c5f9549bba048da2ee59b3a4d10e486ac1ebf7b705579efd68"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/result.json",
+      "sha256": "9ab31f2dccc8970b605376abbe33ba2fc8df410010ee74114a4b08c172b63374"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/layouts.json",
+      "sha256": "6d9b8e49444f1c9dc7f3474eadf43b1342b498438e3c30e430f2b353afdf5028"
+    },
+    {
+      "path": "results/phase1/combinatorial_graph_reuse_confirmation_2_v1/reuse_plans.json",
+      "sha256": "a50bb948024b97c9c3eb12714e43b081da616be49465a6d9dff0f4b36903334f"
+    }
+  ],
+  "interpretation": "Unqualified layouts receive no graph-copy proposals. Lack of improvement in an entirely unqualified stratum does not test the effect of correctly enforcing reuse in that stratum.",
+  "populations": {
+    "confirmation_1": [
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "acetal_aldehyde_diol",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 39,
+        "depth": 1,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 89,
+        "depth": 2,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 17,
+        "depth": 1,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 6,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 105,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 4,
+        "depth": 1,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 4,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 120,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "disulfide_coupling",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 28,
+        "depth": 1,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 100,
+        "depth": 2,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 37,
+        "depth": 1,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 91,
+        "depth": 2,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "passerini_3cr",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 16,
+        "depth": 1,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 112,
+        "depth": 2,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "thiol_michael_thioether",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "ugi_3cr_agile",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 23,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 27,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 17,
+        "depth": 3,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 61,
+        "depth": 4,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      }
+    ],
+    "confirmation_2": [
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "acetal_aldehyde_diol",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 33,
+        "depth": 1,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 95,
+        "depth": 2,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 24,
+        "depth": 1,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 5,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 99,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 5,
+        "depth": 1,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 3,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 120,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "disulfide_coupling",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 43,
+        "depth": 1,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 85,
+        "depth": 2,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 26,
+        "depth": 1,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 102,
+        "depth": 2,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "passerini_3cr",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 27,
+        "depth": 1,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 101,
+        "depth": 2,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "thiol_michael_thioether",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 128,
+        "depth": 1,
+        "family": "ugi_3cr_agile",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 27,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 23,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 17,
+        "depth": 3,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 61,
+        "depth": 4,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      }
+    ],
+    "discovery": [
+      {
+        "attempts": 64,
+        "depth": 1,
+        "family": "acetal_aldehyde_diol",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 21,
+        "depth": 1,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 43,
+        "depth": 2,
+        "family": "amide_coupling_acid_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 13,
+        "depth": 1,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 6,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 45,
+        "depth": 2,
+        "family": "aza_michael_amine_acrylate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 5,
+        "depth": 1,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 1,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "ambiguous_atom_correspondence"
+      },
+      {
+        "attempts": 58,
+        "depth": 2,
+        "family": "carbamate_amine_chloroformate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 64,
+        "depth": 1,
+        "family": "disulfide_coupling",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 17,
+        "depth": 1,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 47,
+        "depth": 2,
+        "family": "epoxide_opening_amine",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 17,
+        "depth": 1,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 47,
+        "depth": 2,
+        "family": "iphos_amine_dioxaphospholane",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 64,
+        "depth": 1,
+        "family": "passerini_3cr",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 10,
+        "depth": 1,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 54,
+        "depth": 2,
+        "family": "reductive_amination_amine_aldehyde",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 64,
+        "depth": 1,
+        "family": "thiol_michael_thioether",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 64,
+        "depth": 1,
+        "family": "ugi_3cr_agile",
+        "qualification_status": "not_repeated"
+      },
+      {
+        "attempts": 14,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 18,
+        "depth": 2,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "qualified"
+      },
+      {
+        "attempts": 3,
+        "depth": 3,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      },
+      {
+        "attempts": 29,
+        "depth": 4,
+        "family": "urea_amine_isocyanate",
+        "qualification_status": "occurrence_partition_mismatch"
+      }
+    ]
+  },
+  "schema_version": "forge.combinatorial_graph_reuse_scope.v1"
+}

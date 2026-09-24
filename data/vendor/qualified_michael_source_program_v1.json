@@ -1,0 +1,216 @@
+{
+  "curation": {
+    "derivation": "Replace the one-atom amine reactant template with the existing non-acyl neutral amine query, preserving map 1. Intersect the mapped acceptor interface atom 6 with O or N; keep every product atom and bond unchanged. Source-supported amine site count is 1..7; a complete acceptor contains exactly one reacting acrylate/acrylamide group. One head plus the explicitly declared number of copies of one tail is mandatory. Preserve the original recursive-N query text: ReactionToSmarts may flatten its H disjunction and recreate the reverse NH radical artifact.",
+    "disposition": "admit_transform_consistency",
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false,
+    "scope": "Event-level repeated assembly; no automatic paper-bank mixing, missing occupancy inference, post-addition methylation or admission of source execution. The supported donor cannot itself carry an unreacted Michael acceptor; the supported tail cannot carry a competing free primary/secondary amine. These substrate-role restrictions exclude potential cross-reaction scope absent from the selected source controls."
+  },
+  "reactions": [
+    {
+      "architecture": "source-declared repeated beta-amino acrylate interface",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[C&H2:2]=[C&H1:3][C&X3:4](=[O&X1:5])[#7,#8;#8:6]>>[N:1][CH2:2][CH2:3][CX3:4](=[OX1:5])[*:6]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [],
+        "temperature_c": 90,
+        "time_h": 24
+      },
+      "implementation": {
+        "functional_group_registry": {
+          "path": "data/vendor/qualified_a3_source_program_v2.json",
+          "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+        },
+        "kind": "derived_source_overlay",
+        "parent_reaction_id": "aza_michael_amine_acrylate",
+        "parent_registry": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[CH2]=[CH1][CX3](=[OX1])[#7,#8]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4
+          ],
+          "name": "acceptor_tail",
+          "required_handle_smarts": "[C&H2]=[C&H1][C&X3](=[O&X1])[#7,#8;#8]"
+        }
+      ],
+      "reaction_id": "source_aza_michael_acrylate",
+      "reaction_version": 1,
+      "selectivity_policy": "Only non-acyl neutral primary/secondary amine N-H sites react. Preserve the complete acceptor and declared repetition. Enumerate all sites; no target-based pruning, experimental selectivity or physical event order is inferred.",
+      "source_program": {
+        "accumulator_role": "amine_head",
+        "event_count_field": "occupancy",
+        "identity_scope": "one complete acceptor identity per program",
+        "interface_atomic_number": 8,
+        "interface_stratum": "O",
+        "maximum_events": 7,
+        "net_byproducts_per_event": {
+          "formal_charge": 0
+        },
+        "physical_order_inferred": false,
+        "repeated_roles": [
+          "acceptor_tail"
+        ],
+        "source_execution_admitted": false
+      },
+      "sources": [
+        {
+          "identifier": "10.1038/nbt1402",
+          "kind": "doi",
+          "locator": "Fig. 1; Methods Library synthesis; SI pp. 3-4, 7-8, 11-12, 20",
+          "notes": "Computed event/repetition support only; preserve declared occupancy and all site ambiguity."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    },
+    {
+      "architecture": "source-declared repeated beta-amino acrylamide interface",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[C&H2:2]=[C&H1:3][C&X3:4](=[O&X1:5])[#7,#8;#7:6]>>[N:1][CH2:2][CH2:3][CX3:4](=[OX1:5])[*:6]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [],
+        "temperature_c": 90,
+        "time_h": 168
+      },
+      "implementation": {
+        "functional_group_registry": {
+          "path": "data/vendor/qualified_a3_source_program_v2.json",
+          "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+        },
+        "kind": "derived_source_overlay",
+        "parent_reaction_id": "aza_michael_amine_acrylate",
+        "parent_registry": {
+          "path": "data/vendor/qualified_reaction_families_v1.json",
+          "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[CH2]=[CH1][CX3](=[OX1])[#7,#8]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4
+          ],
+          "name": "acceptor_tail",
+          "required_handle_smarts": "[C&H2]=[C&H1][C&X3](=[O&X1])[#7,#8;#7]"
+        }
+      ],
+      "reaction_id": "source_aza_michael_acrylamide",
+      "reaction_version": 1,
+      "selectivity_policy": "Only non-acyl neutral primary/secondary amine N-H sites react. Preserve the complete acceptor and declared repetition. Enumerate all sites; no target-based pruning, experimental selectivity or physical event order is inferred.",
+      "source_program": {
+        "accumulator_role": "amine_head",
+        "event_count_field": "occupancy",
+        "identity_scope": "one complete acceptor identity per program",
+        "interface_atomic_number": 7,
+        "interface_stratum": "N",
+        "maximum_events": 7,
+        "net_byproducts_per_event": {
+          "formal_charge": 0
+        },
+        "physical_order_inferred": false,
+        "repeated_roles": [
+          "acceptor_tail"
+        ],
+        "source_execution_admitted": false
+      },
+      "sources": [
+        {
+          "identifier": "10.1038/nbt1402",
+          "kind": "doi",
+          "locator": "Fig. 1; Methods Library synthesis; SI pp. 3-4, 7-8, 11-12, 20",
+          "notes": "Computed event/repetition support only; preserve declared occupancy and all site ambiguity."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-article.html",
+      "sha256": "39c2c11298d91861c3c04737e6f5827032d1eba9b7ffd55cccc01f0dcddafb50"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "scheme": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-fig1.jpg",
+      "sha256": "a6f68c7af40b5d74585082b517da26f5aa0488f1e2f611c820fe7aca2610afab"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/akinc-si.pdf",
+      "sha256": "c7367c7253d2f8a137d0e2508dbb775f6e47d637ee519cf2da01d4ccaefa3808"
+    }
+  }
+}

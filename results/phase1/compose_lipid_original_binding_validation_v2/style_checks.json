@@ -1,0 +1,59 @@
+{
+  "checks": {
+    "black": {
+      "command": [
+        ".venv/bin/black",
+        "--check",
+        "forge/corpus/compose_lipid_original_binding.py",
+        "experiments/phase1/multireaction/compose_lipid_original_binding.py",
+        "tests/test_compose_lipid_original_binding.py",
+        "results/phase1/compose_lipid_original_binding_validation_v2/closeout.py",
+        "results/phase1/compose_lipid_original_binding_validation_v2/validate.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/black.log",
+        "sha256": "25369eabb8c122f861d58ddb255f81f4b9ee797f42f3882975bef953218258ed"
+      }
+    },
+    "ruff": {
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "forge/corpus/compose_lipid_original_binding.py",
+        "experiments/phase1/multireaction/compose_lipid_original_binding.py",
+        "tests/test_compose_lipid_original_binding.py",
+        "results/phase1/compose_lipid_original_binding_validation_v2/closeout.py",
+        "results/phase1/compose_lipid_original_binding_validation_v2/validate.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/ruff.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      }
+    }
+  },
+  "inputs": {
+    "experiments/phase1/multireaction/compose_lipid_original_binding.py": {
+      "path": "experiments/phase1/multireaction/compose_lipid_original_binding.py",
+      "sha256": "fd4d5b5eecef1575475ad5f86c7cf97f713bfd01e88aad2cda2221b92971d285"
+    },
+    "forge/corpus/compose_lipid_original_binding.py": {
+      "path": "forge/corpus/compose_lipid_original_binding.py",
+      "sha256": "3eee2692e6a06069b86ee5fcf93ce99394fb3ae2748bf794a56dccb6c0b4e71d"
+    },
+    "results/phase1/compose_lipid_original_binding_validation_v2/closeout.py": {
+      "path": "results/phase1/compose_lipid_original_binding_validation_v2/closeout.py",
+      "sha256": "589c9e8af1310e765c3116028f95ac588fdc8b588adb0027de7b0f22b63e04b6"
+    },
+    "results/phase1/compose_lipid_original_binding_validation_v2/validate.py": {
+      "path": "results/phase1/compose_lipid_original_binding_validation_v2/validate.py",
+      "sha256": "b3ec9a6d2492f49571ccfd485226efc2be190c0a61ba0b15a54fd183f007d939"
+    },
+    "tests/test_compose_lipid_original_binding.py": {
+      "path": "tests/test_compose_lipid_original_binding.py",
+      "sha256": "d461ebcc03dbc8d879f036bd9016f2d06e7b62f37cd8ab4c84d99e44b1b88526"
+    }
+  },
+  "seed": 0
+}

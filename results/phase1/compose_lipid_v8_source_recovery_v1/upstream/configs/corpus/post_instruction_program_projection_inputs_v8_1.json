@@ -1,0 +1,23 @@
+{
+  "schema": "post_instruction_program_projection_inputs_v8_1",
+  "plan_receipt": "artifacts/corpus_build_v2/post_instruction_program_packaging_plan_v8_1/receipt.json",
+  "plan_receipt_sha256": "78ae5942a7a438f6e50be02963b6866db43223cd0388d8a72316ed529d930ad5",
+  "adapter_probe_receipt": "artifacts/corpus_build_v2/post_instruction_program_adapter_probe_v8_1_final/receipt.json",
+  "adapter_probe_receipt_sha256": "baa24b5df1142a15a00e23a05868f5ffaa4a92c50f4baef3e54621c8138f2eb9",
+  "expected_training_targets": 159782,
+  "worker_shards": 30,
+  "cpus_per_worker": 1,
+  "memory_mib_per_worker": 2048,
+  "expected_resolution_modes": {
+    "project_bound_compatible_decomposition": 2297,
+    "project_v8_bound_family_grid": 13101,
+    "project_v8_exact_family_task": 139603,
+    "reuse_bound_exact_source_program": 4781
+  },
+  "output_dir": "artifacts/corpus_build_v2/post_instruction_program_projection_inputs_v8_1_final",
+  "biology_used": false,
+  "beae_outcomes_used": false,
+  "gpu_used": false,
+  "modal_used": false,
+  "training_admissible": false
+}

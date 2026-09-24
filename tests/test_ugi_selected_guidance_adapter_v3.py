@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 import experiments.phase1.synthesis_guidance.adapters.selected_v3 as adapter_v3
+from experiments._runtime.historical import resolve_pinned_input
 from experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator_v2 import (
     _PENDING_EQUIVALENCE_SHA256,
 )
@@ -28,8 +29,6 @@ from experiments.phase1.synthesis_guidance.adapters.selected_v3 import (
 
 REPO = Path(__file__).resolve().parents[1]
 ROWS = REPO / adapter_v3.EQUIVALENCE_ROWS_PATH
-V2_GENERATOR_SOURCE = REPO / adapter_v3.V2_GENERATOR_SOURCE_PATH
-V2_GUIDANCE_SOURCE = REPO / adapter_v3.V2_GUIDANCE_SOURCE_PATH
 
 
 @pytest.fixture(scope="module")
@@ -124,5 +123,11 @@ def test_initialize_and_state_operations_enter_runtime_guard(
 
 
 def test_frozen_v2_sources_remain_byte_identical() -> None:
-    assert adapter_v3._file_sha256(V2_GENERATOR_SOURCE) == (EXPECTED_V2_GENERATOR_SOURCE_SHA256)
-    assert adapter_v3._file_sha256(V2_GUIDANCE_SOURCE) == EXPECTED_V2_GUIDANCE_SOURCE_SHA256
+    # Source migration changes physical location, never the original path/digest identity.
+    # Read authenticated historical bytes as evidence; do not import archived code.
+    for original_path, expected in (
+        (adapter_v3.V2_GENERATOR_SOURCE_PATH, EXPECTED_V2_GENERATOR_SOURCE_SHA256),
+        (adapter_v3.V2_GUIDANCE_SOURCE_PATH, EXPECTED_V2_GUIDANCE_SOURCE_SHA256),
+    ):
+        source = resolve_pinned_input(REPO, original_path, expected)
+        assert adapter_v3._file_sha256(source) == expected

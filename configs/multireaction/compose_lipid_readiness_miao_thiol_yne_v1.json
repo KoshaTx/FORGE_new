@@ -1,0 +1,30 @@
+{
+  "inputs": {
+    "miao_drawn_precursors": {
+      "path": "results/phase1/compose_lipid_supplied_miao_cyclic_v2/result.json",
+      "sha256": "4357d4cbb73fba0c1d32b2ed8017d6d918194652ec20361f7f4bf66630192fd0"
+    },
+    "miao_iso5_only": {
+      "path": "results/phase1/compose_lipid_supplied_miao_cyclic_v1/result.json",
+      "sha256": "6a029b4d79e61a7bfd7045f9c0f87d9bcfdd3b7a997994de4247bedcb2cae8bc"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "previous_report": {
+      "path": "results/phase1/compose_lipid_readiness_ketone_iphos_v1/result.json",
+      "sha256": "7683ea8d6939f123e43cd40c5c52dd3696384c26fd2f33ef16c0717cf8e5390b"
+    },
+    "thiol_yne": {
+      "path": "results/phase1/compose_lipid_supplied_thiol_yne_v1/result.json",
+      "sha256": "480a6d54519fb762d4a3f2f3feadfba38c31ee79bd8f60589914b328d50f1b06"
+    }
+  },
+  "replay_inputs": [
+    "miao_iso5_only",
+    "miao_drawn_precursors",
+    "thiol_yne"
+  ],
+  "schema_version": "forge.compose_lipid_staged_readiness_config.v1"
+}

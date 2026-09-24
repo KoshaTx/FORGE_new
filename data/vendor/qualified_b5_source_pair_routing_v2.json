@@ -1,0 +1,68 @@
+{
+  "derivation": {
+    "path": "results/phase1/compose_lipid_b5_routing_v2/build_registry.py",
+    "sha256": "fa38bca24e39a9a4bffe26a305bb462efb13260c44e5a7a4c4c934bc0246f6d2"
+  },
+  "parent_registry": {
+    "path": "data/vendor/qualified_b5_staged_source_program_v1.json",
+    "sha256": "0b908189bf09908b8d14d5e08b338291b57519becd2474de1c70548a97c7daa4"
+  },
+  "routes": [
+    {
+      "minimum_reported_tails": 2,
+      "original_profile": "one_tail_acid_knob_amine",
+      "required_components": {
+        "tail_acid_1": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC",
+        "tail_acid_2": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC"
+      },
+      "route_id": "source_I9_compound_11_pair_amine",
+      "source_profile": "matched_identical_tail_acids_amine",
+      "task_fields": {
+        "tail_axis": "reported_tail_acid__reported_tail_acid"
+      }
+    },
+    {
+      "minimum_reported_tails": 2,
+      "original_profile": "one_tail_acid_knob_alcohol",
+      "required_components": {
+        "tail_acid_1": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC",
+        "tail_acid_2": "O=C(O)CCCC(=O)OCC(CCCCCC)CCCCCCCC"
+      },
+      "route_id": "source_I9_compound_11_pair_alcohol",
+      "source_profile": "matched_identical_tail_acids_alcohol",
+      "task_fields": {
+        "tail_axis": "reported_tail_acid__reported_tail_acid"
+      }
+    }
+  ],
+  "schema_version": "forge.b5_source_pair_routing.v2",
+  "source_adjudication": {
+    "doi": "10.1002/adhm.202403366",
+    "evidence_basis": "computed_transform_consistency",
+    "experimental_execution_admitted": false,
+    "finding": "The original one_tail_acid_knob lane includes the exact 11/11 source pair. A generation lane does not identify the hetero 18/11 chemistry. Route only the complete 11/11 pair to the existing homo source program; preserve the original task, metadata, head grammar, component IDs, quantities and stage gates.",
+    "locators": [
+      "Supplement PDF page 25, Figure S3: I9 homo and hetero branches",
+      "Supplement PDF page 32, compound 26: two source acid 11 residues",
+      "Supplement PDF page 33, compound 27: Fm removal preserves both glutarates",
+      "Supplement PDF pages 34-35, I95 and I97 head amide/ester products"
+    ],
+    "remaining_scope": "No new tail identity, mixed pair, site order, source series, reaction primitive or precursor scope is admitted. Other original reported-tail disagreements remain pending.",
+    "source_conflicts": "Retain all analytical and procedure discrepancies from the parent source registry and transcription ledger."
+  },
+  "source_assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39502027/article.xml",
+      "sha256": "200a37640995d3adf430eb9f1de19f84eab2e61d1ad0b2d410f1765d793ecb6a"
+    },
+    "control_transcriptions": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    },
+    "si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39502027/ADHM-14-0-s001.pdf",
+      "sha256": "8a593feacdb6e9dcfda20567688c01d887e5b2f0a7e03476013cce1c428235c9"
+    }
+  },
+  "training_admitted": false
+}

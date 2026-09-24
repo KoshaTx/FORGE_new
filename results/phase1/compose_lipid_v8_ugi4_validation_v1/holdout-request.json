@@ -1,0 +1,77 @@
+{
+  "additional_required_evidence": "The source split-audit artifact and label-identity scope.",
+  "artifacts": {
+    "request": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_validation_v1/unresolved-holdout-request.jsonl.gz",
+      "sha256": "f0c11b4ef999931302e9472d63d84265fb5326f3c390c08dd8368d5e8c592cfc"
+    }
+  },
+  "distinct_unresolved_family_role_labels": 2174,
+  "holdout_qualified": false,
+  "implementation": {
+    "export": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_validation_v1/prepare_holdout_request.py",
+      "sha256": "5c3fbfa0d4608eeacc602007125cb306f6467b69e01380ad6270d7d5dbe4cf66"
+    },
+    "role_metadata": {
+      "path": "forge/assembly/compose_lipid.py",
+      "sha256": "9165923713077959e0c6ece3e12e63e669a7431ed0911f7d8f11284a90e6b0af"
+    }
+  },
+  "inputs": {
+    "audit": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/result.json",
+      "sha256": "7508dde592a69264d6e0cf18e4abe333006ebeedbe9a552136b44b1c51c2fce7"
+    },
+    "catalogue": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/program_catalogue.json",
+      "sha256": "a987382dd2b0e293cccfbba252db49c5111fcfdc1d8c395d532b30c8604a46c6"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "import": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "panels": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/panels.jsonl.gz",
+      "sha256": "abb12ce45ba10b2835a0f1b0833d0c4956cd7377ea0a146d678ab5ad3f7ba14d"
+    }
+  },
+  "malformed_metadata_rows": 1060,
+  "provider_evaluation_graphs_parsed": false,
+  "random_sampling_used": false,
+  "rows": 7002,
+  "rows_by_family": {
+    "a3_amine_aldehyde_alkyne": 232,
+    "acid_epoxide_diester_multistep": 402,
+    "aema_aza_thiol_addition": 530,
+    "aldehyde_ugi3": 206,
+    "aldehyde_ugi4": 473,
+    "alpha_isocyanoester_dihydroimidazole": 333,
+    "amine_alkylation": 323,
+    "amine_epoxide_opening": 284,
+    "aryl_reductive_amination": 180,
+    "aza_michael_acrylamide": 308,
+    "aza_michael_acrylate": 386,
+    "disulfide_michael": 290,
+    "epoxide_opening_o_acylation": 190,
+    "iphos_ring_opening": 281,
+    "ketone_isocyanide_amide": 456,
+    "ketone_ugi4": 220,
+    "maleate_addition": 217,
+    "o_esterification": 218,
+    "passerini_3cr": 262,
+    "preassembled_thiol_yne_tail_amidation": 398,
+    "reductive_amination": 220,
+    "thiolactone_aminolysis_michael": 362,
+    "vitamin_b5_multistep": 231
+  },
+  "schema_version": "forge.unresolved_precursor_request.v1",
+  "seed": 0,
+  "source_splits_changed": false,
+  "status": "prepared_not_sent",
+  "training_calls": 0
+}

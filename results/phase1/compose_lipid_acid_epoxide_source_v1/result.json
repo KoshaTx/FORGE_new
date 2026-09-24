@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-20",
+  "disposition": "abstain",
+  "doi": "10.1002/adhm.202302691",
+  "eligible_records_waiting": 5279,
+  "experimental_failure_claimed": false,
+  "family": "acid_epoxide_diester_multistep",
+  "inputs": {
+    "acquisition_attempts": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v1/acquisition-attempts.json",
+      "sha256": "aa66278b1f01b8ba7cfaa8649bcb3599c64e3e3e7b9cee6aa1d90b50b8451e69"
+    },
+    "adjudication_skill": {
+      "path": ".claude/skills/forge-adjudicate-chemistry-evidence/SKILL.md",
+      "sha256": "6c7be712857976d159130cc5f72f3b24c3f9967953b45a14c54d1419ccf58ad0"
+    },
+    "eligible_population": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    }
+  },
+  "next_required_evidence": "Acquire the original primary supplement, visually inspect Figure S1 and its neighboring procedure/characterization pages, and qualify an independent exact control before creating a family executor.",
+  "pmid": "37990414",
+  "reaction_calls": 0,
+  "reason_codes": [
+    "PRIMARY_SUPPLEMENT_LOCAL_ACQUISITION_HTTP_403",
+    "REACTION_SCHEME_VISUAL_INSPECTION_UNAVAILABLE",
+    "INDEPENDENT_REACTION_CONTROL_NOT_QUALIFIED"
+  ],
+  "requested_asset": "adhm202302691-sup-0001-SuppMat.pdf",
+  "requested_primary_url": "https://advanced.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fadhm.202302691&file=adhm202302691-sup-0001-SuppMat.pdf",
+  "schema_version": "forge.source_acquisition_abstention.v1",
+  "seed": 0,
+  "source_pdf_hash": null,
+  "training_admitted": false,
+  "training_calls": 0
+}

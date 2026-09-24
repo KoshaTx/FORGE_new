@@ -1,0 +1,962 @@
+{
+  "artifacts": {
+    "constitutional_deduplication.json": {
+      "path": "results/phase1/compose_lipid_full_preparation_validation_v2/constitutional_deduplication.json",
+      "sha256": "a59d15812f292de1a94209131e83cf52de6d5e6ba113432e23c778d1defe8fe8"
+    },
+    "readiness.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_full_preparation_validation_v2/readiness.jsonl.gz",
+      "sha256": "da0ced98ac23f1c3abcf45d90dc04ff60df5d5b5382a53c68052e9bbad6edbcf"
+    }
+  },
+  "by_family": {
+    "a3_amine_aldehyde_alkyne": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3080,
+          "protected": 23144,
+          "unresolved_partition_or_study": 43792
+        },
+        "eligible_for_program_preparation": 3080,
+        "maximum_source_declared_atoms": 254,
+        "reason_counts": {
+          "corrected_split_not_train": 1536,
+          "exact_component_combination_of_protected_record": 3284,
+          "exact_source_alias_of_protected_product": 23128,
+          "known_protected_component": 20299,
+          "old_split_not_train": 2124,
+          "prior_protected_product": 2,
+          "source_study_identity_unresolved": 10,
+          "unassigned_partition": 62336
+        },
+        "rows": 70016,
+        "source_declared_above_96_atoms": 12333,
+        "unassigned_rows": 62336
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3080,
+        "pending_source_program_qualification": 3080
+      }
+    },
+    "acid_epoxide_diester_multistep": {
+      "family_definition_present": true,
+      "missing_original_package_files": [
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/00.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/01.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/02.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/03.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/04.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/05.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/06.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/07.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/08.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/09.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/10.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/11.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/12.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/13.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/14.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/15.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/16.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/17.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/18.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/19.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/20.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/21.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/22.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/23.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/24.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/25.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/26.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/27.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/28.jsonl.gz",
+        "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/29.jsonl.gz"
+      ],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 5279,
+          "protected": 60679,
+          "unresolved_partition_or_study": 166282
+        },
+        "eligible_for_program_preparation": 5279,
+        "maximum_source_declared_atoms": 56,
+        "reason_counts": {
+          "corrected_split_not_train": 2140,
+          "exact_component_combination_of_protected_record": 3902,
+          "exact_source_alias_of_protected_product": 60679,
+          "known_protected_component": 58191,
+          "old_split_not_train": 2382,
+          "source_study_identity_unresolved": 80,
+          "unassigned_partition": 221540
+        },
+        "rows": 232240,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 221540
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 5279,
+        "pending_source_program_qualification": 5279
+      }
+    },
+    "aema_aza_thiol_addition": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 2092,
+          "protected": 7093,
+          "unresolved_partition_or_study": 4680
+        },
+        "eligible_for_program_preparation": 2092,
+        "maximum_source_declared_atoms": 214,
+        "reason_counts": {
+          "corrected_split_not_train": 1226,
+          "exact_component_combination_of_protected_record": 3228,
+          "exact_source_alias_of_protected_product": 7093,
+          "known_protected_component": 5038,
+          "old_split_not_train": 2812,
+          "prior_protected_product": 20,
+          "selected_protected_source_study": 44,
+          "unassigned_partition": 7739
+        },
+        "rows": 13865,
+        "source_declared_above_96_atoms": 2855,
+        "unassigned_rows": 7739
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 2092,
+        "pending_source_program_qualification": 2092
+      }
+    },
+    "aldehyde_ugi3": {
+      "family_definition_present": true,
+      "missing_original_package_files": [
+        "original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/author_released_exact_contexts.jsonl.gz",
+        "original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/exact_context_constructions.jsonl.gz"
+      ],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 955,
+          "protected": 15483,
+          "unresolved_partition_or_study": 2404
+        },
+        "eligible_for_program_preparation": 955,
+        "maximum_source_declared_atoms": 62,
+        "reason_counts": {
+          "corrected_split_not_train": 1384,
+          "exact_component_combination_of_protected_record": 4290,
+          "exact_source_alias_of_protected_product": 15483,
+          "known_protected_component": 14842,
+          "old_split_not_train": 3958,
+          "prior_protected_product": 138,
+          "unassigned_partition": 11917
+        },
+        "rows": 18842,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 11917
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 955,
+        "exact_computed_reconstruction": 955,
+        "unsupported_source_role_tuple": 0
+      }
+    },
+    "aldehyde_ugi4": {
+      "family_definition_present": true,
+      "missing_original_package_files": [
+        "original_generator_tasks/family_03_aldehyde_ugi4_enumeration_v8/tuple_regional_dispositions.jsonl.gz"
+      ],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3222,
+          "protected": 124634,
+          "unresolved_partition_or_study": 94173
+        },
+        "eligible_for_program_preparation": 3222,
+        "maximum_source_declared_atoms": 96,
+        "reason_counts": {
+          "corrected_split_not_train": 2226,
+          "exact_component_combination_of_protected_record": 4211,
+          "exact_source_alias_of_protected_product": 124634,
+          "known_protected_component": 122701,
+          "old_split_not_train": 2660,
+          "prior_protected_product": 24,
+          "selected_protected_source_study": 127,
+          "source_study_identity_unresolved": 1,
+          "unassigned_partition": 210895
+        },
+        "rows": 222029,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 210895
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3222,
+        "exact_computed_reconstruction": 3222
+      }
+    },
+    "alpha_isocyanoester_dihydroimidazole": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 1469,
+          "protected": 176211,
+          "unresolved_partition_or_study": 41356
+        },
+        "eligible_for_program_preparation": 1469,
+        "maximum_source_declared_atoms": 59,
+        "reason_counts": {
+          "corrected_split_not_train": 2088,
+          "exact_component_combination_of_protected_record": 3552,
+          "exact_source_alias_of_protected_product": 176211,
+          "known_protected_component": 175629,
+          "old_split_not_train": 2152,
+          "prior_protected_product": 8,
+          "source_study_identity_unresolved": 4,
+          "unassigned_partition": 208597
+        },
+        "rows": 219036,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 208597
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 1469,
+        "pending_source_program_qualification": 1469
+      }
+    },
+    "amine_alkylation": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 4752,
+          "protected": 50366,
+          "unresolved_partition_or_study": 133154
+        },
+        "eligible_for_program_preparation": 4752,
+        "maximum_source_declared_atoms": 56,
+        "reason_counts": {
+          "corrected_split_not_train": 2016,
+          "exact_component_combination_of_protected_record": 3720,
+          "exact_source_alias_of_protected_product": 50366,
+          "known_protected_component": 47860,
+          "old_split_not_train": 2254,
+          "prior_protected_product": 2,
+          "unassigned_partition": 178197
+        },
+        "rows": 188272,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 178197
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 4752,
+        "pending_source_program_qualification": 4752
+      }
+    },
+    "amine_epoxide_opening": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3765,
+          "protected": 51920,
+          "unresolved_partition_or_study": 41754
+        },
+        "eligible_for_program_preparation": 3765,
+        "maximum_source_declared_atoms": 136,
+        "reason_counts": {
+          "corrected_split_not_train": 1708,
+          "exact_component_combination_of_protected_record": 3263,
+          "exact_source_alias_of_protected_product": 51920,
+          "known_protected_component": 49817,
+          "old_split_not_train": 2245,
+          "selected_protected_source_study": 113,
+          "source_study_identity_unresolved": 1,
+          "unassigned_partition": 88898
+        },
+        "rows": 97439,
+        "source_declared_above_96_atoms": 5066,
+        "unassigned_rows": 88898
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3765,
+        "pending_source_program_qualification": 3765
+      }
+    },
+    "aryl_reductive_amination": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 1793,
+          "protected": 21477,
+          "unresolved_partition_or_study": 24820
+        },
+        "eligible_for_program_preparation": 1793,
+        "maximum_source_declared_atoms": 229,
+        "reason_counts": {
+          "corrected_split_not_train": 1210,
+          "exact_component_combination_of_protected_record": 2187,
+          "exact_source_alias_of_protected_product": 21477,
+          "known_protected_component": 20279,
+          "old_split_not_train": 1310,
+          "prior_protected_product": 12,
+          "unassigned_partition": 42044
+        },
+        "rows": 48090,
+        "source_declared_above_96_atoms": 19574,
+        "unassigned_rows": 42044
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 1793,
+        "exact_computed_reconstruction": 1718,
+        "unresolved_computed_reconstruction": 74,
+        "unsupported_source_role_tuple": 1
+      }
+    },
+    "aza_michael_acrylamide": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 2011,
+          "protected": 19033,
+          "unresolved_partition_or_study": 10195
+        },
+        "eligible_for_program_preparation": 2011,
+        "maximum_source_declared_atoms": 97,
+        "reason_counts": {
+          "corrected_split_not_train": 1280,
+          "exact_component_combination_of_protected_record": 2360,
+          "exact_source_alias_of_protected_product": 19033,
+          "known_protected_component": 18300,
+          "old_split_not_train": 1517,
+          "unassigned_partition": 24843
+        },
+        "rows": 31239,
+        "source_declared_above_96_atoms": 150,
+        "unassigned_rows": 24843
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 2011,
+        "exact_computed_reconstruction": 2011
+      }
+    },
+    "aza_michael_acrylate": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 2329,
+          "protected": 21564,
+          "unresolved_partition_or_study": 9726
+        },
+        "eligible_for_program_preparation": 2329,
+        "maximum_source_declared_atoms": 97,
+        "reason_counts": {
+          "corrected_split_not_train": 1756,
+          "exact_component_combination_of_protected_record": 4167,
+          "exact_source_alias_of_protected_product": 21564,
+          "known_protected_component": 19704,
+          "old_split_not_train": 3376,
+          "prior_protected_product": 24,
+          "selected_protected_source_study": 223,
+          "source_study_identity_unresolved": 30,
+          "unassigned_partition": 24843
+        },
+        "rows": 33619,
+        "source_declared_above_96_atoms": 150,
+        "unassigned_rows": 24843
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 2329,
+        "exact_computed_reconstruction": 2167,
+        "unsupported_source_role_tuple": 162
+      }
+    },
+    "disulfide_michael": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3652,
+          "protected": 128365,
+          "unresolved_partition_or_study": 122372
+        },
+        "eligible_for_program_preparation": 3652,
+        "maximum_source_declared_atoms": 250,
+        "reason_counts": {
+          "corrected_split_not_train": 1936,
+          "exact_component_combination_of_protected_record": 3317,
+          "exact_source_alias_of_protected_product": 128365,
+          "known_protected_component": 126845,
+          "old_split_not_train": 2001,
+          "prior_protected_product": 3,
+          "unassigned_partition": 244714
+        },
+        "rows": 254389,
+        "source_declared_above_96_atoms": 39388,
+        "unassigned_rows": 244714
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3652,
+        "exact_computed_reconstruction": 3652
+      }
+    },
+    "epoxide_opening_o_acylation": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 2768,
+          "protected": 16445,
+          "unresolved_partition_or_study": 23592
+        },
+        "eligible_for_program_preparation": 2768,
+        "maximum_source_declared_atoms": 88,
+        "reason_counts": {
+          "corrected_split_not_train": 1268,
+          "exact_component_combination_of_protected_record": 2271,
+          "exact_source_alias_of_protected_product": 16445,
+          "known_protected_component": 15135,
+          "old_split_not_train": 1291,
+          "prior_protected_product": 15,
+          "selected_protected_source_study": 25,
+          "unassigned_partition": 36466
+        },
+        "rows": 42805,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 36466
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 2768,
+        "pending_source_program_qualification": 2768
+      }
+    },
+    "iphos_ring_opening": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 5294,
+          "protected": 37418,
+          "unresolved_partition_or_study": 141633
+        },
+        "eligible_for_program_preparation": 5294,
+        "maximum_source_declared_atoms": 148,
+        "reason_counts": {
+          "corrected_split_not_train": 1874,
+          "exact_component_combination_of_protected_record": 5712,
+          "exact_source_alias_of_protected_product": 36004,
+          "known_protected_component": 32823,
+          "old_split_not_train": 2381,
+          "prior_protected_product": 18,
+          "unassigned_partition": 174976
+        },
+        "rows": 184345,
+        "source_declared_above_96_atoms": 28176,
+        "unassigned_rows": 174976
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 5294,
+        "pending_source_program_qualification": 5294
+      }
+    },
+    "ketone_isocyanide_amide": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 1235,
+          "protected": 232781,
+          "unresolved_partition_or_study": 37544
+        },
+        "eligible_for_program_preparation": 1235,
+        "maximum_source_declared_atoms": 58,
+        "reason_counts": {
+          "corrected_split_not_train": 2374,
+          "exact_component_combination_of_protected_record": 4273,
+          "exact_source_alias_of_protected_product": 232781,
+          "known_protected_component": 232287,
+          "old_split_not_train": 2869,
+          "unassigned_partition": 259691
+        },
+        "rows": 271560,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 259691
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 1235,
+        "pending_source_program_qualification": 1235
+      }
+    },
+    "ketone_ugi4": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 2964,
+          "protected": 46195,
+          "unresolved_partition_or_study": 42236
+        },
+        "eligible_for_program_preparation": 2964,
+        "maximum_source_declared_atoms": 114,
+        "reason_counts": {
+          "corrected_split_not_train": 1474,
+          "exact_component_combination_of_protected_record": 2615,
+          "exact_source_alias_of_protected_product": 46195,
+          "known_protected_component": 44958,
+          "old_split_not_train": 1494,
+          "prior_protected_product": 2,
+          "unassigned_partition": 84024
+        },
+        "rows": 91395,
+        "source_declared_above_96_atoms": 3862,
+        "unassigned_rows": 84024
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 2964,
+        "pending_source_program_qualification": 2964
+      }
+    },
+    "maleate_addition": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3371,
+          "protected": 23808,
+          "unresolved_partition_or_study": 41284
+        },
+        "eligible_for_program_preparation": 3371,
+        "maximum_source_declared_atoms": 228,
+        "reason_counts": {
+          "corrected_split_not_train": 1452,
+          "exact_component_combination_of_protected_record": 2809,
+          "exact_source_alias_of_protected_product": 23808,
+          "known_protected_component": 22016,
+          "old_split_not_train": 1833,
+          "prior_protected_product": 17,
+          "unassigned_partition": 61204
+        },
+        "rows": 68463,
+        "source_declared_above_96_atoms": 11421,
+        "unassigned_rows": 61204
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3371,
+        "pending_source_program_qualification": 3371
+      }
+    },
+    "o_esterification": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3287,
+          "protected": 8728,
+          "unresolved_partition_or_study": 12933
+        },
+        "eligible_for_program_preparation": 3287,
+        "maximum_source_declared_atoms": 70,
+        "reason_counts": {
+          "corrected_split_not_train": 1218,
+          "exact_component_combination_of_protected_record": 2026,
+          "exact_source_alias_of_protected_product": 8728,
+          "known_protected_component": 7385,
+          "old_split_not_train": 1320,
+          "prior_protected_product": 9,
+          "unassigned_partition": 18857
+        },
+        "rows": 24948,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 18857
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3287,
+        "pending_source_program_qualification": 3287
+      }
+    },
+    "passerini_3cr": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 4291,
+          "protected": 38410,
+          "unresolved_partition_or_study": 85651
+        },
+        "eligible_for_program_preparation": 4291,
+        "maximum_source_declared_atoms": 61,
+        "reason_counts": {
+          "corrected_split_not_train": 1752,
+          "exact_component_combination_of_protected_record": 3053,
+          "exact_source_alias_of_protected_product": 38410,
+          "known_protected_component": 36552,
+          "old_split_not_train": 1752,
+          "unassigned_partition": 119593
+        },
+        "rows": 128352,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 119593
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 4291,
+        "exact_computed_reconstruction": 4291
+      }
+    },
+    "preassembled_thiol_yne_tail_amidation": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 6511,
+          "protected": 153843,
+          "unresolved_partition_or_study": 304694
+        },
+        "eligible_for_program_preparation": 6511,
+        "maximum_source_declared_atoms": 61,
+        "reason_counts": {
+          "corrected_split_not_train": 2654,
+          "exact_component_combination_of_protected_record": 4337,
+          "exact_source_alias_of_protected_product": 153843,
+          "known_protected_component": 151779,
+          "old_split_not_train": 2740,
+          "prior_protected_product": 30,
+          "unassigned_partition": 451774
+        },
+        "rows": 465048,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 451774
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 6511,
+        "pending_source_program_qualification": 6511
+      }
+    },
+    "reductive_amination": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 3209,
+          "protected": 22473,
+          "unresolved_partition_or_study": 35638
+        },
+        "eligible_for_program_preparation": 3209,
+        "maximum_source_declared_atoms": 74,
+        "reason_counts": {
+          "corrected_split_not_train": 1458,
+          "exact_component_combination_of_protected_record": 2453,
+          "exact_source_alias_of_protected_product": 22473,
+          "known_protected_component": 20984,
+          "old_split_not_train": 1479,
+          "unassigned_partition": 54031
+        },
+        "rows": 61320,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 54031
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 3209,
+        "exact_computed_reconstruction": 3209
+      }
+    },
+    "reported_lnpdb_route_unassigned": {
+      "family_definition_present": false,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "protected": 255
+        },
+        "eligible_for_program_preparation": 0,
+        "maximum_source_declared_atoms": 96,
+        "reason_counts": {
+          "corrected_split_not_train": 255,
+          "exact_component_combination_of_protected_record": 255,
+          "exact_source_alias_of_protected_product": 255,
+          "known_protected_component": 94,
+          "old_split_not_train": 255,
+          "reference_category_without_qualified_program": 255,
+          "source_study_identity_unresolved": 238
+        },
+        "rows": 255,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 0
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "reference_category_not_program_supervision",
+      "supplied_replay": {}
+    },
+    "reported_multistep_amino_lipid": {
+      "family_definition_present": false,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "protected": 9
+        },
+        "eligible_for_program_preparation": 0,
+        "maximum_source_declared_atoms": 58,
+        "reason_counts": {
+          "corrected_split_not_train": 9,
+          "exact_component_combination_of_protected_record": 9,
+          "exact_source_alias_of_protected_product": 9,
+          "known_protected_component": 8,
+          "old_split_not_train": 9,
+          "reference_category_without_qualified_program": 9
+        },
+        "rows": 9,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 0
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "reference_category_not_program_supervision",
+      "supplied_replay": {}
+    },
+    "reported_reference_lipid": {
+      "family_definition_present": false,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "protected": 4
+        },
+        "eligible_for_program_preparation": 0,
+        "maximum_source_declared_atoms": 70,
+        "reason_counts": {
+          "corrected_split_not_train": 4,
+          "exact_component_combination_of_protected_record": 4,
+          "exact_source_alias_of_protected_product": 4,
+          "known_protected_component": 4,
+          "old_split_not_train": 4,
+          "reference_category_without_qualified_program": 4
+        },
+        "rows": 4,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 0
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "reference_category_not_program_supervision",
+      "supplied_replay": {}
+    },
+    "thiolactone_aminolysis_michael": {
+      "family_definition_present": true,
+      "missing_original_package_files": [
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/00.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/01.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/02.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/03.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/04.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/05.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/06.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/07.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/08.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/09.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/10.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/11.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/12.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/13.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/14.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/15.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/16.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/17.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/18.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/19.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/20.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/21.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/22.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/23.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/24.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/25.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/26.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/27.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/28.jsonl.gz",
+        "original_generator_tasks/family_18_staar_enumeration_v8/tasks/29.jsonl.gz"
+      ],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 5394,
+          "protected": 115345,
+          "unresolved_partition_or_study": 214120
+        },
+        "eligible_for_program_preparation": 5394,
+        "maximum_source_declared_atoms": 62,
+        "reason_counts": {
+          "corrected_split_not_train": 2370,
+          "exact_component_combination_of_protected_record": 4257,
+          "exact_source_alias_of_protected_product": 115345,
+          "known_protected_component": 112919,
+          "old_split_not_train": 2487,
+          "prior_protected_product": 52,
+          "unassigned_partition": 323006
+        },
+        "rows": 334859,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 323006
+      },
+      "qualified_executor_available": true,
+      "remaining_program_work": "source_specific_scope_and_any_unresolved_recipes_remain_separate",
+      "supplied_replay": {
+        "eligible_preparation_rows": 5394,
+        "exact_computed_reconstruction": 5394
+      }
+    },
+    "vitamin_b5_multistep": {
+      "family_definition_present": true,
+      "missing_original_package_files": [],
+      "missing_originals_are_blanket_replay_requirement": false,
+      "preparation": {
+        "dispositions": {
+          "eligible_for_program_preparation": 4077,
+          "protected": 14494,
+          "unresolved_partition_or_study": 61827
+        },
+        "eligible_for_program_preparation": 4077,
+        "maximum_source_declared_atoms": 81,
+        "reason_counts": {
+          "corrected_split_not_train": 1550,
+          "exact_component_combination_of_protected_record": 2767,
+          "exact_source_alias_of_protected_product": 14494,
+          "known_protected_component": 12363,
+          "old_split_not_train": 1559,
+          "source_study_identity_unresolved": 1,
+          "unassigned_partition": 72652
+        },
+        "rows": 80398,
+        "source_declared_above_96_atoms": 0,
+        "unassigned_rows": 72652
+      },
+      "qualified_executor_available": false,
+      "remaining_program_work": "qualify_source_program_sites_stages_and_controls",
+      "supplied_replay": {
+        "eligible_preparation_rows": 4077,
+        "pending_source_program_qualification": 4077
+      }
+    }
+  },
+  "checks": {
+    "all_source_records_accounted": true,
+    "forward_product_identity_mismatches": 0,
+    "protected_or_unassigned_replay_targets": 0,
+    "recipe_role_quantity_changes": 0,
+    "replay_target_coverage_exact": true,
+    "training_calls": 0
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_full_preparation_validation_v2/report.py",
+    "sha256": "1d32be28b35417ca267dd4c01ad76eda16eded6cd88900bd81cd6ac0b8afdd02"
+  },
+  "inputs": {
+    "missing_source_inventory": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/missing_source_files.json",
+      "sha256": "6db3c950d8f75d1170396fc0106198e450e6afc9d39c6757b226292302349421"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_family_replay_v1/result.json",
+      "sha256": "cdce7cde33a9767fbbafc9dee871936158cb310c70a8038888b518b64bcabc7f"
+    },
+    "role_binding": {
+      "path": "results/phase1/compose_lipid_role_binding_v1/result.json",
+      "sha256": "17ab4b1d28726f8ee3dd5afaa4a0368a647b20a24a60ff00a459a14920c78113"
+    }
+  },
+  "remaining_gates": [
+    "qualified_full_universe_partition_and_constitutional_overlap",
+    "full_source_study_and_morphology_protection",
+    "remaining_source_program_qualification",
+    "full_size_representation_on_the_final_eligible_population",
+    "final_constitutional_deduplication_and_balanced_weights",
+    "repository_wide_tests"
+  ],
+  "schema_version": "forge.compose_lipid_full_preparation_report.v1",
+  "seed": 0,
+  "totals": {
+    "eligible_preparation_rows": 76800,
+    "eligible_rows_without_exact_supplied_reconstruction": 50181,
+    "maximum_source_declared_heavy_atoms": 254,
+    "new_exclusion_reason_counts_overlap": {
+      "exact_component_combination_of_protected_record": 135
+    },
+    "newly_excluded_previous_preparation_rows": 135,
+    "preparation_dispositions": {
+      "eligible_for_program_preparation": 76800,
+      "protected": 1410177,
+      "unresolved_partition_or_study": 1695860
+    },
+    "source_records": 3182837,
+    "supplied_exact_reconstructions": 26619
+  },
+  "training_admitted": false
+}

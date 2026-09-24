@@ -1,0 +1,312 @@
+{
+  "architecture_qualification": "Input-only complete source profiles plus all staged forward, inverse and balance gates; incorrect reported source labels abstain. No exact-execution or training admission.",
+  "artifact": {
+    "path": "results/phase1/compose_lipid_readiness_b5_v2/readiness.jsonl.gz",
+    "sha256": "e1cd3e726480b53463e7b2a03b6c69cd6cb09dabeac5988cbe1d4805f4ecb9c9"
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_readiness_b5_v2.json",
+    "sha256": "3bc439261b228ba3ecca4376bdb7e2a35ae6a776e2e495f8b100d7014c7fc3ce"
+  },
+  "implementation": {
+    "forge/corpus/compose_lipid_b5_readiness.py": {
+      "path": "forge/corpus/compose_lipid_b5_readiness.py",
+      "sha256": "7a0ba188e47d9a220b32bc5b2d9042d72a872eb56ce16f4e11d3571aeb9d6be6"
+    },
+    "forge/corpus/compose_lipid_b5_readiness_v2.py": {
+      "path": "forge/corpus/compose_lipid_b5_readiness_v2.py",
+      "sha256": "fb397751fd8592defba8b6f1311585b5374c9a81efe115202cf217330282146d"
+    },
+    "forge/corpus/compose_lipid_grouped_readiness.py": {
+      "path": "forge/corpus/compose_lipid_grouped_readiness.py",
+      "sha256": "d2a1925be5262432020678a937c5cfde6e6a5b5c51838d7a48fce852d5066ffb"
+    }
+  },
+  "inputs": {
+    "b5_replay": {
+      "path": "results/phase1/compose_lipid_supplied_b5_v2/result.json",
+      "sha256": "259fec445e10d827acff9c1412b92ab388de539cac473e369dd13da96cbdeb1f"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "previous_report": {
+      "path": "results/phase1/compose_lipid_readiness_b5_v1/result.json",
+      "sha256": "2bd06cce16bc446ce9faeeb118554447a28a352a821f63c0e821e150cb35423a"
+    }
+  },
+  "remaining_gates": [
+    "qualified_full_universe_partition_and_constitutional_overlap",
+    "full_source_study_and_morphology_protection",
+    "remaining_source_program_qualification",
+    "full_size_representation_on_the_final_eligible_population",
+    "final_constitutional_deduplication_and_balanced_weights",
+    "repository_wide_tests"
+  ],
+  "replay_summaries": {
+    "b5_replay": {
+      "by_design_lane": {
+        "I7_head_x_paired_tail": {
+          "exact": 401,
+          "exact_source_profile_transform_consistency": 401,
+          "profile_qualified": 401,
+          "rows": 401
+        },
+        "acid_one_component": {
+          "exact": 508,
+          "exact_source_profile_transform_consistency": 508,
+          "profile_qualified": 508,
+          "rows": 508
+        },
+        "matched_body": {
+          "exact": 511,
+          "exact_source_profile_transform_consistency": 511,
+          "profile_qualified": 511,
+          "rows": 511
+        },
+        "matched_identical_tail_acids_alcohol": {
+          "exact": 362,
+          "exact_source_profile_transform_consistency": 362,
+          "profile_qualified": 362,
+          "rows": 362
+        },
+        "matched_identical_tail_acids_amine": {
+          "exact": 228,
+          "exact_source_profile_transform_consistency": 228,
+          "profile_qualified": 228,
+          "rows": 228
+        },
+        "one_tail_acid_knob_alcohol": {
+          "exact": 604,
+          "exact_source_profile_transform_consistency": 604,
+          "profile_qualified": 604,
+          "rows": 1225,
+          "source_recipe_or_complete_scope_disagreement": 621
+        },
+        "one_tail_acid_knob_amine": {
+          "exact": 226,
+          "exact_source_profile_transform_consistency": 226,
+          "profile_qualified": 226,
+          "rows": 447,
+          "source_recipe_or_complete_scope_disagreement": 221
+        },
+        "r2_one_component": {
+          "exact": 196,
+          "exact_source_profile_transform_consistency": 196,
+          "profile_qualified": 196,
+          "rows": 395,
+          "source_recipe_or_complete_scope_disagreement": 199
+        }
+      },
+      "exact": 3036,
+      "exact_source_profile_transform_consistency": 3036,
+      "failed_profile_checks": {
+        "tail_axis_identity": 1041
+      },
+      "family": "vitamin_b5_multistep",
+      "profile_qualified": 3036,
+      "rows": 4077,
+      "source_recipe_or_complete_scope_disagreement": 1041
+    }
+  },
+  "schema_version": "forge.compose_lipid_profiled_staged_readiness.v2",
+  "seed": 0,
+  "status": "additional_computed_evidence_training_unqualified",
+  "summary": {
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "eligible_preparation_rows": 3080,
+        "exact_computed_reconstructions": 1866,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 1214,
+        "source_rows": 70016
+      },
+      "acid_epoxide_diester_multistep": {
+        "eligible_preparation_rows": 5279,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 5279,
+        "source_rows": 232240
+      },
+      "aema_aza_thiol_addition": {
+        "eligible_preparation_rows": 2092,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 2092,
+        "source_rows": 13865
+      },
+      "aldehyde_ugi3": {
+        "eligible_preparation_rows": 955,
+        "exact_computed_reconstructions": 955,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 18842
+      },
+      "aldehyde_ugi4": {
+        "eligible_preparation_rows": 3222,
+        "exact_computed_reconstructions": 3222,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 222029
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "eligible_preparation_rows": 1469,
+        "exact_computed_reconstructions": 1469,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 219036
+      },
+      "amine_alkylation": {
+        "eligible_preparation_rows": 4752,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 4752,
+        "source_rows": 188272
+      },
+      "amine_epoxide_opening": {
+        "eligible_preparation_rows": 3765,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 3765,
+        "source_rows": 97439
+      },
+      "aryl_reductive_amination": {
+        "eligible_preparation_rows": 1793,
+        "exact_computed_reconstructions": 1718,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 75,
+        "source_rows": 48090
+      },
+      "aza_michael_acrylamide": {
+        "eligible_preparation_rows": 2011,
+        "exact_computed_reconstructions": 2011,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 31239
+      },
+      "aza_michael_acrylate": {
+        "eligible_preparation_rows": 2329,
+        "exact_computed_reconstructions": 2167,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 162,
+        "source_rows": 33619
+      },
+      "disulfide_michael": {
+        "eligible_preparation_rows": 3652,
+        "exact_computed_reconstructions": 3652,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 254389
+      },
+      "epoxide_opening_o_acylation": {
+        "eligible_preparation_rows": 2768,
+        "exact_computed_reconstructions": 2768,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 42805
+      },
+      "iphos_ring_opening": {
+        "eligible_preparation_rows": 5294,
+        "exact_computed_reconstructions": 4713,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 581,
+        "source_rows": 184345
+      },
+      "ketone_isocyanide_amide": {
+        "eligible_preparation_rows": 1235,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 1235,
+        "source_rows": 271560
+      },
+      "ketone_ugi4": {
+        "eligible_preparation_rows": 2964,
+        "exact_computed_reconstructions": 2964,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 91395
+      },
+      "maleate_addition": {
+        "eligible_preparation_rows": 3371,
+        "exact_computed_reconstructions": 3371,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 68463
+      },
+      "o_esterification": {
+        "eligible_preparation_rows": 3287,
+        "exact_computed_reconstructions": 2378,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 909,
+        "source_rows": 24948
+      },
+      "passerini_3cr": {
+        "eligible_preparation_rows": 4291,
+        "exact_computed_reconstructions": 4291,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 128352
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "eligible_preparation_rows": 6511,
+        "exact_computed_reconstructions": 5605,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 906,
+        "source_rows": 465048
+      },
+      "reductive_amination": {
+        "eligible_preparation_rows": 3209,
+        "exact_computed_reconstructions": 3209,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 61320
+      },
+      "reported_lnpdb_route_unassigned": {
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 255
+      },
+      "reported_multistep_amino_lipid": {
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 9
+      },
+      "reported_reference_lipid": {
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 4
+      },
+      "thiolactone_aminolysis_michael": {
+        "eligible_preparation_rows": 5394,
+        "exact_computed_reconstructions": 5394,
+        "new_exact_computed_reconstructions": 0,
+        "pending_eligible_reconstructions": 0,
+        "source_rows": 334859
+      },
+      "vitamin_b5_multistep": {
+        "eligible_preparation_rows": 4077,
+        "exact_computed_reconstructions": 3036,
+        "new_exact_computed_reconstructions": 8,
+        "pending_eligible_reconstructions": 1041,
+        "source_rows": 80398
+      }
+    },
+    "exact_reconstructions": 54789,
+    "new_exact_reconstructions": 8,
+    "preparation_dispositions": {
+      "eligible_for_program_preparation": 76800,
+      "protected": 1410177,
+      "unresolved_partition_or_study": 1695860
+    },
+    "source_records": 3182837
+  },
+  "training_admitted": false,
+  "training_calls": 0
+}

@@ -1,0 +1,49 @@
+{
+  "full_universe_import": {
+    "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+    "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+  },
+  "full_universe_mapping_also_required": true,
+  "full_universe_required_rows": 3182837,
+  "missing_selection_artifacts": [
+    {
+      "directory": "artifacts/corpus_build_v2/post_instruction_component_manifest_v8_1",
+      "files": [
+        "receipt.json",
+        "components.jsonl.gz",
+        "summary.json"
+      ],
+      "receipt_sha256": "d157f920eac46541e0ae63d87f218b4844a0b2dae853a3705a0733afbb561b4d"
+    },
+    {
+      "directory": "artifacts/corpus_build_v2/post_instruction_generator_splits_v8_1",
+      "files": [
+        "receipt.json",
+        "assignments.jsonl.gz",
+        "split_groups.jsonl.gz",
+        "selected_groups.json",
+        "summary.json"
+      ],
+      "receipt_sha256": "3deffe014847cef3625e08bd2f6d1959d63e9b1445d4f12d5e8c5d8cbc98d8d3"
+    }
+  ],
+  "required_full_universe_fields": [
+    "target_id",
+    "canonical_complete_precursors",
+    "roles",
+    "multiplicities",
+    "ordered_program_and_sites",
+    "source_studies",
+    "registry_and_construction_witness_pins"
+  ],
+  "schema_version": "forge.compose_lipid_full_universe_source_request.v1",
+  "selection_scope_rows": 200000,
+  "status": "prepared_not_sent",
+  "training_admitted": false,
+  "unknown_full_universe_receipt_hash": null,
+  "upstream_commit": "9f77fb399d644e6fbab1d3d766611a81e69e85fc",
+  "upstream_evidence": {
+    "path": "results/phase1/compose_lipid_v8_source_recovery_v1/asset-manifest.json",
+    "sha256": "c39a6334c1522b3afbf72704fa55f4512db444308cef0754653a025f9cc686d2"
+  }
+}

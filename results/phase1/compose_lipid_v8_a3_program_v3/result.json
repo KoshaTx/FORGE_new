@@ -1,0 +1,291 @@
+{
+  "artifacts": {
+    "train_replay.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_a3_program_v3/train_replay.jsonl.gz",
+      "sha256": "d41b2bdf2c9b98e3bf7b1ecd561ee2b44fb0b9ec8de9736ac73ee2dfc93957c5"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_a3_program_v3.json",
+    "sha256": "2e9aa20dff18687817e52e46807b83e3ddc14de15ef5788987ffa4427749b872"
+  },
+  "created_at_utc": "2026-09-18T17:44:56.405069+00:00",
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_repeated_source.py": {
+      "path": "forge/corpus/compose_lipid_repeated_source.py",
+      "sha256": "7580d5f642a425b760f2e44e59d7e78b0eec728d7f722192248f2de8d81df903"
+    }
+  },
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/adjudication-v2.json",
+      "sha256": "ab3ebf50a052e462c54cc0bff88bb90ffd0dcbaf6405d04cda575fb499b0fa2f"
+    },
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "precursor_dictionary": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/precursors.jsonl.gz",
+      "sha256": "71b43339935347062fee1e05f0eb3adf8acc3b9efc4d980a9cadacfd69f2c0e0"
+    },
+    "prior_construction": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/construction_supervision.jsonl.gz",
+      "sha256": "860744d5dbda12bc13968ebe907f99a6889b6ad0b130fea5a629fabdb0e7fb6f"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_a3_source_program_v2.json",
+      "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+    }
+  },
+  "policy": {
+    "fit_population": "protected_train",
+    "generation_calls": 0,
+    "heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "remaining_holds": [
+    "source_architecture_conflict",
+    "component_dictionary_incomplete",
+    "unconditioned_inverse_uniqueness_not_established",
+    "global_precursor_protection_incomplete",
+    "precursor_holdouts_unqualified",
+    "remaining_families_unqualified",
+    "repository_full_tests_fail"
+  ],
+  "runtime": {
+    "rdkit": "2026.03.5"
+  },
+  "schema_version": "forge.compose_lipid_repeated_source.v2",
+  "source_conflicts": [
+    {
+      "disposition": "reject_claim",
+      "id": "han_asymmetric_event_count",
+      "reason": "The cited amine31 asymmetric procedure and Fig3e support one event, not two ordered events. This does not imply other repeated A3 products are impossible.",
+      "source_key_field": "architecture_subfamilies.han_ordered_two_event_asymmetric"
+    },
+    {
+      "disposition": "abstain",
+      "id": "31hP-M_CuCl_amount",
+      "locator": "SI PDF5 Supplementary Method2",
+      "reason": "CuCl is printed as 0.2 mmol and 0.1 equivalents for 0.2 mmol limiting substrate. Both values are preserved; no corrected amount or exact execution label is inferred."
+    }
+  ],
+  "source_controls": {
+    "Han_11(aB)2": {
+      "balance": {
+        "product_and_byproducts": {
+          "C": 36,
+          "H": 56,
+          "N": 2,
+          "O": 2,
+          "formal_charge": 0
+        },
+        "reactants": {
+          "C": 36,
+          "H": 56,
+          "N": 2,
+          "O": 2,
+          "formal_charge": 0
+        }
+      },
+      "bound_reasons": [],
+      "checks": {
+        "complete_search": true,
+        "declared_event_count_replayed": true,
+        "full_element_hydrogen_charge_balance": true,
+        "unique_declared_side_inverse": true,
+        "unique_forward_exact": true
+      },
+      "computed_consistency_pass": true,
+      "experimental_selectivity_qualified": false,
+      "formula": "C36H52N2",
+      "forward_edges": [
+        [
+          1,
+          "CCN(CC)CCN",
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+        ],
+        [
+          2,
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+          "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+        ]
+      ],
+      "forward_layers": [
+        [
+          "CCN(CC)CCN"
+        ],
+        [
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+        ],
+        [
+          "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+        ]
+      ],
+      "inverse_scope": "conditioned_on_declared_fixed_side_components",
+      "physical_event_order_qualified": false,
+      "reverse_edges": [
+        [
+          1,
+          "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1",
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+        ],
+        [
+          2,
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1",
+          "CCN(CC)CCN"
+        ]
+      ],
+      "reverse_layers": [
+        [
+          "CCCCCCc1ccc(C#CCN(CC#Cc2ccc(CCCCCC)cc2)CCN(CC)CC)cc1"
+        ],
+        [
+          "CCCCCCc1ccc(C#CCNCCN(CC)CC)cc1"
+        ],
+        [
+          "CCN(CC)CCN"
+        ]
+      ]
+    },
+    "Han_31hP-M": {
+      "balance": {
+        "product_and_byproducts": {
+          "C": 21,
+          "H": 32,
+          "N": 2,
+          "O": 5,
+          "formal_charge": 0
+        },
+        "reactants": {
+          "C": 21,
+          "H": 32,
+          "N": 2,
+          "O": 5,
+          "formal_charge": 0
+        }
+      },
+      "bound_reasons": [],
+      "checks": {
+        "complete_search": true,
+        "declared_event_count_replayed": true,
+        "full_element_hydrogen_charge_balance": true,
+        "unique_declared_side_inverse": true,
+        "unique_forward_exact": true
+      },
+      "computed_consistency_pass": true,
+      "experimental_selectivity_qualified": false,
+      "formula": "C21H30N2O4",
+      "forward_edges": [
+        [
+          1,
+          "CCN(CC)CCNC",
+          "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+        ]
+      ],
+      "forward_layers": [
+        [
+          "CCN(CC)CCNC"
+        ],
+        [
+          "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+        ]
+      ],
+      "inverse_scope": "conditioned_on_declared_fixed_side_components",
+      "physical_event_order_qualified": false,
+      "reverse_edges": [
+        [
+          1,
+          "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1",
+          "CCN(CC)CCNC"
+        ]
+      ],
+      "reverse_layers": [
+        [
+          "CCN(CC)CCN(C)C(C#CCCCC(=O)O)c1ccc(C(=O)O)cc1"
+        ],
+        [
+          "CCN(CC)CCNC"
+        ]
+      ]
+    }
+  },
+  "status": "diagnostic_complete_architecture_and_training_unqualified",
+  "summary": {
+    "architecture_qualified": false,
+    "by_declared_event_count": {
+      "1": {
+        "computed_consistency_pass": 930,
+        "missing_candidate_component": 759,
+        "reconstruction_or_site_hold": 506
+      },
+      "2": {
+        "computed_consistency_pass": 1359,
+        "missing_candidate_component": 457,
+        "reconstruction_or_site_hold": 1279
+      },
+      "3": {
+        "computed_consistency_pass": 145,
+        "missing_candidate_component": 63
+      },
+      "4": {
+        "computed_consistency_pass": 44,
+        "missing_candidate_component": 14
+      }
+    },
+    "counts": {
+      "computed_consistency_pass": 2478,
+      "consistent_with_protected_precursor": 842,
+      "consistent_with_protected_v5_product": 1,
+      "historical_protected_precursor": 1496,
+      "historical_protected_v5_product": 2,
+      "missing_candidate_component": 1293,
+      "reconstruction_or_site_hold": 1785,
+      "rows": 5556
+    },
+    "failed_checks": {
+      "unique_forward_exact": 1785
+    },
+    "inverse_scope": "conditioned_on_declared_fixed_side_components",
+    "precision_scope": "exact computational replay among ID-resolved tuples; chemical precision requires independent source adjudication",
+    "prior_v5_identity_scope": "exact_constitutional_string_matches_nonmatches_unresolved",
+    "prior_v5_product_fold_overlaps": {
+      "train": 63,
+      "unassigned": 6,
+      "validation": 2
+    },
+    "training_admitted": 0
+  },
+  "training_ready": false
+}

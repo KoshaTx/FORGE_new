@@ -1,0 +1,318 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_training_readiness_v9/aryl-inventory-conflicts.jsonl.gz",
+    "sha256": "3bd7c51035386340d12fc9e47a1f804cbc7500302516bcc4d5129e3c410a5199"
+  },
+  "by_source_head_code": {
+    "H1": 3766,
+    "H2": 3831,
+    "H3": 3830
+  },
+  "conclusion": "These complete supplied recipes fail the qualified program's atom, hydrogen and charge inventory check. The issue packet preserves the source IDs and quantities for original-generator reconciliation. No replacement quantity is inferred from the target, and no record is promoted into training.",
+  "family": "aryl_reductive_amination",
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v9/audit_aryl_inventory.py",
+    "sha256": "fb50aec56a6a8edc056b26ece4f3f34acde77283e25655be86e47957b1742425"
+  },
+  "inputs": {
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/result.json",
+      "sha256": "f3b36eb0098baf99f37564f75405548dee54f5a197e27138d5b611e55b5516f2"
+    }
+  },
+  "inventory_conflicts": 11427,
+  "nonzero_inventory_elements": {
+    "C,H,O": 11427
+  },
+  "replay_dispositions": {
+    "exact_computed_reconstruction": 6070,
+    "unresolved_computed_reconstruction": 11427,
+    "unsupported_source_role_tuple": 1
+  },
+  "schema_version": "forge.compose_lipid_source_inventory_conflicts.v1",
+  "seed": 0,
+  "shards": [
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00000/result.json",
+      "sha256": "0aede0dd690bf3b464215f4d62e797749fff7498ee2ac8b99d53eb3aa03af090"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00001/result.json",
+      "sha256": "e82e5044bf5b2aa1bc342826cf3560dcc3f3cee842ee7f2ae5228a4d77dec1ca"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00002/result.json",
+      "sha256": "4b90e4d10530f8422f4fbeac9f968090d005f6e6088317e64d86e955d3fd49e2"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00003/result.json",
+      "sha256": "c53fc9814d2e03d18d7adca31aff96c9eba5b3c398f285c78631b809050457c9"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00004/result.json",
+      "sha256": "2569fb3419a8c4fb5d1e54843305b89de7b6c053aab45f8aba7cdf06808d7a8d"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00005/result.json",
+      "sha256": "f398db3ef5ba957d06eefe303e903f29781f1647d7b64cc4e11b288c514f7600"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00006/result.json",
+      "sha256": "3847604ca16c073a0252aaf2d3dfb00c5f5e3cf136383d0b037dd0b23c1a0e8e"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00007/result.json",
+      "sha256": "47c64499c8301c0f0b1163995309e7a9afe071f65a0176d83c968d2152f57054"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00008/result.json",
+      "sha256": "610e441938b7454845d7c566c1a77a1bd2066b18ff70fe7057d3e9c6ee5d4284"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00009/result.json",
+      "sha256": "b5e890347e56f20f51a0494b938bdacc642d7f632887505988fc47d632cdf110"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00010/result.json",
+      "sha256": "5135dae46a334daa01f4af16b87bed7ca664ec8fe3724891f851d21cf7f728ee"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00011/result.json",
+      "sha256": "e01f4c146a1c7d2309dacea295a172ad526fa2368047c2821ff5a8730c7fdb55"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00012/result.json",
+      "sha256": "93b8fb0c903179b5e6cd4a07805dec19941b384ae35130b9a33b300084eb94b1"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00013/result.json",
+      "sha256": "d0d3d28e217a74ff343ec606ef1124db0f1ec6d97fdc3169804fb6eefb1de338"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00014/result.json",
+      "sha256": "60c24cb7f3812bf8e1999f73df2dc7936eec56e33b8c1dc84da3dbd92dbedc2b"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00015/result.json",
+      "sha256": "0d6e8de749ea57ad1b57d7cf78fa1573c86c4ed41cdbfac6f470493fc75e134b"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00016/result.json",
+      "sha256": "f3fdebcf1ab352c819be7433850a6d4edbff8a90733da081b9df01150d96d333"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00017/result.json",
+      "sha256": "25aa38825c6d7ea962afe6cb502cc436873fa3d6744e932c6771c51db2d6bced"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00018/result.json",
+      "sha256": "9e3a5f7a246a4244fa3e6e8dede35b7d5fc54099fb149a98fa722a393e1bea99"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00019/result.json",
+      "sha256": "03c28e03ffbc847ac490ab17eb55b28d555ffd52eb27b646a386b7bed5108bf0"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00020/result.json",
+      "sha256": "52343618cf5875df9393b89c86cc27c4634663ec6b709c39c30514f7b33a4eaa"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00021/result.json",
+      "sha256": "448b7139144bc4b12c91c1348a55865640795ed0458df21cf2391da5a50e9bca"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00022/result.json",
+      "sha256": "056cbd96ed88df8550a2c7c73b8a1857c360d8e6c19c5bdd262bf768452c2f34"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00023/result.json",
+      "sha256": "1a26f0c9c973acdad8e75fc802d8aa901e2d346f839310e3cd7c5b93ad0415d2"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00024/result.json",
+      "sha256": "384d8ba9d8cb322fa6ab9450642e3f9ebd0a8bc4278319893fd08fcf247ac7f1"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00025/result.json",
+      "sha256": "479163cdaa428cb1dc30ac28ccac33876602aa76df1b97698ffb950784a6da15"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00026/result.json",
+      "sha256": "af4427b4f7d955212726685d189b236deeaf44f6882caadf2dd93681331ec76c"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00027/result.json",
+      "sha256": "e4aa49d54df72568195e5bc6786dcc78f59cb50541cd3096740bb4b501433ca0"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00028/result.json",
+      "sha256": "a7470ba8a1cabf8b0364410c1ca6f1e9203c41eb5ec5c8a70b3c37bf2e379f84"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00029/result.json",
+      "sha256": "05f50f8d01306e6a46da19f9789d12877418c78fce4930d92dda721d478107d9"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00030/result.json",
+      "sha256": "fbf94985f6bfef2cd1e42a990a90777542480c5c1dadffa62a7156b575963bcf"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00031/result.json",
+      "sha256": "429b694fb4589473ff82732b19c96f33f8c389d2341340741f58d8b78cf13ed3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00032/result.json",
+      "sha256": "4ab298e39ac15f5446dfa683e9e04066842a561f50e9fc5de2f82df2ac1e90d6"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00033/result.json",
+      "sha256": "f3e98d543e5d47a613fdc9c4511c66f62decf28273c044400dc2aa92d1b13eda"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00034/result.json",
+      "sha256": "0acb78c8b76f5c408aebdcffcf21b8f86a96b6fe0b7cce94fc65e5524c82889a"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00035/result.json",
+      "sha256": "83e36f114409ec0417193c87ca5f854dc2902236c731328f9b6f0861a8aa2d94"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00036/result.json",
+      "sha256": "c8b968805dd689218da31b827a862759dc039408e173fb9fe21565c613d901d5"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00037/result.json",
+      "sha256": "91ac602226de827917d1d45268c87d68160f55af4a022eb717e7ae9625308aaf"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00038/result.json",
+      "sha256": "8c4c3c711310b5d06a948ba2cd1730b5316d4cf25d316cee7b5ab5e9044f9259"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00039/result.json",
+      "sha256": "eaf112c2a228eada867f2451f81f387ee0a38406a9902cb6c61fe50f6563d69c"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00040/result.json",
+      "sha256": "b4dc46e01ed041843fade5f0c56230ada7082ad011b3a0ffbc5f4ae2bef24903"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00041/result.json",
+      "sha256": "eaf1a5d1c9edc5f0c57ddfa341a6e3fd86a112a8ec690f641c9fd1103baed0bc"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00042/result.json",
+      "sha256": "1c831cc18eeada0b56db7669ab42822ba0acea55d26214f2dde65af0f26fecd6"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00043/result.json",
+      "sha256": "2b0b614fd6950a093dc7b189d456e41fabf1edf7f5af3a0c86a924eabad8c5f4"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00044/result.json",
+      "sha256": "01c708c26b73f8903e27ec26a63701aa92760987ec38fe44c5d55b5a7619beed"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00045/result.json",
+      "sha256": "55ff3ba8ca37b8e26a1f2469e96c24c4133f37fffa3b0645e4ce6f856627797e"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00046/result.json",
+      "sha256": "100f45b0989c4a8dc9937cc029abbc618118d7048fdc945de29c01b025cf3eb7"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00047/result.json",
+      "sha256": "4484d4e1b4e14c0691dc28521948ff7ddf09234cd43369952314f0d6f2edc983"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00048/result.json",
+      "sha256": "46b224b783831bac4811572438b7dd840cbba8464a7143cfe526dc92afa6ee6b"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00049/result.json",
+      "sha256": "11ecd217c3f7e9d2db436a471ffce2bdcc5ffd25024e1193f61b2bcee1eeed78"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00050/result.json",
+      "sha256": "093f2bbbd86b9430c26e47023a481dea7354846d0ebf833219afa5adf38156dd"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00051/result.json",
+      "sha256": "b1b522f16060074c2c4c8f8d9b7f7ef65b0abbad20cb4631203a8b2473241731"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00052/result.json",
+      "sha256": "cd0b0046b40ab7e7be25bc9f6748c182cf0458c129a0702c444e12328d0e5080"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00053/result.json",
+      "sha256": "bebc4a15be249711b69d506440466cca7ea4bb5b4749f8f0070f2f6228c2df03"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00054/result.json",
+      "sha256": "bd1260b3439cde0801b3e3ca5527d897361378d9ebc2786f4db30867863530fa"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00055/result.json",
+      "sha256": "99a8f414319be39515a195c3c954133edbf921fb56120848da36d8b80c208124"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00056/result.json",
+      "sha256": "a65d9210853372f2ea1b02fdb967b1fcd63b89b16a6eb4d9fb63d204ab953202"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00057/result.json",
+      "sha256": "dc538351a2a4f5407de2fba202bb152134551bc68bfdb1713113f440c540dcf3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00058/result.json",
+      "sha256": "290d01a29a58841e2c5dadc7e71ed8a14528e835cd3f5dcc7311688bd80838cf"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00059/result.json",
+      "sha256": "3f08eb21af1004c2340fb2d8f807ac0d77f16bf5f1546b8780c7da66af7b7b62"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00060/result.json",
+      "sha256": "5c27bdb96bf5827be98ba269e0188f6fa288defa71a5f7a4a98176a8f1c70f53"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00061/result.json",
+      "sha256": "bbbe2f88cbfc1894bcc6a40b460c45c943100d4686c8fdfe247ab7a8665b52fc"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00062/result.json",
+      "sha256": "4d35a391ddb9e33a3e2403199621f86bc134e7601f7133aae07d4f23acc66dbb"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00063/result.json",
+      "sha256": "113ce7c6dc0cc25aff22cc28cb6e6b7f6c5f001d897683cd909294d4b3f3a082"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00064/result.json",
+      "sha256": "da1cb22660b3b2f5e03f96eb4a8e9fcf7c614b3531271422e1f25b4953b55adb"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00065/result.json",
+      "sha256": "f74cd935d6373e4bf9ca890652432831c847fd0a3846d0a6640d936b87d26e16"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00066/result.json",
+      "sha256": "cd84526dc3e536a2775aefe7d94f808030fbc1ee88ba18e2dbc6f4678d026497"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00067/result.json",
+      "sha256": "933a7fd63060240a6d36c85ecdb0d15bd88dd45885ccc83f4a6dbb14a986ca6f"
+    },
+    {
+      "path": "results/phase1/compose_lipid_full_program_replay_v1/programs/aryl_reductive_amination-00068/result.json",
+      "sha256": "e06b85440978718c69a0b5044527a2a4f3858700896be337e134621e34c53435"
+    }
+  ],
+  "training_admitted": false,
+  "training_calls": 0
+}

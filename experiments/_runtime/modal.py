@@ -49,6 +49,35 @@ def modal_call_receipt_path(repo: Path, request_id: str) -> Path:
     return repo.resolve() / "runs" / "_modal_calls" / f"{request_id}.json"
 
 
+def modal_restart_receipt_path(repo: Path, plan: Mapping, previous: Path) -> Path:
+    """Bind a new attempt to the unchanged request and preserve its parent receipt."""
+    previous = previous.resolve()
+    previous.relative_to((repo / "runs" / "_modal_calls").resolve())
+    receipt = read_json_object(previous, error=BackendError)
+    for key in ("request_id", "source_sha256", "spec_sha256", "uploads"):
+        if receipt.get(key) != plan[key]:
+            raise BackendError(f"Restart changed {key}; use the original source and inputs")
+    if receipt.get("status") != "launched" or not receipt.get("function_call_id"):
+        raise BackendError("Restart requires a persisted launched-call receipt")
+    token = str(sha256_json({"parent": str(sha256_file(previous)), "request": plan["request_id"]}))
+    return modal_call_receipt_path(repo, plan["request_id"]).with_name(
+        f"{plan['request_id']}-restart-{token[:16]}.json"
+    )
+
+
+def require_terminal_modal_call(call: Any) -> str:
+    """Unknown, running and successful calls must never start paid recovery."""
+    roots = call.get_call_graph()
+    if len(roots) != 1 or roots[0].status.name not in {
+        "FAILURE",
+        "INIT_FAILURE",
+        "TERMINATED",
+        "TIMEOUT",
+    }:
+        raise BackendError("Prior Modal call is not confirmed failed, terminated or timed out")
+    return roots[0].status.name
+
+
 def _config_dependency_uploads(repo: Path, config_path: Path) -> dict[str, Path]:
     """Resolve the recursive ``inputs`` closure of one hash-pinned JSON configuration.
 
@@ -208,6 +237,8 @@ def launch_modal(
     device: str | None,
     resume: bool,
     detached: bool = False,
+    restart_from: Path | None = None,
+    diagnosis: str = "",
 ) -> int:
     """Invoke the one generic Modal program; never fall back to local execution."""
 
@@ -241,6 +272,10 @@ def launch_modal(
         command.extend(("--device", device))
     if resume:
         command.append("--resume")
+    if restart_from is not None:
+        if not resume or not detached or not diagnosis.strip():
+            raise BackendError("Explicit recovery requires detached resume and a diagnosis")
+        command.extend(("--restart-from", str(restart_from), "--diagnosis", diagnosis))
     if detached:
         command.append("--launch-only")
     completed = subprocess.run(command, cwd=repo, check=False)

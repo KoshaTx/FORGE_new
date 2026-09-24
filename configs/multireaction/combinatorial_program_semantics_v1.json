@@ -1,0 +1,142 @@
+{
+  "schema_version": "forge.combinatorial_program_semantics_config.v1",
+  "workers": 4,
+  "maximum_outcomes": 256,
+  "required_folds": ["train", "calibration", "heldout"],
+  "inputs": {
+    "program_dataset_result": {
+      "path": "results/phase1/library_program_dataset_v1/result.json",
+      "sha256": "04d0a2c9981727de4879a41b640c6ef11d4b1f0564cca18f0eb75401904de28a"
+    },
+    "products": {
+      "path": "results/phase1/library_program_dataset_v1/products.csv.gz",
+      "sha256": "81009f3f5437d8b88963df26b539e97004c8a80952ae90e2e6e55dce108f49da"
+    },
+    "programs": {
+      "path": "results/phase1/library_program_dataset_v1/programs.jsonl.gz",
+      "sha256": "964f38cba65e23e4070732a62f0e9e986b2c8ca4f39d24343295d167e2c0d928"
+    },
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "ugi_registry": {
+      "path": "data/vendor/qualified_reactions_v1.json",
+      "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+    },
+    "family_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "ugi_variant": {
+      "path": "configs/assembly/ugi_variant.yaml",
+      "sha256": "5b97e062b115fcc137b4a05d8f72b74e9cc67a584c05c054ef5f983969bf1427"
+    }
+  },
+  "registries": ["ugi_registry", "family_registry"],
+  "expected_selected_counts": {
+    "acetal_aldehyde_diol": {"train": 624, "calibration": 114, "heldout": 49},
+    "amide_coupling_acid_amine": {"train": 1386, "calibration": 63, "heldout": 192},
+    "aza_michael_amine_acrylate": {"train": 2065, "calibration": 21, "heldout": 72},
+    "carbamate_amine_chloroformate": {"train": 2016, "calibration": 14, "heldout": 120},
+    "disulfide_coupling": {"train": 351, "calibration": 28, "heldout": 21},
+    "epoxide_opening_amine": {"train": 2013, "calibration": 14, "heldout": 120},
+    "iphos_amine_dioxaphospholane": {"train": 1953, "calibration": 28, "heldout": 96},
+    "passerini_3cr": {"train": 13728, "calibration": 171, "heldout": 672},
+    "reductive_amination_amine_aldehyde": {"train": 1512, "calibration": 133, "heldout": 140},
+    "thiol_michael_thioether": {"train": 858, "calibration": 21, "heldout": 18},
+    "ugi_3cr_agile": {"train": 36112, "calibration": 133, "heldout": 2100},
+    "urea_amine_isocyanate": {"train": 1725, "calibration": 17, "heldout": 171}
+  },
+  "programs": {
+    "acetal_aldehyde_diol": {
+      "roles": ["aldehyde_tail", "diol_linker"],
+      "core_positions": ["map_1", "map_3_or_map_6", "map_4_or_map_5"],
+      "core_position_aliases": {
+        "map_1": "map_1",
+        "map_3": "map_3_or_map_6",
+        "map_4": "map_4_or_map_5",
+        "map_5": "map_4_or_map_5",
+        "map_6": "map_3_or_map_6"
+      },
+      "allowed_depths": [1],
+      "fix_core_atoms": false
+    },
+    "amide_coupling_acid_amine": {
+      "roles": ["carboxylic_acid_tail", "amine_head"],
+      "core_positions": ["map_1", "map_2", "map_4"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": false
+    },
+    "aza_michael_amine_acrylate": {
+      "roles": ["amine_head", "alkyl_acrylate_or_acrylamide_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4", "map_5", "map_6"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": true
+    },
+    "carbamate_amine_chloroformate": {
+      "roles": ["amine_head", "chloroformate_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": false
+    },
+    "disulfide_coupling": {
+      "roles": ["thiol_tail", "thiol_head_or_tail"],
+      "core_positions": ["map_1", "map_2"],
+      "allowed_depths": [1],
+      "fix_core_atoms": false
+    },
+    "epoxide_opening_amine": {
+      "roles": ["amine_head", "alkyl_epoxide_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": false
+    },
+    "iphos_amine_dioxaphospholane": {
+      "roles": ["amine_head", "dioxaphospholane_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4", "map_5", "map_6", "map_7"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": false
+    },
+    "passerini_3cr": {
+      "roles": ["carboxylic_acid_tail", "aldehyde_body", "isocyanide_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4", "map_5", "map_6", "map_7"],
+      "allowed_depths": [1],
+      "fix_core_atoms": false
+    },
+    "reductive_amination_amine_aldehyde": {
+      "roles": ["amine_head", "aldehyde_tail"],
+      "core_positions": ["map_1", "map_2"],
+      "allowed_depths": [1, 2],
+      "fix_core_atoms": false
+    },
+    "thiol_michael_thioether": {
+      "roles": ["thiol_tail", "alkyl_acrylate_or_acrylamide_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4", "map_5", "map_6"],
+      "allowed_depths": [1],
+      "fix_core_atoms": false
+    },
+    "ugi_3cr_agile": {
+      "roles": ["amine_head", "assembly_introduced", "isocyanide_tail", "oxoester_aldehyde_body_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4", "template_introduced_0"],
+      "allowed_depths": [1],
+      "fix_core_atoms": true
+    },
+    "urea_amine_isocyanate": {
+      "roles": ["amine_head", "isocyanate_tail"],
+      "core_positions": ["map_1", "map_2", "map_3", "map_4"],
+      "allowed_depths": [1, 2, 3, 4],
+      "fix_core_atoms": false
+    }
+  },
+  "support_bounds": {
+    "maximum_heavy_atoms": 140,
+    "maximum_closures": 1
+  },
+  "policy": {
+    "semantic_ambiguity": "abstain",
+    "evidence_basis": "computed_transform_consistency",
+    "component_identity_in_model_state": false,
+    "raw_family_count_sampling": false
+  }
+}

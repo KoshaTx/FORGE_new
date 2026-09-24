@@ -1,0 +1,86 @@
+{
+  "artifacts": {
+    "checkpoint.json": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    }
+  },
+  "cache": {
+    "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+    "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+  },
+  "checkpoint_sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787",
+  "checks": {
+    "checkpoint_reload_identical": true,
+    "final_state_identical": true,
+    "initial_state_identical": true,
+    "training_stream_identical": true
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_checkpoint_v1.json",
+    "sha256": "cf17e51482bd8ec01f95fd4e14ff81385ef891c75c974c0e45a483df15edd539"
+  },
+  "created_at_utc": "2026-09-14T12:50:03.539887+00:00",
+  "duration_seconds": 11.334350666031241,
+  "environment": {
+    "cpu_threads": 2,
+    "deterministic": true,
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "rdkit": "2026.03.5",
+    "torch": "2.13.0"
+  },
+  "inputs": {
+    "pilot_config": {
+      "path": "configs/multireaction/combinatorial_training_pilot_v1.json",
+      "sha256": "98f247457f5dc8878082aca015449175aff271031be6997ce803dd36aabcf600"
+    },
+    "pilot_result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/result.json",
+      "sha256": "e8ad3a9734290d7f299096745a1ce1f23e52a5b196f3e996615071c44d79ebad"
+    }
+  },
+  "model_state_sha256": "fdc43450f0a8fc0f37db00be271792bf7623581944b01f3bd9945984958fe865",
+  "schema_version": "forge.combinatorial_generation_result.v1",
+  "sources": [
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generation.py",
+      "sha256": "b25384f16a0d7fe6bd29a3a7f62d31122e85ee1bb8aa866f282a5ad86a27de0f"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_training_pilot.py",
+      "sha256": "f622eb6e0b6ff4f37ee878bc62fb6fd6486ebac183f155a4a983360b96aa37e7"
+    },
+    {
+      "path": "forge/assembly/library_generation.py",
+      "sha256": "869d6f2de87bf6da206d63398398a966cae4c5476452a380a277bbac57084a2a"
+    },
+    {
+      "path": "forge/assembly/library_programs.py",
+      "sha256": "e3857930ca4924f2d1f1db4b649ac01b79578d96aa1bbdb8761d76463611075f"
+    },
+    {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+    },
+    {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    {
+      "path": "forge/corpus/synthesis_program_production_cache.py",
+      "sha256": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d"
+    }
+  ],
+  "stage": "checkpoint",
+  "status": "pass",
+  "training_examples": 9216
+}

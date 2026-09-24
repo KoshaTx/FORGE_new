@@ -1,0 +1,60 @@
+{
+  "inputs": {
+    "michael_config": {
+      "path": "configs/multireaction/compose_lipid_supplied_michael_v1.json",
+      "sha256": "9eac136d10a7bf11aefaa492823835d03a87f6d6d9f21e2bc48f6b919f61ee15"
+    },
+    "passerini_config": {
+      "path": "configs/multireaction/compose_lipid_v8_passerini_program_v1.json",
+      "sha256": "78e57cdf7c342260cfa7be0ccc16d4cca584808ea217ad0a399c6237703f3b04"
+    },
+    "passerini_registry": {
+      "path": "results/phase1/compose_lipid_v8_passerini_program_v1/registry.json",
+      "sha256": "781c28feebdd9da1fa07023e982d789cfe5c56082d396059bb7f3ccf8025fd7c"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "reductive_config": {
+      "path": "configs/multireaction/compose_lipid_v8_reductive_program_v1.json",
+      "sha256": "2cf215ceb4eaf4febaf24cf202f4eb7c6f41f412883062ee58209aff705c4e1e"
+    },
+    "staar_config": {
+      "path": "configs/multireaction/compose_lipid_v8_staar_program_v1.json",
+      "sha256": "af621eb44c9d8334a30d129d4d8a47285673a474f2de3104d16b3a1b59614a54"
+    },
+    "ugi3_config": {
+      "path": "configs/multireaction/compose_lipid_v8_ugi3_program_v1.json",
+      "sha256": "d28338a5967a3b541e8d1cfaf0df13704d98e411524ee6fa40de6a2db1e4f1a7"
+    },
+    "ugi4_config": {
+      "path": "configs/multireaction/compose_lipid_v8_ugi4_program_v1.json",
+      "sha256": "f99b14fad795879e91ce3d0881f6b7a1f338f61b7f22c0c4dc14d867f4f0c7e4"
+    }
+  },
+  "policy": {
+    "components": "supplied_global_ids_roles_quantities_no_product_inference",
+    "device": "cpu",
+    "experimental_execution_admitted": false,
+    "forward_sites": "unfiltered_exhaustive_with_existing_qualified_bounds",
+    "population": "full_preparation_eligible_intersection_only",
+    "seed": 0,
+    "training_admitted": false,
+    "training_calls": 0,
+    "unsupported_family": "pending_source_program_qualification",
+    "workers": 1
+  },
+  "qualified_executor_families": [
+    "aldehyde_ugi3",
+    "aldehyde_ugi4",
+    "aryl_reductive_amination",
+    "aza_michael_acrylamide",
+    "aza_michael_acrylate",
+    "disulfide_michael",
+    "passerini_3cr",
+    "reductive_amination",
+    "thiolactone_aminolysis_michael"
+  ],
+  "schema_version": "forge.compose_lipid_family_replay_config.v1"
+}

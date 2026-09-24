@@ -1,0 +1,90 @@
+{
+  "assets": {
+    "article.html": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/article.html",
+      "sha256": "d6e51f7210f5bac28ec7e78a89763d006aa9aa5e9fff7237632101f3567a4f19"
+    },
+    "control_transcriptions.json": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/control_transcriptions.json",
+      "sha256": "8333ecaae7302a97254d25b34f30ba585d4a3b295643d7dcc7e32c670749efca"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "fig1.jpg": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/fig1.jpg",
+      "sha256": "656aa138270a371a35a51696420de32b014c2a14f520edaf07c1e873e58b260d"
+    },
+    "fig2.jpg": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/fig2.jpg",
+      "sha256": "a1b7825556181fbe048c0758c289c9d291ddceccbb1053b29215811e1c4c59e3"
+    },
+    "fig3.jpg": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/fig3.jpg",
+      "sha256": "89c0f47319bed779c29e4574050395b9531899d6decf42cf154df5ee5690c064"
+    },
+    "si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/si.pdf",
+      "sha256": "351ddc2ad3ebb139e4dddd9746401987e1fe67b8b7a2f438329657931d7062e9"
+    },
+    "stage_contract.json": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/stage_contract.json",
+      "sha256": "0e7f663ac07e18e552f484a8b0fae06208925a0c1a8bc89c2b99277f1210dcae"
+    },
+    "transcription_check.json": {
+      "path": "results/phase1/compose_lipid_v8_staar_source_v1/transcription_check.json",
+      "sha256": "d38c2824f87fa090412906f7bd71033c70f97d2de780afc5a8955145d2106cb3"
+    }
+  },
+  "boundary": {
+    "ionizable_site": "A surviving nonacyl amine or unprotonated aromatic nitrogen is a structural candidate only, not a pKa claim.",
+    "missing_metadata": "exclude; never infer provider labels from structure",
+    "role_admission": "Complete components, N-acyl thiolactone with one nitrogen and sulfur, C/O acrylate body, neutral C/N/O head. All N-H sites within the declared size support are enumerated; no intended attachment is selected after observing the target.",
+    "separate_source_programs": [
+      "permanently cationic methylation comparator",
+      "O-linked head variants",
+      "modified carbon-linked thiolactone side substituents"
+    ],
+    "source_program": "One N-acyl homocysteine thiolactone opening followed by thiol addition to one acrylate; no lost atoms."
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "families": {
+    "thiolactone_aminolysis_michael": {
+      "program_id": "source_staar_two_stage",
+      "role_fields": {
+        "acrylate_tail": "acrylate_id",
+        "amine_head": "head_id",
+        "thiolactone_region": "thiolactone_id"
+      }
+    }
+  },
+  "precision_scope": "Two independent positive controls plus adversarial tests; corpus-wide decomposition precision and source experimental membership remain uncalibrated.",
+  "procedure_and_conflicts": {
+    "path": "results/phase1/compose_lipid_v8_staar_source_v1/control_transcriptions.json",
+    "sha256": "8333ecaae7302a97254d25b34f30ba585d4a3b295643d7dcc7e32c670749efca"
+  },
+  "registry": {
+    "path": "data/vendor/qualified_staar_source_program_v1.json",
+    "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+  },
+  "schema_version": "forge.sequential_program_adjudication.v1",
+  "source": {
+    "article_figures_visually_inspected": [
+      1,
+      2,
+      3
+    ],
+    "doi": "10.1038/s42004-025-01516-z",
+    "pmid": "40234552",
+    "si_pages_visually_inspected": [
+      3,
+      4,
+      5
+    ]
+  },
+  "status": "source_program_qualified_for_computed_consistency_not_experimental_labels",
+  "training_rows_admitted": 0
+}

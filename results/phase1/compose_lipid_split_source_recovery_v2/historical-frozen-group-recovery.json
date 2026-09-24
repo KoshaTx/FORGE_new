@@ -1,0 +1,71 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-frozen-selected-groups.json",
+    "sha256": "5695b251b45c17fded852117a786e68969894530f3f5b6272ed6b4f1b3047ac2"
+  },
+  "assignment_failures": 0,
+  "calibration_candidate_structures": 3555,
+  "elapsed_seconds": 10.41528541711159,
+  "full_universe_group_selection_performed": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_frozen_calibration_groups.py",
+    "sha256": "5eb03b5b2f045e7c3d38decb50641de609041321fc4d47bb1af6617f25031eff"
+  },
+  "inputs": {
+    "config": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/configs/corpus/post_instruction_generator_splits_v8.json",
+      "sha256": "777136aa72fe341e8620416fbe8fad3a096c8c6696ba0d4c8bb4730a494069ba"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "digest_registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "historical_policy": {
+      "path": "data/vendor/compose_lipid_historical_morphology_policy_v1.json",
+      "sha256": "ee64de495cb0a92cf9116dd8ba27aecc19b74723642d0fe20d4986bad33064f3"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "loader": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_historical_selected_groups_v2.py",
+      "sha256": "064ad00fd0431e40b1712fd0e553fe5e472429204fe830e2ef5907a9a19d2f83"
+    },
+    "original_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/result.json",
+      "sha256": "2fd5c7059a14d8bb8eaa7b486c032707f6f25ac5489c988cb4a5bfa87cce3227"
+    },
+    "original_test_groups": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/selected_groups.json",
+      "sha256": "6cf4b6ef677cb6acbc21b4ad2b03cf7f52315566a93a0b8b29b3df2fb281dd47"
+    },
+    "records": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/records.jsonl.gz",
+      "sha256": "13e092f953cf9314d14745fd4547d7cf158dbedebd8f3b830ff7e2fc2f4c1ec9"
+    },
+    "replay_differences": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/assignment-differences.json",
+      "sha256": "cfb5dcc1806bbb7acbab2e6e937c071b656f89af9472651bc9c6afd51d9ff048"
+    },
+    "source_algorithm": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/src/compose_lipid/data/generator_splits.py",
+      "sha256": "4e4770a83c9a00132db83d9562ce4e025c2777fa0afdf1d7aca1ebf76750ef44"
+    }
+  },
+  "original_python_hash_seed_known": false,
+  "panel_failures": 0,
+  "pass": true,
+  "recovered_calibration_combinations": 1121,
+  "recovered_calibration_structures": 3508,
+  "recovery_basis": "Original deterministic candidate groups and complete saved calibration membership; no substitution of hash-seed-dependent reassignment.",
+  "schema_version": "forge.compose_lipid_frozen_historical_group_recovery.v1",
+  "seed": "post_instruction_broad_lipid_generator_split_v8_candidate_1",
+  "source_assignments_changed": false,
+  "source_rows_reproduced": 200000,
+  "training_admitted": false
+}

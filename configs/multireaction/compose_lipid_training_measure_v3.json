@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "cohort": {
+      "path": "results/phase1/compose_lipid_training_cohort_v1/cohort.json",
+      "sha256": "bab2f76099f21fcfdcc19b5ec2af8a84470614ae52cb60148b2546d4800b962b"
+    },
+    "population": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/result.json",
+      "sha256": "2ec46df97ae1637b6518b99ff90b832dd79ef69e471b1648bbca0a2afefe1740"
+    },
+    "universe_config": {
+      "path": "configs/multireaction/compose_lipid_v8_universe_v1.json",
+      "sha256": "8ec43e4ada358540a106b77422d85d70926d28421a0ed22fb8669925c48cdc1b"
+    },
+    "verification": {
+      "path": "results/phase1/compose_lipid_unified_preparation_v7/verification.json",
+      "sha256": "61f0bd33eeac2c55d86475994991bfbf4e568d9ec244618dba48536ae9ad2c91"
+    }
+  },
+  "policy": "equal_qualified_family_mass_uniform_unique_constitutions",
+  "schema_version": "forge.compose_lipid_training_measure_config.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0
+}

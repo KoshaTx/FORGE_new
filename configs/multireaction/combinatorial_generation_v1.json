@@ -1,0 +1,35 @@
+{
+  "acceptance_scope": "At least one distinct train-novel exact-program product per family is a functional demonstration only; no production-quality promotion.",
+  "candidate_selection": false,
+  "comparison": "Frozen trained checkpoint versus its original random initialization, with matched train-semantic layouts, source marginals, noise seeds and strict valence decoder.",
+  "cpu_threads": 2,
+  "inputs": {
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "component_partitions": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    }
+  },
+  "remote_compute": false,
+  "sampling": {
+    "attempts_per_family": 64,
+    "batch_size": 16,
+    "flow_seed": 2026091402,
+    "flow_steps": 32
+  },
+  "schema_version": "forge.combinatorial_generation_config.v1",
+  "scientific_question": "Does the frozen balanced shared pilot produce valid new graphs with full-depth exact computed assembly witnesses across every library?",
+  "seed": 2026091401,
+  "stage": "generation"
+}

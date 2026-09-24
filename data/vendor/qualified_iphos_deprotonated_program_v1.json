@@ -1,0 +1,115 @@
+{
+  "curation": {
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false,
+    "proton_inventory": "Neutral precursor sum equals anionic product plus one H+ per incorporated phosphate. This specifies a chemical form; no pKa, buffer composition or exact reaction-solution speciation is inferred."
+  },
+  "reactions": [
+    {
+      "architecture": "ionizable phospholipid (iPhos; adds phosphate/P)",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]);!$(N[C&H2][C&H2]OP(=O)(O)-[O&+0]-[C&^3]):1].[C&H2:2]1[C&H2:3][O&X2:4][P&X4:5](=[O&X1:6])([O&X2&+0:7]1)-[O&+0:8]-[C&^3:9]>>[N:1][C&H2:2][C&H2:3][O:4][P:5](=[O:6])([O&-:7])-[O&+0:8]-[C&^3:9]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [
+          "anhydrous dimethyl sulfoxide"
+        ],
+        "temperature_c": 70,
+        "time_h": 72
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_iphos_source_v1/build_anionic_registry.py",
+          "sha256": "9aaf273158f0c54b43b76f9c4dc3d927fd0e3b678f8c434248ceeba1c8b7321c"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "source_iphos_charge_forms": {
+            "path": "data/vendor/qualified_iphos_source_program_v1.json",
+            "sha256": "91396a7bf5a8cc931ed9dfdaf780b932187a34fb362d668d742f9e177808389e"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Source-drawn neutral nitrogen/anionic phosphate form (main Fig. 1a, physiological panel). Record one released proton per event explicitly; do not neutralize or rewrite the corpus target. Tertiary starting amines remain exclusive to the zwitterion program.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]);!$(N[C&H2][C&H2]OP(=O)(O)-[O&+0]-[C&^3])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "name": "phosphate_tail",
+          "required_handle_smarts": "[C&H2]1[C&H2][O&X2][P&X4](=[O&X1])([O&X2&+0]1)-[O&+0]-[C&^3]"
+        }
+      ],
+      "reaction_id": "source_iphos_deprotonated",
+      "reaction_version": 1,
+      "selectivity_policy": "One phosphate unit per original neutral aliphatic non-acyl N. All sites and intermediate states enumerated. Partial occupancy without unique constitution abstains.",
+      "source_program": {
+        "accumulator_role": "amine_head",
+        "event_count_field": "event_count",
+        "maximum_events": 5,
+        "net_byproducts_per_event": {
+          "H": 1,
+          "formal_charge": 1
+        },
+        "repeated_roles": [
+          "phosphate_tail"
+        ]
+      },
+      "sources": [
+        {
+          "identifier": "10.1038/s41563-020-00886-0",
+          "kind": "doi",
+          "locator": "Main Fig. 1a physiological versus acidic form, and Fig. 1c-d; SI Figs. S2 and S5-S6",
+          "notes": "Both neutral OH/tertiary-N and zwitterionic NH+/O- forms drawn for 9A1P9 and 10A1P10. Exact corpus execution and biological outcomes are not inherited."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_figure": {
+      "path": "results/phase1/compose_lipid_iphos_source_v1/fig1.png",
+      "sha256": "174438f320bb1308eab49a99839ea4acc53f47a1c4b84c8720b23e3c346c7fe7"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/33542471/iphos-si.pdf",
+      "sha256": "b93add365aad4114ea93629bebb276666baa25a626edbb23471e246fbcc74dc5"
+    }
+  }
+}

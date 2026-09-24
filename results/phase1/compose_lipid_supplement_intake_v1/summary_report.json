@@ -1,0 +1,259 @@
+{
+  "constructions": {
+    "basis_counts": {
+      "lnpdb_compatible_decomposition_replay": 3833,
+      "prior_exact_reaction_program": 7434,
+      "v8_exact_bound_lumi_grid": 221184,
+      "v8_exact_bound_ugi3_grid": 17484,
+      "v8_exact_family_task": 2932902
+    },
+    "component_instance_references": 8946808,
+    "family_counts": {
+      "a3_amine_aldehyde_alkyne": 70016,
+      "acid_epoxide_diester_multistep": 232240,
+      "aema_aza_thiol_addition": 13865,
+      "aldehyde_ugi3": 18842,
+      "aldehyde_ugi4": 222029,
+      "alpha_isocyanoester_dihydroimidazole": 219036,
+      "amine_alkylation": 188272,
+      "amine_epoxide_opening": 97439,
+      "aryl_reductive_amination": 48090,
+      "aza_michael_acrylamide": 31239,
+      "aza_michael_acrylate": 33619,
+      "disulfide_michael": 254389,
+      "epoxide_opening_o_acylation": 42805,
+      "iphos_ring_opening": 184345,
+      "ketone_isocyanide_amide": 271560,
+      "ketone_ugi4": 91395,
+      "maleate_addition": 68463,
+      "o_esterification": 24948,
+      "passerini_3cr": 128352,
+      "preassembled_thiol_yne_tail_amidation": 465048,
+      "reductive_amination": 61320,
+      "reported_lnpdb_route_unassigned": 255,
+      "reported_multistep_amino_lipid": 9,
+      "reported_reference_lipid": 4,
+      "thiolactone_aminolysis_michael": 334859,
+      "vitamin_b5_multistep": 80398
+    },
+    "join_failures": {
+      "changed_selected_membership": 0,
+      "missing_or_extra_targets": 0,
+      "selected_component_multiset_mismatches": 0,
+      "target_metadata_mismatches": 0
+    },
+    "quantity_expanded_references": 10616868,
+    "rows": 3182837
+  },
+  "corrected_split": {
+    "panel_counts": {
+      "source_study_transfer_global": 532,
+      "unseen_component_structure": 9259,
+      "unseen_exact_component_combination": 4676,
+      "unseen_regional_morphology": 5512
+    },
+    "panel_failures": {
+      "selected_component_leaks": 0,
+      "selected_study_leaks": 0
+    },
+    "product_molecules_parsed": 0,
+    "scope": "200k structural component/study and supplied group-signature semantics; no product morphology recomputation",
+    "selected_held_components": 905,
+    "selected_held_studies": 6,
+    "split_counts": {
+      "calibration": 19975,
+      "reference": 268,
+      "test": 19975,
+      "train": 159782
+    }
+  },
+  "environment": {
+    "python": "3.11.15",
+    "rdkit": "2026.03.5"
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_supplement_intake_v1/report.py",
+    "sha256": "e1f97a486d476f181b20e176e864c3ebb57a3d8763cfea34a804fcbc12d9a79d"
+  },
+  "inputs": {
+    "checks.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/checks.json",
+      "sha256": "acb87a2d012a3fb065eebe64fbe8c92a1d0edc6b389c2b50e9c86621fa4620e4"
+    },
+    "component_exclusions": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/component_exclusions.json",
+      "sha256": "2e8b37708c1b9a8441c1af32e255621a554301611a9a1f90dbdfd281bfdc5ac5"
+    },
+    "focused_tests": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/focused-tests.xml",
+      "sha256": "ca6c461cda067f9e721994edc345c457c70c8d3548e6fca8860b1c0aaeae2259"
+    },
+    "full_tests": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/full-tests.xml",
+      "sha256": "ab66e5848c5bca06073b7d7fa8a8599f2eb64b1fea1ad70d7ccf86950740b409"
+    },
+    "intake_checks.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/intake_checks.json",
+      "sha256": "9ebc465aba8ea5959c339aa9d7aeade1edbbd4159cd5760b7f71b182773b12cb"
+    },
+    "missing_source_files.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/missing_source_files.json",
+      "sha256": "6db3c950d8f75d1170396fc0106198e450e6afc9d39c6757b226292302349421"
+    },
+    "package_check.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/package_check.json",
+      "sha256": "2300af7c27c0e4761063010761245d759e58dc763ee8b942eed021e4680bed7a"
+    },
+    "precursor_split_check.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/precursor_split_check.json",
+      "sha256": "e1441377a42e3388a69ea85640705b92f5da5e491a021d944f5ea81e203ac56c"
+    },
+    "previous_full_tests": {
+      "path": "results/phase1/compose_lipid_v8_universe_validation_v1/full-tests.xml.gz",
+      "sha256": "eb76ed8c961062550aaba0e1a521a5e9825de3c591ff0fa559fdbde28c6b85f5"
+    },
+    "prior_precursor_concordance.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/prior_precursor_concordance.json",
+      "sha256": "358c96db66ab71d37c55ff14e539559163fd55551c5a8aae5083191b2d48f22f"
+    },
+    "result.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "shasum.log": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/shasum.log",
+      "sha256": "04eb97258ad47003160757a46dfbebec334a8030790f3f7d5d7778e0971fe0f2"
+    },
+    "snapshot-comparison.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/snapshot-comparison.json",
+      "sha256": "23878a4e4f3fe72509ea2d70d47066799c49006489ac9e2b69474ba5f6e6fc50"
+    },
+    "source-snapshot.json": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/source-snapshot.json",
+      "sha256": "cb4ceeead49d7e16f4a8c669e92f8bcd68426a828396b0872f60ca2b528a2ab4"
+    }
+  },
+  "known_component_exclusions": {
+    "corrected_test_component_targets": 135781,
+    "historically_protected_component_targets": 1283322,
+    "union_excluded_targets": 1368812
+  },
+  "precursors": {
+    "ambiguous_scoped_aliases": 0,
+    "cross_family_precursors": 5409,
+    "join_key": "component_id",
+    "precursor_structures": 45805,
+    "scoped_aliases": 51433,
+    "unique_canonical_precursor_structures": 45805
+  },
+  "prior_exact_replay_precursor_agreement": {
+    "exact_replay_targets_compared": 47363,
+    "matching_precursor_structure_sets": 47363
+  },
+  "remaining_gates": [
+    "complete source-package checksum verification",
+    "global precursor/product/study/combination protection with prior frozen exclusions",
+    "all-family reaction-program qualification",
+    "full-size molecular representation qualification",
+    "canonical deduplication and balanced verified training measure",
+    "repository-wide test failures and setup errors"
+  ],
+  "schema_version": "forge.compose_lipid_supplement_intake_report.v1",
+  "seed": 0,
+  "source_package": {
+    "exit_code": 1,
+    "manifest_files": 678,
+    "mismatched_files": [],
+    "missing_paths": [
+      "original_generator_tasks/family_03_aldehyde_ugi4_enumeration_v8/tuple_regional_dispositions.jsonl.gz",
+      "original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/author_released_exact_contexts.jsonl.gz",
+      "original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/exact_context_constructions.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/00.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/01.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/02.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/03.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/04.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/05.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/06.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/07.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/08.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/09.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/10.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/11.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/12.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/13.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/14.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/15.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/16.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/17.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/18.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/19.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/20.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/21.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/22.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/23.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/24.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/25.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/26.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/27.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/28.jsonl.gz",
+      "original_generator_tasks/family_18_staar_enumeration_v8/tasks/29.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/00.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/01.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/02.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/03.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/04.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/05.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/06.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/07.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/08.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/09.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/10.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/11.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/12.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/13.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/14.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/15.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/16.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/17.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/18.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/19.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/20.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/21.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/22.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/23.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/24.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/25.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/26.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/27.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/28.jsonl.gz",
+      "original_generator_tasks/family_21_acid_epoxide_diester_enumeration_v8/tasks/29.jsonl.gz"
+    ],
+    "status": "incomplete",
+    "verified_files": 615
+  },
+  "status": "core_data_verified_supporting_package_incomplete",
+  "training_admitted": false,
+  "training_calls": 0,
+  "validation": {
+    "focused": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 396,
+      "skipped_or_xfailed": 0,
+      "total": 396
+    },
+    "full": {
+      "errors": 17,
+      "failures": 131,
+      "passed": 3006,
+      "skipped_or_xfailed": 92,
+      "total": 3246
+    },
+    "new_errors": [],
+    "new_failures": [],
+    "prior_failure_and_error_ids_unchanged": true,
+    "source_snapshot_unchanged": true,
+    "vendor_verify_exit_code": 0
+  }
+}

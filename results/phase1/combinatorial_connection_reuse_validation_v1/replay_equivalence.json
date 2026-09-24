@@ -1,0 +1,116 @@
+{
+  "compared_artifacts": [
+    "admissions.jsonl",
+    "attempts.jsonl",
+    "plans.json",
+    "proposals.jsonl"
+  ],
+  "compared_fields": [
+    "additional_assembly_checks",
+    "admission_dispositions",
+    "all_family_preservation_screen_passed",
+    "baseline_result",
+    "by_depth",
+    "comparison_vs_frozen_model",
+    "config",
+    "connection_completion_proposals",
+    "new_random_sampling",
+    "nonclaims",
+    "per_arm",
+    "per_family_deltas",
+    "policy",
+    "proposal_dispositions",
+    "qualification",
+    "qualification_reasons",
+    "reference_train_components",
+    "reference_train_products",
+    "saved_generation_sampling",
+    "schema_version",
+    "sources",
+    "status",
+    "total_exact_gain"
+  ],
+  "created_at_utc": "2026-09-14T15:58:53.764811+00:00",
+  "excluded": [
+    "execution timestamp",
+    "duration",
+    "output-directory paths"
+  ],
+  "inputs": {
+    "configs/multireaction/combinatorial_connection_reuse_discovery_v1.json": {
+      "path": "configs/multireaction/combinatorial_connection_reuse_discovery_v1.json",
+      "sha256": "8026bd2f8eadc8834769ace63ad8f2e112fbc1f969fdc039f711477e05cac972"
+    },
+    "configs/multireaction/combinatorial_connection_reuse_protocol_v1.json": {
+      "path": "configs/multireaction/combinatorial_connection_reuse_protocol_v1.json",
+      "sha256": "d69a00f2d6a40b0209ce3920c73c4a85ba15aed8f676366730dfffeef8e4bafb"
+    },
+    "configs/multireaction/combinatorial_connection_reuse_replication_1_v1.json": {
+      "path": "configs/multireaction/combinatorial_connection_reuse_replication_1_v1.json",
+      "sha256": "8dd2a73086c69086a442fd2ff3965a756bbfdc1230b0f32a412eef8e91ef1052"
+    },
+    "configs/multireaction/combinatorial_connection_reuse_replication_2_v1.json": {
+      "path": "configs/multireaction/combinatorial_connection_reuse_replication_2_v1.json",
+      "sha256": "da778d273ee1d71d3051405d3ab95f94f826fa31632983fbf1fad50d799c3d43"
+    },
+    "experiments/phase1/multireaction/combinatorial_connection_reuse.py": {
+      "path": "experiments/phase1/multireaction/combinatorial_connection_reuse.py",
+      "sha256": "9f2936a5418031252d6f337da680a745d265d1c922d762b5bed0d9ebecc66e95"
+    },
+    "forge/model/program_connection_reuse.py": {
+      "path": "forge/model/program_connection_reuse.py",
+      "sha256": "6ffadba7256580e59edba7bbc13209d96ac52c8ce4326d81bbdfadef42bef409"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/admissions.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/admissions.jsonl",
+      "sha256": "c3959ba7a33bd4da0d9c6d1507bfe9fe565ca34a591683fad4d7f46ddb509ba7"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/attempts.jsonl",
+      "sha256": "5801835ba636f8221fedc13f1a3a7e857950ac96fb8a146443f2d58e7567f377"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/plans.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/plans.json",
+      "sha256": "73f0217acc3860931284e99f6c519ddd70f7b9d8d039c6e81a32199bc3f6b8b8"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/proposals.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/proposals.jsonl",
+      "sha256": "eca0227a7597c0fbffacd5ee140ef07ca2b6ee2cc87527e197c622e2d4fdbb93"
+    },
+    "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "results/phase1/combinatorial_connection_reuse_replay_v1/admissions.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replay_v1/admissions.jsonl",
+      "sha256": "c3959ba7a33bd4da0d9c6d1507bfe9fe565ca34a591683fad4d7f46ddb509ba7"
+    },
+    "results/phase1/combinatorial_connection_reuse_replay_v1/attempts.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replay_v1/attempts.jsonl",
+      "sha256": "5801835ba636f8221fedc13f1a3a7e857950ac96fb8a146443f2d58e7567f377"
+    },
+    "results/phase1/combinatorial_connection_reuse_replay_v1/plans.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replay_v1/plans.json",
+      "sha256": "73f0217acc3860931284e99f6c519ddd70f7b9d8d039c6e81a32199bc3f6b8b8"
+    },
+    "results/phase1/combinatorial_connection_reuse_replay_v1/proposals.jsonl": {
+      "path": "results/phase1/combinatorial_connection_reuse_replay_v1/proposals.jsonl",
+      "sha256": "eca0227a7597c0fbffacd5ee140ef07ca2b6ee2cc87527e197c622e2d4fdbb93"
+    },
+    "results/phase1/combinatorial_connection_reuse_replay_v1/result.json": {
+      "path": "results/phase1/combinatorial_connection_reuse_replay_v1/result.json",
+      "sha256": "2dcd0ed73b9aabc448ea2c7379f4cad4e181d3a2fae95e1a067f27f99fad00c5"
+    },
+    "results/phase1/combinatorial_connection_reuse_validation_v1/report_replay.py": {
+      "path": "results/phase1/combinatorial_connection_reuse_validation_v1/report_replay.py",
+      "sha256": "b7209153705aaf497d9ab9228f924f0a67a68d512f9cfd805e561ecffbf64bf2"
+    },
+    "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json": {
+      "path": "results/phase1/combinatorial_occurrence_reuse_discovery_v1/result.json",
+      "sha256": "bb322a3fe1f71970a357ae01e577916e97646b98b91210e62ef8d7b81a8b4459"
+    }
+  },
+  "new_random_sampling": false,
+  "schema_version": "forge.combinatorial_connection_reuse_replay_equivalence.v1",
+  "status": "verified_scientific_payload_and_artifact_equivalence"
+}

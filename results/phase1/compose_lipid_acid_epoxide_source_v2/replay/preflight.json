@@ -1,0 +1,390 @@
+{
+  "parallel_cold_seconds": 3.803022624924779,
+  "parallel_sha256": "59e04bbd02a5efa096e8ba0815144110b2b90edc8599d99d88b779c785a9fd9f",
+  "request": {
+    "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/replay/request.json",
+    "sha256": "b449272e25f1b825a3e50941dc1af0d149a8d7065750cce9961ea5dc761e5fce"
+  },
+  "sample_targets": [
+    "000013e101d4a813d4867197184d4634c754e9b6718a23db2a4c7b16d15a12dd",
+    "00005ec508b32b2cee671fee8fe69fb74f6d7a75cc06df895b9b3f3ed459e8d1",
+    "000184962b715c56f630e22b22c08179ea21551f1601e19c64cb646e8508b2df",
+    "0003ea5a9871df437550a2d115fae18409c1dd7e929bbddcf488d406a55b3bf0",
+    "0004574635c4841552ae4370460eaa340f82f507c993bbea89e2e55e6093033c",
+    "0004ba75166dd1be954ed743b810fbb349f1424002eb366cfb134070c278ba72",
+    "0005ba3af6aa81ce7d6a68e1e96f62bd7a405faf04b81edea6ddff2be1f476b9",
+    "0005e82e60e5548c43e6fa461b8b12addeeceba362793f77d172bd24b49624c8"
+  ],
+  "serial_parallel_equivalent": true,
+  "serial_seconds": 0.08023574994876981,
+  "serial_sha256": "59e04bbd02a5efa096e8ba0815144110b2b90edc8599d99d88b779c785a9fd9f",
+  "source_controls": {
+    "Xu_E12CA1A3_drawn_structure": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 34,
+            "H": 69,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 34,
+            "H": 69,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": true,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCCCC1CO1",
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC",
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCCCC1CO1"
+          ],
+          [
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "amine_acid_head": "CN(C)CCCC(=O)O",
+              "epoxide": "CCCCCCCCCCC1CO1",
+              "hydrophobic_acid": "CCCCCCCCC(CCCCCC)C(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            2,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "amine_acid_head": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "epoxide": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "hydrophobic_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          }
+        }
+      }
+    },
+    "head_and_hydrophobe_site_swap": {
+      "kind": "regression_controls",
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 34,
+            "H": 69,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 34,
+            "H": 69,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCCCC1CO1",
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC",
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCCCC1CO1"
+          ],
+          [
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "amine_acid_head": "CCCCCCCCC(CCCCCC)C(=O)O",
+              "epoxide": "CCCCCCCCCCC1CO1",
+              "hydrophobic_acid": "CN(C)CCCC(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            2,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "amine_acid_head": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "epoxide": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "hydrophobic_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          }
+        }
+      }
+    },
+    "printed_shorter_head_name": {
+      "kind": "regression_controls",
+      "replay": {
+        "balance": {
+          "product_and_net_byproducts": {
+            "C": 33,
+            "H": 67,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 34,
+            "H": 69,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "all_stage_inventories_balance": true,
+          "complete_search": true,
+          "declared_component_equalities": true,
+          "every_stage_replayed": true,
+          "full_element_hydrogen_charge_balance": false,
+          "product_constraints": true,
+          "terminal_constraints": true,
+          "unique_complete_inverse": false,
+          "unique_each_forward_stage": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCCCC1CO1",
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC",
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCCCC1CO1"
+          ],
+          [
+            "CCCCCCCCCCC(O)COC(=O)C(CCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCC(COC(=O)C(CCCCCC)CCCCCCCC)OC(=O)CCCN(C)C"
+          ]
+        ],
+        "inverse": {
+          "bound_reasons": [],
+          "candidate_components": [
+            {
+              "amine_acid_head": "CN(C)CCC(=O)O",
+              "epoxide": "CCCCCCCCCCC1CO1",
+              "hydrophobic_acid": "CCCCCCCCC(CCCCCC)C(=O)O"
+            }
+          ],
+          "complete_search": true,
+          "states_by_depth": [
+            1,
+            2,
+            1
+          ],
+          "transitions": 3
+        },
+        "product_constraints": {
+          "checks": {
+            "formal_charge": true,
+            "query_surviving_nonacyl_basic_candidate": true
+          },
+          "pass": true,
+          "query_counts": {
+            "surviving_nonacyl_basic_candidate": 1
+          }
+        },
+        "stage_balance_checks": [
+          true,
+          true
+        ],
+        "terminal_constraints": {
+          "amine_acid_head": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true,
+              "query_surviving_nonacyl_basic_candidate": true
+            },
+            "pass": true,
+            "query_counts": {
+              "surviving_nonacyl_basic_candidate": 1
+            }
+          },
+          "epoxide": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          },
+          "hydrophobic_acid": {
+            "checks": {
+              "aromaticity": true,
+              "elements": true,
+              "formal_charge": true
+            },
+            "pass": true,
+            "query_counts": {}
+          }
+        }
+      }
+    }
+  },
+  "training_admitted": false
+}

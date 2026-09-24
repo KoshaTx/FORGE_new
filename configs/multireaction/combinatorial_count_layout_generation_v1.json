@@ -1,0 +1,72 @@
+{
+  "acceptance": "Preserve all eight declared metrics per family against the saved source-layout and completed baselines before any replacement. Every valid product receives the unchanged full-depth exact program check. Novelty refers to products/components, not merely layout coordinates.",
+  "cpu_threads": 2,
+  "inputs": {
+    "baseline_result": {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    },
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "completed_result": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "component_partitions": {
+      "path": "results/phase1/library_program_dataset_v1/component_partitions.json",
+      "sha256": "173eb6fe7fd17df82709ff36feecfaf10ce4c4db075a8c2afe08269eb945b257"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    }
+  },
+  "policy": {
+    "all_attempts_retained": true,
+    "automatic_promotion": false,
+    "gate_changes": false,
+    "heldout_use": false,
+    "layout_distribution": "factorized_count_only_train_realism_weight",
+    "remote_compute": false,
+    "source_product_layouts_used": false,
+    "source_variable_graph_values_used": false,
+    "training_calls": 0
+  },
+  "sampling": {
+    "attempts_per_family": 64,
+    "batch_size": 16,
+    "flow_seed": 2026091604,
+    "flow_steps": 32,
+    "layout_seed": 2026091603
+  },
+  "schema_version": "forge.combinatorial_count_layout_generation.v1_config",
+  "source_pins": [
+    {
+      "path": "forge/model/combinatorial_layout_prior.py",
+      "sha256": "dd360c8133ffa5e249c65d58f78f8ae777fc5899e759fb64c067dfe987e0d4a9"
+    },
+    {
+      "path": "forge/model/synthesis_program_layout.py",
+      "sha256": "05ac21ca8aacaeb353a8ccc8ef7b9f909d5bf030e329cb97cffb96fc0fe3fe39"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/generated_program_layout.py",
+      "sha256": "812f1aa3573ca1a470d23d1241aeefefa392a094b908e3ea75948f84aed3d8be"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_count_layout_generation.py",
+      "sha256": "44a10e27f55601925294099d1e625ceff4b2f1c9639b353d1b35e03ef356d686"
+    }
+  ],
+  "stopping_rule": "One count-prior draw and one 32-step neural attempt per requested output; exactly 64 attempts per family. No recovery, filtering, retries, cherry-picked seeds, or gate changes."
+}

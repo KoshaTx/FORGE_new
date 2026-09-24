@@ -1,0 +1,811 @@
+{
+  "alternative_explanation": "A passing optimizer smoke can coexist with program interference or insufficient shared-model capacity, so one or more families may fail to improve or reconstruct even on a fixed overfit set.",
+  "checkpoint_retained": false,
+  "config": {
+    "path": "configs/multireaction/combinatorial_overfit_gate_v1.json",
+    "sha256": "847c62409e2fb5196a578c3c8c4099fb8302d74c4a987e4cd75568dd230290ee"
+  },
+  "created_at_utc": "2026-09-14T03:34:56.824031+00:00",
+  "decision": "shared_sparse_learning_gate_passed",
+  "duration_seconds": 22.53609841701109,
+  "environment": {
+    "cpu_threads": 2,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "torch": "2.13.0"
+  },
+  "exact_tensor_records": 12,
+  "gates": {
+    "all_losses_and_gradients_finite": true,
+    "all_programs_represented_once": true,
+    "clean_batch_not_mutated": true,
+    "fixed_states_never_noised": true,
+    "generation_calls_zero": true,
+    "required_exact_tensor_reconstruction": true,
+    "required_programs_improved": true,
+    "support_bounds_preserved": true,
+    "total_loss_reduction": true
+  },
+  "generator_sampling_calls": 0,
+  "hypothesis": "With equal family loss mass, the shared program-conditioned architecture can reduce loss for all twelve families and exactly reconstruct the twelve bounded training examples.",
+  "inputs": {
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "cache_config": {
+      "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+      "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+    },
+    "cache_result": {
+      "path": "results/phase1/combinatorial_program_cache_v2/result.json",
+      "sha256": "5d766f29c3c777be3b6744c63bd54a1b9e770e19f03a30d19db8909b5045a602"
+    },
+    "training_smoke_result": {
+      "path": "results/phase1/combinatorial_training_smoke_v2/result.json",
+      "sha256": "8fb701cbdb9e641092663a56f7fef6f4969960dcc06b3acd5ab4a1c2c3381319"
+    }
+  },
+  "model": {
+    "architecture": "reaction_program_sparse_whole_lipid_flow",
+    "bond_classes": 4,
+    "dropout": 0.0,
+    "hidden_dim": 64,
+    "layers": 3,
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "parameter_count": 248677
+  },
+  "nonclaims": [
+    "Fitting one fixed corruption per family is a learning-capability diagnostic, not evidence of generalization or generation quality.",
+    "No molecule was sampled and no diagnostic checkpoint was retained or promoted.",
+    "This gate does not establish improved realism, synthesis success or production readiness."
+  ],
+  "optimizer_steps_executed": 1536,
+  "per_program": {
+    "acetal_aldehyde_diol": {
+      "final_loss": 4.11684850405436e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 37,
+          "parent_bonds": 36,
+          "parents": 36
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 37,
+          "parent_bonds": 36,
+          "parents": 36
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 15.629660606384277,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 1,
+          "nodes": 0,
+          "parent_bonds": 2,
+          "parents": 2
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 37,
+          "parent_bonds": 36,
+          "parents": 36
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.999997366002623
+    },
+    "amide_coupling_acid_amine": {
+      "final_loss": 6.108717934694141e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 15.796441078186035,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 3,
+          "parents": 5
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999961328517579
+    },
+    "aza_michael_amine_acrylate": {
+      "final_loss": 3.525129068293609e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.364707946777344,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 11,
+          "parent_bonds": 14,
+          "parents": 18
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999952134842363
+    },
+    "carbamate_amine_chloroformate": {
+      "final_loss": 4.362547770142555e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.255385875701904,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 1,
+          "parent_bonds": 2,
+          "parents": 4
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999939871595462
+    },
+    "disulfide_coupling": {
+      "final_loss": 4.4094747863709927e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 32,
+          "parent_bonds": 31,
+          "parents": 31
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 32,
+          "parent_bonds": 31,
+          "parents": 31
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.074378967285156,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 0,
+          "parents": 3
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 32,
+          "parent_bonds": 31,
+          "parents": 31
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999937669796787
+    },
+    "epoxide_opening_amine": {
+      "final_loss": 7.975779590196908e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 44,
+          "parent_bonds": 43,
+          "parents": 43
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 44,
+          "parent_bonds": 43,
+          "parents": 43
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 16.1325740814209,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 4,
+          "parents": 5
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 44,
+          "parent_bonds": 43,
+          "parents": 43
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999950561022997
+    },
+    "iphos_amine_dioxaphospholane": {
+      "final_loss": 0.00010068363917525858,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.240818023681641,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 7,
+          "parents": 4
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 51,
+          "parent_bonds": 50,
+          "parents": 50
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999860949910845
+    },
+    "passerini_3cr": {
+      "final_loss": 5.292512651067227e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 52,
+          "parent_bonds": 51,
+          "parents": 51
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 52,
+          "parent_bonds": 51,
+          "parents": 51
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.493039131164551,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 1,
+          "parents": 4
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 52,
+          "parent_bonds": 51,
+          "parents": 51
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999929367609611
+    },
+    "reductive_amination_amine_aldehyde": {
+      "final_loss": 3.3124422770924866e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 15.895251274108887,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 1,
+          "parent_bonds": 1,
+          "parents": 4
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 40,
+          "parent_bonds": 39,
+          "parents": 39
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999979160805829
+    },
+    "thiol_michael_thioether": {
+      "final_loss": 4.259229899616912e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 38,
+          "parent_bonds": 37,
+          "parents": 37
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 38,
+          "parent_bonds": 37,
+          "parents": 37
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.264687538146973,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 0,
+          "parent_bonds": 1,
+          "parents": 3
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 38,
+          "parent_bonds": 37,
+          "parents": 37
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999941370776413
+    },
+    "ugi_3cr_agile": {
+      "final_loss": 3.4039068850688636e-05,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 7.1808648109436035,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 5,
+          "parent_bonds": 7,
+          "parents": 9
+        },
+        "field_total": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 43,
+          "parent_bonds": 42,
+          "parents": 42
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999952597535607
+    },
+    "urea_amine_isocyanate": {
+      "final_loss": 0.000148337465361692,
+      "final_reconstruction": {
+        "exact_tensor_fraction": 1.0,
+        "exact_tensor_records": 1,
+        "field_correct": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 68,
+          "parent_bonds": 67,
+          "parents": 67
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 68,
+          "parent_bonds": 67,
+          "parents": 67
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "initial_loss": 17.495241165161133,
+      "initial_reconstruction": {
+        "exact_tensor_fraction": 0.0,
+        "exact_tensor_records": 0,
+        "field_correct": {
+          "closure_bonds": 0,
+          "closure_left": 0,
+          "closure_right": 0,
+          "nodes": 2,
+          "parent_bonds": 10,
+          "parents": 5
+        },
+        "field_total": {
+          "closure_bonds": 1,
+          "closure_left": 1,
+          "closure_right": 1,
+          "nodes": 68,
+          "parent_bonds": 67,
+          "parents": 67
+        },
+        "fixed_states_exact": true,
+        "records": 1
+      },
+      "loss_reduction_fraction": 0.9999915212677573
+    }
+  },
+  "programs_with_improved_loss": [
+    "acetal_aldehyde_diol",
+    "amide_coupling_acid_amine",
+    "aza_michael_amine_acrylate",
+    "carbamate_amine_chloroformate",
+    "disulfide_coupling",
+    "epoxide_opening_amine",
+    "iphos_amine_dioxaphospholane",
+    "passerini_3cr",
+    "reductive_amination_amine_aldehyde",
+    "thiol_michael_thioether",
+    "ugi_3cr_agile",
+    "urea_amine_isocyanate"
+  ],
+  "remote_compute": false,
+  "schema_version": "forge.combinatorial_overfit_gate.v1",
+  "scientific_question": "Can one shared sparse whole-lipid flow learn an exact fixed-corruption target from every qualified combinatorial reaction family before accelerator-scale training is considered?",
+  "selected_records": [
+    {
+      "closures": 1,
+      "heavy_atoms": 37,
+      "program_id": "acetal_aldehyde_diol",
+      "record_id": "0aee5bb155aeddb15e096a18213af635cdbfe2d34fed3f8508cbcd3c729a912a",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 40,
+      "program_id": "amide_coupling_acid_amine",
+      "record_id": "008cc695137c71b7d7d26f57816375617fc0fda1ee6d8a3c56a29fa24e37f2b1",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 51,
+      "program_id": "aza_michael_amine_acrylate",
+      "record_id": "02b9c5620d504a01cacbc67bf135b968f3a7a036dbd600f9cd4a362fad2f16d9",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 43,
+      "program_id": "carbamate_amine_chloroformate",
+      "record_id": "0166e7c397c3e473293043e9f05ba48ad8ea7f153c17f6fb4f880e8d4d163cc0",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 32,
+      "program_id": "disulfide_coupling",
+      "record_id": "03184e59358e41872a841a6862cb301faa628b2806e41f8771607dd6941b3099",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 44,
+      "program_id": "epoxide_opening_amine",
+      "record_id": "054d5272391fc73d4d68bb20b56b887e548c422329b57ea5382a72007ad07483",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 51,
+      "program_id": "iphos_amine_dioxaphospholane",
+      "record_id": "002ce824fd1ef15ba57b52dfe653c1305bc96e12634a80ef1ba86e03ebe42454",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 52,
+      "program_id": "passerini_3cr",
+      "record_id": "0010e7789b2c38d914ce225d37909579020ec9da8da501c399d541babcba436e",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 40,
+      "program_id": "reductive_amination_amine_aldehyde",
+      "record_id": "02ca2abe58f4855903b649710942946808c517788444a11d349046cb014e8e3a",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 38,
+      "program_id": "thiol_michael_thioether",
+      "record_id": "082cbdf0765c3c6ec7c760f4a3eb77202ee88a9f9f0c886eca27bd18dbc84b0d",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 0,
+      "heavy_atoms": 43,
+      "program_id": "ugi_3cr_agile",
+      "record_id": "001c6bd50ecfeb2ca75c947567c298d2635fcbca07535b04d197dab259d6e091",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    },
+    {
+      "closures": 1,
+      "heavy_atoms": 68,
+      "program_id": "urea_amine_isocyanate",
+      "record_id": "0640060c90d423a05dcb59663cf5ed45262bbfbb8249f093db1050d4b84eb9cf",
+      "selection": "lower_median_heavy_atom_count_then_record_id"
+    }
+  ],
+  "sources": {
+    "experiments/phase1/multireaction/combinatorial_overfit_gate.py": "b04e1d4e445a7f9f79feb84cf4d43dedab1122acdd2ac6e5746ecb52c405c614",
+    "forge/corpus/combinatorial_program_cache.py": "d616f60468809906fd12deea46965d972d800b12be0a9467f8d73d54c742e8cd",
+    "forge/corpus/synthesis_program_production_cache.py": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d",
+    "forge/model/reaction_program_flow.py": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9",
+    "forge/model/synthesis_program_training.py": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+  },
+  "status": "pass",
+  "training": {
+    "corruption_policy": "one_fixed_draw_reused_for_learning_gate",
+    "examples_seen": 18432,
+    "family_loss_policy": "equal_program_mass",
+    "final_to_initial_loss_ratio": 5.436734477095508e-06,
+    "final_total_loss": 5.972391591058113e-05,
+    "initial_total_loss": 10.985255241394043,
+    "maximum_gradient_norm_before_clipping": 7.113457202911377,
+    "steps": 1536,
+    "trajectory": [
+      {
+        "step": 0,
+        "total_equal_family_loss": 10.985255241394043
+      },
+      {
+        "step": 1,
+        "total_equal_family_loss": 10.985255241394043
+      },
+      {
+        "step": 16,
+        "total_equal_family_loss": 2.4288227558135986
+      },
+      {
+        "step": 64,
+        "total_equal_family_loss": 0.019188540056347847
+      },
+      {
+        "step": 256,
+        "total_equal_family_loss": 0.0012927192728966475
+      },
+      {
+        "step": 512,
+        "total_equal_family_loss": 0.0004221060371492058
+      },
+      {
+        "step": 1024,
+        "total_equal_family_loss": 0.00012722269457299262
+      },
+      {
+        "step": 1536,
+        "total_equal_family_loss": 5.9804577176691964e-05
+      }
+    ]
+  }
+}

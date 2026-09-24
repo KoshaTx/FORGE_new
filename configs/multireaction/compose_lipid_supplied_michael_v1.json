@@ -1,0 +1,61 @@
+{
+  "families": {
+    "aza_michael_acrylamide": {
+      "reaction_id": "source_aza_michael_acrylamide",
+      "registry_to_source_roles": {
+        "acceptor_tail": "acceptor_tail",
+        "amine_head": "amine_head"
+      }
+    },
+    "aza_michael_acrylate": {
+      "reaction_id": "source_aza_michael_acrylate",
+      "registry_to_source_roles": {
+        "acceptor_tail": "acceptor_tail",
+        "amine_head": "amine_head"
+      }
+    },
+    "disulfide_michael": {
+      "reaction_id": "source_aza_michael_acrylate",
+      "registry_to_source_roles": {
+        "acceptor_tail": "disulfide_acceptor",
+        "amine_head": "amine_head"
+      }
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_source_view_v1/result.json",
+      "sha256": "4ac1ece61b89ea93d5c663d7134ac5fab1bf9ea4f88a373fbf03e2ff92058d27"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_michael_source_program_v1.json",
+      "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/adjudication.json",
+      "sha256": "0009fd42a61bb44dee65449ed3bdeae5a9fe289ebc93a9cbdcf1ecaaba3a9a23"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "fit_population": "intersection_old_and_corrected_train_with_product_component_exclusions",
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "supplied_instance_quantities_checked_against_metadata_when_present",
+    "scope": "computed_reconstruction_only",
+    "seed": 0,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_supplied_replay_config.v1",
+  "search_bounds": {
+    "maximum_events": 7,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

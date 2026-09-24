@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "maleate_ester": {
+      "path": "results/phase1/compose_lipid_supplied_maleate_ester_v1/result.json",
+      "sha256": "f3277cad4766c76b5901c73619cb5946346bbce6466c04905bd277f933d564e1"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "previous_report": {
+      "path": "results/phase1/compose_lipid_full_preparation_validation_v3/reconstruction_report.json",
+      "sha256": "010484c9010224655cac668debe7c8d573a4f0d202969a9c60653ab189c8e072"
+    },
+    "thiol_a3": {
+      "path": "results/phase1/compose_lipid_supplied_thiol_a3_v1/result.json",
+      "sha256": "3af07effe7f95a04c9b0b1408a67324973fb82adea0d894d6e31f85d7b08a478"
+    }
+  },
+  "replay_inputs": [
+    "maleate_ester",
+    "thiol_a3"
+  ],
+  "schema_version": "forge.compose_lipid_readiness_extension_config.v1"
+}

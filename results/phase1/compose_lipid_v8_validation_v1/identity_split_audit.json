@@ -1,0 +1,22 @@
+{
+  "inputs": {
+    "import_receipt": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "index": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    }
+  },
+  "queries": {
+    "forge_train_cross_split_identical_constitutions": "SELECT count(*) FROM (SELECT d.constitution FROM duplicate_constitutions d JOIN targets t USING(constitution) JOIN assignments a USING(target_id) WHERE a.forge_split!='quarantine' GROUP BY d.constitution HAVING max(a.forge_split='train')=1 AND count(DISTINCT a.forge_split)>1)",
+    "provider_cross_split_duplicate_constitutions": "SELECT count(*) FROM (SELECT d.constitution FROM duplicate_constitutions d JOIN targets t USING(constitution) JOIN assignments a USING(target_id) GROUP BY d.constitution HAVING count(DISTINCT a.provider_split)>1)"
+  },
+  "results": {
+    "forge_train_cross_split_identical_constitutions": 0,
+    "provider_cross_split_duplicate_constitutions": 1171
+  },
+  "schema_version": "forge.compose_lipid_identity_split_audit.v1",
+  "scope": "Exact source constitution strings only; no heldout molecular parsing, component-exposure audit or full upstream split-audit reproduction."
+}

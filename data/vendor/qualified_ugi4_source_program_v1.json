@@ -1,0 +1,134 @@
+{
+  "curation": {
+    "evidence_basis": "computed_transform_consistency",
+    "graph_derivation": "Reuse Ugi N1/C2/C3/N4 product scaffold and Passerini acid C/O query fragments. Add acid C5=O6, bond N1-C5 and map the product amide O7 to the acid hydroxy O. This is a Mumm atom-origin convention, not isotope evidence. Aldehyde oxygen leaves in the net water inventory. No physical sequence of isolated intermediates is asserted.",
+    "original_registries_modified": false
+  },
+  "reactions": [
+    {
+      "architecture": "one-event primary-amine aldehyde isocyanide carboxylic-acid Ugi 4CR",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3H1:2]=[OX1].[C;-1,+0;X1:3]#[N;+1,+0;X2:4].[C&X3:5](=[O&X1:6])[O&X2&H1:7]>>[N:1]([C&H1:2][C&+0:3](=[O:7])[N&H1&+0:4])-[C:5]=[O:6]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": null,
+        "solvent": [
+          "dichloromethane",
+          "methanol"
+        ],
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/build_registry.py",
+          "sha256": "177f95678ec09048167a5c20e320acf555ae5d81bbec8e073ddf965e2bb38f6d"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "acid": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "functional_groups": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          },
+          "ugi": {
+            "path": "data/vendor/qualified_reactions_v1.json",
+            "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "net_byproducts": {
+        "H": 2,
+        "O": 1,
+        "formal_charge": 0
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract; no neutralization or salt stripping is applied and none is required for these substrates.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "oxoester_aldehyde_body_tail",
+          "required_handle_smarts": "[CX3H1]=[OX1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            3,
+            4
+          ],
+          "name": "isocyanide_tail",
+          "required_handle_smarts": "[C;-1,+0;X1]#[N;+1,+0;X2]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            5,
+            6,
+            7
+          ],
+          "name": "carboxylic_acid_tail",
+          "required_handle_smarts": "[CX3](=[OX1])[OX2H1]"
+        }
+      ],
+      "reaction_id": "source_aldehyde_ugi4",
+      "reaction_version": 1,
+      "selectivity_policy": "Enumerate unfiltered sites. Require a primary neutral non-acyl NH2 witness, an aldehyde CH witness, one complete inverse tuple and one exact forward product.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41563-024-01867-3",
+          "kind": "doi",
+          "locator": "Main Fig. 1; SI printed pp. 7-9 and 15 (PDF pp. 8-10 and 16), 119-23",
+          "notes": "Computed constitutional assembly only; corpus rows do not inherit source execution or potency."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; no stereoselectivity claim."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_scheme": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/fig1.png",
+      "sha256": "11c5f65684b23aeab149d436471a1fb59c85888186c1d3c7179a0393e18b7cce"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/si.pdf",
+      "sha256": "6d537a4691d61d97288fe7b2b2991c652d1c30eaaa98db088b4d163edc25bcc3"
+    }
+  }
+}

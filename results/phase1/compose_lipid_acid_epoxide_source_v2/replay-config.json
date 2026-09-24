@@ -1,0 +1,55 @@
+{
+  "families": {
+    "acid_epoxide_diester_multistep": {
+      "program_id": "source_xu_acid_epoxide_then_aminoacid_ester",
+      "source_role_occurrences": {
+        "amine_acid_head": [
+          "amine_acid_head"
+        ],
+        "epoxide": [
+          "epoxide"
+        ],
+        "hydrophobic_acid": [
+          "hydrophobic_acid"
+        ]
+      }
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_acid_epoxide_staged_source_program_v1.json",
+      "sha256": "8862c93771cd3236496f21ddb3dca8c0196e1b5e33bcbb81b87cb22e4bc2d33b"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/adjudication.json",
+      "sha256": "a369747af7064af402e6d9546f01f83e88069054d3e37dd36b9d18436de9a98a"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "declared_source_quantities_expanded_as_identical_component_occurrences",
+    "population": "current_full_preparation_eligible_only",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "stages": "source_order_complete_forward_and_inverse_no_branch_filtering",
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_staged_replay_config.v1",
+  "search_bounds": {
+    "maximum_events": 2,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

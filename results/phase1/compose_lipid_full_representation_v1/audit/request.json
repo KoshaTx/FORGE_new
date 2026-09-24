@@ -1,0 +1,85 @@
+{
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_full_partition.py": {
+      "path": "forge/corpus/compose_lipid_full_partition.py",
+      "sha256": "0ab2389e93f2a22816c4e3654cd4012b6b34440913edd21a7eaea6aa4321fd18"
+    },
+    "forge/corpus/compose_lipid_representation.py": {
+      "path": "forge/corpus/compose_lipid_representation.py",
+      "sha256": "28877c26550fde45cb5cac9938d9110bea5d9934f4f63ca15b1c955b935438bd"
+    },
+    "forge/corpus/compose_lipid_source_view.py": {
+      "path": "forge/corpus/compose_lipid_source_view.py",
+      "sha256": "ddfb5a3b62a2f0b2533e7e235ddc204df9c6aace064a2b14b4b24ea34d755b04"
+    },
+    "forge/corpus/compose_lipid_supplement.py": {
+      "path": "forge/corpus/compose_lipid_supplement.py",
+      "sha256": "2497dfdde678615263d3a6cf34cdddfd0710a92b8e3b15d801e3eda83c1b4cc7"
+    },
+    "forge/model/defog_feasibility.py": {
+      "path": "forge/model/defog_feasibility.py",
+      "sha256": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0"
+    },
+    "forge/model/qualified_vocabulary.py": {
+      "path": "forge/model/qualified_vocabulary.py",
+      "sha256": "f759aeff8d5d364ac9c8b40e7bd63cc38bef224d3bfbba85be84307b8ebbc334"
+    },
+    "forge/model/sparse_topology_feasibility.py": {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    },
+    "results/phase1/compose_lipid_full_replay_v1/replay_michael.py": {
+      "path": "results/phase1/compose_lipid_full_replay_v1/replay_michael.py",
+      "sha256": "2d9d0b3c3a6f3d9acf171356713257129d3272c55aadcaff0d9eb6eee1040cf4"
+    },
+    "results/phase1/compose_lipid_full_representation_v1/audit.py": {
+      "path": "results/phase1/compose_lipid_full_representation_v1/audit.py",
+      "sha256": "899a7e83de9a950d6109bbb94efffa2e5bf72125e542c35cc81e2e1f24818cd8"
+    }
+  },
+  "inputs": {
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/partition.sqlite",
+      "sha256": "cdc482357ed35f6639feed41cdbdd0e2106c3118aa8d48537283304d42c40767"
+    },
+    "partition_receipt": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "source_corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "vocabulary": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/atom_vocabulary.json",
+      "sha256": "46faf2f2ecc6e721e600f4ef0879020ca6d162ecd366e2bb0ac666aa491b96ac"
+    },
+    "vocabulary_receipt": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/result.json",
+      "sha256": "b25a0be8940e5eab751c9e4a4a98f1989b488b8090301246aaa55f32c04664c2"
+    }
+  },
+  "policy": {
+    "purpose": "eligible_product_representation_diagnostic_before_final_chemistry_admission",
+    "record_cap": null,
+    "refit_on_final_admitted_train_required": true,
+    "size_filter": null,
+    "source_vocabulary_frequencies_used": false,
+    "training_admitted": false,
+    "training_calls": 0,
+    "vocabulary": "unchanged_previously_qualified_states_and_valence_limits"
+  },
+  "runtime": {
+    "batch_size": 2048,
+    "device": "cpu",
+    "precision": "float32",
+    "torch_threads_per_worker": 1,
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_full_representation_request.v1",
+  "seed": 0
+}

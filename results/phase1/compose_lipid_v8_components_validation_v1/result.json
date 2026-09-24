@@ -1,0 +1,177 @@
+{
+  "artifacts": {
+    "black.log": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/black.log",
+      "sha256": "25369eabb8c122f861d58ddb255f81f4b9ee797f42f3882975bef953218258ed"
+    },
+    "conflict-witness.json": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/conflict-witness.json",
+      "sha256": "ab6fbfac28d34124091417676deca28d19363ca14f7fd28d89ad6ee0630d7481"
+    },
+    "focused-tests.xml": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/focused-tests.xml",
+      "sha256": "496203390b4c1fa7d0274a0423c98e370c147dee1f10d222dcd80898f0623b62"
+    },
+    "full-tests.log.gz": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/full-tests.log.gz",
+      "sha256": "f69542450dbcf989b443b1585798af12620963d7be8e00116250e779db22e29b"
+    },
+    "full-tests.xml.gz": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/full-tests.xml.gz",
+      "sha256": "2732a217045e1c709bce11100cb0d3bbf28696fc0de0d2aa9dbe82c43602f3a4"
+    },
+    "reproduce_conflict.py": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/reproduce_conflict.py",
+      "sha256": "71845c4afda93d78bb9b1b7051dbcc2c4d9c1910cd483e5a88b0ecc98f78ce83"
+    },
+    "ruff.log": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "source-folder.html.gz": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/source-folder.html.gz",
+      "sha256": "694777ad4fb74c46172e48cb43c1cc80f07ac9f88264721430c4b79ed1d751b0"
+    },
+    "source-lookup.json": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/source-lookup.json",
+      "sha256": "556bf77b1e30b7f63fbecf955bf709a6d5166a2bf8511f9a1297bda05404c7cb"
+    },
+    "verification.log": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/verification.log",
+      "sha256": "802e0f2fb241b555deafb1f0b8ab60fef200ed0d24c4f8d77aac41ce7cd3cf0a"
+    },
+    "verify.log": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    }
+  },
+  "baseline": {
+    "counts": {
+      "duration_seconds": 700.474,
+      "errors": 21,
+      "failed": 148,
+      "passed": 2630,
+      "skipped_or_xfail": 92,
+      "tests": 2891
+    },
+    "report": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_validation_v1/final-full-tests.xml.gz",
+      "sha256": "8fa01364779a187a4fd6377e865cba0d90098a8b55dcf599b98df78b94af572b"
+    }
+  },
+  "checks": {
+    "black_check_pass": true,
+    "component_receipt_authenticated_and_recomputed": true,
+    "conflict_witness_reproduced": true,
+    "focused_tests_pass": true,
+    "gates_weakened": false,
+    "generation_calls": 0,
+    "old_results_or_source_data_modified": false,
+    "ruff_check_pass": true,
+    "training_calls": 0,
+    "vendor_assets_verified": 30,
+    "whitespace_check_pass": true
+  },
+  "commands": {
+    "audit": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_components --config configs/multireaction/compose_lipid_v8_components_v1.json --output-dir results/phase1/compose_lipid_v8_components_v1",
+    "conflict_witness": "python3 results/phase1/compose_lipid_v8_components_validation_v1/reproduce_conflict.py",
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_compose_lipid.py tests/test_compose_lipid_pretraining.py tests/test_compose_lipid_representation.py tests/test_compose_lipid_components.py tests/test_architecture_boundaries.py --junitxml=/private/tmp/forge-compose-components-focused.xml",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/forge-compose-components-full.xml' make test",
+    "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify",
+    "verification": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python -m experiments.phase1.multireaction.compose_lipid_components --verify results/phase1/compose_lipid_v8_components_v1/result.json"
+  },
+  "created_at_utc": "2026-09-18T15:30:43.662245+00:00",
+  "failure_comparison": {
+    "claim": "Comparison of failure/error test identities only; not proof of identical causes or complete diagnosis of legacy failures.",
+    "new_component_test_failures": [],
+    "new_failure_or_error_identities": [],
+    "removed_failure_or_error_identities": []
+  },
+  "git_head": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e",
+  "inputs": {
+    "Makefile": {
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    "configs/multireaction/compose_lipid_v8_components_v1.json": {
+      "path": "configs/multireaction/compose_lipid_v8_components_v1.json",
+      "sha256": "1694d77e9e4920674503e1c2bc93c3ee4cc801b01308aed406119f2a2bb6c973"
+    },
+    "experiments/phase1/multireaction/compose_lipid_components.py": {
+      "path": "experiments/phase1/multireaction/compose_lipid_components.py",
+      "sha256": "0ef89f48190f6f0d239c53c62c1f889a72b7f88c9f3eb9af636d5dffa24c9d17"
+    },
+    "forge/assembly/component_constraints.py": {
+      "path": "forge/assembly/component_constraints.py",
+      "sha256": "509408999679ca79dc1fb525b00391facf529c441dbed87936f9a58a50558b30"
+    },
+    "forge/corpus/compose_lipid_components.py": {
+      "path": "forge/corpus/compose_lipid_components.py",
+      "sha256": "ec0fcfd6b09b793e406fdb1e49e4c805593d8de69181c1070bcdd6ce2f2b2d6a"
+    },
+    "pyproject.toml": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "results/phase1/compose_lipid_v8_components_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_components_v1/result.json",
+      "sha256": "55ff93818a30a3d6e2ddfda4145617ac9127c36de8a3a395b9beaaf909cedfa8"
+    },
+    "results/phase1/compose_lipid_v8_pretraining_validation_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_validation_v1/result.json",
+      "sha256": "e5929024154edbfd02d27296f87fe0f8370255428cefae866fc28c2a907ab703"
+    },
+    "tests/test_compose_lipid_components.py": {
+      "path": "tests/test_compose_lipid_components.py",
+      "sha256": "2adbf1d6822aa94b39cb68596bcde7a7339f5be883c30b9befc9a32bcc31a9cc"
+    },
+    "uv.lock": {
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  },
+  "notes": [
+    "The 58 focused checks include 12 new component tests; test populations overlap with the full run.",
+    "The source-label inference is conditional and supplies no independent decomposition-precision estimate.",
+    "The earlier graph representation pass remains valid for its inspection population, not a final training view.",
+    "All rows remain unadmitted; no checkpoint, sampling gate, source assignment, or provider flag was changed."
+  ],
+  "phase1_definition_of_done_met": false,
+  "raw_log_hashes": {
+    "full-tests.log": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/full-tests.log",
+      "sha256": "bdf6b0ceb0040c6778ae9afa052c1e0bddf9523acf7c587365354ad5692d8ee3"
+    },
+    "full-tests.xml": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/full-tests.xml",
+      "sha256": "c844384bdc77fe2adec9e480252ba2f4c051e23a4d0c9bda5de1d7978ad1fcfd"
+    }
+  },
+  "remaining_work": [
+    "Obtain or source-qualify complete v8 programs with exact stages, reactive sites and multiplicities.",
+    "Resolve ambiguous component/site assignments and finish precursor holdout qualification.",
+    "Build final qualified TRAIN view and refit vocabulary and balanced weights.",
+    "Resolve repository-wide test failures without weakening scientific checks."
+  ],
+  "schema_version": "forge.compose_lipid_component_validation.v1",
+  "status": "scoped_checks_pass_global_suite_failed_training_unqualified",
+  "test_reports": {
+    "focused": {
+      "duration_seconds": 3.31,
+      "errors": 0,
+      "failed": 0,
+      "passed": 58,
+      "skipped_or_xfail": 0,
+      "tests": 58
+    },
+    "full": {
+      "duration_seconds": 637.465,
+      "errors": 21,
+      "failed": 148,
+      "passed": 2642,
+      "skipped_or_xfail": 92,
+      "tests": 2903
+    }
+  },
+  "training_qualification_complete": false
+}

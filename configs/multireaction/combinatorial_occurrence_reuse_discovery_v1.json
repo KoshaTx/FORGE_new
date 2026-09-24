@@ -1,0 +1,25 @@
+{
+  "acceptance": "Preserve every declared count metric for each of twelve families versus the preceding constrained-completion stage; improve exact reconstruction, including a previously untreated depth-3 or depth-4 urea stratum.",
+  "baseline_result": {
+    "path": "results/phase1/combinatorial_reuse_admission_discovery_v1/result.json",
+    "sha256": "6251fb0c9bc6a9e894a2c5dac2d104df6a13e7f3e7393525a122360ab0161912"
+  },
+  "maximum_canonical_matches": 4096,
+  "policy": {
+    "all_exact_witnesses_and_atom_mappings_must_agree": true,
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "original_exact_outputs_immutable": true,
+    "prospective_candidate_selection": false,
+    "remote_compute": false,
+    "reuse_existing_novelty_and_multiplicity_admission": true,
+    "source_atom_values_copied": false,
+    "target_previous_status": "occurrence_partition_mismatch",
+    "training_calls": 0
+  },
+  "purpose": "discovery",
+  "schema_version": "forge.combinatorial_occurrence_reuse.v1_config",
+  "stopping_rule": "One proposal per qualified occurrence, every original and rejection retained. No parameter tuning or gate relaxation after inspecting results."
+}

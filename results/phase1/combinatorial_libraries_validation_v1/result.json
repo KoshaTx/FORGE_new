@@ -1,0 +1,90 @@
+{
+  "base_git_head": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e",
+  "checks": {
+    "focused_checks_pass": true,
+    "qualification_pins_reverified": true,
+    "touched_black_check": true,
+    "touched_ruff_check": true,
+    "vendored_assets_verified": 30
+  },
+  "commands": {
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 uv run pytest -q tests/test_assembly_families.py tests/test_combinatorial_libraries.py tests/test_assembly_ugi3.py tests/test_reaction_program.py --junitxml=results/phase1/combinatorial_libraries_validation_v1/focused-tests.xml",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTEST_ADDOPTS='--tb=short --junitxml=results/phase1/combinatorial_libraries_validation_v1/full-tests.xml' make test",
+    "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify"
+  },
+  "created_at_utc": "2026-09-14T00:22:44.569481+00:00",
+  "definition_of_done_met": false,
+  "inputs": {
+    "configs/multireaction/combinatorial_libraries_v1.json": {
+      "path": "configs/multireaction/combinatorial_libraries_v1.json",
+      "sha256": "e205b8fd16ec4a948cee1a12e50deff95a5872b7b8d7e66d177946bc589732ad"
+    },
+    "results/phase1/combinatorial_libraries_v1/admission_summary.json": {
+      "path": "results/phase1/combinatorial_libraries_v1/admission_summary.json",
+      "sha256": "ee64ffda994607e7166417a2f779f8d8a9412227dde2e5e4b07e1bd34b9b535a"
+    },
+    "results/phase1/combinatorial_libraries_v1/repeat_examples.json": {
+      "path": "results/phase1/combinatorial_libraries_v1/repeat_examples.json",
+      "sha256": "d31774340cc9a264da2b55d086446f7733d34df98d59728df4bf3708c4b56224"
+    },
+    "results/phase1/combinatorial_libraries_v1/result.json": {
+      "path": "results/phase1/combinatorial_libraries_v1/result.json",
+      "sha256": "c08ce9c0a6ec4d30ab469f4bb8688c94aaeb54d673cd2d0bf86d7bdc23b80e2f"
+    },
+    "results/phase1/combinatorial_libraries_validation_v1/focused-tests.xml": {
+      "path": "results/phase1/combinatorial_libraries_validation_v1/focused-tests.xml",
+      "sha256": "8f439d9bb3e2fcd5391e5ebcb384a9982d84b1773428b4400aa9550f2e19e120"
+    },
+    "results/phase1/combinatorial_libraries_validation_v1/full-tests.log": {
+      "path": "results/phase1/combinatorial_libraries_validation_v1/full-tests.log",
+      "sha256": "90c7bac40b02f194da025cd876dd5b4338092bac199daf3f39cede6fd0463c6d"
+    },
+    "results/phase1/combinatorial_libraries_validation_v1/full-tests.xml": {
+      "path": "results/phase1/combinatorial_libraries_validation_v1/full-tests.xml",
+      "sha256": "7796ccd5027f139f797844254110d9705112c72d68347576c4025b9a93c63b37"
+    },
+    "results/phase1/combinatorial_libraries_validation_v1/verify.log": {
+      "path": "results/phase1/combinatorial_libraries_validation_v1/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    },
+    "tests/test_assembly_families.py": {
+      "path": "tests/test_assembly_families.py",
+      "sha256": "46eea99de714cca017845c14f2bbd6a7008a3074bcf8f48cdfbd98ca3bbf5211"
+    },
+    "tests/test_combinatorial_libraries.py": {
+      "path": "tests/test_combinatorial_libraries.py",
+      "sha256": "6a932f65329e081b41c72b81e75f228d1d919f58ade86029d60626b0de79e9cd"
+    }
+  },
+  "notes": [
+    "The full run has the same failure/error counts as the previous recorded run; no claim that every remaining failure has been diagnosed.",
+    "All 44 new tests pass in the full run. No existing implementation, test or scientific gate was changed.",
+    "The full-corpus qualification is blocked by exact single-event and role-policy failures. No twelve-family training admission or trained-model improvement is claimed."
+  ],
+  "reports": {
+    "focused-tests": {
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 50,
+        "skipped": 0,
+        "tests": 50
+      },
+      "duration_seconds": 5.383,
+      "new_library_test_failures": []
+    },
+    "full-tests": {
+      "counts": {
+        "errors": 21,
+        "failures": 167,
+        "passed": 2382,
+        "skipped": 92,
+        "tests": 2662
+      },
+      "duration_seconds": 493.793,
+      "new_library_test_failures": []
+    }
+  },
+  "schema_version": "forge.combinatorial_library_validation.v1",
+  "status": "scoped_checks_pass_corpus_qualification_and_global_suite_blocked"
+}

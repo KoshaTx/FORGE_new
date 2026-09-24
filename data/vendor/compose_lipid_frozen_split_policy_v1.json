@@ -1,0 +1,101 @@
+{
+  "carbon_branch_minimum_carbon_neighbors": 3,
+  "derivation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/build_policy.py",
+    "sha256": "e3377a1db5de90be50a347a7598ac25dd8f1caa61734142844c6b8a0873203a4"
+  },
+  "digest": {
+    "algorithm": "sha256",
+    "ensure_ascii": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "sort_keys": true
+  },
+  "elements": {
+    "carbon": 6,
+    "nitrogen": 7,
+    "oxygen": 8,
+    "phosphorus": 15,
+    "sulfur": 16
+  },
+  "metadata_fields": [
+    "architecture_stratum",
+    "coupled_ketone_split",
+    "design_lane",
+    "distance",
+    "event_count",
+    "events",
+    "head_arm_count",
+    "interface_stratum",
+    "mechanism",
+    "occupancy",
+    "pair_lane",
+    "reported_released_tuple",
+    "series",
+    "site_disposition"
+  ],
+  "metadata_suffix": "_axis",
+  "profile_fields": {
+    "carbon_band": {
+      "divisor": 6,
+      "feature": "carbon"
+    },
+    "carbon_branch_points": {
+      "feature": "carbon_branch_points",
+      "maximum": 4
+    },
+    "cc_double_bonds": {
+      "feature": "cc_double_bonds",
+      "maximum": 4
+    },
+    "formal_charge": {
+      "feature": "formal_charge"
+    },
+    "heavy_atom_band": {
+      "divisor": 8,
+      "feature": "heavy_atoms"
+    },
+    "nitrogen_band": {
+      "divisor": 2,
+      "feature": "nitrogen"
+    },
+    "oxygen_band": {
+      "divisor": 2,
+      "feature": "oxygen"
+    },
+    "phosphorus_atoms": {
+      "feature": "phosphorus"
+    },
+    "ring_count": {
+      "feature": "rings",
+      "maximum": 4
+    },
+    "sulfur_band": {
+      "divisor": 2,
+      "feature": "sulfur"
+    }
+  },
+  "role_signature": "one_role_and_complete_component_id_per_incorporated_copy",
+  "schema_version": "forge.compose_lipid_frozen_split_policy.v1",
+  "scope": "Exact source descriptor and frozen-group projection only; no new group selection, chemical decomposition, training admission or size cap.",
+  "signature_labels": {
+    "combination": "complete_component_role_multiset_v2",
+    "core": "post_instruction_family_core_v8_1",
+    "morphology": "reaction_core_regional_morphology_v2",
+    "regional": "post_instruction_coarse_regional_morphology_v8_1"
+  },
+  "source_anchor_context": {
+    "source_anchor": true
+  },
+  "source_config": {
+    "path": "results/phase1/compose_lipid_v8_source_recovery_v1/upstream/configs/corpus/post_instruction_generator_splits_v8_1.json",
+    "sha256": "c2b87270b7beb811f67c2afca38d8bc8511482de3d30c2e754abbfe7b3abb2f7"
+  },
+  "source_recovery": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/result.json",
+    "sha256": "5fb932c51688ba5b8239d322ce809972d927c312570d29b2f81393cfaa88542c"
+  },
+  "training_admitted": false
+}

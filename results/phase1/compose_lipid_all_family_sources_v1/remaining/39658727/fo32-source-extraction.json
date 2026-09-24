@@ -1,0 +1,47 @@
+{
+  "components": {
+    "amine_head": "CN(C)CCCN",
+    "carboxylic_acid": "O=C(O)CCCCC(=O)OC(CCCCCCCC)CCCCCCCC",
+    "coupled_ketone": "O=C(CCCC(=O)OCCC#CCCCCCC)CCCC(=O)OCCC#CCCCCCC",
+    "isocyanide": "CCCC[N+]#[C-]"
+  },
+  "computed_neutral_exact_mass": 1025.837117512,
+  "computed_neutral_formula": "C62H111N3O8",
+  "disposition": "abstain",
+  "doi": "10.1038/s41587-024-02490-y",
+  "experimental_execution_admitted": false,
+  "procedure": {
+    "assembly": "Add acid 2.11 mmol, n-butyl isocyanide 2.11 mmol and 5 mL methanol; room temperature 72 h.",
+    "isolated_amount_mmol": 0.18,
+    "isolated_mass_g": 0.18,
+    "outcome": "Light-brown oil; NMR and QTOF reported.",
+    "precondensation": "Ketone 2.11 mmol and amine 2.11 mmol in 10 mL DCM, room temperature, nitrogen, 2 h.",
+    "purification": "Repeated silica chromatography, 10% methanol and 0.1% ammonium hydroxide in DCM.",
+    "yield_percent": 8.5
+  },
+  "reason": "Exact source graph and procedure transcribed; ketone-specific qualified transform, complete site enumeration and corpus replay still required. No atom-map or reconstruction admission from this extraction alone.",
+  "reported_ms": {
+    "calculated_mz": 1026.84494,
+    "formula": "C62H112N3O8+",
+    "ion": "M+H",
+    "observed_mz": 1026.8444
+  },
+  "route_level": "L1",
+  "schema_version": "forge.source_graph_extraction.v1",
+  "seed": 0,
+  "source": {
+    "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/ketone-ugi4-si.pdf",
+    "sha256": "7d77bfed6c85f28bcaf4d2f050d445059e8045ca189f70d2d4fcc0e70d4059e0"
+  },
+  "source_drawn_product_stereo_free": "CN(C)CCCN(C(=O)CCCCC(=O)OC(CCCCCCCC)CCCCCCCC)C(CCCC(=O)OCCC#CCCCCCC)(CCCC(=O)OCCC#CCCCCCC)C(=O)NCCCC",
+  "source_label": "FO-32",
+  "training_admitted": false,
+  "visual_locator": {
+    "page": 2,
+    "render": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/pages/page-02.png",
+      "sha256": "55012d10c128bbccf13ab4dfe10dfbcd66f44b1073f67937ea0c276768585cd8"
+    },
+    "scheme": "Synthesis of FO-32, components a-d and product e"
+  }
+}

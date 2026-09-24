@@ -1,0 +1,297 @@
+{
+  "programs": [
+    {
+      "architecture_subfamily": "source_two_identical_thiol_tails",
+      "equal_component_groups": [
+        [
+          "thiol_first",
+          "thiol_second"
+        ]
+      ],
+      "initial_role": "alkynoic_linker",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_li_thiol_yne_then_amidation",
+      "scope": "Source two-stage net connectivity with generated component supervision restricted to neutral aliphatic monothiols, C/H/O alkynoic acid and C/H/N/O head. No claim of individual experimental execution for generated precursors.",
+      "stages": [
+        {
+          "accumulator_role": "alkynoic_linker",
+          "added_roles": [
+            "thiol_first",
+            "thiol_second"
+          ],
+          "net_byproducts": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_li_double_thiol_yne",
+          "source_step": "Fig. 1B step a; two thiol equivalents, one net stage"
+        },
+        {
+          "accumulator_role": "carboxylic_acid_tail",
+          "added_roles": [
+            "amine_head"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_li_tail_amidation",
+          "source_step": "Fig. 1B step b; documented subsequent amide coupling"
+        }
+      ],
+      "terminal_constraints": {
+        "alkynoic_linker": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 2
+          },
+          "formal_charge": 0
+        },
+        "amine_head": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_first": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        },
+        "thiol_second": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "architecture": "Two copies of one monothiol add across a terminal alkyne to form the source vicinal bis(thioether).",
+      "atom_mapped_reaction_smarts": "[CX2H1:1]#[CX2:2].[SX2H1:3].[SX2H1:4]>>[CH2:1]([S:3])[CH1:2][S:4]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "DMPA",
+          "UV 365 nm",
+          "argon"
+        ],
+        "solvent": [
+          "THF"
+        ],
+        "temperature_c": null,
+        "time_h": 1
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_thiol_yne_source_v1/build_registry.py",
+          "sha256": "0c95bc098b1928566d8ad356decdc380fafb66e4de230eec2f40d569d6ed31e7"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "a3": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          },
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "head_constraint": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "thiol": {
+            "path": "data/vendor/qualified_thiol_maleate_a3_program_v1.json",
+            "sha256": "3938325bf401a0f8a8bddce47840cbd1d9afb268993edf409e0702f6555ee033"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1,
+            2
+          ],
+          "name": "alkynoic_linker",
+          "required_handle_smarts": "[C&X2&H1]#[C&X2]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            3
+          ],
+          "name": "thiol_first",
+          "required_handle_smarts": "[SX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            4
+          ],
+          "name": "thiol_second",
+          "required_handle_smarts": "[SX2H1]"
+        }
+      ],
+      "reaction_id": "source_li_double_thiol_yne",
+      "reaction_version": 1,
+      "selectivity_policy": "All unfiltered net stage outcomes; equal source thiol identities required by program; no isolated vinyl intermediate claimed.",
+      "sources": [
+        {
+          "identifier": "10.1016/j.biomaterials.2012.07.044",
+          "kind": "doi",
+          "locator": "Author-hosted accepted article PDF p. 3, Fig. 1A-B; p. 2, section 2.2.",
+          "notes": "Source net connectivity and two-stage order. Computed consistency only; no individual analytical or biological labels transferred."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    },
+    {
+      "architecture": "clinical-like amide-linked ionizable lipid",
+      "atom_mapped_reaction_smarts": "[CX3:1](=[OX1:2])[OX2H1:3].[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):4]>>[C:1](=[O:2])[N:4]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "DIC",
+          "HOBt",
+          "argon"
+        ],
+        "solvent": [
+          "dichloromethane",
+          "DMF reagent solution"
+        ],
+        "temperature_c": null,
+        "time_h": 16
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_thiol_yne_source_v1/build_registry.py",
+          "sha256": "0c95bc098b1928566d8ad356decdc380fafb66e4de230eec2f40d569d6ed31e7"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "a3": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          },
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "head_constraint": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "thiol": {
+            "path": "data/vendor/qualified_thiol_maleate_a3_program_v1.json",
+            "sha256": "3938325bf401a0f8a8bddce47840cbd1d9afb268993edf409e0702f6555ee033"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1,
+            2,
+            3
+          ],
+          "name": "carboxylic_acid_tail",
+          "required_handle_smarts": "[CX3](=[OX1])[OX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            4
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        }
+      ],
+      "reaction_id": "source_li_tail_amidation",
+      "reaction_version": 1,
+      "selectivity_policy": "Complete source preassembled acid and unprotected N-H head. Retain all forward and inverse attachment sites.",
+      "sources": [
+        {
+          "identifier": "10.1016/j.biomaterials.2012.07.044",
+          "kind": "doi",
+          "locator": "Author-hosted accepted article PDF p. 3, Fig. 1A-B; p. 2, section 2.2.",
+          "notes": "Source net connectivity and two-stage order. Computed consistency only; no individual analytical or biological labels transferred."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    }
+  ],
+  "schema_version": "forge.source_staged_registry.v1",
+  "source_assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/22902058/li-thiol-yne-main.pdf",
+      "sha256": "f87e63f1d892516c5a4db215067496e70da7cdb8e79ff1ef88df9fe81bf77ca1"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    }
+  }
+}

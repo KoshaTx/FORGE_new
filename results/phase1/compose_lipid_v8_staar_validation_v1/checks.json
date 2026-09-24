@@ -1,0 +1,81 @@
+{
+  "black": {
+    "command": [
+      "uv",
+      "run",
+      "black",
+      "--check",
+      "forge/assembly/sequential_program.py",
+      "forge/corpus/compose_lipid_sequential.py",
+      "experiments/phase1/multireaction/compose_lipid_sequential.py",
+      "tests/test_sequential_program.py",
+      "tests/test_compose_lipid_sequential.py",
+      "results/phase1/compose_lipid_v8_staar_source_v1/build_registry.py"
+    ],
+    "duration_seconds": 0.21417050017043948,
+    "exit_code": 0
+  },
+  "focused-tests": {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q",
+      "tests/test_a3_source_boundary.py",
+      "tests/test_compose_lipid.py",
+      "tests/test_compose_lipid_components.py",
+      "tests/test_compose_lipid_pretraining.py",
+      "tests/test_compose_lipid_protection.py",
+      "tests/test_compose_lipid_repeated_inverse.py",
+      "tests/test_compose_lipid_repeated_source.py",
+      "tests/test_compose_lipid_representation.py",
+      "tests/test_compose_lipid_scaffold_event.py",
+      "tests/test_compose_lipid_sequential.py",
+      "tests/test_compose_lipid_source_event.py",
+      "tests/test_compose_lipid_source_program.py",
+      "tests/test_pinned_sources_are_tracked.py",
+      "tests/test_precursor_scaffolds.py",
+      "tests/test_repeated_components.py",
+      "tests/test_repeated_inverse.py",
+      "tests/test_sequential_program.py",
+      "tests/test_source_event.py",
+      "--tb=short",
+      "--junitxml=results/phase1/compose_lipid_v8_staar_validation_v1/focused-tests.xml"
+    ],
+    "duration_seconds": 26.18265204085037,
+    "exit_code": 0
+  },
+  "full-tests": {
+    "command": [
+      "make",
+      "test"
+    ],
+    "duration_seconds": 590.8713241249789,
+    "exit_code": 2,
+    "pytest_addopts": "--tb=short --junitxml=results/phase1/compose_lipid_v8_staar_validation_v1/full-tests.xml"
+  },
+  "ruff": {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "forge/assembly/sequential_program.py",
+      "forge/corpus/compose_lipid_sequential.py",
+      "experiments/phase1/multireaction/compose_lipid_sequential.py",
+      "tests/test_sequential_program.py",
+      "tests/test_compose_lipid_sequential.py",
+      "results/phase1/compose_lipid_v8_staar_source_v1/build_registry.py"
+    ],
+    "duration_seconds": 0.02831287495791912,
+    "exit_code": 0
+  },
+  "vendor-verify": {
+    "command": [
+      "make",
+      "verify"
+    ],
+    "duration_seconds": 0.16668675001710653,
+    "exit_code": 0
+  }
+}

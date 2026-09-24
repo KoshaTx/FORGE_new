@@ -1,0 +1,231 @@
+{
+  "all_eligible_families_sampled": [
+    "iphos_ring_opening"
+  ],
+  "controls": {
+    "10A1P10_deprotonated": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 32,
+            "H": 68,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 32,
+            "H": 68,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCCCNCCCCCCCCCC",
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC",
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ]
+        ]
+      }
+    },
+    "9A1P9_deprotonated": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 27,
+            "H": 58,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 27,
+            "H": 58,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCNCCCCCCCC",
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCNCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC",
+            "CCCCCCCCNCCCCCCCC"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCNCCCCCCCC"
+          ]
+        ]
+      }
+    },
+    "non_equivalent_nitrogens_deprotonated": {
+      "kind": "ambiguity_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 7,
+            "H": 19,
+            "N": 2,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 7,
+            "H": 19,
+            "N": 2,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CNCCCN",
+            "CNCCCNCCOP(=O)([O-])OC"
+          ],
+          [
+            1,
+            "CNCCCN",
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CNCCCN"
+          ],
+          [
+            "CNCCCNCCOP(=O)([O-])OC",
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "COP(=O)([O-])OCCN(C)CCCN",
+            "CNCCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ],
+          [
+            "CNCCCN"
+          ]
+        ]
+      }
+    }
+  },
+  "equivalent": true,
+  "largest_eligible_molecule_per_family_included": true,
+  "parallel_result_sha256": "099a9a241da8ba2386f3582175ceb35b3210292ea5058cb2b7268cebd3ca8a41",
+  "parallel_seconds_including_worker_startup": 4.035149041097611,
+  "request": {
+    "path": "results/phase1/compose_lipid_full_iphos_replay_v1/anionic/request.json",
+    "sha256": "c6b8d78044396691502d9b7512812f1bac5960da0680f0444526429403382257"
+  },
+  "rows": 9,
+  "sample_targets": [
+    "00001546f3918b77d66999bb22a3d1b266db129e83347429ac7a3e680b80c13b",
+    "0000f5112f9b3964fbc3d55991fb0b3fa4f2c3247a926c795357976e48676cb6",
+    "000122f9c39f055da8d0fdedfb46bddfb289406508d4f87df12e7e2cb3860258",
+    "0001a5dc8211205bdc2296feffc47aec2477f7d1bd98ba07ea5d68af54a849e3",
+    "0001aa12ed905e3bc74118cbf01efa23096df331bf2eb1f45bf83c2f3edd8049",
+    "0002c0b12dcf6b0d76a9c57027c9cbc25fe1f4154661b4ec482f8c6ac5c4142a",
+    "0002c704f5372c80d054a29446e215ec42ad4b6e7bc5626270c4e55ffc9af5c9",
+    "00032f853da6ce6156aea1a267199ba4cd5f0c8403abb475e96287771e48b1ff",
+    "011c34a2484e6ca8ca7fc82958d4f7159080b40aed82e6c2a0b0e8248f74c188"
+  ],
+  "serial_result_sha256": "099a9a241da8ba2386f3582175ceb35b3210292ea5058cb2b7268cebd3ca8a41",
+  "serial_seconds": 0.5188537498470396,
+  "training_admitted": false
+}

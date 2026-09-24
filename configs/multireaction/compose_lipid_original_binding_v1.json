@@ -1,0 +1,91 @@
+{
+  "families": {
+    "acid_epoxide_diester_multistep": {
+      "kind": "task",
+      "role_fields": {
+        "amine_acid_head": {
+          "id": "head_id",
+          "smiles": "head_smiles"
+        },
+        "epoxide": {
+          "id": "epoxide_id",
+          "smiles": "epoxide_smiles"
+        },
+        "hydrophobic_acid": {
+          "id": "hydrophobic_acid_id",
+          "smiles": "hydrophobic_acid_smiles"
+        }
+      },
+      "stage_order_field": "stage_order_fixed"
+    },
+    "aldehyde_ugi3": {
+      "kind": "context",
+      "source_to_registry_role": {
+        "aldehyde_side": "aldehyde",
+        "amine_side": "amine",
+        "isocyanide_side": "isocyanide"
+      }
+    },
+    "aldehyde_ugi4": {
+      "kind": "regional",
+      "regional_source": "artifacts/corpus_build_v2/aldehyde_ugi4_regional_contract_v2/tuple_regional_dispositions.jsonl.gz"
+    },
+    "thiolactone_aminolysis_michael": {
+      "kind": "task",
+      "role_fields": {
+        "acrylate_tail": {
+          "id": "acrylate_id",
+          "smiles": "acrylate_smiles"
+        },
+        "amine_head": {
+          "id": "head_id",
+          "smiles": "head_smiles"
+        },
+        "thiolactone_region": {
+          "id": "thiolactone_id",
+          "smiles": "thiolactone_smiles"
+        }
+      },
+      "stage_order_field": "two_stage_order_fixed"
+    }
+  },
+  "inputs": {
+    "constructions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+      "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "role_binding_result": {
+      "path": "results/phase1/compose_lipid_role_binding_v2/result.json",
+      "sha256": "356ad53498ee200431a648a7cbe3ebbe3f94dcf3c7865f3c5cec4bc9f3b76e66"
+    },
+    "task_manifest": {
+      "path": "data/source_cache/compose_lipid_original_tasks_2026-09-20/MANIFEST.json",
+      "sha256": "2a1d743fb7410db8586433942c3770963e7b3406b30824a35850bc9c5fc6fd96"
+    },
+    "ugi4_catalog": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_03_aldehyde_ugi4_enumeration_v8/precursors.jsonl",
+      "sha256": "31fa88409b5ee99190fcda8940a2f5e76820ee260f7ce3dc0c354f42b0426210"
+    }
+  },
+  "policy": {
+    "experimental_execution_admitted": false,
+    "population": "current_full_preparation_eligible_only",
+    "product_matching_used_to_choose_components": false,
+    "reaction_calls": 0,
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "source_payload_hash": "sha256_of_original_line_without_line_ending",
+    "training_admitted": false,
+    "training_calls": 0,
+    "upstream_atom_annotations_used_as_supervision": false
+  },
+  "schema_version": "forge.compose_lipid_original_binding_config.v1"
+}

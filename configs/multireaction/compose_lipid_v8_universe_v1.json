@@ -1,0 +1,61 @@
+{
+  "expected_family_rows": {
+    "a3_amine_aldehyde_alkyne": 70016,
+    "acid_epoxide_diester_multistep": 232240,
+    "aema_aza_thiol_addition": 13865,
+    "aldehyde_ugi3": 18842,
+    "aldehyde_ugi4": 222029,
+    "alpha_isocyanoester_dihydroimidazole": 219036,
+    "amine_alkylation": 188272,
+    "amine_epoxide_opening": 97439,
+    "aryl_reductive_amination": 48090,
+    "aza_michael_acrylamide": 31239,
+    "aza_michael_acrylate": 33619,
+    "disulfide_michael": 254389,
+    "epoxide_opening_o_acylation": 42805,
+    "iphos_ring_opening": 184345,
+    "ketone_isocyanide_amide": 271560,
+    "ketone_ugi4": 91395,
+    "maleate_addition": 68463,
+    "o_esterification": 24948,
+    "passerini_3cr": 128352,
+    "preassembled_thiol_yne_tail_amidation": 465048,
+    "reductive_amination": 61320,
+    "reported_lnpdb_route_unassigned": 255,
+    "reported_multistep_amino_lipid": 9,
+    "reported_reference_lipid": 4,
+    "thiolactone_aminolysis_michael": 334859,
+    "vitamin_b5_multistep": 80398
+  },
+  "inputs": {
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "precursor_audit_result": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/result.json",
+      "sha256": "7508dde592a69264d6e0cf18e4abe333006ebeedbe9a552136b44b1c51c2fce7"
+    }
+  },
+  "policy": {
+    "duplicate_rows": "retain_provenance_pending_constitutional_weight_deduplication",
+    "graph_parsing": false,
+    "intended_training_measure": "equal_family_mass_after_all_admission_gates",
+    "nonmatches": "unresolved_never_assumed_disjoint",
+    "overlap_matching": "positive_exact_source_strings_only",
+    "random_sampling_used": false,
+    "record_cap": null,
+    "seed": 0,
+    "size_filter": null,
+    "source_splits_changed": false,
+    "training_calls": 0,
+    "training_rows_admitted": 0,
+    "unassigned_records": "pending_partition_before_decomposition"
+  },
+  "reference_families": [
+    "reported_lnpdb_route_unassigned",
+    "reported_multistep_amino_lipid",
+    "reported_reference_lipid"
+  ],
+  "schema_version": "forge.compose_lipid_universe_config.v1"
+}

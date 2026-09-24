@@ -1,0 +1,68 @@
+{
+  "counts": {
+    "all_checks_pass": 200000,
+    "original_calibration": 19975,
+    "original_reference": 268,
+    "original_test": 19975,
+    "original_train": 159782,
+    "rows": 200000
+  },
+  "elapsed_seconds": 40.75563316582702,
+  "examples": [],
+  "failures": {},
+  "full_universe_partition_qualified": false,
+  "group_selection_repeated": false,
+  "implementation": {
+    "forge/corpus/compose_lipid_partition_signatures.py": {
+      "path": "forge/corpus/compose_lipid_partition_signatures.py",
+      "sha256": "6e273f5710b829b935953e1e7182d489f2abae6ff71a214c8a16fe847f50e1e9"
+    },
+    "results/phase1/compose_lipid_split_source_recovery_v2/replay_frozen_groups.py": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/replay_frozen_groups.py",
+      "sha256": "a8e1d708f4fd5876b313f06d573ec184524ce5dd2c736e00ae2d8fb3edf326a5"
+    }
+  },
+  "inputs": {
+    "assignments": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/assignments.jsonl.gz",
+      "sha256": "8c759c737fcda765d9002bdb9f603a7527427ac72761c6a531731b809cae5893"
+    },
+    "components": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_component_manifest_v8_1/components.jsonl.gz",
+      "sha256": "e49966487dedd64368ae8b5a9eea52b97630bc5665b202bef7c18452efe4e6cf"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/split_groups.jsonl.gz",
+      "sha256": "54edee59835223c13e3ecb4910e2d2ece592881b9d321323af9c9ce8b57eae79"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "selected_groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/selected_groups.json",
+      "sha256": "5530c38cdcee4dac96ce8557f133cade1ea32bb2796752d5d642962ab75b8047"
+    }
+  },
+  "pass": true,
+  "purpose": "Non-learning partition and leakage audit only",
+  "reaction_decomposition_performed": false,
+  "schema_version": "forge.compose_lipid_frozen_group_replay.v1",
+  "seed": 0,
+  "source_assignments_changed": false,
+  "training_admitted": false,
+  "training_calls": 0,
+  "upstream_code_executed": false
+}

@@ -1,0 +1,105 @@
+{
+  "artifacts": {
+    "assignment-differences.json": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/assignment-differences.json",
+      "sha256": "cfb5dcc1806bbb7acbab2e6e937c071b656f89af9472651bc9c6afd51d9ff048"
+    },
+    "records.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/records.jsonl.gz",
+      "sha256": "13e092f953cf9314d14745fd4547d7cf158dbedebd8f3b830ff7e2fc2f4c1ec9"
+    },
+    "selected_groups.json": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/selected_groups.json",
+      "sha256": "6cf4b6ef677cb6acbc21b4ad2b03cf7f52315566a93a0b8b29b3df2fb281dd47"
+    }
+  },
+  "assignment_failures": 26,
+  "elapsed_seconds": 46.03048900002614,
+  "examples": [],
+  "failed_fields": {
+    "split": 26
+  },
+  "full_universe_group_selection_performed": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_historical_selected_groups_v2.py",
+    "sha256": "064ad00fd0431e40b1712fd0e553fe5e472429204fe830e2ef5907a9a19d2f83"
+  },
+  "inputs": {
+    "assignments": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/assignments.jsonl.gz",
+      "sha256": "8c759c737fcda765d9002bdb9f603a7527427ac72761c6a531731b809cae5893"
+    },
+    "components": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_component_manifest_v8_1/components.jsonl.gz",
+      "sha256": "e49966487dedd64368ae8b5a9eea52b97630bc5665b202bef7c18452efe4e6cf"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "corrected_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/frozen-group-replay.json",
+      "sha256": "68243f88e2e23ca6b0b4a58736db1b0ae3cfa0165626e2bcd9f931019c089a8c"
+    },
+    "groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/split_groups.jsonl.gz",
+      "sha256": "54edee59835223c13e3ecb4910e2d2ece592881b9d321323af9c9ce8b57eae79"
+    },
+    "historical_policy": {
+      "path": "data/vendor/compose_lipid_historical_morphology_policy_v1.json",
+      "sha256": "ee64de495cb0a92cf9116dd8ba27aecc19b74723642d0fe20d4986bad33064f3"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "morphology_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-morphology-replay.json",
+      "sha256": "90d04455897e2b3c7d739e5fceec778f84ddf0bafa13e2914de7c6018100306e"
+    },
+    "muscle_contexts": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/muscle_bounded_contexts.jsonl.gz",
+      "sha256": "af7ecfbc2856ae224a71d30146b6a9bd49b5ad1a86030dfc34ccd5b49bf842a8"
+    },
+    "original_config": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/configs/corpus/post_instruction_generator_splits_v8.json",
+      "sha256": "777136aa72fe341e8620416fbe8fad3a096c8c6696ba0d4c8bb4730a494069ba"
+    },
+    "original_config_response": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/old-split-config-blob.json",
+      "sha256": "56b967b8e34b18d34d16a13e4332cbb33826b13e20bac3634d9b3a4e8e80c303"
+    },
+    "registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "selected_groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/selected_groups.json",
+      "sha256": "5530c38cdcee4dac96ce8557f133cade1ea32bb2796752d5d642962ab75b8047"
+    },
+    "source_checksums": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/SHA256SUMS",
+      "sha256": "60b3bf5c1dd7e0ce0bb3ffbb2c78fe7b23c3d323c70353a71d940208d46335b9"
+    },
+    "source_constructions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+      "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+    }
+  },
+  "muscle_overrides": 12,
+  "pass": false,
+  "precursor_combination_failures": 0,
+  "rows": 200000,
+  "schema_version": "forge.compose_lipid_historical_selected_recovery.v1",
+  "seed": "post_instruction_broad_lipid_generator_split_v8_candidate_1",
+  "source_anchors": 11267,
+  "source_assignments_changed": false,
+  "training_admitted": false,
+  "upstream_build_driver_executed": false,
+  "upstream_pure_functions_executed": true,
+  "upstream_source_modified": false
+}

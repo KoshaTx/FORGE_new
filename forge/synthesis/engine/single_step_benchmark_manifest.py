@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import gzip
 import hashlib
+import inspect
 import io
 import json
 from collections import Counter, defaultdict
@@ -22,6 +23,8 @@ from typing import Any
 from rdkit import Chem, rdBase
 
 from forge.chemistry.descriptors import component_chemotype_metrics
+from forge.core.hashing import is_sha256
+from forge.core.input_locations import input_location_matches
 from forge.corpus.r1_prime_audit import sha256_file
 
 CONFIG_SCHEMA_VERSION = "forge.single_step_benchmark_manifest_builder.v1"
@@ -91,6 +94,59 @@ def _portable(path: Path, *, repo: Path) -> str:
         return str(path.resolve().relative_to(repo.resolve()))
     except ValueError:
         return str(path.resolve())
+
+
+def _implementation_evidence(repo: Path, specification: Any, *, label: str) -> Path:
+    """Locate exact historical source bytes for attribution; never execute them.
+
+    The config's logical source identity stays fixed. A reviewed move or an archive
+    entry may supply those bytes, and the current executor is recorded separately.
+    This path resolution is restricted to implementation source, never data inputs.
+    """
+    if not isinstance(specification, dict) or set(specification) != {"path", "sha256"}:
+        raise SingleStepBenchmarkManifestError(f"implementation {label} is malformed")
+    asset, digest = specification["path"], specification["sha256"]
+    if (
+        not isinstance(asset, str)
+        or not asset
+        or Path(asset).suffix != ".py"
+        or not is_sha256(digest)
+    ):
+        raise SingleStepBenchmarkManifestError(f"implementation {label} source pin is malformed")
+    direct = _path(repo, asset, label=f"implementation {label}")
+    if input_location_matches(repo, direct, asset, digest):
+        return direct.resolve()
+    moves = repo / "docs/artifact_path_moves.json"
+    archive = repo / "provenance/frozen-code/manifest.json"
+    candidates = []
+    try:
+        if moves.is_file():
+            moved = json.loads(moves.read_text()).get("moves", {}).get(asset)
+            if isinstance(moved, str):
+                candidates.append(repo / moved)
+        if archive.is_file():
+            document = json.loads(archive.read_text())
+            entries = document.get("entries")
+            if not isinstance(entries, list):
+                raise ValueError("archive entries are not a list")
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    raise ValueError("archive entry is not a record")
+                if entry.get("original_path") == asset and entry.get("sha256") == digest:
+                    blob = entry.get("blob_path")
+                    if not isinstance(blob, str):
+                        raise ValueError("archive source location is malformed")
+                    candidates.append(repo / blob)
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        raise SingleStepBenchmarkManifestError(
+            f"implementation {label} source-location metadata is malformed"
+        ) from exc
+    for path in candidates:
+        if input_location_matches(repo, path, asset, digest):
+            return path.resolve()
+    raise SingleStepBenchmarkManifestError(
+        f"implementation {label} has no authenticated bytes for {asset} at {digest}"
+    )
 
 
 @dataclass
@@ -930,17 +986,14 @@ def build_manifest_payloads(repo: Path, config_path: Path) -> dict[str, bytes]:
     )
 
     implementation_hashes: dict[str, dict[str, str]] = {}
+    implementation_bindings: dict[str, dict[str, str]] = {}
     for label in sorted(implementation):
         specification = implementation[label]
-        if not isinstance(specification, dict) or set(specification) != {"path", "sha256"}:
-            raise SingleStepBenchmarkManifestError(f"implementation {label} is malformed")
-        path = _path(repo, specification["path"], label=f"implementation {label}")
-        observed = sha256_file(path)
-        if observed != specification["sha256"]:
-            raise SingleStepBenchmarkManifestError(f"implementation {label} hash changed")
-        implementation_hashes[label] = {
+        path = _implementation_evidence(repo, specification, label=label)
+        implementation_hashes[label] = dict(specification)
+        implementation_bindings[label] = {
             "path": _portable(path, repo=repo),
-            "sha256": observed,
+            "sha256": sha256_file(path),
         }
 
     policy_sha256 = reader.accessed["benchmark_policy"]["sha256"]
@@ -991,6 +1044,26 @@ def build_manifest_payloads(repo: Path, config_path: Path) -> dict[str, bytes]:
         **common,
         "config_sha256": config_sha256,
         "implementation": implementation_hashes,
+        "implementation_source_bindings": implementation_bindings,
+        "execution_provenance": {
+            "historical_implementation_is_evidence_only": True,
+            "archived_code_executed": False,
+            "current_modules": {
+                name: {
+                    "path": _portable(path, repo=repo),
+                    "sha256": sha256_file(path),
+                }
+                for name, path in (
+                    ("builder", Path(__file__)),
+                    (
+                        "source_location_authentication",
+                        Path(inspect.getfile(input_location_matches)),
+                    ),
+                    ("pin_validation", Path(inspect.getfile(is_sha256))),
+                    ("source_hashing", Path(inspect.getfile(sha256_file))),
+                )
+            },
+        },
         "inputs_accessed": accessed,
         "input_access_log_sha256": _content_sha256(accessed),
         "policy_bound_artifacts": policy.get("artifacts"),

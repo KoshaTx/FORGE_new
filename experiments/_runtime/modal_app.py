@@ -219,6 +219,8 @@ def main(
     launch_only: bool = False,
     call_receipt: str = "",
     status_only: bool = False,
+    restart_from: str = "",
+    diagnosis: str = "",
 ) -> None:
     """Launch detached work, or inspect and collect a previously launched call."""
 
@@ -226,11 +228,13 @@ def main(
         MODAL_CALL_RECEIPT_SCHEMA,
         modal_call_receipt_path,
         modal_request_plan,
+        modal_restart_receipt_path,
+        require_terminal_modal_call,
     )
     from forge.core.io import read_json_object, write_json
 
     if call_receipt:
-        if experiment or profile or launch_only or resume or device or replicate:
+        if experiment or profile or launch_only or resume or device or replicate or restart_from:
             raise RuntimeError("call-receipt mode cannot include launch arguments")
         receipt_path = (LOCAL_REPO / call_receipt).resolve()
         try:
@@ -294,6 +298,27 @@ def main(
         replicate=replicate,
         device=device or None,
     )
+    previous = None
+    receipt_path = modal_call_receipt_path(LOCAL_REPO, request["request_id"])
+    terminal_status = None
+    if restart_from:
+        if not launch_only or not resume or not diagnosis.strip():
+            raise RuntimeError("Recovery requires --launch-only --resume and --diagnosis")
+        previous = (LOCAL_REPO / restart_from).resolve()
+        receipt_path = modal_restart_receipt_path(LOCAL_REPO, request, previous)
+        prior = read_json_object(previous)
+        terminal_status = require_terminal_modal_call(
+            modal.FunctionCall.from_id(prior["function_call_id"])
+        )
+    elif launch_only and resume:
+        raise RuntimeError("Detached resume requires --restart-from and a diagnosis")
+    if launch_only:
+        if receipt_path.exists():
+            raise RuntimeError(f"Existing call receipt; inspect or collect it: {receipt_path}")
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        # Keep this claim even if upload/spawn fails: ambiguity requires diagnosis, not retry.
+        with receipt_path.with_suffix(".attempt.json").open("x") as handle:
+            json.dump(dict(request=request, resume=resume, diagnosis=diagnosis), handle)
     remote_repo = PurePosixPath("jobs") / request["request_id"] / "repo"
     with experiment_volume.batch_upload(force=True) as batch:
         for relative, local in _upload_paths(spec_path).items():
@@ -316,7 +341,6 @@ def main(
         request["source_sha256"],
     )
     if launch_only:
-        receipt_path = modal_call_receipt_path(LOCAL_REPO, request["request_id"])
         if receipt_path.exists():
             raise RuntimeError(
                 "detached Modal call receipt already exists; inspect or collect it instead of "
@@ -339,7 +363,19 @@ def main(
             "spec_sha256": request["spec_sha256"],
             "status": "launched",
             "uploads": request["uploads"],
+            "application_id": app.app_id,
         }
+        if previous is not None:
+            from forge.core.hashing import sha256_file
+
+            receipt.update(
+                previous_call_receipt=dict(
+                    path=str(previous.relative_to(LOCAL_REPO)), sha256=str(sha256_file(previous))
+                ),
+                prior_terminal_status=terminal_status,
+                diagnosis=diagnosis,
+                automatic_retry=False,
+            )
         write_json(receipt_path, receipt)
         receipt["receipt_path"] = str(receipt_path)
         print(json.dumps(receipt, indent=2, sort_keys=True))

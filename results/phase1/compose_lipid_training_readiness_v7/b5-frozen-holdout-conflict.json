@@ -1,0 +1,233 @@
+{
+  "all_23_families_ready": false,
+  "conclusion": "Preserving the recovered historical global precursor holdout excludes the common vitamin-B5 core. Every supplied B5 row is protected. All-family training is incompatible with these frozen exclusions; this audit does not authorize changing them.",
+  "core_constitution": "CC(C)(CO)C(O)C(=O)NCCC(=O)O",
+  "eligible_rows": 0,
+  "family": "vitamin_b5_multistep",
+  "global_core_id": "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+  "historical_bindings": [
+    {
+      "binding_basis": [
+        "supplied_scoped_alias"
+      ],
+      "component_ids": [
+        "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1"
+      ],
+      "legacy_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987"
+    }
+  ],
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v7/audit_b5_holdout.py",
+    "sha256": "d33f9b6c7d9487e004afb69c85c74c187175db95d3c96d5a9a54237942fcea24"
+  },
+  "inputs": {
+    "catalogue": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+      "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+    },
+    "held_component_bindings": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-global-component-exclusions.json",
+      "sha256": "fb6f787f25660dbe6aa4a9c11670a0a6eae2d4ac4c6d68332ee63cd1f094365a"
+    },
+    "original_source_records": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-selected-groups-v2/records.jsonl.gz",
+      "sha256": "13e092f953cf9314d14745fd4547d7cf158dbedebd8f3b830ff7e2fc2f4c1ec9"
+    },
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "recipe_registry": {
+      "path": "data/vendor/qualified_b5_staged_source_program_v1.json",
+      "sha256": "0b908189bf09908b8d14d5e08b338291b57519becd2474de1c70548a97c7daa4"
+    }
+  },
+  "original_held_component_witnesses": [
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "0d095f487f58d8dbee29481e1d752f901faeb0aa9ece19a1e5150420217637a8"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "19cc5dd190222633a44285e994abcb411c7752372799d0d5f1b8791b6d1cb35e"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "272b106e13cb637787da1a4bed84f134a9b5a7bb05cd57a5b2c20a0e6ec330d8"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "305bd635dbdec061b549de5848d480f54014f50d185bdef059b008995b9c4c06"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "422aa9c83e7202b9bd0ea086c737511c95de4a0e8db6a64353c40ed8210f600b"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "5215e74e99971639547085317f9fa9cdbe0d0f12a12aedc17afe2100ede1884b"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "566eeee95a57bddf4954e28b7dcf2417f57b8bb2b3b136ffd708b0441d61bd87"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "67af3f0495ed22ec35428b5cb95caf49cdd907fde058ed451c665d634093a16e"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "8a509789e3c728dc25e18800aba07f8d8158e6a0b8daf4b29f2b41d4944d22e4"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "8a8afc3b5561e9800d24d85b1c4645b65ab3d4fc4e5ecdf9301ea66f57b564d3"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "a07793709b66640302558856167e175db148ea52eb8a36f8ba65bf4b8287039f"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "aa48239b5aa6e3a1e5b072fe604dacf90e56f9c5f5e6e7b227cbc41aeaf0c7c6"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "ab4071d86412ee9e037b64fd0930c8a0406b23c66fe5e38054fbb3f1a6a1c158"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "ad8d0587f6849dbaf3f8426d5f6ab2ce5f5620b26e274ae72259ae17cb908961"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_alcohol"
+        }
+      ],
+      "target_id": "b8d3043c19fb835aa76bf5be71130b905ef4b7862853657c1c9a8ae40e2a4fb5"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "d966b4aae50087b1f1383556d5f5e7c00c16169edf3d11d5453ed204e5abe9c5"
+    },
+    {
+      "family": "vitamin_b5_multistep",
+      "held_instances": [
+        {
+          "precursor_id": "d8f18dacc13dc1304a7a3e86f947241c02072760cf99104aee0b0a56c049d987",
+          "role": "source_carboxylic_acid"
+        }
+      ],
+      "target_id": "f7fa82ecaf7a6a2596b0d0d1e363da9b5573f10064b8d3402a047b7dcacfecb4"
+    }
+  ],
+  "remaining_protected_rows": [
+    {
+      "canonical_protected": 1,
+      "corrected_projection": "train",
+      "disposition": "protected",
+      "old_projection": "train",
+      "prior_protected": 1,
+      "target_id": "684d18efc6b25d71bc4881059790b547cd06b5f7713c06ef44abc7780f983dad"
+    }
+  ],
+  "rows_with_held_core": 80397,
+  "schema_version": "forge.compose_lipid_frozen_family_coverage_conflict.v1",
+  "seed": 0,
+  "source_rows": 80398,
+  "training_admitted": false,
+  "training_calls": 0
+}

@@ -1,0 +1,85 @@
+{
+  "budgeted_remote_compute_launched": false,
+  "date": "2026-09-20",
+  "full_universe_partition_requires_original_split_producers": true,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_all_family_validation_v1/closeout.py",
+    "sha256": "11cf81e5a0d6b5483c9890202912c1c2c84bdb681d1849112c5a2a343aaad460"
+  },
+  "inputs": {
+    "input_audit": {
+      "path": "results/phase1/compose_lipid_all_family_validation_v1/input-pin-audit.json",
+      "sha256": "c0a7303a20856a6d12542486fc634e2d473f0a08ab4ad3bfebe0816f25eb69f4"
+    },
+    "maleate_ester": {
+      "path": "results/phase1/compose_lipid_supplied_maleate_ester_v1/result.json",
+      "sha256": "f3277cad4766c76b5901c73619cb5946346bbce6466c04905bd277f933d564e1"
+    },
+    "readiness": {
+      "path": "results/phase1/compose_lipid_readiness_extension_v1/result.json",
+      "sha256": "4121357b25bc0758f853cc065ec9b1d763eafbb7ed1503c18819a03527ed311e"
+    },
+    "split_inputs": {
+      "path": "results/phase1/compose_lipid_training_readiness_v1/required-split-inputs.json",
+      "sha256": "b68c6dd5bb2bd9e550f1ca7f58bd7f327bb6b66482688c3f0584bb438d66c24a"
+    },
+    "thiol_a3": {
+      "path": "results/phase1/compose_lipid_supplied_thiol_a3_v1/result.json",
+      "sha256": "3af07effe7f95a04c9b0b1408a67324973fb82adea0d894d6e31f85d7b08a478"
+    },
+    "validation": {
+      "path": "results/phase1/compose_lipid_all_family_validation_v1/validation_report.json",
+      "sha256": "2482268b894d774859aef239c5b3db65af4a1a19bc6e2ebccaede2b0afe54f15"
+    },
+    "worklist": {
+      "path": "results/phase1/compose_lipid_training_readiness_v1/all-family-worklist.json",
+      "sha256": "477b151fdb0dab4d5556f7d610a56a4a3d72d669de4e2181de03cc197e4a846d"
+    }
+  },
+  "phase1_definition_of_done_met": false,
+  "remaining_gates": [
+    "qualified_full_universe_partition_and_constitutional_overlap",
+    "full_source_study_and_morphology_protection",
+    "remaining_source_program_qualification",
+    "full_size_representation_on_the_final_eligible_population",
+    "final_constitutional_deduplication_and_balanced_weights",
+    "repository_wide_tests"
+  ],
+  "schema_version": "forge.current_all_family_qualification_closeout.v1",
+  "seed": 0,
+  "status": "additional_computed_reconstructions_training_unqualified",
+  "summary": {
+    "eligible_records_pending_reconstruction": 42566,
+    "exact_computed_reconstructions": 34234,
+    "families_with_exact_computed_evidence": 12,
+    "formal_families": 23,
+    "formal_families_without_exact_reconstruction": 11,
+    "new_exact_reconstructions": 7615,
+    "source_records": 3182837
+  },
+  "training_admitted": false,
+  "training_calls": 0,
+  "training_ready": false,
+  "validation": {
+    "focused": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 567,
+      "skipped_or_xfailed": 0,
+      "total": 567
+    },
+    "full": {
+      "errors": 17,
+      "failures": 131,
+      "passed": 3177,
+      "skipped_or_xfailed": 92,
+      "total": 3417
+    },
+    "new_errors": [],
+    "new_failures": [],
+    "resolved_errors": [],
+    "resolved_failures": [],
+    "source_snapshot_unchanged": true,
+    "vendor_verify_exit_code": 0
+  }
+}

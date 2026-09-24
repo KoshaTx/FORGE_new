@@ -1,0 +1,699 @@
+{
+  "artifacts": {
+    "black.log": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/black.log",
+      "sha256": "46dd2b2515e04d20ad375b8ceb138cc8d9a3f8b3827ab92c626e093f411f32ca"
+    },
+    "focused-tests.log": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/focused-tests.log",
+      "sha256": "94e3086a2a3e85478793ead08895ddc5b31cac7c213b3441c8e1b5f0dda6acac"
+    },
+    "focused-tests.xml": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/focused-tests.xml",
+      "sha256": "69e10c25cfdf5725be74b873d324aaacc2079bf14ef30f0fe144599a90d1d45d"
+    },
+    "full-tests.log.gz": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/full-tests.log.gz",
+      "sha256": "5d9f612d00fe3faef4c9362e80882f236f113091ff7e53de1098c009b50769e8"
+    },
+    "full-tests.xml.gz": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/full-tests.xml.gz",
+      "sha256": "8e9529e1c588df5f2e27906de79f056a910247cf18f43e349a67bdeea3a8fd8c"
+    },
+    "ruff.log": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "source-location-check.json": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/source-location-check.json",
+      "sha256": "49cd02bbc01f3582812c000d05ec0bf2a94c523a5ee4381198e63e0e13fd36b1"
+    },
+    "summarize.py": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/summarize.py",
+      "sha256": "0c93b4492850c7fc5febd6f21b2a6e68c02d087d5c358983e7e8eee235457dff"
+    },
+    "verify.log": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/verify.log",
+      "sha256": "1bb9424e4698e60e1e3f0b010716950458028412b0303d5e85b466cba4375ffc"
+    }
+  },
+  "baseline": {
+    "counts": {
+      "duration_seconds": 637.465,
+      "errors": 21,
+      "failures": 148,
+      "passed": 2642,
+      "skipped_or_xfail": 92,
+      "tests": 2903
+    },
+    "errors": {
+      "tests.test_single_step_benchmark_manifest::test_adversarial_controls_are_valid_wrong_role_assignments": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_every_target_is_a_valid_connected_constitution": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_real_manifest_is_deterministic_disjoint_and_truth_separated": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_visibility_masks_hide_exact_truth_and_complete_held_families": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_duplicate_exact_component_identity_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_incomplete_owned_c18_assessment_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_hash_mismatch_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_with_c18_already_complete_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_repinned_broader_c18_config_fails_reproduction": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_frozen_protocol_validates_in_isolated_prereveal_view": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_future_dated_protocol_freeze_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_incomplete_c18_l3_evidence_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_retry_replanning_or_post_reveal_evidence_policy_cannot_be_relaxed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_blindness_receipt_is_invariant_to_arm_labels": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_component_targets_are_arm_independent": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_config_schema_and_scope_are_frozen": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_conservative_high_is_resolved_from_an_authoritative_source": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_every_candidate_carries_exact_constitutional_l1": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_drift_fails_closed": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_matches_frozen_expectation": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_potency_resolution_fails_closed_on_identity_mismatch": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\""
+    },
+    "failures": {
+      "tests.test_l2_forward_resolver::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: could not read resolver scope ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_l2_forward_resolver::test_real_resolver_replays_one_development_exact_pair_without_graph2edits": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_phase1_v5_morphology_config::test_v5_representation_config_is_hash_pinned_and_nonredundant": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/r0_lipid_morphology_audit.json').is_file",
+      "tests.test_single_step_proposal_benchmark::test_bound_production_contract_authenticates_but_remains_nonexecuting": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_hidden_truth_hash_or_output_grid_mutation_fails_closed": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_preflight_blocks_before_target_loader_or_lane_engine_is_called": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_runner_rejects_a_resolver_not_bound_to_the_contract": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark_v3::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_lane_qualification_spec::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/src/forge/route/proposal_engine.py').is_file",
+      "tests.test_synthesis_source_exact_route_replay::test_exact_c18_and_c16_source_replays_are_behavior_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_qualification::test_source_qualification_owns_all_behavior_preserving_replays": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_supersession::test_full_replay_is_behavior_preserving_and_does_not_rewrite_history": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_complete_dossier_census_is_exact_and_conservative": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz'",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "tests.test_ugi3_family_applicability_census::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_family_applicability_census::test_final_projected_family_census_is_deterministic_and_nonqualifying": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_fresh_pool_route_coverage_v4::test_exact_c18_refresh_changes_only_one_component_identity": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_base_v4_independently_has_expected_c16_occurrence_branches": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_exact_c16_refresh_changes_one_component_record_only": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_product_metadata_and_non_target_values_remain_unchanged": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v6::test_v6_requalifies_v5_without_changing_values": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v4_priority_config_pins_frozen_v5_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v5_priority_refresh_is_deterministic_nonselecting_and_evidence_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_exactly_one_authorized_c18_reversion_preserves_all_other_v5_records": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_input_hash_change_fails_closed": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_lineage_is_hash_bound_to_final_v5_and_immutable_v3": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_no_family_homologue_pair_or_holdout_promotion": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_parent_ledger_is_accepted_by_downstream_loader_without_building_pair": "forge.synthesis.assessment.ugi3_route_registry_pair_builder.Ugi3RouteRegistryPairBuilderError: invalid final component ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_graded_family_evidence_audit::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_graded_family_evidence_audit::test_final_v5_graded_audit_is_deterministic_nonselecting_and_nonprobabilistic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_high_leverage_head_terminals::test_high_leverage_head_terminal_audit_is_reproducible": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_high_leverage_head_terminals.py'",
+      "tests.test_ugi3_high_leverage_head_terminals::test_supplier_record_cannot_be_promoted_to_a_different_constitution": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_high_leverage_head_terminals.py'",
+      "tests.test_ugi3_high_leverage_head_terminals::test_supplier_record_without_current_item_availability_cannot_close": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_high_leverage_head_terminals.py'",
+      "tests.test_ugi3_high_leverage_head_terminals::test_typed_overlay_changes_only_the_two_exact_head_identities": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_high_leverage_head_terminals.py'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_every_component_is_missing_knowledge_nonpromoting_and_exactly_grouped": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_required_leaves_and_missing_evidence_are_explicit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_worklist_is_cardinality_minimal_and_matches_frozen_25pct_audit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_route_registry_pair_builder::test_checked_in_builder_is_bound_and_immutable_after_materialization": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_route_registry_pair_contract::test_live_protocol_fails_closed_after_one_shot_reveal": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "tests.test_ugi3_route_registry_pair_contract::test_snapshot_and_binding_hashes_are_deterministic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "tests.test_ugi3_second_wave_head_terminals::test_past_dated_listing_cannot_be_promoted": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_second_wave_head_terminals.py'",
+      "tests.test_ugi3_second_wave_head_terminals::test_second_wave_audit_is_reproducible": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_second_wave_head_terminals.py'",
+      "tests.test_ugi3_second_wave_head_terminals::test_second_wave_overlay_changes_only_propylamine": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_second_wave_head_terminals.py'",
+      "tests.test_ugi3_source_qualified_cumulative_inputs::test_source_qualified_inputs_reproduce_all_historical_science": "experiments.phase1.synthesis_guidance.sources.ugi3_source_qualified_cumulative_inputs.Ugi3SourceQualifiedCumulativeInputsError: source_qualification hash changed",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_exact_route_must_forward_reconstruct_target": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_nonclosing_procurement_cannot_be_promoted": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_targeted_exact_evidence_closes_four_targets_and_21_products": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_closes_only_four_authenticated_exact_targets": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_rejects_nonreproducible_stored_result": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_rejects_unowned_route_ledger": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_exact_overlay::test_unresolved_and_unrelated_targets_delegate_unchanged": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_aldehyde_evidence.py'",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_homologue_list_cannot_be_promoted_to_exact_target": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_role_gap_evidence.py'",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_role_gap_audit_admits_head_and_preserves_isocyanide_abstention": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_role_gap_evidence.py'",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_role_gap_overlay_closes_only_the_exact_head": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_targeted_role_gap_evidence.py'",
+      "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_third_wave_head_terminals.py'",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/route/ugi3_third_wave_head_terminals.py'",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_tampered_input_hash_fails_closed": "AssertionError: Regex pattern did not match.\n  Expected regex: 'input pin changed'\n  Actual message: 'input pin is not a regular file: shortlist_result'",
+      "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate": "forge.corpus.ugi_chemistry_corpus.UgiChemistryCorpusError: could not read /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_fresh_schedule_materializes_sampler_programs_without_outcomes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_candidate_schedule_v2/schedule.json'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_terminal_admission_is_separate_from_exact_l1": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_committed_current_source_receipt_matches_builder": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_current_source_and_locked_zero_guidance_values_requalify": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_requalify_ugi_current_source_zero_guidance.py",
+      "tests.test_ugi_decoration_checkpoint_confirmation_policy::test_confirmation_policy_is_frozen_and_hashes_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt",
+      "tests.test_ugi_decoration_coupling_production_fresh_census::test_fresh_census_programs_and_implementation_are_hash_pinned": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json').is_file",
+      "tests.test_ugi_decoration_coupling_production_refit_policy::test_production_refit_selection_and_data_hashes_are_frozen": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json').is_file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census::test_production_config_is_hash_pinned_and_calibration_only": "experiments.phase1.product_l1.sampling.terminal_census.UgiDynamicTerminalCensusError: frozen_programs is missing or is not a real file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census_validator::test_production_validator_config_is_pinned_and_read_only": "experiments.archive.phase1.design_audits.ugi_dynamic_frozen_prior_terminal_census_validator.UgiDynamicTerminalCensusValidationError: census_source pin changed",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_is_deterministic": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_restores_realistic_branch_support": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_graded_route_readiness_evaluator::test_frozen_evidence_and_proposal_indices_load": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_restartable_v2_preserves_all_old_batch_partitions": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_runner_plan_remains_fail_closed_for_nonzero_execution": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_frozen_first_assignment_expands_to_sixteen_groups_of_four": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_hela_potency_diagnostic::test_calibration_median_and_lower_values_are_neutral": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic::test_policy_regenerates_only_two_calibration_scales": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic_readiness::test_historical_checkpoint_coverage_is_reproduced_exactly": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_high_potency_challenger_adjudication::test_fresh_challenger_closes_potency_tilt_without_reopening_applicability": "experiments.phase1.hela_potency.morphology.ugi_high_potency_challenger_adjudication.HighPotencyChallengerAdjudicationError: invalid input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_contract_authenticates_schedule_and_structural_gate": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_exact_measured_candidate_is_structurally_neutral": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_fake_lane_runs_existing_identity_gate_and_captures_one_arm": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_frozen_matched_terminal_contract_has_full_three_arm_budget": "experiments.phase1.product_l1.sampling.ugi_matched_morphology_terminal_generation.UgiMatchedMorphologyTerminalGenerationError: pin changed: runner",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_schedule_validation_rejects_a_tampered_program_hash": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json'",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_returns_none_for_no_signal_or_safeguard_failure": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_selects_smallest_passing_maximizer": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_promotes_only_when_every_paired_seed_wins": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_rejects_incomplete_matrix_compute_drift_and_oracle_escape": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_finite_library_cannot_claim_beyond_catalog_primary_endpoint": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_frozen_plan_authenticates_and_derives_matched_schedule_budget": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_nonzero_guidance_runner::test_blocked_runner_plan_rederives_all_frozen_assignments": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_pins_all_seed_program_assignments": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_rejects_rehashed_program_tampering": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_branching_audit_is_deterministic_and_detects_tail_spacing_shift": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_held_component::test_postselection_evaluation_recomputes_deterministically": "forge.corpus.ugi_postselection_held_component.UgiPostselectionHeldComponentError: missing input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "tests.test_ugi_postselection_provenance::test_frozen_config_hashes_match_every_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_provenance::test_full_frozen_audit_matches_expected_counts_and_is_byte_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_potency_promotion_failure_audit::test_frozen_potency_failure_is_attributed_without_promoting_tilt": "experiments.archive.phase1.potency_audits.ugi_potency_promotion_failure_audit.PotencyPromotionFailureAuditError: invalid input JSON: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "tests.test_ugi_production_generator_manifest::test_production_generator_manifest_authenticates_all_pinned_artifacts": "AssertionError: results/phase1/ugi_program_prior_v4_selection_samples_1024.json\nassert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v4_selection_samples_1024.json').is_file",
+      "tests.test_ugi_production_generator_manifest::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json'",
+      "tests.test_ugi_production_generator_manifest::test_v3_production_generator_manifest_freezes_refit_selection": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v3.json'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration changed]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'declaration changed'\n  Actual message: 'binary_utility_source hash changed'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_pins_one_nonzero_synthesis_only_assignment": "experiments.phase1.synthesis_guidance.guidance.ugi_production_synthesis_guidance_seam_v4.UgiProductionSynthesisGuidanceSeamV4Error: binary_utility_source hash changed",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_derives_production_context_and_exact_internal_roles": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_rejects_wrong_l1_identity_exact_expiry_and_mutated_graph_support": "AssertionError: Regex pattern did not match.\n  Expected regex: 'context or internal-role qualification failed'\n  Actual message: 'cumulative production Ugi source failed authentication'",
+      "tests.test_ugi_production_terminal_route_evaluator::test_runtime_budget_clone_context_candidate_and_checkpoint_fail_closed": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_terminal_aware_factory_uses_composer_bound_cache_and_external_assessment": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[program_draw]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact program_draw SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_config]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_config SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_result]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_result SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_real_frozen_config_builds_only_the_typed_deterministic_schedule": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_route_reservation_is_derived_from_typed_context_and_scaled_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_terminal_decoder_identity_matches_selected_generator_lane_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_seam_v3::test_v3_seam_config_pins_complete_adapter_and_audit_chain": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_seam_v3.UgiProductionZeroGuidanceSeamV3Error: grouped_schedule hash changed",
+      "tests.test_ugi_program_prior_all_fold::test_all_fold_prior_strictly_extends_development_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v2.json'",
+      "tests.test_ugi_promoted_morphology_proposal::test_promoted_proposal_preserves_complete_support": "experiments.phase1.synthesis_guidance.guidance.ugi_promoted_morphology_proposal.UgiPromotedMorphologyProposalError: pin changed: baseline_full_ledger",
+      "tests.test_ugi_proposal_augmented_route_readiness::test_frozen_proposal_augmented_readiness_is_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_arm_label_cannot_change_zero_guidance_terminal_or_trace_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_generator_support_context_must_match_schedule_checkpoint": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_malformed_offspring_word_is_not_repaired_from_program_or_product": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_reconstruction_valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_smiles_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[offspring_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[program]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[smiles]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_component_identity_is_not_recovered_again_when_missing": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_record_is_a_copy_not_a_mutable_view_of_completion_row": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_real_frozen_sample_preserves_every_native_eligibility_field_exactly": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_schedule_must_bind_exact_native_program_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_route_completion_utility::test_censored_product_retains_none_and_receives_no_bonus": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_nonexact_l1_cannot_receive_positive_bonus_or_evidence_upgrade": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_v6_utility_census_and_sparse_signal_are_frozen": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy": "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.UgiSelectedRestartableGeneratorError: missing v2 production generator manifest: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_restartable_final_matches_direct_independent_stream_callback": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_fail_semantically_even_under_rehashed_payload": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_require_complete_canonical_coverage": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_frozen_v2_sources_remain_byte_identical": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/product/ugi_selected_restartable_generator_v2.py'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_independently_nonexact_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_invalid_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_invalid_and_nonexact_rows_are_sealed_without_route_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_program_decoder_requires_and_recovers_exact_canonical_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_l3_statement_is_frozen_assessment_only": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_requalifies_only_zero_guidance_prerequisites_against_v6": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_synthesis_guidance_failure_audit::test_frozen_failure_audit_rejects_synthesis_tilt": "experiments.archive.phase1.synthesis_value_audits.ugi_synthesis_guidance_failure_audit.UgiSynthesisGuidanceFailureAuditError: input changed: guidance_result",
+      "tests.test_ugi_zero_guidance_typed_audit::test_existing_zero_seam_is_partitioned_without_false_censors": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'",
+      "tests.test_ugi_zero_guidance_typed_audit::test_missing_support_record_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'"
+    },
+    "report": {
+      "path": "results/phase1/compose_lipid_v8_components_validation_v1/full-tests.xml.gz",
+      "sha256": "2732a217045e1c709bce11100cb0d3bbf28696fc0de0d2aa9dbe82c43602f3a4"
+    }
+  },
+  "call_accounting_scope": "No training or generation experiment was launched. Test-internal fixtures are outside these experiment counters.",
+  "checks": {
+    "all_new_location_tests_pass": true,
+    "all_v8_tests_pass": true,
+    "black_check_pass": true,
+    "ruff_check_pass": true,
+    "vendor_verification_pass": true,
+    "vendored_assets_verified": 30
+  },
+  "commands": {
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_core_input_locations.py tests/test_core_provenance_archive.py tests/test_pinned_sources_are_tracked.py tests/test_ugi3_targeted_aldehyde_evidence.py tests/test_ugi3_targeted_exact_overlay.py tests/test_ugi3_targeted_role_gap_evidence.py tests/test_ugi3_high_leverage_head_terminals.py tests/test_ugi3_second_wave_head_terminals.py tests/test_ugi3_third_wave_head_terminals.py --tb=short",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/forge-v8-portability-full-tests.xml' uv run make test",
+    "reproduce_summary": "python3 results/phase1/compose_lipid_v8_readiness_portability_v1/summarize.py",
+    "vendor": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run make verify"
+  },
+  "failure_comparison": {
+    "claim": "Test identity comparison; remaining causes are not all diagnosed.",
+    "new_failure_or_error_identities": [],
+    "removed_failure_or_error_identities": [
+      "tests.test_ugi3_high_leverage_head_terminals::test_high_leverage_head_terminal_audit_is_reproducible",
+      "tests.test_ugi3_high_leverage_head_terminals::test_supplier_record_cannot_be_promoted_to_a_different_constitution",
+      "tests.test_ugi3_high_leverage_head_terminals::test_supplier_record_without_current_item_availability_cannot_close",
+      "tests.test_ugi3_high_leverage_head_terminals::test_typed_overlay_changes_only_the_two_exact_head_identities",
+      "tests.test_ugi3_second_wave_head_terminals::test_past_dated_listing_cannot_be_promoted",
+      "tests.test_ugi3_second_wave_head_terminals::test_second_wave_audit_is_reproducible",
+      "tests.test_ugi3_second_wave_head_terminals::test_second_wave_overlay_changes_only_propylamine",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_exact_route_must_forward_reconstruct_target",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_nonclosing_procurement_cannot_be_promoted",
+      "tests.test_ugi3_targeted_aldehyde_evidence::test_targeted_exact_evidence_closes_four_targets_and_21_products",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_closes_only_four_authenticated_exact_targets",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_rejects_nonreproducible_stored_result",
+      "tests.test_ugi3_targeted_exact_overlay::test_overlay_rejects_unowned_route_ledger",
+      "tests.test_ugi3_targeted_exact_overlay::test_unresolved_and_unrelated_targets_delegate_unchanged",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_homologue_list_cannot_be_promoted_to_exact_target",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_role_gap_audit_admits_head_and_preserves_isocyanide_abstention",
+      "tests.test_ugi3_targeted_role_gap_evidence::test_role_gap_overlay_closes_only_the_exact_head"
+    ]
+  },
+  "focused": {
+    "counts": {
+      "duration_seconds": 20.864,
+      "errors": 0,
+      "failures": 3,
+      "passed": 43,
+      "skipped_or_xfail": 0,
+      "tests": 46
+    },
+    "errors": {},
+    "failures": {
+      "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html"
+    },
+    "report": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/focused-tests.xml",
+      "sha256": "69e10c25cfdf5725be74b873d324aaacc2079bf14ef30f0fe144599a90d1d45d"
+    }
+  },
+  "full": {
+    "counts": {
+      "duration_seconds": 616.34,
+      "errors": 21,
+      "failures": 131,
+      "passed": 2674,
+      "skipped_or_xfail": 92,
+      "tests": 2918
+    },
+    "errors": {
+      "tests.test_single_step_benchmark_manifest::test_adversarial_controls_are_valid_wrong_role_assignments": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_every_target_is_a_valid_connected_constitution": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_real_manifest_is_deterministic_disjoint_and_truth_separated": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_single_step_benchmark_manifest::test_visibility_masks_hide_exact_truth_and_complete_held_families": "failed on setup with \"forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/build_single_step_proposal_benchmark_manifest.py\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_duplicate_exact_component_identity_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_incomplete_owned_c18_assessment_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_hash_mismatch_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_parent_with_c18_already_complete_is_rejected": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_builder::test_repinned_broader_c18_config_fails_reproduction": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_frozen_protocol_validates_in_isolated_prereveal_view": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_future_dated_protocol_freeze_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_incomplete_c18_l3_evidence_fails_closed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi3_route_registry_pair_contract::test_retry_replanning_or_post_reveal_evidence_policy_cannot_be_relaxed": "failed on setup with \"AssertionError: assert False\n +  where False = exists()\n +    where exists = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/sample').exists\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_blindness_receipt_is_invariant_to_arm_labels": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_component_targets_are_arm_independent": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_config_schema_and_scope_are_frozen": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_conservative_high_is_resolved_from_an_authoritative_source": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_every_candidate_carries_exact_constitutional_l1": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_drift_fails_closed": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_population_matches_frozen_expectation": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\"",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_potency_resolution_fails_closed_on_identity_mismatch": "failed on setup with \"experiments.phase1.synthesis_guidance.route_cascade.UgiBoundedHybridRouteCascadeError: input pin is not a regular file: shortlist_result\""
+    },
+    "failures": {
+      "tests.test_l2_forward_resolver::test_real_development_manifest_is_deterministic_l2_only_and_not_benchmarked": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: could not read resolver scope ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_l2_forward_resolver::test_real_resolver_replays_one_development_exact_pair_without_graph2edits": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_phase1_v5_morphology_config::test_v5_representation_config_is_hash_pinned_and_nonredundant": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/r0_lipid_morphology_audit.json').is_file",
+      "tests.test_single_step_proposal_benchmark::test_bound_production_contract_authenticates_but_remains_nonexecuting": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_hidden_truth_hash_or_output_grid_mutation_fails_closed": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_preflight_blocks_before_target_loader_or_lane_engine_is_called": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_benchmark::test_runner_rejects_a_resolver_not_bound_to_the_contract": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze": "forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz",
+      "tests.test_single_step_proposal_benchmark_v3::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts": "forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: runner artifact is missing: /Users/rahulmaganti/Kosha/forge_new/src/forge/route/l2_forward_resolver.py",
+      "tests.test_single_step_proposal_lane_qualification_spec::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/src/forge/route/proposal_engine.py').is_file",
+      "tests.test_synthesis_source_exact_route_replay::test_exact_c18_and_c16_source_replays_are_behavior_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_qualification::test_source_qualification_owns_all_behavior_preserving_replays": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/src/forge/value/synthesis.py",
+      "tests.test_synthesis_source_supersession::test_full_replay_is_behavior_preserving_and_does_not_rewrite_history": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_synthesis_value_audit_v1/result.json",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_complete_dossier_census_is_exact_and_conservative": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz'",
+      "tests.test_ugi3_complete_computational_dossiers::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_dossier_coverage/component_dossier_ledger.csv.gz",
+      "tests.test_ugi3_family_applicability_census::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_family_applicability_census::test_final_projected_family_census_is_deterministic_and_nonqualifying": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/result.json",
+      "tests.test_ugi3_fresh_pool_route_coverage_v4::test_exact_c18_refresh_changes_only_one_component_identity": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v3/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_base_v4_independently_has_expected_c16_occurrence_branches": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_exact_c16_refresh_changes_one_component_record_only": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v5::test_product_metadata_and_non_target_values_remain_unchanged": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v4/product_synthesis_values.json.gz'",
+      "tests.test_ugi3_fresh_pool_route_coverage_v6::test_v6_requalifies_v5_without_changing_values": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v4_priority_config_pins_frozen_v5_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_fresh_pool_route_priority_v4::test_v5_priority_refresh_is_deterministic_nonselecting_and_evidence_preserving": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_exactly_one_authorized_c18_reversion_preserves_all_other_v5_records": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/component_synthesis_values.json.gz'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_input_hash_change_fails_closed": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_freeze_ugi3_parent_component_ledger.py",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_lineage_is_hash_bound_to_final_v5_and_immutable_v3": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_no_family_homologue_pair_or_holdout_promotion": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/result.json'",
+      "tests.test_ugi3_frozen_parent_component_ledger::test_parent_ledger_is_accepted_by_downstream_loader_without_building_pair": "forge.synthesis.assessment.ugi3_route_registry_pair_builder.Ugi3RouteRegistryPairBuilderError: invalid final component ledger: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_graded_family_evidence_audit::test_config_pins_every_frozen_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_graded_family_evidence_audit::test_final_v5_graded_audit_is_deterministic_nonselecting_and_nonprobabilistic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v5/result.json",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_every_component_is_missing_knowledge_nonpromoting_and_exactly_grouped": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_required_leaves_and_missing_evidence_are_explicit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_high_leverage_route_evidence_worklist::test_worklist_is_cardinality_minimal_and_matches_frozen_25pct_audit": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_priority_v4/result.json'",
+      "tests.test_ugi3_route_registry_pair_builder::test_checked_in_builder_is_bound_and_immutable_after_materialization": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_frozen_parent_component_ledger_v1/final_component_ledger.json.gz",
+      "tests.test_ugi3_route_registry_pair_contract::test_live_protocol_fails_closed_after_one_shot_reveal": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_route_saturation_holdout_v1/seal.json",
+      "tests.test_ugi3_route_registry_pair_contract::test_snapshot_and_binding_hashes_are_deterministic": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c18_route_v1/result.json",
+      "tests.test_ugi3_source_qualified_cumulative_inputs::test_source_qualified_inputs_reproduce_all_historical_science": "experiments.phase1.synthesis_guidance.sources.ugi3_source_qualified_cumulative_inputs.Ugi3SourceQualifiedCumulativeInputsError: source_qualification hash changed",
+      "tests.test_ugi3_third_wave_head_terminals::test_supplier_archive_tampering_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html'",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_audit_is_reproducible_and_archived": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "tests.test_ugi3_third_wave_head_terminals::test_third_wave_overlay_changes_only_cyclohexylamine": "forge.synthesis.terminals.ugi3_third_wave_head_terminals.Ugi3ThirdWaveHeadTerminalError: input supplier_page location or pinned content invalid: /Users/rahulmaganti/Kosha/forge_new/data/source_cache/phase1_ugi3_third_wave_head_terminals/chemimpex_03599_2026-08-01.html",
+      "tests.test_ugi_bounded_hybrid_route_cascade_v1::test_tampered_input_hash_fails_closed": "AssertionError: Regex pattern did not match.\n  Expected regex: 'input pin changed'\n  Actual message: 'input pin is not a regular file: shortlist_result'",
+      "tests.test_ugi_chemistry_interface::test_expanded_sparse_decorations_roundtrip_and_backpropagate": "forge.corpus.ugi_chemistry_corpus.UgiChemistryCorpusError: could not read /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_expanded_chemistry_exemplars/assignments.csv.gz'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_fresh_schedule_materializes_sampler_programs_without_outcomes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_candidate_schedule_v2/schedule.json'",
+      "tests.test_ugi_constrained_stochastic_production_candidates_v2::test_terminal_admission_is_separate_from_exact_l1": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_fresh_census_v1/shard_00/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_committed_current_source_receipt_matches_builder": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_current_source_zero_guidance_requalification_v1/result.json'",
+      "tests.test_ugi_current_source_zero_guidance_requalification::test_current_source_and_locked_zero_guidance_values_requalify": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/scripts/phase1_requalify_ugi_current_source_zero_guidance.py",
+      "tests.test_ugi_decoration_checkpoint_confirmation_policy::test_confirmation_policy_is_frozen_and_hashes_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_v1/challenger/checkpoint_step_1500.pt",
+      "tests.test_ugi_decoration_coupling_production_fresh_census::test_fresh_census_programs_and_implementation_are_hash_pinned": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_production_refit_v1/result.json').is_file",
+      "tests.test_ugi_decoration_coupling_production_refit_policy::test_production_refit_selection_and_data_hashes_are_frozen": "AssertionError: assert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_decoration_coupling_checkpoint_confirmation_v1/evaluation_v1.json').is_file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census::test_production_config_is_hash_pinned_and_calibration_only": "experiments.phase1.product_l1.sampling.terminal_census.UgiDynamicTerminalCensusError: frozen_programs is missing or is not a real file",
+      "tests.test_ugi_dynamic_frozen_prior_terminal_census_validator::test_production_validator_config_is_pinned_and_read_only": "experiments.archive.phase1.design_audits.ugi_dynamic_frozen_prior_terminal_census_validator.UgiDynamicTerminalCensusValidationError: census_source pin changed",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_is_deterministic": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_full_corpus_branch_exploration_schedule::test_full_corpus_schedule_restores_realistic_branch_support": "experiments.phase1.synthesis_guidance.schedule.ugi_full_corpus_branch_exploration_schedule.UgiFullCorpusBranchExplorationScheduleError: pin changed: all_fold_program_prior",
+      "tests.test_ugi_graded_route_readiness_evaluator::test_frozen_evidence_and_proposal_indices_load": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_restartable_v2_preserves_all_old_batch_partitions": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_restartable_sampler_equivalence_v2/result.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_current_runner_plan_remains_fail_closed_for_nonzero_execution": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_nonzero_guidance_runner_v1/plan.json'",
+      "tests.test_ugi_grouped_zero_guidance_identity::test_frozen_first_assignment_expands_to_sixteen_groups_of_four": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_hela_potency_diagnostic::test_calibration_median_and_lower_values_are_neutral": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic::test_policy_regenerates_only_two_calibration_scales": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_hela_potency_diagnostic_readiness::test_historical_checkpoint_coverage_is_reproduced_exactly": "experiments.phase1.hela_potency.evaluation.UgiHeLaPotencyDiagnosticError: oracle_worker hash changed",
+      "tests.test_ugi_high_potency_challenger_adjudication::test_fresh_challenger_closes_potency_tilt_without_reopening_applicability": "experiments.phase1.hela_potency.morphology.ugi_high_potency_challenger_adjudication.HighPotencyChallengerAdjudicationError: invalid input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_high_potency_challenger_v1_retry1/result.json",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_contract_authenticates_schedule_and_structural_gate": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_exact_measured_candidate_is_structurally_neutral": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_joint_kernel_lambda_zero_identity::test_fake_lane_runs_existing_identity_gate_and_captures_one_arm": "experiments.phase1.synthesis_guidance.guidance.ugi_joint_kernel_lambda_zero_identity.UgiJointKernelLambdaZeroError: lambda_zero_seam_source hash changed",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_frozen_matched_terminal_contract_has_full_three_arm_budget": "experiments.phase1.product_l1.sampling.ugi_matched_morphology_terminal_generation.UgiMatchedMorphologyTerminalGenerationError: pin changed: runner",
+      "tests.test_ugi_matched_morphology_terminal_generation::test_schedule_validation_rejects_a_tampered_program_hash": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_matched_morphology_allocation_schedule_v1/schedule.json'",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_returns_none_for_no_signal_or_safeguard_failure": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_calibration_selects_smallest_passing_maximizer": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_promotes_only_when_every_paired_seed_wins": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_evaluation_rejects_incomplete_matrix_compute_drift_and_oracle_escape": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_finite_library_cannot_claim_beyond_catalog_primary_endpoint": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_matched_synthesis_experiment::test_frozen_plan_authenticates_and_derives_matched_schedule_budget": "experiments.phase1.synthesis_guidance.contract.UgiMatchedSynthesisExperimentError: artifact program_draw is missing or outside the repository",
+      "tests.test_ugi_nonzero_guidance_runner::test_blocked_runner_plan_rederives_all_frozen_assignments": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_pins_all_seed_program_assignments": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_nonzero_guidance_runner::test_qualified_schedule_loader_rejects_rehashed_program_tampering": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_branching_audit_is_deterministic_and_detects_tail_spacing_shift": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_postselection_branching::test_frozen_config_hashes_match_inputs": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_held_component::test_postselection_evaluation_recomputes_deterministically": "forge.corpus.ugi_postselection_held_component.UgiPostselectionHeldComponentError: missing input: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_held_component_program_probe_v1_512.json",
+      "tests.test_ugi_postselection_provenance::test_frozen_config_hashes_match_every_input": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json",
+      "tests.test_ugi_postselection_provenance::test_full_frozen_audit_matches_expected_counts_and_is_byte_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_potency_promotion_failure_audit::test_frozen_potency_failure_is_attributed_without_promoting_tilt": "experiments.archive.phase1.potency_audits.ugi_potency_promotion_failure_audit.PotencyPromotionFailureAuditError: invalid input JSON: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_morphology_potency_matched_v1/result.json",
+      "tests.test_ugi_production_generator_manifest::test_production_generator_manifest_authenticates_all_pinned_artifacts": "AssertionError: results/phase1/ugi_program_prior_v4_selection_samples_1024.json\nassert False\n +  where False = is_file()\n +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v4_selection_samples_1024.json').is_file",
+      "tests.test_ugi_production_generator_manifest::test_v2_production_generator_manifest_freezes_confirmed_decoder_policy": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json'",
+      "tests.test_ugi_production_generator_manifest::test_v3_production_generator_manifest_freezes_refit_selection": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v3.json'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_fails_closed_on_scope_seed_or_strength_changes[field_path3-0.5-declaration changed]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'declaration changed'\n  Actual message: 'binary_utility_source hash changed'",
+      "tests.test_ugi_production_synthesis_guidance_seam_v4::test_v4_config_pins_one_nonzero_synthesis_only_assignment": "experiments.phase1.synthesis_guidance.guidance.ugi_production_synthesis_guidance_seam_v4.UgiProductionSynthesisGuidanceSeamV4Error: binary_utility_source hash changed",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_derives_production_context_and_exact_internal_roles": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_factory_rejects_wrong_l1_identity_exact_expiry_and_mutated_graph_support": "AssertionError: Regex pattern did not match.\n  Expected regex: 'context or internal-role qualification failed'\n  Actual message: 'cumulative production Ugi source failed authentication'",
+      "tests.test_ugi_production_terminal_route_evaluator::test_runtime_budget_clone_context_candidate_and_checkpoint_fail_closed": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_terminal_route_evaluator::test_terminal_aware_factory_uses_composer_bound_cache_and_external_assessment": "experiments.phase1.synthesis_guidance.schedule.ugi_production_terminal_route_evaluator.UgiProductionTerminalRouteEvaluatorError: cumulative production Ugi source failed authentication",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[program_draw]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact program_draw SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_config]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_config SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_every_on_disk_artifact_pin_fails_closed[restartable_equivalence_result]": "AssertionError: Regex pattern did not match.\n  Expected regex: 'artifact restartable_equivalence_result SHA-256 mismatch'\n  Actual message: 'artifact program_draw is missing or leaves the repository'",
+      "tests.test_ugi_production_zero_guidance_config::test_real_frozen_config_builds_only_the_typed_deterministic_schedule": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_route_reservation_is_derived_from_typed_context_and_scaled_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_config::test_terminal_decoder_identity_matches_selected_generator_lane_exactly": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_config.UgiProductionZeroGuidanceConfigError: artifact program_draw is missing or leaves the repository",
+      "tests.test_ugi_production_zero_guidance_seam_v3::test_v3_seam_config_pins_complete_adapter_and_audit_chain": "experiments.phase1.synthesis_guidance.guidance.ugi_production_zero_guidance_seam_v3.UgiProductionZeroGuidanceSeamV3Error: grouped_schedule hash changed",
+      "tests.test_ugi_program_prior_all_fold::test_all_fold_prior_strictly_extends_development_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_program_prior_v2.json'",
+      "tests.test_ugi_promoted_morphology_proposal::test_promoted_proposal_preserves_complete_support": "experiments.phase1.synthesis_guidance.guidance.ugi_promoted_morphology_proposal.UgiPromotedMorphologyProposalError: pin changed: baseline_full_ledger",
+      "tests.test_ugi_proposal_augmented_route_readiness::test_frozen_proposal_augmented_readiness_is_deterministic": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_graded_family_evidence_audit_v1/graded_family_evidence_ledger.csv.gz'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_arm_label_cannot_change_zero_guidance_terminal_or_trace_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_generator_support_context_must_match_schedule_checkpoint": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_malformed_offspring_word_is_not_repaired_from_program_or_product": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_reconstruction_valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[component_smiles_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[offspring_by_role]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[program]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[smiles]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_missing_native_field_is_never_reconstructed[valid]": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_component_identity_is_not_recovered_again_when_missing": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_native_record_is_a_copy_not_a_mutable_view_of_completion_row": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_real_frozen_sample_preserves_every_native_eligibility_field_exactly": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_restartable_terminal_support_adapter::test_schedule_must_bind_exact_native_program_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_route_completion_utility::test_censored_product_retains_none_and_receives_no_bonus": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_nonexact_l1_cannot_receive_positive_bonus_or_evidence_upgrade": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/product_synthesis_values.json.gz'",
+      "tests.test_ugi_route_completion_utility::test_v6_utility_census_and_sparse_signal_are_frozen": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_lane_binds_current_checkpoint_decoder_and_branch_policy": "experiments.phase1.product_l1.sampling.ugi_selected_restartable_generator.UgiSelectedRestartableGeneratorError: missing v2 production generator manifest: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_product_l1_production_generator_v2.json",
+      "tests.test_ugi_selected_guidance_adapter_v2::test_v2_restartable_final_matches_direct_independent_stream_callback": "experiments.phase1.synthesis_guidance.schedule.ugi_nonzero_guidance_runner.UgiNonzeroGuidanceRunnerError: invalid grouped SMC schedule qualification: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_grouped_smc_schedule_qualification_v1/result.json",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_fail_semantically_even_under_rehashed_payload": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_comparison_rows_require_complete_canonical_coverage": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_selected_v2_pool_singleton_equivalence_v2/comparison_rows.json'",
+      "tests.test_ugi_selected_guidance_adapter_v3::test_frozen_v2_sources_remain_byte_identical": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/src/forge/product/ugi_selected_restartable_generator_v2.py'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_independently_nonexact_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_callback_seals_invalid_native_row_without_retry": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_invalid_and_nonexact_rows_are_sealed_without_route_support": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_selected_restartable_generator::test_program_decoder_requires_and_recovers_exact_canonical_bytes": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_architecture_selection_v3/full_step1000/result.json'",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_l3_statement_is_frozen_assessment_only": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_source_guidance_prerequisite_requalification::test_requalifies_only_zero_guidance_prerequisites_against_v6": "forge.corpus.r1_prime_audit.AuditError: required input not found: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_fresh_pool_route_coverage_v6/result.json",
+      "tests.test_ugi_synthesis_guidance_failure_audit::test_frozen_failure_audit_rejects_synthesis_tilt": "experiments.archive.phase1.synthesis_value_audits.ugi_synthesis_guidance_failure_audit.UgiSynthesisGuidanceFailureAuditError: input changed: guidance_result",
+      "tests.test_ugi_zero_guidance_typed_audit::test_existing_zero_seam_is_partitioned_without_false_censors": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'",
+      "tests.test_ugi_zero_guidance_typed_audit::test_missing_support_record_fails_closed": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi_production_zero_guidance_seam_v2/run.json'"
+    },
+    "report": {
+      "path": "results/phase1/compose_lipid_v8_readiness_portability_v1/full-tests.xml.gz",
+      "sha256": "8e9529e1c588df5f2e27906de79f056a910247cf18f43e349a67bdeea3a8fd8c"
+    }
+  },
+  "generation_calls": 0,
+  "git_head": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e",
+  "inputs": {
+    "Makefile": {
+      "path": "Makefile",
+      "sha256": "fb83da159f3eb5710c045f7c84eb6834554478487ff130fc4163115f5d207833"
+    },
+    "configs/route/phase1_ugi3_high_leverage_head_terminal_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_high_leverage_head_terminal_audit_v1.json",
+      "sha256": "2753c15906699a991ad50edd53771b981f57ee8d392f97c9b771de9f01272cbb"
+    },
+    "configs/route/phase1_ugi3_second_wave_head_terminal_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_second_wave_head_terminal_audit_v1.json",
+      "sha256": "4854b4769ef7e7fe0a9a39e6b8a6c690b9ec1cd1cde248e4d204bee974aa23c2"
+    },
+    "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json",
+      "sha256": "b271127faeb78eebcb00c3c23e5e8e0c810f1aa08ddd3c8587c3bb00df403e42"
+    },
+    "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json",
+      "sha256": "a4c2f40eed36187e4acae4872394cd97890f7215e90a84d1aabeb5419cde2941"
+    },
+    "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json": {
+      "path": "configs/route/phase1_ugi3_third_wave_head_terminal_audit_v1.json",
+      "sha256": "5951ae7d0fca7896e611a48da68450aab63dd64e2fd853ff2e458d9b0ccfcabe"
+    },
+    "docs/artifact_path_moves.json": {
+      "path": "docs/artifact_path_moves.json",
+      "sha256": "4a19badcdcbf694441883546a0e8b558b35994fa0f1912a694c88b89af07248c"
+    },
+    "experiments/_runtime/historical.py": {
+      "path": "experiments/_runtime/historical.py",
+      "sha256": "f39420c753661c678359b1c6af525037dedd9a82ab7b55acc132aed6f789da06"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/core/input_locations.py": {
+      "path": "forge/core/input_locations.py",
+      "sha256": "b0d09218dc3f5fc6adf66a1b5446e8c5a54517a63fba75603805ef2422c2021d"
+    },
+    "forge/synthesis/evidence/ugi3_targeted_exact_overlay.py": {
+      "path": "forge/synthesis/evidence/ugi3_targeted_exact_overlay.py",
+      "sha256": "fc808cc3c13a4de4d0a2d31aede39512ec11c1aa12b31c8dfc676bf1292900d7"
+    },
+    "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py": {
+      "path": "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py",
+      "sha256": "ee7234388758775084e0a9ae060386ad6a7daac78601776078c791035a38c605"
+    },
+    "forge/synthesis/terminals/ugi3_second_wave_head_terminals.py": {
+      "path": "forge/synthesis/terminals/ugi3_second_wave_head_terminals.py",
+      "sha256": "ffb49bb82341e1ada8fa83a521cf209cf6bc1cfabc3730a12eddbfc26caaeb81"
+    },
+    "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py": {
+      "path": "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py",
+      "sha256": "1f74c3996b4b4d93610a2d46ecec900c6614ffbfaebdf6e8e907f68832c37a9a"
+    },
+    "provenance/frozen-code/manifest.json": {
+      "path": "provenance/frozen-code/manifest.json",
+      "sha256": "25bb7e5fc8b68786bf0cdb741c17ee7b61aaa40a36ecd690c051fe6bec8281b3"
+    },
+    "provenance/frozen-code/sha256/0f/0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40": {
+      "path": "provenance/frozen-code/sha256/0f/0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40",
+      "sha256": "0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40"
+    },
+    "provenance/frozen-code/sha256/15/15a495f71f2a744d86790a8f5be7d8684c09608f3282c08ec72626d014d91f17": {
+      "path": "provenance/frozen-code/sha256/15/15a495f71f2a744d86790a8f5be7d8684c09608f3282c08ec72626d014d91f17",
+      "sha256": "15a495f71f2a744d86790a8f5be7d8684c09608f3282c08ec72626d014d91f17"
+    },
+    "provenance/frozen-code/sha256/67/67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf": {
+      "path": "provenance/frozen-code/sha256/67/67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf",
+      "sha256": "67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf"
+    },
+    "provenance/frozen-code/sha256/fc/fc791a6743b62d286d230d5b13f3190ec65aefa8cfb69d2b3db6b822b3fdf4cb": {
+      "path": "provenance/frozen-code/sha256/fc/fc791a6743b62d286d230d5b13f3190ec65aefa8cfb69d2b3db6b822b3fdf4cb",
+      "sha256": "fc791a6743b62d286d230d5b13f3190ec65aefa8cfb69d2b3db6b822b3fdf4cb"
+    },
+    "pyproject.toml": {
+      "path": "pyproject.toml",
+      "sha256": "690da0edf154810f22d4ea7d8def78a0bc89871196f57f0261cae484a97cec47"
+    },
+    "results/phase1/compose_lipid_v8_components_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_components_v1/result.json",
+      "sha256": "55ff93818a30a3d6e2ddfda4145617ac9127c36de8a3a395b9beaaf909cedfa8"
+    },
+    "results/phase1/compose_lipid_v8_import_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "results/phase1/compose_lipid_v8_pretraining_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_v1/result.json",
+      "sha256": "d7696020e636fc7d1eea326fe4c19bb6ee56f51f6d1bc6bac7c96151afc96145"
+    },
+    "results/phase1/compose_lipid_v8_representation_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_representation_v1/result.json",
+      "sha256": "b25a0be8940e5eab751c9e4a4a98f1989b488b8090301246aaa55f32c04664c2"
+    },
+    "tests/test_core_input_locations.py": {
+      "path": "tests/test_core_input_locations.py",
+      "sha256": "f3f2ad6c9e6f0ca7fb5f27bfa571b6e0b4a098ddbe20d783f9505ad756bca695"
+    },
+    "tests/test_ugi3_high_leverage_head_terminals.py": {
+      "path": "tests/test_ugi3_high_leverage_head_terminals.py",
+      "sha256": "e42c2af9baca4578c5e921aad0190ee0deb5e42172baec9faab076c4498b7609"
+    },
+    "tests/test_ugi3_second_wave_head_terminals.py": {
+      "path": "tests/test_ugi3_second_wave_head_terminals.py",
+      "sha256": "80ec3031fff24b871ae157fc98365fc7bf2cef68eba177ea3e140d7d7560b34c"
+    },
+    "tests/test_ugi3_targeted_aldehyde_evidence.py": {
+      "path": "tests/test_ugi3_targeted_aldehyde_evidence.py",
+      "sha256": "3846f77d58e7b6dbb32380b69e3824bf141f8b9655c52f476db9319d7b4fed09"
+    },
+    "tests/test_ugi3_targeted_exact_overlay.py": {
+      "path": "tests/test_ugi3_targeted_exact_overlay.py",
+      "sha256": "4407961500d56880b7ab4b382c81aef2b2d5894dc211331bd945cce96a99a1fd"
+    },
+    "tests/test_ugi3_targeted_role_gap_evidence.py": {
+      "path": "tests/test_ugi3_targeted_role_gap_evidence.py",
+      "sha256": "6fde14f317ba8f8685a0fce22c3e3e54055b7999632b044fb74596fb2475cfa0"
+    },
+    "tests/test_ugi3_third_wave_head_terminals.py": {
+      "path": "tests/test_ugi3_third_wave_head_terminals.py",
+      "sha256": "1334f3b426d15c906002d15e43d58e3dd46a27c351c7ef60876966350852fa15"
+    },
+    "uv.lock": {
+      "path": "uv.lock",
+      "sha256": "74431141e8cf57bde909e71528c539d1338040f40407810c85ec81b788cc3942"
+    }
+  },
+  "phase1_definition_of_done_met": false,
+  "prechange_source_archive_entries": [
+    {
+      "blob_path": "provenance/frozen-code/sha256/15/15a495f71f2a744d86790a8f5be7d8684c09608f3282c08ec72626d014d91f17",
+      "original_path": "forge/synthesis/evidence/ugi3_targeted_exact_overlay.py",
+      "sha256": "15a495f71f2a744d86790a8f5be7d8684c09608f3282c08ec72626d014d91f17",
+      "source": {
+        "captured_at_utc": "2026-09-18T16:04:15.122419+00:00",
+        "kind": "prechange_worktree",
+        "reason": "Input location authentication and replay portability; preserve prior source bytes"
+      }
+    },
+    {
+      "blob_path": "provenance/frozen-code/sha256/67/67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf",
+      "original_path": "forge/synthesis/terminals/ugi3_high_leverage_head_terminals.py",
+      "sha256": "67108c1929aaff261678d9b9ffc0e2d510286c183b3b2163c062cbcb8cb23faf",
+      "source": {
+        "captured_at_utc": "2026-09-18T16:04:15.122633+00:00",
+        "kind": "prechange_worktree",
+        "reason": "Input location authentication and replay portability; preserve prior source bytes"
+      }
+    },
+    {
+      "blob_path": "provenance/frozen-code/sha256/fc/fc791a6743b62d286d230d5b13f3190ec65aefa8cfb69d2b3db6b822b3fdf4cb",
+      "original_path": "forge/synthesis/terminals/ugi3_second_wave_head_terminals.py",
+      "sha256": "fc791a6743b62d286d230d5b13f3190ec65aefa8cfb69d2b3db6b822b3fdf4cb",
+      "source": {
+        "captured_at_utc": "2026-09-18T16:04:15.122764+00:00",
+        "kind": "prechange_worktree",
+        "reason": "Input location authentication and replay portability; preserve prior source bytes"
+      }
+    },
+    {
+      "blob_path": "provenance/frozen-code/sha256/0f/0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40",
+      "original_path": "forge/synthesis/terminals/ugi3_third_wave_head_terminals.py",
+      "sha256": "0fc364d478bd68c765d909bcffedc0d6787850c6a5b4c4d7ce687f611f91af40",
+      "source": {
+        "captured_at_utc": "2026-09-18T16:04:15.122883+00:00",
+        "kind": "prechange_worktree",
+        "reason": "Input location authentication and replay portability; preserve prior source bytes"
+      }
+    }
+  ],
+  "random_sampling_used": false,
+  "schema_version": "forge.compose_lipid_v8_readiness_portability.v1",
+  "scope": [
+    "Authenticate relocated source by its declared path and exact SHA-256.",
+    "Normalize only authenticated inputs.*.path in historical result comparisons.",
+    "Keep all chemistry assertions, source/data digests and ledger checks intact.",
+    "Read source as evidence bytes; do not execute the archived modules.",
+    "No supplier retrieval, new procurement qualification or training occurred.",
+    "Existing v8 source-program and precursor qualification holds remain in force."
+  ],
+  "status": "historical_replay_portability_improved_training_unqualified",
+  "test_function_preservation": {
+    "tests/test_ugi3_high_leverage_head_terminals.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_high_leverage_head_terminals.py",
+      "base_sha256": "a00edb5db9fcb72b171478c3b437ed0fc827d3336a7a5d0a26f9dc1b325149bc",
+      "current": {
+        "path": "tests/test_ugi3_high_leverage_head_terminals.py",
+        "sha256": "e42c2af9baca4578c5e921aad0190ee0deb5e42172baec9faab076c4498b7609"
+      }
+    },
+    "tests/test_ugi3_second_wave_head_terminals.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_second_wave_head_terminals.py",
+      "base_sha256": "4d3bd0cf49873bd50d7ecbb2f712587674c14d6cd012a9382c8c0f77f33f8bbb",
+      "current": {
+        "path": "tests/test_ugi3_second_wave_head_terminals.py",
+        "sha256": "80ec3031fff24b871ae157fc98365fc7bf2cef68eba177ea3e140d7d7560b34c"
+      }
+    },
+    "tests/test_ugi3_targeted_aldehyde_evidence.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_targeted_aldehyde_evidence.py",
+      "base_sha256": "21d19013e17038052159c73b80cafaf9e99c734674d56fc025eb4f2a7dd815e9",
+      "current": {
+        "path": "tests/test_ugi3_targeted_aldehyde_evidence.py",
+        "sha256": "3846f77d58e7b6dbb32380b69e3824bf141f8b9655c52f476db9319d7b4fed09"
+      }
+    },
+    "tests/test_ugi3_targeted_exact_overlay.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_targeted_exact_overlay.py",
+      "base_sha256": "3dde7c835e304b95407732962ce3f5b6f91606e49471cdd7773a49aaafad705d",
+      "current": {
+        "path": "tests/test_ugi3_targeted_exact_overlay.py",
+        "sha256": "4407961500d56880b7ab4b382c81aef2b2d5894dc211331bd945cce96a99a1fd"
+      }
+    },
+    "tests/test_ugi3_targeted_role_gap_evidence.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_targeted_role_gap_evidence.py",
+      "base_sha256": "12a7bc7770db24ce09653cdbd0e49587b302ee9fe4959ad1e569a6ab8b206152",
+      "current": {
+        "path": "tests/test_ugi3_targeted_role_gap_evidence.py",
+        "sha256": "6fde14f317ba8f8685a0fce22c3e3e54055b7999632b044fb74596fb2475cfa0"
+      }
+    },
+    "tests/test_ugi3_third_wave_head_terminals.py": {
+      "all_test_and_helper_function_asts_unchanged": true,
+      "base_git_object": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e:tests/test_ugi3_third_wave_head_terminals.py",
+      "base_sha256": "49e62682586b5db4e6dd8656f768cfabd4b0091716ec9c45f188b166b9953825",
+      "current": {
+        "path": "tests/test_ugi3_third_wave_head_terminals.py",
+        "sha256": "1334f3b426d15c906002d15e43d58e3dd46a27c351c7ef60876966350852fa15"
+      }
+    }
+  },
+  "training_calls": 0,
+  "training_ready": false
+}

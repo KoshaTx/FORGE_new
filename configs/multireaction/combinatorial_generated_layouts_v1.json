@@ -1,0 +1,64 @@
+{
+  "acceptance": "Report qualification and distinct context counts in every family. Novelty in ignored morphology or component metadata is not evidence of novel sparse-flow input. Retain every original attempt and all exact witness alternatives; abstain on ambiguity within any witness.",
+  "inputs": {
+    "cache": {
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    },
+    "checkpoint": {
+      "path": "results/phase1/combinatorial_checkpoint_v1/checkpoint.json",
+      "sha256": "6d2851a250310661d20a8b6989fd494e81b82e92ed8e742c8fc748ba201ec787"
+    },
+    "dataset_config": {
+      "path": "configs/multireaction/library_program_dataset_v1.json",
+      "sha256": "7089b6c7a60d52474e0b34f6d2dae3e6df6190e2bbbb7e4a8d9b010a3a31a13f"
+    },
+    "parent_result": {
+      "path": "results/phase1/combinatorial_connection_reuse_discovery_v1/result.json",
+      "sha256": "0f912710d1f4fdbe3c7e3f1fee1478a2ff84bd1196b5c0fa7234eea87534e76a"
+    },
+    "semantic_config": {
+      "path": "configs/multireaction/combinatorial_program_semantics_v1.json",
+      "sha256": "3de95f770611227f2c56ba8ebe9495b6c31dc8c9a0ae233514d523e9c1865778"
+    }
+  },
+  "policy": {
+    "all_exact_program_alternatives_retained": true,
+    "all_original_attempts_retained": true,
+    "gate_changes": false,
+    "neural_generation_calls": 0,
+    "new_random_sampling": false,
+    "reference_fold": "train",
+    "remote_compute": false,
+    "training_calls": 0,
+    "within_witness_semantic_ambiguity": "abstain"
+  },
+  "question": "Can generated products themselves supply exact reaction-program contexts absent from every TRAIN layout, in all twelve families?",
+  "schema_version": "forge.combinatorial_generated_layouts.v1_config",
+  "source_pins": [
+    {
+      "path": "forge/model/generated_program_layout.py",
+      "sha256": "812f1aa3573ca1a470d23d1241aeefefa392a094b908e3ea75948f84aed3d8be"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_generated_layouts.py",
+      "sha256": "7ddc97db11426b8c3069f37c33b25db165bebe13256d3435345c31c93d5fe9af"
+    },
+    {
+      "path": "forge/model/reaction_program_flow.py",
+      "sha256": "4d14a50df4858bc917560981636fdd0775fa792a0e9498b8c3d0f5775749c5a9"
+    },
+    {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    {
+      "path": "forge/assembly/library_semantics.py",
+      "sha256": "e63eb49511d27e249b50217b48df164eb1134935670386075362be4ebd8093bb"
+    },
+    {
+      "path": "forge/potency/annotations.py",
+      "sha256": "9ffeee87446623832a7030df0bce1a10285a7857aa7dc7dddcef306f59bfe18e"
+    }
+  ]
+}

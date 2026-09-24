@@ -1,0 +1,303 @@
+{
+  "counts": {
+    "eligible_rows": 4077,
+    "exact_rows": 3028,
+    "failed_tail_claims": 1057,
+    "pending_rows": 1049
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v4/audit_b5_sources.py",
+    "sha256": "276ffa59c23397e197ccfe37993c6324613e331de29191480e687c871bde5fa8"
+  },
+  "inputs": {
+    "original_tasks": {
+      "path": "results/phase1/compose_lipid_b5_original_tasks_v1/result.json",
+      "sha256": "0bb8a27e862ed22a07648c54d79108631faf6ef26bdc1d77e1a301e4857f879e"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_b5_staged_source_program_v1.json",
+      "sha256": "0b908189bf09908b8d14d5e08b338291b57519becd2474de1c70548a97c7daa4"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_supplied_b5_v1/result.json",
+      "sha256": "de301d449e80da130f60774489f7ef3253f3b9c2a2e8d0ae622f2859fec731c6"
+    },
+    "replay_ledger": {
+      "path": "results/phase1/compose_lipid_supplied_b5_v1/replay.jsonl.gz",
+      "sha256": "08e57aebf739177562442a1d9977e338dd093894f3c901dbaa489d4a7da8fad0"
+    },
+    "source_controls": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    }
+  },
+  "next_adjudication": "All source-label conflicts stay pending. Preserve original task and exported metadata; any separate computed-variant qualification must explicitly reject the incorrect reported identity and independently justify its same-series precursor and attachment scope.",
+  "product_matching_used_to_resolve_source_claims": false,
+  "reported_label_interpretation": "The current conservative contract binds reported_tail_acid to the source series and attachment site. The task string itself is not site-namespaced. These are disagreements with that contract, not a conclusion that the supplied structures were never reported anywhere in the B5 study.",
+  "schema_version": "forge.b5_source_scope_audit.v1",
+  "seed": 0,
+  "source_claim_disagreements": [
+    {
+      "claim": {
+        "actual_source_identity": "source_compound_11_glutarate",
+        "axis": "reported_tail_acid",
+        "expected_source_identities": [
+          "source_compound_18_malonate"
+        ],
+        "profile": "one_tail_acid_knob_alcohol",
+        "role": "tail_acid_1",
+        "rule_kind": "reported"
+      },
+      "example": {
+        "actual_component_smiles": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+        "component_instances": [
+          [
+            "head_nucleophile",
+            "1eb8942d042a71acc9686b6d92e7e0eb964376eee5e08b76e012bc4ab0b77281",
+            1
+          ],
+          [
+            "tail_acid_1",
+            "2d98383c21d226542203563ce4152391d6824c8274a8ef34971f44313d48e02a",
+            1
+          ],
+          [
+            "tail_acid_2",
+            "d3ae7bebb48fd993a7bf0390c09b57c7906a9e4cc44054c1d56fce8b3cb43e26",
+            1
+          ],
+          [
+            "vitamin_b5_core",
+            "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+            1
+          ]
+        ],
+        "expected_component_smiles": [
+          "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O"
+        ],
+        "original_task_reference": {
+          "line": 1790,
+          "path": "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/05.jsonl.gz",
+          "payload_sha256": "9713b192d2c967cea760773c63e24c6a1ccdd9c93c7fa61e050b2ee292bd96ed",
+          "sha256": "04a264cc3950152f7d48269f4f63de8c30d8961a447b3f67fa23a1d03aa5fafc"
+        },
+        "target_id": "011669edb447b152c7c619f6eb34537e88f2554a569d9d14c8b3c92c446981de"
+      },
+      "rows": 337
+    },
+    {
+      "claim": {
+        "actual_source_identity": "source_compound_11_glutarate",
+        "axis": "reported_tail_acid",
+        "expected_source_identities": [
+          "source_compound_18_malonate"
+        ],
+        "profile": "one_tail_acid_knob_amine",
+        "role": "tail_acid_1",
+        "rule_kind": "reported"
+      },
+      "example": {
+        "actual_component_smiles": "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O",
+        "component_instances": [
+          [
+            "head_nucleophile",
+            "ab6cbee47a0ceb27fa0354673a0fc79a50a77bb4ee355f3558c8d905787e54b3",
+            1
+          ],
+          [
+            "tail_acid_1",
+            "2d98383c21d226542203563ce4152391d6824c8274a8ef34971f44313d48e02a",
+            1
+          ],
+          [
+            "tail_acid_2",
+            "72e2f429bd303810aedb43ad9a88959ec7a2730bd12a789fb4cbb711d1d6d3a9",
+            1
+          ],
+          [
+            "vitamin_b5_core",
+            "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+            1
+          ]
+        ],
+        "expected_component_smiles": [
+          "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O"
+        ],
+        "original_task_reference": {
+          "line": 1377,
+          "path": "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/04.jsonl.gz",
+          "payload_sha256": "fc9ba4fa8380b69352d4222a6294d3d18eb896de7d9bb453f63286a0451ae901",
+          "sha256": "0249225032b7703dbe16eed5a2d3a851649a95adc714a6c2926fd1d39bc4f751"
+        },
+        "target_id": "027f61e18ab6c3325f44be1a6cbad4ff54c80104a16d850125fd42bd287d3454"
+      },
+      "rows": 74
+    },
+    {
+      "claim": {
+        "actual_source_identity": "source_compound_18_malonate",
+        "axis": "reported_tail_acid",
+        "expected_source_identities": [
+          "source_compound_11_glutarate"
+        ],
+        "profile": "one_tail_acid_knob_alcohol",
+        "role": "tail_acid_2",
+        "rule_kind": "reported"
+      },
+      "example": {
+        "actual_component_smiles": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+        "component_instances": [
+          [
+            "head_nucleophile",
+            "741e0ff635e55242d3cd96646c051a18eea893f4daef7f483fbd1bc2efbe917e",
+            1
+          ],
+          [
+            "tail_acid_1",
+            "27a915abb05831b888ac3210a6f3e94f0ecc42e6d0b2a3488e9eec1059bee23a",
+            1
+          ],
+          [
+            "tail_acid_2",
+            "765c1ec774d7cb80fad604480c42dfbffcb61e072aad0dc63e9c769b8aed71ca",
+            1
+          ],
+          [
+            "vitamin_b5_core",
+            "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+            1
+          ]
+        ],
+        "expected_component_smiles": [
+          "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O"
+        ],
+        "original_task_reference": {
+          "line": 2563,
+          "path": "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/25.jsonl.gz",
+          "payload_sha256": "ac27239888d8246f4aa2b91e4e7c95765a86a45f37c4b0eee2bf8f7f40b993fd",
+          "sha256": "cd1ec31241f1ea0ec266c17163a027671494ca40dc2d56600802cafdf0007923"
+        },
+        "target_id": "004d8cec4c4c3153045670fb8b6568204bdc15282e7a2bec00548f0755ba7680"
+      },
+      "rows": 290
+    },
+    {
+      "claim": {
+        "actual_source_identity": "source_compound_18_malonate",
+        "axis": "reported_tail_acid",
+        "expected_source_identities": [
+          "source_compound_11_glutarate"
+        ],
+        "profile": "one_tail_acid_knob_amine",
+        "role": "tail_acid_2",
+        "rule_kind": "reported"
+      },
+      "example": {
+        "actual_component_smiles": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+        "component_instances": [
+          [
+            "head_nucleophile",
+            "9f013cb6c17f4abada013bf64fb89471756504018a3f33ad233929d8ad395413",
+            1
+          ],
+          [
+            "tail_acid_1",
+            "c36ff2a7463f0ff6de799fb4233d4a7cbcab29e48425971f6837894a40828d87",
+            1
+          ],
+          [
+            "tail_acid_2",
+            "765c1ec774d7cb80fad604480c42dfbffcb61e072aad0dc63e9c769b8aed71ca",
+            1
+          ],
+          [
+            "vitamin_b5_core",
+            "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+            1
+          ]
+        ],
+        "expected_component_smiles": [
+          "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O"
+        ],
+        "original_task_reference": {
+          "line": 1718,
+          "path": "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/24.jsonl.gz",
+          "payload_sha256": "a39b95abc1990a05cbe9d0ccb2e137d83e84518e896ab7db6086b1a319a46805",
+          "sha256": "c3fbe5aac476167a7ed3bf69c0ccc64e0bc408b1e8f111abf07cc3b0f3a31db4"
+        },
+        "target_id": "01f4eb0223f5e2183206bc5241b6b37e43a9df9bb772fb676d34206c09a998f5"
+      },
+      "rows": 157
+    },
+    {
+      "claim": {
+        "actual_source_identity": "source_compound_18_malonate",
+        "axis": "reported_tail_acid",
+        "expected_source_identities": [
+          "source_compound_11_glutarate"
+        ],
+        "profile": "r2_one_component",
+        "role": "tail_acid",
+        "rule_kind": "reported"
+      },
+      "example": {
+        "actual_component_smiles": "CCCCCCCCC(CCCCCC)COC(=O)CC(=O)O",
+        "component_instances": [
+          [
+            "head_acid",
+            "7032e4be36fa2fa0b0da930892ca41fd63aba5b36174c647883869d807c1e9ea",
+            1
+          ],
+          [
+            "r2_tail_alcohol",
+            "bad65b9fd1580c16b1103bb5e79d4191a82c85f55ff7be8fce060e324031f7d8",
+            1
+          ],
+          [
+            "tail_acid",
+            "765c1ec774d7cb80fad604480c42dfbffcb61e072aad0dc63e9c769b8aed71ca",
+            1
+          ],
+          [
+            "vitamin_b5_core",
+            "b6ed4ffb7014b43bdd4413a304e1da0d93ac61f19a8ebad113bcc247d80ae5b1",
+            1
+          ]
+        ],
+        "expected_component_smiles": [
+          "CCCCCCCCC(CCCCCC)COC(=O)CCCC(=O)O"
+        ],
+        "original_task_reference": {
+          "line": 413,
+          "path": "artifacts/corpus_build_v2/family_23_vitamin_b5_enumeration_v8/tasks/01.jsonl.gz",
+          "payload_sha256": "023e9efe81c8ff592f52bd7de235fcec46fe610219958814733701224997145a",
+          "sha256": "db899740ca93a83ff58d21012031bddb3fabbf55715fc492580eed5018b825a2"
+        },
+        "target_id": "036991bc7f605b5359847eeb8e61e858ce93908461d9ced390e0069094d1ef0e"
+      },
+      "rows": 199
+    }
+  ],
+  "source_files_changed": false,
+  "source_stage_widths": {
+    "source_b5_I7": {
+      "[1,1,1]": 401
+    },
+    "source_b5_I8": {
+      "[1,1,1,1]": 1215
+    },
+    "source_b5_I9_hetero_alcohol": {
+      "[1,1,1]": 601
+    },
+    "source_b5_I9_hetero_amine": {
+      "[1,1,1]": 221
+    },
+    "source_b5_I9_homo_alcohol": {
+      "[1,1,1]": 362
+    },
+    "source_b5_I9_homo_amine": {
+      "[1,1,1]": 228
+    }
+  },
+  "training_admitted": false
+}

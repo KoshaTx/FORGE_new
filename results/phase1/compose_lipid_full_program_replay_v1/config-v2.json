@@ -1,0 +1,117 @@
+{
+  "contracts": {
+    "a3": {
+      "config": {
+        "path": "configs/multireaction/compose_lipid_supplied_thiol_a3_v1.json",
+        "sha256": "2a8ad697e449cd085529166c95516aef1f8e2046afb50fd6c1f87ed49faf522e"
+      },
+      "families": [
+        "a3_amine_aldehyde_alkyne"
+      ],
+      "loader": "repeated"
+    },
+    "base": {
+      "config": {
+        "path": "configs/multireaction/compose_lipid_family_replay_v1.json",
+        "sha256": "a35c9efd5671869194e49500e647abd2bf3c46e0a8d8deadb7153bb093f4de7c"
+      },
+      "families": [
+        "aldehyde_ugi3",
+        "aldehyde_ugi4",
+        "aryl_reductive_amination",
+        "passerini_3cr",
+        "reductive_amination",
+        "thiolactone_aminolysis_michael"
+      ],
+      "loader": "family"
+    },
+    "han": {
+      "config": {
+        "path": "results/phase1/compose_lipid_han_db_source_v1/replay-config.json",
+        "sha256": "c740fa3aa8613dc762fc12ac4fd5cf149b6d5a9bf09eeed23b4f0d1400b734fe"
+      },
+      "families": [
+        "epoxide_opening_o_acylation"
+      ],
+      "loader": "grouped"
+    },
+    "ketone_ugi4": {
+      "config": {
+        "path": "configs/multireaction/compose_lipid_supplied_ketone_ugi4_profiles_v1.json",
+        "sha256": "024c26e3ac1159b559df0a46a49fb5bc6967ea75eb33ac16425e67beb4551b42"
+      },
+      "families": [
+        "ketone_ugi4"
+      ],
+      "loader": "profiles"
+    },
+    "maleate_ester": {
+      "config": {
+        "path": "configs/multireaction/compose_lipid_supplied_maleate_ester_v1.json",
+        "sha256": "004a8f6da2fb552674c0c0a12a1c30411ba029fa4cb421676aac882314547486"
+      },
+      "families": [
+        "maleate_addition",
+        "o_esterification"
+      ],
+      "loader": "repeated"
+    },
+    "miao": {
+      "config": {
+        "path": "results/phase1/compose_lipid_miao_cyclic_source_v2/replay-config.json",
+        "sha256": "066ea6df43cca5966f1ab61ec144fc77cf1bb6abb9fcb4a11f9a8f664f69ff97"
+      },
+      "families": [
+        "alpha_isocyanoester_dihydroimidazole"
+      ],
+      "loader": "fixed"
+    },
+    "thiol_yne": {
+      "config": {
+        "path": "results/phase1/compose_lipid_thiol_yne_source_v1/replay-config.json",
+        "sha256": "c1aa0aea778c59d088c49a2a93e0a772d9843fbfd34a04d1dc9c2b771bc22578"
+      },
+      "families": [
+        "preassembled_thiol_yne_tail_amidation"
+      ],
+      "loader": "staged"
+    }
+  },
+  "inputs": {
+    "original_evidence": {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/population-audit.json",
+      "sha256": "618804909d2f46be5f336102c4ca032cb0089c1d6227aa4e5bc343419e4feb30"
+    },
+    "partition": {
+      "path": "results/phase1/compose_lipid_full_partition_v1/audit-v2/result.json",
+      "sha256": "fffe6e33884fe0ae374ec0daa8ca5f89fdec00621d205287b9da4d9134b5e714"
+    },
+    "previous_evidence": {
+      "path": "results/phase1/compose_lipid_training_readiness_v7/incremental-replay-audit.json",
+      "sha256": "62e1e9635bf56941e67d2fb68065dfdc396f8213c9174c16b265f2aa9c26daae"
+    },
+    "ugi3_role_binding": {
+      "path": "results/phase1/compose_lipid_role_binding_v2/result.json",
+      "sha256": "356ad53498ee200431a648a7cbe3ebbe3f94dcf3c7865f3c5cec4bc9f3b76e66"
+    }
+  },
+  "policy": {
+    "bounds": "unchanged_qualified_program_limits",
+    "population": "current_partition_eligible_pending_only",
+    "program_choice": "fixed_declared_family_contract_no_target_choice",
+    "record_cap": null,
+    "roles_quantities_ids": "unchanged_complete_source",
+    "size_filter": null,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "runtime": {
+    "batch_size": 256,
+    "device": "cpu",
+    "maximum_pending_batches": 4,
+    "multiprocessing": "spawn",
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_parallel_program_replay_config.v1",
+  "seed": 0
+}

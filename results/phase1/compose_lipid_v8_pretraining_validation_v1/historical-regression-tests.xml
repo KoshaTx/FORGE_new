@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="60" time="64.578" timestamp="2026-09-18T10:03:56.304813-04:00" hostname="Rahuls-MacBook-Pro.local"><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_resume_preserves_completed_stages_and_failed_attempts" time="0.002"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...ulmaganti/pytest-1193/test_resume_preserves_complete0/config.json'), calls=[], checks=[], fail={'stage': 'occurrence'})
+
+    def test_resume_preserves_completed_stages_and_failed_attempts(harness):
+        h = harness
+        h.fail["stage"] = "occurrence"
+        with pytest.raises(RuntimeError, match="interrupted"):
+&gt;           pipeline.run(h.root, h.request, "run")
+
+tests/test_combinatorial_generation_pipeline.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_resume_preserves_complete0')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_changed_request_is_rejected_before_running_stages" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_changed_request_is_reject0/config.json'), calls=[], checks=[], fail={'stage': None})
+
+    def test_changed_request_is_rejected_before_running_stages(harness):
+        h = harness
+&gt;       pipeline.run(h.root, h.request, "run")
+
+tests/test_combinatorial_generation_pipeline.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_changed_request_is_reject0')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_two_writers_cannot_share_output" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_two_writers_cannot_share_0/config.json'), calls=[], checks=[], fail={'stage': None})
+
+    def test_two_writers_cannot_share_output(harness):
+        h = harness
+        with pipeline._lock(h.root / "run"):
+            with pytest.raises(ValueError, match="active writer"):
+&gt;               pipeline.run(h.root, h.request, "run")
+
+tests/test_combinatorial_generation_pipeline.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_two_writers_cannot_share_0')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_semantic_verifier_rejects_substitution_even_with_updated_hashes[result_config]" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects0/config.json'), calls=[], checks=[], fail={'stage': None})
+mutation = 'result_config'
+
+    @pytest.mark.parametrize("mutation", ["result_config", "parent", "export", "summary", "stage_set"])
+    def test_semantic_verifier_rejects_substitution_even_with_updated_hashes(harness, mutation):
+        h = harness
+&gt;       result = pipeline.run(h.root, h.request, "run")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation_pipeline.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects0')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_semantic_verifier_rejects_substitution_even_with_updated_hashes[parent]" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects1/config.json'), calls=[], checks=[], fail={'stage': None})
+mutation = 'parent'
+
+    @pytest.mark.parametrize("mutation", ["result_config", "parent", "export", "summary", "stage_set"])
+    def test_semantic_verifier_rejects_substitution_even_with_updated_hashes(harness, mutation):
+        h = harness
+&gt;       result = pipeline.run(h.root, h.request, "run")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation_pipeline.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects1')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_semantic_verifier_rejects_substitution_even_with_updated_hashes[export]" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects2/config.json'), calls=[], checks=[], fail={'stage': None})
+mutation = 'export'
+
+    @pytest.mark.parametrize("mutation", ["result_config", "parent", "export", "summary", "stage_set"])
+    def test_semantic_verifier_rejects_substitution_even_with_updated_hashes(harness, mutation):
+        h = harness
+&gt;       result = pipeline.run(h.root, h.request, "run")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation_pipeline.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects2')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_semantic_verifier_rejects_substitution_even_with_updated_hashes[summary]" time="0.001"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects3/config.json'), calls=[], checks=[], fail={'stage': None})
+mutation = 'summary'
+
+    @pytest.mark.parametrize("mutation", ["result_config", "parent", "export", "summary", "stage_set"])
+    def test_semantic_verifier_rejects_substitution_even_with_updated_hashes(harness, mutation):
+        h = harness
+&gt;       result = pipeline.run(h.root, h.request, "run")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation_pipeline.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects3')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_semantic_verifier_rejects_substitution_even_with_updated_hashes[stage_set]" time="0.002"><failure message="KeyError: 'source_pins'">harness = namespace(root=PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/...t-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects4/config.json'), calls=[], checks=[], fail={'stage': None})
+mutation = 'stage_set'
+
+    @pytest.mark.parametrize("mutation", ["result_config", "parent", "export", "summary", "stage_set"])
+    def test_semantic_verifier_rejects_substitution_even_with_updated_hashes(harness, mutation):
+        h = harness
+&gt;       result = pipeline.run(h.root, h.request, "run")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_generation_pipeline.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:253: in run
+    require_current_execution_sources(repo, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+repo = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_semantic_verifier_rejects4')
+config = {'population_mode': 'fresh_train', 'sampling': {'attempts_per_family': 1}}
+
+    def require_current_execution_sources(repo, config):
+        """Historical authentication does not authorize execution with different active code."""
+&gt;       for pin in config["source_pins"]:
+                   ^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_pins'
+
+experiments/phase1/multireaction/combinatorial_generation_pipeline.py:245: KeyError</failure></testcase><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_stage_config_preserves_policies_and_budgets" time="0.000" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_frozen_request_rejects_drift[gate]" time="0.001" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_frozen_request_rejects_drift[budget]" time="0.016" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_frozen_request_rejects_drift[source]" time="0.010" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_frozen_request_rejects_drift[chain]" time="0.008" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_frozen_request_rejects_drift[sampling]" time="0.015" /><testcase classname="tests.test_combinatorial_generation_pipeline" name="test_current_frozen_request_accepts_unchanged_sources" time="0.015" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_graph_copy_budget_is_bounded[flow_steps-1]" time="0.000" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_graph_copy_budget_is_bounded[flow_steps-65]" time="0.000" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_graph_copy_budget_is_bounded[attempts_per_family-257]" time="0.000" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_graph_copy_budget_is_bounded[batch_size-True]" time="0.000" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_graph_copy_rejects_gate_changes" time="0.000" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_verification_rejects_false_preservation_claim" time="10.105" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_rehashed_completion_substitution_still_fails" time="7.093" /><testcase classname="tests.test_combinatorial_graph_reuse" name="test_admission_result_recomputes_and_rejects_false_gain" time="0.002"><failure message="forge.core.hashing.PinError: pinned input for admission verification changed: expected e5da348af4ce481303d033facbc7fbfb851387be4b4bc0f42db077e652bc4707, found 372aefc259905a95cf5e401c293fa99c614ea772c9dca394e595b615a062d47a at /Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_graph_reuse_verify.py">tmp_path = PosixPath('/private/var/folders/20/_5gd1kf10133j066_87wr5l40000gn/T/pytest-of-rahulmaganti/pytest-1193/test_admission_result_recomput0')
+
+    def test_admission_result_recomputes_and_rejects_false_gain(tmp_path):
+&gt;       assert verify_admission(REPO, ADMISSION)["status"] == "verified"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_combinatorial_graph_reuse.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/phase1/multireaction/combinatorial_reuse_admission.py:177: in verify
+    resolve_pin(pin, repo, label="admission verification")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'experiments/phase1/multireaction/combinatorial_graph_reuse_verify.py', 'sha256': 'e5da348af4ce481303d033facbc7fbfb851387be4b4bc0f42db077e652bc4707'}
+repo = PosixPath('/Users/rahulmaganti/Kosha/forge_new')
+label = 'admission verification'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -&gt; Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+            raise PinError(f"pinned input for {label} is missing: {resolved}")
+    
+        observed = sha256_file(resolved)
+        if observed != declared:
+&gt;           raise PinError(
+                f"pinned input for {label} changed: expected {declared}, found {observed} at {resolved}"
+            )
+E           forge.core.hashing.PinError: pinned input for admission verification changed: expected e5da348af4ce481303d033facbc7fbfb851387be4b4bc0f42db077e652bc4707, found 372aefc259905a95cf5e401c293fa99c614ea772c9dca394e595b615a062d47a at /Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/combinatorial_graph_reuse_verify.py
+
+forge/core/hashing.py:143: PinError</failure></testcase><testcase classname="tests.test_combinatorial_graph_reuse" name="test_admission_cannot_claim_unused_reference_selection" time="0.002" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_mixed_diagnostic_is_separate_from_identical_repeat_gate[False]" time="0.014" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_mixed_diagnostic_is_separate_from_identical_repeat_gate[True]" time="0.014" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_replay_rejects_a_wrong_intermediate_handoff" time="0.001" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_shorter_path_does_not_satisfy_the_requested_depth" time="0.001" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_role_rejected_raw_transform_stays_rejected" time="0.002" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_incomplete_search_does_not_publish_full_programs[kwargs0]" time="0.001" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_incomplete_search_does_not_publish_full_programs[kwargs1]" time="0.004" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_incomplete_search_does_not_publish_full_programs[kwargs2]" time="0.003" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_invalid_depth_rejected[0]" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_invalid_depth_rejected[3]" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_invalid_depth_rejected[True]" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_invalid_depth_rejected[1.5]" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_summary_retains_invalid_attempts_and_diagnostic_only_matches" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_disagreement_with_original_gate_is_an_error" time="0.000" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_saved_audit_recomputes_every_attempt_and_control" time="4.037" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_verifier_rejects_forged_audit_claims[summary]" time="4.098" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_verifier_rejects_forged_audit_claims[gate]" time="4.103" /><testcase classname="tests.test_combinatorial_repeat_audit" name="test_verifier_rejects_forged_audit_claims[input]" time="0.007" /><testcase classname="tests.test_precursor_reuse" name="test_pool_keeps_examples_separate_and_is_invariant_to_copy_order" time="0.011" /><testcase classname="tests.test_precursor_reuse" name="test_invalid_or_singleton_relations_fail[groups0]" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_invalid_or_singleton_relations_fail[groups1]" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_invalid_or_singleton_relations_fail[groups2]" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_invalid_or_singleton_relations_fail[groups3]" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_qualified_relation_requires_exact_source_reuse" time="0.055" /><testcase classname="tests.test_precursor_reuse" name="test_depth_one_does_not_infer_equality_from_repeated_roles" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_zero_residual_reproduces_base_and_relation_path_has_gradients" time="0.005" /><testcase classname="tests.test_precursor_reuse" name="test_changing_other_copy_affects_shared_context_but_not_self_context" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_sampler_sidecar_binding_rejects_wrong_record_and_reuse" time="0.002" /><testcase classname="tests.test_precursor_reuse" name="test_sampler_does_not_copy_qualified_source_atoms_or_pointers" time="0.018" /><testcase classname="tests.test_precursor_reuse" name="test_experiment_contract_rejects_gate_changes_or_extra_budget" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_symmetric_correspondence_abstains_without_losing_the_record" time="0.430" /><testcase classname="tests.test_precursor_reuse" name="test_correspondence_handles_different_serialization_orders" time="0.000" /><testcase classname="tests.test_precursor_reuse" name="test_saved_pilot_recomputes_all_attempts_and_qualified_relations" time="16.899" /><testcase classname="tests.test_precursor_reuse" name="test_verifier_rejects_forged_pilot_claims[promotion]" time="0.003" /><testcase classname="tests.test_precursor_reuse" name="test_verifier_rejects_forged_pilot_claims[inputs]" time="0.017" /><testcase classname="tests.test_precursor_reuse" name="test_verifier_rejects_forged_pilot_claims[decision]" time="16.771" /></testsuite></testsuites>

@@ -1,0 +1,51 @@
+{
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "original_tasks": {
+      "path": "results/phase1/compose_lipid_b5_original_tasks_v1/result.json",
+      "sha256": "0bb8a27e862ed22a07648c54d79108631faf6ef26bdc1d77e1a301e4857f879e"
+    },
+    "parent_config": {
+      "path": "configs/multireaction/compose_lipid_b5_replay_v1.json",
+      "sha256": "c8baaa690021b5a6423dd74f3ae78c9404a0419339fa7a24ec7eeac51380190c"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_b5_staged_source_program_v1.json",
+      "sha256": "0b908189bf09908b8d14d5e08b338291b57519becd2474de1c70548a97c7daa4"
+    },
+    "source_controls": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    },
+    "source_pair_routing": {
+      "path": "data/vendor/qualified_b5_source_pair_routing_v2.json",
+      "sha256": "fbf818e0a9cacbe21c35f631f16692ec8cc6c99c444a4d3d6d055eaa564a8355"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id_roles_and_unit_quantities_preserved",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "population": "current_full_preparation_eligible_only",
+    "profile_selection": "original_inputs_with_exact_source_pair_routing_no_target",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "stages": "source_documented_net_composites_complete_forward_and_inverse",
+    "training_admitted": false,
+    "training_calls": 0,
+    "wrong_reported_source_labels": "abstain_even_if_generic_transform_matches"
+  },
+  "schema_version": "forge.compose_lipid_b5_replay_config.v2",
+  "search_bounds": {
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 65536
+  }
+}

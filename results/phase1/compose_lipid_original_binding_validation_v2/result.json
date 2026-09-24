@@ -1,0 +1,137 @@
+{
+  "date": "2026-09-20",
+  "implementation": {
+    "path": "results/phase1/compose_lipid_original_binding_validation_v2/closeout.py",
+    "sha256": "589c9e8af1310e765c3116028f95ac588fdc8b588adb0027de7b0f22b63e04b6"
+  },
+  "inputs": {
+    "original_binding": {
+      "path": "results/phase1/compose_lipid_original_binding_v1/result.json",
+      "sha256": "2383de66847801cde8a29548b76d32888568b1107cd074793d7ff31a947d65ff"
+    },
+    "previous_science": {
+      "path": "results/phase1/compose_lipid_full_preparation_validation_v3/result.json",
+      "sha256": "2f6af62d57dc6404cd1e5ca8e7aaa57e18acd933f0772fdb0efb5a157b6c7f4c"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_original_binding_replay_v1/result.json",
+      "sha256": "0a1305df1aec21c090f4262d51d5815581ced99946977ad2bf54359d5dc8e46f"
+    },
+    "source_abstention": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v1/result.json",
+      "sha256": "306d01f4cea1ff55907e6e6aeccba902bb4e380f07bbe0e87567cdbd0cc6db61"
+    },
+    "task_intake": {
+      "path": "results/phase1/compose_lipid_original_tasks_intake_v1/result.json",
+      "sha256": "105380bae281487677cd8ff0aa0f2cb16316781674af667b5075fff1172fa994"
+    },
+    "validation": {
+      "path": "results/phase1/compose_lipid_original_binding_validation_v2/validation_report.json",
+      "sha256": "5f1fb119880cc3e7fab1b9b2b87f7c8b62a14dc3bd8941083d3b997ee326c19c"
+    }
+  },
+  "open_gates": [
+    "all_family_source_program_qualification",
+    "full_universe_partition_and_study_isolation",
+    "final_population_representation_including_large_molecules",
+    "global_constitutional_deduplication",
+    "balanced_training_weights",
+    "repository_wide_test_gate"
+  ],
+  "phase1_definition_of_done_met": false,
+  "replay_comparison": {
+    "path": "results/phase1/compose_lipid_original_binding_validation_v2/replay_comparison.json",
+    "sha256": "171f4d5fe7cbb184b39440076bf97407c987509f33d7999eeada5af708eb8e58"
+  },
+  "schema_version": "forge.compose_lipid_original_binding_closeout.v1",
+  "seed": 0,
+  "status": "recipe_provenance_verified_training_unqualified",
+  "summary": {
+    "by_family": {
+      "acid_epoxide_diester_multistep": {
+        "original_recipe_verified": 5279,
+        "rows": 5279,
+        "verified_recipe_rows": 5279
+      },
+      "aldehyde_ugi3": {
+        "original_recipe_verified": 955,
+        "rows": 955,
+        "verified_recipe_rows": 955
+      },
+      "aldehyde_ugi4": {
+        "regional_recipe_verified_original_program_payload_unavailable": 3222,
+        "rows": 3222,
+        "verified_recipe_rows": 3222
+      },
+      "thiolactone_aminolysis_michael": {
+        "original_recipe_verified": 5394,
+        "rows": 5394,
+        "verified_recipe_rows": 5394
+      }
+    },
+    "disagreements_or_unresolved": 0,
+    "new_reaction_qualified_records": 0,
+    "reaction_calls": 0,
+    "selected_recipes": 14850,
+    "training_admitted": false,
+    "training_calls": 0,
+    "training_ready": false,
+    "verified_recipes": 14850
+  },
+  "validation": {
+    "focused": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 511,
+      "skipped_or_xfailed": 0,
+      "total": 511
+    },
+    "full": {
+      "errors": 17,
+      "failures": 131,
+      "passed": 3121,
+      "skipped_or_xfailed": 92,
+      "total": 3361
+    },
+    "implementation": {
+      "path": "results/phase1/compose_lipid_original_binding_validation_v2/validate.py",
+      "sha256": "b3ec9a6d2492f49571ccfd485226efc2be190c0a61ba0b15a54fd183f007d939"
+    },
+    "inputs": {
+      "checks.json": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/checks.json",
+        "sha256": "67a7f5ea41c5d3bc6812fb2c9840c7b18dc4c369a6b36b939382085288473ca8"
+      },
+      "focused-tests.xml": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/focused-tests.xml",
+        "sha256": "b28691cef440321d384b963e9f145e224f5bab322470bf7d8e7ca3344a9a4c11"
+      },
+      "full-tests.xml": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/full-tests.xml",
+        "sha256": "6ca75a4244ac8a517359e8056dea56a9b7ef15e79467b6fccd3f8c003ae116b9"
+      },
+      "snapshot-comparison.json": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/snapshot-comparison.json",
+        "sha256": "28adfc750ed3c9179951fda877c951d07fe927818bf7f2eaeb497fb06d72c8ab"
+      },
+      "source-snapshot.json": {
+        "path": "results/phase1/compose_lipid_original_binding_validation_v2/source-snapshot.json",
+        "sha256": "4020401573f7232077368f946a946090c5637cd44b52906bd7f08f11cbe1f851"
+      }
+    },
+    "new_errors": [],
+    "new_failures": [],
+    "phase1_definition_of_done_met": false,
+    "previous_full_tests": {
+      "path": "results/phase1/compose_lipid_original_tasks_intake_v1/full-tests.xml",
+      "sha256": "7598577e80f75990977634ea08cdfb3bfc013e6380c34ce30783d8a84cfe5f62"
+    },
+    "resolved_errors": [],
+    "resolved_failures": [],
+    "schema_version": "forge.compose_lipid_original_binding_validation.v1",
+    "seed": 0,
+    "source_snapshot_unchanged": true,
+    "training_admitted": false,
+    "vendor_verify_exit_code": 0
+  }
+}

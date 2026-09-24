@@ -1,0 +1,109 @@
+{
+  "assets": {
+    "controls.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/controls.json",
+      "sha256": "46f6c2b8b0ebf9d8374c912557f6fae3e5e9e48f3dfca6ddd3e650ee4b304cd5"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "jiang-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-article.html",
+      "sha256": "cb56040d438e8f9a5599213945f5e15a47f74407c8686efe7459b00b427e23f5"
+    },
+    "jiang-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/jiang-si.pdf",
+      "sha256": "febe59fae4f5d6bbd11ed754785c1618cc38171b9ec53d14d0956c56b758b220"
+    },
+    "scaffolds.json": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/scaffolds.json",
+      "sha256": "a423d8da03b31eb4020b1a78081e9b7a23ced3fa4d43344686c8ad8faa2519b2"
+    },
+    "xue-article.html": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-article.html",
+      "sha256": "2af22147eb934f7ce1d338be6f41baff15b9f03dfa07f1834dda5ba7afa390f6"
+    },
+    "xue-si.pdf": {
+      "path": "results/phase1/compose_lipid_v8_reductive_source_v1/xue-si.pdf",
+      "sha256": "7f5b1c6413e4db3b09cb86296139ba76848b06de96b7165942643233ad6a3e2c"
+    }
+  },
+  "conditions": {
+    "aryl_reductive_amination": {
+      "acetic_acid_equivalents": 2.4,
+      "aldehyde_equivalents": 1.2,
+      "analytical_evidence": "5-A2-7b2 source reaction drawing and 1H NMR, LC-MS reported 463.6 calculated/463.7 found; no isolated yield stated.",
+      "atmosphere": "not specified",
+      "doi": "10.1038/s41467-024-45422-9",
+      "locator": "Main Methods, Synthesis of cationic-degradable lipid libraries; SI Supplementary Fig. 18",
+      "pmid": "38424061",
+      "sodium_borohydride_equivalents": 10,
+      "solvent": "ethanol",
+      "stage_order": [
+        "AcOH-catalyzed condensation at 80 C for 3 h",
+        "NaBH4 reduction at room temperature for 1 h"
+      ],
+      "workup": "Add dichloromethane; wash three times with saturated NaCl; sodium-sulfate drying; evaporate. Optional silica DCM/MeOH purification."
+    },
+    "reductive_amination": {
+      "amine_equivalents": 2,
+      "analytical_evidence": "Source schemes, 1H/13C NMR and QTOF ESI; reported yields and formulas retained separately for each control.",
+      "atmosphere": "nitrogen",
+      "doi": "10.1038/s41565-023-01548-3",
+      "locator": "SI PDF p. 5, IR-19-Pyrazole and IR-117-17 final assemblies",
+      "pmid": "37985700",
+      "reducing_agent_equivalents": 3,
+      "solvent": "dichloromethane",
+      "stage_order": [
+        "amine/aldehyde mixing for 1 h",
+        "addition of sodium triacetoxyborohydride and overnight reduction"
+      ],
+      "temperature": "room temperature",
+      "workup": "Evaporate solvent; silica chromatography with 10% methanol in dichloromethane and 0.1% NH4OH."
+    }
+  },
+  "created_at_utc": "2026-09-18T19:10:35.314411+00:00",
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "families": [
+    "reductive_amination",
+    "aryl_reductive_amination"
+  ],
+  "limitations": [
+    "Scaffold predicates are independently transcribed from primary chemistry figures, not fitted to the observed corpus reconstruction rate.",
+    "Identical acyl arms and fixed scaffold positions implement the delivered v8 family invariant. This does not prove experimental source-bank membership of a designed variant.",
+    "Jiang's head/site variants and Xue's designed tail variants retain computed-only evidence. Source route closure for their precursor syntheses is not admitted.",
+    "Xue Supplementary Fig. 12 draws a dihydroxy aldehyde input while showing triacylated products; Methods names the trihydroxy precursor but calls the acid heptanoic in an example named 2-methylhexanoate. Preserve this source conflict; no exact precursor-route execution is admitted.",
+    "These are complete net L1 transformations with source-reported condensation/reduction ordering. Transient protonation and reducing-agent speciation are not identified or claimed.",
+    "Jiang SI mislabels 6-oxohexyl oleate as 11 in the aldol procedure and calls palmitate octadecanoic acid elsewhere. Neither conflicting label enters the two oleate/linoleate final-assembly controls.",
+    "Designed v8 products are computed graph programs; experimental source-bank membership and exact precursor synthesis routes are not established.",
+    "Scaffold restrictions can exclude a corpus row but never authorize pruning an alternative forward product from a retained precursor tuple."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_reductive_source_program_v1.json",
+    "sha256": "1ea04fc84a11f47482ce94eb3312e4b4de09ecd280e1e9ec871fa44d86954e81"
+  },
+  "schema_version": "forge.scaffold_event_adjudication.v1",
+  "training_ready": false,
+  "upstream_check": {
+    "observed_commit": "9a4e5884720b883918052db0733a316d0e47caaa",
+    "ref": "refs/heads/dataset/source-corrected-corpus-v3",
+    "repository": "git@github.com:KoshaTx/compose_lipid.git",
+    "scope": "Advertised branch still has v5 exports; the local optional checkout is a27215c4507ccf40cb6940ad5257a1c2c083c058. Neither provides v8 executable programs."
+  },
+  "visual_inspection": {
+    "jiang_si_pdf_pages_one_based": [
+      3,
+      4,
+      5
+    ],
+    "method": "Primary drawings and neighboring procedure pages inspected; structures transcribed independently of transform output. Stereo removed only for constitutional identity.",
+    "xue_si_pdf_pages_one_based": [
+      2,
+      5,
+      8
+    ]
+  }
+}

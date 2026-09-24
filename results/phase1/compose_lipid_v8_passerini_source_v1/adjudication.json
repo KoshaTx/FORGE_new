@@ -1,0 +1,216 @@
+{
+  "assets": {
+    "acquisition-followup.json": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/acquisition-followup.json",
+      "sha256": "8112c8ce1608920578c111474c7142563154e748b8d540635a4fb29e69a4b5d9"
+    },
+    "acquisition.json": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/acquisition.json",
+      "sha256": "e7eb538f672a6da3eb3956e9e7d0ed76bd46622bcc42efa596f6118d9132c480"
+    },
+    "article-author-copy.pdf": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/article-author-copy.pdf",
+      "sha256": "4d397ca0a0ab0c77265de028f4a368fcb61dcf140aaa139b7d5116673115d692"
+    },
+    "article.html": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/article.html",
+      "sha256": "021880effc0cdc536bcd1672925563bca280cdd0b3d00049096061c635cdc169"
+    },
+    "article.pdf.unqualified-response": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/article.pdf.unqualified-response",
+      "sha256": "8dd5187f13b05ab7b5685d0c2d5ac8b03bbfec27842a8526adc34b58212c11d3"
+    },
+    "europepmc.xml": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/europepmc.xml",
+      "sha256": "051867c8f0a7e1d9b45b56a915ab656184e218791ce618686805ac72317a779e"
+    },
+    "extraction.json": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/extraction.json",
+      "sha256": "6b9e5311066843b970641e56b3f40c8056523053cdd6dcae16741d73d9dc1a2d"
+    },
+    "figure1.jpg": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/figure1.jpg",
+      "sha256": "0008997aa5838d5fe61416b3afb7178c5f1d21a9f8467c9a6988df1b75a1b324"
+    },
+    "pnas.2409572122.sapp.pdf": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/pnas.2409572122.sapp.pdf",
+      "sha256": "39bd9405d31b5e288c1dfbc2d4b15cfcd31ed4114d88941a8e628ed00f6e9d9d"
+    },
+    "supplement-pmc.pdf.unqualified-response": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/supplement-pmc.pdf.unqualified-response",
+      "sha256": "7125b26f1f56496a5ee4336223c594c797961df4f141302bfd5ea3cb28db0c82"
+    },
+    "supplementary-files.zip": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/supplementary-files.zip",
+      "sha256": "dd1b5d4d713c16a75ac742a934afc2cd9a1589294816605034cb2d8910ebb2ad"
+    },
+    "train-head-inventory.json": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/train-head-inventory.json",
+      "sha256": "e6a50aae677d89709c1bb168fd8b42e1203d9c3def0e186a64c2a8a79fcccc6e"
+    }
+  },
+  "atom_origin_adjudication": {
+    "derived_variant": {
+      "product_map_permutation": {
+        "3": 5,
+        "5": 3
+      },
+      "reaction_id": "passerini_3cr_source_atom_origins_v2",
+      "reaction_version": 2,
+      "source": {
+        "identifier": "10.1073/pnas.2409572122",
+        "kind": "doi",
+        "locator": "Figure 1A, main article page 3; SI pages 3-5; molecular structures in Figure 1B and SI Figure S1",
+        "notes": "Product-only oxygen-map permutation follows the drawn Mumm rearrangement. It preserves constitutional connectivity. This is a mechanism-based atom-origin convention, not isotope-tracing evidence or an experimental outcome label for v8 enumeration."
+      }
+    },
+    "finding": "The frozen transform has correct constitutional connectivity but assigns the aldehyde oxygen to the amide carbonyl and the acid hydroxyl oxygen to the ester bridge. The drawn Mumm acyl transfer instead places the aldehyde oxygen at the bridge and the acid hydroxyl oxygen at the amide carbonyl.",
+    "original_registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "physical_isotope_tracing_claimed": false,
+    "reason_codes": [
+      "source_mechanism_atom_origin_mismatch",
+      "product_map_permutation_only",
+      "constitutional_graph_preserved",
+      "frozen_registry_preserved"
+    ]
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_passerini_program_v1.json",
+    "sha256": "78e57cdf7c342260cfa7be0ccc16d4cca584808ea217ad0a399c6237703f3b04"
+  },
+  "created_at_utc": "2026-09-18T16:48:47.062928+00:00",
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_outcome_label": "not_admitted",
+  "family": "passerini_3cr",
+  "generation_calls": 0,
+  "heldout_graphs_parsed": false,
+  "independent_controls": [
+    {
+      "components": {
+        "aldehyde_body": "O=CCCCCCCCCC",
+        "carboxylic_acid_tail": "CN(C)CC(=O)O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCCCCC"
+      },
+      "evidence_basis": "computed_transform_consistency",
+      "expected_product": "CN(C)CC(=O)OC(CCCCCCCCC)C(=O)NCCCCCCCCCCC",
+      "label": "H1A1B1",
+      "locator": "Figure 1B components H1/A1/B1; SI Figure S1 page 6 top left"
+    },
+    {
+      "components": {
+        "aldehyde_body": "O=CCCCCCCCC=CCCCCCCCC",
+        "carboxylic_acid_tail": "CN(C)CCC(=O)O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCCC=CCCCCCCCC"
+      },
+      "evidence_basis": "computed_transform_consistency",
+      "expected_product": "CN(C)CCC(=O)OC(CCCCCCCC=CCCCCCCCC)C(=O)NCCCCCCCCC=CCCCCCCCC",
+      "label": "H2A4-Ole",
+      "locator": "SI page 4 lines 105-113 and main Figure 2I page 4; constitutional stereo-free transcription"
+    }
+  ],
+  "limits": [
+    "Two source controls do not calibrate decomposition precision over 7,007 corpus rows.",
+    "Source-family program equivalence is distinct from proof that provider component IDs resolve to the computed precursor structures.",
+    "v8 heads extend beyond the nine drawn primary-library heads; no claim that every v8 head or lipid was experimentally tested.",
+    "No isotope experiment establishes physical oxygen identity; the correction follows the published mechanistic drawing.",
+    "L2 procedures and procurement are outside this record; prior-work references are not admitted as complete L2 evidence.",
+    "Source conflicts are retained and are not exact executed-route controls.",
+    "Global precursor protection, chemical holdouts, remaining families and repository checks still block training."
+  ],
+  "procedure_context": {
+    "atmosphere": "not specified",
+    "catalyst_or_added_reagent": "none specified in this L1 procedure",
+    "interpretation": "Procedure retained as source context. The control is a stereo-free computed reconstruction; no experimental label is transferred to corpus rows.",
+    "locator": "SI page 4 lines 105-113",
+    "purification": "flash chromatography; ammonia/methanol/dichloromethane 1/5/94",
+    "reactant_amounts_micromol": {
+      "aldehyde_tail": 256.09,
+      "amine_acid_head": 256.09,
+      "isocyanide_tail": 256.09
+    },
+    "reported_characterization": "1H NMR and mass spectrum values in the same paragraph; full spectra not independently validated here",
+    "reported_yield": {
+      "admitted_as_experimental_supervision": false,
+      "mass_mg": 132,
+      "percent": 82.28
+    },
+    "solvent": "anhydrous dichloromethane",
+    "solvent_ml": 1,
+    "source_label": "H2A4-Ole",
+    "temperature": "room temperature",
+    "time_hours": 12,
+    "vessel": "capped glass vial"
+  },
+  "program": {
+    "events": 1,
+    "level": "L1",
+    "reactive_sites": "One carboxylic acid, one aldehyde, one isocyanide under the existing registry handle policies; require unique constitutional inverse and forward site class with no search saturation.",
+    "retained_head": "Complete acid-bearing tertiary amine head, including the nonreacting amine. Structural predicate only; no pKa or biological activity assertion.",
+    "roles": {
+      "aldehyde_tail": 1,
+      "amine_acid_head": 1,
+      "isocyanide_tail": 1
+    },
+    "scope": "Complete single-event constitutional assembly only, not component manufacture, procurement, experimental success or route certification.",
+    "stage_order": [
+      "passerini_3cr"
+    ]
+  },
+  "random_sampling_used": false,
+  "schema_version": "forge.compose_lipid_source_program_adjudication.v1",
+  "source": {
+    "article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11804478/",
+    "doi": "10.1073/pnas.2409572122",
+    "pmcid": "PMC11804478",
+    "pmid": "39883839",
+    "title": "Rational design and modular synthesis of biodegradable ionizable lipids via the Passerini reaction for mRNA delivery"
+  },
+  "source_conflicts": [
+    {
+      "issue": "A4B4-S3/S4 headings name branched 2-hexyldecanoate products but the reactant prose names the linear dodecanoate aldehyde. These entries are not exact executed-route controls.",
+      "locator": "SI page 5 lines 124-146"
+    },
+    {
+      "issue": "H2A4B3/B4 headings use 8-oxooctyl wording while their named six-carbon aldehyde components imply a seven-carbon Passerini product segment. Preserve the inconsistency; no exact route label is granted.",
+      "locator": "SI page 4 lines 86-104"
+    },
+    {
+      "issue": "The old JACS identifier is not used to establish this v8 source equivalence. The primary family source is PNAS 10.1073/pnas.2409572122.",
+      "locator": "Frozen family registry Passerini source field"
+    }
+  ],
+  "training_admitted": false,
+  "training_calls": 0,
+  "visual_inspection": {
+    "full_analytical_spectra_independently_validated": false,
+    "method": "pdftoppm page renders and the publisher figure viewed visually; pdftotext used only for locating and transcribing prose",
+    "primary_article_pages": [
+      2,
+      3,
+      4
+    ],
+    "primary_locators": [
+      "Main Figure 1A mechanism, article page 3",
+      "Main Figure 1B complete heads and tails, article page 3",
+      "Main Figure 2I H2A4-Ole, article page 4",
+      "SI Figure S1 H1A1B1, page 6",
+      "SI L1 procedures, pages 4-5"
+    ],
+    "reproduction_commands": [
+      "pdftoppm -f 2 -l 4 -r 140 -png results/phase1/compose_lipid_v8_passerini_source_v1/article-author-copy.pdf /private/tmp/passerini-article",
+      "pdftoppm -f 2 -l 6 -r 140 -png results/phase1/compose_lipid_v8_passerini_source_v1/pnas.2409572122.sapp.pdf /private/tmp/passerini-si"
+    ],
+    "standalone_figure": "Figure 1, full resolution",
+    "supplement_pages": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+aza_michael_acrylamide: 500 checked
+aza_michael_acrylamide: 1,000 checked
+aza_michael_acrylamide: 1,500 checked
+aza_michael_acrylamide: 2,000 checked
+aza_michael_acrylamide: {'rows': 2011, 'exact_computed_reconstruction': 2011}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/compose_lipid_supplied.py", line 23, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/experiments/phase1/multireaction/compose_lipid_supplied.py", line 18, in main
+    result = run(repo, args.config, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_supplied_replay.py", line 210, in run_supplied_replay
+    replay = replay_supplied(
+             ^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_supplied_replay.py", line 87, in replay_supplied
+    components, events = resolve_components(
+                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_supplied_replay.py", line 66, in resolve_components
+    raise ComposeLipidError("Source instance roles differ from the complete reaction binding")
+forge.assembly.compose_lipid.ComposeLipidError: Source instance roles differ from the complete reaction binding

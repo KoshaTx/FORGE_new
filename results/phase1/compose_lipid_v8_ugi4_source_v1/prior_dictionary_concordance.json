@@ -1,0 +1,65 @@
+{
+  "by_family_role_status": {
+    "aldehyde_ugi3/aldehyde/absent": 65,
+    "aldehyde_ugi3/aldehyde/scoped_labels": 65,
+    "aldehyde_ugi3/amine/absent": 20,
+    "aldehyde_ugi3/amine/scoped_labels": 20,
+    "aldehyde_ugi3/isocyanide/absent": 9,
+    "aldehyde_ugi3/isocyanide/scoped_labels": 9,
+    "aryl_reductive_amination/amine_head/absent": 6,
+    "aryl_reductive_amination/amine_head/scoped_labels": 6,
+    "aryl_reductive_amination/coupled_aldehyde/absent": 3200,
+    "aryl_reductive_amination/coupled_aldehyde/scoped_labels": 3200,
+    "aza_michael_acrylamide/acceptor_tail/absent": 673,
+    "aza_michael_acrylamide/acceptor_tail/scoped_labels": 673,
+    "aza_michael_acrylamide/amine_head/family_declared": 43,
+    "aza_michael_acrylamide/amine_head/same_constitution": 43,
+    "aza_michael_acrylamide/amine_head/scoped_labels": 43,
+    "aza_michael_acrylate/acceptor_tail/absent": 677,
+    "aza_michael_acrylate/acceptor_tail/scoped_labels": 677,
+    "aza_michael_acrylate/amine_head/family_declared": 43,
+    "aza_michael_acrylate/amine_head/same_constitution": 43,
+    "aza_michael_acrylate/amine_head/scoped_labels": 43,
+    "passerini_3cr/aldehyde_tail/absent": 2086,
+    "passerini_3cr/aldehyde_tail/scoped_labels": 2086,
+    "passerini_3cr/amine_acid_head/absent": 24,
+    "passerini_3cr/amine_acid_head/scoped_labels": 24,
+    "passerini_3cr/isocyanide_tail/absent": 1365,
+    "passerini_3cr/isocyanide_tail/scoped_labels": 1365,
+    "reductive_amination/amine_head/absent": 24,
+    "reductive_amination/amine_head/scoped_labels": 24,
+    "reductive_amination/coupled_aldehyde/absent": 2251,
+    "reductive_amination/coupled_aldehyde/scoped_labels": 2251,
+    "thiolactone_aminolysis_michael/acrylate_tail/absent": 922,
+    "thiolactone_aminolysis_michael/acrylate_tail/scoped_labels": 922,
+    "thiolactone_aminolysis_michael/amine_head/absent": 28,
+    "thiolactone_aminolysis_michael/amine_head/scoped_labels": 28,
+    "thiolactone_aminolysis_michael/thiolactone_region/absent": 892,
+    "thiolactone_aminolysis_michael/thiolactone_region/scoped_labels": 892
+  },
+  "conflicts": [],
+  "decision": "The prior dictionary is incomplete for the already reconstructed v8 roles. Matching labels are a concordance diagnostic only; no role aliases, new holdout identities or split qualification are inferred.",
+  "dictionary_labels_admitted": 0,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_v8_ugi4_source_v1/check_prior_dictionary.py",
+    "sha256": "6df167541e76979ca482ac48afd35907009a3a4011a4a9226fb8722073545369"
+  },
+  "inputs": {
+    "dictionary": {
+      "path": "data/source_cache/compose_lipid_v5_program_evidence_2026-09-18/precursors.jsonl.gz",
+      "sha256": "71b43339935347062fee1e05f0eb3adf8acc3b9efc4d980a9cadacfd69f2c0e0"
+    },
+    "identities": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v1/identities.jsonl.gz",
+      "sha256": "a50fe53fffbf97fbc7d28561a5325d033b463a0ef3e172e60d492eedae657561"
+    },
+    "prior_audit": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v1/result.json",
+      "sha256": "371cf8c61c9a631f364672e4162d22f3725cfd2b8bf111d33bd69873ced3812a"
+    }
+  },
+  "provider_evaluation_graphs_parsed": false,
+  "schema_version": "forge.prior_dictionary_concordance.v1",
+  "seed": 0,
+  "training_calls": 0
+}

@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-09-14T18:37:08.729844+00:00",
+  "inputs": {
+    "original_result": {
+      "bytes": 11662,
+      "path": "results/m0_07/oracle_graph_tensor_cache_result.json",
+      "sha256": "1b42cc48c3696f2c20797e0bb99cb102fc39039de05be4cb3446f7b61aea60f0"
+    },
+    "replay_receipt": {
+      "bytes": 1625,
+      "path": "results/phase1/combinatorial_repository_readiness_v1/graph_cache_recovery.json",
+      "sha256": "b19deaf52fdfdab442ae6726decf9bedb902ac51c9ea3c9c012f3e80bceb9d23"
+    },
+    "script": {
+      "bytes": 4203,
+      "path": "results/phase1/combinatorial_repository_readiness_v1/restore_graph_cache.py",
+      "sha256": "0617c2290b481708217c330ef59231b465ef804a61077e01f2eef1442d55282a"
+    }
+  },
+  "new_scientific_result": false,
+  "normalization": {
+    "after": 255,
+    "all_other_bytes_identical": true,
+    "before": 19,
+    "byte_offset": 9,
+    "candidate": {
+      "bytes": 650851,
+      "path": "results/phase1/combinatorial_repository_readiness_v1/graph_cache_candidate/oracle_graph_tensor_cache_metadata.csv.gz",
+      "sha256": "15537143ec33b74a27f8350632e94fab95334346ae1c5779082a8531a0ea3c38"
+    },
+    "final_sha256": "2b6fdd2df9e65dbf1f2c1f1fe753863adae624ad577fe8cb878f5617409a3c9d",
+    "uncompressed_sha256": "f2f1804dad8b221fb7adc5dc3461b0cb233894d83f42da47923bc808d8e63195"
+  },
+  "original_result_unchanged": true,
+  "original_sha256s_changed": false,
+  "restored": [
+    {
+      "bytes": 11865629,
+      "path": "results/m0_07/oracle_graph_tensor_cache.npz",
+      "sha256": "d71baed4d34afc4034106609ee11bc9523bb8bfa1319e640a5865588d33c0825"
+    },
+    {
+      "bytes": 650851,
+      "path": "results/m0_07/oracle_graph_tensor_cache_metadata.csv.gz",
+      "sha256": "2b6fdd2df9e65dbf1f2c1f1fe753863adae624ad577fe8cb878f5617409a3c9d"
+    }
+  ],
+  "schema_version": "forge.graph_cache_exact_restoration.v1",
+  "status": "all_original_artifact_bytes_restored",
+  "training_or_generation_calls": 0
+}

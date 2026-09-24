@@ -1,0 +1,322 @@
+{
+  "artifacts": {
+    "identities.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v1/identities.jsonl.gz",
+      "sha256": "a50fe53fffbf97fbc7d28561a5325d033b463a0ef3e172e60d492eedae657561"
+    },
+    "panels.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v1/panels.jsonl.gz",
+      "sha256": "9cd58614782464797c377f9c8113876016972ffd4fa3fc72cc977f67dd5a7c5e"
+    },
+    "rows.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v1/rows.jsonl.gz",
+      "sha256": "a542a6d9cce23695af9e203e3cc037cc2ee68cf3acd825198772194dbbb3cadd"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_precursor_audit_v1.json",
+    "sha256": "451819a97217147f780216f1f251aa5558053a6ecf1c632cee8cd9eb70a9aef5"
+  },
+  "created_at_utc": "2026-09-18T22:21:51.873845+00:00",
+  "implementation": {
+    "forge/assembly/compose_lipid.py": {
+      "path": "forge/assembly/compose_lipid.py",
+      "sha256": "9165923713077959e0c6ece3e12e63e669a7431ed0911f7d8f11284a90e6b0af"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_precursor_audit.py": {
+      "path": "forge/corpus/compose_lipid_precursor_audit.py",
+      "sha256": "5c0150950f57c435385b0849227774e5294399b34fad63785254192f92aef05d"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    }
+  },
+  "inputs": {
+    "program_results": [
+      {
+        "path": "results/phase1/compose_lipid_v8_passerini_program_v1/result.json",
+        "sha256": "eae0be457f2d0ebc863353c6c4af20c4554aeb765a202229b11518a8c7d64be2"
+      },
+      {
+        "path": "results/phase1/compose_lipid_v8_ugi3_program_v1/result.json",
+        "sha256": "7d4d247fdacf590a49737771e77f3bfbc1492da92253f5d813c3f8cde3be5f6a"
+      },
+      {
+        "path": "results/phase1/compose_lipid_v8_michael_program_v2/result.json",
+        "sha256": "cd7d3389f1ea2ea95add131164bf5bdab8dfcd8cc0cee14cf33eefc79896a841"
+      },
+      {
+        "path": "results/phase1/compose_lipid_v8_reductive_program_v1/result.json",
+        "sha256": "91bf8f3d068d86a70c1f25e179f539bb9035ab2636c31a05b3701d1bb9d3dfeb"
+      },
+      {
+        "path": "results/phase1/compose_lipid_v8_staar_program_v1/result.json",
+        "sha256": "21eec94e2f56de024c22501705f33332a5fbc081729a611ae79ce0b89bc4a17a"
+      }
+    ],
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    }
+  },
+  "policy": {
+    "chemistry_scope": "consume_pinned_program_evidence_no_new_chemistry_qualification",
+    "identity_scope": "exact_preparation_components_family_role_scoped_labels",
+    "provider_evaluation_graphs_parsed": false,
+    "random_sampling_used": false,
+    "seed": 0,
+    "source_splits_changed": false,
+    "training_calls": 0,
+    "training_rows_admitted": 0,
+    "unknown_labels": "unresolved_never_assumed_novel_or_disjoint"
+  },
+  "schema_version": "forge.compose_lipid_precursor_audit.v1",
+  "status": "partial_precursor_identity_audit_training_unqualified",
+  "summary": {
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "inspection_rows": 5556,
+        "preparation_rows": 5554,
+        "preparation_rows_without_program_evidence": 5554,
+        "prior_product_exclusions": 2
+      },
+      "acid_epoxide_diester_multistep": {
+        "inspection_rows": 8318,
+        "preparation_rows": 8318,
+        "preparation_rows_without_program_evidence": 8318,
+        "prior_product_exclusions": 0
+      },
+      "aema_aza_thiol_addition": {
+        "inspection_rows": 3314,
+        "preparation_rows": 3294,
+        "preparation_rows_without_program_evidence": 3294,
+        "prior_product_exclusions": 20
+      },
+      "aldehyde_ugi3": {
+        "exact_program_rows": 2577,
+        "exact_rows_clear_of_known_exclusions": 1063,
+        "exact_rows_with_known_protected_precursor": 1514,
+        "inspection_rows": 2967,
+        "preparation_rows": 2829,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 138,
+        "program_rows_evaluated": 2829,
+        "program_rows_not_exact": 252
+      },
+      "aldehyde_ugi4": {
+        "inspection_rows": 8474,
+        "preparation_rows": 8450,
+        "preparation_rows_without_program_evidence": 8450,
+        "prior_product_exclusions": 24
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "inspection_rows": 8287,
+        "preparation_rows": 8279,
+        "preparation_rows_without_program_evidence": 8279,
+        "prior_product_exclusions": 8
+      },
+      "amine_alkylation": {
+        "inspection_rows": 7821,
+        "preparation_rows": 7819,
+        "preparation_rows_without_program_evidence": 7819,
+        "prior_product_exclusions": 2
+      },
+      "amine_epoxide_opening": {
+        "inspection_rows": 6296,
+        "preparation_rows": 6296,
+        "preparation_rows_without_program_evidence": 6296,
+        "prior_product_exclusions": 0
+      },
+      "aryl_reductive_amination": {
+        "exact_program_rows": 4558,
+        "exact_rows_clear_of_known_exclusions": 2280,
+        "exact_rows_with_known_protected_precursor": 2278,
+        "inspection_rows": 4736,
+        "preparation_rows": 4724,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 12,
+        "program_rows_evaluated": 4724,
+        "program_rows_not_exact": 166
+      },
+      "aza_michael_acrylamide": {
+        "exact_program_rows": 4879,
+        "exact_rows_clear_of_known_exclusions": 2376,
+        "exact_rows_with_known_protected_precursor": 2503,
+        "inspection_rows": 4879,
+        "preparation_rows": 4879,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 0,
+        "program_rows_evaluated": 4879
+      },
+      "aza_michael_acrylate": {
+        "exact_program_rows": 5065,
+        "exact_rows_clear_of_known_exclusions": 2549,
+        "exact_rows_with_known_protected_precursor": 2516,
+        "inspection_rows": 5400,
+        "preparation_rows": 5376,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 24,
+        "program_rows_evaluated": 5376,
+        "program_rows_not_exact": 311
+      },
+      "disulfide_michael": {
+        "inspection_rows": 7674,
+        "preparation_rows": 7671,
+        "preparation_rows_without_program_evidence": 7671,
+        "prior_product_exclusions": 3
+      },
+      "epoxide_opening_o_acylation": {
+        "inspection_rows": 5048,
+        "preparation_rows": 5033,
+        "preparation_rows_without_program_evidence": 5033,
+        "prior_product_exclusions": 15
+      },
+      "iphos_ring_opening": {
+        "inspection_rows": 6988,
+        "preparation_rows": 6970,
+        "preparation_rows_without_program_evidence": 6970,
+        "prior_product_exclusions": 18
+      },
+      "ketone_isocyanide_amide": {
+        "inspection_rows": 9000,
+        "preparation_rows": 9000,
+        "preparation_rows_without_program_evidence": 9000,
+        "prior_product_exclusions": 0
+      },
+      "ketone_ugi4": {
+        "inspection_rows": 5877,
+        "preparation_rows": 5875,
+        "preparation_rows_without_program_evidence": 5875,
+        "prior_product_exclusions": 2
+      },
+      "maleate_addition": {
+        "inspection_rows": 5426,
+        "preparation_rows": 5409,
+        "preparation_rows_without_program_evidence": 5409,
+        "prior_product_exclusions": 17
+      },
+      "o_esterification": {
+        "inspection_rows": 4771,
+        "preparation_rows": 4762,
+        "preparation_rows_without_program_evidence": 4762,
+        "prior_product_exclusions": 9
+      },
+      "passerini_3cr": {
+        "exact_program_rows": 7007,
+        "exact_rows_clear_of_known_exclusions": 5279,
+        "exact_rows_with_known_protected_precursor": 1728,
+        "inspection_rows": 7007,
+        "preparation_rows": 7007,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 0,
+        "program_rows_evaluated": 7007
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "inspection_rows": 10534,
+        "preparation_rows": 10504,
+        "preparation_rows_without_program_evidence": 10504,
+        "prior_product_exclusions": 30
+      },
+      "reductive_amination": {
+        "exact_program_rows": 5800,
+        "exact_rows_clear_of_known_exclusions": 3813,
+        "exact_rows_with_known_protected_precursor": 1987,
+        "inspection_rows": 5810,
+        "preparation_rows": 5810,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 0,
+        "program_rows_evaluated": 5810,
+        "program_rows_not_exact": 10
+      },
+      "thiolactone_aminolysis_michael": {
+        "exact_program_rows": 9314,
+        "exact_rows_clear_of_known_exclusions": 6522,
+        "exact_rows_with_known_protected_precursor": 2792,
+        "inspection_rows": 9366,
+        "preparation_rows": 9314,
+        "preparation_rows_without_program_evidence": 0,
+        "prior_product_exclusions": 52,
+        "program_rows_evaluated": 9314
+      },
+      "vitamin_b5_multistep": {
+        "inspection_rows": 6187,
+        "preparation_rows": 6187,
+        "preparation_rows_without_program_evidence": 6187,
+        "prior_product_exclusions": 0
+      }
+    },
+    "conflicting_scoped_labels": 0,
+    "decomposition_precision": "not_established_by_this_identity_audit",
+    "global_precursor_holdout_qualified": false,
+    "identities_shared_across_families": 687,
+    "identities_shared_across_roles": 648,
+    "panels": {
+      "all_evaluation_rows": {
+        "all_role_identities_present_in_clear_exact_rows": 3308,
+        "all_roles_resolved_from_preparation": 5984,
+        "malformed_metadata": 4307,
+        "rows": 39950,
+        "unseen_precursor_label_claim_contradicted": 0
+      },
+      "source_study_transfer": {
+        "all_role_identities_present_in_clear_exact_rows": 0,
+        "all_roles_resolved_from_preparation": 0,
+        "malformed_metadata": 828,
+        "rows": 828,
+        "unseen_precursor_label_claim_contradicted": 0
+      },
+      "unseen_exact_combination": {
+        "all_role_identities_present_in_clear_exact_rows": 937,
+        "all_roles_resolved_from_preparation": 1523,
+        "malformed_metadata": 238,
+        "rows": 6327,
+        "unseen_precursor_label_claim_contradicted": 0
+      },
+      "unseen_precursor_identity": {
+        "all_role_identities_present_in_clear_exact_rows": 0,
+        "all_roles_resolved_from_preparation": 0,
+        "malformed_metadata": 1060,
+        "rows": 7002,
+        "unseen_precursor_label_claim_contradicted": 0
+      },
+      "unseen_regional_topology": {
+        "all_role_identities_present_in_clear_exact_rows": 561,
+        "all_roles_resolved_from_preparation": 1073,
+        "malformed_metadata": 436,
+        "rows": 5830,
+        "unseen_precursor_label_claim_contradicted": 0
+      }
+    },
+    "totals": {
+      "exact_program_rows": 39200,
+      "exact_rows_clear_of_known_exclusions": 23882,
+      "exact_rows_with_known_protected_precursor": 15318,
+      "inspection_rows": 149736,
+      "preparation_rows": 149360,
+      "preparation_rows_without_program_evidence": 109421,
+      "prior_product_exclusions": 376,
+      "program_rows_evaluated": 39939,
+      "program_rows_not_exact": 739
+    },
+    "training_ready": false,
+    "training_rows_admitted": 0,
+    "unique_exact_precursor_identities": 11613
+  }
+}

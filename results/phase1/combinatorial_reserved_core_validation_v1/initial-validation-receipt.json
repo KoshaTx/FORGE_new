@@ -1,0 +1,26 @@
+{
+  "archive": {
+    "path": "results/phase1/combinatorial_reserved_core_validation_v1/initial-validation.tar.gz",
+    "sha256": "d281cee5a765d046be1f86547b55627f0da330b0789efe2c34bd47dab72003ee"
+  },
+  "entries": [
+    {
+      "path": "results/phase1/combinatorial_reserved_core_validation_v1/focused-tests.log",
+      "sha256": "0d837f54f66dab6fce42e28d413115a67a0101882ca0e546bf0f71744ce0bf8e"
+    },
+    {
+      "path": "results/phase1/combinatorial_reserved_core_validation_v1/focused-tests.xml",
+      "sha256": "2d2de443ead4776b0b9166b5c5e18285e023c9dd44a62a8e53b3fdd8edc2f78a"
+    },
+    {
+      "path": "results/phase1/combinatorial_reserved_core_validation_v1/result.json",
+      "sha256": "b09e0240bc2c56e815aaa99573c7ccff0bb030f6d44efb462f6a5239669896df"
+    },
+    {
+      "path": "results/phase1/combinatorial_reserved_core_validation_v1/report_validation.py",
+      "sha256": "3d91f77773528ba95038434f7eed6e28cd06fc107326180fbde687765f8a5816"
+    }
+  ],
+  "reason": "Original pytest failure text contains trailing spaces. Compress original bytes without altering evidence or weakening whitespace checks.",
+  "status": "preserved_raw_validation_before_compressing_failed_test_logs"
+}

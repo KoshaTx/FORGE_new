@@ -447,6 +447,34 @@ def test_role_local_morphology_conditioning_requires_explicit_states() -> None:
         model(**model_inputs)
 
 
+@pytest.mark.parametrize("field", range(4))
+@pytest.mark.parametrize("boundary", ("negative", "upper"))
+def test_morphology_validation_preserves_every_field_bound(field, boundary) -> None:
+    model = _model(role_morphology_conditioning=True).eval()
+    batch = _batch()
+    states = batch["role_morphology_states"].clone()
+    states[0, 0, field] = (
+        -1
+        if boundary == "negative"
+        else model.program_encoder.role_morphology_embeddings[field].num_embeddings
+    )
+    inputs = {
+        key: batch[key]
+        for key in (
+            "program_states",
+            "role_states",
+            "core_position_states",
+            "program_depths",
+            "adapter_mask",
+            "repeat_group_states",
+            "component_position_states",
+        )
+    }
+    with pytest.raises(ValueError, match="outside declared support"):
+        model.program_encoder(**inputs, role_morphology_states=states)
+    assert not any("_morphology_limits" in key for key in model.state_dict())
+
+
 def test_repeat_consistency_loss_aligns_matched_exterior_positions() -> None:
     torch.manual_seed(35)
     batch = _batch()

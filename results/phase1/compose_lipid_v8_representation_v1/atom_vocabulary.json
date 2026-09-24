@@ -1,0 +1,105 @@
+{
+  "active_sparse_bond_indices": [
+    0,
+    1,
+    2
+  ],
+  "atom_vocabulary": [
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 0,
+      "symbol": "Br",
+      "train_atoms": 893
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 1,
+      "symbol": "C",
+      "train_atoms": 6576098
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 2,
+      "symbol": "N",
+      "train_atoms": 350327
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 1,
+      "index": 3,
+      "symbol": "N",
+      "train_atoms": 2718
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": -1,
+      "index": 4,
+      "symbol": "O",
+      "train_atoms": 9903
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 5,
+      "symbol": "O",
+      "train_atoms": 731472
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 6,
+      "symbol": "P",
+      "train_atoms": 9903
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 7,
+      "symbol": "S",
+      "train_atoms": 87184
+    }
+  ],
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_representation_v1.json",
+    "sha256": "fbfdc418ee83c66a5580f54c9b5c9403b1c46f3b14b7d740b8d7ef8dca21dc5d"
+  },
+  "fit_split": "protected_train_pending_precursor_qualification",
+  "heavy_atom_valence_capacities": [
+    2,
+    8,
+    6,
+    8,
+    2,
+    4,
+    10,
+    12
+  ],
+  "maximum_observed": {
+    "atoms": 96,
+    "closures": 8
+  },
+  "neutral_monovalent_extensions": [
+    "Br"
+  ],
+  "preserve_aromaticity": false,
+  "pretraining_audit": {
+    "path": "results/phase1/compose_lipid_v8_pretraining_v1/result.json",
+    "sha256": "d7696020e636fc7d1eea326fe4c19bb6ee56f51f6d1bc6bac7c96151afc96145"
+  },
+  "rdkit_version": "2026.03.5",
+  "schema_version": "forge.compose_lipid_kekule_vocabulary.v1",
+  "scope": "representation_only",
+  "status": "pass",
+  "training_admitted": false
+}

@@ -1,0 +1,180 @@
+{
+  "a3_architecture_conflicts": [
+    {
+      "disposition": "reject_claim",
+      "id": "han_asymmetric_event_count",
+      "reason": "The cited amine31 asymmetric procedure and Fig3e support one event, not two ordered events. This does not imply other repeated A3 products are impossible.",
+      "source_key_field": "architecture_subfamilies.han_ordered_two_event_asymmetric"
+    },
+    {
+      "disposition": "abstain",
+      "id": "31hP-M_CuCl_amount",
+      "locator": "SI PDF5 Supplementary Method2",
+      "reason": "CuCl is printed as 0.2 mmol and 0.1 equivalents for 0.2 mmol limiting substrate. Both values are preserved; no corrected amount or exact execution label is inferred."
+    }
+  ],
+  "a3_architecture_qualified": false,
+  "ambiguity_controls": [
+    {
+      "components": {
+        "maleate": "COC(=O)C=CC(=O)OCC",
+        "thiol_head": "CN(C)CCS"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C11H21NO4S",
+      "expected_forward_product_count": 2,
+      "expected_product": "CN(C)CCSC(C(=O)OC)CC(=O)OCC",
+      "family": "maleate_addition",
+      "interpretation": "Synthetic attribution control; no experimental failure label.",
+      "label": "asymmetric_maleate_thiol_ambiguous_orientation",
+      "reaction_id": "source_thiol_maleate_addition"
+    },
+    {
+      "components": {
+        "aldehyde": "C=O",
+        "alkyne": "C#CC",
+        "amine_head": "NCCNC"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C7H14N2",
+      "expected_forward_product_count": 2,
+      "expected_product": "CNCCNCC#CC",
+      "family": "a3_amine_aldehyde_alkyne",
+      "interpretation": "Synthetic attribution control; no experimental failure label.",
+      "label": "a3_unresolved_amine_site",
+      "reaction_id": "source_fixed_components_repeated_a3"
+    }
+  ],
+  "assets": {
+    "a3_12951_2024_2919_MOESM1_ESM.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM1_ESM.pdf",
+      "sha256": "897d6925eb292113dcf5b4385acedac346545081986b1cd584b96b9823236427"
+    },
+    "a3_12951_2024_2919_MOESM2_ESM.docx": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/12951_2024_2919_MOESM2_ESM.docx",
+      "sha256": "208b48e7f29485bb1590cf767f174f7735a2acadd265cec5f0630c9b8478c693"
+    },
+    "a3_acquisition-followup.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition-followup.json",
+      "sha256": "f5ceba8267c5624b835457eae6ac4fb5fcac7d007a6cae747f9ab6d64232a994"
+    },
+    "a3_acquisition.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/acquisition.json",
+      "sha256": "509b88d6bf93e6050a7daf1f74365c94303c806079c5c692ae61cfbb69d6c545"
+    },
+    "a3_extraction.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/extraction.json",
+      "sha256": "4e9d45846eca968f108fbe544983c6809f63d1e4514fe69efac3466aefe019fa"
+    },
+    "a3_han-epmc.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-epmc.json",
+      "sha256": "c62e3bcca097aa9cf71a1589264b1e2661690991b54e3e2068a7429487f952c2"
+    },
+    "a3_han-si-media.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han-si-media.pdf",
+      "sha256": "672330505add810c8f06b1bfe93e52921bdc093cb7d47794ddc04a9414418dd0"
+    },
+    "a3_han.html": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.html",
+      "sha256": "dfa99704fd97e7266ea215edb502a3b3b5c66b41e467adc52e726661a9d8a64e"
+    },
+    "a3_han.pdf": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/han.pdf",
+      "sha256": "df5d0ca78a22588f0561c8a391eb840b7bf389b442944b6486dd98004b7ee325"
+    },
+    "a3_lu-supplements.zip": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu-supplements.zip",
+      "sha256": "987bdc87479e62e9e4e7c054e5f6608b6ee65ca2f8be7c0a0dd157730d55fa7b"
+    },
+    "a3_lu.xml": {
+      "path": "results/phase1/compose_lipid_v8_a3_source_v1/lu.xml",
+      "sha256": "a22d525bad915040b237e8838bfec3fcdd417d73ad787334a94bd48b59d04550"
+    },
+    "esterification_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/nn2c07822_si_001.pdf",
+      "sha256": "17dbc706d03466803dbe61d853e808717b5cdc95e12e22c733ec100bcf651305"
+    },
+    "maleate_main": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate_article.xml",
+      "sha256": "bfaaa8e80b791cbe472875a07645d1902736fac2ecb20825a5fb23c576dc86bb"
+    },
+    "maleate_main_fig1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/maleate-main-fig1.jpg",
+      "sha256": "207a3daa4c541e9107b4618112583cdba4e7658de1c56c25aca694116ebf4a7a"
+    },
+    "maleate_si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/media-1.pdf",
+      "sha256": "a63a8b2546830b944e63dcb13d6f9065bc3e756dd5d0b3c95eb77866c536e1e3"
+    }
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "limitations": [
+    "A3 fixed-component virtual replay does not validate conflicting source architecture annotations.",
+    "49D8 control follows the reported library combination and generic drawn S-addition scheme; no individual isolated yield or spectrum is available.",
+    "Thiol and amine mechanisms have separate registry identities and controls."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_thiol_maleate_a3_program_v1.json",
+    "sha256": "3938325bf401a0f8a8bddce47840cbd1d9afb268993edf409e0702f6555ee033"
+  },
+  "schema_version": "forge.repeated_source_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "maleate": "CCCCCCCCOC(=O)C=CC(=O)OCCCCCCCC",
+        "thiol_head": "CN(C)CCS"
+      },
+      "events": 1,
+      "evidence_basis": "computed_transform_consistency",
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C24H47NO4S",
+      "expected_forward_product_count": 1,
+      "expected_product": "CN(C)CCSC(CC(=O)OCCCCCCCC)C(=O)OCCCCCCCC",
+      "family": "maleate_addition",
+      "label": "maleate_library_49D8",
+      "locator": "Main Fig. 1a-b reaction and library; SI Fig. 1 (PDF p. 1), thiol 49 and D8. Product is the explicit library combination of these source-drawn ingredients and generic drawn S-addition graph; no individual 49D8 spectrum claimed.",
+      "reaction_id": "source_thiol_maleate_addition"
+    },
+    {
+      "components": {
+        "aldehyde": "C=O",
+        "alkyne": "C#Cc1ccc(CCCCCC)cc1",
+        "amine_head": "CCN(CC)CCN"
+      },
+      "disposition": "admit_transform_consistency",
+      "events": 2,
+      "evidence_basis": "computed_transform_consistency",
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C36H52N2",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCN(CC)CCN(CC#Cc1ccc(CCCCCC)cc1)CC#Cc1ccc(CCCCCC)cc1",
+      "family": "a3_amine_aldehyde_alkyne",
+      "label": "Han_11(aB)2",
+      "locator": "Han main Methods p1421 Method A; main Fig2 amine11/alkyneB; SI PDF6 Supplementary Fig1 and product11(aB)2 characterization",
+      "reaction_id": "source_fixed_components_repeated_a3"
+    },
+    {
+      "components": {
+        "aldehyde": "O=Cc1ccc(C(=O)O)cc1",
+        "alkyne": "C#CCCCC(=O)O",
+        "amine_head": "CCN(CC)CCNC"
+      },
+      "disposition": "admit_transform_consistency",
+      "events": 1,
+      "evidence_basis": "computed_transform_consistency",
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C21H30N2O4",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCN(CC)CCN(C)C(c1ccc(C(=O)O)cc1)C#CCCCC(=O)O",
+      "family": "a3_amine_aldehyde_alkyne",
+      "label": "Han_31hP-M",
+      "locator": "Han SI PDF5 Supplementary Method2, scheme and product31hP-M characterization",
+      "reaction_id": "source_fixed_components_repeated_a3"
+    }
+  ],
+  "training_admitted": false
+}

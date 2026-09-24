@@ -1,0 +1,308 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_supplied_iphos_deprotonated_v1/replay.jsonl.gz",
+    "sha256": "7358bed15924dbf5f8422116874a96ef04e28d085e91af3e118836622423b8a9"
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_supplied_iphos_deprotonated_v1.json",
+    "sha256": "d945ce418edf18e9bed107d43c314788fb4b8ba85df36f44f077f38695727d8a"
+  },
+  "controls": {
+    "10A1P10_deprotonated": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 32,
+            "H": 68,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 32,
+            "H": 68,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCCCNCCCCCCCCCC",
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC",
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCNCCCCCCCCCC"
+          ]
+        ]
+      }
+    },
+    "9A1P9_deprotonated": {
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 27,
+            "H": 58,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 27,
+            "H": 58,
+            "N": 1,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CCCCCCCCNCCCCCCCC",
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CCCCCCCCNCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC",
+            "CCCCCCCCNCCCCCCCC"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC"
+          ],
+          [
+            "CCCCCCCCNCCCCCCCC"
+          ]
+        ]
+      }
+    },
+    "non_equivalent_nitrogens_deprotonated": {
+      "kind": "ambiguity_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 7,
+            "H": 19,
+            "N": 2,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 7,
+            "H": 19,
+            "N": 2,
+            "O": 4,
+            "P": 1,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "CNCCCN",
+            "CNCCCNCCOP(=O)([O-])OC"
+          ],
+          [
+            1,
+            "CNCCCN",
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "CNCCCN"
+          ],
+          [
+            "CNCCCNCCOP(=O)([O-])OC",
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "COP(=O)([O-])OCCN(C)CCCN",
+            "CNCCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "COP(=O)([O-])OCCN(C)CCCN"
+          ],
+          [
+            "CNCCCN"
+          ]
+        ]
+      }
+    }
+  },
+  "environment": {
+    "python": "3.11.15",
+    "rdkit": "2026.03.5"
+  },
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_current_replay.py": {
+      "path": "forge/corpus/compose_lipid_current_replay.py",
+      "sha256": "f7bb5d9da5a7bcfaab74ecfd88f8bcc74a0db37a9315b30a8b920e9c5aab0618"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_supplied_replay.py": {
+      "path": "forge/corpus/compose_lipid_supplied_replay.py",
+      "sha256": "bfcd79a95ffdcb1b631d17d04f530da446cd69a6da1c0c6e2f0b04ff2e9c2221"
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_iphos_deprotonated_program_v1.json",
+      "sha256": "5ea61e767e45ef167e19e197b68cc0da94e6a9274e2335a583b12e521485000e"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_iphos_source_v1/adjudication-deprotonated.json",
+      "sha256": "71d0166aaca4b7c19f5c2c4d94a77e6859168ad3a2368faf28f73c9dd8799a24"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "supplied_instance_quantities_checked_against_metadata_when_present",
+    "population": "current_full_preparation_eligible_only",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_current_replay.v1",
+  "status": "computed_replay_complete_training_unqualified",
+  "summary": {
+    "by_family": {
+      "iphos_ring_opening": {
+        "exact_computed_reconstruction": 3256,
+        "failed_declared_event_count_replayed": 1575,
+        "failed_full_element_hydrogen_charge_balance": 1721,
+        "failed_unique_declared_side_inverse": 1903,
+        "failed_unique_forward_exact": 2038,
+        "rows": 5294,
+        "unresolved_computed_reconstruction": 2038
+      }
+    },
+    "totals": {
+      "exact_computed_reconstruction": 3256,
+      "failed_declared_event_count_replayed": 1575,
+      "failed_full_element_hydrogen_charge_balance": 1721,
+      "failed_unique_declared_side_inverse": 1903,
+      "failed_unique_forward_exact": 2038,
+      "rows": 5294,
+      "unresolved_computed_reconstruction": 2038
+    }
+  }
+}

@@ -13,6 +13,7 @@ from typing import Any
 import numpy as np
 
 from experiments.archive.phase1.design_audits.canonical_representation_audit import load_atom_vocabulary
+from forge.model import ugi_chemistry_interface
 from forge.model.defog_feasibility import AtomState, sha256_file
 from forge.model.ugi_adapter_features import tensorize_ugi_l1_support_record
 from forge.model.ugi_chemistry_interface import (
@@ -33,7 +34,7 @@ class UgiChemistryInterfaceAuditError(RuntimeError):
 
 
 _IMPLEMENTATION_PATHS = {
-    "ugi_chemistry_interface": Path(__file__).with_name("ugi_chemistry_interface.py").resolve(),
+    "ugi_chemistry_interface": Path(ugi_chemistry_interface.__file__).resolve(),
     "ugi_chemistry_interface_audit": Path(__file__).resolve(),
 }
 

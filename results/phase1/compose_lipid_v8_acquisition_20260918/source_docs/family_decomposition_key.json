@@ -1,0 +1,1721 @@
+{
+ "a3_amine_aldehyde_alkyne": {
+  "architecture_subfamilies": [
+   {
+    "id": "lu_single_event_formaldehyde",
+    "literature_or_source_stratum": "Lu library",
+    "port_signature": "one selected N site; one alkyne",
+    "scaffold_invariant": "one A3 event using formaldehyde",
+    "separation_reason": "event-count scaffold"
+   },
+   {
+    "id": "han_symmetric_a3",
+    "literature_or_source_stratum": "Han libraries 1-2",
+    "port_signature": "source-declared repeated ports",
+    "scaffold_invariant": "symmetric A3 exterior with biodegradable alkyne options",
+    "separation_reason": "source architecture"
+   },
+   {
+    "id": "han_ordered_two_event_asymmetric",
+    "literature_or_source_stratum": "Han libraries 3-5",
+    "port_signature": "two ordered, nonequivalent event ports",
+    "scaffold_invariant": "two ordered A3 events using long-chain aldehydes and asymmetric exteriors",
+    "separation_reason": "distinct program and scaffold context"
+   }
+  ],
+  "axis_values": {},
+  "complete_subcomponent_profile": [
+   "complete amine",
+   "complete aldehyde",
+   "complete terminal alkyne or prepared coupled alkyne"
+  ],
+  "field_to_role": {
+   "aldehyde_id": [
+    "aldehyde"
+   ],
+   "alkyne_id": [
+    "alkyne"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "Lu A3 high-throughput library",
+    "official_design": "28+2 amines x 21 alkynes with formaldehyde; 623 synthesized lipids",
+    "pmid": "39497197",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11536852/"
+   },
+   {
+    "doi": "10.1038/s41551-024-01267-7",
+    "library": "Han directed chemical evolution A3 libraries 1-5",
+    "official_design": "symmetric, biodegradable, asymmetric long-chain-aldehyde, tail and head optimization libraries",
+    "pmid": "39578640"
+   }
+  ],
+  "never_collapse": [
+   "half-built starting products",
+   "single/two-event collapse",
+   "unreviewed cross-paper site assignments"
+  ],
+  "reaction_program_invariant": "Each A3 event joins an explicitly selected amine site, aldehyde and terminal alkyne; multi-event programs preserve event count and order.",
+  "roles": {
+   "aldehyde": 1,
+   "alkyne": 1,
+   "amine_head": 1
+  },
+  "title": "A3 amine-aldehyde-alkyne lipids",
+  "universe_rows": 70016,
+  "user_authorized_knobs": [
+   "head exchange within exact site contract",
+   "aldehyde series",
+   "alkyne length/branch/positional unsaturation/internal ester",
+   "single versus ordered two-event designs"
+  ],
+  "variable": [
+   "events"
+  ]
+ },
+ "acid_epoxide_diester_multistep": {
+  "architecture_subfamilies": [
+   {
+    "id": "acid_epoxide_site_ordered_12_diester",
+    "literature_or_source_stratum": "source staged library",
+    "port_signature": "three roles with fixed site order",
+    "scaffold_invariant": "retained ionizable acid region plus epoxide-derived and acid-derived hydrophobes",
+    "separation_reason": "distinct staged scaffold"
+   }
+  ],
+  "axis_values": {
+   "epoxide_axis": [
+    "linear_total_carbon_length",
+    "ester_plus_positional_monoene",
+    "branch_plus_positional_monoene",
+    "positional_diene",
+    "branch_plus_internal_ester",
+    "single_internal_ester_position",
+    "positional_mono_unsaturation",
+    "single_branch_partition"
+   ],
+   "head_axis": [
+    "dimethylamino_acid_spacer",
+    "diethylamino_acid_spacer",
+    "reported_source_head_acid"
+   ],
+   "hydrophobic_acid_axis": [
+    "ester_plus_positional_monoene",
+    "linear_total_carbon_length",
+    "branch_plus_positional_monoene",
+    "positional_diene",
+    "branch_plus_internal_ester",
+    "single_internal_ester_position",
+    "single_branch_partition",
+    "positional_mono_unsaturation"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine-bearing acid",
+   "complete terminal epoxide",
+   "complete hydrophobic acid"
+  ],
+  "field_to_role": {
+   "epoxide_id": [
+    "epoxide"
+   ],
+   "head_id": [
+    "amine_acid_head"
+   ],
+   "hydrophobic_acid_id": [
+    "hydrophobic_acid"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1002/adhm.202302691",
+    "library": "Advanced Healthcare Materials acid-epoxide diester library",
+    "official_design": "amine-bearing acid, terminal epoxide and hydrophobic acid in a staged construction",
+    "pmid": "37990414"
+   }
+  ],
+  "never_collapse": [
+   "generic amine-epoxide replay",
+   "unbound site order",
+   "head on wrong side of the amine-bearing acid"
+  ],
+  "reaction_program_invariant": "Complete amine-bearing acid, complete terminal epoxide and complete hydrophobic acid follow the bound staged ring-opening/esterification program.",
+  "roles": {
+   "amine_acid_head": 1,
+   "epoxide": 1,
+   "hydrophobic_acid": 1
+  },
+  "title": "Acid/epoxide staged 1,2-diester lipids",
+  "universe_rows": 232240,
+  "user_authorized_knobs": [
+   "amine-bearing acid homologues",
+   "epoxide body length/branch/unsaturation/internal ester and ring-to-body spacing",
+   "acid body length/branch/unsaturation/internal ester",
+   "mono/diene and controlled crosses"
+  ],
+  "variable": []
+ },
+ "aema_aza_thiol_addition": {
+  "architecture_subfamilies": [
+   {
+    "id": "g1_exact_occupancy",
+    "literature_or_source_stratum": "Zhou G1 library",
+    "port_signature": "mapped AEMA ports; identical peripheral arms",
+    "scaffold_invariant": "source polyamine with exact AEMA occupancy and repeated thiol periphery",
+    "separation_reason": "published 42x36 design"
+   },
+   {
+    "id": "higher_generation_aema",
+    "literature_or_source_stratum": "Zhou higher-generation strata",
+    "port_signature": "different port count/topology",
+    "scaffold_invariant": "higher-generation core and source-declared occupancy",
+    "separation_reason": "port-count architecture"
+   },
+   {
+    "id": "unsaturated_periphery_aema",
+    "literature_or_source_stratum": "AEMA follow-up",
+    "port_signature": "fixed core/occupancy; unsaturated repeated arms",
+    "scaffold_invariant": "same staged core with source unsaturated thiols",
+    "separation_reason": "separate paper periphery stratum"
+   }
+  ],
+  "axis_values": {
+   "thiol_axis": [
+    "positional_mono_unsaturation",
+    "single_internal_ester_position",
+    "reported_source_periphery",
+    "missing_linear_homologue"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete polyamine core",
+   "fixed AEMA interface repeated at mapped N-H sites",
+   "one complete thiol repeated over mapped periphery"
+  ],
+  "field_to_role": {
+   "core_id": [
+    "amine_core"
+   ],
+   "thiol_id": [
+    "thiol_periphery"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1073/pnas.1520756113",
+    "library": "Zhou AEMA degradable dendrimer library",
+    "official_design": "42 cores x 36 peripheries via ordered aza-Michael/AEMA then thiol-Michael chemistry",
+    "pmid": "26729861"
+   },
+   {
+    "doi": "10.1002/anie.202013927",
+    "library": "AEMA unsaturated follow-up",
+    "official_design": "source unsaturated periphery series",
+    "pmid": "33305471"
+   }
+  ],
+  "never_collapse": [
+   "maximum-NH occupancy inference",
+   "independent peripheral arm mixing",
+   "cross-paper combinations without exact occupancy replay"
+  ],
+  "reaction_program_invariant": "A polyamine receives its declared AEMA occupancy, then the remaining methacrylate ports receive one repeated complete thiol identity.",
+  "roles": {
+   "amine_core": 1,
+   "thiol_periphery": 1
+  },
+  "title": "AEMA aza-addition followed by thiol addition",
+  "universe_rows": 13865,
+  "user_authorized_knobs": [
+   "core topology within occupancy stratum",
+   "thiol length",
+   "branching only where body length supports it",
+   "positional unsaturation",
+   "internal ester position",
+   "reviewed cross-paper core/periphery combinations"
+  ],
+  "variable": []
+ },
+ "aldehyde_ugi3": {
+  "architecture_subfamilies": [
+   {
+    "id": "agile_biodegradable_ugi3",
+    "literature_or_source_stratum": "AGILE",
+    "port_signature": "three inequivalent ports",
+    "scaffold_invariant": "amine head plus biodegradable aldehyde tail and isocyanide tail",
+    "separation_reason": "official AGILE library"
+   },
+   {
+    "id": "bowen_pnas_dual_tail_ugi3",
+    "literature_or_source_stratum": "Bowen PNAS 2023",
+    "port_signature": "three inequivalent ports",
+    "scaffold_invariant": "head plus tail A plus tail B with its own codebook",
+    "separation_reason": "separate published reagent bank"
+   }
+  ],
+  "axis_values": {},
+  "complete_subcomponent_profile": [
+   "complete primary amine head",
+   "complete aldehyde hydrophobe",
+   "complete isocyanide hydrophobe"
+  ],
+  "field_to_role": {},
+  "literature_libraries": [
+   {
+    "doi": "10.1038/s41467-024-50619-z",
+    "library": "AGILE Ugi-3CR library",
+    "official_design": "20 experimental heads x 12 biodegradable aldehyde chains x 5 isocyanide chains; 60,000 virtual pretraining library",
+    "pmid": "39060305"
+   },
+   {
+    "doi": "10.1073/pnas.2309472120",
+    "library": "Bowen Li PNAS muscle-selective 3CR library",
+    "official_design": "amine head, aldehyde tail and isocyanide tail",
+    "pmid": "38060560"
+   }
+  ],
+  "never_collapse": [
+   "automatic AGILE/PNAS cross-grid",
+   "using a ketone in the aldehyde family"
+  ],
+  "reaction_program_invariant": "One complete primary amine, aldehyde and isocyanide form the exact three-component Ugi amide product.",
+  "roles": {
+   "aldehyde": 1,
+   "amine": 1,
+   "isocyanide": 1
+  },
+  "title": "Aldehyde Ugi three-component lipids",
+  "universe_rows": 18842,
+  "user_authorized_knobs": [
+   "head class/spacer",
+   "aldehyde tail length/branch/unsaturation/internal ester",
+   "isocyanide tail length/branch/ring",
+   "controlled tail asymmetry",
+   "one- then two-coordinate grids"
+  ],
+  "variable": []
+ },
+ "aldehyde_ugi4": {
+  "architecture_subfamilies": [
+   {
+    "id": "bowen_4cr_ordinary",
+    "literature_or_source_stratum": "Bowen 2024 ordinary grid",
+    "port_signature": "four inequivalent precursor ports",
+    "scaffold_invariant": "ordinary retained head plus two coherent hydrophobic regions around Ugi core",
+    "separation_reason": "paper grid"
+   },
+   {
+    "id": "lumi_ordinary_source_parented",
+    "literature_or_source_stratum": "LUMI ordinary region contexts",
+    "port_signature": "four inequivalent precursor ports",
+    "scaffold_invariant": "same Ugi core with ordinary component-role organization",
+    "separation_reason": "released reagent/source-parent context"
+   },
+   {
+    "id": "lumi_specialized_fixed",
+    "literature_or_source_stratum": "LUMI specialized source contexts",
+    "port_signature": "four inequivalent ports; specialized port frozen",
+    "scaffold_invariant": "source-specialized aromatic, sulfur, N-N or polycyclic region held fixed",
+    "separation_reason": "prevents specialized chemistry from becoming an ordinary swap"
+   }
+  ],
+  "axis_values": {},
+  "complete_subcomponent_profile": [
+   "complete amine",
+   "complete aldehyde",
+   "complete monocarboxylic acid",
+   "complete isocyanide"
+  ],
+  "field_to_role": {},
+  "literature_libraries": [
+   {
+    "doi": "10.1038/s41563-024-01867-3",
+    "library": "Bowen Li Nature Materials 4CR library",
+    "official_design": "584 assayed lipids and a 40,000-member 40x10x10x10 virtual library",
+    "pmid": "38740955"
+   },
+   {
+    "library": "LUMI released reagent grid",
+    "official_design": "complete amine, aldehyde, acid and isocyanide tables; virtual reagent contexts are not all experimental products"
+   }
+  ],
+  "never_collapse": [
+   "role interchange",
+   "changing to or from specialized components in an ordinary lane",
+   "calling a one-role replacement local without a role-specific analogue edge"
+  ],
+  "reaction_program_invariant": "One complete amine, aldehyde, acid and isocyanide form the aldehyde-derived Ugi bis-amide connectivity.",
+  "roles": {
+   "aldehyde": 1,
+   "amine": 1,
+   "carboxylic_acid": 1,
+   "isocyanide": 1
+  },
+  "title": "Aldehyde Ugi four-component lipids",
+  "universe_rows": 222029,
+  "user_authorized_knobs": [
+   "head scaffold/spacer/N-substitution",
+   "each hydrophobe length/branch/unsaturation",
+   "aldehyde and acid internal-ester spacing",
+   "isocyanide alkyl/ring/ester homologues",
+   "source-parented one-role grids",
+   "closed two-role squares"
+  ],
+  "variable": []
+ },
+ "alpha_isocyanoester_dihydroimidazole": {
+  "architecture_subfamilies": [
+   {
+    "id": "miao_cyclic_dihydroimidazole",
+    "literature_or_source_stratum": "Miao cyclic branch",
+    "port_signature": "three roles; primary-amine ring closure",
+    "scaffold_invariant": "dihydroimidazole ring with coupled ketone-derived substituents",
+    "separation_reason": "cyclic source branch"
+   }
+  ],
+  "axis_values": {
+   "head_axis": [
+    "cyclic_amine_spacer",
+    "diethylamino_spacer",
+    "dimethylamino_spacer"
+   ],
+   "ketone_axis": [
+    "paired_single_internal_ester",
+    "paired_single_branch_partition",
+    "one_arm_single_internal_ester",
+    "one_arm_single_branch_partition",
+    "reported_source_ketone"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete primary amine",
+   "complete coupled ketone",
+   "fixed/reviewed alpha-isocyanoester"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "isocyanide_id": [
+    "isocyanide"
+   ],
+   "ketone_id": [
+    "coupled_ketone"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1038/s41587-019-0247-3",
+    "library": "Miao iLY1809/dihydroimidazole library",
+    "official_design": "amine, coupled ketone and alpha-isocyanoester form cyclic dihydroimidazole products",
+    "pmid": "31570898"
+   }
+  ],
+  "never_collapse": [
+   "mixing with acyclic Miao branch",
+   "splitting ketone arms",
+   "secondary amine closure"
+  ],
+  "reaction_program_invariant": "Primary amine, complete coupled ketone and alpha-isocyanoester close to the source dihydroimidazole ring.",
+  "roles": {
+   "amine_head": 1,
+   "coupled_ketone": 1,
+   "isocyanide": 1
+  },
+  "title": "Alpha-isocyanoester dihydroimidazole lipids",
+  "universe_rows": 219036,
+  "user_authorized_knobs": [
+   "head spacer/ring/hydroxylation",
+   "coupled ketone arm length/branch/unsaturation/internal ester",
+   "isocyanoester substituent only after explicit review"
+  ],
+  "variable": []
+ },
+ "amine_alkylation": {
+  "architecture_subfamilies": [
+   {
+    "id": "ren_bromoester_n_alkylation",
+    "literature_or_source_stratum": "Ren source",
+    "port_signature": "explicit N site; other Ns nonreactive/tertiary",
+    "scaffold_invariant": "amine head plus complete bromoester hydrophobes",
+    "separation_reason": "published library"
+   },
+   {
+    "id": "reference_clinical_n_alkylation",
+    "literature_or_source_stratum": "source/reference lipids",
+    "port_signature": "exact site and event count",
+    "scaffold_invariant": "source-specific N-alkylation scaffold",
+    "separation_reason": "reference chemistry is not an expansion pool"
+   }
+  ],
+  "axis_values": {
+   "arm_axis": [
+    "positional_mono_unsaturation",
+    "conservative_branch_partition"
+   ],
+   "head_axis": [
+    "reported_source_head"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine head",
+   "complete alkyl/bromoester electrophile"
+  ],
+  "field_to_role": {
+   "arm_id": [
+    "bromoester_arm"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "Ren bromoester-tail library",
+    "official_design": "amine heads N-alkylated with complete brominated ester tails",
+    "pmid": "39099464"
+   }
+  ],
+  "never_collapse": [
+   "O-alkylation",
+   "reaction at tertiary N unless quaternary source stratum",
+   "pooling vitamin-B5 multistep products"
+  ],
+  "reaction_program_invariant": "Explicit non-amide amine sites undergo N-alkylation by complete alkyl electrophiles with exact event count and charge state.",
+  "roles": {
+   "amine_head": 1,
+   "bromoester_arm": 2
+  },
+  "title": "Amine N-alkylation lipids",
+  "universe_rows": 188272,
+  "user_authorized_knobs": [
+   "head scaffold/site/occupancy",
+   "tail length",
+   "ester position/orientation",
+   "branch point and size",
+   "positional unsaturation",
+   "reviewed branch x unsaturation x ester crosses"
+  ],
+  "variable": []
+ },
+ "amine_epoxide_opening": {
+  "architecture_subfamilies": [
+   {
+    "id": "anderson_ordinary_epoxide_lipidoid",
+    "literature_or_source_stratum": "Anderson epoxide library",
+    "port_signature": "source-declared N-site occupancy",
+    "scaffold_invariant": "polyamine plus repeated alkyl epoxide arms",
+    "separation_reason": "official epoxide library"
+   },
+   {
+    "id": "paracyclophane_three_arm_epoxide",
+    "literature_or_source_stratum": "Wu paracyclophane Ep",
+    "port_signature": "three declared ports",
+    "scaffold_invariant": "preassembled paracyclophane diamide with repeated epoxide-derived arms",
+    "separation_reason": "distinct scaffold"
+   },
+   {
+    "id": "han_db_aminoalcohol_intermediate",
+    "literature_or_source_stratum": "Han DB stage 1",
+    "port_signature": "mapped N sites and two beta-OH outputs",
+    "scaffold_invariant": "amine plus two repeated body epoxides",
+    "separation_reason": "stage-1 architecture"
+   },
+   {
+    "id": "hepes_or_source_specific_epoxide_core",
+    "literature_or_source_stratum": "HEPES/source-specific libraries",
+    "port_signature": "source-specific sites/charge",
+    "scaffold_invariant": "fixed heterocyclic/polar core with epoxide arms",
+    "separation_reason": "do not pool solely because epoxide chemistry matches"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "positional_diene",
+    "branch_plus_positional_monoene",
+    "positional_mono_unsaturation",
+    "single_internal_ester_position",
+    "linear_total_carbon_length"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine/core",
+   "complete terminal or glycidyl epoxide"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "tail_id": [
+    "epoxide_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1073/pnas.0910603106",
+    "library": "Anderson epoxide-derived lipidoid library",
+    "official_design": "amine-containing monomers x epoxide-terminated alkyl chains",
+    "pmid": "20080679"
+   },
+   {
+    "library": "Paracyclophane Ep series",
+    "official_design": "paracyclophane core with repeated epoxide-derived arms",
+    "pmid": "39424104"
+   },
+   {
+    "library": "Han DB aminoalcohol intermediates",
+    "official_design": "first stage of the two-stage DB/rocket architecture",
+    "pmid": "38409275"
+   }
+  ],
+  "never_collapse": [
+   "all amines in one pool",
+   "site/occupancy inference",
+   "regioisomer collapse"
+  ],
+  "reaction_program_invariant": "One or more explicitly selected amine sites open complete epoxides with mapped regioisomer and occupancy.",
+  "roles": {
+   "amine_head": 1,
+   "epoxide_tail": 6
+  },
+  "title": "Amine opening of epoxides",
+  "universe_rows": 97439,
+  "user_authorized_knobs": [
+   "head/site/occupancy",
+   "C6-C18 body length",
+   "branch position/partition",
+   "positional unsaturation",
+   "glycidyl internal ester position",
+   "reviewed crosses"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "aryl_reductive_amination": {
+  "architecture_subfamilies": [
+   {
+    "id": "xue_a2_aryl_core",
+    "literature_or_source_stratum": "Xue A2 series",
+    "port_signature": "source-declared aldehyde and coupled arm ports",
+    "scaffold_invariant": "A2 aryl substitution/core topology",
+    "separation_reason": "fixed aromatic scaffold"
+   },
+   {
+    "id": "xue_a3_aryl_core",
+    "literature_or_source_stratum": "Xue A3 series",
+    "port_signature": "source-declared aldehyde and coupled arm ports",
+    "scaffold_invariant": "A3 aryl substitution/core topology",
+    "separation_reason": "distinct aromatic scaffold"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "identical_positional_diene"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine",
+   "complete preassembled aryl aldehyde core"
+  ],
+  "field_to_role": {
+   "aldehyde_id": [
+    "coupled_aldehyde"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "Xue aryl-core reductive-amination library",
+    "official_design": "source aryl aldehyde cores and amine heads",
+    "pmid": "38424061"
+   }
+  ],
+  "never_collapse": [
+   "pooling with aliphatic reductive amination",
+   "independent coupled-arm selection",
+   "changing aryl substitution as a local tail knob"
+  ],
+  "reaction_program_invariant": "Source aryl aldehyde/amine systems form mapped reduced C-N linkages while retaining their complete aryl ester cores and coupled arms.",
+  "roles": {
+   "amine_head": 1,
+   "coupled_aldehyde": 1
+  },
+  "title": "Aryl-core reductive amination lipids",
+  "universe_rows": 48090,
+  "user_authorized_knobs": [
+   "head series",
+   "coupled arm length",
+   "coupled branch morphology",
+   "coupled positional unsaturation"
+  ],
+  "variable": []
+ },
+ "aza_michael_acrylamide": {
+  "architecture_subfamilies": [
+   {
+    "id": "lipidoid_2008_n_series_full_occupancy",
+    "literature_or_source_stratum": "2008 N-series",
+    "port_signature": "1-7 mapped N-addition ports; repeated acceptor",
+    "scaffold_invariant": "source amine with source maximum or reported acrylamide occupancy",
+    "separation_reason": "official N-series/tail-count nomenclature"
+   },
+   {
+    "id": "partial_occupancy_acrylamide",
+    "literature_or_source_stratum": "reported partial-isomer strata",
+    "port_signature": "explicit subset of N ports",
+    "scaffold_invariant": "same core at explicitly lower occupancy",
+    "separation_reason": "occupancy is architecture"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "branch_plus_positional_monoene",
+    "positional_mono_unsaturation",
+    "linear_saturated_body_length"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine core",
+   "one complete acrylamide identity repeated at mapped sites"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "tail_id": [
+    "acceptor_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1038/nbt1402",
+    "library": "2008 N-series lipidoids",
+    "official_design": "amine number + acrylamide N-code + tail count; 1-7 additions depending on amine",
+    "pmid": "18438401"
+   }
+  ],
+  "never_collapse": [
+   "pooling acrylate and acrylamide",
+   "unrecorded occupancy",
+   "independent repeated-tail choices"
+  ],
+  "reaction_program_invariant": "Mapped amine sites add to complete acrylamide acceptors, preserving the beta-amino-amide interface and exact occupancy.",
+  "roles": {
+   "acceptor_tail": 2,
+   "amine_head": 1
+  },
+  "title": "Aza-Michael acrylamide lipidoids",
+  "universe_rows": 31239,
+  "user_authorized_knobs": [
+   "head topology within occupancy",
+   "N9-N18 tail homologues",
+   "branching",
+   "positional unsaturation",
+   "internal ester where compatible",
+   "crosses after one-axis qualification"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "aza_michael_acrylate": {
+  "architecture_subfamilies": [
+   {
+    "id": "lipidoid_2008_o_series_full_occupancy",
+    "literature_or_source_stratum": "2008 O-series",
+    "port_signature": "mapped N ports; repeated acceptor",
+    "scaffold_invariant": "source amine plus repeated alkyl acrylate",
+    "separation_reason": "official O-series"
+   },
+   {
+    "id": "paracyclophane_three_arm_acrylate",
+    "literature_or_source_stratum": "Wu paracyclophane Acr",
+    "port_signature": "three source-declared ports",
+    "scaffold_invariant": "preassembled paracyclophane diamide core with three repeated arms",
+    "separation_reason": "distinct scaffold"
+   },
+   {
+    "id": "ricinoleic_complete_acrylate",
+    "literature_or_source_stratum": "pulmonary/ricinoleic sources",
+    "port_signature": "paper-specific mapped ports",
+    "scaffold_invariant": "complete ricinoleic-derived acrylate carries its own hydrophobe/interface",
+    "separation_reason": "prepared acceptor grammar"
+   },
+   {
+    "id": "multiarm_dendron_acrylate",
+    "literature_or_source_stratum": "multiarm paper",
+    "port_signature": "one acceptor object encodes multiple arms",
+    "scaffold_invariant": "complete multiarm degradable acrylate tail object",
+    "separation_reason": "do not fragment multiarm precursor"
+   },
+   {
+    "id": "akinc_or_whitehead_ordinary_acrylate",
+    "literature_or_source_stratum": "source ordinary acrylate libraries",
+    "port_signature": "explicit N sites",
+    "scaffold_invariant": "source amine and paper-specific ordinary acrylate occupancy",
+    "separation_reason": "keeps source library partitions auditable"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "branch_plus_positional_monoene",
+    "positional_mono_unsaturation",
+    "linear_saturated_body_length"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine or paper-specific core",
+   "complete acrylate acceptor; may itself be a prepared multiarm object"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "tail_id": [
+    "acceptor_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1038/nbt1402",
+    "library": "2008 O-series lipidoids",
+    "official_design": "amine number + acrylate O-code + tail count",
+    "pmid": "18438401"
+   },
+   {
+    "library": "Paracyclophane Acr series",
+    "official_design": "preassembled paracyclophane core plus repeated acrylate arms",
+    "pmid": "39424104"
+   },
+   {
+    "library": "ricinoleic/pulmonary acrylate libraries",
+    "official_design": "paper-specific complete acrylate tails",
+    "pmids": [
+     "36997680",
+     "38437545"
+    ]
+   },
+   {
+    "library": "multiarm dendron acrylate library",
+    "official_design": "preassembled multiarm degradable acrylates plus amine cores",
+    "pmid": "39742515"
+   }
+  ],
+  "never_collapse": [
+   "global amine/acrylate Cartesian pooling",
+   "fragmenting preassembled acceptors",
+   "assuming all N-H sites react"
+  ],
+  "reaction_program_invariant": "Mapped amine sites add to complete acrylates under a source-subseries-specific occupancy and prepared-tail contract.",
+  "roles": {
+   "acceptor_tail": 2,
+   "amine_head": 1
+  },
+  "title": "Aza-Michael acrylate lipids",
+  "universe_rows": 33619,
+  "user_authorized_knobs": [
+   "O9-O18 and paper-specific length series",
+   "branch/unsaturation/internal ester within each acceptor grammar",
+   "head/site/occupancy within subseries",
+   "controlled crossed variants"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "disulfide_michael": {
+  "architecture_subfamilies": [
+   {
+    "id": "single_site_ldil",
+    "literature_or_source_stratum": "LDIL occupancy class",
+    "port_signature": "one selected N-H site",
+    "scaffold_invariant": "one SCC arm",
+    "separation_reason": "occupancy architecture"
+   },
+   {
+    "id": "multi_site_symmetric_ldil",
+    "literature_or_source_stratum": "LDIL multiarm class",
+    "port_signature": "2-3 mapped equivalent/declared sites",
+    "scaffold_invariant": "multiple identical SCC arms",
+    "separation_reason": "port-count architecture"
+   },
+   {
+    "id": "four_arm_4a3_scc",
+    "literature_or_source_stratum": "4A3-SCC source series",
+    "port_signature": "four declared ports",
+    "scaffold_invariant": "one 4A3 head plus four disulfide-bridged linkers/tails",
+    "separation_reason": "paper-highlighted cone architecture"
+   }
+  ],
+  "axis_values": {
+   "head_axis": [
+    "reported_disulfide_head"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine/head core",
+   "one complete SCC acceptor repeated at declared sites"
+  ],
+  "field_to_role": {
+   "arm_id": [
+    "disulfide_acceptor"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1021/jacs.3c09143",
+    "library": "LDIL disulfide-linker library",
+    "official_design": "96 linker-degradable lipids; amino headgroups plus repeated SCC disulfide-ester acceptors",
+    "pmid": "37853662"
+   }
+  ],
+  "never_collapse": [
+   "generic disulfide coupling",
+   "independent repeated arms",
+   "adding at amide or tertiary nitrogens"
+  ],
+  "reaction_program_invariant": "Complete SCC/disulfide acceptors add at explicitly selected non-amide N-H sites; the acceptor linkage and repeated arms remain coupled.",
+  "roles": {
+   "amine_head": 1,
+   "disulfide_acceptor": 2
+  },
+  "title": "Disulfide-bridged ester Michael lipids",
+  "universe_rows": 254389,
+  "user_authorized_knobs": [
+   "head topology within 1/2/3-site occupancy",
+   "distal tail length/branch/unsaturation/internal ester",
+   "acrylate-to-disulfide spacing",
+   "disulfide-to-oxygen spacing"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "epoxide_opening_o_acylation": {
+  "architecture_subfamilies": [
+   {
+    "id": "han_db_two_stage_four_arm_rocket",
+    "literature_or_source_stratum": "Han DB final products",
+    "port_signature": "mapped N ports followed by mapped O ports",
+    "scaffold_invariant": "two repeated epoxide-derived bodies and two repeated acyl tails around one head",
+    "separation_reason": "second covalent stage creates distinct family"
+   }
+  ],
+  "axis_values": {
+   "acyl_axis": [
+    "branch_plus_positional_monoene",
+    "linear_total_carbon_length",
+    "positional_mono_unsaturation"
+   ],
+   "epoxide_axis": [
+    "branch_plus_positional_monoene",
+    "linear_total_carbon_length",
+    "positional_mono_unsaturation"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine",
+   "one repeated body epoxide",
+   "one repeated O-acyl hydrophobe"
+  ],
+  "field_to_role": {
+   "acyl_tail_id": [
+    "acyl_tail"
+   ],
+   "epoxide_tail_id": [
+    "epoxide_tail"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "Han DB four-arm rocket series",
+    "official_design": "amine-epoxide aminoalcohol intermediate followed by O-acylation",
+    "pmid": "38409275"
+   }
+  ],
+  "never_collapse": [
+   "calling final products simple epoxide lipidoids",
+   "N-acylation",
+   "mixing repeated arms independently"
+  ],
+  "reaction_program_invariant": "Mapped amine-epoxide opening creates beta-OH sites, then each declared OH is O-acylated with a complete acyl precursor in source order.",
+  "roles": {
+   "acyl_tail": 2,
+   "amine_head": 1,
+   "epoxide_tail": 2
+  },
+  "title": "Epoxide opening followed by O-acylation",
+  "universe_rows": 42805,
+  "user_authorized_knobs": [
+   "head/site/occupancy",
+   "body-tail C6-C18 length/branch/unsaturation",
+   "acyl-tail C6-C18 length/branch/unsaturation",
+   "selected internal ester variants",
+   "controlled body x acyl crosses"
+  ],
+  "variable": []
+ },
+ "iphos_ring_opening": {
+  "architecture_subfamilies": [
+   {
+    "id": "iphos_single_zwitterion_nA1Pm",
+    "literature_or_source_stratum": "iPhos x=1",
+    "port_signature": "one charged attachment port",
+    "scaffold_invariant": "one Pm on one amine; source tail count depends on nA and Pm",
+    "separation_reason": "official x=1 stratum"
+   },
+   {
+    "id": "iphos_multi_zwitterion_nAxPm",
+    "literature_or_source_stratum": "iPhos x>1",
+    "port_signature": "multiple mapped charged ports",
+    "scaffold_invariant": "multiple Pm units on one polyamine",
+    "separation_reason": "different occupancy/charge architecture"
+   },
+   {
+    "id": "iphos_pretailed_amine_architectures",
+    "literature_or_source_stratum": "iPhos nA subclasses",
+    "port_signature": "pre-existing tail plus x Pm-derived regions",
+    "scaffold_invariant": "amine already supplies one or more hydrophobic substituents",
+    "separation_reason": "tail count depends jointly on both components"
+   }
+  ],
+  "axis_values": {
+   "head_axis": [
+    "reported_amine",
+    "positional_mono_unsaturation",
+    "conservative_branch_partition",
+    "single_internal_ester",
+    "linear_arm_length"
+   ],
+   "phosphate_axis": [
+    "reported_phosphate_tail",
+    "positional_mono_unsaturation",
+    "conservative_branch_partition",
+    "single_internal_ester",
+    "linear_arm_length"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine with any pre-existing hydrophobic substituent",
+   "complete alkylated dioxaphospholane"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "phosphate_id": [
+    "phosphate_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1038/s41563-020-00886-0",
+    "library": "iPhos nAxPm library",
+    "official_design": "28 amines nA x 13 alkylated dioxaphospholanes Pm; x records P units per amine",
+    "pmid": "33542471"
+   }
+  ],
+  "never_collapse": [
+   "collapsing x values",
+   "generic P-containing lipid family",
+   "altering phosphate connectivity"
+  ],
+  "reaction_program_invariant": "Explicit amine sites open complete alkylated dioxaphospholanes while conserving phosphate connectivity, charge and source occupancy.",
+  "roles": {
+   "amine_head": 1,
+   "phosphate_tail": 1
+  },
+  "title": "iPhos dioxaphospholane ring opening",
+  "universe_rows": 184345,
+  "user_authorized_knobs": [
+   "amine-side hydrophobe length/branch/unsaturation/internal ester",
+   "P-side hydrophobe length/branch/unsaturation/internal ester",
+   "nitrogen class and exact x occupancy"
+  ],
+  "variable": [
+   "event_count"
+  ]
+ },
+ "ketone_isocyanide_amide": {
+  "architecture_subfamilies": [
+   {
+    "id": "miao_acyclic_secondary_amine_amide",
+    "literature_or_source_stratum": "Miao acyclic branch",
+    "port_signature": "secondary amine prevents cyclic closure",
+    "scaffold_invariant": "acyclic amide product",
+    "separation_reason": "different product core from cyclic family"
+   }
+  ],
+  "axis_values": {
+   "ketone_axis": [
+    "paired_single_internal_ester",
+    "paired_single_branch_partition",
+    "one_arm_single_internal_ester",
+    "one_arm_single_branch_partition",
+    "reported_source_ketone"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete secondary amine",
+   "complete coupled ketone",
+   "complete isocyanide"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "isocyanide_id": [
+    "isocyanide"
+   ],
+   "ketone_id": [
+    "coupled_ketone"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "Miao acyclic sibling branch",
+    "official_design": "secondary amine, ketone and isocyanide form the source acyclic amide branch",
+    "pmid": "31570898"
+   }
+  ],
+  "never_collapse": [
+   "collapsing with dihydroimidazole",
+   "splitting ketone arms"
+  ],
+  "reaction_program_invariant": "Secondary amine, complete coupled ketone and complete isocyanide form the exact acyclic amide topology without dihydroimidazole closure.",
+  "roles": {
+   "amine_head": 1,
+   "coupled_ketone": 1,
+   "isocyanide": 1
+  },
+  "title": "Miao acyclic ketone-isocyanide-secondary-amine lipids",
+  "universe_rows": 271560,
+  "user_authorized_knobs": [
+   "head scaffold/spacer/N-substitution",
+   "coupled ketone arm length/branch/unsaturation/internal ester",
+   "isocyanide homologues only within source branch"
+  ],
+  "variable": []
+ },
+ "ketone_ugi4": {
+  "architecture_subfamilies": [
+   {
+    "id": "linear_coupled_ketone_arms",
+    "literature_or_source_stratum": "LiON ordinary ketones",
+    "port_signature": "one ketone port encoding two arms",
+    "scaffold_invariant": "complete ketone with two coupled acyclic arms",
+    "separation_reason": "arms are not independent slots"
+   },
+   {
+    "id": "unsaturated_or_branched_coupled_ketone",
+    "literature_or_source_stratum": "LiON morphology strata",
+    "port_signature": "one coupled ketone port",
+    "scaffold_invariant": "complete coupled ketone with paired or explicit asymmetric morphology",
+    "separation_reason": "ketone morphology"
+   },
+   {
+    "id": "cyclic_coupled_ketone",
+    "literature_or_source_stratum": "LiON cyclic source ketones",
+    "port_signature": "one coupled ketone port",
+    "scaffold_invariant": "complete cyclic/polycyclic hydrophobic ketone",
+    "separation_reason": "distinct scaffold topology"
+   },
+   {
+    "id": "interface_acyl_vs_hydrophobic_acyl",
+    "literature_or_source_stratum": "LiON acid modes",
+    "port_signature": "acid-role mode label required",
+    "scaffold_invariant": "same Ugi core but acid supplies interface acyl or a hydrophobic/degradable region",
+    "separation_reason": "regional architecture mode"
+   }
+  ],
+  "axis_values": {},
+  "complete_subcomponent_profile": [
+   "complete amine head",
+   "complete coupled ketone",
+   "complete acid",
+   "complete isocyanide"
+  ],
+  "field_to_role": {
+   "acid_code": [
+    "carboxylic_acid"
+   ],
+   "head_id": [
+    "amine_head"
+   ],
+   "isocyanide_code": [
+    "isocyanide"
+   ],
+   "ketone_code": [
+    "coupled_ketone"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "LiON ketone-4CR library",
+    "official_design": "primary amine, complete ketone, carboxylic acid and isocyanide",
+    "pmid": "39658727",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12149338/"
+   }
+  ],
+  "never_collapse": [
+   "splitting ketone arms",
+   "cross-role rescue of an amine that loses its only basic site",
+   "treating interface acetate and long fatty acid as local neighbours"
+  ],
+  "reaction_program_invariant": "One complete amine, one indivisible complete ketone, one acid and one isocyanide form the ketone-Ugi product; the amine must retain a distinct ionizable nitrogen.",
+  "roles": {
+   "amine_head": 1,
+   "carboxylic_acid": 1,
+   "coupled_ketone": 1,
+   "isocyanide": 1
+  },
+  "title": "Ketone Ugi four-component lipids",
+  "universe_rows": 91395,
+  "user_authorized_knobs": [
+   "amine head/spacer",
+   "paired ketone-arm length/branch/unsaturation/internal ester and carbonyl spacing",
+   "acid interface/fatty/degradable modes",
+   "isocyanide homologues"
+  ],
+  "variable": []
+ },
+ "maleate_addition": {
+  "architecture_subfamilies": [
+   {
+    "id": "amine_symmetric_maleate",
+    "literature_or_source_stratum": "maleate amine series",
+    "port_signature": "one nucleophile port; coupled equivalent maleate arms",
+    "scaffold_invariant": "amine addition to symmetric dialkyl maleate",
+    "separation_reason": "mechanism and symmetry class"
+   },
+   {
+    "id": "thiol_symmetric_maleate",
+    "literature_or_source_stratum": "maleate thiol series",
+    "port_signature": "one sulfur port; coupled equivalent arms",
+    "scaffold_invariant": "thiol addition to symmetric dialkyl maleate",
+    "separation_reason": "different nucleophile mechanism"
+   },
+   {
+    "id": "asymmetric_maleate_orientations",
+    "literature_or_source_stratum": "source/review asymmetric series",
+    "port_signature": "coupled nonequivalent arms; positional product label",
+    "scaffold_invariant": "complete asymmetric maleate with explicit addition orientation",
+    "separation_reason": "regioisomers must remain distinct"
+   }
+  ],
+  "axis_values": {
+   "arm_axis": [
+    "positional_mono_unsaturation",
+    "conservative_branch_partition",
+    "single_internal_ester",
+    "linear_arm_length",
+    "reported_symmetric_maleate"
+   ],
+   "head_axis": [
+    "reported_amine_head",
+    "reported_thiol_head"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine or thiol nucleophile",
+   "complete dialkyl maleate"
+  ],
+  "field_to_role": {
+   "arm_id": [
+    "maleate"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "plug-and-play maleate IL library",
+    "official_design": "50 amines/thiols x 10 complete dialkyl maleates = 500 lipids",
+    "pmid": "40060499",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11888472/"
+   }
+  ],
+  "never_collapse": [
+   "amine/thiol pooling",
+   "splitting maleate arms",
+   "unlabeled asymmetric regioisomers"
+  ],
+  "reaction_program_invariant": "One mapped amine or thiol addition consumes the maleate alkene; the two ester arms of each maleate are one complete design object.",
+  "roles": {
+   "amine_head": 1,
+   "maleate": 1
+  },
+  "title": "Amine or thiol addition to dialkyl maleates",
+  "universe_rows": 68463,
+  "user_authorized_knobs": [
+   "head/site count",
+   "paired tail length",
+   "paired branch position/size",
+   "paired positional unsaturation",
+   "controlled symmetric/asymmetric complete maleates"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "o_esterification": {
+  "architecture_subfamilies": [
+   {
+    "id": "h1_single_oh_single_tail",
+    "literature_or_source_stratum": "source occupancy stratum",
+    "port_signature": "one O-acyl port",
+    "scaffold_invariant": "one esterifiable OH",
+    "separation_reason": "tail-count architecture"
+   },
+   {
+    "id": "h2_diol_two_repeated_tails",
+    "literature_or_source_stratum": "AA3/source diol stratum",
+    "port_signature": "two equivalent O-acyl ports",
+    "scaffold_invariant": "two esterifiable OH groups",
+    "separation_reason": "tail-count architecture"
+   },
+   {
+    "id": "h3_triol_three_repeated_tails",
+    "literature_or_source_stratum": "source triol stratum",
+    "port_signature": "three equivalent O-acyl ports",
+    "scaffold_invariant": "three esterifiable OH groups",
+    "separation_reason": "tail-count architecture"
+   }
+  ],
+  "axis_values": {
+   "acid_axis": [
+    "branch_plus_one_unsaturation",
+    "positional_mono_unsaturation",
+    "single_branch_partition",
+    "linear_saturated_carbon_count"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete aminoalcohol head",
+   "one complete acid body repeated at selected OH sites"
+  ],
+  "field_to_role": {
+   "acid_code": [
+    "acid_tail"
+   ],
+   "head_id": [
+    "aminoalcohol_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "enzyme-catalysed aminoalcohol/fatty-acid lipid library",
+    "official_design": "complete aminoalcohol heads esterified with coherent fatty-acid bodies",
+    "pmid": "36269150"
+   }
+  ],
+  "never_collapse": [
+   "H1/H2/H3 as local head analogues",
+   "mixed acids across equivalent OH sites",
+   "lipid-like multiarm acids used as one tail"
+  ],
+  "reaction_program_invariant": "Mapped alcohol sites on one complete aminoalcohol are esterified with one complete monocarboxylic-acid identity while the amine topology is retained.",
+  "roles": {
+   "acid_tail": 1,
+   "aminoalcohol_head": 1
+  },
+  "title": "Aminoalcohol O-esterification",
+  "universe_rows": 24948,
+  "user_authorized_knobs": [
+   "head homologues only within fixed OH occupancy",
+   "tail C8-C18",
+   "double-bond count and position",
+   "branch point/size with fixed total carbon",
+   "branch plus unsaturation",
+   "internal ester position and spacing"
+  ],
+  "variable": [
+   "occupancy"
+  ]
+ },
+ "passerini_3cr": {
+  "architecture_subfamilies": [
+   {
+    "id": "passerini_amine_acid_head_dual_tail",
+    "literature_or_source_stratum": "P-3CR 144-member library",
+    "port_signature": "three inequivalent roles",
+    "scaffold_invariant": "amine-bearing acid head plus aldehyde and isocyanide hydrophobes",
+    "separation_reason": "published Passerini architecture"
+   }
+  ],
+  "axis_values": {
+   "aldehyde_axis": [
+    "linear_tail_length",
+    "branch_plus_positional_monoene",
+    "ester_plus_positional_monoene",
+    "positional_diene",
+    "positional_mono_unsaturation",
+    "conservative_branch_partition",
+    "single_internal_ester_position",
+    "reported_aldehyde_tail"
+   ],
+   "head_axis": [
+    "reported_head_acid",
+    "cyclic_amine_acid_spacer",
+    "diethylamino_acid_spacer",
+    "dimethylamino_acid_spacer"
+   ],
+   "isocyanide_axis": [
+    "linear_tail_length",
+    "branch_plus_positional_monoene",
+    "positional_diene",
+    "positional_mono_unsaturation",
+    "conservative_branch_partition",
+    "reported_isocyanide_tail"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine-bearing carboxylic-acid head",
+   "complete aldehyde tail",
+   "complete isocyanide tail"
+  ],
+  "field_to_role": {
+   "aldehyde_id": [
+    "aldehyde_tail"
+   ],
+   "head_id": [
+    "amine_acid_head"
+   ],
+   "isocyanide_id": [
+    "isocyanide_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "P-3CR biodegradable ionizable lipid library",
+    "official_design": "144 lipids from amine-bearing carboxylic-acid heads, aldehydes and isocyanides; tails include C10-C18, branch, unsaturation and ester motifs",
+    "pmcid": "PMC11804478",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11804478/"
+   }
+  ],
+  "never_collapse": [
+   "old candidates whose only nitrogen becomes an amide",
+   "ordinary carboxylic acid without retained basic head",
+   "Ugi/Passerini collapse"
+  ],
+  "reaction_program_invariant": "One amine-bearing carboxylic acid, one aldehyde and one isocyanide form the Passerini alpha-acyloxy amide core; the acid component must retain a distinct ionizable head.",
+  "roles": {
+   "aldehyde_tail": 1,
+   "amine_acid_head": 1,
+   "isocyanide_tail": 1
+  },
+  "title": "Passerini three-component ionizable lipids",
+  "universe_rows": 128352,
+  "user_authorized_knobs": [
+   "head scaffold within acid-head grammar",
+   "tail length C10-C18",
+   "branching",
+   "positional unsaturation",
+   "additional ester position",
+   "controlled two-tail asymmetry"
+  ],
+  "variable": []
+ },
+ "preassembled_thiol_yne_tail_amidation": {
+  "architecture_subfamilies": [
+   {
+    "id": "li_two_arm_glycerol_mimetic",
+    "literature_or_source_stratum": "Li 2012",
+    "port_signature": "one amide-head port; two equivalent sulfur arms",
+    "scaffold_invariant": "two thioether arms about the thiol-yne junction plus one amide-linked head",
+    "separation_reason": "official source architecture"
+   },
+   {
+    "id": "li_same_platform_unsaturated_head_followup",
+    "literature_or_source_stratum": "same-platform follow-up",
+    "port_signature": "same as Li two-arm",
+    "scaffold_invariant": "same coupled core with source-backed unsaturation/head series",
+    "separation_reason": "retains follow-up as a separately auditable source stratum"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "branch_plus_one_unsaturation",
+    "single_internal_ester_position",
+    "positional_mono_unsaturation",
+    "single_branch_partition",
+    "linear_saturated_carbon_count"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amidating amine head",
+   "complete alkynoic-acid/linker scaffold",
+   "one thiol identity repeated on both sulfur arms"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "amine_head"
+   ],
+   "linker_code": [
+    "alkynoic_linker"
+   ],
+   "tail_code": [
+    "thiol_tail"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1016/j.biomaterials.2012.07.044",
+    "library": "Li biomimetic thiol-yne lipid library",
+    "official_design": "cationic thioether lipids with two hydrophobic tails of variable length and a glycerol-mimetic linker",
+    "pmid": "22902058"
+   }
+  ],
+  "never_collapse": [
+   "independent left/right thiol-arm selection",
+   "heteroatom-rich head-like tails",
+   "changing sulfur placement without a new scaffold"
+  ],
+  "reaction_program_invariant": "Double thiol addition to one alkynoic-acid scaffold followed by amidation to one complete amine; the sulfur arms remain one coupled design object.",
+  "roles": {
+   "alkynoic_linker": 1,
+   "amine_head": 1,
+   "thiol_tail": 2
+  },
+  "title": "Thiol-yne thioether lipid construction and head amidation",
+  "universe_rows": 465048,
+  "user_authorized_knobs": [
+   "amine head scaffold and spacer",
+   "alkynoic-acid-to-yne spacer A/B/C/D",
+   "paired tail carbon count",
+   "paired positional unsaturation",
+   "paired branch partition after one or two carbons",
+   "paired internal ester position",
+   "reviewed crossed tail variants"
+  ],
+  "variable": []
+ },
+ "reductive_amination": {
+  "architecture_subfamilies": [
+   {
+    "id": "jiang_nebulized_ester_aldehyde",
+    "literature_or_source_stratum": "Jiang 2023 pulmonary library",
+    "port_signature": "one selected N site and one aldehyde",
+    "scaffold_invariant": "amine head plus ester-containing lipid aldehyde",
+    "separation_reason": "published library"
+   }
+  ],
+  "axis_values": {
+   "tail_axis": [
+    "paired_positional_diene",
+    "paired_linear_acyl_tail_length"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine",
+   "complete aliphatic lipid aldehyde"
+  ],
+  "field_to_role": {
+   "aldehyde_id": [
+    "coupled_aldehyde"
+   ],
+   "head_id": [
+    "amine_head"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1038/s41565-023-01548-3",
+    "library": "Jiang nebulized pulmonary reductive-amination library",
+    "official_design": "amines plus ester-containing lipid aldehydes",
+    "pmid": "37985700"
+   }
+  ],
+  "never_collapse": [
+   "aromatic aldehydes",
+   "nested whole-lipid aldehydes",
+   "PMID 39658727 LiON bibliographic alias conflict"
+  ],
+  "reaction_program_invariant": "One selected amine site and complete aliphatic aldehyde form the reduced C-N connection with exact oxygen loss accounting.",
+  "roles": {
+   "amine_head": 1,
+   "coupled_aldehyde": 1
+  },
+  "title": "Aliphatic reductive amination lipids",
+  "universe_rows": 61320,
+  "user_authorized_knobs": [
+   "head scaffold/spacer/site",
+   "aldehyde-tail length/branch/positional unsaturation",
+   "internal ester position and spacing",
+   "controlled asymmetry"
+  ],
+  "variable": []
+ },
+ "thiolactone_aminolysis_michael": {
+  "architecture_subfamilies": [
+   {
+    "id": "staar_sequential_aibjck",
+    "literature_or_source_stratum": "STAAR main library",
+    "port_signature": "three inequivalent roles; fixed two-stage order",
+    "scaffold_invariant": "polar head + amide/thiolactone linker-tail + thioether/ester acrylate tail",
+    "separation_reason": "official AiBjCk architecture"
+   },
+   {
+    "id": "staar_permanent_cationic_reference",
+    "literature_or_source_stratum": "STAAR one-step cationic arm",
+    "port_signature": "source-specific charge/port state",
+    "scaffold_invariant": "source permanently charged comparison architecture",
+    "separation_reason": "not ordinary ionizable training stratum"
+   }
+  ],
+  "axis_values": {
+   "acrylate_axis": [
+    "reported_acrylate",
+    "linear_tail_length",
+    "positional_mono_unsaturation",
+    "conservative_branch_partition"
+   ],
+   "head_axis": [
+    "reviewed_clean_head_extension",
+    "reported_head"
+   ],
+   "thiolactone_axis": [
+    "reported_thiolactone",
+    "positional_mono_unsaturation",
+    "linear_tail_length",
+    "conservative_branch_partition"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "complete amine Ai",
+   "complete N-acyl thiolactone Bj",
+   "complete acrylate Ck"
+  ],
+  "field_to_role": {
+   "acrylate_id": [
+    "acrylate_tail"
+   ],
+   "head_id": [
+    "amine_head"
+   ],
+   "thiolactone_id": [
+    "thiolactone_region"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "library": "STAAR AiBjCk library",
+    "official_design": "Ai amine head, Bj N-acyl thiolactone linker-tail and Ck acrylate tail",
+    "pmid": "40234552",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12000586/"
+   }
+  ],
+  "never_collapse": [
+   "stage reversal",
+   "recursive lipid-like Bj/Ck components",
+   "amines that lose their only basic site"
+  ],
+  "reaction_program_invariant": "An amine opens a complete N-acyl thiolactone, exposing a thiol that then adds to one complete acrylate in fixed order.",
+  "roles": {
+   "acrylate_tail": 1,
+   "amine_head": 1,
+   "thiolactone_region": 1
+  },
+  "title": "STAAR thiolactone aminolysis and Michael capture",
+  "universe_rows": 334859,
+  "user_authorized_knobs": [
+   "clean amine heads with surviving ionizable site",
+   "Bj acid-derived tail length/branch/unsaturation",
+   "Ck alcohol-derived tail length/branch/unsaturation",
+   "controlled Bj x Ck combinations"
+  ],
+  "variable": []
+ },
+ "vitamin_b5_multistep": {
+  "architecture_subfamilies": [
+   {
+    "id": "vitamin_b5_i7_two_event",
+    "literature_or_source_stratum": "KIST I71-I75",
+    "port_signature": "two ordered sites",
+    "scaffold_invariant": "B5 carboxyl-tail ester then primary-O head ester",
+    "separation_reason": "official I7 series"
+   },
+   {
+    "id": "vitamin_b5_i8_three_ester",
+    "literature_or_source_stratum": "KIST I81-I84",
+    "port_signature": "three ordered ester sites",
+    "scaffold_invariant": "tail alcohol at B5 acid plus head acid primary-O plus tail acid secondary-O",
+    "separation_reason": "official I8 series"
+   },
+   {
+    "id": "vitamin_b5_i9_dual_tail_head_linkage",
+    "literature_or_source_stratum": "KIST I91-I98",
+    "port_signature": "three ordered events; head linkage subtype retained",
+    "scaffold_invariant": "two source-ordered B5 O-acyl tails then head ester or amide",
+    "separation_reason": "official I9 series"
+   }
+  ],
+  "axis_values": {
+   "head_axis": [
+    "same_head_scaffold_spacer",
+    "reported_head_alcohol",
+    "reported_head_amine",
+    "reported_head_acid"
+   ],
+   "tail_axis": [
+    "reported_tail6"
+   ]
+  },
+  "complete_subcomponent_profile": [
+   "fixed vitamin-B5 core",
+   "series-specific complete tail alcohol/acid inputs",
+   "series-specific complete head acid/amine/alcohol"
+  ],
+  "field_to_role": {
+   "head_id": [
+    "series_head"
+   ],
+   "series": [
+    "series_tail_design"
+   ],
+   "tail_axis": [
+    "series_tail_design"
+   ]
+  },
+  "literature_libraries": [
+   {
+    "doi": "10.1002/adhm.202403366",
+    "library": "KIST I71-I98 vitamin-B5 library",
+    "official_design": "17 lipids in three protected-stage source series around D-pantothenic acid",
+    "pmid": "39502027"
+   }
+  ],
+  "never_collapse": [
+   "I7/I8/I9 pooling",
+   "erasing retained R stereochemistry",
+   "cross-series precursor exchange"
+  ],
+  "reaction_program_invariant": "D-pantothenic acid is the fixed stereodefined core; each source series preserves primary/secondary alcohol site order and final head ester/amide identity.",
+  "roles": {
+   "series_head": 1,
+   "series_tail_design": 1
+  },
+  "title": "Vitamin-B5 site-ordered multistep lipids",
+  "universe_rows": 80398,
+  "user_authorized_knobs": [
+   "conservative hydrophobe length/branch/unsaturation after site-order review",
+   "same-series head homologues",
+   "no cross-series Cartesian expansion"
+  ],
+  "variable": []
+ }
+}

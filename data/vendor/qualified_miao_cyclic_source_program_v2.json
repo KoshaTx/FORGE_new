@@ -1,0 +1,138 @@
+{
+  "curation": {
+    "atom_origin_policy": "Net ring atom origins follow the pinned Iso5 control; the complete source spectator ester substituent is unchanged. No alpha-substituted Iso7 or beta-isocyanoester Iso8 admission.",
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false
+  },
+  "reactions": [
+    {
+      "architecture": "Source-drawn dihydroimidazole net connection for Fig. 1c Iso4, Iso5, or Iso6, retaining the whole ester alkyl group.",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3;H0;!$([C]-[!#6]):2]=[OX1].[#6&-&H0&-:3]#[#7&+&H0&+:4]-[#6&H2&+0:5]-[#6&H0&+0:6](=[#8&H0&+0:7])-[#8&H0&+0:8]>>[N:1]1-[C&H0:2]-[C&+0&H1:3]=[N&H0&+0:4]-[#6&H1&+0:5]-1-[#6&H0&+0:6](=[#8&H0&+0:7])-[#8&H0&+0:8]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "reported_yield_range": [
+          28.4,
+          34.0
+        ],
+        "solvent": [
+          "anhydrous dichloromethane",
+          "ethanol"
+        ],
+        "temperature_c": null,
+        "temperature_text": "room temperature",
+        "time_h": null,
+        "time_text": "overnight"
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_miao_cyclic_source_v2/build_registry.py",
+          "sha256": "c3c918dd778a0a71d42fc9ef4821b71abcb59b5c5e467eed2e9c90cfc5eb7cdb"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "exact_ethoxy_cyclic_source_program": {
+            "path": "data/vendor/qualified_miao_cyclic_source_program_v1.json",
+            "sha256": "16655b684c769e52d21dfb2117d06c75c847a4ab9400a68cfb6a7264ea7f99d2"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "net_byproducts": {
+        "H": 2,
+        "O": 1,
+        "formal_charge": 0
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract; no neutralization or salt stripping is applied and none is required for these substrates.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "coupled_ketone",
+          "required_handle_smarts": "[CX3;H0;!$([C]-[!#6])](=[OX1])"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "name": "isocyanide",
+          "required_handle_smarts": "[$([#6&-&H0]#[#7&+&H0]-[#6&H2]-[#6&H0](=[#8&H0])-[#8&H0]-[#6&H3]),$([#6&-&H0]#[#7&+&H0]-[#6&H2]-[#6&H0](=[#8&H0])-[#8&H0]-[#6&H2]-[#6&H3]),$([#6&-&H0]#[#7&+&H0]-[#6&H2]-[#6&H0](=[#8&H0])-[#8&H0]-[#6&H0](-[#6&H3])(-[#6&H3])-[#6&H3])]"
+        }
+      ],
+      "reaction_id": "source_miao_drawn_alpha_isocyanoacetates_cyclization",
+      "reaction_version": 1,
+      "retained_queries": [
+        {
+          "minimum_matches": 1,
+          "name": "distinct_head_basic_nitrogen",
+          "role": "amine_head",
+          "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+        }
+      ],
+      "selectivity_policy": "Primary reacting NH2 and distinct retained head basic N; exact full source Iso4/5/6 only; complete ketone; all unfiltered forward and inverse outcomes must be unique.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41587-019-0247-3",
+          "kind": "doi",
+          "locator": "Main Figs. 1b-c and 3a; SI PDF pp. 2-3 (printed 1-2), A12 and A2 procedures and characterization; PDF p. 5 (printed 4), structure interpretation.",
+          "notes": "Fig. 1b draws the cyclic ester generically and Fig. 1c explicitly lists Iso4 (methyl), Iso5 (ethyl), Iso6 (tert-butyl). Fig. 3a and SI characterize Iso5 cyclic controls. This supports computed net-transform consistency for the three drawn precursors, not individual experimental execution or selectivity for Iso4/Iso6."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; no stereoselectivity claim."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_figure_1": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig1.png",
+      "sha256": "609d8d856f79e32f25a2b3296139c1f681cd67c6457f1b84041f2221f3233548"
+    },
+    "main_figure_3": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/fig3.png",
+      "sha256": "92338f18227551f9ae30acff1eaece3ec8ad4cc6fb207d0b0076d790638b4546"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/31570898/miao-si.pdf",
+      "sha256": "92d495da953b31003011e7b3e0c44b3fc16f91067e0975abda0c794773c53987"
+    }
+  },
+  "source_isocyanides": {
+    "Iso4": "[C-]#[N+]CC(=O)OC",
+    "Iso5": "[C-]#[N+]CC(=O)OCC",
+    "Iso6": "[C-]#[N+]CC(=O)OC(C)(C)C"
+  }
+}

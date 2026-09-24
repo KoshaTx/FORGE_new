@@ -1,0 +1,118 @@
+{
+  "schema_version": "forge.combinatorial_training_pilot_validation.v1",
+  "created_at_utc": "2026-09-14T04:09:14Z",
+  "status": "scoped_checks_pass_global_suite_failed",
+  "phase1_definition_of_done_met": false,
+  "base_git_head": "38b3d8a49b9cef76ae25bd8ce716d1de1d12014e",
+  "inputs": {
+    "config": {
+      "path": "configs/multireaction/combinatorial_training_pilot_v1.json",
+      "sha256": "98f247457f5dc8878082aca015449175aff271031be6997ce803dd36aabcf600"
+    },
+    "implementation": {
+      "path": "experiments/phase1/multireaction/combinatorial_training_pilot.py",
+      "sha256": "f622eb6e0b6ff4f37ee878bc62fb6fd6486ebac183f155a4a983360b96aa37e7"
+    },
+    "test": {
+      "path": "tests/test_combinatorial_program_semantics.py",
+      "sha256": "aa6d5ea6d8693b6801b964a64b3e78c4c83570fc14f44a8decbc4bfaddb3490c"
+    },
+    "result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/result.json",
+      "sha256": "e8ad3a9734290d7f299096745a1ce1f23e52a5b196f3e996615071c44d79ebad"
+    },
+    "replay_result": {
+      "path": "results/phase1/combinatorial_training_pilot_v1/replay_result.json",
+      "sha256": "53fdcc65af83b8c78f7533f7f15b287721cf6157560e42fd88aa8b2b6845b315"
+    },
+    "artifact_checker": {
+      "path": "results/phase1/combinatorial_training_pilot_validation_v1/check_artifacts.py",
+      "sha256": "32426f07ed04c277ae6dfe34813b546824eccaae4eb4f83f2e83140852877959"
+    },
+    "artifact_checks": {
+      "path": "results/phase1/combinatorial_training_pilot_validation_v1/artifact_checks.json",
+      "sha256": "c34b6ef688bac4a33ddee7530c634e4fa6effd188f476d4f5126c2ebe0237bc8"
+    }
+  },
+  "experiment": {
+    "status": "pass",
+    "training_records_available": 64316,
+    "training_steps": 768,
+    "training_examples_seen": 9216,
+    "training_initial_window_mean_loss": 4.951911948621273,
+    "training_final_window_mean_loss": 0.6265338296070695,
+    "training_final_to_initial_loss_ratio": 0.12652362079691482,
+    "calibration_records": 750,
+    "calibration_programs": 12,
+    "calibration_initial_equal_family_mean_loss": 9.074630381408417,
+    "calibration_final_equal_family_mean_loss": 0.9099036007632618,
+    "calibration_final_to_initial_loss_ratio": 0.10026894347426207,
+    "calibration_programs_with_improved_loss": 12,
+    "ugi_calibration_records": 133,
+    "ugi_initial_exact_tensor_records": 0,
+    "ugi_final_exact_tensor_records": 0,
+    "fixed_states_preserved": true,
+    "generator_sampling_calls": 0,
+    "heldout_structure_access": false,
+    "checkpoint_retained": false,
+    "remote_compute": false
+  },
+  "checks": {
+    "frozen_acceptance_gates_pass": true,
+    "all_input_and_source_hashes_authenticate": true,
+    "independent_scientific_replay_exact": true,
+    "focused_tests_pass": true,
+    "vendored_assets_verified": 30,
+    "touched_python_black_check": true,
+    "touched_python_ruff_check": true,
+    "whitespace_check": true,
+    "full_suite_failure_error_ids_equal_prior_baseline": true,
+    "new_full_suite_failure_error_ids": 0,
+    "resolved_prior_failure_error_ids": 0
+  },
+  "test_reports": {
+    "focused": {
+      "tests": 116,
+      "passed": 116,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 25.975,
+      "xml": {
+        "path": "results/phase1/combinatorial_training_pilot_validation_v1/focused-tests.xml",
+        "sha256": "c451fdd19432ba9691816f9aee4aff3c072f8a4549758ced0f3cde611e052561"
+      }
+    },
+    "full": {
+      "tests": 2709,
+      "passed": 2429,
+      "failures": 167,
+      "errors": 21,
+      "skipped": 92,
+      "duration_seconds": 480.425,
+      "xml": {
+        "path": "results/phase1/combinatorial_training_pilot_validation_v1/full-tests.xml",
+        "sha256": "38d48687e5aaf2483632f2d827c5887e4da48916636e4d2c4089aefd9a46004e"
+      },
+      "log": {
+        "path": "results/phase1/combinatorial_training_pilot_validation_v1/full-tests.log",
+        "sha256": "5df21feee671bc3be0e7943e162c333b8d306d20d9dc789143c7ee085a844af1"
+      }
+    }
+  },
+  "commands": {
+    "experiment": "UV_CACHE_DIR=/private/tmp/forge-uv-cache OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 uv run python -m experiments.phase1.multireaction.combinatorial_training_pilot --repo-root . --config configs/multireaction/combinatorial_training_pilot_v1.json --output-dir results/phase1/combinatorial_training_pilot_v1",
+    "artifact_check": "PYTHONPATH=. UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run python results/phase1/combinatorial_training_pilot_validation_v1/check_artifacts.py --repo-root . --output results/phase1/combinatorial_training_pilot_validation_v1/artifact_checks.json",
+    "focused": "UV_CACHE_DIR=/private/tmp/forge-uv-cache uv run pytest -q tests/test_assembly_families.py tests/test_combinatorial_libraries.py tests/test_library_programs.py tests/test_library_splits.py tests/test_library_program_dataset.py tests/test_library_semantics.py tests/test_combinatorial_program_semantics.py tests/test_reaction_program_flow.py tests/test_shared_synthesis_program_integration.py tests/test_synthesis_program_production_cache.py tests/test_phase1_ugi_l1_origin_annotations.py tests/test_pinned_sources_are_tracked.py",
+    "vendored_data": "UV_CACHE_DIR=/private/tmp/forge-uv-cache make verify",
+    "full": "UV_CACHE_DIR=/private/tmp/forge-uv-cache PYTEST_ADDOPTS='--tb=short --junitxml=/private/tmp/combinatorial-pilot-full.xml' make test"
+  },
+  "decision": "The shared sparse model passes the single-seed balanced training and exhaustive paired calibration-denoising pilot. Preserve the result, but do not promote or claim improved realism. The next discriminating stage requires a retained checkpoint and generation-level matched evaluation, with exact Ugi reconstruction, validity, diversity and novelty as frozen gates.",
+  "nonclaims": [
+    "Lower paired calibration denoising loss is not unconditional generation quality or improved lipid realism.",
+    "All calibration products were evaluated, but only one training seed was used and no across-training uncertainty is estimated.",
+    "Ugi exact tensor reconstruction was zero before and after training; the non-regression gate is therefore weak and does not establish exact terminal reconstruction.",
+    "No heldout structure, molecule generation, retained checkpoint, candidate selection, synthesis call or remote compute was used.",
+    "Repository-wide Phase 1 definition of done remains unmet because the full suite has its unchanged baseline failures."
+  ]
+}

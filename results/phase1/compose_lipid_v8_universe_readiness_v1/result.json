@@ -1,0 +1,781 @@
+{
+  "artifacts": {
+    "readiness.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_universe_readiness_v1/readiness.jsonl.gz",
+      "sha256": "dc24ba518c2c019559db13793c71378d64633b49075cc4fa9f544272ad091ecb"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_universe_v1.json",
+    "sha256": "8ec43e4ada358540a106b77422d85d70926d28421a0ed22fb8669925c48cdc1b"
+  },
+  "created_at_utc": "2026-09-18T23:56:01.341181+00:00",
+  "implementation": {
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_universe.py": {
+      "path": "forge/corpus/compose_lipid_universe.py",
+      "sha256": "ca6139273bfa17ef011eb3b2c6e1ee1961939d56e0030758fa34155a202118cc"
+    }
+  },
+  "inputs": {
+    "import_result": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+      "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+    },
+    "precursor_audit_result": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/result.json",
+      "sha256": "7508dde592a69264d6e0cf18e4abe333006ebeedbe9a552136b44b1c51c2fce7"
+    }
+  },
+  "policy": {
+    "duplicate_rows": "retain_provenance_pending_constitutional_weight_deduplication",
+    "graph_parsing": false,
+    "intended_training_measure": "equal_family_mass_after_all_admission_gates",
+    "nonmatches": "unresolved_never_assumed_disjoint",
+    "overlap_matching": "positive_exact_source_strings_only",
+    "random_sampling_used": false,
+    "record_cap": null,
+    "seed": 0,
+    "size_filter": null,
+    "source_splits_changed": false,
+    "training_calls": 0,
+    "training_rows_admitted": 0,
+    "unassigned_records": "pending_partition_before_decomposition"
+  },
+  "schema_version": "forge.compose_lipid_universe_readiness.v1",
+  "status": "complete_universe_accounted_training_unqualified",
+  "summary": {
+    "all_program_families_qualified": false,
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2,
+          "excluded_exact_source_alias_of_known_exclusion": 667,
+          "excluded_import_calibration": 768,
+          "excluded_import_heldout": 768,
+          "excluded_import_quarantine": 588,
+          "pending_global_qualification": 5554,
+          "pending_partition_before_decomposition": 61669
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2793,
+        "outside_200k_selection": 62336,
+        "rows": 70016,
+        "rows_in_repeated_source_string_classes": 1520,
+        "source_anchor_rows": 764,
+        "source_declared_above_80_atoms": 18580,
+        "source_declared_above_96_atoms": 12333,
+        "source_declared_atom_range": [
+          15,
+          254
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 18576,
+          "model_supported": 51440
+        }
+      },
+      "acid_epoxide_diester_multistep": {
+        "dispositions": {
+          "excluded_exact_source_alias_of_known_exclusion": 72,
+          "excluded_import_calibration": 1070,
+          "excluded_import_heldout": 1070,
+          "excluded_import_quarantine": 242,
+          "pending_global_qualification": 8318,
+          "pending_partition_before_decomposition": 221468
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2454,
+        "outside_200k_selection": 221540,
+        "rows": 232240,
+        "rows_in_repeated_source_string_classes": 512,
+        "source_anchor_rows": 256,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          31,
+          56
+        ],
+        "source_size_dispositions": {
+          "model_supported": 232240
+        }
+      },
+      "aema_aza_thiol_addition": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 20,
+          "excluded_exact_source_alias_of_known_exclusion": 190,
+          "excluded_import_calibration": 613,
+          "excluded_import_heldout": 613,
+          "excluded_import_quarantine": 1586,
+          "pending_global_qualification": 3294,
+          "pending_partition_before_decomposition": 7549
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 3022,
+        "outside_200k_selection": 7739,
+        "rows": 13865,
+        "rows_in_repeated_source_string_classes": 2344,
+        "source_anchor_rows": 1173,
+        "source_declared_above_80_atoms": 3825,
+        "source_declared_above_96_atoms": 2855,
+        "source_declared_atom_range": [
+          24,
+          214
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 3709,
+          "model_supported": 10156
+        }
+      },
+      "aldehyde_ugi3": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 1652,
+          "excluded_exact_source_alias_of_known_exclusion": 2,
+          "excluded_import_calibration": 692,
+          "excluded_import_heldout": 692,
+          "excluded_import_quarantine": 2574,
+          "pending_global_qualification": 1315,
+          "pending_partition_before_decomposition": 11915
+        },
+        "existing_audit_clear_of_known_exclusions": 1063,
+        "existing_exact_program_evidence": 2577,
+        "is_program_family": true,
+        "known_excluded_rows": 5612,
+        "outside_200k_selection": 11917,
+        "rows": 18842,
+        "rows_in_repeated_source_string_classes": 12,
+        "source_anchor_rows": 1358,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          30,
+          62
+        ],
+        "source_size_dispositions": {
+          "model_supported": 18842
+        }
+      },
+      "aldehyde_ugi4": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 4338,
+          "excluded_import_calibration": 1113,
+          "excluded_import_heldout": 1113,
+          "excluded_import_quarantine": 434,
+          "pending_global_qualification": 4136,
+          "pending_partition_before_decomposition": 210895
+        },
+        "existing_audit_clear_of_known_exclusions": 3849,
+        "existing_exact_program_evidence": 8163,
+        "is_program_family": true,
+        "known_excluded_rows": 6998,
+        "outside_200k_selection": 210895,
+        "rows": 222029,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 845,
+        "source_declared_above_80_atoms": 22,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          20,
+          96
+        ],
+        "source_size_dispositions": {
+          "model_supported": 222029
+        }
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 8,
+          "excluded_import_calibration": 1044,
+          "excluded_import_heldout": 1044,
+          "excluded_import_quarantine": 64,
+          "pending_global_qualification": 8279,
+          "pending_partition_before_decomposition": 208597
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2160,
+        "outside_200k_selection": 208597,
+        "rows": 219036,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 184,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          24,
+          59
+        ],
+        "source_size_dispositions": {
+          "model_supported": 219036
+        }
+      },
+      "amine_alkylation": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2,
+          "excluded_exact_source_alias_of_known_exclusion": 130,
+          "excluded_import_calibration": 1008,
+          "excluded_import_heldout": 1008,
+          "excluded_import_quarantine": 238,
+          "pending_global_qualification": 7819,
+          "pending_partition_before_decomposition": 178067
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2386,
+        "outside_200k_selection": 178197,
+        "rows": 188272,
+        "rows_in_repeated_source_string_classes": 395,
+        "source_anchor_rows": 286,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          24,
+          56
+        ],
+        "source_size_dispositions": {
+          "model_supported": 188272
+        }
+      },
+      "amine_epoxide_opening": {
+        "dispositions": {
+          "excluded_exact_source_alias_of_known_exclusion": 87,
+          "excluded_import_calibration": 854,
+          "excluded_import_heldout": 854,
+          "excluded_import_quarantine": 537,
+          "pending_global_qualification": 6296,
+          "pending_partition_before_decomposition": 88811
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2332,
+        "outside_200k_selection": 88898,
+        "rows": 97439,
+        "rows_in_repeated_source_string_classes": 656,
+        "source_anchor_rows": 661,
+        "source_declared_above_80_atoms": 10385,
+        "source_declared_above_96_atoms": 5066,
+        "source_declared_atom_range": [
+          19,
+          136
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 10136,
+          "model_supported": 87303
+        }
+      },
+      "aryl_reductive_amination": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2290,
+          "excluded_import_calibration": 605,
+          "excluded_import_heldout": 605,
+          "excluded_import_quarantine": 100,
+          "pending_global_qualification": 2446,
+          "pending_partition_before_decomposition": 42044
+        },
+        "existing_audit_clear_of_known_exclusions": 2280,
+        "existing_exact_program_evidence": 4558,
+        "is_program_family": true,
+        "known_excluded_rows": 3600,
+        "outside_200k_selection": 42044,
+        "rows": 48090,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 168,
+        "source_declared_above_80_atoms": 24582,
+        "source_declared_above_96_atoms": 19574,
+        "source_declared_atom_range": [
+          31,
+          229
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 24560,
+          "model_supported": 23530
+        }
+      },
+      "aza_michael_acrylamide": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2503,
+          "excluded_exact_source_alias_of_known_exclusion": 6,
+          "excluded_import_calibration": 640,
+          "excluded_import_heldout": 640,
+          "excluded_import_quarantine": 237,
+          "pending_global_qualification": 2376,
+          "pending_partition_before_decomposition": 24837
+        },
+        "existing_audit_clear_of_known_exclusions": 2376,
+        "existing_exact_program_evidence": 4879,
+        "is_program_family": true,
+        "known_excluded_rows": 4026,
+        "outside_200k_selection": 24843,
+        "rows": 31239,
+        "rows_in_repeated_source_string_classes": 428,
+        "source_anchor_rows": 219,
+        "source_declared_above_80_atoms": 1016,
+        "source_declared_above_96_atoms": 150,
+        "source_declared_atom_range": [
+          33,
+          97
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 1010,
+          "model_supported": 30229
+        }
+      },
+      "aza_michael_acrylate": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2540,
+          "excluded_exact_source_alias_of_known_exclusion": 3,
+          "excluded_import_calibration": 878,
+          "excluded_import_heldout": 878,
+          "excluded_import_quarantine": 1620,
+          "pending_global_qualification": 2860,
+          "pending_partition_before_decomposition": 24840
+        },
+        "existing_audit_clear_of_known_exclusions": 2549,
+        "existing_exact_program_evidence": 5065,
+        "is_program_family": true,
+        "known_excluded_rows": 5919,
+        "outside_200k_selection": 24843,
+        "rows": 33619,
+        "rows_in_repeated_source_string_classes": 580,
+        "source_anchor_rows": 2599,
+        "source_declared_above_80_atoms": 1569,
+        "source_declared_above_96_atoms": 150,
+        "source_declared_atom_range": [
+          19,
+          97
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 1010,
+          "model_supported": 32609
+        }
+      },
+      "disulfide_michael": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 3,
+          "excluded_exact_source_alias_of_known_exclusion": 19,
+          "excluded_import_calibration": 968,
+          "excluded_import_heldout": 968,
+          "excluded_import_quarantine": 65,
+          "pending_global_qualification": 7671,
+          "pending_partition_before_decomposition": 244695
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2023,
+        "outside_200k_selection": 244714,
+        "rows": 254389,
+        "rows_in_repeated_source_string_classes": 100,
+        "source_anchor_rows": 52,
+        "source_declared_above_80_atoms": 76741,
+        "source_declared_above_96_atoms": 39388,
+        "source_declared_atom_range": [
+          45,
+          250
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 76731,
+          "model_supported": 177658
+        }
+      },
+      "epoxide_opening_o_acylation": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 15,
+          "excluded_exact_source_alias_of_known_exclusion": 24,
+          "excluded_import_calibration": 634,
+          "excluded_import_heldout": 634,
+          "excluded_import_quarantine": 23,
+          "pending_global_qualification": 5033,
+          "pending_partition_before_decomposition": 36442
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 1330,
+        "outside_200k_selection": 36466,
+        "rows": 42805,
+        "rows_in_repeated_source_string_classes": 50,
+        "source_anchor_rows": 25,
+        "source_declared_above_80_atoms": 9373,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          30,
+          88
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 9373,
+          "model_supported": 33432
+        }
+      },
+      "iphos_ring_opening": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 18,
+          "excluded_exact_source_alias_of_known_exclusion": 389,
+          "excluded_import_calibration": 937,
+          "excluded_import_heldout": 937,
+          "excluded_import_quarantine": 507,
+          "pending_global_qualification": 6970,
+          "pending_partition_before_decomposition": 174587
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2788,
+        "outside_200k_selection": 174976,
+        "rows": 184345,
+        "rows_in_repeated_source_string_classes": 1098,
+        "source_anchor_rows": 549,
+        "source_declared_above_80_atoms": 52275,
+        "source_declared_above_96_atoms": 28176,
+        "source_declared_atom_range": [
+          16,
+          148
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 52244,
+          "model_supported": 132101
+        }
+      },
+      "ketone_isocyanide_amide": {
+        "dispositions": {
+          "excluded_import_calibration": 1187,
+          "excluded_import_heldout": 1187,
+          "excluded_import_quarantine": 495,
+          "pending_global_qualification": 9000,
+          "pending_partition_before_decomposition": 259691
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2869,
+        "outside_200k_selection": 259691,
+        "rows": 271560,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 900,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          22,
+          58
+        ],
+        "source_size_dispositions": {
+          "model_supported": 271560
+        }
+      },
+      "ketone_ugi4": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2,
+          "excluded_import_calibration": 737,
+          "excluded_import_heldout": 737,
+          "excluded_import_quarantine": 20,
+          "pending_global_qualification": 5875,
+          "pending_partition_before_decomposition": 84024
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 1496,
+        "outside_200k_selection": 84024,
+        "rows": 91395,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 72,
+        "source_declared_above_80_atoms": 27584,
+        "source_declared_above_96_atoms": 3862,
+        "source_declared_atom_range": [
+          37,
+          114
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 27568,
+          "model_supported": 63827
+        }
+      },
+      "maleate_addition": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 17,
+          "excluded_exact_source_alias_of_known_exclusion": 10,
+          "excluded_import_calibration": 726,
+          "excluded_import_heldout": 726,
+          "excluded_import_quarantine": 381,
+          "pending_global_qualification": 5409,
+          "pending_partition_before_decomposition": 61194
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 1860,
+        "outside_200k_selection": 61204,
+        "rows": 68463,
+        "rows_in_repeated_source_string_classes": 386,
+        "source_anchor_rows": 463,
+        "source_declared_above_80_atoms": 21101,
+        "source_declared_above_96_atoms": 11421,
+        "source_declared_atom_range": [
+          19,
+          228
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 21063,
+          "model_supported": 47400
+        }
+      },
+      "o_esterification": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 9,
+          "excluded_exact_source_alias_of_known_exclusion": 8,
+          "excluded_import_calibration": 609,
+          "excluded_import_heldout": 609,
+          "excluded_import_quarantine": 102,
+          "pending_global_qualification": 4762,
+          "pending_partition_before_decomposition": 18849
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 1337,
+        "outside_200k_selection": 18857,
+        "rows": 24948,
+        "rows_in_repeated_source_string_classes": 252,
+        "source_anchor_rows": 144,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          14,
+          70
+        ],
+        "source_size_dispositions": {
+          "model_supported": 24948
+        }
+      },
+      "passerini_3cr": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 1728,
+          "excluded_import_calibration": 876,
+          "excluded_import_heldout": 876,
+          "pending_global_qualification": 5279,
+          "pending_partition_before_decomposition": 119593
+        },
+        "existing_audit_clear_of_known_exclusions": 5279,
+        "existing_exact_program_evidence": 7007,
+        "is_program_family": true,
+        "known_excluded_rows": 3480,
+        "outside_200k_selection": 119593,
+        "rows": 128352,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 0,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          30,
+          61
+        ],
+        "source_size_dispositions": {
+          "model_supported": 128352
+        }
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 30,
+          "excluded_exact_source_alias_of_known_exclusion": 53,
+          "excluded_import_calibration": 1327,
+          "excluded_import_heldout": 1327,
+          "excluded_import_quarantine": 86,
+          "pending_global_qualification": 10504,
+          "pending_partition_before_decomposition": 451721
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 2823,
+        "outside_200k_selection": 451774,
+        "rows": 465048,
+        "rows_in_repeated_source_string_classes": 224,
+        "source_anchor_rows": 112,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          26,
+          61
+        ],
+        "source_size_dispositions": {
+          "model_supported": 465048
+        }
+      },
+      "reductive_amination": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 1987,
+          "excluded_import_calibration": 729,
+          "excluded_import_heldout": 729,
+          "excluded_import_quarantine": 21,
+          "pending_global_qualification": 3823,
+          "pending_partition_before_decomposition": 54031
+        },
+        "existing_audit_clear_of_known_exclusions": 3813,
+        "existing_exact_program_evidence": 5800,
+        "is_program_family": true,
+        "known_excluded_rows": 3466,
+        "outside_200k_selection": 54031,
+        "rows": 61320,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 60,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          37,
+          74
+        ],
+        "source_size_dispositions": {
+          "model_supported": 61320
+        }
+      },
+      "reported_lnpdb_route_unassigned": {
+        "dispositions": {
+          "excluded_import_reference": 255
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": false,
+        "known_excluded_rows": 255,
+        "outside_200k_selection": 0,
+        "rows": 255,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 255,
+        "source_declared_above_80_atoms": 12,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          33,
+          96
+        ],
+        "source_size_dispositions": {
+          "model_supported": 255
+        }
+      },
+      "reported_multistep_amino_lipid": {
+        "dispositions": {
+          "excluded_import_reference": 9
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": false,
+        "known_excluded_rows": 9,
+        "outside_200k_selection": 0,
+        "rows": 9,
+        "rows_in_repeated_source_string_classes": 1,
+        "source_anchor_rows": 9,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          40,
+          58
+        ],
+        "source_size_dispositions": {
+          "model_supported": 9
+        }
+      },
+      "reported_reference_lipid": {
+        "dispositions": {
+          "excluded_import_reference": 4
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": false,
+        "known_excluded_rows": 4,
+        "outside_200k_selection": 0,
+        "rows": 4,
+        "rows_in_repeated_source_string_classes": 0,
+        "source_anchor_rows": 4,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          46,
+          70
+        ],
+        "source_size_dispositions": {
+          "model_supported": 4
+        }
+      },
+      "thiolactone_aminolysis_michael": {
+        "dispositions": {
+          "excluded_by_existing_precursor_audit": 2844,
+          "excluded_import_calibration": 1185,
+          "excluded_import_heldout": 1185,
+          "excluded_import_quarantine": 117,
+          "pending_global_qualification": 6522,
+          "pending_partition_before_decomposition": 323006
+        },
+        "existing_audit_clear_of_known_exclusions": 6522,
+        "existing_exact_program_evidence": 9314,
+        "is_program_family": true,
+        "known_excluded_rows": 5331,
+        "outside_200k_selection": 323006,
+        "rows": 334859,
+        "rows_in_repeated_source_string_classes": 182,
+        "source_anchor_rows": 91,
+        "source_declared_above_80_atoms": 0,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          32,
+          62
+        ],
+        "source_size_dispositions": {
+          "model_supported": 334859
+        }
+      },
+      "vitamin_b5_multistep": {
+        "dispositions": {
+          "excluded_import_calibration": 775,
+          "excluded_import_heldout": 775,
+          "excluded_import_quarantine": 9,
+          "pending_global_qualification": 6187,
+          "pending_partition_before_decomposition": 72652
+        },
+        "existing_audit_clear_of_known_exclusions": 0,
+        "existing_exact_program_evidence": 0,
+        "is_program_family": true,
+        "known_excluded_rows": 1559,
+        "outside_200k_selection": 72652,
+        "rows": 80398,
+        "rows_in_repeated_source_string_classes": 34,
+        "source_anchor_rows": 18,
+        "source_declared_above_80_atoms": 58,
+        "source_declared_above_96_atoms": 0,
+        "source_declared_atom_range": [
+          48,
+          81
+        ],
+        "source_size_dispositions": {
+          "above_80_heavy_atom_hold": 58,
+          "model_supported": 80340
+        }
+      }
+    },
+    "constitutional_deduplication_complete": false,
+    "full_universe_component_holdout_complete": false,
+    "full_universe_representation_qualified": false,
+    "program_families": 23,
+    "source_reference_categories": 3,
+    "totals": {
+      "existing_audit_clear_of_known_exclusions": 27731,
+      "existing_exact_program_evidence": 47363,
+      "known_excluded_rows": 71932,
+      "outside_200k_selection": 2982837,
+      "rows": 3182837,
+      "rows_in_repeated_source_string_classes": 8774,
+      "source_anchor_rows": 11267,
+      "source_declared_above_80_atoms": 247123,
+      "source_declared_above_96_atoms": 122975
+    },
+    "training_ready": false,
+    "training_rows_admitted": 0
+  }
+}

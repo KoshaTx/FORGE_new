@@ -1,0 +1,149 @@
+{
+  "assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "source_transcription": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/fo32-source-extraction.json",
+      "sha256": "a1b63a57150ec2243be8b62af3940e9beeb39b5fe6026e8f423fa54f187096ba"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/ketone-ugi4-si.pdf",
+      "sha256": "7d77bfed6c85f28bcaf4d2f050d445059e8045ca189f70d2d4fcc0e70d4059e0"
+    }
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "families": {
+    "ketone_ugi4": {
+      "reaction_id": "source_ketone_ugi4",
+      "registry_to_source_roles": {
+        "amine_head": "amine_head",
+        "carboxylic_acid": "carboxylic_acid",
+        "coupled_ketone": "coupled_ketone",
+        "isocyanide": "isocyanide"
+      },
+      "site_contract": [
+        {
+          "atom_map": 1,
+          "properties": {
+            "atomic_number": 7,
+            "formal_charge": 0,
+            "total_hydrogens": 2
+          },
+          "role": "amine_head"
+        },
+        {
+          "atom_map": 2,
+          "properties": {
+            "atomic_number": 6,
+            "formal_charge": 0,
+            "total_hydrogens": 0
+          },
+          "role": "coupled_ketone"
+        },
+        {
+          "atom_map": 3,
+          "properties": {
+            "atomic_number": 6,
+            "total_hydrogens": 0
+          },
+          "role": "isocyanide"
+        },
+        {
+          "atom_map": 5,
+          "properties": {
+            "atomic_number": 6,
+            "formal_charge": 0
+          },
+          "role": "carboxylic_acid"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "FO-32 supports the net ketone Ugi connection, not every corpus precursor or architecture as experimentally executed.",
+    "Cyclic, asymmetric and other component variants receive only a computed exactness determination. Architecture and source-bank claims remain separate.",
+    "The amine-role basic-N predicate is structural and is not a pKa or protonation measurement."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_ketone_ugi4_source_program_v1.json",
+    "sha256": "2b0930725739e587e63792ba754473e164216ea15fba464417f58b221398eef9"
+  },
+  "regression_controls": [
+    {
+      "components": {
+        "amine_head": "NCCN(C)CCCN",
+        "carboxylic_acid": "CCC(=O)O",
+        "coupled_ketone": "CC(=O)CC",
+        "isocyanide": "CC[N+]#[C-]"
+      },
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C16H34N4O2",
+      "expected_forward_product_count": 2,
+      "expected_product": "CCC(=O)N(CCN(C)CCCN)C(C)(CC)C(=O)NCC",
+      "family": "ketone_ugi4",
+      "label": "asymmetric_two_primary_amines",
+      "required_failed_checks": [
+        "unique_unfiltered_forward_exact"
+      ]
+    },
+    {
+      "components": {
+        "amine_head": "CCN",
+        "carboxylic_acid": "CN(C)CCC(=O)O",
+        "coupled_ketone": "CC(=O)CC",
+        "isocyanide": "CC[N+]#[C-]"
+      },
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C14H29N3O2",
+      "expected_forward_product_count": 1,
+      "expected_product": "CN(C)CCC(=O)N(CC)C(C)(CC)C(=O)NCC",
+      "family": "ketone_ugi4",
+      "label": "cross_role_basic_nitrogen_cannot_rescue_head",
+      "required_failed_checks": [
+        "distinct_source_role_handles_retained"
+      ]
+    }
+  ],
+  "schema_version": "forge.fixed_source_event_adjudication.v1",
+  "source_controls": [
+    {
+      "components": {
+        "amine_head": "CN(C)CCCN",
+        "carboxylic_acid": "O=C(O)CCCCC(=O)OC(CCCCCCCC)CCCCCCCC",
+        "coupled_ketone": "O=C(CCCC(=O)OCCC#CCCCCCC)CCCC(=O)OCCC#CCCCCCC",
+        "isocyanide": "CCCC[N+]#[C-]"
+      },
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C62H111N3O8",
+      "expected_forward_product_count": 1,
+      "expected_product": "CN(C)CCCN(C(=O)CCCCC(=O)OC(CCCCCCCC)CCCCCCCC)C(CCCC(=O)OCCC#CCCCCCC)(CCCC(=O)OCCC#CCCCCCC)C(=O)NCCCC",
+      "family": "ketone_ugi4",
+      "label": "FO_32",
+      "reported_mz_calculated": 1026.84494,
+      "reported_mz_found": 1026.8444,
+      "source_asset": "supplement"
+    }
+  ],
+  "source_procedure": {
+    "assembly": "Add acid 2.11 mmol, n-butyl isocyanide 2.11 mmol and 5 mL methanol; room temperature 72 h.",
+    "isolated_amount_mmol": 0.18,
+    "isolated_mass_g": 0.18,
+    "outcome": "Light-brown oil; NMR and QTOF reported.",
+    "precondensation": "Ketone 2.11 mmol and amine 2.11 mmol in 10 mL DCM, room temperature, nitrogen, 2 h.",
+    "purification": "Repeated silica chromatography, 10% methanol and 0.1% ammonium hydroxide in DCM.",
+    "yield_percent": 8.5
+  },
+  "training_admitted": false,
+  "visual_inspection": {
+    "graph": "complete four-component FO-32 scheme and drawn product",
+    "supplement_pdf_pages_one_based": [
+      2
+    ]
+  }
+}

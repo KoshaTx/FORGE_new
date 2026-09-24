@@ -1,0 +1,32 @@
+{
+  "acceptance": "Positive incremental exact-program gain in each saved run, with no decrease in any declared preservation metric in any of the twelve families. Original invalid and exact attempts remain unchanged; depth-specific outcomes are descriptive.",
+  "alternative": "Source connection context may be insufficient when generated interiors or reaction-core states are incorrect; correspondence ambiguity and edge-count constraints can still prevent recovery.",
+  "hypothesis": "Joint generated-interior reuse and registry-qualified program connection completion resolves some edge-count obstructions while preserving all frozen validity, exactness, diversity and novelty criteria.",
+  "inference_limit": "Previously inspected saved TRAIN layouts/noise with extra source-derived program context and bounded gate-guided computation. Not independent holdout, learned improvement, new-layout autonomy, or full IL qualification.",
+  "runs": [
+    {
+      "path": "configs/multireaction/combinatorial_connection_reuse_discovery_v1.json",
+      "sha256": "8026bd2f8eadc8834769ace63ad8f2e112fbc1f969fdc039f711477e05cac972"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_connection_reuse_replication_1_v1.json",
+      "sha256": "8dd2a73086c69086a442fd2ff3965a756bbfdc1230b0f32a412eef8e91ef1052"
+    },
+    {
+      "path": "configs/multireaction/combinatorial_connection_reuse_replication_2_v1.json",
+      "sha256": "da778d273ee1d71d3051405d3ab95f94f826fa31632983fbf1fad50d799c3d43"
+    }
+  ],
+  "schema_version": "forge.combinatorial_connection_reuse_protocol.v1",
+  "source_pins": [
+    {
+      "path": "forge/model/program_connection_reuse.py",
+      "sha256": "6ffadba7256580e59edba7bbc13209d96ac52c8ce4326d81bbdfadef42bef409"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_connection_reuse.py",
+      "sha256": "9f2936a5418031252d6f337da680a745d265d1c922d762b5bed0d9ebecc66e95"
+    }
+  ],
+  "stopping_rule": "One proposal per qualified occurrence, all attempts/proposals/abstentions retained. No post-result parameter changes or gate relaxation; preserve negative outcomes."
+}

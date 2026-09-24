@@ -1,0 +1,74 @@
+{
+  "by_family": {
+    "aldehyde_ugi3": {
+      "exact_replay_targets_compared": 2577,
+      "matching_precursor_structure_sets": 2577
+    },
+    "aldehyde_ugi4": {
+      "exact_replay_targets_compared": 8163,
+      "matching_precursor_structure_sets": 8163
+    },
+    "aryl_reductive_amination": {
+      "exact_replay_targets_compared": 4558,
+      "matching_precursor_structure_sets": 4558
+    },
+    "aza_michael_acrylamide": {
+      "exact_replay_targets_compared": 4879,
+      "matching_precursor_structure_sets": 4879
+    },
+    "aza_michael_acrylate": {
+      "exact_replay_targets_compared": 5065,
+      "matching_precursor_structure_sets": 5065
+    },
+    "passerini_3cr": {
+      "exact_replay_targets_compared": 7007,
+      "matching_precursor_structure_sets": 7007
+    },
+    "reductive_amination": {
+      "exact_replay_targets_compared": 5800,
+      "matching_precursor_structure_sets": 5800
+    },
+    "thiolactone_aminolysis_michael": {
+      "exact_replay_targets_compared": 9314,
+      "matching_precursor_structure_sets": 9314
+    }
+  },
+  "disagreements": {
+    "path": "results/phase1/compose_lipid_supplement_intake_v1/prior_precursor_disagreements.jsonl",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_supplement_intake_v1/compare_prior_precursors.py",
+    "sha256": "8f6e48c6aa4a3d55a1f9a8d631dbddbc210cf600a87186da19889154bd15a318"
+  },
+  "inputs": {
+    "prior_audit": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/result.json",
+      "sha256": "7508dde592a69264d6e0cf18e4abe333006ebeedbe9a552136b44b1c51c2fce7"
+    },
+    "prior_identities": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/identities.jsonl.gz",
+      "sha256": "20229fd05ae780ba124e44cebe071aec8423d46f7e438de72f467c88a69b4390"
+    },
+    "prior_rows": {
+      "path": "results/phase1/compose_lipid_v8_precursor_audit_v2/rows.jsonl.gz",
+      "sha256": "e812c5c8a29e01ed09bf9cdbb01159813098c905eedfbc5e284638c61694beb4"
+    },
+    "supplied_identity_check": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/precursor_split_check.json",
+      "sha256": "e1441377a42e3388a69ea85640705b92f5da5e491a021d944f5ea81e203ac56c"
+    },
+    "supplied_manifest": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_component_manifest_v8_1/components.jsonl.gz",
+      "sha256": "e49966487dedd64368ae8b5a9eea52b97630bc5665b202bef7c18452efe4e6cf"
+    }
+  },
+  "schema_version": "forge.compose_lipid_prior_precursor_concordance.v1",
+  "scope": "Exact precursor structure SET agreement on previously inspected TRAIN records only; role, multiplicity and historical-route precision are not established by this comparison.",
+  "seed": 0,
+  "totals": {
+    "exact_replay_targets_compared": 47363,
+    "matching_precursor_structure_sets": 47363
+  },
+  "training_admitted": false
+}

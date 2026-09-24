@@ -1,0 +1,99 @@
+{
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/staged_program.py": {
+      "path": "forge/assembly/staged_program.py",
+      "sha256": "2a2ece3f92677bcf6c75b2938431d2cc458aa880d0100ba882514964e0809d0c"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_evidence_index.py": {
+      "path": "forge/corpus/compose_lipid_evidence_index.py",
+      "sha256": "9fbb1c9392df2b0aa962d1bde8684246a0929661ba56c1f69e62276dbe0d1122"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    },
+    "forge/corpus/compose_lipid_staged_replay.py": {
+      "path": "forge/corpus/compose_lipid_staged_replay.py",
+      "sha256": "66a2b44934ec55ac3cea80f2b4a10b0ea39aa9225a78a0d7756820a3ee16078d"
+    },
+    "results/phase1/compose_lipid_acid_epoxide_source_v2/replay.py": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/replay.py",
+      "sha256": "ea9d37def7746c27320ffc687b16c416ac33d38128974338f996b4de6f88cc1a"
+    },
+    "results/phase1/compose_lipid_full_replay_v1/replay_michael.py": {
+      "path": "results/phase1/compose_lipid_full_replay_v1/replay_michael.py",
+      "sha256": "2d9d0b3c3a6f3d9acf171356713257129d3272c55aadcaff0d9eb6eee1040cf4"
+    }
+  },
+  "inputs": {
+    "catalogue": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/precursor_catalog.jsonl.gz",
+      "sha256": "96865388bdb24c6bca91d738c0fd9384a2b71cb33a53eea41d311af750e60a4f"
+    },
+    "config": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/replay-config.json",
+      "sha256": "a4d19fdd81ae4c8bc2560e995c40a9b56975ec258c177eecc862a26e2703bb9f"
+    },
+    "evidence_index": {
+      "path": "results/phase1/compose_lipid_aema_source_v1/reconciled/result.json",
+      "sha256": "54b64ead80fd54ad4f618e1a96c0de4234b5935a8b4afa3abca33d9b3b6a7992"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_acid_epoxide_staged_source_program_v1.json",
+      "sha256": "8862c93771cd3236496f21ddb3dca8c0196e1b5e33bcbb81b87cb22e4bc2d33b"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/adjudication.json",
+      "sha256": "a369747af7064af402e6d9546f01f83e88069054d3e37dd36b9d18436de9a98a"
+    }
+  },
+  "policy": {
+    "population": "current_full_partition_eligible_pending_only",
+    "program_choice": "source_declared_family_contract",
+    "record_cap": null,
+    "size_filter": null,
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "runtime": {
+    "batch_size": 256,
+    "device": "cpu",
+    "maximum_pending_batches": 4,
+    "multiprocessing": "spawn",
+    "workers": 4
+  },
+  "schema_version": "forge.compose_lipid_acid_epoxide_request.v1",
+  "seed": 0
+}

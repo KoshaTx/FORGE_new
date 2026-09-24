@@ -1,0 +1,144 @@
+{
+  "expected_train_rows": 7007,
+  "family": "passerini_3cr",
+  "inputs": {
+    "article_pdf": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/article-author-copy.pdf",
+      "sha256": "4d397ca0a0ab0c77265de028f4a368fcb61dcf140aaa139b7d5116673115d692"
+    },
+    "article_xml": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/europepmc.xml",
+      "sha256": "051867c8f0a7e1d9b45b56a915ab656184e218791ce618686805ac72317a779e"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_reaction_families_v1.json",
+      "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+    },
+    "source_figure": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/figure1.jpg",
+      "sha256": "0008997aa5838d5fe61416b3afb7178c5f1d21a9f8467c9a6988df1b75a1b324"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_v8_passerini_source_v1/pnas.2409572122.sapp.pdf",
+      "sha256": "39bd9405d31b5e288c1dfbc2d4b15cfcd31ed4114d88941a8e628ed00f6e9d9d"
+    }
+  },
+  "original_reaction_id": "passerini_3cr",
+  "policy": {
+    "fit_population": "protected_train",
+    "generation_calls": 0,
+    "heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "pretraining_result": {
+    "path": "results/phase1/compose_lipid_v8_pretraining_v1/result.json",
+    "sha256": "d7696020e636fc7d1eea326fe4c19bb6ee56f51f6d1bc6bac7c96151afc96145"
+  },
+  "schema_version": "forge.compose_lipid_source_program_config.v1",
+  "source_contract": {
+    "bounded_search_limit": 128,
+    "events": 1,
+    "expected_product_map_bonds": [
+      [
+        5,
+        1,
+        "SINGLE"
+      ],
+      [
+        5,
+        4,
+        "SINGLE"
+      ],
+      [
+        3,
+        6,
+        "DOUBLE"
+      ]
+    ],
+    "policy_locator": "Figure 1B nine complete tertiary amine-containing acid heads; v8 key passerini_3cr reaction_program_invariant and never_collapse. Structural amine preservation only; no pKa or biological activity claim.",
+    "registry_to_source_roles": {
+      "aldehyde_body": "aldehyde_tail",
+      "carboxylic_acid_tail": "amine_acid_head",
+      "isocyanide_tail": "isocyanide_tail"
+    },
+    "retained_amine_policy": {
+      "aromatic": false,
+      "bond_type": "SINGLE",
+      "degree": 3,
+      "forbidden_neighbor_multiple_bond_symbols": [
+        "O",
+        "S"
+      ],
+      "formal_charge": 0,
+      "neighbor_symbol": "C",
+      "symbol": "N"
+    },
+    "retained_amine_role": "carboxylic_acid_tail",
+    "roles": {
+      "aldehyde_tail": 1,
+      "amine_acid_head": 1,
+      "isocyanide_tail": 1
+    },
+    "stage_order": [
+      "passerini_3cr"
+    ]
+  },
+  "source_controls": [
+    {
+      "components": {
+        "aldehyde_body": "O=CCCCCCCCCC",
+        "carboxylic_acid_tail": "CN(C)CC(=O)O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCCCCC"
+      },
+      "evidence_basis": "computed_transform_consistency",
+      "expected_product": "CN(C)CC(=O)OC(CCCCCCCCC)C(=O)NCCCCCCCCCCC",
+      "label": "H1A1B1",
+      "locator": "Figure 1B components H1/A1/B1; SI Figure S1 page 6 top left"
+    },
+    {
+      "components": {
+        "aldehyde_body": "O=CCCCCCCCC=CCCCCCCCC",
+        "carboxylic_acid_tail": "CN(C)CCC(=O)O",
+        "isocyanide_tail": "[C-]#[N+]CCCCCCCCC=CCCCCCCCC"
+      },
+      "evidence_basis": "computed_transform_consistency",
+      "expected_product": "CN(C)CCC(=O)OC(CCCCCCCC=CCCCCCCCC)C(=O)NCCCCCCCCC=CCCCCCCCC",
+      "label": "H2A4-Ole",
+      "locator": "SI page 4 lines 105-113 and main Figure 2I page 4; constitutional stereo-free transcription"
+    }
+  ],
+  "source_discrepancies": [
+    {
+      "issue": "A4B4-S3/S4 headings name branched 2-hexyldecanoate products but the reactant prose names the linear dodecanoate aldehyde. These entries are not exact executed-route controls.",
+      "locator": "SI page 5 lines 124-146"
+    },
+    {
+      "issue": "H2A4B3/B4 headings use 8-oxooctyl wording while their named six-carbon aldehyde components imply a seven-carbon Passerini product segment. Preserve the inconsistency; no exact route label is granted.",
+      "locator": "SI page 4 lines 86-104"
+    },
+    {
+      "issue": "The old JACS identifier is not used to establish this v8 source equivalence. The primary family source is PNAS 10.1073/pnas.2409572122.",
+      "locator": "Frozen family registry Passerini source field"
+    }
+  ],
+  "variant": {
+    "product_map_permutation": {
+      "3": 5,
+      "5": 3
+    },
+    "reaction_id": "passerini_3cr_source_atom_origins_v2",
+    "reaction_version": 2,
+    "source": {
+      "identifier": "10.1073/pnas.2409572122",
+      "kind": "doi",
+      "locator": "Figure 1A, main article page 3; SI pages 3-5; molecular structures in Figure 1B and SI Figure S1",
+      "notes": "Product-only oxygen-map permutation follows the drawn Mumm rearrangement. It preserves constitutional connectivity. This is a mechanism-based atom-origin convention, not isotope-tracing evidence or an experimental outcome label for v8 enumeration."
+    }
+  }
+}

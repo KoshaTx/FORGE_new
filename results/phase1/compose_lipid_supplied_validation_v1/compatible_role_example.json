@@ -1,0 +1,86 @@
+{
+  "input": {
+    "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+    "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+  },
+  "record": {
+    "component_instances": [
+      {
+        "component_id": "8c2293a4add8ee35311f6ca0c66e6330e511d81d249f518551b29b2881672dc6",
+        "quantity": 1,
+        "role": "amine_nucleophile"
+      },
+      {
+        "component_id": "ff2676a5917c14f452d58402972a72e56bb69c2c0763912587b3acd80d13a67c",
+        "quantity": 2,
+        "role": "conjugated_carbonyl_acceptor"
+      }
+    ],
+    "constitution": "CCCCCCCCCCCCCCCC(=O)OC(CC=CCCCCCCCCOC(=O)CCN(CCC(=O)OCCCCCCCCC=CCC(CCCCCC)OC(=O)CCCCCCCCCCCCCCC)CCC1CCCCN1C)CCCCCC",
+    "construction_basis": "lnpdb_compatible_decomposition_replay",
+    "declared_precursor_identifiers": [
+      {
+        "field": "source_precursor_id",
+        "roles": [
+          "conjugated_carbonyl_acceptor"
+        ],
+        "scoped_alias": "aza_michael_acrylate|source_precursor_id|2c2685b3876ab7b48eec35c86f7d83b13de6fb1cefd5a5e0ba02f640b2b91abd",
+        "value": "2c2685b3876ab7b48eec35c86f7d83b13de6fb1cefd5a5e0ba02f640b2b91abd"
+      },
+      {
+        "field": "source_precursor_id",
+        "roles": [
+          "amine_nucleophile"
+        ],
+        "scoped_alias": "aza_michael_acrylate|source_precursor_id|8b8c5c2a51b9b91c0a58ca9f4729d99cb3afe41b2e87da4fbc0807d08ba7cccb",
+        "value": "8b8c5c2a51b9b91c0a58ca9f4729d99cb3afe41b2e87da4fbc0807d08ba7cccb"
+      },
+      {
+        "field": "source_precursor_id",
+        "roles": [
+          "conjugated_carbonyl_acceptor"
+        ],
+        "scoped_alias": "aza_michael_acrylate|source_precursor_id|2c2685b3876ab7b48eec35c86f7d83b13de6fb1cefd5a5e0ba02f640b2b91abd",
+        "value": "2c2685b3876ab7b48eec35c86f7d83b13de6fb1cefd5a5e0ba02f640b2b91abd"
+      }
+    ],
+    "family_definition_sufficient": false,
+    "primary_family": "aza_michael_acrylate",
+    "provenance": {
+      "decomposition_reference": {
+        "line": 6,
+        "path": "artifacts/corpus_build_v2/lnpdb_compatible_decompositions_v3/decompositions.jsonl.gz",
+        "sha256": "08f2a2e43b08710ff5443a2032ac3280e0af24815c35d106d66625730cc6b923"
+      },
+      "line": 344,
+      "manifest": "artifacts/corpus_build_v2/post_instruction_supervision_manifest_v8_2/manifest.jsonl.gz",
+      "payload_sha256": "c4037b7b2e6242b364bd2f83314ff8ed9b694d3adb3c2e273088ce411e1a44cd",
+      "program_reference": null,
+      "sha256": "c2077cf4a305e285a277e0010873e7704cc17a81abb614681641c4786182153f"
+    },
+    "reaction_steps_sites": {
+      "decomposition_id": "810b5a80f089132033c526ecb3ccd072cd49c4b8620bd1883616d32594849068",
+      "forward_replay_stereo_free_exact": true,
+      "historical_route_claimed": false,
+      "locator_kind": "compatible_decomposition_exact_replay",
+      "locator_precedence": "reported_structure_with_product_derived_complete_precursors",
+      "program_steps": 1,
+      "reaction_events": 2,
+      "reaction_ids": [
+        "aza_michael"
+      ],
+      "reaction_program_signature": "c43bbb8332b827aa28cca019b9d5bf5667cedea4cedab07117912455af6e5110",
+      "site_assignment_unique": false,
+      "supervision_mode": "lnpdb_compatible_decomposition_replay",
+      "supervision_origin": "verified_prior_source_anchor_manifest_v3"
+    },
+    "route_families": [
+      "aza_michael_acrylate"
+    ],
+    "source_anchor": true,
+    "target_id": "0078bd944b3a782eb99600b94d6c8d2cdb8c5e05c7738c4a53412f335ce6646b",
+    "task_id": null
+  },
+  "source_line": 5817,
+  "training_admitted": false
+}

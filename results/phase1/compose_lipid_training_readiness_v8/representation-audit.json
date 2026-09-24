@@ -1,0 +1,27 @@
+{
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v8/verify_representation.py",
+    "sha256": "b6cdbb796351c7b67b0039af195540f0ba776a41e0fe71b7348cf89922d6d106"
+  },
+  "inputs": {
+    "representation_result": {
+      "path": "results/phase1/compose_lipid_full_representation_v1/audit/result.json",
+      "sha256": "415657b87da188d51ef61591fd4a74120a749541e51c09eaab2b9e5f1ed26936"
+    },
+    "request": {
+      "path": "results/phase1/compose_lipid_full_representation_v1/audit/request.json",
+      "sha256": "2e12e109e0d4daf72ea50d2765aa8d14120a1a58a68fd00e5d3f85325e9b5775"
+    }
+  },
+  "maximum_observed": {
+    "atoms": 250,
+    "closures": 12
+  },
+  "model_smoke_support_atoms": 254,
+  "pass": true,
+  "schema_version": "forge.compose_lipid_full_representation_reconciliation.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0,
+  "verified_eligible_rows": 1272466
+}

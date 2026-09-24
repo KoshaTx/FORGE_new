@@ -53,58 +53,29 @@ def derive_role_morphology_states(record: SynthesisProgramGraphRecord) -> np.nda
     condition, so every observed integer is encoded as ``value + 1``.
     """
 
-    node_count = record.node_count
+    nodes = record.node_count
+    roles = record.role_states
     core = record.core_position_states > 1
-    output = np.zeros((node_count, len(ROLE_MORPHOLOGY_FIELDS)), dtype=np.int64)
-    for role_state in sorted(set(int(value) for value in record.role_states)):
-        if role_state <= 0:
-            continue
-        role = record.role_states == role_state
-        exterior = role & ~core
-        exterior_indices = set(np.flatnonzero(exterior).tolist())
-        child_counts = {index: 0 for index in exterior_indices}
-        attachments = 0
-        for child in range(1, node_count):
-            parent = int(record.graph.parents[child])
-            if child in exterior_indices and parent in exterior_indices:
-                child_counts[parent] += 1
-            elif (
-                child in exterior_indices
-                and bool(core[parent])
-                and int(record.role_states[parent]) == role_state
-            ) or (
-                parent in exterior_indices
-                and bool(core[child])
-                and int(record.role_states[child]) == role_state
-            ):
-                attachments += 1
-        cycles = 0
-        for left, right in zip(record.graph.closure_left, record.graph.closure_right, strict=True):
-            left_index = int(left)
-            right_index = int(right)
-            if left_index in exterior_indices and right_index in exterior_indices:
-                cycles += 1
-            elif (
-                left_index in exterior_indices
-                and bool(core[right_index])
-                and int(record.role_states[right_index]) == role_state
-            ) or (
-                right_index in exterior_indices
-                and bool(core[left_index])
-                and int(record.role_states[left_index]) == role_state
-            ):
-                attachments += 1
-        values = np.asarray(
-            (
-                len(exterior_indices),
-                sum(max(children - 1, 0) for children in child_counts.values()),
-                cycles,
-                attachments,
-            ),
-            dtype=np.int64,
-        )
-        output[role] = values + 1
-    return output
+    role_count = int(roles.max()) + 1
+    values = np.zeros((role_count, len(ROLE_MORPHOLOGY_FIELDS)), dtype=np.int64)
+    exterior = (roles > 0) & ~core
+    values[:, 0] = np.bincount(roles[exterior], minlength=role_count)
+    for is_tree, left, right in (
+        (True, record.graph.parents[1:], np.arange(1, nodes)),
+        (False, record.graph.closure_left, record.graph.closure_right),
+    ):
+        same_role = (roles[left] == roles[right]) & (roles[left] > 0)
+        internal = same_role & ~core[left] & ~core[right]
+        if is_tree:
+            children = np.bincount(left[internal], minlength=nodes)
+            # Integer accumulation preserves the exact original junction counts.
+            np.add.at(values[:, 1], roles[exterior], np.maximum(children[exterior] - 1, 0))
+        else:
+            values[:, 2] = np.bincount(roles[left[internal]], minlength=role_count)
+        attachment = same_role & (core[left] != core[right])
+        values[:, 3] += np.bincount(roles[left[attachment]], minlength=role_count)
+    values[1:] += 1
+    return values[roles]
 
 
 def collate_reaction_program_records(
@@ -439,15 +410,14 @@ def _sample_categorical_interpolation(
         return _sample_flat_interpolation(clean, marginal, t, active_mask, generator)
     if marginal.ndim != clean.ndim + 1 or marginal.shape[:-1] != clean.shape:
         raise ReactionProgramFlowError("position-specific source marginal has invalid shape")
-    probabilities = marginal[active_mask].clone()
-    example_index = torch.arange(clean.shape[0], device=clean.device)[:, None].expand_as(clean)[
-        active_mask
-    ]
+    selection = active_mask.nonzero(as_tuple=True)
+    probabilities = marginal[selection].clone()
+    example_index = selection[0]
     probabilities *= 1.0 - t[example_index, None]
-    probabilities.scatter_add_(1, clean[active_mask][:, None], t[example_index, None])
+    probabilities.scatter_add_(1, clean[selection][:, None], t[example_index, None])
     sampled = torch.multinomial(probabilities, 1, generator=generator).squeeze(1)
     output = clean.clone()
-    output[active_mask] = sampled
+    output[selection] = sampled
     return output
 
 
@@ -688,8 +658,19 @@ if nn is not None:
             repeat_group_states: Any | None = None,
             component_position_states: Any | None = None,
             component_instance_states: Any | None = None,
+            role_morphology_states: Any | None = None,
+            potency_condition: Any | None = None,
         ) -> dict[str, Any]:
-            del repeat_group_states, component_position_states, component_instance_states
+            if potency_condition is not None:
+                raise ReactionProgramFlowError(
+                    "the sparse synthesis-program flow has no potency-conditioning path"
+                )
+            del (
+                repeat_group_states,
+                component_position_states,
+                component_instance_states,
+                role_morphology_states,
+            )
             context = self.conditioning(
                 program_states=program_states,
                 role_states=role_states,

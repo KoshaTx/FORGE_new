@@ -1,0 +1,44 @@
+{
+  "comparisons": [
+    {
+      "candidate": {
+        "bytes": 11865629,
+        "path": "results/phase1/combinatorial_repository_readiness_v1/graph_cache_candidate/oracle_graph_tensor_cache.npz",
+        "sha256": "d71baed4d34afc4034106609ee11bc9523bb8bfa1319e640a5865588d33c0825"
+      },
+      "exact": true,
+      "expected": {
+        "bytes": 11865629,
+        "sha256": "d71baed4d34afc4034106609ee11bc9523bb8bfa1319e640a5865588d33c0825"
+      },
+      "filename": "oracle_graph_tensor_cache.npz"
+    },
+    {
+      "candidate": {
+        "bytes": 650851,
+        "path": "results/phase1/combinatorial_repository_readiness_v1/graph_cache_candidate/oracle_graph_tensor_cache_metadata.csv.gz",
+        "sha256": "15537143ec33b74a27f8350632e94fab95334346ae1c5779082a8531a0ea3c38"
+      },
+      "exact": false,
+      "expected": {
+        "bytes": 650851,
+        "sha256": "2b6fdd2df9e65dbf1f2c1f1fe753863adae624ad577fe8cb878f5617409a3c9d"
+      },
+      "filename": "oracle_graph_tensor_cache_metadata.csv.gz"
+    }
+  ],
+  "created_at_utc": "2026-09-14T18:34:39.062670+00:00",
+  "new_model_or_biological_result": false,
+  "original_inputs_unchanged": true,
+  "original_result_unchanged": true,
+  "request": {
+    "bytes": 3903,
+    "path": "results/phase1/combinatorial_repository_readiness_v1/graph_cache_recovery_request.json",
+    "sha256": "3e0314d34eff9f08794052c7beb4b7a6699ced6d9b65334df4f632f586e304d1"
+  },
+  "restored": [],
+  "schema_version": "forge.graph_cache_exact_recovery.v1",
+  "scientific_thresholds_changed": false,
+  "source_files_unchanged": true,
+  "status": "replay_mismatch_nothing_restored"
+}

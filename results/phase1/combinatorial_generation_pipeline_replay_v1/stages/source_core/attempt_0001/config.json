@@ -1,0 +1,56 @@
+{
+  "baseline_result": {
+    "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/connection/attempt_0001/output/result.json",
+    "sha256": "7c1fa3b9f92e1da2055a38eae948ceadaa6923aba3f3b0041ef8935db7173fc5"
+  },
+  "cpu_threads": 2,
+  "policy": {
+    "admission": "existing_train_novelty_and_product_multiplicity_rule",
+    "all_attempts_retained": true,
+    "core_proposals_per_attempt": 1,
+    "gate_changes": false,
+    "heldout_use": false,
+    "model_promotion": false,
+    "neural_trajectories": "exact_replay_of_existing_layouts_and_noise",
+    "original_atom_and_edge_counts_preserved": true,
+    "original_invalid_and_exact_outputs_immutable": true,
+    "remote_compute": false,
+    "retries": 0,
+    "source_context": "existing_TRAIN_layout_plus_its_computed_program_core",
+    "source_precursor_interiors_copied": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.combinatorial_source_core_completion.v1_config",
+  "scientific_question": "Apply the frozen bounded completion pipeline to all twelve families.",
+  "source_pins": [
+    {
+      "path": "forge/model/source_core_completion.py",
+      "sha256": "9e9b125719200758a57420a1f5fbca54832c956c075b3572b53cddfe97d0e529"
+    },
+    {
+      "path": "forge/model/fixed_closure_decoding.py",
+      "sha256": "415b4f6924d47743671ab86bc5f8cfbf185c029d226e31d0b688334d8ebed803"
+    },
+    {
+      "path": "forge/model/combinatorial_core_scaffold.py",
+      "sha256": "3c0ff91483ce25550780745607415df220ce0072b4c9ea2a1bea7811db6ebfb4"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "2d9dcc173f1be29d943fe355e02a0536c88ce4c22a5158a0bef67f7ba3befdf1"
+    },
+    {
+      "path": "forge/model/precursor_reuse_projection.py",
+      "sha256": "b8994ee70024feda752c92735e6f55336f3001a41feff9b896bf43c0803cbd94"
+    },
+    {
+      "path": "forge/model/precursor_reuse_admission.py",
+      "sha256": "2c190a7b603b487af5887bc7e2c9427a73fad4b6e96b00a53dc1fc9439502533"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_source_core_completion.py",
+      "sha256": "dc6a6f8be86d2ddf8f95849fa63a65586b869ce4ce64902a634244ae3222a471"
+    }
+  ],
+  "stopping_rule": "Fixed requested population; no redraw, tuning or gate change after outcomes."
+}

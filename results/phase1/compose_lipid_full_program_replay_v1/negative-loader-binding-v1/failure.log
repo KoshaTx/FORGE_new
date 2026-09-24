@@ -1,0 +1,15 @@
+Authenticating a3 source contracts and controls
+Authenticating base source contracts and controls
+Authenticating han source contracts and controls
+Traceback (most recent call last):
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_program_replay_v1/replay.py", line 334, in <module>
+    main()
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_program_replay_v1/replay.py", line 162, in main
+    executors, controls = load_programs(config, inputs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_full_program_replay_v1/replay.py", line 106, in load_programs
+    _, _, found, checked = ENGINES[loader].load_contract(ROOT, path)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rahulmaganti/Kosha/forge_new/forge/corpus/compose_lipid_staged_replay.py", line 93, in load_contract
+    raise ComposeLipidError("Staged-event replay schema or policy differs")
+forge.assembly.compose_lipid.ComposeLipidError: Staged-event replay schema or policy differs

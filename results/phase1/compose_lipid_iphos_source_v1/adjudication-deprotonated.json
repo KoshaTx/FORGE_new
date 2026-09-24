@@ -1,0 +1,105 @@
+{
+  "ambiguity_controls": [
+    {
+      "components": {
+        "amine_head": "CNCCCN",
+        "phosphate_tail": "COP1(=O)OCCO1"
+      },
+      "events": 1,
+      "evidence_kind": "synthetic_regression_fixture_not_experimental_evidence",
+      "expected_computed_consistency_pass": false,
+      "expected_formula": "C7H18N2O4P-",
+      "expected_forward_product_count": 2,
+      "expected_product": "COP(=O)([O-])OCCN(C)CCCN",
+      "family": "iphos_ring_opening",
+      "label": "non_equivalent_nitrogens_deprotonated",
+      "reaction_id": "source_iphos_deprotonated"
+    }
+  ],
+  "assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "main_figure": {
+      "path": "results/phase1/compose_lipid_iphos_source_v1/fig1.png",
+      "sha256": "174438f320bb1308eab49a99839ea4acc53f47a1c4b84c8720b23e3c346c7fe7"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/33542471/iphos-si.pdf",
+      "sha256": "b93add365aad4114ea93629bebb276666baa25a626edbb23471e246fbcc74dc5"
+    }
+  },
+  "disposition": "admit_transform_consistency",
+  "evidence_basis": "computed_transform_consistency",
+  "experimental_execution_admitted": false,
+  "limitations": [
+    "The source draws both charge forms; each is a separate exact computational representation. No corpus neutralization occurs.",
+    "Source SI 10A1P10 calculated neutral mass 561.5 and reported [M+H]+ 563.6 are inconsistent by approximately 1 Da; retain the printed values, do not promote an exact analytical claim.",
+    "General source execution and spectra do not establish exact execution of generated precursor variants.",
+    "The anionic source form is supported by the main figure equilibrium drawing; the SI positive-ion mass is not an analytical measurement of this anion. The released H+ is explicit bookkeeping, not an observed reaction byproduct assay."
+  ],
+  "registry": {
+    "path": "data/vendor/qualified_iphos_deprotonated_program_v1.json",
+    "sha256": "5ea61e767e45ef167e19e197b68cc0da94e6a9274e2335a583b12e521485000e"
+  },
+  "schema_version": "forge.repeated_source_adjudication.v1",
+  "source_controls": [
+    {
+      "chemical_form_locator": "Main Fig. 1a physiological N-neutral/phosphate-anion depiction; full substituents from the source 9A1P9 or 10A1P10 graph in SI S5/S6",
+      "components": {
+        "amine_head": "CCCCCCCCNCCCCCCCC",
+        "phosphate_tail": "CCCCCCCCCOP1(=O)OCCO1"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C27H57NO4P-",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCC)CCCCCCCC",
+      "family": "iphos_ring_opening",
+      "label": "9A1P9_deprotonated",
+      "pdf_pages_one_based": [
+        9
+      ],
+      "reaction_id": "source_iphos_deprotonated",
+      "source_analytical_form_is_not_this_anion": true,
+      "source_asset": "main_figure",
+      "source_reported_mh": 492.4,
+      "source_reported_neutral_mass": 491.4
+    },
+    {
+      "chemical_form_locator": "Main Fig. 1a physiological N-neutral/phosphate-anion depiction; full substituents from the source 9A1P9 or 10A1P10 graph in SI S5/S6",
+      "components": {
+        "amine_head": "CCCCCCCCCCNCCCCCCCCCC",
+        "phosphate_tail": "CCCCCCCCCCOP1(=O)OCCO1"
+      },
+      "events": 1,
+      "expected_computed_consistency_pass": true,
+      "expected_formula": "C32H67NO4P-",
+      "expected_forward_product_count": 1,
+      "expected_product": "CCCCCCCCCCOP(=O)([O-])OCCN(CCCCCCCCCC)CCCCCCCCCC",
+      "family": "iphos_ring_opening",
+      "label": "10A1P10_deprotonated",
+      "pdf_pages_one_based": [
+        10
+      ],
+      "reaction_id": "source_iphos_deprotonated",
+      "source_analytical_form_is_not_this_anion": true,
+      "source_asset": "main_figure",
+      "source_reported_mh": 563.6,
+      "source_reported_neutral_mass": 561.5
+    }
+  ],
+  "source_procedure": {
+    "Pm_reagent_equivalents_per_intended_N": 1.1,
+    "incorporated_Pm_per_modified_N": 1,
+    "section": "General synthesis of ionizable phospholipids (iPhos) library",
+    "solvent": "anhydrous DMSO",
+    "starting_material_concentration_g_ml": 0.3,
+    "temperature_c": 70,
+    "time_h": 72,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8188687/",
+    "workup": "Vacuum dry to remove DMSO. Crude library screened; selected examples flash purified with reported chloroform/methanol gradient and vacuum dried 24 h."
+  },
+  "training_admitted": false
+}

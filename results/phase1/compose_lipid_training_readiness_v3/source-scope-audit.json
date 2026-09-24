@@ -1,0 +1,62 @@
+{
+  "experimental_execution_admitted": false,
+  "han_db": {
+    "event_layer_widths": {
+      "[[1, 1, 1], [1, 1, 1]]": 2768
+    },
+    "exact": 2768,
+    "rows": 2768,
+    "scope": "All source-stage endpoints unique; all within-stage branches retained. Two acyl chloride copies; net two HCl. No isolated mono-adduct or generated-product experimental selectivity claim.",
+    "with_converging_intermediate_branches": 0
+  },
+  "implementation": {
+    "path": "results/phase1/compose_lipid_training_readiness_v3/audit_new_replays.py",
+    "sha256": "fcd6b291797f9e61e3bcb6071b73f72dfa44ffdd4ef13ea2e89346ed3b6022ab"
+  },
+  "inputs": {
+    "b5_adversarial": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/draft-adversarial-audit.json",
+      "sha256": "0ee086cd787e75e9c23075dae3f18361d8fadfb8625bd1982e1938b67a1df1f1"
+    },
+    "b5_bindings": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/eligible-bindings.json",
+      "sha256": "1afcb25f4817db361d0844f58f3116068cc3cc632b255f79a81b8df00b3457e8"
+    },
+    "b5_draft_replay": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/draft-control-replay.json",
+      "sha256": "d6348bd003e7e4e85fcd6aa79d02da8b0bea1e3af5617603e00e3553a9421996"
+    },
+    "b5_source_controls": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    },
+    "han_db": {
+      "path": "results/phase1/compose_lipid_supplied_han_db_v1/result.json",
+      "sha256": "ac09c3a0130550040a26c30915eadde4d897a5af6a641d92fdb0e82403c07135"
+    },
+    "previous_scope_audit": {
+      "path": "results/phase1/compose_lipid_training_readiness_v2/source-scope-audit.json",
+      "sha256": "4a12fe9838cae39817b8be732a99490a86625ffc5b8a4f4883627fa794e99321"
+    }
+  },
+  "schema_version": "forge.compose_lipid_source_scope_audit.v2",
+  "seed": 0,
+  "training_admitted": false,
+  "vitamin_b5": {
+    "corpus_replay_qualified": false,
+    "eligible_by_series": {
+      "I7": 401,
+      "I8": 1414,
+      "I9": 2262
+    },
+    "exact_source_control_replays": 6,
+    "mechanical_invariant_checks": 16,
+    "scope": "Draft net programs reproduce independent source structures and isolated endpoints. Source-site selectivity follows source drawings, not target filtering. Complete precursor grammar and metadata binding are still required.",
+    "source_controls": 6,
+    "unresolved_scope_counterexamples": [
+      "I7_unequal_internal_arms",
+      "I8_secondary_tail_alcohol",
+      "I8_unreported_head_scaffold"
+    ]
+  }
+}

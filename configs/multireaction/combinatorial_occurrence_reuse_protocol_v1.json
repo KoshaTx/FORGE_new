@@ -1,0 +1,36 @@
+{
+  "acceptance": "Preserve every declared count metric for each of twelve families versus the preceding constrained-completion stage; improve exact reconstruction, including a previously untreated depth-3 or depth-4 urea stratum.",
+  "alternative": "Original connecting topology or reaction chemistry may remain wrong after occurrence graph copying; symmetric correspondences may abstain.",
+  "hypothesis": "Exact reaction-occurrence provenance recovers joined isocyanate occurrences and enables additional full-depth reconstruction gains.",
+  "inference_limit": "Reanalysis and replication on previously saved TRAIN layouts/noise, not unseen holdout evidence or independent model training.",
+  "runs": [
+    {
+      "config": "configs/multireaction/combinatorial_occurrence_reuse_discovery_v1.json",
+      "sha256": "47dc87f1ba694c7d45fc9e05ae15b4dd487d30aaaa8cac7122ded4b0bb20cf4a"
+    },
+    {
+      "config": "configs/multireaction/combinatorial_occurrence_reuse_replication_1_v1.json",
+      "sha256": "82a22c9bf8ddea9c3ce7fed0de42a188cf74a34d3453070926cc60d12dbe38b3"
+    },
+    {
+      "config": "configs/multireaction/combinatorial_occurrence_reuse_replication_2_v1.json",
+      "sha256": "dc471dacae027a6e2f325523101ff4c2d5f5c3f560abb003e1fc70006586db33"
+    }
+  ],
+  "schema_version": "forge.combinatorial_occurrence_reuse_protocol.v1",
+  "source_pins": [
+    {
+      "path": "forge/assembly/library_occurrences.py",
+      "sha256": "0f8579dd03a29b9528b21132ad69d8e00e21a48c80a5f93dfb1d44324973ed4f"
+    },
+    {
+      "path": "forge/model/precursor_occurrence_reuse.py",
+      "sha256": "4e7749e09d05c49e8a0709a7582ab2564921e21540ac2ba157eae186c9f7fbc2"
+    },
+    {
+      "path": "experiments/phase1/multireaction/combinatorial_occurrence_reuse.py",
+      "sha256": "e15448f73c81a79f23ad1416af9854946a0516fa51eef8192b720e95e9d6fe57"
+    }
+  ],
+  "stopping_rule": "One proposal per qualified occurrence, every original and rejection retained. No parameter tuning or gate relaxation after inspecting results."
+}

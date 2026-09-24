@@ -1,0 +1,53 @@
+{
+  "families": {
+    "aza_michael_acrylamide": {
+      "interface_stratum": "N",
+      "reaction_id": "source_aza_michael_acrylamide",
+      "role_fields": {
+        "acceptor_tail": "tail_id",
+        "amine_head": "head_id"
+      }
+    },
+    "aza_michael_acrylate": {
+      "interface_stratum": "O",
+      "reaction_id": "source_aza_michael_acrylate",
+      "role_fields": {
+        "acceptor_tail": "tail_id",
+        "amine_head": "head_id"
+      }
+    }
+  },
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/adjudication.json",
+      "sha256": "0009fd42a61bb44dee65449ed3bdeae5a9fe289ebc93a9cbdcf1ecaaba3a9a23"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_michael_source_program_v1.json",
+      "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+    }
+  },
+  "policy": {
+    "fit_population": "enforced_product_protection_preparation_view",
+    "generation_calls": 0,
+    "provider_heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_repeated_inverse_config.v1",
+  "search_bounds": {
+    "maximum_events": 7,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

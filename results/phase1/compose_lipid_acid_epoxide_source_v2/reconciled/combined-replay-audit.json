@@ -1,0 +1,316 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconciled/acid-epoxide-evidence.sqlite",
+    "sha256": "f0904c3b6e6e40a521cfe73e9660c4953b5e611020e2f69e1428e66e1b708884"
+  },
+  "counts": {
+    "exact_computed_reconstruction": 101098
+  },
+  "exact_above_96_atoms": 0,
+  "failed_checks": {},
+  "implementation": {
+    "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/reconcile.py",
+    "sha256": "7001029a7744edfe520729cefda956ef3d6eae791f5814ab235f2d1dc2d667f3"
+  },
+  "inputs": {
+    "evidence_index_code": {
+      "path": "forge/corpus/compose_lipid_evidence_index.py",
+      "sha256": "9fbb1c9392df2b0aa962d1bde8684246a0929661ba56c1f69e62276dbe0d1122"
+    },
+    "previous": {
+      "path": "results/phase1/compose_lipid_aema_source_v1/reconciled/combined-replay-audit.json",
+      "sha256": "d9001984bb2bc3d96ef8c9b9c823f86e057050fe098ff017a87c5266af50a528"
+    },
+    "previous_index": {
+      "path": "results/phase1/compose_lipid_aema_source_v1/reconciled/result.json",
+      "sha256": "54b64ead80fd54ad4f618e1a96c0de4234b5935a8b4afa3abca33d9b3b6a7992"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_acid_epoxide_source_v2/replay/result.json",
+      "sha256": "328abf9700a79bf94182c178839a67308ae7ad669c06844f410f6e4698ef941c"
+    },
+    "validation_code": {
+      "path": "forge/corpus/compose_lipid_grouped_readiness.py",
+      "sha256": "d2a1925be5262432020678a937c5cfde6e6a5b5c51838d7a48fce852d5066ffb"
+    }
+  },
+  "maximum_exact_heavy_atoms": 56,
+  "schema_version": "forge.compose_lipid_incremental_evidence_checkpoint.v1",
+  "seed": 0,
+  "summary": {
+    "by_family": {
+      "a3_amine_aldehyde_alkyne": {
+        "eligible_pending_chemistry": 2520,
+        "eligible_preparation_rows": 36624,
+        "exact_computed_reconstructions": 34104,
+        "exact_computed_reconstructions_carried": 1804,
+        "historical_exact_now_protected": 62,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 33392,
+        "source_records": 70016
+      },
+      "acid_epoxide_diester_multistep": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 101098,
+        "exact_computed_reconstructions": 101098,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 101098,
+        "protected_records": 131142,
+        "source_records": 232240
+      },
+      "aema_aza_thiol_addition": {
+        "eligible_pending_chemistry": 1940,
+        "eligible_preparation_rows": 5505,
+        "exact_computed_reconstructions": 3565,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 8360,
+        "source_records": 13865
+      },
+      "aldehyde_ugi3": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 2283,
+        "exact_computed_reconstructions": 2283,
+        "exact_computed_reconstructions_carried": 794,
+        "historical_exact_now_protected": 161,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 16559,
+        "source_records": 18842
+      },
+      "aldehyde_ugi4": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 63616,
+        "exact_computed_reconstructions": 63616,
+        "exact_computed_reconstructions_carried": 2656,
+        "historical_exact_now_protected": 566,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 158413,
+        "source_records": 222029
+      },
+      "alpha_isocyanoester_dihydroimidazole": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 35728,
+        "exact_computed_reconstructions": 35728,
+        "exact_computed_reconstructions_carried": 1304,
+        "historical_exact_now_protected": 165,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 183308,
+        "source_records": 219036
+      },
+      "amine_alkylation": {
+        "eligible_pending_chemistry": 92699,
+        "eligible_preparation_rows": 92699,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 95573,
+        "source_records": 188272
+      },
+      "amine_epoxide_opening": {
+        "eligible_pending_chemistry": 33507,
+        "eligible_preparation_rows": 33507,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 63932,
+        "source_records": 97439
+      },
+      "aryl_reductive_amination": {
+        "eligible_pending_chemistry": 11428,
+        "eligible_preparation_rows": 19216,
+        "exact_computed_reconstructions": 7788,
+        "exact_computed_reconstructions_carried": 1718,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 28874,
+        "source_records": 48090
+      },
+      "aza_michael_acrylamide": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 10127,
+        "exact_computed_reconstructions": 10127,
+        "exact_computed_reconstructions_carried": 1954,
+        "historical_exact_now_protected": 57,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 21112,
+        "source_records": 31239
+      },
+      "aza_michael_acrylate": {
+        "eligible_pending_chemistry": 8,
+        "eligible_preparation_rows": 10278,
+        "exact_computed_reconstructions": 10270,
+        "exact_computed_reconstructions_carried": 2057,
+        "historical_exact_now_protected": 110,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 23341,
+        "source_records": 33619
+      },
+      "disulfide_michael": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 96833,
+        "exact_computed_reconstructions": 96833,
+        "exact_computed_reconstructions_carried": 3509,
+        "historical_exact_now_protected": 143,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 157556,
+        "source_records": 254389
+      },
+      "epoxide_opening_o_acylation": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 21462,
+        "exact_computed_reconstructions": 21462,
+        "exact_computed_reconstructions_carried": 2725,
+        "historical_exact_now_protected": 43,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 21343,
+        "source_records": 42805
+      },
+      "iphos_ring_opening": {
+        "eligible_pending_chemistry": 40682,
+        "eligible_preparation_rows": 103318,
+        "exact_computed_reconstructions": 62636,
+        "exact_computed_reconstructions_carried": 4456,
+        "historical_exact_now_protected": 257,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 81027,
+        "source_records": 184345
+      },
+      "ketone_isocyanide_amide": {
+        "eligible_pending_chemistry": 33693,
+        "eligible_preparation_rows": 33693,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 237867,
+        "source_records": 271560
+      },
+      "ketone_ugi4": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 27027,
+        "exact_computed_reconstructions": 27027,
+        "exact_computed_reconstructions_carried": 2345,
+        "historical_exact_now_protected": 619,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 64368,
+        "source_records": 91395
+      },
+      "maleate_addition": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 38472,
+        "exact_computed_reconstructions": 38472,
+        "exact_computed_reconstructions_carried": 3319,
+        "historical_exact_now_protected": 52,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 29991,
+        "source_records": 68463
+      },
+      "o_esterification": {
+        "eligible_pending_chemistry": 4473,
+        "eligible_preparation_rows": 14864,
+        "exact_computed_reconstructions": 10391,
+        "exact_computed_reconstructions_carried": 2343,
+        "historical_exact_now_protected": 35,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 10084,
+        "source_records": 24948
+      },
+      "passerini_3cr": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 62188,
+        "exact_computed_reconstructions": 62188,
+        "exact_computed_reconstructions_carried": 3674,
+        "historical_exact_now_protected": 617,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 66164,
+        "source_records": 128352
+      },
+      "preassembled_thiol_yne_tail_amidation": {
+        "eligible_pending_chemistry": 27286,
+        "eligible_preparation_rows": 260470,
+        "exact_computed_reconstructions": 233184,
+        "exact_computed_reconstructions_carried": 5287,
+        "historical_exact_now_protected": 318,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 204578,
+        "source_records": 465048
+      },
+      "reductive_amination": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 28471,
+        "exact_computed_reconstructions": 28471,
+        "exact_computed_reconstructions_carried": 3018,
+        "historical_exact_now_protected": 191,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 32849,
+        "source_records": 61320
+      },
+      "reported_lnpdb_route_unassigned": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 255,
+        "source_records": 255
+      },
+      "reported_multistep_amino_lipid": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 9,
+        "source_records": 9
+      },
+      "reported_reference_lipid": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 0,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 4,
+        "source_records": 4
+      },
+      "thiolactone_aminolysis_michael": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 174987,
+        "exact_computed_reconstructions": 174987,
+        "exact_computed_reconstructions_carried": 5302,
+        "historical_exact_now_protected": 92,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 159872,
+        "source_records": 334859
+      },
+      "vitamin_b5_multistep": {
+        "eligible_pending_chemistry": 0,
+        "eligible_preparation_rows": 0,
+        "exact_computed_reconstructions": 0,
+        "exact_computed_reconstructions_carried": 0,
+        "historical_exact_now_protected": 3036,
+        "new_exact_computed_reconstructions": 0,
+        "protected_records": 80398,
+        "source_records": 80398
+      }
+    },
+    "totals": {
+      "eligible_pending_chemistry": 248236,
+      "eligible_preparation_rows": 1272466,
+      "exact_computed_reconstructions": 1024230,
+      "exact_computed_reconstructions_carried": 48265,
+      "historical_exact_now_protected": 6524,
+      "new_exact_computed_reconstructions": 101098,
+      "protected_records": 1910371,
+      "source_records": 3182837
+    }
+  },
+  "training_admitted": false,
+  "training_calls": 0
+}

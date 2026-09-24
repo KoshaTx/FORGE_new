@@ -1,0 +1,142 @@
+{
+  "atom_vocabulary": [
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 0,
+      "symbol": "Br",
+      "train_atoms": 893
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 1,
+      "symbol": "C",
+      "train_atoms": 6474202
+    },
+    {
+      "aromatic": true,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 2,
+      "symbol": "C",
+      "train_atoms": 101896
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 3,
+      "symbol": "N",
+      "train_atoms": 336991
+    },
+    {
+      "aromatic": true,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 4,
+      "symbol": "N",
+      "train_atoms": 12053
+    },
+    {
+      "aromatic": true,
+      "explicit_hydrogens": 1,
+      "formal_charge": 0,
+      "index": 5,
+      "symbol": "N",
+      "train_atoms": 1283
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 1,
+      "index": 6,
+      "symbol": "N",
+      "train_atoms": 2718
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": -1,
+      "index": 7,
+      "symbol": "O",
+      "train_atoms": 9903
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 8,
+      "symbol": "O",
+      "train_atoms": 731472
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 9,
+      "symbol": "P",
+      "train_atoms": 9903
+    },
+    {
+      "aromatic": false,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 10,
+      "symbol": "S",
+      "train_atoms": 86819
+    },
+    {
+      "aromatic": true,
+      "explicit_hydrogens": 0,
+      "formal_charge": 0,
+      "index": 11,
+      "symbol": "S",
+      "train_atoms": 365
+    }
+  ],
+  "bond_counts": {
+    "AROMATIC": 117261,
+    "DOUBLE": 572097,
+    "SINGLE": 7010674,
+    "TRIPLE": 18289
+  },
+  "checkpoint_compatibility": "new_vocabulary_requires_new_model_configuration",
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_pretraining_v1.json",
+    "sha256": "766c23f60241755f037a027df26621bebad360769bf7fdb9467bc5398b7aae79"
+  },
+  "fit_split": "train",
+  "heavy_atom_valence_capacities": [
+    2,
+    8,
+    8,
+    6,
+    6,
+    4,
+    8,
+    2,
+    4,
+    10,
+    12,
+    12
+  ],
+  "import_result": {
+    "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+    "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+  },
+  "maximum_observed": {
+    "atoms": 96,
+    "closures": 8
+  },
+  "neutral_monovalent_extensions": [
+    "Br"
+  ],
+  "rdkit_version": "2026.03.5",
+  "schema_version": "forge.compose_lipid_atom_vocabulary.v1",
+  "scope": "protected_TRAIN_graph_representation_only_not_training_admission",
+  "status": "fail",
+  "training_rows": 149736
+}

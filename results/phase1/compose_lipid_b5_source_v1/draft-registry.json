@@ -1,0 +1,1293 @@
+{
+  "curation": {
+    "corpus_replay_qualified": false,
+    "status": "draft_source_controls_only",
+    "training_admitted": false
+  },
+  "programs": [
+    {
+      "architecture_subfamily": "I7",
+      "equal_component_groups": [],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I7",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "tail6_alcohol"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_i7_carboxyl_tail_net",
+          "source_step": "Source acetal protection/coupling/deprotection composite to8/14"
+        },
+        {
+          "accumulator_role": "b5_tail_diol",
+          "added_roles": [
+            "head_acid"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_primary_oh_head",
+          "source_step": "Source RA head acylation toI7/15/16"
+        }
+      ],
+      "terminal_constraints": {
+        "head_acid": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "tail6_alcohol": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 5
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "I8",
+      "equal_component_groups": [],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I8",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "r2_tail_alcohol"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_i8_carboxyl_tail_net",
+          "source_step": "Source acetal protection/coupling/deprotection composite to8/14"
+        },
+        {
+          "accumulator_role": "b5_tail_diol",
+          "added_roles": [
+            "head_acid"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_primary_oh_head",
+          "source_step": "Source RA head acylation toI7/15/16"
+        },
+        {
+          "accumulator_role": "b5_head_secondary_alcohol",
+          "added_roles": [
+            "tail_acid"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_secondary_oh_tail",
+          "source_step": "Source RB tail acylation toI8"
+        }
+      ],
+      "terminal_constraints": {
+        "head_acid": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "r2_tail_alcohol": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 1
+          },
+          "formal_charge": 0
+        },
+        "tail_acid": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "I9_hetero_amine",
+      "equal_component_groups": [],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I9_hetero_amine",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "tail_acid_1",
+            "tail_acid_2"
+          ],
+          "net_byproducts": {
+            "H": 4,
+            "O": 2,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_site_ordered_dual_tail_net",
+          "source_step": "Source Fm cycle with exact RA/RB assignment to23 or27"
+        },
+        {
+          "accumulator_role": "b5_dual_tail_acid",
+          "added_roles": [
+            "head_nucleophile"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_carboxyl_head_amine",
+          "source_step": "Source RC head amine coupling"
+        }
+      ],
+      "terminal_constraints": {
+        "head_nucleophile": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "tail_acid_1": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "tail_acid_2": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "I9_hetero_alcohol",
+      "equal_component_groups": [],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I9_hetero_alcohol",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "tail_acid_1",
+            "tail_acid_2"
+          ],
+          "net_byproducts": {
+            "H": 4,
+            "O": 2,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_site_ordered_dual_tail_net",
+          "source_step": "Source Fm cycle with exact RA/RB assignment to23 or27"
+        },
+        {
+          "accumulator_role": "b5_dual_tail_acid",
+          "added_roles": [
+            "head_nucleophile"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_carboxyl_head_alcohol",
+          "source_step": "Source RC head alcohol coupling"
+        }
+      ],
+      "terminal_constraints": {
+        "head_nucleophile": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "tail_acid_1": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "tail_acid_2": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "I9_homo_amine",
+      "equal_component_groups": [
+        [
+          "tail_acid_1",
+          "tail_acid_2"
+        ]
+      ],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I9_homo_amine",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "tail_acid_1",
+            "tail_acid_2"
+          ],
+          "net_byproducts": {
+            "H": 4,
+            "O": 2,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_site_ordered_dual_tail_net",
+          "source_step": "Source Fm cycle with exact RA/RB assignment to23 or27"
+        },
+        {
+          "accumulator_role": "b5_dual_tail_acid",
+          "added_roles": [
+            "head_nucleophile"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_carboxyl_head_amine",
+          "source_step": "Source RC head amine coupling"
+        }
+      ],
+      "terminal_constraints": {
+        "head_nucleophile": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "tail_acid_1": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "tail_acid_2": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "I9_homo_alcohol",
+      "equal_component_groups": [
+        [
+          "tail_acid_1",
+          "tail_acid_2"
+        ]
+      ],
+      "initial_role": "vitamin_b5_core",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_b5_I9_homo_alcohol",
+      "scope": "DRAFT source-control validation. Net composite stages contract documented protecting-group cycles while preserving exact source sites and independently transcribed isolated stage endpoints. Full terminal grammar and corpus role binding NOT yet qualified. Computed consistency only.",
+      "stages": [
+        {
+          "accumulator_role": "vitamin_b5_core",
+          "added_roles": [
+            "tail_acid_1",
+            "tail_acid_2"
+          ],
+          "net_byproducts": {
+            "H": 4,
+            "O": 2,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_site_ordered_dual_tail_net",
+          "source_step": "Source Fm cycle with exact RA/RB assignment to23 or27"
+        },
+        {
+          "accumulator_role": "b5_dual_tail_acid",
+          "added_roles": [
+            "head_nucleophile"
+          ],
+          "net_byproducts": {
+            "H": 2,
+            "O": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_b5_carboxyl_head_alcohol",
+          "source_step": "Source RC head alcohol coupling"
+        }
+      ],
+      "terminal_constraints": {
+        "head_nucleophile": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "surviving_nonacyl_basic_candidate",
+              "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+            }
+          ]
+        },
+        "tail_acid_1": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "tail_acid_2": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "vitamin_b5_core": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "H": 17,
+            "N": 1,
+            "O": 5
+          },
+          "formal_charge": 0,
+          "required_queries": [
+            {
+              "minimum_matches": 1,
+              "name": "source_b5_complete_core",
+              "smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114].[O&X2&H1:4][C&X4:5]>>[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:4][C:5]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "DMP",
+          "p-TsOH",
+          "EDCI.HCl",
+          "DMAP",
+          "DTT"
+        ],
+        "net_composite": true,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Acetal protection, tail6 coupling, acetal removal; SI pp.7-11",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "vitamin_b5_core",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "tail6_alcohol",
+          "required_handle_smarts": "[O&X2&H1][C&X4]"
+        }
+      ],
+      "reaction_id": "source_b5_i7_carboxyl_tail_net",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114].[O&X2&H1:4][C&X4:5]>>[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:4][C:5]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "DMP",
+          "p-TsOH",
+          "EDCI.HCl",
+          "DMAP",
+          "DTT"
+        ],
+        "net_composite": true,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Acetal protection, R2 tail coupling, acetal removal; SI pp.16-18",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "vitamin_b5_core",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "r2_tail_alcohol",
+          "required_handle_smarts": "[O&X2&H1][C&X4]"
+        }
+      ],
+      "reaction_id": "source_b5_i8_carboxyl_tail_net",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:114][C&X4:115].[C&X3:1](=[O&X1:2])[O&X2&H1:3]>>[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C:1](=[O:2]))[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:114][C&X4:115]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "EDCI.HCl",
+          "DMAP"
+        ],
+        "net_composite": false,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Source primary RA head ester; SI Fig.S1 or S2",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "b5_tail_diol",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)O[C&X4]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "head_acid",
+          "required_handle_smarts": "[C&X3](=[O&X1])[O&X2&H1]"
+        }
+      ],
+      "reaction_id": "source_b5_primary_oh_head",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:114][C&X4:115].[C&X3:1](=[O&X1:2])[O&X2&H1:3]>>[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([O:106][C:1](=[O:2]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:114][C&X4:115]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "EDCI.HCl",
+          "DMAP"
+        ],
+        "net_composite": false,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Source secondary RB tail ester; SI Fig.S2",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "b5_head_secondary_alcohol",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2]O[C&X3]=O)[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)O[C&X4]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "tail_acid",
+          "required_handle_smarts": "[C&X3](=[O&X1])[O&X2&H1]"
+        }
+      ],
+      "reaction_id": "source_b5_secondary_oh_tail",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][OH:104])[CH:105]([OH:106])[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114].[C&X3:1](=[O&X1:2])[O&X2&H1:3].[C&X3:21](=[O&X1:22])[O&X2&H1:23]>>[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C:1](=[O:2]))[CH:105]([O:106][C:21](=[O:22]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "Fm protecting group",
+          "EDCI.HCl",
+          "DMAP",
+          "piperidine"
+        ],
+        "condition_conflicts_retained": true,
+        "net_composite": true,
+        "solvent": [
+          "DCM",
+          "DMF"
+        ],
+        "source_steps": "Fm protection, primary then secondary O-acylation for heteropair / simultaneous identical pair, Fm removal to isolated23/27; SI pp.25-33",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "name": "vitamin_b5_core",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2][O&H1])[C&H1]([O&H1])C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "tail_acid_1",
+          "required_handle_smarts": "[C&X3](=[O&X1])[O&X2&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "tail_acid_2",
+          "required_handle_smarts": "[C&X3](=[O&X1])[O&X2&H1]"
+        }
+      ],
+      "reaction_id": "source_b5_site_ordered_dual_tail_net",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([O:106][C&X3:118](=[O:119]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114].[O&X2&H1:4][C&X4:5]>>[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([O:106][C&X3:118](=[O:119]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[O:4][C:5]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "EDCI.HCl",
+          "DMAP"
+        ],
+        "net_composite": false,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Source terminal head ester or amide at RC; SI pp.29-36",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "b5_dual_tail_acid",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2]O[C&X3]=O)[C&H1](O[C&X3]=O)C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "head_nucleophile",
+          "required_handle_smarts": "[O&X2&H1][C&X4]"
+        }
+      ],
+      "reaction_id": "source_b5_carboxyl_head_alcohol",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    },
+    {
+      "atom_mapped_reaction_smarts": "[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([O:106][C&X3:118](=[O:119]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[OH:114].[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):4]>>[CH3:100][C:101]([CH3:102])([CH2:103][O:104][C&X3:116](=[O:117]))[CH:105]([O:106][C&X3:118](=[O:119]))[C:107](=[O:108])[NH:109][CH2:110][CH2:111][C:112](=[O:113])[N:4]",
+      "conditions": {
+        "catalyst_or_reagent": [
+          "HATU",
+          "DIPEA"
+        ],
+        "net_composite": false,
+        "solvent": [
+          "DCM"
+        ],
+        "source_steps": "Source terminal head ester or amide at RC; SI pp.29-36",
+        "temperature_c": null,
+        "time_h": null
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_b5_source_v1/build_draft_registry.py",
+          "sha256": "3f71d20f795c00a060d9c5753b0f2543a109cd4873e10bb7c550d7099dffddea"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "amide": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "basic_head": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "nonacyl_nh": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "name": "b5_dual_tail_acid",
+          "required_handle_smarts": "[C&H3]C([C&H3])([C&H2]O[C&X3]=O)[C&H1](O[C&X3]=O)C(=O)[N&H1][C&H2][C&H2]C(=O)[O&H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[O&X2&H1][C&X4]"
+          ],
+          "name": "head_nucleophile",
+          "required_handle_smarts": "[N&X3&$([N;H1,H2])&+0&!$(N-[C,S,P]=[O,S,N])]"
+        }
+      ],
+      "reaction_id": "source_b5_carboxyl_head_amine",
+      "reaction_version": 1,
+      "selectivity_policy": "All sites satisfying the complete independently transcribed B5 core and source attachment assignment; every outcome/inverse retained. Net composite source stages do not assert one-pot selectivity.",
+      "sources": [
+        {
+          "identifier": "10.1002/adhm.202403366",
+          "kind": "doi",
+          "locator": "SI Figs.S1-S3, PDF pp.7,16,25; exact control-specific pages in control-transcriptions.json",
+          "notes": "Net composite stage controls only. Source discrepancies retained; no generated-product execution or direct unprotected chemoselectivity claim."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free only."
+    }
+  ],
+  "schema_version": "forge.source_staged_registry.v1",
+  "source_assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39502027/article.xml",
+      "sha256": "200a37640995d3adf430eb9f1de19f84eab2e61d1ad0b2d410f1765d793ecb6a"
+    },
+    "control_transcriptions": {
+      "path": "results/phase1/compose_lipid_b5_source_v1/control-transcriptions.json",
+      "sha256": "56304c0ea36cc0533b65f25071b10714aec2eec7082eefe403ef932af6f3ad11"
+    },
+    "si": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39502027/ADHM-14-0-s001.pdf",
+      "sha256": "8a593feacdb6e9dcfda20567688c01d887e5b2f0a7e03476013cce1c428235c9"
+    }
+  }
+}

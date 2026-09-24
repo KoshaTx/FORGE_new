@@ -1,0 +1,272 @@
+{
+  "grouped_programs": [
+    {
+      "architecture_subfamily": "han_db_two_stage_four_arm_rocket",
+      "initial_role": "amine_head",
+      "product_constraints": {
+        "formal_charge": 0,
+        "required_queries": [
+          {
+            "minimum_matches": 1,
+            "name": "surviving_nonacyl_basic_candidate",
+            "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+          }
+        ]
+      },
+      "program_id": "source_han_db_two_grouped_stages",
+      "scope": "Net source-stage consistency with two identical complete epoxide copies followed by two identical complete acyl chloride copies. Generated component scope: neutral C/H/N/O amines and C/H/O body/acyl hydrophobes; no experimental execution claim.",
+      "stages": [
+        {
+          "accumulator_role": "amine_head",
+          "added_roles": [
+            "epoxide_tail"
+          ],
+          "events": 2,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_han_db_amine_epoxide",
+          "source_step": "80 C, 48 h; two incorporated epoxide copies"
+        },
+        {
+          "accumulator_role": "aminoalcohol_head",
+          "added_roles": [
+            "acyl_tail"
+          ],
+          "events": 2,
+          "net_byproducts_per_event": {
+            "Cl": 1,
+            "H": 1,
+            "formal_charge": 0
+          },
+          "reaction_id": "source_han_db_acyl_chloride_o_acylation",
+          "source_step": "DCM/TEA, room temperature, 12 h; two O-acylations"
+        }
+      ],
+      "terminal_constraints": {
+        "acyl_tail": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8,
+            17
+          ],
+          "exact_element_counts": {
+            "Cl": 1
+          },
+          "formal_charge": 0
+        },
+        "amine_head": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "epoxide_tail": {
+          "allow_aromatic_atoms": false,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "formal_charge": 0
+        }
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "architecture": "One of two source-ordered grouped stages; no separate source execution claim for a mono-adduct.",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CH2:2]1[CH1:3][OX2:4]1>>[N:1][CH2:2][CH1:3][OH1:4]",
+      "conditions": {
+        "amine_mmol": 0.1,
+        "epoxide_equivalents": 2.4,
+        "epoxide_mmol": 0.24,
+        "temperature_c": 80,
+        "time_h": 48
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_han_db_source_v1/build_registry.py",
+          "sha256": "65e1ecdd227893c6813d3a33b0216833b361b6692b0b15028494f2706bec13c0"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "head_constraint": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "non_acyl_amine": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4
+          ],
+          "name": "epoxide_tail",
+          "required_handle_smarts": "[CH2]1[CH1][OX2]1"
+        }
+      ],
+      "reaction_id": "source_han_db_amine_epoxide",
+      "reaction_version": 1,
+      "selectivity_policy": "Source-drawn terminal epoxide carbon attacked by a neutral non-acyl N-H amine; all N attachment outcomes retained through both declared events.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41467-024-45537-z",
+          "kind": "doi",
+          "locator": "Main Methods, General method for the synthesis of DB-lipidoids; SI PDF p. 3 Fig. S2; p. 23 Table S1.",
+          "notes": "Two complete incorporated epoxide copies followed by two complete incorporated acyl chlorides. Computed source-stage consistency, not individual experimental execution."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; retain source stereo in the primary drawings."
+    },
+    {
+      "architecture": "One of two source-ordered grouped stages; no separate source execution claim for a mono-adduct.",
+      "atom_mapped_reaction_smarts": "[C&X3:1](=[O&X1:2])([Cl:3])-[C:6].[O&X2&H1:4][C&X4:5]>>[C:1](=[O:2])(-[O:4][C:5])-[C:6]",
+      "conditions": {
+        "DCM_ml": 2,
+        "TEA_equivalents": 3,
+        "TEA_mmol": 0.3,
+        "acyl_chloride_equivalents": 2.4,
+        "acyl_chloride_mmol": 0.24,
+        "temperature": "room temperature",
+        "time_h": 12,
+        "workup": "DCM and TEA removed under vacuum; crude products dissolved in EtOH"
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_han_db_source_v1/build_registry.py",
+          "sha256": "65e1ecdd227893c6813d3a33b0216833b361b6692b0b15028494f2706bec13c0"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "ester": {
+            "path": "data/vendor/qualified_maleate_ester_source_program_v1.json",
+            "sha256": "f45aaa00e59b4347103105e346a875b7ab832f7baf902160374012a47aa08cd7"
+          },
+          "family": {
+            "path": "data/vendor/qualified_reaction_families_v1.json",
+            "sha256": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587"
+          },
+          "head_constraint": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "non_acyl_amine": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]",
+            "[O&X2&H1][C&X4]"
+          ],
+          "mapped_reactive_atoms": [
+            1,
+            2,
+            3,
+            6
+          ],
+          "name": "acyl_tail",
+          "required_handle_smarts": "[C&X3](=[O&X1])(Cl)-C"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]",
+            "[CX3](=[OX1])[OX2H1]"
+          ],
+          "name": "aminoalcohol_head",
+          "required_handle_smarts": "[O&X2&H1][C&X4]"
+        }
+      ],
+      "reaction_id": "source_han_db_acyl_chloride_o_acylation",
+      "reaction_version": 1,
+      "selectivity_policy": "Source acyl chloride and aliphatic hydroxyl only; unprotected N-H competitors excluded; all O attachment outcomes retained through both declared events.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41467-024-45537-z",
+          "kind": "doi",
+          "locator": "Main Methods, General method for the synthesis of DB-lipidoids; SI PDF p. 3 Fig. S2; p. 23 Table S1.",
+          "notes": "Two complete incorporated epoxide copies followed by two complete incorporated acyl chlorides. Computed source-stage consistency, not individual experimental execution."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; retain source stereo in the primary drawings."
+    }
+  ],
+  "schema_version": "forge.source_grouped_registry.v1",
+  "source_assets": {
+    "article": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/article.xml",
+      "sha256": "ebcfa04432209827f712e74b41558c042c0b4b9d531f0d436a642b4e8d0f61b0"
+    },
+    "control_transcriptions": {
+      "path": "results/phase1/compose_lipid_han_db_source_v1/control-transcriptions.json",
+      "sha256": "965d1c56701766424ff96a113dcde205021ef6669d1a988847aab8f1985f13aa"
+    },
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/38409275/41467_2024_45537_MOESM1_ESM.pdf",
+      "sha256": "b7ae2f3241f451fd49579fb88338cd3b0dabee0c92836978d4a4701afb03b2b3"
+    }
+  }
+}

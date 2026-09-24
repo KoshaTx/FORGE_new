@@ -1,0 +1,158 @@
+{
+  "by_family_depth": [
+    {
+      "attempts": 64,
+      "exact_program": 61,
+      "family": "acetal_aldehyde_diol",
+      "requested_depth": 1,
+      "valid_connected": 64
+    },
+    {
+      "attempts": 21,
+      "exact_program": 13,
+      "family": "amide_coupling_acid_amine",
+      "requested_depth": 1,
+      "valid_connected": 21
+    },
+    {
+      "attempts": 43,
+      "exact_program": 18,
+      "family": "amide_coupling_acid_amine",
+      "requested_depth": 2,
+      "valid_connected": 43
+    },
+    {
+      "attempts": 13,
+      "exact_program": 13,
+      "family": "aza_michael_amine_acrylate",
+      "requested_depth": 1,
+      "valid_connected": 13
+    },
+    {
+      "attempts": 51,
+      "exact_program": 1,
+      "family": "aza_michael_amine_acrylate",
+      "requested_depth": 2,
+      "valid_connected": 42
+    },
+    {
+      "attempts": 5,
+      "exact_program": 5,
+      "family": "carbamate_amine_chloroformate",
+      "requested_depth": 1,
+      "valid_connected": 5
+    },
+    {
+      "attempts": 59,
+      "exact_program": 16,
+      "family": "carbamate_amine_chloroformate",
+      "requested_depth": 2,
+      "valid_connected": 59
+    },
+    {
+      "attempts": 64,
+      "exact_program": 54,
+      "family": "disulfide_coupling",
+      "requested_depth": 1,
+      "valid_connected": 64
+    },
+    {
+      "attempts": 17,
+      "exact_program": 10,
+      "family": "epoxide_opening_amine",
+      "requested_depth": 1,
+      "valid_connected": 17
+    },
+    {
+      "attempts": 47,
+      "exact_program": 9,
+      "family": "epoxide_opening_amine",
+      "requested_depth": 2,
+      "valid_connected": 47
+    },
+    {
+      "attempts": 17,
+      "exact_program": 9,
+      "family": "iphos_amine_dioxaphospholane",
+      "requested_depth": 1,
+      "valid_connected": 17
+    },
+    {
+      "attempts": 47,
+      "exact_program": 1,
+      "family": "iphos_amine_dioxaphospholane",
+      "requested_depth": 2,
+      "valid_connected": 43
+    },
+    {
+      "attempts": 64,
+      "exact_program": 45,
+      "family": "passerini_3cr",
+      "requested_depth": 1,
+      "valid_connected": 63
+    },
+    {
+      "attempts": 10,
+      "exact_program": 7,
+      "family": "reductive_amination_amine_aldehyde",
+      "requested_depth": 1,
+      "valid_connected": 10
+    },
+    {
+      "attempts": 54,
+      "exact_program": 9,
+      "family": "reductive_amination_amine_aldehyde",
+      "requested_depth": 2,
+      "valid_connected": 54
+    },
+    {
+      "attempts": 64,
+      "exact_program": 54,
+      "family": "thiol_michael_thioether",
+      "requested_depth": 1,
+      "valid_connected": 64
+    },
+    {
+      "attempts": 64,
+      "exact_program": 50,
+      "family": "ugi_3cr_agile",
+      "requested_depth": 1,
+      "valid_connected": 64
+    },
+    {
+      "attempts": 32,
+      "exact_program": 2,
+      "family": "urea_amine_isocyanate",
+      "requested_depth": 2,
+      "valid_connected": 31
+    },
+    {
+      "attempts": 3,
+      "exact_program": 0,
+      "family": "urea_amine_isocyanate",
+      "requested_depth": 3,
+      "valid_connected": 3
+    },
+    {
+      "attempts": 29,
+      "exact_program": 1,
+      "family": "urea_amine_isocyanate",
+      "requested_depth": 4,
+      "valid_connected": 26
+    }
+  ],
+  "created_at_utc": "2026-09-14T13:13:49.230015+00:00",
+  "inputs": [
+    {
+      "path": "results/phase1/combinatorial_generation_v1/attempts.jsonl",
+      "sha256": "113edda03896117d6ec07725e0e56c257bb266d1a6254dbb8bab3537bcd16bc8"
+    },
+    {
+      "path": "results/phase1/combinatorial_generation_v1/result.json",
+      "sha256": "fca710712d7761d561119b104422754aefee336cf4c727bdb62741797aeb2815"
+    }
+  ],
+  "interpretation": "Descriptive differences across different layouts; not a causal effect of reaction depth. No failure mechanism has been established. Identical co-reactant requirements remain unchanged.",
+  "population": "saved trained attempts, grouped after sampling by requested program depth",
+  "schema_version": "forge.combinatorial_repeat_depth_audit.v1"
+}

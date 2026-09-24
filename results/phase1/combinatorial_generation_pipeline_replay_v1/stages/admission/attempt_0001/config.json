@@ -1,0 +1,21 @@
+{
+  "parent_result": {
+    "path": "results/phase1/combinatorial_generation_pipeline_replay_v1/stages/graph/attempt_0001/output/result.json",
+    "sha256": "9eacc28c975db8d1520253bbd35b0840176ec7c28fde6d107417a5da675acb21"
+  },
+  "policy": {
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "prospective_candidate_selection": false,
+    "retain_all_original_attempts": true,
+    "selection": "minimum_graph_edits_then_smiles_then_donor",
+    "training_calls": 0,
+    "uses_current_family_product_counts": true,
+    "uses_train_product_membership": true
+  },
+  "schema_version": "forge.combinatorial_reuse_admission.v1_config",
+  "scientific_question": "Apply the frozen bounded completion pipeline to all twelve families.",
+  "stopping_rule": "Fixed requested population; no redraw, tuning or gate change after outcomes."
+}

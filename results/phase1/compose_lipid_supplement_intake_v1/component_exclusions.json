@@ -1,0 +1,191 @@
+{
+  "artifact": {
+    "path": "results/phase1/compose_lipid_supplement_intake_v1/component_exclusions.sqlite",
+    "sha256": "b47528b63cea2648fc5ef5eaa4dac716b5a3c48256e3c278e0cbd4d37966be6b"
+  },
+  "by_family": [
+    {
+      "corrected_test_component_targets": 4357,
+      "excluded_targets": 20299,
+      "family": "a3_amine_aldehyde_alkyne",
+      "historical_targets": 16302
+    },
+    {
+      "corrected_test_component_targets": 5508,
+      "excluded_targets": 58191,
+      "family": "acid_epoxide_diester_multistep",
+      "historical_targets": 53493
+    },
+    {
+      "corrected_test_component_targets": 1420,
+      "excluded_targets": 5038,
+      "family": "aema_aza_thiol_addition",
+      "historical_targets": 3850
+    },
+    {
+      "corrected_test_component_targets": 607,
+      "excluded_targets": 14842,
+      "family": "aldehyde_ugi3",
+      "historical_targets": 14840
+    },
+    {
+      "corrected_test_component_targets": 6316,
+      "excluded_targets": 122701,
+      "family": "aldehyde_ugi4",
+      "historical_targets": 122667
+    },
+    {
+      "corrected_test_component_targets": 12300,
+      "excluded_targets": 175629,
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "historical_targets": 173046
+    },
+    {
+      "corrected_test_component_targets": 2055,
+      "excluded_targets": 47860,
+      "family": "amine_alkylation",
+      "historical_targets": 46318
+    },
+    {
+      "corrected_test_component_targets": 4145,
+      "excluded_targets": 49817,
+      "family": "amine_epoxide_opening",
+      "historical_targets": 47703
+    },
+    {
+      "corrected_test_component_targets": 395,
+      "excluded_targets": 20279,
+      "family": "aryl_reductive_amination",
+      "historical_targets": 20048
+    },
+    {
+      "corrected_test_component_targets": 836,
+      "excluded_targets": 18300,
+      "family": "aza_michael_acrylamide",
+      "historical_targets": 17939
+    },
+    {
+      "corrected_test_component_targets": 1931,
+      "excluded_targets": 19704,
+      "family": "aza_michael_acrylate",
+      "historical_targets": 18864
+    },
+    {
+      "corrected_test_component_targets": 4235,
+      "excluded_targets": 126845,
+      "family": "disulfide_michael",
+      "historical_targets": 124685
+    },
+    {
+      "corrected_test_component_targets": 2220,
+      "excluded_targets": 15135,
+      "family": "epoxide_opening_o_acylation",
+      "historical_targets": 13581
+    },
+    {
+      "corrected_test_component_targets": 4722,
+      "excluded_targets": 32823,
+      "family": "iphos_ring_opening",
+      "historical_targets": 29005
+    },
+    {
+      "corrected_test_component_targets": 15252,
+      "excluded_targets": 232287,
+      "family": "ketone_isocyanide_amide",
+      "historical_targets": 229950
+    },
+    {
+      "corrected_test_component_targets": 8649,
+      "excluded_targets": 44958,
+      "family": "ketone_ugi4",
+      "historical_targets": 39029
+    },
+    {
+      "corrected_test_component_targets": 3428,
+      "excluded_targets": 22016,
+      "family": "maleate_addition",
+      "historical_targets": 19176
+    },
+    {
+      "corrected_test_component_targets": 576,
+      "excluded_targets": 7385,
+      "family": "o_esterification",
+      "historical_targets": 6995
+    },
+    {
+      "corrected_test_component_targets": 2664,
+      "excluded_targets": 36552,
+      "family": "passerini_3cr",
+      "historical_targets": 34272
+    },
+    {
+      "corrected_test_component_targets": 39231,
+      "excluded_targets": 151779,
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "historical_targets": 116064
+    },
+    {
+      "corrected_test_component_targets": 816,
+      "excluded_targets": 20984,
+      "family": "reductive_amination",
+      "historical_targets": 20440
+    },
+    {
+      "corrected_test_component_targets": 2,
+      "excluded_targets": 94,
+      "family": "reported_lnpdb_route_unassigned",
+      "historical_targets": 94
+    },
+    {
+      "corrected_test_component_targets": 0,
+      "excluded_targets": 8,
+      "family": "reported_multistep_amino_lipid",
+      "historical_targets": 8
+    },
+    {
+      "corrected_test_component_targets": 0,
+      "excluded_targets": 4,
+      "family": "reported_reference_lipid",
+      "historical_targets": 4
+    },
+    {
+      "corrected_test_component_targets": 12180,
+      "excluded_targets": 112919,
+      "family": "thiolactone_aminolysis_michael",
+      "historical_targets": 104267
+    },
+    {
+      "corrected_test_component_targets": 1936,
+      "excluded_targets": 12363,
+      "family": "vitamin_b5_multistep",
+      "historical_targets": 10682
+    }
+  ],
+  "implementation": {
+    "path": "results/phase1/compose_lipid_supplement_intake_v1/component_protection.py",
+    "sha256": "e3729edee0387c7225fb2fd222878542ac6f1eada891bbb3cf7edffb02b78c58"
+  },
+  "inputs": {
+    "constructions": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "policy": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/component_exclusion_policy.json",
+      "sha256": "0edb737485bf6932d3b7793cce02350205e098b8a74cde9867852931e8552888"
+    }
+  },
+  "schema_version": "forge.compose_lipid_supplement_component_exclusions.v1",
+  "scope": "Known component exclusions across the full universe. Product, study, combination/morphology, source qualification and representation gates remain separate; nonmatches are not admitted.",
+  "seed": 0,
+  "totals": {
+    "corrected_test_component_targets": 135781,
+    "historically_protected_component_targets": 1283322,
+    "union_excluded_targets": 1368812
+  },
+  "training_admitted": false
+}

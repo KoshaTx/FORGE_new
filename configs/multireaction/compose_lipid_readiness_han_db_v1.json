@@ -1,0 +1,20 @@
+{
+  "inputs": {
+    "han_db": {
+      "path": "results/phase1/compose_lipid_supplied_han_db_v1/result.json",
+      "sha256": "ac09c3a0130550040a26c30915eadde4d897a5af6a641d92fdb0e82403c07135"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "previous_report": {
+      "path": "results/phase1/compose_lipid_readiness_miao_thiol_yne_v1/result.json",
+      "sha256": "0b28229f4afc6f6dd16c94309d807519f2ab9cd87b5a30a707007aedcca11bf7"
+    }
+  },
+  "replay_inputs": [
+    "han_db"
+  ],
+  "schema_version": "forge.compose_lipid_grouped_readiness_config.v1"
+}

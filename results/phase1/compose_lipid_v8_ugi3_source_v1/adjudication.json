@@ -1,0 +1,171 @@
+{
+  "assets": {
+    "agile_article": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_source_v1/agile.xml",
+      "sha256": "f4f9e849506adce06e56d1a8aa0b17c91e4090c61228e6df63a1b6cb1618544d"
+    },
+    "agile_si": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_source_v1/agile-41467_2024_50619_MOESM1_ESM.pdf",
+      "sha256": "ab21e9fa8ad4f2d991c97298c64232eec9942bce6b95f82419bfef67f5c830e9"
+    },
+    "chen_article": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_source_v1/chen.xml",
+      "sha256": "100c51f29b996023a38f4ea48cacc4cc1ccf30d413771dc941c2be50f0f33342"
+    },
+    "chen_si": {
+      "path": "results/phase1/compose_lipid_v8_ugi3_source_v1/chen-pnas.2309472120.sapp.pdf",
+      "sha256": "51bdaccf337fe8f6d19bc9dbddf99ec6d1f312006d4d1ef2152a4fc2f6e4f1c6"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    }
+  },
+  "conditions_summary": {
+    "AGILE_H9": "Equimolar three precursors, 249.59 umol each; phenylphosphinic acid 49.92 umol; DCM/MeOH 240/160 uL; room temperature, capped vial, overnight. Isolated 35 mg, 59.13 umol, 23.69%.",
+    "AGILE_R6": "Equimolar three precursors, 191.96 umol each; phenylphosphinic acid 39.39 umol; DCM/MeOH 240/160 uL; room temperature, capped vial, overnight. Isolated 39.8 mg, 72.1 umol, 37.56%.",
+    "Chen_iso_A11B5C1": "Equimolar three precursors, 87.57 umol each; phenylphosphinic acid 17.51 umol; MeOH 5 mL; room temperature, capped vial, overnight. Printed isolated mass 41 mg and yield 70.71%; amount units conflict below."
+  },
+  "conflicts": [
+    {
+      "issue": "Catalyst terminology differs: article names phenyl hypophosphoric acid; SI names phenylphosphinic acid. Preserve both; no exact execution label inferred.",
+      "source": "agile_article versus agile_si"
+    },
+    {
+      "issue": "Printed isolated amount 6.2 mmol is inconsistent with 41 mg and 70.71% at 87.57 umol scale. The paragraph also calls the product H3 inside the iso-A11B5C1 section. The reported mass-spectrometry values are retained as source text, not independently validated.",
+      "source": "chen_si PDF page 20"
+    }
+  ],
+  "created_at_utc": "2026-09-18T18:09:47.907235+00:00",
+  "family": "aldehyde_ugi3",
+  "functional_group_registry": {
+    "path": "data/vendor/qualified_a3_source_program_v2.json",
+    "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+  },
+  "nonclaims": [
+    "Controls validate computed constitutional assembly and transcription, not experimental reproducibility or source execution of corpus rows.",
+    "No carboxylic-acid reactant; acidic phosphorus catalyst is present in the cited procedures.",
+    "No automatic AGILE/PNAS cross-grid or assignment of a corpus row to either published reagent bank.",
+    "Source-defined primary NH2 includes N-aminopiperidine; a carbon-only neighbor restriction would incorrectly reject H9."
+  ],
+  "primary_dois": [
+    "10.1038/s41467-024-50619-z",
+    "10.1073/pnas.2309472120"
+  ],
+  "reaction_id": "ugi_3cr_agile",
+  "registry": {
+    "path": "data/vendor/qualified_reactions_v1.json",
+    "sha256": "296bf06238ef22acc1f55117f5ce0adaee21b1bafaf5a83f89182b0f31cc4fcf"
+  },
+  "schema_version": "forge.source_event_adjudication.v1",
+  "source_contract": {
+    "architecture_policy": "Qualify the shared one-event constitutional invariant only. Preserve each provider design_lane and precursor tuple. No new cross-library grid, source-bank assignment, experimental label, L2 or L3 admission.",
+    "atom_origin_policy": "Amine N map 1, aldehyde C map 2, isocyanide C/N maps 3/4 retained. The unmapped product amide O is assembly-introduced under the frozen solvent/water convention; no isotope tracing or assignment to the aldehyde O is claimed.",
+    "events": 1,
+    "net_element_policy": "Complete precursor and product inventories, including H and charge, must agree; no atom-origin inference follows from net balance.",
+    "query_references": {
+      "amine_head": {
+        "input": "functional_group_registry",
+        "reaction_id": "a3_amine_aldehyde_terminal_alkyne",
+        "role": "amine_head"
+      },
+      "isocyanide_tail": {
+        "input": "registry",
+        "reaction_id": "ugi_3cr_agile",
+        "role": "isocyanide_tail"
+      },
+      "oxoester_aldehyde_body_tail": {
+        "input": "functional_group_registry",
+        "reaction_id": "a3_amine_aldehyde_terminal_alkyne",
+        "role": "aldehyde"
+      }
+    },
+    "query_scope": "Reuse functional-group identity predicates only; the A3 transform and multiplicities are not used. The frozen Ugi transform, multiplicities and all unfiltered products remain intact.",
+    "registry_to_source_roles": {
+      "amine_head": "amine",
+      "isocyanide_tail": "isocyanide",
+      "oxoester_aldehyde_body_tail": "aldehyde"
+    },
+    "roles": {
+      "aldehyde": 1,
+      "amine": 1,
+      "isocyanide": 1
+    },
+    "site_contract": [
+      {
+        "atom_map": 1,
+        "properties": {
+          "atomic_number": 7,
+          "formal_charge": 0,
+          "total_hydrogens": 2
+        },
+        "role": "amine_head"
+      },
+      {
+        "atom_map": 2,
+        "properties": {
+          "atomic_number": 6,
+          "formal_charge": 0,
+          "total_hydrogens": 1
+        },
+        "role": "oxoester_aldehyde_body_tail"
+      },
+      {
+        "atom_map": 3,
+        "properties": {
+          "atomic_number": 6,
+          "total_hydrogens": 0
+        },
+        "role": "isocyanide_tail"
+      }
+    ],
+    "stage_order": [
+      "ugi_3cr_agile"
+    ]
+  },
+  "source_controls": [
+    {
+      "components": {
+        "amine_head": "NN1CCCCC1",
+        "isocyanide_tail": "CCCCCCCCC=CCCCCCCCC[N+]#[C-]",
+        "oxoester_aldehyde_body_tail": "O=CCCCOC(=O)CCCCCCC"
+      },
+      "expected_formula": "C36H69N3O3",
+      "expected_product": "CCCCCCCC(=O)OCCCC(NN1CCCCC1)C(=O)NCCCCCCCCC=CCCCCCCCC",
+      "experimental_execution_admitted": false,
+      "label": "AGILE_H9",
+      "pdf_page_one_based": 8,
+      "source_asset": "agile_si"
+    },
+    {
+      "components": {
+        "amine_head": "CCN(CC)CCCN",
+        "isocyanide_tail": "CCCCCCCCCCC[N+]#[C-]",
+        "oxoester_aldehyde_body_tail": "CCCCCCCCCCCCCCCC=O"
+      },
+      "expected_formula": "C35H73N3O",
+      "expected_product": "CCCCCCCCCCCCCCCC(NCCCN(CC)CC)C(=O)NCCCCCCCCCCC",
+      "experimental_execution_admitted": false,
+      "label": "AGILE_R6",
+      "pdf_page_one_based": 8,
+      "source_asset": "agile_si"
+    },
+    {
+      "components": {
+        "amine_head": "NCCN1CCCC1",
+        "isocyanide_tail": "CCCCCCCCC=CCCCCCCCC[N+]#[C-]",
+        "oxoester_aldehyde_body_tail": "O=CCCCCCOC(=O)CCC(C)CCCCC"
+      },
+      "expected_formula": "C41H79N3O3",
+      "expected_product": "CCCCCCCCC=CCCCCCCCCNC(=O)C(CCCCCOC(=O)CCC(C)CCCCC)NCCN1CCCC1",
+      "experimental_execution_admitted": false,
+      "label": "Chen_iso_A11B5C1",
+      "pdf_page_one_based": 20,
+      "source_asset": "chen_si"
+    }
+  ],
+  "visual_inspection": {
+    "agile": "Main Fig. 2 and SI PDF pages 8-9 inspected. H9/R6 structures transcribed from names and schemes, independently of forward output.",
+    "chen": "Main Fig. 1 and SI PDF page 20 inspected. iso-A11B5C1 structure and three precursors transcribed from the explicit scheme."
+  }
+}

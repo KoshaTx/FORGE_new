@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "v1_v2_identical_ledger": true,
+    "v2_v3_identical_chemistry_and_precursors": true
+  },
+  "excluded_fields_from_v2_v3_comparison": [
+    "historical_protected_v5_product",
+    "prior_v5_identity_scope",
+    "prior_v5_product_folds"
+  ],
+  "inputs": {
+    "results/phase1/compose_lipid_v8_a3_program_v1/result.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_program_v1/result.json",
+      "sha256": "05b9297b839cd516fc0a45604cfe58383000bcb0779188c2305eb69a3455d591"
+    },
+    "results/phase1/compose_lipid_v8_a3_program_v2/result.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_program_v2/result.json",
+      "sha256": "4e87cfa8579e99ee8eec1b0a0e605ccf72e8df9acdedd0e12e7548d21a5e7142"
+    },
+    "results/phase1/compose_lipid_v8_a3_program_v3/result.json": {
+      "path": "results/phase1/compose_lipid_v8_a3_program_v3/result.json",
+      "sha256": "c982b8f0245b5b71133074b9f12a6380aaa3df021900f8aed4268a5c107829ec"
+    }
+  },
+  "known_corrections": [
+    "v2 excludes formate/formamide carbonyls from the aldehyde handle without changing any observed A3 row outcome.",
+    "v3 replaces opaque-ID product overlap matching with exact constitutional strings; nonmatches remain unresolved. Two prior validation products are now recognized."
+  ],
+  "original_implementation_snapshot": "results/phase1/compose_lipid_v8_a3_validation_v1/initial_implementation/manifest.json",
+  "schema_version": "forge.a3_correction_comparison.v1"
+}

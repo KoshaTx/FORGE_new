@@ -1,0 +1,24 @@
+{
+  "baseline_result": {
+    "path": "results/phase1/combinatorial_generation_pipeline_fresh_v1/stages/admission/attempt_0001/output/result.json",
+    "sha256": "83068f469206cc97cb30d6e11d88f913401830272ab239edcac552b8374c97f1"
+  },
+  "maximum_canonical_matches": 4096,
+  "policy": {
+    "all_exact_witnesses_and_atom_mappings_must_agree": true,
+    "gate_changes": false,
+    "heldout_record_use": false,
+    "model_promotion": false,
+    "neural_generation_calls": 0,
+    "original_exact_outputs_immutable": true,
+    "prospective_candidate_selection": false,
+    "remote_compute": false,
+    "reuse_existing_novelty_and_multiplicity_admission": true,
+    "source_atom_values_copied": false,
+    "target_previous_status": "occurrence_partition_mismatch",
+    "training_calls": 0
+  },
+  "schema_version": "forge.combinatorial_occurrence_reuse.v1_config",
+  "scientific_question": "Apply the frozen bounded completion pipeline to all twelve families.",
+  "stopping_rule": "Fixed requested population; no redraw, tuning or gate change after outcomes."
+}

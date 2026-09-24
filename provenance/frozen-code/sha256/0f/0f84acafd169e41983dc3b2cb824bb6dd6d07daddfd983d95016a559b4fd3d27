@@ -1,0 +1,233 @@
+"""Recompute reuse qualification and scoring, authenticate checkpoints and optional replay."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+from collections import Counter
+from dataclasses import asdict
+from pathlib import Path
+
+import numpy as np
+import torch
+from rdkit import rdBase
+
+from experiments.phase1.multireaction.combinatorial_generation_verify import (
+    verify as verify_baseline,
+)
+from experiments.phase1.multireaction.combinatorial_reuse_pilot import (
+    ARMS,
+    SCHEMA,
+    _digest,
+    assess_rows,
+    comparisons,
+    validate_config,
+)
+from forge.assembly.families import load_assembly_libraries
+from forge.core.hashing import resolve_pin, sha256_file
+from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model.defog_feasibility import _model_state_sha256
+from forge.model.precursor_reuse import PrecursorReuseError, PrecursorReuseFlow, qualify_reuse
+from forge.model.synthesis_program_sampling import load_synthesis_program_checkpoint
+from forge.model.tensor_checkpoint import decode_tensor_state
+
+
+def verify(repo: Path, result_path: Path, replay_path: Path | None = None) -> dict:
+    repo = repo.resolve()
+    result_path = (repo / result_path).resolve()
+    result = json.loads(result_path.read_text())
+    if (
+        result.get("schema_version") != SCHEMA
+        or result.get("status") != "numerical_complete"
+        or result.get("model_promoted") is not False
+    ):
+        raise PrecursorReuseError("invalid reuse result schema/status/promotion")
+    for pin in [
+        result["config"],
+        *result["sources"],
+        *result["inputs"].values(),
+        *result["artifacts"].values(),
+        *result["registry_inputs"],
+    ]:
+        resolve_pin(pin, repo, label="reuse verification")
+    config = json.loads((repo / result["config"]["path"]).read_text())
+    validate_config(config)
+    if config["inputs"] != result["inputs"]:
+        raise PrecursorReuseError("configured reuse inputs substituted")
+    paths = {k: repo / p["path"] for k, p in config["inputs"].items()}
+    verify_baseline(repo, paths["baseline_result"])
+    baseline = json.loads(paths["baseline_result"].read_text())
+    for key in ("cache", "checkpoint", "dataset_config", "component_partitions"):
+        if baseline["inputs"][key] != config["inputs"][key]:
+            raise PrecursorReuseError("reuse inputs differ from baseline")
+    dataset = json.loads(paths["dataset_config"].read_text())
+    expected_registries = [dataset["inputs"][k] for k in dataset["registries"]]
+    if result["registry_inputs"] != expected_registries:
+        raise PrecursorReuseError("registry input substitution")
+    libraries = load_assembly_libraries(
+        [(repo / p["path"], p["sha256"]) for p in expected_registries],
+        expected_families=dataset["programs"],
+    )
+
+    def read(name: str) -> object:
+        return json.loads((repo / result["artifacts"][name]["path"]).read_text())
+
+    layouts, plans, selection = (
+        read("layouts.json"),
+        read("reuse_plans.json"),
+        read("training_indices.json"),
+    )
+    original_layouts = json.loads(
+        (repo / baseline["artifacts"]["layouts.json"]["path"]).read_text()
+    )
+    if layouts != original_layouts or _digest(selection) != result["training_selection_sha256"]:
+        raise PrecursorReuseError("sampling/training selection changed")
+    families = sorted(dataset["programs"])
+    indices = [r["index"] for r in layouts]
+    used = sorted(set(indices + [i for batch in selection for i in batch]))
+    if set(plans) != {str(i) for i in used} or len(selection) != config["training"]["steps"]:
+        raise PrecursorReuseError("reuse qualification population mismatch")
+    with SynthesisProgramProductionCache(paths["cache"]) as cache, rdBase.BlockLogs():
+        if any(cache.fold(i) != "train" for i in used):
+            raise PrecursorReuseError("nontraining record used")
+        measure = cache.training_measure({f: 1 / len(families) for f in families})
+        choices = {f: cache.indices(program_id=f, fold="train") for f in families}
+        rng = np.random.default_rng(config["seed"] + 1)
+        expected_selection = [
+            [
+                int(rng.choice(choices[f], p=measure[choices[f]] / measure[choices[f]].sum()))
+                for f in families
+            ]
+            for _ in range(config["training"]["steps"])
+        ]
+        if selection != expected_selection:
+            raise PrecursorReuseError("realism-weighted seeded training stream changed")
+        for batch in selection:
+            if [cache.record(i).program_id for i in batch] != families:
+                raise PrecursorReuseError("training family balance changed")
+        for i in used:
+            r = cache.record(i)
+            plan = asdict(
+                qualify_reuse(
+                    r, libraries[r.program_id], dataset["programs"][r.program_id], dataset["limits"]
+                )
+            )
+            if _digest(plan) != _digest(plans[str(i)]):
+                raise PrecursorReuseError("reuse correspondence qualification changed")
+        records = cache.records(indices)
+        train = {cache.canonical_smiles(int(i)) for i in cache.indices(fold="train")}
+    components = {
+        r["constitution_id"]
+        for r in json.loads(paths["component_partitions"].read_text())
+        if r["fold"] == "train"
+    }
+    rows = [
+        json.loads(s)
+        for s in (repo / result["artifacts"]["attempts.jsonl"]["path"]).read_text().splitlines()
+    ]
+    if Counter((r["arm"], r["sample_index"]) for r in rows) != Counter(
+        (a, i) for a in ARMS for i in range(len(layouts))
+    ):
+        raise PrecursorReuseError("generation attempt accounting mismatch")
+    for arm in ARMS:
+        if result["sampler"][arm]["fixed_state_failures"]:
+            raise PrecursorReuseError("saved sampler changed fixed states")
+        local = [r for r in rows if r["arm"] == arm]
+        if [r["sample_index"] for r in local] != list(range(len(layouts))) or any(
+            r["layout_record_id"] != layout["record_id"] or r["program_id"] != layout["family"]
+            for r, layout in zip(local, layouts, strict=True)
+        ):
+            raise PrecursorReuseError("attempt layout/order mismatch")
+        with rdBase.BlockLogs():
+            expected = assess_rows(local, records, arm, dataset, libraries, train, components)
+        if _digest(expected) != _digest(local):
+            raise PrecursorReuseError("saved validity/program/novelty differs from recomputation")
+    expected = comparisons(rows, families, dataset)
+    if any(result[k] != v for k, v in expected.items()):
+        raise PrecursorReuseError("reuse summary/decision differs from attempts")
+    original = [
+        json.loads(s)
+        for s in (repo / baseline["artifacts"]["attempts.jsonl"]["path"]).read_text().splitlines()
+    ]
+    if not result["baseline_replay_identical"] or _digest(
+        [r for r in original if r["arm"] == "trained"]
+    ) != _digest([{**r, "arm": "trained"} for r in rows if r["arm"] == "frozen"]):
+        raise PrecursorReuseError("frozen replay changed")
+    if result["reuse_qualification"] != dict(
+        Counter(p["status"] for p in plans.values())
+    ) or result["generation_reuse_qualification"] != dict(
+        Counter(plans[str(i)]["status"] for i in indices)
+    ):
+        raise PrecursorReuseError("qualification accounting mismatch")
+    if result["reference_train_products"] != len(train) or result[
+        "reference_train_components"
+    ] != len(components):
+        raise PrecursorReuseError("novelty reference count mismatch")
+    base, *_ = load_synthesis_program_checkpoint(paths["checkpoint"], device="cpu")
+    for arm in ("self_control", "reuse"):
+        checkpoint = read(f"{arm}_checkpoint.json")
+        if (
+            checkpoint["schema_version"] != SCHEMA + "_checkpoint"
+            or checkpoint["base_checkpoint"] != config["inputs"]["checkpoint"]
+            or checkpoint["share"] != (arm == "reuse")
+        ):
+            raise PrecursorReuseError("checkpoint contract mismatch")
+        model = PrecursorReuseFlow(copy.deepcopy(base))
+        model.load_state_dict(decode_tensor_state(checkpoint["model_state"]), strict=True)
+        training = result["training"][arm]
+        if (
+            _model_state_sha256(model) != checkpoint["model_state_sha256"]
+            or checkpoint["model_state_sha256"] != training["final_state_sha256"]
+        ):
+            raise PrecursorReuseError("checkpoint tensor digest mismatch")
+        if (
+            training["steps"] != len(selection)
+            or training["examples"] != sum(map(len, selection))
+            or len(training["losses"]) != len(selection)
+            or not all(torch.isfinite(torch.tensor(training["losses"])))
+        ):
+            raise PrecursorReuseError("training accounting/finite loss mismatch")
+    for key in ("initial_state_sha256", "noise_sha256", "parameter_count"):
+        if result["training"]["reuse"][key] != result["training"]["self_control"][key]:
+            raise PrecursorReuseError("paired training control mismatch")
+    replay_equal = None
+    if replay_path is not None:
+        verify(repo, replay_path)
+        replay = json.loads((repo / replay_path).read_text())
+
+        def stable(value: dict) -> dict:
+            value = copy.deepcopy(value)
+            value["artifact_hashes"] = {k: p["sha256"] for k, p in value["artifacts"].items()}
+            for key in ("created_at_utc", "duration_seconds", "artifacts"):
+                value.pop(key)
+            for report in value["training"].values():
+                report.pop("duration_seconds")
+            return value
+
+        replay_equal = stable(result) == stable(replay) and {
+            k: p["sha256"] for k, p in result["artifacts"].items()
+        } == {k: p["sha256"] for k, p in replay["artifacts"].items()}
+        if not replay_equal:
+            raise PrecursorReuseError("scientific payload/checkpoint/ledger replay differs")
+    return {
+        "status": "verified",
+        "result_sha256": str(sha256_file(result_path)),
+        "attempts_recomputed": len(rows),
+        "reuse_plans_recomputed": len(plans),
+        "checkpoint_reloads_verified": 2,
+        "replay_identical": replay_equal,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--result", type=Path, required=True)
+    parser.add_argument("--replay", type=Path)
+    args = parser.parse_args()
+    print(json.dumps(verify(args.repo_root, args.result, args.replay), indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

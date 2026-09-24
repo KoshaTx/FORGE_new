@@ -1,0 +1,909 @@
+{
+  "artifacts": {
+    "programs.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_michael_program_v2/programs.jsonl.gz",
+      "sha256": "72f838ef0eb5e07f243a9e82aefeea8f024440140cee2a682559022145cf050b"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_michael_program_v1.json",
+    "sha256": "2a047b25a87509ffd596ea05bda1a19ca3173cecd2f7d41390064a837b48b366"
+  },
+  "created_at_utc": "2026-09-18T18:50:05.929853+00:00",
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/repeated_inverse.py": {
+      "path": "forge/assembly/repeated_inverse.py",
+      "sha256": "fc505b8bd5ce10ead65c7309e9bc3b3120932894c4e7b3f44cec5ff254ba1054"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid.py": {
+      "path": "forge/corpus/compose_lipid.py",
+      "sha256": "92c7b7234b50032a1d6e5dd5fcdd7572aab734abe8a2daec41f4cf8a179d59ac"
+    },
+    "forge/corpus/compose_lipid_protection.py": {
+      "path": "forge/corpus/compose_lipid_protection.py",
+      "sha256": "a2a3d5053e343cfb6abb24f2225fbbb4a14004ad7dcc4377fd1d2ed822669bd4"
+    },
+    "forge/corpus/compose_lipid_repeated_inverse.py": {
+      "path": "forge/corpus/compose_lipid_repeated_inverse.py",
+      "sha256": "45b1fd8dd1c5a8662add61eaf49723ee50257adcee88eb3f431aa173f6180226"
+    },
+    "forge/corpus/compose_lipid_source_event.py": {
+      "path": "forge/corpus/compose_lipid_source_event.py",
+      "sha256": "37984fe16ddca6bba0445b15d9c289fe9c58ef4274c81ddd26ec0d3e62367e9e"
+    },
+    "forge/corpus/library_splits.py": {
+      "path": "forge/corpus/library_splits.py",
+      "sha256": "d1b59d5b53260b58284051960e0af30b4f86487f472aae7830c97172c1258de2"
+    }
+  },
+  "inputs": {
+    "adjudication": {
+      "path": "results/phase1/compose_lipid_v8_michael_source_v1/adjudication.json",
+      "sha256": "0009fd42a61bb44dee65449ed3bdeae5a9fe289ebc93a9cbdcf1ecaaba3a9a23"
+    },
+    "decomposition_key": {
+      "path": "data/source_cache/compose_lipid_drive_2026-09-18/family_decomposition_key.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "protection_result": {
+      "path": "results/phase1/compose_lipid_v8_product_protection_v1/result.json",
+      "sha256": "5afcbadb23d35d077db3298e7d9d65e7fff913f8256f0a6a7e7552147c67e12b"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_michael_source_program_v1.json",
+      "sha256": "c3257343e08a55a3d84227c57945888d93f37ca0a83152e8ad47c1774b95685e"
+    }
+  },
+  "policy": {
+    "fit_population": "enforced_product_protection_preparation_view",
+    "generation_calls": 0,
+    "provider_heldout_graphs_parsed": false,
+    "seed": 0,
+    "source_flags_changed": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_repeated_inverse.v1",
+  "source_controls": {
+    "Akinc_1L10": {
+      "expectation_pass": true,
+      "family": "aza_michael_acrylate",
+      "formula": "C30H59NO5",
+      "inverse": {
+        "bound_reasons": [],
+        "candidate_components": [
+          {
+            "acceptor_tail": "C=CC(=O)OCCCCCCCCCC",
+            "amine_head": "COCCCN"
+          }
+        ],
+        "complete_search": true,
+        "declared_events": 2,
+        "experimental_selectivity_qualified": false,
+        "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+        "physical_event_order_qualified": false,
+        "states_by_depth": [
+          1,
+          1,
+          1
+        ],
+        "transitions": 2
+      },
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 30,
+            "H": 59,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 30,
+            "H": 59,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "COCCCN",
+            "CCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCOC(=O)CCNCCCOC",
+            "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "COCCCN"
+          ],
+          [
+            "CCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC",
+            "CCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCOC(=O)CCNCCCOC",
+            "COCCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            "COCCCN"
+          ]
+        ]
+      }
+    },
+    "Akinc_1L12": {
+      "expectation_pass": true,
+      "family": "aza_michael_acrylate",
+      "formula": "C34H67NO5",
+      "inverse": {
+        "bound_reasons": [],
+        "candidate_components": [
+          {
+            "acceptor_tail": "C=CC(=O)OCCCCCCCCCCCC",
+            "amine_head": "COCCCN"
+          }
+        ],
+        "complete_search": true,
+        "declared_events": 2,
+        "experimental_selectivity_qualified": false,
+        "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+        "physical_event_order_qualified": false,
+        "states_by_depth": [
+          1,
+          1,
+          1
+        ],
+        "transitions": 2
+      },
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 34,
+            "H": 67,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 34,
+            "H": 67,
+            "N": 1,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "COCCCN",
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC",
+            "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "COCCCN"
+          ],
+          [
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC",
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC",
+            "COCCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCCCOC(=O)CCN(CCCOC)CCC(=O)OCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCOC(=O)CCNCCCOC"
+          ],
+          [
+            "COCCCN"
+          ]
+        ]
+      }
+    },
+    "Akinc_1N12": {
+      "expectation_pass": true,
+      "family": "aza_michael_acrylamide",
+      "formula": "C34H69N3O3",
+      "inverse": {
+        "bound_reasons": [],
+        "candidate_components": [
+          {
+            "acceptor_tail": "C=CC(=O)NCCCCCCCCCCCC",
+            "amine_head": "COCCCN"
+          }
+        ],
+        "complete_search": true,
+        "declared_events": 2,
+        "experimental_selectivity_qualified": false,
+        "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+        "physical_event_order_qualified": false,
+        "states_by_depth": [
+          1,
+          1,
+          1
+        ],
+        "transitions": 2
+      },
+      "kind": "source_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 34,
+            "H": 69,
+            "N": 3,
+            "O": 3,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 34,
+            "H": 69,
+            "N": 3,
+            "O": 3,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "COCCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "COCCCN"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC",
+            "COCCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCCOC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCNCCCOC"
+          ],
+          [
+            "COCCCN"
+          ]
+        ]
+      }
+    },
+    "Akinc_98N12_5_1_unresolved_without_attachment_sites": {
+      "expectation_pass": true,
+      "family": "aza_michael_acrylamide",
+      "formula": "C81H163N9O5",
+      "inverse": {
+        "bound_reasons": [],
+        "candidate_components": [
+          {
+            "acceptor_tail": "C=CC(=O)NCCCCCCCCCCCC",
+            "amine_head": "NCCNCCNCCN"
+          }
+        ],
+        "complete_search": true,
+        "declared_events": 5,
+        "experimental_selectivity_qualified": false,
+        "inverse_scope": "all_tuples_with_one_repeated_identity_per_side_role_at_declared_count",
+        "physical_event_order_qualified": false,
+        "states_by_depth": [
+          1,
+          3,
+          4,
+          4,
+          2,
+          1
+        ],
+        "transitions": 27
+      },
+      "kind": "ambiguity_controls",
+      "replay": {
+        "balance": {
+          "product_and_byproducts": {
+            "C": 81,
+            "H": 163,
+            "N": 9,
+            "O": 5,
+            "formal_charge": 0
+          },
+          "reactants": {
+            "C": 81,
+            "H": 163,
+            "N": 9,
+            "O": 5,
+            "formal_charge": 0
+          }
+        },
+        "bound_reasons": [],
+        "checks": {
+          "complete_search": true,
+          "declared_event_count_replayed": true,
+          "full_element_hydrogen_charge_balance": true,
+          "unique_declared_side_inverse": true,
+          "unique_forward_exact": false
+        },
+        "computed_consistency_pass": false,
+        "experimental_selectivity_qualified": false,
+        "forward_edges": [
+          [
+            1,
+            "NCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+          ],
+          [
+            1,
+            "NCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ]
+        ],
+        "forward_layers": [
+          [
+            "NCCNCCNCCN"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ]
+        ],
+        "inverse_scope": "conditioned_on_declared_fixed_side_components",
+        "physical_event_order_qualified": false,
+        "reverse_edges": [
+          [
+            1,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            1,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            1,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            2,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            3,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            4,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "NCCNCCNCCN"
+          ],
+          [
+            5,
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN",
+            "NCCNCCNCCN"
+          ]
+        ],
+        "reverse_layers": [
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCN)CCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCNCCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN(CCC(=O)NCCCCCCCCCCCC)CCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCNCCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCN(CCNCCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCN(CCN)CCC(=O)NCCCCCCCCCCCC",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCNCCC(=O)NCCCCCCCCCCCC"
+          ],
+          [
+            "CCCCCCCCCCCCNC(=O)CCN(CCN)CCNCCN",
+            "CCCCCCCCCCCCNC(=O)CCNCCNCCNCCN"
+          ],
+          [
+            "NCCNCCNCCN"
+          ]
+        ]
+      }
+    }
+  },
+  "status": "repeated_programs_evaluated_training_unqualified",
+  "summary": {
+    "by_family": {
+      "aza_michael_acrylamide": {
+        "by_declared_occupancy": {
+          "2": 3105,
+          "3": 1456,
+          "4": 318
+        },
+        "by_status": {
+          "computed_consistent": 4879
+        },
+        "component_label_conflicts": 0,
+        "computed_consistency_pass": 4879,
+        "consistent_with_known_protected_precursor": 2503,
+        "eligible_after_known_exclusions": 2376,
+        "rows": 4879,
+        "training_admitted": 0
+      },
+      "aza_michael_acrylate": {
+        "by_declared_occupancy": {
+          "2": 3131,
+          "3": 1641,
+          "4": 293,
+          "None": 311
+        },
+        "by_status": {
+          "computed_consistent": 5065,
+          "excluded_missing_or_invalid_program_metadata": 311
+        },
+        "component_label_conflicts": 0,
+        "computed_consistency_pass": 5065,
+        "consistent_with_known_protected_precursor": 2516,
+        "eligible_after_known_exclusions": 2549,
+        "rows": 5376,
+        "training_admitted": 0
+      }
+    },
+    "precision_scope": "Primary controls and adversarial checks validate computed programs; corpus-wide chemical precision and experimental selectivity are not calibrated.",
+    "remaining_holds": [
+      "global_precursor_protection_incomplete",
+      "precursor_holdouts_unqualified",
+      "source_architecture_and_bank_assignments_incomplete",
+      "remaining_family_programs_unqualified",
+      "final_balanced_train_dataset_unbuilt",
+      "repository_full_tests_fail"
+    ],
+    "training_admitted": 0,
+    "training_ready": false
+  }
+}

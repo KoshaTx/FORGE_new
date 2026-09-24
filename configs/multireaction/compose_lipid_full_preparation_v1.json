@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "source_view": {
+      "path": "results/phase1/compose_lipid_source_view_v1/result.json",
+      "sha256": "4ac1ece61b89ea93d5c663d7134ac5fab1bf9ea4f88a373fbf03e2ff92058d27"
+    }
+  },
+  "policy": {
+    "combination_protection": "same_family_exact_role_quantity_multiset_of_either_nontrain_split",
+    "component_identity": "global_component_id_with_roles_and_quantities_preserved",
+    "missing_study_metadata": "unresolved_for_reported_source_records",
+    "preparation_requires": "old_and_corrected_train_and_no_known_exclusions",
+    "product_alias_matching": "positive_exact_source_strings_only_nonmatches_unresolved",
+    "product_molecules_parsed": 0,
+    "record_cap": null,
+    "seed": 0,
+    "size_filter": null,
+    "source_splits_changed": false,
+    "study_protection": "supplied_selected_studies_and_known_selected_target_pmids",
+    "training_admitted": false,
+    "training_calls": 0,
+    "unassigned_targets": "pending_partition_before_decomposition"
+  },
+  "schema_version": "forge.compose_lipid_full_preparation_config.v1"
+}

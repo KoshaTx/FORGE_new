@@ -1,0 +1,211 @@
+"""Authenticate and recompute saved repeated-program diagnostics without changing admission."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from collections import Counter
+from dataclasses import asdict
+from pathlib import Path
+
+from experiments._runtime.historical import resolve_pinned_input
+from experiments.phase1.multireaction.combinatorial_repeat_audit import SCHEMA, summarize
+from forge.assembly.families import LibraryAssemblyError, load_assembly_libraries
+from forge.assembly.library_generation import check_generated_program
+from forge.assembly.library_programs import LibraryProgramLimits
+from forge.assembly.library_repeat_audit import (
+    DiagnosticStep,
+    audit_repeated_program,
+    classify_repeat_attempt,
+    replay_diagnostic_steps,
+)
+from forge.core.hashing import resolve_pin, sha256_file
+from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+
+
+def verify(repo: Path, result_path: Path, replay_path: Path | None = None) -> dict:
+    repo = repo.resolve()
+    result_path = (repo / result_path).resolve()
+    result = json.loads(result_path.read_text())
+    if result.get("schema_version") != SCHEMA:
+        raise LibraryAssemblyError("unexpected repeat-audit result schema")
+    for pin in [
+        result["config"],
+        *result["inputs"].values(),
+        *result["registry_pins"],
+        *result["artifacts"].values(),
+    ]:
+        resolve_pin(pin, repo, label="audit verification")
+    for pin in result["sources"]:
+        if set(pin) != {"path", "sha256"}:
+            raise ValueError("malformed historical source pin")
+        resolve_pinned_input(repo, pin["path"], pin["sha256"])
+    config = json.loads((repo / result["config"]["path"]).read_text())
+    if config["inputs"] != result["inputs"] or config["policy"] != result["policy"]:
+        raise LibraryAssemblyError("result substituted configured inputs/policy")
+    dataset = json.loads((repo / result["inputs"]["dataset_config"]["path"]).read_text())
+    registries = [dataset["inputs"][key] for key in dataset["registries"]]
+    if result["registry_pins"] != registries:
+        raise LibraryAssemblyError("result substituted registry pins")
+    libraries = load_assembly_libraries(
+        [(repo / p["path"], p["sha256"]) for p in registries], expected_families=dataset["programs"]
+    )
+    families = sorted(
+        p for p, policy in dataset["programs"].items() if policy["accumulator_role"] is not None
+    )
+    if families != result["families"]:
+        raise LibraryAssemblyError("result family population changed")
+    original = [
+        json.loads(line)
+        for line in (repo / result["inputs"]["attempts"]["path"]).read_text().splitlines()
+    ]
+    source = {(r["arm"], r["sample_index"]): r for r in original if r["program_id"] in families}
+    rows = [
+        json.loads(line)
+        for line in (repo / result["artifacts"]["attempt_audit.jsonl"]["path"])
+        .read_text()
+        .splitlines()
+    ]
+    if len(rows) != len(source) or {(r["arm"], r["sample_index"]) for r in rows} != set(source):
+        raise LibraryAssemblyError("audit omitted or duplicated an attempt")
+    witnesses = 0
+    for row in rows:
+        prior = source[(row["arm"], row["sample_index"])]
+        if (
+            row["family"] != prior["program_id"]
+            or row["requested_depth"] != prior["requested_depth"]
+            or row["canonical_smiles"] != prior["canonical_smiles"]
+            or row["original_status"] != prior["assembly"]["status"]
+        ):
+            raise LibraryAssemblyError("audit changed saved attempt fields")
+        expected = None
+        if prior["valid_connected"]:
+            policy = dataset["programs"][row["family"]]
+            expected = audit_repeated_program(
+                libraries[row["family"]],
+                row["canonical_smiles"],
+                depth=row["requested_depth"],
+                accumulator_role=policy["accumulator_role"],
+                limits=LibraryProgramLimits(policy["maximum_steps"], **dataset["limits"]),
+            )
+            for program in row["diagnostic"]["requested_depth_programs"]:
+                steps = tuple(
+                    DiagnosticStep(tuple(map(tuple, s["components"])), s["product"])
+                    for s in program["steps"]
+                )
+                if not replay_diagnostic_steps(
+                    libraries[row["family"]],
+                    steps,
+                    accumulator_role=policy["accumulator_role"],
+                    maximum_outcomes=dataset["limits"]["maximum_outcomes"],
+                ):
+                    raise LibraryAssemblyError("saved program failed strict forward replay")
+                witnesses += 1
+        if (
+            json.loads(json.dumps(expected)) != row["diagnostic"]
+            or classify_repeat_attempt(row["original_status"], expected) != row["classification"]
+        ):
+            raise LibraryAssemblyError("saved diagnostic differs from complete recomputation")
+    controls = []
+    with SynthesisProgramProductionCache(repo / result["inputs"]["cache"]["path"]) as cache:
+        for family in families:
+            indices = cache.indices(program_id=family, fold="train")
+            depths = cache.arrays["program_depths"][indices]
+            policy = dataset["programs"][family]
+            for depth in sorted(set(int(d) for d in depths)):
+                for index in indices[depths == depth][: config["train_controls_per_family_depth"]]:
+                    record = cache.record(int(index))
+                    kwargs = {
+                        "depth": depth,
+                        "accumulator_role": policy["accumulator_role"],
+                        "limits": LibraryProgramLimits(
+                            policy["maximum_steps"], **dataset["limits"]
+                        ),
+                    }
+                    strict = asdict(
+                        check_generated_program(
+                            libraries[family], record.graph.canonical_smiles, **kwargs
+                        )
+                    )
+                    audit = audit_repeated_program(
+                        libraries[family], record.graph.canonical_smiles, **kwargs
+                    )
+                    controls.append(
+                        {
+                            "record_id": cache.record_id(int(index)),
+                            "fold": cache.fold(int(index)),
+                            "family": family,
+                            "requested_depth": depth,
+                            "original_status": strict["status"],
+                            "diagnostic_status": audit["status"],
+                            "classification": classify_repeat_attempt(strict["status"], audit),
+                        }
+                    )
+    counts = {
+        arm: dict(Counter(r["classification"] for r in rows if r["arm"] == arm))
+        for arm in ("untrained", "trained")
+    }
+    if (
+        summarize(rows) != result["by_arm_family_depth"]
+        or counts != result["classifications_by_arm"]
+        or controls != result["train_controls"]
+        or len(rows) != result["audited_attempts"]
+    ):
+        raise LibraryAssemblyError("summary/controls differ from recomputed audit")
+    gates = {
+        "all_saved_attempts_in_repeated_families_audited": True,
+        "original_results_reproduced_without_changes": True,
+        "all_training_controls_recovered": all(
+            r["classification"] == "original_exact_program" for r in controls
+        ),
+        "all_diagnostics_search_complete": all(
+            r["classification"] != "diagnostic_search_abstained" for r in rows
+        ),
+    }
+    if gates != result["gates"] or result["status"] != (
+        "complete" if all(gates.values()) else "complete_with_limits"
+    ):
+        raise LibraryAssemblyError("result gate/status claims differ")
+    equal = None
+    if replay_path is not None:
+        replay = json.loads((repo / replay_path).read_text())
+        verify(repo, replay_path)
+        equal = all(
+            result[k] == replay[k]
+            for k in (
+                "config",
+                "inputs",
+                "sources",
+                "gates",
+                "by_arm_family_depth",
+                "classifications_by_arm",
+                "train_controls",
+                "policy",
+            )
+        ) and (
+            result["artifacts"]["attempt_audit.jsonl"]["sha256"]
+            == replay["artifacts"]["attempt_audit.jsonl"]["sha256"]
+        )
+        if not equal:
+            raise LibraryAssemblyError("audit replay differs")
+    return {
+        "status": "verified",
+        "result_sha256": str(sha256_file(result_path)),
+        "attempts_recomputed": len(rows),
+        "full_depth_programs_forward_replayed": witnesses,
+        "training_controls_recomputed": len(controls),
+        "scientific_payload_and_ledger_replay_equal": equal,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--result", type=Path, required=True)
+    parser.add_argument("--replay", type=Path)
+    args = parser.parse_args()
+    print(json.dumps(verify(args.repo_root, args.result, args.replay), indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

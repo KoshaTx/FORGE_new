@@ -1,0 +1,81 @@
+FFFFF...F..F.........                                                    [100%]
+=================================== FAILURES ===================================
+____ test_bound_production_contract_authenticates_but_remains_nonexecuting _____
+tests/test_single_step_proposal_benchmark.py:164: in test_bound_production_contract_authenticates_but_remains_nonexecuting
+    contract = load_frozen_benchmark_contract(BINDING, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/engine/single_step_proposal_benchmark.py:326: in load_frozen_benchmark_contract
+    _artifact_evidence(repo_root, record, label=str(label))
+forge/synthesis/engine/single_step_proposal_benchmark.py:110: in _artifact_evidence
+    raise BenchmarkContractError(f"artifact is missing: {path}")
+E   forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json
+_____ test_preflight_blocks_before_target_loader_or_lane_engine_is_called ______
+tests/test_single_step_proposal_benchmark.py:176: in test_preflight_blocks_before_target_loader_or_lane_engine_is_called
+    contract = load_frozen_benchmark_contract(BINDING, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/engine/single_step_proposal_benchmark.py:326: in load_frozen_benchmark_contract
+    _artifact_evidence(repo_root, record, label=str(label))
+forge/synthesis/engine/single_step_proposal_benchmark.py:110: in _artifact_evidence
+    raise BenchmarkContractError(f"artifact is missing: {path}")
+E   forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json
+___________ test_runner_rejects_a_resolver_not_bound_to_the_contract ___________
+tests/test_single_step_proposal_benchmark.py:203: in test_runner_rejects_a_resolver_not_bound_to_the_contract
+    resolver = load_independent_l2_forward_resolver(RESOLVER_CONFIG, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:690: in load_independent_l2_forward_resolver
+    artifact_paths = {
+forge/synthesis/assessment/l2_forward_resolver.py:691: in <dictcomp>
+    str(label): _verify_artifact(repo_root, record, label=str(label))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:637: in _verify_artifact
+    raise L2ForwardResolverError(f"{label} artifact is missing: {path}")
+E   forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz
+_ test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze _
+tests/test_single_step_proposal_benchmark.py:216: in test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze
+    resolver = load_independent_l2_forward_resolver(RESOLVER_CONFIG, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:690: in load_independent_l2_forward_resolver
+    artifact_paths = {
+forge/synthesis/assessment/l2_forward_resolver.py:691: in <dictcomp>
+    str(label): _verify_artifact(repo_root, record, label=str(label))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:637: in _verify_artifact
+    raise L2ForwardResolverError(f"{label} artifact is missing: {path}")
+E   forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz
+_________ test_hidden_truth_hash_or_output_grid_mutation_fails_closed __________
+tests/test_single_step_proposal_benchmark.py:272: in test_hidden_truth_hash_or_output_grid_mutation_fails_closed
+    resolver = load_independent_l2_forward_resolver(RESOLVER_CONFIG, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:690: in load_independent_l2_forward_resolver
+    artifact_paths = {
+forge/synthesis/assessment/l2_forward_resolver.py:691: in <dictcomp>
+    str(label): _verify_artifact(repo_root, record, label=str(label))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/assessment/l2_forward_resolver.py:637: in _verify_artifact
+    raise L2ForwardResolverError(f"{label} artifact is missing: {path}")
+E   forge.synthesis.assessment.l2_forward_resolver.L2ForwardResolverError: l2_exact_c16_step_ledger artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_exact_c16_route_v1/step_verification_ledger.json.gz
+_ test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts _
+tests/test_single_step_proposal_benchmark_v3.py:452: in test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts
+    contract = load_executable_benchmark_contract_v3(V3_CONFIG, repo_root=REPO)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/synthesis/engine/single_step_proposal_benchmark_v3.py:221: in load_executable_benchmark_contract_v3
+    legacy = load_frozen_benchmark_contract(
+forge/synthesis/engine/single_step_proposal_benchmark.py:326: in load_frozen_benchmark_contract
+    _artifact_evidence(repo_root, record, label=str(label))
+forge/synthesis/engine/single_step_proposal_benchmark.py:110: in _artifact_evidence
+    raise BenchmarkContractError(f"artifact is missing: {path}")
+E   forge.synthesis.engine.single_step_proposal_benchmark.BenchmarkContractError: artifact is missing: /Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json
+______ test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout ______
+tests/test_single_step_proposal_lane_qualification_spec.py:173: in test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout
+    assert path.is_file()
+E   AssertionError: assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/Users/rahulmaganti/Kosha/forge_new/results/phase1/ugi3_high_leverage_route_evidence_worklist_v1/manifest.json').is_file
+=========================== short test summary info ============================
+FAILED tests/test_single_step_proposal_benchmark.py::test_bound_production_contract_authenticates_but_remains_nonexecuting
+FAILED tests/test_single_step_proposal_benchmark.py::test_preflight_blocks_before_target_loader_or_lane_engine_is_called
+FAILED tests/test_single_step_proposal_benchmark.py::test_runner_rejects_a_resolver_not_bound_to_the_contract
+FAILED tests/test_single_step_proposal_benchmark.py::test_synthetic_lanes_share_budgets_resolve_independently_and_score_after_freeze
+FAILED tests/test_single_step_proposal_benchmark.py::test_hidden_truth_hash_or_output_grid_mutation_fails_closed
+FAILED tests/test_single_step_proposal_benchmark_v3.py::test_bound_v3_contract_derives_readiness_from_authenticated_existing_receipts
+FAILED tests/test_single_step_proposal_lane_qualification_spec.py::test_every_artifact_pin_authenticates_and_avoids_forbidden_holdout

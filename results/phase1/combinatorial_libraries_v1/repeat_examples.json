@@ -1,0 +1,66 @@
+{
+  "inputs": {
+    "data/vendor/building_block_pool_v1.json": "7ad9699364f3bffe09019751e9437df5122becf0f4f6547f500fc849bbf08d18",
+    "data/vendor/qualified_reaction_families_v1.json": "961dea191bbf6c8d169aab09f6aee18082e51696e4056fc4dc9f6fc97ff82587",
+    "data/vendor/r1_reaction_enumerated_support_v1.csv": "8a691e47e24a921233a05627094627e54f1a5a404e998c11ee69a51716d62f3a",
+    "forge/assembly/program.py": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e",
+    "forge/assembly/registry.py": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+  },
+  "method": "Replay each saved head with one and two identical copies of the saved tail using RegistryRepeatedReactionProgram, minimum_steps=1, maximum_steps=2, maximum_outcomes=128. No source-executed or general-corpus claim.",
+  "records": [
+    {
+      "checks_by_repeat_count": {
+        "1": {
+          "enumerated_outcomes_by_step": [
+            1
+          ],
+          "exact": false,
+          "saturated": false
+        },
+        "2": {
+          "enumerated_outcomes_by_step": [
+            1,
+            1
+          ],
+          "exact": true,
+          "saturated": false
+        }
+      },
+      "family": "aza_michael_amine_acrylate",
+      "reactant_ids": [
+        "amine:0023",
+        "acrylate:0002"
+      ],
+      "source_row": 222847
+    },
+    {
+      "checks_by_repeat_count": {
+        "1": {
+          "enumerated_outcomes_by_step": [
+            1
+          ],
+          "exact": false,
+          "saturated": false
+        },
+        "2": {
+          "enumerated_outcomes_by_step": [
+            1,
+            1
+          ],
+          "exact": true,
+          "saturated": false
+        }
+      },
+      "family": "reductive_amination_amine_aldehyde",
+      "reactant_ids": [
+        "amine:0023",
+        "aldehyde:0039"
+      ],
+      "source_row": 333622
+    }
+  ],
+  "schema_version": "forge.combinatorial_library_repeat_examples.v1",
+  "selection": "First failed single-event row without role-policy failure in aza-Michael and reductive-amination, the two existing repeated-program mechanisms.",
+  "status": "diagnostic_only_no_admission",
+  "training_admission": false
+}

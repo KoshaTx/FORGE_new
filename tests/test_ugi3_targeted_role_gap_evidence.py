@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments._runtime.historical import resolve_pinned_input
 from forge.corpus.r1_prime_audit import sha256_file
 from forge.synthesis.assessment.ugi3_targeted_role_gap_overlay import load_targeted_role_gap_overlay
 from forge.synthesis.engine.planner import (
@@ -23,7 +24,7 @@ from forge.synthesis.evidence.ugi3_targeted_role_gap_evidence import (
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_targeted_role_gap_evidence_audit_v1.json"
-INPUT_PATHS = {
+_DECLARED_INPUT_PATHS = {
     "agile_supplement": REPO / "data/vendor/agile_supplementary_information.pdf",
     "audit_source": REPO / "src/forge/route/ugi3_targeted_role_gap_evidence.py",
     "evidence_pack": REPO / "configs/route/phase1_ugi3_targeted_role_gap_evidence_v1.json",
@@ -38,6 +39,20 @@ INPUT_PATHS = {
     / "results/phase1/ugi3_targeted_aldehyde_evidence_audit_v1/result.json",
     "targeted_overlay_result": REPO
     / "results/phase1/ugi3_targeted_exact_overlay_diagnostic_v1/result.json",
+}
+
+# Historical source is authenticated by original path and digest; data pins and all
+# scientific replay/adversarial assertions remain unchanged.
+_CONFIGURED_INPUTS = json.loads(CONFIG.read_text())["inputs"]
+INPUT_PATHS = {
+    name: (
+        resolve_pinned_input(
+            REPO, _CONFIGURED_INPUTS[name]["asset"], _CONFIGURED_INPUTS[name]["expected_sha256"]
+        )
+        if _CONFIGURED_INPUTS[name]["asset"].startswith(("src/", "scripts/"))
+        else path
+    )
+    for name, path in _DECLARED_INPUT_PATHS.items()
 }
 STORED_RESULT = REPO / "results/phase1/ugi3_targeted_role_gap_evidence_audit_v1/result.json"
 STORED_LEDGER = REPO / (

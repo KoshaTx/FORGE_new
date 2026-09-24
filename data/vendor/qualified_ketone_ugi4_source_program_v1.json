@@ -1,0 +1,147 @@
+{
+  "curation": {
+    "atom_origin_policy": "Inherited Ugi Mumm oxygen convention, not isotope evidence. Ketone arms remain attached to their single complete precursor.",
+    "evidence_basis": "computed_transform_consistency",
+    "original_registries_modified": false
+  },
+  "reactions": [
+    {
+      "architecture": "One complete coupled ketone, primary amine, acid and isocyanide; retain a distinct basic head N",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[CX3;H0;!$([C]-[!#6]):2]=[OX1].[C;-1,+0;X1:3]#[N;+1,+0;X2:4].[C&X3:5](=[O&X1:6])[O&X2&H1:7]>>[N:1]([C&H0:2][C&+0:3](=[O:7])[N&H1&+0:4])-[C:5]=[O:6]",
+      "conditions": {
+        "catalyst_or_reagent": [],
+        "precondensation_time_h": 2,
+        "reported_yield_range": [
+          8.5,
+          8.5
+        ],
+        "solvent": [
+          "dichloromethane",
+          "methanol"
+        ],
+        "temperature_c": null,
+        "temperature_text": "room temperature",
+        "time_h": 72
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_ketone_ugi4_source_v1/build_registry.py",
+          "sha256": "533500b526eafe67519f73776ab85e8d92906bf0e216718a1048a0a347fc0b20"
+        },
+        "kind": "source_drawing_overlay",
+        "parent_registries": {
+          "aldehyde_ugi4": {
+            "path": "data/vendor/qualified_ugi4_source_program_v1.json",
+            "sha256": "cc42fc1dbfd88e92194cc325c62d73b425b6186eb46e6d00e3950317ec8bee5b"
+          },
+          "basic_nitrogen": {
+            "path": "data/vendor/qualified_staar_source_program_v1.json",
+            "sha256": "ba4136fb87f50400a42d7d2ed363a409c5f3db588db165894db2d13bf1a5f75b"
+          },
+          "functional_groups": {
+            "path": "data/vendor/qualified_a3_source_program_v2.json",
+            "sha256": "69e51b270d912747bbb95e206aa6a704574d803abcfe591bba0837ff74e7a0cf"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "net_byproducts": {
+        "H": 2,
+        "O": 1,
+        "formal_charge": 0
+      },
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract; no neutralization or salt stripping is applied and none is required for these substrates.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_head",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2
+          ],
+          "name": "coupled_ketone",
+          "required_handle_smarts": "[CX3;H0;!$([C]-[!#6])](=[OX1])"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            3,
+            4
+          ],
+          "name": "isocyanide",
+          "required_handle_smarts": "[C;-1,+0;X1]#[N;+1,+0;X2]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            5,
+            6,
+            7
+          ],
+          "name": "carboxylic_acid",
+          "required_handle_smarts": "[CX3](=[OX1])[OX2H1]"
+        }
+      ],
+      "reaction_id": "source_ketone_ugi4",
+      "reaction_version": 1,
+      "retained_queries": [
+        {
+          "minimum_matches": 1,
+          "name": "distinct_head_basic_nitrogen",
+          "role": "amine_head",
+          "smarts": "[$([NX3;+0;!$(N-[C,S,P]=[O,S,N])]),$([nH0;+0])]"
+        }
+      ],
+      "selectivity_policy": "All unfiltered products and inverse tuples must be unique. The reacting head N is NH2. Retention must be witnessed on an unconsumed atom originating in the complete amine head; another role cannot rescue it.",
+      "sources": [
+        {
+          "identifier": "10.1038/s41587-024-02490-y",
+          "kind": "doi",
+          "locator": "Supplementary information PDF page 2, FO-32 complete graph and procedure",
+          "notes": "Constitutional computed transform support only; no corpus execution, potency, L2 or L3 admission."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Constitutional stereo-free model; no stereoselectivity claim."
+    }
+  ],
+  "schema_version": "forge.source_reaction_registry.v1",
+  "source_assets": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "source_transcription": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/fo32-source-extraction.json",
+      "sha256": "a1b63a57150ec2243be8b62af3940e9beeb39b5fe6026e8f423fa54f187096ba"
+    },
+    "supplement": {
+      "path": "results/phase1/compose_lipid_all_family_sources_v1/remaining/39658727/ketone-ugi4-si.pdf",
+      "sha256": "7d77bfed6c85f28bcaf4d2f050d445059e8045ca189f70d2d4fcc0e70d4059e0"
+    }
+  }
+}

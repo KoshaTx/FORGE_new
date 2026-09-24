@@ -1,0 +1,56 @@
+{
+  "families": {
+    "preassembled_thiol_yne_tail_amidation": {
+      "program_id": "source_li_thiol_yne_then_amidation",
+      "source_role_occurrences": {
+        "alkynoic_linker": [
+          "alkynoic_linker"
+        ],
+        "amine_head": [
+          "amine_head"
+        ],
+        "thiol_tail": [
+          "thiol_first",
+          "thiol_second"
+        ]
+      }
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_thiol_yne_staged_source_program_v1.json",
+      "sha256": "1ce5f384fbb48e3e680e1a38f8a487c01cc19380422b367546bca8678d933598"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_thiol_yne_source_v1/adjudication.json",
+      "sha256": "93de90b9d6ccf26b1860953c7d84ad996a79f599aaf1a2af6784b7aed1d5c58b"
+    }
+  },
+  "policy": {
+    "component_join": "global_component_id",
+    "experimental_execution_admitted": false,
+    "forward_sites": "exhaustive_unfiltered_with_explicit_bounds",
+    "occupancy_source": "declared_source_quantities_expanded_as_identical_component_occurrences",
+    "population": "current_full_preparation_eligible_only",
+    "seed": 0,
+    "selection_before_molecular_record_decoding": true,
+    "stages": "source_order_complete_forward_and_inverse_no_branch_filtering",
+    "training_admitted": false,
+    "training_calls": 0
+  },
+  "schema_version": "forge.compose_lipid_staged_replay_config.v1",
+  "search_bounds": {
+    "maximum_events": 2,
+    "maximum_outcomes": 256,
+    "maximum_states": 4096,
+    "maximum_transitions": 16384
+  }
+}

@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 from rdkit import Chem
 
+from experiments._runtime.historical import resolve_pinned_input
 from forge.corpus.r1_prime_audit import sha256_file
 from forge.synthesis.evidence.ugi3_targeted_aldehyde_evidence import (
     Ugi3TargetedAldehydeEvidenceError,
@@ -14,7 +15,7 @@ from forge.synthesis.evidence.ugi3_targeted_aldehyde_evidence import (
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "configs/route/phase1_ugi3_targeted_aldehyde_evidence_audit_v1.json"
-INPUT_PATHS = {
+_DECLARED_INPUT_PATHS = {
     "audit_source": REPO / "src/forge/route/ugi3_targeted_aldehyde_evidence.py",
     "cli_source": REPO
     / "experiments/archive/producers/phase1_audit_ugi3_targeted_aldehyde_evidence.py",
@@ -37,6 +38,20 @@ INPUT_PATHS = {
     "oxidation_variant": REPO
     / "configs/route/variants/ugi3_upstream_primary_alcohol_oxidation_exact_source_v1.json",
     "qualified_forward_source": REPO / "src/forge/route/qualified_forward.py",
+}
+
+# Historical source is authenticated by original path and digest; data pins and all
+# scientific replay/adversarial assertions remain unchanged.
+_CONFIGURED_INPUTS = json.loads(CONFIG.read_text())["inputs"]
+INPUT_PATHS = {
+    name: (
+        resolve_pinned_input(
+            REPO, _CONFIGURED_INPUTS[name]["asset"], _CONFIGURED_INPUTS[name]["expected_sha256"]
+        )
+        if _CONFIGURED_INPUTS[name]["asset"].startswith(("src/", "scripts/"))
+        else path
+    )
+    for name, path in _DECLARED_INPUT_PATHS.items()
 }
 
 

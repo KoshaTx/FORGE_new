@@ -1,0 +1,59 @@
+{
+  "focused-tests": {
+    "command": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_a3_source_boundary.py",
+      "tests/test_compose_lipid.py",
+      "tests/test_compose_lipid_components.py",
+      "tests/test_compose_lipid_pretraining.py",
+      "tests/test_compose_lipid_protection.py",
+      "tests/test_compose_lipid_repeated_inverse.py",
+      "tests/test_compose_lipid_repeated_source.py",
+      "tests/test_compose_lipid_representation.py",
+      "tests/test_compose_lipid_scaffold_event.py",
+      "tests/test_compose_lipid_sequential.py",
+      "tests/test_compose_lipid_source_event.py",
+      "tests/test_compose_lipid_source_program.py",
+      "tests/test_pinned_sources_are_tracked.py",
+      "tests/test_precursor_scaffolds.py",
+      "tests/test_repeated_components.py",
+      "tests/test_repeated_inverse.py",
+      "tests/test_sequential_program.py",
+      "tests/test_source_event.py",
+      "tests/test_compose_lipid_precursor_audit.py",
+      "tests/test_condensation_event.py",
+      "tests/test_compose_lipid_condensation_event.py",
+      "tests/test_compose_lipid_universe.py",
+      "tests/test_single_step_benchmark_source_relocation.py",
+      "tests/test_single_step_manifest_source_relocation.py",
+      "tests/test_core_input_locations.py",
+      "tests/test_compose_lipid_supplement.py",
+      "tests/test_compose_lipid_source_view.py",
+      "tests/test_compose_lipid_supplied_replay.py",
+      "--tb=short",
+      "--junitxml=/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_supplied_validation_v1/focused-tests.xml"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 31.26734812511131
+  },
+  "vendor-verify": {
+    "command": [
+      "make",
+      "verify"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.20189345791004598
+  },
+  "full-tests": {
+    "command": [
+      "make",
+      "test",
+      "UV_RUN="
+    ],
+    "exit_code": 2,
+    "duration_seconds": 1323.994488791097
+  }
+}

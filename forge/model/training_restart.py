@@ -35,11 +35,7 @@ def _cpu_byte_rng_state(value: Any, *, label: str) -> Any:
         normalized = value.detach().cpu().contiguous()
     except (AttributeError, RuntimeError, TypeError) as error:
         raise TrainingRestartError(f"{label} is not a torch tensor") from error
-    if (
-        not torch.is_tensor(normalized)
-        or normalized.dtype != torch.uint8
-        or normalized.ndim != 1
-    ):
+    if not torch.is_tensor(normalized) or normalized.dtype != torch.uint8 or normalized.ndim != 1:
         raise TrainingRestartError(f"{label} is not a one-dimensional CPU byte tensor")
     return normalized
 
@@ -53,7 +49,10 @@ def atomic_torch_save(path: Path, value: Any) -> None:
     descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
     os.close(descriptor)
     try:
-        torch.save(value, temporary)
+        with open(temporary, "wb") as handle:
+            torch.save(value, handle)
+            handle.flush()
+            os.fsync(handle.fileno())
         os.replace(temporary, path)
     except BaseException:
         try:
@@ -110,9 +109,7 @@ def restore_training_random_state(
     random.setstate(state["python_random_state"])
     np.random.set_state(state["numpy_legacy_state"])
     numpy_generator.bit_generator.state = state["numpy_training_state"]
-    torch.set_rng_state(
-        _cpu_byte_rng_state(state["torch_cpu_rng_state"], label="CPU RNG state")
-    )
+    torch.set_rng_state(_cpu_byte_rng_state(state["torch_cpu_rng_state"], label="CPU RNG state"))
     if device.type == "cuda":
         cuda_states = state["torch_cuda_rng_state_all"]
         if not isinstance(cuda_states, list):

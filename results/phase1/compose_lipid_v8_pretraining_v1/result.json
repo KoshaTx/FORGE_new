@@ -1,0 +1,261 @@
+{
+  "all_train_graph_roundtrips_and_valences_pass": false,
+  "artifacts": {
+    "atom_vocabulary.json": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_v1/atom_vocabulary.json",
+      "sha256": "4f6555113aa47e9cb2677649b4bb59342fe87d9fba301981ad9e76ca4d4a6cd6"
+    },
+    "component_label_conflicts.json": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_v1/component_label_conflicts.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "split_label_audit.json": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_v1/split_label_audit.json",
+      "sha256": "5444860aaf8e20b998e1cdbff11d667aee4d60459a3c5f1ae76d59861f843d9e"
+    },
+    "train_checks.jsonl.gz": {
+      "path": "results/phase1/compose_lipid_v8_pretraining_v1/train_checks.jsonl.gz",
+      "sha256": "0aa51f6dfff51f2428625c2830fcffe0c2377997bf6415bbac2b0800afd14bc1"
+    }
+  },
+  "blockers": [
+    "v8_executable_program_registry_not_published_at_named_source_branch",
+    "related_transform_replays_do_not_establish_source_program_equivalence",
+    "precursor_structure_guards_incomplete_for_unreconstructed_programs"
+  ],
+  "by_family": {
+    "a3_amine_aldehyde_alkyne": {
+      "exact_graph_roundtrips": 5556,
+      "missing_executable_program": 5556,
+      "rows": 5556,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 5471
+    },
+    "acid_epoxide_diester_multistep": {
+      "exact_graph_roundtrips": 8318,
+      "missing_executable_program": 8318,
+      "rows": 8318,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 8318
+    },
+    "aema_aza_thiol_addition": {
+      "exact_graph_roundtrips": 3314,
+      "missing_executable_program": 3314,
+      "rows": 3314,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 3184
+    },
+    "aldehyde_ugi3": {
+      "ambiguous_forward_site_class": 122,
+      "exact_graph_roundtrips": 2967,
+      "exact_related_transform": 1122,
+      "exact_related_transform_protected_precursor": 1593,
+      "no_exact_related_transform_reconstruction": 130,
+      "rows": 2967,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 2797
+    },
+    "aldehyde_ugi4": {
+      "exact_graph_roundtrips": 8474,
+      "missing_executable_program": 8474,
+      "rows": 8474,
+      "rows_with_new_atom_states": 893,
+      "valence_policy_covered": 6497
+    },
+    "alpha_isocyanoester_dihydroimidazole": {
+      "exact_graph_roundtrips": 8287,
+      "missing_executable_program": 8287,
+      "rows": 8287,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 8287
+    },
+    "amine_alkylation": {
+      "exact_graph_roundtrips": 7821,
+      "missing_executable_program": 7821,
+      "rows": 7821,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 7512
+    },
+    "amine_epoxide_opening": {
+      "exact_graph_roundtrips": 6296,
+      "exact_related_transform": 837,
+      "repeated_program_adapter_required": 5459,
+      "rows": 6296,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 6247
+    },
+    "aryl_reductive_amination": {
+      "ambiguous_related_transform": 4722,
+      "exact_graph_roundtrips": 4736,
+      "rows": 4736,
+      "rows_with_new_atom_states": 0,
+      "source_role_or_multiplicity_metadata_missing": 14,
+      "valence_policy_covered": 4736
+    },
+    "aza_michael_acrylamide": {
+      "exact_graph_roundtrips": 4879,
+      "missing_executable_program": 4879,
+      "rows": 4879,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 4793
+    },
+    "aza_michael_acrylate": {
+      "exact_graph_roundtrips": 5400,
+      "repeated_program_adapter_required": 5073,
+      "rows": 5400,
+      "rows_with_new_atom_states": 0,
+      "source_role_or_multiplicity_metadata_missing": 327,
+      "valence_policy_covered": 5314
+    },
+    "disulfide_michael": {
+      "exact_graph_roundtrips": 7674,
+      "missing_executable_program": 7674,
+      "rows": 7674,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 6617
+    },
+    "epoxide_opening_o_acylation": {
+      "exact_graph_roundtrips": 5048,
+      "missing_executable_program": 5048,
+      "rows": 5048,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 4851
+    },
+    "iphos_ring_opening": {
+      "exact_graph_roundtrips": 6988,
+      "no_exact_related_transform_reconstruction": 5518,
+      "repeated_program_adapter_required": 1470,
+      "rows": 6988,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 6988
+    },
+    "ketone_isocyanide_amide": {
+      "exact_graph_roundtrips": 9000,
+      "missing_executable_program": 9000,
+      "rows": 9000,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 9000
+    },
+    "ketone_ugi4": {
+      "exact_graph_roundtrips": 5877,
+      "missing_executable_program": 5877,
+      "rows": 5877,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 5877
+    },
+    "maleate_addition": {
+      "exact_graph_roundtrips": 5426,
+      "missing_executable_program": 5426,
+      "rows": 5426,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 5426
+    },
+    "o_esterification": {
+      "exact_graph_roundtrips": 4771,
+      "missing_executable_program": 4771,
+      "rows": 4771,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 4184
+    },
+    "passerini_3cr": {
+      "exact_graph_roundtrips": 7007,
+      "exact_related_transform": 5279,
+      "exact_related_transform_protected_precursor": 1728,
+      "rows": 7007,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 7007
+    },
+    "preassembled_thiol_yne_tail_amidation": {
+      "exact_graph_roundtrips": 10534,
+      "missing_executable_program": 10534,
+      "rows": 10534,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 10534
+    },
+    "reductive_amination": {
+      "ambiguous_related_transform": 4450,
+      "exact_graph_roundtrips": 5810,
+      "exact_related_transform": 1077,
+      "exact_related_transform_protected_precursor": 273,
+      "rows": 5810,
+      "rows_with_new_atom_states": 0,
+      "source_role_or_multiplicity_metadata_missing": 10,
+      "valence_policy_covered": 5277
+    },
+    "thiolactone_aminolysis_michael": {
+      "exact_graph_roundtrips": 9366,
+      "missing_executable_program": 9366,
+      "rows": 9366,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 8753
+    },
+    "vitamin_b5_multistep": {
+      "exact_graph_roundtrips": 6187,
+      "missing_executable_program": 6187,
+      "rows": 6187,
+      "rows_with_new_atom_states": 0,
+      "valence_policy_covered": 6187
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/compose_lipid_v8_pretraining_v1.json",
+    "sha256": "766c23f60241755f037a027df26621bebad360769bf7fdb9467bc5398b7aae79"
+  },
+  "created_at_utc": "2026-09-18T13:52:48.788115+00:00",
+  "duration_seconds": 238.46421133284457,
+  "generation_calls": 0,
+  "heldout_graphs_parsed": false,
+  "implementation": {
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_pretraining.py": {
+      "path": "forge/corpus/compose_lipid_pretraining.py",
+      "sha256": "6b871bca7a90e3b65b12030f3a7b76d4ca1d228b3d376d6897615c8034bf8b75"
+    },
+    "forge/model/defog_feasibility.py": {
+      "path": "forge/model/defog_feasibility.py",
+      "sha256": "a445e7a8627ec262ba0f200cc31ddcc71412f636e9c930a1ce569e04407ba1a0"
+    },
+    "forge/model/qualified_vocabulary.py": {
+      "path": "forge/model/qualified_vocabulary.py",
+      "sha256": "f759aeff8d5d364ac9c8b40e7bd63cc38bef224d3bfbba85be84307b8ebbc334"
+    },
+    "forge/model/sparse_topology_feasibility.py": {
+      "path": "forge/model/sparse_topology_feasibility.py",
+      "sha256": "c696a82a7027e77ad6b5503aaad26e66dd46615be04537c4f52fce5c5db7326b"
+    },
+    "forge/model/synthesis_program_sampling.py": {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "e4bbf7829b9be151ce97eded64170a66efbeaefbf878cbd546968d8d9e5b3f47"
+    }
+  },
+  "import_result": {
+    "path": "results/phase1/compose_lipid_v8_import_v1/result.json",
+    "sha256": "a5c9ec8e95542d227eaf2ed3f9ab99e3d51e91c93f28cec1d9227cb7612befae"
+  },
+  "random_sampling_used": false,
+  "schema_version": "forge.compose_lipid_pretraining.v1",
+  "source_label_structure_conflicts": 0,
+  "source_programs_qualified": 0,
+  "status": "training_unqualified",
+  "train_rows": 149736,
+  "training_calls": 0
+}

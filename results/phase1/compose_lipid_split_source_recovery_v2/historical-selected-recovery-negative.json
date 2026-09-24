@@ -1,0 +1,115 @@
+{
+  "assignment_examples": [
+    "015fe6a078c560932b71181faf92216581666b23c5a79b63c454df3192059bad",
+    "15e86f888d138c5fce061c701a60faf5d28965de61611958e381e3fe31af8de0",
+    "1656fec735bbe966ceec087a5f1d2e3362340006bb3d6d98b0c07902c88f43c3",
+    "298c4adc94116eed383a9cc3873573f626091c6c62e7de187d3d6518ae5854f4",
+    "2bc394aa44b432aed9f359711685ed949f85cd06506ad044a858133554090548",
+    "371caf29e6660a8714b5e6f2f5de6c2775c6ec22b21f01e8c0d953fff07d6c1e",
+    "379e5f0431700237667d4d8182342d50fce90c3fad8483e1fcbdbfae332ad02e",
+    "3d40d1ffe90e477fa2aa64cfca28d0d6da75ebcdae8b46b1727b54123c5c346a",
+    "41b1addcaa4a289cc8fd9e98d5149788c48a15cdf3ca625169bff9a187356790",
+    "42f7e66ce1c944fdac5e01b95dbc8d38a2042cfa791acc89c25df345779567d6",
+    "439c60de109e919f69269e849f767b12131dba8073778e007582bed86e8dccd8",
+    "4726387209d25dfc0be99c4f079cf9c95aaebf0dc43fd997c5051104170cb4f4",
+    "5d81781f6af6383f19e1ac64140821253325b49e308cf854bea945131c6b92b1",
+    "5f3a21f14a8a7d977bb3656ce207fbe8be77ab63dc8c2b117b2123c23e3f3aef",
+    "609fa7740059d516d13ac6c4100defea660c119747f0d58341024271d9b394c7",
+    "6110da8242587f01fb699075cfcdd65b8fbd7bd751761acb1cb85cf19d39a487",
+    "803ec69ea4ae33c160a153fd19f761bdf50dcb0e48f55594439951c7d83e6328",
+    "80e25936b24094eaa329c898be9cfbc4d5336c93c7810ae608fff9650e42aa27",
+    "8937651522ab9946534f18575db740de487a9ad2cef11e2819c8e2512e8b3fa2",
+    "8c90adec63bb95e5b7a7fd0ee5292c049b69ab40eb86f7f440cb7233eadc5df8"
+  ],
+  "assignment_failures": 26,
+  "examples": [],
+  "full_universe_group_selection_performed": false,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_split_source_recovery_v2/recover_historical_selected_groups.py",
+    "sha256": "499f1c9d49f0917a5642858d0216e18aeb76505cd6ebc0c88c856cdce25330b2"
+  },
+  "inputs": {
+    "assignments": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/assignments.jsonl.gz",
+      "sha256": "8c759c737fcda765d9002bdb9f603a7527427ac72761c6a531731b809cae5893"
+    },
+    "components": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_component_manifest_v8_1/components.jsonl.gz",
+      "sha256": "e49966487dedd64368ae8b5a9eea52b97630bc5665b202bef7c18452efe4e6cf"
+    },
+    "corpus": {
+      "path": "results/phase1/compose_lipid_v8_import_v1/corpus.sqlite",
+      "sha256": "0f7c163885871698be9719a48559311a2816205db2ca26215a4a9813da6d5d57"
+    },
+    "corrected_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/frozen-group-replay.json",
+      "sha256": "68243f88e2e23ca6b0b4a58736db1b0ae3cfa0165626e2bcd9f931019c089a8c"
+    },
+    "groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/split_groups.jsonl.gz",
+      "sha256": "54edee59835223c13e3ecb4910e2d2ece592881b9d321323af9c9ce8b57eae79"
+    },
+    "historical_policy": {
+      "path": "data/vendor/compose_lipid_historical_morphology_policy_v1.json",
+      "sha256": "ee64de495cb0a92cf9116dd8ba27aecc19b74723642d0fe20d4986bad33064f3"
+    },
+    "intake": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/result.json",
+      "sha256": "77b225c536af69cfcf410a59ff099485df7889cd65af28e7b5fb4bdf3633dcc9"
+    },
+    "joins": {
+      "path": "results/phase1/compose_lipid_supplement_intake_v1/joins.sqlite",
+      "sha256": "fbf9141187b957be80dda9b1764f81b5c1d838367d481e5d882620290cce7559"
+    },
+    "morphology_replay": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/historical-morphology-replay.json",
+      "sha256": "90d04455897e2b3c7d739e5fceec778f84ddf0bafa13e2914de7c6018100306e"
+    },
+    "muscle_contexts": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/original_generator_tasks/family_05_aldehyde_ugi3_enumeration_v8/muscle_bounded_contexts.jsonl.gz",
+      "sha256": "af7ecfbc2856ae224a71d30146b6a9bd49b5ad1a86030dfc34ccd5b49bf842a8"
+    },
+    "original_config": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/upstream/configs/corpus/post_instruction_generator_splits_v8.json",
+      "sha256": "777136aa72fe341e8620416fbe8fad3a096c8c6696ba0d4c8bb4730a494069ba"
+    },
+    "original_config_response": {
+      "path": "results/phase1/compose_lipid_split_source_recovery_v2/old-split-config-blob.json",
+      "sha256": "56b967b8e34b18d34d16a13e4332cbb33826b13e20bac3634d9b3a4e8e80c303"
+    },
+    "registry": {
+      "path": "data/vendor/compose_lipid_frozen_split_policy_v1.json",
+      "sha256": "056100e3a3cb87984dbe1932f6f3511ac9cfebd809e5994d31192c4a523071d3"
+    },
+    "selected_groups": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/post_instruction_generator_splits_v8_1/selected_groups.json",
+      "sha256": "5530c38cdcee4dac96ce8557f133cade1ea32bb2796752d5d642962ab75b8047"
+    },
+    "source_checksums": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/SHA256SUMS",
+      "sha256": "60b3bf5c1dd7e0ce0bb3ffbb2c78fe7b23c3d323c70353a71d940208d46335b9"
+    },
+    "source_constructions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/construction_records.jsonl.gz",
+      "sha256": "c9f63f974d4b3d899bee7529c84be82cd4faa29b6f1c633fb49e23a0c2cf4afe"
+    }
+  },
+  "muscle_overrides": 12,
+  "pass": false,
+  "precursor_combination_failures": 0,
+  "recovered_counts": {
+    "calibration": 19975,
+    "reference": 268,
+    "test": 19975,
+    "train": 159782
+  },
+  "rows": 200000,
+  "schema_version": "forge.compose_lipid_historical_selected_recovery.v1",
+  "seed": "post_instruction_broad_lipid_generator_split_v8_candidate_1",
+  "source_anchors": 11267,
+  "source_assignments_changed": false,
+  "training_admitted": false,
+  "upstream_build_driver_executed": false,
+  "upstream_pure_functions_executed": true,
+  "upstream_source_modified": false
+}

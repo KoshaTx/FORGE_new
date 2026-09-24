@@ -1,0 +1,229 @@
+{
+  "config": {
+    "path": "results/phase1/compose_lipid_miao_cyclic_source_v1/replay-config.json",
+    "sha256": "910ffe0202f5eacfac33640cdef4872f147735fa7d8f244057692bfee0d3b03c"
+  },
+  "controls": {
+    "A12_Iso5_2DC18": {
+      "kind": "source_controls",
+      "replay": {
+        "checks": {
+          "distinct_source_role_handles_retained": true,
+          "full_element_hydrogen_charge_balance": true,
+          "source_reactive_site_witness": true,
+          "unique_unfiltered_forward_exact": true,
+          "unique_unfiltered_inverse_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_execution_admitted": false,
+        "forward_products": [
+          "CCCCCCCCC=CCCCCCCCC1(CCCCCCCC=CCCCCCCCC)C=NC(C(=O)OCC)N1CCCN(C)C"
+        ],
+        "inverse_candidate_count": 1,
+        "net_byproducts": {
+          "H": 2,
+          "O": 1,
+          "formal_charge": 0
+        },
+        "retained_source_role_witnesses": [
+          {
+            "distinct_head_basic_nitrogen": [
+              1
+            ]
+          }
+        ],
+        "site_witnesses": [
+          [
+            {
+              "atom_map": 1,
+              "canonical_reactant_atom_index": 6,
+              "role": "amine_head"
+            },
+            {
+              "atom_map": 2,
+              "canonical_reactant_atom_index": 17,
+              "role": "coupled_ketone"
+            },
+            {
+              "atom_map": 3,
+              "canonical_reactant_atom_index": 0,
+              "role": "isocyanide"
+            }
+          ]
+        ]
+      }
+    },
+    "A2_Iso5_2DC18": {
+      "kind": "source_controls",
+      "replay": {
+        "checks": {
+          "distinct_source_role_handles_retained": true,
+          "full_element_hydrogen_charge_balance": true,
+          "source_reactive_site_witness": true,
+          "unique_unfiltered_forward_exact": true,
+          "unique_unfiltered_inverse_exact": true
+        },
+        "computed_consistency_pass": true,
+        "experimental_execution_admitted": false,
+        "forward_products": [
+          "CCCCCCCCC=CCCCCCCCC1(CCCCCCCC=CCCCCCCCC)C=NC(C(=O)OCC)N1CCCN1CCCC1"
+        ],
+        "inverse_candidate_count": 1,
+        "net_byproducts": {
+          "H": 2,
+          "O": 1,
+          "formal_charge": 0
+        },
+        "retained_source_role_witnesses": [
+          {
+            "distinct_head_basic_nitrogen": [
+              4
+            ]
+          }
+        ],
+        "site_witnesses": [
+          [
+            {
+              "atom_map": 1,
+              "canonical_reactant_atom_index": 0,
+              "role": "amine_head"
+            },
+            {
+              "atom_map": 2,
+              "canonical_reactant_atom_index": 17,
+              "role": "coupled_ketone"
+            },
+            {
+              "atom_map": 3,
+              "canonical_reactant_atom_index": 0,
+              "role": "isocyanide"
+            }
+          ]
+        ]
+      }
+    },
+    "non_equivalent_primary_amines": {
+      "kind": "regression_controls",
+      "replay": {
+        "checks": {
+          "distinct_source_role_handles_retained": true,
+          "full_element_hydrogen_charge_balance": true,
+          "source_reactive_site_witness": true,
+          "unique_unfiltered_forward_exact": false,
+          "unique_unfiltered_inverse_exact": true
+        },
+        "computed_consistency_pass": false,
+        "experimental_execution_admitted": false,
+        "forward_products": [
+          "CCOC(=O)C1N=CC(C)(CC)N1CCCN(C)CCN",
+          "CCOC(=O)C1N=CC(C)(CC)N1CCN(C)CCCN"
+        ],
+        "inverse_candidate_count": 1,
+        "net_byproducts": {
+          "H": 2,
+          "O": 1,
+          "formal_charge": 0
+        },
+        "retained_source_role_witnesses": [
+          {
+            "distinct_head_basic_nitrogen": [
+              1,
+              8
+            ]
+          }
+        ],
+        "site_witnesses": [
+          [
+            {
+              "atom_map": 1,
+              "canonical_reactant_atom_index": 4,
+              "role": "amine_head"
+            },
+            {
+              "atom_map": 2,
+              "canonical_reactant_atom_index": 2,
+              "role": "coupled_ketone"
+            },
+            {
+              "atom_map": 3,
+              "canonical_reactant_atom_index": 0,
+              "role": "isocyanide"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "implementation": {
+    "forge/assembly/condensation_event.py": {
+      "path": "forge/assembly/condensation_event.py",
+      "sha256": "d6fd6f8ae9f281d6706e4b194d0a2cde89d09194c89485ec5d4eafdef07de342"
+    },
+    "forge/assembly/families.py": {
+      "path": "forge/assembly/families.py",
+      "sha256": "bc21b3fafd0700ada20d6bf0feef661130449915963f5cabab73eb1c0fc7c1c4"
+    },
+    "forge/assembly/program.py": {
+      "path": "forge/assembly/program.py",
+      "sha256": "c6195066488fcc89f2ff352afa9319342e24ad6df397b37a83d302c1dca75d4e"
+    },
+    "forge/assembly/registry.py": {
+      "path": "forge/assembly/registry.py",
+      "sha256": "72373e01d930651221d7a1365d96e94c817232a3706333f99a7a01a5e20f7037"
+    },
+    "forge/assembly/repeated_components.py": {
+      "path": "forge/assembly/repeated_components.py",
+      "sha256": "7c5eabb57cf4d2cdcec02752a5b820788df46f0fd6b2b5ac07a30bb35f5a34b4"
+    },
+    "forge/assembly/source_event.py": {
+      "path": "forge/assembly/source_event.py",
+      "sha256": "77a7317f18b604a2ad1a0142f518b147c18cf86d90ff5b53dad4d301dfb92289"
+    },
+    "forge/assembly/source_retention.py": {
+      "path": "forge/assembly/source_retention.py",
+      "sha256": "04ac3316629d99fd401578d19c04b2c8523b4ed8cdb0a90e79630f10032af82e"
+    },
+    "forge/chemistry/reactive_sites.py": {
+      "path": "forge/chemistry/reactive_sites.py",
+      "sha256": "e85e455ea0a2ab730456dbfe13692423ad5542adea8ec895fe11a9a9261c5964"
+    },
+    "forge/core/hashing.py": {
+      "path": "forge/core/hashing.py",
+      "sha256": "02677e865bbba6e587603db6d78bbb77cac16fb71846cabff3f5e2182cbbd494"
+    },
+    "forge/corpus/compose_lipid_family_replay.py": {
+      "path": "forge/corpus/compose_lipid_family_replay.py",
+      "sha256": "6e7aea1999e8ec5ae0ec1ffbf235663d1071879a1e3fcd50cdb763d8d3837fc0"
+    },
+    "forge/corpus/compose_lipid_fixed_replay.py": {
+      "path": "forge/corpus/compose_lipid_fixed_replay.py",
+      "sha256": "421a5a5fe6e988989ca7a7525d0fcab5a589e328958154d6d3b21b0edb0f8b72"
+    },
+    "forge/corpus/compose_lipid_full_preparation.py": {
+      "path": "forge/corpus/compose_lipid_full_preparation.py",
+      "sha256": "a185537ce7a84fff7768b45bcaa4d97272009b821e5207cf31249c24f68df2a2"
+    }
+  },
+  "inputs": {
+    "family_definitions": {
+      "path": "data/source_cache/compose_lipid_supplement_2026-09-19/family_reaction_definitions.json",
+      "sha256": "a42405d240526da0ef45e5b07eed3e49e485d9711f85e7b61f4b4c5a32ac5a6d"
+    },
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "registry": {
+      "path": "data/vendor/qualified_miao_cyclic_source_program_v1.json",
+      "sha256": "16655b684c769e52d21dfb2117d06c75c847a4ab9400a68cfb6a7264ea7f99d2"
+    },
+    "transform_controls": {
+      "path": "results/phase1/compose_lipid_miao_cyclic_source_v1/adjudication.json",
+      "sha256": "3a868473552aff2b2a96882b5b917553bfac324213601adc8b32f2b61c89282e"
+    }
+  },
+  "schema_version": "forge.fixed_source_control_preflight.v1",
+  "seed": 0,
+  "training_admitted": false,
+  "training_calls": 0
+}

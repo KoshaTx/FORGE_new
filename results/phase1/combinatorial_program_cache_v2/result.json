@@ -1,0 +1,149 @@
+{
+  "artifacts": {
+    "cache.npz": {
+      "bytes": 6476859,
+      "path": "results/phase1/combinatorial_program_cache_v2/cache.npz",
+      "sha256": "b4f6e6a03f253a90f76915a3b1dc65f1bab5a77229ca1eba0c47c4f9dacbc66c"
+    }
+  },
+  "config": {
+    "path": "configs/multireaction/combinatorial_program_cache_v1.json",
+    "sha256": "155df3ba4ba75e7047837d4d7d9a5fac22fe996c787672238c9e4a28ee06c05e"
+  },
+  "created_at_utc": "2026-09-14T02:36:55.555927+00:00",
+  "duration_seconds": 51.218924916000105,
+  "environment": {
+    "numpy": "2.4.6",
+    "rdkit": "2026.03.5"
+  },
+  "equal_family_training_mass": {
+    "acetal_aldehyde_diol": 0.08333333333333334,
+    "amide_coupling_acid_amine": 0.08333333333333333,
+    "aza_michael_amine_acrylate": 0.08333333333333333,
+    "carbamate_amine_chloroformate": 0.08333333333333334,
+    "disulfide_coupling": 0.0833333333333333,
+    "epoxide_opening_amine": 0.08333333333333333,
+    "iphos_amine_dioxaphospholane": 0.08333333333333334,
+    "passerini_3cr": 0.08333333333333334,
+    "reductive_amination_amine_aldehyde": 0.08333333333333334,
+    "thiol_michael_thioether": 0.08333333333333333,
+    "ugi_3cr_agile": 0.08333333333333334,
+    "urea_amine_isocyanate": 0.08333333333333334
+  },
+  "fixed_state_failures": 0,
+  "fold_counts": {
+    "acetal_aldehyde_diol": {
+      "calibration": 114,
+      "heldout": 49,
+      "train": 624
+    },
+    "amide_coupling_acid_amine": {
+      "calibration": 63,
+      "heldout": 192,
+      "train": 1386
+    },
+    "aza_michael_amine_acrylate": {
+      "calibration": 21,
+      "heldout": 72,
+      "train": 2065
+    },
+    "carbamate_amine_chloroformate": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2016
+    },
+    "disulfide_coupling": {
+      "calibration": 21,
+      "heldout": 15,
+      "train": 325
+    },
+    "epoxide_opening_amine": {
+      "calibration": 14,
+      "heldout": 120,
+      "train": 2013
+    },
+    "iphos_amine_dioxaphospholane": {
+      "calibration": 28,
+      "heldout": 96,
+      "train": 1953
+    },
+    "passerini_3cr": {
+      "calibration": 171,
+      "heldout": 672,
+      "train": 13728
+    },
+    "reductive_amination_amine_aldehyde": {
+      "calibration": 133,
+      "heldout": 140,
+      "train": 1512
+    },
+    "thiol_michael_thioether": {
+      "calibration": 21,
+      "heldout": 18,
+      "train": 858
+    },
+    "ugi_3cr_agile": {
+      "calibration": 133,
+      "heldout": 2100,
+      "train": 36112
+    },
+    "urea_amine_isocyanate": {
+      "calibration": 17,
+      "heldout": 171,
+      "train": 1724
+    }
+  },
+  "gates": {
+    "all_semantic_fold_counts_exact": true,
+    "all_semantic_records_packed": true,
+    "every_family_has_required_folds": true,
+    "fixed_state_policy_exact": true,
+    "full_closure_support_preserved": true,
+    "full_heavy_atom_support_preserved": true,
+    "raw_family_count_sampling_absent": true,
+    "semantic_qualification_passed": true
+  },
+  "generator_sampling_calls": 0,
+  "inputs": {
+    "atom_vocabulary": {
+      "path": "results/phase1/product_v3_atom_vocabulary.json",
+      "sha256": "90ab7430354a9ffd91cfd6e19f2a125020a6547c67cd462a11f77074fd2a0cc5"
+    },
+    "semantic_config": {
+      "path": "configs/multireaction/combinatorial_program_semantics_v1.json",
+      "sha256": "3de95f770611227f2c56ba8ebe9495b6c31dc8c9a0ae233514d523e9c1865778"
+    },
+    "semantic_records": {
+      "path": "results/phase1/combinatorial_program_semantics_v3/semantic_records.jsonl.gz",
+      "sha256": "681125904126159a71a2470c78c9fb0113aecc89935ea0a951559a5142d89c54"
+    },
+    "semantic_result": {
+      "path": "results/phase1/combinatorial_program_semantics_v3/result.json",
+      "sha256": "256139e72dbb0628e1f244d3f3da2d28b0e5dd058e2c739fbb6fa5e74f12139b"
+    }
+  },
+  "nonclaims": [
+    "This cache is model-input infrastructure, not evidence of model generalization or improved realism.",
+    "Transform-consistent products remain reaction-enumerated support, not route-certified products.",
+    "Semantic abstentions remain excluded and visible in the pinned upstream audit.",
+    "No route, oracle, candidate selection, biological label or reductive-amination substructure metric is present."
+  ],
+  "records": 68831,
+  "schema_version": "forge.combinatorial_program_cache.v1",
+  "sources": {
+    "experiments/phase1/multireaction/combinatorial_program_cache.py": "f8ef798dd5abbe46093781e6bbb97a47d2e65bc16fd6d4e84ba1526d2f4ee684",
+    "forge/corpus/combinatorial_program_cache.py": "d616f60468809906fd12deea46965d972d800b12be0a9467f8d73d54c742e8cd",
+    "forge/corpus/combinatorial_program_semantics.py": "74e22ef768e64092153f52b882a53fbe8d43e3a135525228706cbce418cffab0",
+    "forge/corpus/synthesis_program_production_cache.py": "269f0e694898af3343cbf9bef6aa058443e4aff870b0f09d829541d78d4f7d4d",
+    "forge/model/reaction_program_conditioning.py": "309bce163306f8adc4a7035daecdbbf309101981a6bceb242bdca98cbf060d7a",
+    "forge/model/synthesis_program_graph.py": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+  },
+  "status": "pass",
+  "support": {
+    "maximum_closures": 1,
+    "maximum_heavy_atoms": 140,
+    "observed_maximum_closures": 1,
+    "observed_maximum_heavy_atoms": 131
+  },
+  "training_calls": 0
+}

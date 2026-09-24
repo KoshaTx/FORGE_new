@@ -1,0 +1,31 @@
+{
+  "duplicate_eligible_classes": {},
+  "duplicate_exact_classes": {},
+  "eligible_constitutional_classes": 76800,
+  "eligible_source_rows": 76800,
+  "exact_constitutional_classes": 26619,
+  "exact_source_rows": 26619,
+  "implementation": {
+    "path": "results/phase1/compose_lipid_full_preparation_validation_v2/report.py",
+    "sha256": "1d32be28b35417ca267dd4c01ad76eda16eded6cd88900bd81cd6ac0b8afdd02"
+  },
+  "inputs": {
+    "preparation": {
+      "path": "results/phase1/compose_lipid_full_preparation_v1/result.json",
+      "sha256": "326b40d6a3de6f42955379b547100549c7229334aa96135bff92d117fd081246"
+    },
+    "replay": {
+      "path": "results/phase1/compose_lipid_family_replay_v1/result.json",
+      "sha256": "cdce7cde33a9767fbbafc9dee871936158cb310c70a8038888b518b64bcabc7f"
+    },
+    "role_binding": {
+      "path": "results/phase1/compose_lipid_role_binding_v1/result.json",
+      "sha256": "17ab4b1d28726f8ee3dd5afaa4a0368a647b20a24a60ff00a459a14920c78113"
+    }
+  },
+  "schema_version": "forge.compose_lipid_preparation_identity_classes.v1",
+  "scope": "eligible_preparation_only_not_full_universe_deduplication",
+  "seed": 0,
+  "training_admitted": false,
+  "training_weights_fitted": false
+}
