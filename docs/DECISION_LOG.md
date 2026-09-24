@@ -20739,3 +20739,78 @@ under matched draw budgets, calibrate on independent positive controls, and fill
 documentary precursor/terminal evidence gaps. A residual-learning diagnosis must
 precede the proposed optimization comparison; this experiment does not establish
 that longer training or a smaller batch will solve the outstanding problems.
+
+## 2026-09-24 — Confirm all-family L1 point target; retain quality and route gaps
+
+The user authorized continued parallel implementation and evidence collection for all
+22 families while deferring manuscript edits. Matched complete-component construction,
+registered scaffold/symmetry handling and retained-domain AEMA qualification were combined
+with independently checked diversity/novelty-constrained support selection. Chemistry gates,
+TRAIN-only references and full 254-atom/12-closure/Br support were preserved.
+
+Final saved-development D1 selection gives 1,387/1,408 exact source-contract L1 requests,
+with every family at least 58/64. Of these, 982 globally distinct products have all assessed
+local product/component neighborhoods and ring systems observed in TRAIN. A frozen-policy
+fresh-flow run gives the same 1,387/1,408 exact yield, again at least 58/64 in every family,
+and 989 distinct exact products with all assessed local features observed. Within the fresh
+D1 pool, support selection raises that feature-supported count from 649 to 989 without
+reducing exact coverage or the declared product/component diversity and novelty floors.
+All 44 fresh D0/D1 family solves are optimal and independently verified. Unknown feature
+support remains distinct from chemical invalidity; observed support is not full lipid quality.
+
+The fresh comparison does not show an unconditional L1 advantage for atom-aware decoding:
+D0 has 1,388 exact-capable requests versus D1 1,387; D1 retains 1,385, gains two and loses
+three. D0 has 404 high-coordinate-sulfur proposals, 102 passing the source executor; D1 has
+zero. Root independently replayed every selected request in both cohorts and reproduced all
+available full saved assessments, including accepted precursor tuples. Fresh conditional
+source acceptance is 1,387/1,456 enumerated inverse candidates, distinct from request coverage
+and independent experimental chemical precision.
+
+A seed-range defect was caught before fresh chemistry assessment: 36/64 layout RNG seeds
+per family overlap development. All 880 fresh flow-shard seeds are disjoint. The 616 requests
+with disjoint layout seeds include 116 coincident conditioning geometries, leaving 500 new
+geometries. The run was preserved and relabeled fresh-flow confirmation, not independent
+new-layout evaluation. The prespecified descriptive disjoint-seed subgroup gives 605/616
+exact and 427 exact outputs with observed features, with every family at least 26/28 exact.
+Selection was joint across all 64 requests per family, so subgroup noninferiority and
+independent validation are not asserted. No TEST data or new training seeds were evaluated.
+
+The reference diagnostic uses 1,408 fixed TRAIN positive controls. Family-macro broad empirical
+fingerprint precision is 25.1% for controls versus 24.8% for development generated products;
+coverage is 0.91% versus 1.79%. Aggregate reference mismatch and family-specific generation
+gaps coexist. Ketone Ugi4 retains oxygen/unsaturation and topology shifts; A3's aromatic-ring
+deficit occurs before later construction/selection and is identical in D0/D1 aromatic counts
+across 320 matched raw outcomes. A separate 34-control graph probe distinguishes topology
+and chemistry errors but does not establish convergence or a causal update-count diagnosis.
+
+One exact source-supported AEMA preparation step is admitted from the reviewed Zhou 2016
+supplement, preserving conflicting source quantities and withholding quantitative yield
+supervision. Its exact component identity occurs in 61 development and 63 fresh selected
+products, without transferring downstream context or complete-dossier claims. Ten bounded
+public supplier requests captured fresh identity/specification evidence for two recurring
+amines, but no item-level current US stock observation. No new L3 terminal or complete
+product dossier is admitted; complete population closure remains null/unassessed.
+
+Fresh sampling used 57,200 batch forward evaluations and 893.1 shard seconds; construction
+used zero model calls and 449.2 seconds. Primary/subgroup quality assessment took 99.4 seconds
+combined, and independent fresh source replay 19.5 seconds. Setups and serialization remain
+separately recorded; the declared local compute cap was respected. Relevant constructor,
+selector and evidence checks pass; fresh-input selection reproduces all four old selected
+panels, frozen implementation/source pins verify, and make verify passes all 30 assets.
+
+A concrete smaller-batch readiness package proposes 528 versus 3,168 effective batch at
+exactly 402,336 presentations/family: 16,764 versus 2,794 updates and 2,286 versus 381 family
+appearances. It records matched exposure milestones and optimization confounds. Both proposal
+configs remain unadmitted: three source-validation pins are stale, launcher/watcher logic is
+run-specific, immutable intermediate quality exports are absent, and batch-528 GPU numerical,
+restart and timing qualification is outstanding. No paid training was launched.
+
+Decision: preserve the decoder/selector as a measured development candidate; do not promote
+overall quality, training sufficiency or all-family dossier closure. Continue targeted
+structure-prediction diagnosis, qualify the monitored optimization comparison, and expand
+documentary evidence and independent realism calibration. The final paper still requires
+held-component/source evaluation, independent training seeds, proper conditioning controls,
+an original-three-family bridge and common cost accounting. No manuscript edits were made
+by this milestone. Integrated evidence, all-family tables, pins and reproducible verification:
+`results/phase1/compose_lipid_quality_milestone_v2/README.md`, `result.json`, `ALL_FAMILIES.md`,
+`NEXT_STEPS.md`, `verify_selected.py`, and `summarize.py`.
