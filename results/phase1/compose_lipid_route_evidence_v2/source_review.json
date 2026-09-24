@@ -1,0 +1,73 @@
+{
+  "schema_version": "forge.compose_lipid_exact_component_source_review.v1",
+  "reviewed_at_utc": "2026-09-24T21:56:47Z",
+  "source": {
+    "doi": "10.1073/pnas.1520756113",
+    "url": "https://www.pnas.org/doi/suppl/10.1073/pnas.1520756113/suppl_file/pnas.1520756113.sapp.pdf",
+    "path": "data/source_cache/compose_lipid_user_supplements_20260922/pnas.1520756113.sapp.pdf",
+    "sha256": "1b969c58dd4bfaca0a9bb6b3a558ac55d8b3bba31a08805d1eeae55367639987",
+    "asset_origin": "existing user-supplied source cache; no historical result reconstruction",
+    "locator": "SI physical PDF page 19, Experimental Procedures, Synthesis of 2-(acryloyloxy)ethyl methacrylate (AEMA); physical pages 1-2, Figures S1-S2, labelled AEMA structure and monomer 1H NMR control",
+    "visually_reviewed_physical_pages": [1, 2, 18, 19, 20],
+    "visual_findings": "The labelled AEMA drawing contains an acrylate and a methacrylate joined through ethylene glycol. The blue 1H NMR monomer control in Figures S1-S2 labels the vinyl, ethylene and methyl protons. BHT is explicitly present. The page 19 preparation names HEMA and acryloyl chloride, isolation, and reported yield. Neighbouring pages do not replace that preparation with a different route.",
+    "review_status": "chemistry_pages_rendered_and_visually_reviewed"
+  },
+  "claim": {
+    "level": "L2",
+    "scope": "Only the source-executed preparation of this exact constitutional AEMA component; no downstream generated lipid execution, yield prediction, general O-acylation scope, or biological label transfer.",
+    "source_product_name": "2-(acryloyloxy)ethyl methacrylate (AEMA)",
+    "canonical_smiles": "C=CC(=O)OCCOC(=O)C(=C)C",
+    "source_structure_status": "exact_identity_resolved_nonidentity_quantity_conflict",
+    "evidence_basis": "exact_executed_characterized",
+    "precursors": {
+      "acyl_tail": {
+        "source_name": "acryloyl chloride",
+        "canonical_smiles": "C=CC(=O)Cl",
+        "reported_amount": "92.1 mL, 1.14 mol",
+        "reactive_site": "the single acid chloride carbonyl carbon"
+      },
+      "aminoalcohol_head": {
+        "source_name": "2-hydroxyethyl methacrylate",
+        "canonical_smiles": "C=C(C)C(=O)OCCO",
+        "reported_amount": "130 g, 1.08 mol",
+        "reported_mass_g": 130,
+        "reported_mol": 1.08,
+        "reactive_site": "the single free aliphatic hydroxyl oxygen"
+      }
+    },
+    "role_namespace_note": "Names acyl_tail/aminoalcohol_head are existing transform slots. HEMA contains no amine and is not claimed to be an ionizable head. Both structures satisfy the unchanged slot predicates. Han grouped-program execution and its two-copy architecture are not inherited.",
+    "procedure": {
+      "reagents": ["triethylamine: 110 g, 1.14 mol", "BHT: 2.4 g, 10.8 mmol"],
+      "solvent": "anhydrous chloroform: 600 mL initial plus 200 mL in the acryloyl chloride solution",
+      "addition": "acryloyl chloride solution added dropwise at 0 C",
+      "reaction": "room temperature overnight",
+      "atmosphere": "not specified",
+      "workup": "Remove chloroform; add 800 mL hexane; filter precipitate; wash filtrate with water 150 mL three times; dry organic material using sodium sulfate; concentrate.",
+      "purification": "distillation under reduced pressure; colourless oil",
+      "reported_product_mass_g": 169,
+      "reported_yield_percent": 85,
+      "product_specific_characterization": "Figures S1-S2 include labelled AEMA structure and assigned monomer 1H NMR control containing BHT; no independent purity estimate is inferred.",
+      "storage": "add 1 mol% BHT and store at -20 C",
+      "outcome": "reported isolated product"
+    },
+    "discrepancies": [
+      {
+        "kind": "nonidentity_source_quantity_conflict",
+        "observation": "The stated 130 g of HEMA is about 1.00 mol, whereas the procedure reports 1.08 mol. Triethylamine also has inconsistent reported mass and amount: 110 g is about 1.09 mol, not 1.14 mol. The reported 85% yield is consistent with the stated 1.08 mol HEMA basis, not the stated HEMA mass. No amount is silently corrected.",
+        "effect": "Preserve the reported recipe and the identity-resolved exact execution claim; withhold quantitative stoichiometry and yield supervision. The conflict does not change either reactant constitution, the single reactive site, or the isolated product identity.",
+        "quantitative_training_admitted": false
+      }
+    ]
+  },
+  "mechanical_check": {
+    "registry": {
+      "path": "data/vendor/qualified_han_db_grouped_source_program_v1.json",
+      "sha256": "5bcb31bd969061a49408115858fd1f896f055ff513aaa2ba8a08a10ae015d32f"
+    },
+    "reaction_id": "source_han_db_acyl_chloride_o_acylation",
+    "maximum_outcomes": 64,
+    "scope": "Reuse only the unchanged registered transform and role/site predicates on the exact source-specified reactant pair. Use Zhou conditions and source execution evidence. Do not infer Han execution or broaden a planner template.",
+    "inverse_policy": "Preserve all compatible inverse candidates. The primary procedure explicitly resolves the executed pair; global inverse uniqueness is not claimed. Require exactly one source-specified precursor tuple and one unfiltered forward constitutional product.",
+    "net_byproducts_source": "grouped_programs[0].stages[1].net_byproducts_per_event"
+  }
+}
