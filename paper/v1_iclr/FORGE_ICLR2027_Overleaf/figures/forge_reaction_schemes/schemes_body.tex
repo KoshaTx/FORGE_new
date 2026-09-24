@@ -1,19 +1,16 @@
-% The three assembly chemistries FORGE generates into, drawn natively so every glyph is the
-% document's own font.  Colours follow the role palette of the algorithm schematic: the amine head
-% is roleamine, aldehyde-derived atoms roleald, the isocyanide or acrylate tail roleiso, and an atom
-% the template introduces with no precursor origin is grey, exactly as in the Figure 1 core inset.
-% Skeletal notation throughout; hydrogens are drawn only on the atoms whose substitution decides
-% whether the product can be decomposed back into its precursors.  Bonds carry the colour of the
-% component that contributes them, so the reader can read the product back to its three sources.
-\definecolor{roleamine}{HTML}{8A5AC2}
-\definecolor{roleald}{HTML}{168C8C}
-\definecolor{roleiso}{HTML}{E39532}
-\definecolor{roletemplate}{HTML}{9A9A9A}
-\setchemfig{atom sep=2.35em, bond style={line width=0.9pt}}
-\newcommand{\amine}[1]{{\color{roleamine}#1}}
-\newcommand{\ald}[1]{{\color{roleald}#1}}
-\newcommand{\iso}[1]{{\color{roleiso}#1}}
-\newcommand{\tmpl}[1]{{\color{roletemplate}#1}}
+% Monochrome skeletal schemes use the same thin bonds and dark atom labels as the
+% molecular examples. Reaction topology, substituents and hydrogens are unchanged.
+\definecolor{chemicalbond}{HTML}{727272}
+\definecolor{chemicalink}{HTML}{303030}
+\colorlet{roleamine}{chemicalbond}
+\colorlet{roleald}{chemicalbond}
+\colorlet{roleiso}{chemicalbond}
+\colorlet{roletemplate}{chemicalbond}
+\setchemfig{atom sep=2.35em, bond style={line width=0.45pt,draw=chemicalbond}, atom style={text=chemicalink}}
+\newcommand{\amine}[1]{{\color{chemicalink}#1}}
+\newcommand{\ald}[1]{{\color{chemicalink}#1}}
+\newcommand{\iso}[1]{{\color{chemicalink}#1}}
+\newcommand{\tmpl}[1]{{\color{chemicalink}#1}}
 \newcommand{\rxnrow}[3]{%
   \makebox[\linewidth][l]{\begin{minipage}{\linewidth}%
   \textbf{\small #1}\\[-0.15em]{\scriptsize\itshape #2}\\[0.7em]#3\end{minipage}}}

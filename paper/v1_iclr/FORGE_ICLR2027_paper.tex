@@ -15,6 +15,7 @@
 \usepackage{algpseudocode}
 \usepackage{graphicx}
 \usepackage{pgfplots}
+\usepackage{pgfplotstable}
 \pgfplotsset{compat=1.18}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.arrows,fit,backgrounds}
@@ -92,20 +93,20 @@
 \definecolor{atlasrule}{gray}{0.74}
 \definecolor{atlasink}{gray}{0.42}
 \newlength{\atlasgraphwidth}
-\newlength{\atlasviewwidth}
+\newlength{\atlasprecursorwidth}
 \newlength{\atlasgraphheight}
-\newlength{\atlasviewheight}
+\newlength{\atlasprecursorheight}
 \newlength{\atlasrowheight}
 \newlength{\atlasrankwidth}
 \newlength{\atlassmilesskip}
 % Every column is pinned to a stated width, so the alignment cannot be widened past \textwidth by a
 % heading or an index label. These must sum with the three gutters and the divider in the column
-% specification: 5mm + 1.8mm + 0.545 + 2.8mm + 0.5pt + 2.8mm + 0.3648 = \textwidth.
+% specification: 5mm + 1.8mm + 0.4549 + 2.8mm + 0.5pt + 2.8mm + 0.4549 = \textwidth.
 \setlength{\atlasrankwidth}{5mm}
-\setlength{\atlasgraphwidth}{0.545\textwidth}
-\setlength{\atlasviewwidth}{0.3648\textwidth}
+\setlength{\atlasgraphwidth}{0.4549\textwidth}
+\setlength{\atlasprecursorwidth}{0.4549\textwidth}
 \setlength{\atlasgraphheight}{2.45cm}
-\setlength{\atlasviewheight}{3.20cm}
+\setlength{\atlasprecursorheight}{3.80cm}
 % Rows are struck to a common height that exceeds both panels: the surplus is the air between
 % structures, and holding it inside the row keeps the column divider unbroken and keeps the
 % multipage break in the same place for every row rather than following a wrapped SMILES string.
@@ -144,7 +145,8 @@ Across three independent seeds, verified exact level-one (exact-L1) yields were
 followed by post-hoc verification. FORGE also generated exact-L1 products with precursor identities absent from the
 corresponding training component catalogues across all three reactions. These results establish
 reaction-program conditioning as a means of generating complete lipid graphs with verified assembly
-and recovered precursors beyond the training inventory.
+and recovered precursors beyond the training inventory. An exploratory mouse experiment with three
+synthesized FORGE lipids recorded FLuc-associated bioluminescence at the 4-hour time point.
 \end{abstract}
 
 \section{Introduction}
@@ -194,7 +196,10 @@ achieved verified exact-L1 yields of \ForgeTableOneConditionedUgiYield\%,
 matched whole-molecule generation followed by post-hoc verification in every program. FORGE also
 produced verified exact assemblies with recovered precursor constitutions absent from the
 corresponding training catalogues. These experiments tested generation across three specified
-reaction programs; zero-shot generation under unseen assembly chemistry remains untested.
+reaction programs; zero-shot generation under unseen assembly chemistry remains untested. We also
+synthesized three lipids from this model and evaluated FLuc mRNA formulations in an exploratory
+mouse experiment. We report its imaging measurements descriptively, separately from the matched
+computational comparisons.
 
 The paper makes three contributions:
 \begin{itemize}
@@ -228,9 +233,10 @@ complete molecule.
 
 An IL is one constituent of an LNP formulation, commonly combined with helper lipids, cholesterol
 and PEGylated lipids \citep{xu2024agile,xue2024barcoding}. Molecular structure and formulated-particle performance
-are therefore different levels of description. This study evaluates generated lipid constitutions and
-their assembly chemistry. Delivery activity requires evidence beyond molecular structure and
-exact reaction replay.
+are therefore different levels of description. The computational evaluation concerns generated lipid constitutions and
+their assembly chemistry. A separate exploratory mouse experiment measures reporter-associated
+bioluminescence after administration of formulations containing three synthesized designs. Molecular
+structure and exact reaction replay alone do not establish delivery activity.
 
 \subsection{Reaction families and modular lipid assembly}
 \label{sec:reaction-background}
@@ -297,7 +303,8 @@ A reaction program specifies the assembly constraints,
     P=(c,d,\mathbf r,\mathbf k,M).
     \label{eq:reaction-program}
 \end{equation}
-Here $c$ identifies the ordered chemistry, $d$ is its depth, $\mathbf r$ assigns precursor roles to
+Here $c$ identifies a registered assembly chemistry with its admitted transformation sequences,
+$d$ is the requested depth, $\mathbf r$ assigns precursor roles to
 atom positions, and $\mathbf k$ marks reaction-core positions. The four morphology fields in $M$
 record each role's exterior atom count, junction budget, closure count and core-attachment count.
 These quantities constrain coarse architecture without specifying precursor identities. Precursor
@@ -306,20 +313,24 @@ core; a template-introduced atom belongs to the core without belonging to a prec
 Appendix~\ref{app:program-encoding} defines the morphology counts.
 
 \subsection{Exact assembly, novelty and route evidence}
-For a fixed program $P$, a precursor input $\mathbf C\in\mathfrak C_P$ is an ordered tuple of
-precursor constitutions with their registered roles and step assignments. Let
-$\mathcal F_P(\mathbf C)\subseteq\mathfrak G_{N,K_{\rm cl}}$ be its registered forward products
-within the declared support. Reverse search returns a finite candidate set $\mathcal D_P(G)$ of
-pairs $(\mathbf C,\tau)$, where $\tau$ records atom origins and transformations compatible with $P$.
+Exact assembly is checked under the registered chemistry $c$ in $P$. A precursor input
+$\mathbf C\in\mathfrak C_c$ is an ordered tuple whose entries specify a constitution $C_j$, role
+$r_j$ and transformation step. Let $\mathcal F_c(\mathbf C)\subseteq\mathfrak G_{N,K_{\rm cl}}$
+be its registered forward products within the declared support. Reverse search returns a finite
+candidate set $\mathcal D_c(G)$ of pairs $(\mathbf C,\tau)$, where $\tau$ records the recovered precursor assignments and
+reaction sequence admitted by $c$. Atom-origin annotations used for training are defined separately
+in Appendix~\ref{app:graph-encoding}.
 The verified set is
 \begin{equation}
-    \widehat{\mathcal E}_P(G)=
-    \left\{(\mathbf C,\tau)\in\mathcal D_P(G):G\in\mathcal F_P(\mathbf C)\right\}.
+    \widehat{\mathcal E}_c(G)=
+    \left\{(\mathbf C,\tau)\in\mathcal D_c(G):G\in\mathcal F_c(\mathbf C)\right\}.
     \label{eq:main-exact-traces}
 \end{equation}
 Product membership uses constitutional identity. A valid graph passes verified exact level-one
-assembly (L1) when $\widehat{\mathcal E}_P(G)\neq\varnothing$. This establishes existence of an
+assembly (L1) when $\widehat{\mathcal E}_c(G)\neq\varnothing$. This establishes existence of an
 exact assembly under the registered transform; bounded reverse search can miss other assemblies.
+The reported L1 check does not require the recovered trace to match every sampled depth, role-position
+or morphology field in $P$. Those conditioning fields and assembly existence are distinct constraints.
 Candidate coverage and replay precision therefore measure different properties
 (Appendix~\ref{app:verification}).
 
@@ -399,7 +410,7 @@ bond and topology states within each role. Appendix~\ref{app:program-encoding} s
 FORGE generates a categorical tree-plus-closure state. Given a graph $G$ and its selected exact
 atom-mapped annotation $\alpha$, the deterministic encoder assigns
 \begin{equation}
-    X_G:=\operatorname{Enc}_P(G,\alpha)
+    X_\star:=\operatorname{Enc}_P(G,\alpha)
     =\left(\mathbf a,\boldsymbol\pi,\mathbf b,
     \mathbf e^L,\mathbf e^R,\mathbf z\right),
 \end{equation}
@@ -410,8 +421,8 @@ $\mathfrak X_{N,K_{\rm cl}}$ enforces a connected tree and at most $K_{\rm cl}$ 
 edges. The structural decoder $\operatorname{Dec}$ maps this subset onto
 $\mathfrak G_{N,K_{\rm cl}}$ and maps malformed states to $\bot_{\rm dec}$
 (Theorem~\ref{thm:bounded-representation}). Thus every graph within the declared bounded support
-has a representation. This does not imply compatibility with every program or positive probability
-under a trained model.
+has a representation. The production sampler additionally restricts parent candidates and child counts. The representation
+result does not imply compatibility with every program or positive probability under a trained model.
 
 For a given $P$, let $\mathcal I(P)$ index the categorical coordinates, each with finite alphabet
 $\mathcal X_i(P)$. Pointer alphabets contain only positions permitted by the layout.
@@ -449,7 +460,7 @@ coordinates are statistically dependent.
 \subsection{Program-conditioned Transformer and training}
 \label{sec:model-training}
 
-FORGE applies this discrete flow to $X_G$ and conditions endpoint prediction on $P$. A chemistry
+FORGE applies this discrete flow to $X_\star$ and conditions endpoint prediction on $P$. A chemistry
 adapter converts the reaction program into masks over atom, pointer and bond coordinates. Program-fixed
 coordinates remain constant while the flow generates all remaining states. A graph Transformer
 predicts the clean atom, bond, pointer and closure states from $(X_t,t,P)$. Each layer uses
@@ -473,9 +484,9 @@ To isolate the statistical property of coordinate denoising, define the referenc
 \begin{equation}
  \mathcal L_{\rm ref}(\theta)
  =\mathbb E_{\substack{(G,\alpha,P)\sim\mu_{\rm bal},\ t\sim\mathcal U(0,1)\\
- X_t\sim q_{t\mid1}^P(\cdot\mid X_G)}}
+ X_t\sim q_{t\mid1}^P(\cdot\mid X_\star)}}
  \left[\sum_{i\in\mathcal V(P)}w_i(P)
- \bigl[-\log d_{\theta,i}(X_{G,i}\mid X_t,t,P)\bigr]\right],
+ \bigl[-\log d_{\theta,i}(X_{\star,i}\mid X_t,t,P)\bigr]\right],
  \qquad w_i(P)>0.
  \label{eq:primary-loss}
 \end{equation}
@@ -488,7 +499,8 @@ mass, let $q_1^P$ be the law of $\operatorname{Enc}_P(G,\alpha)$ under $\mu_{\rm
 and let $\mu_G^P$ be the corresponding graph law.
 \begin{theorem}[Ideal conditional generation]
 \label{thm:ideal-terminal-law}
-Fix such a program $P$, with finite coordinate alphabets and a full-support source on each variable alphabet. Assume every training endpoint belongs to $\Omega_P$, decodes to its source
+Fix such a program $P$, with registered chemistry $c$, finite coordinate alphabets and a
+full-support source on each variable alphabet. Assume every training endpoint belongs to $\Omega_P$, decodes to its source
 graph, and passes molecular validity and verified exact L1. Assume an unrestricted measurable
 coordinate predictor attains a population minimum of Equation~\ref{eq:primary-loss}. Starting from $q_0^P$, exactly simulate the local CTMC
 of Equation~\ref{eq:posterior-rate} on $0\leq t<1$. Then its marginal law converges to $q_1^P$ as
@@ -496,7 +508,7 @@ $t\uparrow1$, and
 \begin{equation}
  \operatorname{Dec}_{\#}q_1^P=\mu_G^P,\qquad
  \Pr_{G\sim\mu_G^P}\!\left[\mathrm{Valid}(G)=1,
- \widehat{\mathrm{L1}}(G,P)=1\right]=1.
+ \widehat{\mathrm{L1}}(G,c)=1\right]=1.
 \end{equation}
 Here $\operatorname{Dec}_{\#}$ denotes the distribution obtained by decoding.
 \end{theorem}
@@ -522,7 +534,8 @@ chemical consistency requires a separate check.
 After the final step, the model predicts clean coordinates again at $t=1$. A constrained terminal
 readout $H_P^\theta$ selects a state $Z_{\rm out}=H_P^\theta(Z_{L_{\rm samp}})$ or returns a typed
 failure. The production readout uses constrained argmax, including the qualified Ugi core-saturation
-rules. Structural decoding and molecular sanitization then produce $G$ or a failure.
+rules. Structural decoding produces $G$ or a failure; molecular sanitization determines whether the
+decoded graph passes the validity check.
 Appendix~\ref{app:sampling} specifies these operations and their distinction from ideal CTMC sampling.
 
 For each valid graph, Equation~\ref{eq:main-exact-traces} recovers and verifies the implied
@@ -721,35 +734,28 @@ or biological utility.
 \begin{figure}[htbp]
 \caption{\textbf{Exact Ugi products with recovered precursors absent from training.}
 Each row contains a deterministic seed-0 product with a unique verified exact-L1 decomposition and a
-verifier-recovered precursor absent from training. Columns show the generated graph, atom-mapped
-origins and recovered precursors; halos mark the Ugi core and colours encode atom origin. These are
+verifier-recovered precursor absent from training. Columns show the generated lipid and its recovered
+precursors. These are
 structural examples, not evidence of activity or experimental synthesis success.}
 \label{fig:forge-generated-samples}
 \centering
-% Each cell is its own hash-pinned PNG emitted by the sample producer alongside the composite,
-% the same way the atlas emits one file per row, so nothing here is cropped out of a larger image.
-\newlength{\samplerowheight}\setlength{\samplerowheight}{1.78cm}
-\newlength{\sampleproductwidth}\setlength{\sampleproductwidth}{3.53cm}
-\newlength{\samplesemanticwidth}\setlength{\samplesemanticwidth}{5.87cm}
-\newlength{\sampleprecursorwidth}\setlength{\sampleprecursorwidth}{3.80cm}
+% Vector drawings use the unchanged frozen sample identities; see the chemical_drawings receipt.
+\newlength{\samplerowheight}\setlength{\samplerowheight}{4.2cm}
+\newlength{\sampleproductwidth}\setlength{\sampleproductwidth}{0.465\textwidth}
+\newlength{\sampleprecursorwidth}\setlength{\sampleprecursorwidth}{0.49\textwidth}
 \newcommand{\iclrsamplerow}[1]{%
 \begin{minipage}[c][\samplerowheight][c]{\sampleproductwidth}\centering
-\includegraphics[width=\linewidth]{figures/forge_generated_samples_core_saturation_v1/forge_generated_sample_row_#1_product.png}
-\end{minipage}
-&
-\begin{minipage}[c][\samplerowheight][c]{\samplesemanticwidth}\centering
-\includegraphics[width=\linewidth]{figures/forge_generated_samples_core_saturation_v1/forge_generated_sample_row_#1_semantic.png}
+\includegraphics[width=\linewidth]{figures/chemical_drawings/sample_#1_product.pdf}
 \end{minipage}
 &
 \begin{minipage}[c][\samplerowheight][c]{\sampleprecursorwidth}\centering
-\includegraphics[width=\linewidth]{figures/forge_generated_samples_core_saturation_v1/forge_generated_sample_row_#1_precursors.png}
+\includegraphics[width=\linewidth]{figures/chemical_drawings/sample_#1_precursors.pdf}
 \end{minipage}}
 \setlength{\tabcolsep}{0pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{}}
+\begin{tabular}{@{}c@{\hspace{2.6mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.6mm}}c@{}}
 \toprule
 \atlashead{\sampleproductwidth}{Generated lipid}
-& \atlashead{\samplesemanticwidth}{Reaction-program coordinates}
 & \atlashead{\sampleprecursorwidth}{Exact L1 building blocks}\\
 \midrule
 \addlinespace[1.2mm]
@@ -776,6 +782,98 @@ frozen evidence policy. The syntheses of unresolved products remain unknown.
 
 
 
+\subsection{Exploratory in vivo reporter imaging of three synthesized designs}
+\label{sec:in-vivo}
+
+To examine reporter expression from experimentally prepared designs, we synthesized three lipids
+from the shared three-family model, designated FORGE-1, FORGE-2 and FORGE-3, and formulated them
+with firefly luciferase (FLuc) mRNA. At the 4-hour time point, the reported region-of-interest (ROI)
+signals were $5.997\times10^5$, $2.036\times10^6$ and $2.881\times10^6$, respectively, compared
+with $2.195\times10^5$ for the MC3 formulation (Figure~\ref{fig:in-vivo}). All three recorded FORGE
+values exceeded the recorded MC3 value. These observations support reporter expression in this
+exploratory experiment. The record contains one reported value per formulation; it does not support
+estimating between-animal variability or a statistical comparison. The synthesis and formulation
+information is given in Appendix~\ref{app:in-vivo-methods}.
+% Author confirmation pending: biological n, animal/site allocation, ROI units and background
+% correction, administration route, and candidate/checkpoint identifiers. The author confirmed
+% all three structures originated from the historical three-family model. Do not infer n=1
+% per formulation from the single reported value, or count the three designs as replicates.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.56\textwidth}
+\vspace{0pt}
+\small\textbf{a}\quad Synthesized FORGE lipids\\[7pt]
+\footnotesize FORGE-1\\[3pt]
+\includegraphics[width=\linewidth]{experimental/in_vivo/forge_1_structure_supplied.png}\\[9pt]
+\footnotesize FORGE-2\\[3pt]
+\includegraphics[width=\linewidth]{experimental/in_vivo/forge_2_structure_supplied.png}\\[9pt]
+\footnotesize FORGE-3\\[3pt]
+\includegraphics[width=\linewidth]{experimental/in_vivo/forge_3_structure_supplied.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.39\textwidth}
+\vspace{0pt}
+\small\textbf{b}\quad Mouse bioluminescence image\\[7pt]
+\includegraphics[width=\linewidth]{experimental/in_vivo/mouse_imaging_supplied.png}
+\end{minipage}
+
+\par\vspace{14pt}
+\begin{minipage}[t]{\textwidth}
+\small\textbf{c}\quad Reported 4-hour signals\par\vspace{7pt}
+\centering
+\pgfplotstableread[col sep=comma]{experimental/in_vivo/reported_roi_values.csv}\forgeinvivotable
+\pgfplotstablegetelem{3}{reported_roi_signal}\of{\forgeinvivotable}
+\begingroup
+\pgfkeys{/pgf/fpu=true}
+\pgfmathparse{\pgfplotsretval/1000000}
+\pgfmathfloattofixed{\pgfmathresult}
+\global\let\forgeMCThreeSignal\pgfmathresult
+\endgroup
+\begin{tikzpicture}
+\begin{axis}[
+ width=0.92\linewidth,height=5.5cm,
+ scale only axis=false,
+ xmin=-0.6,xmax=3.6,ymin=0,ymax=3.2,
+ xtick={0,1,2,3},ytick={0,1,2,3},
+ xticklabels={FORGE-1,FORGE-2,FORGE-3,MC3},
+ ylabel={Reported ROI signal ($\times10^6$)},
+ tick label style={font=\footnotesize},label style={font=\footnotesize},
+ axis lines*=left,axis line style={black!65},tick style={black!65},
+ ymajorgrids=true,grid style={black!10},
+ nodes near coords={\pgfmathprintnumber[fixed,precision=4]{\pgfplotspointmeta}},
+ every node near coord/.append style={font=\footnotesize,anchor=south},
+ legend style={at={(0.98,0.98)},anchor=north east,draw=none,fill=none,font=\footnotesize},
+ legend cell align=left,
+ clip=false]
+\addplot[ybar,bar width=26pt,bar shift=0pt,draw=none,fill=blue!50!gray,
+ restrict x to domain=-0.5:2.5,filter discard warning=false,forget plot]
+ table[col sep=comma,x expr=\coordindex,y expr=\thisrow{reported_roi_signal}/1000000]
+ {experimental/in_vivo/reported_roi_values.csv};
+\addplot[ybar,bar width=26pt,bar shift=0pt,draw=none,fill=black!60,
+ restrict x to domain=2.5:3.5,filter discard warning=false,forget plot]
+ table[col sep=comma,x expr=\coordindex,y expr=\thisrow{reported_roi_signal}/1000000]
+ {experimental/in_vivo/reported_roi_values.csv};
+\addplot[red!65!gray,dashed,line width=0.8pt,no marks,nodes near coords={}]
+ coordinates {(-0.6,\forgeMCThreeSignal) (3.6,\forgeMCThreeSignal)};
+\addlegendentry{MC3 level}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\caption{\textbf{Structures and exploratory in vivo FLuc imaging measurements.}
+\textbf{a}, Structures of FORGE-1, FORGE-2 and FORGE-3 from the shared three-family model.
+Structure drawings are reproduced as supplied; stereochemical identity was not established by the
+constitutional generator.
+\textbf{b}, Original mouse imaging record, with all four ROI boundaries and numerical labels
+preserved. ROI 1--4 display the values assigned to FORGE-1, FORGE-2, FORGE-3 and MC3 in panel c.
+\textbf{c}, Reported ROI values at the 4-hour time point, without aggregation or error estimates.
+The dashed red line marks the MC3 signal.
+Bars denote reported values, not a declared number of independent animals. The signal-unit and
+replicate information needed for a quantitative delivery comparison remains unresolved; the plotted
+values are descriptive.}
+\label{fig:in-vivo}
+\end{figure}
+\FloatBarrier
+
 \section{Discussion}
 
 FORGE conditions whole-molecule generation on known assembly chemistry with precursor identities
@@ -796,16 +894,24 @@ uniform gains in generalization, structural realism or every reaction program.
 Route assessment further bounded the demonstrated capability. Exact final assembly does not
 establish precursor availability, and the bounded evidence library left the final-model products
 without complete dossiers. Neither synthesis guidance nor the bounded potency diagnostic improved
-the matched outcome (Appendix~\ref{app:results}). The study is computational, covers three programs
-within bounded graph support, and includes no prospective synthesis, formulation or biological
-validation. Evidence was strongest for Ugi; extending qualified precursor evidence and testing
-additional supported programs would address the limits of route completion and chemical coverage.
+the matched outcome (Appendix~\ref{app:results}). These computational comparisons cover three
+programs within bounded graph support. Evidence was strongest for Ugi; extending qualified precursor
+evidence and testing additional supported programs would address the limits of route completion
+and chemical coverage.
+
+The exploratory mouse measurements extend the study to reporter expression from three synthesized
+designs. Their recorded signals exceeded the recorded MC3 signal, but the available measurements
+do not establish reproducibility across animals, a population-level advantage over MC3, tissue
+selectivity, tolerability or therapeutic efficacy. This experiment also does not retrospectively
+complete the frozen computational synthesis dossiers. Candidate-specific synthesis records and the
+L2/L3 evidence required by that assessor are distinct from a reporter-imaging measurement.
 
 \subsection*{AI use statement}
 Generative AI assistance was used to adapt the manuscript's LaTeX formatting, file organization
 and bibliography presentation to the ICLR template, and to reorganize and expand the main text
 using existing appendix material and cited literature. AI assistance was also used for the
-full-manuscript language revision, citation checks and consistency review.
+full-manuscript language revision, mathematical review, citation checks, consistency review and
+presentation of author-supplied experimental records.
 % Author review required before submission: disclose any additional AI use in research, code,
 % analysis, or writing, and describe the authors' review of AI-assisted work.
 
@@ -849,32 +955,15 @@ same-role bonds between exterior and core atoms. When the serialized tree restri
 forest of the exterior subgraph, $\gamma_r$ equals that subgraph's cycle rank. The junction budget
 is a tree-branching count; it does not count degree contributed by closure bonds. Consequently these
 fields depend on the selected annotation and serialization, not on the unannotated graph alone.
-The adapter checks the required morphology constraints separately from fixed-coordinate equality.
+Fixed-coordinate equality alone does not establish agreement with every morphology field.
 Positions without precursor origin use the designated absent morphology state. Integer morphology
 values are encoded with an offset of one, reserving zero for that absent state.
 
-FORGE first samples an admissible complete program $P$ from the training-fold program prior and then
-generates $G$ conditioned on it:
-\begin{equation}
-    p_\theta(G,P\mid c)
-    = p_{\mathrm{prog}}(P\mid c)\,p_\theta(G\mid P).
-\end{equation}
-The prior sets each region's exterior atom count, branching budget, closure count, and number of core
-attachments, but not its molecular structure.
-A chemistry-specific adapter defines the precursor roles, reaction core, reverse decomposition, and
-forward transform associated with $c$.
-For each graph position $i$, FORGE combines learned embeddings of the program identity, program
-depth, precursor role, and reaction-core position:
-\begin{equation}
-    h_i^P
-    = \operatorname{LN}\!\left(
-        e_c(c) + e_d(d) + e_r(r_i) + e_k(k_i)
-        + \sum_{u=1}^{4}e_{M,u}(M_{r_i,u})
-    \right).
-\end{equation}
-The morphology fields determine active positions and fixed/variable masks in the sampling layout.
-The resulting coordinates encode each position's precursor role, reaction-core status and role-local
-counts without specifying its molecular structure.
+The training-fold prior and program embeddings are defined in Section~\ref{sec:program-conditioning}.
+A chemistry-specific adapter determines the precursor roles, reaction core, reverse decomposition
+and forward transform associated with $c$. Its sampling layout determines active positions and
+fixed or variable coordinates; the embeddings condition neural prediction on the remaining
+program fields.
 
 \subsection{Graph serialization and source annotations}
 \label{app:graph-encoding}
@@ -883,7 +972,7 @@ A spanning-tree representation with at most three residual closure edges preserv
 194-atom support without an $O(N_{\max}^2)$ edge state. The discrete flow generates the atom, bond
 and topology states in this representation.
 Let $\alpha=(\mathbf C,\tau,\mathbf r,\mathbf k)$ contain the selected exact precursor tuple,
-atom-mapped reaction trace, precursor-role assignment and reaction-core annotation. The deterministic
+registered assembly trace, atom-wise precursor-role assignment and reaction-core annotation. The deterministic
 program-aware encoder
 \begin{equation}
     \operatorname{Enc}_P:
@@ -893,7 +982,7 @@ program-aware encoder
 \end{equation}
 constructs the categorical graph state
 \begin{equation}
-    X_G:=\operatorname{Enc}_P(G,\alpha)=
+    X_\star:=\operatorname{Enc}_P(G,\alpha)=
     \left(
         \mathbf{a},
         \boldsymbol{\pi},
@@ -939,8 +1028,8 @@ The production terminal readout additionally chooses that state from neural pred
 
 The chemistry adapter marks any atom, pointer, or bond states fixed by $P$.
 FORGE holds these states constant while corrupting the remaining states along the linear probability
-path and predicting their clean values from $(X_t,t,P)$. Let $\Omega_P$ be the face of the raw state
-space satisfying those fixed coordinates, and define the admissible program set
+path and predicting their clean values from $(X_t,t,P)$. Let $\Omega_P$ be the subset of the raw state
+space satisfying the allowed coordinate alphabets and fixed values, and define the admissible program set
 \begin{equation}
     \mathcal P_{\rm adm}
     =\left\{P:\mathfrak X_{N_{\max},K_{\rm cl}}\cap\Omega_P\neq\varnothing\right\}.
@@ -971,7 +1060,7 @@ all times required by the ideal reference objective in Equation~\ref{eq:primary-
 For chemistry $c$ and state family
 $q\in\mathscr J=\{\mathbf a,\boldsymbol\pi,\mathbf b,\mathbf e^L,\mathbf e^R,\mathbf z\}$,
 let $\mathcal S_{c,q}$ be the selected variable coordinates across that chemistry's minibatch.
-With coordinate loss $\ell_i=-\log d_{\theta,i}(X_{G,i}\mid X_t,t,P)$, the pooled reduction is
+With coordinate loss $\ell_i=-\log d_{\theta,i}(X_{\star,i}\mid X_t,t,P)$, the pooled reduction is
 \begin{equation}
  L_{c,q}^{\rm pool}=\frac{\sum_{i\in\mathcal S_{c,q}}\ell_i}{\max\{1,|\mathcal S_{c,q}|\}}.
 \end{equation}
@@ -1052,13 +1141,13 @@ ideal rate in Appendix~\ref{app:flow-proof}.
 
 For the sampled endpoint $a=A_{k,i}$, let
 $h_{k,i}=\Delta t\sum_{v\neq x_i}R_{t_k,i}^{*,\varepsilon}(x_i,v\mid a,P)$ and set
-$\alpha_{k,i}=\min\{1,0.999/h_{k,i}\}$ when $h_{k,i}>0$, with $\alpha_{k,i}=1$ otherwise.
+$\kappa_{k,i}=\min\{1,0.999/h_{k,i}\}$ when $h_{k,i}>0$, with $\kappa_{k,i}=1$ otherwise.
 The implemented coordinate kernel is
 \begin{equation}
  \widehat K_{k,i}(v\mid x,a)=
  \begin{cases}
- \alpha_{k,i}\Delta t\,R_{t_k,i}^{*,\varepsilon}(x_i,v\mid a,P),&v\neq x_i,\\
- 1-\alpha_{k,i}h_{k,i},&v=x_i.
+ \kappa_{k,i}\Delta t\,R_{t_k,i}^{*,\varepsilon}(x_i,v\mid a,P),&v\neq x_i,\\
+ 1-\kappa_{k,i}h_{k,i},&v=x_i.
  \end{cases}
  \label{eq:capped-kernel}
 \end{equation}
@@ -1087,7 +1176,8 @@ If $q_{\theta,\rm out}^P$ is the law after terminal readout, including failure, 
  p_\theta(G\mid P)=\sum_{z:\operatorname{Dec}(z)=G}q_{\theta,\rm out}^P(z).
  \label{eq:generated-law}
 \end{equation}
-This law retains failures and is not normalized only over accepted molecules.
+This law retains structural failures and chemically invalid graphs before the validity and L1
+filters; it is not conditioned on acceptance.
 The ideal theorem does not include the learned $t=1$ readout, which is unconstrained by a loss
 integrated over $t\in(0,1)$. We compared core-saturation and valence-only readouts under the same
 trained weights and verifier, then separately compared program-role and global source marginals
@@ -1096,29 +1186,30 @@ trained weights and verifier, then separately compared program-role and global s
 \subsection{Exact assembly verification}
 \label{app:verification}
 
-To ensure that each retained graph satisfies the specified reaction program, FORGE decomposes it
-into role-assigned precursors and applies the corresponding forward transform.
+For the chemistry $c$ specified by $P$, FORGE decomposes each valid graph into role-assigned
+precursors and applies the registered forward transform. Exact replay checks assembly existence
+under $c$; it does not test full agreement with the sampled conditioning layout.
 
 \begin{definition}[Exact assembly and recovered witnesses]
 \label{def:exact-assembly}
-For the registered forward operator $\mathcal F_P$ on precursor inputs $\mathfrak C_P$, define
+For the registered forward operator $\mathcal F_c$ on precursor inputs $\mathfrak C_c$, define
 \begin{equation}
- \mathcal E_P^\star(G)=\{\mathbf C\in\mathfrak C_P:G\in\mathcal F_P(\mathbf C)\},\qquad
- \mathrm{L1}^\star(G,P)=\mathbf1\{\mathcal E_P^\star(G)\neq\varnothing\}.
+ \mathcal E_c^\star(G)=\{\mathbf C\in\mathfrak C_c:G\in\mathcal F_c(\mathbf C)\},\qquad
+ \mathrm{L1}^\star(G,c)=\mathbf1\{\mathcal E_c^\star(G)\neq\varnothing\}.
 \end{equation}
-The bounded reverse procedure returns candidate pairs $(\mathbf C,\tau)$ in $\mathcal D_P(G)$.
+The bounded reverse procedure returns candidate pairs $(\mathbf C,\tau)$ in $\mathcal D_c(G)$.
 Equation~\ref{eq:main-exact-traces} retains the pairs passing exact forward replay, and
 \begin{equation}
- \widehat{\mathrm{L1}}(G,P)=\mathbf1\{\widehat{\mathcal E}_P(G)\neq\varnothing\}.
+ \widehat{\mathrm{L1}}(G,c)=\mathbf1\{\widehat{\mathcal E}_c(G)\neq\varnothing\}.
 \end{equation}
 Both predicates describe assembly existence; molecular validity is checked separately.
 \end{definition}
-The set $\mathcal E_P^\star(G)$ contains precursor inputs, whereas
-$\widehat{\mathcal E}_P(G)$ contains input--trace pairs. Their compatible comparison is
+The set $\mathcal E_c^\star(G)$ contains precursor inputs, whereas
+$\widehat{\mathcal E}_c(G)$ contains input--trace pairs. Their compatible comparison is
 \begin{equation}
- \{\mathbf C:\exists\tau,\ (\mathbf C,\tau)\in\widehat{\mathcal E}_P(G)\}
- \subseteq\mathcal E_P^\star(G),\qquad
- \widehat{\mathrm{L1}}(G,P)\leq\mathrm{L1}^\star(G,P).
+ \{\mathbf C:\exists\tau,\ (\mathbf C,\tau)\in\widehat{\mathcal E}_c(G)\}
+ \subseteq\mathcal E_c^\star(G),\qquad
+ \widehat{\mathrm{L1}}(G,c)\leq\mathrm{L1}^\star(G,c).
 \end{equation}
 The inclusion follows directly from exact replay. Its converse requires complete reverse search,
 which has not been established. Throughout the paper, verified exact-L1 yield counts valid
@@ -1136,18 +1227,18 @@ Candidate decomposition coverage is the fraction of valid graphs for which
 $\mathcal D_c(G)\neq\varnothing$. For a declared sequence of valid evaluation graphs $G_1,\ldots,G_m$, candidate replay precision is
 \begin{equation}
  \mathrm{ReplayPrecision}
- =\frac{\sum_{b=1}^m|\widehat{\mathcal E}_P(G_b)|}
- {\sum_{b=1}^m|\mathcal D_P(G_b)|},
+ =\frac{\sum_{b=1}^m|\widehat{\mathcal E}_c(G_b)|}
+ {\sum_{b=1}^m|\mathcal D_c(G_b)|},
 \end{equation}
 with N/E when the denominator is zero. Replay of tuples already in
-$\widehat{\mathcal E}_P(G)$ has $100\%$ success by construction. This invariant does not estimate
+$\widehat{\mathcal E}_c(G)$ has $100\%$ success by construction. This invariant does not estimate
 candidate replay precision. We separately define
 \begin{equation}
  \mathrm{CandidateAmbig}(G,c)=\mathbf 1\{|\mathcal D_c(G)|>1\},\qquad
- \mathrm{ExactAmbig}(G,P)=\mathbf 1\{|\widehat{\mathcal E}_P(G)|>1\}.
+ \mathrm{ExactAmbig}(G,c)=\mathbf 1\{|\widehat{\mathcal E}_c(G)|>1\}.
 \end{equation}
 A distinct exact-L1 product is a deduplicated generated constitution. An unambiguous exact
-decomposition satisfies $|\widehat{\mathcal E}_P(G)|=1$. We distinguish product uniqueness from
+decomposition satisfies $|\widehat{\mathcal E}_c(G)|=1$. We distinguish product uniqueness from
 decomposition uniqueness throughout.
 
 \subsection{Recursive route assessment and dossier admission}
@@ -1155,7 +1246,8 @@ decomposition uniqueness throughout.
 
 \subsubsection{Assessment interface}
 
-For a generated molecular graph $G$ and reaction program $P$, route assessment returns either a
+For a valid generated graph $G$ and reaction program $P$ with chemistry $c$, route assessment
+returns either a
 complete synthesis dossier or a typed abstention.
 Let $\mathfrak B$ denote the frozen route contract: depth and query budgets, registered transforms,
 evidence-admission rules and a dated supplier snapshot. Let $\mathfrak D$ be the space of candidate
@@ -1163,13 +1255,11 @@ dossiers, each containing a synthesis tree and its reaction and terminal evidenc
 $\mathfrak F_{\mathfrak B}$ be the disjoint finite set of typed failures.
 Generation and assessment are defined by
 \begin{equation}
-    G\sim p_\theta(\cdot\mid P),
-    \qquad
     Y=\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)
     \in\mathfrak D\cup\mathfrak F_{\mathfrak B}.
 \end{equation}
 $\mathsf{Assess}_{\mathfrak B}$ is invoked after the verifier returns one admitted root trace
-$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$. It verifies the final assembly, searches for
+$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$. It verifies the final assembly, searches for
 preparation routes to unavailable precursors and checks terminal supplier evidence. $P$ and the assessor act at different stages: $P$ guides generation, whereas the assessor
 constructs a dossier from the completed graph without modifying it.
 FORGE accepts $(G,T)$ only when $G$ passes molecular and exact-assembly verification and $T$ traces
@@ -1194,7 +1284,7 @@ Each accepted reaction adds its reactants as new molecule nodes, and FORGE appli
 termination-or-expansion rule recursively.
 The current assessor admits only an unambiguous verified exact-L1 root. Every dossier therefore
 records the sole selected root trace
-$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$; an ambiguous exact set produces a typed
+$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$; an ambiguous exact set produces a typed
 abstention. For each upstream reaction node $r$, let
 $\mathrm{Admitted}_{\mathfrak B}(r)=1$ when its reaction and substrate scope satisfy the frozen
 evidence policy, and let $\mathrm{Verify}_{\mathfrak B}(r)=1$ when
@@ -1211,7 +1301,7 @@ children exactly $\mathbf C_T$ under trace $\tau_T$.
 \begin{aligned}
     \mathrm{Complete}_{\mathfrak B}(G,T,P)
     ={}&\mathrm{Valid}(G)\,\mathrm{WellFormed}(G,T,P)\\
-    &\times\mathbf1\!\left[\widehat{\mathcal E}_P(G)=\{(\mathbf C_T,\tau_T)\}\right]\\
+    &\times\mathbf1\!\left[\widehat{\mathcal E}_c(G)=\{(\mathbf C_T,\tau_T)\}\right]\\
     &\times\prod_{r\in V_R^{\mathrm{up}}(T)}
     \mathrm{Admitted}_{\mathfrak B}(r)\mathrm{Verify}_{\mathfrak B}(r)
     \prod_{\ell\in L(T)}\mathrm{Available}_{\mathfrak B}(\ell).
@@ -1228,11 +1318,9 @@ The guarantee is computational and does not establish experimental synthesis suc
 
 \subsubsection{Recorded evidence and support tiers}
 
-For every accepted pair $(G,T)$, FORGE records a computational synthesis dossier containing all
-molecules and reactions in $T$, the evidence supporting each reaction, and the dated supplier record
-for every terminal material.
-We classify each generated lipid into one of four support tiers according to which elements of its
-assembly lie outside the fixed reference space:
+For each accepted pair $(G,T)$, the synthesis dossier contains every molecule and reaction in $T$,
+the evidence for each reaction and a dated supplier record for each terminal material.
+We classify assembly support relative to the fixed reference space into four tiers:
 \textbf{E0 (enumerated):} the generated lipid matches a product that was already constructed
 computationally from known components using a supported reaction.
 \textbf{E1 (known components):} the generated lipid was not included in the bounded E0 enumeration,
@@ -1242,49 +1330,54 @@ precursor is newly generated and requires a complete L2 route to available start
 \textbf{E3 (new assembly family):} the lipid requires a final assembly reaction outside the
 qualified reaction registry.
 
-\clearpage
-
 \subsection{End-to-end inference procedure}
 \label{app:inference}
 
-The inference procedure records every attempt and its outcome
-(Algorithm~\ref{alg:forge-inference}). Each iteration consumes one generation attempt, including
-those that fail molecular validation, exact replay or route completion.
-\begin{algorithm}[H]
-\caption{FORGE generation and fail-closed synthesis-program construction.}
+Algorithm~\ref{alg:forge-inference} records every generation attempt, including failures in
+molecular validation, exact replay or route completion.
+
+% Allow the long procedure to continue across pages without shrinking its text.
+\begingroup
+\refstepcounter{algorithm}
+\noindent\textbf{Algorithm~\thealgorithm.} FORGE generation and fail-closed synthesis-program construction.
 \label{alg:forge-inference}
+\par
 \begin{algorithmic}[1]
-\Require trained coordinate predictors, reaction program $P$, Euler-step count $L_{\rm samp}$,
-attempt budget $B$, recorded seed $s$, and frozen route contract $\mathfrak B$
+\Require trained coordinate predictors, chemistry $c$, program prior $p_{\rm prog}(\cdot\mid c)$,
+integers $L_{\rm samp}\geq1$ and $B\geq0$, recorded seed $s$, route contract $\mathfrak B$
 \Ensure attempt-indexed dossier sequence $\mathcal D_{\rm out}$, exact-L1 ledger $\mathcal L_{\rm out}$,
 and typed failure ledger $\mathcal H$
 \State initialize the random-number streams from $s$;
 $\mathcal D_{\rm out}\gets[\,]$; $\mathcal L_{\rm out}\gets[\,]$; $\mathcal H\gets[\,]$
 \For{$b=1,\ldots,B$}
+    \State sample and record $P\sim p_{\rm prog}(\cdot\mid c)$
     \State sample $Z_0\sim q_0^P$ and set $Z\gets\Pi_P(Z_0)$
     \For{$k=0,\ldots,L_{\rm samp}-1$}
         \State $t_k\gets k/L_{\rm samp}$; $\Delta t_k\gets1/L_{\rm samp}$
         \State $Z\gets\Pi_P\!\left(\Call{CappedCoordinateEuler}{Z,t_k,\Delta t_k,P}\right)$
     \EndFor
     \State $Z_{\rm out}\gets H_P^\theta(Z)$ \Comment{fresh prediction at $t=1$, constrained readout}
+    \If{$Z_{\rm out}$ is a terminal failure}
+        \State record $(b,\textsc{TerminalFailure},\text{readout reason})$ in $\mathcal H$; \textbf{continue}
+    \EndIf
     \State $G\gets\operatorname{Dec}(Z_{\rm out})$
-    \If{$G=\bot_{\rm dec}$, is valence-invalid, or fails molecular sanitization}
-        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{InvalidGraph})]$
+    \If{$G=\bot_{\rm dec}$ or $\mathrm{Valid}(G)=0$}
+        \State record $(b,\textsc{InvalidGraph},\text{decode or validation reason})$ in $\mathcal H$
         \State \textbf{continue}
     \EndIf
-    \State $\widehat{\mathcal{E}}_P(G)\gets
-    \{(\mathbf C,\tau)\in\mathcal D_P(G):\exists H\in\mathcal F_P(\mathbf C),\ H\cong G\}$
-    \If{$\widehat{\mathcal{E}}_P(G)=\varnothing$}
+    \State $\widehat{\mathcal{E}}_c(G)\gets
+    \{(\mathbf C,\tau)\in\mathcal D_c(G):\exists H\in\mathcal F_c(\mathbf C),\ H\cong G\}$
+    \If{$\widehat{\mathcal{E}}_c(G)=\varnothing$}
         \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{L1Failure})]$
         \State \textbf{continue}
     \EndIf
     \State $\mathcal L_{\rm out}\gets\mathcal L_{\rm out}\mathbin{\|}
-    [(b,G,\widehat{\mathcal E}_P(G))]$
-    \If{$|\widehat{\mathcal E}_P(G)|\neq1$}
+    [(b,G,\widehat{\mathcal E}_c(G))]$
+    \If{$|\widehat{\mathcal E}_c(G)|\neq1$}
         \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{AmbiguousL1})]$
         \State \textbf{continue}
     \EndIf
-    \State select the sole $(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_P(G)$
+    \State select the sole $(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$
     \State $Y\gets\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)$
     \If{$Y$ is a dossier $T$ and $\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$}
         \State $\mathcal D_{\rm out}\gets\mathcal D_{\rm out}\mathbin{\|}
@@ -1297,7 +1390,7 @@ $\mathcal D_{\rm out}\gets[\,]$; $\mathcal L_{\rm out}\gets[\,]$; $\mathcal H\ge
 \EndFor
 \State \Return $\mathcal D_{\rm out},\mathcal L_{\rm out},\mathcal H$
 \end{algorithmic}
-\end{algorithm}
+\endgroup
 
 \clearpage
 
@@ -1380,11 +1473,12 @@ $C_{s,a}^{\rm L1}=\sum_{b=1}^B Y_{s,a,b}^{\rm L1}$ and
 \end{equation}
 Validity and connected yield replace $Y^{\rm L1}$ with their attempt-level indicators. Verified
 decomposition coverage is the number of valid graphs with
-$\widehat{\mathcal E}_P(G)\neq\varnothing$ divided by valid graphs; the implementation does not
+$\widehat{\mathcal E}_c(G)\neq\varnothing$ divided by valid graphs; the implementation does not
 report candidate-search coverage before replay. Exact ambiguity is the fraction of valid graphs with
-$|\widehat{\mathcal E}_P(G)|>1$. Replay of members of $\widehat{\mathcal E}_P(G)$ is an invariant,
-while candidate replay precision is defined in Appendix~\ref{app:forge} and is N/E if no candidate
-tuple is returned.
+$|\widehat{\mathcal E}_c(G)|>1$. Replay of members of $\widehat{\mathcal E}_c(G)$ is an invariant,
+whereas candidate replay precision is defined in Appendix~\ref{app:verification}. The evaluated
+artifacts do not retain the pre-replay candidate sets, so candidate-search coverage and candidate
+replay precision were not estimated.
 Explicitly, with attempt outcomes $G_{s,a,b}$ and the convention that a failed decode makes every
 graph predicate zero,
 \begin{align}
@@ -1399,38 +1493,44 @@ graph predicate zero,
          {\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1\}},\\
  \mathrm{ExactAmbiguity}
  &=\frac{\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1,
-                              |\widehat{\mathcal E}_P(G_b)|>1\}}
+                              |\widehat{\mathcal E}_c(G_b)|>1\}}
          {\sum_b\mathbf 1\{\mathrm{Valid}(G_b)=1\}}.
 \end{align}
 Each ratio is N/E when its denominator is zero.
 
-Distinct-product yield is the number of distinct canonical product constitutions satisfying verified
-exact L1 divided by $B$. The reported verifier-recovered component-novel yield additionally requires
-$|\widehat{\mathcal E}_P(G)|=1$ and at least one returned role-assigned precursor constitution absent
-from the fixed training catalogue. It is not $\mathrm{StrongEscape}$. Held-component recovery counts
-verified exact-L1 attempts whose returned tuple contains a designated held constitution and divides
-by $B$.
-Writing $\operatorname{can}(G)$ for constitutional canonicalization, $\mathcal C_{\rm train}$ for
-the role-indexed training catalogue and $\mathcal H_{\rm held}$ for the designated held
-constitutions, these yields are
+Distinct-product yield counts canonical constitutions once. The reported verifier-recovered
+component-novel yield also counts distinct products and requires an unambiguous recovered input
+with an out-of-training-catalogue precursor. It does not measure strong catalogue escape
+(Definition~\ref{def:catalogue-escape}). Held-component recovery counts qualifying attempts,
+including duplicate products, whose unambiguous input contains a designated held constitution.
+
+For one chemistry $c$, suppress seed and arm indices. Let $\mathcal A_{\rm L1}$ contain the attempt indices
+with valid graphs and verified exact L1, and let
+$\mathcal A_{\rm one}=\{b\in\mathcal A_{\rm L1}:|\widehat{\mathcal E}_c(G_b)|=1\}$.
+For $b\in\mathcal A_{\rm one}$, write the sole recovered input as $\mathbf C_b$, with components $C_{b,j}$
+and roles $r_{b,j}$. Let $\mathcal C_{{\rm train},r}$ and $\mathcal H_{{\rm held},r}$ be the
+training and designated held constitution sets for role $r$, respectively. Define
 \begin{align}
- \mathrm{DistinctL1Yield}
- &=B^{-1}\left|\{\operatorname{can}(G_b):\widehat{\mathrm{L1}}(G_b,P)=1\}\right|,\\
- \mathrm{ComponentNovelYield}
- &=B^{-1}\sum_b\mathbf 1\!\Bigl[
- \widehat{\mathrm{L1}}(G_b,P)=1,\ |\widehat{\mathcal E}_P(G_b)|=1,\notag\\[-1mm]
- &\hspace{34mm}\exists (r,C)\in\mathbf C_b:
- C\notin\mathcal C_{{\rm train},r}\Bigr],\\
- \mathrm{HeldComponentYield}
- &=B^{-1}\sum_b\mathbf 1\!\Bigl[
- \widehat{\mathrm{L1}}(G_b,P)=1,
- \mathbf C_b\cap\mathcal H_{\rm held}\neq\varnothing\Bigr].
+ \mathcal A_{\rm novel}&=\{b\in\mathcal A_{\rm one}:\exists j,\ C_{b,j}\notin\mathcal C_{{\rm train},r_{b,j}}\},\\
+ \mathcal A_{\rm held}&=\{b\in\mathcal A_{\rm one}:\exists j,\ C_{b,j}\in\mathcal H_{{\rm held},r_{b,j}}\}.
 \end{align}
-For component frequencies $w_i$, the effective count is
+With $\operatorname{can}$ denoting constitutional canonicalization, the yields for $B>0$ are
+\begin{align}
+ \mathrm{DistinctL1Yield}&=\frac{|\{\operatorname{can}(G_b):b\in\mathcal A_{\rm L1}\}|}{B},\\
+ \mathrm{ComponentNovelYield}&=\frac{|\{\operatorname{can}(G_b):b\in\mathcal A_{\rm novel}\}|}{B},\\
+ \mathrm{HeldComponentYield}&=\frac{|\mathcal A_{\rm held}|}{B}.
+\end{align}
+Reported values per 1,000 attempts multiply these ratios by 1,000. Ambiguous decompositions do not
+contribute to the component-novel or held-component numerators.
+
+For a fixed role, let $n_i$ be the occurrence count of component identity $i$ among unambiguous
+exact-L1 inputs. When $n_{\rm tot}=\sum_i n_i>0$, set $w_i=n_i/n_{\rm tot}$ and compute
 \begin{equation}
- N_{\rm eff}=\exp\!\left(-\sum_i w_i\log w_i\right).
+ N_{\rm eff}=\exp\!\left(-\sum_{i:n_i>0}w_i\log w_i\right).
 \end{equation}
-Component duplicates are retained when estimating $w_i$. Molecular diversity is the mean pairwise
+This is the exponential of Shannon entropy with natural logarithms. Duplicate products and repeated
+component occurrences contribute to the counts; $N_{\rm eff}$ is N/E when $n_{\rm tot}=0$.
+Molecular diversity is the mean pairwise
 ECFP4 Tanimoto distance among distinct valid canonical product constitutions, so molecular duplicates
 are removed for that metric. For distinct products $g_1,\ldots,g_m$,
 \begin{equation}
@@ -1444,8 +1544,9 @@ Identity is constitutional and stereo-free. Graph and product identity use conne
 SMILES with atom maps and stereochemical tags removed; formal charges and bond orders are retained;
 salts or disconnected products are invalid; and no tautomer normalization is applied. Precursor
 identity uses the same canonicalization. Precursor-tuple equality is role- and program-step-aware,
-with repeated inputs compared in their registered step order. Atom mappings and the trace $\tau$ are
-evidence for semantic alignment, not part of constitutional identity.
+with repeated inputs compared in their registered step order. Training atom mappings and recovered assembly traces serve different roles. The former establish
+semantic alignment; the latter record precursor assignments and reaction steps. Neither is part
+of constitutional identity.
 
 For a paired contrast, $D_s=\widehat p_{s,\rm FORGE}-\widehat p_{s,\rm control}$. We report
 $(D_1,D_2,D_3)$, $\overline D$, and $[\min_sD_s,\max_sD_s]$. These summarize the three observed
@@ -1940,6 +2041,29 @@ Unique components & \ForgeRouteComponents{} & \ForgeRouteCompleteComponents{} & 
 \end{table}
 
 \FloatBarrier
+\subsection{Exploratory lipid synthesis, formulation and in vivo imaging}
+\label{app:in-vivo-methods}
+
+Three lipids generated by the shared three-family model were synthesized by a one-pot,
+three-component Ugi reaction combining the corresponding amine, aldehyde and isocyanide. This
+reactant combination follows the ionizable-lipid synthesis strategy described by
+\citet{chen2023muscle}. Earlier isocyanide-mediated ionizable-lipid synthesis was reported by
+\citet{miao2019heterocyclic}.
+FLuc mRNA LNPs contained the FORGE ionizable lipid, DSPC, cholesterol and a PEG-lipid, with a
+reported amine-to-phosphate ratio of $5.67:1$. Mice received $1\,\mathrm{mg}$ FLuc mRNA per kg
+body weight. D-luciferin was administered at 4 hours, followed by bioluminescence imaging.
+The four reported ROI values are reproduced in Figure~\ref{fig:in-vivo}.
+% Pending protocol completion: purification, analytical identity/purity, exact molar composition,
+% PEG-lipid identity, mixing and buffer exchange, mouse strain/sex/age, administration route,
+% luciferin dose/route/delay, instrument/settings, ROI units/background correction, biological n,
+% treatment/site assignments, and institution/protocol approval. The supplied draft states IV
+% administration, but the anatomical/site assignment needs author confirmation before inclusion.
+% Candidate IDs/SMILES and generating checkpoint IDs are also needed for the experimental record.
+
+The quantitative display reproduces the supplied values without inferring replicate counts,
+calculating group means or estimating uncertainty. No significance test was applied. The three
+FORGE formulations are distinct designs and are not pooled as biological replicates.
+
 \subsection{Guidance diagnostics}
 \label{app:guidance-results}
 
@@ -2082,13 +2206,13 @@ encodable under every $P$.
 \label{app:catalogue-reachability}
 
 Definition~\ref{def:exact-assembly} distinguishes the complete input preimage
-$\mathcal E_P^\star(G)$ from recovered input--trace pairs $\widehat{\mathcal E}_P(G)$.
-Fix $P$ and role-specific catalogues $\mathcal C=(\mathcal C_r)_r$. Let
-$\mathfrak C_P(\mathcal C)\subseteq\mathfrak C_P$ contain the admissible precursor inputs whose
+$\mathcal E_c^\star(G)$ from recovered input--trace pairs $\widehat{\mathcal E}_c(G)$.
+Fix a registered chemistry $c$ and role-specific catalogues $\mathcal C=(\mathcal C_r)_r$. Let
+$\mathfrak C_c(\mathcal C)\subseteq\mathfrak C_c$ contain the admissible precursor inputs whose
 every role-assigned component belongs to its catalogue. The reachable product set is
 \begin{equation}
- \mathcal G_{\rm cat}(P,\mathcal C)
- =\bigcup_{\mathbf C\in\mathfrak C_P(\mathcal C)}\mathcal F_P(\mathbf C).
+ \mathcal G_{\rm cat}(c,\mathcal C)
+ =\bigcup_{\mathbf C\in\mathfrak C_c(\mathcal C)}\mathcal F_c(\mathbf C).
  \label{eq:catalogue-reachable}
 \end{equation}
 This definition includes all registered outcomes of the admissible inputs, not only products found
@@ -2096,18 +2220,18 @@ by a bounded search.
 
 \begin{proposition}[Finite-component reachability]
 \label{prop:catalogue-bound}
-If $\mathfrak C_P(\mathcal C)$ and each $\mathcal F_P(\mathbf C)$ are finite, then
+If $\mathfrak C_c(\mathcal C)$ and each $\mathcal F_c(\mathbf C)$ are finite, then
 \begin{equation}
- |\mathcal G_{\rm cat}(P,\mathcal C)|
- \leq\sum_{\mathbf C\in\mathfrak C_P(\mathcal C)}|\mathcal F_P(\mathbf C)|
- \leq m_{\max,P}(\mathcal C)\,|\mathfrak C_P(\mathcal C)|,
+ |\mathcal G_{\rm cat}(c,\mathcal C)|
+ \leq\sum_{\mathbf C\in\mathfrak C_c(\mathcal C)}|\mathcal F_c(\mathbf C)|
+ \leq m_{\max,c}(\mathcal C)\,|\mathfrak C_c(\mathcal C)|,
 \end{equation}
-where $m_{\max,P}(\mathcal C)$ is the largest outcome count, or zero for an empty input set.
+where $m_{\max,c}(\mathcal C)$ is the largest outcome count, or zero for an empty input set.
 For every $G\in\mathfrak G_{N,K_{\rm cl}}$,
 \begin{equation}
- G\in\mathcal G_{\rm cat}(P,\mathcal C)
+ G\in\mathcal G_{\rm cat}(c,\mathcal C)
  \quad\Longleftrightarrow\quad
- \mathcal E_P^\star(G)\cap\mathfrak C_P(\mathcal C)\neq\varnothing.
+ \mathcal E_c^\star(G)\cap\mathfrak C_c(\mathcal C)\neq\varnothing.
 \end{equation}
 \end{proposition}
 \begin{proof}
@@ -2119,17 +2243,17 @@ is exactly the stated intersection condition.
 
 \begin{definition}[Strong catalogue escape]
 \label{def:catalogue-escape}
-An exactly assemblable graph strongly escapes $\mathcal C$ under $P$ when every exact input uses
+An exactly assemblable graph strongly escapes $\mathcal C$ under $c$ when every exact input uses
 at least one out-of-catalogue component. Its indicator is
 \begin{equation}
- \operatorname{Escape}^\star(G;P,\mathcal C)
- =\mathbf1\!\left[\mathcal E_P^\star(G)\neq\varnothing,\quad
- \mathcal E_P^\star(G)\cap\mathfrak C_P(\mathcal C)=\varnothing\right].
+ \operatorname{Escape}^\star(G;c,\mathcal C)
+ =\mathbf1\!\left[\mathcal E_c^\star(G)\neq\varnothing,\quad
+ \mathcal E_c^\star(G)\cap\mathfrak C_c(\mathcal C)=\varnothing\right].
 \end{equation}
 \end{definition}
-A catalogue assembler whose outputs lie in $\mathcal G_{\rm cat}(P,\mathcal C)$ therefore has
+A catalogue assembler whose outputs lie in $\mathcal G_{\rm cat}(c,\mathcal C)$ therefore has
 zero strong-escape yield. For a verified exact-L1 product, strong escape is equivalent to
-$G\notin\mathcal G_{\rm cat}(P,\mathcal C)$. This can be checked against a complete canonical
+$G\notin\mathcal G_{\rm cat}(c,\mathcal C)$. This can be checked against a complete canonical
 product set or by exhaustive exclusion of all catalogue-only decompositions. A bounded reverse
 search cannot establish that exclusion from one novel witness.
 
@@ -2190,7 +2314,8 @@ more coordinates have zero instantaneous transition rate.
 \label{prop:fixed-invariance}
 Fix $P\in\mathcal P_{\rm adm}$ and an endpoint in $\Omega_P$. Corruption by
 Equation~\ref{eq:conditional-path} stays in $\Omega_P$. The ideal CTMC started from $q_0^P$ stays
-there for $t<1$. Numerical sampling in Equation~\ref{eq:numerical-sampling}, started from $q_0^P$
+there for $t<1$ whenever its coordinate predictions are probability distributions on the allowed
+alphabets. Numerical sampling in Equation~\ref{eq:numerical-sampling}, started from $q_0^P$
 and using the allowed coordinate alphabets, satisfies
 $\Pr[Z_k\in\Omega_P\text{ for all }0\leq k\leq L_{\rm samp}]=1$.
 \end{proposition}
@@ -2293,16 +2418,16 @@ The endpoint assumptions give $q_1^P(\mathcal B_P)=0$; applying the same event b
 $\mathcal B_P$ proves the second.
 \end{proof}
 The corollary can be applied to the law \emph{after} numerical sampling and terminal readout.
-It does not estimate of that law's distance from $q_1^P$. In particular, error before the
+It does not estimate that law's distance from $q_1^P$. In particular, error before the
 learned terminal readout cannot be substituted without controlling the readout's effect.
 
 \subsection{Accepted counts under a fixed sampling budget}
 
-Fix a trained model, requested chemistry and its program-sampling policy. An attempt outcome $Y$
+Fix a trained model, requested chemistry $c$ and its program-sampling policy. An attempt outcome $Y$
 contains its sampled program $P$ and decoded graph or typed failure. Let $Q$ be the common law of
 these outcomes and define
 \begin{equation}
- A(Y)=\mathbf1\{G\text{ is valid and }\widehat{\mathrm{L1}}(G,P)=1\},\qquad
+ A(Y)=\mathbf1\{G\text{ is valid and }\widehat{\mathrm{L1}}(G,c)=1\},\qquad
  z_Q=\mathbb E_Q[A(Y)],
 \end{equation}
 with $A(Y)=0$ for failures. This definition permits a fresh morphology-specific $P$ on every
@@ -2310,7 +2435,7 @@ attempt. A comparison with a single fixed $P$ is the corresponding special case.
 
 \begin{proposition}[Exact law of matched-budget post-hoc filtering]
 \label{prop:posthoc-budget}
-For $B\geq0$ independent attempts with common law $Q$, the accepted-attempt count
+For an integer $B\geq0$ and independent attempts with common law $Q$, the accepted-attempt count
 $N_B=\sum_{b=1}^BA(Y_b)$ is binomial with parameters $(B,z_Q)$. For all $z_Q\in[0,1]$,
 \begin{equation}
  \mathbb E[N_B]=Bz_Q,\qquad
@@ -2383,7 +2508,7 @@ Their evidentiary scope is structural and computational.
 
 \subsection{Assembly schemes}
 \label{app:chemistry}
-The three registered assembly patterns use colour to mark precursor origin and explicit hydrogens
+The three registered assembly patterns use skeletal notation and explicit hydrogens
 to mark substitution constraints at the reaction core (Figure~\ref{fig:reaction-schemes}).
 Precursor-origin boundaries can differ from the functional headgroup, linker and tail regions
 introduced in Section~\ref{sec:lipid-background}.
@@ -2393,11 +2518,8 @@ introduced in Section~\ref{sec:lipid-background}.
 \begin{figure}[tbp]
 \centering
 \input{figures/forge_reaction_schemes/schemes_body.tex}
-\caption{\textbf{The three assembly chemistries.} Skeletal notation, with each bond carrying the
-colour of the component that contributes it: amine head in purple, aldehyde-derived atoms in teal,
-the isocyanide or acrylate tail in orange. Grey marks an atom the assembly template introduces and
-no precursor supplies, following the same convention as the core inset of
-Figure~\ref{fig:forge-overview}. Hydrogens are drawn only on the atoms whose substitution decides
+\caption{\textbf{The three assembly chemistries.} Monochrome skeletal drawings show the
+reactants and products of each registered assembly. Hydrogens are drawn only on the atoms whose substitution decides
 whether a product can be decomposed back into precursors: the head N--H, and the
 $\alpha$-carbon C--H that the Ugi reaction takes from the aldehyde. $R^i$ stand for the
 source-linked components of the frozen library, which are larger than the fragments drawn here.
@@ -2437,26 +2559,22 @@ in the hash-pinned atlas receipt.
 \setlength{\LTpost}{0pt}
 \begin{longtable}{@{}c@{\hspace{1.8mm}}c@{\hspace{2.8mm}}!{\color{atlasrule}\vrule width 0.5pt}@{\hspace{2.8mm}}c@{}}
 \caption{\textbf{FORGE generated-structure atlas.}
-The 12 rows form one multipage table, indexed by display order. Each constitutional graph is
-followed by its canonical SMILES. The decorated three-dimensional column shows one deterministic
-post-hoc RDKit ETKDGv3 structure optimized with up to 400 MMFF94s iterations.
-Purple denotes the amine-derived head, teal the aldehyde-derived body and tail, orange the
-isocyanide-derived tail and gray the assembly-introduced oxygen; these assignments are recovered
-through exact atom-mapped forward replay. FORGE does not generate three-dimensional coordinates, and
-these views are not predicted bioactive conformations. Exact L1 replay and descriptor-manifold
+The 12 rows form one multipage table, indexed by display order. Each generated constitutional
+graph and its canonical SMILES are paired with the amine, aldehyde and isocyanide building blocks
+recovered through exact atom-mapped forward replay. Exact L1 replay and descriptor-manifold
 membership are structural diagnostics, not evidence of activity, route closure or synthesis success.
 These are deterministic display examples, not experimental candidates.}
 \label{tab:forge-generated-atlas}\\[2mm]
 \toprule
-& \atlashead{\atlasgraphwidth}{Constitutional graph and canonical SMILES}
-& \atlashead{\atlasviewwidth}{Decorated 3D view}\\
+& \atlashead{\atlasgraphwidth}{Generated lipid and canonical SMILES}
+& \atlashead{\atlasprecursorwidth}{Exact L1 building blocks}\\
 \midrule
 \addlinespace[3mm]
 \endfirsthead
 \multicolumn{3}{@{}l}{\small\itshape Table~\ref{tab:forge-generated-atlas}, continued}\\[2mm]
 \toprule
-& \atlashead{\atlasgraphwidth}{Constitutional graph and canonical SMILES}
-& \atlashead{\atlasviewwidth}{Decorated 3D view}\\
+& \atlashead{\atlasgraphwidth}{Generated lipid and canonical SMILES}
+& \atlashead{\atlasprecursorwidth}{Exact L1 building blocks}\\
 \midrule
 \addlinespace[3mm]
 \endhead

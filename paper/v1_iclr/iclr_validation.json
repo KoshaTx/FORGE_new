@@ -1,32 +1,36 @@
 {
-  "schema_version": 1,
-  "validated_at": "2026-09-24T21:12:06.519731+00:00",
-  "scope": "Manuscript formatting, reorganization, build integrity and preservation of supplied historical scientific inputs; no experimental reruns.",
+  "schema_version": 2,
+  "validated_at": "2026-09-24T23:40:52.541749+00:00",
+  "scope": "Mathematical and editorial revision with author-supplied exploratory imaging; no training or production evaluation rerun.",
   "artifacts": {
     "FORGE_ICLR2027_paper.tex": {
-      "sha256": "5554e16f530ca66303c699d5cad044a9daf13f4b7c2b3fc8f6abbd89a07260cb"
+      "sha256": "04c625f0118f1a0d2ae7a1b3791fb45abc4e296d95f31d230efac064fd495348"
     },
     "FORGE_ICLR2027_paper.pdf": {
-      "sha256": "278ceeabbd97dd99922d9465b1c0363cea7351d394760ed3d875d35060ecb299"
+      "sha256": "42ee5b9fc340a191159db756031573b1102ea553ccc940f568b7c3bbcc6f8b3e"
     },
     "FORGE_ICLR2027_Overleaf.zip": {
-      "sha256": "892cdbc672827a97c4506823b5528655722a53207b970fc0afd8524aa50b9f16"
+      "sha256": "d8588edec5d2ecb30134d6c36273c19bfc9e2732290e1391ae7faeb407dd9d30"
     },
     "iclr_provenance.json": {
-      "sha256": "18b2fa75b739f073fb8a779ddba9b229ea8d2a7542e5e7e8605e366a8c6234f3"
+      "sha256": "b5d72b3590fd2e751f18d21fa7c31ad4a19ef74187f1cb40c9062ef5b701e4aa"
+    },
+    "mathematical_review.json": {
+      "sha256": "3b4977bd508caab98e0ae8f1c6ca6605aeea603edb06a4d0db4ccc7effd3f965"
     }
   },
   "build": {
-    "canonical": "passed",
-    "standalone_overleaf_archive": "passed",
+    "canonical": "passed; source and local inputs match the isolated standalone build",
+    "standalone_overleaf_archive": "all archived compilation inputs match the validated standalone build",
     "export_pdf_text_identical": true,
     "latex_warnings": [],
     "unresolved_references_or_citations": false,
-    "overfull_boxes": false
+    "overfull_boxes": false,
+    "underfull_box_messages": 9
   },
   "layout": {
-    "total_pages": 40,
-    "main_text_last_page": 10,
+    "total_pages": 39,
+    "main_text_last_page": 12,
     "appendix_sections": [
       "Method and implementation details",
       "Evaluation protocol and additional results",
@@ -54,20 +58,98 @@
       "Figure": [
         1,
         2,
-        3
+        3,
+        4
       ]
     },
-    "visual_review": "All 40 pages rendered and visually inspected after the chemical-preliminaries expansion and Section 2.4 simplification; no clipping, overlap or unintended blank pages observed.",
+    "visual_review": "After the prior full manuscript review, pages 5, 6, 10, 11, 36, 37, 38 and 39 were rendered and inspected for the current figure revisions. Molecular identity and formal charges were preserved; headings, precursor panels, captions, axes, legend and reference line were checked. No clipping or overlaps remained.",
     "appendix_guide_removed": true,
-    "page_budget_editing": "Deferred at user request; main text currently extends to ten pages."
+    "page_budget_editing": "Deferred at user request; no page-limit compliance claim."
   },
   "preservation": {
-    "verified_input_snapshots": 55,
+    "original_input_snapshots": 55,
+    "unchanged_input_snapshots": 46,
+    "locally_revised_inputs": [
+      "figures/forge_algorithm_schematic/schematic_body.tex",
+      "generated/common_ugi_benchmark_completed_rows.tex",
+      "figures/forge_reaction_schemes/schemes_body.tex",
+      "generated/lipid_realism_rows.tex",
+      "generated/route_evidence_completed_rows.tex",
+      "generated/common_ugi_seed_rows.tex",
+      "generated/common_ugi_decomposition_rows.tex",
+      "figures/forge_generated_sample_atlas_core_saturation_v1/atlas_rows.tex",
+      "references.bib"
+    ],
     "official_style_files_unchanged": 7,
-    "empirical_numeric_macro_occurrences_retained": true,
-    "scientific_assets_and_reference_labels_retained": true,
+    "historical_empirical_numeric_macro_set_retained": true,
+    "original_reference_labels_retained": true,
+    "experimental_evidence_hashes_match": true,
     "two_export_directories_identical": true,
-    "archive_file_count": 61
+    "archive_file_count": 131
   },
-  "pending_author_information": "AI-use disclosure documents this formatting/editorial work; additional research, code, analysis or writing use and author review must be supplied by the authors."
+  "mathematical_review": "Informal proof review and scoped historical implementation correspondence; see mathematical_review.json and REVISION_NOTES.md.",
+  "pending_author_information": [
+    "biological replicate counts and independent experimental units",
+    "animal/site/treatment allocation",
+    "ROI anatomical definitions, units, background subtraction and imaging settings",
+    "exact candidate IDs or canonical structures and checkpoint IDs",
+    "lipid purification, identity and purity records",
+    "full formulation ratio, PEG-lipid and preparation method",
+    "mouse strain, sex, age, ethics protocol",
+    "luciferin dose, route and imaging delay",
+    "Broader AI-use disclosure and author review."
+  ],
+  "table_method_label_revision": {
+    "files": 5,
+    "replacements": 7,
+    "final_label": "FORGE",
+    "numeric_values_unchanged": true,
+    "pdf_text_changed_only_by_requested_labels": true,
+    "visually_checked_pages": [
+      9,
+      27,
+      29
+    ]
+  },
+  "in_vivo_figure_presentation": {
+    "changed_pages": [
+      11
+    ],
+    "chart": "vertical bar graph",
+    "baseline": 0,
+    "values_unchanged": true,
+    "display_scale": 1000000,
+    "displayed_values": [
+      0.5997,
+      2.036,
+      2.881,
+      0.2195
+    ],
+    "original_images_unchanged": true,
+    "export_build_inputs_match_validated_standalone": true,
+    "colors": {
+      "FORGE": "blue!50!gray",
+      "MC3": "black!60"
+    },
+    "axis_range": [
+      0,
+      3.2
+    ],
+    "height_cm": 5.5,
+    "reference_line": {
+      "signal": 219500,
+      "legend": "MC3 level",
+      "style": "dashed red"
+    }
+  },
+  "chemical_drawings": {
+    "rendering_record": "figures/chemical_drawings/rendering_record.json",
+    "sha256": "270ad783e900cf276b02e2ac971ca296f3cb70d4bb3c1257fb33df7dce792463",
+    "vector_panel_count": 28,
+    "atlas_product_smiles_checked": 12,
+    "atlas_precursor_records_checked": 36,
+    "molecular_identities_preserved": true,
+    "original_images_preserved": true,
+    "atlas_second_column": "Exact L1 building blocks"
+  }
 }

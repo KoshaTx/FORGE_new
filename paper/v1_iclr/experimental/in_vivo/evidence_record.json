@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "received_date": "2026-09-24",
+  "classification": "author-supplied experimental record",
+  "assets": {
+    "mouse_imaging_supplied.png": {
+      "sha256": "4a18e4bb9b6e560c82bee48eb269eabe6dd4b81d9e033f356173b6cc1fe914ed",
+      "source": "User-supplied attachment, 2026-09-24; preserved without image processing."
+    },
+    "roi_chart_supplied.png": {
+      "sha256": "a2e67f6cc294c71e878a805691ce09576a4a72f57a42463041a2598c0f6880e5",
+      "source": "User-supplied attachment, 2026-09-24; preserved without image processing."
+    },
+    "forge_1_structure_supplied.png": {
+      "sha256": "9a6789ff32f2be9e4a79027f5fc975a559ee3b39f8d71eecc561d4a47b02ad9f",
+      "source": "User-supplied attachment, 2026-09-24; preserved without image processing."
+    },
+    "forge_2_structure_supplied.png": {
+      "sha256": "4c6d2dae9f1b6193c6606b8c0c321239079a2ce628e53be80f7d03913942b721",
+      "source": "User-supplied attachment, 2026-09-24; preserved without image processing."
+    },
+    "forge_3_structure_supplied.png": {
+      "sha256": "cab3fa1ca94c6b1073d7e66ae3128dad3f93c1dd3012cf9366f5669859d752a8",
+      "source": "User-supplied attachment, 2026-09-24; preserved without image processing."
+    },
+    "reported_roi_values.csv": {
+      "sha256": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+      "source": "Transcribed from the supplied chart; ROI labels matched by identical displayed values, pending explicit anatomical assignment."
+    }
+  },
+  "confirmed_by_author": {
+    "historical_three_family_model": true,
+    "structure_mapping": {
+      "FORGE-1": "forge_1_structure_supplied.png",
+      "FORGE-2": "forge_2_structure_supplied.png",
+      "FORGE-3": "forge_3_structure_supplied.png"
+    }
+  },
+  "reported_in_author_protocol": {
+    "reaction": "amine-aldehyde-isocyanide Ugi 3CR",
+    "cargo": "FLuc mRNA",
+    "lipid_components": [
+      "FORGE lipid",
+      "DSPC",
+      "cholesterol",
+      "unspecified PEG-lipid"
+    ],
+    "n_to_p_ratio": 5.67,
+    "mrna_dose_mg_per_kg": 1,
+    "administration_route": "intravenous; explicit confirmation requested because site assignments are unspecified",
+    "time_hours": 4,
+    "luciferin": "administered at 4 h; route, dose and imaging delay unspecified"
+  },
+  "unresolved": [
+    "biological replicate counts and independent experimental units",
+    "animal/site/treatment allocation",
+    "ROI anatomical definitions, units, background subtraction and imaging settings",
+    "exact candidate IDs or canonical structures and checkpoint IDs",
+    "lipid purification, identity and purity records",
+    "full formulation ratio, PEG-lipid and preparation method",
+    "mouse strain, sex, age, ethics protocol",
+    "luciferin dose, route and imaging delay"
+  ],
+  "analysis_scope": "Four reported ROI values only. No means, error bars, significance tests, organ targeting, safety or therapeutic efficacy claims."
+}

@@ -1,0 +1,334 @@
+{
+  "scope": "Presentation only; saved molecular identities and display order retained.",
+  "inputs": {
+    "selected_samples.json": "5845654b489bc2566b099b3bc6b9e127479b7d714ee10d932f336db69d86b5bb",
+    "atlas_samples.json": "0c88485fe69ceb7d5dc55cbb2c544f371d3aeff9d3d8e827bad90d9985a1e2ae"
+  },
+  "renderer_sha256": "0763686df66343ac3dd1b4902055fb7cd67f29cf89be403b6fe7e38d1725f336",
+  "rdkit_version": "2026.03.5",
+  "svg_converter": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.3.1\n  fontconfig 2.18.3",
+  "style": {
+    "bonds": "#727272",
+    "atom_labels": "#303030",
+    "layout": "deterministic RDKit 2D coordinates",
+    "vector_outputs": true
+  },
+  "identities": [
+    {
+      "sample": 1,
+      "role": "amine_head",
+      "smiles": "CCCCC(C)OC(=O)CCCN"
+    },
+    {
+      "sample": 1,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]C(CCN)CCCC"
+    },
+    {
+      "sample": 1,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "C#CCCCCCCCCC(=O)OCOCCCC=O"
+    },
+    {
+      "sample": 2,
+      "role": "amine_head",
+      "smiles": "CNCCC=O"
+    },
+    {
+      "sample": 2,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCCCCC1CO1"
+    },
+    {
+      "sample": 2,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCC(C)(C)C=O"
+    },
+    {
+      "atlas_rank": 1,
+      "smiles": "C#CCCCCCCCCC(=O)OCOCCCC(NCCCC(=O)OC(C)CCCC)C(=O)NC(CCN)CCCC"
+    },
+    {
+      "atlas_rank": 1,
+      "role": "amine_head",
+      "smiles": "CCCCC(C)OC(=O)CCCN"
+    },
+    {
+      "atlas_rank": 1,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]C(CCN)CCCC"
+    },
+    {
+      "atlas_rank": 1,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "C#CCCCCCCCCC(=O)OCOCCCC=O"
+    },
+    {
+      "atlas_rank": 2,
+      "smiles": "CCCCCCC(C)(C)C(C(=O)NCCCCCC1CO1)N(C)CCC=O"
+    },
+    {
+      "atlas_rank": 2,
+      "role": "amine_head",
+      "smiles": "CNCCC=O"
+    },
+    {
+      "atlas_rank": 2,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCCCCC1CO1"
+    },
+    {
+      "atlas_rank": 2,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCC(C)(C)C=O"
+    },
+    {
+      "atlas_rank": 3,
+      "smiles": "CCC(C)CC(C)CC(NCCCC(=O)OC(C)(C)C)C(=O)NCCN1CCCOC1"
+    },
+    {
+      "atlas_rank": 3,
+      "role": "amine_head",
+      "smiles": "CC(C)(C)OC(=O)CCCN"
+    },
+    {
+      "atlas_rank": 3,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCN1CCCOC1"
+    },
+    {
+      "atlas_rank": 3,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCC(C)CC(C)CC=O"
+    },
+    {
+      "atlas_rank": 4,
+      "smiles": "CCCCCCCCCCOCCCCCC(C(=O)NC1CCC1CCCC)N(C)CCC(=O)OCC"
+    },
+    {
+      "atlas_rank": 4,
+      "role": "amine_head",
+      "smiles": "CCOC(=O)CCNC"
+    },
+    {
+      "atlas_rank": 4,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]C1CCC1CCCC"
+    },
+    {
+      "atlas_rank": 4,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCCCCCOCCCCCC=O"
+    },
+    {
+      "atlas_rank": 5,
+      "smiles": "CCCCNC(OC(C)CCCCCCCC(=O)CCCC)C(=O)NCCCC(C)C(C)C"
+    },
+    {
+      "atlas_rank": 5,
+      "role": "amine_head",
+      "smiles": "CCCCN"
+    },
+    {
+      "atlas_rank": 5,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCCC(C)C(C)C"
+    },
+    {
+      "atlas_rank": 5,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCC(=O)CCCCCCCC(C)OC=O"
+    },
+    {
+      "atlas_rank": 6,
+      "smiles": "CCCCCCCCCCNC(CCCC(C)CCC)C(=O)NCCCC1(C)CCCC(CCOCOCCCC)CC1"
+    },
+    {
+      "atlas_rank": 6,
+      "role": "amine_head",
+      "smiles": "CCCCCCCCCCN"
+    },
+    {
+      "atlas_rank": 6,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCCC1(C)CCCC(CCOCOCCCC)CC1"
+    },
+    {
+      "atlas_rank": 6,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCC(C)CCCC=O"
+    },
+    {
+      "atlas_rank": 7,
+      "smiles": "CCCCCCCCCC(=O)OCCCC(NC(C)C(C)C)C(=O)NCC1NN1"
+    },
+    {
+      "atlas_rank": 7,
+      "role": "amine_head",
+      "smiles": "CC(C)C(C)N"
+    },
+    {
+      "atlas_rank": 7,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CC1NN1"
+    },
+    {
+      "atlas_rank": 7,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCCCCC(=O)OCCCC=O"
+    },
+    {
+      "atlas_rank": 8,
+      "smiles": "C#CCCCCCCCCCCCCCCCCCCC(C(=O)NCCCCCCC)N(C)CCCC(C)CCCCCCCCCCCCCC"
+    },
+    {
+      "atlas_rank": 8,
+      "role": "amine_head",
+      "smiles": "CCCCCCCCCCCCCCC(C)CCCNC"
+    },
+    {
+      "atlas_rank": 8,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCCCCCC"
+    },
+    {
+      "atlas_rank": 8,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "C#CCCCCCCCCCCCCCCCCCCC=O"
+    },
+    {
+      "atlas_rank": 9,
+      "smiles": "CCCCCCCCOCCCC(NCCC(C)(C)C)C(=O)NC1COC1"
+    },
+    {
+      "atlas_rank": 9,
+      "role": "amine_head",
+      "smiles": "CC(C)(C)CCN"
+    },
+    {
+      "atlas_rank": 9,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]C1COC1"
+    },
+    {
+      "atlas_rank": 9,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCCCOCCCC=O"
+    },
+    {
+      "atlas_rank": 10,
+      "smiles": "C=CCCCCCCCC(NCCCC(=O)OC(C)(C)C)C(=O)NCNNCC1CCO1"
+    },
+    {
+      "atlas_rank": 10,
+      "role": "amine_head",
+      "smiles": "CC(C)(C)OC(=O)CCCN"
+    },
+    {
+      "atlas_rank": 10,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CNNCC1CCO1"
+    },
+    {
+      "atlas_rank": 10,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "C=CCCCCCCCC=O"
+    },
+    {
+      "atlas_rank": 11,
+      "smiles": "CCCCCCCCC(NCCCC(=O)OCC)C(=O)NC(C)CCN1CCC1"
+    },
+    {
+      "atlas_rank": 11,
+      "role": "amine_head",
+      "smiles": "CCOC(=O)CCCN"
+    },
+    {
+      "atlas_rank": 11,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]C(C)CCN1CCC1"
+    },
+    {
+      "atlas_rank": 11,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCCCCCCCC=O"
+    },
+    {
+      "atlas_rank": 12,
+      "smiles": "CCCC(C)(C)OC(=O)CCCNC(CCCCC(C)CC)C(=O)NCCOCOCCN"
+    },
+    {
+      "atlas_rank": 12,
+      "role": "amine_head",
+      "smiles": "CCCC(C)(C)OC(=O)CCCN"
+    },
+    {
+      "atlas_rank": 12,
+      "role": "isocyanide_tail",
+      "smiles": "[C-]#[N+]CCOCOCCN"
+    },
+    {
+      "atlas_rank": 12,
+      "role": "oxoester_aldehyde_body_tail",
+      "smiles": "CCC(C)CCCCC=O"
+    }
+  ],
+  "outputs": {
+    "sample_01_product.svg": "198fee3c025650fe69e3c92c3ee5e506828980fe3ab489c7f05097e5d6c530f1",
+    "sample_01_product.pdf": "39f5938afd6fd369beecbfc66f7bc45184059e5bc40f45283ba9182925415654",
+    "sample_01_precursors.svg": "1e0900c164a3c13fc07ed5c81f46adeba3db59a4821e92282c6c7a9f8dd90308",
+    "sample_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "sample_02_product.svg": "99896222a9aa5592cc3449a3b8e005974ff915190dfa80ea291f75667dcbbb7e",
+    "sample_02_product.pdf": "4667c73a048cb444cf832d124954546822969d071276449ab01e4d0df217cd94",
+    "sample_02_precursors.svg": "2d8c88704f09dd2359172eb18a334199cc7c5fe16bb5f934aa9fbbbefcfc69da",
+    "sample_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "atlas_01_2d.svg": "3e74f77644d6cdc70a7255d9648b966519378e73e18b61b16c92fd8feb96445e",
+    "atlas_01_2d.pdf": "dcd5cc1e6f4b1a077fd4b7dc1b2b9565546f4039f09d2d46913471037d73d515",
+    "atlas_01_precursors.svg": "1e0900c164a3c13fc07ed5c81f46adeba3db59a4821e92282c6c7a9f8dd90308",
+    "atlas_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "atlas_02_2d.svg": "48367da20467da5a9542e3f32c07035aeaea561b0037714c85d979f9a1bb19af",
+    "atlas_02_2d.pdf": "2b3d2e62d448fc25b03d3e3d67b5537d6eb3c6b341bf9ac4fab5249da22fed4c",
+    "atlas_02_precursors.svg": "2d8c88704f09dd2359172eb18a334199cc7c5fe16bb5f934aa9fbbbefcfc69da",
+    "atlas_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "atlas_03_2d.svg": "9a5307a03fbbc98faa8132162b6259401b135bba1c29df0f5f5f6ee125e90144",
+    "atlas_03_2d.pdf": "fcee1f97c029b7249f8fcfffd860145a216b7e4ddf9e39e5250fea9de1e42d38",
+    "atlas_03_precursors.svg": "afbf33a8ac7bdcb21ad3273ed898a7d6491add02864013b8169ad40996fc5129",
+    "atlas_03_precursors.pdf": "1cc8e333b0aa3f8bab7a4f6158cf07fffa500177c7b75bf1192a2e78d40ff965",
+    "atlas_04_2d.svg": "655a249e509af4c73dc6036643a6eef8aad87f07ca63b76ec7c1841d21713d9f",
+    "atlas_04_2d.pdf": "9a16c5c113acd42a321ea16a42e9ac474011f6ab6e4c44073fc11a73a63cb141",
+    "atlas_04_precursors.svg": "daee64e0b4b3a12e66e31e128571fbbbebecb807fa1b4b2e6a6b8b0ce4931548",
+    "atlas_04_precursors.pdf": "60238d023eb2c430a3222b39078849fafa37bf7508d95f3a8f6be65f69bd21a3",
+    "atlas_05_2d.svg": "397776c84ae16620220ab2a5bb7e667ca3576783d4a84e48f9b0ab11e8753b1c",
+    "atlas_05_2d.pdf": "4c7cb85bfc0a9030180b50e2bff760211496fde8497b152352eb176c68467660",
+    "atlas_05_precursors.svg": "70e96ac62524d6d8e1ea5e0efc6b8b81fea39140633b7e4ea38033f32dd8ba90",
+    "atlas_05_precursors.pdf": "fdc77a04c0bea96605c1646e608cee4220ceba9f8262c835ea91153a70e4d56e",
+    "atlas_06_2d.svg": "375971e86ce41aa56ad7ed00e074733674cf72b2b204085167273c21fcf0b1c1",
+    "atlas_06_2d.pdf": "deb89e984388b20ec6eca06dbef735dae5ea615ed29eec67c6c4ef68a60cae00",
+    "atlas_06_precursors.svg": "5167c2f99860c00001770f38b60dce9954c2de8d12bf56d93aa1d47d372a369a",
+    "atlas_06_precursors.pdf": "41ef7b080077f8d318f08198ba24c5d7a448b0718e3819247489fb0ec152bdf7",
+    "atlas_07_2d.svg": "a8079de418bb871181bb8afa5264cf7cf012383aff88b8a159eaeb58bbd4eef9",
+    "atlas_07_2d.pdf": "2b62e5c318877efb1821ea56bf4941033e0a744c19416b3899085d614416a9ec",
+    "atlas_07_precursors.svg": "75f86ff08d5b0a296d8dfbc78aed019ff85a0dccc250335aa20067bbe4fb2b97",
+    "atlas_07_precursors.pdf": "06f9e5daa90babf2393d7600fbd9a5978656173218149c6377dab51893ed4190",
+    "atlas_08_2d.svg": "9a6fad672ef32899bd34a5730d3f39a3b074373c5493396755fac496e914036f",
+    "atlas_08_2d.pdf": "d98314ce1888c5281843765cf16ebc8c8af7ba8bc72f7b2850c426d495e70142",
+    "atlas_08_precursors.svg": "6d92ece30d5676c23a408f378fbb8d51e961e935c114a37359cecc257ba1e080",
+    "atlas_08_precursors.pdf": "5d430066682f0aa9ef99f310cec317251fc242cbae7db30f06fd94792b8034fa",
+    "atlas_09_2d.svg": "38941aff145a8a35fc514ab0e7f80b6d07c9592a242441e0ebbd58ce83a37175",
+    "atlas_09_2d.pdf": "aa98cfb1d9e73ca71ea29623b21499d511ac4aa774ed31d74e45d6b507ca8af3",
+    "atlas_09_precursors.svg": "c041ab8527bc3b8602c93e4ab4be7e593d076131a658e6de5d9fa638939ea184",
+    "atlas_09_precursors.pdf": "eee30fed7e4c25dc1fad8993d14e8f7a28f557b673102f5c62c10570f1fe4942",
+    "atlas_10_2d.svg": "9444b433a00f7e85ec08228df8b989d0545c03f4072e19f95902fe48f3701f8f",
+    "atlas_10_2d.pdf": "91a5cc96eee9ec725b60fb7d5479f95deb1eff4d34aa14aeb3f20001e7360b83",
+    "atlas_10_precursors.svg": "af1ddf76fb64e469f5c244c119fffeba895c13459d83b17cf3316433d393da06",
+    "atlas_10_precursors.pdf": "851c8a38db03bf49dad5c27add1bec3d903d6f4f741afa5ca8a170ea62f1b4a1",
+    "atlas_11_2d.svg": "f086d0f21e2583ab3879fcc7c70d3d1497a6bba8d31e48f16aad2528bfc231a0",
+    "atlas_11_2d.pdf": "d2a0f3b91121437956f88fd9bdca98b3fc4ebd97501de514288b0d5a361d6492",
+    "atlas_11_precursors.svg": "7b20ec1579115c27c420df1074824bd48a351d11fb50a1657af4b88e1fffe09e",
+    "atlas_11_precursors.pdf": "ebd157f403267e6758b82e002ba881f74169364a3161694a25d46e157e2118bf",
+    "atlas_12_2d.svg": "cdcc0589c0423aebce3909c32f7d1e3aca61295f82bffb57d08f6fb2eaa09a93",
+    "atlas_12_2d.pdf": "48bf4f9b653c09b177be3d4d6ec9952ec159b9b7473b8be0b19140cb0f1220cb",
+    "atlas_12_precursors.svg": "d1be8307ca4783d1714419360af37a08f120ef3226116d5ed8199b3bdc1e5254",
+    "atlas_12_precursors.pdf": "99ec3cebc75fd42b7c595a9a34f36db87aac195a5a59d8463c5dd2fb0791e42e"
+  }
+}
