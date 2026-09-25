@@ -18,6 +18,22 @@
 
 The essential population theorem is in the main method section. Supporting definitions and proofs follow their dependencies in Appendix C. The appendix no longer repeats the main conditioning equations. The inference algorithm and overview figure use the same state, verifier and output notation. Existing reference labels and the set of historical empirical result macros were retained.
 
+## Nine-page main-paper revision
+
+The compiled main paper now occupies pages 1 through 9. The disclosure statements and references
+begin on page 10. The revision shortened repeated contributions, background, implementation
+descriptions and result recaps. It retained the chemical preliminaries, four-stage overview,
+central formulation and theorem, matched comparisons, negative results, route-evidence limits,
+and exploratory mouse experiment with its full figure.
+
+The reaction-family comparison table moved to Appendix D.1, the program-embedding equation and
+definitions to Appendix A.1, and the generated-product/exact-precursor figure to Appendix D.2.
+The main sampling-budget discussion now refers to the full existing result in Appendix C.
+All formal statements, proofs and algorithm steps are unchanged. Existing reference labels,
+citation keys, empirical macro names and numerical inputs were retained. Official styles,
+font sizes, margins and figure sizes were not reduced. The abstract names the Ugi reactants
+without the AGILE label, as requested.
+
 ## Historical implementation correspondence
 
 `mathematical_review.json` records the checked run artifacts and source hashes. All three final evaluation results and their training-result, design and checkpoint pins matched the recorded hashes. The complete seed-0 evaluation source fingerprint matched commit `ac9ef87be4c8e5c14c477bc194a333344e621d3e`.
@@ -34,8 +50,9 @@ Before submission, the experimental record still needs biological replicate coun
 
 ## Figure presentation
 
-Figure 1 is centered across the text width. Figure 2 contains the generated lipid and recovered
-precursor columns; the reaction-coordinate column is omitted. Figure 3 uses blue FORGE bars, a
+Figure 1 is centered across the text width. The generated-example figure in Appendix D.2 contains
+the generated lipid and recovered precursor columns; the reaction-coordinate column is omitted.
+The main experimental figure (Figure 2) uses blue FORGE bars, a
 gray MC3 bar and a dashed red MC3 reference line with a legend. All four ROI values are unchanged.
 The generated two-dimensional examples and atlas use monochrome vector drawings rendered from
 their saved structures. The assembly schemes use the same thin gray bonds and dark atom labels.
@@ -53,4 +70,7 @@ source limitations and the bulk artifacts absent from the standalone manuscript 
 
 ## Build validation
 
-The final build and export checks are recorded in `iclr_validation.json`. Mathematical corrections change definitions and guarantee scope, not the stored historical computational measurements. Page-budget editing remains deferred at the author's request.
+The final build and export checks are recorded in `iclr_validation.json`. Mathematical corrections
+change definitions and guarantee scope, not the stored historical computational measurements.
+The latest nine-page main paper was compiled and visually inspected. The complete document,
+including disclosures, references and appendices, has 40 pages.

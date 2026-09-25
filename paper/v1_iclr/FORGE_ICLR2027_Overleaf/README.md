@@ -17,7 +17,11 @@ lipid structures and the four reported ROI signals. This experimental extension
 remains a working draft pending the protocol, replication and units information
 listed in `experimental/in_vivo/evidence_record.json`. No new experiments were run.
 
-Page-budget editing is deferred. The AI-use statement records author-declared assistance.
+The compiled main paper occupies nine pages; disclosures and references begin on page 10.
+The reaction-family table, program-embedding details and generated-product examples are in
+the appendix. Core mathematical results, comparison tables and the full mouse figure remain
+in the main paper. Official fonts, margins and figure sizes are unchanged.
+The AI-use statement records author-declared assistance.
 The ethics statement records approval by Children's Hospital of Philadelphia; the protocol
 number is omitted at the author's request. Appendix A.8 describes historical source provenance
 and access limitations of the standalone manuscript archive.

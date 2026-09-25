@@ -313,15 +313,15 @@
       "local_revision": "Verified bibliography additions and metadata corrections."
     }
   ],
-  "ai_use_statement_status": "known_formatting_and_editorial_use_documented; broader_author_review_pending",
+  "ai_use_statement_status": "author_declared_research_software_analysis_and_writing_assistance_documented",
   "editorial_revision": {
     "date": "2026-09-24",
     "scope": "ICLR conversion, main-text expansion, mathematical and language revision, and incorporation of author-supplied exploratory in vivo measurements. Historical computational results retained; no new experiment executed.",
-    "main_text_trimming": "deferred at user request",
+    "main_text_trimming": "completed at user request; nine compiled main pages without changing official styles, fonts or margins",
     "pre_expansion_manuscript_sha256": "d6b8e73a226bb0b45b702cd453c39cca8ab4f3b592fb983700d156b4d256180e",
     "canonical_manuscript": {
       "path": "FORGE_ICLR2027_paper.tex",
-      "sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958"
+      "sha256": "92b3a6ffb42fb5843864f11870af51521959f263f51498d91771ec025b73f8e7"
     },
     "promoted_material": [
       {
@@ -388,7 +388,7 @@
         "Main-method PCGrad description specifies per-family task gradients, consistent with the existing detailed definition.",
         "Terminal core-saturation constraints are stated in sampling details using the existing decoder-ablation caption."
       ],
-      "content_preservation": "All empirical numeric macro occurrences, scientific assets, citations and existing reference labels retained; no cuts for page length.",
+      "content_preservation": "At that revision, empirical macro occurrences, scientific assets, citations and reference labels were retained without page-length cuts. The later page_budget_revision records the current compression.",
       "navigation_guide": "removed at user request"
     },
     "chemical_preliminaries_revision": {
@@ -440,11 +440,11 @@
         }
       ],
       "new_experimental_results": false,
-      "page_budget_editing": "deferred at user request"
+      "page_budget_editing": "Deferred during that revision; subsequently completed in page_budget_revision."
     },
     "mathematical_review": {
       "local": "mathematical_review.json",
-      "sha256": "2849cb62a7c65982d6a41c38eef467324848b2dfcd685d014c66a0275b5e1994",
+      "sha256": "66c3d1e598b5080889fa99c2fa208d38cf057a9fd596872d64927c62183f653c",
       "corrections": "REVISION_NOTES.md"
     },
     "experimental_extension": {
@@ -507,6 +507,55 @@
       "approving_institution": "Children's Hospital of Philadelphia",
       "protocol_number": "omitted at author request",
       "reproducibility": "FORGE terminology; new app:repro subsection reports seeds, historical provenance and standalone archive-access limitations."
+    },
+    "page_budget_revision": {
+      "date": "2026-09-24",
+      "prior_manuscript_sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958",
+      "target_main_pages": 9,
+      "compiled_main_pages": 9,
+      "total_pages": 40,
+      "statements_start_page": 10,
+      "venue_guidelines": "https://iclr.cc/Conferences/2027/AuthorGuidelines",
+      "venue_guidelines_verified": "2026-09-24",
+      "prose_revision": "Removed repeated contributions and numerical recaps; condensed background, implementation summaries and discussion while preserving controls, mixed findings and claim limits.",
+      "appendix_moves": [
+        {
+          "item": "reaction-family comparison table",
+          "label": "tab:reaction-family-background",
+          "destination": "D.1"
+        },
+        {
+          "item": "program-embedding equation and symbol definitions",
+          "destination": "A.1"
+        },
+        {
+          "item": "generated-product and exact-precursor figure",
+          "label": "fig:forge-generated-samples",
+          "destination": "D.2"
+        },
+        {
+          "item": "main sampling-budget recap",
+          "destination": "replaced by reference to the existing complete result in C.4"
+        }
+      ],
+      "retained_in_main": [
+        "chemical preliminaries",
+        "four-stage overview",
+        "core formulation and ideal-generation theorem",
+        "matched comparison tables",
+        "negative findings and route-completion limits",
+        "complete mouse, structures and ROI-bar figure"
+      ],
+      "preserved": [
+        "all formal statements, proofs and algorithm steps",
+        "all existing reference labels and citation keys",
+        "set of empirical macro names and all numerical input files",
+        "figure and table blocks including sizes",
+        "official style, fonts and margins"
+      ],
+      "abstract_revision": "Removed AGILE-type; retained amine-aldehyde-isocyanide Ugi 3-CR description.",
+      "new_experiments": false,
+      "formal_content_changes": false
     }
   },
   "experimental_inputs": [

@@ -1,22 +1,22 @@
 {
   "schema_version": 2,
-  "validated_at": "2026-09-24T23:56:43.481551+00:00",
-  "scope": "Mathematical and editorial revision with author-supplied exploratory imaging; no training or production evaluation rerun.",
+  "validated_at": "2026-09-25T00:08:45.840388+00:00",
+  "scope": "Nine-page editorial revision with preserved mathematical and empirical content; requested abstract wording change. No training or production evaluation rerun.",
   "artifacts": {
     "FORGE_ICLR2027_paper.tex": {
-      "sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958"
+      "sha256": "92b3a6ffb42fb5843864f11870af51521959f263f51498d91771ec025b73f8e7"
     },
     "FORGE_ICLR2027_paper.pdf": {
-      "sha256": "fdd44cf19820e59a07e202119107d224b268d5b4aaf55fdb55d790f986d95759"
+      "sha256": "1c693944ddd62d442e80d07b6bb0794fc08be248a40e599e47118fa03bde5ed9"
     },
     "FORGE_ICLR2027_Overleaf.zip": {
-      "sha256": "8bf562ac0a4de83cbfe041b8a85d4bce86e36ad1eacf5c65873d088c512d09b0"
+      "sha256": "3e28006d8eceec6353de6b871e61b85b2dcefc31ae5478160d06dfcde80f41d3"
     },
     "iclr_provenance.json": {
-      "sha256": "22221e71abf2194a33458dc40c0721059427e706190a3ca739a8dd930861ea78"
+      "sha256": "07fcc6042b67a5a1f6496bcdec967e2e36f6c1b8e5e14ad317a4375d3dcd3ca7"
     },
     "mathematical_review.json": {
-      "sha256": "2849cb62a7c65982d6a41c38eef467324848b2dfcd685d014c66a0275b5e1994"
+      "sha256": "66c3d1e598b5080889fa99c2fa208d38cf057a9fd596872d64927c62183f653c"
     }
   },
   "build": {
@@ -26,11 +26,11 @@
     "latex_warnings": [],
     "unresolved_references_or_citations": false,
     "overfull_boxes": false,
-    "underfull_box_messages": 10
+    "underfull_box_messages": 8
   },
   "layout": {
     "total_pages": 40,
-    "main_text_last_page": 12,
+    "main_text_last_page": 9,
     "appendix_sections": [
       "Method and implementation details",
       "Evaluation protocol and additional results",
@@ -62,9 +62,10 @@
         4
       ]
     },
-    "visual_review": "After the prior full manuscript review, pages 5, 6, 10, 11, 36, 37, 38 and 39 were rendered and inspected for the current figure revisions. Molecular identity and formal charges were preserved; headings, precursor panels, captions, axes, legend and reference line were checked. No clipping or overlaps remained. Algorithm 1 and adjacent pages were rendered and inspected after the ruled-layout revision; the numbered procedure, caption rules, font size and cross-references were checked. Pages 12, 13, 21, 22 and 23 were rendered and inspected for the disclosure statements, bibliography transition, preserved algorithm and new reproducibility subsection.",
+    "visual_review": "All 40 pages were rendered and visually inspected after the nine-page revision, including the moved embedding equation, reaction table and generated examples. Main equations, tables, full experimental figure, caption order, algorithm continuation and appendix cross-references were checked. The final abstract was rerendered and inspected after removing AGILE-type; the remaining content retained its pagination. No clipping or overlaps were observed.",
     "appendix_guide_removed": true,
-    "page_budget_editing": "Deferred at user request; no page-limit compliance claim."
+    "page_budget_editing": "Completed: nine main-content pages, including the experimental figure on page 9. Disclosure statements, references and appendices follow. Official styles, font sizes, margins and figure sizes unchanged.",
+    "disclosures_start_page": 10
   },
   "preservation": {
     "original_input_snapshots": 55,
@@ -85,7 +86,11 @@
     "original_reference_labels_retained": true,
     "experimental_evidence_hashes_match": true,
     "two_export_directories_identical": true,
-    "archive_file_count": 131
+    "archive_file_count": 131,
+    "formal_statements_proofs_and_algorithm_unchanged_in_page_revision": true,
+    "all_figure_and_table_blocks_preserved_in_page_revision": true,
+    "all_citation_keys_preserved_in_page_revision": true,
+    "bibliography_content_unchanged_in_page_revision": true
   },
   "mathematical_review": "Informal proof review and scoped historical implementation correspondence; see mathematical_review.json and REVISION_NOTES.md.",
   "pending_author_information": [
@@ -112,7 +117,7 @@
   },
   "in_vivo_figure_presentation": {
     "changed_pages": [
-      11
+      9
     ],
     "chart": "vertical bar graph",
     "baseline": 0,
@@ -139,7 +144,8 @@
       "signal": 219500,
       "legend": "MC3 level",
       "style": "dashed red"
-    }
+    },
+    "current_page": 9
   },
   "chemical_drawings": {
     "rendering_record": "figures/chemical_drawings/rendering_record.json",
@@ -156,8 +162,9 @@
     "algorithm_body_unchanged": true,
     "font_size_unchanged": true,
     "reference_label": "alg:forge-inference",
-    "page": 21,
-    "checked_algorithm_steps": 38
+    "page": 19,
+    "checked_algorithm_steps": 38,
+    "continuation_page": 20
   },
   "disclosure_statements": {
     "ai_use": "Author-declared conceptual, methodological, software, experimental-design, analytical, literature and writing assistance, with author responsibility.",
@@ -166,7 +173,56 @@
     "protocol_number": "omitted at author request",
     "reproducibility": "FORGE terminology; new app:repro subsection reports seeds, historical provenance and standalone archive-access limitations.",
     "cross_references_resolved": true,
-    "statements_page": 12,
-    "reproducibility_appendix_page": 22
+    "statements_page": 10,
+    "reproducibility_appendix_page": 20
+  },
+  "page_budget_revision": {
+    "date": "2026-09-24",
+    "prior_manuscript_sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958",
+    "target_main_pages": 9,
+    "compiled_main_pages": 9,
+    "total_pages": 40,
+    "statements_start_page": 10,
+    "venue_guidelines": "https://iclr.cc/Conferences/2027/AuthorGuidelines",
+    "venue_guidelines_verified": "2026-09-24",
+    "prose_revision": "Removed repeated contributions and numerical recaps; condensed background, implementation summaries and discussion while preserving controls, mixed findings and claim limits.",
+    "appendix_moves": [
+      {
+        "item": "reaction-family comparison table",
+        "label": "tab:reaction-family-background",
+        "destination": "D.1"
+      },
+      {
+        "item": "program-embedding equation and symbol definitions",
+        "destination": "A.1"
+      },
+      {
+        "item": "generated-product and exact-precursor figure",
+        "label": "fig:forge-generated-samples",
+        "destination": "D.2"
+      },
+      {
+        "item": "main sampling-budget recap",
+        "destination": "replaced by reference to the existing complete result in C.4"
+      }
+    ],
+    "retained_in_main": [
+      "chemical preliminaries",
+      "four-stage overview",
+      "core formulation and ideal-generation theorem",
+      "matched comparison tables",
+      "negative findings and route-completion limits",
+      "complete mouse, structures and ROI-bar figure"
+    ],
+    "preserved": [
+      "all formal statements, proofs and algorithm steps",
+      "all existing reference labels and citation keys",
+      "set of empirical macro names and all numerical input files",
+      "figure and table blocks including sizes",
+      "official style, fonts and margins"
+    ],
+    "abstract_revision": "Removed AGILE-type; retained amine-aldehyde-isocyanide Ugi 3-CR description.",
+    "new_experiments": false,
+    "formal_content_changes": false
   }
 }

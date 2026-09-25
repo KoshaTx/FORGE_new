@@ -8,19 +8,22 @@ scoped to their assumptions; the author-supplied exploratory in vivo experiment 
 
 ## Main-text organization
 
-The main text has been expanded before a later page-budget editing pass. Material previously
-confined to the appendix now explains:
+The compiled main paper occupies nine pages. It retains:
 
 - Ionizable-lipid architecture and the three reaction families, followed by molecular identity,
   reaction programs, exact assembly, component novelty, and L1/L2/L3 evidence.
 - The four stages of FORGE, moved from the appendix overview to the start of the main method section.
-- Layerwise program conditioning, role/core supervision, and source-balanced training.
+- Program conditioning, role/core supervision, source-balanced training and the central
+  ideal-generation theorem with its assumptions and limits.
 - Equal-attempt evaluation budgets and the distinction between sampling and training-seed variation.
 - Decoder and architecture ablations, including their reaction-dependent and negative results.
 - Structural-realism diagnostics and their limits.
 
-Detailed algorithms, proofs, full ablation tables, and seed-level reporting remain in the appendix.
-The main-text additions are traced to their existing appendix sources in `iclr_provenance.json`.
+Detailed algorithms, proofs, full ablation tables and seed-level reporting remain in the appendix.
+The reaction-family comparison table, program-embedding equation and generated-product examples
+are also in the appendix. The main paper retains both central comparison tables and the complete
+experimental figure. Repeated descriptions were shortened without changing numerical inputs,
+formal statements or figure sizes. `iclr_provenance.json` records the moves and preservation checks.
 No new experiments were run for this revision. Four author-supplied imaging values were added as
 a descriptive experimental result; their provenance and unresolved protocol details are recorded
 in `experimental/in_vivo/evidence_record.json`.
@@ -37,7 +40,7 @@ The supplement has four appendices:
 | A. Method and implementation details | Program and graph encoding, Transformer and objectives, numerical sampling, verification, route assessment, and the inference algorithm. |
 | B. Evaluation protocol and additional results | Protocol and metrics, assembly controls, ablations, novelty and realism, route closure, and guidance diagnostics. Seed-level tables accompany their comparisons. |
 | C. Theoretical analysis and proofs | Formal graph support, catalogue reachability, discrete flow, sampling-budget results, and route guarantees. |
-| D. Reaction schemes and generated examples | Reaction schemes and the generated-structure atlas; the chemical introduction is in the main preliminaries. |
+| D. Reaction schemes and generated examples | Reaction-family comparison, reaction schemes, generated-product and exact-precursor examples, and the generated-structure atlas. The chemical introduction remains in the main preliminaries. |
 
 The former standalone reporting-table appendix is integrated into the results. Catalogue definitions
 sit beside their proofs, and the repeated graph-space definition is consolidated into the theory setup.
@@ -72,8 +75,10 @@ The bundle and extracted files are hash-recorded in `iclr_provenance.json`.
 
 The manuscript loads `iclr2027_conference` and `times`; `iclrfinalcopy` is disabled.
 The [author guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines) allow nine pages of
-main text at initial submission, with references and appendices excluded. The AI-use and optional
-reproducibility statements are also excluded. Do not change the official margins or font sizes.
+main text at initial submission, with references and appendices excluded. The AI-use, ethics and
+reproducibility statements are also excluded. In the current build, the main paper ends with the
+experimental figure on page 9; disclosure statements and references begin on page 10.
+The official margins and font sizes are unchanged.
 
 The AI-use statement records the author-declared research, software, analysis and writing assistance.
 The ethics statement distinguishes computational evidence from the exploratory mouse measurements;

@@ -190,7 +190,7 @@
     "Historical source from exact seed-0 evaluation snapshot and hash-verified per-seed settings govern corrections; current source is not accepted as historical proof."
   ],
   "reviewed_at": "2026-09-24T23:14:25.105976+00:00",
-  "manuscript_source_sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958",
+  "manuscript_source_sha256": "92b3a6ffb42fb5843864f11870af51521959f263f51498d91771ec025b73f8e7",
   "mathematical_review": {
     "scope": "Informal proof and implementation-correspondence review, not machine-checked formal verification. No training or production evaluation rerun.",
     "central_guarantee": "Exact reference-population CTMC marginals converge to the encoded training law as t approaches 1 from below; this is not a guarantee for the trained model or terminal readout.",
@@ -222,5 +222,21 @@
   "editorial_disclosure_revision": {
     "scope": "AI-use, ethics and reproducibility statements; historical artifact-provenance subsection. Formal statements, proofs, algorithm and empirical macros unchanged.",
     "prior_manuscript_sha256": "9414d1990468c830f7fd22ca83297279ca4b3e209c7f0994f8661f92da324a1c"
+  },
+  "page_budget_revision": {
+    "prior_manuscript_sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958",
+    "scope": "Editorial compression and relocation of supporting material; all formal statements, proofs and algorithm steps unchanged.",
+    "formal_environment_counts": {
+      "algorithmic": 1,
+      "theorem": 2,
+      "lemma": 2,
+      "proposition": 4,
+      "corollary": 2,
+      "definition": 3,
+      "assumption": 0,
+      "invariant": 1,
+      "proof": 10
+    },
+    "review_type": "Preservation and consistency checks; no new scientific or implementation validation."
   }
 }
