@@ -123,6 +123,8 @@ def propose_ring_bonds(
             or not 1 <= logits[key].shape[1] <= len(BOND_VALENCE_UNITS)
         ):
             raise ValueError("Ring proposal bond prediction shape differs from graph")
+        if any(bond < 0 or bond >= logits[key].shape[1] for bond in local[key]):
+            raise ValueError("Ring proposal current bond class is outside prediction vocabulary")
     with rdBase.BlockLogs():
         molecule = graph_to_molecule(nodes, edges, atoms)
     edge_slots = {}

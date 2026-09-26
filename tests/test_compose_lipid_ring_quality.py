@@ -91,6 +91,16 @@ def test_nonfinite_predictions_fail_before_proposal():
         propose_ring_bonds(layout, state, predictions, atoms, {})
 
 
+def test_current_bond_outside_logit_vocabulary_fails_before_proposal():
+    atoms, layout, state, predictions = prepared("CCC1=CCCCC1")
+    predictions["parent_bonds"] = predictions["parent_bonds"][:, :1]
+    predictions["closure_bonds"] = predictions["closure_bonds"][:, :1]
+    with pytest.raises(ValueError, match="current bond class.*outside prediction vocabulary"):
+        propose_ring_bonds(
+            layout, state, predictions, atoms, {"one": ring_patterns(["CCC1CCCCC1"])}
+        )
+
+
 def test_actual_train_role_patterns_preserve_aromatic_vs_terpenoid_difference():
     path = Path("results/phase1/compose_lipid_quality_v1/reference.json")
     if not path.exists():
