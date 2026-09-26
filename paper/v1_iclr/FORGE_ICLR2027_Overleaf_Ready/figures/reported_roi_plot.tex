@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.arrows,fit,backgrounds}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage[most]{tcolorbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{chemfig}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+
+\iclrfinalcopy
+\begin{document}
+\newbox\exportbox
+\pgfplotstableread[col sep=comma]{figures/reported_roi_values.csv}\forgeinvivotable
+\pgfplotstablegetelem{3}{reported_roi_signal}\of{\forgeinvivotable}
+\begingroup
+\pgfkeys{/pgf/fpu=true}
+\pgfmathparse{\pgfplotsretval/1000000}
+\pgfmathfloattofixed{\pgfmathresult}
+\global\let\forgeMCThreeSignal\pgfmathresult
+\endgroup
+\setbox\exportbox=\hbox{\small\begin{tikzpicture}
+\begin{axis}[
+ width=0.92\linewidth,height=5.5cm,
+ scale only axis=false,
+ xmin=-0.6,xmax=3.6,ymin=0,ymax=3.2,
+ xtick={0,1,2,3},ytick={0,1,2,3},
+ xticklabels={FORGE-1,FORGE-2,FORGE-3,DLIN-MC3-DMA},
+ ylabel={Reported ROI signal ($\times10^6$)},
+ tick label style={font=\footnotesize},label style={font=\footnotesize},
+ axis lines*=left,axis line style={black!65},tick style={black!65},
+ ymajorgrids=true,grid style={black!10},
+ nodes near coords={\pgfmathprintnumber[fixed,precision=4]{\pgfplotspointmeta}},
+ every node near coord/.append style={font=\footnotesize,anchor=south},
+ legend style={at={(0.02,0.98)},anchor=north west,draw=none,fill=none,font=\footnotesize},
+ legend cell align=left,
+ clip=false]
+\addplot[ybar,bar width=26pt,bar shift=0pt,draw=none,fill=blue!50!gray,
+ restrict x to domain=-0.5:2.5,filter discard warning=false,forget plot]
+ table[col sep=comma,x expr=\coordindex,y expr=\thisrow{reported_roi_signal}/1000000]
+ {figures/reported_roi_values.csv};
+\addplot[ybar,bar width=26pt,bar shift=0pt,draw=none,fill=black!60,
+ restrict x to domain=2.5:3.5,filter discard warning=false,forget plot]
+ table[col sep=comma,x expr=\coordindex,y expr=\thisrow{reported_roi_signal}/1000000]
+ {figures/reported_roi_values.csv};
+\addplot[red!65!gray,dashed,line width=0.8pt,no marks,nodes near coords={}]
+ coordinates {(-0.6,\forgeMCThreeSignal) (3.6,\forgeMCThreeSignal)};
+\addlegendentry{DLIN-MC3-DMA level}
+\end{axis}
+\end{tikzpicture}}
+\typeout{EXPORTBOX width=\the\wd\exportbox; height=\the\ht\exportbox; depth=\the\dp\exportbox}
+\pdfpagewidth=\wd\exportbox
+\pdfpageheight=\dimexpr\ht\exportbox+\dp\exportbox\relax
+\hoffset=-1in
+\voffset=-1in
+\shipout\hbox{\raise\dp\exportbox\box\exportbox}
+\end{document}

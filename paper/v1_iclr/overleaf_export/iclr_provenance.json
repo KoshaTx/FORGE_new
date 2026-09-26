@@ -553,9 +553,90 @@
         "figure and table blocks including sizes",
         "official style, fonts and margins"
       ],
-      "abstract_revision": "Removed AGILE-type; retained amine-aldehyde-isocyanide Ugi 3-CR description.",
+      "abstract_revision": "Removed the branded reaction qualifier; retained amine-aldehyde-isocyanide Ugi 3-CR description.",
       "new_experiments": false,
       "formal_content_changes": false
+    },
+    "reporter_and_scope_revision": {
+      "date": "2026-09-25T00:31:52.434957+00:00",
+      "abstract": "Added the exploratory mouse FLuc mRNA LNP comparison: all three tested formulations exceeded DLIN-MC3-DMA in reported 4-hour signal; FORGE-3 reached 13.1-fold the benchmark signal.",
+      "signal_source": "experimental/in_vivo/reported_roi_values.csv",
+      "signal_source_sha256": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+      "reported_signal_ratios_to_benchmark": {
+        "FORGE-1": 2.732118451025057,
+        "FORGE-2": 9.275626423690206,
+        "FORGE-3": 13.125284738041003
+      },
+      "reaction_naming": "Ugi 3-CR; removed the branded qualifier without changing chemistry definitions or citations.",
+      "benchmark_display_name": "DLIN-MC3-DMA",
+      "result_scope": "Removed the main route-closure results subsection, appendix route-closure subsection and its two tables, synthesis-guidance outcome paragraph, and experimental dossier caveat at the author's request. Retained exact-assembly results, route definitions, conditional guarantees, and source result artifacts.",
+      "numerical_source_artifacts_changed": false,
+      "zip_rebuild": "Deferred at the user's request."
+    },
+    "introduction_flow_revision": {
+      "date": "2026-09-25T00:36:02.816783+00:00",
+      "scope": "Smoothed the first two Introduction paragraphs, preserved the concurrent removal of their closing gap sentence, and clarified the opening sentence of Recursive route assessment.",
+      "citation_groups_preserved": true,
+      "new_scientific_claims_or_results": false,
+      "route_sentence": "States the unique verified precursor decomposition and fixed depth/query limits in ordinary language; equation and mathematical conditions unchanged."
+    },
+    "contribution_list_revision": {
+      "date": "2026-09-25T00:41:34.065406+00:00",
+      "scope": "Replaced the final Introduction summary paragraph with three numbered contributions: reaction-conditioned generation with exact verification, matched three-chemistry evaluation, and synthesized-lipid mouse reporter measurements.",
+      "contribution_count": 3,
+      "citation_groups_preserved": true,
+      "claim_limits_preserved": true,
+      "new_results": false
+    },
+    "author_text_update": {
+      "date": "2026-09-25T02:32:45.058468+00:00",
+      "scope": "Applied author-supplied manuscript text in abstract, introduction, overview, graph representation, main architecture results, structural comparison and discussion.",
+      "overview_copyediting": "Removed duplicated distribution definition; repaired the sentence fragment and the four-step transition.",
+      "source_files": [
+        {
+          "path": "FORGE_ICLR2027_paper.tex",
+          "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+          "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+        },
+        {
+          "path": "FORGE_ICLR2027_Overleaf/main.tex",
+          "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+          "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+        },
+        {
+          "path": "overleaf_export/main.tex",
+          "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+          "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+        },
+        {
+          "path": "FORGE_ICLR2027_Overleaf_Clean/main.tex",
+          "before_sha256": "5e03992fc4541a509575770020ca2121656c4358be7a186fbcd4a9b32c7c22e8",
+          "after_sha256": "08dc7f1009f998ba898ebba240ec9b1a3f1ec38e2638b5155d7f5480eb688052"
+        },
+        {
+          "path": "FORGE_ICLR2027_Overleaf_Ready/main.tex",
+          "before_sha256": "a9ae4c236e30d877f3e5cfc63b3273e590e965b122191b529dc9198012c4adde",
+          "after_sha256": "6a9f96b4b91a31e24bbb8ae57d438916682d71cc4ca8fc1a72327c78dbf84a6b"
+        }
+      ],
+      "tables_figures_numeric_macros_and_appendix_unchanged": true,
+      "new_experiments": false,
+      "claim_status": "Author-supplied prose revision; not a new scientific evidence review.",
+      "total_pages": 39,
+      "main_pages": 9,
+      "disclosures_start_page": 10,
+      "visually_checked_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
     }
   },
   "experimental_inputs": [

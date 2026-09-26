@@ -21,8 +21,10 @@ The compiled main paper occupies nine pages. It retains:
 
 Detailed algorithms, proofs, full ablation tables and seed-level reporting remain in the appendix.
 The reaction-family comparison table, program-embedding equation and generated-product examples
-are also in the appendix. The main paper retains both central comparison tables and the complete
-experimental figure. Repeated descriptions were shortened without changing numerical inputs,
+are also in the appendix. The main paper retains both central assembly comparison tables and the complete
+experimental figure. Route-closure outcome reporting and its two supplementary tables are
+omitted from this revision; source result artifacts and conditional route-assessment definitions
+remain available. Repeated descriptions were shortened without changing numerical inputs,
 formal statements or figure sizes. `iclr_provenance.json` records the moves and preservation checks.
 No new experiments were run for this revision. Four author-supplied imaging values were added as
 a descriptive experimental result; their provenance and unresolved protocol details are recorded
@@ -76,8 +78,8 @@ The bundle and extracted files are hash-recorded in `iclr_provenance.json`.
 The manuscript loads `iclr2027_conference` and `times`; `iclrfinalcopy` is disabled.
 The [author guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines) allow nine pages of
 main text at initial submission, with references and appendices excluded. The AI-use, ethics and
-reproducibility statements are also excluded. In the current build, the main paper ends with the
-experimental figure on page 9; disclosure statements and references begin on page 10.
+reproducibility statements are also excluded. In the current build, the Discussion ends on page 8 and the experimental figure appears on page 9; disclosure
+statements and references begin on page 10.
 The official margins and font sizes are unchanged.
 
 The AI-use statement records the author-declared research, software, analysis and writing assistance.
@@ -88,10 +90,33 @@ links to the appendix account of historical source provenance and archive-access
 
 ## Overleaf
 
-`FORGE_ICLR2027_Overleaf.zip` contains a standalone project with `main.tex` as its entry point.
-`FORGE_ICLR2027_Overleaf/` and `overleaf_export/` contain the same exported source files.
-These exports are derived from the canonical manuscript; refresh them together after source edits.
-Historical venue names in cited publications or source-provenance paths are retained accurately.
-The export includes the experimental images and ROI table used by the manuscript.
-The experimental extension is a working draft until the protocol and replication fields listed
-in `REVISION_NOTES.md` are completed.
+Use `FORGE_ICLR2027_Overleaf_Ready.zip` for upload. Its unpacked project is in
+`FORGE_ICLR2027_Overleaf_Ready/`. Select `main.tex` and pdfLaTeX in Overleaf.
+The overview, ROI chart and reaction schemes are precompiled vector PDFs, with optional
+editable figure sources in `figures/`. The mouse image is embedded in a PDF with every
+original RGB pixel preserved. Manuscript prose, equations, tables, captions and references
+remain editable. The build requires no shell escape or external figure-generation tools.
+
+Before the latest prose revision, three local clean builds had a median duration of 4.75 seconds, compared with 11.07 seconds
+for the inline-figure export. A fresh extraction of the ZIP compiled successfully to nine main
+pages and 39 pages overall. The export was tested locally with TeX Live 2026, not on Overleaf's
+servers. `overleaf_ready_validation.json` records hashes, timings and preservation checks.
+
+The clean export is in `FORGE_ICLR2027_Overleaf_Clean/`, with one `main.tex`, one
+`references.bib`, the unchanged official template files, and the historical implementation record
+at the root. Required images and ROI data are in `figures/`. Manuscript and bibliography comments
+are removed; official template comments and license notices are retained. Compile `main.tex`
+with pdfLaTeX. The validated output has nine main pages and 39 pages overall, matching the
+canonical PDF in extracted text. `clean_overleaf_validation.json` records the file hashes
+and comparison.
+
+`FORGE_ICLR2027_Overleaf/` and `overleaf_export/` contain matching full source exports.
+The older full-source and clean ZIP archives retain their previous contents; use the new
+`FORGE_ICLR2027_Overleaf_Ready.zip` for the current manuscript and compilation optimizations.
+Historical venue names in citations and source-provenance paths are retained accurately.
+The experimental extension remains a working draft until the protocol and replication fields
+listed in `REVISION_NOTES.md` are completed.
+
+The latest author-supplied prose is synchronized across the canonical manuscript and all four
+export sources. The overview contains minor grammar and duplication corrections. The Ready ZIP
+was rebuilt and tested from a fresh extraction; the main paper remains nine pages.
