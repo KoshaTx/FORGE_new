@@ -3,7 +3,12 @@
 import torch
 from torch.nn import functional
 
-from forge.model.reaction_program_flow import _endpoint_candidate_mask, _parent_candidate_mask
+from forge.model.compose_lipid_training import validate_objective
+from forge.model.reaction_program_flow import (
+    _endpoint_candidate_mask,
+    _parent_candidate_mask,
+    _parent_group_cross_entropy,
+)
 from forge.model.reaction_program_transformer import synthesis_program_offspring_targets
 
 
@@ -60,7 +65,8 @@ class FamilyLoss:
 
     def loss(self, predictions, topology, selection, config):
         full, clean = self.clean, select(self.clean, selection)
-        settings, weights = config["objective"], config["semantic_weights"]
+        settings = validate_objective(config["objective"])
+        weights = config["semantic_weights"]
         by_role = settings["chemistry_loss_balancing"] == "equal_present_role_mass"
 
         def chemistry(output):
@@ -100,6 +106,15 @@ class FamilyLoss:
             metrics[name] = self.ce(
                 predictions[field].masked_fill(~valid, -1e9), clean[field], clean[mask], full[mask]
             )
+        group_weight = settings.get("parent_group_loss_weight", 0.0)
+        if group_weight > 0:
+            categorical = metrics["parent_pointer_ce"]
+            group = _parent_group_cross_entropy(
+                predictions["parents"], clean, full_mask=full["parent_variable_mask"]
+            )
+            metrics["parent_categorical_ce"] = categorical
+            metrics["parent_group_ce"] = group
+            metrics["parent_pointer_ce"] = (categorical + group_weight * group) / (1 + group_weight)
         # Match the reference's addition order.
         base = sum(
             (

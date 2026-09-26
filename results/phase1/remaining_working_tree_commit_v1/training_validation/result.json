@@ -1,0 +1,104 @@
+{
+  "all_test_files_executed": true,
+  "commands": {
+    "tests": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_qualified_program_cache.py",
+      "tests/test_mapped_program_cache.py",
+      "tests/test_compose_lipid_training_measure.py",
+      "tests/test_compose_lipid_training_data.py",
+      "tests/test_repeat_supervision.py",
+      "tests/test_compose_lipid_restoration.py",
+      "tests/test_compose_lipid_family_batches.py",
+      "tests/test_compose_lipid_generation.py",
+      "tests/test_compose_lipid_noise_marginals.py",
+      "tests/test_compose_lipid_run.py",
+      "tests/test_compose_lipid_tensor_cache.py",
+      "tests/test_compose_lipid_prefetch.py",
+      "tests/test_compose_lipid_parallel.py",
+      "tests/test_compose_lipid_sharding.py",
+      "tests/test_compose_lipid_adaptive.py",
+      "tests/test_ordered_relation_embedding.py",
+      "tests/test_modal_restart.py",
+      "tests/test_compose_lipid_prepared_run.py",
+      "tests/test_compose_lipid_gpu_preflight.py",
+      "tests/test_training_restart.py",
+      "tests/test_experiment_modal.py",
+      "--junitxml=/private/tmp/forge-remaining-commit-ymc4y8t9/results/remaining_commit_training_validation_v1/tests.xml"
+    ],
+    "vendor": [
+      "/Users/rahulmaganti/Kosha/forge_new/.venv/bin/python",
+      "-m",
+      "cli",
+      "data",
+      "verify"
+    ]
+  },
+  "elapsed_seconds": {
+    "tests": 17.230859000002965,
+    "vendor": 0.1710457089357078
+  },
+  "full_suite_rerun": false,
+  "gpu_execution": false,
+  "historical_experiment_reproduction_required": false,
+  "inputs": {
+    "source-snapshot.json": {
+      "path": "results/remaining_commit_training_validation_v1/source-snapshot.json",
+      "sha256": "e848b392062c99f124fc5ecebb2409be903ef5dd58f4c0b3315ab08a5c7b4b87"
+    },
+    "tests.log": {
+      "path": "results/remaining_commit_training_validation_v1/tests.log",
+      "sha256": "34a2c1457bf60a9e910dcb073d22f31bb87284afe382a50d747acc6e15cceffe"
+    },
+    "tests.xml": {
+      "path": "results/remaining_commit_training_validation_v1/tests.xml",
+      "sha256": "bf06c8f09011203231f88f0adf0fcb0103f3f804c7fe79f98763d2c3eb314c97"
+    },
+    "vendor.log": {
+      "path": "results/remaining_commit_training_validation_v1/vendor.log",
+      "sha256": "e07732d60ae43f3f331528a807c33d6ae4040138ae51b4b3095e1f91e297b086"
+    }
+  },
+  "paid_compute_calls": 0,
+  "pytest_exit_code": 1,
+  "real_corpus_optimizer_steps": 0,
+  "schema_version": "forge.compose_lipid_training_validation.v1",
+  "scope": "current training code, current prepared-cache controls and synthetic optimizer/restart fixtures",
+  "seed": 0,
+  "source_snapshot_unchanged": true,
+  "test_files": [
+    "tests/test_qualified_program_cache.py",
+    "tests/test_mapped_program_cache.py",
+    "tests/test_compose_lipid_training_measure.py",
+    "tests/test_compose_lipid_training_data.py",
+    "tests/test_repeat_supervision.py",
+    "tests/test_compose_lipid_restoration.py",
+    "tests/test_compose_lipid_family_batches.py",
+    "tests/test_compose_lipid_generation.py",
+    "tests/test_compose_lipid_noise_marginals.py",
+    "tests/test_compose_lipid_run.py",
+    "tests/test_compose_lipid_tensor_cache.py",
+    "tests/test_compose_lipid_prefetch.py",
+    "tests/test_compose_lipid_parallel.py",
+    "tests/test_compose_lipid_sharding.py",
+    "tests/test_compose_lipid_adaptive.py",
+    "tests/test_ordered_relation_embedding.py",
+    "tests/test_modal_restart.py",
+    "tests/test_compose_lipid_prepared_run.py",
+    "tests/test_compose_lipid_gpu_preflight.py",
+    "tests/test_training_restart.py",
+    "tests/test_experiment_modal.py"
+  ],
+  "tests": {
+    "errors": 22,
+    "failures": 6,
+    "passed": 250,
+    "skipped": 0
+  },
+  "training_admitted": false,
+  "training_checks_passed": false,
+  "vendor_verify_exit_code": 0
+}

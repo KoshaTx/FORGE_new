@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
 import subprocess
+import tempfile
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
@@ -23,10 +26,22 @@ REPO = Path(__file__).resolve().parents[1]
 SPEC = REPO / "experiments" / "installation_smoke" / "experiment.json"
 
 
-def test_modal_plan_is_a_hash_pinned_dry_run() -> None:
+@pytest.fixture
+def current_smoke_spec() -> Iterator[tuple[Path, Path]]:
+    """Exercise current pins without changing an archived experiment's inputs."""
+    spec = json.loads(SPEC.read_text())
+    spec["stages"][0]["inputs"]["project"]["sha256"] = sha256_file(REPO / "pyproject.toml")
+    with tempfile.TemporaryDirectory(prefix="modal-plan-", dir=REPO / "results") as temporary:
+        target = Path(temporary) / "experiment.json"
+        write_json(target, spec)
+        yield REPO, target
+
+
+def test_modal_plan_is_a_hash_pinned_dry_run(current_smoke_spec: tuple[Path, Path]) -> None:
+    repo, spec = current_smoke_spec
     plan = modal_request_plan(
-        REPO,
-        SPEC,
+        repo,
+        spec,
         profile="smoke",
         replicate=0,
         device=None,
@@ -35,19 +50,21 @@ def test_modal_plan_is_a_hash_pinned_dry_run() -> None:
     assert plan["run_id"] is None
     assert plan["resource_envelope"]["gpu_type"] is None
     assert set(plan["uploads"]) == {
-        "experiments/installation_smoke/experiment.json",
+        str(spec.relative_to(repo)),
         "experiments/installation_smoke/configs/snapshot_v1.json",
         "pyproject.toml",
         "uv.lock",
     }
+    assert plan["uploads"]["pyproject.toml"]["sha256"] == sha256_file(repo / "pyproject.toml")
     assert len(plan["request_id"]) == 64
 
 
-def test_modal_plan_refuses_mps_without_launching() -> None:
+def test_modal_plan_refuses_mps_without_launching(current_smoke_spec: tuple[Path, Path]) -> None:
+    repo, spec = current_smoke_spec
     with pytest.raises(BackendError, match="MPS"):
         modal_request_plan(
-            REPO,
-            SPEC,
+            repo,
+            spec,
             profile="smoke",
             replicate=0,
             device="mps",

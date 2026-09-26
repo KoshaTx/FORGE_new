@@ -36,11 +36,19 @@ def validate_objective(objective: Mapping[str, Any] | None) -> dict[str, Any]:
         "gradient_balancing",
         "pcgrad_backend",
     }
-    if set(objective) != required:
+    optional = {"parent_group_loss_weight"}
+    if not required <= set(objective) or set(objective) - required - optional:
         raise ValueError("Restored objective requires every declared objective setting")
     for key in required:
         if key.endswith("_weight") and (not math.isfinite(objective[key]) or objective[key] < 0):
             raise ValueError(f"Invalid objective.{key}")
+    group_weight = objective.get("parent_group_loss_weight", 0.0)
+    if (
+        type(group_weight) not in (float, int)
+        or not math.isfinite(group_weight)
+        or group_weight < 0
+    ):
+        raise ValueError("Invalid objective.parent_group_loss_weight")
     if objective["chemistry_loss_balancing"] not in ("pooled", "equal_present_role_mass"):
         raise ValueError("Invalid chemistry loss balancing")
     if objective["gradient_balancing"] not in ("pooled", "equal_family_mean", "pcgrad"):

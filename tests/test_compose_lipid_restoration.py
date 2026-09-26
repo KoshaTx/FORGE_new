@@ -20,6 +20,12 @@ from forge.model.compose_lipid_core import (
     sample_core_condition,
 )
 from forge.model.compose_lipid_training import compose_lipid_backward, validate_objective
+from forge.model.reaction_program_flow import (
+    _masked_cross_entropy,
+    _parent_candidate_mask,
+    _parent_group_cross_entropy,
+    synthesis_program_flow_loss,
+)
 from forge.model.synthesis_program_sampling import (
     _terminal_smiles,
     decode_synthesis_program_strict_argmax,
@@ -127,7 +133,9 @@ def test_smoothed_sources_keep_unsupported_cells_positive_and_normalized():
     np.testing.assert_allclose(p[1, 2], (program_p + counts[1, 2]) / (1 + counts[1, 2].sum()))
 
 
-def test_restored_objectives_produce_gradients_for_new_heads_and_families():
+@pytest.mark.parametrize("backend", ["sequential", "batched_vjp"])
+@pytest.mark.parametrize("group_weight", [0.0, 1.0])
+def test_restored_objectives_produce_gradients_for_new_heads_and_families(backend, group_weight):
     e, vocab, atoms = source()
     batch = collate_qualified_program_examples([e, e], maximum_closures=2)
     batch["family_states"] = torch.tensor([1, 2])
@@ -158,7 +166,7 @@ def test_restored_objectives_produce_gradients_for_new_heads_and_families():
     loss, metrics = compose_lipid_backward(
         model,
         batch,
-        objective=OBJECTIVE,
+        objective=dict(OBJECTIVE, pcgrad_backend=backend, parent_group_loss_weight=group_weight),
         architecture="reaction_program_graph_transformer",
         node_marginal=torch.ones(len(atoms)) / len(atoms),
         bond_marginal=torch.ones(3) / 3,
@@ -168,6 +176,7 @@ def test_restored_objectives_produce_gradients_for_new_heads_and_families():
         repeat_supervision="exact_fragment",
     )
     assert torch.isfinite(loss) and "projected_conflicts" in metrics
+    assert ("parent_group_ce" in metrics) == (group_weight > 0)
     parameters = dict(model.named_parameters())
     for name in ("offspring_output.weight",):
         assert name in parameters
@@ -183,3 +192,125 @@ def test_restored_objectives_produce_gradients_for_new_heads_and_families():
 def test_objective_typo_cannot_silently_disable_restoration():
     with pytest.raises(ValueError):
         validate_objective(dict(OBJECTIVE, offspring_weigth=1.0))
+
+
+def parent_score_fixture(size=254):
+    generator = torch.Generator().manual_seed(824)
+    predictions, clean = {}, {}
+    for key, width, classes in (
+        ("nodes", size, 3),
+        ("parents", size, size),
+        ("parent_bonds", size, 3),
+        ("closure_left", 12, size),
+        ("closure_right", 12, size),
+        ("closure_bonds", 12, 3),
+    ):
+        predictions[key] = torch.randn(
+            2, width, classes, generator=generator, dtype=torch.float64, requires_grad=True
+        )
+        clean[key] = torch.zeros(2, width, dtype=torch.long)
+    clean["node_mask"] = torch.ones(2, size, dtype=torch.bool)
+    for key, width in (
+        ("atom_variable_mask", size),
+        ("parent_variable_mask", size),
+        ("parent_bond_variable_mask", size),
+        ("closure_endpoint_variable_mask", 12),
+        ("closure_bond_variable_mask", 12),
+    ):
+        clean[key] = torch.zeros(2, width, dtype=torch.bool)
+    clean["parent_variable_mask"][:, [1, 3, size - 1]] = True
+    clean["parents"][0, size - 1] = size - 2
+    clean["parents"][1, 3] = 2
+    return predictions, clean
+
+
+def test_parent_group_objective_full_support_matches_independent_value_and_gradient():
+    predictions, clean = parent_score_fixture()
+    logits = predictions["parents"]
+    terms = []
+    for b, child in clean["parent_variable_mask"].nonzero().tolist():
+        legal = logits[b, child, :child]
+        gold = int(clean["parents"][b, child])
+        selected = legal[-1:] if gold == child - 1 else legal[:-1]
+        denominator = torch.logsumexp(legal, dim=0)
+        terms.append((2 * denominator - legal[gold] - selected.logsumexp(0)) / 2)
+    expected = torch.stack(terms).mean()
+    observed, metrics = synthesis_program_flow_loss(
+        predictions, clean, parent_group_loss_weight=1.0, materialize_metrics=False
+    )
+    torch.testing.assert_close(observed, expected, atol=1e-12, rtol=1e-12)
+    torch.testing.assert_close(
+        torch.autograd.grad(observed, logits, retain_graph=True)[0],
+        torch.autograd.grad(expected, logits)[0],
+        atol=1e-12,
+        rtol=1e-12,
+    )
+    assert metrics["parent_group_ce"] > 0
+    assert predictions["closure_left"].shape == (2, 12, 254)
+
+
+def test_parent_group_zero_preserves_original_sentinel_value_gradient_and_metrics():
+    predictions, clean = parent_score_fixture()
+    logits = predictions["parents"]
+    # Probe exact backward compatibility even far outside ordinary logit magnitudes.
+    with torch.no_grad():
+        logits.sub_(1e12)
+    expected = _masked_cross_entropy(
+        logits.masked_fill(~_parent_candidate_mask(clean["node_mask"]), -1e9),
+        clean["parents"],
+        clean["parent_variable_mask"],
+    )
+    implicit, old_metrics = synthesis_program_flow_loss(predictions, clean)
+    explicit, new_metrics = synthesis_program_flow_loss(
+        predictions, clean, parent_group_loss_weight=0.0
+    )
+    assert torch.equal(expected, implicit) and torch.equal(implicit, explicit)
+    assert old_metrics == new_metrics
+    assert torch.equal(
+        torch.autograd.grad(expected, logits, retain_graph=True)[0],
+        torch.autograd.grad(explicit, logits)[0],
+    )
+
+
+def test_parent_group_fixed_empty_singleton_and_illegal_targets():
+    predictions, clean = parent_score_fixture(4)
+    logits = predictions["parents"]
+    clean["parent_variable_mask"].zero_()
+    empty = _parent_group_cross_entropy(logits, clean)
+    assert empty == 0 and torch.count_nonzero(torch.autograd.grad(empty, logits)[0]) == 0
+    clean["parent_variable_mask"][:, 1] = True
+    singleton = _parent_group_cross_entropy(logits, clean)
+    assert singleton == 0
+    assert torch.count_nonzero(torch.autograd.grad(singleton, logits)[0]) == 0
+    clean["parents"][0, 1] = 2
+    assert not torch.isfinite(_parent_group_cross_entropy(logits, clean))
+
+
+def test_parent_group_inactive_rows_ignore_nonfinite_logits_without_nan_gradients():
+    predictions, clean = parent_score_fixture(4)
+    logits = predictions["parents"]
+    clean["parent_variable_mask"].zero_()
+    clean["node_mask"].zero_()
+    with torch.no_grad():
+        logits.fill_(float("nan"))
+    loss = _parent_group_cross_entropy(logits, clean)
+    gradient = torch.autograd.grad(loss, logits)[0]
+    assert loss == 0 and torch.isfinite(gradient).all() and torch.count_nonzero(gradient) == 0
+    clean["node_mask"][0] = True
+    clean["parent_variable_mask"][0, 3] = True
+    with torch.no_grad():
+        logits[0, 3] = 0.0
+    loss = _parent_group_cross_entropy(logits, clean)
+    gradient = torch.autograd.grad(loss, logits)[0]
+    assert torch.isfinite(loss) and torch.isfinite(gradient).all()
+    assert torch.count_nonzero(gradient[1]) == 0
+    assert torch.count_nonzero(gradient[0, :3]) == 0
+
+
+@pytest.mark.parametrize("weight", [float("nan"), float("inf"), float("-inf"), -1, True, "1"])
+def test_parent_group_weights_fail_closed(weight):
+    predictions, clean = parent_score_fixture(4)
+    with pytest.raises(ValueError, match="parent_group_loss_weight"):
+        validate_objective(dict(OBJECTIVE, parent_group_loss_weight=weight))
+    with pytest.raises(ValueError, match="parent group loss weight"):
+        synthesis_program_flow_loss(predictions, clean, parent_group_loss_weight=weight)

@@ -15,6 +15,7 @@ from experiments._runtime.modal import (
     modal_restart_receipt_path,
 )
 from experiments._runtime.registry import stage
+from experiments._runtime.seed import SeedPlan
 from experiments._runtime.spec import ExperimentSpec
 from experiments._runtime.stage import (
     ProducedArtifact,
@@ -60,6 +61,15 @@ def training_files(repo: Path, config_path: Path) -> dict[str, dict[str, str]]:
     inputs = config["inputs"]
     for value in inputs.values():
         add(value)
+    if "initialization" in inputs:
+        initializer = torch.load(
+            add(inputs["initialization"]), map_location="cpu", weights_only=False
+        )
+        for name in ("configuration", "checkpoint"):
+            add(initializer["origin"][name])
+    if "presentation_tape" in inputs:
+        tape = read(inputs["presentation_tape"])
+        add(tape["artifact"])
     if "prepared_tensors" in inputs:
         prepared = read(inputs["prepared_tensors"])
         add(prepared["implementation"])
@@ -107,6 +117,13 @@ def training_files(repo: Path, config_path: Path) -> dict[str, dict[str, str]]:
         if config["model"]["maximum_heavy_atoms"] < data.maximum_heavy_atoms:
             raise TrainingRestartError("Model support would exclude large molecules")
         training_marginals(repo, config, data, torch.device("cpu"))
+        if "presentation_tape" in inputs:
+            from forge.model.compose_lipid_prefetch import load_presentation_tape
+
+            try:
+                load_presentation_tape(repo, inputs["presentation_tape"], config=config, data=data)
+            except (ValueError, KeyError) as error:
+                raise TrainingRestartError(str(error)) from error
     return dict(sorted(files.items()))
 
 
@@ -165,6 +182,7 @@ def detached_plan(repo: Path, spec_path: Path, *, profile: str, replicate: int) 
         PARALLEL_GPUS,
         RESULT_SCHEMA,
         read_admitted_config,
+        read_initialization,
     )
 
     spec = ExperimentSpec.load(spec_path)
@@ -173,6 +191,27 @@ def detached_plan(repo: Path, spec_path: Path, *, profile: str, replicate: int) 
     item = spec.stages[0]
     config_path = item.config.resolve(repo)
     config = read_admitted_config(repo, config_path)
+    initialization = read_initialization(repo, config)
+    if initialization is not None:
+        if (
+            profile not in spec.profiles
+            or type(replicate) is not int
+            or not (0 <= replicate < spec.replicates[profile])
+        ):
+            raise TrainingRestartError("Branch profile/replicate is outside the declared plan")
+        replicate_seed = SeedPlan(
+            root_seed=spec.root_seed,
+            namespace=f"{spec.experiment_id}/{profile}/replicates",
+        ).derive("replicate", replicate)
+        training_seed = (
+            SeedPlan(
+                root_seed=replicate_seed,
+                namespace=f"{spec.experiment_id}/{profile}/{item.determinism.stream}",
+            ).derive("compose-training")
+            % 2**32
+        )
+        if initialization["random_policy"]["seed"] != training_seed:
+            raise TrainingRestartError("Declared branch seed differs from experiment stage seed")
     gpu_count = PARALLEL_GPUS.get(config["runtime"].get("parallel_backend"))
     if gpu_count is not None and (
         not (item.resources.gpu_type or "").endswith(f":{gpu_count}")

@@ -1850,6 +1850,7 @@ def reaction_program_transformer_loss(
     chemistry_loss_balancing: str = "pooled",
     topology_conditioned_predictions: Mapping[str, Any] | None = None,
     topology_conditioned_chemistry_weight: float = 0.0,
+    parent_group_loss_weight: float = 0.0,
     materialize_metrics: bool = True,
 ) -> tuple[Any, dict[str, Any]]:
     """Combine graph flow with state-balanced precursor-role and reaction-core consistency."""
@@ -1874,6 +1875,7 @@ def reaction_program_transformer_loss(
         predictions,
         clean,
         balance_chemistry_by_role=chemistry_loss_balancing == "equal_present_role_mass",
+        parent_group_loss_weight=parent_group_loss_weight,
         materialize_metrics=materialize_metrics,
     )
     role = _balanced_state_cross_entropy(

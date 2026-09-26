@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from typing import Any
@@ -507,6 +508,31 @@ def _group_balanced_masked_cross_entropy(logits: Any, targets: Any, mask: Any, g
     return (means * present).sum() / present.sum().clamp(min=1)
 
 
+def _parent_group_cross_entropy(
+    logits: Any, clean: Mapping[str, Any], *, full_mask: Any | None = None
+) -> Any:
+    """Score predecessor versus other legal-parent probability mass, without class balancing."""
+    active = clean["parent_variable_mask"]
+    legal = _parent_candidate_mask(clean["node_mask"])
+    positions = torch.arange(logits.shape[-1], device=logits.device)
+    predecessor = positions[None, :] == positions[:, None] - 1
+    target_predecessor = clean["parents"] == positions[None, :] - 1
+    group = legal & (predecessor[None, :, :] == target_predecessor[:, :, None])
+    # Static shapes avoid the CUDA synchronization required by nonzero/boolean indexing.
+    # Inactive rows use a constant singleton distribution, including padded/all-empty rows.
+    dummy = ~active[:, :, None] & (positions[None, None, :] == 0)
+    values = logits.masked_fill(~active[:, :, None], 0.0)
+    legal_logits = values.masked_fill(~((legal & active[:, :, None]) | dummy), float("-inf"))
+    group_logits = values.masked_fill(~((group & active[:, :, None]) | dummy), float("-inf"))
+    point_losses = torch.logsumexp(legal_logits, dim=-1) - torch.logsumexp(group_logits, dim=-1)
+    # Invalid supervision stays nonfinite for the existing objective gate; it must not
+    # turn into a finite score for another group. The input pipeline normally rejects it.
+    target_legal = legal.gather(2, clean["parents"][:, :, None]).squeeze(2)
+    point_losses = torch.where(~active | target_legal, point_losses, float("nan"))
+    denominator = active if full_mask is None else full_mask
+    return point_losses.sum() / denominator.sum().clamp(min=1)
+
+
 def synthesis_program_chemistry_loss(
     predictions: Mapping[str, Any],
     clean: Mapping[str, Any],
@@ -556,10 +582,17 @@ def synthesis_program_flow_loss(
     clean: Mapping[str, Any],
     *,
     balance_chemistry_by_role: bool = False,
+    parent_group_loss_weight: float = 0.0,
     materialize_metrics: bool = True,
 ) -> tuple[Any, dict[str, Any]]:
     """Train only variable graph states; adapter-fixed Ugi targets contribute zero loss."""
 
+    if (
+        type(parent_group_loss_weight) not in (float, int)
+        or not math.isfinite(parent_group_loss_weight)
+        or parent_group_loss_weight < 0
+    ):
+        raise ReactionProgramFlowError("parent group loss weight must be finite and nonnegative")
     parent_logits = predictions["parents"].masked_fill(
         ~_parent_candidate_mask(clean["node_mask"]), -1e9
     )
@@ -591,12 +624,24 @@ def synthesis_program_flow_loss(
         ),
         "closure_bond_ce": chemistry_losses["closure_bond_ce"],
     }
+    group_metrics = {}
+    if parent_group_loss_weight > 0:
+        categorical = losses["parent_pointer_ce"]
+        group = _parent_group_cross_entropy(predictions["parents"], clean)
+        losses["parent_pointer_ce"] = (categorical + parent_group_loss_weight * group) / (
+            1 + parent_group_loss_weight
+        )
+        group_metrics = {
+            "parent_categorical_ce": categorical,
+            "parent_group_ce": group,
+        }
     total = sum(losses.values(), start=predictions["nodes"].new_zeros(()))
+    reported = losses | group_metrics
     if materialize_metrics:
-        metrics = {name: float(value.detach()) for name, value in losses.items()}
+        metrics = {name: float(value.detach()) for name, value in reported.items()}
         metrics["total"] = float(total.detach())
     else:
-        metrics = {name: value.detach() for name, value in losses.items()}
+        metrics = {name: value.detach() for name, value in reported.items()}
         metrics["total"] = total.detach()
     return total, metrics
 

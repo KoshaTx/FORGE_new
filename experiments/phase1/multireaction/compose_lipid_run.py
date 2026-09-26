@@ -41,8 +41,94 @@ RUN_SOURCES = {
     "experiments/phase1/multireaction/compose_lipid_run.py",
     "forge/model/training_restart.py",
     "experiments/phase1/multireaction/compose_lipid_training.py",
+    "forge/model/compose_lipid_prefetch.py",
 }
 PARALLEL_GPUS = {"six_gpu_shards_v1": 6, "adaptive_eight_gpu_shards_v1": 8}
+INITIALIZATION_SCHEMA = "forge.declared_model_adamw_branch_initialization.v1"
+
+
+def _same_tensors(left, right):
+    if torch.is_tensor(left):
+        return torch.is_tensor(right) and left.dtype == right.dtype and torch.equal(left, right)
+    if isinstance(left, dict):
+        return (
+            isinstance(right, dict)
+            and left.keys() == right.keys()
+            and all(_same_tensors(left[k], right[k]) for k in left)
+        )
+    if isinstance(left, (tuple, list)):
+        return (
+            type(left) is type(right)
+            and len(left) == len(right)
+            and all(_same_tensors(a, b) for a, b in zip(left, right, strict=True))
+        )
+    return left == right
+
+
+def read_initialization(repo: Path, config: dict) -> dict | None:
+    """A declared fresh branch preserves source model/AdamW and starts new RNG streams."""
+    if "initialization" not in config["inputs"]:
+        return None
+    value = torch.load(
+        resolve_pin(config["inputs"]["initialization"], repo, label="branch initialization"),
+        map_location="cpu",
+        weights_only=False,
+    )
+    if not isinstance(value, dict) or value.get("schema_version") != INITIALIZATION_SCHEMA:
+        raise TrainingRestartError("Expected a distinct declared branch initialization schema")
+    origin, random_policy = value.get("origin", {}), value.get("random_policy", {})
+    original_config = read_json_object(
+        resolve_pin(origin.get("configuration"), repo, label="branch source configuration"),
+        error=TrainingRestartError,
+    )
+    source = torch.load(
+        resolve_pin(origin.get("checkpoint"), repo, label="branch source checkpoint"),
+        map_location="cpu",
+        weights_only=False,
+    )
+    if (
+        source.get("schema_version") != CHECKPOINT_SCHEMA
+        or source.get("identity", {}).get("config_sha256") != origin["configuration"]["sha256"]
+        or source.get("identity", {}).get("inputs") != original_config["inputs"]
+        or type(source.get("completed_steps")) is not int
+        or source["completed_steps"] < 0
+        or source.get("examples_seen")
+        != source["completed_steps"] * original_config["runtime"]["batch_size"]
+        or origin.get("completed_steps") != source.get("completed_steps")
+        or origin.get("examples_seen") != source.get("examples_seen")
+        or value.get("new_branch_counters") != {"completed_steps": 0, "examples_seen": 0}
+        or set(random_policy)
+        != {"seed", "reset_all_training_streams", "original_random_state_restored"}
+        or type(random_policy["seed"]) is not int
+        or not 0 <= random_policy["seed"] < 2**32
+        or random_policy["reset_all_training_streams"] is not True
+        or random_policy["original_random_state_restored"] is not False
+    ):
+        raise TrainingRestartError("Branch lineage, counters or random-stream policy changed")
+    for name in ("model", "optimizer", "semantic_weights", "gradient_clip_norm"):
+        if original_config.get(name) != config.get(name):
+            raise TrainingRestartError(f"Branch {name} policy differs from its source")
+    original_objective = validate_objective(original_config.get("objective"))
+    branch_objective = validate_objective(config.get("objective"))
+    # A declared fresh branch may vary this qualified loss-only intervention. Every
+    # other objective, source, model and AdamW setting retains its exact source value.
+    original_objective.pop("parent_group_loss_weight", None)
+    branch_objective.pop("parent_group_loss_weight", None)
+    if original_objective != branch_objective:
+        raise TrainingRestartError("Branch objective policy differs from its source")
+    for name in ("population", "verification", "measure", "noise_marginals", "mapped_cache"):
+        if original_config["inputs"].get(name) != config["inputs"].get(name):
+            raise TrainingRestartError(f"Branch source input differs: {name}")
+    if (
+        value.get("model_config") != config["model"]
+        or value.get("optimizer_config") != config["optimizer"]
+    ):
+        raise TrainingRestartError("Branch architecture or optimizer metadata changed")
+    if not _same_tensors(value.get("model"), source["model"]) or not _same_tensors(
+        value.get("optimizer"), source["optimizer"]
+    ):
+        raise TrainingRestartError("Branch model or AdamW tensors differ from the pinned original")
+    return value
 
 
 def read_admitted_config(repo: Path, path: Path) -> dict[str, Any]:
@@ -51,7 +137,7 @@ def read_admitted_config(repo: Path, path: Path) -> dict[str, Any]:
     if config.get("schema_version") != CONFIG_SCHEMA:
         raise TrainingRestartError("Unsupported COMPOSE training config")
     inputs = config.get("inputs", {})
-    if set(inputs) not in (
+    if set(inputs) - {"initialization", "presentation_tape"} not in (
         DATA_INPUTS | {"noise_marginals"},
         DATA_INPUTS | {"noise_marginals", "mapped_cache"},
         DATA_INPUTS | {"noise_marginals", "prepared_tensors"},
@@ -85,7 +171,7 @@ def read_admitted_config(repo: Path, path: Path) -> dict[str, Any]:
     ):
         raise TrainingRestartError("Prepared tensor conditioning/padding policy is unsupported")
     if prepared == "prefetch":
-        if runtime.get("family_schedule") != "balanced_cycles":
+        if runtime.get("family_schedule") not in ("balanced_cycles", "presentation_tape_v1"):
             raise TrainingRestartError("Prepared prefetch requires balanced cycles")
         for key in ("prefetch_depth", "prefetch_workers"):
             if type(runtime.get(key)) is not int or runtime[key] < 1:
@@ -120,14 +206,27 @@ def read_admitted_config(repo: Path, path: Path) -> dict[str, Any]:
         ):
             raise TrainingRestartError("Prepared tensor manifest identity or completeness changed")
     family_count = runtime.get("families_per_batch")
-    if runtime.get("family_schedule", "independent") not in ("independent", "balanced_cycles"):
+    if runtime.get("family_schedule", "independent") not in (
+        "independent",
+        "balanced_cycles",
+        "presentation_tape_v1",
+    ):
         raise TrainingRestartError("Unknown family schedule")
-    if runtime.get("family_schedule") == "balanced_cycles" and family_count is None:
+    if (
+        runtime.get("family_schedule") in ("balanced_cycles", "presentation_tape_v1")
+        and family_count is None
+    ):
         raise TrainingRestartError("Balanced cycles require family-block sampling")
     if family_count is not None and (
         type(family_count) is not int or family_count < 1 or runtime["batch_size"] % family_count
     ):
         raise TrainingRestartError("Batch size must divide into families_per_batch")
+    if ("presentation_tape" in inputs) != (
+        runtime.get("family_schedule") == "presentation_tape_v1"
+    ) or ("presentation_tape" in inputs and prepared != "prefetch"):
+        raise TrainingRestartError(
+            "Presentation tape requires explicit tape schedule and prepared prefetch"
+        )
     if runtime.get("core_conditioning", "adapter") not in ("adapter", "qualified_core"):
         raise TrainingRestartError("Unknown core conditioning")
     objective = validate_objective(config.get("objective"))
@@ -219,6 +318,14 @@ def read_admitted_config(repo: Path, path: Path) -> dict[str, Any]:
         or (config["model"]["architecture"] == "sparse_mpnn" and any(weights.values()))
     ):
         raise TrainingRestartError("Invalid semantic loss weights for this architecture")
+    read_initialization(repo, config)
+    if "presentation_tape" in inputs:
+        from forge.model.compose_lipid_prefetch import load_presentation_tape
+
+        try:
+            load_presentation_tape(repo, inputs["presentation_tape"], config=config)
+        except (ValueError, KeyError) as error:
+            raise TrainingRestartError(f"Invalid presentation tape: {error}") from error
     return config
 
 
@@ -310,6 +417,18 @@ def run_training(
     config = read_admitted_config(repo, config_path)
     if type(seed) is not int or not 0 <= seed < 2**32:
         raise TrainingRestartError("seed must be a uint32 integer")
+    initialization = read_initialization(repo, config)
+    if initialization is not None and initialization["random_policy"]["seed"] != seed:
+        raise TrainingRestartError("Branch seed differs from its declared random-stream policy")
+    branch = (
+        dict(
+            initialization=config["inputs"]["initialization"],
+            origin=initialization["origin"],
+            random_policy=initialization["random_policy"],
+        )
+        if initialization is not None
+        else None
+    )
     target = torch.device(device)
     if target.type not in {"cpu", "cuda"}:
         raise TrainingRestartError("Only CPU and CUDA are supported")
@@ -390,6 +509,16 @@ def run_training(
                     raise TrainingRestartError(
                         "Prepared tensor cache has incomplete cohort coverage"
                     )
+            tape = None
+            if "presentation_tape" in config["inputs"]:
+                from forge.model.compose_lipid_prefetch import load_presentation_tape
+
+                try:
+                    tape = load_presentation_tape(
+                        repo, config["inputs"]["presentation_tape"], config=config, data=data
+                    )
+                except (ValueError, KeyError) as error:
+                    raise TrainingRestartError(f"Invalid presentation tape: {error}") from error
             random.seed(seed)
             np.random.seed(seed)
             torch.manual_seed(seed)
@@ -416,6 +545,7 @@ def run_training(
                 )
             ]
             cycle_schedule = runtime.get("family_schedule") == "balanced_cycles"
+            track_exposure = cycle_schedule or tape is not None
             exposure = {name: 0 for name in family_names}
             if checkpoint is not None:
                 state = torch.load(checkpoint, map_location=target, weights_only=False)
@@ -432,23 +562,46 @@ def run_training(
                     or pointer["completed_steps"] != completed
                 ):
                     raise TrainingRestartError("Checkpoint counters changed")
+                if state.get("branch") != branch:
+                    raise TrainingRestartError("Checkpoint branch lineage changed")
+                if tape is not None and (
+                    state.get("presentation_cursor") != completed
+                    or pointer.get("presentation_cursor") != completed
+                ):
+                    raise TrainingRestartError("Checkpoint presentation cursor changed")
+                if tape is None and (
+                    "presentation_cursor" in state or "presentation_cursor" in pointer
+                ):
+                    raise TrainingRestartError("Unexpected checkpoint presentation cursor")
                 model.load_state_dict(state["model"], strict=True)
                 optimizer.load_state_dict(state["optimizer"])
                 restore_training_random_state(state["random"], rng, generator, device=target)
                 metrics = state["last_metrics"]
-                if cycle_schedule:
+                if track_exposure:
                     from forge.model.family_exposure import expected_exposure
 
                     exposure = state["family_presentations"]
-                    expected = expected_exposure(
-                        families=len(family_names),
-                        per_batch=runtime["families_per_batch"],
-                        batch_size=runtime["batch_size"],
-                        steps=completed,
-                        seed=seed,
+                    expected = (
+                        tape["exposure"][completed]
+                        if tape is not None
+                        else expected_exposure(
+                            families=len(family_names),
+                            per_batch=runtime["families_per_batch"],
+                            batch_size=runtime["batch_size"],
+                            steps=completed,
+                            seed=seed,
+                        )
                     )
                     if exposure != dict(zip(family_names, expected.tolist(), strict=True)):
                         raise TrainingRestartError("Family exposure checkpoint counters changed")
+            elif initialization is not None:
+                model.load_state_dict(initialization["model"], strict=True)
+                optimizer.load_state_dict(initialization["optimizer"])
+                random.seed(seed)
+                np.random.seed(seed)
+                torch.manual_seed(seed)
+                rng = np.random.default_rng(seed)
+                generator.manual_seed(seed)
 
             def save() -> None:
                 path = work_dir / f"checkpoint_{completed:09d}.pt"
@@ -464,7 +617,9 @@ def run_training(
                         "optimizer": optimizer.state_dict(),
                         "random": random_state,
                         "last_metrics": metrics,
-                        **({"family_presentations": exposure} if cycle_schedule else {}),
+                        **({"family_presentations": exposure} if track_exposure else {}),
+                        **({"branch": branch} if branch is not None else {}),
+                        **({"presentation_cursor": completed} if tape is not None else {}),
                     },
                 )
                 write_json(
@@ -479,9 +634,10 @@ def run_training(
                                 last_metrics=metrics,
                                 examples_seen=completed * runtime["batch_size"],
                             )
-                            if cycle_schedule
+                            if track_exposure
                             else {}
                         ),
+                        **({"presentation_cursor": completed} if tape is not None else {}),
                     },
                 )
                 commit_progress()
@@ -533,6 +689,7 @@ def run_training(
                         depth=runtime["prefetch_depth"],
                         workers=runtime["prefetch_workers"],
                         pin_memory=target.type == "cuda" and not parallel,
+                        presentation_indices=tape["indices"] if tape is not None else None,
                     )
                 )
                 if target.type == "cuda" and not parallel:
@@ -540,7 +697,9 @@ def run_training(
                     resources.callback(batches.close)
             for step in range(completed + 1, runtime["optimizer_steps"] + 1):
                 family_selection = None
-                if cycle_schedule:
+                if tape is not None:
+                    family_selection = tape["families"][step - 1]
+                elif cycle_schedule:
                     from forge.model.family_exposure import balanced_families
 
                     family_selection = balanced_families(
@@ -601,7 +760,9 @@ def run_training(
                 "examples_seen": completed * runtime["batch_size"],
                 "last_metrics": metrics,
                 "checkpoint_sha256": str(sha256_file(final)),
-                **({"family_presentations": exposure} if cycle_schedule else {}),
+                **({"family_presentations": exposure} if track_exposure else {}),
+                **({"branch": branch} if branch is not None else {}),
+                **({"presentation_cursor": completed} if tape is not None else {}),
             }
             write_json(output_dir / "result.json", result)
             commit_progress()

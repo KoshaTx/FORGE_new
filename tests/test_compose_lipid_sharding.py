@@ -54,10 +54,12 @@ def fixture(run_args):  # noqa: F811
 
 
 @pytest.mark.parametrize("empty", [False, True])
+@pytest.mark.parametrize("group_weight", [0.0, 1.0])
 def test_unequal_shards_preserve_global_loss_and_prediction_gradients(
-    run_args, empty  # noqa: F811
+    run_args, empty, group_weight  # noqa: F811
 ):  # noqa: F811
     model, clean, config, node, bond = fixture(run_args)
+    config["objective"] = dict(OBJECTIVE, parent_group_loss_weight=group_weight)
     if empty:
         for key in (
             "atom_variable_mask",
@@ -76,7 +78,9 @@ def test_unequal_shards_preserve_global_loss_and_prediction_gradients(
     prediction = {k: v.detach().requires_grad_() for k, v in prediction.items()}
     topology = {k: v.detach().requires_grad_() for k, v in topology.items()}
     settings = {
-        k: v for k, v in OBJECTIVE.items() if k not in ("gradient_balancing", "pcgrad_backend")
+        k: v
+        for k, v in config["objective"].items()
+        if k not in ("gradient_balancing", "pcgrad_backend")
     }
     weights = dict(config["semantic_weights"], repeat_consistency_weight=0.0)
     expected, metrics = reaction_program_transformer_loss(
@@ -126,8 +130,12 @@ def test_unequal_shards_preserve_global_loss_and_prediction_gradients(
             torch.testing.assert_close(actual, expected, atol=2e-6, rtol=2e-4)
 
 
-def test_serial_and_independent_shards_preserve_gradients_and_metrics(run_args):  # noqa: F811
+@pytest.mark.parametrize("group_weight", [0.0, 1.0])
+def test_serial_and_independent_shards_preserve_gradients_and_metrics(
+    run_args, group_weight  # noqa: F811
+):
     model, clean, config, node, bond = fixture(run_args)
+    config["objective"] = dict(OBJECTIVE, parent_group_loss_weight=group_weight)
     kwargs = dict(seed=810, device="cpu")
     serial = split_gradient(model, clean, config, node, bond, parts=(0, 1), **kwargs)
     separate = add_results(

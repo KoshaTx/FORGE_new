@@ -138,6 +138,188 @@ def assert_exact(left, right):
         assert left == right
 
 
+def branch_tape_case(run_args):
+    """Use only existing tiny admitted fixture graphs; no research checkpoint."""
+    from forge.corpus.compose_lipid_training_data import ComposeLipidTrainingData
+    from forge.model.compose_lipid_prefetch import TAPE_SCHEMA
+    from tests.test_compose_lipid_prepared_run import prepared_run
+
+    args, config, cache = prepared_run.__wrapped__(run_args)
+    root = args["repo"]
+    config["inputs"]["prepared_tensors"] = cache
+    config["runtime"].update(prepared_loading="prefetch", prefetch_depth=3, prefetch_workers=2)
+    original_path = root / "source-config.json"
+    write_json(original_path, config)
+    source_args = dict(args, config_path=original_path)
+    execute(source_args, "branch-source")
+    source = saved(source_args, "branch-source")
+    source_pin = pin(root, root / "branch-source-output/checkpoint.pt")
+    initialization = {
+        "schema_version": runner.INITIALIZATION_SCHEMA,
+        "origin": {
+            "configuration": pin(root, original_path),
+            "checkpoint": source_pin,
+            "completed_steps": source["completed_steps"],
+            "examples_seen": source["examples_seen"],
+        },
+        "model_config": config["model"],
+        "optimizer_config": config["optimizer"],
+        "model": source["model"],
+        "optimizer": source["optimizer"],
+        "new_branch_counters": {"completed_steps": 0, "examples_seen": 0},
+        "random_policy": {
+            "seed": args["seed"],
+            "reset_all_training_streams": True,
+            "original_random_state_restored": False,
+        },
+    }
+    torch.save(initialization, root / "initialization.pt")
+    config["inputs"]["initialization"] = pin(root, root / "initialization.pt")
+    with ComposeLipidTrainingData(
+        root, **{k: config["inputs"][k] for k in runner.DATA_INPUTS}
+    ) as data:
+        families = [
+            r[0]
+            for r in data._database.execute("SELECT DISTINCT family FROM weights ORDER BY family")
+        ]
+        groups = np.tile(np.array([0, 1, 2]), (4, 1))
+        rng = np.random.default_rng(38)
+        indices = np.stack(
+            [data.sample_indices(6, rng, families_per_batch=3, family_selection=g) for g in groups]
+        )
+    np.savez(root / "presentation.npz", indices=indices, groups=groups)
+    tape = {
+        "schema_version": TAPE_SCHEMA,
+        "inputs": {k: config["inputs"][k] for k in ("population", "verification", "measure")},
+        "families": families,
+        "optimizer_steps": 4,
+        "batch_size": 6,
+        "families_per_batch": 3,
+        "artifact": pin(root, root / "presentation.npz"),
+        "indices_key": "indices",
+        "families_key": "groups",
+        "excluded_target_ids": [],
+        "presentations_by_family": {f: 8 if i < 3 else 0 for i, f in enumerate(families)},
+    }
+    write_json(root / "presentation.json", tape)
+    config["inputs"]["presentation_tape"] = pin(root, root / "presentation.json")
+    config["runtime"]["family_schedule"] = "presentation_tape_v1"
+    write_json(args["config_path"], config)
+    return args, config, source, indices
+
+
+@pytest.mark.parametrize("group_weight", [None, 0.0, 1.0])
+def test_declared_branch_tape_restores_zero_progress_and_exact_restart(run_args, group_weight):
+    args, config, source, indices = branch_tape_case(run_args)
+    if group_weight is not None:
+        config["objective"] = dict(config["objective"], parent_group_loss_weight=group_weight)
+        write_json(args["config_path"], config)
+    initial = []
+
+    def inspect():
+        state = saved(args, "branch-full")
+        if state["completed_steps"] == 0:
+            initial.append(state)
+
+    result = execute(args, "branch-full", commit=inspect)
+    assert len(initial) == 1
+    assert initial[0]["examples_seen"] == initial[0]["presentation_cursor"] == 0
+    assert set(initial[0]["family_presentations"].values()) == {0}
+    assert initial[0]["last_metrics"] == {}
+    assert initial[0]["branch"]["origin"]["completed_steps"] == source["completed_steps"]
+    for key in ("model", "optimizer"):
+        assert_exact(initial[0][key], source[key])
+    assert not torch.equal(
+        initial[0]["random"]["torch_cpu_rng_state"], source["random"]["torch_cpu_rng_state"]
+    )
+    assert result["examples_seen"] == indices.size
+    assert result["presentation_cursor"] == 4
+
+    def interrupt():
+        if saved(args, "branch-resume")["completed_steps"] == 2:
+            raise ConnectionError("interrupt with uncommitted prefetched tape entries")
+
+    with pytest.raises(ConnectionError, match="prefetched"):
+        execute(args, "branch-resume", commit=interrupt)
+    execute(args, "branch-resume", resume=True)
+    assert_exact(saved(args, "branch-full"), saved(args, "branch-resume"))
+    with pytest.raises(TrainingRestartError, match="fresh runs forbid"):
+        execute(args, "branch-full")
+
+
+def test_fresh_branch_only_permits_declared_parent_group_objective_change(run_args):
+    args, config, _, _ = branch_tape_case(run_args)
+    config["objective"] = dict(config["objective"], parent_group_loss_weight=1.0)
+    runner.read_initialization(args["repo"], config)
+    config["objective"]["offspring_weight"] += 1.0
+    with pytest.raises(TrainingRestartError, match="objective policy differs"):
+        runner.read_initialization(args["repo"], config)
+
+
+def test_normal_resume_rejects_parent_group_objective_drift(run_args):
+    args, config, _, _ = branch_tape_case(run_args)
+    execute(args, "group-resume")
+    config["objective"] = dict(config["objective"], parent_group_loss_weight=1.0)
+    write_json(args["config_path"], config)
+    with pytest.raises(TrainingRestartError):
+        execute(args, "group-resume", resume=True)
+
+
+@pytest.mark.parametrize(
+    "defect", ["weight", "optimizer", "lr", "seed", "stale_tape", "stale_origin"]
+)
+def test_branch_and_tape_drift_rejected_before_model_allocation(run_args, monkeypatch, defect):
+    args, config, _, _ = branch_tape_case(run_args)
+    root = args["repo"]
+    if defect in ("weight", "optimizer"):
+        state = torch.load(root / "initialization.pt", weights_only=False)
+        if defect == "weight":
+            next(iter(state["model"].values())).add_(1)
+        else:
+            next(iter(state["optimizer"]["state"].values()))["exp_avg"].add_(1)
+        torch.save(state, root / "initialization.pt")
+        config["inputs"]["initialization"] = pin(root, root / "initialization.pt")
+    elif defect == "lr":
+        config["optimizer"]["lr"] *= 2
+    elif defect == "seed":
+        args = dict(args, seed=args["seed"] + 1)
+    elif defect == "stale_tape":
+        with (root / "presentation.npz").open("ab") as handle:
+            handle.write(b"drift")
+    else:
+        with (root / "branch-source-output/checkpoint.pt").open("ab") as handle:
+            handle.write(b"drift")
+    write_json(args["config_path"], config)
+
+    def forbid(**kwargs):
+        raise AssertionError("Invalid branch must fail before model allocation")
+
+    monkeypatch.setattr(runner, "build_synthesis_program_flow", forbid)
+    with pytest.raises((TrainingRestartError, PinError)):
+        execute(args, "bad-branch")
+
+
+def test_tape_cursor_cannot_skip_a_prefetched_update(run_args):
+    args, _, _, _ = branch_tape_case(run_args)
+
+    def interrupt():
+        if saved(args, "cursor")["completed_steps"] == 2:
+            raise ConnectionError("stop")
+
+    with pytest.raises(ConnectionError):
+        execute(args, "cursor", commit=interrupt)
+    work = args["repo"] / "cursor"
+    pointer = json.loads((work / "latest.json").read_text())
+    checkpoint = work / pointer["checkpoint"]["path"]
+    state = torch.load(checkpoint, weights_only=False)
+    state["presentation_cursor"] += 1
+    torch.save(state, checkpoint)
+    pointer["checkpoint"] = pin(work, checkpoint)
+    write_json(work / "latest.json", pointer)
+    with pytest.raises(TrainingRestartError, match="presentation cursor"):
+        execute(args, "cursor", resume=True)
+
+
 @pytest.mark.parametrize("value", [None, 0, "false"])
 def test_invalid_memory_fill_policy_fails_before_training(run_args, value):
     config = json.loads(run_args["config_path"].read_text())
@@ -399,8 +581,13 @@ def test_stage_uses_backend_volume_committer(run_args):
     assert {value.label for value in result.artifacts} == {"checkpoint", "result"}
 
 
-@pytest.mark.parametrize("prepared_tensors", [False, True])
-def test_inventory_includes_tensor_and_source_recipe_closure(run_args, prepared_tensors):
+@pytest.mark.parametrize(
+    "prepared_tensors,tape_defect",
+    [(False, None), (True, None), (True, "range"), (True, "family"), (True, "excluded")],
+)
+def test_inventory_includes_tensor_and_source_recipe_closure(
+    run_args, prepared_tensors, tape_defect
+):
     repo = run_args["repo"]
 
     def save(name, value):
@@ -492,7 +679,63 @@ def test_inventory_includes_tensor_and_source_recipe_closure(run_args, prepared_
             implementation=pin(repo, repo / "forge/model/compose_lipid_training.py"),
         )
         cfg["inputs"]["prepared_tensors"] = pin(repo, manifest)
+        if tape_defect is not None:
+            from forge.model.compose_lipid_prefetch import TAPE_SCHEMA
+
+            cfg["runtime"].update(
+                prepared_loading="prefetch",
+                family_schedule="presentation_tape_v1",
+                families_per_batch=1,
+                prefetch_depth=2,
+                prefetch_workers=1,
+            )
+            with ComposeLipidTrainingData(
+                repo, **{k: cfg["inputs"][k] for k in runner.DATA_INPUTS}
+            ) as data:
+                families = [
+                    row[0]
+                    for row in data._database.execute(
+                        "SELECT DISTINCT family FROM weights ORDER BY family"
+                    )
+                ]
+                rows = list(
+                    data._database.execute("SELECT record_index,target_id,family FROM weights")
+                )
+                first = next(row for row in rows if row[2] == families[0])
+                other = next(row for row in rows if row[2] != families[0])
+                indices = np.full((4, 2), first[0], dtype=np.int64)
+                if tape_defect == "range":
+                    indices[0, 0] = len(data)
+                elif tape_defect == "family":
+                    indices[0, 0] = other[0]
+            np.savez(repo / "tape.npz", indices=indices, groups=np.zeros((4, 1), dtype=np.int64))
+            cfg["inputs"]["presentation_tape"] = save(
+                "tape.json",
+                {
+                    "schema_version": TAPE_SCHEMA,
+                    "inputs": {
+                        k: cfg["inputs"][k] for k in ("population", "verification", "measure")
+                    },
+                    "families": families,
+                    "optimizer_steps": 4,
+                    "batch_size": 2,
+                    "families_per_batch": 1,
+                    "artifact": pin(repo, repo / "tape.npz"),
+                    "indices_key": "indices",
+                    "families_key": "groups",
+                    "excluded_target_ids": [first[1]] if tape_defect == "excluded" else [],
+                    "presentations_by_family": {
+                        f: 8 if i == 0 else 0 for i, f in enumerate(families)
+                    },
+                },
+            )
     write_json(run_args["config_path"], cfg)
+    if tape_defect is not None:
+        # Schema and artifact pins pass; staging must also authenticate actual record identities.
+        runner.read_admitted_config(repo, run_args["config_path"])
+        with pytest.raises(TrainingRestartError, match="Presentation tape"):
+            launch.training_files(repo, run_args["config_path"])
+        return
     inventory = launch.training_files(repo, run_args["config_path"])
     assert {
         "tensor.npz",
@@ -612,6 +855,52 @@ def test_catalog_registers_the_training_stage():
 
     load_catalog()
     assert registry.resolve(launch.IMPLEMENTATION) is launch.train
+
+
+def test_branch_submission_checks_derived_seed_before_staging(run_args, monkeypatch):
+    args, config, _, _ = branch_tape_case(run_args)
+    repo = args["repo"]
+    spec = json.loads((ROOT / "experiments/installation_smoke/experiment.json").read_text())
+    spec["replicates"]["smoke"] = 3
+    item = spec["stages"][0]
+    item.update(
+        implementation=launch.IMPLEMENTATION,
+        config=pin(repo, args["config_path"]),
+        inputs=config["inputs"],
+        outputs={
+            "checkpoint": {"path": "checkpoint.pt", "schema_version": runner.CHECKPOINT_SCHEMA},
+            "result": {"path": "result.json", "schema_version": runner.RESULT_SCHEMA},
+        },
+    )
+    item["determinism"]["stream"] = "branch-fixture"
+    write_json(repo / "spec.json", spec)
+    staged = []
+    monkeypatch.setattr(launch, "training_files", lambda *a: staged.append(True) or {})
+    monkeypatch.setattr(launch, "modal_request_plan", lambda *a, **k: {"uploads": {}})
+    with pytest.raises(TrainingRestartError, match="stage seed"):
+        launch.detached_plan(repo, repo / "spec.json", profile="smoke", replicate=2)
+    assert not staged
+    parsed = launch.ExperimentSpec.load(repo / "spec.json")
+    root_seed = SeedPlan(parsed.root_seed, f"{parsed.experiment_id}/smoke/replicates").derive(
+        "replicate", 2
+    )
+    expected = (
+        SeedPlan(root_seed, f"{parsed.experiment_id}/smoke/branch-fixture").derive(
+            "compose-training"
+        )
+        % 2**32
+    )
+    initializer = torch.load(repo / "initialization.pt", weights_only=False)
+    initializer["random_policy"]["seed"] = expected
+    torch.save(initializer, repo / "initialization.pt")
+    config["inputs"]["initialization"] = pin(repo, repo / "initialization.pt")
+    write_json(args["config_path"], config)
+    item.update(config=pin(repo, args["config_path"]), inputs=config["inputs"])
+    write_json(repo / "spec.json", spec)
+    assert launch.detached_plan(repo, repo / "spec.json", profile="smoke", replicate=2) == {
+        "uploads": {}
+    }
+    assert staged == [True]
 
 
 def test_package_rejects_unadmitted_data_before_any_fitting(run_args):

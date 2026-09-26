@@ -1,0 +1,1957 @@
+EEEEEE.....FFFFFEEEEEEEEEEEEEEEE........................................ [ 25%]
+........................................................................ [ 51%]
+........................................................................ [ 77%]
+...F..........................................................           [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_every_binding_decodes_like_fresh_full_graph_tensorization _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_introduced_and_fragmented_origins_keep_true_source_counts _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+____ ERROR at setup of test_null_conditioning_matches_shared_graph_collator ____
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_returned_arrays_are_owned_and_cache_bound_is_enforced _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_random_access_preserves_requested_order_and_repeated_draws _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_____ ERROR at setup of test_preparation_cannot_supply_a_training_measure ______
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_global_component_identity_never_changes_model_inputs __
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_incomplete_quantities_are_rejected_even_when_conditioning_is_null _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+
+    @pytest.fixture(scope="module")
+    def examples(source_pins):
+>       with QualifiedProgramCache(ROOT, **source_pins, maximum_cached_shards=2) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_every_binding_and_maximum_size_survive_chunk_boundaries _
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+__ ERROR at setup of test_random_indices_ids_repeated_draws_and_owned_arrays ___
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_____________ ERROR at setup of test_invalid_index_is_rejected[-1] _____________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_________ ERROR at setup of test_invalid_index_is_rejected[1000000000] _________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+____________ ERROR at setup of test_invalid_index_is_rejected[True] ____________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+____________ ERROR at setup of test_invalid_index_is_rejected[1.5] _____________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+______ ERROR at setup of test_preparation_never_supplies_training_weights ______
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ ERROR at setup of test_compiler_refuses_overwrite_or_duplicate_graphs_and_cleans_partial_output _
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+______ ERROR at setup of test_numeric_narrowing_cannot_silently_truncate _______
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_________ ERROR at setup of test_corrupted_cache_is_rejected[checksum] _________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_________ ERROR at setup of test_corrupted_cache_is_rejected[offsets] __________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_________ ERROR at setup of test_corrupted_cache_is_rejected[semantic] _________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+__________ ERROR at setup of test_corrupted_cache_is_rejected[index] ___________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+________ ERROR at setup of test_corrupted_cache_is_rejected[admission] _________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        if not (BASE / "verification.json").exists():
+            pytest.skip("requires the documented compose_lipid_unified_preparation_v1 artifacts")
+        inputs = {
+            name: pin(ROOT, BASE / file)
+            for name, file in (("population", "result.json"), ("verification", "verification.json"))
+        }
+        with tempfile.TemporaryDirectory(
+            prefix="mapped-test-", dir=ROOT / "results/phase1"
+        ) as directory:
+>           with QualifiedProgramCache(ROOT, **inputs) as source:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_mapped_program_cache.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+=================================== FAILURES ===================================
+_ test_source_protection_is_checked_before_exposing_a_record[old_projection-heldout] _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f2dbe10>
+field = 'old_projection', value = 'heldout'
+
+    @pytest.mark.parametrize(
+        "field,value",
+        [
+            ("old_projection", "heldout"),
+            ("corrected_projection", "heldout"),
+            ("eligible_for_program_preparation", False),
+            ("training_admitted", True),
+        ],
+    )
+    def test_source_protection_is_checked_before_exposing_a_record(
+        source_pins, monkeypatch, field, value
+    ):
+>       with QualifiedProgramCache(ROOT, **source_pins) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ test_source_protection_is_checked_before_exposing_a_record[corrected_projection-heldout] _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f799f10>
+field = 'corrected_projection', value = 'heldout'
+
+    @pytest.mark.parametrize(
+        "field,value",
+        [
+            ("old_projection", "heldout"),
+            ("corrected_projection", "heldout"),
+            ("eligible_for_program_preparation", False),
+            ("training_admitted", True),
+        ],
+    )
+    def test_source_protection_is_checked_before_exposing_a_record(
+        source_pins, monkeypatch, field, value
+    ):
+>       with QualifiedProgramCache(ROOT, **source_pins) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ test_source_protection_is_checked_before_exposing_a_record[eligible_for_program_preparation-False] _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f9449d0>
+field = 'eligible_for_program_preparation', value = False
+
+    @pytest.mark.parametrize(
+        "field,value",
+        [
+            ("old_projection", "heldout"),
+            ("corrected_projection", "heldout"),
+            ("eligible_for_program_preparation", False),
+            ("training_admitted", True),
+        ],
+    )
+    def test_source_protection_is_checked_before_exposing_a_record(
+        source_pins, monkeypatch, field, value
+    ):
+>       with QualifiedProgramCache(ROOT, **source_pins) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+_ test_source_protection_is_checked_before_exposing_a_record[training_admitted-True] _
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f2f2850>
+field = 'training_admitted', value = True
+
+    @pytest.mark.parametrize(
+        "field,value",
+        [
+            ("old_projection", "heldout"),
+            ("corrected_projection", "heldout"),
+            ("eligible_for_program_preparation", False),
+            ("training_admitted", True),
+        ],
+    )
+    def test_source_protection_is_checked_before_exposing_a_record(
+        source_pins, monkeypatch, field, value
+    ):
+>       with QualifiedProgramCache(ROOT, **source_pins) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+______________ test_saved_source_instance_corruption_is_rejected _______________
+
+source_pins = {'population': {'path': 'results/phase1/compose_lipid_unified_preparation_v1/result.json', 'sha256': '7eca382f6aab4b53...ified_preparation_v1/verification.json', 'sha256': '2b8c8bd325011e37fab129779e9510711b20f29b4829d2a8697dc1d9d491fbac'}}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f8985d0>
+
+    def test_saved_source_instance_corruption_is_rejected(source_pins, monkeypatch):
+>       with QualifiedProgramCache(ROOT, **source_pins) as cache:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_qualified_program_cache.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/corpus/qualified_program_cache.py:139: in __init__
+    request = self._read(self.population["request"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/corpus/qualified_program_cache.py:178: in _read
+    resolve_pin(value, self.repo, label="qualified program dependency").read_text()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+record = {'path': 'results/phase1/compose_lipid_unified_preparation_v1/request.json', 'sha256': '8b1c0d7fa5067a2402af3b2da66ebc0e9e213cd27ef126db4399a89a5103933c'}
+repo = PosixPath('/private/tmp/forge-remaining-commit-ymc4y8t9')
+label = 'qualified program dependency'
+
+    def resolve_pin(record: Mapping[str, Any], repo: Path, *, label: str) -> Path:
+        """Validate one `{"path", "sha256"}` record and return the file it names.
+    
+        Fails closed on every count: the record must have exactly those two keys, the digest must be
+        well formed, the path must resolve inside `repo`, it must be a real file rather than a symlink
+        pointing elsewhere, and its contents must hash to the recorded digest.
+    
+        The symlink and containment checks matter together. Without both, a pinned input could be made
+        to satisfy its own hash while actually reading bytes from outside the repository.
+        """
+        if not isinstance(record, Mapping) or set(record) != {"path", "sha256"}:
+            raise PinError(f"malformed input pin for {label}: expected exactly path and sha256")
+    
+        declared = record["sha256"]
+        if not is_sha256(declared):
+            raise PinError(f"malformed sha256 for {label}: {declared!r}")
+    
+        path = Path(record["path"])
+        candidate = path if path.is_absolute() else repo / path
+    
+        # Check for a symlink before resolving, not after: resolve() follows the link, so asking a
+        # resolved path whether it is a symlink always answers no.
+        if candidate.is_symlink():
+            raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+    
+        resolved = candidate.resolve()
+        try:
+            resolved.relative_to(repo.resolve())
+        except ValueError as error:
+            raise PinError(
+                f"pinned input for {label} resolves outside the repository: {resolved}"
+            ) from error
+    
+        if not resolved.is_file():
+>           raise PinError(f"pinned input for {label} is missing: {resolved}")
+E           forge.core.hashing.PinError: pinned input for qualified program dependency is missing: /private/tmp/forge-remaining-commit-ymc4y8t9/results/phase1/compose_lipid_unified_preparation_v1/request.json
+
+forge/core/hashing.py:139: PinError
+____________ test_shared_family_buffers_own_input_and_signal_growth ____________
+
+    def test_shared_family_buffers_own_input_and_signal_growth():
+        pool = {}
+        source = torch.arange(8, dtype=torch.float32)
+>       assert workers.share_batch(pool, {source.dtype: source})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_compose_lipid_adaptive.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+forge/model/compose_lipid_workers.py:141: in share_batch
+    pool[dtype] = torch.empty(value.numel(), dtype=dtype).share_memory_()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/_tensor.py:846: in share_memory_
+    self._typed_storage()._share_memory_()
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:1202: in _share_memory_
+    self._untyped_storage.share_memory_()
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:449: in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:523: in share_memory_
+    return super().share_memory_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:398: in share_memory_
+    self._share_filename_cpu_()
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:449: in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =  0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+ 0
+ 0
+ 192
+ 127
+[torch.storage.UntypedStorage(device=cpu) of size 32]
+args = (), kwargs = {}
+
+    @_share_memory_lock_protected
+    def _share_filename_cpu_(self, *args, **kwargs):
+>       return super()._share_filename_cpu_(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       RuntimeError: torch_shm_manager at "/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/bin/torch_shm_manager": Operation not permitted
+E       Exception raised from start_manager at /Users/runner/work/pytorch/pytorch/torch/lib/libshm/core.cpp:67 (most recent call first):
+E       frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>) + 52 (0x107c4cb10 in libc10.dylib)
+E       frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) + 120 (0x107c49f44 in libc10.dylib)
+E       frame #2: THManagedMapAllocatorInit::THManagedMapAllocatorInit(char const*, char const*) + 2104 (0x107ad3b14 in libshm.dylib)
+E       frame #3: THManagedMapAllocator::makeDataPtr(char const*, char const*, int, unsigned long) + 68 (0x107ad4114 in libshm.dylib)
+E       frame #4: THPStorage_shareFilename(_object*, _object*) + 156 (0x10a33987c in libtorch_python.dylib)
+E       frame #5: cfunction_vectorcall_NOARGS + 88 (0x1006e0d70 in python3.11)
+E       frame #6: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #7: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #8: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #9: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #10: method_vectorcall + 340 (0x1006c8d00 in python3.11)
+E       frame #11: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #12: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #13: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #14: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #15: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #16: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #17: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #18: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #19: _PyObject_Call_Prepend + 1072 (0x1003f5c58 in python3.11)
+E       frame #20: slot_tp_call + 104 (0x1004ae83c in python3.11)
+E       frame #21: _PyEval_EvalFrameDefault + 207944 (0x100488a10 in python3.11)
+E       frame #22: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #23: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #24: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #25: _PyObject_Call_Prepend + 1072 (0x1003f5c58 in python3.11)
+E       frame #26: slot_tp_call + 104 (0x1004ae83c in python3.11)
+E       frame #27: _PyEval_EvalFrameDefault + 223472 (0x10048c6b8 in python3.11)
+E       frame #28: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #29: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #30: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #31: _PyObject_Call_Prepend + 1072 (0x1003f5c58 in python3.11)
+E       frame #32: slot_tp_call + 104 (0x1004ae83c in python3.11)
+E       frame #33: _PyEval_EvalFrameDefault + 207944 (0x100488a10 in python3.11)
+E       frame #34: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #35: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #36: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #37: _PyObject_Call_Prepend + 1072 (0x1003f5c58 in python3.11)
+E       frame #38: slot_tp_call + 104 (0x1004ae83c in python3.11)
+E       frame #39: _PyEval_EvalFrameDefault + 207944 (0x100488a10 in python3.11)
+E       frame #40: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #41: _PyEval_EvalFrameDefault + 223168 (0x10048c588 in python3.11)
+E       frame #42: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #43: _PyObject_Call_Prepend + 1072 (0x1003f5c58 in python3.11)
+E       frame #44: slot_tp_call + 104 (0x1004ae83c in python3.11)
+E       frame #45: _PyEval_EvalFrameDefault + 207944 (0x100488a10 in python3.11)
+E       frame #46: _PyEval_Vector + 404 (0x10050026c in python3.11)
+E       frame #47: builtin_exec + 400 (0x100641a60 in python3.11)
+E       frame #48: cfunction_vectorcall_FASTCALL_KEYWORDS + 76 (0x1006e0cc0 in python3.11)
+E       frame #49: _PyEval_EvalFrameDefault + 207120 (0x1004886d8 in python3.11)
+E       frame #50: _PyFunction_Vectorcall + 420 (0x1005fa12c in python3.11)
+E       frame #51: pymain_run_module + 232 (0x1005b2a28 in python3.11)
+E       frame #52: Py_RunMain + 292 (0x1005b204c in python3.11)
+E       frame #53: pymain_main + 512 (0x100561fe0 in python3.11)
+E       frame #54: main + 44 (0x100561dd4 in python3.11)
+E       frame #55: start + 6992 (0x18c5cfe00 in dyld)
+
+/Users/rahulmaganti/Kosha/forge_new/.venv/lib/python3.11/site-packages/torch/storage.py:531: RuntimeError
+=========================== short test summary info ============================
+FAILED tests/test_qualified_program_cache.py::test_source_protection_is_checked_before_exposing_a_record[old_projection-heldout]
+FAILED tests/test_qualified_program_cache.py::test_source_protection_is_checked_before_exposing_a_record[corrected_projection-heldout]
+FAILED tests/test_qualified_program_cache.py::test_source_protection_is_checked_before_exposing_a_record[eligible_for_program_preparation-False]
+FAILED tests/test_qualified_program_cache.py::test_source_protection_is_checked_before_exposing_a_record[training_admitted-True]
+FAILED tests/test_qualified_program_cache.py::test_saved_source_instance_corruption_is_rejected
+FAILED tests/test_compose_lipid_adaptive.py::test_shared_family_buffers_own_input_and_signal_growth
+ERROR tests/test_qualified_program_cache.py::test_every_binding_decodes_like_fresh_full_graph_tensorization
+ERROR tests/test_qualified_program_cache.py::test_introduced_and_fragmented_origins_keep_true_source_counts
+ERROR tests/test_qualified_program_cache.py::test_null_conditioning_matches_shared_graph_collator
+ERROR tests/test_qualified_program_cache.py::test_returned_arrays_are_owned_and_cache_bound_is_enforced
+ERROR tests/test_qualified_program_cache.py::test_random_access_preserves_requested_order_and_repeated_draws
+ERROR tests/test_qualified_program_cache.py::test_preparation_cannot_supply_a_training_measure
+ERROR tests/test_qualified_program_cache.py::test_global_component_identity_never_changes_model_inputs
+ERROR tests/test_qualified_program_cache.py::test_incomplete_quantities_are_rejected_even_when_conditioning_is_null
+ERROR tests/test_mapped_program_cache.py::test_every_binding_and_maximum_size_survive_chunk_boundaries
+ERROR tests/test_mapped_program_cache.py::test_random_indices_ids_repeated_draws_and_owned_arrays
+ERROR tests/test_mapped_program_cache.py::test_invalid_index_is_rejected[-1]
+ERROR tests/test_mapped_program_cache.py::test_invalid_index_is_rejected[1000000000]
+ERROR tests/test_mapped_program_cache.py::test_invalid_index_is_rejected[True]
+ERROR tests/test_mapped_program_cache.py::test_invalid_index_is_rejected[1.5]
+ERROR tests/test_mapped_program_cache.py::test_preparation_never_supplies_training_weights
+ERROR tests/test_mapped_program_cache.py::test_compiler_refuses_overwrite_or_duplicate_graphs_and_cleans_partial_output
+ERROR tests/test_mapped_program_cache.py::test_numeric_narrowing_cannot_silently_truncate
+ERROR tests/test_mapped_program_cache.py::test_corrupted_cache_is_rejected[checksum]
+ERROR tests/test_mapped_program_cache.py::test_corrupted_cache_is_rejected[offsets]
+ERROR tests/test_mapped_program_cache.py::test_corrupted_cache_is_rejected[semantic]
+ERROR tests/test_mapped_program_cache.py::test_corrupted_cache_is_rejected[index]
+ERROR tests/test_mapped_program_cache.py::test_corrupted_cache_is_rejected[admission]
