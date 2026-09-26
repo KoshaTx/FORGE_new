@@ -1,0 +1,1410 @@
+{
+  "schema_version": "forge.iclr22.current_results_ledger.v2",
+  "status": "Computed development evidence populated; final independent-seed and held-out studies remain pending",
+  "date": "2026-09-26",
+  "inputs": {
+    "copied_manuscript": {
+      "path": "paper/v1_iclr22/archive/three_family_source.tex",
+      "sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+    },
+    "train_family_reference": {
+      "path": "results/phase1/compose_lipid_quality_v1/reference.json",
+      "sha256": "6a6b83bc1202540f6b8d82285b233d1e50936430a6d2840626670022cf03fd6e"
+    },
+    "source_evidence_plan_before_scaffold": {
+      "path": "paper/v1_iclr22/archive/NEW_MODEL_EVIDENCE_PLAN.md",
+      "sha256": "1c50db04a1578acaea352338944ae27f8cfe029f730c3f67d795ac8792a9687a"
+    },
+    "current_manuscript_source": {
+      "path": "paper/v1_iclr22/FORGE_ICLR2027_paper.tex",
+      "sha256": "5014ab32315861b1d3127195f7e70bd629d73fbbafa4a34ea43117f839ab24fa"
+    }
+  },
+  "family_ids": [
+    "a3_amine_aldehyde_alkyne",
+    "acid_epoxide_diester_multistep",
+    "aema_aza_thiol_addition",
+    "aldehyde_ugi3",
+    "aldehyde_ugi4",
+    "alpha_isocyanoester_dihydroimidazole",
+    "amine_alkylation",
+    "amine_epoxide_opening",
+    "aryl_reductive_amination",
+    "aza_michael_acrylamide",
+    "aza_michael_acrylate",
+    "disulfide_michael",
+    "epoxide_opening_o_acylation",
+    "iphos_ring_opening",
+    "ketone_isocyanide_amide",
+    "ketone_ugi4",
+    "maleate_addition",
+    "o_esterification",
+    "passerini_3cr",
+    "preassembled_thiol_yne_tail_amidation",
+    "reductive_amination",
+    "thiolactone_aminolysis_michael"
+  ],
+  "historical_results_policy": "Historical three-family measurements remain archived and unchanged. Verified TRAIN-derived and CAL development results may populate explicitly scoped development cells; they never stand in for independent final results.",
+  "new_result_default": null,
+  "blocks": [
+    {
+      "id": "R01",
+      "title": "Cohort and source support",
+      "latex_label": "tab:22-census",
+      "endpoints": "Admitted records, unique products, programs, studies and role components; exclusions, pending families, overlap, weights, size and closure support",
+      "denominator_and_unit": "family/program/source/split; unique constitutions separate from rows",
+      "required_artifacts": "TRAIN/CAL/TEST manifests, registry and admission hashes",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Exact local Git-history search also failed to recover the missing upstream precursor/architecture provenance. Archive location requested; no independent reference admitted.",
+      "remaining_final_work": "Final source/study/component-disjoint census and per-source evidence tiers; computed compatibility is not an experimental recipe.",
+      "linked_displays": [
+        "tab:reaction-family-background",
+        "fig:reaction-schemes",
+        "tab:22-census",
+        "fig:rxn-multicomponent-a",
+        "fig:rxn-ketone-ugi4",
+        "fig:rxn-multicomponent-b",
+        "fig:rxn-conjugate",
+        "fig:rxn-functionalization",
+        "fig:rxn-oxygen-phosphate",
+        "fig:rxn-ordered-a",
+        "fig:rxn-ordered-b",
+        "fig:rxn-ordered-c",
+        "fig:rxn-ordered-d"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/cal_namespace_bridge/versioned_union_census.json",
+          "sha256": "da1567fb838e09df284d48d3a6363c5c927ff892eff8a3204459d383f9c178cb"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/cal_namespace_bridge/validation.json",
+          "sha256": "f5a561c17ab7455396fc54dfb4b4ee46461d5b5de80df21fdc3f4599c34237b2"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/reference_lineage/result.json",
+          "sha256": "742df77466b7e7da9b21b453f578c6b4e5d5de36ff8c101fd2cf0b84f601a781"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/reference_lineage/history_audit_v2.json",
+          "sha256": "e4a1fea9c90a6cb360285edd1cdef8baa3366fea9881a52ce659a0893e310f56"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_cohort_v1/cohort.json",
+          "sha256": "bab2f76099f21fcfdcc19b5ec2af8a84470614ae52cb60148b2546d4800b962b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_training_readiness_v9/validation-report.json",
+          "sha256": "5bb06db2da26b6ed570ead5d138d0ec614edb236845c40439fdae7a7c2521107"
+        },
+        {
+          "path": "results/phase1/compose_lipid_mapped_preparation_v3/cache/manifest.json",
+          "sha256": "e9616f2f86b2d53cbdc3f1d79bbd130cd6cf7df0bf4296aad2f50b3e08b3f440"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R02",
+      "title": "Training and reproducibility",
+      "latex_label": "tab:22-training",
+      "endpoints": "Training seeds, presentations and updates per family, optimizer, LR, clipping, batch, precision, hardware, runtime, memory, numerical/restart equivalence",
+      "denominator_and_unit": "each training run and checkpoint; learning curves by family and corruption time",
+      "required_artifacts": "run/config/checkpoint/code hashes, admission verification and durable job receipts",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Both fixed66 continuations completed with exact initializer/draw/restart qualification; frozen complete CPU evaluation independently recounted. Negative promotion result: retain original checkpoint. Independent fits and held-out confirmation remain open.",
+      "remaining_final_work": "Qualify final conditioned/control runtimes and independent populations, then execute at least three independent final training seeds with monitored budgets.",
+      "linked_displays": [
+        "tab:22-training",
+        "fig:22-training",
+        "tab:22-seeds"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_validation_v2/result.json",
+          "sha256": "e5cdf2324af9bf906d392ede71464be9eb7537d628562ea76e606d50235c9323"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/closeout.json",
+          "sha256": "3d1e8bcaf051b707594802f96bbff089fd680f2545c34f639139755d42fd430f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_validation_v3/result.json",
+          "sha256": "0ba2c8e17782504c6b7d31aebd27d9016996dbf0e325b2e247ee303524fc5607"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/production_review/closure.json",
+          "sha256": "d80dd11fbad946053c16c0d4b684cce240bb3295545e1ad34a6041b87f717ebe"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/next_experiment/v2/readiness.json",
+          "sha256": "fa8182c2048894d2ca051a8b29e7e84323f2300c00d94c82d878ffb43ad48768"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/result.json",
+          "sha256": "90c5e196b17569c0da88447e8f9a9de04d4f4f7ec1a1a0f4fcf6256e53344358"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_integration_v1/result.json",
+          "sha256": "35f499eff36bcc6986aa3a0c60e3db69254df0518292dd679b0147f4b425da1e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/prepared_v3/observations/20260926T023743.934792Z/qualification/result.json",
+          "sha256": "438e9502d4b47cc728406e881490edf05be94c39a96e37492b127df3496bc118"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/prepared_v3/observations/20260926T023743.934792Z/failure.json",
+          "sha256": "2561d3649005b53bf910a5309afcee8f217e0fdcf15e6057d37e730936cc8dc0"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/v3_runtime_audit.json",
+          "sha256": "05feab0ded3056d4003c602d15a1bd46fea213d610b9a4be8ea90d9f39acd435"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/training_only_readiness_v1/prepared_v1/training_admission.json",
+          "sha256": "97714682f7130f48997402b5e84fa857fcd8ce1da0004d4c73069a1c3b236c02"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/training_only_readiness_v1/prepared_v1/observations/20260926T025900.623469Z/result.json",
+          "sha256": "5713bf219399f20362625bd29af393cbde27302d1e319650337fcab226825a96"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/independent_result_review_v1.json",
+          "sha256": "dd1cba7334ad63ad5579fa82bd13bae1d507998f4e0e5ce78da2048a76488271"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/completion-summary.json",
+          "sha256": "796ecc1de4eae8db7e6e610c9c0b39c509d3b32ce8620c92a13704e2c8f74eab"
+        },
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/training-config.json",
+          "sha256": "6bf7221ec3c69568dbb422856199515f4314ab884fa0858007b993fee482fd3e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_adaptive_eight_integration_v1/verification.json",
+          "sha256": "e35b86912c83c20d6f6cd082687e94a4cd7bed2f64f746c18e404b7b37a15d85"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R03",
+      "title": "Exact assembly across all families",
+      "latex_label": "tab:22-l1",
+      "endpoints": "Valid and connected yields, raw/checked exact L1, distinct exact yield, decomposition coverage, candidate precision, accepted replay invariant, ambiguity and failures",
+      "denominator_and_unit": "all requests, all22 families, each program and independent training seed",
+      "required_artifacts": "frozen held-out requests and completed per-attempt source replay ledgers",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "The unchanged1408 selected cohort has1387exact,1392with a returned decomposition candidate,1387accepted/1456checked candidate tuples, and0ambiguous accepted tuples. Same-cohort draw0 terminal-argmax has379exact/1408 and996valid-connected; all5 has1910exact/7040 and4870valid-connected. Candidate acceptance is computational source/replay acceptance, not independent experimental chemical precision.",
+      "remaining_final_work": "Frozen final held-out requests, independently trained seeds, complete attempt denominators, coverage and precision; no promotion of development yield.",
+      "linked_displays": [
+        "tab:22-l1",
+        "tab:22-outcomes",
+        "tab:22-seeds",
+        "fig:22-overview"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/terminal_readout/result.json",
+          "sha256": "f7329b9d19cc0b6ba4318245fcc5523344f1e4f86a7e97896e326592afc39b22"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/all22_context_preserving/result.json",
+          "sha256": "6984bd349704e688f4fac6032c2f38307773e33c4a7c96a54ba504996ce4a095"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_v1/result_v2.json",
+          "sha256": "5136cbf59ec34e5128200f03315b0a513ecb76a0e9701bc8177e8ebb37865525"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_full_v1/namespace_rollup_v1/result.json",
+          "sha256": "3f928f6c51e43ee50194d44d8e3c883f36795812455afcabc2ff4a445dacc564"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/comparison_v1.json",
+          "sha256": "226e65501ae4aed288ae074f0d049a04a1f65794c7a1ff75449810618a1fd36f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/independent_result_review_v1.json",
+          "sha256": "dd1cba7334ad63ad5579fa82bd13bae1d507998f4e0e5ce78da2048a76488271"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/result.json",
+          "sha256": "c5f40972bea662b5ecdde45938cca1fc4e4ec98d76dd67a0870e825151699430"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v3/terminal_v1/result.json",
+          "sha256": "54c48a123686a015acdffd3ec18f4e28da0b1abee430dfb875930ced4e602ecd"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/result.json",
+          "sha256": "885773a1fea028e547ae18a2f429c81f467195798e869fb4ba95a5e54447ccdb"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/independent_review_v1.json",
+          "sha256": "6e5dd9a9a6dfc9630ea3545cb5434e560ac5465217dfa3b921de586207cf287c"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/protocol.json",
+          "sha256": "337e8b47bac3862b5df21bf68551d4f45e7ff0a53dbdb2db76600f6bc61c6368"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/conditioned_v1/result.json",
+          "sha256": "fa479e9aafdbabbcda37d0601bf0be73c7674ef5d977616d6ec8e65535cc1869"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/cyclic_v1/result.json",
+          "sha256": "17365296bd0684bf965505ed9856ecede08c0dfd72fefe52ad709abf03dcb46f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/protocol.json",
+          "sha256": "a76a77e3f90759e9c98a9c8359abde0106de0e3b46264dca26b432d649d47cb8"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_quality_milestone_v3/result.json",
+          "sha256": "6d02ba573f8002de69e0a90e1432b3a58366883fc00d354f1c2954c8a77667f3"
+        },
+        {
+          "path": "results/phase1/compose_lipid_quality_confirmation_v1/seed-overlap.json",
+          "sha256": "d028a5feda35ddcaf2d82d47c4d75be4a0059cedaaa019105351df44c0688b67"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed.",
+      "same_cohort_completed_readouts": "Complete880shards perconditioned/cyclic replay, all7040states and exact checks. Draw0 conditionedraw323/1408exact866valid;cyclicraw313exact927valid;terminal379exact996valid;cyclicterminal368exact1067valid. All5 exact1658/1521/1910/1794 of7040 inthat order. Independent all880x14 predictionhead equality to original logits; full7040terminal dictionaries equal saved-logit recovery. Firstdraw cyclic exact88gains98losses, validity189gains128losses. No nullscore, independentfit uncertainty or equal-budget selection claim."
+    },
+    {
+      "id": "R04",
+      "title": "Conditioning and common benchmarks",
+      "latex_label": "tab:22-controls",
+      "endpoints": "Conditioned, independently trained shared null and cyclic controls; three-family bridge and qualified native comparator set",
+      "denominator_and_unit": "matched data/exposure/requests/completion/verification; paired seed differences",
+      "required_artifacts": "visible-information audit, native applicability, checkpoints and full budget ledger",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Shared-null native model, masks, exact-fragment objective, small PCGrad/shards and count-only interface pass isolated CPU qualification. Global-prior admission/loader preserves all1192065 TRAIN records and1131 count bins, rejecting34 tamper cases. In-memory tensor serialization is not durable optimizer/RNG restart. No trained-null result or production qualification yet; completed cyclic control remains separately indexed.",
+      "remaining_final_work": "Independently trained conditioned/null/cyclic controls with matched exposure and inference budgets, visible-information audit and qualified three-family bridge.",
+      "linked_displays": [
+        "tab:22-l1",
+        "tab:22-controls"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/result.json",
+          "sha256": "90c5e196b17569c0da88447e8f9a9de04d4f4f7ec1a1a0f4fcf6256e53344358"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/control_readiness.json",
+          "sha256": "f21c1ba6865ecb1fc15294ef1eb5cdc200aa6cb454e6bec415533feebcd60afb"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cyclic_inference_qualification_v1/full_pair_v1/paired_result.json",
+          "sha256": "aa20f7c5ccc94c6019a27586a91b3657eca80fef8cacdfc5d401c6d48012140e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cyclic_inference_qualification_v1/full_pair_v1/root_admission.json",
+          "sha256": "690caaa3155169384c99bb0911638909e4795dd68e57a06fc5fc95568f6fb6a6"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_prior_v1/run_v1/result.json",
+          "sha256": "0ee19e0ab9062a1ac7854adcf4473e66ea87bbbc9ff92da5bc5a5bc68036e5b8"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_prior_v1/independent_review_v1.json",
+          "sha256": "22a53d8ceceee0fc90c0a06ffb6cbc1efa6cc567afba78d66ab471729ae4af81"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_prior_v1/model_qualification_v3/result.json",
+          "sha256": "d967fc265f671e69b29dc0d5e000ba1cc9074e67ad75e4075cbdb6a60b5adf24"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_integration_candidate_v1/result.json",
+          "sha256": "c0414150360b084bfb14784d5fae7c967efbe4b8c78b2cb66341757060f326b8"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_integration_candidate_v1/independent_review_v1.json",
+          "sha256": "d1fc614d624b3eb4170c6ca19eb7b3479b78f5516668971823f85161dcb799e7"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_assessment_readiness_v1/qualification_v1/result.json",
+          "sha256": "dff18052d7eb343230c73ba83203f9c9d4db7e2d6142d246ae6984ff15c08e1d"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_prior_admission_v1/admission.json",
+          "sha256": "f3c7f260b4b0f4c95499f0c07895b0863d7428bb696a619a494d6c4792e124e8"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/shared_null_prior_admission_v1/result.json",
+          "sha256": "b6b32014a12caf6ff95d918c70e7586b321f2509096551c69e9bf79fcf750d0c"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/result.json",
+          "sha256": "885773a1fea028e547ae18a2f429c81f467195798e869fb4ba95a5e54447ccdb"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/independent_review_v1.json",
+          "sha256": "6e5dd9a9a6dfc9630ea3545cb5434e560ac5465217dfa3b921de586207cf287c"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/protocol.json",
+          "sha256": "337e8b47bac3862b5df21bf68551d4f45e7ff0a53dbdb2db76600f6bc61c6368"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/conditioned_v1/result.json",
+          "sha256": "fa479e9aafdbabbcda37d0601bf0be73c7674ef5d977616d6ec8e65535cc1869"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/cyclic_v1/result.json",
+          "sha256": "17365296bd0684bf965505ed9856ecede08c0dfd72fefe52ad709abf03dcb46f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/protocol.json",
+          "sha256": "a76a77e3f90759e9c98a9c8359abde0106de0e3b46264dca26b432d649d47cb8"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_eight_fp32_evaluation_cpu_v1/report-summary.json",
+          "sha256": "8afafb288c1d71279fa447f022d55e008b57b66733db0ae9e80ee71f83f9d5cc"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed.",
+      "same_cohort_completed_readouts": "Complete880shards perconditioned/cyclic replay, all7040states and exact checks. Draw0 conditionedraw323/1408exact866valid;cyclicraw313exact927valid;terminal379exact996valid;cyclicterminal368exact1067valid. All5 exact1658/1521/1910/1794 of7040 inthat order. Independent all880x14 predictionhead equality to original logits; full7040terminal dictionaries equal saved-logit recovery. Firstdraw cyclic exact88gains98losses, validity189gains128losses. No nullscore, independentfit uncertainty or equal-budget selection claim."
+    },
+    {
+      "id": "R05",
+      "title": "Decoder and chemistry repairs",
+      "latex_label": "tab:22-decoder",
+      "endpoints": "Raw, constrained, completed, head, joint atom/bond motifs, final ring, full pipeline and selection ablations; changes and negative results",
+      "denominator_and_unit": "paired identical checkpoint/logits/requests; equal-cost and larger-pool contrasts separate",
+      "required_artifacts": "policy/code pins, original/proposed/final graphs and all stage costs",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Same1408 saved terminal predictions reconstructed across all880shards with no new model calls; draw0 and all5 trajectories reported separately. Selected full inference budget is not matched to one terminal readout. Trueendpoint/cyclic full-cohort replay remains separately gated until complete.",
+      "remaining_final_work": "Frozen policy and full raw/constrained/construction/proposal/selection ladder on independent requests; equal-total-cost proposal comparator.",
+      "linked_displays": [
+        "tab:22-decoder"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/terminal_readout/result.json",
+          "sha256": "f7329b9d19cc0b6ba4318245fcc5523344f1e4f86a7e97896e326592afc39b22"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/verification.json",
+          "sha256": "a7fbcd8f19f022ce01266f79712cb7ddba80ef394e75f4b02eef944d46b98106"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/all22_context_preserving/verification.json",
+          "sha256": "3eb0022620d1acc90670554e56e1464f42c2772eb4501d9309d6c51e1734d500"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/fresh_head_repair/result.json",
+          "sha256": "c67315a28e4565d0a4c55ff6e8c8008ee26ec50cdf090ee49c801634b642c7fc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/cage_v2/result.json",
+          "sha256": "87996492dc34daff51c2357526745f0decfc0fa21951cfe14b12b6c649027e0a"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/repair_experiment_readiness_v1/full_verification_v1.json",
+          "sha256": "53dec81467c6ef291586a0367347052b356b762386870985fb5326e63778cd72"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/decoder_regression_audit_v1/result.json",
+          "sha256": "6962a88d349c60b7a045bbf230777f88810f45d642ebdd9029603997dd55af7b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/verified_fallback_diagnostic_v1/result.json",
+          "sha256": "37f2239955649bc4f3a80c743b93e0dd22b94259354d6c1c9070d1148fac589c"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/verified_fallback_diagnostic_v1/independent_review_v1.json",
+          "sha256": "94506c932786d29120a13d2fac7c940fac240b4c06cd7dbdb13dd4b34bf9a210"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/decoder_reason_fix_v1/result.json",
+          "sha256": "ddad7e9a5ef8f1c4b7e02256b053f75377aa97c66b3b27aa698bc55d2f179c2d"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v3/terminal_v1/result.json",
+          "sha256": "54c48a123686a015acdffd3ec18f4e28da0b1abee430dfb875930ced4e602ecd"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/result.json",
+          "sha256": "c5f40972bea662b5ecdde45938cca1fc4e4ec98d76dd67a0870e825151699430"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/result.json",
+          "sha256": "885773a1fea028e547ae18a2f429c81f467195798e869fb4ba95a5e54447ccdb"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/independent_review_v1.json",
+          "sha256": "6e5dd9a9a6dfc9630ea3545cb5434e560ac5465217dfa3b921de586207cf287c"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/paired_readouts_v1/protocol.json",
+          "sha256": "337e8b47bac3862b5df21bf68551d4f45e7ff0a53dbdb2db76600f6bc61c6368"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/conditioned_v1/result.json",
+          "sha256": "fa479e9aafdbabbcda37d0601bf0be73c7674ef5d977616d6ec8e65535cc1869"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/cyclic_v1/result.json",
+          "sha256": "17365296bd0684bf965505ed9856ecede08c0dfd72fefe52ad709abf03dcb46f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/assembly/readout_recovery_v4/protocol.json",
+          "sha256": "a76a77e3f90759e9c98a9c8359abde0106de0e3b46264dca26b432d649d47cb8"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/targeted/result.json",
+          "sha256": "1e0e4fc522ef76e38b49684cdc33ee501e0ff34577aa650876a16eb659bd7897"
+        },
+        {
+          "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/targeted/floor_verification.json",
+          "sha256": "17fc9b890c205cee7a31ceb11f84251a6c95b81c4666cfae8acd7dc64ebdfc1b"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed.",
+      "same_cohort_completed_readouts": "Complete880shards perconditioned/cyclic replay, all7040states and exact checks. Draw0 conditionedraw323/1408exact866valid;cyclicraw313exact927valid;terminal379exact996valid;cyclicterminal368exact1067valid. All5 exact1658/1521/1910/1794 of7040 inthat order. Independent all880x14 predictionhead equality to original logits; full7040terminal dictionaries equal saved-logit recovery. Firstdraw cyclic exact88gains98losses, validity189gains128losses. No nullscore, independentfit uncertainty or equal-budget selection claim."
+    },
+    {
+      "id": "R06",
+      "title": "Independent structural assessment",
+      "latex_label": "tab:22-structure",
+      "endpoints": "Representation and chemical alerts, context flags, head retention, ring-condition agreement, carbon-domain organization, blind review and source-control disagreement",
+      "denominator_and_unit": "all requests and applicable/assessed/pass/fail/abstain per check, family and source control",
+      "required_artifacts": "frozen rubric, evidence-qualified family predicates, independent controls and review masks",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Unchanged1408 current cohort: product-mean atom environment coverage0.9850856028599272, atom-weighted77273/78532; ring support589/810 ring-containing,221unknown,598ringfree; cycleallocation1404/1408, applicable ringsize720/789 with619notapplicable. Limited-design stays1324/1408.",
+      "remaining_final_work": "Resolve the3 remaining weak families under unchanged floors; expand independent source-qualified controls beyond2 families, head-integrity qualification and blinded structural review; adjudicate remaining context-required concerns.",
+      "linked_displays": [
+        "tab:22-quality-metrics",
+        "tab:22-structure",
+        "tab:22-conditions",
+        "tab:22-metric-definitions",
+        "fig:22-overview"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/saved_status.json",
+          "sha256": "d7088cc7cd87e6f1dc9f24440f3cc7cbaf37ed7caf5f82a9bc76946c969eafef"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/fresh_head_audit.json",
+          "sha256": "11ad237fd29fce9b8a3b18256dfb3f190e0ba27e7dc70ed23930d420dfa2dd03"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/all22_context_preserving/verification.json",
+          "sha256": "3eb0022620d1acc90670554e56e1464f42c2772eb4501d9309d6c51e1734d500"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/fresh_tree_recovery/result.json",
+          "sha256": "b400a36fc1cd12992dacc11a126f159438285a0c73bf4983752d1ca2b0284c9a"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/joint_v2/result.json",
+          "sha256": "c541daa90b8eafcb64d9baec549f7bcd629e5770308e95ab1070b59fbe183244"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/routes/recount_closeout_v3/result.json",
+          "sha256": "1a98ba6f949a1114b9aa1fb651c8c248d4660c5a3137fb42503f17f717309318"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/visual_inspection_v2/result.json",
+          "sha256": "6f29f8376e7a584cc94f2e5f7bcdf0a7d5e96a5f3b20b51c08c6392c64141acc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/visual_loss_contact_sheets_v1/root_visual_review.json",
+          "sha256": "3535b7906b64b31fe3b8a2db80c358b358427887558440d6d9cce43ec96eafc1"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/quality/result.json",
+          "sha256": "c64fa85a8aad6295efb7c86915d93b2a9bbd5d94b9916e7d04eaa19459a11147"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/quality/verification.json",
+          "sha256": "698ce78e140a7df682810e321d3e27ae5ea6e6b204a2965987e2eb99ede2fc00"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/result.json",
+          "sha256": "9c91af4844f517904f8c30339d74c352040ca1427b74eab96491ec48ed6a7488"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/protocol.json",
+          "sha256": "676b12e608cd03a27017a3bd2364230a10836564b4fc926aa7f37e418ba1fe51"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/verification.json",
+          "sha256": "14c08bf8f1bfc469bf42b1bc083b2601b011a3d2ca8bee9dee80ea54b96d3f11"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_structural_audit_v1/summary.json",
+          "sha256": "e5c116304f77d34a2cf1c7368f17e318f4a587e3655980c7c1c01a5a4a9b009b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_structural_audit_v1/rubric.json",
+          "sha256": "7b69eaedee39914ac301865a2368a00eda67e51fe610f2efde5ac9dbf5601821"
+        },
+        {
+          "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/gate_policy_v3.json",
+          "sha256": "35548b784e677de4a84281febda31f7c6f4e5d3ab2c34053d8556718a8b6c9a3"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed.",
+      "same_cohort_readout_quality": "Complete1408 draw0 per each raw/terminal conditioned/cyclic readout, plus unchanged selected control. Exact old selected metric reproduction. All22families retain valid/unique conditional and all64request membership denominators. SyntheticCAL geometry only; raw-versus-selected candidate budgets differ and internal diversity decreases."
+    },
+    {
+      "id": "R07",
+      "title": "Distributional lipid realism",
+      "latex_label": "tab:22-realism",
+      "endpoints": "Descriptor distributions/tails and normalized Wasserstein; fingerprint and descriptor precision/coverage; grouped C2ST AUC",
+      "denominator_and_unit": "family-matched and broader observed reference; source-held-out groups and valid/unique denominators",
+      "required_artifacts": "reference/split hashes, leakage audit, feature code and grouped estimator settings",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "All22x3x24 earlier descriptor comparisons exactly reproduced. All24features now include four-arm SD/median/IQR/P5/P95 in same1821syntheticCAL comparison. Same-reference descriptor-ball geometry computed for selected/saved/TRAIN arms, not independent empirical realism.",
+      "remaining_final_work": "Independent empirical reference admission, matched estimator/control design, C2ST and uncertainty; no universal realism cutoff from synthetic CAL or TRAIN.",
+      "linked_displays": [
+        "tab:22-realism-metrics",
+        "tab:22-realism",
+        "tab:22-metric-definitions",
+        "tab:22-descriptors",
+        "fig:22-overview"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/calibration_distribution/result.json",
+          "sha256": "8ba2a0429c7a14b59690210d6e8100da95030f1dca1d0e95e22d48a7d5f9314e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/qualified_CAL_sensitivity/result.json",
+          "sha256": "da32514932c2dd796fa89a59846e597fa2c0c6d2ab53a80761d69e987701e74e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/reference_lineage/reconstruction.json",
+          "sha256": "d13a3933995143ff316a698b838906d17709be7a531feb9f1ca4c59466775c63"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/quality/result.json",
+          "sha256": "c64fa85a8aad6295efb7c86915d93b2a9bbd5d94b9916e7d04eaa19459a11147"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/quality/verification.json",
+          "sha256": "698ce78e140a7df682810e321d3e27ae5ea6e6b204a2965987e2eb99ede2fc00"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/result.json",
+          "sha256": "9c91af4844f517904f8c30339d74c352040ca1427b74eab96491ec48ed6a7488"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/protocol.json",
+          "sha256": "676b12e608cd03a27017a3bd2364230a10836564b4fc926aa7f37e418ba1fe51"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/verification.json",
+          "sha256": "14c08bf8f1bfc469bf42b1bc083b2601b011a3d2ca8bee9dee80ea54b96d3f11"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_quality_reference_baseline_v1/result.json",
+          "sha256": "b642e3a014fdf040ecce02a19cf79d2dc1fbcd294fde83f2f1bc94bc885139af"
+        },
+        {
+          "path": "results/phase1/compose_lipid_quality_v1/reference_scope.json",
+          "sha256": "bd8874e44f20fe5c27b4b011f0a6d668d6ca04155ffedaac79f74e0b97ed0172"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed.",
+      "same_cohort_readout_quality": "Complete1408 draw0 per each raw/terminal conditioned/cyclic readout, plus unchanged selected control. Exact old selected metric reproduction. All22families retain valid/unique conditional and all64request membership denominators. SyntheticCAL geometry only; raw-versus-selected candidate budgets differ and internal diversity decreases."
+    },
+    {
+      "id": "R08",
+      "title": "Diversity, novelty and catalogue reach",
+      "latex_label": "tab:22-diversity",
+      "endpoints": "Product/component unique counts, Shannon and inverse-Simpson effective counts, ECFP4 diversity, role/program novelty, distinct component-novel yield, catalogue reachability",
+      "denominator_and_unit": "all attempts and exact/unambiguous subsets; global cross-family deduplication",
+      "required_artifacts": "TRAIN-only inventories, identity policy and exact role-aware decomposition",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Full family/component diversity and TRAIN novelty recounted. Coarse fails frozen floors versus both original and ordinary continuation; no global design gain is promoted at the expense of these checks.",
+      "remaining_final_work": "Independent-population diversity, scaffold and component novelty with full denominators; qualified compatible support expansion, not relaxed floors.",
+      "linked_displays": [
+        "tab:22-realism-metrics",
+        "tab:22-diversity",
+        "fig:22-overview"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/novelty_matching_certificate.json",
+          "sha256": "1a7c73f627e29b5c7cda6b02f0a12fe958db35ff8e4fbe1dcb9f48bd7eb69cb4"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/cross_family_inventory.json",
+          "sha256": "ed58bb06998f5e100e7c207c30a1c612e61e52c1de57e5d2bc77c9a6769b16cc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/all22_context_preserving/verification.json",
+          "sha256": "3eb0022620d1acc90670554e56e1464f42c2772eb4501d9309d6c51e1734d500"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/joint_v2/result.json",
+          "sha256": "c541daa90b8eafcb64d9baec549f7bcd629e5770308e95ab1070b59fbe183244"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/routes/recount_closeout_v3/result.json",
+          "sha256": "1a98ba6f949a1114b9aa1fb651c8c248d4660c5a3137fb42503f17f717309318"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/comparison_v1.json",
+          "sha256": "226e65501ae4aed288ae074f0d049a04a1f65794c7a1ff75449810618a1fd36f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/independent_result_review_v1.json",
+          "sha256": "dd1cba7334ad63ad5579fa82bd13bae1d507998f4e0e5ce78da2048a76488271"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/targeted/result.json",
+          "sha256": "1e0e4fc522ef76e38b49684cdc33ee501e0ff34577aa650876a16eb659bd7897"
+        },
+        {
+          "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/targeted/floor_verification.json",
+          "sha256": "17fc9b890c205cee7a31ceb11f84251a6c95b81c4666cfae8acd7dc64ebdfc1b"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R09",
+      "title": "Generalization and strata",
+      "latex_label": "tab:22-generalization",
+      "endpoints": "Designated held-component yield, identity coverage, source/component split performance, size/closure/repeat/depth strata",
+      "denominator_and_unit": "independent trained seeds; group-level uncertainty; unseen-family stress secondary",
+      "required_artifacts": "sealed final split and predeclared strata; no TEST-based repair tuning",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Full guarded CAL representation admission:1843 direct plus16 independently verified source-role aliases,1859/2059 total. All source pointers and valid namespaces retained; protected TEST remains unopened.",
+      "remaining_final_work": "Source/study/component-disjoint final protocol and qualified model representation for evaluation records; held-family robustness remains secondary.",
+      "linked_displays": [
+        "tab:22-generalization"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/cal_reference.json",
+          "sha256": "5c2aa3b4fe7b7b3756ec88777b48bbf59b0a0f3525526e928e69351535ce986f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/validation.json",
+          "sha256": "ed2d627b6dc084c114e1928edfe9b151997b5b88e5733cdb292a21336709f991"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/cal_namespace_bridge/exact_source_reference_union.json",
+          "sha256": "a9e173ea78f34f11594d95588b90c0bea5b0ce09d39223cc8df492e20ef293b3"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/cal_l1_qualification/representation_admission_plan.json",
+          "sha256": "72c74534cfcafc97161bf2196bdd14dd1a3d7490dbc3e6406a1da28ea309a426"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_v1/result_v2.json",
+          "sha256": "5136cbf59ec34e5128200f03315b0a513ecb76a0e9701bc8177e8ebb37865525"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_full_v1/namespace_rollup_v1/result.json",
+          "sha256": "3f928f6c51e43ee50194d44d8e3c883f36795812455afcabc2ff4a445dacc564"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_cohort_v1/cohort.json",
+          "sha256": "bab2f76099f21fcfdcc19b5ec2af8a84470614ae52cb60148b2546d4800b962b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_quality_confirmation_v1/seed-overlap.json",
+          "sha256": "d028a5feda35ddcaf2d82d47c4d75be4a0059cedaaa019105351df44c0688b67"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R10",
+      "title": "Computational L2/L3 makeability, with strict dossiers reported separately",
+      "latex_label": "tab:22-routes",
+      "endpoints": "Primary computational makeability: every required component directly vendor-listed or has a complete computational route to listed leaves. Report L2-ready, direct-only and original strict exact-source dossier closure separately.",
+      "denominator_and_unit": "all requests; products, distinct family-role components and leaves separately",
+      "required_artifacts": "exact provenance and forward checks, dates/source snapshots, frozen planner budgets",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Authoritative unchanged-cohort development result:1189 L2-ready,119 direct-only,616 computationally makeable and27 strict dossiers out of1408.35 gains vs581, no losses. The latest common-clock paired evaluator exactly reproduces614 in control and closes527/534 with two independently admitted new listings plus one unchanged saved planner tree. All3173 existing listing states are unchanged at the new clock.",
+      "remaining_final_work": "Complete the authorized exact-identity vendor-listing census; preserve provider overload/errors and unknowns. Expand residual route search under pinned budgets, then run independent held-out/seed comparisons. Reconcile manuscript endpoint wording with the authorized criterion when paper editing resumes; do not label computational paths as experimentally qualified.",
+      "linked_displays": [
+        "tab:22-routes",
+        "fig:22-overview"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/reusable_l2_contexts.json",
+          "sha256": "5c849bdffdd3679548261cbeef10be5d47fe871eef3f9641c105fd16def68177"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/routes/request_222_l3/result.json",
+          "sha256": "a2a28a525405ccd28cd54c3f8a6c304111be9c58c2e1a1c79665cb66378b0190"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v2/routes/result.json",
+          "sha256": "6f5f647d94c9f54f525e7744bfcdacd2267ec3d06e4e353af68057432ac0d301"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v2/routes/population_impact/result.json",
+          "sha256": "ddf30d6e2ab35c7cd101e91b4ffb988cbb8cd1bffa620afc2093c74fb2a3b437"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/route_expansion_v1/result.json",
+          "sha256": "81ab91be41c135a9bf73640c2dea0ebe29370ea0e3bc04d6b2b1cbc07d986092"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/route_expansion_current_quality_v1/context_refresh/current_selection/result.json",
+          "sha256": "48af6432e8bb9dee54cd0786dbf7e733436659c40d2943a22ac9a17abb6c53cd"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/route_expansion_current_quality_v1/independent_review.json",
+          "sha256": "97a18633d93f7006d3df2f890dff4161bb609e2faa55c8705e5fbeca2eaeb618"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined/result.json",
+          "sha256": "9b9c64f85e38a330b4cff04c501213ee4214d98c9007e4b8eff77e004390c4c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined/independent_review.json",
+          "sha256": "81f2e73161eec2b93acbafa9c343f37bae7ce45d8710036b784ea0248caff505"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v2/result.json",
+          "sha256": "5def290fefcc481ad8663475db97b3b995ec2f17b4943ca2a4c3dda5a7ea9a9e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v2/independent_review.json",
+          "sha256": "217c1fc64f7664bf0cdeffb42e04406f252a416ff72f8b0037cde4665d482b69"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v3/result.json",
+          "sha256": "af4023e17fdac398cd66ea4222523d6023a766c1d28c13c27b4251afe688f87a"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v3/independent_review.json",
+          "sha256": "17d124894644d103b8091a67cd5b5e76b30f249d4c9e0b3b8d2b7e07b6dda4f9"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v4/result.json",
+          "sha256": "bd94e40bcaa98d3cb31a5e56a11c67271e2f62fed0b4aa272da67bbd9b48889b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v4/independent_review.json",
+          "sha256": "a4a55ba71c7f30fa0319948a6b068d8e131adedb2ac1ffe3b26567c2826e6d33"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v5/result.json",
+          "sha256": "f4f0e622e34b1cb224e501afe6c9720f21873f82f224ad311abca708eeb56eb9"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/combined_v5/independent_review.json",
+          "sha256": "d5fdbf7a46b81b4b4e455ae2661491666b7c61101e4dacb7987c7e88b4c6d9ff"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/residual_search_v1/result.json",
+          "sha256": "b67f5c6e4a529db5354cd101df488f6d72d4886f8cbd72f17843511e291327c0"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/residual_search_v1.json",
+          "sha256": "9a7c9f616a84b7265375262ff89f07c26b4b31f74ef09262f326eec212d5e06a"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/ketone_intervention_v1/assessment/result.json",
+          "sha256": "6fd4dc43571dbf4ccad74c52c71ec510eea24a9efabc86d27d88ac787310e692"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/ketone_intervention_v1.json",
+          "sha256": "34b8a4f3a9ab810c8cc12f05ccd1a530ffe6ed47a2723e65137b6a2c2974f56e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/ketone_intervention_v1/assessment/validation.json",
+          "sha256": "2fa049cd39714d389a102950bbb526323709dbfb1563002172bab076072e18d7"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_progress_monitor_v2/snapshot_512/result.json",
+          "sha256": "03f328b4dff6487f67bca5819c6c268ad28e358ba65e72af59413570def17b99"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/enriched_progress_snapshot512.json",
+          "sha256": "66cafdad9d72d0bfc20d84f9209831e18a015617d855a4d70bf88f9cd1c4df22"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_progress_monitor_v2/snapshot_512/validation.json",
+          "sha256": "e6669bb0e6a4eebec1f249c331069bcbed7e42cc5cb17c4f411f63cd46f6677e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_progress_monitor_v3/snapshot_vendor_terminal_978/result.json",
+          "sha256": "6a29bcab8197774d6609e35fb57693226a9f1cc61fcf202f5fa297fe7525ee69"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/enriched_progress_terminal978.json",
+          "sha256": "e6183320ba7ab33fc19365e2b2ad2c09fa93fcc0df1ee741c2e6374a71c60416"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_progress_monitor_v3/snapshot_vendor_terminal_978/validation.json",
+          "sha256": "edcd0ea1034dc448bbe12062197cab38cb46944bc77e35d698ab0132eb7286ca"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/thiol_intervention_v1/assessment/result.json",
+          "sha256": "841329b57ddcf5e0b9790ae80c23329bb8a434cc9cac8e91d62df789475ba052"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/thiol_intervention_terminal978.json",
+          "sha256": "4043548936056000459bedd186bad77e9bce0ae0696f13c582b994e472b8486f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/thiol_intervention_v1/assessment/validation.json",
+          "sha256": "66231fe589e2a45b6f831afde3a14dd08becd8bf84ff0da4f3a5ad5c056194fd"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/final_cumulative_v1/assessment/result.json",
+          "sha256": "61f45b456fb97a04269fd338b6ab08a8e3d14e59d0c5f1c74606bc44a655e816"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/final_cumulative_663_thiol.json",
+          "sha256": "c704a780eccae1bf8b70e9204b3e0d533142164ab977f1d44b9ad1b891b4ac62"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/final_cumulative_v1/assessment/validation.json",
+          "sha256": "47311bc6a38c069958a4a9d22c3419d233eccf913a74b2165a3dd004b54867b0"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_intervention_v1/catalogue/result.json",
+          "sha256": "960c65abf31d9c4ee6450bab17aa534bd2824d5ed75f04b521e39eb5142548fc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/otava_catalogue_comparison.json",
+          "sha256": "7813fcb39b89e48a06c8d31f27dc9770724602228f07ac0d824add535c223114"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_intervention_v1/catalogue/validation.json",
+          "sha256": "80705835851a8d7fedb1c60a11cd0c93ce8fa17e45f0f726e8760535763e242e"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_proof_intervention_v1/assessment/result.json",
+          "sha256": "b99d1c469c7cf4cec101451f6700d15b5e30148809f4339eccb276bb4a05f83b"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/otava_incremental_proofs.json",
+          "sha256": "7bee6c68c52e99f7813a5b9699036d5a3977a51399f93d2274611ec1bfc23239"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_proof_intervention_v1/assessment/validation.json",
+          "sha256": "bb6a70a09b8eb9f115ee3d7ca781f114b85f41887756aab535dc8407ac1a8942"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/bulk_supplier_intervention_v1/proof_increment_v1/assessment/result.json",
+          "sha256": "939aafb687a26548d65aa48d2203904a485c488919ed62a8249eb2d8f4892947"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/latest_result_audit.json",
+          "sha256": "e447d83944dc521f669cdbeec6cba45dc92ffcb149beab99bba6d3bbfdef33fc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_evaluation_v1/result.json",
+          "sha256": "cd4b6d1116252e26d30f0fd293fd24dd3262050b731f593af1611fc52378b358"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_evaluation_v1/validation.json",
+          "sha256": "f3f08f806253cf5dd3bf6229dd7e8a981d878e82b0119192aa47b857278492d4"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_admission/admission_v2.json",
+          "sha256": "13462306c1582470178d76349066235e4b57de93feca2b7598166a2943ebe538"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_chemistry_review/additional10_v1/closeout.json",
+          "sha256": "0cc3ac8df7a1f4c1cb248f797adc2791ce0367689cade00c89718eb6bb70f739"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_chemistry_review/sensitivity_v2.json",
+          "sha256": "1ea01897fa70ee47650093bc3d4c994878a3f180f427efbea497b9cadc90b94a"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/routes/next_bottlenecks_v3/new_leaf_listing_diagnostic_v1/paired_evaluation_preparation_v1/paired_run_v1/treatment/result.json",
+          "sha256": "843f3dbc4d3107ed33d07a5879209fe4df911deffa00a24ce8d80baff36b03a6"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_route_evidence_v4/result.json",
+          "sha256": "9be38aca4c429f1e067429629fca7375a30c174946feac91b24393fe0588155d"
+        },
+        {
+          "path": "results/phase1/compose_lipid_route_evidence_v4/product_evidence_ledger.json",
+          "sha256": "1b622b349ff89bce4e00dcd78383e96c30c503cef5c8974a8d15c6247492df33"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R11",
+      "title": "Architecture and learning mechanisms",
+      "latex_label": "tab:22-architecture",
+      "endpoints": "Joint versus factorized matched/generous capacity, conditioning placement, role/core/repeat supervision, adapters and gradient handling",
+      "denominator_and_unit": "independently retrained matched-exposure controls; per-family losses/yields/cost",
+      "required_artifacts": "final architecture contract and seed-matched training receipts",
+      "priority": "Claim-dependent",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Clean nonconsecutive-parent errors1164/1034/1026 of7936 for original/categorical/coarse; only eight fewer errors distinguish coarse from categorical. Raw gains coexist with final D1 losses, so this does not support a general architecture or final-quality improvement claim.",
+      "remaining_final_work": "Matched architectural ablations and independent support/size stress evaluation; do not silently reduce molecular support.",
+      "linked_displays": [
+        "tab:22-architecture"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/admissible_coordinates/result.json",
+          "sha256": "1e6d30558062cfa2dab0fac975aa20c07421fbd07ee2ec4228b4b6530458b8d6"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/control_signal.json",
+          "sha256": "ec2bc606b00edd79f66e3db469b669b8bb73c9c7e283b86b25d7d954822452a7"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_full_v1/clean_graph_diagnostic_v1/result.json",
+          "sha256": "2bba25f4532f7f5011d705c62e7b172db35dcbb49878331fe7b5012ed9e5d4a1"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/comparison_v1.json",
+          "sha256": "226e65501ae4aed288ae074f0d049a04a1f65794c7a1ff75449810618a1fd36f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/decoder_regression_audit_v1/result.json",
+          "sha256": "6962a88d349c60b7a045bbf230777f88810f45d642ebdd9029603997dd55af7b"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/training-config.json",
+          "sha256": "6bf7221ec3c69568dbb422856199515f4314ab884fa0858007b993fee482fd3e"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R12",
+      "title": "Training adequacy and efficiency",
+      "latex_label": "fig:22-training",
+      "endpoints": "Matched-exposure batch/update experiment, separately exposure scaling; checkpoint quality, throughput, latency, GPU-hours and calls per success",
+      "denominator_and_unit": "same admitted corpus/request population; hardware/precision fixed or explicit",
+      "required_artifacts": "qualified numerical/restart gates, immutable checkpoints and complete timing ledger",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Training-only reuse completed417.797 seconds/55.706 function GPU-minutes. Both9504-presentation-per-family continuations evaluated at fixed66 only; neither result supports a full-run promotion. Preserved previous failures and all CPU costs remain separate.",
+      "remaining_final_work": "Measured training and inference cost curves, declared checkpoint/stop rules, matched exposure versus compute distinctions and all failed-attempt costs.",
+      "linked_displays": [
+        "tab:22-training",
+        "fig:22-training"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/continuation/result.json",
+          "sha256": "aef0e25cdb671aa303cade3ff4dc434c1859465d8c4d92babee2302451c1b7f5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/next_experiment/v2/readiness.json",
+          "sha256": "fa8182c2048894d2ca051a8b29e7e84323f2300c00d94c82d878ffb43ad48768"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/result.json",
+          "sha256": "90c5e196b17569c0da88447e8f9a9de04d4f4f7ec1a1a0f4fcf6256e53344358"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_branch_full_v1/result.json",
+          "sha256": "24f8988b1d72d8053150b94d0cf7ab35476c13c3c82ed8986a2f408c48444560"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_pilot_v1/training_only_readiness_v1/prepared_v1/observations/20260926T025900.623469Z/result.json",
+          "sha256": "5713bf219399f20362625bd29af393cbde27302d1e319650337fcab226825a96"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/closeout.json",
+          "sha256": "77ab966fc0fe0dcbe9ad597137ce94a7f34820dbd1804dfbb4caa80c17eadd8e"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/quality-budget-assessment.json",
+          "sha256": "f773cd5bcca73c42253462e9ba1f5628ccd0c8efccbfbade8aaebfe7e000a791"
+        },
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/completion-summary.json",
+          "sha256": "796ecc1de4eae8db7e6e610c9c0b39c509d3b32ce8620c92a13704e2c8f74eab"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R13",
+      "title": "Representative structures and failures",
+      "latex_label": "fig:22-atlas",
+      "endpoints": "All-family seeded product/precursor atlas, head/tail origins, topology, novelty, L1/L2/L3 annotations, before/after repairs and unresolved failures",
+      "denominator_and_unit": "all22 represented; seeded random rows plus separately identified failure cases",
+      "required_artifacts": "exact graph IDs/SMILES, selection rule/seed, render and review records",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Complete changed/adverse gallery and full exact-loss contact sheets preserve failures. Direct review covers all12 coarse D1 exact losses, not every gallery structure; no independent chemistry-adjudication claim.",
+      "remaining_final_work": "Frozen random/stratified visual panel across every family, selection seed, complete sampling frame and separately labeled failures.",
+      "linked_displays": [
+        "fig:22-atlas"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/structure_inspection.json",
+          "sha256": "2bed552a0bfa216b13c7c51c930378a0f16a972abb6100da81962d821aeec851"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/result.json",
+          "sha256": "4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/structure_v2/structure_result.json",
+          "sha256": "20cc8cc6c9c2bb0c0a56a0b479e61ba2a972eda5de4361e7c495e614b910b9d8"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/quality/anchor_context_v1/prototype_v3/paired_fixtures.json",
+          "sha256": "de5967ca92a885a930e95f599d20f4aff808fb0a72241353678576d11ce4c27f"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/visual_inspection_v2/result.json",
+          "sha256": "6f29f8376e7a584cc94f2e5f7bcdf0a7d5e96a5f3b20b51c08c6392c64141acc"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/visual_loss_contact_sheets_v1/root_visual_review.json",
+          "sha256": "3535b7906b64b31fe3b8a2db80c358b358427887558440d6d9cce43ec96eafc1"
+        },
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/decoder_regression_audit_v1/result.json",
+          "sha256": "6962a88d349c60b7a045bbf230777f88810f45d642ebdd9029603997dd55af7b"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_visual_audit_v1/reviewed.json",
+          "sha256": "bde9b6ffc3636cdd05dac500f2b5d1f9578cebb7bc11d387cd18e80908bc3533"
+        },
+        {
+          "path": "results/phase1/compose_lipid_visual_audit_v1/verification.json",
+          "sha256": "1a859a6316f8135a39c08f54d0e4be628b96656c8b7bb297709767c3ced64649"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R14",
+      "title": "Theory and implementation correspondence",
+      "latex_label": "tab:22-theory",
+      "endpoints": "Bounded support, actual loss versus reference loss, masks/readout/repair/selection semantics and sampling dependence",
+      "denominator_and_unit": "final released implementation and explicit theorem assumptions",
+      "required_artifacts": "source manifest and claim-by-claim proof/implementation audit",
+      "priority": "Required",
+      "status": "DEVELOPMENT_AVAILABLE_FINAL_PENDING",
+      "evidence_class": "Computed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Nine theory-to-implementation assumptions mapped; finite training, capped integration, checked proposals and joint selection are explicitly outside ideal guarantees.",
+      "remaining_final_work": "Final code-specific correspondence and any separately required proof/assumption checks; no empirical finite-sampler theorem inferred from ideal CTMC results.",
+      "linked_displays": [
+        "fig:forge-overview",
+        "tab:22-theory"
+      ],
+      "development_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_iclr22_research_v1/theory_correspondence.json",
+          "sha256": "06e13386703c93ec05059ef6ff5b20579b6d690274153bbe03f42857dfdfdbfb"
+        }
+      ],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_training_eight_fp32_v2/training-config.json",
+          "sha256": "6bf7221ec3c69568dbb422856199515f4314ab884fa0858007b993fee482fd3e"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    },
+    {
+      "id": "R15",
+      "title": "Guidance if retained",
+      "latex_label": "tab:22-guidance",
+      "endpoints": "Unguided/post-hoc/in-trajectory matched contrast, zero-guidance identity, eligibility and abstention; synthesis versus permitted potency pilot separate",
+      "denominator_and_unit": "only after applicable route/policy/authorization gates; no silent biological extension",
+      "required_artifacts": "frozen guidance contracts and all generator/planner/verifier cost receipts",
+      "priority": "Conditional, not launch authorization",
+      "status": "CONDITIONAL_NOT_RUN",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null,
+      "final_evidence_admitted": false,
+      "development_findings": "Conditional guidance experiments not launched; routing and zero-guidance prerequisites remain active.",
+      "remaining_final_work": "Only already-authorized guidance after its gates, with matched post-hoc/in-trajectory budgets and preserved abstentions; no new biological scope.",
+      "linked_displays": [
+        "tab:22-guidance"
+      ],
+      "development_artifacts": [],
+      "historical_evidence_artifacts": [
+        {
+          "path": "results/phase1/compose_lipid_route_evidence_v4/result.json",
+          "sha256": "9be38aca4c429f1e067429629fca7375a30c174946feac91b24393fe0588155d"
+        }
+      ],
+      "artifact_scope": "Artifact references preserve the evidence inventory; only current_evidence_manifest assertions are independently checked for this documentary update. Historical pins are not silently refreshed."
+    }
+  ],
+  "family_matrices": [
+    "tab:22-l1",
+    "tab:22-census",
+    "tab:22-outcomes",
+    "tab:22-seeds",
+    "tab:22-structure",
+    "tab:22-realism",
+    "tab:22-diversity",
+    "tab:22-generalization",
+    "tab:22-routes",
+    "tab:22-conditions"
+  ],
+  "figure_slots": [
+    "fig:22-overview",
+    "fig:22-training",
+    "fig:22-atlas"
+  ],
+  "quality_metric_contract": {
+    "path": "paper/v1_iclr22/QUALITY_METRICS.json",
+    "sha256": "534025b0d53e57c2bb18892863ba77c9eca9f00865feb78554b0e7cb4a0a29b8"
+  },
+  "explicit_quality_tables": [
+    "tab:22-quality-metrics",
+    "tab:22-realism-metrics",
+    "tab:22-conditions",
+    "tab:22-metric-definitions",
+    "tab:22-descriptors"
+  ],
+  "methods_implementation_inputs": [
+    {
+      "path": "results/phase1/compose_lipid_training_eight_fp32_v2/training-config.json",
+      "sha256": "6bf7221ec3c69568dbb422856199515f4314ab884fa0858007b993fee482fd3e"
+    },
+    {
+      "path": "results/phase1/compose_lipid_training_eight_fp32_v2/remote-training_result.json",
+      "sha256": "fd359dd0fd473956fc3c6a1b859874e5b1118a847871d3f29e1d5b2a2be369df"
+    },
+    {
+      "path": "results/phase1/partial_transformer_continuation_v1/implementation/forge/model/reaction_program_transformer.py",
+      "sha256": "dc1e274c302b2426547117f470cd08df2a5aeee29c0ed972f0baed39b35c7b80",
+      "original_path": "forge/model/reaction_program_transformer.py",
+      "scope": "Byte-identical historical implementation; current mutable production path has changed."
+    },
+    {
+      "path": "forge/model/synthesis_program_training.py",
+      "sha256": "adcad58d421e46b0d63a717eed3814b71c39857d7a8c6b4b244d4e742ea89891"
+    },
+    {
+      "path": "results/phase1/partial_transformer_continuation_v1/implementation/forge/model/compose_lipid_training.py",
+      "sha256": "6876588d463b1ee9afe5f7a65744b833b6a2e1c4dec30a304369c5070ebf683c",
+      "original_path": "forge/model/compose_lipid_training.py",
+      "scope": "Byte-identical historical implementation; current mutable production path has changed."
+    },
+    {
+      "path": "forge/model/compose_lipid_parallel.py",
+      "sha256": "007bace6ace65304aa07d104bc55c57637934a7a5f1841539a085c56f58ce7a9"
+    },
+    {
+      "path": "results/phase1/partial_transformer_continuation_v1/implementation/forge/model/compose_lipid_sharded_loss.py",
+      "sha256": "7e76ec390b7a346426d5c106282838861962b8c4f4c69bb4f30f0b6495983468",
+      "original_path": "forge/model/compose_lipid_sharded_loss.py",
+      "scope": "Byte-identical historical implementation; current mutable production path has changed."
+    },
+    {
+      "path": "forge/model/family_exposure.py",
+      "sha256": "4dec6663c1534d0103679fe258beef769adecbdbe6efaeaf418353b4f637f606"
+    },
+    {
+      "path": "forge/corpus/compose_lipid_training_data.py",
+      "sha256": "35d66a21c355300fd39e7f22bf52d5661f51845dfbd466f30932393b2be3a447"
+    },
+    {
+      "path": "forge/model/repeat_supervision.py",
+      "sha256": "a576394fc890706d997057740541129573660e35e45c82641fb7363da456ff6d"
+    },
+    {
+      "path": "forge/model/synthesis_program_graph.py",
+      "sha256": "32e03b248e7fea6b9cc8ad85503ee0d602309000c40ddba2f63f6d3c661a7ec9"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_research_v1/training_decoder/next_experiment/implementation_before/experiments/phase1/multireaction/compose_lipid_run.py",
+      "sha256": "abe196f220ad4a31cfdf4e779c2bc29a1e88ef1b7b5d6e857208bd88d215440b",
+      "original_path": "experiments/phase1/multireaction/compose_lipid_run.py",
+      "scope": "Byte-identical historical implementation; current mutable production path has changed."
+    },
+    {
+      "path": "results/phase1/compose_lipid_restoration_v1/prior.json",
+      "sha256": "b66f08a4704cbab58a3a96f6a4f5f195946e5a6203649ac087426194086926b2"
+    },
+    {
+      "path": "forge/model/compose_lipid_atom_aware.py",
+      "sha256": "6e31998fa598244bde9ec4c0ae141440b04a6c2cfabca71b0c4d27d40bbcb5fe"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "34703affff33a07d69967172531656b1f611bb7b4220916c6bfc55b2c7c28342"
+    }
+  ],
+  "reaction_figure_contract": {
+    "path": "paper/v1_iclr22/figures/all_family_reactions/render.json",
+    "sha256": "0e4e1ef38887d9c61e4ed418e2c6bc68103f66bd23ee085b8b2ac9e201f0c819"
+  },
+  "evidence_class": "Computed",
+  "final_evidence_admitted": false,
+  "evidence_inventory": {
+    "path": "results/phase1/compose_lipid_iclr22_research_v1/evidence_matrix_v26.json",
+    "sha256": "af8d825647556a9113087edf316c614a8da3e4f1621d8f389e2d93d4e0f42734"
+  },
+  "current_evidence_files": [
+    "current_summary.json",
+    "current_quality_evidence.json",
+    "current_appendix_evidence.json"
+  ],
+  "final_study_requirements": [
+    "At least three independently trained model seeds with frozen exposure and controls",
+    "Frozen held-out generation requests, complete denominators and no adaptive repair tuning",
+    "Independent source-disjoint empirical realism reference and qualified grouped estimators",
+    "Matched control, proposal, selection and computational-budget attribution"
+  ],
+  "current_evidence_manifest": {
+    "path": "paper/v1_iclr22/current_evidence_manifest.json",
+    "sha256": "db0f2e3f36701526be14f92af89e88f69512bb72daac5fcae1cdf6be861e316d"
+  },
+  "introduction_scientific_correction": {
+    "scope": "Exact second contribution only; correct unsupported completed-comparison claim under user-authorized evidence update",
+    "before": "    \\item \\textbf{Matched evaluation across 22 assembly families.}\n    We compare one shared model with matched whole-molecule generation followed by post-hoc\n    verification, conditioning controls and component-based generators. Family-wise assembly,\n    decomposition precision and coverage, and held-component recovery quantify the contribution\n    of reaction-program conditioning beyond the training inventory.\n",
+    "after": "    \\item \\textbf{Evaluation across 22 assembly families.}\n    We evaluate one shared model with paired program-identity, readout and training-continuation\n    diagnostics. Family-wise assembly, quality and route outcomes distinguish their contributions.\n    Matched trained-null and component-based generator comparisons, decomposition precision and\n    held-component recovery remain unresolved.\n"
+  },
+  "table_completion_validation": {
+    "status": "passed",
+    "scope": "Saved artifacts and in-memory source/display tamper controls; no scientific metrics rerun",
+    "tamper_cases_rejected": [
+      "terminal_wrong_request_denominator",
+      "draw0_replaced_by_all5",
+      "selected_identity_mismatch",
+      "readout_quality_denominator_changed",
+      "raw_terminal_columns_swapped",
+      "cyclic_raw_replaced_by_conditioned",
+      "missing_null_filled_without_measurement",
+      "ring_support_denominator_inflation",
+      "descriptor_macro_replaced_by_pooled",
+      "conditional_precision_relabelled_as_all_request_support",
+      "terminal_valid_count_changed"
+    ],
+    "validator": {
+      "path": "paper/v1_iclr22/verify_placeholders.py",
+      "sha256": "dd845c9d4fe745e56a07035a9a11e718576edaedcd9e814f153ee280f9b73872"
+    },
+    "qualification": {
+      "path": "results/phase1/compose_lipid_iclr22_table_completion_v1/readout_quality/paper_binding_verification_v2.json",
+      "sha256": "a65027e180e9eaa27a681dda312fcfd48038cf58b466e3313ec52b6d4e350987"
+    },
+    "source_validation": "verify_placeholders.py --sources-only passed",
+    "final_independent_evidence_admitted": false
+  }
+}

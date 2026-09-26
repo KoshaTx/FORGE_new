@@ -1,0 +1,266 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Evaluation populations and computational budgets}
+One shared model was trained across 22 families with 402,336 presentations per family
+(8,851,392 total), using 2,794 optimizer updates and deterministic FP32 execution on eight H100s.
+Each family participated in 381 updates. The complete execution took 1,377.7 seconds, including
+preparation and checkpoints (Table~\ref{tab:22-training}). The principal development population
+contains 1,408 TRAIN-derived requests, 64 per family, evaluated using the original checkpoint and
+the developed assembly, proposal and selection procedure. All requests, including failures,
+remain in the denominator. This population was used during method development and is not an
+independent held-out evaluation. Independent training-seed estimates and final held-out results
+remain \PendingValue{independent-seed held-out evaluation}.
+
+Separate paired diagnostics use 352 requests (16 per family), one draw per request and 64
+sampling steps. They compare raw flow endpoints, terminal argmax and the bounded D1 completion
+procedure, without the later full proposal and selection procedure used for the 1,408-request
+population. These populations and inference budgets are not interchangeable. Means and sample
+standard deviations across independent fits are not estimable from one original fit and its
+continuations. Post-hoc rejection cannot increase a proposal's per-attempt acceptance probability
+(Proposition~\ref{prop:posthoc-budget}); larger candidate pools and changed selection are therefore
+reported separately from learned-model comparisons.
+
+\subsection{Shared generation across 22 assembly families}
+The selected development outputs achieve exact L1 in 1,387/1,408 requests (98.5\%), with all 22
+families above 90\% (Table~\ref{tab:22-l1}). The lowest family yield is 58/64 (90.6\%) for aryl
+reductive amination. Exact L1 requires molecular validation, an admitted decomposition and exact
+forward replay. The equal-family and pooled yields coincide because every family has 64 requests.
+These counts describe the combined model and inference procedure. Reconstructing terminal argmax
+from the saved logits gives 379/1,408 exact outputs (26.9\%) on the first draw and 1,910/7,040
+(27.1\%) across all five draws, retaining every trajectory in the latter denominator. These
+single-trajectory readouts do not receive the final procedure's additional proposals or selection.
+The recovered raw endpoint gives 323/1,408 exact first-draw outputs (22.9\%) and 1,658/7,040
+across all five draws (23.6\%). All 880 conditioned replay batches reproduce every saved prediction
+tensor exactly. The independently trained shared-null comparison remains unmeasured.
+
+The selected-product inverse search returns a candidate for 1,392/1,408 requests (98.9\%). Of
+1,456 executor-specific candidate checks, 1,387 pass the admitted replay/source checks (95.3\%).
+Sixteen requests return no candidate and five return candidates without an exact accepted replay.
+Sixty-four of the 69 rejected tuples are alternative executor bindings in the thiol-yne family,
+where all 64 selected products still have an accepted exact decomposition.
+All inverse searches finish without recorded search-bound flags; no request has multiple distinct
+accepted constitutional role/component tuples among the returned candidates. This is bounded
+computational acceptance, not experimentally adjudicated chemical precision or exhaustive route
+uniqueness. The matched three-family comparison remains
+\PendingValue{common-program comparison}.
+
+\begin{table}[H]
+\caption{\textbf{Exact assembly across 22 ionizable-lipid reaction families.}
+Exact-L1 percentages for one checkpoint and 64 TRAIN-derived development requests per family.
+Raw, Terminal and Cyclic raw use the first draw. Raw retains the requested core and layout;
+Cyclic changes only the program ID. Terminal is the final argmax. Final additionally uses five draws,
+checked assembly, proposals and selection, with a larger candidate budget than the paired readouts.
+Decomposition coverage and candidate acceptance refer to selected Final products; their denominators
+are requests and executor-specific candidate checks, respectively. Dashes denote unavailable
+measurements, not zero. Independent-fit uncertainty is not estimated.}
+\label{tab:22-l1}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.28\textwidth}cccccc@{}}
+\toprule
+Family & \shortstack{Raw\\L1 (\%)} & \shortstack{Terminal\\L1 (\%)} & \shortstack{Final\\L1 (\%)} & \shortstack{Shared\\null (\%)} & \shortstack{Cyclic raw\\L1 (\%)} & \shortstack{Decomp. cov. /\\cand. accept. (\%)} \\
+\midrule
+A3 amine--aldehyde--alkyne & 20.3 & 21.9 & 95.3 & \PendingCell & 29.7 & 96.9/98.4 \\
+Acid--epoxide diester & 25.0 & 45.3 & 98.4 & \PendingCell & 25.0 & 98.4/100.0 \\
+AEMA & 21.9 & 26.6 & 98.4 & \PendingCell & 21.9 & 98.4/100.0 \\
+Aldehyde Ugi 3-CR & 65.6 & 71.9 & 98.4 & \PendingCell & 70.3 & 100.0/98.4 \\
+Aldehyde Ugi 4-CR & 48.4 & 54.7 & 100.0 & \PendingCell & 48.4 & 100.0/100.0 \\
+$\alpha$-Isocyanoester dihydroimidazole & 26.6 & 29.7 & 100.0 & \PendingCell & 10.9 & 100.0/100.0 \\
+Amine alkylation & 0.0 & 0.0 & 96.9 & \PendingCell & 0.0 & 96.9/100.0 \\
+Amine--epoxide & 0.0 & 1.6 & 100.0 & \PendingCell & 1.6 & 100.0/100.0 \\
+Aryl reductive amination & 1.6 & 1.6 & 90.6 & \PendingCell & 0.0 & 95.3/95.1 \\
+Aza-Michael acrylamide & 7.8 & 9.4 & 100.0 & \PendingCell & 9.4 & 100.0/100.0 \\
+Aza-Michael acrylate & 1.6 & 3.1 & 100.0 & \PendingCell & 6.2 & 100.0/100.0 \\
+Disulfide Michael & 0.0 & 0.0 & 98.4 & \PendingCell & 0.0 & 98.4/100.0 \\
+Epoxide O-acylation & 4.7 & 9.4 & 98.4 & \PendingCell & 3.1 & 98.4/100.0 \\
+iPhos & 57.8 & 60.9 & 100.0 & \PendingCell & 64.1 & 100.0/100.0 \\
+Ketone--isocyanide amide & 51.6 & 57.8 & 100.0 & \PendingCell & 37.5 & 100.0/100.0 \\
+Ketone Ugi 4-CR & 4.7 & 3.1 & 96.9 & \PendingCell & 1.6 & 96.9/100.0 \\
+Maleate & 0.0 & 0.0 & 100.0 & \PendingCell & 1.6 & 100.0/100.0 \\
+O-esterification & 39.1 & 40.6 & 100.0 & \PendingCell & 35.9 & 100.0/100.0 \\
+Passerini & 68.8 & 78.1 & 100.0 & \PendingCell & 54.7 & 100.0/100.0 \\
+Preassembled thiol-yne & 0.0 & 3.1 & 100.0 & \PendingCell & 3.1 & 100.0/50.0 \\
+Reductive amination & 0.0 & 1.6 & 95.3 & \PendingCell & 0.0 & 95.3/100.0 \\
+Thiolactone & 59.4 & 71.9 & 100.0 & \PendingCell & 64.1 & 100.0/100.0 \\
+\midrule
+Equal-family macro & 22.9 & 26.9 & 98.5 & \PendingCell & 22.2 & 98.9/97.4 \\
+Pooled all requests & 22.9 & 26.9 & 98.5 & \PendingCell & 22.2 & 98.9/95.3 \\
+Worst-family result & 0.0 & 0.0 & 90.6 & \PendingCell & 0.0 & 95.3/50.0 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Worst-family entries are separate column-wise minima and need not describe the same family.
+Candidate checks include rejected returned tuples; earlier inverse-template pruning is not fully
+logged. Acceptance is not precision over all raw inverse outcomes or an independent chemistry audit.
+\end{table}
+
+\subsection{Program conditioning and training diagnostics}
+On the same 1,408-request first draw, cycling the program ID reduces raw exact L1 from 323 to
+313 (88 gains and 98 losses), while valid connected outputs increase from 866 to 927. Terminal
+argmax gives 379 versus 368 exact outputs and 996 versus 1,067 valid connected outputs. Across
+all five draws (7,040 trajectories per arm), raw exact counts are 1,658 versus 1,521 and terminal
+exact counts are 1,910 versus 1,794. These are repeated trajectories from one fit and the same
+requests, not independent training seeds. The intervention retains the true core, roles, layout
+and depth; the small first-draw exact difference and opposing validity change limit its interpretation.
+
+On the 352-request paired population, changing only the program identity at inference reduces D1
+exact L1 from 140/352 to 105/352, a 9.94 percentage-point decrease. Raw endpoint exact counts are
+80 versus 71, and terminal-argmax counts are 91 versus 85. The cyclic intervention retains the true
+reaction core, roles, layout and depth. It therefore measures sensitivity to the program identity
+within otherwise correct structural context, not the full effect of synthesis information.
+The independently trained shared-null contrast remains \PendingValue{trained null comparison}.
+
+Additional training did not improve D1 exact yield. With another 31,680 presentations per family,
+220 large-batch updates and 2,640 small-batch updates produced 135 and 122 exact outputs,
+respectively, versus 140 for their common initializer (all /352). Hardware, computation and
+PCGrad grouping differed, so matched exposure does not imply matched cost. A second experiment
+compared two 66-update continuations, each adding 9,504 presentations per family. Ordinary
+categorical and coarse parent-group training gave 136 and 135 exact outputs, respectively.
+Although coarse training reduced nonconsecutive-parent CAL errors from 1,164 to 1,026 of 7,936,
+it did not preserve the original generation floors. Neither continuation replaced the original
+checkpoint (Figure~\ref{fig:22-training}; Table~\ref{tab:22-architecture}).
+
+\subsection{Decoder contributions and limitations}
+On the 1,408-request cohort's first draw, the saved D0 constrained readout and D1 completion
+give 554 and 576 exact outputs, respectively (39.3\% and 40.9\%), compared with 379 (26.9\%)
+for terminal argmax. D0 includes core reservation and is not a raw flow endpoint. The selected
+1,387/1,408 result additionally uses five draws, construction proposals and selection, so this
+larger gain cannot be attributed to a single decoder rule or increased model learning.
+
+For the original checkpoint on the 352-request diagnostic, raw endpoint, terminal-argmax and D1
+readouts yield 80, 91 and 140 exact products, respectively. A fixed fallback among these already
+computed candidates increases D1 exact yield to 145/352 and limited-design yield from 111 to
+116/352, without new model or chemistry calls. This is a selection gain. In a separate paired
+192-request repair diagnostic covering A3 and the two Ugi 4-CR families, exact L1 remains 187/192
+while limited-design passes increase from 140 to 146. Additional attachment proposals change three
+structures but add no design passes. These repairs were not substituted into the 1,408-request
+routing population. Table~\ref{tab:22-decoder} retains the separate denominators and adverse results.
+Matched whole-graph versus factorized capacity, cross-attention and gradient-control contrasts
+remain \PendingValue{architecture comparisons}.
+
+\subsection{Precursor novelty and diversity}
+The selected population contains 1,407 distinct products among 1,408 requests. Product novelty
+relative to TRAIN occurs in 1,216 observations (1,215 distinct identities). Exact products with at
+least one globally TRAIN-novel recovered component occur in 1,050/1,408 requests (74.6\%),
+representing 1,049 distinct products. This gives 745.0 distinct component-novel products per 1,000
+requests. Role-relative novelty occurs in 1,081 observations (1,080 distinct products).
+Component counts remain uneven: the pooled isocyanide role contains 29 identities among 190
+observations, with Shannon and inverse-Simpson effective counts of 10.21 and 6.09
+(Table~\ref{tab:22-diversity}). High product uniqueness therefore does not ensure broad component use.
+
+TRAIN-relative novelty does not establish catalogue escape, recovery of deliberately withheld
+components or source-disjoint generalization. Only 15/2,059 guarded CAL molecules are wholly
+component-disjoint. The newer 1,859-molecule exact-source and representation-qualified CAL union
+contains 12 such cases, all in two aza-Michael families; it differs from the older 1,821-reference
+distribution cohort below. Final held-component and source-disjoint generation results remain
+\PendingValue{generalization evaluation} (Table~\ref{tab:22-generalization}).
+
+\subsection{Structural quality and agreement with lipid references}
+All 1,408 selected structures are valid and connected, but only 1,324/1,408 (94.0\%) satisfy exact
+L1 together with all applicable limited design checks (Table~\ref{tab:22-quality-metrics}).
+There are 69 failures of the combined ring predicate. The scoped retained-head predicate fails in
+5/64 aldehyde Ugi 4-CR requests; the other 1,344 structures are outside its qualified scope and
+are not counted as passes. Chemistry-context review is flagged for 41/1,408 structures (2.9\%).
+The overlapping flags include hydrated or hemiacetal carbons (24), peroxide groups (8), carbons
+bearing at least three oxygens (6), other allenes (5), a small unsaturated ring (1) and a heteroatom
+cumulene (1). Limited design without context flags holds for 1,292/1,408 (91.8\%).
+
+\begin{table}[H]
+\caption{\textbf{Structural quality of the selected development population.}
+Counts retain all 1,408 requests except explicitly scoped head and ring predicates. The limited-design
+conjunction includes exact L1 and the qualified chemical, head and ring checks; it is not a broad
+empirical lipid-realism assessment. TRAIN support measures observed structural features, not external validation.}
+\label{tab:22-quality-metrics}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.61\textwidth}rc@{}}\toprule
+Metric & Selected count & (\%)\\\midrule
+Valid molecules / requests & 1,408/1,408 & 100.0 \\
+Connected molecules / requests & 1,408/1,408 & 100.0 \\
+Exact L1 + qualified limited design / requests & 1,324/1,408 & 94.0 \\
+Limited design without context flags / requests & 1,292/1,408 & 91.8 \\
+Justified narrow chemical alerts / requests & 0/1,408 & 0.0 \\
+Chemistry-context flags / requests & 41/1,408 & 2.9 \\
+Required head retained / scoped requests & 59/64 & 92.2 \\
+Combined ring predicate / requests & 1,339/1,408 & 95.1 \\
+Role-local cycle allocation / requests & 1,404/1,408 & 99.7 \\
+Requested ring-size agreement / applicable requests & 720/789 & 91.3 \\
+Mean per-product TRAIN atom-environment coverage & 1,408 products & 98.5 \\
+Ring-system TRAIN support / ring-containing products & 589/810 & 72.7 \\
+Exact L1 + product/component features observed in TRAIN & 974/1,408 & 69.2 \\
+\bottomrule\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Ring-size checks are inapplicable to 619 requests. For ring-system TRAIN support, 221 ring-containing
+products have unknown support and 598 are ring-free; neither group is silently counted as a pass.
+The atom-weighted coverage is 77,273/78,532 (98.4\%), distinct from the per-product mean.
+Source-positive controls pass the narrow chemical-alert screen in 29/29 cases, but cover only two families
+and two studies, with zero individually characterized products in that control set. The other 20
+families lack these controls. Absence of an alert does not establish stability, pKa or delivery activity.
+Definitions and family-level counts: Tables~\ref{tab:22-structure}--\ref{tab:22-metric-definitions}.
+\end{table}
+
+The distribution comparison uses 1,821 exact-source-qualified \emph{synthetic CAL structures};
+these are not an independent empirical lipid reference. Equal-family fingerprint precision is
+56.9\%, coverage is 49.1\%, and mean within-family ECFP4 diversity is 0.552
+(Table~\ref{tab:22-realism-metrics}). Precision varies from 1/64 for ketone Ugi 4-CR to 64/64 for
+aza-Michael acrylate. Aryl reductive amination has 2/63 supported distinct outputs. These failures
+remain visible despite high exact L1. Compared with the raw first draw, the full selected procedure
+increases distinct fingerprint-supported output yield from 399/1,408 to 801/1,408, while mean
+within-family diversity decreases from 0.585 to 0.552. This comparison combines decoding, additional
+proposals and selection; it does not isolate a learned-model improvement. A3 has 36/64 supported outputs; its normalized Wasserstein
+distances for cLogP and rotatable bonds are 1.133 and 1.658. Ketone Ugi 4-CR has an sp$^3$-carbon
+fraction distance of 1.082. All 24 descriptor panels are reported by family
+(Table~\ref{tab:22-descriptors}). Independent empirical-reference comparisons, grouped two-sample
+classification and blinded structural review remain unmeasured.
+
+\begin{table}[H]
+\caption{\textbf{Distributional agreement with synthetic CAL references.}
+Each arm has 1,408 requests, 64 per family. Raw and Terminal use the first conditioned draw;
+Selected additionally uses five draws, checked construction and selection. These stages have
+unequal candidate budgets. Values are equal-family means of 22 within-family statistics;
+precision and diversity are conditional on connected molecules (fingerprints also deduplicate).
+All-request support yields retain invalid outputs. TRAIN controls are a reference diagnostic,
+not independent quality evidence.}
+\label{tab:22-realism-metrics}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.49\textwidth}cccc@{}}\toprule
+Metric & Raw & Terminal & Selected & TRAIN\\\midrule
+Connected / all requests (\%) & 61.5 & 70.7 & 100.0 & 100.0 \\
+Fingerprint precision (\%) & 41.6 & 47.6 & 56.9 & 75.1 \\
+Fingerprint coverage (\%) & 34.1 & 36.4 & 49.1 & 59.0 \\
+Fingerprint recall (\%) & 81.2 & 80.0 & 82.1 & 88.4 \\
+Distinct fingerprint-supported products / requests (\%) & 28.3 & 34.7 & 56.9 & 75.1 \\
+Nearest-reference Tanimoto similarity & 0.579 & 0.604 & 0.638 & 0.693 \\
+Within-family ECFP4 diversity & 0.585 & 0.559 & 0.552 & 0.529 \\
+Synthetic-CAL descriptor precision (\%) & 57.4 & 58.6 & 59.4 & 69.7 \\
+Synthetic-CAL descriptor coverage (\%) & 32.0 & 33.1 & 39.7 & 44.0 \\
+Descriptor-supported observations / requests (\%) & 36.6 & 42.2 & 59.4 & 69.7 \\
+Descriptor distances and dispersion (24 features, per family) & \multicolumn{4}{c}{Table~\ref{tab:22-descriptors}} \\
+Independent descriptor precision / coverage & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Independent source-grouped classifier AUC & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Connected counts are 866/1,408 (Raw), 996/1,408 (Terminal) and 1,408/1,408 (Selected).
+ECFP4 uses Morgan radius 2 and 2,048 bits; neighborhoods use up to five neighbors.
+Descriptor neighborhoods use 24 TRAIN-scaled descriptors and the same synthetic reference.
+Coverage is the equal-family mean of covered reference neighborhoods, not the pooled ratio.
+Similarity to this reference is not a probability of chemical realism. The predecessor selection
+and matched cyclic readouts remain in Table~\ref{tab:22-realism}.
+\end{table}
+
+\subsection{Recursive computational makeability and strict dossiers}
+The primary route criterion requires every assembly component to be directly vendor-listed or to
+have a complete computational path to vendor-listed terminal materials. Planner-generated paths
+and forward-applied published transforms may contribute without exact-substrate experimental
+precedent. On the unchanged 1,408-product population, 616/1,408 (43.75\%) meet this criterion,
+including 606 satisfying limited design and 604 also free of context flags
+(Table~\ref{tab:22-routes}). L2 readiness is 1,189/1,408 (84.4\%); it does not require terminal
+listing closure. Direct-only L3 covers 119/1,408 (8.5\%). Strict exact-source/current-item dossiers
+remain a separate secondary outcome, closing 27/1,408 requests (1.9\%).
+
+Makeability ranges from 0/64 for reductive amination and 2/64 for ketone Ugi 4-CR to 58/64 for
+ketone--isocyanide amide. The complete denominator includes 3,723 required component branches.
+The latest listing evidence is dated September 25, 2026 (local date), with a 30-day policy window.
+A vendor-directory listing does not establish stock, price or an experimentally executed route.
+The primary count rose from 581 to 616 through additional evidence, without changing molecules,
+L1 checks or structural predicates. Missing listings and bounded route searches remain unresolved,
+not evidence of unsynthesizability. Neither outcome establishes experimental synthesis or delivery.

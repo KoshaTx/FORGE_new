@@ -1,0 +1,466 @@
+{
+  "source_commit": "f1b7565ddec912ebe9b72e7fe8f0b9b1f3f01d9f",
+  "inputs": {
+    "FORGE_ICLR2027_paper.tex": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+    "forge.bib": "8508b0f3a222b972b703ab6b4e086786395a614c3fd04fffd65318de4536273d",
+    "references.bib": "421400a25a2c8ebb2b9395585cf0ff8dd8f00ba9dee56a599d69619e9b9a22ec",
+    "generated/architecture_ablation_rows.tex": "9dd7802bc9b9eb03ef88c00bc14a7073086ddb6a4693d01008ded81378278ba1",
+    "generated/production_seed_exact_counts_rows.tex": "b21009d1c1c893705d6b615d25b977ad6ac4a88450cb40a7d351642fa95c8812",
+    "generated/iclr_table10_macros.tex": "e97385a0a8e4c30435480459fca4d8b1f3778313852d62f0465f124525a73b18",
+    "generated/iclr_table3_route_macros.tex": "543b434dee29f53ea916389b9e8818c249c34ac66a1c49b8d42f3d3f2dbe0e61",
+    "generated/production_comparison_transposed_rows.tex": "b2ce2a15fdc135cc30194f6f3d473e97e9770e2c607371874aa4e31cd54e074e",
+    "generated/lipid_realism_rows.tex": "446387c3d6c5deb8b41a88a4ccdaccdf61799203757ed82a204e467536d1207c",
+    "generated/common_ugi_seed_rows.tex": "7419beb12c7bc9d3c79b2be2e4205014b468a0aeb937a7eb3c317c39398498b5",
+    "generated/decoder_source_ablation_rows.tex": "8e9c4e90ba722e51a216a0cb065143cf0e7ea29230713d6e8a59f5a36b9a1920",
+    "generated/common_ugi_benchmark_completed_rows.tex": "83edef8ae7776dd5d656b7eb6111bea07e9693d4281c59a2351a962cb9258c8b",
+    "generated/completed_evidence_macros.tex": "8569c07906e8b01bf68200b1f073976514afa4889f79c786779c6786ef5eedcd",
+    "generated/catalogue_comparison_transposed_rows.tex": "f82801f868f60432d776e4d1ea2e34fafb2dcb9d541c63a499908ffcff8f2374",
+    "generated/common_ugi_decomposition_rows.tex": "cc469cc18623df87db3541386d454e6e38ec79787c68b8a8065f1dd2e62fe5ee",
+    "generated/shared_program_figure_rows.tex": "7429d99629ca33db1310bb308379655d3f7514ff00406bd3053647f102c7c6e4",
+    "generated/iclr_table1_macros.tex": "ec1a254b800858122af31910e87897f1036dd5d0193124c9dbae8cc6551dce7a",
+    "generated/iclr_prose_results_macros.tex": "57aa5e7f39536d067fb8c76c607db48950b2ca53baea6d2dc20c38e635b26429",
+    "figures/forge_algorithm_schematic/schematic_body.tex": "82f60cb4f3320a3c0936a8c9bb681de596ec5b5325445aeacb41aa0960268ff8",
+    "figures/forge_reaction_schemes/schemes_body.tex": "2d08a094a931283e3cdf8f9c682835ff84043b73e69a239027605c1bab62c8e4",
+    "figures/forge_generated_sample_atlas_core_saturation_v1/atlas_rows.tex": "be4a7646fc6c0a3772e194e16669ef3698379c9511f17f644e36a2202341d567",
+    "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+    "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "natbib.sty": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d",
+    "fancyhdr.sty": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea",
+    "mathematical_review.json": "66c3d1e598b5080889fa99c2fa208d38cf057a9fd596872d64927c62183f653c",
+    "experimental/in_vivo/forge_1_structure_supplied.png": "9a6789ff32f2be9e4a79027f5fc975a559ee3b39f8d71eecc561d4a47b02ad9f",
+    "experimental/in_vivo/forge_2_structure_supplied.png": "4c6d2dae9f1b6193c6606b8c0c321239079a2ce628e53be80f7d03913942b721",
+    "experimental/in_vivo/forge_3_structure_supplied.png": "cab3fa1ca94c6b1073d7e66ae3128dad3f93c1dd3012cf9366f5669859d752a8",
+    "experimental/in_vivo/mouse_imaging_supplied.png": "4a18e4bb9b6e560c82bee48eb269eabe6dd4b81d9e033f356173b6cc1fe914ed",
+    "experimental/in_vivo/reported_roi_values.csv": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+    "figures/chemical_drawings/atlas_01_2d.pdf": "dcd5cc1e6f4b1a077fd4b7dc1b2b9565546f4039f09d2d46913471037d73d515",
+    "figures/chemical_drawings/atlas_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "figures/chemical_drawings/atlas_02_2d.pdf": "2b3d2e62d448fc25b03d3e3d67b5537d6eb3c6b341bf9ac4fab5249da22fed4c",
+    "figures/chemical_drawings/atlas_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "figures/chemical_drawings/atlas_03_2d.pdf": "fcee1f97c029b7249f8fcfffd860145a216b7e4ddf9e39e5250fea9de1e42d38",
+    "figures/chemical_drawings/atlas_03_precursors.pdf": "1cc8e333b0aa3f8bab7a4f6158cf07fffa500177c7b75bf1192a2e78d40ff965",
+    "figures/chemical_drawings/atlas_04_2d.pdf": "9a16c5c113acd42a321ea16a42e9ac474011f6ab6e4c44073fc11a73a63cb141",
+    "figures/chemical_drawings/atlas_04_precursors.pdf": "60238d023eb2c430a3222b39078849fafa37bf7508d95f3a8f6be65f69bd21a3",
+    "figures/chemical_drawings/atlas_05_2d.pdf": "4c7cb85bfc0a9030180b50e2bff760211496fde8497b152352eb176c68467660",
+    "figures/chemical_drawings/atlas_05_precursors.pdf": "fdc77a04c0bea96605c1646e608cee4220ceba9f8262c835ea91153a70e4d56e",
+    "figures/chemical_drawings/atlas_06_2d.pdf": "deb89e984388b20ec6eca06dbef735dae5ea615ed29eec67c6c4ef68a60cae00",
+    "figures/chemical_drawings/atlas_06_precursors.pdf": "41ef7b080077f8d318f08198ba24c5d7a448b0718e3819247489fb0ec152bdf7",
+    "figures/chemical_drawings/atlas_07_2d.pdf": "2b62e5c318877efb1821ea56bf4941033e0a744c19416b3899085d614416a9ec",
+    "figures/chemical_drawings/atlas_07_precursors.pdf": "06f9e5daa90babf2393d7600fbd9a5978656173218149c6377dab51893ed4190",
+    "figures/chemical_drawings/atlas_08_2d.pdf": "d98314ce1888c5281843765cf16ebc8c8af7ba8bc72f7b2850c426d495e70142",
+    "figures/chemical_drawings/atlas_08_precursors.pdf": "5d430066682f0aa9ef99f310cec317251fc242cbae7db30f06fd94792b8034fa",
+    "figures/chemical_drawings/atlas_09_2d.pdf": "aa98cfb1d9e73ca71ea29623b21499d511ac4aa774ed31d74e45d6b507ca8af3",
+    "figures/chemical_drawings/atlas_09_precursors.pdf": "eee30fed7e4c25dc1fad8993d14e8f7a28f557b673102f5c62c10570f1fe4942",
+    "figures/chemical_drawings/atlas_10_2d.pdf": "91a5cc96eee9ec725b60fb7d5479f95deb1eff4d34aa14aeb3f20001e7360b83",
+    "figures/chemical_drawings/atlas_10_precursors.pdf": "851c8a38db03bf49dad5c27add1bec3d903d6f4f741afa5ca8a170ea62f1b4a1",
+    "figures/chemical_drawings/atlas_11_2d.pdf": "d2a0f3b91121437956f88fd9bdca98b3fc4ebd97501de514288b0d5a361d6492",
+    "figures/chemical_drawings/atlas_11_precursors.pdf": "ebd157f403267e6758b82e002ba881f74169364a3161694a25d46e157e2118bf",
+    "figures/chemical_drawings/atlas_12_2d.pdf": "48bf4f9b653c09b177be3d4d6ec9952ec159b9b7473b8be0b19140cb0f1220cb",
+    "figures/chemical_drawings/atlas_12_precursors.pdf": "99ec3cebc75fd42b7c595a9a34f36db87aac195a5a59d8463c5dd2fb0791e42e",
+    "figures/chemical_drawings/sample_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "figures/chemical_drawings/sample_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "figures/chemical_drawings/sample_01_product.pdf": "39f5938afd6fd369beecbfc66f7bc45184059e5bc40f45283ba9182925415654",
+    "figures/chemical_drawings/sample_02_product.pdf": "4667c73a048cb444cf832d124954546822969d071276449ab01e4d0df217cd94"
+  },
+  "asset_map": {
+    "figures/forge_1_structure_supplied.png": {
+      "source": "experimental/in_vivo/forge_1_structure_supplied.png",
+      "sha256": "9a6789ff32f2be9e4a79027f5fc975a559ee3b39f8d71eecc561d4a47b02ad9f"
+    },
+    "figures/forge_2_structure_supplied.png": {
+      "source": "experimental/in_vivo/forge_2_structure_supplied.png",
+      "sha256": "4c6d2dae9f1b6193c6606b8c0c321239079a2ce628e53be80f7d03913942b721"
+    },
+    "figures/forge_3_structure_supplied.png": {
+      "source": "experimental/in_vivo/forge_3_structure_supplied.png",
+      "sha256": "cab3fa1ca94c6b1073d7e66ae3128dad3f93c1dd3012cf9366f5669859d752a8"
+    },
+    "figures/mouse_imaging_supplied.png": {
+      "source": "experimental/in_vivo/mouse_imaging_supplied.png",
+      "sha256": "4a18e4bb9b6e560c82bee48eb269eabe6dd4b81d9e033f356173b6cc1fe914ed"
+    },
+    "figures/reported_roi_values.csv": {
+      "source": "experimental/in_vivo/reported_roi_values.csv",
+      "sha256": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11"
+    },
+    "figures/atlas_01_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_01_2d.pdf",
+      "sha256": "dcd5cc1e6f4b1a077fd4b7dc1b2b9565546f4039f09d2d46913471037d73d515"
+    },
+    "figures/atlas_01_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_01_precursors.pdf",
+      "sha256": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164"
+    },
+    "figures/atlas_02_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_02_2d.pdf",
+      "sha256": "2b3d2e62d448fc25b03d3e3d67b5537d6eb3c6b341bf9ac4fab5249da22fed4c"
+    },
+    "figures/atlas_02_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_02_precursors.pdf",
+      "sha256": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5"
+    },
+    "figures/atlas_03_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_03_2d.pdf",
+      "sha256": "fcee1f97c029b7249f8fcfffd860145a216b7e4ddf9e39e5250fea9de1e42d38"
+    },
+    "figures/atlas_03_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_03_precursors.pdf",
+      "sha256": "1cc8e333b0aa3f8bab7a4f6158cf07fffa500177c7b75bf1192a2e78d40ff965"
+    },
+    "figures/atlas_04_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_04_2d.pdf",
+      "sha256": "9a16c5c113acd42a321ea16a42e9ac474011f6ab6e4c44073fc11a73a63cb141"
+    },
+    "figures/atlas_04_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_04_precursors.pdf",
+      "sha256": "60238d023eb2c430a3222b39078849fafa37bf7508d95f3a8f6be65f69bd21a3"
+    },
+    "figures/atlas_05_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_05_2d.pdf",
+      "sha256": "4c7cb85bfc0a9030180b50e2bff760211496fde8497b152352eb176c68467660"
+    },
+    "figures/atlas_05_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_05_precursors.pdf",
+      "sha256": "fdc77a04c0bea96605c1646e608cee4220ceba9f8262c835ea91153a70e4d56e"
+    },
+    "figures/atlas_06_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_06_2d.pdf",
+      "sha256": "deb89e984388b20ec6eca06dbef735dae5ea615ed29eec67c6c4ef68a60cae00"
+    },
+    "figures/atlas_06_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_06_precursors.pdf",
+      "sha256": "41ef7b080077f8d318f08198ba24c5d7a448b0718e3819247489fb0ec152bdf7"
+    },
+    "figures/atlas_07_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_07_2d.pdf",
+      "sha256": "2b62e5c318877efb1821ea56bf4941033e0a744c19416b3899085d614416a9ec"
+    },
+    "figures/atlas_07_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_07_precursors.pdf",
+      "sha256": "06f9e5daa90babf2393d7600fbd9a5978656173218149c6377dab51893ed4190"
+    },
+    "figures/atlas_08_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_08_2d.pdf",
+      "sha256": "d98314ce1888c5281843765cf16ebc8c8af7ba8bc72f7b2850c426d495e70142"
+    },
+    "figures/atlas_08_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_08_precursors.pdf",
+      "sha256": "5d430066682f0aa9ef99f310cec317251fc242cbae7db30f06fd94792b8034fa"
+    },
+    "figures/atlas_09_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_09_2d.pdf",
+      "sha256": "aa98cfb1d9e73ca71ea29623b21499d511ac4aa774ed31d74e45d6b507ca8af3"
+    },
+    "figures/atlas_09_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_09_precursors.pdf",
+      "sha256": "eee30fed7e4c25dc1fad8993d14e8f7a28f557b673102f5c62c10570f1fe4942"
+    },
+    "figures/atlas_10_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_10_2d.pdf",
+      "sha256": "91a5cc96eee9ec725b60fb7d5479f95deb1eff4d34aa14aeb3f20001e7360b83"
+    },
+    "figures/atlas_10_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_10_precursors.pdf",
+      "sha256": "851c8a38db03bf49dad5c27add1bec3d903d6f4f741afa5ca8a170ea62f1b4a1"
+    },
+    "figures/atlas_11_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_11_2d.pdf",
+      "sha256": "d2a0f3b91121437956f88fd9bdca98b3fc4ebd97501de514288b0d5a361d6492"
+    },
+    "figures/atlas_11_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_11_precursors.pdf",
+      "sha256": "ebd157f403267e6758b82e002ba881f74169364a3161694a25d46e157e2118bf"
+    },
+    "figures/atlas_12_2d.pdf": {
+      "source": "figures/chemical_drawings/atlas_12_2d.pdf",
+      "sha256": "48bf4f9b653c09b177be3d4d6ec9952ec159b9b7473b8be0b19140cb0f1220cb"
+    },
+    "figures/atlas_12_precursors.pdf": {
+      "source": "figures/chemical_drawings/atlas_12_precursors.pdf",
+      "sha256": "99ec3cebc75fd42b7c595a9a34f36db87aac195a5a59d8463c5dd2fb0791e42e"
+    },
+    "figures/sample_01_precursors.pdf": {
+      "source": "figures/chemical_drawings/sample_01_precursors.pdf",
+      "sha256": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164"
+    },
+    "figures/sample_02_precursors.pdf": {
+      "source": "figures/chemical_drawings/sample_02_precursors.pdf",
+      "sha256": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5"
+    },
+    "figures/sample_01_product.pdf": {
+      "source": "figures/chemical_drawings/sample_01_product.pdf",
+      "sha256": "39f5938afd6fd369beecbfc66f7bc45184059e5bc40f45283ba9182925415654"
+    },
+    "figures/sample_02_product.pdf": {
+      "source": "figures/chemical_drawings/sample_02_product.pdf",
+      "sha256": "4667c73a048cb444cf832d124954546822969d071276449ab01e4d0df217cd94"
+    }
+  },
+  "comment_policy": "All author comments removed from main.tex and references.bib. Official third-party template files and license notices retained unchanged.",
+  "tex_file_count": 1,
+  "bibliography_entries": 29,
+  "asset_count": 33,
+  "flat": false,
+  "validated_at": "2026-09-25T02:32:45.058468+00:00",
+  "archive": {
+    "path": "FORGE_ICLR2027_Overleaf_Clean.zip",
+    "sha256": "c609ef78d48f9779e89b221050a1a58b38b06eb397e030e19e98ccaba71ad353",
+    "bytes": 20121330,
+    "matches_current_export": false,
+    "rebuild_pending": true,
+    "status": "Unchanged at user request; retains the previous flat layout and manuscript revision."
+  },
+  "files": {
+    "README.txt": "b2f15ac96baa93ea32fce820998494d040acc445abede3d4c9d097451037ff5d",
+    "fancyhdr.sty": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea",
+    "figures/atlas_01_2d.pdf": "dcd5cc1e6f4b1a077fd4b7dc1b2b9565546f4039f09d2d46913471037d73d515",
+    "figures/atlas_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "figures/atlas_02_2d.pdf": "2b3d2e62d448fc25b03d3e3d67b5537d6eb3c6b341bf9ac4fab5249da22fed4c",
+    "figures/atlas_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "figures/atlas_03_2d.pdf": "fcee1f97c029b7249f8fcfffd860145a216b7e4ddf9e39e5250fea9de1e42d38",
+    "figures/atlas_03_precursors.pdf": "1cc8e333b0aa3f8bab7a4f6158cf07fffa500177c7b75bf1192a2e78d40ff965",
+    "figures/atlas_04_2d.pdf": "9a16c5c113acd42a321ea16a42e9ac474011f6ab6e4c44073fc11a73a63cb141",
+    "figures/atlas_04_precursors.pdf": "60238d023eb2c430a3222b39078849fafa37bf7508d95f3a8f6be65f69bd21a3",
+    "figures/atlas_05_2d.pdf": "4c7cb85bfc0a9030180b50e2bff760211496fde8497b152352eb176c68467660",
+    "figures/atlas_05_precursors.pdf": "fdc77a04c0bea96605c1646e608cee4220ceba9f8262c835ea91153a70e4d56e",
+    "figures/atlas_06_2d.pdf": "deb89e984388b20ec6eca06dbef735dae5ea615ed29eec67c6c4ef68a60cae00",
+    "figures/atlas_06_precursors.pdf": "41ef7b080077f8d318f08198ba24c5d7a448b0718e3819247489fb0ec152bdf7",
+    "figures/atlas_07_2d.pdf": "2b62e5c318877efb1821ea56bf4941033e0a744c19416b3899085d614416a9ec",
+    "figures/atlas_07_precursors.pdf": "06f9e5daa90babf2393d7600fbd9a5978656173218149c6377dab51893ed4190",
+    "figures/atlas_08_2d.pdf": "d98314ce1888c5281843765cf16ebc8c8af7ba8bc72f7b2850c426d495e70142",
+    "figures/atlas_08_precursors.pdf": "5d430066682f0aa9ef99f310cec317251fc242cbae7db30f06fd94792b8034fa",
+    "figures/atlas_09_2d.pdf": "aa98cfb1d9e73ca71ea29623b21499d511ac4aa774ed31d74e45d6b507ca8af3",
+    "figures/atlas_09_precursors.pdf": "eee30fed7e4c25dc1fad8993d14e8f7a28f557b673102f5c62c10570f1fe4942",
+    "figures/atlas_10_2d.pdf": "91a5cc96eee9ec725b60fb7d5479f95deb1eff4d34aa14aeb3f20001e7360b83",
+    "figures/atlas_10_precursors.pdf": "851c8a38db03bf49dad5c27add1bec3d903d6f4f741afa5ca8a170ea62f1b4a1",
+    "figures/atlas_11_2d.pdf": "d2a0f3b91121437956f88fd9bdca98b3fc4ebd97501de514288b0d5a361d6492",
+    "figures/atlas_11_precursors.pdf": "ebd157f403267e6758b82e002ba881f74169364a3161694a25d46e157e2118bf",
+    "figures/atlas_12_2d.pdf": "48bf4f9b653c09b177be3d4d6ec9952ec159b9b7473b8be0b19140cb0f1220cb",
+    "figures/atlas_12_precursors.pdf": "99ec3cebc75fd42b7c595a9a34f36db87aac195a5a59d8463c5dd2fb0791e42e",
+    "figures/forge_1_structure_supplied.png": "9a6789ff32f2be9e4a79027f5fc975a559ee3b39f8d71eecc561d4a47b02ad9f",
+    "figures/forge_2_structure_supplied.png": "4c6d2dae9f1b6193c6606b8c0c321239079a2ce628e53be80f7d03913942b721",
+    "figures/forge_3_structure_supplied.png": "cab3fa1ca94c6b1073d7e66ae3128dad3f93c1dd3012cf9366f5669859d752a8",
+    "figures/mouse_imaging_supplied.png": "4a18e4bb9b6e560c82bee48eb269eabe6dd4b81d9e033f356173b6cc1fe914ed",
+    "figures/reported_roi_values.csv": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+    "figures/sample_01_precursors.pdf": "2b8786566d9e67414e26c8c0c1afc66eb6a880a6dc6a22a1404e5cb390ea7164",
+    "figures/sample_01_product.pdf": "39f5938afd6fd369beecbfc66f7bc45184059e5bc40f45283ba9182925415654",
+    "figures/sample_02_precursors.pdf": "ce59cbf93d334aa9ac9af1033b108dcd332bfe548f80a2fd4ee259f3ab7332a5",
+    "figures/sample_02_product.pdf": "4667c73a048cb444cf832d124954546822969d071276449ab01e4d0df217cd94",
+    "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+    "main.tex": "08dc7f1009f998ba898ebba240ec9b1a3f1ec38e2638b5155d7f5480eb688052",
+    "mathematical_review.json": "66c3d1e598b5080889fa99c2fa208d38cf057a9fd596872d64927c62183f653c",
+    "natbib.sty": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d",
+    "references.bib": "7c112e30390190d24dff0a608f0d9f8d35fafd64616de72b196f2fbba5fb4088"
+  },
+  "file_count": 41,
+  "source_manuscript": {
+    "path": "FORGE_ICLR2027_paper.tex",
+    "sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+  },
+  "reference_pdf": {
+    "path": "FORGE_ICLR2027_paper.pdf",
+    "sha256": "3d81e62c247b1895da1d68cec3759bf707747912ae3b26ff3edd4ec7c08921ca"
+  },
+  "validation": {
+    "isolated_build": "passed with pdfLaTeX and BibTeX using latexmk",
+    "build_inputs_match_export": true,
+    "no_unresolved_references_or_citations": true,
+    "no_overfull_boxes": true,
+    "pdf_text_identical": true,
+    "total_pages": 39,
+    "main_pages": 9,
+    "archives_unchanged": true,
+    "current_archive": "FORGE_ICLR2027_Overleaf_Ready.zip"
+  },
+  "construction": "Consolidated manuscript and table/figure code, preserving input-boundary relax tokens; removed author comments; grouped image and CSV assets in figures/; retained the 29 cited bibliography entries with original fields.",
+  "tex_boundary_note": "Relax tokens and empty delimiters preserve the original input-command boundaries and whitespace without adding comments or changing formatting.",
+  "structure": "Manuscript, bibliography, template and companion record at root; images and chart data in figures/.",
+  "working_tree_revision": {
+    "date": "2026-09-25T00:31:52.434957+00:00",
+    "abstract": "Added the exploratory mouse FLuc mRNA LNP comparison: all three tested formulations exceeded DLIN-MC3-DMA in reported 4-hour signal; FORGE-3 reached 13.1-fold the benchmark signal.",
+    "signal_source": "experimental/in_vivo/reported_roi_values.csv",
+    "signal_source_sha256": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+    "reported_signal_ratios_to_benchmark": {
+      "FORGE-1": 2.732118451025057,
+      "FORGE-2": 9.275626423690206,
+      "FORGE-3": 13.125284738041003
+    },
+    "reaction_naming": "Ugi 3-CR; removed the branded qualifier without changing chemistry definitions or citations.",
+    "benchmark_display_name": "DLIN-MC3-DMA",
+    "result_scope": "Removed the main route-closure results subsection, appendix route-closure subsection and its two tables, synthesis-guidance outcome paragraph, and experimental dossier caveat at the author's request. Retained exact-assembly results, route definitions, conditional guarantees, and source result artifacts.",
+    "numerical_source_artifacts_changed": false,
+    "zip_rebuild": "Deferred at the user's request."
+  },
+  "introduction_flow_revision": {
+    "date": "2026-09-25T00:36:02.816783+00:00",
+    "scope": "Smoothed the first two Introduction paragraphs, preserved the concurrent removal of their closing gap sentence, and clarified the opening sentence of Recursive route assessment.",
+    "citation_groups_preserved": true,
+    "new_scientific_claims_or_results": false,
+    "route_sentence": "States the unique verified precursor decomposition and fixed depth/query limits in ordinary language; equation and mathematical conditions unchanged.",
+    "changed_rendered_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "main_pages": 9,
+    "total_pages": 39,
+    "visually_checked_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "contribution_list_revision": {
+    "date": "2026-09-25T00:41:34.065406+00:00",
+    "scope": "Replaced the final Introduction summary paragraph with three numbered contributions: reaction-conditioned generation with exact verification, matched three-chemistry evaluation, and synthesized-lipid mouse reporter measurements.",
+    "contribution_count": 3,
+    "citation_groups_preserved": true,
+    "claim_limits_preserved": true,
+    "new_results": false,
+    "changed_rendered_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "main_pages": 9,
+    "total_pages": 39,
+    "visually_checked_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "previous_revision_validation": {
+    "isolated_build": "passed with pdfLaTeX and BibTeX using latexmk",
+    "build_inputs_match_export": true,
+    "no_unresolved_references_or_citations": true,
+    "no_overfull_boxes": true,
+    "pdf_text_identical": true,
+    "total_pages": 39,
+    "main_pages": 9,
+    "all_page_renders_pixel_identical": true,
+    "render_comparison_dpi": 100,
+    "rendered_pages_compared": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "representative_clean_pages_visually_inspected": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "compiler": "pdfLaTeX",
+    "entry_point": "main.tex",
+    "original_template_files_unchanged": true,
+    "all_author_latex_and_bibliography_comments_removed": true,
+    "export_directory_verified": true,
+    "single_figures_directory_verified": true,
+    "archives_unchanged_at_user_request": true
+  },
+  "author_text_update": {
+    "date": "2026-09-25T02:32:45.058468+00:00",
+    "scope": "Applied author-supplied manuscript text in abstract, introduction, overview, graph representation, main architecture results, structural comparison and discussion.",
+    "overview_copyediting": "Removed duplicated distribution definition; repaired the sentence fragment and the four-step transition.",
+    "source_files": [
+      {
+        "path": "FORGE_ICLR2027_paper.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf/main.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "overleaf_export/main.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf_Clean/main.tex",
+        "before_sha256": "5e03992fc4541a509575770020ca2121656c4358be7a186fbcd4a9b32c7c22e8",
+        "after_sha256": "08dc7f1009f998ba898ebba240ec9b1a3f1ec38e2638b5155d7f5480eb688052"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf_Ready/main.tex",
+        "before_sha256": "a9ae4c236e30d877f3e5cfc63b3273e590e965b122191b529dc9198012c4adde",
+        "after_sha256": "6a9f96b4b91a31e24bbb8ae57d438916682d71cc4ca8fc1a72327c78dbf84a6b"
+      }
+    ],
+    "tables_figures_numeric_macros_and_appendix_unchanged": true,
+    "new_experiments": false,
+    "claim_status": "Author-supplied prose revision; not a new scientific evidence review.",
+    "total_pages": 39,
+    "main_pages": 9,
+    "disclosures_start_page": 10,
+    "visually_checked_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  }
+}

@@ -1,0 +1,211 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Evaluation protocol and matched budgets}
+The evaluation compares correctly conditioned, shared-null and cyclically mislabelled models under
+matched architecture, training exposure, checkpoint selection and inference budgets. The evaluation
+population contains \PendingValue{held-out requests per family per seed} requests per family across
+\PendingValue{independent training seeds} independent training seeds. Component-disjoint held-out
+products are excluded from training, decoder development and checkpoint selection. Verified exact-L1
+yield counts attempts passing molecular validation, decomposition and exact forward replay, with
+\emph{all} attempts in the denominator. Post-hoc rejection cannot increase the proposal's per-attempt
+acceptance probability (Proposition~\ref{prop:posthoc-budget}). We report means and sample standard
+deviations across training seeds, distinguishing retraining variation from conditional Monte Carlo
+variation. Raw and final yield count one output per request before and after the declared inference
+procedure; failed searches and abstentions remain in the denominator. Appendix~\ref{app:22-results}
+specifies the splits, source domains, proposal counts and computational budgets.
+
+\subsection{Shared generation across 22 assembly families}
+We first ask whether one conditional flow can cover 22 assembly families while maintaining
+performance on the matched three-family comparison. The equal-family exact-L1 yield is
+\PendingValue{raw macro L1} for raw readout and \PendingValue{final macro L1} after checked inference
+(Table~\ref{tab:22-l1}). The lowest family yield is \PendingValue{lowest family L1}, with
+\PendingValue{between-family pattern}. Decomposition coverage, candidate precision and ambiguity
+are \PendingValue{decomposition outcomes}; replay of accepted traces is
+\PendingValue{accepted-trace replay}. These quantities distinguish an inability to recover a valid
+assembly from an inconsistent returned trace. Fixed-coordinate violations and support overflows
+occur in \PendingValue{coordinate and support failures} of \PendingValue{total requests} requests.
+On common requests for Ugi 3-CR, aza-Michael addition and reductive amination, the change relative to
+the three-family model is \PendingValue{three-family bridge effect}
+(Table~\ref{tab:22-controls}).
+
+\begin{table}[H]
+\caption{\textbf{Exact assembly across 22 ionizable-lipid reaction families.}
+Values are mean $\pm$ sample standard deviation across independent training seeds, with all
+requests in the yield denominator. Raw and final outputs share request identities; final includes
+checked completion, repair and selection. Null and cyclic arms use matched training and inference
+budgets. Decomposition coverage and candidate precision are distinct from replay of accepted traces.
+Per-seed counts, replay invariants and ambiguity: Appendix~\ref{app:22-results}.}
+\label{tab:22-l1}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Raw\\L1 (\%)} & \shortstack{Final\\L1 (\%)} & \shortstack{Shared\\null (\%)} & \shortstack{Cyclic\\label (\%)} & \shortstack{Decomp. cov. /\\candidate prec.} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Contribution of reaction-program conditioning}
+To isolate the effect of reaction information during generation, we compare the conditioned
+model with the shared-null and cyclic arms under the same attempt budget and post-hoc verifier.
+The conditioned-minus-null difference is \PendingValue{conditioning difference} percentage points,
+with \PendingValue{conditioning uncertainty and family variation}. The cyclic control retains
+precursor roles, reaction-core coordinates and program depth, isolating the contribution of the
+reaction-identity label within a structured program. Its difference from correct conditioning is
+\PendingValue{identity-label difference}. The information supplied through layouts, masks, cores and
+decoder priors is accounted for separately (Table~\ref{tab:22-controls}); the resulting attribution is
+\PendingValue{program versus identity-label conclusion}.
+
+\subsection{Decoder and architecture effects across programs}
+With model weights fixed, the raw-to-final exact-L1 change is
+\PendingValue{decoder L1 difference}, and the change in outputs satisfying the qualified structural
+checks is \PendingValue{decoder design difference} (Table~\ref{tab:22-decoder}). The same source
+verifier assesses core-constrained readout, component completion, scoped head retention, role-local
+atom/bond proposals and final ring-system repair. Original candidates remain available to selection.
+Reselection within the original pool changes yield by \PendingValue{selection-only difference};
+adding repaired candidates contributes \PendingValue{repair-pool difference}, at a cost of
+\PendingValue{additional proposal and source-check cost}. Larger-pool gains and equal-cost contrasts
+are reported separately, because additional search and a changed selection objective do not isolate
+the effect of a repair rule.
+
+The architecture comparison separates joint denoising from parameter-matched independent precursor
+roles (FACT), cross-attention and gradient-conflict control. Exact-L1 and structural-quality
+contrasts are \PendingValue{architecture contrasts}, with
+\PendingValue{architecture family dependence} (Table~\ref{tab:22-architecture}). These comparisons
+separate learned-model effects from changes made at inference; motif agreement with the same TRAIN
+components that define a decoder prior is not independent validation.
+
+\subsection{Precursor novelty, diversity and held-component generalization}
+We next ask whether FORGE can preserve exact assembly while generating precursor constitutions
+absent from training. Verified component-novel yield is \PendingValue{component-novel yield} per
+1,000 requests, including \PendingValue{distinct component-novel yield} distinct products
+(Table~\ref{tab:22-diversity}). Finite-inventory methods have zero component novelty relative to
+their own visible inventory by construction. Component novelty is verifier-relative and does not
+establish product-level catalogue escape. Exact product reachability gives
+\PendingValue{catalogue reachability outcome}. Role-specific unique counts and Shannon and Simpson
+effective counts are \PendingValue{component diversity outcome}, distinguishing a broad precursor
+population from repeated use of a few components.
+
+Held-component recovery is \PendingValue{held-component yield} per 1,000 requests, covering
+\PendingValue{held-identity coverage} of reserved identities. Source-disjoint and component-disjoint
+exact yields are \PendingValue{generalization yields}, with \PendingValue{size and repeat effects}
+across molecular size, closure count and repeated-arm strata (Table~\ref{tab:22-generalization}).
+Comparisons with external generators use their qualified chemical scope and a common verifier;
+their outcome is \PendingValue{external-baseline comparison}. Unsupported native families remain
+unassessed. Fresh noise applied to TRAIN-derived requests is a sampling diagnostic, not evidence
+of held-out generalization.
+
+\subsection{Structural quality and agreement with lipid references}
+Exact assembly and lipid structural quality measure different properties. The fraction satisfying
+exact L1 and all applicable design checks is \PendingValue{raw joint design yield} for raw outputs
+and \PendingValue{final joint design yield} after inference
+(Table~\ref{tab:22-quality-metrics}). Chemical alerts, loss of a required headgroup site and
+ring-condition violations account for \PendingValue{structural failure distribution}. These checks
+apply to the complete final graph; source-positive controls give
+\PendingValue{control disagreement and abstention rates}. Chemistry-context flags remain separate
+from confirmed defects. A retained-basic-site query does not establish pKa, and absence of a narrow
+alert does not establish physical stability or delivery activity.
+
+\begin{table}[H]
+\caption{\textbf{Structural quality and agreement with design conditions.}
+Raw and final arms share requests; values are mean $\pm$ sample standard deviation across training
+seeds. Controls are source-positive structures within each metric's qualified scope. Applicable and
+assessed counts, control disagreements and abstentions accompany conditional rates; unsupported
+checks are not counted as passes.}
+\label{tab:22-quality-metrics}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.62\textwidth}ccc@{}}\toprule
+Metric & Raw & Final & Controls\\\midrule
+Valid molecules / all requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Connected molecules / all requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Exact L1 + all qualified design checks / requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Molecules with a justified chemical alert / requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Molecules requiring chemistry-context review / requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Required head retained / family-scope requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Correct role-local cycle allocation / requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Requested ring-size agreement / comparable requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+TRAIN atom-environment coverage (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Ring-system TRAIN support / assessed products (\%) & \PendingCell & \PendingCell & \PendingCell \\
+Exact L1 + product/component features observed / requests (\%) & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule\end{tabular}
+\par\smallskip\raggedright\scriptsize
+TRAIN atom/ring support is a reference diagnostic and may share information with decoder priors.
+Definitions: Table~\ref{tab:22-metric-definitions}; per-family outcomes:
+Tables~\ref{tab:22-structure} and~\ref{tab:22-conditions}.
+\end{table}
+
+Agreement with lipid references is \PendingValue{realism outcome} in fingerprint and descriptor
+spaces (Table~\ref{tab:22-realism-metrics}). Precision measures proximity to the reference
+population, whereas coverage measures how much of that population is represented. Their joint
+pattern is \PendingValue{precision-coverage interpretation}. Nearest-reference similarity and
+internal diversity distinguish concentrated familiar outputs from diverse but distant structures.
+The source-study-grouped two-sample classifier has AUC \PendingValue{two-sample AUC}, with
+\PendingValue{two-sample uncertainty}. These comparisons distinguish TRAIN support from
+independent lipid-reference agreement; near-chance discrimination does not prove chemical quality.
+
+\begin{table}[H]
+\caption{\textbf{Lipid realism and distributional coverage.}
+Raw and final outputs are compared within each family and reference population, with
+unique-molecule and all-request denominators distinguished. TRAIN-reference diagnostics are
+separate from comparisons with source-disjoint observed lipids. Values are mean $\pm$ sample
+standard deviation across training seeds.}
+\label{tab:22-realism-metrics}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.49\textwidth}cc>{\raggedright\arraybackslash}p{.24\textwidth}@{}}\toprule
+Metric & Raw & Final & Reference\\\midrule
+Fingerprint precision (\%) & \PendingCell & \PendingCell & Declared lipid cohort \\
+Fingerprint coverage (\%) & \PendingCell & \PendingCell & Declared lipid cohort \\
+Fingerprint recall (\%) & \PendingCell & \PendingCell & Declared lipid cohort \\
+Distinct reference-supported products / requests (\%) & \PendingCell & \PendingCell & Declared lipid cohort \\
+Nearest-reference Tanimoto similarity & \PendingCell & \PendingCell & Declared lipid cohort \\
+Internal ECFP4 diversity & \PendingCell & \PendingCell & Generated population \\
+Descriptor distribution distance, per feature & \PendingCell & \PendingCell & Declared lipid cohort \\
+Descriptor-space precision and coverage & \PendingCell & \PendingCell & Source-disjoint lipids \\
+Source-grouped two-sample classifier AUC & \PendingCell & \PendingCell & Source-disjoint lipids \\
+\bottomrule\end{tabular}
+\par\smallskip\raggedright\scriptsize
+ECFP4 uses Morgan radius 2 and 2,048 bits; neighborhood metrics use five neighbors.
+Unsupported reference comparisons remain unassessed. Table~\ref{tab:22-descriptors} gives the
+full descriptor panel; Table~\ref{tab:22-realism} reports each family and reference population.
+\end{table}
+
+\subsection{Recursive synthesis evidence and complete-route yield}
+Exact final assembly closes L1 but does not establish an upstream route. Exact precursor-preparation
+evidence (L2) covers \PendingValue{L2 component coverage} of required components, and qualified
+terminal evidence (L3) covers \PendingValue{current L3 coverage}
+(Table~\ref{tab:22-routes}). Complete-product dossier yield is
+\PendingValue{complete dossier yield} per 1,000 requests, with
+\PendingValue{family-wise evidence depth}. Each complete dossier requires every precursor branch
+to terminate in an admitted exact material, preserving role, reaction-step and repeated-component
+context. Directly accepted terminals do not require an L2 synthesis. Missing or scope-mismatched
+sources, unresolved identities, expired availability and bounded-search censoring are reported
+separately. The dominant limitation is \PendingValue{route-closure limitation}; absence of admitted
+evidence is not evidence of unsynthesizability. These results concern auditable computational
+synthesis dossiers and do not establish experimental synthesis or biological activity.

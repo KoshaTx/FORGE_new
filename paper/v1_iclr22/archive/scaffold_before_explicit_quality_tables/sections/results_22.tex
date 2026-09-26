@@ -1,0 +1,87 @@
+\section{Results to be completed for the 22-family model}
+\label{sec:results}
+\TwentyTwoScope
+
+\subsection{Evaluation population and exact assembly}
+\ResultSlot{R01--R03}{Insert the admitted cohort and frozen held-out evaluation population, final checkpoint and inference-policy identifiers, attempt budget, independent training seeds and uncertainty convention. No development result is a substitute for this experiment.}
+All requested outputs will contribute to exact-L1 yield, including invalid graphs, failed searches,
+source-domain rejections and abstentions. Report validity and connectedness per request, decomposition coverage,
+candidate precision and ambiguity separately. Equal-family averages and pooled counts accompany
+all individual families, and cannot conceal a weak family. The final seed summaries will use means
+and sample standard deviations across independent training runs; the planned minimum is three.
+Sampling variation from a fixed checkpoint will be reported separately. Tables in
+Appendix~\ref{app:22-results} specify the remaining endpoints and denominators.
+\begin{table}[H]
+\caption{\textbf{Exact L1 across all 22 assembly families, final results pending.} All cells require independently trained seed summaries under matched frozen requests. ``Final'' includes the declared checked inference procedure; raw and final outputs share attempt IDs. Null and cyclic controls require their own matched training. Candidate precision is distinct from replay of already accepted traces. Per-seed counts and denominator definitions: Appendix~\ref{app:22-results}.}
+\label{tab:22-l1}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Raw\\L1 (\%)} & \shortstack{Final\\L1 (\%)} & \shortstack{Shared\\null (\%)} & \shortstack{Cyclic\\label (\%)} & \shortstack{Decomp. cov. /\\candidate prec.} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Structural quality, realism and component diversity}
+\ResultSlot{R06--R09}{Insert family-wise representation failures, chemical alerts and context flags, qualified head/ring agreement, reference distribution comparisons, component diversity and held-component recovery. State residual failures and abstentions alongside improvements.}
+Exact L1 is a reaction-consistency result. Structural assessment separately checks the complete final
+graph, including retained headgroup sites, hydrophobic carbon-domain organization and ring-system
+connectivity. A basic-substructure match does not establish ionization. Absence of a narrow chemical
+alert does not establish high overall quality. Comparison with TRAIN local features is descriptive
+when those same features supply a repair prior; independent source-held-out controls provide a
+separate assessment. Product and role-specific component diversity and novelty are retained as
+separate outcomes, rather than combined into a single quality score.
+
+\begin{figure}[H]
+\centering
+\DraftPanel{a. Assembly and conditions}{Per-family raw/final exact yield, request counts and training-seed intervals.}\hfill
+\DraftPanel{b. Structural assessment}{Chemical alerts, qualified condition failures and explicit abstentions.}\\[6pt]
+\DraftPanel{c. Diversity and realism}{Role diversity, novelty and independent reference precision/coverage.}\hfill
+\DraftPanel{d. Evidence depth}{L1, L2 and L3 dispositions; complete dossier yield per request.}
+\caption{\textbf{Planned 22-family evidence overview.} These empty panels reserve space for final
+measurements. Each will include all families, fixed comparator budgets and its own denominator.
+No illustrative trend, fabricated value or implied positive outcome is shown.}
+\label{fig:22-overview}
+\end{figure}
+
+\subsection{Attribution, efficiency and synthesis evidence}
+\ResultSlot{R04--R05, R10--R12}{Insert matched conditioning controls, the original-three-family bridge,
+decoder and architecture ablations, training adequacy, cost and complete-route results. Distinguish
+same-cost contrasts from improvements purchased by additional proposals or source checks.}
+A learned-conditioning claim requires matched independently trained controls and an inventory of
+reaction information supplied through layouts, masks, cores, adapters and decoder priors. Fixed-weight
+repairs isolate an inference contribution; they do not establish improved learning. The route analysis
+will report exact precursor preparation evidence (L2), qualified terminal identity and availability
+(L3), and complete-product dossiers. An upstream step or a verified assembly alone does not close
+the complete route. The manuscript will retain unresolved and search-censored outcomes, including
+families whose evidence is shallower than the AGILE-type Ugi case.
+\ResultSlot{R13--R15}{Add a seeded all-family structure atlas, corrected and unresolved failure cases,
+the final implementation/theory correspondence, and any authorized guidance contrast whose
+readiness gates pass. Guidance is conditional and no wet-lab study is proposed here.}

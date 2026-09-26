@@ -1,0 +1,354 @@
+{
+  "schema_version": 2,
+  "validated_at": "2026-09-25T02:32:45.058468+00:00",
+  "scope": "Current draft with a three-item numbered contribution list replacing the Introduction's final summary paragraph. Supported claims, citations, and mathematical content preserved. ZIP rebuild deferred.",
+  "artifacts": {
+    "FORGE_ICLR2027_paper.tex": {
+      "sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+    },
+    "FORGE_ICLR2027_paper.pdf": {
+      "sha256": "3d81e62c247b1895da1d68cec3759bf707747912ae3b26ff3edd4ec7c08921ca"
+    },
+    "FORGE_ICLR2027_Overleaf.zip": {
+      "sha256": "3e28006d8eceec6353de6b871e61b85b2dcefc31ae5478160d06dfcde80f41d3",
+      "matches_current_source": false
+    },
+    "iclr_provenance.json": {
+      "sha256": "075b7c392ad34dca9d1ad663b618d02be26df040c1803346fe3edc9dea14cb09"
+    },
+    "mathematical_review.json": {
+      "sha256": "66c3d1e598b5080889fa99c2fa208d38cf057a9fd596872d64927c62183f653c"
+    },
+    "FORGE_ICLR2027_Overleaf_Ready.zip": {
+      "sha256": "27b610d28cee54ac801c54f66f2897f400716e212a4ab71394953f87d73e19ce",
+      "matches_current_source": true
+    }
+  },
+  "build": {
+    "canonical": "Passed isolated pdfLaTeX/BibTeX build of the exact current canonical source; validated PDF saved as canonical output.",
+    "standalone_overleaf_archive": "Current Ready archive passed a fresh extraction and pdfLaTeX/BibTeX build; older archives remain historical.",
+    "export_pdf_text_identical": true,
+    "latex_warnings": [],
+    "unresolved_references_or_citations": false,
+    "overfull_boxes": false,
+    "underfull_box_messages": 7,
+    "clean_export": "Current source passed isolated build; extracted PDF text matches canonical output."
+  },
+  "layout": {
+    "total_pages": 39,
+    "main_text_last_page": 9,
+    "appendix_sections": [
+      "Method and implementation details",
+      "Evaluation protocol and additional results",
+      "Theoretical analysis and proofs",
+      "Reaction schemes and generated examples"
+    ],
+    "caption_order": {
+      "Table": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "Figure": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "visual_review": "Current canonical and Ready PDFs rendered on pages 1-10; Ready pages 1-10 visually inspected with no clipping or overlaps.",
+    "appendix_guide_removed": true,
+    "page_budget_editing": "Nine main pages, including Discussion on page 8 and experimental figure on page 9; disclosures start on page 10. Official style, font sizes, margins and figure sizes unchanged.",
+    "disclosures_start_page": 10
+  },
+  "preservation": {
+    "original_input_snapshots": 55,
+    "unchanged_input_snapshots": 46,
+    "locally_revised_inputs": [
+      "figures/forge_algorithm_schematic/schematic_body.tex",
+      "generated/common_ugi_benchmark_completed_rows.tex",
+      "figures/forge_reaction_schemes/schemes_body.tex",
+      "generated/lipid_realism_rows.tex",
+      "generated/route_evidence_completed_rows.tex",
+      "generated/common_ugi_seed_rows.tex",
+      "generated/common_ugi_decomposition_rows.tex",
+      "figures/forge_generated_sample_atlas_core_saturation_v1/atlas_rows.tex",
+      "references.bib"
+    ],
+    "official_style_files_unchanged": 7,
+    "historical_empirical_numeric_macro_set_retained": true,
+    "original_reference_labels_retained": true,
+    "experimental_evidence_hashes_match": true,
+    "two_export_directories_identical": true,
+    "archive_file_count": 131,
+    "formal_statements_proofs_and_algorithm_unchanged_in_page_revision": true,
+    "all_figure_and_table_blocks_preserved_in_page_revision": true,
+    "all_citation_keys_preserved_in_page_revision": true,
+    "bibliography_content_unchanged_in_page_revision": true
+  },
+  "mathematical_review": "Informal proof review and scoped historical implementation correspondence; see mathematical_review.json and REVISION_NOTES.md.",
+  "pending_author_information": [
+    "biological replicate counts and independent experimental units",
+    "animal/site/treatment allocation",
+    "ROI anatomical definitions, units, background subtraction and imaging settings",
+    "exact candidate IDs or canonical structures and checkpoint IDs",
+    "lipid purification, identity and purity records",
+    "full formulation ratio, PEG-lipid and preparation method",
+    "mouse strain, sex, age",
+    "luciferin dose, route and imaging delay"
+  ],
+  "table_method_label_revision": {
+    "files": 5,
+    "replacements": 7,
+    "final_label": "FORGE",
+    "numeric_values_unchanged": true,
+    "pdf_text_changed_only_by_requested_labels": true,
+    "visually_checked_pages": [
+      9,
+      27,
+      29
+    ]
+  },
+  "in_vivo_figure_presentation": {
+    "changed_pages": [
+      9
+    ],
+    "chart": "vertical bar graph",
+    "baseline": 0,
+    "values_unchanged": true,
+    "display_scale": 1000000,
+    "displayed_values": [
+      0.5997,
+      2.036,
+      2.881,
+      0.2195
+    ],
+    "original_images_unchanged": true,
+    "export_build_inputs_match_validated_standalone": true,
+    "colors": {
+      "FORGE": "blue!50!gray",
+      "DLIN-MC3-DMA": "black!60"
+    },
+    "axis_range": [
+      0,
+      3.2
+    ],
+    "height_cm": 5.5,
+    "reference_line": {
+      "signal": 219500,
+      "legend": "DLIN-MC3-DMA level",
+      "style": "dashed red",
+      "legend_position": "upper left, clear of bars and value labels"
+    },
+    "current_page": 9
+  },
+  "chemical_drawings": {
+    "rendering_record": "figures/chemical_drawings/rendering_record.json",
+    "sha256": "270ad783e900cf276b02e2ac971ca296f3cb70d4bb3c1257fb33df7dce792463",
+    "vector_panel_count": 28,
+    "atlas_product_smiles_checked": 12,
+    "atlas_precursor_records_checked": 36,
+    "molecular_identities_preserved": true,
+    "original_images_preserved": true,
+    "atlas_second_column": "Exact L1 building blocks"
+  },
+  "algorithm_presentation": {
+    "format": "Ruled caption and block; bold Require and Ensure; existing numbered and indented steps.",
+    "algorithm_body_unchanged": true,
+    "font_size_unchanged": true,
+    "reference_label": "alg:forge-inference",
+    "page": 19,
+    "checked_algorithm_steps": 38,
+    "continuation_page": 20
+  },
+  "disclosure_statements": {
+    "ai_use": "Author-declared conceptual, methodological, software, experimental-design, analytical, literature and writing assistance, with author responsibility.",
+    "ethics": "Computational and exploratory mouse evidence distinguished; approving institution confirmed by author.",
+    "approving_institution": "Children's Hospital of Philadelphia",
+    "protocol_number": "omitted at author request",
+    "reproducibility": "FORGE terminology; new app:repro subsection reports seeds, historical provenance and standalone archive-access limitations.",
+    "cross_references_resolved": true,
+    "statements_page": 10,
+    "reproducibility_appendix_page": 20
+  },
+  "page_budget_revision": {
+    "date": "2026-09-24",
+    "prior_manuscript_sha256": "3c225db54fdc4b92df9386cccbe3f5d84bda02a3a240667ded3ff98459e10958",
+    "target_main_pages": 9,
+    "compiled_main_pages": 9,
+    "total_pages": 40,
+    "statements_start_page": 10,
+    "venue_guidelines": "https://iclr.cc/Conferences/2027/AuthorGuidelines",
+    "venue_guidelines_verified": "2026-09-24",
+    "prose_revision": "Removed repeated contributions and numerical recaps; condensed background, implementation summaries and discussion while preserving controls, mixed findings and claim limits.",
+    "appendix_moves": [
+      {
+        "item": "reaction-family comparison table",
+        "label": "tab:reaction-family-background",
+        "destination": "D.1"
+      },
+      {
+        "item": "program-embedding equation and symbol definitions",
+        "destination": "A.1"
+      },
+      {
+        "item": "generated-product and exact-precursor figure",
+        "label": "fig:forge-generated-samples",
+        "destination": "D.2"
+      },
+      {
+        "item": "main sampling-budget recap",
+        "destination": "replaced by reference to the existing complete result in C.4"
+      }
+    ],
+    "retained_in_main": [
+      "chemical preliminaries",
+      "four-stage overview",
+      "core formulation and ideal-generation theorem",
+      "matched comparison tables",
+      "negative findings and route-completion limits",
+      "complete mouse, structures and ROI-bar figure"
+    ],
+    "preserved": [
+      "all formal statements, proofs and algorithm steps",
+      "all existing reference labels and citation keys",
+      "set of empirical macro names and all numerical input files",
+      "figure and table blocks including sizes",
+      "official style, fonts and margins"
+    ],
+    "abstract_revision": "Removed the branded reaction qualifier; retained amine-aldehyde-isocyanide Ugi 3-CR description.",
+    "new_experiments": false,
+    "formal_content_changes": false,
+    "historical_record": "Describes the preceding nine-page revision; current result-scope removals and pagination are recorded in reporter_and_scope_revision and layout."
+  },
+  "reporter_and_scope_revision": {
+    "date": "2026-09-25T00:31:52.434957+00:00",
+    "abstract": "Added the exploratory mouse FLuc mRNA LNP comparison: all three tested formulations exceeded DLIN-MC3-DMA in reported 4-hour signal; FORGE-3 reached 13.1-fold the benchmark signal.",
+    "signal_source": "experimental/in_vivo/reported_roi_values.csv",
+    "signal_source_sha256": "ec4992e8068eccec16eb885dc62abd6a9cc9f17e1ad01071552f023fd3d69e11",
+    "reported_signal_ratios_to_benchmark": {
+      "FORGE-1": 2.732118451025057,
+      "FORGE-2": 9.275626423690206,
+      "FORGE-3": 13.125284738041003
+    },
+    "reaction_naming": "Ugi 3-CR; removed the branded qualifier without changing chemistry definitions or citations.",
+    "benchmark_display_name": "DLIN-MC3-DMA",
+    "result_scope": "Removed the main route-closure results subsection, appendix route-closure subsection and its two tables, synthesis-guidance outcome paragraph, and experimental dossier caveat at the author's request. Retained exact-assembly results, route definitions, conditional guarantees, and source result artifacts.",
+    "numerical_source_artifacts_changed": false,
+    "zip_rebuild": "Deferred at the user's request."
+  },
+  "archives_rebuild_pending": true,
+  "introduction_flow_revision": {
+    "date": "2026-09-25T00:36:02.816783+00:00",
+    "scope": "Smoothed the first two Introduction paragraphs, preserved the concurrent removal of their closing gap sentence, and clarified the opening sentence of Recursive route assessment.",
+    "citation_groups_preserved": true,
+    "new_scientific_claims_or_results": false,
+    "route_sentence": "States the unique verified precursor decomposition and fixed depth/query limits in ordinary language; equation and mathematical conditions unchanged.",
+    "changed_rendered_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "main_pages": 9,
+    "total_pages": 39,
+    "visually_checked_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "contribution_list_revision": {
+    "date": "2026-09-25T00:41:34.065406+00:00",
+    "scope": "Replaced the final Introduction summary paragraph with three numbered contributions: reaction-conditioned generation with exact verification, matched three-chemistry evaluation, and synthesized-lipid mouse reporter measurements.",
+    "contribution_count": 3,
+    "citation_groups_preserved": true,
+    "claim_limits_preserved": true,
+    "new_results": false,
+    "changed_rendered_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "main_pages": 9,
+    "total_pages": 39,
+    "visually_checked_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "author_text_update": {
+    "date": "2026-09-25T02:32:45.058468+00:00",
+    "scope": "Applied author-supplied manuscript text in abstract, introduction, overview, graph representation, main architecture results, structural comparison and discussion.",
+    "overview_copyediting": "Removed duplicated distribution definition; repaired the sentence fragment and the four-step transition.",
+    "source_files": [
+      {
+        "path": "FORGE_ICLR2027_paper.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf/main.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "overleaf_export/main.tex",
+        "before_sha256": "b31d80ad423a2177253774008a4d678547d7d87d6bc1b48f6a22aed140821f7f",
+        "after_sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf_Clean/main.tex",
+        "before_sha256": "5e03992fc4541a509575770020ca2121656c4358be7a186fbcd4a9b32c7c22e8",
+        "after_sha256": "08dc7f1009f998ba898ebba240ec9b1a3f1ec38e2638b5155d7f5480eb688052"
+      },
+      {
+        "path": "FORGE_ICLR2027_Overleaf_Ready/main.tex",
+        "before_sha256": "a9ae4c236e30d877f3e5cfc63b3273e590e965b122191b529dc9198012c4adde",
+        "after_sha256": "6a9f96b4b91a31e24bbb8ae57d438916682d71cc4ca8fc1a72327c78dbf84a6b"
+      }
+    ],
+    "tables_figures_numeric_macros_and_appendix_unchanged": true,
+    "new_experiments": false,
+    "claim_status": "Author-supplied prose revision; not a new scientific evidence review.",
+    "total_pages": 39,
+    "main_pages": 9,
+    "disclosures_start_page": 10,
+    "visually_checked_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  }
+}

@@ -1,0 +1,411 @@
+\section{Evaluation across reaction families}
+\label{app:22-results}
+We evaluate complete lipid graphs at three distinct levels: exact assembly consistency, structural
+and distributional properties, and synthesis-evidence completeness. Unless stated otherwise, $N$
+denotes all requested products. Conditional rates specify their assessed population and retain
+invalid, unsupported and abstained requests in the accompanying accounting.
+
+\subsection{Cohort, program registry and split accounting}
+We associate each registered assembly program with its source evidence, reactive-site multiplicity,
+precursor roles and repeat/depth support. Admitted training records and qualified CAL molecules are counted separately; a complete source-row versus constitutional-product and study census remains unmeasured. The family census reports sampling mass, representation admission and exclusions; support tiers E0--E3 describe evidence depth rather than a probability of synthesis
+success.
+\begin{table}[H]
+\caption{\textbf{Admitted training corpus and guarded CAL representation.} TRAIN records and CAL molecules are different units. A CAL molecule may have multiple qualified condition variants. These counts measure support and admission, not model success.}
+\label{tab:22-census}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.31\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{TRAIN\\records} & \shortstack{Sampling\\mass} & \shortstack{Admitted CAL /\\guarded molecules} & \shortstack{CAL\\variants} & \shortstack{Independent\\study census} \\
+\midrule
+A3 amine--aldehyde--alkyne & 34,104 & 1/22 & 27/36 & 27 & \PendingCell \\
+Acid--epoxide diester & 101,098 & 1/22 & 95/96 & 95 & \PendingCell \\
+AEMA & 5,428 & 1/22 & 33/39 & 59 & \PendingCell \\
+Aldehyde Ugi 3-CR & 2,283 & 1/22 & 12/17 & 12 & \PendingCell \\
+Aldehyde Ugi 4-CR & 63,616 & 1/22 & 61/66 & 61 & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & 35,728 & 1/22 & 103/135 & 103 & \PendingCell \\
+Amine alkylation & 92,697 & 1/22 & 171/171 & 171 & \PendingCell \\
+Amine--epoxide & 33,507 & 1/22 & 113/113 & 113 & \PendingCell \\
+Aryl reductive amination & 7,788 & 1/22 & 79/80 & 79 & \PendingCell \\
+Aza-Michael acrylamide & 10,127 & 1/22 & 33/33 & 33 & \PendingCell \\
+Aza-Michael acrylate & 10,270 & 1/22 & 33/57 & 33 & \PendingCell \\
+Disulfide Michael & 96,833 & 1/22 & 128/128 & 128 & \PendingCell \\
+Epoxide O-acylation & 21,462 & 1/22 & 70/70 & 70 & \PendingCell \\
+iPhos & 62,636 & 1/22 & 62/110 & 62 & \PendingCell \\
+Ketone--isocyanide amide & 12,482 & 1/22 & 30/60 & 30 & \PendingCell \\
+Ketone Ugi 4-CR & 27,027 & 1/22 & 29/29 & 29 & \PendingCell \\
+Maleate & 38,472 & 1/22 & 49/49 & 49 & \PendingCell \\
+O-esterification & 10,391 & 1/22 & 43/79 & 43 & \PendingCell \\
+Passerini & 62,188 & 1/22 & 68/68 & 68 & \PendingCell \\
+Preassembled thiol-yne & 260,470 & 1/22 & 379/382 & 379 & \PendingCell \\
+Reductive amination & 28,471 & 1/22 & 145/145 & 145 & \PendingCell \\
+Thiolactone & 174,987 & 1/22 & 96/96 & 96 & \PendingCell \\
+\midrule
+Total & 1,192,065 & 1 & 1,859/2,059 & 1,885 & \PendingCell \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+The training measure assigns equal family mass and uniform constitutional-product mass within each family. Pending support excludes 80,401 records; vitamin-B5 multistep has no admitted training support. Declared graph support is 254 atoms and 12 closures. The corpus contains 44,312 records above 96 atoms. Independent study counts, source-disjoint evaluation and a separate source-row versus constitution census remain unmeasured. TEST outcomes are unopened.
+\end{table}
+
+\subsection{Training, numerical validation and computational cost}
+\begin{table}[H]
+\caption{\textbf{Measured training configuration and execution.} One complete fit initializes the continuation diagnostics. Hash-pinned inputs, checkpoints and commands accompany the evidence ledger.}
+\label{tab:22-training}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.50\textwidth}>{\raggedright\arraybackslash}p{.46\textwidth}@{}}
+\toprule
+Field & Setting / result \\
+\midrule
+Independent full fit / seed & 1 / 2026092401 \\
+Families / presentations per family / total & 22 / 402,336 / 8,851,392 \\
+Optimizer updates / updates containing each family & 2,794 / 381 \\
+Global batch / participating families / examples per family & 3,168 / 3 / 1,056 \\
+Optimizer / learning rate / weight decay / clip & AdamW / $10^{-4}$ / $5\!\times\!10^{-5}$ / 1.0 \\
+AdamW $(\beta_1,\beta_2)$ / $\epsilon$ & $(0.9,0.999)$ / $10^{-8}$ \\
+Transformer layers / width / heads / dropout & 6 / 192 / 8 / 0.1 \\
+Routed experts / adapter width / graph support & 3 / 64 / 254 atoms, 12 closures \\
+Gradient and chemistry balancing & Family PCGrad; equal present-role mass \\
+Auxiliary role / core / repeat weights & 0.25 / 0.25 / 0.25 \\
+Offspring / junction / topology-chemistry weights & 1.0 / 0.5 / 1.0 \\
+Hardware / precision / determinism & 8 H100 / FP32 / deterministic \\
+Prefetch workers / depth / checkpoint interval & 2 / 2 / 220 updates \\
+Execution / included preparation time & 1,377.725 s / 31.801 s \\
+Serial versus eight-GPU; kill/restart & Exact 44-step model, optimizer, RNG replay \\
+Development sampling & 352 requests; 16/family; 64 flow steps \\
+Adaptive selected cohort & 1,408 separate requests; 64/family \\
+Final independent held-out protocol and fits & \PendingCell \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+The 22.96-minute execution excludes allocation/image initialization and later evaluation; it does not meet a 15-minute execution target. Fixed-presentation continuation uses 31,680 additional presentations/family: batch 3,168 for 220 updates (8 GPUs; 40.859 function-GPU-minutes) versus batch 264 for 2,640 updates (1 GPU; 16.082 function-GPU-minutes). A separate paired categorical/coarse-parent pilot fixes 66 updates and 9,504 presentations/family/arm (55.706 function-GPU-minutes for the successful paired execution). Function-GPU-minutes are not billed dollar costs. Failed staging and timeout attempts remain in the run ledger; neither continuation is an independent full fit.
+\end{table}
+Training artifacts retain coordinate losses; the completed guarded-CAL diagnostic resolves clean-parent errors by family and topology. Full generation learning curves across corruption time remain unmeasured. Checkpoint comparisons use fixed development requests and report exact yield,
+structural assessment and diversity alongside gradients and clipping. We distinguish molecular
+presentations, family appearances in updates and optimizer updates. Matched-exposure batch/update
+comparisons and exposure-scaling comparisons isolate different effects. The original full fit ends at its fixed 2,794-update budget. Both continuation diagnostics use their fixed final endpoints; saved intermediate checkpoints are descriptive, and no best-checkpoint selection is performed.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{figures/current_results/training_diagnostics.pdf}
+\caption{\textbf{Fixed-endpoint continuation diagnostics on 352 development requests.}
+The matched-presentation large/small-update pilot has D1 exact counts 135/122 and design counts
+113/107, versus original 140/111. The separate categorical/coarse66 pilot gives 136/135 exact
+and 110/114 design, versus the same original 140/111. These are paired continuations of one fit,
+not independent training seeds; no sampling uncertainty bars or held-out claim is attached.}
+\label{fig:22-training}\end{figure}
+
+\subsection{Exact-L1 decomposition and failure accounting}
+We report exact assembly outcomes for each family, registered program, training seed and inference
+arm. Each request contributes to the denominator whether generation, decomposition or verification
+succeeds. Alongside exact yield, we count valid and connected graphs, distinct exact products,
+unique exact precursor roots and checked decomposition traces.
+Candidate-search coverage is the fraction of requests for which a decomposition candidate is found;
+verified decomposition coverage requires exact replay. Candidate precision counts passing checked
+traces over all checked traces, with ambiguity and search censoring explicit. The replay rate among
+already accepted exact traces is an implementation invariant, not an independent precision estimate.
+We distinguish family-local product counts from counts deduplicated across all families. Equal-family
+macro averages, pooled yields and worst-family outcomes use separate definitions. Independent training-seed variability remains unmeasured; the reported development outcomes derive from one full fit.
+
+\begin{table}[H]
+\caption{\textbf{Attempt-level readout outcomes on the fixed 352-request development cohort.} One original checkpoint; 16 TRAIN-derived requests per family. Raw is the flow endpoint, terminal is the $t=1$ argmax, and D1 is constrained readout. Every failed request remains in $N$.}
+\label{tab:22-outcomes}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.29\textwidth}ccccccc@{}}
+\toprule
+Family & $N$ & \shortstack{Raw\\exact} & \shortstack{Terminal\\exact} & \shortstack{D1\\exact} & \shortstack{D1 valid +\\connected} & \shortstack{D1 distinct\\exact} & \shortstack{D1\\nonexact} \\
+\midrule
+A3 amine--aldehyde--alkyne & 16 & 2 & 2 & 11 & 13 & 11 & 5 \\
+Acid--epoxide diester & 16 & 6 & 9 & 14 & 16 & 14 & 2 \\
+AEMA & 16 & 4 & 4 & 4 & 16 & 4 & 12 \\
+Aldehyde Ugi 3-CR & 16 & 11 & 12 & 14 & 16 & 14 & 2 \\
+Aldehyde Ugi 4-CR & 16 & 7 & 9 & 14 & 16 & 14 & 2 \\
+$\alpha$-Isocyanoester dihydroimidazole & 16 & 7 & 7 & 10 & 11 & 10 & 6 \\
+Amine alkylation & 16 & 0 & 0 & 0 & 16 & 0 & 16 \\
+Amine--epoxide & 16 & 0 & 0 & 0 & 15 & 0 & 16 \\
+Aryl reductive amination & 16 & 0 & 0 & 0 & 16 & 0 & 16 \\
+Aza-Michael acrylamide & 16 & 0 & 0 & 0 & 15 & 0 & 16 \\
+Aza-Michael acrylate & 16 & 1 & 1 & 0 & 15 & 0 & 16 \\
+Disulfide Michael & 16 & 0 & 0 & 0 & 13 & 0 & 16 \\
+Epoxide O-acylation & 16 & 1 & 1 & 4 & 16 & 4 & 12 \\
+iPhos & 16 & 9 & 9 & 13 & 15 & 13 & 3 \\
+Ketone--isocyanide amide & 16 & 6 & 7 & 14 & 14 & 14 & 2 \\
+Ketone Ugi 4-CR & 16 & 1 & 0 & 5 & 10 & 5 & 11 \\
+Maleate & 16 & 0 & 0 & 0 & 11 & 0 & 16 \\
+O-esterification & 16 & 7 & 8 & 8 & 16 & 8 & 8 \\
+Passerini & 16 & 9 & 10 & 15 & 16 & 15 & 1 \\
+Preassembled thiol-yne & 16 & 0 & 0 & 1 & 15 & 1 & 15 \\
+Reductive amination & 16 & 0 & 0 & 1 & 14 & 1 & 15 \\
+Thiolactone & 16 & 9 & 12 & 12 & 14 & 12 & 4 \\
+\midrule
+All requests & 352 & 80 & 91 & 140 & 319 & 140 & 212 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+These outputs precede the larger proposal/selection pipeline used for the separate 1,408-product cohort. A failed exact check is not experimental evidence of unmakeability. Ambiguity, checked-trace precision and independent-seed failure distributions are retained as unmeasured endpoints (\PendingCell); replay among accepted exact traces is a verifier invariant, not a precision estimate.
+\end{table}
+\begin{table}[H]
+\caption{\textbf{Current single-fit result and missing independent replications.} The first column is the adaptively selected 1,408-request cohort from seed 2026092401, not a fresh held-out evaluation. Two further independent fits and their matched inference remain unrun. Sampling seeds and continuations do not supply training-seed replication.}
+\label{tab:22-seeds}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.31\textwidth}cccc@{}}
+\toprule
+Family & \shortstack{Existing fit\\exact / $N$} & \shortstack{Independent\\fit B} & \shortstack{Independent\\fit C} & \shortstack{Mean $\pm$\\sample SD} \\
+\midrule
+A3 amine--aldehyde--alkyne & 61/64 & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & 63/64 & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & 63/64 & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & 63/64 & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & 62/64 & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & 58/64 & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & 63/64 & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & 63/64 & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & 62/64 & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & 61/64 & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & 64/64 & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+The existing selected cohort has 1,387/1,408 exact products. No multi-fit mean, sample standard deviation or confidence interval is estimated from this single fit. The prospective matched held-out values remain \PendingCell.
+\end{table}
+
+\subsection{Matched controls, native baselines and the three-family comparison}
+\begin{table}[H]
+\caption{\textbf{Paired inference-only cyclic program-ID control.} The same checkpoint, requests and random draws receive the true or cyclically reassigned program ID. True structural context and source verification remain fixed. Counts use D1; design denotes the limited structural/design checks.}
+\label{tab:22-controls}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.31\textwidth}ccccc@{}}
+\toprule
+Family & $N$ & \shortstack{True ID\\exact} & \shortstack{Cyclic ID\\exact} & \shortstack{True ID\\design} & \shortstack{Cyclic ID\\design} \\
+\midrule
+A3 amine--aldehyde--alkyne & 16 & 11 & 9 & 7 & 5 \\
+Acid--epoxide diester & 16 & 14 & 12 & 12 & 9 \\
+AEMA & 16 & 4 & 3 & 4 & 2 \\
+Aldehyde Ugi 3-CR & 16 & 14 & 11 & 6 & 8 \\
+Aldehyde Ugi 4-CR & 16 & 14 & 13 & 6 & 5 \\
+$\alpha$-Isocyanoester dihydroimidazole & 16 & 10 & 5 & 10 & 5 \\
+Amine alkylation & 16 & 0 & 0 & 0 & 0 \\
+Amine--epoxide & 16 & 0 & 0 & 0 & 0 \\
+Aryl reductive amination & 16 & 0 & 0 & 0 & 0 \\
+Aza-Michael acrylamide & 16 & 0 & 3 & 0 & 3 \\
+Aza-Michael acrylate & 16 & 0 & 0 & 0 & 0 \\
+Disulfide Michael & 16 & 0 & 0 & 0 & 0 \\
+Epoxide O-acylation & 16 & 4 & 1 & 4 & 1 \\
+iPhos & 16 & 13 & 11 & 13 & 11 \\
+Ketone--isocyanide amide & 16 & 14 & 10 & 14 & 10 \\
+Ketone Ugi 4-CR & 16 & 5 & 0 & 4 & 0 \\
+Maleate & 16 & 0 & 0 & 0 & 0 \\
+O-esterification & 16 & 8 & 7 & 8 & 7 \\
+Passerini & 16 & 15 & 10 & 14 & 10 \\
+Preassembled thiol-yne & 16 & 1 & 1 & 0 & 1 \\
+Reductive amination & 16 & 1 & 0 & 1 & 0 \\
+Thiolactone & 16 & 12 & 9 & 8 & 5 \\
+\midrule
+All requests & 352 & 140 & 105 & 111 & 82 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+On all 352 requests, raw exact counts are 80 versus 71 and terminal-argmax counts are 91 versus 85. The intervention tests the incremental program-ID signal with correct core/role/layout/depth information. A consistent training/test label bijection would instead be a recoding. Independently trained true shared-null, finite-catalogue selector, matched/generous FACT, qualified native external baselines and the matched three-family bridge remain \PendingCell. Shared-null implementation tests are not trained-null performance.
+\end{table}
+The completed control comparisons use paired request distributions from one original fit. Independent training-seed ranges and uncertainty remain unmeasured. Training exposure, checkpoint selection, decoder opportunity
+and source/planner budgets define the matched comparison. We distinguish supported native chemistry
+from unavailable baseline coverage. A wrong reaction label supplied alongside correct roles and
+reaction cores tests the incremental information in that label; a retrained null model additionally
+removes the corresponding training signal.
+
+\subsection{Decoder and structural-repair attribution}
+\begin{table}[H]
+\caption{\textbf{Readout, saved-candidate selection and repair attribution.} The 352-request readouts and 192-request repair study have distinct populations. They do not estimate a model improvement or independent realism.}
+\label{tab:22-decoder}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.38\textwidth}ccc>{\raggedright\arraybackslash}p{.29\textwidth}@{}}
+\toprule
+Arm & $N$ & Exact & Design & Attribution \\
+\midrule
+Original raw endpoint & 352 & 80 & 61 & Same saved trajectories \\
+Original terminal argmax & 352 & 91 & 74 & Same saved trajectories \\
+Original D1 & 352 & 140 & 111 & Same saved trajectories \\
+Original verified fallback & 352 & 145 & 116 & No new model/proposal calls \\
+Categorical66 verified fallback & 352 & 143 & 116 & No new model/proposal calls \\
+Coarse66 verified fallback & 352 & 142 & 120 & No new model/proposal calls \\
+\midrule
+Three-family repair identity control & 192 & 187 & 140 & Separate construction diagnostic \\
+Ring-scheduled proposals & 192 & 187 & 146 & Separate construction diagnostic \\
+Anchor-preserving proposals & 192 & 187 & 146 & Separate construction diagnostic \\
+Equal-cost / no TRAIN-motif-prior control & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Verified fallback retains an exact D1 candidate, otherwise takes an already exact raw endpoint, otherwise an already exact terminal argmax, otherwise retains the D1 failure. It rescues 5/7/7 original/categorical/coarse requests, with no new candidates or exact/design losses. The categorical phosphate-tail Shannon count falls from 9.1180 to 9.0757; cross-checkpoint diversity floors still fail. The repair study includes all 64 A3, aldehyde-Ugi4 and ketone-Ugi4 requests: design counts change 51/50/39 to 55/51/40. Both repair arms change the same six requests and preserve the declared integer diversity/novelty floors; three resulting structures differ between the ring and anchor arms without an additional design-pass gain. Equal proposal caps do not mean equal measured cost; the full study uses 7.209 CPU seconds, 84 source checks and 84 design checks. The changed molecules have no transferred routing verdict, and the official 1,408-product cohort is unchanged. Individual decoder-rule and matched-cost effects remain \PendingCell.
+\end{table}
+The inference analysis separates readout, component completion, local chemical proposals, ring-system
+proposals and population selection. We retain original, proposed and selected graphs, with atom,
+bond and topology edits, repeated-arm identities, rejected proposals and search limits. Every design
+predicate is evaluated on the final graph because a later construction can undo an earlier correction.
+Cost includes duplicate and failed proposals, source checks and selection. TRAIN local motifs used
+as proposal priors are identified separately from independent evaluation references.
+
+\input{sections/quality_current.tex}
+
+\subsection{Upstream synthesis and terminal-evidence completeness}
+\begin{table}[H]
+\caption{\textbf{Product-level computational makeability and strict secondary dossiers.} The fixed, adaptively developed 1,408-request selected cohort contains 64 requests per family. All columns retain all requested products, including the 21 nonexact-L1 products. Evidence is assessed as of 2026-09-26 01:56:45 UTC.}
+\label{tab:22-routes}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.31\textwidth}cccccc@{}}
+\toprule
+Family & $N$ & \shortstack{Exact\\L1} & \shortstack{L2\\ready} & \shortstack{L3\\direct-only} & \shortstack{Computationally\\makeable} & \shortstack{Strict\\secondary} \\
+\midrule
+A3 amine--aldehyde--alkyne & 64 & 61 & 50 & 1 & 12 & 1 \\
+Acid--epoxide diester & 64 & 63 & 50 & 0 & 39 & 0 \\
+AEMA & 64 & 63 & 58 & 0 & 47 & 13 \\
+Aldehyde Ugi 3-CR & 64 & 63 & 61 & 1 & 38 & 1 \\
+Aldehyde Ugi 4-CR & 64 & 64 & 47 & 18 & 32 & 0 \\
+$\alpha$-Isocyanoester dihydroimidazole & 64 & 64 & 60 & 8 & 39 & 0 \\
+Amine alkylation & 64 & 62 & 62 & 1 & 34 & 0 \\
+Amine--epoxide & 64 & 64 & 48 & 7 & 40 & 1 \\
+Aryl reductive amination & 64 & 58 & 42 & 0 & 9 & 0 \\
+Aza-Michael acrylamide & 64 & 64 & 64 & 7 & 28 & 3 \\
+Aza-Michael acrylate & 64 & 64 & 64 & 12 & 22 & 1 \\
+Disulfide Michael & 64 & 63 & 62 & 0 & 6 & 0 \\
+Epoxide O-acylation & 64 & 63 & 39 & 14 & 33 & 1 \\
+iPhos & 64 & 64 & 56 & 2 & 31 & 2 \\
+Ketone--isocyanide amide & 64 & 64 & 63 & 12 & 58 & 0 \\
+Ketone Ugi 4-CR & 64 & 62 & 32 & 0 & 2 & 0 \\
+Maleate & 64 & 64 & 61 & 1 & 27 & 0 \\
+O-esterification & 64 & 64 & 39 & 22 & 39 & 3 \\
+Passerini & 64 & 64 & 64 & 3 & 22 & 0 \\
+Preassembled thiol-yne & 64 & 64 & 42 & 10 & 33 & 1 \\
+Reductive amination & 64 & 61 & 61 & 0 & 0 & 0 \\
+Thiolactone & 64 & 64 & 64 & 0 & 25 & 0 \\
+\midrule
+All requests & 1408 & 1387 & 1189 & 119 & 616 & 27 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Computational makeability requires every required component to be directly vendor-listed or connected through a complete admitted computational route to vendor-listed terminal materials. L2-ready counts products whose required components have a direct listing or admitted computational path; it does not require every route leaf to be listed. Direct-only requires all required components to be directly listed. Strict dossiers retain the original exact-source/current-item checks. Vendor-directory listings are not stock, prices or experimental synthesis. Missing listings remain unknown. The 3,723 required branches are distinct from 4,510 incorporated component occurrences: 3,488 branches are L2-ready and 2,787 computationally makeable. There are 792 products without demonstrated primary closure. Of the 616 makeable products, 606 pass the limited design checks and 604 additionally have no context flags. Independent-seed held-out route coverage remains \PendingCell.
+\end{table}
+
+Route assessment follows the actual generated component identity. The primary computational
+criterion admits checked planner-generated and published-transform paths to vendor-listed leaves;
+it does not require an exact-substrate experimental precedent at every step. Strict dossiers remain
+a separate secondary outcome with their original checks. Neither outcome is an experimental yield,
+stock confirmation or synthesis-success probability. Route-search and listing unknowns are retained;
+the available searches are not exhaustive. Detailed source evidence is not transferred between
+reaction families. Changed molecules from the separate repair diagnostic require fresh route
+assessment and are not substituted into Table~\ref{tab:22-routes}.
+
+\subsection{Architecture, theoretical assumptions and synthesis guidance}
+\begin{table}[H]
+\caption{\textbf{Learning diagnostics and unmeasured architecture contrasts.} Matched retraining ablations remain separate from the completed continuation studies. The clean-CAL diagnostic uses all 1,885 admitted condition variants of 1,859 molecules, with coordinate counts as its denominator.}
+\label{tab:22-architecture}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.57\textwidth}>{\raggedright\arraybackslash}p{.39\textwidth}@{}}
+\toprule
+Contrast / readout & Result \\
+\midrule
+Whole graph versus factorized; matched/generous capacity & \PendingCell \\
+Input-only versus layerwise conditioning & \PendingCell \\
+Role/core/repeat, routed adapters and PCGrad retraining ablations & \PendingCell \\
+Original / categorical66 / coarse66 raw exact & 80 / 83 / 86 of 352 \\
+Original / categorical66 / coarse66 D1 exact & 140 / 136 / 135 of 352 \\
+Original / categorical66 / coarse66 D1 design & 111 / 110 / 114 of 352 \\
+D1 design without TRAIN-context flags & 110 / 105 / 109 of 352 \\
+Clean-CAL nonconsecutive-parent errors & 1,164 / 1,034 / 1,026 of 7,936 \\
+Large / small update pilot D1 exact; design & 135 / 122 exact; 113 / 107 design (352) \\
+Continuation advancement & Neither objective nor update regime advances \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+The coarse-parent objective averages categorical parent cross-entropy with a binary immediate-predecessor versus other-legal-parent loss at fixed weight one. Its eight fewer nonconsecutive-parent errors versus ordinary continuation do not establish a general architecture or final-quality improvement. All pilots retain the original model initializer; generation improvements coexist with family and diversity regressions. No checkpoint was selected using the best intermediate result.
+\end{table}
+\begin{table}[H]
+\caption{\textbf{Scoped correspondence between theory and implementation.} Nine assumptions are mapped to the implementation and existing counterchecks. This audit is not a new theorem proof or an empirical guarantee of synthesis success.}
+\label{tab:22-theory}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.32\textwidth}>{\raggedright\arraybackslash}p{.64\textwidth}@{}}
+\toprule
+Obligation & Current evidence / limitation \\
+\midrule
+Bounded representation & Declared 254 atoms / 12 closures; qualified vocabulary and masks. No claim of arbitrary graph support. \\
+Full-support source and endpoint population & TRAIN-fitted priors and admitted records; conditional layout support remains narrower. \\
+Population-optimal cross-entropy predictor & Finite Transformer and updates; auxiliary losses, balanced reductions and PCGrad. Ideal optimum unestablished. \\
+Exact continuous-time limit & Finite capped sampling and 64-step diagnostics; no measured convergence or total-variation bound. \\
+Program-fixed coordinates & Restoration and equality assertions; an implementation invariant, not molecular quality. \\
+Terminal prediction and readout & Raw, terminal-argmax and D1 yields differ (Table~\ref{tab:22-outcomes}); output maps are distinct. \\
+Reference versus altered time law & Clean-state continuation is an objective intervention; its diagnostic gains did not establish generated-quality gains. \\
+Independent attempts & Batch diversity/novelty selection couples requests; binomial independence is not assumed. \\
+Forward replay and recursive evidence & Exact L1, computational makeability and strict dossiers use separate checks and denominators. \\
+Final released-code correspondence and remaining proof checks & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\caption{\textbf{Synthesis-guidance gaps and separate negative activity-conditioning evidence.} The synthesis comparison remains unrun. The completed activity experiment adapts the frozen backbone in two assay/family contexts and cannot establish all-family guidance.}
+\label{tab:22-guidance}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.53\textwidth}>{\raggedright\arraybackslash}p{.43\textwidth}@{}}
+\toprule
+Validation / contrast & Result \\
+\midrule
+22-family synthesis-guidance zero-weight identity & \PendingCell \\
+Matched unguided/post-hoc/in-trajectory synthesis comparison & \PendingCell \\
+Synthesis-guidance eligibility, abstention and total cost & \PendingCell \\
+Separate activity-conditioning data & 550 HeLa/Ugi and 581 A549/aza-Michael constitutions \\
+Activity fits and generation attempts & 27 final fits, 6 capacity comparisons; 24,192 attempts \\
+Genuine versus hidden denoising loss reduction & HeLa $-1.109\%$; A549 $+0.0213\%$ \\
+Genuine versus shuffled denoising loss reduction & HeLa $-0.935\%$; A549 $+0.0086\%$ \\
+High-target HeLa joint versus prior-only (exact / eligible) & 438 / 53 versus 438 / 55, each of 576 \\
+High-target A549 joint versus prior-only (exact / eligible) & 103 / 1 versus 104 / 1, each of 576 \\
+Primary potency gain / advancement & Not estimable / neither cell advances \\
+\bottomrule
+\end{tabular}
+\par\smallskip\raggedright\scriptsize
+Activity fits use three reused structural development folds and three seeds with genuine, hidden and shuffled labels. Shared precursors are allowed; study, cell and chemistry are confounded. None of the 64-attempt cohorts fills 16 distinct eligible selection slots, so the primary potency-gain comparison is not estimable. Exact-yield guardrails fail in one of nine HeLa and two of nine A549 blocks; diversity guards pass. Predictions are not new activity measurements, and these negative results do not qualify synthesis guidance or independent confirmation.
+\end{table}
+Architecture comparisons distinguish matched retraining from fixed-weight inference changes.
+We relate each theoretical assumption to the implemented vocabulary, graph support, objective,
+finite-step sampler and selection map. The ideal flow theorem does not certify a learned numerical
+sampler, a TRAIN-derived repair or a batch-coupled selection procedure. Synthesis-guidance comparisons
+separate unguided, post-hoc and in-trajectory arms at matched total budgets and require both a
+zero-guidance identity check and auditable L1/L2/L3 dossiers. Outcomes outside the declared evidence
+or applicability scope remain unassessed.
+
+\subsection{Assembly, structural and synthesis-evidence outcomes}
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{figures/current_results/family_overview.pdf}
+\caption{\textbf{Current development results across 22 reaction families.}
+Exact L1, limited-design and computational-makeability counts use all 64 selected requests per
+family. ECFP reference precision and CAL coverage use separate generated/reference denominators.
+The selected cohort is adaptively developed from one checkpoint; independent-seed and independent
+held-out confirmation remain unmeasured. Assembly consistency, limited checks, reference similarity
+and route evidence are separate outcomes.}
+\label{fig:22-overview}\end{figure}
+
+\subsection{Representative structures and unresolved failures}
+\begin{figure}[H]\centering
+\ResultPanel{a. Seeded all-family atlas}{One or more prespecified random products per family, with exact precursors and evidence depth.}\hfill
+\ResultPanel{b. Paired failure analysis}{Original and repaired graphs; edits, remaining concerns and unchanged source checks.}
+\caption{\textbf{Structures and failure analysis across reaction families.} A prespecified all-family atlas remains unmeasured. Existing targeted failure galleries are developmental diagnostics, not a random or method-masked quality sample. Atom origins, component novelty and L1/L2/L3 evidence require separate annotations. Molecular drawings represent exact graphs and do not establish three-dimensional stability.}
+\label{fig:22-atlas}\end{figure}
+The structure analysis pairs original and repaired graphs and includes oversized rings, malformed
+cages, missing retained heads and joint atom/bond errors, alongside source-positive controls.
+Graph and drawing hashes distinguish molecular changes from depiction corrections. Random samples
+and examples selected to illustrate a specific failure are identified separately.
+
+\subsection{Failure accounting and reproducibility}
+The analysis retains failed requests and runs, unsupported chemistry, unavailable references,
+source conflicts, null contrasts and search censoring. Source, configuration, checkpoint, policy and
+split hashes link each result to its executable analysis and verification receipt. We distinguish
+TRAIN-derived proposal and selection diagnostics from evaluation against independent references.
+Passing limited structural checks does not establish complete chemical quality, stability, ionization
+or delivery activity; context flags and unresolved cases remain part of the reported outcome.
+

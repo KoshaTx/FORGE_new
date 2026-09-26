@@ -1,0 +1,142 @@
+\section{Historical three-family main comparisons}
+\label{app:historical-main}
+These computational results are reproduced from the source manuscript and retain its original
+population, checkpoints, methods and denominators. They are not 22-family results or a matched
+old-versus-new comparison. The new bridge remains pending in Table~\ref{tab:22-controls}.
+
+\subsection{Evaluation protocol and matched budgets}
+We compared correctly conditioned, shared-null and cyclically mislabelled models using the same
+architecture, optimization budget, attempt count and final-checkpoint rule across three independent
+training seeds. Component-disjoint held-out products were excluded from training and checkpoint
+selection. Verified exact-L1 yield counts attempts passing molecular validation, decomposition and
+exact forward replay, with \emph{all} attempts in the denominator. Post-hoc rejection cannot increase
+the proposal's per-attempt acceptance probability (Proposition~\ref{prop:posthoc-budget}). We report
+means and sample standard deviations across training seeds, distinguishing retraining variation from
+conditional Monte Carlo variation. Appendix~\ref{app:evaluation-protocol} specifies the comparisons,
+coverage and precision metrics, and matched budgets.
+
+\subsection{Shared generation achieved exact assembly across three programs}
+We first tested whether one conditional flow could learn all three reactions while preserving Ugi
+performance. Across
+\ForgeProseAttemptsPerProgram{} held-out attempts per program and seed, FORGE achieved verified
+exact-L1 yields of \ForgeTableOneConditionedUgiYield\% for Ugi,
+\ForgeTableOneConditionedBLYield\% for repeated aza-Michael addition and
+\ForgeTableOneConditionedLXYield\% for repeated reductive amination
+(Table~\ref{tab:iclr-shared-programs}). Every verifier-returned trace passed exact forward replay in
+every program and seed, as required by construction. Reductive amination showed greater between-seed
+variation and higher decomposition ambiguity, indicating less consistent learning in this lower-data
+setting.
+
+FORGE produced no fixed-coordinate violations or support overflows across
+\ForgeProseConditionedTotalAttempts{} held-out attempts. These runs established exact assembly across
+all three programs, with the highest yield for Ugi.
+
+\begin{table}[H]
+\caption{\textbf{Exact assembly under three ionizable-lipid reaction programs.}
+Exact-L1 yields are mean $\pm$ sample standard deviation across three seeds. The final column reports
+decomposition coverage and the forward-replay verifier invariant. Per-seed values:
+Appendix~\ref{app:results}.}
+\label{tab:iclr-shared-programs}
+\centering
+\small
+\setlength{\tabcolsep}{4.6pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Program & FORGE conditioned & Shared null & Cyclic program &
+\shortstack{Decomp. coverage /\\ replay invariant (\%)} \\
+\midrule
+\input{generated/shared_program_figure_rows.tex}%
+\end{tabular}
+\end{table}
+
+\subsection{Program conditioning improved exact-assembly yield}
+To isolate the effect of reaction information during generation, we compared the conditioned
+model with the shared-null and cyclic arms under the same attempt budget and post-hoc verifier.
+Shared generation without program information yielded \ForgeTableOneNullUgiYield\%,
+\ForgeTableOneNullBLYield\% and \ForgeTableOneNullLXYield\% exact L1 for Ugi, aza-Michael addition
+and reductive amination, respectively (Table~\ref{tab:iclr-shared-programs}). For Ugi, conditioning
+increased yield by \ForgeTableOneNullUgiDifferencePP{} percentage points (three-seed range
+\ForgeTableOneNullUgiRangeLowPP{} to \ForgeTableOneNullUgiRangeHighPP{} points).
+
+Assigning the wrong reaction identity reduced exact-L1 yield to
+\ForgeTableOneCyclicUgiYield\%, \ForgeTableOneCyclicBLYield\% and
+\ForgeTableOneCyclicLXYield\% across the three programs. The cyclic control retained precursor roles, reaction-core
+coordinates and program depth, isolating the contribution of the reaction-identity label within a
+structured program. The larger conditioned-versus-null differences supported a benefit from program
+information during generation. The small conditioned-versus-cyclic differences did not establish
+a strong independent contribution from the identity label.
+
+\subsection{Decoder and architecture effects differed across programs}
+With seed-0 weights fixed, enforcing Ugi core hydrogen states increased exact-L1 yield with nearly
+unchanged molecular validity; changing source marginals from program-role to global reduced yield.
+The core-saturation constraint changed the generated graph, with the same verifier applied to both
+decoders (Appendix~\ref{app:ablation-results}).
+
+A separate three-seed study compared joint denoising with parameter-matched independent precursor
+roles (FACT). Its full Transformer was trained independently of the production model. Mean exact-L1
+products per 1,000 attempts were \ForgeProseMechanismFullUgi{} versus
+\ForgeProseMechanismFactMatchedUgi{} for Ugi and \ForgeProseMechanismFullBL{} versus
+\ForgeProseMechanismFactMatchedBL{} for aza-Michael addition. Reductive amination favored FACT:
+\ForgeProseMechanismFullLX{} versus \ForgeProseMechanismFactMatchedLX{}. Removing cross-attention reduced Ugi and reductive-amination yield but
+increased aza-Michael yield; removing gradient-conflict control slightly improved all three means.
+These ablations support reaction-dependent effects, not a uniform benefit from every module.
+
+\subsection{Generated precursors extended beyond the training catalogues}
+We next asked whether FORGE could preserve exact assembly while generating precursor constitutions
+absent from training. Under the common Ugi benchmark, the finite-inventory methods produced
+\ForgeProseCommonSelectorExactPerThousand{} verified exact-L1 products per 1,000 attempts but zero
+component-novel products by construction. FORGE produced
+\ForgeProseCommonForgeExactPerThousand{} verified products and
+\ForgeProseCommonForgeDistinctPerThousand{} distinct component-novel products per 1,000 attempts
+(Table~\ref{tab:ugi-common-benchmark}).
+
+\begin{table}[htbp]
+\caption{\textbf{Exact Ugi assembly with precursor constitutions absent from
+method-visible training.} Values are mean $\pm$ sample standard deviation per 1,000 attempts across
+three seeds under a common component-disjoint protocol and verifier. Component-novel is
+verifier-relative and does not establish strong product-level catalogue escape. Whole-molecule
+baselines are assessed post hoc. $\dagger$, structural zero; N/E, not estimable.}
+\label{tab:ugi-common-benchmark}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+% Column 1 is fixed so the numeric columns, not the model names, decide the table's natural
+% width. The generated rows separate the three baseline groups with a rule and no heading.
+% 3.3cm is the widest model name ("Learned inventory selector", 92.4pt) plus a little; the
+% \resizebox is a guard, since the header arrows push the natural width just past the block.
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}cccccc@{}}
+\toprule
+Models & \shortstack{Valid / 1,000\\$\uparrow$} &
+\shortstack{Verified L1 / 1,000\\$\uparrow$} &
+\shortstack{Distinct L1 / 1,000\\$\uparrow$} &
+\shortstack{Comp.-novel / 1,000\\$\uparrow$} &
+\shortstack{Held-comp. / 1,000\\$\uparrow$} & Diversity \\
+\midrule
+\input{generated/common_ugi_benchmark_completed_rows.tex}%
+\end{tabular}
+}
+\end{table}
+
+Against the fixed training catalogues, component-novel verified exact-L1 yields reached
+\ForgeProseCatalogueForgeUgiComponentNovelPerThousand{},
+\ForgeProseCatalogueForgeBLComponentNovelPerThousand{} and
+\ForgeProseCatalogueForgeLXComponentNovelPerThousand{} products per 1,000 attempts across Ugi,
+aza-Michael addition and reductive amination. The corresponding finite catalogues had zero
+component-novel yield by construction (Appendix~\ref{app:novelty-results}). Representative Ugi
+products and exact precursors appear in Appendix~\ref{app:generated-examples}.
+
+Among the external baselines, DeFoG produced \ForgeProseCommonDefogExactPerThousand{} verified
+products and recovered held components more often than FORGE
+(\ForgeProseCommonDefogHeldPerThousand{} versus \ForgeProseCommonForgeHeldPerThousand{} per 1,000
+attempts). GenMol/SAFE produced no exact Ugi-L1 product, and RGFN emitted no admissible output. FORGE therefore combined reaction consistency with verifier-relative component novelty,
+although DeFoG recovered the reserved components more often. Product-level catalogue escape
+remained unmeasured.
+
+We also compared the generated molecules with known lipids excluded from training. For every
+method, the two sets differed in their overall structural features.
+Precision and coverage in fingerprint and descriptor spaces, together with a source-study-grouped classifier
+two-sample test, found that no method reproduced the full observed-lipid distribution
+(Appendix~\ref{app:novelty-results}). The measured expansion concerns reaction-consistent identities;
+it does not establish biological utility.
+

@@ -1,0 +1,243 @@
+{
+  "schema_version": "forge.iclr22.result_placeholders.v1",
+  "status": "Proposed manuscript evidence scaffold; no new final measurements admitted",
+  "date": "2026-09-24",
+  "inputs": {
+    "copied_manuscript": {
+      "path": "paper/v1_iclr22/archive/three_family_source.tex",
+      "sha256": "09289fd618ed45cfddc2d8f68e4898b5168538279d38f2b26d67caf853812ccc"
+    },
+    "train_family_reference": {
+      "path": "results/phase1/compose_lipid_quality_v1/reference.json",
+      "sha256": "6a6b83bc1202540f6b8d82285b233d1e50936430a6d2840626670022cf03fd6e"
+    },
+    "source_evidence_plan_before_scaffold": {
+      "path": "paper/v1_iclr22/archive/NEW_MODEL_EVIDENCE_PLAN.md",
+      "sha256": "1c50db04a1578acaea352338944ae27f8cfe029f730c3f67d795ac8792a9687a"
+    }
+  },
+  "family_ids": [
+    "a3_amine_aldehyde_alkyne",
+    "acid_epoxide_diester_multistep",
+    "aema_aza_thiol_addition",
+    "aldehyde_ugi3",
+    "aldehyde_ugi4",
+    "alpha_isocyanoester_dihydroimidazole",
+    "amine_alkylation",
+    "amine_epoxide_opening",
+    "aryl_reductive_amination",
+    "aza_michael_acrylamide",
+    "aza_michael_acrylate",
+    "disulfide_michael",
+    "epoxide_opening_o_acylation",
+    "iphos_ring_opening",
+    "ketone_isocyanide_amide",
+    "ketone_ugi4",
+    "maleate_addition",
+    "o_esterification",
+    "passerini_3cr",
+    "preassembled_thiol_yne_tail_amidation",
+    "reductive_amination",
+    "thiolactone_aminolysis_michael"
+  ],
+  "historical_results_policy": "Preserve original computational tables separately. No historical number or TRAIN-derived diagnostic fills a new final-result cell.",
+  "new_result_default": null,
+  "blocks": [
+    {
+      "id": "R01",
+      "title": "Cohort and source support",
+      "latex_label": "tab:22-census",
+      "endpoints": "Admitted records, unique products, programs, studies and role components; exclusions, pending families, overlap, weights, size and closure support",
+      "denominator_and_unit": "family/program/source/split; unique constitutions separate from rows",
+      "required_artifacts": "TRAIN/CAL/TEST manifests, registry and admission hashes",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R02",
+      "title": "Training and reproducibility",
+      "latex_label": "tab:22-training",
+      "endpoints": "Training seeds, presentations and updates per family, optimizer, LR, clipping, batch, precision, hardware, runtime, memory, numerical/restart equivalence",
+      "denominator_and_unit": "each training run and checkpoint; learning curves by family and corruption time",
+      "required_artifacts": "run/config/checkpoint/code hashes, admission verification and durable job receipts",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R03",
+      "title": "Exact assembly across all families",
+      "latex_label": "tab:22-l1",
+      "endpoints": "Valid and connected yields, raw/checked exact L1, distinct exact yield, decomposition coverage, candidate precision, accepted replay invariant, ambiguity and failures",
+      "denominator_and_unit": "all requests, all22 families, each program and independent training seed",
+      "required_artifacts": "frozen held-out requests and completed per-attempt source replay ledgers",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R04",
+      "title": "Conditioning and common benchmarks",
+      "latex_label": "tab:22-controls",
+      "endpoints": "Conditioned, independently trained shared null and cyclic controls; three-family bridge and qualified native comparator set",
+      "denominator_and_unit": "matched data/exposure/requests/completion/verification; paired seed differences",
+      "required_artifacts": "visible-information audit, native applicability, checkpoints and full budget ledger",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R05",
+      "title": "Decoder and chemistry repairs",
+      "latex_label": "tab:22-decoder",
+      "endpoints": "Raw, constrained, completed, head, joint atom/bond motifs, final ring, full pipeline and selection ablations; changes and negative results",
+      "denominator_and_unit": "paired identical checkpoint/logits/requests; equal-cost and larger-pool contrasts separate",
+      "required_artifacts": "policy/code pins, original/proposed/final graphs and all stage costs",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R06",
+      "title": "Independent structural assessment",
+      "latex_label": "tab:22-structure",
+      "endpoints": "Representation and chemical alerts, context flags, head retention, ring-condition agreement, carbon-domain organization, blind review and source-control disagreement",
+      "denominator_and_unit": "all requests and applicable/assessed/pass/fail/abstain per check, family and source control",
+      "required_artifacts": "frozen rubric, evidence-qualified family predicates, independent controls and review masks",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R07",
+      "title": "Distributional lipid realism",
+      "latex_label": "tab:22-realism",
+      "endpoints": "Descriptor distributions/tails and normalized Wasserstein; fingerprint and descriptor precision/coverage; grouped C2ST AUC",
+      "denominator_and_unit": "family-matched and broader observed reference; source-held-out groups and valid/unique denominators",
+      "required_artifacts": "reference/split hashes, leakage audit, feature code and grouped estimator settings",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R08",
+      "title": "Diversity, novelty and catalogue reach",
+      "latex_label": "tab:22-diversity",
+      "endpoints": "Product/component unique counts, Shannon and inverse-Simpson effective counts, ECFP4 diversity, role/program novelty, distinct component-novel yield, catalogue reachability",
+      "denominator_and_unit": "all attempts and exact/unambiguous subsets; global cross-family deduplication",
+      "required_artifacts": "TRAIN-only inventories, identity policy and exact role-aware decomposition",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R09",
+      "title": "Generalization and strata",
+      "latex_label": "tab:22-generalization",
+      "endpoints": "Designated held-component yield, identity coverage, source/component split performance, size/closure/repeat/depth strata",
+      "denominator_and_unit": "independent trained seeds; group-level uncertainty; unseen-family stress secondary",
+      "required_artifacts": "sealed final split and predeclared strata; no TEST-based repair tuning",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R10",
+      "title": "L2/L3 and complete dossiers",
+      "latex_label": "tab:22-routes",
+      "endpoints": "L2 evidence-qualified branches/steps, L3 identity/availability leaves, complete dossier yield, unresolved/conflict/censored states and E0-E3 tiers",
+      "denominator_and_unit": "all requests; products, distinct family-role components and leaves separately",
+      "required_artifacts": "exact provenance and forward checks, dates/source snapshots, frozen planner budgets",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R11",
+      "title": "Architecture and learning mechanisms",
+      "latex_label": "tab:22-architecture",
+      "endpoints": "Joint versus factorized matched/generous capacity, conditioning placement, role/core/repeat supervision, adapters and gradient handling",
+      "denominator_and_unit": "independently retrained matched-exposure controls; per-family losses/yields/cost",
+      "required_artifacts": "final architecture contract and seed-matched training receipts",
+      "priority": "Claim-dependent",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R12",
+      "title": "Training adequacy and efficiency",
+      "latex_label": "fig:22-training",
+      "endpoints": "Matched-exposure batch/update experiment, separately exposure scaling; checkpoint quality, throughput, latency, GPU-hours and calls per success",
+      "denominator_and_unit": "same admitted corpus/request population; hardware/precision fixed or explicit",
+      "required_artifacts": "qualified numerical/restart gates, immutable checkpoints and complete timing ledger",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R13",
+      "title": "Representative structures and failures",
+      "latex_label": "fig:22-atlas",
+      "endpoints": "All-family seeded product/precursor atlas, head/tail origins, topology, novelty, L1/L2/L3 annotations, before/after repairs and unresolved failures",
+      "denominator_and_unit": "all22 represented; seeded random rows plus separately identified failure cases",
+      "required_artifacts": "exact graph IDs/SMILES, selection rule/seed, render and review records",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R14",
+      "title": "Theory and implementation correspondence",
+      "latex_label": "tab:22-theory",
+      "endpoints": "Bounded support, actual loss versus reference loss, masks/readout/repair/selection semantics and sampling dependence",
+      "denominator_and_unit": "final released implementation and explicit theorem assumptions",
+      "required_artifacts": "source manifest and claim-by-claim proof/implementation audit",
+      "priority": "Required",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    },
+    {
+      "id": "R15",
+      "title": "Guidance if retained",
+      "latex_label": "tab:22-guidance",
+      "endpoints": "Unguided/post-hoc/in-trajectory matched contrast, zero-guidance identity, eligibility and abstention; synthesis versus permitted potency pilot separate",
+      "denominator_and_unit": "only after applicable route/policy/authorization gates; no silent biological extension",
+      "required_artifacts": "frozen guidance contracts and all generator/planner/verifier cost receipts",
+      "priority": "Conditional, not launch authorization",
+      "status": "PENDING",
+      "evidence_class": "Proposed",
+      "final_result_artifact": null
+    }
+  ],
+  "family_matrices": [
+    "tab:22-l1",
+    "tab:22-census",
+    "tab:22-outcomes",
+    "tab:22-seeds",
+    "tab:22-structure",
+    "tab:22-realism",
+    "tab:22-diversity",
+    "tab:22-generalization",
+    "tab:22-routes"
+  ],
+  "figure_slots": [
+    "fig:22-overview",
+    "fig:22-training",
+    "fig:22-atlas"
+  ]
+}

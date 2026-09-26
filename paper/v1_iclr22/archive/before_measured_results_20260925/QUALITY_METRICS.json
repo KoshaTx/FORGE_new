@@ -1,0 +1,416 @@
+{
+  "schema_version": "forge.iclr22.quality_metric_placeholders.v1",
+  "status": "Computed metric definitions; final new-model result cells pending",
+  "inputs": [
+    {
+      "path": "forge/model/compose_lipid_quality.py",
+      "sha256": "ee2d7f10d1bc636c9c916dc0bd718faeef91798f61694dc6e0c24c20e47091d3"
+    },
+    {
+      "path": "forge/model/common_lipid_realism.py",
+      "sha256": "75dd951152459c49baa4ca595ef23f7e49553f88c5c56c0f52c50ba83df3b22d"
+    },
+    {
+      "path": "forge/model/compose_lipid_structural_audit.py",
+      "sha256": "a9401498f6dbdd62c6cdc654c31a5a572d6c62ccd6e9cce655e4834d3764f8ae"
+    },
+    {
+      "path": "forge/model/compose_lipid_head_survival.py",
+      "sha256": "e25035bc1e26086113ff451a61404473387d5356754e02d9cc1b23606a2ee32a"
+    },
+    {
+      "path": "results/phase1/compose_lipid_structure_repair_v1/evaluation/gates.py",
+      "sha256": "8ae9194579ac281fa0be29292f0ea30bf216135c17d6da2e07199d34c06b432a"
+    },
+    {
+      "path": "results/phase1/compose_lipid_quality_v1/policy.json",
+      "sha256": "f7eef6fde989c61a18234221b5b6cb289f5259d7c6d9a7eed824cce1f437b24e"
+    },
+    {
+      "path": "results/phase1/compose_lipid_structural_audit_v1/rubric.json",
+      "sha256": "7b69eaedee39914ac301865a2368a00eda67e51fe610f2efde5ac9dbf5601821"
+    },
+    {
+      "path": "results/phase1/compose_lipid_quality_selection_v2/run.py",
+      "sha256": "af3f5129250db1e9fdb5a2a6302cf1ec23ce2471fa4aae9fa852bef8a7a0accf"
+    }
+  ],
+  "quality_metrics": [
+    {
+      "key": "valid_request_yield",
+      "label": "Valid molecules / all requests (\\%)",
+      "definition": "RDKit parsing/sanitization; failure remains in all-request denominator.",
+      "implementation": "audit_smiles",
+      "final_value": null
+    },
+    {
+      "key": "connected_request_yield",
+      "label": "Connected molecules / all requests (\\%)",
+      "definition": "Exactly one connected molecular graph; distinct from validity.",
+      "implementation": "audit_smiles",
+      "final_value": null
+    },
+    {
+      "key": "exact_design_yield",
+      "label": "Exact L1 + all qualified design checks / requests (\\%)",
+      "definition": "Source-exact final graph and every applicable qualified axis assessed/pass. Unknowns and abstentions do not pass.",
+      "implementation": "assess_design",
+      "final_value": null
+    },
+    {
+      "key": "chemical_alert_rate",
+      "label": "Molecules with a justified chemical alert / requests (\\%)",
+      "definition": "Frozen narrow chemical-alert motifs; also report per-rule counts and unassessed requests. Not a complete stability screen.",
+      "implementation": "audit_smiles",
+      "final_value": null
+    },
+    {
+      "key": "context_flag_rate",
+      "label": "Molecules requiring chemistry-context review / requests (\\%)",
+      "definition": "Frozen context flags are descriptive, not automatic failures.",
+      "implementation": "audit_smiles",
+      "final_value": null
+    },
+    {
+      "key": "head_retention",
+      "label": "Required head retained / family-scope requests (\\%)",
+      "definition": "Pass / prespecified family-scope requests; include charged or ambiguous-origin abstentions. Only neutral aldehyde-Ugi4 has a qualified predicate; other families remain unassessed.",
+      "implementation": "assess_head_survival",
+      "final_value": null
+    },
+    {
+      "key": "ring_allocation",
+      "label": "Correct role-local cycle allocation / requests (\\%)",
+      "definition": "Match declared variable closures per role, including zero; cross-origin edges must also match. All requests remain in denominator; report unassessed cases.",
+      "implementation": "audit_layout_rings",
+      "final_value": null
+    },
+    {
+      "key": "ring_size",
+      "label": "Requested ring-size agreement / comparable requests (\\%)",
+      "definition": "Each observed fundamental-cycle length must belong to its role's allowed-size set, under a comparable tree basis. Not a size-multiset, SSSR or 3D-geometry match. Report inapplicable and unassessed counts.",
+      "implementation": "audit_layout_rings",
+      "final_value": null
+    },
+    {
+      "key": "atom_environment_coverage",
+      "label": "TRAIN atom-environment coverage (\\%)",
+      "definition": "Fraction of atoms with reference-observed local environments, averaged over assessed products. Report component-role summaries separately.",
+      "implementation": "StructuralSupport.assess",
+      "final_value": null
+    },
+    {
+      "key": "ring_system_support",
+      "label": "Ring-system TRAIN support / assessed products (\\%)",
+      "definition": "Among valid connected products with a family TRAIN reference, fraction with no unknown connected ring-bond signature. Ring-free products pass vacuously; report them and missing/invalid cases separately. Component roles are separate.",
+      "implementation": "StructuralSupport.assess",
+      "final_value": null
+    },
+    {
+      "key": "exact_observed_yield",
+      "label": "Exact L1 + product/component features observed / requests (\\%)",
+      "definition": "Exact, unambiguously decomposed product and every precursor must have all atom environments and connected ring-bond signatures observed in their family product or family/source-role TRAIN reference. Divide by all requests; absent references never pass.",
+      "implementation": "StructuralSupport.assess",
+      "final_value": null
+    }
+  ],
+  "realism_metrics": [
+    {
+      "key": "fingerprint_precision_among_unique",
+      "label": "Fingerprint precision (\\%)",
+      "status": "TRAIN diagnostic",
+      "definition": "Fraction of unique generated molecules inside the union of reference k-nearest-neighbor balls in ECFP4/Tanimoto distance.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "fingerprint_coverage",
+      "label": "Fingerprint coverage (\\%)",
+      "status": "TRAIN diagnostic",
+      "definition": "Fraction of reference-centered neighborhoods hit by at least one unique generated molecule.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "fingerprint_recall",
+      "label": "Fingerprint recall (\\%)",
+      "status": "TRAIN diagnostic",
+      "definition": "Fraction of references inside generated-centered neighborhoods. Distinct from coverage; small generated sets can inflate neighborhood radii.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "distinct_in_reference_manifold_per_request",
+      "label": "Distinct reference-supported products / requests (\\%)",
+      "status": "TRAIN diagnostic",
+      "definition": "Unique generated identities inside reference neighborhoods divided by all requests; exposes invalidity and duplication.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "nearest_reference_tanimoto_mean",
+      "label": "Nearest-reference Tanimoto similarity",
+      "status": "TRAIN diagnostic",
+      "definition": "Mean nearest-reference similarity over unique generated identities; descriptive, not a novelty or quality objective.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "mean_pairwise_tanimoto_distance",
+      "label": "Internal ECFP4 diversity",
+      "status": "TRAIN diagnostic",
+      "definition": "Mean Tanimoto distance between distinct generated identities; compare alongside validity, realism and component diversity.",
+      "implementation": "fingerprint_distribution",
+      "final_value": null
+    },
+    {
+      "key": "normalized_wasserstein",
+      "label": "Descriptor distribution distance, per feature",
+      "status": "TRAIN diagnostic",
+      "definition": "One-dimensional Wasserstein distance / reference IQR; near-zero fallback: max(reference population SD,1). Connected-request observations retain duplicates. Smaller means closer to reference, not better chemistry.",
+      "implementation": "descriptor_comparison",
+      "final_value": null
+    },
+    {
+      "key": "descriptor_precision_coverage",
+      "label": "Descriptor-space precision and coverage",
+      "status": "Final study pending",
+      "definition": "Robust-scaled descriptor neighborhood metrics from the historical pipeline; new-model source-held-out reference/estimator contract and results remain pending.",
+      "implementation": "common_lipid_realism",
+      "final_value": null
+    },
+    {
+      "key": "grouped_c2st_auc",
+      "label": "Source-grouped two-sample classifier AUC",
+      "status": "Final study pending",
+      "definition": "Distinguish generated and reference molecules with held-out source groups; classifier, sampling, leakage controls and final analysis are not yet qualified for the new model.",
+      "implementation": "common_lipid_realism",
+      "final_value": null
+    }
+  ],
+  "descriptors": [
+    {
+      "key": "heavy_atoms",
+      "label": "Heavy atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "molecular_weight",
+      "label": "Molecular weight",
+      "unit": "Da",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "clogp",
+      "label": "Calculated logP",
+      "unit": "unitless",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "tpsa",
+      "label": "Topological polar surface area",
+      "unit": "\\AA$^2$",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "hbd",
+      "label": "Hydrogen-bond donors",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "hba",
+      "label": "Hydrogen-bond acceptors",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "rotatable_bonds",
+      "label": "Rotatable bonds",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "ring_count",
+      "label": "Rings",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "aromatic_ring_count",
+      "label": "Aromatic rings",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "fraction_csp3",
+      "label": "Fraction sp$^3$ carbons",
+      "unit": "fraction",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "formal_charge",
+      "label": "Net formal charge",
+      "unit": "elementary charge",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "absolute_formal_charge",
+      "label": "Sum of absolute formal charges",
+      "unit": "elementary charge",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "carbon_fraction",
+      "label": "Carbon fraction",
+      "unit": "fraction",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "nitrogen_atoms",
+      "label": "Nitrogen atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "oxygen_atoms",
+      "label": "Oxygen atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "sulfur_atoms",
+      "label": "Sulfur atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "phosphorus_atoms",
+      "label": "Phosphorus atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "branch_atoms",
+      "label": "Branching heavy atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "unsaturated_bonds",
+      "label": "Nonaromatic unsaturated bonds",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "maximum_polar_root_distance",
+      "label": "Maximum polar-root distance",
+      "unit": "graph bonds",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "head_atom_fraction",
+      "label": "Heuristic head fraction",
+      "unit": "fraction",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "interface_atom_fraction",
+      "label": "Heuristic interface fraction",
+      "unit": "fraction",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "tail_atom_fraction",
+      "label": "Heuristic tail fraction",
+      "unit": "fraction",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    },
+    {
+      "key": "tail_branch_atoms",
+      "label": "Heuristic tail branching atoms",
+      "unit": "count",
+      "reference": null,
+      "raw": null,
+      "final": null,
+      "normalized_wasserstein": null
+    }
+  ],
+  "table_labels": [
+    "tab:22-quality-metrics",
+    "tab:22-realism-metrics",
+    "tab:22-conditions",
+    "tab:22-metric-definitions",
+    "tab:22-descriptors"
+  ]
+}

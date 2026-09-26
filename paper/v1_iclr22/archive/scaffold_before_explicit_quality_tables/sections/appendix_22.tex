@@ -1,0 +1,481 @@
+\section{22-family result slots and evaluation contracts}
+\label{app:22-results}
+\TwentyTwoScope
+
+\subsection{Cohort, program registry and split accounting}
+\ResultSlot{R01}{Report every registered program variant and its exact source evidence, reactive-site
+multiplicity, precursor roles, repeat/depth support and E0/E1/E2/E3 interpretation. List excluded or
+pending chemistry separately; no unsupported family is silently admitted to the 22-family denominator.}
+\begin{table}[H]
+\caption{\textbf{Cohort census, pending.} Rows and constitutional products are separate units. Companion source and role inventories must record sampling mass, component counts, source-study overlap and exclusions.}
+\label{tab:22-census}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Admitted\\records} & \shortstack{Unique\\products} & \shortstack{Programs /\\studies} & \shortstack{TRAIN /\\CAL / TEST} & \shortstack{Excluded /\\pending} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Run contract, training adequacy and numerical qualification}
+\begin{table}[H]
+\caption{\textbf{Final training and evaluation contract, pending.} Populate per independent seed;
+record proposed values only as protocol choices until corresponding runs complete.}
+\label{tab:22-training}
+\centering\small
+\begin{tabular}{@{}p{.70\textwidth}l@{}}\toprule
+Field & Final contract / result\\\midrule
+Cohort, split, source registry and vocabulary hashes & \PendingCell\\
+Checkpoint IDs, independent seed IDs and stopping rule & \PendingCell\\
+Per-family sampling law, presentations and update appearances & \PendingCell\\
+Global/per-device batch, accumulation and optimizer updates & \PendingCell\\
+Optimizer, learning-rate schedule, loss weights and clipping & \PendingCell\\
+Architecture, adapters, role/core/repeat and topology objectives & \PendingCell\\
+Precision, determinism, devices, workers and memory & \PendingCell\\
+Numerical equivalence, kill/restart and checkpoint provenance & \PendingCell\\
+Training, setup, checkpoint, sampling and verifier time/cost & \PendingCell\\
+Requests per family/seed, saved draw IDs and final inference policy & \PendingCell\\
+Sampled-layout distribution and all method-visible information & \PendingCell\\
+\bottomrule\end{tabular}
+\end{table}
+\ResultSlot{R02, R12}{Include corruption-time and family-wise errors for atom, bond, parent, closure
+and repeated-component prediction; predeclared checkpoint exact/structural/diversity metrics;
+gradient/clipping diagnostics and missing/censored checkpoints. Separate presentations from optimizer
+updates. A matched-exposure batch/update experiment and a separate exposure-scaling experiment
+are distinct comparisons. Neither is inferred from an unmatched pilot.}
+\begin{figure}[H]\centering
+\DraftPanel{a. Learning and exposure}{Per-family losses and errors against presentations and optimizer updates.}\hfill
+\DraftPanel{b. Quality and cost}{Fixed development checkpoint metrics; latency/calls per accepted distinct product.}
+\caption{\textbf{Training adequacy and efficiency, pending.} Preserve numerical failures and
+incomplete runs. Report hardware, precision, deterministic settings and actual budget for every arm.}
+\label{fig:22-training}\end{figure}
+
+\subsection{Exact-L1 decomposition and failure accounting}
+\ResultSlot{R03}{Expand Table~\ref{tab:22-l1} to one record per family, registered program, training
+seed and inference arm. Supply all-request counts, connected/valid counts, exact and distinct exact
+counts, unique exact roots, candidate traces checked/passed, accepted-trace replay and failure reasons.}
+Candidate-search coverage is the fraction of requests for which a decomposition candidate is found;
+verified decomposition coverage requires exact replay. Candidate precision counts passing checked
+traces over all checked traces, with ambiguity and search censoring explicit. The replay rate among
+already accepted exact traces is an implementation invariant, not an independent precision estimate.
+Report family-local and globally deduplicated product counts separately. Numerical targets are not
+inserted as results. Any ``at least 90\% in every family'' claim must state the metric, denominator,
+seed aggregation and uncertainty, not only a macro average.
+
+\begin{table}[H]
+\caption{\textbf{Attempt-level outcomes, pending.} Expand raw and final arms separately for each registered program and seed. Supply malformed/support failures, no decomposition, rejected source domains, exceptions and search censoring as separate counts. Preserve all-request denominators and report overlaps rather than forcing nonexclusive events to sum to one.}
+\label{tab:22-outcomes}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}\toprule
+Family & \shortstack{Valid /\\requests} & \shortstack{Connected /\\requests} & \shortstack{Distinct\\exact / $N$} & \shortstack{Ambiguous\\exact roots} & \shortstack{Failure /\\abstention} \\\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]
+\caption{\textbf{Independent training-seed reporting, pending.} The three seed columns are the proposed minimum replication design, not completed runs. Replace letters with frozen training seed IDs and extend if more seeds are trained. Repeat for each method/inference arm; include sample counts, paired differences and observed ranges. New sampling noise from one checkpoint is not a new training seed.}
+\label{tab:22-seeds}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}\toprule
+Family & \shortstack{Seed A\\exact / $N$} & \shortstack{Seed B\\exact / $N$} & \shortstack{Seed C\\exact / $N$} & \shortstack{Mean $\pm$\\sample SD} & \shortstack{Paired control\\contrasts} \\\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule\end{tabular}\end{table}
+
+\subsection{Matched controls, native baselines and historical bridge}
+\begin{table}[H]
+\caption{\textbf{Comparator and bridge results, pending.} Every arm uses declared compatible
+programs, splits, attempt budgets and verification. Unsupported native chemistry is unassessed,
+not a zero score.}
+\label{tab:22-controls}\centering\scriptsize
+\begin{tabular}{@{}p{.43\textwidth}cccc@{}}\toprule
+Arm / comparison & Exact L1 & Distinct novel & Quality axes & Cost\\\midrule
+Conditioned shared model & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Independently trained shared-null/post-hoc & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Independently trained cyclic-label control & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Finite TRAIN catalogue and learned selector & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+FACT, matched and generous capacity & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+DeFoG / GenMol-SAFE / RGFN, qualified scope & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Old versus new model, common three-family bridge & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+\bottomrule\end{tabular}\end{table}
+\ResultSlot{R04}{Give per-seed paired differences, ranges and uncertainty. Match training exposure,
+checkpoint selection, request distribution, decoder opportunity and source/planner budgets. List
+family coverage and all information visible to each arm. A wrong reaction label with correct roles
+and core only tests the incremental label; inference-time shuffling is not retrained null control.}
+
+\subsection{Decoder and structural-repair attribution}
+\begin{table}[H]
+\caption{\textbf{Fixed-weight inference ablations, pending.} Retain original, proposed and selected
+graphs under identical saved requests/logits. Report the larger-pool comparison separately from a
+matched-cost control and never attribute these changes to retraining.}
+\label{tab:22-decoder}\centering\scriptsize
+\begin{tabular}{@{}p{.43\textwidth}cccc@{}}\toprule
+Inference arm & Exact L1 & Design checks & Diversity & Added cost\\\midrule
+Raw readout & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Constrained topology / core readout & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Checked component completion & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Scoped head-survival proposals & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Joint role atom/bond motif proposals & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Final ring-system topology proposals & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Combined repairs, original candidates retained & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Combined repairs + declared selection rule & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+Equal-cost control / no TRAIN-motif prior & \PendingCell & \PendingCell & \PendingCell & \PendingCell\\
+\bottomrule\end{tabular}\end{table}
+\ResultSlot{R05}{Report each family, gains and regressions, atom/bond/topology edits, ties between
+repeated arms, rejected proposals, search truncation, component identity overlap and elapsed cost.
+Reassess every design predicate on the final graph, since later construction may undo a repair.
+Charge duplicate and failed proposals, source checks and selection time. Explicit priors over TRAIN
+local motifs remain part of the method description and cannot serve as independent quality evidence.}
+
+\subsection{Structural plausibility and design-condition agreement}
+\begin{table}[H]
+\caption{\textbf{Structural assessment by family, pending.} Use all requests and a separate matched source-positive control population. Give applicable, assessed, pass, fail and abstain counts for every rule; head/ring cells expand into separate endpoints. Exact-plus-design yield requires every applicable check to be assessed and pass; abstentions and unknowns cannot enter its numerator, and all requests remain in its denominator; it is not a universal quality score. Context flags are not automatic chemical failures. Report control disagreements and sensitivity limits, not a universal quality percentage.}
+\label{tab:22-structure}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.27\textwidth}cccccc@{}}
+\toprule
+Family & \shortstack{Exact + design\\pass / $N$} & \shortstack{Represent.\\failures} & \shortstack{Chemical\\alerts} & \shortstack{Context\\flags} & \shortstack{Head / ring\\agreement} & \shortstack{Abstain /\\unassessed} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\ResultSlot{R06}{Freeze source-qualified rules before final candidate review. Assess sanitization,
+connectedness, radical/charge/vocabulary support, alert motifs, retained head sites, carbon-domain
+sizes and branching, head-to-domain distances, and complete ring systems. No universal tail-length,
+logP or pKa cutoff is assumed. Separate graph cycle rank and connected ring systems from SSSR and
+serialization-dependent fundamental cycles. Basis-incompatible comparisons abstain. A frozen masked
+visual sample from every family and matched controls must retain reviewer labels, graph-specific
+reasons, uncertainty and depiction corrections; report whether review was agent-only or external.}
+
+\subsection{Lipid realism independent of decoder priors}
+\begin{table}[H]
+\caption{\textbf{Reference-distribution assessment, pending.} Compare with source-held-out empirical lipids and family-matched controls separately. Descriptor distance is reported feature-wise, including tails, not collapsed to an arbitrary acceptability cutoff. State valid/unique counts, group splits, uncertainty and missing reference support.}
+\label{tab:22-realism}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Fingerprint\\prec. / cov.} & \shortstack{Descriptor\\prec. / cov.} & \shortstack{Grouped\\C2ST AUC} & \shortstack{Descriptor\\distance} & \shortstack{Reference /\\generated $n$} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Aggregation.} Prespecify metric-specific summaries: AUC and distances are not pooled
+success ratios. Unsupported reference populations are unassessed, never zero. Report missing
+family counts and the direction defining the worst family for each metric. Macro means, pooled
+recomputed estimates and worst-family values are distinct quantities.
+
+\ResultSlot{R07}{Include molecular weight, heavy atoms, cLogP, polar surface area, hydrogen-bond
+counts, rotatable bonds, ring/aromaticity counts, fraction sp3, charge, heteroatom counts, branching,
+unsaturation and role morphology. Report normalized Wasserstein distances and reference distributions.
+Fingerprint precision and coverage, grouped classifier two-sample AUC and TRAIN feature membership
+answer different questions. A group-disjoint realism classifier must not learn train/test duplicates
+or source identifiers. No descriptor or similarity metric establishes biological utility.}
+
+\subsection{Product and precursor diversity, novelty and reachability}
+\begin{table}[H]
+\caption{\textbf{Diversity and novelty, pending.} $N$ is all requests. $D_1$ and $D_2$ are Shannon and inverse-Simpson effective counts, reported per registered role. Novel-component endpoints require an unambiguous exact decomposition and include separate observation and distinct-product yields. List TRAIN and full-declared-reference novelty separately.}
+\label{tab:22-diversity}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Distinct\\exact / $N$} & \shortstack{Novel\\product / $N$} & \shortstack{Novel comp.\\product / $N$} & \shortstack{Component\\$D_1$ / $D_2$} & \shortstack{Novel distinct\\components} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\ResultSlot{R08}{Supply per-role frequency tables, unique counts, largest-component concentration,
+pairwise ECFP4 diversity and all absolute noninferiority checks. Global unique counts must deduplicate
+across families. Report catalogue inputs, admissible tuples and reachable unique products separately;
+component novelty alone is not proof that a product is unreachable by every catalogue decomposition.}
+
+\subsection{Generalization beyond development requests}
+\begin{table}[H]
+\caption{\textbf{Generalization and held-component recovery, pending.} Report each applicable split and its own denominator and independent seeds. Missing support is unassessed. Preserve all size/closure/depth strata. Zero-shot held-reaction-family behavior is a secondary stress test, not a hard gate.}
+\label{tab:22-generalization}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Held comp.\\yield / $N$} & \shortstack{Held identity\\coverage} & \shortstack{Component-\\disjoint L1} & \shortstack{Source-\\disjoint L1} & \shortstack{Size/repeat\\strata} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\ResultSlot{R09}{Freeze all model and decoder choices using authorized development data before final
+TEST evaluation. Separate independent training seeds, sampling seeds, request/layout identity overlap
+and geometric overlap. Reusing TRAIN-derived layouts with fresh noise does not establish held-out
+generalization. Account for population-selection dependence when estimating uncertainty.}
+
+\subsection{Upstream synthesis and terminal-evidence completeness}
+\begin{table}[H]
+\caption{\textbf{L1/L2/L3 evidence and dossier dispositions, pending.} Products, unique family-role component constitutions, reaction steps and terminal leaves are distinct denominators. Complete dossiers require all admitted steps and leaves for the actual generated identity. Report L2/L3 unknowns, source conflicts, search limits and access failures separately.}
+\label{tab:22-routes}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}ccccc@{}}
+\toprule
+Family & \shortstack{Exact L1\\products} & \shortstack{L2 closed /\\branches} & \shortstack{L3 qualified /\\leaves} & \shortstack{Complete\\dossiers / $N$} & \shortstack{Unresolved /\\censored} \\
+\midrule
+A3 amine--aldehyde--alkyne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Acid--epoxide diester & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+AEMA & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 3-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aldehyde Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+$\alpha$-Isocyanoester dihydroimidazole & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine alkylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Amine--epoxide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aryl reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylamide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Aza-Michael acrylate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Disulfide Michael & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Epoxide O-acylation & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+iPhos & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone--isocyanide amide & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Ketone Ugi 4-CR & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Maleate & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+O-esterification & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Passerini & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Preassembled thiol-yne & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Reductive amination & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Thiolactone & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\midrule
+Equal-family macro & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Pooled all requests & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+Worst-family result & \PendingCell & \PendingCell & \PendingCell & \PendingCell & \PendingCell \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\ResultSlot{R10}{Publish method-blind component-union adjudication, exact source identifiers and
+locators, source/file hashes, reactive-site and forward checks, terminal identity/availability dates,
+route depths, planner calls/time, and E0/E1/E2/E3 disposition. Report raw and selection-conditioned
+coverage separately. Count a generated-precursor E2 claim only when its required routes close.
+The deepest case may remain Ugi; evidence depth is not transferred across families. L3 is documentary
+qualification, not a request to procure or synthesize materials.}
+
+\subsection{Architecture, theory and conditional guidance claims}
+\begin{table}[H]\caption{\textbf{Architecture contrasts, pending if the corresponding mechanism claim is retained.}
+Each requires matched retraining; a separate short-budget study must remain separate from production.}
+\label{tab:22-architecture}\centering\small
+\begin{tabular}{@{}p{.70\textwidth}l@{}}\toprule
+Contrast / required readouts & Result\\\midrule
+Whole graph versus role-factorized, matched/generous capacity & \PendingCell\\
+Input-only versus layerwise program conditioning & \PendingCell\\
+Role/core, repeat, topology and chemistry-loss contributions & \PendingCell\\
+Routed adapters/heads and gradient-conflict handling & \PendingCell\\
+Per-family exact yield, held losses, diversity and dependence & \PendingCell\\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\caption{\textbf{Final implementation and theorem correspondence, pending.}}
+\label{tab:22-theory}\centering\small
+\begin{tabular}{@{}p{.70\textwidth}l@{}}\toprule
+Obligation & Evidence\\\midrule
+Bounded vocabularies/size/closures and actual production masks & \PendingCell\\
+Reference objective versus implemented training reductions/losses & \PendingCell\\
+Numerical sampler, endpoint readout, repair and selection maps & \PendingCell\\
+Preserved invariants and properties requiring empirical evidence & \PendingCell\\
+Independent-draw assumptions versus batch-coupled selection & \PendingCell\\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\caption{\textbf{Conditional guidance slot, unexecuted unless authorized gates pass.}
+This placeholder does not authorize a new guidance sweep or broaden biological scope.}
+\label{tab:22-guidance}\centering\small
+\begin{tabular}{@{}p{.70\textwidth}l@{}}\toprule
+Readiness gate / contrast & Result\\\midrule
+Nontrivial generated L1/L2/L3 dossiers and zero-guidance identity & \PendingCell\\
+Matched unguided, post-hoc and in-trajectory synthesis contrast & \PendingCell\\
+Eligibility, abstention, route yield, diversity and total budget & \PendingCell\\
+Permitted potency-only diagnostic, if retained, separate policy & \PendingCell\\
+\bottomrule\end{tabular}\end{table}
+\ResultSlot{R11, R14, R15}{Retain negative/null results and narrow claims when a contrast is absent.
+The ideal flow theorem does not certify the learned finite-step sampler, a TRAIN-derived repair,
+or a population selection procedure. Unsupported guidance outcomes remain unassessed.}
+
+\subsection{Representative structures and unresolved failures}
+\begin{figure}[H]\centering
+\DraftPanel{a. Seeded all-family atlas}{One or more prespecified random products per family, with exact precursors and evidence depth.}\hfill
+\DraftPanel{b. Paired failure analysis}{Original and repaired graphs; edits, remaining concerns and unchanged source checks.}
+\caption{\textbf{22-family structure atlas and failure analysis, pending.} Expand the atlas across
+all families with a frozen selection seed. Annotate head/tail origin, component novelty and
+L1/L2/L3 separately. Deliberately selected successes/failures are labeled separately from random
+samples. Use exact molecular graphs; exclude invented structures and fabricated 3D stability claims.}
+\label{fig:22-atlas}\end{figure}
+\ResultSlot{R13}{Include oversized rings, malformed cages, missing retained heads and joint
+atom/bond errors, plus unresolved cases and source-positive controls. Preserve the original graph
+when correcting a misleading depiction. Record the graph and drawing hashes.}
+
+\subsection{Negative results, limitations and evidence provenance}
+\ResultSlot{R01--R15}{For every result, retain failed requests/runs, unsupported chemistry, missing
+reference data, source conflicts, null/negative contrasts and censoring. Each admitted numerical cell
+must resolve to immutable source/config/checkpoint/policy/split hashes, an executable analysis and
+verification receipt. Fill conclusions only after examining per-family failures and uncertainty.}
+The historical tables that follow reproduce the earlier three-family manuscript population.
+They are comparison context, not measurements of the new model. Development saved-draw repairs,
+including changes selected using TRAIN reference features, must remain explicitly labeled until
+an independently frozen final evaluation qualifies the corresponding claim.

@@ -1,0 +1,586 @@
+{
+  "schema": "forge.iclr22.current_evidence_manifest.v1",
+  "evidence_class": "Computed",
+  "scope": "Development-only documentary update; distinct TRAIN-derived, CAL and route evidence populations",
+  "final_evidence_admitted": false,
+  "sources": {
+    "routes": {
+      "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/routes/recount_closeout_v3/result.json",
+      "sha256": "1a98ba6f949a1114b9aa1fb651c8c248d4660c5a3137fb42503f17f717309318"
+    },
+    "realism": {
+      "path": "results/phase1/compose_lipid_iclr22_research_v1/qualified_CAL_sensitivity/result.json",
+      "sha256": "da32514932c2dd796fa89a59846e597fa2c0c6d2ab53a80761d69e987701e74e"
+    },
+    "CAL_representation": {
+      "path": "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/training_evaluation/cal_bridge_full_v1/namespace_rollup_v1/result.json",
+      "sha256": "3f928f6c51e43ee50194d44d8e3c883f36795812455afcabc2ff4a445dacc564"
+    }
+  },
+  "documents": {
+    "main": {
+      "path": "paper/v1_iclr22/current_summary.json",
+      "sha256": "d5856cb2528918bdf6d3904d3df406ddc30dd7799f55ab5acc3f0781d7584b3a"
+    },
+    "quality": {
+      "path": "paper/v1_iclr22/current_quality_evidence.json",
+      "sha256": "d36cdd77b071689b012f7df872e4471fb67697d01f6a6b1dc09fd5c74f6afc2a"
+    },
+    "appendix": {
+      "path": "paper/v1_iclr22/current_appendix_evidence.json",
+      "sha256": "a7dee37cd485cc39c3833b787a945d40d65678aedaca9461217d33c0eff29516"
+    }
+  },
+  "assertions": [
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "requests"
+      ],
+      "equals": 1408
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "exact_L1"
+      ],
+      "equals": 1387
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "combined_primary_products"
+      ],
+      "equals": 616
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "L2_ready_products"
+      ],
+      "equals": 1189
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "L3_direct_only_products"
+      ],
+      "equals": 119
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "strict_secondary_products"
+      ],
+      "equals": 27
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "routing_totals",
+        "required_branches"
+      ],
+      "equals": 3723
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "requests"
+      ],
+      "equals": 1408
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "exact_L1"
+      ],
+      "equals": 1387
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "limited_design_pass"
+      ],
+      "equals": 1324
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "computational_makeability"
+      ],
+      "equals": 616
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "joint_makeability_limited_design"
+      ],
+      "equals": 606
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "totals",
+        "joint_makeability_design_no_context_flags"
+      ],
+      "equals": 604
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "passed"
+      ],
+      "equals": true
+    },
+    {
+      "source": "routes",
+      "pointer": [
+        "final_paper_evidence_admitted"
+      ],
+      "equals": false
+    },
+    {
+      "source": "realism",
+      "pointer": [
+        "references"
+      ],
+      "equals": 1821
+    },
+    {
+      "source": "realism",
+      "pointer": [
+        "requests_per_arm"
+      ],
+      "equals": 1408
+    },
+    {
+      "source": "realism",
+      "pointer": [
+        "empirical_realism_or_final_paper_claim"
+      ],
+      "equals": false
+    },
+    {
+      "source": "CAL_representation",
+      "pointer": [
+        "original_CAL_denominator"
+      ],
+      "equals": 2059
+    },
+    {
+      "source": "CAL_representation",
+      "pointer": [
+        "admitted_molecules"
+      ],
+      "equals": 1859
+    },
+    {
+      "source": "CAL_representation",
+      "pointer": [
+        "admitted_model_condition_variants"
+      ],
+      "equals": 1885
+    },
+    {
+      "source": "CAL_representation",
+      "pointer": [
+        "model_performance_evidence"
+      ],
+      "equals": false
+    },
+    {
+      "source": "CAL_representation",
+      "pointer": [
+        "model_training_TEST_network_calls"
+      ],
+      "equals": 0
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "cohort",
+        "requests"
+      ],
+      "equals": 1408
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "cohort",
+        "families"
+      ],
+      "equals": 22
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "cohort",
+        "requests_per_family"
+      ],
+      "equals": 64
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "cohort",
+        "training_checkpoints"
+      ],
+      "equals": 1
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "source_controls",
+        "controls"
+      ],
+      "equals": 29
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "source_controls",
+        "families_covered"
+      ],
+      "equals": 2
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "source_controls",
+        "families_without_controls"
+      ],
+      "equals": 20
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "source_controls",
+        "component_disjoint_controls"
+      ],
+      "equals": 10
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "independent_reference",
+        "admitted"
+      ],
+      "equals": false
+    },
+    {
+      "source": "quality",
+      "pointer": [
+        "independent_reference",
+        "lineage_admitted"
+      ],
+      "equals": false
+    }
+  ],
+  "document_bindings": [
+    {
+      "document": "main",
+      "document_pointer": [
+        "totals"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "routing_totals"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "requests"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "requests"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "exact_L1"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "exact_L1"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "limited_design"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "limited_design_pass"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "makeable"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "computational_makeability"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "L2_ready"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "L2_ready"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "L3_direct_only"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "L3_direct_only_products"
+      ]
+    },
+    {
+      "document": "main",
+      "document_pointer": [
+        "manuscript_main_counts",
+        "strict_secondary"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "strict_secondary_products"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "synthetic_CAL",
+        "references"
+      ],
+      "source": "realism",
+      "source_pointer": [
+        "references"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "requests"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "requests"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "exact"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "exact_L1"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "design_pass"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "limited_design_pass"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "makeable"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "computational_makeability"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "makeable_and_design"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "joint_makeability_limited_design"
+      ]
+    },
+    {
+      "document": "quality",
+      "document_pointer": [
+        "totals",
+        "makeable_design_no_context"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "totals",
+        "joint_makeability_design_no_context_flags"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "requests"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "requests"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "exact_L1"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "exact_L1"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "combined_primary_products"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "combined_primary_products"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "L2_ready_products"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "L2_ready_products"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "L3_direct_only_products"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "L3_direct_only_products"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "strict_secondary_products"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "strict_secondary_products"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "routing_totals",
+        "required_branches"
+      ],
+      "source": "routes",
+      "source_pointer": [
+        "routing_totals",
+        "required_branches"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "populations",
+        "CAL_molecules"
+      ],
+      "source": "CAL_representation",
+      "source_pointer": [
+        "admitted_molecules"
+      ]
+    },
+    {
+      "document": "appendix",
+      "document_pointer": [
+        "populations",
+        "CAL_condition_variants"
+      ],
+      "source": "CAL_representation",
+      "source_pointer": [
+        "admitted_model_condition_variants"
+      ]
+    }
+  ],
+  "final_study_artifacts": "All15 ledger blocks retain final_result_artifact:null"
+}

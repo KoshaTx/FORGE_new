@@ -1,0 +1,606 @@
+\section{Method and implementation details}
+\label{app:forge}
+
+This appendix specifies program and graph encoding, model training, sampling, verification and
+route assessment. Algorithm~\ref{alg:forge-inference} combines the inference steps.
+
+\subsection{Reaction-program encoding}
+\label{app:program-encoding}
+
+The program tuple in Equation~\ref{eq:reaction-program} uses the ordered atom-position set
+$\mathcal I_{\rm atom}(P)=\{1,\ldots,n(P)\}$. The arrays $\mathbf r$ and $\mathbf k$ assign
+precursor roles and core positions to these atoms. This atom-position index differs from
+$\mathcal I(P)$, which indexes all six families of categorical coordinates.
+
+Morphology is computed from the selected atom-mapped trace and its sparse serialization.
+For role $r$, let $V_r^{\rm ext}$ contain its exterior atoms, excluding reaction-core atoms, and
+let $o_r(v)$ count the same-role exterior children of $v$ in the serialized tree. The four fields are
+\begin{equation}
+ M_r=(n_r,j_r,\gamma_r,a_r),\qquad
+ n_r=|V_r^{\rm ext}|,\qquad
+ j_r=\sum_{v\in V_r^{\rm ext}}\max\{o_r(v)-1,0\}.
+\end{equation}
+Here $\gamma_r$ counts closure edges with both endpoints in $V_r^{\rm ext}$, and $a_r$ counts
+same-role bonds between exterior and core atoms. When the serialized tree restricts to a spanning
+forest of the exterior subgraph, $\gamma_r$ equals that subgraph's cycle rank. The junction budget
+is a tree-branching count; it does not count degree contributed by closure bonds. Consequently these
+fields depend on the selected annotation and serialization, not on the unannotated graph alone.
+Fixed-coordinate equality alone does not establish agreement with every morphology field.
+Positions without precursor origin use the designated absent morphology state. Integer morphology
+values are encoded with an offset of one, reserving zero for that absent state.
+
+The training-fold program prior is defined in Section~\ref{sec:program-conditioning}.
+The memory encoder uses separate program-identity and depth tokens,
+$m_c=e_c(c)+e_{\rm type}(0)$ and $m_d=e_d(d)+e_{\rm type}(1)$, together with one token per active
+atom position,
+\begin{equation}
+ m_i=e_r(r_i)+e_k(k_i)+e_{\rm pos}(i)+e_{\rm rep}(g_i)+e_{\rm comp}(u_i)
+     +\sum_{v=1}^{4}e_{M,v}(M_{r_i,v})+e_{\rm type}(2).
+\end{equation}
+Here $g_i$ is the repeat-group state and $u_i$ the position within the precursor-origin component;
+they are structural conditioning variables, not precursor identity labels. All embeddings share the
+model hidden dimension. Layer normalization precedes memory self-attention, followed by residual
+attention and feed-forward updates. The resulting program, depth and atom-position tokens provide
+the memory for cross-attention in the graph denoiser. The morphology fields determine active
+positions and fixed or variable masks. Sampling from the prior specifies these constraints;
+generation assigns the atom, bond and topology states within each role.
+
+A chemistry-specific adapter determines the precursor roles, reaction core, reverse decomposition
+and forward transform associated with $c$. Its sampling layout determines active positions and
+fixed or variable coordinates; the embeddings condition neural prediction on the remaining
+program fields.
+
+\subsection{Graph serialization and source annotations}
+\label{app:graph-encoding}
+
+A spanning-tree representation with at most twelve residual closure edges preserves the full
+254-heavy-atom support without an $O(N_{\max}^2)$ edge state. The discrete flow generates the atom, bond
+and topology states in this representation.
+Let $\alpha=(\mathbf C,\tau,\mathbf r,\mathbf k)$ contain the selected exact precursor tuple,
+registered assembly trace, atom-wise precursor-role assignment and reaction-core annotation. The deterministic
+program-aware encoder
+\begin{equation}
+    \operatorname{Enc}_P:
+    \{(G,\alpha):G\in\mathfrak G_{N_{\max},K_{\rm cl}}
+      \text{ and }\alpha\text{ is admitted for }P\}
+    \longrightarrow \mathfrak X_{N_{\max},K_{\rm cl}}
+\end{equation}
+constructs the categorical graph state
+\begin{equation}
+    X_\star:=\operatorname{Enc}_P(G,\alpha)=
+    \left(
+        \mathbf{a},
+        \boldsymbol{\pi},
+        \mathbf{b},
+        \mathbf{e}^{L},
+        \mathbf{e}^{R},
+        \mathbf{z}
+    \right)
+\end{equation}
+where $\mathbf{a}$ contains atom states, $\boldsymbol{\pi}$
+parent pointers, $\mathbf{b}$ spanning-tree bond states, $\mathbf{e}^{L}$ and $\mathbf{e}^{R}$
+closure-endpoint pointers, and $\mathbf{z}$ closure-bond states.
+
+The encoder first partitions the atoms into connected precursor-origin components under $\alpha$.
+It selects as root the reaction-core atom with the smallest tie-broken canonical RDKit rank, and
+orders the origin-component graph by breadth-first traversal from that root component, breaking
+ties by role index, component canonical ranks and original atom index. Within each component it uses
+a deterministic depth-first preorder from the selected attachment atom, with neighbors ordered by
+the same canonical ranks. The traversed bonds define the spanning tree. Every residual bond is
+represented once as an ordered endpoint pair with its bond label, and residual triples are sorted
+lexicographically. Role, core, fixed-coordinate and morphology arrays follow the
+same atom order. Each admitted source record supplies a selected qualified exact assembly trace
+and its precursor-origin assignment. Alternative source-role bindings remain explicit annotations;
+they do not receive additional graph sampling mass when their product constitutions coincide. Thus
+$\operatorname{Dec}(\operatorname{Enc}_P(G,\alpha))\cong G$ for every admitted record.
+
+The raw padded categorical product space $\overline{\mathfrak X}_{N_{\max},K_{\rm cl}}$ also
+contains malformed states. Its well-formed subset $\mathfrak X_{N_{\max},K_{\rm cl}}$ enforces an
+active node prefix, earlier-parent pointers, distinct valid closure endpoints, no duplicate edges,
+and null values in unused closure slots. The total decoder, including its failure value, is typed as
+\begin{equation}
+    \operatorname{Dec}:\overline{\mathfrak X}_{N_{\max},K_{\rm cl}}
+    \longrightarrow
+    \mathfrak G_{N_{\max},K_{\rm cl}}\cup\{\bot_{\rm dec}\}.
+\end{equation}
+For this study, $N_{\max}=254$ and $K_{\rm cl}=12$. The atom vocabulary includes qualified bromine states; bond states encode single, double and triple bonds, with aromatic structures represented through Kekul\'e bond assignments.
+These bounds specify architectural support. Reaction consistency, nonzero probability under a
+trained model and synthesis-program completeness require separate conditions.
+
+The structural decoder specifies graph reconstruction from an already chosen state.
+The production terminal readout additionally chooses that state from neural predictions
+(Appendix~\ref{app:sampling}). These are separate operations.
+
+The chemistry adapter marks any atom, pointer, or bond states fixed by $P$.
+FORGE holds these states constant while corrupting the remaining states along the linear probability
+path and predicting their clean values from $(X_t,t,P)$. Let $\Omega_P$ be the subset of the raw state
+space satisfying the allowed coordinate alphabets and fixed values, and define the admissible program set
+\begin{equation}
+    \mathcal P_{\rm adm}
+    =\left\{P:\mathfrak X_{N_{\max},K_{\rm cl}}\cap\Omega_P\neq\varnothing\right\}.
+\end{equation}
+The morphology prior is normalized only on $\mathcal P_{\rm adm}$. Each chemistry adapter is required
+to satisfy the program-compatible encoding property: every admitted annotated record obeys
+$\operatorname{Enc}_P(G,\alpha)\in\Omega_P$. Corpus admission requires this property, an exact
+constitutional encode--decode round trip and source-consistent origin/core assignments. Records
+failing admission are excluded. The frozen split is \PendingValue{split manifest}; noise marginals,
+program priors and motif references are fitted only to its training partition. These checks do not
+establish the property for unregistered chemistry.
+
+\subsection{Transformer architecture and training objectives}
+\label{app:training}
+
+The denoiser is a graph Transformer over the complete sparse state. Each layer applies graph
+self-attention with relation biases for parent, child and closure edges, then cross-attends to memory
+tokens representing program identity, program depth, precursor role and reaction-core position.
+Cross-attention is repeated in every layer so that reaction semantics can influence both local state
+updates and long-range coordination among precursor-derived regions. The backbone has six layers,
+hidden dimension 192, eight attention heads and dropout 0.1. Each routed adapter mixes three
+experts with bottleneck dimension 64 using weights computed from the program summary. Additional
+routed adapters feed atom/parent-bond predictions and closure predictions. Auxiliary heads predict
+precursor roles, core positions and exterior child counts. The shared backbone receives
+repeat-group, component-position and role-morphology conditioning.
+
+Training assigns equal mass to the 22 admitted formal families and uniform mass to qualified
+unique product constitutions within each family. Sampling is with replacement; multiple source
+bindings do not multiply a constitution's probability, and sampling weights are not applied again
+to the loss. Each optimizer update contains 3,168 examples from three distinct families, with
+1,056 examples per selected family. A seeded permutation defines a balanced 22-update cycle in
+which every family appears three times. Family batches are sharded across eight H100 GPUs, and
+their coordinate reductions are accumulated before family-gradient projection. Padding is trimmed
+to the longest molecule within a family batch while retaining the full closure support.
+
+The optimizer is AdamW with learning rate $10^{-4}$, weight decay $5\times10^{-5}$,
+$(\beta_1,\beta_2)=(0.9,0.999)$, $\epsilon=10^{-8}$ and global gradient-norm clipping at 1.
+The original fit uses 2,794 updates with seed 2026092401 and its fixed final checkpoint.
+Independent replication seeds remain \PendingValue{independent training seeds}. Model and gradient
+computations use deterministic FP32 arithmetic. Checkpoints retain model, optimizer, random-number
+streams and the committed sampler state; uncommitted prefetch work is discarded on restart.
+Training times are sampled uniformly, $t\sim\mathcal U(0,1)$, without endpoint clipping.
+
+In the task losses below, $c$ indexes a formal family; multiple registered program variants in that
+family share its task reduction.
+For formal family $c$ and state family
+$q\in\mathscr J=\{\mathbf a,\boldsymbol\pi,\mathbf b,\mathbf e^L,\mathbf e^R,\mathbf z\}$,
+let $\mathcal S_{c,q}$ be the selected variable coordinates across that family's minibatch.
+With coordinate loss $\ell_i=-\log d_{\theta,i}(X_{\star,i}\mid X_t,t,P)$, the pooled reduction is
+\begin{equation}
+ L_{c,q}^{\rm pool}=\frac{\sum_{i\in\mathcal S_{c,q}}\ell_i}{\max\{1,|\mathcal S_{c,q}|\}}.
+\end{equation}
+Coordinates here include their example index. Chemistry states (atoms, parent bonds and closure
+bonds) additionally use equal mass over roles present in the selected coordinates. If
+$\mathcal S_{c,q,r}$ contains coordinates assigned to role $r$ and
+$\mathcal R_{c,q}=\{r:|\mathcal S_{c,q,r}|>0\}$, this reduction is
+\begin{equation}
+ L_{c,q}^{\rm role}=\frac{1}{|\mathcal R_{c,q}|}
+ \sum_{r\in\mathcal R_{c,q}}\frac{\sum_{i\in\mathcal S_{c,q,r}}\ell_i}{|\mathcal S_{c,q,r}|},
+ \label{eq:role-balanced-loss}
+\end{equation}
+with zero loss if no role is present. Atom and parent-bond groups use their position's role;
+closure-bond groups use the role at the clean left endpoint. Pointer losses use the pooled reduction
+and mask logits to the permitted layout positions. The flow term $L_{c,\rm flow}$ sums these six
+reduced losses, with unit weights.
+
+For each family, the task loss is
+\begin{equation}
+\begin{aligned}
+ L_c={}&L_{c,\rm flow}
+ +0.25L_{c,\rm role}+0.25L_{c,\rm core}+0.25L_{c,\rm repeat}\\
+ &+L_{c,\rm child}+0.5L_{c,\rm junction}+L_{c,\rm chem\mid top}.
+\end{aligned}
+\label{eq:production-task-loss}
+\end{equation}
+The role and core terms are cross-entropies averaged equally over present target states.
+The repeat term averages squared differences between predicted atom distributions, and separately
+parent-bond distributions, over exact retained-fragment correspondences in repeated precursor
+instances; it sums the two means. Atom correspondence requires a unique labelled fragment match
+that preserves core annotations. Parent-bond correspondence matches both edge endpoints rather
+than equating serialized child positions. Unequal fragments or ambiguous matches contribute no
+repeat pairs; these target-derived alignments supervise the loss and are not supplied at inference.
+The child term is state-balanced cross-entropy for same-component exterior child
+counts in $\{0,1,2,3\}$. The junction term applies smooth-L1 loss to predicted and target
+role-local junction totals, each divided by the number of exterior atoms in that role, then averages
+over eligible examples within a role and equally across present roles. Predicted junction totals
+sum the expected child-count contribution $\max\{o-1,0\}$ across exterior atoms.
+The topology-conditioned chemistry term repeats the role-balanced atom and bond losses in a second
+forward pass with clean parent and closure endpoints and corrupted atom and bond states.
+Each ablation changes only the declared objective or architecture terms under its matched training contract.
+
+PCGrad combines the task gradients in integer formal-family-state order. For
+$g_c=\nabla_\theta L_c$, it initializes $\widetilde g_c=g_c$ and, for each other task $h$ in that
+order, applies
+\begin{equation}
+ \widetilde g_c\leftarrow\widetilde g_c-
+ \mathbf1\{\langle\widetilde g_c,g_h\rangle<0\}
+ \frac{\langle\widetilde g_c,g_h\rangle}{\max\{\|g_h\|_2^2,10^{-12}\}}\,g_h
+\end{equation}
+on parameter coordinates available to both tasks. Gradients are not norm-normalized, and the
+optimizer receives the arithmetic mean of the projected task gradients. This update is not generally
+the gradient of a scalar sum of task losses. No population optimality claim is made for the full
+procedure. In particular, target-dependent group reductions and the auxiliary objectives require
+analysis beyond Proposition~\ref{prop:masked-bayes}.
+
+Layerwise cross-attention, auxiliary losses, routed adapters and gradient-conflict control are
+separate interventions in the architecture comparison (Table~\ref{tab:22-architecture}).
+
+\subsection{Numerical sampling and terminal decoding}
+\label{app:sampling}
+
+The saved diagnostic sampler uses 64 steps, denoted $L_{\rm samp}$. Its strictly positive atom and bond
+source marginals are indexed by registered program and precursor role and fitted to TRAIN data.
+Pointer marginals are restricted and normalized on their allowed layout positions. The finite
+sampler evaluates the denoiser at $t_k=k/L_{\rm samp}$, for
+$k=0,\ldots,L_{\rm samp}-1$, and uses $\Delta t=1/L_{\rm samp}$.
+Conditional on $Z_k=x$, it draws one clean category
+$A_{k,i}\sim d_{\theta,i}(\cdot\mid x,t_k,P)$ independently for each variable coordinate.
+Write $s_{t,i}^P(u\mid a)=(1-t)q_{0,i}^P(u)+t\mathbf1\{u=a\}$ for its conditional path factor,
+$\dot s_i^P(u\mid a)=\mathbf1\{u=a\}-q_{0,i}^P(u)$ for the derivative, and
+$[z]_+=\max\{z,0\}$. The code uses the conditional off-diagonal rate
+\begin{equation}
+ R_{t,i}^{*,\varepsilon}(u,v\mid a,P)
+ =\frac{[\dot s_i^P(v\mid a)-\dot s_i^P(u\mid a)]_+}
+ {|\mathcal X_i(P)|\max\{s_{t,i}^P(u\mid a),\varepsilon\}},
+ \quad u\neq v,\qquad \varepsilon=10^{-8}.
+ \label{eq:clamped-rate}
+\end{equation}
+Full source support is required only on the allowed coordinate alphabet, including the masked
+candidate set for a pointer. Thus that alphabet is the support for every $t_k<1$.
+The denominator clamp in Equation~\ref{eq:clamped-rate} is a numerical safeguard absent from the
+ideal rate in Appendix~\ref{app:flow-proof}.
+
+For the sampled endpoint $a=A_{k,i}$, let
+$h_{k,i}=\Delta t\sum_{v\neq x_i}R_{t_k,i}^{*,\varepsilon}(x_i,v\mid a,P)$ and set
+$\kappa_{k,i}=\min\{1,0.999/h_{k,i}\}$ when $h_{k,i}>0$, with $\kappa_{k,i}=1$ otherwise.
+The implemented coordinate kernel is
+\begin{equation}
+ \widehat K_{k,i}(v\mid x,a)=
+ \begin{cases}
+ \kappa_{k,i}\Delta t\,R_{t_k,i}^{*,\varepsilon}(x_i,v\mid a,P),&v\neq x_i,\\
+ 1-\kappa_{k,i}h_{k,i},&v=x_i.
+ \end{cases}
+ \label{eq:capped-kernel}
+\end{equation}
+Its off-diagonal masses sum to at most $0.999$; the diagonal is the remaining mass. Consequently
+all entries are nonnegative and each row sums to one. Coordinates are drawn independently from
+these kernels, followed by the projection $\Pi_P$.
+
+Without the clamp or cap, and when every conditional Euler row is nonnegative, averaging over
+$A_{k,i}$ gives the Euler kernel built from Equation~\ref{eq:posterior-rate} exactly. One sampled
+endpoint per coordinate therefore does not by itself bias that uncapped one-step law. The nonlinear
+cap generally changes the averaged kernel. Independent coordinate updates also permit simultaneous
+finite-step changes, so their product is a numerical approximation to the local CTMC, not its exact
+transition kernel. No discretization error bound is asserted near the terminal singularity.
+
+After all steps, the model evaluates $(Z_{L_{\rm samp}},1,P)$ once more. The production terminal
+readout $H_P^\theta$ selects coordinate values using constrained argmax, restores fixed states and
+returns either a raw state or a typed terminal failure, denoted collectively by $\bot_{\rm term}$.
+The atom-aware readout first chooses atom states subject to unavoidable incident-bond demands
+from the fixed core and non-root tree attachments; subsequent variable bonds must fit those atom
+capacities. It abstains when this bounded assignment cannot be completed. It does not exchange an
+element for a higher-valence element merely to accommodate a chosen topology. The registered
+core condition reserves the required bond and hydrogen states for each program. In the AGILE-type
+Ugi 3-CR, these include one hydrogen on the aldehyde-derived $\alpha$ carbon and one on the
+isocyanide-derived amide nitrogen; these conditions are not imposed on other Ugi variants.
+The selected state is then reconstructed and checked for
+connectedness, valence and sanitization. A readout failure retains its detailed reason in the ledger;
+for graph-law notation we extend $\operatorname{Dec}(\bot_{\rm term})=\bot_{\rm dec}$.
+If $q_{\theta,\rm out}^P$ is the raw law after terminal readout, including failure, then
+\begin{equation}
+ p_\theta(\cdot\mid P)=\operatorname{Dec}_{\#}q_{\theta,\rm out}^P,
+ \qquad
+ p_\theta(G\mid P)=\sum_{z:\operatorname{Dec}(z)=G}q_{\theta,\rm out}^P(z).
+ \label{eq:generated-law}
+\end{equation}
+This law retains structural failures and chemically invalid graphs before the validity and L1
+filters; it is not conditioned on acceptance.
+The ideal theorem does not include the learned $t=1$ readout, which is unconstrained by a loss
+integrated over $t\in(0,1)$. Decoder and source-prior comparisons use their declared fixed-weight
+or retrained contrasts (Table~\ref{tab:22-decoder}).
+
+\subsubsection{Checked construction and selection}
+
+Let $\Pi$ specify a bounded inference policy: the draw count, ordered proposal operators, TRAIN
+references, search limits, source verifier, selection objective and selection-group size. Its
+version is \PendingValue{inference policy}; the draw count $D$ is \PendingValue{draws per request},
+the stage caps are \PendingValue{proposal and search caps}, and the selection-group size is
+\PendingValue{selection batch size}. For request $b$, retain all raw trajectories and form
+\begin{equation}
+ \mathcal C_b=\{G^{\rm raw}_{b,d}:1\leq d\leq D\}
+ \cup\mathcal R_\Pi\!\left(P_b,\{Z^{\rm out}_{b,d},\lambda_{b,d}\}_{d=1}^{D}\right),
+\end{equation}
+where $\lambda_{b,d}$ denotes saved terminal predictions and $\mathcal R_\Pi$ is the bounded
+construction map. Original graphs, failed trajectories, rejected proposals and exceptions remain
+in the attempt ledger. A request is not removed when its candidate set has no eligible graph.
+
+Construction can tie repeated components, restore source-required component constraints, propose
+qualified retained-head sites, and assign TRAIN-supported joint atom/bond or ring-system motifs.
+The operators act on generated atom slots while preserving the declared atom budget, precursor
+origins and fixed reaction core. Atom relabelling and topology edits are recorded separately.
+Ring repair is applied after component and head construction, and all checks are evaluated again
+on the final graph. Repeated arms receive tied edits when their established correspondences permit
+this; every proposed product must still pass the unchanged source verifier. A TRAIN motif is an
+explicit inference prior and does not itself certify chemical plausibility or a complete route.
+An unsupported or context-dependent ring fragment is unassessed rather than assigned a fabricated
+known identity. Graph cycle rank, ring systems, SSSR rings and serialization-dependent fundamental
+cycles remain distinct quantities.
+
+The selector maps the request-indexed pools to at most one graph per request,
+\begin{equation}
+ (G^{\rm sel}_1,\ldots,G^{\rm sel}_B)
+ =\mathcal S_\Pi\bigl((P_b,\mathcal C_b)_{b=1}^{B}\bigr),
+ \qquad G^{\rm sel}_b\in\mathcal C_b\cup\{\bot_{\rm dec}\}.
+\end{equation}
+Source-exact eligibility, applicable design predicates and product/role-component diversity and
+novelty constraints are explicit parts of $\Pi$. A combined design pass requires every applicable
+qualified predicate to be assessed and pass; unassessed checks cannot establish that endpoint.
+The selection objective and constraint reference are \PendingValue{selector objective and floors}.
+Each output retains its request, draw and proposal lineage. Raw and selected yields both use the
+original $B$ requests as denominator, while cost accounting includes $BD$ trajectories, all
+construction attempts, source checks and selection work.
+
+The selected joint law is the pushforward of the raw trajectory law through
+$\mathcal R_\Pi$ and $\mathcal S_\Pi$. It is distinct from Equation~\ref{eq:generated-law} and
+can couple different requests. The ideal flow theorem does not certify these inference maps;
+independent-draw accepted-count formulas apply only when their independence assumptions hold.
+A graph-changing repair changes the proposal distribution, whereas rejecting completed graphs
+alone does not.
+
+\subsection{Exact assembly verification}
+\label{app:verification}
+
+For the chemistry $c$ specified by $P$, FORGE decomposes each valid graph into role-assigned
+precursors and applies the registered forward transform. Exact replay checks assembly existence
+under $c$; it does not test full agreement with the sampled conditioning layout.
+
+\begin{definition}[Exact assembly and recovered witnesses]
+\label{def:exact-assembly}
+For the registered forward operator $\mathcal F_c$ on precursor inputs $\mathfrak C_c$, define
+\begin{equation}
+ \mathcal E_c^\star(G)=\{\mathbf C\in\mathfrak C_c:G\in\mathcal F_c(\mathbf C)\},\qquad
+ \mathrm{L1}^\star(G,c)=\mathbf1\{\mathcal E_c^\star(G)\neq\varnothing\}.
+\end{equation}
+The bounded reverse procedure returns candidate pairs $(\mathbf C,\tau)$ in $\mathcal D_c(G)$.
+Equation~\ref{eq:main-exact-traces} retains the pairs passing exact forward replay, and
+\begin{equation}
+ \widehat{\mathrm{L1}}(G,c)=\mathbf1\{\widehat{\mathcal E}_c(G)\neq\varnothing\}.
+\end{equation}
+Both predicates describe assembly existence; molecular validity is checked separately.
+\end{definition}
+The set $\mathcal E_c^\star(G)$ contains precursor inputs, whereas
+$\widehat{\mathcal E}_c(G)$ contains input--trace pairs. Their compatible comparison is
+\begin{equation}
+ \{\mathbf C:\exists\tau,\ (\mathbf C,\tau)\in\widehat{\mathcal E}_c(G)\}
+ \subseteq\mathcal E_c^\star(G),\qquad
+ \widehat{\mathrm{L1}}(G,c)\leq\mathrm{L1}^\star(G,c).
+\end{equation}
+The inclusion follows directly from exact replay. Its converse requires complete reverse search,
+which has not been established. Throughout the paper, verified exact-L1 yield counts valid
+attempts satisfying the recovered predicate. Candidate traces are compared after the registered
+role- and step-aware canonicalization, so duplicate encodings do not create additional witnesses.
+
+Post-hoc filtering changes which completed samples are retained but cannot change the proposal
+distribution's exact-L1 acceptance probability.
+Under independent sampling, this probability determines the complete distribution of accepted
+counts under a fixed attempt budget and the expected cost of obtaining a fixed number of accepted
+products (Proposition~\ref{prop:posthoc-budget}).
+We distinguish decomposition coverage from forward-replay precision because a candidate disconnection
+may fail to reconstruct $G$.
+Candidate decomposition coverage is the fraction of valid graphs for which
+$\mathcal D_c(G)\neq\varnothing$. Candidate yield additionally uses all original requests as
+its denominator; undefined conditional ratios are not replaced by zero. For a declared sequence of valid evaluation graphs $G_1,\ldots,G_m$, candidate replay precision is
+\begin{equation}
+ \mathrm{ReplayPrecision}
+ =\frac{\sum_{b=1}^m|\widehat{\mathcal E}_c(G_b)|}
+ {\sum_{b=1}^m|\mathcal D_c(G_b)|},
+\end{equation}
+with N/E when the denominator is zero. Replay of tuples already in
+$\widehat{\mathcal E}_c(G)$ has $100\%$ success by construction. This invariant does not estimate
+candidate replay precision. We separately define
+\begin{equation}
+ \mathrm{CandidateAmbig}(G,c)=\mathbf 1\{|\mathcal D_c(G)|>1\},\qquad
+ \mathrm{ExactAmbig}(G,c)=\mathbf 1\{|\widehat{\mathcal E}_c(G)|>1\}.
+\end{equation}
+A distinct exact-L1 product is a deduplicated generated constitution. An unambiguous exact
+decomposition satisfies $|\widehat{\mathcal E}_c(G)|=1$. We distinguish product uniqueness from
+decomposition uniqueness throughout.
+
+\subsection{Recursive route assessment and dossier admission}
+\label{app:route-assessment}
+
+\subsubsection{Primary and secondary evidence contracts}
+
+We evaluate two separately named contracts. The primary computational-makeability contract,
+$\mathfrak B_{\rm comp}$, permits computationally proposed or forward-applied published-transform
+paths ending in exact vendor-listed constitutions. It does not require experimental precedent for
+every exact substrate. The secondary strict dossier contract, $\mathfrak B_{\rm strict}$, retains
+its exact-source and current-item evidence requirements. A successful primary assessment does not
+imply strict dossier closure. The complete-tree equations below are parameterized by the contract;
+reaction admission and terminal qualification must always be interpreted under that same contract.
+For $\mathfrak B_{\rm comp}$, the terminal availability predicate means a dated vendor-directory
+listing within the 30-day evidence window, not verified stock or price. L2 readiness is reported
+separately and can hold before terminal listing closure. Direct-only L3 requires all recovered
+components to qualify directly without recursive preparation. Neither contract establishes
+experimental execution or synthesis success.
+
+\subsubsection{Assessment interface}
+
+For a valid generated graph $G$ and reaction program $P$ with chemistry $c$, route assessment
+returns either a
+complete synthesis dossier or a typed abstention.
+Let $\mathfrak B$ denote the frozen route contract: depth and query budgets, registered transforms,
+evidence-admission rules and a dated supplier snapshot. Let $\mathfrak D$ be the space of candidate
+dossiers, each containing a synthesis tree and its reaction and terminal evidence, and let
+$\mathfrak F_{\mathfrak B}$ be the disjoint finite set of typed failures.
+Generation and assessment are defined by
+\begin{equation}
+    Y=\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)
+    \in\mathfrak D\cup\mathfrak F_{\mathfrak B}.
+\end{equation}
+$\mathsf{Assess}_{\mathfrak B}$ is invoked after the verifier returns one admitted root trace
+$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$. It verifies the final assembly, searches for
+preparation routes to unavailable precursors and checks terminal supplier evidence. $P$ and the assessor act at different stages: $P$ guides generation, whereas the assessor
+constructs a dossier from the completed graph without modifying it.
+FORGE accepts $(G,T)$ only when $G$ passes molecular and exact-assembly verification and $T$ traces
+every required precursor to an available starting material; otherwise, it abstains.
+
+\subsubsection{Recursive expansion and completion checks}
+
+Completing a synthesis dossier requires evidence for every recovered precursor. Exact L1
+verification specifies the precursor structures; availability and preparation routes require
+additional evidence. Each precursor must therefore match an available material or have a supported
+route from available starting materials.
+Let $T$ be a candidate dossier with bipartite synthesis tree $(V_M,V_R,E_T)$ rooted at $G$, where each product molecule
+points to its preparation reaction and each reaction points to its required reactants.
+The assessor constructs these routes recursively and withholds a complete dossier when any branch
+remains unresolved.
+A molecule node terminates when a current, dated supplier record lists an exact constitutional match
+as available; otherwise, FORGE must expand that node through a supported, forward-verified reaction.
+FORGE uses a bounded level-two (L2) planner to propose each expansion.
+For each proposal, FORGE records the reaction, reactants, product, and supporting evidence, and
+accepts the step only when the forward transform reconstructs the target precursor exactly.
+Each accepted reaction adds its reactants as new molecule nodes, and FORGE applies the same
+termination-or-expansion rule recursively.
+The current assessor admits only an unambiguous verified exact-L1 root. Every dossier therefore
+records the sole selected root trace
+$(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$; an ambiguous exact set produces a typed
+abstention. For each upstream reaction node $r$, let
+$\mathrm{Admitted}_{\mathfrak B}(r)=1$ when its reaction and substrate scope satisfy the frozen
+evidence policy, and let $\mathrm{Verify}_{\mathfrak B}(r)=1$ when
+$\operatorname{target}(r)\in\mathcal F_r(\operatorname{reactants}(r))$.
+For each leaf molecule $\ell$, let $\mathrm{Available}_{\mathfrak B}(\ell)=1$ when it satisfies the terminal
+supplier-evidence rule.
+Let $V_R^{\mathrm{up}}(T)$ denote the upstream preparation-reaction nodes and $L(T)$ the leaf
+molecules. $\mathrm{WellFormed}(G,T,P)$ requires that $T$ is a connected, acyclic bipartite tree
+rooted at $G$; each internal molecule has exactly one recorded producing reaction; no molecular constitution repeats along an ancestor path; each reaction's
+molecule children equal its recorded reactants with their multiplicities; and $T$ has no disconnected, cyclic or
+extraneous node. Its distinguished final-assembly record must have product $G$ and precursor
+children exactly $\mathbf C_T$ under trace $\tau_T$.
+\begin{equation}
+\begin{aligned}
+    \mathrm{Complete}_{\mathfrak B}(G,T,P)
+    ={}&\mathrm{Valid}(G)\,\mathrm{WellFormed}(G,T,P)\\
+    &\times\mathbf1\!\left[\widehat{\mathcal E}_c(G)=\{(\mathbf C_T,\tau_T)\}\right]\\
+    &\times\prod_{r\in V_R^{\mathrm{up}}(T)}
+    \mathrm{Admitted}_{\mathfrak B}(r)\mathrm{Verify}_{\mathfrak B}(r)
+    \prod_{\ell\in L(T)}\mathrm{Available}_{\mathfrak B}(\ell).
+\end{aligned}
+\end{equation}
+All factors are binary and empty products equal one. Repeated use of a material is represented by
+separate tree occurrences; equality of their constitutions does not merge their nodes.
+Under finite search bounds and terminating evidence queries, the assessor terminates and returns a
+dossier only when $\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$
+(Lemma~\ref{lem:planner-termination} and Invariant~\ref{inv:dossier-soundness}).
+An abstention means that FORGE did not complete a dossier under $\mathfrak B$; it does not imply that
+no synthesis route exists outside the frozen search space or evidence snapshot.
+The guarantee is computational and does not establish experimental synthesis success.
+
+\subsubsection{Recorded evidence and support tiers}
+
+For each accepted pair $(G,T)$, the synthesis dossier contains every molecule and reaction in $T$,
+the evidence for each reaction and a dated supplier record for each terminal material.
+We classify assembly support relative to the fixed reference space into four tiers:
+\textbf{E0 (enumerated):} the generated lipid matches a product that was already constructed
+computationally from known components using a supported reaction.
+\textbf{E1 (known components):} the generated lipid was not included in the bounded E0 enumeration,
+but a supported reaction assembles it entirely from known components.
+\textbf{E2 (generated precursor):} a supported reaction assembles the lipid, but at least one
+precursor is newly generated and requires a complete L2 route to available starting materials.
+\textbf{E3 (new assembly family):} the lipid requires a final assembly reaction outside the
+qualified reaction registry.
+
+\subsection{End-to-end inference procedure}
+\label{app:inference}
+
+Algorithm~\ref{alg:forge-inference} records every requested output and every trajectory used to
+construct it, including failures in molecular validation, exact replay or route completion.
+
+\begingroup
+\setlength{\parskip}{0pt}
+\hrule height 0.8pt\kern 2pt
+\refstepcounter{algorithm}
+\noindent\textbf{Algorithm~\thealgorithm} FORGE generation and fail-closed synthesis-program construction.
+\label{alg:forge-inference}
+\par\nobreak\kern 2pt\hrule height 0.4pt\nobreak
+\begin{algorithmic}[1]
+\Require trained coordinate predictors, chemistry $c$, program prior $p_{\rm prog}(\cdot\mid c)$,
+integers $L_{\rm samp},D\geq1$ and $B\geq0$, recorded seed $s$, inference policy $\Pi$,
+route contract $\mathfrak B$
+\Ensure attempt-indexed dossier sequence $\mathcal D_{\rm out}$, exact-L1 ledger $\mathcal L_{\rm out}$,
+and typed failure and proposal ledger $\mathcal H$
+\State initialize the random-number streams from $s$;
+$\mathcal D_{\rm out}\gets[\,]$; $\mathcal L_{\rm out}\gets[\,]$; $\mathcal H\gets[\,]$
+\For{$b=1,\ldots,B$}
+    \State sample and record $P_b\sim p_{\rm prog}(\cdot\mid c)$; initialize raw draw ledger $\mathcal Z_b$
+    \For{$d=1,\ldots,D$}
+        \State sample $Z_0\sim q_0^{P_b}$ and set $Z\gets\Pi_{P_b}(Z_0)$
+        \For{$k=0,\ldots,L_{\rm samp}-1$}
+            \State $t_k\gets k/L_{\rm samp}$; $\Delta t_k\gets1/L_{\rm samp}$
+            \State $Z\gets\Pi_{P_b}\!\left(\Call{CappedCoordinateEuler}{Z,t_k,\Delta t_k,P_b}\right)$
+        \EndFor
+        \State obtain terminal predictions $\lambda_{b,d}$ and $Z^{\rm out}_{b,d}\gets H_{P_b}^\theta(Z)$
+        \State append the state or typed terminal failure, predictions and raw decoded graph to $\mathcal Z_b$
+    \EndFor
+    \State $\mathcal C_b\gets\Call{CheckedConstruction}{P_b,\mathcal Z_b,\Pi}$
+    \State record every raw/proposed graph, check, abstention and cost in $\mathcal H$
+\EndFor
+\State $(G_1,\ldots,G_B)\gets\mathcal S_\Pi((P_b,\mathcal C_b)_{b=1}^{B})$
+\For{$b=1,\ldots,B$}
+    \State $G\gets G_b$; $P\gets P_b$
+    \If{$G=\bot_{\rm dec}$ or $\mathrm{Valid}(G)=0$}
+        \State record $(b,\textsc{InvalidGraph},\text{decode or validation reason})$ in $\mathcal H$
+        \State \textbf{continue}
+    \EndIf
+    \State $\widehat{\mathcal{E}}_c(G)\gets
+    \{(\mathbf C,\tau)\in\mathcal D_c(G):\exists H\in\mathcal F_c(\mathbf C),\ H\cong G\}$
+    \If{$\widehat{\mathcal{E}}_c(G)=\varnothing$}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{L1Failure})]$
+        \State \textbf{continue}
+    \EndIf
+    \State $\mathcal L_{\rm out}\gets\mathcal L_{\rm out}\mathbin{\|}
+    [(b,G,\widehat{\mathcal E}_c(G))]$
+    \If{$|\widehat{\mathcal E}_c(G)|\neq1$}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{AmbiguousL1})]$
+        \State \textbf{continue}
+    \EndIf
+    \State select the sole $(\mathbf C_T,\tau_T)\in\widehat{\mathcal E}_c(G)$
+    \State $Y\gets\mathsf{Assess}_{\mathfrak B}(G,P,\mathbf C_T,\tau_T)$
+    \If{$Y$ is a dossier $T$ and $\mathrm{Complete}_{\mathfrak B}(G,T,P)=1$}
+        \State $\mathcal D_{\rm out}\gets\mathcal D_{\rm out}\mathbin{\|}[(b,T)]$
+    \ElsIf{$Y\in\mathfrak F_{\mathfrak B}$}
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,Y)]$
+    \Else
+        \State $\mathcal H\gets\mathcal H\mathbin{\|}[(b,\textsc{IncompleteDossier})]$
+    \EndIf
+\EndFor
+\State \Return $\mathcal D_{\rm out},\mathcal L_{\rm out},\mathcal H$
+\end{algorithmic}
+\nopagebreak\hrule height 0.8pt
+\endgroup
+
+\subsection{Reproducibility and artifact provenance}
+\label{app:repro}
+
+Each run is identified by its training seed, data and split manifests, atom/program vocabularies,
+source registries, fitted noise marginals, configuration, code snapshot and checkpoint SHA-256.
+The independent training-seed identifiers are \PendingValue{training seed identifiers}. Each
+comparison retains its declared attempt budget, checkpoint rule and evaluator. Sampling seeds,
+request/layout identifiers and proposal lineage are recorded separately from training seeds.
+The manuscript provenance records identify the source artifacts for tables and figures through
+SHA-256 hashes.
+
+The inference-policy identifier is \PendingValue{inference policy identifier}; its record includes
+all proposal caps, TRAIN motif references, admission order, selection-group boundaries and source
+checks. The route contract is \PendingValue{route contract identifier}, including depth/query
+limits, evidence-admission policy and dated terminal-material snapshots. Restarts preserve committed
+checkpoints and completed request shards, and source-preserving fixes retain the exact earlier
+implementation and an equivalence receipt. A change to an inference map defines a distinct arm
+unless equivalence is demonstrated for the declared inputs.
+
+Reproduction requires source code, configuration and environment manifests, model checkpoints,
+split/registry hashes, attempt-level output and verification ledgers, and figure/table exporters.
+These artifacts are identified by \PendingValue{reproduction archive identifier}. Corpus access conditions are
+\PendingValue{data availability}. Constitutional identity removes atom maps and stereochemical
+labels while retaining formal charge and bond order; no tautomer normalization is applied.
+
+\clearpage
+

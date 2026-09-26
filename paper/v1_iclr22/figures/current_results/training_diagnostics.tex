@@ -1,0 +1,22 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\definecolor{forgeblue}{HTML}{2166AC}
+\definecolor{forgeorange}{HTML}{B35806}
+\definecolor{forgegreen}{HTML}{167D5B}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[width=2.85in,height=2.8in,ybar,bar width=9pt,ymin=0,ymax=170,ytick={0,50,100,150},xmin=-.55,xmax=2.55,xtick={0,1,2},xticklabels={Original,Large batch,Small batch},name=left,title={a. Matched additional exposure},ylabel={Passes / 352 requests},tick label style={font=\scriptsize},title style={font=\small},label style={font=\small},nodes near coords,nodes near coords style={font=\scriptsize},legend style={draw=none,font=\scriptsize,at={(.5,-.16)},anchor=north},legend columns=2]
+\addplot[fill=forgeblue,draw=forgeblue] coordinates {(0,140) (1,135) (2,122)};
+\addlegendentry{Exact L1}
+\addplot[fill=forgeorange,draw=forgeorange] coordinates {(0,111) (1,113) (2,107)};
+\addlegendentry{Limited design}
+\end{axis}
+\begin{axis}[width=2.85in,height=2.8in,ybar,bar width=9pt,ymin=0,ymax=170,ytick={0,50,100,150},xmin=-.55,xmax=2.55,xtick={0,1,2},xticklabels={Original,Categorical,Coarse},at={(left.east)},anchor=west,xshift=.5in,title={b. Matched 66-update continuation},ylabel={Passes / 352 requests},tick label style={font=\scriptsize},title style={font=\small},label style={font=\small},nodes near coords,nodes near coords style={font=\scriptsize},legend style={draw=none,font=\scriptsize,at={(.5,-.16)},anchor=north},legend columns=2]
+\addplot[fill=forgeblue,draw=forgeblue] coordinates {(0,140) (1,136) (2,135)};
+\addlegendentry{Exact L1}
+\addplot[fill=forgeorange,draw=forgeorange] coordinates {(0,111) (1,110) (2,114)};
+\addlegendentry{Limited design}
+\end{axis}
+\end{tikzpicture}
+\end{document}

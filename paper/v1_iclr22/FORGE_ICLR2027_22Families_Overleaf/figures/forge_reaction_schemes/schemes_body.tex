@@ -1,0 +1,50 @@
+% Monochrome skeletal schemes use the same thin bonds and dark atom labels as the
+% molecular examples. Reaction topology, substituents and hydrogens are unchanged.
+\definecolor{chemicalbond}{HTML}{727272}
+\definecolor{chemicalink}{HTML}{303030}
+\colorlet{roleamine}{chemicalbond}
+\colorlet{roleald}{chemicalbond}
+\colorlet{roleiso}{chemicalbond}
+\colorlet{roletemplate}{chemicalbond}
+\setchemfig{atom sep=2.35em, bond style={line width=0.45pt,draw=chemicalbond}, atom style={text=chemicalink}}
+\newcommand{\amine}[1]{{\color{chemicalink}#1}}
+\newcommand{\ald}[1]{{\color{chemicalink}#1}}
+\newcommand{\iso}[1]{{\color{chemicalink}#1}}
+\newcommand{\tmpl}[1]{{\color{chemicalink}#1}}
+\newcommand{\rxnrow}[3]{%
+  \makebox[\linewidth][l]{\begin{minipage}{\linewidth}%
+  \textbf{\small #1}\\[-0.15em]{\scriptsize\itshape #2}\\[0.7em]#3\end{minipage}}}
+
+\rxnrow{Ugi three-component reaction}
+       {amine head, aldehyde and isocyanide combine in one step; no carboxylic-acid reactant component}{%
+\schemestart
+  \chemfig{R^1-[:30]\amine{NH_2}}
+  \+
+  \chemfig{R^3-[:30,,,,roleald]\ald{CH}=[:-30,,,,roleald]\ald{O}}
+  \+
+  \chemfig{R^4-[:30,,,,roleiso]\iso{N}^{+}~[:-30,,,,roleiso]\iso{C}^{-}}
+  \arrow{->[\scriptsize acidic catalyst]}
+  \chemfig{R^1-[:30,,,,roleamine]\amine{NH}-[:-30,,,,roleald]\ald{CH}(-[:-90,,,,roleald]R^3)-[:30,,,,roleiso]\iso{C}(=[:90,,,,roletemplate]\tmpl{O})-[:-30,,,,roleiso]\iso{NH}-[:30,,,,roleiso]R^4}
+\schemestop}\par
+
+\par\vspace{1.9em}\par
+\rxnrow{Repeated aza-Michael addition}
+       {one addition shown; repeat at registered N--H sites; the ester is unchanged}{%
+\schemestart
+  \chemfig{R^1-[:30]\amine{N}(-[:90]R^2)-[:-30]\amine{H}}
+  \+
+  \chemfig{=[:-30,,,,roleiso]-[:30](=[:90]O)-[:-30]O-[:30]R^3}
+  \arrow{->}
+  \chemfig{R^1-[:30,,,,roleamine]\amine{N}(-[:90,,,,roleamine]R^2)-[:-30,,,,roleiso]-[:30,,,,roleiso]-[:-30](=[:90]O)-[:30]O-[:-30]R^3}
+\schemestop}\par
+
+\par\vspace{1.9em}\par
+\rxnrow{Repeated reductive amination}
+       {condensation and reduction form the carbon--nitrogen linkage}{%
+\schemestart
+  \chemfig{R^1-[:30]\amine{N}(-[:90]R^2)-[:-30]\amine{H}}
+  \+
+  \chemfig{R^3-[:30,,,,roleald]\ald{CH}=[:-30,,,,roleald]\ald{O}}
+  \arrow{->[\scriptsize condensation][\scriptsize reduction]}
+  \chemfig{R^1-[:30,,,,roleamine]\amine{N}(-[:90,,,,roleamine]R^2)-[:-30,,,,roleald]-[:30,,,,roleald]R^3}
+\schemestop}

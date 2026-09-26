@@ -1,0 +1,7 @@
+
+% New-model values must be populated only from admitted final result artifacts.
+\definecolor{forgepending}{HTML}{9B4A12}
+\newcommand{\PendingCell}{\textcolor{forgepending}{\textsf{pending}}}
+\newcommand{\ResultSlot}[2]{\par\noindent\textbf{\textcolor{forgepending}{[#1: pending]}} #2\par}
+\newcommand{\DraftPanel}[2]{\fcolorbox{black!25}{black!2}{\parbox[c][2.1cm][c]{0.43\linewidth}{\small\textbf{#1}\par\medskip #2\par\smallskip\textcolor{forgepending}{Result not yet available}}}}
+\newcommand{\TwentyTwoScope}{\textbf{Draft evidence status.} New-model cells marked \PendingCell{} contain no measured values. The 22-family final evaluation is not yet complete. Historical three-family results and TRAIN-derived development diagnostics are separate populations.}
