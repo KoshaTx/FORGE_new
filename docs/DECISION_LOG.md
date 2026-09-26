@@ -20815,6 +20815,2902 @@ by this milestone. Integrated evidence, all-family tables, pins and reproducible
 `results/phase1/compose_lipid_quality_milestone_v2/README.md`, `result.json`, `ALL_FAMILIES.md`,
 `NEXT_STEPS.md`, `verify_selected.py`, and `summarize.py`.
 
+## 2026-09-24 — Separate structural defects from L1 exactness; retain bounded A3 improvement
+
+The user requested continued parallel work on A3 aromatic structure, ketone Ugi4 topology
+and composition, broader chemical quality, and L2/L3 evidence without manuscript edits.
+Three agents completed decoder, independent structural-audit and documentary-evidence
+workstreams; the parent completed a seeded, method-masked molecular review and integration.
+
+The unchanged fresh-flow panel retains all 1,408 requests and 1,387 exact source-contract
+L1 products, at least 58/64 for every family. A frozen narrow chemical rubric finds five
+strain/reactivity alerts and 55 context-dependent requests, versus zero of these rules
+among 1,408 fixed reaction-enumerated TRAIN controls. Unknown sensitivity prevents a
+complete-quality claim. Ring auditing flags four role-cycle allocation deviations and
+123 fundamental-size deviations; 82 selected constructor graphs remain unassessed for
+size. Saved versus recovered tree bases are explicit, distinct from SSSR descriptions.
+
+A seeded panel of two generated requests plus one TRAIN control per family was reviewed
+with family, origin, L1 and flags masked. All 66 notes were frozen before unmasking.
+Subsequent graph checks explicitly corrected false impressions from drawings, including
+an acyclic AEMA TRAIN control whose overlapping bonds appeared cyclic. This assistant
+screen is not independent human chemistry adjudication or a population quality estimate.
+All requests and the original notes remain available, including the one sampled L1 failure.
+
+Two exact cases expose distinct real gaps. Fresh A3 request 41 has three 26-member
+oxygen-containing rings despite requested size6. Raw decoding already produced the bad
+donor; copying it into repeated arms restored component identity consistency while
+propagating the ring error. Fresh aldehyde-Ugi4 request 286 has two amidic nitrogens and
+no ordinary basic center. Its accepted primary-amine precursor is cyclohexylamine;
+all 20 TRAIN head-role components have two or three nitrogens. The existing family
+source contract has no retained-basic product condition, so its L1 pass is correct
+under that contract. A separate product-design requirement is needed; the source
+registry and historical L1 definition were not changed.
+
+An opt-in helper coordinates ring bond assignments from pinned TRAIN role motifs without
+changing atoms, connectivity, fixed core or support bounds. A matched three-family,
+192-request, five-saved-draw replacement comparison increases exact-plus-observed features
+from 35 to 54 but decreases exact L1 from 180 to 178 and loses some component diversity
+and novelty. It is not promoted. A larger-pool augmentation retains originals and adds
+685 request-local entries, increasing the pool from 1,442 to 2,127. Its strict variant
+preserves the original exact, unique, Shannon, Simpson, novel-observation and novel-unique
+floors, independently verified. A3 exact-plus-observed improves 12 to 20 with 64/64 exact;
+aryl remains 17 with 58 exact and ketone remains six with 58 exact. Total exact is still
+180/192, observed 35 to 43. Chemical alerts remain two, context flags decrease 40 to 37,
+and fundamental-size flags decrease 54 to 50. The larger producer budget records 3,143
+source checks versus 1,469 current-only; this is not a same-cost causal comparison.
+
+Ketone still has a cage-connectivity problem that fundamental cycle sizes alone cannot
+resolve. A clean-input control also misses a non-ring acid-chain double bond even under
+gold topology. Both topology and bond/composition learning remain implicated. No result
+establishes that extra updates or a smaller batch alone will fix quality. The ring prior
+and TRAIN-observed feature metric share information and are not independent realism evidence.
+
+Documentary auditing now binds the exact source-supported AEMA upstream step to all 63
+matching fresh products. The full fresh ledger contains 3,723 required role branches and
+2,422 unique family-role constitutions. Both AEMA terminal leaves and the other product
+roles remain unclosed. Bounded public supplier attempts obtained no admissible current
+US stock; package requests encountered HTTP challenges, and native Safari control timed
+out before navigation. These access failures admit no chemical-negative conclusion.
+There are zero new current L3 or complete-product admissions; complete coverage remains
+null/unassessed. The remaining identities are ranked by fresh product/family prevalence.
+
+Independent code review found and fixed two API boundaries: malformed/truncated tree
+states now fail explicitly rather than report size agreement, and bond classes outside
+the supplied prediction vocabulary raise ValueError. Eighteen structural-audit and 12
+ring-helper tests pass, along with seven route-audit checks, lint and formatting. All nine
+preserved valid-input audit comparisons reproduce exactly; all 2,392 saved ring-prior
+calls are unchanged after the validation-only fix. Original source and result bytes are
+archived with explicit hash resolution. Integrated pins, graph identities and denominators
+verify, and make verify passes all 30 present assets. No new model calls or paid training
+were required for these saved-draw diagnostics; no paper or vendor files were edited.
+
+Decision: retain the opt-in ring proposal and strict augmentation as development evidence,
+not a default decoder or overall-quality promotion. Next target complete ring-system
+connectivity through construction, separately qualified head-survival design conditions,
+and joint topology/bond training, followed by independent family-matched evaluation and
+the outstanding documentary routes. Computational paper scope and prior fresh-layout
+overlap limitations remain unchanged. Integrated report and all-family table:
+`results/phase1/compose_lipid_quality_milestone_v3/README.md`, `ALL_FAMILIES.md`, `result.json`
+and `verification.json`. Molecular review: `results/phase1/compose_lipid_visual_audit_v1/`.
+
+
+## 2026-09-24 — Inventory HeLa and A549 guidance data for the latest 22-family model
+
+The user requested guidance research using the most recently trained 22-family model.
+Use the completed eight-H100 FP32 checkpoint as the proposed frozen base rather than
+assuming the historical three-family Ugi guidance interface applies unchanged. This
+assessment launched no training, guidance, generation, holdout evaluation or paid job.
+
+A deterministic inventory of the pinned LNPDB CSV finds 4,142 HeLa mRNA/FLuc rows
+(3,896 connected constitutions), 2,569 A549 rows (886 constitutions), 29 HBEC-ALI rows
+(28 constitutions), and 49 mouse lung reporter rows (26 constitutions). A separate
+96-row mouse lung cohort measures barcode uptake and is not a transfection endpoint.
+Counts precede mixture, source-quality, reaction-program and protected-split admission.
+The HeLa and A549 reporter cohorts share zero constitutions under the stated
+stereo-free canonicalization, limiting direct cell-selectivity interpretation.
+
+Decision: investigate separate HeLa and A549 mRNA-expression tasks with formulation
+and assay context, study-aware evaluation and a frozen 22-family generator. Broader
+chemical pretraining does not establish endpoint-predictor generalization. Completed-
+molecule prediction followed by bounded completion-based guidance is a proposed
+mechanism, not an executed or qualified result. Preserve prior negative experiments.
+
+Reproduction: `.venv/bin/python results/phase1/lnpdb_guidance_endpoint_inventory_v1/audit.py`.
+Result SHA-256: `c17800422408446b5d9cbe3e07b92efc24c382aa3e262feb3debb04f81eb8dfc`. Source and script hashes are recorded in that result.
+
+### 2026-09-24 — 22-family ICLR manuscript result placeholders
+
+The user authorized updating `paper/v1_iclr22/` with placeholders for the complete new-model
+result set. The canonical draft now has 15 evidence blocks, nine matrices containing all 22
+admitted families, and three new figure slots. It includes L1 coverage/precision and failures,
+training-seed results and controls, independent structural checks, realism, diversity/novelty,
+generalization, L2/L3 dossiers, training/cost and decoder/architecture attribution, representative
+structures, theory correspondence, and explicitly conditional guidance. Every final new-model
+cell remains pending; no development measurement was promoted to held-out evidence.
+
+Historical computational numbers are preserved in labeled appendices and verified byte-identical
+in their generated table inputs. The complete incoming manuscript and old export packages are
+archived. Its author-supplied experimental material is not carried into the computational
+22-family narrative. The separate `paper/v1_iclr/` manuscript was not edited by this task.
+
+The canonical PDF and a fresh extraction of the new Overleaf ZIP compile with identical extracted
+text, no unresolved references and no overfull boxes. The working draft has eight main-text pages
+and 50 pages including statements, references and appendices; contact sheets of all pages and
+key full-size placeholder pages were reviewed. No scientific experiment or TEST access was
+performed for this document task. Reproduce with the local `latexmk` command, package with
+`paper/v1_iclr22/package_overleaf.py`, and verify with `verify_placeholders.py --export-pdf <fresh
+ZIP build>/main.pdf`. Evidence, source hashes and the pending-result limitation are recorded in
+`results/phase1/compose_lipid_iclr22_placeholders_v1/result.json` and the manuscript result ledger.
+
+### 2026-09-24 — Bounded structural proposals and independent design selection
+
+The separately authorized four-family development run is complete on 256 original requests and
+five saved draws from one checkpoint, with no new model calls. Bounded head, role-motif and ring
+proposals add 582 unique candidates (572 source-exact) after 596 charged source checks. Original
+candidates remain available. The first 67 shards reproduce byte for byte after the aromatic-fragment
+boundary fix. Exact L1 stays 244/256 and all original absolute product/component unique, Shannon,
+Simpson, novel-observation and novel-identity floors pass independent verification.
+
+The saved baseline has 162 qualified-design passes; design selection from the original pool yields
+195, and selection from the augmented pool yields 208. Thus the 46-pass total change includes 33
+from reselecting existing candidates and 13 beyond that comparator; this is not a matched-cost
+causal repair effect. A3, aldehyde Ugi4, aryl reductive amination and ketone Ugi4 finish at
+57, 55, 58 and 38 passes out of 64 each. Ketone has 52 individually available passing requests, but
+only 38 jointly satisfy every preserved diversity/novelty floor. The optimum is solver-qualified;
+the finite candidate pool remains limiting.
+
+Justified alerts fall from two to zero, scoped head failures from six to zero and ring failures
+from 82 to 38. Context flags remain in 34 selections. In particular request304 acquires a cyclic
+heteroatom cumulene from head repair. The frozen rubric calls it context-required, so it passes
+the limited endpoint without establishing overall quality. The endpoint was not changed after
+outcomes. These are TRAIN-derived development results, not independent all-family realism or
+held-out paper evidence. No overall quality promotion is made.
+
+The role-motif input boundary now rejects negative, fractional, boolean and out-of-range atom
+classes before coercion. Thirteen focused checks pass and all 300 valid-input helper outputs
+(150 eligible ketone seeds at both caps) match the archived implementation. Fourteen ring checks
+and formatting/lint pass. Earlier source, protocol and outcome bytes remain preserved.
+Reproduction and pins: `results/phase1/compose_lipid_structure_repair_v1/generation_v2/handoff.json`,
+`evaluation/targeted/result.json`, `evaluation/targeted/floor_verification.json`, and
+`rings/role_boundary_v1/validation.json`.
+
+### 2026-09-25 — Research specification audit and measured 22-family development
+
+The user designated `paper/v1_iclr22/` as the research specification and requested parallel
+implementation and evidence generation without manuscript edits. The context-reviewed audit
+maps 15 evidence blocks, 36 displays, 1,451 pending table cells, 83 inline placeholders and eight
+result panels to experiments, populations, controls, metrics, input artifacts and admission gates.
+All final result admissions remain pending. Existing development measurements are not substituted
+for independently trained seeds or final held-out evaluations. The manuscript input hashes remain
+unchanged; no TEST molecular evaluation, biological optimization or prospective work was performed.
+
+On the existing 1,408-request development population, all 22 families meet the 90% exact-L1 point
+target, totaling 1,387 exact products. A new context-preserving selector on the same saved candidate
+pools raises the limited chemical/ring/scoped-head endpoint from 1,243 to 1,312 without new model
+calls or proposed molecules. Every original absolute diversity/novelty floor holds. Context-required
+requests fall from 55 to 41 and none acquires a new code category, but TRAIN-observed feature yield
+falls from 989 to 974. A3, AEMA, aldehyde Ugi4 and ketone Ugi4 remain below 90% on the limited endpoint
+(51, 53, 50 and 39 of 64). Fifteen missing-tree checks remain abstentions; their construction graphs
+have no compatible saved ordered tree, so they are not silently counted as passes or chemical
+failures. The head-survival design predicate is qualified only for aldehyde Ugi4; other families are
+outside that additional predicate's scope. No overall lipid-quality promotion is made.
+
+Actual flow-endpoint evaluation on 352 new TRAIN-derived trajectories gives 80 source-exact raw
+endpoints, 91 terminal-argmax products and 140 checked-D1 products. Retain the terminal prediction.
+A matched local continuation pilot then used 44 updates and 48 presentations per family per arm,
+restoring the same original model and AdamW states. On 176 paired generated requests, D1 exact
+counts were 73 for the original checkpoint, 71 for ordinary continuation and 59 for a 50% clean-time
+identity mixture; limited design counts were 61, 57 and 48. The identity mixture improved clean-input
+reconstruction but worsened generation. Neither continuation checkpoint is promoted. The complete
+pilot, including its discarded cost benchmark, used 160.102288 CPU seconds. Failed preflight and
+adapter attempts remain preserved with their outcomes and costs.
+
+For the separate earlier ketone candidate pool, an independently checked maximum matching and
+equal-sized vertex cover show that only nine distinct novel isocyanides can be assigned to the
+52 individually clean requests. The frozen novelty floor requires 23, proving the attained 38/64
+limited-design upper bound for that pool. This is a support limitation, not evidence that weakening
+novelty is justified. Its denominator is distinct from the fresh-panel 39/64 result above.
+
+The guarded product-disjoint CAL development reference contains 2,059 structures across all 22
+families. Original-source-tuple qualification completes with 1,821 exact, 146 failed and 92 unresolved;
+only one exact member is fully component-disjoint from TRAIN. All 91 PMID-bearing rows are among
+the unresolved namespace cases in this initial qualification, so the exact subset is not an
+independent empirical realism reference. A separate distribution-sensitivity experiment on the
+1,821 exact subset finds mixed effects of conservative selection: fingerprint precision decreases
+for A3 and aryl reductive amination and remains weak for ketone Ugi4. Neither a higher structural
+score nor a small reference-neighborhood score certifies realism. Subsequent namespace-reader
+experiments are separately versioned; these original denominators and result bytes remain frozen.
+
+Existing source-backed preparation steps bind 136 required branches in 134 generated products,
+against 3,723 branches across 1,387 exact products. No newly complete L1/L2/L3 dossier is admitted;
+population dossier coverage remains unassessed. A bounded four-terminal supplier check obtained
+cached observations but no qualifying fresh receipt (three direct 403 responses and one timeout,
+after preserved DNS failures). That access limitation is not evidence of chemical unavailability.
+
+Decision: retain the original checkpoint and scientific gates; prioritize matched-exposure training
+with actual-generation monitoring, A3 topology, joint aldehyde-Ugi4 head/ring integrity, qualified
+ketone component support and independent evaluation admission. Explicit warm-start and presentation-
+tape support passes 258 current training checks plus vendor verification and independent code review.
+Pre-change source bytes are archived, preserving old experiment pins. Remote execution, staging and
+monitoring qualification remain separate from these implementation checks; no paid run had been
+launched at this snapshot. The prepared comparison is a batch/optimizer/PCGrad regime comparison
+at equal per-family exposure, not an isolated batch-size effect or equal-compute comparison.
+
+Reproduction and input hashes: `results/phase1/compose_lipid_iclr22_research_v1/PROGRESS_V2.md`,
+`progress_v2.json`, `EVIDENCE_MATRIX_REVIEWED.md`, `EXPERIMENT_PLAN.md`,
+`quality/all22_context_preserving/verification.json`, `qualified_CAL_sensitivity/result.json`,
+`training_decoder/continuation/result.json` and `training_validation_v3/result.json`.
+
+### 2026-09-25 — CAL contract repair and approved matched continuation submission
+
+A separately frozen source-role namespace bridge resolves 16 of 92 initially unassessed CAL
+tuples exactly, rejects three under the unchanged source checks and leaves 73 unresolved. A
+second bounded reader correction admits an already explicit `reaction_steps_sites.reaction_events`
+field, rejecting conflicting, noninteger or out-of-bound declarations; all 22 targeted tuples
+then replay exactly. The versioned union is 1,859 exact, 149 nonexact and 51 unresolved of the
+original 2,059, including 12 fully component-disjoint exact products and 38 PMID-bearing rows.
+No individual-product experimental procedure or execution is newly admitted. The earlier 1,821
+reference and its distribution results remain unchanged. Forty unresolved cases require missing
+authenticated producer/program semantics; neither component counts nor arbitrary reaction-list
+length is substituted for event evidence. All original records, failures and missing-file hashes
+are retained under `routes/cal_namespace_bridge/` in the ICLR22 research directory.
+
+After clarifying that the completed model already received 402,336 presentations per family,
+the user explicitly approved the bounded continuation diagnostic adding 31,680 per family in
+each arm. Both arms start from the same original model and AdamW state and use a matched
+presentation tape: 220 updates at batch 3,168 versus 2,640 at batch 264. The fixed final checkpoint
+is primary. Intermediate paired generation uses 176 requests, final generation 352, with all
+families included. Two consecutive intermediate panels losing at least nine exact and nine
+limited-design successes relative to the same-request baseline trigger operational futility.
+This is a material-loss stopping rule, not a significance test or a held-out result. All 386
+diagnostic source indices are excluded from the added training, but remain TRAIN-derived probes.
+
+Initial function definitions were rejected before any training invocation because their idle
+scaledown setting was one second and the server minimum is two. Both stopped applications had
+zero tasks; code flow and preserved tool traces show that `execute.spawn` was never reached.
+Image preparation is recorded separately from zero training updates. The corrected versioned
+launcher uses two seconds and passes 27 local checks; all scientific inputs, numerical settings,
+runtime limits and monitoring policy are unchanged. This correction completes the approved
+pre-execution submission; it does not retry an executed paid training job. The original failed
+launch artifacts and watcher CPU charges remain preserved.
+
+The corrected detached calls were accepted, with IDs persisted before monitoring:
+small `ap-3qRE5j9LsjJmxAPyTPHeZ9` / `fc-01M3BDVTXMS02HS6PWAHPM0CAB`, and large
+`ap-cxEBqRtVjwoPVnHzgJQfvc` / `fc-01M3BDW1AJABEAKMPXZWJYH9XK`. Function limits remain
+1,800 seconds on one H100 and 600 seconds on eight H100s, with zero retries. These total
+110 GPU-minutes of function execution; platform image/startup/shutdown costs are separate.
+The asynchronous watcher retains its aggregate 450 CPU-second limit and does not own remote
+job lifetime. Cancellation acceptance remains distinct from observed termination. No outcome
+or checkpoint promotion is claimed at submission. Commands, configuration/source/input hashes,
+runtime receipts and monitoring decisions are in
+`results/phase1/compose_lipid_iclr22_research_v1/training_decoder/next_experiment/v3/` and
+`quality/training_comparison_review/execution/`.
+
+### 2026-09-25 — Continuation staging failure; no training comparison measured
+
+The accepted v3 large-arm call failed in `training_files`, before `execute_child`, because
+the staging code copied the tensor manifest and shards but omitted the manifest-pinned
+`diagnostics/compose-full-tensors-0838c55c3871e514/cache-implementation.py`. The small-arm call
+was operationally canceled. Read-only call graphs subsequently confirmed `FAILURE` and
+`TERMINATED`, respectively. Both have function-started receipts but no staging-complete receipt,
+training log, checkpoint or final result. No optimizer updates or generation panels completed;
+this supplies no scientific evidence favoring either batch/update regime. Billing is not inferred
+from zero training updates. The watcher consumed 4.494483 CPU seconds; its aggregate ledger is
+preserved and will not reset for a corrected launch.
+
+Decision: preserve the failed requests, launched source bytes and all remote receipts; make no
+automatic paid retry. Complete a versioned staging correction against authentic cached inputs,
+run unmodified `training_files` for both configurations plus the actual `PreparedTensorCache`
+constructor and representative gathers, and obtain independent review before requesting fresh
+execution authorization under AGENTS.md. Earlier mocked transport tests and filename inventory
+checks were insufficient to qualify this missing dependency. Training semantics, scientific gates,
+populations and the planned continuation exposure are unchanged. Failure evidence and runnable
+reporting are in `results/phase1/compose_lipid_iclr22_research_v1/training_staging_failure.json`
+and `training_decoder/next_experiment/failed_staging_v3/` beneath that research directory.
+
+Separately, visual primary-source adjudication links all 17 targeted Li CAL constitutions to exact
+component pairs in the reported 720-member library. All pass source-component, unique reactive-site,
+forward-balance and inverse checks. This admits reported library execution, not individual final-
+product characterization: none of the 17 acquires an individual yield, purity, spectrum or delivery
+claim. Six focused identity tests pass. The original CAL and distribution reference populations
+remain frozen; no model, protected TEST graph, paid execution or manuscript change was needed.
+Complete source pages, visual transcriptions, component coordinates, pins and limitations are in
+`routes/cal_namespace_bridge/li_source_linkage/` within the research directory.
+
+### 2026-09-25 — Authentic continuation staging qualification and corrected retry package
+
+The corrected v4 transport now stages the complete authenticated execution union: 774 files,
+8,583,760,311 bytes, with 772 consumed by each arm's unchanged production admission function.
+All 292 authentic prepared shards loaded through `PreparedTensorCache`, covering 1,192,065
+records across 22 families. A bounded gather of 587 entries covers every shard boundary,
+maximal observed 250-atom and 12-closure records, and duplicate preservation. Declared model
+support remains 254 atoms and 12 closures; no molecular-size, source or integrity gate changed.
+The final qualification uses the unmodified resolvers and loaders, without live-data fallback.
+
+The actual corrected remote staging helper was then rehearsed for both arms over authentic local
+image/volume mirrors. Both exact inventories passed. Independent review rehashed the full union
+in the qualified tree and both separate destination trees. The earlier four-worker retrieval was
+stopped and preserved as an incomplete transport attempt; a separately pinned sixteen-worker
+retrieval reused only authenticated completed files. No incomplete attempt was promoted to a
+qualification result. Transfer accounting and the two-arm rehearsal remain separate from GPU
+runtime or numerical-equivalence evidence.
+
+Twenty-one focused transport, submission and initialization-guard checks pass, with Black/Ruff.
+The scientific configuration, original model/AdamW initialization, family presentation tapes,
+seeds, losses, monitoring rule and resource limits remain unchanged. The prepared small request
+is `b1438d02d0510f924dfc8d42337c568555cb5058e076d9bccb8b9f033c0959d2`; the large request is
+`69ced70f36765eedd2a4a885441c7a4a59ae0c91e2a9bedbc0557261984e52fd`. Neither is submitted.
+
+Decision: obtain fresh user execution authorization for this concrete corrected package before
+another paid attempt. Submit the existing one-H100 small arm first; authenticate its durable
+staging receipt and planned step-zero checkpoint, including exact model and AdamW restoration,
+before submitting the eight-H100 arm. The startup check reserves and charges its CPU under the
+existing monitoring lock; the watcher then takes ownership of that lock and the large submit
+reuses the authenticated receipt. The aggregate 450 CPU-second ledger retains its earlier
+4.494483-second charge. Failed read-only collections are versioned and do not retry paid jobs.
+The unchanged function limits are 1,800 seconds on one H100 and 600 seconds on eight H100s:
+110 additional GPU-minutes of function execution if both limits are consumed. Prior failed
+allocation costs and platform startup/image/shutdown overhead remain separate; no dollar cap
+or measured GPU speed is claimed. No corrected model call, optimizer update or paid submission
+has occurred. Reproduction, pins and final review are under
+`training_decoder/next_experiment/v4/` and `quality/training_comparison_review/staging_review/`
+within `results/phase1/compose_lipid_iclr22_research_v1/`.
+
+A separate Zhou primary-source audit links all 12 targeted CAL constitutions to the explicitly
+reported executed library; six have matching library conversion-series coordinates. No individual
+purified-product characterization packet is admitted for these 12. Full declared reactive-site
+occupancy and source-tuple replay pass, as do 12 focused identity/occupancy tests. Source feed and
+concentration discrepancies remain recorded. Earlier CAL cohorts, Li results and manuscript bytes
+are unchanged; neither this evidence nor the Li linkage establishes independent model performance,
+complete L2/L3 dossiers or delivery quality. See `routes/cal_namespace_bridge/zhou_source_linkage/`.
+
+Final independent v4 review closed with no blocking findings. The review receipt is
+`quality/training_comparison_review/staging_review/review_closure.json` (SHA256
+`2bade1d4a5345e274861c02e1eb350b7b0fafa8a045d673112b7dfcf4f2c632b`), binding final
+`training_decoder/next_experiment/v4/launch_readiness.json` (SHA256
+`c46deeef398b69573731ac5f62a0ca06e9608cd31577e5daa3c482207073c001`). This closes local
+staging/launcher qualification only; fresh paid execution authorization remains outstanding.
+
+### 2026-09-25 — User authorized the corrected v4 continuation attempt
+
+The user explicitly replied "approve" after the corrected package, prior staging failure and
+additional compute allowance were disclosed. The new `v4/authorization.json` binds both exact
+prepared requests and the previous paid-failure receipt. It authorizes one corrected attempt
+per arm, adding 31,680 presentations per family per arm, with the unchanged 110 aggregate
+GPU-minute function-execution envelope plus platform overhead. No automatic paid retry is
+authorized. Execution proceeds small arm first, then its authenticated planned step-zero
+checkpoint, then the cumulative-budget watcher and large arm. Submission, initialization,
+intermediate evaluation and final results remain separate evidence stages; approval or
+successful submission alone supplies no new model-performance evidence.
+
+The small call was accepted detached as `ap-c3hm3tI3UpTF0VYbgqtwmH` /
+`fc-01M3BGF84J3JNPR0VTTG5FQ6BX`. Its actual staged input inventory passed and its durable
+step-zero checkpoint restored the original model and AdamW state exactly with zero branch
+updates/presentations. Recorded runtime fields match the original fit/serial/restart environment
+except the declared eight-to-one H100 count. This is initialization/runtime identity evidence,
+not a new serial-versus-parallel update-equivalence test. After startup qualification and watcher
+start, the large call was accepted detached as `ap-5E5m8aXZCGL7QU7XlwKgfy` /
+`fc-01M3BGR9HZS3CRXB5QDXS7B46Q` at 2026-09-25T05:31:32.834952+00:00.
+
+The first local watcher could not reach Modal under the default network sandbox. Its failure
+and conservative CPU accounting were preserved, then the same watcher resumed with authorized
+network access. Neither paid training call was restarted. Its first successful observation found
+the small arm's 528-update checkpoint; no numerical performance claim is made before the complete
+paired evaluation panel is validated. Receipts are in `v4/{small,large,startup,diagnostics}/` and
+`quality/training_comparison_review/execution/monitor_restart_01/` within the research directory.
+
+### 2026-09-25 — Continuation intermediate readouts and monitoring-budget failure
+
+The v4 large arm completed all 220 updates and 696,960 presentations, exactly 31,680 per family.
+Seven intermediate panels completed: large steps 44/88/132 and small 528/1056/1584/2112.
+Their D1 exact counts are respectively 66/71/64 and 64/67/63/68 of 176, versus 73/176 at
+initialization; limited-design counts are 55/60/54 and 56/57/57/60, versus 61/176. None satisfies
+the frozen dual-metric consecutive-panel futility rule, and none establishes improvement.
+These are matched TRAIN-derived diagnostic requests, not held-out or independent-seed results.
+
+The original watcher exhausted its 450 CPU-second allowance while evaluating large step 176.
+Eighteen of 22 shards were saved but no complete evaluation was admitted. Its child exceeded a
+47-second CPU reservation; the parent rejected the overrun before durably recording exact child
+CPU. The retained ledger charges 448.611804 seconds including that full reservation. Exact
+physical CPU and final overrun are therefore unknown; the nominal cap is not reported as an exact
+measured bound. Both fixed-final readouts remain unassessed at this closeout. Local watcher
+failure does not imply remote training failure, and no paid job was retried.
+
+The immutable closeout is `quality/training_comparison_review/watcher_closeout_v4/termination.json`
+(SHA256 `23f96318a9f1a018eb1726a9fd5f60146ca7f4774f93c050c13289011ae5dff8`). Saved-ledger
+aggregation in `routes/continuation_outcome_review/snapshots/watcher_closeout_v4/` preserves seven
+complete, one incomplete and two missing panels, all paired family/readout counts and original
+denominators. Its result SHA256 is `7154a71e223bacf1f48cc1f0bcc3ee10f17718d631f617f7c7095a4f7a3d1d31`.
+Decision: preserve the original budget failure and missingness; prepare a separately bounded,
+explicitly authorized fixed-final-only CPU readout. No checkpoint promotion, intermediate-panel
+completion, budget reset, new GPU training, protected TEST scoring or manuscript edit follows.
+
+Read-only final collection subsequently confirmed both remote functions succeeded: large completed
+at 05:37:43.705828 UTC and small at 05:42:49.166907 UTC. Each processed all 696,960 additional
+presentations (31,680 per family); small completed all 2,640 updates. Function wall times including
+staging were 306.4401 seconds on eight H100s and 964.8972 seconds on one H100, respectively.
+These exclude platform startup/idle/shutdown and earlier v3 costs; they are not billing totals.
+Both checkpoint audits passed exact tape/lineage/optimizer-step checks and finite model/AdamW
+tensors. Saved final hashes are `a113d38b7465dd09a26eaed5a61889683134a486573b42a96f93c55d53ea2088`
+(large) and `af53ab952261a1a7093251665e3381fa4976aeab0b3e023f7cea65b068725ee9` (small).
+Collection and saved-state inspection made no new forward calls and do not resolve the missing
+fixed-final quality readouts.
+
+The separately prepared final-only readout passed 21 synthetic contract checks and independent
+review. Its frozen protocol SHA256 is `55afe6fa04286c082885878bb43508f6090aaf513f8de28902f6a2b08f835c5b`;
+review SHA256 is `430a940eabb1828e864f5dda8f22e49827a4de37187869844fd256590fd4a363`.
+The concrete proposal allows 300 additional aggregate local CPU seconds, at most one evaluation
+attempt per arm, only the original large-220 and small-2640 final checkpoints, and the unchanged
+352 requests, readouts, source checks and seeds. Original monitor artifacts and accounting
+uncertainty remain separate. There are no new GPU/training calls. Explicit additional execution
+authorization was requested because the frozen monitor policy disallows automatic extensions;
+preparation and review do not authorize or constitute execution.
+
+### 2026-09-25 — Supplemental fixed-final CPU evaluation authorized
+
+The user replied "yes" to the concrete request for 300 additional local CPU seconds. The new
+`routes/continuation_final_completion_v1/authorization.json` (SHA256
+`2f1e191ac7c4aeb788919d9808eff995520352752c95ae8175a7aba3d5328c89`) binds the exact reviewed
+protocol and both authenticated local final checkpoints. The reviewed wrapper was started once.
+Only the fixed large-220 and small-2640 panels are permitted, with the unchanged 352 requests,
+source/design checks and three readouts. No new training, GPU use or remote call is required;
+the original monitoring failure and CPU accounting remain preserved separately.
+
+### 2026-09-25 — Fixed-final continuation comparison completed; no model promotion
+
+Both authorized supplemental panels completed all 352 requests (16 per family, 44 immutable
+shards per arm). Independent review verified every request identity, source/checkpoint binding,
+saved metric conjunction and summary against the complete shards. Supplemental charged CPU was
+189.991285 seconds of the 300-second allowance, with no pending reservation. No new GPU training,
+remote job or protected TEST evaluation ran. The original monitoring ledger, partial panel and
+missingness remain unchanged; the combined accounting charge of 638.603089 seconds is not an
+exact physical total because the original final-child overrun was not persisted.
+
+The prespecified D1 exact/limited-design counts are baseline 140/111, large 135/113 and small
+122/107, all out of 352. Relative to baseline, large has 10 exact gains/15 losses and 17 design
+gains/15 losses; small has 19/37 and 31/35. Raw-flow exact/design counts are 80/61 → 83/72 for
+large and 83/77 for small; terminal-argmax counts are 91/74 → 92/80 and 97/91. Thus the negative
+primary result does not imply every model readout worsened. Large's two extra limited-design
+passes do not establish broader quality: design passes with context-required motifs increase
+from one to seven, and overall context-required flags increase from 25 to 36. Small has two
+justified chemical alerts versus zero at baseline. Checks and metrics remain unchanged.
+
+The main small-arm family regression is ketone-isocyanide-amide: D1 exact/design 14/16 → 2/16,
+also visible in raw exact (6 → 2) and terminal-argmax exact (7 → 2). It therefore cannot be blamed
+solely on D1. Aldehyde Ugi3 limited-design passes improve 6/16 → 13/16. Family sample sizes are
+diagnostic; no population significance, pure update-frequency causality or independent-seed
+claim follows. D1 and terminal argmax are different readouts of final logits; the diagnostic
+does not include production component construction or post-selection.
+
+Decision: retain the original checkpoint as the reference, preserve both continuation checkpoints
+and negative results, and do not launch a larger run on the assumption that smaller batches fix
+the system. Prioritize the ketone-isocyanide-amide regression and readout interaction in saved
+failure traces before designing a further controlled intervention. No overall lipid-quality,
+held-out, L2/L3 or manuscript promotion is made.
+
+Within `results/phase1/compose_lipid_iclr22_research_v1/`, execution is recorded in
+`routes/continuation_final_completion_v1/execution/result.json` (SHA256
+`8fdc28acab7711b2f3851244ff8877b71b34466bd6c6bba344a570fe8c162493`), paired aggregation in
+`routes/continuation_final_completion_v1/aggregation/fixed_final_v1/result.json` (SHA256
+`af48db680639bbc6659bfd65a8fdd196701e7949ab5567e088c76a7af8fe75f1`), and independent audit in
+`quality/training_comparison_review/supplement_review_v1/outcomes.json` (SHA256
+`5044809c9f84e64c447e1a72a44ae1e40c9bbfffc1d81ebd846508f1a6a0dbfe`). Reproduction commands,
+seeds, exact input hashes and full per-family denominators remain beside those artifacts.
+
+Saved-trace follow-up resolves the ketone-isocyanide-amide loss more precisely. All 16 small
+terminal-argmax products are valid graphs, but only two pass unchanged source-exact replay.
+The 12 lost baseline D1 successes comprise six formerly raw-exact outcomes and six formerly
+D1-only successes. D1 preserves both remaining small raw-exact outputs. Nine refusals explicitly
+report `reaction_core_saturation_unmet`; five original refusal reasons are obscured when the
+evaluator parses a failed decoder's zero-filled placeholder and replaces the reason with an
+invalid-closure exception. Those placeholder buffers are not admitted as chemical structures.
+
+Source review identifies a testable hypothesis: the greedy decoder enforces upper core valence
+while assigning parents, then checks exact saturation at the end, without reserving remaining
+attachment opportunities in this plain path. This does not prove a feasible alternative exists.
+The next proposed diagnostic would preserve refusal reasons, trace residual core demand, and
+compare bounded feasibility lookahead on identical logits without relaxing any source, valence,
+origin or size gate. It has not been executed. Full request traces, all-family paired readouts,
+three focused checks and pinned source evidence are in
+`training_decoder/next_experiment/v4/final_readout_analysis/fixed_final_v1/` within the research
+directory; receipt SHA256 is `43fed5c988b864f9aef254a068177c2fdd40f145d67443e2e64dfc5823b555aa`.
+The follow-up made zero model, remote or new molecular-evaluation calls.
+
+### 2026-09-25 — Original-checkpoint evidence completion: provenance, quality controls, routing and comparison scope
+
+The user accepted the next work on weak-family quality, documentary L2/L3 and rigorous comparisons.
+Parallel work retained the original checkpoint, selected development molecules, frozen source
+contracts and manuscript. No additional GPU training or protected TEST molecular scoring ran.
+
+The 15 previously missing ring assessments now have exact saved construction provenance. Version1
+replayed every final graph but admitted none because copied parent directions could be incompatible
+with the attachment anchor; that negative result remains preserved. Version2 preserves the actual
+inherited tree/closure edge membership, requires a connected N−1 tree, orients that fixed tree uniquely
+from the declared root, and reversibly reindexes within unchanged precursor-origin blocks. No
+spanning-tree choice, cycle deletion, new proposal or molecule change is allowed. Forty-four fixed
+controls, including43 nontrivial permutations, preserve semantic and assessment results. A separate
+certificate verifier rejects tree/closure reassignment even for the same molecular graph.
+
+Twelve formerly unresolved products pass the unchanged predicates; three maleate products fail with
+3-,7- and4-member head cycles where six were requested. The same1,408 selected products now have
+1,324 limited-design passes, up from1,312, with1,387 exact L1 unchanged. Ring statuses are1,339pass,
+69fail and zero unknown. All identities, diversity/novelty floors,974 TRAIN-feature matches and41
+context-required flags are unchanged. AEMA is63/64 and maleate60/64. Nineteen families exceed90%
+on the limited conjunction; this remains a single-checkpoint TRAIN-derived development result,
+not broad lipid realism or independent held-out performance. Additional head-survival qualification
+still applies only to aldehyde Ugi4.
+
+The complete saved weak-family census identifies A3 at51/64, aldehyde Ugi4 at50/64 and ketone Ugi4
+at39/64. A3 has12 ring failures and3 L1 failures with two overlapping. All14 aldehyde-Ugi4 failures
+include amine-ring mismatch, with five also failing head survival. All25 ketone-Ugi4 failures include
+ring mismatch:17 isocyanide and11 coupled-ketone failures, with three overlapping; two also fail L1.
+Reaching58/64 would need7,8 and19 gains respectively. Those counts identify targets, not proven
+feasible repairs under diversity/novelty floors. The older38/64 ketone finite-pool bound remains
+restricted to its original cohort. Four, one and six current design passes in these three families
+respectively retain context flags; passing the limited conjunction is not sufficient quality evidence.
+
+All29 prior-admitted source-library controls pass the unchanged chemical-alert screen:17 Li
+aza-Michael acrylates and12 Zhou AEMA products, with no context flags. The protocol fixed the full
+census before assessment. All are guarded CAL products,10 are fully component-disjoint, and study
+independence remains unqualified. None is admitted as individually purified/characterized. Twenty
+families have no admitted control in this study. This is source-control concordance, not a measured
+false-positive rate, requested-layout/head validation or empirical realism. All29 have a stable-order,
+unfiltered gallery; a separate renderer corrected clipping without changing structures or original
+image receipts. Independent metadata/arithmetic review passed.
+
+Request222's documentary basket preserves three exact component branches and four L2 steps. Fresh
+primary vendor evidence admits exactly one of four required terminal leaves: decanoic acid, A Chemtek
+MSK1708,100mg,98+%, US item stock, with a30-day evidence expiry. The other three fresh distributor
+listings lack page purity and further qualified form/region fields. Cached manufacturer specifications
+are kept separate and do not satisfy the frozen same-page closure requirement. Zero of three
+component branches and zero of one attempted product closes; population closure remains unassessed.
+All20 direct HTTP attempts and access failures remain recorded. Review added an explicit missing-SKU
+admission rejection and tests; pre-review code/results remain hash-mapped in an archive. No
+procurement, supplier contact, delivered-stock or route-scale sufficiency claim was made.
+
+The comparison audit distinguishes conditional label/semantic ablations from a reaction-blind shared
+null. All218 typed core IDs identify their families; retained fixed graphs, masks, layouts, role/repeat
+coordinates, morphology and routing disclose reaction context. The legacy null also alters clean
+auxiliary targets. A new results-only forward-coordinate helper preserves clean targets and sampler
+masks. The historical cyclic code applies the same bijection in training and evaluation: it is a
+consistent-relabeling control, not an incongruent-label test. No historical result was rewritten.
+Thirty-program mapping contracts and nine independent-seed comparison drafts pass12 checks. True
+shared-null production runtime, final policy and measured cost qualification remain incomplete;
+the drafts do not constitute trained controls or introduce a new user-approval requirement.
+
+Metadata-only census covers all1,192,065 TRAIN tuples and selected19,200CAL/19,200TEST assignments.
+The selected TEST has1,827 records with every component ID absent from TRAIN, but these are not
+source-qualified performance denominators. Guarded CAL has only15 fully component-disjoint products.
+Incomplete current target-to-study metadata prevents a study-disjoint claim. The selected benchmark
+has no reported molecule above96 heavy atoms, despite44,312 such TRAIN graphs. A separate full-index
+search finds9,594 protected unique constitutions across10 families,97–232 atoms, with zero current
+TRAIN target-ID or constitutional-ID overlap. Both frozen split projections and their disagreements
+are preserved. All9,594 remain unadmitted, protected TEST: no molecular graphs were loaded or scored.
+
+Decision: retain the original checkpoint and all negative results; prioritize the three concrete
+ring/head/component-support failure sets, expand independent quality evidence, close whole route
+baskets under the unchanged policy, and qualify final controls/populations before independent runs.
+No result is promoted into the manuscript. The current implementation/admission checks total50
+focused passes; no historical full-suite rerun was required. Version4 retains the complete15-block,
+36-display,1,451-pending-cell manuscript evidence map.
+
+All new artifacts are under
+`results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v1/`. Aggregate result SHA256 is
+`4490c37159ceb40360508f0a006ff69416bc5a606b1edd28462855951f4207c5`; integration verification is
+`05fad9f5647373da2bd0ae59127fb7f107a5b94d11053e3bbb154795c998b056`. Runnable commands,
+protocols, input hashes, seeds or census order, complete denominators, costs and scope limits are
+recorded beside each result; `EVIDENCE_STATUS_V4.md` and `evidence_matrix_v4.json` are the new
+execution index. Earlier indices and manuscript files remain unchanged.
+
+Subsequent independent read-only review of the partial dossier verified105 unique pins and all
+five original-to-archive mappings, the exact assembly/role/context bindings, unchanged four-step
+L2 evidence and all20 access receipts. No blocking findings were found. Exactly the acid leaf
+closes; the three unresolved leaves and zero complete components/products are retained. Review
+receipt: `evidence_completion_v1/quality/reviews/routes_review.json` within the research directory,
+SHA256 `57d5fcfc09e2186dd5381db40e5763691e4a2c161e3c41c2c2e9d4dceabfe616`. Final read-only
+integration checks confirmed current result pins and all15 manuscript-input hashes unchanged.
+
+## 2026-09-25 — First current complete development L1/L2/L3 dossier
+
+The user prioritized closing the existing request222 dossier. Parallel supplier-evidence work
+and an independent source/integration review now close all four terminal leaves and all three
+component branches. The original aldehyde-Ugi3 product, exact assembly context and four exact
+source-supported, forward-verified L2 steps are unchanged. The previous one-leaf result remains
+frozen. This is one selected development dossier, not a population closure estimate or a final
+held-out result.
+
+The original current A Chemtek decanoic-acid record is reused at its exact hash. Fresh records
+admit Ambeed A211399 head (5g,97%), Ambeed A561627 neutral hexadecylamine (100g,98%), and CP Lab
+Safety ALA-H103708-100g neutral 1,6-hexanediol (100g, explicit title minimum98%). The two Ambeed
+observations use the public product page's own normal anonymous price/stock requests, with exact
+product, SKU, package, variant and US-stock display bindings. Masked numeric quantities are not
+interpreted as stock counts. The diol's literal description anomaly `±98%` is preserved separately
+from the explicit minimum in its matching title. Its five-day lead time and linked commercial-US
+shipping policy support documentary availability; recipient eligibility and delivery remain
+unassessed. Every unsuccessful or incomplete access remains recorded under the original or
+prospectively amended bounded acquisition protocols.
+
+The frozen admission predicates were not relaxed. The integration requalifies every record and
+binds it only to the already-supported exact role/constitution/product-context leaf. It preserves
+all old expired evidence and all L2 tree edges. Each complete branch uses the intersection of every
+required leaf interval. Review found and resolved two compatibility defects before assessment:
+the head requires the separately pinned existing purity policy, and a conservatively shorter
+expiry must be retained rather than extended to the maximum policy duration. New regressions
+cover missing/wrong policy pins and exclusive expiry boundaries. A test-fixture schema error is
+preserved in a separate receipt; final affected checks total49 passes, with Black/Ruff clear.
+
+At2026-09-25T06:47:22.700857Z the existing recursive assessor and all-branch aggregator report
+4/4current leaves,3/3complete branches and1/1complete dossier. The complete recursive trees,
+intermediate targets, step evidence and traces are saved. The common validity interval ends at
+2026-10-25T06:03:07.561121Z; closure cannot be carried beyond that expiry without new qualified
+evidence. Independent post-run review verified all assessment hashes, original assembly/step/leaf
+equality, historical evidence retention and interval intersections. No synthesis-success
+probability, route-scale quantity sufficiency, delivered stock or biological claim is inferred.
+
+A separate metadata-only audit retains the frozen routing development cohort:1,408requests,
+1,387exact-L1 request baskets and1,386distinct scoped baskets. Request222 is the only one with
+existing pointers for every branch. The other exact requests lack1,2,3or4path pointers in counts
+142,731,366and147 respectively. Across3,723required role branches,3,290lack an exact preparation
+or terminal pointer in this bounded library. This is missing evidence, not synthetic impossibility.
+The fresh C16-amine record could support separate current qualification of16additional already-
+mapped isocyanide contexts; no extra basket is admitted by this census. Its cohort is not silently
+replaced by later quality selections or retraining outputs.
+
+Next documentary priorities are the exact missing oxoester path for request204, the distinct head
+and alternate-route leaves for request201, and the two unassessed leaves of the shared AEMA
+preparation affecting63component branches. The complete142-request one-missing-path worklist
+is saved with exact identities and original ranking. Generic reaction precedent, structural
+similarity or supplier identity recurrence alone cannot fill these gaps. The nontrivial dossier
+set and remaining guidance gates stay open; no production synthesis-guidance run is launched.
+
+Artifacts are under
+`results/phase1/compose_lipid_iclr22_research_v1/evidence_completion_v2/routes/`.
+The complete assessment SHA256 is
+`cf6b655ed0480046ab77c87d9122278468ad7b88aada4a6b75559cfd2e07fb9d`;
+the integrated closeout is
+`6f5f647d94c9f54f525e7744bfcdacd2267ec3d06e4e353af68057432ac0d301`.
+Commands, source hashes, seeds, complete denominators and preserved failures accompany the
+results. Evidence matrixv5 updates only R10's development evidence and remaining work. All
+manuscript hashes remain unchanged; no final result is promoted. No training, protected TEST
+scoring, supplier contact, procurement or wet-lab work occurred.
+
+## 2026-09-25 — Expand exact route evidence across the full 22-family development panel
+
+The user authorized fixing and broadening L2/L3 coverage. Parallel work refreshed independently
+qualified terminal identities, recovered missing exact component preparations from primary sources,
+and applied them through the existing recursive assessor to every original development request.
+No manuscript, training, protected TEST, production guidance, supplier contact, purchase or wet-lab
+action was included.
+
+The original panel remains 1,408 requests (64 per family), 1,387 exact-L1 request baskets,
+3,723 required role branches and 4,510 incorporated component occurrences. The first four-terminal
+full-panel refresh closed 90 branches and only request 222. Independent source review then admitted
+13 individually drawn and characterized iPhos P4–P16 preparations and N-decylacrylamide. These 14
+finite exact instances match 46 original branches. The implementation verifies complete reactant
+constitutions, exact source-derived atom edits, one unique product, elemental/hydrogen/formal-charge
+balance and atom-order invariance. No general reaction SMARTS, substrate extrapolation or vendor
+registry modification was introduced. Four other named acrylamide series members remain unadmitted
+without individual source-structure inspection. SI NMR conversion is not relabeled isolated yield;
+the iPhos main-text/SI discrepancy is retained.
+
+Twelve additional exact terminal materials pass the unchanged US item/form/package/purity/current
+availability policy, producing a 16-constitution terminal manifest including the four prior records.
+New role usages are independently rebound to the saved exact L1 tuple, quantity, stages and full
+product context. Existing L2 steps and historical evidence are preserved. Every required terminal
+interval must intersect at assessment; no partial branch gets a complete receipt. MDEA, acryloyl
+chloride, octanethiol and DMAPA remain unknown after recorded source failures or incomplete current
+stock evidence. Search caches, inquiry-only listings and access errors are not closure evidence.
+
+The combined 15-terminal pass closes 217 branches and two products, requests 222/889. A separately
+frozen one-target 1-decanol follow-on uses four public HTTP requests, passes its checks and adds nine
+branch closures and request 888. The final complete census is **226/3,723 branches** (172 direct
+terminals, 54 exact-L2 routes) across 213 products, and **3/1,408 complete dossiers**: Ugi request 222
+and iPhos requests 888/889. There are 182 qualified L2 contexts overall, distinct from the 54 that
+currently close all leaves. Every family and all 21 nonexact-L1 failures remain included. Twenty
+families have zero complete dossiers; broad closure remains unmet. Missing knowledge is not a claim
+of synthetic impossibility. No inference about lipid quality or biological efficacy follows.
+
+The source and integration boundaries have 81 passing affected checks. Independent saved-body
+verification and a separate agent review check all requests, retained steps/evidence, exact source
+and terminal bindings, and interval intersections. Initial fixture, path-resolution and metadata
+schema failures are preserved. No final result is admitted by evidence matrix v6, which changes only
+R10 development status. All 15 manuscript input hashes remain unchanged.
+
+Artifacts and runnable commands are under
+`results/phase1/compose_lipid_iclr22_research_v1/route_expansion_v1/`.
+Final full-panel result SHA256:
+`4bfbe2bc45aac9d8c00b572b5d689f9ca9382aa0984985fa5acfb63d8f39d676`.
+Independent final review SHA256:
+`d97c5c6c01ef2d626f4b211a35591824f8040bb39ced2f94965bb7d921ae98d1`.
+Integrated closeout SHA256:
+`81ab91be41c135a9bf73640c2dea0ebe29370ea0e3bc04d6b2b1cbc07d986092`.
+The original 142-request worklist, earlier single-case result and every intermediate full-panel
+assessment remain immutable. Request 204's exact oxoester and request 201's distinct head still
+lack admitted preparation evidence; source-library coverage remains the principal barrier.
+
+## 2026-09-25 — Reassess routes on the latest quality-selected development molecules
+
+A separate audit found that the latest saved quality selection changes 142 of the 1,408 product
+identities relative to the original routing cohort; 1,266 are unchanged. Original route receipts
+therefore cannot be transferred wholesale. In particular, request 889 now has an unsaturated
+amine head, while its earlier complete dossier used saturated pentadecylamine. The current head
+has no admitted terminal or preparation evidence. This is an evidence gap, not a judgment that
+the new molecule is chemically implausible. The earlier three-dossier result remains preserved
+and explicitly labeled as a different selection.
+
+The new assessment rebuilds exact assembly and component contexts from all saved current choices.
+It retains all 22 families, 1,408 requests, 1,387 exact L1 baskets, 21 L1 failures, 3,723 required
+role branches and 4,510 incorporated component occurrences. Exactly 64 bounded Passerini forward
+replays recover full product witness fields missing from the cached checks; the unchanged
+verifier is used. There are no new model calls, network acquisitions, training or protected TEST
+evaluations. Preparation takes 3.889284 CPU seconds and assessment 2.047651 CPU seconds.
+
+The current cohort closes **227/3,723 branches**: 174 direct terminals and 53 prepared components.
+There are 181 context-qualified L2 preparations overall (72 existing library, 63 AEMA and 46 finite
+source-instance contexts); qualification alone does not close missing terminal leaves. A total of
+215 products have at least one complete branch, but only **2/1,408 complete dossiers** close:
+requests 222 (Ugi 3CR) and 888 (iPhos). Twenty families still have no complete dossier. Of the 3,496
+incomplete branches, 3,263 lack an admitted exact preparation or current direct terminal, 128 have
+an exact preparation but missing current leaves, and 105 have historical direct-terminal pointers
+requiring current evidence. Broad L2/L3 coverage remains unmet.
+
+Independent review authenticates 393 pinned inputs, every selected product and saved L1 status,
+all 3,723 branch bodies, exact context and terminal bindings, source steps and validity intervals.
+The saturated supplier record is correctly excluded from request 889's unsaturated head. The
+strict residual worklist identifies acryloyl chloride as the remaining single terminal that could
+close two already prepared baskets (135 and 595); another 72 one-identity cases require additional
+direct-terminal or preparation discovery. No acquisition or closure is inferred from that ranking.
+
+Artifacts and runnable commands are under
+`results/phase1/compose_lipid_iclr22_research_v1/route_expansion_current_quality_v1/`.
+Current result SHA256:
+`48af6432e8bb9dee54cd0786dbf7e733436659c40d2943a22ac9a17abb6c53cd`.
+Independent review SHA256:
+`97a18633d93f7006d3df2f890dff4161bb609e2faa55c8705e5fbeca2eaeb618`.
+Integrated closeout SHA256:
+`25794cb23e74e1f982b6eb561fbe021ddd3aeb26bfe1f8cd118b333e216ab907`.
+Evidence matrix v7 updates only R10 development status, preserving all final-result placeholders.
+All 15 manuscript input hashes remain unchanged. This is an adaptive TRAIN-derived diagnostic,
+not held-out evidence or an admission of the production synthesis-guidance gate.
+
+## 2026-09-25 — Activate the broad 22-family L2/L3 goal and test the selection bottleneck
+
+The user explicitly instructed: "set that as a goal and get it done." The active goal is broad,
+defensible L2/L3 coverage on the current quality-selected molecules. Work is split across exact
+source-library integration, primary chemistry recovery and current terminal evidence. All existing
+admission rules, full-cohort denominators, manuscript restrictions and guidance gates remain in force.
+
+A frozen metadata-only diagnostic tests whether selection within the saved D1 candidate pool could
+resolve the deficit without new route knowledge. Across 1,408 requests there are 13,526 saved
+candidate occurrences, including 7,196 exact-L1 occurrences; all 1,387 requests with an exact
+candidate remain represented. Unique component extraction succeeds for every exact candidate.
+An optimistic constitution-only inventory screen ignores roles, context, quality/diversity limits
+and interval intersections, so it is not a source-admission result. With the current supported
+inventory, two selected products match and at most four requests have any matching candidate.
+Including documented exact preparations and historical direct-terminal pointers increases these
+figures to four selected products and ten requests with any matching candidate. Thus selector
+changes alone cannot establish broad closure under this finite evidence inventory.
+
+The diagnostic consumes 1.192079 CPU seconds, makes no model/network calls, changes no selections,
+and creates no dossier receipts. Its frozen protocol, complete request/ordinal ledger, input hashes
+and producer are under
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/selection_ceiling_*`.
+The active execution plan is `broad_routes_goal_v1/GOAL.md`; independent review and subsequent
+evidence batches are recorded separately. This development result does not populate the paper.
+
+## 2026-09-25 — Recover exact routes, qualify current terminals and assess every admitted alternative
+
+The first broad-goal pass raises current complete component branches from 227 to 493 of 3,723
+and complete documentary dossiers from two to seven of 1,408 unchanged quality-selected requests.
+Complete indices are 135, 222, 595, 888, 1091, 1107 and 1112, spanning five families. All 22 families,
+1,387 exact-L1 outcomes and 21 nonexact-L1 failures remain in the denominator. No previous complete
+branch is lost, no molecules are reselected and no training or model sampling occurs.
+
+Exact source-library integration recovers 22 previously missed component contexts. Four individually
+documented STAAR preparations add eight contexts, preserving the full thiolactone hydrochloride
+starting-material salt, exact atom correspondence and source limitations. Total admitted exact-L2
+contexts increase from 181 to 211. B2/B3 conflicts in the article prose are resolved using the drawn
+structures, figure labels, source masses and named SI products; no intermediate yield, enantiopurity
+or unreported high-resolution mass measurement is inferred. Generic templates and neighbouring
+homologues remain unadmitted. The planner now assesses all deduplicated admitted exact alternatives
+before route selection, retaining all 3,885 assessed alternatives and their budgets.
+
+The frozen 12-target terminal batch admits nine exact materials after 54 HTTP attempts and 28
+discovery queries; three isocyanides remain unassessed. Eight materials have explicit current stock.
+Acryloyl chloride has zero stock, one backordered package and an explicit 60-business-day shipping
+estimate for the exact SKU and US reference region. The existing policy expressly accepts stock
+or shipping observations, but the implementation previously checked stock only. A separately
+versioned adapter fixes that mismatch without changing the frozen policy, identity, purity, form,
+region, package or 30-day observation-expiry requirements. The shipping estimate does not guarantee
+delivery and outlasts the documentary validity interval. Exactly 65 complete branches and two
+dossiers depend on this shipping-only evidence; the other five dossiers use current stock records.
+
+Focused checks pass: 21 shipping-contract tests, 27 terminal parsing/admission tests, seven source
+library tests, 14 finite-source tests and 11 combined boundary tests. Independent reviews reconstruct
+supplier observations from pinned source bodies and validate every full-cohort context, alternative,
+terminal interval and aggregate. The combined assessment uses 2.843246 CPU seconds and makes no
+network, reaction-model or TEST calls. Three thousand two hundred thirty branches remain incomplete:
+3,157 lack an exact preparation/current direct terminal, 66 have an exact preparation with missing
+current leaves and seven have historical terminal records needing refresh. Broad coverage remains
+unmet; missing evidence is not a finding of chemical impossibility.
+
+Artifacts are under `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/`.
+Combined result SHA256: `9b9c64f85e38a330b4cff04c501213ee4214d98c9007e4b8eff77e004390c4c5`.
+Independent review SHA256: `81f2e73161eec2b93acbafa9c343f37bae7ce45d8710036b784ea0248caff505`.
+Progress receipt SHA256: `4105531c055ecfb2143e6885256672333592a7052986b3357e7f6b05ec9c6993`.
+Evidence matrix v8 updates only R10 development status. All 15 manuscript input hashes and final
+placeholders remain unchanged. These adaptive TRAIN-derived results neither admit final paper
+evidence nor satisfy the production synthesis-guidance gate. Work continues on ranked complete
+baskets and additional exact component preparations.
+
+## 2026-09-25 — Second ranked evidence batch closes 22 dossiers while broad coverage remains limited
+
+The next frozen supplier batch admits ten of twelve exact target constitutions after 48 HTTP
+attempts and 16 discovery queries. Nine have positive current stock; C15 thiol has stock zero,
+backorder one and an item-specific future shipping-date observation. Its visible October 9 estimate
+and structured fourteen-business-day message disagree and are both preserved. C8 thiol's positive
+stock observation is preserved alongside a dormant generic fifty-day field; no precise delivery
+claim is inferred. Thirty-two focused tests and independent reconstruction of all ten saved
+observations pass. C13 and C17 thiol remain unknown after the bounded search. Unused budget is not
+spent merely to exhaust the allowance, and every unsuccessful outcome remains recorded.
+
+Inspection of physical pages 136–137 of the cached WO2023215796A2 patent resolves the prior drawing
+withholding for explicitly prepared N12, N14 and N16 acrylamides. The source states that its common
+procedure prepared those named members; they match four current branch requirements. The generic
+drawn chain-length range admits no other homologue. Individual NMR integration inconsistencies
+remain explicit. Independently computed exact protonated masses for N14 and N16 round to 268.3
+and 296.3, while the source literally reports calculated/found values 268.2 and 296.2. These
+discrepancies are retained without inventing an instrument tolerance. Admission is source-reported
+execution and constitution, not validated spectra, individual isolated yields, purity or HRMS.
+Twelve focused packet tests pass. Independent visual and analytical reviews bind the unchanged
+source packet, finite graph certificates and full 1,408-request census. No new HTTP calls were
+needed for this source recovery.
+
+The second full-cohort pass retains every prior alternative, all 35 current terminal constitutions
+and all original selected molecules. It assesses 3,889 exact alternatives in 2.997267 CPU seconds
+without model, network or TEST calls. Complete component branches rise from 493 to 564 of 3,723;
+215 branch contexts now have exact L2 preparations. Complete documentary dossiers rise from seven
+to 22 of 1,408: AEMA 13, Ugi3 one, aza-Michael acrylamide three, iPhos two and O-esterification three.
+This is coverage in five families, not in all 22 families. Six dossiers use stock observations
+throughout; sixteen dossiers and 79 complete branches depend on explicitly recorded shipping
+estimates. All 1,387 exact-L1 outcomes and 21 nonexact-L1 failures remain included; no previous
+complete branch is lost. Relative to the initial current-cohort baseline, the gain is 337 complete
+branches and twenty complete dossiers.
+
+Remaining incomplete branches number 3,159: 3,106 lack an admitted exact preparation or current
+direct terminal, 46 have exact L2 preparations missing current leaves, and seven have historical
+terminal observations requiring refresh. Independent full saved-body review passes.
+Result SHA256: `5def290fefcc481ad8663475db97b3b995ec2f17b4943ca2a4c3dda5a7ea9a9e`.
+Review SHA256: `217c1fc64f7664bf0cdeffb42e04406f252a416ff72f8b0037cde4665d482b69`.
+Progress receipt SHA256: `22eec78952f108843bdd86c587ad38fe9378101d9af675ba2a1d7c38fae3ec89`.
+The all-family report is `broad_routes_goal_v1/README_V2.md`; evidence matrix v9 changes only R10
+development status. All 15 manuscript input hashes and final placeholders remain unchanged.
+
+A separate reviewed bottleneck diagnostic uses the fixed first-pass inventory and the complete
+13,526-candidate saved D1 pool. Only twelve requests have any candidate matching current component
+identities, or fourteen after including documented preparations and historical terminal pointers.
+A deliberately optimistic counterfactual that additionally assumes every TRAIN precursor identity
+acquires exact routes and current terminals matches 343 selected products and at most 654 requests
+with any candidate. Ketone-Ugi4 has zero such matches; A3 has one. TRAIN membership is not evidence
+and no route or candidate is admitted by this calculation. Role, context, interval and quality
+restrictions are ignored, making the bounds optimistic. The result identifies a coverage limit
+of finite inventory/selection strategies, not chemical impossibility or a proven training defect.
+The initial v2 bound producer's null-branch parsing error and immutable failure are retained; its
+corrected v3 preserves every request. The report and reviews are in `broad_routes_goal_v1/BOTTLENECK.md`
+and `bottleneck_report.json` (SHA256
+`ebf66cf2b7deca52af6930e6faeddef3cf3122d72bc66dae5dc948be511fe2af`).
+The active goal remains unmet; subsequent work targets the generation/provenance and hybrid-planner
+barriers alongside exact source recovery, without changing the manuscript or weakening admission.
+
+## 2026-09-25 — Count-only ketone repair has no selected quality gain; replay remains nonclosing
+
+A bounded saved-logit diagnostic tests the existing TRAIN-derived ketone oxygen/ester-count prior.
+It retains all 64 requests and 416 original candidate occurrences and adds 27 distinct proposals
+across 15 requests in 5.243 CPU seconds including qualification. All new proposals pass the unchanged
+exact-L1/source-scope checks; none is an experimentally executed product. Every edit is confined to
+the coupled-ketone component. The amine, acid and isocyanide identities and all graph edge endpoints
+remain unchanged. This added-budget decoder experiment is not a matched causal or training result.
+
+Independent evaluation under the unchanged structural/support objective, request-specific context
+restrictions and absolute diversity/novelty floors selects no new molecule. Original-pool reselect,
+augmented-pool reselect and saved current selection are identical: 62/64 exact L1, 39/64 limited
+structural design passes and seven requests with all measured local features observed. All 64 head
+gate statuses are not_applicable, so that gate provides no independent head-survival result here.
+Of 27 individual substitutions, 18 preserve all floors and context conditions; fourteen tie the
+primary/support objectives and lose the ordinal tie-break, while four worsen an existing objective.
+Nine fail a diversity/novelty floor. The full augmented-pool optimum also gives no improvement.
+
+The first evaluator wrapper passed the union of candidate design keys to the original-only arm;
+the selector correctly rejected unknown keys. The failed code and execution are preserved. Its CPU
+receipt did not flush and remains unknown. A corrected, separately capped local adapter completes
+in 10.819142 CPU seconds with no gate or policy change. All failed attempts and denominators remain
+visible. Visual inspection of the complete paired candidate gallery confirms that count repair can
+retain misplaced ester groups, extra reactive tail handles and existing cage or head topology.
+These observations motivate source-relative connectivity qualification; they are not new chemical
+bans or retrospective source exclusions. A larger count-only run is not justified by this outcome.
+
+A fresh quarantined hybrid replay authenticates 138 historical proposals, deduplicated to 123,
+against ten isolated component identities and 39 current full-L1 contexts across six families.
+Four available registry transforms reconstruct eight target identities and 37 current contexts
+(Ugi3 17, Ugi4 five, ketone-isocyanide-amide seven, Passerini eight). Two amine targets remain
+unmatched. Seven definitions whose historical qualification assets are missing remain excluded;
+unavailable chemistry is unassessed, not negative. Eight frozen implementation controls pass;
+the run makes 297 proposal forward calls, 22 control calls and zero new model/network/TEST calls.
+Independent review passes. Every scope, source-execution, operational, L3, synthesis-value and
+route-closure authority flag remains false. This is computed graph consistency and adds no dossier.
+
+Separately, primary WO2019047824A1 Example 21 step 1 supplies one exact reported preparation of
+linear C13 thiol, matching eight current component contexts. The full scheme, procedure and nominal
+analytical data were inspected independently. Bromotridecane, thiourea and water remain typed,
+unresolved terminal leaves; the packet is pending cohort integration and creates no closure.
+The source's 87.1% yield and approximately 85.7% mass-derived yield are both preserved. No validated
+yield, purity, HRMS or C17 homologue support is inferred. Twelve focused source-packet tests pass.
+
+Reviewed diagnostic closeout:
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/diagnostic_closeout.json`,
+SHA256 `a36d9ad7ea29f3bd01a851b2e97dd987ab8ad6ab46b4be7ea64dbe1a7b949867`.
+The report is `broad_routes_goal_v1/DIAGNOSTICS_V1.md`. The routed cohort remains unchanged at
+22/1,408 complete dossiers across five families and 564/3,723 complete branches. All fifteen paper
+input hashes remain unchanged. The goal remains active and unmet; no final paper evidence is admitted.
+
+## 2026-09-25 — Third route pass adds twelve branches; source-relative ketone topology is missing
+
+The independently reviewed third supplier batch admits one of four targets: exact cyclohexyl
+isocyanide, 25 g, at least 98.5% GC assay, from a current anonymous US stock observation. C13 and
+C15 isocyanides remain unlocated; oleylamine lacks a qualified current exact item observation.
+All eight HTTP attempts and twenty discovery queries are retained. One discovery response was
+not saved verbatim; its summarized observations and that limitation are explicit. Search snippets
+do not support stock admission. Fourteen focused supplier tests and independent item reconstruction
+pass. No accounts, purchases or supplier contacts were used.
+
+A new full-cohort integration retains every prior exact alternative and all thirty-five previous
+terminal identities, adding the new direct terminal and the independently reviewed finite C13-thiol
+preparation. Six source-review/material-boundary tests pass. The default test wrapper initially
+could not write its external uv cache; the same focused tests pass with a permitted temporary cache
+and no dependency synchronization. No scientific test failed or input was replaced.
+
+The full 1,408-request, 22-family assessment now has 576/3,723 complete component branches, twelve
+more than the previous pass. Exact L2 context count rises from 215 to 223, with 3,897 alternatives
+retained and assessed. All eight C13-thiol contexts remain incomplete because bromotridecane,
+thiourea and water each lack current accepted terminal evidence. Complete dossiers remain 22/1,408
+across five families; the same sixteen dossiers and 79 complete branches depend on explicit shipping
+estimates. There are 407 direct-terminal and 169 L2-prepared complete branches. The 3,147 incomplete
+branches comprise 3,086 without exact preparation/current direct terminal, 54 exact preparations
+missing current leaves and seven historical terminal pointers requiring refresh. All 21 L1 failures,
+4,510 component occurrences, selected molecules and prior complete branches remain unchanged.
+
+Result SHA256: `af4023e17fdac398cd66ea4222523d6023a766c1d28c13c27b4251afe688f87a`.
+Independent review SHA256: `17d124894644d103b8091a67cd5b5e76b30f249d4c9e0b3b8d2b7e07b6dda4f9`.
+Progress SHA256: `7b692c0b0eb3e9a006e30b3762a0407d57928098bd8d3e6de3fff6249f740cb1`.
+The all-family report is `broad_routes_goal_v1/README_V3.md`; evidence matrix v10 changes only
+R10 development status. All fifteen manuscript hashes and final placeholders remain unchanged.
+
+A separate source-connectivity diagnostic derives a 16-atom precursor scaffold from the pinned
+registry queries, the visually inspected FO-32 source and eleven unique TRAIN ketone components.
+It preserves opposite ester arms, their source-derived internal degrees and attachment boundaries.
+All eleven TRAIN controls and FO-32 embed. None of the 62 exact current selections, 169 original
+exact candidate occurrences or 27 new count-repair proposals embeds even when non-anchor elements
+and bond orders are relaxed. No search cap is reached; two nonexact current selections remain
+unassessed. Seven focused tests pass, and an independent RDKit matcher agrees on all 180 unique
+source/TRAIN/generated precursors. Registry atom-map binding is explicitly verified.
+
+The local first-mismatch census finds a reacting-center methyl in 17/62 exact selections, not a
+majority. Of 124 source-relative arms, 65 lack the required ester branch point, 26 branch too early,
+24 terminate too early, four have the wrong outward attachment shape, and five fit one source arm.
+No selected molecule fits both. All twenty-four source/TRAIN control arms pass. These are conditional
+architecture findings, not proof of chemical impossibility, lipid delivery failure or a training
+bug. They establish that the tested fixed-topology label repair cannot restore this source scaffold.
+The decoder/layout causal trace remains separate; no retraining or topology intervention is admitted.
+
+Connectivity result SHA256: `0ac0d3939d8aab6203626a1a1ea20d9815d70ef8b7dc60bf7e7866be5719b062`.
+Independent validation SHA256: `3aabdd21bb6e16681c6aa5935f02fdc1b10cbc1dd2a282ec62dd5c319652d0c0`.
+Local mismatch result SHA256: `04d48a00e4ff67989fdeca01fc59fae7a9380ee0365b870b218c2759edd8e2dc`.
+Artifacts are under `broad_routes_goal_v1/ketone_architecture_diagnostic/evaluation/source_connectivity/`.
+No neural inference, source-forward evaluation, protected TEST access or new molecular selection
+occurred in these connectivity audits. Broad L2/L3 and independent quality goals remain active.
+
+## 2026-09-25 — Independent route-scope evidence is condition-specific and remains unadmitted
+
+A frozen local inventory screens 26 PDF paths representing 25 unique source hashes without
+extraction failure or censoring. The cached AGILE amine-formylation/dehydration series supplies
+six saturated linear substrates and one oleyl substrate. A separately followed Chen PNAS 2023
+reference chain overlaps those identities and contains condition and analytical inconsistencies:
+the saturated scheme specifies TEA while the oleyl procedure/scheme names TFA, and oleyl analytical
+text omits expected alkene signals. These observations remain source conflicts, not corrections
+made to obtain a qualifying route. Source-independent, substrate-disjoint transfer evidence is
+not established by the overlapping cached series.
+
+A separately frozen primary-literature extension stops after six searches and eight asset
+attempts. Blocked pages and challenge HTML returned as nominal HTTP 200 are retained and do not
+count as acquired supplements. One accessible primary Beilstein 2022 SI (DOI 10.3762/bjoc.18.73)
+reports nine individually characterized isocyanide products, including linear C8, secondary C7
+and cyclohexyl examples. Its complete 21-trial benzylformamide condition table includes eleven
+trace/<1% outcomes. Those are repeated condition-specific outcomes on one substrate, not eleven
+independent failed substrates or a calibrated substrate classifier.
+
+The new preparation uses TsCl/Et3N/Na2CO3 mechanochemistry. It does not validate the cached
+POCl3/THF route domain, and its upstream amine-to-formamide preparation is not established here.
+No exact full route, transferable reaction scope, operational qualification or dossier is admitted
+from this inventory. The source data support a future condition-aware retrieval/abstention test,
+with the missing upstream step and condition-transfer boundary explicit. Four focused inventory
+checks pass, and all source pins and inspected scheme/procedure pages are retained.
+
+The report is `broad_routes_goal_v1/planner/scope_qualification_inventory/README.md`.
+Literature result SHA256: `bd70288e2b433c2511f582114a3347695b3d592a90ee5a5f839ef2dc7b9e990a`.
+Inventory validation SHA256: `4a1e1aa5aaf7352bce97debe5b2c20927cd55e76a86993745c49df58677e4a5d`.
+Primary SI SHA256: `5e025ea62eb60f5ab625b21f162295212889d8d037c27dcf45f33466d9669504`.
+This bounded acquisition is finished; no model call, protected TEST access or production activation
+occurred. Broader source-scope qualification remains an evidence task, not a configuration switch.
+
+
+### 2026-09-25 — Decoder reservation mechanism and refreshed inventory bound
+
+The authentic reservation replay reproduces all 159 successful raw ketone-Ugi4
+occurrences (131 distinct trajectories), with no parent mismatch after including
+the actual attachment-reservation layer. All 17 selected methyl-ketone cases
+share an early extra-core attachment mechanism; the immutable source input does
+not fix those exterior edges. The raw cross-child-row attachment comparison is
+not invariant to additive categorical-logit row offsets. A result-local,
+independently reviewed opportunity-cost correction is being tested on the same
+64 requests and five saved draws. No production default or scientific gate is
+changed. The first old-arm reproduction attempt stopped on a tuple/list
+serialization difference and is preserved; its outcomes are not an admitted
+arm comparison. See `broad_routes_goal_v1/ketone_architecture_diagnostic/`.
+
+A separate numerical counterexample also identifies row-offset sensitivity in
+`compose_lipid_ring_systems._score`, because graph-edge scoring can reuse child
+rows with different multiplicities. Equal node/edge-count ordered connected toy
+graphs reverse rank while their categorical probabilities remain exactly the
+same. This is not an actual-cohort effect or a chemistry result. No ring scorer
+has been changed, and tree/closure scoring semantics require review before a fix.
+The complete synthetic inputs, implementation hash and deterministic assertions
+are recorded in `broad_routes_goal_v1/ring_score_invariance_audit/result.json`.
+
+Refreshing the saved-pool identity screen against combined route pass v3 gives
+22 current matches and at most 33 requests with any matching candidate, all in
+the same five families. Including documented but incomplete/stale evidence gives
+23 current matches and at most 36 requests. All 1,408 requests, 13,526 candidate
+occurrences and 7,196 exact-L1 occurrences are retained. This deliberately
+optimistic bound ignores context, quality, diversity and availability intervals;
+it admits zero dossiers and changes no selections. Independent review is pending.
+The result and reproducible producer are under
+`broad_routes_goal_v1/selection_ceiling_v4/` and `selection_ceiling_v4.py`.
+
+All paths above are relative to
+`results/phase1/compose_lipid_iclr22_research_v1/`. Manuscript inputs, training,
+terminal procurement and experimental work remain unchanged.
+
+
+### 2026-09-25 — Matched attachment correction: raw L1 gain, no retained quality gain
+
+The versioned ketone-Ugi4 attachment correction completed all 64 requests and
+five saved draws. Independent replay review reproduced every original full
+serialized branch across 40 shards, including failures, construction order,
+structures and costs. Each arm used 320 readouts, 320 component construction
+calls, 352 source checks, 1,897 mutations and 416 candidate occurrences. Raw
+exact L1 increased from 131 to 154/320 (26 gains, three losses); first-draw exact
+L1 increased from 28 to 33/64. Any-candidate exact coverage increased 62 to 63/64.
+The independently assessed limited-design candidate ceiling decreased 41 to 40/64.
+
+Both matched arms included the same single current incumbent. Under unchanged
+source/context eligibility and absolute diversity/novelty floors, the solver
+proved the optimum and retained all 64 incumbents: 62 exact L1, 39 limited design
+passes and seven complete observed-feature outcomes. No retained molecule or
+route result changed. The corrected pool has one label-and-bond-relaxed source
+scaffold-capable candidate, but no typed source-scaffold match. Thus the
+correction addresses a demonstrated categorical-score defect and improves raw
+consistency; it does not establish improved retained lipid quality or full
+precursor architecture. No production default is promoted.
+
+The prior serialization-comparison failure, a diagnosis-helper setup failure,
+and the independent verifier import failure are all preserved. The corrected
+comparison normalizes JSON types only and rejects scientific value, candidate
+order, count and status changes. Known cumulative generation/diagnosis CPU was
+21.250 seconds, separately disclosed from unmeasured ancillary setup CPU;
+independent evaluation used 11.28 CPU seconds. There were no neural, network or
+TEST calls. A proposed two-additional-family regression is unexecuted: the
+frozen score function accepts ketone-isocyanide-amide layouts but explicitly
+abstains for alpha-isocyanoester core-incident closure layouts. No scope guard
+was relaxed to make that follow-up run.
+
+The full-source scaffold constructor feasibility/control test now takes
+priority over broader score sweeps. The route agent also confirmed the intended
+E2 plan permits qualified hybrid/template construction, while the current exact
+closure lane requires exact-source/exact-substrate receipts. This is a missing
+qualification lane, not authorization to flip exact-source flags. A separately
+versioned condition-aware evidence-adequacy benchmark will preserve current
+exact closures and distinguish computational support from published execution.
+
+The reviewed inventory bound remains 33 possible requests across the same five
+families, including 22 current selections; it admits no new dossiers. Current
+full-cohort routes remain 576/3,723 branches and 22/1,408 complete dossiers.
+The linked closeout is
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/RESERVATION_DIAGNOSTIC_V1.md`,
+with input hashes in `reservation_diagnostic_closeout.json` alongside it.
+Manuscript inputs and all existing evidence gates remain unchanged.
+
+
+### 2026-09-25 — Condition-aware routing qualification remains an evidence gap
+
+The contract audit distinguishes intended E2 hybrid/template routes from the
+implemented exact-source closure lane. The current exact-source/exact-substrate
+and terminal gates remain unchanged. A versioned documentary preflight retains
+all 40 available records: 16 product constitutions, 19 source-product units and
+three publications; 21 condition trials are repeated measurements of one benzyl
+substrate. All belong to already-exposed development evidence. The independent
+validation population is empty, so no empirical transfer-precision benchmark,
+applicability qualification or new route admission is claimed.
+
+Eleven focused preflight checks pass, and the independent review confirms the
+record bodies, source pins, condition separation and negative readiness result.
+Its two future-boundary findings are addressed in a separate closed readiness
+guard: caller-supplied proof flags cannot establish benchmark readiness, and
+DOI/product keys cannot substitute for a cited-procedure/duplicate-execution
+cluster audit. Hash-bound independent evidence/adjudication references and
+trusted review anchors are required; the trust allowlist remains empty pending
+actual evidence. Seven adversarial controls pass. No labels, experimental
+outcomes or dependency clusters were invented, and the original preflight is
+immutable. See
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/condition_scope_qualification_v1/review.json`.
+
+Separate bounded discovery exposed additional source leads but made zero
+admissions. The first public-API acquisition recovered the licensed article XML
+for PMC9608669; its short supplementary download was incomplete and preserved.
+A separately bounded free public-API retrieval is in progress. It must finish
+and pass archive integrity checks before the supplement is inspected or used.
+No source-search snippet is a preparation/control receipt. New source material
+will require an explicit evidence/split audit before any qualification claim.
+
+### 2026-09-25 — Complete reagent baskets open A3 and thiol-yne dossier coverage
+
+A bounded six-target supplier search added four independently reviewed current
+US stock observations: 1-pentadecyne, piperazine, dodecanal and 7-octynoic acid.
+All 20 public HTTP captures and 12 original plus two prospectively authorized
+fallback queries are retained. The two unsuccessful targets, C15 epoxide and
+nonyl acrylate, remain unassessed. Eighteen focused checks pass. The first
+dodecanal parser abstention is preserved; a versioned extractor recognizes the
+literal BHT stabilizer while retaining its unknown concentration and making no
+inhibitor-free or procedure-compatibility claim. Piperazine uses the conservative
+98.5% GC minimum rather than its rounded 99% title. Reference ZIP 10001 is not
+the user's location. No supplier contact or purchase occurred.
+
+The terminal-only refresh first reproduced all 3,897 prior exact alternatives,
+3,723 role branches and 1,408 request outcomes with the old 36-terminal inventory.
+A corrected import-style control successor was saved without changing the first
+control's hashes. With the four new terminals, the full unchanged cohort now has
+612/3,723 complete branches and 24/1,408 complete documentary dossiers across
+7/22 families. Exactly 36 direct-terminal branches and two whole dossiers were
+added, with no losses: A3 request 20 and thiol-yne request 1265. Eight dossiers
+use only stock observations; 16 still require explicit shipping observations.
+There are still 223 exact L2 contexts and 169 complete prepared branches; this
+pass adds terminal evidence, not a new reaction-scope qualification. All 21 L1
+failures, every denominator and all prior source trees remain unchanged.
+
+Independent source-byte and full-cohort reviews pass. Two initial review-helper
+schema exceptions are retained; neither changed chemical evidence. Results,
+commands, pins and remaining work are in
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/README_V4.md`.
+Evidence matrix v11 updates only R10 development status and verifies all 15
+manuscript hashes unchanged. This adaptive TRAIN-derived evidence does not fill
+final held-out manuscript results. Fifteen families still have no closed dossier.
+
+The separately authorized public supplementary-archive retry ended after 170.04
+seconds with an incomplete 40,532-byte ZIP. The partial bytes are preserved and
+unadmitted; no further download was attempted. Authentic licensed article XML
+was recovered, but image-only scope entries and named isolation failures remain
+unqualified leads without structured independent adjudication. The condition-aware
+routing preflight still has zero independent validation cases and no new admission.
+
+### 2026-09-25 — Source-scaffold construction and an explicit selection preference improve ketone architecture
+
+The registered source oxygen loss gives a 15-atom product-side kernel. Ten
+eligible acyclic source controls and a deliberately corrupted source topology
+recover under the bounded constructor; two cyclic controls explicitly abstain.
+The independent control review verifies every emitted state and retained fragment.
+The full 64-request, five-draw diagnostic produced 81 additional canonical
+proposals across 29 requests, retaining all 416 corrected prior occurrences.
+Seventy-eight additions pass the unchanged exact L1/source-scope check; three
+retain exact graph replay but fail the required distinct source-role head handles.
+All failed draws, cyclic exclusions, beam pruning and costs remain recorded.
+Generation took 3.444 CPU seconds, with no new neural calls.
+
+Under the original selection objective, typed source-kernel coverage improved
+from zero to two selected products, observed local support from seven to nine,
+while exact L1 remained 62/64 and limited design 39/64. A separate case-specific
+provenance proof covered all 81 new proposals without changing a global gate:
+outside-role trees, atom labels, cross-role edges and all closures remain exact,
+and the modified role is explicitly acyclic. Sixteen ring abstentions resolve
+into twelve failures and four passes; the selected set is unchanged.
+
+A prospectively frozen exploratory tie-break then kept the existing design and
+observed-support priorities, all absolute product/component diversity and novelty
+floors, and context/source eligibility, while preferring the typed source kernel
+before candidate ordinal. The joint solve changes 29 structures and reaches
+27/64 typed kernels, versus two under the old objective. Exact L1 stays 62,
+limited design 39 and observed support nine; context-required outputs decrease
+from ten to eight. Twenty-one kernel-bearing selections also pass limited design;
+six still fail ring requirements. All selector stages and integer floor checks
+pass independently. This is an added source-prior and selection improvement,
+not a measured learning gain or a general molecular-quality promotion.
+
+The complete 81-proposal paired gallery and graph-change ledgers are preserved.
+Root inspected eight pages, including both original-objective selected changes;
+other-role cages, asymmetric arms and multiple unsaturations remain visible in
+parts of the pool. Source-kernel membership alone does not establish complete
+precursor synthesis, broad realism, ionization or delivery performance. The
+original 1,408-request routed selection remains unchanged. See
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/ketone_architecture_diagnostic/full_scaffold_evaluation/README.md`.
+
+The next mechanism is explicit: of 120 saved draws in the 24 unserved acyclic
+requests, 106 have sufficient neutral carbon but the whole-descendant-subtree
+restriction loses internal carbon segments below misplaced heteroatoms. Eight
+need more than four terminal subtrees, five fail port/root-depth necessities,
+and one remains assignment-uncertain. A separate induced-carbon-forest primitive
+retains exact carbon fragment atoms/internal bonds while allowing declared
+heteroatom-boundary cuts. Source and corrupted-source controls pass, including a
+case the old constructor cannot recover. Its full panel is authorized only after
+independent control review and a frozen compatible evaluator, with the complete
+prior 497-candidate pool retained and unchanged gates. No full-panel benefit is
+assumed from controls.
+
+### 2026-09-25 — Parallel supplier acquisition expands dossiers to ten families
+
+The second breadth batch ran independent public captures concurrently, with
+preallocated capture directories and a prospectively recorded 24+1 HTTP budget.
+All 25 attempts, including a 301 and inquiry-only packages, remain recorded;
+ten discovery queries were used. Five exact terminals qualified under the
+unchanged policy: 98% C16 epoxide, 98.5%-minimum GC hexylamine, 96%-minimum GC
+myristoyl chloride, 98% MEHQ-stabilized hexadecyl acrylate, and 97% 4-amino-1-butanol.
+The ketone target remains unknown. Twelve focused checks and the root's separate
+primary-byte review pass. Myristoyl chloride is supplier-reported in stock for
+direct supplier fulfillment; warehouse ownership and guaranteed delivery are
+not implied. The hexylamine case-only display/backend SKU bridge is constrained
+to exact identifiers observed together on the primary page, with collisions
+rejected. Failed parser/preparation attempts remain separate from final receipts.
+
+A reusable wrapper now runs the existing qualified v4 assessment engine against
+reviewed terminal batches, avoiding repeated custom integration implementations.
+Its replay matches every prior product/branch/alternative body after verifying
+and excluding only the naturally refreshed aggregate assessment timestamp; the
+initial comparison's timestamp failure is preserved. No route gate changed.
+
+The full unchanged cohort now has 647/3,723 complete branches and 27/1,408 complete
+documentary dossiers across 10/22 families. Exactly 35 direct branches and three
+complete dossiers were added: amine-epoxide request 470, aza-Michael acrylate 672,
+and epoxide/O-acylation 804. All 3,897 prior alternatives, 223 exact L2 contexts,
+1,387 exact-L1 requests and 21 L1 failures remain. Sixteen dossiers still depend
+on explicit shipping observations; eleven use supplier-reported stock. All prior
+complete branches and products are retained. Independent full-cohort review passes.
+
+Current results and all 22 family denominators are in
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/README_V5.md`.
+Evidence matrix v12 verifies all 15 manuscript hashes unchanged and updates only
+routing development status. The status writer initially caught a stale expected
+new-index set before publishing; correcting it to the reviewed 470/672/804 set
+changed no assessment output. Twelve families still lack any closed dossier.
+This development coverage is neither final held-out evidence nor a synthesis
+success rate. The separate ketone selection diagnostics do not replace this
+routed cohort.
+
+### 2026-09-25 — Carbon-forest diagnostic improves ketone scaffold coverage, not overall quality
+
+The independently reviewed carbon-forest extension retained the complete prior
+497-candidate pool and generated 254 additional canonical proposals across all
+53 acyclic requests; 231 additions pass unchanged exact L1/source checks. The
+eleven cyclic requests remain outside constructor scope. Boundary cuts preserve
+retained atom labels and fragment internal bonds, but may change implicit
+hydrogens; they are not a proof of unchanged whole-fragment chemistry.
+
+The frozen exploratory selector increases typed source kernels from 27 to 45/64
+and TRAIN local-feature support from nine to 21/64. Exact L1 remains 62/64 and
+limited design remains 39/64. All original diversity/novelty floors hold, but
+this does not mean every metric improves against the immediately prior control:
+novel isocyanide observations decrease from 33 to 31 while distinct novel
+identities stay at 22. All 25 ring failures remain. Thirty-four of the 45 typed
+kernel selections pass limited design and eleven fail ring requirements.
+
+Generation used 12.707 CPU seconds and independent evaluation 12.57 CPU seconds,
+with no new neural calls or production-default changes. The selected molecules
+have not replaced the routed 1,408-request cohort. No general quality promotion,
+independent realism claim, or new L2/L3 closure is made. Results and complete
+failures are under
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/ketone_architecture_diagnostic/carbon_forest_evaluation/`;
+result SHA-256 is
+`e1b53ca5d5a0e679e6225f7fbaf77bf1d5b3ec7c67c0e2684359cd429e613624`.
+
+### 2026-09-25 — Original FORGE route engine is already imported; active discovery is missing
+
+At the user's request, inspected `git@github.com:KoshaTx/forge.git` at remote
+commit `f58c679594c49312cde666de0fe293bf6ba5c54e` in an isolated sparse checkout.
+Parallel read-only audits separated the current call path, remote search code,
+and historical evidence. Exact function/class AST comparisons confirm all
+definitions match in the five core planner modules (23/19/18/24/11 definitions),
+as do the archived multistep reach and Tail A/B runners. Namespace and schema
+changes exist; this comparison is not a runtime-equivalence qualification.
+
+The live all22 v5 pass only replays admitted saved alternatives and refreshes
+current terminal evidence. It does not call Graph2Edits or AiZynthFinder dynamic
+search. The older engine does have bounded multistep AiZynthFinder discovery, but
+its own strict cascade, verified from fetched JSON, closes 19/256 products and
+36/158 components; proposal engines add no strict closure. The remote's later
+97.2% makeability claim uses forward-applied published routes plus vendor
+listings, explicitly without verified substrate scope. Those later result
+directories are absent from this commit and their numerical claims were not
+independently reproduced. Historical procurement does not establish current L3.
+
+The integration decision is to reuse the existing discovery runtime on a
+hash-pinned generic all22 component ledger, retaining proposals separately from
+exact-route/current-terminal admission. Archived Ugi runners must not be called
+directly with their old populations, hardcoded chemistry, permissive
+target-among-products checks or vendor-count availability semantics. No gate is
+weakened and no complete dossier is added by this audit. Current coverage stays
+27/1,408 dossiers across ten families.
+
+The comparison, seven fetched result summaries, individual hashes and runnable
+producer are in
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/remote_engine_reuse_v1/`.
+An actual local ENOSPC failure occurred during preparation; available storage was
+about 197–213 MiB and the isolated clone only 19 MiB. Fresh target inference is
+held while lightweight diagnostic preparation continues. No unrelated files
+were deleted, and no paid job, training or manuscript edit was launched.
+
+The bounded discovery preparation subsequently freezes every incomplete branch
+and all 1,408 request records, with four deterministic target constitutions
+covering 128 unresolved branch incidences. All six installed AiZynthFinder asset
+hashes match the manifest; four focused preparation checks pass. The new runner
+requires two matching runtime/proposal/source-code smoke receipts and an
+independent saved review before target execution. The optional runtime imports
+successfully but differs from the historical Python/platform pins. No model
+inference ran; storage and runtime smoke qualification remain open.
+
+### 2026-09-25 — User adopts legacy computational makeability as primary L2/L3 success
+
+After the definition comparison, the user explicitly requested changing the
+success criteria to those used by the older repository. The new versioned primary
+outcome is computational makeability with vendor-listed terminals. A product must
+pass exact L1, and every required component must either be directly vendor-listed
+or have a complete computational path whose terminal inputs are vendor-listed.
+Planner-generated paths need no independent forward replay or exact-substrate
+experimental record for this primary outcome. Forward-applied published-transform
+constructions must reproduce the target, but do not require a unique product or
+verified experimental substrate scope. These distinctions remain reported axes.
+
+The policy is `configs/route/compose_lipid_computational_makeability_v1.json`,
+with the scoped authorization recorded in AGENTS.md and an explanation in
+`docs/COMPOSE_LIPID_COMPUTATIONAL_MAKEABILITY.md`. The older classifier's
+`buy_all`/`buy_and_make` success semantics are retained. Recorded snapshot expiry,
+per-path leaf binding, alternative-path search, complete denominators and explicit
+lookup uncertainty correct documented implementation defects rather than silently
+copying them. SKU, assay, stock and shipping are not primary makeability gates.
+
+The original strict exact-source/current-item assessor and policy remain intact
+as a secondary metric; existing 27/1,408 dossier and 647/3,723 branch findings are
+not relabelled. No new full-cohort primary success rate follows from this change.
+All 22 families and 1,408 requests, including the 21 nonexact-L1 outcomes, remain in
+the evaluation. Quality/diversity requirements, independent seeds and held-out
+confirmation are unchanged. The manuscript remains unchanged. This authorization
+does not permit production synthesis guidance or biological optimization.
+
+The separate pure makeability evaluator passes 30 focused tests covering direct
+vendor listing, complete planner and forward-applied paths, alternative-route
+logic, missing branches, identity mismatches, stale/future observations and lookup
+failures. Black and Ruff pass. Default dependency synchronization failed before
+pytest due environment/cache/network conditions; the existing environment passed
+with `UV_RUN='uv run --no-sync'`. These operational failures are preserved in
+`criteria_change_v1/classifier_validation.json`. The classifier requires its
+caller to authenticate source receipts and exact route/identity extraction; the
+unit checks do not constitute a full-cohort evidence evaluation.
+
+Evidence matrix v13 and progress v6 adopt the new primary criterion and retain
+strict results as secondary. All 15 manuscript hashes and 14 nonrouting evidence
+blocks are unchanged. The current full-cohort primary count is explicitly null
+and its status is pending, rather than zero or a relabelled strict count.
+
+The storage problem was subsequently resolved externally. Two isolated current
+AiZynthFinder runtime smokes produced identical proposals, versions and 69 engine
+source hashes; root independently checked the receipts and installed bytes.
+The already frozen four-component search pilot then completed with three
+catalog-reaching targets and one unsolved epoxide target under its bounded
+search. All twelve stored paths remain, including three unsolved alternatives;
+combined process time was 193.891 seconds. The engine's 60-second checks occur
+between iterations and small overruns are retained rather than hidden.
+
+This demonstrates active recursive discovery on current targets, not new primary
+makeability successes: current terminal vendor evidence has not been collected
+for these paths. An alternative tert-butyl-isocyanide path changes the carbon
+skeleton and requires chemical scrutiny; it is retained alongside the distinct
+formamide route. No independent forward-validation claim is made. The complete
+pilot, negative result, source hashes and timings are in
+`planner/remote_engine_reuse_v1/discovery/EXECUTION.md` under the broad-route goal
+directory. No full-cohort success metric, strict dossier count or manuscript
+claim changes from this small prioritized diagnostic.
+
+
+### 2026-09-25 — Parallel biological-guidance hypotheses and conditional-training proposal
+
+At the user's request, ran six bounded hypotheses in three existing separate worktrees.
+The fixed local cohorts were 550 HeLa and 581 A549 observations, with protected TEST
+and reserved identities excluded. Continuous, percentile and high-class objectives were
+compared under the same grouped splits and fit-only eligibility. HeLa high-class
+selection reached 47.17% observed high performers versus 35.60% for the historical
+regression; its paired head-bootstrap improvement range includes zero. A549 alternatives
+were not better than the matched continuous control. These exposed-development results
+are exploratory. Affine response correction and residual-scale interval correction did
+not restore conservative-high selection. No qualified independent repeats were available
+for attributing residuals to assay noise. The admitted mRNA/FLuc census has no common
+HeLa/A549 identities, and study is confounded with cell.
+
+The frozen 22-family checkpoint diagnostic found 55/64 exact HeLa assemblies with strict
+readout, all with aldehydes absent from the local predictor's fitting catalogues. Source
+role positive controls recovered the annotated head and aldehyde for all 550 measured
+HeLa molecules but found 115 tail2 mismatches: a supplied nitroso structure versus an
+exact-replayed isocyanide. Full source-feature qualification fails; the baseline remains
+unchanged and its features require versioned adjudication/correction before promotion.
+This defect does not invalidate the independently checked zero-aldehyde support count.
+A549's general source-alcohol mapping remains unresolved and is not counted as a measured
+domain failure.
+
+Sixteen fresh trajectories plus four preflight executions preserved RNG/state and exact
+terminal output with diagnostic readouts inserted. No eligible intermediate/terminal
+score pairs existed, so their rank agreement was not estimable. No guidance gain, new
+biological efficacy, or model promotion is claimed. All negative and unidentifiable
+outcomes and per-track verification/commands are retained under
+`results/phase1/potency_guidance_hypotheses_v2/`.
+
+In response to the user's suggestion, documented an activity-conditioned generator
+experiment in `docs/ACTIVITY_CONDITIONED_GENERATION_PROPOSAL.md`: reuse the checkpoint,
+train with measured within-assay labels across corruption times, retain chemistry replay,
+and compare against label-free adaptation and within-context shuffled labels. This is a
+proposal, not an executed training result. No paid jobs or protected-label access occurred.
+
+
+### 2026-09-25 — Continuous activity supervision is primary for the guidance extension
+
+The user rejected simplifying mTP to activity classes for the primary method. Revised
+`docs/ACTIVITY_CONDITIONED_GENERATION_PROPOSAL.md` to preserve continuous measured
+responses, endpoint semantics and auditable fit-only transformations. The protocol now
+explicitly separates conditioning the admissible program prior from conditioning the
+graph denoiser: fixed program architecture may limit activity control if only the latter
+is adapted. This is an untested architectural hypothesis, not an explanation established
+by the earlier negative results. Comparisons include structural adaptation, prior-only,
+denoiser-only, joint conditioning, within-context shuffled labels and post-hoc ranking.
+Standard conditional training and CTMC predictor-free guidance are prior methods, not
+claimed novelty. Existing source annotation discrepancies require versioned resolution.
+
+The original proposal is archived with its exact closeout hash. Revision receipt:
+`results/phase1/potency_guidance_hypotheses_v2/proposal_revision_v2.json`. No historical
+metrics or gates were changed, no training was launched, and no manuscript claims were
+promoted. Publication ambition changes the requested evidence standard, not the evidence.
+
+### 2026-09-25 — First all-family computational makeability census
+
+Following the user's adoption of the legacy computational makeability criterion,
+evaluated every request in the current quality-selected cohort: 1,408 requests,
+22 families with 64 requests each, 1,387 exact L1 assemblies, 3,723 required
+branches and 2,044 distinct component constitutions. This is an adaptively selected
+TRAIN-derived development cohort from one trained checkpoint and five sampling
+draws. It is not independent held-out or multi-training-seed evidence. No manuscript
+files or sealed evaluation structures were changed or accessed.
+
+The authenticated saved-evidence baseline preserves all 27 strict dossiers. An
+initial adapter could not resolve human-readable or migrated source locations;
+its undercount is retained as inadmissible. Resolving those locations through
+existing provenance catalogs, with exact source-byte hashes, removed every source
+exclusion without changing chemistry or evidence requirements.
+
+A bounded constructor derived from four upstream and eleven vendored transforms
+passed all 49 existing reaction-pair controls. Across all 2,044 targets, it recorded
+6,966 paths for 1,326 constitutions in 4.695 CPU seconds, with 72,660 reverse and
+5,697 forward calls on distinct cached nodes. Depth and alternative-path truncation
+remain explicit. Exact forward target membership is a computational construction
+check, not experimental execution or substrate-applicability evidence. An isotope
+serialization defect was identified in the original helper; a census found no
+isotopic inputs or outputs, so measured results are unaffected. Subsequent adapters
+preserve isotopes while removing stereochemistry, and retain prior source versions.
+
+With these constructions, prior saved paths and currently authenticated listings,
+645/1,408 requests have every component directly listed or covered by a computational
+path ignoring terminal listing status; 9/1,408 have all components directly listed;
+31/1,408 have a complete path to listed materials for every branch. Strict dossiers
+remain 27/1,408. Root independently verified all product conjunctions, branch
+identities, per-family denominators, aggregate counts and all 15 manuscript pins.
+These are observed evidence-coverage counts under an incomplete listing census:
+2,813 of 2,841 encountered terminal identities are unassessed, 27 have positive
+listings and one has a failed lookup. They are not final makeability estimates.
+
+PubChem individual identity/vendor controls worked, but subsequent batch and control
+requests returned timeout/503 errors. Response headers reported provider service
+overload while client request count/time remained green. Failures and retry guidance
+are preserved; missing responses never become zero listings. Additional current
+supplier pages were reused under the new listing criterion without promoting them
+to strict availability evidence. A separately frozen, nonpaid 16-target residual
+search diagnostic is being launched with isolated processes and recoverable outputs.
+
+Commands, protocols, complete all-family tables and independent aggregation audits
+are under `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/`
+`computational_makeability_v1/`, particularly `evaluation/construction_v1/` and
+`root_review/construction_v1.json`. Broader vendor assessment, residual routing and
+independent paper evaluation remain open; no production synthesis guidance is admitted.
+
+The subsequent 16-target local diagnostic completed without process failures in
+281.868 seconds of supervisor wall time. Fourteen targets had at least one
+catalog-solved path; all 48 alternatives, including 10 unsolved paths, are retained.
+Summed process wall time was 885.433 seconds and is not reported as CPU time.
+Its full-cohort supplement raises L2-ready coverage from 645 to 708/1,408, adding
+140 path-covered branches. Combined coverage remains 31/1,408, direct-only 9/1,408
+and strict closure 27/1,408. Of 2,877 admitted encountered terminal identities,
+2,849 remain unassessed, 27 are listed and one lookup failed. The independent root
+audit again passes all request/branch bindings, conjunctions, counts and manuscript
+pins. Matrix v14, progress v7 and README_V7 record this current development snapshot.
+
+Automatic approval review then rejected the planned PubChem lookup because it
+would disclose internal chemical identifiers to a public service without specific
+user authorization for that payload and destination. No network workaround was
+attempted. A concrete reviewed payload contains 4,753 new lookup identities from
+the 4,803-identity union of current roots and admitted route leaves; 50 identities
+already have reusable positive observations. Leaves found only in unsolved paths
+are excluded, and exact disconnected salt forms are retained. An explicit user
+disclosure question is pending. Local CPU work is independent of this permission:
+the productive diagnostic justifies a frozen remaining 663-target search phase,
+with the same per-target scientific budget, four workers, a four-hour dispatch
+guard, a 180-second outer process timeout, no automatic retries, and independently
+checked full-cohort progress snapshots. Its completion is not yet claimed.
+
+The remaining search passed independent review and launched detached at
+17:26:24 UTC as PID 71519 under `routes/remaining_search_v2/`. The first four
+processes completed without operational errors; three found catalog-solved paths
+and the formaldehyde search was bounded-unsolved, not evidence of unavailability.
+The planning estimate is 3.245 hours, not a guaranteed completion time. A prelaunch
+restart defect was corrected in a versioned successor before any of these targets
+ran; the rejected first protocol and review remain preserved.
+
+The independent aggregation watcher is live as PID 72909 under
+`evaluation/remaining_search_monitor_v2/`, scoring each immutable 64-target export
+and the final or stopped export against the fixed vendor snapshot. A startup CPU
+accounting omission in its first version was corrected before any aggregation;
+the old process stopped without aggregation children. Its whole prior lifetime
+was conservatively charged as 60 CPU seconds, and the successor preserves the
+cumulative 600-CPU-second cap. Search lifetime is independent of this watcher.
+The public query payload also passed an independent exact-union/InChIKey audit;
+actual PubChem disclosure approval remains pending. No further network access or
+final paper promotion is claimed.
+
+### 2026-09-25 — Partial route-search and vendor-evidence update
+
+On the unchanged 1,408-request development cohort, the first 64 of 663 remaining local searches increased L2-ready coverage from 708 to 788 requests. L2-ready permits direct-listing bypass or a target-bound computational path before requiring its leaf listings. A separately pinned vendor partial-v3 snapshot added acetic acid as a positive identity and two makeable branches (752 to 754), with no product gain: 9 direct-only, 31 combined, and 27 strict. Of 2,979 encountered leaves, 28 are positive and 2,951 remain unassessed. Full route search and the supplier census remain incomplete; no final held-out or multi-training-seed claim is supported.
+
+The user's explicit “yes” authorizes this cohort's PubChem disclosure, recorded in vendors/actual_user_approval_v1.json. Current supplier progress is limited by observed service failures. Earlier denial and failed observations remain preserved. The separate route-only watcher retains vendor partial-v2; no manuscript or frozen primary policy changed.
+
+Saved status: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/vendor_partial_v3_routes64/status.json`.
+
+Snapshot timing: the entry above records the export-64/vendor-partial-v3 state. Subsequent bounded supplier recovery qualified single-identifier lookup followed by exact-CID supplier-page collection; the fast batch method remains unqualified. A versioned detached census is being prepared under the existing user authorization. This qualification does not itself complete the census.
+
+### 2026-09-25 — Prioritize whole-product L2/L3 evidence deficits
+
+A frozen analysis of vendor-partial-v3/export-64 preserves all 1,408 development requests: 31 combined successes, 757 L2-ready with incomplete terminal listings, 599 missing at least one path/direct listing, and 21 nonexact L1 outcomes. Exact optimization over one admitted whole path per required component finds 72 of the 757 need one additional positive identity, 168 need two, and 517 need three or more. Independent exhaustive enumeration verifies the minima and all optimal missing-identity sets. These are conditional evidence deficits, not predicted listing success or measured additional makeability. No single identity can close more than three products in this snapshot.
+
+The saved diagnostic is `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/improvement_diagnostic_v1/result.json` (SHA-256 `f81d799065af10fb8a79b6bb732bb8559e75e409dba5935ba943be61b5830478`). Its README records the per-family priorities and a proposed, unexecuted independent-training-seed/held-out confirmation protocol. Preserve the full query population; prioritize evidence gathering by complete-product impact. Finish existing route and listing work before attributing low makeability to model training. Any later generation intervention needs separate quality, diversity, novelty and matched-budget comparisons.
+
+The already authorized single-identifier supplier census launched detached as PID 84848, with receipt `computational_makeability_v1/vendors/census_submission_v1.json` beneath the broad-routes result directory (SHA-256 `337a05c34e178dc46f27fb6e213723179fc4c9835b8c81588ebcd58a53ece3e1`). Its frozen 4,803-identity inventory includes 53 reusable positives and 4,750 queued identities. Intermediate receipts preserve provider errors and unknowns; request-spacing estimates are not elapsed-time guarantees. The route-only watcher remains unchanged. No new training, sealed evaluation, production guidance or manuscript changes were performed for this diagnostic.
+
+### 2026-09-25 — First current supplier checkpoint increases makeability
+
+Holding the generated molecules and export-64 route trees unchanged, authenticated supplier checkpoint 001 increased combined computational makeability from 31 to 40 of all 1,408 requests, with nine additions and no losses. L2-ready remained 788, direct-only 9 and strict-secondary 27. This isolates an evidence-collection improvement; it is not a model or training gain. The full supplier census and local route phase continue, and the result remains preliminary development evidence.
+
+Result: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/vendor_checkpoint_001_routes64/result.json`, SHA-256 `3dba728dce149ba6109321eb6e2ad863dfe655837f4cdec76e9997a02cadb4b8`. The independent root audit passes all request/branch bindings and conjunctions: `root_review/vendor_checkpoint_001_routes64.json` in the same computational-makeability directory, SHA-256 `ad99eaa58663e992f2fbfd0efd8fcf0ca0180db55e9c4361a8574aaf97288bd7`.
+
+### 2026-09-25 — Parallel routing work and correction of the old-paper comparison
+
+The pinned older paper's saved funnel supports 1,472/1,549 (95.0%) computational accessibility among Ugi designs that had already reached routing after upstream support and property checks; 931/1,008 outside the original enumeration resolved. Pre-routing exclusions are unmeasured, not failed routes. Its current-number producer explicitly says the historical97.1% claim is not emitted by an identified artifact and must not be cited until reproduced. The later old-paper95% path used two dedicated precursor procedures and supplier evidence, rather than the general recursive planner. This is a saved-result audit, not a rerun of historical molecular assessments.
+
+A new offline check on the exact historical ledger recovers 4,333 selected occurrence rows, 2,590 distinct products and201 distinct role-components. The unchanged current constructor provides original-order two-step Ugi procedure witnesses for all163 aldehydes and15 isocyanides; an independent saved-trace validator verifies target/precursor bindings, order, acyclicity and every exact forward reproduction. Constructor execution used0.506 CPU seconds excluding imports/admission. The initial validator assumed the first stored witness followed the old step order; it stopped because an alternative order could appear first. The corrected validator records an original-order witness from already saved alternatives, with no result or constructor change. Historical supplier bodies remain absent, so this does not reproduce oldmakeability or establish new experimental substrate scope.
+
+A separate current-vendor re-assessment of104 completed searches now authenticates whole explicit mapped trees and all nested documentary bytes while preserving original planner_solved=false. It admits zero new paths:123 structurally bound nonzero trees still lack current listings, and three zero-step trees are rejected. The negative result is retained. Existing strict gates and live canonical evaluator files were not altered.
+
+The independently audited enriched snapshot combines routeexport128 with vendorauto0256 and yields835 L2-ready,20 direct-only,124 combined and27 strict outcomes out of all1,408 requests. This combines additional route and vendor evidence; it is not a training or molecular-quality gain. The one-shot monitor first encountered a CPU-hard-limit preflight defect and then a locator-key error before any child aggregation. Both versions are preserved; the corrected successor carries prior CPU charges and completed within38.823 cumulative CPU seconds. No failed scientific aggregation was rerun.
+
+Pinned artifacts:
+
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/planner/remote_engine_reuse_v1/legacy_score_audit_v1/audit.json`: `7aee52e20405cbad1aed2204b38cad4a1a8fd98e9f5df2e0ea6f4867b8f4ce06`.
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/routes/legacy_constructor_parity_v1/result.json`: `58a21d409aa89ddd3763b6706f4c2aef8f75f5be51513b193e90a3e5c6fe5028`.
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/routes/legacy_constructor_parity_v1/validation.json`: `0ee6a182748106ad8c29fa5392a848e4c2122e0a98ba227abb60bd43b5d2d5c4`.
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/routes/planner_vendor_closed_v1/run_v2/result.json`: `fc0a1d5d79fc10ab7c153677f0949d65c3157c339e1e6c89ce3f79a2f2acda4a`.
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_monitor_v3/assessment/result.json`: `b2e6375f26d35ac8d7925afb8c1735078ca5059326ce89f95fe8f42bc5b81e04`.
+- `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/root_review/enriched_monitor_v3.json`: `db6d7b0babffd97e860fcf2752242889b4c436706dd661caf07b77eab56f8e74`.
+
+### 2026-09-25 — Matched epoxide and ketone route additions
+
+At fixed export128, vendorauto0256, the same 2026-09-25T18:15:41.544188+00:00 evidence time and all 1,408 development requests, source-pinned epoxide construction increased L2-ready coverage from 835 to 849. A subsequent matched ketone addition increased it to 901 (64.0%). The epoxide changes were acid–epoxide 7→8, amine–epoxide 19→24 and epoxide/O-acylation 14→22; ketone additions changed alpha-isocyanoester/dihydroimidazole 14→38 and ketone/isocyanide/amide 10→38, each out of 64. Computational-path branches increased from 2,864 to 2,984. Direct-only 20, combined 124 (8.8%) and strict-secondary 27 were unchanged. New paths still require terminal listing evidence; these are route-coverage improvements, not training or molecular-quality gains.
+
+The epoxide constructor uses unchanged archived template 39319 and an exact published control; the ketone constructor uses unchanged template 26965, six exact published controls and a bounded saturated-monoketone scope. The ketone source retains competing oxidation products and non-isolated GC yields as limitations. Neither constructor establishes exact experimental substrate scope or successful synthesis. All 53 ketone routes preserve heavy elements, isotopes and charge with formal loss of two hydrogens. Added templates and source documents remain result-local; the vendored registry is unchanged.
+
+Initial v5 integration failed its strict-subset assertion because the source resolver returned the canonical Receipt dataclass while the result-local successor required its own Receipt type. The failed run and 38.293 CPU seconds are preserved. The versioned correction copies authenticated receipt location/hash fields without changing evidence, and retains the original strict-subset check. Original-basis verdict equivalence holds for 2,044 components and 1,408 products; independent aggregation checks verify full denominators and unchanged manuscript pins. The matched ketone run used 26.596 process CPU seconds. No manuscript was revised, and no held-out or independent-training-seed evidence is admitted.
+
+Result: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/ketone_intervention_v1/assessment/result.json`, SHA-256 `6fd4dc43571dbf4ccad74c52c71ec510eea24a9efabc86d27d88ac787310e692`; validation SHA-256 `2fa049cd39714d389a102950bbb526323709dbfb1563002172bab076072e18d7`; independent aggregation audit SHA-256 `34b8a4f3a9ab810c8cc12f05ccd1a530ffe6ed47a2723e65137b6a2c2974f56e`. `README_V8.md`, `progress_v8.json` and `evidence_matrix_v15.json` expose the update; the other 14 evidence blocks remain byte-equivalent as JSON values and final paper results remain pending.
+
+### 2026-09-25 — Recover untouched route searches after a native telemetry failure
+
+The original local search stopped after 196 attempts: 195 successful process exits and target 192 aborted with SIGABRT. Although that worker had written a completed result body, the exporter excludes it. The matching macOS crash report identifies the ONNX Runtime embedded telemetry worker's recursive-mutex/upload path; cache warnings alone do not diagnose the failure because successful workers also emitted them. No failed target was retried or reclassified as a scientific success.
+
+A versioned recovery sets the officially documented ORT_DISABLE_TELEMETRY=1 before interpreter startup and disables telemetry events before constructing sessions. Library/model bytes, original target identities/seeds, 60-second/300-iteration/depth6 search, four workers, 180-second outer timeout and the 21:26:24.686364 UTC dispatch deadline are unchanged. Six focused tests pass. The first untouched target 196 was its one actual preflight attempt: zero process exit, empty stderr, unchanged qualified runtime/source hashes and three bounded-unsolved hypotheses. This qualifies operation of the mitigation; it does not prove all future crashes are prevented.
+
+Root launched the detached continuation for untouched targets 197–662 as PID 13647. Its launch receipt is `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/routes/remaining_search_recovery_v1/continuation_launch.json`, SHA-256 `5e76aac94c4ef7d809fab41d038b3f01afbcdb473231c977b17ff14612a4feb7`. New cumulative exports include the original valid results, retain failed 192 explicitly, and must never be concatenated with the old cumulative export. The preflight validation SHA-256 is `08dccfef6e8c65b705972112d2e9bea088acd9c8a0c7106f50b3f546d27dfca1`; independent recovery review SHA-256 is `7574ba004df6e1a532c0d290f487fd5825599a82f52e6ddcfb9d4fe7bbb34e28`.
+
+A separate six-request supplier batching qualification was blocked by automatic approval review before process creation. The stated reason was that the transcript did not clearly authorize the new 30-terminal public PubChem payload and temporary active-worker pause. No signal or network call occurred; the existing authorized serial collector remains unchanged. Root requested explicit approval for that concrete bounded action. Its rejected execution record is `vendors/throughput_review_v1/execution_v1/automatic_review_rejection.json` beneath the computational-makeability directory, SHA-256 `d1eaea49fc5e7fb3f82e0a7d4ba606757590c526728bc9e03b5fc1010dcd6b32`. A checked successor handles both Retry-After forms and has 14 passing offline tests; it remains unexecuted pending that approval.
+
+### 2026-09-25 — Detached enrichment monitor and next full-denominator checkpoint
+
+A reviewed detached evaluator now combines one authenticated cumulative route export with each admitted supplier checkpoint, retaining all 1,408 requests. It carries 180.615821 CPU seconds from the old monitor, caps the shared ledger at 600 CPU seconds, permits at most four 90-second child reservations, and stops by 21:36:24 UTC after assessing the latest complete prefix. The supplier census can remain incomplete at that deadline. Unlaunched versions preserve fixes for the recovery terminal filename and scientific-input drift: frozen criteria, population and admission hashes are checked before and after child dispatch. Nine focused checks and an independent 37-pin review pass. PID 15174 is the live monitor; neither it nor its failures control the supplier or route workers.
+
+Its first saved snapshot uses cumulative recovery export197 plus supplier auto0512 and gives 934 L2-ready (66.3%), 46 direct-only, 207 combined (14.7%) and 27 strict results out of all 1,408. Relative to the matched ketone snapshot these are gains of 33, 26, 83 and 0 respectively, without losses. This combines route and listing evidence rather than a model or molecule change. All 21 nonexact-L1 requests remain in the denominator; 2,715 of 3,152 encountered leaf identities still have no lookup. The aggregate used 22.900231 child CPU seconds and brings charged monitor CPU to 208.516052, including its parent reservation. Paper confirmation and coverage remain incomplete.
+
+Result: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/enriched_progress_monitor_v2/snapshot_512/result.json`, SHA-256 `03f328b4dff6487f67bca5819c6c268ad28e358ba65e72af59413570def17b99`; validation SHA-256 `e6669bb0e6a4eebec1f249c331069bcbed7e42cc5cb17c4f411f63cd46f6677e`; independent root aggregation audit SHA-256 `66cafdad9d72d0bfc20d84f9209831e18a015617d855a4d70bf88f9cd1c4df22`. `README_V9.md`, `progress_v9.json` and `evidence_matrix_v16.json` record this development update. The other 14 evidence blocks and all 15 manuscript input pins are unchanged; no final manuscript results were promoted.
+
+### 2026-09-25 — Continuous-activity-conditioned generation did not establish guidance
+
+Under the user's explicit HeLa/A549 activity-guidance authorization, completed the frozen
+22-family generator study using continuous source-normalized responses, without activity
+bins. Reused 550 HeLa/YX_2024 Ugi and 581 A549/BL_2023 aza-Michael designs, existing
+connected-product-neighborhood development folds, qualified annotations and the frozen
+checkpoint. Protected identities and reservations remained excluded from fitting and
+admitted prediction. These are reused development data; shared precursors are allowed,
+and cell, study and chemistry remain confounded.
+
+All 27 final fits (three folds, three seeds, genuine/hidden/shuffled activity), six inner
+capacity comparisons and 24,192 generation attempts completed. Inner hidden-label selection
+chose adapters plus the final Transformer block in all folds. Full molecular size support
+was retained. Independent checks verified source labels, assembly annotations, fit/split
+isolation, matched controls, checkpoint reconstruction, generation replay, applicability
+and aggregation. Execution success is separate from the scientific result.
+
+The continuous denoiser failed its primary held-graph criterion. Relative loss reductions
+versus hidden/shuffled were -1.109%/-0.935% for HeLa and +0.0213%/+0.0086% for A549.
+Both continuous program priors also failed their improvement criteria. High-target joint
+generation produced 438 exact-L1 and 53 eligible HeLa attempts out of 576, versus 438/55
+for prior-only conditioning; the A549 counts were 103/1 versus 104/1. No 64-attempt cohort
+filled the required 16 distinct eligible selection slots, so all primary potency-gain
+comparisons are not estimable. Exact-yield guardrails failed in one of nine HeLa and two
+of nine A549 blocks; diversity guards passed. Neither cell advances as demonstrated
+guidance. No predicted score is a new activity measurement.
+
+Descriptive follow-ups found mostly singleton training programs and localized HeLa's
+denoising degradation to closure-endpoint coordinates. Training loss still changed near
+the fixed 400-update endpoint; this leaves optimization insufficiency plausible but does
+not show that longer training would rescue conditioning. Additional model selection must
+use inner validation, and new confirmation cannot be claimed on these reused folds.
+Normalization references, replicate provenance and cross-study coverage remain limited.
+
+The first generation launch failed before sampling because a source-fingerprint helper
+expected an absent directory. Its zero-attempt failure was preserved; an explicit source
+directory list corrected the operational defect without changing scientific settings.
+All computation was local CPU, with zero paid calls. Local execution was too slow for
+this full sweep. The existing detached Modal runtime is reusable, but these drivers still
+need device propagation, CUDA RNG/durability support and a bounded numerical/timing
+qualification. No GPU run or measured speedup is claimed, and the CPU cohort was not
+mixed with another backend.
+
+Results and runnable analysis sources: `results/phase1/continuous_activity_guidance_v1/`.
+Final aggregate SHA-256: `ecbae5008e0f3fecb521f1ab2fbccc3f56d23a4b1d65f48d15715a029aad15ec`.
+The report, stage receipts, figure exports, source archive and negative outcomes are
+retained. No manuscript efficacy claim, prospective candidate selection or sealed
+biological evaluation was introduced.
+
+### 2026-09-25 — Explicitly approved supplier batching test fails on provider overload
+
+The user replied “approve” to the concrete 30-identifier PubChem test, capped at six requests and a temporary collector pause/resumption. The preflight discovered that the original collector had already stopped at18:51:27 UTC after three consecutive provider failures: 978 of4,750 queued identities observed and3,772 pending. Its terminal receipt is preserved. The test therefore required no process pause, resumption or restart.
+
+Three local pre-request failures were retained with zero HTTP calls: executable symlink validation, a childless zombie process and an inaccessible setuid system-login process. Versioned operational corrections preserve the repository-source guard and explicitly verify the executable's resolved path/hash; process exclusions are restricted to recorded nonexecuting/system cases. The final wrapper passes18 focused checks and reuses the frozen identity binding, request orchestration and cooldown logic.
+
+The first five-key batch returned HTTP503 at19:11:27.677616 UTC. The provider reported Service Black537% alongside Request Count Green5% and Request Time Green0%, with Retry-After30 seconds. The probe stopped after one request without retry or continuation. Five identifiers remain unresolved and25 were not queried; no positive or observed-zero listing is admitted. Batching throughput and semantic behavior remain unqualified because service overload confounds this observation. The cumulative HTTP ledger increased1,761→1,762 of the original12,000-call cap. No supplier worker was restarted; local route continuation remains active and its supervisor lock is held with empty stderr.
+
+Artifacts: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/vendors/throughput_review_v1/execution_terminal_v4/`. Result SHA-256 `97c986b22bcde056016ea979e8c2a1d2b06168c3d7edb78734727d76216c03d5`; recovery SHA-256 `322a84b787427e4bb4c03cbe515788d37979a13c7ae98b3c4c49db1355739683`; closeout SHA-256 `514e43c36454af3f9cf9888bed34d85152063775ca55c55646ae95ce0921f864`. Independent root review authenticates the closeout pins, one-call ledger increment, full30-identifier disposition and absence of positive/zero evidence. This test changes no paper score or manuscript.
+
+### 2026-09-25 — Continuous-activity CUDA execution prepared; remote upload awaiting approval
+
+Implemented explicit deterministic FP32 CUDA execution and restartable training/generation in the separate `research/potency-modal` worktree, preserving the original continuous-activity CPU experiment. Fifty focused tests passed; two CUDA tests await a real GPU. Actual CPU checkpoint and stochastic-chunk recovery checks were exact; 254-atom/12-closure tensor support was retained. An isolated 174-file input closure loaded successfully. Prepared a single detached L4 preflight with a 900-second total call limit and no retries. Automatic approval review rejected the upload of the 251 MB scientific input bundle plus source code to Modal before any process began, requesting explicit authorization for that data transfer. No files uploaded, no paid job launched, and no GPU speed or biological-improvement claim admitted. Await specific upload authorization; do not bypass or automatically retry. Receipts: `results/phase1/continuous_activity_cuda_v1/{result,launch_proposal,approval_review}.json`; report: `results/phase1/continuous_activity_cuda_v1/REPORT.md`.
+
+### 2026-09-25 — H100 preflight upload explicitly authorized
+
+The user approved upload of the 251 MB continuous-activity scientific input bundle plus experiment code to the configured Modal workspace and permitted H100 execution. Submitted the single bounded detached H100 preflight (two CPU cores, FP32, 900-second maximum remote call, no automatic retries) as application `ap-6VS1hv35Gj2w9bVU3TcuSA`. The prior approval-review block is resolved; numerical/performance findings remain pending. Source/config/input pins: `results/phase1/continuous_activity_cuda_v1/h100_launch_authorization.json`.
+
+
+## 2026-09-25 — Terminal supplier prefix and refreshed all-family computational evaluation
+
+The authorized local continuation independently qualified two previously bounded-unsolved saved route trees using current exact-identity terminal listings, without changing their historical `planner_solved=false` flags. The offline refresh inspected 344 successful saved observations / 1,028 trees in 6.37 CPU seconds: 2 newly closed proofs, 576 trees with incomplete terminal evidence, 447 previously solved trees, and 3 rejected zero-step trees. The packet is `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/routes/planner_vendor_closed_v1/run_v3/paths.json` (sha256 `da1250c4c6d04d3d0651977fcc7998d198204a32320763a63ef335b6042132ac`). No new search or network calls were needed.
+
+A reviewed monitor successor retired only the idle predecessor, retained its actual CPU accounting and prior failure/history, and immediately assessed the complete terminal supplier prefix of 978 observations while the independent route search continued. At the fixed cumulative route export325 plus terminal978 plus the separately admitted construction/proof packets, all 1,408 development requests (22 x 64), including 21 nonexact L1 failures, yield **988 L2-ready, 76 all-component direct-listed, 264 combined computational-makeability successes, and 27 strict secondary dossiers**. Relative to the previous 512-observation snapshot these are +54/+30/+57/0; routes and listings both advanced, so this is not a single-factor or model-improvement contrast. Removing the two new proof IDs from the saved verdicts changes no whole-product or branch success: their unique incremental contribution is zero.
+
+The result SHA is `6a29bcab8197774d6609e35fb57693226a9f1cc61fcf202f5fa297fe7525ee69`; independent aggregation audit SHA is `e6183320ba7ab33fc19365e2b2ad2c09fa93fcc0df1ee741c2e6374a71c60416`. The assessment used 39.773945 CPU seconds, bringing the unchanged monitor ledger to 253.289997/600 CPU seconds. `broad_routes_goal_v1/README_V10.md`, `progress_v10.json` and `evidence_matrix_v17.json` publish the saved development counts. Only R10 changed; the other 14 evidence blocks and all 15 manuscript input pins are unchanged. No independent held-out or multi-training-seed result is claimed.
+
+A separate complete acid-component graph diagnostic at this same snapshot found 271 acid-bearing constitutions, of which 131 lack both a path and a positive direct listing (132 branch incidences). Missing/total counts are 0/15 for unbranched saturated acyclic acids, 19/20 for branched saturated acyclic acids, 54/80 for acyclic unsaturated acids, 57/155 for additional functionality, and 1/1 for the remaining cyclic stratum. The query is loaded from the vendored registry; group precedence, all structures and deterministic SHA-ordered depictions are preserved in `evaluation/acid_topology_diagnostic_v1/result.json` (SHA `11dda836ff3c1a03f5b5e068419003d8a28c3e9310f0a449e586a33990ef3b0f`). These are descriptive routing gaps, not a new quality gate, experimental impossibility, or a demonstrated training defect.
+
+Original-census recovery was prepared for 3,771 never-attempted identifiers, preserving 978 completed observations plus one separately attempted original identity. Two automatic approval reviews rejected the first-identity service qualification before process creation, despite the second review being supplied exact original-payload membership and the saved earlier full-census approval. Both attempts made zero HTTP calls. The reviewer treated the separate 30-key test as the only accepted approval and rejected earlier generated approval records as insufficient. The root requested explicit current approval for these exact 3,771 original identifiers to public PubChem, at most 7,542 HTTP requests, with an initial one-identifier health qualification, no failed-identifier retry and stop on provider overload. Outbound collection remains paused pending that reply; local route search and offline chemistry qualification continue.
+
+
+## 2026-09-25 — Qualified thiol construction and measured incremental route coverage
+
+A source-bounded primary-alkyl-thiol constructor now consumes the unchanged archived template27113 and the cached exact linear-C13 patent control (WO2019047824A1, Example21 step1). The full 2,044-component scan produced 23 exact computational paths in 1.17 CPU seconds. The raw-envelope comparison estimated 19 new targets; the authoritative saved-classifier comparison found 18 newly path-covered distinct roots. The raw estimate is not the admitted coverage denominator. Every normalized path retains alkyl bromide, thiourea and water, preserves mapped sulfur provenance, and passes full atom/isotope/charge balance. Six beta-tertiary and three beta-quaternary/neopentyl-like substrates were excluded. More remote branching is retained only as an untested computational hypothesis, without substrate-specific success/selectivity claims. All 16 focused chemistry checks passed. The frozen paths SHA is `7901bb0341078dd51bad024023cef03a2c163661d7fba69e63a3288604fa188a`; independent admission SHA is `18c165f143711712e26913c50b5d0584d367eb523bcb542fcb1fba1bb44247a8`.
+
+The matched all-1,408-request evaluation changed only this authenticated path packet: **L2-ready 988 to 1,000 (+12: four AEMA and eight preassembled-thiol-yne requests), direct-only 76 unchanged, combined computational makeability 264 unchanged, strict secondary 27 unchanged**. There were 59 newly path-covered required branches but only 20 newly L2-ready branches because some already qualified through direct listings. All prior successes and all failures remain in their denominators. Twenty-two new bromide terminal identities lie outside the frozen supplier inventory and remain unassessed; no new disclosure or listing evidence was inferred. The negative complete-makeability result is preserved.
+
+Assessment execution used 26.951299 CPU seconds, with conservative total charge36.951301 below the separate120-second diagnostic cap. Result SHA `841329b57ddcf5e0b9790ae80c23329bb8a434cc9cac8e91d62df789475ba052`, validation SHA `66231fe589e2a45b6f831afde3a14dd08becd8bf84ff0da4f3a5ad5c056194fd`, independent full-denominator aggregation audit SHA `4043548936056000459bedd186bad77e9bce0ae0696f13c582b994e472b8486f`. Latest development publication is `broad_routes_goal_v1/README_V11.md`, `progress_v11.json`, and `evidence_matrix_v18.json`; only R10 advances and no manuscript file changes. The still-running v3 monitor retains its original frozen path inputs, which exclude this thiol packet. Its future route-prefix result must not silently replace the newer construction-inclusive result; an explicit cumulative union is required at the next combined assessment.
+
+A separate saved-verdict ablation of the later128 learned-search targets holds terminal978 listings and other evidence fixed. Removing their384 raw path IDs (150 admitted;234 explicitly unsolved) reduces L2-ready988 to944 and combined264 to263; only request1090 depends on those paths for complete makeability. All584 older path records are byte-equivalent within the later968-row envelope. The marginal contribution is44 L2-ready and one complete product, not a matched search-budget or training effect. Result SHA `87ca0a2f070f60c4fde5d2a58d4f9abc15a6f3f7bf3b073474f3a19fab4c6f62`; independent review SHA `d5534b77ab492d3c82886ada5352307240507cb0b837be348222e15a92aea589`.
+
+Supplier recovery remains prepared but unlaunched pending the explicit current PubChem approval requested this turn. The immutable prepared closeout is `vendors/census_recovery_v1/prepared_closeout.json` (SHA `839d3e98558a8e2998026e09c1cbb4f380152736d176b7522ce309a51a8e546d`). Twelve focused checks cover qualification, HTTP cap/deadline/provider stops, and the cumulative4750-identity publisher including prior unknown attempts and duplicate rejection. There have been zero additional outbound calls since the previously recorded503; cumulative starts remain1762/12000. Resume commands are saved in that directory's `RESUME.md`. No automatic retry, new inventory expansion, training, paid compute, sealed-holdout access or paper editing occurred.
+
+
+### 2026-09-25 — H100 speed measured; continuous-activity CUDA qualification fails optimizer check
+
+The explicitly authorized single detached H100 preflight completed and its downloaded artifacts
+matched the remote manifests. On one H100 80 GB HBM3 with deterministic FP32 and TF32 disabled,
+median training-update time was 0.07912 seconds versus 0.64308 seconds on the same host's two
+CPU cores (8.13-fold speedup). Sixteen-molecule, 64-step generation batches took 3.61270 versus
+12.64202 seconds for A549/BL_2023 (3.50-fold) and 3.93023 versus 8.99399 seconds for HeLa/YX_2024
+(2.29-fold). Three post-warmup repetitions retained original scoring, replay, writes and volume
+commits in generation timing. These are small-workload remote-host measurements, not a local-Mac
+or full-sweep speedup or cost comparison.
+
+Exact CUDA training checkpoint recovery and half-trajectory generation recovery passed. Common-input
+logit, loss and gradient comparisons passed at all four tested corruption times. The first AdamW
+update failed the prespecified absolute parameter tolerance at all four times, with maximum error
+7.2882e-5 against 2e-6; relative L2 checks passed. The absolute gate remains unchanged, so CUDA
+qualification is false. A local CPU diagnostic identifies nearly-zero attention key gradients as
+a possible numerical-sensitivity mechanism, but the remote aggregate-only record cannot attribute
+the actual discrepancy to a parameter. Per-parameter differences, optimizer-state inspection and
+post-update functional checks are still needed. No full scientific sweep or paid retry was launched.
+
+Application `ap-6VS1hv35Gj2w9bVU3TcuSA`, call `fc-01M3D0F4HH2468V117XG9EQ15S`, request
+`183f9fb59ad0362031daacde1824ce85902054ab9c39978c09a4b3663acccb29`; raw result SHA-256
+`c40f964b10257ae1602a3d14d49aae0617a3a4640daca6b5dc9e3c5d2820ab35`. The preflight took
+173.36 seconds after setup. The source archive, input hashes, numerical and timing records,
+verification receipt and report are retained in `results/phase1/continuous_activity_cuda_v1/`.
+This resolves the prior upload block and supersedes its pending execution status. It changes
+neither the negative completed CPU guidance findings nor any biological or manuscript claim.
+
+
+## 2026-09-25 — Final bounded route census and cumulative thiol-inclusive evaluation
+
+The route recovery completed at20:44:42UTC before its frozen deadline. The complete663-target union has662 successful process receipts and the single preserved target192 native-process failure; all467 successor attempts exited successfully and no failed target was retried. Offline refresh over682 observed targets /2042 paths yielded only the same two already-admitted vendor-closed proofs:912 previously solved paths,1124 missing listing evidence,4 structural rejects and2 closed trees. No additional proof was promoted; the refresh used5.66CPU seconds.
+
+The fourth and final permitted aggregate retained the original terminal978 supplier snapshot and final663 route export, preserved the two older admissible proof records at the fixed as-of time, and appended the independently qualified23 thiol paths. The later proof refresh is equivalent but postdates this as-of, so the unchanged time gate correctly rejected it in preflight; that failed preflight remains saved. The final full-denominator result is **1119/1408 L2-ready,76 direct-only,273 combined computational-makeability successes and27 strict secondary dossiers**. All1387 exactL1 and21 nonexact requests remain included across22 families;3723 required branches and4510 incorporated occurrences are unchanged. The matched final663 comparison attributes11 newly L2-ready products and58 newly path-covered branches to the thiol packet, with zero additional complete-makeability successes. This differs from the earlier+12 at export325 because later learned paths overlap one prior thiol gain.
+
+Result SHA `61f45b456fb97a04269fd338b6ab08a8e3d14e59d0c5f1c74606bc44a655e816`; validation SHA `47311bc6a38c069958a4a9d22c3419d233eccf913a74b2165a3dd004b54867b0`; root independent aggregate audit SHA `c704a780eccae1bf8b70e9204b3e0d533142164ab977f1d44b9ad1b891b4ac62`. Four focused wrapper tests and formatting passed. Execution24.039959CPU plus10seconds conservative preparation charge brought the original closed monitoring ledger to310.871732/600CPU, with4of4 rollups used. Latest status is `broad_routes_goal_v1/README_V12.md`, `progress_v12.json`, and `evidence_matrix_v19.json`. Only R10 changes; manuscript inputs and all other evidence blocks are unchanged. These are adaptive development results, not independent held-out or multi-training-seed paper evidence.
+
+The user explicitly approved the pending3771-original-identifier PubChem recovery question with “ok do it -- do whatever it takes to get the results i need”, then requested parallel execution again. One first-attempt recovery query ran at21:03UTC:HTTP200 contained the exact identity/CID, but the fresh response reported ServiceBlack163% while personal count/time remainedGreen3%/0%. The frozen overload gate stopped before any vendor query, main launch or batching. Qualification result SHA `03fdd59bcc4258a55c1770ed02ec394ebbd5c842699e972494dcd89b2a22a569`; global molecular/collector HTTP starts1763, previously1762. The outcome is operational overload and unknown supplier evidence, not zero vendors. Approval persists for the remaining original payload; this provider failure does not create permission to retry failed identifiers or broaden it.
+
+Parallel work now investigates a bounded no-private-input public-service metadata monitor and an official publicly downloadable supplier catalogue. PubChem bulk metadata suggests multi-gigabyte downloads with unmeasured local identity-discovery cost, so no such chemical-data bulk download was launched. Login-restricted alternatives were not accessed. Any new catalogue listing must retain current official index/file receipts, actual file modification date, exact full constitutional form, positive-only membership, all unmatched unknowns and no stock or experimental-success claim. Separate source admission and a new explicitly bounded matched experiment are required before changing the final supplier snapshot.
+
+
+## 2026-09-25 — OTAVA catalogue matched comparison and public-census continuation status
+
+The separately bounded OTAVA listing intervention completed over the unchanged 1,408 development requests (22 families × 64; all 21 nonexact L1 failures retained). At the same 2026-09-25T21:18:15.875595+00:00 assessment time, the control exactly reproduces 1,119 L2-ready, 76 direct-only, 273 combined computational makeability and 27 strict dossiers. Adding only the independently admitted public OTAVA catalogue positives yields 1,120 / 78 / 288 / 27 respectively: +1 L2-ready, +2 direct-only and +15 complete products, with no losses. Actual paired runtime was 48.628572 CPU seconds; conservative total charge 58.628574/120. The prior four-rollup ledger remains closed at 310.871732 CPU seconds.
+
+Source admission preserves all 35,103 catalogue records, including seven parse failures, 256 exact matched constitutional identities and 153 new positives relative to prior listings. The downloaded file's February 27 modification date is retained separately from its September 25 observation through the supplier's current official catalogue page. Catalogue absence remains unknown; listing is neither confirmed stock nor experimentally validated synthesis. No newly closed unsolved trees were included in this paired comparison. Separate saved-tree evidence is being reviewed without changing this frozen result.
+
+Reproducibility: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_intervention_v1/protocol.json` SHA256 `be908bb8bf43348560eed334cb8d34e36b9fccc9f21a98d0d652ea3a87ed65ee`; catalogue `result.json` SHA256 `960c65abf31d9c4ee6450bab17aa534bd2824d5ed75f04b521e39eb5142548fc`; root aggregation audit SHA256 `7813fcb39b89e48a06c8d31f27dc9770724602228f07ac0d824add535c223114`. Deterministic complete census; no stochastic sampling seed. The R10 evidence matrix is versioned to v20; 14 other evidence blocks and all 15 manuscript pins remain unchanged. These are adaptive TRAIN-derived development coverage results, not independent held-out or multi-training-seed paper confirmation.
+
+PubChem's public metadata-only health observation at 21:14:16 UTC passed all three green load indicators. However, automatic approval review rejected the concrete 3,770-identifier/7,540-request molecular continuation, including a root retry after an exact subset proof, before process creation. No molecular continuation started; global calls remain 1,764. The exact current payload/destination approval question is pending. Offline catalogue evaluation continued; no alternative execution path bypassed the rejection. The prior false molecular qualification and all provider failures remain retained.
+
+
+## 2026-09-25 — Incremental whole-tree closure after OTAVA admission
+
+A separate offline refresh of all 2,042 saved trees found four additional complete trees using the admitted OTAVA observations (17.94 CPU seconds, no new network or inference). All original planner_solved=false flags, original leaf occurrences and structural exclusions were retained. Independent source and identity review found two newly makeable components; the other two paths were redundant for component makeability. Every path must close its own complete leaf set.
+
+The single separately bounded full-cohort assessment confirmed 1,122 L2-ready, 78 direct-only, 289 combined computational makeability and 27 strict dossiers across all 1,408 requests. Relative to the catalogue-only result, L2-ready gains are requests108 and123, while the sole additional complete product is request123 (acid_epoxide_diester_multistep). Thus the total change from the pre-catalogue result is +3 L2-ready, +2 direct-only and +16 combined products; the catalogue-only and route-proof contributions remain separately measured. Runtime was 29.528002 CPU seconds and conservative charge34.528004/45. No scientific gates, samples, denominators or strict evidence tiers changed.
+
+The result-local evaluator run_v7 differs from preserved run_v6 only by accepting an additional proof-snapshot authentication input. The merged proof snapshot is verified to contain exactly the same listing-row multiset already admitted, and is never appended as duplicate listing observations. Two focused tests verify this row equality and evaluator equivalence, including rejection of altered identities, timestamps, receipts, extra and missing rows.
+
+Reproduction artifacts: `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/evaluation/otava_proof_intervention_v1/assessment/protocol.json` SHA256 `f8dd5e9c7da3d8e10d04663f435c9a8b448537fbe2627f005c2fee1a6d0b6d75`; result SHA256 `b99d1c469c7cf4cec101451f6700d15b5e30148809f4339eccb276bb4a05f83b`; validation SHA256 `bb6a70a09b8eb9f115ee3d7ca781f114b85f41887756aab535dc8407ac1a8942`; independent root aggregation audit SHA256 `7bee6c68c52e99f7813a5b9699036d5a3977a51399f93d2274611ec1bfc23239`. Deterministic full census, no sampling seed. Published README_V14/progress_v14/evidence_matrix_v21 preserve all15 manuscript hashes and14 other evidence blocks. These remain development evidence-coverage results; independent held-out/seed, realism and diversity confirmation are still open.
+
+
+### 2026-09-25 — Activity-guidance H100 numerical diagnosis and qualified optimizer fix
+
+The user authorized fixing and continuing activity guidance. The completed per-parameter diagnostic ruled out AdamW backend selection as the material cause of CPU/H100 update disagreement. Removing softmax-redundant key biases reduced but did not eliminate the mismatch; this negative result is retained. Identical-gradient optimizer replay agreed to 2.98e-8, isolating amplification of slight backpropagation differences at epsilon=1e-8. Offline saved-gradient replay selected the explicit stable_adamw_v1 policy (single-tensor AdamW, epsilon=1e-5, original attention). A new detached H100 qualification passed all original tolerances, eight paired updates, post-update predictions, generation, and exact checkpoint recovery. No threshold, protected split or molecular-support bound changed. Source, input and result hashes are in results/phase1/continuous_activity_cuda_fix_v1/. This fixes execution portability; it does not demonstrate useful biological guidance.
+
+A separate bounded inner-development learning-curve protocol compares genuine, hidden and shuffled continuous activity labels at 400/800/1600 updates under adapters-only and last-block adaptation. Capacity and duration are selected using the hidden arm; all controls receive identical compute and the qualified optimizer. Inner-fit-only normalization is recomputed. This one-seed diagnostic does not replace the original multi-seed or matched-generation success criteria. Protocol, prelaunch source archive and authorization are in results/phase1/continuous_activity_learning_curve_v1/.
+
+
+## 2026-09-25 — Public bulk-data throughput pilot; no molecular disclosure
+
+The independently reviewed public-file prefix pilot completed all three fixed official NCBI FTP HTTPS downloads with valid206/range/date/length responses: 66,060,288 compressed body bytes plus1,947 raw header bytes,256,632,214 streamed decompressed bytes,13.733s wall,3.372CPU seconds and182.1MB peak combinedRSS. The source snapshots yielded333,050 complete key rows,1,612,673 complete SMILES rows and3,264,495 complete SID-map rows. Every gzip prefix remains explicitly incomplete, partial final records are retained, and no target matching or supplier evidence was admitted. Three new requests bring the tracked supplier-service ledger to1,767, leaving at most7,537 requests under the existing9,304 ceiling. No private molecular identifiers were sent.
+
+The pilot's first frozen implementation was rejected locally before network because a parent hardCPU limit would prevent its child from installing the intended limit. The versioned successor also ensures child cleanup on parent failures and counts raw headers, including interim responses. Twelve focused tests and independent source review passed; the original version remains frozen as a prelaunch negative result.
+
+The source-pinned summary is `results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/vendors/census_recovery_v1/bulk_metadata_v1/throughput_summary_v2.json`, SHA256 `7b85f7b68e15676843700aa8b52d29a6de4313a2818439cf12cba591e8185edd`. Separately scaled prefix measurements project34.31minutes for download plus scanning of12.44GB compressed public sources, or35.40minutes using full observed request durations. These are conditional prefix-based estimates, not guaranteed full-run timings; expanded data is approximately42GB and will be streamed rather than materialized. Full acquisition, local exact-identity/source joining and independent positive-listing admission are separate workstreams. The3,770-ID private PubChem query continuation remains unlaunched and is not authorized by the public pilot release. The currently published makeability result remains289/1,408.
+
+## 2026-09-25 — Same-molecule makeability and limited structural-quality intersection
+
+A deterministic saved-assessment join verified all 1,408 request IDs, families, original selected
+ordinals, exact selected SMILES and L1 verdicts between the latest makeability assessment and the
+certified limited structural-quality census. Of 289 computationally makeable outputs, 285 also
+pass the existing limited chemical/head/ring predicate. All 285 have no saved context-required
+flag. The four makeable nonpasses are request 439 (amine alkylation) and 773, 778, 807
+(epoxide opening/O-acylation); all fail the existing ring-condition check. They remain in all
+denominators. The full population retains 1,387 exact L1 outputs and 1,324 limited design passes.
+
+This is descriptive joint coverage, not a new quality gate, selection or promotion. The head
+check applies only within its qualified scope; the context code set is not exhaustive. Broad
+lipid realism, independent quality evidence and multi-seed held-out evaluation remain open.
+No molecules, route verdicts, selection floors, manuscript files or sealed TEST graphs changed.
+The result and all 22 family rows are in
+`results/phase1/compose_lipid_iclr22_research_v1/broad_routes_goal_v1/computational_makeability_v1/quality_joint_v1/`.
+The input-pinned protocol SHA256 is `a600b63252909d13ce8d42650b078c1326cc16510581282bd977ef2e8baf4aeb`;
+result SHA256 is `5bd71bb9ac4fecd3daa9630f6cf3375cf7e83723da614f19664beebc3b6140a3`.
+Black/Ruff and the identity/denominator invariants pass; all six small input pins were rechecked.
+
+## 2026-09-25 — Streaming transport qualification preserves route decisions
+
+The public-source workflow runs source acquisition, local matching and independent admission in
+parallel, with immutable source receipts and detached local monitoring. The first complete key
+table (7,366,333,343 compressed bytes; SHA256
+`2a74a362cb2cfdee6d4d62e8f7f8601a4ef60692be8c9c6cb9eaf4de9e4cbe7a`)
+passed its published MD5 and a second streamed SHA/gzip EOF/CRC check. The bounded key stage
+read 124,665,903 rows, retained 11,225 candidate CIDs and 3,962,469 evidence bytes, and reported
+zero target-key failures. Actual process CPU was 216.8 seconds; conservative worker-plus-monitor
+charge was 224 of 1,800 seconds. All ten fixed historical control CIDs were recovered at this
+retrieval stage. These are retrieval results only, not whole-graph or supplier-listing admission.
+The key result SHA256 is `b0b2a09775acd823e52509b26b2eabf8d793b1f57d75ceda5cd1334a2bef0145`.
+
+Source streaming is necessary because legacy documentary helpers could load multiGB source tables
+into memory. The separately versioned proof producer retained exactly all 682 observations and
+2,042 tree decisions: 912 previously solved, 1,120 listing-incomplete, six vendor-closed and four
+structural rejections. Its 15,197,185-byte scientific projection is identical before/after,
+SHA256 `0c4c12de1683dba2ee030540fc0fd0464db817775f0f4023b736ab8ef2f3012c`.
+The replay used 8.41 CPU seconds and 8.55 wall seconds. The result is
+`routes/planner_vendor_closed_v1/streaming_qualification_v1/equivalence.json` beneath the
+computational-makeability work directory, SHA256
+`5d6f1bffbb260481799627063bc2929045ebbdac04255ce45d6f11a3cc50ca1e`.
+
+Two evaluator transport attempts failed closed and remain frozen. The first followed an ordinary
+JSONL chemistry source as a single JSON document; the second traversed a whole proof into an
+irrelevant 663,232,280-byte planner stock file. Their actual CPU costs were 1.511812 and 21.782301
+seconds, each retaining its five-second preparation reservation. The corrected adapter preserves
+ordinary v6 direct-pin traversal and applies transitive documentary authentication only to explicit
+vendor-listing binding records. Real-source regression tests cover both failures and reject a
+changed direct digest. Twenty-five adapter checks and one projection check pass.
+
+The corrected full-cohort replay preserves every product/component verdict, source pointer,
+coverage field and scientific scope statement. Its 6,924,652-byte scientific projection has
+SHA256 `fb77764ab0ed4f8fda7b430ef8298a70dbda2323e0cea4c029ec448aec2e49c0`.
+Actual whole-process CPU was 34.167613 seconds (39.167615 including the preparation reservation).
+Validation is `evaluation/bulk_proof_adapter_v3/validation.json`, SHA256
+`f6d1b72936d19f95967720af933c3c1fb2a40b7e1d673a0c0ee8c4973df15b38`.
+All 1,408 requests, 22 families, 3,723 branches and 21 nonexact L1 cases remain; metrics stay
+1,122 L2-ready / 78 direct-only / 289 computationally makeable / 27 strict dossiers. No new
+listing, route, quality or manuscript claim is admitted by these transport qualifications.
+
+## 2026-09-25 — Public listing intervention and complete saved-tree recount
+
+The completed public PubChem join admitted 1,881 positively listed exact constitutional identities
+out of 6,322 queried locally against downloaded public tables; the other 4,441 remain unknown.
+The assessment is fixed at 2026-09-25T23:48:12.899654+00:00 under the existing 30-day observation
+window. A positive vendor-directory entry is not verified stock, price or experimental synthesis.
+The listing admission SHA256 is `9cfc8d47540ce506af07a407d53aa82c2e343044eab68a9a30188e9bac9f4efd`.
+
+The completed paired comparison reproduces the prior control exactly: 1,122 L2-ready, 78 direct-only,
+289 computationally makeable and 27 strict dossiers. Adding only the qualified listing envelope
+yields 1,128 / 119 / 531 / 27. The saved-tree refresh then evaluates all 2,042 retained paths:
+912 previously solved, 220 vendor-closed, 906 listing-incomplete and four structural rejections.
+The 220 include six earlier closures; 214 incremental proofs were separately admitted. The final
+full-cohort evaluator yields **1,181 L2-ready, 119 direct-only, 581 computationally makeable and
+27 strict dossiers out of 1,408 requests**. The increment contributes 53 L2-ready and 50 complete
+products, with no losses. No new route search, molecule selection or chemical replay was involved.
+
+Result: `broad_routes_goal_v1/computational_makeability_v1/evaluation/bulk_supplier_intervention_v1/
+proof_increment_v1/assessment/result.json` under the research directory, SHA256
+`939aafb687a26548d65aa48d2203904a485c488919ed62a8249eb2d8f4892947`;
+validation SHA256 `f53165b9e56289340b521a772748532fa6e16d6a7a51f6d07819ee9afa9af9e0`.
+The compare execution used 44.739491 CPU seconds (54.739493 conservative charge); refresh used
+26.925272 CPU seconds (31.925274 including preparation); final evaluation used 52.065941 CPU
+seconds (62.065943 including preparation). Source acquisition, matching and admissions have their
+own preserved execution receipts and are not included in these evaluator costs.
+
+The first comparison_v1 and run_v6_bulk attempts were interrupted and contain no admitted result.
+They remain untouched. The other session completed comparison_v2 and run_v7_bulk with saved
+receipts; refresh_bulk_v4 preserves v3 except its versioned output path. No missing interrupted-run
+cost is represented as zero. This log entry records the completed artifacts, not authorization for
+automatic repeated runs.
+
+A separate root audit recomputed every product and all 22 family totals from saved component and
+path verdicts, preserving the OR across intact alternatives and AND across their own leaves.
+It verifies identical request/family/component sequences across all four assessments, all 1,387
+exact and 21 nonexact L1 requests, 3,723 required branches, unchanged strict identities, and all
+15 frozen manuscript input hashes. This is an independent aggregation audit, not a repeat source
+or chemistry admission. Reproduce with `.venv/bin/python
+results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/audit_latest.py` in a fresh
+output version; the original script deliberately refuses to overwrite its receipt. Black and Ruff
+pass. Latest publications are evidence_matrix_v22.json, README_V15.md and progress_v15.json.
+
+## 2026-09-25 — Parallel completion plan for the 22-family evidence requirements
+
+The user accepted the parallel research plan. Four workstreams now separate saved route/listing
+gaps, quality/reference qualification, training/control/held-out readiness, and independent
+integration. The initial bounded local diagnostics each have at most 180 CPU seconds, no network
+or paid launch, and explicit ownership under `parallel_completion_v1/`. `plan_v1.json` maps all
+15 evidence blocks and their linked manuscript displays to existing artifacts, remaining work,
+owners, dependencies and stopping rules. The earlier small-batch continuation's negative outcome
+is retained; more updates alone are not assumed to improve quality. Final model/control/inference
+and population contracts must qualify before independent training-seed comparisons. No final
+manuscript evidence is promoted, no protected TEST outcomes are accessed and no manuscript edits
+are made. These development results do not yet complete the paper evidence requirements.
+
+## 2026-09-25 — Saved-route composition raises development makeability to 611
+
+The independent evaluator measures **611/1,408 computationally makeable products**, up from 581,
+and **1,189 L2-ready**, up from 1,181. Direct-only remains 119 and strict dossiers remain 27.
+All 22 families retain 64 requests, with 1,387 exact L1 products and 3,723 required branches.
+Every predicted gain identity was confirmed, with no losses. Molecules, selected components,
+vendor observations and the original as-of timestamp are unchanged.
+
+Grafting previously supported root routes into the 906 listing-incomplete saved trees produced
+no gain. Retaining authenticated complete reaction steps while stopping at positively listed
+intermediates or composing complete child witnesses did improve coverage: the first 27 roots
+predicted 19 new products, and ten further roots predicted another 11. Independent admission of
+all 37 component roots authenticated original receipts, complete child sets, identities,
+depth/cycle constraints and listings. Incompatible alternatives were never pooled. The unchanged
+primary classifier and its legacy-basis equivalence check passed.
+
+The authoritative result is `parallel_completion_v1/route_evaluation_v1/result.json` beneath
+`results/phase1/compose_lipid_iclr22_research_v1/`, SHA256
+`cd4b6d1116252e26d30f0fd293fd24dd3262050b731f593af1611fc52378b358`;
+validation SHA256 is `f3f08f806253cf5dd3bf6229dd7e8a981d878e82b0119192aa47b857278492d4`.
+The detached local run used 68.707701 whole-process CPU seconds, separately retaining its
+20-second preparation reservation. Its launch receipt preserves command, process ID, source
+and protocol hashes. No new planner search, vendor lookup, model call, TEST access or paid job
+occurred. Path authority remains computational, not experimental.
+
+The first freeze stopped before output-directory creation because the admitted envelope omitted
+the explicit `candidate_only: false` interface field. Version 3 adds that field and its source
+pin while preserving v2 paths/admission; no chemistry gate changed. Earlier prefix ancestor and
+serialization failures remain recorded. A saved ancestor-repeat route was already rejected by
+the baseline classifier, so no baseline correction was needed. Wrapper review findings concerning
+input pins, exact gain identities and CPU accounting were resolved before execution.
+
+The same-molecule quality join measures **601/1,408 jointly makeable and passing limited design**,
+or **599/1,408 also without a saved context flag**. All selected molecules, quality flags,
+component diversity and novelty are unchanged. These checks do not establish broad lipid realism.
+The complete per-family census and verification are in `parallel_completion_v1/quality/joint_v2/`.
+
+Chemistry review covers 37 roots and 171 retained step occurrences: 36 registry-bound forward
+steps and 135 planner-proposed steps. Five amide/formamide-N alkylation flags occur across four
+roots. Frozen graph/role checks pass, but substrate applicability remains unassessed. Omitting
+only those four reviewed route IDs leaves 608 products under the remaining alternatives; this
+restricted sensitivity neither validates other paths nor changes the primary metric. A reordered
+candidate removes both flagged steps for one target; three alternatives still need exact amine
+inputs. It awaits independent admission and adds no score. Reviews and pins are in
+`parallel_completion_v1/route_chemistry_review/`. The first sensitivity producer's unused-import
+lint failure is preserved; corrected v2 reproduces the same count and passes Ruff.
+
+`parallel_completion_v1/publish_progress_v2.py` independently reconstructs all saved product and
+family counts, binds quality identities and verifies all 15 manuscript pins. Black/Ruff pass.
+Published status: `evidence_matrix_v23.json`, `README_V16.md`, `progress_v16.json` and
+`parallel_completion_v1/plan_v2.json`. Reproduction requires fresh output versions; originals
+are not overwritten. No final paper evidence or manuscript edit is admitted.
+
+## 2026-09-25 — Quality, control and evaluation barriers measured in parallel
+
+A3, aldehyde Ugi4 and ketone Ugi4 have 51, 50 and 39 limited-design passes out of 64. Exhausting
+acceptable saved alternatives before diversity floors yields upper bounds of 51, 51 and 41.
+Reranking cannot reach 58/64. Whole-cage donor replacement repairs 14 of 17 applicable isocyanide
+failures through the unchanged source executor; three abstain and request 1022 retains another
+component defect. Distinct isocyanides drop from 25 to 12 and Shannon effective count from 14.322
+to 7.892 across 62 assessed rows, with two unknown rows retained. Fourteen novel occurrences are
+lost. **The copying intervention is not promoted.** Fixtures and full denominators are preserved
+in `parallel_completion_v1/quality/cage_v2/` and `cage_repair_contract.json`.
+
+The prior 352-request continuation remains negative for extra updates alone: baseline/large/small
+D1 exact counts are 140/135/122 and design counts 111/113/107. These continuations are not independent
+fits. The original fit used 402,336 presentations per family; the diagnostic added 31,680. No new
+full training run is justified solely by this comparison. Current source pins match all 427 files
+bound by the existing 258-pass training qualification; the historical full suite was not rerun.
+
+Forward-only conditioning interventions pass 11 synthetic checks through actual loss/backward and
+sampler APIs. Four strict shared-null candidate checks additionally verify removal of fixed-core
+context and full 254-atom/12-closure support. Actual TRAIN global priors, distributed workers and
+checkpoint/restart for the new null arm remain unqualified. These are implementation checks, not
+model-control performance results. Independent final seeds remain unexecuted.
+
+The prespecified CAL smoke admits physical representations for 22/22 molecules. AEMA's two
+namespaces give identical physical origins, graph, core positions, instances and repeat groups;
+their model tokens differ, so both conditions remain without score-based selection: 23 variants,
+22 molecules. Seven bridge and three equivalence tests pass. The original abstention, virtual-Torch
+source-path reporting failure and fixture serialization mismatch are preserved. This is neither a
+model result nor a full-population qualification. Guarded CAL contains 2,059 rows: 1,859 source-executor
+exact, 149 nonexact and 51 unresolved. No protected TEST graph was opened.
+
+The metadata-only ancestry census accounts for all 1,192,065 TRAIN constructions: 150 PMID-bearing
+source anchors and 1,191,915 virtual enumerations. Missing experimental product PMIDs on virtual
+rows are expected, not missing construction provenance. Existing quality panels share adaptively
+inspected sources. After those and active design-source exclusions, 391 original R0 rows remain
+conditional reference candidates (390 CAL, one TRAIN); none is admitted independent. Shared
+components alone do not establish study ancestry: alternate LUMI source origins were recovered
+for two acids. Remaining original alias/recipe lineage is absent from vendored summaries.
+`parallel_completion_v1/reference_lineage/` preserves 37 exact pinned bank, architecture and producer
+requests, with checked missing locations. No substitute corpus was used. Formal lineage runs used
+6.66 CPU seconds and nine provenance assertions passed. Independent empirical realism remains open.
+
+## 2026-09-25 — Four targeted searches and authoritative 614-product recount
+
+Four exact shared intermediates were prespecified from the 611-product residual census. Their
+20-product opportunity was conditional, not a forecast of search success. The existing isolated
+AiZynthFinder engine and pinned local assets ran detached with explicit seeds, a 175-CPU-second
+allocation under a 180-second cap, no paid or network calls and no retries. All four searches
+completed: 109.915 child CPU seconds plus 0.072 supervisor CPU seconds. The thione's historical
+stock flag was not accepted as current listing evidence; aldehyde and hydroxyacid searches did
+not close. One unsaturated alcohol route had complete witnesses in the unchanged listing snapshot.
+
+Independent admission explicitly added the four-search census: 11 of 12 hypotheses authenticated,
+with the zero-step target-zero tree excluded under the existing check. The old 2,042-tree census
+and prior 37 derived routes remain intact. Three additional graft roots produce a cumulative
+40-root envelope; admission used 2.0275 CPU seconds and 11 adversarial checks passed.
+
+The unchanged complete evaluator confirms **614/1,408 computationally makeable products**,
+**1,189 L2-ready**, **119 direct-only** and **27 strict dossiers**. Gains are exactly requests
+1034, 1042 and 1170 relative to 611; cumulative gains relative to 581 are 33. There are no losses.
+Every molecule, 1,387 exact-L1 identity, strict identity and all 3,723 branch identities remain
+unchanged. Whole-process recount CPU was 70.020545, plus its separate 20-second preparation
+reservation. The authoritative result/validation/execution receipts are in
+`parallel_completion_v1/route_evaluation_v2/` under the research directory.
+
+The independently recomputed quality join gives **604 jointly makeable and limited-design
+passing**, **602 additionally without a saved context flag**. Makeable-subset diversity was
+recomputed for its actual 614 members, not copied from the 611-member predecessor. All 22 family
+tables, source pins and both before/after comparisons are in `routes/recount_closeout_v2/`,
+result SHA256 `393286f576f3158aaad131eb1884558d801c45bdf1b72924519837f45d3a69c2`.
+These remain development results on the same adaptive TRAIN-derived requests. No new listing,
+experimental synthesis, independent realism, model improvement or final-paper claim is admitted.
+
+## 2026-09-25 — Complete CAL representation and corrected topology diagnostics
+
+Full guarded CAL representation processing completed all 2,059 rows without censoring in
+25.426803 CPU seconds: 1,843 direct physical representations, 16 source-namespace abstentions,
+and 200 source-unqualified rows. Independent validation reencoded all 1,862 retained variants in
+4.728245 CPU seconds. The declared 254-atom/12-closure/Br support is unchanged; observed admitted
+CAL support is at most 80 atoms and seven closures, so this does not establish large-graph quality.
+
+All 16 namespace cases were subsequently proved exact role/source aliases. Independent chemistry
+review replayed source programs, both complete origin traces, role bijections, core/introduced
+atoms, equalities and quantities, then reproduced frozen encoding. This adds 16 molecules and
+23 conditions: **1,859 admitted molecules / 1,885 condition variants**, preserving all **2,059**
+guarded CAL rows. The other 200 are 149 nonexact and 51 unresolved source cases. Original split
+exclusions and the initial 16 abstentions remain immutable. Additive receipt:
+`training_evaluation/cal_bridge_full_v1/namespace_rollup_v1/result.json`.
+
+A prespecified 22-molecule/23-condition CAL panel was evaluated on the unchanged local original
+checkpoint: 115 FP32 CPU forwards across t=0.5, 0.9 and 1.0, with shared-corruption raw/oracle
+topology arms and equal namespace weights. The run used 2.70982 CPU seconds. A separate 23-forward
+clean-graph diagnostic used 2.159557 CPU seconds, reproduced every original t1 coordinate metric,
+and passed gold reconstruction controls for all five decoder/intervention arms.
+
+The graph audit corrected a misleading raw metric: 116 of 125 raw parent errors select future/self
+indices that training loss and production decoding already mask. Production masking reduces
+the mean 22-molecule parent error from 13.07% to 1.87%. Remaining errors are substantive graph
+changes, not alternative serialization: 19 errors among 90 branch-return/nonconsecutive-parent
+coordinates, versus zero among 892 consecutive-parent coordinates. All stay in the correct
+precursor role/instance; 13 choose the immediate predecessor and every correct parent is within
+the top four. This motivates broader masked-metric replication before any training modification.
+
+Production argmax reconstructs 11/23 variants (10/22 equally weighted molecule-equivalents);
+strict decoding reconstructs 12/23 (11/22), with two explicit core-saturation abstentions.
+Placeholder coordinates from abstentions are not counted as genuine parent predictions. These
+are clean-input conditional reconstructions, not generation/L1-yield estimates. The complete
+artifacts and independent attribution are in `training_evaluation/cal_bridge_full_v1/`.
+
+## 2026-09-25 — Ring repair, anchored aromatic construction and remaining realism scope
+
+Scheduling the existing joint ring constructor on 51 failing selected parents emitted 42 proposals:
+37 source-exact, 23 passing limited design, six admitted by the unchanged diversity/novelty floors.
+All proposals and rejections were independently replayed. A separate 1,408-row candidate cohort
+retains 1,387 exact L1 and raises limited design from 1,324 to 1,330. It changes six molecules;
+their routes remain unassessed, including previously makeable request 258. It does not replace
+the official 614-product cohort. The fresh construction runner omits this existing ring stage;
+the smallest matched scheduling experiment is documented in `quality/repair_readiness_v1/`.
+
+Visual/anchor review revealed a limitation of ring-only checks: repaired A3 aromatic rings were
+14, 15 and 20 bonds from their aldehyde anchor, whereas the six aromatic TRAIN references attach
+directly. A separate three-case prototype restores distance one and observed para placement,
+preserving the distal-ring candidates' formulas, non-aldehyde components and all current floors.
+All three require explicit lossless within-role coordinate permutations, independently verified;
+fixed source core and roles remain intact. Candidate likelihoods are not inherited from old
+model trajectories. These are constructed proposals, not evidence of improved learned sampling.
+
+Counts remain 61/64 exact and 55/64 limited design for A3, and 1,387/1,330 of 1,408 overall for
+the candidate cohort. The other aromatic substituent's first-shell context differs from all six
+TRAIN references and remains unqualified. The three-stage formulas are explicit: request 1
+C57H103NO4 -> C57H99NO4 -> unchanged; request 32 C170H288N2O8 -> C170H264N2O8 -> unchanged;
+request 41 C140H254N2O12 -> C140H236N2O12 -> unchanged. No hydrogen-formula constraint was invented
+for the original requests. Source replay, candidate-formula and integer-floor verification used
+1.738 CPU seconds. Generator timing was not persisted before a plotting failure, so no exact
+generator CPU cost is claimed; failed wrappers and plot logs are retained. Full fixtures, all
+nine stage images and candidate route requirements are in `quality/anchor_context_v1/`.
+
+The exact-path local Git-history check also found none of the 37 pinned missing bank/architecture
+artifacts or the additional supervision builder in any reachable refs of the three local source
+repositories. It used 0.086 CPU seconds with no network or object-wide enumeration. This does
+not prove global unavailability. The archive location was requested from the user; independent
+empirical reference admission remains open. No manuscript or production source edits were made.
+
+## 2026-09-25 — Full CAL replication localizes the parent-attachment weakness
+
+The original checkpoint completed deterministic clean-input FP32 evaluation for every admitted
+CAL condition: 1,885 forwards for 1,859 molecules, preserving the original 2,059-row guarded pool
+and all 200 source-unqualified exclusions. All 23 prespecified small-panel controls reproduced.
+The run used 15.599487 CPU seconds; independent source-coordinate and aggregation validation
+used 2.422582 CPU seconds. No optimizer, generated-molecule sampling, TEST access or network call
+occurred. Result SHA256: `24f8988b1d72d8053150b94d0cf7ab35476c13c3c82ed8986a2f408c48444560`.
+Artifacts and all-family counts are in `parallel_completion_v1/training_evaluation/cal_branch_full_v1/`.
+
+With the actual training/production legal-parent mask, consecutive-parent coordinates have
+5 errors out of 73,682; nonconsecutive branch returns have 1,164 out of 7,936. Equal condition
+weights within molecule, followed by equal molecule weights, give 1.452% overall parent error
+and 13.812% branch-return error. The latter has 1,844 eligible molecules; 15 with no such
+coordinate retain explicit null values. Branch-return top-two/top-four accuracies are 96.20%
+and 98.92%; these are rank diagnostics, not oracle-corrected generation results. The weakest
+family macro branch errors are alpha-isocyanoester dihydroimidazole (42.49%) and aza-Michael
+acrylate (41.62%). Pooled coordinate counts and molecule-weighted rates are kept separate.
+
+This replicates the attachment weakness across the available CAL representation population.
+It does not establish that training loss causes it, that a repair improves sampling, or that
+lipid quality is adequate. A targeted matched training intervention is being qualified; the
+initial class-balanced-loss proposal is not approved merely because it targets this diagnostic.
+
+## 2026-09-25 — Matched ring and anchor scheduling comparison, full development denominator
+
+The detached local three-arm comparison completed all 192 frozen requests across A3, aldehyde
+Ugi4 and ketone Ugi4 in 7.209024 CPU seconds. The original arm has 187 exact-L1 and 140
+limited-design passes; both ring scheduling and anchor-preserving scheduling retain 187 exact
+and achieve 146 limited-design passes. Per-family design counts become 55, 51 and 40 of 64.
+Both arms select the same six changed requests: 1, 32, 41, 42, 258 and 967. The anchor treatment
+changes five proposed graphs and three selected graphs but adds no pass-count gain over ring
+scheduling. Local attachment correction and broad molecular quality remain distinct outcomes.
+
+All 51 prespecified ring-failing parents were attempted. Twenty-nine emit 42 proposal slots per
+experimental arm; 22 emit none. Each arm preserves five nonexact proposals, 14 further design
+failures, 17 passing but unselected proposals and six selected repairs. Both experimental arms
+have identical source/design-call ceilings and corresponding proposal slots; original has zero
+additional proposal calls. These are not three equal-runtime arms. The physical shared ring
+computation and each arm's additional construction and assessment costs are reported separately.
+
+Independent verification replayed all 192 original source checks and all 84 proposed source/design
+checks in 4.253599 CPU seconds. Full identity/core/role composition, per-request exact/context
+status and integer product/component diversity and novelty floors, including novel-unique counts,
+passed. Every changed molecule has null inherited route and trajectory-likelihood evidence.
+Verification SHA256: `53dec81467c6ef291586a0367347052b356b762386870985fb5326e63778cd72`.
+The full result, all 18 selected before/after structures and limitations are in
+`parallel_completion_v1/quality/repair_experiment_readiness_v1/`. Large C170/C140 architectures
+remain unqualified. Neither the official 1,408-molecule cohort nor the manuscript was replaced.
+
+## 2026-09-25 — Weak-family root search: startup correction and no new route closure
+
+The unchanged 614-product census leaves 794 unresolved requests: 21 lack exact L1, 639 require
+one unresolved component identity, 122 require two and 12 require three. Four exact roots not
+among the 687 previously attempted targets were selected, one per weak family, with a conditional
+ceiling of nine additional complete products. A ceiling was not treated as a search forecast.
+
+The first four jobs failed before importing/constructing the planner because the new wrapper's
+PYTHONHASHSEED disagreed with the qualified engine protocol. No route search occurred. Saved
+child CPU was 2.193210 seconds plus 0.041904 supervisor seconds. The failure was preserved, then
+a new version derived this setting from the unchanged engine protocol. Fresh-process positive
+and negative startup checks passed; root independently reviewed the correction and authorized
+one separate local run with the same four targets and per-target random seeds. No paid work,
+network access, automatic retry or enlarged search scope occurred.
+
+The corrected four-way parallel run completed all targets and structurally authenticated all
+12 retained trees. None closes to the frozen exact vendor-listing snapshot; the official total
+remains 614/1,408 and no unnecessary full recount was launched. Corrected search child CPU was
+149.368053 seconds plus 0.102998 supervisor seconds. Preparation, preflight, review and failed
+attempt costs remain separately recorded in `routes/next_bottlenecks_v3/root_search_v2/`.
+Closeout SHA256: `24325d1005271bb55de5b5c0756a4f8c7a4fac6214fbe633e835667b20e2be60`.
+
+The aryl-reductive-amination head's first two saved alternatives each need exact listings for
+CNCC(OC)OC and O=C(O)CNC(=O)OCc1ccccc1; the other leaves already have qualified evidence.
+Those listings would conditionally close requests 527 and 534. They are not inferred from
+historical planner stock. The other roots still depend on unresolved complex scaffolds.
+
+## 2026-09-25 — Targeted parent-group loss integrated and qualified locally
+
+The proposed equal-present-class parent CE was rejected: it changes the posterior optimum,
+potentially inflating branch frequency. The implemented optional intervention instead uses
+`(parent_CE + lambda * legal_parent_group_CE) / (1 + lambda)`, where the two groups are the
+immediate predecessor and all other legal parents. The finite nonnegative weight defaults to
+zero. The expected excess risk is a positive categorical KL plus a nonnegative group KL, so
+the original posterior remains the unique optimum. This does not match gradient magnitudes:
+the normalized mixture reduces emphasis on discrimination within the nonconsecutive group.
+Improved generation is a hypothesis, not a consequence of the properness argument.
+
+The new weight reaches scalar, PCGrad and actual adaptive worker-shard paths. Root review
+identified an added CUDA synchronization in the first nonzero-based implementation; the final
+helper uses static shapes with safe inactive-row distributions. Profiling reports no new
+item/is_nonzero/nonzero/masked_select events in its forward and gradient calculation. All
+278 current training checks and vendor verification pass on the final pinned source. The first
+current-suite run's torch shared-memory-manager sandbox failure is preserved; the same IPC
+test and subsequent full current validation passed with the needed local process permissions.
+No test was skipped or gate relaxed to obtain the pass.
+
+Weight zero reproduces archived pre-integration loss, metrics and all six prediction gradients
+exactly. Tests cover 254 nodes and 12 closure slots, nonfinite inactive rows, illegal gold
+parents, unequal-shard global denominators, fresh-branch allowed/forbidden deltas and ordinary
+restart identity. Exact pre-integration bytes, including existing user edits, and the isolated
+new diff are archived. Only this loss weight may differ in a declared new branch; ordinary
+resume still requires the original configuration identity.
+
+The shared 66-update TRAIN prefix retains 9,504 presentations per family; a separate 44-update
+qualification prefix retains 6,336 per family. Both keep original model and AdamW tensors and
+all data/measure/exclusion pins. Fresh current-source admissions and configurations pass local
+loading. Isolated FP32 CPU parent-objective median at batch 16 and 254 nodes is 4.05 ms for
+control versus 12.57 ms for the mixture; this is not end-to-end or GPU throughput evidence.
+The eight-H100 numerical/restart gate and paired continuation remain unexecuted at this entry.
+Receipt: `parallel_completion_v1/training_evaluation/group_loss_integration_v1/result.json`,
+SHA256 `35f499eff36bcc6986aa3a0c60e3db69254df0518292dd679b0147f4b425da1e`.
+
+## 2026-09-25 — Two new route leaves independently vendor-listed; product gain pending
+
+The four-search negative result exposed two exact small leaves absent from the earlier 6,322-target
+vendor join. One bounded detached lookup queried only those two InChIKeys, retaining complete raw
+HTTP receipts and exact full-structure responses. Four of eight permitted HTTP calls completed,
+all HTTP200, with no retries or third target. CIDs 8503 and 14349 each have Chemical Vendors category
+evidence. Lookup wall time was 10.094234 seconds; process CPU 0.129157 and transport CPU 0.088768.
+This is directory-listing evidence, not stock, price, procurement or executed chemistry.
+
+Root independently authenticated all four body/header receipts, requested and effective HTTPS URLs,
+actual observation timestamps, complete constitutional SMILES, CIDs and category source-name sets.
+Charge, isotopes, salt membership and tautomer identity remain part of the frozen exact graph policy;
+only stereo and atom maps are erased. The admission took 0.603276 CPU seconds. Original candidate
+bindings remain unchanged; separately admitted bindings explicitly mark exact-form verification.
+The listing field vendor_count=1 counts a positive exact CID/category observation, not suppliers.
+
+New observations retain their real September 26 UTC timestamps. The common comparison cutoff must
+be no earlier than 2026-09-26T01:56:45.654730+00:00; they cannot enter the old September 25 cutoff.
+The preparation check finds no old/new listing-state changes among 3,173 existing distinct records.
+An intact saved aryl-reductive-amination head route could now close requests 527 and 534. This is a
+conditional forecast: the official development count remains 614/1,408 pending complete-tree
+admission and a paired full-evaluator recount. Receipts are in parallel_completion_v1/
+listing_admission_v1/ and routes/next_bottlenecks_v3/new_leaf_listing_diagnostic_v1/lookup_run_v1/.
+
+## 2026-09-25 — Paired parent-loss evaluation reproduces the entire original baseline
+
+The new evaluation protocol was frozen before pilot outputs. Its initial controls reproduce all
+23 historical clean-input full forward tensors and the first eight generation requests across
+three fixed readouts; the combined smoke used 8.836 CPU seconds. The subsequently authorized full
+original-checkpoint evaluation reproduced every historical parent-coordinate ledger across all
+1,885 CAL variants for 1,859 admitted molecules, retaining the original 2,059-row population and
+200 exclusions. All 352 historical generation requests reproduce their saved states, SMILES,
+source checks and limited-design results across the same three readouts. Process CPU was
+111.995 seconds under the 300-second arm cap. CAL used 16.141 seconds and generation 93.175;
+these phase times omit remaining process setup/accounting and should not replace whole CPU.
+
+This establishes no baseline inference or decoder drift from the loss-only code integration.
+It is not a new independent seed or held-out paper result. The protocol fixes final update 66
+for both candidate arms, keeps 22/44 checkpoints descriptive, and requires reporting every
+family and diversity/quality regression. No best-checkpoint selection is allowed. Full evaluation
+allocation is at most 900 CPU seconds for original plus two candidate checkpoints, with no
+automatic retry or admission of censored denominators. Receipt: parallel_completion_v1/
+training_evaluation/group_loss_evaluation_v1/execution_original/completion.json.
+
+## 2026-09-25 — Detached matched parent-loss pilot submitted
+
+Root reviewed the exact request 04348a97d3b5413f824fe0aa3588479754314308006c1113ce9f1b594030963d
+and all current source, configuration, initializer, validation and stage pins. Twenty-five launcher
+behavior checks pass. The original 779-file/8.58-GB staging rehearsal is reused only for unchanged
+transport inputs; separately versioned supervisory checks add paired initial RNG/counter equality,
+restartable partial downloads and complete checkpoint/draw/log collection. No v1 artifact changed.
+The two pilot configurations differ only in the declared parent-group loss weight.
+
+One detached eight-H100 function was submitted at 2026-09-26T02:04:04.728081+00:00. Application:
+ap-Fl4CvFxIKN2jI5hdrN4lwz; function call: fc-01M3DQ94796EM08TDS2F4H0KB8; request identity:
+compose-parent-group-04348a97d3b5413f. The 900-second function timeout bounds function execution to
+120 GPU-minutes, excluding platform startup/shutdown billing. There are no retries or extra
+allocations. A 44-update original-warm-state serial/eight-device/intentional-kill recovery comparison
+must match exactly before either 66-update pilot arm runs. Both arms start from the same original
+model and AdamW and consume the same 9,504 TRAIN presentations per family with seed2725058782.
+Checkpoints0/22/44/66 commit durably; final66 is primary,22/44 are descriptive. No asynchronous
+quality early-stopping or best-checkpoint selection is claimed. Numerical or deadline failure stops
+execution without admitting partial scientific metrics.
+
+The local detached submission exited0; waiting for final application logs timed out on client
+shutdown. This is not evidence of remote training success or failure. Monitoring checks the durable
+function identifier and saved artifacts independently. No resubmission is authorized by that log
+message. The submitted request and independent review are in parallel_completion_v1/
+training_evaluation/group_loss_pilot_v1/prepared_v2/. No pilot result is admitted at this entry.
+
+## 2026-09-25 — Parent-loss remote staging failed before any training; no retry
+
+The detached request compose-parent-group-04348a97d3b5413f failed before qualification or either
+pilot phase. The supervisor passed the logical /forge-workspace path into training_files while
+resolve_pin returned the canonical /__modal/volumes path. Path.relative_to therefore raised a
+ValueError even though both paths denoted the same staged repository. The launcher is responsible
+for this missing normalization. No optimizer update, model-quality result or GPU-equivalence result
+was produced. This operational failure is not a negative scientific finding about the objective.
+
+The durable failure receipt reports 143.043524 wall seconds and 19.072470 function GPU-minutes,
+excluding platform startup/shutdown billing; phases is empty and partial scientific admission is
+false. The failed request, source and outputs remain intact. There is no automatic retry. A minimal
+versioned correction and an actual symlink-root staging regression are being prepared locally;
+a new paid attempt requires fresh user authorization under AGENTS.md. Existing original-checkpoint
+evaluation and unrelated CPU route experiments remain valid. Failure receipt: parallel_completion_v1/
+training_evaluation/group_loss_pilot_v1/prepared_v2/observations/20260926T020701.153757Z/failure.json.
+
+## 2026-09-25 — Final null/cyclic controls distinguished without extra fits or relabeling
+
+A pinned metadata-only control audit distinguishes the old same-bijection train/evaluation cyclic
+recoding from the requested program-ID mismatch intervention. For the latter, use each correctly
+conditioned checkpoint and permute only program_states at every inference forward, including the
+terminal prediction, while retaining the original requested-family verifier and all structural
+context. This estimates sensitivity to program-ID incongruence, not removal of all family
+information. It needs separately qualified sampling, memory/cache rebuilding and matched budgets,
+but not another fitted model. Historical recoding results and the older training-mapped draft
+remain under their original definitions.
+
+A true shared-null comparator requires independent fitting and qualification of TRAIN-global
+count/noise priors, no fixed reaction core, all-active graph targets, and production worker/restart
+integration. Those gates remain open. Three conditioned plus three null independent replicas would
+require six fits; cyclic inference reuses conditioned fits. This arithmetic authorizes no new fit
+or budget. The full 30-program cross-family cycle, unresolved gates and exact source pins are in
+parallel_completion_v1/training_evaluation/group_loss_evaluation_v1/control_readiness.json,
+SHA256 f21c1ba6865ecb1fc15294ef1eb5cdc200aa6cb454e6bec415533feebcd60afb.
+
+## 2026-09-25 — Common-clock full evaluator measures 616 makeable products
+
+The independently admitted two new PubChem directory listings and one unchanged complete saved
+aryl-head planner tree were tested in two detached full-cohort CPU arms. Both use the common
+2026-09-26T01:56:45.654730+00:00 cutoff and the unchanged 30-day policy. The wrapper authenticates
+the 40 historical composition proofs at their original cutoff, then requires every retained
+terminal to remain exactly listed at the new clock; all 3,173 old observation states are unchanged.
+Sixteen positive/adversarial controls cover future/expired/mismatched listings, changed policy,
+tampered or incomplete trees, the complete 12-tree source census and the historical40 routes.
+Root independently reviewed the wrapper and admitted the exact new tree before execution.
+
+Control reproduces all614 successful request identities. Treatment measures616/1,408; only requests
+527 and534 gain makeability. Exact L1 remains1,387, L2-ready1,189, direct-only119 and strict secondary27.
+Every selected lipid and all3,723 required branch identities remain unchanged; no success was lost.
+The primary total is now+35 versus581 at the beginning of this parallel effort. These are adaptive
+development results from the same checkpoint/cohort, not independent paper-confirmation seeds.
+
+Control/treatment execution receipts report70.213192/70.909647 whole-process CPU seconds before
+final process teardown. Supervisor OS child usage is142.616297 CPU seconds; its own usage0.164348,
+so the full paired execution used142.780645 of180 allocated CPU seconds. Preparation, independent
+admission and review costs are separately retained under the30-second preparation allocation.
+No new search, network, model call or TEST access occurred in this recount.
+
+Root independently rechecked every product/component Boolean and identity join and recomputed
+makeable-subset diversity from the616 current members. Same-molecule intersections are606 makeable
+plus limited-design passes and604 additionally free of saved context flags. Whole-cohort quality,
+component diversity and novelty are unchanged. This is not broad empirical realism admission.
+Independent closeout used0.132888 CPU seconds and is recorded in parallel_completion_v1/routes/
+recount_closeout_v3/result.json, SHA2561a98ba6f949a1114b9aa1fb651c8c248d4660c5a3137fb42503f17f717309318.
+The full treatment result SHA256 is843f3dbc4d3107ed33d07a5879209fe4df911deffa00a24ce8d80baff36b03a6.
+
+Evidence matrixv24, progressv17 and parallel_completion_v1/README.md now index the measured routing,
+CAL, repair, training-validation, baseline-evaluation and negative operational results. All15 frozen
+manuscript input hashes remain unchanged and every final-paper evidence-admission flag remains false.
+
+## 2026-09-25 — Corrected parent-loss launcher ready; fresh paid authorization pending
+
+Version3 canonicalizes both the volume and output paths before creating any output, staging data,
+or calling training_files, and requires output containment inside the canonical volume. This is
+an eight-line supervisor-only correction. All training source, configurations, seed, initializer,
+exposure, data transport and numerical/quality protocols remain identical to the failed v2 request.
+An actual symlink-root regression first reproduces the exact v2 relative_to failure, then runs the
+real stager and real training_files successfully over773 authenticated files in19.864367 wall seconds.
+Native and restart aliases are separately authenticated; restart44 bytes equal the qualification
+configuration. The prior full four-config staging proof remains pinned rather than falsely claimed
+as rerun. The executed regression producer retains a documented import-grouping Ruff I001; its
+bytes were not changed after the result was pinned. Launcher, supervisor and tests pass formatting
+and lint, and all34 focused behavior tests pass.
+
+A separate agent independently reviewed canonical paths through both child loaders, alias checks,
+output pins and unchanged scientific settings. Root then validated every prepared pin and wrote
+the independent request review (0.505845 CPU seconds). The exact new request SHA256 is
+4313fd66bb41881632cb7cb23d9cacd214a0b5fbf8e6b6c8ab2a435e5176a34a. No v3 attempt or submission exists.
+The launcher now requires an explicit fresh-authorization record bound to this request and the
+preserved failure before it can create an attempt. The user was asked to authorize one corrected
+detached run with the same900-second/120-function-GPU-minute maximum, no automatic retries, and
+all previous qualification gates. Approval is pending at this entry; elapsed time is not approval.
+The failed19.072470 function GPU-minutes are preserved separately, not deducted from reported
+new-run execution. The manuscript remains unchanged.
+
+## 2026-09-25 — User approved and submitted corrected detached parent-loss pilot
+
+The user explicitly approved the corrected v3 request, then requested continuation and maximum
+parallel work. The interrupted turn had created no attempt; root verified this before recording
+the approval in group_loss_pilot_v1/prepared_v3/authorization.json. Request SHA256
+4313fd66bb41881632cb7cb23d9cacd214a0b5fbf8e6b6c8ab2a435e5176a34a was submitted exactly once at
+2026-09-26T02:20:42.418746+00:00. Detached Modal application ap-8e4lZQX8fCUyKwmzCBZ7xl and
+function call fc-01M3DR7JHT98Q3C9PZX1CFMF93 are persisted with request/configuration/source pins.
+The original 900-second function timeout, qualification gates, two fixed 66-update arms and
+no-automatic-retry policy remain. The paid v2 operational failure is separately preserved.
+
+A final-log timeout while closing the detached client did not establish a remote failure or
+success; restartable monitoring observes the actual function call and volume. As of02:25UTC
+the call was pending allocation with no function-start artifact. No training or numerical result
+is claimed from submission. Independent CPU preparation proceeds in parallel: frozen final-checkpoint
+evaluation, cyclic inference qualification, and the full-graph TRAIN-only shared-null prior.
+The manuscript remains unchanged.
+
+## 2026-09-25 — Complete cyclic control and TRAIN-global shared-null input qualification
+
+A detached pair evaluates all352 original requests,16 per family, under unchanged raw-flow,
+terminal-argmax and original D1 readouts. The treatment changes only the explicit program ID
+at every forward using the frozen30-program cross-family cycle; correct roles, core, layout
+and source verifier remain. No model fit, new proposal, selection or TEST access occurred.
+All1,056 conditioned state/SMILES/source/design records reproduce the original exactly; all5,720
+forward and memory rebuild checks pass. Exact L1 is80 versus71 raw,91 versus85 terminal and140
+versus105 D1. Limited-design passes are61 versus58,74 versus70 and111 versus82 respectively.
+Raw/terminal connected validity increases216 to220 and239 to246 despite the lower exact yield;
+D1 validity decreases319 to297. Every family, gain, loss and diversity/novelty result is retained.
+D1 exact has6 gains and41 losses. This mixed adaptive one-checkpoint control tests ID congruence
+conditional on structural context; it is not a fully unconditioned null or independent paper result.
+Execution used236.577997 CPU seconds of500. Root independently recomputed all69 family/readout
+comparisons and gain/loss identities in0.144495 CPU seconds. Evidence lives in parallel_completion_v1/
+training_evaluation/cyclic_inference_qualification_v1/full_pair_v1; root_admission.json passes.
+
+The global whole-graph null prior was fitted from all1,192,065 admitted TRAIN graphs with unchanged
+equal-family/uniform-constitution weights, including63,995,147 atoms and63,696,279 physical bonds.
+The63,696,279 bonds include893,197 closure bonds and exclude root pseudo-bonds. All44,312 graphs
+above96 atoms are retained; declared254-atom/12-closure support is preserved. Existing conditioned
+noise omitted typed reaction-core coordinates, so its global row was not reused. The new prior
+is a single global state/count distribution, independent of requested family. Fit2.955186 CPU
+seconds; independent weighted-source/histogram/boundary review2.313 CPU seconds passes.
+
+The first real-TRAIN null interface smoke failed its assertion that formerly fixed atoms changed:
+it had collated raw mapped records, whose fixed masks are zero, without the production
+condition_on_qualified_core step. That fixture failure is preserved, not a model numerical result.
+A versioned correction uses the exact production core-conditioning helper before clearing all
+fixed masks. It passes on one frozen TRAIN record from each family:218 formerly fixed atoms
+become variable and115 change in the seeded t0 corruption; all9 semantic input fields are zero
+on every forward; semantic perturbations leave corruptions and predictions bit-exact;333 gradient
+tensors are finite; four global-count layouts complete five zero-semantic sampling forwards.
+The corrected smoke uses4.211898 CPU seconds, no optimizer updates and no trained model.
+Artifacts are under training_evaluation/shared_null_prior_v1. Production runner, PCGrad/sharding,
+checkpoint-schema and GPU/restart integration remain unqualified; no null fit is admitted.
+The manuscript is unchanged and none of these diagnostics closes final multi-seed held-out evidence.
+
+## 2026-09-25 — Exact GPU qualification passes; bounded paired pilot times out
+
+The corrected v3 detached allocation started at2026-09-26T02:22:46.816904+00:00. Its44-update
+qualification passed exact serial/eight-GPU model, optimizer, RNG, metrics, draw indices and
+exposure equivalence, plus kill-at13/restart-from11 equivalence with two uncommitted updates
+discarded. Every family received6,336 presentations. Cross-container migration was not exercised.
+The complete proof, three checkpoint44 files, event ledgers, pointers and closed logs were
+authenticated and collected. Qualification SHA256438e9502d4b47cc728406e881490edf05be94c39a96e37492b127df3496bc118.
+
+The overall run then hit its860-second supervisor deadline during categorical-arm startup, with
+only its step000 checkpoint committed. Failure was published after865.460496 wall seconds /
+115.394733 function GPU-minutes, excluding platform startup/shutdown billing. Neither66-update
+arm completed; no model-quality comparison or partial scientific result is admitted. This is an
+operational budget failure. No automatic retry was launched. Fresh authorization is required for
+additional paid execution by the repository durability contract. A training-only request reusing
+the exact admitted qualification and staged inputs is being prepared and reviewed.
+
+The actual reference44 event ledger separates28.251984 seconds in updates from77.375089 seconds
+in durable commits and0.096993 seconds of input waiting; total child174.070638 seconds. Staging
+took199.880436 seconds. Initial update11.969441 seconds; remaining43 updates average0.378664
+seconds. Remaining phase time is not further instrumented, so setup/serialization costs cannot
+be partitioned. Whole child duration divided by44 is not a per-update training measurement.
+The status API continued reporting PENDING after function start; early queue commentary was
+incorrect and is corrected by the saved start/staging/progress records. One monitoring call
+was delayed by automatic review timeout; read-only retry succeeded. Neither affected the
+detached execution lifetime. See training_evaluation/group_loss_pilot_v1/README_v3_outcome.md
+and v3_runtime_audit.json for command, identifiers, exact timing evidence and preserved failures.
+
+Independent review also found the null interface smoke v2 used default serialization-repeat
+loss while its source configuration selects exact_fragment. Its zero-input/mask/interface
+findings remain, but it did not exercise that exact auxiliary objective. Version3 now consumes
+the actual admitted ComposeLipidTrainingData.batch and passes its configured exact_fragment
+mode through the unchanged forward objective. It passes in9.038811 CPU seconds, including433
+repeat-atom and431 repeat-bond coordinates,333 finite gradient tensors and all8 zero-semantic
+forwards. No optimizer update occurred. Full PCGrad/sharded runner, checkpoint and GPU restart
+qualification remain open. Both earlier smoke versions and their scope limitations are retained.
+
+## 2026-09-25 — New control evidence indexed; null integration remains separate
+
+Evidence matrixv25 and parallel_completion_v1/progress_v2.json/README_v2.md now index the complete
+cyclic control, independently reviewed full-graph null prior, corrected exact-fragment interface
+smoke, passed GPU qualification and preserved overall timeout. All13 new progress input pins and
+all15 unchanged manuscript hashes were rechecked. Every final-paper admission flag remains false.
+Official cohort totals remain616/1,408 computationally makeable, with no inherited route claims
+for separately repaired or diagnostic structures.
+
+An independent agent reviewed the corrected null interface and wrote a concrete six-step production
+integration plan. Current null gaps include a versioned admitted global-noise envelope, native
+semantic-null mode without checkpoint-key changes, mask conversion before every serial and sharded
+loss denominator, count-only sampling/post-generation assessment, and exact PCGrad/restart checks.
+Candidate native-mode implementation may proceed only in an isolated source snapshot during the
+frozen paired-run preparation; production source and paid execution settings remain unchanged.
+No independently trained shared-null result exists yet.
+
+## 2026-09-25 — Training-only request reviewed; fresh authorization requested
+
+Request SHA256008b25ab094485f5561bdd32200358e94901f7b8a8c84e59b9c5c8a7e62f1928 is frozen in
+training_evaluation/group_loss_pilot_v1/training_only_readiness_v1/prepared_v1. It reuses the exact
+v3 numerical/restart proof and existing staged repository read-only. The new allocation verifies
+all source/configuration/runtime and execution-inventory identities, replays the closed qualification
+comparisons on CPU, copies only closed proof files, and starts both fresh66-update branches from
+the original model/AdamW state. It does not resume the unfinished categorical branch or redo the
+four GPU qualification phases. Seeds, draw tape,9,504 presentations per family per arm and fixed
+0/22/44/66 checkpoints remain unchanged. The frozen evaluation consumes the same receipt schema.
+
+All16 focused checks pass. Independent review identified and fixed an operational error path where
+a final commit failure could retain complete=true; the new regression verifies complete=false
+on failure. Local actual-proof replay used0.625 CPU seconds; independent review0.707983 and root
+pin/readiness validation0.111943 seconds. The independent request-bound review SHA256 is
+2193f91a3ec83271fa3b2a7a1855e32f50a861eb4ad4d2ab33ceb3e6c6a5a8d9.
+
+The measured-phase projection is782.092 seconds, retaining the full prior staging allowance despite
+reuse, scaling the measured44-step child to66 twice, and reserving60 seconds for proof/other work.
+This leaves77.908 seconds to the860-second supervisor deadline; it is not a runtime guarantee.
+The detached request retains a900-second/120-function-GPU-minute ceiling and no automatic retries.
+Root requested fresh authorization for this exact package under AGENTS.md after the preserved paid
+timeout. At this entry no authorization record, attempt or submission exists. Unaffected CPU work
+continues in an isolated native-null source snapshot; production source and manuscript are unchanged.
+
+## 2026-09-25 — User approved and submitted training-only paired continuation
+
+The user explicitly replied approve to the reviewed training-only request008b25ab094485f5 after
+the v3timeout. Root verified no attempt existed, recorded the fresh authorization bound to the
+exact new request and preserved failure, and submitted once at2026-09-26T02:49:27.992112+00:00.
+Detached Modal app ap-uz88DXpqfj8x17k2FkGQ0x and call fc-01M3DSW7M334E600ECY86TBWFY are saved in
+training_only_readiness_v1/prepared_v1/submitted.json. Same900-second/120-function-GPU-minute
+envelope and no-automatic-retry policy apply. Both branches must complete their fixed66 updates
+and qualify before any comparative model-quality result. Separate monitoring and collection are
+assigned; isolated native-null and mask-policy CPU implementation can continue without altering
+the submitted source. No manuscript change or final-paper admission follows from submission.
+
+## 2026-09-25 — Isolated native-null, mask-policy and assessment components qualified
+
+While the separately approved paired continuation ran remotely, agents implemented three disjoint
+CPU components without modifying submitted production source. shared_null_native_candidate_v1
+adds a plain native semantic_conditioning mode and null-only cache bypass, preserving parameter
+order, names and default conditioned behavior. Two architecture variants match original conditioned
+outputs/losses/gradients exactly and match the reference zero-input wrapper for null outputs and
+gradients. All14 traced calls hide the nine semantic inputs; invalid mode/stale memory fail. An
+initial generic routed fixture contained forbidden cross-role parents and produced a large loss
+in both unchanged/candidate conditioned code. It is retained. A supported-parent supplement has
+0/15 forbidden targets and finite ordinary-scale conditioned/null losses, with exact comparisons.
+Combined numerical checks used2.652651 CPU seconds. This does not qualify production integration.
+
+shared_null_masks_candidate_v1 applies all-variable masks before serial/family objectives and
+full-family sharded denominators. Six focused checks pass, default conditioned paths remain exact,
+and full-family versus two/four shards agrees within the existing tolerances (maximum gradient
+difference2.98e-7; parameter availability121/123 identical). Independent shard sums and unequal1+3
+shard prediction-gradient comparison are exact.254-atom/12-closure mask support is retained.
+The two preserved runs total3.392457 CPU seconds. Final source_v2 and candidate_v2.patch are
+isolated; prepared source caches and production files remain unchanged.
+
+shared_null_assessment_readiness_v1 adds an evaluation-only record with requested family, program,
+depth and source-role quantities. The existing checker needs no generated-node/source-layout
+correspondence. Executor matching equals the original on all352 saved requests; full checker
+results match on66 prespecified cases (first request per family times three readouts), using
+2.132445 CPU seconds. These request fields are available only after generation; no molecule,
+model, GPU, network or TEST generation occurred. This is checker parity, not null performance.
+
+Joint native/mask/global-prior/assessment integration is being checked in a further isolated
+source tree. No checkpoint schema migration, production-null admission, fitted null result or
+new biological/route claim follows from these component checks.
+
+## 2026-09-25 — Training-only paired continuation completes within its envelope
+
+The approved training-only detached request008b25ab094485f5 returned complete after417.797449
+wall seconds /55.706326 function GPU-minutes, excluding platform startup/shutdown billing. Both
+fixed66-update arms completed from the original model/AdamW initializer with9,504 presentations
+per family per arm (209,088 total each), and all0/22/44/66 checkpoints were published. Categorical
+and coarse-mixture child wall times were151.972362 and165.354258 seconds respectively. The
+function-return-bound result SHA256 is5713bf219399f20362625bd29af393cbde27302d1e319650337fcab226825a96.
+
+Remote paired checks report exact step-zero RNG/model/AdamW/counters and matching66-draw ledgers
+(SHA25664d7d8227579f575f4edd2a4a558fc05709003bf3a9d2ee2d64e141bef48764d). Qualification reuse
+rechecked every saved proof and current runtime/source inventory before either arm started. No
+automatic retry or changed scientific setting was used. Final artifact collection and independent
+local training admission are in progress at this entry; no comparative molecular-quality claim
+is made until the frozen CPU evaluations and complete comparison finish. The prior operational
+failures and their costs remain separately recorded.
+
+## 2026-09-25 — Complete continuation comparison fails the frozen advancement gate
+
+Root collected all28 training artifacts and independently admitted the fixed66 paired run in
+1.144177 CPU seconds. Original model/AdamW initialization, step-zero RNG/counters, both66-draw
+ledgers and the44-draw qualification prefix match exactly. The final checkpoints are
+c68e0dff56978279c19c460b93d2930501b6727585bc6a50e0c004c6cae773ff (categorical) and
+62d95109f954ece131e3a5840cee125ad7d4e078250215b90bf6fc31bcb0c753 (coarse mixture).
+The frozen CPU evaluation used only these final66 checkpoints; no intermediate checkpoint search
+or new decoder/proposal rule was introduced.
+
+All three arms completed1885 CAL variants from1859 qualified molecules, retaining the200
+unqualified molecules in the2059-molecule population accounting. Generation uses352 fixed
+TRAIN-derived requests,16 per family, with identical seeds, layouts,64 flow steps and three
+readouts. Original/categorical/coarse exact L1 counts are80/83/86 for raw flow,91/91/91 for
+terminal argmax, and140/136/135 for D1. Limited-design counts are61/65/72,74/75/78 and111/110/114
+respectively; design without context flags is60/64/71,73/74/77 and110/105/109. CAL
+nonconsecutive-parent errors improve1164/1034/1026 out of7936, showing that most of this clean
+parent-prediction gain is shared by ordinary continuation. It does not establish improved final
+generation quality.
+
+Coarse versus original gains13 and loses10 limited-design passes, but gains7 and loses12 exact
+L1 passes. Per-family, component-diversity and absolute novelty floors also fail. The frozen
+decision is to retain the original checkpoint; this is a negative promotion result, not an
+operational failure or a reason to loosen checks. These one-draw diagnostic counts are separate
+from the selected1408-product cohort, whose existing L1/L2/L3 totals are unchanged. No final
+paper or independent-realism result is admitted.
+
+The comparison SHA256 is226e65501ae4aed288ae074f0d049a04a1f65794c7a1ff75449810618a1fd36f.
+An independent saved-ledger review verified all1885 CAL ledgers and81,618 parent coordinates per
+arm, all352x3 generated outputs per arm, all22 families, canonical product/component diversity,
+TRAIN novelty and all three paired comparisons. It reproduced every count and frozen floor in
+3.800619 CPU seconds (review SHA256dd1cba7334ad63ad5579fa82bd13bae1d507998f4e0e5ce78da2048a76488271).
+The292 failed floor checks versus original and155 versus categorical are correlated metric
+checks, not counts of distinct failed molecules. Three full evaluation processes used350.484425
+CPU seconds; the comparison used2.554109. Source and manuscript remain unchanged.
+
+## 2026-09-25 — Joint shared-null CPU candidate reviewed with its remaining limits
+
+The isolated native-null/mask/global-prior/post-generation integration passed in12.692509 CPU
+seconds. Real22-family TRAIN loss and333 available gradients match the reference zero-input
+model exactly, retaining exact-fragment/paired-topology supervision. All335 checkpoint state keys
+and their tensor values survive in-memory serialization; all25 traced forwards hide all nine
+semantic coordinates. Synthetic two-family PCGrad is exact; two/four-shard differences remain
+within the previously frozen tolerances (maximum gradient4.768372e-7, loss7.629395e-6).
+
+All four untrained count-only generations were invalid and remain in the ledger; four original
+TRAIN positive controls pass the post-generation checker. These outputs are an interface test,
+not trained-null performance. Root independently reviewed the patch, isolation mechanism, saved
+counts and every pinned input in0.003087 CPU seconds without repeating numerical work. The
+review is shared_null_integration_candidate_v1/independent_review_v1.json. Production-null
+readiness remains false: runner/global-prior admission, enforced count-only sampling, durable
+optimizer/RNG restart and actual GPU/shard qualification are still required. No paid null run,
+production source merge or manuscript edit occurred.
+
+## 2026-09-25 — Complete paired gallery recovered after a preserved progress-write failure
+
+The first frozen renderer stopped because it used an exclusive final-artifact writer for the
+second progress update. Numeric evaluations and comparison were unaffected. The original source,
+partial gallery and failure log are preserved, with the unknown terminated cost conservatively
+charged at the full60-CPU-second cap. A versioned visual-only correction replaces the progress
+record atomically; its focused check reproduces the old failure, verifies repeated progress writes,
+and proves that selection, depiction and final-artifact exclusivity are unchanged. Root reviewed
+the exact diff and admitted one fresh local rendering under the existing evaluation envelope.
+
+visual_inspection_v2 completed in3.724082 CPU seconds. The complete1056-case coverage ledger
+contains623 changed/adverse cases across66 family/readout pages and737 unique structure images;
+all117 adverse cases are included, with zero omissions or rendering failures. The result SHA256
+is6f29f8376e7a584cc94f2e5f7bcdf0a7d5e96a5f3b20b51c08c6392c64141acc. Rendering completeness
+does not mean every structure has received independent chemistry adjudication. The gallery
+records this limitation explicitly and introduces no new model or source-assessor calls.
+
+## 2026-09-25 — Saved traces distinguish head/arm failures from decoder abstentions
+
+decoder_regression_audit_v1 independently reproduced all828 paired family/readout/metric rows
+in0.872086 CPU seconds, with zero model, decoder or assessor calls. Original/categorical/coarse
+D1 rescues65/60/56 raw exact failures while losing5/7/7 already-exact raw products. Two of the12
+original-to-coarse D1 losses retain exact new raw and terminal products; the other10 already
+fail upstream. Eight lost requests are shared by both continuations, so the entire regression
+cannot be attributed specifically to the coarse loss.
+
+All33/35/35 invalid D1 states match the strict decoder's fixed-core abstention placeholders.
+The unchanged runner attempts to serialize these placeholders and overwrites the true prior
+refusal with invalid-generated-closure in16/15/16 cases. This is a reporting defect, not evidence
+of an actually emitted bad ring. The earlier reasons cannot be recovered from those saved
+records, and every frozen failed outcome remains failed. Future logging must retain the strict
+refusal and any serialization diagnostic separately.
+
+Root directly inspected all12 original-to-coarse D1 exact-loss cases across all three arms,
+using the separately pinned four-page contact sheet. The saved verifier confirms missing
+nonacyl basic-head candidates in acid-epoxide requests000002/000004; the latter loses nitrogen
+entirely. Epoxide/O-acylation requests000000/000003/000006 each differ by one parent-bond state
+and fail repeated-arm identity. Preassembled thiol-yne000014 replays but violates declared
+component equality. Ketone Ugi4000009 changes12 parent pointers, four parent bonds, three atoms
+and one closure endpoint. These are distinct failure types; plausible-looking shape does not
+establish exact assembly, and original exactness does not establish independent lipid realism.
+The adverse-only visual subset cannot estimate population-wide quality. Its observations are
+in visual_loss_contact_sheets_v1/root_visual_review.json.
+
+A separately named saved-output ablation was assigned after the diagnosis, with a fixed order:
+retain exact D1, otherwise accept an already-exact raw output, otherwise an already-exact terminal
+output, otherwise retain the D1 failure. It uses only the existing three candidates and unchanged
+assessments for all352 requests in every arm. This differs explicitly from the audit's unexecuted
+terminal-first/design-gated suggestion. Any gain will be attributed to selection, not training,
+and cannot change the frozen coarse-loss promotion failure. Its execution and independent
+review are pending at this entry.
+
+## 2026-09-25 — Isolated shared-null global-prior admission and loader qualified
+
+shared_null_prior_admission_v1 binds the already reviewed full-TRAIN prior, fit protocol,
+configuration, population, verification, weighting measure, full weights database and vocabulary.
+It preserves1,192,065 records,22 equally weighted families,8/3 global atom/bond probabilities,
+1,131 empirical joint-count bins and declared254/12 support. Its public loader authenticates
+the consumed closure and requires matching runtime identities. It neither renormalizes the
+saved probabilities nor invents support for unobserved sizes.
+
+Actual admitted loading and exact float32 conversion passed; all34 malformed/conditional/
+stale-receipt cases were rejected in0.812751 CPU seconds. Qualification result SHA256 is
+b6b32014a12caf6ff95d918c70e7586b321f2509096551c69e9bf79fcf750d0c. Root reviewed the loader's
+authentication, measure/support checks and fail-closed1D probability/count validation. This is
+prior-only admission; the conditioned production loader is unchanged. Null configuration,
+runner/input-closure dispatch, enforced count-only sampling and actual durable restart/GPU
+qualification remain open. No model/refit/GPU/TEST/network call or manuscript edit occurred.
+
+## 2026-09-25 — Verified existing-candidate fallback measured and independently reconciled
+
+The separately frozen exact-only D1/raw/terminal fallback completed its352-request evaluation
+for each of the three checkpoints using saved candidates only. All15 focused selection tests
+passed. Original/categorical/coarse exact L1 changes140/136/135 to145/143/142; limited design
+changes111/110/114 to116/116/120; design without context flags changes110/105/109 to115/111/115.
+Every arm has324 valid connected selected products. All5/7/7 rescues use existing raw-flow
+outputs; no terminal-only rescue, new proposal, model call, decoder call or chemistry assessment
+was needed. Every original D1 exact/design pass and every request denominator is retained.
+
+The result SHA256 is37f2239955649bc4f3a80c743b93e0dd22b94259354d6c1c9070d1148fac589c.
+The numerical process used5.475672 CPU seconds; the enclosing run reported5.500751. Independent
+review used2.002740 CPU seconds and rebuilt all1056 selected identities/source digests,552 paired
+summary rows,1056 across-arm request transitions and69 structural summaries without reusing
+the selection or summary helpers. Review SHA256 is94506c932786d29120a13d2fac7c940fac240b4c06cd7dbdb13dd4b34bf9a210.
+
+No within-arm floor fails for original or coarse, but categorical phosphate-tail Shannon
+effective count falls9.118028 to9.075680. Its two reported floor entries are the same effect
+at global and iPhos aggregation, not two independent effects. Cross-arm family/diversity floors
+still fail, and the original checkpoint retains more exact successes under matched fallback.
+These gains belong entirely to post-hoc selection. The original frozen comparison and negative
+coarse-loss advancement decision are unchanged; no production or paper promotion occurred.
+
+## 2026-09-25 — Decoder refusal logging candidate qualified without changing outcomes
+
+decoder_reason_fix_v1 contains an unmerged versioned evaluator copy and exact patch. It keeps
+the strict refusal in reason/decoder_reason and records any graph serialization exception in
+serialization_error. A refusal still prevents molecular assessment. On all103 saved abstention
+placeholders, mock strict-refusal sentinels survive;47 reproduce the old overwritten reason
+defect. The true historical reasons remain unknown and are not replaced by test sentinels in
+scientific records.
+
+The qualification replays the actual old/candidate reporting blocks against all3168 saved
+request/readout cases, using saved SMILES/check/design returns as explicit mocks. Every
+validity, exactness, design, design-axis, source-exact, state and SMILES outcome is unchanged.
+Three malformed non-abstained controls, a normal valid state and a separate refusal/serializer
+sentinel control pass. This is control-flow regression coverage, not new chemistry evaluation.
+It used0.919506 CPU seconds; result SHA256 isddad7e9a5ef8f1c4b7e02256b053f75377aa97c66b3b27aa698bc55d2f179c2d.
+Root inspected the patch. Frozen evaluator source/results and the manuscript remain unchanged.
+
+## 2026-09-25 — Evidence matrixv26 closes this bounded parallel execution
+
+parallel_completion_v1/publish_closeout_v3.py produced evidence_matrix_v26.json, progress_v3.json
+and README_v3.md in0.221548 CPU seconds. The index binds the successful training receipt,
+complete independent evaluation, negative promotion result, complete gallery, direct adverse
+structure review, saved-trace diagnosis, independently verified fallback, isolated shared-null
+model/mask/prior-loader qualification and decoder-reporting candidate. All referenced prior-loader
+and reporting-fix input pins were checked, as were all15 manuscript hashes. No final-paper result
+block is newly admitted.
+
+The established1408-product cohort remains616 computationally makeable,1387 exact L1,1189
+L2-ready,119 direct-only and27 strict-secondary successes;606 jointly pass makeability and
+limited design, and604 additionally have no saved context flags. The new352-request diagnostics
+do not replace that cohort or inherit its route evidence. Remaining priorities are repeated-arm
+identity/head retention, production qualification of the shared-null baseline, independent
+structural references, matched independent-seed held-out confirmation and weakest-family route
+coverage. No further paid training or automatic retry was launched.
+
+## 2026-09-25 — Populate the22-family manuscript with measured development evidence
+
+The user explicitly requested that currently available data be placed in the paper, then asked to
+continue. This authorizes the manuscript update separately from the earlier research-only scope.
+The previous active source, PDF and ledgers are preserved in
+`paper/v1_iclr22/archive/before_measured_results_20260925/`. The sibling `paper/v1_iclr/` is unchanged.
+
+The updated `paper/v1_iclr22/` reports the unchanged1,408-request selected development cohort:
+1,387 exact L1 (98.5%),1,324 limited design (94.0%),616 computationally makeable (43.75%),
+1,189 L2-ready,119 direct-only L3 and27 strict secondary dossiers. It separately reports the
+352-request inference/training controls and negative continuations,192-request repair diagnostic,
+1,821-structure synthetic-CAL distribution comparison, TRAIN-relative novelty and component
+diversity. All22 families,66 family/arm fingerprint comparisons and528 family/descriptor rows
+are included. Two result figures replace empty training and all-family overview panels.
+
+Independent fits, final held-out generation, independent empirical realism, unrun baselines and
+the prespecified atlas remain explicit gaps. No development result is promoted to final independent
+evidence. Abstract, Results, Discussion and route-contract descriptions match the measured scope.
+The original Introduction is preserved except for one contribution bullet that incorrectly claimed
+uncompleted comparisons; the mathematical development and proofs are unchanged.
+
+The65-page canonical PDF and a181-file portable Overleaf ZIP compile successfully. A fresh ZIP
+extraction reproduces identical PDF text. The validator checks22 families,15 evidence blocks,
+10 family matrices, source pins, displayed headline/family counts, unchanged historical inputs and
+theory, with no undefined references or overfull boxes. All pages were rendered and inspected,
+including detailed table/figure checks and reinspection of changed pages. Existing four null
+chemistry net-balance fields remain unassessed because the frozen registries lack that contract;
+no chemistry evidence, reaction figure, or scientific gate was changed.
+
+Reproducible commands, source/output hashes, numerical summaries and review receipts are recorded
+in `results/phase1/compose_lipid_iclr22_manuscript_update_v1/result.json`. No new model, training,
+routing, network or TEST access was performed. No Git commit was requested or created.
+
+## 2026-09-26 — Compute missing same-cohort readouts and structural statistics
+
+The user requested that missing paper cells be measured rather than merely marked pending. The
+work in `results/phase1/compose_lipid_iclr22_table_completion_v1/` reuses the original checkpoint,
+all 1,408 TRAIN-derived development requests and the original five-draw schedule. No independent
+held-out study or training-seed replication is inferred. The selected cohort remains 1,387 exact
+L1, 1,324 limited-design, 616 computationally makeable, 1,189 L2-ready, 119 direct-only and 27
+strict-secondary successes. Computational makeability plus limited design without context flags
+remains 604/1,408.
+
+Complete conditioned and cyclic-ID checkpoint replays recover true raw endpoints. First-draw
+exact counts are 323 and 313; terminal-argmax counts are 379 and 368. Across 7,040 trajectories,
+raw exact counts are 1,658 and 1,521, and terminal counts are 1,910 and 1,794. Cycling increases
+valid connected yield despite reducing exact yield. It changes only program ID while preserving
+the supplied core, origins, roles and layout. It is not a trained null or a matched full-selection
+control. All 880 conditioned batches match all 14 saved terminal prediction heads bit exactly;
+all 7,040 reconstructed terminal states, SMILES and verdicts match. An independent reviewer
+authenticated 6,333 pins and recomputed every paired count and gain/loss cell.
+
+Selected-product inverse-search coverage is 1,392/1,408. Returned computational candidate
+acceptance is 1,387/1,456; 64 of 69 rejected tuples are alternative executor bindings for thiol-yne
+products that also have accepted bindings. These saved candidates have already undergone inverse
+filtering, so this does not measure chemical precision over all raw reverse-template outcomes.
+No bounded-search omissions were recorded. Successful recorded assembly/readout stages consumed
+4,918.340334 CPU seconds; failed setup smokes retain a separate conservative 60-second CPU charge.
+
+New structural statistics report cycle allocation 1,404/1,408, applicable ring-size agreement
+720/789 with 619 inapplicable, mean per-product TRAIN atom-environment coverage 98.50856%, and
+TRAIN-supported ring-containing products 589/810 with 598 ring-free products separate. All 24
+descriptor panels include dispersion and tails. The same-request raw/terminal quality evaluation
+preserves invalid attempts and conditional versus all-request denominators. Distinct fingerprint-
+supported outputs rise 399 to 488 to 801 for raw, terminal and selected outputs, while mean
+within-family fingerprint diversity declines 0.585 to 0.559 to 0.552. Selected outputs use a larger
+proposal budget; this is not a causal learned-model comparison or independent empirical realism.
+These quality producers consumed 6.011402 and 13.079915 CPU seconds, respectively.
+
+The authorized manuscript update adds the measurements to `paper/v1_iclr22/` and retains unrun
+trained-null, independent-fit, held-out and empirical-reference cells as missing. Earlier source,
+PDF and ledgers are preserved under `archive/before_table_completion_20260926/`. The corrected
+76-page canonical PDF and fresh 181-file portable export compile; the validator confirms identical
+PDF text and all source/denominator bindings. A failed fresh build caused by a stray preamble token
+is preserved in `package_preamble_failure_v1/`; only that token was removed. Visual review and
+exact output pins are recorded in this task's closeout. No Git commit was requested or created.
+
+## 2026-09-26 — Shared-null runtime preflight: preserved remote failure, exact offline audit
+
+The isolated null-runtime source passed 278 current training checks, vendor verification, focused
+launcher/boundary checks, real-TRAIN semantic-null gradient equivalence and CPU restart gates.
+One detached eight-H100 preflight was admitted for three two-update serial/parallel/restart arms,
+not a full null fit. Request `compose-null-preflight-0c87fa44a02bf1d3` used application
+`ap-elIMMc7e2fTB2uYdchw7WX`, function `fc-01M3E02T7K8MP9S05HV7NY6MNF`. The remote supervisor
+ran for 401.358 seconds (53.514 function GPU-minutes), saved all final checkpoints and reported
+failure when its comparison mixed CPU and CUDA optimizer-step tensors. That result remains
+`complete:false`. No automatic paid retry was launched.
+
+A separately versioned offline audit restored the authenticated checkpoints to CPU using the
+original serial-reference comparator convention. Serial versus parallel and parallel versus
+restarted checkpoints match exactly in every model, optimizer, RNG, exposure and scalar field.
+Independent review authenticated 53 paths including all 29 collected artifacts, compared 1,344
+tensors and all nine top-level checkpoint fields, and verified the intentional step-one stop and
+step-two completion. All 333 serialized device differences concern optimizer step storage; no
+value/dtype/shape difference was found. This establishes numerical/restart equivalence for the
+bounded preflight, not a full trained-null quality result. Full-batch capacity/timing qualification,
+full-fit admission and confirmatory evaluation remain separate uncompleted work.
+
+## 2026-09-26 — Prioritize learned attribution, weak-family quality and independent confirmation
+
+At the user's request, parallel ML and lipid-quality reviews diagnosed barriers to a strong
+22-family computational paper. The assessment and deterministic adverse structure gallery are
+in `compose_lipid_iclr22_table_completion_v1/paper_diagnosis/`. The main evidence gap is useful
+learned generation beyond equally informed, equally budgeted construction and selection. High
+selected L1 does not resolve raw-generation weakness or independent generalization. The completed
+continuations are negative promotion results: cleaner reconstruction did not improve completed
+exact yield. Further training volume alone is unsupported as the next fix.
+
+Priority structural families are ketone Ugi4, A3, aldehyde Ugi4 and aryl reductive amination.
+Ketone Ugi4 passes limited design in 39/64 and has 25 ring-predicate failures despite 62/64 exact
+L1. The head-origin policy is qualified only for aldehyde Ugi4; other families are unassessed.
+TRAIN support and synthetic-reference neighborhoods are not independent chemical realism.
+Product uniqueness also hides concentrated component roles. Missing listing/path evidence is
+reported separately from chemical impossibility and from strict experimental-source dossiers.
+
+The proposed experiment order is matched model-versus-prior/rules attribution, complete failure-
+lineage diagnosis and source-qualified quality checks, then frozen source/component-disjoint
+confirmation with independent fits. The review sets no new numeric acceptance gate, changes no
+result, and launches no new training or TEST access. No prospective synthesis, formulation or
+delivery experiments are proposed as readiness requirements. The main scientific decision is to
+seek defensible joint quality, novelty and route evidence at explicit cost rather than optimize
+one development percentage.
+
 ## 2026-09-26 — Execute five isolated improvement streams and measure their tradeoffs
 
 The user accepted and requested execution of the parallel-worktree improvement prompt. Five
@@ -21105,3 +24001,32 @@ The source/data boundary and reproduction commands are recorded in
 not contain the complete large historical artifact bundle. Existing worktrees and all frozen
 inputs/results remain intact. No new scientific metric, default-policy change, manuscript edit,
 remote compute launch or paid retry is part of this commit operation.
+
+## 2026-09-26 — Preserve the remaining working-tree changes in Git
+
+The user explicitly requested committing and pushing the changes left after the research-stream
+consolidation. Five disjoint groups preserve training branch initialization, authenticated
+presentation tapes and the optional parent-group objective; bounded ring/role-motif proposals;
+the current three-family manuscript and exports; the 22-family manuscript and archives; and
+the accumulated research proposals and decision records. This archives existing work and does
+not authorize or launch biological optimization, paid training, new route searches or TEST access.
+
+The exact training intermediate state was assembled from commit `aa2a5f9d` plus the selected
+training files in a temporary checkout. `make test-training` passes all 278 cases with no skips,
+failures or errors; all 30 vendored assets verify. The first attempt preserved 27 missing-fixture
+failures/errors and one sandbox shared-memory failure. Eighty-five exact fixture pins were then
+materialized, and the unchanged CPU suite passed with local shared-memory permission. Adding
+only the optional repair files next passes all 39 owning tests. Ruff and Black pass for all
+18 changed Python files. No source, gate or fixture content was changed to make these checks pass.
+
+Both canonical manuscripts rebuild without unresolved references or citations, and their PDF
+text matches the existing 39-page and 76-page PDFs. ZIP CRC checks pass. The source, exported
+packages and historical drafts are preserved as-is. Six stale pointers in three superseded
+22-family validation wrappers remain explicitly recorded in the new commit audit; they do not
+constitute current evidence admission. The audit does not promote development results or claim
+that the drafts are submission-ready. Nested research worktrees, the local SQLite session file,
+and ignored large experimental artifacts remain local and are not staged as nested repositories.
+
+Complete file hashes, exact test receipts, fixture pins, manuscript build checks and the initial
+failures are recorded under `results/phase1/remaining_working_tree_commit_v1/`. The current task
+changes no scientific result and makes no manuscript prose revision.
