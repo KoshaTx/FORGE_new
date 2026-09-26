@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import csv
 import gzip
+import hashlib
+import json
 from collections import defaultdict
 from pathlib import Path
 
@@ -13,6 +15,7 @@ from forge.corpus.ugi_component_expansion import (
     _family_fold_map,
     _similarity_families,
     build_ugi_component_expansion,
+    write_ugi_component_expansion,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -85,3 +88,28 @@ def test_repository_component_expansion_contract() -> None:
     assert {role: len(values) for role, values in retained.items()} == {
         role: len(values) for role, values in expected.items()
     }
+
+
+def test_component_expansion_writer_records_repeatable_artifact_hashes(tmp_path: Path) -> None:
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        json.dumps({"outputs": {"registry": "out/registry.csv.gz", "result": "out/result.json"}})
+    )
+    rows = [{"component_id": "example", "role": "amine_head"}]
+    result = {"schema_version": "test_component_expansion_writer"}
+
+    first = write_ugi_component_expansion(config_path, tmp_path, result, rows)
+    registry_path = tmp_path / "out/registry.csv.gz"
+    result_path = tmp_path / "out/result.json"
+    registry_bytes = registry_path.read_bytes()
+    result_bytes = result_path.read_bytes()
+
+    assert first["artifacts"]["registry"]["sha256"] == hashlib.sha256(registry_bytes).hexdigest()
+    assert first["artifacts"]["registry"]["bytes"] == len(registry_bytes)
+    assert json.loads(result_bytes) == first
+    with gzip.open(registry_path, "rt", newline="") as handle:
+        assert list(csv.DictReader(handle))[0]["component_id"] == "example"
+
+    assert write_ugi_component_expansion(config_path, tmp_path, result, rows) == first
+    assert registry_path.read_bytes() == registry_bytes
+    assert result_path.read_bytes() == result_bytes

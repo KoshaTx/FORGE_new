@@ -7,8 +7,6 @@ import gzip
 import hashlib
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
@@ -16,6 +14,8 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.hashing import sha256_file as _sha256_file
+from forge.core.io import atomic_write as _atomic_write
 from forge.synthesis.engine.qualified_forward import load_qualified_forward_reaction
 
 CONFIG_SCHEMA_VERSION = "m0_07_ugi_semantic_annotations_config.v1"
@@ -92,14 +92,6 @@ COMPONENT_MAPPING_FIELDS = (
 
 class UgiSemanticAnnotationError(ValueError):
     """Raised when exact Ugi semantic annotation cannot be established."""
-
-
-def _sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while block := handle.read(chunk_size):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _sha256_json(value: Any) -> str:
@@ -192,23 +184,6 @@ def _gzip_csv(rows: Iterable[Mapping[str, Any]], fields: Sequence[str]) -> bytes
     with gzip.GzipFile(fileobj=output, mode="wb", mtime=0) as archive:
         archive.write(text.getvalue().encode())
     return output.getvalue()
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _artifact_metadata(payload: bytes) -> dict[str, Any]:

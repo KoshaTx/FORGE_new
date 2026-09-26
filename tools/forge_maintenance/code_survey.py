@@ -1,4 +1,4 @@
-"""Fail-closed reachability and historical-pin survey for retiring legacy code."""
+"""Single-contract reachability and historical-pin survey for manual code review."""
 
 from __future__ import annotations
 
@@ -154,17 +154,29 @@ def _pin_identities(repo: Path, candidates: set[str]) -> dict[str, set[str]]:
     return by_path
 
 
+def _classify_reachability(*, in_cli: bool, in_paper: bool, historical_pins_archived: bool) -> str:
+    if in_cli and in_paper:
+        return "keep_shared"
+    if in_paper:
+        return "keep_paper"
+    if in_cli:
+        return "keep_cli"
+    if historical_pins_archived:
+        return "review_unreached"
+    return "blocked_historical_pin"
+
+
 def survey_code(
     repo: Path,
     contract_path: Path,
     *,
     output: Path | None = None,
 ) -> dict[str, Any]:
-    """Classify code against supported CLI and paper roots without deleting anything.
+    """Classify code against CLI and one paper contract without deleting anything.
 
-    ``retire_candidate`` means only that the static graph found no supported consumer and every
-    historical path/hash identity is already content-addressed. Dynamic imports from reachable code
-    are surfaced separately; a non-empty list blocks automated bulk deletion.
+    ``review_unreached`` means only that this static graph found no consumer under those roots
+    and all known historical pins are archived. Other supported studies may still use the file.
+    A single-contract survey never authorizes automated deletion.
     """
 
     repo = repo.resolve()
@@ -255,16 +267,11 @@ def survey_code(
         archived = [digest for digest in pins if archive.resolve(relative, digest) is not None]
         in_cli = relative in cli_reachable
         in_paper = relative in paper_reachable
-        if in_cli and in_paper:
-            classification = "keep_shared"
-        elif in_paper:
-            classification = "keep_paper"
-        elif in_cli:
-            classification = "keep_cli"
-        elif len(archived) == len(pins):
-            classification = "retire_candidate"
-        else:
-            classification = "blocked_historical_pin"
+        classification = _classify_reachability(
+            in_cli=in_cli,
+            in_paper=in_paper,
+            historical_pins_archived=len(archived) == len(pins),
+        )
         rows.append(
             {
                 "archived_pin_identities": len(archived),
@@ -296,8 +303,17 @@ def survey_code(
         },
         "paper_id": contract.paper_id,
         "reachable_dynamic_imports": reachable_dynamic,
-        "safe_for_automated_deletion": not reachable_dynamic,
-        "schema_version": "forge.code_retirement_survey.v1",
+        "safe_for_automated_deletion": False,
+        "schema_version": "forge.code_retirement_survey.v2",
+        "survey_scope": {
+            "paper_contract": str(
+                contract_path.relative_to(repo)
+                if contract_path.is_relative_to(repo)
+                else contract_path
+            ),
+            "single_paper_contract_only": True,
+            "other_supported_studies_must_be_reviewed": True,
+        },
     }
     if output is not None:
         write_json(output, document)

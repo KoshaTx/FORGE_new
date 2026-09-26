@@ -5,6 +5,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[1]
 LIBRARY = REPO / "forge"
 RUNTIME = REPO / "experiments" / "_runtime"
@@ -119,6 +121,13 @@ def test_catalog_owns_every_active_experiment_specification() -> None:
     assert all(path.parts[0] == "experiments" for path in declared | groups)
     for experiment_id, path in SPECIFICATIONS.items():
         assert ExperimentSpec.load(REPO / path).experiment_id == experiment_id
+
+
+def test_catalog_rejects_duplicate_experiment_identifiers() -> None:
+    from experiments.catalog import _merge_specifications
+
+    with pytest.raises(ValueError, match="duplicate experiment identifiers"):
+        _merge_specifications({"same": "one.json"}, {"same": "two.json"})
 
 
 def test_owned_modal_groups_reference_pinned_catalog_experiments() -> None:

@@ -26,6 +26,7 @@ from experiments.phase1.multireaction.combinatorial_reuse_pilot import assess_ro
 from forge.assembly.families import load_assembly_libraries
 from forge.core.hashing import resolve_pin, sha256_file
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model._synthesis_sampling import SAMPLING_SOURCE_FILES
 from forge.model.combinatorial_layout_prior import CombinatorialLayoutPrior
 from forge.model.generated_program_layout import layout_signatures
 from forge.model.synthesis_program_sampling import (
@@ -37,7 +38,7 @@ SCHEMA = "forge.combinatorial_count_layout_generation.v1"
 SOURCES = (
     "forge/model/combinatorial_layout_prior.py",
     "forge/model/synthesis_program_layout.py",
-    "forge/model/synthesis_program_sampling.py",
+    *SAMPLING_SOURCE_FILES,
     "forge/model/generated_program_layout.py",
     "experiments/phase1/multireaction/combinatorial_count_layout_generation.py",
 )

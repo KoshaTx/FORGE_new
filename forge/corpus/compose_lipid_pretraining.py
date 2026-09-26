@@ -24,6 +24,7 @@ from forge.assembly.compose_lipid import ComposeLipidError, role_metadata
 from forge.assembly.families import LibraryAssemblyError, RegistryAssemblyAdapter
 from forge.core.hashing import resolve_pin, sha256_file
 from forge.corpus.compose_lipid import _frozen_guards, verify_compose_lipid
+from forge.model._synthesis_sampling import SAMPLING_SOURCE_FILES
 from forge.model.defog_feasibility import AtomState
 from forge.model.qualified_vocabulary import QualifiedAtomVocabulary
 from forge.model.sparse_topology_feasibility import (
@@ -36,6 +37,20 @@ from forge.model.vocabulary import load_atom_vocabulary
 
 CONFIG_SCHEMA = "forge.compose_lipid_pretraining_config.v1"
 RESULT_SCHEMA = "forge.compose_lipid_pretraining.v1"
+
+
+IMPLEMENTATION_SOURCES = (
+    "forge/corpus/compose_lipid_pretraining.py",
+    "forge/model/qualified_vocabulary.py",
+    *SAMPLING_SOURCE_FILES,
+    "forge/assembly/families.py",
+    "forge/assembly/registry.py",
+    "forge/assembly/program.py",
+    "forge/chemistry/reactive_sites.py",
+    "forge/model/sparse_topology_feasibility.py",
+    "forge/model/defog_feasibility.py",
+    "forge/core/hashing.py",
+)
 
 
 def _dump(path: Path, value: object) -> None:
@@ -363,18 +378,7 @@ def run_pretraining_checks(repo_root: Path, config_path: Path, output_dir: Path)
             _dump(work / "atom_vocabulary.json", vocab_artifact)
             _dump(work / "split_label_audit.json", split_audit)
             _dump(work / "component_label_conflicts.json", conflicts)
-            implementation = (
-                "forge/corpus/compose_lipid_pretraining.py",
-                "forge/model/qualified_vocabulary.py",
-                "forge/model/synthesis_program_sampling.py",
-                "forge/assembly/families.py",
-                "forge/assembly/registry.py",
-                "forge/assembly/program.py",
-                "forge/chemistry/reactive_sites.py",
-                "forge/model/sparse_topology_feasibility.py",
-                "forge/model/defog_feasibility.py",
-                "forge/core/hashing.py",
-            )
+            implementation = IMPLEMENTATION_SOURCES
             result = {
                 "schema_version": RESULT_SCHEMA,
                 "status": "training_unqualified",

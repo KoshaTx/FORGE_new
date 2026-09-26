@@ -28,6 +28,7 @@ from forge.assembly.library_programs import LibraryProgramLimits
 from forge.core.hashing import resolve_pin, sha256_file
 from forge.corpus.library_splits import constitution_id
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model._synthesis_sampling import SAMPLING_SOURCE_FILES
 from forge.model.defog_feasibility import _model_state_sha256
 from forge.model.synthesis_program_sampling import (
     CHECKPOINT_SCHEMA,
@@ -41,6 +42,17 @@ from forge.model.synthesis_program_training import (
     synthesis_program_forward,
 )
 from forge.model.tensor_checkpoint import encode_tensor_state
+
+IMPLEMENTATION_SOURCES = (
+    "experiments/phase1/multireaction/combinatorial_training_pilot.py",
+    "forge/assembly/library_generation.py",
+    "forge/assembly/library_programs.py",
+    "forge/assembly/families.py",
+    *SAMPLING_SOURCE_FILES,
+    "forge/model/reaction_program_flow.py",
+    "forge/model/synthesis_program_training.py",
+    "forge/corpus/synthesis_program_production_cache.py",
+)
 
 
 class CombinatorialGenerationError(ValueError):
@@ -393,19 +405,7 @@ def run(repo_root: Path, config_path: Path, output_dir: Path) -> dict:
             raise CombinatorialGenerationError("invalid fixed sampling budget")
     sources = [
         Path(__file__).resolve(),
-        *[
-            repo / p
-            for p in (
-                "experiments/phase1/multireaction/combinatorial_training_pilot.py",
-                "forge/assembly/library_generation.py",
-                "forge/assembly/library_programs.py",
-                "forge/assembly/families.py",
-                "forge/model/synthesis_program_sampling.py",
-                "forge/model/reaction_program_flow.py",
-                "forge/model/synthesis_program_training.py",
-                "forge/corpus/synthesis_program_production_cache.py",
-            )
-        ],
+        *[repo / p for p in IMPLEMENTATION_SOURCES],
     ]
     pins = [_pin(p, repo) for p in [config_path, *sources]]
     start = time.monotonic()

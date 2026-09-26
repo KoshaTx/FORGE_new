@@ -12,8 +12,6 @@ import gzip
 import hashlib
 import io
 import json
-import os
-import tempfile
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -21,6 +19,7 @@ from typing import Any
 
 from rdkit import Chem, rdBase
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.corpus.component_splits import (
     FOLDS,
     family_fold_map,
@@ -313,23 +312,6 @@ def _csv_gzip_bytes(rows: Sequence[Mapping[str, Any]]) -> bytes:
     writer.writeheader()
     writer.writerows({field: row.get(field, "") for field in REGISTRY_FIELDS} for row in rows)
     return gzip.compress(stream.getvalue().encode(), compresslevel=9, mtime=0)
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def build_ugi_component_expansion(

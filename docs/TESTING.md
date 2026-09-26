@@ -7,6 +7,12 @@ old experiment outputs do not block the current training pipeline.
 
 ## While implementing
 
+`make test-study-compatibility` checks both study interfaces and shared decoding on small
+local fixtures. It covers catalog registration, extracted source inventories and fingerprints,
+passive RNG traces, fixed closures, and COMPOSE origin/ring/repeat behavior. It performs no
+optimizer training or remote submission. This is a compatibility check, not data admission or
+historical result reproduction. See [STUDIES.md](STUDIES.md) for the workflow map.
+
 The default is the affected case or owning file, then stop once it passes:
 
 ```sh

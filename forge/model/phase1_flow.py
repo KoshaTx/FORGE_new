@@ -17,6 +17,7 @@ from typing import Any
 
 import numpy as np
 
+from forge.core.io import atomic_write as _atomic_write
 from forge.corpus.r0_splits import sha256_file
 from forge.model.defog_feasibility import (
     AtomState,
@@ -186,23 +187,6 @@ def _source_mixture_diagnostic(
         "maximum_absolute_error": max(absolute_error.values()),
         "is_diagnostic_not_acceptance_gate": True,
     }
-
-
-def _atomic_write(path: Path, payload: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        try:
-            os.unlink(temporary)
-        except FileNotFoundError:
-            pass
-        raise
 
 
 def _portable(path: Path, repo: Path) -> str:

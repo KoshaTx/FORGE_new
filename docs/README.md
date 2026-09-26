@@ -29,7 +29,9 @@ inputs or generated inventories. They are not general narrative documentation an
 deleted as clutter.
 
 `../provenance/code-retirement/iclr2027.json` is the generated code-reachability and retirement
-inventory. Regenerate it with `make code-survey`; do not hand-edit its classifications.
+inventory. Its committed v1 snapshot predates the current three-family and 22-family code map.
+Regenerate it with `make code-survey`; do not hand-edit its classifications or use an unreached
+classification as permission to delete a study's code.
 
 ## Scientific milestone records
 

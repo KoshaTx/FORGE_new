@@ -24,6 +24,7 @@ from experiments.phase1.multireaction.combinatorial_reuse_pilot import _digest, 
 from forge.assembly.families import load_assembly_libraries
 from forge.core.hashing import resolve_pin, sha256_file
 from forge.corpus.synthesis_program_production_cache import SynthesisProgramProductionCache
+from forge.model._synthesis_sampling import SAMPLING_SOURCE_FILES
 from forge.model.precursor_reuse_admission import admit_completions
 from forge.model.precursor_reuse_projection import fixed_graph_preserved, state_graph
 from forge.model.source_core_completion import SourceCoreTrace
@@ -37,7 +38,7 @@ SOURCES = (
     "forge/model/source_core_completion.py",
     "forge/model/fixed_closure_decoding.py",
     "forge/model/combinatorial_core_scaffold.py",
-    "forge/model/synthesis_program_sampling.py",
+    *SAMPLING_SOURCE_FILES,
     "forge/model/precursor_reuse_projection.py",
     "forge/model/precursor_reuse_admission.py",
     "experiments/phase1/multireaction/combinatorial_source_core_completion.py",

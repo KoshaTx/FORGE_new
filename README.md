@@ -20,6 +20,7 @@ authorized; Ugi remains the deep case and no new biological or wet-lab scope is 
 
 - Plan: [`docs/PLAN.md`](docs/PLAN.md)
 - Documentation map: [`docs/README.md`](docs/README.md)
+- Supported studies: [`docs/STUDIES.md`](docs/STUDIES.md) — three-family and 22-family workflows.
 - Tasks: [`docs/M0_TASKS.md`](docs/M0_TASKS.md)
 - Data: [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)
 - Decisions: [`docs/DECISION_LOG.md`](docs/DECISION_LOG.md)

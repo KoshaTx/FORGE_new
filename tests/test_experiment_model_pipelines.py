@@ -93,11 +93,11 @@ def test_importing_the_runner_does_not_pull_in_the_training_stack() -> None:
     may import lightweight core serialization at module scope; model, corpus, training, and sampling
     implementations stay inside their stage functions.
     """
-    source = PRODUCT_L1 / "stages.py"
-    tree = ast.parse(source.read_text())
-
     module_level = {
-        node.module for node in tree.body if isinstance(node, ast.ImportFrom) and node.module
+        node.module
+        for source in (*PRODUCT_L1.glob("*stages.py"), PRODUCT_L1 / "_stage_support.py")
+        for node in ast.parse(source.read_text()).body
+        if isinstance(node, ast.ImportFrom) and node.module
     }
     domain = {
         name
@@ -106,10 +106,15 @@ def test_importing_the_runner_does_not_pull_in_the_training_stack() -> None:
             (
                 "forge.corpus",
                 "forge.model",
-                "experiments.phase1.product_l1.sampling",
-                "experiments.phase1.product_l1.training",
+                "experiments.phase1.product_l1.sampling.",
+                "experiments.phase1.product_l1.training.",
             )
         )
+        or name
+        in {
+            "experiments.phase1.product_l1.sampling",
+            "experiments.phase1.product_l1.training",
+        }
     }
 
     assert not domain, (

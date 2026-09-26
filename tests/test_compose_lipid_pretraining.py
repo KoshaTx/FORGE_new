@@ -17,6 +17,9 @@ from forge.assembly.compose_lipid import ComposeLipidError
 from forge.core.hashing import PinError, sha256_file
 from forge.corpus.compose_lipid import import_compose_lipid
 from forge.corpus.compose_lipid_pretraining import (
+    IMPLEMENTATION_SOURCES as PRETRAINING_IMPLEMENTATION_SOURCES,
+)
+from forge.corpus.compose_lipid_pretraining import (
     audit_split_labels,
     component_labels,
     probe_reconstruction,
@@ -208,15 +211,7 @@ def test_ambiguous_and_protected_components_abstain():
 def test_full_check_retains_large_graphs_and_never_grants_training(release):
     repo, _, _, _, _ = release
     import_compose_lipid(repo, Path("config.json"), Path("import"))
-    for name in (
-        "forge/corpus/compose_lipid_pretraining.py",
-        "forge/model/qualified_vocabulary.py",
-        "forge/model/synthesis_program_sampling.py",
-        "forge/assembly/registry.py",
-        "forge/assembly/program.py",
-        "forge/chemistry/reactive_sites.py",
-        "forge/model/defog_feasibility.py",
-    ):
+    for name in PRETRAINING_IMPLEMENTATION_SOURCES:
         target = repo / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(REPO / name, target)

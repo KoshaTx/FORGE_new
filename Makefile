@@ -24,7 +24,7 @@
 	phase1-sampling-reproduce paper-experiment-readiness paper-verify manuscript-pdf manuscript-iclr \
 	paper-bundle code-survey test-baseline-report assessment-benchmark evaluation-profile \
 	typecheck check-core \
-	test test-full test-one test-preparation test-training lint fmt clean
+	test test-full test-one test-preparation test-training test-study-compatibility lint fmt clean
 
 EXPECT_PINS ?= 822
 EXPECT_PINS_ALL ?= 2416
@@ -411,6 +411,13 @@ test:
 	PYTHONPATH=. $(UV_RUN) python -m pytest -q
 
 test-full: test
+
+test-study-compatibility:
+	PYTHONPATH=. $(UV_RUN) python -m pytest -q \
+		tests/test_study_compatibility.py tests/test_experiment_model_pipelines.py \
+		tests/test_ugi_sampling_trace.py tests/test_compose_lipid_generation.py \
+		tests/test_fixed_closure_decoding.py \
+		tests/test_compose_lipid_restoration.py::test_strict_decoder_retains_ring_touching_core_and_exact_atom_count
 
 test-one:
 	@test -n "$(strip $(TEST))" || { echo "Set TEST to the affected pytest file or node ID."; exit 2; }

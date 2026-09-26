@@ -52,7 +52,7 @@ def _command_survey(args: argparse.Namespace) -> int:
         raise FileNotFoundError(f"paper reproduction contract not found: {contract}")
     result = survey_code(repo, contract, output=_optional(repo, args.output))
     _print(result)
-    return 0 if result["safe_for_automated_deletion"] else 2
+    return 0 if not result["reachable_dynamic_imports"] else 2
 
 
 def _command_test_report(args: argparse.Namespace) -> int:

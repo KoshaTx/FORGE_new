@@ -6,6 +6,17 @@ on:
     branches: [main]
 
 jobs:
+  study-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install locked development environment
+        run: uv sync --frozen --extra dev --extra torch
+      - name: Check both study interfaces without training
+        run: uv run make test-study-compatibility
   core:
     runs-on: ubuntu-latest
     steps:

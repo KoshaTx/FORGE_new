@@ -24030,3 +24030,70 @@ and ignored large experimental artifacts remain local and are not staged as nest
 Complete file hashes, exact test receipts, fixture pins, manuscript build checks and the initial
 failures are recorded under `results/phase1/remaining_working_tree_commit_v1/`. The current task
 changes no scientific result and makes no manuscript prose revision.
+
+## 2026-09-26 — Consolidate equivalent FORGE I/O and hashing helpers
+
+- Replaced three duplicate atomic byte writers in Ugi component expansion, Phase 1
+  flow and exact-source Ugi annotations with `forge.core.io.atomic_write`.
+  Reused `forge.core.hashing.sha256_file` in annotations and the DeFoG feasibility
+  probe while retaining the latter's public import path and one-argument call.
+  Serialization, artifact schemas, input pins and frozen outputs were not changed.
+- Added a component-expansion writer regression check for repeatable bytes and
+  recorded artifact hashes. The affected core, corpus, model, potency and Miao
+  tests passed locally; one CUDA-only test was skipped because CUDA is unavailable.
+  Ruff and Black checks passed for touched Python files, and `make verify`
+  confirmed all 30 vendored assets at their recorded hashes.
+- The existing code-retirement survey receipt remains a provisional inventory:
+  its source-tree hash predates these edits. No historical code was deleted or
+  historical result regenerated. Training and remote jobs were not launched.
+
+## 2026-09-26 — Preserve both multireaction studies during application cleanup
+
+- The old code-retirement survey used a single older paper contract. Its
+  `retire_candidate` labels did not identify the three-family study. Preserve
+  both the original three-family and newer 22-family workflows and their
+  historical artifacts; no code was deleted based on that survey.
+- Move the experiment allow-list entries into application-owned
+  `specifications.py` modules and keep `experiments/catalog.py` as a duplicate-
+  rejecting facade. Split the original multireaction stage adapters and the
+  reaction-specialization wrappers into focused modules while retaining their
+  stage IDs, functions, JSON paths, and previous Python import paths. Direct
+  comparison with the pre-edit code confirmed all 153 catalog entries and all
+  48 multireaction stage ID/function pairs are unchanged. All 49 original
+  multireaction function ASTs are identical after the move.
+- The code survey now describes its single-contract scope, classifies unseen
+  code for manual review, and never reports automated deletion as safe. Its
+  v1 committed receipt remains a historical snapshot; a v2 check ran locally
+  without changing that receipt. Focused experiment, specialist, architecture,
+  and survey tests passed. No training or remote jobs were launched.
+
+## 2026-09-26 — Modularize shared sampling and retain both study interfaces
+
+- Added `docs/STUDIES.md` with separate three-family and 22-family entry points,
+  shared implementations, evidence locations, and scoped verification commands.
+- Consolidated acquisition hashing, portable paths, and atomic writes. The core
+  writer accepts an optional mode; acquisition retains 0644 and the default
+  remains private. Bytes, serialization, and acquisition contracts are preserved.
+- Extracted product/L1 training, sampling, and evaluation adapters; extracted
+  shared sampler contracts, checkpoint loading, state operations, constraints,
+  and decoding. Existing import paths and stage IDs remain available. Complete
+  terminal tensor/array records and the distinct topology-only record now have
+  explicit types. Direct producer source inventories include every new module.
+- The 153 catalog entries and 102 stage IDs are unchanged. The 34 sampler and
+  65 adapter function bodies match after erasing types and identity casts. A
+  direct comparison with the archived sampler passes 20 fixture checks including
+  RNG state, abstention, fixed states, and passive traces. The baseline and current
+  samplers use identical current shared dependencies in this comparison.
+- Added `make test-study-compatibility` and a separate CI job. Local receipts show
+  35 compatibility, 58 acquisition/I/O, and nine historical/archive tests passing;
+  affected adapter and COMPOSE checks also passed after fixture updates. All 30
+  vendored assets verify. No training, remote jobs, or remote CI were launched.
+- Preserved all 513 existing archive entries and added 13 exact versions. No
+  previously resolvable source reference was broken. Nine older unresolved
+  source identities remain documented. New contracts and extracted adapters pass
+  targeted typing; the broader sampler retains its 103 pre-existing mypy errors
+  without adding suppressions or weakening gates.
+- Reproducible commands, source hashes, baseline comparisons, and limitations are
+  recorded under `results/maintenance/forge_maintainability_20260926/`. Historical
+  results, frozen configs, chemistry definitions, manuscripts, and scientific
+  acceptance criteria were not rewritten by this cleanup.

@@ -8,6 +8,7 @@ import pytest
 from experiments._runtime.errors import StageError
 from experiments._runtime.spec import ExperimentSpec
 from experiments.catalog import SPECIFICATIONS
+from experiments.phase1.product_l1 import specialist_evaluation_stages
 from experiments.phase1.product_l1 import stages as product_l1_stages
 from experiments.phase1.product_l1.evaluation.reaction_specialist_ugi_v0_comparison import (
     _load_topology_policy,
@@ -556,7 +557,7 @@ def test_chemistry_specialist_recovery_uses_real_preflight_and_authenticates_gat
         return "captured"
 
     monkeypatch.setattr(
-        product_l1_stages,
+        specialist_evaluation_stages,
         "_ugi_chemistry_specialist_base_comparison_stage",
         capture,
     )

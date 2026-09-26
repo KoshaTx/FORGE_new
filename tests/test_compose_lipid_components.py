@@ -22,6 +22,9 @@ from forge.corpus.compose_lipid_components import (
     run_component_constraints,
     verify_component_constraints,
 )
+from forge.corpus.compose_lipid_pretraining import (
+    IMPLEMENTATION_SOURCES as PRETRAINING_IMPLEMENTATION_SOURCES,
+)
 from forge.corpus.compose_lipid_pretraining import run_pretraining_checks
 from forge.corpus.library_splits import FrozenIdentityFolds
 
@@ -175,16 +178,7 @@ def test_full_pipeline_replay_and_tamper_detection_without_heldout_graph_parsing
 ):
     repo, _, _, _, _ = release
     import_compose_lipid(repo, Path("config.json"), Path("import"))
-    for name in (
-        *IMPLEMENTATION,
-        "forge/corpus/compose_lipid_pretraining.py",
-        "forge/model/qualified_vocabulary.py",
-        "forge/model/synthesis_program_sampling.py",
-        "forge/assembly/registry.py",
-        "forge/assembly/program.py",
-        "forge/chemistry/reactive_sites.py",
-        "forge/model/defog_feasibility.py",
-    ):
+    for name in (*IMPLEMENTATION, *PRETRAINING_IMPLEMENTATION_SOURCES):
         target = repo / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(REPO / name, target)

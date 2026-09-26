@@ -9,12 +9,9 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
-import hashlib
 import json
-import os
 import platform
 import tarfile
-import tempfile
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -29,6 +26,9 @@ from urllib.parse import urlparse
 
 from rdkit import rdBase
 
+from forge.synthesis.sources._acquisition_io import atomic_write_bytes as _atomic_write_bytes
+from forge.synthesis.sources._acquisition_io import content_sha256 as _sha256_bytes
+from forge.synthesis.sources._acquisition_io import portable_path as _portable_path
 from forge.synthesis.sources.supervision_inventory import sha256_file
 
 RESULT_SCHEMA_VERSION = "m0_09_pmc_source_acquisition.v1"
@@ -67,35 +67,6 @@ class PmcQueueEntry:
 
 
 FetchFunction = Callable[[str], FetchResponse]
-
-
-def _sha256_bytes(content: bytes) -> str:
-    return hashlib.sha256(content).hexdigest()
-
-
-def _portable_path(path: Path) -> str:
-    resolved = path.resolve()
-    try:
-        return str(resolved.relative_to(Path.cwd().resolve()))
-    except ValueError:
-        return str(resolved)
-
-
-def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(
-        dir=path.parent, prefix=f".{path.name}.", suffix=".tmp"
-    )
-    temporary_path = Path(temporary)
-    try:
-        os.fchmod(descriptor, 0o644)
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary_path, path)
-    finally:
-        temporary_path.unlink(missing_ok=True)
 
 
 def fetch_url(url: str, *, timeout_seconds: float = 60.0) -> FetchResponse:

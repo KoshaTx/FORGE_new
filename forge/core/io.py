@@ -218,18 +218,21 @@ def read_csv_rows(
 # --------------------------------------------------------------------------------- writing
 
 
-def atomic_write(path: Path, payload: bytes) -> None:
+def atomic_write(path: Path, payload: bytes, *, mode: int | None = None) -> None:
     """Write bytes so the destination is never observed partially written.
 
     Writes to a temporary file in the same directory, fsyncs it, then renames over the target --
     rename within a directory is atomic. The repository's engineering contract requires this:
     "calculate first, then write complete artifacts. Do not leave a plausible-looking result after
     an exception." A half-written ledger that still parses is the failure mode this prevents.
+    An explicit mode is applied before publication; None retains mkstemp's private permissions.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
     try:
         with os.fdopen(descriptor, "wb") as handle:
+            if mode is not None:
+                os.fchmod(handle.fileno(), mode)
             handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())

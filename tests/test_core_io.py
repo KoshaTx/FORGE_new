@@ -182,8 +182,9 @@ def test_atomic_write_leaves_no_temp_file_behind(tmp_path: Path) -> None:
     assert [p.name for p in tmp_path.iterdir()] == ["out.bin"]
 
 
+@pytest.mark.parametrize("mode", [None, 0o644])
 def test_atomic_write_does_not_clobber_on_failure(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mode: int | None
 ) -> None:
     """A failed write must leave the previous artifact intact, not a truncated one.
 
@@ -198,10 +199,36 @@ def test_atomic_write_does_not_clobber_on_failure(
 
     monkeypatch.setattr("forge.core.io.os.replace", explode)
     with pytest.raises(RuntimeError):
-        atomic_write(target, b"replacement")
+        atomic_write(target, b"replacement", mode=mode)
 
     assert target.read_bytes() == b"original"
     assert [p.name for p in tmp_path.iterdir()] == ["out.bin"]
+
+
+@pytest.mark.parametrize("mode,expected", [(None, 0o600), (0o644, 0o644)])
+def test_atomic_write_publishes_requested_permissions(
+    tmp_path: Path, mode: int | None, expected: int
+) -> None:
+    target = tmp_path / "out.bin"
+    atomic_write(target, b"payload", mode=mode)
+    assert target.stat().st_mode & 0o777 == expected
+    assert target.read_bytes() == b"payload"
+
+
+def test_atomic_write_cleans_up_when_permission_change_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    target = tmp_path / "out.bin"
+    atomic_write(target, b"original")
+
+    def fail(*args: object) -> None:
+        raise OSError("permission failure")
+
+    monkeypatch.setattr("forge.core.io.os.fchmod", fail)
+    with pytest.raises(OSError, match="permission failure"):
+        atomic_write(target, b"replacement", mode=0o644)
+    assert target.read_bytes() == b"original"
+    assert list(tmp_path.iterdir()) == [target]
 
 
 def test_atomic_write_replaces_existing_content(tmp_path: Path) -> None:

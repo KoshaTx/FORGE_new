@@ -1,13 +1,14 @@
 """Source-bounded primary-amine acyclic Miao branch; no secondary-amine inference."""
 
 from __future__ import annotations
+
 import json
 from functools import partial
+
 from rdkit import Chem
-from forge.corpus.compose_lipid_fixed_replay import (
-    load_contract as load_fixed_contract,
-    qualify_controls,
-)
+
+from forge.corpus.compose_lipid_fixed_replay import load_contract as load_fixed_contract
+from forge.corpus.compose_lipid_fixed_replay import qualify_controls
 
 
 def component_domain(components, specification):
