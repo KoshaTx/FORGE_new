@@ -1,0 +1,130 @@
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/b_quality/experiments/phase1/multireaction/component_feasibility_census_v2.py
++++ experiments/phase1/multireaction/component_feasibility_census_v2.py
+@@ -19,7 +19,7 @@
+ from forge.model.compose_lipid_layout import encoded, summarize_layout
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = WORKTREE.parent.parent
++ROOT = (WORKTREE / "results").resolve().parent
+ N = ROOT / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1"
+ OUT = N / "b_quality/component_feasibility_v1/run_v2"
+ MIRROR = ROOT / ".Codex-scratch/compose-family-rules-v2"
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/b_quality/experiments/phase1/multireaction/quality_lineage_diagnostic.py
++++ experiments/phase1/multireaction/quality_lineage_diagnostic.py
+@@ -22,7 +22,7 @@
+ )
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = Path("/Users/rahulmaganti/Kosha/forge_new")
++ROOT = (WORKTREE / "results").resolve().parent
+ OUT = ROOT / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/b_quality"
+ FRESH = ROOT / "results/phase1/compose_lipid_quality_confirmation_v1"
+ QUALITY = ROOT / "results/phase1/compose_lipid_iclr22_research_v1/quality"
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/d_routes/experiments/phase1/route_improvement/audit_new_leaves.py
++++ experiments/phase1/route_improvement/audit_new_leaves.py
+@@ -12,7 +12,7 @@
+ import forge
+ 
+ ROOT = Path(__file__).resolve().parents[3]
+-MAIN = ROOT.parents[1]
++MAIN = (ROOT / "results").resolve().parent
+ OUT = MAIN / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes"
+ PAR = MAIN / "results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1"
+ PREP = (
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/d_routes/experiments/phase1/route_improvement/residual_debt.py
++++ experiments/phase1/route_improvement/residual_debt.py
+@@ -8,7 +8,7 @@
+ from collections import Counter, defaultdict
+ from pathlib import Path
+ 
+-MAIN = Path(__file__).resolve().parents[5]
++MAIN = (Path(__file__).resolve().parents[3] / "results").resolve().parent
+ ROOT = Path(__file__).resolve().parents[3]
+ OUT = MAIN / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes"
+ DEST = OUT / "residual_debt_v1"
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/e_diversity/experiments/phase1/multireaction/component_concentration_experiment.py
++++ experiments/phase1/multireaction/component_concentration_experiment.py
+@@ -16,7 +16,7 @@
+ from experiments.phase1.multireaction import component_concentration_selector as candidate
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = WORKTREE.parent.parent
++ROOT = (WORKTREE / "results").resolve().parent
+ OUT = WORKTREE / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/e_diversity"
+ RUN = OUT / "concentration_v1"
+ N = OUT.parent
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/e_diversity/experiments/phase1/multireaction/handoff_component_concentration.py
++++ experiments/phase1/multireaction/handoff_component_concentration.py
+@@ -13,12 +13,12 @@
+ import numpy
+ import scipy
+ 
++from experiments.phase1.multireaction.verify_component_concentration import pin, read, write
+ from forge.model.compose_lipid_component_diversity import accepted_components
+ from forge.model.compose_lipid_quality import canonical_molecule
+-from experiments.phase1.multireaction.verify_component_concentration import pin, read, write
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = WORKTREE.parent.parent
++ROOT = (WORKTREE / "results").resolve().parent
+ N = WORKTREE / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1"
+ OUT = N / "e_diversity"
+ RUN = OUT / "concentration_v1"
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/e_diversity/experiments/phase1/multireaction/joint_component_selection_v2.py
++++ experiments/phase1/multireaction/joint_component_selection_v2.py
+@@ -15,7 +15,7 @@
+ from experiments.phase1.multireaction.verify_component_concentration import counts, violations
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = WORKTREE.parent.parent
++ROOT = (WORKTREE / "results").resolve().parent
+ N = ROOT / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1"
+ OUT = N / "integration/joint_selection_v1/run_v2"
+ ROUTE_KEYS = ("L2_ready", "combined_primary", "L3_direct_only", "strict_secondary")
+--- results/phase1/compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/e_diversity/experiments/phase1/multireaction/verify_joint_component_selection.py
++++ experiments/phase1/multireaction/verify_joint_component_selection.py
+@@ -21,7 +21,7 @@
+ )
+ 
+ WORKTREE = Path(__file__).resolve().parents[3]
+-ROOT = WORKTREE.parent.parent
++ROOT = (WORKTREE / "results").resolve().parent
+ OUT = (
+     ROOT
+     / "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/run_v2"
+@@ -138,8 +138,8 @@
+     selected = {x["request"]: x for x in r["selection"]}
+     assert set(selected) == set(baseline)
+     gates = {(x["index"], x["ordinal"]): x["assessment"] for x in sources["gates"]["attempts"]}
+-    E = {x["request"]: x for x in sources["E_selection"]["selections"]}
+-    B = {
++    e_selected = {x["request"]: x for x in sources["E_selection"]["selections"]}
++    b_selected = {
+         x["request"]: x
+         for f in sources["B_selection"]["families"].values()
+         for x in f["selections"]
+@@ -160,7 +160,7 @@
+         after = selected[i]
+         ev = evidence[i]
+         arm = ev["source_arm"]
+-        expected = before if arm == "D" else (B if arm == "B" else E)[i]
++        expected = before if arm == "D" else (b_selected if arm == "B" else e_selected)[i]
+         assert after == expected
+         verdict = products[arm][i]
+         request = requests[arm][i]
+@@ -185,9 +185,12 @@
+             }
+             assert len(component_sets) == 1
+             accepted = dict(next(iter(component_sets)))
+-            canon = lambda s: Chem.MolToSmiles(
+-                Chem.MolFromSmiles(s), canonical=True, isomericSmiles=False
+-            )
++
++            def canon(smiles):
++                return Chem.MolToSmiles(
++                    Chem.MolFromSmiles(smiles), canonical=True, isomericSmiles=False
++                )
++
+             assert {k: canon(v) for k, v in accepted.items()} == {
+                 p["role"]: p["smiles"] for p in after["components"]
+             }

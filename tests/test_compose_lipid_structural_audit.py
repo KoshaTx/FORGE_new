@@ -3,6 +3,7 @@
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 from rdkit import Chem
 
 from forge.model.compose_lipid_structural_audit import (
@@ -115,7 +116,7 @@ def test_query_bounds_are_censored_instead_of_silently_complete():
     assert len(result["registry_handles"][0]["matches"]) == 2
 
 
-def test_role_cycle_count_and_tree_size_are_different_conditions():
+def layout_ring_fixture():
     layout = SimpleNamespace(
         record=SimpleNamespace(
             node_count=6,
@@ -133,6 +134,11 @@ def test_role_cycle_count_and_tree_size_are_different_conditions():
     for a, b in [(0, 1), (1, 2), (2, 3), (3, 0), (0, 4), (4, 5)]:
         edges[a, b] = edges[b, a] = 1
     state = {"parents": [0, 0, 1, 2, 0, 4], "closure_left": [0], "closure_right": [3]}
+    return layout, edges, state
+
+
+def test_role_cycle_count_and_tree_size_are_different_conditions():
+    layout, edges, state = layout_ring_fixture()
     result = audit_layout_rings(edges, layout, tree_state=state, tree_basis="observed raw")
     assert not result["cycle_allocation_mismatch"]
     assert result["fundamental_size_mismatch"]
@@ -140,3 +146,32 @@ def test_role_cycle_count_and_tree_size_are_different_conditions():
     unknown = audit_layout_rings(edges, layout, tree_state=None, tree_basis="unavailable")
     assert unknown["fundamental_size_mismatch"] is None
     assert not unknown["cycle_allocation_mismatch"]
+
+
+def test_truncated_closures_cannot_report_false_ring_size_agreement():
+    layout, edges, state = layout_ring_fixture()
+    state.update(closure_left=[], closure_right=[])
+    with pytest.raises(ValueError, match="topology does not match"):
+        audit_layout_rings(edges, layout, tree_state=state, tree_basis="claimed observed")
+
+
+@pytest.mark.parametrize(
+    "change, message",
+    [
+        ({"parents": [0, 0, 1]}, "span every node"),
+        ({"parents": [0, 0, 1, 2, 3, 4]}, "topology does not match"),
+        ({"parents": [0, 0, 2, 2, 0, 4]}, "ordered rooted tree"),
+        ({"parents": [0, 0, 1.5, 2, 0, 4]}, "integer indices"),
+        ({"closure_left": [0, 0], "closure_right": [3]}, "endpoint counts differ"),
+        ({"closure_left": [0, 3], "closure_right": [3, 0]}, "duplicate edge"),
+        ({"closure_left": [0, 1], "closure_right": [3, 2]}, "duplicate edge"),
+        ({"closure_left": [-1]}, "out of range or equal"),
+        ({"closure_left": [6]}, "out of range or equal"),
+        ({"closure_left": [3]}, "out of range or equal"),
+    ],
+)
+def test_malformed_or_unrelated_tree_is_rejected(change, message):
+    layout, edges, state = layout_ring_fixture()
+    state.update(change)
+    with pytest.raises(ValueError, match=message):
+        audit_layout_rings(edges, layout, tree_state=state, tree_basis="claimed observed")

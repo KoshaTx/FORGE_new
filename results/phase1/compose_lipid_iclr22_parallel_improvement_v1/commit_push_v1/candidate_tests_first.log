@@ -1,0 +1,373 @@
+EEEEEEEEEEEFFE..........................F........EEEEEEE................ [ 36%]
+........................................................................ [ 73%]
+.................FF......FFFFFF.......F.............                     [100%]
+==================================== ERRORS ====================================
+______ ERROR at setup of test_all_candidates_pass_exact_original_contract ______
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_________ ERROR at setup of test_candidate_tampering_fails[drop_child] _________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+______ ERROR at setup of test_candidate_tampering_fails[change_identity] _______
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_________ ERROR at setup of test_candidate_tampering_fails[drop_graft] _________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_______ ERROR at setup of test_candidate_tampering_fails[inject_listing] _______
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_______ ERROR at setup of test_candidate_tampering_fails[change_policy] ________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+________ ERROR at setup of test_candidate_tampering_fails[change_clock] ________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_____ ERROR at setup of test_candidate_tampering_fails[change_source_tree] _____
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+________ ERROR at setup of test_candidate_tampering_fails[change_basis] ________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_______ ERROR at setup of test_candidate_tampering_fails[change_target] ________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+________ ERROR at setup of test_candidate_tampering_fails[solved_flag] _________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+______________ ERROR at setup of test_current_clock_cannot_change ______________
+experiments/phase1/route_improvement/test_candidate_routes.py:11: in qualified
+    return candidate.context(), candidate.read(candidate.CAND / "candidate_paths.json")["paths"]
+           ^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+___ ERROR at setup of test_lost_head_regression_does_not_redefine_source_l1 ____
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+_ ERROR at setup of test_positive_source_heads_and_cross_family_prior_are_explicit _
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+___________ ERROR at setup of test_other_families_are_not_applicable ___________
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+________________ ERROR at setup of test_charged_class_abstains _________________
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+_ ERROR at setup of test_design_match_cannot_override_source_failure_and_costs_are_bounded _
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+_ ERROR at setup of test_missing_local_support_retains_original_without_source_calls _
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+____ ERROR at setup of test_nonfinite_predictions_reject_before_source_work ____
+tests/test_compose_lipid_head_survival.py:22: in sample
+    path = resolve_pin(read(receipt)["fixture"], Path.cwd(), label="head regression input")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for head regression input is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_structure_repair_v1/head/a17_input.pt
+=================================== FAILURES ===================================
+_______________________ test_all_four_searches_required ________________________
+experiments/phase1/route_improvement/test_candidate_routes.py:77: in test_all_four_searches_required
+    with pytest.raises(ValueError, match="denominator"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'denominator'
+E     Actual message: "'/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/leaf_search_v1/protocol.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute."
+___________ test_existing_listing_view_cannot_fabricate_observation ____________
+experiments/phase1/route_improvement/test_candidate_routes.py:90: in test_existing_listing_view_cannot_fabricate_observation
+    with pytest.raises(ValueError, match="Listing union"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Listing union'
+E     Actual message: "'/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute."
+___ test_retention_uses_actual_source_control_and_rejects_cross_role_rescue ____
+tests/test_component_feasibility_census_v2.py:128: in test_retention_uses_actual_source_control_and_rejects_cross_role_rescue
+    reaction = read(files["registry"])["reactions"][0]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/multireaction/component_feasibility_census_v2.py:40: in read
+    return json.loads(path.read_text())
+                      ^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/forge-consolidation-commit-ji31jc30/.Codex-scratch/compose-family-rules-v2/data/vendor/qualified_ketone_ugi4_source_program_v1.json'
+________________________ test_intact_and_graft_pass[0] _________________________
+tests/test_new_clock_routes.py:27: in test_intact_and_graft_pass
+    module.validate_path(rows[index], policy=policy, as_of=module.old.time(module.AS_OF))[
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:134: in validate_path
+    census = head_census()
+             ^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:65: in head_census
+    pin(folder / "protocol.json")["sha256"]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/b258_search_v1/protocol.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+________________________ test_intact_and_graft_pass[1] _________________________
+tests/test_new_clock_routes.py:27: in test_intact_and_graft_pass
+    module.validate_path(rows[index], policy=policy, as_of=module.old.time(module.AS_OF))[
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:145: in validate_path
+    ctx = previous.context()
+          ^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/candidate_routes.py:115: in context
+    + [pin(CAND / "listing_view.json")],
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/candidate_compositions_v1/listing_view.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_________________ test_new_listing_admission_controls[future] __________________
+tests/test_new_clock_routes.py:67: in test_new_listing_admission_controls
+    listings = copy.deepcopy(module.listings())
+                             ^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:27: in listings
+    pin(LISTINGS)["sha256"]
+    ^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/targeted_lookup_v1/admitted_vendor_listings.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_________________ test_new_listing_admission_controls[expired] _________________
+tests/test_new_clock_routes.py:67: in test_new_listing_admission_controls
+    listings = copy.deepcopy(module.listings())
+                             ^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:27: in listings
+    pin(LISTINGS)["sha256"]
+    ^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/targeted_lookup_v1/admitted_vendor_listings.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+________________ test_new_listing_admission_controls[identity] _________________
+tests/test_new_clock_routes.py:67: in test_new_listing_admission_controls
+    listings = copy.deepcopy(module.listings())
+                             ^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:27: in listings
+    pin(LISTINGS)["sha256"]
+    ^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/targeted_lookup_v1/admitted_vendor_listings.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+_______________ test_new_listing_admission_controls[no_listing] ________________
+tests/test_new_clock_routes.py:67: in test_new_listing_admission_controls
+    listings = copy.deepcopy(module.listings())
+                             ^^^^^^^^^^^^^^^^^
+experiments/phase1/route_improvement/new_clock_routes.py:27: in listings
+    pin(LISTINGS)["sha256"]
+    ^^^^^^^^^^^^^
+experiments/phase1/route_improvement/audit_new_leaves.py:38: in pin
+    "path": str(path.relative_to(MAIN)),
+                ^^^^^^^^^^^^^^^^^^^^^^
+/Users/rahulmaganti/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:730: in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+E   ValueError: '/Users/rahulmaganti/Kosha/forge_new/results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/targeted_lookup_v1/admitted_vendor_listings.json' is not in the subpath of '/private/tmp/forge-consolidation-commit-ji31jc30' OR one path is relative and the other is absolute.
+___________________________ test_old_clock_rejected ____________________________
+tests/test_new_clock_routes.py:86: in test_old_clock_rejected
+    with pytest.raises(ValueError, match="unreviewed new evaluation clock"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'unreviewed new evaluation clock'
+E     Actual message: 'nonlocal/unadmitted evidence path: results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_evaluation_v2/protocol.json'
+_______________________ test_policy_pin_tamper_rejected ________________________
+tests/test_new_clock_routes.py:93: in test_policy_pin_tamper_rejected
+    with pytest.raises(ValueError, match="policy pin changed"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'policy pin changed'
+E     Actual message: 'nonlocal/unadmitted evidence path: results/phase1/compose_lipid_iclr22_research_v1/parallel_completion_v1/route_evaluation_v2/protocol.json'
+______________________ test_actual_schema_source_positive ______________________
+tests/test_novel_topology_feasibility_v2.py:80: in test_actual_schema_source_positive
+    with MappedProgramCache(
+forge/corpus/mapped_program_cache.py:281: in __init__
+    self.metadata = json.loads(resolve_pin(manifest, repo, label="mapped manifest").read_text())
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+forge/core/hashing.py:128: in resolve_pin
+    raise PinError(f"pinned input for {label} is a symlink: {candidate}")
+E   forge.core.hashing.PinError: pinned input for mapped manifest is a symlink: /private/tmp/forge-consolidation-commit-ji31jc30/results/phase1/compose_lipid_mapped_preparation_v3/cache/manifest.json
+=========================== short test summary info ============================
+FAILED experiments/phase1/route_improvement/test_candidate_routes.py::test_all_four_searches_required
+FAILED experiments/phase1/route_improvement/test_candidate_routes.py::test_existing_listing_view_cannot_fabricate_observation
+FAILED tests/test_component_feasibility_census_v2.py::test_retention_uses_actual_source_control_and_rejects_cross_role_rescue
+FAILED tests/test_new_clock_routes.py::test_intact_and_graft_pass[0] - ValueE...
+FAILED tests/test_new_clock_routes.py::test_intact_and_graft_pass[1] - ValueE...
+FAILED tests/test_new_clock_routes.py::test_new_listing_admission_controls[future]
+FAILED tests/test_new_clock_routes.py::test_new_listing_admission_controls[expired]
+FAILED tests/test_new_clock_routes.py::test_new_listing_admission_controls[identity]
+FAILED tests/test_new_clock_routes.py::test_new_listing_admission_controls[no_listing]
+FAILED tests/test_new_clock_routes.py::test_old_clock_rejected - AssertionErr...
+FAILED tests/test_new_clock_routes.py::test_policy_pin_tamper_rejected - Asse...
+FAILED tests/test_novel_topology_feasibility_v2.py::test_actual_schema_source_positive
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_all_candidates_pass_exact_original_contract
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[drop_child]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_identity]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[drop_graft]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[inject_listing]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_policy]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_clock]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_source_tree]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_basis]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[change_target]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_candidate_tampering_fails[solved_flag]
+ERROR experiments/phase1/route_improvement/test_candidate_routes.py::test_current_clock_cannot_change
+ERROR tests/test_compose_lipid_head_survival.py::test_lost_head_regression_does_not_redefine_source_l1
+ERROR tests/test_compose_lipid_head_survival.py::test_positive_source_heads_and_cross_family_prior_are_explicit
+ERROR tests/test_compose_lipid_head_survival.py::test_other_families_are_not_applicable
+ERROR tests/test_compose_lipid_head_survival.py::test_charged_class_abstains
+ERROR tests/test_compose_lipid_head_survival.py::test_design_match_cannot_override_source_failure_and_costs_are_bounded
+ERROR tests/test_compose_lipid_head_survival.py::test_missing_local_support_retains_original_without_source_calls
+ERROR tests/test_compose_lipid_head_survival.py::test_nonfinite_predictions_reject_before_source_work

@@ -1,0 +1,73 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> experiments/phase1/multireaction/handoff_component_concentration.py:3:1
+   |
+ 1 |   """Bind saved exact L1 witnesses, global component counts, and separate route joins."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | import difflib
+ 6 | | import json
+ 7 | | import math
+ 8 | | import platform
+ 9 | | import time
+10 | | from collections import Counter
+11 | | from pathlib import Path
+12 | |
+13 | | import numpy
+14 | | import scipy
+15 | |
+16 | | from forge.model.compose_lipid_component_diversity import accepted_components
+17 | | from forge.model.compose_lipid_quality import canonical_molecule
+18 | | from experiments.phase1.multireaction.verify_component_concentration import pin, read, write
+   | |____________________________________________________________________________________________^
+19 |
+20 |   WORKTREE = Path(__file__).resolve().parents[3]
+   |
+help: Organize imports
+   |
+15 |
+16 + from experiments.phase1.multireaction.verify_component_concentration import pin, read, write
+17 | from forge.model.compose_lipid_component_diversity import accepted_components
+18 | from forge.model.compose_lipid_quality import canonical_molecule
+   - from experiments.phase1.multireaction.verify_component_concentration import pin, read, write
+19 |
+   |
+
+N806 Variable `E` in function should be lowercase
+   --> experiments/phase1/multireaction/verify_joint_component_selection.py:141:5
+    |
+139 |     assert set(selected) == set(baseline)
+140 |     gates = {(x["index"], x["ordinal"]): x["assessment"] for x in sources["gates"]["attempts"]}
+141 |     E = {x["request"]: x for x in sources["E_selection"]["selections"]}
+    |     ^
+142 |     B = {
+143 |         x["request"]: x
+    |
+
+N806 Variable `B` in function should be lowercase
+   --> experiments/phase1/multireaction/verify_joint_component_selection.py:142:5
+    |
+140 |     gates = {(x["index"], x["ordinal"]): x["assessment"] for x in sources["gates"]["attempts"]}
+141 |     E = {x["request"]: x for x in sources["E_selection"]["selections"]}
+142 |     B = {
+    |     ^
+143 |         x["request"]: x
+144 |         for f in sources["B_selection"]["families"].values()
+    |
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> experiments/phase1/multireaction/verify_joint_component_selection.py:188:13
+    |
+186 |               assert len(component_sets) == 1
+187 |               accepted = dict(next(iter(component_sets)))
+188 | /             canon = lambda s: Chem.MolToSmiles(
+189 | |                 Chem.MolFromSmiles(s), canonical=True, isomericSmiles=False
+190 | |             )
+    | |_____________^
+191 |               assert {k: canon(v) for k, v in accepted.items()} == {
+192 |                   p["role"]: p["smiles"] for p in after["components"]
+    |
+help: Rewrite `canon` as a `def`
+
+Found 4 errors.
+[*] 1 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

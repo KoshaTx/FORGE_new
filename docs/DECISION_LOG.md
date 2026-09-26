@@ -20814,3 +20814,294 @@ an original-three-family bridge and common cost accounting. No manuscript edits 
 by this milestone. Integrated evidence, all-family tables, pins and reproducible verification:
 `results/phase1/compose_lipid_quality_milestone_v2/README.md`, `result.json`, `ALL_FAMILIES.md`,
 `NEXT_STEPS.md`, `verify_selected.py`, and `summarize.py`.
+
+## 2026-09-26 — Execute five isolated improvement streams and measure their tradeoffs
+
+The user accepted and requested execution of the parallel-worktree improvement prompt. Five
+worktrees share the frozen 2,686-file current-source snapshot with digest `497bf6b57586f25a…`;
+all existing uncommitted changes were preserved. Protocols, complete denominators, source/input
+pins and failure records are under `results/phase1/compose_lipid_iclr22_parallel_improvement_v1/`.
+The manuscript remains unchanged. The coordinator independently admits execution and evidence;
+three worker slots run attribution, quality/diversity, and routing while generalization and
+consolidation proceed locally. No final TEST graphs were accessed.
+
+Six saved-pool ordering controls reproduce the current 1,324 limited-design passes and 1,387
+exact L1 products across all 1,408 requests. Context flags vary from 41 to 20–26. The final
+selector receives no model-likelihood score, so these are ordering interventions, not removal
+of model scoring or a model-versus-rules ablation. The common 11,331-candidate gate ledger adds
+only 15 exact-identity authenticated tree transports to the original census. The earlier 1,312
+design snapshot and its separate controls remain preserved; it is never substituted for 1,324.
+
+The four weak-family lineage census retains all 256 requests and five draws. Bounded endpoint
+repair changes only variable closure endpoints on the existing generated tree, retaining atoms,
+bond classes, fixed chemistry, roles, morphology and repeated identities. Its 84 proposals from
+52 failing parents, four positive controls and all abstentions are recorded. Independent source
+and graph replay verifies the 19 selected changes: limited design rises 1,324 to 1,343 while exact
+L1 stays 1,387. A3 improves 51 to 59, aldehyde Ugi4 50 to 54, and ketone Ugi4 39 to 46; aryl
+reductive amination stays 58, each out of 64. Context flags persist, A3 synthetic-CAL fingerprint
+membership falls by one, and complex multi-arm/oxygenated architectures remain. This qualifies
+a narrow structural improvement, not overall lipid realism. The optional helper and CAL audits
+are integrated; 12 focused integration checks pass without replacing the default selection.
+
+Four bounded recursive leaf searches retain all 12 trees. A reductive-amination leaf whose old
+stock flag was unsolved nevertheless has complete exact current listing evidence. Conversely,
+the disulfide stock-solved tree lacks current terminal listings and contributes no gain. Six
+complete grafts were independently admitted with every original reaction and all 38 terminal
+occurrences preserved. The real full-population paired evaluator exactly reproduces the 616
+baseline, then measures 621 computationally makeable products, five gains and no losses. L2-ready
+1,189, direct L3 119, strict dossiers 27 and exact L1 1,387 are unchanged. A failed local startup
+caused by inherited CPU limits is retained; a separately versioned local supervisor corrects the
+limit without changing evidence or retrying paid work.
+
+The separate B+D cohort rechecks every changed product and component instead of inheriting
+route verdicts. It has 620 makeable and 1,177 L2-ready products: the structural intervention loses
+one established route and 12 L2-ready statuses relative to D alone. Request 258's changed exact
+headgroup is the next bounded recovery target. These tradeoffs block a claim that improvements
+simply add together.
+
+The component-concentration intervention retains all per-family and pooled diversity/novelty
+floors, exactness, design and TRAIN-feature support. Squared component multiplicities decrease
+36,391 to 34,679; distinct component identities increase 2,044 to 2,167. The dominant isocyanide
+remains 64/190 because its family has only one eligible identity in the fixed pool. The paired
+ordinal control fails a pooled diversity floor despite passing all family checks, demonstrating
+why both checks are necessary. All 245 changed identities require new route assessment; eleven
+old strict-dossier products change identity and cannot inherit their prior dossiers.
+
+The complete CAL metadata join finds 1,455 qualified all-seen, 392 partially unseen and 12 wholly
+unseen component cases; 200 of 2,059 original requests remain unqualified. Thus 404 qualified
+cases in 16 families support partial-component development diagnostics. Neither this larger
+stratum nor prior adaptive CAL use establishes independent final evaluation. Exact-hash local
+search recovers none of 37 missing ancestry exports; independent empirical-reference admission
+remains open. The first search's producer-formatting mismatch is retained and corrected by a
+new run with an immutable producer copy.
+
+The detached trained-null capacity measurement completes 22 full-batch updates on eight H100s,
+69,696 presentations, 3,168 per family, with 250-node and 12-closure batches retained. Training
+takes 87.076 seconds; whole-function execution takes 168.386 seconds, excluding platform billing
+overhead. First update is 10.950 seconds and subsequent mean is 0.366092 seconds; peak allocated
+memory is 45,728,235,008 bytes. All nine collected artifacts authenticate, checkpoint exposure
+agrees exactly and all 1,334 model/optimizer tensors are finite. This passes the capacity gate,
+not a quality comparison. A fresh 2,794-update, 402,336-presentations-per-family null fit is
+prepared with original fit seed 2026092401, fixed final checkpoint, separate exact admission and
+a 2,400-second cap. Count-only unconditional sampling and a null model supplied common structural
+context remain separately named evaluation scopes; neither can silently stand in for the other.
+
+
+## 2026-09-26 — Preserve joint quality/route gains and diagnose null-fit startup failure
+
+The five-worktree campaign now retains a separately frozen joint development panel under
+`results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/`.
+The diversity-only intervention is not promoted: its full typed E+D assessment yields 494
+makeable products versus 621 for the unchanged D panel, with 132 losses and five gains. Its
+component concentration improves, but that cannot justify inheriting routes for changed
+identities. B+D likewise retains the previously reported route tradeoff.
+
+The joint protocol admits only the original 1,408 products, the 245 assessed E alternatives
+and the 19 assessed B repairs. Each alternative must preserve that request's exactness,
+positive design and route/dossier evidence, with no new context code. Family and pooled
+component/product diversity and TRAIN-novelty floors are both enforced, with whole-panel
+fallback on a failed pooled audit. Fifty-five alternatives are eligible; 36 products change
+(seven B, 29 E). All 1,408 request/verdict bindings and all 36 source/gate bindings independently
+reproduce their exact source arms. Exact L1 remains 1,387; limited design improves 1,324 to
+1,331; context-flagged products fall 41 to 39; design without context flags improves 1,292 to
+1,300. Makeability improves 621 to 623, direct-listed L3 119 to 121, while L2-ready 1,189 and
+strict dossiers 27 remain unchanged. Makeable-and-design is 613, or 611 without context flags.
+These results use the frozen 2026-09-26T01:56:45.654730+00:00 evidence clock.
+
+All six contact sheets containing every changed before/after pair were inspected. Request 42
+retains its hemiacetal context flag; request 59 remains a ring-size failure. Novel, complex
+ketone components remain unresolved. Terminal Br in request 265 belongs to an exactly listed,
+TRAIN-novel acid component, not a drawing error; this does not establish lipid quality or
+exact-substrate execution. Synthetic-CAL fingerprint membership improves 801 to 803 and
+descriptor membership 837 to 841, with some per-family regressions retained. No independent
+realism, pKa or delivery claim follows. The reusable pure identity/eligibility policy is
+integrated without changing the default selector; 19 focused main-checkout tests pass. The
+initial test command could not access the default uv cache; the unchanged installed environment
+passed through `make test-one` using a writable cache and offline/no-sync execution.
+
+The dominant cyclic-family isocyanide traces to TRAIN and request support: all 35,728 TRAIN
+graphs use Iso6, although the registry admits Iso4, Iso5 and Iso6. All 64 requests have six fixed
+core nodes and four variable exterior nodes. The complete weighted TRAIN role census and all
+six isocyanide-family support counts are preserved in `e_diversity/isocyanide_diagnosis_v1/`.
+This is not evidence that the chemistry intrinsically permits only one reagent. The pooled
+concentration metric is not redefined to hide the restriction. A subsequent bounded all-128
+A3/ketone-Ugi4 complete-component feasibility census is running without proposals or TEST access.
+
+The full null fit was submitted once detached, app `ap-6wvlKnoBH24Un516ILlxFW`, function
+`fc-01M3E4ZXATD2REK7KNMBP4YMPY`. It stopped before the first update: the instrumentation passed
+`__file__` as a string to a hashing helper requiring `Path`. All seven failure artifacts and the
+returned failure agree. Function execution consumed 269.154 seconds / 35.887 GPU-minutes,
+excluding platform billing overhead. No training or quality metric is admitted. A one-line
+`Path(__file__)` fix is frozen in `a_attribution/null_fullfit_readiness_v2/`; configuration and
+qualified numerical source are unchanged. Twenty-three focused checks include an actual-child
+regression reproducing the old failure before CUDA/trainer calls and passing the corrected
+source/config/producer checks. The 1,826-file canonical staging inventory and every one of
+1,131 overlay members authenticate. Request SHA
+`90d18fa84cdbd8a75f3e8e629855e929dca5bd81d45080410d632b329b7eccce` is ready, with no automatic
+retry. Fresh user authorization for this paid retry has been requested and remains pending.
+
+The matched-context null inference harness is qualified separately from count-only unconditional
+sampling: all 14 conditioned logit heads and complete constructor JSON match on three 8-request
+fixtures; all 13,526 candidate records, 6,119 assessments and 1,408 selected dictionaries replay
+exactly; the saved-shard merge covers all 880 sampling and 920 constructor shards. The original
+1,312-design rubric stays distinct from the later 1,324 tree-transport evidence. Full inference
+still requires an authenticated final 2,794-update null checkpoint; harness readiness is not a
+model-comparison result.
+
+After two automatic approval-review rejections, the user explicitly approved transmitting the
+two named building-block InChIKeys to public PubChem. The coordinator executed exactly four
+HTTP requests: both exact constitutional graphs have Chemical Vendors records (CIDs 69392 and
+78915). Raw bodies, headers, times and identity/CID/category bindings were independently
+verified. These are directory listings, not stock. The new common clock is the lookup completion,
+2026-09-26T06:22:31.247475+00:00. Two intact/exactly grafted route candidates are independently
+admitted; all old listing states remain unchanged at the new clock. Three fixed full-population
+paired recounts (original D, full B+D, and fixed joint) are running. The B258 recovery is not
+silently credited to the joint panel, which selected a different E258 identity.
+
+The manuscript and sealed TEST remain unchanged. Baseline, failed attempts and unfavorable
+tradeoffs remain available. This is development evidence; independent final fits, held-out
+evaluation and broader empirical structural-reference admission are still required.
+
+## 2026-09-26 — Complete common-clock routing recount and whole-component support census
+
+All three fixed-cohort recounts completed at the admitted common clock
+`2026-09-26T06:22:31.247475+00:00`. Each control reproduces every saved prior product record
+exactly after removing only the new path/listing evidence. No positive metric is lost.
+Original+D makeability rises 621 to 622 (request 747); full B+D rises 620 to 622
+(requests 258 and 747), and the fixed joint panel rises 623 to 624 (request 747 only).
+The B258 identity is not the joint258 identity and contributes no borrowed gain to the latter.
+B+D L2-ready rises 1,177 to 1,178; original and joint L2-ready remain 1,189. Every cohort
+retains 1,408 requests, 1,387 exact L1 products and 3,723 required component branches.
+The joint panel retains 121 direct-listed L3 products and 27 strict dossiers.
+
+Relative to the campaign's original 616 makeable products, the combined development panel
+now has 624. On the exact same selected identities, limited design is 1,331 versus 1,324,
+design without context flags 1,300 versus 1,292, makeable-and-design 614 versus 606,
+and makeable-and-design without context flags 612 versus 604. The independent full-family
+consolidation is `compose_lipid_iclr22_parallel_improvement_v1/result.json`; the later
+`result_v2.json` adds the component census without changing those molecule-level results.
+All baseline manuscript source hashes remain unchanged. The initial and intermediate
+evidence-clock snapshots remain preserved.
+
+The bounded whole-component census covers all 128 A3 and ketone-Ugi4 requests, scanning
+34,104 and 27,027 authenticated TRAIN graphs in 16.946 CPU seconds. All requests, including
+the 12 A3 and 21 ketone-Ugi4 current limited-design failures, have at least one whole TRAIN
+component for every precursor role satisfying the declared quantity, ordered core/block
+correspondence, morphology, ring and applicable head-witness conditions. Independent saved
+witness replay checks 1,039 profiles from 829 distinct TRAIN records and recounts all 128
+requests in 2.020 CPU seconds. Thirteen focused checks pass. The initial parser attempt
+failed before the scan because it expected `attempts` rather than the real `candidates`
+key; its protocol and failure are retained separately. This implementation failure is
+not treated as a chemical negative result.
+
+This census rules out an empty necessary support set for the sampled request layouts.
+Those layouts are TRAIN-derived, so this is not independent evidence of generalization,
+full mixed-component assembly compatibility, or causation by the decoder rather than the
+model. Current joint identities match only five A3 heads and no ketone-Ugi4 ketone
+components in their compatible TRAIN sets. All 62 exact ketone-Ugi4 ketone components
+are role-TRAIN-novel. Literal replacement by the 11 compatible TRAIN ketones would lower
+that family's unchanged novelty floor, with no additional exact component-bearing
+requests available to compensate. Whole-component copying therefore cannot be promoted
+as a joint solution under this campaign's rules. A future repair must preserve novel
+identities and requalify exact assembly, structure, diversity and routes together.
+
+The corrected paid null-fit retry remains ready but unsubmitted pending the separately
+requested fresh user authorization after the failed paid attempt. No new GPU job, TEST
+access, manuscript edit, default-policy replacement or claim of final paper readiness
+is included in this closeout.
+
+The user's subsequent `continue` was interpreted by the coordinator as a go-ahead for the
+previously described corrected null retry. Automatic approval review rejected the submission
+before process creation, explicitly ruling that this did not satisfy fresh exact paid-retry
+authorization. No v2 attempt/application/submission receipt exists and no new GPU job started.
+The proposed root admission is retained with a separate rejection record; it cannot serve as
+execution authorization. A precise question now names one eight-H100 run, 402,336 presentations
+per family, approximately 25 minutes projected, a 40-minute/320-GPU-minute cap and no automatic
+retry. CPU topology-correspondence and residual route-debt audits continue independently.
+
+## 2026-09-26 — Complete bounded topology and residual-route diagnostics
+
+The saved-graph correspondence audit under `b_quality/novel_topology_feasibility_v1/`
+compares all 128 A3/ketone-Ugi4 requests against 238 request-compatible TRAIN profiles.
+All 2,307 comparisons complete without search-limit censoring. The matcher finds no
+coupled-ketone topology correspondence in either the 62 exact or two nonexact outputs.
+The result remains zero among the 19 requests whose saved-tree morphology matches the
+requested morphology (18 exact, one nonexact). This is correspondence to the declared
+request-compatible witnesses, not all TRAIN topologies or an independent quality gate.
+All 173 topology, 113 bond-labelled and 81 fully labelled positive mappings were checked
+directly against saved graph/core/origin/port data. Independent verification recounts all
+denominators; it does not repeat the negative isomorphism searches. Nine focused tests pass.
+The initial empty-closure-array dtype failure is preserved; the versioned correction
+preflights every selected graph and relevant witness before matching. No new molecule,
+topology-changing repair or source replay was constructed or admitted.
+
+The complete residual route audit under `d_routes/residual_debt_v1/` independently
+reproduces the fixed joint population: 624 makeable, 565 exact products with supported
+component paths but incomplete listing evidence, 198 with at least one unsupported
+component path, and 21 nonexact L1 requests, totaling 1,408. It enumerates complete
+minimal missing-leaf sets without censoring and checks alternative paths without
+double-counting products. The one rejected cyclic path remains rejected under a component
+already makeable by other evidence; it is not a residual blocker. Seven focused tests pass.
+The smallest shared direct-listing opportunity, exact `CC(O)=S`, has a conditional ceiling
+of six additional products. Saved alternative trees require exact `COC(C)=S` or `S`
+evidence and independent tree/graft admission; these alternatives cover the same six
+products and are not additive. The pinned parser identifies the saved `S` graph as H2S,
+not elemental sulfur or S8. No query, new route, new admission or observed gain occurred.
+Measured makeability remains 624. All counts are development evidence.
+
+## 2026-09-26 — Consolidate the five research worktrees into the main working tree
+
+The user requested consolidation. The audit compares all five campaign worktrees to the
+frozen 2,686-file source manifest, rather than merging their inherited dirty Git status.
+Every baseline file remains byte-identical in every worktree. There are 91 added source/test
+paths, with no conflicting paths between streams. All 91 original additions are copied
+byte-for-byte into `compose_lipid_iclr22_parallel_improvement_v1/consolidation_v1/archive/`,
+with original and archive hashes. The worktrees remain intact for historical evidence pins.
+Other unrelated worktrees are outside this consolidation.
+
+Ten reusable files already matched the main checkout. Thirty-nine completed source/test
+files are now added there: 18 attribution files, eight quality files, seven routing files
+and six diversity files. Generalization was already integrated. The remaining 42 additions
+are retained as historical, superseded or cohort-specific producers in the archive and
+original worktrees. Main copies correct eight repository-location assumptions; the joint
+verification copy also receives import ordering and equivalent local naming/function-style
+cleanup. The complete destination diffs and source-to-destination hashes are recorded.
+No existing main source file was overwritten; all 2,687 pre-existing source files were
+verified unchanged before this append-only decision-log entry.
+
+The focused main-checkout integration command in the consolidation README passes all 102
+cases. Ruff and Black checks pass for all 39 additions. Import smoke checks authenticate all
+29 non-test modules and their repository roots without executing producers, models, chemistry
+construction, network queries or training. Existing 39 earlier integration cases were not
+needlessly repeated. Historical source-bound route admissions remain bound to their original
+validators; copied code does not inherit those admissions. Native-null scientific execution
+still requires the separately pinned immutable null source, not current-main model defaults.
+
+This consolidates reviewed code and evidence, not experimental promotion. Selected identities,
+metrics, default generation/selection policies and manuscript source hashes remain unchanged.
+No commit, worktree deletion, paid retry, TEST access or experiment rerun is part of this action.
+The corrected paid null retry remains unsubmitted after automatic approval review rejected
+the prior `continue` interpretation; explicit approval for that exact run is still pending.
+
+## 2026-09-26 — Package the consolidated research streams for commit and push
+
+The user explicitly requested committing and pushing the consolidation. The commit selection
+includes the 49 maintained stream files, their previously untracked evaluation-helper closure,
+computational-makeability policy/classifier, retained-head checks, structural-topology validation,
+and compact evidence/source archives. Unrelated training, potency and manuscript edits remain
+outside the selection; only campaign entries are staged from this accumulated decision log.
+
+The exact proposed source is checked against HEAD plus selected files in an isolated temporary
+checkout. All 168 applicable cases pass with authenticated non-code inputs, and every loaded
+repository module comes from that checkout with its expected source hash. The two historical
+route integration files require original-path admissions; all 196 selected cases pass in the
+original evidence workspace. The first isolated attempt retains 12 failures and 19 setup errors
+from refused temporary artifact links/missing pinned inputs; no provenance check was weakened.
+An overly broad optional input-copy traversal was stopped and replaced by an explicit 42-file
+input list. This was local validation preparation, not an experiment or paid job.
+
+The source/data boundary and reproduction commands are recorded in
+`docs/ICLR22_RESEARCH_CONSOLIDATION.md` and the campaign's `commit_push_v1/` receipts. Git does
+not contain the complete large historical artifact bundle. Existing worktrees and all frozen
+inputs/results remain intact. No new scientific metric, default-policy change, manuscript edit,
+remote compute launch or paid retry is part of this commit operation.

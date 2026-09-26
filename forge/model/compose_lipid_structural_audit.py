@@ -7,7 +7,7 @@ universal lipid-quality score. Reaction SMARTS are supplied by pinned registries
 from __future__ import annotations
 
 from collections import deque
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
@@ -77,6 +77,49 @@ def _distances(adjacency, root):
     return distances
 
 
+def _validated_tree_topology(tree_state, edges):
+    """Require a complete ordered tree/closure encoding of the observed topology.
+
+    Bond orders are irrelevant to fundamental cycle sizes. Every nonzero edge
+    must nevertheless occur exactly once as a parent edge or a closure.
+    """
+    if not isinstance(tree_state, Mapping):
+        raise ValueError("Layout ring audit tree state must be a mapping")
+    fields = {}
+    for name in ("parents", "closure_left", "closure_right"):
+        if name not in tree_state:
+            raise ValueError(f"Layout ring audit tree state missing {name}")
+        values = np.asarray(tree_state[name])
+        if values.ndim != 1 or any(
+            not isinstance(value, (int, np.integer)) or isinstance(value, (bool, np.bool_))
+            for value in values
+        ):
+            raise ValueError(f"Layout ring audit tree {name} must contain integer indices")
+        fields[name] = values
+    parents = fields["parents"]
+    left, right = fields["closure_left"], fields["closure_right"]
+    count = len(edges)
+    if len(parents) != count or not count or parents[0] != 0:
+        raise ValueError("Layout ring audit tree parents must span every node with root zero")
+    if len(left) != len(right):
+        raise ValueError("Layout ring audit tree closure endpoint counts differ")
+    topology = np.zeros(edges.shape, dtype=bool)
+    for child in range(1, count):
+        parent = parents[child]
+        if not 0 <= parent < child:
+            raise ValueError("Layout ring audit tree parents must form an ordered rooted tree")
+        topology[child, parent] = topology[parent, child] = True
+    for a, b in zip(left, right, strict=True):
+        if not 0 <= a < count or not 0 <= b < count or a == b:
+            raise ValueError("Layout ring audit tree closure endpoints are out of range or equal")
+        if topology[a, b]:
+            raise ValueError("Layout ring audit tree contains a duplicate edge")
+        topology[a, b] = topology[b, a] = True
+    if not np.array_equal(topology, edges != 0):
+        raise ValueError("Layout ring audit tree topology does not match the audited graph")
+    return parents, left, right
+
+
 def audit_layout_rings(edges, layout, *, tree_state, tree_basis):
     """Separate basis-invariant role cycle counts from tree-basis ring sizes.
 
@@ -128,12 +171,13 @@ def audit_layout_rings(edges, layout, *, tree_state, tree_basis):
         if roles[a] != roles[b] and not (core[a] and core[b])
     ]
     if tree_state is not None:
-        for a, b in zip(tree_state["closure_left"], tree_state["closure_right"], strict=True):
+        parents, left, right = _validated_tree_topology(tree_state, edges)
+        for a, b in zip(left, right, strict=True):
             if core[a] and core[b]:
                 continue
             if roles[a] != roles[b]:
                 continue
-            size = tree_ring_size(tree_state["parents"], int(a), int(b))
+            size = tree_ring_size(parents, int(a), int(b))
             local = output[int(roles[a])]
             local["observed_fundamental_rings"].append(
                 {

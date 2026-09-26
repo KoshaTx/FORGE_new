@@ -1,0 +1,655 @@
+{
+  "component_bond_types": {
+    "amine_core": [
+      "SINGLE"
+    ],
+    "thiol_periphery": [
+      "SINGLE",
+      "DOUBLE"
+    ]
+  },
+  "experimental_execution_admitted": false,
+  "fixed_components": {
+    "AEMA": "C=CC(=O)OCCOC(=O)C(=C)C"
+  },
+  "grouped_programs": [
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_1_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 1,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 1,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_2_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 2,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 2,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_3_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 3,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 3,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_4_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 4,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 4,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_5_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 5,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 5,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    },
+    {
+      "architecture_subfamily": "source_declared_aema_occupancy",
+      "initial_role": "amine_core",
+      "product_constraints": {
+        "formal_charge": 0
+      },
+      "program_id": "source_zhou_aema_ordered_6_arms",
+      "scope": "Original declared source occupancy; previously qualified aliphatic cores and CHS monothiols, plus exact source component identity extensions independently checked by the replay contract.",
+      "stages": [
+        {
+          "accumulator_role": "amine_core",
+          "added_roles": [
+            "AEMA"
+          ],
+          "events": 6,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_acrylate_aza_addition",
+          "source_step": "Lee SI p. 6 Modified Amine Core; acrylate consumed first"
+        },
+        {
+          "accumulator_role": "modified_core",
+          "added_roles": [
+            "thiol_periphery"
+          ],
+          "events": 6,
+          "net_byproducts_per_event": {
+            "formal_charge": 0
+          },
+          "reaction_id": "source_aema_methacrylate_thiol_addition",
+          "source_step": "Lee SI p. 6 Cationic Lipid; remaining methacrylate consumed second"
+        }
+      ],
+      "terminal_constraints": {
+        "AEMA": {
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            8
+          ],
+          "exact_element_counts": {
+            "C": 9,
+            "O": 4
+          },
+          "formal_charge": 0
+        },
+        "amine_core": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "formal_charge": 0
+        },
+        "thiol_periphery": {
+          "allow_aromatic_atoms": true,
+          "allowed_atomic_numbers": [
+            1,
+            6,
+            7,
+            8,
+            16
+          ],
+          "exact_element_counts": {
+            "S": 1
+          },
+          "formal_charge": 0
+        }
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "architecture": "source-declared repeated beta-amino acrylate interface",
+      "atom_mapped_reaction_smarts": "[NX3;$([N;H1,H2]);+0;!$(N-[C,S,P]=[O,S,N]):1].[C&H2:2]=[C&H1:3][C&X3:4](=[O&X1:5])[#7,#8;#8:6]>>[N:1][CH2:2][CH2:3][CX3:4](=[OX1:5])[*:6]",
+      "conditions": {
+        "AEMA_equivalents": "one per source core N-H",
+        "BHT_mol_percent": 5,
+        "temperature_c": 50,
+        "time_h": 24
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_user_supplements_v1/build_zhou_registry.py",
+          "sha256": "31c5ed53caf4d1bd8915811f3e0e66f045b0e7ee0376873ed70daa9252960463"
+        },
+        "kind": "source_identity_domain_overlay",
+        "parent_registries": {
+          "lee_aema": {
+            "path": "data/vendor/qualified_aema_source_program_v1.json",
+            "sha256": "44f3278ac771e3f141b3db56fc9194bfa8e2c4903ba7dd364ec04bea1ac06839"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[CH2]=[CH1][CX3](=[OX1])[#7,#8]"
+          ],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "amine_core",
+          "required_handle_smarts": "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [
+            "[NX3;H1,H2;+0;!$(N-[C,S,P]=[O,S,N])]"
+          ],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4
+          ],
+          "name": "AEMA",
+          "required_handle_smarts": "[C&H2]=[C&H1][C&X3](=[O&X1])[#7,#8;#8]"
+        }
+      ],
+      "reaction_id": "source_aema_acrylate_aza_addition",
+      "reaction_version": 1,
+      "selectivity_policy": "All unfiltered constitutional outcomes. Source stage order and declared multiplicities; no target-based attachment or occupancy choice.",
+      "sources": [
+        {
+          "identifier": "10.1073/pnas.1520756113",
+          "kind": "doi",
+          "locator": "SI PDF p. 3 Fig. S3 complete 6A3-G1 scheme and explicit thiol drawing; p. 5 Fig. S5; pp. 19-20 G1 library procedure; main PDF p. 3 Fig. 2B component structures",
+          "notes": "Source-ordered acrylate aza addition then methacrylate S addition; explicit aminothiol control preserves N-H."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    },
+    {
+      "architecture": "redox-responsive thioether-linked lipid (thiol-Michael)",
+      "atom_mapped_reaction_smarts": "[SX2H1:1].[CH2:2]=[C;H0:3]([CH3:7])[CX3:4](=[OX1:5])[O:6]>>[S:1][CH2:2][CH1:3]([CH3:7])[CX3:4](=[OX1:5])[*:6]",
+      "conditions": {
+        "DMPP_mol_percent": 5,
+        "DMSO_d6_ul": 400,
+        "extra_feed_reason": "Unreacted AEMA impurity consumes thiol; no extra incorporated branches",
+        "incorporated_thiol_copies": 6,
+        "modified_core_mM": 125,
+        "reported_NMR_conversion_percent": 98,
+        "temperature_c": 60,
+        "thiol_feed_equivalents": 7.2,
+        "thiol_free_control_conversion_percent": 0,
+        "time_h": 48,
+        "without_DMPP_conversion_percent": 94
+      },
+      "implementation": {
+        "derivation": {
+          "path": "results/phase1/compose_lipid_user_supplements_v1/build_zhou_registry.py",
+          "sha256": "31c5ed53caf4d1bd8915811f3e0e66f045b0e7ee0376873ed70daa9252960463"
+        },
+        "kind": "source_identity_domain_overlay",
+        "parent_registries": {
+          "lee_aema": {
+            "path": "data/vendor/qualified_aema_source_program_v1.json",
+            "sha256": "44f3278ac771e3f141b3db56fc9194bfa8e2c4903ba7dd364ec04bea1ac06839"
+          }
+        }
+      },
+      "known_negative_examples": [],
+      "known_positive_examples": [],
+      "protonation_and_salt_policy": "Register neutral full-molecule products under the frozen compose_lipid canonicalization contract.",
+      "reactant_roles": [
+        {
+          "allowed_site_multiplicity": [
+            1
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            1
+          ],
+          "name": "thiol_periphery",
+          "required_handle_smarts": "[SX2H1]"
+        },
+        {
+          "allowed_site_multiplicity": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "count": 1,
+          "forbidden_smarts": [],
+          "mapped_reactive_atoms": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "name": "modified_core",
+          "required_handle_smarts": "[C&H2]=[C&H0]([C&H3])[C&X3](=[O&X1])O"
+        }
+      ],
+      "reaction_id": "source_aema_methacrylate_thiol_addition",
+      "reaction_version": 1,
+      "selectivity_policy": "All unfiltered constitutional outcomes. Source stage order and declared multiplicities; no target-based attachment or occupancy choice.",
+      "sources": [
+        {
+          "identifier": "10.1073/pnas.1520756113",
+          "kind": "doi",
+          "locator": "SI PDF p. 3 Fig. S3 complete 6A3-G1 scheme and explicit thiol drawing; p. 5 Fig. S5; pp. 19-20 G1 library procedure; main PDF p. 3 Fig. 2B component structures",
+          "notes": "Source-ordered acrylate aza addition then methacrylate S addition; explicit aminothiol control preserves N-H."
+        }
+      ],
+      "status": "qualified_for_enumeration",
+      "stereochemistry_policy": "Preserve substrate stereochemistry; new stereocenters left unspecified."
+    }
+  ],
+  "schema_version": "forge.source_grouped_registry.v1",
+  "source_assets": {
+    "lee_si": {
+      "path": "data/source_cache/compose_lipid_user_papers_20260922/anie202013927-sup-0001-misc_information.pdf",
+      "sha256": "239158fe3eea058b35cb78bf3fb215385aa421a5f8729876c6850d96d41ae6e2"
+    },
+    "zhou_control_transcription": {
+      "path": "results/phase1/compose_lipid_user_supplements_v1/zhou-control-transcription.json",
+      "sha256": "1d3a3b0ad3367ae473424c6ce50c3ddaa22c723c56f90114fbcc65e19fd11b8f"
+    },
+    "zhou_main": {
+      "path": "data/source_cache/compose_lipid_user_papers_20260922/zhou-et-al-2016-modular-degradable-dendrimers-enable-small-rnas-to-extend-survival-in-an-aggressive-liver-cancer-model.pdf",
+      "sha256": "6e38a4c5683e1a43c6addfa4f2f0cb94ff4b67acfb694a386e3a5eab5a4573d6"
+    },
+    "zhou_si": {
+      "path": "data/source_cache/compose_lipid_user_supplements_20260922/pnas.1520756113.sapp.pdf",
+      "sha256": "1b969c58dd4bfaca0a9bb6b3a558ac55d8b3bba31a08805d1eeae55367639987"
+    }
+  },
+  "source_component_extensions": {
+    "amine_core": {
+      "2A8": "NCCCn1ccnc1"
+    },
+    "thiol_periphery": {
+      "SC19": "SCCc1ccccc1",
+      "SN1": "CN(C)CCS",
+      "SN10": "CN(C)CCCN(C)C(=O)CCCS",
+      "SN11": "CN(CCN1CCCCC1)C(=O)CCCS",
+      "SN2": "CCCCNCCS",
+      "SN3": "CCN(CC)CCS",
+      "SN8": "CCCCN(CCS)CCCC",
+      "SN9": "O=C(CCCS)N1CCN(CCO)CC1",
+      "SO2": "O=C(O)CCCCCS",
+      "SO3": "O=C(O)CCCCCCCCCCS",
+      "SO4": "OCCS",
+      "SO7": "OCCCS",
+      "SO8": "OCCCCCCS",
+      "SO9": "OCCCCCCCCCCCS"
+    }
+  },
+  "training_admitted": false
+}

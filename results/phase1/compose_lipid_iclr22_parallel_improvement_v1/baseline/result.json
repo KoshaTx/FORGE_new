@@ -1,0 +1,2468 @@
+{
+  "schema": "forge.iclr22.parallel_baseline.v1",
+  "producer": {
+    "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/baseline/freeze.py",
+    "sha256": "ec860d9b20a36022b56044efde0ea7add6ff7175b1b1d784891394c6d2d6f817"
+  },
+  "inputs": [
+    {
+      "path": "paper/v1_iclr22/current_summary.json",
+      "sha256": "bd177b83126ef5925d001accf310b517ca0fa414424445080134b6783ecfc20f"
+    },
+    {
+      "path": "paper/v1_iclr22/current_quality_evidence.json",
+      "sha256": "1d26f75b55d6d7acf44fff7a1e1095bffefa763ceae36be9bef7a9b8911927c1"
+    },
+    {
+      "path": "paper/v1_iclr22/iclr22_validation.json",
+      "sha256": "970484dc4faacde3a22c7d4450e24a9b299c37461807e2cd057b85f2b1c98269"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/baseline/source_manifest.json",
+      "sha256": "be9613f2c7f7261bf308bfe34e6d2b32555589a33e98fbb24714051c474d23ad"
+    }
+  ],
+  "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0",
+  "worktree_source_verification": {
+    "a_attribution": {
+      "files_verified": 2686,
+      "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0"
+    },
+    "b_quality": {
+      "files_verified": 2686,
+      "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0"
+    },
+    "c_generalization": {
+      "files_verified": 2686,
+      "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0"
+    },
+    "d_routes": {
+      "files_verified": 2686,
+      "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0"
+    },
+    "e_diversity": {
+      "files_verified": 2686,
+      "source_digest": "497bf6b57586f25a76d8380cda7d272dc83be73ed74130dca0f3eb30b20597e0"
+    }
+  },
+  "population": {
+    "requests": 1408,
+    "families": 22,
+    "requests_per_family": 64,
+    "independent_conditioned_fits": 1,
+    "scope": "adaptively used TRAIN-derived development"
+  },
+  "selected_totals": {
+    "L2_ready": 1189,
+    "component_diversity_all": {
+      "AEMA": {
+        "inverse_simpson_effective": 1.0,
+        "observations": 63,
+        "shannon_effective": 1.0,
+        "unique": 1
+      },
+      "acceptor_tail": {
+        "inverse_simpson_effective": 160.70925110132183,
+        "observations": 191,
+        "shannon_effective": 169.8955074331375,
+        "unique": 176
+      },
+      "acid_tail": {
+        "inverse_simpson_effective": 55.351351351351354,
+        "observations": 64,
+        "shannon_effective": 58.21039421457302,
+        "unique": 60
+      },
+      "acrylate_tail": {
+        "inverse_simpson_effective": 14.222222222222221,
+        "observations": 64,
+        "shannon_effective": 25.389201288087605,
+        "unique": 39
+      },
+      "acyl_tail": {
+        "inverse_simpson_effective": 13.186046511627879,
+        "observations": 63,
+        "shannon_effective": 22.538643461522735,
+        "unique": 36
+      },
+      "aldehyde": {
+        "inverse_simpson_effective": 29.76800000000001,
+        "observations": 61,
+        "shannon_effective": 40.00815875358112,
+        "unique": 48
+      },
+      "aldehyde_body": {
+        "inverse_simpson_effective": 38.64150943396226,
+        "observations": 64,
+        "shannon_effective": 44.88635005448907,
+        "unique": 50
+      },
+      "alkyne": {
+        "inverse_simpson_effective": 43.77647058823526,
+        "observations": 61,
+        "shannon_effective": 51.08548723222319,
+        "unique": 55
+      },
+      "alkynoic_linker": {
+        "inverse_simpson_effective": 3.8352059925093633,
+        "observations": 64,
+        "shannon_effective": 3.9169613504242866,
+        "unique": 4
+      },
+      "amine_acid_head": {
+        "inverse_simpson_effective": 23.210526315789483,
+        "observations": 63,
+        "shannon_effective": 28.834644156730537,
+        "unique": 35
+      },
+      "amine_core": {
+        "inverse_simpson_effective": 21.68852459016394,
+        "observations": 63,
+        "shannon_effective": 23.596160553625555,
+        "unique": 26
+      },
+      "amine_head": {
+        "inverse_simpson_effective": 67.22400587556363,
+        "observations": 1132,
+        "shannon_effective": 208.74832634658617,
+        "unique": 478
+      },
+      "aminoalcohol_head": {
+        "inverse_simpson_effective": 11.636363636363637,
+        "observations": 64,
+        "shannon_effective": 13.719677438984009,
+        "unique": 18
+      },
+      "bromoester_arm": {
+        "inverse_simpson_effective": 58.24242424242428,
+        "observations": 62,
+        "shannon_effective": 59.28849134876759,
+        "unique": 60
+      },
+      "carboxylic_acid": {
+        "inverse_simpson_effective": 49.282051282051285,
+        "observations": 62,
+        "shannon_effective": 54.216043285704174,
+        "unique": 57
+      },
+      "carboxylic_acid_tail": {
+        "inverse_simpson_effective": 46.02247191011236,
+        "observations": 128,
+        "shannon_effective": 59.16066483823622,
+        "unique": 75
+      },
+      "coupled_aldehyde": {
+        "inverse_simpson_effective": 91.3612903225804,
+        "observations": 119,
+        "shannon_effective": 103.710447419663,
+        "unique": 110
+      },
+      "coupled_ketone": {
+        "inverse_simpson_effective": 176.96078431372604,
+        "observations": 190,
+        "shannon_effective": 180.53958647583846,
+        "unique": 183
+      },
+      "epoxide": {
+        "inverse_simpson_effective": 35.756756756756786,
+        "observations": 63,
+        "shannon_effective": 42.27258289257329,
+        "unique": 48
+      },
+      "epoxide_tail": {
+        "inverse_simpson_effective": 35.76274944567634,
+        "observations": 127,
+        "shannon_effective": 63.47460199411549,
+        "unique": 89
+      },
+      "hydrophobic_acid": {
+        "inverse_simpson_effective": 57.521739130434746,
+        "observations": 63,
+        "shannon_effective": 58.97541777457733,
+        "unique": 60
+      },
+      "isocyanide": {
+        "inverse_simpson_effective": 6.089743589743587,
+        "observations": 190,
+        "shannon_effective": 10.212855884321472,
+        "unique": 29
+      },
+      "isocyanide_tail": {
+        "inverse_simpson_effective": 19.56085790884714,
+        "observations": 191,
+        "shannon_effective": 30.002056488805206,
+        "unique": 59
+      },
+      "maleate": {
+        "inverse_simpson_effective": 49.951219512195124,
+        "observations": 64,
+        "shannon_effective": 53.3791668513013,
+        "unique": 56
+      },
+      "oxoester_aldehyde_body_tail": {
+        "inverse_simpson_effective": 44.43250688705238,
+        "observations": 127,
+        "shannon_effective": 67.56799221535861,
+        "unique": 88
+      },
+      "phosphate_tail": {
+        "inverse_simpson_effective": 16.253968253968253,
+        "observations": 64,
+        "shannon_effective": 22.271225351164965,
+        "unique": 31
+      },
+      "thiol_first": {
+        "inverse_simpson_effective": 52.51282051282051,
+        "observations": 64,
+        "shannon_effective": 55.74246447063239,
+        "unique": 58
+      },
+      "thiol_head": {
+        "inverse_simpson_effective": 1.0,
+        "observations": 1,
+        "shannon_effective": 1.0,
+        "unique": 1
+      },
+      "thiol_periphery": {
+        "inverse_simpson_effective": 25.606451612903246,
+        "observations": 63,
+        "shannon_effective": 35.882199951082114,
+        "unique": 45
+      },
+      "thiol_second": {
+        "inverse_simpson_effective": 52.51282051282051,
+        "observations": 64,
+        "shannon_effective": 55.74246447063239,
+        "unique": 58
+      },
+      "thiolactone_region": {
+        "inverse_simpson_effective": 46.54545454545455,
+        "observations": 64,
+        "shannon_effective": 51.535690622376364,
+        "unique": 55
+      }
+    },
+    "component_diversity_makeable": {
+      "AEMA": {
+        "inverse_simpson_effective": 1.0,
+        "observations": 47,
+        "shannon_effective": 1.0,
+        "unique": 1
+      },
+      "acceptor_tail": {
+        "inverse_simpson_effective": 34.844444444444434,
+        "observations": 56,
+        "shannon_effective": 38.5034154326878,
+        "unique": 42
+      },
+      "acid_tail": {
+        "inverse_simpson_effective": 31.04081632653064,
+        "observations": 39,
+        "shannon_effective": 33.38013591653115,
+        "unique": 35
+      },
+      "acrylate_tail": {
+        "inverse_simpson_effective": 12.25490196078431,
+        "observations": 25,
+        "shannon_effective": 15.342594567869432,
+        "unique": 18
+      },
+      "acyl_tail": {
+        "inverse_simpson_effective": 8.187969924812025,
+        "observations": 33,
+        "shannon_effective": 11.664866628583894,
+        "unique": 17
+      },
+      "aldehyde": {
+        "inverse_simpson_effective": 4.5,
+        "observations": 12,
+        "shannon_effective": 5.11732032057026,
+        "unique": 6
+      },
+      "aldehyde_body": {
+        "inverse_simpson_effective": 15.125,
+        "observations": 22,
+        "shannon_effective": 16.696597006958385,
+        "unique": 18
+      },
+      "alkyne": {
+        "inverse_simpson_effective": 11.999999999999996,
+        "observations": 12,
+        "shannon_effective": 12.00000000000001,
+        "unique": 12
+      },
+      "alkynoic_linker": {
+        "inverse_simpson_effective": 3.9032258064516134,
+        "observations": 33,
+        "shannon_effective": 3.947189919196603,
+        "unique": 4
+      },
+      "amine_acid_head": {
+        "inverse_simpson_effective": 17.482758620689662,
+        "observations": 39,
+        "shannon_effective": 20.61393891145492,
+        "unique": 24
+      },
+      "amine_core": {
+        "inverse_simpson_effective": 18.88034188034188,
+        "observations": 47,
+        "shannon_effective": 21.112442142695993,
+        "unique": 24
+      },
+      "amine_head": {
+        "inverse_simpson_effective": 36.16644649933932,
+        "observations": 468,
+        "shannon_effective": 100.43820428089695,
+        "unique": 206
+      },
+      "aminoalcohol_head": {
+        "inverse_simpson_effective": 9.218181818181819,
+        "observations": 39,
+        "shannon_effective": 10.60240643806173,
+        "unique": 13
+      },
+      "bromoester_arm": {
+        "inverse_simpson_effective": 30.421052631578956,
+        "observations": 34,
+        "shannon_effective": 31.337447791989483,
+        "unique": 32
+      },
+      "carboxylic_acid": {
+        "inverse_simpson_effective": 2.0,
+        "observations": 2,
+        "shannon_effective": 2.0,
+        "unique": 2
+      },
+      "carboxylic_acid_tail": {
+        "inverse_simpson_effective": 37.384615384615415,
+        "observations": 54,
+        "shannon_effective": 40.3221509913742,
+        "unique": 43
+      },
+      "coupled_aldehyde": {
+        "inverse_simpson_effective": 7.363636363636364,
+        "observations": 9,
+        "shannon_effective": 7.715195845677657,
+        "unique": 8
+      },
+      "coupled_ketone": {
+        "inverse_simpson_effective": 86.73451327433617,
+        "observations": 99,
+        "shannon_effective": 89.75637331577279,
+        "unique": 92
+      },
+      "epoxide": {
+        "inverse_simpson_effective": 22.04347826086957,
+        "observations": 39,
+        "shannon_effective": 25.00033108028157,
+        "unique": 28
+      },
+      "epoxide_tail": {
+        "inverse_simpson_effective": 18.698245614035063,
+        "observations": 73,
+        "shannon_effective": 31.608093668234762,
+        "unique": 47
+      },
+      "hydrophobic_acid": {
+        "inverse_simpson_effective": 37.09756097560978,
+        "observations": 39,
+        "shannon_effective": 37.63805489609797,
+        "unique": 38
+      },
+      "isocyanide": {
+        "inverse_simpson_effective": 4.46922024623803,
+        "observations": 99,
+        "shannon_effective": 5.585930194371162,
+        "unique": 7
+      },
+      "isocyanide_tail": {
+        "inverse_simpson_effective": 14.24915824915824,
+        "observations": 92,
+        "shannon_effective": 18.88915028094844,
+        "unique": 28
+      },
+      "maleate": {
+        "inverse_simpson_effective": 17.780487804878053,
+        "observations": 27,
+        "shannon_effective": 19.460599664937888,
+        "unique": 21
+      },
+      "oxoester_aldehyde_body_tail": {
+        "inverse_simpson_effective": 34.027777777777786,
+        "observations": 70,
+        "shannon_effective": 44.21104242918971,
+        "unique": 52
+      },
+      "phosphate_tail": {
+        "inverse_simpson_effective": 15.25396825396826,
+        "observations": 31,
+        "shannon_effective": 18.80129230947037,
+        "unique": 22
+      },
+      "thiol_first": {
+        "inverse_simpson_effective": 23.170212765957455,
+        "observations": 33,
+        "shannon_effective": 25.244240656853314,
+        "unique": 27
+      },
+      "thiol_head": {
+        "inverse_simpson_effective": 1.0,
+        "observations": 1,
+        "shannon_effective": 1.0,
+        "unique": 1
+      },
+      "thiol_periphery": {
+        "inverse_simpson_effective": 15.892086330935259,
+        "observations": 47,
+        "shannon_effective": 22.101178822888723,
+        "unique": 29
+      },
+      "thiol_second": {
+        "inverse_simpson_effective": 23.170212765957455,
+        "observations": 33,
+        "shannon_effective": 25.244240656853314,
+        "unique": 27
+      },
+      "thiolactone_region": {
+        "inverse_simpson_effective": 17.85714285714287,
+        "observations": 25,
+        "shannon_effective": 19.611944646177882,
+        "unique": 21
+      }
+    },
+    "computational_makeability": 616,
+    "exact_L1": 1387,
+    "joint_makeability_design_no_context_flags": 604,
+    "joint_makeability_limited_design": 606,
+    "limited_design_pass": 1324,
+    "makeable_context_flags": [
+      503,
+      504
+    ],
+    "makeable_design_nonpasses": [
+      258,
+      439,
+      448,
+      466,
+      467,
+      484,
+      773,
+      778,
+      807,
+      1377
+    ],
+    "product_diversity_all": {
+      "inverse_simpson_effective": 1406.0028368794553,
+      "observations": 1408,
+      "shannon_effective": 1406.6143878769894,
+      "unique": 1407
+    },
+    "product_diversity_makeable": {
+      "inverse_simpson_effective": 614.0064724919122,
+      "observations": 616,
+      "shannon_effective": 614.6152643817525,
+      "unique": 615
+    },
+    "requests": 1408
+  },
+  "routing_totals": {
+    "L2_ready_products": 1189,
+    "L3_direct_only_products": 119,
+    "combined_primary_products": 616,
+    "exact_L1": 1387,
+    "requests": 1408,
+    "required_branches": 3723,
+    "strict_secondary_products": 27
+  },
+  "family_baselines": [
+    {
+      "family": "a3_amine_aldehyde_alkyne",
+      "route": {
+        "L2_ready": 50,
+        "component_diversity_all": {
+          "aldehyde": {
+            "inverse_simpson_effective": 29.76800000000001,
+            "observations": 61,
+            "shannon_effective": 40.00815875358112,
+            "unique": 48
+          },
+          "alkyne": {
+            "inverse_simpson_effective": 43.77647058823526,
+            "observations": 61,
+            "shannon_effective": 51.08548723222319,
+            "unique": 55
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 59.063492063492006,
+            "observations": 61,
+            "shannon_effective": 59.62933954003377,
+            "unique": 60
+          }
+        },
+        "component_diversity_makeable": {
+          "aldehyde": {
+            "inverse_simpson_effective": 4.5,
+            "observations": 12,
+            "shannon_effective": 5.11732032057026,
+            "unique": 6
+          },
+          "alkyne": {
+            "inverse_simpson_effective": 11.999999999999996,
+            "observations": 12,
+            "shannon_effective": 12.00000000000001,
+            "unique": 12
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 11.999999999999996,
+            "observations": 12,
+            "shannon_effective": 12.00000000000001,
+            "unique": 12
+          }
+        },
+        "computational_makeability": 12,
+        "exact_L1": 61,
+        "joint_makeability_design_no_context_flags": 12,
+        "joint_makeability_limited_design": 12,
+        "limited_design_pass": 51,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 11.999999999999996,
+          "observations": 12,
+          "shannon_effective": 12.00000000000001,
+          "unique": 12
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 12,
+            "pass": 52
+          }
+        },
+        "context": 7,
+        "design_and_no_context": 47,
+        "design_pass": 51,
+        "exact": 61,
+        "observed": 14,
+        "requests": 64
+      }
+    },
+    {
+      "family": "acid_epoxide_diester_multistep",
+      "route": {
+        "L2_ready": 50,
+        "component_diversity_all": {
+          "amine_acid_head": {
+            "inverse_simpson_effective": 23.210526315789483,
+            "observations": 63,
+            "shannon_effective": 28.834644156730537,
+            "unique": 35
+          },
+          "epoxide": {
+            "inverse_simpson_effective": 35.756756756756786,
+            "observations": 63,
+            "shannon_effective": 42.27258289257329,
+            "unique": 48
+          },
+          "hydrophobic_acid": {
+            "inverse_simpson_effective": 57.521739130434746,
+            "observations": 63,
+            "shannon_effective": 58.97541777457733,
+            "unique": 60
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_acid_head": {
+            "inverse_simpson_effective": 17.482758620689662,
+            "observations": 39,
+            "shannon_effective": 20.61393891145492,
+            "unique": 24
+          },
+          "epoxide": {
+            "inverse_simpson_effective": 22.04347826086957,
+            "observations": 39,
+            "shannon_effective": 25.00033108028157,
+            "unique": 28
+          },
+          "hydrophobic_acid": {
+            "inverse_simpson_effective": 37.09756097560978,
+            "observations": 39,
+            "shannon_effective": 37.63805489609797,
+            "unique": 38
+          }
+        },
+        "computational_makeability": 39,
+        "exact_L1": 63,
+        "joint_makeability_design_no_context_flags": 39,
+        "joint_makeability_limited_design": 39,
+        "limited_design_pass": 63,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 39.00000000000003,
+          "observations": 39,
+          "shannon_effective": 38.99999999999984,
+          "unique": 39
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 63,
+        "design_pass": 63,
+        "exact": 63,
+        "observed": 38,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aema_aza_thiol_addition",
+      "route": {
+        "L2_ready": 58,
+        "component_diversity_all": {
+          "AEMA": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 63,
+            "shannon_effective": 1.0,
+            "unique": 1
+          },
+          "amine_core": {
+            "inverse_simpson_effective": 21.68852459016394,
+            "observations": 63,
+            "shannon_effective": 23.596160553625555,
+            "unique": 26
+          },
+          "thiol_periphery": {
+            "inverse_simpson_effective": 25.606451612903246,
+            "observations": 63,
+            "shannon_effective": 35.882199951082114,
+            "unique": 45
+          }
+        },
+        "component_diversity_makeable": {
+          "AEMA": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 47,
+            "shannon_effective": 1.0,
+            "unique": 1
+          },
+          "amine_core": {
+            "inverse_simpson_effective": 18.88034188034188,
+            "observations": 47,
+            "shannon_effective": 21.112442142695993,
+            "unique": 24
+          },
+          "thiol_periphery": {
+            "inverse_simpson_effective": 15.892086330935259,
+            "observations": 47,
+            "shannon_effective": 22.101178822888723,
+            "unique": 29
+          }
+        },
+        "computational_makeability": 47,
+        "exact_L1": 63,
+        "joint_makeability_design_no_context_flags": 47,
+        "joint_makeability_limited_design": 47,
+        "limited_design_pass": 63,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 47.00000000000002,
+          "observations": 47,
+          "shannon_effective": 46.99999999999995,
+          "unique": 47
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "abstain": 0,
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 63,
+        "design_pass": 63,
+        "exact": 63,
+        "observed": 63,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aldehyde_ugi3",
+      "route": {
+        "L2_ready": 61,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 17.640000000000004,
+            "observations": 63,
+            "shannon_effective": 24.84569460890983,
+            "unique": 34
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 4.652989449003518,
+            "observations": 63,
+            "shannon_effective": 4.8143738955334685,
+            "unique": 5
+          },
+          "oxoester_aldehyde_body_tail": {
+            "inverse_simpson_effective": 57.521739130434746,
+            "observations": 63,
+            "shannon_effective": 58.97541777457733,
+            "unique": 60
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 11.281250000000014,
+            "observations": 38,
+            "shannon_effective": 15.727056536259237,
+            "unique": 21
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 4.272189349112426,
+            "observations": 38,
+            "shannon_effective": 4.608782342604132,
+            "unique": 5
+          },
+          "oxoester_aldehyde_body_tail": {
+            "inverse_simpson_effective": 32.81818181818181,
+            "observations": 38,
+            "shannon_effective": 34.060619653238525,
+            "unique": 35
+          }
+        },
+        "computational_makeability": 38,
+        "exact_L1": 63,
+        "joint_makeability_design_no_context_flags": 38,
+        "joint_makeability_limited_design": 38,
+        "limited_design_pass": 63,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 37.999999999999986,
+          "observations": 38,
+          "shannon_effective": 38.000000000000014,
+          "unique": 38
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 3,
+        "design_and_no_context": 60,
+        "design_pass": 63,
+        "exact": 63,
+        "observed": 31,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aldehyde_ugi4",
+      "route": {
+        "L2_ready": 47,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 46.54545454545455,
+            "observations": 64,
+            "shannon_effective": 52.23536137820129,
+            "unique": 56
+          },
+          "carboxylic_acid_tail": {
+            "inverse_simpson_effective": 29.681159420289855,
+            "observations": 64,
+            "shannon_effective": 38.74552716657956,
+            "unique": 47
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 8.126984126984127,
+            "observations": 64,
+            "shannon_effective": 9.09000781646335,
+            "unique": 11
+          },
+          "oxoester_aldehyde_body_tail": {
+            "inverse_simpson_effective": 13.931972789115646,
+            "observations": 64,
+            "shannon_effective": 19.523530356730646,
+            "unique": 28
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 24.38095238095238,
+            "observations": 32,
+            "shannon_effective": 26.47226558293723,
+            "unique": 28
+          },
+          "carboxylic_acid_tail": {
+            "inverse_simpson_effective": 22.26086956521739,
+            "observations": 32,
+            "shannon_effective": 24.275174572341296,
+            "unique": 26
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 6.564102564102564,
+            "observations": 32,
+            "shannon_effective": 7.719336557536447,
+            "unique": 9
+          },
+          "oxoester_aldehyde_body_tail": {
+            "inverse_simpson_effective": 10.24,
+            "observations": 32,
+            "shannon_effective": 13.336432358831898,
+            "unique": 17
+          }
+        },
+        "computational_makeability": 32,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 31,
+        "joint_makeability_limited_design": 31,
+        "limited_design_pass": 50,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [
+          258
+        ],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 32.0,
+          "observations": 32,
+          "shannon_effective": 31.999999999999943,
+          "unique": 32
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "fail": 5,
+            "pass": 59
+          },
+          "ring": {
+            "fail": 14,
+            "pass": 50
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 49,
+        "design_pass": 50,
+        "exact": 64,
+        "observed": 20,
+        "requests": 64
+      }
+    },
+    {
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "route": {
+        "L2_ready": 60,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 19.32075471698113,
+            "observations": 64,
+            "shannon_effective": 22.385197612963136,
+            "unique": 27
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 64.0,
+            "observations": 64,
+            "shannon_effective": 64.00000000000031,
+            "unique": 64
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 64,
+            "shannon_effective": 1.0,
+            "unique": 1
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 15.05940594059406,
+            "observations": 39,
+            "shannon_effective": 17.913567122959797,
+            "unique": 21
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 39.00000000000003,
+            "observations": 39,
+            "shannon_effective": 38.99999999999984,
+            "unique": 39
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 39,
+            "shannon_effective": 1.0,
+            "unique": 1
+          }
+        },
+        "computational_makeability": 39,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 39,
+        "joint_makeability_limited_design": 39,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 39.00000000000003,
+          "observations": 39,
+          "shannon_effective": 38.99999999999984,
+          "unique": 39
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 63,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 50,
+        "requests": 64
+      }
+    },
+    {
+      "family": "amine_alkylation",
+      "route": {
+        "L2_ready": 62,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 26.328767123287694,
+            "observations": 62,
+            "shannon_effective": 30.22498033607584,
+            "unique": 35
+          },
+          "bromoester_arm": {
+            "inverse_simpson_effective": 58.24242424242428,
+            "observations": 62,
+            "shannon_effective": 59.28849134876759,
+            "unique": 60
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 18.0625,
+            "observations": 34,
+            "shannon_effective": 19.903810742712995,
+            "unique": 22
+          },
+          "bromoester_arm": {
+            "inverse_simpson_effective": 30.421052631578956,
+            "observations": 34,
+            "shannon_effective": 31.337447791989483,
+            "unique": 32
+          }
+        },
+        "computational_makeability": 34,
+        "exact_L1": 62,
+        "joint_makeability_design_no_context_flags": 33,
+        "joint_makeability_limited_design": 33,
+        "limited_design_pass": 61,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [
+          439
+        ],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 34.000000000000014,
+          "observations": 34,
+          "shannon_effective": 34.000000000000064,
+          "unique": 34
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 1,
+            "pass": 63
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 61,
+        "design_pass": 61,
+        "exact": 62,
+        "observed": 51,
+        "requests": 64
+      }
+    },
+    {
+      "family": "amine_epoxide_opening",
+      "route": {
+        "L2_ready": 48,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 29.681159420289855,
+            "observations": 64,
+            "shannon_effective": 35.55830495814321,
+            "unique": 42
+          },
+          "epoxide_tail": {
+            "inverse_simpson_effective": 58.51428571428571,
+            "observations": 64,
+            "shannon_effective": 59.97336429152983,
+            "unique": 61
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 22.222222222222214,
+            "observations": 40,
+            "shannon_effective": 25.708681555897105,
+            "unique": 29
+          },
+          "epoxide_tail": {
+            "inverse_simpson_effective": 36.36363636363634,
+            "observations": 40,
+            "shannon_effective": 37.32131966147243,
+            "unique": 38
+          }
+        },
+        "computational_makeability": 40,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 34,
+        "joint_makeability_limited_design": 36,
+        "limited_design_pass": 58,
+        "makeable_context_flags": [
+          503,
+          504
+        ],
+        "makeable_design_nonpasses": [
+          448,
+          466,
+          467,
+          484
+        ],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 39.99999999999997,
+          "observations": 40,
+          "shannon_effective": 40.000000000000156,
+          "unique": 40
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 6,
+            "pass": 58
+          }
+        },
+        "context": 6,
+        "design_and_no_context": 52,
+        "design_pass": 58,
+        "exact": 64,
+        "observed": 47,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aryl_reductive_amination",
+      "route": {
+        "L2_ready": 42,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 7.409691629955938,
+            "observations": 58,
+            "shannon_effective": 11.071204574132716,
+            "unique": 20
+          },
+          "coupled_aldehyde": {
+            "inverse_simpson_effective": 56.0666666666667,
+            "observations": 58,
+            "shannon_effective": 56.63014177365666,
+            "unique": 57
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 3.5217391304347827,
+            "observations": 9,
+            "shannon_effective": 4.166436205292808,
+            "unique": 5
+          },
+          "coupled_aldehyde": {
+            "inverse_simpson_effective": 7.363636363636364,
+            "observations": 9,
+            "shannon_effective": 7.715195845677657,
+            "unique": 8
+          }
+        },
+        "computational_makeability": 9,
+        "exact_L1": 58,
+        "joint_makeability_design_no_context_flags": 9,
+        "joint_makeability_limited_design": 9,
+        "limited_design_pass": 58,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 62.06060606060606,
+          "observations": 64,
+          "shannon_effective": 62.62861197361306,
+          "unique": 63
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 7.363636363636364,
+          "observations": 9,
+          "shannon_effective": 7.715195845677657,
+          "unique": 8
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 1,
+            "pass": 63
+          }
+        },
+        "context": 3,
+        "design_and_no_context": 56,
+        "design_pass": 58,
+        "exact": 58,
+        "observed": 6,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aza_michael_acrylamide",
+      "route": {
+        "L2_ready": 64,
+        "component_diversity_all": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 49.951219512195124,
+            "observations": 64,
+            "shannon_effective": 53.3791668513012,
+            "unique": 56
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 20.277227722772277,
+            "observations": 64,
+            "shannon_effective": 23.302844726040565,
+            "unique": 28
+          }
+        },
+        "component_diversity_makeable": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 17.818181818181817,
+            "observations": 28,
+            "shannon_effective": 19.43243323134895,
+            "unique": 21
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 16.33333333333333,
+            "observations": 28,
+            "shannon_effective": 18.15136091760934,
+            "unique": 20
+          }
+        },
+        "computational_makeability": 28,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 28,
+        "joint_makeability_limited_design": 28,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 27.999999999999986,
+          "observations": 28,
+          "shannon_effective": 27.999999999999996,
+          "unique": 28
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 64,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 63,
+        "requests": 64
+      }
+    },
+    {
+      "family": "aza_michael_acrylate",
+      "route": {
+        "L2_ready": 64,
+        "component_diversity_all": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 49.951219512195124,
+            "observations": 64,
+            "shannon_effective": 54.10386543523637,
+            "unique": 57
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 21.11340206185567,
+            "observations": 64,
+            "shannon_effective": 25.445794296223752,
+            "unique": 31
+          }
+        },
+        "component_diversity_makeable": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 12.100000000000003,
+            "observations": 22,
+            "shannon_effective": 13.495830419625666,
+            "unique": 15
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 12.736842105263165,
+            "observations": 22,
+            "shannon_effective": 14.373613933015104,
+            "unique": 16
+          }
+        },
+        "computational_makeability": 22,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 22,
+        "joint_makeability_limited_design": 22,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 22.0,
+          "observations": 22,
+          "shannon_effective": 21.999999999999964,
+          "unique": 22
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 63,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 61,
+        "requests": 64
+      }
+    },
+    {
+      "family": "disulfide_michael",
+      "route": {
+        "L2_ready": 62,
+        "component_diversity_all": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 62.99999999999992,
+            "observations": 63,
+            "shannon_effective": 63.00000000000027,
+            "unique": 63
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 35.75675675675679,
+            "observations": 63,
+            "shannon_effective": 41.697433119858516,
+            "unique": 47
+          }
+        },
+        "component_diversity_makeable": {
+          "acceptor_tail": {
+            "inverse_simpson_effective": 5.999999999999999,
+            "observations": 6,
+            "shannon_effective": 5.999999999999998,
+            "unique": 6
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 5.999999999999999,
+            "observations": 6,
+            "shannon_effective": 5.999999999999998,
+            "unique": 6
+          }
+        },
+        "computational_makeability": 6,
+        "exact_L1": 63,
+        "joint_makeability_design_no_context_flags": 6,
+        "joint_makeability_limited_design": 6,
+        "limited_design_pass": 62,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 5.999999999999999,
+          "observations": 6,
+          "shannon_effective": 5.999999999999998,
+          "unique": 6
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 1,
+            "pass": 63
+          }
+        },
+        "context": 2,
+        "design_and_no_context": 60,
+        "design_pass": 62,
+        "exact": 63,
+        "observed": 36,
+        "requests": 64
+      }
+    },
+    {
+      "family": "epoxide_opening_o_acylation",
+      "route": {
+        "L2_ready": 39,
+        "component_diversity_all": {
+          "acyl_tail": {
+            "inverse_simpson_effective": 13.186046511627879,
+            "observations": 63,
+            "shannon_effective": 22.538643461522735,
+            "unique": 36
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 17.95927601809955,
+            "observations": 63,
+            "shannon_effective": 22.538643461522746,
+            "unique": 29
+          },
+          "epoxide_tail": {
+            "inverse_simpson_effective": 13.829268292682906,
+            "observations": 63,
+            "shannon_effective": 22.224116150045653,
+            "unique": 34
+          }
+        },
+        "component_diversity_makeable": {
+          "acyl_tail": {
+            "inverse_simpson_effective": 8.187969924812025,
+            "observations": 33,
+            "shannon_effective": 11.664866628583894,
+            "unique": 17
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 11.709677419354835,
+            "observations": 33,
+            "shannon_effective": 14.540283697422268,
+            "unique": 18
+          },
+          "epoxide_tail": {
+            "inverse_simpson_effective": 6.520958083832339,
+            "observations": 33,
+            "shannon_effective": 9.046973948457278,
+            "unique": 14
+          }
+        },
+        "computational_makeability": 33,
+        "exact_L1": 63,
+        "joint_makeability_design_no_context_flags": 30,
+        "joint_makeability_limited_design": 30,
+        "limited_design_pass": 60,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [
+          773,
+          778,
+          807
+        ],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 32.999999999999986,
+          "observations": 33,
+          "shannon_effective": 32.99999999999997,
+          "unique": 33
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 3,
+            "pass": 61
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 60,
+        "design_pass": 60,
+        "exact": 63,
+        "observed": 51,
+        "requests": 64
+      }
+    },
+    {
+      "family": "iphos_ring_opening",
+      "route": {
+        "L2_ready": 56,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 56.888888888888886,
+            "observations": 64,
+            "shannon_effective": 59.48503586990426,
+            "unique": 61
+          },
+          "phosphate_tail": {
+            "inverse_simpson_effective": 16.253968253968253,
+            "observations": 64,
+            "shannon_effective": 22.271225351164965,
+            "unique": 31
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 27.457142857142863,
+            "observations": 31,
+            "shannon_effective": 28.347783922684815,
+            "unique": 29
+          },
+          "phosphate_tail": {
+            "inverse_simpson_effective": 15.25396825396826,
+            "observations": 31,
+            "shannon_effective": 18.80129230947037,
+            "unique": 22
+          }
+        },
+        "computational_makeability": 31,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 31,
+        "joint_makeability_limited_design": 31,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 30.999999999999993,
+          "observations": 31,
+          "shannon_effective": 31.000000000000014,
+          "unique": 31
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 63,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 56,
+        "requests": 64
+      }
+    },
+    {
+      "family": "ketone_isocyanide_amide",
+      "route": {
+        "L2_ready": 63,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 1.9523355576739752,
+            "observations": 64,
+            "shannon_effective": 2.0847105462377145,
+            "unique": 3
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 53.89473684210526,
+            "observations": 64,
+            "shannon_effective": 56.200069131945796,
+            "unique": 58
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 5.475935828877005,
+            "observations": 64,
+            "shannon_effective": 5.734518107996978,
+            "unique": 6
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 1.9355581127733026,
+            "observations": 58,
+            "shannon_effective": 2.0831117028970065,
+            "unique": 3
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 48.057142857142885,
+            "observations": 58,
+            "shannon_effective": 50.25114079408064,
+            "unique": 52
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 5.33968253968254,
+            "observations": 58,
+            "shannon_effective": 5.652866609503521,
+            "unique": 6
+          }
+        },
+        "computational_makeability": 58,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 58,
+        "joint_makeability_limited_design": 58,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 58.000000000000036,
+          "observations": 58,
+          "shannon_effective": 57.99999999999978,
+          "unique": 58
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 64,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 63,
+        "requests": 64
+      }
+    },
+    {
+      "family": "ketone_ugi4",
+      "route": {
+        "L2_ready": 32,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 36.2641509433962,
+            "observations": 62,
+            "shannon_effective": 42.038334528513545,
+            "unique": 47
+          },
+          "carboxylic_acid": {
+            "inverse_simpson_effective": 49.282051282051285,
+            "observations": 62,
+            "shannon_effective": 54.216043285704174,
+            "unique": 57
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 62.00000000000007,
+            "observations": 62,
+            "shannon_effective": 61.99999999999979,
+            "unique": 62
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 9.421568627450984,
+            "observations": 62,
+            "shannon_effective": 14.322389521986244,
+            "unique": 25
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 2.0,
+            "observations": 2,
+            "shannon_effective": 2.0,
+            "unique": 2
+          },
+          "carboxylic_acid": {
+            "inverse_simpson_effective": 2.0,
+            "observations": 2,
+            "shannon_effective": 2.0,
+            "unique": 2
+          },
+          "coupled_ketone": {
+            "inverse_simpson_effective": 2.0,
+            "observations": 2,
+            "shannon_effective": 2.0,
+            "unique": 2
+          },
+          "isocyanide": {
+            "inverse_simpson_effective": 2.0,
+            "observations": 2,
+            "shannon_effective": 2.0,
+            "unique": 2
+          }
+        },
+        "computational_makeability": 2,
+        "exact_L1": 62,
+        "joint_makeability_design_no_context_flags": 2,
+        "joint_makeability_limited_design": 2,
+        "limited_design_pass": 39,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 2.0,
+          "observations": 2,
+          "shannon_effective": 2.0,
+          "unique": 2
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 25,
+            "pass": 39
+          }
+        },
+        "context": 10,
+        "design_and_no_context": 33,
+        "design_pass": 39,
+        "exact": 62,
+        "observed": 7,
+        "requests": 64
+      }
+    },
+    {
+      "family": "maleate_addition",
+      "route": {
+        "L2_ready": 61,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 50.240506329113934,
+            "observations": 63,
+            "shannon_effective": 53.559677178033155,
+            "unique": 56
+          },
+          "maleate": {
+            "inverse_simpson_effective": 49.951219512195124,
+            "observations": 64,
+            "shannon_effective": 53.3791668513013,
+            "unique": 56
+          },
+          "thiol_head": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 1,
+            "shannon_effective": 1.0,
+            "unique": 1
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": 22.533333333333328,
+            "observations": 26,
+            "shannon_effective": 23.370125303084112,
+            "unique": 24
+          },
+          "maleate": {
+            "inverse_simpson_effective": 17.780487804878053,
+            "observations": 27,
+            "shannon_effective": 19.460599664937888,
+            "unique": 21
+          },
+          "thiol_head": {
+            "inverse_simpson_effective": 1.0,
+            "observations": 1,
+            "shannon_effective": 1.0,
+            "unique": 1
+          }
+        },
+        "computational_makeability": 27,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 27,
+        "joint_makeability_limited_design": 27,
+        "limited_design_pass": 60,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 27.000000000000018,
+          "observations": 27,
+          "shannon_effective": 27.000000000000014,
+          "unique": 27
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "abstain": 0,
+            "fail": 4,
+            "pass": 60
+          }
+        },
+        "context": 2,
+        "design_and_no_context": 59,
+        "design_pass": 60,
+        "exact": 64,
+        "observed": 48,
+        "requests": 64
+      }
+    },
+    {
+      "family": "o_esterification",
+      "route": {
+        "L2_ready": 39,
+        "component_diversity_all": {
+          "acid_tail": {
+            "inverse_simpson_effective": 55.351351351351354,
+            "observations": 64,
+            "shannon_effective": 58.21039421457302,
+            "unique": 60
+          },
+          "aminoalcohol_head": {
+            "inverse_simpson_effective": 11.636363636363637,
+            "observations": 64,
+            "shannon_effective": 13.719677438984009,
+            "unique": 18
+          }
+        },
+        "component_diversity_makeable": {
+          "acid_tail": {
+            "inverse_simpson_effective": 31.04081632653064,
+            "observations": 39,
+            "shannon_effective": 33.38013591653115,
+            "unique": 35
+          },
+          "aminoalcohol_head": {
+            "inverse_simpson_effective": 9.218181818181819,
+            "observations": 39,
+            "shannon_effective": 10.60240643806173,
+            "unique": 13
+          }
+        },
+        "computational_makeability": 39,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 39,
+        "joint_makeability_limited_design": 39,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 39.00000000000003,
+          "observations": 39,
+          "shannon_effective": 38.99999999999984,
+          "unique": 39
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 64,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 55,
+        "requests": 64
+      }
+    },
+    {
+      "family": "passerini_3cr",
+      "route": {
+        "L2_ready": 64,
+        "component_diversity_all": {
+          "aldehyde_body": {
+            "inverse_simpson_effective": 38.64150943396226,
+            "observations": 64,
+            "shannon_effective": 44.88635005448907,
+            "unique": 50
+          },
+          "carboxylic_acid_tail": {
+            "inverse_simpson_effective": 19.883495145631066,
+            "observations": 64,
+            "shannon_effective": 23.619214193208634,
+            "unique": 29
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 32.0,
+            "observations": 64,
+            "shannon_effective": 40.62099343967877,
+            "unique": 48
+          }
+        },
+        "component_diversity_makeable": {
+          "aldehyde_body": {
+            "inverse_simpson_effective": 15.125,
+            "observations": 22,
+            "shannon_effective": 16.696597006958385,
+            "unique": 18
+          },
+          "carboxylic_acid_tail": {
+            "inverse_simpson_effective": 15.125,
+            "observations": 22,
+            "shannon_effective": 16.054281162495897,
+            "unique": 17
+          },
+          "isocyanide_tail": {
+            "inverse_simpson_effective": 16.133333333333333,
+            "observations": 22,
+            "shannon_effective": 17.098469099480106,
+            "unique": 18
+          }
+        },
+        "computational_makeability": 22,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 22,
+        "joint_makeability_limited_design": 22,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 22.0,
+          "observations": 22,
+          "shannon_effective": 21.999999999999964,
+          "unique": 22
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 63,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 63,
+        "requests": 64
+      }
+    },
+    {
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "route": {
+        "L2_ready": 42,
+        "component_diversity_all": {
+          "alkynoic_linker": {
+            "inverse_simpson_effective": 3.8352059925093633,
+            "observations": 64,
+            "shannon_effective": 3.9169613504242866,
+            "unique": 4
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 49.951219512195124,
+            "observations": 64,
+            "shannon_effective": 53.37916685130125,
+            "unique": 56
+          },
+          "thiol_first": {
+            "inverse_simpson_effective": 52.51282051282051,
+            "observations": 64,
+            "shannon_effective": 55.74246447063239,
+            "unique": 58
+          },
+          "thiol_second": {
+            "inverse_simpson_effective": 52.51282051282051,
+            "observations": 64,
+            "shannon_effective": 55.74246447063239,
+            "unique": 58
+          }
+        },
+        "component_diversity_makeable": {
+          "alkynoic_linker": {
+            "inverse_simpson_effective": 3.9032258064516134,
+            "observations": 33,
+            "shannon_effective": 3.947189919196603,
+            "unique": 4
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 26.5609756097561,
+            "observations": 33,
+            "shannon_effective": 27.895681205144815,
+            "unique": 29
+          },
+          "thiol_first": {
+            "inverse_simpson_effective": 23.170212765957455,
+            "observations": 33,
+            "shannon_effective": 25.244240656853314,
+            "unique": 27
+          },
+          "thiol_second": {
+            "inverse_simpson_effective": 23.170212765957455,
+            "observations": 33,
+            "shannon_effective": 25.244240656853314,
+            "unique": 27
+          }
+        },
+        "computational_makeability": 33,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 33,
+        "joint_makeability_limited_design": 33,
+        "limited_design_pass": 64,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 32.999999999999986,
+          "observations": 33,
+          "shannon_effective": 32.99999999999997,
+          "unique": 33
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "pass": 64
+          }
+        },
+        "context": 0,
+        "design_and_no_context": 64,
+        "design_pass": 64,
+        "exact": 64,
+        "observed": 55,
+        "requests": 64
+      }
+    },
+    {
+      "family": "reductive_amination",
+      "route": {
+        "L2_ready": 61,
+        "component_diversity_all": {
+          "amine_head": {
+            "inverse_simpson_effective": 20.558011049723778,
+            "observations": 61,
+            "shannon_effective": 25.63840254966499,
+            "unique": 32
+          },
+          "coupled_aldehyde": {
+            "inverse_simpson_effective": 39.16842105263155,
+            "observations": 61,
+            "shannon_effective": 47.71863719554964,
+            "unique": 53
+          }
+        },
+        "component_diversity_makeable": {
+          "amine_head": {
+            "inverse_simpson_effective": null,
+            "observations": 0,
+            "shannon_effective": null,
+            "unique": 0
+          },
+          "coupled_aldehyde": {
+            "inverse_simpson_effective": null,
+            "observations": 0,
+            "shannon_effective": null,
+            "unique": 0
+          }
+        },
+        "computational_makeability": 0,
+        "exact_L1": 61,
+        "joint_makeability_design_no_context_flags": 0,
+        "joint_makeability_limited_design": 0,
+        "limited_design_pass": 61,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": null,
+          "observations": 0,
+          "shannon_effective": null,
+          "unique": 0
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 1,
+            "pass": 63
+          }
+        },
+        "context": 1,
+        "design_and_no_context": 60,
+        "design_pass": 61,
+        "exact": 61,
+        "observed": 45,
+        "requests": 64
+      }
+    },
+    {
+      "family": "thiolactone_aminolysis_michael",
+      "route": {
+        "L2_ready": 64,
+        "component_diversity_all": {
+          "acrylate_tail": {
+            "inverse_simpson_effective": 14.222222222222221,
+            "observations": 64,
+            "shannon_effective": 25.389201288087605,
+            "unique": 39
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 27.30666666666667,
+            "observations": 64,
+            "shannon_effective": 34.02345789555383,
+            "unique": 41
+          },
+          "thiolactone_region": {
+            "inverse_simpson_effective": 46.54545454545455,
+            "observations": 64,
+            "shannon_effective": 51.535690622376364,
+            "unique": 55
+          }
+        },
+        "component_diversity_makeable": {
+          "acrylate_tail": {
+            "inverse_simpson_effective": 12.25490196078431,
+            "observations": 25,
+            "shannon_effective": 15.342594567869432,
+            "unique": 18
+          },
+          "amine_head": {
+            "inverse_simpson_effective": 20.16129032258066,
+            "observations": 25,
+            "shannon_effective": 21.168632809063144,
+            "unique": 22
+          },
+          "thiolactone_region": {
+            "inverse_simpson_effective": 17.85714285714287,
+            "observations": 25,
+            "shannon_effective": 19.611944646177882,
+            "unique": 21
+          }
+        },
+        "computational_makeability": 25,
+        "exact_L1": 64,
+        "joint_makeability_design_no_context_flags": 24,
+        "joint_makeability_limited_design": 24,
+        "limited_design_pass": 63,
+        "makeable_context_flags": [],
+        "makeable_design_nonpasses": [
+          1377
+        ],
+        "product_diversity_all": {
+          "inverse_simpson_effective": 64.0,
+          "observations": 64,
+          "shannon_effective": 64.00000000000031,
+          "unique": 64
+        },
+        "product_diversity_makeable": {
+          "inverse_simpson_effective": 25.000000000000004,
+          "observations": 25,
+          "shannon_effective": 24.99999999999994,
+          "unique": 25
+        },
+        "requests": 64
+      },
+      "quality": {
+        "axes": {
+          "chemical": {
+            "pass": 64
+          },
+          "head": {
+            "not_applicable": 64
+          },
+          "ring": {
+            "fail": 1,
+            "pass": 63
+          }
+        },
+        "context": 2,
+        "design_and_no_context": 61,
+        "design_pass": 63,
+        "exact": 64,
+        "observed": 51,
+        "requests": 64
+      }
+    }
+  ],
+  "raw_readouts_are_secondary": true,
+  "paper_sources": [
+    {
+      "path": "paper/v1_iclr22/FORGE_ICLR2027_paper.tex",
+      "sha256": "5014ab32315861b1d3127195f7e70bd629d73fbbafa4a34ea43117f839ab24fa"
+    },
+    {
+      "path": "paper/v1_iclr22/ICLR_2027_reference_template.tex",
+      "sha256": "03e556d6e5593e498fd39f262ec2d184ebfe8693cbf47fb7cea3402d8d5166ac"
+    },
+    {
+      "path": "paper/v1_iclr22/figures/current_results/family_overview.tex",
+      "sha256": "9488c5b939519905d198a63e8d4a8ce5f12c459b18e8bfbf20e5f55312c8a020"
+    },
+    {
+      "path": "paper/v1_iclr22/figures/current_results/training_diagnostics.tex",
+      "sha256": "8abd0388987aa88ee5d011d56e19a555a9dd2e171f8f295dd4bcbdcc8d3f77c2"
+    },
+    {
+      "path": "paper/v1_iclr22/figures/forge_algorithm_schematic/schematic_body.tex",
+      "sha256": "82f60cb4f3320a3c0936a8c9bb681de596ec5b5325445aeacb41aa0960268ff8"
+    },
+    {
+      "path": "paper/v1_iclr22/figures/forge_generated_sample_atlas_core_saturation_v1/atlas_rows.tex",
+      "sha256": "be4a7646fc6c0a3772e194e16669ef3698379c9511f17f644e36a2202341d567"
+    },
+    {
+      "path": "paper/v1_iclr22/figures/forge_reaction_schemes/schemes_body.tex",
+      "sha256": "73f780e39110e6f64affd9aadbbd8f864142dd214fa1192410760a30455a94ba"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/architecture_ablation_rows.tex",
+      "sha256": "9dd7802bc9b9eb03ef88c00bc14a7073086ddb6a4693d01008ded81378278ba1"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/catalogue_comparison_transposed_rows.tex",
+      "sha256": "f82801f868f60432d776e4d1ea2e34fafb2dcb9d541c63a499908ffcff8f2374"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/common_ugi_benchmark_completed_rows.tex",
+      "sha256": "83edef8ae7776dd5d656b7eb6111bea07e9693d4281c59a2351a962cb9258c8b"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/common_ugi_decomposition_rows.tex",
+      "sha256": "cc469cc18623df87db3541386d454e6e38ec79787c68b8a8065f1dd2e62fe5ee"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/common_ugi_seed_rows.tex",
+      "sha256": "7419beb12c7bc9d3c79b2be2e4205014b468a0aeb937a7eb3c317c39398498b5"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/completed_evidence_macros.tex",
+      "sha256": "8569c07906e8b01bf68200b1f073976514afa4889f79c786779c6786ef5eedcd"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/decoder_source_ablation_rows.tex",
+      "sha256": "8e9c4e90ba722e51a216a0cb065143cf0e7ea29230713d6e8a59f5a36b9a1920"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/iclr_prose_results_macros.tex",
+      "sha256": "57aa5e7f39536d067fb8c76c607db48950b2ca53baea6d2dc20c38e635b26429"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/iclr_table10_macros.tex",
+      "sha256": "e97385a0a8e4c30435480459fca4d8b1f3778313852d62f0465f124525a73b18"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/iclr_table1_macros.tex",
+      "sha256": "ec1a254b800858122af31910e87897f1036dd5d0193124c9dbae8cc6551dce7a"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/iclr_table3_route_macros.tex",
+      "sha256": "543b434dee29f53ea916389b9e8818c249c34ac66a1c49b8d42f3d3f2dbe0e61"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/lipid_realism_rows.tex",
+      "sha256": "446387c3d6c5deb8b41a88a4ccdaccdf61799203757ed82a204e467536d1207c"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/production_comparison_transposed_rows.tex",
+      "sha256": "b2ce2a15fdc135cc30194f6f3d473e97e9770e2c607371874aa4e31cd54e074e"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/production_seed_exact_counts_rows.tex",
+      "sha256": "b21009d1c1c893705d6b615d25b977ad6ac4a88450cb40a7d351642fa95c8812"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/route_evidence_completed_rows.tex",
+      "sha256": "943d9b598dc487e93cdbb43449a0c3f92ba79e624a7e9f3a952eb615a1aef58e"
+    },
+    {
+      "path": "paper/v1_iclr22/generated/shared_program_figure_rows.tex",
+      "sha256": "7429d99629ca33db1310bb308379655d3f7514ff00406bd3053647f102c7c6e4"
+    },
+    {
+      "path": "paper/v1_iclr22/math_commands.tex",
+      "sha256": "90473c4d0542070db244cea73ef962d6cddc5b2a746757e6a40ddf5fdfb90ba9"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/appendix_22.tex",
+      "sha256": "53fc4422586b09c1a98761347c8c7cd119e533922ef72e8736d11a66f6e460b9"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/implementation_22.tex",
+      "sha256": "c5bab0a9aa1b10a58f2b44c2b40585314242ba1ccc1d3e7ee5699ca0b9c17689"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/quality_current.tex",
+      "sha256": "8497f7b4b99e329d33ec0004b15b88c6df675b4c35d103840863497d8ad429eb"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/reaction_figures_22.tex",
+      "sha256": "a1612dc059dbc21cdaf13e39d7e6689464c8772530eddcdf0f5077e2649d8f7a"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/result_placeholders.tex",
+      "sha256": "9dc146d73550ab1e81f46dfc3f0631a8f33f4818bbcbfb5c4fe63fe3fba82dc0"
+    },
+    {
+      "path": "paper/v1_iclr22/sections/results_22.tex",
+      "sha256": "5996855c9cdf7455f66a810ddec9ca7eb28cce5b458c6216fcaa817600f3d772"
+    }
+  ],
+  "promotion": {
+    "verifiers_and_existing_floors_unchanged": true,
+    "all_request_denominators_preserved": true,
+    "target_final_exact_L1_each_family": 0.9,
+    "target_is_not_independent_confirmation": true,
+    "new_quality_thresholds_must_be_source_qualified": true,
+    "combined_changes_require_individual_and_joint_comparisons": true,
+    "development_cannot_be_relabelled_final": true
+  },
+  "common_result_contract": [
+    "schema",
+    "hypothesis",
+    "alternative_explanation",
+    "protocol",
+    "inputs",
+    "producer",
+    "seed",
+    "population",
+    "arms",
+    "per_family",
+    "paired_changes",
+    "cost",
+    "failures",
+    "checks",
+    "interpretation",
+    "remaining"
+  ],
+  "compute_coordination": {
+    "local_threads_per_agent_initial": 3,
+    "CPU_seconds_per_initial_stream": 1800,
+    "paid_job_owner": "root",
+    "paid_jobs_concurrent_max": 1,
+    "automatic_paid_retry": false
+  },
+  "manuscript_edits_authorized_for_this_campaign": false,
+  "protected_TEST_opened": false
+}

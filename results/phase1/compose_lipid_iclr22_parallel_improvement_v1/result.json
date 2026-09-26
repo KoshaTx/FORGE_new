@@ -1,0 +1,1419 @@
+{
+  "schema": "forge.iclr22.parallel_improvement_development_snapshot.v1",
+  "created_at_utc": "2026-09-26T06:34:41.268409+00:00",
+  "producer": {
+    "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/report_v1.py",
+    "sha256": "9a6f1990235f37d13318301a69e56a9af49142f2c3968500b91545e06024fed9"
+  },
+  "inputs": [
+    {
+      "path": "results/phase1/compose_lipid_iclr22_research_v1/quality/all22_context_preserving/result.json",
+      "sha256": "6984bd349704e688f4fac6032c2f38307773e33c4a7c96a54ba504996ce4a095"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/a_attribution/common_gate_ledger_v1/gates.json",
+      "sha256": "fea87d4001b7629b26104f07a8f3c8b1bad5e70c8f0e809e3515d5d6da846315"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/run_v2/result.json",
+      "sha256": "f8504d0fe1edfbd25736cbf36426db619f8e29a6f2c08786f6b12afb1ed6f040"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/full_pair_v2/control/products.json",
+      "sha256": "260714c33029f2a6e52d6b400fd525e0ceaf54ff07c6bc2a304cc0a544136aaf"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/completion.json",
+      "sha256": "b1395d01c4e089be02e91121ce8b0db6b765d3b2f0db6a650897355de7f3849d"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/original/products.json",
+      "sha256": "ef5f0003ca1306f8402ee67a42c98333b8ddd646c350f575c0b058f0654861ac"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/original/result.json",
+      "sha256": "832aa821f0e1ebb66ecd45f4b675a2cb605cccc70a3f184f61fd499c8ce57d0e"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/original/validation.json",
+      "sha256": "52f46efe81c675d353d4141358e0acf7259bdec43f365667b76092bd7031eeca"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/original/protocol.json",
+      "sha256": "3b50e9438395783236c66a6ec3757f8188f62887d3b1124c983aab1f23111308"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/B/products.json",
+      "sha256": "48938f897207e2f0fff73e9870123879628bd96a78f40f74f40cbb4fb8960017"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/B/result.json",
+      "sha256": "2a886e0a092419388702636868cc3a9db04d59b9cc2eb989ed6e53d92e0dbef3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/B/validation.json",
+      "sha256": "a4a86ec6f8fb7f7c209fc4ea46607c5d4b76b6bf7f319a4a711fb6366b062b25"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/B/protocol.json",
+      "sha256": "fc204b609a4bc38db29dd7ba2b2a9c738788d63bdb441bb10e4c39f00696607b"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/joint/products.json",
+      "sha256": "62afe484bb2a034fad46be8eb18a261378fd93898293f7d6a1cb9683003ff4d8"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/joint/result.json",
+      "sha256": "e15186982cd64df5adcd708364894697d08e5f6733d926d9826d3d1ba269b5c0"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/joint/validation.json",
+      "sha256": "79b21bd4e3c3344021b944010b7587f3957baef03550f8f94c7e77475bcfc73a"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/new_clock_recount_v1/joint/protocol.json",
+      "sha256": "4a654b463d4ec2a0933d37a2dbff657f59c3f7b6ac1c202fd309e18e9a9ba5c3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/baseline/result.json",
+      "sha256": "d0d258678a4cc896b3bd9cb48806b572645868717c91de1d0d491555854cf6a7"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/root_review.json",
+      "sha256": "759bac067467ff0a3731f3d7cbdf01eb61e6a7d6fab9bf89c716c2a8c26092f3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/run_v2/audit_v1/result.json",
+      "sha256": "236e7e0d7b7a043a1a76d515e58227c3423f0b14b86ea31a02337dba4d81dd2c"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/run_v2/interpretation_v1/result.json",
+      "sha256": "269dafde81cf35367dbb144c9cf6e0050137c8695e792c3ec28e4173b9d7d713"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_selection_v1/closeout_v1.json",
+      "sha256": "b9bbcb7ca29bd560e236f08a97714c8ab145b4f4e57a033929ac97e179bf41de"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/d_routes/closeout_v1/result.json",
+      "sha256": "a92d2660a9ccb160ee8842f99edafe23a54abd6d7b2371c07617360cfe6e9762"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/b_quality/result.json",
+      "sha256": "160fd4137729a7c01826e8852c3a4ee37e9c0f09a4eabdaaa3df19571c1aaa3c"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/c_generalization/result.json",
+      "sha256": "6728440b1a0bc19467eca752d24be171e53d6f2b95638bf3cef48c4d4df68830"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/e_diversity/closeout_v2.json",
+      "sha256": "ca73ed3143763c7f1143dc0c311e2fb8fe20dd16b8af0c03adf38ef28559e835"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/e_diversity/isocyanide_diagnosis_v1/run_v4/result.json",
+      "sha256": "4742f6a13c8e2bb0b6709f27cbe862fafe44808ef35537a27db1cf2ff06c07c0"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/a_attribution/ordering_v3/summary.json",
+      "sha256": "de2f36a1f2629be94d79677b93cc64f0f17010ca2fe8e8941919b77b88967070"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/a_attribution/null_fullfit_v1/failure_admission.json",
+      "sha256": "9064199ebf7fcf2f71a9661fd2c5578c14b6da5272553ead7a93e02929250fba"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/a_attribution/null_fullfit_v2/readiness_review.json",
+      "sha256": "09b448e661750c03fcb260c7dfaf69079fb86206fec5a83f5b75ab5326e71148"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/a_attribution/matched_context_null_v5/readiness.json",
+      "sha256": "f8b61f567ca5c7dca887012efadb4af125d3ed06eb14b6efed3830e32242917b"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/source_integration_v1.json",
+      "sha256": "146154ddeb3ce23a1399da647f7734863fa4be84bf778fa21f4527171198fdda"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/source_integration_e_v1.json",
+      "sha256": "473f0c65a9243e64547bc27f6b87e7764ca756471efd7e28a8e9737a585badbd"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/source_integration_joint_v1.json",
+      "sha256": "f8af56592e19533b788a9761720cef17d0964ad2a95892ab61c9e27dc6d69ae3"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/bc_tests.xml",
+      "sha256": "1f48b9eaf040fafab118ff285065b1a759fe1ebde97d0ed9fac512cfc1a07413"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/e_tests.xml",
+      "sha256": "d42c92b649ec7b8d11fd90cb5f4b84c4b0d1f5ba8d220c82516df57af021b09c"
+    },
+    {
+      "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/joint_policy_tests.xml",
+      "sha256": "312ed47fe1af8dea2d0f96383661d8e23e0308847c0a3461eb6f06a7aea3eb75"
+    }
+  ],
+  "population": 1408,
+  "families": 22,
+  "evidence_class": "Single-fit, TRAIN-derived request development cohort; adaptive method development, not independent final held-out evidence.",
+  "route_evidence_clock": "2026-09-26T06:22:31.247475+00:00",
+  "baseline": {
+    "requests": 1408,
+    "exact_L1": 1387,
+    "limited_design": 1324,
+    "context_flagged": 41,
+    "design_without_context": 1292,
+    "computational_makeability": 616,
+    "L2_ready": 1189,
+    "L3_direct_only": 119,
+    "strict_dossiers": 27,
+    "makeable_and_design": 606,
+    "makeable_design_without_context": 604,
+    "required_component_observations": 3723,
+    "unique_components_role_agnostic": 2044,
+    "component_role_sum_squares": 36391,
+    "component_role_agnostic_sum_squares": 39683,
+    "component_role_agnostic_inverse_Simpson": 349.2863190786987,
+    "component_role_agnostic_Shannon_effective": 1087.6476902813586,
+    "unique_products": 1407,
+    "TRAIN_novel_product_occurrences": 1216
+  },
+  "routes_only": {
+    "requests": 1408,
+    "exact_L1": 1387,
+    "limited_design": 1324,
+    "context_flagged": 41,
+    "design_without_context": 1292,
+    "computational_makeability": 622,
+    "L2_ready": 1189,
+    "L3_direct_only": 119,
+    "strict_dossiers": 27,
+    "makeable_and_design": 612,
+    "makeable_design_without_context": 610,
+    "required_component_observations": 3723,
+    "unique_components_role_agnostic": 2044,
+    "component_role_sum_squares": 36391,
+    "component_role_agnostic_sum_squares": 39683,
+    "component_role_agnostic_inverse_Simpson": 349.2863190786987,
+    "component_role_agnostic_Shannon_effective": 1087.6476902813586,
+    "unique_products": 1407,
+    "TRAIN_novel_product_occurrences": 1216
+  },
+  "joint": {
+    "requests": 1408,
+    "exact_L1": 1387,
+    "limited_design": 1331,
+    "context_flagged": 39,
+    "design_without_context": 1300,
+    "computational_makeability": 624,
+    "L2_ready": 1189,
+    "L3_direct_only": 121,
+    "strict_dossiers": 27,
+    "makeable_and_design": 614,
+    "makeable_design_without_context": 612,
+    "required_component_observations": 3723,
+    "unique_components_role_agnostic": 2055,
+    "component_role_sum_squares": 36195,
+    "component_role_agnostic_sum_squares": 39473,
+    "component_role_agnostic_inverse_Simpson": 351.14455450561144,
+    "component_role_agnostic_Shannon_effective": 1098.4111178433986,
+    "unique_products": 1407,
+    "TRAIN_novel_product_occurrences": 1216
+  },
+  "by_family": [
+    {
+      "family": "a3_amine_aldehyde_alkyne",
+      "before": {
+        "requests": 64,
+        "exact_L1": 61,
+        "limited_design": 51,
+        "context_flagged": 7,
+        "design_without_context": 47,
+        "computational_makeability": 12,
+        "L2_ready": 50,
+        "L3_direct_only": 1,
+        "strict_dossiers": 1,
+        "makeable_and_design": 12,
+        "makeable_design_without_context": 12,
+        "required_component_observations": 183,
+        "unique_components_role_agnostic": 163,
+        "component_role_sum_squares": 273,
+        "component_role_agnostic_sum_squares": 273,
+        "component_role_agnostic_inverse_Simpson": 122.67032967032966,
+        "component_role_agnostic_Shannon_effective": 148.7384629840172,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 63
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 61,
+        "limited_design": 52,
+        "context_flagged": 7,
+        "design_without_context": 47,
+        "computational_makeability": 12,
+        "L2_ready": 50,
+        "L3_direct_only": 1,
+        "strict_dossiers": 1,
+        "makeable_and_design": 12,
+        "makeable_design_without_context": 12,
+        "required_component_observations": 183,
+        "unique_components_role_agnostic": 164,
+        "component_role_sum_squares": 265,
+        "component_role_agnostic_sum_squares": 265,
+        "component_role_agnostic_inverse_Simpson": 126.37358490566038,
+        "component_role_agnostic_Shannon_effective": 150.78600994329744,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 63
+      }
+    },
+    {
+      "family": "acid_epoxide_diester_multistep",
+      "before": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 0,
+        "design_without_context": 63,
+        "computational_makeability": 39,
+        "L2_ready": 50,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 143,
+        "component_role_sum_squares": 351,
+        "component_role_agnostic_sum_squares": 351,
+        "component_role_agnostic_inverse_Simpson": 101.76923076923077,
+        "component_role_agnostic_Shannon_effective": 124.73913370715461,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 0,
+        "design_without_context": 63,
+        "computational_makeability": 39,
+        "L2_ready": 50,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 144,
+        "component_role_sum_squares": 349,
+        "component_role_agnostic_sum_squares": 349,
+        "component_role_agnostic_inverse_Simpson": 102.35243553008596,
+        "component_role_agnostic_Shannon_effective": 125.65744537208018,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      }
+    },
+    {
+      "family": "aema_aza_thiol_addition",
+      "before": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 0,
+        "design_without_context": 63,
+        "computational_makeability": 47,
+        "L2_ready": 58,
+        "L3_direct_only": 0,
+        "strict_dossiers": 13,
+        "makeable_and_design": 47,
+        "makeable_design_without_context": 47,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 72,
+        "component_role_sum_squares": 4307,
+        "component_role_agnostic_sum_squares": 4307,
+        "component_role_agnostic_inverse_Simpson": 8.293707917343859,
+        "component_role_agnostic_Shannon_effective": 28.381023691144996,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 29
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 0,
+        "design_without_context": 63,
+        "computational_makeability": 47,
+        "L2_ready": 58,
+        "L3_direct_only": 0,
+        "strict_dossiers": 13,
+        "makeable_and_design": 47,
+        "makeable_design_without_context": 47,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 72,
+        "component_role_sum_squares": 4307,
+        "component_role_agnostic_sum_squares": 4307,
+        "component_role_agnostic_inverse_Simpson": 8.293707917343859,
+        "component_role_agnostic_Shannon_effective": 28.381023691144996,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 29
+      }
+    },
+    {
+      "family": "aldehyde_ugi3",
+      "before": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 3,
+        "design_without_context": 60,
+        "computational_makeability": 38,
+        "L2_ready": 61,
+        "L3_direct_only": 1,
+        "strict_dossiers": 1,
+        "makeable_and_design": 38,
+        "makeable_design_without_context": 38,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 99,
+        "component_role_sum_squares": 1147,
+        "component_role_agnostic_sum_squares": 1147,
+        "component_role_agnostic_inverse_Simpson": 31.14298169136879,
+        "component_role_agnostic_Shannon_effective": 57.53629814704441,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 63
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 63,
+        "context_flagged": 3,
+        "design_without_context": 60,
+        "computational_makeability": 38,
+        "L2_ready": 61,
+        "L3_direct_only": 1,
+        "strict_dossiers": 1,
+        "makeable_and_design": 38,
+        "makeable_design_without_context": 38,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 99,
+        "component_role_sum_squares": 1147,
+        "component_role_agnostic_sum_squares": 1147,
+        "component_role_agnostic_inverse_Simpson": 31.14298169136879,
+        "component_role_agnostic_Shannon_effective": 57.53629814704441,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 63
+      }
+    },
+    {
+      "family": "aldehyde_ugi4",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 50,
+        "context_flagged": 1,
+        "design_without_context": 49,
+        "computational_makeability": 32,
+        "L2_ready": 47,
+        "L3_direct_only": 18,
+        "strict_dossiers": 0,
+        "makeable_and_design": 31,
+        "makeable_design_without_context": 31,
+        "required_component_observations": 256,
+        "unique_components_role_agnostic": 142,
+        "component_role_sum_squares": 1024,
+        "component_role_agnostic_sum_squares": 1024,
+        "component_role_agnostic_inverse_Simpson": 64.0,
+        "component_role_agnostic_Shannon_effective": 97.92355868160905,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 52,
+        "context_flagged": 1,
+        "design_without_context": 51,
+        "computational_makeability": 34,
+        "L2_ready": 47,
+        "L3_direct_only": 20,
+        "strict_dossiers": 0,
+        "makeable_and_design": 33,
+        "makeable_design_without_context": 33,
+        "required_component_observations": 256,
+        "unique_components_role_agnostic": 150,
+        "component_role_sum_squares": 944,
+        "component_role_agnostic_sum_squares": 944,
+        "component_role_agnostic_inverse_Simpson": 69.42372881355932,
+        "component_role_agnostic_Shannon_effective": 106.01788311324746,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      }
+    },
+    {
+      "family": "alpha_isocyanoester_dihydroimidazole",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 39,
+        "L2_ready": 60,
+        "L3_direct_only": 8,
+        "strict_dossiers": 0,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 92,
+        "component_role_sum_squares": 4372,
+        "component_role_agnostic_sum_squares": 4372,
+        "component_role_agnostic_inverse_Simpson": 8.431838975297346,
+        "component_role_agnostic_Shannon_effective": 33.819581068905435,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 62
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 39,
+        "L2_ready": 60,
+        "L3_direct_only": 8,
+        "strict_dossiers": 0,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 92,
+        "component_role_sum_squares": 4370,
+        "component_role_agnostic_sum_squares": 4370,
+        "component_role_agnostic_inverse_Simpson": 8.435697940503433,
+        "component_role_agnostic_Shannon_effective": 33.864116854493915,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 62
+      }
+    },
+    {
+      "family": "amine_alkylation",
+      "before": {
+        "requests": 64,
+        "exact_L1": 62,
+        "limited_design": 61,
+        "context_flagged": 0,
+        "design_without_context": 61,
+        "computational_makeability": 34,
+        "L2_ready": 62,
+        "L3_direct_only": 1,
+        "strict_dossiers": 0,
+        "makeable_and_design": 33,
+        "makeable_design_without_context": 33,
+        "required_component_observations": 124,
+        "unique_components_role_agnostic": 95,
+        "component_role_sum_squares": 212,
+        "component_role_agnostic_sum_squares": 212,
+        "component_role_agnostic_inverse_Simpson": 72.52830188679245,
+        "component_role_agnostic_Shannon_effective": 84.66388805558401,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 49
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 62,
+        "limited_design": 61,
+        "context_flagged": 0,
+        "design_without_context": 61,
+        "computational_makeability": 34,
+        "L2_ready": 62,
+        "L3_direct_only": 1,
+        "strict_dossiers": 0,
+        "makeable_and_design": 33,
+        "makeable_design_without_context": 33,
+        "required_component_observations": 124,
+        "unique_components_role_agnostic": 95,
+        "component_role_sum_squares": 212,
+        "component_role_agnostic_sum_squares": 212,
+        "component_role_agnostic_inverse_Simpson": 72.52830188679245,
+        "component_role_agnostic_Shannon_effective": 84.66388805558401,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 49
+      }
+    },
+    {
+      "family": "amine_epoxide_opening",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 58,
+        "context_flagged": 6,
+        "design_without_context": 52,
+        "computational_makeability": 40,
+        "L2_ready": 48,
+        "L3_direct_only": 7,
+        "strict_dossiers": 1,
+        "makeable_and_design": 36,
+        "makeable_design_without_context": 34,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 103,
+        "component_role_sum_squares": 208,
+        "component_role_agnostic_sum_squares": 208,
+        "component_role_agnostic_inverse_Simpson": 78.76923076923077,
+        "component_role_agnostic_Shannon_effective": 92.35910733314864,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 51
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 58,
+        "context_flagged": 6,
+        "design_without_context": 52,
+        "computational_makeability": 40,
+        "L2_ready": 48,
+        "L3_direct_only": 7,
+        "strict_dossiers": 1,
+        "makeable_and_design": 36,
+        "makeable_design_without_context": 34,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 105,
+        "component_role_sum_squares": 204,
+        "component_role_agnostic_sum_squares": 204,
+        "component_role_agnostic_inverse_Simpson": 80.31372549019608,
+        "component_role_agnostic_Shannon_effective": 94.38150843598412,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 51
+      }
+    },
+    {
+      "family": "aryl_reductive_amination",
+      "before": {
+        "requests": 64,
+        "exact_L1": 58,
+        "limited_design": 58,
+        "context_flagged": 3,
+        "design_without_context": 56,
+        "computational_makeability": 9,
+        "L2_ready": 42,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 9,
+        "makeable_design_without_context": 9,
+        "required_component_observations": 116,
+        "unique_components_role_agnostic": 77,
+        "component_role_sum_squares": 514,
+        "component_role_agnostic_sum_squares": 514,
+        "component_role_agnostic_inverse_Simpson": 26.17898832684825,
+        "component_role_agnostic_Shannon_effective": 50.078493772808045,
+        "unique_products": 63,
+        "TRAIN_novel_product_occurrences": 61
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 58,
+        "limited_design": 58,
+        "context_flagged": 2,
+        "design_without_context": 57,
+        "computational_makeability": 9,
+        "L2_ready": 42,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 9,
+        "makeable_design_without_context": 9,
+        "required_component_observations": 116,
+        "unique_components_role_agnostic": 82,
+        "component_role_sum_squares": 472,
+        "component_role_agnostic_sum_squares": 472,
+        "component_role_agnostic_inverse_Simpson": 28.508474576271187,
+        "component_role_agnostic_Shannon_effective": 55.48104741295606,
+        "unique_products": 63,
+        "TRAIN_novel_product_occurrences": 61
+      }
+    },
+    {
+      "family": "aza_michael_acrylamide",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 28,
+        "L2_ready": 64,
+        "L3_direct_only": 7,
+        "strict_dossiers": 3,
+        "makeable_and_design": 28,
+        "makeable_design_without_context": 28,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 84,
+        "component_role_sum_squares": 284,
+        "component_role_agnostic_sum_squares": 284,
+        "component_role_agnostic_inverse_Simpson": 57.690140845070424,
+        "component_role_agnostic_Shannon_effective": 70.53754848990083,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 43
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 28,
+        "L2_ready": 64,
+        "L3_direct_only": 7,
+        "strict_dossiers": 3,
+        "makeable_and_design": 28,
+        "makeable_design_without_context": 28,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 84,
+        "component_role_sum_squares": 284,
+        "component_role_agnostic_sum_squares": 284,
+        "component_role_agnostic_inverse_Simpson": 57.690140845070424,
+        "component_role_agnostic_Shannon_effective": 70.53754848990083,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 43
+      }
+    },
+    {
+      "family": "aza_michael_acrylate",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 22,
+        "L2_ready": 64,
+        "L3_direct_only": 12,
+        "strict_dossiers": 1,
+        "makeable_and_design": 22,
+        "makeable_design_without_context": 22,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 88,
+        "component_role_sum_squares": 276,
+        "component_role_agnostic_sum_squares": 276,
+        "component_role_agnostic_inverse_Simpson": 59.36231884057971,
+        "component_role_agnostic_Shannon_effective": 74.20824295172571,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 48
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 22,
+        "L2_ready": 64,
+        "L3_direct_only": 12,
+        "strict_dossiers": 1,
+        "makeable_and_design": 22,
+        "makeable_design_without_context": 22,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 88,
+        "component_role_sum_squares": 276,
+        "component_role_agnostic_sum_squares": 276,
+        "component_role_agnostic_inverse_Simpson": 59.36231884057971,
+        "component_role_agnostic_Shannon_effective": 74.20824295172571,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 48
+      }
+    },
+    {
+      "family": "disulfide_michael",
+      "before": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 62,
+        "context_flagged": 2,
+        "design_without_context": 60,
+        "computational_makeability": 6,
+        "L2_ready": 62,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 6,
+        "makeable_design_without_context": 6,
+        "required_component_observations": 126,
+        "unique_components_role_agnostic": 110,
+        "component_role_sum_squares": 174,
+        "component_role_agnostic_sum_squares": 174,
+        "component_role_agnostic_inverse_Simpson": 91.24137931034483,
+        "component_role_agnostic_Shannon_effective": 102.50733215826229,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 61
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 62,
+        "context_flagged": 2,
+        "design_without_context": 60,
+        "computational_makeability": 7,
+        "L2_ready": 62,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 7,
+        "makeable_design_without_context": 7,
+        "required_component_observations": 126,
+        "unique_components_role_agnostic": 110,
+        "component_role_sum_squares": 174,
+        "component_role_agnostic_sum_squares": 174,
+        "component_role_agnostic_inverse_Simpson": 91.24137931034483,
+        "component_role_agnostic_Shannon_effective": 102.50733215826229,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 61
+      }
+    },
+    {
+      "family": "epoxide_opening_o_acylation",
+      "before": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 60,
+        "context_flagged": 0,
+        "design_without_context": 60,
+        "computational_makeability": 33,
+        "L2_ready": 39,
+        "L3_direct_only": 14,
+        "strict_dossiers": 1,
+        "makeable_and_design": 30,
+        "makeable_design_without_context": 30,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 99,
+        "component_role_sum_squares": 809,
+        "component_role_agnostic_sum_squares": 809,
+        "component_role_agnostic_inverse_Simpson": 44.15451174289246,
+        "component_role_agnostic_Shannon_effective": 67.29992854479642,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 63,
+        "limited_design": 60,
+        "context_flagged": 0,
+        "design_without_context": 60,
+        "computational_makeability": 33,
+        "L2_ready": 39,
+        "L3_direct_only": 14,
+        "strict_dossiers": 1,
+        "makeable_and_design": 30,
+        "makeable_design_without_context": 30,
+        "required_component_observations": 189,
+        "unique_components_role_agnostic": 99,
+        "component_role_sum_squares": 809,
+        "component_role_agnostic_sum_squares": 809,
+        "component_role_agnostic_inverse_Simpson": 44.15451174289246,
+        "component_role_agnostic_Shannon_effective": 67.29992854479642,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      }
+    },
+    {
+      "family": "iphos_ring_opening",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 31,
+        "L2_ready": 56,
+        "L3_direct_only": 2,
+        "strict_dossiers": 2,
+        "makeable_and_design": 31,
+        "makeable_design_without_context": 31,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 92,
+        "component_role_sum_squares": 324,
+        "component_role_agnostic_sum_squares": 324,
+        "component_role_agnostic_inverse_Simpson": 50.5679012345679,
+        "component_role_agnostic_Shannon_effective": 72.79573171225795,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 55
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 31,
+        "L2_ready": 56,
+        "L3_direct_only": 2,
+        "strict_dossiers": 2,
+        "makeable_and_design": 31,
+        "makeable_design_without_context": 31,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 92,
+        "component_role_sum_squares": 324,
+        "component_role_agnostic_sum_squares": 324,
+        "component_role_agnostic_inverse_Simpson": 50.5679012345679,
+        "component_role_agnostic_Shannon_effective": 72.79573171225795,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 55
+      }
+    },
+    {
+      "family": "ketone_isocyanide_amide",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 58,
+        "L2_ready": 63,
+        "L3_direct_only": 12,
+        "strict_dossiers": 0,
+        "makeable_and_design": 58,
+        "makeable_design_without_context": 58,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 67,
+        "component_role_sum_squares": 2922,
+        "component_role_agnostic_sum_squares": 2922,
+        "component_role_agnostic_inverse_Simpson": 12.616016427104723,
+        "component_role_agnostic_Shannon_effective": 26.27530516080763,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 43
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 58,
+        "L2_ready": 63,
+        "L3_direct_only": 12,
+        "strict_dossiers": 0,
+        "makeable_and_design": 58,
+        "makeable_design_without_context": 58,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 67,
+        "component_role_sum_squares": 2922,
+        "component_role_agnostic_sum_squares": 2922,
+        "component_role_agnostic_inverse_Simpson": 12.616016427104723,
+        "component_role_agnostic_Shannon_effective": 26.27530516080763,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 43
+      }
+    },
+    {
+      "family": "ketone_ugi4",
+      "before": {
+        "requests": 64,
+        "exact_L1": 62,
+        "limited_design": 39,
+        "context_flagged": 10,
+        "design_without_context": 33,
+        "computational_makeability": 2,
+        "L2_ready": 32,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 2,
+        "makeable_design_without_context": 2,
+        "required_component_observations": 248,
+        "unique_components_role_agnostic": 191,
+        "component_role_sum_squares": 654,
+        "component_role_agnostic_sum_squares": 654,
+        "component_role_agnostic_inverse_Simpson": 94.0428134556575,
+        "component_role_agnostic_Shannon_effective": 150.870772565269,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 62,
+        "limited_design": 43,
+        "context_flagged": 9,
+        "design_without_context": 38,
+        "computational_makeability": 2,
+        "L2_ready": 32,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 2,
+        "makeable_design_without_context": 2,
+        "required_component_observations": 248,
+        "unique_components_role_agnostic": 193,
+        "component_role_sum_squares": 636,
+        "component_role_agnostic_sum_squares": 636,
+        "component_role_agnostic_inverse_Simpson": 96.70440251572327,
+        "component_role_agnostic_Shannon_effective": 153.34523393431348,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      }
+    },
+    {
+      "family": "maleate_addition",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 60,
+        "context_flagged": 2,
+        "design_without_context": 59,
+        "computational_makeability": 27,
+        "L2_ready": 61,
+        "L3_direct_only": 1,
+        "strict_dossiers": 0,
+        "makeable_and_design": 27,
+        "makeable_design_without_context": 27,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 113,
+        "component_role_sum_squares": 162,
+        "component_role_agnostic_sum_squares": 162,
+        "component_role_agnostic_inverse_Simpson": 101.1358024691358,
+        "component_role_agnostic_Shannon_effective": 107.92085573669256,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 60,
+        "context_flagged": 2,
+        "design_without_context": 59,
+        "computational_makeability": 27,
+        "L2_ready": 61,
+        "L3_direct_only": 1,
+        "strict_dossiers": 0,
+        "makeable_and_design": 27,
+        "makeable_design_without_context": 27,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 113,
+        "component_role_sum_squares": 160,
+        "component_role_agnostic_sum_squares": 160,
+        "component_role_agnostic_inverse_Simpson": 102.4,
+        "component_role_agnostic_Shannon_effective": 108.36292577421597,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      }
+    },
+    {
+      "family": "o_esterification",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 39,
+        "L2_ready": 39,
+        "L3_direct_only": 22,
+        "strict_dossiers": 3,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 78,
+        "component_role_sum_squares": 426,
+        "component_role_agnostic_sum_squares": 426,
+        "component_role_agnostic_inverse_Simpson": 38.460093896713616,
+        "component_role_agnostic_Shannon_effective": 56.52000821726898,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 46
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 39,
+        "L2_ready": 39,
+        "L3_direct_only": 22,
+        "strict_dossiers": 3,
+        "makeable_and_design": 39,
+        "makeable_design_without_context": 39,
+        "required_component_observations": 128,
+        "unique_components_role_agnostic": 78,
+        "component_role_sum_squares": 422,
+        "component_role_agnostic_sum_squares": 422,
+        "component_role_agnostic_inverse_Simpson": 38.824644549763036,
+        "component_role_agnostic_Shannon_effective": 56.65740997273243,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 46
+      }
+    },
+    {
+      "family": "passerini_3cr",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 22,
+        "L2_ready": 64,
+        "L3_direct_only": 3,
+        "strict_dossiers": 0,
+        "makeable_and_design": 22,
+        "makeable_design_without_context": 22,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 127,
+        "component_role_sum_squares": 440,
+        "component_role_agnostic_sum_squares": 440,
+        "component_role_agnostic_inverse_Simpson": 83.78181818181818,
+        "component_role_agnostic_Shannon_effective": 105.15534367183041,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 1,
+        "design_without_context": 63,
+        "computational_makeability": 22,
+        "L2_ready": 64,
+        "L3_direct_only": 3,
+        "strict_dossiers": 0,
+        "makeable_and_design": 22,
+        "makeable_design_without_context": 22,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 127,
+        "component_role_sum_squares": 440,
+        "component_role_agnostic_sum_squares": 440,
+        "component_role_agnostic_inverse_Simpson": 83.78181818181818,
+        "component_role_agnostic_Shannon_effective": 105.15534367183041,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      }
+    },
+    {
+      "family": "preassembled_thiol_yne_tail_amidation",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 33,
+        "L2_ready": 42,
+        "L3_direct_only": 10,
+        "strict_dossiers": 1,
+        "makeable_and_design": 33,
+        "makeable_design_without_context": 33,
+        "required_component_observations": 256,
+        "unique_components_role_agnostic": 118,
+        "component_role_sum_squares": 1306,
+        "component_role_agnostic_sum_squares": 1462,
+        "component_role_agnostic_inverse_Simpson": 44.82626538987688,
+        "component_role_agnostic_Shannon_effective": 80.30051778684732,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 54
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 64,
+        "context_flagged": 0,
+        "design_without_context": 64,
+        "computational_makeability": 33,
+        "L2_ready": 42,
+        "L3_direct_only": 10,
+        "strict_dossiers": 1,
+        "makeable_and_design": 33,
+        "makeable_design_without_context": 33,
+        "required_component_observations": 256,
+        "unique_components_role_agnostic": 119,
+        "component_role_sum_squares": 1304,
+        "component_role_agnostic_sum_squares": 1460,
+        "component_role_agnostic_inverse_Simpson": 44.88767123287671,
+        "component_role_agnostic_Shannon_effective": 80.73654165773674,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 54
+      }
+    },
+    {
+      "family": "reductive_amination",
+      "before": {
+        "requests": 64,
+        "exact_L1": 61,
+        "limited_design": 61,
+        "context_flagged": 1,
+        "design_without_context": 60,
+        "computational_makeability": 0,
+        "L2_ready": 61,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 0,
+        "makeable_design_without_context": 0,
+        "required_component_observations": 122,
+        "unique_components_role_agnostic": 85,
+        "component_role_sum_squares": 276,
+        "component_role_agnostic_sum_squares": 276,
+        "component_role_agnostic_inverse_Simpson": 53.927536231884055,
+        "component_role_agnostic_Shannon_effective": 69.95511788399541,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 61,
+        "limited_design": 61,
+        "context_flagged": 1,
+        "design_without_context": 60,
+        "computational_makeability": 5,
+        "L2_ready": 61,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 5,
+        "makeable_design_without_context": 5,
+        "required_component_observations": 122,
+        "unique_components_role_agnostic": 85,
+        "component_role_sum_squares": 270,
+        "component_role_agnostic_sum_squares": 270,
+        "component_role_agnostic_inverse_Simpson": 55.12592592592593,
+        "component_role_agnostic_Shannon_effective": 70.59780764549568,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 64
+      }
+    },
+    {
+      "family": "thiolactone_aminolysis_michael",
+      "before": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 63,
+        "context_flagged": 2,
+        "design_without_context": 61,
+        "computational_makeability": 25,
+        "L2_ready": 64,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 24,
+        "makeable_design_without_context": 24,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 135,
+        "component_role_sum_squares": 526,
+        "component_role_agnostic_sum_squares": 526,
+        "component_role_agnostic_inverse_Simpson": 70.08365019011407,
+        "component_role_agnostic_Shannon_effective": 106.3244433662899,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      },
+      "joint": {
+        "requests": 64,
+        "exact_L1": 64,
+        "limited_design": 63,
+        "context_flagged": 2,
+        "design_without_context": 61,
+        "computational_makeability": 25,
+        "L2_ready": 64,
+        "L3_direct_only": 0,
+        "strict_dossiers": 0,
+        "makeable_and_design": 24,
+        "makeable_design_without_context": 24,
+        "required_component_observations": 192,
+        "unique_components_role_agnostic": 135,
+        "component_role_sum_squares": 526,
+        "component_role_agnostic_sum_squares": 526,
+        "component_role_agnostic_inverse_Simpson": 70.08365019011407,
+        "component_role_agnostic_Shannon_effective": 106.3244433662899,
+        "unique_products": 64,
+        "TRAIN_novel_product_occurrences": 56
+      }
+    }
+  ],
+  "route_comparisons": {
+    "original": {
+      "before": {
+        "L2_ready": 1189,
+        "L3_direct_only": 119,
+        "combined_primary": 621,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "after": {
+        "L2_ready": 1189,
+        "L3_direct_only": 119,
+        "combined_primary": 622,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "transitions": {
+        "L2_ready": {
+          "gains": [],
+          "losses": []
+        },
+        "L3_direct_only": {
+          "gains": [],
+          "losses": []
+        },
+        "combined_primary": {
+          "gains": [
+            747
+          ],
+          "losses": []
+        },
+        "exact_L1": {
+          "gains": [],
+          "losses": []
+        },
+        "strict_secondary": {
+          "gains": [],
+          "losses": []
+        }
+      },
+      "control_exactly_reproduces_saved_records": true
+    },
+    "B": {
+      "before": {
+        "L2_ready": 1177,
+        "L3_direct_only": 119,
+        "combined_primary": 620,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "after": {
+        "L2_ready": 1178,
+        "L3_direct_only": 119,
+        "combined_primary": 622,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "transitions": {
+        "L2_ready": {
+          "gains": [
+            258
+          ],
+          "losses": []
+        },
+        "L3_direct_only": {
+          "gains": [],
+          "losses": []
+        },
+        "combined_primary": {
+          "gains": [
+            258,
+            747
+          ],
+          "losses": []
+        },
+        "exact_L1": {
+          "gains": [],
+          "losses": []
+        },
+        "strict_secondary": {
+          "gains": [],
+          "losses": []
+        }
+      },
+      "control_exactly_reproduces_saved_records": true
+    },
+    "joint": {
+      "before": {
+        "L2_ready": 1189,
+        "L3_direct_only": 121,
+        "combined_primary": 623,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "after": {
+        "L2_ready": 1189,
+        "L3_direct_only": 121,
+        "combined_primary": 624,
+        "exact_L1": 1387,
+        "strict_secondary": 27
+      },
+      "transitions": {
+        "L2_ready": {
+          "gains": [],
+          "losses": []
+        },
+        "L3_direct_only": {
+          "gains": [],
+          "losses": []
+        },
+        "combined_primary": {
+          "gains": [
+            747
+          ],
+          "losses": []
+        },
+        "exact_L1": {
+          "gains": [],
+          "losses": []
+        },
+        "strict_secondary": {
+          "gains": [],
+          "losses": []
+        }
+      },
+      "control_exactly_reproduces_saved_records": true
+    }
+  },
+  "synthetic_CAL_distribution": {
+    "current": {
+      "FP_coverage": 0.49096238118853536,
+      "FP_internal_diversity": 0.5515862313577665,
+      "FP_members": 801,
+      "FP_precision": 0.5689145923520923,
+      "descriptor_coverage": 0.3970716490806386,
+      "descriptor_members": 837,
+      "descriptor_precision": 0.5944602272727273
+    },
+    "joint": {
+      "FP_coverage": 0.49140368745508434,
+      "FP_internal_diversity": 0.5516657924534419,
+      "FP_members": 803,
+      "FP_precision": 0.5703350468975469,
+      "descriptor_coverage": 0.3970716490806386,
+      "descriptor_members": 841,
+      "descriptor_precision": 0.5973011363636364
+    }
+  },
+  "generalization": {
+    "schema": "forge.iclr22.generalization_stream.v1",
+    "bounded_stream_complete": true,
+    "final_generalization_evidence_complete": false,
+    "inputs": [
+      {
+        "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/c_generalization/cal_strata_v1/result.json",
+        "sha256": "ce469e0bd40b8024037b51130a8ee45ce6666dc3e37413da26eb726b56c0aeef"
+      },
+      {
+        "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/c_generalization/lineage_search_v2/result.json",
+        "sha256": "b8f752d678fe1b658c33c6e172e030bd46dfad63492f294f0ebcd414b8070c2e"
+      },
+      {
+        "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/c_generalization/README.md",
+        "sha256": "724649b8531d9f2e72703533095f005608710e9bb2b39726e4ee139fb47059d1"
+      },
+      {
+        "path": "results/phase1/compose_lipid_iclr22_parallel_improvement_v1/integration/bc_tests.xml",
+        "sha256": "1f48b9eaf040fafab118ff285065b1a759fe1ebde97d0ed9fac512cfc1a07413"
+      }
+    ],
+    "CAL_original": 2059,
+    "CAL_source_qualified": 1859,
+    "CAL_some_components_unseen": 392,
+    "CAL_all_components_unseen": 12,
+    "qualified_families_with_any_unseen": 16,
+    "missing_ancestry_requested": 37,
+    "exact_ancestry_recovered": 0,
+    "TEST_graphs_loaded": 0,
+    "new_model_network_calls": 0,
+    "negative_results": [
+      "No recovered exact ancestry exports in searched local roots.",
+      "Six families lack qualified unseen-component CAL coverage.",
+      "CAL prior adaptive exposure prevents fresh confirmatory interpretation."
+    ],
+    "next_experiment": "Freeze complete-system controls then use qualified CAL strata for development; independent fits and sealed final evaluation remain separate."
+  },
+  "independent_empirical_lipid_realism_established": false,
+  "default_generation_or_selection_replaced": false,
+  "manuscript_changed": false,
+  "unchanged_manuscript_source_files": 30,
+  "sealed_TEST_accessed": false,
+  "trained_null_fit_status": "First run failed before update1; corrected exact retry ready, fresh user approval pending.",
+  "trained_null_comparison_complete": false,
+  "additional_work_in_progress": "Bounded all128 A3/ketone-Ugi4 complete-component compatibility census; no result admitted in this snapshot.",
+  "research_goal_complete": false,
+  "limitations": [
+    "Limited design and exact assembly do not certify broad molecular realism, pKa, delivery or experimental execution.",
+    "TRAIN support and synthetic-CAL diagnostics are not independent quality references; some family-level distribution metrics regress.",
+    "Directory listings do not establish stock; strict dossiers stay a separately unchanged metric.",
+    "B-only and E-only tradeoffs are preserved; component changes never inherit prior identity-specific routes.",
+    "Independent fit seeds and prespecified final held-out comparisons remain open."
+  ]
+}

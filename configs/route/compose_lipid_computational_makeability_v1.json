@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "authorizes_manuscript_changes": false,
+    "authorizes_production_synthesis_guidance": false,
+    "computational_coverage_only": true,
+    "implies_current_item_stock": false,
+    "implies_verified_substrate_scope": false,
+    "is_experimental_success_probability": false,
+    "may_mutate_strict_route_complete": false
+  },
+  "authorization": "User explicitly requested changing success criteria to the older repository after comparison of computational makeability and strict closure.",
+  "authorized_on": "2026-09-25",
+  "component_success": "Exact identity is positively vendor-listed, or at least one complete target-bound computational route has every terminal leaf positively vendor-listed.",
+  "legacy_implementation_corrections": [
+    "Enforce declared snapshot expiry; never silently reuse stale observations.",
+    "Bind terminal leaves to one actual complete route rather than unioning alternative paths.",
+    "Retain all route alternatives, all request occurrences and unknown/error states.",
+    "Use actual strict-qualified evidence as a valid stronger basis, not a bare historical success flag."
+  ],
+  "policy_id": "compose_lipid_computational_makeability_v1",
+  "primary_l3_does_not_require": [
+    "SKU",
+    "package",
+    "purity",
+    "stock",
+    "shipping",
+    "price",
+    "lead_time"
+  ],
+  "primary_l3_requires": [
+    "exact_identity",
+    "positive_vendor_listing",
+    "dated_source_receipt",
+    "valid_30_day_snapshot"
+  ],
+  "primary_metric": "computational_makeability_with_vendor_listed_terminals",
+  "product_success": "Exact L1 and all declared required component branches successful. Preserve every request in the denominator.",
+  "reference_implementations": [
+    {
+      "path": "experiments/archive/producers/phase1_run_ugi_indomain_makeability_v1.py",
+      "reference_remote_path": "scripts/phase1_run_ugi_indomain_makeability_v1.py",
+      "sha256": "4aea2a370f3874a39aab424c2077cdf1893986bf2e076654672f5a560f578de0"
+    },
+    {
+      "path": "experiments/archive/producers/phase1_run_ugi_tail_a_disconnection_v1.py",
+      "reference_remote_path": "scripts/phase1_run_ugi_tail_a_disconnection_v1.py",
+      "sha256": "8246bdbce7e5a929b0d7a2e8f5947c82fa39c1b395329475ac1fe7da78b4e13a"
+    },
+    {
+      "path": "experiments/archive/producers/phase1_run_ugi_isocyanide_route_v1.py",
+      "reference_remote_path": "scripts/phase1_run_ugi_isocyanide_route_v1.py",
+      "sha256": "ea56ee6eec9bf9e364eb5ff471de7a9255c93c776c31b68ddcf23fba49334255"
+    }
+  ],
+  "reference_repository": {
+    "commit": "f58c679594c49312cde666de0fe293bf6ba5c54e",
+    "url": "git@github.com:KoshaTx/forge.git"
+  },
+  "reporting": {
+    "full_cohort_primary_result": "not_yet_assessed",
+    "leaves_within_one_path": "AND",
+    "missing_assessment_is_zero": false,
+    "numeric_primary_success_threshold": null,
+    "numeric_threshold_note": "User changed criterion, not a numeric threshold; existing L1 >=90% per family and independent quality/validation requirements remain.",
+    "per_family_required": true,
+    "required_component_branches": "AND",
+    "retain_all_requests": true,
+    "retain_nonexact_L1": true,
+    "retain_unknown_and_execution_failures": true,
+    "route_alternatives": "OR",
+    "strict_result_not_relabelled": true
+  },
+  "route_bases": {
+    "forward_applied": "Recorded published/registry transform chain reproduces target among products; uniqueness and substrate scope are separate attributes.",
+    "planner_solved": "Complete target-bound planner path; independent forward verification and exact-substrate source evidence not required for primary makeability."
+  },
+  "schema": "forge.computational_makeability_policy.v1",
+  "secondary_metric": "strict_exact_source_current_item_dossier_closure",
+  "strict_policy_unchanged": "configs/route/m0_09_ugi3_virtual_terminal_procurement.json",
+  "vendor_snapshot_max_age_days": 30
+}

@@ -44,6 +44,20 @@ On 2026-08-21, the user explicitly reconfirmed that the current paper is computa
 Candidate-panel recovery, procurement, synthesis, formulation, in-vitro testing and in-vivo testing
 are not paper-readiness tasks and must not be presented as blockers or next steps.
 
+On 2026-09-25, the user explicitly changed the primary L2/L3 success criterion for the
+22-family study to the older repository's **computational makeability** criterion:
+every required component is either vendor-listed directly or has a complete computational
+route to vendor-listed terminal materials. Planner-generated paths and forward-applied
+published-transform constructions can contribute without exact-substrate experimental
+evidence. The versioned contract is
+`configs/route/compose_lipid_computational_makeability_v1.json`, explained in
+`docs/COMPOSE_LIPID_COMPUTATIONAL_MAKEABILITY.md`. Exact-source/current-item dossier
+closure remains a separately reported secondary metric with its original checks intact.
+This changes the primary evaluation outcome; it does not relabel hypotheses as executed
+chemistry or listings as verified stock, and does not authorize production synthesis
+guidance. Keep old results under their original metric, preserve full denominators,
+and leave the manuscript unchanged until separately requested.
+
 **You are authorized to:**
 
 - Implement and train the sparse whole-lipid discrete-flow backbone selected by M0-06.
@@ -95,6 +109,9 @@ appears to require out-of-scope work, **stop and report** rather than expanding 
 
 These are scientific-validity rules, not style preferences. Violating any of them invalidates the
 paper's central claims. **Never relax a gate to make it pass. Fail loudly and report.**
+
+The explicit September 25 change above introduces a separately named primary outcome;
+it does not change the meaning or acceptance checks of existing strict dossier fields.
 
 1. **Never sample the R1 corpus by raw `reaction_family` counts.** Ugi is 222,768 / 464,265 (48%) and
    would collapse the prior onto one chemistry. Use the `realism_weight` column.
